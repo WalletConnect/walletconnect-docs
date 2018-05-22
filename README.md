@@ -5,10 +5,10 @@
 * [Transactions Flow](https://github.com/WalletConnect/WalletConnect/blob/master/docs/transactions.adoc)
 
 ## Getting Started as a Dapp Developer
-* Take a look at walletconnect repository
+* Head to the [walletconnect](https://github.com/maticnetwork/walletconnect) repository and look under the "Browser Dapp Example" section.
 
 ## Getting Started as a Mobile Wallet Developer
-* Take a look at the rn-walletconnect-client repository
+* Head to the [walletconnect](https://github.com/maticnetwork/walletconnect) repository and look under the "Mobile Wallet Example" section.
 
 ## Implementing a Bridge or Push Server 
 * Take a look at the [py-walletconnect-bridge](https://github.com/WalletConnect/py-walletconnect-bridge) repository or the [py-walletconnect-push](https://github.com/WalletConnect/py-walletconnect-push) repository for a reference implementation
