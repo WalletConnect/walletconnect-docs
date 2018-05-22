@@ -11,4 +11,4 @@
 * Take a look at the rn-walletconnect-client repository
 
 ## Implementing a Bridge or Push Server 
-* Take a look at the py-walletconnect-bridge repository for a reference implementation
+* Take a look at the [py-walletconnect-bridge](https://github.com/WalletConnect/py-walletconnect-bridge) repository or the [py-walletconnect-push](https://github.com/WalletConnect/py-walletconnect-push) repository for a reference implementation
