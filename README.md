@@ -5,10 +5,10 @@
 * [Transactions Flow](https://github.com/WalletConnect/WalletConnect/blob/master/docs/transactions.adoc)
 
 ## Getting Started as a Dapp Developer
-* Head to the [walletconnect](https://github.com/maticnetwork/walletconnect) repository and look under the "Browser Dapp Example" section.
+* Head to the [walletconnect](https://github.com/WalletConnect/walletconnect) repository and look under the "Browser Dapp Example" section.
 
 ## Getting Started as a Mobile Wallet Developer
-* Head to the [walletconnect](https://github.com/maticnetwork/walletconnect) repository and look under the "Mobile Wallet Example" section.
+* Head to the [walletconnect](https://github.com/WalletConnect/walletconnect) repository and look under the "Mobile Wallet Example" section.
 * If you want to support push notifications, run a Push Server on a machine you control or trust to hold your push notification tokens.
 
 ## Implementing a Bridge Server, Push Server, or Mobile Client in a new language
