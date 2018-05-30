@@ -1,8 +1,8 @@
 # Wallet Connect Docs
 
-* [Overview](https://github.com/WalletConnect/WalletConnect/blob/master/docs/home.adoc)
-* [Wallet Addresses Flow](https://github.com/WalletConnect/WalletConnect/blob/master/docs/wallet_addresses.adoc) 
-* [Transactions Flow](https://github.com/WalletConnect/WalletConnect/blob/master/docs/transactions.adoc)
+* [Overview](https://github.com/WalletConnect/walletconnect-docs/blob/master/docs/home.adoc)
+* [Wallet Addresses Flow](https://github.com/WalletConnect/walletconnect-docs/blob/master/docs/wallet_addresses.adoc) 
+* [Transactions Flow](https://github.com/WalletConnect/walletconnect-docs/blob/master/docs/transactions.adoc)
 
 ## Getting Started as a Dapp Developer
 * Head to the [walletconnect](https://github.com/WalletConnect/walletconnect) repository and look under the "Browser Dapp Example" section.
