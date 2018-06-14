@@ -14,10 +14,10 @@ Wallet Connect is a simple solution that bridges communication between browser-b
 
 #### Components
 
-Bridge server
-... Ephemeral session management server to facilitate the passing of information between a Dapp and a mobile wallet. A Dapp can choose which bridge server to use.
-Wallet push server
-... Manages push notifications to a mobile wallet. This server is maintained by the wallet if they choose to provide push notification functionality to their users. Wallets can implement their own rate-limiting logic.
+_Bridge server_
+  Ephemeral session management server to facilitate the passing of information between a Dapp and a mobile wallet. A Dapp can choose which bridge server to use.
+_Push server_
+  Manages push notifications to a mobile wallet. This server is maintained by the wallet if they choose to provide push notification functionality to their users. Wallets can implement their own rate-limiting logic.
 
 ---
 
