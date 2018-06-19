@@ -36,6 +36,8 @@ _Push server_
 
 Read more specific details on the data flows:
 
+[Introduction](./introduction.md)
+
 [Accounts Flow](./accounts.md)
 
 [Transactions Flow](./transactions.md)
