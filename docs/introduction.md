@@ -80,5 +80,3 @@ The Dapp can now display information to the user based on their accounts. Eventu
 5.  Mobile Wallet decrypts signing request with shared key
 6.  Mobile Wallet displays signing request to the User to be signed or not
 7.  Mobile Wallet shares the user’s response of the signing request, which is either approved (with transaction id or signed messaged) or rejected
-
-#walletconnect
