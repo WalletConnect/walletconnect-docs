@@ -1,6 +1,4 @@
-# Documentation
-
-## Introduction
+# Introduction
 
 WalleConnect is an open-source standard for connecting desktop Dapps to mobile Wallets. This system consists in 4 parts to allow interaction between a desktop app or web app without installing any browser extensions or requiring any hardware without comprising the security of any of its parts.
 
@@ -21,7 +19,7 @@ The Push server has the sole purpose of triggering push notifications of the mob
 
 In the next section we will discuss in more detail the core design of this standard, which will clarify how these parts communicate with each other.
 
-### Core Design
+## Core Design
 
 The core of the design is to relay data between a desktop Dapp and a mobile Wallet using a server as bridge without sharing its contents. This is achieved by displaying a QR code containing session data on the Dapp that can be scanned by the Wallet.
 
@@ -41,7 +39,7 @@ The information required for push notifications is:
 
 Let’s walkthrough the most common interactions between a Dapp and a Wallet to demonstrate how this design would work.
 
-### WalletConnect Interactions
+## WalletConnect Interactions
 
 When using a Dapp there is fundamentally 3 interactions that require the user’s Wallet. These are getting accounts, sending transactions and signing messages. The last two are essentially the same where the Dapp provides some data to be signed by the user on the Wallet and returning a signed transaction id or signed message, respectively. Thus we can reduce it as a single interaction in the form of signing request. However we need an initial interaction to create communication between the Dapp and the Wallet.
 
@@ -51,7 +49,7 @@ So we are left with 3 interactions with WalletConnect
 2.  Getting Accounts
 3.  Signing Requests
 
-#### Session Creation
+### Session Creation
 
 In order to create a session, a Dapp must know beforehand the Bridge URL, which you setup your own by following the [Setting up a Bridge server]() tutorial. Now that you have a Bridge URL, the session creation works as follow:
 
@@ -60,7 +58,7 @@ In order to create a session, a Dapp must know beforehand the Bridge URL, which 
 3.  Desktop Dapp shares session data using a QR code
 4.  Mobile Wallet scans the QR code to obtain session data
 
-#### Getting Accounts
+### Getting Accounts
 
 At this point, the Desktop Dapp and Mobile Wallet now have both the session data necessary to communicate with each other. Thus we can proceed with the first fundamental interaction, Getting Accounts:
 
@@ -69,7 +67,7 @@ At this point, the Desktop Dapp and Mobile Wallet now have both the session data
 3.  Desktop Dapp listens to this change and fetches encrypted Accounts
 4.  Desktop Dapp decrypts the user’s accounts with shared Key
 
-#### Signing Requests
+### Signing Requests
 
 The Dapp can now display information to the user based on their accounts. Eventually when required the Dapp will ask the user to sign a transaction or a message, which brings us to the second interaction: Signing Requests:
 
@@ -80,3 +78,16 @@ The Dapp can now display information to the user based on their accounts. Eventu
 5.  Mobile Wallet decrypts signing request with shared key
 6.  Mobile Wallet displays signing request to the User to be signed or not
 7.  Mobile Wallet shares the user’s response of the signing request, which is either approved (with transaction id or signed messaged) or rejected
+
+## Best Practices
+
+Some best practices for presenting and handling WalletConnect Interactions are:
+
+* Display a button for the user to choose type of Wallet whishes to use to connect to your Dapp
+* Provide a QR code instantly to allow a seamless session creation
+* Have an advanced menu or setting available to select a different bridge
+* Display on the Wallet, information about the session including Dapp details, bride URL and accounts being shared
+* Notify the user when the accounts were succesfully shared on both ends
+* Prompt the user to check their mobile for a signing request
+* Incentivise verifying critical parameters of the signing request
+* Emphasise when the signing request involves an ether transaction or any transfer of assets

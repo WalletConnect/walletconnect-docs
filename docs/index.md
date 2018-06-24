@@ -1,8 +1,8 @@
+# WalletConnect
+
+## Description
+
 Wallet Connect is a simple solution that bridges communication between browser-based Dapps and mobile wallets using a QR code to establish the initial connection. It is an open protocol and does not require a Dapp user to install a browser extension. The protocol is agnostic to specific mobile wallets a user may want to use and enables Dapp developers to integrate with multiple wallets through a single implementation.
-
----
-
-#### Goals
 
 * enable users to use their mobile wallets with Dapps without having to install a browser extension
 * enable users to use the wallet of their choice without worrying about which Dapps have integrated with which wallets
@@ -10,34 +10,118 @@ Wallet Connect is a simple solution that bridges communication between browser-b
 * provide flexibility to Dapp developers about which Wallet Connect bridge servers they want to use to communicate with mobile wallets
 * provide control to the mobile wallet developers on how push notifications are sent to their users
 
----
+## Quick Start (for Dapps)
 
-#### Components
+### Install package
 
-_Bridge server_
+```bash
+yarn add walletconnect
 
-... Ephemeral session management server to facilitate the passing of information between a Dapp and a mobile wallet. A Dapp can choose which bridge server to use.
+# OR
 
-_Push server_
+npm install --save walletconnect
+```
 
-... Manages push notifications to a mobile wallet. This server is maintained by the wallet if they choose to provide push notification functionality to their users. Wallets can implement their own rate-limiting logic.
+### Getting Started
 
----
+```js
+import WalletConnect from 'walletconnect'
 
-#### Data being transferred between a Dapp and a mobile wallet:
+/**
+ *  Create a webConnector
+ */
+const webConnector = new WalletConnect(
+  'https://walletconnect.matic.network', // bridge url
+  {
+    dappName: 'INSERT_DAPP_NAME'
+  }
+)
 
-* Public wallet address(es) from mobile wallet to Dapp
-* Unsigned transaction details from Dapp to mobile wallet
-* Transaction hash from mobile wallet to Dapp
+/**
+ *  Create a new session
+ */
+const session = await webConnector.createSession()
 
----
+console.log(session.sessionId) // prints session id
+console.log(session.sharedKey.toString('hex')) // prints shared private key
 
-#### More Documentation
+/**
+ *  Listen to session status
+ */
+webConnector.listenSessionStatus((err, result) => {
+  console.log(result) // check result
+})
 
-Read more specific details on the data flows:
+/**
+ *  Draft transaction
+ */
+const tx = {from: '0xab12...1cd', to: '0x0', nonce: 1, gas: 100000, value: 0, data: '0x0'}
 
-[Introduction](./introduction.md)
+/**
+ *  Create transaction
+ */
+const transactionId = await webConnector.createTransaction(tx)
 
-[Accounts Flow](./accounts.md)
+/**
+ *  Listen to transaction status
+ */
+webConnector.listenTransactionStatus(transactionId, (err, result) => {
+  console.log(result) // check result
+})
+```
 
-[Transactions Flow](./transactions.md)
+## Community
+
+Share your experience, contribute or ask questions with the WalletConnect Community
+
+Github: https://github.com/walletconnect
+Telegram: https://t.me/walletconnect
+Discourse: https://discourse.walletconnect.org
+
+## Table of Contents
+
+* Introduction
+
+  * Core Design
+  * WalletConnect Interactions
+    * Session Creation
+    * Getting Accounts
+    * Signing Requests
+  * Best Practices
+
+* User Documentation
+
+  * For Dapps
+    * Setup
+    * UX Considerations
+    * Create a session
+    * Getting Accounts
+    * Signing Requests
+  * For Wallets
+    * Setup
+    * UX Considerations
+    * Create a session
+    * Getting Accounts
+    * Signing Requests
+  * Bridge Server
+    * Pre-requirements
+    * Setup
+  * Push Server
+    * Pre-requirements
+    * Setup
+
+* Technical Specification
+  * Detailed Interactions
+    * Session Creation
+    * Getting Accounts
+    * Signing Requests
+  * Bridge API Reference
+    * For Dapps
+      * Create a new session
+      * Get session details
+      * Create new transactions
+      * Get transaction status
+    * For Wallets
+      * Update Session details
+      * Get transaction details
+      * Add transaction hash
