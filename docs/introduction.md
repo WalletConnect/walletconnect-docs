@@ -13,7 +13,7 @@ The first two are self-explanatory, they consist on a desktop app or web app tha
 
 The last two are crucial to this design and can be setup by anyone without any commitment to a single Dapp or Wallet. However it’s more logical for the Bridge server to be setup by Dapp development team and the Push server to be setup by the Wallet development team.
 
-The Bridge server has the sole purpose to relay data between the Dapp and the Wallet by storing it momentarily under a session ID without every knowing the contents of the relayed data.
+The Bridge server has the sole purpose to relay data between the Dapp and the Wallet by storing it momentarily under a session ID without ever knowing the contents of the relayed data.
 
 The Push server has the sole purpose of triggering push notifications of the mobile Wallet device without sharing the secret required by the push notification service for either Android or iOS platforms.
 
@@ -25,17 +25,17 @@ The core of the design is to relay data between a desktop Dapp and a mobile Wall
 
 This session data has 3 parameters:
 
-* Session ID
-* Bridge URL
-* Shared Key
+- Session ID
+- Bridge URL
+- Shared Key
 
 Given these the Dapp and the Wallet can now communicate without the Bridge knowing the contents of the data relayed. However the Wallet will also need to be notified about Dapp interactions that require user permission, hence it will need to share with the Bridge the required information to trigger these push notifications by the Push server.
 
 The information required for push notifications is:
 
-* Device ID
-* FCM token
-* Wallet Webhook
+- Device ID
+- FCM token
+- Wallet Webhook
 
 Let’s walkthrough the most common interactions between a Dapp and a Wallet to demonstrate how this design would work.
 
@@ -83,11 +83,11 @@ The Dapp can now display information to the user based on their accounts. Eventu
 
 Some best practices for presenting and handling WalletConnect Interactions are:
 
-* Display a button for the user to choose type of Wallet whishes to use to connect to your Dapp
-* Provide a QR code instantly to allow a seamless session creation
-* Have an advanced menu or setting available to select a different bridge
-* Display on the Wallet, information about the session including Dapp details, bride URL and accounts being shared
-* Notify the user when the accounts were succesfully shared on both ends
-* Prompt the user to check their mobile for a signing request
-* Incentivise verifying critical parameters of the signing request
-* Emphasise when the signing request involves an ether transaction or any transfer of assets
+- Display a button for the user to choose type of Wallet whishes to use to connect to your Dapp
+- Provide a QR code instantly to allow a seamless session creation
+- Have an advanced menu or setting available to select a different bridge
+- Display on the Wallet, information about the session including Dapp details, bride URL and accounts being shared
+- Notify the user when the accounts were succesfully shared on both ends
+- Prompt the user to check their mobile for a signing request
+- Incentivise verifying critical parameters of the signing request
+- Emphasise when the signing request involves an ether transaction or any transfer of assets
