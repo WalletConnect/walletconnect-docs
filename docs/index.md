@@ -76,7 +76,7 @@ Share your experience, contribute or ask questions with the WalletConnect Commun
 
 Github: https://github.com/walletconnect
 Telegram: https://t.me/walletconnect
-Discourse: https://discourse.walletconnect.org
+Discourse: https://discuss.walletconnect.org
 
 ## Table of Contents
 
