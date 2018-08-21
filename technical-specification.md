@@ -10,9 +10,9 @@ The initial flow is to connect the Dapp with the mobile wallet using a QR code, 
 2.  Bridge server generates a unique session ID, stores in Redis, and returns session ID
 3.  Dapp generates a unique symmetric key for this session and creates a pairing QR code which holds:
 
-* bridge server domain
-* session ID
-* session symmetric key
+- bridge server domain
+- session ID
+- session symmetric key
 
 ### Getting accounts
 
@@ -21,12 +21,12 @@ The initial flow is to connect the Dapp with the mobile wallet using a QR code, 
 4.  Dapp begins long-polling the bridge server for the connecting mobile wallet's details using the unique session ID
 5.  After mobile wallet scans in the QR code, generates a nonce, encrypts public wallet account(s) with session symmetric key, authenticates the ciphertext and nonce and a message counter with the session symmetric key, then pushes the following info to the bridge server to be updated in Redis:
 
-* unique session ID
-* encrypted public wallet account(s)
-* nonce and message counter
-* HMAC hash
-* wallet push server webhook
-* wallet push notification token
+- unique session ID
+- encrypted public wallet account(s)
+- nonce and message counter
+- HMAC hash
+- wallet push server webhook
+- wallet push notification token
 
 The mobile wallet's push notification token is stored temporarily on the bridge server associated with the _unique session ID_ The Dapp never gains access to the wallet's push notification token.
 
@@ -51,7 +51,7 @@ The mobile wallet's push notification token is stored temporarily on the bridge 
 #### Create a new session
 
 ```bash
-  POST https://walletconnect.balance.io/session/new
+  POST https://bridge.walletconnect.org/session/new
 
   Response:
   Status: 200
@@ -65,7 +65,7 @@ The mobile wallet's push notification token is stored temporarily on the bridge 
 #### Get session details (long-polling)
 
 ```bash
-  GET https://walletconnect.balance.io/session/<sessionId>
+  GET https://bridge.walletconnect.org/session/<sessionId>
 
   Response (when details exist):
   Status: 200
@@ -82,7 +82,7 @@ The mobile wallet's push notification token is stored temporarily on the bridge 
 #### Create new transaction
 
 ```bash
-  POST https://walletconnect.balance.io/session/<sessionId>/transaction/new
+  POST https://bridge.walletconnect.org/session/<sessionId>/transaction/new
   Content-Type: application/json
   Body:
   {
@@ -102,7 +102,7 @@ The mobile wallet's push notification token is stored temporarily on the bridge 
 #### Get transaction status (long-polling)
 
 ```bash
-  GET https://walletconnect.balance.io/session/<sessionId>/transaction/<transactionId>/status
+  GET https://bridge.walletconnect.org/session/<sessionId>/transaction/<transactionId>/status
 
   Response (when status does exist):
   Status: 200
@@ -120,11 +120,11 @@ The mobile wallet's push notification token is stored temporarily on the bridge 
 #### Update session details
 
 ```bash
-  PUT https://walletconnect.balance.io/session/<sessionId>
+  PUT https://bridge.walletconnect.org/session/<sessionId>
   Content-Type: application/json
   Body:
   {
-    "walletWebhook": "https://walletconnect.balance.io/webhook/push-notify",
+    "walletWebhook": "https://bridge.walletconnect.org/webhook/push-notify",
     "fcmToken": "<fcmToken>",
     "data":"<someEncryptedSessionPayload>"
   }
@@ -136,7 +136,7 @@ The mobile wallet's push notification token is stored temporarily on the bridge 
 #### Get transaction details
 
 ```bash
-  GET https://walletconnect.balance.io/session/<sessionId>/transaction/<transactionId>
+  GET https://bridge.walletconnect.org/session/<sessionId>/transaction/<transactionId>
 
   Response:
   Status: 200
@@ -150,7 +150,7 @@ The mobile wallet's push notification token is stored temporarily on the bridge 
 #### Add transaction hash
 
 ```bash
-  POST https://walletconnect.balance.io/session/<sessionId>/transaction/<transactionId>/status/new
+  POST https://bridge.walletconnect.org/session/<sessionId>/transaction/<transactionId>/status/new
   Content-Type: application/json
   Body:
   {
