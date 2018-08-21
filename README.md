@@ -74,6 +74,8 @@ webConnector.listenTransactionStatus(transactionId, (err, result) => {
 
 Share your experience, contribute or ask questions with the WalletConnect Community
 
-Github: [https://github.com/walletconnect](https://github.com/walletconnect)
-Telegram: [https://t.me/walletconnect](https://t.me/walletconnect)
-Forum: [https://discuss.walletconnect.org](https://discuss.walletconnect.org)
+- Github: [https://github.com/walletconnect](https://github.com/walletconnect)
+
+- Telegram: [https://t.me/walletconnect](https://t.me/walletconnect)
+
+- Forum: [https://discuss.walletconnect.org](https://discuss.walletconnect.org)
