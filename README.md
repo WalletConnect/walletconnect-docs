@@ -1,16 +1,16 @@
-# WalletConnect
+# Getting Started
 
-## Description
+## Description
 
 Wallet Connect is a simple solution that bridges communication between browser-based Dapps and mobile wallets using a QR code to establish the initial connection. It is an open protocol and does not require a Dapp user to install a browser extension. The protocol is agnostic to specific mobile wallets a user may want to use and enables Dapp developers to integrate with multiple wallets through a single implementation.
 
-- enable users to use their mobile wallets with Dapps without having to install a browser extension
-- enable users to use the wallet of their choice without worrying about which Dapps have integrated with which wallets
-- simplify wallet integration for Dapp developers instead of requiring them to integrate each wallet individually
-- provide flexibility to Dapp developers about which Wallet Connect bridge servers they want to use to communicate with mobile wallets
-- provide control to the mobile wallet developers on how push notifications are sent to their users
+* enable users to use their mobile wallets with Dapps without having to install a browser extension
+* enable users to use the wallet of their choice without worrying about which Dapps have integrated with which wallets
+* simplify wallet integration for Dapp developers instead of requiring them to integrate each wallet individually
+* provide flexibility to Dapp developers about which Wallet Connect bridge servers they want to use to communicate with mobile wallets
+* provide control to the mobile wallet developers on how push notifications are sent to their users
 
-## Quick Start (for Dapps)
+## Quick Start \(for Dapps\)
 
 ### Install package
 
@@ -24,7 +24,7 @@ npm install --save walletconnect
 
 ### Getting Started
 
-```js
+```javascript
 import WalletConnect from 'walletconnect'
 
 /**
@@ -70,58 +70,53 @@ webConnector.listenTransactionStatus(transactionId, (err, result) => {
 })
 ```
 
-## Community
+## Community
 
 Share your experience, contribute or ask questions with the WalletConnect Community
 
-Github: https://github.com/walletconnect
-Telegram: https://t.me/walletconnect
-Forum: https://discuss.walletconnect.org
+Github: [https://github.com/walletconnect](https://github.com/walletconnect) Telegram: [https://t.me/walletconnect](https://t.me/walletconnect) Forum: [https://discuss.walletconnect.org](https://discuss.walletconnect.org)
 
 ## Table of Contents
 
-- Introduction
+* Introduction
+  * Core Design
+  * WalletConnect Interactions
+    * Session Creation
+    * Getting Accounts
+    * Signing Requests
+  * Best Practices
+* User Documentation
+  * For Dapps
+    * Setup
+    * UX Considerations
+    * Create a session
+    * Getting Accounts
+    * Signing Requests
+  * For Wallets
+    * Setup
+    * UX Considerations
+    * Create a session
+    * Getting Accounts
+    * Signing Requests
+  * Bridge Server
+    * Pre-requirements
+    * Setup
+  * Push Server
+    * Pre-requirements
+    * Setup
+* Technical Specification
+  * Detailed Interactions
+    * Session Creation
+    * Getting Accounts
+    * Signing Requests
+  * Bridge API Reference
+    * For Dapps
+      * Create a new session
+      * Get session details
+      * Create new transactions
+      * Get transaction status
+    * For Wallets
+      * Update Session details
+      * Get transaction details
+      * Add transaction hash
 
-  - Core Design
-  - WalletConnect Interactions
-    - Session Creation
-    - Getting Accounts
-    - Signing Requests
-  - Best Practices
-
-- User Documentation
-
-  - For Dapps
-    - Setup
-    - UX Considerations
-    - Create a session
-    - Getting Accounts
-    - Signing Requests
-  - For Wallets
-    - Setup
-    - UX Considerations
-    - Create a session
-    - Getting Accounts
-    - Signing Requests
-  - Bridge Server
-    - Pre-requirements
-    - Setup
-  - Push Server
-    - Pre-requirements
-    - Setup
-
-- Technical Specification
-  - Detailed Interactions
-    - Session Creation
-    - Getting Accounts
-    - Signing Requests
-  - Bridge API Reference
-    - For Dapps
-      - Create a new session
-      - Get session details
-      - Create new transactions
-      - Get transaction status
-    - For Wallets
-      - Update Session details
-      - Get transaction details
-      - Add transaction hash

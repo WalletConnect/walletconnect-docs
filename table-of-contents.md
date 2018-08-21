@@ -1,23 +1,22 @@
-# Documentation
+---
+description: This is currently  in progress
+---
+
+# Table of Contents \(Draft\)
 
 * Home
-
   * Description
-  * Quick Start (for Dapps)
+  * Quick Start \(for Dapps\)
   * Community
   * Table of contents
-
 * Introduction
-
   * Core Design
   * WalletConnect Interactions
     * Session Creation
     * Getting Accounts
     * Signing Requests
   * Best Practices
-
 * User Documentation
-
   * For Dapps
     * Setup
     * UX Considerations
@@ -36,7 +35,6 @@
   * Push Server
     * Pre-requirements
     * Setup
-
 * Technical Specification
   * Detailed Interactions
     * Session Creation
@@ -52,3 +50,4 @@
       * Update Session details
       * Get transaction details
       * Add transaction hash
+

@@ -1,6 +1,10 @@
-# User Documentation
+---
+description: This is currently in progress
+---
 
-## For Dapps
+# User Documentation \(Draft\)
+
+## For Dapps
 
 ### Setup
 
@@ -12,7 +16,7 @@
 
 ### Signing Requests
 
-## For Wallets
+## For Wallets
 
 ### Setup
 
@@ -26,12 +30,13 @@
 
 ## Bridge Server
 
-### Pre-requirements
+### Pre-requirements
 
-### Setup
+### Setup
 
 ## Push Server
 
-### Pre-requirements
+### Pre-requirements
 
-### Setup
+### Setup
+
