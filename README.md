@@ -24,26 +24,28 @@ npm install --save walletconnect
 
 ### Getting Started
 
-```javascript
+```js
 import WalletConnect from 'walletconnect'
 
 /**
  *  Create a webConnector
  */
 const webConnector = new WalletConnect(
-  'https://walletconnect.matic.network', // bridge url
   {
-    dappName: 'INSERT_DAPP_NAME'
+    bridgeUrl: 'https://bridge.walletconnect.org',  // Required
+    dappName: 'INSERT_DAPP_NAME',                   // Required
+    canvasElement: 'INSERT_QRCODE_CANVAS_ELEMENT',  // Optional
+    sessionId: 'INSERT_EXISTING_SESSION_ID',        // Optional
+    sharedKey: 'INSERT_EXISTING_SHARED_KEY',        // Optional
   }
 )
 
 /**
  *  Create a new session
  */
-const session = await webConnector.createSession()
+const session = await webConnector.initSession()
 
-console.log(session.sessionId) // prints session id
-console.log(session.sharedKey.toString('hex')) // prints shared private key
+console.log(session) // prints { sessionId, sharedKey, qrcode }
 
 /**
  *  Listen to session status
