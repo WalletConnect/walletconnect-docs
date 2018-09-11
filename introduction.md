@@ -35,7 +35,7 @@ The information required for push notifications is:
 
 - Device ID
 - FCM token
-- Wallet Webhook
+- Push Endpoint
 
 Let’s walkthrough the most common interactions between a Dapp and a Wallet to demonstrate how this design would work.
 
