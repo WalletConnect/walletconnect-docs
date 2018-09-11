@@ -1,7 +1,3 @@
----
-description: This is currently in progress
----
-
 # User Documentation \(Draft\)
 
 ## For Dapps

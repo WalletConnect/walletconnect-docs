@@ -1,7 +1,3 @@
----
-description: This is currently  in progress
----
-
 # Table of Contents \(Draft\)
 
 * Home
