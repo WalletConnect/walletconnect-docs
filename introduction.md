@@ -4,10 +4,10 @@ WalleConnect is an open-source standard for connecting desktop Dapps to mobile W
 
 The 4 parts of the design consist:
 
-1. Desktop Dapp
-2. Mobile Wallet
-3. Bridge Server
-4. Push Server
+1.  Desktop Dapp
+2.  Mobile Wallet
+3.  Bridge Server
+4.  Push Server
 
 The first two are self-explanatory, they consist on a desktop app or web app that serves as front-end for a Dapp and a mobile app that serves as a wallet by managing and storing the user’s private keys to their account\(s\).
 
@@ -25,17 +25,17 @@ The core of the design is to relay data between a desktop Dapp and a mobile Wall
 
 This session data has 3 parameters:
 
-* Session ID
-* Bridge URL
-* Shared Key
+- Session ID
+- Bridge URL
+- Symmetric Key
 
 Given these the Dapp and the Wallet can now communicate without the Bridge knowing the contents of the data relayed. However the Wallet will also need to be notified about Dapp interactions that require user permission, hence it will need to share with the Bridge the required information to trigger these push notifications by the Push server.
 
 The information required for push notifications is:
 
-* Device ID
-* FCM token
-* Wallet Webhook
+- Device ID
+- FCM token
+- Wallet Webhook
 
 Let’s walkthrough the most common interactions between a Dapp and a Wallet to demonstrate how this design would work.
 
@@ -45,50 +45,49 @@ When using a Dapp there is fundamentally 3 interactions that require the user’
 
 So we are left with 3 interactions with WalletConnect
 
-1. Session Creation
-2. Getting Accounts
-3. Signing Requests
+1.  Session Creation
+2.  Getting Accounts
+3.  Signing Requests
 
 ### Session Creation
 
 In order to create a session, a Dapp must know beforehand the Bridge URL, which you setup your own by following the [Setting up a Bridge server](introduction.md) tutorial. Now that you have a Bridge URL, the session creation works as follow:
 
-1. Desktop Dapp requests Bridge server to create a session ID
-2. Desktop Dapp generates a ephemeral shared Key
-3. Desktop Dapp shares session data using a QR code
-4. Mobile Wallet scans the QR code to obtain session data
+1.  Desktop Dapp requests Bridge server to create a session ID
+2.  Desktop Dapp generates a ephemeral symmetric Key
+3.  Desktop Dapp shares session data using a QR code
+4.  Mobile Wallet scans the QR code to obtain session data
 
 ### Getting Accounts
 
 At this point, the Desktop Dapp and Mobile Wallet now have both the session data necessary to communicate with each other. Thus we can proceed with the first fundamental interaction, Getting Accounts:
 
-1. Mobile Wallet encrypts the user’s accounts with the shared key
-2. Mobile Wallet sends it to the Bridge server using the session ID
-3. Desktop Dapp listens to this change and fetches encrypted Accounts
-4. Desktop Dapp decrypts the user’s accounts with shared Key
+1.  Mobile Wallet encrypts the user’s accounts with the symmetric key
+2.  Mobile Wallet sends it to the Bridge server using the session ID
+3.  Desktop Dapp listens to this change and fetches encrypted Accounts
+4.  Desktop Dapp decrypts the user’s accounts with symmetric Key
 
 ### Signing Requests
 
 The Dapp can now display information to the user based on their accounts. Eventually when required the Dapp will ask the user to sign a transaction or a message, which brings us to the second interaction: Signing Requests:
 
-1. Desktop Dapp encrypts data into a signing request with shared ey
-2. Desktop Dapp sends the signing request to the Bridge using the session ID
-3. Bridge server triggers push notification by the Push server
-4. Mobile Wallet fetches signing request data from the Bridge server
-5. Mobile Wallet decrypts signing request with shared key
-6. Mobile Wallet displays signing request to the User to be signed or not
-7. Mobile Wallet shares the user’s response of the signing request, which is either approved \(with transaction id or signed messaged\) or rejected
+1.  Desktop Dapp encrypts data into a signing request with symmetric ey
+2.  Desktop Dapp sends the signing request to the Bridge using the session ID
+3.  Bridge server triggers push notification by the Push server
+4.  Mobile Wallet fetches signing request data from the Bridge server
+5.  Mobile Wallet decrypts signing request with symmetric key
+6.  Mobile Wallet displays signing request to the User to be signed or not
+7.  Mobile Wallet shares the user’s response of the signing request, which is either approved \(with transaction id or signed messaged\) or rejected
 
 ## Best Practices
 
 Some best practices for presenting and handling WalletConnect Interactions are:
 
-* Display a button for the user to choose type of Wallet whishes to use to connect to your Dapp
-* Provide a QR code instantly to allow a seamless session creation
-* Have an advanced menu or setting available to select a different bridge
-* Display on the Wallet, information about the session including Dapp details, bride URL and accounts being shared
-* Notify the user when the accounts were succesfully shared on both ends
-* Prompt the user to check their mobile for a signing request
-* Incentivise verifying critical parameters of the signing request
-* Emphasise when the signing request involves an ether transaction or any transfer of assets
-
+- Display a button for the user to choose type of Wallet whishes to use to connect to your Dapp
+- Provide a QR code instantly to allow a seamless session creation
+- Have an advanced menu or setting available to select a different bridge
+- Display on the Wallet, information about the session including Dapp details, bride URL and accounts being symmetric
+- Notify the user when the accounts were succesfully symmetric on both ends
+- Prompt the user to check their mobile for a signing request
+- Incentivise verifying critical parameters of the signing request
+- Emphasise when the signing request involves an ether transaction or any transfer of assets
