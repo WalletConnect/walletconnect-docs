@@ -1,8 +1,8 @@
 # Quick Start
 
-## For Dapps \(Browser SDK\)
+### For Dapps (Browser SDK)
 
-1. Setup
+1.  Setup
 
 ```bash
 yarn add walletconnect
@@ -12,9 +12,9 @@ yarn add walletconnect
 npm install --save walletconnect
 ```
 
-1. Implementation
+2.  Implementation
 
-```javascript
+```js
 import WalletConnect from 'walletconnect'
 
 /**
@@ -37,7 +37,7 @@ if (session.new) {
 
   const sessionStatus = await webConnector.listenSessionStatus() // Listen to session status
 
-  const accounts = sessionStatus.data // Get wallet accounts
+  const { accounts } = sessionStatus // Get wallet accounts
 } else {
   const { accounts } = session // Get wallet accounts
 }
@@ -62,9 +62,9 @@ if (transactionStatus.success) {
 }
 ```
 
-## For Wallets \(React-Native SDK\)
+### For Wallets (React-Native SDK)
 
-1. Setup
+1.  Setup
 
 ```bash
 /**
@@ -85,9 +85,9 @@ npm install --save rn-walletconnect-wallet
 rn-nodeify --install "crypto" --hack
 ```
 
-1. Implementation
+2.  Implementation
 
-```javascript
+```js
 import RNWalletConnect from 'rn-walletconnect-wallet'
 
 /**
@@ -135,4 +135,3 @@ const allTransactions = await walletConnector.getAllTransactionRequests();
 // allTransactions is a map from transactionId --> transactionData
 const transactionData = allTransactions[someTransactionId];
 ```
-
