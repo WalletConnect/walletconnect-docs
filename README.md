@@ -8,9 +8,11 @@ Wallet Connect is a simple solution that enables communication between desktop D
 
 Currently the WalletConnect standard has implementations in Javascript for Browser SDK, Wallet SDK, Push Notification Webhook and in Python for the Bridge Server.
 
-If you want to quickly setup for your Dapp or Wallet, check out the [Quick Start](quick-start.md)
+To quickly setup for your Dapp or Wallet, go to [Quick Start](quick-start.md)
 
-If you want to know more about the Bridge API check out the [Bridge API](bridge-api.md)
+To read the technical specification of the WalletConnec Standard, go to [Technical Specification](tech-spec.md)
+
+To reference all the Bridge API calls go to [Bridge API](bridge-api.md)
 
 ## Community
 
