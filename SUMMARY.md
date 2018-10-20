@@ -1,6 +1,6 @@
 # Table of contents
 
-- [WalletConnect v1.x](README.md)
-- [Introduction](introduction.md)
+- [WalletConnect v0.7.x](README.md)
 - [Quick Start](quick-start.md)
-- [Technical Specification](technical-specification.md)
+- [Technical Specificaiton](tech-spec.md)
+- [Bridge API](bridge-api.md)

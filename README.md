@@ -1,30 +1,22 @@
-# WalletConnect v1.x
+# WalletConnect v0.7.x
 
-## Description
+## Introduction
 
-Wallet Connect is a simple solution that bridges communication between browser-based Dapps and mobile wallets using a QR code to establish the initial connection. It is an open protocol and does not require a Dapp user to install a browser extension. The protocol is agnostic to specific mobile wallets a user may want to use and enables Dapp developers to integrate with multiple wallets through a single implementation.
-
-* enable users to use their mobile wallets with Dapps without having to install a browser extension
-* enable users to use the wallet of their choice without worrying about which Dapps have integrated with which wallets
-* simplify wallet integration for Dapp developers instead of requiring them to integrate each wallet individually
-* provide flexibility to Dapp developers about which Wallet Connect bridge servers they want to use to communicate with mobile wallets
-* provide control to the mobile wallet developers on how push notifications are sent to their users
+Wallet Connect is a simple solution that enables communication between desktop Dapps and mobile Wallets using a QR Code to establish a session. It's an open standard and does not require the User to have specific hardware or install any software. The standard is agnostic to any mobile Wallets that wishes to support it and enables Dapp developers to integrate with several mobile Wallets through a single implementation.
 
 ## Getting Started
 
-Currently the WalletConnect standard is implemented in Javascript for both Browser and Wallet side and in Python for the Bridge and Push server.
+Currently the WalletConnect standard has implementations in Javascript for Browser SDK, Wallet SDK, Push Notification Webhook and in Python for the Bridge Server.
 
 If you want to quickly setup for your Dapp or Wallet, check out the [Quick Start](quick-start.md)
 
-If you want to know more about the Bridge API check out the [API Reference](technical-specification.md#bridge-api-reference)
-
-Read more about the Detailed Interactions about the user flows on the [Technical Specification](technical-specification.md)
+If you want to know more about the Bridge API check out the [Bridge API](bridge-api.md)
 
 ## Community
 
 Share your experience, contribute or ask questions with the WalletConnect Community
 
-* Github: [https://github.com/walletconnect](https://github.com/walletconnect)
-* Telegram: [https://t.me/walletconnect](https://t.me/walletconnect)
-* Forum: [https://discuss.walletconnect.org](https://discuss.walletconnect.org)
-
+- Github: [https://github.com/walletconnect](https://github.com/walletconnect)
+- Telegram: [https://t.me/walletconnect](https://t.me/walletconnect)
+- Forum: [https://discuss.walletconnect.org](https://discuss.walletconnect.org)
+- Discord: [https://discord.walletconnect.org](https://discord.walletconnect.org)
