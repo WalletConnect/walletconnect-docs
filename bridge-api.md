@@ -1,8 +1,8 @@
 # Bridge API Reference
 
-### For Dapps
+## For Dapps
 
-#### Create a new Session
+### Create a new Session
 
 ```bash
   POST https://bridge.walletconnect.org/session/new
@@ -16,7 +16,7 @@
   }
 ```
 
-#### Get Session details (short-polling)
+### Get Session details (short-polling)
 
 ```bash
   GET https://bridge.walletconnect.org/session/<sessionId>
@@ -33,7 +33,7 @@
   Status: 204
 ```
 
-#### Create new Call Request
+### Create new Call Request
 
 ```bash
   POST https://bridge.walletconnect.org/session/<sessionId>/call/new
@@ -53,7 +53,7 @@
   }
 ```
 
-#### Get Call status (short-polling)
+### Get Call status (short-polling)
 
 ```bash
   GET https://bridge.walletconnect.org/session/<sessionId>/call/<callId>/status
@@ -69,9 +69,9 @@
   Status: 204
 ```
 
-### For Wallets
+## For Wallets
 
-#### Update Session details
+### Update Session details
 
 ```bash
   PUT https://bridge.walletconnect.org/session/<sessionId>
@@ -90,7 +90,7 @@
   Status: 200
 ```
 
-#### Get Call Request details
+### Get Call Request details
 
 ```bash
   GET https://bridge.walletconnect.org/session/<sessionId>/call/<callId>
@@ -104,7 +104,7 @@
   }
 ```
 
-#### Add Call Status
+### Add Call Status
 
 ```bash
   POST https://bridge.walletconnect.org/session/<sessionId>/call/<callId>/status/new

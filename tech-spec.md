@@ -48,7 +48,7 @@ Session requests are similar to when a Dapp requests Metamask the User's account
 
 Call requests are triggered by the Dapp when the User is requested to sign a JSON-RPC call. The user is able to approve or reject these requests. If approved, the Wallet signs the JSON-RPC call and returns the result to the Dapp. Supported JSON-RPC methods include `eth_sendTransaction`, `eth_signTransaction`, `eth_sign`, `eth_signTypedData`, etc.
 
-**Session Requests**
+### Session Requests
 
 1. Desktop Dapp requests Bridge server to generate a new session ID
 2. Desktop Dapp generates a session symmetric Key
@@ -59,7 +59,7 @@ Call requests are triggered by the Dapp when the User is requested to sign a JSO
 7. Desktop Dapp listens to session request update and gets encrypted Accounts
 8. Desktop Dapp decrypts the User’s accounts with symmetric Key
 
-**Call Requests**
+### Call Requests
 
 1. Desktop Dapp encrypts data into a call request with symmetric ey
 2. Desktop Dapp sends the call request to the Bridge using the session ID
