@@ -355,32 +355,35 @@ git clone https://github.com/WalletConnect/firebase-walletconnect-push.git
  */
 
 npm install -g firebase-tools
+
+/**
+ *  Authenticate
+ */
+
+npm install -g firebase-tools
 ```
 
 2.Setup
 
 ```bash
 /**
- *  Login to Firebase
+ *  Initiate Firebase and Select your project
  */
-
-firebase login
-
-/**
- *  Inititate Firebase
- */
-
 firebase use --add
 
 /**
- *  Install dependencies
+ *  Change directory and Install dependencies
  */
-
- cd functions && npm install
+cd functions && npm install
 
 /**
- *  Deploy to Firebase Cloud Function
+ *  Deploy function to Firebase
  */
-
 npm run deploy
+```
+
+You may need to visit this link and enable Firebase Cloud Messaging API
+
+```bash
+https://console.developers.google.com/apis/api/fcm.googleapis.com/overview?project=<PROJECT-NAME>
 ```
