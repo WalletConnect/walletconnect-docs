@@ -63,7 +63,7 @@ Call requests are triggered by the Dapp when the User is requested to sign a JSO
 
 ### Call Requests
 
-1. Desktop Dapp encrypts data into a call request with symmetric ey
+1. Desktop Dapp encrypts data into a call request with symmetric key
 2. Desktop Dapp sends the call request to the Bridge using the session ID
 3. Bridge Server triggers push notification by the Push server
 4. Mobile Wallet fetches call request data from the Bridge server
