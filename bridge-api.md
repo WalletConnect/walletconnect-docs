@@ -9,7 +9,7 @@
 
   Response:
   Status: 200
-  Content-Type: application/json; charset=utf-7
+  Content-Type: application/json; charset=utf-8
   Body:
   {
     "sessionId": <someSessionId>
@@ -23,7 +23,7 @@
 
   Response (when details exist):
   Status: 200
-  Content-Type: application/json; charset=utf-7
+  Content-Type: application/json; charset=utf-8
   Body:
   {
     "encryptionPayload": <encryptedSessionPayload>
@@ -46,7 +46,7 @@
 
   Response:
   Status: 200
-  Content-Type: application/json; charset=utf-7
+  Content-Type: application/json; charset=utf-8
   Body:
   {
       "callId": <callId>
@@ -56,11 +56,11 @@
 ### Get Call status (short-polling)
 
 ```bash
-  GET https://bridge.walletconnect.org/session/<sessionId>/call/<callId>/status
+  GET https://bridge.walletconnect.org/call-status/<callId>
 
   Response (when status does exist):
   Status: 200
-  Content-Type: application/json; charset=utf-7
+  Content-Type: application/json; charset=utf-8
   {
     "encryptionPayload": <encryptedCallStatus>
   }
@@ -97,17 +97,34 @@
 
   Response:
   Status: 200
-  Content-Type: application/json; charset=utf-7
+  Content-Type: application/json; charset=utf-8
   Body:
   {
     "encryptionPayload": <encryptedCallRequest>
   }
 ```
 
+### Get All Call Requests available
+
+```bash
+  GET https://bridge.walletconnect.org/session/<sessionId>/calls
+
+  Response:
+  Status: 200
+  Content-Type: application/json; charset=utf-8
+  Body:
+  {
+    <callId>: {
+      "encryptionPayload": <encryptedCallRequest>
+    },
+    ...
+  }
+```
+
 ### Add Call Status
 
 ```bash
-  POST https://bridge.walletconnect.org/session/<sessionId>/call/<callId>/status/new
+  POST https://bridge.walletconnect.org/call-status/<callId>/status/new
   Content-Type: application/json
   Body:
   {
