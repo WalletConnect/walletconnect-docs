@@ -124,7 +124,7 @@
 ### Add Call Status
 
 ```bash
-  POST https://bridge.walletconnect.org/call-status/<callId>/status/new
+  POST https://bridge.walletconnect.org/call-status/<callId>/new
   Content-Type: application/json
   Body:
   {
