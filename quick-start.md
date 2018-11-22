@@ -252,7 +252,7 @@ const provider = new WalletConnectProvider({
   bridgeUrl: 'https://test-bridge.walletconnect.org',   // Required
   dappName: 'INSERT_DAPP_NAME',                   // Required
   rpcUrl: 'http://localhost:8545'                 // Required
-}
+})
 
 /**
  *  Create Web3
