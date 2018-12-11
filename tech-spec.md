@@ -2,7 +2,7 @@
 
 ## Introduction
 
-WalleConnect is an open-source standard for connecting desktop Dapps to mobile Wallets. The architecture consists in 4 components to allow secure communication between a desktop Dapp without requiring any hardware or software from the User yet without comprising the security of any of its components.
+WalletConnect is an open-source standard for connecting desktop Dapps to mobile Wallets. The architecture consists in 4 components to allow secure communication between a desktop Dapp without requiring any hardware or software from the User yet without comprising the security of any of its components.
 
 The 4 components of the architecture consist:
 
