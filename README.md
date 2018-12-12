@@ -10,7 +10,7 @@ Currently the WalletConnect standard has implementations in Javascript for Brows
 
 To quickly setup for your Dapp or Wallet, go to [Quick Start](quick-start.md)
 
-To read the technical specification of the WalletConnec Standard, go to [Technical Specification](tech-spec.md)
+To read the technical specification of the WalletConnect Standard, go to [Technical Specification](tech-spec.md)
 
 To reference all the Bridge API calls go to [Bridge API](bridge-api.md)
 
