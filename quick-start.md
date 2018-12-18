@@ -2,7 +2,7 @@
 
 ## For Dapps (Browser SDK)
 
-1.Install
+1.  Install
 
 ```bash
 yarn add walletconnect
@@ -12,7 +12,7 @@ yarn add walletconnect
 npm install --save walletconnect
 ```
 
-2.Example
+2.  Example
 
 ```js
 import WalletConnect from "walletconnect";
@@ -52,7 +52,7 @@ if (webConnector.isConnected) {
  *  Draft transaction
  */
 const tx = {
-  from: "0xab12...1cd",
+  from: "0xbc28ea04101f03ea7a94c1379bc3ab32e65e62d3",
   to: "0x0",
   nonce: 1,
   gas: 100000,
@@ -72,16 +72,19 @@ try {
 }
 
 /**
- *  Draft message
+ *  Draft Message Parameters
  */
-const msg = "My email is john@doe.com - 1537836206101";
+const msgParams = [
+  "0xbc28ea04101f03ea7a94c1379bc3ab32e65e62d3",
+  "My email is john@doe.com - 1537836206101"
+];
 
 /**
  *  Sign message
  */
 try {
   // Signed message
-  const result = await webConnector.signMessage(msg);
+  const result = await webConnector.signMessage(msgParams);
 } catch (error) {
   // Rejected signing
   console.error(error);
@@ -91,15 +94,43 @@ try {
  *  Draft Typed Data
  */
 const msgParams = [
+  "0xbc28ea04101f03ea7a94c1379bc3ab32e65e62d3",
   {
-    type: "string",
-    name: "Message",
-    value: "My email is john@doe.com"
-  },
-  {
-    type: "uint32",
-    name: "A number",
-    value: "1537836206101"
+    types: {
+      EIP712Domain: [
+        { name: "name", type: "string" },
+        { name: "version", type: "string" },
+        { name: "chainId", type: "uint256" },
+        { name: "verifyingContract", type: "address" }
+      ],
+      Person: [
+        { name: "name", type: "string" },
+        { name: "account", type: "address" }
+      ],
+      Mail: [
+        { name: "from", type: "Person" },
+        { name: "to", type: "Person" },
+        { name: "contents", type: "string" }
+      ]
+    },
+    primaryType: "Mail",
+    domain: {
+      name: "Example Dapp",
+      version: "0.7.0",
+      chainId: 1,
+      verifyingContract: "0x0000000000000000000000000000000000000000"
+    },
+    message: {
+      from: {
+        name: "Alice",
+        account: "0xaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      },
+      to: {
+        name: "Bob",
+        account: "0xbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+      },
+      contents: "Hey, Bob!"
+    }
   }
 ];
 
@@ -117,7 +148,7 @@ try {
 
 ## For Wallets (React-Native SDK)
 
-1.Install
+1.  Install
 
 ```bash
 /**
@@ -138,7 +169,7 @@ npm install --save rn-walletconnect-wallet
 rn-nodeify --install "crypto" --hack
 ```
 
-2.Example
+2.  Example
 
 ```js
 import RNWalletConnect from 'rn-walletconnect-wallet'
@@ -151,7 +182,7 @@ const walletConnector = new RNWalletConnect({
   push: {
     type: 'fcm',
     token: 'cSgGd8BWURk:APA91bGXsLd_...YdFbutyfc8pScl0Qe8-',
-    endpoint: 'https://push.walletconnect.org/notification/new',
+    webhook: 'https://push.walletconnect.org/notification/new',
   }
 })
 
@@ -190,7 +221,7 @@ FCM.on(FCMEvent.Notification, event => {
   {
     method: 'eth_sendTransaction',
     data: {
-      from: '0xab12...1cd',
+      from: '0xbc28ea04101f03ea7a94c1379bc3ab32e65e62d3',
       to: '0x0',
       nonce: 1,
       gas: 100000,
@@ -225,7 +256,7 @@ walletConnector.rejectCallRequest(
 
 ## For Web3 Provider (web3.js)
 
-1.Install
+1.  Install
 
 ```bash
 /**
@@ -239,7 +270,7 @@ yarn add web3 walletconnect-web3-provider
 npm install --save web3 walletconnect-web3-provider
 ```
 
-2.Example
+2.  Example
 
 ```js
 import Web3 from 'web3'
@@ -252,7 +283,7 @@ const provider = new WalletConnectProvider({
   bridgeUrl: 'https://test-bridge.walletconnect.org',   // Required
   dappName: 'INSERT_DAPP_NAME',                   // Required
   rpcUrl: 'http://localhost:8545'                 // Required
-})
+}
 
 /**
  *  Create Web3
@@ -299,91 +330,4 @@ const signedMessage = await web3.eth.sign(msg)
  * Sign Typed Data
  */
 const signedTypedData = await web3.eth.signTypedData(msg)
-```
-
-## For Bridge Server (Docker setup)
-
-1.Install
-
-```bash
-/**
- *  Clone GIT Repository
- */
-
-git clone https://github.com/WalletConnect/py-walletconnect-bridge.git
-
-/**
- *  Install Docker and Make
- */
-```
-
-2.Setup
-
-```bash
-/**
- *  Setup the Bridge URL
- */
-
-make setup URL=<YOUR_BRIDGE_URL>
-
-/**
- *  Build the Docker image
- */
-
-make build
-
-/**
- *  Run the Docker container
- */
-
-make run
-```
-
-## For Push Notification Webhook (Firebase Cloud Function)
-
-1.Install
-
-```bash
-/**
- *  Clone GIT Repository
- */
-
-git clone https://github.com/WalletConnect/firebase-walletconnect-push.git
-
-/**
- *  Install Firebase Tools
- */
-
-npm install -g firebase-tools
-
-/**
- *  Authenticate
- */
-
-npm install -g firebase-tools
-```
-
-2.Setup
-
-```bash
-/**
- *  Initiate Firebase and Select your project
- */
-firebase use --add
-
-/**
- *  Change directory and Install dependencies
- */
-cd functions && npm install
-
-/**
- *  Deploy function to Firebase
- */
-npm run deploy
-```
-
-You may need to visit this link and enable Firebase Cloud Messaging API
-
-```bash
-https://console.developers.google.com/apis/api/fcm.googleapis.com/overview?project=<PROJECT-NAME>
 ```

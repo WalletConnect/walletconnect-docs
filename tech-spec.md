@@ -2,7 +2,7 @@
 
 ## Introduction
 
-WalletConnect is an open-source standard for connecting desktop Dapps to mobile Wallets. The architecture consists in 4 components to allow secure communication between a desktop Dapp without requiring any hardware or software from the User yet without comprising the security of any of its components.
+WalletConnect is an open protocol for connecting desktop Dapps to mobile Wallets. The architecture consists in 4 components to allow secure communication between a desktop Dapp without requiring any hardware or software from the User yet without comprising the security of any of its components.
 
 The 4 components of the architecture consist:
 
@@ -11,11 +11,11 @@ The 4 components of the architecture consist:
 3. Bridge Server / Node
 4. Push Notification Webhook
 
-The first two components integrate with the WalletConnect standard by the developers installing the respective SDK: a Browser SDK for the Dapp's front-end in and a Mobile SDK for the mobile Wallet which manages and stores the User’s private keys for their accounts.
+The first two components integrate with the WalletConnect protocol by the developers installing the respective SDK: a Browser SDK for the Dapp's front-end in and a Mobile SDK for the mobile Wallet which manages and stores the User’s private keys for their accounts.
 
 The last two components are crucial to allow seamless User experience. The Bridge server/node can be deployed by the Dapp developer or a third party or a shared public network and it will guarantee the WalletConnect communication to be established. The Push notification webhook is an optional component to handle the WalletConnect push notifications for the mobile Wallet, supporting both FCM and APN type of notifications for both iOS and Android platforms.
 
-In the next section we will discuss in more tehnical overview the core design of the WalletConnect standard which will go into more detail on the communications being relayed.
+In the next section we will discuss in more tehnical overview the core design of the WalletConnect protocol which will go into more detail on the communications being relayed.
 
 ## Core Design
 
@@ -39,7 +39,7 @@ Given the technical overview of the core design, in the next section we will des
 
 ## Detailed Communications
 
-The WalletConnect standard has fundamentally 2 types of communications that are exchanged between the Dapp and the Wallet.
+The WalletConnect protocol has fundamentally 2 types of communications that are exchanged between the Dapp and the Wallet.
 
 The 2 types of communcations are:
 
