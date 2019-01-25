@@ -1,4 +1,4 @@
-# Bridge API Reference
+# Bridge Server API Reference
 
 ## For Dapps
 
@@ -41,7 +41,6 @@
   Body:
   {
     "encryptionPayload": <encryptedCallRequestPayload>,
-    "dappName": <ExampleDappName>
   }
 
   Response:
