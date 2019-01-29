@@ -1,46 +1,41 @@
 # Bridge Server API Reference
 
-## For Dapps
-
-### Create a new Session
+## Test Hello World
 
 ```bash
-  POST https://bridge.walletconnect.org/session/new
+  GET https://bridge.walletconnect.org/hello
+
+  Response:
+  Status: 200
+  Content-Type: text/plain; charset=utf-8
+  Body: Hello World, this is WalletConnect v1.0.0-beta
+```
+
+## Get Bridge Server Info
+
+```bash
+  GET https://bridge.walletconnect.org/info
 
   Response:
   Status: 200
   Content-Type: application/json; charset=utf-8
   Body:
   {
-    "sessionId": <someSessionId>
+    "name": "WalletConnect Bridge Server",
+    "repository": "walletconnect-bridge",
+    "version": "1.0.0-beta"
   }
 ```
 
-### Get Session details (short-polling)
+## Subscribe Push Notification Webhook
 
 ```bash
-  GET https://bridge.walletconnect.org/session/<sessionId>
-
-  Response (when details exist):
-  Status: 200
-  Content-Type: application/json; charset=utf-8
-  Body:
-  {
-    "encryptionPayload": <encryptedSessionPayload>
-  }
-
-  Response (when details do not yet exist):
-  Status: 204
-```
-
-### Create new Call Request
-
-```bash
-  POST https://bridge.walletconnect.org/session/<sessionId>/call/new
+  POST https://bridge.walletconnect.org/subscribe
   Content-Type: application/json
   Body:
   {
-    "encryptionPayload": <encryptedCallRequestPayload>,
+    "topic": <client_id>,
+    "webhook": <push_notification_webhook>
   }
 
   Response:
@@ -48,88 +43,6 @@
   Content-Type: application/json; charset=utf-8
   Body:
   {
-      "callId": <callId>
+    "success": true
   }
-```
-
-### Get Call status (short-polling)
-
-```bash
-  GET https://bridge.walletconnect.org/call-status/<callId>
-
-  Response (when status does exist):
-  Status: 200
-  Content-Type: application/json; charset=utf-8
-  {
-    "encryptionPayload": <encryptedCallStatus>
-  }
-
-  Response (when status does not yet exist):
-  Status: 204
-```
-
-## For Wallets
-
-### Update Session details
-
-```bash
-  PUT https://bridge.walletconnect.org/session/<sessionId>
-  Content-Type: application/json
-  Body:
-  {
-    "encryptionPayload":<someEncryptedSessionPayload>,
-    "push": {
-      "type": <pushType>,
-      "token": <pushToken>,
-      "webhook": <pushWebhook>
-    }
-  }
-
-  Response:
-  Status: 200
-```
-
-### Get Call Request details
-
-```bash
-  GET https://bridge.walletconnect.org/session/<sessionId>/call/<callId>
-
-  Response:
-  Status: 200
-  Content-Type: application/json; charset=utf-8
-  Body:
-  {
-    "encryptionPayload": <encryptedCallRequest>
-  }
-```
-
-### Get All Call Requests available
-
-```bash
-  GET https://bridge.walletconnect.org/session/<sessionId>/calls
-
-  Response:
-  Status: 200
-  Content-Type: application/json; charset=utf-8
-  Body:
-  {
-    <callId>: {
-      "encryptionPayload": <encryptedCallRequest>
-    },
-    ...
-  }
-```
-
-### Add Call Status
-
-```bash
-  POST https://bridge.walletconnect.org/call-status/<callId>/new
-  Content-Type: application/json
-  Body:
-  {
-    "encryptionPayload": <encryptedCallStatus>
-  }
-
-  Response:
-  Status: 200
 ```

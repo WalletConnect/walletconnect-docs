@@ -1,46 +1,18 @@
 # Push Server API Reference
 
-## For Dapps
-
-### Create a new Session
+## Register Push Notification Subscription
 
 ```bash
-  POST https://push.walletconnect.org/session/new
-
-  Response:
-  Status: 200
-  Content-Type: application/json; charset=utf-8
-  Body:
-  {
-    "sessionId": <someSessionId>
-  }
-```
-
-### Get Session details (short-polling)
-
-```bash
-  GET https://push.walletconnect.org/session/<sessionId>
-
-  Response (when details exist):
-  Status: 200
-  Content-Type: application/json; charset=utf-8
-  Body:
-  {
-    "encryptionPayload": <encryptedSessionPayload>
-  }
-
-  Response (when details do not yet exist):
-  Status: 204
-```
-
-### Create new Call Request
-
-```bash
-  POST https://push.walletconnect.org/session/<sessionId>/call/new
+  POST https://push.walletconnect.org/new
   Content-Type: application/json
   Body:
   {
-    "encryptionPayload": <encryptedCallRequestPayload>
+    "bridge": <bridge_url>,
+    "topic": <client_id>,
+    "type": <push_type>,
+    "token": <push_token>,
+    "peerName": <peer_name>,
+    "language": <language_code>,
   }
 
   Response:
@@ -48,88 +20,25 @@
   Content-Type: application/json; charset=utf-8
   Body:
   {
-      "callId": <callId>
+    "success": true
   }
 ```
 
-### Get Call status (short-polling)
+## Create new Call Request
 
 ```bash
-  GET https://push.walletconnect.org/call-status/<callId>
-
-  Response (when status does exist):
-  Status: 200
-  Content-Type: application/json; charset=utf-8
-  {
-    "encryptionPayload": <encryptedCallStatus>
-  }
-
-  Response (when status does not yet exist):
-  Status: 204
-```
-
-## For Wallets
-
-### Update Session details
-
-```bash
-  PUT https://push.walletconnect.org/session/<sessionId>
+  POST https://push.walletconnect.org/push
   Content-Type: application/json
   Body:
   {
-    "encryptionPayload":<someEncryptedSessionPayload>,
-    "push": {
-      "type": <pushType>,
-      "token": <pushToken>,
-      "webhook": <pushWebhook>
-    }
+    "topic": <client_id>
   }
-
-  Response:
-  Status: 200
-```
-
-### Get Call Request details
-
-```bash
-  GET https://push.walletconnect.org/session/<sessionId>/call/<callId>
 
   Response:
   Status: 200
   Content-Type: application/json; charset=utf-8
   Body:
   {
-    "encryptionPayload": <encryptedCallRequest>
+      "successs": true
   }
-```
-
-### Get All Call Requests available
-
-```bash
-  GET https://push.walletconnect.org/session/<sessionId>/calls
-
-  Response:
-  Status: 200
-  Content-Type: application/json; charset=utf-8
-  Body:
-  {
-    <callId>: {
-      "encryptionPayload": <encryptedCallRequest>
-    },
-    ...
-  }
-```
-
-### Add Call Status
-
-```bash
-  POST https://push.walletconnect.org/call-status/<callId>/new
-  Content-Type: application/json
-  Body:
-  {
-    "encryptionPayload": <encryptedCallStatus>
-  }
-
-  Response:
-  Status: 200
 ```
