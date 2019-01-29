@@ -1,135 +1,102 @@
 # Client SDK API Reference
 
-## For Dapps
+## Register Event Subscription
 
-### Create a new Session
-
-```bash
-  POST https://bridge.walletconnect.org/session/new
-
-  Response:
-  Status: 200
-  Content-Type: application/json; charset=utf-8
-  Body:
-  {
-    "sessionId": <someSessionId>
-  }
+```typescript
+function on(
+  event: string,
+  callback: (error: Error | null, payload: any | null) => void
+): void;
 ```
 
-### Get Session details (short-polling)
+Events: `connect`, `disconnect`, `session_update`, `call_request`, `wc_sessionRequest`, `wc_sessionUpdate`, `wc_exchangeKey`
 
-```bash
-  GET https://bridge.walletconnect.org/session/<sessionId>
+## Create New Session
 
-  Response (when details exist):
-  Status: 200
-  Content-Type: application/json; charset=utf-8
-  Body:
-  {
-    "encryptionPayload": <encryptedSessionPayload>
-  }
-
-  Response (when details do not yet exist):
-  Status: 204
+```typescript
+async function createSession(): Promise<void>;
 ```
 
-### Create new Call Request
+## Approve Session Request
 
-```bash
-  POST https://bridge.walletconnect.org/session/<sessionId>/call/new
-  Content-Type: application/json
-  Body:
-  {
-    "encryptionPayload": <encryptedCallRequestPayload>,
-  }
-
-  Response:
-  Status: 200
-  Content-Type: application/json; charset=utf-8
-  Body:
-  {
-      "callId": <callId>
-  }
+```typescript
+function approveSession({
+  chainId: number, // Required
+  accounts: string[] // Required
+}): void;
 ```
 
-### Get Call status (short-polling)
+## Reject Session Request
 
-```bash
-  GET https://bridge.walletconnect.org/call-status/<callId>
-
-  Response (when status does exist):
-  Status: 200
-  Content-Type: application/json; charset=utf-8
-  {
-    "encryptionPayload": <encryptedCallStatus>
-  }
-
-  Response (when status does not yet exist):
-  Status: 204
+```typescript
+function rejectSession({
+  message: string // Optional
+}): void;
 ```
 
-## For Wallets
+## Update Session
 
-### Update Session details
-
-```bash
-  PUT https://bridge.walletconnect.org/session/<sessionId>
-  Content-Type: application/json
-  Body:
-  {
-    "encryptionPayload":<someEncryptedSessionPayload>
-    "push": {
-      "type": <pushType>,
-      "token": <pushToken>,
-      "webhook": <pushWebhook>
-    }
-  }
-
-  Response:
-  Status: 200
+```typescript
+function updateSession({
+  chainId: number, // Required
+  accounts: string[] // Required
+}): void;
 ```
 
-### Get Call Request details
+## Kill Session (disconnect)
 
-```bash
-  GET https://bridge.walletconnect.org/session/<sessionId>/call/<callId>
-
-  Response:
-  Status: 200
-  Content-Type: application/json; charset=utf-8
-  Body:
-  {
-    "encryptionPayload": <encryptedCallRequest>
-  }
+```typescript
+function killSession({
+  message: string // Optional
+}): void;
 ```
 
-### Get All Call Requests available
+## Send Transaction (eth_sendTransaction)
 
-```bash
-  GET https://bridge.walletconnect.org/session/<sessionId>/calls
-
-  Response:
-  Status: 200
-  Content-Type: application/json; charset=utf-8
-  Body:
-  {
-    <callId>: {
-      "encryptionPayload": <encryptedCallRequest>
-    },
-    ...
-  }
+```typescript
+async function sendTransaction({
+  from: string, // Required
+  to: string, // Required
+  gasLimit: string, // Required
+  gasPrice: string, // Required
+  value: string, // Required
+  data: string, // Required
+  nonde: string // Required
+}): Promise<string>;
 ```
 
-### Add Call Status
+Returns: Transaction hash
 
-```bash
-  POST https://bridge.walletconnect.org/call-status/<callId>/new
-  Content-Type: application/json
-  Body:
-  {
-    "encryptionPayload": <encryptedCallStatus>
-  }
+## Sign Message (eth_sign)
 
-  Response:
-  Status: 200
+```typescript
+async function signMessage(params: string[]): Promise<string>;
+```
+
+Returns: Signature
+
+## Sign Typed Data (eth_signTypedData)
+
+```typescript
+async function signTypedData(params: any[]): Promise<string>;
+```
+
+Returns: Signature
+
+## Approve Call Request
+
+```typescript
+function approveRequest({
+  id: number, // Required
+  result: any // Required
+}): void;
+```
+
+## Reject Call Request
+
+```typescript
+function rejectRequest({
+  id: number, // Required
+  result: null // Required
+}): void;
 ```
