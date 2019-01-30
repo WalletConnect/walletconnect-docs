@@ -2,7 +2,7 @@
 
 ## For Dapps \(Client SDK - browser\)
 
-You can use the **Test Wallet** to test your integration at ****[test.walletconnect.org](https://test.walletconnect.org) \([Source code](https://github.com/WalletConnect/walletconnect-mock-wallet)\)
+You can use the **Test Wallet** to test your integration at \*\*\*\*[test.walletconnect.org](https://test.walletconnect.org) \([Source code](https://github.com/WalletConnect/walletconnect-mock-wallet)\)
 
 ### Install
 
@@ -316,4 +316,3 @@ walletConnector.rejectRequest({
   result: null
 });
 ```
-
