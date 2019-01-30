@@ -236,4 +236,3 @@ The push notification subscription is only available for native applications \(c
 Additionally there is also the options to provide a peerName of the other peer to customize the notification messages and language code \(ISO-639-1\) to localize the push notifications messages
 
 When registering the push notification subscription the Push Server will post a subscription request to the Bridge Server to listen for any incoming payloads matching the provided topic and it will also share a webhook to trigger the push notification.
-

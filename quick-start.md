@@ -312,4 +312,3 @@ walletConnector.rejectRequest({
   result: null
 });
 ```
-

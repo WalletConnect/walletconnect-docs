@@ -51,7 +51,7 @@ function killSession({
 }): void;
 ```
 
-## Send Transaction \(eth\_sendTransaction\)
+## Send Transaction \(eth_sendTransaction\)
 
 ```typescript
 async function sendTransaction({
@@ -67,7 +67,7 @@ async function sendTransaction({
 
 Returns: Transaction hash
 
-## Sign Message \(eth\_sign\)
+## Sign Message \(eth_sign\)
 
 ```typescript
 async function signMessage(params: string[]): Promise<string>;
@@ -75,7 +75,7 @@ async function signMessage(params: string[]): Promise<string>;
 
 Returns: Signature
 
-## Sign Typed Data \(eth\_signTypedData\)
+## Sign Typed Data \(eth_signTypedData\)
 
 ```typescript
 async function signTypedData(params: any[]): Promise<string>;
@@ -100,4 +100,3 @@ function rejectRequest({
   result: null // Required
 }): void;
 ```
-
