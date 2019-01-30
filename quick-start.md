@@ -1,6 +1,6 @@
-# Quick Start (Examples)
+# Quick Start \(Examples\)
 
-## For Dapps (Client SDK - browser)
+## For Dapps \(Client SDK - browser\)
 
 ### Install
 
@@ -14,7 +14,7 @@ npm install --save @walletconnect/browser
 
 ### Initiate Connection
 
-```js
+```javascript
 import WalletConnect from "@walletconnect/browser";
 import WalletConnectQRCodeModal from "@walletconnect/qrcode-modal";
 
@@ -76,7 +76,7 @@ walletConnector.on("disconnect", (error, payload) => {
 
 ### Send Transaction
 
-```js
+```javascript
 /**
  *  Draft transaction
  */
@@ -103,7 +103,7 @@ try {
 
 ### Sign Message
 
-```js
+```javascript
 /**
  *  Draft Message Parameters
  */
@@ -126,7 +126,7 @@ try {
 
 ### Sign Typed Data
 
-```js
+```javascript
 /**
  *  Draft Typed Data
  */
@@ -183,7 +183,7 @@ try {
 }
 ```
 
-## For Wallets (Client SDK - react-native)
+## For Wallets \(Client SDK - react-native\)
 
 ### Install
 
@@ -209,7 +209,7 @@ rn-nodeify --install --hack
 
 ### Initiate Connection
 
-```js
+```javascript
 import RNWalletConnect from '@walletconnect/react-native'
 
 /**
@@ -268,7 +268,7 @@ walletConnector.on("disconnect", (error, payload) => {
 
 ### Manage Connection
 
-```js
+```javascript
 /**
  *  Approve Session
  */
@@ -295,7 +295,7 @@ walletConnector.killSession()
 
 ### Manage Call Requests
 
-```js
+```javascript
 /**
  *  Approve Call Request
  */
@@ -312,3 +312,4 @@ walletConnector.rejectRequest({
   result: null
 });
 ```
+
