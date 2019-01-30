@@ -18,7 +18,8 @@ To reference all the Bridge API calls go to [Bridge API](bridge-api.md)
 
 Share your experience, contribute or ask questions with the WalletConnect Community
 
-- Github: [https://github.com/walletconnect](https://github.com/walletconnect)
-- Telegram: [https://t.me/walletconnect](https://t.me/walletconnect)
-- Forum: [https://discuss.walletconnect.org](https://discuss.walletconnect.org)
-- Discord: [https://discord.walletconnect.org](https://discord.walletconnect.org)
+* Github: [https://github.com/walletconnect](https://github.com/walletconnect)
+* Telegram: [https://t.me/walletconnect](https://t.me/walletconnect)
+* Forum: [https://discuss.walletconnect.org](https://discuss.walletconnect.org)
+* Discord: [https://discord.walletconnect.org](https://discord.walletconnect.org)
+

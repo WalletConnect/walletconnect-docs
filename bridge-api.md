@@ -1,4 +1,4 @@
-# Bridge API Reference
+# Bridge API
 
 ## For Dapps
 
@@ -16,7 +16,7 @@
   }
 ```
 
-### Get Session details (short-polling)
+### Get Session details \(short-polling\)
 
 ```bash
   GET https://bridge.walletconnect.org/session/<sessionId>
@@ -53,7 +53,7 @@
   }
 ```
 
-### Get Call status (short-polling)
+### Get Call status \(short-polling\)
 
 ```bash
   GET https://bridge.walletconnect.org/call-status/<callId>
@@ -134,3 +134,4 @@
   Response:
   Status: 200
 ```
+

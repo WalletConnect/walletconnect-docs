@@ -6,8 +6,8 @@ WalletConnect is an open protocol for connecting desktop Dapps to mobile Wallets
 
 The 4 components of the architecture consist:
 
-1. Desktop Dapp (Browser SDK)
-2. Mobile Wallet (Mobile SDK)
+1. Desktop Dapp \(Browser SDK\)
+2. Mobile Wallet \(Mobile SDK\)
 3. Bridge Server / Node
 4. Push Notification Webhook
 
@@ -23,34 +23,34 @@ The core of the design is enable data to be realyed between a desktop Dapp and a
 
 The session data includes 3 parameters:
 
-- Session ID
-- Bridge Url
-- Symmetric Key
+* Session ID
+* Bridge Url
+* Symmetric Key
 
-Provided with the symmetric key the Dapp and the Wallet can now relay data in and end-to-end encrypted communication. From the Bridge viewpoint it is simply relaying encrypted payload between two parites. The Wallet will also be notified about Dapp requests that require User consent thus it can optionally share push notification data with the Bridge to trigger notifications on the User's device
+Provided with the symmetric key the Dapp and the Wallet can now relay data in and end-to-end encrypted communication. From the Bridge viewpoint it is simply relaying encrypted payload between two parties. The Wallet will also be notified about Dapp requests that require User consent thus it can optionally share push notification data with the Bridge to trigger notifications on the User's device
 
 The push notification data includes:
 
-- Push Type
-- Push Token
-- Push Webhook
+* Push Type
+* Push Token
+* Push Webhook
 
-Given the technical overview of the core design, in the next section we will describe the detailed communcations between the Dapp and the Wallet.
+Given the technical overview of the core design, in the next section we will describe the detailed communication between the Dapp and the Wallet.
 
 ## Detailed Communications
 
 The WalletConnect protocol has fundamentally 2 types of communications that are exchanged between the Dapp and the Wallet.
 
-The 2 types of communcations are:
+The 2 types of communication are:
 
-- Session Requests
-- Call Requests
+* Session Requests
+* Call Requests
 
-Session requests are similar to when a Dapp requests Metamask the User's accounts with the difference that instead of prompting the User to unlock Metamask, the User is prompted to scan the WalletConnect QR Code with the mobile Wallet. Analagous to the EIP 1102, the User can approve or reject the session request to expose the User's accounts from the Wallet to Dapp.
+Session requests are similar to when a Dapp requests Metamask the User's accounts with the difference that instead of prompting the User to unlock Metamask, the User is prompted to scan the WalletConnect QR Code with the mobile Wallet. Analogous to the EIP 1102, the User can approve or reject the session request to expose the User's accounts from the Wallet to Dapp.
 
 Call requests are triggered by the Dapp when the User is requested to sign a JSON-RPC call. The user is able to approve or reject these requests. If approved, the Wallet signs the JSON-RPC call and returns the result to the Dapp. Supported JSON-RPC methods include `eth_sendTransaction`, `eth_signTransaction`, `eth_sign`, `eth_signTypedData`, etc.
 
-### Session Requests
+### Session Requests
 
 1. Desktop Dapp requests Bridge server to generate a new session ID
 2. Desktop Dapp generates a session symmetric Key
