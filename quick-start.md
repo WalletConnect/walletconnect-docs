@@ -1,8 +1,8 @@
 # Quick Start
 
-## For Dapps (Browser SDK)
+## For Dapps \(Browser SDK\)
 
-1.  Install
+1. Install
 
 ```bash
 yarn add walletconnect
@@ -12,9 +12,9 @@ yarn add walletconnect
 npm install --save walletconnect
 ```
 
-2.  Example
+1. Example
 
-```js
+```javascript
 import WalletConnect from "walletconnect";
 import WalletConnectQRCodeModal from "walletconnect-qrcode-modal";
 
@@ -146,9 +146,9 @@ try {
 }
 ```
 
-## For Wallets (React-Native SDK)
+## For Wallets \(React-Native SDK\)
 
-1.  Install
+1. Install
 
 ```bash
 /**
@@ -169,9 +169,9 @@ npm install --save rn-walletconnect-wallet
 rn-nodeify --install "crypto" --hack
 ```
 
-2.  Example
+1. Example
 
-```js
+```javascript
 import RNWalletConnect from 'rn-walletconnect-wallet'
 
 /**
@@ -254,9 +254,9 @@ walletConnector.rejectCallRequest(
 )
 ```
 
-## For Web3 Provider (web3.js)
+## For Web3 Provider \(web3.js\)
 
-1.  Install
+1. Install
 
 ```bash
 /**
@@ -270,9 +270,9 @@ yarn add web3 walletconnect-web3-provider
 npm install --save web3 walletconnect-web3-provider
 ```
 
-2.  Example
+1. Example
 
-```js
+```javascript
 import Web3 from 'web3'
 import WalletConnectProvider from 'walletconnect-web3-provider'
 
@@ -331,3 +331,4 @@ const signedMessage = await web3.eth.sign(msg)
  */
 const signedTypedData = await web3.eth.signTypedData(msg)
 ```
+
