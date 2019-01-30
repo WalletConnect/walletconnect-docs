@@ -2,8 +2,6 @@
 
 ## For Dapps \(Client SDK - browser\)
 
-You can use the **Test Wallet** to test your integration at ****[test.walletconnect.org](https://test.walletconnect.org) \([Source code](https://github.com/WalletConnect/walletconnect-mock-wallet)\)
-
 ### Install
 
 ```bash
@@ -186,8 +184,6 @@ try {
 ```
 
 ## For Wallets \(Client SDK - react-native\)
-
-You can use the **Example Dapp** to test your integration at [example.walletconnect.org](https://example.walletconnect.org) \([Source code](https://github.com/WalletConnect/walletconnect-example-dapp)\)
 
 ### Install
 
