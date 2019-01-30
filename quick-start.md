@@ -1,18 +1,30 @@
 # Quick Start \(Examples\)
 
 ## For Dapps \(Client SDK - browser\)
-
-You can use the **Test Wallet** to test your integration at \*\*\*\*[test.walletconnect.org](https://test.walletconnect.org) \([Source code](https://github.com/WalletConnect/walletconnect-mock-wallet)\)
+{% hint style="info" %}
+You can use the **Mock Wallet** to test your integration at [test.walletconnect.org](https://test.walletconnect.org) \([Source code](https://github.com/WalletConnect/walletconnect-mock-wallet)\)
+{% endhint %}
 
 ### Install
 
+{% tabs %}
+{% tab title="yarn" %}
 ```bash
 yarn add @walletconnect/browser
+```
+{% endtab %}
 
-# OR
-
+{% tab title="npm" %}
+```bash
 npm install --save @walletconnect/browser
 ```
+{% endtab %}
+{% endtabs %}
+
+{% hint style="info" %}
+Syntax shown below is Javascript ES6 which requires bundling and transpining to run in web browsers. 
+If unfamiliar we recommend setting up an environment using [Webpack Starter](https://github.com/wbkd/webpack-starter) or [Create React App](https://github.com/facebook/create-react-app)\)
+{% endhint %}
 
 ### Initiate Connection
 
