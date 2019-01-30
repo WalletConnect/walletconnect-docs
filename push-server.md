@@ -24,7 +24,7 @@
   }
 ```
 
-## Trigger Push Notification (Webhook)
+## Trigger Push Notification \(Webhook\)
 
 ```bash
   POST https://push.walletconnect.org/push
@@ -42,3 +42,4 @@
       "successs": true
   }
 ```
+
