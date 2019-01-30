@@ -1,53 +1,82 @@
-# Quick Start
+# Quick Start \(Examples\)
 
-## For Dapps \(Browser SDK\)
+## For Dapps \(Client SDK - browser\)
 
-1. Install
+### Install
 
 ```bash
-yarn add walletconnect
+yarn add @walletconnect/browser
 
 # OR
 
-npm install --save walletconnect
+npm install --save @walletconnect/browser
 ```
 
-1. Example
+### Initiate Connection
 
 ```javascript
-import WalletConnect from "walletconnect";
-import WalletConnectQRCodeModal from "walletconnect-qrcode-modal";
+import WalletConnect from "@walletconnect/browser";
+import WalletConnectQRCodeModal from "@walletconnect/qrcode-modal";
 
 /**
- *  Create a webConnector
+ *  Create a walletConnector
  */
-const webConnector = new WalletConnect({
-  bridgeUrl: "https://test-bridge.walletconnect.org", // Required
-  dappName: "INSERT_DAPP_NAME" // Required
+const walletConnector = new WalletConnect({
+  bridge: "https://bridge.walletconnect.org" // Required
 });
-
-/**
- *  Initiate WalletConnect session
- */
-await webConnector.initSession();
 
 /**
  *  Check if connection is already established
  */
-if (webConnector.isConnected) {
-  // If yes, get accounts
-  const accounts = webConnector.accounts;
-} else {
-  // If not, prompt the user to scan the QR code
-  const uri = webConnector.uri;
+if (!walletConnector.connected) {
+  // create new session
+  await walletConnector.createSession();
 
-  // Listen for session confirmation from wallet
-  await webConnector.listenSessionStatus();
+  // get uri for QR Code modal
+  const uri = walletConnector.uri;
 
-  // Get accounts after session status is resolved
-  accounts = webConnector.accounts;
+  // display QR Code modal
+  WalletConnectQRCodeModal.open(uri, () => {
+    console.log("QR Code Modal closed");
+  });
 }
 
+/**
+ *  Subscribe to connection events
+ */
+walletConnector.on("connect", (error, payload) => {
+  if (error) {
+    throw error;
+  }
+
+  // close QR Code Modal
+  WalletConnectQRCodeModal.close();
+
+  // get provided accounts and chainId
+  const { accounts, chainId } = payload.params[0];
+});
+
+walletConnector.on("session_update", (error, payload) => {
+  if (error) {
+    throw error;
+  }
+
+  // get updated accounts and chainId
+  const { accounts, chainId } = payload.params[0];
+});
+
+walletConnector.on("disconnect", (error, payload) => {
+  if (error) {
+    throw error;
+  }
+
+  // delete walletConnector
+});
+```
+
+### Send Transaction
+
+```javascript
 /**
  *  Draft transaction
  */
@@ -65,12 +94,16 @@ const tx = {
  */
 try {
   // Submitted Transaction Hash
-  const result = await webConnector.sendTransaction(tx);
+  const result = await walletConnector.sendTransaction(tx);
 } catch (error) {
   // Rejected Transaction
   console.error(error);
 }
+```
 
+### Sign Message
+
+```javascript
 /**
  *  Draft Message Parameters
  */
@@ -84,12 +117,16 @@ const msgParams = [
  */
 try {
   // Signed message
-  const result = await webConnector.signMessage(msgParams);
+  const result = await walletConnector.signMessage(msgParams);
 } catch (error) {
   // Rejected signing
   console.error(error);
 }
+```
 
+### Sign Typed Data
+
+```javascript
 /**
  *  Draft Typed Data
  */
@@ -116,7 +153,7 @@ const msgParams = [
     primaryType: "Mail",
     domain: {
       name: "Example Dapp",
-      version: "0.7.0",
+      version: "1.0.0-beta",
       chainId: 1,
       verifyingContract: "0x0000000000000000000000000000000000000000"
     },
@@ -139,195 +176,140 @@ const msgParams = [
  */
 try {
   // Signed typed data
-  const result = await webConnector.signTypedData(msgParams);
+  const result = await walletConnector.signTypedData(msgParams);
 } catch (error) {
   // Rejected signing
   console.error(error);
 }
 ```
 
-## For Wallets \(React-Native SDK\)
+## For Wallets \(Client SDK - react-native\)
 
-1. Install
+### Install
 
 ```bash
 /**
  *  Install NPM Package
  */
 
-yarn add rn-walletconnect-wallet
+yarn add @walletconnect/react-native
 
 # OR
 
-npm install --save rn-walletconnect-wallet
+npm install --save @walletconnect/react-native
 
 /**
- *  Nodify 'crypto' package for cryptography
+ *  Polyfill NodeJS modules for React-Native
  */
 
-# install "crypto" shims and run package-specific hacks
-rn-nodeify --install "crypto" --hack
+npm install --save rn-nodeify
+
+rn-nodeify --install --hack
 ```
 
-1. Example
+### Initiate Connection
 
 ```javascript
-import RNWalletConnect from 'rn-walletconnect-wallet'
+import RNWalletConnect from '@walletconnect/react-native'
 
 /**
  *  Create WalletConnector
  */
-const walletConnector = new RNWalletConnect({
-  uri: 'ethereum:wc-8a5e5bdc-a0e4-47...TJRNmhWJmoxdFo6UDk2WlhaOyQ5N0U=',
-  push: {
-    type: 'fcm',
-    token: 'cSgGd8BWURk:APA91bGXsLd_...YdFbutyfc8pScl0Qe8-',
-    webhook: 'https://push.walletconnect.org/notification/new',
+const walletConnector = new RNWalletConnect(
+  {
+    uri: 'wc:8a5e5bdc-a0e4-47...TJRNmhWJmoxdFo6UDk2WlhaOyQ5N0U=',       // Required
+  },
+  {
+    clientMeta: {                                                       // Required
+      description: "WalletConnect Developer App",
+      url: "https://walletconnect.org",
+      icons: ["https://walletconnect.org/walletconnect-logo.png"],
+      name: "WalletConnect",
+      ssl: true
+    },
+    push: {                                                             // Optional
+      url: "https://push.walletconnect.org",
+      type: "fcm",
+      token: token,
+      peerMeta: true,
+      language: language
+    }
   }
-})
+)
 
+/**
+ *  Subscribe to connection events
+ */
+walletConnector.on("call_request", (error, payload) => {
+  if (error) {
+    throw error;
+  }
+
+  // Handle Call Request
+  payload {
+    id: 1,
+    jsonrpc: '2.0'.
+    method: 'eth_sign',
+    params: [
+      "0xbc28ea04101f03ea7a94c1379bc3ab32e65e62d3",
+      "My email is john@doe.com - 1537836206101"
+    ]
+  }
+});
+
+walletConnector.on("disconnect", (error, payload) => {
+  if (error) {
+    throw error;
+  }
+
+  // delete walletConnector
+});
+```
+
+### Manage Connection
+
+```javascript
 /**
  *  Approve Session
  */
-await walletConnector.approveSession({
+walletConnector.approveSession({
   accounts: [
     '0x4292...931B3',
     '0xa4a7...784E8',
     ...
-  ]
+  ],
+  chainId: 1
 })
 
 /**
  *  Reject Session
  */
-await walletConnector.rejectSession()
+walletConnector.rejectSession()
 
 
 /**
  *  Kill Session
  */
-await walletConnector.killSession()
+walletConnector.killSession()
+```
 
+### Manage Call Requests
 
+```javascript
 /**
- *  Handle push notification events & get call data
+ *  Approve Call Request
  */
-FCM.on(FCMEvent.Notification, event => {
-  const { sessionId, callId } = event;
-
-  const callData = await walletConnector.getCallRequest(callId);
-
-  // example callData
-  {
-    method: 'eth_sendTransaction',
-    data: {
-      from: '0xbc28ea04101f03ea7a94c1379bc3ab32e65e62d3',
-      to: '0x0',
-      nonce: 1,
-      gas: 100000,
-      value: 0,
-      data: '0x0'
-    }
-  }
+walletConnector.approveRequest({
+  id: 1,
+  result: "0x41791102999c339c844880b23950704cc43aa840f3739e365323cda4dfa89e7a"
 });
 
 /**
- *  Get all calls from bridge
+ *  Reject Call Request
  */
-const allCalls = await walletConnector.getAllCallRequests();
-
-/**
- *  Approve and share call result
- */
-walletConnector.approveCallRequest(
-  callId,
-  {
-    result: '0xabcd...873'
-  }
-)
-
-/**
- *  Reject call request
- */
-walletConnector.rejectCallRequest(
-  callId
-)
+walletConnector.rejectRequest({
+  id: 1,
+  result: null
+});
 ```
 
-## For Web3 Provider \(web3.js\)
-
-1. Install
-
-```bash
-/**
- *  Install NPM Package
- */
-
-yarn add web3 walletconnect-web3-provider
-
-# OR
-
-npm install --save web3 walletconnect-web3-provider
-```
-
-1. Example
-
-```javascript
-import Web3 from 'web3'
-import WalletConnectProvider from 'walletconnect-web3-provider'
-
-/**
- *  Create WalletConnect Provider
- */
-const provider = new WalletConnectProvider({
-  bridgeUrl: 'https://test-bridge.walletconnect.org',   // Required
-  dappName: 'INSERT_DAPP_NAME',                   // Required
-  rpcUrl: 'http://localhost:8545'                 // Required
-}
-
-/**
- *  Create Web3
- */
-const web3 = new Web3(provider)
-
-/**
- *  Initiate WalletConnect Session
- */
-const session = await web3.currentProvider.walletconnect.initSession()
-
-/**
- *  Get Accounts
- */
-const accounts = await web3.eth.getAccounts()
-
-if (!accounts.length) {
-  // Display QR Code URI
-  const uri = web3.currentProvider.walletconnect.uri
-
-  // Listen for session status
-  await  web3.currentProvider.walletconnect.listenSessionStatus()
-
-  // Get Accounts Again
-  accounts = await web3.eth.getAccounts()
-}
-
-/**
- * Send Transaction
- */
-const txHash = await web3.eth.sendTransaction(tx)
-
-/**
- * Sign Transaction
- */
-const signedTx = await web3.eth.signTransaction(tx)
-
-/**
- * Sign Message
- */
-const signedMessage = await web3.eth.sign(msg)
-
-/**
- * Sign Typed Data
- */
-const signedTypedData = await web3.eth.signTypedData(msg)
-```
