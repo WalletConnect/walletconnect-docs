@@ -82,9 +82,7 @@ interface JsonRpcResponse {
   }
 ```
 
-## WalletConnect JSON RPC Methods
-
-
+## WalletConnect Methods
 
 ### Session Request
 
@@ -135,8 +133,6 @@ interface WCSessionRequestResponse {
 }
 ```
 
-
-
 ### Session Update
 
 This JSON RPC request is dispatched by the Wallet when updating the session. This can either when the session is killed by the Wallet, when it provides new accounts or changes the active chain id. It has the following parameters
@@ -156,8 +152,6 @@ interface WCSessionUpdateRequest {
 	]
 }
 ```
-
-
 
 ### Exchange Key
 
@@ -181,8 +175,6 @@ interface WCExchangeKeyRequest {
 ```
 
 These parameters were similar to the the `wc_sessionRequest` with the exception of the `nextKey` which is the hexadecimal string of the requested key to be exchanged.
-
-
 
 ## Cryptography
 
