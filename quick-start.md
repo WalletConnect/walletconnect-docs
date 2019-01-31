@@ -1,18 +1,30 @@
 # Quick Start \(Examples\)
 
 ## For Dapps \(Client SDK - browser\)
-
-You can use the **Test Wallet** to test your integration at \*\*\*\*[test.walletconnect.org](https://test.walletconnect.org) \([Source code](https://github.com/WalletConnect/walletconnect-mock-wallet)\)
+{% hint style="info" %}
+You can use the **Mock Wallet** to test your integration at [test.walletconnect.org](https://test.walletconnect.org) \([Source code](https://github.com/WalletConnect/walletconnect-mock-wallet)\)
+{% endhint %}
 
 ### Install
 
+{% tabs %}
+{% tab title="yarn" %}
 ```bash
 yarn add @walletconnect/browser
+```
+{% endtab %}
 
-# OR
-
+{% tab title="npm" %}
+```bash
 npm install --save @walletconnect/browser
 ```
+{% endtab %}
+{% endtabs %}
+
+{% hint style="info" %}
+Syntax shown below is Javascript ES6 which requires bundling and transpiling to run in web browsers. 
+If unfamiliar we recommend setting up an environment using [Webpack Starter](https://github.com/wbkd/webpack-starter) or [Create React App](https://github.com/facebook/create-react-app)
+{% endhint %}
 
 ### Initiate Connection
 
@@ -32,15 +44,16 @@ const walletConnector = new WalletConnect({
  */
 if (!walletConnector.connected) {
   // create new session
-  await walletConnector.createSession();
-
-  // get uri for QR Code modal
-  const uri = walletConnector.uri;
-
-  // display QR Code modal
-  WalletConnectQRCodeModal.open(uri, () => {
-    console.log("QR Code Modal closed");
-  });
+    walletConnector
+        .createSession()
+        .then(()=>{
+            // get uri for QR Code modal
+            const uri = walletConnector.uri;
+            // display QR Code modal
+            WalletConnectQRCodeModal.open(uri, () => {
+                console.log("QR Code Modal closed");
+            });
+        });
 }
 
 /**
@@ -94,13 +107,10 @@ const tx = {
 /**
  *  Send transaction
  */
-try {
-  // Submitted Transaction Hash
-  const result = await walletConnector.sendTransaction(tx);
-} catch (error) {
-  // Rejected Transaction
-  console.error(error);
-}
+walletConnector
+    .sendTransaction(tx)
+    .then(console.log)
+    .catch(console.error);
 ```
 
 ### Sign Message
@@ -117,13 +127,10 @@ const msgParams = [
 /**
  *  Sign message
  */
-try {
-  // Signed message
-  const result = await walletConnector.signMessage(msgParams);
-} catch (error) {
-  // Rejected signing
-  console.error(error);
-}
+walletConnector
+    .signMessage(msgParams)
+    .then(console.log)
+    .catch(console.error);
 ```
 
 ### Sign Typed Data
@@ -176,13 +183,10 @@ const msgParams = [
 /**
  *  Sign Typed Data
  */
-try {
-  // Signed typed data
-  const result = await walletConnector.signTypedData(msgParams);
-} catch (error) {
-  // Rejected signing
-  console.error(error);
-}
+walletConnector
+    .signTypedData(msgParams)
+    .then(console.log)
+    .catch(console.error);
 ```
 
 ## For Wallets \(Client SDK - react-native\)
