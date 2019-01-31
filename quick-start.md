@@ -1,6 +1,7 @@
 # Quick Start \(Examples\)
 
 ## For Dapps \(Client SDK - browser\)
+
 {% hint style="info" %}
 You can use the **Mock Wallet** to test your integration at [test.walletconnect.org](https://test.walletconnect.org) \([Source code](https://github.com/WalletConnect/walletconnect-mock-wallet)\)
 {% endhint %}
@@ -22,8 +23,7 @@ npm install --save @walletconnect/browser
 {% endtabs %}
 
 {% hint style="info" %}
-Syntax shown below is Javascript ES6 which requires bundling and transpiling to run in web browsers. 
-If unfamiliar we recommend setting up an environment using [Webpack Starter](https://github.com/wbkd/webpack-starter) or [Create React App](https://github.com/facebook/create-react-app)
+Syntax shown below is Javascript ES6 which requires bundling and transpiling to run in web browsers. If unfamiliar we recommend setting up an environment using [Webpack Starter](https://github.com/wbkd/webpack-starter) or [Create React App](https://github.com/facebook/create-react-app)
 {% endhint %}
 
 ### Initiate Connection
@@ -320,3 +320,4 @@ walletConnector.rejectRequest({
   result: null
 });
 ```
+
