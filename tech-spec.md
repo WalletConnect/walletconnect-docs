@@ -2,50 +2,48 @@
 
 ## Introduction
 
-WalletConnect is an open protocol for connecting Dapps to Wallets. The motivation behind it came from the lack of user-friendly solutions for user to use Wallets without browser extensions. In order to solve this it was designed to not require any software or hardware requirements from the user to connect a Wallet to a Dapp. The design is mostly tailored to mobile wallets but it could definitely support desktop wallets as well. The protocol relies that both the Dapp and the Wallet use the WalletConnect Client SDK and connect to a Bridge server that will relay the communications. The communication is initiated with a standard URI format that contains the topic of the connection request, a symmetric key used to decrypt the payload and the bridge server url.
+WalletConnect is an open protocol for connecting Dapps to Wallets. The motivation behind it came from the lack of user-friendly Wallets available to the user - In particular solutions which don't require installing browser extensions. In order to solve this it was designed to not require any additional software or hardware to connect a Wallet to a Dapp. The design is mostly tailored to mobile wallets but it could definitely support desktop wallets as well. The protocol relies that both the Dapp and the Wallet use WalletConnect Client SDK and connect to a Bridge server that will relay the communications. The communication is initiated with a standard URI format that contains the topic of the connection request, a symmetric key is then used to decrypt the payload and the bridge server url.
 
 ## Core Architecture
 
-The architecture consists essentially on a websocket server \(Bridge\) between two peers \(Dapp and Wallet\) that use the Client SDK.
+The architecture consists essentially of a websocket server \(Bridge\) between two peers \(Dapp and Wallet\) that use the Client SDK.
 
 ### Requesting Connection
 
-The initiator is the first peer that requests the connection \(Dapp\) by posting an encrypted payload using one-time topic used for handshake only with the connection request details to the Bridge Server and using the WalletConnect Standard URI format \([EIP-1328](https://eips.ethereum.org/EIPS/eip-1328)\) passes the required parameters to establish the connection: \(handshake\) topic, bridge \(url\) and \(symmetric\) key.
+The initiator, is the first peer who requests connection \(Dapp\). Dapp posts an encrypted payload consinsting of one-time topic \(used for handshake only\) and connection request details to the Bridge Server. Then using the WalletConnect Standard URI format \([EIP-1328](https://eips.ethereum.org/EIPS/eip-1328)\) Dapp assembles together the required parameters to establish the connection: \(handshake\) topic, bridge \(url\) and \(symmetric\) key.
 
-```javascript
-// Syntax
+```http
+wc:{topic...}@{version...}?bridge={url...}&key={key...}
+```
 
-request       = "wc" ":" topic [ "@" version ][ "?" parameters ]
-topic         = STRING
-version       = 1*DIGIT
-parameters    = parameter *( "&" parameter )
-parameter     = key "=" value
-key           = "bridge" / "key"
-value         = STRING
+| Required parts | Notes |
+| :--- | :--- |
+| wc: | Wallet Connect protocol defined in [EIP-1328](https://eips.ethereum.org/EIPS/eip-1328) |
+| _topic_ | String |
+| _version_ | Number \(eg. 1.9.0\) |
+| _bridge_ | Bridge URL \(URL Encoded\) |
+| _key_ | Symmetric key hex string |
 
-// Required Parameters
+Other query string parameters are all optional.
 
-bridge       = encoded url of the bridge server
-key          = hex string of symmetric key
-
-// Example
-
+```http
+// Example URL
 wc:8a5e5bdc-a0e4-4702-ba63-8f1a5655744f@1?bridge=https%3A%2F%2Fbridge.walletconnect.org&key=41791102999c339c844880b23950704cc43aa840f3739e365323cda4dfa89e7a
 ```
 
 ### Establishing Connection
 
-The second peer \(Wallet\) will read the URI using either a QR Code or a deep link. After reading the URI the peer will immediately receive and decrypted the connection request payload plus post a request to exchange key which will replaced with the new one after confirmation of the Dapp, this exchange happens on the background.
+The second peer \(Wallet\) will read the URI using either a QR Code or a deep link. After reading the URI the peer will immediately receive and decrypt the connection request payload plus post a request to exchange key which will be replaced with the new one after confirmation of the Dapp, this exchange happens in the background.
 
-The Wallet will then display to the user the request details provided by the Dapp. The user will then approve or reject the connection. If rejected, the Dapp will disconnect to the Bridge Server immediately and throw an error message if provided by the Wallet. If approved, the Dapp will receive provided account and chainId from the Wallet.
+The Wallet will then display to the user request details provided by the Dapp. The user will then approve or reject the connection. If rejected, the Dapp will disconnect from the Bridge Server immediately and throw an error message if provided by the Wallet. If approved, the Dapp will receive provided account and chainId from the Wallet.
 
-Once the connection is established, the Dapp will be able to send any JSON-RPC call requests to be handled by the Wallet either to read data from its node or make signing requests for transactions or messages.
+Once the connection is established, the Dapp will be able to send any JSON-RPC call requests to be handled by the Wallet either to read data from it's node or make signing requests for transactions or messages.
 
-Additionally, there is the option from the Wallet side to subscribe for push notifications using a Push Server. This push notification subscription will be registered only when the connection requested has been approved by the user. This subscription can be customized with varying degrees of privacy. It can either display a generic message, include the name of the peer making the request or even display a localized message. \(read Push Notifications sections for more details\)
+Additionally, there is an option from the Wallet side to subscribe for push notifications using a Push Server. This push notification subscription will be registered only when connection request has been approved by the user. This subscription can be customized with varying degrees of privacy. It can either display a generic message, include the name of the peer making the request or even display a localized message. \(read Push Notifications sections for more details\)
 
 ## Events & Payloads
 
-There are various events that happen both internally and across peers. These events are all accompanied by a corresponding payload. The internal events are client-specific but all cross peer events are JSON-RPC 2.0 complaint.
+There are various events that happen both internally and across peers. These events are all accompanied by a corresponding payload. The internal events are client-specific but all cross-peer events are JSON-RPC 2.0 complaint.
 
 ### Internal Events
 
@@ -113,7 +111,7 @@ interface ClientMeta {
 }
 ```
 
-From browser applications, this is scrapped from the loaded webpage's head metatags. From native applications, this is provided by the application developer.
+In browser applications, this is scraped from the loaded webpage's head meta-tags. In native applications, this is provided by the application developer.
 
 The `wc_sessionRequest` will expect a response with the following parameters:
 
@@ -132,7 +130,7 @@ interface WCSessionRequestResponse {
 
 ### Session Update
 
-This JSON RPC request is dispatched by the Wallet when updating the session. This can either when the session is killed by the Wallet, when it provides new accounts or changes the active chain id. It has the following parameters
+This JSON RPC request is dispatched by the Wallet when updating the session. This can occur either when the session is killed by the Wallet, when it provides new accounts or when it changes the active chain id. It has the following parameters:
 
 ```typescript
 interface WCSessionUpdateRequest {
@@ -152,9 +150,9 @@ interface WCSessionUpdateRequest {
 
 ### Exchange Key
 
-The JSON RPC request dispatched when reading the URI to secure the connection is the `wc_exchangeKey`. From browsers, this will be dispatched everytime the webpage is refreshed in order to recycle the persisted key on localStorage.
+This JSON RPC request is dispatched when reading the URI to secure the connection in the `wc_exchangeKey`. From browsers, this will be dispatched every-time the webpage is refreshed in order to recycle the persisted key on localStorage.
 
-This payload has the following parameters
+This payload has the following parameters:
 
 ```typescript
 interface WCExchangeKeyRequest {
@@ -171,7 +169,7 @@ interface WCExchangeKeyRequest {
 }
 ```
 
-These parameters were similar to the the `wc_sessionRequest` with the exception of the `nextKey` which is the hexadecimal string of the requested key to be exchanged.
+These parameters are similar to the `wc_sessionRequest` with the exception of the `nextKey` which is the hexadecimal string of the requested key to be exchanged.
 
 ## Cryptography
 
@@ -187,11 +185,11 @@ interface EncryptionPayload {
 }
 ```
 
-All fields \(data, hmac and iv\) are hexadecimal strings. The receiving peer will consequently verify the hmac before decrypted the data field using the active key and provided iv.
+All fields \(data, hmac and iv\) are hexadecimal strings. The receiving peer will consequently verify the hmac before decrypting the data field using the active key and provided iv.
 
 ## WebSocket Messages
 
-The communications are all relayed using WebSockets stringified payloads with the following structure:
+The communications are all relayed using WebSockets 'stringified' payloads with the following structure:
 
 ```typescript
 interface SocketMessage {
@@ -201,7 +199,7 @@ interface SocketMessage {
 }
 ```
 
-The Bridge Server acts as pub/sub controller which guarantees the published messages are always received by its subscribers.
+The Bridge Server acts as pub/sub controller which guarantees published messages are always received by their subscribers.
 
 ### Subscribe
 
@@ -227,13 +225,13 @@ An example published socket messages looks as follows:
 }
 ```
 
-Additionally the Bridge Server will trigger any esxisting push notifications subscriptions that listen to any incoming payloads with matching topics.
+Additionally the Bridge Server will trigger any existing push notifications' subscriptions that listen to any incoming payloads with matching topics.
 
 ## Push Notifications
 
-The push notification subscription is only available for native applications \(current libraries only support mobile applications\). The Push Server will require a topic, a bridge url, a type of notification and a token for the notification. The topic will match the client id that will receive the call requests, the bridge url is the one to subscribe to, the type of notification will differ for each mobile platform and the token is used to target the specfic mobile device.
+Push notification subscription is only available for native applications \(current libraries only support mobile applications\). The Push Server will require a topic, bridge url, type of notification and a token for the notification. The topic will match the client id that will receive the call requests, the bridge url is the one to subscribe to, the type of notification will differ for each mobile platform and the token is used to target the specific mobile device.
 
-Additionally there is also the options to provide a peerName of the other peer to customize the notification messages and language code \(ISO-639-1\) to localize the push notifications messages
+Additionally there are also options to provide a peerName of the other peer to customize the notification messages and language code \(ISO-639-1\) in order to localize push notification message content.
 
-When registering the push notification subscription the Push Server will post a subscription request to the Bridge Server to listen for any incoming payloads matching the provided topic and it will also share a webhook to trigger the push notification.
+When registering a push notification subscription, Push Server will post a subscription request to the Bridge Server to listen for any incoming payloads matching the provided topic. It will also share a webhook to trigger the push notification.
 
