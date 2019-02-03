@@ -33,11 +33,17 @@ wc:8a5e5bdc-a0e4-4702-ba63-8f1a5655744f@1?bridge=https%3A%2F%2Fbridge.walletconn
 
 ### Establishing Connection
 
+![Establishing Connection](assets/establishing-connection-1.png)
+
 The second peer \(Wallet\) will read the URI using either a QR Code or a deep link. After reading the URI the peer will immediately receive and decrypt the connection request payload plus post a request to exchange key which will be replaced with the new one after confirmation of the Dapp, this exchange happens in the background.
+
+![Establishing Connection](assets/establishing-connection-2.png)
 
 The Wallet will then display to the user request details provided by the Dapp. The user will then approve or reject the connection. If rejected, the Dapp will disconnect from the Bridge Server immediately and throw an error message if provided by the Wallet. If approved, the Dapp will receive provided account and chainId from the Wallet.
 
 Once the connection is established, the Dapp will be able to send any JSON-RPC call requests to be handled by the Wallet either to read data from it's node or make signing requests for transactions or messages.
+
+![Call Requests](assets/call-request.png)
 
 Additionally, there is an option from the Wallet side to subscribe for push notifications using a Push Server. This push notification subscription will be registered only when connection request has been approved by the user. This subscription can be customized with varying degrees of privacy. It can either display a generic message, include the name of the peer making the request or even display a localized message. \(read Push Notifications sections for more details\)
 
