@@ -61,7 +61,7 @@ async function sendTransaction({
   gasPrice: string, // Required
   value: string, // Required
   data: string, // Required
-  nonde: string // Required
+  nonce: string // Required
 }): Promise<string>;
 ```
 
