@@ -4,7 +4,7 @@ description: Quick Start For Dapps with Examples
 # Dapps \(Browser\)
 ## Quick Start For Dapps \(Client SDK - browser\)
 {% hint style="info" %}
-You can use the **Mock Wallet** to test your integration at [test.walletconnect.org](https://test.walletconnect.org) \([Source code](https://github.com/WalletConnect/walletconnect-mock-wallet)\)
+You can use the **Mock Wallet** to test your integration at [test.walletconnect.org](https://test.walletconnect.org) \([Source code](https://github.com/WalletConnect/walletconnect-mock-wallet)\). Keep in mind that this is **not a secure wallet - Do not store funds**.
 {% endhint %}
 ### Install
 {% tabs %}
@@ -21,7 +21,7 @@ npm install --save @walletconnect/browser
 {% endtab %}
 {% endtabs %}
 
-{% hint style="info" %}
+{% hint style="success" %}
 Syntax shown below is Javascript ES6 which requires bundling and transpiling to run in web browsers. 
 If unfamiliar we recommend setting up an environment using [Webpack Starter](https://github.com/wbkd/webpack-starter) or [Create React App](https://github.com/facebook/create-react-app)
 {% endhint %}
