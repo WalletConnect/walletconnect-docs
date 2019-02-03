@@ -9,37 +9,25 @@ You can use the **Example Dapp** to test your integration at [example.walletconn
 ### Install
 {% tabs %}
 {% tab title="yarn" %}
+Install NPM Package
 ```bash
-/**
- *  Install NPM Package
- */
-
 yarn add @walletconnect/react-native
-
-/**
- *  Polyfill NodeJS modules for React-Native
- */
-
-npm install --save rn-nodeify
-
+```
+Polyfill NodeJS modules for React-Native
+```bash
+yarn add rn-nodeify
 rn-nodeify --install --hack
 ```
 {% endtab %}
 
 {% tab title="npm" %}
-```bash
-/**
- *  Install NPM Package
- */
- 
+Install NPM Package
+```bash 
 npm install --save @walletconnect/react-native
-
-/**
- *  Polyfill NodeJS modules for React-Native
- */
-
+```
+Polyfill NodeJS modules for React-Native
+```bash
 npm install --save rn-nodeify
-
 rn-nodeify --install --hack
 ```
 {% endtab %}
