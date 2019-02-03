@@ -2,8 +2,8 @@
 
 * [WalletConnect v1.0.0-beta](README.md)
 * [Quick Start \(Examples\)](quick-start.md)
-  * [For Wallets](quick-start/for-wallets.md)
-  * [For Dapps \(Browser\)](quick-start/for-dapps.md)
+  * [Dapps \(Browser\)](quick-start/dapps.md)
+  * [Wallets](quick-start/wallets.md)
 * [Technical Specification](tech-spec.md)
 * [Client SDK API Reference](client-sdk.md)
 * [Bridge Server API Reference](bridge-server.md)
