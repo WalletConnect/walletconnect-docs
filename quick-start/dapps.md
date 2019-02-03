@@ -1,15 +1,12 @@
 ---
 description: Quick Start For Dapps with Examples
 ---
-
+# Dapps \(Browser\)
 ## Quick Start For Dapps \(Client SDK - browser\)
-
 {% hint style="info" %}
 You can use the **Mock Wallet** to test your integration at [test.walletconnect.org](https://test.walletconnect.org) \([Source code](https://github.com/WalletConnect/walletconnect-mock-wallet)\)
 {% endhint %}
-
 ### Install
-
 {% tabs %}
 {% tab title="yarn" %}
 ```bash
