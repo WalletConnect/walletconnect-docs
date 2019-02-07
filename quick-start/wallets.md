@@ -64,7 +64,37 @@ const walletConnector = new RNWalletConnect(
 );
 
 /**
- *  Subscribe to connection events
+ *  Subscribe to session requests
+ */
+walletConnector.on("wc_sessionRequest", (error, payload) => {
+  if (error) {
+    throw error;
+  }
+
+  // Handle Session Request
+
+  /* payload:
+  {
+    id: 1,
+    jsonrpc: '2.0'.
+    method: 'wc_sessionRequest',
+    params: [{
+      peerId: '15d8b6a3-15bd-493e-9358-111e3a4e6ee4',
+      peerMeta: {
+        name: "WalletConnect Example",
+        description: "Try out WalletConnect v1.0.0-beta",
+        icons: ["https://example.walletconnect.org/favicon.ico"],
+        url: "https://example.walletconnect.org",
+        ssl: true
+      }
+    }]
+  }
+  */
+});
+
+
+/**
+ *  Subscribe to call requests
  */
 walletConnector.on("call_request", (error, payload) => {
   if (error) {
