@@ -66,7 +66,7 @@ const walletConnector = new RNWalletConnect(
 /**
  *  Subscribe to session requests
  */
-walletConnector.on("wc_sessionRequest", (error, payload) => {
+walletConnector.on("session_request", (error, payload) => {
   if (error) {
     throw error;
   }
@@ -77,7 +77,7 @@ walletConnector.on("wc_sessionRequest", (error, payload) => {
   {
     id: 1,
     jsonrpc: '2.0'.
-    method: 'wc_sessionRequest',
+    method: 'session_request',
     params: [{
       peerId: '15d8b6a3-15bd-493e-9358-111e3a4e6ee4',
       peerMeta: {
@@ -143,7 +143,9 @@ walletConnector.approveSession({
 /**
  *  Reject Session
  */
-walletConnector.rejectSession()
+walletConnector.rejectSession({
+  message: 'OPTIONAL_ERROR_MESSAGE'
+})
 
 
 /**
@@ -168,6 +170,8 @@ walletConnector.approveRequest({
  */
 walletConnector.rejectRequest({
   id: 1,
-  result: null
+  error: {
+    message: 'OPTIONAL_ERROR_MESSAGE'
+  }
 });
 ```
