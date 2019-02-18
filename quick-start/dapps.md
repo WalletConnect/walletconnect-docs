@@ -1,28 +1,37 @@
 ---
 description: Quick Start For Dapps with Examples
 ---
+
 # Dapps \(Browser\)
+
 ## Quick Start For Dapps \(Client SDK - browser\)
+
 {% hint style="info" %}
 You can use the **Mock Wallet** to test your integration at [test.walletconnect.org](https://test.walletconnect.org) \([Source code](https://github.com/WalletConnect/walletconnect-mock-wallet)\). Keep in mind that this is **not a secure wallet - Do not store funds**.
 {% endhint %}
+
 ### Install
+
 {% tabs %}
 {% tab title="yarn" %}
+
 ```bash
 yarn add @walletconnect/browser
 ```
+
 {% endtab %}
 
 {% tab title="npm" %}
+
 ```bash
 npm install --save @walletconnect/browser
 ```
+
 {% endtab %}
 {% endtabs %}
 
 {% hint style="success" %}
-Syntax shown below is Javascript ES6 which requires bundling and transpiling to run in web browsers. 
+Syntax shown below is Javascript ES6 which requires bundling and transpiling to run in web browsers.
 If unfamiliar we recommend setting up an environment using [Webpack Starter](https://github.com/wbkd/webpack-starter) or [Create React App](https://github.com/facebook/create-react-app)
 {% endhint %}
 
@@ -44,16 +53,14 @@ const walletConnector = new WalletConnect({
  */
 if (!walletConnector.connected) {
   // create new session
-    walletConnector
-        .createSession()
-        .then(()=>{
-            // get uri for QR Code modal
-            const uri = walletConnector.uri;
-            // display QR Code modal
-            WalletConnectQRCodeModal.open(uri, () => {
-                console.log("QR Code Modal closed");
-            });
-        });
+  walletConnector.createSession().then(() => {
+    // get uri for QR Code modal
+    const uri = walletConnector.uri;
+    // display QR Code modal
+    WalletConnectQRCodeModal.open(uri, () => {
+      console.log("QR Code Modal closed");
+    });
+  });
 }
 
 /**
@@ -97,7 +104,7 @@ walletConnector.on("disconnect", (error, payload) => {
  */
 const tx = {
   from: "0xbc28ea04101f03ea7a94c1379bc3ab32e65e62d3",
-  to: "0x0",
+  to: "0x0000000000000000000000000000000000000000",
   nonce: 1,
   gas: 100000,
   value: 0,
@@ -108,9 +115,9 @@ const tx = {
  *  Send transaction
  */
 walletConnector
-    .sendTransaction(tx)
-    .then(console.log)
-    .catch(console.error);
+  .sendTransaction(tx)
+  .then(console.log)
+  .catch(console.error);
 ```
 
 ### Sign Message
@@ -128,9 +135,9 @@ const msgParams = [
  *  Sign message
  */
 walletConnector
-    .signMessage(msgParams)
-    .then(console.log)
-    .catch(console.error);
+  .signMessage(msgParams)
+  .then(console.log)
+  .catch(console.error);
 ```
 
 ### Sign Typed Data
@@ -184,7 +191,38 @@ const msgParams = [
  *  Sign Typed Data
  */
 walletConnector
-    .signTypedData(msgParams)
-    .then(console.log)
-    .catch(console.error);
+  .signTypedData(msgParams)
+  .then(console.log)
+  .catch(console.error);
+```
+
+### Send Custom Request
+
+```javascript
+/**
+ *  Draft Custom Request
+ */
+const customRequest = {
+  id: 1,
+  jsonrpc: "2.0",
+  method: "eth_signTransaction",
+  params: [
+    {
+      from: "0xbc28ea04101f03ea7a94c1379bc3ab32e65e62d3",
+      to: "0x0000000000000000000000000000000000000000",
+      nonce: 1,
+      gas: 100000,
+      value: 0,
+      data: "0x0"
+    }
+  ]
+};
+
+/**
+ *  Send Custom Request
+ */
+walletConnector
+  .sendCustomRequest(customRequest)
+  .then(console.log)
+  .catch(console.error);
 ```
