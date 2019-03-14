@@ -75,44 +75,29 @@ async function signMessage(params: string[]): Promise<string>;
 
 Returns: Signature
 
+## Sign Personal Message \(personal_sign\)
+
+```typescript
+async function signPersonalMessage(params: string[]): Promise<string>;
+```
+
+Returns: Signature
+
 ## Sign Typed Data \(eth_signTypedData\)
 
 ```typescript
 async function signTypedData(params: any[]): Promise<string>;
 ```
 
+Returns: Signature
+
 ## Send Custom Request
 
 ```javascript
-/**
- *  Draft Custom Request
- */
-const customRequest = {
-  id: 1,
-  jsonrpc: "2.0",
-  method: "eth_signTransaction",
-  params: [
-    {
-      from: "0xbc28ea04101f03ea7a94c1379bc3ab32e65e62d3",
-      to: "0x0000000000000000000000000000000000000000",
-      nonce: 1,
-      gas: 100000,
-      value: 0,
-      data: "0x0"
-    }
-  ]
-};
-
-/**
- *  Send Custom Request
- */
-walletConnector
-  .sendCustomRequest(customRequest)
-  .then(console.log)
-  .catch(console.error);
+async function sendCustomRequest(payload: IJsonRpcRequest): Promise<any>;
 ```
 
-Returns: Signature
+Returns: JSON-RPC Response
 
 ## Approve Call Request
 
