@@ -126,7 +126,6 @@ interface WCSessionRequestResponse {
     approved: boolean;
     chainId: number;
     accounts: string[];
-    message: string | null;
   };
 }
 ```
@@ -145,7 +144,6 @@ interface WCSessionUpdateRequest {
       approved: boolean;
       chainId: number;
       accounts: string[];
-      message: string | null;
     }
   ];
 }
