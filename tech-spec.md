@@ -16,13 +16,13 @@ The initiator, is the first peer who requests connection \(Dapp\). Dapp posts an
 wc:{topic...}@{version...}?bridge={url...}&key={key...}
 ```
 
-| Required parts | Notes |
-| :--- | :--- |
-| wc: | Wallet Connect protocol defined in [EIP-1328](https://eips.ethereum.org/EIPS/eip-1328) |
-| _topic_ | String |
-| _version_ | Number \(eg. 1.9.0\) |
-| _bridge_ | Bridge URL \(URL Encoded\) |
-| _key_ | Symmetric key hex string |
+| Required parts | Notes                                                                                  |
+| :------------- | :------------------------------------------------------------------------------------- |
+| wc:            | Wallet Connect protocol defined in [EIP-1328](https://eips.ethereum.org/EIPS/eip-1328) |
+| _topic_        | String                                                                                 |
+| _version_      | Number \(eg. 1.9.0\)                                                                   |
+| _bridge_       | Bridge URL \(URL Encoded\)                                                             |
+| _key_          | Symmetric key hex string                                                               |
 
 Other query string parameters are all optional.
 
@@ -111,7 +111,6 @@ interface ClientMeta {
   url: string;
   icons: string[];
   name: string;
-  ssl: boolean;
 }
 ```
 
@@ -238,4 +237,3 @@ Push notification subscription is only available for native applications \(curre
 Additionally there are also options to provide a peerName of the other peer to customize the notification messages and language code \(ISO-639-1\) in order to localize push notification message content.
 
 When registering a push notification subscription, Push Server will post a subscription request to the Bridge Server to listen for any incoming payloads matching the provided topic. It will also share a webhook to trigger the push notification.
-
