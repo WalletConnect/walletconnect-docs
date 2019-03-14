@@ -51,7 +51,7 @@ function killSession({
 }): void;
 ```
 
-## Send Transaction \(eth\_sendTransaction\)
+## Send Transaction \(eth_sendTransaction\)
 
 ```typescript
 async function sendTransaction({
@@ -67,7 +67,7 @@ async function sendTransaction({
 
 Returns: Transaction hash
 
-## Sign Message \(eth\_sign\)
+## Sign Message \(eth_sign\)
 
 ```typescript
 async function signMessage(params: string[]): Promise<string>;
@@ -75,10 +75,41 @@ async function signMessage(params: string[]): Promise<string>;
 
 Returns: Signature
 
-## Sign Typed Data \(eth\_signTypedData\)
+## Sign Typed Data \(eth_signTypedData\)
 
 ```typescript
 async function signTypedData(params: any[]): Promise<string>;
+```
+
+## Send Custom Request
+
+```javascript
+/**
+ *  Draft Custom Request
+ */
+const customRequest = {
+  id: 1,
+  jsonrpc: "2.0",
+  method: "eth_signTransaction",
+  params: [
+    {
+      from: "0xbc28ea04101f03ea7a94c1379bc3ab32e65e62d3",
+      to: "0x0000000000000000000000000000000000000000",
+      nonce: 1,
+      gas: 100000,
+      value: 0,
+      data: "0x0"
+    }
+  ]
+};
+
+/**
+ *  Send Custom Request
+ */
+walletConnector
+  .sendCustomRequest(customRequest)
+  .then(console.log)
+  .catch(console.error);
 ```
 
 Returns: Signature
@@ -100,4 +131,3 @@ function rejectRequest({
   result: null // Required
 }): void;
 ```
-
