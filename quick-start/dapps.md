@@ -152,7 +152,7 @@ const msgParams = [
 ];
 
 /**
- *  Sign message
+ *  Sign personal message
  */
 walletConnector
   .signPersonalMessage(msgParams)
