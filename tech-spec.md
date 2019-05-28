@@ -35,7 +35,7 @@ wc:8a5e5bdc-a0e4-4702-ba63-8f1a5655744f@1?bridge=https%3A%2F%2Fbridge.walletconn
 
 ![Establishing Connection](assets/establishing-connection.png)
 
-The second peer \(Wallet\) will read the URI using either a QR Code or a deep link. After reading the URI the peer will immediately receive and decrypt the connection request payload plus post a request to exchange key which will be replaced with the new one after confirmation of the Dapp, this exchange happens in the background.
+The second peer \(Wallet\) will read the URI using either a QR Code or a deep link. After reading the URI the peer will immediately receive and decrypt the connection request payload.
 
 The Wallet will then display to the user request details provided by the Dapp. The user will then approve or reject the connection. If rejected, the Dapp will disconnect from the Bridge Server immediately and throw an error message if provided by the Wallet. If approved, the Dapp will receive provided account and chainId from the Wallet.
 
@@ -62,7 +62,7 @@ interface InternalEvent {
 
 ### Cross-peer Events
 
-Cross-peer events include: `wc_exchangeKey`,`wc_sessionRequest`, `wc_sessionUpdate`, all [Ethereum JSON-RPC requests](https://github.com/ethereum/wiki/wiki/JSON-RPC) and `eth_signTypedData` \([EIP-712](https://eips.ethereum.org/EIPS/eip-712)\)
+Cross-peer events include: `wc_sessionRequest`, `wc_sessionUpdate`, all [Ethereum JSON-RPC requests](https://github.com/ethereum/wiki/wiki/JSON-RPC) and `eth_signTypedData` \([EIP-712](https://eips.ethereum.org/EIPS/eip-712)\)
 
 These events are structured as JSON-RPC 2.0 requests and responses as follows:
 
@@ -148,29 +148,6 @@ interface WCSessionUpdateRequest {
   ];
 }
 ```
-
-### Exchange Key
-
-This JSON RPC request is dispatched when reading the URI to secure the connection in the `wc_exchangeKey`. From browsers, this will be dispatched every-time the webpage is refreshed in order to recycle the persisted key on localStorage.
-
-This payload has the following parameters:
-
-```typescript
-interface WCExchangeKeyRequest {
-  id: number;
-  jsonrpc: "2.0";
-  method: "wc_exchangeKey";
-  params: [
-    {
-      peerId: string;
-      peerMeta: ClientMeta;
-      nextKey: string;
-    }
-  ];
-}
-```
-
-These parameters are similar to the `wc_sessionRequest` with the exception of the `nextKey` which is the hexadecimal string of the requested key to be exchanged.
 
 ## Cryptography
 
