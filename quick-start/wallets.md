@@ -1,59 +1,72 @@
 ---
 description: Quick Start For Wallets With Examples
 ---
+
 # Wallets
+
 ## Quick Start For Wallets \(Client SDK - react-native\)
+
 {% hint style="info" %}
 You can use the **Example Dapp** to test your integration at [example.walletconnect.org](https://example.walletconnect.org) \([Source code](https://github.com/WalletConnect/walletconnect-example-dapp)\)
 {% endhint %}
+
 ### Install
+
 {% tabs %}
 {% tab title="yarn" %}
 Install NPM Package
+
 ```bash
 yarn add @walletconnect/react-native
 ```
+
 Polyfill NodeJS modules for React-Native
+
 ```bash
 yarn add rn-nodeify
 rn-nodeify --install --hack
 ```
+
 {% endtab %}
 
 {% tab title="npm" %}
 Install NPM Package
-```bash 
+
+```bash
 npm install --save @walletconnect/react-native
 ```
+
 Polyfill NodeJS modules for React-Native
+
 ```bash
 npm install --save rn-nodeify
 rn-nodeify --install --hack
 ```
+
 {% endtab %}
 {% endtabs %}
 
 ### Initiate Connection
 
 ```javascript
-import RNWalletConnect from '@walletconnect/react-native'
+import RNWalletConnect from "@walletconnect/react-native";
 
-/**
- *  Create WalletConnector
- */
+// Create WalletConnector
 const walletConnector = new RNWalletConnect(
   {
-    uri: 'wc:8a5e5bdc-a0e4-47...TJRNmhWJmoxdFo6UDk2WlhaOyQ5N0U=',       // Required
+    uri: "wc:8a5e5bdc-a0e4-47...TJRNmhWJmoxdFo6UDk2WlhaOyQ5N0U=" // Required
   },
   {
-    clientMeta: {                                                       // Required
+    clientMeta: {
+      // Required
       description: "WalletConnect Developer App",
       url: "https://walletconnect.org",
       icons: ["https://walletconnect.org/walletconnect-logo.png"],
       name: "WalletConnect",
       ssl: true
     },
-    push: {                                                             // Optional
+    push: {
+      // Optional
       url: "https://push.walletconnect.org",
       type: "fcm",
       token: token,
@@ -63,9 +76,7 @@ const walletConnector = new RNWalletConnect(
   }
 );
 
-/**
- *  Subscribe to session requests
- */
+// Subscribe to session requests
 walletConnector.on("session_request", (error, payload) => {
   if (error) {
     throw error;
@@ -92,17 +103,14 @@ walletConnector.on("session_request", (error, payload) => {
   */
 });
 
-
-/**
- *  Subscribe to call requests
- */
+// Subscribe to call requests
 walletConnector.on("call_request", (error, payload) => {
   if (error) {
     throw error;
   }
 
   // Handle Call Request
-  
+
   /* payload:
   {
     id: 1,
@@ -121,16 +129,14 @@ walletConnector.on("disconnect", (error, payload) => {
     throw error;
   }
 
-  // delete walletConnector
+  // Delete walletConnector
 });
 ```
 
 ### Manage Connection
 
 ```javascript
-/**
- *  Approve Session
- */
+// Approve Session
 walletConnector.approveSession({
   accounts: [
     '0x4292...931B3',
@@ -140,38 +146,30 @@ walletConnector.approveSession({
   chainId: 1
 })
 
-/**
- *  Reject Session
- */
+// Reject Session
 walletConnector.rejectSession({
   message: 'OPTIONAL_ERROR_MESSAGE'
 })
 
 
-/**
- *  Kill Session
- */
+// Kill Session
 walletConnector.killSession()
 ```
 
 ### Manage Call Requests
 
 ```javascript
-/**
- *  Approve Call Request
- */
+// Approve Call Request
 walletConnector.approveRequest({
   id: 1,
   result: "0x41791102999c339c844880b23950704cc43aa840f3739e365323cda4dfa89e7a"
 });
 
-/**
- *  Reject Call Request
- */
+// Reject Call Request
 walletConnector.rejectRequest({
   id: 1,
   error: {
-    message: 'OPTIONAL_ERROR_MESSAGE'
+    message: "OPTIONAL_ERROR_MESSAGE"
   }
 });
 ```
