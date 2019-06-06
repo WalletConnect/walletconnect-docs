@@ -11,13 +11,13 @@ function on(
 
 Events: `connect`, `disconnect`, `session_request`, `session_update`, `call_request`, `wc_sessionRequest`, `wc_sessionUpdate`
 
-## Create New Session
+## Create New Session \(session_request\)
 
 ```typescript
 async function createSession(): Promise<void>;
 ```
 
-## Approve Session Request
+## Approve Session Request \(connect\)
 
 ```typescript
 function approveSession({
@@ -26,15 +26,15 @@ function approveSession({
 }): void;
 ```
 
-## Reject Session Request
+## Reject Session Request \(disconnect\)
 
 ```typescript
 function rejectSession({
-  message: string // Optional
+  message: 'OPTIONAL_ERROR_MESSAGE'
 }): void;
 ```
 
-## Update Session
+## Update Session \(session_update\)
 
 ```typescript
 function updateSession({
@@ -46,9 +46,7 @@ function updateSession({
 ## Kill Session \(disconnect\)
 
 ```typescript
-function killSession({
-  message: string // Optional
-}): void;
+function killSession(): void;
 ```
 
 ## Send Transaction \(eth_sendTransaction\)
@@ -112,7 +110,9 @@ function approveRequest({
 
 ```typescript
 function rejectRequest({
-  id: number, // Required
-  result: null // Required
+  id: 1,
+  error: {
+    message: "OPTIONAL_ERROR_MESSAGE"
+  }
 }): void;
 ```
