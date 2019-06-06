@@ -65,6 +65,22 @@ async function sendTransaction({
 
 Returns: Transaction hash
 
+## Sign Transaction \(eth_signTransaction\)
+
+```typescript
+async function signTransaction({
+  from: string, // Required
+  to: string, // Required
+  gasLimit: string, // Required
+  gasPrice: string, // Required
+  value: string, // Required
+  data: string, // Required
+  nonce: string // Required
+}): Promise<string>;
+```
+
+Returns: Signed Transaction
+
 ## Sign Message \(eth_sign\)
 
 ```typescript
