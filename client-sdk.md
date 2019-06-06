@@ -9,7 +9,7 @@ function on(
 ): void;
 ```
 
-Events: `connect`, `disconnect`, `session_update`, `call_request`, `wc_sessionRequest`, `wc_sessionUpdate`, `wc_exchangeKey`
+Events: `connect`, `disconnect`, `session_update`, `call_request`, `wc_sessionRequest`, `wc_sessionUpdate`
 
 ## Create New Session
 
