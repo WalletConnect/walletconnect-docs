@@ -138,17 +138,17 @@ walletConnector.on("disconnect", (error, payload) => {
 ```javascript
 // Approve Session
 walletConnector.approveSession({
-  accounts: [
+  accounts: [                 // required
     '0x4292...931B3',
     '0xa4a7...784E8',
     ...
   ],
-  chainId: 1
+  chainId: 1                  // required
 })
 
 // Reject Session
 walletConnector.rejectSession({
-  message: 'OPTIONAL_ERROR_MESSAGE'
+  message: 'OPTIONAL_ERROR_MESSAGE'       // optional
 })
 
 
@@ -167,9 +167,10 @@ walletConnector.approveRequest({
 
 // Reject Call Request
 walletConnector.rejectRequest({
-  id: 1,
+  id: 1,                                  // required
   error: {
-    message: "OPTIONAL_ERROR_MESSAGE"
+    code: "OPTIONAL_ERROR_CODE"           // optional
+    message: "OPTIONAL_ERROR_MESSAGE"     // optional
   }
 });
 ```

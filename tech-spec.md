@@ -96,6 +96,7 @@ interface WCSessionRequestRequest {
     {
       peerId: string;
       peerMeta: ClientMeta;
+      chainId?: number | null;
     }
   ];
 }
@@ -123,6 +124,8 @@ interface WCSessionRequestResponse {
   id: number;
   jsonrpc: "2.0";
   result: {
+    peerId: string;
+    peerMeta: ClientMeta;
     approved: boolean;
     chainId: number;
     accounts: string[];
