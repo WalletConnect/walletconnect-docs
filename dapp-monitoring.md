@@ -1,4 +1,4 @@
-# Dapp Analytics
+# Dapp Monitoring
 
 Monitoring Dapps can be very tricky to measure performance and simultaneously perserve user privacy. Fortunately the team at [Terminal](https://terminal.co/) have made their goal to solve this problem and they have added support for WalletConnect on their platform.
 
@@ -16,13 +16,11 @@ const walletConnector = new WalletConnect({
 //add your wallet connection logic
 ```
 
-# test
-
 To begin surfacing logs for calls using this web3 provider, simply wrap the web3 instance in a few easy steps as shown below.
 
 1. Install the Terminal SDK (Our NPM page for [more details](https://www.npmjs.com/package/@terminal-packages/sdk) )npm I @terminal-packages/sdk
 
-2. [Sign up ](https://terminal.co/signup) for Terminal and [generate an API key](https://docs.terminal.co/terminal-platform/create-an-api-key)
+2. [Sign up](https://terminal.co/signup) for Terminal and [generate an API key](https://docs.terminal.co/terminal-platform/create-an-api-key)
 
 3. Wrap your provider by importing the Terminal SDK package and including the account API Key, ProjectID, and the WalletConnect bridge URL.
 
