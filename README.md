@@ -18,11 +18,11 @@ Additionally you can also consult the API references for [Client SDK](client-sdk
 
 **Test Wallet:** [test.walletconnect.org](https://test.walletconnect.org) \([Source code](https://github.com/WalletConnect/walletconnect-test-wallet)\)
 
-![](.gitbook/assets/img_3394.jpg)
+![test wallet](.gitbook/assets/img_3394.jpg)
 
 **Example Dapp:** [example.walletconnect.org](https://example.walletconnect.org) \([Source code](https://github.com/WalletConnect/walletconnect-example-dapp)\)
 
-![](.gitbook/assets/screenshot-2019-01-31-16.52.57.png)
+![example dapp](.gitbook/assets/screenshot-2019-01-31-16.52.57.png)
 
 ## Community
 
