@@ -1,9 +1,13 @@
 # Table of contents
 
 - [WalletConnect v1.0.0-beta](README.md)
-- [Quick Start \(Examples\)](quick-start.md)
-  - [Dapps \(Browser\)](quick-start/dapps.md)
-  - [Wallets](quick-start/wallets.md)
+- [Quick Start](quick-start.md)
+  - [Dapps](dapps.md)
+    - [Web3 Provider](quick-start/dapps/web3-provider.md)
+    - [Browser SDK](quick-start/dapps/browser.md)
+    - [NodeJS SDK](quick-start/dapps/node.md)
+  - [Wallets](wallets.md)
+    - [React-Native SDK](quick-start/wallets/react-native.md)
 - [Dapp Monitoring](dapp-monitoring.md)
 - [Technical Specification](tech-spec.md)
 - [JSON-RPC API Methods](json-rpc.md)
