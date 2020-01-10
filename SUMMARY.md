@@ -8,6 +8,8 @@
     - [NodeJS SDK](quick-start/dapps/node.md)
   - [Wallets](wallets.md)
     - [React-Native SDK](quick-start/wallets/react-native.md)
+    - [Swift SDK \(iOS\)](quick-start/wallets/swift.md)
+    - [Kotlin SDK \(Android\)](quick-start/wallets/swift.md)
 - [Dapp Monitoring](dapp-monitoring.md)
 - [Technical Specification](tech-spec.md)
 - [JSON-RPC API Methods](json-rpc.md)
