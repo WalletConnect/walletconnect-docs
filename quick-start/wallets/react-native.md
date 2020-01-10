@@ -1,10 +1,10 @@
 ---
-description: Quick Start For Wallets With Examples
+description: Quick Start For Wallets Using React-Native SDK
 ---
 
-# Wallets
+# React-Native SDK
 
-## Quick Start For Wallets \(Client SDK - react-native\)
+## Quick Start For Wallets \(React-Native SDK\)
 
 {% hint style="info" %}
 You can use the **Example Dapp** to test your integration at [example.walletconnect.org](https://example.walletconnect.org) \([Source code](https://github.com/WalletConnect/walletconnect-example-dapp)\)
