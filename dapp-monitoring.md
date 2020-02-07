@@ -2,7 +2,7 @@
 
 Monitoring Dapps can be very tricky to measure performance and simultaneously perserve user privacy. Fortunately the team at [Terminal](https://terminal.co/) have made their goal to solve this problem and they have added support for WalletConnect on their platform.
 
-Below you can find how to integrate the Terminal SDK with the WalletConnect SDK.
+Below you can find how to integrate the Terminal SDK with the WalletConnect Client.
 
 Surfacing logs and analytics from WalletConnect is trivially different than most other integrations. If your dapp is integrated with WalletConnect then you probably initialize your WalletConnect browser object similar to this:
 

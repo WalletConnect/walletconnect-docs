@@ -1,10 +1,10 @@
 ---
-description: Quick Start For Wallets Using Swift SDK \(iOS\)
+description: Quick Start For Wallets Using Swift Client \(iOS\)
 ---
 
-# Swift SDK \(iOS\)
+# Swift Client \(iOS\)
 
-## Quick Start For Wallets \(Swift SDK\)
+## Quick Start For Wallets \(Swift Client\)
 
 {% hint style="info" %}
 You can use the **Example Dapp** to test your integration at [example.walletconnect.org](https://example.walletconnect.org) \([Source code](https://github.com/WalletConnect/walletconnect-example-dapp)\)
@@ -12,4 +12,4 @@ You can use the **Example Dapp** to test your integration at [example.walletconn
 
 ## Github
 
-This quick start is currently incomplete, please check the [Github repository](https://github.com/WalletConnect/kotlin-walletconnect-lib) for this SDK
+This quick start is currently incomplete, please check the [Github repository](https://github.com/WalletConnect/kotlin-walletconnect-lib) for this Client

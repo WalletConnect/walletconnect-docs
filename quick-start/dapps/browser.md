@@ -1,10 +1,10 @@
 ---
-description: Quick Start For Dapps using Browser SDK
+description: Quick Start For Dapps using Browser Client
 ---
 
-# Browser SDK
+# Browser Client
 
-## Quick Start For Dapps \(Browser SDK\)
+## Quick Start For Dapps \(Browser Client\)
 
 {% hint style="info" %}
 You can use the **Test Wallet** to test your integration at [test.walletconnect.org](https://test.walletconnect.org) \([Source code](https://github.com/WalletConnect/walletconnect-test-wallet)\). Keep in mind that this is **not a secure wallet - Do not store funds**.

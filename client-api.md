@@ -1,4 +1,4 @@
-# Client SDK API Reference
+# Client API Reference
 
 ## Register Event Subscription
 
