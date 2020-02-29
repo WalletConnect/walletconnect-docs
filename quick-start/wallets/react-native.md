@@ -62,8 +62,7 @@ const walletConnector = new RNWalletConnect(
       description: "WalletConnect Developer App",
       url: "https://walletconnect.org",
       icons: ["https://walletconnect.org/walletconnect-logo.png"],
-      name: "WalletConnect",
-      ssl: true
+      name: "WalletConnect"
     },
     push: {
       // Optional
@@ -95,8 +94,7 @@ walletConnector.on("session_request", (error, payload) => {
         name: "WalletConnect Example",
         description: "Try out WalletConnect v1.0.0-beta",
         icons: ["https://example.walletconnect.org/favicon.ico"],
-        url: "https://example.walletconnect.org",
-        ssl: true
+        url: "https://example.walletconnect.org"
       }
     }]
   }
