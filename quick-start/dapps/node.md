@@ -51,8 +51,7 @@ const walletConnector = new NodeWalletConnect(
       description: "WalletConnect NodeJS Client",
       url: "https://nodejs.org/en/",
       icons: ["https://nodejs.org/static/images/logo.svg"],
-      name: "WalletConnect",
-      ssl: true
+      name: "WalletConnect"
     }
   }
 );
