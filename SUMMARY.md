@@ -10,7 +10,6 @@
     - [React-Native Client](quick-start/wallets/react-native.md)
     - [Swift Client \(iOS\)](quick-start/wallets/swift.md)
     - [Kotlin Client \(Android\)](quick-start/wallets/swift.md)
-- [Dapp Monitoring](dapp-monitoring.md)
 - [Technical Specification](tech-spec.md)
 - [JSON-RPC API Methods](json-rpc.md)
   - [Ethereum](json-rpc/ethereum.md)
