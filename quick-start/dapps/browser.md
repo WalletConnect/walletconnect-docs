@@ -43,7 +43,7 @@ import WalletConnectQRCodeModal from "@walletconnect/qrcode-modal";
 
 // Create a walletConnector
 const walletConnector = new WalletConnect({
-  bridge: "https://bridge.walletconnect.org" // Required
+  bridge: "https://bridge.walletconnect.org", // Required
 });
 
 // Check if connection is already established
@@ -99,19 +99,19 @@ const tx = {
   to: "0x89D24A7b4cCB1b6fAA2625Fe562bDd9A23260359", // Required (for non contract deployments)
   data: "0x", // Required
   gasPrice: "0x02540be400", // Optional
-  gasLimit: "0x9c40", // Optional
+  gas: "0x9c40", // Optional
   value: "0x00", // Optional
-  nonce: "0x0114" // Optional
+  nonce: "0x0114", // Optional
 };
 
 // Send transaction
 walletConnector
   .sendTransaction(tx)
-  .then(result => {
+  .then((result) => {
     // Returns transaction id (hash)
     console.log(result);
   })
-  .catch(error => {
+  .catch((error) => {
     // Error returned when rejected
     console.error(error);
   });
@@ -126,19 +126,19 @@ const tx = {
   to: "0x89D24A7b4cCB1b6fAA2625Fe562bDd9A23260359", // Required (for non contract deployments)
   data: "0x", // Required
   gasPrice: "0x02540be400", // Optional
-  gasLimit: "0x9c40", // Optional
+  gas: "0x9c40", // Optional
   value: "0x00", // Optional
-  nonce: "0x0114" // Optional
+  nonce: "0x0114", // Optional
 };
 
 // Sign transaction
 walletConnector
   .signTransaction(tx)
-  .then(result => {
+  .then((result) => {
     // Returns signed transaction
     console.log(result);
   })
-  .catch(error => {
+  .catch((error) => {
     // Error returned when rejected
     console.error(error);
   });
@@ -206,51 +206,51 @@ const typedData = {
       { name: "name", type: "string" },
       { name: "version", type: "string" },
       { name: "chainId", type: "uint256" },
-      { name: "verifyingContract", type: "address" }
+      { name: "verifyingContract", type: "address" },
     ],
     Person: [
       { name: "name", type: "string" },
-      { name: "account", type: "address" }
+      { name: "account", type: "address" },
     ],
     Mail: [
       { name: "from", type: "Person" },
       { name: "to", type: "Person" },
-      { name: "contents", type: "string" }
-    ]
+      { name: "contents", type: "string" },
+    ],
   },
   primaryType: "Mail",
   domain: {
     name: "Example Dapp",
     version: "1.0.0-beta",
     chainId: 1,
-    verifyingContract: "0x0000000000000000000000000000000000000000"
+    verifyingContract: "0x0000000000000000000000000000000000000000",
   },
   message: {
     from: {
       name: "Alice",
-      account: "0xaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      account: "0xaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
     },
     to: {
       name: "Bob",
-      account: "0xbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+      account: "0xbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
     },
-    contents: "Hey, Bob!"
-  }
+    contents: "Hey, Bob!",
+  },
 };
 
 const msgParams = [
   "0xbc28ea04101f03ea7a94c1379bc3ab32e65e62d3", // Required
-  typedData // Required
+  typedData, // Required
 ];
 
 // Sign Typed Data
 walletConnector
   .signTypedData(msgParams)
-  .then(result => {
+  .then((result) => {
     // Returns signature.
     console.log(result);
   })
-  .catch(error => {
+  .catch((error) => {
     // Error returned when rejected
     console.error(error);
   });
@@ -270,21 +270,21 @@ const customRequest = {
       to: "0x89D24A7b4cCB1b6fAA2625Fe562bDd9A23260359",
       data: "0x",
       gasPrice: "0x02540be400",
-      gasLimit: "0x9c40",
+      gas: "0x9c40",
       value: "0x00",
-      nonce: "0x0114"
-    }
-  ]
+      nonce: "0x0114",
+    },
+  ],
 };
 
 // Send Custom Request
 walletConnector
   .sendCustomRequest(customRequest)
-  .then(result => {
+  .then((result) => {
     // Returns request result
     console.log(result);
   })
-  .catch(error => {
+  .catch((error) => {
     // Error returned when rejected
     console.error(error);
   });

@@ -55,11 +55,11 @@ function killSession(): void;
 async function sendTransaction({
   from: string, // Required
   to: string, // Required
-  gasLimit: string, // Required
+  gas: string, // Required
   gasPrice: string, // Required
   value: string, // Required
   data: string, // Required
-  nonce: string // Required
+  nonce: string, // Required
 }): Promise<string>;
 ```
 
@@ -71,11 +71,11 @@ Returns: Transaction hash
 async function signTransaction({
   from: string, // Required
   to: string, // Required
-  gasLimit: string, // Required
+  gas: string, // Required
   gasPrice: string, // Required
   value: string, // Required
   data: string, // Required
-  nonce: string // Required
+  nonce: string, // Required
 }): Promise<string>;
 ```
 
@@ -118,7 +118,7 @@ Returns: JSON-RPC Response
 ```typescript
 function approveRequest({
   id: number, // Required
-  result: any // Required
+  result: any, // Required
 }): void;
 ```
 
