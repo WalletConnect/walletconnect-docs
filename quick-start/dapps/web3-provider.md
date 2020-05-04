@@ -126,7 +126,7 @@ const signedTypedData = await web3.eth.signTypedData(msg);
    a. bridge - the Bridge URL points to the bridge server used to relay WalletConnect payloads - default="https://bridge.walletconnect.org"
    b. chainId - preferred chain id to be provided by the wallet on session request - default=1
 
-## Custom RPC Url
+## Custom RPC URL
 
 WalletConnect Web3 Provider uses a HTTP connection to a remote node to make read calls instead of making unnecessary JSON-RPC requests through the WalletConnect session.
 
