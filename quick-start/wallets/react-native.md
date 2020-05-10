@@ -129,6 +129,9 @@ walletConnector.on("disconnect", (error, payload) => {
 
   // Delete walletConnector
 });
+
+// This will trigger session_request callback
+walletConnector.createSession();
 ```
 
 ### Manage Connection
