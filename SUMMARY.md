@@ -3,7 +3,7 @@
 - [WalletConnect v1.x.x](README.md)
 - [Quick Start](quick-start.md)
   - [Dapps](dapps.md)
-    - [Client](quick-start/dapps/client.md)
+    - [Standalone Client](quick-start/dapps/client.md)
     - [Web3 Provider](quick-start/dapps/web3-provider.md)
   - [Wallets](wallets.md)
     - [React-Native Client](quick-start/wallets/react-native.md)
