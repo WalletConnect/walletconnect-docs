@@ -2,13 +2,13 @@
 description: Ethereum JSON-RPC API Methods
 ---
 
-# Ethereum JSON-RPC API Methods
+# Ethereum
 
-## personal_sign
+## personal\_sign
 
 The sign method calculates an Ethereum specific signature with:`sign(keccack256("\x19Ethereum Signed Message:\n" + len(message) + message)))`.
 
-By adding a prefix to the message makes the calculated signature recognisable as an Ethereum specific signature. This prevents misuse where a malicious DApp can sign arbitrary data (e.g. transaction) and use the signature to impersonate the victim.
+By adding a prefix to the message makes the calculated signature recognisable as an Ethereum specific signature. This prevents misuse where a malicious DApp can sign arbitrary data \(e.g. transaction\) and use the signature to impersonate the victim.
 
 **Note** See ecRecover to verify the signature.
 
@@ -25,7 +25,7 @@ message, account
 
 ### Example
 
-```json
+```javascript
 // Request
 {
   "id": 1,
@@ -42,13 +42,11 @@ message, account
 }
 ```
 
----
-
-## eth_sign
+## eth\_sign
 
 The sign method calculates an Ethereum specific signature with: `sign(keccak256("\x19Ethereum Signed Message:\n" + len(message) + message)))`.
 
-By adding a prefix to the message makes the calculated signature recognisable as an Ethereum specific signature. This prevents misuse where a malicious DApp can sign arbitrary data (e.g. transaction) and use the signature to impersonate the victim.
+By adding a prefix to the message makes the calculated signature recognisable as an Ethereum specific signature. This prevents misuse where a malicious DApp can sign arbitrary data \(e.g. transaction\) and use the signature to impersonate the victim.
 
 **Note** the address to sign with must be unlocked.
 
@@ -65,7 +63,7 @@ account, message
 
 ### Example
 
-```json
+```javascript
 // Request
 {
   "id": 1,
@@ -85,13 +83,11 @@ account, message
 
 An example how to use solidity ecrecover to verify the signature calculated with `eth_sign` can be found [here](https://gist.github.com/bas-vk/d46d83da2b2b4721efb0907aecdb7ebd). The contract is deployed on the testnet Ropsten and Rinkeby.
 
----
-
-## eth_signTypedData
+## eth\_signTypedData
 
 Calculates an Ethereum-specific signature in the form of `keccak256("\x19Ethereum Signed Message:\n" + len(message) + message))`
 
-By adding a prefix to the message makes the calculated signature recognisable as an Ethereum specific signature. This prevents misuse where a malicious DApp can sign arbitrary data (e.g. transaction) and use the signature to impersonate the victim.
+By adding a prefix to the message makes the calculated signature recognisable as an Ethereum specific signature. This prevents misuse where a malicious DApp can sign arbitrary data \(e.g. transaction\) and use the signature to impersonate the victim.
 
 **Note** the address to sign with must be unlocked.
 
@@ -104,7 +100,7 @@ account, message
 
 ### Example Parameters
 
-```json
+```javascript
 [
   "0xCD2a3d9F938E13CD947Ec05AbC7FE734Df8DD826",
   {
@@ -180,7 +176,7 @@ account, message
 
 ### Example
 
-```json
+```javascript
 // Request
 {
   "id": 1,
@@ -198,27 +194,24 @@ account, message
 }
 ```
 
----
-
-## eth_sendTransaction
+## eth\_sendTransaction
 
 Creates new message call transaction or a contract creation, if the data field contains code.
 
 ### Parameters
 
 1. `Object` - The transaction object
-
-- `from`: `DATA`, 20 Bytes - The address the transaction is send from.
-- `to`: `DATA`, 20 Bytes - (optional when creating new contract) The address the transaction is directed to.
-- `data`: `DATA` - The compiled code of a contract OR the hash of the invoked method signature and encoded parameters. For details see [Ethereum Contract ABI](https://github.com/ethereum/wiki/wiki/Ethereum-Contract-ABI)
-- `gas`: `QUANTITY` - (optional, default: 90000) Integer of the gas provided for the transaction execution. It will return unused gas.
-- `gasPrice`: `QUANTITY` - (optional, default: To-Be-Determined) Integer of the gasPrice used for each paid gas
-- `value`: `QUANTITY` - (optional) Integer of the value sent with this transaction
-- `nonce`: `QUANTITY` - (optional) Integer of a nonce. This allows to overwrite your own pending transactions that use the same nonce.
+2. `from`: `DATA`, 20 Bytes - The address the transaction is send from.
+3. `to`: `DATA`, 20 Bytes - \(optional when creating new contract\) The address the transaction is directed to.
+4. `data`: `DATA` - The compiled code of a contract OR the hash of the invoked method signature and encoded parameters. For details see [Ethereum Contract ABI](https://github.com/ethereum/wiki/wiki/Ethereum-Contract-ABI)
+5. `gas`: `QUANTITY` - \(optional, default: 90000\) Integer of the gas provided for the transaction execution. It will return unused gas.
+6. `gasPrice`: `QUANTITY` - \(optional, default: To-Be-Determined\) Integer of the gasPrice used for each paid gas
+7. `value`: `QUANTITY` - \(optional\) Integer of the value sent with this transaction
+8. `nonce`: `QUANTITY` - \(optional\) Integer of a nonce. This allows to overwrite your own pending transactions that use the same nonce.
 
 ### Example Parameters
 
-```json
+```javascript
 [
   {
     "from": "0xb60e8dd61c5d32be8058bb8eb970870f07233155",
@@ -236,11 +229,11 @@ Creates new message call transaction or a contract creation, if the data field c
 
 `DATA`, 32 Bytes - the transaction hash, or the zero hash if the transaction is not yet available.
 
-Use [eth_getTransactionReceipt](https://github.com/ethereum/wiki/wiki/JSON-RPC#eth_gettransactionreceipt) to get the contract address, after the transaction was mined, when you created a contract.
+Use [eth\_getTransactionReceipt](https://github.com/ethereum/wiki/wiki/JSON-RPC#eth_gettransactionreceipt) to get the contract address, after the transaction was mined, when you created a contract.
 
 ### Example
 
-```json
+```javascript
 // Request
 {
   "id": 1,
@@ -257,27 +250,24 @@ Use [eth_getTransactionReceipt](https://github.com/ethereum/wiki/wiki/JSON-RPC#e
 }
 ```
 
----
-
-## eth_signTransaction
+## eth\_signTransaction
 
 Signs a transaction that can be submitted to the network at a later time using with `eth_sendRawTransaction`
 
 ### Parameters
 
 1. `Object` - The transaction object
-
-- `from`: `DATA`, 20 Bytes - The address the transaction is send from.
-- `to`: `DATA`, 20 Bytes - (optional when creating new contract) The address the transaction is directed to.
-- `data`: `DATA` - The compiled code of a contract OR the hash of the invoked method signature and encoded parameters. For details see [Ethereum Contract ABI](https://github.com/ethereum/wiki/wiki/Ethereum-Contract-ABI)
-- `gas`: `QUANTITY` - (optional, default: 90000) Integer of the gas provided for the transaction execution. It will return unused gas.
-- `gasPrice`: `QUANTITY` - (optional, default: To-Be-Determined) Integer of the gasPrice used for each paid gas
-- `value`: `QUANTITY` - (optional) Integer of the value sent with this transaction
-- `nonce`: `QUANTITY` - (optional) Integer of a nonce. This allows to overwrite your own pending transactions that use the same nonce.
+2. `from`: `DATA`, 20 Bytes - The address the transaction is send from.
+3. `to`: `DATA`, 20 Bytes - \(optional when creating new contract\) The address the transaction is directed to.
+4. `data`: `DATA` - The compiled code of a contract OR the hash of the invoked method signature and encoded parameters. For details see [Ethereum Contract ABI](https://github.com/ethereum/wiki/wiki/Ethereum-Contract-ABI)
+5. `gas`: `QUANTITY` - \(optional, default: 90000\) Integer of the gas provided for the transaction execution. It will return unused gas.
+6. `gasPrice`: `QUANTITY` - \(optional, default: To-Be-Determined\) Integer of the gasPrice used for each paid gas
+7. `value`: `QUANTITY` - \(optional\) Integer of the value sent with this transaction
+8. `nonce`: `QUANTITY` - \(optional\) Integer of a nonce. This allows to overwrite your own pending transactions that use the same nonce.
 
 ### Example Parameters
 
-```json
+```javascript
 [
   {
     "from": "0xb60e8dd61c5d32be8058bb8eb970870f07233155",
@@ -297,7 +287,7 @@ Signs a transaction that can be submitted to the network at a later time using w
 
 ### Example
 
-```json
+```javascript
 // Request
 {
   "id": 1,
@@ -314,9 +304,7 @@ Signs a transaction that can be submitted to the network at a later time using w
 }
 ```
 
----
-
-## eth_sendRawTransaction
+## eth\_sendRawTransaction
 
 Creates new message call transaction or a contract creation for signed transactions.
 
@@ -328,11 +316,11 @@ Creates new message call transaction or a contract creation for signed transacti
 
 `DATA`, 32 Bytes - the transaction hash, or the zero hash if the transaction is not yet available.
 
-Use [eth_getTransactionReceipt](https://github.com/ethereum/wiki/wiki/JSON-RPC#eth_gettransactionreceipt) to get the contract address, after the transaction was mined, when you created a contract.
+Use [eth\_getTransactionReceipt](https://github.com/ethereum/wiki/wiki/JSON-RPC#eth_gettransactionreceipt) to get the contract address, after the transaction was mined, when you created a contract.
 
 ### Example
 
-```json
+```javascript
 // Request
 {
   "id": 1,
@@ -350,3 +338,4 @@ Use [eth_getTransactionReceipt](https://github.com/ethereum/wiki/wiki/JSON-RPC#e
   "result": "0xe670ec64341771606e55d6b4ca35a1a6b75ee3d5145a99d05921026d1527331"
 }
 ```
+

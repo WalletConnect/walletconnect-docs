@@ -26,7 +26,6 @@ Polyfill NodeJS modules for React-Native
 yarn add rn-nodeify
 rn-nodeify --install --hack
 ```
-
 {% endtab %}
 
 {% tab title="npm" %}
@@ -42,7 +41,6 @@ Polyfill NodeJS modules for React-Native
 npm install --save rn-nodeify
 rn-nodeify --install --hack
 ```
-
 {% endtab %}
 {% endtabs %}
 
@@ -171,3 +169,4 @@ connector.rejectRequest({
   }
 });
 ```
+

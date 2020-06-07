@@ -11,7 +11,7 @@ function on(
 
 Events: `connect`, `disconnect`, `session_request`, `session_update`, `call_request`, `wc_sessionRequest`, `wc_sessionUpdate`
 
-## Create New Session \(session_request\)
+## Create New Session \(session\_request\)
 
 ```typescript
 async function createSession(): Promise<void>;
@@ -34,7 +34,7 @@ function rejectSession({
 }): void;
 ```
 
-## Update Session \(session_update\)
+## Update Session \(session\_update\)
 
 ```typescript
 function updateSession({
@@ -49,7 +49,7 @@ function updateSession({
 function killSession(): void;
 ```
 
-## Send Transaction \(eth_sendTransaction\)
+## Send Transaction \(eth\_sendTransaction\)
 
 ```typescript
 async function sendTransaction({
@@ -65,7 +65,7 @@ async function sendTransaction({
 
 Returns: Transaction hash
 
-## Sign Transaction \(eth_signTransaction\)
+## Sign Transaction \(eth\_signTransaction\)
 
 ```typescript
 async function signTransaction({
@@ -81,7 +81,7 @@ async function signTransaction({
 
 Returns: Signed Transaction
 
-## Sign Message \(eth_sign\)
+## Sign Message \(eth\_sign\)
 
 ```typescript
 async function signMessage(params: string[]): Promise<string>;
@@ -89,7 +89,7 @@ async function signMessage(params: string[]): Promise<string>;
 
 Returns: Signature
 
-## Sign Personal Message \(personal_sign\)
+## Sign Personal Message \(personal\_sign\)
 
 ```typescript
 async function signPersonalMessage(params: string[]): Promise<string>;
@@ -97,7 +97,7 @@ async function signPersonalMessage(params: string[]): Promise<string>;
 
 Returns: Signature
 
-## Sign Typed Data \(eth_signTypedData\)
+## Sign Typed Data \(eth\_signTypedData\)
 
 ```typescript
 async function signTypedData(params: any[]): Promise<string>;
@@ -132,3 +132,4 @@ function rejectRequest({
   }
 }): void;
 ```
+
