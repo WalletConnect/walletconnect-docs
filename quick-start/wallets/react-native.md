@@ -17,7 +17,7 @@ You can use the **Example Dapp** to test your integration at [example.walletconn
 Install NPM Package
 
 ```bash
-yarn add @walletconnect/react-native
+yarn add @walletconnect/client
 ```
 
 Polyfill NodeJS modules for React-Native
@@ -33,7 +33,7 @@ rn-nodeify --install --hack
 Install NPM Package
 
 ```bash
-npm install --save @walletconnect/react-native
+npm install --save @walletconnect/client
 ```
 
 Polyfill NodeJS modules for React-Native
@@ -49,34 +49,33 @@ rn-nodeify --install --hack
 ### Initiate Connection
 
 ```javascript
-import RNWalletConnect from "@walletconnect/react-native";
+import WalletConnect from "@walletconnect/client";
 
 // Create WalletConnector
-const walletConnector = new RNWalletConnect(
+const connector = new WalletConnect(
   {
-    uri: "wc:8a5e5bdc-a0e4-47...TJRNmhWJmoxdFo6UDk2WlhaOyQ5N0U=", // Required
-  },
-  {
+    // Required
+    uri: "wc:8a5e5bdc-a0e4-47...TJRNmhWJmoxdFo6UDk2WlhaOyQ5N0U=",
+    // Required
     clientMeta: {
-      // Required
       description: "WalletConnect Developer App",
       url: "https://walletconnect.org",
       icons: ["https://walletconnect.org/walletconnect-logo.png"],
       name: "WalletConnect",
     },
-    push: {
-      // Optional
-      url: "https://push.walletconnect.org",
-      type: "fcm",
-      token: token,
-      peerMeta: true,
-      language: language,
-    },
+  },
+  {
+    // Optional
+    url: "https://push.walletconnect.org",
+    type: "fcm",
+    token: token,
+    peerMeta: true,
+    language: language,
   }
 );
 
 // Subscribe to session requests
-walletConnector.on("session_request", (error, payload) => {
+connector.on("session_request", (error, payload) => {
   if (error) {
     throw error;
   }
@@ -102,7 +101,7 @@ walletConnector.on("session_request", (error, payload) => {
 });
 
 // Subscribe to call requests
-walletConnector.on("call_request", (error, payload) => {
+connector.on("call_request", (error, payload) => {
   if (error) {
     throw error;
   }
@@ -122,12 +121,12 @@ walletConnector.on("call_request", (error, payload) => {
   */
 });
 
-walletConnector.on("disconnect", (error, payload) => {
+connector.on("disconnect", (error, payload) => {
   if (error) {
     throw error;
   }
 
-  // Delete walletConnector
+  // Delete connector
 });
 ```
 
@@ -135,7 +134,7 @@ walletConnector.on("disconnect", (error, payload) => {
 
 ```javascript
 // Approve Session
-walletConnector.approveSession({
+connector.approveSession({
   accounts: [                 // required
     '0x4292...931B3',
     '0xa4a7...784E8',
@@ -145,26 +144,26 @@ walletConnector.approveSession({
 })
 
 // Reject Session
-walletConnector.rejectSession({
+connector.rejectSession({
   message: 'OPTIONAL_ERROR_MESSAGE'       // optional
 })
 
 
 // Kill Session
-walletConnector.killSession()
+connector.killSession()
 ```
 
 ### Manage Call Requests
 
 ```javascript
 // Approve Call Request
-walletConnector.approveRequest({
+connector.approveRequest({
   id: 1,
   result: "0x41791102999c339c844880b23950704cc43aa840f3739e365323cda4dfa89e7a"
 });
 
 // Reject Call Request
-walletConnector.rejectRequest({
+connector.rejectRequest({
   id: 1,                                  // required
   error: {
     code: "OPTIONAL_ERROR_CODE"           // optional
