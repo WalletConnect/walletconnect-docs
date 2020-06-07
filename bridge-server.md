@@ -8,7 +8,7 @@
   Response:
   Status: 200
   Content-Type: text/plain; charset=utf-8
-  Body: Hello World, this is WalletConnect v1.0.0-beta
+  Body: Hello World, this is WalletConnect v1.x.x
 ```
 
 ## Get Bridge Server Info

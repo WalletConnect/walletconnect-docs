@@ -1,4 +1,4 @@
-# WalletConnect v1.0.0-beta
+# WalletConnect v1.x.x
 
 ## Introduction
 

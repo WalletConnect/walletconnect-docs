@@ -1,6 +1,6 @@
 # Table of contents
 
-- [WalletConnect v1.0.0-beta](README.md)
+- [WalletConnect v1.x.x](README.md)
 - [Quick Start](quick-start.md)
   - [Dapps](dapps.md)
     - [Web3 Provider](quick-start/dapps/web3-provider.md)
