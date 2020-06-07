@@ -14,25 +14,20 @@ You can use the **Test Wallet** to test your integration at [test.walletconnect.
 
 {% tabs %}
 {% tab title="yarn" %}
-
 ```bash
 yarn add web3 @walletconnect/web3-provider
 ```
-
 {% endtab %}
 
 {% tab title="npm" %}
-
 ```bash
 npm install --save web3 @walletconnect/web3-provider
 ```
-
 {% endtab %}
 {% endtabs %}
 
 {% hint style="success" %}
-Syntax shown below is Javascript ES6 which requires bundling and transpiling to run in web browsers.
-If unfamiliar we recommend setting up an environment using [Webpack Starter](https://github.com/wbkd/webpack-starter) or [Create React App](https://github.com/facebook/create-react-app)
+Syntax shown below is Javascript ES6 which requires bundling and transpiling to run in web browsers. If unfamiliar we recommend setting up an environment using [Webpack Starter](https://github.com/wbkd/webpack-starter) or [Create React App](https://github.com/facebook/create-react-app)
 {% endhint %}
 
 ## Setup
@@ -53,7 +48,7 @@ await provider.enable();
 const web3 = new Web3(provider);
 ```
 
-## Events (EIP-1193)
+## Events \(EIP-1193\)
 
 ```javascript
 // Subscribe to accounts change
@@ -82,7 +77,7 @@ provider.on("close", (code: number, reason: string) => {
 });
 ```
 
-## Provider Methods
+## Provider Methods
 
 ```javascript
 // Send JSON RPC requests
@@ -119,11 +114,16 @@ const signedTypedData = await web3.eth.signTypedData(msg);
 
 ## Provider Options
 
-1. Required (at least one of the following)
+1. Required \(at least one of the following\)
+
    a. infuraId - the Infura app ID is used for read requests that don't require user approval like signing requests
-   b. rpc - custom rpc url mapping with chainId keys for each url (check custom rpc url section)
+
+   b. rpc - custom rpc url mapping with chainId keys for each url \(check custom rpc url section\)
+
 2. Optional
-   a. bridge - the Bridge URL points to the bridge server used to relay WalletConnect payloads - default="https://bridge.walletconnect.org"
+
+   a. bridge - the Bridge URL points to the bridge server used to relay WalletConnect payloads - default="[https://bridge.walletconnect.org](https://bridge.walletconnect.org)"
+
    b. chainId - preferred chain id to be provided by the wallet on session request - default=1
 
 ## Custom RPC URL
@@ -144,3 +144,4 @@ const provider = new WalletConnectProvider({
   }
 });
 ```
+

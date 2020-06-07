@@ -14,25 +14,20 @@ You can use the **Test Wallet** to test your integration at [test.walletconnect.
 
 {% tabs %}
 {% tab title="yarn" %}
-
 ```bash
 yarn add @walletconnect/node @walletconnect/qrcode-modal
 ```
-
 {% endtab %}
 
 {% tab title="npm" %}
-
 ```bash
 npm install --save @walletconnect/node @walletconnect/qrcode-modal
 ```
-
 {% endtab %}
 {% endtabs %}
 
 {% hint style="success" %}
-Syntax shown below is Javascript ES6 which requires bundling and transpiling to run in web browsers.
-If unfamiliar we recommend setting up an environment using [Webpack Starter](https://github.com/wbkd/webpack-starter) or [Create React App](https://github.com/facebook/create-react-app)
+Syntax shown below is Javascript ES6 which requires bundling and transpiling to run in web browsers. If unfamiliar we recommend setting up an environment using [Webpack Starter](https://github.com/wbkd/webpack-starter) or [Create React App](https://github.com/facebook/create-react-app)
 {% endhint %}
 
 ### Initiate Connection
@@ -106,7 +101,7 @@ walletConnector.on("disconnect", (error, payload) => {
 });
 ```
 
-### Send Transaction \(eth_sendTransaction\)
+### Send Transaction \(eth\_sendTransaction\)
 
 ```javascript
 // Draft transaction
@@ -133,7 +128,7 @@ walletConnector
   });
 ```
 
-### Sign Transaction \(eth_signTransaction\)
+### Sign Transaction \(eth\_signTransaction\)
 
 ```javascript
 // Draft transaction
@@ -160,10 +155,9 @@ walletConnector
   });
 ```
 
-### Sign Personal Message \(personal_sign\)
+### Sign Personal Message \(personal\_sign\)
 
 ```javascript
-
 // Draft Message Parameters
 const message = "My email is john@doe.com - 1537836206101"
 
@@ -186,10 +180,9 @@ walletConnector
   })
 ```
 
-### Sign Message \(eth_sign\)
+### Sign Message \(eth\_sign\)
 
 ```javascript
-
 // Draft Message Parameters
 const message = "My email is john@doe.com - 1537836206101";
 
@@ -212,7 +205,7 @@ walletConnector
   })
 ```
 
-### Sign Typed Data \(eth_signTypedData\)
+### Sign Typed Data \(eth\_signTypedData\)
 
 ```javascript
 // Draft Message Parameters
@@ -305,3 +298,4 @@ walletConnector
     console.error(error);
   });
 ```
+

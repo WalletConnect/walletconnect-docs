@@ -16,13 +16,13 @@ The initiator, is the first peer who requests connection \(Dapp\). Dapp posts an
 wc:{topic...}@{version...}?bridge={url...}&key={key...}
 ```
 
-| Required parts | Notes                                                                                  |
-| :------------- | :------------------------------------------------------------------------------------- |
-| wc:            | Wallet Connect protocol defined in [EIP-1328](https://eips.ethereum.org/EIPS/eip-1328) |
-| _topic_        | String                                                                                 |
-| _version_      | Number \(eg. 1.9.0\)                                                                   |
-| _bridge_       | Bridge URL \(URL Encoded\)                                                             |
-| _key_          | Symmetric key hex string                                                               |
+| Required parts | Notes |
+| :--- | :--- |
+| wc: | Wallet Connect protocol defined in [EIP-1328](https://eips.ethereum.org/EIPS/eip-1328) |
+| _topic_ | String |
+| _version_ | Number \(eg. 1.9.0\) |
+| _bridge_ | Bridge URL \(URL Encoded\) |
+| _key_ | Symmetric key hex string |
 
 Other query string parameters are all optional.
 
@@ -33,7 +33,7 @@ wc:8a5e5bdc-a0e4-4702-ba63-8f1a5655744f@1?bridge=https%3A%2F%2Fbridge.walletconn
 
 ### Establishing Connection
 
-![Establishing Connection](assets/establishing-connection.png)
+![Establishing Connection](.gitbook/assets/establishing-connection.png)
 
 The second peer \(Wallet\) will read the URI using either a QR Code or a deep link. After reading the URI the peer will immediately receive and decrypt the connection request payload.
 
@@ -41,7 +41,7 @@ The Wallet will then display to the user request details provided by the Dapp. T
 
 Once the connection is established, the Dapp will be able to send any JSON-RPC call requests to be handled by the Wallet either to read data from it's node or make signing requests for transactions or messages.
 
-![Call Requests](assets/call-request.png)
+![Call Requests](.gitbook/assets/call-request.png)
 
 Additionally, there is an option from the Wallet side to subscribe for push notifications using a Push Server. This push notification subscription will be registered only when connection request has been approved by the user. This subscription can be customized with varying degrees of privacy. It can either display a generic message, include the name of the peer making the request or even display a localized message. \(read Push Notifications sections for more details\)
 
@@ -215,3 +215,4 @@ Push notification subscription is only available for native applications \(curre
 Additionally there are also options to provide a peerName of the other peer to customize the notification messages and language code \(ISO-639-1\) in order to localize push notification message content.
 
 When registering a push notification subscription, Push Server will post a subscription request to the Bridge Server to listen for any incoming payloads matching the provided topic. It will also share a webhook to trigger the push notification.
+
