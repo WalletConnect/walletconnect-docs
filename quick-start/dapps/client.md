@@ -1,10 +1,10 @@
 ---
-description: Quick Start For Dapps using Browser Client
+description: Quick Start For Dapps using Client
 ---
 
-# Browser Client
+# Client
 
-## Quick Start For Dapps \(Browser Client\)
+## Quick Start For Dapps \(Client\)
 
 {% hint style="info" %}
 You can use the **Test Wallet** to test your integration at [test.walletconnect.org](https://test.walletconnect.org) \([Source code](https://github.com/WalletConnect/walletconnect-test-wallet)\). Keep in mind that this is **not a secure wallet - Do not store funds**.
@@ -14,15 +14,19 @@ You can use the **Test Wallet** to test your integration at [test.walletconnect.
 
 {% tabs %}
 {% tab title="yarn" %}
+
 ```bash
 yarn add @walletconnect/client @walletconnect/qrcode-modal
 ```
+
 {% endtab %}
 
 {% tab title="npm" %}
+
 ```bash
 npm install --save @walletconnect/client @walletconnect/qrcode-modal
 ```
+
 {% endtab %}
 {% endtabs %}
 
@@ -76,7 +80,7 @@ connector.on("disconnect", (error, payload) => {
 });
 ```
 
-### Send Transaction \(eth\_sendTransaction\)
+### Send Transaction \(eth_sendTransaction\)
 
 ```javascript
 // Draft transaction
@@ -103,7 +107,7 @@ connector
   });
 ```
 
-### Sign Transaction \(eth\_signTransaction\)
+### Sign Transaction \(eth_signTransaction\)
 
 ```javascript
 // Draft transaction
@@ -130,7 +134,7 @@ connector
   });
 ```
 
-### Sign Personal Message \(personal\_sign\)
+### Sign Personal Message \(personal_sign\)
 
 ```javascript
 // Draft Message Parameters
@@ -155,7 +159,7 @@ connector
   })
 ```
 
-### Sign Message \(eth\_sign\)
+### Sign Message \(eth_sign\)
 
 ```javascript
 // Draft Message Parameters
@@ -180,7 +184,7 @@ connector
   })
 ```
 
-### Sign Typed Data \(eth\_signTypedData\)
+### Sign Typed Data \(eth_signTypedData\)
 
 ```javascript
 // Draft Message Parameters
@@ -273,4 +277,3 @@ connector
     console.error(error);
   });
 ```
-
