@@ -33,7 +33,7 @@ In the next sections, we describe how both Wallets and Dapps can support the mob
 
 In order to add support for mobile linking within your wallet, you will just need to register the following deep link or universal link subscriptions in your mobile app.
 
-**For Android**
+### For Android
 
 Android has the easiest integration as it's operating system is designed to handle multiple applications subscribing to the same deep linking schema. Hence you will only need to register to the `wc:` schema that is defined per the WalletConnect URI standard.
 
@@ -49,7 +49,7 @@ Additionally when there is a signing request triggered by the dapp it will hit t
 wc:00e46b69-d0cc-4b3e-b6a2-cee442f97188@1
 ```
 
-**For iOS**
+### For iOS
 
 iOS has the a little more caveats to the integration but we ensure to make it as straightforward as possible. Since it's operating system is not designed to handle multiple applications subscribing to the same deep linking schema, we've designed the QRCode Modal to list supporting wallets on our [open-source registry](https://github.com/WalletConnect/walletconnect-monorepo/blob/next/packages/helpers/mobile-registry/registry.json) and target specific deep links or universal links for each wallet.
 
