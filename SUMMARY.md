@@ -12,6 +12,7 @@
 - [Technical Specification](tech-spec.md)
 - [JSON-RPC API Methods](json-rpc.md)
   - [Ethereum](json-rpc/ethereum.md)
+- [Legacy Clients](legacy-clients.md)
 - [Client API Reference](client-api.md)
 - [Bridge Server API Reference](bridge-server.md)
 - [Push Server API Reference](push-server.md)

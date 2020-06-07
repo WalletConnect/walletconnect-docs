@@ -14,15 +14,19 @@ You can use the **Test Wallet** to test your integration at [test.walletconnect.
 
 {% tabs %}
 {% tab title="yarn" %}
+
 ```bash
 yarn add @walletconnect/node @walletconnect/qrcode-modal
 ```
+
 {% endtab %}
 
 {% tab title="npm" %}
+
 ```bash
 npm install --save @walletconnect/node @walletconnect/qrcode-modal
 ```
+
 {% endtab %}
 {% endtabs %}
 
@@ -36,7 +40,7 @@ Syntax shown below is Javascript ES6 which requires bundling and transpiling to 
 import NodeWalletConnect from "@walletconnect/node";
 import WalletConnectQRCodeModal from "@walletconnect/qrcode-modal";
 
-// Create WalletConnector
+// Create connector
 const walletConnector = new NodeWalletConnect(
   {
     bridge: "https://bridge.walletconnect.org", // Required
@@ -101,7 +105,7 @@ walletConnector.on("disconnect", (error, payload) => {
 });
 ```
 
-### Send Transaction \(eth\_sendTransaction\)
+### Send Transaction \(eth_sendTransaction\)
 
 ```javascript
 // Draft transaction
@@ -128,7 +132,7 @@ walletConnector
   });
 ```
 
-### Sign Transaction \(eth\_signTransaction\)
+### Sign Transaction \(eth_signTransaction\)
 
 ```javascript
 // Draft transaction
@@ -155,7 +159,7 @@ walletConnector
   });
 ```
 
-### Sign Personal Message \(personal\_sign\)
+### Sign Personal Message \(personal_sign\)
 
 ```javascript
 // Draft Message Parameters
@@ -180,7 +184,7 @@ walletConnector
   })
 ```
 
-### Sign Message \(eth\_sign\)
+### Sign Message \(eth_sign\)
 
 ```javascript
 // Draft Message Parameters
@@ -205,7 +209,7 @@ walletConnector
   })
 ```
 
-### Sign Typed Data \(eth\_signTypedData\)
+### Sign Typed Data \(eth_signTypedData\)
 
 ```javascript
 // Draft Message Parameters
@@ -298,4 +302,3 @@ walletConnector
     console.error(error);
   });
 ```
-
