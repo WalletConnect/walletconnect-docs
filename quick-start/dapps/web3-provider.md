@@ -35,8 +35,8 @@ Syntax shown below is Javascript ES6 which requires bundling and transpiling to 
 {% tabs %}
 {% tab title="ethers.js" %}
 ```javascript
-import WalletConnectProvider from "@walletconnect/web3-provider";
 import { Contract, providers, utils } from "ethers";
+import WalletConnectProvider from "@walletconnect/web3-provider";
 
 //  Create WalletConnect Provider
 const web3Provider = new WalletConnectProvider({
