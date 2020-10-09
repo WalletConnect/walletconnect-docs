@@ -114,8 +114,8 @@ connector.on("call_request", (error, payload) => {
     jsonrpc: '2.0'.
     method: 'eth_sign',
     params: [
-      "0xbc28ea04101f03ea7a94c1379bc3ab32e65e62d3",
-      "My email is john@doe.com - 1537836206101"
+      "0x23f166bb38add8b588c58987e789c78a4b720589",
+      "My email is karicwit@gmail.com - 0x60806040"
     ]
   }
   */
@@ -136,8 +136,8 @@ connector.on("disconnect", (error, payload) => {
 // Approve Session
 connector.approveSession({
   accounts: [                 // required
-    '0x4292...931B3',
-    '0xa4a7...784E8',
+    '0x2fe8f0e4e65a3aafc1546ce99435f5df41a54cc0',
+    '0x23f166bb38add8b588c58987e789c78a4b720589',
     ...
   ],
   chainId: 1                  // required
@@ -159,7 +159,7 @@ connector.killSession()
 // Approve Call Request
 connector.approveRequest({
   id: 1,
-  result: "0x41791102999c339c844880b23950704cc43aa840f3739e365323cda4dfa89e7a"
+  result: "0xae6025325fc0bc173bda059f52b4c5077c0ad3560b177b79f15f0d59c15f7b4a4f432f939bec14b9ab56216371ca0454057eae1257cc53137539d8afe3dae1c71c"
 });
 
 // Reject Call Request
