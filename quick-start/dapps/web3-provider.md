@@ -44,7 +44,7 @@ const web3Provider = new WalletConnectProvider({
 });
 
 //  Enable session (triggers QR Code modal)
-await provider.enable();
+await web3Provider.enable();
 
 //  Wrap with Web3Provider from ethers.js
 const provider = new providers.Web3Provider(web3Provider);
