@@ -40,7 +40,17 @@ import WalletConnectProvider from "@walletconnect/web3-provider";
 
 //  Create WalletConnect Provider
 const web3Provider = new WalletConnectProvider({
-  infuraId: "27e484dcd9e3efcfd25a83a78777cdf1" // Required
+ // You need to have a Ethereum full node API access 
+ // for web3.js to work. 
+ // Here is a list of service providers
+ // https://ethereumnodes.com/
+ // Nodes are keyed by a Ethereum network it 
+ rpc: {
+    1: "https://mainnet.mycustomnode.com",
+    3: "https://ropsten.mycustomnode.com",
+    100: "https://dai.poa.network",
+    // ...
+  },
 });
 
 //  Enable session (triggers QR Code modal)
