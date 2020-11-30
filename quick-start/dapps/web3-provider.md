@@ -211,7 +211,7 @@ const provider = new WalletConnectProvider({
       "argent",
       "trust",
       "imtoken",
-      "pillar
+      "pillar",
     ]
   }
 });
