@@ -6,6 +6,10 @@ description: Quick Start For Wallets Using React-Native Client
 
 ## Quick Start For Wallets \(React-Native Client\)
 
+{% hint style="warn" %}
+**REQUIRED** to polyfill NodeJS modules (Crypto, Buffer, etc) for this client to work in any React-Native environment. This is usually achieved using the `rn-nodeify` library. Find the following [instructions here](https://www.npmjs.com/package/rn-nodeify)
+{% endhint %}
+
 {% hint style="info" %}
 You can use the **Example Dapp** to test your integration at [example.walletconnect.org](https://example.walletconnect.org) \([Source code](https://github.com/WalletConnect/walletconnect-example-dapp)\)
 {% endhint %}
