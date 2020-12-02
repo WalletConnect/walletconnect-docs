@@ -12,4 +12,10 @@ You can use the **Example Dapp** to test your integration at [example.walletconn
 
 ## Github
 
-This quick start is currently incomplete, please check the [Github repository](https://github.com/WalletConnect/wallet-connect-swift) for this Client
+This quick start is currently incomplete.
+
+There are two swift clients available at the moment:
+- [wallet-connect-swift](https://github.com/WalletConnect/wallet-connect-swift) maintained by [Trust Wallet](https://trustwallet.com) team
+- [WalletConnectSwift](https://github.com/WalletConnect/WalletConnectSwift) maintained by [Gnosis Safe](https://gnosis-safe.io) team
+
+Please check the repositories for more details.
