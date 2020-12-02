@@ -4,169 +4,121 @@ description: Quick Start For Wallets Using React-Native Client
 
 # React-Native Client
 
-## Quick Start For Wallets \(React-Native Client\)
+It's compatible with NodeJS, Browser and React-Native applications (NodeJS modules required to be polyfilled for React-Native)
 
-{% hint style="info" %}
-You can use the **Example Dapp** to test your integration at [example.walletconnect.org](https://example.walletconnect.org) \([Source code](https://github.com/WalletConnect/walletconnect-example-dapp)\)
-{% endhint %}
-
-### Install
-
-{% tabs %}
-{% tab title="yarn" %}
-Install NPM Package
+## Install
 
 ```bash
 yarn add @walletconnect/client
-```
+# OR
 
-Polyfill NodeJS modules for React-Native
-
-```bash
-yarn add rn-nodeify
-rn-nodeify --install --hack
-```
-{% endtab %}
-
-{% tab title="npm" %}
-Install NPM Package
-
-```bash
 npm install --save @walletconnect/client
 ```
 
-Polyfill NodeJS modules for React-Native
+## Connecting
 
-```bash
-npm install --save rn-nodeify
-rn-nodeify --install --hack
+1. Initiate your WalletConnect client with the relay server
+
+```js
+import WalletConnectClient from "@walletconnect/client";
+
+const client = await WalletConnectClient.init({
+  relayProvider: "ws://staging.walletconnect.org",
+});
 ```
-{% endtab %}
-{% endtabs %}
 
-### Initiate Connection
+2. Subscribe to session proposal event for user approval and session created when successful
 
-```javascript
-import WalletConnect from "@walletconnect/client";
+```js
+import { CLIENT_EVENTS } from "@walletconnect/client";
+import { SessionTypes } from "@walletconnect/types";
 
-// Create connector
-const connector = new WalletConnect(
-  {
-    // Required
-    uri: "wc:8a5e5bdc-a0e4-47...TJRNmhWJmoxdFo6UDk2WlhaOyQ5N0U=",
-    // Required
-    clientMeta: {
-      description: "WalletConnect Developer App",
-      url: "https://walletconnect.org",
-      icons: ["https://walletconnect.org/walletconnect-logo.png"],
-      name: "WalletConnect",
-    },
-  },
-  {
-    // Optional
-    url: "https://push.walletconnect.org",
-    type: "fcm",
-    token: token,
-    peerMeta: true,
-    language: language,
+client.on(
+  CLIENT_EVENTS.session.proposal,
+  async (proposal: SessionTypes.Proposal) => {
+    // user should be prompted to approve the proposed session permissions displaying also dapp metadata
+    const { proposer, permissions } = proposal;
+    const { metadata } = proposer;
+    let approved: boolean;
+    handleSessionUserApproval(approved, proposal); // described in the next step
   }
 );
 
-// Subscribe to session requests
-connector.on("session_request", (error, payload) => {
-  if (error) {
-    throw error;
+client.on(
+  CLIENT_EVENTS.session.created,
+  async (session: SessionTypes.Created) => {
+    // session created succesfully
   }
-
-  // Handle Session Request
-
-  /* payload:
-  {
-    id: 1,
-    jsonrpc: '2.0'.
-    method: 'session_request',
-    params: [{
-      peerId: '15d8b6a3-15bd-493e-9358-111e3a4e6ee4',
-      peerMeta: {
-        name: "WalletConnect Example",
-        description: "Try out WalletConnect v1.x.x",
-        icons: ["https://example.walletconnect.org/favicon.ico"],
-        url: "https://example.walletconnect.org"
-      }
-    }]
-  }
-  */
-});
-
-// Subscribe to call requests
-connector.on("call_request", (error, payload) => {
-  if (error) {
-    throw error;
-  }
-
-  // Handle Call Request
-
-  /* payload:
-  {
-    id: 1,
-    jsonrpc: '2.0'.
-    method: 'eth_sign',
-    params: [
-      "0xbc28ea04101f03ea7a94c1379bc3ab32e65e62d3",
-      "My email is john@doe.com - 1537836206101"
-    ]
-  }
-  */
-});
-
-connector.on("disconnect", (error, payload) => {
-  if (error) {
-    throw error;
-  }
-
-  // Delete connector
-});
+);
 ```
 
-### Manage Connection
+3. Handle user approval for proposed session
 
-```javascript
-// Approve Session
-connector.approveSession({
-  accounts: [                 // required
-    '0x4292...931B3',
-    '0xa4a7...784E8',
-    ...
-  ],
-  chainId: 1                  // required
-})
-
-// Reject Session
-connector.rejectSession({
-  message: 'OPTIONAL_ERROR_MESSAGE'       // optional
-})
-
-
-// Kill Session
-connector.killSession()
-```
-
-### Manage Call Requests
-
-```javascript
-// Approve Call Request
-connector.approveRequest({
-  id: 1,
-  result: "0x41791102999c339c844880b23950704cc43aa840f3739e365323cda4dfa89e7a"
-});
-
-// Reject Call Request
-connector.rejectRequest({
-  id: 1,                                  // required
-  error: {
-    code: "OPTIONAL_ERROR_CODE"           // optional
-    message: "OPTIONAL_ERROR_MESSAGE"     // optional
+```js
+function handleSessionUserApproval(approved: boolean, proposal: SessionTypes.Proposal) {
+  if (userApproved) {
+    // if user approved then respond with accountIds matching the chainIds and wallet metadata
+    const response: SessionTypes.Response = {
+      metadata: {
+        name: "Test Wallet",
+        description: "Test Wallet",
+        url: "#",
+        icons: ["https://walletconnect.org/walletconnect-logo.png"],
+      },
+      state: {
+        accountIds: ["0x1d85568eEAbad713fBB5293B45ea066e552A90De@eip155:1"],
+      },
+    }
+    await client.respond({approved: true, proposal, response});
+  } else {
+    // if user didn't approve then respond with no response
+    await client.respond({ approved: false, proposal });
   }
-});
+}
 ```
 
+## JSON-RPC Payloads
+
+Given that session has settled succesfully since user approved the session on the wallet side, then the Wallet should subscribe to session payload events on the client
+
+```js
+import { CLIENT_EVENTS } from "@walletconnect/client";
+import { SessionTypes } from "@walletconnect/types";
+
+client.on(
+  CLIENT_EVENTS.session.payload,
+  async (payloadEvent: SessionTypes.PayloadEvent) => {
+    // WalletConnect client can track multiple sessions
+    // assert the topic from which application requested
+    const { topic, payload } = payloadEvent;
+    const session = await client.session.get(payloadEvent.topic);
+    // now you can display to the user for approval using the stored metadata
+    const { metadata } = session.peer;
+    // after user has either approved or not the request it should be formatted
+    // as response with either the result or the error message
+    let approved: boolean;
+    if (approved) {
+      await client.resolve({
+        topic: session.topic,
+        response: {
+          id: payload.id,
+          jsonrpc: "2.0",
+          result,
+        },
+      });
+    } else {
+      await client.resolve({
+        topic: session.topic,
+        response: {
+          id: payload.id,
+          jsonrpc: "2.0",
+          error: {
+            code: -32000,
+            message: "User rejected JSON-RPC request",
+          },
+        },
+      });
+    }
+  }
+);
+```
