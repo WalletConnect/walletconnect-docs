@@ -12,6 +12,7 @@
 - [Technical Specification](tech-spec.md)
 - [JSON-RPC API Methods](json-rpc.md)
   - [Ethereum](json-rpc/ethereum.md)
+- [Smart Contract Wallets](smart-wallets.md)
 - [Mobile Linking](mobile-linking.md)
 - [Legacy Clients](legacy-clients.md)
 - [Client API Reference](client-api.md)
