@@ -45,12 +45,12 @@ First, instantiate your WalletConnect web3-provider using the following options:
 import WalletConnectProvider from "@walletconnect/web3-provider";
 
 //  Create WalletConnect Provider
-const web3Provider = new WalletConnectProvider({
+const provider = new WalletConnectProvider({
   infuraId: "27e484dcd9e3efcfd25a83a78777cdf1",
 });
 
 //  Enable session (triggers QR Code modal)
-await web3Provider.enable();
+await provider.enable();
 ```
 
 {% endtab %}
@@ -61,7 +61,7 @@ await web3Provider.enable();
 import WalletConnectProvider from "@walletconnect/web3-provider";
 
 //  Create WalletConnect Provider
-const web3Provider = new WalletConnectProvider({
+const provider = new WalletConnectProvider({
   rpc: {
     1: "https://mainnet.mycustomnode.com",
     3: "https://ropsten.mycustomnode.com",
@@ -71,7 +71,7 @@ const web3Provider = new WalletConnectProvider({
 });
 
 //  Enable session (triggers QR Code modal)
-await web3Provider.enable();
+await provider.enable();
 ```
 
 {% endtab %}
@@ -86,7 +86,7 @@ Then you can integrate your dapp using your favorite Ethereum library: ethers.js
 import { providers } from "ethers";
 
 //  Wrap with Web3Provider from ethers.js
-const provider = new providers.Web3Provider(web3Provider);
+const web3Provider = new providers.Web3Provider(provider);
 ```
 
 {% endtab %}
@@ -97,13 +97,15 @@ const provider = new providers.Web3Provider(web3Provider);
 import Web3 from "web3";
 
 //  Create Web3 instance
-const web3 = new Web3(web3Provider);
+const web3 = new Web3(provider);
 ```
 
 {% endtab %}
 {% endtabs %}
 
 ## Events (EIP-1193)
+
+After setting up your provider you should listen to EIP-1193 events to detect accounts and chain change and also disconnection.
 
 ```typescript
 // Subscribe to accounts change
@@ -114,11 +116,6 @@ provider.on("accountsChanged", (accounts: string[]) => {
 // Subscribe to chainId change
 provider.on("chainChanged", (chainId: number) => {
   console.log(chainId);
-});
-
-// Subscribe to session connection
-provider.on("connect", () => {
-  console.log("connect");
 });
 
 // Subscribe to session disconnection
