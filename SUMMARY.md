@@ -1,6 +1,6 @@
 # Table of contents
 
-- [WalletConnect v1.x.x](README.md)
+- [WalletConnect v2.0.0-alpha](README.md)
 - [Quick Start](quick-start.md)
   - [Dapps](dapps.md)
     - [Standalone Client](quick-start/dapps/client.md)
@@ -12,9 +12,7 @@
 - [Technical Specification](tech-spec.md)
 - [JSON-RPC API Methods](json-rpc.md)
   - [Ethereum](json-rpc/ethereum.md)
-- [Smart Contract Wallets](smart-wallets.md)
-- [Mobile Linking](mobile-linking.md)
-- [Legacy Clients](legacy-clients.md)
+  - [Cosmos](json-rpc/cosmos.md)
+  - [Polkadot](json-rpc/polkadot.md)
 - [Client API Reference](client-api.md)
-- [Bridge Server API Reference](bridge-server.md)
-- [Push Server API Reference](push-server.md)
+- [Relay Server API Reference](relay-server.md)
