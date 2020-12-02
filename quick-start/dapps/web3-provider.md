@@ -32,6 +32,26 @@ Syntax shown below is Javascript ES6 which requires bundling and transpiling to 
 
 ## Setup
 
+{% tabs %}
+{% tab title="ethers.js" %}
+```javascript
+import { Contract, providers, utils } from "ethers";
+import WalletConnectProvider from "@walletconnect/web3-provider";
+
+//  Create WalletConnect Provider
+const web3Provider = new WalletConnectProvider({
+  infuraId: "27e484dcd9e3efcfd25a83a78777cdf1" // Required
+});
+
+//  Enable session (triggers QR Code modal)
+await web3Provider.enable();
+
+//  Wrap with Web3Provider from ethers.js
+const provider = new providers.Web3Provider(web3Provider);
+```
+{% endtab %}
+
+{% tab title="web3.js" %}
 ```javascript
 import Web3 from "web3";
 import WalletConnectProvider from "@walletconnect/web3-provider";
@@ -47,10 +67,13 @@ await provider.enable();
 //  Create Web3
 const web3 = new Web3(provider);
 ```
+{% endtab %}
+{% endtabs %}
 
-## Events \(EIP-1193\)
 
-```javascript
+## Events (EIP-1193)
+
+```typescript
 // Subscribe to accounts change
 provider.on("accountsChanged", (accounts: string[]) => {
   console.log(accounts);
@@ -61,42 +84,42 @@ provider.on("chainChanged", (chainId: number) => {
   console.log(chainId);
 });
 
-// Subscribe to networkId change
-provider.on("networkChanged", (networkId: number) => {
-  console.log(networkId);
+// Subscribe to session connection
+provider.on("connect", () => {
+  console.log("connect");
 });
 
-// Subscribe to session connection/open
-provider.on("open", () => {
-  console.log("open");
-});
-
-// Subscribe to session disconnection/close
-provider.on("close", (code: number, reason: string) => {
+// Subscribe to session disconnection
+provider.on("disconnect", (code: number, reason: string) => {
   console.log(code, reason);
 });
 ```
 
 ## Provider Methods
 
-```javascript
+```typescript
+interface RequestArguments {
+  method: string;
+  params?: unknown[] | object;
+}
+
 // Send JSON RPC requests
-const result = await provider.send(method: string, params?: any[]);
+const result = await provider.request(payload: RequestArguments);
 
 // Close provider session
-await provider.close()
+await provider.disconnect()
 ```
 
 ## Web3 Methods
 
-```javascript
+```typescript
 //  Get Accounts
 const accounts = await web3.eth.getAccounts();
 
-//  Get Chain ID
+//  Get Chain Id
 const chainId = await web3.eth.chainId();
 
-//  Get Network ID
+//  Get Network Id
 const networkId = await web3.eth.net.getId();
 
 // Send Transaction
@@ -114,34 +137,82 @@ const signedTypedData = await web3.eth.signTypedData(msg);
 
 ## Provider Options
 
-1. Required \(at least one of the following\)
+### Required
 
-   a. infuraId - the Infura app ID is used for read requests that don't require user approval like signing requests
+In order to resolve non-signing requests you need to provide one of the following:
 
-   b. rpc - custom rpc url mapping with chainId keys for each url \(check custom rpc url section\)
+#### Infura ID
 
-2. Optional
+The infuraId will support the following chainId's: Mainnet (1), Ropsten (3), Rinkeby(4), Goerli (5) and Kovan (42)
 
-   a. bridge - the Bridge URL points to the bridge server used to relay WalletConnect payloads - default="[https://bridge.walletconnect.org](https://bridge.walletconnect.org)"
+```typescript
+const provider = new WalletConnectProvider({
+  infuraId: "27e484dcd9e3efcfd25a83a78777cdf1",
+});
+```
 
-   b. chainId - preferred chain id to be provided by the wallet on session request - default=1
+#### RPC URL Mapping
 
-## Custom RPC URL
+The RPC URL mapping should indexed by chainId and it requires at least one value.
 
-WalletConnect Web3 Provider uses a HTTP connection to a remote node to make read calls instead of making unnecessary JSON-RPC requests through the WalletConnect session.
-
-It's required to pass either the infuraId or rpc option values to make this connection remotely. If you would like to use your own custom RPC url you don't need to pass an InfuraId for the provider to work.
-
-Example RPC mapping by chainId
-
-```javascript
+```typescript
 const provider = new WalletConnectProvider({
   rpc: {
     1: "https://mainnet.mycustomnode.com",
     3: "https://ropsten.mycustomnode.com",
-    100: "https://dai.poa.network"
+    100: "https://dai.poa.network",
     // ...
-  }
+  },
 });
 ```
 
+### Optional
+
+You can also customize the connector through the provider using the following options
+
+#### Bridge URL
+
+Use your own hosted bridge by providing the url
+
+```typescript
+const provider = new WalletConnectProvider({
+  infuraId: "27e484dcd9e3efcfd25a83a78777cdf1",
+  bridge: "https://bridge.myhostedserver.com",
+});
+```
+
+#### Disable QR Code Modal
+
+Use your own custom qrcode modal and disable the built-in one
+
+```typescript
+const provider = new WalletConnectProvider({
+  infuraId: "27e484dcd9e3efcfd25a83a78777cdf1",
+  qrcode: false,
+});
+
+provider.connector.on("display_uri", (err, payload) => {
+  const uri = payload.params[0];
+  CustomQRCodeModal.display(uri);
+});
+```
+
+#### Filter Mobile Linking Options
+
+If you would like to reduce the number of mobile linking options or customize its order, you can provide an array of wallet names
+
+```typescript
+const provider = new WalletConnectProvider({
+  infuraId: "27e484dcd9e3efcfd25a83a78777cdf1",
+  qrcodeModalOptions: {
+    mobileLinks: [
+      "rainbow",
+      "metamask",
+      "argent",
+      "trust",
+      "imtoken",
+      "pillar",
+    ]
+  }
+});
+```
