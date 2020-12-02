@@ -14,15 +14,19 @@ You can use the **Test Wallet** to test your integration at [test.walletconnect.
 
 {% tabs %}
 {% tab title="yarn" %}
+
 ```bash
 yarn add web3 @walletconnect/web3-provider
 ```
+
 {% endtab %}
 
 {% tab title="npm" %}
+
 ```bash
 npm install --save web3 @walletconnect/web3-provider
 ```
+
 {% endtab %}
 {% endtabs %}
 
@@ -32,44 +36,72 @@ Syntax shown below is Javascript ES6 which requires bundling and transpiling to 
 
 ## Setup
 
+First, instantiate your WalletConnect web3-provider using the following options: Infura or Custom RPC mapping
+
 {% tabs %}
-{% tab title="ethers.js" %}
+{% tab title="Infura" %}
+
 ```javascript
-import { Contract, providers, utils } from "ethers";
 import WalletConnectProvider from "@walletconnect/web3-provider";
 
 //  Create WalletConnect Provider
 const web3Provider = new WalletConnectProvider({
-  infuraId: "27e484dcd9e3efcfd25a83a78777cdf1" // Required
+  infuraId: "27e484dcd9e3efcfd25a83a78777cdf1",
 });
 
 //  Enable session (triggers QR Code modal)
 await web3Provider.enable();
+```
+
+{% endtab %}
+
+{% tab title="Custom RPC" %}
+
+```javascript
+import WalletConnectProvider from "@walletconnect/web3-provider";
+
+//  Create WalletConnect Provider
+const web3Provider = new WalletConnectProvider({
+  rpc: {
+    1: "https://mainnet.mycustomnode.com",
+    3: "https://ropsten.mycustomnode.com",
+    100: "https://dai.poa.network",
+    // ...
+  },
+});
+
+//  Enable session (triggers QR Code modal)
+await web3Provider.enable();
+```
+
+{% endtab %}
+{% endtabs %}
+
+Then you can integrate your dapp using your favorite Ethereum library: ethers.js or web3.js
+
+{% tabs %}
+{% tab title="ethers.js" %}
+
+```javascript
+import { providers } from "ethers";
 
 //  Wrap with Web3Provider from ethers.js
 const provider = new providers.Web3Provider(web3Provider);
 ```
+
 {% endtab %}
 
 {% tab title="web3.js" %}
+
 ```javascript
 import Web3 from "web3";
-import WalletConnectProvider from "@walletconnect/web3-provider";
 
-//  Create WalletConnect Provider
-const provider = new WalletConnectProvider({
-  infuraId: "27e484dcd9e3efcfd25a83a78777cdf1" // Required
-});
-
-//  Enable session (triggers QR Code modal)
-await provider.enable();
-
-//  Create Web3
-const web3 = new Web3(provider);
+//  Create Web3 instance
+const web3 = new Web3(web3Provider);
 ```
+
 {% endtab %}
 {% endtabs %}
-
 
 ## Events (EIP-1193)
 
@@ -212,7 +244,7 @@ const provider = new WalletConnectProvider({
       "trust",
       "imtoken",
       "pillar",
-    ]
-  }
+    ],
+  },
 });
 ```
