@@ -2,7 +2,7 @@
 description: Quick Start For Wallets Using Swift Client \(iOS\)
 ---
 
-# Swift Client \(iOS\)
+# Kotlin Client \(Android\)
 
 ## Quick Start For Wallets \(Swift Client\)
 

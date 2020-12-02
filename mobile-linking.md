@@ -13,8 +13,11 @@ Despite the multiple UX caveats that mobile linking encountered, we've been able
 The pattern we chose to adhere for a consistent UX across platforms for connection establishment is the following:
 
 1. Dapp prompts user to connect with:
-   a) single button for Android
-   b) wallet list for iOS
+
+   a\) single button for Android
+
+   b\) wallet list for iOS
+
 2. User presses button to connect and is redirected to wallet of choice
 3. Wallet prompts user to approve or reject session
 4. Wallet prompts user to return to Dapp manually
@@ -55,7 +58,7 @@ iOS has the a little more caveats to the integration but we ensure to make it as
 
 To add your own wallet to the registry, you must submit a pull request to our monorepo on [Github](https://github.com/walletconnect/walletconnect-monorepo).
 
-```json
+```javascript
 {
   "name": "Example Wallet",
   "color": "rgb(255, 255, 255)",
@@ -92,19 +95,15 @@ If you are building a Dapp you will be able to support this pattern by simply in
 
 {% tabs %}
 {% tab title="yarn" %}
-
 ```bash
 yarn add @walletconnect/qrcode-modal
 ```
-
 {% endtab %}
 
 {% tab title="npm" %}
-
 ```bash
 npm install --save @walletconnect/qrcode-modal
 ```
-
 {% endtab %}
 {% endtabs %}
 
@@ -112,22 +111,19 @@ If you would like to build your own UI for mobile linking, we provide the same a
 
 {% tabs %}
 {% tab title="yarn" %}
-
 ```bash
 yarn add @walletconnect/utils @walletconnect/mobile-registry
 ```
-
 {% endtab %}
 
 {% tab title="npm" %}
-
 ```bash
 npm install --save @walletconnect/utils @walletconnect/mobile-registry
 ```
-
 {% endtab %}
 {% endtabs %}
 
 The mobile-registry package will allow you to list the supported mobile linking wallets and provide you with logo, name, color and targetted deep links.
 
 We highly recommend that you use our provided qrcode-modal package to maintain a consistent UX across WalletConnect integrations however we moduralized our packages to give the option on the ethos of decentralization.
+

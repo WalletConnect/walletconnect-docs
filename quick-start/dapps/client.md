@@ -14,19 +14,15 @@ You can use the **Test Wallet** to test your integration at [test.walletconnect.
 
 {% tabs %}
 {% tab title="yarn" %}
-
 ```bash
 yarn add @walletconnect/client @walletconnect/qrcode-modal
 ```
-
 {% endtab %}
 
 {% tab title="npm" %}
-
 ```bash
 npm install --save @walletconnect/client @walletconnect/qrcode-modal
 ```
-
 {% endtab %}
 {% endtabs %}
 
@@ -80,7 +76,7 @@ connector.on("disconnect", (error, payload) => {
 });
 ```
 
-### Send Transaction \(eth_sendTransaction\)
+### Send Transaction \(eth\_sendTransaction\)
 
 ```javascript
 // Draft transaction
@@ -107,7 +103,7 @@ connector
   });
 ```
 
-### Sign Transaction \(eth_signTransaction\)
+### Sign Transaction \(eth\_signTransaction\)
 
 ```javascript
 // Draft transaction
@@ -134,7 +130,7 @@ connector
   });
 ```
 
-### Sign Personal Message \(personal_sign\)
+### Sign Personal Message \(personal\_sign\)
 
 ```javascript
 // Draft Message Parameters
@@ -159,7 +155,7 @@ connector
   })
 ```
 
-### Sign Message \(eth_sign\)
+### Sign Message \(eth\_sign\)
 
 ```javascript
 // Draft Message Parameters
@@ -184,7 +180,7 @@ connector
   })
 ```
 
-### Sign Typed Data \(eth_signTypedData\)
+### Sign Typed Data \(eth\_signTypedData\)
 
 ```javascript
 // Draft Message Parameters
@@ -277,3 +273,4 @@ connector
     console.error(error);
   });
 ```
+

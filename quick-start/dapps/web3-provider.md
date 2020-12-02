@@ -14,19 +14,15 @@ You can use the **Test Wallet** to test your integration at [test.walletconnect.
 
 {% tabs %}
 {% tab title="yarn" %}
-
 ```bash
 yarn add web3 @walletconnect/web3-provider
 ```
-
 {% endtab %}
 
 {% tab title="npm" %}
-
 ```bash
 npm install --save web3 @walletconnect/web3-provider
 ```
-
 {% endtab %}
 {% endtabs %}
 
@@ -40,7 +36,6 @@ First, instantiate your WalletConnect web3-provider using the following options:
 
 {% tabs %}
 {% tab title="Infura" %}
-
 ```javascript
 import WalletConnectProvider from "@walletconnect/web3-provider";
 
@@ -52,11 +47,9 @@ const provider = new WalletConnectProvider({
 //  Enable session (triggers QR Code modal)
 await provider.enable();
 ```
-
 {% endtab %}
 
 {% tab title="Custom RPC" %}
-
 ```javascript
 import WalletConnectProvider from "@walletconnect/web3-provider";
 
@@ -73,7 +66,6 @@ const provider = new WalletConnectProvider({
 //  Enable session (triggers QR Code modal)
 await provider.enable();
 ```
-
 {% endtab %}
 {% endtabs %}
 
@@ -81,29 +73,25 @@ Then you can integrate your dapp using your favorite Ethereum library: ethers.js
 
 {% tabs %}
 {% tab title="ethers.js" %}
-
 ```javascript
 import { providers } from "ethers";
 
 //  Wrap with Web3Provider from ethers.js
 const web3Provider = new providers.Web3Provider(provider);
 ```
-
 {% endtab %}
 
 {% tab title="web3.js" %}
-
 ```javascript
 import Web3 from "web3";
 
 //  Create Web3 instance
 const web3 = new Web3(provider);
 ```
-
 {% endtab %}
 {% endtabs %}
 
-## Events (EIP-1193)
+## Events \(EIP-1193\)
 
 After setting up your provider you should listen to EIP-1193 events to detect accounts and chain change and also disconnection.
 
@@ -172,7 +160,7 @@ In order to resolve non-signing requests you need to provide one of the followin
 
 #### Infura ID
 
-The infuraId will support the following chainId's: Mainnet (1), Ropsten (3), Rinkeby(4), Goerli (5) and Kovan (42)
+The infuraId will support the following chainId's: Mainnet \(1\), Ropsten \(3\), Rinkeby\(4\), Goerli \(5\) and Kovan \(42\)
 
 ```typescript
 const provider = new WalletConnectProvider({
@@ -245,3 +233,4 @@ const provider = new WalletConnectProvider({
   },
 });
 ```
+
