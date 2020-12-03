@@ -4,7 +4,7 @@ description: Quick Start For Dapps using Standalone Client
 
 # Standalone Client
 
-This library is compatible with NodeJS, Browser and React-Native applications (NodeJS modules required to be polyfilled for React-Native).
+This library is compatible with NodeJS, Browser and React-Native applications (NodeJS modules required to be polyfilled for React-Native)
 
 ## Install
 
@@ -15,7 +15,7 @@ yarn add @walletconnect/client
 npm install --save @walletconnect/client
 ```
 
-## Connecting
+## Create Session
 
 1. Initiate your WalletConnect client with the relay server
 
@@ -23,7 +23,7 @@ npm install --save @walletconnect/client
 import WalletConnectClient from "@walletconnect/client";
 
 const client = await WalletConnectClient.init({
-  relayProvider: "ws://staging.walletconnect.org",
+  relayProvider: "wss://staging.walletconnect.org",
 });
 ```
 

@@ -4,7 +4,7 @@ description: Quick Start For Wallets Using React-Native Client
 
 # React-Native Client
 
-It's compatible with NodeJS, Browser and React-Native applications (NodeJS modules required to be polyfilled for React-Native)
+This library is compatible with NodeJS, Browser and React-Native applications (NodeJS modules required to be polyfilled for React-Native)
 
 ## Install
 
@@ -15,7 +15,7 @@ yarn add @walletconnect/client
 npm install --save @walletconnect/client
 ```
 
-## Connecting
+## Create Session
 
 1. Initiate your WalletConnect client with the relay server
 
@@ -23,7 +23,7 @@ npm install --save @walletconnect/client
 import WalletConnectClient from "@walletconnect/client";
 
 const client = await WalletConnectClient.init({
-  relayProvider: "ws://staging.walletconnect.org",
+  relayProvider: "wss://staging.walletconnect.org",
 });
 ```
 
@@ -40,7 +40,7 @@ client.on(
     const { proposer, permissions } = proposal;
     const { metadata } = proposer;
     let approved: boolean;
-    handleSessionUserApproval(approved, proposal); // described in the next step
+    handleSessionUserApproval(approved, proposal); // described in the step 4
   }
 );
 
@@ -52,12 +52,18 @@ client.on(
 );
 ```
 
-3. Handle user approval for proposed session
+3. Establish connection with shared URI from dapp
+
+```js
+client.tether({ uri });
+```
+
+4. Handle user approval for proposed session
 
 ```js
 function handleSessionUserApproval(approved: boolean, proposal: SessionTypes.Proposal) {
   if (userApproved) {
-    // if user approved then respond with accountIds matching the chainIds and wallet metadata
+    // if user approved then include response with accountIds matching the chainIds and wallet metadata
     const response: SessionTypes.Response = {
       metadata: {
         name: "Test Wallet",
@@ -69,10 +75,10 @@ function handleSessionUserApproval(approved: boolean, proposal: SessionTypes.Pro
         accountIds: ["0x1d85568eEAbad713fBB5293B45ea066e552A90De@eip155:1"],
       },
     }
-    await client.respond({approved: true, proposal, response});
+    await client.approve({ proposal, response });
   } else {
-    // if user didn't approve then respond with no response
-    await client.respond({ approved: false, proposal });
+    // if user didn't approve then reject with no response
+    await client.reject({ proposal });
   }
 }
 ```
@@ -84,6 +90,7 @@ Given that session has settled succesfully since user approved the session on th
 ```js
 import { CLIENT_EVENTS } from "@walletconnect/client";
 import { SessionTypes } from "@walletconnect/types";
+import { JsonRpcResponse } from "@json-rpc-tools/utils";
 
 client.on(
   CLIENT_EVENTS.session.payload,
@@ -96,29 +103,28 @@ client.on(
     const { metadata } = session.peer;
     // after user has either approved or not the request it should be formatted
     // as response with either the result or the error message
-    let approved: boolean;
-    if (approved) {
-      await client.resolve({
-        topic: session.topic,
-        response: {
-          id: payload.id,
-          jsonrpc: "2.0",
-          result,
-        },
-      });
-    } else {
-      await client.resolve({
-        topic: session.topic,
-        response: {
-          id: payload.id,
-          jsonrpc: "2.0",
-          error: {
-            code: -32000,
-            message: "User rejected JSON-RPC request",
+    let result: any;
+    const response = approved
+      ? {
+          topic,
+          response: {
+            id: payload.id,
+            jsonrpc: "2.0",
+            result,
           },
-        },
-      });
-    }
+        }
+      : {
+          topic,
+          response: {
+            id: payload.id,
+            jsonrpc: "2.0",
+            error: {
+              code: -32000,
+              message: "User rejected JSON-RPC request",
+            },
+          },
+        };
+    await client.respond(response);
   }
 );
 ```
