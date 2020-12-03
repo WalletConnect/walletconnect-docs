@@ -1,6 +1,101 @@
 # Relay Server API Reference
 
-## Test Hello World
+## WebSocket API (JSON-RPC)
+
+### Subscribe
+
+```jsonc
+// Request (Client -> Server)
+{
+  "id": 1,
+  "jsonrpc": "2.0",
+  "method": "bridge_subscribe",
+  "params": {
+    "topic": "<TOPIC_ID>",
+    "ttl": 604800
+  }
+}
+
+// Response (Server -> Client)
+{
+  "id": 1,
+  "jsonrpc": "2.0",
+  "result": "<SUBSCRIPTION_ID>"
+}
+```
+
+### Publish
+
+```jsonc
+// Request (Client -> Server)
+{
+  "id": 2,
+  "jsonrpc": "2.0",
+  "method": "bridge_publish",
+  "params": {
+    "topic": "<TOPIC_ID>",
+    "message": "<MESSAGE_PAYLOAD>",
+    "ttl": 86400
+  }
+}
+
+// Response (Server -> Client)
+{
+  "id": 2,
+  "jsonrpc": "2.0",
+  "result": true
+}
+```
+
+### Subscription
+
+```jsonc
+// Request (Server -> Client)
+{
+  "id": 3,
+  "jsonrpc": "2.0",
+  "method": "bridge_subscription",
+  "params": {
+    "id": "<SUBSCRIPTION_ID>",
+    "data": {
+      "topic": "<TOPIC_ID>",
+      "message": "<MESSAGE_PAYLOAD>",
+    }
+  }
+}
+
+// Response (Client -> Server)
+{
+  "id": 3,
+  "jsonrpc": "2.0",
+  "result": true
+}
+```
+
+### Unsubscribe
+
+```jsonc
+// Request (Client -> Server)
+{
+  "id": 4,
+  "jsonrpc": "2.0",
+  "method": "bridge_unsubscribe",
+  "params": {
+    "id": "<SUBSCRIPTION_ID>",
+  }
+}
+
+// Response (Server -> Client)
+{
+  "id": 4,
+  "jsonrpc": "2.0",
+  "result": true
+}
+```
+
+## HTTP API
+
+### Test Hello World
 
 ```bash
   GET https://relay.walletconnect.org/hello
@@ -11,7 +106,7 @@
   Body: Hello World, this is WalletConnect v2.0.0-alpha
 ```
 
-## Subscribe Push Notification Webhook
+### Subscribe Push Notification Webhook
 
 ```bash
   POST https://relay.walletconnect.org/subscribe
