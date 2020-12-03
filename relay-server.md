@@ -4,7 +4,7 @@
 
 ### Subscribe
 
-```jsonc
+```json
 // Request (Client -> Server)
 {
   "id": 1,
@@ -26,7 +26,7 @@
 
 ### Publish
 
-```jsonc
+```json
 // Request (Client -> Server)
 {
   "id": 2,
@@ -49,7 +49,7 @@
 
 ### Subscription
 
-```jsonc
+```json
 // Request (Server -> Client)
 {
   "id": 3,
@@ -74,7 +74,7 @@
 
 ### Unsubscribe
 
-```jsonc
+```json
 // Request (Client -> Server)
 {
   "id": 4,
