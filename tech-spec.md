@@ -209,7 +209,7 @@ Therefore the next sequence, session, will follow the same procedure for settlem
 
 ### Session Signal
 
-When a session is proposed through a settled connection it will use a signal structured with a topic as parameter matching the connection used to relay the proposal
+When a session is proposed through a settled connection it will use a signal with a topic field matching the connection topic used to relay the proposal.
 
 ```typescript
 interface SessionSignal {
