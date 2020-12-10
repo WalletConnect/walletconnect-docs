@@ -201,15 +201,15 @@ interface ConnectionSettled {
 
 By now you should have noted that we have specified permissions but by default we only use a single method `wc_sessionPropose` allowed. This takes us to how connection and session relate to each other. 
 
-On the WalletConnect 1.0 protocol, a connection was established per session which made bandwidth requirements for sessions unnecessarily high. Now with WalletConnect 2.0 protocol connections are settled independently of the sessions hence you have a settled connection being established as secure channel between two environments to send signals for session proposals.
+On the WalletConnect 1.0 protocol, a connection was established per session which made bandwidth requirements for sessions unnecessarily high. Now with WalletConnect 2.0 protocol connections are settled independently of the sessions. With a settled connection being used as a secure channel, sessions can be initiated between two environments.
 
-Once two environments are tethered so-to-speak it can use the connection topic and derive shared key to send comprehensive session proposal with detailed permissions through the relay network encrypted.
+Once two participants are tethered, their communications are encrypted through the connection. The participants can use the connection topic to derive shared key to send detailed session proposal with specified permissions through the relay network.
 
-Therefore the next sequence, session, will follow the same procedure for settlement but it will relay its out-of-band information encrypted through the settled connection.
+Therefore the next sequence, session, will follow the same procedure for settlement but it will relay its out-of-band session proposal through the encrypted settled connection.
 
 ### Session Signal
 
-When a session is proposed through a settled connection it will use a signal structured with a topic as parameter matching the connection used to relay the proposal
+When a session is proposed through a settled connection it will use a signal with a topic field matching the connection topic used to relay the proposal.
 
 ```typescript
 interface SessionSignal {
@@ -352,7 +352,7 @@ Contrary to its predecessor, WalletConnect 2.0 protocol is opinionated about ses
 
 As already explained on the out-of-band sequences which describe how connections signal session proposals. It's now important to note that session lifecycles are decoupled from the URI scanning or deep-linking which previously coupled to each session.
 
-A session is proposed only through a tethered connection which can proposed for a user on an application. Therefore it's necessary that wallets design sessions to live in parallel and permit users to approve requests from different sessions simultaneously.
+A session is proposed only through a tethered connection which can displayed to a user on multiple applications. Therefore it's necessary that wallets design sessions to live in parallel and permit users to approve requests from different sessions simultaneously.
 
 A JSON-RPC request from a session should never be displayed from an "active" session since multiple can be active at the same time.
 
