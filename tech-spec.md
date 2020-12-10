@@ -352,7 +352,7 @@ Contrary to its predecessor, WalletConnect 2.0 protocol is opinionated about ses
 
 As already explained on the out-of-band sequences which describe how connections signal session proposals. It's now important to note that session lifecycles are decoupled from the URI scanning or deep-linking which previously coupled to each session.
 
-A session is proposed only through a tethered connection which can proposed for a user on an application. Therefore it's necessary that wallets design sessions to live in parallel and permit users to approve requests from different sessions simultaneously.
+A session is proposed only through a tethered connection which can displayed to a user on multiple applications. Therefore it's necessary that wallets design sessions to live in parallel and permit users to approve requests from different sessions simultaneously.
 
 A JSON-RPC request from a session should never be displayed from an "active" session since multiple can be active at the same time.
 
