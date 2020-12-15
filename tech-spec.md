@@ -1,56 +1,76 @@
-# WalletConnect 2.0 Protocol
+---
+title: WalletConnect 2.0 Protocol
+description: Technical Specification for WalletConnect 2.0 Protocol
+author: Pedro Gomes <pedro@walletconnect.org>
+created: 2020-12-09
+updated: 2020-12-15
+---
 
-9 December 2020
-**Author:** Pedro Gomes <pedro@walletconnect.org>
+# WalletConnect 2.0 Protocol
 
 ## Overview
 
-WalletConnect Protocol provides secure remote signing communication between a blockchain application and wallet which controls the authentication of the user's private keys. 
+WalletConnect Protocol provides secure remote signing communication between a blockchain application and wallet which controls the authentication of the user's private keys.
 
 ## Goals
 
 The goal of WalletConnect protocol is to provide an interoperable secure remote signing experience between two separate environments where public key authentication is required to interface with a blockchain. The goals of the WalletConnect protocol include:
 
-* Reducing end-user steps for connecting two environments securely
-* Protect end-user activity across the relayer infrastructure
-* Allow any blockchain application connect to any blockchain wallet
+- Reducing end-user steps for connecting two environments securely
+- Protect end-user activity across the relayer infrastructure
+- Allow any blockchain application connect to any blockchain wallet
+
+## Architecture
+
+At a high level, WalletConnect serves a secure communication channel between two applications that run equivalent clients for WalletConnect which are connected to a relayer infrastructure communicated through a publish-subscribe pattern.
+
+![walletconnect-protocol-simplified](./.gitbook/assets/walletconnect-protocol-simplified.png)
+
+The two clients are connected when some out-of-band data is shared in order to define the relay infrastructure and the cryptographic keys to used to encrypt payloads.
+
+Usually we have a blockchain application which will be labelled as the proposer and a blockchain wallet which will be labelled as the responder.
+
+After connected the proposer will make signing requests in the form JSON-RPC payloads to the responder to sign with its signer remotely.
+
+In the next sections, we will describe the protocol requirements to implement a client and how to progress sessions from proposal into settlement.
 
 ## Requirements
 
 The protocol was designed to serve primarily but not exclusively mobile blockchain wallets which are targeted as the main signing environment for an end-user to manage its private keys for authenticating blockchain interactions.
 
- Hence the following core components were used to ensure secure and low-latency communication between the application and the wallet:
+Hence the following core components were used to ensure secure and low-latency communication between the application and the wallet:
 
-* JSON-RPC protocol
-* X25519 shared key derivation
-* AEAD encryption scheme
+- JSON-RPC protocol
+- X25519 shared key derivation
+- AEAD encryption scheme
+- Publish-Subscribe pattern
 
 Finally the following standards were used to ensure protocol agnosticism to any blockchain interfaces when connecting applications and wallets:
 
-* CAIP-2 blockchain identifiers
-* CAIP-10 account identifiers
-* CAIP-24 provider request
-* CAIP-25 provider handshake
+- CAIP-2 blockchain identifiers
+- CAIP-10 account identifiers
+- CAIP-24 provider request
+- CAIP-25 provider handshake
 
-## Introduction
+## Backwards Compatibility
 
 WalletConnect 2.0 protocol introduces new concepts when compared to its predecessor which it will purposefully break compatibility in order to provide a more consistent end-user experience across different wallets interfacing with different applications requesting to access different blockchain accounts. Not only WalletConnect 2.0 protocol becomes agnostic to the chain loosing it's strong coupling with the Ethereum blockchain state but also it decouples the session from the connection. Finally it also introduces a stronger set of rules in terms of session management in terms of lifetime cycles and duration.
 
 In the following sections we will discuss progressively core concepts regarding relay protocols, out-of-band sequences, JSON-RPC payloads, session management and persistent storage.
 
-## Relay Protocols
+## Relay Protocol API
 
-Contrary to its predecessor, the WalletConnect 2.0 protocol becomes agnostic to its relay infrastructure. While it's still possible to relay communication between a blockchain application and wallet using the Bridge Server, this is now defined as it's own relay protocol that follows a standard protocol. 
+Contrary to its predecessor, the WalletConnect 2.0 protocol becomes agnostic to its relay infrastructure. While it's still possible to relay communication between a blockchain application and wallet using the Bridge Server, this is now defined as it's own relay protocol that follows a standard protocol.
 
 The Relay Protocol MUST follow a publish-subscribe pattern and which MUST have a JSON-RPC API interface that includes the following methods and corresponding behaviors with the relay network infrastructure:
 
-* info - return status and information about network
-* connect - start connection with network 
-* disconnect - stop connection with network 
-* publish - broadcast message with a topic to the network 
-* subscribe - subscribe to messages with matching topic on the network 
-* unsubscribe - unsubscribe to messages with matching topic on the network 
-* subscription - incoming message with matching topic from the network 
+- info — status and information about network
+- connect — start connection with network
+- disconnect — stop connection with network
+- publish — broadcast message with a topic to the network
+- subscribe — subscribe to messages with matching topic on the network
+- unsubscribe — unsubscribe to messages with matching topic on the network
+- subscription — incoming message with matching topic from the network
 
 Different protocols MUST have unique method prefixing to prevent conflicts when handling network interactions from the JSON-RPC API interface. For example, the Bridge server infrastructure would include methods such as `bridge_info`, `bridge_subscribe` and `bridge_publish`.
 
@@ -58,42 +78,43 @@ Some relay protocols may require some initialization parameters which need to be
 
 ```typescript
 interface ProtocolOptions {
-	name: string;
+  name: string;
   params: any;
 }
 
 const protocolOptions: ProtocolOptions = {
   name: "bridge",
   params: {
-    url: "wss://bridge.walletconnect.org"
-  }
-}
-
+    url: "wss://bridge.walletconnect.org",
+  },
+};
 ```
 
 This shares some similarities with the WalletConnect 1.0 protocol which this protocol options were shared through the URI used when scanning a QR Code or deep linked. With the WalletConnect 2.0 protocol, any relay protocol is available therefore these protocols options are open to other potential relay infrastructure available to both the application and the wallet to share out-of-band which leads us to the out-of-band sequences.
 
 ## Out-of-Band Sequences
 
-Just like its predecessor at its core there is a concept of a proposer and responder that share some out-of-band information that is not available to the relay protocol in order to relay payloads encrypted. This is now defined with WalletConnect 2.0 Protocol as an out-of-band sequence. There are two different sequences within WalletConnect 2.0 protocol: connection and session. 
+Just like its predecessor at its core there is a concept of a proposer and responder that share some out-of-band information that is not available to the relay protocol in order to relay payloads encrypted. This is now defined with WalletConnect 2.0 Protocol as an out-of-band sequence. There are two different sequences within WalletConnect 2.0 protocol: connection and session. They both follow the same procedure to settle an out-of-band sequence. Let's first describe the "approve" flow:
 
-They both follow the same procedure to settle a full sequence that goes as follows:
+- t0 - Proposer generates a sequence proposal that includes a out-of-band data signal and shares with Responder
+- t1 - Responder constructs the proposal using the received signal and approves it which internally sends a response
+- t2 - Responder optimistically settles session before acknowledgement and in parallel the Proposer receives response
+- t3 - Proposer handles and validates response and sends a response acknowledgement to Responder
+- t4 - Proposer is able to settle its own sequence and in parallel the Responder receives acknowledgement
+- t5 - Responder handles and validates the acknowledgement to be either successful or failed
 
-- Proposer generates a sequence proposal that includes a signal
-- Proposer shares the signal with the target responder out-of-band
-- Responder constructs the proposal using the received signal
-- Responder sends response through relay protocol
-  - if approved, responder settles sequence after sending response
-  - if rejected, responder discards proposal after sending response
-- Proposer receives response through relay protocol
-  - if approved, proposer settles sequence after receiving response and sends acknowledgement
-  - if reject, proposer discards proposal after receiving response
-- (if approved) Responder receives acknowledgement 
-  - Acknowledgement may include an error message which can unsettle the sequence
+![outofband-sequence-approve](./.gitbook/assets/outofband-sequence-approve.png)
 
-At this point, (if approved) both the proposer and the responder have settled a sequence and can now exchange payloads securely using the sequence information. 
+At this point, both the proposer and the responder have settled a sequence and can now exchange payloads securely using the sequence permissions agree upon. Now let's describe a "reject" flow:
 
-While this conceptually describe the full flow sequence settlement procedure, we need to dive into what is actually sent between them when sharing a signal, constructing a proposal, sending a response and/or acknowledgement.
+- t0 - Proposer generates a sequence proposal that includes a out-of-band data signal and shares with Responder
+- t1 - Responder constructs the proposal using the received signal and rejects it which internally sends a response
+- t2 - Responder discards proposal and is not subscribed to any topic and in parallel the Proposer receives the response
+- t3 - Proposer handles and validates response and throws an error on the client with the reason received on response
+
+![outofband-sequence-approve](./.gitbook/assets/outofband-sequence-reject.png)
+
+While this conceptually describe the full flow sequence settlement approve and rejects flows, we need to dive into what is actually sent between them when sharing a signal, constructing a proposal, sending a response and/or acknowledgement.
 
 ### Connection Signal
 
@@ -112,7 +133,7 @@ interface ConnectionSignal {
   type: "uri";
   params: {
     uri: string;
-  }
+  };
 }
 ```
 
@@ -132,9 +153,9 @@ interface ConnectionProposal {
   signal: ConnectionSignal;
   permissions: {
     jsonrpc: {
-      methods: string[]
-    }
-  }
+      methods: string[];
+    };
+  };
   ttl: number;
 }
 ```
@@ -173,7 +194,7 @@ If the connection is not successful, either because the responder rejected or an
 
 ```typescript
 interface ConnectionFailureResponse {
-	reason: string;
+  reason: string;
 }
 ```
 
@@ -192,14 +213,14 @@ interface ConnectionSettled {
   peer: ConnectionParticipant;
   permissions: {
     jsonrpc: {
-      methods: string[]
-    }
-  }
+      methods: string[];
+    };
+  };
   expiry: number;
 }
 ```
 
-By now you should have noted that we have specified permissions but by default we only use a single method `wc_sessionPropose` allowed. This takes us to how connection and session relate to each other. 
+By now you should have noted that we have specified permissions but by default we only use a single method `wc_sessionPropose` allowed. This takes us to how connection and session relate to each other.
 
 On the WalletConnect 1.0 protocol, a connection was established per session which made bandwidth requirements for sessions unnecessarily high. Now with WalletConnect 2.0 protocol connections are settled independently of the sessions. With a settled connection being used as a secure channel, sessions can be initiated between two environments.
 
@@ -216,7 +237,7 @@ interface SessionSignal {
   method: "connection";
   params: {
     topic: string;
-  }
+  };
 }
 ```
 
@@ -249,7 +270,7 @@ interface SessionProposal {
     jsonrpc: {
       methods: string[];
     };
-  }
+  };
   ttl: number;
 }
 ```
@@ -270,7 +291,7 @@ Just like connection sequence, session can have two outcomes for its response: s
 
 #### Success
 
-The session response will be successful when the user approves the session proposal and the wallet verifies that it supports the requested blockchains and  JSON-RPC permissions.
+The session response will be successful when the user approves the session proposal and the wallet verifies that it supports the requested blockchains and JSON-RPC permissions.
 
 Given that these conditions are met then the wallet will expose CAIP-10 blockchain accounts corresponding the requested blockchains and will derive a shared key to be used after session settlement.
 
@@ -290,9 +311,9 @@ interface SessionSuccessResponse {
 
 If the session is not successful, either because the user did not approve, permissions requested were not fully supported by the wallet or an error occurred during settlement then the response should be structured as follows:
 
-``` typescript
+```typescript
 interface SessionFailureResponse {
-	reason: string;
+  reason: string;
 }
 ```
 
@@ -314,7 +335,7 @@ interface SessionSettled {
     jsonrpc: {
       methods: string[];
     };
-  }
+  };
   expiry: number;
   state: {
     accountIds: string[];
@@ -322,7 +343,7 @@ interface SessionSettled {
 }
 ```
 
-At this stage, we can consider two applications fully connected. A session has settled on both clients and the permissions have been established on both clients to exchange JSON-RPC payloads. 
+At this stage, we can consider two applications fully connected. A session has settled on both clients and the permissions have been established on both clients to exchange JSON-RPC payloads.
 
 ## JSON-RPC Payloads
 
@@ -332,13 +353,13 @@ Therefore we will add support for CAIP-24 provider requests which will allow JSO
 
 ```typescript
 interface CAIP24Request extends JsonRpcRequest {
-	id: number;
+  id: number;
   jsonrpc: string;
   method: "wc_sessionPayload";
   params: {
     request: JsonRpcRequest;
     chainId?: string;
-  }
+  };
 }
 ```
 
@@ -360,7 +381,7 @@ A JSON-RPC request from a session should never be displayed from an "active" ses
 
 Additionally not only multiple sessions can be settled simultaneously, sessions MUST be persisted for the entire duration until expiry is met.
 
-Only the user can terminate a session intentionally before the expiry is met therefore these sessions should be displayed in parallel on a session manager where the user can control which applications are still connected and can make requests. 
+Only the user can terminate a session intentionally before the expiry is met therefore these sessions should be displayed in parallel on a session manager where the user can control which applications are still connected and can make requests.
 
 Therefore the sessions are stored controlled by the client to ensure the lifecycles and duration are respected. Which takes us to how persistent storage is handled by clients
 
