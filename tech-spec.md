@@ -56,7 +56,7 @@ Finally the following standards were used to ensure protocol agnosticism to any 
 
 WalletConnect 2.0 protocol introduces new concepts when compared to its predecessor which it will purposefully break compatibility in order to provide a more consistent end-user experience across different wallets interfacing with different applications requesting to access different blockchain accounts. Not only WalletConnect 2.0 protocol becomes agnostic to the chain loosing it's strong coupling with the Ethereum blockchain state but also it decouples the session from the connection. Finally it also introduces a stronger set of rules in terms of session management in terms of lifetime cycles and duration.
 
-In the following sections we will discuss progressively core concepts regarding relay protocols, out-of-band sequences, JSON-RPC payloads, session management and persistent storage.
+In the following sections we will discuss progressively core concepts regarding relay protocols, out-of-band sequences, JSON-RPC payloads, session management, persistent storage and client synchronization.
 
 ## Relay Protocol API
 
@@ -77,12 +77,12 @@ Different protocols MUST have unique method prefixing to prevent conflicts when 
 Some relay protocols may require some initialization parameters which need to be shared with another WalletConnect clients with out-of-band communication. For example, Bridge server infrastructure would include the url of the server as parameter:
 
 ```typescript
-interface ProtocolOptions {
+interface RelayProtocolOptions {
   name: string;
   params: any;
 }
 
-const protocolOptions: ProtocolOptions = {
+const protocolOptions: RelayProtocolOptions = {
   name: "bridge",
   params: {
     url: "wss://bridge.walletconnect.org",
@@ -112,7 +112,7 @@ At this point, both the proposer and the responder have settled a sequence and c
 - t2 - Responder discards proposal and is not subscribed to any topic and in parallel the Proposer receives the response
 - t3 - Proposer handles and validates response and throws an error on the client with the reason received on response
 
-![outofband-sequence-approve](./.gitbook/assets/outofband-sequence-reject.png)
+![outofband-sequence-reject](./.gitbook/assets/outofband-sequence-reject.png)
 
 While this conceptually describe the full flow sequence settlement approve and rejects flows, we need to dive into what is actually sent between them when sharing a signal, constructing a proposal, sending a response and/or acknowledgement.
 
@@ -126,7 +126,7 @@ interface UriParameters {
   version: number;
   topic: string;
   publicKey: string;
-  relay: ProtocolOptions;
+  relay: RelayProtocolOptions;
 }
 
 interface ConnectionSignal {
@@ -148,7 +148,7 @@ interface ConnectionParticipant {
 
 interface ConnectionProposal {
   topic: string;
-  relay: ProtocolOptions;
+  relay: RelayProtocolOptions;
   proposer: ConnectionParticipant;
   signal: ConnectionSignal;
   permissions: {
@@ -180,7 +180,7 @@ If the connection response is successful, then the responder must generate an X2
 ```typescript
 interface ConnectionSuccessResponse {
   topic: string;
-  relay: ProtocolOptions;
+  relay: RelayProtocolOptions;
   responder: ConnectionParticipant;
   expiry: number;
 }
@@ -207,7 +207,7 @@ After response, the proposer should be able to settle its own sequence with the 
 ```typescript
 interface ConnectionSettled {
   topic: string;
-  relay: ProtocolOptions;
+  relay: RelayProtocolOptions;
   sharedKey: string;
   self: ConnectionParticipant;
   peer: ConnectionParticipant;
@@ -258,19 +258,21 @@ interface SessionParticipant {
   metadata: SessionMetadata;
 }
 
+interface SessionPermissions {
+  blockchain: {
+    chainIds: string[];
+  };
+  jsonrpc: {
+    methods: string[];
+  };
+}
+
 interface SessionProposal {
   topic: string;
-  relay: ProtocolOptions;
+  relay: RelayProtocolOptions;
   proposer: SessionParticipant;
-  signal: Signal;
-  permissions: {
-    blockchain: {
-      chainIds: string[];
-    };
-    jsonrpc: {
-      methods: string[];
-    };
-  };
+  signal: SessionSignal;
+  permissions: SessionPermissions;
   ttl: number;
 }
 ```
@@ -298,7 +300,7 @@ Given that these conditions are met then the wallet will expose CAIP-10 blockcha
 ```typescript
 interface SessionSuccessResponse {
   topic: string;
-  relay: ProtocolOptions;
+  relay: RelayProtocolOptions;
   responder: SessionParticipant;
   expiry: number;
   state: {
@@ -322,24 +324,19 @@ interface SessionFailureResponse {
 After response, the proposer should be able to settle its own sequence with the details shared. The responder public key is used for deriving the shared key and the derived topic should match the response topic. Finally it includes the expiry calculated by the responder and the session is considered settled by both clients. The settled session is structured as follows on both clients:
 
 ```typescript
+interface SessionState {
+  accountIds: string[];
+}
+
 interface SessionSettled {
   topic: string;
-  relay: ProtocolOptions;
+  relay: RelayProtocolOptions;
   sharedKey: string;
   self: SessionParticipant;
   peer: SessionParticipant;
-  permissions: {
-    blockchain: {
-      chainIds: string[];
-    };
-    jsonrpc: {
-      methods: string[];
-    };
-  };
+  permissions: SessionPermissions;
   expiry: number;
-  state: {
-    accountIds: string[];
-  };
+  state: SessionState;
 }
 ```
 
@@ -388,3 +385,191 @@ Therefore the sessions are stored controlled by the client to ensure the lifecyc
 ## Persistent Storage
 
 WalletConnect 2.0 clients are now also in control of persistent storage to ensure sessions are managed correctly on both sides hence the minimum requirement for a client to be compatible in all platforms by providing a basic key-value storage interface with asynchronous methods for get, set and delete
+
+## Client Synchronization
+
+WalletConenct 2.0 clients will synchronize state and events for the out-of-band sequences, both session and connection, through JSON-RPC methods which are exclusively used to communicate between the two connected clients. These will be published and subscribed under corresponding topics for both before and after settlement. This can be described under a single matrix that encompasses these two states for both sequences.
+
+![outofband-sequence-sync](./.gitbook/assets/outofband-sequence-sync.png)
+
+### wc_connectionRespond
+
+This request is sent as response for a connection proposal which is signalled externally using a URI shared between clients.
+
+```typescript
+interface WCConnectionRespondApprove {
+  id: 1;
+  jsonrpc: "2.0";
+  method: "wc_connectionRespond";
+  params: {
+    topic: string;
+    relay: RelayProtocolOptions;
+    responder: ConnectionParticipant;
+    expiry: number;
+  };
+}
+
+interface WCConnectionRespondReject {
+  id: 1;
+  jsonrpc: "2.0";
+  method: "wc_connectionRespond";
+  params: {
+    reason: string;
+  };
+}
+```
+
+**NOTE:** The response for this request will serve as the acknoledgement of the proposer's connection settlement
+
+### wc_connectionUpdate
+
+This request is used to update metadata of the connection participant which is optionally provided to make it easier to identify the peer's environment and device.
+
+```typescript
+interface WCConnectionUpdate {
+  id: 1;
+  jsonrpc: "2.0";
+  method: "wc_connectionUpdate";
+  params: {
+    update: {
+      peer: {
+        metadata: {
+          type: string;
+          platform: string;
+          version: string;
+          os: string;
+        };
+      };
+    };
+  };
+}
+```
+
+### wc_connectionDelete
+
+This request is used to delete the connection and notify the peer that it won't be receiving anymore payloads being relayed with this topic and specifies a reason for deleting before expire.
+
+```typescript
+interface WCConnectionDelete {
+  id: 1;
+  jsonrpc: "2.0";
+  method: "wc_connectionDelete";
+  params: {
+    reason: string;
+  };
+}
+```
+
+### wc_connectionPayload
+
+This request is used to relay payloads that match the list of methods agreed upon connection settlement. Any requests sent with unauthorized methods will be immediately rejected by the client.
+
+```typescript
+interface WCConnectionPayload {
+  id: 1;
+  jsonrpc: "2.0";
+  method: "wc_connectionPayload";
+  params: {
+    payload: JsonRpcRequest;
+  };
+}
+```
+
+### wc_sessionPropose
+
+This request is used send a session proposal to a client which has an already settled connection therefore this method exists exclusively within a connection payload and it's the only method permitted to be relayed through a connection.
+
+```typescript
+interface WCSessionPropose {
+  id: 1;
+  jsonrpc: "2.0";
+  method: "wc_sessionPropose";
+  params: {
+    topic: string;
+    relay: RelayProtocolOptions;
+    proposer: SessionParticipant;
+    signal: SessionSignal;
+    permissions: SessionPermissions;
+    ttl: number;
+  };
+}
+```
+
+### wc_sessionRespond
+
+This request is sent as response for a session proposal which is received as connection payload as wc_sessionPropose.
+
+```typescript
+interface WCSessionRespondApproved {
+  id: 1;
+  jsonrpc: "2.0";
+  method: "wc_sessionRespond";
+  params: {
+    topic: string;
+    relay: RelayProtocolOptions;
+    responder: SessionParticipant;
+    expiry: number;
+    state: SessionState;
+  };
+}
+
+interface WCSessionRespondRejected {
+  id: 1;
+  jsonrpc: "2.0";
+  method: "wc_sessionRespond";
+  params: {
+    reason: string;
+  };
+}
+```
+
+**NOTE:** The response for this request will serve as the acknoledgement of the proposer's session settlement
+
+### wc_sessionUpdate
+
+This request is used to update state of the session participant which is optionally provided by the responder extra accounts during the session lifetime;
+
+```typescript
+interface WCConnectionUpdate {
+  id: 1;
+  jsonrpc: "2.0";
+  method: "wc_sessionUpdate";
+  params: {
+    update: {
+      state: {
+        accountIds: string[];
+      };
+    };
+  };
+}
+```
+
+### wc_sessionDelete
+
+This request is used to delete the session and notify the peer that it won't be receiving anymore payloads being relayed with this topic and specifies a reason for deleting before expire.
+
+```typescript
+interface WCConnectionDelete {
+  id: 1;
+  jsonrpc: "2.0";
+  method: "wc_sessionDelete";
+  params: {
+    reason: string;
+  };
+}
+```
+
+### wc_sessionPayload
+
+This request is used to relay payloads that match the list of methods agreed upon session settlement. Any requests sent with unauthorized methods will be immediately rejected by the client.
+
+```typescript
+interface WCConnectionPayload {
+  id: 1;
+  jsonrpc: "2.0";
+  method: "wc_sessionPayload";
+  params: {
+    payload: JsonRpcRequest;
+  };
+}
+```
