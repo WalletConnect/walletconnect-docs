@@ -3,7 +3,7 @@
 ```typescript
 export interface ClientOptions {
   logger?: string | Logger;
-  store?: IStore;
+  storage?: IKeyValueStorage;
   relayProvider?: string | IJsonRpcProvider;
   overrideContext?: string;
 }
@@ -14,8 +14,8 @@ export abstract class IClient extends IEvents {
 
   public abstract logger: Logger;
 
-  public abstract store: IStore;
   public abstract relay: IRelay;
+  public abstract storage: IKeyValueStorage;
 
   public abstract connection: IConnection;
   public abstract session: ISession;
