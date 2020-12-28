@@ -10,7 +10,7 @@ The architecture consists essentially of a websocket server \(Bridge\) between t
 
 ### Requesting Connection
 
-The initiator, is the first peer who requests connection \(Dapp\). Dapp posts an encrypted payload consinsting of one-time topic \(used for handshake only\) and connection request details to the Bridge Server. Then using the WalletConnect Standard URI format \([EIP-1328](https://eips.ethereum.org/EIPS/eip-1328)\) Dapp assembles together the required parameters to establish the connection: \(handshake\) topic, bridge \(url\) and \(symmetric\) key.
+The initiator, is the first peer who requests connection \(Dapp\). Dapp posts an encrypted payload consisting of one-time topic \(used for handshake only\) and connection request details to the Bridge Server. Then using the WalletConnect Standard URI format \([EIP-1328](https://eips.ethereum.org/EIPS/eip-1328)\) Dapp assembles together the required parameters to establish the connection: \(handshake\) topic, bridge \(url\) and \(symmetric\) key.
 
 ```http
 wc:{topic...}@{version...}?bridge={url...}&key={key...}
@@ -39,7 +39,7 @@ The second peer \(Wallet\) will read the URI using either a QR Code or a deep li
 
 The Wallet will then display to the user request details provided by the Dapp. The user will then approve or reject the connection. If rejected, the Dapp will disconnect from the Bridge Server immediately and throw an error message if provided by the Wallet. If approved, the Dapp will receive provided account and chainId from the Wallet.
 
-Once the connection is established, the Dapp will be able to send any JSON-RPC call requests to be handled by the Wallet either to read data from it's node or make signing requests for transactions or messages.
+Once the connection is established, the Dapp will be able to send any JSON-RPC call requests to be handled by the Wallet either to read data from its node or make signing requests for transactions or messages.
 
 ![Call Requests](.gitbook/assets/call-request.png)
 

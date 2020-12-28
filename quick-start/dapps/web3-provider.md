@@ -170,7 +170,7 @@ const provider = new WalletConnectProvider({
 
 #### RPC URL Mapping
 
-The RPC URL mapping should indexed by chainId and it requires at least one value.
+The RPC URL mapping should be indexed by chainId and it requires at least one value.
 
 ```typescript
 const provider = new WalletConnectProvider({
