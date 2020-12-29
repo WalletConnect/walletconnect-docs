@@ -38,7 +38,7 @@ In order to add support for mobile linking within your wallet, you will just nee
 
 ### For Android
 
-Android has the easiest integration as it's operating system is designed to handle multiple applications subscribing to the same deep linking schema. Hence you will only need to register to the `wc:` schema that is defined per the WalletConnect URI standard.
+Android has the easiest integration as its operating system is designed to handle multiple applications subscribing to the same deep linking schema. Hence you will only need to register to the `wc:` schema that is defined per the WalletConnect URI standard.
 
 ```bash
 # Example
@@ -54,7 +54,7 @@ wc:00e46b69-d0cc-4b3e-b6a2-cee442f97188@1
 
 ### For iOS
 
-iOS has the a little more caveats to the integration but we ensure to make it as straightforward as possible. Since it's operating system is not designed to handle multiple applications subscribing to the same deep linking schema, we've designed the QRCode Modal to list supporting wallets on our [open-source registry](https://github.com/WalletConnect/walletconnect-monorepo/blob/next/packages/helpers/mobile-registry/registry.json) and target specific deep links or universal links for each wallet.
+iOS has some more caveats to the integration but we ensure to make it as straightforward as possible. Since its operating system is not designed to handle multiple applications subscribing to the same deep linking schema, we've designed the QRCode Modal to list supporting wallets on our [open-source registry](https://github.com/WalletConnect/walletconnect-monorepo/blob/next/packages/helpers/mobile-registry/registry.json) and target specific deep links or universal links for each wallet.
 
 To add your own wallet to the registry, you must submit a pull request to our monorepo on [Github](https://github.com/walletconnect/walletconnect-monorepo).
 
@@ -125,5 +125,5 @@ npm install --save @walletconnect/utils @walletconnect/mobile-registry
 
 The mobile-registry package will allow you to list the supported mobile linking wallets and provide you with logo, name, color and targetted deep links.
 
-We highly recommend that you use our provided qrcode-modal package to maintain a consistent UX across WalletConnect integrations however we moduralized our packages to give the option on the ethos of decentralization.
+We highly recommend that you use our provided qrcode-modal package to maintain a consistent UX across WalletConnect integrations however we modularized our packages to give the option on the ethos of decentralization.
 
