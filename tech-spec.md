@@ -54,7 +54,7 @@ Finally the following standards were used to ensure protocol agnosticism to any 
 
 ## Backwards Compatibility
 
-WalletConnect 2.0 protocol introduces new concepts when compared to its predecessor which it will purposefully break compatibility in order to provide a more consistent end-user experience across different wallets interfacing with different applications requesting to access different blockchain accounts. Not only WalletConnect 2.0 protocol becomes agnostic to the chain loosing it's strong coupling with the Ethereum blockchain state but also it decouples the session from the connection. Finally it also introduces a stronger set of rules in terms of session management in terms of lifetime cycles and duration.
+WalletConnect 2.0 protocol introduces new concepts when compared to its predecessor which it will purposefully break compatibility in order to provide a more consistent end-user experience across different wallets interfacing with different applications requesting to access different blockchain accounts. Not only WalletConnect 2.0 protocol becomes agnostic to the chain loosing it's strong coupling with the Ethereum blockchain state but also it decouples the session from the pairing. Finally it also introduces a stronger set of rules in terms of session management in terms of lifetime cycles and duration.
 
 In the following sections we will discuss progressively core concepts regarding relay protocols, out-of-band sequences, JSON-RPC payloads, session management, persistent storage and client synchronization.
 
@@ -65,8 +65,8 @@ Contrary to its predecessor, the WalletConnect 2.0 protocol becomes agnostic to 
 The Relay Protocol MUST follow a publish-subscribe pattern and which MUST have a JSON-RPC API interface that includes the following methods and corresponding behaviors with the relay network infrastructure:
 
 - info — status and information about network
-- connect — start connection with network
-- disconnect — stop connection with network
+- connect — start pairing with network
+- disconnect — stop pairing with network
 - publish — broadcast message with a topic to the network
 - subscribe — subscribe to messages with matching topic on the network
 - unsubscribe — unsubscribe to messages with matching topic on the network
@@ -94,7 +94,7 @@ This shares some similarities with the WalletConnect 1.0 protocol which this pro
 
 ## Out-of-Band Sequences
 
-Just like its predecessor at its core there is a concept of a proposer and responder that share some out-of-band information that is not available to the relay protocol in order to relay payloads encrypted. This is now defined with WalletConnect 2.0 Protocol as an out-of-band sequence. There are two different sequences within WalletConnect 2.0 protocol: connection and session. They both follow the same procedure to settle an out-of-band sequence. Let's first describe the "approve" flow:
+Just like its predecessor at its core there is a concept of a proposer and responder that share some out-of-band information that is not available to the relay protocol in order to relay payloads encrypted. This is now defined with WalletConnect 2.0 Protocol as an out-of-band sequence. There are two different sequences within WalletConnect 2.0 protocol: pairing and session. They both follow the same procedure to settle an out-of-band sequence. Let's first describe the "approve" flow:
 
 - t0 - Proposer generates a sequence proposal that includes a out-of-band data signal and shares with Responder
 - t1 - Responder constructs the proposal using the received signal and approves it which internally sends a response
@@ -116,9 +116,9 @@ At this point, both the proposer and the responder have settled a sequence and c
 
 While this conceptually describe the full flow sequence settlement approve and rejects flows, we need to dive into what is actually sent between them when sharing a signal, constructing a proposal, sending a response and/or acknowledgement.
 
-### Connection Signal
+### Pairing Signal
 
-When a connection sequence is proposed it will use a URI as signal, this will be the out-of-band information shared between the proposer and the responder to construct the proposal. In the URI we will include the following parameters:
+When a pairing sequence is proposed it will use a URI as signal, this will be the out-of-band information shared between the proposer and the responder to construct the proposal. In the URI we will include the following parameters:
 
 ```typescript
 interface UriParameters {
@@ -129,7 +129,7 @@ interface UriParameters {
   relay: RelayProtocolOptions;
 }
 
-interface ConnectionSignal {
+interface PairingSignal {
   type: "uri";
   params: {
     uri: string;
@@ -137,20 +137,20 @@ interface ConnectionSignal {
 }
 ```
 
-### Connection Proposal
+### Pairing Proposal
 
-When the responder receives this URI it will be able to construct the connection sequence proposal.
+When the responder receives this URI it will be able to construct the pairing sequence proposal.
 
 ```typescript
-interface ConnectionParticipant {
+interface PairingParticipant {
   publicKey: string;
 }
 
-interface ConnectionProposal {
+interface PairingProposal {
   topic: string;
   relay: RelayProtocolOptions;
-  proposer: ConnectionParticipant;
-  signal: ConnectionSignal;
+  proposer: PairingParticipant;
+  signal: PairingSignal;
   permissions: {
     jsonrpc: {
       methods: string[];
@@ -167,21 +167,21 @@ In the constructed proposal we are able to assert the following information:
 - proposer - public key used by the proposer to encrypted payloads after settlement
 - signal - describes the signal parameters shared by the proposer
 - permissions - permissions requested by the proposer (default = ["wc_sessionPropose"])
-- ttl - time expected to live the settled connection sequence (default = 30 days)
+- ttl - time expected to live the settled pairing sequence (default = 30 days)
 
-### Connection Response
+### Pairing Response
 
-There are two possible outcomes for the response for a connection proposal: success or failure
+There are two possible outcomes for the response for a pairing proposal: success or failure
 
 #### Success
 
-If the connection response is successful, then the responder must generate an X25519 key pair as well and derive the shared key for encrypting payloads once settled. Additionally the topic is generated as SHA256 hash of the derived shared key, this way the next topic is only known to both parties. Therefore the successful outcome response should follow as:
+If the pairing response is successful, then the responder must generate an X25519 key pair as well and derive the shared key for encrypting payloads once settled. Additionally the topic is generated as SHA256 hash of the derived shared key, this way the next topic is only known to both parties. Therefore the successful outcome response should follow as:
 
 ```typescript
-interface ConnectionSuccessResponse {
+interface PairingSuccessResponse {
   topic: string;
   relay: RelayProtocolOptions;
-  responder: ConnectionParticipant;
+  responder: PairingParticipant;
   expiry: number;
 }
 ```
@@ -190,27 +190,27 @@ interface ConnectionSuccessResponse {
 
 #### Failure
 
-If the connection is not successful, either because the responder rejected or any client errors occurred during settlement then the failure outcome response should follow as:
+If the pairing is not successful, either because the responder rejected or any client errors occurred during settlement then the failure outcome response should follow as:
 
 ```typescript
-interface ConnectionFailureResponse {
+interface PairingFailureResponse {
   reason: string;
 }
 ```
 
-**Note:** in practice there shouldn't be any reason to reject a connection proposal since it's only used for signaling sessions
+**Note:** in practice there shouldn't be any reason to reject a pairing proposal since it's only used for signaling sessions
 
-### Connection Settlement
+### Pairing Settlement
 
-After response, the proposer should be able to settle its own sequence with the details shared. The responder public key is used for deriving the shared key and the derived topic should match the response topic. Finally it includes the expiry calculated by the responder and the connection is considered settled by both clients. The settled connection is structured as follows on both clients:
+After response, the proposer should be able to settle its own sequence with the details shared. The responder public key is used for deriving the shared key and the derived topic should match the response topic. Finally it includes the expiry calculated by the responder and the pairing is considered settled by both clients. The settled pairing is structured as follows on both clients:
 
 ```typescript
-interface ConnectionSettled {
+interface PairingSettled {
   topic: string;
   relay: RelayProtocolOptions;
   sharedKey: string;
-  self: ConnectionParticipant;
-  peer: ConnectionParticipant;
+  self: PairingParticipant;
+  peer: PairingParticipant;
   permissions: {
     jsonrpc: {
       methods: string[];
@@ -220,21 +220,21 @@ interface ConnectionSettled {
 }
 ```
 
-By now you should have noted that we have specified permissions but by default we only use a single method `wc_sessionPropose` allowed. This takes us to how connection and session relate to each other.
+By now you should have noted that we have specified permissions but by default we only use a single method `wc_sessionPropose` allowed. This takes us to how pairing and session relate to each other.
 
-On the WalletConnect 1.0 protocol, a connection was established per session which made bandwidth requirements for sessions unnecessarily high. Now with WalletConnect 2.0 protocol connections are settled independently of the sessions. With a settled connection being used as a secure channel, sessions can be initiated between two environments.
+On the WalletConnect 1.0 protocol, a pairing was established per session which made bandwidth requirements for sessions unnecessarily high. Now with WalletConnect 2.0 protocol pairings are settled independently of the sessions. With a settled pairing being used as a secure channel, sessions can be initiated between two environments.
 
-Once two participants are tethered, their communications are encrypted through the connection. The participants can use the connection topic to derive shared key to send detailed session proposal with specified permissions through the relay network.
+Once two participants are paired, their communications are encrypted through the pairing. The participants can use the pairing topic to derive shared key to send detailed session proposal with specified permissions through the relay network.
 
-Therefore the next sequence, session, will follow the same procedure for settlement but it will relay its out-of-band session proposal through the encrypted settled connection.
+Therefore the next sequence, session, will follow the same procedure for settlement but it will relay its out-of-band session proposal through the encrypted settled pairing.
 
 ### Session Signal
 
-When a session is proposed through a settled connection it will use a signal with a topic field matching the connection topic used to relay the proposal.
+When a session is proposed through a settled pairing it will use a signal with a topic field matching the pairing topic used to relay the proposal.
 
 ```typescript
 interface SessionSignal {
-  method: "connection";
+  method: "pairing";
   params: {
     topic: string;
   };
@@ -243,7 +243,7 @@ interface SessionSignal {
 
 ### Session Proposal
 
-The proposal will be listened to as part of the params of the `wc_sessionPropose` relayed across the connection settled and it will be structured as follows:
+The proposal will be listened to as part of the params of the `wc_sessionPropose` relayed across the pairing settled and it will be structured as follows:
 
 ```typescript
 interface SessionMetadata {
@@ -277,7 +277,7 @@ interface SessionProposal {
 }
 ```
 
-Session proposal look somewhat similar to connection proposal except for two particularities: participant metadata and blockchain permissions;
+Session proposal look somewhat similar to pairing proposal except for two particularities: participant metadata and blockchain permissions;
 
 #### Participant Metadata
 
@@ -289,7 +289,7 @@ The blockchain permissions together with the JSON-RPC methods that are described
 
 ### Session Response
 
-Just like connection sequence, session can have two outcomes for its response: success or failure
+Just like pairing sequence, session can have two outcomes for its response: success or failure
 
 #### Success
 
@@ -368,9 +368,9 @@ Contrary to its predecessor, WalletConnect 2.0 protocol is opinionated about ses
 
 ### Lifecycles
 
-As already explained on the out-of-band sequences which describe how connections signal session proposals. It's now important to note that session lifecycles are decoupled from the URI scanning or deep-linking which previously coupled to each session.
+As already explained on the out-of-band sequences which describe how pairings signal session proposals. It's now important to note that session lifecycles are decoupled from the URI scanning or deep-linking which previously coupled to each session.
 
-A session is proposed only through a tethered connection which can displayed to a user on multiple applications. Therefore it's necessary that wallets design sessions to live in parallel and permit users to approve requests from different sessions simultaneously.
+A session is proposed only through a paired pairing which can displayed to a user on multiple applications. Therefore it's necessary that wallets design sessions to live in parallel and permit users to approve requests from different sessions simultaneously.
 
 A JSON-RPC request from a session should never be displayed from an "active" session since multiple can be active at the same time.
 
@@ -388,48 +388,48 @@ WalletConnect 2.0 clients are now also in control of persistent storage to ensur
 
 ## Client Synchronization
 
-WalletConenct 2.0 clients will synchronize state and events for the out-of-band sequences, both session and connection, through JSON-RPC methods which are exclusively used to communicate between the two connected clients. These will be published and subscribed under corresponding topics for both before and after settlement. This can be described under a single matrix that encompasses these two states for both sequences.
+WalletConenct 2.0 clients will synchronize state and events for the out-of-band sequences, both session and pairing, through JSON-RPC methods which are exclusively used to communicate between the two connected clients. These will be published and subscribed under corresponding topics for both before and after settlement. This can be described under a single matrix that encompasses these two states for both sequences.
 
 ![outofband-sequence-sync](./.gitbook/assets/outofband-sequence-sync.png)
 
-### wc_connectionRespond
+### wc_pairingRespond
 
-This request is sent as response for a connection proposal which is signalled externally using a URI shared between clients.
+This request is sent as response for a pairing proposal which is signalled externally using a URI shared between clients.
 
 ```typescript
-interface WCConnectionRespondApprove {
+interface WCPairingRespondApprove {
   id: 1;
   jsonrpc: "2.0";
-  method: "wc_connectionRespond";
+  method: "wc_pairingRespond";
   params: {
     topic: string;
     relay: RelayProtocolOptions;
-    responder: ConnectionParticipant;
+    responder: PairingParticipant;
     expiry: number;
   };
 }
 
-interface WCConnectionRespondReject {
+interface WCPairingRespondReject {
   id: 1;
   jsonrpc: "2.0";
-  method: "wc_connectionRespond";
+  method: "wc_pairingRespond";
   params: {
     reason: string;
   };
 }
 ```
 
-**NOTE:** The response for this request will serve as the acknoledgement of the proposer's connection settlement
+**NOTE:** The response for this request will serve as the acknoledgement of the proposer's pairing settlement
 
-### wc_connectionUpdate
+### wc_pairingUpdate
 
-This request is used to update metadata of the connection participant which is optionally provided to make it easier to identify the peer's environment and device.
+This request is used to update metadata of the pairing participant which is optionally provided to make it easier to identify the peer's environment and device.
 
 ```typescript
-interface WCConnectionUpdate {
+interface WCPairingUpdate {
   id: 1;
   jsonrpc: "2.0";
-  method: "wc_connectionUpdate";
+  method: "wc_pairingUpdate";
   params: {
     update: {
       peer: {
@@ -445,30 +445,30 @@ interface WCConnectionUpdate {
 }
 ```
 
-### wc_connectionDelete
+### wc_pairingDelete
 
-This request is used to delete the connection and notify the peer that it won't be receiving anymore payloads being relayed with this topic and specifies a reason for deleting before expire.
+This request is used to delete the pairing and notify the peer that it won't be receiving anymore payloads being relayed with this topic and specifies a reason for deleting before expire.
 
 ```typescript
-interface WCConnectionDelete {
+interface WCPairingDelete {
   id: 1;
   jsonrpc: "2.0";
-  method: "wc_connectionDelete";
+  method: "wc_pairingDelete";
   params: {
     reason: string;
   };
 }
 ```
 
-### wc_connectionPayload
+### wc_pairingPayload
 
-This request is used to relay payloads that match the list of methods agreed upon connection settlement. Any requests sent with unauthorized methods will be immediately rejected by the client.
+This request is used to relay payloads that match the list of methods agreed upon pairing settlement. Any requests sent with unauthorized methods will be immediately rejected by the client.
 
 ```typescript
-interface WCConnectionPayload {
+interface WCPairingPayload {
   id: 1;
   jsonrpc: "2.0";
-  method: "wc_connectionPayload";
+  method: "wc_pairingPayload";
   params: {
     payload: JsonRpcRequest;
   };
@@ -477,7 +477,7 @@ interface WCConnectionPayload {
 
 ### wc_sessionPropose
 
-This request is used send a session proposal to a client which has an already settled connection therefore this method exists exclusively within a connection payload and it's the only method permitted to be relayed through a connection.
+This request is used send a session proposal to a client which has an already settled pairing therefore this method exists exclusively within a pairing payload and it's the only method permitted to be relayed through a pairing.
 
 ```typescript
 interface WCSessionPropose {
@@ -497,7 +497,7 @@ interface WCSessionPropose {
 
 ### wc_sessionRespond
 
-This request is sent as response for a session proposal which is received as connection payload as wc_sessionPropose.
+This request is sent as response for a session proposal which is received as pairing payload as wc_sessionPropose.
 
 ```typescript
 interface WCSessionRespondApproved {
@@ -530,7 +530,7 @@ interface WCSessionRespondRejected {
 This request is used to update state of the session participant which is optionally provided by the responder extra accounts during the session lifetime;
 
 ```typescript
-interface WCConnectionUpdate {
+interface WCPairingUpdate {
   id: 1;
   jsonrpc: "2.0";
   method: "wc_sessionUpdate";
@@ -549,7 +549,7 @@ interface WCConnectionUpdate {
 This request is used to delete the session and notify the peer that it won't be receiving anymore payloads being relayed with this topic and specifies a reason for deleting before expire.
 
 ```typescript
-interface WCConnectionDelete {
+interface WCPairingDelete {
   id: 1;
   jsonrpc: "2.0";
   method: "wc_sessionDelete";
@@ -564,7 +564,7 @@ interface WCConnectionDelete {
 This request is used to relay payloads that match the list of methods agreed upon session settlement. Any requests sent with unauthorized methods will be immediately rejected by the client.
 
 ```typescript
-interface WCConnectionPayload {
+interface WCPairingPayload {
   id: 1;
   jsonrpc: "2.0";
   method: "wc_sessionPayload";

@@ -52,10 +52,10 @@ client.on(
 );
 ```
 
-3. Establish connection with shared URI from dapp
+3. Establish pairing with shared URI from dapp
 
 ```js
-client.tether({ uri });
+client.pair({ uri });
 ```
 
 4. Handle user approval for proposed session

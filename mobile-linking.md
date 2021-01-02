@@ -4,13 +4,13 @@ For a long time WalletConnect served only as secure remote communication between
 
 However connecting a mobile wallet and a mobile application was always possible by design.
 
-Using the URI commonly displayed in the QRCode it is possible to establish a connection by sharing this URI through a deep link or universal link on both Android and iOS.
+Using the URI commonly displayed in the QRCode it is possible to establish a pairing by sharing this URI through a deep link or universal link on both Android and iOS.
 
 Despite the multiple UX caveats that mobile linking encountered, we've been able to simplify this pattern with our own QR Code Modal package.
 
 ![mobile linking](.gitbook/assets/mobile-linking-preview.png)
 
-The pattern we chose to adhere for a consistent UX across platforms for connection establishment is the following:
+The pattern we chose to adhere for a consistent UX across platforms for pairing establishment is the following:
 
 1. Dapp prompts user to connect with:
 
@@ -69,7 +69,7 @@ To add your own wallet to the registry, you must submit a pull request to our mo
 }
 ```
 
-We recommend that universal links are used instead of deep links for iOS since they provide smoother UX with less prompts. When a dapp triggers a mobile connection on iOS, you should expect the following links
+We recommend that universal links are used instead of deep links for iOS since they provide smoother UX with less prompts. When a dapp triggers a mobile pairing on iOS, you should expect the following links
 
 ```bash
 # For deep links
@@ -95,15 +95,19 @@ If you are building a Dapp you will be able to support this pattern by simply in
 
 {% tabs %}
 {% tab title="yarn" %}
+
 ```bash
 yarn add @walletconnect/qrcode-modal
 ```
+
 {% endtab %}
 
 {% tab title="npm" %}
+
 ```bash
 npm install --save @walletconnect/qrcode-modal
 ```
+
 {% endtab %}
 {% endtabs %}
 
@@ -111,19 +115,22 @@ If you would like to build your own UI for mobile linking, we provide the same a
 
 {% tabs %}
 {% tab title="yarn" %}
+
 ```bash
 yarn add @walletconnect/utils @walletconnect/mobile-registry
 ```
+
 {% endtab %}
 
 {% tab title="npm" %}
+
 ```bash
 npm install --save @walletconnect/utils @walletconnect/mobile-registry
 ```
+
 {% endtab %}
 {% endtabs %}
 
 The mobile-registry package will allow you to list the supported mobile linking wallets and provide you with logo, name, color and targetted deep links.
 
 We highly recommend that you use our provided qrcode-modal package to maintain a consistent UX across WalletConnect integrations however we modularized our packages to give the option on the ethos of decentralization.
-

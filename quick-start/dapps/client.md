@@ -27,15 +27,15 @@ const client = await WalletConnectClient.init({
 });
 ```
 
-2. Subscribe to connection proposal event for sharing URI
+2. Subscribe to pairing proposal event for sharing URI
 
 ```js
 import { CLIENT_EVENTS } from "@walletconnect/client";
-import { ConnectionTypes } from "@walletconnect/types";
+import { PairingTypes } from "@walletconnect/types";
 
 client.on(
-  CLIENT_EVENTS.connection.proposal,
-  async (proposal: ConnectionTypes.Proposal) => {
+  CLIENT_EVENTS.pairing.proposal,
+  async (proposal: PairingTypes.Proposal) => {
     // uri should be shared with the Wallet either through QR Code scanning or mobile deep linking
     const { uri } = proposal.signal.params;
   }

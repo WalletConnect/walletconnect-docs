@@ -17,8 +17,10 @@ export abstract class IClient extends IEvents {
   public abstract relay: IRelay;
   public abstract storage: IKeyValueStorage;
 
-  public abstract connection: IConnection;
+  public abstract pairing: IPairing;
   public abstract session: ISession;
+
+  public abstract context: string;
 
   constructor(opts?: ClientOptions) {
     super();
@@ -29,7 +31,7 @@ export abstract class IClient extends IEvents {
     params: ClientTypes.ConnectParams
   ): Promise<SessionTypes.Settled>;
   // for responder to receive a session proposal from a proposer
-  public abstract tether(params: ClientTypes.TetherParams): Promise<void>;
+  public abstract pair(params: ClientTypes.PairParams): Promise<void>;
 
   // for responder to approve a session proposal
   public abstract approve(
@@ -59,10 +61,10 @@ export declare namespace ClientTypes {
     metadata: SessionTypes.Metadata;
     permissions: SessionTypes.BasePermissions;
     relay?: RelayTypes.ProtocolOptions;
-    connection?: SignalTypes.ParamsConnection;
+    pairing?: SignalTypes.ParamsPairing;
   }
 
-  export interface TetherParams {
+  export interface PairParams {
     uri: string;
   }
 
