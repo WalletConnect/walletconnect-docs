@@ -52,7 +52,7 @@ client.on(
 );
 ```
 
-3. Establish pairing with shared URI from dapp
+3. Pair with shared URI from dapp
 
 ```js
 client.pair({ uri });

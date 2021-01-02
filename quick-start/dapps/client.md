@@ -65,7 +65,7 @@ const session = await client.connect({
 
 ## JSON-RPC Payloads
 
-Once the session has been succesfull then you can start making JSON-RPC requests to be approved and signed by the wallet
+Once the session has been successful then you can start making JSON-RPC requests to be approved and signed by the wallet
 
 ```js
 const result = await client.request({

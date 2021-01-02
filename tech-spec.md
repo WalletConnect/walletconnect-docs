@@ -14,9 +14,9 @@ WalletConnect Protocol provides secure remote signing communication between a bl
 
 ## Goals
 
-The goal of WalletConnect protocol is to provide an interoperable secure remote signing experience between two separate environments where public key authentication is required to interface with a blockchain. The goals of the WalletConnect protocol include:
+The goal of WalletConnect protocol is to provide an interoperable secure remote signing experience between two separate platforms where public key authentication is required to interface with a blockchain. The goals of the WalletConnect protocol include:
 
-- Reducing end-user steps for connecting two environments securely
+- Reducing end-user steps for connecting two platforms securely
 - Protect end-user activity across the relayer infrastructure
 - Allow any blockchain application connect to any blockchain wallet
 
@@ -36,7 +36,7 @@ In the next sections, we will describe the protocol requirements to implement a 
 
 ## Requirements
 
-The protocol was designed to serve primarily but not exclusively mobile blockchain wallets which are targeted as the main signing environment for an end-user to manage its private keys for authenticating blockchain interactions.
+The protocol was designed to serve primarily but not exclusively mobile blockchain wallets which are targeted as the main signing platform for an end-user to manage its private keys for authenticating blockchain interactions.
 
 Hence the following core components were used to ensure secure and low-latency communication between the application and the wallet:
 
@@ -65,8 +65,8 @@ Contrary to its predecessor, the WalletConnect 2.0 protocol becomes agnostic to 
 The Relay Protocol MUST follow a publish-subscribe pattern and which MUST have a JSON-RPC API interface that includes the following methods and corresponding behaviors with the relay network infrastructure:
 
 - info — status and information about network
-- connect — start pairing with network
-- disconnect — stop pairing with network
+- connect — start connection with network
+- disconnect — stop connection with network
 - publish — broadcast message with a topic to the network
 - subscribe — subscribe to messages with matching topic on the network
 - unsubscribe — unsubscribe to messages with matching topic on the network
