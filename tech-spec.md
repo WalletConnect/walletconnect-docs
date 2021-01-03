@@ -3,7 +3,7 @@ title: WalletConnect 2.0 Protocol
 description: Technical Specification for WalletConnect 2.0 Protocol
 author: Pedro Gomes <pedro@walletconnect.org>
 created: 2020-12-09
-updated: 2020-12-15
+updated: 2021-01-03
 ---
 
 # WalletConnect 2.0 Protocol
@@ -392,15 +392,15 @@ WalletConenct 2.0 clients will synchronize state and events for the out-of-band 
 
 ![outofband-sequence-sync](./.gitbook/assets/outofband-sequence-sync.png)
 
-### wc_pairingRespond
+### wc_pairingApprove
 
-This request is sent as response for a pairing proposal which is signalled externally using a URI shared between clients.
+This request is sent as response for a pairing proposal which is signaled externally using a URI shared between clients.
 
 ```typescript
-interface WCPairingRespondApprove {
+interface WCPairingApprove {
   id: 1;
   jsonrpc: "2.0";
-  method: "wc_pairingRespond";
+  method: "wc_pairingApprove";
   params: {
     topic: string;
     relay: RelayProtocolOptions;
@@ -408,18 +408,26 @@ interface WCPairingRespondApprove {
     expiry: number;
   };
 }
+```
 
-interface WCPairingRespondReject {
+**NOTE:** The response for this request will serve as the acknowledgement of the proposer's pairing settlement
+
+### wc_pairingReject
+
+This request is sent as response for a pairing proposal which is signaled externally using a URI shared between clients.
+
+```typescript
+interface WCPairingReject {
   id: 1;
   jsonrpc: "2.0";
-  method: "wc_pairingRespond";
+  method: "wc_pairingReject";
   params: {
     reason: string;
   };
 }
 ```
 
-**NOTE:** The response for this request will serve as the acknoledgement of the proposer's pairing settlement
+**NOTE:** The response for this request will serve as the acknowledgement of the proposer's pairing settlement
 
 ### wc_pairingUpdate
 
@@ -495,15 +503,15 @@ interface WCSessionPropose {
 }
 ```
 
-### wc_sessionRespond
+### wc_sessionApprove
 
-This request is sent as response for a session proposal which is received as pairing payload as wc_sessionPropose.
+This request is sent as response for a session proposal which is signaled externally using a URI shared between clients.
 
 ```typescript
-interface WCSessionRespondApproved {
+interface WCPairingApprove {
   id: 1;
   jsonrpc: "2.0";
-  method: "wc_sessionRespond";
+  method: "wc_sessionApprove";
   params: {
     topic: string;
     relay: RelayProtocolOptions;
@@ -512,18 +520,26 @@ interface WCSessionRespondApproved {
     state: SessionState;
   };
 }
+```
 
-interface WCSessionRespondRejected {
+**NOTE:** The response for this request will serve as the acknowledgement of the proposer's session settlement
+
+### wc_sessionReject
+
+This request is sent as response for a session proposal which is signaled externally using a URI shared between clients.
+
+```typescript
+interface WCPairingReject {
   id: 1;
   jsonrpc: "2.0";
-  method: "wc_sessionRespond";
+  method: "wc_sessionReject";
   params: {
     reason: string;
   };
 }
 ```
 
-**NOTE:** The response for this request will serve as the acknoledgement of the proposer's session settlement
+**NOTE:** The response for this request will serve as the acknowledgement of the proposer's session settlement
 
 ### wc_sessionUpdate
 
