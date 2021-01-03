@@ -222,7 +222,7 @@ interface PairingSettled {
 
 By now you should have noted that we have specified permissions but by default we only use a single method `wc_sessionPropose` allowed. This takes us to how pairing and session relate to each other.
 
-On the WalletConnect 1.0 protocol, a pairing was established per session which made bandwidth requirements for sessions unnecessarily high. Now with WalletConnect 2.0 protocol pairings are settled independently of the sessions. With a settled pairing being used as a secure channel, sessions can be initiated between two environments.
+On the WalletConnect 1.0 protocol, a pairing was established per session which made bandwidth requirements for sessions unnecessarily high. Now with WalletConnect 2.0 protocol pairings are settled independently of the sessions. With a settled pairing being used as a secure channel, sessions can be initiated between two platforms.
 
 Once two participants are paired, their communications are encrypted through the pairing. The participants can use the pairing topic to derive shared key to send detailed session proposal with specified permissions through the relay network.
 
@@ -423,7 +423,7 @@ interface WCPairingRespondReject {
 
 ### wc_pairingUpdate
 
-This request is used to update metadata of the pairing participant which is optionally provided to make it easier to identify the peer's environment and device.
+This request is used to update metadata of the pairing participant which is optionally provided to make it easier to identify the peer's platform and version.
 
 ```typescript
 interface WCPairingUpdate {
