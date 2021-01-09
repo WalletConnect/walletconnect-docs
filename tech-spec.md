@@ -3,7 +3,7 @@ title: WalletConnect 2.0 Protocol
 description: Technical Specification for WalletConnect 2.0 Protocol
 author: Pedro Gomes <pedro@walletconnect.org>
 created: 2020-12-09
-updated: 2021-01-03
+updated: 2021-01-09
 ---
 
 # WalletConnect 2.0 Protocol
@@ -17,12 +17,12 @@ WalletConnect Protocol provides secure remote signing communication between a bl
 The goal of WalletConnect protocol is to provide an interoperable secure remote signing experience between two separate platforms where public key authentication is required to interface with a blockchain. The goals of the WalletConnect protocol include:
 
 - Reducing end-user steps for connecting two platforms securely
-- Protect end-user activity across the relayer infrastructure
+- Protect end-user activity across the relay infrastructure
 - Allow any blockchain application connect to any blockchain wallet
 
 ## Architecture
 
-At a high level, WalletConnect serves a secure communication channel between two applications that run equivalent clients for WalletConnect which are connected to a relayer infrastructure communicated through a publish-subscribe pattern.
+At a high level, WalletConnect serves a secure communication channel between two applications that run equivalent clients for WalletConnect which are connected to a relay infrastructure communicated through a publish-subscribe pattern.
 
 ![walletconnect-protocol-simplified](./.gitbook/assets/walletconnect-protocol-simplified.png)
 
@@ -146,16 +146,18 @@ interface PairingParticipant {
   publicKey: string;
 }
 
+interface PairingPermissions {
+  jsonrpc: {
+    methods: string[];
+  };
+}
+
 interface PairingProposal {
   topic: string;
   relay: RelayProtocolOptions;
   proposer: PairingParticipant;
   signal: PairingSignal;
-  permissions: {
-    jsonrpc: {
-      methods: string[];
-    };
-  };
+  permissions: PairingPermissions;
   ttl: number;
 }
 ```
@@ -211,11 +213,7 @@ interface PairingSettled {
   sharedKey: string;
   self: PairingParticipant;
   peer: PairingParticipant;
-  permissions: {
-    jsonrpc: {
-      methods: string[];
-    };
-  };
+  permissions: PairingPermissions;
   expiry: number;
 }
 ```
@@ -298,14 +296,16 @@ The session response will be successful when the user approves the session propo
 Given that these conditions are met then the wallet will expose CAIP-10 blockchain accounts corresponding the requested blockchains and will derive a shared key to be used after session settlement.
 
 ```typescript
+interface SessionState {
+  accountIds: string[];
+}
+
 interface SessionSuccessResponse {
   topic: string;
   relay: RelayProtocolOptions;
   responder: SessionParticipant;
   expiry: number;
-  state: {
-    accountIds: string[];
-  };
+  state: SessionState;
 }
 ```
 
@@ -324,10 +324,6 @@ interface SessionFailureResponse {
 After response, the proposer should be able to settle its own sequence with the details shared. The responder public key is used for deriving the shared key and the derived topic should match the response topic. Finally it includes the expiry calculated by the responder and the session is considered settled by both clients. The settled session is structured as follows on both clients:
 
 ```typescript
-interface SessionState {
-  accountIds: string[];
-}
-
 interface SessionSettled {
   topic: string;
   relay: RelayProtocolOptions;
