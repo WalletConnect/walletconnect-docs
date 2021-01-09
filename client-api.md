@@ -14,7 +14,7 @@ export abstract class IClient extends IEvents {
 
   public abstract logger: Logger;
 
-  public abstract relay: IRelay;
+  public abstract relayer: IRelayer;
   public abstract storage: IKeyValueStorage;
 
   public abstract pairing: IPairing;
@@ -60,7 +60,7 @@ export declare namespace ClientTypes {
   export interface ConnectParams {
     metadata: SessionTypes.Metadata;
     permissions: SessionTypes.BasePermissions;
-    relay?: RelayTypes.ProtocolOptions;
+    relay?: RelayerTypes.ProtocolOptions;
     pairing?: SignalTypes.ParamsPairing;
   }
 
@@ -80,20 +80,13 @@ export declare namespace ClientTypes {
 
   export type NotifyParams = SessionTypes.NotifyParams;
 
-  export interface RequestParams {
-    topic: string;
-    request: JsonRpcRequest;
-    chainId?: string;
-  }
+  export type RequestParams = SessionTypes.RequestParams;
 
   export interface RespondParams {
     topic: string;
     response: JsonRpcResponse;
   }
 
-  export interface DisconnectParams {
-    topic: string;
-    reason: string;
-  }
+  export type DisconnectParams = SessionTypes.DeleteParams;
 }
 ```
