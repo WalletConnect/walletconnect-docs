@@ -98,7 +98,7 @@
 ### Test Hello World
 
 ```bash
-  GET https://relay.walletconnect.org/hello
+  GET https://staging.walletconnect.org/hello
 
   Response:
   Status: 200
@@ -109,7 +109,7 @@
 ### Subscribe Push Notification Webhook
 
 ```bash
-  POST https://relay.walletconnect.org/subscribe
+  POST https://staging.walletconnect.org/subscribe
   Content-Type: application/json
   Body:
   {
