@@ -258,7 +258,7 @@ interface SessionParticipant {
 
 interface SessionPermissions {
   blockchain: {
-    chainIds: string[];
+    chains: string[];
   };
   jsonrpc: {
     methods: string[];
@@ -283,7 +283,7 @@ The metadata here is similar to v1.0 protocol and is displayed to the user to id
 
 #### Blockchain Permissions
 
-The blockchain permissions together with the JSON-RPC methods that are described in parallel are complaint with CAIP-25 provider handshake parameters used to dictate the rules that will be used for the session. ChainIds are CAIP-2 blockchain identifiers that the application is requesting exposure from the wallet and the JSON-RPC methods are the set of methods the application requires from the wallet to fully support in order to establish a successful session sequence.
+The blockchain permissions together with the JSON-RPC methods that are described in parallel are complaint with CAIP-25 provider handshake parameters used to dictate the rules that will be used for the session. chains are CAIP-2 blockchain identifiers that the application is requesting exposure from the wallet and the JSON-RPC methods are the set of methods the application requires from the wallet to fully support in order to establish a successful session sequence.
 
 ### Session Response
 
@@ -297,7 +297,7 @@ Given that these conditions are met then the wallet will expose CAIP-10 blockcha
 
 ```typescript
 interface SessionState {
-  accountIds: string[];
+  accounts: string[];
 }
 
 interface SessionSuccessResponse {
@@ -549,7 +549,7 @@ interface WCPairingUpdate {
   params: {
     update: {
       state: {
-        accountIds: string[];
+        accounts: string[];
       };
     };
   };

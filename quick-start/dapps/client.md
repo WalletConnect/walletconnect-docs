@@ -54,7 +54,7 @@ const session = await client.connect({
   },
   permissions: {
     blockchain: {
-      chainIds: ["eip155:1"],
+      chains: ["eip155:1"],
     },
     jsonrpc: {
       methods: ["eth_sendTransaction", "personal_sign", "eth_signTypedData"],
