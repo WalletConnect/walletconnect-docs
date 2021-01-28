@@ -49,8 +49,8 @@ Finally the following standards were used to ensure protocol agnosticism to any 
 
 - CAIP-2 blockchain identifiers
 - CAIP-10 account identifiers
-- CAIP-24 provider request
 - CAIP-25 provider handshake
+- CAIP-27 provider request
 
 ## Backwards Compatibility
 
@@ -342,15 +342,18 @@ At this stage, we can consider two applications fully connected. A session has s
 
 Now that WalletConnect 2.0 protocol is agnostic to the blockchain interface, it was important to dictate the rules upfront before session settlement to ensure a consistent end-user experience across multiple blockchain applications being interoperable with multiple blockchain wallets.
 
-Therefore we will add support for CAIP-24 provider requests which will allow JSON-RPC requests to be accompanied with chainId target, this is translated as JSON-RPC request in WalletConnect between the two clients as follows:
+Therefore we will add support for CAIP-27 provider requests which will allow JSON-RPC requests to be accompanied by chainId target, this is translated as JSON-RPC request in WalletConnect between the two clients as follows:
 
 ```typescript
-interface CAIP24Request extends JsonRpcRequest {
+interface CAIP27Request {
   id: number;
   jsonrpc: string;
-  method: "wc_sessionPayload";
+  method: "caip_request";
   params: {
-    request: JsonRpcRequest;
+    request: {
+      method: string;
+      params: any;
+    };
     chainId?: string;
   };
 }
@@ -474,7 +477,10 @@ interface WCPairingPayload {
   jsonrpc: "2.0";
   method: "wc_pairingPayload";
   params: {
-    payload: JsonRpcRequest;
+ 		request: {
+      method: string;
+      params: any;
+    }
   };
 }
 ```
@@ -504,7 +510,7 @@ interface WCSessionPropose {
 This request is sent as response for a session proposal which is signaled externally using a URI shared between clients.
 
 ```typescript
-interface WCPairingApprove {
+interface WCSessionApprove {
   id: 1;
   jsonrpc: "2.0";
   method: "wc_sessionApprove";
@@ -525,7 +531,7 @@ interface WCPairingApprove {
 This request is sent as response for a session proposal which is signaled externally using a URI shared between clients.
 
 ```typescript
-interface WCPairingReject {
+interface WCSessionReject {
   id: 1;
   jsonrpc: "2.0";
   method: "wc_sessionReject";
@@ -542,7 +548,7 @@ interface WCPairingReject {
 This request is used to update state of the session participant which is optionally provided by the responder extra accounts during the session lifetime;
 
 ```typescript
-interface WCPairingUpdate {
+interface WCSessionUpdate {
   id: 1;
   jsonrpc: "2.0";
   method: "wc_sessionUpdate";
@@ -561,7 +567,7 @@ interface WCPairingUpdate {
 This request is used to delete the session and notify the peer that it won't be receiving anymore payloads being relayed with this topic and specifies a reason for deleting before expire.
 
 ```typescript
-interface WCPairingDelete {
+interface WCSessionDelete {
   id: 1;
   jsonrpc: "2.0";
   method: "wc_sessionDelete";
@@ -576,12 +582,16 @@ interface WCPairingDelete {
 This request is used to relay payloads that match the list of methods agreed upon session settlement. Any requests sent with unauthorized methods will be immediately rejected by the client.
 
 ```typescript
-interface WCPairingPayload {
+interface WCSessionPayload {
   id: 1;
   jsonrpc: "2.0";
   method: "wc_sessionPayload";
   params: {
-    payload: JsonRpcRequest;
+    request: {
+      method: string;
+      params: any;
+    };
+    chainId?: string;
   };
 }
 ```

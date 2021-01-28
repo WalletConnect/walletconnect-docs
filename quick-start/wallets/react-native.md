@@ -20,10 +20,14 @@ npm install --save @walletconnect/client@experimental
 1. Initiate your WalletConnect client with the relay server
 
 ```js
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import WalletConnectClient from "@walletconnect/client";
 
 const client = await WalletConnectClient.init({
   relayProvider: "wss://staging.walletconnect.org",
+  storageOptions: {
+    asyncStorage: AsyncStorage,
+  },
 });
 ```
 
