@@ -137,8 +137,8 @@ connector
 const message = "My email is john@doe.com - 1537836206101"
 
 const msgParams = [
-  convertUtf8ToHex(message)                                                 // Required
-  "0xbc28ea04101f03ea7a94c1379bc3ab32e65e62d3",                             // Required
+  convertUtf8ToHex(message),                                                 // Required
+  "0xbc28ea04101f03ea7a94c1379bc3ab32e65e62d3"                               // Required
 ];
 
 
