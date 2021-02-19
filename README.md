@@ -24,5 +24,4 @@ Share your experience, contribute or ask questions with the WalletConnect Commun
 
 - Github: [https://github.walletconnect.org](https://github.walletconnect.org)
 - Discord: [https://discord.walletconnect.org](https://discord.walletconnect.org)
-- Telegram: [https://telegram.walletconnect.org](https://telegram.walletconnect.org)
 - Twitter: [https://twitter.walletconnect.org](https://twitter.walletconnect.org)
