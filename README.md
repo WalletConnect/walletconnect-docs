@@ -28,9 +28,6 @@ Additionally you can also consult the API references for [Client](client-api.md)
 
 Share your experience, contribute or ask questions with the WalletConnect Community
 
-* Github: [https://github.walletconnect.org](https://github.walletconnect.org)
-* Forum: [https://discuss.walletconnect.org](https://discuss.walletconnect.org)
-* Discord: [https://discord.walletconnect.org](https://discord.walletconnect.org)
-* Telegram: [https://telegram.walletconnect.org](https://telegram.walletconnect.org)
-* Twitter: [https://twitter.walletconnect.org](https://twitter.walletconnect.org)
-
+- Github: [https://github.walletconnect.org](https://github.walletconnect.org)
+- Discord: [https://discord.walletconnect.org](https://discord.walletconnect.org)
+- Twitter: [https://twitter.walletconnect.org](https://twitter.walletconnect.org)
