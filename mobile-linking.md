@@ -54,20 +54,9 @@ wc:00e46b69-d0cc-4b3e-b6a2-cee442f97188@1
 
 ### For iOS
 
-iOS has some more caveats to the integration but we ensure to make it as straightforward as possible. Since its operating system is not designed to handle multiple applications subscribing to the same deep linking schema, we've designed the QRCode Modal to list supporting wallets on our [open-source registry](https://github.com/WalletConnect/walletconnect-monorepo/blob/next/packages/helpers/mobile-registry/registry.json) and target specific deep links or universal links for each wallet.
+iOS has some more caveats to the integration but we ensure to make it as straightforward as possible. Since its operating system is not designed to handle multiple applications subscribing to the same deep linking schema, we've designed the QRCode Modal to list supporting wallets on our [open-source registry](https://github.com/WalletConnect/walletconnect-registry/) and target specific deep links or universal links for each wallet.
 
-To add your own wallet to the registry, you must submit a pull request to our monorepo on [Github](https://github.com/walletconnect/walletconnect-monorepo).
-
-```javascript
-{
-  "name": "Example Wallet",
-  "color": "rgb(255, 255, 255)",
-  "logo": "https://raw.githubusercontent.com/WalletConnect/walletconnect-monorepo/next/packages/helpers/mobile-registry/logos/wallet-example.png",
-  "universalLink": "https://example.wallet",
-  "deepLink": "examplewallet:",
-  "chromeIntent": ""
-}
-```
+To add your own wallet to the registry, you must submit an Issue on our registry on [Github](https://github.com/walletconnect/walletconnect-registry).
 
 We recommend that universal links are used instead of deep links for iOS since they provide smoother UX with less prompts. When a dapp triggers a mobile connection on iOS, you should expect the following links
 
@@ -95,35 +84,20 @@ If you are building a Dapp you will be able to support this pattern by simply in
 
 {% tabs %}
 {% tab title="yarn" %}
+
 ```bash
 yarn add @walletconnect/qrcode-modal
 ```
+
 {% endtab %}
 
 {% tab title="npm" %}
+
 ```bash
 npm install --save @walletconnect/qrcode-modal
 ```
+
 {% endtab %}
 {% endtabs %}
 
-If you would like to build your own UI for mobile linking, we provide the same assets used in our qrcode-modal package.
-
-{% tabs %}
-{% tab title="yarn" %}
-```bash
-yarn add @walletconnect/utils @walletconnect/mobile-registry
-```
-{% endtab %}
-
-{% tab title="npm" %}
-```bash
-npm install --save @walletconnect/utils @walletconnect/mobile-registry
-```
-{% endtab %}
-{% endtabs %}
-
-The mobile-registry package will allow you to list the supported mobile linking wallets and provide you with logo, name, color and targetted deep links.
-
-We highly recommend that you use our provided qrcode-modal package to maintain a consistent UX across WalletConnect integrations however we modularized our packages to give the option on the ethos of decentralization.
-
+If you would like to build your own UI for mobile linking, you can use our registry [API](https://github.com/walletconnect/walletconnect-registry) to get app entries and logos however we highly recommend that you use our provided qrcode-modal package to maintain a consistent UX across WalletConnect integrations however we modularized our packages to give the option on the ethos of decentralization.
