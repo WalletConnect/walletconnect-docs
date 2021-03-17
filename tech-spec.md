@@ -438,14 +438,12 @@ interface WCPairingUpdate {
   jsonrpc: "2.0";
   method: "wc_pairingUpdate";
   params: {
-    update: {
-      peer: {
-        metadata: {
-          type: string;
-          platform: string;
-          version: string;
-          os: string;
-        };
+    peer: {
+      metadata: {
+        type: string;
+        platform: string;
+        version: string;
+        os: string;
       };
     };
   };
@@ -477,10 +475,10 @@ interface WCPairingPayload {
   jsonrpc: "2.0";
   method: "wc_pairingPayload";
   params: {
- 		request: {
+    request: {
       method: string;
       params: any;
-    }
+    };
   };
 }
 ```
@@ -553,10 +551,8 @@ interface WCSessionUpdate {
   jsonrpc: "2.0";
   method: "wc_sessionUpdate";
   params: {
-    update: {
-      state: {
-        accounts: string[];
-      };
+    state: {
+      accounts: string[];
     };
   };
 }
