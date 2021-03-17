@@ -24,7 +24,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import WalletConnectClient from "@walletconnect/client";
 
 const client = await WalletConnectClient.init({
-  relayProvider: "wss://staging.walletconnect.org",
+  relayProvider: "wss://relay.walletconnect.org",
   storageOptions: {
     asyncStorage: AsyncStorage,
   },
