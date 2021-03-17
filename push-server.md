@@ -3,7 +3,7 @@
 ## Register Push Notification Subscription
 
 ```bash
-  POST https://push.walletconnect.org/new
+  POST <YOUR_PUSH_SERVER_URL>/new
   Content-Type: application/json
   Body:
   {
@@ -27,7 +27,7 @@
 ## Trigger Push Notification \(Webhook\)
 
 ```bash
-  POST https://push.walletconnect.org/push
+  POST <YOUR_PUSH_SERVER_URL>/push
   Content-Type: application/json
   Body:
   {
@@ -42,4 +42,3 @@
       "successs": true
   }
 ```
-

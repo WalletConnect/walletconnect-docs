@@ -26,6 +26,7 @@ Polyfill NodeJS modules for React-Native
 yarn add rn-nodeify
 rn-nodeify --install --hack
 ```
+
 {% endtab %}
 
 {% tab title="npm" %}
@@ -41,6 +42,7 @@ Polyfill NodeJS modules for React-Native
 npm install --save rn-nodeify
 rn-nodeify --install --hack
 ```
+
 {% endtab %}
 {% endtabs %}
 
@@ -64,7 +66,7 @@ const connector = new WalletConnect(
   },
   {
     // Optional
-    url: "https://push.walletconnect.org",
+    url: "<YOUR_PUSH_SERVER_URL>",
     type: "fcm",
     token: token,
     peerMeta: true,
@@ -169,4 +171,3 @@ connector.rejectRequest({
   }
 });
 ```
-
