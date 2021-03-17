@@ -97,12 +97,12 @@ import { SessionTypes } from "@walletconnect/types";
 import { JsonRpcResponse } from "@json-rpc-tools/utils";
 
 client.on(
-  CLIENT_EVENTS.session.payload,
-  async (payloadEvent: SessionTypes.PayloadEvent) => {
+  CLIENT_EVENTS.session.request,
+  async (requestEvent: SessionTypes.RequestEvent) => {
     // WalletConnect client can track multiple sessions
     // assert the topic from which application requested
-    const { topic, payload } = payloadEvent;
-    const session = await client.session.get(payloadEvent.topic);
+    const { topic, request } = requestEvent;
+    const session = await client.session.get(requestEvent.topic);
     // now you can display to the user for approval using the stored metadata
     const { metadata } = session.peer;
     // after user has either approved or not the request it should be formatted
@@ -112,7 +112,7 @@ client.on(
       ? {
           topic,
           response: {
-            id: payload.id,
+            id: request.id,
             jsonrpc: "2.0",
             result,
           },
@@ -120,7 +120,7 @@ client.on(
       : {
           topic,
           response: {
-            id: payload.id,
+            id: request.id,
             jsonrpc: "2.0",
             error: {
               code: -32000,
