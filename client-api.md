@@ -6,6 +6,7 @@ export interface ClientOptions {
   storage?: IKeyValueStorage;
   relayProvider?: string | IJsonRpcProvider;
   overrideContext?: string;
+  storageOptions?: KeyValueStorageOptions;
 }
 
 export abstract class IClient extends IEvents {
@@ -31,7 +32,7 @@ export abstract class IClient extends IEvents {
     params: ClientTypes.ConnectParams
   ): Promise<SessionTypes.Settled>;
   // for responder to receive a session proposal from a proposer
-  public abstract pair(params: ClientTypes.PairParams): Promise<void>;
+  public abstract pair(params: ClientTypes.PairParams): Promise<string>;
 
   // for responder to approve a session proposal
   public abstract approve(
@@ -39,17 +40,18 @@ export abstract class IClient extends IEvents {
   ): Promise<SessionTypes.Settled>;
   // for responder to reject a session proposal
   public abstract reject(params: ClientTypes.RejectParams): Promise<void>;
-
+  // for responder to upgrade session permissions
+  public abstract upgrade(params: ClientTypes.UpgradeParams): Promise<void>;
   // for responder to update session state
   public abstract update(params: ClientTypes.UpdateParams): Promise<void>;
-  // for either to send notifications
-  public abstract notify(params: ClientTypes.NotifyParams): Promise<void>;
 
   // for proposer to request JSON-RPC
   public abstract request(params: ClientTypes.RequestParams): Promise<any>;
   // for responder to respond JSON-RPC
   public abstract respond(params: ClientTypes.RespondParams): Promise<void>;
 
+  // for either to send notifications
+  public abstract notify(params: ClientTypes.NotifyParams): Promise<void>;
   // for either to disconnect a session
   public abstract disconnect(
     params: ClientTypes.DisconnectParams
@@ -74,11 +76,12 @@ export declare namespace ClientTypes {
   }
   export interface RejectParams {
     proposal: SessionTypes.Proposal;
+    reason?: string;
   }
 
-  export type UpdateParams = SessionTypes.UpdateParams;
+  export type UpgradeParams = SessionTypes.UpgradeParams;
 
-  export type NotifyParams = SessionTypes.NotifyParams;
+  export type UpdateParams = SessionTypes.UpdateParams;
 
   export type RequestParams = SessionTypes.RequestParams;
 
@@ -86,6 +89,8 @@ export declare namespace ClientTypes {
     topic: string;
     response: JsonRpcResponse;
   }
+
+  export type NotifyParams = SessionTypes.NotifyParams;
 
   export type DisconnectParams = SessionTypes.DeleteParams;
 }
