@@ -24,7 +24,14 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import WalletConnectClient from "@walletconnect/client";
 
 const client = await WalletConnectClient.init({
+  controller: true,
   relayProvider: "wss://relay.walletconnect.org",
+  metadata: {
+    name: "Test Wallet",
+    description: "Test Wallet",
+    url: "#",
+    icons: ["https://walletconnect.org/walletconnect-logo.png"],
+  },
   storageOptions: {
     asyncStorage: AsyncStorage,
   },
@@ -69,12 +76,6 @@ function handleSessionUserApproval(approved: boolean, proposal: SessionTypes.Pro
   if (userApproved) {
     // if user approved then include response with accounts matching the chains and wallet metadata
     const response: SessionTypes.Response = {
-      metadata: {
-        name: "Test Wallet",
-        description: "Test Wallet",
-        url: "#",
-        icons: ["https://walletconnect.org/walletconnect-logo.png"],
-      },
       state: {
         accounts: ["0x1d85568eEAbad713fBB5293B45ea066e552A90De@eip155:1"],
       },

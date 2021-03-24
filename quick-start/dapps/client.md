@@ -24,6 +24,12 @@ import WalletConnectClient from "@walletconnect/client";
 
 const client = await WalletConnectClient.init({
   relayProvider: "wss://relay.walletconnect.org",
+  metadata: {
+    name: "Example Dapp",
+    description: "Example Dapp",
+    url: "#",
+    icons: ["https://walletconnect.org/walletconnect-logo.png"],
+  },
 });
 ```
 
@@ -46,12 +52,6 @@ client.on(
 
 ```js
 const session = await client.connect({
-  metadata: {
-    name: "Example Dapp",
-    description: "Example Dapp",
-    url: "#",
-    icons: ["https://walletconnect.org/walletconnect-logo.png"],
-  },
   permissions: {
     blockchain: {
       chains: ["eip155:1"],

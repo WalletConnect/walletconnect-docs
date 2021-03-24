@@ -9,7 +9,7 @@
 {
   "id": 1,
   "jsonrpc": "2.0",
-  "method": "bridge_subscribe",
+  "method": "waku_subscribe",
   "params": {
     "topic": "<TOPIC_ID>",
     "ttl": 604800
@@ -31,7 +31,7 @@
 {
   "id": 2,
   "jsonrpc": "2.0",
-  "method": "bridge_publish",
+  "method": "waku_publish",
   "params": {
     "topic": "<TOPIC_ID>",
     "message": "<MESSAGE_PAYLOAD>",
@@ -54,7 +54,7 @@
 {
   "id": 3,
   "jsonrpc": "2.0",
-  "method": "bridge_subscription",
+  "method": "waku_subscription",
   "params": {
     "id": "<SUBSCRIPTION_ID>",
     "data": {
@@ -79,7 +79,7 @@
 {
   "id": 4,
   "jsonrpc": "2.0",
-  "method": "bridge_unsubscribe",
+  "method": "waku_unsubscribe",
   "params": {
     "id": "<SUBSCRIPTION_ID>",
   }

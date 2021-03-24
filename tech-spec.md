@@ -3,7 +3,7 @@ title: WalletConnect 2.0 Protocol
 description: Technical Specification for WalletConnect 2.0 Protocol
 author: Pedro Gomes <pedro@walletconnect.org>
 created: 2020-12-09
-updated: 2021-01-09
+updated: 2021-03-24
 ---
 
 # WalletConnect 2.0 Protocol
@@ -72,7 +72,7 @@ The Relay Protocol MUST follow a publish-subscribe pattern and which MUST have a
 - unsubscribe — unsubscribe to messages with matching topic on the network
 - subscription — incoming message with matching topic from the network
 
-Different protocols MUST have unique method prefixing to prevent conflicts when handling network interactions from the JSON-RPC API interface. For example, the Bridge server infrastructure would include methods such as `bridge_info`, `bridge_subscribe` and `bridge_publish`.
+Different protocols MUST have unique method prefixing to prevent conflicts when handling network interactions from the JSON-RPC API interface. For example, the Bridge server infrastructure would include methods such as `waku_info`, `waku_subscribe` and `waku_publish`.
 
 Some relay protocols may require some initialization parameters which need to be shared with another WalletConnect clients with out-of-band communication. For example, Bridge server infrastructure would include the url of the server as parameter:
 
@@ -83,10 +83,8 @@ interface RelayProtocolOptions {
 }
 
 const protocolOptions: RelayProtocolOptions = {
-  name: "bridge",
-  params: {
-    url: "wss://bridge.walletconnect.org",
-  },
+  name: "waku",
+  params: {},
 };
 ```
 
@@ -126,6 +124,7 @@ interface UriParameters {
   version: number;
   topic: string;
   publicKey: string;
+  controller: boolean;
   relay: RelayProtocolOptions;
 }
 
@@ -142,11 +141,12 @@ interface PairingSignal {
 When the responder receives this URI it will be able to construct the pairing sequence proposal.
 
 ```typescript
-interface PairingParticipant {
+interface PairingProposer {
   publicKey: string;
+  controller: boolean;
 }
 
-interface PairingPermissions {
+interface PairingProposedPermissions {
   jsonrpc: {
     methods: string[];
   };
@@ -155,9 +155,9 @@ interface PairingPermissions {
 interface PairingProposal {
   topic: string;
   relay: RelayProtocolOptions;
-  proposer: PairingParticipant;
+  proposer: PairingProposer;
   signal: PairingSignal;
-  permissions: PairingPermissions;
+  permissions: PairingProposedPermissions;
   ttl: number;
 }
 ```
@@ -180,11 +180,27 @@ There are two possible outcomes for the response for a pairing proposal: success
 If the pairing response is successful, then the responder must generate an X25519 key pair as well and derive the shared key for encrypting payloads once settled. Additionally the topic is generated as SHA256 hash of the derived shared key, this way the next topic is only known to both parties. Therefore the successful outcome response should follow as:
 
 ```typescript
+interface AppMetadata {
+  name: string;
+  description: string;
+  url: string;
+  icons: string[];
+}
+
+interface PairingState {
+  metadata?: AppMetadata;
+}
+
+interface PairingParticipant {
+  publicKey: string;
+}
+
 interface PairingSuccessResponse {
   topic: string;
   relay: RelayProtocolOptions;
   responder: PairingParticipant;
   expiry: number;
+  state: PairingState;
 }
 ```
 
@@ -207,6 +223,12 @@ interface PairingFailureResponse {
 After response, the proposer should be able to settle its own sequence with the details shared. The responder public key is used for deriving the shared key and the derived topic should match the response topic. Finally it includes the expiry calculated by the responder and the pairing is considered settled by both clients. The settled pairing is structured as follows on both clients:
 
 ```typescript
+interface PairingPermissions extends PairingProposedPermissions {
+  controller: {
+    publicKey: string;
+  }
+}
+
 interface PairingSettled {
   topic: string;
   relay: RelayProtocolOptions;
@@ -215,6 +237,7 @@ interface PairingSettled {
   peer: PairingParticipant;
   permissions: PairingPermissions;
   expiry: number;
+  state: PairingState;
 }
 ```
 
@@ -244,33 +267,37 @@ interface SessionSignal {
 The proposal will be listened to as part of the params of the `wc_sessionPropose` relayed across the pairing settled and it will be structured as follows:
 
 ```typescript
-interface SessionMetadata {
+interface AppMetadata {
   name: string;
   description: string;
   url: string;
   icons: string[];
 }
 
-interface SessionParticipant {
+interface SessionProposer {
   publicKey: string;
-  metadata: SessionMetadata;
+  controller: boolean;
+  metadata: AppMetadata;
 }
 
-interface SessionPermissions {
+interface SessionProposedPermissions {
   blockchain: {
     chains: string[];
   };
   jsonrpc: {
     methods: string[];
   };
+  notifications: {
+    types: string[];
+  }
 }
 
 interface SessionProposal {
   topic: string;
   relay: RelayProtocolOptions;
-  proposer: SessionParticipant;
+  proposer: SessionProposer;
   signal: SessionSignal;
-  permissions: SessionPermissions;
+  permissions: SessionProposedPermissions;
   ttl: number;
 }
 ```
@@ -300,6 +327,11 @@ interface SessionState {
   accounts: string[];
 }
 
+interface SessionParticipant {
+  publicKey: string;
+  metadata: AppMetadata;
+}
+
 interface SessionSuccessResponse {
   topic: string;
   relay: RelayProtocolOptions;
@@ -324,6 +356,12 @@ interface SessionFailureResponse {
 After response, the proposer should be able to settle its own sequence with the details shared. The responder public key is used for deriving the shared key and the derived topic should match the response topic. Finally it includes the expiry calculated by the responder and the session is considered settled by both clients. The settled session is structured as follows on both clients:
 
 ```typescript
+interface SessionPermissions extends SessionProposedPermissions {
+  controller: {
+    publicKey: string;
+  }
+}
+
 interface SessionSettled {
   topic: string;
   relay: RelayProtocolOptions;
@@ -405,6 +443,7 @@ interface WCPairingApprove {
     relay: RelayProtocolOptions;
     responder: PairingParticipant;
     expiry: number;
+    state: PairingState;
   };
 }
 ```
@@ -430,7 +469,7 @@ interface WCPairingReject {
 
 ### wc_pairingUpdate
 
-This request is used to update metadata of the pairing participant which is optionally provided to make it easier to identify the peer's platform and version.
+This request is used to update state of the pairing participant which is optionally provided by the controller to share app metadata during the pairing lifetime.
 
 ```typescript
 interface WCPairingUpdate {
@@ -438,14 +477,22 @@ interface WCPairingUpdate {
   jsonrpc: "2.0";
   method: "wc_pairingUpdate";
   params: {
-    peer: {
-      metadata: {
-        type: string;
-        platform: string;
-        version: string;
-        os: string;
-      };
-    };
+    state: Partial<PairingState>;
+  };
+}
+```
+
+### wc_pairingUpgrade
+
+This request is used to upgrade permissions of the pairing during the its lifetime provided by the controller.
+
+```typescript
+interface WCPairingUpgrade {
+  id: 1;
+  jsonrpc: "2.0";
+  method: "wc_pairingUpgrade";
+  params: {
+    permissions: Partial<PairingPermissions>;
   };
 }
 ```
@@ -551,9 +598,22 @@ interface WCSessionUpdate {
   jsonrpc: "2.0";
   method: "wc_sessionUpdate";
   params: {
-    state: {
-      accounts: string[];
-    };
+    state: Partial<SessionState>
+  };
+}
+```
+
+### wc_sessionUpgrade
+
+This request is used to upgrade permissions of the session during the its lifetime provided by the controller.
+
+```typescript
+interface WCSessionUpgrade {
+  id: 1;
+  jsonrpc: "2.0";
+  method: "wc_sessionUpgrade";
+  params: {
+    permissions: Partial<SessionPermmissions>;
   };
 }
 ```
