@@ -5,6 +5,7 @@
   - [Dapps](quick-start/dapps/README.md)
     - [Standalone Client](quick-start/dapps/client.md)
     - [Web3 Provider](quick-start/dapps/web3-provider.md)
+    - [React-Native](quick-start/dapps/react-native.md)
   - [Wallets](quick-start/wallets/README.md)
     - [React-Native Client](quick-start/wallets/react-native.md)
     - [Swift Client \(iOS\)](quick-start/wallets/swift.md)
