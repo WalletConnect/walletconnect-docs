@@ -226,7 +226,7 @@ After response, the proposer should be able to settle its own sequence with the 
 interface PairingPermissions extends PairingProposedPermissions {
   controller: {
     publicKey: string;
-  }
+  };
 }
 
 interface PairingSettled {
@@ -289,7 +289,7 @@ interface SessionProposedPermissions {
   };
   notifications: {
     types: string[];
-  }
+  };
 }
 
 interface SessionProposal {
@@ -359,7 +359,7 @@ After response, the proposer should be able to settle its own sequence with the 
 interface SessionPermissions extends SessionProposedPermissions {
   controller: {
     publicKey: string;
-  }
+  };
 }
 
 interface SessionSettled {
@@ -402,6 +402,8 @@ This allows a blockchain application to be connected to a blockchain wallet on m
 ## Session Management
 
 Contrary to its predecessor, WalletConnect 2.0 protocol is opinionated about session management on two fronts: lifecycles and duration.
+
+You can read more about how to manage it in your application under [session management](session-management.md)
 
 ### Lifecycles
 
@@ -598,7 +600,7 @@ interface WCSessionUpdate {
   jsonrpc: "2.0";
   method: "wc_sessionUpdate";
   params: {
-    state: Partial<SessionState>
+    state: Partial<SessionState>;
   };
 }
 ```
