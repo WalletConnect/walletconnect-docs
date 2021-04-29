@@ -8,7 +8,7 @@
   Response:
   Status: 200
   Content-Type: text/plain; charset=utf-8
-  Body: Hello World, this is WalletConnect v1.x.x
+  Body: Hello World, this is WalletConnect v1.0
 ```
 
 ## Get Bridge Server Info
@@ -23,7 +23,7 @@
   {
     "name": "WalletConnect Bridge Server",
     "repository": "walletconnect-bridge",
-    "version": "1.0.0-beta"
+    "version": "1.0"
   }
 ```
 
@@ -46,4 +46,3 @@
     "success": true
   }
 ```
-

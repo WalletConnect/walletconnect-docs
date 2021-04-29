@@ -234,7 +234,7 @@ const typedData = {
   primaryType: "Mail",
   domain: {
     name: "Example Dapp",
-    version: "1.0.0-beta",
+    version: "1.0",
     chainId: 1,
     verifyingContract: "0x0000000000000000000000000000000000000000",
   },

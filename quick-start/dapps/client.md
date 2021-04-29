@@ -14,15 +14,19 @@ You can use the **Test Wallet** to test your integration at [test.walletconnect.
 
 {% tabs %}
 {% tab title="yarn" %}
+
 ```bash
 yarn add @walletconnect/client @walletconnect/qrcode-modal
 ```
+
 {% endtab %}
 
 {% tab title="npm" %}
+
 ```bash
 npm install --save @walletconnect/client @walletconnect/qrcode-modal
 ```
+
 {% endtab %}
 {% endtabs %}
 
@@ -76,7 +80,7 @@ connector.on("disconnect", (error, payload) => {
 });
 ```
 
-### Send Transaction \(eth\_sendTransaction\)
+### Send Transaction \(eth_sendTransaction\)
 
 ```javascript
 // Draft transaction
@@ -103,7 +107,7 @@ connector
   });
 ```
 
-### Sign Transaction \(eth\_signTransaction\)
+### Sign Transaction \(eth_signTransaction\)
 
 ```javascript
 // Draft transaction
@@ -130,32 +134,31 @@ connector
   });
 ```
 
-### Sign Personal Message \(personal\_sign\)
+### Sign Personal Message \(personal_sign\)
 
 ```javascript
 // Draft Message Parameters
-const message = "My email is john@doe.com - 1537836206101"
+const message = "My email is john@doe.com - 1537836206101";
 
 const msgParams = [
-  convertUtf8ToHex(message),                                                 // Required
-  "0xbc28ea04101f03ea7a94c1379bc3ab32e65e62d3"                               // Required
+  convertUtf8ToHex(message), // Required
+  "0xbc28ea04101f03ea7a94c1379bc3ab32e65e62d3", // Required
 ];
-
 
 // Sign personal message
 connector
   .signPersonalMessage(msgParams)
   .then((result) => {
     // Returns signature.
-    console.log(result)
+    console.log(result);
   })
-  .catch(error => {
+  .catch((error) => {
     // Error returned when rejected
     console.error(error);
-  })
+  });
 ```
 
-### Sign Message \(eth\_sign\)
+### Sign Message \(eth_sign\)
 
 ```javascript
 // Draft Message Parameters
@@ -180,7 +183,7 @@ connector
   })
 ```
 
-### Sign Typed Data \(eth\_signTypedData\)
+### Sign Typed Data \(eth_signTypedData\)
 
 ```javascript
 // Draft Message Parameters
@@ -205,7 +208,7 @@ const typedData = {
   primaryType: "Mail",
   domain: {
     name: "Example Dapp",
-    version: "1.0.0-beta",
+    version: "1.0",
     chainId: 1,
     verifyingContract: "0x0000000000000000000000000000000000000000",
   },
@@ -273,4 +276,3 @@ connector
     console.error(error);
   });
 ```
-
