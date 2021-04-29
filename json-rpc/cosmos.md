@@ -1,5 +1,5 @@
 ---
-description: Cosmos JSON-RPC API Methods
+description: Cosmos JSON-RPC Methods
 ---
 
 # Cosmos

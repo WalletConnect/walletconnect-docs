@@ -1,5 +1,5 @@
 ---
-description: Polkadot JSON-RPC API Methods
+description: Polkadot JSON-RPC Methods
 ---
 
 # Polkadot

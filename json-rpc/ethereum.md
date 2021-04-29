@@ -1,10 +1,10 @@
 ---
-description: Ethereum JSON-RPC API Methods
+description: Ethereum JSON-RPC Methods
 ---
 
 # Ethereum
 
-## personal\_sign
+## personal_sign
 
 The sign method calculates an Ethereum specific signature with:`sign(keccack256("\x19Ethereum Signed Message:\n" + len(message) + message)))`.
 
@@ -42,7 +42,7 @@ message, account
 }
 ```
 
-## eth\_sign
+## eth_sign
 
 The sign method calculates an Ethereum specific signature with: `sign(keccak256("\x19Ethereum Signed Message:\n" + len(message) + message)))`.
 
@@ -83,7 +83,7 @@ account, message
 
 An example how to use solidity ecrecover to verify the signature calculated with `eth_sign` can be found [here](https://gist.github.com/bas-vk/d46d83da2b2b4721efb0907aecdb7ebd). The contract is deployed on the testnet Ropsten and Rinkeby.
 
-## eth\_signTypedData
+## eth_signTypedData
 
 Calculates an Ethereum-specific signature in the form of `keccak256("\x19Ethereum Signed Message:\n" + len(message) + message))`
 
@@ -104,70 +104,70 @@ account, message
 [
   "0xCD2a3d9F938E13CD947Ec05AbC7FE734Df8DD826",
   {
-    "types": {
-      "EIP712Domain": [
+    types: {
+      EIP712Domain: [
         {
-          "name": "name",
-          "type": "string"
+          name: "name",
+          type: "string",
         },
         {
-          "name": "version",
-          "type": "string"
+          name: "version",
+          type: "string",
         },
         {
-          "name": "chainId",
-          "type": "uint256"
+          name: "chainId",
+          type: "uint256",
         },
         {
-          "name": "verifyingContract",
-          "type": "address"
-        }
+          name: "verifyingContract",
+          type: "address",
+        },
       ],
-      "Person": [
+      Person: [
         {
-          "name": "name",
-          "type": "string"
+          name: "name",
+          type: "string",
         },
         {
-          "name": "wallet",
-          "type": "address"
-        }
+          name: "wallet",
+          type: "address",
+        },
       ],
-      "Mail": [
+      Mail: [
         {
-          "name": "from",
-          "type": "Person"
+          name: "from",
+          type: "Person",
         },
         {
-          "name": "to",
-          "type": "Person"
+          name: "to",
+          type: "Person",
         },
         {
-          "name": "contents",
-          "type": "string"
-        }
-      ]
+          name: "contents",
+          type: "string",
+        },
+      ],
     },
-    "primaryType": "Mail",
-    "domain": {
-      "name": "Ether Mail",
-      "version": "1",
-      "chainId": 1,
-      "verifyingContract": "0xCcCCccccCCCCcCCCCCCcCcCccCcCCCcCcccccccC"
+    primaryType: "Mail",
+    domain: {
+      name: "Ether Mail",
+      version: "1",
+      chainId: 1,
+      verifyingContract: "0xCcCCccccCCCCcCCCCCCcCcCccCcCCCcCcccccccC",
     },
-    "message": {
-      "from": {
-        "name": "Cow",
-        "wallet": "0xCD2a3d9F938E13CD947Ec05AbC7FE734Df8DD826"
+    message: {
+      from: {
+        name: "Cow",
+        wallet: "0xCD2a3d9F938E13CD947Ec05AbC7FE734Df8DD826",
       },
-      "to": {
-        "name": "Bob",
-        "wallet": "0xbBbBBBBbbBBBbbbBbbBbbbbBBbBbbbbBbBbbBBbB"
+      to: {
+        name: "Bob",
+        wallet: "0xbBbBBBBbbBBBbbbBbbBbbbbBBbBbbbbBbBbbBBbB",
       },
-      "contents": "Hello, Bob!"
-    }
-  }
-]
+      contents: "Hello, Bob!",
+    },
+  },
+];
 ```
 
 ### Returns
@@ -194,7 +194,7 @@ account, message
 }
 ```
 
-## eth\_sendTransaction
+## eth_sendTransaction
 
 Creates new message call transaction or a contract creation, if the data field contains code.
 
@@ -214,22 +214,23 @@ Creates new message call transaction or a contract creation, if the data field c
 ```javascript
 [
   {
-    "from": "0xb60e8dd61c5d32be8058bb8eb970870f07233155",
-    "to": "0xd46e8dd67c5d32be8058bb8eb970870f07244567",
-    "data": "0xd46e8dd67c5d32be8d46e8dd67c5d32be8058bb8eb970870f072445675058bb8eb970870f072445675",
-    "gas": "0x76c0", // 30400
-    "gasPrice": "0x9184e72a000", // 10000000000000
-    "value": "0x9184e72a", // 2441406250
-    "nonce": "0x117" // 279
-  }
-]
+    from: "0xb60e8dd61c5d32be8058bb8eb970870f07233155",
+    to: "0xd46e8dd67c5d32be8058bb8eb970870f07244567",
+    data:
+      "0xd46e8dd67c5d32be8d46e8dd67c5d32be8058bb8eb970870f072445675058bb8eb970870f072445675",
+    gas: "0x76c0", // 30400
+    gasPrice: "0x9184e72a000", // 10000000000000
+    value: "0x9184e72a", // 2441406250
+    nonce: "0x117", // 279
+  },
+];
 ```
 
 ### Returns
 
 `DATA`, 32 Bytes - the transaction hash, or the zero hash if the transaction is not yet available.
 
-Use [eth\_getTransactionReceipt](https://github.com/ethereum/wiki/wiki/JSON-RPC#eth_gettransactionreceipt) to get the contract address, after the transaction was mined, when you created a contract.
+Use [eth_getTransactionReceipt](https://github.com/ethereum/wiki/wiki/JSON-RPC#eth_gettransactionreceipt) to get the contract address, after the transaction was mined, when you created a contract.
 
 ### Example
 
@@ -250,7 +251,7 @@ Use [eth\_getTransactionReceipt](https://github.com/ethereum/wiki/wiki/JSON-RPC#
 }
 ```
 
-## eth\_signTransaction
+## eth_signTransaction
 
 Signs a transaction that can be submitted to the network at a later time using with `eth_sendRawTransaction`
 
@@ -270,15 +271,16 @@ Signs a transaction that can be submitted to the network at a later time using w
 ```javascript
 [
   {
-    "from": "0xb60e8dd61c5d32be8058bb8eb970870f07233155",
-    "to": "0xd46e8dd67c5d32be8058bb8eb970870f07244567",
-    "data": "0xd46e8dd67c5d32be8d46e8dd67c5d32be8058bb8eb970870f072445675058bb8eb970870f072445675",
-    "gas": "0x76c0", // 30400
-    "gasPrice": "0x9184e72a000", // 10000000000000
-    "value": "0x9184e72a", // 2441406250
-    "nonce": "0x117" // 279
-  }
-]
+    from: "0xb60e8dd61c5d32be8058bb8eb970870f07233155",
+    to: "0xd46e8dd67c5d32be8058bb8eb970870f07244567",
+    data:
+      "0xd46e8dd67c5d32be8d46e8dd67c5d32be8058bb8eb970870f072445675058bb8eb970870f072445675",
+    gas: "0x76c0", // 30400
+    gasPrice: "0x9184e72a000", // 10000000000000
+    value: "0x9184e72a", // 2441406250
+    nonce: "0x117", // 279
+  },
+];
 ```
 
 ### Returns
@@ -304,7 +306,7 @@ Signs a transaction that can be submitted to the network at a later time using w
 }
 ```
 
-## eth\_sendRawTransaction
+## eth_sendRawTransaction
 
 Creates new message call transaction or a contract creation for signed transactions.
 
@@ -316,7 +318,7 @@ Creates new message call transaction or a contract creation for signed transacti
 
 `DATA`, 32 Bytes - the transaction hash, or the zero hash if the transaction is not yet available.
 
-Use [eth\_getTransactionReceipt](https://github.com/ethereum/wiki/wiki/JSON-RPC#eth_gettransactionreceipt) to get the contract address, after the transaction was mined, when you created a contract.
+Use [eth_getTransactionReceipt](https://github.com/ethereum/wiki/wiki/JSON-RPC#eth_gettransactionreceipt) to get the contract address, after the transaction was mined, when you created a contract.
 
 ### Example
 
@@ -338,4 +340,3 @@ Use [eth\_getTransactionReceipt](https://github.com/ethereum/wiki/wiki/JSON-RPC#
   "result": "0xe670ec64341771606e55d6b4ca35a1a6b75ee3d5145a99d05921026d1527331"
 }
 ```
-

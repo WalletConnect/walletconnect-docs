@@ -82,4 +82,3 @@ const result = await client.request({
   },
 });
 ```
-
