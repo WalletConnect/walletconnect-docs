@@ -38,7 +38,7 @@ const topics = client.session.topics;
 
 ## Event Listeners
 
-If you are tracking any of the state variables above in your application, you should also register event listeners for changes made.
+If you are tracking any of the state variables above in your application, you should also register event listeners for changes made using the sync event name.
 
 ```typescript
 import { CLIENT_EVENTS } from "@walletconnect/client";
@@ -46,15 +46,15 @@ import { PairingTypes, SessioTypes } from "@walletconnect/types";
 
 /* ----------- pairing ----------- */
 
-client.on(CLIENT_EVENTS.pairing.created, (pairing: PairingTypes.Settled) => {});
-client.on(CLIENT_EVENTS.pairing.updated, (pairing: PairingTypes.Settled) => {});
-client.on(CLIENT_EVENTS.pairing.deleted, (pairing: PairingTypes.Settled) => {});
+client.on(CLIENT_EVENTS.pairing.sync, () => {
+  pairings = client.pairing.values;
+});
 
 /* ----------- session ----------- */
 
-client.on(CLIENT_EVENTS.session.created, (session: SessionTypes.Settled) => {});
-client.on(CLIENT_EVENTS.session.updated, (session: SessionTypes.Settled) => {});
-client.on(CLIENT_EVENTS.session.deleted, (session: SessionTypes.Settled) => {});
+client.on(CLIENT_EVENTS.session.sync, () => {
+  sessions = client.session.values;
+});
 ```
 
 ## Pending Requests
@@ -69,4 +69,3 @@ const requests = client.pairing.history.pending;
 // get pending request events (topic, request, chainId)
 const requests = client.session.history.pending;
 ```
-
