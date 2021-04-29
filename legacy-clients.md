@@ -28,21 +28,17 @@ Migrating from the Browser client to the isomorphic client is as simple as repla
 
 {% tabs %}
 {% tab title="yarn" %}
-
 ```bash
 yarn remove @walletconnect/browser
 yarn add @walletconnect/client
 ```
-
 {% endtab %}
 
 {% tab title="npm" %}
-
 ```bash
 npm uninstall --save @walletconnect/browser
 npm install --save @walletconnect/client
 ```
-
 {% endtab %}
 {% endtabs %}
 
@@ -121,21 +117,17 @@ Migrating from the React-Native client to the isomorphic client you need to repl
 
 {% tabs %}
 {% tab title="yarn" %}
-
 ```bash
 yarn remove @walletconnect/react-native
 yarn add @walletconnect/client
 ```
-
 {% endtab %}
 
 {% tab title="npm" %}
-
 ```bash
 npm uninstall --save @walletconnect/react-native
 npm install --save @walletconnect/client
 ```
-
 {% endtab %}
 {% endtabs %}
 
@@ -204,21 +196,17 @@ Migrating from the NodeJS client to the isomorphic client you need to replace wi
 
 {% tabs %}
 {% tab title="yarn" %}
-
 ```bash
 yarn remove @walletconnect/node
 yarn add @walletconnect/client
 ```
-
 {% endtab %}
 
 {% tab title="npm" %}
-
 ```bash
 npm uninstall --save @walletconnect/node
 npm install --save @walletconnect/client
 ```
-
 {% endtab %}
 {% endtabs %}
 
@@ -262,3 +250,4 @@ const connector = new WalletConnect({
   },
 });
 ```
+

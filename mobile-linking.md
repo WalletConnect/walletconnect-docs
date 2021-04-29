@@ -84,20 +84,17 @@ If you are building a Dapp you will be able to support this pattern by simply in
 
 {% tabs %}
 {% tab title="yarn" %}
-
 ```bash
 yarn add @walletconnect/qrcode-modal
 ```
-
 {% endtab %}
 
 {% tab title="npm" %}
-
 ```bash
 npm install --save @walletconnect/qrcode-modal
 ```
-
 {% endtab %}
 {% endtabs %}
 
 If you would like to build your own UI for mobile linking, you can use our registry [API](https://github.com/walletconnect/walletconnect-registry) to get app entries and logos however we highly recommend that you use our provided qrcode-modal package to maintain a consistent UX across WalletConnect integrations however we modularized our packages to give the option on the ethos of decentralization.
+

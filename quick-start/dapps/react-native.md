@@ -2,7 +2,7 @@
 description: Quick Start For Dapps using React-Native
 ---
 
-# React-Native Dapps
+# React-Native
 
 ## Quick Start For Dapps \(React-Native\)
 
@@ -16,13 +16,13 @@ For more details, check out the [documentation](https://docs.walletconnect.org).
 
 To get started, install `@walletconnect/react-native-dapp`:
 
-```sh
+```bash
 yarn add @walletconnect/react-native-dapp
 ```
 
 If you haven't already, you may also need to install [`react-native-svg`](https://github.com/react-native-svg/react-native-svg) alongside a persistent storage provider such as [`@react-native-async-storage/async-storage`](https://github.com/react-native-async-storage/async-storage):
 
-```sh
+```bash
 yarn add react-native-svg @react-native-async-storage/async-storage
 ```
 
@@ -32,7 +32,7 @@ This library is implemented using the [**React Context API**](https://reactjs.or
 
 ### `WalletConnectProvider`
 
-At the root of your application, you can declare a [`WalletConnectProvider`](./src/providers/WalletConnectProvider.tsx) which controls access and persistence to a [**connector**](https://docs.walletconnect.org/client-api) instance:
+At the root of your application, you can declare a [`WalletConnectProvider`](https://github.com/WalletConnect/walletconnect-docs/tree/074ef6d866a4790726bc2159d80cdc4f35a969ea/quick-start/dapps/src/providers/WalletConnectProvider.tsx) which controls access and persistence to a [**connector**](https://docs.walletconnect.org/client-api) instance:
 
 ```typescript
 import * as React from 'react';
@@ -52,13 +52,13 @@ export default function App(): JSX.Element {
 }
 ```
 
-Above, we pass the [`WalletConnectProvider`](./src/providers/WalletConnectProvider.tsx) two required parameters; `redirectUrl` and `storageOptions`:
+Above, we pass the [`WalletConnectProvider`](https://github.com/WalletConnect/walletconnect-docs/tree/074ef6d866a4790726bc2159d80cdc4f35a969ea/quick-start/dapps/src/providers/WalletConnectProvider.tsx) two required parameters; `redirectUrl` and `storageOptions`:
 
-- The `redirectUrl` is used to help control navigation between external wallets and your application. On the `web`, you only need to specify a valid application route; whereas on mobile platforms, you must [**specify a deep link URI scheme**](https://docs.expo.io/workflow/linking/#universaldeep-links-without-a-custom-scheme).
-- The `storageOptions` prop allows you to specify the storage engine which must be used to persist session data.
-  - Although in our examples we use [`@react-native-async-storage/async-storage`](https://github.com/react-native-async-storage/async-storage), this can be which engine you please, provided it conforms to the [`IAsyncStorage`](https://github.com/pedrouid/keyvaluestorage) generic storage interface declaration.
+* The `redirectUrl` is used to help control navigation between external wallets and your application. On the `web`, you only need to specify a valid application route; whereas on mobile platforms, you must [**specify a deep link URI scheme**](https://docs.expo.io/workflow/linking/#universaldeep-links-without-a-custom-scheme).
+* The `storageOptions` prop allows you to specify the storage engine which must be used to persist session data.
+  * Although in our examples we use [`@react-native-async-storage/async-storage`](https://github.com/react-native-async-storage/async-storage), this can be which engine you please, provided it conforms to the [`IAsyncStorage`](https://github.com/pedrouid/keyvaluestorage) generic storage interface declaration.
 
-Notably, the [`WalletConnectProvider`](./src/providers/WalletConnectProvider.tsx) optionally accepts `WalletConnect` configuration arguments as defined by the [`IWalletConnectOptions`](https://github.com/WalletConnect/walletconnect-monorepo/tree/next/packages/helpers/utils) interface:
+Notably, the [`WalletConnectProvider`](https://github.com/WalletConnect/walletconnect-docs/tree/074ef6d866a4790726bc2159d80cdc4f35a969ea/quick-start/dapps/src/providers/WalletConnectProvider.tsx) optionally accepts `WalletConnect` configuration arguments as defined by the [`IWalletConnectOptions`](https://github.com/WalletConnect/walletconnect-monorepo/tree/next/packages/helpers/utils) interface:
 
 ```typescript
 import * as React from 'react';
@@ -85,13 +85,13 @@ export default function App(): JSX.Element {
 }
 ```
 
-In the snippet above, aside from the required props, we can see the default configuration of the [`WalletConnectProvider`](./src/providers/WalletConnectProvider.tsx).
+In the snippet above, aside from the required props, we can see the default configuration of the [`WalletConnectProvider`](https://github.com/WalletConnect/walletconnect-docs/tree/074ef6d866a4790726bc2159d80cdc4f35a969ea/quick-start/dapps/src/providers/WalletConnectProvider.tsx).
 
 > **Tip:** Your custom options are merged _deeply_ against this default configuration. Therefore it's possible to override individual nested properties without being required to define _all_ of them.
 
 #### `withWalletConnect`
 
-Alternatively to manually using the [`WalletConnectProvider`](./src/providers/WalletConnectProvider.tsx), you can use the [`withWalletConnect`](./src/hooks/useWalletConnect.ts) higher order component which will wrap your root application in a [`WalletConnectProvider`](./src/providers/WalletConnectProvider.tsx) for you:
+Alternatively to manually using the [`WalletConnectProvider`](https://github.com/WalletConnect/walletconnect-docs/tree/074ef6d866a4790726bc2159d80cdc4f35a969ea/quick-start/dapps/src/providers/WalletConnectProvider.tsx), you can use the [`withWalletConnect`](https://github.com/WalletConnect/walletconnect-docs/tree/074ef6d866a4790726bc2159d80cdc4f35a969ea/quick-start/dapps/src/hooks/useWalletConnect.ts) higher order component which will wrap your root application in a [`WalletConnectProvider`](https://github.com/WalletConnect/walletconnect-docs/tree/074ef6d866a4790726bc2159d80cdc4f35a969ea/quick-start/dapps/src/providers/WalletConnectProvider.tsx) for you:
 
 ```typescript
 import * as React from "react";
@@ -118,11 +118,11 @@ export default withWalletConnect(App, {
 });
 ```
 
-This is almost identical in functionality to the manual implementation of a [`WalletConnectProvider`](./src/providers/WalletConnectProvider.tsx), with the key difference that we're able to make a call to [`useWalletConnect`](./src/hooks/useWalletConnect.ts) directly from the `App` component. By contrast, in the previous example only child components of the [`WalletConnectProvider`](./src/providers/WalletConnectProvider.tsx) may be able to invoke this hook.
+This is almost identical in functionality to the manual implementation of a [`WalletConnectProvider`](https://github.com/WalletConnect/walletconnect-docs/tree/074ef6d866a4790726bc2159d80cdc4f35a969ea/quick-start/dapps/src/providers/WalletConnectProvider.tsx), with the key difference that we're able to make a call to [`useWalletConnect`](https://github.com/WalletConnect/walletconnect-docs/tree/074ef6d866a4790726bc2159d80cdc4f35a969ea/quick-start/dapps/src/hooks/useWalletConnect.ts) directly from the `App` component. By contrast, in the previous example only child components of the [`WalletConnectProvider`](https://github.com/WalletConnect/walletconnect-docs/tree/074ef6d866a4790726bc2159d80cdc4f35a969ea/quick-start/dapps/src/providers/WalletConnectProvider.tsx) may be able to invoke this hook.
 
 ### `useWalletConnect`
 
-The [`useWalletConnect`](./src/hooks/useWalletConnect.ts) hook provides access to a [`WalletConnect`](https://docs.walletconnect.org/client-api) `connector` instance which is accessible on Android, iOS and the Web. This conforms to the original specification:
+The [`useWalletConnect`](https://github.com/WalletConnect/walletconnect-docs/tree/074ef6d866a4790726bc2159d80cdc4f35a969ea/quick-start/dapps/src/hooks/useWalletConnect.ts) hook provides access to a [`WalletConnect`](https://docs.walletconnect.org/client-api) `connector` instance which is accessible on Android, iOS and the Web. This conforms to the original specification:
 
 ```typescript
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -150,7 +150,7 @@ export default withWalletConnect(App, {
 
 ## Customization
 
-`@walletconnect/react-native-dapp` also permits you to customize the presentation of the [`QrcodeModal`](./src/components/QrcodeModal.tsx). This is achieved by passing the [**Render Callback**]() prop, `renderQrcodeModal`, to our calls to `withWalletConnect` or instances of `WalletConnectProvider`.
+`@walletconnect/react-native-dapp` also permits you to customize the presentation of the [`QrcodeModal`](https://github.com/WalletConnect/walletconnect-docs/tree/074ef6d866a4790726bc2159d80cdc4f35a969ea/quick-start/dapps/src/components/QrcodeModal.tsx). This is achieved by passing the [**Render Callback**](react-native.md) prop, `renderQrcodeModal`, to our calls to `withWalletConnect` or instances of `WalletConnectProvider`.
 
 For example, you could choose to render a wallet selection using a `BottomSheet` opposed to a `Modal`:
 
@@ -198,3 +198,4 @@ export default withWalletConnect(App, {
   ),
 });
 ```
+
