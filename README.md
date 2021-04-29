@@ -1,4 +1,4 @@
-# WalletConnect v2.0.0-alpha
+# WalletConnect v2.0
 
 ## Introduction
 
@@ -22,7 +22,6 @@ TODO
 
 Share your experience, contribute or ask questions with the WalletConnect Community
 
-* Github: [https://github.walletconnect.org](https://github.walletconnect.org)
-* Discord: [https://discord.walletconnect.org](https://discord.walletconnect.org)
-* Twitter: [https://twitter.walletconnect.org](https://twitter.walletconnect.org)
-
+- Github: [https://github.walletconnect.org](https://github.walletconnect.org)
+- Discord: [https://discord.walletconnect.org](https://discord.walletconnect.org)
+- Twitter: [https://twitter.walletconnect.org](https://twitter.walletconnect.org)
