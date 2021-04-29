@@ -4,7 +4,7 @@ description: Quick Start For Dapps using Standalone Client
 
 # Standalone Client
 
-This library is compatible with NodeJS, Browser and React-Native applications (NodeJS modules required to be polyfilled for React-Native)
+This library is compatible with NodeJS, Browser and React-Native applications \(NodeJS modules required to be polyfilled for React-Native\)
 
 ## Install
 
@@ -19,7 +19,7 @@ npm install --save @walletconnect/client@experimental
 
 1. Initiate your WalletConnect client with the relay server
 
-```js
+```javascript
 import WalletConnectClient from "@walletconnect/client";
 
 const client = await WalletConnectClient.init({
@@ -33,9 +33,9 @@ const client = await WalletConnectClient.init({
 });
 ```
 
-2. Subscribe to pairing proposal event for sharing URI
+1. Subscribe to pairing proposal event for sharing URI
 
-```js
+```javascript
 import { CLIENT_EVENTS } from "@walletconnect/client";
 import { PairingTypes } from "@walletconnect/types";
 
@@ -48,9 +48,9 @@ client.on(
 );
 ```
 
-3. Connect application and specify session permissions
+1. Connect application and specify session permissions
 
-```js
+```javascript
 const session = await client.connect({
   permissions: {
     blockchain: {
@@ -67,7 +67,7 @@ const session = await client.connect({
 
 Once the session has been successful then you can start making JSON-RPC requests to be approved and signed by the wallet
 
-```js
+```javascript
 const result = await client.request({
   topic: session.topic,
   chainId: "eip155:1",
@@ -82,3 +82,4 @@ const result = await client.request({
   },
 });
 ```
+

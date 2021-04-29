@@ -16,7 +16,7 @@ const client = await Client.init({ ...clientOpts });
 
 ## State Queries
 
-WalletConnect tracks essentially two sequences (pairing and session) which you can query from your client using the following methods: values, topics and entries.
+WalletConnect tracks essentially two sequences \(pairing and session\) which you can query from your client using the following methods: values, topics and entries.
 
 ```typescript
 /* ----------- pairing ----------- */
@@ -69,3 +69,4 @@ const requests = client.pairing.history.pending;
 // get pending request events (topic, request, chainId)
 const requests = client.session.history.pending;
 ```
+

@@ -1,3 +1,0 @@
-# Mobile Linking
-
-TODO

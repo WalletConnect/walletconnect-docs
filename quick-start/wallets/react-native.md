@@ -4,7 +4,7 @@ description: Quick Start For Wallets Using React-Native Client
 
 # React-Native Client
 
-This library is compatible with NodeJS, Browser and React-Native applications (NodeJS modules required to be polyfilled for React-Native)
+This library is compatible with NodeJS, Browser and React-Native applications \(NodeJS modules required to be polyfilled for React-Native\)
 
 ## Install
 
@@ -19,7 +19,7 @@ npm install --save @walletconnect/client@experimental
 
 1. Initiate your WalletConnect client with the relay server
 
-```js
+```javascript
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import WalletConnectClient from "@walletconnect/client";
 
@@ -38,9 +38,9 @@ const client = await WalletConnectClient.init({
 });
 ```
 
-2. Subscribe to session proposal event for user approval and session created when successful
+1. Subscribe to session proposal event for user approval and session created when successful
 
-```js
+```javascript
 import { CLIENT_EVENTS } from "@walletconnect/client";
 import { SessionTypes } from "@walletconnect/types";
 
@@ -63,15 +63,15 @@ client.on(
 );
 ```
 
-3. Pair with shared URI from dapp
+1. Pair with shared URI from dapp
 
-```js
+```javascript
 client.pair({ uri });
 ```
 
-4. Handle user approval for proposed session
+1. Handle user approval for proposed session
 
-```js
+```javascript
 function handleSessionUserApproval(approved: boolean, proposal: SessionTypes.Proposal) {
   if (userApproved) {
     // if user approved then include response with accounts matching the chains and wallet metadata
@@ -92,7 +92,7 @@ function handleSessionUserApproval(approved: boolean, proposal: SessionTypes.Pro
 
 Given that session has settled succesfully since user approved the session on the wallet side, then the Wallet should subscribe to session payload events on the client
 
-```js
+```javascript
 import { CLIENT_EVENTS } from "@walletconnect/client";
 import { SessionTypes } from "@walletconnect/types";
 import { JsonRpcResponse } from "@json-rpc-tools/utils";
@@ -133,3 +133,4 @@ client.on(
   }
 );
 ```
+

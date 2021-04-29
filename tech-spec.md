@@ -2,11 +2,11 @@
 title: WalletConnect 2.0 Protocol
 description: Technical Specification for WalletConnect 2.0 Protocol
 author: Pedro Gomes <pedro@walletconnect.org>
-created: 2020-12-09
-updated: 2021-03-24
+created: '2020-12-09T00:00:00.000Z'
+updated: '2021-03-24T00:00:00.000Z'
 ---
 
-# WalletConnect 2.0 Protocol
+# Technical Specification
 
 ## Overview
 
@@ -16,15 +16,15 @@ WalletConnect Protocol provides secure remote signing communication between a bl
 
 The goal of WalletConnect protocol is to provide an interoperable secure remote signing experience between two separate platforms where public key authentication is required to interface with a blockchain. The goals of the WalletConnect protocol include:
 
-- Reducing end-user steps for connecting two platforms securely
-- Protect end-user activity across the relay infrastructure
-- Allow any blockchain application connect to any blockchain wallet
+* Reducing end-user steps for connecting two platforms securely
+* Protect end-user activity across the relay infrastructure
+* Allow any blockchain application connect to any blockchain wallet
 
 ## Architecture
 
 At a high level, WalletConnect serves a secure communication channel between two applications that run equivalent clients for WalletConnect which are connected to a relay infrastructure communicated through a publish-subscribe pattern.
 
-![walletconnect-protocol-simplified](./.gitbook/assets/walletconnect-protocol-simplified.png)
+![walletconnect-protocol-simplified](.gitbook/assets/walletconnect-protocol-simplified.png)
 
 The two clients are connected when some out-of-band data is shared in order to define the relay infrastructure and the cryptographic keys to used to encrypt payloads.
 
@@ -40,17 +40,17 @@ The protocol was designed to serve primarily but not exclusively mobile blockcha
 
 Hence the following core components were used to ensure secure and low-latency communication between the application and the wallet:
 
-- JSON-RPC protocol
-- X25519 shared key derivation
-- AEAD encryption scheme
-- Publish-Subscribe pattern
+* JSON-RPC protocol
+* X25519 shared key derivation
+* AEAD encryption scheme
+* Publish-Subscribe pattern
 
 Finally the following standards were used to ensure protocol agnosticism to any blockchain interfaces when connecting applications and wallets:
 
-- CAIP-2 blockchain identifiers
-- CAIP-10 account identifiers
-- CAIP-25 provider handshake
-- CAIP-27 provider request
+* CAIP-2 blockchain identifiers
+* CAIP-10 account identifiers
+* CAIP-25 provider handshake
+* CAIP-27 provider request
 
 ## Backwards Compatibility
 
@@ -64,13 +64,13 @@ Contrary to its predecessor, the WalletConnect 2.0 protocol becomes agnostic to 
 
 The Relay Protocol MUST follow a publish-subscribe pattern and which MUST have a JSON-RPC API interface that includes the following methods and corresponding behaviors with the relay network infrastructure:
 
-- info — status and information about network
-- connect — start connection with network
-- disconnect — stop connection with network
-- publish — broadcast message with a topic to the network
-- subscribe — subscribe to messages with matching topic on the network
-- unsubscribe — unsubscribe to messages with matching topic on the network
-- subscription — incoming message with matching topic from the network
+* info — status and information about network
+* connect — start connection with network
+* disconnect — stop connection with network
+* publish — broadcast message with a topic to the network
+* subscribe — subscribe to messages with matching topic on the network
+* unsubscribe — unsubscribe to messages with matching topic on the network
+* subscription — incoming message with matching topic from the network
 
 Different protocols MUST have unique method prefixing to prevent conflicts when handling network interactions from the JSON-RPC API interface. For example, the Bridge server infrastructure would include methods such as `waku_info`, `waku_subscribe` and `waku_publish`.
 
@@ -94,23 +94,23 @@ This shares some similarities with the WalletConnect 1.0 protocol which this pro
 
 Just like its predecessor at its core there is a concept of a proposer and responder that share some out-of-band information that is not available to the relay protocol in order to relay payloads encrypted. This is now defined with WalletConnect 2.0 Protocol as an out-of-band sequence. There are two different sequences within WalletConnect 2.0 protocol: pairing and session. They both follow the same procedure to settle an out-of-band sequence. Let's first describe the "approve" flow:
 
-- t0 - Proposer generates a sequence proposal that includes a out-of-band data signal and shares with Responder
-- t1 - Responder constructs the proposal using the received signal and approves it which internally sends a response
-- t2 - Responder optimistically settles session before acknowledgement and in parallel the Proposer receives response
-- t3 - Proposer handles and validates response and sends a response acknowledgement to Responder
-- t4 - Proposer is able to settle its own sequence and in parallel the Responder receives acknowledgement
-- t5 - Responder handles and validates the acknowledgement to be either successful or failed
+* t0 - Proposer generates a sequence proposal that includes a out-of-band data signal and shares with Responder
+* t1 - Responder constructs the proposal using the received signal and approves it which internally sends a response
+* t2 - Responder optimistically settles session before acknowledgement and in parallel the Proposer receives response
+* t3 - Proposer handles and validates response and sends a response acknowledgement to Responder
+* t4 - Proposer is able to settle its own sequence and in parallel the Responder receives acknowledgement
+* t5 - Responder handles and validates the acknowledgement to be either successful or failed
 
-![outofband-sequence-approve](./.gitbook/assets/outofband-sequence-approve.png)
+![outofband-sequence-approve](.gitbook/assets/outofband-sequence-approve.png)
 
 At this point, both the proposer and the responder have settled a sequence and can now exchange payloads securely using the sequence permissions agree upon. Now let's describe a "reject" flow:
 
-- t0 - Proposer generates a sequence proposal that includes a out-of-band data signal and shares with Responder
-- t1 - Responder constructs the proposal using the received signal and rejects it which internally sends a response
-- t2 - Responder discards proposal and is not subscribed to any topic and in parallel the Proposer receives the response
-- t3 - Proposer handles and validates response and throws an error on the client with the reason received on response
+* t0 - Proposer generates a sequence proposal that includes a out-of-band data signal and shares with Responder
+* t1 - Responder constructs the proposal using the received signal and rejects it which internally sends a response
+* t2 - Responder discards proposal and is not subscribed to any topic and in parallel the Proposer receives the response
+* t3 - Proposer handles and validates response and throws an error on the client with the reason received on response
 
-![outofband-sequence-reject](./.gitbook/assets/outofband-sequence-reject.png)
+![outofband-sequence-reject](.gitbook/assets/outofband-sequence-reject.png)
 
 While this conceptually describe the full flow sequence settlement approve and rejects flows, we need to dive into what is actually sent between them when sharing a signal, constructing a proposal, sending a response and/or acknowledgement.
 
@@ -164,12 +164,12 @@ interface PairingProposal {
 
 In the constructed proposal we are able to assert the following information:
 
-- topic - subscribed by the proposer on the network to receive response
-- relay - relay protocol and parameters used to connect to network
-- proposer - public key used by the proposer to encrypted payloads after settlement
-- signal - describes the signal parameters shared by the proposer
-- permissions - permissions requested by the proposer (default = ["wc_sessionPropose"])
-- ttl - time expected to live the settled pairing sequence (default = 30 days)
+* topic - subscribed by the proposer on the network to receive response
+* relay - relay protocol and parameters used to connect to network
+* proposer - public key used by the proposer to encrypted payloads after settlement
+* signal - describes the signal parameters shared by the proposer
+* permissions - permissions requested by the proposer \(default = \["wc\_sessionPropose"\]\)
+* ttl - time expected to live the settled pairing sequence \(default = 30 days\)
 
 ### Pairing Response
 
@@ -429,9 +429,9 @@ WalletConnect 2.0 clients are now also in control of persistent storage to ensur
 
 WalletConenct 2.0 clients will synchronize state and events for the out-of-band sequences, both session and pairing, through JSON-RPC methods which are exclusively used to communicate between the two connected clients. These will be published and subscribed under corresponding topics for both before and after settlement. This can be described under a single matrix that encompasses these two states for both sequences.
 
-![outofband-sequence-sync](./.gitbook/assets/outofband-sequence-sync.png)
+![outofband-sequence-sync](.gitbook/assets/outofband-sequence-sync.png)
 
-### wc_pairingApprove
+### wc\_pairingApprove
 
 This request is sent as response for a pairing proposal which is signaled externally using a URI shared between clients.
 
@@ -452,7 +452,7 @@ interface WCPairingApprove {
 
 **NOTE:** The response for this request will serve as the acknowledgement of the proposer's pairing settlement
 
-### wc_pairingReject
+### wc\_pairingReject
 
 This request is sent as response for a pairing proposal which is signaled externally using a URI shared between clients.
 
@@ -469,7 +469,7 @@ interface WCPairingReject {
 
 **NOTE:** The response for this request will serve as the acknowledgement of the proposer's pairing settlement
 
-### wc_pairingUpdate
+### wc\_pairingUpdate
 
 This request is used to update state of the pairing participant which is optionally provided by the controller to share app metadata during the pairing lifetime.
 
@@ -484,7 +484,7 @@ interface WCPairingUpdate {
 }
 ```
 
-### wc_pairingUpgrade
+### wc\_pairingUpgrade
 
 This request is used to upgrade permissions of the pairing during the its lifetime provided by the controller.
 
@@ -499,7 +499,7 @@ interface WCPairingUpgrade {
 }
 ```
 
-### wc_pairingDelete
+### wc\_pairingDelete
 
 This request is used to delete the pairing and notify the peer that it won't be receiving anymore payloads being relayed with this topic and specifies a reason for deleting before expire.
 
@@ -514,7 +514,7 @@ interface WCPairingDelete {
 }
 ```
 
-### wc_pairingPayload
+### wc\_pairingPayload
 
 This request is used to relay payloads that match the list of methods agreed upon pairing settlement. Any requests sent with unauthorized methods will be immediately rejected by the client.
 
@@ -532,7 +532,7 @@ interface WCPairingPayload {
 }
 ```
 
-### wc_sessionPropose
+### wc\_sessionPropose
 
 This request is used send a session proposal to a client which has an already settled pairing therefore this method exists exclusively within a pairing payload and it's the only method permitted to be relayed through a pairing.
 
@@ -552,7 +552,7 @@ interface WCSessionPropose {
 }
 ```
 
-### wc_sessionApprove
+### wc\_sessionApprove
 
 This request is sent as response for a session proposal which is signaled externally using a URI shared between clients.
 
@@ -573,7 +573,7 @@ interface WCSessionApprove {
 
 **NOTE:** The response for this request will serve as the acknowledgement of the proposer's session settlement
 
-### wc_sessionReject
+### wc\_sessionReject
 
 This request is sent as response for a session proposal which is signaled externally using a URI shared between clients.
 
@@ -590,7 +590,7 @@ interface WCSessionReject {
 
 **NOTE:** The response for this request will serve as the acknowledgement of the proposer's session settlement
 
-### wc_sessionUpdate
+### wc\_sessionUpdate
 
 This request is used to update state of the session participant which is optionally provided by the responder extra accounts during the session lifetime;
 
@@ -605,7 +605,7 @@ interface WCSessionUpdate {
 }
 ```
 
-### wc_sessionUpgrade
+### wc\_sessionUpgrade
 
 This request is used to upgrade permissions of the session during the its lifetime provided by the controller.
 
@@ -620,7 +620,7 @@ interface WCSessionUpgrade {
 }
 ```
 
-### wc_sessionDelete
+### wc\_sessionDelete
 
 This request is used to delete the session and notify the peer that it won't be receiving anymore payloads being relayed with this topic and specifies a reason for deleting before expire.
 
@@ -635,7 +635,7 @@ interface WCSessionDelete {
 }
 ```
 
-### wc_sessionPayload
+### wc\_sessionPayload
 
 This request is used to relay payloads that match the list of methods agreed upon session settlement. Any requests sent with unauthorized methods will be immediately rejected by the client.
 
@@ -653,3 +653,4 @@ interface WCSessionPayload {
   };
 }
 ```
+

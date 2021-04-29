@@ -1,10 +1,10 @@
 # Relay Server API Reference
 
-## WebSocket API (JSON-RPC)
+## WebSocket API \(JSON-RPC\)
 
 ### Subscribe
 
-```json
+```javascript
 // Request (Client -> Server)
 {
   "id": 1,
@@ -26,7 +26,7 @@
 
 ### Publish
 
-```json
+```javascript
 // Request (Client -> Server)
 {
   "id": 2,
@@ -49,7 +49,7 @@
 
 ### Subscription
 
-```json
+```javascript
 // Request (Server -> Client)
 {
   "id": 3,
@@ -74,7 +74,7 @@
 
 ### Unsubscribe
 
-```json
+```javascript
 // Request (Client -> Server)
 {
   "id": 4,
@@ -103,7 +103,7 @@
   Response:
   Status: 200
   Content-Type: text/plain; charset=utf-8
-  Body: Hello World, this is WalletConnect v2.0
+  Body: Hello World, this is WalletConnect v2.0.0-alpha
 ```
 
 ### Subscribe Push Notification Webhook
@@ -125,3 +125,4 @@
     "success": true
   }
 ```
+
