@@ -10,6 +10,7 @@
     - [Swift Client \(iOS\)](quick-start/wallets/swift.md)
     - [Kotlin Client \(Android\)](quick-start/wallets/kotlin.md)
 - [Session Management](session-management.md)
+- [Migrating from v1.0](migration.md)
 - [Mobile Linking](mobile-linking.md)
 - [Technical Specification](tech-spec.md)
 - [JSON-RPC Methods](json-rpc/README.md)
