@@ -12,9 +12,9 @@ Once we reach a signficant quota of Wallets supporting v2.0 then we can start mi
 
 ## Multi-Chain support
 
-Most interfaces are very similar to the previous version but the most constrating difference between the two versions comes from its multi-chain support.
+Most interfaces are very similar to the previous version but the most contrasting difference between the two versions comes from its multi-chain support.
 
-WalletConnect v1.0 mimic a lot of its behavior from Metamask's browser extension which meant that sessions tracked a single chainId, an accounts array and wallets controlled the chainId while dapps followed.
+WalletConnect v1.0 mimics a lot of its behavior from Metamask's browser extension which meant that sessions tracked a single chainId, an accounts array and wallets controlled the chainId while dapps followed.
 
 WalletConnect v2.0 instead allows dapps to request a set of chains as part of the scope of the session and Wallets respond with a success or error message when the compatibility is met. Additionally this means that the Wallet no longer controls the chainId of the chain but instead the session tracks multiple chainId's. Finally the Wallet will expose one or many accounts matching each of the chains requested by the Dapp and these can be updated on the session state during its lifetime.
 
