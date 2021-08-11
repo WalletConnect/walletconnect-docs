@@ -17,5 +17,6 @@
   - [Ethereum](json-rpc/ethereum.md)
   - [Cosmos](json-rpc/cosmos.md)
   - [Polkadot](json-rpc/polkadot.md)
+  - [Stellar](json-rpc/stellar.md)
 - [Client API Reference](client-api.md)
 - [Relay Server API Reference](relay-server.md)
