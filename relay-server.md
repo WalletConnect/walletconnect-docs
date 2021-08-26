@@ -81,6 +81,7 @@
   "jsonrpc": "2.0",
   "method": "waku_unsubscribe",
   "params": {
+    "topic": "<TOPIC_ID>",
     "id": "<SUBSCRIPTION_ID>",
   }
 }
