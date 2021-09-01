@@ -78,12 +78,12 @@ Some relay protocols may require some initialization parameters which need to be
 
 ```typescript
 interface RelayProtocolOptions {
-  name: string;
+  protocol: string;
   params: any;
 }
 
 const protocolOptions: RelayProtocolOptions = {
-  name: "waku",
+  protocol: "waku",
   params: {},
 };
 ```
@@ -173,6 +173,8 @@ In the constructed proposal we are able to assert the following information:
 - signal - describes the signal parameters shared by the proposer
 - permissions - permissions requested by the proposer \(default = \["wc_sessionPropose"\]\)
 - ttl - time expected to live the settled pairing sequence \(default = 30 days\)
+
+If you notice the proposer is identified by a controller boolean. When false it means that the proposer will not control the settled pairing which means that it does not update state, upgrade permissions nor is bounded by the permissions.
 
 ### Pairing Response
 
@@ -314,6 +316,8 @@ In the constructed proposal we are able to assert the following information:
 - permissions - permissions requested by the proposer
 - ttl - time expected to live the settled pairing sequence \(default = 7 days\)
 
+If you notice the proposer is identified by a controller boolean. When false it means that the proposer will not control the settled session which means that it does not update state, upgrade permissions and is bounded by the permissions.
+
 #### Participant Metadata
 
 The metadata here is similar to v1.0 protocol and is displayed to the user to identify the proposal comes from the application that is attempting to connect remotely. It's also used to identify settled sessions after approval
@@ -414,6 +418,12 @@ This allows a blockchain application to be connected to a blockchain wallet on m
 Contrary to its predecessor, WalletConnect 2.0 protocol is opinionated about session management on two fronts: lifecycles and duration.
 
 You can read more about how to manage it in your application under [session management](session-management.md)
+
+## Controller Client
+
+When describing how pairings and session are proposed we touched briefly on what it meant to be a controller. This meant a non-controller client cannot update state, upgrade permissions and is bounded by the settled permissions. Controller client will almost always be the wallet which is exposing account access to a dapp. Another scenario could be when a hybrid app that manages a DAO or multisig that proxies WalletConnect sessions between a dapp and a wallet meaning it will be able to manage two clients: a controller client and a non-controller client.
+
+This differentiates from the v1.0 protocol as it assumed that responder to always be the controller client but instead now it is independent of each client proposes or responds to sequences. Instead a client always acts as either the controller or the non-controller therefore a controller client can't act as non-controller client for sessions which is the controller. We recommend that two separate clients are managed for each responsibility.
 
 ### Lifecycles
 
