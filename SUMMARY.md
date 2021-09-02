@@ -20,3 +20,4 @@
   - [Stellar](json-rpc/stellar.md)
 - [Client API Reference](client-api.md)
 - [Relay Server API Reference](relay-server.md)
+- [Glossary](glossary.md)
