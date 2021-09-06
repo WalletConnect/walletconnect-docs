@@ -14,7 +14,6 @@
   - [Session Management](protocol/session-management.md)
   - [Glossary](protocol/glossary.md)
 - [Migrating from v1.0](migration.md)
-- [Api Keys](api-keys.md)
 - [Mobile Linking](mobile-linking.md)
 - [JSON-RPC Methods](json-rpc/README.md)
   - [Ethereum](json-rpc/ethereum.md)
@@ -24,3 +23,4 @@
 - [API Reference](api/client-api.md)
   - [Javascript Client API](api/client-api.md)
   - [Relay Server API](api/relay-server.md)
+  - [API Keys](api/api-keys.md)

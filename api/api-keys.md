@@ -1,8 +1,8 @@
-# Api Keys
+# API Keys
 
 ## How to implement
 
-Api keys will be implement through the url. The format of the api keys is:
+API keys will be implement through the url. The format of the api keys is:
 
 Url parameters needed
 
