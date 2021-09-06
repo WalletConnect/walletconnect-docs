@@ -79,7 +79,7 @@ function handleSessionUserApproval(approved: boolean, proposal: SessionTypes.Pro
       state: {
         accounts: ["0x1d85568eEAbad713fBB5293B45ea066e552A90De@eip155:1"],
       },
-    }
+    };
     await client.approve({ proposal, response });
   } else {
     // if user didn't approve then reject with no response
@@ -133,3 +133,7 @@ client.on(
   }
 );
 ```
+
+## Api Keys
+
+For api keys look at [Api Keys](api-keys.md).
