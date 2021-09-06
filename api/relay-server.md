@@ -12,7 +12,6 @@
   "method": "waku_subscribe",
   "params": {
     "topic": "<TOPIC_ID>",
-    "ttl": 604800
   }
 }
 

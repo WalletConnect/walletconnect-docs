@@ -72,7 +72,10 @@ client.pair({ uri });
 1. Handle user approval for proposed session
 
 ```javascript
-function handleSessionUserApproval(approved: boolean, proposal: SessionTypes.Proposal) {
+function handleSessionUserApproval(
+  approved: boolean,
+  proposal: SessionTypes.Proposal
+) {
   if (userApproved) {
     // if user approved then include response with accounts matching the chains and wallet metadata
     const response: SessionTypes.Response = {
@@ -134,6 +137,6 @@ client.on(
 );
 ```
 
-## Api Keys
+## API Keys
 
-For api keys look at [Api Keys](api-keys.md).
+For api keys look at [API Keys](api-keys.md).

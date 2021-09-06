@@ -50,6 +50,6 @@ Perhaps the biggest drawback of the WalletConnect v1.0 was that clients did not 
 
 WalletConnect v2.0 clients track all JSON-RPC requests sent and received with the client, can ignore duplicates and acknowledge messages that were received. This means basically that independently of the server or node that WalletConnect v2.0 is connected to it won't affect the behavior of a session and its state can be restored without interruption.
 
-## Api Keys
+## API Keys
 
-Api Keys will be required on v2.0 for the cloud version of WalletConnect, but this will not be required for self hoasted WalletConnect relays. Read more about Api Keys [here](api-keys.md).
+API Keys will be required on v2.0 for the cloud version of WalletConnect, but this will not be required for self hoasted WalletConnect relays. Read more about API Keys [here](api-keys.md).

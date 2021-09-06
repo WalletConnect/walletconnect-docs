@@ -78,12 +78,12 @@ Some relay protocols may require some initialization parameters which need to be
 
 ```typescript
 interface RelayProtocolOptions {
-  name: string;
+  protocol: string;
   params: any;
 }
 
 const protocolOptions: RelayProtocolOptions = {
-  name: "waku",
+  protocol: "waku",
   params: {},
 };
 ```
@@ -150,6 +150,9 @@ interface PairingProposedPermissions {
   jsonrpc: {
     methods: string[];
   };
+  notifications: {
+    types: string[];
+  };
 }
 
 interface PairingProposal {
@@ -170,6 +173,8 @@ In the constructed proposal we are able to assert the following information:
 - signal - describes the signal parameters shared by the proposer
 - permissions - permissions requested by the proposer \(default = \["wc_sessionPropose"\]\)
 - ttl - time expected to live the settled pairing sequence \(default = 30 days\)
+
+If you notice the proposer is identified by a controller boolean. When false it means that the proposer will not control the settled pairing which means that it does not update state, upgrade permissions nor is bounded by the permissions.
 
 ### Pairing Response
 
@@ -311,6 +316,8 @@ In the constructed proposal we are able to assert the following information:
 - permissions - permissions requested by the proposer
 - ttl - time expected to live the settled pairing sequence \(default = 7 days\)
 
+If you notice the proposer is identified by a controller boolean. When false it means that the proposer will not control the settled session which means that it does not update state, upgrade permissions and is bounded by the permissions.
+
 #### Participant Metadata
 
 The metadata here is similar to v1.0 protocol and is displayed to the user to identify the proposal comes from the application that is attempting to connect remotely. It's also used to identify settled sessions after approval
@@ -412,6 +419,12 @@ Contrary to its predecessor, WalletConnect 2.0 protocol is opinionated about ses
 
 You can read more about how to manage it in your application under [session management](session-management.md)
 
+## Controller Client
+
+When describing how pairings and session are proposed we touched briefly on what it meant to be a controller. This meant a non-controller client cannot update state, upgrade permissions and is bounded by the settled permissions. Controller client will almost always be the wallet which is exposing account access to a dapp. Another scenario could be when a hybrid app that manages a DAO or multisig that proxies WalletConnect sessions between a dapp and a wallet meaning it will be able to manage two clients: a controller client and a non-controller client.
+
+This differentiates from the v1.0 protocol as it assumed that responder to always be the controller client but instead now it is independent of each client proposes or responds to sequences. Instead a client always acts as either the controller or the non-controller therefore a controller client can't act as non-controller client for sessions which is the controller. We recommend that two separate clients are managed for each responsibility.
+
 ### Lifecycles
 
 As already explained on the out-of-band sequences which describe how pairings signal session proposals. It's now important to note that session lifecycles are decoupled from the URI scanning or deep-linking which previously coupled to each session.
@@ -434,229 +447,8 @@ WalletConnect 2.0 clients are now also in control of persistent storage to ensur
 
 ## Client Synchronization
 
-WalletConenct 2.0 clients will synchronize state and events for the out-of-band sequences, both session and pairing, through JSON-RPC methods which are exclusively used to communicate between the two connected clients. These will be published and subscribed under corresponding topics for both before and after settlement. This can be described under a single matrix that encompasses these two states for both sequences.
+WalletConnect 2.0 clients will synchronize state and events for the out-of-band sequences, both session and pairing, through JSON-RPC methods which are exclusively used to communicate between the two connected clients. These will be published and subscribed under corresponding topics for both before and after settlement. This can be described under a single matrix that encompasses these two states for both sequences.
 
 ![outofband-sequence-sync](.gitbook/assets/outofband-sequence-sync.png)
 
-### wc_pairingApprove
-
-This request is sent as response for a pairing proposal which is signaled externally using a URI shared between clients.
-
-```typescript
-interface WCPairingApprove {
-  id: 1;
-  jsonrpc: "2.0";
-  method: "wc_pairingApprove";
-  params: {
-    topic: string;
-    relay: RelayProtocolOptions;
-    responder: PairingParticipant;
-    expiry: number;
-    state: PairingState;
-  };
-}
-```
-
-**NOTE:** The response for this request will serve as the acknowledgement of the proposer's pairing settlement
-
-### wc_pairingReject
-
-This request is sent as response for a pairing proposal which is signaled externally using a URI shared between clients.
-
-```typescript
-interface WCPairingReject {
-  id: 1;
-  jsonrpc: "2.0";
-  method: "wc_pairingReject";
-  params: {
-    reason: string;
-  };
-}
-```
-
-**NOTE:** The response for this request will serve as the acknowledgement of the proposer's pairing settlement
-
-### wc_pairingUpdate
-
-This request is used to update state of the pairing participant which is optionally provided by the controller to share app metadata during the pairing lifetime.
-
-```typescript
-interface WCPairingUpdate {
-  id: 1;
-  jsonrpc: "2.0";
-  method: "wc_pairingUpdate";
-  params: {
-    state: Partial<PairingState>;
-  };
-}
-```
-
-### wc_pairingUpgrade
-
-This request is used to upgrade permissions of the pairing during the its lifetime provided by the controller.
-
-```typescript
-interface WCPairingUpgrade {
-  id: 1;
-  jsonrpc: "2.0";
-  method: "wc_pairingUpgrade";
-  params: {
-    permissions: Partial<PairingPermissions>;
-  };
-}
-```
-
-### wc_pairingDelete
-
-This request is used to delete the pairing and notify the peer that it won't be receiving anymore payloads being relayed with this topic and specifies a reason for deleting before expire.
-
-```typescript
-interface WCPairingDelete {
-  id: 1;
-  jsonrpc: "2.0";
-  method: "wc_pairingDelete";
-  params: {
-    reason: string;
-  };
-}
-```
-
-### wc_pairingPayload
-
-This request is used to relay payloads that match the list of methods agreed upon pairing settlement. Any requests sent with unauthorized methods will be immediately rejected by the client.
-
-```typescript
-interface WCPairingPayload {
-  id: 1;
-  jsonrpc: "2.0";
-  method: "wc_pairingPayload";
-  params: {
-    request: {
-      method: string;
-      params: any;
-    };
-  };
-}
-```
-
-### wc_sessionPropose
-
-This request is used send a session proposal to a client which has an already settled pairing therefore this method exists exclusively within a pairing payload and it's the only method permitted to be relayed through a pairing.
-
-```typescript
-interface WCSessionPropose {
-  id: 1;
-  jsonrpc: "2.0";
-  method: "wc_sessionPropose";
-  params: {
-    topic: string;
-    relay: RelayProtocolOptions;
-    proposer: SessionParticipant;
-    signal: SessionSignal;
-    permissions: SessionPermissions;
-    ttl: number;
-  };
-}
-```
-
-### wc_sessionApprove
-
-This request is sent as response for a session proposal which is signaled externally using a URI shared between clients.
-
-```typescript
-interface WCSessionApprove {
-  id: 1;
-  jsonrpc: "2.0";
-  method: "wc_sessionApprove";
-  params: {
-    topic: string;
-    relay: RelayProtocolOptions;
-    responder: SessionParticipant;
-    expiry: number;
-    state: SessionState;
-  };
-}
-```
-
-**NOTE:** The response for this request will serve as the acknowledgement of the proposer's session settlement
-
-### wc_sessionReject
-
-This request is sent as response for a session proposal which is signaled externally using a URI shared between clients.
-
-```typescript
-interface WCSessionReject {
-  id: 1;
-  jsonrpc: "2.0";
-  method: "wc_sessionReject";
-  params: {
-    reason: string;
-  };
-}
-```
-
-**NOTE:** The response for this request will serve as the acknowledgement of the proposer's session settlement
-
-### wc_sessionUpdate
-
-This request is used to update state of the session participant which is optionally provided by the responder extra accounts during the session lifetime;
-
-```typescript
-interface WCSessionUpdate {
-  id: 1;
-  jsonrpc: "2.0";
-  method: "wc_sessionUpdate";
-  params: {
-    state: Partial<SessionState>;
-  };
-}
-```
-
-### wc_sessionUpgrade
-
-This request is used to upgrade permissions of the session during the its lifetime provided by the controller.
-
-```typescript
-interface WCSessionUpgrade {
-  id: 1;
-  jsonrpc: "2.0";
-  method: "wc_sessionUpgrade";
-  params: {
-    permissions: Partial<SessionPermmissions>;
-  };
-}
-```
-
-### wc_sessionDelete
-
-This request is used to delete the session and notify the peer that it won't be receiving anymore payloads being relayed with this topic and specifies a reason for deleting before expire.
-
-```typescript
-interface WCSessionDelete {
-  id: 1;
-  jsonrpc: "2.0";
-  method: "wc_sessionDelete";
-  params: {
-    reason: string;
-  };
-}
-```
-
-### wc_sessionPayload
-
-This request is used to relay payloads that match the list of methods agreed upon session settlement. Any requests sent with unauthorized methods will be immediately rejected by the client.
-
-```typescript
-interface WCSessionPayload {
-  id: 1;
-  jsonrpc: "2.0";
-  method: "wc_sessionPayload";
-  params: {
-    request: {
-      method: string;
-      params: any;
-    };
-    chainId?: string;
-  };
-}
-```
+All JSON-RPC methods used between clients to synchronize state and events are listed [here](client-jsonrpc.md)
