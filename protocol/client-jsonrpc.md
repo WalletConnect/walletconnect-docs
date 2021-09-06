@@ -31,7 +31,7 @@ interface WCPairingApproveRequest {
 interface WCPairingApproveResponse {
   id: 1;
   jsonrpc: "2.0";
-  result: {};
+  result: true;
 }
 ```
 
@@ -56,7 +56,7 @@ interface WCPairingRejectRequest {
 interface WCPairingRejectResponse {
   id: 2;
   jsonrpc: "2.0";
-  result: {};
+  result: true;
 }
 ```
 
@@ -81,7 +81,7 @@ interface WCPairingUpdateRequest {
 interface WCPairingUpdateResponse {
   id: 3;
   jsonrpc: "2.0";
-  result: {};
+  result: true;
 }
 ```
 
@@ -104,7 +104,7 @@ interface WCPairingUpgradeRequest {
 interface WCPairingUpgradeResponse {
   id: 4;
   jsonrpc: "2.0";
-  result: {};
+  result: true;
 }
 ```
 
@@ -127,7 +127,7 @@ interface WCPairingDeleteRequest {
 interface WCPairingDeleteResponse {
   id: 5;
   jsonrpc: "2.0";
-  result: {};
+  result: true;
 }
 ```
 
@@ -153,7 +153,7 @@ interface WCPairingPayloadRequest {
 interface WCPairingPayloadResponse {
   id: 6;
   jsonrpc: "2.0";
-  result: {};
+  result: any;
 }
 ```
 
@@ -174,7 +174,7 @@ interface WCPairingPingRequest {
 interface WCPairingPingResponse {
   id: 7;
   jsonrpc: "2.0";
-  result: {};
+  result: true;
 }
 ```
 
@@ -198,7 +198,7 @@ interface WCPairingNotificationRequest {
 interface WCPairingNotificationResponse {
   id: 8;
   jsonrpc: "2.0";
-  result: {};
+  result: true;
 }
 ```
 
@@ -226,7 +226,7 @@ interface WCSessionProposeRequest {
 interface WCSessionProposeResponse {
   id: 9;
   jsonrpc: "2.0";
-  result: {};
+  result: true;
 }
 ```
 
@@ -253,7 +253,7 @@ interface WCSessionApproveRequest {
 interface WCSessionApproveResponse {
   id: 10;
   jsonrpc: "2.0";
-  result: {};
+  result: true;
 }
 ```
 
@@ -278,7 +278,7 @@ interface WCSessionRejectRequest {
 interface WCSessionRejectResponse {
   id: 11;
   jsonrpc: "2.0";
-  result: {};
+  result: true;
 }
 ```
 
@@ -303,7 +303,7 @@ interface WCSessionUpdateRequest {
 interface WCSessionUpdateResponse {
   id: 12;
   jsonrpc: "2.0";
-  result: {};
+  result: true;
 }
 ```
 
@@ -326,7 +326,7 @@ interface WCSessionUpgradeRequest {
 interface WCSessionUpgradeResponse {
   id: 13;
   jsonrpc: "2.0";
-  result: {};
+  result: true;
 }
 ```
 
@@ -349,7 +349,7 @@ interface WCSessionDeleteRequest {
 interface WCSessionDeleteResponse {
   id: 14;
   jsonrpc: "2.0";
-  result: {};
+  result: true;
 }
 ```
 
@@ -376,7 +376,7 @@ interface WCSessionPayloadRequest {
 interface WCSessionPayloadResponse {
   id: 15;
   jsonrpc: "2.0";
-  result: {};
+  result: any;
 }
 ```
 
@@ -397,7 +397,7 @@ interface WCSessionPingRequest {
 interface WCSessionPingResponse {
   id: 16;
   jsonrpc: "2.0";
-  result: {};
+  result: true;
 }
 ```
 
@@ -421,6 +421,6 @@ interface WCSessionNotificationRequest {
 interface WCSessionNotificationResponse {
   id: 17;
   jsonrpc: "2.0";
-  result: {};
+  result: true;
 }
 ```
