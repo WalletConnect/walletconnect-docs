@@ -44,7 +44,7 @@ export default function App(): JSX.Element {
     <WalletConnectProvider
       redirectUrl={Platform.OS === 'web' ? window.location.origin : 'yourappscheme://'}
       storageOptions= {{
-        asyncStorage AsyncStorage,
+        asyncStorage: AsyncStorage,
       }}>
       <>{/* awesome app here */}</>
     </WalletConnectProvider>
@@ -77,7 +77,7 @@ export default function App(): JSX.Element {
       }}
       redirectUrl={Platform.OS === 'web' ? window.location.origin : 'yourappscheme://'}
       storageOptions= {{
-        asyncStorage AsyncStorage,
+        asyncStorage: AsyncStorage,
       }}>
       <>{/* awesome app here */}</>
     </WalletConnectProvider>
@@ -143,7 +143,7 @@ function App(): JSX.Element {
 export default withWalletConnect(App, {
   redirectUrl: Platform.OS === 'web' ? window.location.origin : 'yourappscheme://',
   storageOptions: {
-    asyncStorage AsyncStorage,
+    asyncStorage: AsyncStorage,
   },
 });
 ```
@@ -191,7 +191,7 @@ function App(): JSX.Element {
 export default withWalletConnect(App, {
   redirectUrl: Platform.OS === 'web' ? window.location.origin : 'yourappscheme://',
   storageOptions: {
-    asyncStorage AsyncStorage,
+    asyncStorage: AsyncStorage,
   },
   renderQrcodeModal: (props: RenderQrcodeModalProps): JSX.Element => (
     <CustomBottomSheet {...props} />
