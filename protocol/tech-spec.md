@@ -24,7 +24,7 @@ The goal of WalletConnect protocol is to provide an interoperable secure remote 
 
 At a high level, WalletConnect serves a secure communication channel between two applications that run equivalent clients for WalletConnect which are connected to a relay infrastructure communicated through a publish-subscribe pattern.
 
-![walletconnect-protocol-simplified](.gitbook/assets/walletconnect-protocol-simplified.png)
+![walletconnect-protocol-simplified](../.gitbook/assets/walletconnect-protocol-simplified.png)
 
 The two clients are connected when some out-of-band data is shared in order to define the relay infrastructure and the cryptographic keys to used to encrypt payloads.
 
@@ -101,7 +101,7 @@ Just like its predecessor at its core there is a concept of a proposer and respo
 - t4 - Proposer is able to settle its own sequence and in parallel the Responder receives acknowledgement
 - t5 - Responder handles and validates the acknowledgement to be either successful or failed
 
-![outofband-sequence-approve](.gitbook/assets/outofband-sequence-approve.png)
+![outofband-sequence-approve](../.gitbook/assets/outofband-sequence-approve.png)
 
 At this point, both the proposer and the responder have settled a sequence and can now exchange payloads securely using the sequence permissions agree upon. Now let's describe a "reject" flow:
 
@@ -110,7 +110,7 @@ At this point, both the proposer and the responder have settled a sequence and c
 - t2 - Responder discards proposal and is not subscribed to any topic and in parallel the Proposer receives the response
 - t3 - Proposer handles and validates response and throws an error on the client with the reason received on response
 
-![outofband-sequence-reject](.gitbook/assets/outofband-sequence-reject.png)
+![outofband-sequence-reject](../.gitbook/assets/outofband-sequence-reject.png)
 
 While this conceptually describe the full flow sequence settlement approve and rejects flows, we need to dive into what is actually sent between them when sharing a signal, constructing a proposal, sending a response and/or acknowledgement.
 
@@ -449,6 +449,6 @@ WalletConnect 2.0 clients are now also in control of persistent storage to ensur
 
 WalletConnect 2.0 clients will synchronize state and events for the out-of-band sequences, both session and pairing, through JSON-RPC methods which are exclusively used to communicate between the two connected clients. These will be published and subscribed under corresponding topics for both before and after settlement. This can be described under a single matrix that encompasses these two states for both sequences.
 
-![outofband-sequence-sync](.gitbook/assets/outofband-sequence-sync.png)
+![outofband-sequence-sync](../.gitbook/assets/outofband-sequence-sync.png)
 
 All JSON-RPC methods used between clients to synchronize state and events are listed [here](client-jsonrpc.md)

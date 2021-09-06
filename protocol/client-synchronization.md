@@ -2,7 +2,7 @@
 
 WalletConnect 2.0 clients will synchronize state and events for the out-of-band sequences, both session and pairing, through JSON-RPC methods which are exclusively used to communicate between the two connected clients. These will be published and subscribed under corresponding topics for both before and after settlement. This can be described under a single matrix that encompasses these two states for both sequences.
 
-![outofband-sequence-sync](.gitbook/assets/outofband-sequence-sync.png)
+![outofband-sequence-sync](../.gitbook/assets/outofband-sequence-sync.png)
 
 ## JSON-RPC API
 
