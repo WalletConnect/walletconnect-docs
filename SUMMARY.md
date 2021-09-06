@@ -11,6 +11,7 @@
     - [Kotlin Client \(Android\)](quick-start/wallets/kotlin.md)
 - [Protocol](protocol/README.md)
   - [Technical Specification](protocol/tech-spec.md)
+  - [Client Synchronization](protocol/client-synchronization.md)
   - [Session Management](protocol/session-management.md)
   - [Glossary](protocol/glossary.md)
 - [Migrating from v1.0](migration.md)
