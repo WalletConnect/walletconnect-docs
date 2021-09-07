@@ -6,6 +6,6 @@ description: Quick Start For Wallets Using Kotlin Client \(Android\)
 
 TODO
 
-## Api Keys
+## API Keys
 
-For api keys look at [Api Keys](api-keys.md).
+For api keys look at [API Keys](api-keys.md).

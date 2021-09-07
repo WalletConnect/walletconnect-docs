@@ -1,12 +1,12 @@
-# Api Keys
+# API Keys
 
 ## How to implement
 
 Api keys will consumed through the url parameters. The format of the url:
 
-Url parameters needed
+Url parameters needed:
 
-`apiKey`: Your api key obtained from [walletconnect.com](walletconnect.com)
+- `apiKey`: Your api key obtained from [walletconnect.com](walletconnect.com)
 
 Example URL:
 

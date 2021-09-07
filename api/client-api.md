@@ -1,4 +1,4 @@
-# Client API Reference
+# Javascript Client API Reference
 
 ```typescript
 export interface ClientOptions {
@@ -105,4 +105,3 @@ export declare namespace ClientTypes {
   export type DisconnectParams = SessionTypes.DeleteParams;
 }
 ```
-
