@@ -4,6 +4,29 @@
 
 ### Subscribe
 
+#### Interface
+
+```typescript
+// Request (Client -> Server)
+interface WakuSubscribeRequest {
+  id: number;
+  jsonrpc: "2.0";
+  method: "waku_subscribe";
+  params: {
+    topic: string;
+  };
+}
+
+// Response (Server -> Client)
+interface WakuSubscribeResponse {
+  id: number;
+  jsonrpc: "2.0";
+  result: string;
+}
+```
+
+#### Example
+
 ```javascript
 // Request (Client -> Server)
 {
@@ -24,6 +47,31 @@
 ```
 
 ### Publish
+
+#### Interface
+
+```typescript
+// Request (Client -> Server)
+interface WakuPublishRequest {
+  id: number;
+  jsonrpc: "2.0";
+  method: "waku_publish";
+  params: {
+    topic: string;
+    message: string;
+    ttl: number;
+  };
+}
+
+// Response (Server -> Client)
+interface WakuPublishResponse {
+  id: number;
+  jsonrpc: "2.0";
+  result: boolean;
+}
+```
+
+#### Example
 
 ```javascript
 // Request (Client -> Server)
@@ -47,6 +95,33 @@
 ```
 
 ### Subscription
+
+#### Interface
+
+```typescript
+// Request (Server -> Client)
+interface WakuSubscriptionRequest {
+  id: number;
+  jsonrpc: "2.0";
+  method: "waku_subscription";
+  params: {
+    id: string;
+    data: {
+      topic: string;
+      message: string;
+    };
+  };
+}
+
+// Response (Client -> Server)
+interface WakuSubscriptionResponse {
+  id: number;
+  jsonrpc: "2.0";
+  result: boolean;
+}
+```
+
+#### Example
 
 ```javascript
 // Request (Server -> Client)
@@ -72,6 +147,30 @@
 ```
 
 ### Unsubscribe
+
+#### Interface
+
+```typescript
+// Request (Client -> Server)
+interface WakuUnsubscribeRequest {
+  id: number;
+  jsonrpc: "2.0";
+  method: "waku_unsubscribe";
+  params: {
+    topic: string;
+    id: string;
+  };
+}
+
+// Response (Server -> Client)
+interface WakuUnsubscribeResponse {
+  id: number;
+  jsonrpc: "2.0";
+  result: string;
+}
+```
+
+#### Example
 
 ```javascript
 // Request (Client -> Server)
