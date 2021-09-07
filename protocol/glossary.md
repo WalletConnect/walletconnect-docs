@@ -1,15 +1,5 @@
 # Glossary
 
-## JSON-RPC
-
-JSON-RPC is a stateless, light weight remote procedure call (RPC) protocol which uses JSON (RFC 4627) as data format. You can read more about JSON-RPC specification [here](https://www.jsonrpc.org/specification)
-
-## Relay
-
-Relay refers to the system, network and/or mechanism used to send and receives messages between the two clients.
-
-By default, the clients will use a proxy server connected to the Waku network and it will connect to clients through a WebSocket using the reference [Relay API](../api/relay-server.md)
-
 ## Sequence
 
 Sequences refers to a complete flow starting from a Proposal and reaching Settlement. A proposer will create a sequence proposal that will derive a Signal to share out-of-band with the responder in order to reach agreement regarding different permissions and conditions for the sequence. A Sequence establishes how the two clients will relay messages with each other, which keys they will use to encrypt and authenticate messages and additionally what are the permissions regarding the JSON-RPC requests that can be made, notifications that can be emitted and what state will be shared.
@@ -81,6 +71,16 @@ Authentication Encryption refers to a form of encryption which simulatenous assu
 The chosen approach was to encrypt-then-mac which produces a MAC based on the resulting ciphertext. The encryption uses AES-256-CBC with a random Initialization Vector (IV) and authentication uses HMAC-SHA256. The encrypted payloads are serialized in the following order: iv, publicKey, mac and cipherText.
 
 To derive the encryption and authentication keys it uses a SHA512 hash of the shared key using the first 32bytes for encryption and the last 32 bytes for authentication
+
+## JSON-RPC
+
+JSON-RPC is a stateless, light weight remote procedure call (RPC) protocol which uses JSON (RFC 4627) as data format. You can read more about JSON-RPC specification [here](https://www.jsonrpc.org/specification)
+
+## Relay
+
+Relay refers to the system, network and/or mechanism used to send and receives messages between the two clients.
+
+By default, the clients will use a proxy server connected to the Waku network and it will connect to clients through a WebSocket using the reference [Relay API](../api/relay-server.md)
 
 ## Publish-Subscribe pattern
 
