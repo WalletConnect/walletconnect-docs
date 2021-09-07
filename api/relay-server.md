@@ -67,7 +67,7 @@ interface WakuPublishRequest {
 interface WakuPublishResponse {
   id: number;
   jsonrpc: "2.0";
-  result: boolean;
+  result: true;
 }
 ```
 
@@ -117,7 +117,7 @@ interface WakuSubscriptionRequest {
 interface WakuSubscriptionResponse {
   id: number;
   jsonrpc: "2.0";
-  result: boolean;
+  result: true;
 }
 ```
 
@@ -166,7 +166,7 @@ interface WakuUnsubscribeRequest {
 interface WakuUnsubscribeResponse {
   id: number;
   jsonrpc: "2.0";
-  result: string;
+  result: true;
 }
 ```
 

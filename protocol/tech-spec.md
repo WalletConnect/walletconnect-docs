@@ -3,7 +3,7 @@ title: WalletConnect 2.0 Protocol
 description: Technical Specification for WalletConnect 2.0 Protocol
 author: Pedro Gomes <pedro@walletconnect.org>
 created: "2020-12-09T00:00:00.000Z"
-updated: "2021-03-24T00:00:00.000Z"
+updated: "2021-09-07T00:00:00.000Z"
 ---
 
 # Technical Specification
