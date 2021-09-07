@@ -2,9 +2,9 @@
 
 ## How to implement
 
-Api keys will consumed through the url parameters. The format of the url:
+Api keys will consumed through url parameters.
 
-Url parameters needed:
+Url parameters used:
 
 - `apiKey`: Your api key obtained from [walletconnect.com](walletconnect.com)
 
@@ -24,19 +24,23 @@ const client = await WalletConnectClient.init({
 
 ## Allowlist
 
-Since most of the wallet and dapp code will be client side, the security of the api
+Since most of the wallet and dapp code will be client side, the security of the api key depends on the proper implementation of User Agent and HTTP Origin for wallets.
 
 ### Applications
 
 User Agent for wallets.
 
-TODO insert screenshot of Allowlist.
+TODO insert screenshot of Allowlist for User Agent.
+
+#### Kotlin
+
+#### Swift
 
 ### Websites
 
 Website [Origin](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Origin).
 
-TODO insert screenshot of Allowlist.
+TODO insert screenshot of Allowlist for HTTP Origin.
 
 ## Error Codes
 
