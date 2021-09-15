@@ -15,7 +15,7 @@ This request is sent as response for a pairing proposal which is signaled extern
 ```typescript
 // request
 interface WCPairingApproveRequest {
-  id: 1;
+  id: number;
   jsonrpc: "2.0";
   method: "wc_pairingApprove";
   params: {
@@ -29,7 +29,7 @@ interface WCPairingApproveRequest {
 
 // response
 interface WCPairingApproveResponse {
-  id: 1;
+  id: number;
   jsonrpc: "2.0";
   result: true;
 }
@@ -44,7 +44,7 @@ This request is sent as response for a pairing proposal which is signaled extern
 ```typescript
 // request
 interface WCPairingRejectRequest {
-  id: 2;
+  id: number;
   jsonrpc: "2.0";
   method: "wc_pairingReject";
   params: {
@@ -54,7 +54,7 @@ interface WCPairingRejectRequest {
 
 // response
 interface WCPairingRejectResponse {
-  id: 2;
+  id: number;
   jsonrpc: "2.0";
   result: true;
 }
@@ -69,7 +69,7 @@ This request is used to update state of the pairing participant which is optiona
 ```typescript
 // request
 interface WCPairingUpdateRequest {
-  id: 3;
+  id: number;
   jsonrpc: "2.0";
   method: "wc_pairingUpdate";
   params: {
@@ -79,7 +79,7 @@ interface WCPairingUpdateRequest {
 
 // response
 interface WCPairingUpdateResponse {
-  id: 3;
+  id: number;
   jsonrpc: "2.0";
   result: true;
 }
@@ -92,7 +92,7 @@ This request is used to upgrade permissions of the pairing during the its lifeti
 ```typescript
 // request
 interface WCPairingUpgradeRequest {
-  id: 4;
+  id: number;
   jsonrpc: "2.0";
   method: "wc_pairingUpgrade";
   params: {
@@ -102,7 +102,7 @@ interface WCPairingUpgradeRequest {
 
 // response
 interface WCPairingUpgradeResponse {
-  id: 4;
+  id: number;
   jsonrpc: "2.0";
   result: true;
 }
@@ -115,7 +115,7 @@ This request is used to delete the pairing and notify the peer that it won't be 
 ```typescript
 // request
 interface WCPairingDeleteRequest {
-  id: 5;
+  id: number;
   jsonrpc: "2.0";
   method: "wc_pairingDelete";
   params: {
@@ -125,7 +125,7 @@ interface WCPairingDeleteRequest {
 
 // response
 interface WCPairingDeleteResponse {
-  id: 5;
+  id: number;
   jsonrpc: "2.0";
   result: true;
 }
@@ -138,7 +138,7 @@ This request is used to relay payloads that match the list of methods agreed upo
 ```typescript
 // request
 interface WCPairingPayloadRequest {
-  id: 6;
+  id: number;
   jsonrpc: "2.0";
   method: "wc_pairingPayload";
   params: {
@@ -151,7 +151,7 @@ interface WCPairingPayloadRequest {
 
 // response
 interface WCPairingPayloadResponse {
-  id: 6;
+  id: number;
   jsonrpc: "2.0";
   result: any;
 }
@@ -164,7 +164,7 @@ This request is used to internally ping the other client to verify that is onlin
 ```typescript
 // request
 interface WCPairingPingRequest {
-  id: 7;
+  id: number;
   jsonrpc: "2.0";
   method: "wc_pairingPing";
   params: {};
@@ -172,7 +172,7 @@ interface WCPairingPingRequest {
 
 // response
 interface WCPairingPingResponse {
-  id: 7;
+  id: number;
   jsonrpc: "2.0";
   result: true;
 }
@@ -185,7 +185,7 @@ This request is used to emit events as notifications that match the list of type
 ```typescript
 // request
 interface WCPairingNotificationRequest {
-  id: 8;
+  id: number;
   jsonrpc: "2.0";
   method: "wc_pairingNotification";
   params: {
@@ -196,7 +196,7 @@ interface WCPairingNotificationRequest {
 
 // response
 interface WCPairingNotificationResponse {
-  id: 8;
+  id: number;
   jsonrpc: "2.0";
   result: true;
 }
@@ -209,7 +209,7 @@ This request is used send a session proposal to a client which has an already se
 ```typescript
 // request
 interface WCSessionProposeRequest {
-  id: 9;
+  id: number;
   jsonrpc: "2.0";
   method: "wc_sessionPropose";
   params: {
@@ -224,7 +224,7 @@ interface WCSessionProposeRequest {
 
 // response
 interface WCSessionProposeResponse {
-  id: 9;
+  id: number;
   jsonrpc: "2.0";
   result: true;
 }
@@ -237,7 +237,7 @@ This request is sent as response for a session proposal which is signaled extern
 ```typescript
 // request
 interface WCSessionApproveRequest {
-  id: 10;
+  id: number;
   jsonrpc: "2.0";
   method: "wc_sessionApprove";
   params: {
@@ -251,7 +251,7 @@ interface WCSessionApproveRequest {
 
 // response
 interface WCSessionApproveResponse {
-  id: 10;
+  id: number;
   jsonrpc: "2.0";
   result: true;
 }
@@ -266,7 +266,7 @@ This request is sent as response for a session proposal which is signaled extern
 ```typescript
 // request
 interface WCSessionRejectRequest {
-  id: 11;
+  id: number;
   jsonrpc: "2.0";
   method: "wc_sessionReject";
   params: {
@@ -276,7 +276,7 @@ interface WCSessionRejectRequest {
 
 // response
 interface WCSessionRejectResponse {
-  id: 11;
+  id: number;
   jsonrpc: "2.0";
   result: true;
 }
@@ -291,7 +291,7 @@ This request is used to update state of the session participant which is optiona
 ```typescript
 // request
 interface WCSessionUpdateRequest {
-  id: 12;
+  id: number;
   jsonrpc: "2.0";
   method: "wc_sessionUpdate";
   params: {
@@ -301,7 +301,7 @@ interface WCSessionUpdateRequest {
 
 // response
 interface WCSessionUpdateResponse {
-  id: 12;
+  id: number;
   jsonrpc: "2.0";
   result: true;
 }
@@ -314,7 +314,7 @@ This request is used to upgrade permissions of the session during the its lifeti
 ```typescript
 // request
 interface WCSessionUpgradeRequest {
-  id: 13;
+  id: number;
   jsonrpc: "2.0";
   method: "wc_sessionUpgrade";
   params: {
@@ -324,7 +324,7 @@ interface WCSessionUpgradeRequest {
 
 // response
 interface WCSessionUpgradeResponse {
-  id: 13;
+  id: number;
   jsonrpc: "2.0";
   result: true;
 }
@@ -337,7 +337,7 @@ This request is used to delete the session and notify the peer that it won't be 
 ```typescript
 // request
 interface WCSessionDeleteRequest {
-  id: 14;
+  id: number;
   jsonrpc: "2.0";
   method: "wc_sessionDelete";
   params: {
@@ -347,7 +347,7 @@ interface WCSessionDeleteRequest {
 
 // response
 interface WCSessionDeleteResponse {
-  id: 14;
+  id: number;
   jsonrpc: "2.0";
   result: true;
 }
@@ -360,7 +360,7 @@ This request is used to relay payloads that match the list of methods agreed upo
 ```typescript
 // request
 interface WCSessionPayloadRequest {
-  id: 15;
+  id: number;
   jsonrpc: "2.0";
   method: "wc_sessionPayload";
   params: {
@@ -374,7 +374,7 @@ interface WCSessionPayloadRequest {
 
 // response
 interface WCSessionPayloadResponse {
-  id: 15;
+  id: number;
   jsonrpc: "2.0";
   result: any;
 }
@@ -387,7 +387,7 @@ This request is used to internally ping the other client to verify that is onlin
 ```typescript
 // request
 interface WCSessionPingRequest {
-  id: 16;
+  id: number;
   jsonrpc: "2.0";
   method: "wc_sessionPing";
   params: {};
@@ -395,7 +395,7 @@ interface WCSessionPingRequest {
 
 // response
 interface WCSessionPingResponse {
-  id: 16;
+  id: number;
   jsonrpc: "2.0";
   result: true;
 }
@@ -408,7 +408,7 @@ This request is used to emit events as notifications that match the list of type
 ```typescript
 // request
 interface WCSessionNotificationRequest {
-  id: 17;
+  id: number;
   jsonrpc: "2.0";
   method: "wc_sessionNotification";
   params: {
@@ -419,7 +419,7 @@ interface WCSessionNotificationRequest {
 
 // response
 interface WCSessionNotificationResponse {
-  id: 17;
+  id: number;
   jsonrpc: "2.0";
   result: true;
 }
