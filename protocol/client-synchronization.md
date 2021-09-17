@@ -19,7 +19,6 @@ interface WCPairingApproveRequest {
   jsonrpc: "2.0";
   method: "wc_pairingApprove";
   params: {
-    topic: string;
     relay: RelayProtocolOptions;
     responder: PairingParticipant;
     expiry: number;
@@ -241,7 +240,6 @@ interface WCSessionApproveRequest {
   jsonrpc: "2.0";
   method: "wc_sessionApprove";
   params: {
-    topic: string;
     relay: RelayProtocolOptions;
     responder: SessionParticipant;
     expiry: number;
