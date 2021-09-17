@@ -52,4 +52,4 @@ WalletConnect v2.0 clients track all JSON-RPC requests sent and received with th
 
 ## API Keys
 
-API Keys will be required on v2.0 for the cloud version of WalletConnect, but this will not be required for self hosted WalletConnect relays. Read more about API Keys [here](api-keys.md).
+Api Keys will be required on v2.0 for the cloud version of WalletConnect, but this will not be required for self hosted WalletConnect relays. Read more about Api Keys [here](api-keys.md).
