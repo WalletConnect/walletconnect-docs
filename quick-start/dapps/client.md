@@ -74,6 +74,9 @@ connector.on("disconnect", (error, payload) => {
 
   // Delete connector
 });
+
+// Connect by opening QRmodal
+const { accounts, chainId } = await connector.connect();
 ```
 
 ### Send Transaction \(eth\_sendTransaction\)
