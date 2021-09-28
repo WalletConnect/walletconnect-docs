@@ -22,6 +22,6 @@
   - [Polkadot](json-rpc/polkadot.md)
   - [Stellar](json-rpc/stellar.md)
 - [API Reference](api/README.md)
-  - [Javascript Client API](api/client-api.md)
+  - [Conceptual Client API](api/client-api.md)
   - [Relay Server API](api/relay-server.md)
   - [API Keys](api/api-keys.md)
