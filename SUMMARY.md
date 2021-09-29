@@ -12,6 +12,7 @@
 - [Protocol](protocol/README.md)
   - [Technical Specification](protocol/tech-spec.md)
   - [Client Synchronization](protocol/client-synchronization.md)
+  - [UX Considerations](protocol/ux-considerations.md)
   - [Session Management](protocol/session-management.md)
   - [Glossary](protocol/glossary.md)
 - [Migrating from v1.0](migration.md)
