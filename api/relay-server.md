@@ -1,4 +1,4 @@
-# Relay Server API Reference
+# Relay Server API
 
 ## WebSocket API \(JSON-RPC\)
 

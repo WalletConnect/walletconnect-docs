@@ -1,4 +1,4 @@
-# Conceptual Client API Reference
+# Reference Client API
 
 ```typescript
 abstract class Client {
