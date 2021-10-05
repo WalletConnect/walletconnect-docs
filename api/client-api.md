@@ -52,6 +52,10 @@ abstract class Client {
     response: JsonRpcResponse;
   }): Promise<void>;
 
+  // for either to ping and verify peer is online
+  public abstract ping(params: {
+    topic: string;
+  }): Promise<void>;
   // for either to send notifications
   public abstract notify(params: {
     topic: string;
