@@ -445,10 +445,10 @@ Therefore the sessions are stored controlled by the client to ensure the lifecyc
 
 WalletConnect 2.0 clients are now also in control of persistent storage to ensure sessions are managed correctly on both sides hence the minimum requirement for a client to be compatible in all platforms by providing a basic key-value storage interface with asynchronous methods for get, set and delete
 
-## Client Synchronization
+## Client Communication
 
-WalletConnect 2.0 clients will synchronize state and events for the out-of-band sequences, both session and pairing, through JSON-RPC methods which are exclusively used to communicate between the two connected clients. These will be published and subscribed under corresponding topics for both before and after settlement. This can be described under a single matrix that encompasses these two states for both sequences.
+WalletConnect 2.0 clients will communicate state and events for the out-of-band sequences, both session and pairing, through JSON-RPC methods which are exclusively used to communicate between the two connected clients. These will be published and subscribed under corresponding topics for both before and after settlement. This can be described under a single matrix that encompasses these two states for both sequences.
 
 ![outofband-sequence-sync](../.gitbook/assets/outofband-sequence-sync.png)
 
-All JSON-RPC methods used between clients to synchronize state and events are listed [here](client-jsonrpc.md)
+All JSON-RPC methods used between clients to communicate state and events are listed [here](client-jsonrpc.md)
