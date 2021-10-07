@@ -17,7 +17,7 @@ This can be instantiated from the client with the `apiKey` in the `WalletConnect
 ```javascript
 import WalletConnectClient from "@walletconnect/client";
 const client = await WalletConnectClient.init({
-  relayProvider: "wss://relay.walletconnect.org",
+  relayProvider: "wss://relay.walletconnect.com",
   apiKey: c4f79cc821944d9680842e34466bfb,
 });
 ```
