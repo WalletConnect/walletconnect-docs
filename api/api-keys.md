@@ -6,7 +6,7 @@ Api keys will be consumed through url parameters.
 
 Url parameters used:
 
-- `apiKey`: Your api key can be obtained from [walletconnect.com](walletconnect.com)
+- `apiKey`: Your api key can be obtained from [walletconnect.com](https://walletconnect.com)
 
 Example URL:
 
