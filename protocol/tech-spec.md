@@ -451,4 +451,4 @@ WalletConnect 2.0 clients will communicate state and events for the out-of-band 
 
 ![outofband-sequence-sync](../.gitbook/assets/outofband-sequence-sync.png)
 
-All JSON-RPC methods used between clients to communicate state and events are listed [here](client-jsonrpc.md)
+All JSON-RPC methods used between clients to communicate state and events are listed [here](../json-rpc/)
