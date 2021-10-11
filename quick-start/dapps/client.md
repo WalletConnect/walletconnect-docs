@@ -23,12 +23,12 @@ npm install --save @walletconnect/client@experimental
 import WalletConnectClient from "@walletconnect/client";
 
 const client = await WalletConnectClient.init({
-  relayProvider: "wss://relay.walletconnect.org",
+  relayProvider: "wss://relay.walletconnect.com",
   metadata: {
     name: "Example Dapp",
     description: "Example Dapp",
     url: "#",
-    icons: ["https://walletconnect.org/walletconnect-logo.png"],
+    icons: ["https://walletconnect.com/walletconnect-logo.png"],
   },
 });
 ```

@@ -197,7 +197,7 @@ interface WakuUnsubscribeResponse {
 ### Test Hello World
 
 ```bash
-  GET https://relay.walletconnect.org/hello
+  GET https://relay.walletconnect.com/hello
 
   Response:
   Status: 200
@@ -208,7 +208,7 @@ interface WakuUnsubscribeResponse {
 ### Subscribe Push Notification Webhook
 
 ```bash
-  POST https://relay.walletconnect.org/subscribe
+  POST https://relay.walletconnect.com/subscribe
   Content-Type: application/json
   Body:
   {

@@ -25,12 +25,12 @@ import WalletConnectClient from "@walletconnect/client";
 
 const client = await WalletConnectClient.init({
   controller: true,
-  relayProvider: "wss://relay.walletconnect.org",
+  relayProvider: "wss://relay.walletconnect.com",
   metadata: {
     name: "Test Wallet",
     description: "Test Wallet",
     url: "#",
-    icons: ["https://walletconnect.org/walletconnect-logo.png"],
+    icons: ["https://walletconnect.com/walletconnect-logo.png"],
   },
   storageOptions: {
     asyncStorage: AsyncStorage,
