@@ -13,7 +13,7 @@ Swift implementation of WalletConnect v.2 protocol for native iOS applications.
 ## Usage
 #### Instantiate Client
 ```Swift
-let url = URL(string: "wss://relay.walletconnect.org")!
+let url = URL(string: "wss://relay.walletconnect.com")!
 let options = WalletClientOptions(apiKey: String, name: String, isController: true, metadata: AppMetadata(name: String?, description: String?, url: String?, icons: [String]?), relayURL: url)
 let client = WalletConnectClient(options: options)
 ```
