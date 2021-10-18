@@ -1,0 +1,41 @@
+{
+  "version-1.0/mainSidebar": [
+    "version-1.0/readme",
+    {
+      "type": "category",
+      "label": "Quick Start",
+      "items": [
+        {
+          "type": "category",
+          "label": "Dapps",
+          "items": ["version-1.0/quick-start/dapps/client","version-1.0/quick-start/dapps/node","version-1.0/quick-start/dapps/react-native","version-1.0/quick-start/dapps/web3-provider"],
+          "collapsible": true,
+          "collapsed": true
+        },
+        {
+          "type": "category",
+          "label": "Wallets",
+          "items": ["version-1.0/quick-start/wallets/kotlin","version-1.0/quick-start/wallets/swift","version-1.0/quick-start/wallets/react-native"],
+          "collapsible": true,
+          "collapsed": true
+        }
+      ],
+      "collapsible": true,
+      "collapsed": false
+    },
+    "version-1.0/tech-spec",
+    {
+      "type": "category",
+      "label": "JSON-RPC API Methods",
+      "items": ["version-1.0/json-rpc-api-methods/ethereum"],
+      "collapsible": true,
+      "collapsed": true
+    },
+    "version-1.0/smart-wallets",
+    "version-1.0/mobile-linking",
+    "version-1.0/legacy-clients",
+    "version-1.0/client-api",
+    "version-1.0/bridge-server",
+    "version-1.0/push-server"
+  ]
+}
