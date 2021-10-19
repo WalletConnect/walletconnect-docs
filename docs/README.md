@@ -28,6 +28,6 @@ TODO
 
 Share your experience, contribute or ask questions with the WalletConnect Community
 
-- Discord: [https://discord.walletconnect.org](https://discord.walletconnect.org)
+- Discord: [https://discord.walletconnect.com](https://discord.walletconnect.com)
 - Twitter: [https://twitter.com/walletconnect](https://twitter.com/walletconnect)
 - Github: [https://github.com/walletconnect](https://github.com/walletconnect)
