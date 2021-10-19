@@ -22,7 +22,10 @@ Additionally you can also consult the API references for [Client](./api/client-a
 
 ## Useful Links
 
-TODO
+Here are some demos that you can use to try the protocol yourself
+
+- App: [https://react-app.walletconnect.com](https://react-app.walletconnect.com)
+- Wallet: [https://react-wallet.walletconnect.com](https://react-wallet.walletconnect.com)
 
 ## Community
 
