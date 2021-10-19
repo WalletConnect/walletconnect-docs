@@ -24,7 +24,7 @@ const config = {
         docs: {
           routeBasePath: '/',
           sidebarPath: require.resolve('./sidebars.js'),
-          editUrl: 'https://github.com/walletconnect/walletconnect-docs/',
+          editUrl: 'https://github.com/WalletConnect/walletconnect-docs/blob/main/',
           lastVersion: "current",
           versions: {
             "current": {
