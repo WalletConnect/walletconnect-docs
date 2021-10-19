@@ -72,7 +72,19 @@ or
 
 #### JSON-RPC Payloads
 
-TODO
+#### Receive
+ You can parse JSON-RPC Requests received from "Requester" in `didReceive(sessionRequest: SessionRequest)` delegate function.
+
+ Request parameters can be type casted based on request method as below:
+ ```Swift
+             let params = try! sessionRequest.request.params.get([EthSendTransaction].self)
+ ```
+ ##### Respond
+
+ ```Swift
+             let jsonrpcResponse = JSONRPCResponse<AnyCodable>(id: request.id, result: AnyCodable(responseParams))
+             client.respond(topic: sessionRequest.topic, response: jsonrpcResponse)
+ ```
 
 ## API Keys
 
