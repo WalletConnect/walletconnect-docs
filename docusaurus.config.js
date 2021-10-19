@@ -28,7 +28,7 @@ const config = {
           lastVersion: "current",
           versions: {
             "current": {
-              "label": "2.0 alpha"
+              "label": "2.0 beta"
             },
           },
           remarkPlugins: [
