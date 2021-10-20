@@ -15,7 +15,7 @@ Note: The Kotlin client is in Alpha and should only be used for testing.
 To get started, add the WalletConnect library as a module to your project
 
 #### Project build.gradle.kts
-```gradle
+```kotlin
 implementation(project(":walletconnectV2"))
 ```
 
