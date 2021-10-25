@@ -6,9 +6,9 @@ description: Quick Start For Wallets Using Kotlin Client \(Android\)
 
 ## Quick Start For Wallets (Kotlin Client)
 
-{% hint style="info" %}
+:::info
 You can use the **Example Dapp** to test your integration at [example.walletconnect.org](https://example.walletconnect.org) \([Source code](https://github.com/WalletConnect/walletconnect-example-dapp)\)
-{% endhint %}
+:::
 
 ## Github
 
