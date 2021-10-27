@@ -125,6 +125,11 @@ const config = {
         darkTheme: darkCodeTheme,
         additionalLanguages: ['swift','kotlin'],
       },
+      algolia: {
+        appId: 'BH4D9OD16A',
+        apiKey: '4cf6bd4618643027dd526ed4ff272978',
+        indexName: 'walletconnect',
+      },
     }),
 };
 
