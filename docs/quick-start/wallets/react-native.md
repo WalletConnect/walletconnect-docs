@@ -77,7 +77,7 @@ function handleSessionUserApproval(
     // if user approved then include response with accounts matching the chains and wallet metadata
     const response: SessionTypes.Response = {
       state: {
-        accounts: ["0x1d85568eEAbad713fBB5293B45ea066e552A90De@eip155:1"],
+        accounts: ["eip155:1:0x1d85568eEAbad713fBB5293B45ea066e552A90De"],
       },
     };
     await client.approve({ proposal, response });
