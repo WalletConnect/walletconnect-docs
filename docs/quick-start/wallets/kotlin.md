@@ -17,7 +17,7 @@ Note: The Kotlin client is in Alpha and should only be used for testing.
 ## Installation
 root/build.gradle:
 
-```gradle
+```kotlin
 allprojects {
  repositories {
     maven { url "https://jitpack.io" }
@@ -26,7 +26,7 @@ allprojects {
 ```
 app/build.gradle(.kts)
 
-```gradle
+```kotlin
 groovy - implementation 'com.walletconnect:walletconnectv2:1.0.0-alpha01'
 
 kotlin - implementation("com.walletconnect:walletconnectv2:1.0.0-alpha01")
