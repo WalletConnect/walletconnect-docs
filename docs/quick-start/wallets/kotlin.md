@@ -14,8 +14,6 @@ Note: The Kotlin client is in Alpha and should only be used for testing.
 * Android min SDK 21
 * Java 11
 
-<br>
-
 ## Installation
 root/build.gradle:
 
@@ -26,9 +24,6 @@ allprojects {
  }
 }
 ```
-
-<br>
-
 app/build.gradle(.kts)
 
 ```gradle
@@ -37,8 +32,6 @@ groovy - implementation 'com.walletconnect:walletconnectv2:1.0.0-alpha01'
 kotlin - implementation("com.walletconnect:walletconnectv2:1.0.0-alpha01")
 
 ```
-
-<br>
 
 ## **Usage**
 
