@@ -1,5 +1,6 @@
 # Technical Specification
 
+
 ## Overview
 
 WalletConnect Protocol provides secure remote signing communication between a blockchain application and wallet which controls the authentication of the user's private keys.
@@ -16,7 +17,16 @@ The goal of WalletConnect protocol is to provide an interoperable secure remote 
 
 At a high level, WalletConnect serves a secure communication channel between two applications that run equivalent clients for WalletConnect which are connected to a relay infrastructure communicated through a publish-subscribe pattern.
 
-![walletconnect-protocol-simplified](/assets/walletconnect-protocol-simplified.png)
+import ThemedImage from '@theme/ThemedImage';
+import useBaseUrl from '@docusaurus/useBaseUrl';
+
+<ThemedImage
+  alt="Protocol architecture"
+  sources={{
+    light: useBaseUrl('/assets/protocol-architecture-light.png'),
+    dark: useBaseUrl('/assets/protocol-architecture-dark.png'),
+  }}
+/>
 
 The two clients are connected when some out-of-band data is shared in order to define the relay infrastructure and the cryptographic keys to used to encrypt payloads.
 
@@ -93,7 +103,13 @@ Just like its predecessor at its core there is a concept of a proposer and respo
 - t4 - Proposer is able to settle its own sequence and in parallel the Responder receives acknowledgement
 - t5 - Responder handles and validates the acknowledgement to be either successful or failed
 
-![outofband-sequence-approve](/assets/outofband-sequence-approve.png)
+<ThemedImage
+  alt="Out of band sequence approval"
+  sources={{
+    light: useBaseUrl('/assets/outofband-sequence-approve-light.png'),
+    dark: useBaseUrl('/assets/outofband-sequence-approve-dark.png'),
+  }}
+/>
 
 At this point, both the proposer and the responder have settled a sequence and can now exchange payloads securely using the sequence permissions agree upon. Now let's describe a "reject" flow:
 
@@ -102,7 +118,13 @@ At this point, both the proposer and the responder have settled a sequence and c
 - t2 - Responder discards proposal and is not subscribed to any topic and in parallel the Proposer receives the response
 - t3 - Proposer handles and validates response and throws an error on the client with the reason received on response
 
-![outofband-sequence-reject](/assets/outofband-sequence-reject.png)
+<ThemedImage
+  alt="Out of band sequence reject"
+  sources={{
+    light: useBaseUrl('/assets/outofband-sequence-reject-light.png'),
+    dark: useBaseUrl('/assets/outofband-sequence-reject-dark.png'),
+  }}
+/>
 
 While this conceptually describe the full flow sequence settlement approve and rejects flows, we need to dive into what is actually sent between them when sharing a signal, constructing a proposal, sending a response and/or acknowledgement.
 
