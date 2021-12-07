@@ -7,7 +7,7 @@ WalletConnect 2.0 clients will communicate state and events for the out-of-band 
 | pairing | wc_pairingApprove <br /> wc_pairingReject | wc_pairingUpdate <br /> wc_pairingUpgrade <br /> wc_pairingDelete <br /> wc_pairingPayload <br /> wc_pairingPing <br /> wc_pairingNotification |
 | session | wc_sessionApprove <br /> wc_sessionReject | wc_sessionUpdate <br /> wc_sessionUpgrade <br /> wc_sessionDelete <br /> wc_sessionPayload <br /> wc_sessionPing <br /> wc_sessionNotification |
 
-However this matrix does not include the pairing and session proposals which happen out-of-band of each sequence communidation:
+However this matrix does not include the pairing and session proposals which happen out-of-band of each sequence communication:
 
 - pairing proposal is shared through a URI shared as qrcode or deep link between two clients
 - session proposal is shared through a wc_pairingPayload request which includes the method wc_sessionPropose and corresponding params described below
