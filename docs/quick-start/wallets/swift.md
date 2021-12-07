@@ -7,7 +7,7 @@ description: Quick Start For Wallets Using Swift Client (iOS)
 Swift implementation of WalletConnect v.2 protocol for native iOS applications.
 
 :::caution
-Note: The Swift client is in Alpha and should only be used for testing.
+Note: The Swift client is in Beta and should only be used for testing.
 :::
 
 ## Requirements
@@ -19,11 +19,17 @@ Note: The Swift client is in Alpha and should only be used for testing.
 ## Usage
 
 #### Instantiate Client
+You usually want to have a single instance of a client in you app.
 
 ```swift
-let url = URL(string: "wss://relay.walletconnect.com")!
-let options = WalletClientOptions(apiKey: String, name: String, isController: true, metadata: AppMetadata(name: String?, description: String?, url: String?, icons: [String]?), relayURL: url)
-let client = WalletConnectClient(options: options)
+let metadata = AppMetadata(name: String?,
+                           description: String?,
+                           url: String?,
+                           icons: [String]?)
+let client = WalletConnectClient(metadata: AppMetadata,
+                               apiKey: String,
+                               isController: Bool,
+                               relayHost: String)
 ```
 
 #### Pair Clients
@@ -42,32 +48,28 @@ Sessions are always proposed by the `Proposer` client so `Responder` client need
 ```swift
 class ClientDelegate: WalletConnectClientDelegate {
 ...
-    func didReceive(sessionProposal: SessionType.Proposal) {
-        client.approve(proposal: proposal)
-    }
+    func didReceive(sessionProposal: SessionProposal) {
+        client.approve(proposal: proposal, accounts: [String]) { result in ... }
 ...
 ```
 
 or
 
 ```swift
-    func didReceive(sessionProposal: SessionType.Proposal) {
-        client.reject(proposal: proposal, reason: Reason)
-    }
+func didReceive(sessionProposal: SessionProposal) {
+     client.reject(proposal: proposal, reason: Reason)
+}
 ```
 
 #### Handle Delegate methods
 
 ```swift
-    func didSettle(session: SessionType.Settled) {
-        // handle settled session
-    }
-    func didReceive(sessionProposal: SessionType.Proposal) {
-        // handle session proposal
-    }
-    func didReceive(sessionRequest: SessionRequest) {
-        // handle session request
-    }
+func didReceive(sessionProposal: SessionProposal) {
+      // handle session proposal
+ }
+func didReceive(sessionRequest: SessionRequest) {
+     // handle session request
+ }
 ```
 
 #### JSON-RPC Payloads
@@ -77,13 +79,13 @@ or
 
  Request parameters can be type casted based on request method as below:
  ```Swift
-             let params = try! sessionRequest.request.params.get([EthSendTransaction].self)
+ let params = try! sessionRequest.request.params.get([EthSendTransaction].self)
  ```
  ##### Respond
 
  ```Swift
-             let jsonrpcResponse = JSONRPCResponse<AnyCodable>(id: request.id, result: AnyCodable(responseParams))
-             client.respond(topic: sessionRequest.topic, response: jsonrpcResponse)
+ let jsonrpcResponse = JSONRPCResponse<AnyCodable>(id: request.id, result: AnyCodable(responseParams))
+ client.respond(topic: sessionRequest.topic, response: .response(jsonrpcResponse))
  ```
 
 ## API Keys
