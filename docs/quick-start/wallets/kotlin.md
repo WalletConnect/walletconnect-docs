@@ -41,7 +41,7 @@ val initializeParams = ClientTypes.InitialParams(useTls = true, hostName = "rela
 WalletConnectClient.initalize(initalizeParams)
 ```
 The controller client will always be the "wallet" which is exposing blockchain accounts to a "Dapp" and therefore is also in charge of signing.
-To initialize the WalletConnect client, create a ClientTypes.InitialParams object in the Android Application class. The InitialParams object will need at least the API key and the Application. The InitialParams object will then ben passed to the WalletConnect.initialize function. 
+To initialize the WalletConnect client, create a ClientTypes.InitialParams object in the Android Application class. The InitialParams object will need at least the Project ID and the Application. The InitialParams object will then be passed to the WalletConnect.initialize function. 
 
 ### **Pair Clients**
 ```kotlin
@@ -77,6 +77,6 @@ WalletConnectClient.reject(rejectParams)
 ```
 To send a rejection for the Session Proposal, pass a rejection reason and the Session Proposal topic to the WalletConnectClient.reject function.
 
-## API Keys
+## Project ID
 
-For api keys look at [API Keys](../../api/api-keys.md).
+For the Project ID look at [Project ID](../../api/project-id.md).
