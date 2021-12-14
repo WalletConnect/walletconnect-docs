@@ -27,7 +27,7 @@ let metadata = AppMetadata(name: String?,
                            url: String?,
                            icons: [String]?)
 let client = WalletConnectClient(metadata: AppMetadata,
-                               apiKey: String,
+                               projectId: String,
                                isController: Bool,
                                relayHost: String)
 ```

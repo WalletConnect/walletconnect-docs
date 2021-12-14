@@ -37,7 +37,7 @@ kotlin - implementation("com.walletconnect:walletconnectv2:1.0.0-alpha01")
 
 ### **Initialize WalletConnect Client**
 ```kotlin
-val initializeParams = ClientTypes.InitialParams(useTls = true, hostName = "relay.walletconnect.com", apiKey = "sample key", isController = true)
+val initializeParams = ClientTypes.InitialParams(useTls = true, hostName = "relay.walletconnect.com", projectId = "sample project id", isController = true)
 WalletConnectClient.initalize(initalizeParams)
 ```
 The controller client will always be the "wallet" which is exposing blockchain accounts to a "Dapp" and therefore is also in charge of signing.
