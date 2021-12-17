@@ -27,7 +27,7 @@ let metadata = AppMetadata(name: String?,
                            url: String?,
                            icons: [String]?)
 let client = WalletConnectClient(metadata: AppMetadata,
-                               apiKey: String,
+                               projectId: String,
                                isController: Bool,
                                relayHost: String)
 ```
@@ -88,6 +88,6 @@ func didReceive(sessionRequest: SessionRequest) {
  client.respond(topic: sessionRequest.topic, response: .response(jsonrpcResponse))
  ```
 
-## API Keys
+## Project ID
 
-For api keys look at [API Keys](../../api/api-keys.md).
+For the Project ID look at [Project ID](../../api/project-id.md).
