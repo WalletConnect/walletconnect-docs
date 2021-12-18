@@ -134,6 +134,6 @@ client.on(
 );
 ```
 
-## API Keys
+## Project ID
 
-For api keys look at [API Keys](../../api/api-keys.md).
+For the Project ID look at [Project ID](../../api/project-id.md).

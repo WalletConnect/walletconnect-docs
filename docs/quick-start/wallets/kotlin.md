@@ -252,6 +252,6 @@ WalletConnectClient.shutdown()
 To make sure that the internal coroutines are handled correctly when leaving the application, call `WalletConnectClient.shutdown()` before exiting from the application.
 <br>
 
-## API Keys
+## Project ID
 
-For api keys look at [API Keys](../../api/api-keys.md).
+For the Project ID look at [Project ID](../../api/project-id.md).
