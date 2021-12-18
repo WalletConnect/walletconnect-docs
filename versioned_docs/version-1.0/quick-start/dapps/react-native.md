@@ -135,7 +135,7 @@ function App(): JSX.Element {
     /**
      *  Connect! 🎉
      */
-    return <Button title="Connect" onPress={() => connector.connect())} />;
+    return <Button title="Connect" onPress={() => connector.connect()} />;
   }
   return <Button title="Kill Session" onPress={() => connector.killSession()} />;
 }
