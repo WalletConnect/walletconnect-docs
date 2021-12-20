@@ -14,8 +14,6 @@ Note: The Kotlin client is in Alpha and should only be used for testing.
 * Android min SDK 21
 * Java 11
 
-<br>
-
 ## Installation
 root/build.gradle.kts:
 
@@ -27,15 +25,11 @@ allprojects {
 }
 ```
 
-<br>
-
 app/build.gradle
 
 ```gradle
 implementation("com.walletconnect:walletconnectv2:1.0.0-beta01")
 ```
-
-<br>
 
 ## **Usage**
 
@@ -250,7 +244,6 @@ To get a list of the most current pending sessions, call `WalletConnectClient.ge
 WalletConnectClient.shutdown()
 ```
 To make sure that the internal coroutines are handled correctly when leaving the application, call `WalletConnectClient.shutdown()` before exiting from the application.
-<br>
 
 ## Project ID
 
