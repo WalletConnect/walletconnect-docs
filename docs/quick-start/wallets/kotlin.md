@@ -7,7 +7,7 @@ description: Quick Start For Wallets Using Kotlin Client (Android)
 Kotlin implementation of WalletConnect v2 protocol for native Android applications.
 
 :::caution
-Note: The Kotlin client is in Alpha and should only be used for testing.
+Note: The Kotlin client is in Beta and should only be used for testing.
 :::
 
 ## Requirements
