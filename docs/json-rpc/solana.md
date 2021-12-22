@@ -72,7 +72,7 @@ This method returns an Array of public keys available to sign from the wallet.
 
 ## solana_signTransaction
 
-This method returns a signature for the provided instuctions to be signed targetting the requested signer address corresponding to the keypair returned by the account data.
+This method returns a signature over the provided instuctions by the targetted public key.
 
 ### Parameters
 
@@ -135,7 +135,7 @@ This method returns a signature for the provided instuctions to be signed target
 
 ## solana_signPartialTransaction
 
-This method returns a signature for the provided instuctions to be signed targetting the requested signer address corresponding to the keypair returned by the account data.
+This method returns a signature over the provided instuctions by the targetted public key.
 
 ### Parameters
 
@@ -193,6 +193,41 @@ This method returns a signature for the provided instuctions to be signed target
 ```
 
 # solana_signMessage
+
+This method returns a signature for the provided message from the requested signer address.
+
+### Parameters
+
+    1. `Object` - Signing parameters:
+    	1.1. `message` : `String` -  the message to be signed (base58 encoded)
+    	1.2. `pubkey` : `String` -  public key of the signer
+
+### Returns
+
+    1. `Object`
+    	1.1. `signature` : `String` - corresponding signature for signed message
+
+### Example
+
+```javascript
+// Request
+{
+	"id": 1,
+	"jsonrpc": "2.0",
+	"method": "solana_signMessage",
+	"params": {
+		"message": "37u9WtQpcm6ULa3VtWDFAWoQc1hUvybPrA3dtx99tgHvvcE7pKRZjuGmn7VX2tC3JmYDYGG7",
+		"pubkey": "AqP3MyNwDP4L1GJKYhzmaAUdrjzpqJUZjahM7kHpgavm"
+	}
+}
+
+// Result
+{
+	"id": 1,
+	"jsonrpc": "2.0",
+	"result":  { signature: "2Lb1KQHWfbV3pWMqXZveFWqneSyhH95YsgCENRWnArSkLydjN1M42oB82zSd6BBdGkM9pE6sQLQf1gyBh8KWM2c4" }
+}
+```
 
 # solana_sendTransaction
 
