@@ -1,20 +1,406 @@
-# Dependencies
-/node_modules
+From: <Saved by Blink>
+Snapshot-Content-Location: https://walletconnect.com/app/project/b62a0d17-a0a8-4340-979f-b367b8153a5d
+Subject: https://walletconnect.com/app/account - WalletConnect
+Date: Sat, 25 Dec 2021 15:03:31 -0000
+MIME-Version: 1.0
+Content-Type: multipart/related;
+	type="text/html";
+	boundary="----MultipartBoundary--ssidcyYuz9mfLX24sdoe6Llck2CZjDFgUTNS6yZjcd----"
 
-# Production
-/build
 
-# Generated files
-.docusaurus
-.cache-loader
+------MultipartBoundary--ssidcyYuz9mfLX24sdoe6Llck2CZjDFgUTNS6yZjcd----
+Content-Type: text/html
+Content-ID: <frame-3587D11D07E73FA4E243F91CF731D6F3@mhtml.blink>
+Content-Transfer-Encoding: binary
+Content-Location: https://walletconnect.com/app/project/b62a0d17-a0a8-4340-979f-b367b8153a5d
 
-# Misc
-.DS_Store
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
+<!DOCTYPE html><html lang="en" style="--chakra-ui-color-mode:light;"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><link rel="stylesheet" type="text/css" href="cid:css-27ce3706-61b0-4ed9-9b31-81332db7cbad@mhtml.blink" /><link rel="stylesheet" type="text/css" href="cid:css-1236bafb-014d-4cb4-b38c-e64e893b2962@mhtml.blink" /><link rel="stylesheet" type="text/css" href="cid:css-95919465-91db-40f2-8e07-4457deef1161@mhtml.blink" /><link rel="stylesheet" type="text/css" href="cid:css-94c9a7ba-fb9f-4c89-9edf-776fb125b511@mhtml.blink" /><link rel="stylesheet" type="text/css" href="cid:css-dfc980b8-09df-4f56-be3f-eacb012fead8@mhtml.blink" /><link rel="stylesheet" type="text/css" href="cid:css-f287c32a-3a3d-4d97-a0d7-2b1752dc4fc7@mhtml.blink" /><link rel="stylesheet" type="text/css" href="cid:css-2e8d91bb-ed77-4785-95f9-4e89a27abca4@mhtml.blink" /><meta name="description" content="Open protocol for connecting Wallets to Dapps"><meta name="msapplication-TileColor" content="#da532c"><meta name="theme-color" content="#ffffff"><meta name="description" content="WalletConnect is the open source web3 standard to connect blockchain wallets to dapps."><meta name="keywords" content="ethereum, cryptocurrency, wallet, mobile, connect, bridge, relay, proxy, standard, protocol, crypto, tokens, dapp"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@WalletConnect"><meta name="twitter:title" content="WalletConnect"><meta name="twitter:description" content="WalletConnect is the open source web3 standard to connect blockchain wallets to dapps."><meta name="twitter:img:src" content="https://walletconnect.com/social-card.png"><meta name="og:title" content="WalletConnect"><meta name="og:type" content="website"><meta name="og:url" content="https://walletconnect.com"><meta name="og:image" content="https://walletconnect.com/social-card.png"><meta name="twitter:image:alt" content="Connect web3 wallets to dapps."><meta name="og:description" content="WalletConnect is the open source web3 standard to connect blockchain wallets to dapps."><meta name="og:site_name" content="WalletConnect"><meta name="fb:admins" content="365412154213405"><link rel="icon" href="https://walletconnect.com/favicon.ico"><meta name="viewport" content="width=device-width"><title>https://walletconnect.com/app/account - WalletConnect</title><meta name="next-head-count" content="5"><link rel="preload" href="https://walletconnect.com/_next/static/css/45eb3d376e5f7079.css" as="style"><link rel="stylesheet" href="https://walletconnect.com/_next/static/css/45eb3d376e5f7079.css" data-n-g=""></head><body class="chakra-ui-light"><div id="__next"><div class="app css-0"><div mh="100vh" class="css-j7qwjs"><div class="css-1ni4p93"><div align="center" href="/app" class="css-o6tphw"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1459 238" version="1.1" class="css-uwwqev"><title>WalletConnect's logo</title><g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><g id="walletconnect-logo-2"><path d="M526.766839,130.223822 L506.743339,202.279192 L485.915975,202.279192 L458,96.8269617 L480.873561,96.8269617 L497.462373,173.193962 L498.047001,173.193962 L517.778188,96.8269617 L536.413197,96.8269617 L556.144384,173.193962 L556.729011,173.193962 L573.390902,96.8269617 L596.264463,96.8269617 L568.27541,202.279192 L547.448046,202.279192 L527.424545,130.223822 L526.766839,130.223822 Z M626.665106,188.101969 C635.946072,188.101969 643.619311,182.036456 643.619311,173.559354 L643.619311,167.859233 L627.103577,168.882332 C619.138024,169.46696 614.607159,173.047805 614.607159,178.601768 C614.607159,184.448046 619.430338,188.101969 626.665106,188.101969 Z M619.649573,203.521526 C604.741566,203.521526 593.414403,193.875168 593.414403,179.771024 C593.414403,165.520722 604.376173,157.262855 623.888124,156.0936 L643.619311,154.924344 L643.619311,149.735773 C643.619311,142.427926 638.503818,138.189375 630.465187,138.189375 C622.499633,138.189375 617.457219,142.135612 616.434121,147.908811 L596.922169,147.908811 C597.726033,132.70849 610.660922,122.258269 631.415207,122.258269 C651.511786,122.258269 664.592832,132.635411 664.592832,148.420361 L664.592832,202.279192 L643.984703,202.279192 L643.984703,190.294323 L643.546233,190.294323 C639.161524,198.625269 629.442088,203.521526 619.649573,203.521526 Z M678.843133,202.279192 L678.843133,96.8269617 L700.182046,96.8269617 L700.182046,202.279192 L678.843133,202.279192 Z M715.090054,202.279192 L715.090054,96.8269617 L736.428966,96.8269617 L736.428966,202.279192 L715.090054,202.279192 Z M785.976168,138.043218 C776.622124,138.043218 769.898905,145.13183 769.168121,154.924344 L802.418824,154.924344 C801.980353,144.912594 795.476369,138.043218 785.976168,138.043218 Z M802.711138,178.309455 L822.296167,178.309455 C819.957656,193.655933 805.92659,203.959997 786.560796,203.959997 C762.444901,203.959997 747.975365,188.54044 747.975365,163.474525 C747.975365,138.481689 762.591058,122.258269 785.756933,122.258269 C808.557415,122.258269 822.953874,137.677826 822.953874,161.501407 L822.953874,168.00539 L768.948885,168.00539 L768.948885,169.320803 C768.948885,180.501809 776.037497,188.175048 786.926188,188.175048 C794.745585,188.175048 800.738019,184.301889 802.711138,178.309455 Z M839.615765,105.888692 L860.954677,105.888692 L860.954677,123.939074 L875.424214,123.939074 L875.424214,140.016337 L860.954677,140.016337 L860.954677,177.505591 C860.954677,183.498026 863.877816,186.348086 870.162565,186.348086 C872.062605,186.348086 874.035723,186.201929 875.351136,185.982694 L875.351136,201.694565 C873.158782,202.206114 869.504858,202.571506 865.193229,202.571506 C846.777455,202.571506 839.615765,196.432915 839.615765,181.159515 L839.615765,140.016337 L828.580916,140.016337 L828.580916,123.939074 L839.615765,123.939074 L839.615765,105.888692 Z M935.567794,204.106154 C904.874837,204.106154 885.6552,183.571104 885.6552,149.516538 C885.6552,115.53505 905.020994,95 935.567794,95 C960.926023,95 980.218739,111.077263 981.899543,134.681609 L960.414474,134.681609 C958.368277,121.74672 948.429605,113.269617 935.567794,113.269617 C918.905903,113.269617 908.163368,127.227605 908.163368,149.443459 C908.163368,171.951628 918.759746,185.836537 935.640873,185.836537 C948.721919,185.836537 958.149041,178.163298 960.487552,165.666879 L981.972622,165.666879 C979.487954,189.198146 961.437572,204.106154 935.567794,204.106154 Z M1029.69286,203.959997 C1006.01544,203.959997 990.888195,188.759676 990.888195,163.036055 C990.888195,137.677826 1006.23467,122.258269 1029.69286,122.258269 C1053.15105,122.258269 1068.49753,137.604747 1068.49753,163.036055 C1068.49753,188.832754 1053.37029,203.959997 1029.69286,203.959997 Z M1029.69286,187.663499 C1040.14308,187.663499 1046.79322,178.821004 1046.79322,163.109133 C1046.79322,147.543419 1040.07,138.554767 1029.69286,138.554767 C1019.31572,138.554767 1012.51942,147.543419 1012.51942,163.109133 C1012.51942,178.821004 1019.16956,187.663499 1029.69286,187.663499 Z M1079.4593,202.279192 L1079.4593,123.939074 L1100.06743,123.939074 L1100.06743,137.897061 L1100.5059,137.897061 C1104.67137,128.177625 1112.92924,122.477504 1124.98719,122.477504 C1142.37986,122.477504 1152.17238,133.439275 1152.17238,151.78197 L1152.17238,202.279192 L1130.83346,202.279192 L1130.83346,156.239757 C1130.83346,146.008771 1126.01028,140.162494 1116.437,140.162494 C1106.86373,140.162494 1100.79821,147.178027 1100.79821,157.335934 L1100.79821,202.279192 L1079.4593,202.279192 Z M1165.69189,202.279192 L1165.69189,123.939074 L1186.30002,123.939074 L1186.30002,137.897061 L1186.73849,137.897061 C1190.90396,128.177625 1199.16183,122.477504 1211.21978,122.477504 C1228.61245,122.477504 1238.40497,133.439275 1238.40497,151.78197 L1238.40497,202.279192 L1217.06606,202.279192 L1217.06606,156.239757 C1217.06606,146.008771 1212.24288,140.162494 1202.6696,140.162494 C1193.09632,140.162494 1187.03081,147.178027 1187.03081,157.335934 L1187.03081,202.279192 L1165.69189,202.279192 Z M1287.07523,138.043218 C1277.72119,138.043218 1270.99797,145.13183 1270.26718,154.924344 L1303.51789,154.924344 C1303.07941,144.912594 1296.57543,138.043218 1287.07523,138.043218 Z M1303.8102,178.309455 L1323.39523,178.309455 C1321.05672,193.655933 1307.02565,203.959997 1287.65986,203.959997 C1263.54396,203.959997 1249.07443,188.54044 1249.07443,163.474525 C1249.07443,138.481689 1263.69012,122.258269 1286.85599,122.258269 C1309.65648,122.258269 1324.05293,137.677826 1324.05293,161.501407 L1324.05293,168.00539 L1270.04795,168.00539 L1270.04795,169.320803 C1270.04795,180.501809 1277.13656,188.175048 1288.02525,188.175048 C1295.84465,188.175048 1301.83708,184.301889 1303.8102,178.309455 Z M1406.19313,153.097383 L1386.38887,153.097383 C1385.14653,144.839516 1379.66565,138.993238 1370.89623,138.993238 C1360.37293,138.993238 1353.79587,147.908811 1353.79587,163.036055 C1353.79587,178.455611 1360.37293,187.225028 1370.96931,187.225028 C1379.51949,187.225028 1385.07346,182.109535 1386.38887,173.559354 L1406.26621,173.559354 C1405.17004,192.048207 1391.3582,203.959997 1370.75008,203.959997 C1347.14573,203.959997 1332.16464,188.613519 1332.16464,163.036055 C1332.16464,137.897061 1347.14573,122.258269 1370.60392,122.258269 C1391.79668,122.258269 1405.24311,135.339315 1406.19313,153.097383 Z M1422.2704,105.888692 L1443.60931,105.888692 L1443.60931,123.939074 L1458.07885,123.939074 L1458.07885,140.016337 L1443.60931,140.016337 L1443.60931,177.505591 C1443.60931,183.498026 1446.53245,186.348086 1452.8172,186.348086 C1454.71724,186.348086 1456.69036,186.201929 1458.00577,185.982694 L1458.00577,201.694565 C1455.81341,202.206114 1452.15949,202.571506 1447.84786,202.571506 C1429.43209,202.571506 1422.2704,196.432915 1422.2704,181.159515 L1422.2704,140.016337 L1411.23555,140.016337 L1411.23555,123.939074 L1422.2704,123.939074 L1422.2704,105.888692 Z" id="WalletConnect" fill="#3999FB"></path><path d="M79.4992542,46.5389641 C142.715504,-15.3550143 245.209294,-15.3550143 308.425541,46.5389641 L316.033719,53.9880033 C319.194531,57.0827021 319.194531,62.1002006 316.033719,65.1949006 L290.007661,90.6765804 C288.427255,92.2239311 285.86491,92.2239311 284.284504,90.6765804 L273.814748,80.4258162 C229.713513,37.2470301 158.211283,37.2470301 114.110047,80.4258162 L102.897805,91.4035389 C101.317397,92.9508883 98.755052,92.9508883 97.1746471,91.4035389 L71.1485898,65.9218591 C67.9877774,62.8271591 67.9877774,57.8096606 71.1485898,54.7149619 L79.4992542,46.5389641 Z M362.249885,99.2377722 L385.413126,121.916595 C388.573922,125.01128 388.573941,130.028748 385.413167,133.123453 L280.968512,235.385079 C277.807722,238.479801 272.683033,238.479836 269.522198,235.385159 C269.522185,235.385146 269.52217,235.385132 269.522157,235.385118 L195.393696,162.807065 C194.603493,162.03339 193.32232,162.03339 192.532117,162.807065 C192.532112,162.80707 192.532108,162.807076 192.532103,162.807079 L118.40522,235.385079 C115.24444,238.479809 110.119749,238.479861 106.958905,235.385192 C106.958887,235.385174 106.958867,235.385155 106.958847,235.385136 L2.51128675,133.12215 C-0.649524409,130.027451 -0.649524409,125.009953 2.51128675,121.915254 L25.6745697,99.2364692 C28.8353808,96.1417705 33.9600712,96.1417705 37.1208837,99.2364692 L111.250424,171.815537 C112.040627,172.589212 113.321798,172.589212 114.112002,171.815537 C114.112014,171.815525 114.112024,171.815514 114.112036,171.815505 L188.237861,99.2364692 C191.398601,96.1416993 196.523291,96.1415832 199.684176,99.2362107 C199.68422,99.2362542 199.684263,99.2362977 199.684307,99.2363413 L273.813749,171.815505 C274.603952,172.589179 275.885125,172.589179 276.675327,171.815505 L350.803571,99.2377722 C353.964384,96.1430722 359.089073,96.1430722 362.249885,99.2377722 Z" id="WalletConnect" fill="#3B99FC" fill-rule="nonzero"></path></g></g></svg></div><button type="button" class="chakra-button css-1qnk6no" aria-label="Menu"><svg stroke="currentColor" fill="none" stroke-width="0" viewBox="0 0 24 24" font-size="1.5rem" aria-hidden="true" focusable="false" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg></button></div><div class="css-1vtap4y"><div class="css-1uk75os"><div class="css-1ra9au0"><div class="css-1y0bycm"><div align="center" href="/app" class="css-r7mq6z"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1459 238" version="1.1" class="css-uwwqev"><title>WalletConnect's logo</title><g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><g id="walletconnect-logo-2"><path d="M526.766839,130.223822 L506.743339,202.279192 L485.915975,202.279192 L458,96.8269617 L480.873561,96.8269617 L497.462373,173.193962 L498.047001,173.193962 L517.778188,96.8269617 L536.413197,96.8269617 L556.144384,173.193962 L556.729011,173.193962 L573.390902,96.8269617 L596.264463,96.8269617 L568.27541,202.279192 L547.448046,202.279192 L527.424545,130.223822 L526.766839,130.223822 Z M626.665106,188.101969 C635.946072,188.101969 643.619311,182.036456 643.619311,173.559354 L643.619311,167.859233 L627.103577,168.882332 C619.138024,169.46696 614.607159,173.047805 614.607159,178.601768 C614.607159,184.448046 619.430338,188.101969 626.665106,188.101969 Z M619.649573,203.521526 C604.741566,203.521526 593.414403,193.875168 593.414403,179.771024 C593.414403,165.520722 604.376173,157.262855 623.888124,156.0936 L643.619311,154.924344 L643.619311,149.735773 C643.619311,142.427926 638.503818,138.189375 630.465187,138.189375 C622.499633,138.189375 617.457219,142.135612 616.434121,147.908811 L596.922169,147.908811 C597.726033,132.70849 610.660922,122.258269 631.415207,122.258269 C651.511786,122.258269 664.592832,132.635411 664.592832,148.420361 L664.592832,202.279192 L643.984703,202.279192 L643.984703,190.294323 L643.546233,190.294323 C639.161524,198.625269 629.442088,203.521526 619.649573,203.521526 Z M678.843133,202.279192 L678.843133,96.8269617 L700.182046,96.8269617 L700.182046,202.279192 L678.843133,202.279192 Z M715.090054,202.279192 L715.090054,96.8269617 L736.428966,96.8269617 L736.428966,202.279192 L715.090054,202.279192 Z M785.976168,138.043218 C776.622124,138.043218 769.898905,145.13183 769.168121,154.924344 L802.418824,154.924344 C801.980353,144.912594 795.476369,138.043218 785.976168,138.043218 Z M802.711138,178.309455 L822.296167,178.309455 C819.957656,193.655933 805.92659,203.959997 786.560796,203.959997 C762.444901,203.959997 747.975365,188.54044 747.975365,163.474525 C747.975365,138.481689 762.591058,122.258269 785.756933,122.258269 C808.557415,122.258269 822.953874,137.677826 822.953874,161.501407 L822.953874,168.00539 L768.948885,168.00539 L768.948885,169.320803 C768.948885,180.501809 776.037497,188.175048 786.926188,188.175048 C794.745585,188.175048 800.738019,184.301889 802.711138,178.309455 Z M839.615765,105.888692 L860.954677,105.888692 L860.954677,123.939074 L875.424214,123.939074 L875.424214,140.016337 L860.954677,140.016337 L860.954677,177.505591 C860.954677,183.498026 863.877816,186.348086 870.162565,186.348086 C872.062605,186.348086 874.035723,186.201929 875.351136,185.982694 L875.351136,201.694565 C873.158782,202.206114 869.504858,202.571506 865.193229,202.571506 C846.777455,202.571506 839.615765,196.432915 839.615765,181.159515 L839.615765,140.016337 L828.580916,140.016337 L828.580916,123.939074 L839.615765,123.939074 L839.615765,105.888692 Z M935.567794,204.106154 C904.874837,204.106154 885.6552,183.571104 885.6552,149.516538 C885.6552,115.53505 905.020994,95 935.567794,95 C960.926023,95 980.218739,111.077263 981.899543,134.681609 L960.414474,134.681609 C958.368277,121.74672 948.429605,113.269617 935.567794,113.269617 C918.905903,113.269617 908.163368,127.227605 908.163368,149.443459 C908.163368,171.951628 918.759746,185.836537 935.640873,185.836537 C948.721919,185.836537 958.149041,178.163298 960.487552,165.666879 L981.972622,165.666879 C979.487954,189.198146 961.437572,204.106154 935.567794,204.106154 Z M1029.69286,203.959997 C1006.01544,203.959997 990.888195,188.759676 990.888195,163.036055 C990.888195,137.677826 1006.23467,122.258269 1029.69286,122.258269 C1053.15105,122.258269 1068.49753,137.604747 1068.49753,163.036055 C1068.49753,188.832754 1053.37029,203.959997 1029.69286,203.959997 Z M1029.69286,187.663499 C1040.14308,187.663499 1046.79322,178.821004 1046.79322,163.109133 C1046.79322,147.543419 1040.07,138.554767 1029.69286,138.554767 C1019.31572,138.554767 1012.51942,147.543419 1012.51942,163.109133 C1012.51942,178.821004 1019.16956,187.663499 1029.69286,187.663499 Z M1079.4593,202.279192 L1079.4593,123.939074 L1100.06743,123.939074 L1100.06743,137.897061 L1100.5059,137.897061 C1104.67137,128.177625 1112.92924,122.477504 1124.98719,122.477504 C1142.37986,122.477504 1152.17238,133.439275 1152.17238,151.78197 L1152.17238,202.279192 L1130.83346,202.279192 L1130.83346,156.239757 C1130.83346,146.008771 1126.01028,140.162494 1116.437,140.162494 C1106.86373,140.162494 1100.79821,147.178027 1100.79821,157.335934 L1100.79821,202.279192 L1079.4593,202.279192 Z M1165.69189,202.279192 L1165.69189,123.939074 L1186.30002,123.939074 L1186.30002,137.897061 L1186.73849,137.897061 C1190.90396,128.177625 1199.16183,122.477504 1211.21978,122.477504 C1228.61245,122.477504 1238.40497,133.439275 1238.40497,151.78197 L1238.40497,202.279192 L1217.06606,202.279192 L1217.06606,156.239757 C1217.06606,146.008771 1212.24288,140.162494 1202.6696,140.162494 C1193.09632,140.162494 1187.03081,147.178027 1187.03081,157.335934 L1187.03081,202.279192 L1165.69189,202.279192 Z M1287.07523,138.043218 C1277.72119,138.043218 1270.99797,145.13183 1270.26718,154.924344 L1303.51789,154.924344 C1303.07941,144.912594 1296.57543,138.043218 1287.07523,138.043218 Z M1303.8102,178.309455 L1323.39523,178.309455 C1321.05672,193.655933 1307.02565,203.959997 1287.65986,203.959997 C1263.54396,203.959997 1249.07443,188.54044 1249.07443,163.474525 C1249.07443,138.481689 1263.69012,122.258269 1286.85599,122.258269 C1309.65648,122.258269 1324.05293,137.677826 1324.05293,161.501407 L1324.05293,168.00539 L1270.04795,168.00539 L1270.04795,169.320803 C1270.04795,180.501809 1277.13656,188.175048 1288.02525,188.175048 C1295.84465,188.175048 1301.83708,184.301889 1303.8102,178.309455 Z M1406.19313,153.097383 L1386.38887,153.097383 C1385.14653,144.839516 1379.66565,138.993238 1370.89623,138.993238 C1360.37293,138.993238 1353.79587,147.908811 1353.79587,163.036055 C1353.79587,178.455611 1360.37293,187.225028 1370.96931,187.225028 C1379.51949,187.225028 1385.07346,182.109535 1386.38887,173.559354 L1406.26621,173.559354 C1405.17004,192.048207 1391.3582,203.959997 1370.75008,203.959997 C1347.14573,203.959997 1332.16464,188.613519 1332.16464,163.036055 C1332.16464,137.897061 1347.14573,122.258269 1370.60392,122.258269 C1391.79668,122.258269 1405.24311,135.339315 1406.19313,153.097383 Z M1422.2704,105.888692 L1443.60931,105.888692 L1443.60931,123.939074 L1458.07885,123.939074 L1458.07885,140.016337 L1443.60931,140.016337 L1443.60931,177.505591 C1443.60931,183.498026 1446.53245,186.348086 1452.8172,186.348086 C1454.71724,186.348086 1456.69036,186.201929 1458.00577,185.982694 L1458.00577,201.694565 C1455.81341,202.206114 1452.15949,202.571506 1447.84786,202.571506 C1429.43209,202.571506 1422.2704,196.432915 1422.2704,181.159515 L1422.2704,140.016337 L1411.23555,140.016337 L1411.23555,123.939074 L1422.2704,123.939074 L1422.2704,105.888692 Z" id="WalletConnect" fill="#3999FB"></path><path d="M79.4992542,46.5389641 C142.715504,-15.3550143 245.209294,-15.3550143 308.425541,46.5389641 L316.033719,53.9880033 C319.194531,57.0827021 319.194531,62.1002006 316.033719,65.1949006 L290.007661,90.6765804 C288.427255,92.2239311 285.86491,92.2239311 284.284504,90.6765804 L273.814748,80.4258162 C229.713513,37.2470301 158.211283,37.2470301 114.110047,80.4258162 L102.897805,91.4035389 C101.317397,92.9508883 98.755052,92.9508883 97.1746471,91.4035389 L71.1485898,65.9218591 C67.9877774,62.8271591 67.9877774,57.8096606 71.1485898,54.7149619 L79.4992542,46.5389641 Z M362.249885,99.2377722 L385.413126,121.916595 C388.573922,125.01128 388.573941,130.028748 385.413167,133.123453 L280.968512,235.385079 C277.807722,238.479801 272.683033,238.479836 269.522198,235.385159 C269.522185,235.385146 269.52217,235.385132 269.522157,235.385118 L195.393696,162.807065 C194.603493,162.03339 193.32232,162.03339 192.532117,162.807065 C192.532112,162.80707 192.532108,162.807076 192.532103,162.807079 L118.40522,235.385079 C115.24444,238.479809 110.119749,238.479861 106.958905,235.385192 C106.958887,235.385174 106.958867,235.385155 106.958847,235.385136 L2.51128675,133.12215 C-0.649524409,130.027451 -0.649524409,125.009953 2.51128675,121.915254 L25.6745697,99.2364692 C28.8353808,96.1417705 33.9600712,96.1417705 37.1208837,99.2364692 L111.250424,171.815537 C112.040627,172.589212 113.321798,172.589212 114.112002,171.815537 C114.112014,171.815525 114.112024,171.815514 114.112036,171.815505 L188.237861,99.2364692 C191.398601,96.1416993 196.523291,96.1415832 199.684176,99.2362107 C199.68422,99.2362542 199.684263,99.2362977 199.684307,99.2363413 L273.813749,171.815505 C274.603952,172.589179 275.885125,172.589179 276.675327,171.815505 L350.803571,99.2377722 C353.964384,96.1430722 359.089073,96.1430722 362.249885,99.2377722 Z" id="WalletConnect" fill="#3B99FC" fill-rule="nonzero"></path></g></g></svg></div></div><nav class="chakra-stack css-b5leqj" aria-label="Sidebar Navigation"><div class="chakra-stack css-46p1lt"><a class="chakra-link css-y9hi2g" href="https://walletconnect.com/app"><div class="chakra-stack css-a9v878"><span class="chakra-text css-0">Projects</span></div></a><a class="chakra-link css-y9hi2g" href="https://walletconnect.com/app/account"><div class="chakra-stack css-a9v878"><span class="chakra-text css-0">Account</span></div></a></div><hr aria-orientation="horizontal" class="chakra-divider css-svjswr"><div class="chakra-stack css-46p1lt"><a target="_blank" rel="noopener noreferrer" class="chakra-link css-y9hi2g" href="https://discord.gg/cB54BwPGru"><div class="chakra-stack css-a9v878"><span class="chakra-text css-0">Support</span><svg viewBox="0 0 24 24" focusable="false" class="chakra-icon css-2y6psj"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><path d="M15 3h6v6"></path><path d="M10 14L21 3"></path></g></svg></div></a><a target="_blank" rel="noopener noreferrer" class="chakra-link css-y9hi2g" href="https://docs.walletconnect.com/"><div class="chakra-stack css-a9v878"><span class="chakra-text css-0">Docs</span><svg viewBox="0 0 24 24" focusable="false" class="chakra-icon css-2y6psj"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><path d="M15 3h6v6"></path><path d="M10 14L21 3"></path></g></svg></div></a></div></nav><div class="css-17xejub"></div></div><div class="chakra-stack css-16nr4nc"><div class="css-ngojhg"><p class="chakra-text css-1l55ytf" tabindex="0">Logout</p><p class="chakra-text css-cj1kcc">axelbautista1036@gmail.com</p></div></div></div><div class="css-rvgz9u"><div class="css-vlya9n"><div class="css-15u1fik"><div class="chakra-stack css-84zodg"><h2 class="chakra-heading css-17wlkqz">https://walletconnect.com/app/account</h2></div></div><div class="css-e69dqy"><hr aria-orientation="horizontal" class="chakra-divider css-1t64x04"></div><div class="chakra-tabs css-13o7eu2"><div role="tablist" aria-orientation="horizontal" class="chakra-tabs__tablist css-obuqjv"><button type="button" id="tabs-3--tab-0" role="tab" tabindex="0" aria-selected="true" aria-controls="tabs-3--tabpanel-0" class="chakra-tabs__tab css-1ltezim" data-index="0">Keys</button><button type="button" id="tabs-3--tab-1" role="tab" tabindex="-1" aria-selected="false" aria-controls="tabs-3--tabpanel-1" class="chakra-tabs__tab css-1ltezim" data-index="1">Settings</button></div><div class="chakra-tabs__tab-panels css-8atqhb"><div tabindex="0" aria-labelledby="tabs-3--tab-0" role="tabpanel" id="tabs-3--tabpanel-0" class="chakra-tabs__tab-panel css-a5mhaz"><div class="chakra-stack css-aoii07"><h2 class="chakra-heading css-12d46le">Keys</h2></div><hr aria-orientation="horizontal" class="chakra-divider css-1e6gg7n"><div class="css-qt8uxi"><div class="css-1ho3kxk"><div class="chakra-stack css-1msm0s5"><p class="chakra-text css-722v25">Project ID</p><p class="chakra-text css-6q9ebm">Your Project ID gives you access to the WalletConnect cloud.</p></div><div class="chakra-stack css-pc7wsj"><div class="css-3cdidt"><div class="css-70qvj9"><input type="text" disabled="" readonly="" aria-readonly="true" class="chakra-input css-1q6oz7k" value="7ccfc63f9a7d7e8d27eaaba197c5ecde"><div class="css-1fpn409"><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 448 512" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M320 448v40c0 13.255-10.745 24-24 24H24c-13.255 0-24-10.745-24-24V120c0-13.255 10.745-24 24-24h72v296c0 30.879 25.121 56 56 56h168zm0-344V0H152c-13.255 0-24 10.745-24 24v368c0 13.255 10.745 24 24 24h272c13.255 0 24-10.745 24-24V128H344c-13.2 0-24-10.8-24-24zm120.971-31.029L375.029 7.029A24 24 0 0 0 358.059 0H352v96h96v-6.059a24 24 0 0 0-7.029-16.97z"></path></svg></div></div><button type="button" class="chakra-button css-14fm6c8">Reset Project ID</button></div></div></div></div></div></div></div></div></div></div></div></div></div><div id="chakra-toast-portal"><ul id="chakra-toast-manager-top" style="position: fixed; z-index: 5500; pointer-events: none; display: flex; flex-direction: column; margin: 0px auto; top: env(safe-area-inset-top, 0px); right: env(safe-area-inset-right, 0px); left: env(safe-area-inset-left, 0px);"></ul><ul id="chakra-toast-manager-top-left" style="position: fixed; z-index: 5500; pointer-events: none; display: flex; flex-direction: column; top: env(safe-area-inset-top, 0px); left: env(safe-area-inset-left, 0px);"></ul><ul id="chakra-toast-manager-top-right" style="position: fixed; z-index: 5500; pointer-events: none; display: flex; flex-direction: column; top: env(safe-area-inset-top, 0px); right: env(safe-area-inset-right, 0px);"></ul><ul id="chakra-toast-manager-bottom-left" style="position: fixed; z-index: 5500; pointer-events: none; display: flex; flex-direction: column; bottom: env(safe-area-inset-bottom, 0px); left: env(safe-area-inset-left, 0px);"></ul><ul id="chakra-toast-manager-bottom" style="position: fixed; z-index: 5500; pointer-events: none; display: flex; flex-direction: column; margin: 0px auto; bottom: env(safe-area-inset-bottom, 0px); right: env(safe-area-inset-right, 0px); left: env(safe-area-inset-left, 0px);"></ul><ul id="chakra-toast-manager-bottom-right" style="position: fixed; z-index: 5500; pointer-events: none; display: flex; flex-direction: column; bottom: env(safe-area-inset-bottom, 0px); right: env(safe-area-inset-right, 0px);"></ul></div><next-route-announcer><p aria-live="assertive" id="__next-route-announcer__" role="alert" style="border: 0px; clip: rect(0px, 0px, 0px, 0px); height: 1px; margin: -1px; overflow: hidden; padding: 0px; position: absolute; width: 1px; white-space: nowrap; overflow-wrap: normal;"></p></next-route-announcer></body></html>
+------MultipartBoundary--ssidcyYuz9mfLX24sdoe6Llck2CZjDFgUTNS6yZjcd----
+Content-Type: text/css
+Content-Transfer-Encoding: binary
+Content-Location: cid:css-27ce3706-61b0-4ed9-9b31-81332db7cbad@mhtml.blink
 
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
+@charset "utf-8";
+
+:host, :root { --chakra-ring-inset:var(--chakra-empty, ); --chakra-ring-offset-width:0px; --chakra-ring-offset-color:#fff; --chakra-ring-color:rgba(66, 153, 225, 0.6); --chakra-ring-offset-shadow:0 0 #0000; --chakra-ring-shadow:0 0 #0000; --chakra-space-x-reverse:0; --chakra-space-y-reverse:0; --chakra-colors-transparent:transparent; --chakra-colors-current:currentColor; --chakra-colors-black:#000000; --chakra-colors-white:#FFFFFF; --chakra-colors-whiteAlpha-50:rgba(255, 255, 255, 0.04); --chakra-colors-whiteAlpha-100:rgba(255, 255, 255, 0.06); --chakra-colors-whiteAlpha-200:rgba(255, 255, 255, 0.08); --chakra-colors-whiteAlpha-300:rgba(255, 255, 255, 0.16); --chakra-colors-whiteAlpha-400:rgba(255, 255, 255, 0.24); --chakra-colors-whiteAlpha-500:rgba(255, 255, 255, 0.36); --chakra-colors-whiteAlpha-600:rgba(255, 255, 255, 0.48); --chakra-colors-whiteAlpha-700:rgba(255, 255, 255, 0.64); --chakra-colors-whiteAlpha-800:rgba(255, 255, 255, 0.8); --chakra-colors-whiteAlpha-900:rgba(255, 255, 255, 0.92); --chakra-colors-blackAlpha-50:rgba(0, 0, 0, 0.04); --chakra-colors-blackAlpha-100:rgba(0, 0, 0, 0.06); --chakra-colors-blackAlpha-200:rgba(0, 0, 0, 0.08); --chakra-colors-blackAlpha-300:rgba(0, 0, 0, 0.16); --chakra-colors-blackAlpha-400:rgba(0, 0, 0, 0.24); --chakra-colors-blackAlpha-500:rgba(0, 0, 0, 0.36); --chakra-colors-blackAlpha-600:rgba(0, 0, 0, 0.48); --chakra-colors-blackAlpha-700:rgba(0, 0, 0, 0.64); --chakra-colors-blackAlpha-800:rgba(0, 0, 0, 0.8); --chakra-colors-blackAlpha-900:rgba(0, 0, 0, 0.92); --chakra-colors-gray-50:#F7FAFC; --chakra-colors-gray-100:#EDF2F7; --chakra-colors-gray-200:#E2E8F0; --chakra-colors-gray-300:#CBD5E0; --chakra-colors-gray-400:#A0AEC0; --chakra-colors-gray-500:#718096; --chakra-colors-gray-600:#4A5568; --chakra-colors-gray-700:#2D3748; --chakra-colors-gray-800:#1A202C; --chakra-colors-gray-900:#171923; --chakra-colors-red-50:#FFF5F5; --chakra-colors-red-100:#FED7D7; --chakra-colors-red-200:#FEB2B2; --chakra-colors-red-300:#FC8181; --chakra-colors-red-400:#F56565; --chakra-colors-red-500:#E53E3E; --chakra-colors-red-600:#C53030; --chakra-colors-red-700:#9B2C2C; --chakra-colors-red-800:#822727; --chakra-colors-red-900:#63171B; --chakra-colors-orange-50:#FFFAF0; --chakra-colors-orange-100:#FEEBC8; --chakra-colors-orange-200:#FBD38D; --chakra-colors-orange-300:#F6AD55; --chakra-colors-orange-400:#ED8936; --chakra-colors-orange-500:#DD6B20; --chakra-colors-orange-600:#C05621; --chakra-colors-orange-700:#9C4221; --chakra-colors-orange-800:#7B341E; --chakra-colors-orange-900:#652B19; --chakra-colors-yellow-50:#FFFFF0; --chakra-colors-yellow-100:#FEFCBF; --chakra-colors-yellow-200:#FAF089; --chakra-colors-yellow-300:#F6E05E; --chakra-colors-yellow-400:#ECC94B; --chakra-colors-yellow-500:#D69E2E; --chakra-colors-yellow-600:#B7791F; --chakra-colors-yellow-700:#975A16; --chakra-colors-yellow-800:#744210; --chakra-colors-yellow-900:#5F370E; --chakra-colors-green-50:#F0FFF4; --chakra-colors-green-100:#C6F6D5; --chakra-colors-green-200:#9AE6B4; --chakra-colors-green-300:#68D391; --chakra-colors-green-400:#48BB78; --chakra-colors-green-500:#38A169; --chakra-colors-green-600:#2F855A; --chakra-colors-green-700:#276749; --chakra-colors-green-800:#22543D; --chakra-colors-green-900:#1C4532; --chakra-colors-teal-50:#E6FFFA; --chakra-colors-teal-100:#B2F5EA; --chakra-colors-teal-200:#81E6D9; --chakra-colors-teal-300:#4FD1C5; --chakra-colors-teal-400:#38B2AC; --chakra-colors-teal-500:#319795; --chakra-colors-teal-600:#2C7A7B; --chakra-colors-teal-700:#285E61; --chakra-colors-teal-800:#234E52; --chakra-colors-teal-900:#1D4044; --chakra-colors-blue-50:#ebf8ff; --chakra-colors-blue-100:#bee3f8; --chakra-colors-blue-200:#90cdf4; --chakra-colors-blue-300:#63b3ed; --chakra-colors-blue-400:#4299e1; --chakra-colors-blue-500:#3182ce; --chakra-colors-blue-600:#2b6cb0; --chakra-colors-blue-700:#2c5282; --chakra-colors-blue-800:#2a4365; --chakra-colors-blue-900:#1A365D; --chakra-colors-cyan-50:#EDFDFD; --chakra-colors-cyan-100:#C4F1F9; --chakra-colors-cyan-200:#9DECF9; --chakra-colors-cyan-300:#76E4F7; --chakra-colors-cyan-400:#0BC5EA; --chakra-colors-cyan-500:#00B5D8; --chakra-colors-cyan-600:#00A3C4; --chakra-colors-cyan-700:#0987A0; --chakra-colors-cyan-800:#086F83; --chakra-colors-cyan-900:#065666; --chakra-colors-purple-50:#FAF5FF; --chakra-colors-purple-100:#E9D8FD; --chakra-colors-purple-200:#D6BCFA; --chakra-colors-purple-300:#B794F4; --chakra-colors-purple-400:#9F7AEA; --chakra-colors-purple-500:#805AD5; --chakra-colors-purple-600:#6B46C1; --chakra-colors-purple-700:#553C9A; --chakra-colors-purple-800:#44337A; --chakra-colors-purple-900:#322659; --chakra-colors-pink-50:#FFF5F7; --chakra-colors-pink-100:#FED7E2; --chakra-colors-pink-200:#FBB6CE; --chakra-colors-pink-300:#F687B3; --chakra-colors-pink-400:#ED64A6; --chakra-colors-pink-500:#D53F8C; --chakra-colors-pink-600:#B83280; --chakra-colors-pink-700:#97266D; --chakra-colors-pink-800:#702459; --chakra-colors-pink-900:#521B41; --chakra-colors-linkedin-50:#E8F4F9; --chakra-colors-linkedin-100:#CFEDFB; --chakra-colors-linkedin-200:#9BDAF3; --chakra-colors-linkedin-300:#68C7EC; --chakra-colors-linkedin-400:#34B3E4; --chakra-colors-linkedin-500:#00A0DC; --chakra-colors-linkedin-600:#008CC9; --chakra-colors-linkedin-700:#0077B5; --chakra-colors-linkedin-800:#005E93; --chakra-colors-linkedin-900:#004471; --chakra-colors-facebook-50:#E8F4F9; --chakra-colors-facebook-100:#D9DEE9; --chakra-colors-facebook-200:#B7C2DA; --chakra-colors-facebook-300:#6482C0; --chakra-colors-facebook-400:#4267B2; --chakra-colors-facebook-500:#385898; --chakra-colors-facebook-600:#314E89; --chakra-colors-facebook-700:#29487D; --chakra-colors-facebook-800:#223B67; --chakra-colors-facebook-900:#1E355B; --chakra-colors-messenger-50:#D0E6FF; --chakra-colors-messenger-100:#B9DAFF; --chakra-colors-messenger-200:#A2CDFF; --chakra-colors-messenger-300:#7AB8FF; --chakra-colors-messenger-400:#2E90FF; --chakra-colors-messenger-500:#0078FF; --chakra-colors-messenger-600:#0063D1; --chakra-colors-messenger-700:#0052AC; --chakra-colors-messenger-800:#003C7E; --chakra-colors-messenger-900:#002C5C; --chakra-colors-whatsapp-50:#dffeec; --chakra-colors-whatsapp-100:#b9f5d0; --chakra-colors-whatsapp-200:#90edb3; --chakra-colors-whatsapp-300:#65e495; --chakra-colors-whatsapp-400:#3cdd78; --chakra-colors-whatsapp-500:#22c35e; --chakra-colors-whatsapp-600:#179848; --chakra-colors-whatsapp-700:#0c6c33; --chakra-colors-whatsapp-800:#01421c; --chakra-colors-whatsapp-900:#001803; --chakra-colors-twitter-50:#E5F4FD; --chakra-colors-twitter-100:#C8E9FB; --chakra-colors-twitter-200:#A8DCFA; --chakra-colors-twitter-300:#83CDF7; --chakra-colors-twitter-400:#57BBF5; --chakra-colors-twitter-500:#1DA1F2; --chakra-colors-twitter-600:#1A94DA; --chakra-colors-twitter-700:#1681BF; --chakra-colors-twitter-800:#136B9E; --chakra-colors-twitter-900:#0D4D71; --chakra-colors-telegram-50:#E3F2F9; --chakra-colors-telegram-100:#C5E4F3; --chakra-colors-telegram-200:#A2D4EC; --chakra-colors-telegram-300:#7AC1E4; --chakra-colors-telegram-400:#47A9DA; --chakra-colors-telegram-500:#0088CC; --chakra-colors-telegram-600:#007AB8; --chakra-colors-telegram-700:#006BA1; --chakra-colors-telegram-800:#005885; --chakra-colors-telegram-900:#003F5E; --chakra-colors-brand-500:#3999FB; --chakra-borders-none:0; --chakra-borders-1px:1px solid; --chakra-borders-2px:2px solid; --chakra-borders-4px:4px solid; --chakra-borders-8px:8px solid; --chakra-fonts-heading:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol"; --chakra-fonts-body:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol"; --chakra-fonts-mono:SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace; --chakra-fontSizes-xs:0.75rem; --chakra-fontSizes-sm:0.875rem; --chakra-fontSizes-md:1rem; --chakra-fontSizes-lg:1.125rem; --chakra-fontSizes-xl:1.25rem; --chakra-fontSizes-2xl:1.5rem; --chakra-fontSizes-3xl:1.875rem; --chakra-fontSizes-4xl:2.25rem; --chakra-fontSizes-5xl:3rem; --chakra-fontSizes-6xl:3.75rem; --chakra-fontSizes-7xl:4.5rem; --chakra-fontSizes-8xl:6rem; --chakra-fontSizes-9xl:8rem; --chakra-fontWeights-hairline:100; --chakra-fontWeights-thin:200; --chakra-fontWeights-light:300; --chakra-fontWeights-normal:400; --chakra-fontWeights-medium:500; --chakra-fontWeights-semibold:600; --chakra-fontWeights-bold:700; --chakra-fontWeights-extrabold:800; --chakra-fontWeights-black:900; --chakra-letterSpacings-tighter:-0.05em; --chakra-letterSpacings-tight:-0.025em; --chakra-letterSpacings-normal:0; --chakra-letterSpacings-wide:0.025em; --chakra-letterSpacings-wider:0.05em; --chakra-letterSpacings-widest:0.1em; --chakra-lineHeights-3:0.75rem; --chakra-lineHeights-4:1rem; --chakra-lineHeights-5:1.25rem; --chakra-lineHeights-6:1.5rem; --chakra-lineHeights-7:1.75rem; --chakra-lineHeights-8:2rem; --chakra-lineHeights-9:2.25rem; --chakra-lineHeights-10:2.5rem; --chakra-lineHeights-normal:normal; --chakra-lineHeights-none:1; --chakra-lineHeights-shorter:1.25; --chakra-lineHeights-short:1.375; --chakra-lineHeights-base:1.5; --chakra-lineHeights-tall:1.625; --chakra-lineHeights-taller:2; --chakra-radii-none:0; --chakra-radii-sm:0.125rem; --chakra-radii-base:0.25rem; --chakra-radii-md:0.375rem; --chakra-radii-lg:0.5rem; --chakra-radii-xl:0.75rem; --chakra-radii-2xl:1rem; --chakra-radii-3xl:1.5rem; --chakra-radii-full:9999px; --chakra-space-1:0.25rem; --chakra-space-2:0.5rem; --chakra-space-3:0.75rem; --chakra-space-4:1rem; --chakra-space-5:1.25rem; --chakra-space-6:1.5rem; --chakra-space-7:1.75rem; --chakra-space-8:2rem; --chakra-space-9:2.25rem; --chakra-space-10:2.5rem; --chakra-space-12:3rem; --chakra-space-14:3.5rem; --chakra-space-16:4rem; --chakra-space-20:5rem; --chakra-space-24:6rem; --chakra-space-28:7rem; --chakra-space-32:8rem; --chakra-space-36:9rem; --chakra-space-40:10rem; --chakra-space-44:11rem; --chakra-space-48:12rem; --chakra-space-52:13rem; --chakra-space-56:14rem; --chakra-space-60:15rem; --chakra-space-64:16rem; --chakra-space-72:18rem; --chakra-space-80:20rem; --chakra-space-96:24rem; --chakra-space-px:1px; --chakra-space-0\.5:0.125rem; --chakra-space-1\.5:0.375rem; --chakra-space-2\.5:0.625rem; --chakra-space-3\.5:0.875rem; --chakra-shadows-xs:0 0 0 1px rgba(0, 0, 0, 0.05); --chakra-shadows-sm:0 1px 2px 0 rgba(0, 0, 0, 0.05); --chakra-shadows-base:0 1px 3px 0 rgba(0, 0, 0, 0.1),0 1px 2px 0 rgba(0, 0, 0, 0.06); --chakra-shadows-md:0 4px 6px -1px rgba(0, 0, 0, 0.1),0 2px 4px -1px rgba(0, 0, 0, 0.06); --chakra-shadows-lg:0 10px 15px -3px rgba(0, 0, 0, 0.1),0 4px 6px -2px rgba(0, 0, 0, 0.05); --chakra-shadows-xl:0 20px 25px -5px rgba(0, 0, 0, 0.1),0 10px 10px -5px rgba(0, 0, 0, 0.04); --chakra-shadows-2xl:0 25px 50px -12px rgba(0, 0, 0, 0.25); --chakra-shadows-outline:0 0 0 3px rgba(66, 153, 225, 0.6); --chakra-shadows-inner:inset 0 2px 4px 0 rgba(0,0,0,0.06); --chakra-shadows-none:none; --chakra-shadows-dark-lg:rgba(0, 0, 0, 0.1) 0px 0px 0px 1px,rgba(0, 0, 0, 0.2) 0px 5px 10px,rgba(0, 0, 0, 0.4) 0px 15px 40px; --chakra-sizes-1:0.25rem; --chakra-sizes-2:0.5rem; --chakra-sizes-3:0.75rem; --chakra-sizes-4:1rem; --chakra-sizes-5:1.25rem; --chakra-sizes-6:1.5rem; --chakra-sizes-7:1.75rem; --chakra-sizes-8:2rem; --chakra-sizes-9:2.25rem; --chakra-sizes-10:2.5rem; --chakra-sizes-12:3rem; --chakra-sizes-14:3.5rem; --chakra-sizes-16:4rem; --chakra-sizes-20:5rem; --chakra-sizes-24:6rem; --chakra-sizes-28:7rem; --chakra-sizes-32:8rem; --chakra-sizes-36:9rem; --chakra-sizes-40:10rem; --chakra-sizes-44:11rem; --chakra-sizes-48:12rem; --chakra-sizes-52:13rem; --chakra-sizes-56:14rem; --chakra-sizes-60:15rem; --chakra-sizes-64:16rem; --chakra-sizes-72:18rem; --chakra-sizes-80:20rem; --chakra-sizes-96:24rem; --chakra-sizes-px:1px; --chakra-sizes-0\.5:0.125rem; --chakra-sizes-1\.5:0.375rem; --chakra-sizes-2\.5:0.625rem; --chakra-sizes-3\.5:0.875rem; --chakra-sizes-max:max-content; --chakra-sizes-min:min-content; --chakra-sizes-full:100%; --chakra-sizes-3xs:14rem; --chakra-sizes-2xs:16rem; --chakra-sizes-xs:20rem; --chakra-sizes-sm:24rem; --chakra-sizes-md:28rem; --chakra-sizes-lg:32rem; --chakra-sizes-xl:36rem; --chakra-sizes-2xl:42rem; --chakra-sizes-3xl:48rem; --chakra-sizes-4xl:56rem; --chakra-sizes-5xl:64rem; --chakra-sizes-6xl:72rem; --chakra-sizes-7xl:80rem; --chakra-sizes-8xl:90rem; --chakra-sizes-container-sm:640px; --chakra-sizes-container-md:768px; --chakra-sizes-container-lg:1024px; --chakra-sizes-container-xl:1280px; --chakra-zIndices-hide:-1; --chakra-zIndices-auto:auto; --chakra-zIndices-base:0; --chakra-zIndices-docked:10; --chakra-zIndices-dropdown:1000; --chakra-zIndices-sticky:1100; --chakra-zIndices-banner:1200; --chakra-zIndices-overlay:1300; --chakra-zIndices-modal:1400; --chakra-zIndices-popover:1500; --chakra-zIndices-skipLink:1600; --chakra-zIndices-toast:1700; --chakra-zIndices-tooltip:1800; --chakra-transition-property-common:background-color,border-color,color,fill,stroke,opacity,box-shadow,transform; --chakra-transition-property-colors:background-color,border-color,color,fill,stroke; --chakra-transition-property-dimensions:width,height; --chakra-transition-property-position:left,right,top,bottom; --chakra-transition-property-background:background-color,background-image,background-position; --chakra-transition-easing-ease-in:cubic-bezier(0.4, 0, 1, 1); --chakra-transition-easing-ease-out:cubic-bezier(0, 0, 0.2, 1); --chakra-transition-easing-ease-in-out:cubic-bezier(0.4, 0, 0.2, 1); --chakra-transition-duration-ultra-fast:50ms; --chakra-transition-duration-faster:100ms; --chakra-transition-duration-fast:150ms; --chakra-transition-duration-normal:200ms; --chakra-transition-duration-slow:300ms; --chakra-transition-duration-slower:400ms; --chakra-transition-duration-ultra-slow:500ms; --chakra-blur-none:0; --chakra-blur-sm:4px; --chakra-blur-base:8px; --chakra-blur-md:12px; --chakra-blur-lg:16px; --chakra-blur-xl:24px; --chakra-blur-2xl:40px; --chakra-blur-3xl:64px; }
+------MultipartBoundary--ssidcyYuz9mfLX24sdoe6Llck2CZjDFgUTNS6yZjcd----
+Content-Type: text/css
+Content-Transfer-Encoding: binary
+Content-Location: cid:css-1236bafb-014d-4cb4-b38c-e64e893b2962@mhtml.blink
+
+@charset "utf-8";
+
+html { line-height: 1.5; text-size-adjust: 100%; font-family: system-ui, sans-serif; -webkit-font-smoothing: antialiased; text-rendering: optimizelegibility; touch-action: manipulation; }
+
+body { position: relative; min-height: 100%; font-feature-settings: "kern"; }
+
+*, ::before, ::after { border-width: 0px; border-style: solid; box-sizing: border-box; }
+
+main { display: block; }
+
+hr { border-top-width: 1px; box-sizing: content-box; height: 0px; overflow: visible; }
+
+pre, code, kbd, samp { font-family: SFMono-Regular, Menlo, Monaco, Consolas, monospace; font-size: 1em; }
+
+a { background-color: transparent; color: inherit; text-decoration: inherit; }
+
+abbr[title] { border-bottom: none; text-decoration: underline dotted; }
+
+b, strong { font-weight: bold; }
+
+small { font-size: 80%; }
+
+sub, sup { font-size: 75%; line-height: 0; position: relative; vertical-align: baseline; }
+
+sub { bottom: -0.25em; }
+
+sup { top: -0.5em; }
+
+img { border-style: none; }
+
+button, input, optgroup, select, textarea { font-family: inherit; font-size: 100%; line-height: 1.15; margin: 0px; }
+
+button, input { overflow: visible; }
+
+button, select { text-transform: none; }
+
+fieldset { padding: 0.35em 0.75em 0.625em; }
+
+legend { box-sizing: border-box; color: inherit; display: table; max-width: 100%; padding: 0px; white-space: normal; }
+
+progress { vertical-align: baseline; }
+
+textarea { overflow: auto; }
+
+[type="checkbox"], [type="radio"] { box-sizing: border-box; padding: 0px; }
+
+[type="number"]::-webkit-inner-spin-button, [type="number"]::-webkit-outer-spin-button { appearance: none !important; }
+
+input[type="number"] { }
+
+[type="search"] { appearance: textfield; outline-offset: -2px; }
+
+[type="search"]::-webkit-search-decoration { appearance: none !important; }
+
+::-webkit-file-upload-button { appearance: button; font: inherit; }
+
+details { display: block; }
+
+summary { display: list-item; }
+
+template { display: none; }
+
+[hidden] { display: none !important; }
+
+body, blockquote, dl, dd, h1, h2, h3, h4, h5, h6, hr, figure, p, pre { margin: 0px; }
+
+button { background: transparent; padding: 0px; }
+
+fieldset { margin: 0px; padding: 0px; }
+
+ol, ul { margin: 0px; padding: 0px; }
+
+textarea { resize: vertical; }
+
+button, [role="button"] { cursor: pointer; }
+
+table { border-collapse: collapse; }
+
+h1, h2, h3, h4, h5, h6 { font-size: inherit; font-weight: inherit; }
+
+button, input, optgroup, select, textarea { padding: 0px; line-height: inherit; color: inherit; }
+
+img, svg, video, canvas, audio, iframe, embed, object { display: block; vertical-align: middle; }
+
+img, video { max-width: 100%; height: auto; }
+
+[data-js-focus-visible] :focus:not([data-focus-visible-added]) { outline: none; box-shadow: none; }
+------MultipartBoundary--ssidcyYuz9mfLX24sdoe6Llck2CZjDFgUTNS6yZjcd----
+Content-Type: text/css
+Content-Transfer-Encoding: binary
+Content-Location: cid:css-95919465-91db-40f2-8e07-4457deef1161@mhtml.blink
+
+@charset "utf-8";
+
+body { font-family: var(--chakra-fonts-body); color: var(--chakra-colors-gray-800); background: var(--chakra-colors-white); transition-property: background-color; transition-duration: var(--chakra-transition-duration-normal); line-height: var(--chakra-lineHeights-base); }
+
+::-webkit-input-placeholder { color: var(--chakra-colors-gray-400); }
+
+::placeholder { color: var(--chakra-colors-gray-400); }
+
+*, ::before, ::after { border-color: var(--chakra-colors-gray-200); overflow-wrap: break-word; }
+------MultipartBoundary--ssidcyYuz9mfLX24sdoe6Llck2CZjDFgUTNS6yZjcd----
+Content-Type: text/css
+Content-Transfer-Encoding: binary
+Content-Location: cid:css-94c9a7ba-fb9f-4c89-9edf-776fb125b511@mhtml.blink
+
+@charset "utf-8";
+
+.css-1wb36w { width: 100vw; height: 100vh; display: flex; -webkit-box-align: center; align-items: center; -webkit-box-pack: center; justify-content: center; }
+------MultipartBoundary--ssidcyYuz9mfLX24sdoe6Llck2CZjDFgUTNS6yZjcd----
+Content-Type: text/css
+Content-Transfer-Encoding: binary
+Content-Location: cid:css-dfc980b8-09df-4f56-be3f-eacb012fead8@mhtml.blink
+
+@charset "utf-8";
+
+.css-1uzzzzm { display: inline-block; border-top: 4px solid currentcolor; border-right: 4px solid currentcolor; border-bottom-style: solid; border-left-style: solid; border-radius: 99999px; border-bottom-width: 4px; border-left-width: 4px; border-bottom-color: var(--chakra-colors-gray-200); border-left-color: var(--chakra-colors-gray-200); animation: 0.65s linear 0s infinite normal none running animation-b7n1on; width: var(--spinner-size); height: var(--spinner-size); --spinner-size:3rem; color: var(--chakra-colors-brand-500); }
+
+@-webkit-keyframes animation-b7n1on { 
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes animation-b7n1on { 
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+------MultipartBoundary--ssidcyYuz9mfLX24sdoe6Llck2CZjDFgUTNS6yZjcd----
+Content-Type: text/css
+Content-Transfer-Encoding: binary
+Content-Location: cid:css-f287c32a-3a3d-4d97-a0d7-2b1752dc4fc7@mhtml.blink
+
+@charset "utf-8";
+
+.css-f8n5zr { border: 0px; clip: rect(0px, 0px, 0px, 0px); height: 1px; width: 1px; margin: -1px; padding: 0px; overflow: hidden; white-space: nowrap; position: absolute; }
+------MultipartBoundary--ssidcyYuz9mfLX24sdoe6Llck2CZjDFgUTNS6yZjcd----
+Content-Type: text/css
+Content-Transfer-Encoding: binary
+Content-Location: cid:css-2e8d91bb-ed77-4785-95f9-4e89a27abca4@mhtml.blink
+
+@charset "utf-8";
+
+.css-j7qwjs { display: flex; flex-direction: column; }
+
+.css-1ni4p93 { display: flex; -webkit-box-align: center; align-items: center; -webkit-box-pack: justify; justify-content: space-between; padding-top: var(--chakra-space-2); padding-bottom: var(--chakra-space-2); padding-inline-start: var(--chakra-space-4); padding-inline-end: var(--chakra-space-4); background: var(--chakra-colors-gray-50); border-bottom-width: 1px; }
+
+@media screen and (min-width: 48em) {
+  .css-1ni4p93 { display: none; }
+}
+
+.css-o6tphw { cursor: pointer; height: 35px; margin-top: var(--chakra-space-4); margin-bottom: var(--chakra-space-4); }
+
+.css-uwwqev { width: 100%; height: 100%; }
+
+.css-1qnk6no { display: flex; appearance: none; -webkit-box-align: center; align-items: center; -webkit-box-pack: center; justify-content: center; user-select: none; position: relative; white-space: nowrap; vertical-align: middle; outline: transparent solid 2px; outline-offset: 2px; width: auto; line-height: inherit; font-weight: var(--chakra-fontWeights-semibold); transition-property: var(--chakra-transition-property-common); transition-duration: var(--chakra-transition-duration-normal); height: var(--chakra-sizes-10); min-width: var(--chakra-sizes-10); font-size: var(--chakra-fontSizes-md); padding-inline-start: var(--chakra-space-4); padding-inline-end: var(--chakra-space-4); background: none; color: inherit; margin: 0px; padding: 0px; cursor: pointer; }
+
+.css-1qnk6no:focus, .css-1qnk6no[data-focus] { box-shadow: var(--chakra-shadows-outline); }
+
+.css-1qnk6no[disabled], .css-1qnk6no[aria-disabled="true"], .css-1qnk6no[data-disabled] { opacity: 0.4; cursor: not-allowed; box-shadow: var(--chakra-shadows-none); }
+
+.css-1qnk6no:hover[disabled], .css-1qnk6no[data-hover][disabled], .css-1qnk6no:hover[aria-disabled="true"], .css-1qnk6no[data-hover][aria-disabled="true"], .css-1qnk6no:hover[data-disabled], .css-1qnk6no[data-hover][data-disabled] { background: initial; }
+
+.css-1vtap4y { display: flex; flex: 1 1 0%; overflow: hidden; }
+
+.css-1uk75os { display: none; flex-direction: column; background: var(--chakra-colors-gray-50); border-right-width: 1px; width: var(--chakra-sizes-64); }
+
+@media screen and (min-width: 48em) {
+  .css-1uk75os { display: flex; }
+}
+
+.css-1ra9au0 { display: flex; flex-direction: column; flex: 1 1 0%; padding-top: var(--chakra-space-5); padding-bottom: var(--chakra-space-4); overflow-y: auto; padding-inline-start: var(--chakra-space-4); padding-inline-end: var(--chakra-space-4); }
+
+.css-1y0bycm { margin-bottom: var(--chakra-space-6); }
+
+.css-r7mq6z { cursor: pointer; height: var(--chakra-sizes-6); color: var(--chakra-colors-blue-600); margin-bottom: var(--chakra-space-12); }
+
+.css-b5leqj { display: flex; flex-direction: column; }
+
+.css-b5leqj > :not(style) ~ :not(style) { margin-top: var(--chakra-space-6); margin-inline: 0px; margin-bottom: 0px; }
+
+.css-46p1lt { display: flex; flex-direction: column; }
+
+.css-46p1lt > :not(style) ~ :not(style) { margin-top: var(--chakra-space-1); margin-inline: 0px; margin-bottom: 0px; }
+
+.css-y9hi2g { cursor: pointer; text-decoration: none; outline: transparent solid 2px; outline-offset: 2px; color: var(--chakra-colors-gray-700); display: block; padding-top: var(--chakra-space-2); padding-bottom: var(--chakra-space-2); padding-inline-start: var(--chakra-space-3); padding-inline-end: var(--chakra-space-3); border-radius: var(--chakra-radii-md); transition: all 0.3s ease 0s; font-weight: var(--chakra-fontWeights-medium); font-size: var(--chakra-fontSizes-sm); user-select: none; }
+
+.css-y9hi2g:hover, .css-y9hi2g[data-hover] { background: var(--chakra-colors-gray-100); color: var(--chakra-colors-gray-900); }
+
+.css-y9hi2g:focus, .css-y9hi2g[data-focus] { box-shadow: var(--chakra-shadows-outline); }
+
+.css-y9hi2g[aria-current="page"] { background: var(--chakra-colors-gray-200); color: inherit; }
+
+.css-a9v878 { display: flex; -webkit-box-align: center; align-items: center; flex-direction: row; }
+
+.css-a9v878 > :not(style) ~ :not(style) { margin-top: 0px; margin-inline-end: 0px; margin-bottom: 0px; margin-inline-start: var(--chakra-space-4); }
+
+.css-svjswr { opacity: 0.6; border-width: 0px 0px 1px; border-image: initial; border-color: inherit; border-style: solid; width: 100%; }
+
+.css-p9106h { width: 1em; height: 1em; display: inline-block; line-height: 1em; flex-shrink: 0; color: currentcolor; font-size: var(--chakra-fontSizes-lg); opacity: 0.64; }
+
+.css-2y6psj { width: 1em; height: 1em; display: inline-block; line-height: 1em; flex-shrink: 0; color: currentcolor; vertical-align: middle; margin-inline: 2px; }
+
+.css-17xejub { flex: 1 1 0%; place-self: stretch; }
+
+.css-16nr4nc { display: flex; -webkit-box-align: center; align-items: center; flex-direction: row; padding-inline-start: var(--chakra-space-2); padding-inline-end: var(--chakra-space-2); flex-shrink: 0; border-top-width: 1px; padding: var(--chakra-space-4); }
+
+.css-16nr4nc > :not(style) ~ :not(style) { margin-top: 0px; margin-inline-end: 0px; margin-bottom: 0px; margin-inline-start: var(--chakra-space-4); }
+
+.css-ngojhg { display: flex; flex-direction: column; font-weight: var(--chakra-fontWeights-medium); }
+
+.css-1l55ytf { margin-bottom: 4px; cursor: pointer; }
+
+.css-cj1kcc { font-size: var(--chakra-fontSizes-xs); line-height: var(--chakra-lineHeights-shorter); color: var(--chakra-colors-gray-600); }
+
+.css-rvgz9u { padding-inline-start: var(--chakra-space-8); padding-inline-end: var(--chakra-space-8); width: 100%; }
+
+.css-vlya9n { display: flex; flex-direction: column; -webkit-box-align: stretch; align-items: stretch; min-height: 100vh; padding-top: var(--chakra-space-10); padding-bottom: var(--chakra-space-10); }
+
+@media screen and (min-width: 30em) {
+  .css-vlya9n { padding-top: var(--chakra-space-16); padding-bottom: var(--chakra-space-16); }
+}
+
+.css-15u1fik { display: flex; flex-direction: row; -webkit-box-align: center; align-items: center; -webkit-box-pack: justify; justify-content: space-between; margin-bottom: var(--chakra-space-6); }
+
+.css-84zodg { display: flex; -webkit-box-align: center; align-items: center; flex-direction: row; }
+
+.css-84zodg > :not(style) ~ :not(style) { margin-top: 0px; margin-inline: 0.5rem 0px; margin-bottom: 0px; }
+
+.css-17wlkqz { font-family: var(--chakra-fonts-heading); font-weight: var(--chakra-fontWeights-bold); font-size: var(--chakra-fontSizes-2xl); line-height: 1.33; margin-bottom: var(--chakra-space-4); }
+
+@media screen and (min-width: 48em) {
+  .css-17wlkqz { font-size: var(--chakra-fontSizes-3xl); line-height: 1.2; margin-bottom: 0px; }
+}
+
+.css-e69dqy { position: relative; z-index: 0; }
+
+.css-1t64x04 { opacity: 1; border-width: 0px 0px 2px; border-image: initial; border-color: var(--chakra-colors-gray-100); border-style: solid; width: 100%; margin-bottom: var(--chakra-space-5); }
+
+.css-13o7eu2 { display: block; }
+
+.css-obuqjv { display: flex; -webkit-box-pack: start; justify-content: flex-start; flex-direction: row; border: var(--chakra-borders-none); }
+
+.css-1ltezim { outline: transparent solid 2px; outline-offset: 2px; display: flex; -webkit-box-align: center; align-items: center; -webkit-box-pack: center; justify-content: center; transition-property: var(--chakra-transition-property-common); transition-duration: var(--chakra-transition-duration-normal); font-size: var(--chakra-fontSizes-md); padding-top: var(--chakra-space-2); padding-bottom: var(--chakra-space-2); padding-inline-start: var(--chakra-space-4); padding-inline-end: var(--chakra-space-4); border-bottom-width: 2px; border-bottom-style: solid; border-color: var(--chakra-colors-transparent); margin-bottom: -2px; }
+
+.css-1ltezim:focus, .css-1ltezim[data-focus] { z-index: 1; box-shadow: var(--chakra-shadows-outline); }
+
+.css-1ltezim[aria-selected="true"], .css-1ltezim[data-selected] { color: var(--chakra-colors-blue-600); border-color: currentcolor; }
+
+.css-1ltezim:active, .css-1ltezim[data-active] { background: var(--chakra-colors-gray-200); }
+
+.css-1ltezim[disabled], .css-1ltezim[aria-disabled="true"], .css-1ltezim[data-disabled] { opacity: 0.4; cursor: not-allowed; }
+
+.css-8atqhb { width: 100%; }
+
+.css-a5mhaz { padding: var(--chakra-space-4); outline: transparent solid 2px; outline-offset: 2px; }
+
+.css-aoii07 { display: flex; flex-direction: column; padding-top: var(--chakra-space-6); padding-bottom: var(--chakra-space-6); }
+
+.css-aoii07 > :not(style) ~ :not(style) { margin-top: 0.5rem; margin-inline: 0px; margin-bottom: 0px; }
+
+.css-12d46le { font-family: var(--chakra-fonts-heading); font-weight: var(--chakra-fontWeights-bold); font-size: var(--chakra-fontSizes-2xl); line-height: 1.33; }
+
+@media screen and (min-width: 48em) {
+  .css-12d46le { line-height: 1.2; }
+}
+
+.css-1e6gg7n { opacity: 0.6; border-width: 0px 0px 1px; border-image: initial; border-color: inherit; border-style: solid; width: 100%; margin-bottom: var(--chakra-space-6); }
+
+.css-qt8uxi { max-width: var(--chakra-sizes-3xl); margin-bottom: var(--chakra-space-6); }
+
+.css-1ho3kxk { display: flex; flex-direction: column; -webkit-box-align: center; align-items: center; -webkit-box-pack: justify; justify-content: space-between; width: 100%; }
+
+@media screen and (min-width: 30em) {
+  .css-1ho3kxk { flex-direction: row; }
+}
+
+.css-1msm0s5 { display: flex; flex-direction: column; padding-right: var(--chakra-space-2); padding-bottom: var(--chakra-space-4); width: 100%; flex-basis: 100%; }
+
+.css-1msm0s5 > :not(style) ~ :not(style) { margin-top: 0.5rem; margin-inline: 0px; margin-bottom: 0px; }
+
+@media screen and (min-width: 48em) {
+  .css-1msm0s5 { flex-basis: 50%; }
+}
+
+.css-722v25 { font-weight: var(--chakra-fontWeights-bold); }
+
+.css-6q9ebm { color: var(--chakra-colors-gray-500); font-size: var(--chakra-fontSizes-xs); }
+
+.css-pc7wsj { display: flex; flex-direction: column; width: 100%; flex-basis: 100%; }
+
+.css-pc7wsj > :not(style) ~ :not(style) { margin-top: 0.5rem; margin-inline: 0px; margin-bottom: 0px; }
+
+@media screen and (min-width: 48em) {
+  .css-pc7wsj { flex-basis: 50%; }
+}
+
+.css-3cdidt { display: flex; flex-direction: column; }
+
+@media screen and (min-width: 62em) {
+  .css-3cdidt { flex-direction: row; }
+}
+
+.css-70qvj9 { display: flex; -webkit-box-align: center; align-items: center; }
+
+.css-1q6oz7k { width: 100%; min-width: 0px; outline: transparent solid 2px; outline-offset: 2px; position: relative; appearance: none; transition-property: var(--chakra-transition-property-common); transition-duration: var(--chakra-transition-duration-normal); font-size: var(--chakra-fontSizes-md); padding-inline-start: var(--chakra-space-4); padding-inline-end: var(--chakra-space-4); height: var(--chakra-sizes-10); border-radius: var(--chakra-radii-md); border-width: 1px; border-style: solid; border-image: initial; border-color: inherit; background: var(--chakra-colors-transparent); margin-right: var(--chakra-space-2); cursor: auto !important; }
+
+.css-1q6oz7k:hover, .css-1q6oz7k[data-hover] { border-color: var(--chakra-colors-gray-300); }
+
+.css-1q6oz7k[aria-readonly="true"], .css-1q6oz7k[readonly], .css-1q6oz7k[data-readonly] { user-select: all; box-shadow: none !important; }
+
+.css-1q6oz7k[disabled], .css-1q6oz7k[aria-disabled="true"], .css-1q6oz7k[data-disabled] { opacity: 0.4; cursor: not-allowed; }
+
+.css-1q6oz7k[aria-invalid="true"], .css-1q6oz7k[data-invalid] { border-color: rgb(229, 62, 62); box-shadow: rgb(229, 62, 62) 0px 0px 0px 1px; }
+
+.css-1q6oz7k:focus, .css-1q6oz7k[data-focus] { z-index: 1; border-color: rgb(49, 130, 206); box-shadow: rgb(49, 130, 206) 0px 0px 0px 1px; }
+
+.css-1fpn409 { padding: var(--chakra-space-2); cursor: pointer; }
+
+.css-14fm6c8 { display: inline-flex; appearance: none; -webkit-box-align: center; align-items: center; -webkit-box-pack: center; justify-content: center; user-select: none; position: relative; white-space: nowrap; vertical-align: middle; outline: transparent solid 2px; outline-offset: 2px; width: auto; line-height: 1.2; border-radius: var(--chakra-radii-md); font-weight: var(--chakra-fontWeights-normal); transition-property: var(--chakra-transition-property-common); transition-duration: var(--chakra-transition-duration-normal); height: var(--chakra-sizes-10); min-width: var(--chakra-sizes-10); font-size: var(--chakra-fontSizes-md); padding-inline-start: var(--chakra-space-4); padding-inline-end: var(--chakra-space-4); background: var(--chakra-colors-transparent); margin-left: 0px; margin-top: var(--chakra-space-3); }
+
+.css-14fm6c8:focus, .css-14fm6c8[data-focus] { box-shadow: var(--chakra-shadows-outline); }
+
+.css-14fm6c8[disabled], .css-14fm6c8[aria-disabled="true"], .css-14fm6c8[data-disabled] { opacity: 0.4; cursor: not-allowed; box-shadow: var(--chakra-shadows-none); }
+
+.css-14fm6c8:hover, .css-14fm6c8[data-hover] { background: var(--chakra-colors-gray-200); }
+
+.css-14fm6c8:hover[disabled], .css-14fm6c8[data-hover][disabled], .css-14fm6c8:hover[aria-disabled="true"], .css-14fm6c8[data-hover][aria-disabled="true"], .css-14fm6c8:hover[data-disabled], .css-14fm6c8[data-hover][data-disabled] { background: var(--chakra-colors-gray-100); }
+
+.css-14fm6c8:active, .css-14fm6c8[data-active] { background: var(--chakra-colors-gray-300); }
+
+@media screen and (min-width: 62em) {
+  .css-14fm6c8 { margin-left: var(--chakra-space-3); margin-top: 0px; }
+}
+
+.css-15dieqq { padding-top: var(--chakra-space-2); font-size: var(--chakra-fontSizes-xs); color: var(--chakra-colors-gray-500); }
+
+.css-1kxonj9 { width: 100%; position: relative; }
+
+.css-145nr7z { width: 100%; min-width: 0px; outline: transparent solid 2px; outline-offset: 2px; position: relative; appearance: none; transition-property: var(--chakra-transition-property-common); transition-duration: var(--chakra-transition-duration-normal); font-size: var(--chakra-fontSizes-md); padding-inline-start: var(--chakra-space-4); padding-inline-end: var(--chakra-space-4); height: var(--chakra-sizes-10); border-radius: var(--chakra-radii-md); border-width: 1px; border-style: solid; border-image: initial; border-color: inherit; margin-right: var(--chakra-space-2); background: white !important; cursor: auto !important; }
+
+.css-145nr7z:hover, .css-145nr7z[data-hover] { border-color: var(--chakra-colors-gray-300); }
+
+.css-145nr7z[aria-readonly="true"], .css-145nr7z[readonly], .css-145nr7z[data-readonly] { user-select: all; box-shadow: none !important; }
+
+.css-145nr7z[disabled], .css-145nr7z[aria-disabled="true"], .css-145nr7z[data-disabled] { opacity: 0.4; cursor: not-allowed; }
+
+.css-145nr7z[aria-invalid="true"], .css-145nr7z[data-invalid] { border-color: rgb(229, 62, 62); box-shadow: rgb(229, 62, 62) 0px 0px 0px 1px; }
+
+.css-145nr7z:focus, .css-145nr7z[data-focus] { z-index: 1; border-color: rgb(49, 130, 206); box-shadow: rgb(49, 130, 206) 0px 0px 0px 1px; }
+
+.css-1ujzcw { display: inline-flex; appearance: none; -webkit-box-align: center; align-items: center; -webkit-box-pack: center; justify-content: center; user-select: none; position: relative; white-space: nowrap; vertical-align: middle; outline: transparent solid 2px; outline-offset: 2px; width: auto; line-height: 1.2; border-radius: var(--chakra-radii-md); font-weight: var(--chakra-fontWeights-semibold); transition-property: var(--chakra-transition-property-common); transition-duration: var(--chakra-transition-duration-normal); height: var(--chakra-sizes-10); min-width: var(--chakra-sizes-10); font-size: var(--chakra-fontSizes-md); padding-inline-start: var(--chakra-space-4); padding-inline-end: var(--chakra-space-4); background: var(--chakra-colors-brand-500); color: var(--chakra-colors-white); margin-right: var(--chakra-space-3); }
+
+.css-1ujzcw:focus, .css-1ujzcw[data-focus] { box-shadow: var(--chakra-shadows-outline); }
+
+.css-1ujzcw[disabled], .css-1ujzcw[aria-disabled="true"], .css-1ujzcw[data-disabled] { opacity: 0.4; cursor: not-allowed; box-shadow: var(--chakra-shadows-none); }
+
+.css-1ujzcw:hover, .css-1ujzcw[data-hover] { background: var(--chakra-colors-blue-600); }
+
+.css-1ujzcw:hover[disabled], .css-1ujzcw[data-hover][disabled], .css-1ujzcw:hover[aria-disabled="true"], .css-1ujzcw[data-hover][aria-disabled="true"], .css-1ujzcw:hover[data-disabled], .css-1ujzcw[data-hover][data-disabled] { background: var(--chakra-colors-blue-500); }
+
+.css-1ujzcw:active, .css-1ujzcw[data-active] { background: var(--chakra-colors-blue-700); }
+------MultipartBoundary--ssidcyYuz9mfLX24sdoe6Llck2CZjDFgUTNS6yZjcd----
+Content-Type: text/css
+Content-Transfer-Encoding: binary
+Content-Location: https://walletconnect.com/_next/static/css/45eb3d376e5f7079.css
+
+@charset "utf-8";
+
+body, html { padding: 0px; margin: 0px; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif; scroll-behavior: smooth; }
+
+a { color: inherit; text-decoration: none; }
+
+* { box-sizing: border-box; }
+
+.copy-link { color: rgb(1, 121, 241) !important; }
+------MultipartBoundary--ssidcyYuz9mfLX24sdoe6Llck2CZjDFgUTNS6yZjcd------
