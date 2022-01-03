@@ -25,11 +25,12 @@ const config = {
           routeBasePath: '/',
           sidebarPath: require.resolve('./sidebars.js'),
           editUrl: 'https://github.com/WalletConnect/walletconnect-docs/blob/main/',
-          lastVersion: "current",
+          lastVersion: "1.0",
           versions: {
             "current": {
-              "label": "2.0 beta"
-            },
+              "label": "2.0 beta",
+              "path": "2.0"
+            }
           },
           remarkPlugins: [
             [require('@docusaurus/remark-plugin-npm2yarn'), {sync: true}],
