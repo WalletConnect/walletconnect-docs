@@ -14,7 +14,7 @@ npm install --save @walletconnect/client@experimental
 
 ## Create Session
 
-1. Initiate your WalletConnect client with the relay server
+1. Initiate your WalletConnect client with the relay server, using [your Project ID](../../api/project-id.md).
 
 ```javascript
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -22,7 +22,8 @@ import WalletConnectClient from "@walletconnect/client";
 
 const client = await WalletConnectClient.init({
   controller: true,
-  relayProvider: "wss://relay.walletconnect.com",
+  projectId: "c4f79cc...",
+  relayUrl: "wss://relay.walletconnect.com",
   metadata: {
     name: "Test Wallet",
     description: "Test Wallet",
@@ -35,7 +36,7 @@ const client = await WalletConnectClient.init({
 });
 ```
 
-1. Subscribe to session proposal event for user approval and session created when successful
+2. Subscribe to session proposal event for user approval and session created when successful
 
 ```javascript
 import { CLIENT_EVENTS } from "@walletconnect/client";
@@ -60,13 +61,13 @@ client.on(
 );
 ```
 
-1. Pair with shared URI from dapp
+3. Pair with shared URI from dapp
 
 ```javascript
 client.pair({ uri });
 ```
 
-1. Handle user approval for proposed session
+4. Handle user approval for proposed session
 
 ```javascript
 function handleSessionUserApproval(
