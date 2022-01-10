@@ -25,11 +25,12 @@ const config = {
           routeBasePath: '/',
           sidebarPath: require.resolve('./sidebars.js'),
           editUrl: 'https://github.com/WalletConnect/walletconnect-docs/blob/main/',
-          lastVersion: "current",
+          lastVersion: "1.0",
           versions: {
             "current": {
-              "label": "2.0 beta"
-            },
+              "label": "2.0 beta",
+              "path": "2.0"
+            }
           },
           remarkPlugins: [
             [require('@docusaurus/remark-plugin-npm2yarn'), {sync: true}],
@@ -126,8 +127,8 @@ const config = {
         additionalLanguages: ['swift','kotlin'],
       },
       algolia: {
-        appId: 'BH4D9OD16A',
-        apiKey: '4cf6bd4618643027dd526ed4ff272978',
+        appId: 'KEO8ND6AUT',
+        apiKey: '5921626237dc9040afc258af25d4e77d',
         indexName: 'walletconnect',
         contextualSearch: true,
       },
