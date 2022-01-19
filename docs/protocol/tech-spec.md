@@ -66,15 +66,12 @@ Contrary to its predecessor, the WalletConnect 2.0 protocol becomes agnostic to 
 
 The Relay Protocol MUST follow a publish-subscribe pattern and which MUST have a JSON-RPC API interface that includes the following methods and corresponding behaviors with the relay network infrastructure:
 
-- info — status and information about network
-- connect — start connection with network
-- disconnect — stop connection with network
 - publish — broadcast message with a topic to the network
 - subscribe — subscribe to messages with matching topic on the network
 - unsubscribe — unsubscribe to messages with matching topic on the network
 - subscription — incoming message with matching topic from the network
 
-Different protocols MUST have unique method prefixing to prevent conflicts when handling network interactions from the JSON-RPC API interface. For example, the Bridge server infrastructure would include methods such as `waku_info`, `waku_subscribe` and `waku_publish`.
+Different protocols MUST have unique method prefixing to prevent conflicts when handling network interactions from the JSON-RPC API interface. For example, the Bridge server infrastructure would include methods such as `waku_subscribe` and `waku_publish`.
 
 Some relay protocols may require some initialization parameters which need to be shared with another WalletConnect clients with out-of-band communication. For example, Bridge server infrastructure would include the url of the server as parameter:
 
