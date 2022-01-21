@@ -64,19 +64,10 @@ const config = {
             label: 'Website',
           },
           {
-            href: 'https://discord.gg/q2BKTBVxYu',
-            position: 'left',
-            label: 'Discord',
-          },
-          {
-            href: 'https://twitter.com/walletconnect',
-            position: 'left',
-            label: 'Twitter',
-          },
-          {
             href: 'https://github.com/walletconnect/',
-            label: 'GitHub',
             position: 'right',
+            className: 'header-github-link',
+            'aria-label': 'GitHub repository',
           },
         ],
       },
@@ -87,14 +78,22 @@ const config = {
             title: 'Docs',
             items: [
               {
-                label: 'Getting Started',
+                label: 'V1.0 Getting Started',
                 to: '/#getting-started',
+              },
+              {
+                label: 'v2.0 Getting Started',
+                to: '/2.0/#getting-started',
               },
             ],
           },
           {
             title: 'Community',
             items: [
+              {
+                label: 'Github Discussions',
+                href: 'https://github.com/WalletConnect/walletconnect-monorepo/discussions',
+              },
               {
                 label: 'Discord',
                 href: 'https://discord.com/invite/cB54BwPGru',
