@@ -25,11 +25,12 @@ const config = {
           routeBasePath: '/',
           sidebarPath: require.resolve('./sidebars.js'),
           editUrl: 'https://github.com/WalletConnect/walletconnect-docs/blob/main/',
-          lastVersion: "current",
+          lastVersion: "1.0",
           versions: {
             "current": {
-              "label": "2.0 beta"
-            },
+              "label": "2.0 beta",
+              "path": "2.0"
+            }
           },
           remarkPlugins: [
             [require('@docusaurus/remark-plugin-npm2yarn'), {sync: true}],
@@ -63,19 +64,10 @@ const config = {
             label: 'Website',
           },
           {
-            href: 'https://discord.gg/q2BKTBVxYu',
-            position: 'left',
-            label: 'Discord',
-          },
-          {
-            href: 'https://twitter.com/walletconnect',
-            position: 'left',
-            label: 'Twitter',
-          },
-          {
             href: 'https://github.com/walletconnect/',
-            label: 'GitHub',
             position: 'right',
+            className: 'header-github-link',
+            'aria-label': 'GitHub repository',
           },
         ],
       },
@@ -86,14 +78,22 @@ const config = {
             title: 'Docs',
             items: [
               {
-                label: 'Getting Started',
+                label: 'V1.0 Getting Started',
                 to: '/#getting-started',
+              },
+              {
+                label: 'v2.0 Getting Started',
+                to: '/2.0/#getting-started',
               },
             ],
           },
           {
             title: 'Community',
             items: [
+              {
+                label: 'Github Discussions',
+                href: 'https://github.com/WalletConnect/walletconnect-monorepo/discussions',
+              },
               {
                 label: 'Discord',
                 href: 'https://discord.com/invite/cB54BwPGru',
@@ -126,8 +126,8 @@ const config = {
         additionalLanguages: ['swift','kotlin'],
       },
       algolia: {
-        appId: 'BH4D9OD16A',
-        apiKey: '4cf6bd4618643027dd526ed4ff272978',
+        appId: 'KEO8ND6AUT',
+        apiKey: '5921626237dc9040afc258af25d4e77d',
         indexName: 'walletconnect',
         contextualSearch: true,
       },

@@ -14,13 +14,14 @@ npm install --save @walletconnect/client@experimental
 
 ## Create Session
 
-1. Initiate your WalletConnect client with the relay server
+1. Initiate your WalletConnect client with the relay server, using [your Project ID](../../api/project-id.md).
 
 ```javascript
 import WalletConnectClient from "@walletconnect/client";
 
 const client = await WalletConnectClient.init({
-  relayProvider: "wss://relay.walletconnect.com",
+  projectId: "c4f79cc...",
+  relayUrl: "wss://relay.walletconnect.com",
   metadata: {
     name: "Example Dapp",
     description: "Example Dapp",
@@ -30,7 +31,7 @@ const client = await WalletConnectClient.init({
 });
 ```
 
-1. Subscribe to pairing proposal event for sharing URI
+2. Subscribe to pairing proposal event for sharing URI
 
 ```javascript
 import { CLIENT_EVENTS } from "@walletconnect/client";
@@ -45,7 +46,7 @@ client.on(
 );
 ```
 
-1. Connect application and specify session permissions
+3. Connect application and specify session permissions
 
 ```javascript
 const session = await client.connect({
