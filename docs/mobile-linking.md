@@ -54,9 +54,9 @@ wc:00e46b69-d0cc-4b3e-b6a2-cee442f97188@1
 
 ### For iOS
 
-iOS has some more caveats to the integration but we ensure to make it as straightforward as possible. Since its operating system is not designed to handle multiple applications subscribing to the same deep linking schema, we've designed the QRCode Modal to list supporting wallets on our [open-source registry](https://github.com/WalletConnect/walletconnect-registry/) and target specific deep links or universal links for each wallet.
+iOS has some more caveats to the integration but we ensure to make it as straightforward as possible. Since its operating system is not designed to handle multiple applications subscribing to the same deep linking schema, we've designed the QRCode Modal to list supporting wallets on our [registry](https://walletconnect.com/registry) and target specific deep links or universal links for each wallet.
 
-To add your own wallet to the registry, you must submit an Issue on our registry on [Github](https://github.com/walletconnect/walletconnect-registry).
+To add your own wallet to the registry, login to your [WalletConnect Cloud](https://walletconnect.com) account.
 
 We recommend that universal links are used instead of deep links for iOS since they provide smoother UX with less prompts. When a dapp triggers a mobile connection on iOS, you should expect the following links
 
@@ -87,4 +87,4 @@ If you are building a Dapp you will be able to support this pattern by simply in
 npm install --save @walletconnect/qrcode-modal
 ```
 
-If you would like to build your own UI for mobile linking, you can use our registry [API](https://github.com/walletconnect/walletconnect-registry) to get app entries and logos however we highly recommend that you use our provided qrcode-modal package to maintain a consistent UX across WalletConnect integrations however we modularized our packages to give the option on the ethos of decentralization.
+If you would like to build your own UI for mobile linking, you can use our [registry API](api/registry-api.md) to get app entries and logos however we highly recommend that you use our provided qrcode-modal package to maintain a consistent UX across WalletConnect integrations however we modularized our packages to give the option on the ethos of decentralization.
