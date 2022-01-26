@@ -169,3 +169,7 @@ This method returns a signature for the provided message from the requested sign
 	"result":  { signature: "2Lb1KQHWfbV3pWMqXZveFWqneSyhH95YsgCENRWnArSkLydjN1M42oB82zSd6BBdGkM9pE6sQLQf1gyBh8KWM2c4" }
 }
 ```
+
+## solana_signBatchTransactions
+
+TODO
