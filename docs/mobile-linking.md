@@ -87,4 +87,4 @@ If you are building a Dapp you will be able to support this pattern by simply in
 npm install --save @walletconnect/qrcode-modal
 ```
 
-If you would like to build your own UI for mobile linking, you can use our [registry API](./api/registry-api.md) to get app entries and logos however we highly recommend that you use our provided qrcode-modal package to maintain a consistent UX across WalletConnect integrations however we modularized our packages to give the option on the ethos of decentralization.
+If you would like to build your own UI for mobile linking, you can use our [registry API](api/registry-api.md) to get app entries and logos however we highly recommend that you use our provided qrcode-modal package to maintain a consistent UX across WalletConnect integrations however we modularized our packages to give the option on the ethos of decentralization.
