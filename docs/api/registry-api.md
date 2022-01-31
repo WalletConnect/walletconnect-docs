@@ -48,7 +48,7 @@ Returns a JSON object containing all dApps listed in the public registry.
 curl https://registry.walletconnect.com/api/v1/dapps
 
 # {
-#   "count": 6,
+#   "count": 155,
 #   "listings": [
 #       "d2ae9c3c2782806fd6db704bf40ef0238af9470d7964ae566114a033f4a9a110": {
 #         "id": "d2ae9c3c2782806fd6db704bf40ef0238af9470d7964ae566114a033f4a9a110",
