@@ -13,7 +13,7 @@ By default listings endpoints return all data for provided type. You can use fol
 | ------- | ----------------------------------------------------------------------------------- |
 | entries | Specifies how many entries will be returned (must be used together with page param) |
 | page    | Specifies current page (must be used with entries param)                            |
-| search  | Returns listings whos name matches peovided search query                            |
+| search  | Returns listings whose name matches provided search query                            |
 
 ### `GET /api/v1/wallets`
 
