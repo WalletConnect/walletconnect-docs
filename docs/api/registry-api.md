@@ -27,7 +27,7 @@ Returns a JSON object containing all wallets listed in the public registry.
 curl https://registry.walletconnect.com/api/v1/wallets
 
 # {
-#  "count": 12,
+#  "count": 142,
 #  "listings": [
 #     "1ae92b26df02f0abca6304df07debccd18262fdf5fe82daa81593582dac9a369": {
 #       "id": "1ae92b26df02f0abca6304df07debccd18262fdf5fe82daa81593582dac9a369",
