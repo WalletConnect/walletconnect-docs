@@ -68,7 +68,7 @@ Returns a JSON object containing all entries listed in the public registry.
 curl https://registry.walletconnect.com/api/v1/all
 
 # {
-#   "count": 18,
+#   "count": 290,
 #   "listings": [
 #       "1ae92b26df02f0abca6304df07debccd18262fdf5fe82daa81593582dac9a369": {
 #         "id": "1ae92b26df02f0abca6304df07debccd18262fdf5fe82daa81593582dac9a369",
