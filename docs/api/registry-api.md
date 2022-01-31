@@ -7,7 +7,7 @@ The Registry API currently offers the following functionality:
 
 ## Listings API
 
-By default listings endpoints return all data for provided type. You can use following query params to return paginated data or search for specific listing by its name:
+By default listings endpoints return all data for provided type. You can use the following query params to return paginated data or search for a specific listing by its name:
 
 | Name    | Description                                                                         |
 | ------- | ----------------------------------------------------------------------------------- |
