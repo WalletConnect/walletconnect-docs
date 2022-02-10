@@ -31,7 +31,7 @@ const client = await WalletConnectClient.init({
 });
 ```
 
-2. Subscribe to pairing proposal event for sharing URI
+2. Subscribe to the pairing proposal event in order to share the pairing URI
 
 ```javascript
 import { CLIENT_EVENTS } from "@walletconnect/client";
@@ -46,7 +46,7 @@ client.on(
 );
 ```
 
-3. Connect application and specify session permissions
+3. Connect the application and specify session permissions
 
 ```javascript
 const session = await client.connect({
@@ -63,7 +63,7 @@ const session = await client.connect({
 
 ## JSON-RPC Payloads
 
-Once the session has been successful then you can start making JSON-RPC requests to be approved and signed by the wallet
+Once the session has been established successfully, you can start making JSON-RPC requests to be approved and signed by the wallet
 
 ```javascript
 const result = await client.request({
