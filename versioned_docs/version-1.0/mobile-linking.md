@@ -68,7 +68,7 @@ examplewallet://wc?uri=wc:00e46b69-d0cc-4b3e-b6a2-cee442f97188@1?bridge=https%3A
 https://example.wallet/wc?uri=wc:00e46b69-d0cc-4b3e-b6a2-cee442f97188@1?bridge=https%3A%2F%2Fbridge.walletconnect.org&key=91303dedf64285cbbaf9120f6e9d160a5c8aa3deb67017a3874cd272323f48ae
 ```
 
-Additionally when there is a signing request triggered by the dapp it will hit the deep link with an incomplete URI, this should be ignored and not considered invalid as it's only used for automatically redirecting the users to approve or reject a signing request.
+Additionally when there is a signing request triggered by the dapp it will hit the deep link with an incomplete URI, this should be ignored and not considered valid as it's only used for automatically redirecting the users to approve or reject a signing request.
 
 ```bash
 # For deep links
@@ -87,4 +87,3 @@ npm install --save @walletconnect/qrcode-modal
 ```
 
 If you would like to build your own UI for mobile linking, you can use our registry API to get app entries and logos however we highly recommend that you use our provided qrcode-modal package to maintain a consistent UX across WalletConnect integrations however we modularized our packages to give the option on the ethos of decentralization.
-
