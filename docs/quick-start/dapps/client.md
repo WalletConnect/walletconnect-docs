@@ -21,7 +21,7 @@ import WalletConnectClient from "@walletconnect/client";
 
 const client = await WalletConnectClient.init({
   projectId: "c4f79cc...",
-  relayUrl: "wss://relay.walletconnect.com",
+  relayUrl: "wss://relay.walletconnect.org",
   metadata: {
     name: "Example Dapp",
     description: "Example Dapp",
