@@ -174,7 +174,7 @@ await provider.disconnect()
 const accounts = await web3.eth.getAccounts();
 
 //  Get Chain Id
-const chainId = await web3.eth.chainId();
+const chainId = await web3.eth.getChainId();
 
 //  Get Network Id
 const networkId = await web3.eth.net.getId();

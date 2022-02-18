@@ -16,7 +16,6 @@ You can use the **Test Wallet** to test your integration at [test.walletconnect.
 npm install --save web3 @walletconnect/web3-provider
 ```
 
-
 :::info
 Syntax shown below is Javascript ES6 which requires bundling and transpiling to run in web browsers. If unfamiliar we recommend setting up an environment using [Webpack Starter](https://github.com/wbkd/webpack-starter) or [Create React App](https://github.com/facebook/create-react-app)
 :::
@@ -131,7 +130,7 @@ await provider.disconnect()
 const accounts = await web3.eth.getAccounts();
 
 //  Get Chain Id
-const chainId = await web3.eth.chainId();
+const chainId = await web3.eth.getChainId();
 
 //  Get Network Id
 const networkId = await web3.eth.net.getId();
@@ -230,4 +229,3 @@ const provider = new WalletConnectProvider({
   },
 });
 ```
-
