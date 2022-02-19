@@ -126,9 +126,16 @@ client.respond(topic: sessionRequest.topic, response: .response(response))
 By default web socket connection is handled internally by the SDK. That means that Web socket will be safely disconnected when apps go to background and it will connect back when app reaches foreground. But if it is not expeted for your app and you want to handle socket connection manually you can do it as follows:
 
 1. instantiate Relayer object.  
-```let relayer = Relayer(relayHost: "relay.walletconnect.com", projectId: "52af113ee0c1e1a20xxx95730196c13e")```  
+```
+let relayer = Relayer(
+    relayHost: "relay.walletconnect.com",
+    projectId: "52af113ee0c1e1a20xxx95730196c13e,
+    socketConnectionType: .manual")
+```  
 2. inject relayer into WalletConnectClient instance:  
 ```let client = WalletConnectClient(metadata: metadata, relayer: relayer)```
+3. control connection:  
+```relayer.connect()```
 
 ### Where to go from here
 Try our example wallet implementation that is part of WalletConnectSwiftV2 repository.
