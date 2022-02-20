@@ -77,10 +77,11 @@ func didReceive(sessionProposal: Session.Proposal) {
 }
 ```
 `Session.Proposal` object conveys `Permissions` structure that contains allowed blockchains and methods that later the dapp will be authorized to request.
-The user will either approve the session proposal (with allowed accounts) or reject it. Note that accounts should be provided according to [CAIP10](https://github.com/ChainAgnostic/CAIPs/blob/master/CAIPs/caip-10.md) specification and be prefixed with a chain identifier. chain_id + : + account_address. You can find more on blockchain identifiers in [CAIP2](https://github.com/ChainAgnostic/CAIPs/blob/master/CAIPs/caip-2.md).
+The user will either approve the session proposal (with allowed accounts) or reject it. Accounts must be provided according to [CAIP10](https://github.com/ChainAgnostic/CAIPs/blob/master/CAIPs/caip-10.md) specification and be prefixed with a chain identifier. chain_id + : + account_address. You can find more on blockchain identifiers in [CAIP2](https://github.com/ChainAgnostic/CAIPs/blob/master/CAIPs/caip-2.md).
 
 ```Swift
- client.approve(proposal: proposal, accounts: ["eip155:1:0xab16a96d359ec26a11e2c2b3d8f8b8942d5bfcdb"])
+let account = Account("eip155:1:0xab16a96d359ec26a11e2c2b3d8f8b8942d5bfcdb")!
+ client.approve(proposal: proposal, accounts: [account])
 ```
 When session is sucessfully approved another delegate method is called:
 ```Swift
@@ -120,6 +121,21 @@ let result = sign(request: sessionRequest) // implement your signing method
 let response = JSONRPCResponse<AnyCodable>(id: sessionRequest.id, result: result)
 client.respond(topic: sessionRequest.topic, response: .response(response))
 ```
+
+### Web Socket Connection
+By default web socket connection is handled internally by the SDK. That means that Web socket will be safely disconnected when apps go to background and it will connect back when app reaches foreground. But if it is not expeted for your app and you want to handle socket connection manually you can do it as follows:
+
+1. instantiate Relayer object.  
+```
+let relayer = Relayer(
+    relayHost: "relay.walletconnect.com",
+    projectId: "52af113ee0c1e1a20xxx95730196c13e,
+    socketConnectionType: .manual")
+```  
+2. inject relayer into WalletConnectClient instance:  
+```let client = WalletConnectClient(metadata: metadata, relayer: relayer)```
+3. control connection:  
+```relayer.connect()```
 
 ### Where to go from here
 Try our example wallet implementation that is part of WalletConnectSwiftV2 repository.
