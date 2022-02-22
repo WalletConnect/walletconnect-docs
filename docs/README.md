@@ -14,11 +14,27 @@ WalletConnect is an open protocol to communicate securely between Dapps and Wall
 
 Currently the WalletConnect protocol has references implementations written in Typescript for the Client and the Relay Server
 
-To quickly setup for your Dapp or Wallet, go to Quick Start section for code examples.
+To quickly setup your Dapp or Wallet, go to the Quick Start section for code examples.
 
 To read in more detail about the WalletConnect protocol, go to [Technical Specification](./protocol/tech-spec.md)
 
 Additionally you can also consult the API references for [Client](./api/client-api.md) and [Relay Server](./api/relay-server.md).
+
+
+## Useful Links
+
+Here are some demos that you can use to try the protocol yourself
+
+- App: [https://react-app.walletconnect.com](https://react-app.walletconnect.com)
+- Wallet: [https://react-wallet.walletconnect.com](https://react-wallet.walletconnect.com)
+
+## Community
+
+Share your experience, contribute or ask questions with the WalletConnect Community
+
+- Discord: [https://discord.walletconnect.com](https://discord.walletconnect.com)
+- Twitter: [https://twitter.com/walletconnect](https://twitter.com/walletconnect)
+- Github: [https://github.com/walletconnect](https://github.com/walletconnect)
 
 ## What's New
 
@@ -60,17 +76,3 @@ Smarter caching mechanisms guarantee message delivery in more diverse network co
 
 Works everywhere across desktop apps, browser apps, mobile apps, gaming apps and much more. 
 
-## Useful Links
-
-Here are some demos that you can use to try the protocol yourself
-
-- App: [https://react-app.walletconnect.com](https://react-app.walletconnect.com)
-- Wallet: [https://react-wallet.walletconnect.com](https://react-wallet.walletconnect.com)
-
-## Community
-
-Share your experience, contribute or ask questions with the WalletConnect Community
-
-- Discord: [https://discord.walletconnect.com](https://discord.walletconnect.com)
-- Twitter: [https://twitter.com/walletconnect](https://twitter.com/walletconnect)
-- Github: [https://github.com/walletconnect](https://github.com/walletconnect)
