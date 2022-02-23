@@ -203,7 +203,7 @@ In order to resolve non-signing requests you need to provide one of the followin
 The infuraId will support the following chain IDs: Mainnet \(1\), Ropsten \(3\), Rinkeby\(4\), Goerli \(5\) and Kovan \(42\)
 
 ```typescript
-const provider = new WalletConnectProvider({
+const provider = new EthereumProvider({
   // ...
   rpc: {
     infuraId: "27e484dcd9e3efcfd25a83a78777cdf1",
@@ -216,7 +216,7 @@ const provider = new WalletConnectProvider({
 The `custom` RPC URL mapping should be indexed by chainId and it requires at least one value.
 
 ```typescript
-const provider = new WalletConnectProvider({
+const provider = new EthereumProvider({
   // ...
   rpc: {
     custom: {
