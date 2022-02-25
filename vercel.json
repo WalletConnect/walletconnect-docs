@@ -1,12 +1,12 @@
 {
   "redirects": [
     {
-      "source": "/:path((?!/v/1.0/).*)",
-      "destination": "/:path*"
+      "source": "/v/1.0/*",
+      "destination": "/*"
     },
     {
-      "source": "/:path((?!/v/2.0/).*)",
-      "destination": "/2.0/:path*"
+      "source": "/v/2.0/*",
+      "destination": "/2.0/*"
     }
   ]
 }
