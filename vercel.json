@@ -1,10 +1,6 @@
 {
   "redirects": [
     {
-      "source": "/v/1.0/",
-      "destination": "/"
-    },
-    {
       "source": "/v/1.0/:path*",
       "destination": "/:path*"
     },
