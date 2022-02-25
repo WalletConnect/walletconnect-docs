@@ -1,0 +1,13 @@
+{
+  "trailingSlash": false,
+  "redirects": [
+    {
+      "source": "/v/1.0/:path*",
+      "destination": "/:path*"
+    },
+    {
+      "source": "/v/2.0/:path*",
+      "destination": "/2.0/:path*"
+    }
+  ]
+}
