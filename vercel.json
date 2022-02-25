@@ -9,12 +9,12 @@
       "destination": "/2.0/:path*"
     },
     {
-      "source": "/v/1.0/",
+      "source": "/v/1.0",
       "destination": "/"
     },
     {
-      "source": "/v/2.0/",
-      "destination": "/2.0/"
+      "source": "/v/2.0",
+      "destination": "/2.0"
     }
   ]
 }
