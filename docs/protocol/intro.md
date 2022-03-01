@@ -1,10 +1,15 @@
-# Wallet Connect V2 Protocol - Introduction
-
+# Introduction
 
 
 ## Relay Server Protocol and DApp-Wallet Protocol Overview
 
-Communication between DApp and Wallets occur through the relay server or relay bridge.
+Communication between DApp and Wallets occur through a relay server or bridge (see [architecture](./tech-spec.md#architecture)).
+To communicate through the bridge in a secure way,
+DApps and wallet share an out-of-band URI which contains information;
+- used to identify the communication channel/topic to subscribe to.
+- which helps to setup the secure tunnel over the channel. Once the secure channel is setup, management and configuration information can be sent and received between DApps and wallets.
+
+
 In V2, the Wallet Connect relay socket address is `wss://relay.walletconnect.com/?projectId=<PROJECT_ID>`.
 To test the endpoint using HTTP, add `/hello` to the url path - `https://relay.walletconnect.com/hello?projectId=<PROJECT_ID>`
 
@@ -100,9 +105,9 @@ Since DApp-Wallet(DW) protocol messages are tunneled through Relay servers/bridg
 - The Publish Protocol: When sending messages to the other party (DApp or Wallet). Use the publish protocol message. In Wallet Connect Relay Server, the [WakuPublishRequest](../api/relay-server.md#publish) is used. The DW Message serves as the `message` content/payload in the WakuPublishRequest protocol.
 
 
-## V2 Outband URI Format
-V2 outband URI format is 
-wc:topic@version?bridge=<URL> where the URL contains [UriParameters](./tech-spec.md#pairing-signal) as query parameters. For example, a Wallet Connect outband URI with expanded URL results to 
+## V2 Out-of-band URI Format
+V2 out-of-band URI format is 
+`wc:topic@version?bridge=<URL>` where the URL contains [UriParameters](./tech-spec.md#pairing-signal) as query parameters. For example, a Wallet Connect out-of-band URI with expanded URL results to 
 ```
 wc:<256_BIT_TOPIC>@2?bridge=https://relay.walletconnect.com/?projectId=<PROJECT_ID>&publicKey=<X25519_PUBLIC_KEY>&relay={"protocol":"waku"}&controller=<BOOLEAN>
 ```
