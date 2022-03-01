@@ -95,7 +95,7 @@ Since DApp-Wallet(DW) protocol messages are tunneled through Relay servers/bridg
 
 ```
 
-## There are 4 types of Relay Protocol Messages:
+## Types of Relay Protocol Messages:
 - The Subscribe Protocol: When a DApp/Wallet initiates a websocket connection to the relay bridge, it needs to inform the relay bridge about a topic in which it wants to listen to and receive messages from other partner. The bridge is informed of this topic using the subscribe protocol message. For Wallet Connect Relay server, this information is shared with the relay server using [WakuSubscribeRequest](../api/relay-server.md#subscribe).
 
 - The Unsubscribe Protocol: Used to inform the relay server when to release resources and stop active listening on a subscribed topic. For Wallet Connect Relay server, this server is informed to unsubscribe using the [WakuUnsubscribeRequest](../api/relay-server.md#unsubscribe).
@@ -126,5 +126,8 @@ wc:490959aebbc6cd9c6b7c6c97b3f059b520f0a70b91a314e94f2bf100327e0d23@2?controller
 
 When a relay server is deployed in private environment, it is necessary to update the server URL in the WC URL above to point to the private environment. 
 
-## Further Reading on Protocol
-- [Glossary](./glossary.md)
+## More on protocols
+- [Glossary](./glossary.md) -  Terminologies and meaning
+- [Client Communication](./client-communication.md) - Types and formats of DW Message protocol.
+- [Technical Specification](./tech-spec.md) - Architecture and protocol.
+- [Relay Server API](./../api/relay-server.md) - Relay server message format
