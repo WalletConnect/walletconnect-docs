@@ -3,8 +3,8 @@
 
 ## Relay Server Protocol and DApp-Wallet Protocol Overview
 
-Communication between DApp and Wallets occur through a relay server or bridge (see [architecture](./tech-spec.md#architecture)).
-To communicate through the bridge in a secure way,
+Communication between DApp and Wallets occur through a relay server (known as bridge in v1) (see [architecture](./tech-spec.md#architecture)).
+To communicate through the server in a secure way,
 DApps and wallet share an out-of-band URI which contains information;
 - used to identify the communication channel/topic to subscribe to.
 - which helps to setup the secure tunnel over the channel. Once the secure channel is setup, management and configuration information can be sent and received between DApps and wallets.
@@ -42,7 +42,7 @@ The DW protocols are used to establish and manage device pairing and app session
 ```
 
 ### [Relay Protocol Messages](../api/relay-server.md) 
-These are JSON objects that are used to communicate with the Relay bridge. The relay bridge acts as a tunnel for tunneling/passing messages between DApps and wallets.
+These are JSON objects that are used to communicate with the Relay server. The relay server acts as a tunnel for tunneling/passing messages between DApps and wallets.
 
 #### Example of a Relay Message  ( [WakuSubscriptionRequest](../api/relay-server.md#subscription)):
 ```json
@@ -60,7 +60,7 @@ These are JSON objects that are used to communicate with the Relay bridge. The r
 }
 ```
 
-Since DApp-Wallet(DW) protocol messages are tunneled through Relay servers/bridges, this means Relay messages wraps DW messages before being tunneled over a relay bridge to the other party. Using the examples above, a complete message sent from one party to the other - Wallet to DApp - in this example, will look like:
+Since DApp-Wallet(DW) protocol messages are tunneled through Relay servers, this means Relay messages wraps DW messages before being tunneled over a relay server to the other party. Using the examples above, a complete message sent from one party to the other - Wallet to DApp - in this example, will look like:
 
 ```json
 { // --- WakuSubscriptionRequest
@@ -96,7 +96,7 @@ Since DApp-Wallet(DW) protocol messages are tunneled through Relay servers/bridg
 ```
 
 ## Types of Relay Protocol Messages:
-- The Subscribe Protocol: When a DApp/Wallet initiates a websocket connection to the relay bridge, it needs to inform the relay bridge about a topic in which it wants to listen to and receive messages from other partner. The bridge is informed of this topic using the subscribe protocol message. For Wallet Connect Relay server, this information is shared with the relay server using [WakuSubscribeRequest](../api/relay-server.md#subscribe).
+- The Subscribe Protocol: When a DApp/Wallet initiates a websocket connection to the relay server, it needs to inform the relay server about a topic in which it wants to listen to and receive messages from other partner. The server is informed of this topic using the subscribe protocol message. For Wallet Connect Relay server, this information is shared with the relay server using [WakuSubscribeRequest](../api/relay-server.md#subscribe).
 
 - The Unsubscribe Protocol: Used to inform the relay server when to release resources and stop active listening on a subscribed topic. For Wallet Connect Relay server, this server is informed to unsubscribe using the [WakuUnsubscribeRequest](../api/relay-server.md#unsubscribe).
   
