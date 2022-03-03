@@ -107,24 +107,20 @@ Since DApp-Wallet(DW) protocol messages are tunneled through Relay servers, this
 
 ## V2 Out-of-band URI Format
 V2 out-of-band URI format is 
-`wc:topic@version?bridge=<URL>` where the URL contains [UriParameters](./tech-spec.md#pairing-signal) as query parameters. For example, a Wallet Connect out-of-band URI with expanded URL results to 
+`wc:topic@version?<UriParameters>` where the [UriParameters](./tech-spec.md#pairing-signal) are url encoded similar to query URL parameters. For example, a Wallet Connect out-of-band URI with expanded URL results to 
 ```
-wc:<256_BIT_TOPIC>@2?bridge=https://relay.walletconnect.com/?projectId=<PROJECT_ID>&publicKey=<X25519_PUBLIC_KEY>&relay={"protocol":"waku"}&controller=<BOOLEAN>
+wc:<256_BIT_TOPIC>@2?publicKey=<X25519_PUBLIC_KEY>&relay={"protocol":"waku"}&controller=<BOOLEAN>
 ```
 
-**Note**: The URL should be encoded therefore, the a typical WC URI with encoded URI looks like 
+**Note**: With the UriParameters encoded, a typical WC URI looks like 
 ```shell
-wc:29021e708ae0401b89e1f40f3828c1dec24dbabd244f3779fe7150490bb878a9@2?bridge=https%3A%2F%2Frelay.walletconnect.com/?projectId=1234567890abcdefdeadbeef0ddfeed1&publicKey=123a45669843b861daefa546d138d2eb6b42ac5e1f11584991fb4c29fd7d4cdb&relay=%7B%22protocol%22%3A%22waku%22%7D&controller=false
+wc:f49107703833dd352e3a8253a3108a7868f60aaf43134557d10df3ca6b780026@2?controller=false&publicKey=b71698c026788b09632627c708b8202e18de606fd098a898efc0f45805ada07b&relay=%7B%22protocol%22%3A%22waku%22%7D
 ```
 
-**Tip**: The server URL may be ommitted. When ommitted, it defaults to `https://relay.walletconnect.com/`.
+The relay server URL is ommitted from the out-of-band WC URI because the relay server URL is expected to be preset for both parties before pairing. When using the Waku relay protocol, the server URL defaults to the Wallet Connect URL - `https://relay.walletconnect.com/`.
 
-Encoded URI Example:
-```shell
-wc:490959aebbc6cd9c6b7c6c97b3f059b520f0a70b91a314e94f2bf100327e0d23@2?controller=false&publicKey=1469cf72a19fbc5cbd6e7908649f190c3fcc350fe8e61d5a2897c2042c702d4a&relay=%7B%22protocol%22%3A%22waku%22%7D
-```
+When deploying the relay server in a private environment, it is expected that the URL of the private environment is updated within the mobile SDK's initialisation function by the developer.  
 
-When a relay server is deployed in private environment, it is necessary to update the server URL in the WC URL above to point to the private environment. 
 
 ## More on protocols
 - [Glossary](./glossary.md) -  Terminologies and meaning
