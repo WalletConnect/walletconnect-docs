@@ -1,30 +1,41 @@
-# WalletConnect Docs
+# Website
 
-This repo runs [docs.walletconnect.com](https://docs.walletconnect.com).
+This website is built using [Docusaurus 2](https://docusaurus.io/), a modern static website generator.
 
-Source can be viewed in [docs/](./docs/).
+### Installation
 
-## Running Locally
+```
+$ yarn
+```
 
-1. `yarn install`
-2. `yarn start`
-3. Open `http://localhost:3000/`
+### Local Development
 
-## Adding a New Page
+```
+$ yarn start
+```
 
-1. Create a new file in `docs/`
-2. Configure `sidebars.js` to create the sidebar link.
+This command starts a local development server and opens up a browser window. Most changes are reflected live without having to restart the server.
 
-## Editing a Page
+### Build
 
-1. Open the file in `docs/`
+```
+$ yarn build
+```
 
-Older versions are available in `versioned_docs/`.
+This command generates static content into the `build` directory and can be served using any static contents hosting service.
 
-## Customize Settings & Theme
+### Deployment
 
-1. Open `docusaurus.config.js`
+Using SSH:
 
-## More
+```
+$ USE_SSH=true yarn deploy
+```
 
-For more options, check the [Docusaurus docs](https://docusaurus.io/).
+Not using SSH:
+
+```
+$ GIT_USER=<Your GitHub username> yarn deploy
+```
+
+If you are using GitHub pages for hosting, this command is a convenient way to build the website and push to the `gh-pages` branch.
