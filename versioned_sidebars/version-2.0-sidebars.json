@@ -8,7 +8,6 @@
       "items": [
         "version-2.0/introduction/about",
         "version-2.0/introduction/cloud",
-        "version-2.0/introduction/glosary",
         {
           "type": "category",
           "label": "Products",
@@ -17,7 +16,8 @@
             "version-2.0/introduction/walletmail",
             "version-2.0/introduction/walletpush"
           ]
-        }
+        },
+        "version-2.0/introduction/glosary"
       ]
     },
 

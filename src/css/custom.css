@@ -62,6 +62,7 @@ main {
   text-transform: uppercase;
   font-weight: bold;
   font-size: 14px;
+  color: rgba(0, 0, 0, 0.25);
 }
 
 .menu_outer_list > div:hover {
