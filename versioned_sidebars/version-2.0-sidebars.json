@@ -1,0 +1,42 @@
+{
+  "version-2.0/mainSidebar": [
+    {
+      "type": "category",
+      "label": "Introduction",
+      "className": "menu_outer_list",
+      "collapsible": false,
+      "items": [
+        "version-2.0/introduction/about",
+        "version-2.0/introduction/cloud",
+        "version-2.0/introduction/glosary",
+        {
+          "type": "category",
+          "label": "Products",
+          "items": [
+            "version-2.0/introduction/walletconnect",
+            "version-2.0/introduction/walletmail",
+            "version-2.0/introduction/walletpush"
+          ]
+        }
+      ]
+    },
+
+    {
+      "type": "category",
+      "label": "JavaScript",
+      "collapsible": false,
+      "className": "menu_outer_list",
+      "items": [
+        {
+          "type": "category",
+          "label": "WalletConnect",
+          "items": [
+            "version-2.0/javascript/walletconnect/installation",
+            "version-2.0/javascript/walletconnect/usage",
+            "version-2.0/javascript/walletconnect/api-reference"
+          ]
+        }
+      ]
+    }
+  ]
+}

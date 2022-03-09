@@ -1,24 +1,24 @@
 /* You can override the default Infima variables here. */
 :root {
-  --ifm-color-primary: #3182CE;
-  --ifm-color-primary-dark: #2B6CB0;
-  --ifm-color-primary-darker: #2C5282;
-  --ifm-color-primary-darkest: #2A4365;
-  --ifm-color-primary-light: #4299E1;
-  --ifm-color-primary-lighter: #63B3ED;
-  --ifm-color-primary-lightest: #90CDF4;
+  --ifm-color-primary: #3182ce;
+  --ifm-color-primary-dark: #2b6cb0;
+  --ifm-color-primary-darker: #2c5282;
+  --ifm-color-primary-darkest: #2a4365;
+  --ifm-color-primary-light: #4299e1;
+  --ifm-color-primary-lighter: #63b3ed;
+  --ifm-color-primary-lightest: #90cdf4;
   --ifm-code-font-size: 95%;
 }
 
 /* For readability concerns, you should choose a lighter palette in dark mode. */
 [data-theme="dark"] {
-  --ifm-color-primary: #3182CE;
-  --ifm-color-primary-dark: #2B6CB0;
-  --ifm-color-primary-darker: #2C5282;
-  --ifm-color-primary-darkest: #2A4365;
-  --ifm-color-primary-light: #4299E1;
-  --ifm-color-primary-lighter: #63B3ED;
-  --ifm-color-primary-lightest: #90CDF4;
+  --ifm-color-primary: #3182ce;
+  --ifm-color-primary-dark: #2b6cb0;
+  --ifm-color-primary-darker: #2c5282;
+  --ifm-color-primary-darkest: #2a4365;
+  --ifm-color-primary-light: #4299e1;
+  --ifm-color-primary-lighter: #63b3ed;
+  --ifm-color-primary-lightest: #90cdf4;
 }
 
 .docusaurus-highlight-code-line {
@@ -44,27 +44,41 @@ main {
 /* Navbar */
 [data-theme="dark"] .navbar {
   background-color: #171923;
-  border-bottom: 1px solid #2D3748;
+  border-bottom: 1px solid #2d3748;
 }
 
 /* Sidebar */
 .menu {
-  background-color: #F7FAFC;
-  border-right: 1px solid #EDF2F7;
+  background-color: #f7fafc;
+  border-right: 1px solid #edf2f7;
 }
 
 [data-theme="dark"] .menu {
-  background-color: #1A202C;
-  border-right: 1px solid #2D3748;
+  background-color: #1a202c;
+  border-right: 1px solid #2d3748;
+}
+
+.menu_outer_list > div a {
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.menu_outer_list > div:hover {
+  background-color: transparent;
+}
+
+.menu_outer_list > ul {
+  padding-left: 0 !important;
 }
 
 /* Footer */
 .footer {
-  background-color: #2D3748;
+  background-color: #2d3748;
 }
 
 .footer__copyright {
-  border-top: 1px solid #4A5568;
+  border-top: 1px solid #4a5568;
   padding-top: 32px;
   text-align: left;
 }

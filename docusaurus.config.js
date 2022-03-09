@@ -30,6 +30,11 @@ const config = {
             current: {
               label: '2.0 beta',
               path: '2.0'
+            },
+            '2.0': {
+              label: '2.0 rc',
+              path: '2.x',
+              banner: "none"
             }
           },
           remarkPlugins: [[require('@docusaurus/remark-plugin-npm2yarn'), { sync: true }]]
