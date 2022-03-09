@@ -8,6 +8,7 @@
       "items": [
         "version-2.0/introduction/about",
         "version-2.0/introduction/cloud",
+        "version-2.0/introduction/registry",
         {
           "type": "category",
           "label": "Products",
@@ -23,7 +24,7 @@
 
     {
       "type": "category",
-      "label": "JavaScript",
+      "label": "Web - JavaScript",
       "collapsible": false,
       "className": "menu_outer_list",
       "items": [
@@ -34,6 +35,141 @@
             "version-2.0/javascript/walletconnect/installation",
             "version-2.0/javascript/walletconnect/usage",
             "version-2.0/javascript/walletconnect/api-reference"
+          ]
+        },
+        {
+          "type": "category",
+          "label": "WalletMail",
+          "items": [
+            "version-2.0/javascript/walletmail/installation",
+            "version-2.0/javascript/walletmail/usage",
+            "version-2.0/javascript/walletmail/api-reference"
+          ]
+        },
+        {
+          "type": "category",
+          "label": "WalletPush",
+          "items": [
+            "version-2.0/javascript/walletpush/installation",
+            "version-2.0/javascript/walletpush/usage",
+            "version-2.0/javascript/walletpush/api-reference"
+          ]
+        },
+        {
+          "type": "category",
+          "label": "Providers",
+          "items": [
+            "version-2.0/javascript/providers/ethereum",
+            "version-2.0/javascript/providers/cosmos",
+            "version-2.0/javascript/providers/solana"
+          ]
+        },
+        {
+          "type": "category",
+          "label": "Guides",
+          "items": [
+            "version-2.0/javascript/guides/typescript",
+            "version-2.0/javascript/guides/react-native"
+          ]
+        },
+        {
+          "type": "category",
+          "label": "Examples",
+          "items": [
+            "version-2.0/javascript/examples/wallet",
+            "version-2.0/javascript/examples/dapp"
+          ]
+        }
+      ]
+    },
+
+    {
+      "type": "category",
+      "label": "iOS - Swift",
+      "collapsible": false,
+      "className": "menu_outer_list",
+      "items": [
+        {
+          "type": "category",
+          "label": "WalletConnect",
+          "items": [
+            "version-2.0/swift/walletconnect/installation",
+            "version-2.0/swift/walletconnect/usage",
+            "version-2.0/swift/walletconnect/api-reference"
+          ]
+        },
+        {
+          "type": "category",
+          "label": "WalletMail",
+          "items": [
+            "version-2.0/swift/walletmail/installation",
+            "version-2.0/swift/walletmail/usage",
+            "version-2.0/swift/walletmail/api-reference"
+          ]
+        },
+        {
+          "type": "category",
+          "label": "WalletPush",
+          "items": [
+            "version-2.0/swift/walletpush/installation",
+            "version-2.0/swift/walletpush/usage",
+            "version-2.0/swift/walletpush/api-reference"
+          ]
+        }
+      ]
+    },
+
+    {
+      "type": "category",
+      "label": "Android - Kotlin",
+      "collapsible": false,
+      "className": "menu_outer_list",
+      "items": [
+        {
+          "type": "category",
+          "label": "WalletConnect",
+          "items": [
+            "version-2.0/kotlin/walletconnect/installation",
+            "version-2.0/kotlin/walletconnect/usage",
+            "version-2.0/kotlin/walletconnect/api-reference"
+          ]
+        },
+        {
+          "type": "category",
+          "label": "WalletMail",
+          "items": [
+            "version-2.0/kotlin/walletmail/installation",
+            "version-2.0/kotlin/walletmail/usage",
+            "version-2.0/kotlin/walletmail/api-reference"
+          ]
+        },
+        {
+          "type": "category",
+          "label": "WalletPush",
+          "items": [
+            "version-2.0/kotlin/walletpush/installation",
+            "version-2.0/kotlin/walletpush/usage",
+            "version-2.0/kotlin/walletpush/api-reference"
+          ]
+        }
+      ]
+    },
+
+    {
+      "type": "category",
+      "label": "Advanced",
+      "collapsible": false,
+      "className": "menu_outer_list",
+      "items": [
+        {
+          "type": "category",
+          "label": "RPC Reference",
+          "items": [
+            "version-2.0/advanced/ethereum-rpc",
+            "version-2.0/advanced/cosmos-rpc",
+            "version-2.0/advanced/solana-rpc",
+            "version-2.0/advanced/polkadot-rpc",
+            "version-2.0/advanced/stellar-rpc"
           ]
         }
       ]

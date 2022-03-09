@@ -58,19 +58,35 @@ main {
   border-right: 1px solid #2d3748;
 }
 
+.menu_outer_list {
+  margin-bottom: 20px;
+}
+
 .menu_outer_list > div a {
   text-transform: uppercase;
   font-weight: bold;
   font-size: 14px;
-  color: rgba(0, 0, 0, 0.25);
+  color: rgba(0, 0, 0, 0.3);
 }
 
 .menu_outer_list > div:hover {
   background-color: transparent;
 }
 
+.menu_outer_list > div:hover a {
+  color: rgba(0, 0, 0, 0.3) !important;
+}
+
 .menu_outer_list > ul {
   padding-left: 0 !important;
+}
+
+[data-theme="dark"] .menu_outer_list > div a {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+[data-theme="dark"] .menu_outer_list > div:hover a {
+  color: rgba(255, 255, 255, 0.4) !important;
 }
 
 /* Footer */

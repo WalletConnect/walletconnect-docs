@@ -1,6 +1,6 @@
 ---
 slug: /javascript/walletconnect/api-reference
-title: Api Reference
+title: API Reference
 ---
 
 [TODO]
