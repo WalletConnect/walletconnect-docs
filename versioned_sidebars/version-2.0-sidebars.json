@@ -115,6 +115,14 @@
             "version-2.0/swift/walletpush/usage",
             "version-2.0/swift/walletpush/api-reference"
           ]
+        },
+        {
+          "type": "category",
+          "label": "Examples",
+          "items": [
+            "version-2.0/swift/examples/wallet",
+            "version-2.0/swift/examples/dapp"
+          ]
         }
       ]
     },
@@ -150,6 +158,14 @@
             "version-2.0/kotlin/walletpush/installation",
             "version-2.0/kotlin/walletpush/usage",
             "version-2.0/kotlin/walletpush/api-reference"
+          ]
+        },
+        {
+          "type": "category",
+          "label": "Examples",
+          "items": [
+            "version-2.0/kotlin/examples/wallet",
+            "version-2.0/kotlin/examples/dapp"
           ]
         }
       ]
