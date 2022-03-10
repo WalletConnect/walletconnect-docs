@@ -12,10 +12,10 @@ If you would like to edit or claim an existing registry item, email us at suppor
 
 The Registry API currently offers the following functionality:
 
-- [Listings API](#listings-api) - Allows for fetching of wallets and dApps listed in the [WalletConnect Cloud Registry](https://walletconnect.com/registry).
-- [Logo API](#logo-api) - Provides logo assets in different sizes for a given registry entry.
+- [Listings](#listings-api) - Allows for fetching of wallets and dApps listed in the [WalletConnect Cloud Registry](https://walletconnect.com/registry).
+- [Logo](#logo-api) - Provides logo assets in different sizes for a given registry entry.
 
-### Listings API
+### Listings
 
 By default listings endpoints return all data for provided type. You can use following query params to return paginated data or search for a specific listing by its name:
 
@@ -40,7 +40,7 @@ Returns a JSON object containing all dApps listed in the public registry. <br />
 Returns a JSON object containing all entries listed in the public registry. <br />
 [See Example](https://registry.walletconnect.com/api/v1/all?entries=5&page=1)
 
-### Logo API
+### Logo
 
 | Param | Description                                                                |
 | ----- | -------------------------------------------------------------------------- |
