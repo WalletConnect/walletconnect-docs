@@ -1,6 +1,1 @@
----
-slug: /advanced/ethereum-rpc
-title: Ethereum RPC
----
-
-[TODO]
+# Ethereum RPC

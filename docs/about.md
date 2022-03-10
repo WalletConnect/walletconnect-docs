@@ -3,5 +3,3 @@ slug: /
 ---
 
 # About
-
-[TODO]

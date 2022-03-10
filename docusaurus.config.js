@@ -23,6 +23,7 @@ const config = {
       /** @type {import('@docusaurus/preset-classic').Options} */
       {
         docs: {
+          lastVersion: "current",
           routeBasePath: "/",
           sidebarPath: require.resolve("./sidebars.js"),
           editUrl:
@@ -35,12 +36,10 @@ const config = {
             "2.0": {
               label: "2.0 beta",
               path: "2.0",
-              banner: "none",
             },
             "1.0": {
               label: "1.0",
               path: "1.0",
-              banner: "none",
             },
           },
           remarkPlugins: [
