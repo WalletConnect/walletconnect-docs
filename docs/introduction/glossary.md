@@ -80,7 +80,7 @@ JSON-RPC is a stateless, light weight remote procedure call (RPC) protocol which
 
 Relay refers to the system, network and/or mechanism used to send and receives messages between the two clients.
 
-By default, the clients will use a proxy server connected to the Waku network and it will connect to clients through a WebSocket using the reference [Relay API](../api/relay-server.md)
+By default, the clients will use a proxy server connected to the Waku network and it will connect to clients through a WebSocket using the reference Relay API
 
 ## Publish-Subscribe pattern
 
