@@ -28,7 +28,7 @@ module.exports = {
           items: ["introduction/cloud", "introduction/registry"],
         },
         "introduction/examples-and-resources",
-        "introduction/glosary",
+        "introduction/glossary",
       ],
     },
 
