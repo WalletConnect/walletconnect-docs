@@ -11,17 +11,23 @@ module.exports = {
       collapsible: false,
       items: [
         "about",
-        "introduction/cloud",
-        "introduction/registry",
         {
           type: "category",
-          label: "Products",
+          label: "Our SDKs",
+          collapsed: false,
           items: [
             "introduction/walletconnect",
             "introduction/walletmail",
             "introduction/walletpush",
           ],
         },
+        {
+          type: "category",
+          label: "Our Projects",
+          collapsed: false,
+          items: ["introduction/cloud", "introduction/registry"],
+        },
+        "introduction/examples-and-resources",
         "introduction/glosary",
       ],
     },
@@ -76,11 +82,6 @@ module.exports = {
             "javascript/guides/react-native",
           ],
         },
-        {
-          type: "category",
-          label: "Examples",
-          items: ["javascript/examples/wallet", "javascript/examples/dapp"],
-        },
       ],
     },
 
@@ -116,11 +117,6 @@ module.exports = {
             "swift/walletpush/usage",
             "swift/walletpush/api-reference",
           ],
-        },
-        {
-          type: "category",
-          label: "Examples",
-          items: ["swift/examples/wallet", "swift/examples/dapp"],
         },
       ],
     },
@@ -158,11 +154,6 @@ module.exports = {
             "kotlin/walletpush/api-reference",
           ],
         },
-        {
-          type: "category",
-          label: "Examples",
-          items: ["kotlin/examples/wallet", "kotlin/examples/dapp"],
-        },
       ],
     },
 
@@ -172,6 +163,7 @@ module.exports = {
       collapsible: false,
       className: "menu_outer_list",
       items: [
+        "advanced/migrating-from-v1.0",
         {
           type: "category",
           label: "RPC Reference",

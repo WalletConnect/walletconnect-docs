@@ -23,6 +23,7 @@ const config = {
       /** @type {import('@docusaurus/preset-classic').Options} */
       {
         docs: {
+          breadcrumbs: false,
           lastVersion: "current",
           routeBasePath: "/",
           sidebarPath: require.resolve("./sidebars.js"),
@@ -30,6 +31,7 @@ const config = {
             "https://github.com/WalletConnect/walletconnect-docs/blob/main/",
           versions: {
             current: {
+              badge: false,
               label: "2.0 rc",
               path: "/",
             },
@@ -66,7 +68,6 @@ const config = {
           {
             type: "docsVersionDropdown",
             position: "left",
-            label: "1.0",
           },
           {
             href: "https://www.walletconnect.com/",

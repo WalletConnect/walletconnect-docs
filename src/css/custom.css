@@ -99,3 +99,9 @@ main {
   padding-top: 32px;
   text-align: left;
 }
+
+/* Tables */
+table {
+  display: table;
+  width: 100%;
+}
