@@ -19,7 +19,7 @@ The Registry API currently offers the following functionality:
 
 By default listings endpoints return all data for provided type. You can use following query params to return paginated data or search for a specific listing by its name:
 
-| Name    | Description                                                                         |
+| Param   | Description                                                                         |
 | ------- | ----------------------------------------------------------------------------------- |
 | entries | Specifies how many entries will be returned (must be used together with page param) |
 | page    | Specifies current page (must be used with entries param)                            |
@@ -42,14 +42,12 @@ Returns a JSON object containing all entries listed in the public registry. <br 
 
 ### Logo API
 
+| Param | Description                                                                |
+| ----- | -------------------------------------------------------------------------- |
+| size  | Determines resolution of returned image can be one of: sm, md or lg        |
+| id    | Corresponds to a registry entry's id field as returned by the Listings API |
+
 #### `GET /api/v1/logo/:size/:id`
 
-#### Request
-
-- The `size` parameter can be one of: `sm | md | lg`
-- The `id` parameter corresponds to a registry entry's `id` field as returned by the Listings API.
-
-#### Response
-
-Returns the image source of the logo for `id` sized according `size`. <br />
+Returns the image source of the logo for id sized according size. <br />
 [See Example](https://registry.walletconnect.com/api/v1/logo/lg/d2ae9c3c2782806fd6db704bf40ef0238af9470d7964ae566114a033f4a9a110)
