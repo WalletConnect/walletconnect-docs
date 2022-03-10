@@ -1,6 +1,1 @@
----
-slug: /javascript/providers/cosmos
-title: Cosmos Provider
----
-
-[TODO]
+# Cosmos Provider

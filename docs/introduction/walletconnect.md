@@ -1,6 +1,1 @@
----
-slug: /walletconnect
-title: WalletConnect
----
-
-[TODO]
+# WalletConnect

@@ -1,6 +1,1 @@
----
-slug: /walletmail
-title: WalletMail
----
-
-[TODO]
+# WalletMail

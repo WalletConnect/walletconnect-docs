@@ -1,6 +1,1 @@
----
-slug: /registry
-title: Registry
----
-
-[TODO]
+# Registry

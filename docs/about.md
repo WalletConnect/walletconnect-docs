@@ -1,6 +1,7 @@
 ---
 slug: /
-title: About
 ---
+
+# About
 
 [TODO]

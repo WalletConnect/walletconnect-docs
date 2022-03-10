@@ -1,6 +1,1 @@
----
-slug: /walletpush
-title: WalletPush
----
-
-[TODO]
+# WalletPush

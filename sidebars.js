@@ -10,7 +10,7 @@ module.exports = {
       className: "menu_outer_list",
       collapsible: false,
       items: [
-        "introduction/about",
+        "about",
         "introduction/cloud",
         "introduction/registry",
         {
