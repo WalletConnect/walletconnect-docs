@@ -105,3 +105,8 @@ table {
   display: table;
   width: 100%;
 }
+
+/* Headings */
+h4 {
+  margin-bottom: 10px !important;
+}
