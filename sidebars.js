@@ -43,8 +43,15 @@ module.exports = {
           label: "WalletConnect",
           items: [
             "javascript/walletconnect/installation",
-            "javascript/walletconnect/usage",
-            "javascript/walletconnect/reference",
+            "javascript/walletconnect/wallet-usage",
+            {
+              type: "category",
+              label: "Reference",
+              items: [
+                "javascript/walletconnect/reference/methods",
+                "javascript/walletconnect/reference/interfaces",
+              ],
+            },
           ],
         },
         {

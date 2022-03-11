@@ -2,7 +2,7 @@
 
 ## 1. Obtain Project ID
 
-Head over to [WalletConnect Cloud](https://cloud.walletconnect.com/) to sign in / sign up. Create new project or find an existing one. Copy your project id, this will be used latter on when initializing WalletConnect client.
+Head over to [WalletConnect Cloud](https://cloud.walletconnect.com/) to sign in or sign up. Create (or use an existing) project and copy its associated project id. We will need this in a latter step.
 
 ## 2. Install Packages
 
@@ -14,7 +14,7 @@ npm install --save @walletconnect/client@experimental
 
 ## 3. Initialize Client
 
-You only need `projectId` and `relayUrl` to get started with a client. Please see [Reference](/javascript/walletconnect/reference) page for aditional options.
+Initialize client by passing `relayUrl` and `projectId` we created before. See [client.init() reference](/javascript/walletconnect/reference/methods#clientinit) for more info.
 
 ```js
 import WalletConnectClient from "@walletconnect/client";
