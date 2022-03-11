@@ -44,7 +44,7 @@ module.exports = {
           items: [
             "javascript/walletconnect/installation",
             "javascript/walletconnect/usage",
-            "javascript/walletconnect/api-reference",
+            "javascript/walletconnect/reference",
           ],
         },
         {
@@ -53,7 +53,7 @@ module.exports = {
           items: [
             "javascript/walletmail/installation",
             "javascript/walletmail/usage",
-            "javascript/walletmail/api-reference",
+            "javascript/walletmail/reference",
           ],
         },
         {
@@ -62,7 +62,7 @@ module.exports = {
           items: [
             "javascript/walletpush/installation",
             "javascript/walletpush/usage",
-            "javascript/walletpush/api-reference",
+            "javascript/walletpush/reference",
           ],
         },
         {
@@ -97,7 +97,7 @@ module.exports = {
           items: [
             "swift/walletconnect/installation",
             "swift/walletconnect/usage",
-            "swift/walletconnect/api-reference",
+            "swift/walletconnect/reference",
           ],
         },
         {
@@ -106,7 +106,7 @@ module.exports = {
           items: [
             "swift/walletmail/installation",
             "swift/walletmail/usage",
-            "swift/walletmail/api-reference",
+            "swift/walletmail/reference",
           ],
         },
         {
@@ -115,7 +115,7 @@ module.exports = {
           items: [
             "swift/walletpush/installation",
             "swift/walletpush/usage",
-            "swift/walletpush/api-reference",
+            "swift/walletpush/reference",
           ],
         },
       ],
@@ -133,7 +133,7 @@ module.exports = {
           items: [
             "kotlin/walletconnect/installation",
             "kotlin/walletconnect/usage",
-            "kotlin/walletconnect/api-reference",
+            "kotlin/walletconnect/reference",
           ],
         },
         {
@@ -142,7 +142,7 @@ module.exports = {
           items: [
             "kotlin/walletmail/installation",
             "kotlin/walletmail/usage",
-            "kotlin/walletmail/api-reference",
+            "kotlin/walletmail/reference",
           ],
         },
         {
@@ -151,7 +151,7 @@ module.exports = {
           items: [
             "kotlin/walletpush/installation",
             "kotlin/walletpush/usage",
-            "kotlin/walletpush/api-reference",
+            "kotlin/walletpush/reference",
           ],
         },
       ],
