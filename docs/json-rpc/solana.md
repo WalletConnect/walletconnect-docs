@@ -133,7 +133,7 @@ This method returns a signature over the provided instuctions by the targetted p
 }
 ```
 
-# solana_signMessage
+## solana_signMessage
 
 This method returns a signature for the provided message from the requested signer address.
 
