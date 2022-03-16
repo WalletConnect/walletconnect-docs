@@ -56,6 +56,38 @@
 | TODO | TODO        | TODO     | TODO    | TODO |
 | TODO | TODO        | TODO     | TODO    | TODO |
 
+## _ClientTypes.PairParams_
+
+| Name | Description | Required | Default | Type |
+| ---- | ----------- | -------- | ------- | ---- |
+| TODO | TODO        | TODO     | TODO    | TODO |
+| TODO | TODO        | TODO     | TODO    | TODO |
+| TODO | TODO        | TODO     | TODO    | TODO |
+
+## _ClientTypes.PingParams_
+
+| Name | Description | Required | Default | Type |
+| ---- | ----------- | -------- | ------- | ---- |
+| TODO | TODO        | TODO     | TODO    | TODO |
+| TODO | TODO        | TODO     | TODO    | TODO |
+| TODO | TODO        | TODO     | TODO    | TODO |
+
+## _ClientTypes.RejectParams_
+
+| Name | Description | Required | Default | Type |
+| ---- | ----------- | -------- | ------- | ---- |
+| TODO | TODO        | TODO     | TODO    | TODO |
+| TODO | TODO        | TODO     | TODO    | TODO |
+| TODO | TODO        | TODO     | TODO    | TODO |
+
+## _PairingTypes.Settled_
+
+| Name | Description | Required | Default | Type |
+| ---- | ----------- | -------- | ------- | ---- |
+| TODO | TODO        | TODO     | TODO    | TODO |
+| TODO | TODO        | TODO     | TODO    | TODO |
+| TODO | TODO        | TODO     | TODO    | TODO |
+
 ## _SessionTypes.Settled_
 
 | Name | Description | Required | Default | Type |

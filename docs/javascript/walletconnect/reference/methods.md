@@ -4,7 +4,7 @@
 
 #### Description
 
-TODO
+Approves proposal (i.e pairing / signing / send ...)
 
 #### Interfaces
 
@@ -92,6 +92,103 @@ notify(params: SequenceTypes.NotificationEvent): Promise<void>
 
 ---
 
+## `client.off()`
+
+#### Description
+
+Removes event subscription
+
+#### Example
+
+```ts
+off(event: string, listener: Function): void
+```
+
+---
+
+## `client.on()`
+
+#### Description
+
+Creates event subscription
+
+#### Example
+
+```ts
+on(event: string, listener: Function): void
+```
+
+---
+
+## `client.once()`
+
+#### Description
+
+Creates event subscription that only triggers once
+
+#### Example
+
+```ts
+once(event: string, listener: Function): void
+```
+
+---
+
+## `client.pair()`
+
+#### Description
+
+Creates / starts pairing request for a given uri
+
+#### Interfaces
+
+[[ClientTypes.PairParams](/javascript/walletconnect/reference/interfaces#clienttypespairparams)]
+[[PairingTypes.Settled](/javascript/walletconnect/reference/interfaces#pairingtypessettled)]
+
+#### Example
+
+```ts
+pair(params: ClientTypes.PairParams): Promise<PairingTypes.Settled>
+```
+
+---
+
+## `client.ping()`
+
+#### Description
+
+Pings given topic, usefull to check if connection is still valid
+
+#### Interfaces
+
+[[ClientTypes.PingParams](/javascript/walletconnect/reference/interfaces#clienttypespingparams)]
+
+#### Example
+
+```ts
+ping(params: ClientTypes.PingParams): Promise<void>
+```
+
+---
+
+## `client.reject()`
+
+#### Description
+
+Rejects proposal (i.e pairing / signing / send ...)
+
+#### Interfaces
+
+[[ClientTypes.RejectParams](/javascript/walletconnect/reference/interfaces#clienttypesrejectparams)]
+
+#### Example
+
+```ts
+reject(params: ClientTypes.RejectParams): Promise<void>
+```
+
+---
+
 ## `client.init()`
 
 #### Description
@@ -108,13 +205,5 @@ Initializes WalletConnect client
 ```ts
 init(options?: ClientOptions): Promise<Client>
 ```
-
----
-
-## `client.on()`
-
-#### Description
-
-Creates a listener for given event, passes event data to given callback
 
 ---
