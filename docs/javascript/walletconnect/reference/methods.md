@@ -1,5 +1,24 @@
 # Methods
 
+## `client.init()`
+
+#### Description
+
+Initializes WalletConnect client
+
+#### Interfaces
+
+[[ClientOptions](/javascript/walletconnect/reference/interfaces#clientoptions)]
+[[Client](/javascript/walletconnect/reference/interfaces#client)]
+
+#### Example
+
+```ts
+init(options?: ClientOptions): Promise<Client>
+```
+
+---
+
 ## `client.approve()`
 
 #### Description
@@ -96,7 +115,7 @@ notify(params: SequenceTypes.NotificationEvent): Promise<void>
 
 #### Description
 
-Removes event subscription
+Removes event subscription. Same as [removeListener](/javascript/walletconnect/reference/methods#clientremovelistener)
 
 #### Example
 
@@ -189,21 +208,88 @@ reject(params: ClientTypes.RejectParams): Promise<void>
 
 ---
 
-## `client.init()`
+## `client.removeListener()`
 
 #### Description
 
-Initializes WalletConnect client
-
-#### Interfaces
-
-[[ClientOptions](/javascript/walletconnect/reference/interfaces#clientoptions)]
-[[Client](/javascript/walletconnect/reference/interfaces#client)]
+Removes event subscription. Same as [off](/javascript/walletconnect/reference/methods#clientoff)
 
 #### Example
 
 ```ts
-init(options?: ClientOptions): Promise<Client>
+removeListener(event: string, listener: Function): void
+```
+
+---
+
+## `client.request()`
+
+#### Description
+
+Requests for method permissions on specified chains
+
+#### Interfaces
+
+[[ClientTypes.RequestParams](/javascript/walletconnect/reference/interfaces#clienttypesrequestparams)]
+
+#### Example
+
+```ts
+request(params: ClientTypes.RequestParams): Promise<any>
+```
+
+---
+
+## `client.respond()`
+
+#### Description
+
+Responds to [request](/javascript/walletconnect/reference/methods#clientrequest)
+
+#### Interfaces
+
+[[ClientTypes.RespondParams](/javascript/walletconnect/reference/interfaces#clienttypesrespondparams)]
+
+#### Example
+
+```ts
+respond(params: ClientTypes.RespondParams): Promise<void>
+```
+
+---
+
+## `client.update()`
+
+#### Description
+
+Updates session to i.e. include / exclude accounts
+
+#### Interfaces
+
+[[ClientTypes.UpdateParams](/javascript/walletconnect/reference/interfaces#clienttypesupdateparams)]
+
+#### Example
+
+```ts
+update(params: ClientTypes.UpdateParams): Promise<void>
+```
+
+---
+
+## `client.upgrade()`
+
+#### Description
+
+Upgrades pairing i.e. extending it
+
+#### Interfaces
+
+[[ClientTypes.UpgradeParams](/javascript/walletconnect/reference/interfaces#clienttypesupgradeparams)]
+
+#### Example
+
+```ts
+upgrade(params: ClientTypes.UpgradeParams): Promise<void>
 ```
 
 ---

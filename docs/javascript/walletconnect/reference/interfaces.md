@@ -80,6 +80,38 @@
 | TODO | TODO        | TODO     | TODO    | TODO |
 | TODO | TODO        | TODO     | TODO    | TODO |
 
+## _ClientTypes.RequestParams_
+
+| Name | Description | Required | Default | Type |
+| ---- | ----------- | -------- | ------- | ---- |
+| TODO | TODO        | TODO     | TODO    | TODO |
+| TODO | TODO        | TODO     | TODO    | TODO |
+| TODO | TODO        | TODO     | TODO    | TODO |
+
+## _ClientTypes.RespondParams_
+
+| Name | Description | Required | Default | Type |
+| ---- | ----------- | -------- | ------- | ---- |
+| TODO | TODO        | TODO     | TODO    | TODO |
+| TODO | TODO        | TODO     | TODO    | TODO |
+| TODO | TODO        | TODO     | TODO    | TODO |
+
+## _ClientTypes.UpdateParams_
+
+| Name | Description | Required | Default | Type |
+| ---- | ----------- | -------- | ------- | ---- |
+| TODO | TODO        | TODO     | TODO    | TODO |
+| TODO | TODO        | TODO     | TODO    | TODO |
+| TODO | TODO        | TODO     | TODO    | TODO |
+
+## _ClientTypes.UpgradeParams_
+
+| Name | Description | Required | Default | Type |
+| ---- | ----------- | -------- | ------- | ---- |
+| TODO | TODO        | TODO     | TODO    | TODO |
+| TODO | TODO        | TODO     | TODO    | TODO |
+| TODO | TODO        | TODO     | TODO    | TODO |
+
 ## _PairingTypes.Settled_
 
 | Name | Description | Required | Default | Type |
