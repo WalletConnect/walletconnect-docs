@@ -38,6 +38,60 @@ connect(params: ClientTypes.ConnectParams): Promise<SessionTypes.Settled>
 
 ---
 
+## `client.disconect()`
+
+#### Description
+
+Disconects from websocket and stops listening to events
+
+#### Interfaces
+
+[[ClientTypes.DisconnectParams](/javascript/walletconnect/reference/interfaces#clienttypesdisconnectparams)]
+
+#### Example
+
+```ts
+disconect(params: SequenceTypes.DeleteParams): Promise<void>
+```
+
+---
+
+## `client.extend()`
+
+#### Description
+
+Allows to extend lifespan of a given topic by given time
+
+#### Interfaces
+
+[[ClientTypes.ExtendParams](/javascript/walletconnect/reference/interfaces#clienttypesextendparams)]
+
+#### Example
+
+```ts
+extend(params: SequenceTypes.ExtendParams): Promise<void>
+```
+
+---
+
+## `client.notify()`
+
+#### Description
+
+Sends notification to specified topic
+
+#### Interfaces
+
+[[ClientTypes.NotifyParams](/javascript/walletconnect/reference/interfaces#clienttypesnotifyparams)]
+
+#### Example
+
+```ts
+notify(params: SequenceTypes.NotificationEvent): Promise<void>
+```
+
+---
+
 ## `client.init()`
 
 #### Description
