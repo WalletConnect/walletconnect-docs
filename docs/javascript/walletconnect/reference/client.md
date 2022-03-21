@@ -1,6 +1,30 @@
-# Methods
+# Client
 
-## `client.init()`
+## Members
+
+| Name       | Type                                                                      | Description          |
+| ---------- | ------------------------------------------------------------------------- | -------------------- |
+| context    | `string`                                                                  | TODO                 |
+| controller | `boolean`                                                                 | TODO                 |
+| crypto     | `-`                                                                       | TODO                 |
+| encoder    | `-`                                                                       | TODO                 |
+| events     | [EventEmitter](https://github.com/browserify/events)                      | Node's event emitter |
+| heartbeat  | `-`                                                                       | TODO                 |
+| logger     | [Logger](https://github.com/pinojs/pino)                                  | Pino logger          |
+| metadata   | [AppMetadata](/javascript/walletconnect/reference/interfaces#appmetadata) | TODO                 |
+| name       | `string`                                                                  | TODO                 |
+| pairing    | `-`                                                                       | TODO                 |
+| projectId  | `string`                                                                  | TODO                 |
+| protocol   | `string`                                                                  | TODO                 |
+| relayUrl   | `string`                                                                  | TODO                 |
+| relayer    | `-`                                                                       | TODO                 |
+| session    | `-`                                                                       | TODO                 |
+| storage    | `-`                                                                       | TODO                 |
+| version    | `number`                                                                  | TODO                 |
+
+## Methods
+
+### `init()`
 
 #### Description
 
@@ -9,7 +33,6 @@ Initializes WalletConnect client
 #### Interfaces
 
 [[ClientOptions](/javascript/walletconnect/reference/interfaces#clientoptions)]
-[[Client](/javascript/walletconnect/reference/interfaces#client)]
 
 #### Example
 
@@ -19,7 +42,7 @@ init(options?: ClientOptions): Promise<Client>
 
 ---
 
-## `client.approve()`
+### `approve()`
 
 #### Description
 
@@ -38,7 +61,7 @@ approve(params: ClientTypes.ApproveParams): Promise<SessionTypes.Settled>
 
 ---
 
-## `client.connect()`
+### `connect()`
 
 #### Description
 
@@ -57,7 +80,7 @@ connect(params: ClientTypes.ConnectParams): Promise<SessionTypes.Settled>
 
 ---
 
-## `client.disconect()`
+### `disconect()`
 
 #### Description
 
@@ -75,7 +98,7 @@ disconect(params: SequenceTypes.DeleteParams): Promise<void>
 
 ---
 
-## `client.extend()`
+### `extend()`
 
 #### Description
 
@@ -93,7 +116,7 @@ extend(params: SequenceTypes.ExtendParams): Promise<void>
 
 ---
 
-## `client.notify()`
+### `notify()`
 
 #### Description
 
@@ -111,7 +134,7 @@ notify(params: SequenceTypes.NotificationEvent): Promise<void>
 
 ---
 
-## `client.off()`
+### `off()`
 
 #### Description
 
@@ -125,7 +148,7 @@ off(event: string, listener: Function): void
 
 ---
 
-## `client.on()`
+### `on()`
 
 #### Description
 
@@ -139,7 +162,7 @@ on(event: string, listener: Function): void
 
 ---
 
-## `client.once()`
+### `once()`
 
 #### Description
 
@@ -153,7 +176,7 @@ once(event: string, listener: Function): void
 
 ---
 
-## `client.pair()`
+### `pair()`
 
 #### Description
 
@@ -172,7 +195,7 @@ pair(params: ClientTypes.PairParams): Promise<PairingTypes.Settled>
 
 ---
 
-## `client.ping()`
+### `ping()`
 
 #### Description
 
@@ -190,7 +213,7 @@ ping(params: ClientTypes.PingParams): Promise<void>
 
 ---
 
-## `client.reject()`
+### `reject()`
 
 #### Description
 
@@ -208,7 +231,7 @@ reject(params: ClientTypes.RejectParams): Promise<void>
 
 ---
 
-## `client.removeListener()`
+### `removeListener()`
 
 #### Description
 
@@ -222,7 +245,7 @@ removeListener(event: string, listener: Function): void
 
 ---
 
-## `client.request()`
+### `request()`
 
 #### Description
 
@@ -240,7 +263,7 @@ request(params: ClientTypes.RequestParams): Promise<any>
 
 ---
 
-## `client.respond()`
+### `respond()`
 
 #### Description
 
@@ -258,7 +281,7 @@ respond(params: ClientTypes.RespondParams): Promise<void>
 
 ---
 
-## `client.update()`
+### `update()`
 
 #### Description
 
@@ -276,7 +299,7 @@ update(params: ClientTypes.UpdateParams): Promise<void>
 
 ---
 
-## `client.upgrade()`
+### `upgrade()`
 
 #### Description
 

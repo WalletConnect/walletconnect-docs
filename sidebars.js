@@ -48,8 +48,8 @@ module.exports = {
               type: "category",
               label: "Reference",
               items: [
-                "javascript/walletconnect/reference/members",
-                "javascript/walletconnect/reference/methods",
+                "javascript/walletconnect/reference/client",
+                "javascript/walletconnect/reference/crypto",
                 "javascript/walletconnect/reference/interfaces",
               ],
             },
