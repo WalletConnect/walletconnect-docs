@@ -9,7 +9,7 @@
 | crypto     | [Crypto](/javascript/walletconnect/reference/crypto)                      | TODO                 |
 | encoder    | [Encoder](/javascript/walletconnect/reference/encoder)                    | TODO                 |
 | events     | [EventEmitter](https://github.com/browserify/events)                      | Node's event emitter |
-| heartbeat  | `-`                                                                       | TODO                 |
+| heartbeat  | [Heartbeat](/javascript/walletconnect/reference/heartbeat)                | TODO                 |
 | logger     | [Logger](https://github.com/pinojs/pino)                                  | Pino logger          |
 | metadata   | [AppMetadata](/javascript/walletconnect/reference/interfaces#appmetadata) | TODO                 |
 | name       | `string`                                                                  | TODO                 |

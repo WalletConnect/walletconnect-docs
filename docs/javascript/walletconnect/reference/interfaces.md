@@ -62,6 +62,14 @@
 | TODO | TODO        | TODO     | TODO    | TODO |
 | TODO | TODO        | TODO     | TODO    | TODO |
 
+## _JsonRpcRecord_
+
+| Name | Description | Required | Default | Type |
+| ---- | ----------- | -------- | ------- | ---- |
+| TODO | TODO        | TODO     | TODO    | TODO |
+| TODO | TODO        | TODO     | TODO    | TODO |
+| TODO | TODO        | TODO     | TODO    | TODO |
+
 ## _ClientTypes.ApproveParams_
 
 | Name | Description | Required | Default | Type |
@@ -166,7 +174,31 @@
 | TODO | TODO        | TODO     | TODO    | TODO |
 | TODO | TODO        | TODO     | TODO    | TODO |
 
+## _PairingTypes.Config_
+
+| Name | Description | Required | Default | Type |
+| ---- | ----------- | -------- | ------- | ---- |
+| TODO | TODO        | TODO     | TODO    | TODO |
+| TODO | TODO        | TODO     | TODO    | TODO |
+| TODO | TODO        | TODO     | TODO    | TODO |
+
+## _PairingTypes.Engine_
+
+| Name | Description | Required | Default | Type |
+| ---- | ----------- | -------- | ------- | ---- |
+| TODO | TODO        | TODO     | TODO    | TODO |
+| TODO | TODO        | TODO     | TODO    | TODO |
+| TODO | TODO        | TODO     | TODO    | TODO |
+
 ## _SessionTypes.Settled_
+
+| Name | Description | Required | Default | Type |
+| ---- | ----------- | -------- | ------- | ---- |
+| TODO | TODO        | TODO     | TODO    | TODO |
+| TODO | TODO        | TODO     | TODO    | TODO |
+| TODO | TODO        | TODO     | TODO    | TODO |
+
+## _RequestEvent_
 
 | Name | Description | Required | Default | Type |
 | ---- | ----------- | -------- | ------- | ---- |
