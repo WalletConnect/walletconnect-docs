@@ -138,7 +138,7 @@ notify(params: SequenceTypes.NotificationEvent): Promise<void>
 
 #### Description
 
-Removes event subscription. Same as [removeListener](/javascript/walletconnect/reference/methods#clientremovelistener)
+Removes event subscription. Same as [removeListener](/javascript/walletconnect/reference/client#removelistener)
 
 #### Example
 
@@ -235,7 +235,7 @@ reject(params: ClientTypes.RejectParams): Promise<void>
 
 #### Description
 
-Removes event subscription. Same as [off](/javascript/walletconnect/reference/methods#clientoff)
+Removes event subscription. Same as [off](/javascript/walletconnect/reference/client#off)
 
 #### Example
 
@@ -267,7 +267,7 @@ request(params: ClientTypes.RequestParams): Promise<any>
 
 #### Description
 
-Responds to [request](/javascript/walletconnect/reference/methods#clientrequest)
+Responds to [request](/javascript/walletconnect/reference/client#request)
 
 #### Interfaces
 

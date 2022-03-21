@@ -23,21 +23,6 @@
 | url         | `string`   | TODO     | TODO    |
 | icons       | `string[]` | TODO     | TODO    |
 
-## _IKeychain_
-
-| Name     | Description                                                        | Required | Default | Type |
-| -------- | ------------------------------------------------------------------ | -------- | ------- | ---- |
-| client   | `Client`                                                           | TODO     | TODO    | TODO |
-| logger   | `Logger`                                                           | TODO     | TODO    | TODO |
-| keychain | `Map<string, string>`                                              | TODO     | TODO    | TODO |
-| name     | `string`                                                           | TODO     | TODO    | TODO |
-| context  | `string`                                                           | TODO     | TODO    | TODO |
-| init     | [Method](/javascript/walletconnect/reference/methods#keychaininit) | TODO     | TODO    | TODO |
-| has      | [Method](/javascript/walletconnect/reference/methods#keychainhas)  | TODO     | TODO    | TODO |
-| set      | [Method](/javascript/walletconnect/reference/methods#keychainset)  | TODO     | TODO    | TODO |
-| get      | [Method](/javascript/walletconnect/reference/methods#keychainget)  | TODO     | TODO    | TODO |
-| del      | [Method](/javascript/walletconnect/reference/methods#keychaindel)  | TODO     | TODO    | TODO |
-
 ## _IKeyValueStorage_
 
 | Name | Description | Required | Default | Type |

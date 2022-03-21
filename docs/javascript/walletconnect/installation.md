@@ -14,7 +14,7 @@ npm install --save @walletconnect/client@experimental
 
 ## 3. Initialize Client
 
-Initialize client by passing `relayUrl` and `projectId` we created before. See [client.init() reference](/javascript/walletconnect/reference/methods#clientinit) for more info.
+Initialize client by passing `relayUrl` and `projectId` we created before. See [client.init() reference](/javascript/walletconnect/reference/client#init) for more info.
 
 ```js
 import WalletConnectClient from "@walletconnect/client";
