@@ -51,6 +51,7 @@ module.exports = {
                 "javascript/walletconnect/reference/client",
                 "javascript/walletconnect/reference/crypto",
                 "javascript/walletconnect/reference/encoder",
+                "javascript/walletconnect/reference/heartbeat",
                 "javascript/walletconnect/reference/interfaces",
               ],
             },

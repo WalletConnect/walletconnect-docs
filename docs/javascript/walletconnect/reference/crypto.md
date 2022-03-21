@@ -12,7 +12,7 @@
 
 ## Mehods
 
-### `init()`
+### `init`
 
 #### Description
 
@@ -26,7 +26,7 @@ init(): Promise<void>
 
 ---
 
-### `decode()`
+### `decode`
 
 #### Description
 
@@ -44,7 +44,7 @@ decode(topic: string, encrypted: string): Promise<JsonRpcPayload>
 
 ---
 
-### `decrypt()`
+### `decrypt`
 
 #### Description
 
@@ -58,7 +58,7 @@ decrypt(topic: string, encrypted: string): Promise<string>
 
 ---
 
-### `encode()`
+### `encode`
 
 #### Description
 
@@ -76,7 +76,7 @@ encode(topic: string, payload: JsonRpcPayload): Promise<string>
 
 ---
 
-### `encrypt()`
+### `encrypt`
 
 #### Description
 
@@ -90,7 +90,7 @@ encrypt(topic: string, message: string): Promise<string>
 
 ---
 
-### `generateKeyPair()`
+### `generateKeyPair`
 
 #### Description
 
@@ -104,7 +104,7 @@ generateKeyPair(): Promise<string>
 
 ---
 
-### `generateSharedKey()`
+### `generateSharedKey`
 
 #### Description
 
@@ -122,7 +122,7 @@ generateSharedKey(self: CryptoTypes.Participant, peer: CryptoTypes.Participant, 
 
 ---
 
-### `hasKeys()`
+### `hasKeys`
 
 #### Description
 

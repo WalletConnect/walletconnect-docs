@@ -11,7 +11,7 @@
 
 ## Mehods
 
-### `decode()`
+### `decode`
 
 #### Description
 
@@ -29,7 +29,7 @@ decode(topic: string, encrypted: string): Promise<JsonRpcPayload>
 
 ---
 
-### `encode()`
+### `encode`
 
 #### Description
 

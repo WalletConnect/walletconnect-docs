@@ -24,7 +24,7 @@
 
 ## Methods
 
-### `init()`
+### `init`
 
 #### Description
 
@@ -42,7 +42,7 @@ init(options?: ClientOptions): Promise<Client>
 
 ---
 
-### `approve()`
+### `approve`
 
 #### Description
 
@@ -61,7 +61,7 @@ approve(params: ClientTypes.ApproveParams): Promise<SessionTypes.Settled>
 
 ---
 
-### `connect()`
+### `connect`
 
 #### Description
 
@@ -80,7 +80,7 @@ connect(params: ClientTypes.ConnectParams): Promise<SessionTypes.Settled>
 
 ---
 
-### `disconect()`
+### `disconect`
 
 #### Description
 
@@ -98,7 +98,7 @@ disconect(params: SequenceTypes.DeleteParams): Promise<void>
 
 ---
 
-### `extend()`
+### `extend`
 
 #### Description
 
@@ -116,7 +116,7 @@ extend(params: SequenceTypes.ExtendParams): Promise<void>
 
 ---
 
-### `notify()`
+### `notify`
 
 #### Description
 
@@ -134,7 +134,7 @@ notify(params: SequenceTypes.NotificationEvent): Promise<void>
 
 ---
 
-### `off()`
+### `off`
 
 #### Description
 
@@ -148,7 +148,7 @@ off(event: string, listener: Function): void
 
 ---
 
-### `on()`
+### `on`
 
 #### Description
 
@@ -162,7 +162,7 @@ on(event: string, listener: Function): void
 
 ---
 
-### `once()`
+### `once`
 
 #### Description
 
@@ -176,7 +176,7 @@ once(event: string, listener: Function): void
 
 ---
 
-### `pair()`
+### `pair`
 
 #### Description
 
@@ -195,7 +195,7 @@ pair(params: ClientTypes.PairParams): Promise<PairingTypes.Settled>
 
 ---
 
-### `ping()`
+### `ping`
 
 #### Description
 
@@ -213,7 +213,7 @@ ping(params: ClientTypes.PingParams): Promise<void>
 
 ---
 
-### `reject()`
+### `reject`
 
 #### Description
 
@@ -231,7 +231,7 @@ reject(params: ClientTypes.RejectParams): Promise<void>
 
 ---
 
-### `removeListener()`
+### `removeListener`
 
 #### Description
 
@@ -245,7 +245,7 @@ removeListener(event: string, listener: Function): void
 
 ---
 
-### `request()`
+### `request`
 
 #### Description
 
@@ -263,7 +263,7 @@ request(params: ClientTypes.RequestParams): Promise<any>
 
 ---
 
-### `respond()`
+### `respond`
 
 #### Description
 
@@ -281,7 +281,7 @@ respond(params: ClientTypes.RespondParams): Promise<void>
 
 ---
 
-### `update()`
+### `update`
 
 #### Description
 
@@ -299,7 +299,7 @@ update(params: ClientTypes.UpdateParams): Promise<void>
 
 ---
 
-### `upgrade()`
+### `upgrade`
 
 #### Description
 
