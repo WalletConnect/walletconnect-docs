@@ -173,3 +173,11 @@
 | TODO | TODO        | TODO     | TODO    | TODO |
 | TODO | TODO        | TODO     | TODO    | TODO |
 | TODO | TODO        | TODO     | TODO    | TODO |
+
+## _CryptoTypes.Participant_
+
+| Name | Description | Required | Default | Type |
+| ---- | ----------- | -------- | ------- | ---- |
+| TODO | TODO        | TODO     | TODO    | TODO |
+| TODO | TODO        | TODO     | TODO    | TODO |
+| TODO | TODO        | TODO     | TODO    | TODO |
