@@ -1,4 +1,4 @@
-# WalletConnect Swift Client Installation
+# Installation
 
 Swift implementation of WalletConnect v.2 protocol for native iOS applications.
 

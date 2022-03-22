@@ -65,8 +65,6 @@ module.exports = {
           label: "WalletMail",
           items: [
             "javascript/walletmail/installation",
-            "javascript/walletmail/usage",
-            "javascript/walletmail/reference",
           ],
         },
         {
@@ -74,8 +72,6 @@ module.exports = {
           label: "WalletPush",
           items: [
             "javascript/walletpush/installation",
-            "javascript/walletpush/usage",
-            "javascript/walletpush/reference",
           ],
         },
         {
@@ -154,8 +150,7 @@ module.exports = {
           label: "WalletMail",
           items: [
             "kotlin/walletmail/installation",
-            "kotlin/walletmail/usage",
-            "kotlin/walletmail/reference",
+
           ],
         },
         {
@@ -163,8 +158,6 @@ module.exports = {
           label: "WalletPush",
           items: [
             "kotlin/walletpush/installation",
-            "kotlin/walletpush/usage",
-            "kotlin/walletpush/reference",
           ],
         },
       ],

@@ -11,3 +11,7 @@ There are getting started guides for the following clients platforms:
 - [Web - Javascript](../javascript/walletconnect/installation.md)
 - [iOS - Swift](../swift/walletconnect/installation.md)
 - [Android - Kotlin](../kotlin/walletconnect/installation.md)
+
+## Examples and Resources
+
+We have a set of [official examples](examples-and-resources.md) in various flavors of javascript, swift, and kotlin.

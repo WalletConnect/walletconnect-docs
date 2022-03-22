@@ -1,4 +1,4 @@
-# WalletConnect Kotlin Client Installation
+# Installation
 
 Kotlin implementation of WalletConnect v2 protocol for native Android applications.
 
