@@ -1,4 +1,4 @@
-# WalletConnect
+# Authentication
 
 ## Introduction
 
