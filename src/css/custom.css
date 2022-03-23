@@ -65,7 +65,7 @@ main {
 .menu_outer_list > div a {
   text-transform: uppercase;
   font-weight: bold;
-  font-size: 14px;
+  font-size: 13px;
   color: rgba(0, 0, 0, 0.3);
 }
 

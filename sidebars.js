@@ -16,9 +16,9 @@ module.exports = {
           label: "Our SDKs",
           collapsed: false,
           items: [
-            "introduction/walletconnect",
-            "introduction/walletmail",
-            "introduction/walletpush",
+            "introduction/authentication",
+            "introduction/messaging",
+            "introduction/notifications",
           ],
         },
         {
@@ -40,39 +40,35 @@ module.exports = {
       items: [
         {
           type: "category",
-          label: "WalletConnect",
+          label: "Authentication",
           items: [
-            "javascript/walletconnect/installation",
-            "javascript/walletconnect/wallet-usage",
+            "javascript/authentication/installation",
+            "javascript/authentication/wallet-usage",
             {
               type: "category",
               label: "Reference",
               items: [
-                "javascript/walletconnect/reference/client",
-                "javascript/walletconnect/reference/crypto",
-                "javascript/walletconnect/reference/encoder",
-                "javascript/walletconnect/reference/heartbeat",
-                "javascript/walletconnect/reference/pairing",
-                "javascript/walletconnect/reference/engine",
-                "javascript/walletconnect/reference/history",
-                "javascript/walletconnect/reference/interfaces",
+                "javascript/authentication/reference/client",
+                "javascript/authentication/reference/crypto",
+                "javascript/authentication/reference/encoder",
+                "javascript/authentication/reference/heartbeat",
+                "javascript/authentication/reference/pairing",
+                "javascript/authentication/reference/engine",
+                "javascript/authentication/reference/history",
+                "javascript/authentication/reference/interfaces",
               ],
             },
           ],
         },
         {
           type: "category",
-          label: "WalletMail",
-          items: [
-            "javascript/walletmail/installation",
-          ],
+          label: "Messaging",
+          items: ["javascript/messaging/installation"],
         },
         {
           type: "category",
-          label: "WalletPush",
-          items: [
-            "javascript/walletpush/installation",
-          ],
+          label: "Notifications",
+          items: ["javascript/notifications/installation"],
         },
         {
           type: "category",
@@ -102,29 +98,29 @@ module.exports = {
       items: [
         {
           type: "category",
-          label: "WalletConnect",
+          label: "Authentication",
           items: [
-            "swift/walletconnect/installation",
-            "swift/walletconnect/usage",
-            "swift/walletconnect/reference",
+            "swift/authentication/installation",
+            "swift/authentication/usage",
+            "swift/authentication/reference",
           ],
         },
         {
           type: "category",
-          label: "WalletMail",
+          label: "Messaging",
           items: [
-            "swift/walletmail/installation",
-            "swift/walletmail/usage",
-            "swift/walletmail/reference",
+            "swift/messaging/installation",
+            "swift/messaging/usage",
+            "swift/messaging/reference",
           ],
         },
         {
           type: "category",
-          label: "WalletPush",
+          label: "Notifications",
           items: [
-            "swift/walletpush/installation",
-            "swift/walletpush/usage",
-            "swift/walletpush/reference",
+            "swift/notifications/installation",
+            "swift/notifications/usage",
+            "swift/notifications/reference",
           ],
         },
       ],
@@ -138,27 +134,22 @@ module.exports = {
       items: [
         {
           type: "category",
-          label: "WalletConnect",
+          label: "Authentication",
           items: [
-            "kotlin/walletconnect/installation",
-            "kotlin/walletconnect/usage",
-            "kotlin/walletconnect/reference",
+            "kotlin/authentication/installation",
+            "kotlin/authentication/usage",
+            "kotlin/authentication/reference",
           ],
         },
         {
           type: "category",
-          label: "WalletMail",
-          items: [
-            "kotlin/walletmail/installation",
-
-          ],
+          label: "Messaging",
+          items: ["kotlin/messaging/installation"],
         },
         {
           type: "category",
-          label: "WalletPush",
-          items: [
-            "kotlin/walletpush/installation",
-          ],
+          label: "Notifications",
+          items: ["kotlin/notifications/installation"],
         },
       ],
     },
