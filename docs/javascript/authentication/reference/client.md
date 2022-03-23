@@ -2,25 +2,25 @@
 
 ## Members
 
-| Name       | Type                                                                      | Description          |
-| ---------- | ------------------------------------------------------------------------- | -------------------- |
-| context    | `string`                                                                  | TODO                 |
-| controller | `boolean`                                                                 | TODO                 |
-| crypto     | [Crypto](/javascript/walletconnect/reference/crypto)                      | TODO                 |
-| encoder    | [Encoder](/javascript/walletconnect/reference/encoder)                    | TODO                 |
-| events     | [EventEmitter](https://github.com/browserify/events)                      | Node's event emitter |
-| heartbeat  | [Heartbeat](/javascript/walletconnect/reference/heartbeat)                | TODO                 |
-| logger     | [Logger](https://github.com/pinojs/pino)                                  | Pino logger          |
-| metadata   | [AppMetadata](/javascript/walletconnect/reference/interfaces#appmetadata) | TODO                 |
-| name       | `string`                                                                  | TODO                 |
-| pairing    | `-`                                                                       | TODO                 |
-| projectId  | `string`                                                                  | TODO                 |
-| protocol   | `string`                                                                  | TODO                 |
-| relayUrl   | `string`                                                                  | TODO                 |
-| relayer    | `-`                                                                       | TODO                 |
-| session    | `-`                                                                       | TODO                 |
-| storage    | `-`                                                                       | TODO                 |
-| version    | `number`                                                                  | TODO                 |
+| Name       | Type                                                                       | Description          |
+| ---------- | -------------------------------------------------------------------------- | -------------------- |
+| context    | `string`                                                                   | TODO                 |
+| controller | `boolean`                                                                  | TODO                 |
+| crypto     | [Crypto](/javascript/authentication/reference/crypto)                      | TODO                 |
+| encoder    | [Encoder](/javascript/authentication/reference/encoder)                    | TODO                 |
+| events     | [EventEmitter](https://github.com/browserify/events)                       | Node's event emitter |
+| heartbeat  | [Heartbeat](/javascript/authentication/reference/heartbeat)                | TODO                 |
+| logger     | [Logger](https://github.com/pinojs/pino)                                   | Pino logger          |
+| metadata   | [AppMetadata](/javascript/authentication/reference/interfaces#appmetadata) | TODO                 |
+| name       | `string`                                                                   | TODO                 |
+| pairing    | `-`                                                                        | TODO                 |
+| projectId  | `string`                                                                   | TODO                 |
+| protocol   | `string`                                                                   | TODO                 |
+| relayUrl   | `string`                                                                   | TODO                 |
+| relayer    | `-`                                                                        | TODO                 |
+| session    | `-`                                                                        | TODO                 |
+| storage    | `-`                                                                        | TODO                 |
+| version    | `number`                                                                   | TODO                 |
 
 ## Methods
 
@@ -32,7 +32,7 @@ Initializes WalletConnect client
 
 #### Interfaces
 
-[[ClientOptions](/javascript/walletconnect/reference/interfaces#clientoptions)]
+[[ClientOptions](/javascript/authentication/reference/interfaces#clientoptions)]
 
 #### Example
 
@@ -50,8 +50,8 @@ Approves proposal (i.e pairing / signing / send ...)
 
 #### Interfaces
 
-[[ClientTypes.ApproveParams](/javascript/walletconnect/reference/interfaces#clienttypesapproveparams)]
-[[SessionTypes.Settled](/javascript/walletconnect/reference/interfaces#sessiontypessettled)]
+[[ClientTypes.ApproveParams](/javascript/authentication/reference/interfaces#clienttypesapproveparams)]
+[[SessionTypes.Settled](/javascript/authentication/reference/interfaces#sessiontypessettled)]
 
 #### Example
 
@@ -69,8 +69,8 @@ TODO
 
 #### Interfaces
 
-[[ClientTypes.ConnectParams](/javascript/walletconnect/reference/interfaces#clienttypesconnectparams)]
-[[SessionTypes.Settled](/javascript/walletconnect/reference/interfaces#sessiontypessettled)]
+[[ClientTypes.ConnectParams](/javascript/authentication/reference/interfaces#clienttypesconnectparams)]
+[[SessionTypes.Settled](/javascript/authentication/reference/interfaces#sessiontypessettled)]
 
 #### Example
 
@@ -88,7 +88,7 @@ Disconects from websocket and stops listening to events
 
 #### Interfaces
 
-[[ClientTypes.DisconnectParams](/javascript/walletconnect/reference/interfaces#clienttypesdisconnectparams)]
+[[ClientTypes.DisconnectParams](/javascript/authentication/reference/interfaces#clienttypesdisconnectparams)]
 
 #### Example
 
@@ -106,7 +106,7 @@ Allows to extend lifespan of a given topic by given time
 
 #### Interfaces
 
-[[ClientTypes.ExtendParams](/javascript/walletconnect/reference/interfaces#clienttypesextendparams)]
+[[ClientTypes.ExtendParams](/javascript/authentication/reference/interfaces#clienttypesextendparams)]
 
 #### Example
 
@@ -124,7 +124,7 @@ Sends notification to specified topic
 
 #### Interfaces
 
-[[ClientTypes.NotifyParams](/javascript/walletconnect/reference/interfaces#clienttypesnotifyparams)]
+[[ClientTypes.NotifyParams](/javascript/authentication/reference/interfaces#clienttypesnotifyparams)]
 
 #### Example
 
@@ -138,7 +138,7 @@ notify(params: SequenceTypes.NotificationEvent): Promise<void>
 
 #### Description
 
-Removes event subscription. Same as [removeListener](/javascript/walletconnect/reference/client#removelistener)
+Removes event subscription. Same as [removeListener](/javascript/authentication/reference/client#removelistener)
 
 #### Example
 
@@ -184,8 +184,8 @@ Creates / starts pairing request for a given uri
 
 #### Interfaces
 
-[[ClientTypes.PairParams](/javascript/walletconnect/reference/interfaces#clienttypespairparams)]
-[[PairingTypes.Settled](/javascript/walletconnect/reference/interfaces#pairingtypessettled)]
+[[ClientTypes.PairParams](/javascript/authentication/reference/interfaces#clienttypespairparams)]
+[[PairingTypes.Settled](/javascript/authentication/reference/interfaces#pairingtypessettled)]
 
 #### Example
 
@@ -203,7 +203,7 @@ Pings given topic, usefull to check if connection is still valid
 
 #### Interfaces
 
-[[ClientTypes.PingParams](/javascript/walletconnect/reference/interfaces#clienttypespingparams)]
+[[ClientTypes.PingParams](/javascript/authentication/reference/interfaces#clienttypespingparams)]
 
 #### Example
 
@@ -221,7 +221,7 @@ Rejects proposal (i.e pairing / signing / send ...)
 
 #### Interfaces
 
-[[ClientTypes.RejectParams](/javascript/walletconnect/reference/interfaces#clienttypesrejectparams)]
+[[ClientTypes.RejectParams](/javascript/authentication/reference/interfaces#clienttypesrejectparams)]
 
 #### Example
 
@@ -235,7 +235,7 @@ reject(params: ClientTypes.RejectParams): Promise<void>
 
 #### Description
 
-Removes event subscription. Same as [off](/javascript/walletconnect/reference/client#off)
+Removes event subscription. Same as [off](/javascript/authentication/reference/client#off)
 
 #### Example
 
@@ -253,7 +253,7 @@ Requests for method permissions on specified chains
 
 #### Interfaces
 
-[[ClientTypes.RequestParams](/javascript/walletconnect/reference/interfaces#clienttypesrequestparams)]
+[[ClientTypes.RequestParams](/javascript/authentication/reference/interfaces#clienttypesrequestparams)]
 
 #### Example
 
@@ -267,11 +267,11 @@ request(params: ClientTypes.RequestParams): Promise<any>
 
 #### Description
 
-Responds to [request](/javascript/walletconnect/reference/client#request)
+Responds to [request](/javascript/authentication/reference/client#request)
 
 #### Interfaces
 
-[[ClientTypes.RespondParams](/javascript/walletconnect/reference/interfaces#clienttypesrespondparams)]
+[[ClientTypes.RespondParams](/javascript/authentication/reference/interfaces#clienttypesrespondparams)]
 
 #### Example
 
@@ -289,7 +289,7 @@ Updates session to i.e. include / exclude accounts
 
 #### Interfaces
 
-[[ClientTypes.UpdateParams](/javascript/walletconnect/reference/interfaces#clienttypesupdateparams)]
+[[ClientTypes.UpdateParams](/javascript/authentication/reference/interfaces#clienttypesupdateparams)]
 
 #### Example
 
@@ -307,7 +307,7 @@ Upgrades pairing i.e. extending it
 
 #### Interfaces
 
-[[ClientTypes.UpgradeParams](/javascript/walletconnect/reference/interfaces#clienttypesupgradeparams)]
+[[ClientTypes.UpgradeParams](/javascript/authentication/reference/interfaces#clienttypesupgradeparams)]
 
 #### Example
 

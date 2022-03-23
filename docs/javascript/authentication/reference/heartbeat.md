@@ -2,13 +2,13 @@
 
 ## Members
 
-| Name     | Type                                                 | Description |
-| -------- | ---------------------------------------------------- | ----------- |
-| client   | [Client](/javascript/walletconnect/reference/client) | TODO        |
-| context  | `string`                                             | TODO        |
-| interval | `number`                                             | TODO        |
-| logger   | [Logger](https://github.com/pinojs/pino)             | Pino logger |
-| name     | `string`                                             | TODO        |
+| Name     | Type                                                  | Description |
+| -------- | ----------------------------------------------------- | ----------- |
+| client   | [Client](/javascript/authentication/reference/client) | TODO        |
+| context  | `string`                                              | TODO        |
+| interval | `number`                                              | TODO        |
+| logger   | [Logger](https://github.com/pinojs/pino)              | Pino logger |
+| name     | `string`                                              | TODO        |
 
 ## Mehods
 
@@ -44,7 +44,7 @@ on(event: string, listener: Function): void
 
 #### Description
 
-Removes event subscription. Same as [removeListener](/javascript/walletconnect/reference/heartbeat#removelistener)
+Removes event subscription. Same as [removeListener](/javascript/authentication/reference/heartbeat#removelistener)
 
 #### Example
 
@@ -72,7 +72,7 @@ once(event: string, listener: Function): void
 
 #### Description
 
-Removes event subscription. Same as [off](/javascript/walletconnect/reference/heartbeat#off)
+Removes event subscription. Same as [off](/javascript/authentication/reference/heartbeat#off)
 
 #### Example
 

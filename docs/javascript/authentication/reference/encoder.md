@@ -2,12 +2,12 @@
 
 ## Members
 
-| Name    | Type                                                 | Description |
-| ------- | ---------------------------------------------------- | ----------- |
-| client  | [Client](/javascript/walletconnect/reference/client) | TODO        |
-| context | `string`                                             | TODO        |
-| logger  | [Logger](https://github.com/pinojs/pino)             | Pino logger |
-| name    | `string`                                             | TODO        |
+| Name    | Type                                                  | Description |
+| ------- | ----------------------------------------------------- | ----------- |
+| client  | [Client](/javascript/authentication/reference/client) | TODO        |
+| context | `string`                                              | TODO        |
+| logger  | [Logger](https://github.com/pinojs/pino)              | Pino logger |
+| name    | `string`                                              | TODO        |
 
 ## Mehods
 
@@ -19,7 +19,7 @@ TODO
 
 #### Interfaces
 
-[[JsonRpcPayload](/javascript/walletconnect/reference/interfaces#jsonrpcpayload)]
+[[JsonRpcPayload](/javascript/authentication/reference/interfaces#jsonrpcpayload)]
 
 #### Example
 
@@ -37,7 +37,7 @@ TODO
 
 #### Interfaces
 
-[[JsonRpcPayload](/javascript/walletconnect/reference/interfaces#jsonrpcpayload)]
+[[JsonRpcPayload](/javascript/authentication/reference/interfaces#jsonrpcpayload)]
 
 #### Example
 
