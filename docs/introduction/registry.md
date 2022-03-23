@@ -24,6 +24,7 @@ By default listings endpoints return all data for provided type. You can use fol
 | entries | Specifies how many entries will be returned (must be used together with page param) |
 | page    | Specifies current page (must be used with entries param)                            |
 | search  | Returns listings whose name matches provided search query                           |
+| version | Specifies WalletConnect supported version (1 or 2)                                  |
 
 #### `GET /api/v1/wallets`
 
@@ -34,6 +35,11 @@ Returns a JSON object containing all wallets listed in the public registry. <br 
 
 Returns a JSON object containing all dApps listed in the public registry. <br />
 [See Example](https://registry.walletconnect.com/api/v1/dapps?entries=5&page=1)
+
+#### `GET /api/v1/hybrid`
+
+Returns a JSON object containing all hybrids listed in the public registry. <br />
+[See Example](https://registry.walletconnect.com/api/v1/hybrid?entries=5&page=1)
 
 #### `GET /api/v1/all`
 
