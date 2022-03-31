@@ -213,7 +213,7 @@ const typedData = {
 
 const msgParams = [
   "0xbc28ea04101f03ea7a94c1379bc3ab32e65e62d3", // Required
-  typedData, // Required
+  JSON.stringify(typedData), // Required
 ];
 
 // Sign Typed Data
