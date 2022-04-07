@@ -31,6 +31,6 @@ Additionally you can also consult the API references for [Client](client-api.md)
 
 Share your experience, contribute or ask questions with the WalletConnect Community
 
-- Discord: [https://discord.walletconnect.org](https://discord.walletconnect.org)
-- Twitter: [https://twitter.com/walletconnect](https://twitter.com/walletconnect)
-- Github: [https://github.com/walletconnect](https://github.com/walletconnect)
+- **Discord**: [https://discord.walletconnect.org](https://discord.walletconnect.org)
+- **Twitter**: [https://twitter.com/walletconnect](https://twitter.com/walletconnect)
+- **Github**: [https://github.com/walletconnect](https://github.com/walletconnect)
