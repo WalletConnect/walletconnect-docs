@@ -18,7 +18,7 @@ To quickly setup your Dapp or Wallet, go to the Quick Start section for code exa
 
 To read in more detail about the WalletConnect protocol, go to [Technical Specification](tech-spec.md)
 
-Additionally you can also consult the API references for [Client](client-api.md), [Bridge Server](bridge-server.md) and [Push Server](push-server.md)
+Additionally you can also consult the API references for [Client](client-api.md), [Bridge Server](bridge-server.md) and [Push Server](push-server.md).
 
 ## Useful Links
 
@@ -29,7 +29,7 @@ Additionally you can also consult the API references for [Client](client-api.md)
 
 ## Community
 
-Share your experience, contribute or ask questions with the WalletConnect Community
+Share your experience, contribute or ask questions with the WalletConnect Community:
 
 - **Discord**: [https://discord.walletconnect.org](https://discord.walletconnect.org)
 - **Twitter**: [https://twitter.com/walletconnect](https://twitter.com/walletconnect)
