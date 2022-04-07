@@ -22,10 +22,10 @@ Additionally you can also consult the API references for [Client](client-api.md)
 
 ## Useful Links
 
-| Test | Dapp |
+| **Test Wallet** | **Example Dapp** |
 | --------------- | --------------- |
 | ![test wallet](/assets-1.0/img_3394.jpg) | ![example dapp](/assets-1.0/screenshot-2019-01-31-16.52.57.png) |
-| **Test Wallet:** [test.walletconnect.org](https://test.walletconnect.org) \([Source code](https://github.com/WalletConnect/walletconnect-test-wallet)\) | **Example Dapp:** [example.walletconnect.org](https://example.walletconnect.org) \([Source code](https://github.com/WalletConnect/walletconnect-example-dapp)\) |
+| [test.walletconnect.org](https://test.walletconnect.org) \([Source code](https://github.com/WalletConnect/walletconnect-test-wallet)\) | [example.walletconnect.org](https://example.walletconnect.org) \([Source code](https://github.com/WalletConnect/walletconnect-example-dapp)\) |
 
 ## Community
 
