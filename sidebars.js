@@ -163,13 +163,18 @@ module.exports = {
         "advanced/migrating-from-v1.0",
         {
           type: "category",
+          label: "API Reference",
+          items: ["advanced/api-reference/project-id"],
+        },
+        {
+          type: "category",
           label: "RPC Reference",
           items: [
-            "advanced/ethereum-rpc",
-            "advanced/cosmos-rpc",
-            "advanced/solana-rpc",
-            "advanced/polkadot-rpc",
-            "advanced/stellar-rpc",
+            "advanced/rpc-reference/ethereum-rpc",
+            "advanced/rpc-reference/cosmos-rpc",
+            "advanced/rpc-reference/solana-rpc",
+            "advanced/rpc-reference/polkadot-rpc",
+            "advanced/rpc-reference/stellar-rpc",
           ],
         },
       ],
