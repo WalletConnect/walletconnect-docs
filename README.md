@@ -2,7 +2,7 @@
 
 This repo runs [docs.walletconnect.com](https://docs.walletconnect.com).
 
-Source can be viewed in [docs/](./docs/).
+Source can be viewed in [`docs`](./docs/) directory.
 
 ## Running Locally
 

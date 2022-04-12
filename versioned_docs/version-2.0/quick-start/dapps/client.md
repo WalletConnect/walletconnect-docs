@@ -9,7 +9,7 @@ This library is compatible with NodeJS, Browser and React-Native applications \(
 ## Install
 
 ```bash npm2yarn
-npm install --save @walletconnect/client@experimental
+npm install --save @walletconnect/client@experimental @walletconnect/types@experimental
 ```
 
 ## Create Session
