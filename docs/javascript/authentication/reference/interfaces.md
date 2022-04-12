@@ -2,17 +2,15 @@
 
 ## _ClientOptions_
 
-| Name           | Type                                              | Required | Default |
-| -------------- | ------------------------------------------------- | -------- | ------- |
-| name           | `string`                                          | No       | TODO    |
-| projectId      | `string`                                          | No       | TODO    |
-| controller     | `boolean`                                         | No       | TODO    |
-| metadata       | [AppMetadata](#appmetadata)                       | No       | TODO    |
-| relayUrl       | `string`                                          | No       | TODO    |
-| logger         | `string` / `Logger`                               | No       | TODO    |
-| keychain       | [IKeychain](#ikeychain)                           | No       | TODO    |
-| storage        | [IKeyValueStorage](#ikeyvaluestorage)             | No       | TODO    |
-| storageOptions | [KeyValueStorageOptions](#keyvaluestorageoptions) | No       | TODO    |
+| Name       | Type                        | Required | Default |
+| ---------- | --------------------------- | -------- | ------- |
+| name       | `string`                    | No       | TODO    |
+| projectId  | `string`                    | No       | TODO    |
+| controller | `boolean`                   | No       | TODO    |
+| metadata   | [AppMetadata](#appmetadata) | No       | TODO    |
+| relayUrl   | `string`                    | No       | TODO    |
+| logger     | `string` / `Logger`         | No       | TODO    |
+| keychain   | [IKeychain](#ikeychain)     | No       | TODO    |
 
 ## _AppMetadata_
 
@@ -24,14 +22,6 @@
 | icons       | `string[]` | TODO     | TODO    |
 
 ## _IKeyValueStorage_
-
-| Name | Description | Required | Default | Type |
-| ---- | ----------- | -------- | ------- | ---- |
-| TODO | TODO        | TODO     | TODO    | TODO |
-| TODO | TODO        | TODO     | TODO    | TODO |
-| TODO | TODO        | TODO     | TODO    | TODO |
-
-## _KeyValueStorageOptions_
 
 | Name | Description | Required | Default | Type |
 | ---- | ----------- | -------- | ------- | ---- |
