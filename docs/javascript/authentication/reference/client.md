@@ -80,7 +80,7 @@ connect(params: ClientTypes.ConnectParams): Promise<SessionTypes.Settled>
 
 ---
 
-### `disconect`
+### `disconnect`
 
 #### Description
 
