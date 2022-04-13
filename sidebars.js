@@ -85,6 +85,7 @@ module.exports = {
           items: [
             "javascript/guides/typescript",
             "javascript/guides/react-native",
+            "javascript/guides/nodejs",
           ],
         },
       ],
