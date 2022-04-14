@@ -6,7 +6,13 @@ Head over to [WalletConnect Cloud](https://cloud.walletconnect.com/) to sign in 
 
 ## 2. Install Packages
 
-Install WalletConnect client package. For additional type packages refer to our [TypeScript Guide](/javascript/guides/typescript).
+Install the WalletConnect client package.
+
+:::info
+For additional type packages refer to our [TypeScript Guide](/javascript/guides/typescript).
+
+For platform-specific instructions, refer to our [React Native](/javascript/guides/react-native) and [Node.js](/javascript/guides/nodejs.md) guides.
+:::
 
 ```bash npm2yarn
 npm install --save @walletconnect/client@experimental
