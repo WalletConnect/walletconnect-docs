@@ -2,25 +2,25 @@
 
 ## Members
 
-| Name            | Type                                                                                 | Description          |
-| --------------- | ------------------------------------------------------------------------------------ | -------------------- |
-| context         | `string`                                                                             | TODO                 |
-| controller      | `boolean`                                                                            | TODO                 |
-| crypto          | [Crypto](/javascript/authentication/reference/crypto)                                | TODO                 |
-| encoder         | [Encoder](/javascript/authentication/reference/encoder)                              | TODO                 |
-| events          | [EventEmitter](https://github.com/browserify/events)                                 | Node's event emitter |
-| heartbeat       | [Heartbeat](/javascript/authentication/reference/heartbeat)                          | TODO                 |
-| keyValueStorage | [IKeyValueStorage](/javascript/authentication/reference/interfaces#ikeyvaluestorage) | TODO                 |
-| logger          | [Logger](https://github.com/pinojs/pino)                                             | Pino logger          |
-| metadata        | [AppMetadata](/javascript/authentication/reference/interfaces#appmetadata)           | TODO                 |
-| name            | `string`                                                                             | TODO                 |
-| pairing         | `-`                                                                                  | TODO                 |
-| projectId       | `string`                                                                             | TODO                 |
-| protocol        | `string`                                                                             | TODO                 |
-| relayUrl        | `string`                                                                             | TODO                 |
-| relayer         | `-`                                                                                  | TODO                 |
-| session         | `-`                                                                                  | TODO                 |
-| version         | `number`                                                                             | TODO                 |
+| Name       | Type                                                                                 | Description          |
+| ---------- | ------------------------------------------------------------------------------------ | -------------------- |
+| context    | `string`                                                                             | TODO                 |
+| controller | `boolean`                                                                            | TODO                 |
+| crypto     | [Crypto](/javascript/authentication/reference/crypto)                                | TODO                 |
+| encoder    | [Encoder](/javascript/authentication/reference/encoder)                              | TODO                 |
+| events     | [EventEmitter](https://github.com/browserify/events)                                 | Node's event emitter |
+| heartbeat  | [Heartbeat](/javascript/authentication/reference/heartbeat)                          | TODO                 |
+| logger     | [Logger](https://github.com/pinojs/pino)                                             | Pino logger          |
+| metadata   | [AppMetadata](/javascript/authentication/reference/interfaces#appmetadata)           | TODO                 |
+| name       | `string`                                                                             | TODO                 |
+| pairing    | `-`                                                                                  | TODO                 |
+| projectId  | `string`                                                                             | TODO                 |
+| protocol   | `string`                                                                             | TODO                 |
+| relayUrl   | `string`                                                                             | TODO                 |
+| relayer    | `-`                                                                                  | TODO                 |
+| session    | `-`                                                                                  | TODO                 |
+| storage    | [IKeyValueStorage](/javascript/authentication/reference/interfaces#ikeyvaluestorage) | TODO                 |
+| version    | `number`                                                                             | TODO                 |
 
 ## Methods
 
