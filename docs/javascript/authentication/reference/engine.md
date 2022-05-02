@@ -6,6 +6,8 @@
 | ------ | ---------------------------------------------------- | ------------------------------------------------ |
 | events | [EventEmitter](https://github.com/browserify/events) | Event object using the Node.js event emitter API |
 
+## Methods
+
 ### `constructor`
 
 #### Description
