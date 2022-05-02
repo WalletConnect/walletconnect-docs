@@ -10,7 +10,7 @@
 | logger   | [Logger](https://github.com/pinojs/pino)              | Pino logger |
 | name     | `string`                                              | TODO        |
 
-## Mehods
+## Methods
 
 ### `init`
 
