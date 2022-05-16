@@ -44,7 +44,6 @@ Note that you want to have only one instance of a client in your app, and you do
         return WalletConnectClient(
             metadata: metadata,
             projectId: "project_id",
-            isController: true,
             relayHost: "relay.walletconnect.com"
         )
     }()
@@ -76,19 +75,58 @@ func didReceive(sessionProposal: Session.Proposal) {
     
 }
 ```
-`Session.Proposal` object conveys `Permissions` structure that contains allowed blockchains and methods that later the dapp will be authorized to request.
-The user will either approve the session proposal (with allowed accounts) or reject it. Accounts must be provided according to [CAIP10](https://github.com/ChainAgnostic/CAIPs/blob/master/CAIPs/caip-10.md) specification and be prefixed with a chain identifier. chain_id + : + account_address. You can find more on blockchain identifiers in [CAIP2](https://github.com/ChainAgnostic/CAIPs/blob/master/CAIPs/caip-2.md).
+Session proposal is a heandshake sent by a dapp and it's puropose is to define a session rules. Heandshake procedure is defined by [CAIP-25](https://github.com/ChainAgnostic/CAIPs/blob/master/CAIPs/caip-25.md).
+`Session.Proposal` object conveys set of required `Namespaces` that contains required blockchains methods and events. Dapp requests with methods and wallet will emit events defined in namespaces. 
 
-```Swift
+The user will either approve the session proposal (with session namespaces) or reject it. Session namespaces must at least contain requested methods, events and accounts associated with proposed blockchains.
+
+Accounts must be provided according to [CAIP10](https://github.com/ChainAgnostic/CAIPs/blob/master/CAIPs/caip-10.md) specification and be prefixed with a chain identifier. chain_id + : + account_address. You can find more on blockchain identifiers in [CAIP2](https://github.com/ChainAgnostic/CAIPs/blob/master/CAIPs/caip-2.md). Our `Account` type meets the criteria.
+```
 let account = Account("eip155:1:0xab16a96d359ec26a11e2c2b3d8f8b8942d5bfcdb")!
- client.approve(proposal: proposal, accounts: [account])
+```
+
+Accounts sent in session approval must at least match all requested blockchains.
+
+Example proposal namespaces request:
+```json
+{
+    "eip155":{
+        "chains": ["eip155:137", "eip155:1"],
+        "methods": ["eth_sign"],
+        "events": ["accountsChanged"]
+    },
+    "cosmos":{
+        "chains": ["cosmos:cosmoshub-4"],
+        "methods": ["cosmos_signDirect"],
+        "events": ["someCosmosEvent"]
+    }
+}
+```
+
+Example session namespaces response:
+``` json
+{
+    "eip155":{
+        "accounts": ["eip155:137:0xab16a96d359ec26a11e2c2b3d8f8b8942d5bfcdb", "eip155:1:0xab16a96d359ec26a11e2c2b3d8f8b8942d5bfcdb"],
+        "methods": ["eth_sign"],
+        "events": ["accountsChanged"]
+    },
+    "cosmos":{
+        "accounts": ["cosmos:cosmoshub-4:cosmos1t2uflqwqe0fsj0shcfkrvpukewcw40yjj6hdc0"],
+        "methods": ["cosmos_signDirect", "personal_sign"],
+        "events": ["someCosmosEvent", "proofFinalized"]
+    }
+}
+```
+```Swift
+ client.approve(proposalId: "proposal_id", namespaces: [String: SessionNamespace])
 ```
 When session is sucessfully approved another delegate method is called:
 ```Swift
 func didSettle(session: Session) {
 }
 ```
-`Session` object represents an active session connection with a dapp. It contains dapp’s metadata (that you may want to use for displaying an active session to the user), permissions, and accounts. There is also a topic property that you will use for linking requests with related sequences.
+`Session` object represents an active session connection with a dapp. It contains dapp’s metadata (that you may want to use for displaying an active session to the user), namespaces, and expiry date. There is also a topic property that you will use for linking requests with related sessions.
 
 You can always query settled sessions from the client later with:
 ```Swift
@@ -102,7 +140,7 @@ func didReceive(sessionRequest: Request) {
     
 }
 ```
-When a wallet receives a session request, you probably want to show it to the user. It’s method will be one of those allowed by the session permissions. And it’s params are represented by `AnyCodable` type. An expected object can be derived as follows:
+When a wallet receives a session request, you probably want to show it to the user. It’s method will be in scope of session namespaces. And it’s params are represented by `AnyCodable` type. An expected object can be derived as follows:
 
 ```Swift
         if sessionRequest.method == "personal_sign" {
@@ -139,8 +177,6 @@ let relayer = Relayer(
 
 ### Where to go from here
 Try our example wallet implementation that is part of WalletConnectSwiftV2 repository.
-
-You may also be interested in reading our [Beginner guide to WalletConnect v2.0 for iOS Developers](https://medium.com/walletconnect/beginner-guide-to-walletconnect-v2-0-for-swift-developers-4534b0975218)
 
 To dive deeper into protocol concepts check out our [documentation](https://docs.walletconnect.com/2.0/protocol/glossary)
 
