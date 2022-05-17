@@ -31,17 +31,17 @@ You can add a WalletConnect SDK to your project with Swift Package Manager. In o
 
 ### Instantiate a client
 Create an AppMetadata object first. It will describe your application and define its appearance in a web browser.
-Then create an instance of WalletConnectClient, inject a metadata object you have instantiated, set a project ID generated when starting a project on WalletConnect Cloud. Set your client as a controller and provide a relayHost URL.
+Then create an instance of AuthClient, inject a metadata object you have instantiated, set a project ID generated when starting a project on WalletConnect Cloud. Set your client as a controller and provide a relayHost URL.
 
 Note that you want to have only one instance of a client in your app, and you don’t want to deinitialize that instance.
 ```Swift
-    let client: WalletConnectClient = {
+    let client: AuthClient = {
         let metadata = AppMetadata(
             name: "My Wallet",
             description: "description",
             url: "",
             icons: ["icon_url"])
-        return WalletConnectClient(
+        return AuthClient(
             metadata: metadata,
             projectId: "project_id",
             relayHost: "relay.walletconnect.com"
@@ -50,10 +50,10 @@ Note that you want to have only one instance of a client in your app, and you do
 ```
 
 ##### Set client's delegate
-Your View Controller or whatever place you have decided to initialize your client should conform to `WalletConnectDelegate`.
+Your View Controller or whatever place you have decided to initialize your client should conform to `AuthClientDelegate`.
 
 ```Swift
-final class MyViewController: UIViewController, WalletConnectClientDelegate {
+final class MyViewController: UIViewController, AuthClientDelegate {
     ...
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -160,23 +160,42 @@ let response = JSONRPCResponse<AnyCodable>(id: sessionRequest.id, result: result
 client.respond(topic: sessionRequest.topic, response: .response(response))
 ```
 
+### Update Session
+If you want to update user session's chains, accounts, methods or events you can use session update method.
+
+```Swift
+try client.update(topic: session.topic, namespaces: newNamespaces)
+```
+
+### Extend Session
+By default, session lifetime is set for 7 days and after that time user's session will expire. But if you consider that a session should be extended you can call:
+
+```Swift
+try client.extend(topic: session.topic)
+```
+above method will extend a user's session to a week.
+
+### Disconnect Session
+For good user experience your wallet should to allow users to disconnect unwanted sessions. In order to terminate a session use `disconnect` method.
+```Swift
+try client.disconnect(topic: session.topic, reason: reason)
+```
 ### Web Socket Connection
 By default web socket connection is handled internally by the SDK. That means that Web socket will be safely disconnected when apps go to background and it will connect back when app reaches foreground. But if it is not expeted for your app and you want to handle socket connection manually you can do it as follows:
 
-1. instantiate Relayer object.  
+1. instantiate RelayClient object.  
 ```
-let relayer = Relayer(
+let relayClient = RelayClient(
     relayHost: "relay.walletconnect.com",
     projectId: "52af113ee0c1e1a20xxx95730196c13e,
     socketConnectionType: .manual")
 ```  
-2. inject relayer into WalletConnectClient instance:  
-```let client = WalletConnectClient(metadata: metadata, relayer: relayer)```
+2. inject RelayClient into AuthClient instance:  
+```let client = AuthClient(metadata: metadata, relayClient: relayClient)```
 3. control connection:  
-```relayer.connect()```
+```relayClient.connect()```
 
 ### Where to go from here
-Try our example wallet implementation that is part of WalletConnectSwiftV2 repository.
-
-To dive deeper into protocol concepts check out our [documentation](https://docs.walletconnect.com/2.0/protocol/glossary)
-
+- Try our example wallet implementation that is part of WalletConnectSwiftV2 repository.
+- To dive deeper into protocol concepts check out our [documentation](https://docs.walletconnect.com/2.0/protocol/glossary)
+- Build API documentation in XCode: go to Product -> Build Documentation
