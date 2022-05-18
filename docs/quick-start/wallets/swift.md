@@ -67,7 +67,7 @@ For testing, you can use our test dapp at: https://react-app.walletconnect.com/,
 Once you derive a URI from the QR code call `pair` method:
 
 ```Swift
-try? client.pair(uri: uri)
+try await client.pair(uri: uri)
 ```
 if everything goes well, the following delegate method should be called
 ```Swift
@@ -164,21 +164,21 @@ client.respond(topic: sessionRequest.topic, response: .response(response))
 If you want to update user session's chains, accounts, methods or events you can use session update method.
 
 ```Swift
-try client.update(topic: session.topic, namespaces: newNamespaces)
+try await client.update(topic: session.topic, namespaces: newNamespaces)
 ```
 
 ### Extend Session
 By default, session lifetime is set for 7 days and after that time user's session will expire. But if you consider that a session should be extended you can call:
 
 ```Swift
-try client.extend(topic: session.topic)
+try await client.extend(topic: session.topic)
 ```
 above method will extend a user's session to a week.
 
 ### Disconnect Session
 For good user experience your wallet should to allow users to disconnect unwanted sessions. In order to terminate a session use `disconnect` method.
 ```Swift
-try client.disconnect(topic: session.topic, reason: reason)
+try await client.disconnect(topic: session.topic, reason: reason)
 ```
 ### Web Socket Connection
 By default web socket connection is handled internally by the SDK. That means that Web socket will be safely disconnected when apps go to background and it will connect back when app reaches foreground. But if it is not expeted for your app and you want to handle socket connection manually you can do it as follows:
