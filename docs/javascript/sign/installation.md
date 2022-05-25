@@ -15,7 +15,7 @@ For platform-specific instructions, refer to our [React Native](../guides/react-
 :::
 
 ```bash npm2yarn
-npm install --save @walletconnect/client@experimental
+npm install --save @walletconnect/sign-client@experimental
 ```
 
 ## 3. Initialize Client
@@ -23,9 +23,9 @@ npm install --save @walletconnect/client@experimental
 Initialize client by passing `relayUrl` and `projectId` we created before.
 
 ```js
-import WalletConnectClient from "@walletconnect/client";
+import SignClient from "@walletconnect/sign-client";
 
-const client = await WalletConnectClient.init({
+const signClient = await SignClient.init({
   projectId: "<YOUR PROJECT ID FROM STEP 1>",
   relayUrl: "wss://relay.walletconnect.com",
 });
