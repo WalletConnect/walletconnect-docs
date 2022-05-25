@@ -47,7 +47,7 @@ Additionally, there is an option from the Wallet side to subscribe for push noti
 
 ## Events & Payloads
 
-There are various events that happen both internally and across peers. These events are all accompanied by a corresponding payload. The internal events are client-specific but all cross-peer events are JSON-RPC 2.0 complaint.
+There are various events that happen both internally and across peers. These events are all accompanied by a corresponding payload. The internal events are client-specific but all cross-peer events are JSON-RPC 2.0 compliant.
 
 ### Internal Events
 

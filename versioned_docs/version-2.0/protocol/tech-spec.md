@@ -335,7 +335,7 @@ The metadata here is similar to v1.0 protocol and is displayed to the user to id
 
 #### Blockchain Permissions
 
-The blockchain permissions together with the JSON-RPC methods that are described in parallel are complaint with CAIP-25 provider handshake parameters used to dictate the rules that will be used for the session. chains are CAIP-2 blockchain identifiers that the application is requesting exposure from the wallet and the JSON-RPC methods are the set of methods the application requires from the wallet to fully support in order to establish a successful session sequence.
+The blockchain permissions together with the JSON-RPC methods that are described in parallel are compliant with CAIP-25 provider handshake parameters used to dictate the rules that will be used for the session. chains are CAIP-2 blockchain identifiers that the application is requesting exposure from the wallet and the JSON-RPC methods are the set of methods the application requires from the wallet to fully support in order to establish a successful session sequence.
 
 ### Session Response
 
