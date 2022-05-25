@@ -82,7 +82,7 @@ This method returns a transaction with added signature by the targetted public k
 		1.3. `instructions` : `Array` - instructions to be atomically executed:
 			1.3.1. `Object` - instruction
 				1.3.1.1. `programId` : `String` - public key of the on chain program
-				1.3.1.2. `data` : `String | undefined` - base58 encoded calldata for instruction
+				1.3.1.2. `data` : `String` - base58 encoded calldata for instruction
 				1.3.1.3. `keys` : `Array` - account metadata used to define instructions
 					1.3.1.3.1. `Object` - key
 						1.3.1.3.1.1. `isSigner` : `Boolean` - true if an instruction requires a transaction signature matching `pubkey`
@@ -91,7 +91,7 @@ This method returns a transaction with added signature by the targetted public k
 		1.4. `nonceInfo` : `Object` - (optional) Nonce information. If populated, transaction will use a durable Nonce hash instead of a recentBlockhash.
 			1.4.1 `nonce` : `String` - The current base58 encoded blockhash stored in the nonce
 			1.4.2 `nonceInstruction` : `Object` AdvanceNonceAccount Instruction. See `1.3.1` for object layout
-		1.5. `signatures` : `Array`, - (optional) previous signatures for this instruction set
+		1.5. `signatures` : `Array`, - previous signatures for this instruction set
 			1.5.1. `Object` - signature
 				1.5.1.2. `pubkey` : `String` - pubkey of the signer
 				1.5.1.1. `signature` : `String` - signature matching `pubkey`
@@ -104,16 +104,16 @@ This method returns a transaction with added signature by the targetted public k
 		1.3. `instructions` : `Array` - instructions to be atomically executed:
 			1.3.1. `Object` - instruction
 				1.3.1.1. `programId` : `String` - public key of the on chain program
-				1.3.1.2. `data` : `String | undefined` - base58 encoded calldata for instruction
+				1.3.1.2. `data` : `String` - base58 encoded calldata for instruction
 				1.3.1.3. `keys` : `Array` - account metadata used to define instructions
 					1.3.1.3.1. `Object` - key
 						1.3.1.3.1.1. `isSigner` : `Boolean` - true if an instruction requires a transaction signature matching `pubkey`
 						1.3.1.3.1.2. `isWritable` : `Boolean` - true if the `pubkey` can be loaded as a read-write account
 						1.3.1.3.1.3. `pubkey` : `String` - public key of authorized program
 		1.4. `nonceInfo` : `Object` - (optional) Nonce information. If populated, transaction will use a durable Nonce hash instead of a recentBlockhash.
-			1.4.1	`nonce` : `String` - The current base58 encoded blockhash stored in the nonce
+			1.4.1 `nonce` : `String` - The current base58 encoded blockhash stored in the nonce
 			1.4.2 `nonceInstruction` : `Object` AdvanceNonceAccount Instruction. See `1.3.1` for object layout
-		1.5. `signatures` : `Array`, - (optional) previous signatures for this instruction set
+		1.5. `signatures` : `Array`, - previous signatures for this instruction set
 			1.5.1. `Object` - signature
 				1.5.1.2. `pubkey` : `String` - pubkey of the signer
 				1.5.1.1. `signature` : `String` - signature matching `pubkey`
@@ -137,7 +137,8 @@ This method returns a transaction with added signature by the targetted public k
 				"isWritable": true,
 				"pubkey": "AqP3MyNwDP4L1GJKYhzmaAUdrjzpqJUZjahM7kHpgavm"
 			}]
-		}]
+		}],
+		"signatures": []
 	}
 }
 
@@ -179,16 +180,16 @@ This method returns a an array of transactions with added signatures by the targ
 				1.1.1.3. `instructions` : `Array` - instructions to be atomically executed:
 					1.1.1.3.1. `Object` - instruction
 						1.1.1.3.1.1. `programId` : `String` - public key of the on chain program
-						1.1.1.3.1.2. `data` : `String | undefined` - base58 encoded calldata for instruction
+						1.1.1.3.1.2. `data` : `String` - base58 encoded calldata for instruction
 						1.1.1.3.1.3. `keys` : `Array` - account metadata used to define instructions
 							1.1.1.2.1.3.1. `Object` - key
 								1.1.1.3.1.3.1.1. `isSigner` : `Boolean` - true if an instruction requires a transaction signature matching `pubkey`
 								1.1.1.3.1.3.1.2. `isWritable` : `Boolean` - true if the `pubkey` can be loaded as a read-write account
 								1.1.1.3.1.3.1.3. `pubkey` : `String` - public key of authorized program
 				1.1.1.4. `nonceInfo` : `Object` - (optional) Nonce information. If populated, transaction will use a durable Nonce hash instead of a recentBlockhash.
-					1.1.1.4.1	`nonce` : `String` - The current base58 encoded blockhash stored in the nonce
+					1.1.1.4.1 `nonce` : `String` - The current base58 encoded blockhash stored in the nonce
 					1.1.1.4.2 `nonceInstruction` : `Object` AdvanceNonceAccount Instruction. See `1.1.1.3.1` for object layout
-				1.1.1.5. `signatures` : `Array`, - (optional) previous signatures for this instruction set
+				1.1.1.5. `signatures` : `Array`, - previous signatures for this instruction set
 					1.1.1.5.1. `Object` - signature
 						1.1.1.5.1.2. `pubkey` : `String` - pubkey of the signer
 						1.1.1.5.1.1. `signature` : `String` - signature matching `pubkey`
@@ -203,7 +204,7 @@ This method returns a an array of transactions with added signatures by the targ
 				1.1.1.3. `instructions` : `Array` - instructions to be atomically executed:
 					1.1.1.3.1. `Object` - instruction
 						1.1.1.3.1.1. `programId` : `String` - public key of the on chain program
-						1.1.1.3.1.2. `data` : `String | undefined` - base58 encoded calldata for instruction
+						1.1.1.3.1.2. `data` : `String` - base58 encoded calldata for instruction
 						1.1.1.3.1.3. `keys` : `Array` - account metadata used to define instructions
 							1.1.1.3.1.3.1. `Object` - key
 								1.1.1.3.1.3.1.1. `isSigner` : `Boolean` - true if an instruction requires a transaction signature matching `pubkey`
@@ -212,7 +213,7 @@ This method returns a an array of transactions with added signatures by the targ
 				1.1.1.4. `nonceInfo` : `Object` - (optional) Nonce information. If populated, transaction will use a durable Nonce hash instead of a recentBlockhash.
 					1.1.1.4.1 `nonce` : `String` - The current base58 encoded blockhash stored in the nonce
 					1.1.1.4.2 `nonceInstruction` : `Object` AdvanceNonceAccount Instruction. See `1.1.1.3.1` for object layout
-				1.1.1.5. `signatures` : `Array`, - (optional) previous signatures for this instruction set
+				1.1.1.5. `signatures` : `Array`, - previous signatures for this instruction set
 					1.1.1.5.1. `Object` - signature
 						1.1.1.5.1.2. `pubkey` : `String` - pubkey of the signer
 						1.1.1.5.1.1. `signature` : `String` - signature matching `pubkey`
@@ -237,7 +238,8 @@ This method returns a an array of transactions with added signatures by the targ
 					"isWritable": true,
 					"pubkey": "AqP3MyNwDP4L1GJKYhzmaAUdrjzpqJUZjahM7kHpgavm"
 				}]
-			}]
+			}],
+			"signatures": []
 		}]
 	}
 }
