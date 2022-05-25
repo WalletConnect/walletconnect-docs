@@ -45,20 +45,6 @@ module.exports = {
           items: [
             "javascript/sign/installation",
             "javascript/sign/wallet-usage",
-            {
-              type: "category",
-              label: "Reference",
-              items: [
-                "javascript/sign/reference/client",
-                "javascript/sign/reference/crypto",
-                "javascript/sign/reference/encoder",
-                "javascript/sign/reference/heartbeat",
-                "javascript/sign/reference/pairing",
-                "javascript/sign/reference/engine",
-                "javascript/sign/reference/history",
-                "javascript/sign/reference/interfaces",
-              ],
-            },
           ],
         },
         {
