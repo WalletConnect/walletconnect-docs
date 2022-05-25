@@ -45,7 +45,7 @@ Accordingly, `SignClient.WebSocket.open()` and `SignClient.WebSocket.close()`.
 
 Above, there are two example on how to create the initalizing parameters.
 
-&nbsp;
+
 
 ## **Wallet**
 
@@ -82,7 +82,7 @@ SignClient.setWalletDelegate(walletDelegate)
 
 The SignClient needs a `SignClient.WalletDelegate` passed to it for it to be able to expose asynchronous updates sent from the Dapp.
 
-&nbsp;
+
 
 ### **Pair Clients**
 
@@ -94,7 +94,7 @@ SignClient.pair(pair)
 To pair the wallet with the Dapp, call the SignClient.pair function which needs a `Sign.Params.Pair` parameter.
 `Sign.Params.Pair` is where the WC Uri will be passed.
 
-&nbsp;
+
 
 ### **Session Approval**
 
@@ -115,7 +115,7 @@ SignClient.approveSession(approveParams) { error -> /*callback for error while a
 
 To send an approval, pass a Proposer's Public Key along with the map of namespaces to the `SignClient.approveSession` function.
 
-&nbsp;
+
 
 ### **Session Rejection**
 
@@ -132,7 +132,7 @@ SignClient.rejectSession(rejectParams) { error -> /*callback for error while rej
 To send a rejection for the Session Proposal, pass a proposerPublicKey, rejection reason and rejection code to
 the `SignClient.rejectSession` function.
 
-&nbsp;
+
 
 ### **Session Disconnect**
 
@@ -149,7 +149,7 @@ SignClient.disconnect(disconnectParams) { error -> /*callback for error while di
 To disconnect from a settled session, pass a disconnection reason with code and the Session topic to the `SignClient.disconnect`
 function.
 
-&nbsp;
+
 
 ### **Respond Request**
 
@@ -177,7 +177,7 @@ SignClient.respond(result) { error -> /*callback for error while responding sess
 To reject a JSON-RPC method that was sent from a Dapps for a session, submit a `Sign.Params.Response` with the settled session's topic and
 request ID along with the rejection data to the `SignClient.respond` function.
 
-&nbsp;
+
 
 ### **Session Update**
 
@@ -199,7 +199,7 @@ SignClient.update(updateParams) { error -> /*callback for error while sending se
 To update a session with namespaces, submit a `Sing.Params.Update` object with the session's topic and namespaces to update session with
 to `SignClient.Update`.
 
-&nbsp;
+
 
 ### **Session Extend**
 
@@ -213,7 +213,7 @@ WalletConnectClient.extend(exdendParams) { error -> /*callback for error while e
 To extend a session, create a `Sign.Params.Extend` object with the session's topic to update the session with to `Sign.Extend`. Session is
 extended by 7 days.
 
-&nbsp;
+
 
 ### **Session Ping**
 
@@ -236,9 +236,9 @@ WalletConnectClient.ping(pingParams, listener)
 To ping a peer with a session, call `SignClient.ping` with the `Sign.Params.Ping` with a session's topic. If ping is successful, topic is
 echo'd in listener.
 
-&nbsp;
 
-&nbsp;
+
+
 
 ## **Daap**
 
@@ -283,7 +283,7 @@ SignClient.setWalletDelegate(dappDelegate)
 
 The SignClient needs a `SignClient.DappDelegate` passed to it for it to be able to expose asynchronously updates sent from the Wallet.
 
-&nbsp;
+
 
 ### **Connect**
 
@@ -305,7 +305,7 @@ To establish a session between peers, pass the existing pairing's topic to the c
 the hood for the given topic and expect session approval or rejection in onSessionApproved and onSessionRejected in DappDelegate
 accordingly.
 
-&nbsp;
+
 
 ### **Get List of Settled Sessions**
 
@@ -315,7 +315,7 @@ SignClient.getListOfSettledSessions()
 
 To get a list of the most current settled sessions, call `SignClient.getListOfSettledSessions()` which will return a list of type `Session`.
 
-&nbsp;
+
 
 ### **Get List of Settled Pairings**
 
@@ -325,7 +325,7 @@ SignClient.getListOfSettledPairings()
 
 To get a list of the most current settled pairings, call `SignClient.getListOfSettledPairings()` which will return a list of type `Pairing`.
 
-&nbsp;
+
 
 ### **Get list of pending session requests for a topic**
 
@@ -336,7 +336,7 @@ SignClient.getPendingRequests(topic: String)
 To get a list of pending session requests for a topic, call `SignClient.getPendingRequests()` and pass a topic which will return
 a `PendingRequest` object containing requestId, method, chainIs and params for pending request.
 
-&nbsp;
+
 
 ## Project ID
 
