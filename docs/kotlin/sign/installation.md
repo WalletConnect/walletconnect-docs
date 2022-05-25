@@ -1,4 +1,4 @@
-# **WalletConnect V2 - Kotlin**
+# Installation
 
 Kotlin implementation of WalletConnect v2 Sign protocol for Android applications.
 
