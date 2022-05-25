@@ -1,17 +1,17 @@
 # Migrating from v2.0-beta.26
 
-As much as we wanted to avoid this, we had to make some breaking changes between beta-26 and beta-100 (hence big version jump). We hope this migration guide helps to ease transition to our next version. We are feeling confident that there shouldn't be any other major changes after beta-100 and our main focus will now shift to extensive testing and stability improvements.
+As much as we wanted to avoid this, we had to make some breaking changes between beta-26 and beta-100 (hence the big version jump). We hope this migration guide helps to ease transition to our next version. We are feeling confident that there shouldn't be any other major changes after beta-100 and our main focus will now shift to extensive testing and stability improvements.
 
 All our changes were documented in detail in our new team repo available at [https://github.com/WalletConnect/walletconnect-specs](https://github.com/WalletConnect/walletconnect-specs). We will be bringing some of these contents to docs soon as well.
 
 We have also updated our [web-examples](https://github.com/WalletConnect/web-examples) repo to reflect these changes
 
-## The biggest introduced in beta-100 include:
+## Biggest changes introduced in beta-100 include:
 
-- Changing the client name from WalletConnectClient to SignClient, hence `@walletconnect/client` npm package is now deprecated in favor of `@walletconnect/sign-client`.
+- Changing the client name from WalletConnectClient to SignClient, hence `@walletconnect/client` npm package is now deprecated in favor of `@walletconnect/sign-client`
 - Changes to the [pairing uri](https://github.com/WalletConnect/walletconnect-specs/blob/main/sign/pairing-uri.md)
 - Removal of permissions in favor of [namespaces](https://github.com/WalletConnect/walletconnect-specs/blob/main/sign/session-proposal.md#session-proposal)
-- Changes to [rpc methods](https://github.com/WalletConnect/walletconnect-specs/blob/main/sign/rpc-methods.md) to account for abbove
+- Changes to [rpc methods](https://github.com/WalletConnect/walletconnect-specs/blob/main/sign/rpc-methods.md) to account for the above
 - Removal of `controller` option when initializing the client
 - Addition of `approval` promise to connect method (more on this below)
 - Addition of `acknowledged` promises to approve, update and extend methods (more on this below)
@@ -58,7 +58,7 @@ const { uri, approval } = await signClient.connect({
   relays: [{ relay: "waku" }], // Optional
 });
 
-// uri will be returned, uness you used existing pairingTopic
+// uri will be returned, unless you used existing pairingTopic
 if (uri) {
   // Do something with uri, for example show it as qr code
 }
@@ -159,7 +159,7 @@ await signClient.request({
   topic: "<SESSION_TOPIC>",
   chainId: "<REQUEST_CHAIN>", // Must be allowed within session namespaces
   request: {
-    method: "<REQUEST_METHOD>", // Must be allowed within session maespaces
+    method: "<REQUEST_METHOD>", // Must be allowed within session namespaces
     params: "...",
   },
 });
@@ -207,7 +207,7 @@ await signClient.emit({
   topic: "<SESSION_TOPIC>",
   chainId: "<EVENT_CHAIN_ID", // Must be within session namespaces
   event: {
-    name: "<EVENT_NAME>", // Musr be within session namespaces
+    name: "<EVENT_NAME>", // Must be within session namespaces
     data: "...",
   },
 });
