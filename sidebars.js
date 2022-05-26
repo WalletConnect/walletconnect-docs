@@ -95,8 +95,6 @@ module.exports = {
           label: "Sign",
           items: [
             "swift/sign/installation",
-            "swift/sign/usage",
-            "swift/sign/reference",
           ],
         },
         {
