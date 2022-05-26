@@ -2,6 +2,7 @@
 
 Swift implementation of WalletConnect v.2 protocol for native iOS applications.
 
+
 ## Getting started with wallet integration
 
 ### Set up a project
@@ -13,7 +14,7 @@ In order to connect to WalletConnect Cloud, you need to create a new project fir
 3. Give it a name and tap Create button
 4. Your new project should appear on the projects list
 5. You should see a project ID string if you tap on your project.
-   for more info on Project ID look at Project ID.
+   for more info on Project ID look at [Project ID](../../api/project-id.md).
 
 ### Add SDK for your project.
 
@@ -21,44 +22,49 @@ You can add a WalletConnect SDK to your project with Swift Package Manager. In o
 
 1. Open XCode
 2. Go to File -> Add Packages
-3. Paste the repo GitHub url: https://github.com/authentication/WalletConnectSwiftV2
+3. Paste the repo GitHub url: https://github.com/WalletConnect/WalletConnectSwiftV2
 4. Tap Add Package
 
 ### Instantiate a client
 
 Create an AppMetadata object first. It will describe your application and define its appearance in a web browser.
-Then create an instance of WalletConnectClient, inject a metadata object you have instantiated, set a project ID generated when starting a project on WalletConnect Cloud. Set your client as a controller and provide a relayHost URL.
+Then configure `Sign` instance with a metadata object you have instantiated and set a project ID generated when starting a project on WalletConnect Cloud.
 
 Note that you want to have only one instance of a client in your app, and you don’t want to deinitialize that instance.
 
 ```Swift
-    let client: WalletConnectClient = {
-        let metadata = AppMetadata(
-            name: "My Wallet",
-            description: "description",
-            url: "",
-            icons: ["icon_url"])
-        return WalletConnectClient(
-            metadata: metadata,
-            projectId: "project_id",
-            isController: true,
-            relayHost: "relay.walletconnect.com"
-        )
-    }()
+let metadata = AppMetadata(name: <String>,
+                           description: <String>,
+                           url: <String>,
+                           icons: <[String]>)
+
+Sign.configure(Sign.Config(metadata: <AppMetadata>, projectId: <String>))
 ```
 
-##### Set client's delegate
-
-Your View Controller or whatever place you have decided to initialize your client should conform to `WalletConnectDelegate`.
+### Subscribe for Sign publishers
+When your `Sign` instance receives requests from a peer it will publish related event. So you should set subscription to handle them.
 
 ```Swift
-final class MyViewController: UIViewController, WalletConnectClientDelegate {
-    ...
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        client.delegate = self
-    }
-}
+Sign.instance.sessionDeletePublisher
+    .receive(on: DispatchQueue.main)
+    .sink { [unowned self] _ in
+        //handle event
+    }.store(in: &publishers)
+```
+
+Following publishers are available to subscribe:
+
+```swift
+    public var sessionProposalPublisher: AnyPublisher<Session.Proposal, Never> 
+    public var sessionRequestPublisher: AnyPublisher<Request, Never> 
+    public var socketConnectionStatusPublisher: AnyPublisher<SocketConnectionStatus, Never> 
+    public var sessionSettlePublisher: AnyPublisher<Session, Never> 
+    public var sessionDeletePublisher: AnyPublisher<(String, Reason), Never> 
+    public var sessionResponsePublisher: AnyPublisher<Response, Never> 
+    public var sessionRejectionPublisher: AnyPublisher<(Session.Proposal, Reason), Never> 
+    public var sessionUpdatePublisher: AnyPublisher<(sessionTopic: String, namespaces: [String : SessionNamespace]), Never>
+    public var sessionEventPublisher: AnyPublisher<(event: Session.Event, sessionTopic: String, chainId: Blockchain?), Never> 
+    public var sessionUpdateExpiryPublisher: AnyPublisher<(sessionTopic: String, expiry: Date), Never> 
 ```
 
 ### Connect Clients
@@ -68,51 +74,91 @@ For testing, you can use our test dapp at: https://react-app.walletconnect.com/,
 Once you derive a URI from the QR code call `pair` method:
 
 ```Swift
-try? client.pair(uri: uri)
+try await Sign.instance.pair(uri: uri)
 ```
-
-if everything goes well, the following delegate method should be called
-
+if everything goes well, you should handle following event:
 ```Swift
-func didReceive(sessionProposal: Session.Proposal) {
-
-}
+Sign.instance.sessionProposalPublisher
+    .receive(on: DispatchQueue.main)
+    .sink { [weak self] sessionProposal in
+           // present proposal to the user
+    }.store(in: &publishers)
 ```
+Session proposal is a heandshake sent by a dapp and it's puropose is to define a session rules. Heandshake procedure is defined by [CAIP-25](https://github.com/ChainAgnostic/CAIPs/blob/master/CAIPs/caip-25.md).
+`Session.Proposal` object conveys set of required `ProposalNamespaces` that contains required blockchains methods and events. Dapp requests with methods and wallet will emit events defined in namespaces. 
 
-`Session.Proposal` object conveys `Permissions` structure that contains allowed blockchains and methods that later the dapp will be authorized to request.
-The user will either approve the session proposal (with allowed accounts) or reject it. Accounts must be provided according to [CAIP10](https://github.com/ChainAgnostic/CAIPs/blob/master/CAIPs/caip-10.md) specification and be prefixed with a chain identifier. chain_id + : + account_address. You can find more on blockchain identifiers in [CAIP2](https://github.com/ChainAgnostic/CAIPs/blob/master/CAIPs/caip-2.md).
+The user will either approve the session proposal (with session namespaces) or reject it. Session namespaces must at least contain requested methods, events and accounts associated with proposed blockchains.
 
-```Swift
+Accounts must be provided according to [CAIP10](https://github.com/ChainAgnostic/CAIPs/blob/master/CAIPs/caip-10.md) specification and be prefixed with a chain identifier. chain_id + : + account_address. You can find more on blockchain identifiers in [CAIP2](https://github.com/ChainAgnostic/CAIPs/blob/master/CAIPs/caip-2.md). Our `Account` type meets the criteria.
+```
 let account = Account("eip155:1:0xab16a96d359ec26a11e2c2b3d8f8b8942d5bfcdb")!
- client.approve(proposal: proposal, accounts: [account])
 ```
 
-When session is sucessfully approved another delegate method is called:
+Accounts sent in session approval must at least match all requested blockchains.
 
-```Swift
-func didSettle(session: Session) {
+Example proposal namespaces request:
+```json
+{
+    "eip155":{
+        "chains": ["eip155:137", "eip155:1"],
+        "methods": ["eth_sign"],
+        "events": ["accountsChanged"]
+    },
+    "cosmos":{
+        "chains": ["cosmos:cosmoshub-4"],
+        "methods": ["cosmos_signDirect"],
+        "events": ["someCosmosEvent"]
+    }
 }
 ```
 
-`Session` object represents an active session connection with a dapp. It contains dapp’s metadata (that you may want to use for displaying an active session to the user), permissions, and accounts. There is also a topic property that you will use for linking requests with related sequences.
+Example session namespaces response:
+``` json
+{
+    "eip155":{
+        "accounts": ["eip155:137:0xab16a96d359ec26a11e2c2b3d8f8b8942d5bfcdb", "eip155:1:0xab16a96d359ec26a11e2c2b3d8f8b8942d5bfcdb"],
+        "methods": ["eth_sign"],
+        "events": ["accountsChanged"]
+    },
+    "cosmos":{
+        "accounts": ["cosmos:cosmoshub-4:cosmos1t2uflqwqe0fsj0shcfkrvpukewcw40yjj6hdc0"],
+        "methods": ["cosmos_signDirect", "personal_sign"],
+        "events": ["someCosmosEvent", "proofFinalized"]
+    }
+}
+```
+##### Approve Session
+
+```Swift
+ Sign.instance.approve(proposalId: "proposal_id", namespaces: [String: SessionNamespace])
+```
+When session is sucessfully approved `sessionSettlePublisher` will publish a `Session`
+```Swift
+Sign.instance.sessionSettlePublisher
+    .receive(on: DispatchQueue.main)
+    .sink { [weak self] _ in
+        self?.reloadSessions()
+    }.store(in: &publishers)
+}
+```
+`Session` object represents an active session connection with a dapp. It contains dapp’s metadata (that you may want to use for displaying an active session to the user), namespaces, and expiry date. There is also a topic property that you will use for linking requests with related sessions.
 
 You can always query settled sessions from the client later with:
 
 ```Swift
-client.getSettledSessions()
+Sign.instance.getSessions()
 ```
 
 ### Handle requests from dapp
-
-After the session is established, a dapp will request your wallet users to sign a transaction or a message. Requests will be delivered by the following delegate method.
-
+After the session is established, a dapp will request your wallet's users to sign a transaction or a message. Requests will be delivered by the following publisher.
 ```Swift
-func didReceive(sessionRequest: Request) {
-
-}
+Sign.instance.sessionRequestPublisher
+    .receive(on: DispatchQueue.main)
+    .sink { [weak self] sessionRequest in
+        self?.showSessionRequest(sessionRequest)
+    }.store(in: &publishers)
 ```
-
-When a wallet receives a session request, you probably want to show it to the user. It’s method will be one of those allowed by the session permissions. And it’s params are represented by `AnyCodable` type. An expected object can be derived as follows:
+When a wallet receives a session request, you probably want to show it to the user. It’s method will be in scope of session namespaces. And it’s params are represented by `AnyCodable` type. An expected object can be derived as follows:
 
 ```Swift
         if sessionRequest.method == "personal_sign" {
@@ -129,29 +175,40 @@ Now, your wallet (as it owns your user’s privete keys) is responsible for sign
 ```Swift
 let result = sign(request: sessionRequest) // implement your signing method
 let response = JSONRPCResponse<AnyCodable>(id: sessionRequest.id, result: result)
-client.respond(topic: sessionRequest.topic, response: .response(response))
+Sign.instance.respond(topic: sessionRequest.topic, response: .response(response))
 ```
 
-### Web Socket Connection
+### Update Session
+If you want to update user session's chains, accounts, methods or events you can use session update method.
 
+```Swift
+try await Sign.instance.update(topic: session.topic, namespaces: newNamespaces)
+```
+
+### Extend Session
+By default, session lifetime is set for 7 days and after that time user's session will expire. But if you consider that a session should be extended you can call:
+
+```Swift
+try await Sign.instance.extend(topic: session.topic)
+```
+above method will extend a user's session to a week.
+
+### Disconnect Session
+For good user experience your wallet should allow users to disconnect unwanted sessions. In order to terminate a session use `disconnect` method.
+```Swift
+try await Sign.instance.disconnect(topic: session.topic, reason: reason)
+```
+### Web Socket Connection
 By default web socket connection is handled internally by the SDK. That means that Web socket will be safely disconnected when apps go to background and it will connect back when app reaches foreground. But if it is not expeted for your app and you want to handle socket connection manually you can do it as follows:
 
-1. instantiate Relayer object.
-
-```
-let relayer = Relayer(
-    relayHost: "relay.walletconnect.com",
-    projectId: "52af113ee0c1e1a20xxx95730196c13e,
-    socketConnectionType: .manual")
-```
-
-2. inject relayer into WalletConnectClient instance:  
-   `let client = WalletConnectClient(metadata: metadata, relayer: relayer)`
-3. control connection:  
-   `relayer.connect()`
+1. set socketConnectionType in an Sign instance config for manual  
+```Swift
+Sign.Config(metadata: metadata, projectId: "", socketConnectionType: .manual)
+```  
+3. control socket connection:  
+```relayClient.connect()```
 
 ### Where to go from here
-
-Try our example wallet implementation that is part of WalletConnectSwiftV2 repository.
-
-You may also be interested in reading our [Beginner guide to WalletConnect v2.0 for iOS Developers](https://medium.com/authentication/beginner-guide-to-walletconnect-v2-0-for-swift-developers-4534b0975218)
+- Try our example wallet implementation that is part of WalletConnectSwiftV2 repository.
+- To dive deeper into protocol concepts check out our [documentation](https://docs.walletconnect.com/2.0/protocol/glossary)
+- Build API documentation in XCode: go to Product -> Build Documentation
