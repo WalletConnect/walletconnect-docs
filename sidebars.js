@@ -157,7 +157,6 @@ module.exports = {
       className: "menu_outer_list",
       items: [
         "advanced/migrating-from-v1.0",
-        "advanced/migrating-from-v2.0-beta.26",
         {
           type: "category",
           label: "API Reference",
