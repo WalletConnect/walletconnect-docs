@@ -94,7 +94,7 @@ This method returns a transaction with added signature by the targetted public k
 		1.5. `signatures` : `Array`, - previous signatures for this instruction set
 			1.5.1. `Object` - signature
 				1.5.1.2. `pubkey` : `String` - pubkey of the signer
-				1.5.1.1. `signature` : `String` - signature matching `pubkey`
+				1.5.1.1. `signature` : `String` - (optional) signature matching `pubkey`
 
 ### Returns
 
@@ -116,7 +116,7 @@ This method returns a transaction with added signature by the targetted public k
 		1.5. `signatures` : `Array`, - previous signatures for this instruction set
 			1.5.1. `Object` - signature
 				1.5.1.2. `pubkey` : `String` - pubkey of the signer
-				1.5.1.1. `signature` : `String` - signature matching `pubkey`
+				1.5.1.1. `signature` : `String` - (optional) signature matching `pubkey`
 
 ### Example
 
@@ -192,7 +192,7 @@ This method returns a an array of transactions with added signatures by the targ
 				1.1.1.5. `signatures` : `Array`, - previous signatures for this instruction set
 					1.1.1.5.1. `Object` - signature
 						1.1.1.5.1.2. `pubkey` : `String` - pubkey of the signer
-						1.1.1.5.1.1. `signature` : `String` - signature matching `pubkey`
+						1.1.1.5.1.1. `signature` : `String` - (optional) signature matching `pubkey`
 
 ### Returns
 
@@ -216,7 +216,7 @@ This method returns a an array of transactions with added signatures by the targ
 				1.1.1.5. `signatures` : `Array`, - previous signatures for this instruction set
 					1.1.1.5.1. `Object` - signature
 						1.1.1.5.1.2. `pubkey` : `String` - pubkey of the signer
-						1.1.1.5.1.1. `signature` : `String` - signature matching `pubkey`
+						1.1.1.5.1.1. `signature` : `String` - (optional) signature matching `pubkey`
 
 ### Example
 
