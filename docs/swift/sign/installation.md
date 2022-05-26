@@ -14,7 +14,7 @@ In order to connect to WalletConnect Cloud, you need to create a new project fir
 3. Give it a name and tap Create button
 4. Your new project should appear on the projects list
 5. You should see a project ID string if you tap on your project.
-   for more info on Project ID look at [Project ID](../../api/project-id.md).
+   for more info on Project ID look at Project ID.
 
 ### Add SDK for your project.
 
