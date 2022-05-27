@@ -69,11 +69,11 @@ val walletDelegate = object : SignClient.WalletDelegate {
         // Triggered when wallet receives the session settlement response from Dapp
     }
 
-    fun onSessionUpdateResponse(sessionUpdateResponse: Sign.Model.SessionUpdateResponse) {
+    override fun onSessionUpdateResponse(sessionUpdateResponse: Sign.Model.SessionUpdateResponse) {
         // Triggered when wallet receives the session update response from Dapp
     }
 
-    fun onConnectionStateChange(state: Sign.Model.ConnectionState) {
+    override fun onConnectionStateChange(state: Sign.Model.ConnectionState) {
         //Triggered whenever the connection state is changed
     }
 }
@@ -254,11 +254,11 @@ val dappDelegate = object : SignClient.DappDelegate {
         // Triggered when Dapp receives the session rejection from wallet
     }
 
-    fun onSessionUpdate(updatedSession: Sign.Model.UpdatedSession) {
+    override fun onSessionUpdate(updatedSession: Sign.Model.UpdatedSession) {
         // Triggered when Dapp receives the session update from wallet
     }
 
-    fun onSessionExtend(session: Sign.Model.Session) {
+    override fun onSessionExtend(session: Sign.Model.Session) {
         // Triggered when Dapp receives the session extend from wallet
     }
 
@@ -266,15 +266,15 @@ val dappDelegate = object : SignClient.DappDelegate {
         // Triggered when the peer emits events that match the list of events agreed upon session settlement
     }
 
-    fun onSessionDelete(deletedSession: Sign.Model.DeletedSession) {
+    override fun onSessionDelete(deletedSession: Sign.Model.DeletedSession) {
         // Triggered when Dapp receives the session delete from wallet
     }
 
-    fun onSessionRequestResponse(response: Sign.Model.SessionRequestResponse) {
+    override fun onSessionRequestResponse(response: Sign.Model.SessionRequestResponse) {
         // Triggered when Dapp receives the session request response from wallet
     }
 
-    fun onConnectionStateChange(state: Sign.Model.ConnectionState) {
+    override fun onConnectionStateChange(state: Sign.Model.ConnectionState) {
         //Triggered whenever the connection state is changed
     }
 }
