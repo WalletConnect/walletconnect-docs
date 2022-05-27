@@ -127,7 +127,6 @@ module.exports = {
           items: [
             "kotlin/sign/installation",
             "kotlin/sign/usage",
-            "kotlin/sign/reference",
           ],
         },
         {
