@@ -36,7 +36,7 @@ module.exports = {
     {
       type: "category",
       label: "Web - JavaScript",
-      collapsible: false,
+      collapsible: true,
       className: "menu_outer_list",
       items: [
         {
@@ -87,7 +87,7 @@ module.exports = {
     {
       type: "category",
       label: "iOS - Swift",
-      collapsible: false,
+      collapsible: true,
       className: "menu_outer_list",
       items: [
         {
@@ -118,7 +118,7 @@ module.exports = {
     {
       type: "category",
       label: "Android - Kotlin",
-      collapsible: false,
+      collapsible: true,
       className: "menu_outer_list",
       items: [
         {
@@ -151,7 +151,7 @@ module.exports = {
     {
       type: "category",
       label: "Advanced",
-      collapsible: false,
+      collapsible: true,
       className: "menu_outer_list",
       items: [
         "advanced/migrating-from-v1.0",
