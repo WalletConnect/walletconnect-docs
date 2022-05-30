@@ -32,12 +32,12 @@ const config = {
           versions: {
             "1.0": {
               badge: false,
-              label: "1.0",
+              label: "v1.0",
               path: "/",
             },
             current: {
               badge: false,
-              label: "2.0 beta",
+              label: "v2.0 beta",
               path: "2.0",
             },
           },
@@ -65,6 +65,11 @@ const config = {
           {
             type: "docsVersionDropdown",
             position: "left",
+          },
+          {
+            href: "https://github.com/walletconnect/walletconnect-specs",
+            position: "left",
+            label: "Specs",
           },
           {
             href: "https://www.walletconnect.com/",
