@@ -20,13 +20,12 @@ npm install --save @walletconnect/sign-client@experimental
 
 ## 3. Initialize Client
 
-Initialize client by passing `relayUrl` and `projectId` we created before.
+Initialize client by passing `projectId` we created before.
 
 ```js
 import SignClient from "@walletconnect/sign-client";
 
 const signClient = await SignClient.init({
-  projectId: "<YOUR PROJECT ID FROM STEP 1>",
-  relayUrl: "wss://relay.walletconnect.com",
+  projectId: "<YOUR_PROJECT_ID>",
 });
 ```
