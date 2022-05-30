@@ -20,8 +20,7 @@ npm install --save @walletconnect/sign-client@canary @walletconnect/types@canary
 import SignClient from "@walletconnect/sign-client";
 
 const client = await SignClient.init({
-  projectId: "c4f79cc...",
-  relayUrl: "wss://relay.walletconnect.com",
+  projectId: "<YOUR_PROJECT_ID>",
   metadata: {
     name: "Example Dapp",
     description: "Example Dapp",

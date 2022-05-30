@@ -20,8 +20,7 @@ npm install --save @walletconnect/client@experimental better-sqlite3
 import WalletConnectClient from "@walletconnect/client";
 
 const client = await WalletConnectClient.init({
-  projectId: "c4f79cc...",
-  relayUrl: "wss://relay.walletconnect.com",
+  projectId: "<YOUR_PROJECT_ID>",
   metadata: {
     name: "Test Wallet",
     description: "Test Wallet",

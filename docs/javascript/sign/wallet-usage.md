@@ -5,6 +5,5 @@
 ```js
 const signClient = await SignClient.init({
   projectId: "<YOUR PROJECT ID>",
-  relayUrl: "wss://relay.walletconnect.com",
 });
 ```

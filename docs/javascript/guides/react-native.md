@@ -21,9 +21,7 @@ npm install --save @walletconnect/client@experimental @react-native-async-storag
 import WalletConnectClient from "@walletconnect/client";
 
 const client = await WalletConnectClient.init({
-  controller: true,
-  projectId: "c4f79cc...",
-  relayUrl: "wss://relay.walletconnect.com",
+  projectId: "<YOUR_PROJECT_ID>",
   metadata: {
     name: "Test Wallet",
     description: "Test Wallet",
