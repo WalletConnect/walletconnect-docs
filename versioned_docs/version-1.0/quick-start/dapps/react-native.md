@@ -26,6 +26,16 @@ If you haven't already, you may also need to install [`react-native-svg`](https:
 yarn add react-native-svg @react-native-async-storage/async-storage
 ```
 
+In order to make your app compatible with Android SDK 29 and newer, edit your AndroidManifest.xml file and add the following code:
+```xml
+<queries>
+    <intent>
+        <action android:name="android.intent.action.VIEW" />
+        <data android:scheme="wc"/>
+    </intent>
+</queries>
+```
+
 ## Architecture
 
 This library is implemented using the [**React Context API**](https://reactjs.org/docs/context.html), which is used to help make an instance of a [`connector`](https://docs.walletconnect.org/client-api) accessible globally throughout your application. This permits you to use a uniform instance within even deeply nested components, and ensures your rendered application is always synchronized against the connector state.
