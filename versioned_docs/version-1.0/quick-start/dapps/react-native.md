@@ -25,7 +25,7 @@ If you haven't already, you may also need to install [`react-native-svg`](https:
 ```bash
 yarn add react-native-svg @react-native-async-storage/async-storage
 ```
-
+:::info
 In order to make your app compatible with Android SDK 29 and newer, edit your AndroidManifest.xml file and add the following code:
 ```xml
 <queries>
