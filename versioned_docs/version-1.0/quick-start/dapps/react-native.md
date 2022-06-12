@@ -35,7 +35,7 @@ In order to make your app compatible with Android SDK 29 and newer, edit your An
     </intent>
 </queries>
 ```
-
+:::
 ## Architecture
 
 This library is implemented using the [**React Context API**](https://reactjs.org/docs/context.html), which is used to help make an instance of a [`connector`](https://docs.walletconnect.org/client-api) accessible globally throughout your application. This permits you to use a uniform instance within even deeply nested components, and ensures your rendered application is always synchronized against the connector state.
