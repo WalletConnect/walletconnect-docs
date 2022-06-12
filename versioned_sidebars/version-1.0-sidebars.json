@@ -33,6 +33,11 @@
     },
     "version-1.0/smart-wallets",
     "version-1.0/mobile-linking",
+    {
+      "type": "link",
+      "label": "Cloud Registry",
+      "href": "https://medium.com/walletconnect/introducing-walletconnect-cloud-registry-c17ac580f33"
+    },
     "version-1.0/legacy-clients",
     "version-1.0/client-api",
     "version-1.0/bridge-server",
