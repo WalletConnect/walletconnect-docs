@@ -10,6 +10,73 @@ Additionally, we define a type `Felt` that is used to encode all manner of strin
 
 # Starknet
 
+
+## starknet_getAccounts
+
+This method returns an array of addrsses available to sign from the wallet.
+
+### Parameters
+
+  none
+
+### Returns
+
+1.`Array` - Array of contract addresses:
+  1.1. `Object`
+    1.1.1. `address` : `Felt` - contract address for wallet
+
+### Example
+
+```javascript
+// Request
+{
+  "id": 1,
+  "jsonrpc": "2.0",
+  "method": "starknet_getAccounts",
+  "params": {}
+}
+
+// Result
+{
+  "id": 1,
+  "jsonrpc": "2.0",
+  "result": [{ "address": "0x0..." }]
+}
+```
+
+## starknet_requestAccounts
+
+This method returns an array of addrsses available to sign from the wallet.
+
+### Parameters
+
+  none
+
+### Returns
+
+1.`Array` - Array of contract addresses:
+  1.1. `Object`
+    1.1.1. `address` : `Felt` - contract address for wallet
+
+### Example
+
+```javascript
+// Request
+{
+  "id": 1,
+  "jsonrpc": "2.0",
+  "method": "starknet_getAccounts",
+  "params": {}
+}
+
+// Result
+{
+  "id": 1,
+  "jsonrpc": "2.0",
+  "result": [{ "address": "0x0..." }]
+}
+```
+
 ## starknet_signInvokeTransaction
 
 Signs a transaction that can be submitted to the network at a later time using with `starknet_addInvokeTransaction`.
