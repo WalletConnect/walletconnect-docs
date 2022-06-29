@@ -8,9 +8,9 @@ Sign API establishes a session between a wallet and a dapp in order to expose a 
 npm install --save @walletconnect/sign-client@experimental @walletconnect/types@experimental
 ```
 
-
 ## Initializing the client
-Initialize client as a controller using [your project id](http://localhost:3000/2.0/introduction/cloud#project-id).
+
+Initialize client as a controller using [your project id](/2.0/introduction/cloud#project-id).
 
 ```js
 const signClient = await SignClient.init({
@@ -28,34 +28,40 @@ const signClient = await SignClient.init({
 ```
 
 ## Setting up event listeners
+
 WalletConnect v2.0 allows any method or event to be emited. The following requirements should be satisfied in order to have a particular event :
 
-**1. Include the event in pairing namespace.**
+**1. Add listeners for desired `SignClient` events.**
 
 ```js
+// Subscribe to session_proposal event(s)
+client.on("session_proposal", (event) => {
+  // Show session proposal data to the user i.e. in a modal with options to approve / reject it
+});
+
 client.on("session_event", ({ event }) => {
   // Handle session events, such as "chainChanged", "accountsChanged", etc.
 });
 
 client.on("session_update", ({ topic, params }) => {
-  const { namespaces } = params;
-  const _session = client.session.get(topic);
-  // Overwrite the `namespaces` of the existing session with the incoming one.
-  const updatedSession = { ..._session, namespaces };
-  // Integrate the updated session state into your dapp state.
-  onSessionUpdate(updatedSession);
+  // React to session update
 });
 
-client.on("session_delete", () => {
-  // Session was deleted -> reset the dapp state, clean up from user session, etc.
+client.on("session_delete", (event) => {
+  // React to session delete event
+});
+
+client.on("pairing_delete", (event) => {
+  // React to pairing delete event
 });
 ```
-**2. Call the `.emit` method and pass the necessary data for the particular event.**
 
+**2. Call the `.emit` method and pass the necessary data for the particular event.**
 
 ## Pairing and session permissions
 
 ### URI
+
 The pairing proposal between a wallet and a dapp is made using an [URI](https://github.com/WalletConnect/walletconnect-specs/blob/bc3c79dbe7542cdd59613d967acb2e4151c21b81/sign/pairing-uri.md). In WalletConnect v2.0 the session and pairing are decoupled from each other. This means that a URI is shared to construct a pairing proposal and only after settling the pairing then the dapp can propose a session using that pairing. In simpler words, the dapp generates an URI that can be used by the wallet for pairing.
 
 ### Namespaces
@@ -66,7 +72,7 @@ The `namespaces` parameter is used to specify the namespaces and chains that are
 namespaces: {
     eip155: {
       accounts: ["eip155:1:0x0000000000..."],
-      methods: ["presonal_sign", "eth_sendTransaction"],
+      methods: ["personal_sign", "eth_sendTransaction"],
       events: ["accountsChanged"],
       extension: [
         {
@@ -98,9 +104,39 @@ extension: [
 To create a pairing proposal, simply pass the `uri` received from the dapp into the `signClient.pair()` function.
 
 ```js
-// uri : string (e.g. wc:a281567bb3e4...)
+// This will trigger the `session_proposal` event
+await signClient.pair({ uri });
 
-signClient.pair({ uri })
+// Approve session proposal, use id from session proposal event and respond with namespace(s) that satisfy dapps request and contain approved accounts
+const { topic, acknowledged } = await signClient.approve({
+  id: 123,
+  namespaces: {
+    eip155: {
+      accounts: ["eip155:1:0x0000000000..."],
+      methods: ["personal_sign", "eth_sendTransaction"],
+      events: ["accountsChanged"],
+      extension: [
+        {
+          accounts: ["eip:137"],
+          methods: ["eth_sign"],
+          events: [],
+        },
+      ],
+    },
+  },
+});
+
+// Optionally await acknowledgement from dapp
+const session = await acknowledged();
+
+// Or: reject session proposal
+await signClient.reject({
+  id: 123,
+  reason: {
+    code: 1,
+    message: "rejected",
+  },
+});
 ```
 
 ### Pairing with QR Codes
