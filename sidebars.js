@@ -93,7 +93,11 @@ module.exports = {
         {
           type: "category",
           label: "Sign",
-          items: ["swift/sign/installation"],
+          items: [
+            "swift/sign/installation",
+            "swift/sign/wallet-usage",
+            "swift/sign/dapp-usage",
+          ],
         },
         {
           type: "category",

@@ -48,7 +48,7 @@ Above, there are two example on how to create the initalizing parameters.
 
 
 
-## **Daap**
+## **Dapp**
 
 ### **SignClient.DappDelegate**
 
