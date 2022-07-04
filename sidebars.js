@@ -95,6 +95,8 @@ module.exports = {
           label: "Sign",
           items: [
             "swift/sign/installation",
+            "swift/sign/wallet-usage",
+            "swift/sign/dapp-usage",
           ],
         },
         {
@@ -126,7 +128,8 @@ module.exports = {
           label: "Sign",
           items: [
             "kotlin/sign/installation",
-            "kotlin/sign/usage",
+            "kotlin/sign/wallet-usage",
+            "kotlin/sign/dapp-usage",
           ],
         },
         {
