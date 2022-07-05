@@ -14,8 +14,27 @@ let metadata = AppMetadata(name: <String>,
                            url: <String>,
                            icons: <[String]>)
 
-Sign.configure(Sign.Config(metadata: <AppMetadata>, projectId: <String>))
+Sign.configure(metadata: <AppMetadata>, projectId: <String>, socketFactory: <SocketFactory>)
 ```
+
+### SocketFactory
+
+WalletConnect Swift SDK no more depends on 3rd party websocket library. SocketFactory parameter allows you to pass your own implementation of websocket connection.
+
+Example of WebSocketFactory implementation using Starscream v3.
+
+```swift
+import Starscream
+
+extension WebSocket: WebSocketConnecting { }
+
+struct SocketFactory: WebSocketFactory {
+    func create(with url: URL) -> WebSocketConnecting {
+        return WebSocket(url: url)
+    }
+}
+```
+
 ### Subscribe for Sign publishers
 When your `Sign` instance receives requests from a peer it will publish related event. So you should set subscription to handle them.
 
