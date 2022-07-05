@@ -118,3 +118,14 @@ const result = await client.request({
 ```
 
 > For more information on available JSON-RPC requests, see the [JSON-RPC reference](../../advanced/rpc-reference/ethereum-rpc.md).
+
+
+## Try it out
+
+<iframe src="https://codesandbox.io/embed/restless-sea-26wh8g?fontsize=14&hidenavigation=1&theme=dark"
+       height="512"
+  width="100%"
+     title="clever-hooks-8wyxdy"
+     allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
+     sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
+   ></iframe>
