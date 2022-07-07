@@ -21,7 +21,7 @@ Sign.configure(metadata: <AppMetadata>, projectId: <String>, socketFactory: <Soc
 
 WalletConnect Swift SDK no more depends on 3rd party websocket library. SocketFactory parameter allows you to pass your own implementation of websocket connection.
 
-Example of WebSocketFactory implementation using Starscream v3.
+Here's an example of WebSocketFactory implementation using Starscream v3,
 
 ```swift
 import Starscream
