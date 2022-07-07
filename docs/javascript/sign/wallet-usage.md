@@ -142,12 +142,3 @@ await signClient.reject({
 ### Pairing with QR Codes
 
 To facilitate better user experience, it is possible to pair wallets with dapps by scanning QR codes. This can be implemented by using any QR code scanning library (example, [react-qr-reader](https://www.npmjs.com/package/react-qr-reader)). After scanning the QR code, pass the obtained `uri` into the `signClient.pair()` function. A useful reference for implementing QR codes for pairing is the [react wallet example](https://github.com/WalletConnect/web-examples/blob/main/wallets/react-wallet-v2/).
-
-### Try it out
-
-<iframe src="https://codesandbox.io/embed/clever-hooks-8wyxdy?fontsize=11&hidenavigation=1&theme=dark"  height="512"
-  width="100%"
-     title="clever-hooks-8wyxdy"
-     allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
-     sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
-   ></iframe>
