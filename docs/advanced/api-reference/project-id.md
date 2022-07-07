@@ -47,3 +47,4 @@ TODO insert screenshot of Allowlist for HTTP Origin.
 | ---------------------- | ---------- |
 | Project ID doesn't exist | 401        |
 | Exists and is invalid  | 403        |
+| Too many requests  | 1013        |
