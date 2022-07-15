@@ -26,8 +26,8 @@ Example URL:
 This can be instantiated from the client with the `projectId` in the `WalletConnectClient` constructor.
 
 ```javascript
-import WalletConnectClient from "@walletconnect/client";
-const client = await WalletConnectClient.init({
+import SignClient from "@walletconnect/sign-client";
+const signClient = await SignClient.init({
   projectId: "c4f79cc821944d9680842e34466bfb",
 });
 ```

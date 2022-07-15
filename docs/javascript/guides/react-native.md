@@ -10,7 +10,7 @@ to manage storage internally.
 :::
 
 ```bash npm2yarn
-npm install --save @walletconnect/client@experimental @react-native-async-storage/async-storage
+npm install --save @walletconnect/sign-client@experimental @react-native-async-storage/async-storage
 ```
 
 ## Create Session
@@ -18,9 +18,9 @@ npm install --save @walletconnect/client@experimental @react-native-async-storag
 1. Initiate your WalletConnect client with the relay server, using [your Project ID](../../advanced/api-reference/project-id.md).
 
 ```javascript
-import WalletConnectClient from "@walletconnect/client";
+import SignClient from "@walletconnect/sign-client";
 
-const client = await WalletConnectClient.init({
+const signClient = await SignClient.init({
   projectId: "<YOUR_PROJECT_ID>",
   metadata: {
     name: "Test Wallet",

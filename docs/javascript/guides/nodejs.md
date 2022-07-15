@@ -9,7 +9,7 @@ For Node.js, the WalletConnect client additionally requires `better-sqlite3` to 
 :::
 
 ```bash npm2yarn
-npm install --save @walletconnect/client@experimental better-sqlite3
+npm install --save @walletconnect/sign-client@experimental better-sqlite3
 ```
 
 ## Create Session
@@ -17,9 +17,9 @@ npm install --save @walletconnect/client@experimental better-sqlite3
 1. Initiate your WalletConnect client with the relay server, using [your Project ID](../../advanced/api-reference/project-id.md).
 
 ```javascript
-import WalletConnectClient from "@walletconnect/client";
+import SignClient from "@walletconnect/sign-client";
 
-const client = await WalletConnectClient.init({
+const signClient = await SignClient.init({
   projectId: "<YOUR_PROJECT_ID>",
   metadata: {
     name: "Test Wallet",

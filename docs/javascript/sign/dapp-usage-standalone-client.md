@@ -19,7 +19,7 @@ npm install --save @walletconnect/sign-client@experimental @walletconnect/types@
 ```javascript
 import SignClient from "@walletconnect/sign-client";
 
-const client = await SignClient.init({
+const signClient = await SignClient.init({
   projectId: "<YOUR_PROJECT_ID>",
   metadata: {
     name: "Example Dapp",
