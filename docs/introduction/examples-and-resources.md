@@ -23,4 +23,4 @@ We have a set of official examples in our [web-examples](https://github.com/Wall
 
 ## Android - Kotlin
 
-[TODO android]
+- Sample Wallet and Dapp apks can be found under the lates release tag in [Kotlin repository](https://github.com/WalletConnect/WalletConnectKotlinV2/tags)

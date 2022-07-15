@@ -6,7 +6,7 @@ Kotlin implementation of WalletConnect v2 Sign protocol for Android applications
 
 ## Requirements
 
-* Android min SDK 24
+* Android min SDK 23
 * Java 11
 
 ## Installation
@@ -24,5 +24,5 @@ allprojects {
 app/build.gradle
 
 ```gradle
-implementation("com.github.WalletConnect:WalletConnectKotlinV2:release_version")
+implementation("com.walletconnect:WalletConnectKotlinV2:release_version")
 ```
