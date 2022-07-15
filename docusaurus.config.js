@@ -61,6 +61,7 @@ const config = {
         logo: {
           alt: "WalletConnect Logo",
           src: "img/walletconnect-logo.svg",
+          srcDark: "img/walletconnect-logo-white.svg",
         },
         items: [
           {
