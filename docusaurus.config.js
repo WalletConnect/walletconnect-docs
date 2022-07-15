@@ -133,6 +133,11 @@ const config = {
         ],
         copyright: `Copyright © ${new Date().getFullYear()} WalletConnect, Inc.`,
       },
+      colorMode: {
+        defaultMode: 'dark',
+        disableSwitch: false,
+        respectPrefersColorScheme: false,
+      },
       prism: {
         theme: lightCodeTheme,
         darkTheme: darkCodeTheme,
