@@ -10,7 +10,7 @@ to manage storage internally.
 :::
 
 ```bash npm2yarn
-npm install --save @walletconnect/sign-client@experimental @react-native-async-storage/async-storage
+npm install --save @walletconnect/sign-client@rc @react-native-async-storage/async-storage
 ```
 
 ## Create Session

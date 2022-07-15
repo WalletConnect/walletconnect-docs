@@ -9,7 +9,7 @@ For Node.js, the WalletConnect client additionally requires `better-sqlite3` to 
 :::
 
 ```bash npm2yarn
-npm install --save @walletconnect/sign-client@experimental better-sqlite3
+npm install --save @walletconnect/sign-client@rc better-sqlite3
 ```
 
 ## Create Session
