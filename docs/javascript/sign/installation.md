@@ -15,7 +15,7 @@ For platform-specific instructions, refer to our [React Native](../guides/react-
 :::
 
 ```bash npm2yarn
-npm install --save @walletconnect/sign-client@experimental
+npm install --save @walletconnect/sign-client@rc
 ```
 
 ## 3. Initialize Client
