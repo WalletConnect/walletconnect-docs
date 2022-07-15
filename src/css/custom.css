@@ -38,12 +38,12 @@ main {
 }
 
 [data-theme="dark"] main {
-  background-color: #171923;
+  background-color: #000000;
 }
 
 /* Navbar */
 [data-theme="dark"] .navbar {
-  background-color: #171923;
+  background-color: #000000;
   border-bottom: 1px solid #2d3748;
 }
 
@@ -54,7 +54,7 @@ main {
 }
 
 [data-theme="dark"] .menu {
-  background-color: #1a202c;
+  background-color: #000000;
   border-right: 1px solid #2d3748;
 }
 
