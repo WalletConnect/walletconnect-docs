@@ -38,7 +38,7 @@ const config = {
             },
             current: {
               badge: false,
-              label: "v2.0 beta",
+              label: "v2.0-rc",
               path: "2.0",
             },
           },
