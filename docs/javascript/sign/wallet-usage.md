@@ -66,7 +66,7 @@ The pairing proposal between a wallet and a dapp is made using an [URI](https://
 
 ### Namespaces
 
-The `namespaces` parameter is used to specify the namespaces and chains that are intended to be used in the session. The following is an example,
+The `namespaces` parameter is used to specify the list of chains, methods and events that are intended to be used in the session. In other words, namespaces are the minimal requirement for a wallet to establish a session with a dapp. The following is an example,
 
 ```js
 namespaces: {
@@ -84,6 +84,8 @@ namespaces: {
     },
   },
 ```
+
+If you are looking for a more in-depth explanation about namespaces, checkout the [glossary](http://localhost:3000/2.0/introduction/glossary#namespaces).
 
 ### Extension
 
