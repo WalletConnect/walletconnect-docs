@@ -11,22 +11,6 @@
   Body: Hello World, this is WalletConnect v1.0
 ```
 
-## Get Bridge Server Info
-
-```bash
-  GET https://bridge.walletconnect.org/info
-
-  Response:
-  Status: 200
-  Content-Type: application/json; charset=utf-8
-  Body:
-  {
-    "name": "WalletConnect Bridge Server",
-    "repository": "walletconnect-bridge",
-    "version": "1.0"
-  }
-```
-
 ## Subscribe Push Notification Webhook
 
 ```bash

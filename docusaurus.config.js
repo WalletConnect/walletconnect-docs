@@ -61,6 +61,7 @@ const config = {
         logo: {
           alt: "WalletConnect Logo",
           src: "img/walletconnect-logo.svg",
+          srcDark: "img/walletconnect-logo-white.svg",
         },
         items: [
           {
@@ -132,6 +133,11 @@ const config = {
           },
         ],
         copyright: `Copyright © ${new Date().getFullYear()} WalletConnect, Inc.`,
+      },
+      colorMode: {
+        defaultMode: 'dark',
+        disableSwitch: false,
+        respectPrefersColorScheme: false,
       },
       prism: {
         theme: lightCodeTheme,

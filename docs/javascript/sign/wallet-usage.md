@@ -5,7 +5,7 @@ Sign API establishes a session between a wallet and a dapp in order to expose a 
 ## Install
 
 ```bash npm2yarn
-npm install --save @walletconnect/sign-client@experimental @walletconnect/types@experimental
+npm install --save @walletconnect/sign-client@rc @walletconnect/types@rc
 ```
 
 ## Initializing the client

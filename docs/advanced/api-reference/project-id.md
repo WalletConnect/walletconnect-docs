@@ -12,11 +12,11 @@ Example URL:
 
 `https://relay.walletconnect.com/?projectId=c4f79cc821944d9680842e34466bfbd`
 
-This can be instantiated from the client with the `projectId` in the `WalletConnectClient` constructor.
+This can be instantiated from the client with the `projectId` in the `SignClient` constructor.
 
 ```javascript
-import WalletConnectClient from "@walletconnect/client";
-const client = await WalletConnectClient.init({
+import SignClient from "@walletconnect/sign-client";
+const signClient = await SignClient.init({
   projectId: "c4f79cc821944d9680842e34466bfb",
 });
 ```
@@ -47,3 +47,4 @@ TODO insert screenshot of Allowlist for HTTP Origin.
 | ---------------------- | ---------- |
 | Project ID doesn't exist | 401        |
 | Exists and is invalid  | 403        |
+| Too many requests  | 1013        |

@@ -5,11 +5,11 @@ All our SDKs are written in and support TypeScript. Following type packages are 
 ### @walletconnect/types
 
 ```bash npm2yarn
-npm install --save @walletconnect/types@experimental
+npm install --save @walletconnect/types@rc
 ```
 
 ### @walletconnect/jsonrpc-types
 
 ```bash npm2yarn
-npm install --save @walletconnect/jsonrpc-types@experimental
+npm install --save @walletconnect/jsonrpc-types@rc
 ```
