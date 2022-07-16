@@ -19,8 +19,8 @@ We have a set of official examples in our [web-examples](https://github.com/Wall
 
 ## iOS - Swift
 
-[TODO ios]
+- Sample wallet and dapp can be found in [Swift's V2 repository](https://github.com/WalletConnect/WalletConnectSwiftV2/tree/main/Example)
 
 ## Android - Kotlin
 
-- Sample Wallet and Dapp .apk files can be found under the latest release tag in [Kotlin repository](https://github.com/WalletConnect/WalletConnectKotlinV2/tags)
+- Sample wallet and dapp .apk files can be found under the latest release tag in [Kotlin's V2 repository](https://github.com/WalletConnect/WalletConnectKotlinV2/tags)
