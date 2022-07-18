@@ -96,7 +96,7 @@ Topics are 32 bytes hexadecimal strings which are used to identify messages sent
 Namespaces are used to specify the chains, methods and events that are intended to be used in a particular session. They establish the minimal requirement for a wallet and a dapp to get paired. There are two types of namespaces,
 
 ### Proposal namespaces
-A dapp sends a proposal namespace to the wallet for pairing. The proposal namespace contains the list of chains, methods and events that are required for the dapp. The wallet validates if the received proposal namespaces are valid and returns a session namespace as a response if it is valid. If the requested proposal namespaces are not valid, the session cannot be established and the wallet rejects it with a `1006` code that tells the dapp that the proposal namespaces are invalid.
+A dapp sends a proposal namespace to the wallet for pairing. The proposal namespace contains the list of chains, methods and events that are required for the dapp. The wallet validates if the received proposal namespaces are valid and returns a session namespace as a response if it is valid. If the requested proposal namespaces are not valid, the session cannot be established and the wallet rejects it with an error code that tells the dapp if the proposal namespaces have invalid chains, methods, events or if it was rejected by the user
 
 **Example :** If a dapp wants access to Ethereum Mainnet, Polygon and Cosmos Mainnet - the required chains, methods and events should be mentioned in the proposal namespaces request as follows :
 
