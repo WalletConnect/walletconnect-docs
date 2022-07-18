@@ -25,4 +25,4 @@ We have a set of official examples in our [web-examples](https://github.com/Wall
 
 ## Relay
 
-- The [open source relay reppository]([url](https://github.com/walletconnect/relay)) for self-hosting and installation instructions.
+- The [open source relay reppository](https://github.com/walletconnect/relay) for self-hosting and installation instructions.
