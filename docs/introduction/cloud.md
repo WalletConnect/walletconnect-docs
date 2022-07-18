@@ -7,7 +7,7 @@ The WalletConnect Cloud web app is available at https://cloud.walletconnect.com,
 It can be used for the following services:
 
 - Project management for generating projectId's for public relay server access
-- Regsitry management for creating and [registry listings](registry.md)
+- Listing management for creating and [Cloud explorer listings](cloud-explorer.md)
 
 ## Project ID
 
