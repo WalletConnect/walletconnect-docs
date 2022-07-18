@@ -28,7 +28,7 @@ By default listings endpoints return all data for provided type. You can use fol
 
 #### `GET /api/v1/wallets`
 
-Returns a JSON object containing all wallets listed in the public cloud explorer. <br />
+Returns a JSON object containing all wallets listed in the cloud explorer. <br />
 [See Example](https://registry.walletconnect.com/api/v1/wallets?entries=5&page=1)
 
 #### `GET /api/v1/dapps`
