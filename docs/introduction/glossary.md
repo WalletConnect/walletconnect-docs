@@ -125,7 +125,7 @@ A dapp sends a proposal namespace to the wallet for pairing. The proposal namesp
 The `extension` field is used to mention the *chain-exclusive parameters*. For example, let's say Polygon has a special method `personalSign` and an event `chainChanged` that is not available in Ethereum Mainnet. Hence, these special chain-exclusive parameters can be mentioned as extensions as stated in the above code snippet.
 
 ### Session namespaces
-The dapp validates if the received proposal namespaces comply with the session namespaces. If they comply, a session is established sucessfully and pairing is completed. If not, the session is not established and all the cached data related to the namespaces are deleted. The proposal namespace can also choose to provide access to more chains, methods or events that were not a part of the proposal namespaces.
+The dapp validates if the received proposal namespaces comply with the session namespaces. If they comply, a session is established successfully and pairing is completed. If not, the session is not established and all the cached data related to the namespaces are deleted. The session namespace can also choose to provide access to more chains, methods or events that were not a part of the proposal namespaces.
 
 **Example :** The following is an example for a sessoion namespace which complies with the requested proposal namespace example,
 
