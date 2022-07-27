@@ -46,14 +46,26 @@ Returns a JSON object containing all hybrids listed in the public cloud explorer
 Returns a JSON object containing all entries listed in the public cloud explorer. <br />
 [See Example](https://explorer-api.walletconnect.com/v1/all?entries=5&page=1)
 
-### Logo
+### Logo v1
 
-| Param | Description                                                                |
-| ----- | -------------------------------------------------------------------------- |
-| size  | Determines resolution of returned image can be one of: sm, md or lg        |
+| Param | Description                                                                      |
+| ----- | -------------------------------------------------------------------------------- |
+| size  | Determines resolution of returned image can be one of: `sm`, `md` or `lg`        |
 | id    | Corresponds to a cloud explorer entry's id field as returned by the Listings API |
 
 #### `GET /v1/logo/:size/:id`
 
-Returns the image source of the logo for id sized according size. <br />
+Returns the image source of the logo for `id` sized according `size`. <br />
 [See Example](https://explorer-api.walletconnect.com/v1/logo/lg/d2ae9c3c2782806fd6db704bf40ef0238af9470d7964ae566114a033f4a9a110)
+
+### Logo v2
+
+| Param | Description                                                                              |
+| ----- | ---------------------------------------------------------------------------------------- |
+| size  | Determines resolution of returned image can be one of: `sm`, `md` or `lg`                |
+| id    | Corresponds to a cloud explorer entry's `image_id` field as returned by the Listings API |
+
+#### `GET /v2/logo/:size/:image_id`
+
+Returns the image source of the logo for `image_id` sized according `size`. <br />
+[See Example](https://explorer-api.walletconnect.com/v2/logo/md/32a77b79-ffe8-42c3-61a7-3e02e019ca00)
