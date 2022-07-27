@@ -26,25 +26,25 @@ By default listings endpoints return all data for provided type. You can use fol
 | search  | Returns listings whose name matches provided search query                           |
 | version | Specifies WalletConnect supported version (1 or 2)                                  |
 
-#### `GET /api/v1/wallets`
+#### `GET /v1/wallets`
 
 Returns a JSON object containing all wallets listed in the cloud explorer. <br />
-[See Example](https://registry.walletconnect.com/api/v1/wallets?entries=5&page=1)
+[See Example](https://explorer-api.walletconnect.com/v1/wallets?entries=5&page=1)
 
-#### `GET /api/v1/dapps`
+#### `GET /v1/dapps`
 
 Returns a JSON object containing all dApps listed in the public cloud explorer. <br />
-[See Example](https://registry.walletconnect.com/api/v1/dapps?entries=5&page=1)
+[See Example](https://explorer-api.walletconnect.com/v1/dapps?entries=5&page=1)
 
-#### `GET /api/v1/hybrid`
+#### `GET /v1/hybrid`
 
 Returns a JSON object containing all hybrids listed in the public cloud explorer. <br />
-[See Example](https://registry.walletconnect.com/api/v1/hybrid?entries=5&page=1)
+[See Example](https://explorer-api.walletconnect.com/v1/hybrid?entries=5&page=1)
 
-#### `GET /api/v1/all`
+#### `GET /v1/all`
 
 Returns a JSON object containing all entries listed in the public cloud explorer. <br />
-[See Example](https://registry.walletconnect.com/api/v1/all?entries=5&page=1)
+[See Example](https://explorer-api.walletconnect.com/v1/all?entries=5&page=1)
 
 ### Logo
 
@@ -53,7 +53,7 @@ Returns a JSON object containing all entries listed in the public cloud explorer
 | size  | Determines resolution of returned image can be one of: sm, md or lg        |
 | id    | Corresponds to a cloud explorer entry's id field as returned by the Listings API |
 
-#### `GET /api/v1/logo/:size/:id`
+#### `GET /v1/logo/:size/:id`
 
 Returns the image source of the logo for id sized according size. <br />
-[See Example](https://registry.walletconnect.com/api/v1/logo/lg/d2ae9c3c2782806fd6db704bf40ef0238af9470d7964ae566114a033f4a9a110)
+[See Example](https://explorer-api.walletconnect.com/v1/logo/lg/d2ae9c3c2782806fd6db704bf40ef0238af9470d7964ae566114a033f4a9a110)
