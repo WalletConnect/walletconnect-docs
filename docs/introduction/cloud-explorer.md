@@ -4,7 +4,7 @@ The WalletConnect Cloud Explorer is an open-source solution to submit and showca
 
 ## Submitting a project
 
-Head over to [cloud.walletconnect.com](https://cloud.walletconnect.com/) and create an account if you don't already have one. Once you sign in, simply fill out our project form under the "Explorer" section and submit it for review. To ensure fast approval make sure you follow our [submission guidelines](https://walletconnect.com/registry/guidelines). Once approved your project will automatically appear on our website and API.
+Head over to [cloud.walletconnect.com](https://cloud.walletconnect.com/) and create an account if you don't already have one. Once you sign in, simply fill out our project form under the "Explorer" section and submit it for review. To ensure fast approval make sure you follow our [submission guidelines](https://explorer.walletconnect.com/guidelines). Once approved your project will automatically appear on our website and API.
 
 If you would like to edit or claim an existing cloud explorer item, email us at support@walletconnect.com to help migrate the listing to your account.
 
