@@ -210,14 +210,32 @@ provider.connector.on("display_uri", (err, payload) => {
 });
 ```
 
-#### Filter Mobile Linking Options
+#### Filter Linking Options
 
-If you would like to reduce the number of mobile linking options or customize its order, you can provide an array of wallet names
+If you would like to reduce the number of desktop and mobile linking options or customize its order, you can provide an array of wallet names
 
 ```typescript
 const provider = new WalletConnectProvider({
   infuraId: "27e484dcd9e3efcfd25a83a78777cdf1",
   qrcodeModalOptions: {
+    desktopLinks: [
+      'ledger',
+      'tokenary',
+      'wallet',
+      'wallet 3',
+      'secuX',
+      'ambire',
+      'wallet3',
+      'apolloX',
+      'zerion',
+      'sequence',
+      'punkWallet',
+      'kryptoGO',
+      'nft',
+      'riceWallet',
+      'vision',
+      'keyring'
+    ],
     mobileLinks: [
       "rainbow",
       "metamask",
