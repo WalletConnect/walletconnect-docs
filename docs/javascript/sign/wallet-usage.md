@@ -138,37 +138,37 @@ The pairing proposal between a wallet and a dapp is made using an [URI](https://
 
 ### Namespaces
 
-The `namespaces` parameter is used to specify the namespaces and chains that are intended to be used in the session. The following is an example,
+The `namespaces` parameter is used to specify the namespaces and chains that are intended to be used in the session. The following is an example:
 
 ```js
 namespaces: {
-    eip155: {
-      accounts: ["eip155:1:0x0000000000..."],
-      methods: ["personal_sign", "eth_sendTransaction"],
-      events: ["accountsChanged"],
-      extension: [
-        {
-          accounts: ["eip:137"],
-          methods: ["eth_sign"],
-          events: [],
-        },
-      ],
-    },
+  eip155: {
+    accounts: ["eip155:1:0x0000000000..., eip155:2:0x0000000000..."],
+    methods: ["personal_sign", "eth_sendTransaction"],
+    events: ["accountsChanged"],
+    extension: [
+      {
+        accounts: ["eip155:2:0x0000000000..."],
+        methods: ["eth_sign"],
+        events: [],
+      },
+    ],
   },
+};
 ```
 
 ### Extension
 
-The `extension` parameter is used to specify methods that are not shared by all the accounts/chains of the namespace. For example, chain A may have a special method that is not shared by chain B - in this case, we would create an extension that would only include chain B. Here's an example,
+The `extension` parameter is used to specify methods that are not shared by all the accounts/chains of the namespace. For example, chain A may have a special method that is not shared by chain B - in this case, we would create an extension that would only include chain B. Here's an example:
 
 ```js
 extension: [
-        {
-          accounts: ["eip:137"],
-          methods: ["eth_sign"],
-          events: [],
-        },
-      ],
+  {
+    accounts: ["eip:137"],
+    methods: ["eth_sign"],
+    events: [],
+  },
+];
 ```
 
 ### Pairing with `uri`
@@ -201,7 +201,7 @@ const { topic, acknowledged } = await signClient.approve({
 // Optionally await acknowledgement from dapp
 const session = await acknowledged();
 
-// Or: reject session proposal
+// Or reject session proposal
 await signClient.reject({
   id: 123,
   reason: {
