@@ -23,7 +23,6 @@ const signClient = await SignClient.init({
     url: "<YOUR WALLET'S URL>",
     icons: ["<URL TO WALLET'S LOGO/ICON>"],
   },
- }
 });
 ```
 
@@ -33,30 +32,103 @@ WalletConnect v2.0 allows any method or event to be emited. The following requir
 
 **1. Add listeners for desired `SignClient` events.**
 
-```js
-// Subscribe to session_proposal event(s)
+```ts
 client.on("session_proposal", (event) => {
   // Show session proposal data to the user i.e. in a modal with options to approve / reject it
+
+  interface Event {
+    id: number;
+    params: {
+      id: number;
+      expiry: number;
+      relays: { protocol: string; data?: string }[];
+      proposer: {
+        publicKey: string;
+        metadata: {
+          name: string;
+          description: string;
+          url: string;
+          icons: string[];
+        };
+      };
+      requiredNamespaces: Record<
+        string,
+        {
+          chains: string[];
+          methods: string[];
+          events: string[];
+          extension?: {
+            chains: string[];
+            methods: string[];
+            events: string[];
+          }[];
+        }
+      >;
+      pairingTopic?: string;
+    };
+  }
 });
 
-client.on("session_event", ({ event }) => {
+client.on("session_event", (event) => {
   // Handle session events, such as "chainChanged", "accountsChanged", etc.
+
+  interface Event {
+    id: number;
+    topic: string;
+    params: {
+      event: { name: string; data: any };
+      chainId: string;
+    };
+  }
 });
 
-client.on("session_update", ({ topic, params }) => {
-  // React to session update
+client.on("session_request", (event) => {
+  // Handle session method requests, such as "eth_sign", "eth_sendTransaction", etc.
+
+  interface Event {
+    id: number;
+    topic: string;
+    params: {
+      request: { method: string; params: any };
+      chainId: string;
+    };
+  }
+});
+
+client.on("session_ping", (event) => {
+  // React to session ping event
+
+  interface Event {
+    id: number;
+    topic: string;
+  }
 });
 
 client.on("session_delete", (event) => {
   // React to session delete event
+
+  interface Event {
+    id: number;
+    topic: string;
+  }
+});
+
+client.on("pairing_ping", (event) => {
+  // React to pairing ping event
+  interface Event {
+    id: number;
+    topic: string;
+  }
 });
 
 client.on("pairing_delete", (event) => {
   // React to pairing delete event
+  interface Event {
+    id: number;
+    topic: string;
+  }
 });
 ```
-
-**2. Call the `.emit` method and pass the necessary data for the particular event.**
 
 ## Pairing and session permissions
 
