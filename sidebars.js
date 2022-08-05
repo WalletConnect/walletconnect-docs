@@ -147,6 +147,11 @@ module.exports = {
           label: "Push",
           items: ["kotlin/push/installation"],
         },
+        {
+          type: "category",
+          label: "Mobile Linking",
+          items: ["kotlin/mobile-linking/mobile-linking"],
+        },
       ],
     },
 
