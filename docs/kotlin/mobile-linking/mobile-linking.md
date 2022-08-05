@@ -25,7 +25,7 @@ In order to add support for mobile linking within your wallet and receive sessio
 
 Deep link example: `wc:/{topic}@2`
 
-To receive receive signing request in your Wallet, you'll need to initialize Kotlin SDK with the `Redirect` object where you pass a deep link that redirects to your wallet when it comes to receiving signing request from Dapp.
+To receive signing request in your Wallet, you'll need to initialize Kotlin SDK with the `Redirect` object where you pass a deep link that redirects to your wallet when it comes to receiving signing request from Dapp.
 
 ```kotlin
 val redirect = Sign.Model.Redirect(native = "kotlin-wallet-wc:/request") //should be unique for your wallet
@@ -54,13 +54,13 @@ https://github.com/WalletConnect/WalletConnectKotlinV2/tree/master/signSDK/walle
 
 ## Dapp Support
 
-To send session proposals to mobile wallet user the pairing URI as deep link that triggers a wallet to open and consume this link.
+To send session proposals to mobile wallet user the pairing URI as deep link that triggers a wallet to open and consume pairing URI
 
 ```kotlin
 requireActivity().startActivity(Intent(Intent.ACTION_VIEW, deeplinkPairingUri.toUri()))
 ```
 
-In order to add support for mobile linking within your Dapp and receive signing request responses from wallet, you'll need to initialize Kotlin SDK with the `Redirect` object where you pass a deep link that redirects to your wallet when it comes to receiving signing request from Dapp.
+In order to add support for mobile linking within your Dapp and receive signing request responses from wallet, you'll need to initialize Kotlin SDK with the `Redirect` object where you pass a deep link that redirects to your Dapp when it comes to receiving signing request responses from wallet.
 
 ```kotlin
 val redirect = Sign.Model.Redirect(native = "kotlin-dapp-wc:/request") //should be unique for your Dapp
