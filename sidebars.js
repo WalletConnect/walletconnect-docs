@@ -150,7 +150,7 @@ module.exports = {
         {
           type: "category",
           label: "Guides",
-          items: ["kotlin/mobile-linking/mobile-linking"],
+          items: ["kotlin/guides/mobile-linking"],
         },
       ],
     },
