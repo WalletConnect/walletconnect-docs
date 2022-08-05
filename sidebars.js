@@ -149,7 +149,7 @@ module.exports = {
         },
         {
           type: "category",
-          label: "Mobile Linking",
+          label: "Guides",
           items: ["kotlin/mobile-linking/mobile-linking"],
         },
       ],
