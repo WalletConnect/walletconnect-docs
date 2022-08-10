@@ -23,7 +23,6 @@ const signClient = await SignClient.init({
     url: "<YOUR WALLET'S URL>",
     icons: ["<URL TO WALLET'S LOGO/ICON>"],
   },
- }
 });
 ```
 
@@ -33,30 +32,103 @@ WalletConnect v2.0 allows any method or event to be emited. The following requir
 
 **1. Add listeners for desired `SignClient` events.**
 
-```js
-// Subscribe to session_proposal event(s)
+```ts
 client.on("session_proposal", (event) => {
   // Show session proposal data to the user i.e. in a modal with options to approve / reject it
+
+  interface Event {
+    id: number;
+    params: {
+      id: number;
+      expiry: number;
+      relays: { protocol: string; data?: string }[];
+      proposer: {
+        publicKey: string;
+        metadata: {
+          name: string;
+          description: string;
+          url: string;
+          icons: string[];
+        };
+      };
+      requiredNamespaces: Record<
+        string,
+        {
+          chains: string[];
+          methods: string[];
+          events: string[];
+          extension?: {
+            chains: string[];
+            methods: string[];
+            events: string[];
+          }[];
+        }
+      >;
+      pairingTopic?: string;
+    };
+  }
 });
 
-client.on("session_event", ({ event }) => {
+client.on("session_event", (event) => {
   // Handle session events, such as "chainChanged", "accountsChanged", etc.
+
+  interface Event {
+    id: number;
+    topic: string;
+    params: {
+      event: { name: string; data: any };
+      chainId: string;
+    };
+  }
 });
 
-client.on("session_update", ({ topic, params }) => {
-  // React to session update
+client.on("session_request", (event) => {
+  // Handle session method requests, such as "eth_sign", "eth_sendTransaction", etc.
+
+  interface Event {
+    id: number;
+    topic: string;
+    params: {
+      request: { method: string; params: any };
+      chainId: string;
+    };
+  }
+});
+
+client.on("session_ping", (event) => {
+  // React to session ping event
+
+  interface Event {
+    id: number;
+    topic: string;
+  }
 });
 
 client.on("session_delete", (event) => {
   // React to session delete event
+
+  interface Event {
+    id: number;
+    topic: string;
+  }
+});
+
+client.on("pairing_ping", (event) => {
+  // React to pairing ping event
+  interface Event {
+    id: number;
+    topic: string;
+  }
 });
 
 client.on("pairing_delete", (event) => {
   // React to pairing delete event
+  interface Event {
+    id: number;
+    topic: string;
+  }
 });
 ```
-
-**2. Call the `.emit` method and pass the necessary data for the particular event.**
 
 ## Pairing and session permissions
 
@@ -66,37 +138,37 @@ The pairing proposal between a wallet and a dapp is made using an [URI](https://
 
 ### Namespaces
 
-The `namespaces` parameter is used to specify the namespaces and chains that are intended to be used in the session. The following is an example,
+The `namespaces` parameter is used to specify the namespaces and chains that are intended to be used in the session. The following is an example:
 
 ```js
 namespaces: {
-    eip155: {
-      accounts: ["eip155:1:0x0000000000..."],
-      methods: ["personal_sign", "eth_sendTransaction"],
-      events: ["accountsChanged"],
-      extension: [
-        {
-          accounts: ["eip:137"],
-          methods: ["eth_sign"],
-          events: [],
-        },
-      ],
-    },
+  eip155: {
+    accounts: ["eip155:1:0x0000000000..., eip155:2:0x0000000000..."],
+    methods: ["personal_sign", "eth_sendTransaction"],
+    events: ["accountsChanged"],
+    extension: [
+      {
+        accounts: ["eip155:2:0x0000000000..."],
+        methods: ["eth_sign"],
+        events: [],
+      },
+    ],
   },
+};
 ```
 
 ### Extension
 
-The `extension` parameter is used to specify methods that are not shared by all the accounts/chains of the namespace. For example, chain A may have a special method that is not shared by chain B - in this case, we would create an extension that would only include chain B. Here's an example,
+The `extension` parameter is used to specify methods that are not shared by all the accounts/chains of the namespace. For example, chain A may have a special method that is not shared by chain B - in this case, we would create an extension that would only include chain B. Here's an example:
 
 ```js
 extension: [
-        {
-          accounts: ["eip:137"],
-          methods: ["eth_sign"],
-          events: [],
-        },
-      ],
+  {
+    accounts: ["eip:137"],
+    methods: ["eth_sign"],
+    events: [],
+  },
+];
 ```
 
 ### Pairing with `uri`
@@ -129,7 +201,7 @@ const { topic, acknowledged } = await signClient.approve({
 // Optionally await acknowledgement from dapp
 const session = await acknowledged();
 
-// Or: reject session proposal
+// Or reject session proposal
 await signClient.reject({
   id: 123,
   reason: {
