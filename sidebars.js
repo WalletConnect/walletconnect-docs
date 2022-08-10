@@ -114,6 +114,11 @@ module.exports = {
           label: "Push",
           items: ["swift/push/installation"],
         },
+        {
+          type: "category",
+          label: "Guides",
+          items: ["swift/guides/mobile-linking"],
+        },
       ],
     },
 
