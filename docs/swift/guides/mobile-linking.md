@@ -8,15 +8,22 @@ The pattern we chose to adhere for a consistent UX across platforms for connecti
 2. User presses button to connect and is shown a list of iOS compatible wallets
 3. User is redirected to the wallet of choice
 4. Wallet prompts user to approve or reject session
-5. Wallet prompts user to return to Dapp manually
-6. User presses back/return button to return to Dapp
+
+5a. Wallet prompts user to return to Dapp manually
+6a. User presses back/return button to return to Dapp
+or
+5b. Wallet automatically returns to Dapp using `WalletConnectRouter`
 
 Similar pattern happens when signing requests are required from the user:
 
 1. Dapp redirects user automatically to previously chosen wallet
 2. Wallet prompts user to approve or reject request
-3. Wallet prompts user to return to Dapp manually
-4. User presses back/return button to return to Dapp
+
+3a. Wallet prompts user to return to Dapp manually
+4a. User presses back/return button to return to Dapp
+or 
+3b. Wallet automatically returns to Dapp using `WalletConnectRouter`
+
 
 
 ## iOS Wallet Support
@@ -30,20 +37,20 @@ We recommend that universal links are used instead of deep links for iOS since t
 
 ```bash
 # For deep links
-examplewallet://wc?uri=wc:00e46b69-d0cc-4b3e-b6a2-cee442f97188@1?bridge=https%3A%2F%2Fbridge.walletconnect.org&key=91303dedf64285cbbaf9120f6e9d160a5c8aa3deb67017a3874cd272323f48ae
+examplewallet://wc?uri=wc:94caa59c77dae0dd234b5818fb7292540d017b27d41f7f387ee75b22b9738c94@2?relay-protocol=iridium&symKey=ce3a2c7724c03cf1769ba8b1bdedad5414cc7b920aa3fb72112b997d1916266f
 
 # For universal links
-https://example.wallet/wc?uri=wc:00e46b69-d0cc-4b3e-b6a2-cee442f97188@1?bridge=https%3A%2F%2Fbridge.walletconnect.org&key=91303dedf64285cbbaf9120f6e9d160a5c8aa3deb67017a3874cd272323f48ae
+https://example.wallet/wc?uri=wc:94caa59c77dae0dd234b5818fb7292540d017b27d41f7f387ee75b22b9738c94@2?relay-protocol=iridium&symKey=ce3a2c7724c03cf1769ba8b1bdedad5414cc7b920aa3fb72112b997d1916266f
 ```
 
 Additionally when there is a signing request triggered by the dapp it will hit the deep link with an incomplete URI, this should be ignored and not considered valid as it's only used for automatically redirecting the users to approve or reject a signing request.
 
 ```bash
 # For deep links
-examplewallet://wc?uri=wc:00e46b69-d0cc-4b3e-b6a2-cee442f97188@1
+examplewallet://wc?uri=wc:00e46b69-d0cc-4b3e-b6a2-cee442f97188@2
 
 # For universal links
-https://example.wallet/wc?uri=wc:00e46b69-d0cc-4b3e-b6a2-cee442f97188@1
+https://example.wallet/wc?uri=wc:00e46b69-d0cc-4b3e-b6a2-cee442f97188@2
 ```
 
 
