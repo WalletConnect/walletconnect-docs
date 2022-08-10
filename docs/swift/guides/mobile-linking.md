@@ -8,7 +8,7 @@ The pattern we chose to adhere for a consistent UX across platforms for connecti
 2. User presses button to connect and is shown a list of iOS compatible wallets
 3. User is redirected to the wallet of choice
 4. Wallet prompts user to approve or reject session
-5. Wallet prompts user to return to Dapp manually
+5. 
 5a. Wallet prompts user to return to Dapp manually
 5b. Wallet automatically returns to Dapp using `WalletConnectRouter`
 6.
