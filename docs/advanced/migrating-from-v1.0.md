@@ -2,6 +2,10 @@
 
 WalletConnect v1.0 and v2.0 offer essentially the same end-user experience however they work very differently internally. This means that developers will have to consider different APIs and SDKs. Additionally some UX considerations need to be made when integration v2.0
 
+## Javascript
+
+We recommend you install v1 and v2 together for maximum compatbility.  To support both versions without dependency conflicts, use `@walletconnect/legacy-client@2.0.0-rc.0`.
+
 ## Migration schedule
 
 WalletConnect v2.0 is **NOT** backwards-compatible with v1.0. Therefore we must coordinate a migration schedule to ensure end-users do not suffer from this transition.
