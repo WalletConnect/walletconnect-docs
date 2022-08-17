@@ -1,9 +1,13 @@
 # Dapp Usage
 
+### Relay client
+
+Make sure what you properly configure Relay Client first [Relay Configuration](https://github.com/WalletConnect/walletconnect-docs/blob/main/docs/swift/relay/relay-setup.md)
+
 ### Instantiate a client
 
-Create an AppMetadata object first. It will describe your application and define its appearance in a web browser.
-Then configure `Sign` instance with a metadata object you have instantiated and set a project ID generated when starting a project on WalletConnect Cloud.
+Create an AppMetadata object. It will describe your application and define its appearance in a web browser.
+Then configure `Sign` instance with a metadata object you have instantiated.
 
 Note that you want to have only one instance of a client in your app, and you don’t want to deinitialize that instance.
 
@@ -13,7 +17,7 @@ let metadata = AppMetadata(name: <String>,
                            url: <String>,
                            icons: <[String]>)
 
-Sign.configure(Sign.Config(metadata: <AppMetadata>, projectId: <String>))
+Sign.configure(metadata: <AppMetadata>)
 ```
 
 ### Subscribe for Sign publishers
