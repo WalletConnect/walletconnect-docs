@@ -30,7 +30,7 @@ const signClient = await SignClient.init({
 });
 ```
 
-# Migrating from v1.x
+## Migrating from v1.x
 
 We recommend you install v1 and v2 together for maximum compatbility. To support both versions without dependency conflicts, use the v1 version `@walletconnect/legacy-client@2.0.0-rc.0`.
 
