@@ -29,9 +29,3 @@ const signClient = await SignClient.init({
   projectId: "<YOUR_PROJECT_ID>",
 });
 ```
-
-## Migrating from v1.x
-
-We recommend you install v1 and v2 together for maximum compatbility. To support both versions without dependency conflicts, use the v1 version `@walletconnect/legacy-client@2.0.0-rc.0`.
-
-For more information check our [migration guide](../../advanced/migrating-from-v1.0.md).

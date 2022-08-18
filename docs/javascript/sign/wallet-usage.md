@@ -8,6 +8,12 @@ Sign API establishes a session between a wallet and a dapp in order to expose a 
 npm install --save @walletconnect/sign-client@rc @walletconnect/types@rc
 ```
 
+## Migrating from v1.x
+
+We recommend you install v1 and v2 together for maximum compatibility. To support both versions without dependency conflicts, use the v1 version `@walletconnect/legacy-client@2.0.0-rc.0`.
+
+For more information check our [migration guide](../../advanced/migrating-from-v1.0.md).
+
 ## Initializing the client
 
 Initialize client as a controller using [your project id](/2.0/introduction/cloud#project-id).
