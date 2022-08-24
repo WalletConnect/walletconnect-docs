@@ -30,7 +30,7 @@ const authClient = await AuthClient.init({
 **2. Add listeners for the `auth_response` event**
 
 ```javascript
-client.once("auth_response", ({params}) => {
+authClient.once("auth_response", ({params}) => {
   isSuccessfulResponse = Boolean(params.result?.signature);
   // Handle successful/unsuccessful response
 });
@@ -39,7 +39,7 @@ client.once("auth_response", ({params}) => {
 **3. Request Authentication**
 
 ```javascript
-const { uri } = await client.request({
+const { uri } = await authClient.request({
   aud: "<FULL_URL_OF_LOGIN_PAGE>",
   domain: "<YOUR_DOMAIN>",
   chainId: "eip155:1",
