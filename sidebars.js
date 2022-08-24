@@ -51,7 +51,11 @@ module.exports = {
         {
           type: "category",
           label: "Auth",
-          items: ["javascript/auth/installation"],
+          items: [
+            "javascript/auth/installation",
+            "javascript/auth/dapp-usage",
+            "javascript/auth/wallet-usage"
+          ],
         },
         {
           type: "category",
