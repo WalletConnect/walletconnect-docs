@@ -14,7 +14,8 @@ npm install --save @walletconnect/auth-client@rc @walletconnect/types@rc
 ```javascript
 const authClient = await AuthClient.init({
   projectId: "<YOUR_PROJECT_ID>",
-  storageOptions: {
+  // storageOptions is an optional property, not a must to specify.
+  storageOptions: { 
     database: ":memory:"
   },
   iss: `did:pkh:eip155:1:<WALLET_ADDRESS>`
