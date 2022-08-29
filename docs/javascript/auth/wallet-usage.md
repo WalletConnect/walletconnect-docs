@@ -12,7 +12,7 @@ authenticate a user based on their wallet using JSON-RPC.
 ## Install
 
 ```bash npm2yarn
-npm install --save @walletconnect/auth-client@rc @walletconnect/types@rc
+npm install --save @walletconnect/auth-client @walletconnect/types@rc
 ```
 
 ## Initialize the client
@@ -32,9 +32,9 @@ const authClient = await AuthClient.init({
 
 ```javascript
 authClient.once("auth_request", async (args) => {
-  // Naturally this is a good point to trigger a UI event to give the user
-  // like a button to accept or reject the authentication request
-  // instead of automatically responding
+  // This is a good point to trigger a UI event to provide the user
+  // with a button to accept or reject the authentication request,
+  // instead of automatically responding.
   const signature = await wallet.signMessage(args.params.message);
   await authClient.respond({
     id: args.id,
@@ -48,7 +48,7 @@ authClient.once("auth_request", async (args) => {
 
 ## Scan QR Code
 
-Once a QR code is scanned, pairing must be established using the URI embedded.
+Once a QR code is scanned, a pairing must be established using the embedded URI.
 This is what allows the `auth_request` events to be received.
 
 ```javascript
