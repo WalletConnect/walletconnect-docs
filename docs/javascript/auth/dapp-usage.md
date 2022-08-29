@@ -15,12 +15,12 @@ This library is compatible with NodeJS, browsers and React-Native applications \
 ## Installation
 
 ```bash npm2yarn
-npm install --save @walletconnect/auth-client@rc @walletconnect/types@rc
+npm install --save @walletconnect/auth-client @walletconnect/types@rc
 ```
 
 ## Request Authentication
 
-**1. Initiate your WalletConnect auth client with the relay server, using [your Project ID](../../introduction/cloud.md#project-id).**
+**1. Initiate your WalletConnect AuthClient with the relay server, using [your Project ID](../../introduction/cloud.md#project-id).**
 
 ```javascript
 import AuthClient from "@walletconnect/auth-client";
