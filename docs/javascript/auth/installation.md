@@ -25,7 +25,7 @@ Initialize client by passing `projectId` we created before.
 ```javascript
 import AuthClient from "@walletconnect/auth-client";
 
-const signClient = await AuthClient.init({
+const authClient = await AuthClient.init({
   projectId: "<YOUR_PROJECT_ID>",
 });
 ```
