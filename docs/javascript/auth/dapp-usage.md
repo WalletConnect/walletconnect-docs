@@ -15,7 +15,8 @@ This library is compatible with NodeJS, browsers and React-Native applications \
 ## Installation
 
 ```bash npm2yarn
-npm install --save @walletconnect/auth-client @walletconnect/types@rc
+npm install --save @walletconnect/auth-client
+npm install --save-dev @walletconnect/types@rc
 ```
 
 ## Request Authentication

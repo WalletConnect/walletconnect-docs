@@ -12,7 +12,8 @@ authenticate a user based on their wallet using JSON-RPC.
 ## Install
 
 ```bash npm2yarn
-npm install --save @walletconnect/auth-client @walletconnect/types@rc
+npm install --save @walletconnect/auth-client
+npm install --save-dev @walletconnect/types@rc
 ```
 
 ## Initialize the client
