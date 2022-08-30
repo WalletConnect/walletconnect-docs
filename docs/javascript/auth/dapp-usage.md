@@ -4,33 +4,40 @@ description: Quick Start For Dapps using Auth Client
 
 # Dapp Usage
 
+:::caution
+**The WalletConnect Auth SDK is currently in early Alpha and is not production-ready**.
+
+Its public API and associated documentation may still see significant and breaking changes.
+:::
+
 This library is compatible with NodeJS, browsers and React-Native applications \(NodeJS modules require polyfills for React-Native\).
 
 ## Installation
 
 ```bash npm2yarn
-npm install --save @walletconnect/auth-client@rc @walletconnect/types@rc
+npm install --save @walletconnect/auth-client
+npm install --save-dev @walletconnect/types@rc
 ```
 
 ## Request Authentication
 
-**1. Initiate your WalletConnect auth client with the relay server, using [your Project ID](../../introduction/cloud.md#project-id).**
+**1. Initiate your WalletConnect AuthClient with the relay server, using [your Project ID](../../introduction/cloud.md#project-id).**
 
 ```javascript
-import AuthClient from "@walletconnect/auth-client"
+import AuthClient from "@walletconnect/auth-client";
 
 const authClient = await AuthClient.init({
   projectId: "<YOUR_PROJECT_ID>",
   storageOptions: {
-    database: ":memory:"
-  }
-})
+    database: ":memory:",
+  },
+});
 ```
 
 **2. Add listeners for the `auth_response` event**
 
 ```javascript
-authClient.once("auth_response", ({params}) => {
+authClient.once("auth_response", ({ params }) => {
   isSuccessfulResponse = Boolean(params.result?.signature);
   // Handle successful/unsuccessful response
 });
@@ -58,4 +65,3 @@ if (uri) {
   });
 }
 ```
-

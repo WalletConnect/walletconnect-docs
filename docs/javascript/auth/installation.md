@@ -1,8 +1,14 @@
 # Installation
 
+:::caution
+**The WalletConnect Auth SDK is currently in early Alpha and is not production-ready**.
+
+Its public API and associated documentation may still see significant and breaking changes.
+:::
+
 ## 1. Obtain Project ID
 
-Head over to [WalletConnect Cloud](https://cloud.walletconnect.com/) to sign in or sign up. Create (or use an existing) project and copy its associated project id. We will need this in a latter step.
+Head over to [WalletConnect Cloud](https://cloud.walletconnect.com/) to sign in or sign up. Create (or use an existing) project and copy its associated Project ID. We will need this in a later step.
 
 ## 2. Install Packages
 
@@ -15,7 +21,7 @@ For platform-specific instructions, refer to our [React Native](../guides/react-
 :::
 
 ```bash npm2yarn
-npm install --save @walletconnect/auth-client@rc
+npm install --save @walletconnect/auth-client
 ```
 
 ## 3. Initialize Client
@@ -25,7 +31,7 @@ Initialize client by passing `projectId` we created before.
 ```javascript
 import AuthClient from "@walletconnect/auth-client";
 
-const signClient = await AuthClient.init({
+const authClient = await AuthClient.init({
   projectId: "<YOUR_PROJECT_ID>",
 });
 ```
