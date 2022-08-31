@@ -56,7 +56,7 @@ let signature = try signer.sign(message: request.message, privateKey: privateKey
 try await Auth.instance.respond(requestId: request.id, signature: signature)
 ```
 
-Nn case user rejects an authentication request, call:
+In case user rejects an authentication request, call:
 ```swift
 try await Auth.instance.reject(requestId: request.id)
 ```
