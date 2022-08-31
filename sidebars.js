@@ -107,6 +107,8 @@ module.exports = {
           type: "category",
           label: "Auth",
           items: ["swift/auth/installation"],
+          items: ["swift/auth/wallet-usage"],
+          items: ["swift/auth/app-usage"],
         },
         {
           type: "category",
