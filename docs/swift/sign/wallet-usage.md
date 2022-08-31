@@ -176,15 +176,6 @@ For good user experience your wallet should allow users to disconnect unwanted s
 ```swift
 try await Sign.instance.disconnect(topic: session.topic, reason: reason)
 ```
-### Web Socket Connection
-By default web socket connection is handled internally by the SDK. That means that Web socket will be safely disconnected when apps go to background and it will connect back when app reaches foreground. But if it is not expeted for your app and you want to handle socket connection manually you can do it as follows:
-
-1. set socketConnectionType in an Sign instance config for manual  
-```swift
-Sign.Config(metadata: metadata, projectId: "", socketConnectionType: .manual)
-```  
-3. control socket connection:  
-```relayClient.connect()```
 
 ### Where to go from here
 - Try our example wallet implementation that is part of WalletConnectSwiftV2 repository.
