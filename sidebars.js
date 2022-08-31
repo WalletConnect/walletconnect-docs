@@ -109,7 +109,8 @@ module.exports = {
           items: [
             "swift/auth/installation",
             "swift/auth/wallet-usage",
-            "swift/auth/app-usage"],
+            "swift/auth/app-usage",
+          ],
         },
         {
           type: "category",
@@ -121,7 +122,8 @@ module.exports = {
           label: "Relay",
           items: [
             "swift/relay/installation",
-            "swift/relay/usage"],
+            "swift/relay/usage",
+          ],
         },
         {
           type: "category",
