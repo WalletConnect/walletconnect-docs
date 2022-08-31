@@ -1,4 +1,5 @@
-# Relay Configuration
+# Relay Usage
+Relay client provides transport layer for Sign, Auth and Chat SDKs. You can configure it once and every SDK will transport protocol messages via same instance of a relay client with only one opened websocket connection.
 
 ### Setup Relay client
 
