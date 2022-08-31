@@ -117,6 +117,12 @@ module.exports = {
         },
         {
           type: "category",
+          label: "Relay",
+          items: ["swift/relay/installation"],
+          items: ["swift/relay/usage"],
+        },
+        {
+          type: "category",
           label: "Push",
           items: ["swift/push/installation"],
         },
