@@ -106,12 +106,24 @@ module.exports = {
         {
           type: "category",
           label: "Auth",
-          items: ["swift/auth/installation"],
+          items: [
+            "swift/auth/installation",
+            "swift/auth/wallet-usage",
+            "swift/auth/app-usage",
+          ],
         },
         {
           type: "category",
           label: "Chat",
           items: ["swift/chat/installation"],
+        },
+        {
+          type: "category",
+          label: "Relay",
+          items: [
+            "swift/relay/installation",
+            "swift/relay/usage",
+          ],
         },
         {
           type: "category",
