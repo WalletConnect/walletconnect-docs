@@ -45,3 +45,41 @@ Following publishers are available to subscribe:
     public var sessionEventPublisher: AnyPublisher<(event: Session.Event, sessionTopic: String, chainId: Blockchain?), Never> 
     public var sessionUpdateExpiryPublisher: AnyPublisher<(sessionTopic: String, expiry: Date), Never> 
 ```
+
+### Connect Clients
+
+1. Prepare namespaces that constraints minimal requirements for your dApp:
+```Swift
+let methods: Set<String> = ["eth_sendTransaction", "personal_sign", "eth_signTypedData"]
+let blockchains: Set<Blockchain> = [Blockchain("eip155:1")!, Blockchain("eip155:137")!]
+let namespaces: [String: ProposalNamespace] = ["eip155": ProposalNamespace(chains: blockchains, methods: methods, events: [], extensions: nil)]
+``` 
+to learn more on namespaces, check out our [specs]("https://github.com/WalletConnect/walletconnect-specs/blob/main/sign/session-namespaces.md")
+
+2. Your App should generate a pairing uri and share it with a wallet. Uri can be presented as QR code or sent via universal link. Wallet after receiving uri begins subscribing for session proposals. In order to create pairing and send session proposal you need to call only one method:
+
+```Swift
+let uri = try await Sign.instance.connect(requiredNamespaces: namespaces)
+```
+or if the pairing already exists to just send a session proposal call:
+
+```Swift
+let _ = try await Sign.instance.connect(requiredNamespaces: namespaces, topic: existingPairingTopic)
+```
+
+### Send Request to the Wallet
+
+Once the session has been established `sessionSettlePublisher` will publish an event. Your dApp can start requesting wallet now.
+
+```Swift
+let method = "personal_sign"
+let requestParams = AnyCodable(["0x4d7920656d61696c206973206a6f686e40646f652e636f6d202d2031363533333933373535313531", "0x9b2055d370f73ec7d8a03e965129118dc8f5bf83"])
+let request = Request(topic: session.topic, method: method, params: requestParams, chainId: Blockchain(chainId)!)
+try await Sign.instance.request(params: request)
+```
+
+When wallet respond `sessionResponsePublisher` will publish an event so you can verify the response.
+
+### Where to go from here
+- Try our Example dApp that is part of WalletConnectSwiftV2 repository.
+- Build API documentation in XCode: go to Product -> Build Documentation
