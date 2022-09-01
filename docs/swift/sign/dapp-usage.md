@@ -2,7 +2,7 @@
 
 ### Relay client
 
-Make sure what you properly configure Relay Client first [Relay Configuration](https://github.com/WalletConnect/walletconnect-docs/blob/main/docs/swift/relay/relay-setup.md)
+Make sure what you properly configure Relay Client first [Relay Configuration](https://docs.walletconnect.com/2.0/swift/relay/usage#relay-client-configuration)
 
 ### Instantiate a client
 

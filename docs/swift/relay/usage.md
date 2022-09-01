@@ -21,7 +21,7 @@ struct SocketFactory: WebSocketFactory {
 }
 ```
 
-Relay client configuration 
+### Relay client configuration 
 
 ```swift
 Relay.configure(projectId: <String>, socketFactory: SocketFactory())
