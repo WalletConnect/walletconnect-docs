@@ -3,9 +3,9 @@ Relay client provides transport layer for Sign, Auth and Chat SDKs. You can conf
 
 ### Setup Relay client
 
-Before Sign SDK usage necessary to configure shared Relay instance. Set a project ID generated when starting a project on WalletConnect Cloud and SocketFactory instance.
-touch 
-WalletConnect Swift SDK no more depends on 3rd party websocket library. SocketFactory parameter allows you to pass your own implementation of websocket connection.
+Before using Sign or Auth SDK it is necessary to configure shared Relay Client instance. Set a project ID generated when starting a project on WalletConnect Cloud and SocketFactory instance.
+
+WalletConnect Swift SDK does not depend on any websocket library. SocketFactory parameter allows you to pass your own implementation of websocket connection.
 
 Here's an example of WebSocketFactory implementation using Starscream v3
 
@@ -21,7 +21,7 @@ struct SocketFactory: WebSocketFactory {
 }
 ```
 
-Relay client configuration 
+### Relay client configuration 
 
 ```swift
 Relay.configure(projectId: <String>, socketFactory: SocketFactory())
@@ -37,4 +37,7 @@ Relay.configure(projectId: <String>, socketFactory: SocketFactory(), socketConne
 2. control socket connection:  
 ```swift
 try Relay.instance.connect()
+```
+```swift
+try Relay.instance.disconnect()
 ```

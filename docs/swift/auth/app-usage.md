@@ -2,8 +2,7 @@
 
 ### Relay client
 
-Make sure what you properly configure Relay Client first [Relay Configuration](https://github.com/WalletConnect/walletconnect-docs/blob/main/docs/swift/relay/relay-setup.md)
-
+Make sure what you properly configure Relay Client first [Relay Configuration](../relay/usage#relay-client-configuration)
 ### Instantiate a client
 
 Create an AppMetadata object. It will describe your application and define its appearance in a wallet.
