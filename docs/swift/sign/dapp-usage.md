@@ -54,7 +54,7 @@ let methods: Set<String> = ["eth_sendTransaction", "personal_sign", "eth_signTyp
 let blockchains: Set<Blockchain> = [Blockchain("eip155:1")!, Blockchain("eip155:137")!]
 let namespaces: [String: ProposalNamespace] = ["eip155": ProposalNamespace(chains: blockchains, methods: methods, events: [], extensions: nil)]
 ``` 
-to learn more on namespaces, check out our [specs]("https://github.com/WalletConnect/walletconnect-specs/blob/main/sign/session-namespaces.md")
+to learn more on namespaces, check out our [specs](https://github.com/WalletConnect/walletconnect-specs/blob/main/sign/session-namespaces.md)
 
 2. Your App should generate a pairing uri and share it with a wallet. Uri can be presented as QR code or sent via universal link. Wallet after receiving uri begins subscribing for session proposals. In order to create pairing and send session proposal you need to call only one method:
 
