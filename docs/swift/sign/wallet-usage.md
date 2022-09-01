@@ -2,8 +2,7 @@
 
 ### Relay client
 
-Make sure what you properly configure Relay Client first [Relay Configuration](https://docs.walletconnect.com/2.0/swift/relay/usage#relay-client-configuration)
-
+Make sure what you properly configure Relay Client first [Relay Configuration](../relay/usage#relay-client-configuration)
 ### Instantiate a client
 
 Create an AppMetadata object. It will describe your application and define its appearance in a web browser.
