@@ -121,7 +121,10 @@ module.exports = {
         {
           type: "category",
           label: "Guides",
-          items: ["swift/guides/mobile-linking"],
+          items: [
+            "swift/guides/mobile-linking",
+            "swift/router/installation",
+          ],
         },
       ],
     },
