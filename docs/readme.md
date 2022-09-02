@@ -11,10 +11,10 @@ WalletConnect is the decentralized Web3 messaging layer and a standard to connec
 
 WalletConnect comprises four core components and associated SDKs:
 
-- [Sign](introduction/sign.md) - a remote signer protocol to communicate securely between web3 wallets and dapps.
-- [Auth](introduction/auth.md) - a authentication protocol to login wallets users into web applications. 
-- [Chat](introduction/chat.md) - a direct messaging protocol that will allow wallets to message each other.
-- [Push](introduction/push.md) - a push notification protocol to allow apps to notify users of both off-chain and on-chain events.
+- [Sign](sign/quickstart.md) - a remote signer protocol to communicate securely between web3 wallets and dapps.
+- [Auth](auth/auth.md) - a authentication protocol to login wallets users into web applications. 
+- [Chat](chat/chat.md) - a direct messaging protocol that will allow wallets to message each other.
+- [Push](push/push.md) - a push notification protocol to allow apps to notify users of both off-chain and on-chain events.
 
 ## Why use WalletConnect?
 

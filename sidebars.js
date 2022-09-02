@@ -35,20 +35,18 @@ module.exports = {
           type: "category",
           label: "Auth",
           items: [
-            "old/javascript/auth/installation",
-            "old/javascript/auth/dapp-usage",
-            "old/javascript/auth/wallet-usage"
+            "auth/auth",
           ],
         },
         {
           type: "category",
           label: "Chat",
-          items: ["old/javascript/chat/installation"],
+          items: ["chat/chat"],
         },
         {
           type: "category",
           label: "Push",
-          items: ["old/javascript/push/installation"],
+          items: ["push/push"],
         },
         // {
         //   type: "category",

@@ -7,7 +7,3 @@ WalletConnect Push is a push notification protocol that enables apps to notify u
 ## Getting Started
 
 There are getting started guides for the following clients platforms:
-
-- [Web - Javascript](../javascript/push/installation.md)
-- [iOS - Swift](../swift/push/installation.md)
-- [Android - Kotlin](../kotlin/push/installation.md)

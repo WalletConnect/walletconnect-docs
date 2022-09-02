@@ -14,7 +14,7 @@ npm install --save @walletconnect/sign-client@rc @walletconnect/types@rc
 
 ## Create a Session
 
-**1. Initiate your WalletConnect client with the relay server, using [your Project ID](../../introduction/cloud.md#project-id).**
+**1. Initiate your WalletConnect client with the relay server, using [your Project ID](../other/cloud.md#project-id).**
 
 ```javascript
 import SignClient from "@walletconnect/sign-client";
@@ -117,4 +117,4 @@ const result = await client.request({
 });
 ```
 
-> For more information on available JSON-RPC requests, see the [JSON-RPC reference](../../advanced/rpc-reference/ethereum-rpc.md).
+> For more information on available JSON-RPC requests, see the [JSON-RPC reference](../advanced/rpc-reference/ethereum-rpc.md).

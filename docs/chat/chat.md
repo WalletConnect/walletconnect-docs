@@ -8,8 +8,4 @@ WalletConnect Chat is a direct messaging protocol that can enable wallets to mes
 
 There are getting started guides for the following clients platforms:
 
-- [Web - Javascript](../javascript/chat/installation.md)
-- [iOS - Swift](../swift/chat/installation.md)
-- [Android - Kotlin](../kotlin/chat/installation.md)
-
 

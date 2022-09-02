@@ -8,7 +8,3 @@ WalletConnect Auth is an authentication protocol that can be used to login block
 
 There are getting started guides for the following clients platforms:
 
-- [Web - Javascript](../javascript/auth/installation.md)
-- [iOS - Swift](../swift/auth/installation.md)
-- [Android - Kotlin](../kotlin/auth/installation.md)
-
