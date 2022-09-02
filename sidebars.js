@@ -25,7 +25,7 @@ module.exports = {
           type: "category",
           label: "Sign",
           items: [
-            "sign/sign",
+            "sign/quickstart",
             "sign/installation",
             "sign/wallet-usage",
             "sign/dapp-usage-standalone-client",
