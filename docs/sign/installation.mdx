@@ -1,0 +1,91 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# Installation
+
+## Obtain Project ID
+
+Head over to [WalletConnect Cloud](https://cloud.walletconnect.com/) to sign in or sign up. Create (or use an existing) project and copy its associated project id. We will need this in a latter step.
+
+## Install 
+
+
+
+
+
+<Tabs groupId="platform">
+<TabItem value="js" label="JS">
+
+
+
+:::info
+For additional type packages refer to our [TypeScript Guide](../old/javascript/guides/typescript).
+
+For platform-specific instructions, refer to our [React Native](../old/javasscript/guides/react-native) and [Node.js](../guides/nodejs.md) guides.
+:::
+
+
+```bash
+npm install --save @walletconnect/sign-client@rc
+```
+
+## Initialize Client
+
+Initialize client by passing `projectId` we created before.
+
+```js
+import SignClient from "@walletconnect/sign-client";
+
+const signClient = await SignClient.init({
+projectId: "<YOUR_PROJECT_ID>",
+});
+```
+
+</TabItem>
+<TabItem value="swift" label="Swift">
+
+You can add a WalletConnect SDK to your project with Swift Package Manager. In order to do that:
+
+1. Open XCode
+2. Go to File -> Add Packages
+3. Paste the repo GitHub url: https://github.com/WalletConnect/WalletConnectSwiftV2
+4. Tap Add Package
+5. Select WalletConnect check mark
+
+
+</TabItem>
+<TabItem value="kotlin" label="Kotlin">
+
+
+[![](https://jitpack.io/v/WalletConnect/WalletConnectKotlinV2.svg)](https://jitpack.io/#WalletConnect/WalletConnectKotlinV2)
+
+## Requirements
+
+* Android min SDK 23
+* Java 11
+
+## Installation
+
+root/build.gradle.kts:
+
+```kotlin
+allprojects {
+repositories {
+maven(url = "https://jitpack.io")
+}
+}
+```
+
+app/build.gradle
+
+```kotlin
+implementation("com.walletconnect:WalletConnectKotlinV2:release_version")
+```
+
+
+</TabItem>
+</Tabs>
+
+
+
+

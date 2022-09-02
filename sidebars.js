@@ -10,177 +10,79 @@ module.exports = {
       className: "menu_outer_list",
       collapsible: false,
       items: [
-        "about",
-        {
-          type: "category",
-          label: "Our SDKs",
-          collapsed: false,
-          items: [
-            "introduction/sign",
-            "introduction/auth",
-            "introduction/chat",
-            "introduction/push",
-          ],
-        },
-        {
-          type: "category",
-          label: "Our Projects",
-          collapsed: false,
-          items: ["introduction/cloud", "introduction/cloud-explorer"],
-        },
-        "introduction/examples-and-resources",
-        "introduction/glossary",
-      ],
-    },
+        "readme",
+
+
 
     {
       type: "category",
-      label: "Web - JavaScript",
+      label: "SDKs",
       collapsible: true,
+      collapsible: false,
       className: "menu_outer_list",
       items: [
         {
           type: "category",
           label: "Sign",
           items: [
-            "javascript/sign/installation",
-            "javascript/sign/wallet-usage",
-            "javascript/sign/dapp-usage-standalone-client",
+            "sign/sign",
+            "sign/installation",
+            "sign/wallet-usage",
+            "sign/dapp-usage-standalone-client",
           ],
         },
         {
           type: "category",
           label: "Auth",
           items: [
-            "javascript/auth/installation",
-            "javascript/auth/dapp-usage",
-            "javascript/auth/wallet-usage"
+            "old/javascript/auth/installation",
+            "old/javascript/auth/dapp-usage",
+            "old/javascript/auth/wallet-usage"
           ],
         },
         {
           type: "category",
           label: "Chat",
-          items: ["javascript/chat/installation"],
+          items: ["old/javascript/chat/installation"],
         },
         {
           type: "category",
           label: "Push",
-          items: ["javascript/push/installation"],
+          items: ["old/javascript/push/installation"],
         },
-        {
-          type: "category",
-          label: "Providers",
-          items: [
-            "javascript/providers/ethereum",
-            "javascript/providers/cosmos",
-            "javascript/providers/solana",
-          ],
-        },
-        {
-          type: "category",
-          label: "Guides",
-          items: [
-            "javascript/guides/typescript",
-            "javascript/guides/react-native",
-            "javascript/guides/nodejs",
-          ],
-        },
+        // {
+        //   type: "category",
+        //   label: "Providers",
+        //   items: [
+        //     "old/javascript/providers/ethereum",
+        //     "old/javascript/providers/cosmos",
+        //     "old/javascript/providers/solana",
+        //   ],
+        // },
+        // {
+        //   type: "category",
+        //   label: "Guides",
+        //   items: [
+        //     "old/javascript/guides/typescript",
+        //     "old/javascript/guides/react-native",
+        //     "old/javascript/guides/nodejs",
+        //   ],
+        // },
       ],
     },
 
-    {
-      type: "category",
-      label: "iOS - Swift",
-      collapsible: true,
-      className: "menu_outer_list",
-      items: [
-        {
-          type: "category",
-          label: "Sign",
-          items: [
-            "swift/sign/installation",
-            "swift/sign/wallet-usage",
-            "swift/sign/dapp-usage",
-          ],
-        },
-        {
-          type: "category",
-          label: "Auth",
-          items: [
-            "swift/auth/installation",
-            "swift/auth/wallet-usage",
-            "swift/auth/app-usage",
-          ],
-        },
-        {
-          type: "category",
-          label: "Chat",
-          items: ["swift/chat/installation"],
-        },
-        {
-          type: "category",
-          label: "Relay",
-          items: [
-            "swift/relay/installation",
-            "swift/relay/usage",
-          ],
-        },
-        {
-          type: "category",
-          label: "Push",
-          items: ["swift/push/installation"],
-        },
-        {
-          type: "category",
-          label: "Relay",
-          items: ["swift/relay/relay-setup"],
-        },
-        {
-          type: "category",
-          label: "Guides",
-          items: [
-            "swift/guides/mobile-linking",
-            "swift/router/installation",
-          ],
-        },
-      ],
-    },
 
     {
       type: "category",
-      label: "Android - Kotlin",
-      collapsible: true,
-      className: "menu_outer_list",
+      label: "Our Projects",
+      collapsed: false,
       items: [
-        {
-          type: "category",
-          label: "Sign",
-          items: [
-            "kotlin/sign/installation",
-            "kotlin/sign/wallet-usage",
-            "kotlin/sign/dapp-usage",
-          ],
-        },
-        {
-          type: "category",
-          label: "Auth",
-          items: ["kotlin/auth/installation"],
-        },
-        {
-          type: "category",
-          label: "Chat",
-          items: ["kotlin/chat/installation"],
-        },
-        {
-          type: "category",
-          label: "Push",
-          items: ["kotlin/push/installation"],
-        },
-        {
-          type: "category",
-          label: "Guides",
-          items: ["kotlin/guides/mobile-linking"],
-        },
+        "other/cloud", 
+        "other/cloud-explorer"
+      ],
+    },
+    "other/examples-and-resources",
+    "other/glossary",
       ],
     },
 
