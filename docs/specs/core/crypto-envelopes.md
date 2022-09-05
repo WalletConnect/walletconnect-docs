@@ -1,4 +1,4 @@
-# Typed Envelopes
+# Crypto Typed Envelopes
 
 Typed envelopes purpose is to provide flexible and future proof jsonrpc serialization methods. All WalletConnect protocols requests should use one of the following envelope serialization types.
 

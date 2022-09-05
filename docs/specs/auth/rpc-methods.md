@@ -63,3 +63,69 @@ Parameters for request and response are compliant with [CAIP-74](https://github.
 | Prompt  | false    |
 | Tag     | 3001     |
 ```
+
+
+### wc_pairingDelete
+
+Used to inform the peer to close and delete a pairing. The associated authentication state of the given pairing must also be deleted.
+
+**Request**
+
+```jsonc
+// wc_pairingDelete params
+{
+  "code": Int64,
+  "message": string
+}
+
+| IRN     |          |
+| ------- | -------- |
+| TTL     | 86400    |
+| Prompt  | false    |
+| Tag     | 1000     |
+```
+
+**Response**
+
+```jsonc
+// Success result
+true
+
+| IRN     |          |
+| ------- | -------- |
+| TTL     | 86400    |
+| Prompt  | false    |
+| Tag     | 1001     |
+```
+
+### wc_pairingPing
+
+Used to evaluate if peer is currently online. Timeout at 30 seconds
+
+**Request**
+
+```jsonc
+// wc_pairingPing params
+{
+  // empty
+}
+
+| IRN     |          |
+| ------- | -------- |
+| TTL     | 30       |
+| Prompt  | false    |
+| Tag     | 1002     |
+```
+
+**Response**
+
+```jsonc
+// Success result
+true
+
+| IRN     |          |
+| ------- | -------- |
+| TTL     | 30       |
+| Prompt  | false    |
+| Tag     | 1003     |
+```

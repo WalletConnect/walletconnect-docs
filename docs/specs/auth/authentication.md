@@ -18,11 +18,12 @@ User returns to a previously visited website before authentication expiry
 User returns to a previously visited website after authentication expiry
 
 1. Website checks if user is authenticated from local storage
-2. Website sends new request to previously paired wallet
-3. User is prompted/redirected to wallet
-4. User approves prompt for auth in wallet
-5. User returns to website after prompt success
-6. Website is now authenticated with signed message
+2. Website generates new keypair and derives a new response topic from it
+3. Website sends new request to previously paired wallet, using known pairing topic, but subscribes to new response topic
+4. User is prompted/redirected to wallet
+5. User approves prompt for auth in wallet, wallet responds on the new response topic
+6. User returns to website after prompt success
+7. Website is now authenticated with signed message
 
 ## Request Protocol
 

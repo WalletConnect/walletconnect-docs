@@ -42,15 +42,13 @@ In this repository, we document and discuss features that are currently under de
 
 - Push Overview ([doc](push/README.md))
 
-### Relay
+### Core
 
-- Relay Overview ([doc](relay/README.md))
-- Relay Client ([doc](relay/relay-client.md))
-- Relay Server ([doc](relay/relay-server.md))
-- Client Auth ([doc](relay/client-auth.md))
-- User Agent ([doc](relay/user-agent.md))
-
-### Crypto
-
-- Crypto Overview ([doc](crypto/README.md))
-- Typed Envelopes ([doc](crypto/envelopes.md))
+- Core Overview ([doc](core/README.md))
+- Relay Client ([doc](core/relay-client.md))
+- Relay Server ([doc](core/relay-server.md))
+- Relay Client Auth ([doc](core/relay-clientauth.md))
+- Relay User Agent ([doc](core/relay-useragent.md))
+- Crypto API ([doc](core/crypto-api.md))
+- Crypto Envelopes ([doc](core/crypto-envelopes.md))
+- Storage API ([doc](core/storage-api.md))
