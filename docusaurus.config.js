@@ -69,7 +69,7 @@ const config = {
             position: "left",
           },
           {
-            href: "https://github.com/walletconnect/walletconnect-specs",
+            href: "/2.0/specs",
             position: "left",
             label: "Specs",
           },
