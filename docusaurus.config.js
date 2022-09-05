@@ -150,6 +150,14 @@ const config = {
         indexName: "walletconnect",
         contextualSearch: true,
       },
+      announcementBar: {
+        id: 'support_us',
+        content:
+          '⚠️ Getting started? For dapps, use <a rel="noopener noreferrer" href="/">v1</a>.  For wallets, use both <a rel="noopener noreferrer" href="/">v1</a> and <a rel="noopener noreferrer" href="/2.0/">v2</a> together. <a rel="noopener noreferrer" href="/2.0/advanced/migrating-from-v1.0">Learn more.</a>',
+        backgroundColor: '#3182ce',
+        textColor: '#fff',
+        isCloseable: true,
+      },
     },
 };
 
