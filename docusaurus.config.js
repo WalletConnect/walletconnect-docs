@@ -81,7 +81,8 @@ const config = {
           {
             href: "https://github.com/walletconnect/",
             position: "right",
-            label: "GitHub",
+            className: 'header-github-link',
+            'aria-label': 'GitHub repository',
           },
         ],
       },
