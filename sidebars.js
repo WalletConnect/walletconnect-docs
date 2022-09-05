@@ -132,11 +132,6 @@ module.exports = {
         },
         {
           type: "category",
-          label: "Relay",
-          items: ["swift/relay/relay-setup"],
-        },
-        {
-          type: "category",
           label: "Guides",
           items: [
             "swift/guides/mobile-linking",
