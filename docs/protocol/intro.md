@@ -107,7 +107,7 @@ Since DApp-Wallet(DW) protocol messages are tunneled through Relay servers, this
 
 ## V2 Out-of-band URI Format
 V2 out-of-band URI format is 
-`wc:topic@version?<UriParameters>` where the [UriParameters](./tech-spec.md#pairing-signal) are url encoded similar to query URL parameters. For example, a Wallet Connect out-of-band URI with expanded URL results to 
+`wc:topic@version?<UriParameters>` where the [UriParameters](./tech-spec.md#pairing-signal) are URL encoded similar to query URL parameters. For example, a Wallet Connect out-of-band URI with expanded URL results to 
 ```
 wc:<256_BIT_TOPIC>@2?publicKey=<X25519_PUBLIC_KEY>&relay={"protocol":"waku"}&controller=<BOOLEAN>
 ```
