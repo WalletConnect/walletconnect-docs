@@ -5,7 +5,7 @@
 
 Communication between DApp and Wallets occur through a relay server (known as bridge in v1) (see [architecture](./tech-spec.md#architecture)).
 To communicate through the server in a secure way,
-DApps and wallet share an out-of-band URI which contains information;
+DApps and wallet share an out-of-band URI which contains information:
 - used to identify the communication channel/topic to subscribe to.
 - which helps to setup the secure tunnel over the channel. Once the secure channel is setup, management and configuration information can be sent and received between DApps and wallets.
 
