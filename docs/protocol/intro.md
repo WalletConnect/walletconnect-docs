@@ -60,7 +60,7 @@ These are JSON objects that are used to communicate with the Relay server. The r
 }
 ```
 
-Since DApp-Wallet(DW) protocol messages are tunneled through Relay servers, this means Relay messages wraps DW messages before being tunneled over a relay server to the other party. Using the examples above, a complete message sent from one party to the other - Wallet to DApp - in this example, will look like:
+Since DApp-Wallet(DW) protocol messages are tunneled through Relay servers, this means Relay messages wrap DW messages before being tunneled over a relay server to the other party. Using the examples above, a complete message sent from one party to the other - Wallet to DApp - in this example, will look like:
 
 ```json
 { // --- WakuSubscriptionRequest
