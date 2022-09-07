@@ -65,14 +65,15 @@ const config = {
         },
         items: [
           {
-            type: 'doc',
-            position: 'left',
-            docId: 'readme',
-            label: 'Docs',
+            type: "doc",
+            position: "left",
+            docId: "readme",
+            label: "Docs",
           },
           {
-            href: "/2.0/specs",
+            type: "doc",
             position: "left",
+            docId: "specs/readme",
             label: "Specs",
           },
           {
