@@ -126,4 +126,4 @@ When deploying the relay server in a private environment, it is expected that th
 - [Glossary](./glossary.md) -  Terminologies and meaning
 - [Client Communication](./client-communication.md) - Types and formats of DW Message protocol.
 - [Technical Specification](./tech-spec.md) - Architecture and protocol.
-- [Relay Server API](./../api/relay-server.md) - Relay server message format
+- [Relay Server API](./../api/relay-server.md) - Relay server message format.
