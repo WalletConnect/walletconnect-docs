@@ -16,7 +16,7 @@ To test the endpoint using HTTP, add `/hello` to the url path - `https://relay.w
 There are two types of Json Messages - The Relay Messages and the DApp-Wallet Protocol Messages.
 
 ### [DApp-Wallet (DW) Protocol Messages](../protocol/client-communication.md)
-These are JSON objects that hold information transmitted between (e.g session and pairing info - SessionPropose, PairingPropose) between Dapps and Wallets.
+These are JSON objects that hold information (e.g session and pairing info - SessionPropose, PairingPropose) transmitted between DApps and Wallets.
 The DW protocols are used to establish and manage device pairing and app sessions.
 [The Technical Specification](./tech-spec.md) contains a detailed overview of the proceedures used in establishing pairing and session.
 
