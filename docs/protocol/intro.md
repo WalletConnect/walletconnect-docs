@@ -42,7 +42,7 @@ The DW protocols are used to establish and manage device pairing and app session
 ```
 
 ### [Relay Protocol Messages](../api/relay-server.md) 
-These are JSON objects that are used to communicate with the Relay server. The relay server acts as a tunnel for tunneling/passing messages between DApps and wallets.
+These are JSON objects that are used to communicate with the Relay server. The relay server acts as a tunnel for passing messages between DApps and wallets.
 
 #### Example of a Relay Message  ( [WakuSubscriptionRequest](../api/relay-server.md#subscription)):
 ```json
