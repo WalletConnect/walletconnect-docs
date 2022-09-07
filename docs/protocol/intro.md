@@ -102,7 +102,7 @@ Since DApp-Wallet(DW) protocol messages are tunneled through Relay servers, this
   
 - The Subscription Protocol: After subscribing to a topic using the WakuSubscribeRequest, Incoming messages are routed using the Subscription protocol. For Wallet Connect Relay Server, this means the DW messages are wrapped in [WakuSubscriptionRequest's](../api/relay-server.md#subscription) `message` field as the message payload.
   
-- The Publish Protocol: When sending messages to the other party (DApp or Wallet). Use the publish protocol message. In Wallet Connect Relay Server, the [WakuPublishRequest](../api/relay-server.md#publish) is used. The DW Message serves as the `message` content/payload in the WakuPublishRequest protocol.
+- The Publish Protocol: When sending messages to the other party (DApp or Wallet), use the publish protocol message. In Wallet Connect Relay Server, the [WakuPublishRequest](../api/relay-server.md#publish) is used. The DW Message serves as the `message` content/payload in the WakuPublishRequest protocol.
 
 
 ## V2 Out-of-band URI Format
