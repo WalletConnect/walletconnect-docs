@@ -41,15 +41,15 @@ The DW protocols are used to establish and manage device pairing and app session
 }
 ```
 
-### [Relay Protocol Messages](../api/relay-server.md) 
+### [Relay Protocol Messages](../api/relay-server.md)
 These are JSON objects that are used to communicate with the Relay server. The relay server acts as a tunnel for passing messages between DApps and wallets.
 
-#### Example of a Relay Message  ([WakuSubscriptionRequest](../api/relay-server.md#subscription)):
+#### Example of a Relay Message ([IrnSubscriptionRequest](../api/relay-server.md#subscription)):
 ```json
 {
   "id": 0,
   "jsonrpc": "2.0",
-  "method": "waku_subscription",
+  "method": "irn_subscription",
   "params": {
     "id": "string",
     "data": {
@@ -63,10 +63,10 @@ These are JSON objects that are used to communicate with the Relay server. The r
 Since DApp-Wallet(DW) protocol messages are tunneled through Relay servers, this means Relay messages wrap DW messages before being tunneled over a relay server to the other party. Using the examples above, a complete message sent from one party to the other - Wallet to DApp - in this example, will look like:
 
 ```json
-{ // --- WakuSubscriptionRequest
+{ // --- IrnSubscriptionRequest
   "id": 1,
   "jsonrpc": "2.0",
-  "method": "waku_subscription",
+  "method": "irn_subscription",
   "params": {
     "id": "2087",
     "data": {
@@ -96,30 +96,30 @@ Since DApp-Wallet(DW) protocol messages are tunneled through Relay servers, this
 ```
 
 ## Types of Relay Protocol Messages:
-- The Subscribe Protocol: When a DApp/Wallet initiates a websocket connection to the relay server, it needs to inform the relay server about a topic which it wants to listen to and receive messages from other partner. The server is informed of this topic using the subscribe protocol message. For Wallet Connect Relay server, this information is shared with the relay server using [WakuSubscribeRequest](../api/relay-server.md#subscribe).
+- The Subscribe Protocol: When a DApp/Wallet initiates a websocket connection to the relay server, it needs to inform the relay server about a topic which it wants to listen to and receive messages from other partner. The server is informed of this topic using the subscribe protocol message. For Wallet Connect Relay server, this information is shared with the relay server using [IrnSubscribeRequest](../api/relay-server.md#subscribe).
 
-- The Unsubscribe Protocol: Used to inform the relay server when to release resources and stop active listening on a subscribed topic. For Wallet Connect Relay server, this server is informed to unsubscribe using the [WakuUnsubscribeRequest](../api/relay-server.md#unsubscribe).
-  
-- The Subscription Protocol: After subscribing to a topic using the WakuSubscribeRequest, Incoming messages are routed using the Subscription protocol. For Wallet Connect Relay Server, this means the DW messages are wrapped in [WakuSubscriptionRequest's](../api/relay-server.md#subscription) `message` field as the message payload.
-  
-- The Publish Protocol: When sending messages to the other party (DApp or Wallet), use the publish protocol message. In Wallet Connect Relay Server, the [WakuPublishRequest](../api/relay-server.md#publish) is used. The DW Message serves as the `message` content/payload in the WakuPublishRequest protocol.
+- The Unsubscribe Protocol: Used to inform the relay server when to release resources and stop active listening on a subscribed topic. For Wallet Connect Relay server, this server is informed to unsubscribe using the [IrnUnsubscribeRequest](../api/relay-server.md#unsubscribe).
+
+- The Subscription Protocol: After subscribing to a topic using the IrnSubscribeRequest, Incoming messages are routed using the Subscription protocol. For Wallet Connect Relay Server, this means the DW messages are wrapped in [IrnSubscriptionRequest's](../api/relay-server.md#subscription) `message` field as the message payload.
+
+- The Publish Protocol: When sending messages to the other party (DApp or Wallet), use the publish protocol message. In Wallet Connect Relay Server, the [IrnPublishRequest](../api/relay-server.md#publish) is used. The DW Message serves as the `message` content/payload in the IrnPublishRequest protocol.
 
 
 ## V2 Out-of-band URI Format
-V2 out-of-band URI format is 
-`wc:topic@version?<UriParameters>` where the [UriParameters](./tech-spec.md#pairing-signal) are URL encoded similar to query URL parameters. For example, a Wallet Connect out-of-band URI with expanded URL results to 
+V2 out-of-band URI format is
+`wc:topic@version?<UriParameters>` where the [UriParameters](./tech-spec.md#pairing-signal) are URL encoded similar to query URL parameters. For example, a Wallet Connect out-of-band URI with expanded URL results to
 ```
-wc:<256_BIT_TOPIC>@2?publicKey=<X25519_PUBLIC_KEY>&relay={"protocol":"waku"}&controller=<BOOLEAN>
+wc:<256_BIT_TOPIC>@2?publicKey=<X25519_PUBLIC_KEY>&relay={"protocol":"irn"}&controller=<BOOLEAN>
 ```
 
-**Note**: With the UriParameters encoded, a typical WC URI looks like 
+**Note**: With the UriParameters encoded, a typical WC URI looks like
 ```shell
-wc:f49107703833dd352e3a8253a3108a7868f60aaf43134557d10df3ca6b780026@2?controller=false&publicKey=b71698c026788b09632627c708b8202e18de606fd098a898efc0f45805ada07b&relay=%7B%22protocol%22%3A%22waku%22%7D
+wc:f49107703833dd352e3a8253a3108a7868f60aaf43134557d10df3ca6b780026@2?controller=false&publicKey=b71698c026788b09632627c708b8202e18de606fd098a898efc0f45805ada07b&relay=%7B%22protocol%22%3A%22irn%22%7D
 ```
 
-The relay server URL is ommitted from the out-of-band WC URI because the relay server URL is expected to be present for both parties before pairing. When using the Waku relay protocol, the server URL defaults to the Wallet Connect URL - `https://relay.walletconnect.com/`.
+The relay server URL is ommitted from the out-of-band WC URI because the relay server URL is expected to be present for both parties before pairing. When using the Irn relay protocol, the server URL defaults to the Wallet Connect URL - `https://relay.walletconnect.com/`.
 
-When deploying the relay server in a private environment, it is expected that the URL of the private environment is updated within the mobile SDK's initialisation function by the developer.  
+When deploying the relay server in a private environment, it is expected that the URL of the private environment is updated within the mobile SDK's initialisation function by the developer.
 
 
 ## More on protocols
