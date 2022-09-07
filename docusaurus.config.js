@@ -71,9 +71,9 @@ const config = {
             label: "Docs",
           },
           {
-            type: "doc",
+            type: "docSidebar",
             position: "left",
-            docId: "specs/readme",
+            sidebarId: "specs",
             label: "Specs",
           },
           {
