@@ -117,7 +117,7 @@ wc:<256_BIT_TOPIC>@2?publicKey=<X25519_PUBLIC_KEY>&relay={"protocol":"waku"}&con
 wc:f49107703833dd352e3a8253a3108a7868f60aaf43134557d10df3ca6b780026@2?controller=false&publicKey=b71698c026788b09632627c708b8202e18de606fd098a898efc0f45805ada07b&relay=%7B%22protocol%22%3A%22waku%22%7D
 ```
 
-The relay server URL is ommitted from the out-of-band WC URI because the relay server URL is expected to be preset for both parties before pairing. When using the Waku relay protocol, the server URL defaults to the Wallet Connect URL - `https://relay.walletconnect.com/`.
+The relay server URL is ommitted from the out-of-band WC URI because the relay server URL is expected to be present for both parties before pairing. When using the Waku relay protocol, the server URL defaults to the Wallet Connect URL - `https://relay.walletconnect.com/`.
 
 When deploying the relay server in a private environment, it is expected that the URL of the private environment is updated within the mobile SDK's initialisation function by the developer.  
 
