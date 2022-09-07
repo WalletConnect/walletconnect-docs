@@ -10,7 +10,7 @@ module.exports = {
       className: "menu_outer_list",
       collapsible: false,
       items: [
-        "about",
+        "readme",
         {
           type: "category",
           label: "Our SDKs",

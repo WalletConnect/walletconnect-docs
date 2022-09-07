@@ -65,13 +65,19 @@ const config = {
         },
         items: [
           {
-            type: "docsVersionDropdown",
-            position: "left",
+            type: 'doc',
+            position: 'left',
+            docId: 'readme',
+            label: 'Docs',
           },
           {
             href: "/2.0/specs",
             position: "left",
             label: "Specs",
+          },
+          {
+            type: "docsVersionDropdown",
+            position: "right",
           },
           {
             href: "https://www.walletconnect.com/",
