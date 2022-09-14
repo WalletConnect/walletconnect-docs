@@ -26,13 +26,13 @@ const authClient = await AuthClient.init({
 **2. Listen to authentication requests**
 
 ```javascript
-authClient.once("auth_request", async (args) => {
+authClient.on("auth_request", async ({ id, params }) => {
   // This is a good point to trigger a UI event to provide the user
   // with a button to accept or reject the authentication request,
   // instead of automatically responding.
-  const signature = await wallet.signMessage(args.params.message);
+  const signature = await wallet.signMessage(params.message);
   await authClient.respond({
-    id: args.id,
+    id: id,
     signature: {
       s: signature,
       t: "eip191",

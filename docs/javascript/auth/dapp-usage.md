@@ -10,8 +10,6 @@ description: Quick Start For Dapps using Auth Client
 Its public API and associated documentation may still see significant and breaking changes.
 :::
 
-## Request Authentication
-
 **1. Initialize your WalletConnect AuthClient, using [your Project ID](../../introduction/cloud.md#project-id).**
 
 ```javascript
