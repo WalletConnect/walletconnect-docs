@@ -12,5 +12,13 @@ You can use the **Example Dapp** to test your integration at [example.walletconn
 
 ## Github
 
-This quick start is currently incomplete, please check the [Github repository](https://github.com/WalletConnect/kotlin-walletconnect-lib) for this Client
+This quick start is currently incomplete.
+
+There are 3 kotlin libraries available at the moment:
+
+* [Kotlin-WalletConnect-Lib](https://github.com/WalletConnect/kotlin-walletconnect-lib)
+* [Wallet-Connect-Kotlin](https://github.com/trustwallet/wallet-connect-kotlin)
+* [WalletConnect](https://github.com/jemshit/WalletConnect)
+
+Please check the repositories for more details.
 
