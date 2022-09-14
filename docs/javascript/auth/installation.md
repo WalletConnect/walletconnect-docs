@@ -19,17 +19,6 @@ For additional type packages refer to our [TypeScript Guide](../guides/typescrip
 :::
 
 ```bash npm2yarn
-npm install --save @walletconnect/auth-client
-```
-
-## 3. Initialize Client
-
-Initialize client by passing `projectId` we created before.
-
-```javascript
-import AuthClient from "@walletconnect/auth-client";
-
-const authClient = await AuthClient.init({
-  projectId: "<YOUR_PROJECT_ID>",
-});
+npm i @walletconnect/auth-client
+npm i better-sqlite3 # required for @walletconnect/core in Node envs
 ```

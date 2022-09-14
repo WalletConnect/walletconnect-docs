@@ -5,31 +5,25 @@ description: Quick Start For Dapps using Auth Client
 # Dapp Usage
 
 :::caution
-**The WalletConnect Auth SDK is currently in early Alpha and is not production-ready**.
+**The WalletConnect Auth SDK is currently in Alpha and is not production-ready**.
 
 Its public API and associated documentation may still see significant and breaking changes.
 :::
 
-This library is compatible with NodeJS, browsers and React-Native applications \(NodeJS modules require polyfills for React-Native\).
-
-## Installation
-
-```bash npm2yarn
-npm install --save @walletconnect/auth-client
-npm install --save-dev @walletconnect/types@rc
-```
-
 ## Request Authentication
 
-**1. Initiate your WalletConnect AuthClient with the relay server, using [your Project ID](../../introduction/cloud.md#project-id).**
+**1. Initialize your WalletConnect AuthClient, using [your Project ID](../../introduction/cloud.md#project-id).**
 
 ```javascript
 import AuthClient from "@walletconnect/auth-client";
 
 const authClient = await AuthClient.init({
   projectId: "<YOUR_PROJECT_ID>",
-  storageOptions: {
-    database: ":memory:",
+  metadata: {
+    name: "my-auth-dapp",
+    description: "A dapp using WalletConnect AuthClient",
+    url: "my-auth-dapp.com",
+    icons: ["https://my-auth-dapp.com/icons/logo.png"],
   },
 });
 ```
@@ -54,7 +48,7 @@ const { uri } = await authClient.request({
 });
 ```
 
-**4. The URI generated can be generated into a QRCode and scanned**
+**4. The provided URI can be generated into a QRCode and scanned**
 
 ```javascript
 import QRCodeModal from "@walletconnect/qrcode-modal";
