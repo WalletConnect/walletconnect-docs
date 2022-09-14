@@ -31,9 +31,13 @@ const authClient = await AuthClient.init({
 **2. Add listeners for the `auth_response` event**
 
 ```javascript
-authClient.once("auth_response", ({ params }) => {
-  isSuccessfulResponse = Boolean(params.result?.signature);
-  // Handle successful/unsuccessful response
+authClient.on("auth_response", ({ params }) => {
+  if (Boolean(params.result?.s)) {
+    // Response contained a valid signature -> user is authenticated.
+  } else {
+    // Handle error or invalid signature case
+    console.error(params.message);
+  }
 });
 ```
 
