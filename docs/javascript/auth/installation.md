@@ -1,7 +1,7 @@
 # Installation
 
 :::caution
-**The WalletConnect Auth SDK is currently in early Alpha and is not production-ready**.
+**The WalletConnect Auth SDK is currently in Alpha and is not production-ready**.
 
 Its public API and associated documentation may still see significant and breaking changes.
 :::
@@ -16,22 +16,9 @@ Install the WalletConnect client package.
 
 :::info
 For additional type packages refer to our [TypeScript Guide](../guides/typescript).
-
-For platform-specific instructions, refer to our [React Native](../guides/react-native) and [Node.js](../guides/nodejs.md) guides.
 :::
 
 ```bash npm2yarn
-npm install --save @walletconnect/auth-client
-```
-
-## 3. Initialize Client
-
-Initialize client by passing `projectId` we created before.
-
-```javascript
-import AuthClient from "@walletconnect/auth-client";
-
-const authClient = await AuthClient.init({
-  projectId: "<YOUR_PROJECT_ID>",
-});
+npm i @walletconnect/auth-client
+npm i better-sqlite3 # required for @walletconnect/core in Node envs
 ```
