@@ -16,9 +16,9 @@ This quick start is currently incomplete.
 
 There are 3 kotlin libraries available at the moment:
 
-* [WalletConnect](https://github.com/jemshit/WalletConnect)
 * [Kotlin-WalletConnect-Lib](https://github.com/WalletConnect/kotlin-walletconnect-lib)
 * [Wallet-Connect-Kotlin](https://github.com/trustwallet/wallet-connect-kotlin)
+* [WalletConnect](https://github.com/jemshit/WalletConnect)
 
 Please check the repositories for more details.
 
