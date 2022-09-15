@@ -4,48 +4,31 @@
 ### **Initialize Sign Client**
 
 ```kotlin
+val projectId = "" // Get Project ID at https://cloud.walletconnect.com/
+val relayUrl = "relay.walletconnect.com"
+val serverUrl = "wss://$relayUrl?projectId=${projectId}"
+val connectionType = ConnectionType.AUTOMATIC or ConnectionType.MANUAL
+
+RelayClient.initialize(relayServerUrl = serverUrl, connectionType = connectionType, application = this)
+
 val appMetaData = Sign.Model.AppMetaData(
     name = "Wallet Name",
     description = "Wallet Description",
     url = "Wallet Url",
-    icons = listOfIconUrlStrings
+    icons = listOfIconUrlStrings,
+    redirect = "kotlin-dapp-wc:/request"
 )
-
-val connectionType = Sign.ConnectionType.AUTOMATIC or Sign.ConnectionType.MANUAL
-
-val init = Sign.Params.Init(
-    application = application,
-    relayServerUrl = /*websocket server with scheme, authority, and projectId as query parameter*/
-    appMetaData = appMetaData,
-    connectionType = connectionType
-)
-
-// or
-
-val init = Sign.Params.Init(
-    application = application,
-    useTls = /*true or false*/,
-    hostName = /*websocket server with scheme and authority*/,
-    projectId = /*projectId*/,
-    appMetaData = appMetaData,
-    connectionType = connectionType
-)
+val init = Sign.Params.Init(relay = RelayClient, appMetaData = appMetaData)
 
 SignClient.initalize(init)
 ```
 
 The wallet client will always be responsible for exposing accounts (CAPI10 compatible) to a Dapp and therefore is also in charge of signing.
 To initialize the Sign client, create a `Sign.Params.Init` object in the Android Application class. The Init object will need the
-application class, the Project ID, and the apps's AppMetaData. The `Sign.Params.Init` object will then be passed to the `SignClient`
-initialize function. `Sign.Params.Init` also allows for custom URLs by passing URL string into the `hostName` property.
+initialized firstly RelayClient instance and the apps's AppMetaData. The `Sign.Params.Init` object will then be passed to the `SignClient`
+initialize function.
 
-We allow developers to choose between the `Sign.ConnectionType.MANUAL` and `Sign.ConnectionType.AUTOMATIC`connection type. The default
-one(`Sign.ConnectionType.AUTOMATIC`) disconnects wss connection when app enters background and reconnects when app is brought back to the
-foreground. The `Sign.ConnectionType.MANUAL` allows developers to control when to open WebSocket connection and when to close it.
-Accordingly, `SignClient.WebSocket.open()` and `SignClient.WebSocket.close()`.
-
-Above, there are two example on how to create the initalizing parameters.
-
+For more contex on how to initialize RelayClient, go to [RelayClient docs](../../kotlin/guides/relay.md) section.
 
 
 ## **Dapp**
