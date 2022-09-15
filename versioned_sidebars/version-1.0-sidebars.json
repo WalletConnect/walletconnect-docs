@@ -23,7 +23,6 @@
       "collapsible": true,
       "collapsed": false
     },
-    "version-1.0/tech-spec",
     {
       "type": "category",
       "label": "JSON-RPC API Methods",
@@ -42,5 +41,8 @@
     "version-1.0/client-api",
     "version-1.0/bridge-server",
     "version-1.0/push-server"
+  ],
+  "specs": [
+    "version-1.0/specs/readme"
   ]
 }
