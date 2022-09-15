@@ -10,6 +10,10 @@ description: Quick Start For Dapps using Auth Client
 Its public API and associated documentation may still see significant and breaking changes.
 :::
 
+:::info
+For an example implementation, please refer to our [`react-dapp-auth` example](https://github.com/WalletConnect/web-examples/tree/main/dapps/react-dapp-auth).
+:::
+
 **1. Initialize your WalletConnect AuthClient, using [your Project ID](../../introduction/cloud.md#project-id).**
 
 ```javascript
