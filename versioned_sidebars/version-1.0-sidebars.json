@@ -43,6 +43,6 @@
     "version-1.0/push-server"
   ],
   "specs": [
-    "specs/readme"
+    "version-1.0/specs/readme"
   ]
 }
