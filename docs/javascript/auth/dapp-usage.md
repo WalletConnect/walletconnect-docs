@@ -42,11 +42,15 @@ authClient.on("auth_response", ({ params }) => {
 **3. Request Authentication**
 
 ```javascript
+import AuthClient, { generateNonce } from "@walletconnect/auth-client";
+
+// ...
+
 const { uri } = await authClient.request({
   aud: "<FULL_URL_OF_LOGIN_PAGE>",
   domain: "<YOUR_DOMAIN>",
   chainId: "eip155:1",
-  nonce: "<GENERATED_NONCE>",
+  nonce: generateNonce(),
 });
 ```
 
