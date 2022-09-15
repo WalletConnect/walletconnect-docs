@@ -69,7 +69,7 @@ object RequesterDelegate : AuthClient.RequesterDelegate {
 
 ### **Request**
 
-The `AuthClient.request` asynchronously exposes the pairing URI that must be shared with wallet out of bound, as qr code or mobile linking.
+The `AuthClient.request` asynchronously exposes the pairing URI that must be shared with wallet out of bound, as qr code or [mobile linking](https://docs.walletconnect.com/2.0/kotlin/guides/mobile-linking).
 To establish a session between peers, Wallet / Responder must pass the received uri to `AuthClient.pair` method on their side. Dapp / Requester will receive respone via `AuthClient.RequesterDelegate` on `onAuthReponse` callback.
 
 ```kotlin
@@ -98,3 +98,9 @@ AuthClient.request(requestParams,
     }
 )
 ```
+---
+### **CACAO**
+More about CACAO can be found [here](https://github.com/ChainAgnostic/CAIPs/blob/master/CAIPs/caip-74.md)
+
+### **SIWE / EIP-4361**
+More about SIWE can be found [here](https://eips.ethereum.org/EIPS/eip-4361)

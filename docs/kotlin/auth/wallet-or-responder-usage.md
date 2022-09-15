@@ -25,7 +25,7 @@ AuthClient.initialize(
             icons = listOf("https://raw.githubusercontent.com/WalletConnect/walletconnect-assets/master/Logo/Gradient/Logo.png"),
             redirect = "kotlin-responder-wc:/request"
         ),
-        iss = "" // Example did:pkh:eip155:1:0xb9c5714089478a327f09197987f16f9e5d936e8a. Please use valid chain id and address.
+        iss = "" // Example did:pkh:eip155:1:0xb9c5714089478a327f09197987f16f9e5d936e8a. Please use valid chain id and account addres as referenced here: https://github.com/ChainAgnostic/CAIPs/blob/master/CAIPs/caip-10.md
     )
     { error ->
     Log.e("Responder initialize", error.throwable.stackTraceToString())
