@@ -108,7 +108,7 @@ AuthClient.respond(
 ```
 
 
-### **Get List of Settled Sessions**
+### **Get List of Pending Requests**
 
 ```kotlin
 val pendingRequest: List<Auth.Model.PendingRequest> = AuthClient.getPendingRequest()

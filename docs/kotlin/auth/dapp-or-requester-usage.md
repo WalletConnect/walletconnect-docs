@@ -42,7 +42,7 @@ Accordingly, `RelayClient.disconnect()` and `RelayClient.connect()`.
 ---
 ### **AuthClient.RequesterDelegate**
 
-The AuthClient needs a `AuthClient.RequesterDelegate` passed to it for it to be able to expose asynchronously updates sent from the Wallet / Responder.
+The AuthClient needs a `AuthClient.RequesterDelegate` passed to it to be able to expose asynchronously updates sent from the Wallet / Responder.
 
 ```kotlin
 object RequesterDelegate : AuthClient.RequesterDelegate {
