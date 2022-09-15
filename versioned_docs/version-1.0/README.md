@@ -16,7 +16,7 @@ Currently the WalletConnect protocol has references implementations written in T
 
 To quickly setup your Dapp or Wallet, go to the Quick Start section for code examples.
 
-To read in more detail about the WalletConnect protocol, go to [Technical Specification](specs/README.md)
+To read in more detail about the WalletConnect protocol, go to [Technical Specification](specs/readme.md)
 
 Additionally you can also consult the API references for [Client](client-api.md), [Bridge Server](bridge-server.md) and [Push Server](push-server.md).
 
