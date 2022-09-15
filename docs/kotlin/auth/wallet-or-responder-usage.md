@@ -31,12 +31,8 @@ AuthClient.initialize(
     Log.e("Responder initialize", error.throwable.stackTraceToString())
 }
 ```
-### Connection types
 
-We allow developers to choose between the `ConnectionType.MANUAL` and `ConnectionType.AUTOMATIC`connection type. The default
-one(`ConnectionType.AUTOMATIC`) disconnects wss connection when app enters background and reconnects when app is brought back to the
-foreground. The `ConnectionType.MANUAL` allows developers to control when to open WebSocket connection and when to close it.
-Accordingly, `RelayClient.disconnect()` and `RelayClient.connect()`.
+For more contex on how to initialize RelayClient, go to [RelayClient docs](../../kotlin/guides/relay.md) section.
 
 ---
 ### **AuthClient.ResponderDelegate**
