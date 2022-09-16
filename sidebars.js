@@ -159,7 +159,11 @@ module.exports = {
         {
           type: "category",
           label: "Auth",
-          items: ["kotlin/auth/installation"],
+          items: [
+            "kotlin/auth/installation",
+            "kotlin/auth/dapp-or-requester-usage",
+            "kotlin/auth/wallet-or-responder-usage",
+          ],
         },
         {
           type: "category",
