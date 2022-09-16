@@ -178,7 +178,10 @@ module.exports = {
         {
           type: "category",
           label: "Guides",
-          items: ["kotlin/guides/mobile-linking"],
+          items: [
+            "kotlin/guides/mobile-linking",
+            "kotlin/guides/relay"
+          ],
         },
       ],
     },
