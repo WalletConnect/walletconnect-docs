@@ -1,5 +1,5 @@
 # Installation
-<!-- todo: Add Maven central data -->
+
 Kotlin implementation of WalletConnect v2 Auth protocol for Android applications.
 
 ![Maven Central](https://img.shields.io/maven-central/v/com.walletconnect/auth)
