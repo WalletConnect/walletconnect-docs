@@ -8,12 +8,22 @@ Relay client provides transport layer for Sign, Auth and Chat SDKs. You can conf
 
 ## Installation
 
-<!-- Add MavenCentral badge and artifact path -->
+![Maven Central](https://img.shields.io/maven-central/v/com.walletconnect/android-core)
+
+root/build.gradle.kts:
+
+```gradle
+allprojects {
+ repositories {
+    mavenCentral()
+ }
+}
+```
 
 app/build.gradle
 
 ```gradle
-implementation("com.walletconnect:WalletConnectKotlinV2:android_core:version")
+implementation("com.walletconnect:android-core:release_version")
 ```
 
 ## Project set up
