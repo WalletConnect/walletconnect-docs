@@ -2,7 +2,7 @@
 
 Kotlin implementation of WalletConnect v2 Sign protocol for Android applications.
 
-[![](https://jitpack.io/v/WalletConnect/WalletConnectKotlinV2.svg)](https://jitpack.io/#WalletConnect/WalletConnectKotlinV2)
+![Maven Central](https://img.shields.io/maven-central/v/com.walletconnect/sign)
 
 ## Requirements
 
