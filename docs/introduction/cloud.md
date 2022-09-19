@@ -54,7 +54,7 @@ TODO insert screenshot of Allowlist for HTTP Origin.
 
 ### Error Codes
 
-| Reason                   | Error Code |
-| ------------------------ | ---------- |
-| Project ID doesn't exist | 401        |
-| Exists and is invalid    | 403        |
+| Reason                                       | Error Code |
+| -------------------------------------------- | ---------- |
+| Invalid auth token                           | 401        |
+| Origin is not allowed or invalid project ID  | 403        |
