@@ -36,7 +36,9 @@ const provider = new WalletConnectProvider({
 });
 
 //  Enable session (triggers QR Code modal)
-await provider.enable();
+(async()=>{
+  await provider.enable()
+ })();
 ```
 
 </TabItem>
@@ -56,7 +58,9 @@ const provider = new WalletConnectProvider({
 });
 
 //  Enable session (triggers QR Code modal)
-await provider.enable();
+(async()=>{
+  await provider.enable()
+ })();
 ```
 
 </TabItem>
