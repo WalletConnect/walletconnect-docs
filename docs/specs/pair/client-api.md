@@ -14,7 +14,7 @@ abstract class Client {
   public abstract create(): Promise<{ uri }>;
   
   // for both to subscribe on methods requests
-  public abstract configureProtocols(params { methods: [string] });
+  public abstract configureProtocols(params: { methods: [string] });
   
   // query pairings
   public abstract getPairings(): Promise<Array<Pairing>>;
