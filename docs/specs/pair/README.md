@@ -1,17 +1,17 @@
-#Pairing API Overview
+# Pairing API Overview
 
-##Description
+## Description
 
 Pairing API is a lightweight api for establishing an encrypted, protocol agnostic communication layer between peers. It's purpose is to provide a secure channel for proposing protocols or sending requests.
 
 
-##Context
+## Context
 
 WalletConnect offers Sign, Auth and Push Protocols. In order to allow reusable communitaction channel between peers pairing API exposes a common interface and allows for sending and receiving multi-protocol requests over a single pairing.
 
 This significantly improves end user experience by allowing to scan just a single QR code and receive requests from different protocols.
 
-##User Flow
+## User Flow
 
 User visits a new website that requires Sign session for submitting transactions Auth for authentication
 
@@ -22,7 +22,7 @@ User visits a new website that requires Sign session for submitting transactions
 4. User returns to website after prompt success
 5. User is now authenticated and has a sign session established with the dapp
 
-##Request Protocol
+## Request Protocol
 
 1. A creates random symKey S and pairing topic that is a sha256 hash of symKey S.
 2. A configures Pairing client with protocol P
