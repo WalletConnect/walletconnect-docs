@@ -23,23 +23,14 @@ const signClient = await SignClient.init({
 
 ## Allowlist
 
-Since most of the wallet and dapp code will be client side, the security of the Project ID depends on the proper implementation of User Agent and HTTP Origin for wallets.
+Limit access to known HTTP [origin](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Origin).
 
-### Applications
+Possible values for the origin value:
 
-User Agent for wallets.
-
-TODO insert screenshot of Allowlist for User Agent.
-
-#### Kotlin
-
-#### Swift
-
-### Websites
-
-Website [Origin](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Origin).
-
-TODO insert screenshot of Allowlist for HTTP Origin.
+- `<hostname>`
+- `<scheme>://<hostname>`
+- `<scheme>://<hostname>:<port>`
+- `*.<hostname>`
 
 ## Error Codes
 
