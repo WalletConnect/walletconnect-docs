@@ -28,6 +28,6 @@ abstract class Client {
 
   // ---------- Events ----------------------------------------------- //
 
-  // emits on supscribed request
+  // emits on subscribed request
   public abstract onRequest(${registered_request}, (topic: string, request: Request) => {}): void;
 ```
