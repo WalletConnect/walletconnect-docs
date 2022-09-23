@@ -24,7 +24,7 @@ User visits a new website that requires a Sign session for submitting transactio
 
 ## Request Protocol
 
-#### Successful request handling if B configures for protocol P
+#### Successful request handling if B registers protocol P
 
 1. A creates random symKey S and pairing topic that is a sha256 hash of symKey S.
 2. A's pairing client registers protocol P 
@@ -35,7 +35,7 @@ User visits a new website that requires a Sign session for submitting transactio
 7. B receives protocol P request.
 
 
-## Error case where B is not configured for handling protocol P
+#### Error case where B did not registered protocol P
 
 1. A creates random symKey S and pairing topic that is a sha256 hash of symKey S.
 2. A's pairing client registers protocol P 
