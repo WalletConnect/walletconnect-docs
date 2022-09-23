@@ -45,3 +45,14 @@ interface ErrorResponse {
   };
 }
 ```
+
+## Relay
+
+Relay is defined by the transport protocol used for the two clients to publish and subscribe messages between each other.
+
+```jsonc
+{
+  "protocol": string,
+  "data": string, // optional
+}
+```
