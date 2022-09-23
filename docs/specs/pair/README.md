@@ -13,7 +13,7 @@ This significantly improves end user experience by allowing to scan just a singl
 
 ## User Flow
 
-User visits a new website that requires Sign session for submitting transactions Auth for authentication
+User visits a new website that requires a Sign session for submitting transactions and Auth for authentication
 
 1. Website displays qrcode or deep link
 2. User scans qrcode or redirects to wallet
