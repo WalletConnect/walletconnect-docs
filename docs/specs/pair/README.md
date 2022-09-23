@@ -24,21 +24,25 @@ User visits a new website that requires a Sign session for submitting transactio
 
 ## Request Protocol
 
+#### Successful request handling if B configures for protocol P
+
 1. A creates random symKey S and pairing topic that is a sha256 hash of symKey S.
-2. A configures Pairing client with protocol P
+2. A's pairing client registers protocol P 
 3. A encrypts request with symKey S. Pairing client does not expects any response. P is responsible for response subscription.
 4. A sends request on pairing topic.
-
-
-// Successful request handling if B configures for protocol P
-5. B configures Pairing Client for protocol P
+5. B's pairing client registers protocol P 
 6. B subscribes to pairing topic from provided URI
-7. B's Pairing client receives protocol P request.
-8. B's Pairing client emits event to notify P's client.
+7. B receives protocol P request.
 
-// Error case where B is not configured for handling protocol P
+
+## Error case where B is not configured for handling protocol P
+
+1. A creates random symKey S and pairing topic that is a sha256 hash of symKey S.
+2. A's pairing client registers protocol P 
+3. A encrypts request with symKey S. Pairing client does not expects any response. P is responsible for response subscription.
+4. A sends request on pairing topic.
 5. B subscribes to pairing topic from provided URI
 6. B's Pairing client receives protocol P request.
-7. B's Pairing client responds with error as is not configured for handling received request
+7. B's Pairing client responds with error as it did not registered protocol P method
 
 
