@@ -11,7 +11,7 @@ abstract class Client {
   public abstract pair(params: { uri: string }): Promise<Sequence>;
 
   // for proposer to create inactive pairing
-  public abstract create(): Promise<{ uri }>;
+  public abstract create(): Promise<{ uri: string }>;
 
   // for either to activate a previously created pairing
   public abstract activate(params: { topic: string }): Promise<void>;
