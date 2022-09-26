@@ -12,16 +12,25 @@ abstract class Client {
 
   // for proposer to create inactive pairing
   public abstract create(): Promise<{ uri }>;
-  
+
+  // for either to activate a previously created pairing
+  public abstract activate(params: { topic: string }): Promise<void>;
+
   // for both to subscribe on methods requests
   public abstract register(params: { methods: string });
-  
+
+  // for either to update the expiry of an existing pairing.
+  public abstract updateExpiry(params: { topic: string, expiry: number }): Promise<void>;
+
+  // for either to update the metadata of an existing pairing.
+  public abstract updateMetadata(params: { topic: string, metadata: Metadata }): Promise<void>;
+
   // query pairings
   public abstract getPairings(): Promise<Array<Pairing>>;
-  
+
   // for either to ping a peer
   public abstract ping(params: { topic: string; }): Promise<void>;
-  
+
   // for either peer to disconnect a pairing
   public abstract disconnect(params: { topic: string }): Promise<void>;
 
