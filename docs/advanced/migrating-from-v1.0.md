@@ -52,4 +52,4 @@ WalletConnect v2.0 clients track all JSON-RPC requests sent and received with th
 
 ## Project ID
 
-Project ID will be required on v2.0 for the cloud version of WalletConnect, but this will not be required for self hosted WalletConnect relays. Read more about Project ID [here](advanced/api-reference/project-id.md).
+Project ID will be required on v2.0 for the cloud version of WalletConnect, but this will not be required for self hosted WalletConnect relays. Read more about [Project ID's](relay-server.md).
