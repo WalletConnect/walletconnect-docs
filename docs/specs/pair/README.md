@@ -45,4 +45,16 @@ User visits a new website that requires a Sign session for submitting transactio
 6. B's Pairing client receives protocol P request.
 7. B's Pairing client responds with error as it did not registered protocol P method
 
+## Pairing lifecycle
+
+**Inactive Pairing** - Pairing is considered inactive if prosing peer has no proof that any peer has paired with it. Inactive pairing should expire after 5 minute from being created.
+
+**Active Pairing** - Pairing is considered active if any of peer has a proof that other peer can respond to it. Active pairing should have 30 days expiry period.
+
+- Proposing peer is creating an inactive pairing and sends protocol's P request. If response for that request is delivered proposing peer should activate the pairing as it has proof that peer has paired.
+
+- Responding peer after calling `pair()` function should always create an active pairing on its side.
+
+- Pairing expiry should be updated to another 30 days on each peer after any request or response from its peer has been delivered proving that pairing remains active.
+
 
