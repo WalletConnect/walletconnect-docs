@@ -47,7 +47,7 @@ User visits a new website that requires a Sign session for submitting transactio
 
 ## Pairing lifecycle
 
-**Inactive Pairing** - Pairing is considered inactive if prosing peer has no proof that any peer has paired with it. Inactive pairing should expire after 5 minute from being created.
+**Inactive Pairing** - A pairing is considered inactive if the proposing peer has no proof that any peer has paired with it. Inactive pairings should expire 5 minutes after being created.
 
 **Active Pairing** - A pairing is considered active if any of peer has a proof that other peer can respond to it. Active pairings should have a 30 days expiry period.
 
