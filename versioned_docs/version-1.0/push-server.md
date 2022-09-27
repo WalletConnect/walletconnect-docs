@@ -1,5 +1,11 @@
 # Push Server API Reference
 
+:::info
+
+If you are looking at implementing push for v2, please refer to the new [Echo Server spec](https://github.com/WalletConnect/echo-server/blob/main/spec/spec.md) as support for the Push Server API is being removed from v2 in the coming weeks.
+
+:::
+
 ## Register Push Notification Subscription
 
 ```bash
@@ -42,4 +48,3 @@
       "success": true
   }
 ```
-
