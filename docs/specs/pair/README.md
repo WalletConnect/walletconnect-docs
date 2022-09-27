@@ -51,7 +51,7 @@ User visits a new website that requires a Sign session for submitting transactio
 
 **Active Pairing** - A pairing is considered active if any of peer has a proof that other peer can respond to it. Active pairings should have a 30 days expiry period.
 
-- Proposing peer is creating an inactive pairing and sends protocol's P request. If response for that request is delivered proposing peer should activate the pairing as it has proof that peer has paired.
+- Proposing peer is creating an inactive pairing and sends protocol P's request. If the response for that request is delivered, the proposing peer should activate the pairing as it has proof that peer has paired.
 
 - Responding peer after calling `pair()` function should always create an active pairing on its side.
 
