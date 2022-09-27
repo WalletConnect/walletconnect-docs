@@ -28,7 +28,7 @@ Proposal protocol will be established as follows:
 1. Dapp sends session proposal on pairing P with publicKey, relayB, permissions and metadata
 2. Wallet receives session proposal with required namespaces and public key X on pairing P
 3. Wallet generates key pair Y
-4. Wallet settles session with symetric key derived with keys X and Y
+4. Wallet settles session with symmetric key derived with keys X and Y
 5. Session topic B key is derived from sha256 hash of session's symmetric key 
 6. Wallet sends proposal response on pairing P with publicKey Y 
 7. Wallet sends settlement payload to topic B with metadata, namespaces and public key Y
