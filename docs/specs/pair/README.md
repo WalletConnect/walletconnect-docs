@@ -49,7 +49,7 @@ User visits a new website that requires a Sign session for submitting transactio
 
 **Inactive Pairing** - Pairing is considered inactive if prosing peer has no proof that any peer has paired with it. Inactive pairing should expire after 5 minute from being created.
 
-**Active Pairing** - Pairing is considered active if any of peer has a proof that other peer can respond to it. Active pairing should have 30 days expiry period.
+**Active Pairing** - A pairing is considered active if any of peer has a proof that other peer can respond to it. Active pairings should have a 30 days expiry period.
 
 - Proposing peer is creating an inactive pairing and sends protocol's P request. If response for that request is delivered proposing peer should activate the pairing as it has proof that peer has paired.
 
