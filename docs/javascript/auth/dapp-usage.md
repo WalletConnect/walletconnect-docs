@@ -14,7 +14,7 @@ Its public API and associated documentation may still see significant and breaki
 For an example implementation, please refer to our [`react-dapp-auth` example](https://github.com/WalletConnect/web-examples/tree/main/dapps/react-dapp-auth).
 :::
 
-**1. Initialize your WalletConnect AuthClient, using [your Project ID](../../introduction/cloud.md#project-id).**
+**1. Initialize your WalletConnect AuthClient, using [your Project ID](../../advanced/relay-server.md).**
 
 ```javascript
 import AuthClient from "@walletconnect/auth-client";

@@ -14,7 +14,7 @@ npm install --save @walletconnect/sign-client@rc @walletconnect/types@rc
 
 ## Create a Session
 
-**1. Initiate your WalletConnect client with the relay server, using [your Project ID](../../introduction/cloud.md#project-id).**
+**1. Initiate your WalletConnect client with the relay server, using [your Project ID](../../advanced/relay-server.md).**
 
 ```javascript
 import SignClient from "@walletconnect/sign-client";

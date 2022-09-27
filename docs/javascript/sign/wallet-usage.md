@@ -16,7 +16,7 @@ For more information check our [migration guide](../../advanced/migrating-from-v
 
 ## Initializing the client
 
-Initialize client as a controller using [your project id](/2.0/introduction/cloud#project-id).
+Initialize client as a controller using [your project id](../../advanced/relay-server.md).
 
 ```js
 const signClient = await SignClient.init({

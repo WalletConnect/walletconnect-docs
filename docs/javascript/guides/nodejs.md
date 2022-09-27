@@ -14,7 +14,7 @@ npm install --save @walletconnect/sign-client@rc better-sqlite3
 
 ## Create Session
 
-1. Initiate your WalletConnect client with the relay server, using [your Project ID](../../advanced/api-reference/project-id.md).
+1. Initiate your WalletConnect client with the relay server, using [your Project ID](../../advanced/relay-server.md).
 
 ```javascript
 import SignClient from "@walletconnect/sign-client";
