@@ -53,7 +53,7 @@ User visits a new website that requires a Sign session for submitting transactio
 
 - Proposing peer is creating an inactive pairing and sends protocol P's request. If the response for that request is delivered, the proposing peer should activate the pairing as it has proof that peer has paired.
 
-- Responding peer after calling `pair()` function should always create an active pairing on its side.
+- Responding peer should always create an active pairing on its side after calling `pair()` function.
 
 - Pairing expiry should be updated to another 30 days on each peer after any request or response from its peer has been delivered proving that pairing remains active.
 
