@@ -13,40 +13,6 @@ Relay is defined by the transport protocol used for the two clients to publish a
 }
 ```
 
-## Metadata
-
-Metadata is a set of parameters used to identify each participant in a session and/or pairing which are provided by the consumer for the client to broadcast to its peer
-
-```jsonc
-{
-  "name": string,
-  "description": string,
-  "url": string,
-  "icons": [string],
-  "redirect": { // Optional
-    "native": string, // Optional
-    "universal": string, // Optional
-  }
-}
-```
-
-## Pairing
-
-Pairing is a topic encrypted by a symmetric key shared through a URI between two clients with the sole purpose of communicating session proposals
-
-```jsonc
-{
-  "topic": string,
-  "relay": {
-    "protocol": string,
-    "data": string
-  },
-  "peerMetadata": Metadata,
-  "expiry": Int64,
-  "active": boolean
-}
-```
-
 ## Session
 
 Session is a topic encrypted by a symmetric key derived using a key agreement established after an approved proposal and it has a controller pariticipant that can update its accounts, methods, events and expiry

@@ -17,17 +17,22 @@ User vists application that requires to connect wallet
 
 ## Proposal Protocol
 
-Proposal protocol will be established has followed:
+#### Prerequisites
+Wallet and Dapp are required to establish pairing P before proceeding to Sign protocol execution.
 
-1. Dapp generates pairing URI with topic A, relayA, symmetric key
-2. Dapp sends session proposal to topic A with publicKey, relayB, permissions and metadata
-3. Dapps shares URI with topic A with topic A, relayA, symmetric key for encrypt topic A
-4. Wallet pairs using shared URI topic A and symmetric key
-5. Wallet receives session proposal from topic A
-6. Wallet settles session with topic B using derived key
-7. Wallet sends approval to topic A with relayB, publicKey to encrypt topic B
-8. Wallet sends settlement payload to topic B with state, permissions and metadata
-9. Dapp receives approval on topic A
-10. Dapp settles session with topic B using derived key
-11. Dapp receives settlement on topic B
-12. Dapp sends acknowledgment on topic B
+
+#### Protocol
+
+Proposal protocol will be established as follows:
+
+1. Dapp sends session proposal on pairing P with publicKey, relayB, permissions and metadata
+2. Wallet receives session proposal with required namespaces and public key X on pairing P
+3. Wallet generates key pair Y
+4. Wallet settles session with symmetric key derived with keys X and Y
+5. Session topic B key is derived from sha256 hash of session's symmetric key 
+6. Wallet sends proposal response on pairing P with publicKey Y 
+7. Wallet sends settlement payload to topic B with metadata, namespaces and public key Y
+8. Dapp receives propose response on pairing P
+9. Dapp settles session with topic B using derived key
+10. Dapp receives settlement on topic B
+11. Dapp sends acknowledgment on topic B

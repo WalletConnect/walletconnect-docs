@@ -9,16 +9,11 @@ abstract class Client {
     metadata?: AppMetadata;
   }): Promise<void>;
 
-  // for responder to pair a pairing created by a proposer
-  public abstract pair(params: {
-    uri: string;
-  }): Promise<Sequence>;
-
-  // for proposer to create a session with or without pairing creation
+  // for proposer to create a session 
   public abstract connect(params: {
     requiredNamespaces: Map<string, ProposalNamespace>;
     relays?: RelayProtocolOptions[];
-    pairingTopic?: string;
+    pairingTopic: string;
   }): Promise<Sequence>;
 
   // for responder to approve a session proposal
@@ -65,12 +60,12 @@ abstract class Client {
     chainId: string;
   }): Promise<void>;
 
-    // for either to ping a peer in a session or pairing
+    // for either to ping a peer in a session
   public abstract ping(params: {
     topic: string;
   }): Promise<void>;
 
-  // for either to disconnect a session or pairing
+  // for either to disconnect a session
   public abstract disconnect(params: {
     topic: string;
     reason: Reason;
@@ -78,9 +73,6 @@ abstract class Client {
 
 
   // ---------- Events ----------------------------------------------- //
-
-  // subscribe to pairing created
-  public abstract on("pairing_created", (pairingCreated: PairingCreated) => {}): void;
 
   // subscribe to session proposal
   public abstract on("session_proposal", (sessionProposal: SessionProposal) => {}): void;

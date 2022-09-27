@@ -1,22 +1,5 @@
 # Data Structures
 
-## Metadata
-
-Metadata is a set of parameters used to identify each participant in a session and/or pairing which are provided by the consumer for the client to broadcast to its peer
-
-```jsonc
-{
-  "name": string,
-  "description": string,
-  "url": string,
-  "icons": [string],
-  "redirect": { // Optional
-    "native": string, // Optional
-    "universal": string, // Optional
-  }
-}
-```
-
 ## Request Params
 
 ```typescript
