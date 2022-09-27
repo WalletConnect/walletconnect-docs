@@ -1,6 +1,6 @@
-# Project ID
+# Relay Server
 
-## How to implement
+## Project ID
 
 The Project ID is consumed through URL parameters.
 

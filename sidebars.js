@@ -193,11 +193,7 @@ module.exports = {
       className: "menu_outer_list",
       items: [
         "advanced/migrating-from-v1.0",
-        {
-          type: "category",
-          label: "API Reference",
-          items: ["advanced/api-reference/project-id"],
-        },
+        "advanced/relay-server",
         {
           type: "category",
           label: "RPC Reference",
