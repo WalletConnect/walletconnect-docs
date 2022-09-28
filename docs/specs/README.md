@@ -50,6 +50,7 @@ In this repository, we document and discuss features that are currently under de
 - Client API ([doc](pair/client-api.md))
 - Pairing URI ([doc](pair/pairing-uri.md))
 - Data Structures ([doc](pair/data-structures.md))
+- RPC Methods ([doc](pair/rpc-methods.md))
 - Migration ([doc](pair/migration.md))
 
 ### Core
