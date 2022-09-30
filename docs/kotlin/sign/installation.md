@@ -10,19 +10,17 @@ Kotlin implementation of WalletConnect v2 Sign protocol for Android applications
 * Java 11
 
 ## Installation
-
 root/build.gradle.kts:
-
 ```gradle
 allprojects {
  repositories {
-    maven(url = "https://jitpack.io")
+    mavenCentral()
  }
 }
 ```
 
-app/build.gradle
+app/build.gradle.kts
 
 ```gradle
-implementation("com.walletconnect:WalletConnectKotlinV2:release_version")
+implementation("com.walletconnect:sign:release_version")
 ```
