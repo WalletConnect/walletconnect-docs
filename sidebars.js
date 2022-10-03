@@ -202,6 +202,7 @@ module.exports = {
             "advanced/rpc-reference/cosmos-rpc",
             "advanced/rpc-reference/solana-rpc",
             "advanced/rpc-reference/stellar-rpc",
+            "advanced/rpc-reference/starknet-rpc",
           ],
         },
       ],
