@@ -44,22 +44,19 @@ In this repository, we document and discuss features that are currently under de
 
 - Push Overview ([doc](push/README.md))
 
-### Pair
-
-- Pair Overview ([doc](pair/README.md))
-- Client API ([doc](pair/client-api.md))
-- Pairing URI ([doc](pair/pairing-uri.md))
-- Data Structures ([doc](pair/data-structures.md))
-- RPC Methods ([doc](pair/rpc-methods.md))
-- Migration ([doc](pair/migration.md))
-
 ### Core
 
 - Core Overview ([doc](core/README.md))
-- Relay Client ([doc](core/relay-client.md))
-- Relay Server ([doc](core/relay-server.md))
-- Relay Client Auth ([doc](core/relay-client-auth.md))
-- Relay User Agent ([doc](core/relay-user-agent.md))
-- Crypto API ([doc](core/crypto-api.md))
-- Crypto Envelopes ([doc](core/crypto-envelopes.md))
-- Storage API ([doc](core/storage-api.md))
+- Relay Client ([doc](core/relay/relay-client.md))
+- Relay Server ([doc](core/relay/relay-server.md))
+- Relay Client Auth ([doc](core/relay/relay-client-auth.md))
+- Relay User Agent ([doc](core/relay/relay-user-agent.md))
+- Crypto API ([doc](core/crypto/crypto-api.md))
+- Crypto Envelopes ([doc](core/crypto/crypto-envelopes.md))
+- Storage API ([doc](core/storage/storage-api.md))
+- Pair Overview ([doc](core/pairing/README.md))
+- Client API ([doc](core/pairing/pairing-api.md))
+- Pairing URI ([doc](core/pairing/pairing-uri.md))
+- Data Structures ([doc](core/pairing/data-structures.md))
+- RPC Methods ([doc](core/pairing/rpc-methods.md))
+

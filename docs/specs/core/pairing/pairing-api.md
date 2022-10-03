@@ -1,7 +1,7 @@
-# Client API
+# Pairing API
 
 ```typescript
-abstract class Client {
+abstract class PairingClient {
   // ---------- Methods ----------------------------------------------- //
 
   // initializes the client with persisted storage and a network connection
