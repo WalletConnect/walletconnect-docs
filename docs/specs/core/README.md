@@ -20,5 +20,5 @@ Storage API enables high-level APIs to store persistent data for managing their 
 
 ### Pairing API
 
-Pairing API is a lightweight api for establishing an encrypted, protocol agnostic communication layer between peers. It's purpose is to provide a secure channel for proposing protocols or sending requests.
+Pairing API is a lightweight API for establishing an encrypted, protocol agnostic communication layer between peers. It's purpose is to provide a secure channel for proposing protocols or sending requests.
 
