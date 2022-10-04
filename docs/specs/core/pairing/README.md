@@ -27,23 +27,23 @@ User visits a new website that requires a Sign session for submitting transactio
 #### Successful request handling if B registers protocol P
 
 1. A creates random symKey S and pairing topic that is a sha256 hash of symKey S.
-2. A's pairing client registers protocol P 
+2. A's pairing client registers protocol P.
 3. A encrypts request with symKey S. Pairing client does not expects any response. P is responsible for response subscription.
 4. A sends request on pairing topic.
-5. B's pairing client registers protocol P 
-6. B subscribes to pairing topic from provided URI
-7. B receives protocol P request.
+5. B's pairing client succesfully verifies if it supports requested Protocol P.
+6. B's pairing client registers protocol P.
+7. B subscribes to pairing topic from provided URI.
+8. B receives protocol P request.
 
 
 #### Error case where B did not registered protocol P
 
 1. A creates random symKey S and pairing topic that is a sha256 hash of symKey S.
-2. A's pairing client registers protocol P 
+2. A's pairing client registers protocol P. 
 3. A encrypts request with symKey S. Pairing client does not expects any response. P is responsible for response subscription.
 4. A sends request on pairing topic.
-5. B subscribes to pairing topic from provided URI
-6. B's Pairing client receives protocol P request.
-7. B's Pairing client responds with error as it did not registered protocol P method
+5. B's pairing client fails to verify if it supports requested Protocol P.
+6. B sends `wc_pairingDelete` with code [20000](./codes.md)
 
 ## Pairing lifecycle
 
