@@ -17,3 +17,8 @@ Crypto API exposes methods for managing keys on the keychain, deriving shared sy
 ### Storage API
 
 Storage API enables high-level APIs to store persistent data for managing their state engines internally and compromises of a simple key-value storage API
+
+### Pairing API
+
+Pairing API is a lightweight API for establishing an encrypted, protocol agnostic communication layer between peers. It's purpose is to provide a secure channel for proposing protocols or sending requests.
+
