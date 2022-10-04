@@ -23,7 +23,7 @@ Requests the wallet to sign and submit a [INVOKE transaction](https://docs.stark
         2.1.2. `entrypoint` : `Felt`
         2.1.3. `calldata` : `Felt[]` (Optional)
     2.2. `abi` : `ABI` (Optional) the abi of the contract for better displaying
-    2.3. `executionParams` : `Object` (Optional)
+    2.3. `executionParams` : `Object` (Optional) Parameters suggested by the dapp
         2.3.1. `nonce` : `Felt` (Optional)
         2.3.2. `maxFee` : `Felt` (Optional)
         2.3.3. `version` : `Felt` (Optional)
@@ -77,7 +77,7 @@ Requests the wallet to sign and submit a [INVOKE transaction](https://docs.stark
 
 ## starknet_signTypedData
 
-Request the wallet to sign an *Off-chain message* as defined here [Starknet Off-chain message spec](https://github.com/argentlabs/argent-x/discussions/14). This is similar to Ethereum's EIP-712
+Request the wallet to sign an *Off-chain message* as defined here [Starknet Off-chain message spec](https://community.starknet.io/t/signing-transactions-and-off-chain-messages/66).  This is similar to Ethereum's EIP-712
 
 ### Parameters
 
