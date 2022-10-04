@@ -55,7 +55,7 @@ In this repository, we document and discuss features that are currently under de
 - Crypto Envelopes ([doc](core/crypto/crypto-envelopes.md))
 - Storage API ([doc](core/storage/storage-api.md))
 - Pair Overview ([doc](core/pairing/README.md))
-- Client API ([doc](core/pairing/pairing-api.md))
+- Pairing Client API ([doc](core/pairing/pairing-api.md))
 - Pairing URI ([doc](core/pairing/pairing-uri.md))
 - Data Structures ([doc](core/pairing/data-structures.md))
 - RPC Methods ([doc](core/pairing/rpc-methods.md))
