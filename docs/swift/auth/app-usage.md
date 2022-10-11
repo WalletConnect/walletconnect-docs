@@ -2,20 +2,11 @@
 
 ### Relay client
 
-Make sure what you properly configure Relay Client first [Relay Configuration](../relay/usage#relay-client-configuration)
-### Instantiate a client
+### Configure Networking and Pair clients
 
-Create an AppMetadata object. It will describe your application and define its appearance in a wallet.
-Then configure `Auth` instance with a metadata object you have instantiated.
+Make sure what you properly configure Networking and Pair Clients first [Networking](../core/networking-configuration)
+[Pairing](../core/pairing-usage)
 
-```swift
-let metadata = AppMetadata(name: <String>,
-                           description: <String>,
-                           url: <String>,
-                           icons: <[String]>)
-
-Auth.configure(metadata: metadata)
-```
 
 ### Subscribe for Auth publishers
 When your `Auth` instance receives requests or responses from a peer client it will publish related event. So you should set subscription to handle them.
@@ -37,10 +28,11 @@ public let socketConnectionStatusPublisher: AnyPublisher<SocketConnectionStatus,
 
 ### Connect Clients and Send Authentication Request
 
-Your App should generate a pairing uri and share it with wallet. Uri can be presented as QR code or sent via universal link. Wallet after receiving uri begins subscribing for your app's authentication requests. In order to create pairing and send authentication request you need to call only one method:
+Your App should generate a pairing uri and share it with wallet. Uri can be presented as QR code or sent via universal link. Wallet after receiving uri begins subscribing for your app's authentication requests. In order to create pairing and send authentication request you need to call:
 
 ```swift
-let uri = try await Auth.instance.request(<RequestParams>)
+let uri = try await Pair.instance.create()
+try await Auth.instance.request(<RequestParams>, topic: uri.topic)
 ```
 
 ### Handle Authentication Response
