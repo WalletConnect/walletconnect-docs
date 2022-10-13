@@ -25,7 +25,7 @@ Wallet and Dapp are required to establish pairing P before proceeding to Sign pr
 
 Proposal protocol will be established as follows:
 
-1. Dapp sends session proposal on pairing P with publicKey, relayB, permissions and metadata
+1. Dapp sends session proposal on pairing P with publicKey, relay, permissions and metadata
 2. Wallet receives session proposal with required namespaces and public key X on pairing P
 3. Wallet generates key pair Y
 4. Wallet settles session with symmetric key derived with keys X and Y

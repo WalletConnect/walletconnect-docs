@@ -43,6 +43,9 @@ In this repository, we document and discuss features that are currently under de
 ### Push
 
 - Push Overview ([doc](push/README.md))
+- Client API ([doc](push/client-api.md))
+- RPC Methods ([doc](push/rpc-methods.md))
+- Data Structures ([doc](push/data-structures.md))
 
 ### Core
 
