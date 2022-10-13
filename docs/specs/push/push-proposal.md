@@ -8,7 +8,7 @@ App can prompt a push proposal after connecting or it can provide a "bell" butto
 
 User can approve or reject the push proposal from its wallet.
 
-In future events, the app can trigger push notitifcations after subscriptions has been approved.
+In future events, the app can trigger push notifications after subscription has been approved.
 
 ## Proposal Protocol
 
