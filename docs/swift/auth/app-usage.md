@@ -1,7 +1,5 @@
 # App Usage
 
-### Relay client
-
 ### Configure Networking and Pair clients
 
 Make sure what you properly configure Networking and Pair Clients first [Networking](../core/networking-configuration)

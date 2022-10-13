@@ -1,8 +1,9 @@
 # Wallet Usage
 
-### Relay client
+### Configure Networking and Pair clients
 
-Make sure what you properly configure Relay Client first [Relay Configuration](../relay/usage#relay-client-configuration)
+Make sure what you properly configure Networking and Pair Clients first [Networking](../core/networking-configuration)
+[Pairing](../core/pairing-usage)
 
 ### Instantiate a client
 
