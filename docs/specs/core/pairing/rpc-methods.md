@@ -82,3 +82,20 @@ true
 | Prompt  | false    |
 | Tag     | 1003     |
 ```
+
+### unsupported methods response
+
+Used to respond for requests that are not registered
+
+**Response**
+
+```jsonc
+// Success result
+true
+
+| IRN     |          |
+| ------- | -------- |
+| TTL     | 86400    |
+| Prompt  | false    |
+| Tag     | 0        |
+```
