@@ -41,7 +41,7 @@ let namespaces: [String: ProposalNamespace] = ["eip155": ProposalNamespace(chain
 ``` 
 to learn more on namespaces, check out our [specs](../../specs/sign/session-namespaces)
 
-2. Your App should generate a pairing uri and share it with a wallet. Uri can be presented as QR code or sent via universal link. Wallet after receiving uri begins subscribing for session proposals. In order to create pairing and send session proposal you need to call:
+2. Your App should generate a pairing URI and share it with a wallet. Uri can be presented as a QR code or sent via a universal link. Wallet begins subscribing for session proposals after receiving URI. In order to create a pairing and send a session proposal, you need to call the following:
 
 ```Swift
 let uri = try await Pair.instance.create()
