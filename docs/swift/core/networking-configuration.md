@@ -1,10 +1,10 @@
 # Networking Configuration
 
-Networking client provides transport layer for Sign, Auth and Chat SDKs. You can configure it once and every SDK will transport protocol messages via same instance of a networking client with only one opened websocket connection.
+The networking client provides a transport layer for Sign, Auth, and Chat SDKs. You can configure it once, and every SDK will transport protocol messages via the same instance of a networking client with only one opened WebSocket connection.
 
 ### Setup Networking Client
 
-Before using Sign or Auth SDK it is necessary to configure shared Networking Client instance. Set a project ID generated when starting a project on WalletConnect Cloud and SocketFactory instance.
+Before using Sign or Auth SDK, it is necessary to configure a shared Networking Client instance. Set a project ID generated when starting a project on WalletConnect Cloud and SocketFactory instance.
 
 WalletConnect Swift SDK does not depend on any websocket library. SocketFactory parameter allows you to pass your own implementation of websocket connection.
 
