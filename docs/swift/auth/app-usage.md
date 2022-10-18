@@ -2,8 +2,8 @@
 
 ### Configure Networking and Pair clients
 
-Make sure what you properly configure Networking and Pair Clients first [Networking](../core/networking-configuration)
-[Pairing](../core/pairing-usage)
+Make sure that you correctly configure Networking and Pair Clients first [Networking](../core/networking-configuration)
+		[Pairing](../core/pairing-usage)
 
 
 ### Subscribe for Auth publishers
@@ -26,7 +26,7 @@ public let socketConnectionStatusPublisher: AnyPublisher<SocketConnectionStatus,
 
 ### Connect Clients and Send Authentication Request
 
-Your App should generate a pairing uri and share it with wallet. Uri can be presented as QR code or sent via universal link. Wallet after receiving uri begins subscribing for your app's authentication requests. In order to create pairing and send authentication request you need to call:
+Your App should generate a pairing URI and share it with the wallet. Uri can be presented as a QR code or sent via a universal link. Wallet begins subscribing to your App's authentication requests after scanning URI. To create a pairing and send an authentication request, you need to call:	
 
 ```swift
 let uri = try await Pair.instance.create()
@@ -36,7 +36,7 @@ try await Auth.instance.request(<RequestParams>, topic: uri.topic)
 ### Handle Authentication Response
 
 Subscribe for `authResponsePublisher` events.
-Response will be either signed CAIP-74 `Cacao` object or `AuthError` in case signature is invalid or requested message has been compromised.
+A response will be either signed CAIP-74 `Cacao` object or `AuthError` in case the signature is invalid, or the requested message has been compromised.
 
 ### Where to go from here
 - Try our Example dApp that is part of WalletConnectSwiftV2 repository.
