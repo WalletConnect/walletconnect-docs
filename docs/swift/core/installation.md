@@ -13,11 +13,11 @@ In order to connect to WalletConnect Cloud, you need to create a new project fir
 
 ### Add SDK for your project.
 
-You can add a WalletConnect Relay SDK to your project with Swift Package Manager. In order to do that:
+You can add a WalletConnect Core SDKs to your project with Swift Package Manager. In order to do that:
 
 1. Open XCode
 2. Go to File -> Add Packages
 3. Paste the repo GitHub url: https://github.com/WalletConnect/WalletConnectSwiftV2
 4. Tap Add Package
-5. Select WalletConnectRelay check mark
+5. Select WalletConnectPairing check mark
 

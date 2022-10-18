@@ -119,10 +119,11 @@ module.exports = {
         },
         {
           type: "category",
-          label: "Relay",
+          label: "Core",
           items: [
-            "swift/relay/installation",
-            "swift/relay/usage",
+            "swift/core/installation",
+            "swift/core/networking-configuration",
+            "swift/core/pairing-usage",
           ],
         },
         {

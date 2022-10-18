@@ -1,24 +1,9 @@
 # Dapp Usage
 
-### Relay client
+### Configure Networking and Pair clients
 
-Make sure what you properly configure Relay Client first [Relay Configuration](../relay/usage#relay-client-configuration)
-
-### Instantiate a client
-
-Create an AppMetadata object. It will describe your application and define its appearance in a web browser.
-Then configure `Sign` instance with a metadata object you have instantiated.
-
-Note that you want to have only one instance of a client in your app, and you don’t want to deinitialize that instance.
-
-```swift
-let metadata = AppMetadata(name: <String>,
-                           description: <String>,
-                           url: <String>,
-                           icons: <[String]>)
-
-Sign.configure(metadata: <AppMetadata>)
-```
+Make sure what you properly configure Networking and Pair Clients first [Networking](../core/networking-configuration)
+[Pairing](../core/pairing-usage)
 
 ### Subscribe for Sign publishers
 When your `Sign` instance receives requests from a peer it will publish related event. So you should set subscription to handle them.
@@ -54,18 +39,15 @@ let methods: Set<String> = ["eth_sendTransaction", "personal_sign", "eth_signTyp
 let blockchains: Set<Blockchain> = [Blockchain("eip155:1")!, Blockchain("eip155:137")!]
 let namespaces: [String: ProposalNamespace] = ["eip155": ProposalNamespace(chains: blockchains, methods: methods, events: [], extensions: nil)]
 ``` 
-to learn more on namespaces, check out our [specs](https://github.com/WalletConnect/walletconnect-specs/blob/main/sign/session-namespaces.md)
+to learn more on namespaces, check out our [specs](../../specs/sign/session-namespaces)
 
-2. Your App should generate a pairing uri and share it with a wallet. Uri can be presented as QR code or sent via universal link. Wallet after receiving uri begins subscribing for session proposals. In order to create pairing and send session proposal you need to call only one method:
-
-```Swift
-let uri = try await Sign.instance.connect(requiredNamespaces: namespaces)
-```
-or if the pairing already exists to just send a session proposal call:
+2. Your App should generate a pairing URI and share it with a wallet. Uri can be presented as a QR code or sent via a universal link. Wallet begins subscribing for session proposals after receiving URI. In order to create a pairing and send a session proposal, you need to call the following:
 
 ```Swift
-let _ = try await Sign.instance.connect(requiredNamespaces: namespaces, topic: existingPairingTopic)
+let uri = try await Pair.instance.create()
+try await Sign.instance.connect(requiredNamespaces: namespaces, topic: uri.topic)
 ```
+
 
 ### Send Request to the Wallet
 
