@@ -2,21 +2,17 @@
 
 ### Configure Networking and Pair clients
 
-Make sure that you properly configure Networking and Pair Clients first [Networking](../core/networking-configuration)
-		[Pairing](../core/pairing-usage)
+Make sure what you properly configure Networking and Pair Clients first 
+- [Networking](../core/networking-configuration.md)
+- [Pairing](../core/pairing-usage.md)
 
 ### Instantiate a client
 
 Create an AppMetadata object. It will describe your application and define its appearance in a web browser.
-Then configure the `Auth` instance with a metadata object you have instantiated and an Account object.
+Then configure the `Auth` instance Account object.
 
 ```swift
-let metadata = AppMetadata(name: <String>,
-                           description: <String>,
-                           url: <String>,
-                           icons: <[String]>)
-
-Auth.configure(metadata: metadata, account: Account("eip155:56:0xe5EeF1368781911d265fDB6946613dA61915a501")!)
+Auth.configure(account: Account("eip155:56:0xe5EeF1368781911d265fDB6946613dA61915a501")!)
 ```
 
 ### Subscribe for Auth publishers
@@ -50,9 +46,11 @@ try await Auth.instance.pair(uri: uri)
 
 After pairing with dapp, your wallet will be subscribing for authentication requests. Requests will be published by `authRequestPublisher`. When a wallet receives a request, you want to present it to the user and request a signature. After the user signs the authentication message, the wallet should respond to a dapp.
 
+`Type` parameter represent signature validation method which will be used on DApp side. Supported signature validation methods: [EIP191](https://eips.ethereum.org/EIPS/eip-191), [EIP1271](https://eips.ethereum.org/EIPS/eip-1271). In both cases message will be signed with [EIP191](https://eips.ethereum.org/EIPS/eip-191) standard.
+
 ```swift
-let signer = MessageSigner()
-let signature = try signer.sign(message: request.message, privateKey: privateKey)
+let signer = MessageSignerFactory.create()
+let signature = try signer.sign(message: request.message, privateKey: privateKey, type: .eip191)
 try await Auth.instance.respond(requestId: request.id, signature: signature)
 ```
 

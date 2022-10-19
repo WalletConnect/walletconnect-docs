@@ -2,8 +2,9 @@
 
 ### Configure Networking and Pair clients
 
-Make sure that you correctly configure Networking and Pair Clients first [Networking](../core/networking-configuration)
-		[Pairing](../core/pairing-usage)
+Make sure what you properly configure Networking and Pair Clients first 
+- [Networking](../core/networking-configuration.md)
+- [Pairing](../core/pairing-usage.md)
 
 
 ### Subscribe for Auth publishers
