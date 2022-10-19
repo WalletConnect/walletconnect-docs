@@ -2,21 +2,17 @@
 
 ### Configure Networking and Pair clients
 
-Make sure that you properly configure Networking and Pair Clients first [Networking](../core/networking-configuration)
-		[Pairing](../core/pairing-usage)
+Make sure what you properly configure Networking and Pair Clients first 
+- [Networking](../core/networking-configuration.md)
+- [Pairing](../core/pairing-usage.md)
 
 ### Instantiate a client
 
 Create an AppMetadata object. It will describe your application and define its appearance in a web browser.
-Then configure the `Auth` instance with a metadata object you have instantiated and an Account object.
+Then configure the `Auth` instance Account object.
 
 ```swift
-let metadata = AppMetadata(name: <String>,
-                           description: <String>,
-                           url: <String>,
-                           icons: <[String]>)
-
-Auth.configure(metadata: metadata, account: Account("eip155:56:0xe5EeF1368781911d265fDB6946613dA61915a501")!)
+Auth.configure(account: Account("eip155:56:0xe5EeF1368781911d265fDB6946613dA61915a501")!)
 ```
 
 ### Subscribe for Auth publishers
