@@ -30,7 +30,8 @@ Pairing is a topic encrypted by a symmetric key shared through a URI between two
   },
   "peerMetadata": Metadata,
   "expiry": Int64,
-  "active": boolean
+  "active": boolean,
+  "registeredMethods": string
 }
 ```
 
