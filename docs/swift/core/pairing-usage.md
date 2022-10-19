@@ -1,10 +1,10 @@
 # Pairing SDK
 
-###Description
+### Description
 
 Pairing API is a lightweight API for establishing an encrypted, protocol-agnostic communication layer between peers. Its purpose is to provide a secure channel for proposing protocols or sending requests between dapp and wallet.
 
-###Context
+### Context
 
 WalletConnect offers Sign, Auth, and Push Protocols. To allow a reusable communication channel between peers, the Pairing API exposes a standard interface and allows for sending and receiving multi-protocol requests over a single pairing.
 
