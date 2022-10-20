@@ -26,7 +26,10 @@ module.exports = {
           type: "category",
           label: "Our Projects",
           collapsed: false,
-          items: ["introduction/cloud-explorer"],
+          items: [
+            "introduction/cloud-explorer",
+            "introduction/web3modal"
+          ],
         },
         "introduction/examples-and-resources",
         "introduction/glossary",
