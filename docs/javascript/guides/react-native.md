@@ -4,13 +4,13 @@
 
 :::info
 
-For React Native, the WalletConnect client additionally requires `@react-native-async-storage/async-storage`, `react-native-get-random-values` and `@walletconnect/react-native-compat`
+For React Native, the WalletConnect SignClient additionally requires `@react-native-async-storage/async-storage`, `react-native-get-random-values` and `@walletconnect/react-native-compat`
 to manage storage internally and provide all necessary polyfills.
 
 :::
 
 ```bash npm2yarn
-npm install --save @walletconnect/sign-client@rc @walletconnect/react-native-compat@rc @react-native-async-storage/async-storage react-native-get-random-values
+npm install --save @walletconnect/sign-client @walletconnect/react-native-compat @react-native-async-storage/async-storage react-native-get-random-values
 ```
 
 ## Set Up
