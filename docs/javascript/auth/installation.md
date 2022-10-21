@@ -19,6 +19,6 @@ For additional type packages refer to our [TypeScript Guide](../guides/typescrip
 :::
 
 ```bash npm2yarn
-npm i @walletconnect/auth-client
-npm i better-sqlite3 # required for @walletconnect/core in Node envs
+npm install @walletconnect/auth-client
+npm install better-sqlite3 # required for @walletconnect/core in Node envs
 ```
