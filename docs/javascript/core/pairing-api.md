@@ -12,7 +12,7 @@ The Pairing API is a lightweight API for establishing an encrypted, protocol-agn
 
 WalletConnect currently offers Sign and Auth SDKs. To allow a reusable communication channel between peers, the Pairing API exposes a standard interface and allows for sending and receiving multi-protocol requests over a single pairing.
 
-Each SDK uses the same implementation of `core/pairing` (via `@walletconnect/core`) to manage pairings. To run multiple SDKs side-by-side (e.g. Sign and Auth), please refer to the [Sharing a Core instance (NEEDS LINK)](./) guide.
+Each SDK uses the same implementation of `core/pairing` (via `@walletconnect/core`) to manage pairings. To run multiple SDKs side-by-side (e.g. Sign and Auth), please refer to the [Sharing a Core instance](../guides/shared-core.md) guide.
 
 ## Using the Pairing API
 

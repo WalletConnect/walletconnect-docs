@@ -91,6 +91,7 @@ module.exports = {
             "javascript/guides/typescript",
             "javascript/guides/react-native",
             "javascript/guides/nodejs",
+            "javascript/guides/shared-core",
           ],
         },
       ],
