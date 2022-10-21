@@ -1,14 +1,13 @@
 # Wallet Usage
 
 ### Configure Networking and Pair clients
-
-Make sure what you properly configure Networking and Pair Clients first 
+Confirm you have configured the Network and Pair Client first
 - [Networking](../core/networking-configuration.md)
 - [Pairing](../core/pairing-usage.md)
 
 ### Subscribe for Sign publishers
 
-When your `Sign` instance receives requests from a peer it will publish related event. So you should set subscription to handle them.
+When your `Sign` instance receives requests from a peer it will publish a related event. Set a subscription to handle them.
 
 ```swift
 Sign.instance.sessionDeletePublisher
@@ -18,7 +17,7 @@ Sign.instance.sessionDeletePublisher
     }.store(in: &publishers)
 ```
 
-Following publishers are available to subscribe:
+The following publishers are available to subscribe:
 
 ```swift
     public var sessionProposalPublisher: AnyPublisher<Session.Proposal, Never> 
