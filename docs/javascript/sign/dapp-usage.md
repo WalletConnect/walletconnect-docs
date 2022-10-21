@@ -30,6 +30,10 @@ const signClient = await SignClient.init({
 
 **2. Add listeners for desired `SignClient` events.**
 
+:::info
+To listen to pairing-related events, please follow the guidance for [Pairing API event listeners](../core/pairing-api.md).
+:::
+
 ```javascript
 signClient.on("session_event", ({ event }) => {
   // Handle session events, such as "chainChanged", "accountsChanged", etc.

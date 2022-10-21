@@ -36,6 +36,10 @@ WalletConnect v2.0 allows any method or event to be emitted. The following requi
 
 **1. Add listeners for desired `SignClient` events.**
 
+:::info
+To listen to pairing-related events, please follow the guidance for [Pairing API event listeners](../core/pairing-api.md).
+:::
+
 ```ts
 signClient.on("session_proposal", (event) => {
   // Show session proposal data to the user i.e. in a modal with options to approve / reject it
