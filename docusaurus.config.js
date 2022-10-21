@@ -25,7 +25,7 @@ const config = {
       {
         docs: {
           breadcrumbs: false,
-          lastVersion: "1.0",
+          lastVersion: "current",
           routeBasePath: "/",
           sidebarPath: require.resolve("./sidebars.js"),
           showLastUpdateTime: true,
@@ -35,11 +35,11 @@ const config = {
             "1.0": {
               badge: false,
               label: "v1.0",
-              path: "/",
+              path: "1.0",
             },
             current: {
               badge: false,
-              label: "v2.0-rc",
+              label: "v2.0",
               path: "2.0",
             },
           },
