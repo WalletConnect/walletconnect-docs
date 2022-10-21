@@ -2,11 +2,9 @@
 
 Sign API establishes a session between a wallet and a dapp in order to expose a set of blockchain accounts that can sign transactions or messages using a secure remote JSON-RPC transport with methods and events. This library is compatible with NodeJS, browsers and React-Native applications (NodeJS modules require polyfills for React-Native).
 
-## Install
-
-```bash npm2yarn
-npm install --save @walletconnect/sign-client@rc @walletconnect/types@rc
-```
+:::info
+For an example implementation, please refer to our `react-wallet-v2` [example](https://github.com/WalletConnect/web-examples/tree/main/wallets/react-wallet-v2).
+:::
 
 ## Migrating from v1.x
 
@@ -34,7 +32,7 @@ const signClient = await SignClient.init({
 
 ## Setting up event listeners
 
-WalletConnect v2.0 allows any method or event to be emited. The following requirements should be satisfied in order to have a particular event :
+WalletConnect v2.0 allows any method or event to be emitted. The following requirements should be satisfied in order to have a particular event:
 
 **1. Add listeners for desired `SignClient` events.**
 
@@ -118,29 +116,13 @@ signClient.on("session_delete", (event) => {
     topic: string;
   }
 });
-
-signClient.on("pairing_ping", (event) => {
-  // React to pairing ping event
-  interface Event {
-    id: number;
-    topic: string;
-  }
-});
-
-signClient.on("pairing_delete", (event) => {
-  // React to pairing delete event
-  interface Event {
-    id: number;
-    topic: string;
-  }
-});
 ```
 
 ## Pairing and session permissions
 
 ### URI
 
-The pairing proposal between a wallet and a dapp is made using an [URI](https://github.com/WalletConnect/walletconnect-specs/blob/bc3c79dbe7542cdd59613d967acb2e4151c21b81/sign/pairing-uri.md). In WalletConnect v2.0 the session and pairing are decoupled from each other. This means that a URI is shared to construct a pairing proposal and only after settling the pairing then the dapp can propose a session using that pairing. In simpler words, the dapp generates an URI that can be used by the wallet for pairing.
+The pairing proposal between a wallet and a dapp is made using an [URI](../../specs/core/pairing/pairing-uri.md). In WalletConnect v2.0 the session and pairing are decoupled from each other. This means that a URI is shared to construct a pairing proposal, and only after settling the pairing the dapp can propose a session using that pairing. In simpler words, the dapp generates an URI that can be used by the wallet for pairing.
 
 ### Namespaces
 
@@ -180,6 +162,12 @@ extension: [
 ### Pairing with `uri`
 
 To create a pairing proposal, simply pass the `uri` received from the dapp into the `signClient.pair()` function.
+
+:::caution
+As of 2.0.0 (stable), calling pairing-specific methods (such as `signClient.pair()`) directly on `signClient` will continue to work, but is considered deprecated and will be removed in a future major version.
+
+It is recommended to instead call these methods directly via the [Pairing API](../core/pairing-api.md), e.g.: `signClient.core.pairing.pair()`.
+:::
 
 ```js
 // This will trigger the `session_proposal` event

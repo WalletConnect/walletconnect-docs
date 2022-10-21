@@ -6,11 +6,9 @@ description: Quick Start For Dapps using Standalone Client
 
 This library is compatible with NodeJS, browsers and React-Native applications \(NodeJS modules require polyfills for React-Native\).
 
-## Install
-
-```bash npm2yarn
-npm install --save @walletconnect/sign-client@rc @walletconnect/types@rc
-```
+:::info
+For an example implementation, please refer to our `react-dapp-v2` [example](https://github.com/WalletConnect/web-examples/tree/main/dapps/react-dapp-v2).
+:::
 
 ## Create a Session
 
@@ -60,7 +58,7 @@ import QRCodeModal from "@walletconnect/qrcode-modal";
 
 try {
   const { uri, approval } = await signClient.connect({
-    // Optionally: pass a known prior pairing (e.g. from `signClient.pairing.values`) to skip the `uri` step.
+    // Optionally: pass a known prior pairing (e.g. from `signClient.core.pairing.getPairings()`) to skip the `uri` step.
     pairingTopic: pairing?.topic,
     // Provide the namespaces and chains (e.g. `eip155` for EVM-based chains) we want to use in this session.
     requiredNamespaces: {
