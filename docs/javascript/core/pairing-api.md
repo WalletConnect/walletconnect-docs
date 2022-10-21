@@ -43,10 +43,10 @@ await sdkClient.core.pairing.updateMetadata({ topic: "1b3eda3f4...", metadata: {
 const pairings = sdkClient.core.pairing.getPairings()
 
 // Pings a pairing's peer, by providing the pairing topic.
-await sdkClient.core.pairing.ping({ topic: string })
+await sdkClient.core.pairing.ping({ topic: "1b3eda3f4..." })
 
 // Disconnects/Removes a pairing, by providing the pairing topic.
-await sdkClient.core.pairing.disconnect({ topic: string })
+await sdkClient.core.pairing.disconnect({ topic: "1b3eda3f4..." })
 ```
 
 ## Listeners for pairing-related events
