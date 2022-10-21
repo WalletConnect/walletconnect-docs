@@ -46,3 +46,19 @@ await sdkClient.core.pairing.ping({ topic: string })
 // Disconnects/Removes a pairing, by providing the pairing topic.
 await sdkClient.core.pairing.disconnect({ topic: string })
 ```
+
+## Listeners for pairing-related events
+
+The Pairing API currently emits the following events:
+
+- `pairing_ping`
+- `pairing_delete`
+- `pairing_expire`
+
+Any of these events can be listened for via the standard Node [`EventEmitter` interface](https://nodejs.org/api/events.html#class-eventemitter):
+
+```ts
+sdkClient.pairing.events.on("pairing_delete", ({ id, topic }) => {
+  // clean up after the pairing for `topic` was deleted.
+});
+```
