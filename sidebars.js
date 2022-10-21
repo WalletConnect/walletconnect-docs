@@ -112,7 +112,7 @@ module.exports = {
           items: [
             "swift/auth/installation",
             "swift/auth/wallet-usage",
-            "swift/auth/app-usage",
+            "swift/auth/dapp-usage",
           ],
         },
         {

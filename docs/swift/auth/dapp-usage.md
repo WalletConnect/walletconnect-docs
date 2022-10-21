@@ -27,7 +27,7 @@ public let socketConnectionStatusPublisher: AnyPublisher<SocketConnectionStatus,
 
 ### Connect Clients and Send Authentication Request
 
-Your App should generate a pairing URI and share it with the wallet. Uri can be presented as a QR code or sent via a universal link. Wallet begins subscribing to your App's authentication requests after scanning URI. To create a pairing and send an authentication request, you need to call:	
+Your App should generate a pairing URI and share it with the wallet. URI can be presented as a QR code or sent via a universal link. Wallet begins subscribing to your App's authentication requests after scanning URI. To create a pairing and send an authentication request, you need to call:	
 
 ```swift
 let uri = try await Pair.instance.create()
@@ -40,6 +40,6 @@ Subscribe for `authResponsePublisher` events.
 A response will be either signed CAIP-74 `Cacao` object or `AuthError` in case the signature is invalid, or the requested message has been compromised.
 
 ### Where to go from here
-- Try our Example dApp that is part of WalletConnectSwiftV2 repository.
+- Try our [Example dApp](https://github.com/WalletConnect/WalletConnectSwiftV2/tree/main/Example) that is part of [WalletConnectSwiftV2 repository](https://github.com/WalletConnect/WalletConnectSwiftV2).
 - Build API documentation in XCode: go to Product -> Build Documentation
 
