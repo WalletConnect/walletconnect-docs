@@ -1,49 +1,7 @@
 # Relay Client
-Relay client provides transport layer for Sign, Auth and Chat SDKs. You can configure it once and every SDK will transport protocol messages via same instance of a relay client with only one opened websocket connection.
+Relay client provides transport layer for Sign, Auth and Chat SDKs. You can configure it once and every SDK will transport protocol messages via same instance of a relay client with only one opened websocket connection. The Relay api can be acceessed throgh the Core Client
 
-## Requirements
-
-* Android min SDK 23
-* Java 11
-
-## Installation
-
-![Maven Central](https://img.shields.io/maven-central/v/com.walletconnect/android-core)
-
-root/build.gradle.kts:
-
-```gradle
-allprojects {
- repositories {
-    mavenCentral()
- }
-}
-```
-
-app/build.gradle
-
-```gradle
-implementation("com.walletconnect:android-core:release_version")
-```
-
-## Project set up
-
-To use initialize RelayClient properly you will need a projectId. Go to https://cloud.walletconnect.com/app, register your project and get projectId.
-
-## RelayClient initialization
-
-Before using any WalletConnect Kotlin SDK it is necessary to initialize shared instance of RelayClient. The initialization of RelayClient must always happen in the Android Application class. Provide the projectId generated in the WalletConnec Cloud, construct the server url and choose the connection type.
-
-```kotlin
-val projectId = "" //Get Project ID at https://cloud.walletconnect.com/
-val relayUrl = "relay.walletconnect.com"
-val serverUrl = "wss://$relayUrl?projectId=${projectId}"
-val connectionType = ConnectionType.AUTOMATIC or ConnectionType.MANUAL
-val application = //Android Application level class
-
-RelayClient.initialize(relayServerUrl = serverUrl, connectionType = connectionType, application = application)
-```
-
+#
 ## Web Socket connection control
 
 There are two connection types, Automatic and Manual.
