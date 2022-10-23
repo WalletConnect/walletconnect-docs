@@ -25,7 +25,7 @@ SignClient.initalize(init) { error ->
 }
 ```
 
-The Dapp client is responsible for initiating the connection with wallets and defining the required namespaces (CAIP-2) from the Wallet and is also in charge of sending requests. To initialize the Sign client, create a `Sign.Params.Init` object in the Android Application class and the Core Client. The `Sign.Params.Init` object will then be passed to the `SignClient` initialize function.
+The Dapp client is responsible for initiating the connection with wallets and defining the required namespaces (CAIP-2) from the Wallet and is also in charge of sending requests. To initialize the Sign client, create a `Sign.Params.Init` object in the Android Application class with the Core Client. The `Sign.Params.Init` object will then be passed to the `SignClient` initialize function.
 
 #
 ## **Dapp**
