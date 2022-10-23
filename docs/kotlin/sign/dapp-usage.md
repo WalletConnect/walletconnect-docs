@@ -6,31 +6,28 @@
 ```kotlin
 val projectId = "" // Get Project ID at https://cloud.walletconnect.com/
 val relayUrl = "relay.walletconnect.com"
-val serverUrl = "wss://$relayUrl?projectId=${projectId}"
+val serverUrl = "wss://$relayUrl?projectId=$projectId"
 val connectionType = ConnectionType.AUTOMATIC or ConnectionType.MANUAL
-
-RelayClient.initialize(relayServerUrl = serverUrl, connectionType = connectionType, application = this)
-
-val appMetaData = Sign.Model.AppMetaData(
-    name = "Wallet Name",
-    description = "Wallet Description",
-    url = "Wallet Url",
-    icons = listOfIconUrlStrings,
-    redirect = "kotlin-dapp-wc:/request"
+val appMetaData = Core.Model.AppMetaData(
+    name = "Dapp Name",
+    description = "Dapp Description",
+    url = "Dapp Url",
+    icons = /*list of icon url strings*/,
+    redirect = "kotlin-dapp-wc:/request" // Custom Redirect URI
 )
-val init = Sign.Params.Init(relay = RelayClient, appMetaData = appMetaData)
 
-SignClient.initalize(init)
+CoreClient.initialize(relayServerUrl = serverUrl, connectionType = connectionType, application = this, metaData = appMetaData)
+
+val init = Sign.Params.Init(coreClient = CoreClient)
+
+SignClient.initalize(init) { error ->
+    // Error will be thrown if there's an isssue during initalization
+}
 ```
 
-The wallet client will always be responsible for exposing accounts (CAPI10 compatible) to a Dapp and therefore is also in charge of signing.
-To initialize the Sign client, create a `Sign.Params.Init` object in the Android Application class. The Init object will need the
-initialized firstly RelayClient instance and the apps's AppMetaData. The `Sign.Params.Init` object will then be passed to the `SignClient`
-initialize function.
+The Dapp client is responsible for initiating the connection with wallets and defining the required namespaces (CAIP-2) from the Wallet and is also in charge of sending requests. To initialize the Sign client, create a `Sign.Params.Init` object in the Android Application class and the Core Client. The `Sign.Params.Init` object will then be passed to the `SignClient` initialize function.
 
-For more contex on how to initialize RelayClient, go to [RelayClient docs](../../kotlin/guides/relay.md) section.
-
-
+#
 ## **Dapp**
 
 ### **SignClient.DappDelegate**
@@ -68,13 +65,18 @@ val dappDelegate = object : SignClient.DappDelegate {
     override fun onConnectionStateChange(state: Sign.Model.ConnectionState) {
         //Triggered whenever the connection state is changed
     }
+
+    override fun onError(error: Sign.Model.Error) {
+        // Triggered whenever there is an issue inside the SDK
+    }
 }
+
 SignClient.setWalletDelegate(dappDelegate)
 ```
 
 The SignClient needs a `SignClient.DappDelegate` passed to it for it to be able to expose asynchronously updates sent from the Wallet.
 
-
+#
 
 ### **Connect**
 
@@ -84,20 +86,20 @@ val chains: List<String> = /*List of chains that wallet will be requested for*/
 val methods: List<String> = /*List of methods that wallet will be requested for*/
 val events: List<String> = /*List of events that wallet will be requested for*/
 val namespaces: Map<String, Sign.Model.Namespaces.Proposal> = mapOf(namespace, Sign.Model.Namespaces.Proposal(accounts, methods, events))
-val pairingTopic: String? =  /* Optional parameter, use it when the pairing between peers is already established*/
+val pairing: Core.Model.Pairing = /*Either an active or inactive pairing*/
 val connectParams = Sign.Params.Connect(namespaces, pairingTopic)
 
-fun SignClient.connect(connectParams, { proposedSequence -> /*callback that returns the WalletConnect.Model.ProposedSequence*/ }, { error -> /*callback for error while sending session proposal*/ })
+fun SignClient.connect(connectParams, 
+    { onSuccess -> 
+        /*callback that returns letting you know that you have successfully initiated connecting*/ 
+    }, 
+    { error -> 
+        /*callback for error while trying to initiate a connection with a peer*/ 
+    }
+)
 ```
 
-The `SignClient.connect` asynchronously exposes the pairing URI that is shared with wallet out of bound, as qr code or mobile linking. The
-Sign.Model.ProposedSequence returns either a Pairing or Session flag depending on if there is already an established pairing between peers.
-To establish a session between peers, pass the existing pairing's topic to the connect method. The SDK will send the SessionProposal under
-the hood for the given topic and expect session approval or rejection in onSessionApproved and onSessionRejected in DappDelegate
-accordingly.
-
-
-
+#
 ### **Get List of Settled Sessions**
 
 ```kotlin
@@ -106,18 +108,7 @@ SignClient.getListOfSettledSessions()
 
 To get a list of the most current settled sessions, call `SignClient.getListOfSettledSessions()` which will return a list of type `Session`.
 
-
-
-### **Get List of Settled Pairings**
-
-```kotlin
-SignClient.getListOfSettledPairings()
-```
-
-To get a list of the most current settled pairings, call `SignClient.getListOfSettledPairings()` which will return a list of type `Pairing`.
-
-
-
+#
 ### **Get list of pending session requests for a topic**
 
 ```kotlin
@@ -127,8 +118,7 @@ SignClient.getPendingRequests(topic: String)
 To get a list of pending session requests for a topic, call `SignClient.getPendingRequests()` and pass a topic which will return
 a `PendingRequest` object containing requestId, method, chainIs and params for pending request.
 
-
-
+#
 ## Project ID
 
 For the Project ID look at [Project ID](https://www.walletconnect.com).
