@@ -12,27 +12,23 @@ application class, the Project ID, and the application AppMetaData. The `Auth.Pa
 val projectId = "" // Get Project ID at https://cloud.walletconnect.com/
 val relayUrl = "relay.walletconnect.com"
 val serverUrl = "wss://$relayUrl?projectId=${projectId}"
+val appMetaData = Core.Model.AppMetaData(name = "Kotlin.Requester",
+    description = "Kotlin AuthSDK Requester Implementation",
+    url = "kotlin.requester.walletconnect.com",
+    icons = listOf("https://raw.githubusercontent.com/WalletConnect/walletconnect-assets/master/Icon/Gradient/Icon.png"),
+    redirect = "kotlin-requester-wc:/request"
+)
 
-RelayClient.initialize(relayServerUrl = serverUrl, connectionType = ConnectionType.AUTOMATIC, application = this)
+CoreClient.initialize(relayServerUrl = serverUrl, connectionType = ConnectionType.AUTOMATIC, application = this,metaData = appMetaData)
 
 AuthClient.initialize(
-    init = Auth.Params.Init(
-        relay = RelayClient,
-        appMetaData = Auth.Model.AppMetaData(
-            name = "Kotlin.Requester",
-            description = "Kotlin AuthSDK Requester Implementation",
-            url = "kotlin.requester.walletconnect.com",
-            icons = listOf("https://raw.githubusercontent.com/WalletConnect/walletconnect-assets/master/Icon/Gradient/Icon.png"),
-            redirect = "kotlin-requester-wc:/request"
-        ),
-        iss = null
-    )
+    init = Auth.Params.Init(core = CoreClient, iss = null)
 ) { error ->
-    Log.e("Requester initialize", error.throwable.stackTraceToString())
+    Log.e(tag(this), error.throwable.stackTraceToString())
 }
 ```
 
-For more contex on how to initialize RelayClient, go to [RelayClient docs](../../kotlin/guides/relay.md) section.
+For more contex on how to initialize CoreClient, go to [CoreClient docs](../../kotlin/core/installation.md) section.
 
 ---
 ### **AuthClient.RequesterDelegate**
