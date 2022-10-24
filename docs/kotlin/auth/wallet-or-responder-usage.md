@@ -12,27 +12,25 @@ application class, the Project ID, and the application AppMetaData. The `Auth.Pa
 val projectId = "" // Get Project ID at https://cloud.walletconnect.com/
 val relayUrl = "relay.walletconnect.com"
 val serverUrl = "wss://$relayUrl?projectId=${projectId}"
+val appMetaData = Core.Model.AppMetaData(name = "Kotlin.Responder",
+    description = "Kotlin AuthSDK Responder Implementation",
+    url = "kotlin.responder.walletconnect.com",
+    icons = listOf("https://raw.githubusercontent.com/WalletConnect/walletconnect-assets/master/Icon/Gradient/Icon.png"),
+    redirect = "kotlin-responder-wc:/request"
+)
 
-RelayClient.initialize(relayServerUrl = serverUrl, connectionType = ConnectionType.AUTOMATIC, application = this)
+CoreClient.initialize(relayServerUrl = serverUrl, connectionType = ConnectionType.AUTOMATIC, application = this,metaData = appMetaData)
 
 AuthClient.initialize(
     init = Auth.Params.Init(
-        relay = RelayClient,
-        appMetaData = Auth.Model.AppMetaData(
-            name = "Kotlin.Responder",
-            description = "Kotlin AuthSDK Responder Implementation",
-            url = "kotlin.responder.walletconnect.com",
-            icons = listOf("https://raw.githubusercontent.com/WalletConnect/walletconnect-assets/master/Logo/Gradient/Logo.png"),
-            redirect = "kotlin-responder-wc:/request"
-        ),
-        iss = "" // Example did:pkh:eip155:1:0xb9c5714089478a327f09197987f16f9e5d936e8a. Please use valid chain id and account addres as referenced here: https://github.com/ChainAgnostic/CAIPs/blob/master/CAIPs/caip-10.md
+        core = CoreClient,
+        iss = ISSUER
     )
-    { error ->
-    Log.e("Responder initialize", error.throwable.stackTraceToString())
+) { error ->
+    Log.e(tag(this), error.throwable.stackTraceToString())
 }
 ```
-
-For more contex on how to initialize RelayClient, go to [RelayClient docs](../../kotlin/guides/relay.md) section.
+For more contex on how to initialize CoreClient, go to [CoreClient docs](../../kotlin/core/installation.md) section.
 
 ---
 ### **AuthClient.ResponderDelegate**
