@@ -47,7 +47,7 @@ Requests the wallet to sign and submit a [INVOKE transaction](https://docs.stark
         2.1.1. `contractAddress` : `Felt`
         2.1.2. `entrypoint` : `Felt`
         2.1.3. `calldata` : `Felt[]` (Optional)
-    2.2. `abi` : `ABI` (Optional) the abi of the contract for better displaying
+    2.2. `abi` : `ABI[]` (Optional) one or more contract abis which can be used to display the calls
     2.3. `executionParams` : `Object` (Optional) Parameters suggested by the dapp
         2.3.1. `nonce` : `Felt` (Optional)
         2.3.2. `maxFee` : `Felt` (Optional)
