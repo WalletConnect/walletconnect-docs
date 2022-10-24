@@ -9,6 +9,31 @@ We define new types for starknet:
 - `ABI`, a representation of a StarkNet contract’s interface. As [StarkNet ABI Spec](https://docs.starknet.io/documentation/develop/Contracts/contract-abi/)
 
 
+
+## starknet_requestDeployAccount
+
+Requests the wallet to deploy a given account
+
+### Parameters
+
+```
+1. `FELT`, accountAddress: Identifies account to be deployed
+```
+
+### Example Parameters
+
+```javascript
+[
+   "0x003a8278a26f32452f156260d81b93efb0eca126b44df7b005a5b27e2bbc4a64",
+];
+```
+
+### Returns
+
+`FELT`, The hash of the transaction submitted by the wallet
+
+
+
 ## starknet_requestAddInvokeTransaction
 
 Requests the wallet to sign and submit a [INVOKE transaction](https://docs.starknet.io/documentation/develop/Blocks/transactions/#invoke_transaction)
