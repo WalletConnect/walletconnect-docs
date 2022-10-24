@@ -3,13 +3,6 @@ description: Quick Start For Dapps using Auth Client
 ---
 
 # Dapp Usage
-
-:::caution
-**The WalletConnect Auth SDK is currently in Alpha and is not production-ready**.
-
-Its public API and associated documentation may still see significant and breaking changes.
-:::
-
 :::info
 For an example implementation, please refer to our [`react-dapp-auth` example](https://github.com/WalletConnect/web-examples/tree/main/dapps/react-dapp-auth).
 :::

@@ -28,6 +28,7 @@ const config = {
           lastVersion: "1.0",
           routeBasePath: "/",
           sidebarPath: require.resolve("./sidebars.js"),
+          showLastUpdateTime: true,
           editUrl:
             "https://github.com/WalletConnect/walletconnect-docs/blob/main/",
           versions: {
