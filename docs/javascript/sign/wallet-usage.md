@@ -39,7 +39,7 @@ WalletConnect v2.0 allows any method or event to be emited. The following requir
 **1. Add listeners for desired `SignClient` events.**
 
 ```ts
-client.on("session_proposal", (event) => {
+signClient.on("session_proposal", (event) => {
   // Show session proposal data to the user i.e. in a modal with options to approve / reject it
 
   interface Event {
@@ -75,7 +75,7 @@ client.on("session_proposal", (event) => {
   }
 });
 
-client.on("session_event", (event) => {
+signClient.on("session_event", (event) => {
   // Handle session events, such as "chainChanged", "accountsChanged", etc.
 
   interface Event {
@@ -88,7 +88,7 @@ client.on("session_event", (event) => {
   }
 });
 
-client.on("session_request", (event) => {
+signClient.on("session_request", (event) => {
   // Handle session method requests, such as "eth_sign", "eth_sendTransaction", etc.
 
   interface Event {
@@ -101,7 +101,7 @@ client.on("session_request", (event) => {
   }
 });
 
-client.on("session_ping", (event) => {
+signClient.on("session_ping", (event) => {
   // React to session ping event
 
   interface Event {
@@ -110,7 +110,7 @@ client.on("session_ping", (event) => {
   }
 });
 
-client.on("session_delete", (event) => {
+signClient.on("session_delete", (event) => {
   // React to session delete event
 
   interface Event {
@@ -119,7 +119,7 @@ client.on("session_delete", (event) => {
   }
 });
 
-client.on("pairing_ping", (event) => {
+signClient.on("pairing_ping", (event) => {
   // React to pairing ping event
   interface Event {
     id: number;
@@ -127,7 +127,7 @@ client.on("pairing_ping", (event) => {
   }
 });
 
-client.on("pairing_delete", (event) => {
+signClient.on("pairing_delete", (event) => {
   // React to pairing delete event
   interface Event {
     id: number;

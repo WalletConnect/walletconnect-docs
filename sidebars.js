@@ -48,7 +48,7 @@ module.exports = {
           items: [
             "javascript/sign/installation",
             "javascript/sign/wallet-usage",
-            "javascript/sign/dapp-usage-standalone-client",
+            "javascript/sign/dapp-usage",
           ],
         },
         {
@@ -112,7 +112,7 @@ module.exports = {
           items: [
             "swift/auth/installation",
             "swift/auth/wallet-usage",
-            "swift/auth/app-usage",
+            "swift/auth/dapp-usage",
           ],
         },
         {

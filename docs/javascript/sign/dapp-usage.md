@@ -33,20 +33,20 @@ const signClient = await SignClient.init({
 **2. Add listeners for desired `SignClient` events.**
 
 ```javascript
-client.on("session_event", ({ event }) => {
+signClient.on("session_event", ({ event }) => {
   // Handle session events, such as "chainChanged", "accountsChanged", etc.
 });
 
-client.on("session_update", ({ topic, params }) => {
+signClient.on("session_update", ({ topic, params }) => {
   const { namespaces } = params;
-  const _session = client.session.get(topic);
+  const _session = signClient.session.get(topic);
   // Overwrite the `namespaces` of the existing session with the incoming one.
   const updatedSession = { ..._session, namespaces };
   // Integrate the updated session state into your dapp state.
   onSessionUpdate(updatedSession);
 });
 
-client.on("session_delete", () => {
+signClient.on("session_delete", () => {
   // Session was deleted -> reset the dapp state, clean up from user session, etc.
 });
 ```
@@ -59,8 +59,8 @@ import QRCodeModal from "@walletconnect/qrcode-modal";
 // ...
 
 try {
-  const { uri, approval } = await client.connect({
-    // Optionally: pass a known prior pairing (e.g. from `client.pairing.values`) to skip the `uri` step.
+  const { uri, approval } = await signClient.connect({
+    // Optionally: pass a known prior pairing (e.g. from `signClient.pairing.values`) to skip the `uri` step.
     pairingTopic: pairing?.topic,
     // Provide the namespaces and chains (e.g. `eip155` for EVM-based chains) we want to use in this session.
     requiredNamespaces: {
@@ -102,7 +102,7 @@ try {
 Once the session has been established successfully, you can start making JSON-RPC requests to be approved and signed by the wallet:
 
 ```javascript
-const result = await client.request({
+const result = await signClient.request({
   topic: session.topic,
   chainId: "eip155:1",
   request: {

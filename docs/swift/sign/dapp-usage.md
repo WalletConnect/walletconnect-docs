@@ -2,7 +2,7 @@
 
 ### Configure Networking and Pair clients
 
-Make sure what you properly configure Networking and Pair Clients first 
+Make sure what you properly configure Networking and Pair Clients first.
 - [Networking](../core/networking-configuration.md)
 - [Pairing](../core/pairing-usage.md)
 
@@ -40,7 +40,7 @@ let methods: Set<String> = ["eth_sendTransaction", "personal_sign", "eth_signTyp
 let blockchains: Set<Blockchain> = [Blockchain("eip155:1")!, Blockchain("eip155:137")!]
 let namespaces: [String: ProposalNamespace] = ["eip155": ProposalNamespace(chains: blockchains, methods: methods, events: [], extensions: nil)]
 ``` 
-to learn more on namespaces, check out our [specs](../../specs/sign/session-namespaces)
+To learn more on namespaces, check out our [specs](../../specs/sign/session-namespaces).
 
 2. Your App should generate a pairing URI and share it with a wallet. Uri can be presented as a QR code or sent via a universal link. Wallet begins subscribing for session proposals after receiving URI. In order to create a pairing and send a session proposal, you need to call the following:
 
@@ -64,5 +64,5 @@ try await Sign.instance.request(params: request)
 When wallet respond `sessionResponsePublisher` will publish an event so you can verify the response.
 
 ### Where to go from here
-- Try our Example dApp that is part of WalletConnectSwiftV2 repository.
+- Try our [Example dApp](https://github.com/WalletConnect/WalletConnectSwiftV2/tree/main/Example) that is part of [WalletConnectSwiftV2 repository](https://github.com/WalletConnect/WalletConnectSwiftV2).
 - Build API documentation in XCode: go to Product -> Build Documentation
