@@ -50,7 +50,7 @@ The CoreClient offers the ability to use a custom Relay client. Just creating an
 
 ```kotlin
 ...
-val optionalRelay: RelayConnectionInterface? = /*implement interface*/
+val optionalRelay: RelayConnectionInterface = /*implement interface*/
 
 CoreClient.initialize(relayServerUrl = serverUrl, connectionType = connectionType, application = application, relay = optionalRelay)
 ```
