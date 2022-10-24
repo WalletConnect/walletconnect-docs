@@ -180,7 +180,6 @@ module.exports = {
           label: "Guides",
           items: [
             "kotlin/guides/mobile-linking",
-            "kotlin/guides/relay"
           ],
         },
       ],
