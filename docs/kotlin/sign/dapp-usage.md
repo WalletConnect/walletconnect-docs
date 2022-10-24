@@ -87,7 +87,7 @@ val methods: List<String> = /*List of methods that wallet will be requested for*
 val events: List<String> = /*List of events that wallet will be requested for*/
 val namespaces: Map<String, Sign.Model.Namespaces.Proposal> = mapOf(namespace, Sign.Model.Namespaces.Proposal(accounts, methods, events))
 val pairing: Core.Model.Pairing = /*Either an active or inactive pairing*/
-val connectParams = Sign.Params.Connect(namespaces, pairingTopic)
+val connectParams = Sign.Params.Connect(namespaces, pairing)
 
 fun SignClient.connect(connectParams, 
     { onSuccess -> 
