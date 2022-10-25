@@ -124,7 +124,10 @@ module.exports = {
         {
           type: "category",
           label: "Chat",
-          items: ["swift/chat/installation"],
+          items: [
+            "swift/chat/installation",
+            "swift/chat/usage",
+           ],
         },
         {
           type: "category",
