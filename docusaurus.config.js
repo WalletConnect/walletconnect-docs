@@ -25,7 +25,7 @@ const config = {
       {
         docs: {
           breadcrumbs: false,
-          lastVersion: "1.0",
+          lastVersion: "current",
           routeBasePath: "/",
           sidebarPath: require.resolve("./sidebars.js"),
           showLastUpdateTime: true,
@@ -35,11 +35,11 @@ const config = {
             "1.0": {
               badge: false,
               label: "v1.0",
-              path: "/",
+              path: "1.0",
             },
             current: {
               badge: false,
-              label: "v2.0-rc",
+              label: "v2.0",
               path: "2.0",
             },
           },
@@ -158,14 +158,6 @@ const config = {
         apiKey: "5921626237dc9040afc258af25d4e77d",
         indexName: "walletconnect",
         contextualSearch: true,
-      },
-      announcementBar: {
-        id: 'support_us',
-        content:
-          '⚠️ Getting started? For dapps, use <a rel="noopener noreferrer" href="/">v1</a>.  For wallets, use both <a rel="noopener noreferrer" href="/">v1</a> and <a rel="noopener noreferrer" href="/2.0/">v2</a> together. <a rel="noopener noreferrer" href="/2.0/advanced/migrating-from-v1.0">Learn more.</a>',
-        backgroundColor: '#3182ce',
-        textColor: '#fff',
-        isCloseable: true,
       },
     },
 };

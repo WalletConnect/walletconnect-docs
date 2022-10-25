@@ -8,6 +8,66 @@
     {
       "source": "/v/2.0/:path*",
       "destination": "/2.0/:path*"
+    },
+    {
+      "source": "/quick-start/dapps/client",
+      "destination": "/1.0/quick-start/dapps/client"
+    },
+    {
+      "source": "/quick-start/dapps/node",
+      "destination": "/1.0/quick-start/dapps/node"
+    },
+    {
+      "source": "/quick-start/dapps/react-native",
+      "destination": "/1.0/quick-start/dapps/react-native"
+    },
+    {
+      "source": "/quick-start/dapps/web3-provider",
+      "destination": "/1.0/quick-start/dapps/web3-provider"
+    },
+    {
+      "source": "/quick-start/dapps/web3modal",
+      "destination": "/1.0/quick-start/dapps/web3modal"
+    },
+    {
+      "source": "/quick-start/wallets/kotlin",
+      "destination": "/1.0/quick-start/wallets/kotlin"
+    },
+    {
+      "source": "/quick-start/wallets/swift",
+      "destination": "/1.0/quick-start/wallets/swift"
+    },
+    {
+      "source": "/quick-start/wallets/react-native",
+      "destination": "/1.0/quick-start/wallets/react-native"
+    },
+    {
+      "source": "/json-rpc-api-methods/ethereum",
+      "destination": "/1.0/json-rpc-api-methods/ethereum"
+    },
+    {
+      "source": "/smart-wallets",
+      "destination": "/1.0/smart-wallets"
+    },
+    {
+      "source": "/mobile-linking",
+      "destination": "/1.0/mobile-linking"
+    },
+    {
+      "source": "/legacy-clients",
+      "destination": "/1.0/legacy-clients"
+    },
+    {
+      "source": "/client-api",
+      "destination": "/1.0/client-api"
+    },
+    {
+      "source": "/bridge-server",
+      "destination": "/1.0/bridge-server"
+    },
+    {
+      "source": "/push-server",
+      "destination": "/1.0/push-server"
     }
   ]
 }
