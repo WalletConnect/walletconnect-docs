@@ -13,7 +13,7 @@ module.exports = {
         "readme",
         {
           type: "category",
-          label: "Our SDKs",
+          label: "SDKs",
           collapsed: false,
           items: [
             "introduction/sign",
@@ -22,16 +22,8 @@ module.exports = {
             "introduction/push",
           ],
         },
-        {
-          type: "category",
-          label: "Our Projects",
-          collapsed: false,
-          items: [
-            "introduction/cloud-explorer",
-            "introduction/web3modal"
-          ],
-        },
-        "introduction/examples-and-resources",
+        "introduction/web3modal",
+        "introduction/cloud-explorer",
         "introduction/glossary",
       ],
     },
