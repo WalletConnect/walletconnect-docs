@@ -184,6 +184,15 @@ module.exports = {
         },
         {
           type: "category",
+          label: "Core",
+          items: [
+            "kotlin/core/installation",
+            "kotlin/core/pairing",
+            "kotlin/core/relay",
+          ],
+        },
+        {
+          type: "category",
           label: "Guides",
           items: ["kotlin/guides/mobile-linking"],
         },
