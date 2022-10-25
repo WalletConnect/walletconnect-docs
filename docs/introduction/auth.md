@@ -22,6 +22,20 @@ There are getting started guides for the following clients platforms:
 - [iOS - Swift](../swift/auth/installation.md)
 - [Android - Kotlin](../kotlin/auth/installation.md)
 
-## Useful Links
+## Examples and Resources
 
-We've created some sample apps so that you can get a taste of the WalletConnect Auth experience. Here is our [sample wallet](https://react-auth-wallet.walletconnect.com/) and [sample dapp](https://react-auth-dapp.walletconnect.com/).
+To view examples of the Sign SDK in use, please see the below web examples.
+
+### dApps
+- [React Auth dApp](https://github.com/WalletConnect/web-examples/tree/main/dapps/react-dapp-auth) ([Demo](https://react-auth-dapp.vercel.app/))
+### Wallets
+- [React Auth Wallet](https://github.com/WalletConnect/web-examples/tree/main/wallets/react-wallet-auth) ([Demo](https://react-auth-wallet.vercel.app/))
+
+### Native Apps
+#### iOS - Swift
+
+- Sample Wallet and Dapp sample apps can be found under the Example directory in [Swift's V2 repository](https://github.com/WalletConnect/WalletConnectSwiftV2/tree/main/Example)
+
+#### Android - Kotlin
+
+- Sample Wallet and Dapp .apk files can be found under the latest release tag in [Kotlin's V2 repository](https://github.com/WalletConnect/WalletConnectKotlinV2/tags)
