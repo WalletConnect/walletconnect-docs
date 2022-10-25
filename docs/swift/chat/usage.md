@@ -15,8 +15,8 @@ Chat.instance
 
 ### Register address at a key server
 
-In order to make a user's account publicly discoverable one needs to register it's account on public key server. 
-Keyserver will create a record of an account and client generated public key that will be used for peer key exchange during thread creation.
+To make a user's account publicly discoverable, one must register his account on a public key server. 
+Keyserver will create a record of an account and client-generated public key that will be used for peer key exchange during thread creation.
  
 ```swift
 let Caip2Account = Account(chainIdentifier: "eip155:1", address: "0x36275231673672234423f")!
@@ -25,7 +25,7 @@ let pubKey = try! await Chat.instance.register(account: Caip2Account)
 
 ### Resolve peer associated public key with it's address
 
-To resolve peer's public key that you will need in order to invite him into a chat thread call `resolve` method.
+To resolve a peer's public key that you will need to invite him into a chat thread, call `resolve` method.
  ```swift
 let resolvedPubKey = try! await Chat.instance.resolve(account: Caip2Account)
 ```
@@ -38,7 +38,7 @@ try! await Chat.instance.invite(publicKey: resolvedPubKey, peerAccount: peerAcco
 
 ### Accepting an invite
 
-When your client gets invited you can accept the invitation or reject it.
+When your client gets invited, you can accept the invitation or reject it.
 
 ```swift
 try! await Chat.instance.accept(inviteId: invite.id)
@@ -66,7 +66,7 @@ try! await Chat.instance.leave(topic: thread.topic)
 
 Integration of chat client will require you to handle following events:
 
-`newThreadPublisher` will publish when new thread with a peer client has been established.
+`newThreadPublisher` will publish when a new thread with a peer client has been established.
 ```swift
 public var newThreadPublisher: AnyPublisher<Thread, Never> 
 ```
