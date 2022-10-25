@@ -41,3 +41,7 @@ Adding `dapp.example.com` to the allowlist will only allow requests from that or
 | Project ID doesn't exist | 401        |
 | Exists and is invalid  | 403        |
 | Too many requests  | 1013        |
+
+## Examples and Resources
+
+- The [open source relay reppository](https://github.com/walletconnect/relay) for self-hosting and installation instructions.
