@@ -10,39 +10,17 @@ We define new types for starknet:
 
 
 
-## starknet_requestDeployAccount
-
-Requests the wallet to deploy a given account
-
-### Parameters
-
-```
-1. `FELT`, accountAddress: Identifies account to be deployed
-```
-
-### Example Parameters
-
-```javascript
-[
-   "0x003a8278a26f32452f156260d81b93efb0eca126b44df7b005a5b27e2bbc4a64",
-];
-```
-
-### Returns
-
-`FELT`, The hash of the transaction submitted by the wallet
-
-
-
 ## starknet_requestAddInvokeTransaction
 
 Requests the wallet to sign and submit a [INVOKE transaction](https://docs.starknet.io/documentation/develop/Blocks/transactions/#invoke_transaction)
 
+This request might be processed before the account is deployed. In that scenario the wallet will ask the user to do the deployment and the requested transaction.
+
 ### Parameters
 
 ```
-1. `FELT`, sender address
-2. `Object`, Transaction request.
+1. `FELT`, `senderAddress` : Account that is being requested to send a transaction
+2. `Object`, `transactionRequest` : Transaction requested
     2.1. `calls` : `Object[]` array of calls to perform
         2.1.1. `contractAddress` : `Felt`
         2.1.2. `entrypoint` : `Felt`
@@ -58,27 +36,27 @@ Requests the wallet to sign and submit a [INVOKE transaction](https://docs.stark
 ### Example Parameters
 
 ```javascript
-[
-   "0x003a8278a26f32452f156260d81b93efb0eca126b44df7b005a5b27e2bbc4a64",
-   {
-       calls : [
-           {
-              contractAddress : "0x003a8278a26f32452f156260d81b93efb0eca126b44df7b005a5b27e2bbc4a64",
-              entrypoint : "0x555278a26f32452f156260d81b93efb0eca126b44df7b005a5b27e2bbc4a64",
-              calldata : ["0x003", "0xa82705a5b27e2bbc4a64"]
-           },
-          {
-             contractAddress : "0x00111178a26f32452f156260d81b93efb0eca126b44df7b005a5b27e2bbc4a64",
-             entrypoint : "0x0022228a26f32452f156260d81b93efb0eca126b44df7b005a5b27e2bbc4a64",
-          },
-      ]
-   },
-];
+{
+      "senderAddress": "0x003a8278a26f32452f156260d81b93efb0eca126b44df7b005a5b27e2bbc4a64",
+      "transactionRequest" : {
+            "calls" : [
+                {
+                  "contractAddress": "0x003a8278a26f32452f156260d81b93efb0eca126b44df7b005a5b27e2bbc4a64", 
+                  "entrypoint": "0x555278a26f32452f156260d81b93efb0eca126b44df7b005a5b27e2bbc4a64",
+                  "calldata": ["0x003", "0xa82705a5b27e2bbc4a64"]
+                },
+                {
+                    "contractAddress": "0x00111178a26f32452f156260d81b93efb0eca126b44df7b005a5b27e2bbc4a64",
+                    "entrypoint": "0x0022228a26f32452f156260d81b93efb0eca126b44df7b005a5b27e2bbc4a64"
+                }
+            ]
+      }
+}
 ```
 
 ### Returns
 
-`FELT`, The hash of the transaction submitted by the wallet
+1. `FELT`, `transaction_hash` :  The hash of the transaction submitted by the wallet
 
 ### Example
 
@@ -88,14 +66,14 @@ Requests the wallet to sign and submit a [INVOKE transaction](https://docs.stark
   "id": 1,
   "jsonrpc": "2.0",
   "method": "starknet_requestAddInvokeTransaction",
-  "params":[{see above}],
+  "params":{see above}
 }
 
 // Result
 {
   "id": 1,
   "jsonrpc": "2.0",
-  "result": "0x01d666de4dc4d7e888190475ea6381a862e7d77cc3cb425e72ebf85e1d5144fa"
+  "result": { "transaction_hash" : "0x01d666de4dc4d7e888190475ea6381a862e7d77cc3cb425e72ebf85e1d5144fa" }
 }
 ```
 
@@ -103,6 +81,9 @@ Requests the wallet to sign and submit a [INVOKE transaction](https://docs.stark
 ## starknet_signTypedData
 
 Request the wallet to sign an *Off-chain message* as defined here [Starknet Off-chain message spec](https://community.starknet.io/t/signing-transactions-and-off-chain-messages/66).  This is similar to Ethereum's EIP-712
+
+
+This request might be processed before the account is deployed. In that scenario the wallet will ask the user to do the deployment and sign the data
 
 ### Parameters
 
@@ -115,49 +96,50 @@ account, message
 ### Example Parameters
 
 ```javascript
-[
-  "0x003a8278a26f32452f156260d81b93efb0eca126b44df7b005a5b27e2bbc4a64",
-  {
-      types: {
-          StarkNetDomain: [
-              { name: 'name', type: 'felt' },
-              { name: 'version', type: 'felt' },
-              { name: 'chainId', type: 'felt' },
-          ],
-          Person: [
-              { name: 'name', type: 'felt' },
-              { name: 'wallet', type: 'felt' },
-          ],
-          Mail: [
-              { name: 'from', type: 'Person' },
-              { name: 'to', type: 'Person' },
-              { name: 'contents', type: 'felt' },
-          ],
-      },
-      primaryType: 'Mail',
-      domain: {
-          name: 'StarkNet Mail',
-          version: '1',
-          chainId: 1,
-      },
-      message: {
-          from: {
-              name: 'Cow',
-              wallet: '0xCD2a3d9F938E13CD947Ec05AbC7FE734Df8DD826',
+{
+    "senderAddress" : "0x003a8278a26f32452f156260d81b93efb0eca126b44df7b005a5b27e2bbc4a64",
+    "typedData" : {
+          "types" : {
+              "StarkNetDomain ": [
+                  { "name" : "name", "type" : "felt" },
+                  { "name" : "version", "type" : "felt" },
+                  { "name" : "chainId", "type" : "felt" }
+              ],
+              "Person" : [
+                  { "name": "name", "type" : "felt" },
+                  { "name": "wallet", "type" : "felt" }
+              ],
+              "Mail": [
+                  { "name": "from", "type": "Person" },
+                  { "name": "to", "type": "Person" },
+                  { "name": "contents", "type": "felt" }
+              ]
           },
-          to: {
-              name: 'Bob',
-              wallet: '0xbBbBBBBbbBBBbbbBbbBbbbbBBbBbbbbBbBbbBBbB',
+          "primaryType" : "Mail",
+          "domain" : {
+              "name" : "StarkNet Mail",
+              "version" : "1",
+              "chainId" : 1
           },
-          contents: 'Hello, Bob!',
-      }
-  },
-];
+          "message" : {
+              "from" : {
+                  "name" : "Cow",
+                  "wallet" : "0xCD2a3d9F938E13CD947Ec05AbC7FE734Df8DD826"
+              },
+              "to": {
+                  "name" : "Bob",
+                  "wallet" : "0xbBbBBBBbbBBBbbbBbbBbbbbBBbBbbbbBbBbbBBbB"
+              },
+              "contents" : "Hello, Bob!"
+          }
+  }
+}
 ```
 
 ### Returns
 
-`FELT[]`: Signature: Array of Felts
+1. `FELT[]`, `signature` :  Signarure as an array of Felts
+ 
 
 ### Example
 
@@ -175,7 +157,52 @@ account, message
 {
   "id": 1,
   "jsonrpc": "2.0",
-  "result": ["0x1", "0x072e509b65029052eb6c299d53a04e16605b915621c", "0x07897a4646"]
+  "result": { "signature" : ["0x1", "0x072e509b65029052eb6c299d53a04e16605b915621c", "0x07897a4646"] }
+}
+```
+
+
+## starknet_requestDeployAccount
+
+Requests the wallet to deploy a given account. Note usually it's preferred to call `starknet_requestAddInvokeTransaction` with the first transaction. That will let the wallet bundle the deployment and the first transaction together.
+
+### Parameters
+
+```
+1. `FELT`, `accountAddress` : Identifies account to be deployed
+
+```
+
+### Example Parameters
+
+```javascript
+{
+    "accountAddress" : "0x003a8278a26f32452f156260d81b93efb0eca126b44df7b005a5b27e2bbc4a64"
+}
+```
+
+### Returns
+
+1. `FELT`, `transaction_hash` :  The hash of the transaction submitted by the wallet
+
+### Example
+
+```javascript
+// Request
+{
+  "id": 1,
+  "jsonrpc" : "2.0",
+  "method" : "starknet_requestDeployAccount",
+  "params" : {
+    "accountAddress" : "0x003a8278a26f32452f156260d81b93efb0eca126b44df7b005a5b27e2bbc4a64"
+  }
+}
+
+// Result
+{
+  "id": 1,
+  "jsonrpc": "2.0",
+  "result": { "transaction_hash" : "0x01d666de4dc4d7e888190475ea6381a862e7d77cc3cb425e72ebf85e1d5144fa" }
 }
 ```
 
