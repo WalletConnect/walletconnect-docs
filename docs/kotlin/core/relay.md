@@ -10,7 +10,7 @@ Automatic connection type enables SDK to controll web socket connection internal
 
 Manual connnection type enables developers to controll web socket connection.
 ```kotlin
-CoreClient.initialize(relayServerUrl = serverUrl, connectionType = ConnectionType.MANUAL, application = application, relay = optionalRelay)
+CoreClient.initialize(relayServerUrl = serverUrl, connectionType = ConnectionType.MANUAL, application = application)
 
 CoreClient.Relay.connect() { error -> /*Error when wrong connection type is in use*/}
 
