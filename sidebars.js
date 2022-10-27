@@ -26,10 +26,7 @@ module.exports = {
           type: "category",
           label: "Our Projects",
           collapsed: false,
-          items: [
-            "introduction/cloud-explorer",
-            "introduction/web3modal"
-          ],
+          items: ["introduction/cloud-explorer", "introduction/web3modal"],
         },
         "introduction/examples-and-resources",
         "introduction/glossary",
@@ -63,7 +60,7 @@ module.exports = {
         {
           type: "category",
           label: "Chat",
-          items: ["javascript/chat/installation"],
+          items: ["javascript/chat/installation", "javascript/chat/usage"],
         },
         {
           type: "category",
