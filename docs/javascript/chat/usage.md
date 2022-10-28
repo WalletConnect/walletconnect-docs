@@ -68,12 +68,16 @@ await chatClient.invite({
 });
 ```
 
-### Accepting an incoming invite
+### Accepting or rejecting an incoming invite
 
-When your client receives an invite from a peer, you're able to accept it by calling `.accept()` with the invite's `id`.
+When your client receives an invite from a peer, you're able to accept/reject it by calling `.accept()/.reject()` with the invite's `id`.
 
 ```javascript
 await chatClient.accept({ id: invite.id });
+
+// or
+
+await chatClient.reject({ id: invite.id });
 ```
 
 ### Sending a chat message
