@@ -178,7 +178,10 @@ module.exports = {
         {
           type: "category",
           label: "Chat",
-          items: ["kotlin/chat/installation"],
+          items: [
+            "kotlin/chat/installation",
+            "kotlin/chat/usage",
+           ],
         },
         {
           type: "category",

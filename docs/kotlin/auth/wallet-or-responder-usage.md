@@ -61,17 +61,7 @@ object ResponderDelegate : AuthClient.ResponderDelegate {
 
 ## **Methods**
 
-### **Pair Clients**
-
-```kotlin
-val pair = Auth.Params.Pair("wc:auth-...")
-AuthClient.pair(pair)
-```
-
-To pair the wallet with the Dapp / Requester, call the AuthClient.pair function which needs a `Auth.Params.Pair` parameter. `Auth.Params.Pair` is where the WC Uri will be passed.
-
-
-### **Session Approval**
+### **Authotisation Request Approval**
 
 To approve authorisation request, sign message using `CacaoSigner.sign` which requires private key to sign `Cacao` object that needs to be passed to `Auth.Params.Respond.Result` object and send to Dapp / Requester.
 
@@ -88,7 +78,7 @@ AuthClient.respond(Auth.Params.Respond.Result(request.id, cacao)) { error ->
 }
 ```
 
-### **Session Rejection**
+### **Authotisation Request Rejection**
 
 To reject authorisation request respond Dapp / Requester with `Auth.Params.Respond.Error`. Note: We recommend using defined below error message and error code.
 
