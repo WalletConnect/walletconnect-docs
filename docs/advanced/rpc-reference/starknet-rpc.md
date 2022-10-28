@@ -19,14 +19,14 @@ This request might be processed before the account is deployed. In that scenario
 ### Parameters
 
 ```
-1. `FELT`, `senderAddress` : Account that is being requested to send a transaction
-2. `Object`, `transactionRequest` : Transaction requested
+1. `FELT`, `accountAddress` : Account that is being requested to send a transaction
+2. `Object`, `executionRequest` : Transaction requested
     2.1. `calls` : `Object[]` array of calls to perform
         2.1.1. `contractAddress` : `Felt`
         2.1.2. `entrypoint` : `Felt`
         2.1.3. `calldata` : `Felt[]` (Optional)
-    2.2. `abi` : `ABI[]` (Optional) one or more contract abis which can be used to display the calls
-    2.3. `executionParams` : `Object` (Optional) Parameters suggested by the dapp
+    2.2. `abis` : `ABI[]` (Optional) one or more contract abis which can be used to display the calls
+    2.3. `invocationDetails` : `Object` (Optional) Parameters suggested by the dapp
         2.3.1. `nonce` : `Felt` (Optional)
         2.3.2. `maxFee` : `Felt` (Optional)
         2.3.3. `version` : `Felt` (Optional)
@@ -37,8 +37,8 @@ This request might be processed before the account is deployed. In that scenario
 
 ```javascript
 {
-      "senderAddress": "0x003a8278a26f32452f156260d81b93efb0eca126b44df7b005a5b27e2bbc4a64",
-      "transactionRequest" : {
+      "accountAddress": "0x003a8278a26f32452f156260d81b93efb0eca126b44df7b005a5b27e2bbc4a64",
+      "executionRequest" : {
             "calls" : [
                 {
                   "contractAddress": "0x003a8278a26f32452f156260d81b93efb0eca126b44df7b005a5b27e2bbc4a64", 
@@ -89,15 +89,15 @@ This request might be processed before the account is deployed. In that scenario
 
 account, message
 ```
-1. `FELT`, account address used for signing.
-2. `Object`, typed data to sign containing type information, a domain separator, and data. It follows the Starknet Off-chain message spec
+1. `FELT`, `accountAddress` : account address used for signing.
+2. `Object`, `typedData` : typed data to sign containing type information, a domain separator, and data. It follows the Starknet Off-chain message spec
 ```
 
 ### Example Parameters
 
 ```javascript
 {
-    "senderAddress" : "0x003a8278a26f32452f156260d81b93efb0eca126b44df7b005a5b27e2bbc4a64",
+    "accountAddress" : "0x003a8278a26f32452f156260d81b93efb0eca126b44df7b005a5b27e2bbc4a64",
     "typedData" : {
           "types" : {
               "StarkNetDomain ": [
@@ -138,7 +138,7 @@ account, message
 
 ### Returns
 
-1. `FELT[]`, `signature` :  Signarure as an array of Felts
+1. `FELT[]`, `signature` :  Signature as an array of Felts
  
 
 ### Example
