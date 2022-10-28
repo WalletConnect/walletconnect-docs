@@ -49,7 +49,13 @@ This request might be processed before the account is deployed. In that scenario
                     "contractAddress": "0x00111178a26f32452f156260d81b93efb0eca126b44df7b005a5b27e2bbc4a64",
                     "entrypoint": "0x0022228a26f32452f156260d81b93efb0eca126b44df7b005a5b27e2bbc4a64"
                 }
-            ]
+            ],
+            "abis" : [{
+                "inputs": [{ "name": "amount", "type": "felt" }],
+                "name": "set_balance",
+                "outputs": [],
+                "type": "function"
+            }]
       }
 }
 ```
@@ -205,4 +211,3 @@ Requests the wallet to deploy a given account. Note usually it's preferred to ca
   "result": { "transaction_hash" : "0x01d666de4dc4d7e888190475ea6381a862e7d77cc3cb425e72ebf85e1d5144fa" }
 }
 ```
-
