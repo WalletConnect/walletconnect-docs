@@ -78,7 +78,7 @@ AuthClient.respond(Auth.Params.Respond.Result(request.id, cacao)) { error ->
 }
 ```
 
-### **Authotisation Request Rejection**
+### **Authorisation Request Rejection**
 
 To reject authorisation request respond Dapp / Requester with `Auth.Params.Respond.Error`. Note: We recommend using defined below error message and error code.
 
