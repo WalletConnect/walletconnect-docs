@@ -56,7 +56,7 @@ await chatClient.register({ account: `eip155:1:0xa6de541...` });
 
 ### Inviting another peer to chat
 
-To resolve a peer's public key that you will need to invite him into a chat thread, call `resolve` method.
+To send a chat invitation to a peer, you can call `.invite()` with your account and an `invite` object:
 
 ```javascript
 await chatClient.invite({
