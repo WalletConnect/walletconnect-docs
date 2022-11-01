@@ -38,7 +38,11 @@ const signClient = await SignClient.init({
 
 ## Setting up event listeners
 
-WalletConnect v2.0 allows any method or event to be emitted. The following requirements should be satisfied in order to have a particular event:
+WalletConnect v2.0 emits events related to the current session. The listeners listed in the following code snippet represent typical
+events in a session's lifecycle that you can listen for to synchronise your application accordingly.
+
+Example: when a `session_delete` event is emitted, it makes sense to change the UI from an active session state to
+an inactive/disconnected state.
 
 **1. Add listeners for desired `SignClient` events.**
 
