@@ -8,9 +8,15 @@ For an example implementation, please refer to our `react-wallet-v2` [example](h
 
 ## Migrating from v1.x
 
-We recommend you install v1 and v2 together for maximum compatibility. To support both versions without dependency conflicts, use the v1 version `@walletconnect/legacy-client@2.0.0-rc.0`.
+**We recommend you install v1 and v2 together for maximum compatibility.** If your wallet already uses `@walletconnect/client@1.x.x`,
+you should be able to add `@walletconnect/sign-client@2.x.x` without any issues.
 
-For more information check our [migration guide](../../advanced/migrating-from-v1.0.md).
+If you experience dependency clashes or you require both `@walletconnect/types@1.x.x` and `@walletconnect/types@2.x.x` in parallel
+in your wallet's top-level dependencies, please refer to the [`legacy` packages](https://github.com/WalletConnect/walletconnect-legacy/tree/main/packages) which were published explicitly for this purpose.
+
+In the above scenario, you would replace `@walletconnect/types@1.x.x` with `@walletconnect/legacy-types` and then install `@walletconnect/types@2.x.x`.
+
+For more information check our [migration guide](../../advanced/migrating-from-v1.0.md) and the [repository for `legacy` packages](https://github.com/WalletConnect/walletconnect-legacy).
 
 ## Initializing the client
 
@@ -32,7 +38,11 @@ const signClient = await SignClient.init({
 
 ## Setting up event listeners
 
-WalletConnect v2.0 allows any method or event to be emitted. The following requirements should be satisfied in order to have a particular event:
+WalletConnect v2.0 emits events related to the current session. The listeners listed in the following code snippet represent typical
+events in a session's lifecycle that you can listen for to synchronise your application accordingly.
+
+Example: when a `session_delete` event is emitted, it makes sense to change the UI from an active session state to
+an inactive/disconnected state.
 
 **1. Add listeners for desired `SignClient` events.**
 

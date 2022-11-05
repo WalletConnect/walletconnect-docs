@@ -1,4 +1,5 @@
 # Wallet Usage
+
 :::info
 For an example implementation, please refer to our [`react-wallet-auth` example](https://github.com/WalletConnect/web-examples/tree/main/wallets/react-wallet-auth).
 :::
@@ -22,6 +23,10 @@ const authClient = await AuthClient.init({
 
 **2. Listen to authentication requests**
 
+:::info
+To listen to pairing-related events, please follow the guidance for [Pairing API event listeners](../core/pairing-api.md).
+:::
+
 ```javascript
 authClient.on("auth_request", async ({ id, params }) => {
   // This is a good point to trigger a UI event to provide the user
@@ -44,5 +49,5 @@ Once a QR code is scanned, a pairing must be established using the embedded URI.
 This is what allows the `auth_request` events to be received.
 
 ```javascript
-await authClient.pair({ uri });
+await authClient.core.pairing.pair({ uri });
 ```

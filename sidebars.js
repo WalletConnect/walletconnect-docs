@@ -55,7 +55,7 @@ module.exports = {
         {
           type: "category",
           label: "Chat",
-          items: ["javascript/chat/installation"],
+          items: ["javascript/chat/installation", "javascript/chat/usage"],
         },
         {
           type: "category",
@@ -116,7 +116,10 @@ module.exports = {
         {
           type: "category",
           label: "Chat",
-          items: ["swift/chat/installation"],
+          items: [
+            "swift/chat/installation",
+            "swift/chat/usage",
+           ],
         },
         {
           type: "category",
@@ -167,12 +170,24 @@ module.exports = {
         {
           type: "category",
           label: "Chat",
-          items: ["kotlin/chat/installation"],
+          items: [
+            "kotlin/chat/installation",
+            "kotlin/chat/usage",
+           ],
         },
         {
           type: "category",
           label: "Push",
           items: ["kotlin/push/installation"],
+        },
+        {
+          type: "category",
+          label: "Core",
+          items: [
+            "kotlin/core/installation",
+            "kotlin/core/pairing",
+            "kotlin/core/relay",
+          ],
         },
         {
           type: "category",

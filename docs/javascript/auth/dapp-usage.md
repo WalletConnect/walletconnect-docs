@@ -3,6 +3,7 @@ description: Quick Start For Dapps using Auth Client
 ---
 
 # Dapp Usage
+
 :::info
 For an example implementation, please refer to our [`react-dapp-auth` example](https://github.com/WalletConnect/web-examples/tree/main/dapps/react-dapp-auth).
 :::
@@ -24,6 +25,10 @@ const authClient = await AuthClient.init({
 ```
 
 **2. Add listeners for the `auth_response` event**
+
+:::info
+To listen to pairing-related events, please follow the guidance for [Pairing API event listeners](../core/pairing-api.md).
+:::
 
 ```javascript
 authClient.on("auth_response", ({ params }) => {
