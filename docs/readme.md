@@ -13,7 +13,7 @@ Are you a wallet developer? Are you a dApp developer? Are you developing your fi
 ___
 
 ### SDKs
-WalletConnect comprises four core components and associated SDKs:
+WalletConnect comprises four core components and associated SDKs:WalletConnect Sign is a remote signer
 
 - [Sign](introduction/sign.md) - a remote signer protocol to communicate securely between web3 wallets and dapps.
 - [Auth](introduction/auth.md) - an authentication protocol to login wallets users into web applications. 
@@ -22,7 +22,7 @@ WalletConnect comprises four core components and associated SDKs:
 
 ___
 
-### Modal
+### Web3Modal
 If you're building a dApp and need a way to easily and quickly connect the user's wallet to your dApp, Web3Modal is the solution for you. Checkout our our [Web3Modal docs](introduction/web3modal.md) docs to get started!
 
 ![test wallet](/assets/web3modal.gif)
