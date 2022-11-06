@@ -13,7 +13,7 @@ Are you a wallet developer? Are you a dApp developer? Are you developing your fi
 ___
 
 ### SDKs
-WalletConnect comprises four core components and associated SDKs:WalletConnect Sign is a remote signer
+WalletConnect comprises four core components and associated SDKs:
 
 - [Sign](introduction/sign.md) - a remote signer protocol to communicate securely between web3 wallets and dapps.
 - [Auth](introduction/auth.md) - an authentication protocol to login wallets users into web applications. 
