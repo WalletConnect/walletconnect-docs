@@ -14,7 +14,7 @@ There are getting started guides for the following clients platforms:
 
 ## Examples and Resources
 
-To view some examples of our Sign SDK at work, check out some of the examples below.
+To view some examples of our Sign SDK at work, check out some of the links below.
 
 ### dApps
 

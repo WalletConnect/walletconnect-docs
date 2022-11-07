@@ -44,7 +44,7 @@ Adding `dapp.example.com` to the allowlist will only allow requests from that or
 
 ## Examples and Resources
 
-- The [open source relay reppository](https://github.com/walletconnect/relay) for self-hosting and installation instructions.
+- The [open source relay repository](https://github.com/walletconnect/relay) for self-hosting and installation instructions.
 ## Websocket Close codes
 
 | Code        | Description | Reconnect  |
