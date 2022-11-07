@@ -1,2 +1,0 @@
-# Overview
-Ethereum | Wallets | Auth

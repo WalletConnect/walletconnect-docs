@@ -30,10 +30,9 @@ module.exports = {
                 collapsible: false,
                 items: [
                   {
-                    type: "category",
+                    type: "link",
                     label: "Ethereum",
-                    collapsible: true,
-                    items: ["products/web3-modal/ethereum/overview"],
+                    href: "https:web3modal.com",
                   },
                   {
                     type: "category",
@@ -70,27 +69,50 @@ module.exports = {
                       items: [
                         {
                           type: "category",
-                          label: "Auth",
+                          label: "Web Applications",
                           collapsed: true,
-                          items: ["products/sdks/ethereum/dApps/auth/overview"],
+                          items: [
+                            {
+                              type: "category",
+                              label: "JavaScript",
+                              collapsed: true,
+                              items: [
+                                "products/sdks/ethereum/dApps/web-applications/javascript/sign/overview",
+                                "products/sdks/ethereum/dApps/web-applications/javascript/auth/overview",
+                                "products/sdks/ethereum/dApps/web-applications/javascript/push/overview",
+                                "products/sdks/ethereum/dApps/web-applications/javascript/chat/overview",
+                              ],
+                            },
+                          ],
                         },
                         {
                           type: "category",
-                          label: "Sign",
+                          label: "Native Applications",
                           collapsed: true,
-                          items: ["products/sdks/ethereum/dApps/sign/overview"],
-                        },
-                        {
-                          type: "category",
-                          label: "Push",
-                          collapsed: true,
-                          items: ["products/sdks/ethereum/dApps/push/overview"],
-                        },
-                        {
-                          type: "category",
-                          label: "Chat",
-                          collapsed: true,
-                          items: ["products/sdks/ethereum/dApps/chat/overview"],
+                          items: [
+                            {
+                              type: "category",
+                              label: "iOS",
+                              collapsed: true,
+                              items: [
+                                "products/sdks/ethereum/dApps/native-applications/ios/sign/overview",
+                                "products/sdks/ethereum/dApps/native-applications/ios/auth/overview",
+                                "products/sdks/ethereum/dApps/native-applications/ios/push/overview",
+                                "products/sdks/ethereum/dApps/native-applications/ios/chat/overview",
+                              ],
+                            },
+                            {
+                              type: "category",
+                              label: "Android",
+                              collapsed: true,
+                              items: [
+                                "products/sdks/ethereum/dApps/native-applications/android/sign/overview",
+                                "products/sdks/ethereum/dApps/native-applications/android/auth/overview",
+                                "products/sdks/ethereum/dApps/native-applications/android/push/overview",
+                                "products/sdks/ethereum/dApps/native-applications/android/chat/overview",
+                              ],
+                            },
+                          ],
                         },
                       ],
                     },
@@ -102,27 +124,50 @@ module.exports = {
                       items: [
                         {
                           type: "category",
-                          label: "Auth",
+                          label: "Web Applications",
                           collapsed: true,
-                          items: ["products/sdks/ethereum/wallets/auth/overview"],
+                          items: [
+                            {
+                              type: "category",
+                              label: "JavaScript",
+                              collapsed: true,
+                              items: [
+                                "products/sdks/ethereum/wallets/web-applications/javascript/sign/overview",
+                                "products/sdks/ethereum/wallets/web-applications/javascript/auth/overview",
+                                "products/sdks/ethereum/wallets/web-applications/javascript/push/overview",
+                                "products/sdks/ethereum/wallets/web-applications/javascript/chat/overview",
+                              ],
+                            },
+                          ],
                         },
                         {
                           type: "category",
-                          label: "Sign",
+                          label: "Native Applications",
                           collapsed: true,
-                          items: ["products/sdks/ethereum/wallets/sign/overview"],
-                        },
-                        {
-                          type: "category",
-                          label: "Push",
-                          collapsed: true,
-                          items: ["products/sdks/ethereum/wallets/push/overview"],
-                        },
-                        {
-                          type: "category",
-                          label: "Chat",
-                          collapsed: true,
-                          items: ["products/sdks/ethereum/wallets/chat/overview"],
+                          items: [
+                            {
+                              type: "category",
+                              label: "iOS",
+                              collapsed: true,
+                              items: [
+                                "products/sdks/ethereum/wallets/native-applications/ios/sign/overview",
+                                "products/sdks/ethereum/wallets/native-applications/ios/auth/overview",
+                                "products/sdks/ethereum/wallets/native-applications/ios/push/overview",
+                                "products/sdks/ethereum/wallets/native-applications/ios/chat/overview",
+                              ],
+                            },
+                            {
+                              type: "category",
+                              label: "Android",
+                              collapsed: true,
+                              items: [
+                                "products/sdks/ethereum/wallets/native-applications/android/sign/overview",
+                                "products/sdks/ethereum/wallets/native-applications/android/auth/overview",
+                                "products/sdks/ethereum/wallets/native-applications/android/push/overview",
+                                "products/sdks/ethereum/wallets/native-applications/android/chat/overview",
+                              ],
+                            },
+                          ],
                         },
                       ],
                     },
@@ -141,27 +186,32 @@ module.exports = {
                       items: [
                         {
                           type: "category",
-                          label: "Auth",
+                          label: "Web Applications",
                           collapsed: true,
-                          items: ["products/sdks/solana/dApps/auth/overview"],
+                          items: [
+                            "products/sdks/solana/dApps/web-applications/sign/overview",
+                            "products/sdks/solana/dApps/web-applications/auth/overview",
+                            "products/sdks/solana/dApps/web-applications/push/overview",
+                            "products/sdks/solana/dApps/web-applications/chat/overview",
+                          ],
                         },
                         {
                           type: "category",
-                          label: "Sign",
+                          label: "Native Applications",
                           collapsed: true,
-                          items: ["products/sdks/solana/dApps/sign/overview"],
-                        },
-                        {
-                          type: "category",
-                          label: "Push",
-                          collapsed: true,
-                          items: ["products/sdks/solana/dApps/push/overview"],
-                        },
-                        {
-                          type: "category",
-                          label: "Chat",
-                          collapsed: true,
-                          items: ["products/sdks/solana/dApps/chat/overview"],
+                          items: [
+                            {
+                              type: "category",
+                              label: "iOS",
+                              collapsed: true,
+                              items: [
+                                "products/sdks/solana/dApps/native-applications/ios/sign/overview",
+                                "products/sdks/solana/dApps/native-applications/ios/auth/overview",
+                                "products/sdks/solana/dApps/native-applications/ios/push/overview",
+                                "products/sdks/solana/dApps/native-applications/ios/chat/overview",
+                              ],
+                            },
+                          ],
                         },
                       ],
                     },
@@ -173,27 +223,43 @@ module.exports = {
                       items: [
                         {
                           type: "category",
-                          label: "Auth",
+                          label: "Web Applications",
                           collapsed: true,
-                          items: ["products/sdks/solana/wallets/auth/overview"],
+                          items: [
+                            "products/sdks/solana/wallets/web-applications/sign/overview",
+                            "products/sdks/solana/wallets/web-applications/auth/overview",
+                            "products/sdks/solana/wallets/web-applications/push/overview",
+                            "products/sdks/solana/wallets/web-applications/chat/overview",
+                          ],
                         },
                         {
                           type: "category",
-                          label: "Sign",
+                          label: "Native Applications",
                           collapsed: true,
-                          items: ["products/sdks/solana/wallets/sign/overview"],
-                        },
-                        {
-                          type: "category",
-                          label: "Push",
-                          collapsed: true,
-                          items: ["products/sdks/solana/wallets/push/overview"],
-                        },
-                        {
-                          type: "category",
-                          label: "Chat",
-                          collapsed: true,
-                          items: ["products/sdks/solana/wallets/chat/overview"],
+                          items: [
+                            {
+                              type: "category",
+                              label: "iOS",
+                              collapsed: true,
+                              items: [
+                                "products/sdks/solana/wallets/native-applications/ios/sign/overview",
+                                "products/sdks/solana/wallets/native-applications/ios/auth/overview",
+                                "products/sdks/solana/wallets/native-applications/ios/push/overview",
+                                "products/sdks/solana/wallets/native-applications/ios/chat/overview",
+                              ]
+                            },
+                            {
+                              type: "category",
+                              label: "Android",
+                              collapsed: true,
+                              items: [
+                                "products/sdks/solana/wallets/native-applications/android/sign/overview",
+                                "products/sdks/solana/wallets/native-applications/android/auth/overview",
+                                "products/sdks/solana/wallets/native-applications/android/push/overview",
+                                "products/sdks/solana/wallets/native-applications/android/chat/overview",
+                              ]
+                            }
+                          ],
                         },
                       ],
                     },
