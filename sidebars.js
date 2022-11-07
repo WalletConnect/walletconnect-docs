@@ -9,198 +9,212 @@ module.exports = {
       label: "Introduction",
       className: "menu_outer_list",
       collapsible: false,
+      items: ["readme", "how-to-read-the-docs"],
+    },
+    {
+      type: "category",
+      label: "Products",
+      className: "menu_outer_list",
+      collapsible: false,
       items: [
-        "readme",
+        {
+          type: "category",
+          label: "Web3Modal",
+          collapsible: true,
+          items: [
+            [
+              {
+                type: "category",
+                label: "Ecosystems",
+                className: "menu_outer_list",
+                collapsible: false,
+                items: [
+                  {
+                    type: "category",
+                    label: "Ethereum",
+                    collapsible: true,
+                    items: ["products/web3-modal/ethereum/overview"],
+                  },
+                  {
+                    type: "category",
+                    label: "Solana",
+                    collapsible: true,
+                    items: ["products/web3-modal/solana/overview"],
+                  },
+                ],
+              },
+            ],
+          ],
+        },
         {
           type: "category",
           label: "SDKs",
-          collapsed: false,
+          collapsible: true,
           items: [
-            "introduction/sign",
-            "introduction/auth",
-            "introduction/chat",
-            "introduction/push",
-          ],
-        },
-        "introduction/web3modal",
-        "introduction/cloud-explorer",
-        "introduction/glossary",
-      ],
-    },
-
-    {
-      type: "category",
-      label: "Web - JavaScript",
-      collapsible: true,
-      className: "menu_outer_list",
-      items: [
-        {
-          type: "category",
-          label: "Sign",
-          items: [
-            "javascript/sign/installation",
-            "javascript/sign/wallet-usage",
-            "javascript/sign/dapp-usage",
-          ],
-        },
-        {
-          type: "category",
-          label: "Auth",
-          items: [
-            "javascript/auth/installation",
-            "javascript/auth/dapp-usage",
-            "javascript/auth/wallet-usage",
-          ],
-        },
-        {
-          type: "category",
-          label: "Chat",
-          items: ["javascript/chat/installation", "javascript/chat/usage"],
-        },
-        {
-          type: "category",
-          label: "Push",
-          items: ["javascript/push/installation"],
-        },
-        {
-          type: "category",
-          label: "Core",
-          items: ["javascript/core/pairing-api"],
-        },
-        {
-          type: "category",
-          label: "Providers",
-          items: [
-            "javascript/providers/ethereum",
-            "javascript/providers/cosmos",
-            "javascript/providers/solana",
-          ],
-        },
-        {
-          type: "category",
-          label: "Guides",
-          items: [
-            "javascript/guides/typescript",
-            "javascript/guides/react-native",
-            "javascript/guides/nodejs",
-            "javascript/guides/shared-core",
-          ],
-        },
-      ],
-    },
-
-    {
-      type: "category",
-      label: "iOS - Swift",
-      collapsible: true,
-      className: "menu_outer_list",
-      items: [
-        {
-          type: "category",
-          label: "Sign",
-          items: [
-            "swift/sign/installation",
-            "swift/sign/wallet-usage",
-            "swift/sign/dapp-usage",
-          ],
-        },
-        {
-          type: "category",
-          label: "Auth",
-          items: [
-            "swift/auth/installation",
-            "swift/auth/wallet-usage",
-            "swift/auth/dapp-usage",
-          ],
-        },
-        {
-          type: "category",
-          label: "Chat",
-          items: [
-            "swift/chat/installation",
-            "swift/chat/usage",
-           ],
-        },
-        {
-          type: "category",
-          label: "Core",
-          items: [
-            "swift/core/installation",
-            "swift/core/networking-configuration",
-            "swift/core/pairing-usage",
-          ],
-        },
-        {
-          type: "category",
-          label: "Push",
-          items: ["swift/push/installation"],
-        },
-        {
-          type: "category",
-          label: "Guides",
-          items: ["swift/guides/mobile-linking", "swift/router/installation"],
-        },
-      ],
-    },
-
-    {
-      type: "category",
-      label: "Android - Kotlin",
-      collapsible: true,
-      className: "menu_outer_list",
-      items: [
-        {
-          type: "category",
-          label: "Sign",
-          items: [
-            "kotlin/sign/installation",
-            "kotlin/sign/wallet-usage",
-            "kotlin/sign/dapp-usage",
-          ],
-        },
-        {
-          type: "category",
-          label: "Auth",
-          items: [
-            "kotlin/auth/installation",
-            "kotlin/auth/dapp-or-requester-usage",
-            "kotlin/auth/wallet-or-responder-usage",
-          ],
-        },
-        {
-          type: "category",
-          label: "Chat",
-          items: [
-            "kotlin/chat/installation",
-            "kotlin/chat/usage",
-           ],
-        },
-        {
-          type: "category",
-          label: "Push",
-          items: ["kotlin/push/installation"],
-        },
-        {
-          type: "category",
-          label: "Core",
-          items: [
-            "kotlin/core/installation",
-            "kotlin/core/pairing",
-            "kotlin/core/relay",
+            {
+              type: "category",
+              label: "Ecosystems",
+              className: "menu_outer_list",
+              collapsible: false,
+              items: [
+                {
+                  type: "category",
+                  label: "Ethereum",
+                  collapsible: true,
+                  items: [
+                    {
+                      type: "category",
+                      label: "dApps",
+                      className: "menu_outer_list",
+                      collapsible: false,
+                      items: [
+                        {
+                          type: "category",
+                          label: "Auth",
+                          collapsed: true,
+                          items: ["products/sdks/ethereum/dApps/auth/overview"],
+                        },
+                        {
+                          type: "category",
+                          label: "Sign",
+                          collapsed: true,
+                          items: ["products/sdks/ethereum/dApps/sign/overview"],
+                        },
+                        {
+                          type: "category",
+                          label: "Push",
+                          collapsed: true,
+                          items: ["products/sdks/ethereum/dApps/push/overview"],
+                        },
+                        {
+                          type: "category",
+                          label: "Chat",
+                          collapsed: true,
+                          items: ["products/sdks/ethereum/dApps/chat/overview"],
+                        },
+                      ],
+                    },
+                    {
+                      type: "category",
+                      label: "Wallets",
+                      className: "menu_outer_list",
+                      collapsible: false,
+                      items: [
+                        {
+                          type: "category",
+                          label: "Auth",
+                          collapsed: true,
+                          items: ["products/sdks/ethereum/wallets/auth/overview"],
+                        },
+                        {
+                          type: "category",
+                          label: "Sign",
+                          collapsed: true,
+                          items: ["products/sdks/ethereum/wallets/sign/overview"],
+                        },
+                        {
+                          type: "category",
+                          label: "Push",
+                          collapsed: true,
+                          items: ["products/sdks/ethereum/wallets/push/overview"],
+                        },
+                        {
+                          type: "category",
+                          label: "Chat",
+                          collapsed: true,
+                          items: ["products/sdks/ethereum/wallets/chat/overview"],
+                        },
+                      ],
+                    },
+                  ],
+                },
+                {
+                  type: "category",
+                  label: "Solana",
+                  collapsible: true,
+                  items: [
+                    {
+                      type: "category",
+                      label: "dApps",
+                      className: "menu_outer_list",
+                      collapsible: false,
+                      items: [
+                        {
+                          type: "category",
+                          label: "Auth",
+                          collapsed: true,
+                          items: ["products/sdks/solana/dApps/auth/overview"],
+                        },
+                        {
+                          type: "category",
+                          label: "Sign",
+                          collapsed: true,
+                          items: ["products/sdks/solana/dApps/sign/overview"],
+                        },
+                        {
+                          type: "category",
+                          label: "Push",
+                          collapsed: true,
+                          items: ["products/sdks/solana/dApps/push/overview"],
+                        },
+                        {
+                          type: "category",
+                          label: "Chat",
+                          collapsed: true,
+                          items: ["products/sdks/solana/dApps/chat/overview"],
+                        },
+                      ],
+                    },
+                    {
+                      type: "category",
+                      label: "Wallets",
+                      className: "menu_outer_list",
+                      collapsible: false,
+                      items: [
+                        {
+                          type: "category",
+                          label: "Auth",
+                          collapsed: true,
+                          items: ["products/sdks/solana/wallets/auth/overview"],
+                        },
+                        {
+                          type: "category",
+                          label: "Sign",
+                          collapsed: true,
+                          items: ["products/sdks/solana/wallets/sign/overview"],
+                        },
+                        {
+                          type: "category",
+                          label: "Push",
+                          collapsed: true,
+                          items: ["products/sdks/solana/wallets/push/overview"],
+                        },
+                        {
+                          type: "category",
+                          label: "Chat",
+                          collapsed: true,
+                          items: ["products/sdks/solana/wallets/chat/overview"],
+                        },
+                      ],
+                    },
+                  ],
+                },
+              ],
+            },
           ],
         },
         {
           type: "category",
-          label: "Guides",
-          items: ["kotlin/guides/mobile-linking"],
+          label: "Cloud Explorer",
+          collapsible: true,
+          items: ["products/cloud-explorer/overview"],
         },
       ],
     },
-
     {
       type: "category",
       label: "Advanced",
-      collapsible: true,
+      collapsible: false,
       className: "menu_outer_list",
       items: [
         "advanced/migrating-from-v1.0",
