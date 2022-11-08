@@ -1,4 +1,4 @@
-# Codes
+# Error Codes
 
 ## VALIDATION
 
