@@ -22,7 +22,7 @@ abstract class Client {
   // ---------- Events ----------------------------------------------- //
 
   // subscribe to auth response
-  public abstract on("auth_response", (id: number, response: Response) => {}): void;
+  public abstract on("auth_response", (response: Response) => {}): void;
 
   // for wallet to listen on auth request
   public abstract on("auth_request", (id: number, payload: PayloadParams) => {}): void;
