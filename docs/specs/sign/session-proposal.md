@@ -30,9 +30,10 @@ Proposal protocol will be established as follows:
 3. Wallet generates key pair Y
 4. Wallet settles session with symmetric key derived with keys X and Y
 5. Session topic B key is derived from sha256 hash of session's symmetric key 
-6. Wallet sends proposal response on pairing P with publicKey Y 
-7. Wallet sends settlement payload to topic B with metadata, namespaces and public key Y
-8. Dapp receives propose response on pairing P
-9. Dapp settles session with topic B using derived key
-10. Dapp receives settlement on topic B
-11. Dapp sends acknowledgment on topic B
+6. In parallel:
+  * Wallet sends settlement payload to topic B with metadata, namespaces and public key Y
+  * Wallet sends proposal response on pairing P with publicKey Y 
+7. Dapp receives propose response on pairing P
+8. Dapp settles session with topic B using derived key
+9. Dapp receives settlement on topic B
+10. Dapp sends acknowledgment on topic B
