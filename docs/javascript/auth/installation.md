@@ -6,12 +6,15 @@ Head over to [WalletConnect Cloud](https://cloud.walletconnect.com/) to sign in 
 
 ## 2. Install Packages
 
-Install the WalletConnect client package.
+For Dapps, only install Auth. If you're building a wallet, you will need to install the [Sign](../sign/installation.md) client too.
 
-:::info
-For additional type packages refer to our [TypeScript Guide](../guides/typescript).
-:::
-
+### Dapps
 ```bash npm2yarn
 npm install @walletconnect/auth-client
+```
+
+### Wallets
+```bash npm2yarn
+npm install @walletconnect/auth-client
+npm install @walletconnect/sign-client
 ```
