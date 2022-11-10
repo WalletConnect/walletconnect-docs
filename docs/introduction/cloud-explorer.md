@@ -19,15 +19,16 @@ The Cloud Explorer API currently offers the following functionality:
 
 By default listings endpoints return all data for provided type. You can use following query params to return paginated data or search for a specific listing by its name:
 
-| Param     | Required? | Description                                                                                                  |
-| --------- | --------- | ------------------------------------------------------------------------------------------------------------ |
-| projectId | Required  | Your WalletConnect Cloud Project ID (from [cloud.walletconnect.com](https://cloud.walletconnect.com/))       |
-| entries   |           | Specifies how many entries will be returned (must be used together with page param)                          |
-| page      |           | Specifies current page (must be used with entries param)                                                     |
-| search    |           | Returns listings whose name matches provided search query                                                    |
-| version   |           | Specifies WalletConnect supported version (1 or 2)                                                           |
-| chains    |           | Returns listings that support at least one of the provided chains<br/>(e.g. `?chains=eip155:1,eip155:137`)   |
-| platforms |           | Returns listings that support at least one of the provided platforms<br/>(e.g. `?platforms=ios,android,mac`) |
+| Param       | Required? | Description                                                                                                              |
+| ----------- | --------- | ------------------------------------------------------------------------------------------------------------------------ |
+| projectId   | Required  | Your WalletConnect Cloud Project ID (from [cloud.walletconnect.com](https://cloud.walletconnect.com/))                   |
+| entries     |           | Specifies how many entries will be returned (must be used together with page param)                                      |
+| page        |           | Specifies current page (must be used with entries param)                                                                 |
+| search      |           | Returns listings whose name matches provided search query                                                                |
+| chains      |           | Returns listings that support at least one of the provided chains<br/>(e.g. `?chains=eip155:1,eip155:137`)               |
+| platforms   |           | Returns listings that support at least one of the provided platforms<br/>(e.g. `?platforms=ios,android,mac`)             |
+| sdks        |           | Returns listings that support at least one of the provided WalletConnect SDKs<br/>(e.g. `?sdks=sign_v1,sign_v2,auth_v1`) |
+| ~~version~~ |           | Deprecated - replaced by `sdks` param. Specifies supported Sign version (1 or 2)                                         |
 
 #### `GET /v3/wallets`
 
