@@ -5,7 +5,7 @@ slug: /
 # About
 
 ## What is WalletConnect?
-WalletConnect is the decentralized Web3 messaging layer and a standard to connect blockchain wallets to dapps. Our mission continues to expand the interoperability of the Web3 space by providing the best tooling and infrastructure for Wallets to deliver an outstanding user experience. WalletConnect v2 is chain agnostic and built to work with any blockchain of your choice. To read more in detail about the WalletConnect protocol, check out our [Technical specifications](https://github.com/walletconnect/walletconnect-specs).
+WalletConnect is the decentralized Web3 messaging layer and a standard to connect blockchain wallets to dapps. Our mission continues to expand the interoperability of the Web3 space by providing the best tooling and infrastructure for Wallets to deliver an outstanding user experience. WalletConnect v2 is chain agnostic and built to work with any blockchain of your choice. To read more in detail about the WalletConnect protocol, check out our [Technical specifications](https://github.com/WalletConnect/walletconnect-docs/tree/main/docs/specs).
 
 ## Our Projects
 Are you a wallet developer? Are you a dApp developer? Are you developing your first dApp? We offer a few tools depending on the job. Keep reading below to learn the differences between our products to find the right fit for you.
