@@ -90,19 +90,8 @@ const config = {
             label: "Swift",
           },
           {
-            type: "docSidebar",
-            position: "left",
-            sidebarId: "specs",
-            label: "Specs",
-          },
-          {
             type: "docsVersionDropdown",
             position: "right",
-          },
-          {
-            href: "https://www.walletconnect.com/",
-            position: "right",
-            label: "Website",
           },
           {
             href: "https://github.com/walletconnect/",
