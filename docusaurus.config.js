@@ -69,7 +69,7 @@ const config = {
             type: "doc",
             position: "left",
             docId: "readme",
-            label: "Docs",
+            label: "Overview",
           },
           {
             type: "docSidebar",
@@ -86,7 +86,7 @@ const config = {
           {
             type: "docSidebar",
             position: "left",
-            sidebarId: "javascript",
+            sidebarId: "swift",
             label: "Swift",
           },
           {
