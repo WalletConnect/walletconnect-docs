@@ -238,17 +238,6 @@ module.exports = {
       items: [
         {
           type: "category",
-          label: "Auth",
-          collapsible: true,
-          collapsed: true,
-          items: [
-            "javascript/auth/installation",
-            "javascript/auth/dapp-usage",
-            "javascript/auth/wallet-usage",
-          ],
-        },
-        {
-          type: "category",
           label: "Sign",
           collapsible: true,
           collapsed: true,
@@ -256,6 +245,17 @@ module.exports = {
             "javascript/sign/installation",
             "javascript/sign/dapp-usage",
             "javascript/sign/wallet-usage",
+          ],
+        },
+        {
+          type: "category",
+          label: "Auth",
+          collapsible: true,
+          collapsed: true,
+          items: [
+            "javascript/auth/installation",
+            "javascript/auth/dapp-usage",
+            "javascript/auth/wallet-usage",
           ],
         },
         {
@@ -321,6 +321,17 @@ module.exports = {
       items: [
         {
           type: "category",
+          label: "Sign",
+          collapsible: true,
+          collapsed: true,
+          items: [
+            "kotlin/sign/installation",
+            "kotlin/sign/dapp-usage",
+            "kotlin/sign/wallet-usage",
+          ],
+        },
+        {
+          type: "category",
           label: "Auth",
           collapsible: true,
           collapsed: true,
@@ -332,22 +343,11 @@ module.exports = {
         },
         {
           type: "category",
-          label: "Sign",
-          collapsible: true,
-          collapsed: true,
-          items: [
-            "javascript/sign/installation",
-            "javascript/sign/dapp-usage",
-            "javascript/sign/wallet-usage",
-          ],
-        },
-        {
-          type: "category",
           label: "Push",
           collapsible: true,
           collapsed: true,
           items: [
-            "javascript/push/installation"
+            "kotlin/push/installation"
           ],
         },
         {
