@@ -11,7 +11,3 @@ There are getting started guides for the following clients platforms:
 - [Web - Javascript](../javascript/sign/installation.md)
 - [iOS - Swift](../swift/sign/installation.md)
 - [Android - Kotlin](../kotlin/sign/installation.md)
-
-## Examples and Resources
-
-We have a set of [official examples](examples-and-resources.md) in various flavors of javascript, swift, and kotlin.
