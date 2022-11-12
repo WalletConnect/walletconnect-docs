@@ -74,6 +74,24 @@ const config = {
           {
             type: "docSidebar",
             position: "left",
+            sidebarId: "javascript",
+            label: "JavaScript",
+          },
+          {
+            type: "docSidebar",
+            position: "left",
+            sidebarId: "kotlin",
+            label: "Kotlin",
+          },
+          {
+            type: "docSidebar",
+            position: "left",
+            sidebarId: "javascript",
+            label: "Kotlin",
+          },
+          {
+            type: "docSidebar",
+            position: "left",
             sidebarId: "specs",
             label: "Specs",
           },
