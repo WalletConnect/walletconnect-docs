@@ -58,7 +58,7 @@ const config = {
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     {
       navbar: {
-        title: "WalletConnect",
+        title: "WalletConnect | Docs",
         logo: {
           alt: "WalletConnect Logo",
           src: "img/walletconnect-logo.svg",
@@ -87,7 +87,7 @@ const config = {
             type: "docSidebar",
             position: "left",
             sidebarId: "javascript",
-            label: "Kotlin",
+            label: "Swift",
           },
           {
             type: "docSidebar",
