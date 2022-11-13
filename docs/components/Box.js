@@ -1,13 +1,10 @@
 import React from "react";
 
-export const Box = () => {
+const Box = ({ name, description}) => {
   return (
     <div className="box">
-      <h1 style={{ fontSize: "20px" }}>Auth</h1>
-      <p>
-        An authentication protocol that can be used to log-in blockchain wallets
-        into apps.
-      </p>
+      <h1 style={{ fontSize: "20px" }}>{name}</h1>
+      <p>{description}</p>
     </div>
   );
 };
