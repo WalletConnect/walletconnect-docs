@@ -48,6 +48,8 @@
 }
  .box:hover {
   background-color: #100e10;
+  cursor: pointer;
+  border: 1px solid #242124;
  }
 
 @media only screen and (min-width: 660px) {
