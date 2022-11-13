@@ -32,18 +32,24 @@
   display: flex;
   flex-flow: wrap;
   justify-content: center;
+  row-gap: 1em;
+  column-gap: 1em;
 }
 
 .box {
-  /* width: 19rem; */
-  border: 1px solid black;
+  min-height: 33%;
+  border: 1px solid #000000;
   border-radius: 7px;
   background-color: #242124;
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;;
   padding-inline: 1em;
   padding-top: 1em;
-  margin-bottom: 1em;
-  margin-right: 1em;
+}
+
+@media only screen and (min-width: 660px) {
+  .box {
+    flex: 1 0 33%;
+  }
 }
 
 [data-theme="dark"] .docusaurus-highlight-code-line {
