@@ -28,7 +28,7 @@
   padding: 0 var(--ifm-pre-padding);
 }
 
-.container {
+.boxContainer {
   display: flex;
   flex-flow: wrap;
   justify-content: center;
@@ -54,7 +54,19 @@
 
 @media only screen and (min-width: 660px) {
   .box {
-    flex: 1 0 33%;
+    flex: 1 33%;
+  }
+}
+
+@media only screen and (min-width: 900px) {
+  .box {
+    flex: auto;
+  }
+}
+
+@media only screen and (min-width: 1100px) {
+  .box {
+    flex: 1 33%;
   }
 }
 
