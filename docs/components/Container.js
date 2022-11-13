@@ -27,8 +27,8 @@ const CONSTANTS = [
 export const Container = () => {
   return (
     <div className="container">
-      {CONSTANTS.map((i)=>(
-        <Box name={i.name} description={i.description} url={url}/>
+      {CONSTANTS.map((product, i)=>(
+        <Box name={product.name} description={product.description} url={product.url} key={i}/>
       ))}
     </div>
   );
