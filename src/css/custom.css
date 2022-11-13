@@ -31,6 +31,19 @@
 .container {
   display: flex;
   flex-flow: wrap;
+  justify-content: center;
+}
+
+.box {
+  /* width: 19rem; */
+  border: 1px solid black;
+  border-radius: 7px;
+  background-color: #242124;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;;
+  padding-inline: 1em;
+  padding-top: 1em;
+  margin-bottom: 1em;
+  margin-right: 1em;
 }
 
 [data-theme="dark"] .docusaurus-highlight-code-line {
