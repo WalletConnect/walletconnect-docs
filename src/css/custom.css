@@ -44,7 +44,11 @@
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;;
   padding-inline: 1em;
   padding-top: 1em;
+
 }
+ .box:hover {
+  background-color: #100e10;
+ }
 
 @media only screen and (min-width: 660px) {
   .box {
