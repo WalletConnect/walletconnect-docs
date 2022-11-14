@@ -14,10 +14,10 @@ You can further customize the modal by specifying it's theme and accent color (s
 
 ### Options
 
-| Property    | Values                                                                          | Default                                 |
-| ----------- | ------------------------------------------------------------------------------- | --------------------------------------- |
-| theme       | 'dark', 'light'                                                                 | Adopts based on user system preferences |
-| accentColor | 'default', 'blackWhite', 'blue', 'green', 'magenta', 'orange', 'purple', 'teal' | WalletConnect blue                      |
+| Property    | Values                                                                          |
+| ----------- | ------------------------------------------------------------------------------- |
+| theme       | "dark", "light"                                                                 |
+| accentColor | "default", "blackWhite", "blue", "green", "magenta", "orange", "purple", "teal" |
 
 ### Preview
 
