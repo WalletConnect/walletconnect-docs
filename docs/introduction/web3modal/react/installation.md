@@ -28,7 +28,7 @@ import { chain, configureChains, createClient, WagmiConfig } from "wagmi";
 
 ## Configure
 
-Configure wagmi and web3modal clients. Please refer to [wagmi](https://wagmi.sh/) documentation for more advanced topics like custom chain creation, using other providers like infura or alchemy etc. For now, we will use best default settings for web3modal.
+Configure wagmi and Web3Modal clients. Please refer to [wagmi](https://wagmi.sh/) documentation for more advanced topics like custom chain creation, using other providers like infura or alchemy etc. For now, we will use best default settings for web3modal.
 
 ```tsx
 const chains = [chain.mainnet, chain.polygon, chain.optimism, chain.arbitrum];
@@ -49,7 +49,7 @@ const ethereumClient = new EthereumClient(wagmiClient, chains);
 
 ## Add react components
 
-You don't have to wrap `Web3Modal` inside `WagmiConfig`, in fact, we recomend placing it somewhere outside of your main app, thus removing extra re-rendering work.
+You don't have to wrap `Web3Modal` inside `WagmiConfig`, in fact, we recommend placing it somewhere outside of your main app, thus removing extra re-rendering work.
 See [Customization](/2.0/introduction/web3modal/about#options) docs for more information about modal props.
 
 ```tsx

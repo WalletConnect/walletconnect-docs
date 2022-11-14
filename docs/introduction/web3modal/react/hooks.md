@@ -2,7 +2,7 @@
 
 ## Modal Hooks
 
-React hooks to programatically control the modal. Usefull when you want to use your own ui components and react to modal state.
+React hooks to programatically control the modal. Useful when you want to use your own ui components and react to modal state.
 
 ```tsx
 import { useWeb3Modal } from "@web3modal/react";
