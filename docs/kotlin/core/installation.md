@@ -14,7 +14,7 @@ root/build.gradle.kts:
 ```gradle
 allprojects {
  repositories {
-    maven { url "https://repo1.maven.org/maven2/" }
+    mavenCentral()
     maven { url "https://jitpack.io" }
  }
 }
