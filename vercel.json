@@ -68,6 +68,10 @@
     {
       "source": "/push-server",
       "destination": "/1.0/push-server"
+    },
+    {
+      "source": "/2.0/introduction/examples-and-resources",
+      "destination": "/2.0/javascript/guides/examples-and-resources"
     }
   ]
 }

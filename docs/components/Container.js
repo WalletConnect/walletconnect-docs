@@ -14,12 +14,13 @@ const CONSTANTS = [
   },
   {
     name: "Push",
-    description: "Chat is a direct messaging protocol that can enable wallets to message each other.",
+    description: "Push is a push notification protocol that enables apps to notify users of both off-chain and on-chain events.",
     url: "push"
   },
   {
     name: "Chat",
-    description: "Push is a push notification protocol that enables apps to notify users of both off-chain and on-chain events.",
+    description: "Chat is a direct messaging protocol that can enable wallets to message each other.",
+  
     url: "chat"
   }
 ]
