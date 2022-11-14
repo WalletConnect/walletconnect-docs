@@ -28,10 +28,6 @@
   padding: 0 var(--ifm-pre-padding);
 }
 
-[data-theme="dark"] .docusaurus-highlight-code-line {
-  background-color: rgba(0, 0, 0, 0.3);
-}
-
 /* Content */
 main {
   background-color: #ffffff;
@@ -39,6 +35,61 @@ main {
 
 [data-theme="dark"] main {
   background-color: #000000;
+}
+
+.boxContainer {
+  display: flex;
+  flex-flow: wrap;
+  justify-content: center;
+  row-gap: 1em;
+  column-gap: 1em;
+}
+
+.box {
+  min-height: 33%;
+  border: 1px solid #edf2f7;
+  border-radius: 7px;
+  background-color: #f7fafc;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  padding-inline: 1em;
+  padding-top: 1em;
+}
+
+.box:hover {
+  background-color: #ebedf0;
+  cursor: pointer;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+[data-theme="dark"] .box {
+  border: 1px solid #000000;
+  border-radius: 7px;
+  background-color: #242124;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
+[data-theme="dark"] .box:hover {
+  background-color: #100e10;
+  cursor: pointer;
+  border: 1px solid #242124;
+}
+
+@media only screen and (min-width: 660px) {
+  .box {
+    flex: 1 33%;
+  }
+}
+
+@media only screen and (min-width: 900px) {
+  .box {
+    flex: auto;
+  }
+}
+
+@media only screen and (min-width: 1100px) {
+  .box {
+    flex: 1 33%;
+  }
 }
 
 /* Navbar */

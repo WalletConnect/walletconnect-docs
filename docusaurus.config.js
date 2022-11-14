@@ -58,7 +58,7 @@ const config = {
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     {
       navbar: {
-        title: "WalletConnect",
+        title: "WalletConnect | Docs",
         logo: {
           alt: "WalletConnect Logo",
           src: "img/walletconnect-logo.svg",
@@ -69,22 +69,29 @@ const config = {
             type: "doc",
             position: "left",
             docId: "readme",
-            label: "Docs",
+            label: "Overview",
           },
           {
             type: "docSidebar",
             position: "left",
-            sidebarId: "specs",
-            label: "Specs",
+            sidebarId: "javascript",
+            label: "JavaScript",
+          },
+          {
+            type: "docSidebar",
+            position: "left",
+            sidebarId: "kotlin",
+            label: "Kotlin",
+          },
+          {
+            type: "docSidebar",
+            position: "left",
+            sidebarId: "swift",
+            label: "Swift",
           },
           {
             type: "docsVersionDropdown",
             position: "right",
-          },
-          {
-            href: "https://www.walletconnect.com/",
-            position: "right",
-            label: "Website",
           },
           {
             href: "https://github.com/walletconnect/",
