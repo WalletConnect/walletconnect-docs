@@ -7,7 +7,7 @@ interface RequestParams {
   chainId: string;
   domain: string;
   aud: string;
-  nonce?: string;
+  nonce: string;
   type?: string;
   nbf?: string;
   exp?: string;
@@ -16,8 +16,6 @@ interface RequestParams {
   resources?: string[];
 }
 ```
-
-Note: Nonce can be specified by requester. However, if it's null Auth SDK should generate random nonce. 
 ## Respond Params
 
 ```typescript
