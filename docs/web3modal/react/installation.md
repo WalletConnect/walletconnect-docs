@@ -50,7 +50,7 @@ const ethereumClient = new EthereumClient(wagmiClient, chains);
 ## Add react components
 
 You don't have to wrap `Web3Modal` inside `WagmiConfig`, in fact, we recommend placing it somewhere outside of your main app, thus removing extra re-rendering work.
-See [Customization](/2.0/introduction/web3modal/about#options) docs for more information about modal props.
+See [Customization](../about#options) docs for more information about modal props.
 
 ```tsx
 function App() {
