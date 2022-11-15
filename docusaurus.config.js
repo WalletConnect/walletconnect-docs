@@ -16,7 +16,13 @@ const config = {
   favicon: "img/favicon.ico",
   organizationName: "walletconnect",
   projectName: "walletconnect-docs",
-  scripts: [{src: 'https://plausible.io/js/plausible.js', defer: true, 'data-domain': 'docs.walletconnect.com'}],
+  scripts: [
+    {
+      src: "https://plausible.io/js/plausible.js",
+      defer: true,
+      "data-domain": "docs.walletconnect.com",
+    },
+  ],
 
   presets: [
     [
@@ -96,8 +102,8 @@ const config = {
           {
             href: "https://github.com/walletconnect/",
             position: "right",
-            className: 'header-github-link',
-            'aria-label': 'GitHub repository',
+            className: "header-github-link",
+            "aria-label": "GitHub repository",
           },
         ],
       },
@@ -151,7 +157,7 @@ const config = {
         copyright: `Copyright © ${new Date().getFullYear()} WalletConnect, Inc.`,
       },
       colorMode: {
-        defaultMode: 'dark',
+        defaultMode: "dark",
         disableSwitch: false,
         respectPrefersColorScheme: false,
       },
