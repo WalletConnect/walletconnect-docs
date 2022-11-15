@@ -23,19 +23,19 @@ module.exports = {
           collapsed: true,
           collapsible: true,
           items: [
-            "introduction/web3modal/about",
+            "web3modal/about",
             {
               type: "category",
               label: "React",
               collapsed: true,
               collapsible: true,
               items: [
-                "introduction/web3modal/react/installation",
-                "introduction/web3modal/react/hooks",
+                "web3modal/react/installation",
+                "web3modal/react/hooks",
               ],
             },
             ,
-            "introduction/web3modal/for-wallets",
+            "web3modal/for-wallets",
           ],
         },
         {

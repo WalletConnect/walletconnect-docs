@@ -73,5 +73,9 @@
       "source": "/2.0/introduction/examples-and-resources",
       "destination": "/2.0/javascript/guides/examples-and-resources"
     }
+    {
+      "source": "/2.0/introduction/web3modal/:path*",
+      "destination": "/2.0/web3modal/:path*"
+    },
   ]
 }
