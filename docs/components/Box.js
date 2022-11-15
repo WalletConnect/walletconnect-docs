@@ -5,7 +5,7 @@ const Box = ({ name, description, url}) => {
   let history = useHistory();
 
   const handleClick = () => {
-    history.push(`/2.0/introduction/${url}`)
+    history.push(url)
   }
   
   return (
