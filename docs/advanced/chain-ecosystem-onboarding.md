@@ -1,7 +1,7 @@
 # Chain Ecosystem Onboarding
 
 Any chain can accelerate their reach into the broader Web3 ecosystem by integrating with WalletConnect. [WalletConnect v2](https://medium.com/walletconnect/walletconnect-v2-0-protocol-whats-new-3243fa80d312) provides multi-chain compatibility, session management and JSON-RPC management. Any chain can take advantage of WalletConnect's secure end to end encrypted messaging with [Auth](https://medium.com/walletconnect/introducing-walletconnect-auth-one-click-wallet-login-to-simplify-web3-ux-9cc11fd18aba) and [Sign](https://medium.com/walletconnect/walletconnect-sign-v2-0-the-final-release-is-here-864b21e8d1ca). 
-WalletConnect supports and uses the foundational industry strandard [CAIPs](https://github.com/ChainAgnostic/CAIPs), for interoperability in the Web3 ecosystem.
+WalletConnect supports and uses the foundational industry standard [CAIPs](https://github.com/ChainAgnostic/CAIPs), for interoperability in the Web3 ecosystem.
 
 
 In order for dapps to use Web3Modal to connect to wallets, wallets must support our Core v2, Sign and Auth SDK's.
