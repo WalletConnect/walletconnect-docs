@@ -4,7 +4,7 @@ Any chain can accelerate their reach into the broader Web3 ecosystem by integrat
 WalletConnect supports and uses the foundational industry standard [CAIPs](https://github.com/ChainAgnostic/CAIPs), for interoperability in the Web3 ecosystem.
 
 
-In order for dapps to use Web3Modal to connect to wallets, wallets must support our Core v2, Sign and Auth SDK's.
+In order for dapps to use Web3Modal to connect to wallets, wallets must support our Core v2, Sign and Auth SDKs.
 
 Chains need to provide the following to support Web3Modal for dapps:
 1. RPC node for accessing transaction information on the L1 or similar endpoint and provide it for [Web3Modal](https://github.com/WalletConnect/web3modal).
