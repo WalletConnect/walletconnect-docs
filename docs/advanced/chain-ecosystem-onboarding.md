@@ -8,7 +8,7 @@ In order for dapps to use Web3Modal to connect to wallets, wallets must support 
 
 Chains need to provide the following to support Web3Modal for dapps:
 1. RPC node for accessing transaction information on the L1 or similar endpoint and provide it for [Web3Modal](https://github.com/WalletConnect/web3modal).
-2. Chains need to create a standalone libray for their L1 similar to [Solib](https://github.com/WalletConnect/solib) or WAGMI. Chains will need to expose similar capabilities as represented in the [API template](https://github.com/WalletConnect/web3modal/tree/V2/chains/ethereum).
+2. Chains need to create a standalone library for their L1 similar to [Solib](https://github.com/WalletConnect/solib) or WAGMI. Chains will need to expose similar capabilities as represented in the [API template](https://github.com/WalletConnect/web3modal/tree/V2/chains/ethereum).
 
 ## Onboarding Framework
 Our recommended approach is the following: 
