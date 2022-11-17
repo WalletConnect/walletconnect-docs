@@ -18,7 +18,7 @@ We have a set of official examples in our [web-examples](https://github.com/Wall
 
 - [React Chat Wallet](https://github.com/WalletConnect/web-examples/tree/main/wallets/react-wallet-chat) ([Demo](https://react-wallet-chat.walletconnect.com/))
 
-### dApps
+### Dapps
 
 **Sign**
 
