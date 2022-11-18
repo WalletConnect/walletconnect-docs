@@ -154,7 +154,7 @@ function decodeIss(issuer: string): Uint8Array {
     MULTICODEC_ED25519_ENCODING
   );
   const keyType = toString(multicodec.slice(0, 2), MULTICODEC_ED25519_ENCODING);
-  if (keyType !== MULTICODEC_ED25519_KEY_TYPE) {
+  if (keyType !== MULTICODEC_ED25519_HEADER) {
     throw new Error(`Issuer must be a public key with type "Ed25519"`);
   }
   const publicKey = multicodec.slice(2);
