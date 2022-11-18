@@ -109,6 +109,8 @@ const MULTICODEC_ED25519_HEADER = "K36";
 
 const MULTICODEC_ED25519_LENGTH = 32;
 
+const MULTIBASE_BASE58BTC_PREFIX = 'z'
+
 // ---------- JSON ----------------------------------------------- //
 
 function decodeJSON(str: string): any {
@@ -129,6 +131,7 @@ function encodeIss(publicKey: Uint8Array): string {
     MULTICODEC_ED25519_KEY_TYPE,
     MULTICODEC_ED25519_ENCODING
   );
+  const header = fromString(MULTICODEC_ED25519_HEADER, MULTICODEC_ED25519_ENCODING);
   const multicodec = toString(
     concat([header, publicKey]),
     MULTICODEC_ED25519_ENCODING
