@@ -39,7 +39,7 @@ const { provider } = configureChains(chains, [
 ]);
 const wagmiClient = createClient({
   autoConnect: true,
-  connectors: modalConnectors({ appName: "web3Moda", chains }),
+  connectors: modalConnectors({ appName: "web3Modal", chains }),
   provider,
 });
 
