@@ -2,13 +2,13 @@
 
 ## User Flow
 
-User vists application that connected with its wallet
+User visits application that connected with its wallet
 
 App can prompt a push proposal after connecting or it can provide a "bell" button that user can trigger the push proposal
 
 User can approve or reject the push proposal from its wallet.
 
-In future events, the app can trigger push notitifcations after subscriptions has been approved.
+In future events, the app can trigger push notifications after subscription has been approved.
 
 ## Proposal Protocol
 
