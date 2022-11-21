@@ -87,7 +87,7 @@ module.exports = {
           collapsed: true,
           collapsible: true,
           items: [
-            "specs",
+            "specs/readme",
             {
               type: "category",
               label: "Client APIs",
