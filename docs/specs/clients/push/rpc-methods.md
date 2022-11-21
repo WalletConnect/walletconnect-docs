@@ -4,7 +4,7 @@ This doc should be used as a _source-of-truth_ and reflect the latest decisions 
 
 ## Definitions
 
-- **Nullables:** Fields flagged as `Optional` can be ommited from the payload.
+- **Nullables:** Fields flagged as `Optional` can be omitted from the payload.
 - Unless explicitly mentioned that a response requires associated data, all methods response's follow a default JSON-RPC pattern for the success and failure cases:
 
 ```jsonc
