@@ -1,7 +1,7 @@
 import React from "react";
 import Box from './Box'
 
-const URL_SCHEME = "/2.0/introduction/";
+const URL_SCHEME = "/2.0/api/";
 const CONSTANTS = [
   {
     name: "Sign",

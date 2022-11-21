@@ -44,10 +44,10 @@ module.exports = {
           collapsed: true,
           collapsible: true,
           items: [
-            "apis/sign",
-            "apis/auth",
-            "apis/chat",
-            "apis/push",
+            "api/sign",
+            "api/auth",
+            "api/chat",
+            "api/push",
           ],
         },
         {
@@ -56,8 +56,8 @@ module.exports = {
           collapsed: true,
           collapsible: true,
           items: [
-            "cloud/cloud-explorer",
-            "cloud/cloud-relay",
+            "cloud/explorer",
+            "cloud/relay",
           ],
         },
       ],
