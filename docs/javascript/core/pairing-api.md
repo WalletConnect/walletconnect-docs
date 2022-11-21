@@ -2,7 +2,7 @@
 
 ## Useful Links
 
-- [Pairing API Spec](../../specs/clients/core/pairing/readme.md)
+- [Pairing API Spec](../core/pairing/readme.md)
 - [Implementation](https://github.com/WalletConnect/walletconnect-monorepo/blob/v2.0/packages/core/src/controllers/pairing.ts)
 - [Types](https://github.com/WalletConnect/walletconnect-monorepo/blob/v2.0/packages/types/src/core/pairing.ts)
 
