@@ -70,4 +70,5 @@ In this repository, we document and discuss features that are currently under de
 ## Servers
 
 ### Relay
+
 - Relay RPC ([doc](servers/relay/relay-rpc.md))
