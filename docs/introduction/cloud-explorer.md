@@ -12,60 +12,75 @@ If you would like to edit or claim an existing cloud explorer item, email us at 
 
 The Cloud Explorer API currently offers the following functionality:
 
-- [Listings](#listings-api) - Allows for fetching of wallets and dApps listed in the [WalletConnect Cloud Explorer](https://explorer.walletconnect.com/).
-- [Logo](#logo-api) - Provides logo assets in different sizes for a given Cloud explorer entry.
+- [Listings](#listings) - Allows for fetching of wallets and dApps listed in the [WalletConnect Cloud Explorer](https://explorer.walletconnect.com/).
+- [Logos](#logos) - Provides logo assets in different sizes for a given Cloud explorer entry.
 
 ### Listings
 
 By default listings endpoints return all data for provided type. You can use following query params to return paginated data or search for a specific listing by its name:
 
-| Param   | Description                                                                         |
-| ------- | ----------------------------------------------------------------------------------- |
-| entries | Specifies how many entries will be returned (must be used together with page param) |
-| page    | Specifies current page (must be used with entries param)                            |
-| search  | Returns listings whose name matches provided search query                           |
-| version | Specifies WalletConnect supported version (1 or 2)                                  |
+| Param       | Required? | Description                                                                                                              |
+| ----------- | --------- | ------------------------------------------------------------------------------------------------------------------------ |
+| projectId   | Required  | Your WalletConnect Cloud Project ID (from [cloud.walletconnect.com](https://cloud.walletconnect.com/))                   |
+| entries     |           | Specifies how many entries will be returned (must be used together with page param)                                      |
+| page        |           | Specifies current page (must be used with entries param)                                                                 |
+| search      |           | Returns listings whose name matches provided search query                                                                |
+| chains      |           | Returns listings that support at least one of the provided chains<br/>(e.g. `?chains=eip155:1,eip155:137`)               |
+| platforms   |           | Returns listings that support at least one of the provided platforms<br/>(e.g. `?platforms=ios,android,mac`)             |
+| sdks        |           | Returns listings that support at least one of the provided WalletConnect SDKs<br/>(e.g. `?sdks=sign_v1,sign_v2,auth_v1`) |
+| ~~version~~ |           | Deprecated - replaced by `sdks` param. Specifies supported Sign version (1 or 2)                                         |
 
-#### `GET /v1/wallets`
+#### `GET /v3/wallets`
 
-Returns a JSON object containing all wallets listed in the cloud explorer. <br />
-[See Example](https://explorer-api.walletconnect.com/v1/wallets?entries=5&page=1)
+Returns a JSON object containing all wallets listed in the cloud explorer.
 
-#### `GET /v1/dapps`
+Examples:
 
-Returns a JSON object containing all dApps listed in the public cloud explorer. <br />
-[See Example](https://explorer-api.walletconnect.com/v1/dapps?entries=5&page=1)
+- `GET https://explorer-api.walletconnect.com/v3/wallets?projectId=YOUR_PROJECT_ID&entries=5&page=1`
 
-#### `GET /v1/hybrid`
+#### `GET /v3/dapps`
 
-Returns a JSON object containing all hybrids listed in the public cloud explorer. <br />
-[See Example](https://explorer-api.walletconnect.com/v1/hybrid?entries=5&page=1)
+Returns a JSON object containing all dApps listed in the public cloud explorer.
 
-#### `GET /v1/all`
+Examples:
 
-Returns a JSON object containing all entries listed in the public cloud explorer. <br />
-[See Example](https://explorer-api.walletconnect.com/v1/all?entries=5&page=1)
+- `GET https://explorer-api.walletconnect.com/v3/dapps?projectId=YOUR_PROJECT_ID&entries=5&page=1`
 
-### Logo v1
+#### `GET /v3/hybrid`
 
-| Param | Description                                                                      |
-| ----- | -------------------------------------------------------------------------------- |
-| size  | Determines resolution of returned image can be one of: `sm`, `md` or `lg`        |
-| id    | Corresponds to a cloud explorer entry's id field as returned by the Listings API |
+Returns a JSON object containing all hybrids listed in the public cloud explorer.
 
-#### `GET /v1/logo/:size/:id`
+Examples:
 
-Returns the image source of the logo for `id` sized according `size`. <br />
-[See Example](https://explorer-api.walletconnect.com/v1/logo/lg/d2ae9c3c2782806fd6db704bf40ef0238af9470d7964ae566114a033f4a9a110)
+- `GET https://explorer-api.walletconnect.com/v3/hybrid?projectId=YOUR_PROJECT_ID&entries=5&page=1`
 
-### Logo v2
+#### `GET /v3/all`
+
+Returns a JSON object containing all entries listed in the public cloud explorer.
+
+Examples:
+
+- `GET https://explorer-api.walletconnect.com/v3/all?projectId=YOUR_PROJECT_ID&entries=5&page=1`
+
+### Logos
+
+#### Path Parameters
 
 | Param | Description                                                                              |
 | ----- | ---------------------------------------------------------------------------------------- |
 | size  | Determines resolution of returned image can be one of: `sm`, `md` or `lg`                |
-| id    | Corresponds to a cloud explorer entry's `image_id` field as returned by the Listings API |
+| id    | Corresponds to a Cloud Explorer entry's `image_id` field as returned by the Listings API |
 
-#### `GET /v2/logo/:size/:image_id`
+#### Query Parameters
 
-Returns the image source of the logo for `image_id` sized according `size`. <br />
-[See Example](https://explorer-api.walletconnect.com/v2/logo/md/32a77b79-ffe8-42c3-61a7-3e02e019ca00)
+| Param     | Required? | Description                                                                                            |
+| --------- | --------- | ------------------------------------------------------------------------------------------------------ |
+| projectId | Required  | Your WalletConnect Cloud Project ID (from [cloud.walletconnect.com](https://cloud.walletconnect.com/)) |
+
+#### `GET /v3/logo/:size/:image_id`
+
+Returns the image source of the logo for `image_id` sized according `size`.
+
+Examples:
+
+- `GET https://explorer-api.walletconnect.com/v3/logo/md/32a77b79-ffe8-42c3-61a7-3e02e019ca00?projectId=YOUR_PROJECT_ID`

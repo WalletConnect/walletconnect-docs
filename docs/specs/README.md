@@ -60,6 +60,7 @@ In this repository, we document and discuss features that are currently under de
 - Pair Overview ([doc](core/pairing/README.md))
 - Pairing Client API ([doc](core/pairing/pairing-api.md))
 - Pairing URI ([doc](core/pairing/pairing-uri.md))
+- Error Codes ([doc](core/pairing/error-codes.md))
 - Data Structures ([doc](core/pairing/data-structures.md))
 - RPC Methods ([doc](core/pairing/rpc-methods.md))
 

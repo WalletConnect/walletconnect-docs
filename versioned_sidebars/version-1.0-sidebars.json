@@ -8,7 +8,7 @@
         {
           "type": "category",
           "label": "Dapps",
-          "items": ["version-1.0/quick-start/dapps/client","version-1.0/quick-start/dapps/node","version-1.0/quick-start/dapps/react-native","version-1.0/quick-start/dapps/web3-provider"],
+          "items": ["version-1.0/quick-start/dapps/client","version-1.0/quick-start/dapps/node","version-1.0/quick-start/dapps/react-native","version-1.0/quick-start/dapps/web3-provider","version-1.0/quick-start/dapps/web3modal"],
           "collapsible": true,
           "collapsed": true
         },

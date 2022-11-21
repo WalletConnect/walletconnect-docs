@@ -41,3 +41,11 @@ Adding `dapp.example.com` to the allowlist will only allow requests from that or
 | Project ID doesn't exist | 401        |
 | Exists and is invalid  | 403        |
 | Too many requests  | 1013        |
+
+## Websocket Close codes
+
+| Code        | Description | Reconnect  |
+| ----------- | ----------- |----------- |
+| 1001        | Server terminating | Yes |
+| 4008        | Client stale: connected without a prior subscription and is not sending data | When needed |
+| 4010        | Load Rebalancing | Yes |
