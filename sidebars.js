@@ -62,6 +62,7 @@ module.exports = {
         "introduction/glossary",
         "advanced/migrating-from-v1.0",
         "advanced/relay-server",
+        "advanced/chain-ecosystem-onboarding",
         {
           type: "category",
           label: "RPC Reference",
