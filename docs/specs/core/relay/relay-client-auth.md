@@ -109,6 +109,8 @@ const MULTICODEC_ED25519_HEADER = "K36";
 
 const MULTICODEC_ED25519_LENGTH = 32;
 
+const MULTIBASE_BASE58BTC_PREFIX = 'z'
+
 // ---------- JSON ----------------------------------------------- //
 
 function decodeJSON(str: string): any {
@@ -129,6 +131,7 @@ function encodeIss(publicKey: Uint8Array): string {
     MULTICODEC_ED25519_KEY_TYPE,
     MULTICODEC_ED25519_ENCODING
   );
+  const header = fromString(MULTICODEC_ED25519_HEADER, MULTICODEC_ED25519_ENCODING);
   const multicodec = toString(
     concat([header, publicKey]),
     MULTICODEC_ED25519_ENCODING
@@ -151,7 +154,7 @@ function decodeIss(issuer: string): Uint8Array {
     MULTICODEC_ED25519_ENCODING
   );
   const keyType = toString(multicodec.slice(0, 2), MULTICODEC_ED25519_ENCODING);
-  if (keyType !== MULTICODEC_ED25519_KEY_TYPE) {
+  if (keyType !== MULTICODEC_ED25519_HEADER) {
     throw new Error(`Issuer must be a public key with type "Ed25519"`);
   }
   const publicKey = multicodec.slice(2);
