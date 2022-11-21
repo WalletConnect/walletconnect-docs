@@ -19,6 +19,10 @@ abstract class Client {
   // query all active subscriptions
   public abstract getActiveSubscriptions(): Promise<Record<number, PushSubscription>>;
 
+  // decrypt push subscription message
+  public abstract decryptMessage(topic:string, encryptedMessage: string): Promise<string>;
+
+
   // ---------- Events ----------------------------------------------- //
 
   // subscribe to push response
