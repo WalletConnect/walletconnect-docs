@@ -10,7 +10,7 @@ Its public API and associated documentation may still see significant and breaki
 For an example implementation, please refer to our [`react-wallet-chat` example](https://github.com/WalletConnect/web-examples/tree/main/wallets/react-wallet-chat).
 :::
 
-### Initialize your WalletConnect ChatClient, using [your Project ID](../../cloud/cloud-relay.md)
+### Initialize your WalletConnect ChatClient, using [your Project ID](../../cloud/relay.md)
 
 ```javascript
 import { ChatClient } from "@walletconnect/chat-client";

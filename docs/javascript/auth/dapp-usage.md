@@ -8,7 +8,7 @@ description: Quick Start For Dapps using Auth Client
 For an example implementation, please refer to our [`react-dapp-auth` example](https://github.com/WalletConnect/web-examples/tree/main/dapps/react-dapp-auth).
 :::
 
-**1. Initialize your WalletConnect AuthClient, using [your Project ID](../../cloud/cloud-relay.md).**
+**1. Initialize your WalletConnect AuthClient, using [your Project ID](../../cloud/relay.md).**
 
 ```javascript
 import AuthClient from "@walletconnect/auth-client";

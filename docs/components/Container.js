@@ -25,10 +25,11 @@ const CONSTANTS = [
   }
 ];
 
-export const Container = () => {
+export const Container = (props) => {
+  const items = props.items || CONSTANTS
   return (
     <div className="boxContainer">
-      {CONSTANTS.map((product, i)=>(
+      {items.map((product, i)=>(
         <Box name={product.name} description={product.description} url={product.url} key={i}/>
       ))}
     </div>
