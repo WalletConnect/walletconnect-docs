@@ -51,7 +51,7 @@ In this repository, we document and discuss features that are currently under de
 
 - Core Overview ([doc](clients/core/README.md))
 
-- Relay Client ([doc](clients/core/relay/relay-client.md))
+- Relay Client API ([doc](clients/core/relay/relay-client-api.md))
 - Relay Client Auth ([doc](clients/core/relay/relay-client-auth.md))
 - Relay User Agent ([doc](clients/core/relay/relay-user-agent.md))
 
