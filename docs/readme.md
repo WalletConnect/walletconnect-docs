@@ -11,7 +11,30 @@ If you'd like to make a PR or create an issue for our docs, you can do so by goi
 
 WalletConnect comprises four core components and associated SDKs:
 
-<Container />
+<Container
+  items={[
+    {
+      name: "Sign",
+      description: "Sign is a remote signer protocol to communicate securely between web3 wallets and dapps.",
+      url: `/2.0/api/sign`
+    },
+    {
+      name: "Auth",
+      description: "Auth is an authentication protocol that can be used to log-in blockchain wallets into apps.",
+      url: `/2.0/api/auth`
+    },
+    {
+      name: "Push",
+      description: "Push is a push notification protocol that enables apps to notify users of both off-chain and on-chain events.",
+      url: `/2.0/api/push`
+    },
+    {
+      name: "Chat",
+      description: "Chat is a direct messaging protocol that can enable wallets to message each other.",
+      url: `/2.0/api/chat`
+    }
+  ]}
+/>
 
 ## Why use WalletConnect?
 
