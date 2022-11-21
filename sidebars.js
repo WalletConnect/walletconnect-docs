@@ -87,6 +87,7 @@ module.exports = {
           collapsed: true,
           collapsible: true,
           items: [
+            "specs",
             {
               type: "category",
               label: "Client APIs",
