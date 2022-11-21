@@ -40,17 +40,26 @@ module.exports = {
         },
         {
           type: "category",
-          label: "SDKs",
+          label: "APIs",
           collapsed: true,
           collapsible: true,
           items: [
-            "introduction/sign",
-            "introduction/auth",
-            "introduction/chat",
-            "introduction/push",
+            "apis/sign",
+            "apis/auth",
+            "apis/chat",
+            "apis/push",
           ],
         },
-        "introduction/cloud-explorer",
+        {
+          type: "category",
+          label: "Cloud",
+          collapsed: true,
+          collapsible: true,
+          items: [
+            "cloud/cloud-explorer",
+            "cloud/cloud-relay",
+          ],
+        },
       ],
     },
     {
@@ -59,7 +68,7 @@ module.exports = {
       collapsible: false,
       className: "menu_outer_list",
       items: [
-        "introduction/glossary",
+        "advanced/glossary",
         "advanced/migrating-from-v1.0",
         "advanced/relay-server",
         {

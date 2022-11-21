@@ -1,4 +1,4 @@
-# Relay Server
+# Relay RPC
 
 ## Purpose
 

@@ -24,7 +24,7 @@ The way of handling unpublished messages in the RelayClient should differ depend
   - once RelayClient fails to publish a message three times in a row for no Internet availability or web-socket connection, the unpublished message is persistent in local storage. Once RelayClient detects that connection is again available, messages are sent in the original order. For a better user experience, RelayClient should throw a descriptive error to its consumer once a message publish fails.
   - once RelayClient fails to publish a given message three time in a row for any other reason than no available connection, the unpublished message is persistent in local storage, and RelayClient's consumer is responsible for sending a message again. For a better user experience, RelayClient should throw a descriptive error to its consumer once a message publish fails.
 
-## RelayClient API
+## API
 
 The Relay Client API defines a public interface with set of supported methods. It is consumed by an instance of SDK, where it allows to publish a message on a topic and subscribe or unsubcsribe the given topic.
 
@@ -55,7 +55,7 @@ The policy object defines the policy's parameters.
 ```jsonc
 {
     "ttl" : seconds,
-    "api" : number, // Optional / default = 0
+    "tag" : number, // Optional / default = 0
     "prompt" : boolean // Optional / default = false
 }
 ```

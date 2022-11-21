@@ -136,7 +136,7 @@ signClient.on("session_delete", (event) => {
 
 ### URI
 
-The pairing proposal between a wallet and a dapp is made using an [URI](../../specs/core/pairing/pairing-uri.md). In WalletConnect v2.0 the session and pairing are decoupled from each other. This means that a URI is shared to construct a pairing proposal, and only after settling the pairing the dapp can propose a session using that pairing. In simpler words, the dapp generates an URI that can be used by the wallet for pairing.
+The pairing proposal between a wallet and a dapp is made using an [URI](../../specs/clients/core/pairing/pairing-uri.md). In WalletConnect v2.0 the session and pairing are decoupled from each other. This means that a URI is shared to construct a pairing proposal, and only after settling the pairing the dapp can propose a session using that pairing. In simpler words, the dapp generates an URI that can be used by the wallet for pairing.
 
 ### Namespaces
 
