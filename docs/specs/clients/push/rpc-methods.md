@@ -32,6 +32,7 @@ Used to request push subscription to a peer through topic P. Response is expecte
 {
   "publicKey": string,
   "metadata": Metadata,
+  "account": string,
 }
 
 | IRN     |          |
@@ -57,3 +58,41 @@ Used to request push subscription to a peer through topic P. Response is expecte
 | Tag     | 4001     |
 ```
 
+### wc_pushMessage
+
+Used to publish a notification message to a peer through topic P. Response is expected on the same topic.
+
+- Success response is equivalent to push message acknowledgement.
+- Error response is equivalent to push message failed to decrypt.
+
+
+**Request**
+
+```jsonc
+// wc_pushRequest params
+{
+  "title": string,
+  "body": string,
+  "icon": string,
+}
+
+| IRN     |          |
+| ------- | -------- |
+| TTL     | 86400    |
+| Prompt  | true     |
+| Tag     | 4002     |
+
+```
+
+**Response**
+
+```jsonc
+// Success result
+true
+
+| IRN     |          |
+| ------- | -------- |
+| TTL     | 86400    |
+| Prompt  | false    |
+| Tag     | 4003     |
+```
