@@ -70,7 +70,6 @@ module.exports = {
       items: [
         "advanced/glossary",
         "advanced/migrating-from-v1.0",
-        "advanced/relay-server",
         {
           type: "category",
           label: "RPC Reference",
