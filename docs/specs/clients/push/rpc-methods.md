@@ -28,7 +28,7 @@ Used to request push subscription to a peer through topic P. Response is expecte
 **Request**
 
 ```jsonc
-// wc_authRequest params
+// wc_pushRequest params
 {
   "publicKey": string,
   "metadata": Metadata,
