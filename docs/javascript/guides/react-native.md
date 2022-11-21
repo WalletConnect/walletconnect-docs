@@ -23,7 +23,7 @@ import "@walletconnect/react-native-compat";
 
 ## Create Session
 
-1. Initiate your WalletConnect client with the relay server, using [your Project ID](../../advanced/relay-server.md).
+1. Initiate your WalletConnect client with the relay server, using [your Project ID](../../cloud/cloud-relay.md).
 
 ```javascript
 import SignClient from "@walletconnect/sign-client";
