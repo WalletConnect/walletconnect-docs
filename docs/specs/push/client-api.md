@@ -8,7 +8,7 @@ abstract class Client {
   public abstract init(params: {}): Promise<void>;
 
   // request push subscription
-  public abstract request(params: {}): Promise<{ uri, id }>;
+  public abstract request(params: { accounts: string[] }): Promise<{ uri, id }>;
 
   // approve push subscription 
   public abstract approve(params: {}): Promise<boolean>;
