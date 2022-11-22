@@ -74,7 +74,7 @@ Used to publish a notification message to a peer through topic P. Response is ex
   "title": string,
   "body": string,
   "icon": string,
-  "url": string;
+  "url": string,
 }
 
 | IRN     |          |

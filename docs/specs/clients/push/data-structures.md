@@ -1,7 +1,5 @@
 # Data Structures
 
-
-
 ## Push Subscription
 
 ```jsonc
@@ -12,7 +10,16 @@
     "data": string
   },  
   "metadata": Metadata,
-  "acknowledged": boolean,
-  "controller": string,
+}
+```
+
+## Push Message
+
+```jsonc
+{
+  "title": string,
+  "body": string,
+  "icon": string,
+  "url": string,
 }
 ```
