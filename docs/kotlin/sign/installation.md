@@ -23,5 +23,6 @@ allprojects {
 app/build.gradle.kts
 
 ```gradle
+implementation("com.walletconnect:android-core:release_version")
 implementation("com.walletconnect:sign:release_version")
 ```

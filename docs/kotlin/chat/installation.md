@@ -25,5 +25,6 @@ allprojects {
 app/build.gradle
 
 ```gradle
+implementation("com.walletconnect:android-core:release_version")
 implementation("com.walletconnect:chat:release_version")
 ```
