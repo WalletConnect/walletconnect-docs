@@ -16,9 +16,6 @@ abstract class DappClient {
   // delete active subscription
   public abstract delete(params: { topic: string }): Promise<void>;
 
-  // decrypt push subscription message
-  public abstract decryptMessage(topic:string, encryptedMessage: string): Promise<string>;
-
   // ---------- Events ----------------------------------------------- //
 
   // subscribe to push response
