@@ -34,7 +34,7 @@ module.exports = {
                 "web3modal/react/hooks",
               ],
             },
-            ,
+            "web3modal/standalone",
             "web3modal/for-wallets",
           ],
         },
