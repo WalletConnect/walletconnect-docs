@@ -1,89 +1,22 @@
 # Relay Server API
 
-## Purpose
+## WebSocket
 
-This document aims to create the JsonRpc contract between a client and a server.
+WebSocket supports JSON-RPC methods (please review [Relay RPC](./relay-server-rpc.md))
 
-## Definitions
+## HTTP
 
-The following definitions are shared concepts across all JSON-RPC methods for the Relay API:
+### Register Webhook
 
-- **topic** - a target topic for the message to be subscribed by the receiver.
-- **message** - a plaintext message to be relayed to any subscribers on the topic.
-- **ttl** - a storage duration for the message to be cached server-side in **seconds** (aka time-to-live).
-- **tag** - a label that identifies what type of message is sent based on the rpc method used.
-- **prompt** - a flag that identifies whether the server should trigger a notification webhook to a client through a push server.
-- **id** - a unique identifier for each subscription targetting a topic.
+Used to register a webhook that would return an incoming message to the webhook.
 
-## Publish payload
+`POST /register-webhook`
 
-Used when a client publishes a message to a server.
+Body:
 
 ```jsonc
 {
-  "id" : "1",
-  "jsonrpc": "2.0",
-  "method": "irn_publish",
-  "params" : {
-    "topic" : string,
-    "message" : string,
-    "ttl" : seconds,
-    "tag" : number, // optional / default = 0
-    "prompt" : boolean, // optional / default = false
-  }
+    "clientId": string,
+    "webhook": string
 }
 ```
-
-## Subcribe payload
-
-Used when a client subscribes a given topic.
-
-```jsonc
-{
-  "id" : "1",
-  "jsonrpc": "2.0",
-  "method": "irn_subscribe",
-  "params" : {
-    "topic" : string
-  }
-}
-```
-
-## Unsubcribe payload
-
-Used when a client unsubscribes a given topic.
-
-```jsonc
-{
-  "id" : "1",
-  "jsonrpc": "2.0",
-  "method": "irn_unsubscribe",
-  "params" : {
-    "topic" : string,
-    "id": string
-  }
-}
-```
-
-## Subscription payload
-
-Used when a server sends a subscription message to a client.
-
-```jsonc
-{
-  "id" : "1",
-  "jsonrpc": "2.0",
-  "method": "irn_subscription",
-  "params" : {
-    "id" : string,
-    "data" : {
-      "topic" : string,
-      "message": string
-    }
-  }
-}
-```
-
-## FAQ
-
-- What is a client? - Any SDK instance (Sign, Chat, Auth, Push)
