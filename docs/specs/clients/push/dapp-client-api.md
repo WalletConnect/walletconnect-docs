@@ -11,7 +11,7 @@ abstract class DappClient {
   public abstract request(params: { account: string, pairingTopic?: string }): Promise<{ uri, id }>;
 
   // send push notification message
-  public abstract notify(params: { topic: string, notification: Notification }): Promise<void>
+  public abstract notify(params: { topic: string, message: PushMessage }): Promise<void>
 
   // query all active subscriptions
   public abstract getActiveSubscriptions(): Promise<Record<number, PushSubscription>>;

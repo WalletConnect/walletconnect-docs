@@ -10,7 +10,7 @@ Body:
 
 ```jsonc
 {
-    "message": string,
+    "account": string,
     "symKey": string
 }
 ```
@@ -27,7 +27,12 @@ Body:
 
 ```jsonc
 {
-    "message": string,
+    "message": {
+        "title": string,
+        "body": string,
+        "icon": string,
+        "url": string
+    },
     "accounts": string[]
 }
 ``` 
