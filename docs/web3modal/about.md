@@ -6,6 +6,10 @@ Your on-ramp to web3 multichain. Web3Modal is a versatile library that makes it 
 
 The Web3Modal Github can be found at [https://github.com/WalletConnect/web3modal](https://github.com/WalletConnect/web3modal).
 
+## Get Started
+
+To get started, click [here](./react/installation.md) to learn how to implement Web3Modal to your project.
+
 ## Customization
 
 Web3Modal automatically adapts to display desktop or mobile wallets depending on the user's device. Furthermore, we will only show wallets that support your configured chains.
@@ -22,8 +26,4 @@ You can further customize the modal by specifying it's theme and accent color (s
 ### Preview
 
 ![web3modal customisation](/assets/modal_preview.png)
-
-## Get Started
-
-To get started, click [here](./react/installation.md).
 
