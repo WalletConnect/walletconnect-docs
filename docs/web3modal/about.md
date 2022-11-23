@@ -2,23 +2,15 @@
 
 Your on-ramp to web3 multichain. Web3Modal is a versatile library that makes it super easy to connect users with your Dapp and start interacting with the blockchain.
 
+Built to be framework and use case agnostic, Web3Modal currently supports vanilla html/js and react on the ui side, as well as all EVM compatible chains. We are planning to expand support to more frameworks and chains in the future.
+
+Web3Modal provides first class integration with Wagmi, a library that can help you to dramatically speed up and simplify your development flows.
+In case you want to use Web3Modal with another development tooling or integrate with chains that are not yet supported, there is also a standalone mode.
+
+Check out [web3modal.com](https://web3modal.com) for more information and previews.
+
 ## Github
 
 The Web3Modal Github can be found at [https://github.com/WalletConnect/web3modal](https://github.com/WalletConnect/web3modal).
-
-## Customization
-
-Web3Modal automatically adapts to display desktop or mobile wallets depending on the user's device. Furthermore, we will only show wallets that support your configured chains.
-
-You can further customize the modal by specifying it's theme and accent color (see options below). More customization options will be added soon.
-
-### Options
-
-| Property    | Values                                                                          |
-| ----------- | ------------------------------------------------------------------------------- |
-| theme       | "dark", "light"                                                                 |
-| accentColor | "default", "blackWhite", "blue", "green", "magenta", "orange", "purple", "teal" |
-
-### Preview
 
 ![web3modal customisation](/assets/modal_preview.png)
