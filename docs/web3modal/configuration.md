@@ -80,9 +80,23 @@ walletImages: [
 ];
 ```
 
+### enableNetworkView (optional)
+
+If more than 1 chain was provided in modal or wagmi configuration users will be show network selection view before selecting a wallet, this option can enable or disable this behavior. Defaults to `true`
+
+```ts
+enableNetworkView: true;
+```
+
+## Standalone Modal Options
+
+### enableStandaloneMode (optional)
+
+Flag that is required to set modal into standalone mode. Defaults to `false`
+
 ### standaloneChains (optional)
 
-When using Web3Modal in standalone mode (without wagmi) you can define array of custom chains via this option. Defaults to `undefined`.
+When using Web3Modal in standalone mode (without wagmi) you can define array of custom chains via this option. Requires `enableStandaloneMode` to be set to `true`. Defaults to `undefined`.
 
 ```ts
 standaloneChains: [
@@ -91,14 +105,6 @@ standaloneChains: [
   "cosmos:cosmoshub-4",
   "polkadot:91b171bb158e2d3848fa23a9f1c25182",
 ];
-```
-
-### enableNetworkView (optional)
-
-If more than 1 chain was provided in modal or wagmi configuration users will be show network selection view before selecting a wallet, this option can enable or disable this behavior. Defaults to `true`
-
-```ts
-enableNetworkView: true;
 ```
 
 ## Wagmi Options
