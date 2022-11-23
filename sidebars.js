@@ -17,27 +17,7 @@ module.exports = {
       collapsible: false,
       className: "menu_outer_list",
       items: [
-        {
-          type: "category",
-          label: "Web3Modal",
-          collapsed: true,
-          collapsible: true,
-          items: [
-            "web3modal/about",
-            {
-              type: "category",
-              label: "React",
-              collapsed: true,
-              collapsible: true,
-              items: [
-                "web3modal/react/installation",
-                "web3modal/react/hooks",
-              ],
-            },
-            "web3modal/standalone",
-            "web3modal/for-wallets",
-          ],
-        },
+        "web3modal/about",
         {
           type: "category",
           label: "APIs",
@@ -172,6 +152,26 @@ module.exports = {
       className: "menu_outer_list",
       collapsible: false,
       items: [
+        {
+          type: "category",
+          label: "Web3Modal",
+          collapsible: true,
+          collapsed: true,
+          items: [
+            {
+              type: "category",
+              label: "React",
+              collapsed: true,
+              collapsible: true,
+              items: [
+                "web3modal/react/installation",
+                "web3modal/react/hooks",
+              ],
+            },
+            "web3modal/standalone",
+            "web3modal/for-wallets",
+          ]
+        },
         {
           type: "category",
           label: "Sign",

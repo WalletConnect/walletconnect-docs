@@ -1,4 +1,4 @@
-# About
+# Web3Modal
 
 Your on-ramp to web3 multichain. Web3Modal is a versatile library that makes it super easy to connect users with your Dapp and start interacting with the blockchain.
 
@@ -22,3 +22,8 @@ You can further customize the modal by specifying it's theme and accent color (s
 ### Preview
 
 ![web3modal customisation](/assets/modal_preview.png)
+
+## Get Started
+
+To get started, click [here](./standalone.md).
+
