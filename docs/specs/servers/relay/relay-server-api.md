@@ -2,7 +2,7 @@
 
 ## WebSocket
 
-WebSocket supports JSON-RPC methods (please review [Relay RPC](./relay-server-rpc.md))
+WebSocket supports JSON-RPC methods. For more details, please visit [Relay RPC docs](./relay-server-rpc.md).
 
 ## HTTP
 
