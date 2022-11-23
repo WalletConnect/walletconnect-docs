@@ -54,6 +54,19 @@ mobileWallets: [
 
 When `projectId` is not provided, you can define an array of custom desktop or web based wallets. Note: you will also need to add appropriate wallet images in `walletImages`. Native link represents deeplinking url like `ledgerlive://` and Universal link represents webpage link that can redirect to the app or fallback page. Defaults to `undefined`.
 
+```ts
+desktopWallets: [
+  {
+    id: string,
+    name: string,
+    links: {
+      native: string
+      universal: string,
+    },
+  },
+];
+```
+
 ### walletImages (optional)
 
 Array of wallet id's and their logo mappings. If `projectId` is provided, this will override default logos. Id's in this case can be: [explorer.walletconnect.com](https://explorer.walletconnect.com) id's, wallet id's you provided in `mobileWallets` or `desktopWallets` and [Wagmi](https://wagmi.sh) connector id's. Defaults to `undefined`.
@@ -72,7 +85,7 @@ walletImages: [
 Array of chain id's and their logo mappings. If `projectId` is provided, this will override default logos. You can find detailed chain data at [chainlist.org](https://chainlist.org) Defaults to `undefined`.
 
 ```ts
-walletImages: [
+chainImages: [
   {
     1: "/images/ethereum.webp",
     137: "/images/polygon.webp",
@@ -93,6 +106,10 @@ enableNetworkView: true;
 ### enableStandaloneMode (optional)
 
 Flag that is required to set modal into standalone mode. Defaults to `false`
+
+```ts
+enableStandaloneMode: false;
+```
 
 ### standaloneChains (optional)
 
