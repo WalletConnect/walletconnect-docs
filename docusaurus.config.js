@@ -172,6 +172,14 @@ const config = {
         indexName: "walletconnect",
         contextualSearch: true,
       },
+      announcementBar: {
+        id: 'support_us',
+        content:
+          '🚨 WalletConnect is sunsetting v1.0. All wallets must complete their migration by December 16, 2022. Apps are encouraged to begin migration now. Read more <a rel="noopener noreferrer" href="https://medium.com/walletconnect/walletconnect-v1-0-sunset-notice-and-migration-schedule-8af9d3720d2e">here</a>. 🚨',
+        backgroundColor: '#3182ce',
+        textColor: '#fff',
+        isCloseable: true,
+      },
     },
 };
 
