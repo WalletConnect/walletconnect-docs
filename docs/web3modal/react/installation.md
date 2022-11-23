@@ -1,6 +1,6 @@
 # Installation
 
-Web3Modal is split into granular packages that allow you to compose exact functionality required for your app. In most cases you will want to use "framework" and "chain" packages for your app. As of now we support `@web3modal/react` and `@web3modal/ethereum`. Support for more frameworks and non-evm chains is coming soon.
+Web3Modal offers out of the box support for react and integrates very well with a popular react hook library [wagmi](https://wagmi.sh/).
 
 ## Obtain Project ID
 
@@ -62,8 +62,6 @@ function App() {
 
       <Web3Modal
         projectId="<YOUR_PROJECT_ID>"
-        theme="dark"
-        accentColor="default"
         ethereumClient={ethereumClient}
       />
     </>

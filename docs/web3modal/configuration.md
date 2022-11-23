@@ -35,7 +35,7 @@ accentColor: "default" |
 
 ### mobileWallets (optional)
 
-When `projectId` is not provided, you can define an array of custom mobile wallets. Note: you will also need to add appropriate wallet images in `walletImages`. Defaults to `undefined`
+When `projectId` is not provided, you can define an array of custom mobile wallets. Note: you will also need to add appropriate wallet images in `walletImages`. Native link represents deeplinking url like `rainbow://` and Universal link represent webpage link that can redirect to the app or fallback page. Defaults to `undefined`.
 
 ```ts
 mobileWallets: [
@@ -43,21 +43,64 @@ mobileWallets: [
     id: string,
     name: string,
     links: {
-      deeplink: string, // rainbow://
-      universal: string, // https://rainbow.me
+      native: string
+      universal: string,
     },
   },
 ];
 ```
 
-### desktopWallets
+### desktopWallets (optional)
 
-When `projectId` is not provided, you can define an array of custom desktop or web based wallets. Note: you will also need to add appropriate wallet images in `walletImages`. Defaults to `undefined`
+When `projectId` is not provided, you can define an array of custom desktop or web based wallets. Note: you will also need to add appropriate wallet images in `walletImages`. Native link represents deeplinking url like `ledgerlive://` and Universal link represents webpage link that can redirect to the app or fallback page. Defaults to `undefined`.
 
-### walletImages
+### walletImages (optional)
 
-### chainImages
+Array of wallet id's and their logo mappings. If `projectId` is provided, this will override default logos. Id's in this case can be: [explorer.walletconnect.com](https://explorer.walletconnect.com) id's, wallet id's you provided in `mobileWallets` or `desktopWallets` and [Wagmi](https://wagmi.sh) connector id's. Defaults to `undefined`.
 
-### enableNetworkView
+```ts
+walletImages: [
+  {
+    rainbow: "/images/rainbow.webp",
+    metaMask: "/images/metamask.webp",
+  },
+];
+```
+
+### chainImages (optional)
+
+Array of chain id's and their logo mappings. If `projectId` is provided, this will override default logos. You can find detailed chain data at [chainlist.org](https://chainlist.org) Defaults to `undefined`.
+
+```ts
+walletImages: [
+  {
+    1: "/images/ethereum.webp",
+    137: "/images/polygon.webp",
+  },
+];
+```
+
+### standaloneChains (optional)
+
+When using Web3Modal in standalone mode (without wagmi) you can define array of custom chains via this option. Defaults to `undefined`.
+
+```ts
+standaloneChains: [
+  "eip155:1",
+  "solana:4sGjMW1sUnHzSxGspuhpqLDx6wiyjNtZ",
+  "cosmos:cosmoshub-4",
+  "polkadot:91b171bb158e2d3848fa23a9f1c25182",
+];
+```
+
+### enableNetworkView (optional)
+
+If more than 1 chain was provided in modal or wagmi configuration users will be show network selection view before selecting a wallet, this option can enable or disable this behavior. Defaults to `true`
+
+```ts
+enableNetworkView: true;
+```
 
 ## Wagmi Options
+
+In addition to modal configuration options above, all standard wagmi configuration properties for chains, connectors and providers are also supported. We do however require `WalletConnectConnector` to always be present. Make sure to check out their [documentation](https://wagmi.sh/) for more info.
