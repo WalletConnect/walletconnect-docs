@@ -1,6 +1,6 @@
 # Installation
 
-Web3Modal is built using standard web technologies like web-components and es modules, which means that it can be used in any front-end environment. It works particularly well with [wagmi core](wagmi.sh/) library that offers big suite of helper actions to speed up and simplify web3 development flows.
+Web3Modal is built using standard web technologies like web-components and es modules, which means that it can be used in any front-end environment. It works particularly well with [wagmi core](https://wagmi.sh/) library that offers big suite of helper actions to speed up and simplify web3 development flows.
 
 ## Obtain Project ID
 
