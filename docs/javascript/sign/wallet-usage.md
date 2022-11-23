@@ -20,7 +20,7 @@ For more information check our [migration guide](../../advanced/migrating-from-v
 
 ## Initializing the client
 
-Initialize client as a controller using [your project id](../../cloud/relay.md).
+Initialize client as a controller using [your Project ID](../../cloud/relay.md).
 
 ```js
 const signClient = await SignClient.init({
