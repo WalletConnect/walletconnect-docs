@@ -1,6 +1,6 @@
 # Installation
 
-Web3Modal offers out of the box support for react and integrates very well with a popular react hook library [wagmi](https://wagmi.sh/).
+Web3Modal offers out of the box support for React and integrates very well with a popular React hook library called [wagmi](https://wagmi.sh/).
 
 ## Obtain Project ID
 
@@ -28,7 +28,7 @@ import { chain, configureChains, createClient, WagmiConfig } from "wagmi";
 
 ## Configure
 
-Configure wagmi and Web3Modal clients. Please refer to [wagmi](https://wagmi.sh/) documentation for more advanced topics like custom chain creation, using other providers like infura or alchemy etc. For now, we will use best default settings for web3modal.
+Configure wagmi and Web3Modal clients. Please refer to [wagmi](https://wagmi.sh/) documentation for more advanced topics like custom chain creation, using other providers like Infura or Alchemy etc. For now, we will use the best default settings for web3modal.
 
 ```tsx
 const chains = [chain.mainnet, chain.polygon, chain.optimism, chain.arbitrum];
@@ -47,9 +47,9 @@ const wagmiClient = createClient({
 const ethereumClient = new EthereumClient(wagmiClient, chains);
 ```
 
-## Add react components
+## Add React components
 
-You don't have to wrap `Web3Modal` inside `WagmiConfig`, in fact, we recommend placing it somewhere outside of your main app, thus removing extra re-rendering work.
+You don't have to wrap `Web3Modal` inside `WagmiConfig`. In fact, we recommend placing it somewhere outside of your main app, thus removing extra re-rendering work.
 See [Customization](../about#options) docs for more information about modal props.
 
 ```tsx
@@ -69,7 +69,7 @@ function App() {
 }
 ```
 
-## Add connect button
+## Add Connect Button
 
 ```tsx
 import { Web3Button } from "@web3modal/react";

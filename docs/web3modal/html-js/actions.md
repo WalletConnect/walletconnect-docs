@@ -2,7 +2,7 @@
 
 ## Modal Actions
 
-Custom controllers to programatically control the modal. Useful when you want to use your own ui components and react to modal state.
+Custom controllers to programatically control the modal. Useful when you want to use your own UI components and React to modal state.
 
 ```js
 import { ModalCtrl } from "@web3modal/core";

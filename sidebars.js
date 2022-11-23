@@ -34,7 +34,7 @@ module.exports = {
             },
             {
               type: "category",
-              label: "Html & Js Usage",
+              label: "Html & JS Usage",
               collapsed: true,
               collapsible: true,
               items: [
