@@ -78,7 +78,8 @@ Used when a server sends a subscription message to a client.
     "id" : string,
     "data" : {
       "topic" : string,
-      "message": string
+      "message": string,
+      "timestamp": number,
     }
   }
 }
