@@ -1,4 +1,4 @@
-# Standalone Mode
+# Standalone Usage
 
 Web3Modal standalone is the minimal UI modal without any extras like wagmi,ethers, or injected wallet support.
 
