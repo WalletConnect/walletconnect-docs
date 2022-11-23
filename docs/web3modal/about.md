@@ -25,5 +25,5 @@ You can further customize the modal by specifying it's theme and accent color (s
 
 ## Get Started
 
-To get started, click [here](./standalone.md).
+To get started, click [here](./react/installation.md).
 

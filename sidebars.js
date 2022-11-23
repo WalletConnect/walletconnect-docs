@@ -158,6 +158,7 @@ module.exports = {
           collapsible: true,
           collapsed: true,
           items: [
+            "web3modal/standalone",
             {
               type: "category",
               label: "React",
@@ -168,7 +169,6 @@ module.exports = {
                 "web3modal/react/hooks",
               ],
             },
-            "web3modal/standalone",
             "web3modal/for-wallets",
           ]
         },
