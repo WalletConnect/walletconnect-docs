@@ -28,6 +28,7 @@ const signClient = await SignClient.init({ projectId: "<YOUR_PROJECT_ID>" });
 
 ConfigCtrl.setConfig({
   projectId: "<YOUR_PROJECT_ID>",
+  enableStandaloneMode: true,
   standaloneChains: ["eip155:1"],
 });
 
