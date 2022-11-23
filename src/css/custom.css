@@ -74,6 +74,17 @@ main {
   border: 1px solid #242124;
 }
 
+.faq {
+  --ifm-code-background: rgb(246, 247, 248);
+  --ifm-alert-border-color: #dadde1;
+
+}
+
+[data-theme="dark"] .faq {
+  --ifm-code-background: rgba(255, 255, 255, 0.1);
+  --ifm-alert-border-color: #ffffff;
+}
+
 @media only screen and (min-width: 660px) {
   .box {
     flex: 1 33%;
