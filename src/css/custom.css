@@ -80,6 +80,15 @@ main {
 
 }
 
+.faq-question {
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.faq-answer {
+  font-size: 14px;;
+}
+
 [data-theme="dark"] .faq {
   --ifm-code-background: rgba(255, 255, 255, 0.1);
   --ifm-alert-border-color: #ffffff;
