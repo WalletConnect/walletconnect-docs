@@ -30,6 +30,8 @@ ConfigCtrl.setConfig({
   projectId: "<YOUR_PROJECT_ID>",
   standaloneChains: ["eip155:1"],
 });
+
+import("@web3modal/ui");
 ```
 
 ## Create pairing and open the modal
