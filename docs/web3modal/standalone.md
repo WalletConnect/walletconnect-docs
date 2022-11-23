@@ -21,7 +21,7 @@ import { ConfigCtrl, ModalCtrl } from "@web3modal/core";
 
 ## Configure
 
-Note: if you don't know your `standaloneChains` in advance, they can be passed in later to `ModalCtrl.open` method.
+If you don't know your `standaloneChains` in advance, they can be passed in later to `ModalCtrl.open` method.
 
 ```ts
 const signClient = await SignClient.init({ projectId: "<YOUR_PROJECT_ID>" });
@@ -50,6 +50,20 @@ if (uri) {
   await approval();
   ModalCtrl.close();
 }
+```
+
+## Add Modal Web Component in your app
+
+:::caution
+
+Only `<w3m-modal>` web component is supported in standalone mode, as you need to manage opening and closing the modal manually.
+
+:::
+
+```html
+<body>
+  <w3m-modal></w3m-modal>
+</body>
 ```
 
 ## Examples
