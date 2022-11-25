@@ -105,7 +105,7 @@ themeColor: "default" |
 
 ### themeBackground (optional)
 
-Changes Web3Modal's background to animated gradient or solid color. Defaults to `gradient`.
+Changes Web3Modal's background to animated gradient or solid color. Defaults to `gradient` on desktop and `themeColor` on mobile.
 
 ```ts
 themeBackground: "gradient" | "themeColor";
