@@ -1,6 +1,6 @@
 # Configuration
 
-## Modal Options
+## General Options
 
 ### projectId (optional)
 
@@ -8,29 +8,6 @@ Your project’s unique identifier that can be obtained at [cloud.walletconnect.
 
 ```ts
 projectId: string;
-```
-
-### theme (optional)
-
-Puts Web3Modal into dark or light mode. Defaults to user's system preference.
-
-```ts
-theme: "dark" | "light";
-```
-
-### accentColor (optional)
-
-Changes Web3Modal's accent color. Defaults to WalletConnect brand color.
-
-```ts
-accentColor: "default" |
-  "blackWhite" |
-  "blue" |
-  "green" |
-  "magenta" |
-  "orange" |
-  "purple" |
-  "teal";
 ```
 
 ### mobileWallets (optional)
@@ -101,7 +78,40 @@ If more than 1 chain was provided in modal or wagmi configuration users will be 
 enableNetworkView: true;
 ```
 
-## Standalone Modal Options
+## Theming Options
+
+### themeMode (optional)
+
+Puts Web3Modal into dark or light mode. Defaults to user's system preference.
+
+```ts
+themeMode: "dark" | "light";
+```
+
+### themeColor (optional)
+
+Changes Web3Modal's accent color. Defaults to WalletConnect brand color.
+
+```ts
+themeColor: "default" |
+  "blackWhite" |
+  "blue" |
+  "green" |
+  "magenta" |
+  "orange" |
+  "purple" |
+  "teal";
+```
+
+### themeBackground (optional)
+
+Changes Web3Modal's background to animated gradient or solid color. Defaults to `gradient`.
+
+```ts
+themeBackground: "gradient" | "themeColor";
+```
+
+## Standalone Mode Options
 
 ### enableStandaloneMode (optional)
 
@@ -126,4 +136,4 @@ standaloneChains: [
 
 ## Wagmi Options
 
-In addition to modal configuration options above, all standard wagmi configuration properties for chains, connectors and providers are also supported. We do however require `WalletConnectConnector` to always be present. Make sure to check out their [documentation](https://wagmi.sh/) for more info.
+If you are also using wagmi, all standard wagmi configuration properties for chains, connectors and providers are also supported. We do however require `WalletConnectConnector` to always be present. Make sure to check out their [documentation](https://wagmi.sh/) for more info.
