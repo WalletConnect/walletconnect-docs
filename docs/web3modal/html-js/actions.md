@@ -2,7 +2,9 @@
 
 ## Modal Actions
 
-Custom controllers to programatically control the modal. Useful when you want to use your own UI components and React to modal state.
+## ModalCtrl actions
+
+Controller to programatically control the modal. Useful when you want to use your own UI components and React to modal state.
 
 ```js
 import { ModalCtrl } from "@web3modal/core";
@@ -12,6 +14,23 @@ ModalCtrl.open();
 ModalCtrl.close();
 
 const unsubscribe = ModalCtrl.subscribe((newState) => console.log(newState));
+usubscribe();
+```
+
+## ConfigCtrl actions
+
+Controller to programatically control the modal config. Currently used to set and access theme options.
+
+```js
+import { ConfigCtrl } from "@web3modal/core";
+
+ConfigCtrl.setTheme({
+  themeColor: "green",
+  themeMode: "dark",
+  themeBackground: "gradient",
+});
+
+const unsubscribe = ConfigCtrl.subscribe((newState) => console.log(newState));
 usubscribe();
 ```
 
