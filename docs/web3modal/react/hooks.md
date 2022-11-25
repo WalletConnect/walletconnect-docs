@@ -4,7 +4,7 @@
 
 ### useWeb3Modal
 
-Hooks to programatically control the modal. Useful when you want to use your own ui components and react to modal state.
+Hooks to programatically control the modal. Useful when you want to use your own ui elemts and subscribe to modals state.
 
 ```tsx
 import { useWeb3Modal } from "@web3modal/react";
@@ -14,7 +14,7 @@ const { isOpen, open, close } = useWeb3Modal();
 
 ### useWeb3ModalTheme
 
-Hook to set/update theme options like `themeColor`, `themeMode` and `themeBackground`.
+Hook to set or update theme options like `themeColor`, `themeMode` and `themeBackground`.
 
 ```tsx
 import { useWeb3ModalTheme } from "@web3modal/react";
