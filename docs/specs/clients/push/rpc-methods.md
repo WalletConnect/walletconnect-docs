@@ -69,7 +69,7 @@ Used to publish a notification message to a peer through topic P. Response is ex
 **Request**
 
 ```jsonc
-// wc_pushRequest params
+// wc_pushMessage params
 {
   "title": string,
   "body": string,
