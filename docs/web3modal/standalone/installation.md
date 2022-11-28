@@ -21,6 +21,8 @@ import { Web3Modal } from "@web3modal/standalone";
 
 ## Configure
 
+See [configuration](../configuration.md) docs for full Web3Modal options list.
+
 If you do not know your `standaloneChains` in advance, they can be passed later to `web3modal.openModal` method.
 
 ```ts

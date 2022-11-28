@@ -26,6 +26,8 @@ import {
 
 ## Configure
 
+See [configuration](../configuration.md) docs for full Web3Modal options list.
+
 ```js
 const chains = [chain.mainnet];
 
