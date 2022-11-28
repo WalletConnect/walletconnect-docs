@@ -9,7 +9,7 @@ If you'd like to make a PR or create an issue for our docs, you can do so by goi
 
 ## Getting Started
 
-WalletConnect comprises four core components and associated SDKs:
+WalletConnect comprises four core components and associated APIs:
 
 <Container
   items={[

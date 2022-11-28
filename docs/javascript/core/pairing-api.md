@@ -60,7 +60,7 @@ The Pairing API currently emits the following events:
 Any of these events can be listened for via the standard Node [`EventEmitter` interface](https://nodejs.org/api/events.html#class-eventemitter):
 
 ```ts
-sdkClient.pairing.events.on("pairing_delete", ({ id, topic }) => {
+sdkClient.core.pairing.events.on("pairing_delete", ({ id, topic }) => {
   // clean up after the pairing for `topic` was deleted.
 });
 ```
