@@ -1,6 +1,6 @@
 # Installation
 
-Special and lightweight standalone mode that allows you to use Web3Modal anywhere, with any chain and any development tool. This comes in useful if you are not using wagmi or already manage other connections for say injected wallets yourself. You are responsible for managing [Sign SDK](../introduction/sign.md) and obtaining a pairing uri that can be passed to Web3Modal's open method to display relevant wallets and qr code.
+Special and lightweight standalone mode that allows you to use Web3Modal anywhere, with any chain and any development tool. This comes in useful if you are not using wagmi or already manage other connections for say injected wallets yourself. You are responsible for managing [Sign SDK](../../introduction/sign.md) and obtaining a pairing uri that can be passed to Web3Modal's open method to display relevant wallets and qr code.
 
 ## Obtain Project ID
 
