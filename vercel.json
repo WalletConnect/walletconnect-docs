@@ -116,6 +116,6 @@
     {
       "source": "/2.0/specs/core/:path*",
       "destination": "/2.0/specs/clients/core/:path*"
-    },
+    }
   ]
 }
