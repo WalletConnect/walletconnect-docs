@@ -76,6 +76,46 @@
     {
       "source": "/2.0/introduction/web3modal/:path*",
       "destination": "/2.0/web3modal/:path*"
-    }
+    },
+    {
+      "source": "/2.0/introduction/sign",
+      "destination": "/2.0/api/sign"
+    },
+    {
+      "source": "/2.0/introduction/auth",
+      "destination": "/2.0/api/auth"
+    },
+    {
+      "source": "/2.0/introduction/push",
+      "destination": "/2.0/api/push"
+    },
+    {
+      "source": "/2.0/introduction/chat",
+      "destination": "/2.0/api/chat"
+    },
+    {
+      "source": "/2.0/advanced/relay-server",
+      "destination": "/2.0/cloud/relay"
+    },
+    {
+      "source": "/2.0/specs/sign/:path*",
+      "destination": "/2.0/specs/clients/sign/:path*"
+    },
+    {
+      "source": "/2.0/specs/auth/:path*",
+      "destination": "/2.0/specs/clients/auth/:path*"
+    },
+    {
+      "source": "/2.0/specs/push/:path*",
+      "destination": "/2.0/specs/clients/push/:path*"
+    },
+    {
+      "source": "/2.0/specs/chat/:path*",
+      "destination": "/2.0/specs/clients/chat/:path*"
+    },
+    {
+      "source": "/2.0/specs/core/:path*",
+      "destination": "/2.0/specs/clients/core/:path*"
+    },
   ]
 }
