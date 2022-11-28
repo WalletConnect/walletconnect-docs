@@ -25,8 +25,10 @@ If you haven't already, you may also need to install [`react-native-svg`](https:
 ```bash
 yarn add react-native-svg @react-native-async-storage/async-storage
 ```
+
 :::info
 In order to make your app compatible with Android SDK 29 and newer, edit your AndroidManifest.xml file and add the following code:
+
 ```xml
 <queries>
     <intent>
@@ -35,7 +37,9 @@ In order to make your app compatible with Android SDK 29 and newer, edit your An
     </intent>
 </queries>
 ```
+
 :::
+
 ## Architecture
 
 This library is implemented using the [**React Context API**](https://reactjs.org/docs/context.html), which is used to help make an instance of a [`connector`](https://docs.walletconnect.org/client-api) accessible globally throughout your application. This permits you to use a uniform instance within even deeply nested components, and ensures your rendered application is always synchronized against the connector state.
@@ -45,17 +49,20 @@ This library is implemented using the [**React Context API**](https://reactjs.or
 At the root of your application, you can declare a [`WalletConnectProvider`](https://github.com/WalletConnect/walletconnect-docs/tree/074ef6d866a4790726bc2159d80cdc4f35a969ea/quick-start/dapps/src/providers/WalletConnectProvider.tsx) which controls access and persistence to a [**connector**](https://docs.walletconnect.org/client-api) instance:
 
 ```typescript
-import * as React from 'react';
-import WalletConnectProvider from '@walletconnect/react-native-dapp';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import * as React from "react";
+import WalletConnectProvider from "@walletconnect/react-native-dapp";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function App(): JSX.Element {
   return (
     <WalletConnectProvider
-      redirectUrl={Platform.OS === 'web' ? window.location.origin : 'yourappscheme://'}
-      storageOptions= {{
+      redirectUrl={
+        Platform.OS === "web" ? window.location.origin : "yourappscheme://"
+      }
+      storageOptions={{
         asyncStorage: AsyncStorage,
-      }}>
+      }}
+    >
       <>{/* awesome app here */}</>
     </WalletConnectProvider>
   );
@@ -64,31 +71,34 @@ export default function App(): JSX.Element {
 
 Above, we pass the [`WalletConnectProvider`](https://github.com/WalletConnect/walletconnect-docs/tree/074ef6d866a4790726bc2159d80cdc4f35a969ea/quick-start/dapps/src/providers/WalletConnectProvider.tsx) two required parameters; `redirectUrl` and `storageOptions`:
 
-* The `redirectUrl` is used to help control navigation between external wallets and your application. On the `web`, you only need to specify a valid application route; whereas on mobile platforms, you must [**specify a deep link URI scheme**](https://docs.expo.io/workflow/linking/#universaldeep-links-without-a-custom-scheme).
-* The `storageOptions` prop allows you to specify the storage engine which must be used to persist session data.
-  * Although in our examples we use [`@react-native-async-storage/async-storage`](https://github.com/react-native-async-storage/async-storage), this can be which engine you please, provided it conforms to the [`IAsyncStorage`](https://github.com/pedrouid/keyvaluestorage) generic storage interface declaration.
+- The `redirectUrl` is used to help control navigation between external wallets and your application. On the `web`, you only need to specify a valid application route; whereas on mobile platforms, you must [**specify a deep link URI scheme**](https://docs.expo.io/workflow/linking/#universaldeep-links-without-a-custom-scheme).
+- The `storageOptions` prop allows you to specify the storage engine which must be used to persist session data.
+  - Although in our examples we use [`@react-native-async-storage/async-storage`](https://github.com/react-native-async-storage/async-storage), this can be which engine you please, provided it conforms to the [`IAsyncStorage`](https://github.com/pedrouid/keyvaluestorage) generic storage interface declaration.
 
 Notably, the [`WalletConnectProvider`](https://github.com/WalletConnect/walletconnect-docs/tree/074ef6d866a4790726bc2159d80cdc4f35a969ea/quick-start/dapps/src/providers/WalletConnectProvider.tsx) optionally accepts `WalletConnect` configuration arguments as defined by the [`IWalletConnectOptions`](https://github.com/WalletConnect/walletconnect-monorepo/tree/next/packages/helpers/utils) interface:
 
 ```typescript
-import * as React from 'react';
-import WalletConnectProvider from '@walletconnect/react-native-dapp';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import * as React from "react";
+import WalletConnectProvider from "@walletconnect/react-native-dapp";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function App(): JSX.Element {
   return (
     <WalletConnectProvider
       bridge="https://bridge.walletconnect.org"
       clientMeta={{
-        description: 'Connect with WalletConnect',
-        url: 'https://walletconnect.org',
-        icons: ['https://walletconnect.org/walletconnect-logo.png'],
-        name: 'WalletConnect',
+        description: "Connect with WalletConnect",
+        url: "https://walletconnect.org",
+        icons: ["https://walletconnect.org/walletconnect-logo.png"],
+        name: "WalletConnect",
       }}
-      redirectUrl={Platform.OS === 'web' ? window.location.origin : 'yourappscheme://'}
-      storageOptions= {{
+      redirectUrl={
+        Platform.OS === "web" ? window.location.origin : "yourappscheme://"
+      }
+      storageOptions={{
         asyncStorage: AsyncStorage,
-      }}>
+      }}
+    >
       <>{/* awesome app here */}</>
     </WalletConnectProvider>
   );
@@ -135,9 +145,12 @@ This is almost identical in functionality to the manual implementation of a [`Wa
 The [`useWalletConnect`](https://github.com/WalletConnect/walletconnect-docs/tree/074ef6d866a4790726bc2159d80cdc4f35a969ea/quick-start/dapps/src/hooks/useWalletConnect.ts) hook provides access to a [`WalletConnect`](https://docs.walletconnect.org/client-api) `connector` instance which is accessible on Android, iOS and the Web. This conforms to the original specification:
 
 ```typescript
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import { useWalletConnect, withWalletConnect } from '@walletconnect/react-native-dapp';
-import * as React from 'react';
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import {
+  useWalletConnect,
+  withWalletConnect,
+} from "@walletconnect/react-native-dapp";
+import * as React from "react";
 
 function App(): JSX.Element {
   const connector = useWalletConnect();
@@ -147,11 +160,14 @@ function App(): JSX.Element {
      */
     return <Button title="Connect" onPress={() => connector.connect()} />;
   }
-  return <Button title="Kill Session" onPress={() => connector.killSession()} />;
+  return (
+    <Button title="Kill Session" onPress={() => connector.killSession()} />
+  );
 }
 
 export default withWalletConnect(App, {
-  redirectUrl: Platform.OS === 'web' ? window.location.origin : 'yourappscheme://',
+  redirectUrl:
+    Platform.OS === "web" ? window.location.origin : "yourappscheme://",
   storageOptions: {
     asyncStorage: AsyncStorage,
   },
@@ -165,16 +181,16 @@ export default withWalletConnect(App, {
 For example, you could choose to render a wallet selection using a `BottomSheet` opposed to a `Modal`:
 
 ```typescript
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import BottomSheet from 'react-native-reanimated-bottom-sheet';
-import { Image, Text, TouchableOpacity } from 'react-native';
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import BottomSheet from "react-native-reanimated-bottom-sheet";
+import { Image, Text, TouchableOpacity } from "react-native";
 import {
   useWalletConnect,
   withWalletConnect,
   RenderQrcodeModalProps,
   WalletService,
-} from '@walletconnect/react-native-dapp';
-import * as React from 'react';
+} from "@walletconnect/react-native-dapp";
+import * as React from "react";
 
 function CustomBottomSheet({
   walletServices,
@@ -184,14 +200,17 @@ function CustomBottomSheet({
 }: RenderQrcodeModalProps): JSX.Element {
   const renderContent = React.useCallback(() => {
     return walletServices.map((walletService: WalletService, i: number) => (
-      <TouchableOpacity key={`i${i}`} onPress={() => connectToWalletService(walletService, uri)}>
+      <TouchableOpacity
+        key={`i${i}`}
+        onPress={() => connectToWalletService(walletService, uri)}
+      >
         <Image source={{ uri: walletService.logo }} />
         <Text>{walletService.name}</Text>
       </TouchableOpacity>
     ));
   }, [walletServices, uri]);
   return <BottomSheet renderContent={renderContent} {...etc} />;
-};
+}
 
 function App(): JSX.Element {
   const connector = useWalletConnect();
@@ -199,7 +218,8 @@ function App(): JSX.Element {
 }
 
 export default withWalletConnect(App, {
-  redirectUrl: Platform.OS === 'web' ? window.location.origin : 'yourappscheme://',
+  redirectUrl:
+    Platform.OS === "web" ? window.location.origin : "yourappscheme://",
   storageOptions: {
     asyncStorage: AsyncStorage,
   },
@@ -208,4 +228,3 @@ export default withWalletConnect(App, {
   ),
 });
 ```
-
