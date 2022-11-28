@@ -1,6 +1,6 @@
-# Standalone Usage
+# Installation
 
-Web3Modal can be put into a special and lightweight standalone mode that allows you to use it anywhere, with any chain and any development tool. This comes in useful if you are not using wagmi and already manage other connections for say injected wallets. It also means that you are responsible for managing [Sign SDK](../introduction/sign.md) and obtaining a pairing uri that can be passed to Web3Modal's open method, thus triggering it into this special mode.
+Special and lightweight standalone mode that allows you to use Web3Modal anywhere, with any chain and any development tool. This comes in useful if you are not using wagmi or already manage other connections for say injected wallets yourself. You are responsible for managing [Sign SDK](../introduction/sign.md) and obtaining a pairing uri that can be passed to Web3Modal's open method to display relevant wallets and qr code.
 
 ## Obtain Project ID
 
@@ -9,30 +9,26 @@ Unlike previously, `projectId` is required here as it is also used by Sign SDK. 
 ## Add Packages
 
 ```bash npm2yarn
-npm install @walletconnect/sign-client @web3modal/core @web3modal/ui
+npm install @walletconnect/sign-client @web3modal/standalone
 ```
 
 ## Import
 
 ```ts
 import SignClient from "@walletconnect/sign-client";
-import { ConfigCtrl, ModalCtrl } from "@web3modal/core";
+import { Web3Modal } from "@web3modal/standalone";
 ```
 
 ## Configure
 
-If you do not know your `standaloneChains` in advance, they can be passed in later to `ModalCtrl.open` method.
+If you do not know your `standaloneChains` in advance, they can be passed later to `web3modal.openModal` method.
 
 ```ts
-const signClient = await SignClient.init({ projectId: "<YOUR_PROJECT_ID>" });
-
-ConfigCtrl.setConfig({
+const web3Modal = new Web3Modal({
   projectId: "<YOUR_PROJECT_ID>",
-  enableStandaloneMode: true,
   standaloneChains: ["eip155:1"],
 });
-
-import("@web3modal/ui");
+const signClient = await SignClient.init({ projectId: "<YOUR_PROJECT_ID>" });
 ```
 
 ## Create pairing and open the modal
@@ -49,24 +45,10 @@ const { uri, approval } = await signClient.connect({
 });
 
 if (uri) {
-  ModalCtrl.open({ uri, standaloneChains: ["eip155:1"] });
+  web3Modal.openModal({ uri, standaloneChains: ["eip155:1"] });
   await approval();
-  ModalCtrl.close();
+  web3Modal.closeModal();
 }
-```
-
-## Add Modal Web Component in your app
-
-:::caution
-
-Only `<w3m-modal>` web component is supported in standalone mode, as you need to manage opening and closing the modal manually.
-
-:::
-
-```html
-<body>
-  <w3m-modal></w3m-modal>
-</body>
 ```
 
 ## Examples

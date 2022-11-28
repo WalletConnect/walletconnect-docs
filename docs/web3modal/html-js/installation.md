@@ -41,11 +41,15 @@ const wagmiClient = createClient({
 
 // Web3Modal and Ethereum Client
 const ethereumClient = new EthereumClient(wagmiClient, chains);
-export const web3modal = new Web3Modal(
+const web3modal = new Web3Modal(
   { projectId: "<YOUR_PROJECT_ID>" },
   ethereumClient
 );
 ```
+
+## Usage
+
+See [actions](./actions.md) and [components](components.md) docs for further instructions.
 
 ## Examples
 
