@@ -17,7 +17,7 @@ abstract class DappClient {
   public abstract getActiveSubscriptions(): Promise<Record<number, PushSubscription>>;
 
   // delete active subscription
-  public abstract delete(params: { topic: string, message: PushMessage }): Promise<void>;
+  public abstract delete(params: { topic: string }): Promise<void>;
 
   // ---------- Events ----------------------------------------------- //
 
