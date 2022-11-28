@@ -1,6 +1,6 @@
 # FAQs
 
-<details className="box faq"><summary className="faq-question">Will relay server <code>bridge.walletconnect.org</code> still work in V2 </summary>
+<details className="box faq"><summary className="faq-question">Will the relay server <code>bridge.walletconnect.org</code> still work in v2?</summary>
 <p className="faq-answer">
 
 No, the bridge servers are v1 only.
