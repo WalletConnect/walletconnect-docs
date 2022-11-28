@@ -58,7 +58,7 @@ module.exports = {
               ],
             },
             "web3modal/for-wallets",
-          ]
+          ],
         },
         {
           type: "category",
