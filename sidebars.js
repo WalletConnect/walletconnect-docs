@@ -17,41 +17,49 @@ module.exports = {
       collapsible: false,
       className: "menu_outer_list",
       items: [
-        "web3modal/about",
-        "web3modal/configuration",
         {
           type: "category",
-          label: "React Usage",
+          label: "Web3Modal",
           collapsed: true,
           collapsible: true,
           items: [
-            "web3modal/react/installation",
-            "web3modal/react/hooks",
-            "web3modal/react/components",
-          ],
+            "web3modal/about",
+            "web3modal/configuration",
+            {
+              type: "category",
+              label: "React Usage",
+              collapsed: true,
+              collapsible: true,
+              items: [
+                "web3modal/react/installation",
+                "web3modal/react/hooks",
+                "web3modal/react/components",
+              ],
+            },
+            {
+              type: "category",
+              label: "HTML Usage",
+              collapsed: true,
+              collapsible: true,
+              items: [
+                "web3modal/html-js/installation",
+                "web3modal/html-js/actions",
+                "web3modal/html-js/components",
+              ],
+            },
+            {
+              type: "category",
+              label: "Standalone Usage",
+              collapsed: true,
+              collapsible: true,
+              items: [
+                "web3modal/standalone/installation",
+                "web3modal/standalone/actions",
+              ],
+            },
+            "web3modal/for-wallets",
+          ]
         },
-        {
-          type: "category",
-          label: "HTML Usage",
-          collapsed: true,
-          collapsible: true,
-          items: [
-            "web3modal/html-js/installation",
-            "web3modal/html-js/actions",
-            "web3modal/html-js/components",
-          ],
-        },
-        {
-          type: "category",
-          label: "Standalone Usage",
-          collapsed: true,
-          collapsible: true,
-          items: [
-            "web3modal/standalone/installation",
-            "web3modal/standalone/actions",
-          ],
-        },
-        "web3modal/for-wallets",
         {
           type: "category",
           label: "APIs",
