@@ -15,5 +15,5 @@ For platform-specific instructions, refer to our [React Native](../guides/react-
 :::
 
 ```bash npm2yarn
-npm install --save @walletconnect/sign-client
+npm install @walletconnect/sign-client
 ```
