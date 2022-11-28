@@ -4,7 +4,7 @@
 
 ### useWeb3Modal
 
-Hook to programatically control the modal. Useful when you want to use your own ui elemts and subscribe to modals state.
+Hook to programatically control the modal. Useful when you want to use your own UI elemts and subscribe to modals state.
 
 ```tsx
 import { useWeb3Modal } from "@web3modal/react";

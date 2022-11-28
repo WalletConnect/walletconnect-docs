@@ -55,4 +55,4 @@ See [actions](./actions.md) and [components](components.md) docs for further ins
 
 ## Examples
 
-- Minimal html [example](https://github.com/WalletConnect/web3modal/tree/V2/examples/html)
+- Minimal HTML [example](https://github.com/WalletConnect/web3modal/tree/V2/examples/html)
