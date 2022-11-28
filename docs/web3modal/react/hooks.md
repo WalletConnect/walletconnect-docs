@@ -4,7 +4,7 @@
 
 ### useWeb3Modal
 
-Hooks to programatically control the modal. Useful when you want to use your own ui elemts and subscribe to modals state.
+Hook to programatically control the modal. Useful when you want to use your own UI elemts and subscribe to modals state.
 
 ```tsx
 import { useWeb3Modal } from "@web3modal/react";
@@ -26,4 +26,4 @@ const { theme, setTheme } = useWeb3ModalTheme();
 
 [Wagmi](https://wagmi.sh/react/getting-started) is a collection of React Hooks containing everything you need to start working with Ethereum. wagmi makes it easy to display ENS and balance information, sign messages, interact with contracts, and much more — all with caching, request deduplication, and persistence.
 
-See [Wagmi Documentation](https://wagmi.sh/react/getting-started) for more information.
+See [wagmi docs](https://wagmi.sh/react/getting-started) for more information.

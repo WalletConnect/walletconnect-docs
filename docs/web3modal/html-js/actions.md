@@ -2,36 +2,43 @@
 
 ## Modal Actions
 
-## ModalCtrl actions
+### web3modal.openModal
 
-Controller to programatically control the modal. Useful when you want to use your own UI components and React to modal state.
+Programmatically open the modal.
 
 ```js
-import { ModalCtrl } from "@web3modal/core";
-
-ModalCtrl.open();
-
-ModalCtrl.close();
-
-const unsubscribe = ModalCtrl.subscribe((newState) => console.log(newState));
-usubscribe();
+web3modal.openModal();
 ```
 
-## ConfigCtrl actions
+### web3modal.closeModal
 
-Controller to programatically control the modal config. Currently used to set and access theme options.
+Programmatically open the modal.
 
 ```js
-import { ConfigCtrl } from "@web3modal/core";
+web3modal.closeModal();
+```
 
-ConfigCtrl.setTheme({
-  themeColor: "green",
+### web3modal.subscribeModal
+
+Subscribe or unsubscribe from modal's state.
+
+```js
+const usnubscribe = web3modal.subscribeModal((newState) =>
+  console.log(newState)
+);
+unsubscribe();
+```
+
+### web3modal.setTheme
+
+Programmatically set or update modal's theme.
+
+```js
+web3modal.setTheme({
   themeMode: "dark",
+  themeColor: "blue",
   themeBackground: "gradient",
 });
-
-const unsubscribe = ConfigCtrl.subscribe((newState) => console.log(newState));
-usubscribe();
 ```
 
 ## Wagmi Actions
