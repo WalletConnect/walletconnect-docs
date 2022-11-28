@@ -1,5 +1,14 @@
 # FAQs
 
+<details className="box faq"><summary className="faq-question">Will relay server <code>bridge.walletconnect.org</code> still work in V2 </summary>
+<p className="faq-answer">
+
+No, the bridge servers are v1 only.
+
+</p>
+
+</details>
+
 <details className="box faq"><summary className="faq-question">How can I reconnect to the same pairing if my browser was restarted?</summary>
 <p className="faq-answer">
 
