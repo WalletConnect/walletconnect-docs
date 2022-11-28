@@ -14,7 +14,7 @@ abstract class WalletClient {
   public abstract reject(params: { reason: Reason }): Promise<boolean>;
 
   // query all active subscriptions
-  public abstract getActiveSubscriptions(): Promise<Record<number, PushSubscription>>;
+  public abstract getActiveSubscriptions(): Promise<Record<string, PushSubscription>>;
 
   // delete active subscription
   public abstract delete(params: { topic: string }): Promise<void>;
