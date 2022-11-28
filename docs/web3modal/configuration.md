@@ -113,14 +113,6 @@ themeBackground: "gradient" | "themeColor";
 
 ## Standalone Mode Options
 
-### enableStandaloneMode (optional)
-
-Flag that is required to set modal into standalone mode. Defaults to `false`
-
-```ts
-enableStandaloneMode: false;
-```
-
 ### standaloneChains (optional)
 
 When using Web3Modal in standalone mode (without wagmi) you can define array of custom chains via this option. Requires `enableStandaloneMode` to be set to `true`. Defaults to `undefined`.
