@@ -1,15 +1,5 @@
 # FAQs
 
-<details className="box faq"><summary className="faq-question">How can I get WalletConnect v2 support on my wallet?</summary>
-<p className="faq-answer">
-
-If you enjoy using WalletConnect and would like your wallet of choice to work with v2, then you will need to request the update as a feature. You can generally do this by finding your wallet's GitHub repo, and opening an issue.
-
-For more information on migrating from v1 to v2, visit this [page](https://docs.walletconnect.com/2.0/advanced/migrating-from-v1.0).
-
-</p>
-</details>
-
 <details className="box faq"><summary className="faq-question">How can I reconnect to the same pairing if my browser was restarted?</summary>
 <p className="faq-answer">
 
