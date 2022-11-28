@@ -16,6 +16,6 @@ Our recommended approach is the following:
 
 - Phase 1 Wallets
 - Phase 2 Dapps
+1. Wallets integrate [Sign v2](../api/sign.md) and [Auth v2](../api/auth.md) utilizing our Javascript, Kotlin, or Swift SDKs. This will ensure the ecosystem of dapps have wallets to connect to.
+2. Dapps can integrate either [Web3Modal](../web3modal/about.md) (open source web3 solution) or any other library of choice. We are focused on enhancing Web3Modal so developers can be sure that we have dedicated resources focused on issues.
 
-1. Wallets integrate [Sign v2](../introduction/sign.md) and [Auth v2](../introduction/auth.md) utilizing our Javascript, Kotlin, or Swift SDKs. This will ensure the ecosystem of dapps have wallets to connect to.
-2. Dapps can integrate either [Web3Modal](../web3modal/about) (open source web3 solution) or any other library of choice. We are focused on enhancing Web3Modal so developers can be sure that we have dedicated resources focused on issues.

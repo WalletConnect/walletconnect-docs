@@ -12,7 +12,7 @@ For an example implementation, please refer to our `react-dapp-v2` [example](htt
 
 ## Create a Session
 
-**1. Initiate your WalletConnect client with the relay server, using [your Project ID](../../advanced/relay-server.md).**
+**1. Initiate your WalletConnect client with the relay server, using [your Project ID](../../cloud/relay.md).**
 
 ```javascript
 import SignClient from "@walletconnect/sign-client";
