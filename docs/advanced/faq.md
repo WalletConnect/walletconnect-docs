@@ -25,7 +25,7 @@ For more information on migrating from v1 to v2, visit this [page](https://docs.
 <details className="box faq"><summary className="faq-question">The default RPC endpoint is blocked. How can I get around this?</summary>
 <p className="faq-answer">
 
-When initializing `signClient`, you can set `rpcUrl` to `walletconnect.org` or `walletconnect.dev`. 
+When initializing `signClient`, you can set `rpcUrl` to `relay.walletconnect.org`. 
 
 ```js
 const signClient = await SignClient.init({
