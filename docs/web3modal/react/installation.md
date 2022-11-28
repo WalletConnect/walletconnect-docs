@@ -69,16 +69,6 @@ function App() {
 }
 ```
 
-## Add Connect Button
-
-```tsx
-import { Web3Button } from "@web3modal/react";
-
-function HomePage() {
-  return <Web3Button />;
-}
-```
-
 ## Examples
 
 - Full NextJS [example](https://github.com/WalletConnect/web3modal/tree/V2/examples/react)

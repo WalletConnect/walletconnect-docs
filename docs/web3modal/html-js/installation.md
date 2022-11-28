@@ -9,14 +9,14 @@ Head over to [WalletConnect Cloud](https://cloud.walletconnect.com/) to sign in 
 ## Add Packages
 
 ```bash npm2yarn
-npm install @web3modal/ethereum @web3modal/ui @web3modal/core @wagmi/core ethers
+npm install @web3modal/ethereum @web3modal/html @wagmi/core ethers
 ```
 
 ## Import
 
 ```js
 import { chain, configureChains, createClient } from "@wagmi/core";
-import { ClientCtrl, ConfigCtrl } from "@web3modal/core";
+import { Web3Modal } from "@web3modal/html";
 import {
   EthereumClient,
   modalConnectors,
@@ -39,32 +39,14 @@ const wagmiClient = createClient({
   provider,
 });
 
-// Web3Modal Ethereum Client
+// Web3Modal and Ethereum Client
 const ethereumClient = new EthereumClient(wagmiClient, chains);
-
-// Web3Modal
-ConfigCtrl.setConfig({
-  projectId,
-  theme: "dark",
-  accentColor: "default",
-});
-ClientCtrl.setEthereumClient(ethereumClient, chains);
-
-// Import ui library AFTER configuration is complete
-import("@web3modal/ui");
-```
-
-## Add Web Components to your index.html
-
-```html
-<body>
-  <w3m-core-button></w3m-core-button>
-  <w3m-modal></w3m-modal>
-
-  <script type="module" src="main.js"></script>
-</body>
+export const web3modal = new Web3Modal(
+  { projectId: "<YOUR_PROJECT_ID>" },
+  ethereumClient
+);
 ```
 
 ## Examples
 
-- Minimal [example](https://github.com/WalletConnect/web3modal/tree/V2/examples/html)
+- Minimal html [example](https://github.com/WalletConnect/web3modal/tree/V2/examples/html)
