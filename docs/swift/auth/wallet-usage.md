@@ -1,18 +1,29 @@
 # Wallet Usage
 
-### Configure Networking and Pair clients
+### Initial configurations
 
-Make sure what you properly configure Networking and Pair Clients first 
+Make sure what you properly configure Networking, Pair Clients and SignerFactory first 
 - [Networking](../core/networking-configuration.md)
 - [Pairing](../core/pairing-usage.md)
+- [SignerFactory](./signer-configuration.md)
 
 ### Instantiate a client
 
-Create an AppMetadata object. It will describe your application and define its appearance in a web browser.
-Then configure the `Auth` instance Account object.
+Configure the `Auth` instance with Account object and your own [SignerFactory](./signer-configuration.md) implementation.
 
 ```swift
-Auth.configure(account: Account("eip155:56:0xe5EeF1368781911d265fDB6946613dA61915a501")!)
+Auth.configure(
+    account: Account("eip155:56:0xe5EeF1368781911d265fDB6946613dA61915a501")!,
+    signerFactory: <SignerFactory>
+)
+```
+
+### Completed Auth SDK configuration: 
+
+``` swift
+Networking.configure(projectId: <Project ID>, socketFactory: <SocketFactory>)
+Pair.configure(metadata: <AppMetadata>)
+Auth.configure(account: <Account>, signerFactory: <SignerFactory>)
 ```
 
 ### Subscribe for Auth publishers
