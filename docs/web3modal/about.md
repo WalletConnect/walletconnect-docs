@@ -1,3 +1,5 @@
+import Container from './../components/Container';
+
 # About
 
 Your on-ramp to web3 multichain. Web3Modal is a versatile library that makes it super easy to connect users with your Dapp and start interacting with the blockchain.
@@ -8,17 +10,43 @@ For our supported flows, both react and HTML have great integration with [wagmi]
 
 Check out [web3modal.com](https://web3modal.com) for more information and previews.
 
-## Getting Started
 
+## Getting Started
 ### CLI
 
-Get started easily with [wagmi-cli](https://wagmi.sh/cli/create-wagmi).
+Get started with [wagmi-cli](https://wagmi.sh/cli/create-wagmi).
 
 ```
 npm init wagmi@web3modal
 ```
 
 ### Platforms
+See our installation docs for each platform.
+
+<Container
+  items={[
+    {
+      name: "React",
+      description: "Web3Modal offers out of the box support for React and integrates very well with wagmi.",
+      url: `/2.0/web3modal/react/installation`
+    },
+    {
+      name: "HTML",
+      description: "Your vanilla JS solution. Uuse it on any front-end environment.",
+      url: `/2.0/web3modal/html-js/installation`
+    },
+    {
+      name: "Standalone",
+      description: "If you don't use wagmi or already manage other connections for injected wallets yourself.",
+      url: `/2.0/web3modal/standalone/installation`
+    },
+    {
+      name: "Wallets",
+      description: "How to list your wallet in the dashboard.",
+      url: `/2.0/web3modal/for-wallets`
+    }
+  ]}
+/>
 
 ## Github
 
