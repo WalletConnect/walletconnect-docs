@@ -32,7 +32,7 @@ See our installation docs for each platform.
     },
     {
       name: "HTML",
-      description: "Your vanilla JS solution. Uuse it on any front-end environment.",
+      description: "Your vanilla JS solution. Use it on any front-end environment.",
       url: `/2.0/web3modal/html-js/installation`
     },
     {
