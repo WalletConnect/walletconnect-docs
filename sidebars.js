@@ -20,7 +20,7 @@ module.exports = {
         {
           type: 'link',
           label: 'Web3Modal',
-          href: "web3modal/about",
+          href: "/2.0/web3modal/about",
         },
         {
           type: "category",
