@@ -17,7 +17,11 @@ module.exports = {
       collapsible: false,
       className: "menu_outer_list",
       items: [
-        "web3modal/about",
+        {
+          type: 'link',
+          label: 'Web3Modal',
+          href: "web3modal/about",
+        },
         {
           type: "category",
           label: "APIs",
@@ -164,6 +168,7 @@ module.exports = {
               collapsed: true,
               collapsible: true,
               items: [
+                "web3modal/about",
                 "web3modal/react/installation",
                 "web3modal/react/hooks",
                 "web3modal/react/components",
