@@ -223,6 +223,11 @@ true
 
 Sends a CAIP-27 request to the peer client. The client should immediately reject the request and respond an error if the target session permissions doesn't include the requested method or chain ID.
 
+##### Expiry
+Param `Expiry` is an optional Unix timestamp. Sets the time until which the responder can respond to this request. If request is expired responder should respond with a specific error code.
+
+If this parameter is not specified, the request is considered indefinite.
+
 **Request**
 
 ```jsonc
@@ -230,7 +235,8 @@ Sends a CAIP-27 request to the peer client. The client should immediately reject
 {
   "request": {
     "method": string,
-    "params": any
+    "params": any,
+    "expiry": number // optional
   },
   "chainId": string
 }
