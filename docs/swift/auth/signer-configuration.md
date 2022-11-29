@@ -10,9 +10,9 @@ import CryptoSwift
 import Web3
 import Auth
 
-public struct MultichainSignerFactory: SignerFactory {
+public struct AuthSignerFactory: SignerFactory {
 
-    public func createEthereum() -> EthereumSigner {
+    public func createEthereumSigner() -> EthereumSigner {
         return Web3Signer()
     }
 }
@@ -43,11 +43,11 @@ public struct Web3Signer: EthereumSigner {
 }
 ```
 
-Once MultichainSignerFactory implemented it could be used to configure `Auth` client
+Once AuthSignerFactory implemented it could be used to configure `Auth` client
 
 ```swift
 Auth.configure(
     account: Account("eip155:1:0xe5EeF1368781911d265fDB6946613dA61915a501")!,
-    signerFactory: MultichainSignerFactory()
+    signerFactory: AuthSignerFactory()
 )
 ```
