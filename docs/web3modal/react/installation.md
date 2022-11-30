@@ -1,6 +1,7 @@
 # Installation
 
-Web3Modal offers out of the box support for React and integrates very well with a popular React hook library called [wagmi](https://wagmi.sh/).
+Web3Modal offers out of the box support for React and integrates very well with a popular React hook library called [wagmi](https://wagmi.sh/). To get started with their CLI, click [here](https://wagmi.sh/cli/create-wagmi). Alternatively follow our manual setup guide below.
+
 
 ## Obtain Project ID
 

@@ -12,15 +12,6 @@ Check out [web3modal.com](https://web3modal.com) for more information and previe
 
 
 ## Getting Started
-### CLI
-
-Get started with [wagmi-cli](https://wagmi.sh/cli/create-wagmi).
-
-```
-npm init wagmi@web3modal
-```
-
-### Platforms
 See our installation docs for each platform.
 
 <Container
