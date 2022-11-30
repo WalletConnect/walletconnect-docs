@@ -43,13 +43,6 @@ See our installation docs for each platform.
 
 The Web3Modal Github can be found at [https://github.com/WalletConnect/web3modal](https://github.com/WalletConnect/web3modal).
 
-### Options
-
-| Property    | Values                                                                          |
-| ----------- | ------------------------------------------------------------------------------- |
-| theme       | "dark", "light"                                                                 |
-| accentColor | "default", "blackWhite", "blue", "green", "magenta", "orange", "purple", "teal" |
-
 ### Preview
 
 ![web3modal customisation](/assets/modal_preview.png)
