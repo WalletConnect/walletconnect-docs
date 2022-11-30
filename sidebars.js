@@ -52,6 +52,7 @@ module.exports = {
       collapsible: false,
       className: "menu_outer_list",
       items: [
+        "advanced/faq",
         "advanced/glossary",
         "advanced/migrating-from-v1.0",
         "advanced/chain-ecosystem-onboarding",
