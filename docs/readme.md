@@ -1,20 +1,40 @@
----
-slug: /
----
+import Container from './components/Container';
 
 # About
 
 ## What is WalletConnect?
-WalletConnect is the decentralized Web3 messaging layer and a standard to connect blockchain wallets to dapps. Our mission continues to expand the interoperability of the Web3 space by providing the best tooling and infrastructure for Wallets to deliver an outstanding user experience. WalletConnect v2 is chain agnostic and built to work with any blockchain of your choice. To read more in detail about the WalletConnect protocol, check out our [Technical specificiations](https://github.com/walletconnect/walletconnect-specs).
+WalletConnect is the decentralized Web3 messaging layer and a standard to connect blockchain wallets to dapps. Our mission continues to expand the interoperability of the Web3 space by providing the best tooling and infrastructure for Wallets to deliver an outstanding user experience. WalletConnect v2 is chain agnostic and built to work with any blockchain of your choice. To read more in detail about the WalletConnect protocol, check out our [Technical specifications](./specs/readme.md).
 
-## Getting started
+If you'd like to make a PR or create an issue for our docs, you can do so by going to the [WalletConnect Docs repo](https://github.com/WalletConnect/walletconnect-docs).
 
-WalletConnect comprises four core components and associated SDKs:
+## Getting Started
 
-- [Sign](introduction/sign.md) - a remote signer protocol to communicate securely between web3 wallets and dapps.
-- [Auth](introduction/auth.md) - a authentication protocol to login wallets users into web applications. 
-- [Chat](introduction/chat.md) - a direct messaging protocol that will allow wallets to message each other.
-- [Push](introduction/push.md) - a push notification protocol to allow apps to notify users of both off-chain and on-chain events.
+WalletConnect comprises four core components and associated APIs:
+
+<Container
+  items={[
+    {
+      name: "Sign",
+      description: "Sign is a remote signer protocol to communicate securely between web3 wallets and dapps.",
+      url: `/2.0/api/sign`
+    },
+    {
+      name: "Auth",
+      description: "Auth is an authentication protocol that can be used to log-in blockchain wallets into apps.",
+      url: `/2.0/api/auth`
+    },
+    {
+      name: "Push",
+      description: "Push is a push notification protocol that enables apps to notify users of both off-chain and on-chain events.",
+      url: `/2.0/api/push`
+    },
+    {
+      name: "Chat",
+      description: "Chat is a direct messaging protocol that can enable wallets to message each other.",
+      url: `/2.0/api/chat`
+    }
+  ]}
+/>
 
 ## Why use WalletConnect?
 

@@ -12,11 +12,16 @@ const config = {
   url: "https://docs.walletconnect.com/",
   baseUrl: "/",
   onBrokenLinks: "throw",
-  onBrokenMarkdownLinks: "warn",
   favicon: "img/favicon.ico",
   organizationName: "walletconnect",
   projectName: "walletconnect-docs",
-  scripts: [{src: 'https://plausible.io/js/plausible.js', defer: true, 'data-domain': 'docs.walletconnect.com'}],
+  scripts: [
+    {
+      src: "https://plausible.io/js/plausible.js",
+      defer: true,
+      "data-domain": "docs.walletconnect.com",
+    },
+  ],
 
   presets: [
     [
@@ -25,20 +30,21 @@ const config = {
       {
         docs: {
           breadcrumbs: false,
-          lastVersion: "1.0",
+          lastVersion: "current",
           routeBasePath: "/",
           sidebarPath: require.resolve("./sidebars.js"),
+          showLastUpdateTime: true,
           editUrl:
             "https://github.com/WalletConnect/walletconnect-docs/blob/main/",
           versions: {
             "1.0": {
               badge: false,
               label: "v1.0",
-              path: "/",
+              path: "1.0",
             },
             current: {
               badge: false,
-              label: "v2.0-rc",
+              label: "v2.0",
               path: "2.0",
             },
           },
@@ -57,7 +63,7 @@ const config = {
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     {
       navbar: {
-        title: "WalletConnect",
+        title: "WalletConnect | Docs",
         logo: {
           alt: "WalletConnect Logo",
           src: "img/walletconnect-logo.svg",
@@ -68,28 +74,35 @@ const config = {
             type: "doc",
             position: "left",
             docId: "readme",
-            label: "Docs",
+            label: "Overview",
           },
           {
             type: "docSidebar",
             position: "left",
-            sidebarId: "specs",
-            label: "Specs",
+            sidebarId: "javascript",
+            label: "JavaScript",
+          },
+          {
+            type: "docSidebar",
+            position: "left",
+            sidebarId: "kotlin",
+            label: "Kotlin",
+          },
+          {
+            type: "docSidebar",
+            position: "left",
+            sidebarId: "swift",
+            label: "Swift",
           },
           {
             type: "docsVersionDropdown",
             position: "right",
           },
           {
-            href: "https://www.walletconnect.com/",
-            position: "right",
-            label: "Website",
-          },
-          {
             href: "https://github.com/walletconnect/",
             position: "right",
-            className: 'header-github-link',
-            'aria-label': 'GitHub repository',
+            className: "header-github-link",
+            "aria-label": "GitHub repository",
           },
         ],
       },
@@ -143,7 +156,7 @@ const config = {
         copyright: `Copyright © ${new Date().getFullYear()} WalletConnect, Inc.`,
       },
       colorMode: {
-        defaultMode: 'dark',
+        defaultMode: "dark",
         disableSwitch: false,
         respectPrefersColorScheme: false,
       },
@@ -161,7 +174,7 @@ const config = {
       announcementBar: {
         id: 'support_us',
         content:
-          '⚠️ Getting started? For dapps, use <a rel="noopener noreferrer" href="/">v1</a>.  For wallets, use both <a rel="noopener noreferrer" href="/">v1</a> and <a rel="noopener noreferrer" href="/2.0/">v2</a> together. <a rel="noopener noreferrer" href="/2.0/advanced/migrating-from-v1.0">Learn more.</a>',
+          '🚨 v1.0 has been sunset.  Wallets must upgrade by December 16, 2022. Apps must upgrade from January 1. <a rel="noopener noreferrer" href="https://medium.com/walletconnect/walletconnect-v1-0-sunset-notice-and-migration-schedule-8af9d3720d2e">Learn more</a>. 🚨',
         backgroundColor: '#3182ce',
         textColor: '#fff',
         isCloseable: true,

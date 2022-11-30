@@ -26,7 +26,7 @@ WalletConnect v2.0 introduces a set of JSON-RPC methods that are permissioned to
 
 ## Session Lifetime
 
-Previously on v1.0, WalletConnect had indefinite session lifetime which meant that clients would persist the session state until one of the clients emitted an event to disconnect. This however introduced a lot of stalled session states where one of the clients would loose its state and never emitted an event to disconnect.
+Previously on v1.0, WalletConnect had indefinite session lifetime which meant that clients would persist the session state until one of the clients emitted an event to disconnect. This however introduced a lot of stalled session states where one of the clients would lose its state and never emitted an event to disconnect.
 
 Therefore WalletConnect v2.0 introduces expiry timestamps for sessions which are currently defaulted to 7 days. This means that independent of the disconnect event not being emitted by a peer client then a client will disconnect and delete the session state after expiry is met.
 
@@ -52,4 +52,4 @@ WalletConnect v2.0 clients track all JSON-RPC requests sent and received with th
 
 ## Project ID
 
-Project ID will be required on v2.0 for the cloud version of WalletConnect, but this will not be required for self hosted WalletConnect relays. Read more about [Project ID's](relay-server.md).
+Project ID will be required on v2.0 for the cloud version of WalletConnect, but this will not be required for self hosted WalletConnect relays. Read more about [Project ID's](../cloud/relay.md).
