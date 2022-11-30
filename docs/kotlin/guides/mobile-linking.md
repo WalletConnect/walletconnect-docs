@@ -2,7 +2,11 @@
 
 Communication between a mobile wallet and a mobile application is possible by design. Using the URI displayed by the QR-code it is possible to establish connection by sharing this URI via deep-link on Android.
 
-**Disclamer:** Deeplinking flow works in the same way in all pur producs (Sign, Auth, Push, Chat)
+:::info
+
+Deeplinking flow works in the same way in all pur producs (Sign, Auth, Push, Chat)
+
+:::
 
 The common pattern of establishing a connection between a mobile wallet and a mobile applications is the following:
 
