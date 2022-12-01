@@ -27,7 +27,7 @@ User visits a new website that requires a Sign session for submitting transactio
 #### Successful request handling if B registers protocol P
 
 1. A creates random symKey S and pairing topic that is a sha256 hash of symKey S.
-2. A's pairing client registers protocol P by passing the list of methods needed for protocol P
+2. A's pairing client registers protocol P by passing the list of methods required for protocol P
 3. A encrypts request with symKey S. Pairing client does not expects any response. P is responsible for response subscription.
 4. A sends request on pairing topic.
 5. A generates URI and appends the query parameter with the keys "and-methods" and "or-methods" the value being a array.
