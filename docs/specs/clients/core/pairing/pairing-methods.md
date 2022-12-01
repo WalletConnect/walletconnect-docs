@@ -4,11 +4,11 @@
 ## 1. Peer B matches the required list and the optional list
 
 ### Peer A's pairing uri:
-    uri = "...req-methods=["wc_sessionPropose"]&opt-methods=["wc_authBatchRequest","wc_authRequest"]" 
+    uri = "...req-methods=["wc_sessionPropose","wc_authRequest"]&opt-methods=["wc_authBatchRequest"]" 
     
 ### Peer B's registered methods:
-    var requiredList = ["wc_sessionPropose"]
-    var optionalList = ["wc_authBatchRequest","wc_authRequest"]
+    var requiredList = ["wc_sessionPropose", "wc_authRequest"]
+    var optionalList = ["wc_authBatchRequest"]
 
 
 is valid? Yes
@@ -39,7 +39,7 @@ is valid? Yes
     var optionalList = []
 
 
-is valid? No
+is valid? Yes
 
 ---
 
