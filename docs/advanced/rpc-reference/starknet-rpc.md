@@ -163,7 +163,7 @@ account, message
 {
   "id": 1,
   "jsonrpc": "2.0",
-  "result": { "signature" : ["0x1", "0x072e509b65029052eb6c299d53a04e16605b915621c", "0x07897a4646"] }
+  "result": { "signature" : ["0x3a8278a26f32452f156260d81b93efb0eca126b44df7b005a5b27e2bbc4a64", "0x072e509b6502e2bbc4a649052eb6c299d53a04e16605b915621c", "0x07897a1b93efb0eca126b44df4646", "0x072e509b6502e2bbc4a649052eb6c299d53a04e16605b915621c"] }
 }
 ```
 
