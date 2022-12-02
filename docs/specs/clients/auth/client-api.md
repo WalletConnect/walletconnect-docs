@@ -5,13 +5,13 @@ abstract class Client {
   // ---------- Methods ----------------------------------------------- //
 
   // initializes the client with persisted storage and a network connection
-  public abstract init(params: { iss?: string }): Promise<void>;
+  public abstract init(): Promise<void>;
 
   // request wallet authentication
   public abstract request(params: RequestParams, topic: string ): Promise<{ uri, id }>;
 
   // respond wallet authentication
-  public abstract respond(params: RespondParams): Promise<boolean>;
+  public abstract respond(params: RespondParams, account: Account): Promise<boolean>;
 
   // query all pending requests
   public abstract getPendingRequests(): Promise<Record<number, PendingRequest>>;

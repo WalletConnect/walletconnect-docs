@@ -56,7 +56,6 @@ type Response = Cacao | ErrorResponse;
 interface PendingRequest {
   id: number;
   payloadParams: PayloadParams;
-  message: string;
 }
 ```
 
