@@ -12,7 +12,7 @@ web3modal.openModal();
 
 ### web3modal.closeModal
 
-Programmatically open the modal.
+Programmatically close the modal.
 
 ```js
 web3modal.closeModal();
