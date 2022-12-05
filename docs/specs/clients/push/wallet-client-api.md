@@ -11,7 +11,7 @@ abstract class WalletClient {
   public abstract approve(params: { id: number }): Promise<boolean>;
 
   // reject push subscription 
-  public abstract reject(params: { reason: Reason }): Promise<boolean>;
+  public abstract reject(params: { id: number, reason: Reason }): Promise<boolean>;
 
   // query all active subscriptions
   public abstract getActiveSubscriptions(): Promise<Record<string, PushSubscription>>;
