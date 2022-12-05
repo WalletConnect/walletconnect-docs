@@ -8,7 +8,7 @@ abstract class WalletClient {
   public abstract init(params: {}): Promise<void>;
 
   // approve push subscription 
-  public abstract approve(params: {}): Promise<boolean>;
+  public abstract approve(params: { id: number }): Promise<boolean>;
 
   // reject push subscription 
   public abstract reject(params: { reason: Reason }): Promise<boolean>;
