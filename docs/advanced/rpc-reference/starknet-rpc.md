@@ -26,10 +26,6 @@ This request might be processed before the account is deployed. In that scenario
         2.1.2. `entrypoint` : `Felt`
         2.1.3. `calldata` : `Felt[]` (Optional)
     2.2. `abis` : `ABI[]` (Optional) one or more contract abis which can be used to display the calls
-    2.3. `invocationDetails` : `Object` (Optional) Parameters suggested by the dapp
-        2.3.1. `nonce` : `Felt` (Optional)
-        2.3.2. `maxFee` : `Felt` (Optional)
-        2.3.3. `version` : `Felt` (Optional)
 ```
 
 
