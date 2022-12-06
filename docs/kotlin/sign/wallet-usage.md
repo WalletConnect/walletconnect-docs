@@ -18,9 +18,9 @@ val appMetaData = Core.Model.AppMetaData(
 
 CoreClient.initialize(relayServerUrl = serverUrl, connectionType = connectionType, application = this, metaData = appMetaData)
 
-val init = Sign.Params.Init(coreClient = CoreClient)
+val init = Sign.Params.Init(core = CoreClient)
 
-SignClient.initalize(init) { error ->
+SignClient.initialize(init) { error ->
     // Error will be thrown if there's an isssue during initalization
 }
 ```
