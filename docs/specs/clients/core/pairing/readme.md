@@ -32,7 +32,7 @@ User visits a new website that requires a Sign session for submitting transactio
 4. A sends request on pairing topic.
 5. A generates URI and appends the query parameter with the keys "req-methods" and "opt-methods", the value of each being an array.
 6. B's pairing client registers protocol P by passing lists of methods needed for Protocol P
-7. B verifies that the URI's "req-methods" query paramter's value equals B's cached "and" list of protocol methods along with checking if B's cached "or" list matches any values in the URI's "opt-methods' query parameter's value and then subscribes to pairing topic from provided URI
+7. B verifies that the URI's "req-methods" query parameter's value equals B's cached "and" list of protocol methods along with checking if B's cached "or" list matches any values in the URI's "opt-methods" query parameter's value and then subscribes to pairing topic from provided URI
 8. B receives protocol P request.
 
 
