@@ -5,16 +5,19 @@ abstract class Client {
   // ---------- Methods ----------------------------------------------- //
 
   // initializes the client with persisted storage and a network connection
-  public abstract init(params: { iss?: string }): Promise<void>;
+  public abstract init(): Promise<void>;
 
   // request wallet authentication
-  public abstract request(params: RequestParams, topic: string ): Promise<{ uri, id }>;
+  public abstract request(params: RequestParams, topic: string): Promise<{ uri, id }>;
 
   // respond wallet authentication
-  public abstract respond(params: RespondParams): Promise<boolean>;
+  public abstract respond(params: RespondParams, iss: string): Promise<boolean>;
 
   // query all pending requests
   public abstract getPendingRequests(): Promise<Record<number, PendingRequest>>;
+
+  // format payload to SIWE message string 
+  public abstract formatMessage(payload: PayloadParams, iss: string): Promise<string>;
 
   // ---------- Events ----------------------------------------------- //
 
@@ -22,6 +25,6 @@ abstract class Client {
   public abstract on("auth_response", (id: number, response: Response) => {}): void;
 
   // for wallet to listen on auth request
-  public abstract on("auth_request", (id: number, message: string) => {}): void;
+  public abstract on("auth_request", (id: number, payload: PayloadParams) => {}): void;
 }
 ```
