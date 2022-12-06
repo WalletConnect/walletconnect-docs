@@ -44,7 +44,7 @@ User visits a new website that requires a Sign session for submitting transactio
 4. A sends request on pairing topic.
 5. A generates URI and appends the query parameter with a key "req-methods" with the value being a list of the required methods registered and a key "opt-methods" with the value being a list of optional methods.
 6. B's pairing client registers protocol P by passing the list of methods needed for Protocol P
-7. B verifies that the URI's "req-methods" query paramter's value equals B's cached "required" list of protocol methods along with checking if B's cached "optional" list matches any values in the URI's "opt-methods' query parameter's value and the verification fails by either not having all of the required methods or missing any of the optional methods. B will notify user that it cannot pair with A, and internally publish a wc_deletePairing with a reason.
+7. B verifies that the URI's "req-methods" query parameter's value equals B's cached "required" list of protocol methods along with checking if B's cached "optional" list matches any values in the URI's "opt-methods' query parameter's value. The verification fails by either not having all of the required methods or missing any of the optional methods. B will notify user that it cannot pair with A, and internally publish a wc_deletePairing with a reason.
 
 ## Pairing lifecycle
 

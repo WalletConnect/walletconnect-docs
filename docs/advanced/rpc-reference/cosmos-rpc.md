@@ -15,7 +15,7 @@ This method returns an array of key pairs available to sign from the wallet mapp
 ### Returns
 
     1.`Array` - Array of accounts:
-    	1.1. `Object` - Account Data object with paramters:
+    	1.1. `Object` - Account Data object with parameters:
     		1.1.1. `algo` : `STRING` - algorithm used for signing
     		1.1.2. `address` : `STRING` - corresponding address for keypair
     		1.1.3. `pubkey` : `STRING` - public key for keypair
