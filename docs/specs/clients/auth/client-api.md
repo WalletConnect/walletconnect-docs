@@ -8,13 +8,16 @@ abstract class Client {
   public abstract init(): Promise<void>;
 
   // request wallet authentication
-  public abstract request(params: RequestParams, topic: string ): Promise<{ uri, id }>;
+  public abstract request(params: RequestParams, topic: string): Promise<{ uri, id }>;
 
   // respond wallet authentication
-  public abstract respond(params: RespondParams, account: Account): Promise<boolean>;
+  public abstract respond(params: RespondParams, iss: string): Promise<boolean>;
 
   // query all pending requests
   public abstract getPendingRequests(): Promise<Record<number, PendingRequest>>;
+
+  // format payload to SIWE message string 
+  public abstract formatMessage(payload: PayloadParams, iss: string): Promise<string>;
 
   // ---------- Events ----------------------------------------------- //
 
