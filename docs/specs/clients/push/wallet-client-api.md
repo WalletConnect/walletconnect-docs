@@ -26,6 +26,7 @@ abstract class WalletClient {
 
   // for wallet to listen on push request
   public abstract on("push_request", (id: number, metadata: Metadata) => {}): void;
+  public abstract on("push_message", (message: PushMessage, metadata: Metadata) => {}): void;
 }
 ```
  
