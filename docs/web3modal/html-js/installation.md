@@ -15,8 +15,12 @@ npm install @web3modal/ethereum @web3modal/html @wagmi/core ethers
 ## Import
 
 ```js
-import { chain, configureChains, createClient } from "@wagmi/core";
+import { configureChains, createClient } from "@wagmi/core";
+
+import { arbitrum, mainnet, polygon } from "@wagmi/core/chains";
+
 import { Web3Modal } from "@web3modal/html";
+
 import {
   EthereumClient,
   modalConnectors,
@@ -29,7 +33,7 @@ import {
 See [configuration](../configuration.md) docs for full Web3Modal options list.
 
 ```js
-const chains = [chain.mainnet];
+const chains = [arbitrum, mainnet, polygon];
 
 // Wagmi Core Client
 const { provider } = configureChains(chains, [
