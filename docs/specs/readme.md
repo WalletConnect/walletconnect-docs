@@ -35,6 +35,12 @@ In this repository, we document and discuss features that are currently under de
       name: "Relay Server",
       description: "Relay server routes messages between clients using publish-subscribe pattern with topic-based routing.",
       url: `/2.0/specs/servers/relay`
-    }
+    },
+    {
+      name: "History Server",
+      description: "History server persists Relay messages indefinitely on the behalf of a client through a webhook.",
+      url: `/2.0/specs/servers/history`
+    },
   ]}
 />
+
