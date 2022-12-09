@@ -30,10 +30,7 @@ Used to invite a peer through topic I. Requires a success response with associat
 ```jsonc
 // wc_chatInvite params
 {
-  "message": string,
-  "account": string,
-  "publicKey": string,
-  "signature": string, // optional
+  "jwt": string
 }
 
 | IRN     |          |
@@ -49,7 +46,7 @@ Used to invite a peer through topic I. Requires a success response with associat
 ```jsonc
 // Success result
 {
-  "publicKey": string, // invitee public key
+  "jwt": string
 }
 
 | IRN     |          |
