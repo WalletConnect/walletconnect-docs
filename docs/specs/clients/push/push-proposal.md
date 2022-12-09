@@ -28,5 +28,6 @@ Proposal protocol will be established as follows:
 6. Wallet subscribes to push topic 
 7. Wallet sends proposal response on pairing P with publicKey Y 
 8. Dapp receives proposal response on pairing P
-9. Dapp derives topic and symmetric key 
+9. Dapp derives push topic and symmetric key
+10. Dapp subscribes to push topic
  
