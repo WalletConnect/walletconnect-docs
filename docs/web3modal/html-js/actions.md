@@ -29,6 +29,33 @@ const usnubscribe = web3modal.subscribeModal((newState) =>
 unsubscribe();
 ```
 
+### web3modal.setSelectedChain
+
+Programmatically set selected chain.
+
+```js
+web3modal.setSelectedChain();
+```
+
+### web3modal.getSelectedChain
+
+Programmatically get selected chain.
+
+```js
+web3modal.getSelectedChain();
+```
+
+### web3modal.subscribeSelectedChain
+
+Subscribe or unsubscribe from selected chain changes.
+
+```js
+const usnubscribe = web3modal.subscribeSelectedChain((newState) =>
+  console.log(newState)
+);
+unsubscribe();
+```
+
 ### web3modal.setTheme
 
 Programmatically set or update modal's theme.

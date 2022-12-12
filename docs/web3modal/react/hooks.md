@@ -12,6 +12,16 @@ import { useWeb3Modal } from "@web3modal/react";
 const { isOpen, open, close } = useWeb3Modal();
 ```
 
+### useWeb3ModalNetwork
+
+Hook to set or get current selected chain based on wagmi events or user selection in modal ui.
+
+```tsx
+import { useWeb3ModalNetwork } from "@web3modal/react";
+
+const { selectedChain, setSelectedChain } = useWeb3ModalNetwork();
+```
+
 ### useWeb3ModalTheme
 
 Hook to set or update theme options like `themeColor`, `themeMode` and `themeBackground`.
