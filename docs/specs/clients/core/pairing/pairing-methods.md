@@ -71,7 +71,7 @@ is valid? No
 
 ---
 
-## 6. Peer B does not match the required list and does not partially matche the optional list
+## 6. Peer B does not match the required list and does not partially matches the optional list
 
 ### Peer A's pairing uri:
     uri = "...req-methods="wc_sessionRequest"&opt-methods="wc_authBatchRequest","wc_authRequest"" 
