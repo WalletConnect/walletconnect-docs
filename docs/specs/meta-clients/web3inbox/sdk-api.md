@@ -15,6 +15,14 @@ displaying Web3Inbox in an `iframe`, etc)
 ```typescript
 abstract class Web3InboxSDK {
 
+  // If the init function does not receive `params`, Web3InboxSDK operates in a 
+  // stateless manner where it does not maintain chat/push clients and only
+  // listens to external events.
+  public static abstract init(params?: {
+    relayUrl: string;
+    projectId: string;
+  }): Promise<Web3InboxSDK>
+  
   // ---------- Chat Methods (Internal W3I use) ----------------------------------------------- //
   
   // register a blockchain account with a public key / returns the public key
@@ -39,7 +47,7 @@ abstract class Web3InboxSDK {
     inviteId: number;
   }): Promise<string>;
 
-// rejects a chat invite by id
+  // rejects a chat invite by id
   public abstract reject(params: {
     inviteId: string;
   }): Promise<void>;
@@ -81,6 +89,9 @@ abstract class Web3InboxSDK {
   public abstract getMessages(params: {
     topic: string;
   }): Promise<[Message]>;
+  
+  
+  // ---------- Push Methods (Internal W3I use) ----------------------------------------------- //
   
   // request push subscription
   public abstract request(params: { account: string, pairingTopic: string }): Promise<{ id }>;
