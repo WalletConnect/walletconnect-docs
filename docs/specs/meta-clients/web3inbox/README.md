@@ -1,4 +1,4 @@
-# Web3Inbox SDK
+# Web3Inbox SDK Overview
 
 The Web3Inbox SDK will combine functionality of
 [Push](../../clients/push/README.md) and [Chat](../../clients/chat/README.md) 

@@ -1,4 +1,4 @@
-# Web3Inbox SDK
+# Web3Inbox SDK API
 
 The Web3InboxSDK will encompass both [Push](../../clients/push/README.md) and
 [Chat](../../clients/chat/README.md) methods and event listeners. All methods 
