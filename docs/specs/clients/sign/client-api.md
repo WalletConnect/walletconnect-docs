@@ -82,8 +82,5 @@ abstract class Client {
 
   // subscribe to session event
   public abstract on("session_event", (sessionEvent: SessionEvent) => {}): void;
-
-  // subscribe to sessions update
-  public abstract on("sessions_update", (sessions: Session[]) => {}): void;
 }
 ```
