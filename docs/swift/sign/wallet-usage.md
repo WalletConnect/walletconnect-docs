@@ -9,17 +9,20 @@ Confirm you have configured the Network and Pair Client first
 
 When your `Sign` instance receives requests from a peer it will publish a related event. Set a subscription to handle them.
 
+To track sessions subscribe to `sessionsPublisher` publisher
+
 ```swift
-Sign.instance.sessionDeletePublisher
+Sign.instance.sessionsPublisher
     .receive(on: DispatchQueue.main)
-    .sink { [unowned self] _ in
-        //handle event
+    .sink { [unowned self] (sessions: [Session]) in
+        // reload UI
     }.store(in: &publishers)
 ```
 
 The following publishers are available to subscribe:
 
 ```swift
+    public var sessionsPublisher: AnyPublisher<[Session], Never>
     public var sessionProposalPublisher: AnyPublisher<Session.Proposal, Never> 
     public var sessionRequestPublisher: AnyPublisher<Request, Never> 
     public var socketConnectionStatusPublisher: AnyPublisher<SocketConnectionStatus, Never> 
