@@ -84,18 +84,21 @@ abstract class Web3InboxSDKChatFacade {
     topic: string;
   }): Promise<[Message]>;
   
+  /*
+    Event observing.
+    Note: All observers return a method to stop observing.
+  */
   // subscribe to new chat invites received
-  public abstract observe("chat_invite", Observer<{ id: number, invite: Invite }>): void;
+  public abstract observe("chat_invite", Observer<{ id: number, invite: Invite}>): () => void;
 
   // subscribe to new chat thread joined
-  public abstract observe("chat_joined", Observer<{ topic: string }>): void;
+  public abstract observe("chat_joined", Observer<{ topic: string }>): () => void;
 
   // subscribe to new chat messages received
-  public abstract observe("chat_message", Observer<{ topic: string, payload: Message}>): void;
+  public abstract observe("chat_message", Observer<{ topic: string, payload:  Message}>): () => void;
 
   // subscribe to new chat thread left
-  public abstract observe("chat_left",  Observer<{ topic: string }>): void;
-
+  public abstract observe("chat_left",  Observer<{ topic: string }>): () => void;
   
 }
 
@@ -112,7 +115,11 @@ abstract class Web3InboxSDKPushFacade {
   // delete active subscription
   public abstract delete(params: { topic: string }): Promise<void>;
   
-  public abstract observe("push_response", Observer<{id: number, response: {error?: Reason, subscription?: PushSubscription }>): void;
+  /*
+    Event observing.
+    Note: All observers return a method to stop observing.
+  */
+  public abstract observe("push_response", Observer<{id: number, response:{error?: Reason, subscription?: PushSubscription }>): () => void;
 }
 
 abstract class Web3InboxSDK {
