@@ -1,16 +1,16 @@
 # Web3Inbox SDK API
 
-The Web3InboxSDK will encompass both [Push](../../clients/push/README.md) and
+The Web3InboxSDK encompasses both [Push](../../clients/push/README.md) and
 [Chat](../../clients/chat/README.md) methods and event listeners. All methods
-within the class documented here will be used internally by the web3inbox web
-app. Internally, the state will be managed through [RxJS](https://rxjs.dev/),
-which will allow the SDK to cleanly listen to events from anywhere. This will of
-course the include the Chat & Push clients in the webapp. 
+within the class documented here are used internally by the web3inbox web
+app. Internally, the state is managed through [RxJS](https://rxjs.dev/),
+which allows the SDK to cleanly listen to events from anywhere. This of
+course includes the Chat & Push clients in the webapp. 
 
 ## Stateless Mode
-In the case of the webapp being integrated in a native webview, RxJS will hook
+In the case of the webapp being integrated in a native webview, RxJS hooks
 into the `message` event on the window, receiving messages from the
-`postMessage` calls. Note, this will also enable communication with any parent
+`postMessage` calls. Note, this also enables communication with any parent
 context (React Native, web page displaying Web3Inbox in an `iframe`, etc).
 
 This is Web3InboxSDK's stateless mode, where it won't manage any clients and

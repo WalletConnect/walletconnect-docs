@@ -1,7 +1,7 @@
 # Stateless Communication
 
 In the case of stateless mode, the parent (Eg: native app displaying a webview)
-will communicate using `postMessage`, sending messages one-way to the client.
+communicates using `postMessage`, sending messages one-way to the client.
 
 The message format should be as follows, following JSON RPC:
 
