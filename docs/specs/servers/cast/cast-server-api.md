@@ -11,7 +11,8 @@ Body:
 ```jsonc
 {
     "account": string,
-    "symKey": string
+    "symKey": string,
+    "relayUrl": string
 }
 ```
 

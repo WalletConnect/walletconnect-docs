@@ -11,7 +11,8 @@ Body:
 ```jsonc
 {
     "clientId": string,
-    "tokenId": string
+    "tokenId": string,
+    "relayUrl": string
 }
 ```
 
@@ -27,7 +28,9 @@ Body:
 
 ```jsonc
 {
-    "message": string,
-    "accounts": string[]
+    "clientId": string,
+    "topic" : string,
+    "message" : string,
+    "tag" : number, 
 }
-``` 
+```
