@@ -96,10 +96,12 @@ true
 | TTL     | 86400    |
 | Prompt  | false    |
 | Tag     | 4003     |
+
+```
+
 ### wc_pushDelete
 
 Used to inform the peer to close and delete a push subscription. The reason field should be a human-readable message defined by the SDK consumer to be shown on the peer's side.
-
 
 **Request**
 
@@ -113,8 +115,8 @@ Used to inform the peer to close and delete a push subscription. The reason fiel
 | ------- | -------- |
 | TTL     | 86400    |
 | Prompt  | true     |
-| Tag     | 4003     |
-
+| Tag     | 4004     |
+```
 
 **Response**
 
@@ -125,4 +127,4 @@ true
 | ------- | -------- |
 | TTL     | 86400    |
 | Prompt  | false    |
-| Tag     | 4004     |
+| Tag     | 4005     |

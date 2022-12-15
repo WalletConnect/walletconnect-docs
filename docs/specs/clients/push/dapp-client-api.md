@@ -28,4 +28,3 @@ abstract class DappClient {
   public abstract on("push_delete", (topic: string) => {}): void;
 }
 ```
- 

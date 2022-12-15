@@ -34,4 +34,3 @@ abstract class WalletClient {
   public abstract on("push_delete", (topic: string) => {}): void;
 }
 ```
- 
