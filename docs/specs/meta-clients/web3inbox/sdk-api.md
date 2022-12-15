@@ -43,7 +43,7 @@ abstract class Web3InboxSDKChatFacade {
 
   // rejects a chat invite by id
   public abstract reject(params: {
-    inviteId: string;
+    inviteId: number;
   }): Promise<void>;
 
   // sends a chat message to an active chat thread
