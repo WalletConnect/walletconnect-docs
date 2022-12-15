@@ -18,11 +18,11 @@ Body:
 
 
 
-## Notify
+## Push
 
-Used to notify a message to a set of accounts 
+The webhook triggered when a message is observed on the relay
 
-`POST /notify`
+`POST /push`
 
 Body:
 

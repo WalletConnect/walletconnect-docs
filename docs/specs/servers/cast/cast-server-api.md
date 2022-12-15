@@ -28,7 +28,7 @@ Body:
 
 ```jsonc
 {
-    "message": {
+    "notification": {
         "title": string,
         "body": string,
         "icon": string,
