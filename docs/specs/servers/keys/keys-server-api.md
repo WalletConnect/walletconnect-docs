@@ -13,8 +13,7 @@ Body:
 ```jsonc
 {
     "account": string,
-    "publicKey": string,
-    "jwt": string
+    "idAuth": string
 }
 ```
 
@@ -51,7 +50,7 @@ Body:
 ```jsonc
 {
     "account": string,
-    "jwt": string
+    "idAuth": string
 }
 ```
 
@@ -67,23 +66,20 @@ Body:
 
 ```jsonc
 {
-    "account": string,
-    "publicKey": string,
     "cacao": string
 }
 ```
 
-### Verify Encryption Key
+### Resolve Identity Key
 
-Used to verify that identity key matches account
+Used to get a cacao matching an identity key
 
-`POST /identity/verify`
+`POST /identity/resolve`
 
 Query Params:
 
 ```jsonc
 {
     "publicKey": string,
-    "account": string,
 }
 ```

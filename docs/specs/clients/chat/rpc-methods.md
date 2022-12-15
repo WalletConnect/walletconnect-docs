@@ -30,7 +30,7 @@ Used to invite a peer through topic I. Requires a success response with associat
 ```jsonc
 // wc_chatInvite params
 {
-  "jwt": string
+  "inviteAuth": string
 }
 
 | IRN     |          |
@@ -46,7 +46,7 @@ Used to invite a peer through topic I. Requires a success response with associat
 ```jsonc
 // Success result
 {
-  "jwt": string
+  "responseAuth": string
 }
 
 | IRN     |          |
@@ -68,10 +68,7 @@ Used to send a message to its peer through topic T.
 ```jsonc
 // wc_chatMessage params
 {
-  "message" : string,
-  "authorAccount": string,
-  "timestamp": Int64,
-  "media": Media // optional
+  "messageAuth": string,
 }
 
 | IRN     |          |
@@ -85,7 +82,9 @@ Used to send a message to its peer through topic T.
 
 ```jsonc
 // Success result
-true
+{
+  "acknowledgementAuth": string
+}
 
 | IRN     |          |
 | ------- | -------- |
