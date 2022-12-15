@@ -2,6 +2,12 @@
 
 Communication between a mobile wallet and a mobile application is possible by design. Using the URI displayed by the QR-code it is possible to establish connection by sharing this URI via deep-link on Android.
 
+:::info
+
+Deeplinking flow works in the same way in all pur producs (Sign, Auth, Push, Chat)
+
+:::
+
 The common pattern of establishing a connection between a mobile wallet and a mobile applications is the following:
 
 1. Dapp shows user a connection button
@@ -30,7 +36,7 @@ To receive signing request in your Wallet, you'll need to initialize Kotlin SDK 
 ```kotlin
 val redirect = "kotlin-wallet-wc:/request" //should be unique for your wallet
 
-val appMetaData = Sign.Model.AppMetaData(
+val appMetaData = Core.Model.AppMetaData(
     name = "Wallet Name",
     description = "Wallet Description",
     url = "Wallet Url",
@@ -38,12 +44,9 @@ val appMetaData = Sign.Model.AppMetaData(
     redirect = redirect
 )
 
-val init = Sign.Params.Init(
-    application = application,
-    relayServerUrl = serverUrl
-    appMetaData = appMetaData
-)
+CoreClient.initialize(relayServerUrl = serverUrl, connectionType = connectionType, application = application, metaData = appMetaData)
 
+val init = Sign.Params.Init(coreClient = CoreClient)
 SignClient.initalize(init)
 ```
 
@@ -65,7 +68,7 @@ In order to add support for mobile linking within your Dapp and receive signing 
 ```kotlin
 val redirect = "kotlin-dapp-wc:/request" //should be unique for your Dapp
 
-val appMetaData = Sign.Model.AppMetaData(
+val appMetaData = Core.Model.AppMetaData(
     name = "Wallet Name",
     description = "Wallet Description",
     url = "Wallet Url",
@@ -73,12 +76,9 @@ val appMetaData = Sign.Model.AppMetaData(
     redirect = redirect
 )
 
-val init = Sign.Params.Init(
-    application = application,
-    relayServerUrl = serverUrl
-    appMetaData = appMetaData
-)
+CoreClient.initialize(relayServerUrl = serverUrl, connectionType = connectionType, application = application, metaData = appMetaData)
 
+val init = Sign.Params.Init(coreClient = CoreClient)
 SignClient.initalize(init)
 ```
 

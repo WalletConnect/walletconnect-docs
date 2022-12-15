@@ -1,4 +1,8 @@
-# Core Client
+# Installation
+
+Kotlin implementation of Android CoreClient for all WalletConnect SDKs.
+
+![Maven Central](https://img.shields.io/maven-central/v/com.walletconnect/android-core)
 
 ## Requirements
 
@@ -6,8 +10,6 @@
 * Java 11
 
 ## Installation
-
-![Maven Central](https://img.shields.io/maven-central/v/com.walletconnect/android-core)
 
 root/build.gradle.kts:
 

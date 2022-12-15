@@ -53,3 +53,9 @@ case .userDisconnected: return 6000
 case .sessionSettlementFailed: return 7000
 case .noSessionForTopic: return 7001
 ```
+
+## SESSION REQUEST
+
+```sh
+case .sessionRequestExpired: return 8000
+```

@@ -18,6 +18,10 @@ In the above scenario, you would replace `@walletconnect/types@1.x.x` with `@wal
 
 For more information check our [migration guide](../../advanced/migrating-from-v1.0.md) and the [repository for `legacy` packages](https://github.com/WalletConnect/walletconnect-legacy).
 
+## Integrating Auth
+
+We strongly encourage wallets to also integrate the [Auth](./../auth/installation.md) API so that dapps using only Auth can still particpate in the same ecosystem.
+
 ## Initializing the client
 
 Initialize client as a controller using [your Project ID](../../cloud/relay.md).
