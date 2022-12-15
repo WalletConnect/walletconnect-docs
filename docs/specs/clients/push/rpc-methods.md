@@ -96,4 +96,33 @@ true
 | TTL     | 86400    |
 | Prompt  | false    |
 | Tag     | 4003     |
-```
+### wc_pushDelete
+
+Used to inform the peer to close and delete a push subscription. The reason field should be a human-readable message defined by the SDK consumer to be shown on the peer's side.
+
+
+**Request**
+
+```jsonc
+// wc_pushDelete params
+{
+  "code": Int64,
+  "message": string
+}
+| IRN     |          |
+| ------- | -------- |
+| TTL     | 86400    |
+| Prompt  | true     |
+| Tag     | 4003     |
+
+
+**Response**
+
+```jsonc
+// Success result
+true
+| IRN     |          |
+| ------- | -------- |
+| TTL     | 86400    |
+| Prompt  | false    |
+| Tag     | 4004     |
