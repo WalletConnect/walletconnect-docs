@@ -23,6 +23,8 @@ abstract class DappClient {
 
   // subscribe to push response
   public abstract on("push_response", (id: number, response: { error?: Reason, subscription?: PushSubscription }) => {}): void;
+
+ // subscribe to push deletion
   public abstract on("push_delete", (topic: string) => {}): void;
 }
 ```

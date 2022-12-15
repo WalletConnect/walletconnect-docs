@@ -29,6 +29,8 @@ abstract class WalletClient {
   
   //  for wallet to listen on push messages
   public abstract on("push_message", (message: PushMessage, metadata: Metadata) => {}): void;
+
+  // for wallet to listen on push deletion
   public abstract on("push_delete", (topic: string) => {}): void;
 }
 ```
