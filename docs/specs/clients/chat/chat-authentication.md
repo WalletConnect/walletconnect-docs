@@ -1,6 +1,6 @@
 # Chat Authentication
 
-Given that Chat API supports multiple clients with different Identity Keys for the same blockchain account, we must validate different payloads:
+Given that Chat API supports multiple clients with different [Identity Keys](./chat-identity-keys.md) for the same blockchain account, we must validate different payloads:
 
 1. Invite Proposals
 2. Invite Approvals
