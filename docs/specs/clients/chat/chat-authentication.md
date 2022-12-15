@@ -5,7 +5,7 @@ Given that Chat API supports multiple clients with different [Identity Keys](./c
 1. Invite Proposals
 2. Invite Approvals
 3. Chat Messages
-4. Chat Acknowledgements
+4. Chat Receipts
 
 This will be achieved using did-jwt which the different purposes above will have the same mandatory fields:
 
@@ -40,9 +40,9 @@ When we are validating chat messages we must use the following additional fields
 * aud - recipient blockchain account (did:pkh)
 * xma - extensible media attachment (optional)
 
-## Chat Acknowledgements
+## Chat Receipts
 
-When we are validating chat acknowledgements we must use the following additional fields in the jwt:
+When we are validating chat receipts we must use the following additional fields in the jwt:
 
 * sub - hash of the message received
 * aud - sender blockchain account (did:pkh)

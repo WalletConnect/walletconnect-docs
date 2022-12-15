@@ -83,7 +83,7 @@ Used to send a message to its peer through topic T.
 ```jsonc
 // Success result
 {
-  "acknowledgementAuth": string
+  "receiptAuth": string
 }
 
 | IRN     |          |
