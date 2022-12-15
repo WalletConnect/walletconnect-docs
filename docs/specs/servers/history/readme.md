@@ -1,34 +1,5 @@
-# History Server API
+# History Server Overview
 
-## Register
+## Description
 
-Used to register an intent to persist messages.
-
-`POST /register`
-
-Body:
-
-```jsonc
-{
-    "tags": string[],
-    "relayUrl": string
-}
-```
-
-
-
-## Get Messages
-
-Used to get message history for a given topic.
-
-`GET /messages`
-
-Params:
-
-```jsonc
-{
-    "topic": string,
-    "pageSize": number,
-    "pageNumber": number
-}
-```
+History server persists Relay messages indefinitely on the behalf of a client through a webhook.
