@@ -17,5 +17,10 @@ Pre-styled connect/disconnect button that reacts to modal's theme changes.
 ```tsx
 import { Web3Button } from "@web3modal/react";
 
+interface Props {
+  icon?: "show" | "hide";
+  label?: string;
+}
+
 return <Web3Button />;
 ```

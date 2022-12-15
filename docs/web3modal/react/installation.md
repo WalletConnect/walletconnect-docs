@@ -2,7 +2,6 @@
 
 Web3Modal offers out of the box support for React and integrates very well with a popular React hook library called [wagmi](https://wagmi.sh/). To get started with their CLI, click [here](https://wagmi.sh/cli/create-wagmi). Alternatively follow our manual setup guide below.
 
-
 ## Obtain Project ID
 
 Head over to [WalletConnect Cloud](https://cloud.walletconnect.com/) to sign in or sign up. Create (or use an existing) project and copy its associated Project ID. We will need this in a later step.
@@ -24,7 +23,9 @@ import {
 
 import { Web3Modal } from "@web3modal/react";
 
-import { chain, configureChains, createClient, WagmiConfig } from "wagmi";
+import { configureChains, createClient, WagmiConfig } from "wagmi";
+
+import { arbitrum, mainnet, polygon } from "wagmi/chains";
 ```
 
 ## Configure
@@ -32,7 +33,7 @@ import { chain, configureChains, createClient, WagmiConfig } from "wagmi";
 Configure wagmi and Web3Modal clients. Refer to [wagmi](https://wagmi.sh/) docs to see how to set up custom chains, providers and work with their client.
 
 ```tsx
-const chains = [chain.mainnet, chain.polygon, chain.optimism, chain.arbitrum];
+const chains = [arbitrum, mainnet, polygon];
 
 // Wagmi client
 const { provider } = configureChains(chains, [
