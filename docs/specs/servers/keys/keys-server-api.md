@@ -12,7 +12,6 @@ Body:
 
 ```jsonc
 {
-    "account": string,
     "idAuth": string
 }
 ```
@@ -49,7 +48,6 @@ Body:
 
 ```jsonc
 {
-    "account": string,
     "idAuth": string
 }
 ```

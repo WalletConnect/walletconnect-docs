@@ -95,6 +95,7 @@ When we are registering a proposal encryption key we must use the following mand
 * iss - public key of the identity key
 * sub - public key for proposal encryption key
 * aud - key server url used for registering
+* pkh - corresponding blockchain account (did:pkh)
 
 Expiry will be calculated 1 day (86400 seconds) from issued date
 
