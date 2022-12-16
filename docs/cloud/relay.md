@@ -27,12 +27,13 @@ Limit access to known HTTP [origin](https://developer.mozilla.org/en-US/docs/Web
 
 Possible values for the origin value:
 
-- `<hostname>`
 - `<scheme>://<hostname>`
 - `<scheme>://<hostname>:<port>`
-- `*.<hostname>`
+- `<scheme>://*.<hostname>`
 
-Adding `dapp.example.com` to the allowlist will only allow requests from that origin. Requests from other origins will be dendied.
+Adding `https://dapp.example.com` to the allowlist will only allow requests from that origin. Requests from other origins will be dendied. Using localhost (or 127.0.0.1) is also always permitted. 
+
+Updates take 15 minutes to apply.
 
 ## Error Codes
 
