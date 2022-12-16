@@ -11,7 +11,6 @@ import AuthClient from "@walletconnect/auth-client";
 
 const authClient = await AuthClient.init({
   projectId: "<YOUR_PROJECT_ID>",
-  iss: `did:pkh:eip155:1:<WALLET_ADDRESS>`,
   metadata: {
     name: "my-auth-wallet",
     description: "A wallet using WalletConnect AuthClient",
@@ -28,17 +27,26 @@ To listen to pairing-related events, please follow the guidance for [Pairing API
 :::
 
 ```javascript
-authClient.on("auth_request", async ({ id, params }) => {
+authClient.on("auth_request", async ({ id, args }) => {
+
+  // the wallet address
+  const iss = `did:pkh:eip155:1:${WALLET_ADDRESS}`;
+  
+  // format the cacao payload with users address
+  const message = peer.formatMessage(args.params.cacaoPayload, iss);
+  
   // This is a good point to trigger a UI event to provide the user
   // with a button to accept or reject the authentication request,
   // instead of automatically responding.
   const signature = await wallet.signMessage(params.message);
+
   await authClient.respond({
     id: id,
     signature: {
       s: signature,
       t: "eip191",
     },
+    iss,
   });
 });
 ```
