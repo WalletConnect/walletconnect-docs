@@ -29,7 +29,7 @@ To listen to pairing-related events, please follow the guidance for [Pairing API
 ```javascript
 authClient.on("auth_request", async ({ id, args }) => {
 
-  // the user's address
+  // the user’s address
   const iss = `did:pkh:eip155:1:${WALLET_ADDRESS}`;
 
   // format the cacao payload with the user’s address
