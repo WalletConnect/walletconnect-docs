@@ -33,7 +33,7 @@ authClient.on("auth_request", async ({ id, args }) => {
   const iss = `did:pkh:eip155:1:${WALLET_ADDRESS}`;
 
   // format the cacao payload with the user’s address
-  const message = peer.formatMessage(args.params.cacaoPayload, iss);
+  const message = authClient.formatMessage(args.params.cacaoPayload, iss);
   
   // This is a good point to trigger a UI event to provide the user
   // with a button to accept or reject the authentication request,
