@@ -32,7 +32,7 @@ Possible values for the origin value:
 - `<scheme>://<hostname>:<port>`
 - `*.<hostname>`
 
-Adding `dapp.example.com` to the allowlist will only allow requests from that origin. Requests from other origins will be dendied.
+Adding `dapp.example.com` to the allowlist will only allow requests from that origin. Requests from other origins will be denied.
 
 ## Error Codes
 
