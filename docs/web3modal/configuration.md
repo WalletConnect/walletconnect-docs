@@ -70,6 +70,19 @@ chainImages: [
 ];
 ```
 
+### tokenImages (optional)
+
+Array of token symbols and their logo mappings. Defaults to `undefined`.
+
+```ts
+tokenImages: [
+  {
+    ETH: "/images/eth.webp",
+    AVAX: "/images/avax.webp",
+  },
+];
+```
+
 ### enableNetworkView (optional)
 
 If more than 1 chain was provided in modal or wagmi configuration users will be show network selection view before selecting a wallet, this option can enable or disable this behavior. Defaults to `true`
