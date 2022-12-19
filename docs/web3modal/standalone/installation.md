@@ -59,5 +59,5 @@ if (uri) {
 
 ## Examples
 
-React [example](https://github.com/WalletConnect/web3modal/tree/V2/examples/react-standalone)
-HTML [example](https://github.com/WalletConnect/web3modal/tree/V2/examples/html-standalone)
+- React [example](https://github.com/WalletConnect/web3modal/tree/V2/examples/react-standalone)
+- HTML [example](https://github.com/WalletConnect/web3modal/tree/V2/examples/html-standalone)
