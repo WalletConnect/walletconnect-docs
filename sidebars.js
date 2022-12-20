@@ -19,21 +19,11 @@ module.exports = {
       items: [
         {
           type: 'link',
-          label: 'Web3Modal',
+          label: 'Web3Modal SDK',
           href: "/2.0/web3modal/about",
         },
-        {
-          type: "category",
-          label: "APIs",
-          collapsed: true,
-          collapsible: true,
-          items: [
-            "api/sign",
-            "api/auth",
-            "api/chat",
-            "api/push",
-          ],
-        },
+        'web3wallet/about',
+        'web3inbox/about',
         {
           type: "category",
           label: "Cloud",
@@ -52,10 +42,30 @@ module.exports = {
       collapsible: false,
       className: "menu_outer_list",
       items: [
+        {
+          type: "category",
+          label: "APIs",
+          collapsed: true,
+          collapsible: true,
+          items: [
+            "api/sign",
+            "api/auth",
+            "api/chat",
+            "api/push",
+          ],
+        },
+        "advanced/chain-ecosystem-onboarding",
+      ],
+    },
+    {
+      type: "category",
+      label: "Technical Reference",
+      collapsible: false,
+      className: "menu_outer_list",
+      items: [
         "advanced/faq",
         "advanced/glossary",
         "advanced/migrating-from-v1.0",
-        "advanced/chain-ecosystem-onboarding",
         {
           type: "category",
           label: "RPC Reference",
@@ -147,8 +157,8 @@ module.exports = {
             },
           ],
         },
-      ],
-    },
+      ]
+    }
   ],
   javascript: [
     {
