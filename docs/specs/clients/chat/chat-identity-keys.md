@@ -10,7 +10,7 @@ These are randomly generated ed25519 key pairs that are only present one per cli
 
 Client will only generate a single identity key per blockchain accoun per client. The wallet user could use multiple blockchain accounts with a single client by authorizing one respective identity key for each. Additionally the wallet can use multiple clients with the same blockchain account by authorizing a new identity key on a new client.
 
-Identity Keys are ed25519 key pairs generated internally and the client will expose a CAIP-122 message which includes the public key of the Identity Key pair in the nonce in the form of a did-key.
+Identity Keys are ed25519 key pairs generated internally and the client will expose a CAIP-122 message which includes the public key of the Identity Key pair in the Resources in the form of a did-key.
 
 
 ### Message Format
