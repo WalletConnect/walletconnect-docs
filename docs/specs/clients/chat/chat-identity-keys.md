@@ -92,7 +92,7 @@ When we are registering a proposal encryption key we must use the following mand
 
 * iat - timestamp when jwt was issued 
 * exp - timestamp when jwt must expire
-* iss - public key of the identity key
+* iss - public identity key in form of did:key
 * sub - public key for proposal encryption key
 * aud - key server url used for registering
 * pkh - corresponding blockchain account (did:pkh)
