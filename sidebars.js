@@ -289,6 +289,36 @@ module.exports = {
       items: [
         {
           type: "category",
+          label: "Web3Wallet SDK",
+          collapsible: true,
+          collapsed: true,
+          items: [
+            "kotlin/web3wallet/installation",
+            "kotlin/web3wallet/dapp-usage",
+            "kotlin/web3wallet/wallet-usage",
+          ],
+        },
+        {
+          type: "category",
+          label: "Web3Inbox SDK",
+          collapsible: true,
+          collapsed: true,
+          items: [
+            "kotlin/web3inbox/installation",
+            "kotlin/web3inbox/dapp-usage",
+            "kotlin/web3inbox/wallet-usage",
+          ],
+        }
+      ],
+    },
+    {
+      type: "category",
+      label: "Advanced",
+      className: "menu_outer_list",
+      collapsible: false,
+      items: [
+        {
+          type: "category",
           label: "Sign",
           collapsible: true,
           collapsed: true,
@@ -356,6 +386,36 @@ module.exports = {
       items: [
         {
           type: "category",
+          label: "Web3Wallet SDK",
+          collapsible: true,
+          collapsed: true,
+          items: [
+            "swift/web3wallet/installation",
+            "swift/web3wallet/dapp-usage",
+            "swift/web3wallet/wallet-usage",
+          ],
+        },
+        {
+          type: "category",
+          label: "Web3Inbox SDK",
+          collapsible: true,
+          collapsed: true,
+          items: [
+            "swift/web3inbox/installation",
+            "swift/web3inbox/dapp-usage",
+            "swift/web3inbox/wallet-usage",
+          ],
+        },
+      ],
+    },
+    {
+      type: "category",
+      label: "Advanced",
+      className: "menu_outer_list",
+      collapsible: false,
+      items: [
+        {
+          type: "category",
           label: "Sign",
           collapsible: true,
           collapsed: true,
@@ -408,7 +468,7 @@ module.exports = {
           collapsed: true,
           items: ["swift/router/installation"],
         },
-      ],
+      ]
     },
     {
       type: "category",
