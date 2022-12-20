@@ -294,7 +294,6 @@ module.exports = {
           collapsed: true,
           items: [
             "kotlin/web3wallet/installation",
-            "kotlin/web3wallet/dapp-usage",
             "kotlin/web3wallet/wallet-usage",
           ],
         },
@@ -391,7 +390,6 @@ module.exports = {
           collapsed: true,
           items: [
             "swift/web3wallet/installation",
-            "swift/web3wallet/dapp-usage",
             "swift/web3wallet/wallet-usage",
           ],
         },
