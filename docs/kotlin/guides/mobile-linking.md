@@ -47,7 +47,7 @@ val appMetaData = Core.Model.AppMetaData(
 CoreClient.initialize(relayServerUrl = serverUrl, connectionType = connectionType, application = application, metaData = appMetaData)
 
 val init = Sign.Params.Init(coreClient = CoreClient)
-SignClient.initalize(init)
+SignClient.initialize(init)
 ```
 
 **Heads-up:** To make this flow working well, Wallet must register one of its Android components with the same deep link that it initialized with.
@@ -78,7 +78,7 @@ val appMetaData = Core.Model.AppMetaData(
 
 CoreClient.initialize(relayServerUrl = serverUrl, connectionType = connectionType, application = application, metaData = appMetaData)
 
-val init = Sign.Params.Init(coreClient = CoreClient)
+val init = Sign.Params.Init(core = CoreClient)
 SignClient.initalize(init)
 ```
 
