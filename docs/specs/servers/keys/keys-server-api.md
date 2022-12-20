@@ -72,12 +72,19 @@ Body:
 
 Used to get a cacao matching an identity key
 
-`POST /identity/resolve`
+`GET /identity/resolve`
 
 Query Params:
 
 ```jsonc
 {
     "publicKey": string,
+}```
+
+
+Response:
+
+```jsonc
+{
+    "cacao": CACAO,
 }
-```
