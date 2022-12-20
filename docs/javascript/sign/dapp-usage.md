@@ -118,7 +118,7 @@ try {
     web3Modal.closeModal();
   }
 } catch (e) {
-  console.log(e);
+  console.error(e);
 }
 ```
 
