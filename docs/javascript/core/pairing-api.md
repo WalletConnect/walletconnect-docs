@@ -36,7 +36,7 @@ await sdkClient.core.pairing.activate({ topic: "1b3eda3f4..." })
 // Updates the expiry of an existing pairing, by providing the pairing topic and an `expiry` in seconds (e.g. `60` for one minute from now)
 await sdkClient.core.pairing.updateExpiry({ topic: "1b3eda3f4...", expiry: 60 })
 
-// Updates the client metadata, by providing the pairing topic and the desired metadata.
+// Updates a pairing's metadata, by providing the pairing topic and the desired metadata.
 await sdkClient.core.pairing.updateMetadata({ topic: "1b3eda3f4...", metadata: { name: "MyDapp", ... } })
 
 // Returns an array of all existing pairings.
