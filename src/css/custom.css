@@ -38,11 +38,9 @@ main {
 }
 
 .boxContainer {
-  display: flex;
-  flex-flow: wrap;
-  justify-content: center;
-  row-gap: 1em;
-  column-gap: 1em;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(100%, 1fr));
+  grid-gap: 1rem;
 }
 
 .box {
@@ -53,6 +51,7 @@ main {
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
   padding-inline: 1em;
   padding-top: 1em;
+  /* max-width: 33%; */
 }
 
 .box:hover {
@@ -95,20 +94,20 @@ main {
 }
 
 @media only screen and (min-width: 660px) {
-  .box {
-    flex: 1 33%;
+  .boxContainer {
+    grid-template-columns: repeat(3, minmax(33%, 1fr));
   }
 }
 
 @media only screen and (min-width: 900px) {
-  .box {
-    flex: auto;
+  .boxContainer {
+    grid-template-columns: repeat(2, minmax(50%, 1fr));
   }
 }
 
 @media only screen and (min-width: 1100px) {
-  .box {
-    flex: 1 33%;
+  .boxContainer {
+    grid-template-columns: repeat(3, minmax(33%, 1fr));
   }
 }
 
