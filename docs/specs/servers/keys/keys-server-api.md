@@ -81,3 +81,11 @@ Query Params:
     "publicKey": string,
 }
 ```
+
+Response:
+
+```jsonc
+{
+    "cacao": string
+}
+```
