@@ -10,7 +10,7 @@ These are randomly generated ed25519 key pairs that are only present one per cli
 
 Client will only generate a single identity key per blockchain accoun per client. The wallet user could use multiple blockchain accounts with a single client by authorizing one respective identity key for each. Additionally the wallet can use multiple clients with the same blockchain account by authorizing a new identity key on a new client.
 
-Identity Keys are ed25519 key pairs generated internally and the client will expose a CAIP-122 message which includes the public key of the Identity Key pair in the nonce in the form of a did-key.
+Identity Keys are ed25519 key pairs generated internally and the client will expose a CAIP-122 message which includes the public key of the Identity Key pair in the Resources in the form of a did-key.
 
 
 ### Message Format
@@ -92,7 +92,7 @@ When we are registering a proposal encryption key we must use the following mand
 
 * iat - timestamp when jwt was issued 
 * exp - timestamp when jwt must expire
-* iss - public key of the identity key
+* iss - public identity key in form of did:key
 * sub - public key for proposal encryption key
 * aud - key server url used for registering
 * pkh - corresponding blockchain account (did:pkh)
