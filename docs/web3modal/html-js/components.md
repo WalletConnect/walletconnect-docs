@@ -16,5 +16,6 @@ Following attributes can be set
 interface Attributes {
   icon?: "show" | "hide";
   label?: string;
+  balance?: "show" | "hide";
 }
 ```

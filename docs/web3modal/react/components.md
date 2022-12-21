@@ -20,6 +20,7 @@ import { Web3Button } from "@web3modal/react";
 interface Props {
   icon?: "show" | "hide";
   label?: string;
+  balance?: "show" | "hide";
 }
 
 return <Web3Button />;

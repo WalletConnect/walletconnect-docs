@@ -31,9 +31,7 @@ Possible values for the origin value:
 - `<scheme>://<hostname>:<port>`
 - `<scheme>://*.<hostname>`
 
-Adding `https://dapp.example.com` to the allowlist will only allow requests from that origin. Requests from other origins will be denied. Using localhost (or 127.0.0.1) is also always permitted. 
-
-Updates take 15 minutes to apply.
+Adding `https://dapp.example.com` to the allowlist will only allow requests from that origin. Requests from other origins will be denied. Using localhost (or 127.0.0.1) is also always permitted.  Updates take 15 minutes to apply.
 
 ## Error Codes
 
