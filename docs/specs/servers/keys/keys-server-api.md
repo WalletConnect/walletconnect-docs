@@ -79,7 +79,8 @@ Query Params:
 ```jsonc
 {
     "publicKey": string,
-}```
+}
+```
 
 Response:
 
