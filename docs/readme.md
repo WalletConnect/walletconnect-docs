@@ -9,29 +9,24 @@ If you'd like to make a PR or create an issue for our docs, you can do so by goi
 
 ## Getting Started
 
-WalletConnect comprises four core components and associated APIs:
+WalletConnect is comprimised of three SDKs. 
 
 <Container
   items={[
     {
-      name: "Sign",
-      description: "Sign is a remote signer protocol to communicate securely between web3 wallets and dapps.",
-      url: `/2.0/api/sign`
+      name: "Web3Modal",
+      description: "Web3Modal is a versatile library that makes it super easy to connect users with your Dapp and start interacting with the blockchain.",
+      url: `/2.0/web3modal/about`
     },
     {
-      name: "Auth",
-      description: "Auth is an authentication protocol that can be used to log-in blockchain wallets into apps.",
-      url: `/2.0/api/auth`
+      name: "Web3Wallet",
+      description: "Web3Wallet should simplifies the developer experience for wallet integrations to include both Sign and Auth APIs into a single module/interface.",
+      url: `/2.0/web3wallet/about`
     },
     {
-      name: "Push",
-      description: "Push is a push notification protocol that enables apps to notify users of both off-chain and on-chain events.",
-      url: `/2.0/api/push`
-    },
-    {
-      name: "Chat",
-      description: "Chat is a direct messaging protocol that can enable wallets to message each other.",
-      url: `/2.0/api/chat`
+      name: "Web3Inbox",
+      description: "Web3inbox is a dapp integrated with Push and Chat API’s so users can connect their wallet, receive their Chat or Push messages, and send Chat messages.",
+      url: `/2.0/web3inbox/about`
     }
   ]}
 />
