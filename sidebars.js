@@ -18,12 +18,20 @@ module.exports = {
       className: "menu_outer_list",
       items: [
         {
-          type: "link",
-          label: "Web3Modal SDK",
-          href: "/2.0/web3modal/about",
+          type: "category",
+          label: "SDKs",
+          collapsed: true,
+          collapsible: true,
+          items: [
+            {
+              type: "link",
+              label: "Web3Modal SDK",
+              href: "/2.0/web3modal/about",
+            },
+            "web3wallet/about",
+            "web3inbox/about",
+          ],
         },
-        "web3wallet/about",
-        "web3inbox/about",
         {
           type: "category",
           label: "Cloud",
