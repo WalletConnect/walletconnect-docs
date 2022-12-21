@@ -97,5 +97,5 @@ When we are registering a chat invite key key we must use the following mandator
 * aud - key server url used for registering
 * pkh - corresponding blockchain account (did:pkh)
 
-Expiry will be calculated 30 days (2592000 seconds) from issued date
+Expiry will be calculated 1 hour (3600 seconds) from issued date
 
