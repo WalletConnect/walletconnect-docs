@@ -169,7 +169,7 @@ module.exports = {
       items: [
         {
           type: "category",
-          label: "Web3Modal",
+          label: "Web3Modal SDK",
           collapsible: true,
           collapsed: true,
           items: [
@@ -208,6 +208,27 @@ module.exports = {
             },
             "web3modal/configuration",
             "web3modal/for-wallets",
+          ],
+        },
+        {
+          type: "category",
+          label: "Web3Inbox SDK",
+          collapsible: true,
+          collapsed: true,
+          items: [
+            "javascript/web3inbox/installation",
+            "javascript/web3inbox/dapp-usage",
+            "javascript/web3inbox/wallet-usage",
+          ],
+        },
+        {
+          type: "category",
+          label: "Web3Wallet SDK",
+          collapsible: true,
+          collapsed: true,
+          items: [
+            "javascript/web3wallet/installation",
+            "javascript/web3wallet/wallet-usage",
           ],
         },
       ],
