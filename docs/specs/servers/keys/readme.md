@@ -2,4 +2,4 @@
 
 ## Description
 
-Keys Server indexes Chat proposal encryption keys for discoverability and also verifies identity key ownership 
+Keys Server indexes Chat invite keys for discoverability and also verifies identity key ownership 

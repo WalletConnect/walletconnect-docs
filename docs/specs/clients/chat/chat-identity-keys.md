@@ -86,14 +86,14 @@ When two clients are using the Chat API they need to verify each others Identity
 
 ## Key Authentication
 
-Now that we have generated, authorized and registered Identity Keys we can use them for authentication for [different purposes](./chat-authentication.md) but also importantly we must use it to register the proposal encryption keys
+Now that we have generated, authorized and registered Identity Keys we can use them for authentication for [different purposes](./chat-authentication.md) but also importantly we must use it to register the invite keys
 
-When we are registering a proposal encryption key we must use the following mandatory fields in the jwt:
+When we are registering a chat invite key key we must use the following mandatory fields in the jwt:
 
 * iat - timestamp when jwt was issued 
 * exp - timestamp when jwt must expire
 * iss - public identity key in form of did:key
-* sub - public key for proposal encryption key
+* sub - public key for chat invite key
 * aud - key server url used for registering
 * pkh - corresponding blockchain account (did:pkh)
 

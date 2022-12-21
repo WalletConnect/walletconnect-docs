@@ -1,12 +1,12 @@
 # Keys Server API
 
-## Encryption Keys
+## Invite Keys
 
-### Register Encryption Key
+### Register Invite Key
 
-Used to register a new encryption key
+Used to register a new invite key
 
-`POST /encryption/register`
+`POST /invite/register`
 
 Body:
 
@@ -16,11 +16,11 @@ Body:
 }
 ```
 
-### Resolve Encryption Key
+### Resolve Invite Key
 
-Used to get an encryption key for an account
+Used to get an invite key for an account
 
-`GET /encryption/resolve`
+`GET /invite/resolve`
 
 Query Params:
 
@@ -38,11 +38,11 @@ Response:
 }
 ```
 
-### Remove Encryption Key
+### Remove Invite Key
 
-Used to remove an encryption key from the server
+Used to remove an invite key from the server
 
-`DELETE /encryption/register/:publicKey`
+`DELETE /invite/register/:publicKey`
 
 Body:
 

@@ -38,7 +38,7 @@ In this repository, we document and discuss features that are currently under de
     },
     {
       name: "Keys Server",
-      description: "Keys Server indexes Chat proposal encryption keys for discoverability and also verifies identity key ownership.",
+      description: "Keys Server indexes Chat invite keys for discoverability and also verifies identity key ownership.",
       url: `/2.0/specs/servers/keys`
     }
   ]}
