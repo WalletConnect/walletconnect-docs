@@ -14,7 +14,7 @@ This will be achieved using did-jwt which the different purposes above will have
 * iss - public key of the identity key
 * ksu - key server for identity key verification
 
-Expiry will be calculated 1 day (86400 seconds) from issued date
+Expiry will be calculated 30 days (2592000 seconds) from issued date
 
 
 ## Invite Proposals

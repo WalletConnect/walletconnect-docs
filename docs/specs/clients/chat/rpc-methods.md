@@ -35,7 +35,7 @@ Used to invite a peer through topic I. Requires a success response with associat
 
 | IRN     |          |
 | ------- | -------- |
-| TTL     | 86400    |
+| TTL     | 2592000  |
 | Prompt  | true     |
 | Tag     | 2000     |
 
@@ -51,7 +51,7 @@ Used to invite a peer through topic I. Requires a success response with associat
 
 | IRN     |          |
 | ------- | -------- |
-| TTL     | 86400    |
+| TTL     | 2592000  |
 | Prompt  | false    |
 | Tag     | 2001     |
 ```
@@ -73,7 +73,7 @@ Used to send a message to its peer through topic T.
 
 | IRN     |          |
 | ------- | -------- |
-| TTL     | 86400    |
+| TTL     | 2592000  |
 | Prompt  | true     |
 | Tag     | 2002     |
 ```
@@ -88,7 +88,7 @@ Used to send a message to its peer through topic T.
 
 | IRN     |          |
 | ------- | -------- |
-| TTL     | 86400    |
+| TTL     | 2592000  |
 | Prompt  | false    |
 | Tag     | 2003     |
 ```
@@ -107,7 +107,7 @@ Used to signal to a peer that a chat thread is being left.
 
 | IRN     |          |
 | ------- | -------- |
-| TTL     | 86400    |
+| TTL     | 2592000  |
 | Prompt  | true     |
 | Tag     | 2004     |
 ```
@@ -120,7 +120,7 @@ true
 
 | IRN     |          |
 | ------- | -------- |
-| TTL     | 86400    |
+| TTL     | 2592000  |
 | Prompt  | false    |
 | Tag     | 2005     |
 ```
