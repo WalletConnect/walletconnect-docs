@@ -10,6 +10,24 @@ This library is compatible with NodeJS, browsers and React-Native applications \
 For an example implementation, please refer to our `react-dapp-v2` [example](https://github.com/WalletConnect/web-examples/tree/main/dapps/react-dapp-v2).
 :::
 
+## Install Packages
+
+Install the WalletConnect Web3Modal package.
+
+```bash npm2yarn
+npm install @web3modal/standalone
+```
+
+:::note
+There are different Web3Modal packages depending on your use case.
+
+- `@web3modal/standalone`
+- `@web3modal/react`
+- `@web3modal/html`
+
+To learn about the differences, click [here](https://docs.walletconnect.com/2.0/web3modal/about).
+:::
+
 ## Create a Session
 
 **1. Initiate your WalletConnect client with the relay server, using [your Project ID](../../cloud/relay.md).**
@@ -53,13 +71,21 @@ signClient.on("session_delete", () => {
 });
 ```
 
-**3. Connect the application and specify session permissions.**
+**3. Create a new Web3Modal instance.**
 
 ```javascript
-import QRCodeModal from "@walletconnect/qrcode-modal";
+import Web3Modal from "@web3modal/standalone";
 
-// ...
+const web3Modal = new Web3Modal({
+  projectId: "<YOUR_PROJECT_ID>",
+  // `standaloneChains` can also be specified when calling `web3Modal.openModal(...)` later on.
+  standaloneChains: ["eip155:1"],
+});
+```
 
+**4. Connect the application and specify session permissions.**
+
+```javascript
 try {
   const { uri, approval } = await signClient.connect({
     // Optionally: pass a known prior pairing (e.g. from `signClient.core.pairing.getPairings()`) to skip the `uri` step.
@@ -82,20 +108,17 @@ try {
 
   // Open QRCode modal if a URI was returned (i.e. we're not connecting an existing pairing).
   if (uri) {
-    QRCodeModal.open(uri, () => {
-      console.log("EVENT", "QR Code Modal closed");
-    });
+    web3Modal.openModal({ uri });
+    // Await session approval from the wallet.
+    const session = await approval();
+    // Handle the returned session (e.g. update UI to "connected" state).
+    // * You will need to create this function *
+    onSessionConnect(session);
+    // Close the QRCode modal in case it was open.
+    web3Modal.closeModal();
   }
-
-  // Await session approval from the wallet.
-  const session = await approval();
-  // Handle the returned session (e.g. update UI to "connected" state).
-  await onSessionConnected(session);
 } catch (e) {
   console.error(e);
-} finally {
-  // Close the QRCode modal in case it was open.
-  QRCodeModal.close();
 }
 ```
 

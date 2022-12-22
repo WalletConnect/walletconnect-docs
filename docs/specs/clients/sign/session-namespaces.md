@@ -299,6 +299,44 @@ Throw Error Code should be the frist one caught
 
 ---
 
+### 1.10. Proposal namespaces MAY be empty
+
+Requested Proposal Namespaces:
+
+```json
+{}
+```
+
+Is valid?: Yes
+
+Note: Empty Proposal Namespaces means that the DApp does not have required namespaces and can work with any provided chains. 
+
+Wallet must provide namespaces for ALL supported chains with empty methods and events. 
+
+For example if wallet supports eip155:1, eip155:137, cosmos:cosmoshub-1 chains, Session Namespaces should looks like: 
+
+```json
+{
+  "eip155": {
+    "accounts": [
+      "eip155:1:0xab16a96d359ec26a11e2c2b3d8f8b8942d5bfcdb",
+      "eip155:137:0xab16a96d359ec26a11e2c2b3d8f8b8942d5bfcdb"
+    ],
+    "methods": [],
+    "events": []
+  },
+  "cosmos": {
+    "accounts": [
+      "cosmos:cosmoshub-1:cosmos1pn5a6s4k063608cnt2zue208965lc0m06u9clj",
+    ],
+    "methods": [],
+    "events": []
+  }
+}
+```
+
+---
+
 ## Non-controller side validation of incoming Proposal Namespaces (Dapp)
 
 ---
