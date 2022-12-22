@@ -35,6 +35,7 @@ abstract class Client {
   }): Promise<void>;
 
   // sends a chat message to an active chat thread
+  // This uses a chat queue as described in chat-message-queue.md
   public abstract message(params: {
     topic: string;
     message: string;
