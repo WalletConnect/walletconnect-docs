@@ -309,7 +309,7 @@ Requested Proposal Namespaces:
 
 Is valid?: Yes
 
-Note: Empty Proposal Namespaces means what DApp does not have required namespaces and can work with any provided chains. 
+Note: Empty Proposal Namespaces means that the DApp does not have required namespaces and can work with any provided chains. 
 
 Wallet must provide namespaces for ALL supported chains with empty methods and events. 
 
