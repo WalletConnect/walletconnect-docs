@@ -313,7 +313,7 @@ Note: Empty Proposal Namespaces means that the DApp does not have required names
 
 Wallet must provide namespaces for ALL supported chains with empty methods and events. 
 
-For example if wallet support eip155:1, eip155:137, cosmos:cosmoshub-1 chains Session Namespaces should looks like: 
+For example if wallet supports eip155:1, eip155:137, cosmos:cosmoshub-1 chains, Session Namespaces should looks like: 
 
 ```json
 {
