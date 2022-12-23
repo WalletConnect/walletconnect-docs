@@ -9,28 +9,33 @@ If you'd like to make a PR or create an issue for our docs, you can do so by goi
 
 ## Getting Started
 
-WalletConnect is comprimised of three SDKs. 
+WalletConnect consists of three SDKs: Web3Modal, Web3Wallet, and Web3Inbox.
+
+
+|                 | Web3Modal | Web3Wallet    | Web3Inbox         |
+|-----------------|-----------|---------------|-------------------|
+| Target Audience | dApps     | Wallets       | DApps and Wallets |
+| APIs            | Sign v2   | Sign v2, Auth | Chat, Push        |
 
 <Container
   items={[
     {
       name: "Web3Modal",
-      description: "Web3Modal is a versatile library that makes it super easy to connect users with your Dapp and start interacting with the blockchain.",
+      description: "Web3Modal is a library that makes it easy to connect users to your DApp and interact with the blockchain.",
       url: `/2.0/web3modal/about`
     },
     {
       name: "Web3Wallet",
-      description: "Web3Wallet should simplifies the developer experience for wallet integrations to include both Sign and Auth APIs into a single module/interface.",
+      description: "Web3Wallet simplifies the process of integrating wallets into DApps by combining the Sign and Auth APIs into a single module.",
       url: `/2.0/web3wallet/about`
     },
     {
       name: "Web3Inbox",
-      description: "Web3inbox is a dapp integrated with Push and Chat API’s so users can connect their wallet, receive their Chat or Push messages, and send Chat messages.",
+      description: "Web3Inbox is a DApp integrated with the Chat and Push APIs, allowing users to connect their wallets, receive and send chat messages, and receive push notifications",
       url: `/2.0/web3inbox/about`
     }
   ]}
 />
-
 ## Why use WalletConnect?
 
 WalletConnect improves wallet-to-dapp interoperability in the web3 ecosystem. For dapps, WalletConnect can seamlessly integrate support for more than 150+ crypto wallets without much hassle. Wallets can easily integrate WalletConnect with our JavaScript, Swift or Kotlin SDK's.
