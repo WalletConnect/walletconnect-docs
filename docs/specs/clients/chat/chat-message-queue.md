@@ -23,14 +23,13 @@ On receive queue message call with message payload and topic:
 
    
 1. call `setMessage` with `MessageStatus` = `pending`
-3. If `core.relayer.connected` continue, else call `core.relayer.transportOpen`.
-   After successful `transportOpen` call, `queue_message` is fired once more
-   with the same payload.
-4. If `payload.retryAttempts` >= `max_retry_attempts`, the message's life cycle
+3. If `core.relayer.connected` continue, else fire `queue_message` with the 
+   same payload. Do not add to retry attempts.
+5. If `payload.retryAttempts` >= `max_retry_attempts`, the message's life cycle
    ends and `setMessage` is called with `MessageStatus` = `Failed`. Else,
    continue
-5. Attempt to send the message using  `send_request`
-6. If successful, that message's life cycle ends and `setMessage` is called with
+6. Attempt to send the message using  `send_request`
+7. If successful, that message's life cycle ends and `setMessage` is called with
    `MessageStatus` = `Delivered`. 
    If it fails, a `"queue_message"` event is fired once more, with the message
    payload modified to have `retryAttempts` += 1
