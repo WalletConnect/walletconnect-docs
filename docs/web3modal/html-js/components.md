@@ -19,3 +19,13 @@ interface Attributes {
   balance?: "show" | "hide";
 }
 ```
+
+## `<w3m-network-switch>`
+
+Pre-styled network switch button that reacts to modal's theme and network changes.
+
+```html
+<body>
+  <w3m-network-switch></w3m-network-switch>
+</body>
+```
