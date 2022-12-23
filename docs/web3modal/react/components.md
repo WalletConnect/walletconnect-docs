@@ -25,3 +25,13 @@ interface Props {
 
 return <Web3Button />;
 ```
+
+## Web3NetworkSwitch
+
+Pre-styled network switch button that reacts to modal's theme and network changes.
+
+```tsx
+import { Web3NetworkSwitch } from "@web3modal/react";
+
+return <Web3NetworkSwitch />;
+```
