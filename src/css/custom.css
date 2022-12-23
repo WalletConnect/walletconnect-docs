@@ -54,6 +54,21 @@ main {
   /* max-width: 33%; */
 }
 
+.tableMatrix {
+  border-collapse: collapse;
+  border-radius: 7px;
+  overflow: hidden;
+  background: #f7fafc;
+  border: 1px solid #edf2f7;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+
+}
+
+[data-theme="dark"] .tableMatrix {
+  background-color: #242124;
+  border: 1px solid #000000;
+}
+
 .box:hover {
   background-color: #ebedf0;
   cursor: pointer;
@@ -64,7 +79,6 @@ main {
   border: 1px solid #000000;
   border-radius: 7px;
   background-color: #242124;
-  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
 
 [data-theme="dark"] .box:hover {
