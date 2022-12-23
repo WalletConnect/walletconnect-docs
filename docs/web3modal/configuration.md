@@ -1,5 +1,7 @@
 # Configuration
 
+Web3Modal is configurable via combination of options below and [wagmi.sh](https://wagmi.sh).
+
 ## General Options
 
 ### projectId (optional)
