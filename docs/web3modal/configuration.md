@@ -1,5 +1,7 @@
 # Configuration
 
+Web3Modal is configurable via combination of options below and [wagmi.sh](https://wagmi.sh).
+
 ## General Options
 
 ### projectId (optional)
@@ -83,12 +85,62 @@ tokenImages: [
 ];
 ```
 
+### defaultChain (optional)
+
+Set default / pre-selected chain. Defaults to `mainnet` if it was configured, or first chain in array of chains.
+
+```ts
+defaultChain: polygon;
+```
+
+### explorerAllowList (optional)
+
+Some wallet data in Web3Modal is fetched from our explorer api [explorer.walletconnect.com](https://explorer.walletconnect.com/?type=wallet). You can define an allow list only for the wallets that you want to be shown. Allow list is an array of wallet id's. You can get / copy these id's from the explorer link mentioned before. Defaults to `undefined`.
+
+```ts
+explorerAllowList: [
+  // rainbow
+  "1ae92b26df02f0abca6304df07debccd18262fdf5fe82daa81593582dac9a369",
+  // trust
+  "4622a2b2d6af1c9844944291e5e7351a6aa24cd7b23099efac1b2fd875da31a0",
+];
+```
+
+### explorerDenyList (optional)
+
+Some wallet data in Web3Modal is fetched from our explorer api [explorer.walletconnect.com](https://explorer.walletconnect.com/?type=wallet). You can define a deny list for the wallets that you want to be excluded. Deny list is an array of wallet id's. You can get / copy these id's from the explorer link mentioned before. Defaults to `undefined`.
+
+```ts
+explorerDenyList: [
+  // rainbow
+  "1ae92b26df02f0abca6304df07debccd18262fdf5fe82daa81593582dac9a369",
+  // trust
+  "4622a2b2d6af1c9844944291e5e7351a6aa24cd7b23099efac1b2fd875da31a0",
+];
+```
+
 ### enableNetworkView (optional)
 
-If more than 1 chain was provided in modal or wagmi configuration users will be show network selection view before selecting a wallet, this option can enable or disable this behavior. Defaults to `true`
+If more than 1 chain was provided in modal or wagmi configuration users will be show network selection view before selecting a wallet, this option can enable or disable this behavior. Defaults to `false`
 
 ```ts
 enableNetworkView: true;
+```
+
+### termsOfServiceUrl (optional)
+
+String url to your terms of service page, if specified will append special "legal info" footer to the modal. Defaults to `undefined`
+
+```ts
+termsOfServiceUrl: "https://example.com/terms-and-conditions";
+```
+
+### privacyPolicyUrl (optional)
+
+String url to your privacy policy page, if specified will append special "legal info" footer to the modal. Defaults to `undefined`
+
+```ts
+privacyPolicyUrl: "https://example.com/privacy-policy";
 ```
 
 ## Theming Options
@@ -122,6 +174,14 @@ Changes Web3Modal's background to animated gradient or solid color. Defaults to 
 
 ```ts
 themeBackground: "gradient" | "themeColor";
+```
+
+### themeZIndex (optional)
+
+Changes Web3Modal's z-index. Defaults to `89`.
+
+```ts
+themeZIndex: 9999;
 ```
 
 ## Standalone Mode Options
