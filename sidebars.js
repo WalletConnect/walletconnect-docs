@@ -55,7 +55,6 @@ module.exports = {
         "advanced/faq",
         "advanced/glossary",
         "advanced/migrating-from-v1.0",
-        "advanced/chain-ecosystem-onboarding",
         {
           type: "category",
           label: "RPC Reference",
