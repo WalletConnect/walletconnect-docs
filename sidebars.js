@@ -29,7 +29,6 @@ module.exports = {
               href: "/2.0/web3modal/about",
             },
             "web3wallet/about",
-            "web3inbox/about",
           ],
         },
         {
@@ -228,17 +227,6 @@ module.exports = {
         },
         {
           type: "category",
-          label: "Web3Inbox SDK",
-          collapsible: true,
-          collapsed: true,
-          items: [
-            "javascript/web3inbox/installation",
-            "javascript/web3inbox/dapp-usage",
-            "javascript/web3inbox/wallet-usage",
-          ],
-        },
-        {
-          type: "category",
           label: "Web3Wallet SDK",
           collapsible: true,
           collapsed: true,
@@ -351,17 +339,6 @@ module.exports = {
             "kotlin/web3wallet/wallet-usage",
           ],
         },
-        {
-          type: "category",
-          label: "Web3Inbox SDK",
-          collapsible: true,
-          collapsed: true,
-          items: [
-            "kotlin/web3inbox/installation",
-            "kotlin/web3inbox/dapp-usage",
-            "kotlin/web3inbox/wallet-usage",
-          ],
-        },
       ],
     },
     {
@@ -445,17 +422,6 @@ module.exports = {
           items: [
             "swift/web3wallet/installation",
             "swift/web3wallet/wallet-usage",
-          ],
-        },
-        {
-          type: "category",
-          label: "Web3Inbox SDK",
-          collapsible: true,
-          collapsed: true,
-          items: [
-            "swift/web3inbox/installation",
-            "swift/web3inbox/dapp-usage",
-            "swift/web3inbox/wallet-usage",
           ],
         },
       ],
