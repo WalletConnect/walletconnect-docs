@@ -11,7 +11,7 @@ If you'd like to make a PR or create an issue for our docs, you can do so by goi
 
 ## Getting Started
 
-WalletConnect consists of three SDKs: Web3Modal, Web3Wallet, and Web3Inbox.
+WalletConnect consists of two SDKs: Web3Modal and Web3Wallet.
 
 <Container
 items={[
@@ -25,30 +25,23 @@ name: "Web3Wallet",
 description: "Web3Wallet simplifies the process of integrating wallets into dApps by combining the Sign and Auth APIs into a single module.",
 url: `/2.0/web3wallet/about`
 },
-{
-name: "Web3Inbox",
-description: "Web3Inbox is a dApp integrated with the Chat and Push APIs, allowing users to connect their wallets, receive and send chat messages, and receive push notifications",
-url: `/2.0/web3inbox/about`
-}
 ]}
 />
 
 ## Compare the Differences
 
 <Table 
-headers={[ "Feature", "Web3Modal SDK", "Web3Wallet SDK", "Web3Inbox SDK" ]}
+headers={[ "Feature", "Web3Modal SDK", "Web3Wallet SDK" ]}
 data={[
 {
 feature: "Target Builders",
 web3Modal: "dApps",
 web3Wallet: "Wallets",
-web3Inbox: "dApps, Wallets"
 },
 {
 feature: "APIs",
-web3Modal: "Sign v2",
-web3Wallet: "Sign v2, Auth",
-web3Inbox: "Push, Chat"
+web3Modal: "Sign v1.0",
+web3Wallet: "Sign v2.0, Auth",
 }
 ]}
 />

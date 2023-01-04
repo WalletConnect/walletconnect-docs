@@ -51,7 +51,6 @@ main {
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
   padding-inline: 1em;
   padding-top: 1em;
-  /* max-width: 33%; */
 }
 
 .tableMatrix {
@@ -61,7 +60,6 @@ main {
   background: #f7fafc;
   border: 1px solid #edf2f7;
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-
 }
 
 [data-theme="dark"] .tableMatrix {
