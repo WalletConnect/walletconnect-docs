@@ -233,6 +233,7 @@ module.exports = {
           items: [
             "javascript/web3wallet/installation",
             "javascript/web3wallet/wallet-usage",
+            "javascript/web3wallet/migration-guide",
           ],
         },
       ],
