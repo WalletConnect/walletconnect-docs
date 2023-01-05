@@ -223,4 +223,4 @@ Web3Wallet.formatMessage(formatMessage)
 ```
 
 ### **Sample App**
-To check more in details go and visit our Web3Wallet implementation app [here](https://github.com/WalletConnect/WalletConnectKotlinV2/tree/develop/samples/web3wallet)
+To check more in details go and visit our Web3Wallet implementation app [here](https://github.com/WalletConnect/WalletConnectKotlinV2/tree/develop/samples/web3wallet).
