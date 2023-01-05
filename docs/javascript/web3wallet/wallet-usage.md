@@ -1,10 +1,8 @@
-# Wallet Useage
-
-JavaScript | Web3Wallet | Wallets
+# Wallet Usage
 
 ## Initialization
 
-Create a new instance from `Core` and initialize it with a `projectId` created in the first step. Next, create a wagmi Client instance using createClient, and pass the result from configureChains to it.
+Create a new instance from `Core` and initialize it with a `projectId` created from [installation](./installation.md). Next, create web3Wallet instance by calling `init` on `Web3Wallet`. Passing in the options object containing metadata about the app and an optional relay URL.
 
 ```javascript
 import { Core } from "@walletconnect/core";
@@ -21,20 +19,20 @@ const web3wallet = await Web3Wallet.init({
         description: "Demo Client as Wallet/Peer",
         url: "www.walletconnect.com",
         icons: [],
+         // optional parameters
+        relayUrl: "<YOUR RELAY URL>",
     }
 })
 ```
 
-## Pairing
+## Session Approval
 
-The `session_proposal` event is triggered when a dApp initiates a new WalletConnect session with a user's wallet, and includes a `proposal` object with information about the dApp and requested permissions. This event is emitted by the dApp and received by the wallet. The wallet should display a prompt for the user to approve or reject the session, and if approved, should call the `approveSession` method with the `proposal.id` and requested `namespaces`.
+The `session_proposal` event is emitted when a dapp initiates a new session with a user's wallet. The event will include a `proposal` object with information about the dapp and requested permissions. The wallet should display a prompt for the user to approve or reject the session. If approved, call `approveSession` and pass in the `proposal.id` and requested `namespaces`.
 
-The `pair` method initiates a WalletConnect pairing process with a dApp using the given `uri` (QR code from the dApps).
+The `pair` method initiates a WalletConnect pairing process with a dapp using the given `uri` (QR code from the dapps). To learn more about pairing, checkout out the [docs](../core/pairing-api.md).
 
 ```javascript
 web3wallet.on("session_proposal", async (proposal) => {
-    // should display a prompt for the user to approve or reject the session 
-
     const session = await web3wallet.approveSession({
         id: proposal.id,
         namespaces,
@@ -43,22 +41,60 @@ web3wallet.on("session_proposal", async (proposal) => {
 await web3wallet.core.pairing.pair({ uri })
 ```
 
+## Session Rejection
+
+In the event you want to reject the session proposal, call the `rejectSession` method. The `getSDKError` function comes from the `@walletconnect-utils` [library](https://github.com/WalletConnect/walletconnect-monorepo/tree/v2.0/packages/utils).
+
+```javascript
+web3wallet.on("session_proposal", async (proposal) => {
+    const session = await web3wallet.rejectSession({
+        id: proposal.id,
+        reason: getSdkError('USER_REJECTED_METHODS')
+    });
+});
+```
+
+## Session Disconnect
+
+If either the dapp or the wallet decides to disconnect the session, the `session_delete` event will be emitted. The wallet should listen for this event in order to update the UI. 
+
+To disconnect a session from the wallet, call the `disconnectSession` function and pass in the `topic` and `reason`. You can use the `getSDKError` function, which is available in the `@walletconnect-utils` [library](https://github.com/WalletConnect/walletconnect-monorepo/tree/v2.0/packages/utils).
+
+```javascript
+await web3wallet.disconnectSession({ topic, reason: getSdkError('USER_DISCONNECTED') })
+```
+
 ## Responding to Session Requests
 
-The `session_request` event is triggered when a dApp sends a request to the wallet for a specific action, such as signing a transaction. This event is emitted by the dApp and received by the wallet.
+The `session_request` event is triggered when a dapp sends a request to the wallet for a specific action, such as signing a transaction. This event is emitted by the dapp and received by the wallet. To respond to the request, wallets should call the respondSessionRequest function and pass in details from the request. You can then approve or reject the request based on the response.
 
 ```javascript
 web3wallet.on("session_request", (event) => {
-  // process the request
   const { id, method, params } = event.request;
 
   await web3wallet.respondSessionRequest({ id, result: response });
 });
 ```
 
+## Updating a Session
+
+The `session_update` event is emitted from the wallet when the session is updated by calling `updateSession`. To update a session, pass in the `topic` and the new namespace.
+
+```javascript
+await web3wallet.updateSession({ topic, namespaces: newNs })
+```
+
+## Extend a Session
+
+To extend the session, call the `extendSession` method and pass in the new `topic`. The `session_update` event will be emitted from the wallet.
+
+```javascript
+await web3wallet.extendSession({ topic: pairing.topic });
+```
+
 ## Emit Session Events
 
-To emit sesssion events, call the `emitSessionEvent` and pass in the params. In this exmaple, the wallet will emit `sesssion_event` when the wallet switches chains while on Ethereum Mainnet.
+To emit sesssion events, call the `emitSessionEvent` and pass in the params. In the example, the wallet will emit `sesssion_event` when the wallet switches chains while on the Ethereum Mainnet.
 
 ```javascript
 await web3wallet.emitSessionEvent({
@@ -66,12 +102,4 @@ await web3wallet.emitSessionEvent({
     event: { name: 'chainChanged', data: 'Hello World' },
     chainId: 'eip155:1'
 })
-```
-
-## Extend a Session
-
-To extend the session, call the `extendSession` method and pass in the new `topic`.
-```javascript
-
-await web3wallet.extendSession({ topic: pairing.topic });
 ```
