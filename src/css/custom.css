@@ -60,6 +60,7 @@ main {
   background: #f7fafc;
   border: 1px solid #edf2f7;
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  width: auto;
 }
 
 [data-theme="dark"] .tableMatrix {
