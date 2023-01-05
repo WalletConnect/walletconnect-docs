@@ -40,7 +40,7 @@ web3Wallet: "Wallets",
 },
 {
 feature: "APIs",
-web3Modal: "Sign v1.0",
+web3Modal: "Sign v1.0, Sign v2.0, Auth",
 web3Wallet: "Sign v2.0, Auth",
 }
 ]}
