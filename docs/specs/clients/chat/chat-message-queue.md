@@ -30,7 +30,8 @@ On receive queue message call with message payload and topic:
    continue
 6. Attempt to send the message using  `send_request`
 7. If successful, that message's life cycle ends and `setMessage` is called with
-   `MessageStatus` = `Sent`. 
+   `MessageStatus` = `Sent`. Finally, a `queued_message_delivered` event is
+   fired.
    If it fails, a `"queue_message"` event is fired once more, with the message
    payload modified to have `retryAttempts` += 1
 
