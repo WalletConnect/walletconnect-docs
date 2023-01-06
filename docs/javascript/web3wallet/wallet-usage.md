@@ -89,7 +89,7 @@ await web3wallet.updateSession({ topic, namespaces: newNs })
 To extend the session, call the `extendSession` method and pass in the new `topic`. The `session_update` event will be emitted from the wallet.
 
 ```javascript
-await web3wallet.extendSession({ topic: pairing.topic });
+await web3wallet.extendSession({ topic });
 ```
 
 ## Emit Session Events
