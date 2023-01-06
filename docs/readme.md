@@ -31,7 +31,7 @@ url: `/2.0/web3wallet/about`
 ## Compare the Differences
 
 <Table 
-headers={[ "Feature", "Web3Modal SDK", "Web3Wallet SDK" ]}
+headers={[ "SDKs", "Web3Modal", "Web3Wallet" ]}
 data={[
 {
 feature: "Target Builders",
