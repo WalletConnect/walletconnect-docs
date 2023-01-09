@@ -20,7 +20,18 @@ import { Web3Button } from "@web3modal/react";
 interface Props {
   icon?: "show" | "hide";
   label?: string;
+  balance?: "show" | "hide";
 }
 
 return <Web3Button />;
+```
+
+## Web3NetworkSwitch
+
+Pre-styled network switch button that reacts to modal's theme and network changes.
+
+```tsx
+import { Web3NetworkSwitch } from "@web3modal/react";
+
+return <Web3NetworkSwitch />;
 ```

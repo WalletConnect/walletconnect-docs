@@ -6,8 +6,8 @@
 interface RequestParams {
   chainId: string;
   domain: string;
-  nonce: string;
   aud: string;
+  nonce: string;
   type?: string;
   nbf?: string;
   exp?: string;
@@ -16,7 +16,6 @@ interface RequestParams {
   resources?: string[];
 }
 ```
-
 ## Respond Params
 
 ```typescript
