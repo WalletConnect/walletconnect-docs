@@ -84,10 +84,10 @@ abstract class Client {
   // subscribe to new chat messages received
   public abstract on("chat_message", ({ topic: string, payload: Message }) => {}): void;
   
-  // subscribe to new chat messages received
+  // Internal use only, read more chat-message-queue.md
   public abstract on("queue_message", ({ topic: string, payload: Message }) => {}): void;
   
-  // subscribe to new chat messages received
+  // subscribe to queued messages that got delivered
   public abstract on("queued_message_delivered", ({ topic: string, payload: Message }) => {}): void;
 
   // subscribe to new chat thread left
