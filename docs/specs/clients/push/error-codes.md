@@ -4,7 +4,7 @@
 ## REJECTED
 
 ```sh
-case .userRejected return 1000
+case .userRejected return 4001
 ```
 
 ## INVALID
