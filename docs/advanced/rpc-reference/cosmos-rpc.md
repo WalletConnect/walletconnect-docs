@@ -15,7 +15,7 @@ This method returns an array of key pairs available to sign from the wallet mapp
 ### Returns
 
     1.`Array` - Array of accounts:
-    	1.1. `Object` - Account Data object with paramters:
+    	1.1. `Object` - Account Data object with parameters:
     		1.1.1. `algo` : `STRING` - algorithm used for signing
     		1.1.2. `address` : `STRING` - corresponding address for keypair
     		1.1.3. `pubkey` : `STRING` - public key for keypair
@@ -47,7 +47,7 @@ This method returns an array of key pairs available to sign from the wallet mapp
 
 ## cosmos_signDirect
 
-This method returns a signature for the provided document to be signed targetting the requested signer address corresponding to the keypair returned by the account data.
+This method returns a signature for the provided document to be signed targeting the requested signer address corresponding to the keypair returned by the account data.
 
 ### Parameters
 
@@ -106,7 +106,7 @@ This method returns a signature for the provided document to be signed targettin
 
 ## cosmos_signAmino
 
-This method returns a signature for the provided document to be signed targetting the requested signer address corresponding to the keypair returned by the account data.
+This method returns a signature for the provided document to be signed targeting the requested signer address corresponding to the keypair returned by the account data.
 
 ### Parameters
 

@@ -2,7 +2,7 @@
 
 ### Initial configurations
 
-Make sure what you properly configure Networking, Pair Clients and SignerFactory first 
+Make sure what you properly configure Networking, Pair Clients and SignerFactory first
 - [Networking](../core/networking-configuration.md)
 - [Pairing](../core/pairing-usage.md)
 - [SignerFactory](./signer-configuration.md)
@@ -18,7 +18,7 @@ Auth.configure(
 )
 ```
 
-### Completed Auth SDK configuration: 
+### Completed Auth SDK configuration:
 
 ``` swift
 Networking.configure(projectId: <Project ID>, socketFactory: <SocketFactory>)
@@ -72,7 +72,7 @@ try await Auth.instance.reject(requestId: request.id)
 
 ### Get pending requests
 
-if you've missed some requests you can querry them with
+if you've missed some requests you can query them with
 ```swift 
 Auth.instance.getPendingRequests()
 ```

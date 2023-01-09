@@ -21,7 +21,7 @@ CoreClient.initialize(relayServerUrl = serverUrl, connectionType = connectionTyp
 val init = Sign.Params.Init(core = CoreClient)
 
 SignClient.initialize(init) { error ->
-    // Error will be thrown if there's an isssue during initalization
+    // Error will be thrown if there's an issue during initialization
 }
 ```
 

@@ -15,7 +15,7 @@ Relay is defined by the transport protocol used for the two clients to publish a
 
 ## Session
 
-Session is a topic encrypted by a symmetric key derived using a key agreement established after an approved proposal and it has a controller pariticipant that can update its accounts, methods, events and expiry
+Session is a topic encrypted by a symmetric key derived using a key agreement established after an approved proposal and it has a controller participant that can update its accounts, methods, events and expiry
 
 ```jsonc
 {
@@ -129,7 +129,7 @@ Response is sent by the responder client and can either be an approval or reject
 
 ## Settlement
 
-Settelement is sent by the responder after approval and it's broadcasted right after the response on the new topic derived from the hashed symmetric key from the key agreement
+Settlement is sent by the responder after approval and it's broadcasted right after the response on the new topic derived from the hashed symmetric key from the key agreement
 
 ```jsonc
 {

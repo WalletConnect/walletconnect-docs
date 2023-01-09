@@ -21,7 +21,7 @@ CoreClient.initialize(relayServerUrl = serverUrl, connectionType = connectionTyp
 val init = Sign.Params.Init(core = CoreClient)
 
 SignClient.initialize(init) { error ->
-    // Error will be thrown if there's an issue during initalization
+    // Error will be thrown if there's an issue during initialization
 }
 ```
 
@@ -180,7 +180,7 @@ to `SignClient.Update`.
 val sessionTopic: String = /*Topic of Session*/
 val extendParams = Sign.Params.Extend(sessionTopic = sessionTopic)
 
-WalletConnectClient.extend(exdendParams) { error -> /*callback for error while extending a session*/ }
+WalletConnectClient.extend(extendParams) { error -> /*callback for error while extending a session*/ }
 ```
 
 To extend a session, create a `Sign.Params.Extend` object with the session's topic to update the session with to `Sign.Extend`. Session is

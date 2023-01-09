@@ -295,7 +295,7 @@ Is valid?: No
 Note: Even though, the first proposal namespace is valid the second being invalid makes whole proposal invalid
 
 Throw Message should be the first one caught
-Throw Error Code should be the frist one caught
+Throw Error Code should be the first one caught
 
 ---
 
