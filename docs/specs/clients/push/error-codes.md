@@ -7,7 +7,6 @@
 case .invalidProposal: return 1000
 ```
 
-
 ## REJECTED
 
 ```sh
@@ -19,8 +18,6 @@ case .userRejected return 5000
 ```sh
 case .userUnsubscribed return 5000
 ```
-
-
 
 ## FAILURE
 
