@@ -1,21 +1,30 @@
 
 # Error Codes
 
-## REJECTED
-
-```sh
-case .userRejected return 4001
-```
-
 ## INVALID
 
 ```sh
-case .proposalInvalid: return 6000
+case .invalidProposal: return 1000
 ```
+
+
+## REJECTED
+
+```sh
+case .userRejected return 5000
+```
+
+## REASON
+
+```sh
+case .userUnsubscribed return 5000
+```
+
+
 
 ## FAILURE
 
 ```sh
-case .approvalFailed: return 7000
-case .rejectionFailed: return 7000
+case .approvalFailed: return 7002
+case .rejectionFailed: return 7003
 ```
