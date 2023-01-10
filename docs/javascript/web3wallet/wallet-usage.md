@@ -18,9 +18,7 @@ const web3wallet = await Web3Wallet.init({
         name: "Demo app",
         description: "Demo Client as Wallet/Peer",
         url: "www.walletconnect.com",
-        icons: [],
-         // optional parameters
-        relayUrl: "<YOUR RELAY URL>",
+        icons: []
     }
 })
 ```
