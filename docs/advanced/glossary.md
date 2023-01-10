@@ -127,7 +127,7 @@ The dapp validates if the received proposal namespaces comply with the session n
       "eip155:137:0xab16a96d359ec26a11e2c2b3d8f8b8942d5bfcdb",
       "eip155:1:0xab16a96d359ec26a11e2c2b3d8f8b8942d5bfcdb"
     ],
-    "methods": ["eth_sign"]
+    "methods": ["eth_sign"],
     "events": ["accountsChanged"]
   },
   "cosmos": {
