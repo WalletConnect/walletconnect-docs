@@ -26,7 +26,7 @@ The following publishers are available to subscribe:
     public var sessionProposalPublisher: AnyPublisher<Session.Proposal, Never> 
     public var sessionRequestPublisher: AnyPublisher<Request, Never> 
     public var socketConnectionStatusPublisher: AnyPublisher<SocketConnectionStatus, Never> 
-    public var sessionSettlePublisher: AnyPublisher<Session, Never> 
+    public var sessionsPublishers: AnyPublisher<Session, Never> 
     public var sessionDeletePublisher: AnyPublisher<(String, Reason), Never> 
     public var sessionResponsePublisher: AnyPublisher<Response, Never> 
     public var sessionRejectionPublisher: AnyPublisher<(Session.Proposal, Reason), Never> 
@@ -100,9 +100,9 @@ Example session namespaces response:
 ```swift
  Web3Wallet.instance.approve(proposalId: "proposal_id", namespaces: [String: SessionNamespace])
 ```
-When session is sucessfully approved `sessionSettlePublisher` will publish a `Session`
+When session is sucessfully approved `sessionsPublishers` will publish a `Session`
 ```swift
-Web3Wallet.instance.sessionSettlePublisher
+Web3Wallet.instance.sessionsPublishers
     .receive(on: DispatchQueue.main)
     .sink { [weak self] _ in
         self?.reloadSessions()
