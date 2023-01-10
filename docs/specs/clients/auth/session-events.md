@@ -1,8 +1,9 @@
 import Table from '../../../components/Table';
 
 # Session Events
-
 ## Events
+
+You can set up event listeners to perform an action if these events are emitted.
 
 <Table 
 headers={[ "Events", "Description" ]}
@@ -18,162 +19,36 @@ description: "Sent by the WalletConnect server when it acceps or rejects an auth
 ]}
 />
 
-## Methods
+## Triggering Events
+
+To trigger one of the events from above, you generally need to call an action. Below are a list of methods and their associated events. This is not a full list of the function available, just the ones that emit an event.
 
 <Table 
-headers={[ "Sign v2", "Web3Wallet", "Auth", "Description", "Event On", "Event Triggered" ]}
+headers={[ "Method", "Description", "Event On", "Event Triggered" ]}
 data={[
 {
-methodSign: "connect",
-methodWallet: "?",
-methodAuth: "?",
-description: "Establishes a connection with a WalletConnect server",
-eventOn: "N/A",
-eventTriggered: "session_connect"
-},
-{
-methodSign: "connect",
-methodWallet: "?",
-methodAuth: "?",
-description: "Establishes a connection with a WalletConnect server",
-eventOn: "N/A",
-eventTriggered: "session_connect"
-},
-{
-methodSign: "pair",
-methodWallet: "?",
-methodAuth: "jshadvas",
-description: "Pair with a WalletConnect server using a pairing topic and URI",
-eventOn: "N/A",
-eventTriggered: "session_connect"
-},
-{
-methodSign: "approve",
-methodWallet: "approveSession",
-methodAuth: "jshadvas",
-description: "Establishes a connection with a WalletConnect server",
-eventOn: "N/A",
-eventTriggered: "session_connect"
-},
-{
-methodSign: "reject",
-methodWallet: "rejectSession",
-methodAuth: "jshadvas",
-description: "Establishes a connection with a WalletConnect server",
-eventOn: "N/A",
-eventTriggered: "session_connect"
-},
-{
-methodSign: "update",
-methodWallet: "updateSession",
-methodAuth: "jshadvas",
-description: "Establishes a connection with a WalletConnect server",
-eventOn: "N/A",
-eventTriggered: "session_connect"
-},
-{
-methodSign: "extend",
-methodWallet: "extendSession",
-methodAuth: "jshadvas",
-description: "Establishes a connection with a WalletConnect server",
-eventOn: "N/A",
-eventTriggered: "session_connect"
-},
-{
-methodSign: "request",
-methodWallet: "X",
 methodAuth: "request",
 description: "Send a method call request to a WalletConnect server",
-eventOn: "N/A",
-eventTriggered: "session_connect"
+eventOn: "none",
+eventTriggered: "auth_request"
 },
 {
-methodSign: "respond",
-methodWallet: "respondSessionRequest",
-methodAuth: "X",
-description: "Responds to a session request",
-eventOn: "client.on('session_request')",
-eventTriggered: "session_respond"
-},
-{
-methodSign: "ping",
-methodWallet: "jshadvas",
-methodAuth: "jshadvas",
-description: "Establishes a connection with a WalletConnect server",
-eventOn: "N/A",
-eventTriggered: "session_connect"
-},
-{
-methodSign: "emit",
-methodWallet: "emitSessionEvent",
-methodAuth: "jshadvas",
-description: "Emits an event to an active session",
-eventOn: "N/A",
-eventTriggered: "session_event"
-},
-{
-methodSign: "disconnect",
-methodWallet: "disconnectSession",
-methodAuth: "jshadvas",
-description: "Disconnects ",
-eventOn: "N/A",
-eventTriggered: "session_connect"
-},
-{
-methodSign: "find",
-methodWallet: "jshadvas",
-methodAuth: "jshadvas",
-description: "Establishes a connection with a WalletConnect server",
-eventOn: "N/A",
-eventTriggered: "session_connect"
-},
-{
-methodSign: "getPendingSessionRequests",
-methodWallet: "jshadvas",
-methodAuth: "jshadvas",
-description: "Establishes a connection with a WalletConnect server",
-eventOn: "N/A",
-eventTriggered: "session_connect"
-},
-{
-methodSign: "getAll",
-methodWallet: "jshadvas",
-methodAuth: "jshadvas",
-description: "Establishes a connection with a WalletConnect server",
-eventOn: "N/A",
-eventTriggered: "session_connect"
-},
-{
-methodSign: "proposal.getAll",
-methodWallet: "getPendingSessionProposals",
-methodAuth: "jshadvas",
-description: "Establishes a connection with a WalletConnect server",
-eventOn: "N/A",
-eventTriggered: "session_connect"
-},
-{
-methodSign: "x",
-methodWallet: "respondAuthRequest",
 methodAuth: "respond",
-description: "Establishes a connection with a WalletConnect server",
-eventOn: "N/A",
-eventTriggered: "session_connect"
+description: "Responds to an authoirzation request",
+eventOn: "client.on('auth_request')",
+eventTriggered: "auth_response"
 },
 {
-methodSign: "x",
-methodWallet: "getPendingAuthRequests",
 methodAuth: "getPendingRequests",
 description: "Establishes a connection with a WalletConnect server",
-eventOn: "N/A",
-eventTriggered: "session_connect"
+eventOn: "none",
+eventTriggered: "none"
 },
 {
-methodSign: "x",
-methodWallet: "formatMessage",
 methodAuth: "formatMessage",
 description: "Establishes a connection with a WalletConnect server",
-eventOn: "N/A",
-eventTriggered: "session_connect"
+eventOn: "none",
+eventTriggered: "none"
 },
 ]}
 />
