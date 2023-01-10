@@ -367,6 +367,7 @@ module.exports = {
           items: [
             "kotlin/web3wallet/installation",
             "kotlin/web3wallet/wallet-usage",
+            "kotlin/web3wallet/migration-guide",
           ],
         },
       ],
@@ -452,6 +453,7 @@ module.exports = {
           items: [
             "swift/web3wallet/installation",
             "swift/web3wallet/wallet-usage",
+            "swift/web3wallet/migration-guide",
           ],
         },
       ],
