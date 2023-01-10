@@ -7,7 +7,12 @@
 Programmatically open the modal.
 
 ```js
-web3modal.openModal();
+// Open modal (if route is not provided, modal opens view based on connection / config status)
+export interface Options {
+  route?: "Account" | "ConnectWallet" | "Help" | "SelectNetwork";
+}
+
+await web3modal.openModal(options?: Options);
 ```
 
 ### web3modal.closeModal
