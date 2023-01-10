@@ -41,28 +41,14 @@ Session is a topic encrypted by a symmetric key derived using a key agreement es
     "<namespace_name>" : {
       "accounts": [string],
       "methods": [string],
-      "events": [string],
-      "extension": [ // optional
-        {
-          "accounts": [string],
-          "methods": [string],
-          "events": [string],
-        }
-      ]
+      "events": [string]
     }
   },
   "requiredNamespaces": {
     "<namespace_name>" : {
       "chains": [string],
       "methods": [string],
-      "events": [string],
-      "extension": [ // optional
-        {
-          "chains": [string],
-          "methods": [string],
-          "events": [string],
-        }
-      ]
+      "events": [string]
     }
   },
 }
@@ -89,14 +75,7 @@ Proposal is sent by the proposer client to be approved or rejected by the respon
     "<namespace_name>" : {
       "chains": [string],
       "methods": [string],
-      "events": [string],
-      "extension": [ // optional
-        {
-          "chains": [string],
-          "methods": [string],
-          "events": [string],
-        }
-      ]
+      "events": [string]
     }
   },
   "pairingTopic": string
@@ -145,14 +124,7 @@ Settelement is sent by the responder after approval and it's broadcasted right a
     "<namespace_name>" : {
       "accounts": [string],
       "methods": [string],
-      "events": [string],
-      "extension": [ // optional
-        {
-          "accounts": [string],
-          "methods": [string],
-          "events": [string],
-        }
-      ]
+      "events": [string]
     }
   },
   "expiry": Int64, // seconds
