@@ -56,3 +56,14 @@ Relay is defined by the transport protocol used for the two clients to publish a
   "data": string, // optional
 }
 ```
+
+## Protocol Types
+
+```jsonc
+ const ProtocolType = {
+ 	Sign: "sign",
+ 	Auth: "auth",
+  Chat: "chat",
+  Push: "push"
+ }
+```

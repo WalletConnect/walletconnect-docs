@@ -1,98 +1,70 @@
 # Pairing Methods Validation Test Cases
 
 
-## 1. Peer B matches the required list and the optional list
+## 1. Peer B matches URI's list exactly
 
 ### Peer A's pairing uri:
-    uri = "...req-methods="wc_sessionPropose,wc_authRequest"&opt-methods="wc_authBatchRequest"" 
+    uri = "...methods=[wc_sessionPropose],[wc_authRequest,wc_authBatchRequest]"
+
     
 ### Peer B's registered methods:
-    var requiredList = ["wc_sessionPropose", "wc_authRequest"]
-    var optionalList = ["wc_authBatchRequest"]
+    var registeredMethods = [{ method = "wc_sessionPropose", type = ProtocolType.Sign }, { method = "wc_authRequest", type = ProtocolType.Auth }, { method = "wc_authBatchRequest", type = ProtocolType.Auth }]
 
 
 is valid? Yes
 
 ---
 
-## 2. Peer B matches the required list and partially matches the optional list
+## 2. Peer B matches one inner array exactly and partially matches another inner array
 
 ### Peer A's pairing uri:
-    uri = "...req-methods="wc_sessionPropose"&opt-methods="wc_authBatchRequest,wc_pushMessage"" 
+    uri = "...methods=[wc_sessionPropose],[wc_authBatchRequest]"
+
     
 ### Peer B's registered methods:
-    var requiredList = ["wc_sessionPropose"]
-    var optionalList = ["wc_authBatchRequest"]
+    var registeredMethods = [{ method = "wc_sessionPropose", type = ProtocolType.Sign }, { method = "wc_authRequest", type = ProtocolType.Auth }, { method = "wc_authBatchRequest", type = ProtocolType.Auth }]
 
 
 is valid? Yes
 
 ---
 
-## 3. Peer B matches the required list and does not paritially match the optional list
+## 3. Peer B contains more methods than URI's list of methods
 
 ### Peer A's pairing uri:
-    uri = "...req-methods="wc_sessionPropose"&opt-methods="wc_authBatchRequest,wc_pushMessage"" 
+    uri = "...methods=[wc_sessionPropose]"
+
     
 ### Peer B's registered methods:
-    var requiredList = ["wc_sessionPropose"]
-    var optionalList = []
+    var registeredMethods = [{ method = "wc_sessionPropose", type = ProtocolType.Sign }, { method = "wc_authRequest", type = ProtocolType.Auth }, { method = "wc_authBatchRequest", type = ProtocolType.Auth }]
 
 
 is valid? Yes
 
 ---
 
-## 4. Required list is empty and Peer B's paritially matches the optional list
+## 4. Peer B matches an inner array and does not partically match the other inner array
 
 ### Peer A's pairing uri:
-    uri = "...opt-methods="wc_authBatchRequest,wc_pushMessage"" 
-    
+    uri = "...methods=[wc_sessionPropose],[wc_authRequest]"
+
+
 ### Peer B's registered methods:
-    var requiredList = []
-    var optionalList = ["wc_pushMessage"]
-
-
-is valid? Yes
-
----
-
-## 5. Peer B does not match the required list and matches the optional list
-
-### Peer A's pairing uri:
-    uri = "...req-methods="wc_sessionRequest"&opt-methods="wc_authBatchRequest,wc_pushMessage"" 
-    
-### Peer B's registered methods:
-    var requiredList = ["wc_sessionPropose"]
-    var optionalList = ["wc_authBatchRequest","wc_pushMessage"]
+    var registeredMethods = [{ method = "wc_sessionPropose", type = ProtocolType.Sign }]
 
 
 is valid? No
 
 ---
 
-## 6. Peer B does not match the required list and partially matches the optional list
+## 5. Peer B does not match any inner arrays
 
 ### Peer A's pairing uri:
-    uri = "...req-methods="wc_sessionRequest"&opt-methods="wc_authBatchRequest,wc_pushMessage"" 
-    
+    uri = "...methods=[wc_sessionPropose],[wc_authRequest]"
+
+
 ### Peer B's registered methods:
-    var requiredList = ["wc_sessionPropose"]
-    var optionalList = ["wc_authBatchRequest"]
-
-
-is valid? No
-
----
-
-## 7. Peer B does not match the required list and does not partially matches the optional list
-
-### Peer A's pairing uri:
-    uri = "...req-methods="wc_sessionRequest"&opt-methods="wc_authBatchRequest,wc_pushMessage"" 
-    
-### Peer B's registered methods:
-    var requiredList = ["wc_sessionPropose"]
-    var optionalList = []
+    var registeredMethods = [{ method = "wc_sessionProposeV2", type = ProtocolType.Sign },{ method = "wc_authBatchRequest", type = ProtocolType.Auth }]
 
 
 is valid? No

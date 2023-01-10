@@ -17,8 +17,7 @@
 
 - `symKey` (STRING) = symmetric key used for pairing encryption
 - `relay-protocol` (STRING) = protocol name used for relay
-- `req-methods` (STRING) = comma separated list of methods that are all required when registered with the Pairing API's `register` method
-- `opt-methods` (STRING) = comma separated list of methods that are optional when registered with the Pairing API's `register` method
+- `methods` (STRING) = comma separated array of inner arrays of methods. Inner arrays are grouped by `ProtocolType`
 
 ### Optional
 
@@ -30,9 +29,8 @@
     version = 2
     symKey = "587d5484ce2a2a6ee3ba1962fdd7e8588e06200c46823bd18fbd67def96ad303"
     relay = { protocol: "irn", data: "" }
-    req-methods = ["wc_sessionPropose"]
-    opt-methods = ["wc_authBatchRequest","wc_authRequest"]
+    req-methods = [wc_sessionPropose],[wc_authRequest,wc_authBatchRequest]
 
 ```
-uri = "wc:7f6e504bfad60b485450578e05678ed3e8e8c4751d3c6160be17160d63ec90f9@2?relay-protocol=irn&symKey=587d5484ce2a2a6ee3ba1962fdd7e8588e06200c46823bd18fbd67def96ad303&req-methods=["wc_sessionPropose"]&opt-methods=["wc_authBatchRequest","wc_authRequest"]"
+uri = "wc:7f6e504bfad60b485450578e05678ed3e8e8c4751d3c6160be17160d63ec90f9@2?relay-protocol=irn&symKey=587d5484ce2a2a6ee3ba1962fdd7e8588e06200c46823bd18fbd67def96ad303&methods=[wc_sessionPropose],[wc_authRequest,wc_authBatchRequest]"
 ```
