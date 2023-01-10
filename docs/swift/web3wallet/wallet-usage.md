@@ -42,7 +42,7 @@ For testing, you can use our test dapp at: https://react-app.walletconnect.com/,
 Once you derive a URI from the QR code call `pair` method:
 
 ```swift
-try await Pair.instance.pair(uri: uri)
+try await Web3Wallet.instance.pair(uri: uri)
 ```
 if everything goes well, you should handle following event:
 ```swift
