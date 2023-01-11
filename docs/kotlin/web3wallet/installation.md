@@ -1,9 +1,10 @@
 # Installation
 
-Kotlin implementation of WalletConnect v2 Chat protocol for Android applications.
+Kotlin implementation of Web3Wallet for Android applications.
+
 
 Android Core ![Maven Central](https://img.shields.io/maven-central/v/com.walletconnect/android-core)
-Chat ![Maven Central](https://img.shields.io/maven-central/v/com.walletconnect/chat)
+Web3Wallet ![Maven Central](https://img.shields.io/maven-central/v/com.walletconnect/web3wallet)
 
 ## Requirements
 
@@ -11,9 +12,7 @@ Chat ![Maven Central](https://img.shields.io/maven-central/v/com.walletconnect/c
 * Java 11
 
 ## Installation
-
 root/build.gradle.kts:
-
 ```gradle
 allprojects {
  repositories {
@@ -23,9 +22,9 @@ allprojects {
 }
 ```
 
-app/build.gradle
+app/build.gradle.kts
 
 ```gradle
 implementation("com.walletconnect:android-core:release_version")
-implementation("com.walletconnect:chat:release_version")
+implementation("com.walletconnect:web3wallet:release_version")
 ```

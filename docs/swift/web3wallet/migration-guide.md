@@ -1,4 +1,6 @@
-## Migration guide from Sign and Auth to Web3Wallet
+# Migration Guide
+
+If you are a developer currently using Sign v2 or Auth and want to update to the Web3Wallet SDK, it's a straightforward process. Here are the updated functions along with their corresponding Sign v2 functions for reference.
 
 ### Instantiate client
 

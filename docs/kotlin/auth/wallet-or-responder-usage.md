@@ -63,7 +63,7 @@ val request: Auth.Event.AuthRequest = // Request from onAuthRequest
 val signature: Auth.Model.Cacao.Signature = CacaoSigner.sign(
     request.message, // Message to be signed
     PRIVATE_KEY, // Private key used to signing a message
-    SignatureType.EIP191 // Currently only EIP191 signing is supported
+    SignatureType.EIP191 // or EIP1271
 )
 val issuer = //Check following link for more reference: https://github.com/w3c-ccg/did-pkh/blob/main/did-pkh-method-draft.md
 

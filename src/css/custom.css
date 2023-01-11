@@ -38,11 +38,9 @@ main {
 }
 
 .boxContainer {
-  display: flex;
-  flex-flow: wrap;
-  justify-content: center;
-  row-gap: 1em;
-  column-gap: 1em;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(100%, 1fr));
+  grid-gap: 1rem;
 }
 
 .box {
@@ -55,6 +53,21 @@ main {
   padding-top: 1em;
 }
 
+.tableMatrix {
+  border-collapse: collapse;
+  border-radius: 7px;
+  overflow: hidden;
+  background: #f7fafc;
+  border: 1px solid #edf2f7;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  width: auto;
+}
+
+[data-theme="dark"] .tableMatrix {
+  background-color: #242124;
+  border: 1px solid #000000;
+}
+
 .box:hover {
   background-color: #ebedf0;
   cursor: pointer;
@@ -65,7 +78,6 @@ main {
   border: 1px solid #000000;
   border-radius: 7px;
   background-color: #242124;
-  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
 
 [data-theme="dark"] .box:hover {
@@ -95,20 +107,20 @@ main {
 }
 
 @media only screen and (min-width: 660px) {
-  .box {
-    flex: 1 33%;
+  .boxContainer {
+    grid-template-columns: repeat(3, minmax(33%, 1fr));
   }
 }
 
 @media only screen and (min-width: 900px) {
-  .box {
-    flex: auto;
+  .boxContainer {
+    grid-template-columns: repeat(2, minmax(50%, 1fr));
   }
 }
 
 @media only screen and (min-width: 1100px) {
-  .box {
-    flex: 1 33%;
+  .boxContainer {
+    grid-template-columns: repeat(3, minmax(33%, 1fr));
   }
 }
 
