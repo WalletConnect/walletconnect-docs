@@ -324,7 +324,6 @@ module.exports = {
             },
           ],
         },
-
         {
           type: "category",
           label: "Providers",
@@ -336,6 +335,7 @@ module.exports = {
             "javascript/providers/solana",
           ],
         },
+        "advanced/echo-server"
       ],
     },
     {
