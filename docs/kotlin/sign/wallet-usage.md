@@ -154,13 +154,13 @@ request ID along with the rejection data to the `SignClient.respond` function.
 #
 ### **Session Update**
 
-NOTE: addresses provided in `accounts` array should follow [CAPI10](https://github.com/ChainAgnostic/CAIPs/blob/master/CAIPs/caip-10.md)
-semantics.
+NOTE: addresses provided in `accounts` array should follow [CAIP10](https://github.com/ChainAgnostic/CAIPs/blob/master/CAIPs/caip-10.md)
+semantics and syntax.
 
 ```kotlin
 val sessionTopic: String = /*Topic of Session*/
 val namespace: String = /*Namespace identifier, see for reference: https://github.com/ChainAgnostic/CAIPs/blob/master/CAIPs/caip-2.md#syntax*/
-val accounts: List<String> = /*List of accounts on chains*/
+val accounts: List<String> = /*List of accounts on authorized chains*/
 val methods: List<String> = /*List of methods that wallet approves*/
 val events: List<String> = /*List of events that wallet approves*/
 val namespaces: Map<String, Sign.Model.Namespaces.Session> = mapOf(namespace, Sign.Model.Namespaces.Session(accounts, methods, events))
@@ -169,8 +169,7 @@ val updateParams = Sign.Params.Update(sessionTopic, namespaces)
 SignClient.update(updateParams) { error -> /*callback for error while sending session update*/ }
 ```
 
-To update a session with namespaces, submit a `Sing.Params.Update` object with the session's topic and namespaces to update session with
-to `SignClient.Update`.
+To update a session with namespaces, use `SignClient.Update` to submit a `Sign.Params.Update` object with the session's topic and updated namespace objects (i.e. adding requesting new methods or events, new accounts on authorized chains, or authorizing new chainIds within a multi-chain namespace).
 
 
 #
