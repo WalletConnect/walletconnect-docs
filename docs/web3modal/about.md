@@ -46,3 +46,9 @@ The Web3Modal Github can be found at [https://github.com/WalletConnect/web3modal
 ### Preview
 
 ![web3modal customisation](/assets/modal_preview.png)
+
+### Integrations
+
+**Bubble | No Code Solution**
+
+- https://bubble.io/plugin/walletconnect-official-1666178128464x529020524869713900
