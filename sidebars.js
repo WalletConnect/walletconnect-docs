@@ -324,7 +324,6 @@ module.exports = {
             },
           ],
         },
-
         {
           type: "category",
           label: "Providers",
