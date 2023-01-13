@@ -334,7 +334,7 @@ module.exports = {
             "javascript/providers/ethereum",
             "javascript/providers/solana",
           ],
-        }
+        },
       ],
     },
     {
