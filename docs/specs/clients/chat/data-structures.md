@@ -26,6 +26,15 @@ Media is an optional parameter used in wc_chatMessage to append a media file ref
 }
 ```
 
+## Message Status
+```typescript
+enum MessageStatus {
+  Failed = -1,
+  Pending = 0,
+  Sent = 1,
+}
+```
+
 ## Message
 
 An array of Messages is returned on `getMessages(params: {topic: string;})`
@@ -33,6 +42,8 @@ An array of Messages is returned on `getMessages(params: {topic: string;})`
 ```jsonc
 {
   "message" : string,
+  "status": MessageStatus,
+  "retryAttempts": Int32, 
   "authorAccount": string, // to distinguish who sent it. Could also be a flag
   "timestamp": Int64,
   "media": Media // optional

@@ -1,4 +1,3 @@
-
 # Error Codes
 
 ## INVALID
@@ -16,7 +15,7 @@ case .userRejected return 5000
 ## REASON
 
 ```sh
-case .userUnsubscribed return 5000
+case .userUnsubscribed return 6000
 ```
 
 ## FAILURE
