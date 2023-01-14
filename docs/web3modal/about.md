@@ -47,7 +47,13 @@ The Web3Modal Github can be found at [https://github.com/WalletConnect/web3modal
 
 ![web3modal customisation](/assets/modal_preview.png)
 
-### Integrations
+### Community SDK's
+
+**Dart/Flutter**
+
+- https://github.com/Eucalyptus-Labs/wallet-connect-dart
+
+### Community Plugins
 
 **Bubble | No Code Solution**
 
