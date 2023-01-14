@@ -52,7 +52,14 @@ module.exports = {
           collapsed: true,
           collapsible: true,
           items: ["api/sign", "api/auth", "api/chat", "api/push"],
-        }
+        },
+        {
+          type: "category",
+          label: "Echo Server",
+          collapsed: true,
+          collapsible: true,
+          items: ["advanced/echo-server/overview", "advanced/echo-server/getting-started"],
+        },
       ],
     },
     {
