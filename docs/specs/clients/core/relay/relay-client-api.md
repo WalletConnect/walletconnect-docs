@@ -26,7 +26,7 @@ The way of handling unpublished messages in the RelayClient should differ depend
 
 ## API
 
-The Relay Client API defines a public interface with set of supported methods. It is consumed by an instance of SDK, where it allows to publish a message on a topic and subscribe or unsubcsribe the given topic.
+The Relay Client API defines a public interface with set of supported methods. It is consumed by an instance of SDK, where it allows to publish a message on a topic and subscribe or unsubscribe the given topic.
 
 ```kotlin
 interface Relay {
@@ -34,10 +34,10 @@ interface Relay {
     /*Publishes a message over the network on given topic*/
     fun publish(topic: String, message: String, policy: Policy)
 
-    /*Subcribes on topic to receive messages*/
+    /*Subscribes on topic to receive messages*/
     fun subscribe(topic: String)
 
-    /*Unsubcribes from a topic*/
+    /*Unsubscribes from a topic*/
     fun unsubscribe(topic: String, subscriptionId: String)
 
     /*Opens a Web-Socket connection*/

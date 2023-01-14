@@ -62,11 +62,11 @@ TTL times are always represented in seconds.
 
 Shared key is the key derived using both participants key pairs using the elliptic curve Diffie-Hellman (ECDH) key agrrement scheme.
 
-The chosen elliptic curve was Curve25519 offering 128 bits of security (256 bits key size) which was speifically designed for ECDH and it's widely supported by many different platforms natively. The name of its DH function is X25519
+The chosen elliptic curve was Curve25519 offering 128 bits of security (256 bits key size) which was specifically designed for ECDH and it's widely supported by many different platforms natively. The name of its DH function is X25519
 
 ## Authenticated Encryption
 
-Authentication Encryption refers to a form of encryption which simulatenous assures the confidentiality and authenticity of data.
+Authentication Encryption refers to a form of encryption which simultaneous assures the confidentiality and authenticity of data.
 
 The chosen approach was to encrypt-then-mac which produces a MAC based on the resulting ciphertext. The encryption uses AES-256-CBC with a random Initialization Vector (IV) and authentication uses HMAC-SHA256. The encrypted payloads are serialized in the following order: iv, publicKey, mac and cipherText.
 
@@ -127,7 +127,7 @@ The `extension` field is used to mention the *chain-exclusive parameters*. For e
 ### Session namespaces
 The dapp validates if the received proposal namespaces comply with the session namespaces. If they comply, a session is established successfully and pairing is completed. If not, the session is not established and all the cached data related to the namespaces are deleted. The session namespace can also choose to provide access to more chains, methods or events that were not a part of the proposal namespaces.
 
-**Example :** The following is an example for a sessoion namespace which complies with the requested proposal namespace example,
+**Example :** The following is an example for a session namespace which complies with the requested proposal namespace example,
 
 ```js
 {
