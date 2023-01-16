@@ -5,7 +5,7 @@ abstract class WalletClient {
   // ---------- Methods ----------------------------------------------- //
 
   // initializes the client with persisted storage and a network connection
-  public abstract init(params: {}): Promise<void>;
+  public abstract init(): Promise<void>;
 
   // approve push subscription 
   public abstract approve(params: { id: number }): Promise<boolean>;
@@ -15,6 +15,9 @@ abstract class WalletClient {
 
   // query all active subscriptions
   public abstract getActiveSubscriptions(): Promise<Record<string, PushSubscription>>;
+
+  // get all messages for a subscription
+  public abstract getMessageHistory(params: { topic: string }): Promise<Record<number, PushMessage>>
 
   // delete active subscription
   public abstract delete(params: { topic: string }): Promise<void>;
