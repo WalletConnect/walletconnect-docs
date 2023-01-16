@@ -48,6 +48,14 @@ The policy object defines the policy's parameters.
 }
 ```
 
+### Message Id
+
+A Relay message is globally available and it's always an utf8 string. Therefore the message id is derived as the sha256 hash.
+
+```
+message_id = sha256(message)
+```
+
 ## FAQ
 
 - What is a RelayClient? - an instance of Relay on the client-side used by any sdk instance.
