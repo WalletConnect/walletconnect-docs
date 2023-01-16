@@ -15,7 +15,16 @@ Configure the `Push` instance with:
 try Push.configure()
 ```
 
+### Register for Push Notifications
+
+Communicate with Apple Push Notification service and receive unique device token. Register that token with following method:
+
+```swift
+try await Push.wallet.register(deviceToken: deviceToken)
+```
+
 ### Subscribe for Push publishers
+
 When your `Push` instance receives push request or push message from a peer client, it will publish a related event. Subscribe to publishers to reveive the requests.
 
 ```swift
