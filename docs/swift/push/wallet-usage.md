@@ -56,6 +56,44 @@ try await Push.wallet.approve(id: id)
 
 After push subscription is established, dapp and it's services can send push messages to a wallet. If user approved the wallet iOS application to display Push Notifications, all the push messages will be displayed in a form of PN on the user's screen. Additionally you can subscribe for push messages with it's publisher `pushMessagePublisher` but messages with this channel will be delivered only when the app is in foreground and a web socket connection is opened.
 
+### Decrypt Push Notifications
+
+All the PNs that are send APNs are decrypted. They have following payload:
+
+```
+{
+  "aps":{
+    "content-available":1,
+    "mutable-content":1
+  },
+    "ciphertext":"encrypted-payload",
+    "topic":"subscription_topic",
+}
+```
+
+In order to decrypt a PN you need to instantiate [UNNotificationServiceExtension](https://developer.apple.com/documentation/usernotifications/unnotificationserviceextension)
+Learn how to [modify content in newly delivered notifications](https://developer.apple.com/documentation/usernotifications/modifying_content_in_newly_delivered_notifications)
+Create a [keychain group](https://developer.apple.com/documentation/security/keychain_services/keychain_items/sharing_access_to_keychain_items_among_a_collection_of_apps) that is shared between your wallet application and the notification service. It must be called `group.com.walletconnect.sdk`.
+Import WalletConnectPush inside your notification service extension file, intialise PushDecryptionService() and decrypt the message:
+
+```swift
+    override func didReceive(_ request: UNNotificationRequest, withContentHandler contentHandler: @escaping (UNNotificationContent) -> Void) {
+        bestAttemptContent = (request.content.mutableCopy() as? UNMutableNotificationContent)
+        if let bestAttemptContent = bestAttemptContent {
+            let topic = bestAttemptContent.userInfo["topic"] as! String
+            let ciphertext = bestAttemptContent.userInfo["ciphertext"] as! String
+            do {
+                let service = PushDecryptionService()
+                let pushMessage = try service.decryptMessage(topic: topic, ciphertext: ciphertext)
+                bestAttemptContent.title = pushMessage.title
+                bestAttemptContent.body = pushMessage.body
+                contentHandler(bestAttemptContent)
+                return
+            }
+        ...
+    }
+```
+
 ### Get active subscriptions
 
 ```swift 
