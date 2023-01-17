@@ -27,24 +27,20 @@ User visits a new website that requires a Sign session for submitting transactio
 #### Successful request handling if B registers protocol P
 
 1. A creates random symKey S and pairing topic that is a sha256 hash of symKey S.
-2. A's pairing client registers protocol P by passing the list of methods required for protocol P
-3. A encrypts request with symKey S. Pairing client does not expects any response. P is responsible for response subscription.
-4. A sends request on pairing topic.
-5. A generates URI and appends the query parameter with the keys "methods" and the value is an array of inner arrays.
-6. B's pairing client registers protocol P by passing lists of methods needed for Protocol P
-7. B verifies that the URI's "methods" query parameter's value against B's cached "registered methods" list of protocol methods. If verification being valid then B subscribes to pairing topic from provided URI
-8. B receives protocol P request.
+2. A encrypts request with symKey S. Pairing client does not expects any response. P is responsible for response subscription.
+3. A sends request on pairing topic.
+4. A generates URI and appends the query parameter with the keys "methods" and the value is an array of inner arrays.
+5. B verifies that the URI's "methods" query parameter's value against B's cached "registered methods" list of protocol methods. If verification being valid then B subscribes to pairing topic from provided URI
+6. B receives protocol P request.
 
 
 #### Error case where B did not registered protocol P
 
 1. A creates random symKey S and pairing topic that is a sha256 hash of symKey S.
-2. A's pairing client registers protocol P by passing the list of methods needed for protocol P
-3. A encrypts request with symKey S. Pairing client does not expects any response. P is responsible for response subscription.
-4. A sends request on pairing topic.
-5. A generates URI and appends the query parameter with a key "methods" with the value being a list of the required methods registered.
-6. B's pairing client registers protocol P by passing the list of methods needed for Protocol P
-7. B verifies that the URI's "methods" query parameter equals B's cached "registered methods" list of protocol methods. The verification fails by based on any of the cases in [Pairing Methods](/docs/specs/clients/core/pairing/pairing-methods.md). B will notify user that it cannot pair with A, and internally publish a wc_deletePairing with a reason.
+2. A encrypts request with symKey S. Pairing client does not expects any response. P is responsible for response subscription.
+3. A sends request on pairing topic.
+4. A generates URI and appends the query parameter with a key "methods" with the value being a list of the required methods registered.
+5. B verifies that the URI's "methods" query parameter equals B's cached "registered methods" list of protocol methods. The verification fails by based on any of the cases in [Pairing Methods](/docs/specs/clients/core/pairing/pairing-methods.md). B will notify user that it cannot pair with A, and internally publish a wc_deletePairing with a reason.
 
 ## Pairing lifecycle
 
