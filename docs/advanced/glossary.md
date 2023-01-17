@@ -105,14 +105,7 @@ A dapp sends a proposal namespace to the wallet for pairing. The proposal namesp
   "eip155": {
     "chains": ["eip155:137", "eip155:1"],
     "methods": ["eth_sign"],
-    "events": ["accountsChanged"],
-    "extensions": [
-      {
-        "chains": ["eip155:137"],
-        "method": ["personalSign"],
-        "events": ["chainChanged"]
-      }
-    ]
+    "events": ["accountsChanged"]
   },
   "cosmos": {
     "chains": ["cosmos:cosmoshub-4"],
@@ -121,8 +114,6 @@ A dapp sends a proposal namespace to the wallet for pairing. The proposal namesp
   }
 }
 ```
-
-The `extension` field is used to mention the *chain-exclusive parameters*. For example, let's say Polygon has a special method `personalSign` and an event `chainChanged` that is not available in Ethereum Mainnet. Hence, these special chain-exclusive parameters can be mentioned as extensions as stated in the above code snippet.
 
 ### Session namespaces
 The dapp validates if the received proposal namespaces comply with the session namespaces. If they comply, a session is established successfully and pairing is completed. If not, the session is not established and all the cached data related to the namespaces are deleted. The session namespace can also choose to provide access to more chains, methods or events that were not a part of the proposal namespaces.
@@ -137,14 +128,7 @@ The dapp validates if the received proposal namespaces comply with the session n
       "eip155:1:0xab16a96d359ec26a11e2c2b3d8f8b8942d5bfcdb"
     ],
     "methods": ["eth_sign"],
-    "events": ["accountsChanged"],
-    "extensions": [
-      {
-        "accounts": ["eip155:137:0xab16a96d359ec26a11e2c2b3d8f8b8942d5bfcdb"],
-        "method": ["personalSign"],
-        "events": ["chainChanged"]
-      }
-    ]
+    "events": ["accountsChanged"]
   },
   "cosmos": {
     "accounts": [

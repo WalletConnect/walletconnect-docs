@@ -48,14 +48,7 @@ Used to propose a session through topic A. Requires a success response with asso
     "<namespace_name>" : {
       "chains": [string],
       "methods": [string],
-      "events": [string],
-      "extension": [ // optional
-        {
-          "chains": [string],
-          "methods": [string],
-          "events": [string],
-        }
-      ]
+      "events": [string]
     }
   },
 }
@@ -107,14 +100,7 @@ Used to settle a session over topic B.
     "<namespace_name>" : {
       "accounts": [string],
       "methods": [string],
-      "events": [string],
-      "extension": [ // optional
-        {
-          "accounts": [string],
-          "methods": [string],
-          "events": [string],
-        }
-      ]
+      "events": [string]
     }
   },
   "expiry": Int64, // seconds
@@ -153,14 +139,7 @@ Used to update the namespaces of a session.
     "<namespace_name>" : {
       "accounts": [string],
       "methods": [string],
-      "events": [string],
-      "extension": [ // optional
-        {
-          "accounts": [string],
-          "methods": [string],
-          "events": [string],
-        }
-      ]
+      "events": [string]
     }
   }
 }
