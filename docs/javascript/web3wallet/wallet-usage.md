@@ -9,20 +9,18 @@ import { Core } from "@walletconnect/core";
 import { Web3Wallet } from "@walletconnect/web3wallet";
 
 const core = new Core({
-    projectId: process.env.PROJECT_ID,
-})
+  projectId: process.env.PROJECT_ID,
+});
 
 const web3wallet = await Web3Wallet.init({
-    core, // <- pass the shared `core` instance
-    metadata: {
-        name: "Demo app",
-        description: "Demo Client as Wallet/Peer",
-        url: "www.walletconnect.com",
-        icons: [],
-         // optional parameters
-        relayUrl: "<YOUR RELAY URL>",
-    }
-})
+  core, // <- pass the shared `core` instance
+  metadata: {
+    name: "Demo app",
+    description: "Demo Client as Wallet/Peer",
+    url: "www.walletconnect.com",
+    icons: [],
+  },
+});
 ```
 
 ## Session Approval
@@ -33,12 +31,12 @@ The `pair` method initiates a WalletConnect pairing process with a dapp using th
 
 ```javascript
 web3wallet.on("session_proposal", async (proposal) => {
-    const session = await web3wallet.approveSession({
-        id: proposal.id,
-        namespaces,
-    });
+  const session = await web3wallet.approveSession({
+    id: proposal.id,
+    namespaces,
+  });
 });
-await web3wallet.core.pairing.pair({ uri })
+await web3wallet.core.pairing.pair({ uri });
 ```
 
 ## Session Rejection
@@ -47,21 +45,24 @@ In the event you want to reject the session proposal, call the `rejectSession` m
 
 ```javascript
 web3wallet.on("session_proposal", async (proposal) => {
-    const session = await web3wallet.rejectSession({
-        id: proposal.id,
-        reason: getSdkError('USER_REJECTED_METHODS')
-    });
+  const session = await web3wallet.rejectSession({
+    id: proposal.id,
+    reason: getSdkError("USER_REJECTED_METHODS"),
+  });
 });
 ```
 
 ## Session Disconnect
 
-If either the dapp or the wallet decides to disconnect the session, the `session_delete` event will be emitted. The wallet should listen for this event in order to update the UI. 
+If either the dapp or the wallet decides to disconnect the session, the `session_delete` event will be emitted. The wallet should listen for this event in order to update the UI.
 
 To disconnect a session from the wallet, call the `disconnectSession` function and pass in the `topic` and `reason`. You can use the `getSDKError` function, which is available in the `@walletconnect-utils` [library](https://github.com/WalletConnect/walletconnect-monorepo/tree/v2.0/packages/utils).
 
 ```javascript
-await web3wallet.disconnectSession({ topic, reason: getSdkError('USER_DISCONNECTED') })
+await web3wallet.disconnectSession({
+  topic,
+  reason: getSdkError("USER_DISCONNECTED"),
+});
 ```
 
 ## Responding to Session Requests
@@ -81,7 +82,7 @@ web3wallet.on("session_request", (event) => {
 The `session_update` event is emitted from the wallet when the session is updated by calling `updateSession`. To update a session, pass in the `topic` and the new namespace.
 
 ```javascript
-await web3wallet.updateSession({ topic, namespaces: newNs })
+await web3wallet.updateSession({ topic, namespaces: newNs });
 ```
 
 ## Extend a Session
@@ -98,8 +99,11 @@ To emit sesssion events, call the `emitSessionEvent` and pass in the params. In 
 
 ```javascript
 await web3wallet.emitSessionEvent({
-    topic,
-    event: { name: 'chainChanged', data: 'Hello World' },
-    chainId: 'eip155:1'
-})
+  topic,
+  event: {
+    name: "accountsChanged",
+    data: ["0xab16a96D359eC26a11e2C2b3d8f8B8942d5Bfcdb"],
+  },
+  chainId: "eip155:1",
+});
 ```

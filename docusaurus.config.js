@@ -174,7 +174,7 @@ const config = {
       announcementBar: {
         id: 'support_us',
         content:
-          '🚨 v1.0 has been sunset.  Wallets must upgrade by December 16, 2022. Apps must upgrade from January 1. <a rel="noopener noreferrer" href="https://medium.com/walletconnect/walletconnect-v1-0-sunset-notice-and-migration-schedule-8af9d3720d2e">Learn more</a>. 🚨',
+          '🚨 v1.0 has been sunset. Wallets and apps must upgrade to v2.0 by February 28. <a rel="noopener noreferrer" href="https://medium.com/walletconnect/walletconnect-v1-0-sunset-notice-and-migration-schedule-8af9d3720d2e">Learn more</a>. 🚨',
         backgroundColor: '#3182ce',
         textColor: '#fff',
         isCloseable: true,

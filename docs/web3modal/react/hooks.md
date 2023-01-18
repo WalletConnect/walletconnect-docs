@@ -10,6 +10,13 @@ Hook to programatically control the modal. Useful when you want to use your own 
 import { useWeb3Modal } from "@web3modal/react";
 
 const { isOpen, open, close } = useWeb3Modal();
+
+// Open modal (if route is not provided, modal opens view based on connection / config status)
+export interface Options {
+  route?: "Account" | "ConnectWallet" | "Help" | "SelectNetwork";
+}
+
+await open(options?: Options);
 ```
 
 ### useWeb3ModalNetwork

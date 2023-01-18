@@ -37,6 +37,8 @@ import SignClient from "@walletconnect/sign-client";
 
 const signClient = await SignClient.init({
   projectId: "<YOUR_PROJECT_ID>",
+  // optional parameters
+  relayUrl: "<YOUR RELAY URL>",
   metadata: {
     name: "Example Dapp",
     description: "Example Dapp",

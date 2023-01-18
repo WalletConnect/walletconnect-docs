@@ -7,7 +7,12 @@
 Programmatically open the modal.
 
 ```js
-web3modal.openModal();
+// Open modal (if route is not provided, modal opens view based on connection / config status)
+export interface Options {
+  route?: "Account" | "ConnectWallet" | "Help" | "SelectNetwork";
+}
+
+await web3modal.openModal(options?: Options);
 ```
 
 ### web3modal.closeModal
@@ -23,7 +28,7 @@ web3modal.closeModal();
 Subscribe or unsubscribe from modal's state.
 
 ```js
-const usnubscribe = web3modal.subscribeModal((newState) =>
+const unsubscribe = web3modal.subscribeModal((newState) =>
   console.log(newState)
 );
 unsubscribe();
@@ -50,7 +55,7 @@ web3modal.getSelectedChain();
 Subscribe or unsubscribe from selected chain changes. (Only subscribes in scope of Web3Modal, not wagmi)
 
 ```js
-const usnubscribe = web3modal.subscribeSelectedChain((newState) =>
+const unsubscribe = web3modal.subscribeSelectedChain((newState) =>
   console.log(newState)
 );
 unsubscribe();

@@ -12,6 +12,10 @@ Head over to [WalletConnect Cloud](https://cloud.walletconnect.com/) to sign in 
 npm install @web3modal/ethereum @web3modal/react wagmi ethers
 ```
 
+:::info
+We target builds with es2020 features, this includes esm imports, please ensure that your dev tools like webpack, babel, create-react-app, nextjs etc. are updated to latest version to support this out of the box, otherwise you will likely see errors related to "unknown syntax" as older versions of these don't support features like opptional chaining, nullish coalescing etc.
+:::
+
 ## Import
 
 ```tsx
