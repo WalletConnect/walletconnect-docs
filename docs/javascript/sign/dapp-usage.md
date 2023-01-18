@@ -12,10 +12,9 @@ For an example implementation, please refer to our `react-dapp-v2` [example](htt
 
 ## Install Packages
 
-Install the WalletConnect Sign and Web3Modal packages.
+Dapps will also need to install `Web3Modal` for the UI.
 
 ```bash npm2yarn
-npm install @wwalletconnect/sign-client
 npm install @web3modal/standalone
 ```
 
