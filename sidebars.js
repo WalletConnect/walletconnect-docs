@@ -495,6 +495,14 @@ module.exports = {
                   "swift/push/wallet-usage",
                   "swift/push/dapp-usage"],
         },
+        type: "category",
+        label: "Echo",
+        collapsible: true,
+        collapsed: true,
+        items: [
+                "swift/echo/installation",
+                "swift/echo/usage"],
+      },
         {
           type: "category",
           label: "Chat",
