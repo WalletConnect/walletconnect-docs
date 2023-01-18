@@ -2,7 +2,7 @@
 
 Swift implementation of WalletConnect Push protocol for native iOS applications.
 
-### Set up a project
+### Set Up a Project
 
 In order to connect to WalletConnect Cloud, you need to create a new project first:
 
