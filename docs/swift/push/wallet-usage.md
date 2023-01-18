@@ -45,7 +45,7 @@ public var deleteSubscriptionPublisher: AnyPublisher<String, Never>
 
 ### Establish Push Subscription:
 
-Once you have an active pairing with a dapp and Push wallet client configured, a dapp is able to send a push request to a wallet. The `requestPublisher` will publish an event.
+Once you have an active pairing with a dapp and the Push wallet client configured, a dapp is able to send a push request to a wallet. The `requestPublisher` will publish an event.
 After user accepts dapp's request, you can call following method:
 
 ```swift
