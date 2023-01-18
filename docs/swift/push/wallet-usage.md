@@ -101,7 +101,7 @@ Push.wallet.getActiveSubscriptions()
 ```
 
 
-### Where to go from here
+### Where to Go from Here
 - Try our Wallet app that is part of WalletConnectSwiftV2 repository.
 - Build API documentation in XCode: go to Product -> Build Documentation
 
