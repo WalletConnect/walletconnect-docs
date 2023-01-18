@@ -12,7 +12,7 @@ In order to connect to WalletConnect Cloud, you need to create a new project fir
 4. Your new project should appear on the projects list
 5. You should see a project ID string if you tap on your project
 
-### Add SDK for your project.
+### Add SDK for Your Project.
 
 You can add a WalletConnect SDK to your project with the Swift Package Manager. In order to do that:
 
