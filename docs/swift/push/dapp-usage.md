@@ -36,7 +36,7 @@ try await Push.dapp.request(account: Account, topic: String)
 
 ### Send a push message to a wallet
 
-After push subscription is established, you are able to send a PN to a wallet on a push subscription topic.
+Once a push subscription is established, you can then send a push notification to a wallet on the designated push subscription topic.
 
 ```swift
 try await Push.dapp.notify(topic: String, message: PushMessage)
