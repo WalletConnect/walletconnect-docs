@@ -34,7 +34,7 @@ Once you have an active pairing with a wallet, you are able to send a push subsc
 try await Push.dapp.request(account: Account, topic: String)
 ```
 
-### Send a push message to a wallet
+### Send a Push Message to a Wallet
 
 Once a push subscription is established, you can then send a push notification to a wallet on the designated push subscription topic.
 
