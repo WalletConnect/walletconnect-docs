@@ -1,7 +1,7 @@
 
 # Installation
 
-### Add SDK for your project.
+### Add SDK to your Project
 
 You can add a WalletConnectEcho SDK to your project with Swift Package Manager. In order to do that:
 
