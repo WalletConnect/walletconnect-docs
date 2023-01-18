@@ -42,7 +42,7 @@ Once a push subscription is established, you can then send a push notification t
 try await Push.dapp.notify(topic: String, message: PushMessage)
 ```
 
-### Get active subscriptions
+### Get Active Subscriptions
 
 ```swift 
 Push.wallet.getActiveSubscriptions()
