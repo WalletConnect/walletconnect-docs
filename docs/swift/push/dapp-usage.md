@@ -10,7 +10,7 @@ Make sure Networking and Pairing are properly configured.
 
 
 ### Subscribe for Push publishers
-When your `Push` dapp instance receives push request or push message from a peer client, it will publish a related event. Subscribe to publishers to reveive the requests.
+When your `Push` dapp instance receives a push request or push message from a peer client, it will publish a related event. Subscribe to publishers to receive the requests.
 
 ```swift
 Push.wallet.responsePublisher
