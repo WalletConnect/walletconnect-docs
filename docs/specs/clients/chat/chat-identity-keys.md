@@ -8,7 +8,7 @@ These are randomly generated ed25519 key pairs that are only present one per cli
 
 ## Key Authorization
 
-Client will only generate a single identity key per blockchain accoun per client. The wallet user could use multiple blockchain accounts with a single client by authorizing one respective identity key for each. Additionally the wallet can use multiple clients with the same blockchain account by authorizing a new identity key on a new client.
+Client will only generate a single identity key per blockchain account per client. The wallet user could use multiple blockchain accounts with a single client by authorizing one respective identity key for each. Additionally the wallet can use multiple clients with the same blockchain account by authorizing a new identity key on a new client.
 
 Identity Keys are ed25519 key pairs generated internally and the client will expose a CAIP-122 message which includes the public key of the Identity Key pair in the Resources in the form of a did-key.
 
@@ -88,7 +88,7 @@ When two clients are using the Chat API they need to verify each others Identity
 
 Now that we have generated, authorized and registered Identity Keys we can use them for authentication for [different purposes](./chat-authentication.md) but also importantly we must use it to register the invite keys
 
-When we are registering a chat invite key key we must use the following mandatory fields in the jwt:
+When we are registering a chat invite key we must use the following mandatory fields in the jwt:
 
 * iat - timestamp when jwt was issued 
 * exp - timestamp when jwt must expire
