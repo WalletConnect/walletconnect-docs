@@ -94,7 +94,7 @@ Import WalletConnectPush inside your notification service extension file, initia
     }
 ```
 
-### Get active subscriptions
+### Get Active Subscriptions
 
 ```swift 
 Push.wallet.getActiveSubscriptions()
