@@ -34,7 +34,7 @@ Push.wallet.requestPublisher
         //handle event
     }.store(in: &publishers)
 ```
-Following publishers are available to subscribe:
+The following publishers are available for subscription:
 
 ```swift
 public var requestPublisher: AnyPublisher<(id: RPCID, metadata: AppMetadata), Never> 
