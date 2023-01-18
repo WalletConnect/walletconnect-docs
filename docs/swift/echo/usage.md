@@ -1,6 +1,6 @@
 # Wallet Usage
 
-Configured Echo SDK alows users to receive Push Notifications on their devices about important events, like an auth request or a sign session request.
+A configured Echo SDK allows users to receive push notifications on their devices about important events, such as an auth request or a sign session request
 
 ### Initial configurations
 
