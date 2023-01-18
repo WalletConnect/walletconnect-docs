@@ -35,7 +35,6 @@ abstract class Client {
   }): Promise<void>;
 
   // sends a chat message to an active chat thread
-  // This uses a chat queue as described in chat-message-queue.md
   public abstract message(params: {
     topic: string;
     message: string;
@@ -83,12 +82,6 @@ abstract class Client {
 
   // subscribe to new chat messages received
   public abstract on("chat_message", ({ topic: string, payload: Message }) => {}): void;
-  
-  // Internal use only, read more chat-message-queue.md
-  public abstract on("queue_message", ({ topic: string, payload: Message }) => {}): void;
-  
-  // subscribe to queued messages that got delivered
-  public abstract on("queued_message_delivered", ({ topic: string, payload: Message }) => {}): void;
 
   // subscribe to new chat thread left
   public abstract on("chat_left",  ({ topic: string }) => {}): void;
