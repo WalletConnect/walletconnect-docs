@@ -54,7 +54,7 @@ try await Push.wallet.approve(id: id)
 
 ### Subscribe for push messages from a dapp
 
-After push subscription is established, dapp and it's services can send push messages to a wallet. If user approved the wallet iOS application to display Push Notifications, all the push messages will be displayed in a form of PN on the user's screen. Additionally you can subscribe for push messages with it's publisher `pushMessagePublisher` but messages with this channel will be delivered only when the app is in foreground and a web socket connection is opened.
+After push subscription is established, the dapp and it's services can send push messages to a wallet. If user approves the wallet iOS application to display Push Notifications, all the push messages will be displayed in a form of push notifications on the user's screen. Additionally you can subscribe for push messages with it's publisher `pushMessagePublisher` but messages with this channel will be delivered only when the app is in foreground and a web socket connection is opened.
 
 ### Decrypt Push Notifications
 
