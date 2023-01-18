@@ -19,7 +19,7 @@ Push.wallet.responsePublisher
         //handle event
     }.store(in: &publishers)
 ```
-Following publishers are available to subscribe:
+The following publishers are available for subscription:
 
 ```swift
 public var responsePublisher: AnyPublisher<(id: RPCID, result: Result<PushSubscription, PushError>), Never> 
