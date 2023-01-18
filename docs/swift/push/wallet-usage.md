@@ -58,7 +58,7 @@ After push subscription is established, the dapp and it's services can send push
 
 ### Decrypt Push Notifications
 
-All the PNs that are send APNs are decrypted. They have following payload:
+All push notifications that are sent via APNs are decrypted. They have following payload:
 
 ```
 {
