@@ -19,6 +19,7 @@ abstract class Client {
   }): Promise<string>;
 
   // sends a chat invite to peer account / returns an invite id
+  // Stores the invite in a separate store for pendingThreads
   public abstract invite(params: {
     account: string;
     invite: Invite;
@@ -70,7 +71,7 @@ abstract class Client {
   // returns all pending threads matching an account / returns map of threads indexed by topic
   public abstract getPendingThreads(params: {
     account: string;
-  }): Promise<Map<string, PendingThread>>;
+  }): Promise<Map<string, PendingOrRejectedThread>>;
 
   // returns all messages matching a thread's topic / returns array of messages
   public abstract getMessages(params: {
