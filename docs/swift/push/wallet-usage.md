@@ -102,6 +102,6 @@ Push.wallet.getActiveSubscriptions()
 
 
 ### Where to Go from Here
-- Try our Wallet app that is part of WalletConnectSwiftV2 repository.
+- Try our [Wallet App](https://github.com/WalletConnect/WalletConnectSwiftV2/tree/main/Example/WalletApp) and to test notifications.
 - Build API documentation in XCode: go to Product -> Build Documentation
 
