@@ -3,7 +3,7 @@
 
 ### Initial Configurations
 
-Make sure what you properly configure Networking and Pair Clients first
+Make sure Networking and Pairing are properly configured.
 - [Networking](../core/networking-configuration.md)
 - [Pairing](../core/pairing-usage.md)
 
