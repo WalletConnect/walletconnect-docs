@@ -23,7 +23,7 @@ Communicate with Apple Push Notification service and receive unique device token
 try await Push.wallet.register(deviceToken: deviceToken)
 ```
 
-### Subscribe for Push publishers
+### Subscribe to Push Publishers
 
 When your `Push` instance receives push request or push message from a peer client, it will publish a related event. Subscribe to publishers to receive the requests.
 
