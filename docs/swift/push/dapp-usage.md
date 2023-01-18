@@ -9,7 +9,7 @@ Make sure Networking and Pairing are properly configured.
 - [Pairing](../core/pairing-usage.md)
 
 
-### Subscribe for Push publishers
+### Subscribe to Push Publishers
 When your `Push` dapp instance receives a push request or push message from a peer client, it will publish a related event. Subscribe to publishers to receive the requests.
 
 ```swift
