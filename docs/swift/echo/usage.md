@@ -4,24 +4,24 @@ A configured Echo SDK allows users to receive push notifications on their device
 
 ### Initial Configurations
 
-Make sure to configure Networking instance first:
+Make sure Networking is properly configured:
 - [Networking](../core/networking-configuration.md)
 
 ### Configure Client
 
-1. get client id:
+1. Get `clientId`:
 
 ```swift
 let clientId = try! Networking.interactor.getClientId()
 ```
 
-2. call configuration method:
+2. Call Configuration Method:
 
 ```swift
 Echo.configure(clientId: clientId)
 ```
 
-### Register device token
+### Register Device Token
 
 Communicate with Apple Push Notification service and receive unique device token. Register that token with following method:
 
