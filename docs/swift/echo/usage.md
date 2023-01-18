@@ -2,7 +2,7 @@
 
 A configured Echo SDK allows users to receive push notifications on their devices about important events, such as an auth request or a sign session request
 
-### Initial configurations
+### Initial Configurations
 
 Make sure to configure Networking instance first:
 - [Networking](../core/networking-configuration.md)
