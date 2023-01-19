@@ -34,19 +34,19 @@ The Push Dapp client is responsible for initiating the connection with the cast 
 ```kotlin
 val dappDelegate = object : PushDappClient.Delegate {
     override fun onPushResponse(pushResponse: Push.Dapp.Event.Response) {
-        // Triggered when 
+        // Triggered when the request has been accepted by the wallet. pushResponse contains the accepted subscription
     }
 
     override fun onPushRejected(rejection: Push.Dapp.Event.Rejected) {
-        // Triggered when 
+        // Triggered when the request has been rejected by the wallet. rejection contains the reason for the rejection
     }
 
     override fun onDelete(pushDelete: Push.Dapp.Event.Delete) {
-        // Triggered when 
+        // Triggered when the wallet deletes the subscription. pushDelete contains the topic that was deleted
     }
 
     override fun onError(error: Push.Model.Error) {
-        // Triggered when 
+        // Triggered when there's an error inside the SDK
     }
 }
 
@@ -74,31 +74,47 @@ PushDappClient.request(
 )
 ```
 
-Send a request to the Wallet to register
+Send a push subscription request to a wallet on the pairing topic with an account. If successful, return the request ID. If unsuccesful, return the error.
 
 #
 ### **Notify**
 
 ```kotlin
-SignClient.getListOfSettledSessions()
+val pushTopic = // active push subscription topic
+val pushMessage = Push.Model.Message(
+    title = /*title*/,
+    body = /*body*/,
+    icon = /*icon url*/,
+    url = /*url*/
+)
+val notifyParams = Push.Dapp.Params.Notify(pushTopic, pushMessage)
+
+PushDappClient.notify(notifyParams) { error ->
+    // callback for when the notify has failed
+}
 ```
 
-To get a list of the most current settled sessions, call `SignClient.getListOfSettledSessions()` which will return a list of type `Session`.
+With an active push subscription, send a notifification to a wallet on the established push topic. If unsuccessful, an error is returned in the callback.
 
 #
-### **getActiveSubscriptions**
+### **Get a map of active subscriptions**
 
 ```kotlin
-SignClient.getListOfSettledSessions()
+PushDappClient.getActiveSubscriptions()
 ```
 
-To get a list of the most current settled sessions, call `SignClient.getListOfSettledSessions()` which will return a list of type `Session`.
+Get a list of all the active subscriptions. Returns a map with the topic as the key and `Push.Model.Subscription` as the value.
 
 #
 ### **Delete**
 
 ```kotlin
-SignClient.getListOfSettledSessions()
+val pushTopic = // active push subscription topic
+val deleteParams = Push.Dapp.Params.Delete(topic = pushTopic)
+
+PushDappClient.delete(deleteParams) { error ->
+    // callback for when the delete has failed
+}
 ```
 
-To get a list of the most current settled sessions, call `SignClient.getListOfSettledSessions()` which will return a list of type `Session`.
+To delete a subscription, pass `Push.Dapp.Params.Delete` with the push topic that is to be deleted. If unsuccessful, an error is reutrned in the callback.
