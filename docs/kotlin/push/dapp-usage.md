@@ -25,7 +25,9 @@ PushDappClient.initialize(init) { error ->
 }
 ```
 
-The Push Dapp client is responsible for initiating the connection with the cast server and is also in charge of registering and notifying clients. To initialize the Push Dapp client, create a `Push.Dapp.Params.Init` object in the Android Application class with the Core Client and the cast server url if available. The `Push.Dapp.Params.Init` object will then be passed to the `PushDappClient` initialize function.
+The Push Dapp client is responsible for initiating the connection with the cast server and is also in charge of registering and notifying clients. To initialize the Push Dapp client, create a `Push.Dapp.Params.Init` object in the Android Application class with the `CoreClient` and the cast server url if available. The `Push.Dapp.Params.Init` object will then be passed to the `PushDappClient` initialize function.
+
+The `PushDappClient` should be initalized in the Application class.
 
 #
 
@@ -34,15 +36,15 @@ The Push Dapp client is responsible for initiating the connection with the cast 
 ```kotlin
 val dappDelegate = object : PushDappClient.Delegate {
     override fun onPushResponse(pushResponse: Push.Dapp.Event.Response) {
-        // Triggered when the request has been accepted by the wallet. pushResponse contains the accepted subscription
+        // Triggered when the request has been accepted by the wallet. The pushResponse contains the accepted subscription
     }
 
     override fun onPushRejected(rejection: Push.Dapp.Event.Rejected) {
-        // Triggered when the request has been rejected by the wallet. rejection contains the reason for the rejection
+        // Triggered when the request has been rejected by the wallet. The rejection contains the reason for the rejection
     }
 
     override fun onDelete(pushDelete: Push.Dapp.Event.Delete) {
-        // Triggered when the wallet deletes the subscription. pushDelete contains the topic that was deleted
+        // Triggered when the wallet deletes the subscription. The pushDelete contains the topic that was deleted
     }
 
     override fun onError(error: Push.Model.Error) {
@@ -117,4 +119,4 @@ PushDappClient.delete(deleteParams) { error ->
 }
 ```
 
-To delete a subscription, pass `Push.Dapp.Params.Delete` with the push topic that is to be deleted. If unsuccessful, an error is reutrned in the callback.
+To delete a subscription, pass `Push.Dapp.Params.Delete` with the push topic that is to be deleted. If unsuccessful, an error is returned in the callback.
