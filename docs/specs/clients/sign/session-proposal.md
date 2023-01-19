@@ -2,7 +2,7 @@
 
 ## User Flow
 
-User vists application that requires to connect wallet
+User visits application that requires to connect wallet
 
 1. App displays qrcode or deep link to connect wallet
 2. User scans qrcode or redirects to wallet
