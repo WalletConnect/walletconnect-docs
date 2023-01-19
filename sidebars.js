@@ -414,7 +414,10 @@ module.exports = {
           label: "Push",
           collapsible: true,
           collapsed: true,
-          items: ["kotlin/push/installation"],
+          items: [
+            "kotlin/push/installation",
+            "kotlin/push/wallet-usage",
+            "kotlin/push/dapp-usage"],
         },
         {
           type: "category",
