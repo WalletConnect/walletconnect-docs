@@ -500,7 +500,19 @@ module.exports = {
           label: "Push",
           collapsible: true,
           collapsed: true,
-          items: ["swift/push/installation"],
+          items: [
+                  "swift/push/installation",
+                  "swift/push/wallet-usage",
+                  "swift/push/dapp-usage"],
+        },
+        {
+          type: "category",
+          label: "Echo",
+          collapsible: true,
+          collapsed: true,
+          items: [
+                  "swift/echo/installation",
+                  "swift/echo/usage"],
         },
         {
           type: "category",
