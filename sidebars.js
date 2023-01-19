@@ -421,6 +421,14 @@ module.exports = {
         },
         {
           type: "category",
+          label: "Echo",
+          collapsible: true,
+          collapsed: true,
+          items: [
+                  "kotlin/echo/usage"],
+        },
+        {
+          type: "category",
           label: "Chat",
           collapsible: true,
           collapsed: true,
