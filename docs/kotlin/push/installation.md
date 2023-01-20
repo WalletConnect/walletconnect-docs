@@ -2,9 +2,7 @@
 
 Kotlin implementation of WalletConnect Push protocol for Android applications.
 
-**Android Core** ![Maven Central](https://img.shields.io/maven-central/v/com.walletconnect/android-core)
-##
-**Push** ![Maven Central](https://img.shields.io/maven-central/v/com.walletconnect/push)
+**Android BOM** ![Maven Central](https://img.shields.io/maven-central/v/com.walletconnect/android-bom)
 
 ## Requirements
 
@@ -25,6 +23,7 @@ allprojects {
 app/build.gradle.kts
 
 ```gradle
-implementation("com.walletconnect:android-core:release_version")
-implementation("com.walletconnect:push:release_version")
+implementation("com.walletconnect:android-bom:release_version")
+implementation("com.walletconnect:android-core")
+implementation("com.walletconnect:push")
 ```
