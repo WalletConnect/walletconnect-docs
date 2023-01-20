@@ -20,6 +20,7 @@ Session is a topic encrypted by a symmetric key derived using a key agreement es
 ```jsonc
 {
   "topic": string,
+  "pairingTopic: string,
   "relay": {
     "protocol": string,
     "data": string
