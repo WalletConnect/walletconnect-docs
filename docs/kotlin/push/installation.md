@@ -23,7 +23,7 @@ allprojects {
 app/build.gradle.kts
 
 ```gradle
-implementation("com.walletconnect:android-bom:release_version")
+implementation(platform("com.walletconnect:android-bom::release_version")
 implementation("com.walletconnect:android-core")
 implementation("com.walletconnect:push")
 ```
