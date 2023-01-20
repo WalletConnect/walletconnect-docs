@@ -91,7 +91,7 @@ PushWalletClient.reject(
 
 To send a rejection for the subscription request, pass `Push.Wallet.Params.Reject` to the `PushWalletClient.reject` function to reject the subscription request and notify the Dapp.
 
-### **Get a map of active subscriptions**
+### Get a Map of Active Subscriptions
 To get a list of all the active subscriptions, call the `getActiveSubscriptions` function. It will return a map with the topic as the key and `Push.Model.Subscription` as the value.
 ```kotlin
 PushWalletClient.getActiveSubscriptions()
