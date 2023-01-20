@@ -1,8 +1,8 @@
-# Wallet's EchoClient Usage 
+# Wallet's Echo Client Usage 
 
 The Echo SDK enables wallets to receive push notifications from WalletConnect's Echo Server via [Firebase Cloud Messaging](https://firebase.google.com/docs/cloud-messaging). This means you will have to setup your project with Firebase before being able to use the `EchoClient`.  
 
-### prerequisites
+### Prerequisites
 Make sure that a service extending the FirebaseMessagingService is added to your manifest as per the [Firebase FCM documentation](https://firebase.google.com/docs/cloud-messaging/android/client#manifest) as well as any other setup Firebase requires [Firebase setup documentation](https://firebase.google.com/docs/android/setup)
 
 ### Register Device Token
@@ -20,4 +20,4 @@ CoreClient.Echo.register(
     })
 ```
 
-To register a wallet to recieve WalletConnect push notifications, call `CoreClient.Echo.register` and pass the Firebase Access Token
+To register a wallet to recieve WalletConnect push notifications, call `CoreClient.Echo.register` and pass the Firebase Access Token.
