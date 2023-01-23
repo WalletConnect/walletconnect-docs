@@ -8,7 +8,7 @@ Invite is an encrypted payload used in wc_chatInvite which will be tracked by th
 
 ```jsonc
 {
-  "message": string,
+  "message": string, // character limit is 200. Must be checked by SDK before sending
   "account": string,
   "publicKey": string,
   "signature": string, // optional
@@ -22,7 +22,7 @@ Media is an optional parameter used in wc_chatMessage to append a media file ref
 ```jsonc
 {
   "type": string,
-  "data": string,
+  "data": string, // Decide on data limit
 }
 ```
 
@@ -32,7 +32,7 @@ An array of Messages is returned on `getMessages(params: {topic: string;})`
 
 ```jsonc
 {
-  "message" : string,
+  "message" : string, // character limit is 1000. Must be checked by SDK before sending
   "authorAccount": string, // to distinguish who sent it. Could also be a flag
   "timestamp": Int64,
   "media": Media // optional
