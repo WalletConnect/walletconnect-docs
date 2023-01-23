@@ -56,7 +56,6 @@ The policy object defines the policy's parameters.
 {
     "ttl" : seconds,
     "tag" : number, // Optional / default = 0
-    "prompt" : boolean // Optional / default = false
 }
 ```
 
