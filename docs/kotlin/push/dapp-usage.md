@@ -66,7 +66,7 @@ PushDappClient.request(
 )
 ```
 
-Send a push subscription request to a wallet on the pairing topic with an account. If successful, return the request ID. If unsuccesful, return the error.
+Send a push subscription request to a wallet on the pairing topic with an account. If successful, return the request ID. If unsuccessful, return the error.
 
 ### Notify
 
@@ -84,7 +84,7 @@ PushDappClient.notify(notifyParams) { error ->
 }
 ```
 
-With an active push subscription, send a notifification to a wallet on the established push topic. If unsuccessful, an error is returned in the callback.
+With an active push subscription, send a notification to a wallet on the established push topic. If unsuccessful, an error is returned in the callback.
 
 ### Get a Map of Active Subscriptions
 
