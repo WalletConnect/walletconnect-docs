@@ -125,3 +125,16 @@ interface ErrorResponse {
   };
 }
 ```
+
+## Context
+
+Context is appended to Auth Requests to provide metadata that was constructed internally by the client that is relevant to the specific request
+
+```jsonc
+{
+  "verified": {
+    "origin": string,
+    "validation": "UNKNOWN" | "VALID" | "INVALID"
+  }
+}
+```

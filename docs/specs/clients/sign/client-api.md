@@ -75,10 +75,10 @@ abstract class Client {
   // ---------- Events ----------------------------------------------- //
 
   // subscribe to session proposal
-  public abstract on("session_proposal", (sessionProposal: SessionProposal) => {}): void;
+  public abstract on("session_proposal", (sessionProposal: SessionProposal, context: SessionContext) => {}): void;
 
   // subscribe to session request
-  public abstract on("session_request", (sessionRequest: SessionRequest) => {}): void;
+  public abstract on("session_request", (sessionRequest: SessionRequest, context: SessionContext) => {}): void;
 
   // subscribe to session event
   public abstract on("session_event", (sessionEvent: SessionEvent) => {}): void;

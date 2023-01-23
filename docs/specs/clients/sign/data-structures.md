@@ -131,3 +131,16 @@ Settlement is sent by the responder after approval and it's broadcasted right af
   "expiry": Int64, // seconds
 }
 ```
+
+## Context
+
+Context is appended to Session Proposals and Session Requests to provide metadata that was constructed internally by the client that is relevant to the specific proposal or request
+
+```jsonc
+{
+  "verified": {
+    "origin": string,
+    "validation": "UNKNOWN" | "VALID" | "INVALID"
+  }
+}
+```
