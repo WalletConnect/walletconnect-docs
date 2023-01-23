@@ -2,7 +2,7 @@
 
 ## Description
 
-Relay Network is publish-subscribe network that route messages between clients subscribed to a topic through a Relay Server
+Relay Network is a publish-subscribe network that routes messages between clients subscribed to a topic through a Relay Server
 
 ## Properties
 
