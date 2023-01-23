@@ -50,6 +50,11 @@ In this repository, we document and discuss features that are currently under de
       name: "Cast Server",
       description: "Cast server tracks encryption keys on the behalf of a client and publishes messages to the Relay Server.",
       url: `/2.0/specs/servers/cast`
+    },
+    {
+      name: "Verify Server",
+      description: "Verify server is used to authenticate the origin of an attestation id which is related to a JSON-RPC payload sent.",
+      url: `/2.0/specs/servers/verify`
     }
   ]}
 />
