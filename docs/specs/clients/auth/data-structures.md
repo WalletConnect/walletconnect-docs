@@ -58,7 +58,7 @@ interface PendingRequest {
 }
 ```
 
-## Cacao Header (CAIP-70)
+## Cacao Header (CAIP-74)
 
 ```typescript
 interface CacaoHeader {
@@ -66,7 +66,7 @@ interface CacaoHeader {
 }
 ```
 
-## Cacao Payload (CAIP-70)
+## Cacao Payload (CAIP-74)
 
 ```typescript
 interface CacaoPayload {
@@ -84,7 +84,7 @@ interface CacaoPayload {
 }
 ```
 
-## Cacao Signature (CAIP-70)
+## Cacao Signature (CAIP-74)
 
 ```typescript
 interface CacaoSignature {
@@ -94,7 +94,7 @@ interface CacaoSignature {
 }
 ```
 
-## Cacao (CAIP-70)
+## Cacao (CAIP-74)
 
 ```typescript
 interface Cacao {
