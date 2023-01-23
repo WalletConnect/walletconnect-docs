@@ -41,7 +41,7 @@ authClient.on("auth_response", ({ params }) => {
 });
 ```
 
-You can derive the users' wallet address by desctrutcing and splitting `params.result.p.iss`.
+You can derive the users' wallet address by destructing and splitting `params.result.p.iss`.
 
 ```javascript
 const { iss } = params.result.p.iss;
