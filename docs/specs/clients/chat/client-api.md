@@ -11,11 +11,13 @@ abstract class Client {
 
   // - registers a blockchain account with an identity key if not yet registered 
   // - registers invite key and starts listening on invites if private is true
+  // - onSign(message) is a callback for signing CAIP-122 message to verify blockchain account ownership
   // returns the public identity key
   // calling register with another account switches currently managed blockchain account
   public abstract register(params: {
     account: string;
     private?: boolean;
+    onSign: (message: string) => Cacao.Signature
   }): Promise<string>;
 
   // queries the keyserver with a blockchain account
