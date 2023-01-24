@@ -28,3 +28,11 @@ Params:
     "attestationId": string,
 }
 ```
+
+Response:
+
+```jsonc
+{
+    "origin": string
+}
+```
