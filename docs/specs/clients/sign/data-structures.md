@@ -140,7 +140,8 @@ Context is appended to Session Proposals and Session Requests to provide metadat
 {
   "verified": {
     "origin": string,
-    "validation": "UNKNOWN" | "VALID" | "INVALID"
+    "validation": "UNKNOWN" | "VALID" | "INVALID",
+    "verifyUrl": string
   }
 }
 ```
