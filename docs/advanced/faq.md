@@ -38,21 +38,19 @@ const signClient = await SignClient.init({
 
 </details>
 
-<details className="box faq"><summary className="faq-question">How can we use a custom relay for our bridge without a WC URI parameter for the host?</summary>
+<details className="box faq"><summary className="faq-question">How can we use a custom relay for our bridge without a WC URI parameter as the host?</summary>
 <p className="faq-answer">
 
- A custom URI parameter can be utilized during testing, however it is not recommended for use in a production environment.
+You are more than welcome to utilize a custom URI parameter during testing. However, it is currently not recommended for use in a production environment. 
 
 </p>
 
 </details>
 
-<details className="box faq"><summary className="faq-question">Why is self-hosting of RPC nodes not currently an option and what are the plans for decentralization?</summary>
+<details className="box faq"><summary className="faq-question">Why is self-hosting RPC nodes not an option at this time? Are there plans to make this possible in the future?</summary>
 <p className="faq-answer">
 
-We acknowledge the concerns around centralization and the desire for developers to self-host their own RPC nodes. However, at this time, we will not be able to offer that option. We understand that in the web3 space, decentralization is a key concern. We have chosen a more pragmatic solution and have observed that currently, the industry standard is the use of third-party RPC services.
-
-This summer, we will be launching a permissioned network available to a select group of partners. This will allow for more decentralization of nodes and will provide additional options for developers.
+We understand the desire for developers to self-host their own RPC nodes. We share this vision, and have embarked on a decentralization roadmap in order to achieve this. This summer, we will launch a permissioned network and invite a select group of partners to participate in this crucial first phase. Our objective is to make self-hosting RPC nodes a reality with the creation of the decentralized WalletConnect Network, and we appreciate your patience as we progress in this enormous mission. 
 
 </p>
 
