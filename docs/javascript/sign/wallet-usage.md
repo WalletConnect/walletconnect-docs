@@ -20,7 +20,7 @@ For more information check our [migration guide](../../advanced/migrating-from-v
 
 ## Integrating Auth
 
-We strongly encourage wallets to also integrate the [Auth](./../auth/installation.md) API so that dapps using only Auth can still particpate in the same ecosystem.
+We strongly encourage wallets to also integrate the [Auth](./../auth/installation.md) API so that dapps using only Auth can still participate in the same ecosystem.
 
 ## Initializing the client
 

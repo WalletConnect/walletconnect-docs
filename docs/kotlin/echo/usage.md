@@ -20,4 +20,4 @@ CoreClient.Echo.register(
     })
 ```
 
-To register a wallet to recieve WalletConnect push notifications, call `CoreClient.Echo.register` and pass the Firebase Access Token.
+To register a wallet to receive WalletConnect push notifications, call `CoreClient.Echo.register` and pass the Firebase Access Token.

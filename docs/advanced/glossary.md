@@ -66,7 +66,7 @@ The chosen elliptic curve was Curve25519 offering 128 bits of security (256 bits
 
 ## Authenticated Encryption
 
-Authentication Encryption refers to a form of encryption which simultaneous assures the confidentiality and authenticity of data.
+Authentication Encryption refers to a form of encryption which simultaneously assures the confidentiality and authenticity of data.
 
 The chosen approach was to encrypt-then-mac which produces a MAC based on the resulting ciphertext. The encryption uses AES-256-CBC with a random Initialization Vector (IV) and authentication uses HMAC-SHA256. The encrypted payloads are serialized in the following order: iv, publicKey, mac and cipherText.
 
@@ -84,7 +84,7 @@ By default, the clients will use a proxy server connected to the Waku network an
 
 ## Publish-Subscribe pattern
 
-Publish-Subscribe (also known as PubSub) is a messaging pattern where senders of messages (publishers) do not send messages directly to receivers but instead label messages with a topic that can listened by subscribers. Subscribers only receive messages matching the topics that have expressed interest on.
+Publish-Subscribe (also known as PubSub) is a messaging pattern where senders of messages (publishers) do not send messages directly to receivers but instead label messages with a topic that can be listened to by subscribers. Subscribers only receive messages matching the topics that have expressed interest on.
 
 ## Topics
 
