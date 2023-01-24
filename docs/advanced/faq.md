@@ -24,12 +24,12 @@ No, the bridge servers are v1 only.
 <details className="box faq"><summary className="faq-question">The default RPC endpoint is blocked. How can I get around this?</summary>
 <p className="faq-answer">
 
-When initializing `signClient`, you can set `rpcUrl` to `relay.walletconnect.org`. 
+When initializing `signClient`, you can set `rpcUrl` to `wss://relay.walletconnect.com`. 
 
 ```js
 const signClient = await SignClient.init({
   projectId: "<YOUR PROJECT ID>",
-  relayUrl: "relay.walletconnect.org",
+  relayUrl: "wss://relay.walletconnect.com",
   metadata: {},
 });
 ```
