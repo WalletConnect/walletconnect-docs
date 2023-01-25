@@ -7,7 +7,7 @@ abstract class Client {
   // ---------- Methods ----------------------------------------------- //
 
   // initializes the client with persisted storage and a network connection
-  public abstract init(): Promise<void>;
+  public abstract init(account: string): Promise<void>;
 
   // - registers a blockchain account with an identity key if not yet registered 
   // - registers invite key and starts listening on invites if private is true
