@@ -23,7 +23,7 @@ CoreClient.initialize(relayServerUrl = serverUrl, connectionType = ConnectionTyp
 AuthClient.initialize(init = Auth.Params.Init(core = CoreClient)) { error -> Log.e(tag(this), error.throwable.stackTraceToString()) }
 ```
 
-For more contex on how to initialize CoreClient, go to [CoreClient docs](../../kotlin/core/installation.md) section.
+For more context on how to initialize CoreClient, go to [CoreClient docs](../../kotlin/core/installation.md) section.
 
 ---
 ### **AuthClient.RequesterDelegate**

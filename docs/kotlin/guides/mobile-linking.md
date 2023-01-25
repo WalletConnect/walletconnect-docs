@@ -4,11 +4,11 @@ Communication between a mobile wallet and a mobile application is possible by de
 
 :::info
 
-Deeplinking flow works in the same way in all pur producs (Sign, Auth, Push, Chat)
+Deeplinking flow works in the same way in all pur products (Sign, Auth, Push, Chat)
 
 :::
 
-The common pattern of establishing a connection between a mobile wallet and a mobile applications is the following:
+The common pattern of establishing a connection between a mobile wallet and a mobile application is the following:
 
 1. Dapp shows user a connection button
 2. User presses the button and Android system shows an app chooser
@@ -17,7 +17,7 @@ The common pattern of establishing a connection between a mobile wallet and a mo
 5. User returns to Dapp manually
 6. After returning to a Dapp a connection between Dapp and wallet is established
 
-Simillar pattern happens when Dapp wants to send a signing request to wallet:
+Similar pattern happens when Dapp wants to send a signing request to wallet:
 
 1. User presses a button to send a signing request to wallet
 2. User is redirected automatically to already connected wallet
@@ -52,7 +52,7 @@ SignClient.initialize(init)
 
 **Heads-up:** To make this flow working well, Wallet must register one of its Android components with the same deep link that it initialized with.
 
-To check the flow implementation decribed above have a look on our sample wallet:
+To check the flow implementation described above have a look on our sample wallet:
 https://github.com/WalletConnect/WalletConnectKotlinV2/tree/master/signSDK/wallet
 
 ## Dapp Support
@@ -79,12 +79,12 @@ val appMetaData = Core.Model.AppMetaData(
 CoreClient.initialize(relayServerUrl = serverUrl, connectionType = connectionType, application = application, metaData = appMetaData)
 
 val init = Sign.Params.Init(core = CoreClient)
-SignClient.initalize(init)
+SignClient.initialize(init)
 ```
 
 **Heads-up:** To make this flow working well, Dapp must register one of its Android components with the same deep link that it initialized with.
 
-To check the flow implementation decribed above have a look on our sample Dapp:
+To check the flow implementation described above have a look on our sample Dapp:
 https://github.com/WalletConnect/WalletConnectKotlinV2/tree/master/signSDK/dapp
 
 ## References

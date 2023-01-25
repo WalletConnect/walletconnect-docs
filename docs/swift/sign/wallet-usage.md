@@ -52,7 +52,7 @@ Sign.instance.sessionProposalPublisher
            // present proposal to the user
     }.store(in: &publishers)
 ```
-Session proposal is a heandshake sent by a dapp and it's puropose is to define a session rules. Heandshake procedure is defined by [CAIP-25](https://github.com/ChainAgnostic/CAIPs/blob/master/CAIPs/caip-25.md).
+Session proposal is a handshake sent by a dapp and it's purpose is to define a session rules. Handshake procedure is defined by [CAIP-25](https://github.com/ChainAgnostic/CAIPs/blob/master/CAIPs/caip-25.md).
 `Session.Proposal` object conveys set of required `ProposalNamespaces` that contains required blockchains methods and events. Dapp requests with methods and wallet will emit events defined in namespaces. 
 
 The user will either approve the session proposal (with session namespaces) or reject it. Session namespaces must at least contain requested methods, events and accounts associated with proposed blockchains.
@@ -100,7 +100,7 @@ Example session namespaces response:
 ```swift
  Sign.instance.approve(proposalId: "proposal_id", namespaces: [String: SessionNamespace])
 ```
-When session is sucessfully approved `sessionSettlePublisher` will publish a `Session`
+When session is successfully approved `sessionSettlePublisher` will publish a `Session`
 ```swift
 Sign.instance.sessionSettlePublisher
     .receive(on: DispatchQueue.main)
@@ -138,7 +138,7 @@ if sessionRequest.method == "personal_sign" {
 }
 ```
 
-Now, your wallet (as it owns your user’s privete keys) is responsible for signing the transaction. After doing it, you can send a response to a dapp.
+Now, your wallet (as it owns your user’s private keys) is responsible for signing the transaction. After doing it, you can send a response to a dapp.
 
 ```swift
 let response: AnyCodable = sign(request: sessionRequest) // implement your signing method

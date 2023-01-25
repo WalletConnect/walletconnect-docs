@@ -20,3 +20,13 @@ Body:
     "webhook": string
 }
 ```
+
+
+
+### Message Id
+
+A Relay message is globally available and it's always an utf8 string. Therefore the message id is derived as the sha256 hash.
+
+```sh
+message_id = sha256(message)
+```

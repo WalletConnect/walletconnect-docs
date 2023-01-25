@@ -22,7 +22,7 @@ CoreClient.initialize(relayServerUrl = serverUrl, connectionType = ConnectionTyp
 
 AuthClient.initialize(init = Auth.Params.Init(core = CoreClient)) { error -> Log.e(tag(this), error.throwable.stackTraceToString()) }
 ```
-For more contex on how to initialize CoreClient, go to [CoreClient docs](../../kotlin/core/installation.md) section.
+For more context on how to initialize CoreClient, go to [CoreClient docs](../../kotlin/core/installation.md) section.
 
 ---
 ### **AuthClient.ResponderDelegate**
@@ -53,7 +53,7 @@ object ResponderDelegate : AuthClient.ResponderDelegate {
 
 ## **Methods**
 
-### **Authotisation Request Approval**
+### **Authorisation Request Approval**
 
 To approve authorisation request, sign message using `CacaoSigner.sign` which requires private key to sign `Cacao` object that needs to be passed to `Auth.Params.Respond.Result` object and send to Dapp / Requester.
 `issuer` parameter describes what did responder authorises. Example `iss` for Ethereum Mainnet: `did:pkh:eip155:1:0xb9c5714089478a327f09197987f16f9e5d936e8a`. More about `did:pkh` method [here](https://github.com/w3c-ccg/did-pkh/blob/main/did-pkh-method-draft.md).

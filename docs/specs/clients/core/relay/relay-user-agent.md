@@ -2,7 +2,7 @@
 
 ## Motivation
 
-User Agent is an optional url parameter that provides context over the client's platform that is being run to enable Relay to identify issues regarding specific devices and/or operatign systems.
+User Agent is an optional url parameter that provides context over the client's platform that is being run to enable Relay to identify issues regarding specific devices and/or operating systems.
 
 ## Overview
 
@@ -20,7 +20,7 @@ The schema for the client's User Agent will include the following:
 - SDK Version (sdk) - defines which SDK is being used (eg. "swift-2.0-rc.0" or "js-2.0-rc.0" or "kotlin-2.0-rc.0")
 - Operating System (os) - defines which operating system is being used (eg "macos-12.4")
 
-Additionaly the following optional params can be included if available:
+Additionally the following optional params can be included if available:
 
 - App identifier (id) - defines which application is being used (eg "browser-app.uniswap.org" or "android-com.walletconnect.example")
 

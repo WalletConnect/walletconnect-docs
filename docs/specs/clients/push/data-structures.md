@@ -5,6 +5,7 @@
 ```jsonc
 {
   "topic": string,
+  "account": string,
   "relay": {
     "protocol": string,
     "data": string

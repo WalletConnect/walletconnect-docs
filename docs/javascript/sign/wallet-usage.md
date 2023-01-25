@@ -20,7 +20,7 @@ For more information check our [migration guide](../../advanced/migrating-from-v
 
 ## Integrating Auth
 
-We strongly encourage wallets to also integrate the [Auth](./../auth/installation.md) API so that dapps using only Auth can still particpate in the same ecosystem.
+We strongly encourage wallets to also integrate the [Auth](./../auth/installation.md) API so that dapps using only Auth can still participate in the same ecosystem.
 
 ## Initializing the client
 
@@ -79,11 +79,6 @@ signClient.on("session_proposal", (event) => {
           chains: string[];
           methods: string[];
           events: string[];
-          extension?: {
-            chains: string[];
-            methods: string[];
-            events: string[];
-          }[];
         }
       >;
       pairingTopic?: string;
@@ -151,30 +146,9 @@ namespaces: {
   eip155: {
     accounts: ["eip155:1:0x0000000000..., eip155:2:0x0000000000..."],
     methods: ["personal_sign", "eth_sendTransaction"],
-    events: ["accountsChanged"],
-    extension: [
-      {
-        accounts: ["eip155:2:0x0000000000..."],
-        methods: ["eth_sign"],
-        events: [],
-      },
-    ],
+    events: ["accountsChanged"]
   },
 };
-```
-
-### Extension
-
-The `extension` parameter is used to specify methods that are not shared by all the accounts/chains of the namespace. For example, chain A may have a special method that is not shared by chain B - in this case, we would create an extension that would only include chain B. Here's an example:
-
-```js
-extension: [
-  {
-    accounts: ["eip:137"],
-    methods: ["eth_sign"],
-    events: [],
-  },
-];
 ```
 
 ### Pairing with `uri`
@@ -198,14 +172,7 @@ const { topic, acknowledged } = await signClient.approve({
     eip155: {
       accounts: ["eip155:1:0x0000000000..."],
       methods: ["personal_sign", "eth_sendTransaction"],
-      events: ["accountsChanged"],
-      extension: [
-        {
-          accounts: ["eip:137"],
-          methods: ["eth_sign"],
-          events: [],
-        },
-      ],
+      events: ["accountsChanged"]
     },
   },
 });

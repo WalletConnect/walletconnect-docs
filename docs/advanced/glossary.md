@@ -62,11 +62,11 @@ TTL times are always represented in seconds.
 
 Shared key is the key derived using both participants key pairs using the elliptic curve Diffie-Hellman (ECDH) key agrrement scheme.
 
-The chosen elliptic curve was Curve25519 offering 128 bits of security (256 bits key size) which was speifically designed for ECDH and it's widely supported by many different platforms natively. The name of its DH function is X25519
+The chosen elliptic curve was Curve25519 offering 128 bits of security (256 bits key size) which was specifically designed for ECDH and it's widely supported by many different platforms natively. The name of its DH function is X25519
 
 ## Authenticated Encryption
 
-Authentication Encryption refers to a form of encryption which simulatenous assures the confidentiality and authenticity of data.
+Authentication Encryption refers to a form of encryption which simultaneously assures the confidentiality and authenticity of data.
 
 The chosen approach was to encrypt-then-mac which produces a MAC based on the resulting ciphertext. The encryption uses AES-256-CBC with a random Initialization Vector (IV) and authentication uses HMAC-SHA256. The encrypted payloads are serialized in the following order: iv, publicKey, mac and cipherText.
 
@@ -84,7 +84,7 @@ By default, the clients will use a proxy server connected to the Waku network an
 
 ## Publish-Subscribe pattern
 
-Publish-Subscribe (also known as PubSub) is a messaging pattern where senders of messages (publishers) do not send messages directly to receivers but instead label messages with a topic that can listened by subscribers. Subscribers only receive messages matching the topics that have expressed interest on.
+Publish-Subscribe (also known as PubSub) is a messaging pattern where senders of messages (publishers) do not send messages directly to receivers but instead label messages with a topic that can be listened to by subscribers. Subscribers only receive messages matching the topics that have expressed interest on.
 
 ## Topics
 
@@ -105,14 +105,7 @@ A dapp sends a proposal namespace to the wallet for pairing. The proposal namesp
   "eip155": {
     "chains": ["eip155:137", "eip155:1"],
     "methods": ["eth_sign"],
-    "events": ["accountsChanged"],
-    "extensions": [
-      {
-        "chains": ["eip155:137"],
-        "method": ["personalSign"],
-        "events": ["chainChanged"]
-      }
-    ]
+    "events": ["accountsChanged"]
   },
   "cosmos": {
     "chains": ["cosmos:cosmoshub-4"],
@@ -122,12 +115,10 @@ A dapp sends a proposal namespace to the wallet for pairing. The proposal namesp
 }
 ```
 
-The `extension` field is used to mention the *chain-exclusive parameters*. For example, let's say Polygon has a special method `personalSign` and an event `chainChanged` that is not available in Ethereum Mainnet. Hence, these special chain-exclusive parameters can be mentioned as extensions as stated in the above code snippet.
-
 ### Session namespaces
 The dapp validates if the received proposal namespaces comply with the session namespaces. If they comply, a session is established successfully and pairing is completed. If not, the session is not established and all the cached data related to the namespaces are deleted. The session namespace can also choose to provide access to more chains, methods or events that were not a part of the proposal namespaces.
 
-**Example :** The following is an example for a sessoion namespace which complies with the requested proposal namespace example,
+**Example :** The following is an example for a session namespace which complies with the requested proposal namespace example,
 
 ```js
 {
@@ -137,14 +128,7 @@ The dapp validates if the received proposal namespaces comply with the session n
       "eip155:1:0xab16a96d359ec26a11e2c2b3d8f8b8942d5bfcdb"
     ],
     "methods": ["eth_sign"],
-    "events": ["accountsChanged"],
-    "extensions": [
-      {
-        "accounts": ["eip155:137:0xab16a96d359ec26a11e2c2b3d8f8b8942d5bfcdb"],
-        "method": ["personalSign"],
-        "events": ["chainChanged"]
-      }
-    ]
+    "events": ["accountsChanged"]
   },
   "cosmos": {
     "accounts": [

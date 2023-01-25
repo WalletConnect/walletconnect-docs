@@ -4,7 +4,7 @@ This doc should be used as a _source-of-truth_ and reflect the latest decisions 
 
 ## Definitions
 
-- **Nullables:** Fields flagged as `Optional` can be ommited from the payload.
+- **Nullables:** Fields flagged as `Optional` can be omitted from the payload.
 - Unless explicitly mentioned that a response requires associated data, all methods response's follow a default JSON-RPC pattern for the success and failure cases:
 
 ```jsonc
@@ -48,14 +48,7 @@ Used to propose a session through topic A. Requires a success response with asso
     "<namespace_name>" : {
       "chains": [string],
       "methods": [string],
-      "events": [string],
-      "extension": [ // optional
-        {
-          "chains": [string],
-          "methods": [string],
-          "events": [string],
-        }
-      ]
+      "events": [string]
     }
   },
 }
@@ -107,14 +100,7 @@ Used to settle a session over topic B.
     "<namespace_name>" : {
       "accounts": [string],
       "methods": [string],
-      "events": [string],
-      "extension": [ // optional
-        {
-          "accounts": [string],
-          "methods": [string],
-          "events": [string],
-        }
-      ]
+      "events": [string]
     }
   },
   "expiry": Int64, // seconds
@@ -153,14 +139,7 @@ Used to update the namespaces of a session.
     "<namespace_name>" : {
       "accounts": [string],
       "methods": [string],
-      "events": [string],
-      "extension": [ // optional
-        {
-          "accounts": [string],
-          "methods": [string],
-          "events": [string],
-        }
-      ]
+      "events": [string]
     }
   }
 }
@@ -227,6 +206,16 @@ Sends a CAIP-27 request to the peer client. The client should immediately reject
 Param `Expiry` is an optional Unix timestamp. Sets the time until which the responder can respond to this request. If request is expired responder should respond with a specific error code.
 
 If this parameter is not specified, the request is considered indefinite.
+
+##### Expiry validation
+`Expiry` should be between `.now() + MIN_INTERVAL` and `.now() + MAX_INTERVAL` where:
+- `MIN_INTERVAL` is 300 (5 mins)
+- `MAX_INTERVAL` is 604800 (7 days)
+
+If expiry validation failed wallet should respond with `.sessionRequestExpired (code 8000)` error
+
+##### TTL extension
+When DApp is setting `expiry` params, client should insure that Relay Publish payload method `ttl` fit `expiry` value. Otherwise request `ttl` must be increased by the required value. Check [Relay Publish payload method](../../servers/relay/relay-server-rpc.md)
 
 **Request**
 

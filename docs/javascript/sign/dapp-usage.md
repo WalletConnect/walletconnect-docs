@@ -12,21 +12,11 @@ For an example implementation, please refer to our `react-dapp-v2` [example](htt
 
 ## Install Packages
 
-Install the WalletConnect Web3Modal package.
+Dapps will also need to install `Web3Modal` for the UI.
 
 ```bash npm2yarn
 npm install @web3modal/standalone
 ```
-
-:::note
-There are different Web3Modal packages depending on your use case.
-
-- `@web3modal/standalone`
-- `@web3modal/react`
-- `@web3modal/html`
-
-To learn about the differences, click [here](https://docs.walletconnect.com/2.0/web3modal/about).
-:::
 
 ## Create a Session
 
