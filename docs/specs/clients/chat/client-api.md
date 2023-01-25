@@ -35,7 +35,7 @@ abstract class Client {
   // sends a chat invite from curently managed account to peer account 
   // returns an invite id
   public abstract invite(params: {
-    account: string;
+    inviteeAccount: string;
     invite: Invite;
   }): Promise<number>;
 

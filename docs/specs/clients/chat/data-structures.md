@@ -9,7 +9,7 @@ Invite is an encrypted payload used in wc_chatInvite which will be tracked by th
 ```jsonc
 {
   "message": string, // character limit is 200. Must be checked by SDK before sending
-  "account": string,
+  "inviterAccount": string,
   "publicKey": string,
 }
 ```
