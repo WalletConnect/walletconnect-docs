@@ -21,15 +21,15 @@ No, the bridge servers are v1 only.
 
 </details>
 
-<details className="box faq"><summary className="faq-question">The default RPC endpoint is blocked. How can I get around this?</summary>
+<details className="box faq"><summary className="faq-question">The default relay endpoint is blocked. How can I get around this?</summary>
 <p className="faq-answer">
 
-When initializing `signClient`, you can set `rpcUrl` to `wss://relay.walletconnect.com`. 
+When initializing `signClient`, you can set `relayUrl` to `wss://relay.walletconnect.org`. 
 
 ```js
 const signClient = await SignClient.init({
   projectId: "<YOUR PROJECT ID>",
-  relayUrl: "wss://relay.walletconnect.com",
+  relayUrl: "wss://relay.walletconnect.org",
   metadata: {},
 });
 ```
@@ -47,10 +47,10 @@ You are more than welcome to utilize a custom URI parameter during testing. Howe
 
 </details>
 
-<details className="box faq"><summary className="faq-question">Why is self-hosting RPC nodes not an option at this time? Are there plans to make this possible in the future?</summary>
+<details className="box faq"><summary className="faq-question">Why is self-hosting not an option at this time? Are there plans to make this possible in the future?</summary>
 <p className="faq-answer">
 
-We understand the desire for developers to self-host their own RPC nodes. We share this vision, and have embarked on a decentralization roadmap in order to achieve this. This summer, we will launch a permissioned network and invite a select group of partners to participate in this crucial first phase. Our objective is to make self-hosting RPC nodes a reality with the creation of the decentralized WalletConnect Network, and we appreciate your patience as we progress in this enormous mission. 
+We understand the desire for developers to self-host their own relay. We share this vision, and have embarked on a decentralization roadmap in order to achieve this. This summer, we will launch a permissioned network and invite a select group of partners to participate in this crucial first phase. Our objective is to make self-hosting relay a reality with the creation of the decentralized WalletConnect Network, and we appreciate your patience as we progress in this enormous mission. 
 
 </p>
 
