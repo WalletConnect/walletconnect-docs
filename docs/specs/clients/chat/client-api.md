@@ -1,15 +1,16 @@
 # Client API
 
-Client manages only one blockchain account at a time. To switch accounts call register with new parameters. Client only listens to one topic for invites at a time. 
+Client manages only one blockchain account at a time which is set on `init()` method call. To switch accounts call register with new parameters. Client only listens to one topic for invites at a time. 
 
 ```typescript
 abstract class Client {
   // ---------- Methods ----------------------------------------------- //
 
   // initializes the client with persisted storage and a network connection
+  // sets currently managed blockchain account
   public abstract init(account: string): Promise<void>;
 
-  // - registers a blockchain account with an identity key if not yet registered 
+  // - registers a blockchain account with an identity key if not yet registered on this client
   // - registers invite key and starts listening on invites if private is true
   // - onSign(message) is a callback for signing CAIP-122 message to verify blockchain account ownership
   // returns the public identity key
