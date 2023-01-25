@@ -28,8 +28,8 @@ Params:
 ```jsonc
 {
     "topic": string,
-    "pageSize": number,
-    "pageNumber": number
+    "lastMessageId": number,
+    "messageCount": number
 }
 ```
 
