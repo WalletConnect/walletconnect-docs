@@ -21,7 +21,7 @@ Media is an optional parameter used in wc_chatMessage to append a media file ref
 ```jsonc
 {
   "type": string,
-  "data": string, // Decide on data limit
+  "data": string, // character limit is 1000. Must be checked by SDK before sending
 }
 ```
 
