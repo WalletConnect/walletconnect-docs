@@ -41,7 +41,7 @@ val chatDelegate = object : ChatClient.ChatDelegate {
     }
 
     override fun onReject(onReject: Chat.Model.Events.OnReject) {
-        // Triggered when a invite is rejected by the other peer
+        // Triggered when an invite is rejected by the other peer
     }
 
     override fun onMessage(onMessage: Chat.Model.Events.OnMessage) {
