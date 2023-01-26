@@ -43,7 +43,7 @@ is valid? Yes
 
 ---
 
-## 4. Peer B matches an inner array and does not partically match the other inner array
+## 4. Peer B matches an inner array and does not partially match the other inner array
 
 ### Peer A's pairing uri:
     uri = "...methods=[wc_sessionPropose],[wc_authRequest]"

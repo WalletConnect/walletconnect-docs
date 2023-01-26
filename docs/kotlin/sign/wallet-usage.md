@@ -180,7 +180,7 @@ to `SignClient.Update`.
 val sessionTopic: String = /*Topic of Session*/
 val extendParams = Sign.Params.Extend(sessionTopic = sessionTopic)
 
-SignClient.extend(exdendParams) { error -> /*callback for error while extending a session*/ }
+SignClient.extend(extendParams) { error -> /*callback for error while extending a session*/ }
 ```
 
 To extend a session, create a `Sign.Params.Extend` object with the session's topic to update the session with to `Sign.Extend`. Session is
