@@ -4,19 +4,22 @@ In this document we define data structures and definitions used in the chat api
 
 ## Invite
 
-Invite is an encrypted payload used in wc_chatInvite which will be tracked by the json-rpc id to index on the client-side with the following params.
+Invite is an structure that is returned by SDK. Is extracted from Invite Proposals did-jwt claims. To get author account identity must be resolved from `iss` field. A map of type `Map<number, Invite>` is returned on `getInvites()`. Topic is the key of the map.
+
 
 ```jsonc
 {
+  "id": number,
   "message": string, // character limit is 200. Must be checked by SDK before sending
   "inviterAccount": string,
-  "publicKey": string,
+  "inviteeAccount": string,
+  "inviterPublicKey": string,
 }
 ```
 
 ## Media
 
-Media is an optional parameter used in wc_chatMessage to append a media file reference sent together with the plaintext message.
+Media is an optional parameter used in Message to append a media file reference sent together with the plaintext message.
 
 ```jsonc
 {
@@ -27,12 +30,13 @@ Media is an optional parameter used in wc_chatMessage to append a media file ref
 
 ## Message
 
-An array of Messages is returned on `getMessages(params: {topic: string;})`
+Message is an structure that is returned by SDK. Is extracted from Chat Message did-jwt claims. To get author account identity must be resolved from `iss` field. An array of Messages is returned on `getMessages(params: {topic: string;})`
 
 ```jsonc
 {
+  "topic": string,
   "message" : string, // character limit is 1000. Must be checked by SDK before sending
-  "authorAccount": string, // to distinguish who sent it. Could also be a flag
+  "authorAccount": string, // to distinguish who sent it
   "timestamp": Int64,
   "media": Media // optional
 }
@@ -51,7 +55,7 @@ An array of Messages is returned on `getMessages(params: {topic: string;})`
 
 ## Thread
 
-A map of type `Map<string, Thread>` is returned on `getThreads(params: {account: string;}`. Topic is the key of the map.
+A map of type `Map<string, Thread>` is returned on `getThreads(params: {account: string;})`. Topic is the key of the map.
 
 ```jsonc
 {

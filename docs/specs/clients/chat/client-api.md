@@ -31,7 +31,7 @@ abstract class Client {
   // stops listening for invites
   // stores the invite in a separate store for pendingThreads
   // returns the public invite key
-  public abstract stopListeningToInvites(): Promise<string>;
+  public abstract goPrivate(): Promise<string>;
 
   // sends a chat invite from curently managed account to peer account 
   // returns an invite id
@@ -75,7 +75,7 @@ abstract class Client {
   }): Promise<void>
 
   // returns all invites for currently managed account / returns maps of invites indexed by id
-  public abstract getInvites(): Promise<Map<string, Invite>>
+  public abstract getInvites(): Promise<Map<number, Invite>>
 
   // returns all threads for currently managed account / returns map of threads indexed by topic
   public abstract getThreads(): Promise<Map<string, Thread>>;
