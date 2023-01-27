@@ -39,6 +39,17 @@ An array of Messages is returned on `getMessages(params: {topic: string;})`
 }
 ```
 
+## PendingOrRejectedThread
+
+```jsonc
+{
+  "topic": string | undefined,
+  "selfAccount": string,
+  "peerAccount": string,
+  "status": 'pending' | 'rejected'
+}
+```
+
 ## Thread
 
 A map of type `Map<string, Thread>` is returned on `getThreads(params: {account: string;}`. Topic is the key of the map.
