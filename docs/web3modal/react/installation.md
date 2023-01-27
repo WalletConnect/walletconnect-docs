@@ -13,7 +13,7 @@ npm install @web3modal/ethereum @web3modal/react wagmi ethers
 ```
 
 :::info
-Ensure to use latest versions for tools like next, react-scripts, babel, webpack etc. to ensure that your build supports es2020 features.
+Ensure to use latest versions for tools like next, react-scripts, babel, webpack etc. to support es2020 features.
 :::
 
 ## Import
