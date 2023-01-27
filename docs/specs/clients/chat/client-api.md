@@ -11,7 +11,7 @@ abstract class Client {
   public abstract init(account: string): Promise<void>;
 
   // - registers a blockchain account with an identity key if not yet registered on this client
-  // - registers invite key and starts listening on invites if private is true
+  // - registers invite key and starts listening on invites if private is false
   // - onSign(message) is a callback for signing CAIP-122 message to verify blockchain account ownership
   // returns the public identity key
   // calling register with another account switches currently managed blockchain account
