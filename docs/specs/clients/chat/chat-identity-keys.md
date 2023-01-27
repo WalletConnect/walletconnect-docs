@@ -30,7 +30,7 @@ Issued At: ${issued-at}
 
 Let's use the account `eip155:1:0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2` and identity key  use the following fields:
 
-* Domain = walletconnect.com
+* Domain = keys.walletconnect.com
 * Namespace Name = Ethereum
 * Address = 0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2
 * URI = https://keys.walletconnect.com
@@ -43,7 +43,7 @@ Let's use the account `eip155:1:0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2` and 
 Formatted Message (CAIP-122)
 
 ```md
-walletconnect.com wants you to sign in with your Ethereum account:
+keys.walletconnect.com wants you to sign in with your Ethereum account:
 0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2
 
 URI: https://keys.walletconnect.com
