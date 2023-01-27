@@ -32,9 +32,9 @@ description: "If you don't use wagmi or already manage other connections for inj
 url: `/2.0/web3modal/standalone/installation`
 },
 {
-name: "Wallets",
-description: "How to list your wallet in the dashboard.",
-url: `/2.0/web3modal/for-wallets`
+name: "FAQ",
+description: "Frequently asked questions.",
+url: `/2.0/web3modal/faq`
 }
 ]}
 />

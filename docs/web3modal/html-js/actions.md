@@ -7,11 +7,9 @@
 Programmatically open the modal.
 
 ```js
-// Open modal (if route is not provided, modal opens view based on connection / config status)
-export interface Options {
+interface Options {
   route?: "Account" | "ConnectWallet" | "Help" | "SelectNetwork";
 }
-
 await web3modal.openModal(options?: Options);
 ```
 
@@ -34,31 +32,12 @@ const unsubscribe = web3modal.subscribeModal((newState) =>
 unsubscribe();
 ```
 
-### web3modal.setSelectedChain
+### web3modal.setDefaultChain
 
-Programmatically set selected chain. (Only sets in scope of Web3Modal, not wagmi)
-
-```js
-web3modal.setSelectedChain();
-```
-
-### web3modal.getSelectedChain
-
-Programmatically get selected chain. (Only gets in scope of Web3Modal, not wagmi)
+Set default chain BEFORE user is connected. Use wagmi network get / switch action AFTER user is connected.
 
 ```js
-web3modal.getSelectedChain();
-```
-
-### web3modal.subscribeSelectedChain
-
-Subscribe or unsubscribe from selected chain changes. (Only subscribes in scope of Web3Modal, not wagmi)
-
-```js
-const unsubscribe = web3modal.subscribeSelectedChain((newState) =>
-  console.log(newState)
-);
-unsubscribe();
+web3modal.setDefaultChain(mainnet);
 ```
 
 ### web3modal.setTheme
