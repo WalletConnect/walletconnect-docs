@@ -68,10 +68,8 @@ abstract class Client {
     account: string;
   }): Promise<Map<string, Thread>>;
   
-  // returns all pending threads matching an account / returns map of threads indexed by topic
-  public abstract getPendingThreads(params: {
-    account: string;
-  }): Promise<Map<string, PendingOrRejectedThread>>;
+  // returns all pending threads for currently managed account / returns map of threads indexed by topic
+  public abstract getPendingThreads(): Promise<Map<string, PendingOrRejectedThread>>;
 
   // returns all messages matching a thread's topic / returns array of messages
   public abstract getMessages(params: {
