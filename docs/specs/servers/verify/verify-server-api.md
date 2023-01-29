@@ -19,15 +19,7 @@ Body:
 
 Used to resolve an attestation
 
-`GET /attestation`
-
-Params:
-
-```jsonc
-{
-    "attestationId": string,
-}
-```
+`GET /attestation/:attestationId`
 
 Response:
 
