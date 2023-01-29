@@ -1,8 +1,8 @@
 # Push
 
-:::caution
+:::note
 
-Currently the [v1 Push](/1.0/push-server) is available in v2, over the coming weeks this is going to be deprecated in favor of the new [Echo Server spec](https://github.com/WalletConnect/echo-server/blob/main/spec/spec.md) and support for the Push Server API will be removed.
+WalletConnect v2 only supports the [Echo Server spec](https://github.com/WalletConnect/echo-server/blob/main/spec/spec.md).
 
 :::
 
