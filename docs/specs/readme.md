@@ -27,6 +27,11 @@ In this repository, we document and discuss features that are currently under de
       url: `/2.0/specs/clients/chat`
     },
     {
+      name: "Sync API",
+      description: "Sync allows a wallet user to sync private data between multiple clients using a single signature from an account.",
+      url: `/2.0/specs/clients/sync`
+    },
+    {
       name: "Core API",
       description: "Core API consolidates several core modules that are shared between all other high-level APIs.",
       url: `/2.0/specs/clients/core`
