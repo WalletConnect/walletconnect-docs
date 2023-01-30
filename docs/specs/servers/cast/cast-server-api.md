@@ -30,6 +30,7 @@ Body:
 {
     "notification": {
         "title": string,
+        "subtitle": string?,
         "body": string,
         "icon": string,
         "url": string
