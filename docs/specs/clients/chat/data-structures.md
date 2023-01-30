@@ -24,7 +24,7 @@ Media is an optional parameter used in Message to append a media file reference 
 ```jsonc
 {
   "type": string,
-  "data": string, // character limit is 1000. Must be checked by SDK before sending
+  "data": string, // character limit is 500. Must be checked by SDK before sending
 }
 ```
 
