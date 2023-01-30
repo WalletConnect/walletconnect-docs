@@ -23,13 +23,13 @@ When we are validating invite proposal we must use the following additional fiel
 
 * sub - opening message included in the invite
 * aud - responder/invitee blockchain account (did:pkh)
-* inv - proposer/inviter public key (did:pkh)
+* inv - proposer/inviter public key (did:key)
 
 ## Invite Approvals
 
 When we are validating invite approvals we must use the following additional fields in the jwt:
 
-* sub - public key sent by the responder/invitee
+* sub - public key sent by the responder/invitee (did:key)
 * aud - proposer/inviter blockchain account (did:pkh)
 
 
