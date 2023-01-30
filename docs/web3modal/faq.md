@@ -39,3 +39,7 @@ You will first need to get ethersjs provider from wagmi and then convert it to w
 ## Do you support cdn script installation?
 
 Not at the moment, but while we are working on one you can easily compile the library using tools like [Vite](https://vitejs.dev/) or [Webpack](https://webpack.js.org/).
+
+## Why can't I connect to a wallet when testing locally on mobile?
+
+When testing locally on a mobile device, you will need to ensure that your app uses `https` instead of `http` protocol, otherwise majority of wallets will decline the connection. You could use a tool like [localtunnel](https://www.npmjs.com/package/localtunnel) for this.
