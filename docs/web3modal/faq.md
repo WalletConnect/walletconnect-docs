@@ -1,8 +1,8 @@
 # FAQ
 
-## How do I add native wallet to web3modal?
+## How do I add a native wallet to Web3Modal?
 
-Depending on user's device, Web3Modal will show a selection of native or desktop browsers that can be deep / universally linked into. Users can also scan qr code no matter which device they are on.
+Web3Modal will present a selection of native or desktop browsers that can be deep-linked or universally linked, depending on the user's device. Users can also scan a QR code to access the link regardless of their device.
 
 In order for your wallet to show up in Web3Modal, you need to register it at our [Cloud Dashboard](https://cloud.walletconnect.com/). Make sure to specify correct data and pay extra attention to deeplink and universal link section.
 

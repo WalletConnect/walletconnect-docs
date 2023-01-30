@@ -4,9 +4,9 @@ Web3Modal is configurable via combination of options below and [wagmi.sh](https:
 
 ## General Options
 
-### projectId (optional)
+### projectId (required)
 
-Your project’s unique identifier that can be obtained at [cloud.walletconnect.com](https://cloud.walletconnect.com). Providing this enables the following functionalities within Web3Modal: wallet and chain logos, optional walletconnect rpc, support for all wallets from [explorer.walletconnect.com](https://explorer.walletconnect.com). Defaults to `undefined`.
+Your project’s unique identifier that can be obtained at [cloud.walletconnect.com](https://cloud.walletconnect.com). Enables following functionalities within Web3Modal: wallet and chain logos, optional walletconnect rpc, support for all wallets from [explorer.walletconnect.com](https://explorer.walletconnect.com) and WalletConnect v2 support. Defaults to `undefined`.
 
 ```ts
 projectId: string;
@@ -87,7 +87,7 @@ tokenImages: [
 
 ### defaultChain (optional)
 
-Set default wagmi chain BEFORE user is connected. Defaults to `mainnet` if it was configured, or first chain in array of all wagmi chains. Use network actions from wagmi after user is connected.
+Before the user establishes a connection, the default wagmi chain can be set. This defaults to the `mainnet` if configured, or the first chain in the array of all available wagmi chains. Once the user is connected, utilize the network actions provided by wagmi.
 
 ```ts
 defaultChain: polygon;
@@ -129,7 +129,7 @@ enableNetworkView: true;
 
 ### enableAccountView (optional)
 
-Enable or disable modal's account view once user is connected. Defaults to `true`
+Option to enable or disable the modal's account view. The default setting is set to `true`.
 
 ```ts
 enableAccountView: false;

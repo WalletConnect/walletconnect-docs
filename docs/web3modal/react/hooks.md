@@ -23,9 +23,10 @@ await open(options?: Options);
 // Close modal
 close();
 
-// Set default chain BEFORE user is connected.
+// Sets the default chain BEFORE user is connected.
 // Use wagmi network get / switch action AFTER user is connected.
-setDefaultChain(mainnet);
+// Default chain will be `mainnet` or first wagmi chain in config if `mainnet` is not available.
+setDefaultChain(polygon);
 ```
 
 ### useWeb3ModalTheme
