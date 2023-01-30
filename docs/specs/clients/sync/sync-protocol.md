@@ -2,7 +2,7 @@
 
 ## Key Coordination
 
-A user can synchronize multiple clients assuming that it can sign the same message and deterministically return the same signature. This is possible as a property of ECDSA and EdDSA which most blockchain accounts uses to verify signatures from a private key.
+A user can synchronize multiple clients assuming that it can sign the same message and deterministically return the same signature. This is possible as a property of ECDSA and EdDSA which most blockchain accounts use to verify signatures from a private key.
 
 Therefore using the same mechanism we will request the wallet to sign a message that only the exact same account can return and therefore use it to generate sets of keys in our protocol.
 
