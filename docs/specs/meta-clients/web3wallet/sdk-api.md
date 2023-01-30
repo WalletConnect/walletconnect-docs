@@ -6,7 +6,7 @@ class Web3Wallet {
   public abstract init(params: { core: CoreClient }): Promise<void>;
   
   // establish pairing from URI (BOTH)
-  public abstract pair(parmas: { uri: string }): Promise<void>;
+  public abstract pair(params: { uri: string }): Promise<void>;
   
    // approve a session proposal (SIGN)
   public abstract approveSession(params: {

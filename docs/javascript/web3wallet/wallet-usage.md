@@ -95,7 +95,7 @@ await web3wallet.extendSession({ topic });
 
 ## Emit Session Events
 
-To emit sesssion events, call the `emitSessionEvent` and pass in the params. In the example, the wallet will emit `sesssion_event` when the wallet switches chains while on the Ethereum Mainnet.
+To emit session events, call the `emitSessionEvent` and pass in the params. In the example, the wallet will emit `session_event` when the wallet switches chains while on the Ethereum Mainnet.
 
 ```javascript
 await web3wallet.emitSessionEvent({
