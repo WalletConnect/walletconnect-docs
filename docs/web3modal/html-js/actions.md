@@ -37,7 +37,7 @@ unsubscribe();
 Sets the default chain **before** the user connects. After the user connects, use the wagmi network get/switch action. The default chain is `mainnet` or first chain in wagmi config if `mainnet` is not available.
 
 ```js
-web3modal.setDefaultChain(mainnet);
+web3modal.setDefaultChain(polygon);
 ```
 
 ### web3modal.setTheme
