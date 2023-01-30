@@ -28,7 +28,7 @@ Used when a client publishes a message to a server.
     "topic" : string,
     "message" : string,
     "ttl" : seconds,
-    "tag" : number, // optional / default = 0
+    "tag" : number,
     "prompt" : boolean, // optional / default = false
   }
 }
