@@ -24,7 +24,7 @@ https://mywallet.com/wc?uri=<URI_ENCODED_WC_PAIRING_URL>
 
 ## Browser extensions
 
-Web3Modal supports all [EIP-1193](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-1193.md) compliant browser extensions. We automatically show installed wallets on the home page of the modal. In order to customise your wallets display from default "Injected", please create an issue in [web3modal repository](https://github.com/WalletConnect/web3modal) and provide following information:
+Web3Modal supports all [EIP-1193](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-1193.md) compliant browser extensions. We automatically show installed wallets on the home page of the modal. In order to customize your wallets display from default "Injected", please create an issue in [web3modal repository](https://github.com/WalletConnect/web3modal) and provide following information:
 
 1. Extension name
 2. Extension image / icon

@@ -45,7 +45,7 @@ The Web3Modal Github can be found at [https://github.com/WalletConnect/web3modal
 
 ### Preview
 
-![web3modal customisation](/assets/modal_preview.png)
+![web3modal customization](/assets/modal_preview.png)
 
 ### Community SDK's
 

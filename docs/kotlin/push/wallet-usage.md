@@ -27,7 +27,7 @@ PushWalletClient.initialize(init) { error ->
 
 The Push Wallet client is responsible for resubscribing to existing subscriptions. To initialize the Push Wallet client, create a `Push.Wallet.Params.Init` object in the Android Application class with the `CoreClient`. The `Push.Wallet.Params.Init` object will then be passed to the `PushWalletClient` initialize function.
 
-The `PushWalletClient` should be initalized in the Application class.
+The `PushWalletClient` should be initialized in the Application class.
 
 ### PushWalletClient.Delegate
 
@@ -168,4 +168,4 @@ class CustomFirebaseService: PushMessageService() {
 ```
 
 The `PushMessageService` is a wrapper around the `FirebaseMessagingService`. This wrapper class needs to be implemented for the Push SDK to be able to decrypt and notify wallets of a push notification sent from the Dapp in the background. 
-This service also needs to be registered in the AndroidManfiest.xml file similar to the example in the [FCM documentation](https://firebase.google.com/docs/cloud-messaging/android/client#manifest).
+This service also needs to be registered in the AndroidManifest.xml file similar to the example in the [FCM documentation](https://firebase.google.com/docs/cloud-messaging/android/client#manifest).
