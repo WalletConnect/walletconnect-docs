@@ -69,7 +69,7 @@ await web3wallet.disconnectSession({
 
 The `session_request` event is triggered by a dapp when it needs the wallet to perform a specific action, such as signing a transaction. The event contains a `topic` and a `request` object, which will vary depending on the action requested.
 
-To respond to the request, the wallet can access the `topic` and `request` object by destructing them from the event payload. To see a list of possible `request` and `response` objects, refer to the relevant JSON-RPC Methods for [Ethereum](../../advanced/rpc-reference/ethereum-rpc.md), [Solana](../../advanced/rpc-reference/solana-rpc.md), [Cosmos](../../advanced/rpc-reference/cosmos-rpc.md), or [Stellar](../../advanced/rpc-reference/stellar-rpc.md).
+To respond to the request, the wallet can access the `topic` and `request` object by destructuring them from the event payload. To see a list of possible `request` and `response` objects, refer to the relevant JSON-RPC Methods for [Ethereum](../../advanced/rpc-reference/ethereum-rpc.md), [Solana](../../advanced/rpc-reference/solana-rpc.md), [Cosmos](../../advanced/rpc-reference/cosmos-rpc.md), or [Stellar](../../advanced/rpc-reference/stellar-rpc.md).
 
 As an example, if the dapp requests a `personal_sign` method, the wallet can extract the `params` array from the `request` object. The first item in the array is the hex version of the message to be signed, which can be converted to UTF-8 and assigned to a `message` variable. The second item in `params` is the user's wallet address.
 
