@@ -67,13 +67,30 @@ await web3wallet.disconnectSession({
 
 ## Responding to Session Requests
 
-The `session_request` event is triggered when a dapp sends a request to the wallet for a specific action, such as signing a transaction. This event is emitted by the dapp and received by the wallet. To respond to the request, wallets should call the respondSessionRequest function and pass in details from the request. You can then approve or reject the request based on the response.
+The `session_request` event is triggered by a dapp when it needs the wallet to perform a specific action, such as signing a transaction. The event contains a `topic` and a `request` object, which will vary depending on the action requested.
+
+To respond to the request, the wallet can access the `topic` and `request` object by destructuring them from the event payload. To see a list of possible `request` and `response` objects, refer to the relevant JSON-RPC Methods for [Ethereum](../../advanced/rpc-reference/ethereum-rpc.md), [Solana](../../advanced/rpc-reference/solana-rpc.md), [Cosmos](../../advanced/rpc-reference/cosmos-rpc.md), or [Stellar](../../advanced/rpc-reference/stellar-rpc.md).
+
+As an example, if the dapp requests a `personal_sign` method, the wallet can extract the `params` array from the `request` object. The first item in the array is the hex version of the message to be signed, which can be converted to UTF-8 and assigned to a `message` variable. The second item in `params` is the user's wallet address.
+
+To sign the message, the wallet can use the `wallet.signMessage` method and pass in the message. The signed message, along with the `id` from the event payload, can then be used to create a `response` object, which can be passed into `respondSessionRequest`.
+
+The wallet then signs the message. `signedMessage`, along with the `id` from the event payload, can then be used to create a `response` object, which can be passed into `respondSessionRequest`.
 
 ```javascript
-web3wallet.on("session_request", (event) => {
-  const { id, method, params } = event.request;
+web3wallet.on("session_request", async (event) => {
+  const { topic, params, id } = event;
+  const { request } = params;
+  const requestParamsMessage = request.params[0];
 
-  await web3wallet.respondSessionRequest({ id, result: response });
+  // convert `requestParamsMessage` by using a method like hexToUtf8
+  const message = hexToUtf8(requestParamsMessage);
+
+  // sign the message
+  const signedMessage = await wallet.signMessage(message);
+
+  const response = { id, result: signedMessage };
+  await web3wallet.respondSessionRequest({ topic, response });
 });
 ```
 
