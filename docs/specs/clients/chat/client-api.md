@@ -47,7 +47,7 @@ abstract class Client {
   }): Promise<string>;
 
   // sends a chat invite 
-  // crates ans stores SentInvite with `pending` state
+  // creates and stores SentInvite with `pending` state
   // returns an invite id
   public abstract invite(params: {
     invite: Invite;
