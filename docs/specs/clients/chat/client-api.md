@@ -81,8 +81,8 @@ abstract class Client {
     topic: string;
   }): Promise<void>;
 
-  // upserrts peer account with public key 
-  public abstract upsertContact(params: {
+  // sets peer account with public key 
+  public abstract setContact(params: {
     account: string;
     publicKey: string;
   }): Promise<void>
