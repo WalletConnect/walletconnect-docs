@@ -63,10 +63,10 @@ signClient.on("session_proposal", (event) => {
     params: {
       id: number;
       expiry: number;
-      relays: { 
+      relays: Array<{ 
         protocol: string; 
         data?: string;
-      };
+      }>;
       proposer: {
         publicKey: string;
         metadata: {
