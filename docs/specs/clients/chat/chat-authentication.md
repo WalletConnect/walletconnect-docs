@@ -23,7 +23,7 @@ When we are validating invite proposal we must use the following additional fiel
 
 * sub - opening message included in the invite
 * aud - responder/invitee blockchain account (did:pkh)
-* inv - proposer/inviter public key (did:key)
+* pke - proposer/inviter public key for key exchange (did:key)
 
 ## Invite Approvals
 

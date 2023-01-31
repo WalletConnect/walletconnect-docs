@@ -1,25 +1,31 @@
 # Client API
 
-Client manages only one blockchain account at a time which is set on `init()` method call. To switch accounts call register with new parameters. Client only listens to one topic for invites at a time. 
+Client manages multiple blockchain account at a time. Client listens to multiple topic for invites at a time. 
 
 ```typescript
 abstract class Client {
   // ---------- Methods ----------------------------------------------- //
 
   // initializes the client with persisted storage and a network connection
-  // sets currently managed blockchain account
-  public abstract init(account: string): Promise<void>;
+  public abstract init(): Promise<void>;
 
   // - registers a blockchain account with an identity key if not yet registered on this client
-  // - registers invite key and starts listening on invites if private is false
+  // - registers invite key if not yet registered on this client and starts listening on invites if private is false
   // - onSign(message) is a callback for signing CAIP-122 message to verify blockchain account ownership
   // returns the public identity key
-  // calling register with another account switches currently managed blockchain account
   public abstract register(params: {
     account: string;
     private?: boolean;
     onSign: (message: string) => Cacao.Signature
   }): Promise<string>;
+
+  // - unregisters a blockchain account with previously registered identity key 
+  // - must not unregister invite key but must stop listening for invites
+  // - onSign(message) is a callback for signing CAIP-122 message to verify blockchain account ownership
+  public abstract unregister(params: {
+    account: string;
+    onSign: (message: string) => Cacao.Signature
+  }): Promise<void>;
 
   // queries the keyserver with a blockchain account
   // returns the invite key
@@ -27,31 +33,38 @@ abstract class Client {
     account: string;
   }): Promise<string>;
 
-  // unregisters an invite key of blockchain account from keyserver 
+  // unregisters an invite key from keyserver 
   // stops listening for invites
-  // stores the invite in a separate store for pendingThreads
-  // returns the public invite key
-  public abstract goPrivate(): Promise<string>;
+  public abstract goPrivate(params: {
+    account: string;
+  }): Promise<void>;
 
-  // sends a chat invite from curently managed account to peer account 
+  // registers an invite key if not yet registered on this client from keyserver 
+  // starts listening for invites
+  // returns the public invite key
+  public abstract goPublic(params: {
+    account: string;
+  }): Promise<string>;
+
+  // sends a chat invite 
+  // crates ans stores SentInvite with `pending` state
   // returns an invite id
   public abstract invite(params: {
-    inviteeAccount: string;
     invite: Invite;
   }): Promise<number>;
 
-  // accepts a chat invite by id from curently managed account 
+  // accepts a chat invite by id from account specified as inviteeAccount in Invite
   // returns thread topic
   public abstract accept(params: {
     inviteId: number;
   }): Promise<string>;
 
-  // rejects a chat invite by id from curently managed account
+  // rejects a chat invite by id from account specified as inviteeAccount in Invite
   public abstract reject(params: {
     inviteId: string;
   }): Promise<void>;
 
-  // sends a chat message to an active chat thread from curently managed account
+  // sends a chat message to an active chat thread from account specified as selfAccount in Thread
   public abstract message(params: {
     topic: string;
     message: string;
@@ -68,20 +81,29 @@ abstract class Client {
     topic: string;
   }): Promise<void>;
 
-  // adds peer account with public key 
-  public abstract addContact(params: {
+  // upserrts peer account with public key 
+  public abstract upsertContact(params: {
     account: string;
     publicKey: string;
   }): Promise<void>
 
-  // returns all invites for currently managed account / returns maps of invites indexed by id
-  public abstract getInvites(): Promise<Map<number, Invite>>
+  // returns all invites matching an inviteeAccount from Invite 
+  // returns maps of invites indexed by id
+  public abstract getReceivedInvites(params: {
+    account: string;
+  }): Promise<Map<number, Invite>>
 
-  // returns all threads for currently managed account / returns map of threads indexed by topic
-  public abstract getThreads(): Promise<Map<string, Thread>>;
-  
-  // returns all pending threads for currently managed account / returns map of threads indexed by topic
-  public abstract getPendingThreads(): Promise<Map<string, PendingOrRejectedThread>>;
+  // returns all pending invites matching an inviterAccount from SentInvite 
+  // returns map of threads indexed by topic
+  public abstract getSentInvites(params: {
+    account: string;
+  }): Promise<Map<string, SentInvite>>;
+
+  // returns all threads matching an selfAccount from Thread 
+  // returns map of threads indexed by topic
+  public abstract getThreads(params: {
+    account: string;
+  }): Promise<Map<string, Thread>>;
 
   // returns all messages matching a thread's topic / returns array of messages
   public abstract getMessages(params: {
@@ -91,13 +113,13 @@ abstract class Client {
   // ---------- Events ----------------------------------------------- //
 
   // subscribe to new chat invites received
-  public abstract on("chat_invite", ({ id: number, invite: Invite }) => {}): void;
+  public abstract on("chat_invite", ({ invite: Invite }) => {}): void;
 
   // subscribe to new chat thread joined
   public abstract on("chat_joined",  ({ topic: string }) => {}): void;
 
   // subscribe to new chat messages received
-  public abstract on("chat_message", ({ topic: string, payload: Message }) => {}): void;
+  public abstract on("chat_message", ({ payload: Message }) => {}): void;
 
   // subscribe to new chat thread left
   public abstract on("chat_left",  ({ topic: string }) => {}): void;
