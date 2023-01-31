@@ -65,7 +65,8 @@ signClient.on("session_proposal", (event) => {
       expiry: number;
       relays: { 
         protocol: string; 
-        data?: string }[];
+        data?: string;
+      };
       proposer: {
         publicKey: string;
         metadata: {
