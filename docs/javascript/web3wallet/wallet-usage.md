@@ -102,7 +102,7 @@ const response = {
   id,
   jsonrpc: "2.0",
   error: {
-    code: -3200,
+    code: 5000,
     message: "User rejected.",
   },
 };
