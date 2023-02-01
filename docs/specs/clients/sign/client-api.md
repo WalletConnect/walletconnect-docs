@@ -12,8 +12,10 @@ abstract class Client {
   // for proposer to create a session 
   public abstract connect(params: {
     requiredNamespaces: Map<string, ProposalNamespace>;
+    optionalNamespaces: Map<string, ProposalNamespace>;
+    properties: Map<string, string>;
     relays?: RelayProtocolOptions[];
-    pairingTopic: string;
+    pairingTopic?: string;
   }): Promise<Sequence>;
 
   // for responder to approve a session proposal

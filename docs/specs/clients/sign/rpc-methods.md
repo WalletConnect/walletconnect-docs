@@ -44,13 +44,9 @@ Used to propose a session through topic A. Requires a success response with asso
     "publicKey": string,
     "metadata": Metadata
   },
-  "requiredNamespaces": {
-    "<namespace_name>" : {
-      "chains": [string],
-      "methods": [string],
-      "events": [string]
-    }
-  },
+  "requiredNamespaces": NamespaceMap,
+  "optionalNamespaces": NamespaceMap, // Optional
+  "properties": Map<string, string> // Optional
 }
 
 | IRN     |          |
@@ -96,13 +92,7 @@ Used to settle a session over topic B.
     "publicKey": string,
     "metadata": Metadata
   },
-  "namespaces": {
-    "<namespace_name>" : {
-      "accounts": [string],
-      "methods": [string],
-      "events": [string]
-    }
-  },
+  "namespaces": NamespaceMap,
   "expiry": Int64, // seconds
 }
 
@@ -135,13 +125,7 @@ Used to update the namespaces of a session.
 ```jsonc
 // wc_sessionUpdate params
 {
-  "namespaces": {
-    "<namespace_name>" : {
-      "accounts": [string],
-      "methods": [string],
-      "events": [string]
-    }
-  }
+  "namespaces": NamespaceMap
 }
 
 | IRN     |          |

@@ -13,6 +13,52 @@ Relay is defined by the transport protocol used for the two clients to publish a
 }
 ```
 
+## Chains & Namespaces
+
+Chains and Namespaces are defined with different methods and events that are compatible for the set of chains within the scope.
+
+As defined by the [CAIP-2](https://chainagnostic.org/CAIPs/caip-2), we have a schema for chainId's that is composed by both a chain namespace and a chain reference.
+
+```sh
+chain_id = chain_namespace + ":" + chain_reference
+```
+
+These will be used for reference within the following data structures:
+
+### Namespace
+
+Namespace includes multiple chains within the same set of methods and events.
+
+```jsonc
+{
+  "chains": string[], // set of chainId's
+  "methods": string[], // set of JSON-RPC methods
+  "events": string[] // set of JSON-RPC events
+}
+```
+
+### Chain
+
+Chain defines methods and events for a single chainId.
+
+```jsonc
+{
+  "methods": string[], // set of JSON-RPC methods
+  "events": string[] // set of JSON-RPC events
+}
+```
+
+### Namespace Map
+
+During or after a session is proposed we can index these two data structures with either a namespace or chainId as a reference
+
+```jsonc
+{
+  "<chain_namespace>": Namespace,
+  "<chain_id>": Chain,
+}
+```
+
 ## Session
 
 Session is a topic encrypted by a symmetric key derived using a key agreement established after an approved proposal and it has a controller participant that can update its accounts, methods, events and expiry
@@ -38,20 +84,10 @@ Session is a topic encrypted by a symmetric key derived using a key agreement es
   "expiry": Int64, // timestamp (seconds)
   "acknowledged": boolean,
   "controller": string,
-  "namespaces": {
-    "<namespace_name>" : {
-      "accounts": [string],
-      "methods": [string],
-      "events": [string]
-    }
-  },
-  "requiredNamespaces": {
-    "<namespace_name>" : {
-      "chains": [string],
-      "methods": [string],
-      "events": [string]
-    }
-  },
+  "namespaces": NamespaceMap,
+  "requiredNamespaces": NamespaceMap,
+  "optionalNamespaces": NamespaceMap,
+  "properties": Map<string, string>,
 }
 ```
 
@@ -72,13 +108,9 @@ Proposal is sent by the proposer client to be approved or rejected by the respon
     "publicKey": string,
     "metadata": Metadata
   },
-  "requiredNamespaces": {
-    "<namespace_name>" : {
-      "chains": [string],
-      "methods": [string],
-      "events": [string]
-    }
-  },
+  "requiredNamespaces": NamespaceMap,
+  "optionalNamespaces": NamespaceMap,
+  "properties": Map<string, string>,
   "pairingTopic": string
 }
 ```
@@ -121,13 +153,7 @@ Settlement is sent by the responder after approval and it's broadcasted right af
     "publicKey": string,
     "metadata": Metadata
   },
-  "namespaces": {
-    "<namespace_name>" : {
-      "accounts": [string],
-      "methods": [string],
-      "events": [string]
-    }
-  },
+  "namespaces": NamespaceMap,
   "expiry": Int64, // seconds
 }
 ```
