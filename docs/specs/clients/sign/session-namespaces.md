@@ -7,15 +7,17 @@ It specifies the proposed execution environment for each blockchain in the form 
 
 ```json
 {
-  "eip155": {
-    "chains": ["eip155:137", "eip155:1"],
-    "methods": ["eth_sign"],
-    "events": ["accountsChanged"]
-  },
-  "cosmos": {
-    "chains": ["cosmos:cosmoshub-4"],
-    "methods": ["cosmos_signDirect"],
-    "events": ["someCosmosEvent"]
+  "requiredNamespaces": {
+    "eip155": {
+      "chains": ["eip155:137", "eip155:1"],
+      "methods": ["eth_sign"],
+      "events": ["accountsChanged"]
+    },
+    "cosmos": {
+      "chains": ["cosmos:cosmoshub-4"],
+      "methods": ["cosmos_signDirect"],
+      "events": ["someCosmosEvent"]
+    }
   }
 }
 ```
@@ -28,20 +30,22 @@ If the Wallet (or the user) does NOT approve the session, then it is rejected. O
 
 ```json
 {
-  "eip155": {
-    "accounts": [
-      "eip155:137:0xab16a96d359ec26a11e2c2b3d8f8b8942d5bfcdb",
-      "eip155:1:0xab16a96d359ec26a11e2c2b3d8f8b8942d5bfcdb"
-    ],
-    "methods": ["eth_sign"],
-    "events": ["accountsChanged"]
-  },
-  "cosmos": {
-    "accounts": [
-      "cosmos:cosmoshub-4:cosmos1t2uflqwqe0fsj0shcfkrvpukewcw40yjj6hdc0"
-    ],
-    "methods": ["cosmos_signDirect", "personal_sign"],
-    "events": ["someCosmosEvent", "proofFinalized"]
+  "namespaces": {
+    "eip155": {
+      "accounts": [
+        "eip155:137:0xab16a96d359ec26a11e2c2b3d8f8b8942d5bfcdb",
+        "eip155:1:0xab16a96d359ec26a11e2c2b3d8f8b8942d5bfcdb"
+      ],
+      "methods": ["eth_sign"],
+      "events": ["accountsChanged"]
+    },
+    "cosmos": {
+      "accounts": [
+        "cosmos:cosmoshub-4:cosmos1t2uflqwqe0fsj0shcfkrvpukewcw40yjj6hdc0"
+      ],
+      "methods": ["cosmos_signDirect", "personal_sign"],
+      "events": ["someCosmosEvent", "proofFinalized"]
+    }
   }
 }
 ```
@@ -60,10 +64,12 @@ Requested Proposal Namespaces:
 
 ```json
 {
-  "cosmos": {
-    "chains": [],
-    "methods": ["cosmos_signDirect"],
-    "events": ["someCosmosEvent"]
+  "requiredNamespaces": {
+    "cosmos": {
+      "chains": [],
+      "methods": ["cosmos_signDirect"],
+      "events": ["someCosmosEvent"]
+    }
   }
 }
 ```
@@ -83,10 +89,12 @@ Requested Proposal Namespaces:
 
 ```json
 {
-  "eip155": {
-    "chains": ["42"],
-    "methods": ["eth_sign"],
-    "events": ["accountsChanged"]
+  "requiredNamespaces": {
+    "eip155": {
+      "chains": ["42"],
+      "methods": ["eth_sign"],
+      "events": ["accountsChanged"]
+    }
   }
 }
 ```
@@ -106,10 +114,12 @@ Requested Proposal Namespaces:
 
 ```json
 {
-  "eip155": {
-    "chains": ["eip155:1"],
-    "methods": [],
-    "events": []
+  "requiredNamespaces": {
+    "eip155": {
+      "chains": ["eip155:1"],
+      "methods": [],
+      "events": []
+    }
   }
 }
 ```
@@ -124,10 +134,12 @@ Requested Proposal Namespaces:
 
 ```json
 {
-  "eip155": {
-    "chains": ["eip155:1", "cosmos:cosmoshub-4"],
-    "methods": ["personalSign"],
-    "events": ["chainChanged"]
+  "requiredNamespaces": {
+    "eip155": {
+      "chains": ["eip155:1", "cosmos:cosmoshub-4"],
+      "methods": ["personalSign"],
+      "events": ["chainChanged"]
+    }
   }
 }
 ```
@@ -147,15 +159,17 @@ Requested Proposal Namespaces:
 
 ```json
 {
-  "": {
-    "chains": [":1"],
-    "methods": ["personalSign"],
-    "events": []
-  },
-  "**": {
-    "chains": ["**:1"],
-    "methods": ["personalSign"],
-    "events": []
+  "requiredNamespaces": {
+    "": {
+      "chains": [":1"],
+      "methods": ["personalSign"],
+      "events": []
+    },
+    "**": {
+      "chains": ["**:1"],
+      "methods": ["personalSign"],
+      "events": []
+    }
   }
 }
 ```
@@ -175,15 +189,17 @@ Requested Proposal Namespaces:
 
 ```json
 {
-  "eip155": {
-    "chains": ["eip155:1"],
-    "methods": ["personalSign"],
-    "events": []
-  },
-  "cosmos": {
-    "chains": [],
-    "methods": [],
-    "events": []
+  "requiredNamespaces": {
+    "eip155": {
+      "chains": ["eip155:1"],
+      "methods": ["personalSign"],
+      "events": []
+    },
+    "cosmos": {
+      "chains": [],
+      "methods": [],
+      "events": []
+    }
   }
 }
 ```
@@ -215,20 +231,22 @@ For example if wallet supports eip155:1, eip155:137, cosmos:cosmoshub-1 chains, 
 
 ```json
 {
-  "eip155": {
-    "accounts": [
-      "eip155:1:0xab16a96d359ec26a11e2c2b3d8f8b8942d5bfcdb",
-      "eip155:137:0xab16a96d359ec26a11e2c2b3d8f8b8942d5bfcdb"
-    ],
-    "methods": [],
-    "events": []
-  },
-  "cosmos": {
-    "accounts": [
-      "cosmos:cosmoshub-1:cosmos1pn5a6s4k063608cnt2zue208965lc0m06u9clj",
-    ],
-    "methods": [],
-    "events": []
+  "requiredNamespaces": {
+    "eip155": {
+      "accounts": [
+        "eip155:1:0xab16a96d359ec26a11e2c2b3d8f8b8942d5bfcdb",
+        "eip155:137:0xab16a96d359ec26a11e2c2b3d8f8b8942d5bfcdb"
+      ],
+      "methods": [],
+      "events": []
+    },
+    "cosmos": {
+      "accounts": [
+        "cosmos:cosmoshub-1:cosmos1pn5a6s4k063608cnt2zue208965lc0m06u9clj",
+      ],
+      "methods": [],
+      "events": []
+    }
   }
 }
 ```
@@ -245,10 +263,12 @@ Requested Proposal Namespaces:
 
 ```json
 {
-  "cosmos": {
-    "chains": ["cosmos:cosmoshub-4"],
-    "methods": ["cosmos_signDirect"],
-    "events": ["someCosmosEvent"]
+  "namespaces": {
+    "cosmos": {
+      "chains": ["cosmos:cosmoshub-4"],
+      "methods": ["cosmos_signDirect"],
+      "events": ["someCosmosEvent"]
+    }
   }
 }
 ```
@@ -257,10 +277,12 @@ Received Session Namespaces:
 
 ```json
 {
-  "cosmos": {
-    "accounts": [],
-    "methods": ["cosmos_signDirect"],
-    "events": ["someCosmosEvent"]
+  "namespaces": {
+    "cosmos": {
+      "accounts": [],
+      "methods": ["cosmos_signDirect"],
+      "events": ["someCosmosEvent"]
+    }
   }
 }
 ```
@@ -280,10 +302,12 @@ Requested Proposal Namespaces:
 
 ```json
 {
-  "eip155": {
-    "chains": ["eip155:1"],
-    "methods": ["eth_sign"],
-    "events": ["accountsChanged"]
+  "requiredNamespaces": {
+    "eip155": {
+      "chains": ["eip155:1"],
+      "methods": ["eth_sign"],
+      "events": ["accountsChanged"]
+    }
   }
 }
 ```
@@ -292,10 +316,12 @@ Received Session Namespaces:
 
 ```json
 {
-  "eip155": {
-    "accounts": ["eip155:0xab16a96d359ec26a11e2c2b3d8f8b8942d5bfcdb"],
-    "methods": ["eth_sign"],
-    "events": ["accountsChanged"]
+  "namespaces": {
+    "eip155": {
+      "accounts": ["eip155:0xab16a96d359ec26a11e2c2b3d8f8b8942d5bfcdb"],
+      "methods": ["eth_sign"],
+      "events": ["accountsChanged"]
+    }
   }
 }
 ```
@@ -316,10 +342,12 @@ Requested Proposal Namespaces:
 
 ```json
 {
-  "eip155": {
-    "chains": ["eip155:1"],
-    "methods": ["eth_sign"],
-    "events": []
+  "requiredNamespaces": {
+    "eip155": {
+      "chains": ["eip155:1"],
+      "methods": ["eth_sign"],
+      "events": []
+    }
   }
 }
 ```
@@ -328,10 +356,12 @@ Received Session Namespaces:
 
 ```json
 {
-  "eip155": {
-    "accounts": ["eip155:1:0xab16a96d359ec26a11e2c2b3d8f8b8942d5bfcdb"],
-    "methods": [],
-    "events": []
+  "namespaces": {
+    "eip155": {
+      "accounts": ["eip155:1:0xab16a96d359ec26a11e2c2b3d8f8b8942d5bfcdb"],
+      "methods": [],
+      "events": []
+    }
   }
 }
 ```
@@ -351,10 +381,12 @@ Requested Proposal Namespaces:
 
 ```json
 {
-  "eip155": {
-    "chains": ["eip155:1", "eip155:10"],
-    "methods": ["eth_sign"],
-    "events": ["accountsChanged"]
+  "requiredNamespaces": {
+    "eip155": {
+      "chains": ["eip155:1", "eip155:10"],
+      "methods": ["eth_sign"],
+      "events": ["accountsChanged"]
+    }
   }
 }
 ```
@@ -363,10 +395,12 @@ Received Session Namespaces:
 
 ```json
 {
-  "eip155": {
-    "accounts": ["eip155:1:0xab16a96d359ec26a11e2c2b3d8f8b8942d5bfcdb"],
-    "methods": ["eth_sign"],
-    "events": ["accountsChanged"]
+  "namespaces": {
+    "eip155": {
+      "accounts": ["eip155:1:0xab16a96d359ec26a11e2c2b3d8f8b8942d5bfcdb"],
+      "methods": ["eth_sign"],
+      "events": ["accountsChanged"]
+    }
   }
 }
 ```
@@ -386,10 +420,12 @@ Requested Proposal Namespaces:
 
 ```json
 {
-  "eip155": {
-    "chains": ["eip155:1"],
-    "methods": ["eth_sign"],
-    "events": ["accountsChanged"]
+  "requiredNamespaces": {
+    "eip155": {
+      "chains": ["eip155:1"],
+      "methods": ["eth_sign"],
+      "events": ["accountsChanged"]
+    }
   }
 }
 ```
@@ -398,16 +434,18 @@ Received Session Namespaces:
 
 ```json
 {
-  "eip155": {
-    "accounts": [
-      "eip155:1:0xab16a96d359ec26a11e2c2b3d8f8b8942d5bfcdb",
-      "eip155:1:0x25caCa7f7Bf3A77b1738A8c98A666dd9e4C69A0C",
-      "eip155:1:0x2Fe1cC9b1DCe6E8e16C48bc6A7ABbAB3d10DA954",
-      "eip155:1:0xEA674fdDe714fd979de3EdF0F56AA9716B898ec8",
-      "eip155:1:0xEB2F31B0224222D774541BfF89A221e7eb15a17E"
-    ],
-    "methods": ["eth_sign"],
-    "events": ["accountsChanged"]
+  "namespaces": {
+    "eip155": {
+      "accounts": [
+        "eip155:1:0xab16a96d359ec26a11e2c2b3d8f8b8942d5bfcdb",
+        "eip155:1:0x25caCa7f7Bf3A77b1738A8c98A666dd9e4C69A0C",
+        "eip155:1:0x2Fe1cC9b1DCe6E8e16C48bc6A7ABbAB3d10DA954",
+        "eip155:1:0xEA674fdDe714fd979de3EdF0F56AA9716B898ec8",
+        "eip155:1:0xEB2F31B0224222D774541BfF89A221e7eb15a17E"
+      ],
+      "methods": ["eth_sign"],
+      "events": ["accountsChanged"]
+    }
   }
 }
 ```
@@ -422,10 +460,12 @@ Requested Proposal Namespaces:
 
 ```json
 {
-  "eip155": {
-    "chains": ["eip155:1"],
-    "methods": ["eth_sign"],
-    "events": ["accountsChanged"]
+  "requiredNamespaces": {
+    "eip155": {
+      "chains": ["eip155:1"],
+      "methods": ["eth_sign"],
+      "events": ["accountsChanged"]
+    }
   }
 }
 ```
@@ -434,10 +474,12 @@ Received Session Namespaces:
 
 ```json
 {
-  "eip155": {
-    "accounts": ["eip155:1:0xab16a96d359ec26a11e2c2b3d8f8b8942d5bfcdb"],
-    "methods": ["eth_sign", "personalSign"],
-    "events": ["accountsChanged", "someEvent"]
+  "namespaces": {
+    "eip155": {
+      "accounts": ["eip155:1:0xab16a96d359ec26a11e2c2b3d8f8b8942d5bfcdb"],
+      "methods": ["eth_sign", "personalSign"],
+      "events": ["accountsChanged", "someEvent"]
+    }
   }
 }
 ```
@@ -452,10 +494,12 @@ Requested Proposal Namespaces:
 
 ```json
 {
-  "eip155": {
-    "chains": ["eip155:1"],
-    "methods": ["eth_sign"],
-    "events": ["accountsChanged"]
+  "requiredNamespaces": {
+    "eip155": {
+      "chains": ["eip155:1"],
+      "methods": ["eth_sign"],
+      "events": ["accountsChanged"]
+    }
   }
 }
 ```
@@ -464,13 +508,15 @@ Received Session Namespaces:
 
 ```json
 {
-  "eip155": {
-    "accounts": [
-      "eip155:1:0xab16a96d359ec26a11e2c2b3d8f8b8942d5bfcdb",
-      "cosmos:cosmoshub-4:cosmos1t2uflqwqe0fsj0shcfkrvpukewcw40yjj6hdc0"
-    ],
-    "methods": ["eth_sign"],
-    "events": ["accountsChanged"]
+  "namespaces": {
+    "eip155": {
+      "accounts": [
+        "eip155:1:0xab16a96d359ec26a11e2c2b3d8f8b8942d5bfcdb",
+        "cosmos:cosmoshub-4:cosmos1t2uflqwqe0fsj0shcfkrvpukewcw40yjj6hdc0"
+      ],
+      "methods": ["eth_sign"],
+      "events": ["accountsChanged"]
+    }
   }
 }
 ```
@@ -490,10 +536,12 @@ Requested Proposal Namespaces:
 
 ```json
 {
-  "eip155": {
-    "chains": ["eip155:1"],
-    "methods": ["eth_sign"],
-    "events": ["accountsChanged"]
+  "requiredNamespaces": {
+    "eip155": {
+      "chains": ["eip155:1"],
+      "methods": ["eth_sign"],
+      "events": ["accountsChanged"]
+    }
   }
 }
 ```
@@ -502,13 +550,15 @@ Received Session Namespaces:
 
 ```json
 {
-  "eip155": {
-    "accounts": [
-      "eip155:1:0xab16a96d359ec26a11e2c2b3d8f8b8942d5bfcdb",
-      "eip155:42:0xab16a96d359ec26a11e2c2b3d8f8b8942d5bfcdb"
-    ],
-    "methods": ["eth_sign"],
-    "events": ["accountsChanged"]
+  "namespaces": {
+    "eip155": {
+      "accounts": [
+        "eip155:1:0xab16a96d359ec26a11e2c2b3d8f8b8942d5bfcdb",
+        "eip155:42:0xab16a96d359ec26a11e2c2b3d8f8b8942d5bfcdb"
+      ],
+      "methods": ["eth_sign"],
+      "events": ["accountsChanged"]
+    }
   }
 }
 ```
@@ -523,6 +573,7 @@ Requested Proposal Namespaces:
 
 ```json
 {
+  "requiredNamespaces": {    
     "eip155": {
         "chains": ["eip155:137", "eip155:1"],
         "methods": ["eth_sign"],
@@ -533,20 +584,23 @@ Requested Proposal Namespaces:
         "methods": ["cosmos_signDirect"],
         "events": ["someCosmosEvent"]
     }
-
+  }
+}
 ```
 
 Received Session Namespaces:
 
 ```json
 {
-  "eip155": {
-    "accounts": [
-      "eip155:1:0xab16a96d359ec26a11e2c2b3d8f8b8942d5bfcdb",
-      "eip155:137:0xab16a96d359ec26a11e2c2b3d8f8b8942d5bfcdb"
-    ],
-    "methods": ["eth_sign"],
-    "events": ["accountsChanged"]
+  "namespaces": {
+    "eip155": {
+      "accounts": [
+        "eip155:1:0xab16a96d359ec26a11e2c2b3d8f8b8942d5bfcdb",
+        "eip155:137:0xab16a96d359ec26a11e2c2b3d8f8b8942d5bfcdb"
+      ],
+      "methods": ["eth_sign"],
+      "events": ["accountsChanged"]
+    }
   }
 }
 ```
@@ -566,11 +620,13 @@ Requested Proposal Namespaces:
 
 ```json
 {
-  "eip155": {
-    "chains": ["eip155:1"],
-    "methods": [],
-    "events": ["chainChanged"]
-  }
+  "requiredNamespaces": {
+    "eip155": {
+      "chains": ["eip155:1"],
+      "methods": [],
+      "events": ["chainChanged"]
+    }
+  } 
 }
 ```
 
@@ -578,10 +634,12 @@ Received Session Namespaces:
 
 ```json
 {
-  "eip155": {
-    "accounts": ["eip155:1:0xab16a96d359ec26a11e2c2b3d8f8b8942d5bfcdb"],
-    "methods": [],
-    "events": []
+  "namespaces": {
+    "eip155": {
+      "accounts": ["eip155:1:0xab16a96d359ec26a11e2c2b3d8f8b8942d5bfcdb"],
+      "methods": [],
+      "events": []
+    }
   }
 }
 ```

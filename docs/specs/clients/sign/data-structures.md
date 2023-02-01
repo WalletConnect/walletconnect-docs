@@ -17,29 +17,39 @@ Relay is defined by the transport protocol used for the two clients to publish a
 
 Chains and Namespaces are defined with different methods and events that are compatible for the set of chains within the scope.
 
-As defined by the [CAIP-2](https://chainagnostic.org/CAIPs/caip-2), we have a schema for chainId's that is composed by both a chain namespace and a chain reference.
+As defined by the [CAIP-2](https://chainagnostic.org/CAIPs/caip-2), we have a schema for chain id's that is composed by both a chain namespace and a chain reference.
 
 ```sh
 chain_id = chain_namespace + ":" + chain_reference
 ```
 
-These will be used for reference within the following data structures:
+As defined by the [CAIP-10](https://chainagnostic.org/CAIPs/caip-10), we have a schema for account id's that is composed by a chain namespace, a chain reference and account address.
 
-### Namespace
+```sh
+account_id = chain_id + ":" + account_address
+```
+
+These will be used for reference for both Proposals and Session Namespaces.
+
+### Proposal Namespaces
+
+Proposal namespaces will include: chains, methods and events.
+
+#### Proposal Namespace
 
 Namespace includes multiple chains within the same set of methods and events.
 
 ```jsonc
 {
-  "chains": string[], // set of chainId's
+  "chains": string[], // set of CAIP-2 chain id's
   "methods": string[], // set of JSON-RPC methods
   "events": string[] // set of JSON-RPC events
 }
 ```
 
-### Chain
+#### Proposal Chain
 
-Chain defines methods and events for a single chainId.
+Chain defines methods and events for a single chain id.
 
 ```jsonc
 {
@@ -48,16 +58,58 @@ Chain defines methods and events for a single chainId.
 }
 ```
 
-### Namespace Map
+#### Proposal Namespace Map
 
-During or after a session is proposed we can index these two data structures with either a namespace or chainId as a reference
+A proposal namespace map can index these two data structures with either a namespace or chain id as a reference.
 
 ```jsonc
 {
-  "<chain_namespace>": Namespace,
-  "<chain_id>": Chain,
+  "<chain_namespace>": ProposalNamespace,
+  // OR
+  "<chain_id>": ProposalChain,
 }
 ```
+
+### Session Namespaces
+
+Session namespaces will include: chains, methods and events.
+
+#### Session Namespace
+
+Namespace includes multiple chains within the same set of methods and events.
+
+```jsonc
+{
+  "chains": string[], // set of CAIP-10 account id's
+  "methods": string[], // set of JSON-RPC methods
+  "events": string[] // set of JSON-RPC events
+}
+```
+
+#### Session Chain
+
+Chain defines methods and events for a single chain id.
+
+```jsonc
+{
+  "accounts": string[], // set of CAIP-10 account id's
+  "methods": string[], // set of JSON-RPC methods
+  "events": string[] // set of JSON-RPC events
+}
+```
+
+#### Session Namespace Map
+
+A sesion namespace map can index these two data structures with either a namespace or chain id as a reference
+
+```jsonc
+{
+  "<chain_namespace>": SessionNamespace,
+  // OR
+  "<chain_id>": SessionChain,
+}
+```
+
 
 ## Session
 
@@ -84,9 +136,9 @@ Session is a topic encrypted by a symmetric key derived using a key agreement es
   "expiry": Int64, // timestamp (seconds)
   "acknowledged": boolean,
   "controller": string,
-  "namespaces": NamespaceMap,
-  "requiredNamespaces": NamespaceMap,
-  "optionalNamespaces": NamespaceMap,
+  "namespaces": SessionNamespaceMap,
+  "requiredNamespaces": ProposalNamespaceMap,
+  "optionalNamespaces": ProposalNamespaceMap,
   "properties": Map<string, string>,
 }
 ```
@@ -108,8 +160,8 @@ Proposal is sent by the proposer client to be approved or rejected by the respon
     "publicKey": string,
     "metadata": Metadata
   },
-  "requiredNamespaces": NamespaceMap,
-  "optionalNamespaces": NamespaceMap,
+  "requiredNamespaces": ProposalNamespaceMap,
+  "optionalNamespaces": ProposalNamespaceMap,
   "properties": Map<string, string>,
   "pairingTopic": string
 }
@@ -153,7 +205,7 @@ Settlement is sent by the responder after approval and it's broadcasted right af
     "publicKey": string,
     "metadata": Metadata
   },
-  "namespaces": NamespaceMap,
+  "namespaces": SessionNamespaceMap,
   "expiry": Int64, // seconds
 }
 ```
