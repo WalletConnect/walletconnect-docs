@@ -89,9 +89,23 @@ web3wallet.on("session_request", async (event) => {
   // sign the message
   const signedMessage = await wallet.signMessage(message);
 
-  const response = { id, result: signedMessage };
+  const response = { id, result: signedMessage, jsonrpc: "2.0" };
+
   await web3wallet.respondSessionRequest({ topic, response });
 });
+```
+
+To reject a session request, the response should be similar to this.
+
+```javascript
+const response = {
+  id,
+  jsonrpc: "2.0",
+  error: {
+    code: 5000,
+    message: "User rejected.",
+  },
+};
 ```
 
 ## Updating a Session
