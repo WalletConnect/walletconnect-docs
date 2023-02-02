@@ -38,7 +38,6 @@ Used to request push subscription to a peer through topic P. Response is expecte
 | IRN     |          |
 | ------- | -------- | 
 | TTL     | 86400    |
-| Prompt  | true     |
 | Tag     | 4000     |
 
 ```
@@ -54,7 +53,6 @@ Used to request push subscription to a peer through topic P. Response is expecte
 | IRN     |          |
 | ------- | -------- |
 | TTL     | 86400    |
-| Prompt  | false    |
 | Tag     | 4001     |
 ```
 
@@ -80,7 +78,6 @@ Used to publish a notification message to a peer through topic P. Response is ex
 | IRN     |          |
 | ------- | -------- |
 | TTL     | 86400    |
-| Prompt  | true     |
 | Tag     | 4002     |
 
 ```
@@ -94,7 +91,6 @@ true
 | IRN     |          |
 | ------- | -------- |
 | TTL     | 86400    |
-| Prompt  | false    |
 | Tag     | 4003     |
 
 ```
@@ -114,7 +110,6 @@ Used to inform the peer to close and delete a push subscription. The reason fiel
 | IRN     |          |
 | ------- | -------- |
 | TTL     | 86400    |
-| Prompt  | true     |
 | Tag     | 4004     |
 ```
 
@@ -126,5 +121,4 @@ true
 | IRN     |          |
 | ------- | -------- |
 | TTL     | 86400    |
-| Prompt  | false    |
 | Tag     | 4005     |
