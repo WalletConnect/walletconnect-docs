@@ -32,6 +32,10 @@ import {
 
 See [configuration](../configuration.md) docs for full Web3Modal options list.
 
+:::info
+Minimum version of @wagmi/core 0.9.3 is required to use `version: "2"`
+:::
+
 ```js
 const chains = [arbitrum, mainnet, polygon];
 
