@@ -1,7 +1,7 @@
 # Session Namespaces
 
 Let's say a dapp wants access to Ethereum Mainnet, Polygon, Cosmos Mainnet.
-It specifies the proposed execution environment for each blockchain in the form of namespaces. For example, for Ethereum Mainnet and Polygon, it requires: `eth_sign` method and `accountsChanged` event, and, for Cosmos Mainnet, it requires: `cosmos_signDirect` method and `someCosmosEvent` event. Let's say that Polygon also has a special method `personalSign` and an event `chainChanged` not available in Ethereum Mainnet. The Dapp can require chain-exclusive parameters via the `extensions` field.
+It specifies the proposed execution environment for each blockchain in the form of namespaces. For example, for Ethereum Mainnet and Polygon, it requires: `eth_sign` method and `accountsChanged` event, and, for Cosmos Mainnet, it requires: `cosmos_signDirect` method and `someCosmosEvent` event. Let's say that Polygon also has a special method `personalSign` and an event `chainChanged` not available in Ethereum Mainnet.
 
 ## Example Proposal Namespaces request
 
@@ -10,14 +10,7 @@ It specifies the proposed execution environment for each blockchain in the form 
   "eip155": {
     "chains": ["eip155:137", "eip155:1"],
     "methods": ["eth_sign"],
-    "events": ["accountsChanged"],
-    "extensions": [
-      {
-        "chains": ["eip155:137"],
-        "method": ["personalSign"],
-        "events": ["chainChanged"]
-      }
-    ]
+    "events": ["accountsChanged"]
   },
   "cosmos": {
     "chains": ["cosmos:cosmoshub-4"],
@@ -41,14 +34,7 @@ If the Wallet (or the user) does NOT approve the session, then it is rejected. O
       "eip155:1:0xab16a96d359ec26a11e2c2b3d8f8b8942d5bfcdb"
     ],
     "methods": ["eth_sign"],
-    "events": ["accountsChanged"],
-    "extensions": [
-      {
-        "accounts": ["eip155:137:0xab16a96d359ec26a11e2c2b3d8f8b8942d5bfcdb"],
-        "method": ["personalSign"],
-        "events": ["chainChanged"]
-      }
-    ]
+    "events": ["accountsChanged"]
   },
   "cosmos": {
     "accounts": [
@@ -155,95 +141,7 @@ Throw Error Code: `case .unsupportedChains: return 5100`
 
 ---
 
-### 1.5. Extension MUST NOT have chains empty
-
-Requested Proposal Namespaces:
-
-```json
-{
-  "eip155": {
-    "chains": ["eip155:1", "eip155:137"],
-    "methods": ["personalSign"],
-    "events": [],
-    "extensions": [
-      {
-        "chains": [],
-        "methods": ["eth_getAccounts"],
-        "events": []
-      }
-    ]
-  }
-}
-```
-
-Is valid?: No
-
-Note: Proposal namespace extension doesn't have any chains, hence it's invalid
-
-Throw Message: `Chains must not be empty`
-Throw Error Code: `case .unsupportedChains: return 5100`
-
----
-
-### 1.6. Extension methods field is REQUIRED
-
-Requested Proposal Namespaces:
-
-```json
-{
-  "eip155": {
-    "chains": ["eip155:1", "eip155:137", "eip155:10"],
-    "methods": ["personalSign"],
-    "events": [],
-    "extensions": [
-      {
-        "chains": ["eip155:1"],
-        "events": ["chainChanged"]
-      }
-    ]
-  }
-}
-```
-
-Is valid?: No
-
-Note: Extension is missing `methods` field.
-
-Throw Message: `Methods field is missing`
-Throw Error Code: `case .unsupportedMethods: return 5101`
-
----
-
-### 1.7. Extension events field is REQUIRED
-
-Requested Proposal Namespaces:
-
-```json
-{
-  "eip155": {
-    "chains": ["eip155:1", "eip155:137", "eip155:10"],
-    "methods": ["personalSign"],
-    "events": [],
-    "extensions": [
-      {
-        "chains": ["eip155:137"],
-        "methods": ["eth_getAccounts"]
-      }
-    ]
-  }
-}
-```
-
-Is valid?: No
-
-Note: Extension is missing `events` field.
-
-Throw Message: `Events field is missing`
-Throw Error Code: `case .unsupportedEvents: return 5102`
-
----
-
-### 1.8. Namespace key must comply with CAIP-2 specification
+### 1.5. Namespace key must comply with CAIP-2 specification
 
 Requested Proposal Namespaces:
 
@@ -271,7 +169,7 @@ Throw Error Code: `case .unsupportedNamespaceKey: return 5104`
 
 ---
 
-### 1.9. All namespaces MUST be valid
+### 1.6. All namespaces MUST be valid
 
 Requested Proposal Namespaces:
 
@@ -295,11 +193,11 @@ Is valid?: No
 Note: Even though, the first proposal namespace is valid the second being invalid makes whole proposal invalid
 
 Throw Message should be the first one caught
-Throw Error Code should be the frist one caught
+Throw Error Code should be the first one caught
 
 ---
 
-### 1.10. Proposal namespaces MAY be empty
+### 1.7. Proposal namespaces MAY be empty
 
 Requested Proposal Namespaces:
 
@@ -662,47 +560,7 @@ Throw Error Code: `case .userRejected return 5000`
 
 ---
 
-### 2.10. Extensions MAY be merged into namespace
-
-Requested Proposal Namespaces:
-
-```json
-{
-  "eip155": {
-    "chains": ["eip155:137", "eip155:1"],
-    "methods": ["eth_sign"],
-    "events": ["accountsChanged"],
-    "extensions": [
-      {
-        "chains": ["eip155:137"],
-        "methods": ["personalSign"],
-        "events": []
-      }
-    ]
-  }
-}
-```
-
-Received Session Namespaces:
-
-```json
-{
-  "eip155": {
-    "accounts": [
-      "eip155:1:0xab16a96d359ec26a11e2c2b3d8f8b8942d5bfcdb",
-      "eip155:137:0xab16a96d359ec26a11e2c2b3d8f8b8942d5bfcdb"
-    ],
-    "methods": ["eth_sign", "personalSign"],
-    "events": ["accountsChanged"]
-  }
-}
-```
-
-Is valid?: Yes
-
----
-
-### 2.11. Session Namespaces MUST approve all events
+### 2.10. Session Namespaces MUST approve all events
 
 Requested Proposal Namespaces:
 
@@ -737,139 +595,3 @@ Throw Error Code: `case .userRejectedEvents: return 5003`
 
 ---
 
-### 2.12. Session Namespaces extensions MAY extend methods and events of Proposal Namespaces extensions
-
-Requested Proposal Namespaces:
-
-```json
-{
-  "eip155": {
-    "chains": ["eip155:1", "eip155:137"],
-    "methods": [],
-    "events": ["chainChanged"],
-    "extensions": [
-      {
-        "chains": ["eip155:137"],
-        "methods": ["eth_sign"],
-        "events": []
-      }
-    ]
-  }
-}
-```
-
-Received Session Namespaces:
-
-```json
-{
-  "eip155": {
-    "accounts": [
-      "eip155:1:0xab16a96d359ec26a11e2c2b3d8f8b8942d5bfcdb",
-      "eip155:137:0xab16a96d359ec26a11e2c2b3d8f8b8942d5bfcdb"
-    ],
-    "methods": [],
-    "events": ["chainChanged"],
-    "extensions": [
-      {
-        "accounts": ["eip155:137:0xab16a96d359ec26a11e2c2b3d8f8b8942d5bfcdb"],
-        "methods": ["eth_sign", "personalSign"],
-        "events": ["accountsChanged"]
-      }
-    ]
-  }
-}
-```
-
-Is valid?: Yes
-
----
-
-### 2.13. Session Namespaces extensions MAY contain accounts from chains not defined in Proposal Namespaces extensions
-
-Requested Proposal Namespaces:
-
-```json
-{
-  "eip155": {
-    "chains": ["eip155:1", "eip155:137"],
-    "methods": ["eth_sign"],
-    "events": ["accountsChanged"],
-    "extensions": [
-      {
-        "chains": ["eip155:137"],
-        "methods": ["personalSign"],
-        "events": ["chainChanged"]
-      }
-    ]
-  }
-}
-```
-
-Received Session Namespaces:
-
-```json
-{
-  "eip155": {
-    "accounts": [
-      "eip155:1:0xab16a96d359ec26a11e2c2b3d8f8b8942d5bfcdb",
-      "eip155:137:0xab16a96d359ec26a11e2c2b3d8f8b8942d5bfcdb"
-    ],
-    "methods": ["eth_sign"],
-    "events": ["accountsChanged"],
-    "extensions": [
-      {
-        "accounts": [
-          "eip155:137:0xab16a96d359ec26a11e2c2b3d8f8b8942d5bfcdb",
-          "eip155:42:0xab16a96d359ec26a11e2c2b3d8f8b8942d5bfcdb"
-        ],
-        "methods": ["personalSign"],
-        "events": ["chainChanged"]
-      }
-    ]
-  }
-}
-```
-
-Is valid?: Yes
-
----
-
-### 2.14. Session Namespaces MAY add extensions not defined in Proposal Namespaces extensions
-
-Requested Proposal Namespaces:
-
-```json
-{
-  "eip155": {
-    "chains": ["eip155:1", "eip155:137"],
-    "methods": ["eth_sign"],
-    "events": ["accountsChanged"]
-  }
-}
-```
-
-Received Session Namespaces:
-
-```json
-{
-  "eip155": {
-    "accounts": [
-      "eip155:1:0xab16a96d359ec26a11e2c2b3d8f8b8942d5bfcdb",
-      "eip155:137:0xab16a96d359ec26a11e2c2b3d8f8b8942d5bfcdb"
-    ],
-    "methods": ["eth_sign"],
-    "events": ["accountsChanged"],
-    "extensions": [
-      {
-        "accounts": ["eip155:137:0xab16a96d359ec26a11e2c2b3d8f8b8942d5bfcdb"],
-        "methods": ["personalSign"],
-        "events": ["chainChanged"]
-      }
-    ]
-  }
-}
-```
-
-Is valid?: Yes
-
----

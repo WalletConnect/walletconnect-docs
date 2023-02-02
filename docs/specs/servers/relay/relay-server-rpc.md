@@ -13,7 +13,7 @@ The following definitions are shared concepts across all JSON-RPC methods for th
 - **ttl** - a storage duration for the message to be cached server-side in **seconds** (aka time-to-live).
 - **tag** - a label that identifies what type of message is sent based on the rpc method used.
 - **prompt** - a flag that identifies whether the server should trigger a notification webhook to a client through a push server.
-- **id** - a unique identifier for each subscription targetting a topic.
+- **id** - a unique identifier for each subscription targeting a topic.
 
 ## Publish payload
 
@@ -34,7 +34,7 @@ Used when a client publishes a message to a server.
 }
 ```
 
-## Subcribe payload
+## Subscribe payload
 
 Used when a client subscribes a given topic.
 
@@ -49,7 +49,7 @@ Used when a client subscribes a given topic.
 }
 ```
 
-## Unsubcribe payload
+## Unsubscribe payload
 
 Used when a client unsubscribes a given topic.
 

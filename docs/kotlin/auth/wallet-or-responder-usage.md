@@ -22,7 +22,7 @@ CoreClient.initialize(relayServerUrl = serverUrl, connectionType = ConnectionTyp
 
 AuthClient.initialize(init = Auth.Params.Init(core = CoreClient)) { error -> Log.e(tag(this), error.throwable.stackTraceToString()) }
 ```
-For more contex on how to initialize CoreClient, go to [CoreClient docs](../../kotlin/core/installation.md) section.
+For more context on how to initialize CoreClient, go to [CoreClient docs](../../kotlin/core/installation.md) section.
 
 ---
 ### **AuthClient.ResponderDelegate**
@@ -36,7 +36,7 @@ object ResponderDelegate : AuthClient.ResponderDelegate {
     }
 
     override fun onAuthRequest(authRequest: Auth.Event.AuthRequest) {
-        // Triggered when Dapp / Requester makes an authorisation request. Wallet / Responder should display message to user and ask him to approve or reject authorisation.
+        // Triggered when Dapp / Requester makes an authorization request. Wallet / Responder should display message to user and ask him to approve or reject authorization.
     }
 
     override fun onConnectionStateChange(connectionStateChange: Auth.Event.ConnectionStateChange) {
@@ -53,17 +53,17 @@ object ResponderDelegate : AuthClient.ResponderDelegate {
 
 ## **Methods**
 
-### **Authotisation Request Approval**
+### **Authorization Request Approval**
 
-To approve authorisation request, sign message using `CacaoSigner.sign` which requires private key to sign `Cacao` object that needs to be passed to `Auth.Params.Respond.Result` object and send to Dapp / Requester.
-`issuer` parameter describes what did responder authorises. Example `iss` for Ethereum Mainnet: `did:pkh:eip155:1:0xb9c5714089478a327f09197987f16f9e5d936e8a`. More about `did:pkh` method [here](https://github.com/w3c-ccg/did-pkh/blob/main/did-pkh-method-draft.md).
+To approve authorization request, sign message using `CacaoSigner.sign` which requires private key to sign `Cacao` object that needs to be passed to `Auth.Params.Respond.Result` object and send to Dapp / Requester.
+`issuer` parameter describes what did responder authorizes. Example `iss` for Ethereum Mainnet: `did:pkh:eip155:1:0xb9c5714089478a327f09197987f16f9e5d936e8a`. More about `did:pkh` method [here](https://github.com/w3c-ccg/did-pkh/blob/main/did-pkh-method-draft.md).
 
 ```kotlin
 val request: Auth.Event.AuthRequest = // Request from onAuthRequest
 val signature: Auth.Model.Cacao.Signature = CacaoSigner.sign(
     request.message, // Message to be signed
     PRIVATE_KEY, // Private key used to signing a message
-    SignatureType.EIP191 // Currently only EIP191 signing is supported
+    SignatureType.EIP191 // or EIP1271
 )
 val issuer = //Check following link for more reference: https://github.com/w3c-ccg/did-pkh/blob/main/did-pkh-method-draft.md
 
@@ -72,9 +72,9 @@ AuthClient.respond(Auth.Params.Respond.Result(request.id, signature, issuer)) { 
 }
 ```
 
-### **Authorisation Request Rejection**
+### **Authorization Request Rejection**
 
-To reject authorisation request respond Dapp / Requester with `Auth.Params.Respond.Error`. Note: We recommend using defined below error message and error code.
+To reject authorization request respond Dapp / Requester with `Auth.Params.Respond.Error`. Note: We recommend using defined below error message and error code.
 
 ```kotlin
 val request: Auth.Event.AuthRequest = // Request from onAuthRequest

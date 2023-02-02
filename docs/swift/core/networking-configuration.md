@@ -30,7 +30,7 @@ Networking.configure(projectId: <String>, socketFactory: SocketFactory())
 
 ### Web Socket Connection
 
-By default web socket connection is handled internally by the SDK. That means that Web socket will be safely disconnected when apps go to background and it will connect back when app reaches foreground. But if it is not expeted for your app and you want to handle socket connection manually you can do it as follows:
+By default web socket connection is handled internally by the SDK. That means that Web socket will be safely disconnected when apps go to background and it will connect back when app reaches foreground. But if it is not expected for your app and you want to handle socket connection manually you can do it as follows:
 
 1. set socketConnectionType for manual  
 ```swift
