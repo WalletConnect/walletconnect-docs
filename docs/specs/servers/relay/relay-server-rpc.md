@@ -40,6 +40,37 @@ Used when a client publishes a message to a server.
 }
 ```
 
+## Batch Publish payload
+
+Used when a client publishes multiple messages to a server.
+
+```jsonc
+// PublishedMessage
+{
+  "topic" : string,
+  "message" : string,
+  "ttl" : seconds,
+  "tag" : number,
+}
+
+// Request (client->server)
+{
+  "id" : "1",
+  "jsonrpc": "2.0",
+  "method": "irn_batchPublish",
+  "params" : {
+    "messages": PublishedMessage[]
+  }
+}
+
+// Response (server->client)
+{
+  "id" : "1",
+  "jsonrpc": "2.0",
+  "result": true
+}
+```
+
 ## Subscribe payload
 
 Used when a client subscribes a given topic.
@@ -60,6 +91,29 @@ Used when a client subscribes a given topic.
   "id" : "1",
   "jsonrpc": "2.0",
   "result": string // subscriptionId
+}
+```
+
+## Batch Subscribe payload
+
+Used when a client subscribes multiple topics.
+
+```jsonc
+// Request (client->server)
+{
+  "id" : "1",
+  "jsonrpc": "2.0",
+  "method": "irn_batchSubscribe",
+  "params" : {
+    "topics" : string[]
+  }
+}
+
+// Response (server->client)
+{
+  "id" : "1",
+  "jsonrpc": "2.0",
+  "result": string[] // array of subscriptionId's
 }
 ```
 
@@ -87,6 +141,36 @@ Used when a client unsubscribes a given topic.
 }
 ```
 
+## Batch Unsubscribe payload
+
+Used when a client unsubscribes a given topic.
+
+```jsonc
+// Subscription
+{
+  "topic": string,
+  "id": string
+}
+
+// Request (client->server)
+{
+  "id" : "1",
+  "jsonrpc": "2.0",
+  "method": "irn_batchUnsubscribe",
+  "params" : {
+    "subscriptions": Subscription[]
+  }
+}
+
+// Response (server->client)
+{
+  "id" : "1",
+  "jsonrpc": "2.0",
+  "result": true
+}
+```
+
+
 ## Subscription payload
 
 Used when a server sends a subscription message to a client.
@@ -103,6 +187,35 @@ Used when a server sends a subscription message to a client.
       "topic" : string,
       "message": string
     }
+  }
+}
+
+// Response (client->server)
+{
+  "id" : "1",
+  "jsonrpc": "2.0",
+  "result": true
+}
+```
+
+## Get Messsages payload
+
+Used when a client wants to get all undelivered messages before subscribing.
+
+```jsonc
+// ReceivedMessage
+{
+  "topic": string,
+  "message": string,
+}
+
+// Request (server->client)
+{
+  "id" : "1",
+  "jsonrpc": "2.0",
+  "method": "irn_getMessages",
+  "params" : {
+    "messages": ReceivedMessage[]
   }
 }
 
