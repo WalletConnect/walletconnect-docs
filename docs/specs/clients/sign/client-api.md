@@ -82,5 +82,8 @@ abstract class Client {
 
   // subscribe to session event
   public abstract on("session_event", (sessionEvent: SessionEvent) => {}): void;
+
+  // subscribe to session delete (SIGN)
+  public abstract on("session_delete", (sessionDelete: { id: number, topic: string }) => {}): void;
 }
 ```
