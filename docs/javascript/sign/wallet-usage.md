@@ -63,7 +63,10 @@ signClient.on("session_proposal", (event) => {
     params: {
       id: number;
       expiry: number;
-      relays: { protocol: string; data?: string }[];
+      relays: Array<{ 
+        protocol: string; 
+        data?: string;
+      }>;
       proposer: {
         publicKey: string;
         metadata: {
@@ -93,7 +96,10 @@ signClient.on("session_event", (event) => {
     id: number;
     topic: string;
     params: {
-      event: { name: string; data: any };
+      event: { 
+        name: string; 
+        data: any 
+      };
       chainId: string;
     };
   }
@@ -106,7 +112,10 @@ signClient.on("session_request", (event) => {
     id: number;
     topic: string;
     params: {
-      request: { method: string; params: any };
+      request: {
+        method: string; 
+        params: any
+      };
       chainId: string;
     };
   }

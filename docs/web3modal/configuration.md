@@ -4,9 +4,9 @@ Web3Modal is configurable via combination of options below and [wagmi.sh](https:
 
 ## General Options
 
-### projectId (optional)
+### projectId (required)
 
-Your project’s unique identifier that can be obtained at [cloud.walletconnect.com](https://cloud.walletconnect.com). Providing this enables the following functionalities within Web3Modal: wallet and chain logos, optional walletconnect rpc, support for all wallets from [explorer.walletconnect.com](https://explorer.walletconnect.com). Defaults to `undefined`.
+Your project’s unique identifier that can be obtained at [cloud.walletconnect.com](https://cloud.walletconnect.com). Enables following functionalities within Web3Modal: wallet and chain logos, optional walletconnect rpc, support for all wallets from [explorer.walletconnect.com](https://explorer.walletconnect.com) and WalletConnect v2 support. Defaults to `undefined`.
 
 ```ts
 projectId: string;
@@ -87,7 +87,7 @@ tokenImages: [
 
 ### defaultChain (optional)
 
-Set default / pre-selected chain. Defaults to `mainnet` if it was configured, or first chain in array of chains.
+Before the user establishes a connection, the default wagmi chain can be set. This defaults to the `mainnet` if configured, or the first chain in the array of all available wagmi chains. Once the user is connected, utilize the network actions provided by wagmi.
 
 ```ts
 defaultChain: polygon;
@@ -125,6 +125,14 @@ If more than 1 chain was provided in modal or wagmi configuration users will be 
 
 ```ts
 enableNetworkView: true;
+```
+
+### enableAccountView (optional)
+
+Option to enable or disable the modal's account view. The default setting is set to `true`.
+
+```ts
+enableAccountView: false;
 ```
 
 ### termsOfServiceUrl (optional)
@@ -201,4 +209,4 @@ standaloneChains: [
 
 ## Wagmi Options
 
-If you are also using wagmi, all standard wagmi configuration properties for chains, connectors and providers are also supported. We do however require `WalletConnectConnector` to always be present. Make sure to check out their [documentation](https://wagmi.sh/) for more info.
+All standard wagmi configuration properties for chains, connectors and providers are also supported. We do however require `WalletConnectConnector` to always be present. Make sure to check out their [documentation](https://wagmi.sh/) for more info.
