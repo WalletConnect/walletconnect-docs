@@ -198,9 +198,34 @@ Used when a server sends a subscription message to a client.
 }
 ```
 
-## Get Messsages payload
+## Fetch Messsages payload
 
-Used when a client wants to get all undelivered messages before subscribing.
+Used when a client wants to fetch all undelivered messages matching a single topic before subscribing.
+
+```jsonc
+// Request (client->server)
+{
+  "id" : "1",
+  "jsonrpc": "2.0",
+  "method": "irn_fetchMessages",
+  "params" : {
+    "topic": string
+  }
+}
+
+// Response (server->client)
+{
+  "id" : "1",
+  "jsonrpc": "2.0",
+  "result": string[] // array of messages
+}
+```
+
+
+
+## Batch Fetch Messsages payload
+
+Used when a client wants to fetch all undelivered messages matching multiple topics before subscribing.
 
 ```jsonc
 // ReceivedMessage
@@ -209,21 +234,21 @@ Used when a client wants to get all undelivered messages before subscribing.
   "message": string,
 }
 
-// Request (server->client)
+// Request (client->server)
 {
   "id" : "1",
   "jsonrpc": "2.0",
-  "method": "irn_getMessages",
+  "method": "irn_batchFetchessages",
   "params" : {
-    "messages": ReceivedMessage[]
+    "topics": string[]
   }
 }
 
-// Response (client->server)
+// Response (server->client)
 {
   "id" : "1",
   "jsonrpc": "2.0",
-  "result": true
+  "result": ReceivedMessage[] 
 }
 ```
 
