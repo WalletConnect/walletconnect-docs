@@ -19,6 +19,7 @@ The following definitions are shared concepts across all JSON-RPC methods for th
 Used when a client publishes a message to a server.
 
 ```jsonc
+// Request (client->server)
 {
   "id" : "1",
   "jsonrpc": "2.0",
@@ -30,6 +31,13 @@ Used when a client publishes a message to a server.
     "tag" : number,
   }
 }
+
+// Response (server->client)
+{
+  "id" : "1",
+  "jsonrpc": "2.0",
+  "result": true
+}
 ```
 
 ## Subscribe payload
@@ -37,6 +45,7 @@ Used when a client publishes a message to a server.
 Used when a client subscribes a given topic.
 
 ```jsonc
+// Request (client->server)
 {
   "id" : "1",
   "jsonrpc": "2.0",
@@ -45,6 +54,13 @@ Used when a client subscribes a given topic.
     "topic" : string
   }
 }
+
+// Response (server->client)
+{
+  "id" : "1",
+  "jsonrpc": "2.0",
+  "result": string // subscriptionId
+}
 ```
 
 ## Unsubscribe payload
@@ -52,6 +68,7 @@ Used when a client subscribes a given topic.
 Used when a client unsubscribes a given topic.
 
 ```jsonc
+// Request (client->server)
 {
   "id" : "1",
   "jsonrpc": "2.0",
@@ -61,6 +78,13 @@ Used when a client unsubscribes a given topic.
     "id": string
   }
 }
+
+// Response (server->client)
+{
+  "id" : "1",
+  "jsonrpc": "2.0",
+  "result": true
+}
 ```
 
 ## Subscription payload
@@ -68,6 +92,7 @@ Used when a client unsubscribes a given topic.
 Used when a server sends a subscription message to a client.
 
 ```jsonc
+// Request (server->client)
 {
   "id" : "1",
   "jsonrpc": "2.0",
@@ -79,6 +104,13 @@ Used when a server sends a subscription message to a client.
       "message": string
     }
   }
+}
+
+// Response (client->server)
+{
+  "id" : "1",
+  "jsonrpc": "2.0",
+  "result": true
 }
 ```
 
