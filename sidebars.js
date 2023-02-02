@@ -261,7 +261,7 @@ module.exports = {
               ],
             },
             "web3modal/configuration",
-            "web3modal/for-wallets",
+            "web3modal/faq",
           ],
         },
         {

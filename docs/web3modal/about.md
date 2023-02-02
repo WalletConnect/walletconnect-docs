@@ -10,6 +10,8 @@ While we add support for other chains and frameworks a unique "standalone" mode 
 For our supported flows, both React and HTML have great integration with [wagmi](https://wagmi.sh/).
 Check out [web3modal.com](https://web3modal.com) for more information and previews.
 
+![web3modal customisation](/assets/web3modal_preview.png)
+
 ## Getting Started
 
 See our installation docs for each platform.
@@ -32,9 +34,9 @@ description: "If you don't use wagmi or already manage other connections for inj
 url: `/2.0/web3modal/standalone/installation`
 },
 {
-name: "Wallets",
-description: "How to list your wallet in the dashboard.",
-url: `/2.0/web3modal/for-wallets`
+name: "FAQ",
+description: "Frequently asked questions.",
+url: `/2.0/web3modal/faq`
 }
 ]}
 />
@@ -42,16 +44,6 @@ url: `/2.0/web3modal/for-wallets`
 ## Github
 
 The Web3Modal Github can be found at [https://github.com/WalletConnect/web3modal](https://github.com/WalletConnect/web3modal).
-
-### Preview
-
-![web3modal customization](/assets/modal_preview.png)
-
-### Community SDK's
-
-**Dart/Flutter**
-
-- https://github.com/Eucalyptus-Labs/wallet-connect-dart
 
 ### Community Plugins
 

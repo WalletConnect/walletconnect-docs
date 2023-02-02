@@ -13,7 +13,7 @@ npm install @web3modal/ethereum @web3modal/react wagmi ethers
 ```
 
 :::info
-We target builds with es2020 features, this includes esm imports, please ensure that your dev tools like webpack, babel, create-react-app, nextjs etc. are updated to latest version to support this out of the box, otherwise you will likely see errors related to "unknown syntax" as older versions of these don't support features like optional chaining, nullish coalescing etc.
+Ensure to use latest versions for tools like next, react-scripts, babel, webpack etc. to support es2020 features.
 :::
 
 ## Import
@@ -36,6 +36,10 @@ import { arbitrum, mainnet, polygon } from "wagmi/chains";
 
 Configure wagmi and Web3Modal clients. Refer to [wagmi](https://wagmi.sh/) docs to see how to set up custom chains, providers and work with their client.
 
+:::info
+Minimum version of wagmi 0.11.3 is required to use `version: "2"`
+:::
+
 ```tsx
 const chains = [arbitrum, mainnet, polygon];
 
@@ -45,7 +49,12 @@ const { provider } = configureChains(chains, [
 ]);
 const wagmiClient = createClient({
   autoConnect: true,
-  connectors: modalConnectors({ appName: "web3Modal", chains }),
+  connectors: modalConnectors({
+    projectId: "<YOUR_PROJECT_ID>",
+    version: "1" | "2",
+    appName: "web3Modal",
+    chains,
+  }),
   provider,
 });
 
