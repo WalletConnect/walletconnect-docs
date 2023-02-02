@@ -79,7 +79,7 @@ class Web3Wallet {
   // subscribe to session request (SIGN)
   public abstract on("session_request", (sessionRequest: SessionRequest) => {}): void;
 
-    // subscribe to session delete (SIGN)
+  // subscribe to session delete (SIGN)
   public abstract on("session_delete", (sessionDelete: { id: number, topic: string }) => {}): void;
 
   // subscribe to auth request (AUTH)
