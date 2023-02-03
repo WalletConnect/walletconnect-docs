@@ -2,6 +2,12 @@
 
 Universal Provider for WalletConnect v2
 
+## Installation
+
+```bash npm2yarn
+npm install @walletconnect/universal-provider
+```
+
 ## Usage
 
 ```typescript

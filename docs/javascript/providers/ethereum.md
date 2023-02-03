@@ -4,8 +4,8 @@ Ethereum Provider for WalletConnect v2
 
 ## Installation
 
-```
-npm i @walletconnect/ethereum-provider
+```bash npm2yarn
+npm install @walletconnect/ethereum-provider
 ```
 
 ## Initialization
