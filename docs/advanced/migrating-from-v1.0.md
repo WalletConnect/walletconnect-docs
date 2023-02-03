@@ -1,6 +1,6 @@
 # Migrating from v1.x
 
-WalletConnect v1.0 migration to WalletConnect v2.0 is **NOT** backwards-compatible but in this document we will list all the SDKs that you need to replace to make your transition easier. But also note the migration schedule that we set for both Wallets and Dapps.
+The migration from WalletConnect v1.0 to WalletConnect v2.0 is **NOT** backwards-compatible, but in this document we will list all the SDKs that you need to replace to make your transition easier. Please also note the migration schedule that we set for both Wallets and Dapps.
 
 ## Migration schedule
 
