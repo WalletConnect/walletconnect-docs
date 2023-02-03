@@ -91,7 +91,7 @@ If you were using our [WalletConnectSwift SDK](https://github.com/WalletConnect/
 
 #### Android Wallets
 
-If you were using our [WalletConnectKotlin SDK](https://github.com/WalletConnect/kotlin-walletconnect-lib) (or any other community SDK), you must integrate the Web3Wallet SDK for Kotlin which you can find docs [here](https://docs.walletconnect.com/2.0/kotlin/web3wallet/installation)
+If you were using our [WalletConnectKotlin SDK](https://github.com/WalletConnect/kotlin-walletconnect-lib) (or any other community SDK), you must integrate the Web3Wallet SDK for Kotlin, for which you can find docs [here](https://docs.walletconnect.com/2.0/kotlin/web3wallet/installation)
 
 ### React-Native Wallets
 
