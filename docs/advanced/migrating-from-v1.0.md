@@ -42,7 +42,7 @@ If you are using `@walletconnect/web3-provider`, we stopped supporting this prov
 
 #### For Web3Modal v2.0 integrations
 
-If your are using our new redesigned Web3Modal v2.0 you can simply enable v2.0 using our feature flag `version: '2'` when injecting modal connectors. Here is a code example:
+If you are using our new redesigned Web3Modal v2.0, you can simply enable v2.0 by using the feature flag `version: '2'` when injecting modal connectors. Here is a code example:
 
 ```typescript
 import { modalConnectors } from '@web3modal/ethereum'
