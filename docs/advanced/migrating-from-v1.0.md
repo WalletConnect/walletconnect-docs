@@ -65,7 +65,7 @@ If you still want to use Web3Modal v1.0 but just upgrade the WalletConnect ether
 
 #### For react-native-dapp integrations
 
-If you are using `@walletconnect/react-native-dapp`, we currently don't have a equivalent package for this but we will eventually publish a React-Native version of Web3Modal in the upcoming months.
+If you are using `@walletconnect/react-native-dapp`, we currently don't have an equivalent package for this but we will eventually publish a React-Native version of Web3Modal in the upcoming months.
 
 In the meantime, you can list all the wallet mobile links from our [Cloud Explorer API](https://docs.walletconnect.com/2.0/cloud/explorer) and integrate our `@walletconnect/ethereum-provider` package using the latest version available on NPM which you can find [here](https://npmjs.com/package/@walletconnect/ethereum-provider).
 
