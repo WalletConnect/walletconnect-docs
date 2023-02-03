@@ -64,6 +64,7 @@ module.exports = {
         "advanced/faq",
         "advanced/glossary",
         "advanced/migrating-from-v1.0",
+        "advanced/what-changed-from-v1.0",
         {
           type: "category",
           label: "RPC Reference",
