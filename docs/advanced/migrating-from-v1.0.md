@@ -87,7 +87,7 @@ If you were using our [WalletConnectKotlin SDK](https://github.com/WalletConnect
 
 ### React-Native Wallets
 
-If you were using our [WalletConnectClient SDK](https://www.npmjs.com/package/@walletconnect/client) (or any other community SDK), you must integrate the Web3Wallet SDK for Javascript which you can find docs [here](https://docs.walletconnect.com/2.0/javascript/web3wallet/installation)
+If you were using our [WalletConnectClient SDK](https://www.npmjs.com/package/@walletconnect/client) (or any other community SDK), you must integrate the Web3Wallet SDK for Javascript which you can find docs [here](https://docs.walletconnect.com/2.0/javascript/web3wallet/installation) and check out the RN Examples [here](https://github.com/WalletConnect/react-native-examples)
 
 ### Browser-based Wallets
 
