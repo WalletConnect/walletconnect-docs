@@ -10,6 +10,14 @@ Most importantly we must migrate Wallets before Dapps can start supporting v2.0.
 
 The migration schedule has been set to 16 December 2022 for Wallets and 01 March 2023 for Dapps. We will be shutting down all Cloud-hosted servers for v1.0 on 01 March 2023
 
+## Migration Changes
+
+The overall UX has not change despite the internal protocol changes thus you will find an almost identical developer experience as well.
+
+The only major difference is that we now require a `projectId` for all our SDKs which you can find more information [here](https://docs.walletconnect.com/2.0/cloud/relay).
+
+You can get your your `projectId` by registering for a WalletConnect Cloud account at [cloud.walletconnect.com](https://cloud.walletconnect.com/sign-up).
+
 ## Migration Paths
 
 There are different migration paths for Dapps and Wallets.
