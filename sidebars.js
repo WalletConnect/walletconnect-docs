@@ -344,9 +344,8 @@ module.exports = {
           collapsible: true,
           collapsed: true,
           items: [
-            "javascript/providers/cosmos",
             "javascript/providers/ethereum",
-            "javascript/providers/solana",
+            "javascript/providers/universal",
           ],
         },
       ],
