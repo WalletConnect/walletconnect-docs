@@ -34,7 +34,7 @@ Dapps should have an easy migration from v1.0 to v2.0 by simply replacing the pa
 
 #### For ethereum-provider integrations
 
-If you are using `@walletconnect/ethereum-provider`, then you can simply change the version number in your package.json to the latest which you can check on NPM [here](https://npmjs.com/package/@walletconnect/ethereum-provider).
+If you are using `@walletconnect/ethereum-provider`, you can simply change the version number in your package.json to the latest which you can check on NPM [here](https://npmjs.com/package/@walletconnect/ethereum-provider).
 
 #### For web3-provider integrations
 
