@@ -8,7 +8,7 @@ WalletConnect v2.0 is **NOT** backwards-compatible with v1.0. Therefore, we must
 
 Most importantly we must migrate Wallets before Dapps can start supporting v2.0. This is because Wallets can support both versions in parallel and route connection requests to corresponding clients using the version number specified in the URI present in the QR Code or Deep Link.
 
-The migration schedule has been set to 16 December 2022 for Wallets and 01 March 2023 for Dapps. We will be shutting down all Cloud-hosted servers for v1.0 on 01 March 2023
+The migration schedule has been set to 16 December 2022 for Wallets and 01 March 2023 for Dapps. We will be shutting down all Cloud-hosted servers for v1.0 on 01 March 2023. Read our blog post about the [v1.0 sunset notice and migration schedule](https://medium.com/walletconnect/walletconnect-v1-0-sunset-notice-and-migration-schedule-8af9d3720d2e).
 
 ## Migration Changes
 
