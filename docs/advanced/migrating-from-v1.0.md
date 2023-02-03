@@ -67,7 +67,7 @@ For more documentation, follow the docs for Web3Modal [here](https://docs.wallet
 
 #### For Web3Modal v1.0 integrations
 
-We recommend that you replace your existing integration with the latest versio of Web3Modal which you can find more docs [here](https://docs.walletconnect.com/2.0/web3modal/about).
+We recommend that you replace your existing integration with the latest version of Web3Modal, for which you can find more docs [here](https://docs.walletconnect.com/2.0/web3modal/about).
 
 If you still want to use Web3Modal v1.0 but just upgrade the WalletConnect ethereum-provider to v2.0 then you can update to the latest version available on NPM which you can find [here](https://npmjs.com/package/@walletconnect/ethereum-provider).
 
