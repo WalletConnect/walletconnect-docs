@@ -31,6 +31,7 @@ If you do not know your `standaloneChains` in advance, they can be passed later 
 
 ```ts
 const web3Modal = new Web3Modal({
+  walletConnectVersion: 1, // or 2
   projectId: "<YOUR_PROJECT_ID>",
   standaloneChains: ["eip155:1"],
 });
