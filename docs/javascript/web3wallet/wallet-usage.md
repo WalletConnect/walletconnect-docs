@@ -41,7 +41,7 @@ await web3wallet.core.pairing.pair({ uri });
 
 ## Session Rejection
 
-In the event you want to reject the session proposal, call the `rejectSession` method. The `getSDKError` function comes from the `@walletconnect-utils` [library](https://github.com/WalletConnect/walletconnect-monorepo/tree/v2.0/packages/utils).
+In the event you want to reject the session proposal, call the `rejectSession` method. The `getSDKError` function comes from the `@walletconnect/utils` [library](https://github.com/WalletConnect/walletconnect-monorepo/tree/v2.0/packages/utils).
 
 ```javascript
 web3wallet.on("session_proposal", async (proposal) => {
@@ -56,7 +56,7 @@ web3wallet.on("session_proposal", async (proposal) => {
 
 If either the dapp or the wallet decides to disconnect the session, the `session_delete` event will be emitted. The wallet should listen for this event in order to update the UI.
 
-To disconnect a session from the wallet, call the `disconnectSession` function and pass in the `topic` and `reason`. You can use the `getSDKError` function, which is available in the `@walletconnect-utils` [library](https://github.com/WalletConnect/walletconnect-monorepo/tree/v2.0/packages/utils).
+To disconnect a session from the wallet, call the `disconnectSession` function and pass in the `topic` and `reason`. You can use the `getSDKError` function, which is available in the `@walletconnect/utils` [library](https://github.com/WalletConnect/walletconnect-monorepo/tree/v2.0/packages/utils).
 
 ```javascript
 await web3wallet.disconnectSession({
@@ -67,14 +67,45 @@ await web3wallet.disconnectSession({
 
 ## Responding to Session Requests
 
-The `session_request` event is triggered when a dapp sends a request to the wallet for a specific action, such as signing a transaction. This event is emitted by the dapp and received by the wallet. To respond to the request, wallets should call the respondSessionRequest function and pass in details from the request. You can then approve or reject the request based on the response.
+The `session_request` event is triggered by a dapp when it needs the wallet to perform a specific action, such as signing a transaction. The event contains a `topic` and a `request` object, which will vary depending on the action requested.
+
+To respond to the request, the wallet can access the `topic` and `request` object by destructuring them from the event payload. To see a list of possible `request` and `response` objects, refer to the relevant JSON-RPC Methods for [Ethereum](../../advanced/rpc-reference/ethereum-rpc.md), [Solana](../../advanced/rpc-reference/solana-rpc.md), [Cosmos](../../advanced/rpc-reference/cosmos-rpc.md), or [Stellar](../../advanced/rpc-reference/stellar-rpc.md).
+
+As an example, if the dapp requests a `personal_sign` method, the wallet can extract the `params` array from the `request` object. The first item in the array is the hex version of the message to be signed, which can be converted to UTF-8 and assigned to a `message` variable. The second item in `params` is the user's wallet address.
+
+To sign the message, the wallet can use the `wallet.signMessage` method and pass in the message. The signed message, along with the `id` from the event payload, can then be used to create a `response` object, which can be passed into `respondSessionRequest`.
+
+The wallet then signs the message. `signedMessage`, along with the `id` from the event payload, can then be used to create a `response` object, which can be passed into `respondSessionRequest`.
 
 ```javascript
-web3wallet.on("session_request", (event) => {
-  const { id, method, params } = event.request;
+web3wallet.on("session_request", async (event) => {
+  const { topic, params, id } = event;
+  const { request } = params;
+  const requestParamsMessage = request.params[0];
 
-  await web3wallet.respondSessionRequest({ id, result: response });
+  // convert `requestParamsMessage` by using a method like hexToUtf8
+  const message = hexToUtf8(requestParamsMessage);
+
+  // sign the message
+  const signedMessage = await wallet.signMessage(message);
+
+  const response = { id, result: signedMessage, jsonrpc: "2.0" };
+
+  await web3wallet.respondSessionRequest({ topic, response });
 });
+```
+
+To reject a session request, the response should be similar to this.
+
+```javascript
+const response = {
+  id,
+  jsonrpc: "2.0",
+  error: {
+    code: 5000,
+    message: "User rejected.",
+  },
+};
 ```
 
 ## Updating a Session
@@ -95,7 +126,7 @@ await web3wallet.extendSession({ topic });
 
 ## Emit Session Events
 
-To emit sesssion events, call the `emitSessionEvent` and pass in the params. In the example, the wallet will emit `sesssion_event` when the wallet switches chains while on the Ethereum Mainnet.
+To emit session events, call the `emitSessionEvent` and pass in the params. In the example, the wallet will emit `session_event` when the wallet switches chains while on the Ethereum Mainnet.
 
 ```javascript
 await web3wallet.emitSessionEvent({

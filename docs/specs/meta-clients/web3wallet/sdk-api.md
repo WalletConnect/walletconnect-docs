@@ -6,7 +6,7 @@ class Web3Wallet {
   public abstract init(params: { core: CoreClient }): Promise<void>;
   
   // establish pairing from URI (BOTH)
-  public abstract pair(parmas: { uri: string }): Promise<void>;
+  public abstract pair(params: { uri: string }): Promise<void>;
   
    // approve a session proposal (SIGN)
   public abstract approveSession(params: {
@@ -78,6 +78,9 @@ class Web3Wallet {
 
   // subscribe to session request (SIGN)
   public abstract on("session_request", (sessionRequest: SessionRequest) => {}): void;
+
+  // subscribe to session delete (SIGN)
+  public abstract on("session_delete", (sessionDelete: { id: number, topic: string }) => {}): void;
 
   // subscribe to auth request (AUTH)
   public abstract on("auth_request", (id: number, payload: PayloadParams) => {}): void;

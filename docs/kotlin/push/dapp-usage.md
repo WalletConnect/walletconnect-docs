@@ -24,7 +24,7 @@ PushDappClient.initialize(init) { error ->
 
 The Push Dapp client is responsible for initiating the connection with the cast server and is also in charge of registering and notifying clients. To initialize the Push Dapp client, create a `Push.Dapp.Params.Init` object in the Android Application class with the `CoreClient` and the cast server url if available. The `Push.Dapp.Params.Init` object will then be passed to the `PushDappClient` initialize function.
 
-The `PushDappClient` should be initalized in the Application class.
+The `PushDappClient` should be initialized in the Application class.
 
 
 ### PushDappClient.Delegate

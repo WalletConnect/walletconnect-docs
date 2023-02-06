@@ -8,18 +8,18 @@ This document aims to create the JsonRpc contract between a client and a server.
 
 The following definitions are shared concepts across all JSON-RPC methods for the Relay API:
 
-- **topic** - a target topic for the message to be subscribed by the receiver.
-- **message** - a plaintext message to be relayed to any subscribers on the topic.
-- **ttl** - a storage duration for the message to be cached server-side in **seconds** (aka time-to-live).
-- **tag** - a label that identifies what type of message is sent based on the rpc method used.
-- **prompt** - a flag that identifies whether the server should trigger a notification webhook to a client through a push server.
-- **id** - a unique identifier for each subscription targeting a topic.
+- **topic** - (hex string - 32 bytes) a target topic for the message to be subscribed by the receiver.
+- **message** - (utf8 string - variable - max 10,000 bytes) a plaintext message to be relayed to any subscribers on the topic.
+- **ttl** - (uint32 - 4 bytes) a storage duration for the message to be cached server-side in **seconds** (aka time-to-live).
+- **tag** - (uint32 - 4 bytes) a label that identifies what type of message is sent based on the rpc method used.
+- **id** - (hex string - 32 bytes) a unique identifier for each subscription targeting a topic.
 
 ## Publish payload
 
 Used when a client publishes a message to a server.
 
 ```jsonc
+// Request (client->server)
 {
   "id" : "1",
   "jsonrpc": "2.0",
@@ -28,9 +28,15 @@ Used when a client publishes a message to a server.
     "topic" : string,
     "message" : string,
     "ttl" : seconds,
-    "tag" : number, // optional / default = 0
-    "prompt" : boolean, // optional / default = false
+    "tag" : number,
   }
+}
+
+// Response (server->client)
+{
+  "id" : "1",
+  "jsonrpc": "2.0",
+  "result": true
 }
 ```
 
@@ -39,6 +45,7 @@ Used when a client publishes a message to a server.
 Used when a client subscribes a given topic.
 
 ```jsonc
+// Request (client->server)
 {
   "id" : "1",
   "jsonrpc": "2.0",
@@ -47,6 +54,13 @@ Used when a client subscribes a given topic.
     "topic" : string
   }
 }
+
+// Response (server->client)
+{
+  "id" : "1",
+  "jsonrpc": "2.0",
+  "result": string // subscriptionId
+}
 ```
 
 ## Unsubscribe payload
@@ -54,6 +68,7 @@ Used when a client subscribes a given topic.
 Used when a client unsubscribes a given topic.
 
 ```jsonc
+// Request (client->server)
 {
   "id" : "1",
   "jsonrpc": "2.0",
@@ -63,6 +78,13 @@ Used when a client unsubscribes a given topic.
     "id": string
   }
 }
+
+// Response (server->client)
+{
+  "id" : "1",
+  "jsonrpc": "2.0",
+  "result": true
+}
 ```
 
 ## Subscription payload
@@ -70,6 +92,7 @@ Used when a client unsubscribes a given topic.
 Used when a server sends a subscription message to a client.
 
 ```jsonc
+// Request (server->client)
 {
   "id" : "1",
   "jsonrpc": "2.0",
@@ -81,6 +104,13 @@ Used when a server sends a subscription message to a client.
       "message": string
     }
   }
+}
+
+// Response (client->server)
+{
+  "id" : "1",
+  "jsonrpc": "2.0",
+  "result": true
 }
 ```
 

@@ -20,7 +20,7 @@ CoreClient.initialize(relayServerUrl = serverUrl, connectionType = connectionTyp
 val initParams = Wallet.Params.Init(core = CoreClient)
 
 Web3Wallet.initialize(initParams) { error ->
-    // Error will be thrown if there's an issue during initalization
+    // Error will be thrown if there's an issue during initialization
 }
 ```
 
@@ -40,7 +40,7 @@ val walletDelegate = object : Web3Wallet.WalletDelegate {
     }
 
     override fun onAuthRequest(authRequest: Wallet.Model.AuthRequest) {
-        // Triggered when Dapp / Requester makes an authorisation request
+        // Triggered when Dapp / Requester makes an authorization request
     }
 
     override fun onSessionDelete(sessionDelete: Wallet.Model.SessionDelete) {
@@ -181,7 +181,7 @@ to `Web3Wallet.updateSession`.
 val sessionTopic: String = /*Topic of Session*/
 val extendParams = Wallet.Params.SessionExtend(sessionTopic = sessionTopic)
 
-Web3Wallet.extendSession(exdendParams) { error -> /*callback for error while extending a session*/ }
+Web3Wallet.extendSession(extendParams) { error -> /*callback for error while extending a session*/ }
 ```
 
 To extend a session, create a `Wallet.Params.SessionExtend` object with the session's topic to update the session with to `Web3Wallet.extendSession`. Session is
@@ -189,10 +189,10 @@ extended by 7 days.
 
 
 #
-### **Authotisation Request Approval**
+### **Authorization Request Approval**
 
-To approve authorisation request, sign message using `CacaoSigner.sign` which requires private key to sign `Cacao` object that needs to be passed to `Wallet.Params.AuthRequestResponse` object and send to Dapp.
-`issuer` parameter describes what did responder authorises. Example `iss` for Ethereum Mainnet: `did:pkh:eip155:1:0xb9c5714089478a327f09197987f16f9e5d936e8a`. More about `did:pkh` method [here](https://github.com/w3c-ccg/did-pkh/blob/main/did-pkh-method-draft.md).
+To approve authorization request, sign message using `CacaoSigner.sign` which requires private key to sign `Cacao` object that needs to be passed to `Wallet.Params.AuthRequestResponse` object and send to Dapp.
+`issuer` parameter describes what did responder authorizes. Example `iss` for Ethereum Mainnet: `did:pkh:eip155:1:0xb9c5714089478a327f09197987f16f9e5d936e8a`. More about `did:pkh` method [here](https://github.com/w3c-ccg/did-pkh/blob/main/did-pkh-method-draft.md).
 
 ```kotlin
 val request: Wallet.Event.AuthRequest = // Request from onAuthRequest

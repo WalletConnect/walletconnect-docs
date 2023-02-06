@@ -64,6 +64,7 @@ module.exports = {
         "advanced/faq",
         "advanced/glossary",
         "advanced/migrating-from-v1.0",
+        "advanced/what-changed-from-v1.0",
         {
           type: "category",
           label: "RPC Reference",
@@ -261,7 +262,7 @@ module.exports = {
               ],
             },
             "web3modal/configuration",
-            "web3modal/for-wallets",
+            "web3modal/faq",
           ],
         },
         {
@@ -344,9 +345,8 @@ module.exports = {
           collapsible: true,
           collapsed: true,
           items: [
-            "javascript/providers/cosmos",
             "javascript/providers/ethereum",
-            "javascript/providers/solana",
+            "javascript/providers/universal",
           ],
         },
       ],
