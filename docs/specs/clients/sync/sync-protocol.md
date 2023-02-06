@@ -77,7 +77,11 @@ There will be only two operations for state changes: setting values and deleting
 
 These state changes will be published as JSON-RPC requests that will be stringified and encrypted with the store key and similarly to other WalletConnect clients they will use a time-based JSON-RPC id which is a timestamp in miliseconds appended by 3 random digits.
 
-Therefore we can solve conflicts by using the JSON-RPC id published for the last state change on that specific key-value pair by prioritizing the highest integer. Let's walkthrough an example:
+Therefore we can solve conflicts by using the JSON-RPC id published for the last state change on that specific key-value pair by prioritizing the highest integer.
+
+### Setting State
+
+Considereing the conflict resolution described with JSON-RPC id let's walkthrough an example with setting state between two clients.
 
 A and B are synced with the same store and A publishes the following state change:
 
@@ -102,7 +106,7 @@ Now the store has one key ("username") with a value "@johndoe98". Then coinciden
   params: { key: 'username', value: '@johndoe123' }
 }
 
-// published B
+// published by B
 {
   id: 1675012321135117,
   jsonrpc: '2.0',
@@ -113,6 +117,42 @@ Now the store has one key ("username") with a value "@johndoe98". Then coinciden
 ```
 
 Given that A's payload has an id with a higher integer than B's payload then its corresponding state change is prioritized as the latest change. Now the store has one key ("username") with a value "@johndoe123".
+
+Another critical detail to note is that we must persist keys that are deleted with `wc_syncDel` in order to detect state changes for keys that had values erased. 
+
+### Deleting State
+
+Whenever a client wants to delete state associated with a key-value pair it will publish a state change with the method `wc_syndDel` and the parameter would include the associated key. Let's walkthrough an example:
+
+```js
+// store (before)
+{
+  updates: {
+      username: 1675012321135267,
+  },
+  state: {
+      username: '@johndoe456',
+  }
+}
+
+// published by A
+{
+  id: 1675706949227363,
+  jsonrpc: '2.0',
+  method: 'wc_syncSet',
+  params: { key: 'username' }
+}
+
+// store (after)
+{
+  updates: {
+      username: 1675706949227363,
+  },
+  state: {}
+}
+```
+
+The state has been completely removed for the key-value pair associated with key `username` but the jsonrpc id for the lastest state change was persisted and this would allow us to resolve future conflicts with state changes with the exact same key.
 
 ## State History
 
