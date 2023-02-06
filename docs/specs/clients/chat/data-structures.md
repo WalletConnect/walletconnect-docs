@@ -16,7 +16,7 @@ In this document we define data structures and definitions used in the chat api
 
 ## ReceivedInvite
 
-`ReceivedInvite` is a structure that is returned by SDK. Is extracted from Invite Proposals did-jwt claims. To get author account identity must be resolved from `iss` field. `inviteePublicKey` should be attach based on topic this invite was sent. A map of type `Map<number, ReceivedInvite>` is returned on `getReceivedInvites(params: {account: string})`. Topic is the key of the map.
+`ReceivedInvite` is a structure that is returned by SDK. Is extracted from Invite Proposals did-jwt claims. To get author account identity must be resolved from `iss` field. `inviteePublicKey` should be attach based on topic this invite was sent. A map of type `Map<number, ReceivedInvite>` is returned on `getReceivedInvites(params: {account: string})`. InviteId is the key of the map.
 
 
 ```jsonc
