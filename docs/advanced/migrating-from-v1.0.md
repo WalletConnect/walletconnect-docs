@@ -18,6 +18,8 @@ The only major difference is that we now require a `projectId` for all our SDKs 
 
 You can get your your `projectId` by registering for a WalletConnect Cloud account at [cloud.walletconnect.com](https://cloud.walletconnect.com/sign-up).
 
+The Bridge URL is no longer supported. It has been replaced with the Relay URL, which is `wss://relay.walletconnect.com`.
+
 ## Migration Paths
 
 There are different migration paths for Dapps and Wallets.
