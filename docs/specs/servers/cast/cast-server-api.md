@@ -6,6 +6,11 @@ Used to notify a message to a set of accounts
 
 `POST /register`
 
+Headers:
+:warning: This header is temporary
+
+`Auth: {project_id}`
+
 Body:
 
 ```jsonc
@@ -18,11 +23,17 @@ Body:
 
 
 
+
 ## Notify
 
 Used to notify a message to a set of accounts 
 
 `POST /notify`
+
+Headers:
+:warning: This header is temporary
+
+`Auth: {project_id}`
 
 Body:
 
@@ -37,3 +48,13 @@ Body:
     "accounts": string[]
 }
 ``` 
+
+Response: 
+
+```jsonc
+{
+  "sent": string[],
+  "failed": string[][],
+  "notFound": string[]
+}
+```
