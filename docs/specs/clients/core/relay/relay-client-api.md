@@ -33,6 +33,9 @@ interface Relay {
 
     /*Closes a Web-Socket connection*/
     fun disconnect()
+    
+    /*Listening for new incoming messages*/
+    fun on("relay_message", (topic: string, message: string, timestamp: Int64) => {})
 }
 ```
 
