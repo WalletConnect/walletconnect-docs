@@ -10,45 +10,41 @@ You can set up event listeners to perform an action if these events are emitted.
 headers={[ "Event", "Description" ]}
 data={[
 {
-event: "session_proposal",
-description: "Emitted by the dapp when it makes a session proposal",
-},
-{
-event: "session_connect",
-description: "Sent by the WalletConnect serve when the wallet approves the session proposal",
-},
-{
-event: "session_request",
-description: "Sent by the WalletConnect client when it wants to create a new session with the server.",
-},
-{
-event: "session_approve",
-description: "Sent by the wallet once the user approves the session request",
-},
-{
-event: "session_update",
-description: "Sent by the WalletConnect client when it wants to update an existing session with the server.",
-},
-{
-event: "session_delete",
-description: "Either the wallet or the dapp can emit this event when a session is disconnected",
-},
-{
-event: "session_event",
-description: "Sent by the WalletConnect client when it wants to emit an event to the server.",
-},
-{
-event: "session_ping",
-description: "Sent by the WalletConnect client to keep a session alive.",
-},
-{
-event: "session_expire",
-description: "Sent by the WalletConnect server when a session expires.",
-},
-{
-event: "session_extend",
-description: "Sent by the WalletConnect client when it wants to extend an existing session with the server.",
-},
+    event: "session_proposal",
+    description: "Emitted by the dApp when a new session with a user's wallet is initiated. The method the dapp uses is `connect`"
+  },
+  {
+    event: "session_request",
+    description: "Triggered by the dApp when it requires the wallet to perform an action, such as signing a transaction by calling the `request` method"
+  },
+  {
+    event: "session_update",
+    description: "Emitted by the wallet when a session is updated via the 'update' method"
+  },
+  {
+    event: "session_delete",
+    description: "Emitted by either the wallet or the dApp when a session is disconnected."
+  },
+  {
+    event: "session_event",
+    description: "Emitted by the dApp or wallet by calling the 'emit' or 'emitSessionEvent' method."
+  },
+  {
+    event: "session_ping",
+    description: "Emitted by the dApp to keep a session active."
+  },
+  {
+    event: "session_expire",
+    description: "Emitted by the wallet when a session has expired."
+  },
+  {
+    event: "session_extend",
+    description: "Emitted by the wallet to extend a session by calling the 'extendSession' method."
+  },
+  {
+    event: "proposal_expire",
+    description: "Emitted by the wallet when the session proposal has expired."
+  }
 ]}
 />
 
