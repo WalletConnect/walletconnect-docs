@@ -139,7 +139,7 @@ Whenever a client wants to delete state associated with a key-value pair it will
 {
   id: 1675706949227363,
   jsonrpc: '2.0',
-  method: 'wc_syncSet',
+  method: 'wc_syncDel',
   params: { key: 'username' }
 }
 
