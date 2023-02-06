@@ -91,7 +91,7 @@ abstract class Client {
   // returns maps of invites indexed by id
   public abstract getReceivedInvites(params: {
     account: string;
-  }): Promise<Map<number, Invite>>
+  }): Promise<Map<number, ReceivedInvite>>
 
   // returns all pending invites matching an inviterAccount from SentInvite 
   // returns map of threads indexed by topic
@@ -113,7 +113,7 @@ abstract class Client {
   // ---------- Events ----------------------------------------------- //
 
   // subscribe to new chat invites received
-  public abstract on("chat_invite", ({ invite: Invite }) => {}): void;
+  public abstract on("chat_invite", ({ invite: ReceivedInvite }) => {}): void;
 
   // subscribe to new chat thread joined
   public abstract on("chat_joined",  ({ topic: string }) => {}): void;

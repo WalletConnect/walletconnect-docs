@@ -3,17 +3,43 @@
 In this document we define data structures and definitions used in the chat api
 
 ## Invite
+`Invite` is a structure used to call `invite(params: {invite: Invite;}): Promise<number>;`
 
-`Invite` is a structure that is returned by SDK. Is extracted from Invite Proposals did-jwt claims. To get author account identity must be resolved from `iss` field. A map of type `Map<number, Invite>` is returned on `getReceivedInvites(params: {account: string})`. Topic is the key of the map.
+```jsonc
+{
+  "message": string, // character limit is 200. Must be checked by SDK before sending
+  "inviterAccount": string,
+  "inviteeAccount": string,
+  "inviteePublicKey": string
+}
+```
+
+## ReceivedInvite
+
+`ReceivedInvite` is a structure that is returned by SDK. Is extracted from Invite Proposals did-jwt claims. To get author account identity must be resolved from `iss` field. `inviteePublicKey` should be attach based on topic this invite was sent. A map of type `Map<number, ReceivedInvite>` is returned on `getReceivedInvites(params: {account: string})`. Topic is the key of the map.
 
 
 ```jsonc
 {
   "id": number,
-  "message": string, // character limit is 200. Must be checked by SDK before sending
+  "message": string, // character limit is 200.
   "inviterAccount": string,
   "inviteeAccount": string,
   "inviterPublicKey": string,
+  "inviteePublicKey": string
+}
+```
+
+## SentInvite
+
+`SentInvite` structure keeps track of state of sent Invites. If Invite is approved by peer it should be removed from storage, if rejected should stay in storage. An array of `SentInvite` is returned on `getSentInvites(params: {account: string})`
+```jsonc
+{
+  "id": number,
+  "message": string, // character limit is 200
+  "inviterAccount": string,
+  "inviteeAccount": string,
+  "status": 'pending' | 'rejected'
 }
 ```
 
@@ -39,19 +65,6 @@ In this document we define data structures and definitions used in the chat api
   "authorAccount": string, // to distinguish who sent it
   "timestamp": Int64,
   "media": Media // optional
-}
-```
-
-## SentInvite
-
-`SentInvite` structure keeps track of state of sent Invites. If Invite is approved by peer it should be removed from storage, if rejected should stay in storage. An array of `SentInvite` is returned on `getSentInvites(params: {account: string})`
-```jsonc
-{
-  "id": number,
-  "message": string, // character limit is 200
-  "inviterAccount": string,
-  "inviteeAccount": string,
-  "status": 'pending' | 'rejected'
 }
 ```
 
