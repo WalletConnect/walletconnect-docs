@@ -21,7 +21,7 @@ In this document we define data structures and definitions used in the chat api
 
 ```jsonc
 {
-  "id": number,
+  "id": number, // invite request RPC ID
   "message": string, // character limit is 200.
   "inviterAccount": string,
   "inviteeAccount": string,
