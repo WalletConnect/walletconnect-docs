@@ -42,7 +42,7 @@ data={[
   {
     event: "session_expire",
     description: "Emitted when a session has expired.",
-    emittedBy: "dApp"
+    emittedBy: "dApp or wallet"
   },
   {
     event: "session_extend",
@@ -52,7 +52,7 @@ data={[
   {
     event: "proposal_expire",
     description: "Emitted when the session proposal has expired.",
-    emittedBy: "dApp"
+    emittedBy: "dApp or wallet"
   }
 ]}
 />
@@ -316,7 +316,15 @@ A payload example from `session_ping`
 
 ### session_expire
 
-// no examples
+An event can be triggered by either a wallet or a dApp with the topic of a session that has expired.
+
+A payload example from `session_expire`
+
+```ts
+{
+    "topic": "95d6aca451b8e3c6d9d176761bf786f1cc0a6d38dffd31ed896306bb37f6ae8d"
+}
+```
 
 ### session_extend
 
@@ -336,12 +344,12 @@ A payload example from `session_extend`:
 
 ### proposal_expire
 
-This event is triggerd by the dApp when the proposal sent to the wallet expires.
+An event can be triggered by either a wallet or a dApp with the topic of a pairing that has expired.
 
 A payload example from `proposal_expire`:
 
 ```ts
 {
-    "id": 1675760005514901
+    "topic": "95d6aca451b8e3c6d9d176761bf786f1cc0a6d38dffd31ed896306bb37f6ae8d"
 }
 ```
