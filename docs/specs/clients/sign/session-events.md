@@ -7,59 +7,77 @@ import Table from '../../../components/Table';
 You can set up event listeners to perform an action if these events are emitted.
 
 <Table 
-headers={[ "Event", "Description" ]}
+headers={[ "Event", "Description", "Emitted By" ]}
 data={[
 {
     event: "session_proposal",
-    description: "Emitted by the dApp when a new session with a user's wallet is initiated. The method the dapp uses is `connect`"
+    description: "Emitted when a new session with a user's wallet is initiated",
+    emittedBy: "dApp"
   },
   {
     event: "session_request",
-    description: "Triggered by the dApp when it requires the wallet to perform an action, such as signing a transaction by calling the `request` method"
+    description: "The event is triggered when the wallet is required to take action, such as signing a transaction.",
+    emittedBy: "dApp"
   },
   {
     event: "session_update",
-    description: "Emitted by the wallet when a session is updated via the 'update' method"
+    description: "Emitted when a session is updated.",
+    emittedBy: "wallet"
   },
   {
     event: "session_delete",
-    description: "Emitted by either the wallet or the dApp when a session is disconnected."
+    description: "Emitted when a session is disconnected.",
+    emittedBy: "dApp or wallet"
   },
   {
     event: "session_event",
-    description: "Emitted by the dApp or wallet by calling the 'emit' or 'emitSessionEvent' method."
+    description: "Emitted when an event like accountsChanged happens.",
+    emittedBy: "dApp or wallet"
   },
   {
     event: "session_ping",
-    description: "Emitted by the dApp to keep a session active."
+    description: "Emitted to keep a session active.",
+    emittedBy: "dApp or wallet"
   },
   {
     event: "session_expire",
-    description: "Emitted by the wallet when a session has expired."
+    description: "Emitted when a session has expired.",
+    emittedBy: "dApp"
   },
   {
     event: "session_extend",
-    description: "Emitted by the wallet to extend a session by calling the 'extendSession' method."
+    description: "Emitted when extending a session.",
+    emittedBy: "dApp or wallet"
   },
   {
     event: "proposal_expire",
-    description: "Emitted by the wallet when the session proposal has expired."
+    description: "Emitted when the session proposal has expired.",
+    emittedBy: "dApp"
   }
 ]}
 />
 
 ### session_proposal
 
-An event is triggered when the dapp establishes a connection with the wallet by calling the connect method. The following is the payload that the wallet can listen for. Here's an example payload when the dApp is initiating a session proposal on the Goerli Network.
+An event is triggered when the dApp establishes a connection with the wallet by calling the `connect` method. The following is the payload that the wallet can listen for. Here's an example payload when the dApp is initiating a session proposal on the Goerli Network.
 
-```jsonc
+```ts
+await client.connect({
+  pairingTopic: pairing?.topic,
+  requiredNamespaces,
+});
+```
+
+For a properly formatted namespace, refer to the documentation [here](../../../specs/clients/sign/session-namespaces.md#example-proposal-namespaces-request).
+
+```ts
 {
     "id": 1675734656244887,
     "params": {
         "id": 1675734656244887,
         "pairingTopic": "3c74583111ab5e006b03cbb0f252c667686e9fc01e675dff90aa8b18ec435feb",
         "expiry": 1675734962,
-        "requiredNamespaces": {s
+        "requiredNamespaces": {
             "eip155": {
                 "methods": [
                     "eth_sendTransaction",
@@ -99,20 +117,49 @@ An event is triggered when the dapp establishes a connection with the wallet by 
 
 ### session_request
 
-A dApp triggers an event when it requires the wallet to carry out a specific action, such as signing a transaction. The event includes a `topic` and a `request` object, which will differ based on the requested action. 
+A dApp triggers an event when it requires the wallet to carry out a specific action, such as signing a transaction. The event includes a `topic` and a `request` object, which will differ based on the requested action.
 
-As the request can vary, here's an example of the payload when the request is for personal_sign. The hex value of the message is stored in `request.params[0]` and the user's wallet address is stored in `request.params[1]`.
+As the request can vary, here's an example of the payload when the request is for `eth_signTransaction`.
 
-```jsonc
+```ts
+await client.request({
+          topic: session.topic,
+          chainId: "eip155:5"
+          request: {
+            method: "eth_signTransaction",
+            params: [
+                {
+                    from: "0x1456225dE90927193F7A171E64a600416f96f2C8",
+                    to: "0x1456225dE90927193F7A171E64a600416f96f2C8",
+                    data: "0x",
+                    nonce: "0x00",
+                    gasPrice: "0xbb5e",
+                    gasLimit: "0x5208",
+                    value: "0x00"
+            }],
+        },
+    })
+```
+
+An example of a payload from `session_request`:
+
+```ts
 {
-    "id": 1675736040649044,
-    "topic": "15873cc9ea27883bd56bf35e7ff28067393cace9ebd8d9888f007aecca6d92f5",
+    "id": 1675761658561934,
+    "topic": "95d6aca451b8e3c6d9d176761bf786f1cc0a6d38dffd31ed896306bb37f6ae8d",
     "params": {
         "request": {
-            "method": "personal_sign",
+            "method": "eth_signTransaction",
             "params": [
-                "0x4d7920656d61696c206973206a6f686e40646f652e636f6d202d2031363735373336303430363430",
-                "0x1456225dE90927193F7A171E64a600416f96f2C8"
+                {
+                    "from": "0x1456225dE90927193F7A171E64a600416f96f2C8",
+                    "to": "0x1456225dE90927193F7A171E64a600416f96f2C8",
+                    "data": "0x",
+                    "nonce": "0x00",
+                    "gasPrice": "0xa72c",
+                    "gasLimit": "0x5208",
+                    "value": "0x00"
+                }
             ]
         },
         "chainId": "eip155:5"
@@ -126,60 +173,51 @@ Updating the session is possible by adding a new chain, method, or event.
 
 Here's an example. The user has a session that appears as follows. From this object, we can deduce that the user is connected to the Goerli Network, as indicated by `currentRequiredNamespace.eip155.chains` value.
 
-```typescript
+```ts
 const currentRequiredNamespace = {
-    "eip155": {
-        "methods": [
-            "eth_sendTransaction",
-            "eth_signTransaction",
-            "eth_sign",
-            "personal_sign",
-            "eth_signTypedData"
-        ],
-        "chains": [
-            "eip155:5"
-        ],
-        "events": [
-            "chainChanged",
-            "accountsChanged"
-        ]
-    }
-}
+  eip155: {
+    methods: [
+      "eth_sendTransaction",
+      "eth_signTransaction",
+      "eth_sign",
+      "personal_sign",
+      "eth_signTypedData",
+    ],
+    chains: ["eip155:5"],
+    events: ["chainChanged", "accountsChanged"],
+  },
+};
 ```
 
-If you want to add another chain to the session you can do so by calling `update` and passing in the `topic` and new namespace. Note, the new namespace can only **append** new items, it cannot remove. 
+If you want to add another chain to the session you can do so by calling `update` and passing in the `topic` and new namespace. Note, the new namespace can only **append** new items, it cannot remove.
 
-
-```typescript
+```ts
 const newNamespace = {
-        "eip155": {
-        "accounts": [
-            // this already exsited from the initial namespace
-            // chain:id:walletNumber
-            "eip155:5:0x1456225dE90927193F7A171E64a600416f96f2C8",
-            // this is how we update the session to add a new chain
-            "eip155:137:0x1456225dE90927193F7A171E64a600416f96f2C8"
-        ],
-        "methods": [
-            "eth_sendTransaction",
-            "eth_signTransaction",
-            "eth_sign",
-            "personal_sign",
-            "eth_signTypedData"
-        ],
-        "events": [
-            "chainChanged",
-            "accountsChanged"
-        ]
-    }
-}
+  eip155: {
+    accounts: [
+      // this already existed from the initial namespace
+      // chain:id:walletNumber
+      "eip155:5:0x1456225dE90927193F7A171E64a600416f96f2C8",
+      // this is how we update the session to add a new chain
+      "eip155:137:0x1456225dE90927193F7A171E64a600416f96f2C8",
+    ],
+    methods: [
+      "eth_sendTransaction",
+      "eth_signTransaction",
+      "eth_sign",
+      "personal_sign",
+      "eth_signTypedData",
+    ],
+    events: ["chainChanged", "accountsChanged"],
+  },
+};
 
-await signClient.update({ topic, namespaces: newNamespace })
+await signClient.update({ topic, namespaces: newNamespace });
 ```
 
 Once `update` is called, `session_update` is triggered. An example payload request is as follows.
 
-```jsonc
+```ts
 {
     "topic": "a03a89f703bf3fc12db4bd4ef1e367caabad48fbdb9351059716bf3e57319193",
     "params": {
@@ -203,5 +241,107 @@ Once `update` is called, `session_update` is triggered. An example payload reque
             }
         }
     }
+}
+```
+
+### session_delete
+
+This event can be triggered by either the wallet or dapp, indicating the termination of a session. Emitted only after the session has been successfully deleted, this event enables you to respond to the change and adjust your UI accordingly, such as resetting to a non-connected state. The event is activated when the disconnect method is invoked by the wallet or dapp.
+
+To use the `getSdkError` method, import `@walletconnect/utils`.
+
+```ts
+await client.disconnect({
+  topic: session.topic,
+  reason: getSdkError("USER_DISCONNECTED"),
+});
+```
+
+An example of a payload from `session_delete`:
+
+```ts
+{
+    "id": 1675757972688031,
+    "topic": "4eb584221f799cdf416a6b9167e341c5cd713718125dc82ef70923ce6b0e95b5"
+}
+```
+
+### session_event
+
+This event can be triggered by either the wallet or dApp by caling the `emit` method.
+
+```ts
+await signClient.emit({
+  topic,
+  event: {
+    name: "accountsChanged",
+    data: ["0xab16a96D359eC26a11e2C2b3d8f8B8942d5Bfcdb"],
+  },
+  chainId: "eip155:5",
+});
+```
+
+A payload example from `session_event`:
+
+```ts
+{
+    "id": 1675759795769537,
+    "topic": "95d6aca451b8e3c6d9d176761bf786f1cc0a6d38dffd31ed896306bb37f6ae8d",
+    "params": {
+        "event": {
+            "name": "accountsChanged",
+            "data": ["0xab16a96D359eC26a11e2C2b3d8f8B8942d5Bfcdb"]
+        },
+        "chainId": "eip155:5"
+    }
+}
+```
+
+### session_ping
+
+This event can be emitted be either the wallet or dApp. It is emitted by calling `ping`.
+
+```ts
+await client.ping({ topic: session.topic });
+```
+
+A payload example from `session_ping`
+
+```ts
+{
+    "id": 1675760005514901,
+    "topic": "95d6aca451b8e3c6d9d176761bf786f1cc0a6d38dffd31ed896306bb37f6ae8d"
+}
+```
+
+### session_expire
+
+// no examples
+
+### session_extend
+
+This event can be emitted by either wallet or dApp by calling the `extend` method.
+
+```ts
+await signClient.extend({ topic });
+```
+
+A payload example from `session_extend`:
+
+```ts
+{
+    "topic": "95d6aca451b8e3c6d9d176761bf786f1cc0a6d38dffd31ed896306bb37f6ae8d"
+}
+```
+
+### proposal_expire
+
+This event is triggerd by the dApp when the proposal sent to the wallet expires.
+
+A payload example from `proposal_expire`:
+
+```ts
+{
+    "id": 1675760005514901
 }
 ```
