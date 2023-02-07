@@ -4,12 +4,7 @@
 
 Used to notify a message to a set of accounts 
 
-`POST /register`
-
-Headers:
-:warning: This header is temporary
-
-`Auth: {project_id}`
+`POST /:project_id/register`
 
 Body:
 
@@ -23,17 +18,11 @@ Body:
 
 
 
-
 ## Notify
 
 Used to notify a message to a set of accounts 
 
-`POST /notify`
-
-Headers:
-:warning: This header is temporary
-
-`Auth: {project_id}`
+`POST /:project_id/notify`
 
 Body:
 
