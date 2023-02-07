@@ -48,82 +48,160 @@ data={[
 ]}
 />
 
-## Triggering Events
+### session_proposal
 
-To trigger one of the events from above, you generally need to call an action. Below are a list of methods and their associated events. This is not a full list of the function available, just the ones that emit an event.
+An event is triggered when the dapp establishes a connection with the wallet by calling the connect method. The following is the payload that the wallet can listen for. Here's an example payload when the dApp is initiating a session proposal on the Goerli Network.
 
-<Table 
-headers={[ "Method", "Event On", "Event Triggered" ]}
-data={[
+```jsonc
 {
-methodSign: "connect",
-eventOn: "none",
-eventTriggered: "session_connect"
-},
+    "id": 1675734656244887,
+    "params": {
+        "id": 1675734656244887,
+        "pairingTopic": "3c74583111ab5e006b03cbb0f252c667686e9fc01e675dff90aa8b18ec435feb",
+        "expiry": 1675734962,
+        "requiredNamespaces": {s
+            "eip155": {
+                "methods": [
+                    "eth_sendTransaction",
+                    "eth_signTransaction",
+                    "eth_sign",
+                    "personal_sign",
+                    "eth_signTypedData"
+                ],
+                "chains": [
+                    "eip155:5"
+                ],
+                "events": [
+                    "chainChanged",
+                    "accountsChanged"
+                ]
+            }
+        },
+        "relays": [
+            {
+                "protocol": "irn"
+            }
+        ],
+        "proposer": {
+            "publicKey": "a3ad5e26070ddb2809200c6f56e739333512015bceeadbb8ea1731c4c7ddb207",
+            "metadata": {
+                "description": "React App for WalletConnect",
+                "url": "http://localhost:3000",
+                "icons": [
+                    "https://avatars.githubusercontent.com/u/37784886"
+                ],
+                "name": "React App"
+            }
+        }
+    }
+}
+```
+
+### session_request
+
+A dApp triggers an event when it requires the wallet to carry out a specific action, such as signing a transaction. The event includes a `topic` and a `request` object, which will differ based on the requested action. 
+
+As the request can vary, here's an example of the payload when the request is for personal_sign. The hex value of the message is stored in `request.params[0]` and the user's wallet address is stored in `request.params[1]`.
+
+```jsonc
 {
-methodSign: "pair",
-eventOn: "none",
-eventTriggered: "session_connect"
-},
+    "id": 1675736040649044,
+    "topic": "15873cc9ea27883bd56bf35e7ff28067393cace9ebd8d9888f007aecca6d92f5",
+    "params": {
+        "request": {
+            "method": "personal_sign",
+            "params": [
+                "0x4d7920656d61696c206973206a6f686e40646f652e636f6d202d2031363735373336303430363430",
+                "0x1456225dE90927193F7A171E64a600416f96f2C8"
+            ]
+        },
+        "chainId": "eip155:5"
+    }
+}
+```
+
+### session_update
+
+Updating the session is possible by adding a new chain, method, or event.
+
+Here's an example. The user has a session that appears as follows. From this object, we can deduce that the user is connected to the Goerli Network, as indicated by `currentRequiredNamespace.eip155.chains` value.
+
+```typescript
+const currentRequiredNamespace = {
+    "eip155": {
+        "methods": [
+            "eth_sendTransaction",
+            "eth_signTransaction",
+            "eth_sign",
+            "personal_sign",
+            "eth_signTypedData"
+        ],
+        "chains": [
+            "eip155:5"
+        ],
+        "events": [
+            "chainChanged",
+            "accountsChanged"
+        ]
+    }
+}
+```
+
+If you want to add another chain to the session you can do so by calling `update` and passing in the `topic` and new namespace. Note, the new namespace can only **append** new items, it cannot remove. 
+
+
+```typescript
+const newNamespace = {
+        "eip155": {
+        "accounts": [
+            // this already exsited from the initial namespace
+            // chain:id:walletNumber
+            "eip155:5:0x1456225dE90927193F7A171E64a600416f96f2C8",
+            // this is how we update the session to add a new chain
+            "eip155:137:0x1456225dE90927193F7A171E64a600416f96f2C8"
+        ],
+        "methods": [
+            "eth_sendTransaction",
+            "eth_signTransaction",
+            "eth_sign",
+            "personal_sign",
+            "eth_signTypedData"
+        ],
+        "events": [
+            "chainChanged",
+            "accountsChanged"
+        ]
+    }
+}
+
+await signClient.update({ topic, namespaces: newNamespace })
+```
+
+Once `update` is called, `session_update` is triggered. An example payload request is as follows.
+
+```jsonc
 {
-methodSign: "approve",
-eventOn: "client.on('session_proposal')",
-eventTriggered: "session_approve"
-},
-{
-methodSign: "reject",
-eventOn: "none",
-eventTriggered: "session_rejected"
-},
-{
-methodSign: "update",
-eventOn: "none",
-eventTriggered: "session_updated"
-},
-{
-methodSign: "extend",
-eventOn: "client.on('session_extend')",
-eventTriggered: "session_extend"
-},
-{
-methodSign: "request",
-eventOn: "none",
-eventTriggered: "session_request"
-},
-{
-methodSign: "respond",
-eventOn: "client.on('session_request')",
-eventTriggered: "session_respond"
-},
-{
-methodSign: "ping",
-eventOn: "none",
-eventTriggered: "session_ping"
-},
-{
-methodSign: "emit",
-eventOn: "none",
-eventTriggered: "session_event"
-},
-{
-methodSign: "disconnect",
-eventOn: "none",
-eventTriggered: "session_delete"
-},
-{
-methodSign: "find",
-eventOn: "none",
-eventTriggered: "none"
-},
-{
-methodSign: "getPendingSessionRequests",
-eventOn: "none",
-eventTriggered: "none"
-},
-{
-methodSign: "getAll",
-eventOn: "none",
-eventTriggered: "none"
-},
-]}
-/>
+    "topic": "a03a89f703bf3fc12db4bd4ef1e367caabad48fbdb9351059716bf3e57319193",
+    "params": {
+        "namespaces": {
+            "eip155": {
+                "accounts": [
+                    "eip155:5:0x1456225dE90927193F7A171E64a600416f96f2C8",
+                    "eip155:137:0x1456225dE90927193F7A171E64a600416f96f2C8"
+                ],
+                "methods": [
+                    "eth_sendTransaction",
+                    "eth_signTransaction",
+                    "eth_sign",
+                    "personal_sign",
+                    "eth_signTypedData"
+                ],
+                "events": [
+                    "chainChanged",
+                    "accountsChanged"
+                ]
+            }
+        }
+    }
+}
+```
