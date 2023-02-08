@@ -3,7 +3,7 @@ import Table from '../../../components/Table';
 # Session Events
 ## Events
 
-You can set up event listeners to perform an action if these events are emitted.
+You can set up event listeners to perform an action when these events are emitted.
 
 <Table 
 headers={[ "Events", "Description" ]}
