@@ -6,8 +6,10 @@ Client manages multiple blockchain account at a time. Client listens to multiple
 abstract class Client {
   // ---------- Methods ----------------------------------------------- //
 
-  // initializes the client with persisted storage and a network connection
-  public abstract init(): Promise<void>;
+  // initializes the client with persisted storage and a network connection and keyserver url
+  public abstract init(params: {
+    keyserverUrl?: string; //optional. If value not supplied default to keys.walletconnect.com
+  }): Promise<void>;
 
   // - registers a blockchain account with an identity key if not yet registered on this client
   // - registers invite key if not yet registered on this client and starts listening on invites if private is false
