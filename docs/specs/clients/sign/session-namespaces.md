@@ -5,9 +5,9 @@ It specifies the proposed execution environment for each blockchain in the form 
 
 ## How Sessions Work
 
-To establish a session, the dApp first sends a session proposal to the wallet. The namespace proposal outlines the methods and events the dApp is seeking permission for. The wallet then evaluates the proposal and, if approved, send back the session namespace.
+To establish a session, the dApp first sends a session proposal to the wallet. The namespace proposal outlines the methods and events the dApp is seeking permission for. The wallet then evaluates the proposal and, if approved, sends back the session namespace.
 
-Sessions are saved to local storage, meaning that even if the web page is reloaded, the session can still be retrieved, as demonstrated in the following code:
+Sessions are saved to localstorage, meaning that even if the web page is reloaded, the session can still be retrieved, as demonstrated in the following code:
 
 ```ts
   if (_client.session.length) {
