@@ -34,7 +34,7 @@ eventTriggered: "auth_request"
 },
 {
 methodAuth: "respond",
-description: "Responds to an authoirzation request",
+description: "Responds to an authorization request",
 eventOn: "client.on('auth_request')",
 eventTriggered: "auth_response"
 },
