@@ -4,7 +4,7 @@ In this document we define data structures and definitions used in the v2.0-rc p
 
 ## Relay
 
-Relay is defined by the transport protocol used for the two clients to publish and subscribe messages between each other. The Relay URL is `wss://relay.walletconnect.com`.
+Relay is defined by the transport protocol used for the two clients to publish and subscribe messages between each other.
 
 ```jsonc
 {
