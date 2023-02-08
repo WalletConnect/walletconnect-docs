@@ -10,7 +10,7 @@ headers={[ "Events", "Description" ]}
 data={[
 {
 event: "auth_request",
-description: "Sent by the WalletConnect client when requesting authentication from your wallet.",
+description: "Emitted by the wallet when there is a request for authentication from a dapp.",
 },
 {
 event: "auth_response",
