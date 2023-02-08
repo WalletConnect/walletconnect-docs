@@ -14,7 +14,7 @@ description: "Emitted by the wallet when there is a request for authentication f
 },
 {
 event: "auth_response",
-description: "Sent by the WalletConnect server when it acceps or rejects an authorization request."
+description: "Emitted by the dapp when there is a response from a wallet accepting/rejecting an authorization request."
 },
 ]}
 />
