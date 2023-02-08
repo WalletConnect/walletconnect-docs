@@ -162,7 +162,7 @@ namespaces: {
 
 ### Pairing with `uri`
 
-To create a pairing proposal, simply pass the `uri` received from the dapp into the `signClient.pair()` function.
+To create a pairing proposal, simply pass the `uri` received from the dapp into the `signClient.core.pairing.pair()` function.
 
 :::caution
 As of 2.0.0 (stable), calling pairing-specific methods (such as `signClient.pair()`) directly on `signClient` will continue to work, but is considered deprecated and will be removed in a future major version.
