@@ -28,7 +28,7 @@ headers={[ "Method", "Description", "Event On", "Event Triggered on Peer" ]}
 data={[
 {
 methodAuth: "request",
-description: "Send a method call request to a WalletConnect server",
+description: "Creates an authorization request. Returns a URI for the wallet to pair and approve/reject the request",
 eventOn: "none",
 eventTriggered: "auth_request"
 },
