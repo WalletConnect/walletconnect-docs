@@ -79,7 +79,7 @@ In the meantime, you can list all the wallet mobile links from our [Cloud Explor
 
 #### For web3-onboard integrations
 
-If you are using the WalletConnect package with [Blocknative's web3-onboard](https://onboard.blocknative.com/docs/wallets/walletconnect#install)the migration is straight foward and the latest WC package is backwards compatible (until the WC v1 sunset).
+If you are using the WalletConnect package with [Blocknative's web3-onboard](https://onboard.blocknative.com/docs/wallets/walletconnect#install) the migration is straight forward. The latest WC package is backwards compatible (until the WC v1 sunset).
 When ready to transition bump the `@web3-onboard/walletconnect` package version to >= `2.3.0` and adjust the initialization params to include: 
 ```typescript 
 {
