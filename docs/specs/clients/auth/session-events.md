@@ -24,7 +24,7 @@ description: "Emitted by the dapp when there is a response from a wallet accepti
 To trigger one of the events from above, you generally need to call an action. Below is a list of methods and their associated events. This is not a full list of available methods, just the ones that emit an event.
 
 <Table 
-headers={[ "Method", "Description", "Event On", "Event Triggered" ]}
+headers={[ "Method", "Description", "Event On", "Event Triggered on Peer" ]}
 data={[
 {
 methodAuth: "request",
