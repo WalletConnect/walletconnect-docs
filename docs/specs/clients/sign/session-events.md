@@ -4,62 +4,62 @@ import Table from '../../../components/Table';
 
 ## Events
 
-You can set up event listeners to perform an action if these events are emitted.
+You can set up event listeners to perform an action when these events are emitted.
 
 <Table 
-headers={[ "Event", "Description", "Emitted By" ]}
+headers={[ "Event", "Description", "Who Should Listen" ]}
 data={[
 {
     event: "session_proposal",
     description: "Emitted when a new session with a user's wallet is initiated",
-    emittedBy: "dApp"
+    whoShouldListen: "wallet"
   },
   {
     event: "session_request",
     description: "The event is triggered when the wallet is required to take action, such as signing a transaction.",
-    emittedBy: "dApp"
+    whoShouldListen: "wallet"
   },
   {
     event: "session_update",
     description: "Emitted when a session is updated.",
-    emittedBy: "wallet"
+    whoShouldListen: "dapp"
   },
   {
     event: "session_delete",
     description: "Emitted when a session is disconnected.",
-    emittedBy: "dApp or wallet"
+    whoShouldListen: "dapp & wallet"
   },
   {
     event: "session_event",
     description: "Emitted when an event like accountsChanged happens.",
-    emittedBy: "dApp or wallet"
+    whoShouldListen: "dapp & wallet"
   },
   {
     event: "session_ping",
     description: "Emitted to keep a session active.",
-    emittedBy: "dApp or wallet"
+    whoShouldListen: "dapp & wallet"
   },
   {
     event: "session_expire",
     description: "Emitted when a session has expired.",
-    emittedBy: "dApp or wallet"
+    whoShouldListen: "dapp & wallet"
   },
   {
     event: "session_extend",
     description: "Emitted when extending a session.",
-    emittedBy: "dApp or wallet"
+    whoShouldListen: "dapp & wallet"
   },
   {
     event: "proposal_expire",
     description: "Emitted when the session proposal has expired.",
-    emittedBy: "dApp or wallet"
+    whoShouldListen: "dapp & wallet"
   }
 ]}
 />
 
 ### session_proposal
 
-An event is triggered when the dApp establishes a connection with the wallet by calling the `connect` method. The following is the payload that the wallet can listen for. Here's an example payload when the dApp is initiating a session proposal on the Goerli Network.
+An event is triggered when the dapp establishes a connection with the wallet by calling the `connect` method. The following is the payload that the wallet can listen for. Here's an example payload when the dapp is initiating a session proposal on the Goerli Network.
 
 ```ts
 await client.connect({
@@ -117,7 +117,7 @@ For a properly formatted namespace, refer to the documentation [here](../../../s
 
 ### session_request
 
-A dApp triggers an event when it requires the wallet to carry out a specific action, such as signing a transaction. The event includes a `topic` and a `request` object, which will differ based on the requested action.
+A dapp triggers an event when it requires the wallet to carry out a specific action, such as signing a transaction. The event includes a `topic` and a `request` object, which will differ based on the requested action.
 
 As the request can vary, here's an example of the payload when the request is for `eth_signTransaction`.
 
@@ -268,7 +268,7 @@ An example of a payload from `session_delete`:
 
 ### session_event
 
-This event can be triggered by either the wallet or dApp by caling the `emit` method.
+This event can be triggered by either the wallet or dapp by caling the `emit` method.
 
 ```ts
 await signClient.emit({
@@ -299,7 +299,7 @@ A payload example from `session_event`:
 
 ### session_ping
 
-This event can be emitted be either the wallet or dApp. It is emitted by calling `ping`.
+This event can be emitted be either the wallet or dapp. It is emitted by calling `ping`.
 
 ```ts
 await client.ping({ topic: session.topic });
@@ -316,7 +316,7 @@ A payload example from `session_ping`
 
 ### session_expire
 
-An event can be triggered by either a wallet or a dApp with the topic of a session that has expired.
+An event can be triggered by either a wallet or a dapp with the topic of a session that has expired.
 
 A payload example from `session_expire`
 
@@ -328,7 +328,7 @@ A payload example from `session_expire`
 
 ### session_extend
 
-This event can be emitted by either wallet or dApp by calling the `extend` method.
+This event can be emitted by either wallet or dapp by calling the `extend` method.
 
 ```ts
 await signClient.extend({ topic });
@@ -344,7 +344,7 @@ A payload example from `session_extend`:
 
 ### proposal_expire
 
-An event can be triggered by either a wallet or a dApp with the topic of a pairing that has expired.
+An event can be triggered by either a wallet or a dapp with the topic of a pairing that has expired.
 
 A payload example from `proposal_expire`:
 
