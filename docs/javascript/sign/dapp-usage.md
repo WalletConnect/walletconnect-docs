@@ -135,3 +135,16 @@ const result = await signClient.request({
 ```
 
 > For more information on available JSON-RPC requests, see the [JSON-RPC reference](../../advanced/rpc-reference/ethereum-rpc.md).
+
+## Restoring a Session
+
+Sessions are saved to localstorage, meaning that even if the web page is reloaded, the session can still be retrieved, as demonstrated in the following code:
+
+```ts
+  if (signClient.session.length) {
+    const lastKeyIndex = signClient.session.keys.length - 1;
+    // this will be the last session you were connected to
+    const session = signClient.session.get(
+      signClient.session.keys[lastKeyIndex]
+    );
+```

@@ -7,17 +7,6 @@ It specifies the proposed execution environment for each blockchain in the form 
 
 To establish a session, the dApp first sends a session proposal to the wallet. The namespace proposal outlines the methods and events the dApp is seeking permission for. The wallet then evaluates the proposal and, if approved, sends back the session namespace.
 
-Sessions are saved to localstorage, meaning that even if the web page is reloaded, the session can still be retrieved, as demonstrated in the following code:
-
-```ts
-  if (_client.session.length) {
-    const lastKeyIndex = _client.session.keys.length - 1;
-    // this will be the last session you were connected to
-    const _session = _client.session.get(
-      _client.session.keys[lastKeyIndex]
-    );
-```
-
 ## Example Proposal Namespaces Request
 
 ```json
