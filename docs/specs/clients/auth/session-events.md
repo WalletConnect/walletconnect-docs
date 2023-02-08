@@ -1,6 +1,7 @@
 import Table from '../../../components/Table';
 
 # Session Events
+
 ## Events
 
 You can set up event listeners to perform an action when these events are emitted.
@@ -21,36 +22,7 @@ data={[
 ]}
 />
 
-## Triggering Events
+### auth_request
 
-To trigger one of the events from above, you generally need to call an action. Below is a list of methods and their associated events. This is not a full list of available methods, just the ones that emit an event.
 
-<Table 
-headers={[ "Method", "Description", "Event On", "Event Triggered on Peer" ]}
-data={[
-{
-methodAuth: "request",
-description: "Creates an authorization request. Returns a URI for the wallet to pair and approve/reject the request",
-eventOn: "none",
-eventTriggered: "auth_request"
-},
-{
-methodAuth: "respond",
-description: "Responds to an authorization request",
-eventOn: "client.on('auth_request')",
-eventTriggered: "auth_response"
-},
-{
-methodAuth: "getPendingRequests",
-description: "Establishes a connection with a WalletConnect server",
-eventOn: "none",
-eventTriggered: "none"
-},
-{
-methodAuth: "formatMessage",
-description: "Establishes a connection with a WalletConnect server",
-eventOn: "none",
-eventTriggered: "none"
-},
-]}
-/>
+### auth_response
