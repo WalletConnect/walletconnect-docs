@@ -2,7 +2,7 @@
 
 ## Register
 
-Used to notify a message to a set of accounts 
+Registers an account and push subscription symmetric key
 
 `POST /:project_id/register`
 
@@ -16,11 +16,9 @@ Body:
 }
 ```
 
-
-
 ## Notify
 
-Used to notify a message to a set of accounts 
+Used to notify a message to a set of accounts
 
 `POST /:project_id/notify`
 

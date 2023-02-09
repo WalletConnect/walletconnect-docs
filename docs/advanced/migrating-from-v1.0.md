@@ -18,6 +18,8 @@ The only major difference is that we now require a `projectId` for all our SDKs 
 
 You can get your your `projectId` by registering for a WalletConnect Cloud account at [cloud.walletconnect.com](https://cloud.walletconnect.com/sign-up).
 
+The Bridge URL is no longer supported. It has been replaced with the Relay URL, which is `wss://relay.walletconnect.com`.
+
 ## Migration Paths
 
 There are different migration paths for Dapps and Wallets.
@@ -42,7 +44,7 @@ If you are using `@walletconnect/web3-provider`, we stopped supporting this prov
 
 #### For Web3Modal v2.0 integrations
 
-If you are using our new redesigned Web3Modal v2.0, you can simply enable v2.0 by using the feature flag `version: '2'` when injecting modal connectors. Here is a code example:
+If you are using our new redesigned Web3Modal v2.0, you can simply enable v2.0 by using the feature flag `version: '2'` when injecting modal connectors. Please ensure that you are using a minimum version of `2.1.1`. Here is a code example:
 
 ```typescript
 import { modalConnectors } from '@web3modal/ethereum'
