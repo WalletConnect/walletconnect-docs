@@ -2,7 +2,7 @@
 
 ## Hosted Platform (recommended)
 
-### Prerequirements
+### Prerequisites
 
 1. Create a Project in the Cloud App. Go to [WalletConnect Cloud](https://cloud.walletconnect.com/) and sign up for an account.
 
@@ -17,7 +17,7 @@
 
 ### Register Client
 
-Make a POST request to the Echo Server's URL to register your client. Use the URL that you created in step 2.
+To register your client, make a POST request to the URL of the Echo Server. Use the URL that you created in step 2.
 
 ```
 POST <ECHO_SERVER_URL>/clients
