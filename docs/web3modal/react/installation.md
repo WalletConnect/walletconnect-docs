@@ -84,6 +84,16 @@ function App() {
 }
 ```
 
+## Add Connect Wallet Button
+
+```tsx
+import { Web3Button } from "@web3modal/react";
+
+export const YourApp = () => {
+  return <Web3Button />;
+};
+```
+
 ## Usage
 
 See [hooks](./hooks.md) and [components](components.md) docs for further instructions.
