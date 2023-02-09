@@ -24,4 +24,15 @@
   "url": string,
 }
 ```
+
+## Push Message Record
+
+```jsonc
+{
+  "id": string,
+  "topic": string,
+  "publishedAt": Int64,
+  "message": PushMessage
+}
+```
  
