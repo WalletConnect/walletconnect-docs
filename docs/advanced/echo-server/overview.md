@@ -5,5 +5,5 @@ The Echo Server is a push server for the WalletConnect v2 Protocol. It allows cl
 ## Options for Receiving Notifications
 
 1. [Use the hosted platform (recommended)](./getting-started.md#hosted-platform-recommended)
-2. Host the rust implementation
+2. Self-Host our [server](https://github.com/WalletConnect/echo-server)
 3. Write their own implementation using the spec
