@@ -5,7 +5,7 @@ abstract class WalletClient {
   // ---------- Methods ----------------------------------------------- //
 
   // initializes the client with persisted storage and a network connection
-  public abstract init(params: {}): Promise<void>;
+  public abstract init(): Promise<void>;
 
   // approve push subscription 
   public abstract approve(params: { id: number }): Promise<boolean>;
@@ -16,6 +16,9 @@ abstract class WalletClient {
   // query all active subscriptions
   public abstract getActiveSubscriptions(): Promise<Record<string, PushSubscription>>;
 
+  // get all messages for a subscription
+  public abstract getMessageHistory(params: { topic: string }): Promise<Record<number, PushMessage>>
+
   // delete active subscription
   public abstract delete(params: { topic: string }): Promise<void>;
 
@@ -25,7 +28,7 @@ abstract class WalletClient {
   // ---------- Events ----------------------------------------------- //
 
   // for wallet to listen on push request
-  public abstract on("push_request", (id: number, metadata: Metadata) => {}): void;
+  public abstract on("push_request", (id: number, account: string, metadata: Metadata) => {}): void;
   
   //  for wallet to listen on push messages
   public abstract on("push_message", (message: PushMessage, metadata: Metadata) => {}): void;

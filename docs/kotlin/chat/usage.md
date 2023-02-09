@@ -21,8 +21,8 @@ CoreClient.initialize(relayServerUrl = serverUrl, connectionType = connectionTyp
 
 val init = Chat.Params.Init(coreClient = CoreClient)
 
-ChatClient.initalize(init) { error ->
-    // Error will be thrown if there's an isssue during initalization
+ChatClient.initialize(init) { error ->
+    // Error will be thrown if there's an issue during initialization
 }
 ```
 
@@ -41,7 +41,7 @@ val chatDelegate = object : ChatClient.ChatDelegate {
     }
 
     override fun onReject(onReject: Chat.Model.Events.OnReject) {
-        // Triggered when a intive is rejected by the other peer
+        // Triggered when an invite is rejected by the other peer
     }
 
     override fun onMessage(onMessage: Chat.Model.Events.OnMessage) {
@@ -93,7 +93,7 @@ To resolve a peer's public key that you will need to invite him into a chat thre
 val resolve = Chat.Params.Resolve(Chat.Model.AccountId(account = /*[CAIP-10](https://github.com/ChainAgnostic/CAIPs/blob/master/CAIPs/caip-10.md) compatible accountId*/)
 ChatClient.resolve(resolve), object : Chat.Listeners.Resolve {
     override fun onError(error: Chat.Model.Error) {
-        //Error occured
+        //Error occurred
     }
 
     override fun onSuccess(publicKey: String) {
@@ -141,5 +141,5 @@ ChatClient.message(messageParams) { error -> /* Error while sending a message */
 ```kotlin
 val threadTopic = /*thread topic*/
 
-ChatClient.leave(threadTopuic) { error -> /* Error while leaving a thread */ }
+ChatClient.leave(threadTopic) { error -> /* Error while leaving a thread */ }
 ```

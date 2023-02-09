@@ -20,7 +20,7 @@ For more information check our [migration guide](../../advanced/migrating-from-v
 
 ## Integrating Auth
 
-We strongly encourage wallets to also integrate the [Auth](./../auth/installation.md) API so that dapps using only Auth can still particpate in the same ecosystem.
+We strongly encourage wallets to also integrate the [Auth](./../auth/installation.md) API so that dapps using only Auth can still participate in the same ecosystem.
 
 ## Initializing the client
 
@@ -63,7 +63,10 @@ signClient.on("session_proposal", (event) => {
     params: {
       id: number;
       expiry: number;
-      relays: { protocol: string; data?: string }[];
+      relays: Array<{
+        protocol: string;
+        data?: string;
+      }>;
       proposer: {
         publicKey: string;
         metadata: {
@@ -79,11 +82,6 @@ signClient.on("session_proposal", (event) => {
           chains: string[];
           methods: string[];
           events: string[];
-          extension?: {
-            chains: string[];
-            methods: string[];
-            events: string[];
-          }[];
         }
       >;
       pairingTopic?: string;
@@ -98,7 +96,10 @@ signClient.on("session_event", (event) => {
     id: number;
     topic: string;
     params: {
-      event: { name: string; data: any };
+      event: {
+        name: string;
+        data: any;
+      };
       chainId: string;
     };
   }
@@ -111,7 +112,10 @@ signClient.on("session_request", (event) => {
     id: number;
     topic: string;
     params: {
-      request: { method: string; params: any };
+      request: {
+        method: string;
+        params: any;
+      };
       chainId: string;
     };
   }
@@ -151,35 +155,14 @@ namespaces: {
   eip155: {
     accounts: ["eip155:1:0x0000000000..., eip155:2:0x0000000000..."],
     methods: ["personal_sign", "eth_sendTransaction"],
-    events: ["accountsChanged"],
-    extension: [
-      {
-        accounts: ["eip155:2:0x0000000000..."],
-        methods: ["eth_sign"],
-        events: [],
-      },
-    ],
+    events: ["accountsChanged"]
   },
 };
 ```
 
-### Extension
-
-The `extension` parameter is used to specify methods that are not shared by all the accounts/chains of the namespace. For example, chain A may have a special method that is not shared by chain B - in this case, we would create an extension that would only include chain B. Here's an example:
-
-```js
-extension: [
-  {
-    accounts: ["eip:137"],
-    methods: ["eth_sign"],
-    events: [],
-  },
-];
-```
-
 ### Pairing with `uri`
 
-To create a pairing proposal, simply pass the `uri` received from the dapp into the `signClient.pair()` function.
+To create a pairing proposal, simply pass the `uri` received from the dapp into the `signClient.core.pairing.pair()` function.
 
 :::caution
 As of 2.0.0 (stable), calling pairing-specific methods (such as `signClient.pair()`) directly on `signClient` will continue to work, but is considered deprecated and will be removed in a future major version.
@@ -189,7 +172,7 @@ It is recommended to instead call these methods directly via the [Pairing API](.
 
 ```js
 // This will trigger the `session_proposal` event
-await signClient.pair({ uri });
+await signClient.core.pairing.pair({ uri });
 
 // Approve session proposal, use id from session proposal event and respond with namespace(s) that satisfy dapps request and contain approved accounts
 const { topic, acknowledged } = await signClient.approve({
@@ -199,13 +182,6 @@ const { topic, acknowledged } = await signClient.approve({
       accounts: ["eip155:1:0x0000000000..."],
       methods: ["personal_sign", "eth_sendTransaction"],
       events: ["accountsChanged"],
-      extension: [
-        {
-          accounts: ["eip:137"],
-          methods: ["eth_sign"],
-          events: [],
-        },
-      ],
     },
   },
 });

@@ -8,24 +8,6 @@ description: Quick Start For Dapps using Auth Client
 For an example implementation, please refer to our [`react-dapp-auth` example](https://github.com/WalletConnect/web-examples/tree/main/dapps/react-dapp-auth).
 :::
 
-## Install Packages
-
-Install the WalletConnect Web3Modal package.
-
-```bash npm2yarn
-npm install @web3modal/standalone
-```
-
-:::note
-There are different Web3Modal packages depending on your use case.
-
-- `@web3modal/standalone`
-- `@web3modal/react`
-- `@web3modal/html`
-
-To learn about the differences, click [here](https://docs.walletconnect.com/2.0/web3modal/about).
-:::
-
 **1. Initialize your WalletConnect AuthClient, using [your Project ID](../../cloud/relay.md).**
 
 ```javascript
@@ -42,7 +24,7 @@ const authClient = await AuthClient.init({
 });
 ```
 
-**2. Add listeners for the `auth_response` event**
+**2. Subscribe to `auth_response`.**
 
 :::info
 To listen to pairing-related events, please follow the guidance for [Pairing API event listeners](../core/pairing-api.md).
@@ -59,7 +41,44 @@ authClient.on("auth_response", ({ params }) => {
 });
 ```
 
+You can derive the users' wallet address by destructing and splitting `params.result.p.iss`.
+
+```javascript
+const { iss } = params.result.p.iss;
+const walletAddress = iss.split(":")[4];
+console.log(walletAddress);
+// "0x977aeFEC1879160eC9560cd16f08e12B6DF52ed1"
+```
+
+For the full log of the `params` object:
+```
+{
+    id: 1674070525664600,
+    jsonrpc: "2.0",
+    result: {
+        h: {
+            t: "eip4361"
+        },
+        p: {
+            aud: "http://localhost:3000/",
+            domain: "localhost",
+            version: "1",
+            nonce: "dl9Xu8ICZZ0dj4VUS",
+            ia": "2023-01-18T19:35:25.664Z",
+            statement: "Sign in with wallet.",
+            iss: "did:pkh:eip155:1:0x977aeFEC1879160eC9560cd16f08e12B6DF52ed1"
+        },
+        s: {
+            s: "0x9edd446e150fad96ec24ab60c697055dc7c7815cc84a727cafa4a5a0d6f09909764332e14f8bee2430b81e6e4169c3b5bb5cbf7931a569ae78bffc953c8b6a7f1c",
+            t: "eip191"
+        }
+    }
+}
+```
+
 **3. Request Authentication**
+
+Update your import to include `generateNonce`.
 
 ```javascript
 import AuthClient, { generateNonce } from "@walletconnect/auth-client";
@@ -74,23 +93,12 @@ const { uri } = await authClient.request({
 });
 ```
 
-**4. Create a new Web3Modal instance.**
+The `uri` can then be displayed as a QRCode or as a deep link.
 
-```javascript
-import Web3Modal from "@web3modal/standalone";
+**Example deep link (preferred for desktop wallets):**
 
-const web3Modal = new Web3Modal({
-  projectId: "<YOUR_PROJECT_ID>",
-  // `standaloneChains` can also be specified when calling `web3Modal.openModal(...)` later on.
-  standaloneChains: ["eip155:1"],
-});
-```
+`mywallet://wc?uri={uri}`
 
-**5. Open the Web3Modal by passing in `uri`.**
+**Example universal link (preferred for mobile wallets):**
 
-```javascript
-if (uri) {
-  web3Modal.openModal({ uri });
-  console.log("Web3Modal opened")
-}
-```
+`https://mywallet.com/wc?uri={uri}`

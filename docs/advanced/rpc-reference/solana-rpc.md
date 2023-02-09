@@ -72,7 +72,7 @@ This method returns an Array of public keys available to sign from the wallet.
 
 ## solana_signTransaction
 
-This method returns a signature over the provided instuctions by the targetted public key.
+This method returns a signature over the provided instructions by the targeted public key.
 
 ### Parameters
 

@@ -1,6 +1,6 @@
 # Legacy Clients
 
-During the beta development of the WalletConnect clients, there were NPM packages distributed for Browser, React-Native and NodeJS clients which targetted different platforms.
+During the beta development of the WalletConnect clients, there were NPM packages distributed for Browser, React-Native and NodeJS clients which targeted different platforms.
 
 ```bash
 # For Browser apps

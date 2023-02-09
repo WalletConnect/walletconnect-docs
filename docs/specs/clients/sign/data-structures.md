@@ -15,11 +15,12 @@ Relay is defined by the transport protocol used for the two clients to publish a
 
 ## Session
 
-Session is a topic encrypted by a symmetric key derived using a key agreement established after an approved proposal and it has a controller pariticipant that can update its accounts, methods, events and expiry
+Session is a topic encrypted by a symmetric key derived using a key agreement established after an approved proposal and it has a controller participant that can update its accounts, methods, events and expiry
 
 ```jsonc
 {
   "topic": string,
+  "pairingTopic: string,
   "relay": {
     "protocol": string,
     "data": string
@@ -41,28 +42,14 @@ Session is a topic encrypted by a symmetric key derived using a key agreement es
     "<namespace_name>" : {
       "accounts": [string],
       "methods": [string],
-      "events": [string],
-      "extension": [ // optional
-        {
-          "accounts": [string],
-          "methods": [string],
-          "events": [string],
-        }
-      ]
+      "events": [string]
     }
   },
   "requiredNamespaces": {
     "<namespace_name>" : {
       "chains": [string],
       "methods": [string],
-      "events": [string],
-      "extension": [ // optional
-        {
-          "chains": [string],
-          "methods": [string],
-          "events": [string],
-        }
-      ]
+      "events": [string]
     }
   },
 }
@@ -89,14 +76,7 @@ Proposal is sent by the proposer client to be approved or rejected by the respon
     "<namespace_name>" : {
       "chains": [string],
       "methods": [string],
-      "events": [string],
-      "extension": [ // optional
-        {
-          "chains": [string],
-          "methods": [string],
-          "events": [string],
-        }
-      ]
+      "events": [string]
     }
   },
   "pairingTopic": string
@@ -129,7 +109,7 @@ Response is sent by the responder client and can either be an approval or reject
 
 ## Settlement
 
-Settelement is sent by the responder after approval and it's broadcasted right after the response on the new topic derived from the hashed symmetric key from the key agreement
+Settlement is sent by the responder after approval and it's broadcasted right after the response on the new topic derived from the hashed symmetric key from the key agreement
 
 ```jsonc
 {
@@ -145,14 +125,7 @@ Settelement is sent by the responder after approval and it's broadcasted right a
     "<namespace_name>" : {
       "accounts": [string],
       "methods": [string],
-      "events": [string],
-      "extension": [ // optional
-        {
-          "accounts": [string],
-          "methods": [string],
-          "events": [string],
-        }
-      ]
+      "events": [string]
     }
   },
   "expiry": Int64, // seconds

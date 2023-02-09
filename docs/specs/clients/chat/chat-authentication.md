@@ -11,7 +11,7 @@ This will be achieved using did-jwt which the different purposes above will have
 
 * iat - timestamp when jwt was issued 
 * exp - timestamp when jwt must expire
-* iss - public key of the identity key
+* iss - public key of the identity key (did:key). Enables to fetch attached blockchain account
 * ksu - key server for identity key verification
 
 Expiry will be calculated 30 days (2592000 seconds) from issued date
@@ -23,12 +23,13 @@ When we are validating invite proposal we must use the following additional fiel
 
 * sub - opening message included in the invite
 * aud - responder/invitee blockchain account (did:pkh)
+* pke - proposer/inviter public key for key exchange (did:key)
 
 ## Invite Approvals
 
 When we are validating invite approvals we must use the following additional fields in the jwt:
 
-* sub - public key sent by the responder/invitee
+* sub - public key sent by the responder/invitee (did:key)
 * aud - proposer/inviter blockchain account (did:pkh)
 
 

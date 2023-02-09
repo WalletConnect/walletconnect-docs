@@ -17,7 +17,7 @@ abstract class PairingClient {
   public abstract activate(params: { topic: string }): Promise<void>;
 
   // for both to subscribe on methods requests
-  public abstract register(params: { methods: string }): Promise<void>;
+  public abstract register(params: { methods: string[], type: ProtocolType }): Promise<void>;
 
   // for either to update the expiry of an existing pairing.
   public abstract updateExpiry(params: { topic: string, expiry: number }): Promise<void>;

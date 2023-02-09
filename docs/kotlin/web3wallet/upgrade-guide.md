@@ -98,7 +98,7 @@ Web3Wallet.updateSession(update) { error -> }
 ```kotlin
 //SignClient
 val extendParams = Sign.Params.Extend(sessionTopic)
-WalletConnectClient.extend(exdendParams) { error -> }
+WalletConnectClient.extend(extendParams) { error -> }
 
 //Web3Wallet
 val extend = Wallet.Params.SessionExtend(sessionTopic)
@@ -163,7 +163,7 @@ val walletDelegate = object : Web3Wallet.WalletDelegate {
     }
 
     override fun onAuthRequest(authRequest: Wallet.Model.AuthRequest) {
-        // Triggered when Dapp / Requester makes an authorisation request
+        // Triggered when Dapp / Requester makes an authorization request
     }
 
     override fun onSessionDelete(sessionDelete: Wallet.Model.SessionDelete) {
