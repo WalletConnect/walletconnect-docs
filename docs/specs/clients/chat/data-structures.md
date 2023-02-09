@@ -26,7 +26,8 @@ In this document we define data structures and definitions used in the chat api
   "inviterAccount": string,
   "inviteeAccount": string,
   "inviterPublicKey": string,
-  "inviteePublicKey": string
+  "inviteePublicKey": string,
+  "status": 'pending' | 'rejected' | 'approved'
 }
 ```
 
