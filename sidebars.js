@@ -58,7 +58,20 @@ module.exports = {
           label: "Echo Server",
           collapsed: true,
           collapsible: true,
-          items: ["advanced/echo-server/overview", "advanced/echo-server/getting-started", "advanced/echo-server/kotlin-usage", "advanced/echo-server/swift-usage"],
+          items: [
+            "advanced/echo-server/overview",
+            "advanced/echo-server/getting-started",
+            {
+              type: "link",
+              label: "Kotlin Usage",
+              href: "/2.0/kotlin/echo/usage",
+            },
+            {
+              type: "link",
+              label: "Swift Usage",
+              href: "/2.0/swift/echo/usage",
+            },
+          ],
         },
       ],
     },
