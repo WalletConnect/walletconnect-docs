@@ -4,16 +4,15 @@
 
 1. Create a Project in the Cloud App. Go to [WalletConnect Cloud](https://cloud.walletconnect.com/) and sign up for an account.
 
-2. To get your project's Push URL, from the Cloud App, go into settings and click on `Create Push URL`. Once its been created, use that URL for the step 4.
+2. To get your project's Push URL, from the Cloud App, go into settings tab and click on `Create Push URL`. Once its been created, use that URL for step 4.
 
 ![create push url](/assets/create-push-url.png)
 
-3. Add [FCM](#firebase-cloud-messaging-fcm) and/or [APNs](#apple-push-notifications-apns) details in the same settings form as above and save.
+3. From the same settings tab, add the [FCM](#firebase-cloud-messaging-fcm) and/or [APNs](#apple-push-notifications-apns) details.
 
 ![fmc and apns details form](/assets/apns-fmc-details.png)
 
-
-3. Make a POST request to the Echo Server's URL to register your client. The `ECHO_SERVER_URL` URL will be created in the Project's page in the Cloud App.
+4. Make a POST request to the Echo Server's URL to register your client. Use the URL that you created in step 2.
 
 **To Register**
 ```
@@ -29,8 +28,6 @@ POST <ECHO_SERVER_URL>/clients
 ```
 DELETE <ECHO_SERVER_URL>/clients/<CLIENT_ID>
 ```
-
-4. Go to the Cloud App Project settings to upload your mobile push notification services authentication and authorization methods. This will be done either with [Firebase Cloud Messaging](#firebase-cloud-messaging-fcm) or [Apple Push Notifications](#apple-push-notifications-apns).
 
 ### Firebase Cloud Messaging (FCM)
 
