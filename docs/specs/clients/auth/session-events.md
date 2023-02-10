@@ -24,7 +24,7 @@ data={[
 
 ### auth_request
 
-When the dapp initiates a session, it will emit the `auth_request` event. The wallet should listen for this event and respond by either accepting or rejecting the request.
+When the wallet receives an authorization request, it will emit the `auth_request` event. The wallet should listen for this event and respond by either accepting or rejecting the request.
 
 An example of a payload from `auth_request`:
 
