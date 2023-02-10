@@ -36,7 +36,7 @@ data={[
   },
   {
     event: "session_ping",
-    description: "Emitted to keep a session active.",
+    description: "Emitted when the session's peer is checking if the receiving client is online.",
     whoShouldListen: "dapp & wallet"
   },
   {
