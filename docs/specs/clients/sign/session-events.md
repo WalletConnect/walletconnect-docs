@@ -11,7 +11,7 @@ headers={[ "Event", "Description", "Who Should Listen" ]}
 data={[
 {
     event: "session_proposal",
-    description: "Emitted when a new session with a user's wallet is initiated",
+    description: "Emitted when there is a new session proposal to be responded to",
     whoShouldListen: "wallet"
   },
   {
