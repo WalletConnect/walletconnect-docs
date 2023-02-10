@@ -26,7 +26,7 @@ data={[
   },
   {
     event: "session_delete",
-    description: "Emitted when a session is disconnected.",
+    description: "Emitted when a session has been disconnected.",
     whoShouldListen: "dapp & wallet"
   },
   {
