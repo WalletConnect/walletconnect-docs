@@ -63,7 +63,7 @@ An event is triggered when the dapp establishes a connection with the wallet by 
 
 ```ts
 await client.connect({
-  pairingTopic: pairing?.topic,
+  pairingTopic: pairing?.topic, // optional, only provided when connecting via existing pairing.
   requiredNamespaces,
 });
 ```
