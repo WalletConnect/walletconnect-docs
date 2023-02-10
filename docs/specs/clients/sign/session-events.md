@@ -268,7 +268,7 @@ An example of a payload from `session_delete`:
 
 ### session_event
 
-This event can be triggered by either the wallet or dapp by caling the `emit` method.
+This event can be triggered by either the wallet or dapp by calling the `emit` method.
 
 ```ts
 await signClient.emit({
