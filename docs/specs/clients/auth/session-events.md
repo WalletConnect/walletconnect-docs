@@ -56,7 +56,7 @@ An example of a payload from `auth_request`:
 
 ### auth_response
 
-Once the wallet receives the request, the user will have the option to either approve or reject it. The following payloads are for an approved request and a rejected request, respectively.
+Once the wallet receives the request, the user will have the option to either approve or reject it. The following payloads represent what is emitted by `auth_response` for an approved request and a rejected request, respectively.
 
 #### Wallet Approved Request
 
