@@ -16,7 +16,7 @@ data={[
   },
   {
     event: "session_request",
-    description: "The event is triggered when the wallet is required to take action, such as signing a transaction.",
+    description: "Emitted when the wallet is required to take action, such as signing a transaction.",
     whoShouldListen: "wallet"
   },
   {
