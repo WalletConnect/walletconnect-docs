@@ -12,12 +12,12 @@ data={[
 {
     event: "auth_request",
     description: "Emitted by wallet when there is a request for authentication from a dapp.",
-    whoShouldListen: "Dapps"
+    whoShouldListen: "Wallets"
   },
   {
     event: "auth_response",
     description: "Emitted by a dapp when there is a response from a wallet accepting/rejecting an authorization request.",
-    whoShouldListen: "Wallets"
+    whoShouldListen: "Dapps"
   }
 ]}
 />

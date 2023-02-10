@@ -12,54 +12,54 @@ data={[
 {
     event: "session_proposal",
     description: "Emitted when there is a new session proposal to be responded to",
-    whoShouldListen: "wallet"
+    whoShouldListen: "Wallets"
   },
   {
     event: "session_request",
     description: "Emitted when the wallet is required to take action, such as signing a transaction.",
-    whoShouldListen: "wallet"
+    whoShouldListen: "Wallets"
   },
   {
     event: "session_update",
     description: "Emitted when a session is updated.",
-    whoShouldListen: "dapp"
+    whoShouldListen: "Dapps"
   },
   {
     event: "session_delete",
     description: "Emitted when a session has been disconnected.",
-    whoShouldListen: "dapp & wallet"
+    whoShouldListen: "Dapps & Wallets"
   },
   {
     event: "session_event",
     description: "Emitted when an event like accountsChanged happens.",
-    whoShouldListen: "dapp & wallet"
+    whoShouldListen: "Dapps & Wallets"
   },
   {
     event: "session_ping",
     description: "Emitted when the session's peer is checking if the receiving client is online.",
-    whoShouldListen: "dapp & wallet"
+    whoShouldListen: "Dapps & Wallets"
   },
   {
     event: "session_expire",
     description: "Emitted when a session has expired.",
-    whoShouldListen: "dapp & wallet"
+    whoShouldListen: "Dapps & Wallets"
   },
   {
     event: "session_extend",
     description: "Emitted when extending a session.",
-    whoShouldListen: "dapp & wallet"
+    whoShouldListen: "Dapps & Wallets"
   },
   {
     event: "proposal_expire",
     description: "Emitted when the session proposal has expired.",
-    whoShouldListen: "dapp & wallet"
+    whoShouldListen: "Dapps & Wallets"
   }
 ]}
 />
 
 ### session_proposal
 
-An event is triggered when the dapp establishes a connection with the wallet by calling the `connect` method. The following is the payload that the wallet can listen for. Here's an example payload when the dapp is initiating a session proposal on the Goerli Network.
+An event is triggered when the dapp establishes a connection with the wallet by calling the `connect` method.
 
 ```ts
 await client.connect({
@@ -68,7 +68,11 @@ await client.connect({
 });
 ```
 
+Here's an example payload when the dapp is initiating a session proposal on the Goerli Network.
+
+:::tip
 For a properly formatted namespace, refer to the documentation [here](../../../specs/clients/sign/session-namespaces.md#example-proposal-namespaces-request).
+:::
 
 ```ts
 {
@@ -119,8 +123,6 @@ For a properly formatted namespace, refer to the documentation [here](../../../s
 
 A dapp triggers an event when it requires the wallet to carry out a specific action, such as signing a transaction. The event includes a `topic` and a `request` object, which will differ based on the requested action.
 
-As the request can vary, here's an example of the payload when the request is for `eth_signTransaction`.
-
 ```ts
 await client.request({
           topic: session.topic,
@@ -141,7 +143,7 @@ await client.request({
     })
 ```
 
-An example of a payload from `session_request`:
+Here's an example of a payload from a `session_request` when the request is for `eth_signTransaction`. Keep in mind, the request will vary depending on the method.
 
 ```ts
 {
@@ -248,12 +250,13 @@ Once `update` is called, `session_update` is triggered. An example payload reque
 
 This event can be triggered by either the wallet or dapp, indicating the termination of a session. Emitted only after the session has been successfully deleted, this event enables you to respond to the change and adjust your UI accordingly, such as resetting to a non-connected state. The event is activated when the disconnect method is invoked by the wallet or dapp.
 
-To use the `getSdkError` method, import `@walletconnect/utils`.
-
 ```ts
 await client.disconnect({
   topic: session.topic,
-  reason: getSdkError("USER_DISCONNECTED"),
+  reason: {
+    code: 6000,
+    message: "User disconnected.",
+  },
 });
 ```
 
