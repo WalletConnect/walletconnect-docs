@@ -189,7 +189,7 @@ const currentRequiredNamespace = {
 };
 ```
 
-If you want to add another chain to the session you can do so by calling `update` and passing in the `topic` and new namespace. Note, the new namespace can only **append** new items, it cannot remove.
+If you want to add another chain to the session you can do so by calling `update` and passing in the session's `topic` and new namespace. Note, the new namespace can only **append** new items, it cannot remove.
 
 ```ts
 const newNamespace = {
