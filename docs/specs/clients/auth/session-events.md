@@ -11,7 +11,7 @@ headers={[ "Event", "Description", "Who Should Listen" ]}
 data={[
 {
     event: "auth_request",
-    description: "Emitted wallet when there is a request for authentication from a dapp.",
+    description: "Emitted by wallet when there is a request for authentication from a dapp.",
     whoShouldListen: "Dapps"
   },
   {
