@@ -8,11 +8,11 @@
 
 2. To get your project's Push URL, from the Cloud App, go into the settings tab and click on `Create Push URL`.
 
-![create push url](/assets/create-push-url.png)
+![create-push-url](/assets/create-push-url.png)
 
 3. From the same settings tab, add the [FCM](#firebase-cloud-messaging-fcm) and/or [APNs](#apple-push-notifications-apns) details.
 
-![fmc and apns details form](/assets/apns-fmc-details.png)
+![fmc-and-apns-details-form](/assets/apns-fmc-details.png)
 
 
 ### Register Client
