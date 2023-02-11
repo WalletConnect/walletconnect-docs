@@ -14,34 +14,6 @@
 
 ![fmc-and-apns-details-form](/assets/apns-fmc-details.png)
 
-
-### Register Client
-
-To register your client, make a POST request to the URL of the Echo Server. Use the URL that you created in step 2.
-
-```
-POST <ECHO_SERVER_URL>/clients
-{
-    "client_id": <CLIENT_ID>,
-    "type": <TYPE>,
-    "token": <DEVICE_TOKEN>
-}
-```
-
-- `CLIENT_ID`: The Client's ID from the Relay pairing.
-- `TYPE`: The push service to use e.g. APNS, FCM. This will be validated against the supported types on the Echo
-  Server's side.
-- `DEVICE_TOKEN`: The device's token for the push service e.g. FCM, APNS.
-
-### Unregister Device
-
-```
-DELETE <ECHO_SERVER_URL>/clients/<CLIENT_ID>
-```
-
-- `CLIENT_ID`: The Client's ID from the Relay pairing.
-
-
 ### Firebase Cloud Messaging (FCM)
 
 Google's FCM allows you to use send notifications to both Android and Apple devices. At this time, we only support the API. Please refer to their docs on set up.
