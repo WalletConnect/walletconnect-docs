@@ -9,7 +9,7 @@ Head over to [WalletConnect Cloud](https://cloud.walletconnect.com/) to sign in 
 ## Add Packages
 
 ```bash npm2yarn
-npm install @web3modal/ethereum @web3modal/react wagmi ethers
+npm install @web3modal/ethereum @web3modal/react wagmi ethers@^5
 ```
 
 :::info
