@@ -27,6 +27,7 @@ In this document we define data structures and definitions used in the chat api
   "inviteeAccount": string,
   "inviterPublicKey": string,
   "inviteePublicKey": string,
+  "timestamp": number, // taken from relay message receivedAt value
   "status": 'pending' | 'rejected' | 'approved'
 }
 ```
@@ -40,6 +41,7 @@ In this document we define data structures and definitions used in the chat api
   "message": string, // character limit is 200
   "inviterAccount": string,
   "inviteeAccount": string,
+  "timestamp": number, // taken from client current timestamp
   "status": 'pending' | 'rejected'
 }
 ```
