@@ -47,6 +47,5 @@ We provide an official SDK for Dart/Flutter, which you can find on our GitHub pa
 
 **Dart/Flutter**
 
-- https://github.com/Eucalyptus-Labs/wallet-connect-v2-dart
 - https://github.com/wakumo/flutter-wallet-connect-v2
 - https://github.com/Orange-Wallet/wallet-connect-dart-v2
