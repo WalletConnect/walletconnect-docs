@@ -11,9 +11,3 @@ You can find getting started guides for the following client platforms:
 - [Web - Javascript](../javascript/sign/installation.md)
 - [iOS - Swift](../swift/sign/installation.md)
 - [Android - Kotlin](../kotlin/sign/installation.md)
-
-## Official SDKs
-
-We provide an official SDK for Dart/Flutter, which you can find on our GitHub page.
-
-- [Dart/Flutter](https://github.com/WalletConnect/WalletConnectDartV2)

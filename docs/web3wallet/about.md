@@ -37,6 +37,12 @@ url: `/2.0/kotlin/web3wallet/installation`
 ]}
 />
 
+## Official SDKs
+
+We provide an official SDK for Dart/Flutter, which you can find on our GitHub page.
+
+- [Dart/Flutter](https://github.com/WalletConnect/WalletConnectDartV2)
+
 ### Community SDK's
 
 **Dart/Flutter**
