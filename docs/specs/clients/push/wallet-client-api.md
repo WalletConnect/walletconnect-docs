@@ -17,11 +17,14 @@ abstract class WalletClient {
   public abstract getActiveSubscriptions(): Promise<Record<string, PushSubscription>>;
 
   // get all messages for a subscription
-  public abstract getMessageHistory(params: { topic: string }): Promise<Record<number, PushMessage>>
+  public abstract getMessageHistory(params: { topic: string }): Promise<Record<number, PushMessageRecord>>
 
   // delete active subscription
-  public abstract delete(params: { topic: string }): Promise<void>;
-
+  public abstract deleteSubscription(params: { topic: string }): Promise<void>;
+  
+  // delete push message
+  public abstract deletePushMessage(params: { id: string }): Promise<void>;
+  
   // decrypt push subscription message
   public abstract decryptMessage(topic: string, encryptedMessage: string): Promise<PushMessage>;
 
@@ -31,7 +34,7 @@ abstract class WalletClient {
   public abstract on("push_request", (id: number, account: string, metadata: Metadata) => {}): void;
   
   //  for wallet to listen on push messages
-  public abstract on("push_message", (message: PushMessage, metadata: Metadata) => {}): void;
+  public abstract on("push_message", (message: PushMessageRecord, metadata: Metadata) => {}): void;
 
   // for wallet to listen on push deletion
   public abstract on("push_delete", (topic: string) => {}): void;
