@@ -10,7 +10,7 @@
 
 ![create-push-url](/assets/create-push-url.png)
 
-3. From the same settings tab, add the [FCM](#firebase-cloud-messaging-fcm) and/or [APNs](#apple-push-notifications-apns) details.
+3. From the same settings tab, add the [FCM](#firebase-cloud-messaging-fcm) and/or [APNS](#apple-push-notifications-apns) details.
 
 ![fmc-and-apns-details-form](/assets/apns-fmc-details.png)
 
