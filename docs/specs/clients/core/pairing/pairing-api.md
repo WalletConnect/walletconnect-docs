@@ -8,7 +8,7 @@ abstract class PairingClient {
   public abstract init(params: { metadata: Metadata}): Promise<void>;
 
   // for responder to pair a pairing created by a proposer
-  public abstract pair(params: { uri: string }): Promise<Sequence>;
+  public abstract pair(params: { uri: string; activatePairing?: boolean }): Promise<Sequence>;
 
   // for proposer to create inactive pairing
   public abstract create(): Promise<{ uri: string }>;
