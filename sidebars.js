@@ -569,15 +569,23 @@ module.exports = {
   dart: [
     {
       type: "category",
-      label: "Products",
+      label: "Introduction",
       className: "menu_outer_list",
       collapsible: false,
       items: [
         "flutter/overview",
+      ],
+    },
+    {
+      type: "category",
+      label: "Products",
+      className: "menu_outer_list",
+      collapsible: false,
+      items: [
         "flutter/dapps/auth",
         "flutter/dapps/sign",
         "flutter/wallet-usage",
       ],
-    },
+    }
   ],
 };
