@@ -95,6 +95,12 @@ const config = {
             label: "Swift",
           },
           {
+            type: "docSidebar",
+            position: "left",
+            sidebarId: "dart",
+            label: "Dart",
+          },
+          {
             type: "docsVersionDropdown",
             position: "right",
           },

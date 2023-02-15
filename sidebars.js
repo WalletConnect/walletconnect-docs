@@ -29,15 +29,6 @@ module.exports = {
               href: "/2.0/web3modal/about",
             },
             "web3wallet/about",
-            {
-              type: "category",
-              label: "Flutter SDK",
-              items: [
-                "flutter/overview",
-                "flutter/dapp-usage",
-                "flutter/wallet-usage",
-              ],
-            },
           ],
         },
         {
@@ -572,6 +563,20 @@ module.exports = {
       items: [
         "swift/guides/examples-and-resources",
         "swift/guides/mobile-linking",
+      ],
+    },
+  ],
+  dart: [
+    {
+      type: "category",
+      label: "Products",
+      className: "menu_outer_list",
+      collapsible: false,
+      items: [
+        "flutter/overview",
+        "flutter/dapps/auth",
+        "flutter/dapps/sign",
+        "flutter/wallet-usage",
       ],
     },
   ],

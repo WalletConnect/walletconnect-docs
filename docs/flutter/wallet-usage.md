@@ -1,4 +1,4 @@
-# Wallet Usage
+# Web3Wallet SDK
 
 ## Initialization
 

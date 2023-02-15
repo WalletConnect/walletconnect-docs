@@ -1,15 +1,8 @@
-import Container from './../components/Container';
+# Sign SDK
 
-# Dapp Usage
+The following documentation is aimed for Dapp Sign usage. If you're a wallet loooking to incorporarte Sign, please see [Web3Wallet SDK](../wallet-usage.md).
 
-WalletConnect Dart v2 library for Flutter, heavily inspired by the WalletConnect V2 Javacript Monorepo.  
-Original work for this library is attributed to [Eucalyptus Labs](https://eucalyptuslabs.com/) and Sterling Long for [Koala Wallet](https://koalawallet.io/), a wallet built for the Kadena blockchain.
-
-## Sign Dapps
-
-These are the dapps requiring sending transactions. If you're just looking for an auth solution, skip to [Auth Dapps](#auth-dapps).
-
-### Initialzation
+## Initialzation
 
 To create an instance of `SignClient`, you need to pass in the core and metadata parameters.
 
@@ -28,7 +21,7 @@ SignClient wcClient = await SignClient.createInstance(
 );
 ```
 
-### Connection
+## Connection
 
 To connect with specific parameters and display the returned URI, use `connect` with the required namespaces.
 
@@ -48,7 +41,7 @@ ConnectResponse resp = await wcClient.connect(
 Uri? uri = resp.uri;
 ```
 
-### Session Data
+## Session Data
 
 Once you've displayed the URI, you can wait for the future and hide the QR code once you've received session data.
 
@@ -56,7 +49,7 @@ Once you've displayed the URI, you can wait for the future and hide the QR code 
 final SessionData session = await resp.session.future;
 ```
 
-### Request Signatures
+## Request Signatures
 
 Once the session had been created, you can request signatures.
 
@@ -71,7 +64,7 @@ final sig = await wcClient.request(
 );
 ```
 
-### Respond to Events
+## Respond to Events
 
 You can also respond to events from the wallet, like chain changed, using `onSessionEvent` and `registerEventHandler`.
 
@@ -83,49 +76,6 @@ wcClient.onSessionEvent.subscribe((SessionEvent? session) {
 wcClient.registerEventHandler(
     namespace: 'kadena',
     method: 'kadena_transaction_updated',
-);
-```
-
-## Auth Dapps
-
-If you're looking for a light Auth solution, you've come to the right place. 
-
-### Initialzation
-
-To create an instance of `AuthClient`, you need to pass in the core and metadata parameters.
-
-```dart
-AuthClient wcClient = await AuthClient.createInstance(
-    core: Core(
-        relayUrl: 'wss://relay.walletconnect.com', // The relay websocket URL
-        projectId: '123',
-    ),
-    metadata: PairingMetadata(
-        name: 'dApp (Requester)',
-        description: 'A dapp that can request that transactions be signed',
-        url: 'https://walletconnect.com',
-        icons: ['https://avatars.githubusercontent.com/u/37784886'],
-    ),
-);
-```
-
-## Subscribe to `auth_response`
-
-TODO
-
-## Request Authentication
-
-
-```dart
-final auth = await wcClient.requestAuth(
-  params: AuthRequestParams(
-    aud: 'http://localhost:3000/login',
-    domain: 'localhost:3000',
-    chainId: 'eip155:1',
-    nonce: AuthUtils.generateNonce(),
-    statement: 'Sign in with your wallet!',
-  ),
-  pairingTopic: resp.pairingTopic,
 );
 ```
 
