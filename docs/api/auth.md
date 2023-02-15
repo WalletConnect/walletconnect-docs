@@ -21,6 +21,7 @@ There are getting started guides for the following clients platforms:
 - [Web - Javascript](../javascript/auth/installation.md)
 - [iOS - Swift](../swift/auth/installation.md)
 - [Android - Kotlin](../kotlin/auth/installation.md)
+- [Mobile - Dart](../flutter/dapps/auth.md)
 
 ## Useful Links
 
