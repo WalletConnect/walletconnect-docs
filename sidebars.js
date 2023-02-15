@@ -569,22 +569,48 @@ module.exports = {
   dart: [
     {
       type: "category",
-      label: "Introduction",
-      className: "menu_outer_list",
-      collapsible: false,
-      items: [
-        "flutter/overview",
-      ],
-    },
-    {
-      type: "category",
       label: "Products",
       className: "menu_outer_list",
       collapsible: false,
       items: [
-        "flutter/dapps/auth",
-        "flutter/dapps/sign",
-        "flutter/wallet-usage",
+        {
+          type: "category",
+          label: "Web3Wallet SDK",
+          collapsible: true,
+          collapsed: true,
+          items: [
+            "dart/wallets/installation",
+            "dart/wallets/wallet-usage",
+          ],
+        },
+      ],
+    },
+    {
+      type: "category",
+      label: "Advanced",
+      className: "menu_outer_list",
+      collapsible: false,
+      items: [
+        {
+          type: "category",
+          label: "Sign",
+          collapsible: true,
+          collapsed: true,
+          items: [
+            "dart/dapps/sign/installation",
+            "dart/dapps/sign/dapp-usage"
+          ],
+        },
+        {
+          type: "category",
+          label: "Auth",
+          collapsible: true,
+          collapsed: true,
+          items: [
+            "dart/dapps/auth/installation",
+            "dart/dapps/auth/dapp-usage"
+          ],
+        },
       ],
     }
   ],
