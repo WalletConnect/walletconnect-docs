@@ -11,4 +11,4 @@ You can find getting started guides for the following client platforms:
 - [Web - Javascript](../javascript/sign/installation.md)
 - [iOS - Swift](../swift/sign/installation.md)
 - [Android - Kotlin](../kotlin/sign/installation.md)
-- [Mobile - Dart](../flutter/dapps/sign.md)
+- [Mobile - Dart](../dart/dapps/sign/installation.md)
