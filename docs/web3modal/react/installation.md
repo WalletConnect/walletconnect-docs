@@ -9,7 +9,7 @@ Head over to [WalletConnect Cloud](https://cloud.walletconnect.com/) to sign in 
 ## Add Packages
 
 ```bash npm2yarn
-npm install @web3modal/ethereum @web3modal/react wagmi ethers
+npm install @web3modal/ethereum @web3modal/react wagmi ethers@^5
 ```
 
 :::info
@@ -82,6 +82,16 @@ function App() {
     </>
   );
 }
+```
+
+## Add Connect Wallet Button
+
+```tsx
+import { Web3Button } from "@web3modal/react";
+
+export const YourApp = () => {
+  return <Web3Button />;
+};
 ```
 
 ## Usage

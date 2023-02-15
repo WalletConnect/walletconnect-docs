@@ -44,7 +44,7 @@ If you are using `@walletconnect/web3-provider`, we stopped supporting this prov
 
 #### For Web3Modal v2.0 integrations
 
-If you are using our new redesigned Web3Modal v2.0, you can simply enable v2.0 by using the feature flag `version: '2'` when injecting modal connectors. Here is a code example:
+If you are using our new redesigned Web3Modal v2.0, you can simply enable v2.0 by using the feature flag `version: '2'` when injecting modal connectors. Please ensure that you are using a minimum version of `2.1.1`. Here is a code example:
 
 ```typescript
 import { modalConnectors } from '@web3modal/ethereum'
@@ -78,6 +78,25 @@ If you still want to use Web3Modal v1.0 but just upgrade the WalletConnect ether
 If you are using `@walletconnect/react-native-dapp`, we currently don't have an equivalent package for this but we will eventually publish a React-Native version of Web3Modal in the upcoming months.
 
 In the meantime, you can list all the wallet mobile links from our [Cloud Explorer API](https://docs.walletconnect.com/2.0/cloud/explorer) and integrate our `@walletconnect/ethereum-provider` package using the latest version available on NPM which you can find [here](https://npmjs.com/package/@walletconnect/ethereum-provider).
+
+#### For web3-onboard integrations
+
+If you are using the WalletConnect package with [Blocknative's web3-onboard](https://onboard.blocknative.com/docs/wallets/walletconnect#install) the migration is straight forward. The latest WC package is backwards compatible (until the WC v1 sunset).
+When ready to transition bump the `@web3-onboard/walletconnect` package version to >= `2.3.0` and adjust the initialization params to include: 
+```typescript 
+{
+  /**
+  * Defaults to version: 1 - this behavior will be deprecated after the WalletConnect v1 sunset
+  */
+  version: 2,
+  
+  /**
+  * Project ID associated with [WalletConnect account](https://cloud.walletconnect.com)
+  */
+  projectId: string
+}
+```
+*note: The `@web3-onboard/walletconnect` package will default to version 1 until the WC v1 sunset is complete*
 
 ### For Wallets
 
