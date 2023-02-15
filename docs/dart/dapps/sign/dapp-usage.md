@@ -1,7 +1,7 @@
 # Dapp Usage
 
 :::info
-If you're a wallet loooking to incorporarte Sign, please see [Web3Wallet SDK](../wallet-usage.md)..
+If you're a wallet loooking to incorporarte Sign, please see [Web3Wallet SDK](../../wallets/installation.md)..
 :::
 
 ## Initialzation
