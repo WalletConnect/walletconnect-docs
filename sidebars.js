@@ -29,6 +29,15 @@ module.exports = {
               href: "/2.0/web3modal/about",
             },
             "web3wallet/about",
+            {
+              type: "category",
+              label: "Flutter SDK",
+              items: [
+                "flutter/overview",
+                "flutter/dapp-usage",
+                "flutter/wallet-usage",
+              ],
+            },
           ],
         },
         {
