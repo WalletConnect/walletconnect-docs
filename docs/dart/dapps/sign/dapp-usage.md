@@ -1,6 +1,8 @@
-# Sign SDK
+# Dapp Usage
 
-The following documentation is aimed for Dapp Sign usage. If you're a wallet loooking to incorporarte Sign, please see [Web3Wallet SDK](../wallet-usage.md).
+:::info
+If you're a wallet loooking to incorporarte Sign, please see [Web3Wallet SDK](../wallet-usage.md)..
+:::
 
 ## Initialzation
 
@@ -78,12 +80,6 @@ wcClient.registerEventHandler(
     method: 'kadena_transaction_updated',
 );
 ```
-
-# To Build
-
-- Example project and dapp
-- Reduce number of crypto libraries used for encryption, shared key, etc.
-- Push API
 
 # To Test
 

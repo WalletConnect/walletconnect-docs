@@ -1,6 +1,4 @@
-# Auth SDK
-
-If you're a Dapp looking for a light Auth solution, you've come to the right place. 
+# Dapp Usage
 
 ## Initialzation
 
@@ -40,12 +38,6 @@ final auth = await wcClient.requestAuth(
   pairingTopic: resp.pairingTopic,
 );
 ```
-
-# To Build
-
-- Example project and dapp
-- Reduce number of crypto libraries used for encryption, shared key, etc.
-- Push API
 
 # To Test
 
