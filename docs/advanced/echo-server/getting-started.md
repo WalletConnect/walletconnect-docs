@@ -1,3 +1,5 @@
+import Container from './../../components/Container';
+
 # Getting Started
 
 ## Hosted Platform (recommended)
@@ -26,3 +28,23 @@ Google's FCM allows you to use send notifications to both Android and Apple devi
 Apple recommends using a Token-Based Connection for APNs over a Certificate-Based connection. Please refer to their documentation for instructions on obtaining either.
 - [Token-Based Connection](https://developer.apple.com/documentation/usernotifications/setting_up_a_remote_notification_server/establishing_a_token-based_connection_to_apns) 
 - [Certificate-Based Connection](https://developer.apple.com/documentation/usernotifications/setting_up_a_remote_notification_server/establishing_a_certificate-based_connection_to_apns)
+
+
+## Registering your Devices
+
+Once you have set up your project and obtained the Push URL, you can register your devices to start receiving push notifications.
+
+<Container
+items={[
+{
+name: "Kotlin",
+description: "",
+url: `/2.0/kotlin/echo/usage`
+},
+{
+name: "Swift",
+description: "",
+url: `/2.0/swift/echo/usage`
+}
+]}
+/>
