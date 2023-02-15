@@ -30,7 +30,7 @@ wcClient.onSessionProposal.subscribe((SessionProposal? args) async {
   // Handle UI updates using the args.params
   // Keep track of the args.id for the approval response
   id = args!.id;
-});
+})
 ```
 
 ## Responding to Request
@@ -39,18 +39,18 @@ Also set up the methods and chains that your wallet supports.
 
 ```dart
 wcClient.onSessionRequest.subscribe((SessionRequestEvent? request) async {
-    // You can respond to requests in this manner
-    await clientB.respondSessionRequest(
-        topic: request.topic,
-        response: JsonRpcResponse<String>(
-        id: request.id,
-        result: 'Signed!',
-        ),
-    );
+  // You can respond to requests in this manner
+  await clientB.respondSessionRequest(
+    topic: request.topic,
+    response: JsonRpcResponse<String>(
+      id: request.id,
+      result: 'Signed!',
+    ),
+  );
 });
 wcClient.registerRequestHandler(
-    namespace: 'kadena',
-    method: 'kadena_sign',
+  namespace: 'kadena',
+  method: 'kadena_sign',
 );
 ```
 
@@ -76,7 +76,7 @@ clientB.onAuthRequest.subscribe((AuthRequest? args) async {
 
 ## Pairing
 
-Scan the QR code and parse the URI, and pair with the dApp. On the first pairing, you will immediately receive onSessionProposal and onAuthRequest events.
+Scan the QR code and parse the URI, and pair with the dApp. On the first pairing, you will immediately receive `onSessionProposal` and `onAuthRequest` events.
 
 ```dart
 Uri uri = Uri.parse(scannedUriString);
@@ -85,7 +85,7 @@ await wcClient.pair(uri: uri);
 
 ## Approving the Sign Request
 
-Present the UI and then approve.
+Present the UI and to approve.
 
 ```dart
 final walletNamespaces = {
@@ -107,7 +107,7 @@ await wcClient.approve(
 
 ## Rejecting the Sign Request
 
-To reject the request, pass in an error code and reason. They can be found here.
+To reject the request, pass in an error code and reason. They can be found [here](https://docs.walletconnect.com/2.0/specs/clients/sign/error-codes).
 
 ```dart
 await wcClient.reject(
@@ -133,6 +133,8 @@ await wcClient.respondAuthRequest(
 ```
 
 ## Rejecting an Auth Request
+
+To reject the request, pass in an error code and reason. They can be found [here](https://docs.walletconnect.com/2.0/specs/clients/sign/error-codes).
 
 ```dart
 await wcClient.respondAuthRequest(
