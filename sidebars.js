@@ -61,16 +61,6 @@ module.exports = {
           items: [
             "advanced/echo-server/overview",
             "advanced/echo-server/getting-started",
-            {
-              type: "link",
-              label: "Kotlin Usage",
-              href: "/2.0/kotlin/echo/usage",
-            },
-            {
-              type: "link",
-              label: "Swift Usage",
-              href: "/2.0/swift/echo/usage",
-            },
           ],
         },
       ],
