@@ -169,3 +169,7 @@ class CustomFirebaseService: PushMessageService() {
 
 The `PushMessageService` is a wrapper around the `FirebaseMessagingService`. This wrapper class needs to be implemented for the Push SDK to be able to decrypt and notify wallets of a push notification sent from the Dapp in the background. 
 This service also needs to be registered in the AndroidManifest.xml file similar to the example in the [FCM documentation](https://firebase.google.com/docs/cloud-messaging/android/client#manifest).
+
+### Where to Go from Here
+
+- View a [guide](../guides/wallet-push-integration.md) for common use cases for wallets that use push notifications.

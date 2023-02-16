@@ -50,6 +50,8 @@ Push.wallet.getActiveSubscriptions()
 
 
 ### Where to Go from Here
+
 - Try our [Wallet App](https://github.com/WalletConnect/WalletConnectSwiftV2/tree/main/Example/WalletApp) and to test notifications.
 - Build API documentation in XCode: go to Product -> Build Documentation
+- View a [guide](../guides/dapp-push-integration.md) for common use cases for dapps that use push notifications.
 

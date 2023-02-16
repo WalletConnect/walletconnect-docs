@@ -105,3 +105,7 @@ PushDappClient.delete(deleteParams) { error ->
 ```
 
 To delete a subscription, pass `Push.Dapp.Params.Delete` with the push topic that is to be deleted. If unsuccessful, an error is returned in the callback.
+
+### Where to Go from Here
+
+- View a [guide](../guides/dapp-push-integration.md) for common use cases for dapps that use push notifications.
