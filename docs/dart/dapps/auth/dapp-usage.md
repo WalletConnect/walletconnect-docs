@@ -19,15 +19,12 @@ AuthClient authClient = await AuthClient.createInstance(
 );
 ```
 
-## Subscribe to `auth_response`
-
-TODO
-
 ## Request Authentication
 
+To request authentication use the `requestAuth` method on the authClient object.
 
 ```dart
-final auth = await wcClient.requestAuth(
+final auth = await authClient.requestAuth(
   params: AuthRequestParams(
     aud: 'http://localhost:3000/login',
     domain: 'localhost:3000',
@@ -37,6 +34,23 @@ final auth = await wcClient.requestAuth(
   ),
   pairingTopic: resp.pairingTopic,
 );
+```
+
+## Handling Session Approval and Rejection
+
+This code shows how to handle session approval and rejection using AuthResponse in a WalletConnect application. It awaits the response and checks for a non-null result to determine approval or rejection.
+
+```dart
+final AuthResponse authResponse = await authResponse.completer.future;
+if (authResponse.result != null) {
+  // Having a result indicates that the signature has been verified.
+}
+else {
+  // Otherwise, you might have received a WalletConnectError if there was an issue verifying the signature.
+  final WalletConnectError? error = authResponse.error;
+  // Or a JsonRpcError if something went wrong when signing with the wallet.
+  final JsonRpcError? error = authResponse.jsonRpcError;
+}
 ```
 
 # To Test
