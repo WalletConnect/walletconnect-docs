@@ -26,7 +26,7 @@ Session requests include a TTL (time to live) value which can extend the default
 
 ## Pairings & Sessions
 
-The newest concept introduced with WalletConnect v2.0 which wasn't present in WalletConnect v1.0 were the pairings. Pairings which are special-purpose sessions used to propose new sessions which have a default lifetime of 30 days. Whenever a QR Code or Deep Link is generated to connect a Dapp and a Wallet it is used to establish a pairing, therefore when a session is expired or terminated it no longer requires clients to pair again if they still have an active pairing.
+The newest concept introduced with WalletConnect v2.0 which wasn't present in WalletConnect v1.0 is the pairings. Pairings which are special-purpose sessions used to propose new sessions which have a default lifetime of 30 days. Whenever a QR Code or Deep Link is generated to connect a Dapp and a Wallet it is used to establish a pairing, therefore when a session is expired or terminated it no longer requires clients to pair again if they still have an active pairing.
 
 Pairings have longer expiration than Sessions because they are meant to be re-used for session proposals and they can request an infinite number of session proposals between Dapps and Wallets
 
