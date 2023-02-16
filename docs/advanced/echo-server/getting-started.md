@@ -25,7 +25,8 @@ Google's FCM allows you to use send notifications to both Android and Apple devi
 
 ### Apple Push Notifications (APNS)
 
-Apple recommends using a Token-Based Connection for APNs over a Certificate-Based connection. Please refer to their documentation for instructions on obtaining either.
+Apple recommends using a Token-Based Connection for APNS over a Certificate-Based connection. Please refer to their documentation for instructions on obtaining either.
+
 - [Token-Based Connection](https://developer.apple.com/documentation/usernotifications/setting_up_a_remote_notification_server/establishing_a_token-based_connection_to_apns) 
 - [Certificate-Based Connection](https://developer.apple.com/documentation/usernotifications/setting_up_a_remote_notification_server/establishing_a_certificate-based_connection_to_apns)
 
