@@ -89,3 +89,7 @@ const message = {
 
 await pushClient.notify({ topic: latestSubscription.topic, message });
 ```
+
+### Where to Go from Here
+
+- View a [guide](../guides/dapps-push-integration.md) for common use cases for dapps that use push notifications.
