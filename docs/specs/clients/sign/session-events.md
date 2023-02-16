@@ -51,7 +51,7 @@ data={[
   },
   {
     event: "proposal_expire",
-    description: "Emitted when the session proposal has expired.",
+    description: "Emitted when a session proposal has expired.",
     whoShouldListen: "Dapps & Wallets"
   }
 ]}
