@@ -38,7 +38,7 @@ final auth = await authClient.requestAuth(
 
 ## Handling Session Approval and Rejection
 
-This code shows how to handle session approval and rejection using AuthResponse in a WalletConnect application. It awaits the response and checks for a non-null result to determine approval or rejection.
+To handle a session approval and rejection using `AuthResponse` await the response and check for a non-null result to determine approval or rejection.
 
 ```dart
 final AuthResponse authResponse = await authResponse.completer.future;
