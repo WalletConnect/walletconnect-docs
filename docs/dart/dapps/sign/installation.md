@@ -8,4 +8,6 @@ Head over to [WalletConnect Cloud](https://cloud.walletconnect.com/) to sign in 
 
 Install the WalletConnect client package.
 
-TODO
+```dart
+flutter pub add walletconnect_flutter_v2
+```
