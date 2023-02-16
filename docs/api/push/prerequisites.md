@@ -1,10 +1,8 @@
 import Container from './../../components/Container';
 
-# Getting Started
+# Prerequisites 
 
 ## Hosted Platform (recommended)
-
-### Prerequisites
 
 1. Create a Project in the Cloud App. Go to [WalletConnect Cloud](https://cloud.walletconnect.com/) and sign up for an account.
 
