@@ -22,7 +22,7 @@ data={[
   {
     event: "session_update",
     description: "Emitted when a session is updated.",
-    whoShouldListen: "Dapps"
+    whoShouldListen: "Dapps & Wallets"
   },
   {
     event: "session_delete",
