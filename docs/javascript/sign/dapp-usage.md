@@ -142,9 +142,7 @@ Sessions are saved to localstorage, meaning that even if the web page is reloade
 
 ```ts
   if (signClient.session.length) {
-    const lastKeyIndex = signClient.session.keys.length - 1;
     // this will be the last session you were connected to
-    const session = signClient.session.get(
-      signClient.session.keys[lastKeyIndex]
-    );
+    const lastKeyIndex = signClient.session.getAll().length - 1;
+    const _session = signClient.session.getAll()[lastKeyIndex];
 ```
