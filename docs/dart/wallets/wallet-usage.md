@@ -20,9 +20,28 @@ Web3Wallet web3Wallet = await Web3Wallet.createInstance(
 
 ```
 
-## Proposal Handling
+## Chain Configuration
 
-For a wallet, setup the proposal handler that will display the proposal to the user after the URI has been scanned.
+Set up the methods and chains that your wallet supports.
+
+```dart
+web3Wallet.registerRequestHandler(
+  namespace: 'kadena',
+  method: 'kadena_sign',
+);
+```
+
+## Pairing
+
+Scan the QR code and parse the URI, and pair with the dapp. Upon the first pairing, you will immediately receive `onSessionProposal` and `onAuthRequest` events.
+
+```dart
+Uri uri = Uri.parse(scannedUriString);
+await web3Wallet.pair(uri: uri);
+```
+## Responding to a Session Proposal
+
+Set up the proposal handler that will display the proposal to the user after the URI has been scanned.
 
 ```dart
 late int id;
@@ -35,8 +54,6 @@ web3Wallet.onSessionProposal.subscribe((SessionProposal? args) async {
 
 ## Responding to Request
 
-Also set up the methods and chains that your wallet supports.
-
 ```dart
 web3Wallet.onSessionRequest.subscribe((SessionRequestEvent? request) async {
   // You can respond to requests in this manner
@@ -48,10 +65,6 @@ web3Wallet.onSessionRequest.subscribe((SessionRequestEvent? request) async {
     ),
   );
 });
-web3Wallet.registerRequestHandler(
-  namespace: 'kadena',
-  method: 'kadena_sign',
-);
 ```
 
 ## Auth Handling
