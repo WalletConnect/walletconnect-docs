@@ -39,6 +39,7 @@ Scan the QR code and parse the URI, and pair with the dapp. Upon the first pairi
 Uri uri = Uri.parse(scannedUriString);
 await web3Wallet.pair(uri: uri);
 ```
+
 ## Responding to a Session Proposal
 
 Set up the proposal handler that will display the proposal to the user after the URI has been scanned.
@@ -85,15 +86,6 @@ clientB.onAuthRequest.subscribe((AuthRequest? args) async {
         ),
     );
 });
-```
-
-## Pairing
-
-Scan the QR code and parse the URI, and pair with the dapp. Upon the first pairing, you will immediately receive `onSessionProposal` and `onAuthRequest` events
-
-```dart
-Uri uri = Uri.parse(scannedUriString);
-await web3Wallet.pair(uri: uri);
 ```
 
 ## Approving the Sign Request
