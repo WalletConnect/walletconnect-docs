@@ -11,9 +11,7 @@ Chat ![Maven Central](https://img.shields.io/maven-central/v/com.walletconnect/c
 * Java 11
 
 ## Installation
-
 root/build.gradle.kts:
-
 ```gradle
 allprojects {
  repositories {
@@ -23,7 +21,7 @@ allprojects {
 }
 ```
 
-app/build.gradle
+app/build.gradle.kts
 
 ```gradle
 implementation("com.walletconnect:android-core:release_version")
