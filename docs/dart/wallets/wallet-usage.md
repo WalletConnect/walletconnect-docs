@@ -5,7 +5,7 @@
 To create an instance of Web3Wallet, you need to pass in the `core` and `metadata` parameters.
 
 ```dart
-Web3Wallet wcClient = await Web3Wallet.createInstance(
+Web3Wallet web3Wallet = await Web3Wallet.createInstance(
   core: Core(
     relayUrl: 'wss://relay.walletconnect.com', // The relay websocket URL
     projectId: '123',
@@ -26,7 +26,7 @@ For a wallet, setup the proposal handler that will display the proposal to the u
 
 ```dart
 late int id;
-wcClient.onSessionProposal.subscribe((SessionProposal? args) async {
+web3Wallet.onSessionProposal.subscribe((SessionProposal? args) async {
   // Handle UI updates using the args.params
   // Keep track of the args.id for the approval response
   id = args!.id;
@@ -38,7 +38,7 @@ wcClient.onSessionProposal.subscribe((SessionProposal? args) async {
 Also set up the methods and chains that your wallet supports.
 
 ```dart
-wcClient.onSessionRequest.subscribe((SessionRequestEvent? request) async {
+web3Wallet.onSessionRequest.subscribe((SessionRequestEvent? request) async {
   // You can respond to requests in this manner
   await clientB.respondSessionRequest(
     topic: request.topic,
@@ -48,7 +48,7 @@ wcClient.onSessionRequest.subscribe((SessionRequestEvent? request) async {
     ),
   );
 });
-wcClient.registerRequestHandler(
+web3Wallet.registerRequestHandler(
   namespace: 'kadena',
   method: 'kadena_sign',
 );
@@ -76,16 +76,16 @@ clientB.onAuthRequest.subscribe((AuthRequest? args) async {
 
 ## Pairing
 
-Scan the QR code and parse the URI, and pair with the dApp. On the first pairing, you will immediately receive `onSessionProposal` and `onAuthRequest` events.
+Scan the QR code and parse the URI, and pair with the dapp. Upon the first pairing, you will immediately receive `onSessionProposal` and `onAuthRequest` events
 
 ```dart
 Uri uri = Uri.parse(scannedUriString);
-await wcClient.pair(uri: uri);
+await web3Wallet.pair(uri: uri);
 ```
 
 ## Approving the Sign Request
 
-Present the UI and to approve.
+Present the UI for approval.
 
 ```dart
 final walletNamespaces = {
@@ -99,7 +99,7 @@ final walletNamespaces = {
         events: ['kadena_transaction_updated'],
     ),
 }
-await wcClient.approve(
+await web3Wallet.approve(
     id: id,
     namespaces: walletNamespaces // This will have the accounts requested in params
 );
@@ -110,7 +110,7 @@ await wcClient.approve(
 To reject the request, pass in an error code and reason. They can be found [here](https://docs.walletconnect.com/2.0/specs/clients/sign/error-codes).
 
 ```dart
-await wcClient.reject(
+await web3Wallet.reject(
     id: id,
     reason: ErrorResponse(
         code: 4001,
@@ -125,7 +125,7 @@ You can approve a dapp's auth request by responding with the user's signature.
 
 ```dart
 String sig = 'your sig here';
-await wcClient.respondAuthRequest(
+await web3Wallet.respondAuthRequest(
   id: args.id,
   iss: 'did:pkh:eip155:1:0x06C6A22feB5f8CcEDA0db0D593e6F26A3611d5fa',
   signature: CacaoSignature(t: CacaoSignature.EIP191, s: sig),
@@ -137,7 +137,7 @@ await wcClient.respondAuthRequest(
 To reject the request, pass in an error code and reason. They can be found [here](https://docs.walletconnect.com/2.0/specs/clients/sign/error-codes).
 
 ```dart
-await wcClient.respondAuthRequest(
+await web3Wallet.respondAuthRequest(
   id: args.id,
   iss: 'did:pkh:eip155:1:0x06C6A22feB5f8CcEDA0db0D593e6F26A3611d5fa',
   error: WalletConnectErrorResponse(code: 12001, message: 'User rejected the signature request'),

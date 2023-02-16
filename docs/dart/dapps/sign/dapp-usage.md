@@ -9,13 +9,13 @@ If you're a wallet looking to incorporarte Sign, please see [Web3Wallet SDK](../
 To create an instance of `SignClient`, you need to pass in the core and metadata parameters.
 
 ```dart
-SignClient wcClient = await SignClient.createInstance(
+SignClient signClient = await SignClient.createInstance(
     core: Core(
         relayUrl: 'wss://relay.walletconnect.com', // The relay websocket URL
         projectId: '123',
     ),
     metadata: PairingMetadata(
-        name: 'dApp (Requester)',
+        name: 'dapp (Requester)',
         description: 'A dapp that can request that transactions be signed',
         url: 'https://walletconnect.com',
         icons: ['https://avatars.githubusercontent.com/u/37784886'],
@@ -28,7 +28,7 @@ SignClient wcClient = await SignClient.createInstance(
 To connect with specific parameters and display the returned URI, use `connect` with the required namespaces.
 
 ```dart
-ConnectResponse resp = await wcClient.connect(
+ConnectResponse response = await signClient.connect(
     requiredNamespaces: {
         'eip155': RequiredNamespace(
             chains: ['eip155:1'], // Ethereum chain
@@ -40,7 +40,8 @@ ConnectResponse resp = await wcClient.connect(
         ),
     }
 );
-Uri? uri = resp.uri;
+
+Uri? uri = response.uri;
 ```
 
 ## Session Data
@@ -48,7 +49,7 @@ Uri? uri = resp.uri;
 Once you've displayed the URI, you can wait for the future and hide the QR code once you've received session data.
 
 ```dart
-final SessionData session = await resp.session.future;
+final SessionData session = await response.session.future;
 ```
 
 ## Request Signatures
@@ -56,7 +57,7 @@ final SessionData session = await resp.session.future;
 Once the session had been created, you can request signatures.
 
 ```dart
-final sig = await wcClient.request(
+final signature = await signClient.request(
     topic: session.topic,
     chainId: 'eip155:1',
     request: SessionRequestParams(
@@ -71,11 +72,11 @@ final sig = await wcClient.request(
 You can also respond to events from the wallet, like chain changed, using `onSessionEvent` and `registerEventHandler`.
 
 ```dart
-wcClient.onSessionEvent.subscribe((SessionEvent? session) {
+signClient.onSessionEvent.subscribe((SessionEvent? session) {
     // Do something with the event
 });
 
-wcClient.registerEventHandler(
+signClient.registerEventHandler(
     namespace: 'kadena',
     method: 'kadena_transaction_updated',
 );

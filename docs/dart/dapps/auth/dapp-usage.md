@@ -5,13 +5,13 @@
 To create an instance of `AuthClient`, you need to pass in the core and metadata parameters.
 
 ```dart
-AuthClient wcClient = await AuthClient.createInstance(
+AuthClient authClient = await AuthClient.createInstance(
     core: Core(
         relayUrl: 'wss://relay.walletconnect.com', // The relay websocket URL
         projectId: '123',
     ),
     metadata: PairingMetadata(
-        name: 'dApp (Requester)',
+        name: 'dapp (Requester)',
         description: 'A dapp that can request that transactions be signed',
         url: 'https://walletconnect.com',
         icons: ['https://avatars.githubusercontent.com/u/37784886'],
