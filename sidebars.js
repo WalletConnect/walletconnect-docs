@@ -459,6 +459,8 @@ module.exports = {
       items: [
         "kotlin/guides/examples-and-resources",
         "kotlin/guides/mobile-linking",
+        "kotlin/guides/dapp-push-integration",
+        "kotlin/guides/wallet-push-integration",
       ],
     },
   ],
@@ -563,6 +565,8 @@ module.exports = {
       items: [
         "swift/guides/examples-and-resources",
         "swift/guides/mobile-linking",
+        "swift/guides/dapp-push-integration",
+        "swift/guides/wallet-push-integration",
       ],
     },
   ],
