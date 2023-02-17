@@ -3,7 +3,11 @@
 Let's say a dapp wants access to Ethereum Mainnet, Polygon, Cosmos Mainnet.
 It specifies the proposed execution environment for each blockchain in the form of namespaces. For example, for Ethereum Mainnet and Polygon, it requires: `eth_sign` method and `accountsChanged` event, and, for Cosmos Mainnet, it requires: `cosmos_signDirect` method and `someCosmosEvent` event. Let's say that Polygon also has a special method `personalSign` and an event `chainChanged` not available in Ethereum Mainnet.
 
-## Example Proposal Namespaces request
+## How Sessions Work
+
+To establish a session, the dApp first sends a session proposal to the wallet. The namespace proposal outlines the methods and events the dApp is seeking permission for. The wallet then evaluates the proposal and, if approved, sends back the session namespace.
+
+## Example Proposal Namespaces Request
 
 ```json
 {
@@ -24,7 +28,7 @@ The Wallet then validates if the received Proposal Namespaces are valid. If they
 
 If the Wallet (or the user) does NOT approve the session, then it is rejected. Otherwise, the Wallet responds with a slightly different namespace schema: Session Namespaces. Instead of having a list of `chains`, it has list of `accounts` compatible with the given methods and events. If the Wallet approves a session proposal, it needs to approve all methods and events of all Proposal Namespaces. If needed, the Wallet can add permissions for more methods and events than the ones requested, but never less.
 
-## Example Session Namespaces response
+## Example Session Namespaces Response
 
 ```json
 {
