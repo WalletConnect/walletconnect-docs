@@ -89,4 +89,4 @@ When two clients are using the peer to peer API for some requests they need to v
 Now that we have generated, authorized and registered Identity Keys we can use them for authentication for different purposes:
 - [Chat Authentication](./chat-authentication.md)
 - [Push Authentication](./push/push-authentication.md)
-- [Chat Invite Keys registration] (./invite-keys.md)
+- [Chat Invite Keys registration](./invite-keys.md)

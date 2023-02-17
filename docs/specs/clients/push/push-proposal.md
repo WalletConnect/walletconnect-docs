@@ -28,6 +28,6 @@ Proposal protocol will be established as follows:
 6. Wallet subscribes to push topic 
 7. Wallet sends proposal response(type1 envelope) on pairing P with subscriptionAuth
 8. Dapp receives proposal response on pairing P
-9. Dapp derives symmetric key and encrupts subscriptionAuth
+9. Dapp derives symmetric key and encrypts subscriptionAuth
 11. Dapp registeres address at the Cast Server. 
  

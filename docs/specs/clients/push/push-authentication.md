@@ -11,5 +11,5 @@ ksu - key server for identity key verification
 aud - dapp's url
 sub - blockchain account that push subscription has been proposed for
 
-Expiry should be calculated from addition of issuance date and and push request tt l (86400 seconds)
+Expiry should be calculated from addition of issuance date and and push request ttl (86400 seconds)
  
