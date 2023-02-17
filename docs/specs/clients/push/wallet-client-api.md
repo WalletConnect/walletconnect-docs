@@ -23,7 +23,7 @@ abstract class WalletClient {
   public abstract deleteSubscription(params: { topic: string }): Promise<void>;
   
   // delete push message
-  public abstract deletePushMessage(params: { id: string }): Promise<void>;
+  public abstract deletePushMessage(params: { id: number }): Promise<void>;
   
   // decrypt push subscription message
   public abstract decryptMessage(topic: string, encryptedMessage: string): Promise<PushMessage>;
