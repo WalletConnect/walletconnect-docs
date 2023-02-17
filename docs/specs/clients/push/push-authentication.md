@@ -2,7 +2,7 @@
 
 Given that a dapp is proposing a push subscription for a blockchain account that client's don't have to authenticate in advence, wallet needs to prove account ownership in Push Subscription response.
 
-This is achieved using WalletConnect Identity keys and did-jwt with following claims:
+This is achieved using [Identity Keys](././servers/keys/identity-keys) and did-jwt with following claims:
 
 iat - timestamp when jwt was issued
 exp - timestamp when jwt must expire

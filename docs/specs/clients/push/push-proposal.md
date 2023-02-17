@@ -26,8 +26,8 @@ Proposal protocol will be established as follows:
 4. Wallet derives symmetric key derived with keys X and Y
 5. Push topic is derived from sha256 hash of symmetric key 
 6. Wallet subscribes to push topic 
-7. Wallet sends proposal response on pairing P with publicKey Y 
+7. Wallet sends proposal response(type1 envelope) on pairing P with subscriptionAuth
 8. Dapp receives proposal response on pairing P
-9. Dapp derives push topic and symmetric key
-10. Dapp subscribes to push topic
+9. Dapp derives symmetric key and encrupts subscriptionAuth
+11. Dapp registeres address at the Cast Server. 
  

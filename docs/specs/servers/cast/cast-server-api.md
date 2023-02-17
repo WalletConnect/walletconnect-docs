@@ -2,7 +2,7 @@
 
 ## Register
 
-Registers an account and push subscription symmetric key
+Registers an account and push subscription symmetric key. `subscriptionAuth` must be attached in the request so the Cast server can verify if wallet proved ownership of an address.
 
 `POST /:project_id/register`
 
@@ -12,6 +12,7 @@ Body:
 {
     "account": string,
     "symKey": string,
+    "subscriptionAuth": string,
     "relayUrl": string
 }
 ```
