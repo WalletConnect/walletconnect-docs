@@ -1,0 +1,15 @@
+# Push Authenticaiton
+
+Given that a dapp is proposing a push subscription for a blockchain account that client's don't have to authenticate in advence, wallet needs to prove account ownership in Push Subscription response.
+
+This is achieved using WalletConnect Identity keys and did-jwt with following claims:
+
+iat - timestamp when jwt was issued
+exp - timestamp when jwt must expire
+iss - did:key of an identity key. Enables to resolve attached blockchain account.
+ksu - key server for identity key verification
+aud - dapp's url
+sub - blockchain account that push subscription has been proposed for
+
+Expiry should be calculated from addition of issuance date and and push request tt l (86400 seconds)
+ 
