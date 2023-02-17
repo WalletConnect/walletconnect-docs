@@ -141,8 +141,28 @@ const result = await signClient.request({
 Sessions are saved to localstorage, meaning that even if the web page is reloaded, the session can still be retrieved, as demonstrated in the following code:
 
 ```ts
-  if (signClient.session.length) {
-    // this will be the last session you were connected to
     const lastKeyIndex = signClient.session.getAll().length - 1;
-    const _session = signClient.session.getAll()[lastKeyIndex];
+    const lastSession = signClient.session.getAll()[lastKeyIndex];
+```
+
+## Finding a Specific Session
+
+If you need to find a specific session, you can do so by passing in a known `requiredNamespace` and calling `find`.
+
+```ts
+const specificSession = _client.find({
+  requiredNamespaces: {
+    eip155: {
+      methods: [
+        "eth_sendTransaction",
+        "eth_signTransaction",
+        "eth_sign",
+        "personal_sign",
+        "eth_signTypedData",
+      ],
+      chains: ["eip155:5"],
+      events: ["chainChanged", "accountsChanged"],
+    },
+  },
+});
 ```
