@@ -1,6 +1,6 @@
 # Identity Keys
 
-Identity Keys are used to verify Blockchain Account ownership and validating peer to peer requests are legitimate.
+Identity Keys are used to verify Blockchain Account ownership and validating peer to peer requests are legitimate without requiring the wallet user to sign every message with their blockchain private key.
 
 ## Short Description
 
@@ -89,7 +89,4 @@ When two clients are using the peer to peer API for some requests they need to v
 Now that we have generated, authorized and registered Identity Keys we can use them for authentication for different purposes:
 - [Chat Authentication](./chat-authentication.md)
 - [Push Authentication](./push/push-authentication.md)
-- [Chat Invite Keys registration] 
-
-
-
+- [Chat Invite Keys registration] (./invite-keys.md)
