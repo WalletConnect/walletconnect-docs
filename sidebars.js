@@ -566,7 +566,7 @@ module.exports = {
       ],
     },
   ],
-  dart: [
+  flutter: [
     {
       type: "category",
       label: "Products",
@@ -579,8 +579,8 @@ module.exports = {
           collapsible: true,
           collapsed: true,
           items: [
-            "dart/wallets/installation",
-            "dart/wallets/wallet-usage",
+            "flutter/wallets/installation",
+            "flutter/wallets/wallet-usage",
           ],
         },
       ],
@@ -597,8 +597,8 @@ module.exports = {
           collapsible: true,
           collapsed: true,
           items: [
-            "dart/dapps/sign/installation",
-            "dart/dapps/sign/dapp-usage"
+            "flutter/dapps/sign/installation",
+            "flutter/dapps/sign/dapp-usage"
           ],
         },
         {
@@ -607,8 +607,8 @@ module.exports = {
           collapsible: true,
           collapsed: true,
           items: [
-            "dart/dapps/auth/installation",
-            "dart/dapps/auth/dapp-usage"
+            "flutter/dapps/auth/installation",
+            "flutter/dapps/auth/dapp-usage"
           ],
         },
       ],

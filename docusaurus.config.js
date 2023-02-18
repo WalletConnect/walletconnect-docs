@@ -97,8 +97,8 @@ const config = {
           {
             type: "docSidebar",
             position: "left",
-            sidebarId: "dart",
-            label: "Dart",
+            sidebarId: "flutter",
+            label: "Flutter",
           },
           {
             type: "docsVersionDropdown",
