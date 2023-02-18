@@ -18,8 +18,8 @@ interface ChatInterface {
 
     interface ChatDelegate {
         fun onInvite(onInvite: Chat.Model.Events.OnInvite)
-        fun onJoined(onJoined: Chat.Model.Events.OnJoined)
-        fun onReject(onReject: Chat.Model.Events.OnReject)
+        fun onInviteAccepted(onInviteAccepted: Chat.Model.Events.OnInviteAccepted)
+        fun onInviteRejected(onInviteRejected: Chat.Model.Events.OnInviteRejected)
         fun onMessage(onMessage: Chat.Model.Events.OnMessage)
         fun onLeft(onLeft: Chat.Model.Events.OnLeft)
         fun onConnectionStateChange(state: Chat.Model.ConnectionState)
@@ -82,11 +82,11 @@ val chatDelegate = object : ChatClient.ChatDelegate {
         // Triggered when a new invite is received
     }
 
-    override fun onJoined(onJoined: Chat.Model.Events.OnJoined) {
+    override fun onInviteAccepted(onInviteAccepted: Chat.Model.Events.OnInviteAccepted) {
         // Triggered when a new chat thread joined
     }
 
-    override fun onReject(onReject: Chat.Model.Events.OnReject) {
+    override fun onInviteRejected(onInviteRejected: Chat.Model.Events.OnInviteRejected) {
         // Triggered when an invite is rejected by the other peer
     }
 
@@ -128,11 +128,11 @@ sealed class Events : Model() {
     //onInvite of onInvite(onInvite)
     data class OnInvite(val invite: Invite.Received) : Events()
     
-    //onJoined of onJoined(onJoined)
-    data class OnJoined(val topic: String) : Events()
+    //onInviteAccepted of onInviteAccepted(onInviteAccepted)
+    data class OnInviteAccepted(val topic: String) : Events()
     
-    //onReject of onReject(onReject)
-    data class OnReject(val topic: String) : Events()
+    //onInviteRejected of onInviteRejected(onInviteRejected)
+    data class OnInviteRejected(val topic: String) : Events()
     
     //onMessage of onMessage(onMessage)
     data class OnMessage(val message: Message) : Events()
@@ -261,7 +261,7 @@ val params = Chat.Params.Reject(inviteId = /*Id of invite received onInvite() ev
 ChatClient.reject(params, onError = { error -> /* Error when rejecting */ })
 ```
 
-Inviter receives invite response on either [`ChatClient.ChatDelegate.onJoined`](#chatclientchatdelegate) when invitee accepted the invite or on [`ChatClient.ChatDelegate.onReject`](#chatclientchatdelegate) when invitee rejected the invite. 
+Inviter receives invite response on either [`ChatClient.ChatDelegate.onInviteAccepted`](#chatclientchatdelegate) when invitee accepted the invite or on [`ChatClient.ChatDelegate.onInviteRejected`](#chatclientchatdelegate) when invitee rejected the invite. 
 
 #### Sending a Chat Message
 
