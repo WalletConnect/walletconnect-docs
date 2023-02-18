@@ -4,13 +4,15 @@ Chat SDK allows E2EE direct messaging between users, using their wallet address.
 
 ## Chat Sample App
 
-We recommend looking at example implementations of Chat Sample at our [Kotlin Github repository](https://github.com/WalletConnect/WalletConnectKotlinV2/tree/develop/chat/sample)
+We recommend looking at example implementations of Chat Sample at our [Kotlin Github repository](https://github.com/WalletConnect/WalletConnectKotlinV2/tree/master/chat/sample)
 
 ## ChatClient
 
-`ChatClient` which implements [`ChatInterface`](#chatinterface) is a object to interact with Chat SDK. It contains asynchronous events informing occurance of an event i.e. received message and methods to use the Chat SDK i.e. sending messages. 
+`ChatClient` is an object that interacts with the Chat SDK and implements the [ChatInterface](#chatinterface). It contains asynchronous events that notify you of occurrences, such as receiving a message, and methods that you can use with the Chat SDK, such as sending messages.
 
-##### ChatInterface
+
+### ChatInterface
+
 ```kotlin
 interface ChatInterface {
 
@@ -70,7 +72,7 @@ ChatClient.initialize(init) { error ->
 }
 ```
 
-To initialize the Chat client, create a `Chat.Params.Init` object in the Android Application class in the `Application.onCreate` method with the Core Client. The `Chat.Params.Init` object will then be passed to the [`ChatClient`](#chatclient) initialize function.
+To initialize the Chat client, create a `Chat.Params.Init` object in the `Application.onCreate` method of the Android Application class with the Core Client. Then, pass the `Chat.Params.Init` object to the [ChatClient](#chatclient) initialization function.
 
 ### ChatClient.ChatDelegate
 
@@ -114,7 +116,7 @@ The ChatClient needs a [`ChatClient.ChatDelegate`](#chatclientchatdelegate) pass
 
 The contents of [`ChatClient.ChatDelegate`](#chatclientchatdelegate) callback functions are of type [`Chat.Model.Events`](#event-structures) for chat specific events and [`Chat.Model.ConnectionState`](#event-structures) or [`Chat.Model.Error`](#event-structures) for Relay Server specific events. 
 
-#### Event structures
+#### Event Structures
 ```kotlin
 // error of onError(error)
 data class Error(val throwable: Throwable) : Model()
@@ -139,7 +141,9 @@ sealed class Events : Model() {
     data class OnLeft(val topic: String) : Events()
 }
 ```
+
 #### Invite.Received
+
 ```kotlin
 // Invite.Received data class from OnInvite event
 data class Received(
@@ -152,7 +156,9 @@ data class Received(
     override val status: Type.InviteStatus,
 ) : Invite
 ```
+
 #### Message
+
 ```kotlin
 // Mesage data class from OnMessage event
 data class Message(
@@ -169,9 +175,11 @@ data class Media(
     val data: Type.MediaData,
 ) : Model()
 ```
+
 ### Methods
 
-#### Register identity at a Keyserver
+
+#### Register Identity at a Keyserver
 
 In order to use Chat SDK account must register identity in [Keyserver](https://docs.walletconnect.com/2.0/specs/servers/keys/). To verify ownership over blockchain account when registering identities in [Keyserver](https://docs.walletconnect.com/2.0/specs/servers/keys/) user's must sign message provided on `onSign(message: String)` callback. Currenlty only [`EIP191`](https://eips.ethereum.org/EIPS/eip-191) signatures are supported in [Keyserver](https://docs.walletconnect.com/2.0/specs/servers/keys/)
 <!-- TODO: Chat milestone 2 remove EIP191 signatures only comment -->
@@ -181,16 +189,16 @@ In order to use Chat SDK account must register identity in [Keyserver](https://d
 val params = Chat.Params.Register(account = Chat.Type.AccountId(/*[CAIP-10](https://github.com/ChainAgnostic/CAIPs/blob/master/CAIPs/caip-10.md) compatible accountId*/))
 ChatClient.register(params, object : Chat.Listeners.Register {
     override fun onSign(message: String): Chat.Model.Cacao.Signature {
-        //Message to be signed. CacaoSigner is a util for easy message signing.
+        // Message to be signed. CacaoSigner is a util for easy message signing.
         return CacaoSigner.sign(message, /*privateKey*/, SignatureType.EIP191)
     }
     
     override fun onError(error: Chat.Model.Error) {
-        //Error while registering an address
+        // Error while registering an address
     }
 
     override fun onSuccess(publicKey: String) {
-        //Identity Key registered succesfully
+        // Identity key registered successfully
     }
 })
 ```
@@ -219,9 +227,9 @@ ChatClient.resolve(params), object : Chat.Listeners.Resolve {
 })
 ```
 
-#### Invite into chat thread
+#### Invite into Chat Thread
 
-Once acquired invitee public key, sending an invite is possible. Invites can contain short messages to convince invitee to accept the invite. To invite call [`ChatClient.invite`](#chatclientinvite) method. Sent invites are stored and can be fetched with [`ChatClient.getSentInvites`](#chatclientgetsentinvites) described in [Getting sent invites section](#getting-sent-invites)
+After acquiring the invitee's public key, you can send an invitation. Invitations can include short messages to encourage the invitee to accept. To send an invitation, use the [ChatClient.invite](#chatclientinvite) method. Sent invitations are stored and can be retrieved using the [ChatClient.getSentInvites](#chatclientgetsentinvites) method, which is described in the [Getting Sent Invitations](#getting-sent-invites) section.
 
 ##### `ChatClient.invite`
 ```kotlin
@@ -233,11 +241,11 @@ ChatClient.invite(
 )
 ```
 
-Invitee receives invites on [`ChatClient.ChatDelegate.onInvite`](#chatclientchatdelegate) callback with necessary data to respond to an invite. Received invites are stored and can be fetched with [`ChatClient.getReceivedInvites`](#chatclientgetreceivedinvites) described in [Getting received invites section](#getting-received-invites)
+The invitee receives invitations via the [ChatClient.ChatDelegate.onInvite](#chatclientchatdelegate) callback, which provides the necessary data to respond to the invitation. Received invitations are stored and can be retrieved using the [ChatClient.getReceivedInvites](#chatclientgetreceivedinvites) method, which is described in the [Getting Received Invitations](#getting-received-invites) section.
 
-#### Accepting and rejecting an invite
+#### Accepting and Rejecting an Invite
 
-Invitee has a option to accept or reject invitation. To accept an invite call [`ChatClient.accept`](#chatclientaccept) method. To reject an invite call [`ChatClient.reject`](#chatclientreject) method
+The invitee has the option to accept or reject the invitation. To accept an invitation, call the [ChatClient.accept](#chatclientaccept) method. To reject an invitation, call the [ChatClient.reject](#chatclientreject) method.
 
 ##### `ChatClient.accept`
 ```kotlin
@@ -255,11 +263,12 @@ ChatClient.reject(params, onError = { error -> /* Error when rejecting */ })
 
 Inviter receives invite response on either [`ChatClient.ChatDelegate.onJoined`](#chatclientchatdelegate) when invitee accepted the invite or on [`ChatClient.ChatDelegate.onReject`](#chatclientchatdelegate) when invitee rejected the invite. 
 
-#### Sending a chat message
+#### Sending a Chat Message
 
 After succesful invite inviter and invitee can E2EE direct messages with attached media. To send message call [`ChatClient.message`](#chatclientmessage) method. 
 
 ##### `ChatClient.message`
+
 ```kotlin
 val threadTopic = /*thread topic*/
 val message = Chat.Type.ChatMessage(message = /* Message string that's 1000 char limited */)
@@ -270,22 +279,24 @@ val params = Chat.Params.Message(threadTopic, message, media)
 ChatClient.message(params) { error -> /* Error while sending a message */ }
 ```
 
-#### Leaving a chat thread
+#### Leaving a Chat Thread
 
 Calling [`ChatClient.leave](#chatclientleave) with a chat thread topic means no longer receiving chat messages, removal of thread in storage and removal of chat messages on given thread in storage.
 
 ##### `ChatClient.leave`
+
 ```kotlin
 val params = Chat.Params.Leave(topic = /* Thread topic*/))
 
 ChatClient.leave(params) { error -> /* Error while leaving a thread */ }
 ```
 
-#### Going private
+#### Going Private
 
-To not be discoverable to everyone, account can decide to remove it's public invite key from Keyserver. Calling [`ChatClient.goPrivate`](#chatclientgoprivate) means no longer listening on incoming invites. 
+If you don't want your account to be discoverable to everyone, you can remove its public invite key from the Keyserver. Calling the [ChatClient.goPrivate](#chatclientgoprivate) method means that your account will no longer listen for incoming invitations.
 
 ##### `ChatClient.goPrivate`
+
 ```kotlin
 val params = Chat.Params.GoPrivate(account = Chat.Type.AccountId(/*[CAIP-10](https://github.com/ChainAgnostic/CAIPs/blob/master/CAIPs/caip-10.md) compatible accountId*/))
 
@@ -296,11 +307,12 @@ ChatClient.goPrivate(
 )
 ```
 
-#### Going public
+#### Going Public
 
-To be discoverable to everyone, account can decide to add it's public invite key from Keyserver. Calling [`ChatClient.goPublic`](#chatclientgopublic) means start listening on incoming invites. 
+If you want your account to be discoverable to everyone, you can add its public invite key to the Keyserver. Calling the [ChatClient.goPublic](#chatclientgopublic) method means that your account will start listening for incoming invitations.
 
 ##### `ChatClient.goPublic`
+
 ```kotlin
 val params = Chat.Params.GoPublic(account = Chat.Type.AccountId(/*[CAIP-10](https://github.com/ChainAgnostic/CAIPs/blob/master/CAIPs/caip-10.md) compatible accountId*/))
 
@@ -311,11 +323,12 @@ ChatClient.goPublic(
 )
 ```
 
-#### Unregistering identity
+#### Unregistering Identity
 
-To opt out of using Chat SDK on device account should call [`ChatClient.unregister`](#chatclientunregister). This removes identity key assigned to the device.
+To stop using the Chat SDK on a device, the account should call the [ChatClient.unregister](#chatclientunregister) method. This removes the identity key that was assigned to the device.
 
 ##### `ChatClient.unregister`
+
 ```kotlin
 val params = Chat.Params.Unegister(account = Chat.Type.AccountId(/*[CAIP-10](https://github.com/ChainAgnostic/CAIPs/blob/master/CAIPs/caip-10.md) compatible accountId*/))
 
@@ -337,12 +350,12 @@ ChatClient.unregister(params, object : Chat.Listeners.Unregister {
 <!-- Add once we implement it -->
 <!-- ### Adding Contact -->
 
+#### Getting Received Invitations
 
-#### Getting received invites
-
-Clients can fetch all received invites for given account by calling [`ChatClient.getReceivedInvites`](#chatclientgetreceivedinvites). [`Invite.Received`](#invitereceived) contain status of type [`Type.InviteStatus`](#typeinvitestatus) to describe whether it's still pending, was rejected or approved. 
+Clients can retrieve all received invitations for a given account by calling [ChatClient.getReceivedInvites](#chatclientgetreceivedinvites). [Invite.Received](#invitereceived) contains a status of type [Type.InviteStatus](#typeinvitestatus) to describe whether the invitation is still pending, was rejected, or has been approved.
 
 ##### Type.InviteStatus
+
 ```kotlin
 enum class InviteStatus : Type { 
     PENDING, // Invite that was not yet responded to
@@ -352,17 +365,19 @@ enum class InviteStatus : Type {
 ```
 
 ##### `ChatClient.getReceivedInvites`
+
 ```kotlin
 val params = Chat.Params.GetReceivedInvites(account = Chat.Type.AccountId(/*[CAIP-10](https://github.com/ChainAgnostic/CAIPs/blob/master/CAIPs/caip-10.md) compatible accountId*/))
 
 val receivedInvites: Map<Long, Chat.Model.Invite.Received> = ChatClient.getReceivedInvites(params)
 ```
 
-#### Getting sent invites
+#### Getting Sent Invites
 
-Clients can fetch all sent invites for given account by calling [`ChatClient.getSentInvites`](#chatclientgetsentinvites). [`Invite.Sent`](#invitesent) contain status of type [`Type.InviteStatus`](#typeinvitestatus-1) to describe whether it's still pending, was rejected or approved. 
+Clients can retrieve all sent invitations for a given account by calling [`ChatClient.getSentInvites`](#chatclientgetsentinvites). [`Invite.Sent`](#invitesent) contains a status of type [`Type.InviteStatus`](#typeinvitestatus-1) to describe whether the invitation is still pending, was rejected, or has been approved.
 
 ##### Type.InviteStatus
+
 ```kotlin
 enum class InviteStatus : Type { 
     PENDING, // Invite that was not yet responded to
@@ -372,6 +387,7 @@ enum class InviteStatus : Type {
 ```
 
 ##### Invite.Sent
+
 ```kotlin
 // Invite.Sent data class
 data class Sent(
@@ -392,11 +408,12 @@ val params = Chat.Params.GetSentInvites(account = Chat.Type.AccountId(/*[CAIP-10
 val sentInvites: Map<Long, Chat.Model.Invite.Sent> = ChatClient.getSentInvites(params)
 ```
 
-#### Getting threads
+#### Getting Threads
 
-Clients can fetch all threads for given acconut by calling [`ChatClient.getThreads`](#chatclientgetthreads). [`Model.Thread`](#modelthread) contains data on what topic two account communicate
+Clients can retrieve all threads for a given account by calling the [ChatClient.getThreads](#chatclientgetthreads) method. The [Model.Thread](#modelthread) object contains data on the topic that two accounts are communicating about.
 
 ##### `Model.Thread`
+
 ```kotlin
 data class Thread(
     val topic: String,
@@ -406,18 +423,19 @@ data class Thread(
 ```
 
 ##### `ChatClient.getThreads`
+
 ```kotlin
 val params = Chat.Params.GetThreads(account = Chat.Type.AccountId(/*[CAIP-10](https://github.com/ChainAgnostic/CAIPs/blob/master/CAIPs/caip-10.md) compatible accountId*/))
 
 val threads: Map<String, Chat.Model.Thread> = ChatClient.getThreads(params)
 ```
 
-#### Getting messages
+#### Getting Messages
 
-
-Clients can fetch all messages for given thread by calling [`ChatClient.getMessages`](#chatclientgetmessages). [`Model.Message`](#modelmessage) contains data neccessary to display a message. [`Model.Media`](#modelmedia) can be attached to message for versatility 
+Clients can fetch all messages for given thread by calling [`ChatClient.getMessages`](#chatclientgetmessages). [`Model.Message`](#modelmessage) contains data neccessary to display a message. [`Model.Media`](#modelmedia) can be attached to message for versatility.
 
 ##### `Model.Message`
+
 ```kotlin
 data class Message(
     val topic: String,
@@ -429,6 +447,7 @@ data class Message(
 ```
 
 ##### `Model.Media`
+
 ```kotlin
 data class Media(
     val type: String,
@@ -437,6 +456,7 @@ data class Media(
 ```
 
 ##### `ChatClient.getMessages`
+
 ```kotlin
 val params = Chat.Params.GetMessages(topic = /*Thread topic*/))
 
