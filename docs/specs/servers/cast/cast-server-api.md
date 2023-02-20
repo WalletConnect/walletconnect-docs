@@ -4,7 +4,7 @@
 
 Registers an account and push subscription symmetric key
 
-`POST /:project_id/register`
+`POST /register`
 
 Body:
 
@@ -20,7 +20,7 @@ Body:
 
 Used to notify a message to a set of accounts
 
-`POST /:project_id/notify`
+`POST /notify`
 
 Body:
 
