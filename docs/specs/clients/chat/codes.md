@@ -3,5 +3,5 @@
 ## Signing
 
 ```sh
-case .signatureRejected return 12001
+case .signatureRejected return 20001
 ```
