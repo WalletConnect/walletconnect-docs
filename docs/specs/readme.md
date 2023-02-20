@@ -50,6 +50,12 @@ In this repository, we document and discuss features that are currently under de
       name: "Cast Server",
       description: "Cast server tracks encryption keys on the behalf of a client and publishes messages to the Relay Server.",
       url: `/2.0/specs/servers/cast`
-    }
+    },
+    {
+      name: "History Server",
+      description: "History server persists Relay messages indefinitely on the behalf of a client through a webhook.",
+      url: `/2.0/specs/servers/history`
+    },
   ]}
 />
+
