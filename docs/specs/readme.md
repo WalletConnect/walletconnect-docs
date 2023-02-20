@@ -37,11 +37,6 @@ In this repository, we document and discuss features that are currently under de
       url: `/2.0/specs/servers/relay`
     },
     {
-      name: "History Server",
-      description: "History server persists Relay messages indefinitely on the behalf of a client through a webhook.",
-      url: `/2.0/specs/servers/history`
-    },
-    {
       name: "Keys Server",
       description: "Keys Server indexes Chat invite keys for discoverability and also verifies identity key ownership.",
       url: `/2.0/specs/servers/keys`
