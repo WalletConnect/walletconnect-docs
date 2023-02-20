@@ -9,7 +9,7 @@ Head over to [WalletConnect Cloud](https://cloud.walletconnect.com/) to sign in 
 ## Add Packages
 
 ```bash npm2yarn
-npm install @web3modal/ethereum @web3modal/html @wagmi/core ethers
+npm install @web3modal/ethereum @web3modal/html @wagmi/core ethers@^5
 ```
 
 ## Import
@@ -32,6 +32,10 @@ import {
 
 See [configuration](../configuration.md) docs for full Web3Modal options list.
 
+:::info
+Minimum version of @wagmi/core 0.9.3 is required to use `version: "2"`
+:::
+
 ```js
 const chains = [arbitrum, mainnet, polygon];
 
@@ -41,7 +45,12 @@ const { provider } = configureChains(chains, [
 ]);
 const wagmiClient = createClient({
   autoConnect: true,
-  connectors: modalConnectors({ appName: "web3Modal", chains }),
+  connectors: modalConnectors({
+    projectId: "<YOUR_PROJECT_ID>",
+    version: "1", // or "2"
+    appName: "web3Modal",
+    chains,
+  }),
   provider,
 });
 

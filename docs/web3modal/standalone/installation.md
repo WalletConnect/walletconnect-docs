@@ -1,5 +1,9 @@
 # Installation
 
+:::info
+Standalone package is for advanced users, you might be looking for [HTML](../html-js/installation.md) or [React](../react/installation.md) packages.
+:::
+
 Special and lightweight standalone mode that allows you to use Web3Modal anywhere, with any chain and any development tool. This comes in useful if you are not using wagmi or already manage other connections for say injected wallets yourself. You are responsible for managing [Sign SDK](../../api/sign.md) and obtaining a pairing uri that can be passed to Web3Modal's open method to display relevant wallets and qr code.
 
 ## Obtain Project ID
@@ -27,6 +31,7 @@ If you do not know your `standaloneChains` in advance, they can be passed later 
 
 ```ts
 const web3Modal = new Web3Modal({
+  walletConnectVersion: 1, // or 2
   projectId: "<YOUR_PROJECT_ID>",
   standaloneChains: ["eip155:1"],
 });
@@ -55,4 +60,5 @@ if (uri) {
 
 ## Examples
 
-React [example](https://github.com/WalletConnect/web3modal/tree/V2/examples/react-standalone)
+- React [example](https://github.com/WalletConnect/web3modal/tree/V2/examples/nextjs-standalone)
+- HTML [example](https://github.com/WalletConnect/web3modal/tree/V2/examples/html-standalone)

@@ -21,7 +21,7 @@ CoreClient.initialize(relayServerUrl = serverUrl, connectionType = connectionTyp
 val init = Sign.Params.Init(core = CoreClient)
 
 SignClient.initialize(init) { error ->
-    // Error will be thrown if there's an isssue during initalization
+    // Error will be thrown if there's an issue during initialization
 }
 ```
 
@@ -71,7 +71,7 @@ val dappDelegate = object : SignClient.DappDelegate {
     }
 }
 
-SignClient.setWalletDelegate(dappDelegate)
+SignClient.setDappDelegate(dappDelegate)
 ```
 
 The SignClient needs a `SignClient.DappDelegate` passed to it for it to be able to expose asynchronously updates sent from the Wallet.

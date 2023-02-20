@@ -10,6 +10,14 @@ This library is compatible with NodeJS, browsers and React-Native applications \
 For an example implementation, please refer to our `react-dapp-v2` [example](https://github.com/WalletConnect/web-examples/tree/main/dapps/react-dapp-v2).
 :::
 
+## Install Packages
+
+Dapps will also need to install `Web3Modal` for the UI.
+
+```bash npm2yarn
+npm install @web3modal/standalone
+```
+
 ## Create a Session
 
 **1. Initiate your WalletConnect client with the relay server, using [your Project ID](../../cloud/relay.md).**
@@ -19,6 +27,8 @@ import SignClient from "@walletconnect/sign-client";
 
 const signClient = await SignClient.init({
   projectId: "<YOUR_PROJECT_ID>",
+  // optional parameters
+  relayUrl: "<YOUR RELAY URL>",
   metadata: {
     name: "Example Dapp",
     description: "Example Dapp",
@@ -53,13 +63,21 @@ signClient.on("session_delete", () => {
 });
 ```
 
-**3. Connect the application and specify session permissions.**
+**3. Create a new Web3Modal instance.**
 
 ```javascript
-import QRCodeModal from "@walletconnect/qrcode-modal";
+import Web3Modal from "@web3modal/standalone";
 
-// ...
+const web3Modal = new Web3Modal({
+  projectId: "<YOUR_PROJECT_ID>",
+  // `standaloneChains` can also be specified when calling `web3Modal.openModal(...)` later on.
+  standaloneChains: ["eip155:1"],
+});
+```
 
+**4. Connect the application and specify session permissions.**
+
+```javascript
 try {
   const { uri, approval } = await signClient.connect({
     // Optionally: pass a known prior pairing (e.g. from `signClient.core.pairing.getPairings()`) to skip the `uri` step.
@@ -82,20 +100,17 @@ try {
 
   // Open QRCode modal if a URI was returned (i.e. we're not connecting an existing pairing).
   if (uri) {
-    QRCodeModal.open(uri, () => {
-      console.log("EVENT", "QR Code Modal closed");
-    });
+    web3Modal.openModal({ uri });
+    // Await session approval from the wallet.
+    const session = await approval();
+    // Handle the returned session (e.g. update UI to "connected" state).
+    // * You will need to create this function *
+    onSessionConnect(session);
+    // Close the QRCode modal in case it was open.
+    web3Modal.closeModal();
   }
-
-  // Await session approval from the wallet.
-  const session = await approval();
-  // Handle the returned session (e.g. update UI to "connected" state).
-  await onSessionConnected(session);
 } catch (e) {
   console.error(e);
-} finally {
-  // Close the QRCode modal in case it was open.
-  QRCodeModal.close();
 }
 ```
 
@@ -120,3 +135,34 @@ const result = await signClient.request({
 ```
 
 > For more information on available JSON-RPC requests, see the [JSON-RPC reference](../../advanced/rpc-reference/ethereum-rpc.md).
+
+## Restoring a Session
+
+Sessions are saved to localstorage, meaning that even if the web page is reloaded, the session can still be retrieved, as demonstrated in the following code:
+
+```ts
+    const lastKeyIndex = signClient.session.getAll().length - 1;
+    const lastSession = signClient.session.getAll()[lastKeyIndex];
+```
+
+## Finding a Specific Session
+
+If you need to find a specific session, you can do so by passing in a known `requiredNamespace` and calling `find`.
+
+```ts
+const specificSession = _client.find({
+  requiredNamespaces: {
+    eip155: {
+      methods: [
+        "eth_sendTransaction",
+        "eth_signTransaction",
+        "eth_sign",
+        "personal_sign",
+        "eth_signTypedData",
+      ],
+      chains: ["eip155:5"],
+      events: ["chainChanged", "accountsChanged"],
+    },
+  },
+});
+```

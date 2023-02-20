@@ -9,8 +9,12 @@ Head over to [WalletConnect Cloud](https://cloud.walletconnect.com/) to sign in 
 ## Add Packages
 
 ```bash npm2yarn
-npm install @web3modal/ethereum @web3modal/react wagmi ethers
+npm install @web3modal/ethereum @web3modal/react wagmi ethers@^5
 ```
+
+:::info
+Ensure to use latest versions for tools like next, react-scripts, babel, webpack etc. to support es2020 features.
+:::
 
 ## Import
 
@@ -32,6 +36,10 @@ import { arbitrum, mainnet, polygon } from "wagmi/chains";
 
 Configure wagmi and Web3Modal clients. Refer to [wagmi](https://wagmi.sh/) docs to see how to set up custom chains, providers and work with their client.
 
+:::info
+Minimum version of wagmi 0.11.3 is required to use `version: "2"`
+:::
+
 ```tsx
 const chains = [arbitrum, mainnet, polygon];
 
@@ -41,7 +49,12 @@ const { provider } = configureChains(chains, [
 ]);
 const wagmiClient = createClient({
   autoConnect: true,
-  connectors: modalConnectors({ appName: "web3Modal", chains }),
+  connectors: modalConnectors({
+    projectId: "<YOUR_PROJECT_ID>",
+    version: "1", // or "2"
+    appName: "web3Modal",
+    chains,
+  }),
   provider,
 });
 
@@ -69,6 +82,16 @@ function App() {
     </>
   );
 }
+```
+
+## Add Connect Wallet Button
+
+```tsx
+import { Web3Button } from "@web3modal/react";
+
+export const YourApp = () => {
+  return <Web3Button />;
+};
 ```
 
 ## Usage

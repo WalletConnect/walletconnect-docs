@@ -5,12 +5,17 @@
 Programmatically open the modal.
 
 ```js
-web3modal.openModal();
+interface Options {
+  uri?: string
+  standaloneChains?: string[]
+  route?: 'Account' | 'ConnectWallet' | 'Help' | 'SelectNetwork'
+}
+await web3modal.openModal(options?: Options);
 ```
 
 ## web3modal.closeModal
 
-Programmatically open the modal.
+Programmatically close the modal.
 
 ```js
 web3modal.closeModal();
@@ -21,7 +26,7 @@ web3modal.closeModal();
 Subscribe or unsubscribe from modal's state.
 
 ```js
-const usnubscribe = web3modal.subscribeModal((newState) =>
+const unsubscribe = web3modal.subscribeModal((newState) =>
   console.log(newState)
 );
 unsubscribe();

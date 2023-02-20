@@ -1,10 +1,12 @@
 # Configuration
 
+Web3Modal is configurable via combination of options below and [wagmi.sh](https://wagmi.sh).
+
 ## General Options
 
-### projectId (optional)
+### projectId (required)
 
-Your project’s unique identifier that can be obtained at [cloud.walletconnect.com](https://cloud.walletconnect.com). Providing this enables the following functionalities within Web3Modal: wallet and chain logos, optional walletconnect rpc, support for all wallets from [explorer.walletconnect.com](https://explorer.walletconnect.com). Defaults to `undefined`.
+Your project’s unique identifier that can be obtained at [cloud.walletconnect.com](https://cloud.walletconnect.com). Enables following functionalities within Web3Modal: wallet and chain logos, optional walletconnect rpc, support for all wallets from [explorer.walletconnect.com](https://explorer.walletconnect.com) and WalletConnect v2 support. Defaults to `undefined`.
 
 ```ts
 projectId: string;
@@ -70,12 +72,83 @@ chainImages: [
 ];
 ```
 
+### tokenImages (optional)
+
+Array of token symbols and their logo mappings. Defaults to `undefined`.
+
+```ts
+tokenImages: [
+  {
+    ETH: "/images/eth.webp",
+    AVAX: "/images/avax.webp",
+  },
+];
+```
+
+### defaultChain (optional)
+
+Before the user establishes a connection, the default wagmi chain can be set. This defaults to the `mainnet` if configured, or the first chain in the array of all available wagmi chains. Once the user is connected, utilize the network actions provided by wagmi.
+
+```ts
+defaultChain: polygon;
+```
+
+### explorerAllowList (optional)
+
+Some wallet data in Web3Modal is fetched from our explorer api [explorer.walletconnect.com](https://explorer.walletconnect.com/?type=wallet). You can define an allow list only for the wallets that you want to be shown. Allow list is an array of wallet id's. You can get / copy these id's from the explorer link mentioned before. Defaults to `undefined`.
+
+```ts
+explorerAllowList: [
+  // rainbow
+  "1ae92b26df02f0abca6304df07debccd18262fdf5fe82daa81593582dac9a369",
+  // trust
+  "4622a2b2d6af1c9844944291e5e7351a6aa24cd7b23099efac1b2fd875da31a0",
+];
+```
+
+### explorerDenyList (optional)
+
+Some wallet data in Web3Modal is fetched from our explorer api [explorer.walletconnect.com](https://explorer.walletconnect.com/?type=wallet). You can define a deny list for the wallets that you want to be excluded. Deny list is an array of wallet id's. You can get / copy these id's from the explorer link mentioned before. Defaults to `undefined`.
+
+```ts
+explorerDenyList: [
+  // rainbow
+  "1ae92b26df02f0abca6304df07debccd18262fdf5fe82daa81593582dac9a369",
+  // trust
+  "4622a2b2d6af1c9844944291e5e7351a6aa24cd7b23099efac1b2fd875da31a0",
+];
+```
+
 ### enableNetworkView (optional)
 
-If more than 1 chain was provided in modal or wagmi configuration users will be show network selection view before selecting a wallet, this option can enable or disable this behavior. Defaults to `true`
+If more than 1 chain was provided in modal or wagmi configuration users will be show network selection view before selecting a wallet, this option can enable or disable this behavior. Defaults to `false`
 
 ```ts
 enableNetworkView: true;
+```
+
+### enableAccountView (optional)
+
+Option to enable or disable the modal's account view. The default setting is set to `true`.
+
+```ts
+enableAccountView: false;
+```
+
+### termsOfServiceUrl (optional)
+
+String url to your terms of service page, if specified will append special "legal info" footer to the modal. Defaults to `undefined`
+
+```ts
+termsOfServiceUrl: "https://example.com/terms-and-conditions";
+```
+
+### privacyPolicyUrl (optional)
+
+String url to your privacy policy page, if specified will append special "legal info" footer to the modal. Defaults to `undefined`
+
+```ts
+privacyPolicyUrl: "https://example.com/privacy-policy";
 ```
 
 ## Theming Options
@@ -111,6 +184,14 @@ Changes Web3Modal's background to animated gradient or solid color. Defaults to 
 themeBackground: "gradient" | "themeColor";
 ```
 
+### themeZIndex (optional)
+
+Changes Web3Modal's z-index. Defaults to `89`.
+
+```ts
+themeZIndex: 9999;
+```
+
 ## Standalone Mode Options
 
 ### standaloneChains (optional)
@@ -128,4 +209,4 @@ standaloneChains: [
 
 ## Wagmi Options
 
-If you are also using wagmi, all standard wagmi configuration properties for chains, connectors and providers are also supported. We do however require `WalletConnectConnector` to always be present. Make sure to check out their [documentation](https://wagmi.sh/) for more info.
+All standard wagmi configuration properties for chains, connectors and providers are also supported. We do however require `WalletConnectConnector` to always be present. Make sure to check out their [documentation](https://wagmi.sh/) for more info.

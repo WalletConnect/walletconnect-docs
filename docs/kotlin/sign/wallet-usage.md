@@ -21,7 +21,7 @@ CoreClient.initialize(relayServerUrl = serverUrl, connectionType = connectionTyp
 val init = Sign.Params.Init(core = CoreClient)
 
 SignClient.initialize(init) { error ->
-    // Error will be thrown if there's an isssue during initalization
+    // Error will be thrown if there's an issue during initialization
 }
 ```
 
@@ -180,7 +180,7 @@ to `SignClient.Update`.
 val sessionTopic: String = /*Topic of Session*/
 val extendParams = Sign.Params.Extend(sessionTopic = sessionTopic)
 
-WalletConnectClient.extend(exdendParams) { error -> /*callback for error while extending a session*/ }
+SignClient.extend(extendParams) { error -> /*callback for error while extending a session*/ }
 ```
 
 To extend a session, create a `Sign.Params.Extend` object with the session's topic to update the session with to `Sign.Extend`. Session is
@@ -203,7 +203,7 @@ val listener = object : Sign.Listeners.SessionPing {
     }
 }
 
-WalletConnectClient.ping(pingParams, listener)
+SignClient.ping(pingParams, listener)
 ```
 
 To ping a peer with a session, call `SignClient.ping` with the `Sign.Params.Ping` with a session's topic. If ping is successful, topic is

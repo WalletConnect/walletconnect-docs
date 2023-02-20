@@ -6,8 +6,8 @@
 interface RequestParams {
   chainId: string;
   domain: string;
-  nonce: string;
   aud: string;
+  nonce: string;
   type?: string;
   nbf?: string;
   exp?: string;
@@ -59,7 +59,7 @@ interface PendingRequest {
 }
 ```
 
-## Cacao Header (CAIP-70)
+## Cacao Header ([CAIP-74](https://github.com/ChainAgnostic/CAIPs/blob/master/CAIPs/caip-74.md))
 
 ```typescript
 interface CacaoHeader {
@@ -67,7 +67,7 @@ interface CacaoHeader {
 }
 ```
 
-## Cacao Payload (CAIP-70)
+## Cacao Payload ([CAIP-74](https://github.com/ChainAgnostic/CAIPs/blob/master/CAIPs/caip-74.md))
 
 ```typescript
 interface CacaoPayload {
@@ -85,7 +85,7 @@ interface CacaoPayload {
 }
 ```
 
-## Cacao Signature (CAIP-70)
+## Cacao Signature ([CAIP-74](https://github.com/ChainAgnostic/CAIPs/blob/master/CAIPs/caip-74.md))
 
 ```typescript
 interface CacaoSignature {
@@ -95,7 +95,7 @@ interface CacaoSignature {
 }
 ```
 
-## Cacao (CAIP-70)
+## Cacao ([CAIP-74](https://github.com/ChainAgnostic/CAIPs/blob/master/CAIPs/caip-74.md))
 
 ```typescript
 interface Cacao {

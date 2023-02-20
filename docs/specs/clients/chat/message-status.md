@@ -20,4 +20,4 @@ A message is considered published from the moment the Relay API has received ack
 
 ## Delivered
 
-A message is considered delivered from the moment the peer has sent a corresponding response to the wc_chatMessage request as acknowledgement of message receipt.
+A message is considered delivered from the moment the peer has sent a corresponding response to the wc_chatMessage request as a message receipt.
