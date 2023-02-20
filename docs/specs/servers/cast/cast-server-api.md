@@ -41,7 +41,15 @@ Response:
 ```jsonc
 {
   "sent": string[],
-  "failed": string[][],
+  "failed": Failed[],
   "notFound": string[]
+}
+```
+
+Failed
+```jsonc
+{
+  "account": string,
+  "reason": string
 }
 ```
