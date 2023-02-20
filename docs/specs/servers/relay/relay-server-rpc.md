@@ -232,6 +232,7 @@ Used when a client wants to fetch all undelivered messages matching multiple top
 {
   "topic": string,
   "message": string,
+  "publishedAt": Int64,
 }
 
 // Request (client->server)
