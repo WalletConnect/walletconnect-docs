@@ -41,6 +41,17 @@ Used to set a new value to a new or existing key in the synced store for the pub
 
 ```
 
+**Response**
+
+```jsonc
+// Success result
+true
+| IRN     |          |
+| ------- | -------- |
+| TTL     | 2592000  |
+| Tag     | 5001     |
+```
+
 
 ### wc_syncDel
 
@@ -58,6 +69,18 @@ Used to delete a key-value pair in the synced store for the published topic. Thi
 | ------- | -------- |
 | TTL     | 2592000  |
 | Prompt  | false    |
-| Tag     | 5001     |
+| Tag     | 5002     |
 
 ```
+
+**Response**
+
+```jsonc
+// Success result
+true
+| IRN     |          |
+| ------- | -------- |
+| TTL     | 2592000  |
+| Tag     | 5001     |
+```
+
