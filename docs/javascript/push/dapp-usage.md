@@ -73,7 +73,7 @@ const id = await pushDappClient.request({
 
 :::info
 
-- Once `PushDappClient` receives an accepted push subscription request from the wallet, it will automatically attempt to register the push subscription with the Cast server at `https://cast.walletconnect.com`.
+- Once `PushDappClient` receives an accepted push subscription from the wallet, it will automatically attempt to register the push subscription with the Cast server at `https://cast.walletconnect.com`.
 - The **Cast server's purpose is to allow the dapp to send push messages** to the wallet, **even when there is no active websocket connection**.
 
 :::
@@ -83,7 +83,8 @@ const id = await pushDappClient.request({
 In order to send a push notification via the Cast server, we can send a `POST` request to the `/notify` endpoint, with the following payload (here via `fetch`):
 
 ```javascript
-// Construct the payload, including the target `accounts` that should receive the push notification.
+// Construct the payload, including the target `accounts`
+// that should receive the push notification.
 const notificationPayload = {
   accounts: ["eip155:1:0xafeb..."],
   message: {
@@ -94,8 +95,9 @@ const notificationPayload = {
   },
 };
 
-// We can construct the URL to the Cast server using the `castUrl` property of the `PushClient`
-// (which will be `https://cast.walletconnect.com` by default), together with our Project ID.
+// We can construct the URL to the Cast server using the `castUrl` property
+// of the `PushClient` (which will be `https://cast.walletconnect.com` by default),
+// together with our Project ID.
 const result = await fetch(`${pushClient.castUrl}/${YOUR_PROJECT_ID}/notify`, {
   method: "POST",
   headers: {
