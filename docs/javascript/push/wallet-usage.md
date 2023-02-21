@@ -8,8 +8,8 @@ Its public API and associated documentation may still see breaking changes.
 
 ## Prerequisites
 
-The PushClient should be used alongside the [Sign SDK](../sign/installation.md) or the
-[Auth SDK](../auth/installation.md), via the [Shared Core](../guides/shared-core.md) setup.
+The **PushWalletClient requires an existing pairing** in order to receive a push subscription request from a dapp.
+This means that the PushClient should be used alongside the [Web3Wallet SDK](../web3wallet/installation.md), via the [Shared Core](../guides/shared-core.md) setup.
 
 ## Usage
 

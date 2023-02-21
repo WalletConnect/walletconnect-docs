@@ -8,8 +8,8 @@ Its public API and associated documentation may still see breaking changes.
 
 ## Prerequisites
 
-The **PushClient consumes an existing pairing** in order to send a push subscription request to the wallet.
-This means that the PushClient should be used alongside the [Sign SDK](../sign/installation.md) or the
+The **`PushDappClient` requires an existing pairing** in order to send a push subscription request to the wallet.
+This means that the `PushDappClient` should be used alongside the [Sign SDK](../sign/installation.md) or the
 [Auth SDK](../auth/installation.md), via the [Shared Core](../guides/shared-core.md) setup.
 
 ## Usage
