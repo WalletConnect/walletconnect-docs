@@ -6,7 +6,7 @@ description: Tezos JSON-RPC Methods
 
 ## tezos_getAccounts
 
-This method returns an array of keypairs available to sign from the wallet.
+This method returns an array of public keys, which correspond to keypairs available in the wallet for signing.
 
 ### Parameters
 
@@ -47,7 +47,7 @@ This method returns an array of keypairs available to sign from the wallet.
 
 ## tezos_send
 
-This method returns a signature for the provided operations. It will be signed by the keypair corresponding to the requested signer address.
+This method returns a hash for the provided operations. They will be signed by the keypair corresponding to the requested signer address and sent to the blockchain.
 
 ### Parameters
 
@@ -57,7 +57,7 @@ This method returns a signature for the provided operations. It will be signed b
     		1.2.1. `Object` - identifier of blockchain
                 1.2.1.1. `kind` : `STRING` - type of the transaction
                 1.2.1.2. `destination` : `STRING` - recipient of the transaction
-                1.2.1.3. `amount` : `STRING` - tez amount
+                1.2.1.3. `amount` : `STRING` - mutez amount
                 1.2.1.4. `source` : `STRING` - (optional) transaction origin
                 1.2.1.5. `fee` : `STRING` - (optional) transaction fee
                 1.2.1.6. `counter` : `STRING` - (optional) integer of a counter
@@ -109,8 +109,7 @@ This method returns a signature for the provided payload. It will be signed by t
 
     1. `Object` - Signing parameters:
     	1.1. `account` : `STRING` - corresponding address for keypair
-    	1.2. `expression` : `STRING` - payload to be signed
-        1.3. `signingType` : `STRING` - type of the payload ('raw' | 'operation' | 'micheline')
+    	1.2. `payload` : `STRING` - payload to be signed
 
 ### Returns
 
@@ -127,8 +126,7 @@ This method returns a signature for the provided payload. It will be signed by t
     "method": "tezos_sign",
     "params": {
         "account": "tz1VQA4RP4fLjEEMW2FR4pE9kAg5abb5h5GL",
-        "expression": "05010000004254",
-        "signingType": "micheline"
+        "payload": "05010000004254",
     }
 }
 
