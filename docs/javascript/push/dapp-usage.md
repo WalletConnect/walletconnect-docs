@@ -18,6 +18,7 @@ This means that the `PushDappClient` should be used alongside the [Sign SDK](../
 
 ```javascript
 import { Core } from "@walletconnect/core";
+import SignClient from "@walletconnect/sign-client";
 import { DappClient as PushDappClient } from "@walletconnect/push-client";
 
 const core = new Core({
@@ -35,9 +36,9 @@ const signClient = await SignClient.init({
 const pushDappClient = await PushDappClient.init({
   core,
   metadata: {
-    name: "my-push-dapp-client",
+    name: "My Push-Enabled Dapp",
     description: "A dapp using WalletConnect PushClient",
-    url: "my-push-dapp-client.com",
+    url: "https://my-dapp.com",
     icons: ["https://my-dapp.com/icons/logo.png"],
   },
 });
@@ -96,15 +97,18 @@ const notificationPayload = {
 };
 
 // We can construct the URL to the Cast server using the `castUrl` property
-// of the `PushClient` (which will be `https://cast.walletconnect.com` by default),
+// of the `PushDappClient` (which will be `https://cast.walletconnect.com` by default),
 // together with our Project ID.
-const result = await fetch(`${pushClient.castUrl}/${YOUR_PROJECT_ID}/notify`, {
-  method: "POST",
-  headers: {
-    "Content-Type": "application/json",
-  },
-  body: JSON.stringify(notificationPayload),
-});
+const result = await fetch(
+  `${pushDappClient.castUrl}/${YOUR_PROJECT_ID}/notify`,
+  {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(notificationPayload),
+  }
+);
 
 await result.json(); // { "sent": ["eip155:1:0xafeb..."], "failed": [], "not_found": [] }
 ```

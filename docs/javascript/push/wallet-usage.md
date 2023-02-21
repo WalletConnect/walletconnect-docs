@@ -8,8 +8,8 @@ Its public API and associated documentation may still see breaking changes.
 
 ## Prerequisites
 
-The **PushWalletClient requires an existing pairing** in order to receive a push subscription request from a dapp.
-This means that the PushClient should be used alongside the [Web3Wallet SDK](../web3wallet/installation.md), via the [Shared Core](../guides/shared-core.md) setup.
+The **`PushWalletClient` requires an existing pairing** in order to receive a push subscription request from a dapp.
+This means that the `PushWalletClient` should be used alongside the [Web3Wallet SDK](../web3wallet/installation.md), via the [Shared Core](../guides/shared-core.md) setup.
 
 ## Usage
 
@@ -32,12 +32,12 @@ const web3wallet = await Web3Wallet.init({
   },
 });
 
-const pushClient = await PushWalletClient.init({
+const pushWalletClient = await PushWalletClient.init({
   core, // <- pass the shared `core` instance
   metadata: {
-    name: "my-push-wallet-client",
+    name: "My Push-Enabled Wallet",
     description: "A wallet using WalletConnect PushClient",
-    url: "my-push-wallet-client.com",
+    url: "https://my-wallet.com",
     icons: ["https://my-wallet.com/icons/logo.png"],
   },
 });
@@ -46,12 +46,12 @@ const pushClient = await PushWalletClient.init({
 **2. Add listeners for relevant push events**
 
 ```javascript
-pushClient.on("push_request", async ({ id, topic, params }) => {
+pushWalletClient.on("push_request", async ({ id, topic, params }) => {
   const { metadata, account } = params;
   // e.g. show a notification to the user, asking them to accept the push subscription request.
 });
 
-pushClient.on("push_message", async ({ params }) => {
+pushWalletClient.on("push_message", async ({ params }) => {
   const { message } = params;
   // e.g. build a notification using the metadata from `message` and show to the user.
 });
@@ -60,12 +60,12 @@ pushClient.on("push_message", async ({ params }) => {
 **3. Accept or reject incoming push subscription requests**
 
 ```javascript
-pushClient.on("push_request", async ({ id, topic, params }) => {
+pushWalletClient.on("push_request", async ({ id, topic, params }) => {
   // Show a notification to the user with the requesting dapp's metadata, asking them to accept the push subscription request.
   const userAccepted = await showNotificationToUser(params.metadata);
   if (userAccepted) {
-    await pushClient.approve({ id });
+    await pushWalletClient.approve({ id });
   } else {
-    await pushClient.reject({ id, reason: "User rejected push subscription request" });
+    await pushWalletClient.reject({ id, reason: "User rejected push subscription request" });
   }
 ```
