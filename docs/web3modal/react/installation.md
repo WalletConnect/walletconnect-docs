@@ -100,5 +100,5 @@ See [hooks](./hooks.md) and [components](components.md) docs for further instruc
 
 ## Examples
 
-- Full NextJS [example](https://github.com/WalletConnect/web3modal/tree/V2/examples/react)
-- Standalone NextJS [example](https://github.com/WalletConnect/web3modal/tree/V2/examples/react-standalone)
+- Full NextJS [example](https://github.com/WalletConnect/web3modal/tree/V2/examples/nextjs)
+- Standalone NextJS [example](https://github.com/WalletConnect/web3modal/tree/V2/examples/nextjs-standalone)
