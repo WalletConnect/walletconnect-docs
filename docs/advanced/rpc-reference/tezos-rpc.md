@@ -126,7 +126,7 @@ This method returns a signature for the provided payload. It will be signed by t
     "jsonrpc": "2.0",
     "method": "tezos_sign",
     "params": {
-        "signerAddress": "tz1VQA4RP4fLjEEMW2FR4pE9kAg5abb5h5GL",
+        "account": "tz1VQA4RP4fLjEEMW2FR4pE9kAg5abb5h5GL",
         "expression": "05010000004254",
         "signingType": "micheline"
     }
