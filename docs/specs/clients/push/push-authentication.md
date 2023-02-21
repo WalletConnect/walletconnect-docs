@@ -8,7 +8,7 @@ iat - timestamp when jwt was issued
 exp - timestamp when jwt must expire
 iss - did:key of an identity key. Enables to resolve attached blockchain account.
 ksu - key server for identity key verification
-aud - The Cast Server url / projectID
+aud - dapp's url
 sub - blockchain account that push subscription has been proposed for (did:pkh)
 
 Expiry should be calculated from addition of issuance date and and push request ttl (86400 seconds)

@@ -31,9 +31,7 @@ Used to request push subscription to a peer through topic P. Response is expecte
 // wc_pushRequest params
 {
   "publicKey": string,
-  "aud": string,
   "metadata": Metadata,
-  "account": string,
 }
 
 | IRN     |          |
