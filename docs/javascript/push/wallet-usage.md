@@ -17,22 +17,23 @@ This means that the PushClient should be used alongside the [Web3Wallet SDK](../
 
 ```javascript
 import { Core } from "@walletconnect/core";
+import { Web3Wallet } from "@walletconnect/web3wallet";
 import { WalletClient as PushWalletClient } from "@walletconnect/push-client";
 
 const core = new Core({
   projectId: "<YOUR_PROJECT_ID>",
 });
 
-// e.g. for SignClient. See the "Shared Core" guide linked above for details.
-const signClient = await SignClient.init({
-  core,
+// e.g. for Web3Wallet. See the "Shared Core" guide linked above for details.
+const web3wallet = await Web3Wallet.init({
+  core, // <- pass the shared `core` instance
   metadata: {
     /* ... */
   },
 });
 
 const pushClient = await PushWalletClient.init({
-  core,
+  core, // <- pass the shared `core` instance
   metadata: {
     name: "my-push-wallet-client",
     description: "A wallet using WalletConnect PushClient",
@@ -46,13 +47,12 @@ const pushClient = await PushWalletClient.init({
 
 ```javascript
 pushClient.on("push_request", async ({ id, topic, params }) => {
+  const { metadata, account } = params;
   // e.g. show a notification to the user, asking them to accept the push subscription request.
 });
 
-pushClient.on("push_message", async (event) => {
-  const {
-    params: { message },
-  } = event;
+pushClient.on("push_message", async ({ params }) => {
+  const { message } = params;
   // e.g. build a notification using the metadata from `message` and show to the user.
 });
 ```
