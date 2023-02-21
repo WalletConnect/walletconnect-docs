@@ -4,7 +4,7 @@
 
 ### Register Invite Key
 
-Used to register a new invite key. `idAuth` is did jwt of claims described under section [Key Authentication](/docs/specs/clients/chat/chat-identity-keys.md)
+Used to register a new invite key. `idAuth` is did jwt of claims described under section [Key Authentication](./identity-keys.md)
 
 `POST /invite`
 
@@ -87,7 +87,7 @@ Used to get an invite key for an account
 
 ### Remove Invite Key
 
-Used to remove an invite key from the server. `idAuth` is did jwt of claims described under section [Key Authentication](/docs/specs/clients/chat/chat-identity-keys.md)
+Used to remove an invite key from the server. `idAuth` is did jwt of claims described under section [Key Authentication](./identity-keys.md)
 
 `DELETE /invite`
 
