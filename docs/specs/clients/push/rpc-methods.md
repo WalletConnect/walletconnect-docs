@@ -32,6 +32,7 @@ Used to request push subscription to a peer through topic P. Response is expecte
 {
   "publicKey": string,
   "metadata": Metadata,
+  "account": string,
 }
 
 | IRN     |          |
