@@ -18,7 +18,7 @@ abstract class Client {
   public abstract register(params: {
     account: string;
     private?: boolean;
-    onSign: Promise<Cacao.Signature>
+    onSign: (message: string) => Promise<Cacao.Signature>
   }): Promise<string>;
 
   // - unregisters a blockchain account with previously registered identity key 
