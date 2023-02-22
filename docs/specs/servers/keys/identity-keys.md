@@ -82,7 +82,7 @@ Resources:
 
 ## Key Registration
 
-When two clients are using the peer to peer API for some requests they need to verify each others Identity Keys. Therefore we use the Keys Server to index these keys privately and the counter-party can validate that the key would be used for the corresponding account in the WalletConnect identities.
+When two clients are using a peer to peer API for some requests they need to verify each others Identity Keys. Therefore we use the Keys Server to index these keys privately and the counter-party can validate that the key would be used for the corresponding account in the WalletConnect identities.
 
 ## Authentication
 
