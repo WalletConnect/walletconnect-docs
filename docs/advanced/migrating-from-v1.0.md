@@ -99,7 +99,8 @@ When ready to transition bump the `@web3-onboard/walletconnect` package version 
 *note: The `@web3-onboard/walletconnect` package will default to version 1 until the WC v1 sunset is complete*
 
 
-#### For Dynamic integrations
+#### For Dynamic Integrations
+
 Switching to v2 is straightforward using [Dynamic](https://www.dynamic.xyz/). To upgrade, ensure you are using v0.15 or later of `@dynamic-labs/sdk-react` . Once set up, visit your Dynamic developer dashboard and head to the integrations page. Select the WalletConnect card, toggle v2 on and add your WalletConnect `project ID`. Once enabled, Dynamic will automatically use WalletConnect v2 for wallets that support it, and v1 for wallets that don’t.
 
 
