@@ -34,7 +34,19 @@ final auth = await authClient.requestAuth(
   ),
   pairingTopic: resp.pairingTopic,
 );
+
+final uri = auth.uri;
 ```
+
+The `uri` can then be displayed as a QRCode or as a deep link.
+
+**Example deep link (preferred for desktop wallets):**
+
+`mywallet://wc?uri={uri}`
+
+**Example universal link (preferred for mobile wallets):**
+
+`https://mywallet.com/wc?uri={uri}`
 
 ## Handling Session Approval and Rejection
 
