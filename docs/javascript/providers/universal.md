@@ -60,27 +60,27 @@ const web3Provider = new ethers.providers.Web3Provider(provider);
 ```typescript
 // Subscribe for pairing URI
 provider.on("display_uri", (uri) => {
-  console.log(uri);
+  console.log("display_uri", uri);
 });
 
 // Subscribe to session ping
 provider.on("session_ping", ({ id, topic }) => {
-  console.log(id, topic);
+  console.log("session_ping", id, topic);
 });
 
 // Subscribe to session event
 provider.on("session_event", ({ event, chainId }) => {
-  console.log(event, chainId);
+  console.log("session_event", event, chainId);
 });
 
 // Subscribe to session update
 provider.on("session_update", ({ topic, params }) => {
-  console.log(topic, params);
+  console.log("session_update", topic, params);
 });
 
 // Subscribe to session delete
 provider.on("session_delete", ({ id, topic }) => {
-  console.log(id, topic);
+  console.log("session_delete", id, topic);
 });
 ```
 
