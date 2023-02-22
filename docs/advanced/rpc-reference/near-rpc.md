@@ -170,6 +170,7 @@ Sign a list of transactions. It makes use of [near-api-js](https://github.com/ne
     	1.1. `transactions` : `Array<Uint8Array>` - Array of Encoded Transaction via transactions.Transaction.encode()
 
 ### Returns
+The result of `signTransactions` and are encoded [SignedTransaction](https://nomicon.io/RuntimeSpec/Transactions#signed-transaction) models.
 
     1. `Array<Uint8Array>` - Array of Encoded SignedTransaction via transactions.SignedTransaction.encode()
 
