@@ -4,7 +4,7 @@ Identity Keys are used to verify Blockchain Account ownership and validating pee
 
 ## Short Description
 
-These are randomly generated ed25519 key pairs that are only present one per client. The Wallet user signs a CAIP-122 message to generate a CACAO that authorizes the client's identity key to sign messages on the behalf of the Blockchain Account
+These are randomly generated ed25519 key pairs that are only present one per client. The Wallet user signs a CAIP-122 message to generate a CACAO that authorizes the client's identity key to sign messages on the behalf of the Blockchain Account.
 
 ## Key Authorization
 
