@@ -21,7 +21,7 @@ Wallet and Dapp are required to establish pairing P before proceeding to Push pr
 Proposal protocol will be established as follows:
 
 1. Dapp sends push proposal on pairing P with public key X, relay and metadata
-2. Dapp subscribes to response topic, which is sha256 of a public key X
+2. Dapp subscribes to response topic, which is the sha256 hash of public key X
 3. Wallet receives push proposal with public key X on pairing P
 4. Wallet generates key pair Y
 5. Wallet derives symmetric key with keys X and Y
