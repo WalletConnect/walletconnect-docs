@@ -21,7 +21,7 @@ AuthClient authClient = await AuthClient.createInstance(
 
 ## Request Authentication
 
-To request authentication use the `requestAuth` method on the authClient object.
+To request authentication use the `requestAuth` method on the `authClient` object.
 
 ```dart
 final auth = await authClient.requestAuth(
@@ -44,6 +44,9 @@ To handle a session approval and rejection using `AuthResponse` await the respon
 final AuthResponse authResponse = await authResponse.completer.future;
 if (authResponse.result != null) {
   // Having a result indicates that the signature has been verified.
+
+  // Retrieve the wallet address from a successful response
+  final walletAddress = AddressUtils.getDidAddress(authResponse.result!.p.iss);
 }
 else {
   // Otherwise, you might have received a WalletConnectError if there was an issue verifying the signature.
