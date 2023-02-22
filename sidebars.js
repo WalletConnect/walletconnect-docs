@@ -600,4 +600,23 @@ module.exports = {
       ],
     },
   ],
+  csharp: [
+    {
+      type: "category",
+      label: "Products",
+      className: "menu_outer_list",
+      collapsible: false,
+      items: [
+        {
+          type: "category",
+          label: "Web3Wallet SDK",
+          collapsible: true,
+          collapsed: true,
+          items: [
+            "csharp/overview",
+          ],
+        },
+      ],
+    }
+  ],
 };

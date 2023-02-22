@@ -95,6 +95,12 @@ const config = {
             label: "Swift",
           },
           {
+            type: "docSidebar",
+            position: "left",
+            sidebarId: "csharp",
+            label: "C#",
+          },
+          {
             type: "docsVersionDropdown",
             position: "right",
           },
