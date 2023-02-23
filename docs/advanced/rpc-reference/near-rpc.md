@@ -122,6 +122,7 @@ Delete one or more `FunctionCall` access keys created with `signIn`. While this 
 Sign a transaction. It makes use of [near-api-js](https://github.com/near/near-api-js) to enable interoperability with dApps that will already use it for constructing transactions and communicating with RPC endpoints.  
 
 [Transaction](https://nomicon.io/RuntimeSpec/Transactions) passed to `signTransaction`  must be encoded.
+
 ### Parameters
 
      1. `Object` - Signing parameters:
