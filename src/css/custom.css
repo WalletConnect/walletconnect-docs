@@ -149,6 +149,16 @@ img[alt="create-push-url"] {
   );
 }
 
+.DocSearch-Button {
+  background-color: var(--ifm-color-gray-800) !important;
+  border: 1px solid var(--ifm-color-gray-800) !important;
+  box-shadow: none !important;
+}
+
+.DocSearch-Button:hover {
+  border: 1px solid var(--ifm-color-gray-600) !important;
+}
+
 /* Custom Components */
 .boxContainer {
   display: grid;
