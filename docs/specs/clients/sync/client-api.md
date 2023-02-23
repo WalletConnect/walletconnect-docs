@@ -20,7 +20,7 @@ abstract class Client {
   public abstract set(params: { account: string, store: string, key: string, value: string }): Promise<string>;
 
   // delete value 
-  public abstract delete(params: { account: string, store: string, key: string }): Promise<string>
+  public abstract delete(params: { account: string, store: string, key: string }): Promise<void>
 
   // get stores
   public abstract getStores(params: { account: string }): Promise<StoreMap>;
