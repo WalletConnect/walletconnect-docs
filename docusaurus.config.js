@@ -63,12 +63,6 @@ const config = {
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     {
       navbar: {
-        title: "WalletConnect | Docs",
-        logo: {
-          alt: "WalletConnect Logo",
-          src: "img/walletconnect-logo.svg",
-          srcDark: "img/walletconnect-logo-white.svg",
-        },
         items: [
           {
             type: "doc",
