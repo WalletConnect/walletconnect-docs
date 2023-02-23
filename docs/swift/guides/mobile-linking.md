@@ -12,7 +12,7 @@ The pattern we chose to adhere for a consistent UX across platforms for connecti
     
     5a. Wallet prompts user to return to Dapp manually
     
-    5b. Wallet automatically returns to Dapp using `WalletConnectRouter`
+    5b. Wallet automatically returns to Dapp using [`WalletConnectRouter`](../router/installation.md)
 6. User returns to Dapp
 
 Similar pattern happens when signing requests are required from the user:
@@ -23,7 +23,7 @@ Similar pattern happens when signing requests are required from the user:
 
     3a. Wallet prompts user to return to Dapp manually
     
-    3b. Wallet automatically returns to Dapp using `WalletConnectRouter`
+    3b. Wallet automatically returns to Dapp using [`WalletConnectRouter`](../router/installation.md)
 
 4. User returns to Dapp
 
