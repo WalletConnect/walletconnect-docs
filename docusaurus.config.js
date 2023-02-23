@@ -65,6 +65,11 @@ const config = {
       navbar: {
         items: [
           {
+            type: "html",
+            value:
+              '<a class="navbar__brand" href="/"><div class="navbar__logo"><img src="/img/walletconnect-logo-white.svg" alt="WalletConnect Logo"></div>WalletConnect<span>Docs<span></a>',
+          },
+          {
             type: "doc",
             position: "left",
             docId: "readme",

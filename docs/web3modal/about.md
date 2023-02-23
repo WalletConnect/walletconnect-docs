@@ -10,7 +10,7 @@ While we add support for other chains and frameworks a unique "standalone" mode 
 For our supported flows, both React and HTML have great integration with [wagmi](https://wagmi.sh/).
 Check out [web3modal.com](https://web3modal.com) for more information and previews.
 
-![web3modal customisation](/assets/web3modal_preview.png)
+![web3modal customisation](/assets/web3modal_preview.jpeg)
 
 ## Getting Started
 

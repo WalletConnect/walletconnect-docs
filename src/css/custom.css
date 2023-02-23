@@ -33,6 +33,15 @@ h6 {
   backdrop-filter: blur(20px) saturate(180%);
 }
 
+.thin-scrollbar {
+  scrollbar-width: none;
+}
+
+.thin-scrollbar::-webkit-scrollbar-track,
+.thin-scrollbar::-webkit-scrollbar-thumb {
+  display: none;
+}
+
 .navbar__inner {
   max-width: var(--ifm-container-width-xl);
   margin: 0 auto;
@@ -43,8 +52,16 @@ h6 {
   justify-content: flex-start;
 }
 
-.navbar__items .navbar__brand {
+.navbar__items .navbar__brand,
+.navbar__items .navbar__item:nth-child(3) {
   display: none;
+}
+
+@media (max-width: 996px) {
+  .navbar__items .navbar__brand,
+  .navbar__items .navbar__item:nth-child(3) {
+    display: flex !important;
+  }
 }
 
 .navbar__brand {
@@ -130,6 +147,21 @@ main {
 table {
   display: table;
   width: 100%;
+}
+
+table tr,
+table th,
+table td {
+  border-color: var(--ifm-color-gray-800);
+}
+
+table thead tr {
+  border-bottom: none !important;
+}
+
+table thead,
+table tr:nth-child(2n) {
+  background-color: rgba(255, 255, 255, 0.05) !important;
 }
 
 img[alt="create-push-url"] {
@@ -219,6 +251,35 @@ img[alt="create-push-url"] {
   border: 1px solid var(--ifm-color-gray-600) !important;
 }
 
+.theme-doc-sidebar-item-link-level-4,
+.theme-doc-sidebar-item-link-level-5 {
+  position: relative;
+}
+
+.theme-doc-sidebar-item-link-level-4 .menu__link::before,
+.theme-doc-sidebar-item-link-level-5 .menu__link::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 10%;
+  width: 1px;
+  height: 80%;
+  background-color: var(--ifm-color-gray-700);
+}
+
+.menu__link:hover,
+.menu__link--active {
+  background-color: transparent !important;
+}
+
+.menu__link--active::before {
+  background-color: var(--ifm-color-primary) !important;
+}
+
+.menu__link::after {
+  background-size: contain;
+}
+
 /* Custom Components */
 .boxContainer {
   display: grid;
@@ -270,7 +331,7 @@ article ul {
   list-style: none;
 }
 
-article ul li::before {
+article ul li:not([role="tab"])::before {
   content: "→";
   color: rgba(255, 255, 255, 0.4);
   font-weight: bold;
@@ -279,6 +340,11 @@ article ul li::before {
   width: 1em;
   margin-left: -1em;
   margin-right: 0.5em;
+}
+
+article img {
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 @media only screen and (min-width: 660px) {
@@ -300,9 +366,12 @@ article ul li::before {
 }
 
 .tableMatrix {
-  border-collapse: collapse;
-  border-radius: 7px;
+  border-radius: 14px;
+  background: linear-gradient(
+    135deg,
+    var(--ifm-color-gray-900) 0,
+    transparent 100%
+  );
+  box-shadow: inset 0 0 0 1px var(--ifm-color-gray-800);
   overflow: hidden;
-  background: #242124;
-  border: 1px solid #000000;
 }
