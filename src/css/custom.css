@@ -29,8 +29,26 @@ h6 {
 /* Docusaurus */
 .navbar {
   background-color: rgba(20, 20, 20, 0.4);
-  backdrop-filter: blur(20px) saturate(180%);
   border-bottom: 1px solid var(--ifm-color-gray-800);
+  backdrop-filter: blur(20px) saturate(180%);
+}
+
+.navbar-sidebar--show {
+  backdrop-filter: none;
+  background-color: rgba(20, 20, 20, 1);
+}
+
+.footer {
+  background-color: var(--ifm-background-color);
+  border-top: 1px solid var(--ifm-color-gray-800);
+  padding-top: 50px;
+  padding-bottom: 50px;
+  margin-top: 50px;
+}
+
+.footer__bottom {
+  margin-top: 50px;
+  color: var(--ifm-color-gray-700);
 }
 
 .theme-doc-sidebar-container {
@@ -49,7 +67,7 @@ h6 {
   background: linear-gradient(
     180deg,
     var(--ifm-color-gray-800) 0,
-    transparent 500px
+    transparent 80%
   );
 }
 
