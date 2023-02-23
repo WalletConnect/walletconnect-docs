@@ -254,6 +254,12 @@ module.exports = {
   ],
   javascript: [
     {
+      type: "html",
+      value:
+        '<a class="navbar__brand sidebar__brand" href="/"><div class="navbar__logo"><img src="/img/walletconnect-logo-white.svg" alt="WalletConnect Logo"></div>WalletConnect<span>Docs<span></a>',
+      defaultStyle: true,
+    },
+    {
       type: "category",
       label: "Products",
       className: "menu_outer_list",
@@ -404,6 +410,12 @@ module.exports = {
   ],
   kotlin: [
     {
+      type: "html",
+      value:
+        '<a class="navbar__brand sidebar__brand" href="/"><div class="navbar__logo"><img src="/img/walletconnect-logo-white.svg" alt="WalletConnect Logo"></div>WalletConnect<span>Docs<span></a>',
+      defaultStyle: true,
+    },
+    {
       type: "category",
       label: "Products",
       className: "menu_outer_list",
@@ -500,6 +512,12 @@ module.exports = {
     },
   ],
   swift: [
+    {
+      type: "html",
+      value:
+        '<a class="navbar__brand sidebar__brand" href="/"><div class="navbar__logo"><img src="/img/walletconnect-logo-white.svg" alt="WalletConnect Logo"></div>WalletConnect<span>Docs<span></a>',
+      defaultStyle: true,
+    },
     {
       type: "category",
       label: "Products",

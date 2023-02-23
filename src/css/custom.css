@@ -253,6 +253,34 @@ img[alt="create-push-url"] {
   color: var(--ifm-color-primary);
 }
 
+article a {
+  color: white;
+  border-bottom: 1px solid rgba(51, 150, 255, 0.5);
+  transition: all 0.2s ease-in-out;
+}
+
+article a:hover {
+  color: white;
+  text-decoration: none;
+  border-color: rgba(51, 150, 255, 1);
+}
+
+article ul {
+  padding-left: 15px;
+  list-style: none;
+}
+
+article ul li::before {
+  content: "→";
+  color: rgba(255, 255, 255, 0.4);
+  font-weight: bold;
+  font-size: 12px;
+  display: inline-block;
+  width: 1em;
+  margin-left: -1em;
+  margin-right: 0.5em;
+}
+
 @media only screen and (min-width: 660px) {
   .boxContainer {
     grid-template-columns: repeat(3, minmax(33%, 1fr));
