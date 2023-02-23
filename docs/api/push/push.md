@@ -1,4 +1,4 @@
-# Push
+# Overview
 
 :::note
 
@@ -8,7 +8,11 @@ WalletConnect v2 only supports the [Echo Server spec](https://github.com/WalletC
 
 ## Introduction
 
-WalletConnect Push is a push notification protocol that enables apps to notify users of both off-chain and on-chain events. The Push API allows wallet users to register subscriptions for different on-chain or off-chain events that are relevant to the user. The notifications are sent to the respective wallets.
+WalletConnect Push is a push notification protocol that enables apps to notify users of both off-chain and on-chain events. The Push API allows wallet users to register subscriptions for different on-chain or off-chain events that are relevant to the user. The notifications are sent to the respective wallets. Dapp Push Notifications, which are end-to-end encrypted and only visible to the dapp and wallet. These notifications cannot be read by WalletConnect or Apple/Google.
+
+:::note
+For wallets, there are two types of push notifications available: Sign Notifications, which are unencrypted and notify users when user interaction is required and Dapp Push Notifications. To learn more about Sign Notifications, review the [Web3Wallet Specs](../../specs/clients/sign/client-api.md).
+:::
 
 Echo and Cast servers are essential components of the wallet notification system as Dapps use Cast server to send notifications, which are then forwarded to Echo server for broadcasting via APNS or Firebase.
 
