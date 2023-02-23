@@ -11,16 +11,16 @@ abstract class Client {
   public abstract getMessage(params: { account: string }): Promise<string>;
 
   // register an account to sync
-  public abstract register(params: { account: string, signature: string }): Promise<string>;
+  public abstract register(params: { account: string, signature: string }): Promise<void>;
   
   // create a store
-  public abstract create(params: { account: string, store: string }): Promise<string>;
+  public abstract create(params: { account: string, store: string }): Promise<void>;
 
   // set value 
-  public abstract set(params: { store: string, key: string, value: string }): Promise<string>;
+  public abstract set(params: { account: string, store: string, key: string, value: string }): Promise<string>;
 
   // delete value 
-  public abstract delete(params: { store: string, key: string }): Promise<string>
+  public abstract delete(params: { account: string, store: string, key: string }): Promise<string>
 
   // get stores
   public abstract getStores(params: { account: string }): Promise<StoreMap>;
