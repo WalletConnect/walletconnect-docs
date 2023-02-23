@@ -117,9 +117,6 @@ abstract class Client {
   // subscribe to new chat invites received
   public abstract on("chat_invite", ({ invite: ReceivedInvite }) => {}): void;
 
-  // subscribe to new chat thread joined
-  public abstract on("chat_joined",  ({ topic: string }) => {}): void;
-  
   // subscribe to chat invite being accepted
   public abstract on("chat_invite_accepted", ({ invite: SentInvite}) => {}): void;
   
