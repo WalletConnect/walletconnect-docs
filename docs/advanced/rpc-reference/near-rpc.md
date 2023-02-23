@@ -57,6 +57,7 @@ For dApps that often sign gas-only transactions, `FunctionCall` access keys can 
                 1.2.1. `Object` - Account
                     1.2.1.1. `accountId` : `String` - The account name to which the publicKey corresponds as plain text
                     1.2.1.2. `publicKey` : `String` - The public counterpart of the key used to sign, expressed as a string with format "<key-type>:<base58-key-bytes>"
+
 ### Returns
 
     void
