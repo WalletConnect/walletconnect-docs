@@ -58,9 +58,9 @@ class Web3Wallet {
   // query all active sessions (SIGN)
   public abstract getActiveSessions(): Promise<Record<string, Session>>;
   
-  // format payload to message string
+  // format payload to message string (AUTH)
   public abstract formatMessage(payload: PayloadParams, iss: string): Promise<string>;
-
+  
   // query all pending session requests (SIGN)
   public abstract getPendingSessionProposals(): Promise<Record<number, SessionProposal>>;
   
@@ -69,7 +69,9 @@ class Web3Wallet {
   
   // query all pending auth requests (AUTH)
   public abstract getPendingAuthRequests(): Promise<Record<number, PendingRequest>>;
-
+  
+  // register device token for Echo server (BOTH)
+  public abstract registerDeviceToken(token: string): Promise<void>;
 
   // ---------- Events ----------------------------------------------- //
 

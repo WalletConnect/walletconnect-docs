@@ -15,7 +15,7 @@ Relay is defined by the transport protocol used for the two clients to publish a
 
 ## Session
 
-Session is a topic encrypted by a symmetric key derived using a key agreement established after an approved proposal and it has a controller participant that can update its accounts, methods, events and expiry
+Session is a topic encrypted by a symmetric key derived using a key agreement established after an approved proposal and it has a controller participant that can update its accounts, methods, events and expiry.
 
 ```jsonc
 {

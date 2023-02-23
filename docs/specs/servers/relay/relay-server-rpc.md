@@ -102,6 +102,7 @@ Used when a server sends a subscription message to a client.
     "data" : {
       "topic" : string,
       "message": string,
+      "tag": Int64,
       "publishedAt": Int64
     }
   }

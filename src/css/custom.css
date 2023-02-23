@@ -194,6 +194,9 @@ h4 {
   margin-bottom: 10px !important;
 }
 
+/* Images */
+img[alt=create-push-url] { width: 400px; }
+
 /* GitHub */
 .header-github-link:hover {
   opacity: 0.6;

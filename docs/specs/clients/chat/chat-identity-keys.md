@@ -30,7 +30,7 @@ Issued At: ${issued-at}
 
 Let's use the account `eip155:1:0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2` and identity key  use the following fields:
 
-* Domain = walletconnect.com
+* Domain = keys.walletconnect.com
 * Namespace Name = Ethereum
 * Address = 0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2
 * URI = https://keys.walletconnect.com
@@ -43,7 +43,7 @@ Let's use the account `eip155:1:0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2` and 
 Formatted Message (CAIP-122)
 
 ```md
-walletconnect.com wants you to sign in with your Ethereum account:
+keys.walletconnect.com wants you to sign in with your Ethereum account:
 0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2
 
 URI: https://keys.walletconnect.com
@@ -88,7 +88,7 @@ When two clients are using the Chat API they need to verify each others Identity
 
 Now that we have generated, authorized and registered Identity Keys we can use them for authentication for [different purposes](./chat-authentication.md) but also importantly we must use it to register the invite keys
 
-When we are registering a chat invite key key we must use the following mandatory fields in the jwt:
+When we are registering a chat invite key we must use the following mandatory fields in the jwt:
 
 * iat - timestamp when jwt was issued 
 * exp - timestamp when jwt must expire

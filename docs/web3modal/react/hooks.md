@@ -43,9 +43,9 @@ theme;
 
 // Set modal theme
 setTheme({
-  themeMode: "dark";
-  themeColor: "orange";
-  themeBackground: "gradient";
+  themeMode: "dark",
+  themeColor: "orange",
+  themeBackground: "gradient",
 });
 ```
 

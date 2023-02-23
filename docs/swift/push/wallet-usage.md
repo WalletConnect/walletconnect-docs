@@ -81,7 +81,7 @@ Import WalletConnectPush inside your notification service extension file, initia
         bestAttemptContent = (request.content.mutableCopy() as? UNMutableNotificationContent)
         if let bestAttemptContent = bestAttemptContent {
             let topic = bestAttemptContent.userInfo["topic"] as! String
-            let ciphertext = bestAttemptContent.userInfo["ciphertext"] as! String
+            let ciphertext = bestAttemptContent.userInfo["blob"] as! String
             do {
                 let service = PushDecryptionService()
                 let pushMessage = try service.decryptMessage(topic: topic, ciphertext: ciphertext)
