@@ -1,8 +1,7 @@
 // @ts-check
 // Note: type annotations allow type checking and IDEs autocompletion
 
-const lightCodeTheme = require("prism-react-renderer/themes/github");
-const darkCodeTheme = require("prism-react-renderer/themes/dracula");
+const darkCodeTheme = require("prism-react-renderer/themes/oceanicNext");
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
@@ -39,12 +38,12 @@ const config = {
           versions: {
             "1.0": {
               badge: false,
-              label: "v1.0",
+              label: "v1.x.x",
               path: "1.0",
             },
             current: {
               badge: false,
-              label: "v2.0",
+              label: "v2.x.x",
               path: "2.0",
             },
           },
@@ -63,13 +62,12 @@ const config = {
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     {
       navbar: {
-        title: "WalletConnect | Docs",
-        logo: {
-          alt: "WalletConnect Logo",
-          src: "img/walletconnect-logo.svg",
-          srcDark: "img/walletconnect-logo-white.svg",
-        },
         items: [
+          {
+            type: "html",
+            value:
+              '<a class="navbar__brand" href="/"><div class="navbar__logo"><img src="/img/walletconnect-logo-white.svg" alt="WalletConnect Logo"></div>WalletConnect<span>Docs<span></a>',
+          },
           {
             type: "doc",
             position: "left",
@@ -94,15 +92,16 @@ const config = {
             sidebarId: "swift",
             label: "Swift",
           },
-          {
-            type: "docsVersionDropdown",
-            position: "right",
-          },
+
           {
             href: "https://github.com/walletconnect/",
             position: "right",
             className: "header-github-link",
             "aria-label": "GitHub repository",
+          },
+          {
+            type: "docsVersionDropdown",
+            position: "right",
           },
         ],
       },
@@ -157,11 +156,10 @@ const config = {
       },
       colorMode: {
         defaultMode: "dark",
-        disableSwitch: false,
+        disableSwitch: true,
         respectPrefersColorScheme: false,
       },
       prism: {
-        theme: lightCodeTheme,
         darkTheme: darkCodeTheme,
         additionalLanguages: ["swift", "kotlin"],
       },
@@ -172,11 +170,11 @@ const config = {
         contextualSearch: true,
       },
       announcementBar: {
-        id: 'support_us',
+        id: "support_us",
         content:
           '🚨 v1.0 has been sunset. Wallets and Dapps must upgrade to v2.0 before June 28. <a rel="noopener noreferrer" href="/2.0/advanced/migrating-from-v1.0">Learn more</a>. 🚨',
-        backgroundColor: '#3182ce',
-        textColor: '#fff',
+        backgroundColor: "#3182ce",
+        textColor: "#fff",
         isCloseable: true,
       },
     },
