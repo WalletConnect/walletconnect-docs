@@ -17,7 +17,7 @@ abstract class Client {
   public abstract create(params: { account: string, store: string }): Promise<void>;
 
   // set value 
-  public abstract set(params: { account: string, store: string, key: string, value: string }): Promise<string>;
+  public abstract set(params: { account: string, store: string, key: string, value: string }): Promise<void>;
 
   // delete value 
   public abstract delete(params: { account: string, store: string, key: string }): Promise<void>
