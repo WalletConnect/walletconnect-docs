@@ -118,7 +118,7 @@ abstract class Client {
   public abstract on("chat_invite", ({ invite: ReceivedInvite }) => {}): void;
 
   // subscribe to chat invite being accepted
-  public abstract on("chat_invite_accepted", ({ invite: SentInvite}) => {}): void;
+  public abstract on("chat_invite_accepted", ({ topic: string, invite: SentInvite}) => {}): void;
   
   // subscribe to chat invite being rejected
   public abstract on("chat_invite_rejected", ({ invite: SentInvite}) => {}): void;
