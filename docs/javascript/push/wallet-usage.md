@@ -13,7 +13,7 @@ This means that the `PushWalletClient` should be used alongside the [Web3Wallet 
 
 ## Usage
 
-**1. Initialize your WalletConnect Core, using [your Project ID](../../cloud/relay.md), and pass it to the SDK clients**
+### 1. Initialize your WalletConnect Core, using [your Project ID](../../cloud/relay.md), and pass it to the SDK clients
 
 ```javascript
 import { Core } from "@walletconnect/core";
@@ -43,7 +43,7 @@ const pushWalletClient = await PushWalletClient.init({
 });
 ```
 
-**2. Add listeners for relevant push events**
+### 2. Add listeners for relevant push events
 
 ```javascript
 pushWalletClient.on("push_request", async ({ id, topic, params }) => {
@@ -57,7 +57,7 @@ pushWalletClient.on("push_message", async ({ params }) => {
 });
 ```
 
-**3. Accept or reject incoming push subscription requests**
+### 3. Accept or reject incoming push subscription requests
 
 ```javascript
 pushWalletClient.on("push_request", async ({ id, topic, params }) => {
