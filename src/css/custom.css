@@ -78,8 +78,8 @@ h6 {
 }
 
 .navbar--fixed-top {
-  position: fixed;
-  right: 0;
+  position: sticky;
+  margin-left: auto;
   width: calc(100vw - var(--doc-sidebar-width));
 }
 
@@ -102,10 +102,6 @@ h6 {
 .navbar__logo img {
   width: 30px;
   height: 18px;
-}
-
-main {
-  margin-top: var(--ifm-navbar-height) !important;
 }
 
 .footer {
