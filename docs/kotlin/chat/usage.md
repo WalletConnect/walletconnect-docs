@@ -129,10 +129,10 @@ sealed class Events : Model() {
     data class OnInvite(val invite: Invite.Received) : Events()
     
     //onInviteAccepted corresponds to ChatDelegate.onInviteAccepted() parameter
-    data class OnInviteAccepted(val topic: String) : Events()
+    data class OnInviteAccepted(val topic: String, val invite: Chat.Model.Invite.Sent) : Events()
     
     //onInviteRejected corresponds to ChatDelegate.onInviteRejected() parameter
-    data class OnInviteRejected(val topic: String) : Events()
+    data class OnInviteRejected(val invite: Chat.Model.Invite.Sent) : Events()
     
     //onMessage corresponds to ChatDelegate.onMessage() parameter
     data class OnMessage(val message: Message) : Events()
@@ -147,6 +147,21 @@ sealed class Events : Model() {
 ```kotlin
 // Invite.Received data class from OnInvite event
 data class Received(
+    override val id: Long,
+    override val inviterAccount: Type.AccountId,
+    override val inviteeAccount: Type.AccountId,
+    override val message: Type.InviteMessage,
+    override val inviterPublicKey: String,
+    override val inviteePublicKey: String,
+    override val status: Type.InviteStatus,
+) : Invite
+```
+
+#### Invite.Sent
+
+```kotlin
+// Invite.Sent data class from OnInviteAccepted or OnInviteRejected event
+data class Sent(
     override val id: Long,
     override val inviterAccount: Type.AccountId,
     override val inviteeAccount: Type.AccountId,
