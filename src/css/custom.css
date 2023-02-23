@@ -347,6 +347,30 @@ article img {
   border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
+.navbar__item.dropdown {
+  background-color: rgba(51, 150, 255, 0.2);
+  border-radius: 40px;
+  border: 1px solid rgba(51, 150, 255, 0.3);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.navbar__item.dropdown:hover {
+  background-color: rgba(51, 150, 255, 0.3);
+  border: 1px solid rgba(51, 150, 255, 0.5);
+}
+
+.navbar__item.dropdown a {
+  font-size: 14px;
+  color: var(--ifm-color-primary);
+}
+
+.navbar__item.dropdown a::after {
+  border-width: 0.25em 0.25em 0;
+  top: 0;
+  margin-left: 0.5em;
+}
+
 @media only screen and (min-width: 660px) {
   .boxContainer {
     grid-template-columns: repeat(3, minmax(33%, 1fr));

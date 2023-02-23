@@ -1,8 +1,7 @@
 // @ts-check
 // Note: type annotations allow type checking and IDEs autocompletion
 
-const lightCodeTheme = require("prism-react-renderer/themes/github");
-const darkCodeTheme = require("prism-react-renderer/themes/dracula");
+const darkCodeTheme = require("prism-react-renderer/themes/oceanicNext");
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
@@ -39,12 +38,12 @@ const config = {
           versions: {
             "1.0": {
               badge: false,
-              label: "v1.0",
+              label: "v1.x.x",
               path: "1.0",
             },
             current: {
               badge: false,
-              label: "v2.0",
+              label: "v2.x.x",
               path: "2.0",
             },
           },
@@ -93,15 +92,16 @@ const config = {
             sidebarId: "swift",
             label: "Swift",
           },
-          {
-            type: "docsVersionDropdown",
-            position: "right",
-          },
+
           {
             href: "https://github.com/walletconnect/",
             position: "right",
             className: "header-github-link",
             "aria-label": "GitHub repository",
+          },
+          {
+            type: "docsVersionDropdown",
+            position: "right",
           },
         ],
       },
@@ -160,7 +160,6 @@ const config = {
         respectPrefersColorScheme: false,
       },
       prism: {
-        theme: lightCodeTheme,
         darkTheme: darkCodeTheme,
         additionalLanguages: ["swift", "kotlin"],
       },
