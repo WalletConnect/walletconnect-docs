@@ -188,9 +188,12 @@ In order to use Chat SDK account must register identity in [Keyserver](https://d
 ```kotlin
 val params = Chat.Params.Register(account = Chat.Type.AccountId(/*[CAIP-10](https://github.com/ChainAgnostic/CAIPs/blob/master/CAIPs/caip-10.md) compatible accountId*/))
 ChatClient.register(params, object : Chat.Listeners.Register {
-    override fun onSign(message: String): Chat.Model.Cacao.Signature {
-        // Message to be signed. CacaoSigner is a util for easy message signing.
+    override fun onSign(message: String): Chat.Model.Cacao.Signature? {
+        // Message to be signed. When user decides to sign message use CacaoSigner to sign message.
+        // CacaoSigner is a util for easy message signing.
         return CacaoSigner.sign(message, /*privateKey*/, SignatureType.EIP191)
+        // When users decides to not sign message return null
+        return null
     }
     
     override fun onError(error: Chat.Model.Error) {
@@ -333,9 +336,12 @@ To stop using the Chat SDK on a device, the account should call the [ChatClient.
 val params = Chat.Params.Unegister(account = Chat.Type.AccountId(/*[CAIP-10](https://github.com/ChainAgnostic/CAIPs/blob/master/CAIPs/caip-10.md) compatible accountId*/))
 
 ChatClient.unregister(params, object : Chat.Listeners.Unregister {
-    override fun onSign(message: String): Chat.Model.Cacao.Signature {
-        //Message to be signed. CacaoSigner is a util for easy message signing.
+    override fun onSign(message: String): Chat.Model.Cacao.Signature? {
+        // Message to be signed. When user decides to sign message use CacaoSigner to sign message.
+        // CacaoSigner is a util for easy message signing.
         return CacaoSigner.sign(message, /*privateKey*/, SignatureType.EIP191)
+        // When users decides to not sign message return null
+        return null
     }
     
     override fun onError(error: Chat.Model.Error) {
