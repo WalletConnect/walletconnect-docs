@@ -203,7 +203,7 @@ ChatClient.register(params, object : Chat.Listeners.Register {
 })
 ```
 
-To not be discoverable to everyone set `private` in `Chat.Params.Register` to `true`. If this flag is `true` then only identity is restored in [Keyserver](https://docs.walletconnect.com/2.0/specs/servers/keys/). Parameter `private` is set to `false` by default.
+To not be discoverable to everyone, set `private` in `Chat.Params.Register` to `true`. If this flag is `true` then only identity is restored in [Keyserver](https://docs.walletconnect.com/2.0/specs/servers/keys/). Parameter `private` is set to `false` by default.
 
 ##### Chat.Params.Register with private = false
 ```kotlin
@@ -211,7 +211,7 @@ val params = Chat.Params.Register(account = Chat.Type.AccountId(/*[CAIP-10](http
 ```
 
 #### Resolve invitee public invite key with blockchain address
-In order to invite someone for a chat converstion, inviter must know invitee public invite key. To resolve a invitee public invite key that is required invite into a chat thread, call [`ChatClient.resolve`](#chatclientresolve) method.
+In order to invite someone for a chat converstion, inviter must know invitee public invite key. To resolve a invitee's public invite key that is required to invite into a chat thread, call [`ChatClient.resolve`](#chatclientresolve) method.
 
 ##### `ChatClient.resolve`
 ```kotlin
@@ -281,7 +281,7 @@ ChatClient.message(params) { error -> /* Error while sending a message */ }
 
 #### Leaving a Chat Thread
 
-Calling [`ChatClient.leave](#chatclientleave) with a chat thread topic means no longer receiving chat messages, removal of thread in storage and removal of chat messages on given thread in storage.
+Calling [`ChatClient.leave](#chatclientleave) with a chat thread topic causes the caller to stop receiving chat messages, removal of thread in storage and removal of chat messages on given thread in storage.
 
 ##### `ChatClient.leave`
 
