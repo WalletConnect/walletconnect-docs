@@ -125,19 +125,19 @@ data class Error(val throwable: Throwable) : Model()
 data class ConnectionState(val isAvailable: Boolean) : Model()
 
 sealed class Events : Model() {
-    //onInvite of onInvite(onInvite)
+    //onInvite corresponds to ChatDelegate.onInvite() parameter
     data class OnInvite(val invite: Invite.Received) : Events()
     
-    //onInviteAccepted of onInviteAccepted(onInviteAccepted)
+    //onInviteAccepted corresponds to ChatDelegate.onInviteAccepted() parameter
     data class OnInviteAccepted(val topic: String) : Events()
     
-    //onInviteRejected of onInviteRejected(onInviteRejected)
+    //onInviteRejected corresponds to ChatDelegate.onInviteRejected() parameter
     data class OnInviteRejected(val topic: String) : Events()
     
-    //onMessage of onMessage(onMessage)
+    //onMessage corresponds to ChatDelegate.onMessage() parameter
     data class OnMessage(val message: Message) : Events()
     
-    //onLeft of onLeft(onLeft)
+    //onLeft corresponds to ChatDelegate.onLeft() parameter
     data class OnLeft(val topic: String) : Events()
 }
 ```
