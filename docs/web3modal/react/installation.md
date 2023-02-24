@@ -1,12 +1,14 @@
-# Installation
+# Quick Start
 
 Web3Modal offers out of the box support for React and integrates very well with a popular React hook library called [wagmi](https://wagmi.sh/). To get started with their CLI, click [here](https://wagmi.sh/cli/create-wagmi). Alternatively follow our manual setup guide below.
 
-## Obtain Project ID
+## Installation
+
+### Obtain Project ID
 
 Head over to [WalletConnect Cloud](https://cloud.walletconnect.com/) to sign in or sign up. Create (or use an existing) project and copy its associated Project ID. We will need this in a later step.
 
-## Add Packages
+### Add Packages
 
 ```bash npm2yarn
 npm install @web3modal/ethereum @web3modal/react wagmi ethers@^5
@@ -16,7 +18,9 @@ npm install @web3modal/ethereum @web3modal/react wagmi ethers@^5
 Ensure to use latest versions for tools like next, react-scripts, babel, webpack etc. to support es2020 features.
 :::
 
-## Import
+## Set Up
+
+### Import
 
 ```tsx
 import {
@@ -32,7 +36,7 @@ import { configureChains, createClient, WagmiConfig } from "wagmi";
 import { arbitrum, mainnet, polygon } from "wagmi/chains";
 ```
 
-## Configure
+### Configure
 
 Configure wagmi and Web3Modal clients. Refer to [wagmi](https://wagmi.sh/) docs to see how to set up custom chains, providers and work with their client.
 
@@ -62,7 +66,7 @@ const wagmiClient = createClient({
 const ethereumClient = new EthereumClient(wagmiClient, chains);
 ```
 
-## Add Web3Modal and Wagmi Components
+### Add Web3Modal and Wagmi Components
 
 You don't have to wrap `Web3Modal` inside `WagmiConfig`. In fact, we recommend placing it somewhere outside of your main app, thus removing extra re-rendering work.
 See [Configuration](../configuration.md) docs for full Web3Modal prop list.
@@ -84,7 +88,7 @@ function App() {
 }
 ```
 
-## Add Connect Wallet Button
+### Add Connect Wallet Button
 
 ```tsx
 import { Web3Button } from "@web3modal/react";

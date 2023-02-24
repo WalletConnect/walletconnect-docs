@@ -164,6 +164,10 @@ img[alt="create-push-url"] {
   width: 400px;
 }
 
+img[alt="web3modal-customisation"] {
+  width: 700px;
+}
+
 .header-github-link:hover {
   opacity: 0.6;
 }
