@@ -42,7 +42,7 @@ In this document we define data structures and definitions used in the chat api
   "inviterAccount": string,
   "inviteeAccount": string,
   "timestamp": number, // taken from client current timestamp
-  "status": 'pending' | 'rejected'
+  "status": pending' | 'rejected' | 'approved'
 }
 ```
 
