@@ -291,7 +291,7 @@ module.exports = {
                 },
                 {
                   type: "category",
-                  label: "Framework Agnostic Usage",
+                  label: "Framework-Agnostic Usage",
                   collapsed: true,
                   collapsible: true,
                   items: [
