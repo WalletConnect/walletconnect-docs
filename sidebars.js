@@ -274,24 +274,24 @@ module.exports = {
             "web3modal/about",
             {
               type: "category",
-              label: "Beginner Usage",
-              collapsed: true,
-              collapsible: true,
-              items: [
-                "web3modal/react/installation",
-                "web3modal/react/hooks",
-                "web3modal/react/components",
-              ],
-            },
-            {
-              type: "category",
-              label: "Advanced Usage",
+              label: "Usage",
               collapsed: true,
               collapsible: true,
               items: [
                 {
                   type: "category",
-                  label: "HTML Usage",
+                  label: "React Usage",
+                  collapsed: true,
+                  collapsible: true,
+                  items: [
+                "web3modal/react/installation",
+                "web3modal/react/hooks",
+                "web3modal/react/components",
+                  ],
+                },
+                {
+                  type: "category",
+                  label: "Framework Agnostic Usage",
                   collapsed: true,
                   collapsible: true,
                   items: [
@@ -300,6 +300,14 @@ module.exports = {
                     "web3modal/html-js/components",
                   ],
                 },
+              ],
+            },
+            {
+              type: "category",
+              label: "Advanced Usage",
+              collapsed: true,
+              collapsible: true,
+              items: [
                 {
                   type: "category",
                   label: "Standalone Usage",
