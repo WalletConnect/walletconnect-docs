@@ -58,6 +58,80 @@ if (uri) {
 }
 ```
 
+### Add Connect Wallet Button using React
+
+```ts
+async function onOpenModal() {
+  if (signClient) {
+    const { uri, approval } = await signClient.connect({
+      requiredNamespaces: {
+        eip155: {
+          methods: ["eth_sign"],
+          chains: ["eip155:1"],
+          events: ["accountsChanged"],
+        },
+      },
+    });
+    if (uri) {
+      await web3Modal.openModal({
+        uri,
+        standaloneChains: namespaces.eip155.chains,
+      });
+      await approval();
+      web3Modal.closeModal();
+    }
+  }
+}
+
+return <button onClick={onOpenModal}>Connect Wallet</button>;
+```
+
+### Add Connect Wallet Button using HTML
+
+```html
+<button id="connect-button">Initializing...</button>
+```
+
+```js
+const connectButton = document.getElementById("connect-button");
+
+async function initialize() {
+  try {
+    connectButton.disabled = true;
+    signClient = await SignClient.init({ projectId });
+    connectButton.disabled = false;
+    connectButton.innerText = "Connect Wallet";
+  } catch (err) {
+    console.error(err);
+  }
+}
+
+initialize();
+
+connectButton.addEventListener("click", async () => {
+  try {
+    if (signClient) {
+      const { uri, approval } = await signClient.connect({
+        requiredNamespaces: {
+          eip155: {
+            methods: ["eth_sign"],
+            chains: ["eip155:1"],
+            events: ["accountsChanged"],
+          },
+        },
+      });
+      if (uri) {
+        await web3Modal.openModal({ uri });
+        await approval();
+        web3Modal.closeModal();
+      }
+    }
+  } catch (err) {
+    console.error(err);
+  }
+});
+```
+
 ## Examples
 
 - React [example](https://github.com/WalletConnect/web3modal/tree/V2/examples/nextjs-standalone)
