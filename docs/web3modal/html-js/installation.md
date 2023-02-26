@@ -17,17 +17,14 @@ npm install @web3modal/ethereum @web3modal/html @wagmi/core ethers@^5
 ## Import
 
 ```js
-import { configureChains, createClient } from "@wagmi/core";
-
-import { arbitrum, mainnet, polygon } from "@wagmi/core/chains";
-
-import { Web3Modal } from "@web3modal/html";
-
 import {
   EthereumClient,
   modalConnectors,
   walletConnectProvider,
 } from "@web3modal/ethereum";
+import { Web3Modal } from "@web3modal/html";
+import { configureChains, createClient } from "@wagmi/core";
+import { arbitrum, mainnet, polygon } from "@wagmi/core/chains";
 ```
 
 ## Configure
