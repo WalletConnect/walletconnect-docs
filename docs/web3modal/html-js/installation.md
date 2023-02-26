@@ -2,15 +2,17 @@
 
 Web3Modal is built using standard web technologies like web-components and es modules, which means that it can be used in any front-end environment. It works particularly well with [wagmi core](https://wagmi.sh/) library that offers big suite of helper actions to speed up and simplify web3 development flows.
 
-## Obtain Project ID
+### Obtain Project ID
 
 Head over to [WalletConnect Cloud](https://cloud.walletconnect.com/) to sign in or sign up. Create (or use an existing) project and copy its associated Project ID. We will need this in a later step.
 
-## Add Packages
+### Add Packages
 
 ```bash npm2yarn
 npm install @web3modal/ethereum @web3modal/html @wagmi/core ethers@^5
 ```
+
+## Quick Start
 
 ## Import
 
@@ -60,6 +62,14 @@ const web3modal = new Web3Modal(
   { projectId: "<YOUR_PROJECT_ID>" },
   ethereumClient
 );
+```
+
+### Add Connect Wallet Button
+
+```js
+<body>
+  <w3m-core-button></w3m-core-button>
+</body>
 ```
 
 ## Usage

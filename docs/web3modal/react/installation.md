@@ -1,8 +1,6 @@
-# Quick Start
+# Installation
 
 Web3Modal offers out of the box support for React and integrates very well with a popular React hook library called [wagmi](https://wagmi.sh/). To get started with their CLI, click [here](https://wagmi.sh/cli/create-wagmi). Alternatively follow our manual setup guide below.
-
-## Installation
 
 ### Obtain Project ID
 
@@ -18,7 +16,7 @@ npm install @web3modal/ethereum @web3modal/react wagmi ethers@^5
 Ensure to use latest versions for tools like next, react-scripts, babel, webpack etc. to support es2020 features.
 :::
 
-## Set Up
+## Quick Start
 
 ### Import
 
