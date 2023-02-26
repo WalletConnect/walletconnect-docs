@@ -280,7 +280,7 @@ module.exports = {
               items: [
                 {
                   type: "category",
-                  label: "React Usage",
+                  label: "React",
                   collapsed: true,
                   collapsible: true,
                   items: [
@@ -291,7 +291,7 @@ module.exports = {
                 },
                 {
                   type: "category",
-                  label: "Framework-Agnostic Usage",
+                  label: "HTML",
                   collapsed: true,
                   collapsible: true,
                   items: [
@@ -304,13 +304,13 @@ module.exports = {
             },
             {
               type: "category",
-              label: "Advanced Usage",
+              label: "Advanced",
               collapsed: true,
               collapsible: true,
               items: [
                 {
                   type: "category",
-                  label: "Standalone Usage",
+                  label: "Standalone Mode",
                   collapsed: true,
                   collapsible: true,
                   items: [

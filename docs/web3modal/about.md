@@ -36,7 +36,7 @@ description: "Web3Modal offers out of the box support for React and integrates v
 url: `/2.0/web3modal/react/installation`
 },
 {
-name: "Framework-Agnostic",
+name: "HTML",
 description: "Your vanilla JS solution. Use it on any front-end environment.",
 url: `/2.0/web3modal/html-js/installation`
 },
