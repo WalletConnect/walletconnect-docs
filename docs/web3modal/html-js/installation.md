@@ -34,6 +34,8 @@ import {
 
 See [configuration](../configuration.md) docs for full Web3Modal options list.
 
+For more information on versioning, see the [docs](../about.md/#versioning).
+
 :::info
 Minimum version of @wagmi/core 0.9.3 is required to use `version: "2"`
 :::

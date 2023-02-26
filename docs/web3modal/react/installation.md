@@ -38,6 +38,8 @@ import { arbitrum, mainnet, polygon } from "wagmi/chains";
 
 Configure wagmi and Web3Modal clients. Refer to [wagmi](https://wagmi.sh/) docs to see how to set up custom chains, providers and work with their client.
 
+For more information on versioning, see the [docs](../about.md/#versioning).
+
 :::info
 Minimum version of wagmi 0.11.3 is required to use `version: "2"`
 :::
