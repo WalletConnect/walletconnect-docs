@@ -27,6 +27,10 @@ public var sessionProposalPublisher: AnyPublisher<Session.Proposal, Never>
 public var sessionRequestPublisher: AnyPublisher<Request, Never>
 public var authRequestPublisher: AnyPublisher<Request, Never>
 public var sessionPublisher: AnyPublisher<[Session], Never>
+public var socketConnectionStatusPublisher: AnyPublisher<SocketConnectionStatus, Never>
+public var sessionSettlePublisher: AnyPublisher<Session, Never>
+public var sessionDeletePublisher: AnyPublisher<(String, Reason), Never>
+public var sessionResponsePublisher: AnyPublisher<Response, Never>
 ```
 
 ### Connect Clients
@@ -181,6 +185,31 @@ For good user experience your wallet should allow users to disconnect unwanted s
 
 ```swift
 try await Web3Wallet.instance.disconnect(topic: session.topic)
+```
+
+### Authorization Request Approval
+
+Authorization request will be published by `authRequestPublisher`. When a wallet receives a request, you want to present it to the user and request a signature. After the user signs the authentication message, the wallet should respond to a dapp.
+
+`Type` parameter represent signature validation method which will be used on dapp side. Supported signature validation methods: [EIP191](https://eips.ethereum.org/EIPS/eip-191), [EIP1271](https://eips.ethereum.org/EIPS/eip-1271). In both cases message will be signed with [EIP191](https://eips.ethereum.org/EIPS/eip-191) standard.
+
+```swift
+let signer = MessageSignerFactory.create()
+let signature = try signer.sign(message: request.message, privateKey: privateKey, type: .eip191)
+try await Web3WalletClient.respond(requestId: request.id, signature: signature, from: account)
+```
+
+In case user rejects an authentication request, call:
+
+```swift
+try await Web3WalletClient.reject(requestId: request.id)
+```
+
+### Get pending requests
+
+if you've missed some requests you can query them with:
+```swift 
+Web3WalletClient.getPendingRequests()
 ```
 
 ### Sample App
