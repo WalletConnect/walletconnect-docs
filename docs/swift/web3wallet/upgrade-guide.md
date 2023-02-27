@@ -70,6 +70,42 @@ Web3Wallet.configure(metadata: metadata, signerFactory: DefaultSignerFactory())
 ---
 #### Before
 ```swift
+    SignClient.socketConnectionStatusPublisher.sink { ... }
+```
+#### Now
+```swift
+    Web3WalletClient.socketConnectionStatusPublisher.sink { ... }
+```
+---
+#### Before
+```swift
+    SignClient.sessionSettlePublisher.sink { ... }
+```
+#### Now
+```swift
+    Web3WalletClient.sessionSettlePublisher.sink { ... }
+```
+---
+#### Before
+```swift
+    SignClient.sessionDeletePublisher.sink { ... }
+```
+#### Now
+```swift
+    Web3WalletClient.sessionDeletePublisher.sink { ... }
+```
+---
+#### Before
+```swift
+    SignClient.sessionResponsePublisher.sink { ... }
+```
+#### Now
+```swift
+    Web3WalletClient.sessionResponsePublisher.sink { ... }
+```
+---
+#### Before
+```swift
     await SignClient.approve(proposalId: proposalId, namespaces: namespaces)
 ```
 #### Now
@@ -203,3 +239,20 @@ Web3Wallet.configure(metadata: metadata, signerFactory: DefaultSignerFactory())
     Web3WalletClient.getPendingRequests(account: account)
 ```
 ---
+#### Before
+```swift
+    await SignClient.cleanup()
+```
+#### Now
+```swift
+    await Web3WalletClient.cleanup()
+```
+---
+#### Before
+```swift
+    PairingClient.getPairings()
+```
+#### Now
+```swift
+    Web3WalletClient.getPairings()
+```
