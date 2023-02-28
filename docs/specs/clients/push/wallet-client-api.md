@@ -8,7 +8,10 @@ abstract class WalletClient {
   public abstract init(): Promise<void>;
 
   // approve push subscription 
-  public abstract approve(params: { id: number }): Promise<boolean>;
+  public abstract approve(params: {
+        id: number 
+        onSign: (message: string) => Cacao.Signature
+    ): Promise<boolean>;
 
   // reject push subscription 
   public abstract reject(params: { id: number, reason: Reason }): Promise<boolean>;
