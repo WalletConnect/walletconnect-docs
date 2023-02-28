@@ -51,12 +51,10 @@ desktopWallets: [
 Array of wallet id's and their logo mappings. If `projectId` is provided, this will override default logos. Id's in this case can be: [explorer.walletconnect.com](https://explorer.walletconnect.com) id's, wallet id's you provided in `mobileWallets` or `desktopWallets` and [Wagmi](https://wagmi.sh) connector id's. Defaults to `undefined`.
 
 ```ts
-walletImages: [
-  {
-    rainbow: "/images/rainbow.webp",
-    metaMask: "/images/metamask.webp",
-  },
-];
+walletImages: {
+  rainbow: "/images/rainbow.webp",
+  metaMask: "/images/metamask.webp",
+};
 ```
 
 ### chainImages (optional)
@@ -64,12 +62,10 @@ walletImages: [
 Array of chain id's and their logo mappings. If `projectId` is provided, this will override default logos. You can find detailed chain data at [chainlist.org](https://chainlist.org) Defaults to `undefined`.
 
 ```ts
-chainImages: [
-  {
-    1: "/images/ethereum.webp",
-    137: "/images/polygon.webp",
-  },
-];
+chainImages: {
+  1: "/images/ethereum.webp",
+  137: "/images/polygon.webp",
+};
 ```
 
 ### tokenImages (optional)
@@ -77,12 +73,10 @@ chainImages: [
 Array of token symbols and their logo mappings. Defaults to `undefined`.
 
 ```ts
-tokenImages: [
-  {
-    ETH: "/images/eth.webp",
-    AVAX: "/images/avax.webp",
-  },
-];
+tokenImages: {
+  ETH: "/images/eth.webp",
+  AVAX: "/images/avax.webp",
+};
 ```
 
 ### defaultChain (optional)
