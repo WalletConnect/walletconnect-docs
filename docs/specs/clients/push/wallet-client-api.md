@@ -8,7 +8,10 @@ abstract class WalletClient {
   public abstract init(): Promise<void>;
 
   // approve push subscription 
-  public abstract approve(params: { id: number }): Promise<boolean>;
+  public abstract approve(params: {
+        id: number 
+        onSign: (message: string) => Cacao.Signature
+    ): Promise<boolean>;
 
   // reject push subscription 
   public abstract reject(params: { id: number, reason: Reason }): Promise<boolean>;
@@ -27,14 +30,6 @@ abstract class WalletClient {
   
   // decrypt push subscription message
   public abstract decryptMessage(topic: string, encryptedMessage: string): Promise<PushMessage>;
-
-  // - registers a blockchain account with an identity key if not yet registered on this client
-  // - onSign(message) is a callback for signing CAIP-122 message to verify blockchain account ownership
-  // returns the public identity key
-  public abstract register(params: {
-    account: string;
-    onSign: (message: string) => Cacao.Signature
-  }): Promise<string>;
 
   // ---------- Events ----------------------------------------------- //
 
