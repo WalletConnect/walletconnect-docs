@@ -274,34 +274,50 @@ module.exports = {
             "web3modal/about",
             {
               type: "category",
-              label: "React Usage",
+              label: "Usage",
               collapsed: true,
               collapsible: true,
               items: [
+                {
+                  type: "category",
+                  label: "React",
+                  collapsed: true,
+                  collapsible: true,
+                  items: [
                 "web3modal/react/installation",
                 "web3modal/react/hooks",
                 "web3modal/react/components",
+                  ],
+                },
+                {
+                  type: "category",
+                  label: "HTML",
+                  collapsed: true,
+                  collapsible: true,
+                  items: [
+                    "web3modal/html-js/installation",
+                    "web3modal/html-js/actions",
+                    "web3modal/html-js/components",
+                  ],
+                },
               ],
             },
             {
               type: "category",
-              label: "HTML Usage",
+              label: "Advanced",
               collapsed: true,
               collapsible: true,
               items: [
-                "web3modal/html-js/installation",
-                "web3modal/html-js/actions",
-                "web3modal/html-js/components",
-              ],
-            },
-            {
-              type: "category",
-              label: "Standalone Usage",
-              collapsed: true,
-              collapsible: true,
-              items: [
-                "web3modal/standalone/installation",
-                "web3modal/standalone/actions",
+                {
+                  type: "category",
+                  label: "Standalone Mode",
+                  collapsed: true,
+                  collapsible: true,
+                  items: [
+                    "web3modal/standalone/installation",
+                    "web3modal/standalone/actions",
+                  ],
+                },
               ],
             },
             "web3modal/configuration",
