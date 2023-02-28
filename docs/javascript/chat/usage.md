@@ -55,6 +55,8 @@ To allow for other Chat SDK user's to invite you to a chat, you need to register
 
 The key server expects a full CAIP-2 account for the address (as shown below).
 
+`onSign` will be used to sign the identity key using a wallet, one could supply `wagmi`'s [signMessage](https://wagmi.sh/core/actions/signMessage) function here for example.
+
 ```javascript
 await chatClient.register({ account: `eip155:1:0xa6de541...`, onSign: async () => {} });
 ```
