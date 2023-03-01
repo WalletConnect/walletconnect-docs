@@ -196,7 +196,7 @@ public struct Thread: Codable, Equatable {
 
 In order to use Chat SDK account must register identity in [Keyserver](https://docs.walletconnect.com/2.0/specs/servers/keys/). To verify ownership over blockchain account when registering identities in [Keyserver](https://docs.walletconnect.com/2.0/specs/servers/keys/) user's must sign message provided on `onSign(message: String)` callback. Currenlty only [`EIP191`](https://eips.ethereum.org/EIPS/eip-191) signatures are supported in [Keyserver](https://docs.walletconnect.com/2.0/specs/servers/keys/)
 
-##### Chat.instance.register
+##### `Chat.instance.register`
 ```swift
 func register(account: Account, privateKey: String) async throws {
     _ = try await Chat.instance.register(account: account) { [unowned self] message in
