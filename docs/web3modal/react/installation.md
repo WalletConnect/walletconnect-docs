@@ -55,3 +55,11 @@ function HomePage() {
   return <Web3Button />
 }
 ```
+
+## Use wagmi hooks
+
+[wagmi](https://wagmi.sh) provides everything you'll need to start working with accounts, contracts, chains and much more.
+
+```tsx
+import { useAccount, useContract, useSigner } from 'wagmi'
+```

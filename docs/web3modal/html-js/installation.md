@@ -42,3 +42,11 @@ Add our pre-built button component in your app to open/close connection and acco
   <w3m-core-button></w3m-core-button>
 </body>
 ```
+
+## Use wagmi core actions
+
+[wagmi core](https://wagmi.sh) provides everything you'll need to start working with accounts, contracts, chains and much more.
+
+```tsx
+import { getAccount, readContract, getSigner } from '@wagmi/core'
+```

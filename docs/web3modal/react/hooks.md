@@ -1,8 +1,8 @@
 # Hooks
 
-## Modal Hooks
+For majority of your tasks like getting account details, managing chains, interacting with contracts etc. you will be using react hooks provided by [wagmi](https://wagmi.sh), so make sure to read over their documentation as well. Below are some Web3Modal specific hooks that you might find useful.
 
-### useWeb3Modal
+## useWeb3Modal
 
 Hook to programmatically control the modal. Useful when you want to use your own UI elements and subscribe to modals state.
 
@@ -29,7 +29,7 @@ close();
 setDefaultChain(polygon);
 ```
 
-### useWeb3ModalTheme
+## useWeb3ModalTheme
 
 Hook to set or update theme options like `themeVariables` and `themeMode`.
 
@@ -51,9 +51,3 @@ setTheme({
   }
 })
 ```
-
-## Wagmi Hooks
-
-[Wagmi react](https://wagmi.sh/react/getting-started) has a collection of Hooks containing everything you need to start working with Ethereum. wagmi makes it easy to display ENS and balance information, sign messages, interact with contracts, and much more — all with caching, request deduplication, and persistence.
-
-See [wagmi docs](https://wagmi.sh/react/getting-started) for more information.
