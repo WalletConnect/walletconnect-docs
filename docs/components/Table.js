@@ -12,9 +12,9 @@ export const Table = ({ headers, data }) => {
       </thead>
       <tbody>
         {data.map((row) => (
-          <tr key={row.feature}>
+          <tr key={Object.keys(row)[0]}>
             {Object.values(row).map((cell) => (
-              <td key={cell}>{cell}</td>
+              <td key={cell}>{cell.code ? <code>{cell.code}</code> : cell}</td>
             ))}
           </tr>
         ))}
