@@ -284,9 +284,9 @@ module.exports = {
                   collapsed: true,
                   collapsible: true,
                   items: [
-                "web3modal/react/installation",
-                "web3modal/react/hooks",
-                "web3modal/react/components",
+                    "web3modal/react/installation",
+                    "web3modal/react/hooks",
+                    "web3modal/react/components",
                   ],
                 },
                 {
@@ -321,6 +321,7 @@ module.exports = {
               ],
             },
             "web3modal/configuration",
+            "web3modal/theming",
             "web3modal/faq",
           ],
         },
