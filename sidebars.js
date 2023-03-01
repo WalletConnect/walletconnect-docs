@@ -274,7 +274,7 @@ module.exports = {
             "web3modal/about",
             {
               type: "category",
-              label: "Usage",
+              label: "Getting Started",
               collapsed: true,
               collapsible: true,
               items: [

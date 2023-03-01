@@ -31,7 +31,7 @@ setDefaultChain(polygon);
 
 ### useWeb3ModalTheme
 
-Hook to set or update theme options like `themeColor`, `themeMode` and `themeBackground`.
+Hook to set or update theme options like `themeVariables` and `themeMode`.
 
 ```tsx
 import { useWeb3ModalTheme } from "@web3modal/react";
@@ -44,8 +44,11 @@ theme;
 // Set modal theme
 setTheme({
   themeMode: "dark",
-  themeColor: "orange",
-  themeBackground: "gradient",
+  themeVariables: {
+    "--w3m-font-family": "Roboto, sans-serif",
+    "--w3m-accent-color": "#F5841F",
+    // ...
+  },
 });
 ```
 

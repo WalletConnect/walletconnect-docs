@@ -102,6 +102,16 @@ explorerAllowList: [
 
 ### explorerDenyList (optional)
 
+### termsOfServiceUrl (optional)
+
+String url to your terms of service page, if specified will append special "legal info" footer to the modal. Defaults to `undefined`
+
+```ts
+termsOfServiceUrl: "https://example.com/terms-and-conditions";
+```
+
+### privacyPolicyUrl (optional)
+
 Some wallet data in Web3Modal is fetched from our explorer api [explorer.walletconnect.com](https://explorer.walletconnect.com/?type=wallet). You can define a deny list for the wallets that you want to be excluded. Deny list is an array of wallet id's. You can get / copy these id's from the explorer link mentioned before. Defaults to `undefined`.
 
 ```ts
@@ -112,6 +122,8 @@ explorerDenyList: [
   "4622a2b2d6af1c9844944291e5e7351a6aa24cd7b23099efac1b2fd875da31a0",
 ];
 ```
+
+## Feature Options
 
 ### enableNetworkView (optional)
 
@@ -129,15 +141,13 @@ Option to enable or disable the modal's account view. The default setting is set
 enableAccountView: false;
 ```
 
-### termsOfServiceUrl (optional)
+### enableExplorer (optional)
 
-String url to your terms of service page, if specified will append special "legal info" footer to the modal. Defaults to `undefined`
+Option to enable or disable wallet fetching from [explorer.walletconnect.com](https://explorer.walletconnect.com/?type=wallet). Defaults to `true`.
 
 ```ts
-termsOfServiceUrl: "https://example.com/terms-and-conditions";
+enableExplorer: false;
 ```
-
-### privacyPolicyUrl (optional)
 
 String url to your privacy policy page, if specified will append special "legal info" footer to the modal. Defaults to `undefined`
 
@@ -155,38 +165,19 @@ Puts Web3Modal into dark or light mode. Defaults to user's system preference.
 themeMode: "dark" | "light";
 ```
 
-### themeColor (optional)
+### themeVariables (optional)
 
-Changes Web3Modal's accent color. Defaults to WalletConnect brand color.
-
-```ts
-themeColor: "default" |
-  "blackWhite" |
-  "blue" |
-  "green" |
-  "magenta" |
-  "orange" |
-  "purple" |
-  "teal";
-```
-
-### themeBackground (optional)
-
-Changes Web3Modal's background to animated gradient or solid color. Defaults to `gradient` on desktop and `themeColor` on mobile.
+Allows to override Web3Modal's css styles. See [theming](./theming) for all available options.
 
 ```ts
-themeBackground: "gradient" | "themeColor";
+themeVariables: {
+  "--w3m-font-family": "Roboto, sans-serif",
+  "--w3m-accent-color": "#F5841F",
+  // ...
+};
 ```
 
-### themeZIndex (optional)
-
-Changes Web3Modal's z-index. Defaults to `89`.
-
-```ts
-themeZIndex: 9999;
-```
-
-## Standalone Mode Options
+## Standalone Options
 
 ### standaloneChains (optional)
 
