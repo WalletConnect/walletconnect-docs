@@ -15,15 +15,15 @@ return <Web3Modal projectId="..." ethereumClient={...} />;
 Pre-styled connect/disconnect button that reacts to modal's theme changes.
 
 ```tsx
-import { Web3Button } from "@web3modal/react";
+import { Web3Button } from '@web3modal/react'
 
 interface Props {
-  icon?: "show" | "hide";
-  label?: string;
-  balance?: "show" | "hide";
+  icon?: 'show' | 'hide'
+  label?: string
+  balance?: 'show' | 'hide'
 }
 
-return <Web3Button />;
+return <Web3Button />
 ```
 
 ## Web3NetworkSwitch
@@ -31,7 +31,7 @@ return <Web3Button />;
 Pre-styled network switch button that reacts to modal's theme and network changes.
 
 ```tsx
-import { Web3NetworkSwitch } from "@web3modal/react";
+import { Web3NetworkSwitch } from '@web3modal/react'
 
-return <Web3NetworkSwitch />;
+return <Web3NetworkSwitch />
 ```

@@ -34,22 +34,22 @@ setDefaultChain(polygon);
 Hook to set or update theme options like `themeVariables` and `themeMode`.
 
 ```tsx
-import { useWeb3ModalTheme } from "@web3modal/react";
+import { useWeb3ModalTheme } from '@web3modal/react'
 
-const { theme, setTheme } = useWeb3ModalTheme();
+const { theme, setTheme } = useWeb3ModalTheme()
 
 // Modal's theme object
-theme;
+theme
 
 // Set modal theme
 setTheme({
-  themeMode: "dark",
+  themeMode: 'dark',
   themeVariables: {
-    "--w3m-font-family": "Roboto, sans-serif",
-    "--w3m-accent-color": "#F5841F",
+    '--w3m-font-family': 'Roboto, sans-serif',
+    '--w3m-accent-color': '#F5841F'
     // ...
-  },
-});
+  }
+})
 ```
 
 ## Wagmi Hooks
