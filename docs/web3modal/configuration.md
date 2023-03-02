@@ -1,4 +1,4 @@
-# Configuration
+# Options
 
 Web3Modal is configurable via combination of options below and [wagmi.sh](https://wagmi.sh).
 
@@ -9,7 +9,7 @@ Web3Modal is configurable via combination of options below and [wagmi.sh](https:
 Your project’s unique identifier that can be obtained at [cloud.walletconnect.com](https://cloud.walletconnect.com). Enables following functionalities within Web3Modal: wallet and chain logos, optional walletconnect rpc, support for all wallets from [explorer.walletconnect.com](https://explorer.walletconnect.com) and WalletConnect v2 support. Defaults to `undefined`.
 
 ```ts
-projectId: string;
+projectId: string
 ```
 
 ### mobileWallets (optional)
@@ -84,7 +84,7 @@ tokenImages: {
 Before the user establishes a connection, the default wagmi chain can be set. This defaults to the `mainnet` if configured, or the first chain in the array of all available wagmi chains. Once the user is connected, utilize the network actions provided by wagmi.
 
 ```ts
-defaultChain: polygon;
+defaultChain: polygon
 ```
 
 ### explorerAllowList (optional)
@@ -94,10 +94,10 @@ Some wallet data in Web3Modal is fetched from our explorer api [explorer.walletc
 ```ts
 explorerAllowList: [
   // rainbow
-  "1ae92b26df02f0abca6304df07debccd18262fdf5fe82daa81593582dac9a369",
+  '1ae92b26df02f0abca6304df07debccd18262fdf5fe82daa81593582dac9a369',
   // trust
-  "4622a2b2d6af1c9844944291e5e7351a6aa24cd7b23099efac1b2fd875da31a0",
-];
+  '4622a2b2d6af1c9844944291e5e7351a6aa24cd7b23099efac1b2fd875da31a0'
+]
 ```
 
 ### explorerDenyList (optional)
@@ -107,7 +107,7 @@ explorerAllowList: [
 String url to your terms of service page, if specified will append special "legal info" footer to the modal. Defaults to `undefined`
 
 ```ts
-termsOfServiceUrl: "https://example.com/terms-and-conditions";
+termsOfServiceUrl: 'https://example.com/terms-and-conditions'
 ```
 
 ### privacyPolicyUrl (optional)
@@ -117,10 +117,10 @@ Some wallet data in Web3Modal is fetched from our explorer api [explorer.walletc
 ```ts
 explorerDenyList: [
   // rainbow
-  "1ae92b26df02f0abca6304df07debccd18262fdf5fe82daa81593582dac9a369",
+  '1ae92b26df02f0abca6304df07debccd18262fdf5fe82daa81593582dac9a369',
   // trust
-  "4622a2b2d6af1c9844944291e5e7351a6aa24cd7b23099efac1b2fd875da31a0",
-];
+  '4622a2b2d6af1c9844944291e5e7351a6aa24cd7b23099efac1b2fd875da31a0'
+]
 ```
 
 ## Feature Options
@@ -130,7 +130,7 @@ explorerDenyList: [
 If more than 1 chain was provided in modal or wagmi configuration users will be show network selection view before selecting a wallet, this option can enable or disable this behavior. Defaults to `false`
 
 ```ts
-enableNetworkView: true;
+enableNetworkView: true
 ```
 
 ### enableAccountView (optional)
@@ -138,7 +138,7 @@ enableNetworkView: true;
 Option to enable or disable the modal's account view. The default setting is set to `true`.
 
 ```ts
-enableAccountView: false;
+enableAccountView: false
 ```
 
 ### enableExplorer (optional)
@@ -146,13 +146,13 @@ enableAccountView: false;
 Option to enable or disable wallet fetching from [explorer.walletconnect.com](https://explorer.walletconnect.com/?type=wallet). Defaults to `true`.
 
 ```ts
-enableExplorer: false;
+enableExplorer: false
 ```
 
 String url to your privacy policy page, if specified will append special "legal info" footer to the modal. Defaults to `undefined`
 
 ```ts
-privacyPolicyUrl: "https://example.com/privacy-policy";
+privacyPolicyUrl: 'https://example.com/privacy-policy'
 ```
 
 ## Theming Options
@@ -162,7 +162,7 @@ privacyPolicyUrl: "https://example.com/privacy-policy";
 Puts Web3Modal into dark or light mode. Defaults to user's system preference.
 
 ```ts
-themeMode: "dark" | "light";
+themeMode: 'dark' | 'light'
 ```
 
 ### themeVariables (optional)
@@ -185,11 +185,11 @@ When using Web3Modal in standalone mode (without wagmi) you can define array of 
 
 ```ts
 standaloneChains: [
-  "eip155:1",
-  "solana:4sGjMW1sUnHzSxGspuhpqLDx6wiyjNtZ",
-  "cosmos:cosmoshub-4",
-  "polkadot:91b171bb158e2d3848fa23a9f1c25182",
-];
+  'eip155:1',
+  'solana:4sGjMW1sUnHzSxGspuhpqLDx6wiyjNtZ',
+  'cosmos:cosmoshub-4',
+  'polkadot:91b171bb158e2d3848fa23a9f1c25182'
+]
 ```
 
 ## Wagmi Options

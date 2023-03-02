@@ -320,7 +320,11 @@ module.exports = {
                   label: 'Standalone Mode',
                   collapsed: true,
                   collapsible: true,
-                  items: ['web3modal/standalone/installation', 'web3modal/standalone/actions']
+                  items: [
+                    'web3modal/standalone/about',
+                    'web3modal/standalone/installation',
+                    'web3modal/standalone/actions'
+                  ]
                 }
               ]
             },
