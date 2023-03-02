@@ -44,3 +44,6 @@ url: `/2.0/kotlin/web3wallet/installation`
 - https://github.com/Eucalyptus-Labs/wallet-connect-v2-dart
 - https://github.com/wakumo/flutter-wallet-connect-v2
 - https://github.com/Orange-Wallet/wallet-connect-dart-v2
+
+**Unreal Engine**
+- https://github.com/Quantum-Connect/WalletConnectUnrealEngineV1
