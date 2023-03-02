@@ -1,4 +1,4 @@
-import Table from "../components/Table";
+import Table from "../../components/Table";
 
 # Theming
 
@@ -11,8 +11,8 @@ Below is an example of overiding default font and main accent color in `@web3mod
 ```tsx
 <Web3Modal
   themeVariables={{
-    "--w3m-font-family": "Roboto, sans-serif",
-    "--w3m-accent-color": "#F5841F",
+    '--w3m-font-family': 'Roboto, sans-serif',
+    '--w3m-accent-color': '#F5841F'
   }}
 />
 ```
@@ -22,10 +22,10 @@ And equivalend for `@web3modal/html` and `@web3modal/standalone`
 ```ts
 const web3Modal = new Web3Modal({
   themeVariables: {
-    "--w3m-font-family": "Roboto, sans-serif",
-    "--w3m-accent-color": "#F5841F",
-  },
-});
+    '--w3m-font-family': 'Roboto, sans-serif',
+    '--w3m-accent-color': '#F5841F'
+  }
+})
 ```
 
 ## Modal Variables
