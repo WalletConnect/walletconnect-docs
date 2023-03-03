@@ -1,8 +1,8 @@
-import Table from "../../components/Table";
+import Table from "../components/Table";
 
 # Theming
 
-In addition to [`themeMode`](./configuration.md#thememode-optional) config, Web3Modal uses [css variables](https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties) for majority of it's styles. You can override these variables via `themeVariables` config to customize the look and feel of the modal to match your own design.
+In addition to [`themeMode`](./options.md#thememode-optional) config, Web3Modal uses [css variables](https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties) for majority of it's styles. You can override these variables via `themeVariables` config to customize the look and feel of the modal to match your own design.
 
 ## Example
 

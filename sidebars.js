@@ -307,7 +307,7 @@ module.exports = {
               label: 'Customization',
               collapsed: true,
               collapsible: true,
-              items: ['web3modal/customization/options', 'web3modal/customization/theming']
+              items: ['web3modal/options', 'web3modal/theming']
             },
             {
               type: 'category',

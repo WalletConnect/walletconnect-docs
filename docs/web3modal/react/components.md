@@ -2,7 +2,7 @@
 
 ## Web3Modal
 
-Core component that should be placed at the root of your app. See [configuration docs](../configuration.md) for available props. Additionally to configuration props, this component also requires `ethereumClient` prop which references wagmi client.
+Core component that should be placed at the root of your app. See [options docs](../options.md) for available props. Additionally to configuration props, this component also requires `ethereumClient` prop which references wagmi client.
 
 ```tsx
 import { Web3Modal } from "@web3modal/react";
