@@ -315,6 +315,9 @@ module.exports = {
               collapsed: true,
               collapsible: true,
               items: [
+                'web3modal/advanced/wallets',
+                'web3modal/advanced/chains',
+                'web3modal/advanced/providers',
                 {
                   type: 'category',
                   label: 'Standalone Mode',

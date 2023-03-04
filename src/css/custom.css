@@ -301,12 +301,10 @@ img[alt='web3modal-customisation'] {
   border: 1px solid var(--ifm-color-gray-600) !important;
 }
 
-.theme-doc-sidebar-item-link-level-4,
 .theme-doc-sidebar-item-link-level-5 {
   position: relative;
 }
 
-.theme-doc-sidebar-item-link-level-4 .menu__link::before,
 .theme-doc-sidebar-item-link-level-5 .menu__link::before {
   content: '';
   position: absolute;
