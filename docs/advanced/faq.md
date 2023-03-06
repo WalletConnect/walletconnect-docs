@@ -1,5 +1,10 @@
 # FAQs
 
+<details className="box faq"><summary className="faq-question">What chains does WalletConnect support?</summary>
+<p className="faq-answer">WalletConnect as a protocol is chain agnostic.</p>
+<p className="faq-answer">However, our specific SDKs are more limited in what chains they support. TODO document this</p>
+</details>
+
 <details className="box faq"><summary className="faq-question">Will the relay server <code>bridge.walletconnect.org</code> still work in v2?</summary>
 <p className="faq-answer">
 
