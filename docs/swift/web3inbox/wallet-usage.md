@@ -32,7 +32,7 @@ Web3Inbox.instance
 ```swift
 protocol Web3InboxClient {
 	/// Returns WKWebView instance with Web3Inbox web app
-	func getWebView() -> WKWebView { get }
+	func getWebView() -> WKWebView
 
 	/// Reconfigure Web3Inbox SDK with another account. Useful for account changing
 	func setAccount( _ account: Account, onSign: @escaping SigningCallback) async throws
