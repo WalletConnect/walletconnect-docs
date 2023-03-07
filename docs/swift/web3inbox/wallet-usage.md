@@ -21,7 +21,7 @@ func onSing(_ message: String) -> SigningResult {
 
 ### Use client instance
 
-Chat client instance is a singleton and you can access it by calling
+Web3Inbox client instance is a singleton and you can access it by calling
 
 ```swift
 Web3Inbox.instance
