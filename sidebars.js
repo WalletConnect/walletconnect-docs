@@ -318,6 +318,7 @@ module.exports = {
                 'web3modal/advanced/wallets',
                 'web3modal/advanced/chains',
                 'web3modal/advanced/providers',
+                'web3modal/advanced/mobile-linking',
                 {
                   type: 'category',
                   label: 'Standalone Mode',
