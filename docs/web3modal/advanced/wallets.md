@@ -1,6 +1,6 @@
 # Wallets
 
-Web3Modal will display wallets from [WalletConnect's explorer](https://explorer.walletconnect.com), as well as any manually added wallets. If [wagmi](https://wagmi.sh) is used, it will also display connector wallets like [InjectedConnector](https://wagmi.sh/react/connectors/injected) and any other user defined connectors. Depending on user's platform (desktop or mobile) different wallet lists will be displayed.
+Web3Modal will display wallets from [WalletConnect's explorer](https://explorer.walletconnect.com), as well as any manually added wallets. If [wagmi](https://wagmi.sh) is used, it will also display connector wallets like [InjectedConnector](https://wagmi.sh/react/connectors/injected) and any other user defined connectors. Depending on the user's platform (desktop or mobile) different wallet lists will be displayed.
 
 ## Explorer wallets
 
