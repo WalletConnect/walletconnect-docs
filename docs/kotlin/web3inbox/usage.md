@@ -1,3 +1,5 @@
+# Usage
+
 ## Web3Inbox SDK
 
 Web3Inbox SDK enables easy intergation of [Web3Inbox](https://web3inbox.com/). To use Web3Inbox SDK simply initalize the client and place either compose or xml view into your app. 
