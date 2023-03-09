@@ -18,6 +18,6 @@ Fortunately, compared to iOS, Android has much better support for mobile linking
 
 ## For dapps
 
-- Every action that needs user to be redirected to a wallet needs to be triggered by explicit user action like clicking on a button or a link. If you perform a sign / rpc etc. request without prior user action, redirect to wallet will likely fail.
+- Every task that relies on user to be redirected to a wallet needs to be triggered by explicit user action like clicking on a button or a link. If you perform a sign / rpc etc. request without prior user action, redirect to wallet will likely fail.
 - Make sure you don't don't do any extra work besides your original action as there seems to be a limit of 300ms between user click and redirect to the wallet. If there is other network request in between, redirect will likely fail.
 - Use libraries like [wagmi](https://wagmi.sh) or [viem](https://viem.sh) as they provide prepare/simulate tools that automatically handle many edge cases mentioned above.
