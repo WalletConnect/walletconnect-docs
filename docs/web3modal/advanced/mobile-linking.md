@@ -1,6 +1,6 @@
 # Mobile Linking
 
-When used on mobile, Web3Modal uses and takes care of native mobile linking to connect wallets and perform actions. This guide outlines best practices for setting up these links as a wallet and ensuring eberything works as expected as a dapp. Wallets can create or update their project details at [cloud.walletconnect.com](https://cloud.walletconnect.com/).
+When used on mobile, Web3Modal uses and takes care of native mobile linking to connect wallets and perform actions. This guide outlines best practices for setting up these links as a wallet and ensuring everything works as expected as a dapp. Wallets can create or update their project details at [cloud.walletconnect.com](https://cloud.walletconnect.com/).
 
 ## For iOS wallets
 
@@ -9,11 +9,11 @@ Web3Modal favours [universal links](https://developer.apple.com/ios/universal-li
 - Ensure your universal link doesn't use redirects.
 - If you are using a subdomain, it needs to be explicitly set up in XCode.
 - Host your universal link on a fast cdn like [Cloudflare](https://cloudflare.com).
-- Use established linking sollutions like [Firebase dynamic links](https://firebase.google.com/docs/dynamic-links).
+- Use established linking solutions like [Firebase dynamic links](https://firebase.google.com/docs/dynamic-links).
 
 ## For Android wallets
 
-Fortunately, compared to iOS, Android has much better support for mobile linking. Web3Modal will show a special view with a single button that redirects user to `wc://` link, this triggers native android view that will show all instaleld apps that can handle this link.
+Fortunately, compared to iOS, Android has much better support for mobile linking. Web3Modal will show a special view with a single button that redirects user to `wc://` link, this triggers native android view that will show all installed apps that can handle this link.
 
 ## For dapps
 
