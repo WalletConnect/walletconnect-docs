@@ -10,6 +10,7 @@ Web3Modal favours [universal links](https://developer.apple.com/ios/universal-li
 - If you are using a subdomain, it needs to be explicitly set up in XCode.
 - Host your universal link on a fast cdn like [Cloudflare](https://cloudflare.com).
 - Use established linking solutions like [Firebase dynamic links](https://firebase.google.com/docs/dynamic-links).
+- Don't change your universal link often, it appears iOS caches it for a while.
 
 ## For Android wallets
 
