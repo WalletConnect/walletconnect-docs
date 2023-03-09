@@ -4,7 +4,7 @@ Web3Modal will display wallets from [WalletConnect's explorer](https://explorer.
 
 ## Explorer wallets
 
-Wallets are fetched from [WalletConnect explorer](https://explorer.walletconnect.com) based on configured chains and WalletConnect version. You can manage which wallets are displayed by using [explorerAllowList](../options.md#explorerallowlist-optional) or [explorerDenyList](../options.md#explorerdenylist-optional) options. To completely disable explorer wallets use [enableExplorer](../options.md#enableexplorer-optional) option.
+Wallets are fetched from [WalletConnect explorer](https://explorer.walletconnect.com) based on configured chains and WalletConnect version. You can manage which wallets are displayed by using [explorerAllowList](../options.md#explorerallowlist-optional) or [explorerDenyList](../options.md#explorerdenylist-optional) options. To completely disable explorer wallets use [enableExplorer](../options.md#enableexplorer-optional) option. You can submit your own wallet to explorer at [cloud.walletconnect.com](https://cloud.walletconnect.com).
 
 ## Manual wallets
 
@@ -12,7 +12,7 @@ You can add aditional native mobile wallets via [mobileWallets](../options.md#mo
 
 ## Wagmi connectors
 
-By default Web3Modal exposes `w3mConnectors` utility that returns pre-configured wagmi connectors for [WalletConnectConnector](https://wagmi.sh/react/connectors/walletConnect) and [InjectedConnector](https://wagmi.sh/react/connectors/injected). You can easily override these (however `WalletConnectConnector` is required) or extend connectors i.e here is exampel of adding coinbase and safe connectors:
+By default Web3Modal exposes `w3mConnectors` utility that returns pre-configured wagmi connectors for [WalletConnectConnector](https://wagmi.sh/react/connectors/walletConnect) and [InjectedConnector](https://wagmi.sh/react/connectors/injected). You can easily override these (however `WalletConnectConnector` is required) or extend connectors. Please see [wagmi](https://wagmi.sh/react/connectors/injected) or [@wagmi/core](https://wagmi.sh/core/connectors/injected) documentation for more details. As an example:
 
 ```ts
 const wagmiClient = createClient({
