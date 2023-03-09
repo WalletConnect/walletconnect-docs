@@ -3,15 +3,15 @@
 :root {
   --ifm-color-primary: #66b0ff;
   --ifm-link-hover-color: #3396ff;
-  --ifm-heading-font-family: "ABC Diatype Bold", sans-serif;
+  --ifm-heading-font-family: 'ABC Diatype Bold', sans-serif;
   --ifm-heading-font-weight: bold;
-  --ifm-font-family-base: "ABC Diatype", sans-serif;
+  --ifm-font-family-base: 'ABC Diatype', sans-serif;
   --ifm-heading-color: #ffffff;
   --ifm-font-color-base: #c9cfcf;
   --ifm-color-gray-800: hsla(0, 0%, 100%, 0.1);
 }
 
-html[data-theme="dark"] {
+html[data-theme='dark'] {
   --ifm-background-color: #141414;
 }
 
@@ -21,24 +21,9 @@ h3,
 h4,
 h5,
 h6 {
-  font-feature-settings: "case", "ss02", "ss04", "ss06";
-  font-family: "ABC Diatype Bold", sans-serif;
+  font-feature-settings: 'case', 'ss02', 'ss04', 'ss06';
+  font-family: 'ABC Diatype Bold', sans-serif;
   letter-spacing: -0.03em;
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  background-image: linear-gradient(
-    45deg,
-    var(--ifm-heading-color),
-    var(--ifm-color-primary)
-  );
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
 }
 
 h1 {
@@ -46,18 +31,19 @@ h1 {
   padding-bottom: 20px;
 }
 
+h2 {
+  margin-top: 50px !important;
+  margin-bottom: 10px !important;
+}
+
 h1::after {
-  content: "";
+  content: '';
   position: absolute;
   width: 100%;
   height: 1px;
   bottom: 0;
   left: 0;
-  background-image: linear-gradient(
-    45deg,
-    var(--ifm-color-gray-800),
-    transparent
-  );
+  background-image: linear-gradient(45deg, var(--ifm-color-gray-800), transparent);
 }
 
 /* Docusaurus */
@@ -105,7 +91,7 @@ h1::after {
 
 .navbar__brand span {
   text-transform: uppercase;
-  font-family: "Office Code Pro", monospace;
+  font-family: 'Office Code Pro', monospace;
   font-weight: normal;
   color: var(--ifm-color-primary);
   margin-left: 5px;
@@ -160,18 +146,41 @@ h1::after {
 }
 
 .theme-doc-sidebar-container > div::after {
-  content: "";
+  content: '';
   position: absolute;
   top: 0;
   bottom: 0;
   right: 0;
   width: 1px;
   height: 100%;
-  background: linear-gradient(
-    180deg,
-    var(--ifm-color-gray-800) 0,
-    transparent 80%
-  );
+  background: linear-gradient(180deg, var(--ifm-color-gray-800) 0, transparent 80%);
+}
+
+.hash-link {
+  border: none;
+  color: var(--ifm-color-primary);
+}
+
+.hash-link:hover {
+  color: var(--ifm-link-hover-color);
+}
+
+.theme-doc-footer-edit-meta-row a {
+  border-bottom: none;
+  color: var(--ifm-color-primary);
+}
+
+.theme-doc-footer-edit-meta-row a:hover {
+  color: var(--ifm-link-hover-color);
+}
+
+.pagination-nav__link {
+  background-color: rgba(255, 255, 255, 0.04);
+  border-color: rgba(255, 255, 255, 0.07);
+}
+
+.theme-code-block {
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 table {
@@ -194,11 +203,11 @@ table tr:nth-child(2n) {
   background-color: rgba(255, 255, 255, 0.05) !important;
 }
 
-img[alt="create-push-url"] {
+img[alt='create-push-url'] {
   width: 400px;
 }
 
-img[alt="web3modal-customisation"] {
+img[alt='web3modal-customisation'] {
   width: 700px;
 }
 
@@ -207,7 +216,7 @@ img[alt="web3modal-customisation"] {
 }
 
 .header-github-link:before {
-  content: "";
+  content: '';
   width: 24px;
   height: 24px;
   display: flex;
@@ -222,18 +231,14 @@ img[alt="web3modal-customisation"] {
 }
 
 .menu_outer_list:not(:nth-child(2))::before {
-  content: "";
+  content: '';
   display: block;
   position: absolute;
   left: 12px;
   top: 0;
   height: 1px;
   width: 100%;
-  background: linear-gradient(
-    90deg,
-    var(--ifm-color-gray-800) 0,
-    transparent 100%
-  );
+  background: linear-gradient(90deg, var(--ifm-color-gray-800) 0, transparent 100%);
 }
 
 .menu_outer_list:nth-child(2) {
@@ -244,7 +249,7 @@ img[alt="web3modal-customisation"] {
   text-transform: uppercase;
   font-size: 13px;
   color: var(--ifm-color-gray-600) !important;
-  font-family: "Office Code Pro", "Courier New", Courier, monospace;
+  font-family: 'Office Code Pro', 'Courier New', Courier, monospace;
 }
 
 .menu_outer_list > div:hover {
@@ -261,18 +266,29 @@ img[alt="web3modal-customisation"] {
 }
 
 .table-of-contents::before {
-  content: "";
+  content: '';
   position: absolute;
   top: 0;
   bottom: 0;
   left: 0;
   width: 1px;
   height: 100%;
-  background: linear-gradient(
-    180deg,
-    var(--ifm-color-gray-800) 0,
-    transparent 100%
-  );
+  background: linear-gradient(180deg, var(--ifm-color-gray-800) 0, transparent 100%);
+}
+
+.theme-doc-footer {
+  position: relative;
+  padding-top: 40px;
+}
+
+.theme-doc-footer::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 1px;
+  background-image: linear-gradient(90deg, var(--ifm-color-gray-800) 0, transparent 100%);
 }
 
 .DocSearch-Button {
@@ -285,14 +301,12 @@ img[alt="web3modal-customisation"] {
   border: 1px solid var(--ifm-color-gray-600) !important;
 }
 
-.theme-doc-sidebar-item-link-level-4,
 .theme-doc-sidebar-item-link-level-5 {
   position: relative;
 }
 
-.theme-doc-sidebar-item-link-level-4 .menu__link::before,
 .theme-doc-sidebar-item-link-level-5 .menu__link::before {
-  content: "";
+  content: '';
   position: absolute;
   left: 0;
   top: 10%;
@@ -319,17 +333,14 @@ img[alt="web3modal-customisation"] {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(100%, 1fr));
   grid-gap: 1rem;
+  margin-bottom: 20px;
 }
 
 .box {
   min-height: 33%;
   border: 1px solid var(--ifm-color-gray-800);
   border-radius: 14px;
-  background: linear-gradient(
-    135deg,
-    var(--ifm-color-gray-800) 0,
-    transparent 100%
-  );
+  background: linear-gradient(135deg, var(--ifm-color-gray-800) 0, transparent 100%);
   padding-inline: 1em;
   padding-top: 1em;
   cursor: pointer;
@@ -365,8 +376,8 @@ article ul {
   list-style: none;
 }
 
-article ul li:not([role="tab"])::before {
-  content: "→";
+article ul li:not([role='tab'])::before {
+  content: '→';
   color: rgba(255, 255, 255, 0.4);
   font-weight: bold;
   font-size: 12px;
@@ -425,11 +436,7 @@ article img {
 
 .tableMatrix {
   border-radius: 14px;
-  background: linear-gradient(
-    135deg,
-    var(--ifm-color-gray-900) 0,
-    transparent 100%
-  );
+  background: linear-gradient(135deg, var(--ifm-color-gray-900) 0, transparent 100%);
   box-shadow: inset 0 0 0 1px var(--ifm-color-gray-800);
   overflow: hidden;
 }

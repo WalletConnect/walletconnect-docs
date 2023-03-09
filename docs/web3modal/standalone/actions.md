@@ -39,7 +39,10 @@ Programmatically set or update modal's theme.
 ```js
 web3modal.setTheme({
   themeMode: "dark",
-  themeColor: "blue",
-  themeBackground: "gradient",
+  themeVariables: {
+    "--w3m-font-family": "Roboto, sans-serif",
+    "--w3m-accent-color": "#F5841F",
+    // ...
+  },
 });
 ```
