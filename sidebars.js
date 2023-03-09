@@ -473,7 +473,7 @@ module.exports = {
           collapsed: true,
           items: [
             "kotlin/web3inbox/installation",
-            "kotlin/web3inbox/wallet-usage",
+            "kotlin/web3inbox/usage",
           ],
         },
       ],
