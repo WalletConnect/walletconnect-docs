@@ -6,7 +6,7 @@ In addition to [`themeMode`](./options.md#thememode-optional) config, Web3Modal 
 
 ## Example
 
-Below is an example of overriding default font and main accent color in `@web3modal/react`
+Below is an example of overriding the default font and main accent color in `@web3modal/react`
 
 ```tsx
 <Web3Modal
