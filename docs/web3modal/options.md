@@ -98,7 +98,7 @@ explorerAllowList: [
 
 ## explorerDenyList (optional)
 
-Some wallet data in Web3Modal is fetched from our explorer api explorer.walletconnect.com. You can define a deny list for the wallets that you want to be excluded. Deny list is an array of wallet id's. You can get / copy these id's from the explorer link mentioned before. Defaults to undefined.
+Some wallet data in Web3Modal is fetched from our explorer api [explorer.walletconnect.com](https://explorer.walletconnect.com/?type=wallet). You can define a deny list for the wallets that you want to be excluded. Deny list is an array of wallet id's. You can get / copy these id's from the explorer link mentioned before. Defaults to undefined.
 
 ```ts
 explorerDenyList: [

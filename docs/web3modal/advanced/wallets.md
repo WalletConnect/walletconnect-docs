@@ -1,13 +1,26 @@
 # Wallets
 
-Web3Modal has extensive catalog of native mobile, desktop and web wallets that is powered by WalletConnect's [explorer api](https://explorer.walletconnect.com). In addition to this we also support [wagmi](https://wagmi.sh) connectors that enable extension wallet support, as well as custom integrations like [Coinbase wallet](https://www.coinbase.com/wallet), [Safe](https://safe.global) and many others. You can also add wallets manually.
+Web3Modal will display wallets from [WalletConnect's explorer](https://explorer.walletconnect.com), as well as any manually added wallets. If [wagmi](https://wagmi.sh) is used, it will also display connector wallets like [InjectedConnector](https://wagmi.sh/react/connectors/injected) and any other user defined connectors. Depending on user's platform (desktop or mobile) differetn wallet lists will be displayed.
 
-## Managing explorer wallets
+## Explorer wallets
 
-By default Web3Modal will use user provided configuration and fetch wallets that satisfy requirements for provided chains. You can disable this behaviour by setting [enableExplorer](../options.md#enableexplorer-optional) to `false`.
+Wallets are fetched from [WalletConnect explorer](https://explorer.walletconnect.com) based on configured chains and WalletConnect version. You can manage which wallets are displayed by using [explorerAllowList](../options.md#explorerallowlist-optional) or [explorerDenyList](../options.md#explorerdenylist-optional) options. To completely disable explorer wallets use [enableExplorer](../options.md#enableexplorer-optional) option.
 
-## Managing wagmi connectors
+## Manual wallets
 
-## Adding manual wallets
+You can add aditional native mobile wallets via [mobileWallets](../options.md#mobilewallets-optional) or desktop ones via [desktopWallets](../options.md#desktopwallets-optional).
 
-## Understanding wallet display on different platforms
+## Wagmi connectors
+
+By default Web3Modal exposes `w3mConnectors` utility that returns pre-configured wagmi connectors for [WalletConnectConnector](https://wagmi.sh/react/connectors/walletConnect) and [InjectedConnector](https://wagmi.sh/react/connectors/injected). You can easily override these (however `WalletConnectConnector` is required) or extend connectors i.e here is exampel of adding coinbase and safe connectors:
+
+```ts
+const wagmiClient = createClient({
+  // ...
+  connectors: [...w3mConnectors({}), new CoinbaseWalletConnector({}), new SafeConnector({})]
+})
+```
+
+## Change or add wallet images
+
+You can change existing wallet images or add new ones for manual wallets by using [walletImages](../options.md#walletimages-optional) option.
