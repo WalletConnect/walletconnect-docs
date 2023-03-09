@@ -10,10 +10,12 @@ abstract class Client {
   }): Promise<void>;
 
   // for proposer to create a session 
+  // - note: supports ttl extension
   public abstract connect(params: {
     requiredNamespaces: Map<string, ProposalNamespace>;
     relays?: RelayProtocolOptions[];
     pairingTopic: string;
+    ttl: number; // optional
   }): Promise<Sequence>;
 
   // for responder to approve a session proposal
@@ -41,10 +43,12 @@ abstract class Client {
   }): Promise<void>;
 
   // for proposer to request JSON-RPC request
+  // - note: supports ttl extension
   public abstract request(params: {
     topic: string;
     request: RequestArguments;
     chainId: string;
+    ttl: number; // optional
   }): Promise<any>;
 
   // for responder to respond JSON-RPC request
@@ -60,7 +64,7 @@ abstract class Client {
     chainId: string;
   }): Promise<void>;
 
-    // for either to ping a peer in a session
+  // for either to ping a peer in a session
   public abstract ping(params: {
     topic: string;
   }): Promise<void>;

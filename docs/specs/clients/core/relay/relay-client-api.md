@@ -35,7 +35,7 @@ interface Relay {
     fun disconnect()
     
     /*Listening for new incoming messages*/
-    fun on("relay_message", (topic: string, message: string, publishedAt: Int64, receivedAt: Int64) => {})
+    fun on("relay_message", (topic: string, message: string, publishedAt: Int64, receivedAt: Int64, ttl: Int64) => {})
 }
 ```
 
@@ -57,6 +57,11 @@ A Relay message is globally available and it's always a utf8 string. Therefore t
 ```sh
 message_id = sha256(message)
 ```
+
+
+### Message expiration
+
+Relay server monitors message expiration by the ttl parameter but the client also has this ability. Client could track message expiration using combination of `publishedAt` and `ttl` params from `relay_message` subscription. 
 
 ## FAQ
 
