@@ -10,10 +10,8 @@ To create an instance of `SignClient`, you need to pass in the core and metadata
 
 ```dart
 SignClient signClient = await SignClient.createInstance(
-    core: Core(
-        relayUrl: 'wss://relay.walletconnect.com', // The relay websocket URL
-        projectId: '123',
-    ),
+    relayUrl: 'wss://relay.walletconnect.com', // The relay websocket URL, leave blank to use the default
+    projectId: '123',
     metadata: PairingMetadata(
         name: 'dapp (Requester)',
         description: 'A dapp that can request that transactions be signed',
@@ -61,8 +59,8 @@ final signature = await signClient.request(
     topic: session.topic,
     chainId: 'eip155:1',
     request: SessionRequestParams(
-    method: 'eth_signTransaction',
-    params: 'json serializable parameters',
+        method: 'eth_signTransaction',
+        params: 'json serializable parameters',
     ),
 );
 ```
@@ -75,10 +73,9 @@ You can also respond to events from the wallet, like chain changed, using `onSes
 signClient.onSessionEvent.subscribe((SessionEvent? session) {
     // Do something with the event
 });
-
 signClient.registerEventHandler(
     namespace: 'kadena',
-    method: 'kadena_transaction_updated',
+    event: 'kadena_transaction_updated',
 );
 ```
 

@@ -6,10 +6,8 @@ To create an instance of Web3Wallet, you need to pass in the `core` and `metadat
 
 ```dart
 Web3Wallet web3Wallet = await Web3Wallet.createInstance(
-  core: Core(
-    relayUrl: 'wss://relay.walletconnect.com', // The relay websocket URL
-    projectId: '123',
-  ),
+  relayUrl: 'wss://relay.walletconnect.com', // The relay websocket URL, leave blank to use the default
+  projectId: '123',
   metadata: PairingMetadata(
     name: 'Wallet (Responder)',
     description: 'A wallet that can be requested to sign transactions',
@@ -20,57 +18,63 @@ Web3Wallet web3Wallet = await Web3Wallet.createInstance(
 
 ```
 
-## Chain Configuration
+## Setup Sign Request Handling
 
 Set up the methods and chains that your wallet supports.
 
 ```dart
+final kadenaSignRequestHandler = (String topic, dynamic parameters) async {
+  // Handling Steps
+  // 1. Parse the request, if there are any errors thrown while trying to parse
+  // the client will automatically respond to the requester with a 
+  // JsonRpcError.invalidParams error
+  final parsedResponse = parameters;
+
+  // 2. Show a modal to the user with the signature info: Allow approval/rejection
+  bool userApproved = await showDialog( // This is an example, you will have to make your own changes to make it work.
+    context: context,
+    builder: (context) {
+      return AlertDialog(
+        title: const Text('Sign Transaction'),
+        content: SizedBox(
+          width: 300,
+          height: 350,
+          child: Text(parsedResponse.toString()),
+        ),
+        actions: [
+          ElevatedButton(
+            onPressed: () => Navigator.pop(context, true),
+            child: Text('Accept'),
+          ),
+          ElevatedButton(
+            onPressed: () => Navigator.pop(context, false),
+            child: Text('Reject'),
+          ),
+        ],
+      );
+    },
+  );
+
+  // 3. Respond to the dApp based on user response
+  if (userApproved) {
+    return 'Signed!';
+  }
+  else {
+    return 'User Rejected!';
+  }
+}
+
 web3Wallet.registerRequestHandler(
   namespace: 'kadena',
   method: 'kadena_sign',
+  handler: kadenaSignRequestHandler,
 );
 ```
 
-## Pairing
+## Setup Auth Request Handling
 
-Scan the QR code and parse the URI, and pair with the dapp. Upon the first pairing, you will immediately receive `onSessionProposal` and `onAuthRequest` events.
-
-```dart
-Uri uri = Uri.parse(scannedUriString);
-await web3Wallet.pair(uri: uri);
-```
-
-## Responding to a Session Proposal
-
-Set up the proposal handler that will display the proposal to the user after the URI has been scanned.
-
-```dart
-late int id;
-web3Wallet.onSessionProposal.subscribe((SessionProposal? args) async {
-  // Handle UI updates using the args.params
-  // Keep track of the args.id for the approval response
-  id = args!.id;
-})
-```
-
-## Responding to Request
-
-```dart
-web3Wallet.onSessionRequest.subscribe((SessionRequestEvent? request) async {
-  // You can respond to requests in this manner
-  await clientB.respondSessionRequest(
-    topic: request.topic,
-    response: JsonRpcResponse<String>(
-      id: request.id,
-      result: 'Signed!',
-    ),
-  );
-});
-```
-
-## Auth Handling
-
-Set up the auth handling.
+Setup catching auth requests and formatting the message to be signed.
+This event should present the 
 
 ```dart
 clientB.onAuthRequest.subscribe((AuthRequest? args) async {
@@ -85,10 +89,79 @@ clientB.onAuthRequest.subscribe((AuthRequest? args) async {
         args!.payloadParams,
         ),
     );
+
+    // This is an example UI that can be presented to the user.
+    // I expect you will need to make changes to this to fit your needs.
+    bool userApproved = await showDialog( 
+        context: context,
+        builder: (context) {
+            return AlertDialog(
+                title: const Text('Approve Auth Request'),
+                content: SizedBox(
+                    width: 300,
+                    height: 350,
+                    child: Text(message),
+                ),
+                actions: [
+                    ElevatedButton(
+                        onPressed: () => Navigator.pop(context, true),
+                        child: Text('Accept'),
+                    ),
+                    ElevatedButton(
+                        onPressed: () => Navigator.pop(context, false),
+                        child: Text('Reject'),
+                    ),
+                ],
+            );
+        },
+    );
+
+    if (userApproved) {
+        // In this example I use EthSigUtil, but you can use any library that can perform a personal eth sign.
+        String sig = EthSigUtil.signPersonalMessage(
+            message: Uint8List.fromList(message.codeUnits),
+            privateKey: 'PRIVATE_KEY',
+        );
+        await web3Wallet.respondAuthRequest(
+            id: args.id,
+            iss: 'did:pkh:eip155:1:ETH_ADDRESS',
+            signature: CacaoSignature(t: CacaoSignature.EIP191, s: sig),
+        );
+    }
+    else {
+        await web3Wallet.respondAuthRequest(
+            id: args.id,
+            iss: 'did:pkh:eip155:1:ETH_ADDRESS',
+            error: WalletConnectErrorResponse(code: 12001, message: 'User rejected the signature request'),
+        );
+    }
 });
 ```
 
-## Approving the Sign Request
+## Setup Response to a Session Proposal
+
+Set up the proposal handler that will display the proposal to the user after the URI has been scanned.
+
+```dart
+late int id;
+web3Wallet.onSessionProposal.subscribe((SessionProposal? args) async {
+  // Handle UI updates using the args.params
+  // Keep track of the args.id for the approval response
+  id = args!.id;
+})
+```
+
+## Pairing
+
+Scan the QR code and parse the URI, and pair with the dapp.  
+Upon the first pairing, you will immediately receive `onSessionProposal` and `onAuthRequest` events.  
+
+```dart
+Uri uri = Uri.parse(scannedUriString);
+await web3Wallet.pair(uri: uri);
+```
+
+## Approve the Session Proposal
 
 Present the UI for approval.
 
@@ -110,7 +183,7 @@ await web3Wallet.approve(
 );
 ```
 
-## Rejecting the Sign Request
+## Reject the Session Proposal
 
 To reject the request, pass in an error code and reason. They can be found [here](https://docs.walletconnect.com/2.0/specs/clients/sign/error-codes).
 

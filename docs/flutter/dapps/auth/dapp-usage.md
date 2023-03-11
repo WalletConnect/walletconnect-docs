@@ -6,10 +6,8 @@ To create an instance of `AuthClient`, you need to pass in the core and metadata
 
 ```dart
 AuthClient authClient = await AuthClient.createInstance(
-    core: Core(
-        relayUrl: 'wss://relay.walletconnect.com', // The relay websocket URL
-        projectId: '123',
-    ),
+    relayUrl: 'wss://relay.walletconnect.com', // The relay websocket URL, leave blank to use the default
+    projectId: '123',
     metadata: PairingMetadata(
         name: 'dapp (Requester)',
         description: 'A dapp that can request that transactions be signed',
@@ -24,7 +22,7 @@ AuthClient authClient = await AuthClient.createInstance(
 To request authentication use the `requestAuth` method on the `authClient` object.
 
 ```dart
-final auth = await authClient.requestAuth(
+final AuthRequestResponse auth = await authClient.requestAuth(
   params: AuthRequestParams(
     aud: 'http://localhost:3000/login',
     domain: 'localhost:3000',
@@ -56,7 +54,6 @@ To handle a session approval and rejection using `AuthResponse` await the respon
 final AuthResponse authResponse = await authResponse.completer.future;
 if (authResponse.result != null) {
   // Having a result indicates that the signature has been verified.
-
   // Retrieve the wallet address from a successful response
   final walletAddress = AddressUtils.getDidAddress(authResponse.result!.p.iss);
 }
