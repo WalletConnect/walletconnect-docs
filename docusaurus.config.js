@@ -85,6 +85,12 @@ const config = {
           {
             type: 'docSidebar',
             position: 'left',
+            sidebarId: 'swift',
+            label: 'Swift'
+          },
+          {
+            type: 'docSidebar',
+            position: 'left',
             sidebarId: 'flutter',
             label: 'Flutter'
           },
