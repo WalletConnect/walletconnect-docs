@@ -2,7 +2,7 @@
 
 :::note
 
-WalletConnect v2 only supports the [Echo Server spec](https://github.com/WalletConnect/echo-server/blob/main/spec/spec.md).
+WalletConnect v2 only supports the [Echo Server spec](../../specs/servers/echo/echo-server-api.md).
 
 :::
 
@@ -18,7 +18,7 @@ The Echo Server is a push server for the WalletConnect v2 Protocol. It allows cl
 
 1. Use the [hosted](./prerequisites.md/#hosted-platform-recommended) platform (recommended).
 2. Self-Host our [server](https://github.com/WalletConnect/echo-server).
-3. Write their own implementation using the [spec](https://github.com/WalletConnect/echo-server/blob/main/spec/spec.md).
+3. Write their own implementation using the [spec](../../specs/servers/echo/echo-server-api.md).
 
 :::note
 For inquiries about self-hosting, please contact [Luther](https://t.me/lutherwc) or [Harry](https://t.me/theharryet) on Telegram.
