@@ -60,7 +60,7 @@ final kadenaSignRequestHandler = (String topic, dynamic parameters) async {
     return 'Signed!';
   }
   else {
-    return 'User Rejected!';
+    throw Errors.getSdkError(Errors.USER_REJECTED_SIGN);
   }
 }
 
@@ -190,10 +190,7 @@ To reject the request, pass in an error code and reason. They can be found [here
 ```dart
 await web3Wallet.reject(
     id: id,
-    reason: ErrorResponse(
-        code: 4001,
-        message: "User rejected request",
-    ),
+    reason: Errors.getSdkError(Errors.USER_REJECTED_SIGN),
 );
 ```
 
@@ -218,7 +215,7 @@ To reject the request, pass in an error code and reason. They can be found [here
 await web3Wallet.respondAuthRequest(
   id: args.id,
   iss: 'did:pkh:eip155:1:0x06C6A22feB5f8CcEDA0db0D593e6F26A3611d5fa',
-  error: WalletConnectErrorResponse(code: 12001, message: 'User rejected the signature request'),
+  error: Errors.getSdkError(Errors.USER_REJECTED_AUTH),
 );
 ```
 
