@@ -141,8 +141,8 @@ const result = await signClient.request({
 Sessions are saved to localstorage, meaning that even if the web page is reloaded, the session can still be retrieved, as demonstrated in the following code:
 
 ```ts
-    const lastKeyIndex = signClient.session.getAll().length - 1;
-    const lastSession = signClient.session.getAll()[lastKeyIndex];
+const lastKeyIndex = signClient.session.getAll().length - 1;
+const lastSession = signClient.session.getAll()[lastKeyIndex];
 ```
 
 ## Finding a Specific Session
