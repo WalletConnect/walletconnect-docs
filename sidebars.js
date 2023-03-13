@@ -607,12 +607,53 @@ module.exports = {
         }
       ]
     },
+  ],
+  flutter: [
     {
-      type: 'category',
-      label: 'Guides',
-      className: 'menu_outer_list',
+      type: "category",
+      label: "Products",
+      className: "menu_outer_list",
       collapsible: false,
-      items: ['swift/guides/examples-and-resources', 'swift/guides/mobile-linking']
+      items: [
+        {
+          type: "category",
+          label: "Web3Wallet SDK",
+          collapsible: true,
+          collapsed: true,
+          items: [
+            "flutter/wallets/installation",
+            "flutter/wallets/wallet-usage",
+          ],
+        },
+      ],
+    },
+    {
+      type: "category",
+      label: "Advanced",
+      className: "menu_outer_list",
+      collapsible: false,
+      items: [
+        {
+          type: "category",
+          label: "Sign",
+          collapsible: true,
+          collapsed: true,
+          items: [
+            "flutter/dapps/sign/installation",
+            "flutter/dapps/sign/dapp-usage"
+          ],
+        },
+        {
+          type: "category",
+          label: "Auth",
+          collapsible: true,
+          collapsed: true,
+          items: [
+            "flutter/dapps/auth/installation",
+            "flutter/dapps/auth/dapp-usage"
+          ],
+        },
+      ],
     }
-  ]
-}
+  ],
+};

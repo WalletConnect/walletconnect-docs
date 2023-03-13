@@ -79,3 +79,21 @@ signClient.registerEventHandler(
     event: 'kadena_transaction_updated',
 );
 ```
+
+# To Test
+
+Run tests using `flutter test`.
+Expected flutter version is: >`3.3.10`
+
+# Useful Commands
+
+* `flutter pub run build_runner build --delete-conflicting-outputs` - Regenerates JSON Generators
+* `flutter doctor -v` - get paths of everything installed.
+* `flutter pub get`
+* `flutter upgrade`
+* `flutter clean`
+* `flutter pub cache clean`
+* `flutter pub deps`
+* `flutter pub run dependency_validator` - show unused dependencies and more
+* `dart format lib/* -l 120`
+* `flutter analyze`

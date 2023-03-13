@@ -63,6 +63,7 @@ final kadenaSignRequestHandler = (String topic, dynamic parameters) async {
     return 'User Rejected!';
   }
 }
+
 web3Wallet.registerRequestHandler(
   namespace: 'kadena',
   method: 'kadena_sign',
@@ -160,7 +161,7 @@ Uri uri = Uri.parse(scannedUriString);
 await web3Wallet.pair(uri: uri);
 ```
 
-## Approve the Session Proposal
+## Approve a Session Proposal
 
 Present the UI for approval.
 
@@ -182,7 +183,7 @@ await web3Wallet.approve(
 );
 ```
 
-## Reject the Session Proposal
+## Reject a Session Proposal
 
 To reject the request, pass in an error code and reason. They can be found [here](https://docs.walletconnect.com/2.0/specs/clients/sign/error-codes).
 
@@ -195,3 +196,46 @@ await web3Wallet.reject(
     ),
 );
 ```
+
+## Approve an Auth Request
+
+You can approve a dapp's auth request by responding with the user's signature.
+
+```dart
+String sig = 'your sig here';
+await web3Wallet.respondAuthRequest(
+  id: args.id,
+  iss: 'did:pkh:eip155:1:0x06C6A22feB5f8CcEDA0db0D593e6F26A3611d5fa',
+  signature: CacaoSignature(t: CacaoSignature.EIP191, s: sig),
+);
+```
+
+## Reject an Auth Request
+
+To reject the request, pass in an error code and reason. They can be found [here](https://docs.walletconnect.com/2.0/specs/clients/sign/error-codes).
+
+```dart
+await web3Wallet.respondAuthRequest(
+  id: args.id,
+  iss: 'did:pkh:eip155:1:0x06C6A22feB5f8CcEDA0db0D593e6F26A3611d5fa',
+  error: WalletConnectErrorResponse(code: 12001, message: 'User rejected the signature request'),
+);
+```
+
+# To Test
+
+Run tests using `flutter test`.
+Expected flutter version is: >`3.3.10`
+
+# Useful Commands
+
+* `flutter pub run build_runner build --delete-conflicting-outputs` - Regenerates JSON Generators
+* `flutter doctor -v` - get paths of everything installed.
+* `flutter pub get`
+* `flutter upgrade`
+* `flutter clean`
+* `flutter pub cache clean`
+* `flutter pub deps`
+* `flutter pub run dependency_validator` - show unused dependencies and more
+* `dart format lib/* -l 120`
+* `flutter analyze`
