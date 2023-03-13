@@ -85,9 +85,10 @@ val namespace: String = /*Namespace identifier, see for reference: https://githu
 val chains: List<String> = /*List of chains that wallet will be requested for*/
 val methods: List<String> = /*List of methods that wallet will be requested for*/
 val events: List<String> = /*List of events that wallet will be requested for*/
-val namespaces: Map<String, Sign.Model.Namespaces.Proposal> = mapOf(namespace, Sign.Model.Namespaces.Proposal(accounts, methods, events))
+val requiredNamespaces: Map<String, Sign.Model.Namespaces.Proposal> = mapOf(namespace, Sign.Model.Namespaces.Proposal(accounts, methods, events)) /*Required namespaces to setup a session*/
+val optionalNamespaces: Map<String, Sign.Model.Namespaces.Proposal> = mapOf(namespace, Sign.Model.Namespaces.Proposal(accounts, methods, events)) /*Optional namespaces to setup a session*/
 val pairing: Core.Model.Pairing = /*Either an active or inactive pairing*/
-val connectParams = Sign.Params.Connect(namespaces, pairing)
+val connectParams = Sign.Params.Connect(requiredNamespaces, optionalNamespaces, pairing)
 
 fun SignClient.connect(connectParams, 
     { onSuccess -> 
@@ -98,6 +99,7 @@ fun SignClient.connect(connectParams,
     }
 )
 ```
+More about optional and required namespaces can be found [here](https://github.com/ChainAgnostic/CAIPs/blob/master/CAIPs/caip-25.md)
 
 #
 ### **Get List of Settled Sessions**

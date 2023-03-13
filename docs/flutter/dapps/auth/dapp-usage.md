@@ -54,6 +54,7 @@ To handle a session approval and rejection using `AuthResponse` await the respon
 final AuthResponse authResponse = await authResponse.completer.future;
 if (authResponse.result != null) {
   // Having a result indicates that the signature has been verified.
+
   // Retrieve the wallet address from a successful response
   final walletAddress = AddressUtils.getDidAddress(authResponse.result!.p.iss);
 }

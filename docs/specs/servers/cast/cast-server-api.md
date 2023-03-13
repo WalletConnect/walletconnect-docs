@@ -2,9 +2,9 @@
 
 ## Register
 
-Registers an account and push subscription symmetric key
+Registers an account and push subscription symmetric key. The `subscriptionAuth` must be attached in the request so the Cast server can verify if wallet proved ownership of an address.
 
-`POST /:project_id/register`
+`POST /register`
 
 Body:
 
@@ -12,6 +12,7 @@ Body:
 {
     "account": string,
     "symKey": string,
+    "subscriptionAuth": string,
     "relayUrl": string
 }
 ```
@@ -20,7 +21,7 @@ Body:
 
 Used to notify a message to a set of accounts
 
-`POST /:project_id/notify`
+`POST /notify`
 
 Body:
 
@@ -41,7 +42,15 @@ Response:
 ```jsonc
 {
   "sent": string[],
-  "failed": string[][],
+  "failed": Failed[],
   "notFound": string[]
+}
+```
+
+Failed
+```jsonc
+{
+  "account": string,
+  "reason": string
 }
 ```

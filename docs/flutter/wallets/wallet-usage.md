@@ -161,7 +161,7 @@ Uri uri = Uri.parse(scannedUriString);
 await web3Wallet.pair(uri: uri);
 ```
 
-## Approve the Session Proposal
+## Approve a Session Proposal
 
 Present the UI for approval.
 
@@ -183,7 +183,7 @@ await web3Wallet.approve(
 );
 ```
 
-## Reject the Session Proposal
+## Reject a Session Proposal
 
 To reject the request, pass in an error code and reason. They can be found [here](https://docs.walletconnect.com/2.0/specs/clients/sign/error-codes).
 
@@ -197,7 +197,7 @@ await web3Wallet.reject(
 );
 ```
 
-## Approving an Auth Request
+## Approve an Auth Request
 
 You can approve a dapp's auth request by responding with the user's signature.
 
@@ -210,7 +210,7 @@ await web3Wallet.respondAuthRequest(
 );
 ```
 
-## Rejecting an Auth Request
+## Reject an Auth Request
 
 To reject the request, pass in an error code and reason. They can be found [here](https://docs.walletconnect.com/2.0/specs/clients/sign/error-codes).
 

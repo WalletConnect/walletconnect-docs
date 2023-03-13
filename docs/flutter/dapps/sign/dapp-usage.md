@@ -73,6 +73,7 @@ You can also respond to events from the wallet, like chain changed, using `onSes
 signClient.onSessionEvent.subscribe((SessionEvent? session) {
     // Do something with the event
 });
+
 signClient.registerEventHandler(
     namespace: 'kadena',
     event: 'kadena_transaction_updated',

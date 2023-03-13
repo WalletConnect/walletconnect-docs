@@ -47,7 +47,7 @@ Used to request push subscription to a peer through topic P. Response is expecte
 ```jsonc
 // Success result
 {
-  "publicKey": string
+  "subscriptionAuth": string
 }
 
 | IRN     |          |
