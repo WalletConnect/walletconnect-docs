@@ -86,12 +86,11 @@ module.exports = {
           type: 'category',
           label: 'RPC Reference',
           items: [
-            "advanced/rpc-reference/ethereum-rpc",
-            "advanced/rpc-reference/cosmos-rpc",
-            "advanced/rpc-reference/solana-rpc",
-            "advanced/rpc-reference/stellar-rpc",
-            "advanced/rpc-reference/tezos-rpc",
-          ],
+            'advanced/rpc-reference/ethereum-rpc',
+            'advanced/rpc-reference/cosmos-rpc',
+            'advanced/rpc-reference/solana-rpc',
+            'advanced/rpc-reference/stellar-rpc'
+          ]
         },
         {
           type: 'category',
@@ -607,54 +606,51 @@ module.exports = {
           items: ['swift/router/installation']
         }
       ]
-    },
+    }
   ],
   flutter: [
     {
-      type: "category",
-      label: "Products",
-      className: "menu_outer_list",
-      collapsible: false,
-      items: [
-        {
-          type: "category",
-          label: "Web3Wallet SDK",
-          collapsible: true,
-          collapsed: true,
-          items: [
-            "flutter/wallets/installation",
-            "flutter/wallets/wallet-usage",
-          ],
-        },
-      ],
+      type: 'html',
+      value:
+        '<a class="navbar__brand sidebar__brand" href="/"><div class="navbar__logo"><img src="/img/walletconnect-logo-white.svg" alt="WalletConnect Logo"></div>WalletConnect<span>Docs<span></a>',
+      defaultStyle: true
     },
     {
-      type: "category",
-      label: "Advanced",
-      className: "menu_outer_list",
+      type: 'category',
+      label: 'Products',
+      className: 'menu_outer_list',
       collapsible: false,
       items: [
         {
-          type: "category",
-          label: "Sign",
+          type: 'category',
+          label: 'Web3Wallet SDK',
           collapsible: true,
           collapsed: true,
-          items: [
-            "flutter/dapps/sign/installation",
-            "flutter/dapps/sign/dapp-usage"
-          ],
+          items: ['flutter/wallets/installation', 'flutter/wallets/wallet-usage']
+        }
+      ]
+    },
+    {
+      type: 'category',
+      label: 'Advanced',
+      className: 'menu_outer_list',
+      collapsible: false,
+      items: [
+        {
+          type: 'category',
+          label: 'Sign',
+          collapsible: true,
+          collapsed: true,
+          items: ['flutter/dapps/sign/installation', 'flutter/dapps/sign/dapp-usage']
         },
         {
-          type: "category",
-          label: "Auth",
+          type: 'category',
+          label: 'Auth',
           collapsible: true,
           collapsed: true,
-          items: [
-            "flutter/dapps/auth/installation",
-            "flutter/dapps/auth/dapp-usage"
-          ],
-        },
-      ],
+          items: ['flutter/dapps/auth/installation', 'flutter/dapps/auth/dapp-usage']
+        }
+      ]
     }
-  ],
-};
+  ]
+}

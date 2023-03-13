@@ -83,14 +83,22 @@ const config = {
             label: 'Kotlin'
           },
           {
-            type: "docSidebar",
-            position: "left",
-            sidebarId: "flutter",
-            label: "Flutter",
+            type: 'docSidebar',
+            position: 'left',
+            sidebarId: 'swift',
+            label: 'Swift'
           },
           {
-            type: "docsVersionDropdown",
-            position: "right",
+            type: 'docSidebar',
+            position: 'left',
+            sidebarId: 'flutter',
+            label: 'Flutter'
+          },
+          {
+            href: 'https://github.com/walletconnect/',
+            position: 'right',
+            className: 'header-github-link',
+            'aria-label': 'GitHub repository'
           },
           {
             type: 'docsVersionDropdown',
