@@ -69,7 +69,8 @@ module.exports = {
               items: ['api/push/prerequisites', 'api/push/push']
             }
           ]
-        }
+        },
+        'advanced/chain-onboarding/overview'
       ]
     },
     {
