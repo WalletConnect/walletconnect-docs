@@ -16,6 +16,9 @@ We recommend looking at the example implementations of the Web3Inbox Sample in o
 
 ### Initialize
 
+To initialize the Web3Inbox client, create a `Inbox.Params.Init` object in the Android Application class with the Core Client. The `Inbox.Params.Init` object will then be passed to the `Web3Inbox` initialize function.
+
+
 ```kotlin
 val accountsPrivateKey: ByteArray = /* address' private key.
 val caip10Account: String = /*[CAIP-10](https://github.com/ChainAgnostic/CAIPs/blob/master/CAIPs/caip-10.md) compatible accountId*/
@@ -44,62 +47,37 @@ Web3Inbox.initialize(Inbox.Params.Init(core = CoreClient, account = Inbox.Type.A
 }
 ```
 
-To initialize the Web3Inbox client, create a `Inbox.Params.Init` object in the Android Application class with the Core Client. The `Inbox.Params.Init` object will then be passed to the `Web3Inbox` initialize function.
-
-
 ## Create Web3Inbox.View
-Once the Web3Inbox client is [initialized](#intialize), all that's left to do is to place the `Web3Inbox.View` in your app. We support both [Compose](https://developer.android.com/jetpack/compose)  and Android XML. We advise allowing the `Web3Inbox.View` to use the whole screen.
+Once the Web3Inbox client is [initialized](#intialize), all that's left to do is to place the `Web3Inbox.View` in your app. We support both [Compose](https://developer.android.com/jetpack/compose)  and Android XML.
 
 ### Prevent reloading of Web3Inbox
 
-**IMPORTANT:** To prevent reloading of Web3Inbox the activity that contains the `Web3Inbox.View` add `android:configChanges="orientation|screenSize"` to `<activity>` element `Manifest.xml`.
+**IMPORTANT:** If Web3Inbox's inner WebView is reloaded it will lose state and be displayed as blank page. To prevent reloading of Web3Inbox the activity that contains the `Web3Inbox.View` add `android:configChanges="orientation|screenSize"` to `<activity>` element `Manifest.xml`.
 
 ### Android Compose
 
 #### Composable Web3Inbox.View()
 
+To display Web3Inbox with Compose call `Web3Inbox.View()` somewhere in your app.
+
 ```kotlin
 fun View(modifier: Modifier = Modifier)
 ```
-
-To display Web3Inbox with Compose call `Web3Inbox.View()` somewhere in your app.
 
 ### Android XML
 
 #### Web3Inbox.View()
 
+To display Web3Inbox with Android XML add view programatically by calling `addView(Web3Inbox.View(/*Context/*))`.
+
 ```kotlin
 fun View(context: Context): WebView
 ```
+#### Adding Web3Inbox into fragment's layout
 
-To display Web3Inbox with Android XML add view programatically by calling `addView(Web3Inbox.View(/*Context/*))`. It can be placed in designated activity or in a fragment.
+In order to display Web3Inbox in fragment's layout it needs to added programatically inside `onViewCreated(view: View, savedInstanceState: Bundle?)`
 
-#### Designated activity
-
-##### activity_web3inbox.xml
-```kotlin
-<?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/root"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-</androidx.constraintlayout.widget.ConstraintLayout>
-```
-
-##### Activity
-```kotlin
-class Web3InboxXMLActivity : AppCompatActivity(R.layout.activity_web3inbox) {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        findViewById<ConstraintLayout>(R.id.root).apply {
-            addView(Web3Inbox.View(applicationContext))
-        }
-    }
-}
-```
-
-#### Designated fragment
+Code below shows how to append Web3Inbox as a `ConstraintLayout` child.
 
 ##### fragment_web3inbox.xml
 ```kotlin
