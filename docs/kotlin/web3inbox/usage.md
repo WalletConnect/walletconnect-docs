@@ -8,13 +8,13 @@ Web3Inbox SDK enables easy intergation of [Web3Inbox](https://web3inbox.com/). T
 
 ## Web3Inbox Sample App
 
-We recommend looking at example implementations of Web3Inbox Sample at our [Kotlin Github repository](https://github.com/WalletConnect/WalletConnectKotlinV2/tree/master/samples/web3inbox)
+We recommend looking at the example implementations of the Web3Inbox Sample in our Kotlin GitHub [repository](https://github.com/WalletConnect/WalletConnectKotlinV2/tree/master/samples/web3inbox).
 
 ## Web3Inbox Client
 
 `Web3Inbox` is an object that interacts with the Web3Inbox SDK
 
-### Initialize Web3Inbox Client
+### Initialize
 
 ```kotlin
 val accountsPrivateKey: ByteArray = /* address' private key.
@@ -48,7 +48,7 @@ To initialize the Web3Inbox client, create a `Inbox.Params.Init` object in the A
 
 
 ## Create Web3Inbox.View
-Once [Web3Inbox client is initalized](#initialize-web3inbox-client) all the's left to do is to place Web3Inbox.View in your app. We support both [Compose](https://developer.android.com/jetpack/compose) and Android XML. We advise to allow `Web3Inbox.View` to use the whole screen.
+Once the Web3Inbox client is [initialized](#intialize), all that's left to do is to place the `Web3Inbox.View` in your app. We support both [Compose](https://developer.android.com/jetpack/compose)  and Android XML. We advise allowing the `Web3Inbox.View` to use the whole screen.
 
 ### Prevent reloading of Web3Inbox
 
