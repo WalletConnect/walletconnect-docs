@@ -72,10 +72,10 @@ module.exports = {
         },
         {
           type: 'category',
-          label: 'Chain Onboarding',
+          label: 'Multi-Chain',
           items: [
-            'advanced/chain-onboarding/overview',
-            'advanced/chain-onboarding/chain-list',
+            'advanced/multichain/overview',
+            'advanced/multichain/chain-list',
           ]
         },
       ]
