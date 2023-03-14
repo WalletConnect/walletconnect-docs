@@ -7,7 +7,7 @@ Our Sign and Auth APIs are multi-chain out of the box, along with `@web3modal/st
 ## Adding a Chain into the Explorer
 
 If you don't see your chain listed in this list, then you will need to create an issue in GitHub to to get the process started.
-You can do so by clicking [here](https://github.com/WalletConnect/walletconnect-monorepo/issues/new?assignees=&labels=type%3A+new+chain+request&template=new_chain_to_explorer.md&title=). Once your chain is added to this list, wallets will be able to register via [Cloud](https://cloud.walletconnect.com) so that users can select your wallet from the options.
+You can do so by clicking [here](https://github.com/WalletConnect/walletconnect-monorepo/issues/new?assignees=&labels=type%3A+new+chain+request&template=new_chain_to_explorer.md&title=). Once your chain is added to this list, wallets & dapps will be able to indicate support for your chain via WalletConnect's [Cloud](https://cloud.walletconnect.com).
 
 ## Web3Modal
 
