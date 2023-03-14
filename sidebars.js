@@ -607,7 +607,17 @@ module.exports = {
           items: ['swift/router/installation']
         }
       ]
-    }
+    },
+    {
+      type: "category",
+      label: "Guides",
+      className: "menu_outer_list",
+      collapsible: false,
+      items: [
+        "swift/guides/examples-and-resources",
+        "swift/guides/mobile-linking",
+      ],
+    },
   ],
   flutter: [
     {
