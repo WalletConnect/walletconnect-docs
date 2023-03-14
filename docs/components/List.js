@@ -1,17 +1,9 @@
 import React from 'react'
-import { useEffect, useState, useRef } from 'react'
+import { useEffect, useState } from 'react'
+import ChainCard from './ChainCard'
 
 const List = () => {
   const [chains, setChains] = useState([])
-  const [isOpen, setIsOpen] = useState(false)
-
-  const updatedChains = Object.keys(chains).map(key => {
-    return chains[key]
-  })
-
-  const handleClick = () => {
-    setIsOpen(!isOpen)
-  }
 
   useEffect(() => {
     fetch(
@@ -22,21 +14,17 @@ const List = () => {
       .catch(error => console.error(error))
   }, [])
 
+  const chainsArray = Object.keys(chains).map(key => chains[key])
+
   return (
-    <div className="dropdown-container">
-      <button className="dropdown-btn" onClick={handleClick}>
-        Select an Item
-      </button>
-      {isOpen && (
-        <ul className="dropdown-list">
-          {updatedChains.map((chain, index) => (
-            <li key={index} className="dropdown-item">
-              {chain.name}
-            </li>
-          ))}
-        </ul>
-      )}
+    <div className="chain-list">
+      <div className="chain-card-container">
+        {chainsArray?.map((chain, index) => (
+          <ChainCard key={index} chainName={chain.name} />
+        ))}
+      </div>
     </div>
+
   )
 }
 

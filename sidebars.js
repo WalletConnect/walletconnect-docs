@@ -70,7 +70,14 @@ module.exports = {
             }
           ]
         },
-        'advanced/chain-onboarding/overview'
+        {
+          type: 'category',
+          label: 'Chain Onboarding',
+          items: [
+            'advanced/chain-onboarding/overview',
+            'advanced/chain-onboarding/chain-list',
+          ]
+        },
       ]
     },
     {
