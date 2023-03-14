@@ -17,8 +17,10 @@ let clientId = try! Networking.interactor.getClientId()
 
 2. Call Configuration Method:
 
+Specify an environment, use `.sandbox` for debugging and `.production` for TestFlight and AppStore builds.
+
 ```swift
-Echo.configure(clientId: clientId)
+Echo.configure(clientId: clientId, environment: .production)
 ```
 
 ### Register Device Token

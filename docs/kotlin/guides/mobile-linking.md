@@ -8,7 +8,7 @@ Deeplinking flow works in the same way in all pur products (Sign, Auth, Push, Ch
 
 :::
 
-The common pattern of establishing a connection between a mobile wallet and a mobile applications is the following:
+The common pattern of establishing a connection between a mobile wallet and a mobile application is the following:
 
 1. Dapp shows user a connection button
 2. User presses the button and Android system shows an app chooser

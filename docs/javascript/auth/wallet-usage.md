@@ -27,13 +27,13 @@ To listen to pairing-related events, please follow the guidance for [Pairing API
 :::
 
 ```javascript
-authClient.on("auth_request", async ({ id, args }) => {
+authClient.on("auth_request", async ({ id, params }) => {
 
   // the user’s address
   const iss = `did:pkh:eip155:1:${WALLET_ADDRESS}`;
 
   // format the cacao payload with the user’s address
-  const message = authClient.formatMessage(args.params.cacaoPayload, iss);
+  const message = authClient.formatMessage(params.cacaoPayload, iss);
   
   // This is a good point to trigger a UI event to provide the user
   // with a button to accept or reject the authentication request,

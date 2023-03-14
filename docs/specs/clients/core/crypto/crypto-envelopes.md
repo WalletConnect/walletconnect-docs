@@ -4,7 +4,7 @@ Typed envelopes purpose is to provide flexible and future proof jsonrpc serializ
 
 ## Envelope Structure:
 
-First byte of any serialised envelope string always defines its type so envelope structure is known:  
+First byte of any serialized envelope string always defines its type so envelope structure is known:  
 tp - type byte (1 byte)
 
 ### Type 0 Envelope
@@ -25,7 +25,7 @@ tp + iv + sb
 
 ### Type 1 Envelope
 
-Used by client that is able to seal the message but it's peer is unable to open the sealbox as it is missing public key for Diffie Hellman key agreement. After deriving symmetric key using `pk` and private key associated with the topic the envelope has been reveived on both peers are able to seal and open the sealbox.
+Used by client that is able to seal the message but it's peer is unable to open the sealbox as it is missing public key for Diffie Hellman key agreement. After deriving symmetric key using `pk` and private key associated with the topic the envelope has been received on both peers are able to seal and open the sealbox.
 
 algo: ChaCha20-Poly1305
 

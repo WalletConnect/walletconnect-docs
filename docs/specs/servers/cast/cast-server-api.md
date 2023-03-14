@@ -2,7 +2,7 @@
 
 ## Register
 
-Used to notify a message to a set of accounts 
+Registers an account and push subscription symmetric key. The `subscriptionAuth` must be attached in the request so the Cast server can verify if wallet proved ownership of an address.
 
 `POST /register`
 
@@ -12,15 +12,14 @@ Body:
 {
     "account": string,
     "symKey": string,
+    "subscriptionAuth": string,
     "relayUrl": string
 }
 ```
 
-
-
 ## Notify
 
-Used to notify a message to a set of accounts 
+Used to notify a message to a set of accounts
 
 `POST /notify`
 
@@ -37,3 +36,21 @@ Body:
     "accounts": string[]
 }
 ``` 
+
+Response: 
+
+```jsonc
+{
+  "sent": string[],
+  "failed": Failed[],
+  "notFound": string[]
+}
+```
+
+Failed
+```jsonc
+{
+  "account": string,
+  "reason": string
+}
+```

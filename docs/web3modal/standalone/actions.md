@@ -5,19 +5,17 @@
 Programmatically open the modal.
 
 ```js
-// Open modal (if route is not provided, modal opens view based on connection / config status)
-export interface Options {
+interface Options {
   uri?: string
   standaloneChains?: string[]
   route?: 'Account' | 'ConnectWallet' | 'Help' | 'SelectNetwork'
 }
-
 await web3modal.openModal(options?: Options);
 ```
 
 ## web3modal.closeModal
 
-Programmatically open the modal.
+Programmatically close the modal.
 
 ```js
 web3modal.closeModal();
@@ -28,7 +26,7 @@ web3modal.closeModal();
 Subscribe or unsubscribe from modal's state.
 
 ```js
-const usnubscribe = web3modal.subscribeModal((newState) =>
+const unsubscribe = web3modal.subscribeModal((newState) =>
   console.log(newState)
 );
 unsubscribe();
@@ -41,7 +39,10 @@ Programmatically set or update modal's theme.
 ```js
 web3modal.setTheme({
   themeMode: "dark",
-  themeColor: "blue",
-  themeBackground: "gradient",
+  themeVariables: {
+    "--w3m-font-family": "Roboto, sans-serif",
+    "--w3m-accent-color": "#F5841F",
+    // ...
+  },
 });
 ```

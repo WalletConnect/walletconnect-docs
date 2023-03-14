@@ -1,14 +1,14 @@
-# Chat Identity Keys
+# Identity Keys
 
-Identity Keys are used to verify Blockchain Account ownership and validating chat invites are legitimate.
+Identity Keys are used to verify Blockchain Account ownership and validating peer to peer requests are legitimate without requiring the wallet user to sign every message with their blockchain private key.
 
 ## Short Description
 
-These are randomly generated ed25519 key pairs that are only present one per client. The Wallet user would sign a CAIP-122 message to generate a CACAO that authorizes the client to sign messages on the behalf of the Blockchain Account
+These are randomly generated ed25519 key pairs that are only present one per client. The Wallet user signs a CAIP-122 message to generate a CACAO that authorizes the client's identity key to sign messages on the behalf of the Blockchain Account.
 
 ## Key Authorization
 
-Client will only generate a single identity key per blockchain accoun per client. The wallet user could use multiple blockchain accounts with a single client by authorizing one respective identity key for each. Additionally the wallet can use multiple clients with the same blockchain account by authorizing a new identity key on a new client.
+Client only generates a single identity key per blockchain account per client. The wallet user uses multiple blockchain accounts with a single client by authorizing one respective identity key for each. Additionally the wallet can use multiple clients with the same blockchain account by authorizing a new identity key on a new client.
 
 Identity Keys are ed25519 key pairs generated internally and the client will expose a CAIP-122 message which includes the public key of the Identity Key pair in the Resources in the form of a did-key.
 
@@ -30,7 +30,7 @@ Issued At: ${issued-at}
 
 Let's use the account `eip155:1:0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2` and identity key  use the following fields:
 
-* Domain = walletconnect.com
+* Domain = keys.walletconnect.com
 * Namespace Name = Ethereum
 * Address = 0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2
 * URI = https://keys.walletconnect.com
@@ -43,7 +43,7 @@ Let's use the account `eip155:1:0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2` and 
 Formatted Message (CAIP-122)
 
 ```md
-walletconnect.com wants you to sign in with your Ethereum account:
+keys.walletconnect.com wants you to sign in with your Ethereum account:
 0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2
 
 URI: https://keys.walletconnect.com
@@ -82,20 +82,11 @@ Resources:
 
 ## Key Registration
 
-When two clients are using the Chat API they need to verify each others Identity Keys used in Chat invite payloads (request and response). Therefore we use the Keys Server to index these keys privately and the counter-party can validate that the key would be used for the corresponding account in the Chat identities
+When two clients are using a peer to peer API for some requests they need to verify each others Identity Keys. Therefore we use the Keys Server to index these keys privately and the counter-party can validate that the key would be used for the corresponding account in the WalletConnect identities.
 
-## Key Authentication
+## Authentication
 
-Now that we have generated, authorized and registered Identity Keys we can use them for authentication for [different purposes](./chat-authentication.md) but also importantly we must use it to register the invite keys
-
-When we are registering a chat invite key key we must use the following mandatory fields in the jwt:
-
-* iat - timestamp when jwt was issued 
-* exp - timestamp when jwt must expire
-* iss - public identity key in form of did:key
-* sub - public key for chat invite key
-* aud - key server url used for registering
-* pkh - corresponding blockchain account (did:pkh)
-
-Expiry will be calculated 1 hour (3600 seconds) from issued date
-
+Now that we have generated, authorized and registered Identity Keys we can use them for authentication for different purposes:
+- [Chat Authentication](../../clients/chat/chat-authentication.md)
+- [Push Authentication](../../clients/push/push-authentication.md)
+- [Chat Invite Keys registration](../../clients/chat/invite-keys.md)
