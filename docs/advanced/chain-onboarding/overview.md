@@ -1,6 +1,6 @@
 # New Chain Onboarding
 
-Web3 is a multi-chain supported protocol. By using the [CAIP-25 standard](https://github.com/ChainAgnostic/CAIPs/blob/master/CAIPs/caip-25.md), WalletConnect aims to provide a standardized process for onboarding new chains into our ecosystem.
+The WalletConnect protocol is multi-chain by design. By using the [CAIP-25 standard](https://github.com/ChainAgnostic/CAIPs/blob/master/CAIPs/caip-25.md), WalletConnect aims to provide a standardized process for onboarding new chains into our ecosystem.
 
 Our Sign and Auth APIs are multi-chain out of the box, along with `@web3modal/standalone`. For those chains wishing to add chain support to `@web3modal/react` or `@web3modal/html`, please see the instructions below.
 
