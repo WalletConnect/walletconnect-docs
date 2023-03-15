@@ -32,7 +32,3 @@ For a chain to benefit users, its prominent wallets and dApps must be registered
 ### [Web3Modal Standalone](../../web3modal/standalone/about.md)
 
 After adding the chain to the Explorer, Web3Modal Standalone can be utilized to offer users a seamless experience when connecting to their wallet.
-
-:::note
-Using the standalone version requires handling injected providers and creating a custom wallet selection user interface.
-:::
