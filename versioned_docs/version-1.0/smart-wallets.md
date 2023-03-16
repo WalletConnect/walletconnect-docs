@@ -46,7 +46,7 @@ const isSmartContract = bytecode && utils.hexStripZeros(bytecode) !== '0x'
 </TabItem>
 </Tabs>
 
-Smart contract wallets are essentially multi-signature wallets that use multiple keys to authorize operations on the behalf of these smart contract accounts, so you will have to take into consideration how messages and transactions are handled by your dapp.
+Smart contract wallets are essentially multi-signature wallets that use multiple keys to authorize operations on behalf of these smart contract accounts, so you will have to take into consideration how messages and transactions are handled by your dapp.
 
 ## Messages
 
