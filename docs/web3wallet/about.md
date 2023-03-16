@@ -49,7 +49,7 @@ url: `/2.0/dart/wallets/installation`
 
 ## Resources
 
-- [Awesome WalletConnect](https://github.com/WalletConnect/awesome-walletconnect) - community-curated collection of WalletConnect-enabled wallets, libraries, and tools.
+- [Awesome WalletConnect](https://github.com/WalletConnect/awesome-walletconnect) - Community-curated collection of WalletConnect-enabled wallets, libraries, and tools.
 - [Web3Modal Laboratory](https://lab.web3modal.com) - A place to test your wallet integrations against various setups of Web3Modal.
 - [Web3Wallet GitHub](https://github.com/WalletConnect/walletconnect-monorepo/tree/v2.0/packages/web3wallet) - Web3Modal GitHub repository.
 - [Web3Wallet Discord Forum](https://discord.com/channels/492410046307631105/1068626962374991993) - Get help from community and WalletConnect team members on Discord.
