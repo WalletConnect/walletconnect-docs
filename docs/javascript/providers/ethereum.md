@@ -5,7 +5,7 @@ Ethereum Provider for WalletConnect v2
 ## Installation
 
 ```bash npm2yarn
-npm install @walletconnect/ethereum-provider
+npm install @walletconnect/ethereum-provider @web3modal/standalone
 ```
 
 ## Initialization
@@ -21,6 +21,7 @@ const provider = await EthereumProvider.init({
   rpcMap, // OPTIONAL rpc urls for each chain
   metadata, // OPTIONAL metadata of your app
   showQrModal, // OPTIONAL - `true` by default
+  qrModalOptions, // OPTIONAL - `undefined` by default, see https://docs.walletconnect.com/2.0/web3modal/theming
 });
 ```
 

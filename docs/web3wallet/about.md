@@ -53,3 +53,6 @@ url: `/2.0/dart/wallets/installation`
 
 - https://github.com/wakumo/flutter-wallet-connect-v2
 - https://github.com/Orange-Wallet/wallet-connect-dart-v2
+
+**Unreal Engine**
+- https://github.com/Quantum-Connect-Co/WalletConnectUnrealEngineV1
