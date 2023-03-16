@@ -97,7 +97,7 @@ const hash = web3.eth.accounts.hashMessage(message)
 
 Smart Contract wallets, like [Argent](https://argent.gitbook.io/argent/wallet-connect-and-argent), commonly use the concept of meta transactions. These are a specific type of transaction that is signed by one or more key pairs but is submitted to the Ethereum network by a relayer.
 
-The relayer pays the gas fee \(in ETH\) and the wallet will refund the relayer \(in ETH or ERC20 tokens\) up to an amount signed by the wallet's owner.
+The relayer pays the gas fee (in ETH), and the wallet will refund the relayer (in ETH or ERC20 tokens) up to an amount signed by the wallet's owner.
 
 From your dapp's perspective, this is managed by the mobile wallet application. Your dapp will submit a regular `{ to, value, data }` transaction to the web3 provider. This transaction will be transmitted to the mobile wallet application through WalletConnect.
 
