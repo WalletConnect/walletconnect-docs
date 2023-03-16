@@ -2,7 +2,7 @@
 
 Smart Contract wallets like [Argent](https://argent.gitbook.io/argent/wallet-connect-and-argent) are fully supported by the WalletConnect protocol.
 
-However there are some considerations to be taken when integrating WalletConnect in your dapp for Smart Contract wallets, regarding how the accounts are exposed in the session, message signatures are returned and transactions are broadcasted.
+However, there are some considerations to be taken when integrating WalletConnect in your dapp for Smart Contract wallets, regarding how the accounts are exposed in the session, message signatures are returned, and transactions are broadcasted.
 
 ## Accounts
 
