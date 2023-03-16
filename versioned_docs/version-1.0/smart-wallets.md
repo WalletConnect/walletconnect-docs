@@ -106,7 +106,7 @@ The mobile wallet will transform the data into a meta transaction:
 - `to` will be the `RelayerManager` contract address
 - `data` will be the encoded data of the call to the `execute()` method with the relevant parameters
 
-Your dapp will receive the transaction hash in order to monitor the status of the transaction and events will be emitted as usual.
+Your dapp will receive the transaction hash in order to monitor the status of the transaction, and events will be emitted as usual.
 
 The relayer has the ability to replay a transaction with a higher gas price due to fluctuating network conditions. The transaction hash is modified and the dapp will not be aware of the new transaction hash.
 
