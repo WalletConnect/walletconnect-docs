@@ -54,6 +54,34 @@ We are currently in the midst of a migration, and we anticipate that dapps will 
 
 If the wallet you intend to use still utilizes v1, we recommend including `version: 1` in your configuration to ensure that your users can continue to connect to their preferred wallet. It's crucial to stay up to date on any changes made to wallets, so we encourage you to check back regularly for any updates.
 
+## Testing Wallet Support with Web3Modal (Temporary Workaround)
+
+As we work on a staging flow for Web3Modal v2, you can use the following temporary workaround to test wallet support, such as Rainbow Wallet, without needing to have an updated version published.
+
+To make Rainbow Wallet appear as a "recent" wallet, you can set a localStorage item with the required information. Use the following code snippet:
+
+```javascript
+localStorage.setItem(
+  'W3M_RECENT_WALLET',
+  JSON.stringify({
+    2: {
+      image: "",
+      name: "",
+      links: {
+        native: "rainbow://",
+        universal: "https://..."
+      }
+    }
+  })
+);
+```
+
+Replace the `https://...` placeholder in the universal link with the appropriate URL.
+
+After setting the `localStorage` item, you can test the wallet integration on https://lab.web3modal.com/v2Standalone. This will make Rainbow Wallet appear as a recent wallet, allowing you to test its compatibility with Web3Modal v2.
+
+Please note that this is a temporary solution, and we are actively working on implementing a proper staging flow for testing wallet support with Web3Modal v2. We will update the documentation once the staging flow is available.
+
 ## Resources
 
 - [Awesome WalletConnect](https://github.com/WalletConnect/awesome-walletconnect) - community-curated collection of WalletConnect-enabled wallets, libraries, and tools.
