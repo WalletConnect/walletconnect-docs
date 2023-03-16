@@ -9,6 +9,7 @@ case .signatureRejected return 20001
 ## Messages
 ```sh
 case .chatMessageTooLong return 20002
+case .mediaDataTooLong return 20006
 ```
 
 ## Inviting 
