@@ -8,7 +8,7 @@ However, there are some considerations to be taken when integrating WalletConnec
 
 :::tip
 
-Whenever you connect your dapp to a smart contract wallet you will actually receive the **smart account address** for the wallet. This is not to be confused with the **delegate keys** that are used to sign messages and transactions.
+When you connect your dapp to a smart contract wallet, you will receive the **smart account address** for the wallet. This is not to be confused with the **delegate keys** that are used to sign messages and transactions.
 
 :::
 
