@@ -52,7 +52,7 @@ Smart contract wallets are essentially multi-signature wallets that use multiple
 
 Normally, when verifying signatures from "normal" accounts, which are Externally Owned Accounts (EOAs), you would use an ECDSA method called `ecrecover()` to retrieve the corresponding public key, which will then map to an address.
 
-In the case of Smart Contract Wallets you are not able to sign a message with the smart contract account. Therefore the standard [EIP-1271](https://eips.ethereum.org/EIPS/eip-1271) was defined to outline a validation method which can be called on-chain, labelled `isValidSignature()`.
+In the case of Smart Contract Wallets, you are not able to sign a message with the smart contract account. Therefore, the standard [EIP-1271](https://eips.ethereum.org/EIPS/eip-1271) was defined to outline a validation method which can be called on-chain, labeled `isValidSignature()`.
 
 ```text
 contract ERC1271 {
