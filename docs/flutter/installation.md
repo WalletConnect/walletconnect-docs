@@ -11,3 +11,16 @@ Install the WalletConnect client package.
 ```dart
 flutter pub add walletconnect_flutter_v2
 ```
+
+## 3. Platform Specific Setup
+
+Depending on your platform, you will have to add different permissions to get the package to work.
+
+### MacOS
+
+Add the following to your `DebugProfile.entitlements` and `Release.entitlements` files so that it can connect to the WebSocket server.
+
+```xml
+<key>com.apple.security.network.client</key>
+<true/>
+```

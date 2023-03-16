@@ -1,4 +1,4 @@
-# Dapp Usage
+# Dapp Auth API Usage
 
 ## Initialzation
 
@@ -19,15 +19,14 @@ AuthClient authClient = await AuthClient.createInstance(
 
 ## Request Authentication
 
-To request authentication use the `requestAuth` method on the `authClient` object.
+To request authentication use the `request` method on the `authClient` object.
 
 ```dart
-final AuthRequestResponse auth = await authClient.requestAuth(
+final AuthRequestResponse auth = await authClient.request(
   params: AuthRequestParams(
     aud: 'http://localhost:3000/login',
     domain: 'localhost:3000',
     chainId: 'eip155:1',
-    nonce: AuthUtils.generateNonce(),
     statement: 'Sign in with your wallet!',
   ),
   pairingTopic: resp.pairingTopic,

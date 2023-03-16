@@ -1,4 +1,4 @@
-# Dapp Usage
+# Dapp Sign API Usage
 
 :::info
 If you're a wallet looking to incorporarte Sign, please see [Web3Wallet SDK](../../wallets/installation.md)..
