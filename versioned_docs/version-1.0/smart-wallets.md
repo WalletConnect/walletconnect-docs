@@ -95,7 +95,7 @@ const hash = web3.eth.accounts.hashMessage(message)
 
 ## Transactions
 
-Smart Contract wallets like [Argent](https://argent.gitbook.io/argent/wallet-connect-and-argent) commonly use the concept of meta transactions. These are a particular type of transaction which is signed by one or more key pairs, but is submitted to the Ethereum network by a relayer.
+Smart Contract wallets, like [Argent](https://argent.gitbook.io/argent/wallet-connect-and-argent), commonly use the concept of meta transactions. These are a specific type of transaction that is signed by one or more key pairs but is submitted to the Ethereum network by a relayer.
 
 The relayer pays the gas fee \(in ETH\) and the wallet will refund the relayer \(in ETH or ERC20 tokens\) up to an amount signed by the wallet's owner.
 
