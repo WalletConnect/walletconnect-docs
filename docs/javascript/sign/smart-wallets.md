@@ -1,4 +1,4 @@
-# Smart Contract Wallets
+# Smart Contract Wallet Usage
 
 Smart Contract wallets like [Argent](https://argent.gitbook.io/argent/wallet-connect-and-argent) are fully supported by the WalletConnect protocol.
 

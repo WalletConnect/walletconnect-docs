@@ -369,7 +369,8 @@ module.exports = {
               items: [
                 'javascript/sign/installation',
                 'javascript/sign/dapp-usage',
-                'javascript/sign/wallet-usage'
+                'javascript/sign/wallet-usage',
+                'javascript/sign/smart-wallets'
               ]
             },
             {
@@ -609,15 +610,12 @@ module.exports = {
       ]
     },
     {
-      type: "category",
-      label: "Guides",
-      className: "menu_outer_list",
+      type: 'category',
+      label: 'Guides',
+      className: 'menu_outer_list',
       collapsible: false,
-      items: [
-        "swift/guides/examples-and-resources",
-        "swift/guides/mobile-linking",
-      ],
-    },
+      items: ['swift/guides/examples-and-resources', 'swift/guides/mobile-linking']
+    }
   ],
   flutter: [
     {
