@@ -108,6 +108,6 @@ The mobile wallet will transform the data into a meta transaction:
 
 Your dapp will receive the transaction hash in order to monitor the status of the transaction, and events will be emitted as usual.
 
-The relayer has the ability to replay a transaction with a higher gas price due to fluctuating network conditions. The transaction hash is modified and the dapp will not be aware of the new transaction hash.
+The relayer has the ability to replay a transaction with a higher gas price due to fluctuating network conditions. The transaction hash is modified, and the dapp will not be aware of the new transaction hash.
 
 One solution could be for your dapp to observe a specific event being emitted instead of the transaction status. There is currently work on standardizing events for transactions replies that has been recently proposed via [EIP-2831](https://eips.ethereum.org/EIPS/eip-2831). We hope to improve our SDKs in the future to take this standard into account.
