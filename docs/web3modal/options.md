@@ -2,7 +2,7 @@
 
 ## projectId (required)
 
-Your project’s unique identifier that can be obtained at [cloud.walletconnect.com](https://cloud.walletconnect.com). Enables following functionalities within Web3Modal: wallet and chain logos, optional walletconnect rpc, support for all wallets from [explorer.walletconnect.com](https://explorer.walletconnect.com) and WalletConnect v2 support. Defaults to `undefined`.
+Your project’s unique identifier that can be obtained at [cloud.walletconnect.com](https://cloud.walletconnect.com). Enables following functionalities within Web3Modal: wallet and chain logos, optional WalletConnect RPC, support for all wallets from [explorer.walletconnect.com](https://explorer.walletconnect.com) and WalletConnect v2 support. Defaults to `undefined`.
 
 ```ts
 projectId: string
@@ -10,7 +10,7 @@ projectId: string
 
 ## mobileWallets (optional)
 
-When `projectId` is not provided, you can define an array of custom mobile wallets. Note: you will also need to add appropriate wallet images in `walletImages`. Native link represents deeplinking url like `rainbow://` and Universal link represent webpage link that can redirect to the app or fallback page. Defaults to `undefined`.
+You can define an array of custom mobile wallets. Note: you will also need to add appropriate wallet images in `walletImages`. Native link represents deeplinking url like `rainbow://` and Universal link represent webpage link that can redirect to the app or fallback page. Defaults to `undefined`.
 
 ```ts
 mobileWallets: [
@@ -27,7 +27,7 @@ mobileWallets: [
 
 ## desktopWallets (optional)
 
-When `projectId` is not provided, you can define an array of custom desktop or web based wallets. Note: you will also need to add appropriate wallet images in `walletImages`. Native link represents deeplinking url like `ledgerlive://` and Universal link represents webpage link that can redirect to the app or fallback page. Defaults to `undefined`.
+You can define an array of custom desktop or web based wallets. Note: you will also need to add appropriate wallet images in `walletImages`. Native link represents deeplinking url like `ledgerlive://` and Universal link represents webpage link that can redirect to the app or fallback page. Defaults to `undefined`.
 
 ```ts
 desktopWallets: [
@@ -44,7 +44,7 @@ desktopWallets: [
 
 ## walletImages (optional)
 
-Array of wallet id's and their logo mappings. If `projectId` is provided, this will override default logos. Id's in this case can be: [explorer.walletconnect.com](https://explorer.walletconnect.com) id's, wallet id's you provided in `mobileWallets` or `desktopWallets` and [Wagmi](https://wagmi.sh) connector id's. Defaults to `undefined`.
+Array of wallet id's and their logo mappings. This will override default logos. Id's in this case can be: [explorer.walletconnect.com](https://explorer.walletconnect.com) id's, wallet id's you provided in `mobileWallets` or `desktopWallets` and [Wagmi](https://wagmi.sh) connector id's. Defaults to `undefined`.
 
 ```ts
 walletImages: {
@@ -55,7 +55,7 @@ walletImages: {
 
 ## chainImages (optional)
 
-Array of chain id's and their logo mappings. If `projectId` is provided, this will override default logos. You can find detailed chain data at [chainlist.org](https://chainlist.org) Defaults to `undefined`.
+Array of chain id's and their logo mappings. This will override default logos. You can find detailed chain data at [chainlist.org](https://chainlist.org) Defaults to `undefined`.
 
 ```ts
 chainImages: {
@@ -111,7 +111,7 @@ explorerDenyList: [
 
 ## termsOfServiceUrl (optional)
 
-String url to your terms of service page, if specified will append special "legal info" footer to the modal. Defaults to `undefined`
+String URL to your terms of service page, if specified will append special "legal info" footer to the modal. Defaults to `undefined`.
 
 ```ts
 termsOfServiceUrl: 'https://example.com/terms-and-conditions'
@@ -119,7 +119,7 @@ termsOfServiceUrl: 'https://example.com/terms-and-conditions'
 
 ## privacyPolicyUrl (optional)
 
-String url to your privacy policy page, if specified will append special "legal info" footer to the modal. Defaults to `undefined`
+String URL to your privacy policy page, if specified will append special "legal info" footer to the modal. Defaults to `undefined`.
 
 ```ts
 privacyPolicyUrl: 'https://example.com/privacy-policy'
@@ -127,7 +127,7 @@ privacyPolicyUrl: 'https://example.com/privacy-policy'
 
 ## enableNetworkView (optional)
 
-If more than 1 chain was provided in modal or wagmi configuration users will be show network selection view before selecting a wallet, this option can enable or disable this behavior. Defaults to `false`
+If more than 1 chain was provided in modal or wagmi configuration, users will be show network selection view before selecting a wallet. This option can enable or disable this behavior. Defaults to `false`.
 
 ```ts
 enableNetworkView: true
