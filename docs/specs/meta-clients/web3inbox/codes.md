@@ -1,19 +1,21 @@
 # Error Codes
 
-## Signing
+## Chat
+
+### Signing
 
 ```sh
 case .signatureRejected return 20001
 ```
 
-## Messages
+### Messages
 ```sh
 case .chatMessageTooLong return 20002
 
 case .mediaDataTooLong return 20003
 ```
 
-## Inviting 
+### Inviting 
 ```sh
 case .inviteMessageTooLong return 20004
 
