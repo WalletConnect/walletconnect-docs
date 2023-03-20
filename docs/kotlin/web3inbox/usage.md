@@ -20,7 +20,7 @@ To initialize the Web3Inbox client, create a `Inbox.Params.Init` object in the A
 
 
 ```kotlin
-val accountsPrivateKey: ByteArray = /* address' private key.
+val accountsPrivateKey: ByteArray = /* address' private key. */
 val caip10Account: String = /*[CAIP-10](https://github.com/ChainAgnostic/CAIPs/blob/master/CAIPs/caip-10.md) compatible accountId*/
 val projectId = PROJECT_ID
 val relayUrl = "relay.walletconnect.com"
@@ -36,11 +36,10 @@ val appMetaData = Core.Model.AppMetaData(
 CoreClient.initialize(relayServerUrl = serverUrl, connectionType = ConnectionType.AUTOMATIC, application = this, metaData = appMetaData)
 
 Web3Inbox.initialize(Inbox.Params.Init(core = CoreClient, account = Inbox.Type.AccountId(caip10Account), onSign = { message -> 
-    // Message to be signed. When user decides to sign message use CacaoSigner to sign message.
-    // CacaoSigner is a util for easy message signing.
-    return CacaoSigner.sign(message, accountsPrivateKey, SignatureType.EIP191)
-    // When users decides to not sign message return null
-    return null
+    // Message to be signed by the user. 
+    //    If user decides to sign the message, use the CacaoSigner util class to sign the message. 
+    //    If user decides to not sign the message, return null
+    return CacaoSigner.sign(message, accountsPrivateKey, SignatureType.EIP191) OR null
     }
 )) { error ->
     // Error will be thrown if there's an issue during initialization
@@ -52,7 +51,7 @@ Once the Web3Inbox client is [initialized](#intialize), all that's left to do is
 
 ### Prevent reloading of Web3Inbox
 
-**IMPORTANT:** If Web3Inbox's inner WebView is reloaded it will lose state and be displayed as blank page. To prevent reloading of Web3Inbox the activity that contains the `Web3Inbox.View` add `android:configChanges="orientation|screenSize"` to `<activity>` element `Manifest.xml`.
+**IMPORTANT:** If Web3Inbox's inner WebView is reloaded it will lose state and be displayed as blank page. To prevent reloading of Web3Inbox the activity that contains the `Web3Inbox.View` add `android:configChanges="orientation|screenSize"` to `<activity>` element `Manifest.xml` that houses Web3Inbox.
 
 ### Android Compose
 
@@ -61,7 +60,9 @@ Once the Web3Inbox client is [initialized](#intialize), all that's left to do is
 To display Web3Inbox with Compose call `Web3Inbox.View()` somewhere in your app.
 
 ```kotlin
-fun View(modifier: Modifier = Modifier)
+   setContent {
+      Web3Inbox.View(modifier: Modifier = Modifier)
+   }
 ```
 
 ### Android XML
