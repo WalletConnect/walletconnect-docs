@@ -41,10 +41,17 @@ Adding `https://dapp.example.com` to the allowlist will only allow requests from
 | Exists and is invalid  | 403        |
 | Too many requests  | 1013        |
 
-## Websocket Close codes
+## Websocket Close Codes
 
 | Code        | Description | Reconnect  |
 | ----------- | ----------- |----------- |
 | 1001        | Server terminating | Yes |
 | 4008        | Client stale: connected without a prior subscription and is not sending data | When needed |
 | 4010        | Load Rebalancing | Yes |
+
+## Best Practices
+
+- Create a new `projectId` for each project. This allows for more granular control, dedicated explorer listings, and project metrics.
+- Don't reuse a `projectId`.
+- Use the AllowList to limit unauthorized usage.
+- Avoid committing projects keys to the repo. Use env variables instead.
