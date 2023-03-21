@@ -2,7 +2,7 @@
 
 ## 1. Obtain Project ID
 
-Head over to [WalletConnect Cloud](https://cloud.walletconnect.com/) to sign in or sign up. Create (or use an existing) project and copy its associated project id. We will need this in a latter step.
+Head over to [WalletConnect Cloud](https://cloud.walletconnect.com/) to sign in or sign up. Create (or use an existing) project and copy its associated project id. We will need this in a later step.
 
 ## 2. Install Packages
 
@@ -15,17 +15,5 @@ For platform-specific instructions, refer to our [React Native](../guides/react-
 :::
 
 ```bash npm2yarn
-npm install --save @walletconnect/sign-client@rc
-```
-
-## 3. Initialize Client
-
-Initialize client by passing `projectId` we created before.
-
-```js
-import SignClient from "@walletconnect/sign-client";
-
-const signClient = await SignClient.init({
-  projectId: "<YOUR_PROJECT_ID>",
-});
+npm install @walletconnect/sign-client
 ```

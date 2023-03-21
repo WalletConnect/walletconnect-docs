@@ -4,35 +4,26 @@ We recommend looking at example implementations of Requester at our [Kotlin Gith
 
 ### **Initialize Auth Client**
 
-To initialize the Auth client, create a `Auth.Params.Init` object in the Android Application class. The Init object will need the
-application class, the Project ID, and the application AppMetaData. The `Auth.Params.Init` object will then be passed to the `AuthClient`
-`initialize` function. `Auth.Params.Init` also allows for custom URLs by passing URL string into the `relayUrl` property. `iss` parameter should be null for Dapp / Requester.
+To initialize the Auth client, initialize first a `CoreClient` in the Android Application class. It will need the application class,
+the server URL, connection type and the application AppMetaData. Next, pass CoreClient to AuthClient initialize function.
 
 ```kotlin
 val projectId = "" // Get Project ID at https://cloud.walletconnect.com/
 val relayUrl = "relay.walletconnect.com"
 val serverUrl = "wss://$relayUrl?projectId=${projectId}"
+val appMetaData = Core.Model.AppMetaData(name = "Kotlin.Requester",
+    description = "Kotlin AuthSDK Requester Implementation",
+    url = "kotlin.requester.walletconnect.com",
+    icons = listOf("https://raw.githubusercontent.com/WalletConnect/walletconnect-assets/master/Icon/Gradient/Icon.png"),
+    redirect = "kotlin-requester-wc:/request"
+)
 
-RelayClient.initialize(relayServerUrl = serverUrl, connectionType = ConnectionType.AUTOMATIC, application = this)
+CoreClient.initialize(relayServerUrl = serverUrl, connectionType = ConnectionType.AUTOMATIC, application = this, metaData = appMetaData)
 
-AuthClient.initialize(
-    init = Auth.Params.Init(
-        relay = RelayClient,
-        appMetaData = Auth.Model.AppMetaData(
-            name = "Kotlin.Requester",
-            description = "Kotlin AuthSDK Requester Implementation",
-            url = "kotlin.requester.walletconnect.com",
-            icons = listOf("https://raw.githubusercontent.com/WalletConnect/walletconnect-assets/master/Icon/Gradient/Icon.png"),
-            redirect = "kotlin-requester-wc:/request"
-        ),
-        iss = null
-    )
-) { error ->
-    Log.e("Requester initialize", error.throwable.stackTraceToString())
-}
+AuthClient.initialize(init = Auth.Params.Init(core = CoreClient)) { error -> Log.e(tag(this), error.throwable.stackTraceToString()) }
 ```
 
-For more contex on how to initialize RelayClient, go to [RelayClient docs](../../kotlin/guides/relay.md) section.
+For more context on how to initialize CoreClient, go to [CoreClient docs](../../kotlin/core/installation.md) section.
 
 ---
 ### **AuthClient.RequesterDelegate**
@@ -46,7 +37,7 @@ object RequesterDelegate : AuthClient.RequesterDelegate {
     }
 
     override fun onAuthResponse(authResponse: Auth.Event.AuthResponse) {
-        // Triggered when Wallet / Responder respondes to authorisation request. Result can be either signed Cacao object or Error
+        // Triggered when Wallet / Responder responds to authorization request. Result can be either signed Cacao object or Error
     }
 
     override fun onConnectionStateChange(connectionStateChange: Auth.Event.ConnectionStateChange) {
@@ -64,13 +55,13 @@ object RequesterDelegate : AuthClient.RequesterDelegate {
 
 ### **Request**
 
-The `AuthClient.request` asynchronously exposes the pairing URI that must be shared with wallet out of bound, as qr code or [mobile linking](https://docs.walletconnect.com/2.0/kotlin/guides/mobile-linking).
-To establish a session between peers, Wallet / Responder must pass the received uri to `AuthClient.pair` method on their side. Dapp / Requester will receive respone via `AuthClient.RequesterDelegate` on `onAuthReponse` callback.
+The `AuthClient.request` sends the authentication request to the responder/wallet.
 
 ```kotlin
 fun randomNonce(): String = Random.nextBytes(16).bytesToHex()
 
 val requestParams = Auth.Params.Request(
+    topic = pairingTopic // a pairing topic is used to send a authentication request, pass it from [Pairing API](../../kotlin/core/pairing.md)
     chainId = "1", // is the EIP-155 Chain ID to which the session is bound, and the network where Contract Accounts MUST be resolved.
     domain = "kotlin.requester.walletconnect.com", // is the RFC 3986 authority that is requesting the signing.
     nonce = randomNonce(), // is a randomized token typically chosen by the relying party and used to prevent replay attacks, at least 8 alphanumeric characters.
@@ -85,8 +76,8 @@ val requestParams = Auth.Params.Request(
 )
 
 AuthClient.request(requestParams,
-    onPairing = { pairing ->
-        // Callback with Auth.Model.Pairing that contains uri for making pairing with wallet / responder
+    onSuccess = {
+        // Callback triggered when the authentication request has been sent successfully. Expose Pairing URL using [Pairing API](../../kotlin/core/pairing.md), to a wallet to establish a secure connection
     },
     onError = { error ->
         Log.e("Requester request", error.throwable.stackTraceToString())
@@ -99,3 +90,6 @@ More about CACAO can be found [here](https://github.com/ChainAgnostic/CAIPs/blob
 
 ### **SIWE / EIP-4361**
 More about SIWE can be found [here](https://eips.ethereum.org/EIPS/eip-4361)
+
+### **Sample App**
+To check more in details go and visit our requester implementation app [here](https://github.com/WalletConnect/WalletConnectKotlinV2/tree/develop/auth/requester)

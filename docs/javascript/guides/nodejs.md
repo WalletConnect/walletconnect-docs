@@ -4,17 +4,17 @@
 
 :::info
 
-For Node.js, the WalletConnect client additionally requires `better-sqlite3` to manage storage internally.
+For Node.js, the WalletConnect SignClient additionally requires `lokijs` to manage storage internally.
 
 :::
 
 ```bash npm2yarn
-npm install --save @walletconnect/sign-client@rc better-sqlite3
+npm install --save @walletconnect/sign-client lokijs@1.x
 ```
 
 ## Create Session
 
-1. Initiate your WalletConnect client with the relay server, using [your Project ID](../../advanced/relay-server.md).
+1. Initiate your WalletConnect client with the relay server, using [your Project ID](../../cloud/relay.md).
 
 ```javascript
 import SignClient from "@walletconnect/sign-client";

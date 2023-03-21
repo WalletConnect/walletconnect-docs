@@ -2,7 +2,8 @@
 
 Kotlin implementation of WalletConnect v2 Auth protocol for Android applications.
 
-![Maven Central](https://img.shields.io/maven-central/v/com.walletconnect/auth)
+Android Core ![Maven Central](https://img.shields.io/maven-central/v/com.walletconnect/android-core)
+Auth ![Maven Central](https://img.shields.io/maven-central/v/com.walletconnect/auth)
 
 ## Requirements
 
@@ -17,6 +18,7 @@ root/build.gradle.kts:
 allprojects {
  repositories {
     mavenCentral()
+    maven { url "https://jitpack.io" }
  }
 }
 ```
@@ -24,5 +26,6 @@ allprojects {
 app/build.gradle
 
 ```gradle
+implementation("com.walletconnect:android-core:release_version")
 implementation("com.walletconnect:auth:release_version")
 ```

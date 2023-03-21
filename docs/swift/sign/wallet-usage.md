@@ -1,37 +1,28 @@
 # Wallet Usage
 
-### Relay client
-
-Make sure what you properly configure Relay Client first [Relay Configuration](../relay/usage#relay-client-configuration)
-### Instantiate a client
-
-Create an AppMetadata object. It will describe your application and define its appearance in a web browser.
-Then configure `Sign` instance with a metadata object you have instantiated.
-
-
-```swift
-let metadata = AppMetadata(name: <String>,
-                           description: <String>,
-                           url: <String>,
-                           icons: <[String]>)
-
-Sign.configure(metadata: <AppMetadata>)
-```
+### Configure Networking and Pair clients
+Confirm you have configured the Network and Pair Client first
+- [Networking](../core/networking-configuration.md)
+- [Pairing](../core/pairing-usage.md)
 
 ### Subscribe for Sign publishers
-When your `Sign` instance receives requests from a peer it will publish related event. So you should set subscription to handle them.
+
+When your `Sign` instance receives requests from a peer it will publish a related event. Set a subscription to handle them.
+
+To track sessions subscribe to `sessionsPublisher` publisher
 
 ```swift
-Sign.instance.sessionDeletePublisher
+Sign.instance.sessionsPublisher
     .receive(on: DispatchQueue.main)
-    .sink { [unowned self] _ in
-        //handle event
+    .sink { [unowned self] (sessions: [Session]) in
+        // reload UI
     }.store(in: &publishers)
 ```
 
-Following publishers are available to subscribe:
+The following publishers are available to subscribe:
 
 ```swift
+    public var sessionsPublisher: AnyPublisher<[Session], Never>
     public var sessionProposalPublisher: AnyPublisher<Session.Proposal, Never> 
     public var sessionRequestPublisher: AnyPublisher<Request, Never> 
     public var socketConnectionStatusPublisher: AnyPublisher<SocketConnectionStatus, Never> 
@@ -51,7 +42,7 @@ For testing, you can use our test dapp at: https://react-app.walletconnect.com/,
 Once you derive a URI from the QR code call `pair` method:
 
 ```swift
-try await Sign.instance.pair(uri: uri)
+try await Pair.instance.pair(uri: uri)
 ```
 if everything goes well, you should handle following event:
 ```swift
@@ -61,7 +52,7 @@ Sign.instance.sessionProposalPublisher
            // present proposal to the user
     }.store(in: &publishers)
 ```
-Session proposal is a heandshake sent by a dapp and it's puropose is to define a session rules. Heandshake procedure is defined by [CAIP-25](https://github.com/ChainAgnostic/CAIPs/blob/master/CAIPs/caip-25.md).
+Session proposal is a handshake sent by a dapp and it's purpose is to define a session rules. Handshake procedure is defined by [CAIP-25](https://github.com/ChainAgnostic/CAIPs/blob/master/CAIPs/caip-25.md).
 `Session.Proposal` object conveys set of required `ProposalNamespaces` that contains required blockchains methods and events. Dapp requests with methods and wallet will emit events defined in namespaces. 
 
 The user will either approve the session proposal (with session namespaces) or reject it. Session namespaces must at least contain requested methods, events and accounts associated with proposed blockchains.
@@ -109,7 +100,7 @@ Example session namespaces response:
 ```swift
  Sign.instance.approve(proposalId: "proposal_id", namespaces: [String: SessionNamespace])
 ```
-When session is sucessfully approved `sessionSettlePublisher` will publish a `Session`
+When session is successfully approved `sessionSettlePublisher` will publish a `Session`
 ```swift
 Sign.instance.sessionSettlePublisher
     .receive(on: DispatchQueue.main)
@@ -138,21 +129,20 @@ Sign.instance.sessionRequestPublisher
 When a wallet receives a session request, you probably want to show it to the user. It’s method will be in scope of session namespaces. And it’s params are represented by `AnyCodable` type. An expected object can be derived as follows:
 
 ```swift
-        if sessionRequest.method == "personal_sign" {
-            let params = try! sessionRequest.params.get([String].self)
-        } else if method == "eth_signTypedData" {
-            let params = try! sessionRequest.params.get([String].self)
-        } else if method == "eth_sendTransaction" {
-            let params = try! sessionRequest.params.get([EthereumTransaction].self)
-        }
+if sessionRequest.method == "personal_sign" {
+    let params = try! sessionRequest.params.get([String].self)
+} else if method == "eth_signTypedData" {
+    let params = try! sessionRequest.params.get([String].self)
+} else if method == "eth_sendTransaction" {
+    let params = try! sessionRequest.params.get([EthereumTransaction].self)
+}
 ```
 
-Now, your wallet (as it owns your user’s privete keys) is responsible for signing the transaction. After doing it, you can send a response to a dapp.
+Now, your wallet (as it owns your user’s private keys) is responsible for signing the transaction. After doing it, you can send a response to a dapp.
 
 ```swift
-let result = sign(request: sessionRequest) // implement your signing method
-let response = JSONRPCResponse<AnyCodable>(id: sessionRequest.id, result: result)
-Sign.instance.respond(topic: sessionRequest.topic, response: .response(response))
+let response: AnyCodable = sign(request: sessionRequest) // implement your signing method
+try await Sign.instance.respond(topic: request.topic, requestId: request.id, response: .response(response))
 ```
 
 ### Update Session
@@ -173,7 +163,7 @@ above method will extend a user's session to a week.
 ### Disconnect Session
 For good user experience your wallet should allow users to disconnect unwanted sessions. In order to terminate a session use `disconnect` method.
 ```swift
-try await Sign.instance.disconnect(topic: session.topic, reason: reason)
+try await Sign.instance.disconnect(topic: session.topic)
 ```
 
 ### Where to go from here

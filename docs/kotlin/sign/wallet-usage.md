@@ -6,30 +6,27 @@
 ```kotlin
 val projectId = "" // Get Project ID at https://cloud.walletconnect.com/
 val relayUrl = "relay.walletconnect.com"
-val serverUrl = "wss://$relayUrl?projectId=${projectId}"
+val serverUrl = "wss://$relayUrl?projectId=$projectId"
 val connectionType = ConnectionType.AUTOMATIC or ConnectionType.MANUAL
-
-RelayClient.initialize(relayServerUrl = serverUrl, connectionType = connectionType, application = this)
-
-val appMetaData = Sign.Model.AppMetaData(
+val appMetaData = Core.Model.AppMetaData(
     name = "Wallet Name",
     description = "Wallet Description",
     url = "Wallet Url",
-    icons = listOfIconUrlStrings,
-    redirect = "kotlin-wallet-wc:/request"
+    icons = /*list of icon url strings*/,
+    redirect = "kotlin-wallet-wc:/request" // Custom Redirect URI
 )
-val init = Sign.Params.Init(relay = RelayClient, appMetaData = appMetaData)
 
-SignClient.initalize(init)
+CoreClient.initialize(relayServerUrl = serverUrl, connectionType = connectionType, application = this, metaData = appMetaData)
+
+val init = Sign.Params.Init(core = CoreClient)
+
+SignClient.initialize(init) { error ->
+    // Error will be thrown if there's an issue during initialization
+}
 ```
 
 The wallet client will always be responsible for exposing accounts (CAPI10 compatible) to a Dapp and therefore is also in charge of signing.
-To initialize the Sign client, create a `Sign.Params.Init` object in the Android Application class. The Init object will need the
-initialized firstly RelayClient instance and the apps's AppMetaData. The `Sign.Params.Init` object will then be passed to the `SignClient`
-initialize function.
-
-For more contex on how to initialize RelayClient, go to [RelayClient docs](../../kotlin/guides/relay.md) section.
-
+To initialize the Sign client, create a `Sign.Params.Init` object in the Android Application class with the Core Client. The `Sign.Params.Init` object will then be passed to the `SignClient`initialize function.
 
 ## **Wallet**
 
@@ -60,25 +57,17 @@ val walletDelegate = object : SignClient.WalletDelegate {
     override fun onConnectionStateChange(state: Sign.Model.ConnectionState) {
         //Triggered whenever the connection state is changed
     }
+
+    override fun onError(error: Sign.Model.Error) {
+        // Triggered whenever there is an issue inside the SDK
+    }
 }
 SignClient.setWalletDelegate(walletDelegate)
 ```
 
 The SignClient needs a `SignClient.WalletDelegate` passed to it for it to be able to expose asynchronous updates sent from the Dapp.
 
-
-
-### **Pair Clients**
-
-```kotlin
-val pair = Sign.Params.Pair("wc:...")
-SignClient.pair(pair)
-```
-
-To pair the wallet with the Dapp, call the SignClient.pair function which needs a `Sign.Params.Pair` parameter.
-`Sign.Params.Pair` is where the WC Uri will be passed.
-
-
+#
 
 ### **Session Approval**
 
@@ -99,7 +88,7 @@ SignClient.approveSession(approveParams) { error -> /*callback for error while a
 
 To send an approval, pass a Proposer's Public Key along with the map of namespaces to the `SignClient.approveSession` function.
 
-
+#
 
 ### **Session Rejection**
 
@@ -117,7 +106,7 @@ To send a rejection for the Session Proposal, pass a proposerPublicKey, rejectio
 the `SignClient.rejectSession` function.
 
 
-
+#
 ### **Session Disconnect**
 
 ```kotlin
@@ -134,7 +123,7 @@ To disconnect from a settled session, pass a disconnection reason with code and 
 function.
 
 
-
+#
 ### **Respond Request**
 
 ```kotlin
@@ -162,7 +151,7 @@ To reject a JSON-RPC method that was sent from a Dapps for a session, submit a `
 request ID along with the rejection data to the `SignClient.respond` function.
 
 
-
+#
 ### **Session Update**
 
 NOTE: addresses provided in `accounts` array should follow [CAPI10](https://github.com/ChainAgnostic/CAIPs/blob/master/CAIPs/caip-10.md)
@@ -184,14 +173,14 @@ To update a session with namespaces, submit a `Sing.Params.Update` object with t
 to `SignClient.Update`.
 
 
-
+#
 ### **Session Extend**
 
 ```kotlin
 val sessionTopic: String = /*Topic of Session*/
 val extendParams = Sign.Params.Extend(sessionTopic = sessionTopic)
 
-WalletConnectClient.extend(exdendParams) { error -> /*callback for error while extending a session*/ }
+SignClient.extend(extendParams) { error -> /*callback for error while extending a session*/ }
 ```
 
 To extend a session, create a `Sign.Params.Extend` object with the session's topic to update the session with to `Sign.Extend`. Session is
@@ -214,7 +203,7 @@ val listener = object : Sign.Listeners.SessionPing {
     }
 }
 
-WalletConnectClient.ping(pingParams, listener)
+SignClient.ping(pingParams, listener)
 ```
 
 To ping a peer with a session, call `SignClient.ping` with the `Sign.Params.Ping` with a session's topic. If ping is successful, topic is

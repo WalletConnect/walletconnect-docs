@@ -1,39 +1,28 @@
 # Dapp Usage
 
-### Relay client
+### Configure Networking and Pair clients
 
-Make sure what you properly configure Relay Client first [Relay Configuration](../relay/usage#relay-client-configuration)
-
-### Instantiate a client
-
-Create an AppMetadata object. It will describe your application and define its appearance in a web browser.
-Then configure `Sign` instance with a metadata object you have instantiated.
-
-Note that you want to have only one instance of a client in your app, and you don’t want to deinitialize that instance.
-
-```swift
-let metadata = AppMetadata(name: <String>,
-                           description: <String>,
-                           url: <String>,
-                           icons: <[String]>)
-
-Sign.configure(metadata: <AppMetadata>)
-```
+Make sure that you properly configure Networking and Pair Clients first.
+- [Networking](../core/networking-configuration.md)
+- [Pairing](../core/pairing-usage.md)
 
 ### Subscribe for Sign publishers
 When your `Sign` instance receives requests from a peer it will publish related event. So you should set subscription to handle them.
 
+To track sessions subscribe to `sessionsPublisher` publisher
+
 ```swift
-Sign.instance.sessionDeletePublisher
+Sign.instance.sessionsPublisher
     .receive(on: DispatchQueue.main)
-    .sink { [unowned self] _ in
-        //handle event
+    .sink { [unowned self] (sessions: [Session]) in
+        // reload UI
     }.store(in: &publishers)
 ```
 
 Following publishers are available to subscribe:
 
 ```swift
+    public var sessionsPublisher: AnyPublisher<[Session], Never>
     public var sessionProposalPublisher: AnyPublisher<Session.Proposal, Never> 
     public var sessionRequestPublisher: AnyPublisher<Request, Never> 
     public var socketConnectionStatusPublisher: AnyPublisher<SocketConnectionStatus, Never> 
@@ -52,20 +41,17 @@ Following publishers are available to subscribe:
 ```Swift
 let methods: Set<String> = ["eth_sendTransaction", "personal_sign", "eth_signTypedData"]
 let blockchains: Set<Blockchain> = [Blockchain("eip155:1")!, Blockchain("eip155:137")!]
-let namespaces: [String: ProposalNamespace] = ["eip155": ProposalNamespace(chains: blockchains, methods: methods, events: [], extensions: nil)]
+let namespaces: [String: ProposalNamespace] = ["eip155": ProposalNamespace(chains: blockchains, methods: methods, events: []]
 ``` 
-to learn more on namespaces, check out our [specs](https://github.com/WalletConnect/walletconnect-specs/blob/main/sign/session-namespaces.md)
+To learn more on namespaces, check out our [specs](../../specs/clients/sign/namespaces).
 
-2. Your App should generate a pairing uri and share it with a wallet. Uri can be presented as QR code or sent via universal link. Wallet after receiving uri begins subscribing for session proposals. In order to create pairing and send session proposal you need to call only one method:
-
-```Swift
-let uri = try await Sign.instance.connect(requiredNamespaces: namespaces)
-```
-or if the pairing already exists to just send a session proposal call:
+2. Your App should generate a pairing URI and share it with a wallet. Uri can be presented as a QR code or sent via a universal link. Wallet begins subscribing for session proposals after receiving URI. In order to create a pairing and send a session proposal, you need to call the following:
 
 ```Swift
-let _ = try await Sign.instance.connect(requiredNamespaces: namespaces, topic: existingPairingTopic)
+let uri = try await Pair.instance.create()
+try await Sign.instance.connect(requiredNamespaces: namespaces, topic: uri.topic)
 ```
+
 
 ### Send Request to the Wallet
 
@@ -81,5 +67,5 @@ try await Sign.instance.request(params: request)
 When wallet respond `sessionResponsePublisher` will publish an event so you can verify the response.
 
 ### Where to go from here
-- Try our Example dApp that is part of WalletConnectSwiftV2 repository.
+- Try our [Example dApp](https://github.com/WalletConnect/WalletConnectSwiftV2/tree/main/Example) that is part of [WalletConnectSwiftV2 repository](https://github.com/WalletConnect/WalletConnectSwiftV2).
 - Build API documentation in XCode: go to Product -> Build Documentation
