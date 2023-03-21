@@ -1,6 +1,14 @@
 # Dapp Usage
 
-## Initialzation
+:::info
+If you're a wallet looking to incorporarte Auth, please see [Web3Wallet SDK](../wallets/wallet-usage.md)..
+:::
+
+## Installation
+
+Follow these [steps](../installation.md) to install the Flutter SDK.
+
+## Initialization
 
 To create an instance of `AuthClient`, you need to pass in the core and metadata parameters.
 
