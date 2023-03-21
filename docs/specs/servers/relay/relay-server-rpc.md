@@ -250,7 +250,7 @@ Used when a client wants to fetch all undelivered messages matching multiple top
 {
   "id" : "1",
   "jsonrpc": "2.0",
-  "method": "irn_batchFetchessages",
+  "method": "irn_batchFetchMessages",
   "params" : {
     "topics": string[]
   }
