@@ -54,6 +54,17 @@ We are currently in the midst of a migration, and we anticipate that dapps will 
 
 If the wallet you intend to use still utilizes v1, we recommend including `version: 1` in your configuration to ensure that your users can continue to connect to their preferred wallet. It's crucial to stay up to date on any changes made to wallets, so we encourage you to check back regularly for any updates.
 
+## Upcoming Web3Modal SDKs
+
+We're continually working to improve and expand the Web3Modal ecosystem to support a wider range of platforms and technologies. We're excited to announce that we are currently developing Web3Modal SDKs for the following platforms:
+
+- React Native
+- Flutter
+- Kotlin
+- Swift
+
+Please stay tuned for future updates and announcements regarding the release of these SDKs.
+
 ## Resources
 
 - [Awesome WalletConnect](https://github.com/WalletConnect/awesome-walletconnect) - community-curated collection of WalletConnect-enabled wallets, libraries, and tools.
