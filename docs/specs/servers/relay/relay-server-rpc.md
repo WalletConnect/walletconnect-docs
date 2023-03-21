@@ -185,7 +185,9 @@ Used when a server sends a subscription message to a client.
     "id" : string,
     "data" : {
       "topic" : string,
-      "message": string
+      "message": string,
+      "publishedAt: number,
+      "tag": number
     }
   }
 }
@@ -203,6 +205,14 @@ Used when a server sends a subscription message to a client.
 Used when a client wants to fetch all undelivered messages matching a single topic before subscribing.
 
 ```jsonc
+// ReceivedMessage
+{
+  "topic": string,
+  "message": string,
+  "publishedAt": number,
+  "tag": number
+}
+
 // Request (client->server)
 {
   "id" : "1",
@@ -217,7 +227,7 @@ Used when a client wants to fetch all undelivered messages matching a single top
 {
   "id" : "1",
   "jsonrpc": "2.0",
-  "result": string[] // array of messages
+  "result": ReceivedMessage[]
 }
 ```
 
@@ -232,7 +242,8 @@ Used when a client wants to fetch all undelivered messages matching multiple top
 {
   "topic": string,
   "message": string,
-  "publishedAt": Int64,
+  "publishedAt": number,
+  "tag": number
 }
 
 // Request (client->server)
