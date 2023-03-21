@@ -1,4 +1,4 @@
-# Dapp Auth API Usage
+# Dapp Usage
 
 ## Initialzation
 
