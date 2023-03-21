@@ -12,7 +12,7 @@ We define new types for starknet:
 
 ## starknet_requestAddInvokeTransaction
 
-Requests the wallet to sign and submit a [INVOKE transaction](https://docs.starknet.io/documentation/develop/Blocks/transactions/#invoke_transaction)
+Requests the wallet to sign and submit a [INVOKE transaction](https://docs.starknet.io/documentation/architecture_and_concepts/Blocks/transactions/#invoke_transaction)
 
 This request might be processed before the account is deployed. In that scenario the wallet will ask the user to do the deployment and the requested transaction.
 
