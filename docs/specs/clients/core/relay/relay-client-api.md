@@ -12,6 +12,22 @@ Rules define the default behaviors that RelayClient must respect when publishing
 - **Error handling** - given that a message publish fails. After making three retries, RelayClient must throw an error with a descriptive message to its consumer.
 - **Offline support** - given that RelayClient detects no Internet availability or web-socket connection. After making three retries, RelayClient must throw an error with a descriptive message to its consumer.
 
+## Server-Client Extended RPC ID
+
+When communicating with the server using `publish`, `subscribe`, or `unsubscribe`, Json RPC Ids should have 19 characters of entropy to avoid collisions.
+
+The same function that is used to generate an ID for client-client communication can be used to generate an ID for client-server communication, it just needs to accept an override for the number of characters of entropy.
+
+```javascript
+export function payloadId(entropy = 3): number {
+  const date = Date.now() * Math.pow(10, entropy);
+  const extra = Math.floor(Math.random() * Math.pow(10, entropy));
+  return date + extra;
+}
+```
+
+Instead of 3, the server should use a payloadId with an entropy set to 6.
+
 ## API
 
 The Relay Client API defines a public interface with set of supported methods. It is consumed by an instance of SDK, where it allows to publish a message on a topic and subscribe or unsubscribe the given topic.
