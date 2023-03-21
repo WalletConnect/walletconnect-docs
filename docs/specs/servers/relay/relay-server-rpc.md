@@ -227,7 +227,10 @@ Used when a client wants to fetch all undelivered messages matching a single top
 {
   "id" : "1",
   "jsonrpc": "2.0",
-  "result": ReceivedMessage[]
+  "result": {
+    "messages": ReceivedMessage[],
+    "hasMore": boolean
+  }
 }
 ```
 
@@ -260,7 +263,10 @@ Used when a client wants to fetch all undelivered messages matching multiple top
 {
   "id" : "1",
   "jsonrpc": "2.0",
-  "result": ReceivedMessage[] 
+  "result": {
+    "messages": ReceivedMessage[],
+    "hasMore": boolean
+  }
 }
 ```
 
