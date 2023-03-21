@@ -71,6 +71,15 @@ abstract class Client {
     reason: Reason;
   }): Promise<void>;
 
+  // register an account for automated namespace creation (SIGN)
+  public abstract registerAccount(params: { chainId: string, accountAddress: string }): void;
+
+  // register an event emitter for the automated namespace creation (SIGN)
+  public abstract registerEventEmitter(params: { chainId: string, event: string }): void;
+
+  // register a method for the automated namespace creation (SIGN)
+  public abstract registerRequestHandler(params: { chainId: string, method: string }): void;
+
 
   // ---------- Events ----------------------------------------------- //
 
