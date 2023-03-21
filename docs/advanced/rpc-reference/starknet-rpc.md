@@ -1,12 +1,12 @@
 ---
-description: StarkNet JSON-RPC Methods
+description: Starknet JSON-RPC Methods
 ---
 
-# StarkNet
+# Starknet
 
 We define new types for starknet:
 - `FELT`, a number represented by a hex string. Prefixed with 0x. It can be left padded with zeroes or not. It follows the [Cairo Field Element spec](https://www.cairo-lang.org/docs/how_cairo_works/cairo_intro.html#field-elements)
-- `ABI`, a representation of a StarkNet contract’s interface. As [StarkNet ABI Spec](https://docs.starknet.io/documentation/architecture_and_concepts/Contracts/contract-abi/)
+- `ABI`, a representation of a Starknet contract’s interface. As [Starknet ABI Spec](https://docs.starknet.io/documentation/architecture_and_concepts/Contracts/contract-abi/)
 
 
 
