@@ -122,11 +122,28 @@ Settlement is sent by the responder after approval and it's broadcasted right af
     "metadata": Metadata
   },
   "namespaces": {
-    "<namespace_name>" : {
+    "<namespace_name>": {
       "accounts": [string],
       "methods": [string],
       "events": [string]
     }
+  },
+  "requiredNamespaces": {
+    "<namespace_name>": {
+      "chains": [string],
+      "methods": [string],
+      "events": [string]
+    }
+  },
+  "optionalNamespaces": {
+    "<namespace_name_OR_chain>": {
+      "chains": [string],
+      "methods": [string],
+      "events": [string]
+    }
+  },
+  "sessionProperties": {
+    "property": string
   },
   "expiry": Int64, // seconds
 }
