@@ -2,7 +2,7 @@
 
 ## Web3Inbox SDK
 
-Web3Inbox SDK enables easy intergation of [Web3Inbox](https://web3inbox.com/). To use Web3Inbox SDK simply initalize the client and place either compose or xml view into your app. 
+Web3Inbox SDK enables easy intergation of [Web3Inbox](https://web3inbox.com/). To use Web3Inbox SDK simply initalize the client and place composeable into your app. 
 
 **Note:** Currently Web3Inbox SDK contains Chat SDK features. Push SDK features coming soon.
 
@@ -47,7 +47,9 @@ Web3Inbox.initialize(Inbox.Params.Init(core = CoreClient, account = Inbox.Type.A
 ```
 
 ## Create Web3Inbox.View
-Once the Web3Inbox client is [initialized](#intialize), all that's left to do is to place the `Web3Inbox.View` in your app. We support both [Compose](https://developer.android.com/jetpack/compose)  and Android XML.
+Once the Web3Inbox client is [initialized](#intialize), all that's left to do is to place the `Web3Inbox.View` in your app. We support both [Compose](https://developer.android.com/jetpack/compose), which sample sample implementation can be found in our [sample app](https://github.com/WalletConnect/WalletConnectKotlinV2/blob/develop/samples/web3inbox/src/main/kotlin/com/walletconnect/web3/inbox/ui/Web3InboxComposeActivity.kt)
+
+<!-- TODO: Change :pointup: once we move Web3Inbox sample into Web3Wallet sample -->
 
 ### Prevent reloading of Web3Inbox
 
@@ -67,38 +69,6 @@ To display Web3Inbox with Compose call `Web3Inbox.View()` somewhere in your app.
 
 ### Android XML
 
-#### Web3Inbox.View()
+Adding Web3Inbox to legacy Views should be achieved according to Google's guidelines: https://developer.android.com/jetpack/compose/migrate/interoperability-apis/compose-in-views.
 
-To display Web3Inbox with Android XML add view programatically by calling `addView(Web3Inbox.View(/*Context/*))`.
-
-```kotlin
-fun View(context: Context): WebView
-```
-#### Adding Web3Inbox into fragment's layout
-
-In order to display Web3Inbox in fragment's layout it needs to added programatically inside `onViewCreated(view: View, savedInstanceState: Bundle?)`
-
-Code below shows how to append Web3Inbox as a `ConstraintLayout` child.
-
-##### fragment_web3inbox.xml
-```kotlin
-<?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/root"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-</androidx.constraintlayout.widget.ConstraintLayout>
-```
-
-##### Fragment
-```kotlin
-class Web3InboxXMLFragment : Fragment(R.layout.fragment_web3inbox) {
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        findViewById<ConstraintLayout>(R.id.root).apply {
-            addView(Web3Inbox.View(applicationContext))
-        }
-    }
-}
-```
+For sample implementation take a look at our [sample app](https://github.com/WalletConnect/WalletConnectKotlinV2/blob/develop/samples/web3inbox/src/main/kotlin/com/walletconnect/web3/inbox/ui/Web3InboxXMLActivity.kt)
