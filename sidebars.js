@@ -69,7 +69,15 @@ module.exports = {
               items: ['api/push/prerequisites', 'api/push/push']
             }
           ]
-        }
+        },
+        {
+          type: 'category',
+          label: 'Multi-Chain',
+          items: [
+            'advanced/multichain/overview',
+            'advanced/multichain/chain-list',
+          ]
+        },
       ]
     },
     {
