@@ -38,7 +38,7 @@ url: `https://github.com/WalletConnect/web3modal-examples/tree/main/nextjs`
 {
 name: "NextJS App",
 description: "Example of Web3Modal in NextJS using @web3modal/standalone and @walletconnect/sign-client.",
-url: `https://github.com/WalletConnect/web3modal-examples/blob/main/nextjs-standalone/package.json`
+url: `https://github.com/WalletConnect/web3modal-examples/blob/main/nextjs-standalone`
 },
 {
 name: "Create React App",
@@ -48,12 +48,12 @@ url: `https://github.com/WalletConnect/web3modal-examples/tree/main/create-react
 {
 name: "Vite App",
 description: "Example of Web3Modal in Vite using @web3modal/standalone and @walletconnect/sign-client.",
-url: `https://github.com/WalletConnect/web3modal-examples/blob/main/html-standalone/package.json`
+url: `https://github.com/WalletConnect/web3modal-examples/blob/main/html-standalone`
 },
 {
 name: "Vite App",
 description: "Example of Web3Modal in Vite using @web3modal/html.",
-url: `https://github.com/WalletConnect/web3modal-examples/blob/main/html/package.json`
+url: `https://github.com/WalletConnect/web3modal-examples/blob/main/html`
 },
 ]}
 />
