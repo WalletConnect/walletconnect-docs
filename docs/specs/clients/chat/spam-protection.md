@@ -1,6 +1,5 @@
 # Chat Spam Protection
 
-
 To ensure a positive end-user experience, it's essential to mitigate spam and
 protect users from chat spam and [push notifications spam](../push/spam-protection.md).
 This document outlines the measures taken to prevent spam and maintain a
