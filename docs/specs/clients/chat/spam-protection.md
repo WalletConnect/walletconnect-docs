@@ -32,6 +32,7 @@ These spam protection come prepackaged with the Chat SDK but require action by
 the end user.
 
 ### Thread Protection
+
 1. A user can leave a thread at anytime, effectively "blocking" a peer using the
    `leave` function. This works inherently because of the above innate invite
    protection. For example, if a peer was compromised and began sending spam
