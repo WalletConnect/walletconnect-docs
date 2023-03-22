@@ -31,6 +31,7 @@ the end user.
    `muteContact` function to prevent sending notifications from a selected peer.
 
 ### Push Notification Protection
+
 1. Web3Inbox's UI exposes all active spam protection actions provided by the
    Push SDK. This of course includes the `deleteSubscription` function which blocks a
    spamming dapp.
