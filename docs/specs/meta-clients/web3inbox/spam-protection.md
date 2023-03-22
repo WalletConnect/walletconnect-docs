@@ -24,7 +24,7 @@ the end user.
 
 ### Chat Thread Protection
 1. Web3Inbox's UI exposes all active spam protection actions provided by the
-   chat SDK. This of course includes the `leave` function which blocks a
+   Chat SDK. This of course includes the `leave` function which blocks a
    spamming user.
 2. Web3Inbox sends notifications from peers by default, but if one has a peer
    that sends many messages in succession, one can use the Web3Inbox SDK's
