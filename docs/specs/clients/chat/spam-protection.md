@@ -29,7 +29,7 @@ additional configuration.
 
 ## User-triggered Protection
 
-These spam protection come prepackaged with the Chat SDK but require action by
+These spam protections come prepackaged with the Chat SDK but require action by
 the end user.
 
 ### Thread Protection
