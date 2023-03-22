@@ -23,6 +23,7 @@ additional configuration.
    
    
 ### Message Protection
+
 1. The SDK prevents absurdly long messages, with a character limit of 2000
    characters per message.
 
