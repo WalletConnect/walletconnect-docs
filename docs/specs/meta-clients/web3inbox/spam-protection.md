@@ -33,6 +33,6 @@ the end user.
 ### Push Notification Protection
 1. Web3Inbox's UI exposes all active spam protection actions provided by the
    push SDK. This of course includes the `deleteSubscription` function which blocks a
-   spamming dApp.
+   spamming dapp.
 
 
