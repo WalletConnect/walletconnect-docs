@@ -22,7 +22,8 @@ additional configuration.
    program via our Cloud app.
 
 
-## User-triggered protection
+## User-Triggered Protection
+
 These spam protection come prepackaged with the Push SDK but require action by
 the end user.
 
