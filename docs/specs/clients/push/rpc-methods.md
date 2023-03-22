@@ -122,3 +122,35 @@ true
 | ------- | -------- |
 | TTL     | 86400    |
 | Tag     | 4005     |
+```
+
+### wc_pushSubscribe
+
+Used to subscribe push subscription to a peer through topic S. Response is expected on the same topic.
+
+**Request**
+
+```jsonc
+// wc_pushSubscribe params
+{
+  "subscriptionAuth": string
+}
+
+| IRN     |          |
+| ------- | -------- | 
+| TTL     | 86400    |
+| Tag     | 4006     |
+
+```
+
+**Response**
+
+```jsonc
+// Success result
+true
+
+| IRN     |          |
+| ------- | -------- |
+| TTL     | 86400    |
+| Tag     | 4007     |
+```
