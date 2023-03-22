@@ -9,7 +9,7 @@ Note, wallets implementing this SDK have the ability to expand on this
 protection due to the customizability of the SDK. An example of this is
 [Web3Inbox Spam Protection](../../meta-clients/web3inbox/spam-protection.md).
 
-## Innate passive protection
+## Innate Passive Protection
 
 These spam protection come prepackaged with the Chat SDK and require no
 additional configuration.
