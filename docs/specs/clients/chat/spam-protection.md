@@ -15,6 +15,7 @@ These spam protection come prepackaged with the Chat SDK and require no
 additional configuration.
 
 ### Invite Protection
+
 1. Cannot re-invite a peer who already declined an invite: The SDK maintains
    state and prevents inviting a peer who exists in the `sentInvites` store.
 2. Invite messages are limited to 200 characters to prevent spammers sending
