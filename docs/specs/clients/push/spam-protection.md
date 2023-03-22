@@ -15,6 +15,7 @@ These spam protection come prepackaged with the Push SDK and require no
 additional configuration.
 
 ### Notification Protection
+
 1. Limited push notifications: Only one push notification per dapp per hour is
    allowed. This is to prevent dApps spamming a user as seen in Web2.
 2. Permissioned dapps: Initially, only vetted partners are allowed in the
