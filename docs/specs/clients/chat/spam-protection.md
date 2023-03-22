@@ -19,7 +19,7 @@ additional configuration.
 1. Cannot re-invite a peer who already declined an invite: The SDK maintains
    state and prevents inviting a peer who exists in the `sentInvites` store.
 2. Invite messages are limited to 200 characters to prevent spammers sending
-   invites with spam content
+   invites with spam content.
    
    
 ### Message Protection
