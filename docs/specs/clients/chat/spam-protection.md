@@ -27,7 +27,8 @@ additional configuration.
 1. The SDK prevents absurdly long messages, with a character limit of 2000
    characters per message.
 
-## User-triggered protection
+## User-triggered Protection
+
 These spam protection come prepackaged with the Chat SDK but require action by
 the end user.
 
