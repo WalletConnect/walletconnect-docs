@@ -1,6 +1,6 @@
 # Cast Server API
 
-## Register
+## Register Account
 
 Registers an account and push subscription symmetric key. The `subscriptionAuth` must be attached in the request so the Cast server can verify if wallet proved ownership of an address.
 
@@ -16,6 +16,22 @@ Body:
     "relayUrl": string
 }
 ```
+
+### Register Webhook
+
+Used to register a webhook that would return when accounts are subscribed or unsubscribed
+
+`POST /register-webhook`
+
+Body:
+
+```jsonc
+{
+    "events": string[], // subscribed or unsubscribed
+    "webhook": string
+}
+```
+
 
 ## Notify
 
@@ -54,3 +70,27 @@ Failed
   "reason": string
 }
 ```
+
+## Generate Subscribe Topic
+
+Used to notify a message to a set of accounts
+
+`GET /generate-subscribe-topic`
+
+Response:
+
+```jsonc
+{
+    "topic": string,
+    "publicKey": string,
+    "didDocument" DidDocument
+}
+``` 
+
+Failed
+```jsonc
+{
+  "reason": string
+}
+```
+
