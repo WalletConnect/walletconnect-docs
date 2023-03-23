@@ -32,18 +32,28 @@ url: `/2.0/web3modal/standalone/installation`
 items={[
 {
 name: "NextJS App",
-description: "Example of Web3Modal in NextJS.",
-url: `https://github.com/WalletConnect/web3modal/tree/V2/examples/nextjs`
+description: "Example of Web3Modal in NextJS using @web3modal/react.",
+url: `https://github.com/WalletConnect/web3modal-examples/tree/main/nextjs`
+},
+{
+name: "NextJS App",
+description: "Example of Web3Modal in NextJS using @web3modal/standalone and @walletconnect/sign-client.",
+url: `https://github.com/WalletConnect/web3modal-examples/blob/main/nextjs-standalone`
 },
 {
 name: "Create React App",
-description: "Example of Web3Modal in Create React App.",
-url: `https://github.com/WalletConnect/web3modal/tree/V2/examples/create-react-app`
+description: "Example of Web3Modal in Create React App using @web3modal/react.",
+url: `https://github.com/WalletConnect/web3modal-examples/tree/main/create-react-app`
 },
 {
 name: "Vite App",
-description: "Example of Web3Modal in Vite.",
-url: `https://github.com/WalletConnect/web3modal/tree/V2/examples/html`
+description: "Example of Web3Modal in Vite using @web3modal/standalone and @walletconnect/sign-client.",
+url: `https://github.com/WalletConnect/web3modal-examples/blob/main/html-standalone`
+},
+{
+name: "Vite App",
+description: "Example of Web3Modal in Vite using @web3modal/html.",
+url: `https://github.com/WalletConnect/web3modal-examples/blob/main/html`
 },
 ]}
 />
