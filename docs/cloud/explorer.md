@@ -64,6 +64,27 @@ Examples:
 
 - `GET https://explorer-api.walletconnect.com/v3/all?projectId=YOUR_PROJECT_ID&entries=5&page=1`
 
+### Chains
+
+By default chains endpoint returns all the chains supported by WalletConnect. 
+#### Query Parameters
+You can use following query params to query chains by its namespace and exclude testnets:
+
+| Param      | Description                                                                                                                 |
+| ---------- | --------------------------------------------------------------------------------------------------------------------------- |
+| testnets   | Determines if testnets should be included in the response <br/> (e.g. `?testnets=false`, defaults to `true` if not provided)  |
+| namespaces | Returns chains that belong to one of the provided namespaces<br/>(e.g. `?namespaces=eip155,cosmos,solana`)                  |
+
+#### `GET /v3/chains`
+
+Returns all the chains supported by WalletConnect.
+
+Examples:
+
+- `GET https://explorer-api.walletconnect.com/v3/chains?projectId=YOUR_PROJECT_ID`
+- `GET https://explorer-api.walletconnect.com/v3/chains?projectId=YOUR_PROJECT_ID&testnets=false`
+- `GET https://explorer-api.walletconnect.com/v3/chains?projectId=YOUR_PROJECT_ID&namespaces=eip155,cosmos`
+
 ### Logos
 
 #### Path Parameters
