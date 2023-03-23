@@ -21,7 +21,7 @@ There are getting started guides for the following clients platforms:
 - [Web - Javascript](../javascript/auth/installation.md)
 - [iOS - Swift](../swift/auth/installation.md)
 - [Android - Kotlin](../kotlin/auth/installation.md)
-- [Universal - Dart](../flutter/dapps/auth/installation.md)
+- [Universal - Dart](../flutter/installation.md)
 ## Useful Links
 
 We've created some sample apps so that you can get a taste of the WalletConnect Auth experience. Here is our [sample wallet](https://react-auth-wallet.walletconnect.com/) and [sample dapp](https://react-auth-dapp.walletconnect.com/).

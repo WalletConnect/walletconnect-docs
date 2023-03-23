@@ -1,6 +1,14 @@
 # Dapp Usage
 
-## Initialzation
+:::info
+If you're a wallet looking to incorporarte Auth, please see [Web3Wallet SDK](../wallets/wallet-usage.md)..
+:::
+
+## Installation
+
+Follow these [steps](../installation.md) to install the Flutter SDK.
+
+## Initialization
 
 To create an instance of `AuthClient`, you need to pass in the core and metadata parameters.
 
@@ -19,15 +27,14 @@ AuthClient authClient = await AuthClient.createInstance(
 
 ## Request Authentication
 
-To request authentication use the `requestAuth` method on the `authClient` object.
+To request authentication use the `request` method on the `authClient` object.
 
 ```dart
-final AuthRequestResponse auth = await authClient.requestAuth(
+final AuthRequestResponse auth = await authClient.request(
   params: AuthRequestParams(
     aud: 'http://localhost:3000/login',
     domain: 'localhost:3000',
     chainId: 'eip155:1',
-    nonce: AuthUtils.generateNonce(),
     statement: 'Sign in with your wallet!',
   ),
   pairingTopic: resp.pairingTopic,
