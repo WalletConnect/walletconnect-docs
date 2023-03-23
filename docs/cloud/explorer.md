@@ -24,11 +24,13 @@ By default listings endpoints return all data for provided type. You can use fol
 | projectId   | Required  | Your WalletConnect Cloud Project ID (from [cloud.walletconnect.com](https://cloud.walletconnect.com/))                   |
 | entries     |           | Specifies how many entries will be returned (must be used together with page param)                                      |
 | page        |           | Specifies current page (must be used with entries param)                                                                 |
+| updatedAt   |           | Specifies when a listing was last updated                                                                                     |
 | search      |           | Returns listings whose name matches provided search query                                                                |
 | chains      |           | Returns listings that support at least one of the provided chains<br/>(e.g. `?chains=eip155:1,eip155:137`)               |
 | platforms   |           | Returns listings that support at least one of the provided platforms<br/>(e.g. `?platforms=ios,android,mac`)             |
 | sdks        |           | Returns listings that support at least one of the provided WalletConnect SDKs<br/>(e.g. `?sdks=sign_v1,sign_v2,auth_v1`) |
-| standards   |           | Returns listings that support at least one of the provided standards<br/>(e.g. `?standards=eip-712,eip-3085`)                |
+| standards   |           | Returns listings that support at least one of the provided standards<br/>(e.g. `?standards=eip-712,eip-3085`)            |
+
 | ~~version~~ |           | Deprecated - replaced by `sdks` param. Specifies supported Sign version (1 or 2)                                         |
 
 #### `GET /v3/wallets`
@@ -63,6 +65,22 @@ Examples:
 
 - `GET https://explorer-api.walletconnect.com/v3/all?projectId=YOUR_PROJECT_ID&entries=5&page=1`
 
+#### `GET /v3/logo/:size/:image_id`
+
+Returns the image source of the logo for `image_id` sized according `size`.
+
+Examples:
+
+- `GET https://explorer-api.walletconnect.com/v3/logo/md/32a77b79-ffe8-42c3-61a7-3e02e019ca00?projectId=YOUR_PROJECT_ID`
+
+#### `GET /v3/all?projectId=YOUR_PROJECT_ID&ids=LISTING_ID1,LISTING_ID2`
+
+Returns a JSON object containing the entry listings by ID, which can be useful for allowlisting purposes.
+
+Examples:
+
+- `GET https://explorer-api.walletconnect.com/v3/all?projectId=YOUR_PROJECT_ID&ids=a85fb60f37b9971969e00caa241ed2b6ccd8fce369f59d3a965202595a4a9462`
+
 ### Logos
 
 #### Path Parameters
@@ -77,11 +95,3 @@ Examples:
 | Param     | Required? | Description                                                                                            |
 | --------- | --------- | ------------------------------------------------------------------------------------------------------ |
 | projectId | Required  | Your WalletConnect Cloud Project ID (from [cloud.walletconnect.com](https://cloud.walletconnect.com/)) |
-
-#### `GET /v3/logo/:size/:image_id`
-
-Returns the image source of the logo for `image_id` sized according `size`.
-
-Examples:
-
-- `GET https://explorer-api.walletconnect.com/v3/logo/md/32a77b79-ffe8-42c3-61a7-3e02e019ca00?projectId=YOUR_PROJECT_ID`
