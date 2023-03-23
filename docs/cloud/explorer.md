@@ -26,9 +26,9 @@ By default listings endpoints return all data for provided type. You can use fol
 | page        |           | Specifies current page (must be used with entries param)                                                                 |
 | search      |           | Returns listings whose name matches provided search query                                                                |
 | chains      |           | Returns listings that support at least one of the provided chains<br/>(e.g. `?chains=eip155:1,eip155:137`)               |
-| platforms   |           | Returns listings that support at least one of the provided platforms<br/>(e.g. `?platforms=ios,android,mac`)             |
+| platforms   |           | Returns listings that support at least one of the provided platforms<br/>(e.g. `?platforms=ios,android,mac,injected`)    |
 | sdks        |           | Returns listings that support at least one of the provided WalletConnect SDKs<br/>(e.g. `?sdks=sign_v1,sign_v2,auth_v1`) |
-| standards   |           | Returns listings that support at least one of the provided standards<br/>(e.g. `?standards=eip-712,eip-3085`)                |
+| standards   |           | Returns listings that support at least one of the provided standards<br/>(e.g. `?standards=eip-712,eip-3085`)            |
 | ~~version~~ |           | Deprecated - replaced by `sdks` param. Specifies supported Sign version (1 or 2)                                         |
 
 #### `GET /v3/wallets`
@@ -37,7 +37,8 @@ Returns a JSON object containing all wallets listed in the cloud explorer.
 
 Examples:
 
-- `GET https://explorer-api.walletconnect.com/v3/wallets?projectId=YOUR_PROJECT_ID&entries=5&page=1`
+- `GET https://explorer-api.walletconnect.com/v3/wallets?projectId=YOUR_PROJECT_ID&entries=5&page=1` (will return the first 5 wallets from the first page)
+- `GET https://explorer-api.walletconnect.com/v3/wallets?projectId=YOUR_PROJECT_ID&platforms=injected` (will only return injected wallets)
 
 #### `GET /v3/dapps`
 
