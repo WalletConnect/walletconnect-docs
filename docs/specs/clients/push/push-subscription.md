@@ -15,4 +15,4 @@ To learn more about the push proposal flow please visit [Push Proposal](./push-p
 
 ## Push Subscribe
 
-To learn more about the push subscribe flow please vist [Push Subscribe](./push-subscribe.md)
+To learn more about the push subscribe flow please visit [Push Subscribe](./push-subscribe.md)
