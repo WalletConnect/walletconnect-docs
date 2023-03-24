@@ -6,7 +6,7 @@ The Push subscribe flow will require a dapp to host a static json file which wil
 
 On the Wallet side we will be able to fetch a list of dapps that expose public keys for Push subscribe from a registry as for example our WalletConnect Cloud Explorer. These public keys are generated on the Cast server which will be able to listen for new subscriptions sent by the wallet to the subscribe topic which is the sha256 hash of the public key exposed.
 
-Once the wallet user has selected the dapp which they intend to subscribe the wallet will be able to subscribe remotely without visting the dapp
+Once the wallet user has selected the dapp which they intend to subscribe to, the wallet will be able to subscribe remotely without visiting the dapp.
 
 ## Subscribe Protocol
 
