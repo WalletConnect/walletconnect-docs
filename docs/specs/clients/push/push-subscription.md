@@ -11,7 +11,7 @@ There are however two flows for creating a push subscription:
 
 ## Push Proposal
 
-To learn more about the push proposal flow please vist [Push Proposal](./push-proposal.md)
+To learn more about the push proposal flow please visit [Push Proposal](./push-proposal.md)
 
 ## Push Subscribe
 
