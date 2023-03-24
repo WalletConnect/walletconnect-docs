@@ -2,7 +2,7 @@
 
 ### Description
 
-Pairing API is a lightweight API for establishing an encrypted, protocol-agnostic communication layer between peers. Its purpose is to provide a secure channel for proposing protocols or sending requests between dapp and wallet.
+Pairing API is a lightweight API for establishing an encrypted, protocol-agnostic communication layer between peers. Its purpose is to provide a secure channel for proposing protocols or sending requests between dapps and wallets.
 
 ### Context
 
