@@ -24,7 +24,7 @@ Subscribe protocol will be established as follows:
 3. Wallet generates key pair Y
 4. Wallet derives symmetric key with keys X and Y
 5. Push topic is derived from sha256 hash of symmetric key
-6. Wallet sends push subcribe request (type 1 envelope) on response topic with subscriptionAuth
+6. Wallet sends push subscribe request (type 1 envelope) on response topic with subscriptionAuth
 7. Cast Server receives push subscribe request on subscribe request
 8. Cast Server derives symmetric key and decrypts subscriptionAuth
 9. Cast Server triggers webhook to notify Dapp of new registered address
