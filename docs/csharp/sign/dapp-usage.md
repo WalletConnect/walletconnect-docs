@@ -69,7 +69,7 @@ var dappConnectOptions1 = new ConnectOptions()
     );
 ```
 
-With both options defined, you can initialize and connect the SDK
+With both options defined, you can initialize and connect the SDK.
 
 ```csharp
 var dappClient = await WalletConnectSignClient.Init(dappOptions);
