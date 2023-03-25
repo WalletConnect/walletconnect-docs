@@ -76,7 +76,7 @@ var dappClient = await WalletConnectSignClient.Init(dappOptions);
 var connectData = await dappClient.Connect(dappConnectOptions);
 ```
 
-You can grab the `Uri` for the connection request from `connectData`
+You can grab the `Uri` for the connection request from `connectData`.
 
 ```csharp
 ExampleShowQRCode(connectData.Uri);
