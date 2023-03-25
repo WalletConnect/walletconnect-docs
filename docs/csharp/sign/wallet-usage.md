@@ -18,7 +18,7 @@ var walletOptions = new SignClientOptions()
 };
 ```
 
-Once you have options defined, you can initialize the SDK
+Once you have the options defined, you can initialize the SDK.
 
 ```csharp
 var walletClient = await WalletConnectSignClient.Init(walletOptions);
