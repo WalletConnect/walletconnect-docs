@@ -82,7 +82,7 @@ You can grab the `Uri` for the connection request from `connectData`.
 ExampleShowQRCode(connectData.Uri);
 ```
 
-and await for connection approval using the `Approval` Task object
+Then await connection approval using the `Approval` Task object.
 
 ```csharp
 Task<SessionData> sessionConnectTask = connectData.Approval;
