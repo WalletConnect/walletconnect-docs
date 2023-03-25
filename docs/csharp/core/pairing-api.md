@@ -12,6 +12,8 @@ WalletConnect offers Sign, Auth, Chat and Push APIs. To allow a reusable communi
 
 Create a Metadata object. It will describe your application and define its appearance in a web browser. Then configure the Pair instance with a metadata object you have instantiated.
 
+Every project needs to obtain a Project ID from [WalletConnect Cloud](https://cloud.walletconnect.com/).
+
 ```csharp
 var core = new CoreModule(new CoreOptions() { ProjectId = "...", Name = "my-app" });
 core.Pairing.Configure(new Metadata()
