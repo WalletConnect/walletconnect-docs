@@ -30,7 +30,7 @@ Wallets can pair an incoming session using the session's Uri. Pairing a session 
 ProposalStruct proposal = await walletClient.Pair(connectData.Uri);
 ```
 
-The wallet can then approve or reject the proposal using either of the following
+The wallet can then approve or reject the proposal using either of the following:
 
 ```csharp
 string addressToConnect = ...;
