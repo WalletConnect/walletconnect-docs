@@ -242,6 +242,8 @@ Response will include a flag `hasMore`. If true, the consumer should fetch again
 
 Used when a client wants to fetch all undelivered messages matching multiple topics before subscribing.
 
+Response will include a flag `hasMore`. If true, the consumer should fetch again to get the rest of the messages. If false, then all messages have been delivered.
+
 ```jsonc
 // ReceivedMessage
 {
