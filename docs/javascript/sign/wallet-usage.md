@@ -63,8 +63,8 @@ signClient.on("session_proposal", (event) => {
     params: {
       id: number;
       expiry: number;
-      relays: Array<{ 
-        protocol: string; 
+      relays: Array<{
+        protocol: string;
         data?: string;
       }>;
       proposer: {
@@ -96,9 +96,9 @@ signClient.on("session_event", (event) => {
     id: number;
     topic: string;
     params: {
-      event: { 
-        name: string; 
-        data: any 
+      event: {
+        name: string;
+        data: any;
       };
       chainId: string;
     };
@@ -113,8 +113,8 @@ signClient.on("session_request", (event) => {
     topic: string;
     params: {
       request: {
-        method: string; 
-        params: any
+        method: string;
+        params: any;
       };
       chainId: string;
     };
@@ -162,7 +162,7 @@ namespaces: {
 
 ### Pairing with `uri`
 
-To create a pairing proposal, simply pass the `uri` received from the dapp into the `signClient.pair()` function.
+To create a pairing proposal, simply pass the `uri` received from the dapp into the `signClient.core.pairing.pair()` function.
 
 :::caution
 As of 2.0.0 (stable), calling pairing-specific methods (such as `signClient.pair()`) directly on `signClient` will continue to work, but is considered deprecated and will be removed in a future major version.
@@ -172,7 +172,7 @@ It is recommended to instead call these methods directly via the [Pairing API](.
 
 ```js
 // This will trigger the `session_proposal` event
-await signClient.pair({ uri });
+await signClient.core.pairing.pair({ uri });
 
 // Approve session proposal, use id from session proposal event and respond with namespace(s) that satisfy dapps request and contain approved accounts
 const { topic, acknowledged } = await signClient.approve({
@@ -181,7 +181,7 @@ const { topic, acknowledged } = await signClient.approve({
     eip155: {
       accounts: ["eip155:1:0x0000000000..."],
       methods: ["personal_sign", "eth_sendTransaction"],
-      events: ["accountsChanged"]
+      events: ["accountsChanged"],
     },
   },
 });

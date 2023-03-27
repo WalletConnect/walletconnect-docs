@@ -17,6 +17,7 @@ import { ChatClient } from "@walletconnect/chat-client";
 
 const chatClient = await ChatClient.init({
   projectId: "<YOUR PROJECT ID>",
+  keyseverUrl: "<YOUR KEYSERVER URL: eg: https://keys.walletconnect.com"
 });
 ```
 
@@ -27,8 +28,12 @@ chatClient.on("chat_invite", async (event) => {
   // React to an incoming invite to chat.
 });
 
-chatClient.on("chat_joined", async (event) => {
+chatClient.on("chat_invite_accepted", async (event) => {
   // React to your peer joining a given chat.
+});
+
+chatClient.on("chat_invite_rejected", async (event) => {
+  // React to your peer declining your invite
 });
 
 chatClient.on("chat_message", (event) => {
@@ -50,8 +55,10 @@ To allow for other Chat SDK user's to invite you to a chat, you need to register
 
 The key server expects a full CAIP-2 account for the address (as shown below).
 
+`onSign` will be used to sign the identity key using a wallet, one could supply `wagmi`'s [signMessage](https://wagmi.sh/core/actions/signMessage) function here for example.
+
 ```javascript
-await chatClient.register({ account: `eip155:1:0xa6de541...` });
+await chatClient.register({ account: `eip155:1:0xa6de541...`, onSign: async () => {} });
 ```
 
 ### Inviting another peer to chat
@@ -59,12 +66,12 @@ await chatClient.register({ account: `eip155:1:0xa6de541...` });
 To send a chat invitation to a peer, you can call `.invite()` with your account and an `invite` object:
 
 ```javascript
+const inviteePublicKey = await chatClient.resolve({ account: 'eip155:1:0xf5d44...' })
 await chatClient.invite({
-  account: `eip155:1:0xf5d44...`, // the CAIP-2 formatted account of the recipient.
-  invite: {
-    message: "Hey, let's chat!", // an intro message from you
-    account: `eip155:1:0xa6de541...`, // your CAIP-2 formatted account that you registered previously.
-  },
+  message: "Hey, Let's chat!,
+  inviterAccount: `eip155:1:0xa6de541...`, // your CAIP-2 formatted account that you registered previously.
+  inviteeAccount: 'eip155:1:0xf5d44...', // the CAIP-2 formatted account of the recipient.
+  inviteePublicKey
 });
 ```
 
@@ -87,12 +94,10 @@ you can call `.message()` with the following parameters:
 
 ```javascript
 await chatClient.message({
-  topic: chatThread.topic, // Topic of the chat thread this message should be sent to.
-  payload: {
-    message: "Hey, good to hear from you!", // the message you want to send.
-    authorAccount: `eip155:1:0xa6de541...`, // your CAIP-2 formatted account that you registered previously.
-    timestamp: Date.now(),
-  },
+  topic: chatThread.topic,
+  message: "Hey, good to hear from you!",
+  authorAccount: `eip155:1:0xa6de541...`, // your CAIP-2 formatted account that you registered previously.
+  timestamp: Date.now(),
 });
 ```
 

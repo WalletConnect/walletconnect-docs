@@ -147,7 +147,7 @@ await signClient.emit({
       event: {
     name: "accountsChanged",
     data: ["0xab16a96D359eC26a11e2C2b3d8f8B8942d5Bfcdb"],
-  },,
+  },
     chainId: 'eip155:1'
 })
 
@@ -157,7 +157,7 @@ await web3wallet.emitSessionEvent({
       event: {
     name: "accountsChanged",
     data: ["0xab16a96D359eC26a11e2C2b3d8f8B8942d5Bfcdb"],
-  },,
+  },
     chainId: 'eip155:1'
 })
 ```

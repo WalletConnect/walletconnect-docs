@@ -6,6 +6,11 @@ We have a set of official examples in our [web-examples](https://github.com/Wall
 
 ### Wallets
 
+**Web3Wallet**
+This wallet can be used with any dapp using Sign v2 or Auth.
+
+- [React Web3Wallet](https://github.com/WalletConnect/web-examples/tree/main/wallets/react-web3wallet) ([Demo](https://react-web3wallet.vercel.app))
+
 **Sign**
 
 - [React Wallet Ethers - v2](https://github.com/WalletConnect/web-examples/tree/main/wallets/react-wallet-v2) ([Demo](https://react-wallet.walletconnect.com/))
