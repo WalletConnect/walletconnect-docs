@@ -126,7 +126,7 @@ await web3wallet.extendSession({ topic });
 
 ## Emit Session Events
 
-To emit session events, call the `emitSessionEvent` and pass in the params. If you wish to switch to chain/account that is not approved (missing from `session.namespaces`) you will have to update the session first. In the following example, the wallet will emit `session_event` when the wallet switches accounts.
+To emit session events, call the `emitSessionEvent` and pass in the params. If you wish to switch to chain/account that is not approved (missing from `session.namespaces`) you will have to update the session first. In the following example, the wallet will emit `session_event` that will instruct the dapp to switch the active accounts.
 
 ```javascript
 await web3wallet.emitSessionEvent({
