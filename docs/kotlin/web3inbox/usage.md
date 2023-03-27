@@ -47,9 +47,7 @@ Web3Inbox.initialize(Inbox.Params.Init(core = CoreClient, account = Inbox.Type.A
 ```
 
 ## Create Web3Inbox.View
-Once the Web3Inbox client is [initialized](#intialize), all that's left to do is to place the `Web3Inbox.View` in your app. We support both [Compose](https://developer.android.com/jetpack/compose), which sample sample implementation can be found in our [sample app](https://github.com/WalletConnect/WalletConnectKotlinV2/blob/develop/samples/web3inbox/src/main/kotlin/com/walletconnect/web3/inbox/ui/Web3InboxComposeActivity.kt)
-
-<!-- TODO: Change :pointup: once we move Web3Inbox sample into Web3Wallet sample -->
+Once the Web3Inbox client is [initialized](#intialize), all that's left to do is to place the `Web3Inbox.View` in your app. We support both [Compose](https://developer.android.com/jetpack/compose), which sample sample implementation can be found in our [sample app](https://github.com/WalletConnect/WalletConnectKotlinV2/blob/develop/samples/web3wallet/src/main/kotlin/com/walletconnect/web3/wallet/ui/routes/composable_routes/web3inbox/Web3InboxRoute.kt)
 
 ### Prevent reloading of Web3Inbox
 
@@ -59,11 +57,12 @@ Once the Web3Inbox client is [initialized](#intialize), all that's left to do is
 
 #### Composable Web3Inbox.View()
 
-To display Web3Inbox with Compose call `Web3Inbox.View()` somewhere in your app.
+To remember Web3Inbox state call `Web3Inbox.rememberWeb3InboxState()` which later needs to be passed to `Web3Inbox.View(state)` composable.To display Web3Inbox with Compose call `Web3Inbox.View(state)` somewhere in your app.
 
 ```kotlin
    setContent {
-      Web3Inbox.View(modifier: Modifier = Modifier)
+        val state = Web3Inbox.rememberWeb3InboxState()
+        Web3Inbox.View(state = state)
    }
 ```
 
