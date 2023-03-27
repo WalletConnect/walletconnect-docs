@@ -204,6 +204,8 @@ Used when a server sends a subscription message to a client.
 
 Used when a client wants to fetch all undelivered messages matching a single topic before subscribing.
 
+Response will include a flag `hasMore`. If true, the consumer should fetch again to get the rest of the messages. If false, then all messages have been delivered.
+
 ```jsonc
 // ReceivedMessage
 {
