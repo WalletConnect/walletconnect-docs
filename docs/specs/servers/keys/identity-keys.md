@@ -102,5 +102,4 @@ When we are unregistering an Identity Key we must use the following mandatory fi
 * iss - public identity key in form of did:key
 * aud - key server url used for registering
 * pkh - corresponding blockchain account (did:pkh)
-
-<!-- act will be added in another PR -->
+* act - desription of action intent. Must be equal to "unregister_identity"

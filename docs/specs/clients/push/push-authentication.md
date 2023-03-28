@@ -16,5 +16,7 @@ This is achieved using [Identity Keys](../../servers/keys/identity-keys) and did
 
 `sub` - blockchain account that push subscription has been proposed for (did:pkh)
 
+`act` - desription of action intent. Must be equal to "push_subscription"
+
 Expiry should be calculated from the addition of the issuance date and the push request TTL (86400 seconds)
  
