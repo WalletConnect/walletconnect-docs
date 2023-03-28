@@ -17,12 +17,12 @@ WalletConnect consists of two SDKs: Web3Modal and Web3Wallet.
 items={[
 {
 name: "Web3Modal",
-description: "Web3Modal is a library that makes it easy to connect users to your dApp and interact with the blockchain.",
+description: "For Dapps. Web3Modal is a library that makes it easy to connect users to your dApp and interact with the blockchain.",
 url: `/2.0/web3modal/about`
 },
 {
 name: "Web3Wallet",
-description: "Web3Wallet simplifies the process of integrating wallets into dApps by combining the Sign and Auth APIs into a single module.",
+description: "For Wallets. Web3Wallet simplifies the process of integrating wallets into dApps by combining the Sign and Auth APIs into a single module.",
 url: `/2.0/web3wallet/about`
 },
 ]}
