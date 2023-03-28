@@ -91,6 +91,12 @@ const config = {
           {
             type: 'docSidebar',
             position: 'left',
+            sidebarId: 'reactnative',
+            label: 'React Native'
+          },
+          {
+            type: 'docSidebar',
+            position: 'left',
             sidebarId: 'flutter',
             label: 'Flutter'
           },
