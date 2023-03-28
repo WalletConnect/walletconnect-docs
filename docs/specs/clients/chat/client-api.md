@@ -83,12 +83,6 @@ abstract class Client {
     topic: string;
   }): Promise<void>;
 
-  // sets peer account with public key 
-  public abstract setContact(params: {
-    account: string;
-    publicKey: string;
-  }): Promise<void>
-
   // returns all invites matching an inviteeAccount from Invite 
   // returns maps of invites indexed by id
   public abstract getReceivedInvites(params: {
