@@ -680,5 +680,51 @@ module.exports = {
         }
       ]
     }
+  ],
+  reactnative: [
+    {
+      type: 'html',
+      value:
+        '<a class="navbar__brand sidebar__brand" href="/"><div class="navbar__logo"><img src="/img/walletconnect-logo-white.svg" alt="WalletConnect Logo"></div>WalletConnect<span>Docs<span></a>',
+      defaultStyle: true
+    },
+    {
+      type: 'category',
+      label: 'Products',
+      className: 'menu_outer_list',
+      collapsible: false,
+      items: [
+        'flutter/installation',
+        {
+          type: 'category',
+          label: 'Web3Wallet SDK',
+          collapsible: true,
+          collapsed: true,
+          items: ['flutter/wallets/wallet-usage']
+        }
+      ]
+    },
+    {
+      type: 'category',
+      label: 'Advanced',
+      className: 'menu_outer_list',
+      collapsible: false,
+      items: [
+        {
+          type: 'category',
+          label: 'Sign',
+          collapsible: true,
+          collapsed: true,
+          items: ['flutter/dapps/dapp-sign-usage']
+        },
+        {
+          type: 'category',
+          label: 'Auth',
+          collapsible: true,
+          collapsed: true,
+          items: ['flutter/dapps/dapp-auth-usage']
+        }
+      ]
+    }
   ]
 }
