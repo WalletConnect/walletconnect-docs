@@ -10,16 +10,16 @@ When we are creating claims describing a chat invite key we must use the followi
 * sub - public key for chat invite key
 * aud - key server url used for registering
 * pkh - corresponding blockchain account (did:pkh)
-* act - desription of action intent. Must be equal to specific value defined in each claims
+* act - description of action intent. Must be equal to specific value defined in each claims
 
 Expiry will be calculated 1 hour (3600 seconds) from issued date
 
 ## Register Invite
 When we are validating invite key registration claims we must use specify act:
 
-* act - desription of action intent. Must be equal to "register_invite"
+* act - description of action intent. Must be equal to "register_invite"
 
 ## Unregister Invite
 When we are validating invite key registration claims we must use specify act:
 
-* act - desription of action intent. Must be equal to "unregister_invite"
+* act - description of action intent. Must be equal to "unregister_invite"
