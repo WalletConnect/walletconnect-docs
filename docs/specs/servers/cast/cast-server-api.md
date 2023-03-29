@@ -37,6 +37,8 @@ Response:
 {
     "id": string
 }
+```
+
 Webhook payload:
 ```jsonc
 {
@@ -44,6 +46,8 @@ Webhook payload:
     "event": string // subscribe or unsubscribed
     "account": string // CAIP-10 account
 }
+```
+
 ## Notify
 
 Used to notify a message to a set of accounts
