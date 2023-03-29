@@ -83,7 +83,6 @@ Response:
 {
     "topic": string,
     "publicKey": string,
-    "didDocument" DidDocument
 }
 ``` 
 
