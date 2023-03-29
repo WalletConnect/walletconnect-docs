@@ -31,7 +31,12 @@ Body:
     "webhook": string
 }
 ```
+Response:
 
+```jsonc
+{
+    "id": string
+}
 
 ## Notify
 
