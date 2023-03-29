@@ -6,7 +6,7 @@ When we are registering a chat invite key we must use the following mandatory fi
 
 * iat - timestamp when jwt was issued 
 * exp - timestamp when jwt must expire
-* iss - public identity key in form of did:key
+* iss - public identity key according to the [X25519](https://w3c-ccg.github.io/did-method-key/#x25519) did:key spec
 * sub - public key for chat invite key
 * aud - key server url used for registering
 * pkh - corresponding blockchain account (did:pkh)
