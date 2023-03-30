@@ -695,13 +695,6 @@ module.exports = {
           collapsed: true,
           items: ['reactnative/web3wallet/GettingStarted', 'reactnative/web3wallet/Usage']
         }
-        // {
-        //   type: 'category',
-        //   label: 'Web3Modal SDK',
-        //   collapsible: true,
-        //   collapsed: true,
-        //   items: ['reactnative/web3modal/GettingStarted']
-        // }
       ]
     }
   ]
