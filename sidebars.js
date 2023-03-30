@@ -73,11 +73,8 @@ module.exports = {
         {
           type: 'category',
           label: 'Multi-Chain',
-          items: [
-            'advanced/multichain/overview',
-            'advanced/multichain/chain-list',
-          ]
-        },
+          items: ['advanced/multichain/overview', 'advanced/multichain/chain-list']
+        }
       ]
     },
     {
@@ -436,7 +433,6 @@ module.exports = {
       items: [
         'javascript/guides/examples-and-resources',
         'javascript/guides/nodejs',
-        'javascript/guides/react-native',
         'javascript/guides/shared-core',
         'javascript/guides/typescript'
       ]
@@ -463,20 +459,17 @@ module.exports = {
           items: [
             'kotlin/web3wallet/installation',
             'kotlin/web3wallet/wallet-usage',
-            'kotlin/web3wallet/upgrade-guide',
-          ],
+            'kotlin/web3wallet/upgrade-guide'
+          ]
         },
         {
           type: 'category',
           label: 'Web3Inbox SDK',
           collapsible: true,
           collapsed: true,
-          items: [
-            'kotlin/web3inbox/installation',
-            'kotlin/web3inbox/usage',
-          ],
-        },
-      ],
+          items: ['kotlin/web3inbox/installation', 'kotlin/web3inbox/usage']
+        }
+      ]
     },
     {
       type: 'category',
@@ -694,36 +687,21 @@ module.exports = {
       className: 'menu_outer_list',
       collapsible: false,
       items: [
-        'flutter/installation',
+        'reactnative/Introduction',
         {
           type: 'category',
           label: 'Web3Wallet SDK',
           collapsible: true,
           collapsed: true,
-          items: ['flutter/wallets/wallet-usage']
+          items: ['reactnative/web3wallet/GettingStarted', 'reactnative/web3wallet/Usage']
         }
-      ]
-    },
-    {
-      type: 'category',
-      label: 'Advanced',
-      className: 'menu_outer_list',
-      collapsible: false,
-      items: [
-        {
-          type: 'category',
-          label: 'Sign',
-          collapsible: true,
-          collapsed: true,
-          items: ['flutter/dapps/dapp-sign-usage']
-        },
-        {
-          type: 'category',
-          label: 'Auth',
-          collapsible: true,
-          collapsed: true,
-          items: ['flutter/dapps/dapp-auth-usage']
-        }
+        // {
+        //   type: 'category',
+        //   label: 'Web3Modal SDK',
+        //   collapsible: true,
+        //   collapsed: true,
+        //   items: ['reactnative/web3modal/GettingStarted']
+        // }
       ]
     }
   ]
