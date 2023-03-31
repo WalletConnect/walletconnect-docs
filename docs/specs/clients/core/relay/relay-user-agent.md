@@ -17,7 +17,7 @@ Clients MUST format each platform's parameters to comply with the specification 
 The schema for the client's User Agent will include the following:
 
 - Protocol Version (protocol) - defines WalletConnect protocol version (eg. "wc-relay-2.0")
-- SDK Version (sdk) - defines which SDK is being used in little-endian ordered bitwise flags without leading zeros with all SDKs combined using an `inclusive OR` operator (eg. "swift-2.0-rc.0x10011" or "js-2.0-rc.0x10011" or "kotlin-2.0-rc.0x10011")
+- SDK Version (sdk) - defines which SDK is being used in little-endian (right to left) ordered bitwise flags without leading zeros. All flags are combined using an `inclusive OR` operator (eg. "swift-2.0-rc.0x10011" or "js-2.0-rc.0x10011" or "kotlin-2.0-rc.0x10011")
 - Operating System (os) - defines which operating system is being used (eg "macos-12.4")
 
 Additionally the following optional params can be included if available:
