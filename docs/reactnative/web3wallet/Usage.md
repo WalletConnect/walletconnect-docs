@@ -176,7 +176,7 @@ const response = {
 
 ## Updating a Session
 
-The `session_update` event is emitted from the wallet when the session is updated by calling `updateSession`. To update a session, pass in the [topic](https://docs.walletconnect.com/2.0/advanced/glossary#topics) and the new namespace.
+The `session_update` event is emitted from the wallet when the session is updated by calling `updateSession`. To update a session, pass in the [topic](../../advanced/glossary#topics) and the new namespace.
 
 ```javascript
 await web3wallet.updateSession({ topic, namespaces: newNs })
