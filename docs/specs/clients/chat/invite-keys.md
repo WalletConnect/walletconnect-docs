@@ -2,7 +2,7 @@
 
 Invite keys are used by Chat API for public blockchain account resolution.
 
-When we are registering a chat invite key we must use the following mandatory fields in the jwt:
+When we are creating claims describing a chat invite key we must use the following mandatory fields in the jwt:
 
 * iat - timestamp when jwt was issued 
 * exp - timestamp when jwt must expire
@@ -10,5 +10,16 @@ When we are registering a chat invite key we must use the following mandatory fi
 * sub - public key for chat invite key in form of did:key according to the [X25519](https://w3c-ccg.github.io/did-method-key/#x25519)
 * aud - key server url used for registering
 * pkh - corresponding blockchain account (did:pkh)
+* act - description of action intent. Must be equal to specific value defined in each claims
 
 Expiry will be calculated 1 hour (3600 seconds) from issued date
+
+## Register Invite
+When we are validating invite key registration claims we must use specify act:
+
+* act - description of action intent. Must be equal to "register_invite"
+
+## Unregister Invite
+When we are validating invite key registration claims we must use specify act:
+
+* act - description of action intent. Must be equal to "unregister_invite"
