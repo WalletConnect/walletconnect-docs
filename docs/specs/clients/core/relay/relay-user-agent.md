@@ -17,7 +17,7 @@ Clients MUST format each platform's parameters to comply with the specification 
 The schema for the client's User Agent will include the following:
 
 - Protocol Version (protocol) - defines WalletConnect protocol version (eg. "wc-relay-2.0")
-- SDK Version (sdk) - defines which SDK is being used (eg. "swift-2.0-rc.0x010011" or "js-2.0-rc.0x010011" or "kotlin-2.0-rc.0x010011")
+- SDK Version (sdk) - defines which SDK is being used in little-endian ordered bitwise flags without leading zeros (eg. "swift-2.0-rc.0x10011" or "js-2.0-rc.0x10011" or "kotlin-2.0-rc.0x10011")
 - Operating System (os) - defines which operating system is being used (eg "macos-12.4")
 
 Additionally the following optional params can be included if available:
@@ -42,17 +42,17 @@ Additionally the following optional params can be included if available:
 
 ```
 # javascript (browser)
-<RELAY_URL>?ua=wc-2/js-2.0.0-rc.1x010011/macos-chrome-103.0.5060/browser:app.uniswap.org
+<RELAY_URL>?ua=wc-2/js-2.0.0-rc.1x10011/macos-chrome-103.0.5060/browser:app.uniswap.org
 
 # javascript (react-native)
-<RELAY_URL>?ua=wc-2/js-2.0.0-rc.1x010011/ios-12.4/react-native
+<RELAY_URL>?ua=wc-2/js-2.0.0-rc.1x10011/ios-12.4/react-native
 
 # javascript (react-native)
-<RELAY_URL>?ua=wc-2/js-2.0.0-rc.1x010011/macos-11.6/nodejs
+<RELAY_URL>?ua=wc-2/js-2.0.0-rc.1x10011/macos-11.6/nodejs
 
 # swift (ios)
-<RELAY_URL>?ua=wc-2/swift-2.0.0-rc.1x010011/ios-12.4
+<RELAY_URL>?ua=wc-2/swift-2.0.0-rc.1x10011/ios-12.4
 
 # kotlin (android)
-<RELAY_URL>?ua=wc-2/kotlin-2.0.0-rc.1x010011/android-10
+<RELAY_URL>?ua=wc-2/kotlin-2.0.0-rc.1x10011/android-10
 ```
