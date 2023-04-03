@@ -16,45 +16,45 @@ This means that the `PushWalletClient` should be used alongside the [Web3Wallet 
 **1. Initialize your WalletConnect Core, using [your Project ID](../../cloud/relay.md), and pass it to the SDK clients**
 
 ```javascript
-import { Core } from "@walletconnect/core";
-import { Web3Wallet } from "@walletconnect/web3wallet";
-import { WalletClient as PushWalletClient } from "@walletconnect/push-client";
+import { Core } from '@walletconnect/core'
+import { Web3Wallet } from '@walletconnect/web3wallet'
+import { WalletClient as PushWalletClient } from '@walletconnect/push-client'
 
 const core = new Core({
-  projectId: "<YOUR_PROJECT_ID>",
-});
+  projectId: '<YOUR_PROJECT_ID>'
+})
 
 // e.g. for Web3Wallet. See the "Shared Core" guide linked above for details.
 const web3wallet = await Web3Wallet.init({
   core, // <- pass the shared `core` instance
   metadata: {
     /* ... */
-  },
-});
+  }
+})
 
 const pushWalletClient = await PushWalletClient.init({
   core, // <- pass the shared `core` instance
   metadata: {
-    name: "My Push-Enabled Wallet",
-    description: "A wallet using WalletConnect PushClient",
-    url: "https://my-wallet.com",
-    icons: ["https://my-wallet.com/icons/logo.png"],
-  },
-});
+    name: 'My Push-Enabled Wallet',
+    description: 'A wallet using WalletConnect PushClient',
+    url: 'https://my-wallet.com',
+    icons: ['https://my-wallet.com/icons/logo.png']
+  }
+})
 ```
 
 **2. Add listeners for relevant push events**
 
 ```javascript
-pushWalletClient.on("push_request", async ({ id, topic, params }) => {
-  const { metadata, account } = params;
+pushWalletClient.on('push_request', async ({ id, topic, params }) => {
+  const { metadata, account } = params
   // e.g. show a notification to the user, asking them to accept the push subscription request.
-});
+})
 
-pushWalletClient.on("push_message", async ({ params }) => {
-  const { message } = params;
+pushWalletClient.on('push_message', async ({ params }) => {
+  const { message } = params
   // e.g. build a notification using the metadata from `message` and show to the user.
-});
+})
 ```
 
 **3. Accept or reject incoming push subscription requests**
