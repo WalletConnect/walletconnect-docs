@@ -59,12 +59,25 @@ pushWalletClient.on('push_message', async ({ params }) => {
 
 **3. Accept or reject incoming push subscription requests**
 
+To accept a push subscription request, you must provide a callback to the `onSign: (message: string) => string` parameter of the `approve` method.
+In order to authorize the push subscription, the SDK will call this callback with a message to sign, expecting the signature for that message to be returned.
+
+Some suggested ways to implement the `onSign` callback are via:
+
+- Ethers.js [`Wallet.signMessage` method](https://docs.ethers.org/v5/api/signer/#Signer-signMessage)
+- The [`signMessage` method](https://wagmi.sh/core/actions/signMessage) in `@wagmi/core`
+
 ```javascript
 pushWalletClient.on("push_request", async ({ id, topic, params }) => {
   // Show a notification to the user with the requesting dapp's metadata, asking them to accept the push subscription request.
-  const userAccepted = await showNotificationToUser(params.metadata);
+  const userAccepted = await showNotificationToUser(params.metadata); // <- your own handler
   if (userAccepted) {
-    await pushWalletClient.approve({ id });
+    // The `onSign` callback you provide will be called by the SDK to authorize the push subscription.
+    const onSign = async (message: string) => {
+      const signature = await wallet.signMessage(message);
+      return signature
+    }
+    await pushWalletClient.approve({ id, onSign });
   } else {
     await pushWalletClient.reject({ id, reason: "User rejected push subscription request" });
   }
