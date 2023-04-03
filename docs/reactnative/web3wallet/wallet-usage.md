@@ -1,44 +1,18 @@
 import Container from '../../components/Container';
 
-# Usage
+# Wallet Usage
 
 The followings steps describe the process of creating a React Native wallet with the Web3Wallet SDK.
 
-1. [Obtain Project ID](#obtain-project-id)
-2. [Installation](#installation)
-3. [Initialization](#initialization)
-4. [Pairing, Session Approval & Rejection](#pairing-session-approval--rejection)
-5. [Session Disconnect](#session-disconnect)
-6. [Session Requests](#session-requests)
-7. [Updating a Session](#updating-a-session)
-8. [Extend a Session](#extend-a-session)
-9. [Emit Session Events](#emit-session-events)
+1. [Initialization](#initialization)
+2. [Pairing, Session Approval & Rejection](#pairing-session-approval--rejection)
+3. [Session Disconnect](#session-disconnect)
+4. [Session Requests](#session-requests)
+5. [Updating a Session](#updating-a-session)
+6. [Extend a Session](#extend-a-session)
+7. [Emit Session Events](#emit-session-events)
 
 ---
-
-## Obtain Project ID
-
-Every project using WalletConnect SDKs needs to obtain projectId from [WalletConnect Cloud](https://cloud.walletconnect.com/sign-in). This is absolutely free and only takes a few minutes.
-
-## Installation
-
-Install the Web3Wallet SDK package.
-
-```bash npm2yarn
-npm install @walletconnect/web3wallet @walletconnect/react-native-compat
-```
-
-Additionally add these extra packages to help with async storage, polyfills and the instance of ethers.
-
-```bash npm2yarn
-npm install @react-native-async-storage/async-storage react-native-get-random-values fast-text-encoding @ethersproject/shims ethers@5.4
-```
-
-For those using Typescript, we recommend adding these dev dependencies:
-
-```bash npm2yarn
-npm install npm install --save @walletconnect/jsonrpc-types
-```
 
 ## Initialization
 
