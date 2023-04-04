@@ -86,18 +86,17 @@ Failed
 }
 ```
 
-## Generate Subscribe Topic
+## Generate Subscription
 
-Used to notify a message to a set of accounts
+Used to generate a new push subscription for a dapp, returns a web did document that should be stored at dapp's domain
 
-`GET /generate-subscribe-topic`
+`GET /generate-subscription`
 
 Response:
 
 ```jsonc
 {
-    "topic": string,
-    "publicKey": string,
+    "didDoc": DidDocument,
 }
 ``` 
 
