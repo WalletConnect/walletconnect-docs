@@ -162,7 +162,7 @@ Used to update a push subscription with a new push subscription scope, replacing
 
 Push subscription id is the sha256 hash of the serialized did-jwt of subscriptionAuth string.
 
-**Note:** this method is peforming atomically two methods (wc_pushDelete + wc_pushSubscribe)
+**Note:** this method is atomically performing two methods (wc_pushDelete + wc_pushSubscribe)
 
 **Request**
 
