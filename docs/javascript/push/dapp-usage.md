@@ -65,7 +65,7 @@ const pairings = pushDappClient.core.pairing.getPairings();
 const latestPairing = pairings[pairings.length - 1];
 
 const id = await pushDappClient.request({
-  account: "eip155:1:0xafeb..." // Target account to request push notifications for.
+  account: "eip155:1:0xafeb...", // Target account to request push notifications for.
   pairingTopic: latestPairing.topic,
 });
 
@@ -88,7 +88,7 @@ In order to send a push notification via the Cast server, we can send a `POST` r
 // that should receive the push notification.
 const notificationPayload = {
   accounts: ["eip155:1:0xafeb..."],
-  message: {
+  notification: {
     title: "Profile Activity",
     body: "There's been activity on your profile!",
     icon: "https://my-dapp.com/icons/logo.png",
