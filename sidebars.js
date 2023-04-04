@@ -69,7 +69,15 @@ module.exports = {
               items: ['api/push/prerequisites', 'api/push/push']
             }
           ]
-        }
+        },
+        {
+          type: 'category',
+          label: 'Multi-Chain',
+          items: [
+            'advanced/multichain/overview',
+            'advanced/multichain/chain-list',
+          ]
+        },
       ]
     },
     {
@@ -90,7 +98,8 @@ module.exports = {
             'advanced/rpc-reference/cosmos-rpc',
             'advanced/rpc-reference/solana-rpc',
             'advanced/rpc-reference/stellar-rpc',
-            'advanced/rpc-reference/tezos-rpc'
+            'advanced/rpc-reference/tezos-rpc',
+            'advanced/rpc-reference/near-rpc'
           ]
         },
         {
@@ -455,10 +464,20 @@ module.exports = {
           items: [
             'kotlin/web3wallet/installation',
             'kotlin/web3wallet/wallet-usage',
-            'kotlin/web3wallet/upgrade-guide'
-          ]
-        }
-      ]
+            'kotlin/web3wallet/upgrade-guide',
+          ],
+        },
+        {
+          type: 'category',
+          label: 'Web3Inbox SDK',
+          collapsible: true,
+          collapsed: true,
+          items: [
+            'kotlin/web3inbox/installation',
+            'kotlin/web3inbox/usage',
+          ],
+        },
+      ],
     },
     {
       type: 'category',
@@ -630,12 +649,13 @@ module.exports = {
       className: 'menu_outer_list',
       collapsible: false,
       items: [
+        'flutter/installation',
         {
           type: 'category',
           label: 'Web3Wallet SDK',
           collapsible: true,
           collapsed: true,
-          items: ['flutter/wallets/installation', 'flutter/wallets/wallet-usage']
+          items: ['flutter/wallets/wallet-usage']
         }
       ]
     },
@@ -650,14 +670,14 @@ module.exports = {
           label: 'Sign',
           collapsible: true,
           collapsed: true,
-          items: ['flutter/dapps/sign/installation', 'flutter/dapps/sign/dapp-usage']
+          items: ['flutter/dapps/dapp-sign-usage']
         },
         {
           type: 'category',
           label: 'Auth',
           collapsible: true,
           collapsed: true,
-          items: ['flutter/dapps/auth/installation', 'flutter/dapps/auth/dapp-usage']
+          items: ['flutter/dapps/dapp-auth-usage']
         }
       ]
     }
