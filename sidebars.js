@@ -98,7 +98,8 @@ module.exports = {
             'advanced/rpc-reference/cosmos-rpc',
             'advanced/rpc-reference/solana-rpc',
             'advanced/rpc-reference/stellar-rpc',
-            'advanced/rpc-reference/tezos-rpc'
+            'advanced/rpc-reference/tezos-rpc',
+            'advanced/rpc-reference/near-rpc'
           ]
         },
         {
@@ -463,10 +464,20 @@ module.exports = {
           items: [
             'kotlin/web3wallet/installation',
             'kotlin/web3wallet/wallet-usage',
-            'kotlin/web3wallet/upgrade-guide'
-          ]
-        }
-      ]
+            'kotlin/web3wallet/upgrade-guide',
+          ],
+        },
+        {
+          type: 'category',
+          label: 'Web3Inbox SDK',
+          collapsible: true,
+          collapsed: true,
+          items: [
+            'kotlin/web3inbox/installation',
+            'kotlin/web3inbox/usage',
+          ],
+        },
+      ],
     },
     {
       type: 'category',
