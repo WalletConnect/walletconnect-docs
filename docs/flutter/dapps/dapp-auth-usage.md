@@ -1,6 +1,14 @@
 # Dapp Usage
 
-## Initialzation
+:::info
+If you're a wallet looking to incorporarte Auth, please see [Web3Wallet SDK](../wallets/wallet-usage.md)..
+:::
+
+## Installation
+
+Follow these [steps](../installation.md) to install the Flutter SDK.
+
+## Initialization
 
 To create an instance of `AuthClient`, you need to pass in the core and metadata parameters.
 
@@ -72,13 +80,13 @@ Expected flutter version is: >`3.3.10`
 
 # Useful Commands
 
-* `flutter pub run build_runner build --delete-conflicting-outputs` - Regenerates JSON Generators
-* `flutter doctor -v` - get paths of everything installed.
-* `flutter pub get`
-* `flutter upgrade`
-* `flutter clean`
-* `flutter pub cache clean`
-* `flutter pub deps`
-* `flutter pub run dependency_validator` - show unused dependencies and more
-* `dart format lib/* -l 120`
-* `flutter analyze`
+- `flutter pub run build_runner build --delete-conflicting-outputs` - Regenerates JSON Generators
+- `flutter doctor -v` - get paths of everything installed.
+- `flutter pub get`
+- `flutter upgrade`
+- `flutter clean`
+- `flutter pub cache clean`
+- `flutter pub deps`
+- `flutter pub run dependency_validator` - show unused dependencies and more
+- `dart format lib/* -l 120`
+- `flutter analyze`
