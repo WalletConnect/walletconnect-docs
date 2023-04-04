@@ -53,7 +53,7 @@ export async function pair(params: { uri: string }) {
 
 ## Pairing, Session Approval & Rejection
 
-In order to connect with a dapp, you will need to receive a WalletConnect URI (WCURI) and this will talk to our protocol to facilitate a pairing session. Therefore, you will need a test dApp in order to communicate with the wallet. We recommend testing with our [React V2 Dapp](https://react-app.walletconnect.com/) as this is the most up-to-date development site.
+In order to connect with a dapp, you will need to receive a WalletConnect URI (WCURI) and this will talk to our protocol to facilitate a pairing session. Therefore, you will need a test dapp in order to communicate with the wallet. We recommend testing with our [React V2 Dapp](https://react-app.walletconnect.com/) as this is the most up-to-date development site.
 
 In order to capture the WCURI, recommend having some sort of state management you will pass through a `TextInput` or QRcode instance.
 
