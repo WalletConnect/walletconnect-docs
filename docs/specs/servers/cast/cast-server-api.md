@@ -31,6 +31,7 @@ Body:
     "webhook": string
 }
 ```
+
 Response:
 
 ```jsonc
@@ -40,6 +41,7 @@ Response:
 ```
 
 Webhook payload:
+
 ```jsonc
 {
     "id": string,
@@ -78,7 +80,8 @@ Response:
 }
 ```
 
-Failed
+Failed:
+
 ```jsonc
 {
   "account": string,
@@ -86,11 +89,13 @@ Failed
 }
 ```
 
-## Generate Subscribe Topic
+## Subscribe Topic
 
 Used to generate a subscribe topic for a dapp to receive push subscriptions, returns a public key that should be stored on dapps's domain a did:web document.
 
-`GET /generate-subscribe-topic`
+**Note:** this method is idempotent and will always return the same key.
+
+`GET /subscribe-topic`
 
 Response:
 
@@ -100,7 +105,8 @@ Response:
 }
 ``` 
 
-Failed
+Failed:
+
 ```jsonc
 {
   "reason": string
