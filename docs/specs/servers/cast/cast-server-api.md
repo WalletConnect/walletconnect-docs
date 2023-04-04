@@ -86,17 +86,17 @@ Failed
 }
 ```
 
-## Generate Subscription
+## Generate Subscribe Topic
 
-Used to generate a new push subscription for a dapp, returns a web did document that should be stored at dapp's domain
+Used to generate a subscribe topic for a dapp to receive push subscriptions, returns a public key that should be stored on dapps's domain a did:web document.
 
-`GET /generate-subscription`
+`GET /generate-subscribe-topic`
 
 Response:
 
 ```jsonc
 {
-    "didDoc": DidDocument,
+    "publicKey": string
 }
 ``` 
 
