@@ -45,7 +45,7 @@ Webhook payload:
 ```jsonc
 {
     "id": string,
-    "event": string // subscribe or unsubscribed
+    "event": string, // subscribe or unsubscribed
     "account": string // CAIP-10 account
 }
 ```
