@@ -158,7 +158,7 @@ true
 
 ### wc_pushUpdate
 
-Used to update a push subscription with a new push subscription scope replacing an existing authorized push subscription.
+Used to update a push subscription with a new push subscription scope, replacing an existing authorized push subscription.
 
 Push subscription id is the sha256 hash of the serialized did-jwt of subscriptionAuth string.
 
