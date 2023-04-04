@@ -1,5 +1,9 @@
 # Push Authentication
 
+In this document we will describe the authentication payloads for different methods
+
+## Push Subscription
+
 Given that a dapp is proposing a push subscription for a blockchain account that clients don't have to authenticate in advance, the wallet needs to prove account ownership in the Push Subscription response.
 
 This is achieved using [Identity Keys](../../servers/keys/identity-keys) and did-jwt with the following claims:
@@ -17,6 +21,8 @@ This is achieved using [Identity Keys](../../servers/keys/identity-keys) and did
 `sub` - blockchain account that push subscription has been proposed for (did:pkh)
 
 `act` - description of action intent. Must be equal to "push_subscription"
+
+`scope` - scope of notification types authorized by the user
 
 Expiry should be calculated from the addition of the issuance date and the push request TTL (86400 seconds)
  
