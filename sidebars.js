@@ -331,12 +331,23 @@ module.exports = {
                 'web3modal/advanced/mobile-linking',
                 {
                   type: 'category',
-                  label: 'Standalone Mode',
+                  label: 'Standalone Sign',
                   collapsed: true,
                   collapsible: true,
                   items: [
                     'web3modal/standalone/about',
                     'web3modal/standalone/installation',
+                    'web3modal/standalone/actions'
+                  ]
+                },
+                {
+                  type: 'category',
+                  label: 'Standalone Auth',
+                  collapsed: true,
+                  collapsible: true,
+                  items: [
+                    'web3modal/advanced/standalone/auth/about',
+                    'web3modal/advanced/standalone/auth/installation',
                     'web3modal/standalone/actions'
                   ]
                 }
