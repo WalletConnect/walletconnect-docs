@@ -36,22 +36,22 @@ url: `/2.0/web3modal/advanced/standalone/auth/installation`
 <Container
 items={[
 {
-name: "NextJS App - React",
+name: "NextJS - React",
 description: "Example of Web3Modal in NextJS using @web3modal/react.",
 url: `https://github.com/WalletConnect/web3modal-examples/tree/main/nextjs`
 },
 {
-name: "NextJS App - Standalone - Sign",
+name: "NextJS - Standalone Sign",
 description: "Example of Web3Modal in NextJS using @web3modal/standalone and @walletconnect/sign-client.",
 url: `https://github.com/WalletConnect/web3modal-examples/blob/main/nextjs-standalone`
 },
 {
-name: "Vite App - HTML",
+name: "Vite - HTML",
 description: "Example of Web3Modal in Vite using @web3modal/html.",
 url: `https://github.com/WalletConnect/web3modal-examples/blob/main/html`
 },
 {
-name: "Vite App - Standalone - Sign",
+name: "Vite - Standalone Sign",
 description: "Example of Web3Modal in Vite using @web3modal/standalone and @walletconnect/sign-client.",
 url: `https://github.com/WalletConnect/web3modal-examples/blob/main/html-standalone`
 }

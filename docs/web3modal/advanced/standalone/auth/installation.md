@@ -13,8 +13,7 @@ npm install @walletconnect/auth-client @web3modal/standalone
 ## Implementation
 
 Start by importing Web3Modal and Auth SDK packages, then create a Web3Modal and Auth instance.
-
-Call the `request` function to destruct the `uri` and finally, manage when modal gets open or closed.
+Manage auth connection via auth sdk and pass generated uri to web3modal. Finally, manage when modal gets open or closed by subscribing to auth sdk events.
 
 ```ts
 import AuthClient, { generateNonce } from '@walletconnect/auth-client'
@@ -38,9 +37,13 @@ const authClient = await AuthClient.init({
   }
 })
 
+authClient.on('auth_response', ({ params }) => {
+  web3Modal.closeModal()
+})
+
 const { uri } = await authClient.request({
-  aud: window.location.href,
-  domain: window.location.hostname.split('.').slice(-2).join('.'),
+  aud: 'https://yourapp.com/',
+  domain: 'yourapp.com',
   chainId: 'eip155:1',
   type: 'eip4361',
   nonce: generateNonce(),

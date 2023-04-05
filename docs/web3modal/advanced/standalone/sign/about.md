@@ -9,14 +9,14 @@ Standalone mode comes as a leaner version of Web3Modal that does not use [wagmi]
 <Container
 items={[
 {
-name: "NextJS Standalone App",
+name: "NextJS Standalone",
 description: "Example of Standalone Web3Modal in NextJS.",
-url: `https://github.com/WalletConnect/web3modal/tree/V2/examples/nextjs-standalone`
+url: `https://github.com/WalletConnect/web3modal-examples/tree/main/html-standalone`
 },
 {
-name: "Vite Standalone App",
+name: "Vite Standalone",
 description: "Example of Standalone Web3Modal in Vite / Html.",
-url: `https://github.com/WalletConnect/web3modal/tree/V2/examples/html-standalone`
+url: `https://github.com/WalletConnect/web3modal-examples/tree/main/html-standalone`
 },
 ]}
 />
