@@ -91,6 +91,12 @@ const config = {
           {
             type: 'docSidebar',
             position: 'left',
+            sidebarId: 'reactnative',
+            label: 'React Native'
+          },
+          {
+            type: 'docSidebar',
+            position: 'left',
             sidebarId: 'flutter',
             label: 'Flutter'
           },
@@ -119,12 +125,16 @@ const config = {
             title: 'Docs',
             items: [
               {
-                label: 'V1.0 Getting Started',
-                to: '/#getting-started'
-              },
-              {
                 label: 'v2.0 Getting Started',
                 to: '/2.0/#getting-started'
+              },
+              {
+                label: 'Web3Modal SDK',
+                to: '/2.0/web3modal/about'
+              },
+              {
+                label: 'Web3Wallet SDK',
+                to: '/2.0/web3wallet/about'
               }
             ]
           },

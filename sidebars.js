@@ -434,7 +434,6 @@ module.exports = {
       items: [
         'javascript/guides/examples-and-resources',
         'javascript/guides/nodejs',
-        'javascript/guides/react-native',
         'javascript/guides/shared-core',
         'javascript/guides/typescript'
       ]
@@ -674,6 +673,37 @@ module.exports = {
           items: ['flutter/dapps/dapp-auth-usage']
         }
       ]
+    }
+  ],
+  reactnative: [
+    {
+      type: 'html',
+      value:
+        '<a class="navbar__brand sidebar__brand" href="/"><div class="navbar__logo"><img src="/img/walletconnect-logo-white.svg" alt="WalletConnect Logo"></div>WalletConnect<span>Docs<span></a>',
+      defaultStyle: true
+    },
+    {
+      type: 'category',
+      label: 'Products',
+      className: 'menu_outer_list',
+      collapsible: false,
+      items: [
+        'reactnative/Introduction',
+        {
+          type: 'category',
+          label: 'Web3Wallet SDK',
+          collapsible: true,
+          collapsed: true,
+          items: ['reactnative/web3wallet/Installation', 'reactnative/web3wallet/wallet-usage']
+        }
+      ]
+    },
+    {
+      type: 'category',
+      label: 'Guides',
+      className: 'menu_outer_list',
+      collapsible: false,
+      items: ['reactnative/guides/tutorials']
     }
   ],
   csharp: [
