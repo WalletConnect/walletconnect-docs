@@ -6,26 +6,6 @@ import Container from '../../components/Container';
 
 We have written a simple tutorial for Expo on how to get started. This same approach is applicable for React Native CLI. At any point of development, feel free to reach out via [Github Discussions](https://github.com/orgs/WalletConnect/discussions) or Discord in the `wallet-dev-support` [channel.](https://discord.com/channels/492410046307631105/1040018700734038169)
 
-# Tutorial
-
-Experimental: For Expo, we have an unofficial npx starter command. `newWallet` represents the name of your project.
-
-```bash
-npx create-wc-wallet-expo@latest newWallet
-```
-
-This downloads an Expo template with Web3Wallet installed. More information available in the below tutorial
-
-<Container
-items={[
-{
-name: "Web3Wallet (Expo)",
-description: "How to Build a Wallet in React Native with the Web3Wallet SDK",
-url: `https://medium.com/walletconnect/how-to-build-a-wallet-in-react-native-with-the-web3wallet-sdk-b6f57bf02f9a`
-},
-]}
-/>
-
 ## Obtain Project ID
 
 Every project using WalletConnect SDKs needs to obtain projectId from [WalletConnect Cloud](https://cloud.walletconnect.com/sign-in). This is absolutely free and only takes a few minutes.

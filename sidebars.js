@@ -696,6 +696,13 @@ module.exports = {
           items: ['reactnative/web3wallet/Installation', 'reactnative/web3wallet/wallet-usage']
         }
       ]
+    },
+    {
+      type: 'category',
+      label: 'Guides',
+      className: 'menu_outer_list',
+      collapsible: false,
+      items: ['reactnative/guides/tutorials']
     }
   ]
 }
