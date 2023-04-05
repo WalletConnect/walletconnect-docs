@@ -24,7 +24,7 @@ Generation of the message body and its signature.
 {
   "id": 1,
   "jsonrpc": "2.0",
-  "method": "ever_processMessage",
+  "method": "ever_signMessage",
   "params": {
         "source_address": "0:695e42...b8d",
         "value": 1000000000,
