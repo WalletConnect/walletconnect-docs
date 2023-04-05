@@ -350,6 +350,17 @@ module.exports = {
                     'web3modal/advanced/standalone/auth/installation',
                     'web3modal/advanced/standalone/sign/actions'
                   ]
+                },
+                {
+                  type: 'category',
+                  label: 'Standalone Auth',
+                  collapsed: true,
+                  collapsible: true,
+                  items: [
+                    'web3modal/advanced/standalone/auth/about',
+                    'web3modal/advanced/standalone/auth/installation',
+                    'web3modal/standalone/actions'
+                  ]
                 }
               ]
             },
