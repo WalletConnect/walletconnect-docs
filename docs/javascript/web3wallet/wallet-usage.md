@@ -38,6 +38,65 @@ web3wallet.on('session_proposal', async proposal => {
 })
 await web3wallet.core.pairing.pair({ uri })
 ```
+### 💡 Namespaces builder util
+With Web3Wallet v1.5.1 (and @walletconnect/utils v2.6.1) we've published a helper utility that greatly reduces the complexity of parsing the `required` and `optional` namespaces. It accepts as parameters a `session proposal` along with your user's `chains/methods/events/accounts` and returns ready-to-use `namespaces` object.
+```javascript
+// util params
+{
+  proposal: ProposalTypes.Struct; // the proposal received by `.on("session_proposal")`
+  supportedNamespaces: Record< // your Wallet's supported namespaces
+    string, // the supported namespace key e.g. eip155
+    { 
+      chains: string[]; // your supported chains in CAIP-2 format e.g. ["eip155:1", "eip155:2", ...]
+      methods: string[]; // your supported methods e.g. ["personal_sign", "eth_sendTransaction"]
+      events: string[]; // your supported events e.g. ["chainChanged", "accountsChanged"]
+      accounts: string[] // your user's accounts in CAIP-10 format e.g. ["eip155:1:0x453d506b1543dcA64f57Ce6e7Bb048466e85e228"]
+      }
+  >;
+};
+```
+Example usage
+```javascript
+// import the builder util
+import { buildApprovedNamespaces } from "@walletconnect/utils";
+
+web3wallet.on("session_proposal", async (sessionProposal) => {
+    const { id, params } = sessionProposal;
+
+    // ------- namespaces builder util ------------ //
+    const approvedNamespaces = buildApprovedNamespaces({
+        proposal: params,
+        supportedNamespaces: {
+            eip155: {
+                chains: supportedNamespaces.eip155.chains,
+                accounts: supportedNamespaces.eip155.accounts,
+                methods: supportedNamespaces.eip155.methods,
+                events: supportedNamespaces.eip155.events,
+            },
+        },
+    });
+    // ------- end namespaces builder util ------------ //
+
+    const session = await web3wallet.approveSession({
+        id,
+        namespaces: approvedNamespaces,
+    });
+});
+```
+If your wallet supports multiple namespaces e.g. `eip155`,`cosmos` & `near`
+Your `supportedNamespaces` should look like the following example.
+```javascript
+// ------- namespaces builder util ------------ //
+const approvedNamespaces = buildApprovedNamespaces({
+    proposal: params,
+    supportedNamespaces: {
+        eip155: {...}, 
+        cosmos: {...},
+        near: {...}
+    },
+});
+// ------- end namespaces builder util ------------ //
+``` 
 
 ## Session Rejection
 
