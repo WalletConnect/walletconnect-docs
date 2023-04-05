@@ -359,7 +359,7 @@ module.exports = {
                   items: [
                     'web3modal/advanced/standalone/auth/about',
                     'web3modal/advanced/standalone/auth/installation',
-                    'web3modal/standalone/actions'
+                    'web3modal/advanced/standalone/sign/actions'
                   ]
                 }
               ]
