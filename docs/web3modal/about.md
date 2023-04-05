@@ -19,12 +19,12 @@ description: "Use Web3Modal with any front-end environment.",
 url: `/2.0/web3modal/html-js/installation`
 },
 {
-name: "Standalone - Sign",
+name: "Standalone Sign",
 description: "Advanced Web3Modal usage without wagmi.",
 url: `/2.0/web3modal/standalone/installation`
 },
 {
-name: "Standalone - Auth",
+name: "Standalone Auth",
 description: "Advanced Web3Modal usage without wagmi.",
 url: `/2.0/web3modal/advanced/standalone/auth/installation`
 },
@@ -36,25 +36,30 @@ url: `/2.0/web3modal/advanced/standalone/auth/installation`
 <Container
 items={[
 {
-name: "NextJS - React",
+name: "React & Wagmi",
 description: "Example of Web3Modal in NextJS using @web3modal/react.",
 url: `https://github.com/WalletConnect/web3modal-examples/tree/main/nextjs`
 },
 {
-name: "NextJS - Standalone Sign",
-description: "Example of Web3Modal in NextJS using @web3modal/standalone and @walletconnect/sign-client.",
-url: `https://github.com/WalletConnect/web3modal-examples/blob/main/nextjs-standalone`
-},
-{
-name: "Vite - HTML",
+name: "Html & Wagmi",
 description: "Example of Web3Modal in Vite using @web3modal/html.",
 url: `https://github.com/WalletConnect/web3modal-examples/blob/main/html`
 },
 {
-name: "Vite - Standalone Sign",
+name: "React & Standalone Sign",
+description: "Example of Web3Modal in NextJS using @web3modal/standalone and @walletconnect/sign-client.",
+url: `https://github.com/WalletConnect/web3modal-examples/blob/main/nextjs-standalone`
+},
+{
+name: "Html & Standalone Sign",
 description: "Example of Web3Modal in Vite using @web3modal/standalone and @walletconnect/sign-client.",
 url: `https://github.com/WalletConnect/web3modal-examples/blob/main/html-standalone`
-}
+},
+{
+name: "Html & Standalone Auth",
+description: "Example of Web3Modal in Vite using @web3modal/standalone and @walletconnect/auth-client.",
+url: `https://github.com/WalletConnect/web3modal-examples/tree/main/html-standalone-auth`
+},
 ]}
 />
 
