@@ -1,36 +1,16 @@
 # FAQ
 
-## How do I add a native wallet to Web3Modal?
+## How can I add a native or extension wallet to Web3Modal?
 
-Web3Modal will present a selection of native or desktop browsers that can be deep-linked or universally linked, depending on the user's device. Users can also scan a QR code to access the link regardless of their device.
-
-To ensure that your wallet appears in the Web3Modal, you must register it on our [Cloud Dashboard](https://cloud.walletconnect.com/). Be sure to provide accurate information and pay close attention to the deeplink and universal link sections.
-
-When users click on your wallet within Web3Modal, they will be redirected to your deeplink / universal link with appended `wc` URI query. You are responsible for handling this redirect and processing such query.
-
-Example deep link (preferred for desktop wallets), uri comes from our sign sdk and is encoded.
-
-```
-mywallet://wc?uri=<URI_ENCODED_WC_PAIRING_URL>
-```
-
-Example universal link (preferred for mobile wallets)
-
-```
-https://mywallet.com/wc?uri=<URI_ENCODED_WC_PAIRING_URL>
-```
-
-## How do I add an injected / extension wallet to Web3Modal?
-
-Coming soon to [Cloud Dashboard](https://cloud.walletconnect.com/).
+Web3Modal fetches wallet information from [WalletConnect explorer](https://explorer.walletconnect.com). In order to add your wallet to it, please submit your project at [cloud.walletconnect.com](https://cloud.walletconnect.com).
 
 ## What is the difference between standalone and other packages?
 
-Standalone is a very lightweight package that does not include wagmi as a dependency, and therefore, it also does not handle injected/extension wallets, wagmi connectors, or Ethereum providers. It is a pure WalletConnect experience that can be used if you already manage everything mentioned above.
+Standalone works with any chain using our [Sign SDK](../javascript/sign/dapp-usage.md). It is meant for more advanced users and does not come with features like extension wallets, account view etc.
 
-## How can I use the ethers.js provider?
+## How can I use the ethers provider with wagmi?
 
-Use wagmi's `useProvider` or `getProvider` actions to use the ethers.js provider.
+For wagmi, use [`useProvider`](https://wagmi.sh/react/hooks/useProvider) and [`useSigner`](https://wagmi.sh/react/hooks/useSigner) hooks. Alternatively, for @wagmi/core, use [`getProvider`](https://wagmi.sh/core/actions/getProvider) and [`getSigner`](https://wagmi.sh/core/actions/fetchSigner) actions.
 
 ## How can I use the web3js provider?
 
@@ -38,8 +18,34 @@ You will first need to obtain an ethers.js provider from wagmi and then convert 
 
 ## Do you offer support for installing the script via a CDN?
 
-No, not at the present time. However, while we are working on one, you can easily compile the library using tools such as [Vite](https://vitejs.dev/) or [Webpack](https://webpack.js.org/).
+No, not at the present time. However, while we are working on one, you can easily compile the library using tools such as [Vite](https://vitejs.dev/) or [Webpack](https://webpack.js.org/) and expose everything you need on `window` object.
 
 ## Why can't I connect to a wallet when testing locally on mobile?
 
 When testing locally on a mobile device, you will need to ensure that your app uses `https` instead of `http` protocol, otherwise majority of wallets will decline the connection. You could use a tool like [localtunnel](https://www.npmjs.com/package/localtunnel) for this.
+
+## How to Test Mobile Wallet Compatibility 
+
+1. Visit https://lab.web3modal.com/v2Standalone.
+2. Open your browser's developer tools and navigate to the Console tab.
+3. Paste the following code snippet into the console and press Enter:
+
+```javascript
+localStorage.setItem(
+  'W3M_RECENT_WALLET',
+  JSON.stringify({
+    2: {
+      image: "",
+      name: "",
+      links: {
+        native: "rainbow://",
+        universal: "https://..."
+      }
+    }
+  })
+);
+```
+
+Replace the `https://...` placeholder in the universal link with the appropriate URL.
+
+This will make your mobile wallet, such as Rainbow Wallet, appear as a recent wallet in Web3Modal, allowing you to test its compatibility.

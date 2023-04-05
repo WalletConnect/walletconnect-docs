@@ -44,27 +44,27 @@ If you are using `@walletconnect/web3-provider`, we stopped supporting this prov
 
 #### For Web3Modal v2.0 integrations
 
-If you are using our new redesigned Web3Modal v2.0, you can simply enable v2.0 by using the feature flag `version: '2'` when injecting modal connectors. Please ensure that you are using a minimum version of `2.1.1`. Here is a code example:
+If you are using our new redesigned Web3Modal v2.0, you can simply enable v2.0 by using the feature flag `version: 2` when injecting modal connectors. Please ensure that you are using a minimum version of `2.2.0`. Here is a code example:
 
 ```typescript
-import { modalConnectors } from '@web3modal/ethereum'
-import { createClient } from 'wagmi'
+import { w3mConnectors } from "@web3modal/ethereum";
+import { createClient } from "wagmi";
 
 // ...
 
 const wagmiClient = createClient({
   autoConnect: true,
-  connectors: modalConnectors({
+  connectors: w3mConnectors({
     projectId,
-    appName: 'web3Modal',
     chains,
-    version: '2', // add this line
+    version: 2, // add this line
   }),
-  provider
-})
+  provider,
+});
 
 // ...
 ```
+
 For more documentation, follow the docs for Web3Modal [here](https://docs.walletconnect.com/2.0/web3modal/about)
 
 #### For Web3Modal v1.0 integrations
@@ -82,21 +82,27 @@ In the meantime, you can list all the wallet mobile links from our [Cloud Explor
 #### For web3-onboard integrations
 
 If you are using the WalletConnect package with [Blocknative's web3-onboard](https://onboard.blocknative.com/docs/wallets/walletconnect#install) the migration is straight forward. The latest WC package is backwards compatible (until the WC v1 sunset).
-When ready to transition bump the `@web3-onboard/walletconnect` package version to >= `2.3.0` and adjust the initialization params to include: 
-```typescript 
+When ready to transition bump the `@web3-onboard/walletconnect` package version to >= `2.3.0` and adjust the initialization params to include:
+
+```typescript
 {
   /**
   * Defaults to version: 1 - this behavior will be deprecated after the WalletConnect v1 sunset
   */
   version: 2,
-  
+
   /**
   * Project ID associated with [WalletConnect account](https://cloud.walletconnect.com)
   */
   projectId: string
 }
 ```
-*note: The `@web3-onboard/walletconnect` package will default to version 1 until the WC v1 sunset is complete*
+
+_note: The `@web3-onboard/walletconnect` package will default to version 1 until the WC v1 sunset is complete_
+
+#### For Dynamic Integrations
+
+Switching to v2 is straightforward using [Dynamic](https://www.dynamic.xyz/). To upgrade, ensure you are using v0.15 or later of `@dynamic-labs/sdk-react` . Once set up, visit your Dynamic developer dashboard and head to the integrations page. Select the WalletConnect card, toggle v2 on and add your WalletConnect `project ID`. Once enabled, Dynamic will automatically use WalletConnect v2 for wallets that support it, and v1 for wallets that don’t.
 
 ### For Wallets
 
@@ -122,14 +128,10 @@ If you were using our [WalletConnectClient SDK](https://www.npmjs.com/package/@w
 
 If you were using our [WalletConnectClient SDK](https://www.npmjs.com/package/@walletconnect/client) (or any other community SDK), you must integrate the Web3Wallet SDK for Javascript which you can find docs [here](https://docs.walletconnect.com/2.0/javascript/web3wallet/installation) and check out the Web Examples [here](https://github.com/WalletConnect/web-examples)
 
-### Unity Wallets 
+### Unity Wallets
 
 If you were using our [WalletConnectSharp SDK](https://github.com/WalletConnect/WalletConnectSharp/tree/1.0) (or any other community SDK), you must integrate the Sign Client for Unity which you can find docs [here](https://github.com/WalletConnect/WalletConnectSharp/)
 
-
 ### Flutter Wallets
 
-
 If you were using OrangeWallet's [WalletConnectDart SDK](https://github.com/Orange-Wallet/wallet-connect-dart) (or any other community SDK), you must integrate the Sign Client for Flutter which you can find docs [here](https://github.com/Eucalyptus-Labs/wallet-connect-v2-dart)
-
-
