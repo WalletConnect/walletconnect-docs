@@ -32,7 +32,7 @@ Additionally the following optional params can be included if available:
     sdk               = sdk-prefix + core-version
     sdk-prefix        = ("js"|"swift"|"kotlin"|"csharp")
     core-version      = STRING
-    api-flags         = 2^0-Sign, 2^1-Auth, 2^2-Chat, 2^3-Push, 2^4-W3W, 2^5-W3I
+    api-flags         = 2^0-Sign, 2^1-Auth, 2^2-Chat, 2^3-Push, 2^4-W3W, 2^5-W3I, 2^6-Sync
     os                = STRING
     id                = id-prefix + id-host
     id-prefix         = ("browser","react-native","nodejs","android","ios")
@@ -42,17 +42,17 @@ Additionally the following optional params can be included if available:
 
 ```
 # javascript (browser)
-<RELAY_URL>?ua=wc-2/js-2.0.0-rc.1x10011/macos-chrome-103.0.5060/browser:app.uniswap.org
+<RELAY_URL>?ua=wc-2/js-2.0.0-rc.1x110011/macos-chrome-103.0.5060/browser:app.uniswap.org
 
 # javascript (react-native)
-<RELAY_URL>?ua=wc-2/js-2.0.0-rc.1x10011/ios-12.4/react-native
+<RELAY_URL>?ua=wc-2/js-2.0.0-rc.1x110011/ios-12.4/react-native
 
 # javascript (react-native)
-<RELAY_URL>?ua=wc-2/js-2.0.0-rc.1x10011/macos-11.6/nodejs
+<RELAY_URL>?ua=wc-2/js-2.0.0-rc.1x110011/macos-11.6/nodejs
 
 # swift (ios)
-<RELAY_URL>?ua=wc-2/swift-2.0.0-rc.1x10011/ios-12.4
+<RELAY_URL>?ua=wc-2/swift-2.0.0-rc.1x110011/ios-12.4
 
 # kotlin (android)
-<RELAY_URL>?ua=wc-2/kotlin-2.0.0-rc.1x10011/android-10
+<RELAY_URL>?ua=wc-2/kotlin-2.0.0-rc.1x110011/android-10
 ```
