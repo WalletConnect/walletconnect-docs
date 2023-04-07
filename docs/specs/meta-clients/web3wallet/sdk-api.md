@@ -85,6 +85,6 @@ class Web3Wallet {
   public abstract on("session_delete", (sessionDelete: { id: number, topic: string }) => {}): void;
 
   // subscribe to auth request (AUTH)
-  public abstract on("auth_request", (id: number, payload: PayloadParams) => {}): void;
+  public abstract on("auth_request", (id: number, pairingTopic: String, payload: PayloadParams) => {}): void;
 }
 ```
