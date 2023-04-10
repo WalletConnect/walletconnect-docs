@@ -30,7 +30,8 @@ Universal Links are URLs that are used to tie native mobile applications to a we
 
 However, universal links can be unstable and unreliable, as they rely on several perfect conditions to be met. For example, if the network is stale, or there are programmatic redirects or some webviews don't implement them, then the link may not work as expected. In such cases, instead of directing the user to the native mobile application, users may end up on a fallback webpage.
 
-We reccommend using universal over deeplinks.
+We recommend using universal over deeplinks.
+
 ### Deeplinks
 
 Deep links are a more "native" way of linking that uses a specific format like `myWallet://` or `wc://`. On Android, it is additionally possible to use `wc://` as Android will show all wallets that can handle such a link. These links are used to direct users to a specific location within a mobile application, rather than directing them to a website or a fallback page.
