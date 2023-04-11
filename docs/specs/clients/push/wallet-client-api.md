@@ -15,6 +15,9 @@ abstract class WalletClient {
 
   // reject push subscription 
   public abstract reject(params: { id: number, reason: Reason }): Promise<boolean>;
+  
+  // send wc_Pushsubscription request
+  public abstract subscribe(params: { dappUrl: string }): Promise<boolean>;
 
   // query all active subscriptions
   public abstract getActiveSubscriptions(): Promise<Record<string, PushSubscription>>;
@@ -32,6 +35,9 @@ abstract class WalletClient {
   public abstract decryptMessage(topic: string, encryptedMessage: string): Promise<PushMessage>;
 
   // ---------- Events ----------------------------------------------- //
+
+  // for wallet to listen for push subscription created
+  public abstract on("push_subscription", (pushSubscription: PushSubscription) => {}): void;
 
   // for wallet to listen on push request
   public abstract on("push_request", (id: number, account: string, metadata: Metadata) => {}): void;
