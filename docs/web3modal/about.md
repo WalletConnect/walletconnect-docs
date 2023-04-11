@@ -21,7 +21,7 @@ url: `/2.0/web3modal/html-js/installation`
 {
 name: "Standalone Sign",
 description: "Advanced Web3Modal usage without wagmi.",
-url: `/2.0/web3modal/standalone/installation`
+url: `/2.0/web3modal/advanced/standalone/sign/installation`
 },
 {
 name: "Standalone Auth",
