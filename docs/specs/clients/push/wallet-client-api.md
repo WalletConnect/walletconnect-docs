@@ -16,7 +16,7 @@ abstract class WalletClient {
   // reject push subscription 
   public abstract reject(params: { id: number, reason: Reason }): Promise<boolean>;
   
-  // send wc_Pushsubscription request
+  // send wc_PushSubscription request
   public abstract subscribe(params: { dappUrl: string }): Promise<boolean>;
 
   // query all active subscriptions
