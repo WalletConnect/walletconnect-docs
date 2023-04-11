@@ -68,7 +68,7 @@ Used to get an invite key for an account
     "status": "SUCCESS",
     "error": null,
     "value": {
-        "inviteKey": "efd0639fa5fa7ca30888c33706f6c395e928f4ec44d7bbe3262c387668ccd841"
+        "inviteKey": "did:key:z6LStTPuJjDfTJccKp7jKCbqZLkXP9QLbAeT925Th3kvzvzX"
     }
 }
 ```
@@ -241,7 +241,7 @@ Used to remove an identity key from the server
 
 ```jsonc
 {
-    "cacao": Cacao
+    "idAuth": string
 }
 ```
 
@@ -252,29 +252,9 @@ Used to remove an identity key from the server
 ##### Body
 ```jsonc
 {
-  "cacao": {
-    "h": {
-      "t": "eip4361"
-    },
-    "p": {
-      "iss": "did:pkh:eip155:1:0xe980ccf9124e80c47745db40982c301ed839800f",
-      "domain": "walletconnect.com",
-      "aud": "https://keys.walletconnect.com",
-      "version": "1",
-      "nonce": "Some Random Nonce",
-      "iat": "2023-01-17T21:32:19+01:00",
-      "resources": [
-        "did:key:z6MkkKzGDpQv4mR8Gkamt1Wbsrz4mFjjQpAgDFGE919vH7Ts"
-      ]
-    },
-    "s": {
-      "t": "eip191",
-      "s": "0x8e52b8c2b9adb4f84c179ef68d10b139c20c6b26a65ad4735a41e035b39a0a5b49ffc77f6626119f4e2f6b63c017e195d6d890c6a54e748e22a64ae3a33ad68d1c"
-    }
-  }
+  "idAuth": "eyJhbGciOiJFZERTQSIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJkaWQ6a2V5Ono2TWtoQk5tQXZ0VDNxeW5YekVCcmlSa2o4TWJoTURxMUs1aFhpY1BTSlZTWnBzOSIsImF1ZCI6Imh0dHA6Ly8xMC4wLjIuMjo4MDgwIiwiaWF0IjoxNjc3MTg4NzU1MjUwLCJleHAiOjE2Nzk3ODA3NTUyNTAsInBraCI6ImRpZDpwa2g6ZWlwMTU1OjE6MHhiYjU0NjZkODcyZGQxN2Y4MDRkMjYwNDVhMWVkMDk3ZWQ4NDM2MmI3In0.cTqEuxARCPwewx4PqhUiG8BkerqGX18icRhMJr9PPQW8fFTqKgjV7D2vzjKcxAEUWY2BL4b2998V0jEASSEIAQ"
 }
 ```
-
 ---
 
 ## Data structures

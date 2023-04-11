@@ -23,10 +23,8 @@ abstract class Client {
 
   // - unregisters a blockchain account with previously registered identity key 
   // - must not unregister invite key but must stop listening for invites
-  // - onSign(message) is a callback for signing CAIP-122 message to verify blockchain account ownership
   public abstract unregister(params: {
     account: string;
-    onSign: (message: string) => Cacao.Signature
   }): Promise<void>;
 
   // queries the keyserver with a blockchain account

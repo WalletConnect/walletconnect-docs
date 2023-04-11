@@ -73,11 +73,8 @@ module.exports = {
         {
           type: 'category',
           label: 'Multi-Chain',
-          items: [
-            'advanced/multichain/overview',
-            'advanced/multichain/chain-list',
-          ]
-        },
+          items: ['advanced/multichain/overview', 'advanced/multichain/chain-list']
+        }
       ]
     },
     {
@@ -331,13 +328,24 @@ module.exports = {
                 'web3modal/advanced/mobile-linking',
                 {
                   type: 'category',
-                  label: 'Standalone Mode',
+                  label: 'Standalone Sign',
                   collapsed: true,
                   collapsible: true,
                   items: [
-                    'web3modal/standalone/about',
-                    'web3modal/standalone/installation',
-                    'web3modal/standalone/actions'
+                    'web3modal/advanced/standalone/sign/about',
+                    'web3modal/advanced/standalone/sign/installation',
+                    'web3modal/advanced/standalone/sign/actions'
+                  ]
+                },
+                {
+                  type: 'category',
+                  label: 'Standalone Auth',
+                  collapsed: true,
+                  collapsible: true,
+                  items: [
+                    'web3modal/advanced/standalone/auth/about',
+                    'web3modal/advanced/standalone/auth/installation',
+                    'web3modal/advanced/standalone/sign/actions'
                   ]
                 }
               ]
@@ -437,7 +445,6 @@ module.exports = {
       items: [
         'javascript/guides/examples-and-resources',
         'javascript/guides/nodejs',
-        'javascript/guides/react-native',
         'javascript/guides/shared-core',
         'javascript/guides/typescript'
       ]
@@ -464,20 +471,17 @@ module.exports = {
           items: [
             'kotlin/web3wallet/installation',
             'kotlin/web3wallet/wallet-usage',
-            'kotlin/web3wallet/upgrade-guide',
-          ],
+            'kotlin/web3wallet/upgrade-guide'
+          ]
         },
         {
           type: 'category',
           label: 'Web3Inbox SDK',
           collapsible: true,
           collapsed: true,
-          items: [
-            'kotlin/web3inbox/installation',
-            'kotlin/web3inbox/usage',
-          ],
-        },
-      ],
+          items: ['kotlin/web3inbox/installation', 'kotlin/web3inbox/usage']
+        }
+      ]
     },
     {
       type: 'category',
@@ -680,6 +684,37 @@ module.exports = {
           items: ['flutter/dapps/dapp-auth-usage']
         }
       ]
+    }
+  ],
+  reactnative: [
+    {
+      type: 'html',
+      value:
+        '<a class="navbar__brand sidebar__brand" href="/"><div class="navbar__logo"><img src="/img/walletconnect-logo-white.svg" alt="WalletConnect Logo"></div>WalletConnect<span>Docs<span></a>',
+      defaultStyle: true
+    },
+    {
+      type: 'category',
+      label: 'Products',
+      className: 'menu_outer_list',
+      collapsible: false,
+      items: [
+        'reactnative/Introduction',
+        {
+          type: 'category',
+          label: 'Web3Wallet SDK',
+          collapsible: true,
+          collapsed: true,
+          items: ['reactnative/web3wallet/Installation', 'reactnative/web3wallet/wallet-usage']
+        }
+      ]
+    },
+    {
+      type: 'category',
+      label: 'Guides',
+      className: 'menu_outer_list',
+      collapsible: false,
+      items: ['reactnative/guides/tutorials']
     }
   ]
 }

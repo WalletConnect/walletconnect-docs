@@ -2,7 +2,7 @@
 
 ## JavaScript
 
-We have a set of official examples in our [web-examples](https://github.com/WalletConnect/web-examples) repository to help you get started.
+We have a set of official examples in our [web-examples](https://github.com/WalletConnect/web-examples) repository to help you get started. Our React Native examples documentation is available [here](../../reactnative/Introduction.md)
 
 ### Wallets
 
