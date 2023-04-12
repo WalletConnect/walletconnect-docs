@@ -4,7 +4,7 @@ In this module we will handle also authentication payloads used by multiple high
 
 ## DID-JWT
 
-[DID-JWT](https://github.com/decentralized-identity/did-jwt) are [JSON Web Tokens (JWT)](https://jwt.io/) which are self-issued using cryptographic key pairs in elliptic curves such as `secp256k` or `ed25519`.
+[DID-JWT](https://github.com/decentralized-identity/did-jwt) are [JSON Web Tokens (JWT)](https://jwt.io/) which are self-issued using cryptographic key pairs in elliptic curves such as `ed25519`.
 
 As per the JWT spec, all fields are serialized as base64url encoding and separated by full stops (`.`).
 
