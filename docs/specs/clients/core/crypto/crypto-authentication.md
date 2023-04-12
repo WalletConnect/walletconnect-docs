@@ -14,7 +14,7 @@ serialized_did_jwt = "eyJhbGciOiJFZERTQSIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJkaWQ6a2V5O
 
 ### Header
 
-The header will allow you to identify the JWT type and the algorithm used which in our protocols we use exclusively `ed25519` which is labelled as `EdDSA` in the header.
+The header will allow you to identify the JWT type and the algorithm used. `ed25519` is exclusively used which is labelled as `EdDSA` in the header.
 
 ```jsonc
 // header
