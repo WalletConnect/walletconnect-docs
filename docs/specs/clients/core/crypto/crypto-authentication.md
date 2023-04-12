@@ -50,7 +50,7 @@ Our protocols will share the following claims with different context:
 
 ### Signature
 
-The header and payload must each be stringified JSON and then concatenated as bytes with the header first followed by the payload this will then be signed with the private key.
+The header and payload must each be stringified JSON and then concatenated as bytes with the header first followed by the payload. This will be signed with the private key.
 
 The signature payload is the resulting signature bytes using ed25519 keypair and it will be encoded at the end as base64url.
 
