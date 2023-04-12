@@ -91,6 +91,50 @@ To send an approval, pass a Proposer's Public Key along with the map of namespac
 
 #
 
+### **Namespace utils**
+
+With Web3Wallet SDK 1.7.0 we've published a helper utility that greatly reduces the complexity of parsing the required and optional namespaces. It accepts as parameters a session proposal along with your wallet's chains, methods, events, and accounts (supported namespaces) and returns ready-to-use namespaces object that has to be passed into `Wallet.Params.SessionApprove` when approving a session.
+
+```
+val supportedNamespaces: Wallet.Model.Namespaces.Session = /* a map of all supported namespaces created by a wallet */
+val sessionProposal: Wallet.Model.SessionProposal =  /* an object received by `fun onSessionProposal(sessionProposal: Wallet.Model.SessionProposal)` in `Web3Wallet.WalletDelegate` */
+val sessionNamespaces = Web3Wallet.generateApprovedNamespaces(sessionProposal, supportedNamespaces)
+
+val approveParams: Wallet.Params.SessionApprove = Wallet.Params.SessionApprove(proposerPublicKey, sessionNamespaces)
+Web3Wallet.approveSession(approveParams) { error -> /*callback for error while approving a session*/ }
+```
+
+Examples of supported namespaces:
+
+```
+ val supportedNamespcaces = mapOf(
+    "eip155" to Wallet.Model.Namespace.Session(
+        chains = listOf("eip155:1", "eip155:137", "eip155:3"),
+        methods = listOf("personal_sign", "eth_sendTransaction", "eth_signTransaction"),
+        events = listOf("chainChanged"),
+        accounts = listOf("eip155:1:0x57f48fAFeC1d76B27e3f29b8d277b6218CDE6092", "eip155:137:0x57f48fAFeC1d76B27e3f29b8d277b6218CDE6092", "eip155:3:0x57f48fAFeC1d76B27e3f29b8d277b6218CDE6092")
+    )
+)
+
+ val supportedNamespcaces = mapOf(
+    "eip155" to Wallet.Model.Namespace.Session(
+        chains = listOf("eip155:1", "eip155:2", "eip155:4"),
+        methods = listOf("personal_sign", "eth_sendTransaction", "eth_signTransaction"),
+        events = listOf("chainChanged", "accountChanged"),
+        accounts = listOf("eip155:1:0x57f48fAFeC1d76B27e3f29b8d277b6218CDE6092", "eip155:2:0x57f48fAFeC1d76B27e3f29b8d277b6218CDE6092", "eip155:4:0x57f48fAFeC1d76B27e3f29b8d277b6218CDE6092")
+    ),
+    "cosmos" to Wallet.Model.Namespace.Session(
+        chains = listOf("cosmos:cosmoshub-4"),
+        methods = listOf("cosmos_method"),
+        events = listOf("cosmos_event"),
+        accounts = listOf("cosmos:cosmoshub-4:cosmos1hsk6jryyqjfhp5dhc55tc9jtckygx0eph6dd02")
+    )
+)
+    
+```
+
+#
+
 ### **Session Rejection**
 
 ```kotlin
