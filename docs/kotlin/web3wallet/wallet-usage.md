@@ -116,7 +116,7 @@ Examples of supported namespaces:
     )
 )
 
- val supportedNamespcaces = mapOf(
+ val anotherSupportedNamespaces = mapOf(
     "eip155" to Wallet.Model.Namespace.Session(
         chains = listOf("eip155:1", "eip155:2", "eip155:4"),
         methods = listOf("personal_sign", "eth_sendTransaction", "eth_signTransaction"),
