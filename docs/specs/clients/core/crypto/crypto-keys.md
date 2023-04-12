@@ -2,7 +2,7 @@
 
 WalletConnect can be simply described as a remote protocol for communication between clients using end-to-end encryption and there are also uses of authentication.
 
-In this document we will describe how this is achieved through different keys types and crypto algorithms
+In this document we will describe how this is achieved through different key types and crypto algorithms
 
 ## Key Types
 
