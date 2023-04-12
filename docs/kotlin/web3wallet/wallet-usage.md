@@ -107,7 +107,7 @@ Web3Wallet.approveSession(approveParams) { error -> /*callback for error while a
 Examples of supported namespaces:
 
 ```
- val supportedNamespcaces = mapOf(
+ val supportedNamespaces = mapOf(
     "eip155" to Wallet.Model.Namespace.Session(
         chains = listOf("eip155:1", "eip155:137", "eip155:3"),
         methods = listOf("personal_sign", "eth_sendTransaction", "eth_signTransaction"),
