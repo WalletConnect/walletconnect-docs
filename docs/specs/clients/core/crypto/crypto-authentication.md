@@ -32,7 +32,7 @@ public_key = "did:key:z6MkiTBz1ymuepAQ4HEHYSF1H8quG5GLVVQR3djdX3mDooWp"
 
 ### Payload
 
-The payload will include multiple claims and the context can be identifiable by identifying the first claim `act` which will describe the payload's action/intent.
+The payload will include multiple claims. The context can be identified by the first claim `act`, which will describe the payload's action/intent.
 
 Our protocols will share the following claims with different context:
 
