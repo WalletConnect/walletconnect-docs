@@ -19,7 +19,7 @@ There are three types of keys that are used in our protocol:
 
 ## Key Algorithmes
 
-There are few algorithms that we use in our communication protocol:
+There are the algorithms that we use in our communication protocol:
 
 * Ed25519 - used for all persisted client or blockchain account authentication
 * Sha-256 - used for hashing keys into topics that are used for publish-subscribe network
