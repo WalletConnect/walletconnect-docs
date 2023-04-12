@@ -31,7 +31,7 @@ https://example.com/.well-known/wc-push-config.json
 // wc-push-config.json
 {
   "version": 1,
-  "lastModified": 1680167470169,
+  "lastModified": 1681289416,
   "types": [
     {
       "name": "promotional",
