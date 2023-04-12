@@ -24,7 +24,7 @@ The header will allow you to identify the JWT type and the algorithm used. `ed25
 }
 ```
 
-Public keys are resolved using the Decentralized ID (DID) of the signing identity of the token, which is passed as the iss attribute of the JWT payload. We will exclusively identify them to as [did:key](https://w3c-ccg.github.io/did-method-key/)
+Public keys are resolved using the Decentralized ID (DID) of the signing identity of the token, which is passed as the `iss` attribute of the JWT payload. We will exclusively identify them to as [did:key](https://w3c-ccg.github.io/did-method-key/)
 
 ```sh
 public_key = "did:key:z6MkiTBz1ymuepAQ4HEHYSF1H8quG5GLVVQR3djdX3mDooWp"
