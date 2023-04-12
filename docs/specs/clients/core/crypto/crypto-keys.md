@@ -17,7 +17,7 @@ There are three types of keys that are used in our protocol:
     * random source - these are only used for pairings where a key is randomly generated and exchanged between two clients
     * secret derivation - these are used for all of our protocol APIs to establish a secure channel between the two clients using a Diffie-Hellman key exchange (x25519). After the key exchange the derived secret is hashed using HKDF to obtain the correct symmetric key
 
-## Key Algorithmes
+## Key Algorithms
 
 There are the algorithms that we use in our communication protocol:
 
