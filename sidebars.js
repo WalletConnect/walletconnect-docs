@@ -706,6 +706,13 @@ module.exports = {
           collapsible: true,
           collapsed: true,
           items: ['reactnative/web3wallet/Installation', 'reactnative/web3wallet/wallet-usage']
+        },
+        {
+          type: 'category',
+          label: 'Web3Modal SDK',
+          collapsible: true,
+          collapsed: true,
+          items: ['reactnative/web3modal/installation', 'reactnative/web3modal/dapp-usage']
         }
       ]
     },
