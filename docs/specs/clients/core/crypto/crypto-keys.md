@@ -10,7 +10,7 @@ There are three types of keys that are used in our protocol:
 
 1. Authentication Public Key Pairs - these are key pairs with both a private key and a public key that are persisted and generated on each client internally. These keys are used to authenticate either the client itself when connecting to a server (eg. Relay) or they are used to authenticate a blockchain account such as an Identity Key
 
-2. Encryption Public Key Pairs - these are key pairs with both a private key and a public key that are ephemerally generated on each client internally. These are not used for blockchain transactions at all and purely for messaging purposes. These keys are on the Curve25519 and will be used for secret derivation
+2. Encryption Public Key Pairs - these are key pairs with both a private key and a public key that are ephemerally generated on each client internally. These are not used for blockchain transactions at all and are purely for messaging purposes. These keys are on the Curve25519 and will be used for secret derivation
 
 3. Encryption Symmetric Keys - these are keys used for encryption of the messages exchanged in our communication protocol which can be derived from two sources:
 
