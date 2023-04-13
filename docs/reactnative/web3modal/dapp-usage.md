@@ -20,7 +20,7 @@ function App() {
 }
 ```
 
-## Add connect button
+## Add Connect Button
 
 Add our pre-built button component in your app to open/close connection and account modals. Alternatively, use your own button along with [useWeb3Modal](#useweb3modal) hook.
 
