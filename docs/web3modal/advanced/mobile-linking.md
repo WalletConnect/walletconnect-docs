@@ -18,6 +18,13 @@ If deeplink is not available, Web3Modal will use backup of [universal link](http
 
 Fortunately, compared to iOS, Android has much better support for mobile linking. Web3Modal will show a special view with a single button that redirects user to `wc://` link, this triggers native android view that will show all installed apps that can handle this link.
 
+## For all wallets
+
+No matter which of the above methods is used, Web3Modal will attach following data to mobile wallet link:
+
+1. For pairings, `uri` pairing data will be added and encoded - `/wc?uri=wc...`
+2. For requests, `requestId` and `sessionTopic` will be added - `/wc?requestId=...&sessionTopic=...`
+
 ## For Dapps
 
 - Every task that relies on user to be redirected to a wallet needs to be triggered by explicit user action like clicking on a button or a link. If you perform a sign / rpc etc. request without prior user action, redirect to wallet will likely fail.
