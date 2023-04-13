@@ -26,7 +26,12 @@ Web3Wallet.configure(
     // Used for the Echo: "APNSEnvironment.production" will be used by default if not provided
     environment: .production
 )
-Push.configure(environment: .production) // For supporting Push
+```
+
+In order to allow users to receive push notifications you have to communicate with Apple Push Notification service and receive unique device token. Register that token with following method:
+
+```swift
+try await Web3Wallet.instance.registerEchoClient(deviceToken: deviceToken)
 ```
 
 ### Subscribe for Web3Wallet publishers

@@ -145,7 +145,7 @@ do {
             Account(blockchain: Blockchain("eip155:137")!, address: "0xab16a96d359ec26a11e2c2b3d8f8b8942d5bfcdb")!
         ]
     )
-    try await Web3Wallet.instance.approve(proposalId: proposal.id, namespaces: sessionNamespaces)
+    try await Sign.instance.approve(proposalId: proposal.id, namespaces: sessionNamespaces)
 } catch {
     print(error)
 }
