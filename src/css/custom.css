@@ -110,7 +110,7 @@ h1::after {
   justify-content: flex-start;
 }
 
-.navbar__items div[class*='ColorModeToggle'] {
+.navbar__items div:nth-child(3) {
   margin-left: 0.75rem;
 }
 
