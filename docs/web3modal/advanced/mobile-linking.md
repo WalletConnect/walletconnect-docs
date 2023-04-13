@@ -4,7 +4,7 @@ When used on mobile, Web3Modal uses and takes care of native mobile linking to c
 
 ## For iOS wallets
 
-Web3Modal will first attempt to use native deeplinks, that usually look like `rainbow://` or `metamask://`. These are most reliable way of linking user to their mobile wallet from your dapp. User will be shown a native prompt to confirm pairing or other actions before they are dirrected to the wallet.
+Web3Modal will first attempt to use native deeplinks, which usually look like rainbow:// or metamask://. These are the most reliable way of linking a user to their mobile wallet from your dapp. The user will be shown a native prompt to confirm pairing or other actions before being directed to the wallet.
 
 If deeplink is not available, Web3Modal will use backup of [universal link](https://developer.apple.com/ios/universal-links). You should follow official [apple documentation](https://developer.apple.com/documentation/xcode/allowing-apps-and-websites-to-link-to-your-content?language=objc) in order to set everything up, but here are some additional suggestions from WalletConnect team:
 
