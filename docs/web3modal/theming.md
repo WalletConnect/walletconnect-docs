@@ -86,6 +86,16 @@ Core styling variables for the modal. Any valid css value associated to the styl
       example: { code: "2em" },
     },
     {
+      variable: { code: "--w3m-wallet-icon-large-border-radius" },
+      description: "Border radius applied to large wallet icons",
+      example: { code: "3em" },
+    },
+    {
+      variable: { code: "--w3m-wallet-icon-small-border-radius " },
+      description: "Border radius applied to small wallet icons",
+      example: { code: "1em" },
+    },
+    {
       variable: { code: "--w3m-input-border-radius" },
       description: "Border radius applied to text inputs",
       example: { code: "50%" },

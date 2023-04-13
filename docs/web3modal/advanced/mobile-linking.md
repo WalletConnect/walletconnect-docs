@@ -4,7 +4,9 @@ When used on mobile, Web3Modal uses and takes care of native mobile linking to c
 
 ## For iOS wallets
 
-Web3Modal favours [universal links](https://developer.apple.com/ios/universal-links), but will fall back to deeplinks when prior are not available. You should follow official [apple documentation](https://developer.apple.com/documentation/xcode/allowing-apps-and-websites-to-link-to-your-content?language=objc) in order to set everything up, but here are some additional suggestions from WalletConnect team:
+Web3Modal will first attempt to use native deeplinks, that usually look like `rainbow://` or `metamask://`. These are most reliable way of linking user to their mobile wallet from your dapp. User will be shown a native prompt to confirm pairing or other actions before they are dirrected to the wallet.
+
+If deeplink is not available, Web3Modal will use backup of [universal link](https://developer.apple.com/ios/universal-links). You should follow official [apple documentation](https://developer.apple.com/documentation/xcode/allowing-apps-and-websites-to-link-to-your-content?language=objc) in order to set everything up, but here are some additional suggestions from WalletConnect team:
 
 - Ensure your universal link doesn't use redirects.
 - If you are using a subdomain, it needs to be explicitly set up in XCode.
@@ -16,7 +18,7 @@ Web3Modal favours [universal links](https://developer.apple.com/ios/universal-li
 
 Fortunately, compared to iOS, Android has much better support for mobile linking. Web3Modal will show a special view with a single button that redirects user to `wc://` link, this triggers native android view that will show all installed apps that can handle this link.
 
-## For dapps
+## For Dapps
 
 - Every task that relies on user to be redirected to a wallet needs to be triggered by explicit user action like clicking on a button or a link. If you perform a sign / rpc etc. request without prior user action, redirect to wallet will likely fail.
 - Make sure you don't don't do any extra work besides your original action as there seems to be a limit of 300ms between user click and redirect to the wallet. If there is other network request in between, redirect will likely fail.

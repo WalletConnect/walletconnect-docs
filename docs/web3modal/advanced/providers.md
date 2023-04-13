@@ -7,7 +7,7 @@ Web3Modal providers concept only applies to [`@web3modal/react`](../react/instal
 By default Web3Modal exposes `w3mProvider` which uses WalletConnect's rpc proxy `https://rpc.walletconnect.com`. This rpc is free to use and will only rate limit specific users who abuse it. You can check chain id information at [Chainlist](https://chainlist.org). As of now this proxy supports following chains id's:
 
 ```
-1, 3, 4, 5, 10, 42, 56, 69, 97, 100, 137, 420, 42161, 42220, 43114, 80001, 421611, 421613, 1313161554, 11297108109`
+1, 3, 4, 5, 10, 42, 56, 69, 97, 100, 137, 280, 324, 420, 42161, 42220, 43114, 80001, 421611, 421613, 1313161554, 1313161555
 ```
 
 ## Wagmi providers
