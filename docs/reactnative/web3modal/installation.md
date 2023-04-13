@@ -9,13 +9,13 @@ It's public API and associated documentation may still see significant and break
 :::
 
 
-Web3Modal SDK simplifies the modal integration process for dapp developers. Only V2 [WCURIs](../../specs/clients/core/pairing/pairing-uri) will work with this SDK as V1 is being deprecated by 28 June 2023.
+The Web3Modal SDK simplifies the modal integration process for dapp developers. Please note that only V2 [WCURIs](../../specs/clients/core/pairing/pairing-uri) will work with this SDK, as V1 is being deprecated by June 28th, 2023.
 
-We have written a simple tutorial for Expo on how to get started. This same approach is applicable for React Native CLI. At any point of development, feel free to reach out via [Github Discussions](https://github.com/orgs/WalletConnect/discussions) or Discord in the `dapp-dev-support` [channel.](https://discord.com/channels/492410046307631105/1040019697271328838)
+If you need assistance at any point during development, please feel free to reach out to us via [Github Discussions](https://github.com/orgs/WalletConnect/discussions) or on Discord in the dapp-dev-support [channel](https://discord.com/channels/492410046307631105/1040019697271328838).
 
 ## Obtain Project ID
 
-Every project using WalletConnect SDKs needs to obtain projectId from [WalletConnect Cloud](https://cloud.walletconnect.com/sign-in). This is absolutely free and only takes a few minutes.
+Every project that uses WalletConnect SDKs needs to obtain a Project ID from [WalletConnect Cloud](https://cloud.walletconnect.com/sign-in). This process is completely free and only takes a few minutes.
 
 ## Add Packages
 
@@ -43,15 +43,6 @@ On iOS, use CocoaPods to add the native modules to your project:
 npx pod-install
 ```
 
-## Apply Polyfills
-
-In your root file, add this lines:
-
-```javascript
-import '@walletconnect/react-native-compat';
-import '@ethersproject/shims';
-```
-
 </TabItem>
 
 <TabItem value="expo" label="Expo">
@@ -66,47 +57,24 @@ Additionally add these extra packages to help with async storage, polyfills, mod
 npx expo install @react-native-async-storage/async-storage react-native-get-random-values react-native-modal react-native-svg
 ```
 
-<Tabs>
-<TabItem value="e48" label="SDK 48+">
+### Additional Setup for Expo SDK 48+
 
-Expo 48 has an [issue](https://github.com/expo/expo/issues/17270) with `react-native-get-random-values`, so we need to temporarily fix this with their crypto library.
+If you are using Expo SDK 48+, there's an [issue](https://github.com/expo/expo/issues/17270) with `react-native-get-random-values`, so we need to temporarily fix this by installing their crypto library and copying [this](https://github.com/WalletConnect/web3modal-react-native/blob/main/example/expo-crypto-shim.js) file in your root folder.
 
 ```
 npx expo install expo-crypto
 ```
 
-### Create shim file
+</TabItem>
 
-Copy [this](https://github.com/WalletConnect/web3modal-react-native/blob/main/example/expo-crypto-shim.js) file in your root folder
+</Tabs>
 
 ## Apply Polyfills
 
 In your root file, add this lines:
 
 ```javascript
-import './expo-crypto-shim.js'
+// import './expo-crypto-shim.js' --> Only for Expo SDK 48+
 import '@walletconnect/react-native-compat';
 import '@ethersproject/shims';
 ```
-
-</TabItem>
-
-<TabItem value="e47" label="SDK < 48">
-
-## Apply Polyfills
-
-In your root file, add this lines:
-
-```javascript
-import '@walletconnect/react-native-compat';
-import '@ethersproject/shims';
-```
-</TabItem>
-
-
-</Tabs>
-
-
-</TabItem>
-
-</Tabs>

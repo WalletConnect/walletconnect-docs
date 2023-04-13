@@ -22,7 +22,7 @@ function App() {
 
 ## Add Connect Button
 
-Add our pre-built button component in your app to open/close connection and account modals. Alternatively, use your own button along with [useWeb3Modal](#useweb3modal) hook.
+Add our pre-built button component in your dapp to open/close connection and account modals. Alternatively, use your own button along with the [useWeb3Modal](#useweb3modal) hook.
 
 ```javascript
 import { Web3Modal, Web3Button } from '@web3modal/react-native'
