@@ -10,7 +10,7 @@ By default Web3Modal exposes `w3mProvider` which uses WalletConnect's rpc proxy 
 1, 3, 4, 5, 10, 42, 56, 69, 97, 100, 137, 280, 324, 420, 42161, 42220, 43114, 80001, 421611, 421613, 1313161554, 1313161555
 ```
 
-## Wagmi providers
+## Wagmi Providers
 
 You can change or add other wagmi provider easily when creating it's client. Please see [wagmi](https://wagmi.sh/react/providers/configuring-chains) or [@wagmi/core](https://wagmi.sh/core/providers/configuring-chains) documentation for more details. As an example:
 
