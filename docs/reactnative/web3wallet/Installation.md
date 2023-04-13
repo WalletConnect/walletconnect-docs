@@ -27,5 +27,5 @@ npm install @react-native-async-storage/async-storage react-native-get-random-va
 For those using Typescript, we recommend adding these dev dependencies:
 
 ```bash npm2yarn
-npm install npm install --save @walletconnect/jsonrpc-types
+npm install --save @walletconnect/jsonrpc-types
 ```
