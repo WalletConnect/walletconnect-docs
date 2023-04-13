@@ -4,7 +4,7 @@ import Container from '../../components/Container';
 
 ## Implementation
 
-Import Web3Modal package and replace `YOUR_PROJECT_ID` with your [WalletConnect Cloud](https://cloud.walletconnect.com/sign-in) ID
+Import Web3Modal package and replace `YOUR_PROJECT_ID` with your [WalletConnect Cloud](https://cloud.walletconnect.com/sign-in) Project ID.
 
 ```javascript
 import { Web3Modal } from '@web3modal/react-native'
