@@ -28,6 +28,6 @@ abstract class Client {
   // ---------- Events ----------------------------------------------- //
 
   // subscribe to session proposal
-  public abstract on("sync_update", (store: string, update: StoreUpdate) => {}): void;
+  public abstract on("sync_update", (account: string, store: string, update: StoreUpdate) => {}): void;
 }
 ```
