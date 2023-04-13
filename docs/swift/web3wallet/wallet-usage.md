@@ -6,6 +6,29 @@ Confirm you have configured the Network Client first.
 
 - [Networking](../core/networking-configuration.md)
 
+### Initialize Web3Wallet client
+
+In order to initialize a client just call a `configure` method from the Web3Wallet instance wrapper
+
+```swift
+let metadata = AppMetadata(
+    name: "Example Wallet",
+    description: "Wallet description",
+    url: "example.wallet",
+    icons: ["https://avatars.githubusercontent.com/u/37784886"]
+)
+        
+Web3Wallet.configure(
+    metadata: metadata, 
+    crypto: DefaultCryptoProvider(), 
+    // Used for the Echo: "echo.walletconnect.com" will be used by default if not provided
+    echoHost: "echo.walletconnect.com",
+    // Used for the Echo: "APNSEnvironment.production" will be used by default if not provided
+    environment: .production
+)
+Push.configure(environment: .production) // For supporting Push
+```
+
 ### Subscribe for Web3Wallet publishers
 
 When your `Web3Wallet` instance receives requests from a peer it will publish a related event. Set a subscription to handle them.
