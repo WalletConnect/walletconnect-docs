@@ -22,9 +22,11 @@
   --ifm-theme-code-border-color: rgba(0, 0, 0, 0.15);
   --ifm-close-color: white;
   --ifm-list-before-color: rgba(0, 0, 0, 0.4);
+  --ifm-navbar-show-bg-color: rgba(235, 235, 235, 1);
 }
 
 html[data-theme='dark'] {
+  --ifm-navbar-show-bg-color: rgba(20, 20, 20, 1);
   --ifm-list-before-color: rgba(255, 255, 255, 0.4);
   --ifm-close-color: black;
   --ifm-theme-code-border-color: rgba(255, 255, 255, 0.1);
@@ -157,7 +159,7 @@ h1::after {
 
 .navbar-sidebar--show {
   backdrop-filter: none;
-  background-color: rgba(20, 20, 20, 1);
+  background-color: var(--ifm-navbar-show-bg-color);
 }
 
 .navbar__logo {
