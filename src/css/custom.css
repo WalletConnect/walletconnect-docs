@@ -23,6 +23,7 @@
   --ifm-close-color: white;
   --ifm-list-before-color: rgba(0, 0, 0, 0.4);
   --ifm-navbar-show-bg-color: rgba(235, 235, 235, 1);
+  --ifm-background-color: #fff;
 }
 
 html[data-theme='dark'] {
@@ -144,11 +145,10 @@ h1::after {
 }
 
 .navbar--fixed-top {
-  --hidden-padding: calc(var(--doc-sidebar-hidden-width) / 2);
   --normal-width: calc(100vw - var(--doc-sidebar-width));
   position: sticky;
   margin-left: auto;
-  width: calc(var(--normal-width) - var(--hidden-padding));
+  width: var(--normal-width);
 }
 
 @media (max-width: 996px) {
