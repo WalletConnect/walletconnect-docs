@@ -130,6 +130,40 @@ You can always query settled sessions from the client later with:
 Web3Wallet.instance.getSessions()
 ```
 
+##### 💡 AutoNamespaces builder util
+
+`AutoNamespaces` is a helper utility that greatly reduces the complexity of parsing the required and optional namespaces. It accepts as parameters a session proposal along with your user's chains/methods/events/accounts and returns ready-to-use `SessionNamespace` object.
+
+```swift
+public static func build(
+    sessionProposal: Session.Proposal,
+    chains: [Blockchain],
+    methods: [String],
+    events: [String],
+    accounts: [Account]
+) throws -> [String: SessionNamespace]
+```
+
+Example usage
+
+```swift
+do {
+    let sessionNamespaces = try AutoNamespaces.build(
+        sessionProposal: proposal,
+        chains: [Blockchain("eip155:1")!, Blockchain("eip155:137")!],
+        methods: ["eth_sendTransaction", "personal_sign"],
+        events: ["accountsChanged", "chainChanged"],
+        accounts: [
+            Account(blockchain: Blockchain("eip155:1")!, address: "0xab16a96d359ec26a11e2c2b3d8f8b8942d5bfcdb")!,
+            Account(blockchain: Blockchain("eip155:137")!, address: "0xab16a96d359ec26a11e2c2b3d8f8b8942d5bfcdb")!
+        ]
+    )
+    try await Web3Wallet.instance.approve(proposalId: proposal.id, namespaces: sessionNamespaces)
+} catch {
+    print(error)
+}
+```
+
 ### Handle requests from dapp
 
 After the session is established, a dapp will request your wallet's users to sign a transaction or a message. Requests will be delivered by the following publisher.
