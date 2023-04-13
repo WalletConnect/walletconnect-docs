@@ -95,7 +95,7 @@ To send an approval, pass a Proposer's Public Key along with the map of namespac
 
 With Web3Wallet SDK 1.7.0 we've published a helper utility that greatly reduces the complexity of parsing the required and optional namespaces. It accepts as parameters a session proposal along with your wallet's chains, methods, events, and accounts (supported namespaces) and returns ready-to-use namespaces object that has to be passed into `Wallet.Params.SessionApprove` when approving a session.
 
-```
+```kotlin
 val supportedNamespaces: Wallet.Model.Namespaces.Session = /* a map of all supported namespaces created by a wallet */
 val sessionProposal: Wallet.Model.SessionProposal =  /* an object received by `fun onSessionProposal(sessionProposal: Wallet.Model.SessionProposal)` in `Web3Wallet.WalletDelegate` */
 val sessionNamespaces = Web3Wallet.generateApprovedNamespaces(sessionProposal, supportedNamespaces)
@@ -106,7 +106,7 @@ Web3Wallet.approveSession(approveParams) { error -> /*callback for error while a
 
 Examples of supported namespaces:
 
-```
+```kotlin
  val supportedNamespaces = mapOf(
     "eip155" to Wallet.Model.Namespace.Session(
         chains = listOf("eip155:1", "eip155:137", "eip155:3"),
