@@ -6,18 +6,24 @@ description: Everscale JSON-RPC Methods
 
 # WC JSON-RPC for Everscale
 
-### ever_processMessage
+## ever_processMessage
+
 Creates message, sends it to the network, monitors its processing and returns transaction's id.
-##### Parameters:
-1. source_address - message source address;
-2. value - amount of coins attached to the message;
-3. bounce - should the answer message be generated in case of an error;
-4. dest_address - message destination address;
-5. dest_payload - message destination payload;
-6. dest_abi - destination contract ABI;
-##### Returns:
-1. tx_id - transaction's id in blockchain;
-##### Example:
+
+### Parameters
+
+1. `source_address` - message source address;
+2. `value` - amount of coins attached to the message;
+3. `bounce` - should the answer message be generated in case of an error;
+4. `dest_address` - message destination address;
+5. `dest_payload` - message destination payload;
+6. `dest_abi` - destination contract ABI;
+
+### Returns
+
+1. `tx_id` - transaction's id in blockchain;
+### Example
+
 ```
 // Request
 {
@@ -44,18 +50,25 @@ Creates message, sends it to the network, monitors its processing and returns tr
 }
 ```
 
-### ever_signMessage
+## ever_signMessage
+
 Message that can then be sent to the blockchain.
-##### Parameters:
-1. source_address - message source address;
-2. value - amount of coins attached to the message;
-3. bounce - should the answer message be generated in case of an error;
-4. dest_address - message destination address;
-5. dest_payload - message destination payload;
-6. dest_abi - destination contract ABI;
-##### Returns:
-1. signed_ext_message - signed external message;
-##### Example:
+
+### Parameters
+
+1. `source_address` - message source address;
+2. `value` - amount of coins attached to the message;
+3. `bounce` - should the answer message be generated in case of an error;
+4. `dest_address` - message destination address;
+5. `dest_payload` - message destination payload;
+6. `dest_abi` - destination contract ABI;
+
+### Returns
+
+1. `signed_ext_message` - signed external message;
+
+### Example
+
 ```
 // Request
 {
@@ -82,15 +95,21 @@ Message that can then be sent to the blockchain.
 }
 ```
 
-### ever_sign
+## ever_sign
+
 Signature of a random message for authentication.
-##### Parameters:
-1. source_address - message source address;
-2. message - some message in base64;
-##### Returns:
-1. signature - string signature in base64;
-2. pubkey - public key of the wallet's address;
-##### Example:
+
+### Parameters
+
+1. `source_address` - message source address;
+2. `message` - some message in base64;
+### Returns
+
+1. `signature` - string signature in base64;
+2. `pubkey` - public key of the wallet's address;
+
+### Example
+
 ```
 // Request
 {

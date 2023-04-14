@@ -91,6 +91,7 @@ module.exports = {
           type: 'category',
           label: 'RPC Reference',
           items: [
+            'advanced/rpc-reference/everscale-rpc',
             'advanced/rpc-reference/ethereum-rpc',
             'advanced/rpc-reference/cosmos-rpc',
             'advanced/rpc-reference/solana-rpc',
