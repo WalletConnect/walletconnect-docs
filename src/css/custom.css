@@ -145,7 +145,7 @@ h1::after {
 }
 
 .navbar--fixed-top {
-  --normal-width: calc(100vw - var(--doc-sidebar-width));
+  --normal-width: calc(100% - var(--doc-sidebar-width));
   position: sticky;
   margin-left: auto;
   width: var(--normal-width);
