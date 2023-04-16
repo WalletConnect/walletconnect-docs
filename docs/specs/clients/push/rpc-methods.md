@@ -18,9 +18,42 @@ error: {
 }
 ```
 
-### wc_pushRequest
+## Methods
 
-Used to request push subscription to a peer through topic P. Response is expected on the same topic.
+### wc_pushSubscribe
+
+Used to subscribe push subscription to a peer through topic S. Response is expected on the same topic.
+
+**Request**
+
+```jsonc
+// wc_pushSubscribe params
+{
+  "subscriptionAuth": string
+}
+
+| IRN     |          |
+| ------- | -------- | 
+| TTL     | 86400    |
+| Tag     | 4006     |
+
+```
+
+**Response**
+
+```jsonc
+// Success result
+true
+
+| IRN     |          |
+| ------- | -------- |
+| TTL     | 86400    |
+| Tag     | 4007     |
+```
+
+### wc_pushPropose
+
+Used to propose a new push subscription to a peer through topic P. Response is expected on the same topic.
 
 - Success response is equivalent to push subscription acceptance.
 - Error response is equivalent to push subscription rejection.
@@ -33,12 +66,13 @@ Used to request push subscription to a peer through topic P. Response is expecte
   "publicKey": string,
   "metadata": Metadata,
   "account": string,
+  "scope": string
 }
 
 | IRN     |          |
 | ------- | -------- | 
 | TTL     | 86400    |
-| Tag     | 4000     |
+| Tag     | 4010     |
 
 ```
 
@@ -47,13 +81,13 @@ Used to request push subscription to a peer through topic P. Response is expecte
 ```jsonc
 // Success result
 {
-  "subscriptionAuth": string
+  "subscriptionId": string
 }
 
 | IRN     |          |
 | ------- | -------- |
 | TTL     | 86400    |
-| Tag     | 4001     |
+| Tag     | 4011     |
 ```
 
 ### wc_pushMessage
@@ -124,36 +158,6 @@ true
 | Tag     | 4005     |
 ```
 
-### wc_pushSubscribe
-
-Used to subscribe push subscription to a peer through topic S. Response is expected on the same topic.
-
-**Request**
-
-```jsonc
-// wc_pushSubscribe params
-{
-  "subscriptionAuth": string
-}
-
-| IRN     |          |
-| ------- | -------- | 
-| TTL     | 86400    |
-| Tag     | 4006     |
-
-```
-
-**Response**
-
-```jsonc
-// Success result
-true
-
-| IRN     |          |
-| ------- | -------- |
-| TTL     | 86400    |
-| Tag     | 4007     |
-```
 
 
 ### wc_pushUpdate
@@ -190,5 +194,45 @@ true
 | ------- | -------- |
 | TTL     | 86400    |
 | Tag     | 4009     |
+```
+
+## Deprecated Methods
+
+### wc_pushRequest (DEPRECATED)
+
+Used to request push subscription to a peer through topic P. Response is expected on the the Response topic R.
+
+- Success response is equivalent to push subscription acceptance.
+- Error response is equivalent to push subscription rejection.
+
+**Request**
+
+```jsonc
+// wc_pushRequest params
+{
+  "publicKey": string,
+  "metadata": Metadata,
+  "account": string,
+}
+
+| IRN     |          |
+| ------- | -------- | 
+| TTL     | 86400    |
+| Tag     | 4000     |
+
+```
+
+**Response**
+
+```jsonc
+// Success result
+{
+  "subscriptionAuth": string
+}
+
+| IRN     |          |
+| ------- | -------- |
+| TTL     | 86400    |
+| Tag     | 4001     |
 ```
 
