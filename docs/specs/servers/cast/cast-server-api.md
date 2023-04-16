@@ -91,7 +91,7 @@ Failed:
 
 ## Subscribe Topic
 
-Used to generate a subscribe topic for a dapp to receive push subscriptions, returns a public key that should be stored on dapps's domain a did:web document.
+Used to generate a subscribe topic for a dapp to receive push subscriptions, returns a public key that should be stored on dapps's domain as a did:web document.
 
 **Note:** this method is idempotent and will always return the same key.
 
@@ -113,3 +113,26 @@ Failed:
 }
 ```
 
+## Authentication Key
+
+Used to generate an authentication key for a dapp to send signed push messages, returns a public key that should be stored on dapps's domain as a did:web document.
+
+**Note:** this method is idempotent and will always return the same key.
+
+`GET /authentication-key`
+
+Response:
+
+```jsonc
+{
+    "publicKey": string
+}
+``` 
+
+Failed:
+
+```jsonc
+{
+  "reason": string
+}
+```

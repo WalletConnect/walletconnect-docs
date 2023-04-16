@@ -103,10 +103,7 @@ Used to publish a notification message to a peer through topic P. Response is ex
 ```jsonc
 // wc_pushMessage params
 {
-  "title": string,
-  "body": string,
-  "icon": string,
-  "url": string,
+  "messageAuth": string
 }
 
 | IRN     |          |
@@ -213,6 +210,7 @@ Used to request push subscription to a peer through topic P. Response is expecte
   "publicKey": string,
   "metadata": Metadata,
   "account": string,
+  "scope": string
 }
 
 | IRN     |          |
