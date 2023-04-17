@@ -103,6 +103,11 @@ abstract class Client {
   public abstract getMessages(params: {
     topic: string;
   }): Promise<[Message]>;
+  
+  // returns invite public key for selected account
+  public abstract getInvitePublicKey(params: {
+    account: string;
+  }): string;
 
   // ---------- Events ----------------------------------------------- //
 
