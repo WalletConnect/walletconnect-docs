@@ -16,11 +16,11 @@ abstract class Client {
   // create a store
   public abstract create(params: { account: string, store: string }): Promise<void>;
 
-  // set value 
-  public abstract set(params: { account: string, store: string, key: string, value: string }): Promise<void>;
+  // set value. Returns true if value changed, false otherwise.
+  public abstract set(params: { account: string, store: string, key: string, value: string }): Promise<boolean>;
 
-  // delete value 
-  public abstract delete(params: { account: string, store: string, key: string }): Promise<void>
+  // delete value. Returns true if value existed before delete, false otherwise. 
+  public abstract delete(params: { account: string, store: string, key: string }): Promise<boolean>
 
   // get stores
   public abstract getStores(params: { account: string }): Promise<StoreMap>;
