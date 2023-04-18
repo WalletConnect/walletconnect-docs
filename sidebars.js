@@ -91,6 +91,7 @@ module.exports = {
           type: 'category',
           label: 'RPC Reference',
           items: [
+            'advanced/rpc-reference/everscale-rpc',
             'advanced/rpc-reference/ethereum-rpc',
             'advanced/rpc-reference/cosmos-rpc',
             'advanced/rpc-reference/solana-rpc',
@@ -328,13 +329,24 @@ module.exports = {
                 'web3modal/advanced/mobile-linking',
                 {
                   type: 'category',
-                  label: 'Standalone Mode',
+                  label: 'Standalone Sign',
                   collapsed: true,
                   collapsible: true,
                   items: [
-                    'web3modal/standalone/about',
-                    'web3modal/standalone/installation',
-                    'web3modal/standalone/actions'
+                    'web3modal/advanced/standalone/sign/about',
+                    'web3modal/advanced/standalone/sign/installation',
+                    'web3modal/advanced/standalone/sign/actions'
+                  ]
+                },
+                {
+                  type: 'category',
+                  label: 'Standalone Auth',
+                  collapsed: true,
+                  collapsible: true,
+                  items: [
+                    'web3modal/advanced/standalone/auth/about',
+                    'web3modal/advanced/standalone/auth/installation',
+                    'web3modal/advanced/standalone/sign/actions'
                   ]
                 }
               ]

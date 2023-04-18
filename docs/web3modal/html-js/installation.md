@@ -1,6 +1,6 @@
 # Installation
 
-## Obtain Project id
+## Obtain Project ID
 
 Every project using WalletConnect SDKs (including Web3Modal) needs to obtain `projectId` from [WalletConnect Cloud](https://cloud.walletconnect.com/). This is absolutely free and only takes a few minutes.
 

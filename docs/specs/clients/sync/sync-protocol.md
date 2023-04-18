@@ -122,7 +122,7 @@ Another critical detail to note is that we must persist keys that are deleted wi
 
 ### Deleting State
 
-Whenever a client wants to delete state associated with a key-value pair it will publish a state change with the method `wc_syndDel` and the parameter would include the associated key. Let's walkthrough an example:
+Whenever a client wants to delete state associated with a key-value pair it will publish a state change with the method `wc_syncDel` and the parameter would include the associated key. Let's walkthrough an example:
 
 ```js
 // store (before)
