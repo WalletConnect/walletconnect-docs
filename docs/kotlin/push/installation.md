@@ -2,6 +2,9 @@
 
 Kotlin implementation of WalletConnect Push protocol for Android applications.
 
+## Prerequisite
+Setup [WalletConnect Cloud](https://cloud.walletconnect.com/) with Firebase. Instructions can be found [here](docs/api/push/prerequisites.md)
+
 **Android BOM** ![Maven Central](https://img.shields.io/maven-central/v/com.walletconnect/android-bom)
 
 ## Requirements
