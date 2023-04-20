@@ -2,7 +2,7 @@ import Container from './../components/Container';
 
 # Introduction
 
-Welcome to the React Native documentation for WalletConnect! We will soon have guides available for both Web3Wallet (wallet side) and Web3Modal (Dapp side).
+Welcome to the React Native documentation for WalletConnect!
 
 <Container
 items={[
