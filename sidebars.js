@@ -57,24 +57,14 @@ module.exports = {
           label: 'APIs',
           collapsed: true,
           collapsible: true,
-          items: [
-            'api/sign',
-            'api/auth',
-            'api/chat',
-            {
-              type: 'category',
-              label: 'Push',
-              collapsed: true,
-              collapsible: true,
-              items: ['api/push/prerequisites', 'api/push/push']
-            }
-          ]
+          items: ['api/sign', 'api/auth', 'api/chat', 'api/push']
         },
         {
           type: 'category',
           label: 'Multi-Chain',
           items: ['advanced/multichain/overview', 'advanced/multichain/chain-list']
-        }
+        },
+        'advanced/echo-server'
       ]
     },
     {
@@ -513,7 +503,30 @@ module.exports = {
           label: 'Push',
           collapsible: true,
           collapsed: true,
-          items: ['kotlin/push/installation', 'kotlin/push/wallet-usage', 'kotlin/push/dapp-usage']
+          items: [
+            {
+              type: 'category',
+              label: 'Dapp Usage',
+              collapsible: true,
+              collapsed: true,
+              items: [
+                [
+                  'kotlin/push/dapp-usage/getting-started'
+                ]
+              ]
+            },
+            {
+              type: 'category',
+              label: 'Wallet Usage',
+              collapsible: true,
+              collapsed: true,
+              items: [
+                [
+                  'kotlin/push/wallet-usage/getting-started'
+                ]
+              ]
+            }
+          ]
         },
         {
           type: 'category',
@@ -597,7 +610,30 @@ module.exports = {
           label: 'Push',
           collapsible: true,
           collapsed: true,
-          items: ['swift/push/installation', 'swift/push/wallet-usage', 'swift/push/dapp-usage']
+          items: [
+            {
+              type: 'category',
+              label: 'Dapp Usage',
+              collapsible: true,
+              collapsed: true,
+              items: [
+                [
+                  'swift/push/dapp-usage/getting-started'
+                ]
+              ]
+            },
+            {
+              type: 'category',
+              label: 'Wallet Usage',
+              collapsible: true,
+              collapsed: true,
+              items: [
+                [
+                  'swift/push/wallet-usage/getting-started'
+                ]
+              ]
+            }
+          ]
         },
         {
           type: 'category',
