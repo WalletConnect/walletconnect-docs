@@ -73,7 +73,7 @@ class CustomFirebaseService: PushMessageService() {
 
 ### Register for Subscriptions
 
-`PushWalletClient` needs a `PushWalletClient.Delegate` passed to it for it to be able to expose asynchronous updates sent from the Dapp.
+`PushWalletClient` needs a `PushWalletClient.Delegate` passed to it for it to be able to expose asynchronous updates sent from the dapp.
 
 ```kotlin
 val walletDelegate = object : PushWalletClient.Delegate {

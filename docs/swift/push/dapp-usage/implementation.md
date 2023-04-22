@@ -3,9 +3,8 @@
 ### Initialization
 
 Make sure Networking and Pairing are properly configured.
-- [Networking](../core/networking-configuration.md)
-- [Pairing](../core/pairing-usage.md)
-
+- [Networking](../../core/networking-configuration.md)
+- [Pairing](../../core/pairing-usage.md)
 
 ### Register for Subscriptions
 
