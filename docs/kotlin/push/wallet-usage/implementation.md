@@ -30,8 +30,6 @@ PushWalletClient.initialize(init) { error ->
 }
 ```
 
-#
-
 ### Register for Subscriptions
 
 `PushWalletClient` needs a `PushWalletClient.Delegate` passed to it for it to be able to expose asynchronous updates sent from the Dapp.
@@ -58,8 +56,6 @@ val walletDelegate = object : PushWalletClient.Delegate {
 PushWalletClient.setDelegate(walletDelegate)
 ```
 
-#
-
 ### Approve Request
 
 To send an approval for the subscription request, pass `Push.Wallet.Params.Approve` to the `PushWalletClient.approve` function to establish a subscription and notify the Dapp. The request id for `Push.Wallet.Params.Approve` will be available from the `Push.Wallet.Event.Request` of `onPushRequest` from the PushWalletClient.Delegate
@@ -77,8 +73,6 @@ PushWalletClient.approve(
     }
 )
 ```
-
-#
 
 ### Reject Request
 
@@ -98,17 +92,13 @@ PushWalletClient.reject(
 )
 ```
 
-#
-
-### Get a Map of Active Subscriptions
+### Get Active Subscriptions
 
 To get a list of all the active subscriptions, call the `getActiveSubscriptions` function. It will return a map with the topic as the key and `Push.Model.Subscription` as the value.
 
 ```kotlin
 PushWalletClient.getActiveSubscriptions()
 ```
-
-#
 
 ### Delete Subscription
 
@@ -122,8 +112,6 @@ PushWalletClient.delete(deleteParams) { error ->
 ```
 
 To delete a subscription, pass `Push.Wallet.Params.Delete` with the push topic that is to be deleted. If unsuccessful, an error is returned in the callback. The pushTopic can be fetched from the `PushWalletClient.getActiveSubscriptions()`
-
-#
 
 ### Decrypt Message
 
@@ -142,8 +130,6 @@ PushWalletClient.decryptMessage(
     }
 )
 ```
-
-#
 
 ### PushMessageService
 

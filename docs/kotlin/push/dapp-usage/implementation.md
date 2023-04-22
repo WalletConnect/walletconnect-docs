@@ -27,8 +27,6 @@ PushDappClient.initialize(init) { error ->
 }
 ```
 
-#
-
 ### Register for Subscriptions
 
 The `PushDappClient` needs a `PushDappClient.Delegate` passed to it for it to be able to expose asynchronous updates sent from the Wallet.
@@ -51,8 +49,6 @@ val dappDelegate = object : PushDappClient.Delegate {
 PushDappClient.setDelegate(dappDelegate)
 ```
 
-#
-
 ### Request to Send Push Notifications
 
 Send a push subscription request to a wallet on the pairing topic with an account. If successful, return the request ID. If unsuccessful, return the error.
@@ -72,9 +68,7 @@ PushDappClient.request(
 )
 ```
 
-#
-
-### Send a Notification
+### Send a Push Notification
 
 With an active push subscription, send a notification to a wallet on the established push topic. If unsuccessful, an error is returned in the callback.
 
@@ -92,17 +86,13 @@ PushDappClient.notify(notifyParams) { error ->
 }
 ```
 
-#
-
-### Get a Map of Active Subscriptions
+### Get Active Subscriptions
 
 Get a list of all the active subscriptions. Returns a map with the topic as the key and `Push.Model.Subscription` as the value.
 
 ```kotlin
 PushDappClient.getActiveSubscriptions()
 ```
-
-#
 
 ### Delete a Subscription
 
@@ -115,5 +105,3 @@ PushDappClient.delete(deleteParams) { error ->
     // callback for when the delete has failed
 }
 ```
-
-#
