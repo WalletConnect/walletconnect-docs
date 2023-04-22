@@ -511,8 +511,7 @@ module.exports = {
               collapsed: true,
               items: [
                 [
-                  'kotlin/push/dapp-usage/getting-started',
-                  'kotlin/push/dapp-usage/implementation',
+                  'kotlin/push/dapp-usage/getting-started'
                 ]
               ]
             },
@@ -523,8 +522,7 @@ module.exports = {
               collapsed: true,
               items: [
                 [
-                  'kotlin/push/wallet-usage/getting-started',
-                  'kotlin/push/wallet-usage/implementation',
+                  'kotlin/push/wallet-usage/getting-started'
                 ]
               ]
             }
@@ -620,8 +618,7 @@ module.exports = {
               collapsed: true,
               items: [
                 [
-                  'swift/push/dapp-usage/getting-started',
-                  'swift/push/dapp-usage/implementation',
+                  'swift/push/dapp-usage/getting-started'
                 ]
               ]
             },
@@ -632,8 +629,7 @@ module.exports = {
               collapsed: true,
               items: [
                 [
-                  'swift/push/wallet-usage/getting-started',
-                  'swift/push/wallet-usage/implementation',
+                  'swift/push/wallet-usage/getting-started'
                 ]
               ]
             }
