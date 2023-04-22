@@ -4,7 +4,9 @@ When used on mobile, Web3Modal uses and takes care of native mobile linking to c
 
 ## For iOS Wallets
 
-Web3Modal favours [universal links](https://developer.apple.com/ios/universal-links), but will fall back to deeplinks when prior are not available. You should follow official [apple documentation](https://developer.apple.com/documentation/xcode/allowing-apps-and-websites-to-link-to-your-content?language=objc) in order to set everything up, but here are some additional suggestions from WalletConnect team:
+Web3Modal will first attempt to use native deeplinks, which usually look like rainbow:// or metamask://. These are the most reliable way of linking a user to their mobile wallet from your dapp. The user will be shown a native prompt to confirm pairing or other actions before being directed to the wallet.
+
+If a deeplink is not available, Web3Modal will use a backup of a [universal link](https://developer.apple.com/ios/universal-links). You should follow the official [Apple documentation](https://developer.apple.com/documentation/xcode/allowing-apps-and-websites-to-link-to-your-content?language=objc) in order to set everything up, but here are some additional suggestions from the WalletConnect team:
 
 - Ensure your universal link doesn't use redirects.
 - If you are using a subdomain, it needs to be explicitly set up in XCode.
@@ -15,6 +17,13 @@ Web3Modal favours [universal links](https://developer.apple.com/ios/universal-li
 ## For Android Wallets
 
 Fortunately, compared to iOS, Android has much better support for mobile linking. Web3Modal will show a special view with a single button that redirects user to `wc://` link, this triggers native android view that will show all installed apps that can handle this link.
+
+## For all wallets
+
+No matter which of the above methods is used, Web3Modal will attach following data to mobile wallet link:
+
+1. For pairings, `uri` pairing data will be added and encoded - `/wc?uri=wc...`
+2. For requests, `requestId` and `sessionTopic` will be added - `/wc?requestId=...&sessionTopic=...`
 
 ## For Dapps
 

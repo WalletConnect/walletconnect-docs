@@ -2,6 +2,7 @@
 // Note: type annotations allow type checking and IDEs autocompletion
 
 const darkCodeTheme = require('prism-react-renderer/themes/dracula')
+const lightCodeTheme = require('prism-react-renderer/themes/github')
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
@@ -62,7 +63,7 @@ const config = {
           {
             type: 'html',
             value:
-              '<a class="navbar__brand" href="/"><div class="navbar__logo"><img src="/img/walletconnect-logo-white.svg" alt="WalletConnect Logo"></div>WalletConnect<span>Docs<span></a>'
+              '<a class="navbar__brand" href="/"><div class="navbar__logo"><img src="/img/walletconnect-logo-white.svg#dark-mode-only"  alt="WalletConnect Logo"><img src="/img/walletconnect-logo-black.svg#light-mode-only"  alt="WalletConnect Logo"></div>WalletConnect<span>Docs<span></a>'
           },
           {
             type: 'doc',
@@ -106,6 +107,7 @@ const config = {
             className: 'header-github-link',
             'aria-label': 'GitHub repository'
           },
+
           {
             type: 'docsVersionDropdown',
             position: 'right'
@@ -113,7 +115,6 @@ const config = {
         ]
       },
       footer: {
-        style: 'dark',
         links: [
           {
             title: 'Docs',
@@ -167,11 +168,12 @@ const config = {
       },
       colorMode: {
         defaultMode: 'dark',
-        disableSwitch: true,
+        disableSwitch: false,
         respectPrefersColorScheme: false
       },
       prism: {
         darkTheme: darkCodeTheme,
+        theme: lightCodeTheme,
         additionalLanguages: ['swift', 'kotlin']
       },
       algolia: {

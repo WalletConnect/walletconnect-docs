@@ -7,7 +7,7 @@ module.exports = {
     {
       type: 'html',
       value:
-        '<a class="navbar__brand sidebar__brand" href="/"><div class="navbar__logo"><img src="/img/walletconnect-logo-white.svg" alt="WalletConnect Logo"></div>WalletConnect<span>Docs<span></a>',
+        '<a class="navbar__brand" href="/"><div class="navbar__logo"><img src="/img/walletconnect-logo-white.svg#dark-mode-only"  alt="WalletConnect Logo"><img src="/img/walletconnect-logo-black.svg#light-mode-only"  alt="WalletConnect Logo"></div>WalletConnect<span>Docs<span></a>',
       defaultStyle: true
     },
     {
@@ -91,6 +91,7 @@ module.exports = {
           type: 'category',
           label: 'RPC Reference',
           items: [
+            'advanced/rpc-reference/everscale-rpc',
             'advanced/rpc-reference/ethereum-rpc',
             'advanced/rpc-reference/cosmos-rpc',
             'advanced/rpc-reference/solana-rpc',
@@ -263,7 +264,7 @@ module.exports = {
     {
       type: 'html',
       value:
-        '<a class="navbar__brand sidebar__brand" href="/"><div class="navbar__logo"><img src="/img/walletconnect-logo-white.svg" alt="WalletConnect Logo"></div>WalletConnect<span>Docs<span></a>',
+        '<a class="navbar__brand" href="/"><div class="navbar__logo"><img src="/img/walletconnect-logo-white.svg#dark-mode-only"  alt="WalletConnect Logo"><img src="/img/walletconnect-logo-black.svg#light-mode-only"  alt="WalletConnect Logo"></div>WalletConnect<span>Docs<span></a>',
       defaultStyle: true
     },
     {
@@ -454,7 +455,7 @@ module.exports = {
     {
       type: 'html',
       value:
-        '<a class="navbar__brand sidebar__brand" href="/"><div class="navbar__logo"><img src="/img/walletconnect-logo-white.svg" alt="WalletConnect Logo"></div>WalletConnect<span>Docs<span></a>',
+        '<a class="navbar__brand" href="/"><div class="navbar__logo"><img src="/img/walletconnect-logo-white.svg#dark-mode-only"  alt="WalletConnect Logo"><img src="/img/walletconnect-logo-black.svg#light-mode-only"  alt="WalletConnect Logo"></div>WalletConnect<span>Docs<span></a>',
       defaultStyle: true
     },
     {
@@ -549,7 +550,7 @@ module.exports = {
     {
       type: 'html',
       value:
-        '<a class="navbar__brand sidebar__brand" href="/"><div class="navbar__logo"><img src="/img/walletconnect-logo-white.svg" alt="WalletConnect Logo"></div>WalletConnect<span>Docs<span></a>',
+        '<a class="navbar__brand" href="/"><div class="navbar__logo"><img src="/img/walletconnect-logo-white.svg#dark-mode-only"  alt="WalletConnect Logo"><img src="/img/walletconnect-logo-black.svg#light-mode-only"  alt="WalletConnect Logo"></div>WalletConnect<span>Docs<span></a>',
       defaultStyle: true
     },
     {
@@ -644,7 +645,7 @@ module.exports = {
     {
       type: 'html',
       value:
-        '<a class="navbar__brand sidebar__brand" href="/"><div class="navbar__logo"><img src="/img/walletconnect-logo-white.svg" alt="WalletConnect Logo"></div>WalletConnect<span>Docs<span></a>',
+        '<a class="navbar__brand" href="/"><div class="navbar__logo"><img src="/img/walletconnect-logo-white.svg#dark-mode-only"  alt="WalletConnect Logo"><img src="/img/walletconnect-logo-black.svg#light-mode-only"  alt="WalletConnect Logo"></div>WalletConnect<span>Docs<span></a>',
       defaultStyle: true
     },
     {
@@ -690,7 +691,7 @@ module.exports = {
     {
       type: 'html',
       value:
-        '<a class="navbar__brand sidebar__brand" href="/"><div class="navbar__logo"><img src="/img/walletconnect-logo-white.svg" alt="WalletConnect Logo"></div>WalletConnect<span>Docs<span></a>',
+        '<a class="navbar__brand" href="/"><div class="navbar__logo"><img src="/img/walletconnect-logo-white.svg#dark-mode-only"  alt="WalletConnect Logo"><img src="/img/walletconnect-logo-black.svg#light-mode-only"  alt="WalletConnect Logo"></div>WalletConnect<span>Docs<span></a>',
       defaultStyle: true
     },
     {
@@ -706,6 +707,13 @@ module.exports = {
           collapsible: true,
           collapsed: true,
           items: ['reactnative/web3wallet/Installation', 'reactnative/web3wallet/wallet-usage']
+        },
+        {
+          type: 'category',
+          label: 'Web3Modal SDK',
+          collapsible: true,
+          collapsed: true,
+          items: ['reactnative/web3modal/installation', 'reactnative/web3modal/dapp-usage']
         }
       ]
     },

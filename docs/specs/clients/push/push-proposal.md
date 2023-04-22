@@ -12,11 +12,12 @@ In future events, the app can trigger push notifications after subscription has 
 
 ## Proposal Protocol
 
-#### Prerequisites
+### Pre-requisites
+
 Wallet and Dapp are required to establish pairing P before proceeding to Push protocol execution.
 
 
-#### Protocol
+### Protocol
 
 Proposal protocol will be established as follows:
 
