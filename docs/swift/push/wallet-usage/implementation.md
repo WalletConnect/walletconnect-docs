@@ -64,7 +64,11 @@ Push.wallet.getActiveSubscriptions()
 
 ### Delete Subscription
 
-// todo
+To delete a subscription.
+
+```swift
+try await Push.wallet.delete(topic: String)
+```
 
 ### Decrypt Push Notifications
 
@@ -107,4 +111,3 @@ Import WalletConnectPush inside your notification service extension file, initia
 ### Where to Go from Here
 - Try our [Wallet App](https://github.com/WalletConnect/WalletConnectSwiftV2/tree/main/Example/WalletApp) and to test notifications.
 - Build API documentation in XCode: go to Product -> Build Documentation
-

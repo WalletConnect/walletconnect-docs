@@ -56,9 +56,6 @@ To delete a subscription.
 try await Push.dapp.delete(topic: String)
 ```
 
-
-
 ### Where to Go from Here
 - Try our [Wallet App](https://github.com/WalletConnect/WalletConnectSwiftV2/tree/main/Example/WalletApp) and to test notifications.
 - Build API documentation in XCode: go to Product -> Build Documentation
-
