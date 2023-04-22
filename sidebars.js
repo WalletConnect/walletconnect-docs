@@ -61,20 +61,15 @@ module.exports = {
             'api/sign',
             'api/auth',
             'api/chat',
-            {
-              type: 'category',
-              label: 'Push',
-              collapsed: true,
-              collapsible: true,
-              items: ['api/push/prerequisites', 'api/push/push']
-            }
+            'api/push'
           ]
         },
         {
           type: 'category',
           label: 'Multi-Chain',
           items: ['advanced/multichain/overview', 'advanced/multichain/chain-list']
-        }
+        },
+        'advanced/echo-server'
       ]
     },
     {

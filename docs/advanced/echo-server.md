@@ -1,6 +1,16 @@
-import Container from './../../components/Container';
+# Echo Server
 
-# Prerequisites 
+The Echo Server is a push server for the WalletConnect v2 Protocol. It allows clients to send push notifications to their users. The Echo Server can be used alongside our [Push API](../api/push.md) and [Web3Wallet SDK](../web3wallet/about.md).
+
+## Options for Receiving Push Notifications
+
+1. Use the [hosted](#hosted-platform-recommended) platform (recommended).
+2. Self-Host our [server](https://github.com/WalletConnect/echo-server).
+3. Write your own implementation using the [spec](../../specs/servers/echo/spec.md).
+
+:::note
+For inquiries about self-hosting, please contact [Luther](https://t.me/lutherwc) or [Harry](https://t.me/theharryet) on Telegram.
+:::
 
 ## Hosted Platform (recommended)
 
@@ -27,23 +37,3 @@ Apple recommends using a Token-Based Connection for APNS over a Certificate-Base
 
 - [Token-Based Connection](https://developer.apple.com/documentation/usernotifications/setting_up_a_remote_notification_server/establishing_a_token-based_connection_to_apns) 
 - [Certificate-Based Connection](https://developer.apple.com/documentation/usernotifications/setting_up_a_remote_notification_server/establishing_a_certificate-based_connection_to_apns)
-
-
-## Registering your Devices
-
-Once you have set up your project and obtained the Push URL, you can register your devices to start receiving push notifications.
-
-<Container
-items={[
-{
-name: "Kotlin",
-description: "",
-url: `/2.0/kotlin/echo/usage`
-},
-{
-name: "Swift",
-description: "",
-url: `/2.0/swift/echo/usage`
-}
-]}
-/>
