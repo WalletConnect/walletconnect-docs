@@ -102,6 +102,12 @@ const config = {
             label: 'Flutter'
           },
           {
+            type: "docSidebar",
+            position: "left",
+            sidebarId: "csharp",
+            label: "C#",
+          },
+          {
             href: 'https://github.com/walletconnect/',
             position: 'right',
             className: 'header-github-link',
