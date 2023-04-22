@@ -719,5 +719,47 @@ module.exports = {
       collapsible: false,
       items: ['reactnative/guides/tutorials']
     }
+  ],
+  csharp: [
+    {
+      type: 'html',
+      value:
+        '<a class="navbar__brand sidebar__brand" href="/"><div class="navbar__logo"><img src="/img/walletconnect-logo-white.svg" alt="WalletConnect Logo"></div>WalletConnect<span>Docs<span></a>',
+      defaultStyle: true
+    },
+    {
+      type: 'category',
+      label: 'Products',
+      className: 'menu_outer_list',
+      collapsible: false,
+      items: [
+        {
+          type: 'category',
+          label: 'Web3Wallet SDK',
+          collapsible: true,
+          collapsed: true,
+          items: [
+            'csharp/sign/installation',
+            'csharp/sign/dapp-usage',
+            'csharp/sign/wallet-usage'
+          ]
+        }
+      ]
+    },
+    {
+      type: 'category',
+      label: 'Advanced',
+      className: 'menu_outer_list',
+      collapsible: false,
+      items: [
+        {
+          type: 'category',
+          label: 'Core',
+          collapsible: true,
+          collapsed: true,
+          items: ['csharp/core/pairing-api']
+        }
+      ]
+    }
   ]
 }
