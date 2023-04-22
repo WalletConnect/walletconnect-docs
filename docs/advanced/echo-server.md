@@ -27,6 +27,9 @@ For inquiries about self-hosting, please contact [Luther](https://t.me/lutherwc)
 ### Firebase Cloud Messaging (FCM)
 
 Google's FCM allows you to use send notifications to both Android and Apple devices. At this time, we only support the API. Please refer to their docs on set up.
+
+- Enable Legacy Cloud Messaging API in the Firebase Project Settings
+![legacy-fcm-cloud-messaging](/assets/legacy-fcm-cloud-messaging-api.png)
 - [Set up Android](https://firebase.google.com/docs/cloud-messaging/android/client)
 - [Set up Apple](https://firebase.google.com/docs/cloud-messaging/ios/client)
 
