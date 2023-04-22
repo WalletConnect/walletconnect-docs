@@ -95,7 +95,7 @@ PushWalletClient.reject(
 )
 ```
 
-To send a rejection for the subscription request, pass `Push.Wallet.Params.Reject` to the `PushWalletClient.reject` function to reject the subscription request and notify the Dapp. The request id for `Push.Wallet.Params.Approve` will be available from the `Push.Wallet.Event.Request` of `onPushRequest` from the PushWalletClient.Delegate
+To send a rejection for the subscription request, pass `Push.Wallet.Params.Reject` to the `PushWalletClient.reject` function to reject the subscription request and notify the Dapp. The request id for `Push.Wallet.Params.Approve` will be available from the `Push.Wallet.Event.Request` of `onPushRequest` from the PushWalletClient.Delegate.
 
 #
 
