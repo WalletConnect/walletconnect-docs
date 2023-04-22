@@ -17,26 +17,26 @@ abstract class Client {
   }): Promise<Sequence>;
 
   // for responder to approve a session proposal
-  public abstract approve(params: {
+  public abstract approveSession(params: {
     id: number;
     namespaces: Map<string, SessionNamespace>;
     relayProtocol?: string;
   }): Promise<Sequence>;
 
   // for responder to reject a session proposal
-  public abstract reject(params: {
+  public abstract rejectSession(params: {
     proposerPublicKey: string;
     reason: Reason;
   }): Promise<void>;
 
   // for controller to update session namespaces
-  public abstract update(params: {
+  public abstract updateSession(params: {
     topic: string;
     namespaces: Map<string, SessionNamespace>;
   }): Promise<void>;
 
   // for controller to update session expiry
-  public abstract extend(params: {
+  public abstract extendSession(params: {
     topic: string;
   }): Promise<void>;
 
@@ -48,13 +48,13 @@ abstract class Client {
   }): Promise<any>;
 
   // for responder to respond JSON-RPC request
-  public abstract respond(params: {
+  public abstract respondSessionRequest(params: {
     topic: string;
     response: JsonRpcResponse;
   }): Promise<void>;
 
   // for controller to send events
-  public abstract emit(params: {
+  public abstract emitSessionEvent(params: {
     topic: string;
     event: SessionEvent;
     chainId: string;
@@ -66,7 +66,7 @@ abstract class Client {
   }): Promise<void>;
 
   // for either to disconnect a session
-  public abstract disconnect(params: {
+  public abstract disconnectSession(params: {
     topic: string;
     reason: Reason;
   }): Promise<void>;
