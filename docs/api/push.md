@@ -10,4 +10,4 @@ There are getting started guides for the following clients platforms:
 
 - [Web - Javascript](../../javascript/push/installation.md)
 - [iOS - Swift](../../swift/push/installation.md)
-- [Android - Kotlin](../../kotlin/push/installation.md)
+- [Android - Kotlin](../kotlin/push/installation.md)
