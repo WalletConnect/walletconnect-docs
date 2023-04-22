@@ -1,7 +1,12 @@
-# Dapp Usage
+# Implementation
 
+Once you've finished the previous step, you're ready to start implementing the Push API.
 
-### Initialize Push Client
+## Initialization
+
+The Push Dapp client is responsible for initiating the connection with the cast server and is also in charge of registering and notifying clients. To initialize the Push Dapp client, create a `Push.Dapp.Params.Init` object in the Android Application class with the `CoreClient` and the cast server url if available. The `Push.Dapp.Params.Init` object will then be passed to the `PushDappClient` initialize function.
+
+The `PushDappClient` should be initialized in the Application class.
 
 ```kotlin
 val projectId = "" // Get Project ID at https://cloud.walletconnect.com/
@@ -22,12 +27,11 @@ PushDappClient.initialize(init) { error ->
 }
 ```
 
-The Push Dapp client is responsible for initiating the connection with the cast server and is also in charge of registering and notifying clients. To initialize the Push Dapp client, create a `Push.Dapp.Params.Init` object in the Android Application class with the `CoreClient` and the cast server url if available. The `Push.Dapp.Params.Init` object will then be passed to the `PushDappClient` initialize function.
+#
 
-The `PushDappClient` should be initialized in the Application class.
+### Register for Subscriptions
 
-
-### PushDappClient.Delegate
+The `PushDappClient` needs a `PushDappClient.Delegate` passed to it for it to be able to expose asynchronous updates sent from the Wallet.
 
 ```kotlin
 val dappDelegate = object : PushDappClient.Delegate {
@@ -47,9 +51,11 @@ val dappDelegate = object : PushDappClient.Delegate {
 PushDappClient.setDelegate(dappDelegate)
 ```
 
-The PushDappClient needs a `PushDappClient.Delegate` passed to it for it to be able to expose asynchronous updates sent from the Wallet.
+#
 
-### Request
+### Request to Send Push Notifications
+
+Send a push subscription request to a wallet on the pairing topic with an account. If successful, return the request ID. If unsuccessful, return the error.
 
 ```kotlin
 val account = // CAIP-10 compliant account address
@@ -66,9 +72,11 @@ PushDappClient.request(
 )
 ```
 
-Send a push subscription request to a wallet on the pairing topic with an account. If successful, return the request ID. If unsuccessful, return the error.
+#
 
-### Notify
+### Send a Notification
+
+With an active push subscription, send a notification to a wallet on the established push topic. If unsuccessful, an error is returned in the callback.
 
 ```kotlin
 val pushTopic = // active push subscription topic
@@ -84,17 +92,21 @@ PushDappClient.notify(notifyParams) { error ->
 }
 ```
 
-With an active push subscription, send a notification to a wallet on the established push topic. If unsuccessful, an error is returned in the callback.
+#
 
 ### Get a Map of Active Subscriptions
+
+Get a list of all the active subscriptions. Returns a map with the topic as the key and `Push.Model.Subscription` as the value.
 
 ```kotlin
 PushDappClient.getActiveSubscriptions()
 ```
 
-Get a list of all the active subscriptions. Returns a map with the topic as the key and `Push.Model.Subscription` as the value.
+#
 
-### Delete
+### Delete a Subscription
+
+To delete a subscription, pass `Push.Dapp.Params.Delete` with the push topic that is to be deleted. If unsuccessful, an error is returned in the callback.
 
 ```kotlin
 val pushTopic = // active push subscription topic
@@ -104,4 +116,4 @@ PushDappClient.delete(deleteParams) { error ->
 }
 ```
 
-To delete a subscription, pass `Push.Dapp.Params.Delete` with the push topic that is to be deleted. If unsuccessful, an error is returned in the callback.
+#

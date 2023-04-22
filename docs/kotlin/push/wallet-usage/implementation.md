@@ -1,7 +1,12 @@
-# Wallet Usage
+# Implementation
 
+Once you've finished the previous step, you're ready to start implementing the Push API.
 
-### Initialize Push Client
+## Initialization
+
+The Push Wallet client is responsible for creating and maintaining subscriptions. To initialize the Push Wallet client, create a `Push.Wallet.Params.Init` object in the Android Application class with the `CoreClient`. The `Push.Wallet.Params.Init` object will then be passed to the `PushWalletClient` initialize function.
+
+`PushWalletClient` should be initialized in the Application class.
 
 ```kotlin
 val projectId = "" // Get Project ID at https://cloud.walletconnect.com/
@@ -25,13 +30,11 @@ PushWalletClient.initialize(init) { error ->
 }
 ```
 
-The Push Wallet client is responsible for creating and maintaining subscriptions. To initialize the Push Wallet client, create a `Push.Wallet.Params.Init` object in the Android Application class with the `CoreClient`. The `Push.Wallet.Params.Init` object will then be passed to the `PushWalletClient` initialize function.
-
-The `PushWalletClient` should be initialized in the Application class.
-
 #
 
-### PushWalletClient.Delegate
+### Register for Subscriptions
+
+`PushWalletClient` needs a `PushWalletClient.Delegate` passed to it for it to be able to expose asynchronous updates sent from the Dapp.
 
 ```kotlin
 val walletDelegate = object : PushWalletClient.Delegate {
@@ -55,11 +58,11 @@ val walletDelegate = object : PushWalletClient.Delegate {
 PushWalletClient.setDelegate(walletDelegate)
 ```
 
-The PushWalletClient needs a `PushWalletClient.Delegate` passed to it for it to be able to expose asynchronous updates sent from the Dapp
-
 #
 
 ### Approve Request
+
+To send an approval for the subscription request, pass `Push.Wallet.Params.Approve` to the `PushWalletClient.approve` function to establish a subscription and notify the Dapp. The request id for `Push.Wallet.Params.Approve` will be available from the `Push.Wallet.Event.Request` of `onPushRequest` from the PushWalletClient.Delegate
 
 ```kotlin
 val approveParams = Push.Wallet.Params.Approve(id = /*request ID*/)
@@ -75,11 +78,11 @@ PushWalletClient.approve(
 )
 ```
 
-To send an approval for the subscription request, pass `Push.Wallet.Params.Approve` to the `PushWalletClient.approve` function to establish a subscription and notify the Dapp. The request id for `Push.Wallet.Params.Approve` will be available from the `Push.Wallet.Event.Request` of `onPushRequest` from the PushWalletClient.Delegate
-
 #
 
 ### Reject Request
+
+To send a rejection for the subscription request, pass `Push.Wallet.Params.Reject` to the `PushWalletClient.reject` function to reject the subscription request and notify the Dapp. The request id for `Push.Wallet.Params.Approve` will be available from the `Push.Wallet.Event.Request` of `onPushRequest` from the PushWalletClient.Delegate.
 
 ```kotlin
 val rejectParams = Push.Wallet.Params.Reject(id = /*request ID*/, reason = /*Error Reason*/)
@@ -95,11 +98,10 @@ PushWalletClient.reject(
 )
 ```
 
-To send a rejection for the subscription request, pass `Push.Wallet.Params.Reject` to the `PushWalletClient.reject` function to reject the subscription request and notify the Dapp. The request id for `Push.Wallet.Params.Approve` will be available from the `Push.Wallet.Event.Request` of `onPushRequest` from the PushWalletClient.Delegate.
-
 #
 
 ### Get a Map of Active Subscriptions
+
 To get a list of all the active subscriptions, call the `getActiveSubscriptions` function. It will return a map with the topic as the key and `Push.Model.Subscription` as the value.
 
 ```kotlin
@@ -108,7 +110,7 @@ PushWalletClient.getActiveSubscriptions()
 
 #
 
-### Delete
+### Delete Subscription
 
 ```kotlin
 val pushTopic = // active push subscription topic
@@ -125,6 +127,8 @@ To delete a subscription, pass `Push.Wallet.Params.Delete` with the push topic t
 
 ### Decrypt Message
 
+To decrypt a message sent by Echo server, pass the topic and encrypted message into `Push.Wallet.Params.DecryptMessage`. Pass the variable into `PushWalletClient.decryptMessage` and use the `onSuccess` and `onError` callbacks to react to the result. This function is not needed when using the `PushMessageService`.
+
 ```kotlin
 val encryptedMessage = Push.Wallet.Params.DecryptMessage(topic = /*topic*/, encryptedMessage = /*encrypted message*/)
 
@@ -139,11 +143,12 @@ PushWalletClient.decryptMessage(
 )
 ```
 
-To decrypt a message sent by Echo server, pass the topic and encrypted message into `Push.Wallet.Params.DecryptMessage`. Pass the variable into `PushWalletClient.decryptMessage` and use the `onSuccess` and `onError` callbacks to react to the result. This function is not needed when using the `PushMessageService`.
-
 #
 
 ### PushMessageService
+
+The `PushMessageService` is a wrapper around the `FirebaseMessagingService`. This wrapper class needs to be implemented for the Push SDK to be able to decrypt and notify wallets of a push notification sent from the Dapp in the background. 
+This service also needs to be registered in the AndroidManifest.xml file similar to the example in the [FCM documentation](https://firebase.google.com/docs/cloud-messaging/android/client#manifest).
 
 ```kotlin
 class CustomFirebaseService: PushMessageService() {
@@ -180,6 +185,3 @@ class CustomFirebaseService: PushMessageService() {
     </service>
 </application>
 ```
-
-The `PushMessageService` is a wrapper around the `FirebaseMessagingService`. This wrapper class needs to be implemented for the Push SDK to be able to decrypt and notify wallets of a push notification sent from the Dapp in the background. 
-This service also needs to be registered in the AndroidManifest.xml file similar to the example in the [FCM documentation](https://firebase.google.com/docs/cloud-messaging/android/client#manifest).

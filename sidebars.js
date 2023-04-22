@@ -508,7 +508,32 @@ module.exports = {
           label: 'Push',
           collapsible: true,
           collapsed: true,
-          items: ['kotlin/push/installation', 'kotlin/push/wallet-usage', 'kotlin/push/dapp-usage']
+          items: [
+            {
+              type: 'category',
+              label: 'Dapp Usage',
+              collapsible: true,
+              collapsed: true,
+              items: [
+                [
+                  'kotlin/push/dapp-usage/getting-started',
+                  'kotlin/push/dapp-usage/implementation',
+                ]
+              ]
+            },
+            {
+              type: 'category',
+              label: 'Wallet Usage',
+              collapsible: true,
+              collapsed: true,
+              items: [
+                [
+                  'kotlin/push/wallet-usage/getting-started',
+                  'kotlin/push/wallet-usage/implementation',
+                ]
+              ]
+            }
+          ]
         },
         {
           type: 'category',
