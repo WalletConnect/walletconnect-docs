@@ -1,19 +1,18 @@
+# Implementation
 
-
-# Dapp Usage
-
-### Initial Configuration
+### Initialization
 
 Make sure Networking and Pairing are properly configured.
 - [Networking](../core/networking-configuration.md)
 - [Pairing](../core/pairing-usage.md)
 
 
-### Subscribe to Push Publishers
+### Register for Subscriptions
+
 When your `Push` dapp instance receives a push request or push message from a peer client, it will publish a related event. Subscribe to publishers to receive the requests.
 
 ```swift
-Push.wallet.responsePublisher
+Push.dapp.responsePublisher
     .receive(on: DispatchQueue.main)
     .sink { [unowned self] id, result in
         //handle event
@@ -26,15 +25,15 @@ public var responsePublisher: AnyPublisher<(id: RPCID, result: Result<PushSubscr
 public var deleteSubscriptionPublisher: AnyPublisher<String, Never> 
 ```
 
-### Send Push Subscription:
+### Request to Send Push Notifications
 
-Once you have an active pairing with a wallet, you are able to send a push subscription requests on a pairing topic.
+Once you have an active pairing with a wallet, you are able to send a push subscription request on a pairing topic.
 
 ```swift
 try await Push.dapp.request(account: Account, topic: String)
 ```
 
-### Send a Push Message to a Wallet
+### Send a Push Notification
 
 Once a push subscription is established, you can then send a push notification to a wallet on the designated push subscription topic.
 
@@ -44,9 +43,20 @@ try await Push.dapp.notify(topic: String, message: PushMessage)
 
 ### Get Active Subscriptions
 
+Get a list of all the active subscriptions.
+
 ```swift 
 Push.wallet.getActiveSubscriptions()
 ```
+
+### Delete a Subscription
+
+To delete a subscription.
+
+```swift
+try await Push.dapp.delete(topic: String)
+```
+
 
 
 ### Where to Go from Here

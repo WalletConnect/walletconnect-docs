@@ -30,6 +30,47 @@ PushWalletClient.initialize(init) { error ->
 }
 ```
 
+### Register for Push Notifications
+
+The `PushMessageService` is a wrapper around the `FirebaseMessagingService`. This wrapper class needs to be implemented for the Push SDK to be able to decrypt and notify wallets of a push notification sent from the Dapp in the background. 
+This service also needs to be registered in the AndroidManifest.xml file similar to the example in the [FCM documentation](https://firebase.google.com/docs/cloud-messaging/android/client#manifest).
+
+```kotlin
+class CustomFirebaseService: PushMessageService() {
+
+    override fun newToken(token: String) {
+        // Triggered when Firebase Cloud Messaging creates a new token and that token is registered with the Echo server
+    }
+
+    override fun registeringFailed(token: String, throwable: Throwable) {
+        // Triggered when Firebase Cloud Messaging if there is an error with registering with the Echo server with a new token
+    }
+
+    override fun onMessage(message: Push.Model.Message, originalMessage: RemoteMessage) {
+        // Triggered when a message is sent from the Echo server through Firebase Cloud Messaging and the message contains `Push.Model.Message`. The original FCM RemoteMessage is also returned
+    }
+
+    override fun onDefaultBehavior(message: RemoteMessage) {
+        // Triggered when a message is sent from the Echo server through Firebase Cloud Messaging and the message does not contain `Push.Model.Message`. The original FCM RemoteMessage returned instead
+    }
+
+    override fun onError(throwable: Throwable, defaultMessage: RemoteMessage) {
+        // Triggered when there is an error that occurs when a message is received from the Echo server
+    }
+}
+```
+
+```xml
+<application...>
+    <service
+        android:name=".CustomFirebaseService">
+        <intent-filter>
+            <action android:name="com.google.firebase.MESSAGING_EVENT" />
+        </intent-filter>
+    </service>
+</application>
+```
+
 ### Register for Subscriptions
 
 `PushWalletClient` needs a `PushWalletClient.Delegate` passed to it for it to be able to expose asynchronous updates sent from the Dapp.
@@ -129,45 +170,4 @@ PushWalletClient.decryptMessage(
         // callback for when the decryption has failed
     }
 )
-```
-
-### PushMessageService
-
-The `PushMessageService` is a wrapper around the `FirebaseMessagingService`. This wrapper class needs to be implemented for the Push SDK to be able to decrypt and notify wallets of a push notification sent from the Dapp in the background. 
-This service also needs to be registered in the AndroidManifest.xml file similar to the example in the [FCM documentation](https://firebase.google.com/docs/cloud-messaging/android/client#manifest).
-
-```kotlin
-class CustomFirebaseService: PushMessageService() {
-
-    override fun newToken(token: String) {
-        // Triggered when Firebase Cloud Messaging creates a new token and that token is registered with the Echo server
-    }
-
-    override fun registeringFailed(token: String, throwable: Throwable) {
-        // Triggered when Firebase Cloud Messaging if there is an error with registering with the Echo server with a new token
-    }
-
-    override fun onMessage(message: Push.Model.Message, originalMessage: RemoteMessage) {
-        // Triggered when a message is sent from the Echo server through Firebase Cloud Messaging and the message contains `Push.Model.Message`. The original FCM RemoteMessage is also returned
-    }
-
-    override fun onDefaultBehavior(message: RemoteMessage) {
-        // Triggered when a message is sent from the Echo server through Firebase Cloud Messaging and the message does not contain `Push.Model.Message`. The original FCM RemoteMessage returned instead
-    }
-
-    override fun onError(throwable: Throwable, defaultMessage: RemoteMessage) {
-        // Triggered when there is an error that occurs when a message is received from the Echo server
-    }
-}
-```
-
-```xml
-<application...>
-    <service
-        android:name=".CustomFirebaseService">
-        <intent-filter>
-            <action android:name="com.google.firebase.MESSAGING_EVENT" />
-        </intent-filter>
-    </service>
-</application>
 ```

@@ -57,12 +57,7 @@ module.exports = {
           label: 'APIs',
           collapsed: true,
           collapsible: true,
-          items: [
-            'api/sign',
-            'api/auth',
-            'api/chat',
-            'api/push'
-          ]
+          items: ['api/sign', 'api/auth', 'api/chat', 'api/push']
         },
         {
           type: 'category',
@@ -617,7 +612,32 @@ module.exports = {
           label: 'Push',
           collapsible: true,
           collapsed: true,
-          items: ['swift/push/installation', 'swift/push/wallet-usage', 'swift/push/dapp-usage']
+          items: [
+            {
+              type: 'category',
+              label: 'Dapp Usage',
+              collapsible: true,
+              collapsed: true,
+              items: [
+                [
+                  'swift/push/dapp-usage/getting-started',
+                  'swift/push/dapp-usage/implementation',
+                ]
+              ]
+            },
+            {
+              type: 'category',
+              label: 'Wallet Usage',
+              collapsible: true,
+              collapsed: true,
+              items: [
+                [
+                  'swift/push/wallet-usage/getting-started',
+                  'swift/push/wallet-usage/implementation',
+                ]
+              ]
+            }
+          ]
         },
         {
           type: 'category',
