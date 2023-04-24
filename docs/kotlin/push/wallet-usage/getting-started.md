@@ -142,7 +142,7 @@ PushWalletClient.setDelegate(walletDelegate)
 To send an approval for the subscription request, pass `Push.Wallet.Params.Approve` to the `PushWalletClient.approve` function to establish a subscription and notify the Dapp. The request id for `Push.Wallet.Params.Approve` will be available from the `Push.Wallet.Event.Request` of `onPushRequest` from the PushWalletClient.Delegate
 
 ```kotlin
-val approveParams = Push.Wallet.Params.Approve(id = /*request ID*/)
+val approveParams = Push.Wallet.Params.Approve(id = /*request ID*/, onSign = {/*12*/})
 
 PushWalletClient.approve(
     params = approveParams,
