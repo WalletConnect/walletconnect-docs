@@ -2,6 +2,16 @@
 
 The WalletConnect Cloud Explorer is an open-source solution to submit and showcase wallets and dApps that support WalletConnect. You can view existing entries over at our [explorer website](https://explorer.walletconnect.com/) or use the [Cloud Explorer API](#cloud-explorer-api) to fetch them programmatically.
 
+## Setting Up a New Project
+
+In order to connect to WalletConnect Cloud, you need to create a new project:
+
+1. Go to https://cloud.walletconnect.com/app
+2. Tap New Project
+3. Give it a name and tap Create button
+4. Your new project should appear on the projects list
+5. You should see a project ID string if you tap on your project
+
 ## Submitting a project
 
 Head over to [cloud.walletconnect.com](https://cloud.walletconnect.com/) and create an account if you don't already have one. Once you sign in, simply fill out our project form under the "Explorer" section and submit it for review. To ensure fast approval make sure you follow our [submission guidelines](https://explorer.walletconnect.com/guidelines). Once approved your project will automatically appear on our website and API.
