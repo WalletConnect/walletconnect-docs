@@ -32,7 +32,7 @@ Additionally the following optional params can be included if available:
     sdk               = sdk-prefix + core-version
     sdk-prefix        = ("js"|"swift"|"kotlin"|"csharp")
     core-version      = STRING
-    api-flags         = 2^0-Sign, 2^1-Auth, 2^2-Chat, 2^3-Push, 2^4-W3W, 2^5-W3I
+    api-flags         = 2^0-Sign, 2^1-Auth, 2^2-Chat, 2^3-Notify, 2^4-W3W, 2^5-W3I
     os                = STRING
     id                = id-prefix + id-host
     id-prefix         = ("browser","react-native","nodejs","android","ios")

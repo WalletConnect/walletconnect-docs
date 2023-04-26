@@ -17,9 +17,9 @@ In this repository, we document and discuss features that are currently under de
       url: `/2.0/specs/clients/auth`
     },
     {
-      name: "Push API",
-      description: "Push is a push notification protocol that enables apps to notify users of both off-chain and on-chain events.",
-      url: `/2.0/specs/clients/push`
+      name: "Notify API",
+      description: "Notify is a notification protocol that enables apps to notify users of both off-chain and on-chain events.",
+      url: `/2.0/specs/clients/notify`
     },
     {
       name: "Chat API",

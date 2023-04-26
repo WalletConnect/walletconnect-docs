@@ -7,7 +7,7 @@ Pairing API is a lightweight api for establishing an encrypted, protocol agnosti
 
 ## Context
 
-WalletConnect offers Sign, Auth and Push Protocols. In order to allow reusable communication channel between peers, the Pairing API exposes a common interface and allows for sending and receiving multi-protocol requests over a single pairing.
+WalletConnect offers Sign, Auth and Notify Protocols. In order to allow reusable communication channel between peers, the Pairing API exposes a common interface and allows for sending and receiving multi-protocol requests over a single pairing.
 
 This significantly improves end user experience by allowing to scan just a single QR code and receive requests from different protocols.
 
