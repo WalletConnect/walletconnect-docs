@@ -42,14 +42,14 @@ In this repository, we document and discuss features that are currently under de
       url: `/2.0/specs/servers/keys`
     },
     {
-      name: "Echo Server",
-      description: "Echo server observes incoming messages on the behalf of a Client through a webhook on the Relay Server.",
-      url: `/2.0/specs/servers/echo`
+      name: "Push Server",
+      description: "Push server observes incoming messages on the behalf of a Client through a webhook on the Relay Server.",
+      url: `/2.0/specs/servers/push`
     },
     {
-      name: "Cast Server",
-      description: "Cast server tracks encryption keys on the behalf of a client and publishes messages to the Relay Server.",
-      url: `/2.0/specs/servers/cast`
+      name: "Notify Server",
+      description: "Notify server tracks encryption keys on the behalf of a client and publishes messages to the Relay Server.",
+      url: `/2.0/specs/servers/notify`
     },
     {
       name: "History Server",

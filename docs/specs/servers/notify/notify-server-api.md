@@ -1,8 +1,8 @@
-# Cast Server API
+# Notify Server API
 
 ## Register Account
 
-Registers an account and notify subscription symmetric key. The `subscriptionAuth` must be attached in the request so the Cast server can verify if wallet proved ownership of an address.
+Registers an account and notify subscription symmetric key. The `subscriptionAuth` must be attached in the request so the Notify server can verify if wallet proved ownership of an address.
 
 `POST /register`
 

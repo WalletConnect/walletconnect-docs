@@ -2,8 +2,8 @@
 
 Notify API requires Dapp developers to host a did:web document to expose public keys for two specific purposes:
 
-    * key agreement - public key used to subscribe to the chosen cast server
-    * authentication - public key used to sign message published by the chosen cast server
+    * key agreement - public key used to subscribe to the chosen notify server
+    * authentication - public key used to sign message published by the chosen notify server
 
 This should be available under the `.well-known` path for the Dapp Domain or alternatively it can be made available through a specific path for this did:web document.
 
