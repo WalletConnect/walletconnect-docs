@@ -139,10 +139,20 @@ PushWalletClient.setDelegate(walletDelegate)
 
 ### Approve Request
 
-To send an approval for the subscription request, pass `Push.Wallet.Params.Approve` to the `PushWalletClient.approve` function to establish a subscription and notify the Dapp. The request id for `Push.Wallet.Params.Approve` will be available from the `Push.Wallet.Event.Request` of `onPushRequest` from the PushWalletClient.Delegate
+To send an approval for the subscription request, pass `Push.Wallet.Params.Approve` to the `PushWalletClient.approve` function to establish a subscription and notify the Dapp. The request id for `Push.Wallet.Params.Approve` will be available from the `Push.Wallet.Event.Request` of `onPushRequest` from the PushWalletClient.Delegate. To verify ownership over blockchain account, user's must sign the provided message on the `onSign(message: String)` callback. Currenlty only EIP191 signatures are supported. 
+
+Our recommendation is to show the message to the user and ask the user to either accept or reject the message.
+* If the user accepts, then you will need to call `CacaoSigner.sign()` with the message, account private key, and a signature type of SignatureType.EIP191.
+* If the user rejects, then you will need to send null as the result of the `onSign` lamda
 
 ```kotlin
-val approveParams = Push.Wallet.Params.Approve(id = /*request ID*/, onSign = {/*12*/})
+val approveParams = Push.Wallet.Params.Approve(id = /*request ID*/, onSign = fun(message: String): Push.Model.Cacao.Signature? { 
+    // Message to be signed. When user decides to sign message use CacaoSigner to sign message.
+    // CacaoSigner is a util for easy message signing.
+    return CacaoSigner.sign(message, /*privateKey*/, SignatureType.EIP191)
+    // When users decides to not sign message return null
+    return null
+})
 
 PushWalletClient.approve(
     params = approveParams,
