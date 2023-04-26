@@ -22,3 +22,6 @@ Storage API enables high-level APIs to store persistent data for managing their 
 
 Pairing API is a lightweight API for establishing an encrypted, protocol agnostic communication layer between peers. It's purpose is to provide a secure channel for proposing protocols or sending requests.
 
+### Sync API
+
+Sync API allows a wallet user to sync private data between multiple clients using a single signature from an account. It works similarly to [Storage API](https://docs.walletconnect.com/2.0/specs/clients/core/storage/storage-api) but it can be accessible through multiple clients using a blockchain account signature.

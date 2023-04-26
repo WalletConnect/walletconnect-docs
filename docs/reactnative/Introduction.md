@@ -2,7 +2,7 @@ import Container from './../components/Container';
 
 # Introduction
 
-Welcome to the React Native documentation for WalletConnect! We will soon have guides available for both Web3Wallet (wallet side) and Web3Modal (Dapp side).
+Welcome to the React Native documentation for WalletConnect!
 
 <Container
 items={[
@@ -10,9 +10,15 @@ items={[
 name: "Web3Wallet",
 description: "For Wallets. Use Web3Wallet to interact with Dapps.",
 url: `/2.0/reactnative/web3wallet/Installation`
+},
+{
+name: "Web3Modal",
+description: "For Dapps. Use Web3Modal to interact with Wallets.",
+url: `/2.0/reactnative/web3modal/Installation`
 }
 ]}
 />
+
 
 ## Examples
 
@@ -29,6 +35,11 @@ url: `https://github.com/WalletConnect/react-native-examples/tree/main/wallets/r
 name: "Web3Wallet (Expo)",
 description: "Example of Web3Wallet React Native built via Expo",
 url: `https://github.com/WalletConnect/react-native-examples/tree/main/wallets/web3wallet_tutorial`
+},
+{
+name: "Web3Modal (CLI)",
+description: "Example of Web3Modal React Native built via React Native CLI",
+url: `https://github.com/WalletConnect/react-native-examples/tree/main/dapps/v2Explorer`
 },
 ]}
 />
