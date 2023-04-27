@@ -77,7 +77,7 @@ class Web3Wallet {
   public abstract on("session_proposal", (sessionProposal: SessionProposal, verifyContext: VerifyContext) => {}): void;
 
   // subscribe to session request (SIGN)
-  public abstract on("session_request", (sessionRequest: SessionRequest, context: SessionContext) => {}): void;
+  public abstract on("session_request", (sessionRequest: SessionRequest, verifyContext: VerifyContext) => {}): void;
 
   // subscribe to auth request (AUTH)
   public abstract on("auth_request", (id: number, payload: PayloadParams, context: AuthContext) => {}): void;
