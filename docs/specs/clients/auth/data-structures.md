@@ -127,7 +127,7 @@ interface ErrorResponse {
 }
 ```
 
-## Context
+## Verify Context
 
 Context is appended to Auth Requests to provide metadata that was constructed internally by the client that is relevant to the specific request
 
