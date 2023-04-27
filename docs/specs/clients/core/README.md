@@ -25,3 +25,7 @@ Pairing API is a lightweight API for establishing an encrypted, protocol agnosti
 ### Sync API
 
 Sync API allows a wallet user to sync private data between multiple clients using a single signature from an account. It works similarly to [Storage API](https://docs.walletconnect.com/2.0/specs/clients/core/storage/storage-api) but it can be accessible through multiple clients using a blockchain account signature.
+
+### Verify API
+
+Verify API is an attestation mechanism to verify the domain origin of a published message. The client will hash the contents of the encrypted envelope and attest with the verify enclave to register its attestation in the verify server for peers to compare with incoming messages from the Relay.
