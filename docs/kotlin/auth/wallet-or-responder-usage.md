@@ -35,7 +35,7 @@ object ResponderDelegate : AuthClient.ResponderDelegate {
         AuthClient.setResponderDelegate(this)
     }
 
-    override fun onAuthRequest(authRequest: Auth.Event.AuthRequest) {
+    override fun onAuthRequest(authRequest: Auth.Event.AuthRequest, verifyContext: Auth.Event.VerifyContext) {
         // Triggered when Dapp / Requester makes an authorization request. Wallet / Responder should display message to user and ask him to approve or reject authorization.
     }
 
@@ -46,6 +46,21 @@ object ResponderDelegate : AuthClient.ResponderDelegate {
     override fun onError(error: Auth.Event.Error) {
         //Triggered whenever the error occurs with Relay Server
     }
+}
+```
+
+`Auth.Event.VerifyContext` provides a domain verification information about AuthRequest. It consists of origin of a Dapp from where the request has been sent, validation Enum that says whether origin is VALID, INVALID or UNKNOWN and verify url server. 
+
+```kotlin
+data class VerifyContext(
+    val id: Long,
+    val origin: String,
+    val validation: Model.Validation,
+    val verifyUrl: String
+)
+
+enum class Validation {
+    VALID, INVALID, UNKNOWN
 }
 ```
 
