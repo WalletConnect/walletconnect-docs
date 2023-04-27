@@ -5,14 +5,12 @@ Push API requires Dapp developers to host a did:web document to expose public ke
     * key agreement - public key used to subscribe to the chosen cast server
     * authentication - public key used to sign message published by the chosen cast server
 
-This should be available under the `.well-known` path for the Dapp Domain or alternatively it can be made available through a specific path for this did:web document.
+This should be available as did.json document under the `.well-known` path for the Dapp Domain specified as did:web identifier.
 
 Here is an example for the two public keys being exposed:
 
 ```jsonc
 did:web:example.com -> https://example.com/.well-known/did.json
-# OR
-did:web:example.com:wc:push -> https://example.com/wc/push/did.json
 
 // did.json
 {
