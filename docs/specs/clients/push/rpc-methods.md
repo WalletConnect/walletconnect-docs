@@ -73,7 +73,6 @@ Used to publish a notification message to a peer through topic P. Response is ex
   "body": string,
   "icon": string,
   "url": string,
-  "type": string
 }
 
 | IRN     |          |
