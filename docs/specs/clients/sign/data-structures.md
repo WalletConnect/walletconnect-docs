@@ -151,7 +151,7 @@ Settlement is sent by the responder after approval and it's broadcasted right af
 
 ## Verify Context
 
-Context is appended to Session Proposals and Session Requests to provide metadata that was constructed internally by the client that is relevant to the specific proposal or request
+Verify Context is appended to Session Proposals and Session Requests to provide metadata that was constructed internally by the client that is relevant to the specific proposal or request
 
 ```jsonc
 {
