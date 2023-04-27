@@ -55,6 +55,7 @@ type Response = Cacao | ErrorResponse;
 ```typescript
 interface PendingRequest {
   id: number;
+  pairingTopic: String;
   payloadParams: PayloadParams;
 }
 ```

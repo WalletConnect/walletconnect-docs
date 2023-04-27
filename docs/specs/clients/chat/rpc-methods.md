@@ -36,7 +36,6 @@ Used to invite a peer through topic I. Requires a success response with associat
 | IRN     |          |
 | ------- | -------- |
 | TTL     | 2592000  |
-| Prompt  | true     |
 | Tag     | 2000     |
 
 ```
@@ -52,7 +51,6 @@ Used to invite a peer through topic I. Requires a success response with associat
 | IRN     |          |
 | ------- | -------- |
 | TTL     | 2592000  |
-| Prompt  | false    |
 | Tag     | 2001     |
 ```
 
@@ -74,7 +72,6 @@ Used to send a message to its peer through topic T.
 | IRN     |          |
 | ------- | -------- |
 | TTL     | 2592000  |
-| Prompt  | true     |
 | Tag     | 2002     |
 ```
 
@@ -89,7 +86,6 @@ Used to send a message to its peer through topic T.
 | IRN     |          |
 | ------- | -------- |
 | TTL     | 2592000  |
-| Prompt  | false    |
 | Tag     | 2003     |
 ```
 
@@ -108,7 +104,6 @@ Used to signal to a peer that a chat thread is being left.
 | IRN     |          |
 | ------- | -------- |
 | TTL     | 2592000  |
-| Prompt  | true     |
 | Tag     | 2004     |
 ```
 
@@ -121,7 +116,6 @@ true
 | IRN     |          |
 | ------- | -------- |
 | TTL     | 2592000  |
-| Prompt  | false    |
 | Tag     | 2005     |
 ```
 
@@ -140,7 +134,6 @@ Used to evaluate if peer is currently online. Timeout at 30 seconds
 | IRN     |          |
 | ------- | -------- |
 | TTL     | 30       |
-| Prompt  | false    |
 | Tag     | 2006     |
 ```
 
@@ -153,6 +146,5 @@ true
 | IRN     |          |
 | ------- | -------- |
 | TTL     | 30       |
-| Prompt  | false    |
 | Tag     | 2007     |
 ```

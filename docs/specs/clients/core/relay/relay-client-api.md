@@ -33,6 +33,9 @@ interface Relay {
 
     /*Closes a Web-Socket connection*/
     fun disconnect()
+    
+    /*Listening for new incoming messages*/
+    fun on("relay_message", (topic: string, message: string, publishedAt: Int64, receivedAt: Int64) => {})
 }
 ```
 
@@ -44,7 +47,6 @@ The policy object defines the policy's parameters.
 {
     "ttl" : seconds,
     "tag" : number, // Optional / default = 0
-    "prompt" : boolean // Optional / default = false
 }
 ```
 

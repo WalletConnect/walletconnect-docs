@@ -56,7 +56,6 @@ Used to propose a session through topic A. Requires a success response with asso
 | IRN     |          |
 | ------- | -------- |
 | TTL     | 300      |
-| Prompt  | true     |
 | Tag     | 1100     |
 ```
 
@@ -75,7 +74,6 @@ Used to propose a session through topic A. Requires a success response with asso
 | IRN     |          |
 | ------- | -------- |
 | TTL     | 300      |
-| Prompt  | false    |
 | Tag     | 1101     |
 ```
 
@@ -109,7 +107,6 @@ Used to settle a session over topic B.
 | IRN     |          |
 | ------- | -------- |
 | TTL     | 300      |
-| Prompt  | false    |
 | Tag     | 1102     |
 ```
 
@@ -122,7 +119,6 @@ true
 | IRN     |          |
 | ------- | -------- |
 | TTL     | 300      |
-| Prompt  | false    |
 | Tag     | 1103     |
 ```
 
@@ -147,7 +143,6 @@ Used to update the namespaces of a session.
 | IRN     |          |
 | ------- | -------- |
 | TTL     | 86400    |
-| Prompt  | false    |
 | Tag     | 1104     |
 ```
 
@@ -160,7 +155,6 @@ true
 | IRN     |          |
 | ------- | -------- |
 | TTL     | 86400    |
-| Prompt  | false    |
 | Tag     | 1105     |
 ```
 
@@ -181,7 +175,6 @@ Used to extend the lifetime of a session.
 | IRN     |          |
 | ------- | -------- |
 | TTL     | 86400    |
-| Prompt  | false    |
 | Tag     | 1106     |
 ```
 
@@ -194,7 +187,6 @@ true
 | IRN     |          |
 | ------- | -------- |
 | TTL     | 86400    |
-| Prompt  | false    |
 | Tag     | 1107     |
 ```
 
@@ -233,7 +225,6 @@ When DApp is setting `expiry` params, client should insure that Relay Publish pa
 | IRN     |          |
 | ------- | -------- |
 | TTL     | 300      |
-| Prompt  | true     |
 | Tag     | 1108     |
 ```
 
@@ -246,7 +237,6 @@ true
 | IRN     |          |
 | ------- | -------- |
 | TTL     | 300      |
-| Prompt  | false    |
 | Tag     | 1109     |
 ```
 
@@ -267,7 +257,6 @@ true
 | IRN     |          |
 | ------- | -------- |
 | TTL     | 300      |
-| Prompt  | true     |
 | Tag     | 1110     |
 ```
 
@@ -280,7 +269,6 @@ true
 | IRN     |          |
 | ------- | -------- |
 | TTL     | 300      |
-| Prompt  | false    |
 | Tag     | 1111     |
 ```
 
@@ -300,7 +288,6 @@ Used to inform the peer to close and delete a session. The reason field should b
 | IRN     |          |
 | ------- | -------- |
 | TTL     | 86400    |
-| Prompt  | false    |
 | Tag     | 1112     |
 ```
 
@@ -313,7 +300,6 @@ true
 | IRN     |          |
 | ------- | -------- |
 | TTL     | 86400    |
-| Prompt  | false    |
 | Tag     | 1113     |
 ```
 
@@ -332,7 +318,6 @@ Used to evaluate if peer is currently online. Timeout at 30 seconds
 | IRN     |          |
 | ------- | -------- |
 | TTL     | 30       |
-| Prompt  | false    |
 | Tag     | 1114     |
 ```
 
@@ -345,6 +330,5 @@ true
 | IRN     |          |
 | ------- | -------- |
 | TTL     | 30       |
-| Prompt  | false    |
 | Tag     | 1115     |
 ```

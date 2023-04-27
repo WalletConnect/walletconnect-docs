@@ -17,12 +17,12 @@ WalletConnect consists of two SDKs: Web3Modal and Web3Wallet.
 items={[
 {
 name: "Web3Modal",
-description: "Web3Modal is a library that makes it easy to connect users to your dApp and interact with the blockchain.",
+description: "For Dapps. Web3Modal is a library that makes it easy to connect users to your dapp and interact with the blockchain.",
 url: `/2.0/web3modal/about`
 },
 {
 name: "Web3Wallet",
-description: "Web3Wallet simplifies the process of integrating wallets into dApps by combining the Sign and Auth APIs into a single module.",
+description: "For Wallets. Web3Wallet simplifies the process of integrating wallets into dapps by combining the Sign and Auth APIs into a single module.",
 url: `/2.0/web3wallet/about`
 },
 ]}
@@ -35,12 +35,12 @@ headers={[ "SDKs", "Web3Modal", "Web3Wallet" ]}
 data={[
 {
 feature: "Target Builders",
-web3Modal: "dApps",
+web3Modal: "Dapps",
 web3Wallet: "Wallets",
 },
 {
 feature: "APIs",
-web3Modal: "Sign v1.0",
+web3Modal: "Sign v2.0, Auth, Sign v1.0",
 web3Wallet: "Sign v2.0, Auth",
 }
 ]}
@@ -48,7 +48,7 @@ web3Wallet: "Sign v2.0, Auth",
 
 ## Why use WalletConnect?
 
-WalletConnect improves wallet-to-dApp interoperability in the web3 ecosystem. For dApps, WalletConnect can seamlessly integrate support for more than 150+ crypto wallets without much hassle. Wallets can easily integrate WalletConnect with our JavaScript, Swift or Kotlin SDK's.
+WalletConnect improves wallet-to-dapp interoperability in the web3 ecosystem. For dapps, WalletConnect can seamlessly integrate support for more than 150+ crypto wallets without much hassle. Wallets can easily integrate WalletConnect with our JavaScript, Swift or Kotlin SDK's.
 
 ## Join our community
 

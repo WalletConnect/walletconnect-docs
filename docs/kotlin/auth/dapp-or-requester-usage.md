@@ -37,7 +37,7 @@ object RequesterDelegate : AuthClient.RequesterDelegate {
     }
 
     override fun onAuthResponse(authResponse: Auth.Event.AuthResponse) {
-        // Triggered when Wallet / Responder responds to authorisation request. Result can be either signed Cacao object or Error
+        // Triggered when Wallet / Responder responds to authorization request. Result can be either signed Cacao object or Error
     }
 
     override fun onConnectionStateChange(connectionStateChange: Auth.Event.ConnectionStateChange) {

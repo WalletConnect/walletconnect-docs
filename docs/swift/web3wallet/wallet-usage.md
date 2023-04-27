@@ -6,6 +6,34 @@ Confirm you have configured the Network Client first.
 
 - [Networking](../core/networking-configuration.md)
 
+### Initialize Web3Wallet client
+
+In order to initialize a client just call a `configure` method from the Web3Wallet instance wrapper
+
+```swift
+let metadata = AppMetadata(
+    name: "Example Wallet",
+    description: "Wallet description",
+    url: "example.wallet",
+    icons: ["https://avatars.githubusercontent.com/u/37784886"]
+)
+        
+Web3Wallet.configure(
+    metadata: metadata, 
+    crypto: DefaultCryptoProvider(), 
+    // Used for the Echo: "echo.walletconnect.com" will be used by default if not provided
+    echoHost: "echo.walletconnect.com",
+    // Used for the Echo: "APNSEnvironment.production" will be used by default if not provided
+    environment: .production
+)
+```
+
+In order to allow users to receive push notifications you have to communicate with Apple Push Notification service and receive unique device token. Register that token with following method:
+
+```swift
+try await Web3Wallet.instance.registerEchoClient(deviceToken: deviceToken)
+```
+
 ### Subscribe for Web3Wallet publishers
 
 When your `Web3Wallet` instance receives requests from a peer it will publish a related event. Set a subscription to handle them.
@@ -27,6 +55,10 @@ public var sessionProposalPublisher: AnyPublisher<Session.Proposal, Never>
 public var sessionRequestPublisher: AnyPublisher<Request, Never>
 public var authRequestPublisher: AnyPublisher<Request, Never>
 public var sessionPublisher: AnyPublisher<[Session], Never>
+public var socketConnectionStatusPublisher: AnyPublisher<SocketConnectionStatus, Never>
+public var sessionSettlePublisher: AnyPublisher<Session, Never>
+public var sessionDeletePublisher: AnyPublisher<(String, Reason), Never>
+public var sessionResponsePublisher: AnyPublisher<Response, Never>
 ```
 
 ### Connect Clients
@@ -49,7 +81,7 @@ Web3Wallet.instance.sessionProposalPublisher
     }.store(in: &publishers)
 ```
 
-Session proposal is a heandshake sent by a dapp and it's puropose is to define a session rules. Heandshake procedure is defined by [CAIP-25](https://github.com/ChainAgnostic/CAIPs/blob/master/CAIPs/caip-25.md).
+Session proposal is a handshake sent by a dapp and it's purpose is to define a session rules. Handshake procedure is defined by [CAIP-25](https://github.com/ChainAgnostic/CAIPs/blob/master/CAIPs/caip-25.md).
 `Session.Proposal` object conveys set of required `ProposalNamespaces` that contains required blockchains methods and events. Dapp requests with methods and wallet will emit events defined in namespaces.
 
 The user will either approve the session proposal (with session namespaces) or reject it. Session namespaces must at least contain requested methods, events and accounts associated with proposed blockchains.
@@ -107,7 +139,7 @@ Example session namespaces response:
  Web3Wallet.instance.approve(proposalId: "proposal_id", namespaces: [String: SessionNamespace])
 ```
 
-When session is sucessfully approved `sessionsPublishers` will publish a `Session`
+When session is successfully approved `sessionsPublishers` will publish a `Session`
 
 ```swift
 Web3Wallet.instance.sessionsPublishers
@@ -124,6 +156,40 @@ You can always query settled sessions from the client later with:
 
 ```swift
 Web3Wallet.instance.getSessions()
+```
+
+##### 💡 AutoNamespaces builder util
+
+`AutoNamespaces` is a helper utility that greatly reduces the complexity of parsing the required and optional namespaces. It accepts as parameters a session proposal along with your user's chains/methods/events/accounts and returns ready-to-use `SessionNamespace` object.
+
+```swift
+public static func build(
+    sessionProposal: Session.Proposal,
+    chains: [Blockchain],
+    methods: [String],
+    events: [String],
+    accounts: [Account]
+) throws -> [String: SessionNamespace]
+```
+
+Example usage
+
+```swift
+do {
+    let sessionNamespaces = try AutoNamespaces.build(
+        sessionProposal: proposal,
+        chains: [Blockchain("eip155:1")!, Blockchain("eip155:137")!],
+        methods: ["eth_sendTransaction", "personal_sign"],
+        events: ["accountsChanged", "chainChanged"],
+        accounts: [
+            Account(blockchain: Blockchain("eip155:1")!, address: "0xab16a96d359ec26a11e2c2b3d8f8b8942d5bfcdb")!,
+            Account(blockchain: Blockchain("eip155:137")!, address: "0xab16a96d359ec26a11e2c2b3d8f8b8942d5bfcdb")!
+        ]
+    )
+    try await Web3Wallet.instance.approve(proposalId: proposal.id, namespaces: sessionNamespaces)
+} catch {
+    print(error)
+}
 ```
 
 ### Handle requests from dapp
@@ -150,7 +216,7 @@ if sessionRequest.method == "personal_sign" {
 }
 ```
 
-Now, your wallet (as it owns your user’s privete keys) is responsible for signing the transaction. After doing it, you can send a response to a dapp.
+Now, your wallet (as it owns your user’s private keys) is responsible for signing the transaction. After doing it, you can send a response to a dapp.
 
 ```swift
 let response: AnyCodable = sign(request: sessionRequest) // implement your signing method
@@ -181,6 +247,31 @@ For good user experience your wallet should allow users to disconnect unwanted s
 
 ```swift
 try await Web3Wallet.instance.disconnect(topic: session.topic)
+```
+
+### Authorization Request Approval
+
+Authorization request will be published by `authRequestPublisher`. When a wallet receives a request, you want to present it to the user and request a signature. After the user signs the authentication message, the wallet should respond to a dapp.
+
+`Type` parameter represent signature validation method which will be used on dapp side. Supported signature validation methods: [EIP191](https://eips.ethereum.org/EIPS/eip-191), [EIP1271](https://eips.ethereum.org/EIPS/eip-1271). In both cases message will be signed with [EIP191](https://eips.ethereum.org/EIPS/eip-191) standard.
+
+```swift
+let signer = MessageSignerFactory.create()
+let signature = try signer.sign(message: request.message, privateKey: privateKey, type: .eip191)
+try await Web3WalletClient.respond(requestId: request.id, signature: signature, from: account)
+```
+
+In case user rejects an authentication request, call:
+
+```swift
+try await Web3WalletClient.reject(requestId: request.id)
+```
+
+### Get pending requests
+
+if you've missed some requests you can query them with:
+```swift 
+Web3WalletClient.getPendingRequests()
 ```
 
 ### Sample App

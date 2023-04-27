@@ -20,7 +20,7 @@ CoreClient.initialize(relayServerUrl = serverUrl, connectionType = connectionTyp
 val initParams = Wallet.Params.Init(core = CoreClient)
 
 Web3Wallet.initialize(initParams) { error ->
-    // Error will be thrown if there's an issue during initalization
+    // Error will be thrown if there's an issue during initialization
 }
 ```
 
@@ -40,7 +40,7 @@ val walletDelegate = object : Web3Wallet.WalletDelegate {
     }
 
     override fun onAuthRequest(authRequest: Wallet.Model.AuthRequest) {
-        // Triggered when Dapp / Requester makes an authorisation request
+        // Triggered when Dapp / Requester makes an authorization request
     }
 
     override fun onSessionDelete(sessionDelete: Wallet.Model.SessionDelete) {
@@ -88,6 +88,50 @@ Web3Wallet.approveSession(approveParams) { error -> /*callback for error while a
 ```
 
 To send an approval, pass a Proposer's Public Key along with the map of namespaces to the `Web3Wallet.approveSession` function.
+
+#
+
+### **Namespace utils**
+
+With Web3Wallet SDK 1.7.0 we've published a helper utility that greatly reduces the complexity of parsing the required and optional namespaces. It accepts as parameters a session proposal along with your wallet's chains, methods, events, and accounts (supported namespaces) and returns ready-to-use namespaces object that has to be passed into `Wallet.Params.SessionApprove` when approving a session.
+
+```kotlin
+val supportedNamespaces: Wallet.Model.Namespaces.Session = /* a map of all supported namespaces created by a wallet */
+val sessionProposal: Wallet.Model.SessionProposal =  /* an object received by `fun onSessionProposal(sessionProposal: Wallet.Model.SessionProposal)` in `Web3Wallet.WalletDelegate` */
+val sessionNamespaces = Web3Wallet.generateApprovedNamespaces(sessionProposal, supportedNamespaces)
+
+val approveParams: Wallet.Params.SessionApprove = Wallet.Params.SessionApprove(proposerPublicKey, sessionNamespaces)
+Web3Wallet.approveSession(approveParams) { error -> /*callback for error while approving a session*/ }
+```
+
+Examples of supported namespaces:
+
+```kotlin
+ val supportedNamespaces = mapOf(
+    "eip155" to Wallet.Model.Namespace.Session(
+        chains = listOf("eip155:1", "eip155:137", "eip155:3"),
+        methods = listOf("personal_sign", "eth_sendTransaction", "eth_signTransaction"),
+        events = listOf("chainChanged"),
+        accounts = listOf("eip155:1:0x57f48fAFeC1d76B27e3f29b8d277b6218CDE6092", "eip155:137:0x57f48fAFeC1d76B27e3f29b8d277b6218CDE6092", "eip155:3:0x57f48fAFeC1d76B27e3f29b8d277b6218CDE6092")
+    )
+)
+
+ val anotherSupportedNamespaces = mapOf(
+    "eip155" to Wallet.Model.Namespace.Session(
+        chains = listOf("eip155:1", "eip155:2", "eip155:4"),
+        methods = listOf("personal_sign", "eth_sendTransaction", "eth_signTransaction"),
+        events = listOf("chainChanged", "accountChanged"),
+        accounts = listOf("eip155:1:0x57f48fAFeC1d76B27e3f29b8d277b6218CDE6092", "eip155:2:0x57f48fAFeC1d76B27e3f29b8d277b6218CDE6092", "eip155:4:0x57f48fAFeC1d76B27e3f29b8d277b6218CDE6092")
+    ),
+    "cosmos" to Wallet.Model.Namespace.Session(
+        chains = listOf("cosmos:cosmoshub-4"),
+        methods = listOf("cosmos_method"),
+        events = listOf("cosmos_event"),
+        accounts = listOf("cosmos:cosmoshub-4:cosmos1hsk6jryyqjfhp5dhc55tc9jtckygx0eph6dd02")
+    )
+)
+    
+```
 
 #
 
@@ -181,7 +225,7 @@ to `Web3Wallet.updateSession`.
 val sessionTopic: String = /*Topic of Session*/
 val extendParams = Wallet.Params.SessionExtend(sessionTopic = sessionTopic)
 
-Web3Wallet.extendSession(exdendParams) { error -> /*callback for error while extending a session*/ }
+Web3Wallet.extendSession(extendParams) { error -> /*callback for error while extending a session*/ }
 ```
 
 To extend a session, create a `Wallet.Params.SessionExtend` object with the session's topic to update the session with to `Web3Wallet.extendSession`. Session is
@@ -189,10 +233,10 @@ extended by 7 days.
 
 
 #
-### **Authotisation Request Approval**
+### **Authorization Request Approval**
 
-To approve authorisation request, sign message using `CacaoSigner.sign` which requires private key to sign `Cacao` object that needs to be passed to `Wallet.Params.AuthRequestResponse` object and send to Dapp.
-`issuer` parameter describes what did responder authorises. Example `iss` for Ethereum Mainnet: `did:pkh:eip155:1:0xb9c5714089478a327f09197987f16f9e5d936e8a`. More about `did:pkh` method [here](https://github.com/w3c-ccg/did-pkh/blob/main/did-pkh-method-draft.md).
+To approve authorization request, sign message using `CacaoSigner.sign` which requires private key to sign `Cacao` object that needs to be passed to `Wallet.Params.AuthRequestResponse` object and send to Dapp.
+`issuer` parameter describes what did responder authorizes. Example `iss` for Ethereum Mainnet: `did:pkh:eip155:1:0xb9c5714089478a327f09197987f16f9e5d936e8a`. More about `did:pkh` method [here](https://github.com/w3c-ccg/did-pkh/blob/main/did-pkh-method-draft.md).
 
 ```kotlin
 val request: Wallet.Event.AuthRequest = // Request from onAuthRequest
@@ -222,5 +266,27 @@ val formatMessage = Wallet.Params.FormatMessage(event.payloadParams, issuer)
 Web3Wallet.formatMessage(formatMessage)
 ```
 
+#
+### **Register Device Token**
+
+This method enables wallets to receive push notifications from WalletConnect's Echo Server via [Firebase Cloud Messaging](https://firebase.google.com/docs/cloud-messaging). This means you will have to setup your project with Firebase before being able to call registerDeviceToken method.
+
+Make sure that a service extending the FirebaseMessagingService is added to your manifest as per the [Firebase FCM documentation](https://firebase.google.com/docs/cloud-messaging/android/client#manifest) as well as any other setup Firebase requires [Firebase setup documentation](https://firebase.google.com/docs/android/setup).
+
+To register a wallet to receive WalletConnect push notifications, call `Web3Wallet.registerDeviceToken` and pass the Firebase Access Token.
+
+```kotlin
+val firebaseAccessToken: String = //FCM access token received through the Firebase Messaging SDK
+
+Web3Wallet.registerDeviceToken(
+    firebaseAccessToken,
+    onSuccess = {
+        // callback triggered once registered successfully with the Echo Server
+    },
+    onError = { error: Wallet.Model.Error ->
+        // callback triggered if there's an exception thrown during the registration process
+    })
+```
+
 ### **Sample App**
-To check more in details go and visit our Web3Wallet implementation app [here](https://github.com/WalletConnect/WalletConnectKotlinV2/tree/develop/samples/web3wallet).
+To check more in details go and visit our Web3Wallet implementation app [here](https://github.com/WalletConnect/WalletConnectKotlinV2/tree/develop/sample/wallet).

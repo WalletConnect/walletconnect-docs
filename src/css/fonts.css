@@ -1,0 +1,27 @@
+@font-face {
+  font-family: 'ABC Diatype';
+  src: url(./fonts/ABCDiatype-Regular.woff2) format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'ABC Diatype Bold';
+  src: url(./fonts/ABCDiatype-Bold.woff2) format('woff2');
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'ABC Diatype Thin';
+  src: url(./fonts/ABCDiatype-Thin.woff2) format('woff2');
+  font-weight: lighter;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Office Code Pro';
+  src: url(./fonts/OfficeCodePro-Regular.woff2) format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}

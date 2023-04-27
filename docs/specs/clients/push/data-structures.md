@@ -11,6 +11,8 @@
     "data": string
   },  
   "metadata": Metadata,
+  "scope": [string: bool],
+  "expiry": Int64,
 }
 ```
 
@@ -22,6 +24,17 @@
   "body": string,
   "icon": string,
   "url": string,
+}
+```
+
+## Push Message Record
+
+```jsonc
+{
+  "id": string,
+  "topic": string,
+  "publishedAt": Int64,
+  "message": PushMessage
 }
 ```
  

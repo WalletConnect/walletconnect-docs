@@ -116,6 +116,14 @@
     {
       "source": "/2.0/specs/core/:path*",
       "destination": "/2.0/specs/clients/core/:path*"
+    },
+    {
+      "source": "/2.0/web3modal/standlone:path*",
+      "destination": "/2.0/web3modal/advanced/standalone/sign:path*"
+    },
+    {
+      "source": "/2.0/web3modal/standalone/about",
+      "destination": "/2.0/web3modal/advanced/standalone/sign/about"
     }
   ]
 }

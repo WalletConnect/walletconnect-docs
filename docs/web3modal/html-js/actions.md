@@ -1,80 +1,54 @@
 # Actions
 
-## Modal Actions
+For majority of your tasks like getting account details, managing chains, interacting with contracts etc. you will be using actions provided by [wagmi core](https://wagmi.sh), so make sure to read over their documentation as well. Below are some Web3Modal specific actions that you might find useful.
 
-### web3modal.openModal
+## web3modal.openModal
 
 Programmatically open the modal.
 
 ```js
-// Open modal (if route is not provided, modal opens view based on connection / config status)
-export interface Options {
+interface Options {
   route?: "Account" | "ConnectWallet" | "Help" | "SelectNetwork";
 }
-
 await web3modal.openModal(options?: Options);
 ```
 
-### web3modal.closeModal
+## web3modal.closeModal
 
 Programmatically close the modal.
 
 ```js
-web3modal.closeModal();
+web3modal.closeModal()
 ```
 
-### web3modal.subscribeModal
+## web3modal.subscribeModal
 
 Subscribe or unsubscribe from modal's state.
 
 ```js
-const unsubscribe = web3modal.subscribeModal((newState) =>
-  console.log(newState)
-);
-unsubscribe();
+const unsubscribe = web3modal.subscribeModal(newState => console.log(newState))
+unsubscribe()
 ```
 
-### web3modal.setSelectedChain
+## web3modal.setDefaultChain
 
-Programmatically set selected chain. (Only sets in scope of Web3Modal, not wagmi)
+Sets the default chain **before** the user connects. After the user connects, use the wagmi network get/switch action. The default chain is `mainnet` or first chain in wagmi config if `mainnet` is not available.
 
 ```js
-web3modal.setSelectedChain();
+web3modal.setDefaultChain(polygon)
 ```
 
-### web3modal.getSelectedChain
-
-Programmatically get selected chain. (Only gets in scope of Web3Modal, not wagmi)
-
-```js
-web3modal.getSelectedChain();
-```
-
-### web3modal.subscribeSelectedChain
-
-Subscribe or unsubscribe from selected chain changes. (Only subscribes in scope of Web3Modal, not wagmi)
-
-```js
-const unsubscribe = web3modal.subscribeSelectedChain((newState) =>
-  console.log(newState)
-);
-unsubscribe();
-```
-
-### web3modal.setTheme
+## web3modal.setTheme
 
 Programmatically set or update modal's theme.
 
 ```js
 web3modal.setTheme({
-  themeMode: "dark",
-  themeColor: "blue",
-  themeBackground: "gradient",
-});
+  themeMode: 'dark',
+  themeVariables: {
+    '--w3m-font-family': 'Roboto, sans-serif',
+    '--w3m-accent-color': '#F5841F'
+    // ...
+  }
+})
 ```
-
-## Wagmi Actions
-
-[Wagmi](https://wagmi.sh/core/getting-started) is a collection of actions containing everything you need to start working with Ethereum. wagmi makes it easy to display ENS and balance information, sign messages, interact with contracts, and much more.
-
-See [Wagmi Documentation](https://wagmi.sh/core/getting-started) for more information.

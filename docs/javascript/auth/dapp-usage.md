@@ -11,17 +11,17 @@ For an example implementation, please refer to our [`react-dapp-auth` example](h
 **1. Initialize your WalletConnect AuthClient, using [your Project ID](../../cloud/relay.md).**
 
 ```javascript
-import AuthClient from "@walletconnect/auth-client";
+import AuthClient from '@walletconnect/auth-client'
 
 const authClient = await AuthClient.init({
-  projectId: "<YOUR_PROJECT_ID>",
+  projectId: '<YOUR_PROJECT_ID>',
   metadata: {
-    name: "my-auth-dapp",
-    description: "A dapp using WalletConnect AuthClient",
-    url: "my-auth-dapp.com",
-    icons: ["https://my-auth-dapp.com/icons/logo.png"],
-  },
-});
+    name: 'my-auth-dapp',
+    description: 'A dapp using WalletConnect AuthClient',
+    url: 'my-auth-dapp.com',
+    icons: ['https://my-auth-dapp.com/icons/logo.png']
+  }
+})
 ```
 
 **2. Subscribe to `auth_response`.**
@@ -31,26 +31,27 @@ To listen to pairing-related events, please follow the guidance for [Pairing API
 :::
 
 ```javascript
-authClient.on("auth_response", ({ params }) => {
+authClient.on('auth_response', ({ params }) => {
   if (Boolean(params.result?.s)) {
     // Response contained a valid signature -> user is authenticated.
   } else {
     // Handle error or invalid signature case
-    console.error(params.message);
+    console.error(params.message)
   }
-});
+})
 ```
 
-You can derive the users' wallet address by desctrutcing and splitting `params.result.p.iss`.
+You can derive the users' wallet address by destructing and splitting `params.result.p.iss`.
 
 ```javascript
-const { iss } = params.result.p.iss;
-const walletAddress = iss.split(":")[4];
-console.log(walletAddress);
+const { iss } = params.result.p.iss
+const walletAddress = iss.split(':')[4]
+console.log(walletAddress)
 // "0x977aeFEC1879160eC9560cd16f08e12B6DF52ed1"
 ```
 
 For the full log of the `params` object:
+
 ```
 {
     id: 1674070525664600,
@@ -81,16 +82,17 @@ For the full log of the `params` object:
 Update your import to include `generateNonce`.
 
 ```javascript
-import AuthClient, { generateNonce } from "@walletconnect/auth-client";
+import AuthClient, { generateNonce } from '@walletconnect/auth-client'
 
 // ...
 
 const { uri } = await authClient.request({
-  aud: "<FULL_URL_OF_LOGIN_PAGE>",
-  domain: "<YOUR_DOMAIN>",
-  chainId: "eip155:1",
-  nonce: generateNonce(),
-});
+  aud: '<FULL_URL_OF_LOGIN_PAGE>',
+  domain: '<YOUR_DOMAIN>',
+  chainId: 'eip155:1',
+  type: 'eip4361',
+  nonce: generateNonce()
+})
 ```
 
 The `uri` can then be displayed as a QRCode or as a deep link.

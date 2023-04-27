@@ -52,9 +52,15 @@ In this repository, we document and discuss features that are currently under de
       url: `/2.0/specs/servers/cast`
     },
     {
+      name: "History Server",
+      description: "History server persists Relay messages indefinitely on the behalf of a client through a webhook.",
+      url: `/2.0/specs/servers/history`
+    },
+    {
       name: "Verify Server",
       description: "Verify server is used to authenticate the origin of an attestation id which is related to a JSON-RPC payload sent.",
       url: `/2.0/specs/servers/verify`
     }
   ]}
 />
+

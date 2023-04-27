@@ -59,7 +59,6 @@ When DApp is setting `expiry` params, client should insure that Relay Publish pa
 | IRN     |          |
 | ------- | -------- |
 | TTL     | 86400    |
-| Prompt  | true     |
 | Tag     | 3000     |
 
 ```
@@ -77,7 +76,6 @@ When DApp is setting `expiry` params, client should insure that Relay Publish pa
 | IRN     |          |
 | ------- | -------- |
 | TTL     | 86400    |
-| Prompt  | false    |
 | Tag     | 3001     |
 ```
 
