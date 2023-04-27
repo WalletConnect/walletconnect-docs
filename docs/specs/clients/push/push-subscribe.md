@@ -24,7 +24,7 @@ Subscribe protocol will be established as follows:
 2. Wallet derives subscribe topic, which is the sha256 hash of public key X
 3. Wallet generates key pair Y
 4. Wallet derives symmetric key with keys X and Y
-5. Push topic is derived from sha256 hash of symmetric key
+5. Subscription topic is derived from sha256 hash of symmetric key
 6. Wallet subscribes to subscription topic
 7. Wallet sends push subscribe request (type 1 envelope) on subscribe topic with subscriptionAuth
 8. Cast Server receives push subscribe request on subscribe topic
