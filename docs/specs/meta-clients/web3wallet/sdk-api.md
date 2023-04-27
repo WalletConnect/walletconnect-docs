@@ -74,7 +74,7 @@ class Web3Wallet {
   // ---------- Events ----------------------------------------------- //
 
   // subscribe to session proposal (SIGN)
-  public abstract on("session_proposal", (sessionProposal: SessionProposal, context: SessionContext) => {}): void;
+  public abstract on("session_proposal", (sessionProposal: SessionProposal, verifyContext: VerifyContext) => {}): void;
 
   // subscribe to session request (SIGN)
   public abstract on("session_request", (sessionRequest: SessionRequest, context: SessionContext) => {}): void;
