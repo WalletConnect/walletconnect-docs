@@ -31,4 +31,4 @@ Subscribe protocol will be established as follows:
 9. Cast Server derives symmetric key and decrypts subscriptionAuth
 10. Cast Server triggers webhook to notify Dapp of new registered address
 11. Cast Server responds to push subscribe request
-12. Wallet receives push subscribe response on the push topic
+12. Wallet receives push subscribe response on the subscription topic
