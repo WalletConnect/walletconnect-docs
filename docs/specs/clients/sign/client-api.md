@@ -78,7 +78,7 @@ abstract class Client {
   public abstract on("session_proposal", (sessionProposal: SessionProposal, context: SessionContext) => {}): void;
 
   // subscribe to session request
-  public abstract on("session_request", (sessionRequest: SessionRequest, context: SessionContext) => {}): void;
+  public abstract on("session_proposal", (sessionProposal: SessionProposal, verifyContext: VerifyContext) => {}): void;
 
   // subscribe to session event
   public abstract on("session_event", (sessionEvent: SessionEvent) => {}): void;
