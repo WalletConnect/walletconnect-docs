@@ -11,6 +11,8 @@
     "data": string
   },  
   "metadata": Metadata,
+  "scope": [string: bool],
+  "expiry": Int64,
 }
 ```
 

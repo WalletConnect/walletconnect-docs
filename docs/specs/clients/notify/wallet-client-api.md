@@ -11,13 +11,17 @@ abstract class WalletClient {
   public abstract approve(params: {
         id: number 
         onSign: (message: string) => Cacao.Signature
-    ): Promise<boolean>;
+   }): Promise<boolean>;
 
   // reject notify subscription 
   public abstract reject(params: { id: number, reason: Reason }): Promise<boolean>;
   
   // send notify subscription
-  public abstract subscribe(params: { dappUrl: string }): Promise<boolean>;
+  public abstract subscribe(params: { 
+        metadata: Metadata,
+        account: string,
+        onSign: (message: string) => Cacao.Signature
+  }): Promise<boolean>;
 
   // query all active subscriptions
   public abstract getActiveSubscriptions(): Promise<Record<string, NotifySubscription>>;
@@ -37,7 +41,7 @@ abstract class WalletClient {
   // ---------- Events ----------------------------------------------- //
 
   // for wallet to listen for notify subscription created
-  public abstract on("notify_subscription", (notifySubscription: NotifySubscription) => {}): void;
+  public abstract on("push_subscription", (result: PushSubscription | Error) => {}): void;
 
   // for wallet to listen on notify request
   public abstract on("notify_request", (id: number, account: string, metadata: Metadata) => {}): void;
