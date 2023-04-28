@@ -17,7 +17,7 @@ abstract class WalletClient {
   public abstract reject(params: { id: number, reason: Reason }): Promise<boolean>;
   
   // update push subscription
-  public abstract update(params: { topic: String, scope: [string] }): Promise<boolean>;
+  public abstract update(params: { topic: string, scope: string[] }): Promise<boolean>;
   
   // send wc_PushSubscription request
   public abstract subscribe(params: { 
