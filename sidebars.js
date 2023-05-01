@@ -241,13 +241,13 @@ module.exports = {
     },
     {
       type: 'category',
-      label: 'Products',
+      label: 'SDKs',
       className: 'menu_outer_list',
       collapsible: false,
       items: [
         {
           type: 'category',
-          label: 'Web3Modal SDK',
+          label: 'Web3Modal',
           collapsible: true,
           collapsed: true,
           items: [
@@ -328,7 +328,7 @@ module.exports = {
         },
         {
           type: 'category',
-          label: 'Web3Wallet SDK',
+          label: 'Web3Wallet',
           collapsible: true,
           collapsed: true,
           items: [
@@ -432,13 +432,13 @@ module.exports = {
     },
     {
       type: 'category',
-      label: 'Products',
+      label: 'SDKs',
       className: 'menu_outer_list',
       collapsible: false,
       items: [
         {
           type: 'category',
-          label: 'Web3Wallet SDK',
+          label: 'Web3Wallet',
           collapsible: true,
           collapsed: true,
           items: [
@@ -449,7 +449,7 @@ module.exports = {
         },
         {
           type: 'category',
-          label: 'Web3Inbox SDK',
+          label: 'Web3Inbox',
           collapsible: true,
           collapsed: true,
           items: ['kotlin/web3inbox/installation', 'kotlin/web3inbox/usage']
@@ -542,13 +542,13 @@ module.exports = {
     },
     {
       type: 'category',
-      label: 'Products',
+      label: 'SDKs',
       className: 'menu_outer_list',
       collapsible: false,
       items: [
         {
           type: 'category',
-          label: 'Web3Wallet SDK',
+          label: 'Web3Wallet',
           collapsible: true,
           collapsed: true,
           items: [
@@ -556,6 +556,13 @@ module.exports = {
             'swift/web3wallet/wallet-usage',
             'swift/web3wallet/upgrade-guide'
           ]
+        },
+        {
+          type: 'category',
+          label: 'Web3Inbox',
+          collapsed: true,
+          collapsible: true,
+          items: ['swift/web3inbox/installation', 'swift/web3inbox/wallet-usage']
         }
       ]
     },
@@ -643,6 +650,52 @@ module.exports = {
       items: ['swift/guides/examples-and-resources', 'swift/guides/mobile-linking']
     }
   ],
+  reactnative: [
+    {
+      type: 'html',
+      value:
+        '<a class="navbar__brand" href="/"><div class="navbar__logo"><img src="/img/walletconnect-logo-white.svg#dark-mode-only"  alt="WalletConnect Logo"><img src="/img/walletconnect-logo-black.svg#light-mode-only"  alt="WalletConnect Logo"></div>WalletConnect<span>Docs<span></a>',
+      defaultStyle: true
+    },
+    {
+      type: 'category',
+      label: 'Introduction',
+      className: 'menu_outer_list',
+      collapsible: false,
+      items: [
+        'reactnative/overview',
+      ]
+    },
+    {
+      type: 'category',
+      label: 'SDKs',
+      className: 'menu_outer_list',
+      collapsible: false,
+      items: [
+        {
+          type: 'category',
+          label: 'Web3Wallet',
+          collapsible: true,
+          collapsed: true,
+          items: ['reactnative/web3wallet/Installation', 'reactnative/web3wallet/wallet-usage']
+        },
+        {
+          type: 'category',
+          label: 'Web3Modal',
+          collapsible: true,
+          collapsed: true,
+          items: ['reactnative/web3modal/installation', 'reactnative/web3modal/dapp-usage']
+        }
+      ]
+    },
+    {
+      type: 'category',
+      label: 'Guides',
+      className: 'menu_outer_list',
+      collapsible: false,
+      items: ['reactnative/guides/tutorials']
+    }
+  ],
   flutter: [
     {
       type: 'html',
@@ -652,17 +705,16 @@ module.exports = {
     },
     {
       type: 'category',
-      label: 'Products',
+      label: 'SDKs',
       className: 'menu_outer_list',
       collapsible: false,
       items: [
-        'flutter/installation',
         {
           type: 'category',
-          label: 'Web3Wallet SDK',
+          label: 'Web3Wallet',
           collapsible: true,
           collapsed: true,
-          items: ['flutter/wallets/wallet-usage']
+          items: ['flutter/installation', 'flutter/wallets/wallet-usage']
         }
       ]
     },
@@ -689,44 +741,6 @@ module.exports = {
       ]
     }
   ],
-  reactnative: [
-    {
-      type: 'html',
-      value:
-        '<a class="navbar__brand" href="/"><div class="navbar__logo"><img src="/img/walletconnect-logo-white.svg#dark-mode-only"  alt="WalletConnect Logo"><img src="/img/walletconnect-logo-black.svg#light-mode-only"  alt="WalletConnect Logo"></div>WalletConnect<span>Docs<span></a>',
-      defaultStyle: true
-    },
-    {
-      type: 'category',
-      label: 'Products',
-      className: 'menu_outer_list',
-      collapsible: false,
-      items: [
-        'reactnative/Introduction',
-        {
-          type: 'category',
-          label: 'Web3Wallet SDK',
-          collapsible: true,
-          collapsed: true,
-          items: ['reactnative/web3wallet/Installation', 'reactnative/web3wallet/wallet-usage']
-        },
-        {
-          type: 'category',
-          label: 'Web3Modal SDK',
-          collapsible: true,
-          collapsed: true,
-          items: ['reactnative/web3modal/installation', 'reactnative/web3modal/dapp-usage']
-        }
-      ]
-    },
-    {
-      type: 'category',
-      label: 'Guides',
-      className: 'menu_outer_list',
-      collapsible: false,
-      items: ['reactnative/guides/tutorials']
-    }
-  ],
   unity: [
     {
       type: 'html',
@@ -736,13 +750,13 @@ module.exports = {
     },
     {
       type: 'category',
-      label: 'Products',
+      label: 'SDKs',
       className: 'menu_outer_list',
       collapsible: false,
       items: [
         {
           type: 'category',
-          label: 'Web3Wallet SDK',
+          label: 'Web3Wallet',
           collapsible: true,
           collapsed: true,
           items: ['csharp/sign/installation', 'csharp/sign/dapp-usage', 'csharp/sign/wallet-usage']
