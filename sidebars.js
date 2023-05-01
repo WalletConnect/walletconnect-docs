@@ -442,9 +442,9 @@ module.exports = {
           collapsible: true,
           collapsed: true,
           items: [
-            'kotlin/web3wallet/installation',
-            'kotlin/web3wallet/wallet-usage',
-            'kotlin/web3wallet/upgrade-guide'
+            'android/web3wallet/installation',
+            'android/web3wallet/wallet-usage',
+            'android/web3wallet/upgrade-guide'
           ]
         },
         {
@@ -452,7 +452,7 @@ module.exports = {
           label: 'Web3Inbox',
           collapsible: true,
           collapsed: true,
-          items: ['kotlin/web3inbox/installation', 'kotlin/web3inbox/usage']
+          items: ['android/web3inbox/installation', 'android/web3inbox/usage']
         }
       ]
     },
@@ -467,7 +467,7 @@ module.exports = {
           label: 'Sign',
           collapsible: true,
           collapsed: true,
-          items: ['kotlin/sign/installation', 'kotlin/sign/dapp-usage', 'kotlin/sign/wallet-usage']
+          items: ['android/sign/installation', 'android/sign/dapp-usage', 'android/sign/wallet-usage']
         },
         {
           type: 'category',
@@ -475,9 +475,9 @@ module.exports = {
           collapsible: true,
           collapsed: true,
           items: [
-            'kotlin/auth/installation',
-            'kotlin/auth/dapp-or-requester-usage',
-            'kotlin/auth/wallet-or-responder-usage'
+            'android/auth/installation',
+            'android/auth/dapp-or-requester-usage',
+            'android/auth/wallet-or-responder-usage'
           ]
         },
         {
@@ -491,14 +491,14 @@ module.exports = {
               label: 'Dapp Usage',
               collapsible: true,
               collapsed: true,
-              items: [['kotlin/push/dapp-usage/getting-started']]
+              items: [['android/push/dapp-usage/getting-started']]
             },
             {
               type: 'category',
               label: 'Wallet Usage',
               collapsible: true,
               collapsed: true,
-              items: [['kotlin/push/wallet-usage/getting-started']]
+              items: ['android/push/wallet-usage/getting-started']
             }
           ]
         },
@@ -507,21 +507,21 @@ module.exports = {
           label: 'Echo',
           collapsible: true,
           collapsed: true,
-          items: ['kotlin/echo/usage']
+          items: ['android/echo/usage']
         },
         {
           type: 'category',
           label: 'Chat',
           collapsible: true,
           collapsed: true,
-          items: ['kotlin/chat/installation', 'kotlin/chat/usage']
+          items: ['android/chat/installation', 'android/chat/usage']
         },
         {
           type: 'category',
           label: 'Core',
           collapsible: true,
           collapsed: true,
-          items: ['kotlin/core/installation', 'kotlin/core/pairing', 'kotlin/core/relay']
+          items: ['android/core/installation', 'android/core/pairing', 'android/core/relay']
         }
       ]
     },
@@ -530,7 +530,7 @@ module.exports = {
       label: 'Guides',
       className: 'menu_outer_list',
       collapsible: false,
-      items: ['kotlin/guides/examples-and-resources', 'kotlin/guides/mobile-linking']
+      items: ['android/guides/examples-and-resources', 'android/guides/mobile-linking']
     }
   ],
   ios: [

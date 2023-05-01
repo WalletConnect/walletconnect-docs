@@ -134,6 +134,10 @@
       "destination": "/2.0/web/:path*"
     },
     {
+      "source": "/2.0/kotlin/:path*",
+      "destination": "/2.0/android/:path*"
+    },
+    {
       "source": "/2.0/csharp/:path*",
       "destination": "/2.0/unity/:path*"
     }
