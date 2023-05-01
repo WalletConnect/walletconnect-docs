@@ -9,6 +9,6 @@ WalletConnect Sign is a remote signer protocol to communicate securely between w
 You can find getting started guides for the following client platforms:
 
 - [Web - Javascript](../web/sign/installation.md)
-- [iOS - Swift](../swift/sign/installation.md)
+- [iOS - Swift](../ios/sign/installation.md)
 - [Android - Kotlin](../android/sign/installation.md)
 - [Universal - Dart](../flutter/installation.md)

@@ -138,6 +138,10 @@
       "destination": "/2.0/android/:path*"
     },
     {
+      "source": "/2.0/swift/:path*",
+      "destination": "/2.0/ios/:path*"
+    },
+    {
       "source": "/2.0/csharp/:path*",
       "destination": "/2.0/unity/:path*"
     }

@@ -114,7 +114,7 @@ Below we will list the SDK you must integrate for v2.0 protocol for each platfor
 
 #### iOS Wallets
 
-If you were using our [WalletConnectSwift SDK](https://github.com/WalletConnect/WalletConnectSwift) (or any other community SDK), you must integrate the Web3Wallet SDK for Swift, for which you can find docs [here](https://docs.walletconnect.com/2.0/swift/web3wallet/installation)
+If you were using our [WalletConnectSwift SDK](https://github.com/WalletConnect/WalletConnectSwift) (or any other community SDK), you must integrate the Web3Wallet SDK for Swift, for which you can find docs [here](https://docs.walletconnect.com/2.0/ios/web3wallet/installation)
 
 #### Android Wallets
 

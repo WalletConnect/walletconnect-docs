@@ -19,7 +19,7 @@ Domain binding to prevent phishing (coming in beta!): WalletConnect Auth seeks t
 There are getting started guides for the following clients platforms:
 
 - [Web - Javascript](../web/auth/installation.md)
-- [iOS - Swift](../swift/auth/installation.md)
+- [iOS - Swift](../ios/auth/installation.md)
 - [Android - Kotlin](../android/auth/installation.md)
 - [Universal - Dart](../flutter/installation.md)
 ## Useful Links

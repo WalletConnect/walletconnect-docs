@@ -552,9 +552,9 @@ module.exports = {
           collapsible: true,
           collapsed: true,
           items: [
-            'swift/web3wallet/installation',
-            'swift/web3wallet/wallet-usage',
-            'swift/web3wallet/upgrade-guide'
+            'ios/web3wallet/installation',
+            'ios/web3wallet/wallet-usage',
+            'ios/web3wallet/upgrade-guide'
           ]
         },
         {
@@ -562,7 +562,7 @@ module.exports = {
           label: 'Web3Inbox',
           collapsed: true,
           collapsible: true,
-          items: ['swift/web3inbox/installation', 'swift/web3inbox/wallet-usage']
+          items: ['ios/web3inbox/installation', 'ios/web3inbox/wallet-usage']
         }
       ]
     },
@@ -577,14 +577,14 @@ module.exports = {
           label: 'Sign',
           collapsible: true,
           collapsed: true,
-          items: ['swift/sign/installation', 'swift/sign/dapp-usage', 'swift/sign/wallet-usage']
+          items: ['ios/sign/installation', 'ios/sign/dapp-usage', 'ios/sign/wallet-usage']
         },
         {
           type: 'category',
           label: 'Auth',
           collapsible: true,
           collapsed: true,
-          items: ['swift/auth/installation', 'swift/auth/dapp-usage', 'swift/auth/wallet-usage']
+          items: ['ios/auth/installation', 'ios/auth/dapp-usage', 'ios/auth/wallet-usage']
         },
         {
           type: 'category',
@@ -597,14 +597,14 @@ module.exports = {
               label: 'Dapp Usage',
               collapsible: true,
               collapsed: true,
-              items: [['swift/push/dapp-usage/getting-started']]
+              items: [['ios/push/dapp-usage/getting-started']]
             },
             {
               type: 'category',
               label: 'Wallet Usage',
               collapsible: true,
               collapsed: true,
-              items: [['swift/push/wallet-usage/getting-started']]
+              items: [['ios/push/wallet-usage/getting-started']]
             }
           ]
         },
@@ -613,14 +613,14 @@ module.exports = {
           label: 'Echo',
           collapsible: true,
           collapsed: true,
-          items: ['swift/echo/installation', 'swift/echo/usage']
+          items: ['ios/echo/installation', 'ios/echo/usage']
         },
         {
           type: 'category',
           label: 'Chat',
           collapsible: true,
           collapsed: true,
-          items: ['swift/chat/installation', 'swift/chat/usage']
+          items: ['ios/chat/installation', 'ios/chat/usage']
         },
         {
           type: 'category',
@@ -628,9 +628,9 @@ module.exports = {
           collapsible: true,
           collapsed: true,
           items: [
-            'swift/core/installation',
-            'swift/core/pairing-usage',
-            'swift/core/networking-configuration'
+            'ios/core/installation',
+            'ios/core/pairing-usage',
+            'ios/core/networking-configuration'
           ]
         },
         {
@@ -638,7 +638,7 @@ module.exports = {
           label: 'Router',
           collapsible: true,
           collapsed: true,
-          items: ['swift/router/installation']
+          items: ['ios/router/installation']
         }
       ]
     },
@@ -647,7 +647,7 @@ module.exports = {
       label: 'Guides',
       className: 'menu_outer_list',
       collapsible: false,
-      items: ['swift/guides/examples-and-resources', 'swift/guides/mobile-linking']
+      items: ['ios/guides/examples-and-resources', 'ios/guides/mobile-linking']
     }
   ],
   reactnative: [

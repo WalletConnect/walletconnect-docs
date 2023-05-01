@@ -28,7 +28,7 @@ url: `/2.0/web/web3wallet/installation`
 {
 name: "Swift",
 description: "",
-url: `/2.0/swift/web3wallet/installation`
+url: `/2.0/ios/web3wallet/installation`
 }
 ]}
 />
