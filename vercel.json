@@ -130,6 +130,10 @@
       "destination": "/2.0/reactnative/overview"
     },
     {
+      "source": "/2.0/javascript/:path*",
+      "destination": "/2.0/web/:path*"
+    },
+    {
       "source": "/2.0/csharp/:path*",
       "destination": "/2.0/unity/:path*"
     }

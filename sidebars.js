@@ -332,9 +332,9 @@ module.exports = {
           collapsible: true,
           collapsed: true,
           items: [
-            'javascript/web3wallet/installation',
-            'javascript/web3wallet/wallet-usage',
-            'javascript/web3wallet/upgrade-guide'
+            'web/web3wallet/installation',
+            'web/web3wallet/wallet-usage',
+            'web/web3wallet/upgrade-guide'
           ]
         }
       ]
@@ -357,10 +357,10 @@ module.exports = {
               collapsible: true,
               collapsed: true,
               items: [
-                'javascript/sign/installation',
-                'javascript/sign/dapp-usage',
-                'javascript/sign/wallet-usage',
-                'javascript/sign/smart-wallets'
+                'web/sign/installation',
+                'web/sign/dapp-usage',
+                'web/sign/wallet-usage',
+                'web/sign/smart-wallets'
               ]
             },
             {
@@ -369,9 +369,9 @@ module.exports = {
               collapsible: true,
               collapsed: true,
               items: [
-                'javascript/auth/installation',
-                'javascript/auth/dapp-usage',
-                'javascript/auth/wallet-usage'
+                'web/auth/installation',
+                'web/auth/dapp-usage',
+                'web/auth/wallet-usage'
               ]
             },
             {
@@ -380,9 +380,9 @@ module.exports = {
               collapsible: true,
               collapsed: true,
               items: [
-                'javascript/push/installation',
-                'javascript/push/dapp-usage',
-                'javascript/push/wallet-usage'
+                'web/push/installation',
+                'web/push/dapp-usage',
+                'web/push/wallet-usage'
               ]
             },
             {
@@ -390,14 +390,14 @@ module.exports = {
               label: 'Chat',
               collapsible: true,
               collapsed: true,
-              items: ['javascript/chat/installation', 'javascript/chat/usage']
+              items: ['web/chat/installation', 'web/chat/usage']
             },
             {
               type: 'category',
               label: 'Core',
               collapsible: true,
               collapsed: true,
-              items: ['javascript/core/pairing-api']
+              items: ['web/core/pairing-api']
             }
           ]
         },
@@ -406,7 +406,7 @@ module.exports = {
           label: 'Providers',
           collapsible: true,
           collapsed: true,
-          items: ['javascript/providers/ethereum', 'javascript/providers/universal']
+          items: ['web/providers/ethereum', 'web/providers/universal']
         }
       ]
     },
@@ -416,10 +416,10 @@ module.exports = {
       className: 'menu_outer_list',
       collapsible: false,
       items: [
-        'javascript/guides/examples-and-resources',
-        'javascript/guides/nodejs',
-        'javascript/guides/shared-core',
-        'javascript/guides/typescript'
+        'web/guides/examples-and-resources',
+        'web/guides/nodejs',
+        'web/guides/shared-core',
+        'web/guides/typescript'
       ]
     }
   ],
