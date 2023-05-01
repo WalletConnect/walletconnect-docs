@@ -23,7 +23,7 @@ items={[
 {
 name: "JavaScript",
 description: "",
-url: `/2.0/javascript/web3wallet/installation`
+url: `/2.0/web/web3wallet/installation`
 },
 {
 name: "Swift",
@@ -37,7 +37,7 @@ items={[
 {
 name: "Kotlin",
 description: "",
-url: `/2.0/kotlin/web3wallet/installation`
+url: `/2.0/android/web3wallet/installation`
 },
 {
 name: "Dart",
