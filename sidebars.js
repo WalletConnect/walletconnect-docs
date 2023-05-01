@@ -19,32 +19,24 @@ module.exports = {
     },
     {
       type: 'category',
-      label: 'Products',
+      label: 'SDKs',
       collapsible: false,
       className: 'menu_outer_list',
       items: [
         {
-          type: 'category',
-          label: 'SDKs',
-          collapsed: true,
-          collapsible: true,
-          items: [
-            {
-              type: 'link',
-              label: 'Web3Modal SDK',
-              href: '/2.0/web3modal/about'
-            },
-            'web3wallet/about'
-          ]
+          type: 'link',
+          label: 'Web3Modal',
+          href: '/2.0/web3modal/about'
         },
-        {
-          type: 'category',
-          label: 'Cloud',
-          collapsed: true,
-          collapsible: true,
-          items: ['cloud/explorer', 'cloud/relay']
-        }
+        'web3wallet/about'
       ]
+    },
+    {
+      type: 'category',
+      label: 'Cloud',
+      collapsible: false,
+      className: 'menu_outer_list',
+      items: ['cloud/explorer', 'cloud/relay']
     },
     {
       type: 'category',
@@ -499,22 +491,14 @@ module.exports = {
               label: 'Dapp Usage',
               collapsible: true,
               collapsed: true,
-              items: [
-                [
-                  'kotlin/push/dapp-usage/getting-started'
-                ]
-              ]
+              items: [['kotlin/push/dapp-usage/getting-started']]
             },
             {
               type: 'category',
               label: 'Wallet Usage',
               collapsible: true,
               collapsed: true,
-              items: [
-                [
-                  'kotlin/push/wallet-usage/getting-started'
-                ]
-              ]
+              items: [['kotlin/push/wallet-usage/getting-started']]
             }
           ]
         },
@@ -606,22 +590,14 @@ module.exports = {
               label: 'Dapp Usage',
               collapsible: true,
               collapsed: true,
-              items: [
-                [
-                  'swift/push/dapp-usage/getting-started'
-                ]
-              ]
+              items: [['swift/push/dapp-usage/getting-started']]
             },
             {
               type: 'category',
               label: 'Wallet Usage',
               collapsible: true,
               collapsed: true,
-              items: [
-                [
-                  'swift/push/wallet-usage/getting-started'
-                ]
-              ]
+              items: [['swift/push/wallet-usage/getting-started']]
             }
           ]
         },
@@ -769,11 +745,7 @@ module.exports = {
           label: 'Web3Wallet SDK',
           collapsible: true,
           collapsed: true,
-          items: [
-            'csharp/sign/installation',
-            'csharp/sign/dapp-usage',
-            'csharp/sign/wallet-usage'
-          ]
+          items: ['csharp/sign/installation', 'csharp/sign/dapp-usage', 'csharp/sign/wallet-usage']
         }
       ]
     },

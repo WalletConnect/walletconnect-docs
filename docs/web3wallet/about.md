@@ -1,6 +1,6 @@
 import Container from './../components/Container';
 
-# Web3Wallet SDK
+# Web3Wallet
 
 ## Introduction
 
