@@ -759,7 +759,7 @@ module.exports = {
           label: 'Web3Wallet',
           collapsible: true,
           collapsed: true,
-          items: ['csharp/sign/installation', 'csharp/sign/dapp-usage', 'csharp/sign/wallet-usage']
+          items: ['unity/sign/installation', 'unity/sign/dapp-usage', 'unity/sign/wallet-usage']
         }
       ]
     },
@@ -774,7 +774,7 @@ module.exports = {
           label: 'Core',
           collapsible: true,
           collapsed: true,
-          items: ['csharp/core/pairing-api']
+          items: ['unity/core/pairing-api']
         }
       ]
     }
