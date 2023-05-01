@@ -240,7 +240,7 @@ module.exports = {
       ]
     }
   ],
-  javascript: [
+  web: [
     {
       type: 'html',
       value:
@@ -431,7 +431,7 @@ module.exports = {
       ]
     }
   ],
-  kotlin: [
+  android: [
     {
       type: 'html',
       value:
@@ -549,7 +549,7 @@ module.exports = {
       items: ['kotlin/guides/examples-and-resources', 'kotlin/guides/mobile-linking']
     }
   ],
-  swift: [
+  ios: [
     {
       type: 'html',
       value:
@@ -751,7 +751,7 @@ module.exports = {
       items: ['reactnative/guides/tutorials']
     }
   ],
-  csharp: [
+  unity: [
     {
       type: 'html',
       value:
