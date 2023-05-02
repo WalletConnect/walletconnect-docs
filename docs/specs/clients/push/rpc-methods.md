@@ -73,6 +73,7 @@ Used to publish a notification message to a peer through push topic. Response is
   "body": string,
   "icon": string,
   "url": string,
+  "type": string
 }
 
 | IRN     |          |
@@ -126,7 +127,7 @@ true
 
 ### wc_pushSubscribe
 
-Used to subscribe push subscription to a peer through subscribe topic. Response is expected on the same topic.
+Used to subscribe push subscription to a peer through subscribe topic. Response is expected on the response topic
 
 **Request**
 
@@ -147,7 +148,9 @@ Used to subscribe push subscription to a peer through subscribe topic. Response 
 
 ```jsonc
 // Success result
-true
+{
+  "publicKey": string
+}
 
 | IRN     |          |
 | ------- | -------- |
