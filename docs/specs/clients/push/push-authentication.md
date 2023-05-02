@@ -1,6 +1,12 @@
 # Push Authentication
 
-In this document we will describe the authentication payloads for different methods
+In this document we will describe the authentication payloads for different methods. All of the authentication payloads share the following claims:
+
+`iat` - timestamp when jwt was issued
+
+`exp` - timestamp when jwt must expire
+
+`ksu` - key server for identity key verification
 
 ## Push Subscription
 
@@ -8,13 +14,7 @@ Given that a dapp is proposing a push subscription for a blockchain account that
 
 This is achieved using [Identity Keys](../../servers/keys/identity-keys) and did-jwt with the following claims:
 
-`iat` - timestamp when jwt was issued
-
-`exp` - timestamp when jwt must expire
-
 `iss` - did:key of an identity key. Enables to resolve attached blockchain account.
-
-`ksu` - key server for identity key verification
 
 `aud` - dapp's domain url
 
@@ -26,6 +26,7 @@ This is achieved using [Identity Keys](../../servers/keys/identity-keys) and did
 
 Expiry should be calculated from the addition of the issuance date and the push request TTL (2592000 seconds)
 
+
 ## Push Message
 
 For each Push Notification message, the Dapp will have an authenticated payload signed by the chosen Cast Server which will have associated an authentication key for each Dapp domain.
@@ -34,13 +35,7 @@ This is achieved using [Dapp Authentication](./dapp-authentication.md) keys whic
 
 The message payload is a did-jwt with the following claims:
 
-`iat` - timestamp when jwt was issued
-
-`exp` - timestamp when jwt must expire
-
 `iss` - did:key of an identity key. Enables to resolve which Cast server was used.
-
-`ksu` - key server for identity key verification
 
 `aud` - did:key of an identity key. Enables to resolve attached blockchain account.
 
