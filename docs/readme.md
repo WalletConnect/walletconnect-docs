@@ -30,7 +30,7 @@ url: `/2.0/api/push`
 ]}
 />
 
-### 🪪 For Wallet builders:
+### 🔐 For Wallet builders:
 
 <Container
 items={[
