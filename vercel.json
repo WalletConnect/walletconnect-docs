@@ -124,6 +124,26 @@
     {
       "source": "/2.0/web3modal/standalone/about",
       "destination": "/2.0/web3modal/advanced/standalone/sign/about"
+    },
+    {
+      "source": "/2.0/reactnative/introduction",
+      "destination": "/2.0/reactnative/overview"
+    },
+    {
+      "source": "/2.0/javascript/:path*",
+      "destination": "/2.0/web/:path*"
+    },
+    {
+      "source": "/2.0/kotlin/:path*",
+      "destination": "/2.0/android/:path*"
+    },
+    {
+      "source": "/2.0/swift/:path*",
+      "destination": "/2.0/ios/:path*"
+    },
+    {
+      "source": "/2.0/csharp/:path*",
+      "destination": "/2.0/unity/:path*"
     }
   ]
 }

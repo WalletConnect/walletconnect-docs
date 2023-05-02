@@ -23,7 +23,7 @@ CoreClient.initialize(relayServerUrl = serverUrl, connectionType = ConnectionTyp
 AuthClient.initialize(init = Auth.Params.Init(core = CoreClient)) { error -> Log.e(tag(this), error.throwable.stackTraceToString()) }
 ```
 
-For more context on how to initialize CoreClient, go to [CoreClient docs](../../kotlin/core/installation.md) section.
+For more context on how to initialize CoreClient, go to [CoreClient docs](../../android/core/installation.md) section.
 
 ---
 ### **AuthClient.RequesterDelegate**
@@ -61,7 +61,7 @@ The `AuthClient.request` sends the authentication request to the responder/walle
 fun randomNonce(): String = Random.nextBytes(16).bytesToHex()
 
 val requestParams = Auth.Params.Request(
-    topic = pairingTopic // a pairing topic is used to send a authentication request, pass it from [Pairing API](../../kotlin/core/pairing.md)
+    topic = pairingTopic // a pairing topic is used to send a authentication request, pass it from [Pairing API](../../android/core/pairing.md)
     chainId = "1", // is the EIP-155 Chain ID to which the session is bound, and the network where Contract Accounts MUST be resolved.
     domain = "kotlin.requester.walletconnect.com", // is the RFC 3986 authority that is requesting the signing.
     nonce = randomNonce(), // is a randomized token typically chosen by the relying party and used to prevent replay attacks, at least 8 alphanumeric characters.
@@ -77,7 +77,7 @@ val requestParams = Auth.Params.Request(
 
 AuthClient.request(requestParams,
     onSuccess = {
-        // Callback triggered when the authentication request has been sent successfully. Expose Pairing URL using [Pairing API](../../kotlin/core/pairing.md), to a wallet to establish a secure connection
+        // Callback triggered when the authentication request has been sent successfully. Expose Pairing URL using [Pairing API](../../android/core/pairing.md), to a wallet to establish a secure connection
     },
     onError = { error ->
         Log.e("Requester request", error.throwable.stackTraceToString())
