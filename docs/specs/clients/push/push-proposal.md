@@ -14,7 +14,7 @@ In future events, the app can trigger push notifications after subscription has 
 
 ### Pre-requisites
 
-Wallet and Dapp are required to establish pairing P before proceeding to Push protocol execution.
+Wallet and Dapp are required to establish pairing topic before proceeding to Push protocol execution.
 
 Additonally Wallet must meet the pre-requisites for the [Push Subscribe](./push-subscribe.md) to complete this flow
 
@@ -23,8 +23,8 @@ Additonally Wallet must meet the pre-requisites for the [Push Subscribe](./push-
 Proposal protocol will be established as follows:
 
 1. Dapp queries Cast Server for the key agreement public key (X)
-2. Dapp sends push proposal on pairing P with public key X, relay and metadata
-3. Wallet receives push proposal with public key X on pairing P
+2. Dapp sends push proposal on pairing topic with public key X, relay and metadata
+3. Wallet receives push proposal with public key X on pairing topic
 4. Wallet generates key pair Y
 5. Wallet derives symmetric key with keys X and Y
 6. Push topic is derived from sha256 hash of symmetric key 
