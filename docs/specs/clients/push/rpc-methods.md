@@ -127,7 +127,7 @@ true
 
 ### wc_pushSubscribe
 
-Used to subscribe push subscription to a peer through topic S. Response is expected on the same topic.
+Used to subscribe push subscription to a peer through topic S. Response is expected on the response topic
 
 **Request**
 
@@ -148,7 +148,9 @@ Used to subscribe push subscription to a peer through topic S. Response is expec
 
 ```jsonc
 // Success result
-true
+{
+  "publicKey": string
+}
 
 | IRN     |          |
 | ------- | -------- |
