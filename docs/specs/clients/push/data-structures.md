@@ -24,6 +24,7 @@
   "body": string,
   "icon": string,
   "url": string,
+  "type": string
 }
 ```
 
