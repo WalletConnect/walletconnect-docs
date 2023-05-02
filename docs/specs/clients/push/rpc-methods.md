@@ -35,14 +35,14 @@ Used to subscribe push subscription to a peer through subscribe topic. Response 
 | IRN     |          |
 | ------- | -------- | 
 | TTL     | 86400    |
-| Tag     | 4006     |
+| Tag     | 4000     |
 
 ```
 
 **Response**
 
 ```jsonc
-// Success result
+// Success resu0t
 {
   "responseAuth": string
 }
@@ -50,46 +50,7 @@ Used to subscribe push subscription to a peer through subscribe topic. Response 
 | IRN     |          |
 | ------- | -------- |
 | TTL     | 86400    |
-| Tag     | 4007     |
-```
-
-### wc_pushPropose
-
-Used to request push subscription to a peer through pairing topic. Response is expected on the same topic.
-
-- Success response is equivalent to push subscription acceptance.
-- Error response is equivalent to push subscription rejection.
-
-**Request**
-
-```jsonc
-// wc_pushRequest params
-{
-  "publicKey": string,
-  "metadata": Metadata,
-  "account": string,
-  "scope": string
-}
-
-| IRN     |          |
-| ------- | -------- | 
-| TTL     | 86400    |
-| Tag     | 4010     |
-
-```
-
-**Response**
-
-```jsonc
-// Success result
-{
-  "subscriptionAuth": string
-}
-
-| IRN     |          |
-| ------- | -------- |
-| TTL     | 86400    |
-| Tag     | 4011     |
+| Tag     | 4001     |
 ```
 
 ### wc_pushMessage
@@ -194,10 +155,7 @@ Used to update a push subscription with a new push subscription, replacing an ex
 | Tag     | 4009     |
 ```
 
-
-## Deprecated Methods
-
-### wc_pushRequest (DEPRECATED)
+### wc_pushPropose
 
 Used to request push subscription to a peer through pairing topic. Response is expected on the same topic.
 
@@ -218,7 +176,7 @@ Used to request push subscription to a peer through pairing topic. Response is e
 | IRN     |          |
 | ------- | -------- | 
 | TTL     | 86400    |
-| Tag     | 4000     |
+| Tag     | 4010     |
 
 ```
 
@@ -233,6 +191,5 @@ Used to request push subscription to a peer through pairing topic. Response is e
 | IRN     |          |
 | ------- | -------- |
 | TTL     | 86400    |
-| Tag     | 4001     |
+| Tag     | 4011     |
 ```
-
