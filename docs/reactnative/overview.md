@@ -1,6 +1,6 @@
 import Container from './../components/Container';
 
-# Introduction
+# Overview
 
 Welcome to the React Native documentation for WalletConnect!
 

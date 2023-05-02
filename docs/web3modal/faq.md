@@ -6,7 +6,7 @@ Web3Modal fetches wallet information from [WalletConnect explorer](https://explo
 
 ## What is the difference between standalone and other packages?
 
-Standalone works with any chain using our [Sign SDK](../javascript/sign/dapp-usage.md). It is meant for more advanced users and does not come with features like extension wallets, account view etc.
+Standalone works with any chain using our [Sign SDK](../web/sign/dapp-usage.md). It is meant for more advanced users and does not come with features like extension wallets, account view etc.
 
 ## How can I use the ethers provider with wagmi?
 
