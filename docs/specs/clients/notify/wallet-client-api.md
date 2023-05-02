@@ -16,6 +16,9 @@ abstract class WalletClient {
   // reject notify subscription 
   public abstract reject(params: { id: number, reason: Reason }): Promise<boolean>;
   
+  // update notify subscription
+  public abstract update(params: { topic: string, scope: string[] }): Promise<boolean>;
+  
   // send notify subscription
   public abstract subscribe(params: { 
         metadata: Metadata,

@@ -42,54 +42,15 @@ Used to subscribe notify subscription to a peer through subscribe topic. Respons
 **Response**
 
 ```jsonc
-// Success result
+// Success resu0t
 {
-  "publicKey": string
+  "responseAuth": string
 }
 
 | IRN     |          |
 | ------- | -------- |
 | TTL     | 86400    |
 | Tag     | 4001     |
-```
-
-### wc_notifyPropose
-
-Used to request notify subscription to a peer through pairing topic. Response is expected on the same topic.
-
-- Success response is equivalent to notify subscription acceptance.
-- Error response is equivalent to notify subscription rejection.
-
-**Request**
-
-```jsonc
-// wc_notifyRequest params
-{
-  "publicKey": string,
-  "metadata": Metadata,
-  "account": string,
-  "scope": string
-}
-
-| IRN     |          |
-| ------- | -------- | 
-| TTL     | 86400    |
-| Tag     | 4010     |
-
-```
-
-**Response**
-
-```jsonc
-// Success result
-{
-  "subscriptionAuth": string
-}
-
-| IRN     |          |
-| ------- | -------- |
-| TTL     | 86400    |
-| Tag     | 4011     |
 ```
 
 ### wc_notifyMessage
@@ -119,7 +80,9 @@ Used to publish a notification message to a peer through notify topic. Response 
 
 ```jsonc
 // Success result
-true
+{
+  "receiptAuth": string
+}
 
 | IRN     |          |
 | ------- | -------- |
@@ -182,7 +145,9 @@ Used to update a notify subscription with a new notify subscription, replacing a
 
 ```jsonc
 // Success result
-true
+{
+  "responseAuth": string
+}
 
 | IRN     |          |
 | ------- | -------- |
@@ -190,3 +155,41 @@ true
 | Tag     | 4009     |
 ```
 
+### wc_notifyPropose
+
+Used to request notify subscription to a peer through pairing topic. Response is expected on the same topic.
+
+- Success response is equivalent to notify subscription acceptance.
+- Error response is equivalent to notify subscription rejection.
+
+**Request**
+
+```jsonc
+// wc_notifyRequest params
+{
+  "publicKey": string,
+  "metadata": Metadata,
+  "account": string,
+  "scope": string
+}
+
+| IRN     |          |
+| ------- | -------- | 
+| TTL     | 86400    |
+| Tag     | 4010     |
+
+```
+
+**Response**
+
+```jsonc
+// Success result
+{
+  "subscriptionAuth": string
+}
+
+| IRN     |          |
+| ------- | -------- |
+| TTL     | 86400    |
+| Tag     | 4011     |
+```

@@ -9,7 +9,6 @@ There are however two flows for creating a notify subscription:
 1. a subscription is subscribed by the wallet and sent to the dapp (Notify Subscribe)
 2. a subscription is proposed by the dapp and subscribed by the wallet (Notify Proposal)
 
-
 ## Notify Subscribe
 
 To learn more about the notify subscribe flow please visit [Notify Subscribe](./notify-subscribe.md)
@@ -17,4 +16,3 @@ To learn more about the notify subscribe flow please visit [Notify Subscribe](./
 ## Notify Proposal
 
 To learn more about the notify proposal flow please visit [Notify Proposal](./notify-proposal.md)
-
