@@ -9,10 +9,6 @@ There are however two flows for creating a push subscription:
 1. a subscription is subscribed by the wallet and sent to the dapp (Push Subscribe)
 2. a subscription is proposed by the dapp and subscribed by the wallet (Push Proposal)
 
-There is also a deprecated flow for creating a push subscription:
-
-- a subscription is requested by the dapp and approved by the wallet (Push Request)
-
 ## Push Subscribe
 
 To learn more about the push subscribe flow please visit [Push Subscribe](./push-subscribe.md)
@@ -20,7 +16,3 @@ To learn more about the push subscribe flow please visit [Push Subscribe](./push
 ## Push Proposal
 
 To learn more about the push proposal flow please visit [Push Proposal](./push-proposal.md)
-
-## Push Request
-
-To learn more about the push request flow please visit [Push Request](./push-request.md)
