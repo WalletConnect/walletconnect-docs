@@ -57,18 +57,7 @@ module.exports = {
           label: 'APIs',
           collapsed: true,
           collapsible: true,
-          items: [
-            'api/sign',
-            'api/auth',
-            'api/chat',
-            {
-              type: 'category',
-              label: 'Push',
-              collapsed: true,
-              collapsible: true,
-              items: ['api/push/prerequisites', 'api/push/push']
-            }
-          ]
+          items: ['api/sign', 'api/auth', 'api/chat', 'api/push']
         },
         {
           type: 'category',
