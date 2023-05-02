@@ -600,7 +600,30 @@ module.exports = {
           label: 'Push',
           collapsible: true,
           collapsed: true,
-          items: ['swift/push/installation', 'swift/push/wallet-usage', 'swift/push/dapp-usage']
+          items: [
+            {
+              type: 'category',
+              label: 'Dapp Usage',
+              collapsible: true,
+              collapsed: true,
+              items: [
+                [
+                  'swift/push/dapp-usage/getting-started'
+                ]
+              ]
+            },
+            {
+              type: 'category',
+              label: 'Wallet Usage',
+              collapsible: true,
+              collapsed: true,
+              items: [
+                [
+                  'swift/push/wallet-usage/getting-started'
+                ]
+              ]
+            }
+          ]
         },
         {
           type: 'category',
