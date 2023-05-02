@@ -1,12 +1,12 @@
 # Wallet Usage
 
-### Configure Networking and Pair clients
+### Configure Networking and Pair Clients
 
 Confirm you have configured the Network Client first.
 
 - [Networking](../core/networking-configuration.md)
 
-### Initialize Web3Wallet client
+### Initialize Web3Wallet Client
 
 In order to initialize a client just call a `configure` method from the Web3Wallet instance wrapper
 
@@ -34,26 +34,14 @@ In order to allow users to receive push notifications you have to communicate wi
 try await Web3Wallet.instance.registerEchoClient(deviceToken: deviceToken)
 ```
 
-### Subscribe for Web3Wallet publishers
-
-When your `Web3Wallet` instance receives requests from a peer it will publish a related event. Set a subscription to handle them.
-
-To track sessions subscribe to `sessionsPublisher` publisher
-
-```swift
-Web3Wallet.instance.sessionsPublisher
-    .receive(on: DispatchQueue.main)
-    .sink { [unowned self] (sessions: [Session]) in
-        // reload UI
-    }.store(in: &publishers)
-```
+### Subscribe for Web3Wallet Publishers
 
 The following publishers are available to subscribe:
 
 ```swift
-public var sessionProposalPublisher: AnyPublisher<Session.Proposal, Never>
-public var sessionRequestPublisher: AnyPublisher<Request, Never>
-public var authRequestPublisher: AnyPublisher<Request, Never>
+public var sessionProposalPublisher: AnyPublisher<(proposal: Session.Proposal, context: Session.Context?), Never>
+public var sessionRequestPublisher: AnyPublisher<(request: Request, context: Session.Context?), Never>
+public var authRequestPublisher: AnyPublisher<(request: AuthRequest, context: AuthContext?), Never>
 public var sessionPublisher: AnyPublisher<[Session], Never>
 public var socketConnectionStatusPublisher: AnyPublisher<SocketConnectionStatus, Never>
 public var sessionSettlePublisher: AnyPublisher<Session, Never>
@@ -76,13 +64,30 @@ if everything goes well, you should handle following event:
 ```swift
 Web3Wallet.instance.sessionProposalPublisher
     .receive(on: DispatchQueue.main)
-    .sink { [weak self] sessionProposal in
-           // present proposal to the user
+    .sink { [weak self] session in
+        self?.verifyDapp(session.context)
+        self?.showSessionProposal(session.proposal)
     }.store(in: &publishers)
 ```
 
 Session proposal is a handshake sent by a dapp and it's purpose is to define a session rules. Handshake procedure is defined by [CAIP-25](https://github.com/ChainAgnostic/CAIPs/blob/master/CAIPs/caip-25.md).
 `Session.Proposal` object conveys set of required `ProposalNamespaces` that contains required blockchains methods and events. Dapp requests with methods and wallet will emit events defined in namespaces.
+
+`Session.Context` provides a domain verification information about `Session.Proposal` and `Request`. It consists of origin of a Dapp from where the request has been sent, validation enum that says whether origin is **unknown**, **valid** or **invalid** and verify url server. 
+
+ ```swift
+public struct Context: Equatable, Hashable {
+    public enum ValidationStatus {
+        case unknown
+        case valid
+        case invalid
+    }
+        
+    public let origin: String?
+    public let validation: ValidationStatus
+    public let verifyUrl: String
+}
+ ```
 
 The user will either approve the session proposal (with session namespaces) or reject it. Session namespaces must at least contain requested methods, events and accounts associated with proposed blockchains.
 
@@ -133,32 +138,7 @@ Example session namespaces response:
 }
 ```
 
-##### Approve Session
-
-```swift
- Web3Wallet.instance.approve(proposalId: "proposal_id", namespaces: [String: SessionNamespace])
-```
-
-When session is successfully approved `sessionsPublishers` will publish a `Session`
-
-```swift
-Web3Wallet.instance.sessionsPublishers
-    .receive(on: DispatchQueue.main)
-    .sink { [weak self] _ in
-        self?.reloadSessions()
-    }.store(in: &publishers)
-}
-```
-
-`Session` object represents an active session connection with a dapp. It contains dapp’s metadata (that you may want to use for displaying an active session to the user), namespaces, and expiry date. There is also a topic property that you will use for linking requests with related sessions.
-
-You can always query settled sessions from the client later with:
-
-```swift
-Web3Wallet.instance.getSessions()
-```
-
-##### 💡 AutoNamespaces builder util
+### 💡 AutoNamespaces Builder Utility
 
 `AutoNamespaces` is a helper utility that greatly reduces the complexity of parsing the required and optional namespaces. It accepts as parameters a session proposal along with your user's chains/methods/events/accounts and returns ready-to-use `SessionNamespace` object.
 
@@ -192,15 +172,54 @@ do {
 }
 ```
 
-### Handle requests from dapp
+### Approve Session
+
+```swift
+ Web3Wallet.instance.approve(proposalId: "proposal_id", namespaces: [String: SessionNamespace])
+```
+
+When session is successfully approved `sessionsPublishers` will publish a `Session`
+
+```swift
+Web3Wallet.instance.sessionsPublishers
+    .receive(on: DispatchQueue.main)
+    .sink { [weak self] _ in
+        self?.reloadSessions()
+    }.store(in: &publishers)
+```
+
+`Session` object represents an active session connection with a dapp. It contains dapp’s metadata (that you may want to use for displaying an active session to the user), namespaces, and expiry date. There is also a topic property that you will use for linking requests with related sessions.
+
+You can always query settled sessions from the client later with:
+
+```swift
+Web3Wallet.instance.getSessions()
+```
+
+### Track Sessions
+
+When your `Web3Wallet` instance receives requests from a peer it will publish a related event. Set a subscription to handle them.
+
+To track sessions subscribe to `sessionsPublisher` publisher
+
+```swift
+Web3Wallet.instance.sessionsPublisher
+    .receive(on: DispatchQueue.main)
+    .sink { [unowned self] (sessions: [Session]) in
+        // Reload UI
+    }.store(in: &publishers)
+```
+
+### Handle Session Requests from Dapp
 
 After the session is established, a dapp will request your wallet's users to sign a transaction or a message. Requests will be delivered by the following publisher.
 
 ```swift
 Web3Wallet.instance.sessionRequestPublisher
     .receive(on: DispatchQueue.main)
-    .sink { [weak self] sessionRequest in
-        self?.showSessionRequest(sessionRequest)
+    .sink { [weak self] session in
+        self?.verifyDapp(session.context)
+        self?.showSessionRequest(session.request)
     }.store(in: &publishers)
 ```
 
@@ -249,6 +268,35 @@ For good user experience your wallet should allow users to disconnect unwanted s
 try await Web3Wallet.instance.disconnect(topic: session.topic)
 ```
 
+### Handle Authorization Requests from Dapp
+
+When your `Auth` instance receives requests or responses from a peer client, it will publish a related event. So you should set a subscription to handle them.
+
+```swift
+Web3Wallet.instance.authRequestPublisher
+    .receive(on: DispatchQueue.main)
+    .sink { [unowned self] auth in
+        self?.verifyDapp(auth.context)
+        self?.showAuthRequest(auth.request)
+    }.store(in: &publishers)
+```
+
+Auth context provides a domain verification information about `AuthRequest`. It consists of origin of a Dapp from where the request has been sent, validation enum that says whether origin is **unknown**, **valid** or **invalid** and verify url server. 
+
+ ```swift
+public struct AuthContext: Equatable, Hashable {
+    public enum ValidationStatus {
+        case unknown
+        case valid
+        case invalid
+    }
+    
+    public let origin: String?
+    public let validation: ValidationStatus
+    public let verifyUrl: String
+}
+ ```
+
 ### Authorization Request Approval
 
 Authorization request will be published by `authRequestPublisher`. When a wallet receives a request, you want to present it to the user and request a signature. After the user signs the authentication message, the wallet should respond to a dapp.
@@ -267,13 +315,13 @@ In case user rejects an authentication request, call:
 try await Web3WalletClient.reject(requestId: request.id)
 ```
 
-### Get pending requests
+### Get Pending Requests
 
 if you've missed some requests you can query them with:
 ```swift 
 Web3WalletClient.getPendingRequests()
 ```
 
-### Sample App
+### Where to go from here
 
-To check more in details go and visit our Web3Wallet implementation app here.
+- To check more in details go and visit our Web3Wallet implementation app here.
