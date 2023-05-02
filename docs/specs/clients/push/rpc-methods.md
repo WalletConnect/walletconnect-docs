@@ -44,7 +44,7 @@ Used to subscribe push subscription to a peer through subscribe topic. Response 
 ```jsonc
 // Success result
 {
-  "publicKey": string
+  "responseAuth": string
 }
 
 | IRN     |          |
@@ -119,7 +119,9 @@ Used to publish a notification message to a peer through push topic. Response is
 
 ```jsonc
 // Success result
-true
+{
+  "receiptAuth": string
+}
 
 | IRN     |          |
 | ------- | -------- |
@@ -182,7 +184,9 @@ Used to update a push subscription with a new push subscription, replacing an ex
 
 ```jsonc
 // Success result
-true
+{
+  "responseAuth": string
+}
 
 | IRN     |          |
 | ------- | -------- |

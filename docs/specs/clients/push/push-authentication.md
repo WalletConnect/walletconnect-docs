@@ -3,9 +3,10 @@
 In this document we will describe the authentication payloads for different methods:
 
 - Push Subscription
-- Push Response
+- Push Subscription Response
 - Push Message
 - Push Receipt
+- Push Update Response
 
 
 All of the above authentication payloads will share the following claims:
@@ -29,11 +30,11 @@ This is achieved using [Identity Keys](../../servers/keys/identity-keys) and did
 
 Expiry should be calculated from the addition of the issuance date and the push request TTL (2592000 seconds)
 
-## Push Response
+## Push Subscription Response
 
 Once the Cast Server has successfully handled the incoming push subscription request then it will acknowledge it by responding with a public key used for key agreement on the Push topic.
 
-- act - description of action intent. Must be equal to "push_response"
+- act - description of action intent. Must be equal to "push_subscription_response"
 - iss - did:key of an identity key. Enables to resolve which Cast server was used.
 - aud - did:key of an identity key. Enables to resolve attached blockchain account.
 - sub - did:key of the public key used for key agreement on the Push topic 
@@ -75,3 +76,14 @@ For each Push message received, the Wallet will acknowledge its receipt with an 
 
 Expiry should be calculated from the addition of the issuance date and the push request TTL (86400 seconds)
 
+## Push Update Response
+
+Once the Cast Server has successfully handled the incoming push update request then it will acknowledge it by responding with a hash of the new subscription payload.
+
+- act - description of action intent. Must be equal to "push_update_response"
+- iss - did:key of an identity key. Enables to resolve which Cast server was used.
+- aud - did:key of an identity key. Enables to resolve attached blockchain account.
+- sub - hash of the new subscription payload
+- app - dapp's domain url
+
+Expiry should be calculated from the addition of the issuance date and the push request TTL (86400 seconds)
