@@ -18,6 +18,8 @@ error: {
 }
 ```
 
+## Methods
+
 ### wc_pairingDelete
 
 Used to inform the peer to close and delete a pairing. The associated authentication state of the given pairing must also be deleted.

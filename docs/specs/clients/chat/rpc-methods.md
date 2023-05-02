@@ -18,6 +18,8 @@ error: {
 }
 ```
 
+## Methods
+
 ### wc_chatInvite
 
 Used to invite a peer through topic I. Requires a success response with associated data
