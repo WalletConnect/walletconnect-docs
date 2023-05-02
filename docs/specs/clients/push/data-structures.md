@@ -11,8 +11,8 @@
     "data": string
   },  
   "metadata": Metadata,
-  "scope": [string: bool],
-  "expiry": Int64,
+  "scope": Record<string, {description: string, enabled: boolean}>,
+  "expiry": number,
 }
 ```
 
