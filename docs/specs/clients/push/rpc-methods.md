@@ -83,7 +83,7 @@ Used to request push subscription to a peer through pairing topic. Response is e
 ```jsonc
 // Success result
 {
-  "subscriptionId": string
+  "subscriptionAuth": string
 }
 
 | IRN     |          |

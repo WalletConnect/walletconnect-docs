@@ -29,7 +29,6 @@ Proposal protocol will be established as follows:
 5. Wallet derives symmetric key with keys X and Y
 6. Push topic is derived from sha256 hash of symmetric key 
 7. Wallet sends push subscribe request to Cast Server with subscriptionAuth
-8. Wallet derives subscriptionId from sha256 hash of subscriptionAuth
-9. Wallet responds to Dapp with subscriptionId 
-10. Dapp verifies with Cast Server that subscription was created.
- 
+8. Wallet responds to Dapp with subscriptionAuth
+9. Dapp derives subscriptionId from sha256 hash of subscriptionAuth
+10. Dapp verifies with Cast Server that subscription was created with matching subscriptionId.
