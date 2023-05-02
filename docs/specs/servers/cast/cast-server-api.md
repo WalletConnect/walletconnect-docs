@@ -126,7 +126,7 @@ Response:
 
 ```jsonc
 {
-    "publicKey": string
+  "publicKey": string
 }
 ``` 
 
