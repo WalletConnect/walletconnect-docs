@@ -74,7 +74,8 @@ module.exports = {
           type: 'category',
           label: 'Multi-Chain',
           items: ['advanced/multichain/overview', 'advanced/multichain/chain-list']
-        }
+        },
+        'advanced/echo-server'
       ]
     },
     {
