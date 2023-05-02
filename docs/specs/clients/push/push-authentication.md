@@ -24,7 +24,7 @@ This is achieved using [Identity Keys](../../servers/keys/identity-keys) and did
 
 `scp` - scope of notification types authorized by the user
 
-Expiry should be calculated from the addition of the issuance date and the push request TTL (86400 seconds)
+Expiry should be calculated from the addition of the issuance date and the push request TTL (2592000 seconds)
 
 ## Push Message
 
@@ -63,3 +63,4 @@ The message payload is a did-jwt with the following claims:
     * type - push notification type which matches the scope of push subscription
 
 Expiry should be calculated from the addition of the issuance date and the push request TTL (86400 seconds)
+
