@@ -20,7 +20,7 @@ error: {
 
 ### wc_pushRequest
 
-Used to request push subscription to a peer through topic P. Response is expected on the same topic.
+Used to request push subscription to a peer through pairing topic. Response is expected on the same topic.
 
 - Success response is equivalent to push subscription acceptance.
 - Error response is equivalent to push subscription rejection.
@@ -58,7 +58,7 @@ Used to request push subscription to a peer through topic P. Response is expecte
 
 ### wc_pushMessage
 
-Used to publish a notification message to a peer through topic P. Response is expected on the same topic.
+Used to publish a notification message to a peer through push topic. Response is expected on the same topic.
 
 - Success response is equivalent to push message acknowledgement.
 - Error response is equivalent to push message failed to decrypt.
@@ -98,7 +98,7 @@ true
 
 ### wc_pushDelete
 
-Used to inform the peer to close and delete a push subscription. The reason field should be a human-readable message defined by the SDK consumer to be shown on the peer's side.
+Used to inform the peer to close and delete a push subscription through push topic. The reason field should be a human-readable message defined by the SDK consumer to be shown on the peer's side.
 
 **Request**
 
@@ -127,7 +127,7 @@ true
 
 ### wc_pushSubscribe
 
-Used to subscribe push subscription to a peer through topic S. Response is expected on the response topic
+Used to subscribe push subscription to a peer through subscribe topic. Response is expected on the response topic
 
 **Request**
 
@@ -161,9 +161,7 @@ Used to subscribe push subscription to a peer through topic S. Response is expec
 
 ### wc_pushUpdate
 
-Used to update a push subscription with a new push subscription scope, replacing an existing authorized push subscription.
-
-Push subscription id is the sha256 hash of the serialized did-jwt of subscriptionAuth string.
+Used to update a push subscription with a new push subscription, replacing an existing push subscription through push topic.
 
 **Note:** this method is atomically performing two methods (wc_pushDelete + wc_pushSubscribe)
 
@@ -172,8 +170,7 @@ Push subscription id is the sha256 hash of the serialized did-jwt of subscriptio
 ```jsonc
 // wc_pushUpdate params
 {
-  "replacesId": string, // previous subscription id
-  "subscriptionAuth": string // new subscription authorized
+  "subscriptionAuth": string // new subscription
 }
 
 | IRN     |          |
