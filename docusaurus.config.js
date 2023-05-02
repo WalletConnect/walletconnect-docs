@@ -74,20 +74,20 @@ const config = {
           {
             type: 'docSidebar',
             position: 'left',
-            sidebarId: 'javascript',
-            label: 'JavaScript'
+            sidebarId: 'web',
+            label: 'Web'
           },
           {
             type: 'docSidebar',
             position: 'left',
-            sidebarId: 'kotlin',
-            label: 'Kotlin'
+            sidebarId: 'android',
+            label: 'Android'
           },
           {
             type: 'docSidebar',
             position: 'left',
-            sidebarId: 'swift',
-            label: 'Swift'
+            sidebarId: 'ios',
+            label: 'iOS'
           },
           {
             type: 'docSidebar',
@@ -104,8 +104,8 @@ const config = {
           {
             type: "docSidebar",
             position: "left",
-            sidebarId: "csharp",
-            label: "C#",
+            sidebarId: "unity",
+            label: "Unity",
           },
           {
             href: 'https://github.com/walletconnect/',

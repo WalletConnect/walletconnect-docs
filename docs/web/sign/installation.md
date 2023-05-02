@@ -11,7 +11,7 @@ Install the WalletConnect client package.
 :::info
 For additional type packages refer to our [TypeScript Guide](../guides/typescript).
 
-For platform-specific instructions, refer to our [React Native](../../reactnative/Introduction.md) and [Node.js](../guides/nodejs.md) guides.
+For platform-specific instructions, refer to our [React Native](../../reactnative/overview.md) and [Node.js](../guides/nodejs.md) guides.
 :::
 
 ```bash npm2yarn

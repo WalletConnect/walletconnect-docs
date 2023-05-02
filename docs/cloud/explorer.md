@@ -1,4 +1,4 @@
-# Cloud Explorer
+# Explorer
 
 The WalletConnect Cloud Explorer is an open-source solution to submit and showcase wallets and dApps that support WalletConnect. You can view existing entries over at our [explorer website](https://explorer.walletconnect.com/) or use the [Cloud Explorer API](#cloud-explorer-api) to fetch them programmatically.
 

@@ -47,7 +47,7 @@ Web3Inbox.initialize(Inbox.Params.Init(core = CoreClient, account = Inbox.Type.A
 ```
 
 ## Create Web3Inbox.View
-Once the Web3Inbox client is [initialized](#intialize), all that's left to do is to place the `Web3Inbox.View` in your app. We support both [Compose](https://developer.android.com/jetpack/compose), which sample sample implementation can be found in our [sample app](https://github.com/WalletConnect/WalletConnectKotlinV2/blob/develop/samples/web3wallet/src/main/kotlin/com/walletconnect/web3/wallet/ui/routes/composable_routes/web3inbox/Web3InboxRoute.kt)
+Once the Web3Inbox client is [initialized](#intialize), all that's left to do is to place the `Web3Inbox.View` in your app. We support both [Compose](https://developer.android.com/jetpack/compose), which sample sample implementation can be found in our [sample app](https://github.com/WalletConnect/WalletConnectKotlinV2/blob/develop/samples/web3wallet/src/main/android/com/walletconnect/web3/wallet/ui/routes/composable_routes/web3inbox/Web3InboxRoute.kt)
 
 ### Prevent reloading of Web3Inbox
 
@@ -70,4 +70,4 @@ To remember Web3Inbox state call `Web3Inbox.rememberWeb3InboxState()` which late
 
 Adding Web3Inbox to legacy Views should be achieved according to Google's guidelines: https://developer.android.com/jetpack/compose/migrate/interoperability-apis/compose-in-views.
 
-For sample implementation take a look at our [sample app](https://github.com/WalletConnect/WalletConnectKotlinV2/blob/develop/samples/web3inbox/src/main/kotlin/com/walletconnect/web3/inbox/ui/Web3InboxXMLActivity.kt)
+For sample implementation take a look at our [sample app](https://github.com/WalletConnect/WalletConnectKotlinV2/blob/develop/samples/web3inbox/src/main/android/com/walletconnect/web3/inbox/ui/Web3InboxXMLActivity.kt)
