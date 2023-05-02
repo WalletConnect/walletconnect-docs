@@ -6,7 +6,7 @@ The Echo Server is a push server for the WalletConnect v2 Protocol. It allows cl
 
 1. Use the [hosted](#hosted-platform-recommended) platform (recommended).
 2. Self-Host our [server](https://github.com/WalletConnect/echo-server).
-3. Write your own implementation using the [spec](../specs/servers/echo/spec.md).
+3. Write your own implementation using the [spec](../specs/servers/push/spec.md).
 
 :::note
 For inquiries about self-hosting, please contact [Luther](https://t.me/lutherwc) or [Harry](https://t.me/theharryet) on Telegram.
