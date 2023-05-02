@@ -11,7 +11,9 @@ If you'd like to make a PR or create an issue for our docs, you can do so by goi
 
 ## Getting Started
 
-WalletConnect consists of two SDKs: Web3Modal and Web3Wallet.
+At WalletConnect, developers are primarily categorized as either Wallet builders or Dapp builders, as each type requires distinct toolkits for their respective projects.
+
+### 💻 For Dapp builders:
 
 <Container
 items={[
@@ -21,27 +23,26 @@ description: "For Dapps. Web3Modal is a library that makes it easy to connect us
 url: `/2.0/web3modal/about`
 },
 {
-name: "Web3Wallet",
-description: "For Wallets. Web3Wallet simplifies the process of integrating wallets into dapps by combining the Sign and Auth APIs into a single module.",
-url: `/2.0/web3wallet/about`
+name: "Push API",
+description: "A push notification protocol that enables dapps to notify users of both off-chain and on-chain events.",
+url: `/2.0/api/push`
 },
 ]}
 />
 
-## Compare the Differences
+### 🪪 For Wallet builders:
 
-<Table 
-headers={[ "SDKs", "Web3Modal", "Web3Wallet" ]}
-data={[
+<Container
+items={[
 {
-feature: "Target Builders",
-web3Modal: "Dapps",
-web3Wallet: "Wallets",
+name: "Web3Wallet",
+description: "For Wallets. Web3Wallet simplifies the process of integrating wallets into dapps by combining the Sign and Auth APIs into a single module.",
+url: `/2.0/web3wallet/about`
 },
 {
-feature: "APIs",
-web3Modal: "Sign v2.0, Auth, Sign v1.0",
-web3Wallet: "Sign v2.0, Auth",
+name: "Push API",
+description: "A push notification protocol that enables wallets to recieve dapp off-chain and on-chain events.",
+url: `/2.0/api/push`
 }
 ]}
 />
