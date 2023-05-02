@@ -24,8 +24,7 @@ This is achieved using [Identity Keys](../../servers/keys/identity-keys) and did
 
 `scp` - scope of notification types authorized by the user
 
-Expiry should be calculated from the addition of the issuance date and the notify request TTL (86400 seconds)
- 
+Expiry should be calculated from the addition of the issuance date and the notify request TTL (2592000 seconds)
 
 ## Notify Message
 

@@ -20,9 +20,42 @@ error: {
 
 ## Methods
 
+### wc_notifySubscribe
+
+Used to subscribe notify subscription to a peer through subscribe topic. Response is expected on the response topic
+
+**Request**
+
+```jsonc
+// wc_notifySubscribe params
+{
+  "subscriptionAuth": string
+}
+
+| IRN     |          |
+| ------- | -------- | 
+| TTL     | 86400    |
+| Tag     | 4000     |
+
+```
+
+**Response**
+
+```jsonc
+// Success result
+{
+  "publicKey": string
+}
+
+| IRN     |          |
+| ------- | -------- |
+| TTL     | 86400    |
+| Tag     | 4001     |
+```
+
 ### wc_notifyPropose
 
-Used to propose a new notify subscription to a peer through topic P. Response is expected on the same topic.
+Used to request notify subscription to a peer through pairing topic. Response is expected on the same topic.
 
 - Success response is equivalent to notify subscription acceptance.
 - Error response is equivalent to notify subscription rejection.
@@ -41,7 +74,7 @@ Used to propose a new notify subscription to a peer through topic P. Response is
 | IRN     |          |
 | ------- | -------- | 
 | TTL     | 86400    |
-| Tag     | 4000     |
+| Tag     | 4010     |
 
 ```
 
@@ -50,20 +83,18 @@ Used to propose a new notify subscription to a peer through topic P. Response is
 ```jsonc
 // Success result
 {
-  "subscriptionId": string
+  "subscriptionAuth": string
 }
 
 | IRN     |          |
 | ------- | -------- |
 | TTL     | 86400    |
-| Tag     | 4001     |
+| Tag     | 4011     |
 ```
-
-
 
 ### wc_notifyMessage
 
-Used to publish a notification message to a peer through topic P. Response is expected on the same topic.
+Used to publish a notification message to a peer through notify topic. Response is expected on the same topic.
 
 - Success response is equivalent to notify message acknowledgement.
 - Error response is equivalent to notify message failed to decrypt.
@@ -99,7 +130,7 @@ true
 
 ### wc_notifyDelete
 
-Used to inform the peer to close and delete a notify subscription. The reason field should be a human-readable message defined by the SDK consumer to be shown on the peer's side.
+Used to inform the peer to close and delete a notify subscription through notify topic. The reason field should be a human-readable message defined by the SDK consumer to be shown on the peer's side.
 
 **Request**
 
@@ -126,42 +157,9 @@ true
 | Tag     | 4005     |
 ```
 
-### wc_notifySubscribe
-
-Used to subscribe notify subscription to a peer through topic S. Response is expected on the same topic.
-
-**Request**
-
-```jsonc
-// wc_notifySubscribe params
-{
-  "subscriptionAuth": string
-}
-
-| IRN     |          |
-| ------- | -------- | 
-| TTL     | 86400    |
-| Tag     | 4006     |
-
-```
-
-**Response**
-
-```jsonc
-// Success result
-true
-
-| IRN     |          |
-| ------- | -------- |
-| TTL     | 86400    |
-| Tag     | 4007     |
-```
-
 ### wc_notifyUpdate
 
-Used to update a notify subscription with a new notify subscription scope, replacing an existing authorized notify subscription.
-
-Notify subscription id is the sha256 hash of the serialized did-jwt of subscriptionAuth string.
+Used to update a notify subscription with a new notify subscription, replacing an existing notify subscription through notify topic.
 
 **Note:** this method is atomically performing two methods (wc_notifyDelete + wc_notifySubscribe)
 
@@ -170,8 +168,7 @@ Notify subscription id is the sha256 hash of the serialized did-jwt of subscript
 ```jsonc
 // wc_notifyUpdate params
 {
-  "replacesId": string, // previous subscription id
-  "subscriptionAuth": string // new subscription authorized
+  "subscriptionAuth": string // new subscription
 }
 
 | IRN     |          |

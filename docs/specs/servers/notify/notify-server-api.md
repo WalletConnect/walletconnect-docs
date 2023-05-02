@@ -64,7 +64,8 @@ Body:
         "title": string,
         "body": string,
         "icon": string,
-        "url": string
+        "url": string,
+        "type": string
     },
     "accounts": string[]
 }
@@ -125,7 +126,7 @@ Response:
 
 ```jsonc
 {
-    "publicKey": string
+  "publicKey": string
 }
 ``` 
 
