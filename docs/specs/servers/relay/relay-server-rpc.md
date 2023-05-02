@@ -14,7 +14,9 @@ The following definitions are shared concepts across all JSON-RPC methods for th
 - **tag** - (uint32 - 4 bytes) a label that identifies what type of message is sent based on the rpc method used.
 - **id** - (hex string - 32 bytes) a unique identifier for each subscription targeting a topic.
 
-## Publish payload
+
+## Methods
+### Publish payload
 
 Used when a client publishes a message to a server.
 
@@ -40,7 +42,7 @@ Used when a client publishes a message to a server.
 }
 ```
 
-## Batch Publish payload
+### Batch Publish payload
 
 Used when a client publishes multiple messages to a server.
 
@@ -71,7 +73,7 @@ Used when a client publishes multiple messages to a server.
 }
 ```
 
-## Subscribe payload
+### Subscribe payload
 
 Used when a client subscribes a given topic.
 
@@ -94,7 +96,7 @@ Used when a client subscribes a given topic.
 }
 ```
 
-## Batch Subscribe payload
+### Batch Subscribe payload
 
 Used when a client subscribes multiple topics.
 
@@ -117,7 +119,7 @@ Used when a client subscribes multiple topics.
 }
 ```
 
-## Unsubscribe payload
+### Unsubscribe payload
 
 Used when a client unsubscribes a given topic.
 
@@ -141,7 +143,7 @@ Used when a client unsubscribes a given topic.
 }
 ```
 
-## Batch Unsubscribe payload
+### Batch Unsubscribe payload
 
 Used when a client unsubscribes a given topic.
 
@@ -171,7 +173,7 @@ Used when a client unsubscribes a given topic.
 ```
 
 
-## Subscription payload
+### Subscription payload
 
 Used when a server sends a subscription message to a client.
 
@@ -200,7 +202,7 @@ Used when a server sends a subscription message to a client.
 }
 ```
 
-## Fetch Messsages payload
+### Fetch Messsages payload
 
 Used when a client wants to fetch all undelivered messages matching a single topic before subscribing.
 
@@ -238,7 +240,7 @@ Response will include a flag `hasMore`. If true, the consumer should fetch again
 
 
 
-## Batch Fetch Messsages payload
+### Batch Fetch Messsages payload
 
 Used when a client wants to fetch all undelivered messages matching multiple topics before subscribing.
 

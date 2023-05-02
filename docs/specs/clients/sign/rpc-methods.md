@@ -18,7 +18,7 @@ error: {
 }
 ```
 
-## Session:
+## Methods
 
 ### wc_sessionPropose
 

@@ -18,6 +18,8 @@ error: {
 }
 ```
 
+## Methods
+
 ### wc_pushRequest
 
 Used to request push subscription to a peer through pairing topic. Response is expected on the same topic.
