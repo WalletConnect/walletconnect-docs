@@ -28,4 +28,4 @@ npm install @walletconnect/push-client
 npm install lokijs --save
 ```
 
-This step is not required if you are using the SDK on the client-side.
+This step is not required if you are using the SDK on the browser-side.
