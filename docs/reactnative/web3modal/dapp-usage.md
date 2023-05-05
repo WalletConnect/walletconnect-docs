@@ -6,7 +6,7 @@ import Container from '../../components/Container';
 
 Import Web3Modal package and replace `YOUR_PROJECT_ID` with your [WalletConnect Cloud](https://cloud.walletconnect.com/sign-in) Project ID.
 
-```javascript
+```tsx
 import { Web3Modal } from '@web3modal/react-native';
 
 const projectId = 'YOUR_PROJECT_ID';
@@ -24,7 +24,7 @@ function App() {
 
 Add our pre-built button component in your dapp to open/close connection and account modals. Alternatively, use your own button along with the [useWeb3Modal](#useweb3modal) hook.
 
-```javascript
+```tsx
 import { Web3Modal, Web3Button } from '@web3modal/react-native';
 
 const projectId = 'YOUR_PROJECT_ID';
@@ -46,7 +46,7 @@ Hook to programmatically control the modal. Useful when you want to use your own
 ```tsx
 import { useWeb3Modal } from "@web3modal/react-native";
 
-const { isOpen, open, close, provider } = useWeb3Modal();
+const { isOpen, open, close, provider, isConnected } = useWeb3Modal();
 
 // Modal's open state
 isOpen;
@@ -62,21 +62,24 @@ close();
 
 // Initialized provider
 provider;
-```
 
+// Wallet connection state
+isConnected;
+
+```
 #### Example
-```javascript
+```tsx
 import { Pressable, Text } from 'react-native';
 import { Web3Modal, useWeb3Modal } from '@web3modal/react-native';
 
 const projectId = 'YOUR_PROJECT_ID';
 
 function App() {
-  const { open } = useWeb3Modal();
+  const { open, isConnected } = useWeb3Modal();
   return (
     <>
       <Pressable onPress={open}>
-        <Text>Connect</Text>
+        <Text>{isConnected ? 'View Account' : 'Connect'}</Text>
       </Pressable>
       <Web3Modal projectId={projectId} />
     </>
