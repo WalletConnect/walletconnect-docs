@@ -84,7 +84,8 @@ Used when a client subscribes a given topic.
   "jsonrpc": "2.0",
   "method": "irn_subscribe",
   "params" : {
-    "topic" : string
+    "topic" : string,
+    "ttl": number
   }
 }
 
