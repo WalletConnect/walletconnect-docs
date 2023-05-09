@@ -254,15 +254,24 @@ module.exports = {
             {
               type: 'category',
               label: 'Ethereum',
-              items: ['new_web3modal/react/wagmi', 'new_web3modal/react/provider']
+              items: [
+                {
+                  type: 'category',
+                  label: 'With Wagmi',
+                  items: [
+                    'new_web3modal/react/wagmi/installation',
+                    'new_web3modal/react/wagmi/components',
+                    'new_web3modal/react/wagmi/hooks'
+                  ]
+                },
+                'new_web3modal/react/provider'
+              ]
             },
             {
               type: 'category',
               label: 'Multichain',
               items: ['new_web3modal/react/sign', 'new_web3modal/react/auth']
-            },
-            'new_web3modal/react/components',
-            'new_web3modal/react/hooks'
+            }
           ]
         },
         {

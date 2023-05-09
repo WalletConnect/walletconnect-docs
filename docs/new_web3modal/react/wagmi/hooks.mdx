@@ -4,7 +4,7 @@
 
 Hook to programmatically control the modal. Useful when you want to use your own UI elements and subscribe to modals state
 
-### Example
+#### Example
 
 ```tsx
 import { useWeb3Modal } from '@web3modal/react'
@@ -12,7 +12,7 @@ import { useWeb3Modal } from '@web3modal/react'
 const { isOpen, open, close, setDefaultChain } = useWeb3Modal()
 ```
 
-### Refference
+#### Refference
 
 Boolean that indicates if modal is open or closed
 
@@ -36,7 +36,7 @@ Function to close the modal
 close: () => void
 ```
 
-Only available when using wagmi. Function to set a default chain before user connects
+Function to set a default chain before user connects
 
 ```ts
 setDefaultChain: (chain: WagmiChain) => void
