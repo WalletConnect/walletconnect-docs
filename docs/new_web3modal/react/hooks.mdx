@@ -1,0 +1,66 @@
+# Hooks
+
+## useWeb3Modal
+
+Hook to programmatically control the modal. Useful when you want to use your own UI elements and subscribe to modals state
+
+### Example
+
+```tsx
+import { useWeb3Modal } from '@web3modal/react'
+
+const { isOpen, open, close, setDefaultChain } = useWeb3Modal()
+```
+
+### Refference
+
+Boolean that indicates if modal is open or closed
+
+```ts
+isOpen: boolean
+```
+
+Function to open the modal. Takes in optional object with options
+
+```ts
+interface Options {
+  route?: 'Account' | 'ConnectWallet' | 'Help' | 'SelectNetwork'
+}
+
+open: (options?: Options) => Promise<void>
+```
+
+Function to close the modal
+
+```ts
+close: () => void
+```
+
+Only available when using wagmi. Function to set a default chain before user connects
+
+```ts
+setDefaultChain: (chain: WagmiChain) => void
+```
+
+## useWeb3ModalTheme
+
+Hook to set or update theme options like `themeVariables` and `themeMode`.
+
+```tsx
+import { useWeb3ModalTheme } from '@web3modal/react'
+
+const { theme, setTheme } = useWeb3ModalTheme()
+
+// Modal's theme object
+theme
+
+// Set modal theme
+setTheme({
+  themeMode: 'dark',
+  themeVariables: {
+    '--w3m-font-family': 'Roboto, sans-serif',
+    '--w3m-accent-color': '#F5841F'
+    // ...
+  }
+})
+```

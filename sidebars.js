@@ -249,15 +249,25 @@ module.exports = {
         {
           type: 'category',
           label: 'Web3Modal | React',
-          collapsible: true,
-          collapsed: true,
-          items: ['new_web3modal/react/introduction']
+          items: [
+            'new_web3modal/react/introduction',
+            {
+              type: 'category',
+              label: 'Ethereum',
+              items: ['new_web3modal/react/wagmi', 'new_web3modal/react/provider']
+            },
+            {
+              type: 'category',
+              label: 'Multichain',
+              items: ['new_web3modal/react/sign', 'new_web3modal/react/auth']
+            },
+            'new_web3modal/react/components',
+            'new_web3modal/react/hooks'
+          ]
         },
         {
           type: 'category',
           label: 'Web3Modal | HTML',
-          collapsible: true,
-          collapsed: true,
           items: ['new_web3modal/html/introduction']
         },
 
