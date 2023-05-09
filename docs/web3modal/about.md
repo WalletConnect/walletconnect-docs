@@ -23,11 +23,6 @@ name: "Standalone Sign",
 description: "Advanced Web3Modal usage without wagmi.",
 url: `/2.0/web3modal/advanced/standalone/sign/installation`
 },
-{
-name: "Standalone Auth",
-description: "Advanced Web3Modal usage without wagmi.",
-url: `/2.0/web3modal/advanced/standalone/auth/installation`
-},
 ]}
 />
 
@@ -54,11 +49,6 @@ url: `https://github.com/WalletConnect/web3modal-examples/blob/main/nextjs-stand
 name: "Html & Standalone Sign",
 description: "Example of Web3Modal in Vite using @web3modal/standalone and @walletconnect/sign-client.",
 url: `https://github.com/WalletConnect/web3modal-examples/blob/main/html-standalone`
-},
-{
-name: "Html & Standalone Auth",
-description: "Example of Web3Modal in Vite using @web3modal/standalone and @walletconnect/auth-client.",
-url: `https://github.com/WalletConnect/web3modal-examples/tree/main/html-standalone-auth`
 },
 ]}
 />

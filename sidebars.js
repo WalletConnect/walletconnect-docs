@@ -80,7 +80,7 @@ module.exports = {
             'advanced/rpc-reference/stellar-rpc',
             'advanced/rpc-reference/tezos-rpc',
             'advanced/rpc-reference/near-rpc',
-            'advanced/rpc-reference/xrpl-rpc',
+            'advanced/rpc-reference/xrpl-rpc'
           ]
         },
         {
@@ -248,85 +248,89 @@ module.exports = {
       items: [
         {
           type: 'category',
-          label: 'Web3Modal',
+          label: 'Web3Modal | React',
           collapsible: true,
           collapsed: true,
-          items: [
-            'web3modal/about',
-            {
-              type: 'category',
-              label: 'Getting Started',
-              collapsed: true,
-              collapsible: true,
-              items: [
-                {
-                  type: 'category',
-                  label: 'React',
-                  collapsed: true,
-                  collapsible: true,
-                  items: [
-                    'web3modal/react/installation',
-                    'web3modal/react/hooks',
-                    'web3modal/react/components'
-                  ]
-                },
-                {
-                  type: 'category',
-                  label: 'HTML',
-                  collapsed: true,
-                  collapsible: true,
-                  items: [
-                    'web3modal/html-js/installation',
-                    'web3modal/html-js/actions',
-                    'web3modal/html-js/components'
-                  ]
-                }
-              ]
-            },
-            {
-              type: 'category',
-              label: 'Customization',
-              collapsed: true,
-              collapsible: true,
-              items: ['web3modal/options', 'web3modal/theming']
-            },
-            {
-              type: 'category',
-              label: 'Advanced',
-              collapsed: true,
-              collapsible: true,
-              items: [
-                'web3modal/advanced/wallets',
-                'web3modal/advanced/chains',
-                'web3modal/advanced/providers',
-                'web3modal/advanced/mobile-linking',
-                {
-                  type: 'category',
-                  label: 'Standalone Sign',
-                  collapsed: true,
-                  collapsible: true,
-                  items: [
-                    'web3modal/advanced/standalone/sign/about',
-                    'web3modal/advanced/standalone/sign/installation',
-                    'web3modal/advanced/standalone/sign/actions'
-                  ]
-                },
-                {
-                  type: 'category',
-                  label: 'Standalone Auth',
-                  collapsed: true,
-                  collapsible: true,
-                  items: [
-                    'web3modal/advanced/standalone/auth/about',
-                    'web3modal/advanced/standalone/auth/installation',
-                    'web3modal/advanced/standalone/sign/actions'
-                  ]
-                }
-              ]
-            },
-            'web3modal/faq'
-          ]
+          items: ['new_web3modal/react/introduction']
         },
+        {
+          type: 'category',
+          label: 'Web3Modal | HTML',
+          collapsible: true,
+          collapsed: true,
+          items: ['new_web3modal/html/introduction']
+        },
+
+        // {
+        //   type: 'category',
+        //   label: 'Web3Modal',
+        //   collapsible: true,
+        //   collapsed: true,
+        //   items: [
+        //     'web3modal/about',
+        //     {
+        //       type: 'category',
+        //       label: 'Getting Started',
+        //       collapsed: true,
+        //       collapsible: true,
+        //       items: [
+        //         {
+        //           type: 'category',
+        //           label: 'React',
+        //           collapsed: true,
+        //           collapsible: true,
+        //           items: [
+        //             'web3modal/react/installation',
+        //             'web3modal/react/hooks',
+        //             'web3modal/react/components'
+        //           ]
+        //         },
+        //         {
+        //           type: 'category',
+        //           label: 'HTML',
+        //           collapsed: true,
+        //           collapsible: true,
+        //           items: [
+        //             'web3modal/html-js/installation',
+        //             'web3modal/html-js/actions',
+        //             'web3modal/html-js/components'
+        //           ]
+        //         }
+        //       ]
+        //     },
+        //     {
+        //       type: 'category',
+        //       label: 'Customization',
+        //       collapsed: true,
+        //       collapsible: true,
+        //       items: ['web3modal/options', 'web3modal/theming']
+        //     },
+        //     {
+        //       type: 'category',
+        //       label: 'Advanced',
+        //       collapsed: true,
+        //       collapsible: true,
+        //       items: [
+        //         'web3modal/advanced/wallets',
+        //         'web3modal/advanced/chains',
+        //         'web3modal/advanced/providers',
+        //         'web3modal/advanced/mobile-linking',
+        //         {
+        //           type: 'category',
+        //           label: 'Standalone Sign',
+        //           collapsed: true,
+        //           collapsible: true,
+        //           items: [
+        //             'web3modal/advanced/standalone/sign/about',
+        //             'web3modal/advanced/standalone/sign/installation',
+        //             'web3modal/advanced/standalone/sign/actions'
+        //           ]
+        //         }
+        //       ]
+        //     },
+        //     'web3modal/faq'
+        //   ]
+        // },
         {
           type: 'category',
           label: 'Web3Wallet',
@@ -369,22 +373,14 @@ module.exports = {
               label: 'Auth',
               collapsible: true,
               collapsed: true,
-              items: [
-                'web/auth/installation',
-                'web/auth/dapp-usage',
-                'web/auth/wallet-usage'
-              ]
+              items: ['web/auth/installation', 'web/auth/dapp-usage', 'web/auth/wallet-usage']
             },
             {
               type: 'category',
               label: 'Push',
               collapsible: true,
               collapsed: true,
-              items: [
-                'web/push/installation',
-                'web/push/dapp-usage',
-                'web/push/wallet-usage'
-              ]
+              items: ['web/push/installation', 'web/push/dapp-usage', 'web/push/wallet-usage']
             },
             {
               type: 'category',
@@ -468,7 +464,11 @@ module.exports = {
           label: 'Sign',
           collapsible: true,
           collapsed: true,
-          items: ['android/sign/installation', 'android/sign/dapp-usage', 'android/sign/wallet-usage']
+          items: [
+            'android/sign/installation',
+            'android/sign/dapp-usage',
+            'android/sign/wallet-usage'
+          ]
         },
         {
           type: 'category',
@@ -663,9 +663,7 @@ module.exports = {
       label: 'Introduction',
       className: 'menu_outer_list',
       collapsible: false,
-      items: [
-        'reactnative/overview',
-      ]
+      items: ['reactnative/overview']
     },
     {
       type: 'category',
