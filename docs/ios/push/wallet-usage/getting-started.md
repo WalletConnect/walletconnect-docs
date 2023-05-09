@@ -114,7 +114,9 @@ Another way of subscribing to dapp's push messages is to fetch publicly discover
 public func subscribe(metadata: AppMetadata, account: Account, onSign: @escaping SigningCallback) async throws {
 ```
 `metadata` - metadata object of publicly discoverable dapp fetched from WalletConnect explorer
+
 `account` - an account you want to associate a sebscription with
+
 `onSign` - callback that requres a signature from a user
  
  
