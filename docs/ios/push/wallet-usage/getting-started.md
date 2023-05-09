@@ -32,8 +32,9 @@ Make sure Networking and Pairing are properly configured.
 Configure the `Push` instance with:
 
 ```swift
-try Push.configure()
+try Push.configure(environment: APNSEnvironment)
 ```
+Use `debug` environment for debug builds and `release` for release and TestFlight builds
 
 ### Register for Push Notifications
 
@@ -43,9 +44,12 @@ Communicate with Apple Push Notification service and receive unique device token
 try await Push.wallet.register(deviceToken: deviceToken)
 ```
 
-### Register for Subscriptions
+### Subscribe Events
 
-When your `Push` instance receives push request or push message from a peer client, it will publish a related event. Subscribe to publishers to receive the requests.
+
+#### Subscribe Proposal
+
+When your `Push` instance receives a push request or push message from a peer client, it will publish a related event. Subscribe to publishers to receive the requests.
 
 ```swift
 Push.wallet.requestPublisher
@@ -54,16 +58,46 @@ Push.wallet.requestPublisher
         //handle event
     }.store(in: &publishers)
 ```
-The following publishers are available for subscription:
+
+#### Subscribe Push Message
+
+Emits new push message from a dapp.
 
 ```swift
-public var requestPublisher: AnyPublisher<(id: RPCID, metadata: AppMetadata), Never> 
 public var pushMessagePublisher: AnyPublisher<PushMessage, Never> 
-public var deleteSubscriptionPublisher: AnyPublisher<String, Never> 
-
 ```
 
-### Approve Request
+#### Subscribe Subscription Deletion
+
+Emits  a topic of a deleted subscription.
+
+```swift
+public var deleteSubscriptionPublisher: AnyPublisher<String, Never> 
+```
+
+#### Subscribe Subscription Update
+
+Emits a result of a subscription update, containing updated subscription if successful. 
+
+```swift
+public var updateSubscriptionPublisher: AnyPublisher<Result<PushSubscription, Error>, Never> {
+```
+
+#### Subscribe Active Subscriptions
+
+Emits a list of active subscriptions.
+
+```swift
+public var subscriptionsPublisher: AnyPublisher<[PushSubscription], Never> 
+```
+
+
+### Create Push Subscription
+
+To enable seamless communication between a Dapp and a wallet, the wallet must first establish a Push Subscription. This crucial step allows the Dapp and its associated services to transmit push messages directly to the wallet. Upon granting permission for the wallet's iOS application to display Push Notifications, users will experience real-time updates in the form of push notifications on their devices. For an enhanced user experience, consider subscribing to the `pushMessagePublisher` channel. This option ensures that push messages are delivered promptly when the app is active and a web socket connection is established, keeping users informed and engaged.
+
+
+#### Approve Request
 
 Once you have an active pairing with a dapp and the Push wallet client configured, a dapp is able to send a push request to a wallet. The `requestPublisher` will publish an event.
 After the user accepts the dapp's request, you can call following method:
@@ -71,11 +105,19 @@ After the user accepts the dapp's request, you can call following method:
 ```swift
 try await Push.wallet.approve(id: id)
 ```
+`id` - RPCID of a request
 
-### Subscribe to Push Messages from a Dapp
+#### Subscribe from a wallet
 
-After push subscription is established, the dapp and it's services can send push messages to a wallet. If user approves the wallet iOS application to display Push Notifications, all the push messages will be displayed in a form of push notifications on the user's screen. Additionally you can subscribe for push messages with it's publisher `pushMessagePublisher` but messages with this channel will be delivered only when the app is in foreground and a web socket connection is opened.
-
+Another way of subscribing to dapp's push messages is to fetch publicly discoverable dapps with WalletConnet explorer and request a subscription directly from the wallet:
+```swift
+public func subscribe(metadata: AppMetadata, account: Account, onSign: @escaping SigningCallback) async throws {
+```
+`metadata` - metadata object of publicly discoverable dapp fetched from WalletConnect explorer
+`account` - an account you want to associate a sebscription with
+`onSign` - callback that requres a signature from a user
+ 
+ 
 ### Get Active Subscriptions
 
 ```swift 
@@ -88,6 +130,14 @@ To delete a subscription.
 
 ```swift
 try await Push.wallet.delete(topic: String)
+```
+
+### Get Push Messages
+
+To get messages by topic call:
+
+```swift
+Push.wallet.getMessageHistory(topic: subscription.topic) 
 ```
 
 ### Decrypt Push Notifications
