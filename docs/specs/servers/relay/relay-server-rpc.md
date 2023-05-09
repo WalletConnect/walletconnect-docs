@@ -85,7 +85,7 @@ Used when a client subscribes a given topic.
   "method": "irn_subscribe",
   "params" : {
     "topic" : string,
-    "ttl": number
+    "ttl": number (optional / default = 604800 seconds)
   }
 }
 
