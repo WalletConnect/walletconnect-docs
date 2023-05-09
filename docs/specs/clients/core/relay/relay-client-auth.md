@@ -34,7 +34,20 @@ Client authentication is described with a did-jwt using the following claims:
 
 `aud` - relay server url
 
-`sub` - random nonce (unique per connection)
+`sub` - random session identifier
 
 `act` - description of action intent. Must be equal to "client_auth"
 
+### Relay Session
+
+A Relay session is defined by the following lifecycle conditions:
+
+* Session initializes when the app loads for the first time
+* Session terminates when the app is closed or terminated
+* Session is persisted when switching between foreground and background
+* Session is unique per each tab instance (specific for web browsers)
+
+A Relay session identifier should be:
+* Persisted through the whole session lifecycle
+* Re-used whenever the websocket reconnects
+* Formatted as 32 byte hex string
