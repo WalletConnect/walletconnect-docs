@@ -261,7 +261,8 @@ module.exports = {
                   items: [
                     'new_web3modal/react/wagmi/installation',
                     'new_web3modal/react/wagmi/components',
-                    'new_web3modal/react/wagmi/hooks'
+                    'new_web3modal/react/wagmi/hooks',
+                    'new_web3modal/react/wagmi/options'
                   ]
                 },
                 'new_web3modal/react/provider'
