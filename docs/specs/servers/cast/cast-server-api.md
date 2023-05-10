@@ -86,7 +86,7 @@ Response:
 
 Used to update the registered webhook
 
-`PUT /<webhook_id>`
+`PUT /webhooks/<webhook_id>`
 
 Body:
 
@@ -96,6 +96,15 @@ Body:
     "webhook": string
 } 
 ```
+
+
+
+## Delete Webhook
+
+Used to delete the registered webhook
+
+`Delete /webhooks/<webhook_id>`
+
 
 
 ## Notify
