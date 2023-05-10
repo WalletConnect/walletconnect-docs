@@ -32,7 +32,7 @@ Similar pattern happens when signing requests are required from the user:
 ## iOS Wallet Support
 
 
-iOS has some more caveats to the integration but we ensure to make it as straightforward as possible. Since its operating system is not designed to handle multiple applications subscribing to the same deep linking schema, we've designed the QRCode Modal to list supporting wallets on our [Explorer](https://explorer.walletconnect.com/) and target specific deep links or universal links for each wallet.
+iOS has some more caveats to the integration but we ensure to make it as straightforward as possible. Since its operating system is not designed to handle multiple applications subscribing to the same deep linking schema, we've designed the QRCode Modal to list supporting wallets on our [Explorer](https://walletconnect.com/explorer) and target specific deep links or universal links for each wallet.
 
 To add your own wallet to the Explorer, login to your [WalletConnect Cloud](https://walletconnect.com) account.
 
