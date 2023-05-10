@@ -17,7 +17,7 @@ Body:
 }
 ```
 
-### Register Webhook
+## Register Webhook
 
 Used to register a webhook that would return when accounts are subscribed or unsubscribed
 
@@ -46,9 +46,57 @@ Webhook payload:
 {
     "id": string,
     "event": string, // subscribe or unsubscribed
-    "account": string // CAIP-10 account
+    "account": string, // CAIP-10 account
+    "dapp": string // dApp at which the account was registered
 }
 ```
+
+
+## Registered Webhooks
+
+Used to retrieve the list of registered webhooks
+
+`GET /webhooks`
+
+Response:
+
+```jsonc
+{
+  "<webhook_id1>": {
+    "url": "<webhook_url1>",
+    "events": [
+      "<event1>",
+      "<event2>",
+      ...
+    ]
+  },
+  "<webhook_id2>": {
+    "url": "<webhook_url2>",
+    "events": [
+      "<event1>",
+      ...
+    ]
+  },
+  ...
+}
+```
+
+
+## Update Webhook
+
+Used to update the registered webhook
+
+`PUT /<webhook_id>`
+
+Body:
+
+```jsonc
+{
+    "events": string[], // subscribed or unsubscribed
+    "webhook": string
+} 
+```
+
 
 ## Notify
 
