@@ -7,29 +7,29 @@ Every project using WalletConnect SDKs (including Web3Modal) needs to obtain `pr
 ## Add Packages
 
 ```bash npm2yarn
-npm install @web3modal/ethereum @web3modal/html @wagmi/core ethers@^5
+npm install @web3modal/ethereum @web3modal/html @wagmi/core viem
 ```
 
 ## Implementation
 
-Start by importing Web3Modal and wagmi packages, then create wagmi client using your own settings or our default presets as shown below. Finally, pass wagmi client to Web3Modal as `ethereumClient`.
+Start by importing Web3Modal and wagmi packages, then create wagmi config using your own settings or our default presets as shown below. Finally, pass wagmi config to Web3Modal as `ethereumClient`.
 
 ```js
 import { EthereumClient, w3mConnectors, w3mProvider } from '@web3modal/ethereum'
 import { Web3Modal } from '@web3modal/html'
-import { configureChains, createClient } from '@wagmi/core'
+import { configureChains, createConfig } from '@wagmi/core'
 import { arbitrum, mainnet, polygon } from '@wagmi/core/chains'
 
 const chains = [arbitrum, mainnet, polygon]
 const projectId = 'YOUR_PROJECT_ID'
 
-const { provider } = configureChains(chains, [w3mProvider({ projectId })])
-const wagmiClient = createClient({
+const { publicClient } = configureChains(chains, [w3mProvider({ projectId })])
+const wagmiConfig = createConfig({
   autoConnect: true,
   connectors: w3mConnectors({ projectId, version: 1, chains }),
-  provider
+  publicClient
 })
-const ethereumClient = new EthereumClient(wagmiClient, chains)
+const ethereumClient = new EthereumClient(wagmiConfig, chains)
 const web3modal = new Web3Modal({ projectId }, ethereumClient)
 ```
 
@@ -48,5 +48,5 @@ Add our pre-built button component in your app to open/close connection and acco
 [wagmi core](https://wagmi.sh) provides everything you'll need to start working with accounts, contracts, chains and much more.
 
 ```tsx
-import { getAccount, readContract, fetchSigner } from '@wagmi/core'
+import { getAccount, readContract } from '@wagmi/core'
 ```
