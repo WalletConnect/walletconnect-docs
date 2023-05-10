@@ -83,6 +83,11 @@ abstract class Web3InboxSDKChatFacade {
   public abstract getMessages(params: {
     topic: string;
   }): Promise<[Message]>;
+
+  // returns all account addresses that are muted for an account
+  public abstract getMutedContacts(params: {
+    account: string;
+  }): Promise<[string]>;
   
   /*
     Event observing.
@@ -119,7 +124,15 @@ abstract class Web3InboxSDKPushFacade {
     Event observing.
     Note: All observers return a method to stop observing.
   */
-  public abstract observe("push_response", Observer<{id: number, response:{error?: Reason, subscription?: PushSubscription }>): () => void;
+  public abstract observe("push_response", Observer<{id: number, response:{error?: Reason, subscription?: PushSubscription }}>): () => void;
+}
+
+abstract class Web3InboxSyncFacede {
+  /*
+    Event observing.
+    Note: All observers return a method to stop observing.
+  */
+  public abstract observe("sync_update", Observer<{ store: string, update: StoreUpdate }>): () => void;
 }
 
 abstract class Web3InboxSDK {
@@ -129,6 +142,7 @@ abstract class Web3InboxSDK {
   // within web3inbox.
   public readonly get chat: Web3InboxSDKChatFacade
   public readonly get push: Web3InboxSDKPushFacade
+  public readonly get sync: Web3InboxSDKSyncFacade
 
   // If the init function does not receive `params`, Web3InboxSDK operates in a 
   // stateless manner where it does not maintain chat/push clients and only
