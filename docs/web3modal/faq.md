@@ -2,7 +2,7 @@
 
 ## How can I add a native or extension wallet to Web3Modal?
 
-Web3Modal fetches wallet information from [WalletConnect explorer](https://explorer.walletconnect.com). In order to add your wallet to it, please submit your project at [cloud.walletconnect.com](https://cloud.walletconnect.com).
+Web3Modal fetches wallet information from our [Explorer](https://walletconnect.com/explorer). In order to add your wallet to it, please submit your project at [cloud.walletconnect.com](https://cloud.walletconnect.com).
 
 ## What is the difference between standalone and other packages?
 

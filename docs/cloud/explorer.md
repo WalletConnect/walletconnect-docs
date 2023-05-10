@@ -1,6 +1,6 @@
 # Explorer
 
-The WalletConnect Cloud Explorer is an open-source solution to submit and showcase wallets and dApps that support WalletConnect. You can view existing entries over at our [explorer website](https://explorer.walletconnect.com/) or use the [Cloud Explorer API](#cloud-explorer-api) to fetch them programmatically.
+The WalletConnect Cloud Explorer is an open-source solution to submit and showcase wallets and dApps that support WalletConnect. You can view existing entries over at our [Explorer](https://walletconnect.com/explorer) or use the [Cloud Explorer API](#cloud-explorer-api) to fetch them programmatically.
 
 ## Setting Up a New Project
 
@@ -14,7 +14,7 @@ In order to connect to WalletConnect Cloud, you need to create a new project:
 
 ## Submitting a project
 
-Head over to [cloud.walletconnect.com](https://cloud.walletconnect.com/) and create an account if you don't already have one. Once you sign in, simply fill out our project form under the "Explorer" section and submit it for review. To ensure fast approval make sure you follow our [submission guidelines](https://explorer.walletconnect.com/guidelines). Once approved your project will automatically appear on our website and API.
+Head over to [cloud.walletconnect.com](https://cloud.walletconnect.com/) and create an account if you don't already have one. Once you sign in, simply fill out our project form under the "Explorer" section and submit it for review. To ensure fast approval make sure you follow our [submission guidelines](https://walletconnect.com/guidelines). Once approved your project will automatically appear on our website and API.
 
 If you would like to edit or claim an existing cloud explorer item, email us at support@walletconnect.com to help migrate the listing to your account.
 
@@ -22,7 +22,7 @@ If you would like to edit or claim an existing cloud explorer item, email us at 
 
 The Cloud Explorer API currently offers the following functionality:
 
-- [Listings](#listings) - Allows for fetching of wallets and dApps listed in the [WalletConnect Cloud Explorer](https://explorer.walletconnect.com/).
+- [Listings](#listings) - Allows for fetching of wallets and dApps listed in the [WalletConnect Cloud Explorer](https://walletconnect.com/explorer).
 - [Logos](#logos) - Provides logo assets in different sizes for a given Cloud explorer entry.
 
 ### Listings
@@ -78,7 +78,7 @@ Examples:
 #### `GET /v3/all?projectId=YOUR_PROJECT_ID&ids=LISTING_ID1,LISTING_ID2`
 
 Returns a JSON object containing the entry listings by ID, which can be useful for allowlisting purposes. <br/>
-You can find and copy listing ids from our [Explorer UI](https://explorer.walletconnect.com/)
+You can find and copy listing ids from our [Explorer](https://walletconnect.com/explorer)
 
 Examples:
 
