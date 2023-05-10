@@ -4,17 +4,24 @@ import Container from '../../components/Container';
 
 ## Implementation
 
-Import Web3Modal package and replace `YOUR_PROJECT_ID` with your [WalletConnect Cloud](https://cloud.walletconnect.com/sign-in) Project ID.
+Import Web3Modal package, replace `YOUR_PROJECT_ID` with your [WalletConnect Cloud](https://cloud.walletconnect.com/sign-in) Project ID and add your Project's info in `providerMetadata`
 
 ```tsx
 import { Web3Modal } from '@web3modal/react-native';
 
 const projectId = 'YOUR_PROJECT_ID';
 
+const providerMetadata = {
+  name: 'RN V2 dApp',
+  description: 'RN dApp by WalletConnect',
+  url: 'https://walletconnect.com/',
+  icons: ['https://avatars.githubusercontent.com/u/37784886'],
+};
+
 function App() {
   return (
     <>
-      <Web3Modal projectId={projectId} />
+      <Web3Modal projectId={projectId} providerMetadata={providerMetadata} />
     </>
   )
 }
@@ -28,12 +35,14 @@ Add our pre-built button component in your dapp to open/close connection and acc
 import { Web3Modal, Web3Button } from '@web3modal/react-native';
 
 const projectId = 'YOUR_PROJECT_ID';
+const providerMetadata= {<YOUR_PROJECT_METADATA>}
+
 
 function App() {
   return (
     <>
       <Web3Button />
-      <Web3Modal projectId={projectId} />
+      <Web3Modal projectId={projectId} providerMetadata={providerMetadata}  />
     </>
   )
 }
@@ -73,6 +82,7 @@ import { Pressable, Text } from 'react-native';
 import { Web3Modal, useWeb3Modal } from '@web3modal/react-native';
 
 const projectId = 'YOUR_PROJECT_ID';
+const providerMetadata= {<YOUR_PROJECT_METADATA>}
 
 function App() {
   const { open, isConnected } = useWeb3Modal();
@@ -81,7 +91,7 @@ function App() {
       <Pressable onPress={open}>
         <Text>{isConnected ? 'View Account' : 'Connect'}</Text>
       </Pressable>
-      <Web3Modal projectId={projectId} />
+      <Web3Modal projectId={projectId} providerMetadata={providerMetadata} />
     </>
   )
 }
