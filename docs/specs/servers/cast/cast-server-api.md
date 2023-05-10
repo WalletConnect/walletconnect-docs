@@ -47,7 +47,7 @@ Webhook payload:
     "id": string,
     "event": string, // subscribe or unsubscribed
     "account": string, // CAIP-10 account
-    "dapp": string // dApp at which the account was registered
+    "dappUrl": string // dApp's URL with which the account was registered
 }
 ```
 
