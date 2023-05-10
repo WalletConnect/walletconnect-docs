@@ -103,7 +103,7 @@ Body:
 
 Used to delete the registered webhook
 
-`Delete /webhooks/<webhook_id>`
+`DELETE /webhooks/<webhook_id>`
 
 
 
