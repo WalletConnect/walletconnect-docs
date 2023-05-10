@@ -5,11 +5,11 @@ import ObtainProjectIdPartial from '../../_partials/obtainProjectId.mdx'
 [wagmi](https://wagmi.sh/react/getting-started) is a collection of React Hooks containing everything you need to start working with Ethereum.
 wagmi makes it easy to display ENS and balance information, sign messages, interact with contracts, and much more — all with caching, request deduplication, and persistence.
 
-## Obtain Project ID
+## Obtain project id
 
 <ObtainProjectIdPartial />
 
-## Add Packages
+## Add packages
 
 ```bash npm2yarn
 npm install @web3modal/ethereum @web3modal/react wagmi viem
@@ -47,4 +47,36 @@ function App() {
     </>
   )
 }
+```
+
+## Trigger the modal
+
+Use pre-built [Web3Button](./components#web3button) component.
+
+```tsx
+import { Web3Button } from '@web3modal/react'
+
+function HomePage() {
+  return <Web3Button />
+}
+```
+
+Alternatively, use your own button with [useWeb3Modal](./hooks#useWeb3Modal) hook.
+
+```tsx
+import { useWeb3Modal } from '@web3modal/react'
+
+function HomePage() {
+  const { open, close } = useWeb3Modal()
+
+  return <button onClick={() => open()}>Connect</button>
+}
+```
+
+## Use wagmi hooks
+
+[wagmi](https://wagmi.sh) provides everything you'll need to start working with accounts, contracts, chains and much more.
+
+```tsx
+import { useAccount, useContract } from 'wagmi'
 ```

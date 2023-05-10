@@ -14,31 +14,27 @@ const { isOpen, open, close, setDefaultChain } = useWeb3Modal()
 
 ### Refference
 
-Boolean that indicates if modal is open or closed
-
 ```ts
+// Boolean that indicates if modal is open or closed
 isOpen: boolean
 ```
 
-Function to open the modal. Takes in optional object with options
-
 ```ts
+// Function to open the modal. Takes in optional object with options
+open: (options?: Options) => Promise<void>
+
 interface Options {
   route?: 'Account' | 'ConnectWallet' | 'Help' | 'SelectNetwork'
 }
-
-open: (options?: Options) => Promise<void>
 ```
 
-Function to close the modal
-
 ```ts
+// Function to close the modal
 close: () => void
 ```
 
-Function to set a default chain before user connects
-
 ```ts
+// Function to set a default chain before user connects
 setDefaultChain: (chain: WagmiChain) => void
 ```
 
@@ -46,15 +42,25 @@ setDefaultChain: (chain: WagmiChain) => void
 
 Hook to set or update theme options like `themeVariables` and `themeMode`.
 
+### Example
+
 ```tsx
 import { useWeb3ModalTheme } from '@web3modal/react'
 
 const { theme, setTheme } = useWeb3ModalTheme()
+```
 
-// Modal's theme object
-theme
+### Refference
 
-// Set modal theme
+```tsx
+// Object that reflets current modal theme
+theme: {
+  themeMode, themeVariables
+}
+```
+
+```tsx
+// Function to set modal's themeMode and themeVariables options
 setTheme({
   themeMode: 'dark',
   themeVariables: {
