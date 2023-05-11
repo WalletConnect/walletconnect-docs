@@ -104,7 +104,9 @@ abstract class Web3InboxSDKChatFacade {
 
   // subscribe to new chat thread left
   public abstract observe("chat_left",  Observer<{ topic: string }>): () => void;
-  
+
+  // subscribe to updates from sync stores
+  public abstract observe("sync_update", Observer<{ store: string, update: StoreUpdate }>): () => void;
 }
 
 abstract class Web3InboxSDKPushFacade {
@@ -125,13 +127,8 @@ abstract class Web3InboxSDKPushFacade {
     Note: All observers return a method to stop observing.
   */
   public abstract observe("push_response", Observer<{id: number, response:{error?: Reason, subscription?: PushSubscription }}>): () => void;
-}
 
-abstract class Web3InboxSyncFacede {
-  /*
-    Event observing.
-    Note: All observers return a method to stop observing.
-  */
+  // subscribe to updates from sync stores
   public abstract observe("sync_update", Observer<{ store: string, update: StoreUpdate }>): () => void;
 }
 
@@ -142,7 +139,6 @@ abstract class Web3InboxSDK {
   // within web3inbox.
   public readonly get chat: Web3InboxSDKChatFacade
   public readonly get push: Web3InboxSDKPushFacade
-  public readonly get sync: Web3InboxSDKSyncFacade
 
   // If the init function does not receive `params`, Web3InboxSDK operates in a 
   // stateless manner where it does not maintain chat/push clients and only
