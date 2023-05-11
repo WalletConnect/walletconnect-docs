@@ -242,6 +242,13 @@ module.exports = {
     },
     {
       type: 'category',
+      label: 'Introduction',
+      collapsible: false,
+      className: 'menu_outer_list',
+      items: ['web/about-web3modal', 'web/about-web3wallet']
+    },
+    {
+      type: 'category',
       label: 'SDKs',
       className: 'menu_outer_list',
       collapsible: false,
@@ -285,76 +292,6 @@ module.exports = {
           items: ['web3modal/html/introduction']
         },
 
-        // {
-        //   type: 'category',
-        //   label: 'Web3Modal',
-        //   collapsible: true,
-        //   collapsed: true,
-        //   items: [
-        //     'web3modal/about',
-        //     {
-        //       type: 'category',
-        //       label: 'Getting Started',
-        //       collapsed: true,
-        //       collapsible: true,
-        //       items: [
-        //         {
-        //           type: 'category',
-        //           label: 'React',
-        //           collapsed: true,
-        //           collapsible: true,
-        //           items: [
-        //             'web3modal/react/installation',
-        //             'web3modal/react/hooks',
-        //             'web3modal/react/components'
-        //           ]
-        //         },
-        //         {
-        //           type: 'category',
-        //           label: 'HTML',
-        //           collapsed: true,
-        //           collapsible: true,
-        //           items: [
-        //             'web3modal/html-js/installation',
-        //             'web3modal/html-js/actions',
-        //             'web3modal/html-js/components'
-        //           ]
-        //         }
-        //       ]
-        //     },
-        //     {
-        //       type: 'category',
-        //       label: 'Customization',
-        //       collapsed: true,
-        //       collapsible: true,
-        //       items: ['web3modal/options', 'web3modal/theming']
-        //     },
-        //     {
-        //       type: 'category',
-        //       label: 'Advanced',
-        //       collapsed: true,
-        //       collapsible: true,
-        //       items: [
-        //         'web3modal/advanced/wallets',
-        //         'web3modal/advanced/chains',
-        //         'web3modal/advanced/providers',
-        //         'web3modal/advanced/mobile-linking',
-        //         {
-        //           type: 'category',
-        //           label: 'Standalone Sign',
-        //           collapsed: true,
-        //           collapsible: true,
-        //           items: [
-        //             'web3modal/advanced/standalone/sign/about',
-        //             'web3modal/advanced/standalone/sign/installation',
-        //             'web3modal/advanced/standalone/sign/actions'
-        //           ]
-        //         }
-        //       ]
-        //     },
-        //     'web3modal/faq'
-        //   ]
-        // },
         {
           type: 'category',
           label: 'Web3Wallet',
