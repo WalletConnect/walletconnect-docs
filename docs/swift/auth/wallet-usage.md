@@ -31,7 +31,7 @@ Auth.configure(account: <Account>, signerFactory: <SignerFactory>)
 Following publishers are available to subscribe:
 
 ```swift
-public var authRequestPublisher: AnyPublisher<(request: AuthRequest, context: AuthContext?), Never>
+public var authRequestPublisher: AnyPublisher<(request: AuthRequest, context: VerifyContext?), Never>
 public var authResponsePublisher: AnyPublisher<(id: RPCID, result: Result<Cacao, AuthError>), Never>
 public let socketConnectionStatusPublisher: AnyPublisher<SocketConnectionStatus, Never>
 ```
@@ -43,7 +43,7 @@ When your `Auth` instance receives requests or responses from a peer client, it 
 ```swift
 Auth.instance.authRequestPublisher
     .receive(on: DispatchQueue.main)
-    .sink { [unowned self] auth in
+    .sink { [self self] auth in
         self?.verifyDapp(auth.context)
         self?.showAuthRequest(auth.request)
     }.store(in: &publishers)
@@ -51,8 +51,10 @@ Auth.instance.authRequestPublisher
 
 Auth context provides a domain verification information about `AuthRequest`. It consists of origin of a Dapp from where the request has been sent, validation enum that says whether origin is **unknown**, **valid** or **invalid** and verify url server. 
 
+To enable verification you have to provide `verifyUrl` in your [AppMetadata](https://docs.walletconnect.com/2.0/ios/core/pairing-usage#pair-configuration). To use a default verify server set this value to `verify.walletconnect.com`. To oup-out just ignore this parameter (`nil` by default).
+
  ```swift
-public struct AuthContext: Equatable, Hashable {
+public struct VerifyContext: Equatable, Hashable {
     public enum ValidationStatus {
         case unknown
         case valid

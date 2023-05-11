@@ -5,14 +5,28 @@ Confirm you have configured the Network and Pair Client first
 - [Networking](../core/networking-configuration.md)
 - [Pairing](../core/pairing-usage.md)
 
+### Configure Sign Client
+In order to initialize a client just call a `configure` method from the Sign instance wrapper
+```swift
+let metadata = AppMetadata(
+    name: "Swift wallet",
+    description: "wallet",
+    url: "wallet.connect",
+    icons: ["https://my_icon.com/1"],
+    // Used for the Verify: to opt-out verification ingore this parameter
+    verifyUrl: "verify.walletconnect.com"
+)
+Sign.configure(metadata: metadata)
+```
+
 ### Subscribe for Sign Publishers
 
 The following publishers are available to subscribe:
 
 ```swift
 public var sessionsPublisher: AnyPublisher<[Session], Never>
-public var sessionProposalPublisher: AnyPublisher<(proposal: Session.Proposal, context: Session.Context?), Never>
-public var sessionRequestPublisher: AnyPublisher<(request: Request, context: Session.Context?), Never>
+public var sessionProposalPublisher: AnyPublisher<(proposal: Session.Proposal, context: VerifyContext?), Never>
+public var sessionRequestPublisher: AnyPublisher<(request: Request, context: VerifyContext?), Never>
 public var socketConnectionStatusPublisher: AnyPublisher<SocketConnectionStatus, Never> 
 public var sessionSettlePublisher: AnyPublisher<Session, Never> 
 public var sessionDeletePublisher: AnyPublisher<(String, Reason), Never> 
@@ -47,10 +61,12 @@ Sign.instance.sessionProposalPublisher
 Session proposal is a handshake sent by a dapp and it's purpose is to define a session rules. Handshake procedure is defined by [CAIP-25](https://github.com/ChainAgnostic/CAIPs/blob/master/CAIPs/caip-25.md).
 `Session.Proposal` object conveys set of required `ProposalNamespaces` that contains required blockchains methods and events. Dapp requests with methods and wallet will emit events defined in namespaces. 
 
-`Session.Context` provides a domain verification information about `Session.Proposal` and `Request`. It consists of origin of a Dapp from where the request has been sent, validation enum that says whether origin is **unknown**, **valid** or **invalid** and verify url server. 
+`Session.Context` provides a domain verification information about `Session.Proposal` and `Request`. It consists of origin of a Dapp from where the request has been sent, validation enum that says whether origin is **unknown**, **valid** or **invalid** and verify url server.
+
+To enable verification you have to provide `verifyUrl` in your [AppMetadata](https://docs.walletconnect.com/2.0/ios/sign/wallet-usage#configure-sign-client). To use a default verify server set this value to `verify.walletconnect.com`. To oup-out just ignore this parameter (`nil` by default).
 
  ```swift
-public struct Context: Equatable, Hashable {
+public struct VerifyContext: Equatable, Hashable {
     public enum ValidationStatus {
         case unknown
         case valid
@@ -77,12 +93,12 @@ Example proposal namespaces request:
 
 ```json
 {
-    "eip155":{
+    "eip155": {
         "chains": ["eip155:137", "eip155:1"],
         "methods": ["eth_sign"],
         "events": ["accountsChanged"]
     },
-    "cosmos":{
+    "cosmos": {
         "chains": ["cosmos:cosmoshub-4"],
         "methods": ["cosmos_signDirect"],
         "events": ["someCosmosEvent"]
@@ -94,13 +110,18 @@ Example session namespaces response:
 
 ``` json
 {
-    "eip155":{
-        "accounts": ["eip155:137:0xab16a96d359ec26a11e2c2b3d8f8b8942d5bfcdb", "eip155:1:0xab16a96d359ec26a11e2c2b3d8f8b8942d5bfcdb"],
+    "eip155": {
+        "accounts": [
+            "eip155:137:0xab16a96d359ec26a11e2c2b3d8f8b8942d5bfcdb",
+            "eip155:1:0xab16a96d359ec26a11e2c2b3d8f8b8942d5bfcdb"
+        ],
         "methods": ["eth_sign"],
         "events": ["accountsChanged"]
     },
-    "cosmos":{
-        "accounts": ["cosmos:cosmoshub-4:cosmos1t2uflqwqe0fsj0shcfkrvpukewcw40yjj6hdc0"],
+    "cosmos": {
+        "accounts": [
+            "cosmos:cosmoshub-4:cosmos1t2uflqwqe0fsj0shcfkrvpukewcw40yjj6hdc0"
+        ],
         "methods": ["cosmos_signDirect", "personal_sign"],
         "events": ["someCosmosEvent", "proofFinalized"]
     }
@@ -144,7 +165,10 @@ do {
 ### Approve Session
 
 ```swift
- Sign.instance.approve(proposalId: "proposal_id", namespaces: [String: SessionNamespace])
+ Sign.instance.approve(
+    proposalId: "proposal_id", 
+    namespaces: sessionNamespaces
+)
 ```
 
 When session is successfully approved `sessionSettlePublisher` will publish a `Session`
@@ -174,7 +198,7 @@ To track sessions subscribe to `sessionsPublisher` publisher
 ```swift
 Sign.instance.sessionsPublisher
     .receive(on: DispatchQueue.main)
-    .sink { [unowned self] (sessions: [Session]) in
+    .sink { [self self] (sessions: [Session]) in
         // Reload UI
     }.store(in: &publishers)
 ```
@@ -238,6 +262,6 @@ try await Sign.instance.disconnect(topic: session.topic)
 
 ### Where to go from here
 
-- Try our example wallet implementation that is part of WalletConnectSwiftV2 repository.
+- Try our example wallet implementation [here](https://github.com/WalletConnect/WalletConnectSwiftV2/tree/main/Example/WalletApp).
 - To dive deeper into protocol concepts check out our [documentation](https://docs.walletconnect.com/2.0/protocol/glossary)
 - Build API documentation in XCode: go to Product -> Build Documentation
