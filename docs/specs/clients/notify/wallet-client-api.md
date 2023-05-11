@@ -44,13 +44,16 @@ abstract class WalletClient {
   // ---------- Events ----------------------------------------------- //
 
   // for wallet to listen for notify subscription created
-  public abstract on("push_subscription", (result: PushSubscription | Error) => {}): void;
+  public abstract on("notify_subscription", (result: NotifySubscription | Error) => {}): void;
 
   // for wallet to listen on notify request
   public abstract on("notify_request", (id: number, account: string, metadata: Metadata) => {}): void;
   
   //  for wallet to listen on notify messages
   public abstract on("notify_message", (message: NotifyMessageRecord, metadata: Metadata) => {}): void;
+  
+  // for wallet to listen for result of notify subscription update
+  public abstract on("notify_update", (result: NotifySubscription | Error) => {}): void;
 
   // for wallet to listen on notify deletion
   public abstract on("notify_delete", (topic: string) => {}): void;

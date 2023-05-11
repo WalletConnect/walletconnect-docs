@@ -43,16 +43,6 @@ On iOS, use CocoaPods to add the native modules to your project:
 npx pod-install
 ```
 
-## Apply Polyfills
-
-In your root file, add this lines:
-
-```javascript
-import '@walletconnect/react-native-compat';
-import '@ethersproject/shims';
-```
-
-
 </TabItem>
 
 <TabItem value="expo" label="Expo">
@@ -75,14 +65,13 @@ If you are using Expo SDK 48+, there's an [issue](https://github.com/expo/expo/i
 npx expo install expo-crypto
 ```
 
-## Apply Polyfills
+#### Apply Polyfill
 
-In your root file, add this lines:
+In your root file, add this line:
 
 ```javascript
-// import './expo-crypto-shim.js' --> Only for Expo SDK 48+
-import '@walletconnect/react-native-compat';
-import '@ethersproject/shims';
+// Only for Expo SDK 48+
+import './expo-crypto-shim.js'
 ```
 
 </TabItem>

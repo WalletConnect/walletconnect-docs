@@ -4,7 +4,7 @@ Communication between a mobile wallet and a mobile application is possible by de
 
 :::info
 
-Deeplinking flow works in the same way in all pur products (Sign, Auth, Push, Chat)
+Deeplinking flow works in the same way in all our products (Sign, Auth, Push, Chat)
 
 :::
 
@@ -27,6 +27,8 @@ Similar pattern happens when Dapp wants to send a signing request to wallet:
 
 ## Wallet Support
 
+**Disclaimer:** The below solution is designed for the communication between native Android dapps and native Android wallets. In the case of mobile browser dapps and native Android wallets communication, we recommend moving wallets into the background after both approving and rejecting sessions or approving and rejecting requests to persist smooth deep-link UX.
+
 In order to add support for mobile linking within your wallet and receive session proposals, register following deep link in your mobile wallet using intent filters in your Activity/Fragment or deepLink tag in your navigation graph.
 
 Deep link example: `wc://{topic}@2`
@@ -46,14 +48,14 @@ val appMetaData = Core.Model.AppMetaData(
 
 CoreClient.initialize(relayServerUrl = serverUrl, connectionType = connectionType, application = application, metaData = appMetaData)
 
-val init = Sign.Params.Init(coreClient = CoreClient)
-SignClient.initialize(init)
+val init = Wallet.Params.Init(coreClient = CoreClient)
+Web3Wallet.initialize(init)
 ```
 
 **Heads-up:** To make this flow working well, Wallet must register one of its Android components with the same deep link that it initialized with.
 
 To check the flow implementation described above have a look on our sample wallet:
-https://github.com/WalletConnect/WalletConnectKotlinV2/tree/master/signSDK/wallet
+https://github.com/WalletConnect/WalletConnectKotlinV2/tree/master/samples/wallet
 
 ## Dapp Support
 
@@ -85,7 +87,7 @@ SignClient.initialize(init)
 **Heads-up:** To make this flow working well, Dapp must register one of its Android components with the same deep link that it initialized with.
 
 To check the flow implementation described above have a look on our sample Dapp:
-https://github.com/WalletConnect/WalletConnectKotlinV2/tree/master/signSDK/dapp
+https://github.com/WalletConnect/WalletConnectKotlinV2/tree/master/samples/dapp
 
 ## References
 * https://developer.android.com/guide/navigation/navigation-deep-link#implicit
