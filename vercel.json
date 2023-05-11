@@ -144,6 +144,14 @@
     {
       "source": "/2.0/csharp/:path*",
       "destination": "/2.0/unity/:path*"
+    },
+    {
+      "source": "/2.0/specs/servers/echo",
+      "destination": "/2.0/advanced/echo-server"
+    },
+    {
+      "source": "/2.0/specs/servers/cast",
+      "destination": "/2.0/specs/servers/cast/cast-server-api"
     }
   ]
 }
