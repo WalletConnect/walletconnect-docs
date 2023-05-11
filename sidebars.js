@@ -257,7 +257,7 @@ module.exports = {
           type: 'category',
           label: 'Web3Modal | React',
           items: [
-            'web3modal/react/introduction',
+            'web/web3modal/react/introduction',
             {
               type: 'category',
               label: 'Ethereum',
@@ -266,30 +266,30 @@ module.exports = {
                   type: 'category',
                   label: 'With Wagmi',
                   items: [
-                    'web3modal/react/wagmi/installation',
-                    'web3modal/react/wagmi/components',
-                    'web3modal/react/wagmi/hooks',
-                    'web3modal/react/wagmi/options',
-                    'web3modal/react/wagmi/theming',
-                    'web3modal/react/wagmi/custom-wallets',
-                    'web3modal/react/wagmi/custom-chains',
-                    'web3modal/react/wagmi/custom-providers'
+                    'web/web3modal/react/wagmi/installation',
+                    'web/web3modal/react/wagmi/components',
+                    'web/web3modal/react/wagmi/hooks',
+                    'web/web3modal/react/wagmi/options',
+                    'web/web3modal/react/wagmi/theming',
+                    'web/web3modal/react/wagmi/custom-wallets',
+                    'web/web3modal/react/wagmi/custom-chains',
+                    'web/web3modal/react/wagmi/custom-providers'
                   ]
                 },
-                'web3modal/react/provider'
+                'web/web3modal/react/provider'
               ]
             },
             {
               type: 'category',
               label: 'Multichain',
-              items: ['web3modal/react/sign', 'web3modal/react/auth']
+              items: ['web/web3modal/react/sign', 'web/web3modal/react/auth']
             }
           ]
         },
         {
           type: 'category',
           label: 'Web3Modal | HTML',
-          items: ['web3modal/html/introduction']
+          items: ['web/web3modal/html/introduction']
         },
 
         {
