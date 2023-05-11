@@ -44,7 +44,7 @@ In this repository, we document and discuss features that are currently under de
     {
       name: "Echo Server",
       description: "Echo server observes incoming messages on the behalf of a Client through a webhook on the Relay Server.",
-      url: `/2.0/advanced/echo-server`
+      url: `/2.0/specs/servers/echo/spec`
     },
     {
       name: "Cast Server",

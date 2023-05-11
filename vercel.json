@@ -147,7 +147,7 @@
     },
     {
       "source": "/2.0/specs/servers/echo",
-      "destination": "/2.0/advanced/echo-server"
+      "destination": "/2.0/specs/servers/echo/spec"
     },
     {
       "source": "/2.0/specs/servers/cast",
