@@ -1,19 +1,19 @@
-# Echo Server Authentication
+# Push Server Authentication
 
 > **Warning**
 > This spec is subject to change; all initial changes made will be non-breaking. For more information read the [footnote](#footnote).
 
-We use Ed25519 to verify that requests from the Relay are valid and intended for the Echo Server Instance that has received them.
+We use Ed25519 to verify that requests from the Relay are valid and intended for the Push Server Instance that has received them.
 
 ## Implementation
-The Echo Server instance also fetches the Relay's public key and caches it so that requests received can be validated. 
+The Push Server instance also fetches the Relay's public key and caches it so that requests received can be validated. 
 
-For every request received the Echo Server instance retrieves the `X-Ed25519-Signature` and `X-Ed25519-Timestamp` headers. If these headers are 
+For every request received the Push Server instance retrieves the `X-Ed25519-Signature` and `X-Ed25519-Timestamp` headers. If these headers are 
 not present the request will be treated as unauthenticated. Once these headers are retrieved we can reconstruct the original signature body as below:
 ```
 {timestamp}.{body length}.{body}
 ```
-Then Echo Server will ensure the signature is from the Cached public key and that the body of the signature matches the body that was reconstructed. If
+Then Push Server will ensure the signature is from the Cached public key and that the body of the signature matches the body that was reconstructed. If
 any part of validation fails the request will be treated as unauthenticated and no action should be taken. If the signature is valid the request can
 then be acted upon.
 
@@ -29,5 +29,5 @@ then be acted upon.
 
 ## Footnote
 This is an initial authentication spec which keeps some acknowledged risks from the v1 push server. There are plans to improve upon this spec to
-ensure there are no edge cases or other ways for either the Relay or Echo Server to be mimicked/impersonated. Changes to this spec will initially
+ensure there are no edge cases or other ways for either the Relay or Push Server to be mimicked/impersonated. Changes to this spec will initially
 be non-breaking but there is a breaking change planned for some point in the future to use a more sturdy authentication system.

@@ -1,6 +1,6 @@
 # Data Structures
 
-## Push Subscription
+## Notify Subscription
 
 ```jsonc
 {
@@ -16,7 +16,7 @@
 }
 ```
 
-## Push Message
+## Notify Message
 
 ```jsonc
 {
@@ -28,14 +28,14 @@
 }
 ```
 
-## Push Message Record
+## Notify Message Record
 
 ```jsonc
 {
   "id": string,
   "topic": string,
   "publishedAt": Int64,
-  "message": PushMessage
+  "message": NotifyMessage
 }
 ```
  

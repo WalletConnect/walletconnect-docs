@@ -1,11 +1,11 @@
 # Web3Inbox SDK API
 
-The Web3InboxSDK encompasses both [Push](../../clients/push/README.md) and
+The Web3InboxSDK encompasses both [Notify](../../clients/notify/README.md) and
 [Chat](../../clients/chat/README.md) methods and event listeners. All methods
 within the class documented here are used internally by the web3inbox web
 app. Internally, the state is managed through [RxJS](https://rxjs.dev/),
 which allows the SDK to cleanly listen to events from anywhere. This of
-course includes the Chat & Push clients in the webapp. 
+course includes the Chat & Notify clients in the webapp. 
 
 ## Stateless Mode
 In the case of the webapp being integrated in a native webview, RxJS hooks
@@ -102,15 +102,15 @@ abstract class Web3InboxSDKChatFacade {
   
 }
 
-abstract class Web3InboxSDKPushFacade {
-  // request push subscription
+abstract class Web3InboxSDKNotifyFacade {
+  // request notify subscription
   public abstract request(params: { account: string, pairingTopic: string }): Promise<{ id }>;
   
-  // send push notification message
-  public abstract notify(params: { topic: string, message: PushMessage }): Promise<void>
+  // send notify message
+  public abstract notify(params: { topic: string, message: NotifyMessage }): Promise<void>
   
   // query all active subscriptions
-  public abstract getActiveSubscriptions(): Promise<Record<string, PushSubscription>>;
+  public abstract getActiveSubscriptions(): Promise<Record<string, NotifySubscription>>;
   
   // delete active subscription
   public abstract delete(params: { topic: string }): Promise<void>;
@@ -119,7 +119,7 @@ abstract class Web3InboxSDKPushFacade {
     Event observing.
     Note: All observers return a method to stop observing.
   */
-  public abstract observe("push_response", Observer<{id: number, response:{error?: Reason, subscription?: PushSubscription }>): () => void;
+  public abstract observe("notify_message", Observer<{id: number, response:{error?: Reason, subscription?: NotifySubscription }>): () => void;
 }
 
 abstract class Web3InboxSDK {
@@ -128,10 +128,10 @@ abstract class Web3InboxSDK {
   // of them, this is so that their functionality and state can be managed
   // within web3inbox.
   public readonly get chat: Web3InboxSDKChatFacade
-  public readonly get push: Web3InboxSDKPushFacade
+  public readonly get notify: Web3InboxSDKNotifyFacade
 
   // If the init function does not receive `params`, Web3InboxSDK operates in a 
-  // stateless manner where it does not maintain chat/push clients and only
+  // stateless manner where it does not maintain chat/notify clients and only
   // listens to external events.
   public static abstract init(params?: {
     relayUrl: string;

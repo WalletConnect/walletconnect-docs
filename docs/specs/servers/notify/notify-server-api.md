@@ -1,8 +1,8 @@
-# Cast Server API
+# Notify Server API
 
 ## Register Account
 
-Registers an account and push subscription symmetric key. The `subscriptionAuth` must be attached in the request so the Cast server can verify if wallet proved ownership of an address.
+Registers an account and notify subscription symmetric key. The `subscriptionAuth` must be attached in the request so the Notify server can verify if wallet proved ownership of an address.
 
 `POST /register`
 
@@ -92,7 +92,7 @@ Failed:
 
 ## Subscribe Topic
 
-Used to generate a subscribe topic for a dapp to receive push subscriptions, returns a public key that should be stored on dapps's domain as a did:web document.
+Used to generate a subscribe topic for a dapp to receive notify subscriptions, returns a public key that should be stored on dapps's domain as a did:web document.
 
 **Note:** this method is idempotent and will always return the same key.
 
@@ -116,7 +116,7 @@ Failed:
 
 ## Authentication Key
 
-Used to generate an authentication key for a dapp to send signed push messages, returns a public key that should be stored on dapps's domain as a did:web document.
+Used to generate an authentication key for a dapp to send signed notify messages, returns a public key that should be stored on dapps's domain as a did:web document.
 
 **Note:** this method is idempotent and will always return the same key.
 

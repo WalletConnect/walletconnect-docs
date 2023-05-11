@@ -1,11 +1,11 @@
-# Echo Server Spec
+# Push Server Spec
 
 This is an overview spec document which details the endpoint and what they expect to receive and in turn what responses
 you can expect.
 
 ## Security
 
-The details of Echo Server's Security are in [auth.md](./auth.md)
+The details of Push Server's Security are in [auth.md](./auth.md)
 
 ## Responses
 
@@ -33,7 +33,7 @@ These are the default responses and are only different if otherwise specified.
 }
 ```
 
-This is sent whenever echo server encounters an error. 
+This is sent whenever push server encounters an error. 
 The `fields` property will only be available if it is a user provided field that caused the error. 
 The `errors` property will only be available when we can provide more generic errors e.g. Postgres error.
 
@@ -45,13 +45,13 @@ The `errors` property will only be available when we can provide more generic er
 ### Health
 
 ```
-GET <ECHO_SERVER_URL>/health
+GET <PUSH_SERVER_URL>/health
 ```
 
 #### Example Response
 
 ```
-OK, echo-server v0.1.0
+OK, push-server v0.1.0
 ```
 
 ### Register Client
@@ -66,7 +66,7 @@ POST <ECHO_SERVER_URL>/clients
 ```
 
 - `CLIENT_ID`: The Client's ID from the Relay pairing.
-- `TYPE`: The push service to use e.g. APNS, FCM. This will be validated against the supported types on the Echo
+- `TYPE`: The push service to use e.g. APNS, FCM. This will be validated against the supported types on the Push
   Server's side.
 - `DEVICE_TOKEN`: The device's token for the push service e.g. FCM, APNS.
 
@@ -101,6 +101,6 @@ POST <ECHO_SERVER_URL>/clients/<CLIENT_ID>
     Sign       = 1 << 1
     Auth       = 1 << 2
     Chat       = 1 << 3
-    Push       = 1 << 4
+    Notify     = 1 << 4
     ```
-  - `blob`: If the payload is encrypted this is just the encrypted blob, when this is cleartext it should be base64 encoded. The blob should follow the format from of the [Push Message](https://docs.walletconnect.com/2.0/specs/clients/push/data-structures#push-message) 
+  - `blob`: If the payload is encrypted this is just the encrypted blob, when this is cleartext it should be base64 encoded. The blob should follow the format from of the [Notify Message](https://docs.walletconnect.com/2.0/specs/clients/notify/data-structures#notify-message) 

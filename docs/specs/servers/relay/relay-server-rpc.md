@@ -278,4 +278,4 @@ Response will include a flag `hasMore`. If true, the consumer should fetch again
 
 ## FAQ
 
-- What is a client? - Any SDK instance (Sign, Chat, Auth, Push)
+- What is a client? - Any SDK instance (Sign, Chat, Auth, Notify)

@@ -20,14 +20,14 @@ error: {
 
 ## Methods
 
-### wc_pushSubscribe
+### wc_notifySubscribe
 
-Used to subscribe push subscription to a peer through subscribe topic. Response is expected on the response topic
+Used to subscribe notify subscription to a peer through subscribe topic. Response is expected on the response topic
 
 **Request**
 
 ```jsonc
-// wc_pushSubscribe params
+// wc_notifySubscribe params
 {
   "subscriptionAuth": string
 }
@@ -53,18 +53,18 @@ Used to subscribe push subscription to a peer through subscribe topic. Response 
 | Tag     | 4001     |
 ```
 
-### wc_pushMessage
+### wc_notifyMessage
 
-Used to publish a notification message to a peer through push topic. Response is expected on the same topic.
+Used to publish a notification message to a peer through notify topic. Response is expected on the same topic.
 
-- Success response is equivalent to push message acknowledgement.
-- Error response is equivalent to push message failed to decrypt.
+- Success response is equivalent to notify message acknowledgement.
+- Error response is equivalent to notify message failed to decrypt.
 
 
 **Request**
 
 ```jsonc
-// wc_pushMessage params
+// wc_notifyMessage params
 {
   "messageAuth": string
 }
@@ -91,14 +91,14 @@ Used to publish a notification message to a peer through push topic. Response is
 
 ```
 
-### wc_pushDelete
+### wc_notifyDelete
 
-Used to inform the peer to close and delete a push subscription through push topic. The reason field should be a human-readable message defined by the SDK consumer to be shown on the peer's side.
+Used to inform the peer to close and delete a notify subscription through notify topic. The reason field should be a human-readable message defined by the SDK consumer to be shown on the peer's side.
 
 **Request**
 
 ```jsonc
-// wc_pushDelete params
+// wc_notifyDelete params
 {
   "code": Int64,
   "message": string
@@ -120,16 +120,16 @@ true
 | Tag     | 4005     |
 ```
 
-### wc_pushUpdate
+### wc_notifyUpdate
 
-Used to update a push subscription with a new push subscription, replacing an existing push subscription through push topic.
+Used to update a notify subscription with a new notify subscription, replacing an existing notify subscription through notify topic.
 
-**Note:** this method is atomically performing two methods (wc_pushDelete + wc_pushSubscribe)
+**Note:** this method is atomically performing two methods (wc_notifyDelete + wc_notifySubscribe)
 
 **Request**
 
 ```jsonc
-// wc_pushUpdate params
+// wc_notifyUpdate params
 {
   "subscriptionAuth": string // new subscription
 }
@@ -155,17 +155,17 @@ Used to update a push subscription with a new push subscription, replacing an ex
 | Tag     | 4009     |
 ```
 
-### wc_pushPropose
+### wc_notifyPropose
 
-Used to request push subscription to a peer through pairing topic. Response is expected on the same topic.
+Used to request notify subscription to a peer through pairing topic. Response is expected on the same topic.
 
-- Success response is equivalent to push subscription acceptance.
-- Error response is equivalent to push subscription rejection.
+- Success response is equivalent to notify subscription acceptance.
+- Error response is equivalent to notify subscription rejection.
 
 **Request**
 
 ```jsonc
-// wc_pushRequest params
+// wc_notifyRequest params
 {
   "publicKey": string,
   "metadata": Metadata,
