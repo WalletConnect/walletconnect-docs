@@ -1,10 +1,10 @@
 # Wallets
 
-Web3Modal will display wallets from [WalletConnect's explorer](https://explorer.walletconnect.com), as well as any manually added wallets. If [wagmi](https://wagmi.sh) is used, it will also display connector wallets like [InjectedConnector](https://wagmi.sh/react/connectors/injected) and any other user defined connectors. Depending on the user's platform (desktop or mobile) different wallet lists will be displayed.
+Web3Modal will display wallets from our [Explorer](https://walletconnect.com/explorer?type=wallet), as well as any manually added wallets. If [wagmi](https://wagmi.sh) is used, it will also display connector wallets like [InjectedConnector](https://wagmi.sh/react/connectors/injected) and any other user defined connectors. Depending on the user's platform (desktop or mobile) different wallet lists will be displayed.
 
 ## Explorer Wallets
 
-Wallets are fetched from [WalletConnect explorer](https://explorer.walletconnect.com) based on configured chains and WalletConnect version. You can manage which wallets are displayed by using [explorerRecommendedWalletIds](../options.md#explorerrecommendedwalletids-optional) or [explorerExcludedWalletIds](../options.md#explorerexcludedwalletids-optional) options. To completely disable explorer wallets use [enableExplorer](../options.md#enableexplorer-optional) option. You can submit your own wallet to explorer at [cloud.walletconnect.com](https://cloud.walletconnect.com).
+Wallets are fetched from our [Explorer](https://walletconnect.com/explorer?type=wallet) based on configured chains and WalletConnect version. You can manage which wallets are displayed by using [explorerRecommendedWalletIds](../options.md#explorerrecommendedwalletids-optional) or [explorerExcludedWalletIds](../options.md#explorerexcludedwalletids-optional) options. To completely disable explorer wallets use [enableExplorer](../options.md#enableexplorer-optional) option. You can submit your own wallet to explorer at [cloud.walletconnect.com](https://cloud.walletconnect.com).
 
 ## Wagmi connectors
 
