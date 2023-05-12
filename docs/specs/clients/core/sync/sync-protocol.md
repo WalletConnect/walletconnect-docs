@@ -15,13 +15,13 @@ In order for us to get the same signature for all clients we must have a fixed m
 ```sh
 I authorize this app to sync my account:  <CAIP_10_ACCOUNT>
 
-Read more about Sync API: https://docs.walletconnect.com/2.0/specs/clients/sync
+Read more about Sync API: https://docs.walletconnect.com/2.0/specs/clients/core/sync
 ```
 
 Once the wallet returns us the signature we must convert it into a BIP-32 seed. For example:
 
 ```js
-message = "I authorize this app to sync my account: eip155:1:0x58315c689b483a66b951EDEfAbf8847c75e44B45\n\nRead more about Sync API: https://docs.walletconnect.com/2.0/specs/clients/sync"
+message = "I authorize this app to sync my account: eip155:1:0x58315c689b483a66b951EDEfAbf8847c75e44B45\n\nRead more about Sync API: https://docs.walletconnect.com/2.0/specs/clients/core/sync"
 signature = "0xc91265eadb1473d90f8d49d31b7016feb7f7761a2a986ca2146a4b8964f3357569869680154927596a5829ceea925f4196b8a853a29c2c1d5915832fc9f1c6a01c"
 ```
 
