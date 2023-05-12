@@ -11,12 +11,12 @@ Wallets are ordered with following priority: wagmi connectors, manual wallets, e
 
 ## Custom explorer wallets
 
-You can manage wallets fetched from explorer via [`explorerRecommendedWalletIds`](./options#explorerrecommendedwalletids-optional) and [`explorerExcludedWalletIds`](./options#explorerexcludedwalletids-optional) options to prioritise, include or exclude them.
-To fully dissable explorer wallets, use [`enableExplorer`](./options#enableexplorer-optional) option.
+You can manage wallets fetched from explorer via [`explorerRecommendedWalletIds`](./options#explorerrecommendedwalletids-optional) and [`explorerExcludedWalletIds`](./options#explorerexcludedwalletids-optional) options to prioritize, include or exclude them.
+To fully disable explorer wallets, use [`enableExplorer`](./options#enableexplorer-optional) option.
 
-You can get all wallet id's from [WalletConnect explorer](https://walletconnect.com/explorer?type=wallet) (click copy icon on choosen wallets).
+You can get all wallet id's from [WalletConnect explorer](https://walletconnect.com/explorer?type=wallet) (click copy icon on chosen wallets).
 
-Below is an example of how to prioritise MetaMask, Rainbow and TrustWallet in that specific order:
+Below is an example of how to prioritize MetaMask, Rainbow and TrustWallet in that specific order:
 
 ```tsx
 <Web3Modal
