@@ -10,11 +10,17 @@ Import Web3Modal package and replace `YOUR_PROJECT_ID` with your [WalletConnect 
 import { Web3Modal } from '@web3modal/react-native';
 
 const projectId = 'YOUR_PROJECT_ID';
+const providerMetadata = {
+  name: 'React Native V2 dapp',
+  description: 'RN dapp by WalletConnect',
+  url: 'https://walletconnect.com/',
+  icons: ['https://avatars.githubusercontent.com/u/37784886'],
+};
 
 function App() {
   return (
     <>
-      <Web3Modal projectId={projectId} />
+      <Web3Modal projectId={projectId} providerMetadata={providerMetadata} />
     </>
   )
 }
@@ -33,7 +39,7 @@ function App() {
   return (
     <>
       <Web3Button />
-      <Web3Modal projectId={projectId} />
+      <Web3Modal projectId={projectId} providerMetadata={providerMetadata} />
     </>
   )
 }
