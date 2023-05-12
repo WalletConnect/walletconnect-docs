@@ -22,14 +22,7 @@ module.exports = {
       label: 'SDKs',
       collapsible: false,
       className: 'menu_outer_list',
-      items: [
-        {
-          type: 'link',
-          label: 'Web3Modal',
-          href: '/2.0/web3modal/about'
-        },
-        'web3wallet/about'
-      ]
+      items: ['web3modal/about', 'web3wallet/about']
     },
     {
       type: 'category',
