@@ -75,7 +75,7 @@ store_topic = "741f8902d339c4c16f33fa598a6598b63e5ed125d761374511b2e06562b033eb"
 
 There will be only two operations for state changes: setting values and deleting values. Both the keys and values are restricted to strings. The state can be overriden or "updated" by simplying setting a different value with the same key.
 
-These state changes will be published as JSON-RPC requests that will be stringified and encrypted with the store key and similarly to other WalletConnect clients they will use a time-based JSON-RPC id which is a timestamp in miliseconds appended by 3 random digits.
+These state changes will be published as JSON-RPC requests that will be stringified and encrypted with the store key and similarly to other WalletConnect clients they will use a time-based JSON-RPC id which is a timestamp in miliseconds appended by 3 random digits. The state changes will be "optimistic" in that they should be published in an async manner and the client's "set" and "delete" should resolve before the completion of the successful publishing of the message. 
 
 Therefore we can solve conflicts by using the JSON-RPC id published for the last state change on that specific key-value pair by prioritizing the highest integer.
 
