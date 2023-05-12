@@ -264,8 +264,7 @@ module.exports = {
                     'web/web3modal/react/wagmi/options',
                     'web/web3modal/react/wagmi/theming',
                     'web/web3modal/react/wagmi/custom-wallets',
-                    'web/web3modal/react/wagmi/custom-chains',
-                    'web/web3modal/react/wagmi/custom-providers'
+                    'web/web3modal/react/wagmi/custom-chains'
                   ]
                 },
                 'web/web3modal/react/provider'
