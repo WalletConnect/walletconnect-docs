@@ -54,7 +54,15 @@ module.exports = {
         {
           type: 'category',
           label: 'Multi-Chain',
-          items: ['advanced/multichain/overview', 'advanced/multichain/chain-list']
+          items: [
+            'advanced/multichain/overview',
+            'advanced/multichain/chain-list',
+            {
+              type: 'category',
+              label: 'Polkadot',
+              items: ['web3modal/polkadot/dapp-integration-guide', 'web3wallet/polkadot/wallet-integration-guide']
+            }
+          ]
         },
         'advanced/echo-server'
       ]
