@@ -12,6 +12,9 @@ abstract class Client {
 
   // register an account to sync
   public abstract register(params: { account: string, signature: string }): Promise<void>;
+
+  // checks if account is already registered in sync
+  public abstract isRegistered(params: { account: string }): Promise<boolean>;
   
   // create a store
   public abstract create(params: { account: string, store: string }): Promise<void>;
