@@ -250,7 +250,6 @@ module.exports = {
           type: 'category',
           label: 'Web3Modal | React',
           items: [
-            'web/web3modal/react/introduction',
             {
               type: 'category',
               label: 'Ethereum',

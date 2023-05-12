@@ -3,14 +3,111 @@
 Web3Modal includes wallets from 3 sources: [WalletConnect explorer](https://walletconnect.com/explorer), wagmi connectors and manually defined wallets.
 Bellow are defaults for each source:
 
-1. All WalletConnect explorer wallets that satisfy your options will be fetched
+1. All WalletConnect explorer wallets that satisfy your options
 2. When using `w3mConnectors` helper, modal includes [WalletConnectConnector](https://wagmi.sh/react/connectors/walletConnect) and [InjectedConnector](https://wagmi.sh/react/connectors/injected)
 3. No manual wallets are defined by default
 
+Wallets are ordered with following priority: wagmi connectors, manual wallets, explorer wallets.
+
 ## Custom explorer wallets
 
-You can manage wallets fetched from explorer via [`explorerRecommendedWalletIds`](./options#explorerrecommendedwalletids-optional) and [`explorerExcludedWalletIds`](./options#explorerexcludedwalletids-optional) to prioritise or exclude them from the list.
+You can manage wallets fetched from explorer via [`explorerRecommendedWalletIds`](./options#explorerrecommendedwalletids-optional) and [`explorerExcludedWalletIds`](./options#explorerexcludedwalletids-optional) options to prioritise, include or exclude them.
+To fully dissable explorer wallets, use [`enableExplorer`](./options#enableexplorer-optional) option.
+
+You can get all wallet id's from [WalletConnect explorer](https://walletconnect.com/explorer?type=wallet) (click copy icon on choosen wallets).
+
+Below is an example of how to prioritise MetaMask, Rainbow and TrustWallet in that specific order:
+
+```tsx
+<Web3Modal
+  explorerRecommendedWalletIds={[
+    'c57ca95b47569778a828d19178114f4db188b89b763c899ba0be274e97267d96',
+    '1ae92b26df02f0abca6304df07debccd18262fdf5fe82daa81593582dac9a369',
+    '4622a2b2d6af1c9844944291e5e7351a6aa24cd7b23099efac1b2fd875da31a0'
+  ]}
+/>
+```
+
+Now, these wallets will show up first in specified order. If you want to exclude some or all other wallets, you can combine above with [`explorerExcludedWalletIds`](./options#explorerexcludedwalletids-optional) option:
+
+```tsx
+<Web3Modal
+  explorerRecommendedWalletIds={[
+    'c57ca95b47569778a828d19178114f4db188b89b763c899ba0be274e97267d96',
+    '1ae92b26df02f0abca6304df07debccd18262fdf5fe82daa81593582dac9a369',
+    '4622a2b2d6af1c9844944291e5e7351a6aa24cd7b23099efac1b2fd875da31a0'
+  ]}
+  explorerExcludedWalletIds="ALL"
+/>
+```
 
 ## Custom wagmi connectors
 
+You can add any wagmi connector as you normally would in wagmi's [`createConfig`](https://wagmi.sh/react/config) function. However, for Web3Modal to work correctly [WalletConnectConnector](https://wagmi.sh/react/connectors/walletConnect) is required.
+Below is a simplified example of how to use [CoinbaseWalletConnector](https://wagmi.sh/react/connectors/coinbaseWallet) together with defaults from `w3mConnectors` helper:
+
+```tsx
+import { createConfig } from 'wagmi'
+import { CoinbaseWalletConnector } from 'wagmi/connectors/coinbaseWallet'
+import { w3mConnectors } from '@web3modal/ethereum'
+
+const wagmiConfig = createConfig({
+  connectors: [
+    ...w3mConnectors({
+      /* ... */
+    }),
+    new CoinbaseWalletConnector({
+      /* ... */
+    })
+  ]
+})
+```
+
 ## Custom manual wallets
+
+If your WalletConnect enabled wallet is not present in [WalletConnect explorer](https://walletconnect.com/explorer) or is still pending approval,
+you can add it manually via [`mobileWallets`](./options#mobilewallets-optional) and [`desktopWallets`](./options#desktopwallets-optional) options.
+
+```tsx
+<Web3Modal
+  mobileWallets={[
+    {
+      id: 'customMobileWallet',
+      name: 'Custom Mobile Wallet',
+      links: {
+        native: 'customMobileWallet://',
+        universal: 'https://customMobileWallet.com'
+      }
+    }
+  ]}
+  desktopWallets={[
+    {
+      id: 'customDesktopWallet',
+      name: 'Custom Desktop Wallet',
+      links: {
+        native: 'customDesktopWallet://',
+        universal: 'https://web.customDesktopWallet.com'
+      }
+    }
+  ]}
+/>
+```
+
+## Custom wallet images
+
+If your wallet's logo is not supported by Web3Modal or you want to override default one, you can use [`walletImages`](./options#walletimages-optional) option.
+
+```tsx
+<Web3Modal
+  walletImages={{
+    // Override explorer wallet image by it's id
+    c57ca95b47569778a828d19178114f4db188b89b763c899ba0be274e97267d96: 'https://example.com/metamask.png'
+
+    // Override wagmi connector image by it's id
+    coinbaseWallet: 'https://example.com/coinbaseWallet.png'
+
+    // Override manual wallet image by it's id
+    customMobileWallet: 'https://example.com/customMobileWallet.png',
+  }}
+/>
+```
