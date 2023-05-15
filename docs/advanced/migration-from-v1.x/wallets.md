@@ -27,7 +27,7 @@ If you were using our [WalletConnectClient SDK](https://www.npmjs.com/package/@w
 
 ### Browser-based
 
-If you were using our [WalletConnectClient SDK](https://www.npmjs.com/package/@walletconnect/client) (or any other community SDK), you must integrate the Web3Wallet SDK for Javascript which you can find docs [here](https://docs.walletconnect.com/2.0/web/web3wallet/installation) and check out the Web Examples [here](https://github.com/WalletConnect/web-examples)
+If you were using our [WalletConnectClient SDK](https://www.npmjs.com/package/@walletconnect/client) (or any other community SDK), you must integrate the Web3Wallet SDK for Javascript which you can find docs [here](https://docs.walletconnect.com/2.0/web/web3wallet/installation) and check out the Web Examples [here](https://github.com/WalletConnect/web-examples).
 
 ### Unity
 
