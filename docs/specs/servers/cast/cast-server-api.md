@@ -45,7 +45,7 @@ Webhook payload:
 ```jsonc
 {
     "id": string,
-    "event": string, // subscribe or unsubscribed
+    "event": string, // subscribed or unsubscribed
     "account": string, // CAIP-10 account
     "dappUrl": string // dApp's URL with which the account was registered
 }
