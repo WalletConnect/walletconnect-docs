@@ -32,7 +32,9 @@ interface AuthOptions {
 
 ```ts
 interface AuthData {
+  // Boolean indicating if the authentication data is valid
   valid: boolean
+  // Users address that signed authentication data
   address: string
   // CAIP-222 compliant auth/cacao response
   // Learn about CAIP-222: https://github.com/ChainAgnostic/CAIPs/blob/master/CAIPs/caip-222.md#response
