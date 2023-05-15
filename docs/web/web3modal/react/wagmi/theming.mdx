@@ -1,11 +1,12 @@
+import ThemeVariablesTablePartial from '../../_partials/themeVariablesTable.mdx'
+import ThemeModePartial from '../../_partials/themeMode.mdx'
 import ThemeVariablesPartial from '../../_partials/themeVariables.mdx'
 
 # Theming
 
 ## themeMode
 
-By default [`themeMode`](./options#thememode-optional) option will be set to user system settings i.e. 'light' or 'dark',
-however you can easily override it to match design of your dapp.
+<ThemeModePartial />
 
 ### Example
 
@@ -15,7 +16,7 @@ however you can easily override it to match design of your dapp.
 
 ## themeVariables
 
-Web3Modal's theming is done via css variables. You can override any of them to match your dapp's design via [`themeVariables`](./options#themevariables-optional) option.
+<ThemeVariablesPartial />
 
 ### Example
 
@@ -30,4 +31,4 @@ Web3Modal's theming is done via css variables. You can override any of them to m
 
 ### List of theme variables
 
-<ThemeVariablesPartial />
+<ThemeVariablesTablePartial />

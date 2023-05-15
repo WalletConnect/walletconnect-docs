@@ -11,11 +11,7 @@ import ThemeVariablesPartial from '../../_partials/themeVariables.mdx'
 ### Example
 
 ```tsx
-EthereumProvider.init({
-  qrModalOptions: {
-    themeMode: 'dark'
-  }
-})
+<WebModalAuth modalOptions={{ themeMode: 'dark' }} />
 ```
 
 ## themeVariables
@@ -25,14 +21,14 @@ EthereumProvider.init({
 ### Example
 
 ```tsx
-EthereumProvider.init({
-  qrModalOptions: {
+<WebModalAuth
+  modalOptions={{
     themeVariables: {
       '--w3m-font-family': 'Roboto, sans-serif',
       '--w3m-accent-color': '#F5841F'
     }
-  }
-})
+  }}
+/>
 ```
 
 ### List of theme variables
