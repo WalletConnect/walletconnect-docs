@@ -300,7 +300,8 @@ module.exports = {
                     'web/web3modal/react/auth-api/installation',
                     'web/web3modal/react/auth-api/components',
                     'web/web3modal/react/auth-api/hooks',
-                    'web/web3modal/react/auth-api/options'
+                    'web/web3modal/react/auth-api/options',
+                    'web/web3modal/react/auth-api/theming'
                   ]
                 },
                 {
