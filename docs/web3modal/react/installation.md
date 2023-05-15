@@ -7,34 +7,34 @@ Every project using WalletConnect SDKs (including Web3Modal) needs to obtain `pr
 ## Add Packages
 
 ```bash npm2yarn
-npm install @web3modal/ethereum @web3modal/react wagmi ethers@^5
+npm install @web3modal/ethereum @web3modal/react wagmi viem
 ```
 
 ## Implementation
 
-Start by importing Web3Modal and wagmi packages, then create wagmi client using your own settings or our default presets as shown below. Finally, pass wagmi client to Web3Modal as `ethereumClient`.
+Start by importing Web3Modal and wagmi packages, then create wagmi config using your own settings or our default presets as shown below. Finally, pass wagmi config to Web3Modal as `ethereumClient`.
 
 ```tsx
 import { EthereumClient, w3mConnectors, w3mProvider } from '@web3modal/ethereum'
 import { Web3Modal } from '@web3modal/react'
-import { configureChains, createClient, WagmiConfig } from 'wagmi'
+import { configureChains, createConfig, WagmiConfig } from 'wagmi'
 import { arbitrum, mainnet, polygon } from 'wagmi/chains'
 
 const chains = [arbitrum, mainnet, polygon]
 const projectId = 'YOUR_PROJECT_ID'
 
-const { provider } = configureChains(chains, [w3mProvider({ projectId })])
-const wagmiClient = createClient({
+const { publicClient } = configureChains(chains, [w3mProvider({ projectId })])
+const wagmiConfig = createConfig({
   autoConnect: true,
   connectors: w3mConnectors({ projectId, version: 1, chains }),
-  provider
+  publicClient
 })
-const ethereumClient = new EthereumClient(wagmiClient, chains)
+const ethereumClient = new EthereumClient(wagmiConfig, chains)
 
 function App() {
   return (
     <>
-      <WagmiConfig client={wagmiClient}>
+      <WagmiConfig config={wagmiConfig}>
         <HomePage />
       </WagmiConfig>
 
@@ -61,5 +61,5 @@ function HomePage() {
 [wagmi](https://wagmi.sh) provides everything you'll need to start working with accounts, contracts, chains and much more.
 
 ```tsx
-import { useAccount, useContract, useSigner } from 'wagmi'
+import { useAccount, useContract } from 'wagmi'
 ```

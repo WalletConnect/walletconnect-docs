@@ -65,7 +65,7 @@ url: `https://github.com/WalletConnect/web3modal-examples/tree/main/html-standal
 
 ## Versioning
 
-We are currently in the midst of a migration, and we anticipate that dapps will have completed the migration to Sign v2 by the end of June. To view the list of wallets that are compatible with Sign v2, please visit our [explorer page](https://explorer.walletconnect.com/?type=wallet&version=2).
+We are currently in the midst of a migration, and we anticipate that dapps will have completed the migration to Sign v2 by the end of June. To view the list of wallets that are compatible with Sign v2, please visit our [Explorer](https://walletconnect.com/explorer?type=wallet&version=2).
 
 If the wallet you intend to use still utilizes v1, we recommend including `version: 1` in your configuration to ensure that your users can continue to connect to their preferred wallet. It's crucial to stay up to date on any changes made to wallets, so we encourage you to check back regularly for any updates.
 

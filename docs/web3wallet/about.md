@@ -1,6 +1,6 @@
 import Container from './../components/Container';
 
-# Web3Wallet SDK
+# Web3Wallet
 
 ## Introduction
 
@@ -23,12 +23,12 @@ items={[
 {
 name: "JavaScript",
 description: "",
-url: `/2.0/javascript/web3wallet/installation`
+url: `/2.0/web/web3wallet/installation`
 },
 {
 name: "Swift",
 description: "",
-url: `/2.0/swift/web3wallet/installation`
+url: `/2.0/ios/web3wallet/installation`
 }
 ]}
 />
@@ -37,7 +37,7 @@ items={[
 {
 name: "Kotlin",
 description: "",
-url: `/2.0/kotlin/web3wallet/installation`
+url: `/2.0/android/web3wallet/installation`
 },
 {
 name: "Dart",

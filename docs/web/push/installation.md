@@ -21,3 +21,11 @@ For additional type packages refer to our [TypeScript Guide](../guides/typescrip
 ```bash npm2yarn
 npm install @walletconnect/push-client
 ```
+
+**If you are using the SDK on a server (such as Node.js), you will need to install an additional package:**
+
+```bash npm2yarn
+npm install lokijs --save
+```
+
+This step is not required if you are using the SDK on the browser-side.

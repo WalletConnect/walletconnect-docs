@@ -18,6 +18,8 @@ error: {
 }
 ```
 
+## Methods
+
 ### wc_authRequest
 
 Used to request authentication signature to a peer through topic P. Response is expected on topic R with shared symKey.

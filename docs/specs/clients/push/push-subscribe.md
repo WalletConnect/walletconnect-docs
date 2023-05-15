@@ -21,14 +21,19 @@ The Push subscribe flow will require a dapp to host a static json file which wil
 Subscribe protocol will be established as follows:
 
 1. Wallet fetches public key X from the did:web document
-2. Wallet derives subscribe topic, which is the sha256 hash of public key X
+2. Subscribe topic is derived from the sha256 hash of public key X
 3. Wallet generates key pair Y
-4. Wallet derives symmetric key with keys X and Y
-5. Subscribe topic is derived from sha256 hash of symmetric key
-6. Wallet subscribes to subscribe topic
-7. Wallet sends push subscribe request (type 1 envelope) on subscribe topic with subscriptionAuth
+4. Wallet derives symmetric key S with keys X and Y
+5. Wallet sends push subscribe request (type 1 envelope) on subscribe topic with subscriptionAuth
+6. Response topic is derived from the sha256 hash of symmetric key S
+7. Wallet subscribes to response topic
 8. Cast Server receives push subscribe request on subscribe topic
 9. Cast Server derives symmetric key and decrypts subscriptionAuth
 10. Cast Server triggers webhook to notify Dapp of new registered address
-11. Cast Server responds to push subscribe request
-12. Wallet receives push subscribe response on the subscribe topic
+11. Cast Server generates key pair Z
+12. Cast Server derives symmetric key P with keys Y and Z
+13. Cast Server responds to push subscribe request on response topic
+14. Wallet receives push subscribe response on the response topic
+15. Wallet derives symmetric key P
+16. Push topic is derived from the sha256 hash of the symmetric key P
+17. Wallet subscribes to push topic for future push messages
