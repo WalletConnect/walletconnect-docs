@@ -283,7 +283,8 @@ module.exports = {
                   label: 'With Provider',
                   items: [
                     'web/web3modal/react/ethereum-provider/installation',
-                    'web/web3modal/react/ethereum-provider/options'
+                    'web/web3modal/react/ethereum-provider/options',
+                    'web/web3modal/react/ethereum-provider/theming'
                   ]
                 }
               ]
