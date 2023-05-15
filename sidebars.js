@@ -53,7 +53,10 @@ module.exports = {
             {
               type: 'category',
               label: 'Polkadot',
-              items: ['web3modal/polkadot/dapp-integration-guide', 'web3wallet/polkadot/wallet-integration-guide']
+              items: [
+                'web3modal/polkadot/dapp-integration-guide',
+                'web3wallet/polkadot/wallet-integration-guide'
+              ]
             }
           ]
         },
@@ -275,7 +278,14 @@ module.exports = {
                     'web/web3modal/react/wagmi/custom-chains'
                   ]
                 },
-                'web/web3modal/react/provider'
+                {
+                  type: 'category',
+                  label: 'With Provider',
+                  items: [
+                    'web/web3modal/react/ethereum-provider/installation',
+                    'web/web3modal/react/ethereum-provider/options'
+                  ]
+                }
               ]
             },
             {
@@ -288,7 +298,16 @@ module.exports = {
         {
           type: 'category',
           label: 'Web3Modal | HTML',
-          items: ['web/web3modal/html/introduction']
+          items: [
+            {
+              type: 'category',
+              label: 'With Provider',
+              items: [
+                'web/web3modal/html/ethereum-provider/installation',
+                'web/web3modal/html/ethereum-provider/options'
+              ]
+            }
+          ]
         },
 
         {

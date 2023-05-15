@@ -1,0 +1,57 @@
+import ObtainProjectIdPartial from '../../_partials/obtainProjectId.mdx'
+
+# Installation
+
+It is easy to integrate Web3Modal as an [EIP-1193](https://eips.ethereum.org/EIPS/eip-1193) provider together with [`@walletconnect/ethereum-provider`](../../../providers/ethereum). Please note that this approach does not include support for some features like: injected wallet management, account view, chain switching etc. When using web3modal as a provider, we assume you are already managing these yourself.
+
+## Obtain project id
+
+<ObtainProjectIdPartial />
+
+## Add packages
+
+```bash npm2yarn
+npm install @web3modal/standalone @walletconnect/ethereum-provider
+```
+
+## Implementation
+
+Start by importing ethereum provider, initializing it and storing it somewhere for future use (in this example we store it in component state, but you'll likely want it stored globally). Make sure to set `showQrModal: true` to show the QR code modal.
+
+```tsx
+import { EthereumProvider } from '@walletconnect/ethereum-provider'
+
+function App() {
+  const [provider, setProvider] = useState(undefined)
+
+  async function onInitializeProviderClient() {
+    const client = await EthereumProvider.init({
+      projectId: 'YOUR_PROJECT_ID',
+      showQrModal: true,
+      qrModalOptions: { themeMode: 'light' },
+      chains: [1],
+      methods: ['eth_sendTransaction', 'personal_sign'],
+      events: ['chainChanged', 'accountsChanged']
+    })
+    setProvider(client)
+  }
+
+  useEffect(() => {
+    onInitializeProviderClient()
+  }, [])
+}
+```
+
+## Trigger the modal
+
+From here on, use `provider` as you normally would, Web3Modal will be shown and hidden automatically i.e.
+
+```tsx
+function App() {
+  const [provider, setProvider] = useState(undefined)
+
+  /* ... */
+
+  return provider ? <button onClick={provider.connect}>Connect Wallet</button> : 'Loading...'
+}
+```
