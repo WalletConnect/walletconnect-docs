@@ -14,3 +14,49 @@ import ObtainProjectIdPartial from '../../_partials/obtainProjectId.mdx'
 ```bash npm2yarn
 npm install @web3modal/auth-react
 ```
+
+## Implementation
+
+Start by adding `Web3ModalAuth` component at the root of your app.
+
+```tsx
+import { Web3ModalAuth } from '@web3modal/auth-react'
+
+function App() {
+  return (
+    <>
+      <HomePage />
+
+      <Web3ModalAuth
+        projectId="YOUR_PROJECT_ID"
+        metadata={{
+          name: 'My Dapp',
+          description: 'My Dapp description',
+          url: 'https://my-dapp.com',
+          icons: ['https://my-dapp.com/logo.png']
+        }}
+        modalOptions={{
+          themeMode: 'dark'
+        }}
+      />
+    </>
+  )
+}
+```
+
+## Use sign in hook
+
+```tsx
+import { useSignIn } from '@web3modal/auth-react'
+
+function HomePage() {
+  const signIn = useSignIn({ statement: 'Connect to my dapp' })
+
+  async function onSignIn() {
+    const data = await signIn()
+    console.info(data)
+  }
+
+  return <button onClick={onSignIn}>Sign in with wallet</button>
+}
+```

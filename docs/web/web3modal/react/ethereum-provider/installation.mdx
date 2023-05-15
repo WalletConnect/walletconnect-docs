@@ -33,8 +33,15 @@ function App() {
       qrModalOptions: { themeMode: 'light' },
       chains: [1],
       methods: ['eth_sendTransaction', 'personal_sign'],
-      events: ['chainChanged', 'accountsChanged']
+      events: ['chainChanged', 'accountsChanged'],
+      metadata: {
+        name: 'My Dapp',
+        description: 'My Dapp description',
+        url: 'https://my-dapp.com',
+        icons: ['https://my-dapp.com/logo.png']
+      }
     })
+
     setProvider(client)
   }
 
@@ -54,7 +61,11 @@ function App() {
 
   /* ... */
 
-  return provider ? <button onClick={provider.connect}>Connect Wallet</button> : 'Loading...'
+  return provider ? (
+    <button onClick={() => provider.connect()}>Connect Wallet</button>
+  ) : (
+    'Loading...'
+  )
 }
 ```
 
