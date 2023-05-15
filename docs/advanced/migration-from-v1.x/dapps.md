@@ -51,7 +51,7 @@ const wagmiClient = createClient({
 // ...
 ```
 
-For more documentation, follow the docs for Web3Modal [here](https://docs.walletconnect.com/2.0/web3modal/about)
+For more documentation, follow the docs for Web3Modal [here](https://docs.walletconnect.com/2.0/web3modal/about).
 
 ### react-native-dapp
 
