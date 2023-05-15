@@ -6,7 +6,7 @@ Confirm you have configured the Network and Pair Client first
 - [Pairing](../core/pairing-usage.md)
 
 ### Configure Sign Client
-In order to initialize a client just call a `configure` method from the Sign instance wrapper
+In order to initialize a client, call a `configure` method from the Sign instance wrapper
 ```swift
 let metadata = AppMetadata(
     name: "Swift wallet",
