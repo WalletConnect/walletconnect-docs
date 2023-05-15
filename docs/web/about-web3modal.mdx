@@ -1,10 +1,16 @@
-import IntroductionPartial from './web3modal/_partials/introduction.mdx'
-import ResourcesPartial from './web3modal/_partials/resources.mdx'
 import Container from '../components/Container'
 
 # About Web3Modal
 
-<IntroductionPartial />
+:::info
+WalletConnect is undergoing protocol migration from v1 to v2, you can learn more in [this blog post](https://medium.com/walletconnect/how-to-prepare-for-the-walletconnect-v1-0-shutdown-1a954da1dbff).
+Web3Modal supports both of these protocol versions and makes it easy to switch to v2 once all your target wallets support it.
+:::
+
+Web3Modal is a versatile UI library built on top of [WalletConnect](https://walletconnect.com) and other popular wallet providers and sdks.
+It is designed to make complex tasks like connecting wallets, performing transactions and managing accounts easy.
+Built on top of latest web standards, Web3Modal is lightweight, performant, tree-shakable and much more.
+Check out [web3modal.com](https://web3modal.com) for a live demo and in-depth feature list.
 
 ## React Quick Start
 
@@ -23,12 +29,12 @@ import Container from '../components/Container'
     {
       name: 'Multichain - Sign',
       description: 'Use with any chain and WalletConnect sign api',
-      url: `/2.0/web/web3modal/react/sign`
+      url: `/2.0/web/web3modal/react/sign-api/installation`
     },
     {
       name: 'Multichain - Auth',
       description: 'Use with any chain and WalletConnect auth api',
-      url: `/2.0/web/web3modal/react/auth`
+      url: `/2.0/web/web3modal/react/auth-api/installation`
     }
   ]}
 />
@@ -37,4 +43,9 @@ import Container from '../components/Container'
 
 ## Resources
 
-<ResourcesPartial />
+- [Web3Modal Examples](https://github.com/WalletConnect/web3modal-examples) - Repo with various Web3Modal usage examples.
+- [Web3Modal Laboratory](https://lab.web3modal.com) - A place to test your wallet integrations against various setups of Web3Modal.
+- [Web3Modal GitHub](https://github.com/WalletConnect/web3modal) - Web3Modal GitHub repository.
+- [Web3Modal GitHub Discussions](https://github.com/orgs/WalletConnect/discussions/categories/web3modal-sdk-support) - Get help from WalletConnect team on GitHub.
+- [Web3Modal Discord Forum](https://discord.com/channels/492410046307631105/1040016448157925467) - Get help from community on Discord.
+- [Awesome WalletConnect](https://github.com/WalletConnect/awesome-walletconnect) - community-curated collection of WalletConnect-enabled wallets, libraries, and tools.

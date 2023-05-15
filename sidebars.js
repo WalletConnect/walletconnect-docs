@@ -291,7 +291,23 @@ module.exports = {
             {
               type: 'category',
               label: 'Multichain',
-              items: ['web/web3modal/react/sign', 'web/web3modal/react/auth']
+              items: [
+                {
+                  type: 'category',
+                  label: 'With Auth API',
+                  items: [
+                    'web/web3modal/react/auth-api/installation',
+                    'web/web3modal/react/auth-api/components',
+                    'web/web3modal/react/auth-api/hooks',
+                    'web/web3modal/react/auth-api/options'
+                  ]
+                },
+                {
+                  type: 'category',
+                  label: 'With Sign API',
+                  items: ['web/web3modal/react/sign-api/installation']
+                }
+              ]
             }
           ]
         },

@@ -1,9 +1,10 @@
 import ObtainProjectIdPartial from '../../_partials/obtainProjectId.mdx'
-import UseEthereumProviderPartial from '../../_partials/useEthereumProvider.mdx'
+import AboutEthereumProviderPartial from '../../_partials/ethereum-provider/about.mdx'
+import DocsEthereumProviderPartial from '../../_partials/ethereum-provider/docsReference.mdx'
 
 # Installation
 
-It is easy to integrate Web3Modal as an [EIP-1193](https://eips.ethereum.org/EIPS/eip-1193) provider together with [`@walletconnect/ethereum-provider`](../../../providers/ethereum). Please note that this approach does not include support for some features like: injected wallet management, account view, chain switching etc. When using web3modal as a provider, we assume you are already managing these yourself.
+<AboutEthereumProviderPartial />
 
 ## Obtain project id
 
@@ -59,4 +60,4 @@ function App() {
 
 ## Use ethereum provider
 
-<UseEthereumProviderPartial />
+<DocsEthereumProviderPartial />
