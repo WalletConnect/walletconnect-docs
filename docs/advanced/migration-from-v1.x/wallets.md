@@ -35,4 +35,4 @@ If you were using our [WalletConnectSharp SDK](https://github.com/WalletConnect/
 
 ### Flutter
 
-If you were using OrangeWallet's [WalletConnectDart SDK](https://github.com/Orange-Wallet/wallet-connect-dart) (or any other community SDK), you must integrate the Sign Client for Flutter which you can find docs [here](https://github.com/Eucalyptus-Labs/wallet-connect-v2-dart)
+If you were using OrangeWallet's [WalletConnectDart SDK](https://github.com/Orange-Wallet/wallet-connect-dart) (or any other community SDK), you must integrate the Sign Client for Flutter which you can find docs [here](https://github.com/Eucalyptus-Labs/wallet-connect-v2-dart).
