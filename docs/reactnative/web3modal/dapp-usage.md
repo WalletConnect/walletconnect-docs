@@ -12,10 +12,10 @@ import { Web3Modal } from '@web3modal/react-native';
 const projectId = 'YOUR_PROJECT_ID';
 
 const providerMetadata = {
-  name: 'RN V2 dApp',
-  description: 'RN dApp by WalletConnect',
-  url: 'https://walletconnect.com/',
-  icons: ['https://avatars.githubusercontent.com/u/37784886'],
+  name: 'YOUR_PROJECT_NAME',
+  description: 'YOUR_PROJECT_DESCRIPTION',
+  url: 'https://your-project-website.com/',
+  icons: ['https://your-project-logo.com/'],
 };
 
 function App() {
@@ -35,7 +35,14 @@ Add our pre-built button component in your dapp to open/close connection and acc
 import { Web3Modal, Web3Button } from '@web3modal/react-native';
 
 const projectId = 'YOUR_PROJECT_ID';
-const providerMetadata= {<YOUR_PROJECT_METADATA>}
+
+const providerMetadata = {
+  name: 'YOUR_PROJECT_NAME',
+  description: 'YOUR_PROJECT_DESCRIPTION',
+  url: 'https://your-project-website.com/',
+  icons: ['https://your-project-logo.com/'],
+};
+
 
 
 function App() {
@@ -82,7 +89,14 @@ import { Pressable, Text } from 'react-native';
 import { Web3Modal, useWeb3Modal } from '@web3modal/react-native';
 
 const projectId = 'YOUR_PROJECT_ID';
-const providerMetadata= {<YOUR_PROJECT_METADATA>}
+
+const providerMetadata = {
+  name: 'YOUR_PROJECT_NAME',
+  description: 'YOUR_PROJECT_DESCRIPTION',
+  url: 'https://your-project-website.com/',
+  icons: ['https://your-project-logo.com/'],
+};
+
 
 function App() {
   const { open, isConnected } = useWeb3Modal();
