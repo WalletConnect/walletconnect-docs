@@ -1,3 +1,5 @@
+import AuthSignInReference from '../../_partials/auth-api/authSignInReference.mdx'
+
 # Hooks
 
 ## useSignIn
@@ -16,33 +18,4 @@ const authData = await signIn()
 
 ### Reference
 
-```ts
-interface AuthOptions {
-  // User friendly statement shown during signature approval within wallet
-  statement: string
-  // CAIP-10 compliant chain id, defaults to eip155:1 (ethereum mainnet)
-  // Learn about CAIP-10: https://github.com/ChainAgnostic/CAIPs/blob/master/CAIPs/caip-10.md
-  chainId?: string
-  // Full url of dapp page performing sign in, defaults to window.location.href
-  aud?: string
-  // Domain name of the dapp, defaults to window.location.host
-  domain?: string
-}
-```
-
-```ts
-interface AuthData {
-  // Boolean indicating if the authentication data is valid
-  valid: boolean
-  // Users address that signed authentication data
-  address: string
-  // CAIP-222 compliant auth/cacao object
-  // Learn about CAIP-222: https://github.com/ChainAgnostic/CAIPs/blob/master/CAIPs/caip-222.md#response
-  cacao: Object
-}
-```
-
-```ts
-// Method that authenticates the user
-signIn: (options?: AuthOptions) => Promise<AuthData>
-```
+<AuthSignInReference />

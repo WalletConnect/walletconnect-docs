@@ -352,7 +352,12 @@ module.exports = {
                 {
                   type: 'category',
                   label: 'With Auth API',
-                  items: ['web/web3modal/html/auth-api/installation']
+                  items: [
+                    'web/web3modal/html/auth-api/installation',
+                    'web/web3modal/html/auth-api/actions',
+                    'web/web3modal/html/auth-api/options',
+                    'web/web3modal/html/auth-api/theming'
+                  ]
                 },
                 {
                   type: 'category',
