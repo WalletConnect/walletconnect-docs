@@ -275,7 +275,12 @@ module.exports = {
                     'web/web3modal/react/wagmi/options',
                     'web/web3modal/react/wagmi/theming',
                     'web/web3modal/react/wagmi/custom-wallets',
-                    'web/web3modal/react/wagmi/custom-chains'
+                    'web/web3modal/react/wagmi/custom-chains',
+                    {
+                      type: 'link',
+                      label: 'Example',
+                      href: 'https://github.com/WalletConnect/web3modal-examples/tree/main/nextjs-wagmi'
+                    }
                   ]
                 },
                 {
@@ -284,7 +289,12 @@ module.exports = {
                   items: [
                     'web/web3modal/react/ethereum-provider/installation',
                     'web/web3modal/react/ethereum-provider/options',
-                    'web/web3modal/react/ethereum-provider/theming'
+                    'web/web3modal/react/ethereum-provider/theming',
+                    {
+                      type: 'link',
+                      label: 'Example',
+                      href: 'https://github.com/WalletConnect/web3modal-examples/tree/main/nextjs-ethereum-provider'
+                    }
                   ]
                 }
               ]
@@ -301,13 +311,25 @@ module.exports = {
                     'web/web3modal/react/auth-api/components',
                     'web/web3modal/react/auth-api/hooks',
                     'web/web3modal/react/auth-api/options',
-                    'web/web3modal/react/auth-api/theming'
+                    'web/web3modal/react/auth-api/theming',
+                    {
+                      type: 'link',
+                      label: 'Example',
+                      href: 'https://github.com/WalletConnect/web3modal-examples/tree/main/nextjs-auth'
+                    }
                   ]
                 },
                 {
                   type: 'category',
                   label: 'With Sign API',
-                  items: ['web/web3modal/react/sign-api/installation']
+                  items: [
+                    'web/web3modal/react/sign-api/installation',
+                    {
+                      type: 'link',
+                      label: 'Example',
+                      href: 'https://github.com/WalletConnect/web3modal-examples/tree/main/nextjs-sign'
+                    }
+                  ]
                 }
               ]
             }
@@ -331,7 +353,12 @@ module.exports = {
                     'web/web3modal/html/wagmi/options',
                     'web/web3modal/html/wagmi/theming',
                     'web/web3modal/html/wagmi/custom-wallets',
-                    'web/web3modal/html/wagmi/custom-chains'
+                    'web/web3modal/html/wagmi/custom-chains',
+                    {
+                      type: 'link',
+                      label: 'Example',
+                      href: 'https://github.com/WalletConnect/web3modal-examples/tree/main/html-wagmi'
+                    }
                   ]
                 },
                 {
@@ -340,7 +367,12 @@ module.exports = {
                   items: [
                     'web/web3modal/html/ethereum-provider/installation',
                     'web/web3modal/html/ethereum-provider/options',
-                    'web/web3modal/html/ethereum-provider/theming'
+                    'web/web3modal/html/ethereum-provider/theming',
+                    {
+                      type: 'link',
+                      label: 'Example',
+                      href: 'https://github.com/WalletConnect/web3modal-examples/tree/main/html-ethereum-provider'
+                    }
                   ]
                 }
               ]
@@ -356,13 +388,25 @@ module.exports = {
                     'web/web3modal/html/auth-api/installation',
                     'web/web3modal/html/auth-api/actions',
                     'web/web3modal/html/auth-api/options',
-                    'web/web3modal/html/auth-api/theming'
+                    'web/web3modal/html/auth-api/theming',
+                    {
+                      type: 'link',
+                      label: 'Example',
+                      href: 'https://github.com/WalletConnect/web3modal-examples/tree/main/html-auth'
+                    }
                   ]
                 },
                 {
                   type: 'category',
                   label: 'With Sign API',
-                  items: ['web/web3modal/html/sign-api/installation']
+                  items: [
+                    'web/web3modal/html/sign-api/installation',
+                    {
+                      type: 'link',
+                      label: 'Example',
+                      href: 'https://github.com/WalletConnect/web3modal-examples/tree/main/html-sign'
+                    }
+                  ]
                 }
               ]
             }
