@@ -319,10 +319,46 @@ module.exports = {
           items: [
             {
               type: 'category',
-              label: 'With Provider',
+              label: 'Ethereum',
               items: [
-                'web/web3modal/html/ethereum-provider/installation',
-                'web/web3modal/html/ethereum-provider/options'
+                {
+                  type: 'category',
+                  label: 'With Wagmi',
+                  items: [
+                    'web/web3modal/html/wagmi/installation',
+                    'web/web3modal/html/wagmi/components',
+                    'web/web3modal/html/wagmi/actions',
+                    'web/web3modal/html/wagmi/options',
+                    'web/web3modal/html/wagmi/theming',
+                    'web/web3modal/html/wagmi/custom-wallets',
+                    'web/web3modal/html/wagmi/custom-chains'
+                  ]
+                },
+                {
+                  type: 'category',
+                  label: 'With Provider',
+                  items: [
+                    'web/web3modal/html/ethereum-provider/installation',
+                    'web/web3modal/html/ethereum-provider/options',
+                    'web/web3modal/html/ethereum-provider/theming'
+                  ]
+                }
+              ]
+            },
+            {
+              type: 'category',
+              label: 'Multichain',
+              items: [
+                {
+                  type: 'category',
+                  label: 'With Auth API',
+                  items: ['web/web3modal/html/auth-api/installation']
+                },
+                {
+                  type: 'category',
+                  label: 'With Sign API',
+                  items: ['web/web3modal/html/sign-api/installation']
+                }
               ]
             }
           ]
