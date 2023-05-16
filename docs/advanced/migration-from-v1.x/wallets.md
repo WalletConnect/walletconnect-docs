@@ -31,7 +31,7 @@ If you were using our [WalletConnectClient SDK](https://www.npmjs.com/package/@w
 
 ### Unity
 
-If you were using our [WalletConnectSharp SDK](https://github.com/WalletConnect/WalletConnectSharp/tree/1.0) (or any other community SDK), you must integrate the Sign Client for Unity which you can find docs [here](https://github.com/WalletConnect/WalletConnectSharp/)
+If you were using our [WalletConnectSharp SDK](https://github.com/WalletConnect/WalletConnectSharp/tree/1.0) (or any other community SDK), you must integrate the Sign Client for Unity which you can find docs [here](https://github.com/WalletConnect/WalletConnectSharp/).
 
 ### Flutter
 
