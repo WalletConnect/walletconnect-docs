@@ -16,7 +16,7 @@ In future events, the app can trigger notifications after subscription has been 
 
 Wallet and Dapp are required to establish pairing topic before proceeding to Push protocol execution.
 
-Additonally Wallet must meet the pre-requisites for the [Push Subscribe](./push-subscribe.md) to complete this flow
+Additionally Wallet must meet the pre-requisites for [Push Subscribe](./push-subscribe.md) to complete this flow.
 
 ### Protocol
 
