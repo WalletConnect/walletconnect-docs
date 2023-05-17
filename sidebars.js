@@ -54,7 +54,15 @@ module.exports = {
         {
           type: 'category',
           label: 'Multi-Chain',
-          items: ['advanced/multichain/overview', 'advanced/multichain/chain-list']
+          items: [
+            'advanced/multichain/overview',
+            'advanced/multichain/chain-list',
+            {
+              type: 'category',
+              label: 'Polkadot',
+              items: ['web3modal/polkadot/dapp-integration-guide', 'web3wallet/polkadot/wallet-integration-guide']
+            }
+          ]
         },
         'advanced/echo-server'
       ]
@@ -65,10 +73,18 @@ module.exports = {
       collapsible: false,
       className: 'menu_outer_list',
       items: [
+        {
+          type: 'category',
+          label: 'Migration from v1.x',
+          items: [
+            'advanced/migration-from-v1.x/overview',
+            'advanced/migration-from-v1.x/dapps',
+            'advanced/migration-from-v1.x/wallets',
+            'advanced/migration-from-v1.x/what-changed-from-v1.0'
+          ]
+        },
         'advanced/faq',
         'advanced/glossary',
-        'advanced/migrating-from-v1.0',
-        'advanced/what-changed-from-v1.0',
         {
           type: 'category',
           label: 'RPC Reference',
@@ -80,7 +96,7 @@ module.exports = {
             'advanced/rpc-reference/stellar-rpc',
             'advanced/rpc-reference/tezos-rpc',
             'advanced/rpc-reference/near-rpc',
-            'advanced/rpc-reference/xrpl-rpc',
+            'advanced/rpc-reference/xrpl-rpc'
           ]
         },
         {
@@ -685,7 +701,7 @@ module.exports = {
           label: 'Web3Modal',
           collapsible: true,
           collapsed: true,
-          items: ['reactnative/web3modal/installation', 'reactnative/web3modal/dapp-usage']
+          items: ['reactnative/web3modal/installation', 'reactnative/web3modal/dapp-usage', 'reactnative/web3modal/options']
         }
       ]
     },
