@@ -20,44 +20,6 @@ error: {
 
 ## Methods
 
-### wc_pushRequest
-
-Used to request push subscription to a peer through pairing topic. Response is expected on the same topic.
-
-- Success response is equivalent to push subscription acceptance.
-- Error response is equivalent to push subscription rejection.
-
-**Request**
-
-```jsonc
-// wc_pushRequest params
-{
-  "publicKey": string,
-  "metadata": Metadata,
-  "account": string,
-}
-
-| IRN     |          |
-| ------- | -------- | 
-| TTL     | 86400    |
-| Tag     | 4000     |
-
-```
-
-**Response**
-
-```jsonc
-// Success result
-{
-  "subscriptionAuth": string
-}
-
-| IRN     |          |
-| ------- | -------- |
-| TTL     | 86400    |
-| Tag     | 4001     |
-```
-
 ### wc_pushMessage
 
 Used to publish a notification message to a peer through push topic. Response is expected on the same topic.
@@ -194,3 +156,41 @@ true
 | Tag     | 4009     |
 ```
 
+### wc_pushPropose
+
+Used to request push subscription to a peer through pairing topic. Response is expected on the same topic.
+
+- Success response is equivalent to push subscription acceptance.
+- Error response is equivalent to push subscription rejection.
+
+**Request**
+
+```jsonc
+// wc_pushRequest params
+{
+  "publicKey": string,
+  "metadata": Metadata,
+  "account": string,
+  "scope": string
+}
+
+| IRN     |          |
+| ------- | -------- | 
+| TTL     | 86400    |
+| Tag     | 4010     |
+
+```
+
+**Response**
+
+```jsonc
+// Success result
+{
+  "subscriptionAuth": string
+}
+
+| IRN     |          |
+| ------- | -------- |
+| TTL     | 86400    |
+| Tag     | 4011     |
+```
