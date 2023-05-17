@@ -165,7 +165,7 @@ Used to request notify subscription to a peer through pairing topic. Response is
 **Request**
 
 ```jsonc
-// wc_notifyRequest params
+// wc_notifyPropose params
 {
   "publicKey": string,
   "metadata": Metadata,
