@@ -49,7 +49,7 @@ WalletConnect uses chain ids based on the CAIP standard (CAIP-13 for Polkadot Na
 
 ### Example Namespace and Sign Client connect call:
 
-**Note**: this serves as an example where a dapp requires 3 chains (polkadot, hydradx and turing network). The supported methods, chains, and events can all be defined by the dapp team based on the requirements of the dapp.
+**Note**: this serves as an example where a dapp requires 3 different chain namespaces (polkadot, hydradx and turing network). The supported methods, chains, and events can all be defined by the dapp team based on the requirements of the dapp.
 
 ```js
 const params = {
@@ -188,13 +188,29 @@ const unsignedTransaction = {
 
 9. Send the unsigned transaction to the paired wallet for signing using the providers sign client. This triggers a `session_request` event which must be handled by the paired wallet.
 
+### Polkadot Example
 ```js
 const result = await client.request({
   chainId: 'polkadot:91b171bb158e2d3848fa23a9f1c25182',
   topic: walletConnectSession.topic,
   request: {
     method: 'polkadot_signTransaction',
-    params: {w
+    params: {
+      address: selectedWalletConnectAddress,
+      transactionPayload: unsignedTransaction
+    }
+  }
+})
+```
+
+### Parachain Example (HydraDX)
+```js
+const result = await client.request({
+  chainId: 'polkadot:afdc188f45c71dacbaa0b62e16a91f72',
+  topic: walletConnectSession.topic,
+  request: {
+    method: 'polkadot_signTransaction',
+    params: {
       address: selectedWalletConnectAddress,
       transactionPayload: unsignedTransaction
     }
