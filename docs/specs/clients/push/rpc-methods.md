@@ -158,7 +158,7 @@ true
 
 ### wc_pushPropose
 
-Used to request push subscription to a peer through pairing topic. Response is expected on the same topic.
+Used to request push subscription to a peer through pairing topic. Response is expected on the response topic.
 
 - Success response is equivalent to push subscription acceptance.
 - Error response is equivalent to push subscription rejection.
