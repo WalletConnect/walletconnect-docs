@@ -23,7 +23,7 @@ Additonally Wallet must meet the pre-requisites for the [Push Subscribe](./push-
 Proposal protocol will be established as follows:
 
 1. Dapp queries Push Server for the key agreement public key (X)
-2. Dapp sends push proposal on pairing topic with public key X, relay and metadata
+2. Dapp sends push proposal on pairing topic with public key X, relay, metadata and scope
 3. Wallet receives push proposal with public key X on pairing topic
 4. Wallet generates key pair Y
 5. Wallet derives symmetric key with keys X and Y
