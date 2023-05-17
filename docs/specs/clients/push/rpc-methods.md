@@ -166,7 +166,7 @@ Used to request push subscription to a peer through pairing topic. Response is e
 **Request**
 
 ```jsonc
-// wc_pushRequest params
+// wc_pushPropose params
 {
   "publicKey": string,
   "metadata": Metadata,
