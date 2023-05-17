@@ -157,7 +157,7 @@ Used to update a notify subscription with a new notify subscription, replacing a
 
 ### wc_notifyPropose
 
-Used to request notify subscription to a peer through pairing topic. Response is expected on the same topic.
+Used to request notify subscription to a peer through pairing topic. Response is expected on the response topic.
 
 - Success response is equivalent to notify subscription acceptance.
 - Error response is equivalent to notify subscription rejection.
