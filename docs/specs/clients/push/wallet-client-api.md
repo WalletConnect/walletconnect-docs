@@ -47,7 +47,7 @@ abstract class WalletClient {
   public abstract on("push_subscription", (result: PushSubscription | Error) => {}): void;
 
   // for wallet to listen on push proposal
-  public abstract on("push_proposal", (id: number, account: string, metadata: Metadata, scope: string[]) => {}): void;
+  public abstract on("push_proposal", (id: number, account: string, metadata: Metadata) => {}): void;
   
   //  for wallet to listen on push messages
   public abstract on("push_message", (message: PushMessageRecord, metadata: Metadata) => {}): void;
