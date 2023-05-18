@@ -7,8 +7,8 @@ abstract class DappClient {
   // initializes the client with persisted storage and a network connection
   public abstract init(params: { metadata: Metadata, castUrl?: string }): Promise<void>;
 
-  // request push subscription
-  public abstract request(params: { account: string, pairingTopic: string }): Promise<{ id }>;
+  // propose push subscription
+  public abstract propose(params: { account: string, scope: string[], pairingTopic: string }): Promise<{ id }>;
 
   // send push notification message
   public abstract notify(params: { topic: string, message: PushMessage }): Promise<void>
