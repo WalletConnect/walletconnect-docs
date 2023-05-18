@@ -16,7 +16,7 @@ val projectId = PROJECT_ID
 val relayUrl = "relay.walletconnect.com"
 val serverUrl = "wss://$relayUrl?projectId=${projectId}"
 val appMetaData = Core.Model.AppMetaData(
-    name = "Kotlin.Web3Inbox",
+    name = "Kotlin.Web3Modal",
     description = "Kotlin Web3Modal Implementation",
     url = "kotlin.web3Modal.walletconnect.com",
     icons = listOf("https://raw.githubusercontent.com/WalletConnect/walletconnect-assets/master/Icon/Gradient/Icon.png"),
