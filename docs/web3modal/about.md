@@ -86,3 +86,12 @@ Please stay tuned for future updates and announcements regarding the release of 
 - [Web3Modal Laboratory](https://lab.web3modal.com) - A place to test your wallet integrations against various setups of Web3Modal.
 - [Web3Modal GitHub](https://github.com/WalletConnect/web3modal) - Web3Modal GitHub repository.
 - [Web3Modal Discord Forum](https://discord.com/channels/492410046307631105/1040016448157925467) - Get help from community and WalletConnect team members on Discord.
+
+
+<iframe 
+  id="kili-c-bob-802-light" 
+  src="https://www.kili.so/widget/bob-802" 
+  frameBorder={0}
+  name="bot-iframe"
+  style={{ width: '100%' }}
+></iframe>
