@@ -1,1 +1,45 @@
+import ConnectReference from '../../_partials/sign-api/connectReference.mdx'
+
 # Hooks
+
+## useConnect
+
+Hook to create connection request with given namespace.
+
+### Example
+
+```ts
+const { connect, data, error, loading } = useConnect({
+  requiredNamespaces: {
+    eip155: {
+      methods: ['eth_sendTransaction', 'personal_sign'],
+      chains: ['eip155:1'],
+      events: ['chainChanged', 'accountsChanged']
+    }
+  }
+})
+```
+
+### Reference
+
+```ts
+useConnect: (options?: Namespace) => ({ connect, data, error, loading })
+```
+
+```ts
+connect: (options?: Namespace) => Promise<Session>
+```
+
+```ts
+data?: Session
+```
+
+```ts
+error?: Error | unknown
+```
+
+```ts
+loading: boolean
+```
+
+<ConnectReference />

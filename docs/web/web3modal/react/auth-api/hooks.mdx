@@ -22,15 +22,19 @@ const { signIn, data, error, loading } = useSignIn({
 ### Reference
 
 ```ts
+useSignIn: (options?: SignInOptions) => ({ signIn, data, error, loading })
+```
+
+```ts
 signIn: (options?: SignInOptions) => Promise<SignInData>
 ```
 
 ```ts
-data: SignInData
+data?: SignInData
 ```
 
 ```ts
-error: Error | unknown
+error?: Error | unknown
 ```
 
 ```ts
