@@ -69,10 +69,18 @@ module.exports = {
       collapsible: false,
       className: 'menu_outer_list',
       items: [
+        {
+          type: 'category',
+          label: 'Migration from v1.x',
+          items: [
+            'advanced/migration-from-v1.x/overview',
+            'advanced/migration-from-v1.x/dapps',
+            'advanced/migration-from-v1.x/wallets',
+            'advanced/migration-from-v1.x/what-changed-from-v1.0'
+          ]
+        },
         'advanced/faq',
         'advanced/glossary',
-        'advanced/migrating-from-v1.0',
-        'advanced/what-changed-from-v1.0',
         {
           type: 'category',
           label: 'RPC Reference',
@@ -765,7 +773,7 @@ module.exports = {
           label: 'Web3Modal',
           collapsible: true,
           collapsed: true,
-          items: ['reactnative/web3modal/installation', 'reactnative/web3modal/dapp-usage']
+          items: ['reactnative/web3modal/installation', 'reactnative/web3modal/dapp-usage', 'reactnative/web3modal/options']
         }
       ]
     },

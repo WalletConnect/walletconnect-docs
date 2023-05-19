@@ -17,7 +17,7 @@ import { ChatClient } from "@walletconnect/chat-client";
 
 const chatClient = await ChatClient.init({
   projectId: "<YOUR PROJECT ID>",
-  keyseverUrl: "<YOUR KEYSERVER URL: eg: https://keys.walletconnect.com"
+  keyserverUrl: "<YOUR KEYSERVER URL: eg: https://keys.walletconnect.com"
 });
 ```
 
