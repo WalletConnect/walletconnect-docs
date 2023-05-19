@@ -9,7 +9,12 @@ Action to create sign in request with given options. Returns authentication data
 ### Example
 
 ```js
-const data = await web3modal.signIn(SignInOptions)
+const data = await web3modal.signIn({
+  statement: 'Hello from my dapp',
+  chainId: 'eip155:1',
+  aud: 'https://mydapp.com/authenticate',
+  domain: 'www.mydapp.com'
+})
 ```
 
 ### Reference

@@ -122,7 +122,7 @@ See [reference for connect method](#reference), to learn more about sessions.
 
 ## onSessionEvent
 
-Action to subscribe to session events and trigger callback
+Action to subscribe to session events
 
 ### Example
 
@@ -160,6 +160,138 @@ web3modal.offSessionEvent(logData)
 
 ```ts
 offSessionEvent: (callback: EventCallback) => void
+```
+
+<EventCallbackReference />
+
+## onSessionUpdate
+
+Action to subscribe to session updates
+
+### Example
+
+```js
+function logData(data) {
+  console.info(data)
+}
+
+web3modal.onSessionUpdate(logData)
+```
+
+### Reference
+
+```ts
+onSessionUpdate: (callback: EventCallback) => void
+```
+
+<EventCallbackReference />
+
+## offSessionUpdate
+
+Action to unsubscribe from session updates
+
+### Example
+
+```js
+function logData(data) {
+  console.info(data)
+}
+
+web3modal.offSessionUpdate(logData)
+```
+
+### Reference
+
+```ts
+offSessionUpdate: (callback: EventCallback) => void
+```
+
+<EventCallbackReference />
+
+## onSessionDelete
+
+Action to subscribe to session deletions
+
+### Example
+
+```js
+function logData(data) {
+  console.info(data)
+}
+
+web3modal.onSessionDelete(logData)
+```
+
+### Reference
+
+```ts
+onSessionDelete: (callback: EventCallback) => void
+```
+
+<EventCallbackReference />
+
+## offSessionDelete
+
+Action to unsubscribe from session deletions
+
+### Example
+
+```js
+function logData(data) {
+  console.info(data)
+}
+
+web3modal.offSessionDelete(logData)
+```
+
+### Reference
+
+```ts
+offSessionDelete: (callback: EventCallback) => void
+```
+
+<EventCallbackReference />
+
+## onSessionExpire
+
+Action to subscribe to session expirations
+
+### Example
+
+```js
+function logData(data) {
+  console.info(data)
+}
+
+web3modal.onSessionExpire(logData)
+```
+
+### Reference
+
+```ts
+onSessionExpire: (callback: EventCallback) => void
+```
+
+<EventCallbackReference />
+
+## offSessionExpire
+
+Action to unsubscribe from session expirations
+
+### Example
+
+```js
+function logData(data) {
+  console.info(data)
+}
+
+web3modal.offSessionExpire(logData)
+```
+
+### Reference
+
+```ts
+offSessionExpire: (callback: EventCallback) => void
 ```
 
 <EventCallbackReference />
