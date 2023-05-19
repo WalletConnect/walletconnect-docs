@@ -1,5 +1,7 @@
 import ConnectReference from '../../_partials/sign-api/connectReference.mdx'
 import DisconnectReference from '../../_partials/sign-api/disconnectReference.mdx'
+import RequestReference from '../../_partials/sign-api/disconnectReference.mdx'
+import EventCallbackReference from '../../_partials/sign-api/eventCallbackReference.mdx'
 
 # Actions
 
@@ -51,3 +53,113 @@ disconnect: DisconnectOptions => Promise<void>
 ```
 
 <DisconnectReference />
+
+## request
+
+Action to perform a json-rpc request.
+
+### Example
+
+```js
+const response = await web3modal.request({
+  topic: '12345...',
+  chainId: 'eip155:1',
+  request: {
+    id: 1,
+    jsonrpc: '2.0',
+    method: 'personal_sign',
+    params: [
+      '0x1d85568eEAbad713fBB5293B45ea066e552A90De',
+      '0x7468697320697320612074657374206d65737361676520746f206265207369676e6564'
+    ]
+  }
+})
+```
+
+### Reference
+
+```ts
+request: (options: RequestOptions) => Promise<any>
+```
+
+<RequestReference />
+
+## getSessions
+
+Action to get array of established sessions
+
+### Example
+
+```js
+const sessions = await web3modal.getSessions()
+```
+
+### Reference
+
+```ts
+getSessions: () => Promise<Session[]>
+```
+
+See [reference for connect method](#reference), to learn more about sessions.
+
+## getSessions
+
+Action to get last established (active) session
+
+### Example
+
+```js
+const session = await web3modal.getSession()
+```
+
+### Reference
+
+```ts
+getSession: () => Promise<Session>
+```
+
+See [reference for connect method](#reference), to learn more about sessions.
+
+## onSessionEvent
+
+Action to subscribe to session events and trigger callback
+
+### Example
+
+```js
+function logData(data) {
+  console.info(data)
+}
+
+web3modal.onSessionEvent(logData)
+```
+
+### Reference
+
+```ts
+onSessionEvent: (callback: EventCallback) => void
+```
+
+<EventCallbackReference />
+
+## offSessionEvent
+
+Action to unsubscribe from session events
+
+### Example
+
+```js
+function logData(data) {
+  console.info(data)
+}
+
+web3modal.offSessionEvent(logData)
+```
+
+### Reference
+
+```ts
+offSessionEvent: (callback: EventCallback) => void
+```
+
+<EventCallbackReference />
