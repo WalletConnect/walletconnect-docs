@@ -1,5 +1,6 @@
 import ConnectReference from '../../_partials/sign-api/connectReference.mdx'
 import DisconnectReference from '../../_partials/sign-api/disconnectReference.mdx'
+import RequestReference from '../../_partials/sign-api/requestReference.mdx'
 
 # Hooks
 
@@ -84,4 +85,50 @@ loading: boolean
 
 <DisconnectReference />
 
-# useRequest
+## useRequest
+
+Hook to perform a json-rpc request.
+
+### Example
+
+```ts
+const { request, data, error, loading } = useRequest({
+  topic: '12345...',
+  chainId: 'eip155:1',
+  request: {
+    id: 1,
+    jsonrpc: '2.0',
+    method: 'personal_sign',
+    params: [
+      '0x1d85568eEAbad713fBB5293B45ea066e552A90De',
+      '0x7468697320697320612074657374206d65737361676520746f206265207369676e6564'
+    ]
+  }
+})
+
+request()
+```
+
+### Reference
+
+```ts
+useDisconnect: (options: RequestOptions) => ({ request, data, error, loading })
+```
+
+```ts
+request: (options?: RequestOptions) => Promise<any>
+```
+
+```ts
+data?: any
+```
+
+```ts
+error?: Error | unknown
+```
+
+```ts
+loading: boolean
+```
+
+<RequestReference />
