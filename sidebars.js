@@ -316,6 +316,10 @@ module.exports = {
                   label: 'With Sign API',
                   items: [
                     'web/web3modal/react/sign-api/installation',
+                    'web/web3modal/react/sign-api/components',
+                    'web/web3modal/react/sign-api/hooks',
+                    'web/web3modal/react/sign-api/options',
+                    'web/web3modal/react/sign-api/theming',
                     {
                       type: 'link',
                       label: 'Example',
