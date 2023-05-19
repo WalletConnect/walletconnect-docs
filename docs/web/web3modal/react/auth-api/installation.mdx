@@ -35,9 +35,6 @@ function App() {
           url: 'https://my-dapp.com',
           icons: ['https://my-dapp.com/logo.png']
         }}
-        modalOptions={{
-          themeMode: 'dark'
-        }}
       />
     </>
   )
@@ -52,7 +49,7 @@ Set up and use signIn method to open the modal and start user authentication.
 import { useSignIn } from '@web3modal/auth-react'
 
 function HomePage() {
-  const signIn = useSignIn({ statement: 'Connect to my dapp' })
+  const { signIn, data, error, loading } = useSignIn({ statement: 'Connect to my dapp' })
 
   async function onSignIn() {
     const data = await signIn()

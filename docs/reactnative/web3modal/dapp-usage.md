@@ -4,17 +4,24 @@ import Container from '../../components/Container';
 
 ## Implementation
 
-Import Web3Modal package and replace `YOUR_PROJECT_ID` with your [WalletConnect Cloud](https://cloud.walletconnect.com/sign-in) Project ID.
+Import Web3Modal package, replace `YOUR_PROJECT_ID` with your [WalletConnect Cloud](https://cloud.walletconnect.com/sign-in) Project ID and add your Project's info in `providerMetadata`
 
 ```tsx
 import { Web3Modal } from '@web3modal/react-native';
 
 const projectId = 'YOUR_PROJECT_ID';
 
+const providerMetadata = {
+  name: 'YOUR_PROJECT_NAME',
+  description: 'YOUR_PROJECT_DESCRIPTION',
+  url: 'https://your-project-website.com/',
+  icons: ['https://your-project-logo.com/'],
+};
+
 function App() {
   return (
     <>
-      <Web3Modal projectId={projectId} />
+      <Web3Modal projectId={projectId} providerMetadata={providerMetadata} />
     </>
   )
 }
@@ -29,11 +36,20 @@ import { Web3Modal, Web3Button } from '@web3modal/react-native';
 
 const projectId = 'YOUR_PROJECT_ID';
 
+const providerMetadata = {
+  name: 'YOUR_PROJECT_NAME',
+  description: 'YOUR_PROJECT_DESCRIPTION',
+  url: 'https://your-project-website.com/',
+  icons: ['https://your-project-logo.com/'],
+};
+
+
+
 function App() {
   return (
     <>
       <Web3Button />
-      <Web3Modal projectId={projectId} />
+      <Web3Modal projectId={projectId} providerMetadata={providerMetadata}  />
     </>
   )
 }
@@ -74,6 +90,14 @@ import { Web3Modal, useWeb3Modal } from '@web3modal/react-native';
 
 const projectId = 'YOUR_PROJECT_ID';
 
+const providerMetadata = {
+  name: 'YOUR_PROJECT_NAME',
+  description: 'YOUR_PROJECT_DESCRIPTION',
+  url: 'https://your-project-website.com/',
+  icons: ['https://your-project-logo.com/'],
+};
+
+
 function App() {
   const { open, isConnected } = useWeb3Modal();
   return (
@@ -81,7 +105,7 @@ function App() {
       <Pressable onPress={open}>
         <Text>{isConnected ? 'View Account' : 'Connect'}</Text>
       </Pressable>
-      <Web3Modal projectId={projectId} />
+      <Web3Modal projectId={projectId} providerMetadata={providerMetadata} />
     </>
   )
 }

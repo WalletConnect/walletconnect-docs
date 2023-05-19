@@ -1,5 +1,5 @@
 ```ts
-interface AuthOptions {
+interface SignInOptions {
   // User friendly statement shown during signature approval within wallet
   statement: string
   // CAIP-10 compliant chain id, defaults to eip155:1 (ethereum mainnet)
@@ -13,7 +13,7 @@ interface AuthOptions {
 ```
 
 ```ts
-interface AuthData {
+interface SignInData {
   // Boolean indicating if the authentication data is valid
   valid: boolean
   // Users address that signed authentication data
@@ -22,9 +22,4 @@ interface AuthData {
   // Learn about CAIP-222: https://github.com/ChainAgnostic/CAIPs/blob/master/CAIPs/caip-222.md#response
   cacao: Object
 }
-```
-
-```ts
-// Method that authenticates the user
-signIn: (options?: AuthOptions) => Promise<AuthData>
 ```

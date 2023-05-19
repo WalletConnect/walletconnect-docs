@@ -69,10 +69,18 @@ module.exports = {
       collapsible: false,
       className: 'menu_outer_list',
       items: [
+        {
+          type: 'category',
+          label: 'Migration from v1.x',
+          items: [
+            'advanced/migration-from-v1.x/overview',
+            'advanced/migration-from-v1.x/dapps',
+            'advanced/migration-from-v1.x/wallets',
+            'advanced/migration-from-v1.x/what-changed-from-v1.0'
+          ]
+        },
         'advanced/faq',
         'advanced/glossary',
-        'advanced/migrating-from-v1.0',
-        'advanced/what-changed-from-v1.0',
         {
           type: 'category',
           label: 'RPC Reference',
@@ -305,6 +313,22 @@ module.exports = {
               items: [
                 {
                   type: 'category',
+                  label: 'With Sign API',
+                  items: [
+                    'web/web3modal/react/sign-api/installation',
+                    'web/web3modal/react/sign-api/components',
+                    'web/web3modal/react/sign-api/hooks',
+                    'web/web3modal/react/sign-api/options',
+                    'web/web3modal/react/sign-api/theming',
+                    {
+                      type: 'link',
+                      label: 'Example',
+                      href: 'https://github.com/WalletConnect/web3modal-examples/tree/main/nextjs-sign'
+                    }
+                  ]
+                },
+                {
+                  type: 'category',
                   label: 'With Auth API',
                   items: [
                     'web/web3modal/react/auth-api/installation',
@@ -316,18 +340,6 @@ module.exports = {
                       type: 'link',
                       label: 'Example',
                       href: 'https://github.com/WalletConnect/web3modal-examples/tree/main/nextjs-auth'
-                    }
-                  ]
-                },
-                {
-                  type: 'category',
-                  label: 'With Sign API',
-                  items: [
-                    'web/web3modal/react/sign-api/installation',
-                    {
-                      type: 'link',
-                      label: 'Example',
-                      href: 'https://github.com/WalletConnect/web3modal-examples/tree/main/nextjs-sign'
                     }
                   ]
                 }
@@ -383,6 +395,21 @@ module.exports = {
               items: [
                 {
                   type: 'category',
+                  label: 'With Sign API',
+                  items: [
+                    'web/web3modal/html/sign-api/installation',
+                    'web/web3modal/html/sign-api/actions',
+                    'web/web3modal/html/sign-api/options',
+                    'web/web3modal/html/sign-api/theming',
+                    {
+                      type: 'link',
+                      label: 'Example',
+                      href: 'https://github.com/WalletConnect/web3modal-examples/tree/main/html-sign'
+                    }
+                  ]
+                },
+                {
+                  type: 'category',
                   label: 'With Auth API',
                   items: [
                     'web/web3modal/html/auth-api/installation',
@@ -393,18 +420,6 @@ module.exports = {
                       type: 'link',
                       label: 'Example',
                       href: 'https://github.com/WalletConnect/web3modal-examples/tree/main/html-auth'
-                    }
-                  ]
-                },
-                {
-                  type: 'category',
-                  label: 'With Sign API',
-                  items: [
-                    'web/web3modal/html/sign-api/installation',
-                    {
-                      type: 'link',
-                      label: 'Example',
-                      href: 'https://github.com/WalletConnect/web3modal-examples/tree/main/html-sign'
                     }
                   ]
                 }
@@ -765,7 +780,11 @@ module.exports = {
           label: 'Web3Modal',
           collapsible: true,
           collapsed: true,
-          items: ['reactnative/web3modal/installation', 'reactnative/web3modal/dapp-usage']
+          items: [
+            'reactnative/web3modal/installation',
+            'reactnative/web3modal/dapp-usage',
+            'reactnative/web3modal/options'
+          ]
         }
       ]
     },

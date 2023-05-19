@@ -1,3 +1,69 @@
+import SignApiAbout from '../../_partials/sign-api/about.mdx'
+import ObtainProjectIdPartial from '../../_partials/obtainProjectId.mdx'
+
 # Installation
 
-TODO(Ilja): Add docs when `@web3modal/sign-react` package is ready
+<SignApiAbout />
+
+## Obtain project id
+
+<ObtainProjectIdPartial />
+
+## Add packages
+
+```bash npm2yarn
+npm install @web3modal/sign-react
+```
+
+## Implementation
+
+Start by adding `Web3ModalSign` component at the root of your app.
+
+```tsx
+import { Web3ModalSign } from '@web3modal/sign-react'
+
+function App() {
+  return (
+    <>
+      <HomePage />
+
+      <Web3ModalSign
+        projectId="YOUR_PROJECT_ID"
+        metadata={{
+          name: 'My Dapp',
+          description: 'My Dapp description',
+          url: 'https://my-dapp.com',
+          icons: ['https://my-dapp.com/logo.png']
+        }}
+      />
+    </>
+  )
+}
+```
+
+## Use connect hook
+
+Set up and use connect method to open the modal and start user connection flow.
+
+```tsx
+import { useConnect } from '@web3modal/sign-react'
+
+function HomePage() {
+  const { connect, data, error, loading } = useConnect({
+    requiredNamespaces: {
+      eip155: {
+        methods: ['eth_sendTransaction', 'personal_sign'],
+        chains: ['eip155:1'],
+        events: ['chainChanged', 'accountsChanged']
+      }
+    }
+  })
+
+  async function onConnect() {
+    const data = await connect()
+    console.info(data)
+  }
+
+  return <button onClick={onConnect}>Connect with wallet</button>
+}
+```
