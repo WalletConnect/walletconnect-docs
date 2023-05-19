@@ -1,4 +1,5 @@
 import ConnectReference from '../../_partials/sign-api/connectReference.mdx'
+import DisconnectReference from '../../_partials/sign-api/disconnectReference.mdx'
 
 # Actions
 
@@ -9,7 +10,15 @@ Action to create connection request with given options. Returns session data.
 ### Example
 
 ```js
-const data = await web3modal.connect(Namespace)
+const data = await web3modal.connect({
+  requiredNamespaces: {
+    eip155: {
+      methods: ['eth_sendTransaction', 'personal_sign'],
+      chains: ['eip155:1'],
+      events: ['chainChanged', 'accountsChanged']
+    }
+  }
+})
 ```
 
 ### Reference
@@ -19,3 +28,26 @@ connect: (options: Namespace) => Promise<Session>
 ```
 
 <ConnectReference />
+
+## disconnect
+
+Action to disconnect from a provided session topic via given reason.
+
+### Example
+
+```js
+import { getSdkError } from '@walletconnect/utils'
+
+await web3modal.disconnect({
+  topic: '12345...',
+  reason: getSdkError('USER_DISCONNECTED')
+})
+```
+
+### Reference
+
+```ts
+disconnect: DisconnectOptions => Promise<void>
+```
+
+<DisconnectReference />
