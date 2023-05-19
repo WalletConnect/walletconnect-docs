@@ -1,4 +1,4 @@
-import AuthSignInReference from '../../_partials/auth-api/authSignInReference.mdx'
+import SignInReference from '../../_partials/auth-api/signInReference.mdx'
 
 # Hooks
 
@@ -11,11 +11,25 @@ Hook to create sign in method with given options. Returns authentication data.
 ```tsx
 import { useSignIn } from '@web3modal/auth-react'
 
-const signIn = useSignIn(authOptions)
-
-const authData = await signIn()
+const { signIn, data, error, loading } = useSignIn(SignInOptions)
 ```
 
 ### Reference
 
-<AuthSignInReference />
+```ts
+signIn: (options?: SignInOptions) => Promise<SignInData>
+```
+
+```ts
+data: SignInData
+```
+
+```ts
+error: Error | unknown
+```
+
+```ts
+loading: boolean
+```
+
+<SignInReference />

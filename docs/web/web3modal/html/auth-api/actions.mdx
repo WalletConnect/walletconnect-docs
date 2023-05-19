@@ -1,4 +1,4 @@
-import AuthSignInReference from '../../_partials/auth-api/authSignInReference.mdx'
+import SignInReference from '../../_partials/auth-api/signInReference.mdx'
 
 # Actions
 
@@ -9,9 +9,13 @@ Action to create sign in request with given options. Returns authentication data
 ### Example
 
 ```js
-const data = await web3modal.signIn()
+const data = await web3modal.signIn(SignInOptions)
 ```
 
 ### Reference
 
-<AuthSignInReference />
+```ts
+signIn: (options?: SignInOptions) => Promise<SignInData>
+```
+
+<SignInReference />
