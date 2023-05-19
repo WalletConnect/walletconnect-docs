@@ -2,12 +2,16 @@
 
 ## connect
 
-Action to create sign in request with given options. Returns authentication data.
+Action to create connection request with given options. Returns session data.
 
 ### Example
 
 ```js
-const session = await web3modal.connect(options)
+const data = await web3modal.connect(ConnectOptions)
 ```
 
 ### Reference
+
+```ts
+connect: (options: Namespaces) => Promise<Session>
+```
