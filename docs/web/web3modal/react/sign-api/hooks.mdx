@@ -1,6 +1,7 @@
 import ConnectReference from '../../_partials/sign-api/connectReference.mdx'
 import DisconnectReference from '../../_partials/sign-api/disconnectReference.mdx'
 import RequestReference from '../../_partials/sign-api/requestReference.mdx'
+import EventCallbackReference from '../../_partials/sign-api/eventCallbackReference.mdx'
 
 # Hooks
 
@@ -132,3 +133,111 @@ loading: boolean
 ```
 
 <RequestReference />
+
+## useSessions
+
+Hook to get array of established sessions
+
+### Example
+
+```ts
+const sessions = useSessions()
+```
+
+### Reference
+
+```ts
+useSessions: () => Session[] | undefined
+```
+
+See [reference for useConnect hook](#reference), to learn more about sessions.
+
+## useSession
+
+Hook to get last established (active) session
+
+### Example
+
+```ts
+const session = useSession()
+```
+
+### Reference
+
+```ts
+useSession: () => Session | undefined
+```
+
+See [reference for useConnect hook](#reference), to learn more about sessions.
+
+## useSessionEvent
+
+Hook to subscribe to session events. Unsubscribes automatically when unmounted.
+
+### Example
+
+```ts
+useSessionEvent(data => console.info(data))
+```
+
+### Reference
+
+```ts
+useSessionEvent: (callback: EventCallback) => void
+```
+
+<EventCallbackReference />
+
+## useSessionUpdate
+
+Hook to subscribe to session updates. Unsubscribes automatically when unmounted.
+
+### Example
+
+```ts
+useSessionUpdate(data => console.info(data))
+```
+
+### Reference
+
+```ts
+useSessionUpdate: (callback: EventCallback) => void
+```
+
+<EventCallbackReference />
+
+## useSessionDelete
+
+Hook to subscribe to session deletes. Unsubscribes automatically when unmounted.
+
+### Example
+
+```ts
+useSessionDelete(data => console.info(data))
+```
+
+### Reference
+
+```ts
+useSessionDelete: (callback: EventCallback) => void
+```
+
+<EventCallbackReference />
+
+## useSessionExpire
+
+Hook to subscribe to session expirations. Unsubscribes automatically when unmounted.
+
+### Example
+
+```ts
+useSessionExpire(data => console.info(data))
+```
+
+### Reference
+
+```ts
+useSessionExpire: (callback: EventCallback) => void
+```
+
+<EventCallbackReference />
