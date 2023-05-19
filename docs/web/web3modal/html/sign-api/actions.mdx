@@ -1,3 +1,5 @@
+import ConnectReference from '../../_partials/sign-api/connectReference.mdx'
+
 # Actions
 
 ## connect
@@ -7,11 +9,13 @@ Action to create connection request with given options. Returns session data.
 ### Example
 
 ```js
-const data = await web3modal.connect(ConnectOptions)
+const data = await web3modal.connect(Namespace)
 ```
 
 ### Reference
 
 ```ts
-connect: (options: Namespaces) => Promise<Session>
+connect: (options: Namespace) => Promise<Session>
 ```
+
+<ConnectReference />
