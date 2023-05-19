@@ -17,12 +17,14 @@ const { signIn, data, error, loading } = useSignIn({
   aud: 'https://mydapp.com/authenticate',
   domain: 'www.mydapp.com'
 })
+
+signIn()
 ```
 
 ### Reference
 
 ```ts
-useSignIn: (options?: SignInOptions) => ({ signIn, data, error, loading })
+useSignIn: (options: SignInOptions) => ({ signIn, data, error, loading })
 ```
 
 ```ts

@@ -1,4 +1,5 @@
 import ConnectReference from '../../_partials/sign-api/connectReference.mdx'
+import DisconnectReference from '../../_partials/sign-api/disconnectReference.mdx'
 
 # Hooks
 
@@ -18,12 +19,14 @@ const { connect, data, error, loading } = useConnect({
     }
   }
 })
+
+connect()
 ```
 
 ### Reference
 
 ```ts
-useConnect: (options?: Namespace) => ({ connect, data, error, loading })
+useConnect: (options: Namespace) => ({ connect, data, error, loading })
 ```
 
 ```ts
@@ -43,3 +46,42 @@ loading: boolean
 ```
 
 <ConnectReference />
+
+## useDisconnect
+
+Hook to disconnect from a provided session topic via given reason.
+
+### Example
+
+```ts
+import { getSdkError } from '@walletconnect/utils'
+
+const { disconnect, error, loading } = useDisconnect({
+  topic: '12345...',
+  reason: getSdkError('USER_DISCONNECTED')
+})
+
+disconnect()
+```
+
+### Reference
+
+```ts
+useDisconnect: (options: DisconnectOptions) => ({ disconnect, error, loading })
+```
+
+```ts
+disconnect: (options?: DisconnectOptions) => Promise<void>
+```
+
+```ts
+error?: Error | unknown
+```
+
+```ts
+loading: boolean
+```
+
+<DisconnectReference />
+
+# useRequest
