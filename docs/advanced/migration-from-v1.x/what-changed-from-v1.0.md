@@ -12,7 +12,7 @@ WalletConnect v2.0 instead allows dapps to request a set of chains as part of th
 
 ## Chain-Agnostic interface
 
-Previously on v1.0, WalletConnect expected only EVM-compatible Wallets and Dapps to use its protocol to interoperate. This assumption however brought its own constraints, which disables other chain ecosystems to meet compatibility and utilize the protocol.
+Previously on v1.0, WalletConnect expected only EVM-compatible Wallets and Dapps to use its protocol to interoperate. This assumption however brought its own constraints, which disable other chain ecosystems to meet compatibility and utilize the protocol.
 
 WalletConnect v2.0 introduces a set of JSON-RPC methods that are permissioned to use within the session's lifetime. This means that a Dapp can request a minimum set of methods that requires to meet compatibility with the Wallet, which can be responded with a success or error message when the compatibility is met. Additionally, this means that the Dapp can not only determine if the Wallet can sign transactions and/or messages for the chain it needs, but it also can detect support for experimental methods (e.g. eth_signTypedData). Finally, the Wallet can upgrade the set of methods it exposes during its session lifetime.
 
