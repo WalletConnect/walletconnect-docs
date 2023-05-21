@@ -276,6 +276,117 @@ Response will include a flag `hasMore`. If true, the consumer should fetch again
 }
 ```
 
+### Register Webhook
+
+Used to register a webhook to observe relay messages matching a given client.
+
+Watch will be triggered for both incoming and outgoing messages but will not affect the delivery status of the messages.
+
+Subscribe will be triggered only for incoming messages and messages will be considered delivered when webhook event is successfuly received.
+
+```jsonc
+// RegisterAuth Payload
+{
+   "act": string, // action ("client_watch" or "client_subscribe")
+   "iss": string, // clientId
+   "aud": string, // serviceUrl
+   "sub": string, // relayUrl
+   "whu": string, // webhookUrl
+   "iat": string, // issued at
+   "exp": string, // expiry (max = 30 days)
+   "tag": [1000, 1001, 1010, 1011] // array of tags
+}
+
+// Request (service->relay)
+{
+  "id" : "1",
+  "jsonrpc": "2.0",
+  "method": "irn_registerWebhook",
+  "params" : {
+    "registerAuth": string // jwt with RegisterAuth payload
+  }
+}
+
+// Response (relay->service)
+{
+  "id" : "1",
+  "jsonrpc": "2.0",
+  "result": {
+    "webhookId": string, // sha256(act + iss + aud + sub + whu)
+    "relayId": string // relay public key (did:key)
+  }
+}
+```
+
+Future publishedmessage events will be triggered on the corresponding webhook url ("whu") with the following body payload.
+
+`POST <WEBHOOK_URL>`
+
+Body:
+
+```jsonc
+// EventAuth Payload
+{
+  "act": string, // action (must be "irn_webhookEvent")
+  "iss": string, // relayId
+  "aud": string, // serviceUrl
+  "sub": string, // clientId
+  "wid": string, // webhookId
+  "iat": string, // issued at
+  "evt": {       // published message event
+  "topic" : string,
+  "message": string,
+  "publishedAt": number,
+  "tag": number
+  }
+}
+
+
+{
+    "eventAuth": string[], // jwt with EventAuth payload
+}
+```
+
+Response:
+
+```sh
+200
+```
+
+### Unregister Webhook
+
+Used to unregister an active webhook corresponding to a webhookId 
+
+```jsonc
+// UnregisterAuth Payload
+{
+   "act": string, // action ("client_unwatch" or "client_unsubscribe")
+   "iss": string, // clientId
+   "aud": string, // serviceUrl
+   "sub": string, // relayUrl
+   "whu": string, // webhookUrl
+   "wid": string, // websocketId
+   "iat": string, // issued at
+}
+
+// Request (service->relay)
+{
+  "id" : "1",
+  "jsonrpc": "2.0",
+  "method": "irn_unregisterWebhook",
+  "params" : {
+    "unregisterAuth": string // jwt with UnregisterAuth payload
+  }
+}
+
+// Response (relay->service)
+{
+  "id" : "1",
+  "jsonrpc": "2.0",
+  "result": true
+}
+```
+
 ## FAQ
 
 - What is a client? - Any SDK instance (Sign, Chat, Auth, Push)
