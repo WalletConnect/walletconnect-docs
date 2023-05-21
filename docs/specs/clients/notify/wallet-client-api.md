@@ -47,7 +47,7 @@ abstract class WalletClient {
   public abstract on("notify_subscription", (result: NotifySubscription | Error) => {}): void;
 
   // for wallet to listen on notify proposal
-  public abstract on("notify_proposal", (id: number, account: string, metadata: Metadata, scope: string[]) => {}): void;
+  public abstract on("notify_proposal", (id: number, account: string, metadata: Metadata) => {}): void;
   
   //  for wallet to listen on notify messages
   public abstract on("notify_message", (message: NotifyMessageRecord, metadata: Metadata) => {}): void;
