@@ -37,18 +37,30 @@ WalletConnect uses chain ids based on the CAIP standard (CAIP-13 for Polkadot Na
 - polkadot CAIP id = `91b171bb158e2d3848fa23a9f1c25182`
 - kusama CAIP id = `b0a8d493285c2df73290dfb7e61f870f`
 - westend CAIP id = `e143f23803ac50e8f6f8e62695d1ce9e`
+- statemint CAIP id = `68d56f15f85d3136970ec16946040bc1`
+- hydradx CAIP id = `afdc188f45c71dacbaa0b62e16a91f72`
+- phala network CAIP id = `1bb969d85965e4bb5a651abbedf21a54`
+- astar network CAIP id = `9eb76c5184c4ab8679d2d5d819fdf90b`
+- crust shadow CAIP id = `d4c0c08ca49dc7c680c3dac71a7c0703`
+- mangata kusama mainnet CAIP id = `d611f22d291c5b7b69f1e105cca03352`
+- turing network CAIP id = `0f62b701fb12d02237a33b84818c11f6`
+
 - Chain ids correspond to the genesis hash for each respective chain
 
 ### Example Namespace and Sign Client connect call:
 
-**Note**: this serves as an example. The supported methods, chains, and events can all be defined by the dapp team based on the requirements of the dapp.
+**Note**: this serves as an example where a dapp requires 3 different chain namespaces (polkadot, hydradx and turing network). The supported methods, chains, and events can all be defined by the dapp team based on the requirements of the dapp.
 
 ```js
 const params = {
   requiredNamespaces: {
     polkadot: {
       methods: ['polkadot_signTransaction', 'polkadot_signMessage'],
-      chains: ['polkadot:91b171bb158e2d3848fa23a9f1c25182'],
+      chains: [
+        'polkadot:91b171bb158e2d3848fa23a9f1c25182', // polkadot
+        'polkadot:afdc188f45c71dacbaa0b62e16a91f72',  // hydradx
+        'polkadot:0f62b701fb12d02237a33b84818c11f6' // turing network
+        ],
       events: ['chainChanged", "accountsChanged']
     }
   }
@@ -176,13 +188,29 @@ const unsignedTransaction = {
 
 9. Send the unsigned transaction to the paired wallet for signing using the providers sign client. This triggers a `session_request` event which must be handled by the paired wallet.
 
+### Polkadot Example
 ```js
 const result = await client.request({
   chainId: 'polkadot:91b171bb158e2d3848fa23a9f1c25182',
   topic: walletConnectSession.topic,
   request: {
     method: 'polkadot_signTransaction',
-    params: {w
+    params: {
+      address: selectedWalletConnectAddress,
+      transactionPayload: unsignedTransaction
+    }
+  }
+})
+```
+
+### Parachain Example (HydraDX)
+```js
+const result = await client.request({
+  chainId: 'polkadot:afdc188f45c71dacbaa0b62e16a91f72',
+  topic: walletConnectSession.topic,
+  request: {
+    method: 'polkadot_signTransaction',
+    params: {
       address: selectedWalletConnectAddress,
       transactionPayload: unsignedTransaction
     }
