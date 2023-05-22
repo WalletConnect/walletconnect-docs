@@ -115,7 +115,7 @@ Example `InviteKeys` payload:
 
 ### Received Invites Status Store
 
-Store that handles synchronized state of received invites status, which allows other clients to acknowledge that some other responded already responded to invite. Whenever a client rejects or approves received invite `com.walletconnect.chat.receivedInviteStatuses` with [`ReceivedInviteStatus`](#ReceivedInviteStatus) data structure.
+Store that handles synchronized state of received invites status, which allows other clients to acknowledge that some other responded already responded to invite. Whenever a client rejects received invite `com.walletconnect.chat.receivedInviteStatuses` with [`ReceivedInviteStatus`](#ReceivedInviteStatus) data structure.
 
 
 #### Store Key
@@ -149,8 +149,10 @@ In a multiclient environment there are clients that didn't send a `JsonRpcReques
 ### Invite Protocol in multiclient environment
 
 
-A1,A2,Ax - clients that have access A blockchain account keys
-B1,B2,Bx - clients that have access B blockchain account keys
+A1,A2 - clients that have access A blockchain account keys.
+Ax - all clients that have access B blockchain account keys. 
+B1,B2 - clients that have access B blockchain account keys. 
+Bx - all clients that have access B blockchain account keys. 
 
 A1 retrieves the public key associated with B's blockchain account, publicKey X.
 A1 generates a keyPair Y to encrypt the invite with derived DH symKey I.
@@ -177,3 +179,12 @@ Ax derives symKey T using privKey Y and publicKey Z.
 Ax tries to update thread storage if not yet updated
 
 Ax and Bx both subscribe to thread topic and encrypt messages with symKey T.
+
+### Receiving Messages in multiclient environment
+
+A1,A2 - clients that have access A blockchain account keys.
+Ax - all clients that have access B blockchain account keys. 
+B1,B2 - clients that have access B blockchain account keys. 
+Bx - all clients that have access B blockchain account keys.
+
+Whenever A1 sends a message to blockchain account B, all Bx clients receive it as [`wc_chatMessage request`](./rpc-methods.md#wc_chatmessage), and then responds with [`wc_chatMessage response`](./rpc-methods.md#wc_chatmessage) to blockchain account Ax clients that it received the message. In multiclient environment any Ax client, that didn't send the message also receives [`wc_chatMessage request`](./rpc-methods.md#wc_chatmessage) however they shouldn't respond with [`wc_chatMessage response`](./rpc-methods.md#wc_chatmessage) unless the device also has account B registered within the Chat Client.
