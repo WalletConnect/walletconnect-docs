@@ -308,16 +308,16 @@ Used to batch acknowledge receipt of messages from a subscribed client
 ```
 
 
-### Register Webhook
+### Register Watch (Webhook)
 
-Used to register a webhook to observe relay messages matching a given client.
+Used to register a webhook to watch relay messages matching a given client.
 
-Watch will be triggered for both incoming and outgoing messages but will not affect the delivery status of the messages.
+Watch events will be triggered for both incoming and outgoing messages but will not affect the delivery status of the messages in the mailbox.
 
 ```jsonc
 // RegisterAuth Payload
 {
-   "act": string, // action ("client_watch")
+   "act": string, // action (must be "irn_watchRegister")
    "iss": string, // clientId
    "aud": string, // relayUrl
    "sub": string, // serviceUrl
@@ -331,7 +331,7 @@ Watch will be triggered for both incoming and outgoing messages but will not aff
 {
   "id" : "1",
   "jsonrpc": "2.0",
-  "method": "irn_registerWebhook",
+  "method": "irn_watchRegister",
   "params" : {
     "registerAuth": string // jwt with RegisterAuth payload
   }
@@ -342,13 +342,15 @@ Watch will be triggered for both incoming and outgoing messages but will not aff
   "id" : "1",
   "jsonrpc": "2.0",
   "result": {
-    "webhookId": string, // sha256(act + iss + aud + sub + whu)
+    "webhookId": string, // sha256(iss + aud + sub + whu)
     "relayId": string // relay public key (did:key)
   }
 }
 ```
 
-Future publishedmessage events will be triggered on the corresponding webhook url ("whu") with the following body payload.
+#### Watch Events (Webhook)
+
+Future published message events will be triggered on the corresponding webhook url ("whu") with the following body payload.
 
 `POST <WEBHOOK_URL>`
 
@@ -384,14 +386,14 @@ Response:
 200
 ```
 
-### Unregister Webhook
+### Unregister Watch (Webhook)
 
-Used to unregister an active webhook corresponding to a webhookId 
+Used to unregister an active watch webhook corresponding to a webhookId.
 
 ```jsonc
 // UnregisterAuth Payload
 {
-   "act": string, // action ("client_unwatch")
+   "act": string, // action ("irn_watchUnregister")
    "iss": string, // clientId
    "aud": string, // serviceUrl
    "sub": string, // relayUrl
@@ -404,7 +406,7 @@ Used to unregister an active webhook corresponding to a webhookId
 {
   "id" : "1",
   "jsonrpc": "2.0",
-  "method": "irn_unregisterWebhook",
+  "method": "irn_watchUnregister",
   "params" : {
     "unregisterAuth": string // jwt with UnregisterAuth payload
   }
