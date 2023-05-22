@@ -16,7 +16,7 @@ The following definitions are shared concepts across all JSON-RPC methods for th
 
 
 ## Methods
-### Publish payload
+### Publish
 
 Used when a client publishes a message to a server.
 
@@ -42,7 +42,7 @@ Used when a client publishes a message to a server.
 }
 ```
 
-### Batch Publish payload
+### Batch Publish
 
 Used when a client publishes multiple messages to a server.
 
@@ -73,7 +73,7 @@ Used when a client publishes multiple messages to a server.
 }
 ```
 
-### Subscribe payload
+### Subscribe
 
 Used when a client subscribes a given topic.
 
@@ -96,7 +96,7 @@ Used when a client subscribes a given topic.
 }
 ```
 
-### Batch Subscribe payload
+### Batch Subscribe
 
 Used when a client subscribes multiple topics.
 
@@ -119,7 +119,7 @@ Used when a client subscribes multiple topics.
 }
 ```
 
-### Unsubscribe payload
+### Unsubscribe
 
 Used when a client unsubscribes a given topic.
 
@@ -143,7 +143,7 @@ Used when a client unsubscribes a given topic.
 }
 ```
 
-### Batch Unsubscribe payload
+### Batch Unsubscribe
 
 Used when a client unsubscribes a given topic.
 
@@ -173,7 +173,7 @@ Used when a client unsubscribes a given topic.
 ```
 
 
-### Subscription payload
+### Subscription
 
 Used when a server sends a subscription message to a client.
 
@@ -186,9 +186,10 @@ Used when a server sends a subscription message to a client.
   "params" : {
     "id" : string,
     "data" : {
-      "topic" : string,
+      "messageId": string,
+      "topic": string,
       "message": string,
-      "publishedAt: number,
+      "publishedAt": number,
       "tag": number
     }
   }
@@ -202,7 +203,7 @@ Used when a server sends a subscription message to a client.
 }
 ```
 
-### Fetch Messsages payload
+### Fetch Messsages
 
 Used when a client wants to fetch all undelivered messages matching a single topic before subscribing.
 
@@ -211,6 +212,7 @@ Response will include a flag `hasMore`. If true, the consumer should fetch again
 ```jsonc
 // ReceivedMessage
 {
+  "messageId": string,
   "topic": string,
   "message": string,
   "publishedAt": number,
@@ -240,7 +242,7 @@ Response will include a flag `hasMore`. If true, the consumer should fetch again
 
 
 
-### Batch Fetch Messsages payload
+### Batch Fetch
 
 Used when a client wants to fetch all undelivered messages matching multiple topics before subscribing.
 
@@ -276,18 +278,46 @@ Response will include a flag `hasMore`. If true, the consumer should fetch again
 }
 ```
 
+### Batch Receive
+
+Used to batch acknowledge receipt of messages from a subscribed client
+
+```jsonc
+// Receipt
+{
+  "topic": string,
+  "messageId": string
+}
+
+// Request (service->relay)
+{
+  "id" : "1",
+  "jsonrpc": "2.0",
+  "method": "irn_batchReceive",
+  "params" : {
+    "receipts": Receipt[]
+  }
+}
+
+// Response (relay->service)
+{
+  "id" : "1",
+  "jsonrpc": "2.0",
+  "result": true
+}
+```
+
+
 ### Register Webhook
 
 Used to register a webhook to observe relay messages matching a given client.
 
 Watch will be triggered for both incoming and outgoing messages but will not affect the delivery status of the messages.
 
-Subscribe will be triggered only for incoming messages and messages will be considered delivered when webhook event is successfuly received.
-
 ```jsonc
 // RegisterAuth Payload
 {
-   "act": string, // action ("client_watch" or "client_subscribe")
+   "act": string, // action ("client_watch")
    "iss": string, // clientId
    "aud": string, // serviceUrl
    "sub": string, // relayUrl
@@ -327,17 +357,18 @@ Body:
 ```jsonc
 // EventAuth Payload
 {
-  "act": string, // action (must be "irn_webhookEvent")
+  "act": string, // action (must be "irn_watchEvent")
   "iss": string, // relayId
   "aud": string, // serviceUrl
   "sub": string, // clientId
   "wid": string, // webhookId
   "iat": string, // issued at
   "evt": {       // published message event
-  "topic" : string,
-  "message": string,
-  "publishedAt": number,
-  "tag": number
+    "messageId": string,
+    "topic": string,
+    "message": string,
+    "publishedAt": number,
+    "tag": number
   }
 }
 
@@ -360,7 +391,7 @@ Used to unregister an active webhook corresponding to a webhookId
 ```jsonc
 // UnregisterAuth Payload
 {
-   "act": string, // action ("client_unwatch" or "client_unsubscribe")
+   "act": string, // action ("client_unwatch")
    "iss": string, // clientId
    "aud": string, // serviceUrl
    "sub": string, // relayUrl
