@@ -154,10 +154,6 @@
       "destination": "/2.0/specs/servers/cast/cast-server-api"
     },
     {
-      "source": "/2.0/advanced/migration-from-v1.x/wallets",
-      "destination": "/2.0/advanced/migration-from-v1.x/wallets/wallets"
-    },
-    {
       "source": "/2.0/advanced/migrating-from-v1.0",
       "destination": "/2.0/advanced/migration-from-v1.x/overview"
     }
