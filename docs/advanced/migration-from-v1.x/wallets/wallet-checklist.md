@@ -49,7 +49,7 @@ More information about WalletConnect v2 experience can be found here → [https:
   <source src="/assets/chain-switching-ios.mov" type="video/mp4" />
 </video>
 
-### ✍🏻 **Auth API**
+## ✍🏻 **Auth API**
 
 - **Docs:** [https://docs.walletconnect.com/2.0/api/auth](https://docs.walletconnect.com/2.0/api/auth)
 - **Test Dapp:** [https://react-auth-dapp.vercel.app/](https://react-auth-dapp.vercel.app/)
@@ -75,7 +75,7 @@ More information about WalletConnect v2 experience can be found here → [https:
   <source src="/assets/auth-ios.mov" type="video/mp4" />
 </video>
 
-### 🔄 **Automatic Redirect**
+## 🔄 **Automatic Redirect**
 
 - **Test Dapp:** [https://lab.web3modal.com/ManagedReact](https://lab.web3modal.com/ManagedReact)
 
@@ -99,7 +99,7 @@ More information about WalletConnect v2 experience can be found here → [https:
   <source src="/assets/auto-redirect-ios.mov" type="video/mp4" />
 </video>
 
-### 📢 **Sign Notifications**
+## 📢 **Sign Notifications**
 
 - **Test Dapp:** [https://react-app.walletconnect.com/](https://react-app.walletconnect.com/)
 
@@ -123,7 +123,7 @@ More information about WalletConnect v2 experience can be found here → [https:
   <source src="/assets/sign-notifications-ios.mov" type="video/mp4" />
 </video>
 
-### **Account switching:**
+## **Account switching:**
 
 📕 JS docs: [https://docs.walletconnect.com/2.0/web/web3wallet/wallet-usage#updating-a-session](https://docs.walletconnect.com/2.0/web/web3wallet/wallet-usage#updating-a-session)
 
