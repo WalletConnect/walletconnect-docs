@@ -132,5 +132,5 @@ More information about WalletConnect v2 experience can be found here → [https:
 📕 Swift docs: [https://docs.walletconnect.com/2.0/ios/web3wallet/wallet-usage#update-session](https://docs.walletconnect.com/2.0/ios/web3wallet/wallet-usage#update-session)
 
 <video controls width="448" height="336">
-  <source src="/assets/account-switching.mov" type="video/mp4" />
+  <source src="/assets/account_switching.mov" type="video/mp4" />
 </video>
