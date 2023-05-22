@@ -319,8 +319,8 @@ Watch will be triggered for both incoming and outgoing messages but will not aff
 {
    "act": string, // action ("client_watch")
    "iss": string, // clientId
-   "aud": string, // serviceUrl
-   "sub": string, // relayUrl
+   "aud": string, // relayUrl
+   "sub": string, // serviceUrl
    "whu": string, // webhookUrl
    "iat": string, // issued at
    "exp": string, // expiry (max = 30 days)
