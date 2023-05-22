@@ -8,7 +8,10 @@ State synchronization is achieved by sharing the same key value stores among eve
 
 ### Sent Invites Store
 
-Store that handles synchronized state of invites that are sent by multiple clients. Whenever any client sends an invite it needs to update the store with name `com.walletconnect.chat.sentInvites` with [`SentInvite`](#sentinvite) data structure.
+Store that handles synchronized state of invites that are sent by multiple clients. Whenever any client sends an invite it needs to update the store with name `com.walletconnect.chat.sentInvites` with [`SentInvite`](#sentinvite) data structure. 
+
+#### Store Key
+Key of [Sent Invite Store](#sent-invites-store) must be equal to `responseTopic` from [`SentInvite`](#sentinvite) data structure. 
 
 #### SentInvite 
 
@@ -50,6 +53,10 @@ Example `SentInvite` payload:
 
 Store that handles synchronized state of chat threads that blockchain account is having. Whenever any client accepts an invite or receives response to sent invite it needs to update the store with name `com.walletconnect.chat.threads` with [`Thread`](#thread) data structure.
 
+
+#### Store Key
+Key of [Threads Store](#threads-store) must be equal to `topic` from [`Thread`](#thread) data structure. 
+
 #### Thread 
 
 `Thread` structure contains minimal data required to receive messages in chat thread
@@ -77,6 +84,10 @@ Example `Thread` payload:
 ### Invite Keys Store
 
 Store that handles synchronized state of current invite key, which allows other clients to invite the blockchain account. Whenever any client registers invite key in [Keys Server](../../servers/keys/readme.md) it needs to update the store with name `com.walletconnect.chat.inviteKeys` with [`InviteKeys`](#InviteKeys) data structure.
+
+
+#### Store Key
+Key of [Invite Keys Store](#invite-keys-store) must be equal to `account` from [`InviteKeys`](#invitekeys) data structure. 
 
 #### InviteKeys
 
@@ -107,6 +118,9 @@ Example `InviteKeys` payload:
 Store that handles synchronized state of received invites status, which allows other clients to acknowledge that some other responded already responded to invite. Whenever a client rejects or approves received invite `com.walletconnect.chat.receivedInviteStatuses` with [`ReceivedInviteStatus`](#ReceivedInviteStatus) data structure.
 
 
+#### Store Key
+Key of [Received Invites Status Store](#received-invites-status-store) must be equal to `id` from [`ReceivedInviteStatus`](#receivedinvitestatus) data structure. 
+
 #### ReceivedInviteStatus
 
 `ReceivedInviteStatus` structure contains minimal data required to share received invites updates across clients
@@ -117,6 +131,8 @@ Store that handles synchronized state of received invites status, which allows o
     "status": string,
 }
 ```
+
+Example `ReceivedInviteStatus` payload:
 
 ```jsonc
 {
