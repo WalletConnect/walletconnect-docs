@@ -79,7 +79,14 @@ module.exports = {
           items: [
             'advanced/migration-from-v1.x/overview',
             'advanced/migration-from-v1.x/dapps',
-            'advanced/migration-from-v1.x/wallets',
+            {
+              type: 'category',
+              label: 'Wallets',
+              items: [
+                'advanced/migration-from-v1.x/wallets/wallets',
+                'advanced/migration-from-v1.x/wallets/wallet-checklist',
+              ]
+            },
             'advanced/migration-from-v1.x/what-changed-from-v1.0'
           ]
         },
