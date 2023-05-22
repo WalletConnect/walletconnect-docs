@@ -171,7 +171,7 @@ Used to request push subscription to a peer through pairing topic. Response is e
   "publicKey": string,
   "metadata": Metadata,
   "account": string,
-  "scope": string
+  "scope": string[]
 }
 
 | IRN     |          |
