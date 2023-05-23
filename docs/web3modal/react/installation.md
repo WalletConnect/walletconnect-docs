@@ -1,3 +1,5 @@
+import  IframeComponent from '../../components/IframeComponent';
+
 # Installation
 
 ## Obtain Project ID
@@ -63,3 +65,5 @@ function HomePage() {
 ```tsx
 import { useAccount, useContract } from 'wagmi'
 ```
+
+<IframeComponent />
