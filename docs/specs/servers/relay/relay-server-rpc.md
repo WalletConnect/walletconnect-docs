@@ -342,7 +342,6 @@ Watch events will be triggered for both incoming and outgoing messages but will 
   "id" : "1",
   "jsonrpc": "2.0",
   "result": {
-    "webhookId": string, // sha256(iss + aud + sub + whu)
     "relayId": string // relay public key (did:key)
   }
 }
@@ -395,10 +394,9 @@ Used to unregister an active watch webhook corresponding to a webhookId.
 {
    "act": string, // action ("irn_watchUnregister")
    "iss": string, // clientId
-   "aud": string, // serviceUrl
-   "sub": string, // relayUrl
+   "aud": string, // relayUrl
+   "sub": string, // serviceUrl
    "whu": string, // webhookUrl
-   "wid": string, // websocketId
    "iat": string, // issued at
 }
 
