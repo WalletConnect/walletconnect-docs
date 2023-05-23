@@ -1,10 +1,10 @@
 # Web3Wallet Integration Checklist
 
-As a part of the integration process, we perform internal testing of WalletConnect experience. 
+To ensure a smooth integration process, we perform internal testing of the WalletConnect experience. You can find more information about the WalletConnect v2 experience [here](https://docs.walletconnect.com/2.0/web3wallet/about).
 
-Please fix the following issues for the WalletConnect v2 integration as soon as possible. 
+Below, you'll find different tests that wallets want to perform to ensure a consistent experience across all platforms. For testing in-production dapps, we have included staging links [here](#production-dapps).
 
-More information about WalletConnect v2 experience can be found here → [https://docs.walletconnect.com/2.0/web3wallet/about](https://docs.walletconnect.com/2.0/web3wallet/about)
+Please note that the links to SDK versions and sample wallets can be found in the respective sections below.
 
 # WalletConnect v2 🪄
 
@@ -145,3 +145,12 @@ Account Switching is about the user's ability to change accounts and sign a mess
 <video controls width="448" height="336">
   <source src="/assets/account_switching.mov" type="video/mp4" />
 </video>
+
+## Production Dapps
+
+These dapps have provided us staging links so that wallets can test functionality.
+
+- [Aave](https://bafybeib3eavuc54ldbpziaql2koo4k7dc5l3gddn5y6zvi4rbrfnnm2sb4.ipfs.cf-ipfs.com/) | [GitHub PR](https://github.com/aave/interface/pull/1470)
+- [Pancake Swap](https://web-git-pan-1047-walletconnect-v2.pancake.run/?_vercel_share=bYy2q8qBAQA6c2CQGIANbgXAcepL9ZT4&chain=eth) | [GitHub](https://github.com/pancakeswap/pancake-frontend/pull/5963)
+- [Uniswap](https://interface-git-feat-add-wc2-uniswap.vercel.app)
+- [Polygon Bridge](https://wallet.polygon.technology/)
