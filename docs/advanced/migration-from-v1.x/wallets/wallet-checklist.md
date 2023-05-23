@@ -35,7 +35,7 @@ Chain Switching enables users to experience a seamless chain agnostic UX. In Wal
 
 📕 **Kotlin docs →** [https://docs.walletconnect.com/2.0/android/web3wallet/wallet-usage#namespace-utils](https://docs.walletconnect.com/2.0/android/web3wallet/wallet-usage#namespace-utils)
 
-📱**Example app** → [Link](https://www.notion.so/Cape-Verde-April-23-135abe735e1243599eab02c0011d3a48)
+📱**Example app** → [Link](https://github.com/WalletConnect/WalletConnectKotlinV2/tree/develop/samples/wallet)
 
 <video controls width="448" height="336">
   <source src="/assets/chain-switching-android.mp4" type="video/mp4" />
