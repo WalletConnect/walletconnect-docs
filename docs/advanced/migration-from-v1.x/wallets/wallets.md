@@ -1,4 +1,4 @@
-import IframeComponent from '../../components/IframeComponent';
+import IframeComponent from '../../../components/IframeComponent';
 
 # Wallets
 
