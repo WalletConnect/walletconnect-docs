@@ -26,6 +26,8 @@ More information about WalletConnect v2 experience can be found here → [https:
 
 ## 🔗 **Chain Switching**
 
+Chain Switching enables users to experience a seamless chain agnostic UX. In WalletConnect's v2 functionality, the wallet can switch the active chain by triggering a `chainChanged` event.
+
 - **Test Dapp:** [https://lab.web3modal.com/ManagedReact](https://lab.web3modal.com/ManagedReact)
 - **JS docs:** [https://docs.walletconnect.com/2.0/web/web3wallet/wallet-usage#-namespaces-builder-util](https://docs.walletconnect.com/2.0/web/web3wallet/wallet-usage#-namespaces-builder-util)
 
@@ -50,6 +52,8 @@ More information about WalletConnect v2 experience can be found here → [https:
 </video>
 
 ## ✍🏻 **Auth API**
+
+Auth API plays a critical role when dapps offer off-chain signatures. Wallets should authenticate dapps via this API, which can be tested [here](https://react-auth-dapp.vercel.app/).
 
 - **Docs:** [https://docs.walletconnect.com/2.0/api/auth](https://docs.walletconnect.com/2.0/api/auth)
 - **Test Dapp:** [https://react-auth-dapp.vercel.app/](https://react-auth-dapp.vercel.app/)
@@ -77,6 +81,8 @@ More information about WalletConnect v2 experience can be found here → [https:
 
 ## 🔄 **Automatic Redirect**
 
+Automatic Redirect assesses the user flow after the wallet signs and authorizes an account. The test involves verifying the wallet's ability to redirect to the dapp after a user signs or sends a transaction. Use this [Test Dapp](https://lab.web3modal.com/ManagedReact) to evaluate.
+
 - **Test Dapp:** [https://lab.web3modal.com/ManagedReact](https://lab.web3modal.com/ManagedReact)
 
 ### Android 🤖
@@ -101,6 +107,8 @@ More information about WalletConnect v2 experience can be found here → [https:
 
 ## 📢 **Sign Notifications**
 
+Sign Notifications ensure users receive a push notification for any pending dapp request, even when their wallet isn't open. To test this functionality, follow this [link](https://react-app.walletconnect.com/).
+
 - **Test Dapp:** [https://react-app.walletconnect.com/](https://react-app.walletconnect.com/)
 
 ### Android 🤖
@@ -123,7 +131,10 @@ More information about WalletConnect v2 experience can be found here → [https:
   <source src="/assets/sign-notifications-ios.mov" type="video/mp4" />
 </video>
 
-## **Account switching:**
+## **Account Switching:**
+
+Account Switching is about the user's ability to change accounts and sign a message from a different account than the one proposed initially in the session. The wallet can switch the active account by triggering a `accountsChanged` event.
+
 
 📕 JS docs: [https://docs.walletconnect.com/2.0/web/web3wallet/wallet-usage#updating-a-session](https://docs.walletconnect.com/2.0/web/web3wallet/wallet-usage#updating-a-session)
 
