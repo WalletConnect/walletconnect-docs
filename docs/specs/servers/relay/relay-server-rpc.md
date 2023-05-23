@@ -318,13 +318,15 @@ Watch events will be triggered for both incoming and outgoing messages but will 
 // RegisterAuth Payload
 {
    "act": string, // action (must be "irn_watchRegister")
-   "iss": string, // clientId
+   "typ": string, // either "subscriber" or "publisher"
+   "iss": string, // clientId (matches "typ")
    "aud": string, // relayUrl
    "sub": string, // serviceUrl
    "whu": string, // webhookUrl
    "iat": string, // issued at
    "exp": string, // expiry (max = 30 days)
    "tag": [1000, 1001, 1010, 1011] // array of tags
+   "sts": ["accepted", "queued", "delivered"] // array of status
 }
 
 // Request (service->relay)
@@ -361,10 +363,12 @@ Body:
   "act": string, // action (must be "irn_watchEvent")
   "iss": string, // relayId
   "aud": string, // serviceUrl
-  "sub": string, // clientId
-  "wid": string, // webhookId
+  "typ": string, // either "subscriber" or "publisher"
+  "sub": string, // clientId (matches "typ")
+  "whu": string, // webhook url
   "iat": string, // issued at
   "evt": {       // published message event
+    "status": string // either "accepted", "queued" or "delivered"
     "messageId": string,
     "topic": string,
     "message": string,
