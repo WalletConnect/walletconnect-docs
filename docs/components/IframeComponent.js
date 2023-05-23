@@ -20,7 +20,7 @@ const IframeComponent = () => {
     <div style={containerStyle}>
       <iframe 
         id="kili-c-bob-802-light" 
-        src="https://www.kili.so/widget/kili" 
+        src="https://www.kili.so/widget/bob-802"
         frameborder="0"
         name="bot-iframe"
         style={iframeStyle}
