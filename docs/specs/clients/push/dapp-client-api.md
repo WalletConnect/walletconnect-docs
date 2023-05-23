@@ -1,3 +1,5 @@
+import IframeComponent from '../../../components/IframeComponent';
+
 # Dapp Client API
 
 ```typescript
@@ -28,3 +30,5 @@ abstract class DappClient {
   public abstract on("push_delete", (topic: string) => {}): void;
 }
 ```
+
+<IframeComponent />

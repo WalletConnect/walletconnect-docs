@@ -1,3 +1,5 @@
+import IframeComponent from '../../../components/IframeComponent';
+
 import Table from '../../../components/Table';
 
 # Session Events
@@ -105,3 +107,4 @@ Once the wallet receives the request, the user will have the option to either ap
     }
 }
 ```
+<IframeComponent />

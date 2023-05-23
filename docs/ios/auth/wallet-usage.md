@@ -1,3 +1,5 @@
+import IframeComponent from '../../components/IframeComponent';
+
 # Wallet Usage
 
 ### Initial configurations
@@ -96,3 +98,5 @@ Auth.instance.getPendingRequests()
 - Try our Showcase wallet that is part of WalletConnectSwiftV2 repository.
 - Build API documentation in XCode: go to Product -> Build Documentation
 
+
+<IframeComponent />

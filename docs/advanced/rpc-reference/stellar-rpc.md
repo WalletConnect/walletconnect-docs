@@ -1,3 +1,5 @@
+import IframeComponent from '../../components/IframeComponent';
+
 ---
 description: Stellar JSON-RPC Methods
 ---
@@ -78,3 +80,5 @@ This method sends the Stellar transaction encoded as [XDR](https://developers.st
   }
 }
 ```
+
+<IframeComponent />

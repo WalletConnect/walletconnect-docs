@@ -1,3 +1,5 @@
+import IframeComponent from '../../../components/IframeComponent';
+
 # Chat API Overview
 
 ## Description
@@ -19,3 +21,5 @@ A user can register their blockchain account to be discoverable in the default k
 A user can invite another wallet user to chat with their blockchain account regardless of its discoverability.
 
 A user can message another wallet user after inviting them into a chat thread that has been mutually approved.
+
+<IframeComponent />

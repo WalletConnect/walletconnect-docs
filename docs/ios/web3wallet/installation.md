@@ -1,3 +1,5 @@
+import IframeComponent from '../../components/IframeComponent';
+
 # Installation
 
 Swift implementation of WalletConnect Web3Wallet SDK for native iOS applications.
@@ -40,3 +42,5 @@ If you encounter any problems during package installation, you can specify the e
 ```Ruby
 pod 'WalletConnectSwiftV2', :git => 'https://github.com/WalletConnect/WalletConnectSwiftV2.git', :tag => '1.0.5'
 ```
+
+<IframeComponent />

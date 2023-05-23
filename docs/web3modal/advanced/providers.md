@@ -1,3 +1,5 @@
+import IframeComponent from '../../components/IframeComponent';
+
 # Providers
 
 Web3Modal providers concept only applies to [`@web3modal/react`](../react/installation.md) and [`@web3modal/html`](../html-js/installation.md) packages that use [wagmi](https://wagmi.sh). Providers add http (or websocket) rpc support to fetch data like ens and balance, as well as, perform contract and other requests.
@@ -17,3 +19,5 @@ You can change or add other wagmi provider easily when creating it's client. Ple
 ```ts
 const { provider } = configureChains(chains, [w3mProvider({}), infuraProvider({})])
 ```
+
+<IframeComponent />

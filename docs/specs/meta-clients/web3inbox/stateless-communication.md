@@ -1,3 +1,5 @@
+import IframeComponent from '../../../components/IframeComponent';
+
 # Stateless Communication
 
 In the case of stateless mode, the parent (Eg: native app displaying a webview)
@@ -18,3 +20,5 @@ Where `method`/`eventName` is 1:1 original event name from the original clients 
 they are already prefixed. Eg: `chat_message`. `params`/`eventData` is the unencrypted
 event data coming from the original client. Eg: `Message` coming from
 `chat_message` event.
+
+<IframeComponent />

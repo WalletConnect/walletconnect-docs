@@ -1,3 +1,5 @@
+import IframeComponent from '../../components/IframeComponent';
+
 # Wallets
 
 Web3Modal will display wallets from our [Explorer](https://walletconnect.com/explorer?type=wallet), as well as any manually added wallets. If [wagmi](https://wagmi.sh) is used, it will also display connector wallets like [InjectedConnector](https://wagmi.sh/react/connectors/injected) and any other user defined connectors. Depending on the user's platform (desktop or mobile) different wallet lists will be displayed.
@@ -24,3 +26,5 @@ You can add additional native mobile wallets via [mobileWallets](../options.md#m
 ## Change or add wallet images
 
 You can change existing wallet images or add new ones for manual wallets by using [walletImages](../options.md#walletimages-optional) option.
+
+<IframeComponent />

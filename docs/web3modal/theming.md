@@ -1,3 +1,5 @@
+import IframeComponent from '../components/IframeComponent';
+
 import Table from "../components/Table";
 
 # Theming
@@ -317,3 +319,5 @@ Granular text style variables for when `--w3m-font-family` is not enough.
     },
   ]}
 />
+
+<IframeComponent />

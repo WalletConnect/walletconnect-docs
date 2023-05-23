@@ -1,3 +1,5 @@
+import IframeComponent from '../../../components/IframeComponent';
+
 # Invite Keys
 
 Invite keys are used by Chat API for public blockchain account resolution.
@@ -23,3 +25,5 @@ When we are validating invite key registration claims we must use specify act:
 When we are validating invite key registration claims we must use specify act:
 
 * act - description of action intent. Must be equal to "unregister_invite"
+
+<IframeComponent />

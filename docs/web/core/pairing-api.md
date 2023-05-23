@@ -1,3 +1,5 @@
+import IframeComponent from '../../components/IframeComponent';
+
 # Pairing API
 
 ## Useful Links
@@ -64,3 +66,5 @@ sdkClient.core.pairing.events.on("pairing_delete", ({ id, topic }) => {
   // clean up after the pairing for `topic` was deleted.
 });
 ```
+
+<IframeComponent />

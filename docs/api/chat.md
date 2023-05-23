@@ -1,3 +1,5 @@
+import IframeComponent from '../components/IframeComponent';
+
 # Chat
 
 ## Introduction
@@ -13,3 +15,5 @@ There are getting started guides for the following clients platforms:
 - [Android - Kotlin](../android/chat/installation.md)
 
 
+
+<IframeComponent />

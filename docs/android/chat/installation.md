@@ -1,3 +1,5 @@
+import IframeComponent from '../../components/IframeComponent';
+
 # Installation
 
 Kotlin implementation of WalletConnect v2 Chat protocol for Android applications.
@@ -27,3 +29,5 @@ app/build.gradle(kts)
 implementation("com.walletconnect:android-core:release_version")
 implementation("com.walletconnect:chat:release_version")
 ```
+
+<IframeComponent />

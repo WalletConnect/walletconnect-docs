@@ -1,3 +1,5 @@
+import IframeComponent from '../../../../components/IframeComponent';
+
 # Verify Client
 
 ## Description
@@ -30,3 +32,5 @@ interface Verify Client {
   public abstract resolve(params: { attestationId: string, verifyUrl?: string }): Promise<string>;
 }
 ```
+
+<IframeComponent />

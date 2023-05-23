@@ -1,3 +1,5 @@
+import IframeComponent from '../../../components/IframeComponent';
+
 # Getting Started
 
 This doc will walk you through how to get your dapp ready to start using the Push API. For simplicity, we're going to say there are two types of push notification a dapp may want to send.
@@ -90,3 +92,5 @@ try await Push.dapp.delete(topic: String)
 ### Where to Go from Here
 - Try our [Wallet App](https://github.com/WalletConnect/WalletConnectSwiftV2/tree/main/Example/WalletApp) and to test notifications.
 - Build API documentation in XCode: go to Product -> Build Documentation
+
+<IframeComponent />

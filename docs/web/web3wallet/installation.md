@@ -1,3 +1,5 @@
+import IframeComponent from '../../components/IframeComponent';
+
 # Installation
 
 ## Obtain Project ID
@@ -11,3 +13,5 @@ Install the Web3Wallet SDK package.
 ```bash npm2yarn
 npm install @walletconnect/web3wallet
 ```
+
+<IframeComponent />

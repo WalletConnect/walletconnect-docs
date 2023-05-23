@@ -1,3 +1,5 @@
+import IframeComponent from '../../components/IframeComponent';
+
 # Options
 
 ## projectId (required)
@@ -63,3 +65,4 @@ const onCopyClipboard = (value: string) => {
   Clipboard.setString(value);
 };
 ```
+<IframeComponent />

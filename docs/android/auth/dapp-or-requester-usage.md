@@ -1,3 +1,5 @@
+import IframeComponent from '../../components/IframeComponent';
+
 # Dapp / Requester Usage
 
 We recommend looking at example implementations of Requester at our [Kotlin Github repository](https://github.com/WalletConnect/WalletConnectKotlinV2/tree/develop/auth/requester)
@@ -93,3 +95,4 @@ More about SIWE can be found [here](https://eips.ethereum.org/EIPS/eip-4361)
 
 ### **Sample App**
 To check more in details go and visit our requester implementation app [here](https://github.com/WalletConnect/WalletConnectKotlinV2/tree/develop/auth/requester)
+<IframeComponent />

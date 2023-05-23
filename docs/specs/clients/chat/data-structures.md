@@ -1,3 +1,5 @@
+import IframeComponent from '../../../components/IframeComponent';
+
 # Data Structures
 
 In this document we define data structures and definitions used in the chat api
@@ -82,3 +84,5 @@ A map of type `Map<string, Thread>` is returned on `getThreads(params: {account:
   "peerAccount": string
 }
 ```
+
+<IframeComponent />

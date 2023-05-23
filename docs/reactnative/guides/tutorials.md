@@ -1,3 +1,5 @@
+import IframeComponent from '../../components/IframeComponent';
+
 import Container from '../../components/Container';
 
 # Tutorials
@@ -21,3 +23,5 @@ url: `https://medium.com/walletconnect/how-to-build-a-wallet-in-react-native-wit
 },
 ]}
 />
+
+<IframeComponent />

@@ -1,3 +1,5 @@
+import IframeComponent from '../../components/IframeComponent';
+
 # Wallet Usage
 
 ## Initialization
@@ -236,3 +238,5 @@ Expected flutter version is: >`3.3.10`
 * `flutter pub run dependency_validator` - show unused dependencies and more
 * `dart format lib/* -l 120`
 * `flutter analyze`
+
+<IframeComponent />

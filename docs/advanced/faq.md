@@ -1,3 +1,5 @@
+import IframeComponent from '../components/IframeComponent';
+
 # FAQs
 
 <details className="box faq"><summary className="faq-question">Will the relay server <code>bridge.walletconnect.org</code> still work in v2?</summary>
@@ -55,3 +57,5 @@ We understand the desire for developers to self-host their own relay. We share t
 </p>
 
 </details>
+
+<IframeComponent />

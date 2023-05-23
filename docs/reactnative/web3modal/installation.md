@@ -1,3 +1,5 @@
+import IframeComponent from '../../components/IframeComponent';
+
 import Container from '../../components/Container';
 
 # Installation
@@ -77,3 +79,5 @@ import './expo-crypto-shim.js'
 </TabItem>
 
 </Tabs>
+
+<IframeComponent />

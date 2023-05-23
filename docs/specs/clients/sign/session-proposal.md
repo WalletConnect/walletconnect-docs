@@ -1,3 +1,5 @@
+import IframeComponent from '../../../components/IframeComponent';
+
 # Session Proposal
 
 ## User Flow
@@ -37,3 +39,5 @@ Proposal protocol will be established as follows:
 8. Dapp settles session with topic B using derived key
 9. Dapp receives settlement on topic B
 10. Dapp sends acknowledgment on topic B
+
+<IframeComponent />

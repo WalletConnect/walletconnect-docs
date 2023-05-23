@@ -1,3 +1,5 @@
+import IframeComponent from '../components/IframeComponent';
+
 # Explorer
 
 The WalletConnect Cloud Explorer is an open-source solution to submit and showcase wallets and dApps that support WalletConnect. You can view existing entries over at our [Explorer](https://walletconnect.com/explorer) or use the [Cloud Explorer API](#cloud-explorer-api) to fetch them programmatically.
@@ -127,3 +129,4 @@ Returns the image source of the logo for `image_id` sized according `size`.
 Examples:
 
 - `GET https://explorer-api.walletconnect.com/v3/logo/md/32a77b79-ffe8-42c3-61a7-3e02e019ca00?projectId=YOUR_PROJECT_ID`
+<IframeComponent />

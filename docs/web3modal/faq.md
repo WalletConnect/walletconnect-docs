@@ -1,3 +1,5 @@
+import IframeComponent from '../components/IframeComponent';
+
 # FAQ
 
 ## How can I add a native or extension wallet to Web3Modal?
@@ -49,3 +51,5 @@ localStorage.setItem(
 Replace the `https://...` placeholder in the universal link with the appropriate URL.
 
 This will make your mobile wallet, such as Rainbow Wallet, appear as a recent wallet in Web3Modal, allowing you to test its compatibility.
+
+<IframeComponent />

@@ -1,3 +1,5 @@
+import IframeComponent from '../../components/IframeComponent';
+
 # Relay Client
 Relay client provides transport layer for Sign, Auth and Chat SDKs. You can configure it once and every SDK will transport protocol messages via same instance of a relay client with only one opened websocket connection. The Relay api can be accessed through the Core Client
 
@@ -16,3 +18,5 @@ CoreClient.Relay.connect() { error -> /*Error when wrong connection type is in u
 
 CoreClient.Relay.disconnect() { error -> /*Error when wrong connection type is in use*/}
 ```
+
+<IframeComponent />

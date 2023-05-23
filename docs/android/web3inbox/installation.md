@@ -1,3 +1,5 @@
+import IframeComponent from '../../components/IframeComponent';
+
 # Installation
 
 Kotlin implementation of Web3Inbox for Android applications.
@@ -28,3 +30,5 @@ app/build.gradle.kts
 implementation("com.walletconnect:android-core:release_version")
 implementation("com.walletconnect:web3inbox:release_version")
 ```
+
+<IframeComponent />

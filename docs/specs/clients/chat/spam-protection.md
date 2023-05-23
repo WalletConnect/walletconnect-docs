@@ -1,3 +1,5 @@
+import IframeComponent from '../../../components/IframeComponent';
+
 # Chat Spam Protection
 
 To ensure a positive end-user experience, it's essential to mitigate spam and
@@ -39,3 +41,5 @@ the end user.
    protection. For example, if a peer was compromised and began sending spam
    messages, one could immediately block them. 
 
+
+<IframeComponent />

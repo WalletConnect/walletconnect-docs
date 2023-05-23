@@ -1,3 +1,5 @@
+import IframeComponent from '../../../../components/IframeComponent';
+
 # Error Codes
 
 ## INVALID
@@ -11,3 +13,5 @@ case .methodUnsupported: return 10001
 ```sh
 case .userDisconnected: return 6000
 ```
+
+<IframeComponent />

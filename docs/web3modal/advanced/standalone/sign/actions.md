@@ -1,3 +1,5 @@
+import IframeComponent from '../../../../components/IframeComponent';
+
 # Actions
 
 ## web3modal.openModal
@@ -46,3 +48,5 @@ web3modal.setTheme({
   },
 });
 ```
+
+<IframeComponent />

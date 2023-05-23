@@ -1,3 +1,5 @@
+import IframeComponent from '../../components/IframeComponent';
+
 # Mobile Linking
 
 Communication between a mobile wallet and a mobile application is possible by design. Using the URI displayed by the QR-code it is possible to establish connection by sharing this URI via deep-link on Android.
@@ -92,3 +94,5 @@ https://github.com/WalletConnect/WalletConnectKotlinV2/tree/master/samples/dapp
 ## References
 * https://developer.android.com/guide/navigation/navigation-deep-link#implicit
 * https://developer.android.com/training/app-links#deep-links
+
+<IframeComponent />

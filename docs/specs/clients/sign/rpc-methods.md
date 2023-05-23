@@ -1,3 +1,5 @@
+import IframeComponent from '../../../components/IframeComponent';
+
 # RPC Methods
 
 This doc should be used as a _source-of-truth_ and reflect the latest decisions and changes applied to the WalletConnect collection of client-to-client JSON-RPC methods for all platforms SDKs.
@@ -332,3 +334,5 @@ true
 | TTL     | 30       |
 | Tag     | 1115     |
 ```
+
+<IframeComponent />

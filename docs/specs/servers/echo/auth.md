@@ -1,3 +1,5 @@
+import IframeComponent from '../../../components/IframeComponent';
+
 # Echo Server Authentication
 
 > **Warning**
@@ -31,3 +33,5 @@ then be acted upon.
 This is an initial authentication spec which keeps some acknowledged risks from the v1 push server. There are plans to improve upon this spec to
 ensure there are no edge cases or other ways for either the Relay or Echo Server to be mimicked/impersonated. Changes to this spec will initially
 be non-breaking but there is a breaking change planned for some point in the future to use a more sturdy authentication system.
+
+<IframeComponent />

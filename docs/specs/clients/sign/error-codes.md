@@ -1,3 +1,5 @@
+import IframeComponent from '../../../components/IframeComponent';
+
 # Error Codes
 
 ## INVALID
@@ -59,3 +61,5 @@ case .noSessionForTopic: return 7001
 ```sh
 case .sessionRequestExpired: return 8000
 ```
+
+<IframeComponent />

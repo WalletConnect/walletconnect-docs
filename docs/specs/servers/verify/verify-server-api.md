@@ -1,3 +1,5 @@
+import IframeComponent from '../../../components/IframeComponent';
+
 # Verify Server API
 
 ## Register Attestation
@@ -28,3 +30,5 @@ Response:
     "origin": string
 }
 ```
+
+<IframeComponent />

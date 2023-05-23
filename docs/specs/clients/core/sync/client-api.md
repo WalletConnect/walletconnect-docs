@@ -1,3 +1,5 @@
+import IframeComponent from '../../../../components/IframeComponent';
+
 # Client API
 
 ```typescript
@@ -31,3 +33,5 @@ abstract class Client {
   public abstract on("sync_update", (account: string, store: string, update: StoreUpdate) => {}): void;
 }
 ```
+
+<IframeComponent />

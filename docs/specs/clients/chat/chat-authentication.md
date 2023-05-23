@@ -1,3 +1,5 @@
+import IframeComponent from '../../../components/IframeComponent';
+
 # Chat Authentication
 
 Given that Chat API supports multiple clients with different [Identity Keys](../../servers/keys/identity-keys.md) for the same blockchain account, we must validate different payloads:
@@ -51,3 +53,5 @@ When we are validating chat receipts we must use the following additional fields
 * sub - hash of the message received
 * aud - sender blockchain account (did:pkh)
 * act - description of action intent. Must be equal to "chat_receipt"
+
+<IframeComponent />

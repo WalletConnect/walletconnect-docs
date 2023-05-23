@@ -1,3 +1,5 @@
+import IframeComponent from '../../components/IframeComponent';
+
 # Upgrade Guide
 
 If you are a developer currently using Sign v2 or Auth and wish to update to the Web3Wallet SDK, the process is straightforward. Below are the updated functions, along with their corresponding Sign v2 and Auth functions for reference.
@@ -267,3 +269,5 @@ authClient.on("auth_request", handler);
 /* new */
 web3wallet.on("auth_request", handler);
 ```
+
+<IframeComponent />

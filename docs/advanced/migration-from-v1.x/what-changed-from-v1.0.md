@@ -1,3 +1,5 @@
+import IframeComponent from '../../components/IframeComponent';
+
 # What Changed from v1.0
 
 WalletConnect v2.0 is **NOT** backwards-compatible with v1.0. However WalletConnect v1.0 and v2.0 offer essentially the same end-user experience however they work very differently internally. This means that developers will have to consider different APIs and SDKs. Additionally, some UX considerations need to be made when integrating v2.0.
@@ -45,3 +47,5 @@ WalletConnect v2.0 clients track all JSON-RPC requests sent and received with th
 ## Project ID
 
 Project ID will be required on v2.0 for the cloud version of WalletConnect, but this will not be required for self-hosted WalletConnect relays. Read more about [Project IDs](../../cloud/relay.md).
+
+<IframeComponent />

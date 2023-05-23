@@ -1,3 +1,5 @@
+import IframeComponent from '../../components/IframeComponent';
+
 # Installation
 
 ## 1. Obtain Project ID
@@ -12,3 +14,5 @@ install via Nuget
 ```shell
 dotnet add package WalletConnect.Sign
 ```
+
+<IframeComponent />

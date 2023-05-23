@@ -1,3 +1,5 @@
+import IframeComponent from '../../components/IframeComponent';
+
 # Node.js
 
 ## Install
@@ -29,3 +31,5 @@ const signClient = await SignClient.init({
   },
 });
 ```
+
+<IframeComponent />

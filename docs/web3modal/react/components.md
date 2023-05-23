@@ -1,3 +1,5 @@
+import IframeComponent from '../../components/IframeComponent';
+
 # Components
 
 ## Web3Modal
@@ -46,3 +48,5 @@ import { W3mQrCode } from '@web3modal/react'
 return <W3mQrCode size={200} imageUrl="url/to/image" uri="data" />
 ```
 
+
+<IframeComponent />

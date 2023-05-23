@@ -1,3 +1,5 @@
+import IframeComponent from '../../components/IframeComponent';
+
 # Installation
 
 ## 1. Obtain Project ID
@@ -15,3 +17,5 @@ For additional type packages refer to our [TypeScript Guide](../guides/typescrip
 ```bash npm2yarn
 npm install @walletconnect/auth-client
 ```
+
+<IframeComponent />

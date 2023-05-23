@@ -1,3 +1,5 @@
+import IframeComponent from '../../components/IframeComponent';
+
 ---
 description: NEAR JSON-RPC Methods
 ---
@@ -206,3 +208,5 @@ The result of `signTransactions` and are encoded [SignedTransaction](https://nom
 
 ```
 
+
+<IframeComponent />

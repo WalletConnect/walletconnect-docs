@@ -1,3 +1,5 @@
+import IframeComponent from '../../components/IframeComponent';
+
 # Examples and Resources
 
 ## Swift
@@ -32,3 +34,4 @@ If you need to test your app's integration, you can use one of our following dem
 **Auth**
 
 - [React dApp (with auth client)](https://github.com/WalletConnect/web-examples/tree/main/dapps/react-dapp-auth) ([Demo](https://react-auth-dapp.vercel.app/))
+<IframeComponent />

@@ -1,3 +1,5 @@
+import IframeComponent from '../../../components/IframeComponent';
+
 import Container from '../../../components/Container';
 
 # Core API Overview
@@ -41,3 +43,5 @@ Core API consolidates several core modules that are shared between all other hig
     },
   ]}
 />
+
+<IframeComponent />

@@ -1,3 +1,5 @@
+import IframeComponent from '../../components/IframeComponent';
+
 # Typescript
 
 All our SDKs are written in and support TypeScript. Following type packages are provided for user convenience
@@ -13,3 +15,5 @@ npm install --save @walletconnect/types
 ```bash npm2yarn
 npm install --save @walletconnect/jsonrpc-types
 ```
+
+<IframeComponent />

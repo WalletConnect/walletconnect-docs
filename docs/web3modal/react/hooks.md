@@ -1,3 +1,5 @@
+import IframeComponent from '../../components/IframeComponent';
+
 # Hooks
 
 For majority of your tasks like getting account details, managing chains, interacting with contracts etc. you will be using react hooks provided by [wagmi](https://wagmi.sh), so make sure to read over their documentation as well. Below are some Web3Modal specific hooks that you might find useful.
@@ -51,3 +53,5 @@ setTheme({
   }
 })
 ```
+
+<IframeComponent />

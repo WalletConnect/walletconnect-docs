@@ -1,3 +1,5 @@
+import IframeComponent from '../components/IframeComponent';
+
 # Push
 
 ## Introduction
@@ -11,3 +13,5 @@ There are getting started guides for the following clients platforms:
 - [Web - Javascript](../web/push/installation.md)
 - [iOS - Swift](../ios/push/wallet-usage/getting-started.md)
 - [Android - Kotlin](../android/push/wallet-usage/getting-started.md)
+
+<IframeComponent />

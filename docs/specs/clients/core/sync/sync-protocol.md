@@ -1,3 +1,5 @@
+import IframeComponent from '../../../../components/IframeComponent';
+
 # Sync Protocol
 
 ## Key Coordination
@@ -161,3 +163,5 @@ Sync API has a dependency on the History API which backs up all the messages pub
 Using the History API we can retrieve all the messages published in the past even past their TTL expired. Therefore all clients will register the intent to persist messages correspodning store topics in order to allow future clients to retrieve the state changes in the past and recreate the state before subscribing to new changes.
 
 Let's take for example the user authorizes a new client C to sync to the same store above as A and B. Therefore it will retrieve messages for the matching topic then it will be able to decrypt them using the store key and then parse the previous payloads and conclude that the store has a one key ("username") with a value "@johndoe123".
+
+<IframeComponent />

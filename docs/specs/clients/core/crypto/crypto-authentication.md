@@ -1,3 +1,5 @@
+import IframeComponent from '../../../../components/IframeComponent';
+
 # Crypto Authentication
 
 In this module we will handle also authentication payloads used by multiple high-level SDKs which require an Ed25519 key pair to sign did-jwt payloads for multiple purposes.
@@ -313,3 +315,4 @@ async function test() {
 
 test();
 ```
+<IframeComponent />

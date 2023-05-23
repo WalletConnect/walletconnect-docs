@@ -1,3 +1,5 @@
+import IframeComponent from '../../../../components/IframeComponent';
+
 # Pairing API
 
 ## Description
@@ -55,3 +57,5 @@ User visits a new website that requires a Sign session for submitting transactio
 - Pairing expiry should be updated to another 30 days on each peer after any request or response from its peer has been delivered proving that pairing remains active.
 
 
+
+<IframeComponent />

@@ -1,3 +1,5 @@
+import IframeComponent from '../../../components/IframeComponent';
+
 # Installation
 
 Swift implementation of WalletConnect Push protocol for native iOS applications.
@@ -131,3 +133,5 @@ Import WalletConnectPush inside your notification service extension file, initia
 ### Where to Go from Here
 - Try our [Wallet App](https://github.com/WalletConnect/WalletConnectSwiftV2/tree/main/Example/WalletApp) and to test notifications.
 - Build API documentation in XCode: go to Product -> Build Documentation
+
+<IframeComponent />

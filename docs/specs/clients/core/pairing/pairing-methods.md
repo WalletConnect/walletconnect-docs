@@ -1,3 +1,5 @@
+import IframeComponent from '../../../../components/IframeComponent';
+
 # Pairing Methods Validation Test Cases
 
 
@@ -68,3 +70,4 @@ is valid? No
 
 
 is valid? No
+<IframeComponent />

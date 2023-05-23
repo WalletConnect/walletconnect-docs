@@ -1,3 +1,5 @@
+import IframeComponent from '../../components/IframeComponent';
+
 # Examples and Resources
 
 ## JavaScript
@@ -35,3 +37,5 @@ This wallet can be used with any dapp using Sign v2 or Auth.
 **Auth**
 
 - [React dApp (with auth client)](https://github.com/WalletConnect/web-examples/tree/main/dapps/react-dapp-auth) ([Demo](https://react-auth-dapp.vercel.app/))
+
+<IframeComponent />

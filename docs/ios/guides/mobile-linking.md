@@ -1,3 +1,5 @@
+import IframeComponent from '../../components/IframeComponent';
+
 # Mobile Linking in iOS
 
 Using the URI commonly displayed in the QRCode it is possible to establish a connection by sharing this URI through a deep link or universal link on both Android and iOS.
@@ -101,3 +103,5 @@ These are the known workarounds for avoiding app linking issues on iOS when usin
 #### When signing a message
 
 - If the message depends on the result of an asynchronous call (e.g. retrieving a nonce when implementing [Sign-In With Ethereum](https://login.xyz)), you should do this work ahead of time, storing the result before the user attempts to sign the message. Do not perform this asynchronous work in the event handler.
+
+<IframeComponent />

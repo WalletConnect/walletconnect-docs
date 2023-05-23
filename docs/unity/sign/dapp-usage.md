@@ -1,3 +1,5 @@
+import IframeComponent from '../../components/IframeComponent';
+
 # Dapp Usage
 
 First you must setup `SignClientOptions` which stores both the `ProjectId` and `Metadata`. You may also optionally specify the storage module to use. By default, the `FileSystemStorage` module is used if none is specified.
@@ -96,3 +98,5 @@ This `Task` will return the `SessionData` when the session was approved, or thro
 
 * Timed out
 * Been Rejected
+
+<IframeComponent />

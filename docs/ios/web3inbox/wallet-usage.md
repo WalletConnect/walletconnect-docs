@@ -1,3 +1,5 @@
+import IframeComponent from '../../components/IframeComponent';
+
 # Usage
 
 ### Configure Networking client
@@ -69,3 +71,4 @@ final class Web3InboxViewController: UIViewController {
 }
 
 ```
+<IframeComponent />

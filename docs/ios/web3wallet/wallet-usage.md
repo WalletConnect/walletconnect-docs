@@ -1,3 +1,5 @@
+import IframeComponent from '../../components/IframeComponent';
+
 # Wallet Usage
 
 ## Configure Networking Client
@@ -336,3 +338,5 @@ Web3WalletClient.getPendingRequests()
 ## Where to go from here
 
 - To check more in details go and visit our Web3Wallet implementation app [here](https://github.com/WalletConnect/WalletConnectSwiftV2/tree/main/Example/WalletApp).
+
+<IframeComponent />

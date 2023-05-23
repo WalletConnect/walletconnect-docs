@@ -1,3 +1,5 @@
+import IframeComponent from '../../../components/IframeComponent';
+
 # SDK API
 
 ```typescript
@@ -88,3 +90,5 @@ class Web3Wallet {
   public abstract on("auth_request", (id: number, pairingTopic: String, payload: PayloadParams, verifyContext: VerifyContext) => {}): void;
 }
 ```
+
+<IframeComponent />

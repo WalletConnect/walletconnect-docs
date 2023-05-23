@@ -1,3 +1,5 @@
+import IframeComponent from '../../../components/IframeComponent';
+
 # Echo Server Spec
 
 This is an overview spec document which details the endpoint and what they expect to receive and in turn what responses
@@ -104,3 +106,4 @@ POST <ECHO_SERVER_URL>/clients/<CLIENT_ID>
     Push       = 1 << 4
     ```
   - `blob`: If the payload is encrypted this is just the encrypted blob, when this is cleartext it should be base64 encoded. The blob should follow the format from of the [Push Message](https://docs.walletconnect.com/2.0/specs/clients/push/data-structures#push-message) 
+<IframeComponent />

@@ -1,3 +1,5 @@
+import IframeComponent from '../components/IframeComponent';
+
 # Options
 
 ## projectId (required)
@@ -192,3 +194,5 @@ standaloneChains: [
   'polkadot:91b171bb158e2d3848fa23a9f1c25182'
 ]
 ```
+
+<IframeComponent />

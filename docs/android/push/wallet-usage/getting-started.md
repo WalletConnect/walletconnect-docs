@@ -1,3 +1,5 @@
+import IframeComponent from '../../../components/IframeComponent';
+
 # Getting Started
 
 This page will walk you through how to get your wallet ready to start using the Push API. For simplicity, we're going to say there are two types of push notification a wallet may want to receive.
@@ -221,3 +223,5 @@ PushWalletClient.decryptMessage(
     }
 )
 ```
+
+<IframeComponent />

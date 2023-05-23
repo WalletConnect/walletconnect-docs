@@ -1,3 +1,5 @@
+import IframeComponent from '../components/IframeComponent';
+
 import Container from './../components/Container';
 
 # Overview
@@ -47,3 +49,5 @@ url: `https://github.com/WalletConnect/react-native-examples/tree/main/dapps/v2E
 <!-- ## Obtain Project ID
 
 Head over to [WalletConnect Cloud](https://cloud.walletconnect.com/) to sign in or sign up. Create (or use an existing) project and copy its associated Project ID. We will need this in a later step. -->
+
+<IframeComponent />

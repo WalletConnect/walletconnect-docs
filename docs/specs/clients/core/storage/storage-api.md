@@ -1,3 +1,5 @@
+import IframeComponent from '../../../../components/IframeComponent';
+
 # Storage API
 
 ```typescript
@@ -9,3 +11,5 @@ export abstract class IKeyValueStorage {
   public abstract removeItem(key: string): Promise<void>;
 }
 ```
+
+<IframeComponent />

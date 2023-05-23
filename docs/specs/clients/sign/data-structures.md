@@ -1,3 +1,5 @@
+import IframeComponent from '../../../components/IframeComponent';
+
 # Data Structures
 
 In this document we define data structures and definitions used in the v2.0-rc protocol
@@ -162,3 +164,5 @@ Verify Context is appended to Session Proposals and Session Requests to provide 
   }
 }
 ```
+
+<IframeComponent />

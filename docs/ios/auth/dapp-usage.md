@@ -1,3 +1,5 @@
+import IframeComponent from '../../components/IframeComponent';
+
 # App Usage
 
 ### Initial configurations
@@ -59,3 +61,5 @@ A response will be either signed CAIP-74 `Cacao` object or `AuthError` in case t
 - Try our [Example dApp](https://github.com/WalletConnect/WalletConnectSwiftV2/tree/main/Example) that is part of [WalletConnectSwiftV2 repository](https://github.com/WalletConnect/WalletConnectSwiftV2).
 - Build API documentation in XCode: go to Product -> Build Documentation
 
+
+<IframeComponent />

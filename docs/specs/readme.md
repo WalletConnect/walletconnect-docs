@@ -1,3 +1,5 @@
+import IframeComponent from '../components/IframeComponent';
+
 import Container from '../components/Container';
 
 # WalletConnect v2.0 Protocol Specs
@@ -64,3 +66,5 @@ In this repository, we document and discuss features that are currently under de
   ]}
 />
 
+
+<IframeComponent />

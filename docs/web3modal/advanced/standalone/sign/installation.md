@@ -1,3 +1,5 @@
+import IframeComponent from '../../../../components/IframeComponent';
+
 # Installation
 
 ## Obtain Project ID
@@ -44,3 +46,5 @@ if (uri) {
   web3Modal.closeModal()
 }
 ```
+
+<IframeComponent />

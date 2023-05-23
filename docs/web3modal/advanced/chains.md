@@ -1,3 +1,5 @@
+import IframeComponent from '../../components/IframeComponent';
+
 # Chains
 
 Web3Modal works with any chain when using [`@web3modal/standalone`](../advanced/standalone/sign/about.md) package. Other packages like [`@web3modal/html`](../html-js/installation.md) and [`@web3modal/react`](../react/installation.md) will work with chains that are supported by [wagmi](https://wagmi.sh).
@@ -9,3 +11,5 @@ Wagmi supports most of the popular evm chains out of the box, but also allows yo
 ## Standalone chains
 
 You can define standalone modal chains via [standaloneChains](../options.md#standalonechains-optional) option. These should adhere to [CAIP-10](https://github.com/ChainAgnostic/CAIPs/blob/master/CAIPs/caip-10.md) chain standard.
+
+<IframeComponent />

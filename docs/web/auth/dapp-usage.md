@@ -1,3 +1,5 @@
+import IframeComponent from '../../components/IframeComponent';
+
 ---
 description: Quick Start For Dapps using Auth Client
 ---
@@ -104,3 +106,5 @@ The `uri` can then be displayed as a QRCode or as a deep link.
 **Example universal link (preferred for mobile wallets):**
 
 `https://mywallet.com/wc?uri={uri}`
+
+<IframeComponent />

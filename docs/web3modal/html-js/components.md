@@ -1,3 +1,5 @@
+import IframeComponent from '../../components/IframeComponent';
+
 # Components
 
 ## w3m-core-button
@@ -50,3 +52,5 @@ interface Attributes {
   uri?: string
 }
 ```
+
+<IframeComponent />

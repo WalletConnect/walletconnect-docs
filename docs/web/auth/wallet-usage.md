@@ -1,3 +1,5 @@
+import IframeComponent from '../../components/IframeComponent';
+
 # Wallet Usage
 
 :::info
@@ -59,3 +61,5 @@ This is what allows the `auth_request` events to be received.
 ```javascript
 await authClient.core.pairing.pair({ uri });
 ```
+
+<IframeComponent />

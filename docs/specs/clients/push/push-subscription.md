@@ -1,3 +1,5 @@
+import IframeComponent from '../../../components/IframeComponent';
+
 # Push Subscription
 
 A Push subscription is an agreement between a dapp and a wallet to receive future push notifications.
@@ -16,3 +18,5 @@ To learn more about the push proposal flow please visit [Push Proposal](./push-p
 ## Push Subscribe
 
 To learn more about the push subscribe flow please visit [Push Subscribe](./push-subscribe.md)
+
+<IframeComponent />

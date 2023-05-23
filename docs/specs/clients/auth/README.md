@@ -1,3 +1,5 @@
+import IframeComponent from '../../../components/IframeComponent';
+
 # Auth API Overview
 
 ## Description
@@ -23,3 +25,5 @@ An app does not need to maintain a persisted connection with the wallet once aut
 A wallet can evaluate all auth parameters requested to format the message independently.
 
 An authentication message can be used to access resources through OAuth 2.0 or OpenID.
+
+<IframeComponent />

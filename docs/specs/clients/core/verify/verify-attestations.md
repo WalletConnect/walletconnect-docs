@@ -1,3 +1,5 @@
+import IframeComponent from '../../../../components/IframeComponent';
+
 # Verify Attestations
 
 ## Browser Attestations
@@ -21,3 +23,4 @@ window.addEventListener("message", (event) => {
 ## Mobile Attestations
 
 TODO
+<IframeComponent />

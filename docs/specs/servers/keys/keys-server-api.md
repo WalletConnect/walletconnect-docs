@@ -1,3 +1,5 @@
+import IframeComponent from '../../../components/IframeComponent';
+
 # Keys Server API
 
 ## Invite Keys
@@ -266,3 +268,5 @@ Used to remove an identity key from the server
     "message": String
 }  
 ```
+
+<IframeComponent />

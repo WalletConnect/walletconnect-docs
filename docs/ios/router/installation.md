@@ -1,3 +1,5 @@
+import IframeComponent from '../../components/IframeComponent';
+
 # WalletConnectRouter
 
 ### Overview
@@ -18,3 +20,5 @@ Task { @MainActor in
   Router.goBack()
 }
 ```
+
+<IframeComponent />

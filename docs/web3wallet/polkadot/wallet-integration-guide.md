@@ -1,3 +1,5 @@
+import IframeComponent from '../../components/IframeComponent';
+
 # Wallet Integration Guide
 
 ## Wallet Guide Section Topics
@@ -163,3 +165,5 @@ web3wallet.on("session_request", async (requestEvent) => {
 
 # Further Documentation for WalletConnect 2.0
 * https://docs.walletconnect.com/2.0/
+
+<IframeComponent />

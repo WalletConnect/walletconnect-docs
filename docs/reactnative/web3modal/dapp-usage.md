@@ -1,3 +1,5 @@
+import IframeComponent from '../../components/IframeComponent';
+
 import Container from '../../components/Container';
 
 # Dapp Usage
@@ -110,3 +112,4 @@ function App() {
   )
 }
 ```
+<IframeComponent />

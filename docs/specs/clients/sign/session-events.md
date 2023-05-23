@@ -1,3 +1,5 @@
+import IframeComponent from '../../../components/IframeComponent';
+
 import Table from '../../../components/Table';
 
 # Session Events
@@ -356,3 +358,5 @@ A payload example from `proposal_expire`:
     "topic": "95d6aca451b8e3c6d9d176761bf786f1cc0a6d38dffd31ed896306bb37f6ae8d"
 }
 ```
+
+<IframeComponent />

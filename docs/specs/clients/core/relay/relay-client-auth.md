@@ -1,3 +1,5 @@
+import IframeComponent from '../../../../components/IframeComponent';
+
 # Relay Client Auth
 
 ## Motivation
@@ -38,3 +40,5 @@ Client authentication is described with a did-jwt using the following claims:
 
 `act` - description of action intent. Must be equal to "client_auth"
 
+
+<IframeComponent />

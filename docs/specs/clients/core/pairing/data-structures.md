@@ -1,3 +1,5 @@
+import IframeComponent from '../../../../components/IframeComponent';
+
 # Data Structures
 
 ## Metadata
@@ -68,3 +70,4 @@ Relay is defined by the transport protocol used for the two clients to publish a
   Push: "push"
  }
 ```
+<IframeComponent />

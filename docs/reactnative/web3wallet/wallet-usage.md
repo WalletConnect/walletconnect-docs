@@ -1,3 +1,5 @@
+import IframeComponent from '../../components/IframeComponent';
+
 import Container from '../../components/Container';
 
 # Wallet Usage
@@ -191,3 +193,5 @@ await web3wallet.emitSessionEvent({
   chainId: 'eip155:1'
 })
 ```
+
+<IframeComponent />

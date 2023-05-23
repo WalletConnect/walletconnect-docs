@@ -1,3 +1,5 @@
+import IframeComponent from '../../components/IframeComponent';
+
 # Wallet Usage
 
 ### **Initialize Web3Wallet Client**
@@ -290,3 +292,4 @@ Web3Wallet.registerDeviceToken(
 
 ### **Sample App**
 To check more in details go and visit our Web3Wallet implementation app [here](https://github.com/WalletConnect/WalletConnectKotlinV2/tree/develop/sample/wallet).
+<IframeComponent />

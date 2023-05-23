@@ -1,3 +1,5 @@
+import IframeComponent from '../../../components/IframeComponent';
+
 ```typescript
 // Read more: https://rxjs.dev/guide/observer
 interface Observer<TObservedValue> {
@@ -6,3 +8,5 @@ interface Observer<TObservedValue> {
   complete?: () => void
 }
 ```
+
+<IframeComponent />

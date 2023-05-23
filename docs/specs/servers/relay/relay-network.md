@@ -1,3 +1,5 @@
+import IframeComponent from '../../../components/IframeComponent';
+
 # Relay Network
 
 ## Description
@@ -28,3 +30,5 @@ A Relay message is globally available and it's always a utf8 string. Therefore t
 ```sh
 message_id = sha256(message)
 ```
+
+<IframeComponent />

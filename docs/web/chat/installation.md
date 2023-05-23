@@ -1,3 +1,5 @@
+import IframeComponent from '../../components/IframeComponent';
+
 # Installation
 
 :::caution
@@ -25,3 +27,5 @@ npm install lokijs --save
 ```
 
 This step is not required if you are using the SDK on the browser-side.
+
+<IframeComponent />

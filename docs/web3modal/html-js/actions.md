@@ -1,3 +1,5 @@
+import IframeComponent from '../../components/IframeComponent';
+
 # Actions
 
 For majority of your tasks like getting account details, managing chains, interacting with contracts etc. you will be using actions provided by [wagmi core](https://wagmi.sh), so make sure to read over their documentation as well. Below are some Web3Modal specific actions that you might find useful.
@@ -52,3 +54,5 @@ web3modal.setTheme({
   }
 })
 ```
+
+<IframeComponent />

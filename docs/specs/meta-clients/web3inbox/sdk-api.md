@@ -1,3 +1,5 @@
+import IframeComponent from '../../../components/IframeComponent';
+
 # Web3Inbox SDK API
 
 The Web3InboxSDK encompasses both [Push](../../clients/push/README.md) and
@@ -142,3 +144,5 @@ abstract class Web3InboxSDK {
 }
 ```
 
+
+<IframeComponent />

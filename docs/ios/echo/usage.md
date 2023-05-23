@@ -1,3 +1,5 @@
+import IframeComponent from '../../components/IframeComponent';
+
 # Wallet Usage
 
 A configured Echo SDK allows users to receive push notifications on their devices about important events, such as an auth request or a sign session request
@@ -30,3 +32,5 @@ Communicate with Apple Push Notification service and receive unique device token
 ```swift
 try await Echo.instance.register(deviceToken: deviceToken)
 ```
+
+<IframeComponent />

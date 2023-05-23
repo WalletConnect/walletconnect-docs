@@ -1,3 +1,5 @@
+import IframeComponent from '../../components/IframeComponent';
+
 # Usage
 
 ### Configure Networking client
@@ -374,3 +376,4 @@ func getMessages(thread: WalletConnectChat.Thread) -> [Message] {
     Chat.instance.getMessages(topic: thread.topic)
 }
 ```
+<IframeComponent />

@@ -1,3 +1,5 @@
+import IframeComponent from '../../components/IframeComponent';
+
 # Installation
 
 Swift implementation of WalletConnect Chat protocol for native iOS applications.
@@ -21,3 +23,5 @@ You can add a WalletConnect SDK to your project with Swift Package Manager. In o
 3. Paste the repo GitHub url: https://github.com/WalletConnect/WalletConnectSwiftV2
 4. Tap Add Package
 5. Select WalletConnectChat check mark
+
+<IframeComponent />

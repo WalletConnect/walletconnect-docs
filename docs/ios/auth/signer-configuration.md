@@ -1,3 +1,5 @@
+import IframeComponent from '../../components/IframeComponent';
+
 ### Setup Signer Factory
 
 WalletConnect Swift SDK does not depend on any third-party Web3 or crypto library. SignerFactory allows you to pass your own signer implementation.
@@ -51,3 +53,5 @@ Auth.configure(
     signerFactory: AuthSignerFactory()
 )
 ```
+
+<IframeComponent />

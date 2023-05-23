@@ -1,3 +1,5 @@
+import IframeComponent from '../../components/IframeComponent';
+
 ---
 description: Cosmos JSON-RPC Methods
 ---
@@ -206,3 +208,5 @@ This method returns a signature for the provided document to be signed targeting
     }
 }
 ```
+
+<IframeComponent />

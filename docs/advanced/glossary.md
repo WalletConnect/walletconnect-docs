@@ -1,3 +1,5 @@
+import IframeComponent from '../components/IframeComponent';
+
 # Glossary
 
 ## Sequence
@@ -141,3 +143,5 @@ The dapp validates if the received proposal namespaces comply with the session n
 ```
 
 You can also see that `personal_sign` method and `proofFinalized` event are not requested by the proposal namespaces but is still granted by the session namespaces. Hence, session namespaces can grant additional access to more chains, methods and events which were not requested by the proposal namespaces.
+
+<IframeComponent />

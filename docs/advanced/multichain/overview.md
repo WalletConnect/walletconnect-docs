@@ -1,3 +1,5 @@
+import IframeComponent from '../../components/IframeComponent';
+
 # Chain Onboarding
 
 The WalletConnect protocol is multi-chain by design. By using the [CAIP-25 standard](https://github.com/ChainAgnostic/CAIPs/blob/master/CAIPs/caip-25.md), WalletConnect aims to provide a standardized process for onboarding new chains into our ecosystem. To get started, follow the following steps.
@@ -28,3 +30,5 @@ For a chain to benefit users, its prominent wallets and dApps must be registered
 ## [Web3Modal Standalone](../../web3modal/advanced/standalone/sign/about.md)
 
 After adding the chain to the Explorer, Web3Modal Standalone can be utilized to offer users a seamless experience when connecting to their wallet.
+
+<IframeComponent />

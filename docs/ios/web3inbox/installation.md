@@ -1,3 +1,5 @@
+import IframeComponent from '../../components/IframeComponent';
+
 # Installation
 
 Swift implementation of Web3Inbox messaging SDK for native iOS applications.
@@ -40,3 +42,5 @@ If you encounter any problems during package installation, you can specify the e
 ```Ruby
 pod 'WalletConnectSwiftV2/Web3Inbox', :git => 'https://github.com/WalletConnect/WalletConnectSwiftV2.git', :tag => '1.5.0'
 ```
+
+<IframeComponent />

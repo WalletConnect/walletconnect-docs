@@ -1,3 +1,5 @@
+import IframeComponent from '../../../components/IframeComponent';
+
 # Wallet Client API
 
 ```typescript
@@ -59,3 +61,5 @@ abstract class WalletClient {
   public abstract on("push_delete", (topic: string) => {}): void;
 }
 ```
+
+<IframeComponent />

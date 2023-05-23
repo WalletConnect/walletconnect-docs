@@ -1,3 +1,5 @@
+import IframeComponent from '../../components/IframeComponent';
+
 # Installation
 
 ### Set up a project
@@ -21,3 +23,5 @@ You can add a WalletConnect Core SDKs to your project with Swift Package Manager
 4. Tap Add Package
 5. Select WalletConnectPairing check mark
 
+
+<IframeComponent />

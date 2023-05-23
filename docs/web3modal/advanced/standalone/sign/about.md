@@ -1,3 +1,5 @@
+import IframeComponent from '../../../../components/IframeComponent';
+
 import Container from '../../../../components/Container';
 
 # About
@@ -20,3 +22,5 @@ url: `https://github.com/WalletConnect/web3modal-examples/blob/main/html-standal
 },
 ]}
 />
+
+<IframeComponent />

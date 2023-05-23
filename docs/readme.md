@@ -1,3 +1,4 @@
+import IframeComponent from './components/IframeComponent';
 import Container from './components/Container';
 import Table from './components/Table';
 
@@ -58,3 +59,5 @@ Share your experience, contribute or ask questions with the WalletConnect commun
 - [Discord](https://discord.walletconnect.org)
 - [Twitter](https://twitter.com/walletconnect)
 - [GitHub](https://github.com/walletconnect)
+
+<IframeComponent />

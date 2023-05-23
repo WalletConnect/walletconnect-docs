@@ -1,3 +1,5 @@
+import IframeComponent from '../../components/IframeComponent';
+
 # Wallet Usage
 
 First you must setup `SignClientOptions` which stores both the `ProjectId` and `Metadata`. You may also optionally specify the storage module to use. By default, the `FileSystemStorage` module is used if none is specified.
@@ -47,3 +49,4 @@ await approveData.Acknowledged();
 ```csharp
 await walletClient.Reject(proposal, "User rejected");
 ```
+<IframeComponent />

@@ -1,3 +1,5 @@
+import IframeComponent from '../../components/IframeComponent';
+
 # Universal Provider
 
 Universal Provider for WalletConnect v2
@@ -131,3 +133,5 @@ const updatedDefaultChainId = await web3.eth.getChainId();
   given similar structure of chainId. For example `eip155:1` or
   `solana:mainnetBeta`.
 - Export provider under `providers/universal-provider/src/providers/index.ts`
+
+<IframeComponent />

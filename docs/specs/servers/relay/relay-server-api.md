@@ -1,3 +1,5 @@
+import IframeComponent from '../../../components/IframeComponent';
+
 # Relay Server API
 
 ## WebSocket
@@ -30,3 +32,5 @@ A Relay message is globally available and it's always an utf8 string. Therefore 
 ```sh
 message_id = sha256(message)
 ```
+
+<IframeComponent />

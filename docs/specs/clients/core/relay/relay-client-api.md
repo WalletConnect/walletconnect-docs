@@ -1,3 +1,5 @@
+import IframeComponent from '../../../../components/IframeComponent';
+
 # Relay Client
 
 ## Purpose
@@ -61,3 +63,5 @@ message_id = sha256(message)
 ## FAQ
 
 - What is a RelayClient? - an instance of Relay on the client-side used by any sdk instance.
+
+<IframeComponent />

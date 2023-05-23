@@ -1,3 +1,5 @@
+import IframeComponent from '../../components/IframeComponent';
+
 # Installation
 
 Kotlin implementation of Android CoreClient for all WalletConnect SDKs.
@@ -57,3 +59,4 @@ val optionalRelay: RelayConnectionInterface = /*implement interface*/
 
 CoreClient.initialize(relayServerUrl = serverUrl, connectionType = connectionType, application = application, relay = optionalRelay)
 ```
+<IframeComponent />

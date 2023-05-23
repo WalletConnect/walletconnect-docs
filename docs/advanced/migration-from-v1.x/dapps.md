@@ -1,3 +1,5 @@
+import IframeComponent from '../../components/IframeComponent';
+
 # Dapps
 
 The followings steps describe the various paths for dapps to migrate to v2:
@@ -87,3 +89,5 @@ Switching to v2 is straightforward using [Dynamic](https://www.dynamic.xyz/). To
 ### solana-labs/wallet-adapter
 
 If you are using `solana-labs/wallet-adapter`, this is already working on WalletConnect v2 so there is nothing to change here. There will be a new version released with an updated UI modal coming shortly.
+
+<IframeComponent />

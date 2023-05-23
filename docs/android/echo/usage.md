@@ -1,3 +1,5 @@
+import IframeComponent from '../../components/IframeComponent';
+
 # Wallet's Echo Client Usage 
 
 The Echo SDK enables wallets to receive push notifications from WalletConnect's Echo Server via [Firebase Cloud Messaging](https://firebase.google.com/docs/cloud-messaging). This means you will have to setup your project with Firebase before being able to use the `EchoClient`.  
@@ -22,3 +24,5 @@ CoreClient.Echo.register(
         // callback triggered if there's an exception thrown during the registration process
     })
 ```
+
+<IframeComponent />

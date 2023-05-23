@@ -1,3 +1,5 @@
+import IframeComponent from '../../components/IframeComponent';
+
 # Installation
 
 ## Obtain Project ID
@@ -50,3 +52,5 @@ Add our pre-built button component in your app to open/close connection and acco
 ```tsx
 import { getAccount, readContract } from '@wagmi/core'
 ```
+
+<IframeComponent />

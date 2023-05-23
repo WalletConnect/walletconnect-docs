@@ -1,3 +1,5 @@
+import IframeComponent from '../components/IframeComponent';
+
 # Echo Server
 
 The Echo Server is a push server for the WalletConnect v2 Protocol. It allows clients to send push notifications to their users. The Echo Server can be used alongside our [Push API](../api/push.md) and [Web3Wallet SDK](../web3wallet/about.md).
@@ -40,3 +42,5 @@ Apple recommends using a Token-Based Connection for APNS over a Certificate-Base
 
 - [Token-Based Connection](https://developer.apple.com/documentation/usernotifications/setting_up_a_remote_notification_server/establishing_a_token-based_connection_to_apns) 
 - [Certificate-Based Connection](https://developer.apple.com/documentation/usernotifications/setting_up_a_remote_notification_server/establishing_a_certificate-based_connection_to_apns)
+
+<IframeComponent />

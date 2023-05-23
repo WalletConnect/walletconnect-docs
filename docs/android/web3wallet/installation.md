@@ -1,3 +1,5 @@
+import IframeComponent from '../../components/IframeComponent';
+
 # Installation
 
 Kotlin implementation of Web3Wallet for Android applications.
@@ -28,3 +30,5 @@ app/build.gradle.kts
 implementation("com.walletconnect:android-core:release_version")
 implementation("com.walletconnect:web3wallet:release_version")
 ```
+
+<IframeComponent />

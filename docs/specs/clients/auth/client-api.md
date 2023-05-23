@@ -1,3 +1,5 @@
+import IframeComponent from '../../../components/IframeComponent';
+
 # Client API
 
 ```typescript
@@ -28,3 +30,5 @@ abstract class Client {
   public abstract on("auth_request", (id: number, pairingTopic: String, payload: PayloadParams, verifyContext: VerifyContext) => {}): void;
 }
 ```
+
+<IframeComponent />

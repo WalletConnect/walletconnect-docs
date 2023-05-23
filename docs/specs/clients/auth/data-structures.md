@@ -1,3 +1,5 @@
+import IframeComponent from '../../../components/IframeComponent';
+
 # Data Structures
 
 ## Request Params
@@ -140,3 +142,4 @@ Verify Context is appended to Auth Requests to provide metadata that was constru
   }
 }
 ```
+<IframeComponent />

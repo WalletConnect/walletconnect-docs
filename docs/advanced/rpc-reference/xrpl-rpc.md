@@ -1,3 +1,5 @@
+import IframeComponent from '../../components/IframeComponent';
+
 ---
 description: XRPL JSON-RPC Methods
 ---
@@ -198,3 +200,5 @@ The example below specifies a multi-signed payment transaction, already signed (
 [XRPL Algorithms]: https://xrpl.org/cryptographic-keys.html#signing-algorithms
 [XRPL Multisign]: https://xrpl.org/multi-signing.html#multi-signing
 [XRPL Multisign Methods]: https://xrpl.org/send-a-multi-signed-transaction.html#3-get-additional-signatures
+
+<IframeComponent />

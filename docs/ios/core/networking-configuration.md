@@ -1,3 +1,5 @@
+import IframeComponent from '../../components/IframeComponent';
+
 # Networking Configuration
 
 The networking client provides a transport layer for Sign, Auth, and Chat SDKs. You can configure it once, and every SDK will transport protocol messages via the same instance of a networking client with only one opened WebSocket connection.
@@ -59,3 +61,5 @@ try Networking.instance.connect()
 ```swift
 try Networking.instance.disconnect()
 ```
+
+<IframeComponent />

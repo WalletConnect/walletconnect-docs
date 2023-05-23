@@ -1,3 +1,5 @@
+import IframeComponent from '../../components/IframeComponent';
+
 # Dapp Integration Guide
 
 ## Dapp Guide Section Topics
@@ -251,3 +253,5 @@ const unsub = await tx.send(({ status, events }) => {
   }
 });
 ```
+
+<IframeComponent />

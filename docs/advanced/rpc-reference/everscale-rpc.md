@@ -1,3 +1,5 @@
+import IframeComponent from '../../components/IframeComponent';
+
 ---
 description: Everscale JSON-RPC Methods
 ---
@@ -132,3 +134,5 @@ Signature of a random message for authentication.
     }
 }
 ```
+
+<IframeComponent />

@@ -1,3 +1,5 @@
+import IframeComponent from '../components/IframeComponent';
+
 # Auth
 
 ## Introduction
@@ -25,3 +27,5 @@ There are getting started guides for the following clients platforms:
 ## Useful Links
 
 We've created some sample apps so that you can get a taste of the WalletConnect Auth experience. Here is our [sample wallet](https://react-auth-wallet.walletconnect.com/) and [sample dapp](https://react-auth-dapp.walletconnect.com/).
+
+<IframeComponent />

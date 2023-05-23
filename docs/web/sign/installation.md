@@ -1,3 +1,5 @@
+import IframeComponent from '../../components/IframeComponent';
+
 # Installation
 
 ## 1. Obtain Project ID
@@ -17,3 +19,5 @@ For platform-specific instructions, refer to our [React Native](../../reactnativ
 ```bash npm2yarn
 npm install @walletconnect/sign-client
 ```
+
+<IframeComponent />

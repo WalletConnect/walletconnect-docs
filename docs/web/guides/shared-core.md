@@ -1,3 +1,5 @@
+import IframeComponent from '../../components/IframeComponent';
+
 # Shared Core Instance
 
 WalletConnect's SDKs are designed to share common logic and resources via the `@walletconnect/core` package.
@@ -32,3 +34,5 @@ const signClient = await SignClient.init({ core, metadata });
 // Pass `core` to the AuthClient on init.
 const authClient = await AuthClient.init({ core, metadata });
 ```
+
+<IframeComponent />

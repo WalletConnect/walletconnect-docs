@@ -1,3 +1,5 @@
+import IframeComponent from '../../../components/IframeComponent';
+
 # Error Codes
 
 ## INVALID
@@ -24,3 +26,5 @@ case .userUnsubscribed return 6000
 case .approvalFailed: return 7002
 case .rejectionFailed: return 7003
 ```
+
+<IframeComponent />

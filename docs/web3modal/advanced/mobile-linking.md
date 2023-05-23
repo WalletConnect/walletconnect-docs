@@ -1,3 +1,5 @@
+import IframeComponent from '../../components/IframeComponent';
+
 # Mobile Linking
 
 When used on mobile, Web3Modal uses and takes care of native mobile linking to connect wallets and perform actions. This guide outlines best practices for setting up these links as a wallet and ensuring everything works as expected as a dapp. Wallets can create or update their project details at [cloud.walletconnect.com](https://cloud.walletconnect.com/).
@@ -44,3 +46,5 @@ We recommend using universal over deeplinks.
 ### Deeplinks
 
 Deep links are a more "native" way of linking that uses a specific format like `myWallet://` or `wc://`. On Android, it is additionally possible to use `wc://` as Android will show all wallets that can handle such a link. These links are used to direct users to a specific location within a mobile application, rather than directing them to a website or a fallback page.
+
+<IframeComponent />

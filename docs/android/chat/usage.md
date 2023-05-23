@@ -1,3 +1,5 @@
+import IframeComponent from '../../components/IframeComponent';
+
 # Chat SDK
 
 Chat SDK allows E2EE direct messaging between users, using their wallet address.
@@ -483,3 +485,4 @@ val params = Chat.Params.GetMessages(topic = /*Thread topic*/))
 
 val messages: List<Chat.Model.Message> = ChatClient.getMessages(params)
 ```
+<IframeComponent />

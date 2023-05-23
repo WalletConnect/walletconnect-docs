@@ -1,3 +1,5 @@
+import IframeComponent from '../../../components/IframeComponent';
+
 # Identity Keys
 
 Identity Keys are used to verify Blockchain Account ownership and validating peer to peer requests are legitimate without requiring the wallet user to sign every message with their blockchain private key.
@@ -103,3 +105,5 @@ When we are unregistering an Identity Key we must use the following mandatory fi
 * aud - key server url used for registering
 * pkh - corresponding blockchain account (did:pkh)
 * act - description of action intent. Must be equal to "unregister_identity"
+
+<IframeComponent />

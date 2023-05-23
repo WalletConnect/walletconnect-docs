@@ -1,3 +1,5 @@
+import IframeComponent from '../../../components/IframeComponent';
+
 # Namespaces
 
 A namespace is a standardized object defined by the [Chain Agnostic Improvement Proposal (CAIP)](https://github.com/ChainAgnostic/CAIPs) that ensures a common industry standard for chain agnostic purposes. You will encounter two namespaces: the **proposal namespace** and the **session namespace** when connects wallets and dapps.
@@ -831,3 +833,5 @@ Is valid?: Yes
 Note: `eth_sendTransaction`, `eth_signTransaction`, and `get_balance` method is missing in the session namespace
 
 ---
+
+<IframeComponent />

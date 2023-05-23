@@ -1,3 +1,5 @@
+import IframeComponent from '../../components/IframeComponent';
+
 # Pairing API
 
 ### Description
@@ -78,3 +80,4 @@ Request, Responses and Errors can be sent using the `SendRequest` , `SendResult`
 ```csharp
 long id = await core.MessageHandler.SendRequest<MyRequest, MyResponse>(pairingTopic, data);
 ```
+<IframeComponent />

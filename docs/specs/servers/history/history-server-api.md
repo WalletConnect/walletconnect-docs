@@ -1,3 +1,5 @@
+import IframeComponent from '../../../components/IframeComponent';
+
 # History Server API
 
 ## Register
@@ -69,3 +71,5 @@ The `originId` message is included in the results `messages` list.
 
 The triplet `topic`, `direction` and `nextId` can be used to continue history retrieval without necessarily having to keep
 the querying context on the client.
+
+<IframeComponent />

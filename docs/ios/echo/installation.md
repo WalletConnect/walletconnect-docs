@@ -1,3 +1,5 @@
+import IframeComponent from '../../components/IframeComponent';
+
 
 # Installation
 
@@ -10,3 +12,5 @@ You can add a WalletConnectEcho SDK to your project with Swift Package Manager. 
 3. Paste the repo GitHub url: https://github.com/WalletConnect/WalletConnectSwiftV2
 4. Tap Add Package
 5. Select WalletConnectEcho check mark
+
+<IframeComponent />

@@ -1,3 +1,5 @@
+import IframeComponent from '../../../../components/IframeComponent';
+
 # Data Structures
 
 ## Store Update
@@ -38,3 +40,5 @@ type StoreState = Map<string, string>
 // store (string), state(StoreState)
 type StoreMap = Map<string, StoreState>
 ```
+
+<IframeComponent />

@@ -1,3 +1,5 @@
+import IframeComponent from '../../../components/IframeComponent';
+
 # Push Proposal
 
 ## User Flow
@@ -33,3 +35,5 @@ Proposal protocol will be established as follows:
 10. Dapp derives symmetric key and decrypts subscriptionAuth
 11. Dapp registers address at the Cast Server
  
+
+<IframeComponent />

@@ -1,3 +1,5 @@
+import IframeComponent from '../../../components/IframeComponent';
+
 # Message Status
 
 Given the Chat API relies on the Relay API for peer communication, we can build the following message status:
@@ -21,3 +23,5 @@ A message is considered published from the moment the Relay API has received ack
 ## Delivered
 
 A message is considered delivered from the moment the peer has sent a corresponding response to the wc_chatMessage request as a message receipt.
+
+<IframeComponent />

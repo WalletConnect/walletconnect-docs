@@ -1,3 +1,5 @@
+import IframeComponent from '../../../../components/IframeComponent';
+
 # Crypto Keys
 
 WalletConnect can be simply described as a remote protocol for communication between clients using end-to-end encryption and there are also uses of authentication.
@@ -27,3 +29,5 @@ There are the algorithms that we use in our communication protocol:
 * X25519 - used for secret derivation between two clients
 * HKDF - used for a symmetric key derivation using the DH secret
 * Chacha20-poly1305 - used for encryption and authentication of messages
+
+<IframeComponent />

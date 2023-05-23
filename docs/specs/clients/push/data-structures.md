@@ -1,3 +1,5 @@
+import IframeComponent from '../../../components/IframeComponent';
+
 # Data Structures
 
 ## Push Subscription
@@ -39,3 +41,5 @@
 }
 ```
  
+
+<IframeComponent />

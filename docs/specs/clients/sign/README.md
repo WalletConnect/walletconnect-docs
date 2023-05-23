@@ -1,3 +1,5 @@
+import IframeComponent from '../../../components/IframeComponent';
+
 # Sign API Overview
 
 ## Description
@@ -23,3 +25,5 @@ Thus if the dapp never receives the pairing response that means it also will nev
 ### Goal
 
 The solution is to find a protocol change that inherits the same capability of v1.0 to propose session and pairing simultaneously but also persists the decoupled property of v2.0 protocol
+
+<IframeComponent />

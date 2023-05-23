@@ -1,3 +1,5 @@
+import IframeComponent from '../../components/IframeComponent';
+
 # Usage
 
 :::caution
@@ -109,3 +111,5 @@ the chat thread's topic:
 ```javascript
 await chatClient.leave({ topic: chatThread.topic });
 ```
+
+<IframeComponent />

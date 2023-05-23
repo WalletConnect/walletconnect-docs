@@ -1,3 +1,5 @@
+import IframeComponent from '../../../components/IframeComponent';
+
 # Cast Server API
 
 ## Register Account
@@ -171,3 +173,5 @@ Failed:
 }
 ```
 
+
+<IframeComponent />

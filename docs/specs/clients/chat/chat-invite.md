@@ -1,3 +1,5 @@
+import IframeComponent from '../../../components/IframeComponent';
+
 # Chat Invite
 
 ## User Flow
@@ -38,3 +40,5 @@ A receives response which includes publicKey Z.
 A derives symKey T using privKey Y and publicKey Z.
 
 A and B both subscribe to thread topic and encrypt messages with symKey T.
+
+<IframeComponent />

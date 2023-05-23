@@ -1,3 +1,5 @@
+import IframeComponent from '../../../components/IframeComponent';
+
 # Authentication
 
 ## User Flow
@@ -56,3 +58,5 @@ B sends response on response topic.
 A receives response and validates signature.
 
 If signature is valid, then user is authenticated.
+
+<IframeComponent />

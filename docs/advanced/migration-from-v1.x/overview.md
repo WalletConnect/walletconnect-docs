@@ -1,3 +1,5 @@
+import IframeComponent from '../../components/IframeComponent';
+
 import Container from '../../components/Container';
 
 # Overview
@@ -43,3 +45,5 @@ url: `/2.0/advanced/migration-from-v1.x/wallets`
 }
 ]}
 />
+
+<IframeComponent />

@@ -1,3 +1,5 @@
+import IframeComponent from '../../../components/IframeComponent';
+
 # Error Codes
 
 ## VALIDATION
@@ -17,3 +19,5 @@ case .missingIssuer return 11006
 case .userRejectedRequest return 12001
 case .userDisconnected: return 12002
 ```
+
+<IframeComponent />

@@ -1,3 +1,5 @@
+import IframeComponent from '../../../../components/IframeComponent';
+
 # Crypto Typed Envelopes
 
 Typed envelopes purpose is to provide flexible and future proof jsonrpc serialization methods. All WalletConnect protocols requests should use one of the following envelope serialization types.
@@ -39,3 +41,5 @@ sb - sealbox: ct + tag
 #### Serialized Type 1 Envelope:
 
 tp + pk + iv + sb
+
+<IframeComponent />

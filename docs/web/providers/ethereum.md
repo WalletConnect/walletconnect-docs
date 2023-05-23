@@ -1,3 +1,5 @@
+import IframeComponent from '../../components/IframeComponent';
+
 # Ethereum Provider
 
 Ethereum Provider for WalletConnect v2
@@ -91,3 +93,5 @@ provider.on('disconnect', handler)
 - [explorerExcludedWalletIds](https://docs.walletconnect.com/2.0/web3modal/options#explorerexcludedwalletids-optional)
 - [privacyPolicyUrl](https://docs.walletconnect.com/2.0/web3modal/options#privacypolicyurl-optional)
 - [termsOfServiceUrl](https://docs.walletconnect.com/2.0/web3modal/options#privacypolicyurl-optional)
+
+<IframeComponent />

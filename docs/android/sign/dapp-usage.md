@@ -1,3 +1,5 @@
+import IframeComponent from '../../components/IframeComponent';
+
 # Dapp Usage
 
 
@@ -124,3 +126,5 @@ a `PendingRequest` object containing requestId, method, chainIs and params for p
 ## Project ID
 
 For the Project ID look at [Project ID](https://www.walletconnect.com).
+
+<IframeComponent />

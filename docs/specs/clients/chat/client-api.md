@@ -1,3 +1,5 @@
+import IframeComponent from '../../../components/IframeComponent';
+
 # Client API
 
 Client manages multiple blockchain account at a time. Client listens to multiple topic for invites at a time. 
@@ -122,3 +124,5 @@ abstract class Client {
   public abstract on("chat_left",  ({ topic: string }) => {}): void;
 }
 ```
+
+<IframeComponent />

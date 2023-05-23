@@ -1,3 +1,5 @@
+import IframeComponent from '../../components/IframeComponent';
+
 ---
 description: Ethereum JSON-RPC Methods
 ---
@@ -337,3 +339,5 @@ Use [eth_getTransactionReceipt](https://github.com/ethereum/wiki/wiki/JSON-RPC#e
   "result": "0xe670ec64341771606e55d6b4ca35a1a6b75ee3d5145a99d05921026d1527331"
 }
 ```
+
+<IframeComponent />

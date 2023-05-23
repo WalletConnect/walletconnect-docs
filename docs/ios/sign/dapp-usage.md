@@ -1,3 +1,5 @@
+import IframeComponent from '../../components/IframeComponent';
+
 # Dapp Usage
 
 ### Configure Networking and Pair clients
@@ -69,3 +71,5 @@ When wallet respond `sessionResponsePublisher` will publish an event so you can 
 ### Where to go from here
 - Try our [Example dApp](https://github.com/WalletConnect/WalletConnectSwiftV2/tree/main/Example) that is part of [WalletConnectSwiftV2 repository](https://github.com/WalletConnect/WalletConnectSwiftV2).
 - Build API documentation in XCode: go to Product -> Build Documentation
+
+<IframeComponent />

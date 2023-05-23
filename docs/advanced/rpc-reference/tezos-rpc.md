@@ -1,3 +1,5 @@
+import IframeComponent from '../../components/IframeComponent';
+
 ---
 description: Tezos JSON-RPC Methods
 ---
@@ -139,3 +141,5 @@ This method returns a signature for the provided payload. It will be signed by t
     }
 }
 ```
+
+<IframeComponent />

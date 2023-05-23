@@ -1,3 +1,5 @@
+import IframeComponent from '../../components/IframeComponent';
+
 ---
 description: Quick Start For Dapps using Standalone Client
 ---
@@ -166,3 +168,5 @@ const specificSession = _client.find({
   },
 });
 ```
+
+<IframeComponent />

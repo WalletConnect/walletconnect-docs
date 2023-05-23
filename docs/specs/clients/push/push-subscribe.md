@@ -1,3 +1,5 @@
+import IframeComponent from '../../../components/IframeComponent';
+
 # Push Subscribe
 
 ## User Flow
@@ -37,3 +39,5 @@ Subscribe protocol will be established as follows:
 15. Wallet derives symmetric key P
 16. Push topic is derived from the sha256 hash of the symmetric key P
 17. Wallet subscribes to push topic for future push messages
+
+<IframeComponent />

@@ -1,3 +1,5 @@
+import IframeComponent from '../../components/IframeComponent';
+
 import Container from '../../components/Container';
 
 # Installation
@@ -29,3 +31,5 @@ For those using Typescript, we recommend adding these dev dependencies:
 ```bash npm2yarn
 npm install --save @walletconnect/jsonrpc-types
 ```
+
+<IframeComponent />

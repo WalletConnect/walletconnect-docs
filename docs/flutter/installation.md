@@ -1,3 +1,5 @@
+import IframeComponent from '../components/IframeComponent';
+
 # Installation
 
 To get started with [Web3Wallet](./wallets/wallet-usage.md), [Sign](./dapps/dapp-sign-usage.md), or [Auth](./dapps/dapp-auth-usage.md), follow the instructions below.
@@ -26,3 +28,5 @@ Add the following to your `DebugProfile.entitlements` and `Release.entitlements`
 <key>com.apple.security.network.client</key>
 <true/>
 ```
+
+<IframeComponent />

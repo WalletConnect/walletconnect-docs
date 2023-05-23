@@ -1,3 +1,5 @@
+import IframeComponent from '../../components/IframeComponent';
+
 # Installation
 
 Kotlin implementation of WalletConnect v2 Auth protocol for Android applications.
@@ -29,3 +31,5 @@ app/build.gradle
 implementation("com.walletconnect:android-core:release_version")
 implementation("com.walletconnect:auth:release_version")
 ```
+
+<IframeComponent />

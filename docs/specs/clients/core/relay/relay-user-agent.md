@@ -1,3 +1,5 @@
+import IframeComponent from '../../../../components/IframeComponent';
+
 # Relay User Agent
 
 ## Motivation
@@ -56,3 +58,5 @@ Additionally the following optional params can be included if available:
 # kotlin (android)
 <RELAY_URL>?ua=wc-2/kotlin-2.0.0-rc.1x10011/android-10
 ```
+
+<IframeComponent />

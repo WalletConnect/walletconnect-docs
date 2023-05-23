@@ -1,3 +1,5 @@
+import IframeComponent from '../components/IframeComponent';
+
 # Sign
 
 ## Introduction
@@ -12,3 +14,4 @@ You can find getting started guides for the following client platforms:
 - [iOS - Swift](../ios/sign/installation.md)
 - [Android - Kotlin](../android/sign/installation.md)
 - [Universal - Dart](../flutter/installation.md)
+<IframeComponent />

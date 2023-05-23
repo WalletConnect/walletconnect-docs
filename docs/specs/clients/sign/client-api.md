@@ -1,3 +1,5 @@
+import IframeComponent from '../../../components/IframeComponent';
+
 # Reference Client API
 
 ```typescript
@@ -87,3 +89,5 @@ abstract class Client {
   public abstract on("session_delete", (sessionDelete: { id: number, topic: string }) => {}): void;
 }
 ```
+
+<IframeComponent />

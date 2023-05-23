@@ -1,3 +1,5 @@
+import IframeComponent from '../../components/IframeComponent';
+
 # Pairing SDK
 
 ### Description
@@ -41,3 +43,5 @@ To generate a uri call `create()` function on Pair instance as follows.
 let uri = try await Pair.instance.create()
 ```
 Now you can share the uri with the wallet.
+
+<IframeComponent />

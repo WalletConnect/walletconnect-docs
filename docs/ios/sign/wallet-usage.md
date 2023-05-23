@@ -1,3 +1,5 @@
+import IframeComponent from '../../components/IframeComponent';
+
 # Wallet Usage
 
 ### Configure Networking and Pair Clients
@@ -265,3 +267,5 @@ try await Sign.instance.disconnect(topic: session.topic)
 - Try our example wallet implementation [here](https://github.com/WalletConnect/WalletConnectSwiftV2/tree/main/Example/WalletApp).
 - To dive deeper into protocol concepts check out our [documentation](https://docs.walletconnect.com/2.0/protocol/glossary)
 - Build API documentation in XCode: go to Product -> Build Documentation
+
+<IframeComponent />

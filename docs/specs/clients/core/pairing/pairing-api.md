@@ -1,3 +1,5 @@
+import IframeComponent from '../../../../components/IframeComponent';
+
 # Pairing API
 
 ```typescript
@@ -40,3 +42,5 @@ abstract class PairingClient {
   // emits on subscribed request
   public abstract onRequest(${registered_request}, (topic: string, request: Request) => {}): void;
 ```
+
+<IframeComponent />

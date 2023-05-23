@@ -1,3 +1,5 @@
+import IframeComponent from '../../../components/IframeComponent';
+
 # Push Notification Types
 
 Not every message is the same and not every wallet user wants to receive every possible push notification that a dapp targets their wallet account.
@@ -80,3 +82,5 @@ A Push Message will include a parameter called `type` in the message payload whi
   "type": string // <--- notification type
 }
 ```
+
+<IframeComponent />

@@ -1,3 +1,5 @@
+import IframeComponent from '../../components/IframeComponent';
+
 # Wallet Usage
 
 :::caution
@@ -82,3 +84,5 @@ pushWalletClient.on("push_request", async ({ id, topic, params }) => {
     await pushWalletClient.reject({ id, reason: "User rejected push subscription request" });
   }
 ```
+
+<IframeComponent />

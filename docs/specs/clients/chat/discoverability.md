@@ -1,3 +1,5 @@
+import IframeComponent from '../../../components/IframeComponent';
+
 # Discoverability
 
 One of the most important features of the user experience is that two participants can exchange messages by simply discovering their peer's public key and below we will described three different mechanisms to exchange them both privately and publicly.
@@ -33,3 +35,5 @@ In this scenario, it is assumed that A does not have knowledge of B's blockchain
 We assume that A and B have other means of communication such as a face-to-face interaction or an online video call where they can exchange a qrcode to send a chat invite to each other.
 
 Thus A can scan the qrcode provided by B to retrieve blockchain account and public key
+
+<IframeComponent />

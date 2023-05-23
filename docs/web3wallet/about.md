@@ -1,3 +1,5 @@
+import IframeComponent from '../components/IframeComponent';
+
 import Container from './../components/Container';
 
 # Web3Wallet
@@ -53,3 +55,5 @@ url: `/2.0/dart/wallets/installation`
 - [Web3Modal Laboratory](https://lab.web3modal.com) - A place to test your wallet integrations against various setups of Web3Modal.
 - [Web3Wallet GitHub](https://github.com/WalletConnect/walletconnect-monorepo/tree/v2.0/packages/web3wallet) - Web3Wallet GitHub repository.
 - [Web3Wallet Discord Forum](https://discord.com/channels/492410046307631105/1068626962374991993) - Get help from community and WalletConnect team members on Discord.
+
+<IframeComponent />

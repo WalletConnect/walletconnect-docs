@@ -1,3 +1,5 @@
+import IframeComponent from '../../components/IframeComponent';
+
 # Pairing Client
 Pairing API is a lightweight api for establishing an encrypted, protocol agnostic communication layer between peers. It's purpose is to provide a secure channel for proposing protocols or sending requests. The Pairing api can be accessed through the Core Client
 
@@ -36,3 +38,5 @@ CoreClient.Pairing.disconnect(topic = /*Pairing topic*/") { error -> }
 ```
 
 To disconnect from a pairing, just pass the topic of the pairing to disconnect from (use `getPairings()` to get a list of all active pairings and their topics). 
+
+<IframeComponent />

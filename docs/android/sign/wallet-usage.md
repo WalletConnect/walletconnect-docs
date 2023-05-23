@@ -1,3 +1,5 @@
+import IframeComponent from '../../components/IframeComponent';
+
 # Wallet Usage
 
 
@@ -208,3 +210,5 @@ SignClient.ping(pingParams, listener)
 
 To ping a peer with a session, call `SignClient.ping` with the `Sign.Params.Ping` with a session's topic. If ping is successful, topic is
 echo'd in listener.
+
+<IframeComponent />

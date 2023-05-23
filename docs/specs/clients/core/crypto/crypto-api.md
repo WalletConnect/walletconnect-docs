@@ -1,3 +1,5 @@
+import IframeComponent from '../../../../components/IframeComponent';
+
 # Crypto API
 
 ```typescript
@@ -101,3 +103,5 @@ export abstract class ICrypto {
   ): Promise<JsonRpcPayload>;
 }
 ```
+
+<IframeComponent />

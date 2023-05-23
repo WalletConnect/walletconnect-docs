@@ -1,3 +1,5 @@
+import IframeComponent from '../../components/IframeComponent';
+
 # Dapp Usage
 
 :::caution
@@ -131,3 +133,5 @@ const message = {
 
 await pushDappClient.notify({ topic: latestSubscription.topic, message });
 ```
+
+<IframeComponent />

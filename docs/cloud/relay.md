@@ -1,3 +1,5 @@
+import IframeComponent from '../components/IframeComponent';
+
 # Relay
 
 ## Project ID
@@ -55,3 +57,5 @@ Adding `https://dapp.example.com` to the allowlist will only allow requests from
 - Don't reuse a `projectId`.
 - Use the AllowList to limit unauthorized usage.
 - Avoid committing projects keys to the repo. Use env variables instead.
+
+<IframeComponent />
