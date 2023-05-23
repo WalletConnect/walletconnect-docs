@@ -48,6 +48,7 @@ A Relay session is defined by the following lifecycle conditions:
 * Session is unique per each tab instance (specific for web browsers)
 
 A Relay session identifier should be:
+
 * Persisted through the whole session lifecycle
 * Re-used whenever the websocket reconnects
 * Formatted as 32 byte hex string
