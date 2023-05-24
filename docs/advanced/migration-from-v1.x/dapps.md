@@ -10,6 +10,7 @@ The followings steps describe the various paths for dapps to migrate to v2:
 6. [web3-onboard](#web3-onboard)
 7. [Dynamic](#dynamic)
 8. [solana-labs/wallet-adapter](#solana-labs/wallet-adapter)
+9. [web3-react](#web3-react)
 
 ### web3-provider
 
@@ -87,3 +88,13 @@ Switching to v2 is straightforward using [Dynamic](https://www.dynamic.xyz/). To
 ### solana-labs/wallet-adapter
 
 If you are using `solana-labs/wallet-adapter`, this is already working on WalletConnect v2 so there is nothing to change here. There will be a new version released with an updated UI modal coming shortly.
+
+### web3-react
+Web3-react has created their own modules for WalletConnect v2. You can test their playground [here](https://web3-react-mu.vercel.app/). In order to get started with the migration, we suggest upgrading your `@web3-react/types`, `@web3-react/store` and `@web3-react/core` as well as installing `@web3-react/walletconnect-v2`.
+
+After installing
+
+
+
+
+
