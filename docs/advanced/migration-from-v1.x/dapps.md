@@ -153,7 +153,7 @@ Create a new environment variable `WALLETCONNECT_PROJECT_ID` in your `.env` file
 WALLETCONNECT_PROJECT_ID=YOUR_PROJECT_ID
 ```
 
-Next, update your code to include the `walletConnectProjectId` in `createClient`:
+Next, update your code by including the `walletConnectProjectId` inside the config object for `getDefaultClient`:
 
 ```typescript
 ...
