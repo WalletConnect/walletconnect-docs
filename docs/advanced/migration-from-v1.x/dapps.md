@@ -124,10 +124,10 @@ Note: Be sure to test with several chains in order to complete your implementati
 
 Then use the `@web3-react/walletconnect-v2` package with the following methods in your components.
 
-- `URIListener`: Event listener for when v2 URI is created. Code reference here.
-- `activate`: Create a session pairing with WalletConnect v2. Code reference here.
-- `deactivate`: Disconnect your session from your wallet. Code reference here.
-- `connectEagerly`: Connect to v2 protocol on mount. Code reference here.
+- `URIListener`: Event listener for when v2 URI is created. Code reference [here](https://github.com/Uniswap/web3-react/blob/3781fe453c88c7cd6a0fd12c77192ef17dd07619/example/components/connectorCards/WalletConnectV2Card.tsx#L26).
+- `activate`: Create a session pairing with WalletConnect v2. Code reference [here](https://github.com/Uniswap/web3-react/blob/3781fe453c88c7cd6a0fd12c77192ef17dd07619/packages/walletconnect-v2/src/index.ts#L133).
+- `deactivate`: Disconnect your session from your wallet. Code reference [here](https://github.com/Uniswap/web3-react/blob/3781fe453c88c7cd6a0fd12c77192ef17dd07619/packages/walletconnect-v2/src/index.ts#L171).
+- `connectEagerly`: Connect to v2 protocol on mount. Code reference [here](https://github.com/Uniswap/web3-react/blob/3781fe453c88c7cd6a0fd12c77192ef17dd07619/packages/walletconnect-v2/src/index.ts#L113).
 
 Sample codes of reference can be found in:
 
