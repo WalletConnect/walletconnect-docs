@@ -1,5 +1,11 @@
 # Installation
 
+:::caution
+**The Web3Modal SDK is currently in Alpha and is not production-ready**.
+
+It's public API and associated documentation may still see significant and breaking changes.
+:::
+
 Kotlin implementation of Web3Modal for Android applications.
 
 Android Core ![Maven Central](https://img.shields.io/maven-central/v/com.walletconnect/android-core)
