@@ -87,7 +87,8 @@ module.exports = {
                 'advanced/migration-from-v1.x/wallets/wallet-checklist',
               ]
             },
-            'advanced/migration-from-v1.x/what-changed-from-v1.0'
+            'advanced/migration-from-v1.x/what-changed-from-v1.0',
+            'advanced/migration-from-v1.x/migration-faq',
           ]
         },
         'advanced/faq',
