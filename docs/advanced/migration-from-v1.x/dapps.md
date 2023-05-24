@@ -11,7 +11,7 @@ The followings steps describe the various paths for dapps to migrate to v2:
 7. [Dynamic](#dynamic)
 8. [solana-labs/wallet-adapter](#solana-labs/wallet-adapter)
 9. [web3-react](#web3-react)
-10. [connectkit](#connectkit)
+10. [Connectkit](#connectkit)
 
 ### web3-provider
 
@@ -92,8 +92,46 @@ If you are using `solana-labs/wallet-adapter`, this is already working on Wallet
 
 ### web3-react
 
-Web3-react has created their own modules for WalletConnect v2. You can test their playground [here](https://web3-react-mu.vercel.app/). In order to get started with the migration, we suggest upgrading your `@web3-react/types`, `@web3-react/store` and `@web3-react/core` as well as installing `@web3-react/walletconnect-v2`.
+[web3-react](https://github.com/Uniswap/web3-react) has created their own modules for WalletConnect v2. You can test their playground [here](https://web3-react-mu.vercel.app/) and read their example implementation [here](https://github.com/Uniswap/web3-react/blob/main/example/connectors/walletConnectV2.ts). In order to get started with the migration, we suggest upgrading your `@web3-react/types`, `@web3-react/store` and `@web3-react/core` as well as installing `@web3-react/walletconnect-v2`.
 
-After you have updated your
+After you have the respective packages, you will have to obtain a projectID from our Cloud Platform and add it your `.env` file.
+
+You will need to then initialize WalletConnect v2 as a connector as referenced [here.](https://github.com/Uniswap/web3-react/blob/main/example/components/connectorCards/WalletConnectV2Card.tsx)
+
+```typescript
+import { initializeConnector } from '@web3-react/core'
+import { WalletConnect as WalletConnectV2 } from '@web3-react/walletconnect-v2'
+
+import { MAINNET_CHAINS } from '../chains'
+
+const [mainnet, ...optionalChains] = Object.keys(MAINNET_CHAINS).map(Number)
+
+export const [walletConnectV2, hooks] = initializeConnector<WalletConnectV2>(
+  actions =>
+    new WalletConnectV2({
+      actions,
+      options: {
+        projectId: process.env.walletConnectProjectId,
+        chains: [mainnet],
+        optionalChains,
+        showQrModal: true
+      }
+    })
+)
+```
+
+Note: Be sure to test with several chains in order to complete your implementation for WalletConnect v2.
+
+Then use the `@web3-react/walletconnect-v2` package with the following methods in your components.
+
+- `URIListener`: Event listener for when v2 URI is created. Code reference here.
+- `activate`: Create a session pairing with WalletConnect v2. Code reference here.
+- `deactivate`: Disconnect your session from your wallet. Code reference here.
+- `connectEagerly`: Connect to v2 protocol on mount. Code reference here.
+
+Sample codes of reference can be found in:
+
+- [WalletConnectV2Card.tsx](https://github.com/Uniswap/web3-react/blob/main/example/components/connectorCards/WalletConnectV2Card.tsx)
+- [CardWithSelect.tsx](https://github.com/Uniswap/web3-react/blob/main/example/components/ConnectWithSelect.tsx)
 
 ### ConnectKit
