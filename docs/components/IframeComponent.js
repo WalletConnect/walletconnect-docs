@@ -5,15 +5,11 @@ const IframeComponent = () => {
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    height: '1200px',
-    width: '800px',
   };
 
   const iframeStyle = {
     width: '100%',
-    height: '100%',
-    maxWidth: '1200px',
-    maxHeight: '800px',
+    height: '100vh',
   };
 
   return (
