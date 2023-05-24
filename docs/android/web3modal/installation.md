@@ -25,6 +25,7 @@ allprojects {
 app/build.gradle.kts
 
 ```gradle
-implementation("com.walletconnect:android-core:release_version")
-implementation("com.walletconnect:web3modal:release_version")
+implementation(platform("com.walletconnect:android-bom:$BOM_VERSION"))
+implementation("com.walletconnect:android-core")
+implementation(project(":web3:modal"))
 ```

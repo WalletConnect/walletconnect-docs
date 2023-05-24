@@ -2,17 +2,17 @@
 
 ## Web3Modal SDK
 
-Web3Modal SDK allows easy integration of [Web3Modal](https://web3modal.com/) in a native Android application.
+The Web3Modal Android SDK allows for easy integration of [Web3Modal](https://web3modal.com/) in a native Android application.
 
 ## Web3Modal Client
 
-`Web3Modal` is object that interacts with the Web3Modal SDK.
+`Web3Modal` is a singleton that interacts with the Web3Modal SDK.
 
 ### Initialize
 
 ```kotlin
 val connectionType = ConnectionType.AUTOMATIC or ConnectionType.MANUAL
-val projectId = PROJECT_ID
+val projectId = "" // Get Project ID at https://cloud.walletconnect.com/
 val relayUrl = "relay.walletconnect.com"
 val serverUrl = "wss://$relayUrl?projectId=${projectId}"
 val appMetaData = Core.Model.AppMetaData(
@@ -20,10 +20,10 @@ val appMetaData = Core.Model.AppMetaData(
     description = "Kotlin Web3Modal Implementation",
     url = "kotlin.web3Modal.walletconnect.com",
     icons = listOf("https://raw.githubusercontent.com/WalletConnect/walletconnect-assets/master/Icon/Gradient/Icon.png"),
-    redirect = null
+    redirect = "kotlin-web3Modal://request"
 )
 
-CoreClient.initialize(relayServerUrl = serverUrl, connectionType = ConnectionType.AUTOMATIC, application = this, metaData = appMetaData)
+CoreClient.initialize(relayServerUrl = serverUrl, connectionType = connectionType, application = this, metaData = appMetaData)
 
 Web3Modal.initialize(
     init = Modal.Params.Init(CoreClient),
@@ -59,7 +59,7 @@ Web3Modal.initialize(
         }
     }
 ````
-**IMPORTANT**: Web3modal uses accompanist navigation material inside. `ModalBottomSheetLayout` should be imported from this package
+**IMPORTANT**: Web3modal uses accompanist navigation material inside. `ModalBottomSheetLayout` should be imported from [Accompanist Navigation Material](https://google.github.io/accompanist/navigation-material/)
 
 ````kotlin
     val config = Config.Connect(uri = "wc:7f6e504bfad60b485450578e05678ed3e8e8c4751d3c6160be17160d63ec90f9@2")
@@ -166,11 +166,12 @@ val optionalNamespaces: Map<String, Web3Modal.Model.Namespaces.Proposal> = mapOf
 val pairing: Core.Model.Pairing = /*Either an active or inactive pairing*/
 val connectParams = Web3Modal.Params.Connect(requiredNamespaces, optionalNamespaces, pairing)
 
-Web3Modal.connect(connectParams, 
-    { onSuccess -> 
+Web3Modal.connect(
+    connect = connectParams,
+    onSuccess = { 
         /* callback that letting you know that you have successfully initiated connecting */ 
     }, 
-    { error -> 
+    onError = { error -> 
         /* callback for error while trying to initiate a connection with a peer */ 
     }
 )
@@ -185,12 +186,12 @@ More about optional and required namespaces can be found [here](https://github.c
 val disconnectParams = Web3Modal.Params.Disconnect(topic)
 
 Web3Modal.disconnect(
-    disconnectParams,
-    { 
-        /* callback that letting you know that you have successfully disconnected */ 
+    disconnect = disconnectParams,
+    onSuccess = { 
+    /* callback that letting you know that you have successfully disconnected */ 
     },
-    { error -> 
-        /* callback for error while trying to disconnection with a peer */ 
+    onError = { error ->
+    /* callback for error while trying to disconnection with a peer */ 
     }
 )
 ````
@@ -205,12 +206,13 @@ val requestParams = Modal.Params.Request(
     chainId = /* Chain id */
 )
 
-Web3Modal.request(requestParams,
-    {
-        /* callback that letting you know that you have successful request */
+Web3Modal.request(
+    request = requestParams,
+    onSuccess = {
+    /* callback that letting you know that you have successful request */
     },
-    { error ->
-        /* callback for error */
+    onError = { error ->
+    /* callback for error */
     }
 )
 ````
@@ -236,6 +238,6 @@ a `Modal.Model.Session` object containing requestId, method, chainIs and params 
 
 
 #
-## Project ID
+## Obtain Project ID
 
-For the Project ID look at [Project ID](https://www.walletconnect.com).
+Head over to [WalletConnect Cloud](https://cloud.walletconnect.com/) to sign in or sign up. Create (or use an existing) project and copy its associated Project ID.
