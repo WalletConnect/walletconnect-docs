@@ -172,7 +172,7 @@ Note:
 - When customizing your configuration for advanced usage, it is important to include the `projectId` within your `WalletConnectConnector` object. You can learn more about it [here](https://wagmi.sh/react/connectors/walletConnect#projectid)
 - Make sure you have compatible versions of ethers and viem. Check your project's dependencies to ensure compatibility with ConnectKit.
 
-For a comprehensive example, refer to the provided sample code located at:
+For a comprehensive example, refer to the provided sample code:
 
 - [ConnectKit with Next.js](https://github.com/family/connectkit/tree/main/examples/nextjs)
 - [ConnectKit with React (Vite)](https://github.com/family/connectkit/tree/main/examples/vite)
