@@ -11,7 +11,7 @@ The followings steps describe the various paths for dapps to migrate to v2:
 7. [Dynamic](#dynamic)
 8. [solana-labs/wallet-adapter](#solana-labs/wallet-adapter)
 9. [web3-react](#web3-react)
-10. [Connectkit](#connectkit)
+10. [ConnectKit](#connectkit)
 
 ### web3-provider
 
@@ -135,3 +135,45 @@ Sample codes of reference can be found in:
 - [CardWithSelect.tsx](https://github.com/Uniswap/web3-react/blob/main/example/components/ConnectWithSelect.tsx)
 
 ### ConnectKit
+
+To migrate to WalletConnect V2 using ConnectKit, you need to upgrade `connectkit` and `wagmi` to the latest version
+
+Run the following command to install it using Yarn:
+
+```bash
+yarn add connectkit@^1.3.0 wagmi@^0.12.0
+```
+
+WalletConnect v2 requires a project ID to be set and included in the configuration.
+You can get a `projectID` from [WalletConnect Cloud](https://cloud.walletconnect.com/) for free.
+
+Create a new environment variable `WALLETCONNECT_PROJECT_ID` in your `.env` file and set it to your project ID.
+
+```bash
+WALLETCONNECT_PROJECT_ID=YOUR_PROJECT_ID
+```
+
+Next, update your code to include the `walletConnectProjectId` in `createClient`:
+
+```typescript
+...
+const client = createClient(
+  getDefaultClient({
+    ...
++    walletConnectProjectId: process.env.WALLETCONNECT_PROJECT_ID,
+    ...
+  }),
+);
+...
+```
+
+Note:
+
+- When customizing your configuration for advanced usage, it is important to include the `projectId` within your `WalletConnectConnector` object. You can learn more about it [here](https://wagmi.sh/react/connectors/walletConnect#projectid)
+- Make sure you have compatible versions of ethers and viem. Check your project's dependencies to ensure compatibility with ConnectKit.
+
+For a comprehensive example, refer to the provided sample code located at:
+
+- [ConnectKit with Next.js](https://github.com/family/connectkit/tree/main/examples/nextjs)
+- [ConnectKit with React (Vite)](https://github.com/family/connectkit/tree/main/examples/vite)
+- [ConnectKit with React (CRA)](https://github.com/family/connectkit/tree/main/examples/cra)
