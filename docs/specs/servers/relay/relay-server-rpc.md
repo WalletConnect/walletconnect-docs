@@ -186,7 +186,6 @@ Used when a server sends a subscription message to a client.
   "params" : {
     "id" : string,
     "data" : {
-      "messageId": string,
       "topic": string,
       "message": string,
       "publishedAt": number,
@@ -212,7 +211,6 @@ Response will include a flag `hasMore`. If true, the consumer should fetch again
 ```jsonc
 // ReceivedMessage
 {
-  "messageId": string,
   "topic": string,
   "message": string,
   "publishedAt": number,
@@ -368,8 +366,7 @@ Body:
   "whu": string, // webhook url
   "iat": string, // issued at
   "evt": {       // published message event
-    "status": string // either "accepted", "queued" or "delivered"
-    "messageId": string,
+    "status": string, // either "accepted", "queued" or "delivered"
     "topic": string,
     "message": string,
     "publishedAt": number,
