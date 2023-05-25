@@ -91,7 +91,6 @@ module.exports = {
             'advanced/migration-from-v1.x/migration-faq',
           ]
         },
-        'advanced/faq',
         'advanced/glossary',
         {
           type: 'category',
@@ -253,7 +252,8 @@ module.exports = {
               ]
             }
           ]
-        }
+        },
+        'advanced/faq',
       ]
     }
   ],
