@@ -60,7 +60,11 @@ module.exports = {
             {
               type: 'category',
               label: 'Polkadot',
-              items: ['web3modal/polkadot/dapp-integration-guide', 'web3wallet/polkadot/wallet-integration-guide']
+              items: [
+                'web3modal/polkadot/dapp-integration-guide',
+                'web3wallet/polkadot/wallet-integration-guide',
+                'web3wallet/polkadot/namespaces-guide',
+              ]
             }
           ]
         },
@@ -385,22 +389,14 @@ module.exports = {
               label: 'Auth',
               collapsible: true,
               collapsed: true,
-              items: [
-                'web/auth/installation',
-                'web/auth/dapp-usage',
-                'web/auth/wallet-usage'
-              ]
+              items: ['web/auth/installation', 'web/auth/dapp-usage', 'web/auth/wallet-usage']
             },
             {
               type: 'category',
               label: 'Push',
               collapsible: true,
               collapsed: true,
-              items: [
-                'web/push/installation',
-                'web/push/dapp-usage',
-                'web/push/wallet-usage'
-              ]
+              items: ['web/push/installation', 'web/push/dapp-usage', 'web/push/wallet-usage']
             },
             {
               type: 'category',
@@ -484,7 +480,11 @@ module.exports = {
           label: 'Sign',
           collapsible: true,
           collapsed: true,
-          items: ['android/sign/installation', 'android/sign/dapp-usage', 'android/sign/wallet-usage']
+          items: [
+            'android/sign/installation',
+            'android/sign/dapp-usage',
+            'android/sign/wallet-usage'
+          ]
         },
         {
           type: 'category',
@@ -679,9 +679,7 @@ module.exports = {
       label: 'Introduction',
       className: 'menu_outer_list',
       collapsible: false,
-      items: [
-        'reactnative/overview',
-      ]
+      items: ['reactnative/overview']
     },
     {
       type: 'category',
@@ -701,7 +699,11 @@ module.exports = {
           label: 'Web3Modal',
           collapsible: true,
           collapsed: true,
-          items: ['reactnative/web3modal/installation', 'reactnative/web3modal/dapp-usage', 'reactnative/web3modal/options']
+          items: [
+            'reactnative/web3modal/installation',
+            'reactnative/web3modal/dapp-usage',
+            'reactnative/web3modal/options'
+          ]
         }
       ]
     },
