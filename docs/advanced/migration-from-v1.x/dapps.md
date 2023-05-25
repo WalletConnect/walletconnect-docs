@@ -138,10 +138,27 @@ Sample codes of reference can be found in:
 
 To migrate to WalletConnect V2 using ConnectKit, you need to upgrade `connectkit` and `wagmi` to the latest version
 
+:::caution
+
+WalletConnect V2 is only supported in ConnectKit v1.3.0 and above
+
+:::
+
+:::info
+
+For version 1.4.0 and above, you need to remove `ethers` and install `viem` instead.
+
+```bash
+yarn remove ethers
+yarn add wagmi@latest viem@latest
+```
+
+:::
+
 Run the following command to install it using Yarn:
 
 ```bash
-yarn add connectkit@^1.3.0 wagmi@^0.12.0
+yarn add connectkit@^latest wagmi@^latest
 ```
 
 WalletConnect v2 requires a project ID to be set and included in the configuration.
@@ -169,6 +186,7 @@ const client = createClient(
 
 Note:
 
+- For a version specific upgrade, refer to the [official migration guide](https://docs.family.co/connectkit/migration-guide#migration-guide) by Family.
 - When customizing your configuration for advanced usage, it is important to include the `projectId` within your `WalletConnectConnector` object. You can learn more about it [here](https://wagmi.sh/react/connectors/walletConnect#projectid)
 - Make sure you have compatible versions of ethers and viem. Check your project's dependencies to ensure compatibility with ConnectKit.
 
