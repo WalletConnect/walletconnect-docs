@@ -186,7 +186,7 @@ Used to request push subscription to a peer through pairing topic. Response is e
 ```jsonc
 // Success result
 {
-  "subscriptionAuth": string
+  "subscriptionAuth": string,
   "subscriptionKey"
 }
 
