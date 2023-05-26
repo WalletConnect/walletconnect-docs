@@ -187,6 +187,7 @@ Used to request push subscription to a peer through pairing topic. Response is e
 // Success result
 {
   "subscriptionAuth": string
+  "subscriptionKey"
 }
 
 | IRN     |          |
