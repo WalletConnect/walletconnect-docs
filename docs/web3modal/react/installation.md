@@ -46,7 +46,7 @@ function App() {
 
 ## Add connect button
 
-Add our pre-built button component in your app to open/close connection and account modals. Alternatively, use your own button.
+Add our pre-built button component in your app to open/close connection and account modals.
 
 ```tsx
 import { Web3Button } from '@web3modal/react'
@@ -55,6 +55,8 @@ function HomePage() {
   return <Web3Button />
 }
 ```
+
+Alternatively, use your own button by calling `open()` and `close()` on [`useWeb3Modal()`](./hooks.md#useweb3modal).
 
 ## Use wagmi hooks
 
