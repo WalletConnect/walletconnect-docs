@@ -21,7 +21,7 @@ Read more about Sync API: https://docs.walletconnect.com/2.0/specs/clients/core/
 Once the wallet returns us the signature we must convert it into a BIP-32 seed. For example:
 
 ```js
-message = "I authorize this app to sync my account: eip155:1:0xCe07bbC8719553a0133770Cd2cf7e823cC1d2485\n\nRead more about Sync API: https://docs.walletconnect.com/2.0/specs/clients/core/sync"
+message = "I authorize this app to sync my account: eip155:1:0xCe07bbC8719553a0133770Cd2cf7e823cC1d2485\n\nRead more about it here: https://walletconnect.com/faq"
 signature = "0xfbbdc863d63c02692dc20bf61415dbd68e531882fd5725c4349df4f2e294307b2b5acc8751e12b1bf65e4c35128fa917a6200e3855c12b5e967fe2b26dc9f6031c"
 ```
 
