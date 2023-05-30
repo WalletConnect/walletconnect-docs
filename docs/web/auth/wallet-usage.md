@@ -40,14 +40,16 @@ authClient.on("auth_request", async ({ id, params }) => {
   // instead of automatically responding.
   const signature = await wallet.signMessage(params.message);
 
-  await authClient.respond({
-    id: id,
-    signature: {
-      s: signature,
-      t: "eip191",
+  await authClient.respond(
+    {
+      id: id,
+      signature: {
+        s: signature,
+        t: "eip191",
+      }
     },
-    iss,
-  });
+    iss
+  );
 });
 ```
 
