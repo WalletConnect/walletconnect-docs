@@ -8,8 +8,6 @@ Every project that uses WalletConnect SDKs needs to obtain a Project ID from [Wa
 
 ## Add Packages
 
-Install the NPM package.
-
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
