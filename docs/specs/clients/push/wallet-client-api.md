@@ -28,7 +28,7 @@ abstract class WalletClient {
 
   // query all active subscriptions
   public abstract getActiveSubscriptions(params: {
-    account: string
+    account?: string
   }): Promise<Record<string, PushSubscription>>;
 
   // get all messages for a subscription
