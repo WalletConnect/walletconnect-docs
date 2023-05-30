@@ -15,14 +15,14 @@ In order for us to get the same signature for all clients we must have a fixed m
 ```sh
 I authorize this app to sync my account:  <CAIP_10_ACCOUNT>
 
-Read more about Sync API: https://docs.walletconnect.com/2.0/specs/clients/core/sync
+Read more about it here: https://walletconnect.com/faq
 ```
 
 Once the wallet returns us the signature we must convert it into a BIP-32 seed. For example:
 
 ```js
-message = "I authorize this app to sync my account: eip155:1:0xCe07bbC8719553a0133770Cd2cf7e823cC1d2485\n\nRead more about it here: https://walletconnect.com/faq"
-signature = "0xfbbdc863d63c02692dc20bf61415dbd68e531882fd5725c4349df4f2e294307b2b5acc8751e12b1bf65e4c35128fa917a6200e3855c12b5e967fe2b26dc9f6031c"
+message = "I authorize this app to sync my account: eip155:1:0x51352a3A0c7168C57e3831B6812B005B120645C6\n\nRead more about it here: https://walletconnect.com/faq"
+signature = "0xee6567bf0763ce704d4cc3ec919cb74bbb484222e19ad72f51072fbdc2af7add063c00ac334a510c51fd25daf14f87337c23a81d45ac4f1dde469a0d8dc5724b1b"
 ```
 
 ### Converting a signature to a seed
@@ -32,8 +32,8 @@ The signature can be encoded differently depending on the namespace the blockcha
 We take the resulting utf8 bytes from the signature and we hash it using SHA-256 to obtain an entropy with 32 bytes. For example:
 
 ```js
-signature = "0xfbbdc863d63c02692dc20bf61415dbd68e531882fd5725c4349df4f2e294307b2b5acc8751e12b1bf65e4c35128fa917a6200e3855c12b5e967fe2b26dc9f6031c"
-entropy = "0a0801cec7d99e78ed8c9a9bfda87bdf7f59e93b377be4e4eb58883be943668a"
+signature = "0xee6567bf0763ce704d4cc3ec919cb74bbb484222e19ad72f51072fbdc2af7add063c00ac334a510c51fd25daf14f87337c23a81d45ac4f1dde469a0d8dc5724b1b"
+entropy = "98363a603bb3aeb12b2a1686e54190822ca39ba6593aa512679630ee42f77dc4"
 ```
 
 Using the derived entropy from the signature we will deterministically generate the seed for our HD wallet to coordinate keys across clients.
@@ -69,8 +69,8 @@ To communicate state changes between all clients we will publish messages under 
 ```sh
 store_name = "my-user-profile"
 store_path = "m/77'/0'/0/1836658037/1936028205/1886547814/6909029"
-store_key = "3b17151f7bb5d4421e0c647f2b59eae81e4bf3a5458a3bbd8169d8a70132bbaf"
-store_topic = "9a07815209f63b80e9af08e5922e70802089989aee3b991a102cf28efd4b984f"
+store_key = "02fe412cf77b84f7e1dcac2ac036ba5da857ef6c683e6e93a39005734cb289f4"
+store_topic = "7a73cffc9951264511549e64222a612a27199b01d30fa952b708bcafce96ea3f"
 ```
 
 There will be only two operations for state changes: setting values and deleting values. Both the keys and values are restricted to strings. The state can be overriden or "updated" by simplying setting a different value with the same key.
