@@ -732,6 +732,7 @@ module.exports = {
           collapsible: true,
           collapsed: true,
           items: [
+            'reactnative/web3modal/about',
             'reactnative/web3modal/installation',
             'reactnative/web3modal/dapp-usage',
             'reactnative/web3modal/options'

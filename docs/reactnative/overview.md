@@ -14,7 +14,7 @@ url: `/2.0/reactnative/web3wallet/Installation`
 {
 name: "Web3Modal",
 description: "For Dapps. Use Web3Modal to interact with Wallets.",
-url: `/2.0/reactnative/web3modal/Installation`
+url: `/2.0/reactnative/web3modal/about`
 }
 ]}
 />
@@ -43,7 +43,3 @@ url: `https://github.com/WalletConnect/react-native-examples/tree/main/dapps/v2E
 },
 ]}
 />
-
-<!-- ## Obtain Project ID
-
-Head over to [WalletConnect Cloud](https://cloud.walletconnect.com/) to sign in or sign up. Create (or use an existing) project and copy its associated Project ID. We will need this in a later step. -->
