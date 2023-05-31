@@ -20,7 +20,7 @@ If you need assistance at any point during development, please feel free to reac
 - Use our provider to interact with chains
 - Expo support
 
-## Upcoming
+## Upcoming features
 - Account View with balance
 - Chain selection
 - Use own storage manager
