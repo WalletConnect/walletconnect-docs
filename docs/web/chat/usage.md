@@ -17,7 +17,7 @@ import { Core } from "@walletconnect/core";
 import { SyncClient, SyncStore } from "@walletconnect/sync-client";
 import { ChatClient } from "@walletconnect/chat-client";
 
-// Initialize core separely to allow sharing it between sync and chat
+// Initialize core separately to allow sharing it between sync and chat
 const core = new Core({
   projectId: "<YOUR PROJECT ID>",
 })
