@@ -6,13 +6,24 @@
 Its public API and associated documentation may still see breaking changes.
 :::
 
-## Prerequisites
+## Enabling Push Notifications for your Dapp
 
+In order to enable push notifications for your dapp, you will need to:
+
+1. Sign up to [WalletConnect Cloud](https://cloud.walletconnect.com) and create a project. This will also provide you with a Project ID, which is required for all WalletConnect SDKs.
+2. On your project's page, navigate to the `Explorer` tab and fill out the required fields, including the homepage URL of your dapp.
+3. Click `Save` to validate and save your project's details.
+4. Next, navigate to the `Settings` tab.
+5. Under `Push SDK`, download both the `did.json` the `wc-push-config.json` files that have been preconfigured based on your dapp's homepage URL.
+6. Host both files in your dapp's `/.well-known` directory, so that they are accessible at `/.well-known/did.json` and `/.well-known/wc-push-config.json` respectively.
+
+## Usage
+
+:::info
 The **`PushDappClient` requires an existing pairing** in order to send a push subscription request to the wallet.
 This means that the `PushDappClient` should be used alongside the [Sign SDK](../sign/installation.md) or the
 [Auth SDK](../auth/installation.md), via the [Shared Core](../guides/shared-core.md) setup.
-
-## Usage
+:::
 
 **1. Initialize your WalletConnect Core, using [your Project ID](../../cloud/relay.md), and pass it to the SDK clients**
 

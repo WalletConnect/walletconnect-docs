@@ -6,12 +6,12 @@
 Its public API and associated documentation may still see breaking changes.
 :::
 
-## Prerequisites
+## Usage
 
+:::info
 The **`PushWalletClient` requires an existing pairing** in order to receive a push subscription request from a dapp.
 This means that the `PushWalletClient` should be used alongside the [Web3Wallet SDK](../web3wallet/installation.md), via the [Shared Core](../guides/shared-core.md) setup.
-
-## Usage
+:::
 
 **1. Initialize your WalletConnect Core, using [your Project ID](../../cloud/relay.md), and pass it to the SDK clients**
 
