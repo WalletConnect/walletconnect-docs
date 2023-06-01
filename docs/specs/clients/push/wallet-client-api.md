@@ -27,7 +27,9 @@ abstract class WalletClient {
   }): Promise<boolean>;
 
   // query all active subscriptions
-  public abstract getActiveSubscriptions(): Promise<Record<string, PushSubscription>>;
+  public abstract getActiveSubscriptions(params: {
+    account?: string
+  }): Promise<Record<string, PushSubscription>>;
 
   // get all messages for a subscription
   public abstract getMessageHistory(params: { topic: string }): Promise<Record<number, PushMessageRecord>>
