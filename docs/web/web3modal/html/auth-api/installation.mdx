@@ -1,0 +1,51 @@
+import AboutAuthApi from '../../_partials/auth-api/about.mdx'
+import ObtainProjectIdPartial from '../../_partials/obtainProjectId.mdx'
+
+# Installation
+
+<AboutAuthApi />
+
+## Obtain Project ID
+
+<ObtainProjectIdPartial />
+
+## Add packages
+
+```bash npm2yarn
+npm install @web3modal/auth-html
+```
+
+## Implementation
+
+Start by initializing `Web3ModalAuth` in your app.
+
+```js
+import { Web3ModalAuth } from '@web3modal/auth-html'
+
+const web3Modal = new Web3ModalAuth({
+  projectId,
+  metadata: {
+    name: 'Web3Modal',
+    description: 'Web3Modal',
+    url: 'web3modal.com',
+    icons: ['https://walletconnect.com/_next/static/media/logo_mark.84dd8525.svg']
+  }
+})
+```
+
+## Call sign in method
+
+Call signIn method to open the modal and start user authentication.
+
+```html
+<button id="signin-button">Sign in with Wallet</button>
+```
+
+```js
+async function onSignIn() {
+  const data = await web3Modal.signIn({ statement: 'Connect to Web3Modal' })
+  console.info(data)
+}
+
+document.getElementById('signin-button').addEventListener('click', onSignIn)
+```
