@@ -122,3 +122,73 @@ true
 | ------- | -------- |
 | TTL     | 86400    |
 | Tag     | 4005     |
+```
+
+### wc_pushSubscribe
+
+Used to subscribe push subscription to a peer through topic S. Response is expected on the same topic.
+
+**Request**
+
+```jsonc
+// wc_pushSubscribe params
+{
+  "subscriptionAuth": string
+}
+
+| IRN     |          |
+| ------- | -------- | 
+| TTL     | 86400    |
+| Tag     | 4006     |
+
+```
+
+**Response**
+
+```jsonc
+// Success result
+true
+
+| IRN     |          |
+| ------- | -------- |
+| TTL     | 86400    |
+| Tag     | 4007     |
+```
+
+
+### wc_pushUpdate
+
+Used to update a push subscription with a new push subscription scope, replacing an existing authorized push subscription.
+
+Push subscription id is the sha256 hash of the serialized did-jwt of subscriptionAuth string.
+
+**Note:** this method is atomically performing two methods (wc_pushDelete + wc_pushSubscribe)
+
+**Request**
+
+```jsonc
+// wc_pushUpdate params
+{
+  "replacesId": string, // previous subscription id
+  "subscriptionAuth": string // new subscription authorized
+}
+
+| IRN     |          |
+| ------- | -------- | 
+| TTL     | 86400    |
+| Tag     | 4008     |
+
+```
+
+**Response**
+
+```jsonc
+// Success result
+true
+
+| IRN     |          |
+| ------- | -------- |
+| TTL     | 86400    |
+| Tag     | 4009     |
+```
+

@@ -215,7 +215,7 @@ AuthClient.respond(Auth.Params.Respond.Result(requestId, signature, issuer)) { e
 
 //Web3Wallet
 val signature = CacaoSigner.sign(message, privateKey, SignatureType.EIP191)
-Web3Wallet.respondAuthRequest(Wallet.Params.AuthRequestResponse(requestId, signature, issuer)) { error -> }
+Web3Wallet.respondAuthRequest(Wallet.Params.AuthRequestResponse.Result(requestId, signature, issuer)) { error -> }
 ```
 
 ### Message formatting
