@@ -28,7 +28,7 @@ For usage with typescript, make sure you are using Typescript version `5.0.0` or
 - Ensure you have a `projectId` from WalletConnect Cloud. You can get one for free [here](https://cloud.walletconnect.com/)
 - Upgrade `@walletconnect/ethereum-provider` from `1.x.x` to `2.x.x`.
 
-Before you would have to pass in an `infuraId` like so:
+Previously, you would have passed in an `infuraId` like:
 
 ```typescript
 import WalletConnectProvider from '@walletconnect/ethereum-provider'
