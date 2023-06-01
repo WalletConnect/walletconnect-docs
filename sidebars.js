@@ -21,7 +21,11 @@ module.exports = {
           type: 'category',
           label: 'Migration from v1.x',
           items: [
-            'advanced/migration-from-v1.x/overview',
+            {
+              type: 'doc',
+              id: 'advanced/migration-from-v1.x/overview',
+              label: 'Overview',
+            },
             'advanced/migration-from-v1.x/dapps',
             {
               type: 'category',
