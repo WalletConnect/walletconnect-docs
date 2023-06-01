@@ -27,11 +27,6 @@ In this repository, we document and discuss features that are currently under de
       url: `/2.0/specs/clients/chat`
     },
     {
-      name: "Sync API",
-      description: "Sync allows a wallet user to sync private data between multiple clients using a single signature from an account.",
-      url: `/2.0/specs/clients/sync`
-    },
-    {
       name: "Core API",
       description: "Core API consolidates several core modules that are shared between all other high-level APIs.",
       url: `/2.0/specs/clients/core`
@@ -49,18 +44,23 @@ In this repository, we document and discuss features that are currently under de
     {
       name: "Echo Server",
       description: "Echo server observes incoming messages on the behalf of a Client through a webhook on the Relay Server.",
-      url: `/2.0/specs/servers/echo`
+      url: `/2.0/specs/servers/echo/spec`
     },
     {
       name: "Cast Server",
       description: "Cast server tracks encryption keys on the behalf of a client and publishes messages to the Relay Server.",
-      url: `/2.0/specs/servers/cast`
+      url: `/2.0/specs/servers/cast/cast-server-api`
     },
     {
       name: "History Server",
       description: "History server persists Relay messages indefinitely on the behalf of a client through a webhook.",
       url: `/2.0/specs/servers/history`
     },
+    {
+      name: "Verify Server",
+      description: "Verify server is used to authenticate the origin of an attestation id which is related to a JSON-RPC payload sent.",
+      url: `/2.0/specs/servers/verify`
+    }
   ]}
 />
 

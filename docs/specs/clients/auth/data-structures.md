@@ -55,6 +55,7 @@ type Response = Cacao | ErrorResponse;
 ```typescript
 interface PendingRequest {
   id: number;
+  pairingTopic: String;
   payloadParams: PayloadParams;
 }
 ```
@@ -123,5 +124,19 @@ interface ErrorResponse {
     code: number;
     message: string;
   };
+}
+```
+
+## Verify Context
+
+Verify Context is appended to Auth Requests to provide metadata that was constructed internally by the client that is relevant to the specific request
+
+```jsonc
+{
+  "verified": {
+    "origin": string,
+    "validation": "UNKNOWN" | "VALID" | "INVALID",
+    "verifyUrl": string
+  }
 }
 ```

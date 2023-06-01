@@ -2,7 +2,7 @@
 
 ## projectId (required)
 
-Your project’s unique identifier that can be obtained at [cloud.walletconnect.com](https://cloud.walletconnect.com). Enables following functionalities within Web3Modal: wallet and chain logos, optional WalletConnect RPC, support for all wallets from [explorer.walletconnect.com](https://explorer.walletconnect.com) and WalletConnect v2 support. Defaults to `undefined`.
+Your project’s unique identifier that can be obtained at [cloud.walletconnect.com](https://cloud.walletconnect.com). Enables following functionalities within Web3Modal: wallet and chain logos, optional WalletConnect RPC, support for all wallets from our [Explorer](https://walletconnect.com/explorer) and WalletConnect v2 support. Defaults to `undefined`.
 
 ```ts
 projectId: string
@@ -44,7 +44,7 @@ desktopWallets: [
 
 ## walletImages (optional)
 
-Array of wallet id's and their logo mappings. This will override default logos. Id's in this case can be: [explorer.walletconnect.com](https://explorer.walletconnect.com) id's, wallet id's you provided in `mobileWallets` or `desktopWallets` and [Wagmi](https://wagmi.sh) connector id's. Defaults to `undefined`.
+Array of wallet id's and their logo mappings. This will override default logos. Id's in this case can be: [Explorer](https://walletconnect.com/explorer) id's, wallet id's you provided in `mobileWallets` or `desktopWallets` and [Wagmi](https://wagmi.sh) connector id's. Defaults to `undefined`.
 
 ```ts
 walletImages: {
@@ -77,36 +77,47 @@ tokenImages: {
 
 ## defaultChain (optional)
 
-Before the user establishes a connection, the default wagmi chain can be set. This defaults to the `mainnet` if configured, or the first chain in the array of all available wagmi chains. Once the user is connected, utilize the network actions provided by wagmi.
+Before the user establishes a connection, the default wagmi chain can be set prompting user to switch in their wallet if they were on a different one. Defaults to `undefined`.
 
 ```ts
 defaultChain: polygon
 ```
 
-## explorerAllowList (optional)
+## tokenContracts (optional)
 
-Some wallet data in Web3Modal is fetched from our explorer api [explorer.walletconnect.com](https://explorer.walletconnect.com/?type=wallet). You can define an allow list only for the wallets that you want to be shown. Allow list is an array of wallet id's. You can get / copy these id's from the explorer link mentioned before. Defaults to `undefined`.
+Allows to override default token(s) address for each chain to show custom balances in account view. Defaults to `undefined`.
 
 ```ts
-explorerAllowList: [
-  // rainbow
-  '1ae92b26df02f0abca6304df07debccd18262fdf5fe82daa81593582dac9a369',
-  // trust
-  '4622a2b2d6af1c9844944291e5e7351a6aa24cd7b23099efac1b2fd875da31a0'
-]
+tokenContracts: {
+  1: '0x1f9840a85d5af5bf1d1762f925bdaddc4201f984',
+  137: '0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174'
+}
 ```
 
-## explorerDenyList (optional)
+## explorerRecommendedWalletIds (optional)
 
-Some wallet data in Web3Modal is fetched from our explorer api [explorer.walletconnect.com](https://explorer.walletconnect.com/?type=wallet). You can define a deny list for the wallets that you want to be excluded. Deny list is an array of wallet id's. You can get / copy these id's from the explorer link mentioned before. Defaults to undefined.
+Allows to override default recommended wallets that are fetched from our [Explorer API](https://walletconnect.com/explorer?type=wallet). You can define an array of wallet id's you'd like to prioritise (order is respected). You can get / copy these id's from the explorer link mentioned before. If you want to completely disable recommended wallets, you can set this option to `NONE`. Defaults to `undefined`.
 
 ```ts
-explorerDenyList: [
-  // rainbow
+explorerRecommendedWalletIds: [
   '1ae92b26df02f0abca6304df07debccd18262fdf5fe82daa81593582dac9a369',
-  // trust
   '4622a2b2d6af1c9844944291e5e7351a6aa24cd7b23099efac1b2fd875da31a0'
 ]
+// -- or -- //
+explorerRecommendedWalletIds: 'NONE'
+```
+
+## explorerExcludedWalletIds (optional)
+
+Allows to exclude wallets that are fetched from our [Explorer API](https://walletconnect.com/explorer?type=wallet). You can define an array of wallet id's you'd like to exclude. You can get / copy these id's from the explorer link mentioned before. If you want to exclude all wallets, you can set this option to `ALL`, however if `explorerRecommendedWalletIds` were defined, they will still be fetched. Defaults to `undefined`.
+
+```ts
+explorerExcludedWalletIds: [
+  '1ae92b26df02f0abca6304df07debccd18262fdf5fe82daa81593582dac9a369',
+  '4622a2b2d6af1c9844944291e5e7351a6aa24cd7b23099efac1b2fd875da31a0'
+]
+// -- or -- //
+explorerExcludedWalletIds: 'ALL'
 ```
 
 ## termsOfServiceUrl (optional)
@@ -143,7 +154,7 @@ enableAccountView: false
 
 ## enableExplorer (optional)
 
-Option to enable or disable wallet fetching from [explorer.walletconnect.com](https://explorer.walletconnect.com/?type=wallet). Defaults to `true`.
+Option to enable or disable wallet fetching from our [Explorer](https://walletconnect.com/explorer?type=wallet). Defaults to `true`.
 
 ```ts
 enableExplorer: false

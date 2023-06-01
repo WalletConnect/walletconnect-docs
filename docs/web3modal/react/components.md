@@ -35,3 +35,14 @@ import { Web3NetworkSwitch } from '@web3modal/react'
 
 return <Web3NetworkSwitch />
 ```
+
+## W3mQrCode
+
+WalletConnect styled QRCode that allows for an image in the center
+
+```tsx
+import { W3mQrCode } from '@web3modal/react'
+
+return <W3mQrCode size={200} imageUrl="url/to/image" uri="data" />
+```
+

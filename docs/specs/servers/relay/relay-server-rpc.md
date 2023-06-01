@@ -14,7 +14,9 @@ The following definitions are shared concepts across all JSON-RPC methods for th
 - **tag** - (uint32 - 4 bytes) a label that identifies what type of message is sent based on the rpc method used.
 - **id** - (hex string - 32 bytes) a unique identifier for each subscription targeting a topic.
 
-## Publish payload
+
+## Methods
+### Publish payload
 
 Used when a client publishes a message to a server.
 
@@ -40,7 +42,38 @@ Used when a client publishes a message to a server.
 }
 ```
 
-## Subscribe payload
+### Batch Publish payload
+
+Used when a client publishes multiple messages to a server.
+
+```jsonc
+// PublishedMessage
+{
+  "topic" : string,
+  "message" : string,
+  "ttl" : seconds,
+  "tag" : number,
+}
+
+// Request (client->server)
+{
+  "id" : "1",
+  "jsonrpc": "2.0",
+  "method": "irn_batchPublish",
+  "params" : {
+    "messages": PublishedMessage[]
+  }
+}
+
+// Response (server->client)
+{
+  "id" : "1",
+  "jsonrpc": "2.0",
+  "result": true
+}
+```
+
+### Subscribe payload
 
 Used when a client subscribes a given topic.
 
@@ -63,7 +96,30 @@ Used when a client subscribes a given topic.
 }
 ```
 
-## Unsubscribe payload
+### Batch Subscribe payload
+
+Used when a client subscribes multiple topics.
+
+```jsonc
+// Request (client->server)
+{
+  "id" : "1",
+  "jsonrpc": "2.0",
+  "method": "irn_batchSubscribe",
+  "params" : {
+    "topics" : string[]
+  }
+}
+
+// Response (server->client)
+{
+  "id" : "1",
+  "jsonrpc": "2.0",
+  "result": string[] // array of subscriptionId's
+}
+```
+
+### Unsubscribe payload
 
 Used when a client unsubscribes a given topic.
 
@@ -87,7 +143,37 @@ Used when a client unsubscribes a given topic.
 }
 ```
 
-## Subscription payload
+### Batch Unsubscribe payload
+
+Used when a client unsubscribes a given topic.
+
+```jsonc
+// Subscription
+{
+  "topic": string,
+  "id": string
+}
+
+// Request (client->server)
+{
+  "id" : "1",
+  "jsonrpc": "2.0",
+  "method": "irn_batchUnsubscribe",
+  "params" : {
+    "subscriptions": Subscription[]
+  }
+}
+
+// Response (server->client)
+{
+  "id" : "1",
+  "jsonrpc": "2.0",
+  "result": true
+}
+```
+
+
+### Subscription payload
 
 Used when a server sends a subscription message to a client.
 
@@ -102,8 +188,8 @@ Used when a server sends a subscription message to a client.
     "data" : {
       "topic" : string,
       "message": string,
-      "tag": Int64,
-      "publishedAt": Int64
+      "publishedAt: number,
+      "tag": number
     }
   }
 }
@@ -113,6 +199,80 @@ Used when a server sends a subscription message to a client.
   "id" : "1",
   "jsonrpc": "2.0",
   "result": true
+}
+```
+
+### Fetch Messsages payload
+
+Used when a client wants to fetch all undelivered messages matching a single topic before subscribing.
+
+Response will include a flag `hasMore`. If true, the consumer should fetch again to get the rest of the messages. If false, then all messages have been delivered.
+
+```jsonc
+// ReceivedMessage
+{
+  "topic": string,
+  "message": string,
+  "publishedAt": number,
+  "tag": number
+}
+
+// Request (client->server)
+{
+  "id" : "1",
+  "jsonrpc": "2.0",
+  "method": "irn_fetchMessages",
+  "params" : {
+    "topic": string
+  }
+}
+
+// Response (server->client)
+{
+  "id" : "1",
+  "jsonrpc": "2.0",
+  "result": {
+    "messages": ReceivedMessage[],
+    "hasMore": boolean
+  }
+}
+```
+
+
+
+### Batch Fetch Messsages payload
+
+Used when a client wants to fetch all undelivered messages matching multiple topics before subscribing.
+
+Response will include a flag `hasMore`. If true, the consumer should fetch again to get the rest of the messages. If false, then all messages have been delivered.
+
+```jsonc
+// ReceivedMessage
+{
+  "topic": string,
+  "message": string,
+  "publishedAt": number,
+  "tag": number
+}
+
+// Request (client->server)
+{
+  "id" : "1",
+  "jsonrpc": "2.0",
+  "method": "irn_batchFetchMessages",
+  "params" : {
+    "topics": string[]
+  }
+}
+
+// Response (server->client)
+{
+  "id" : "1",
+  "jsonrpc": "2.0",
+  "result": {
+    "messages": ReceivedMessage[],
+    "hasMore": boolean
+  }
 }
 ```
 
