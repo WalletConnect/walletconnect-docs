@@ -46,7 +46,7 @@ import { EthereumProvider } from '@walletconnect/ethereum-provider'
 const provider = await EthereumProvider.init({
   projectId: 'WALLETCONNECT_PROJECT_ID', // required
   chains: [1], // required
-  showQrCode: true // requires @web3modal/standalone
+  showQrModal: true // requires @web3modal/standalone
 })
 ```
 
