@@ -50,7 +50,12 @@ const provider = await EthereumProvider.init({
 })
 ```
 
-- Install `@web3modal/standalone` if you want to use the QR Code modal. You can find more information about Web3Modal [here](https://docs.walletconnect.com/2.0/web3modal/about).
+- Install `@web3modal/standalone` if you want to use the QR Code modal.
+
+For more documentation about implementation with Web3Modal, refer to the following:
+
+- [ethereum-provider with Web3Modal (React)](https://docs.walletconnect.com/2.0/web/web3modal/react/ethereum-provider/installation)
+- [ethereum-provider with Web3modal (HTML)](https://docs.walletconnect.com/2.0/web/web3modal/html/ethereum-provider/installation)
 
 ### Web3Modal v1.0
 
