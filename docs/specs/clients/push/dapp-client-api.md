@@ -10,14 +10,8 @@ abstract class DappClient {
   // propose push subscription
   public abstract propose(params: { account: string, scope: string[], pairingTopic: string }): Promise<{ id }>;
 
-  // send push notification message
-  public abstract notify(params: { topic: string, message: PushMessage }): Promise<void>
-
   // query all active subscriptions
   public abstract getActiveSubscriptions(): Promise<Record<string, PushSubscription>>;
-
-  // delete active subscription
-  public abstract deleteSubscription(params: { topic: string }): Promise<void>;
 
   // ---------- Events ----------------------------------------------- //
 

@@ -13,11 +13,27 @@ For an example implementation, please refer to our [react-wallet-chat example](h
 ### Initialize your WalletConnect ChatClient, using [your Project ID](../../cloud/relay.md)
 
 ```javascript
+import { Core } from "@walletconnect/core";
+import { SyncClient, SyncStore } from "@walletconnect/sync-client";
 import { ChatClient } from "@walletconnect/chat-client";
 
-const chatClient = await ChatClient.init({
+// Initialize core separately to allow sharing it between sync and chat
+const core = new Core({
   projectId: "<YOUR PROJECT ID>",
-  keyserverUrl: "<YOUR KEYSERVER URL: eg: https://keys.walletconnect.com"
+})
+
+// SyncClient enables syncing data across devices
+const syncClient = await SyncClient.init({
+  projectId: "<YOUR PROJECT ID>",
+  core,
+})
+
+const chatClient = await ChatClient.init({
+  core,
+  projectId: "<YOUR PROJECT ID>",
+  keyserverUrl: "<YOUR KEYSERVER URL: eg: https://keys.walletconnect.com",
+  syncClient,
+  SyncStoreController: SyncStore,
 });
 ```
 
