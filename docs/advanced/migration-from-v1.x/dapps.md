@@ -19,7 +19,38 @@ If you are using `@walletconnect/web3-provider`, we stopped supporting this prov
 
 ### ethereum-provider
 
-If you are using `@walletconnect/ethereum-provider`, you can simply change the version number in your `package.json` to the latest which you can check on NPM [here](https://npmjs.com/package/@walletconnect/ethereum-provider).
+:::caution
+
+For usage with typescript, make sure you are using Typescript version `5.0.0` or higher.
+
+:::
+
+- Ensure you have a `projectId` from WalletConnect Cloud. You can get one for free [here](https://cloud.walletconnect.com/)
+- Upgrade `@walletconnect/ethereum-provider` from `1.x.x` to `2.x.x`.
+
+Before you would have to pass in an `infuraId` like so:
+
+```typescript
+import WalletConnectProvider from '@walletconnect/ethereum-provider'
+
+const web3Provider = new WalletConnectProvider({
+  infuraId: 'INFURA_ID'
+})
+```
+
+The new implementation requires `projectId` and `chains` instead. Here is an example of the new initialization:
+
+```typescript
+import { EthereumProvider } from '@walletconnect/ethereum-provider'
+
+const provider = await EthereumProvider.init({
+  projectId: 'WALLETCONNECT_PROJECT_ID', // required
+  chains: [1], // required
+  showQrCode: true // requires @web3modal/standalone
+})
+```
+
+- Install `@web3modal/standalone` if you want to use the QR Code modal. You can find more information about Web3Modal [here](https://docs.walletconnect.com/2.0/web3modal/about).
 
 ### Web3Modal v1.0
 
