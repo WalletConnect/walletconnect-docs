@@ -19,7 +19,38 @@ If you are using `@walletconnect/web3-provider`, we stopped supporting this prov
 
 ### ethereum-provider
 
-If you are using `@walletconnect/ethereum-provider`, you can simply change the version number in your `package.json` to the latest which you can check on NPM [here](https://npmjs.com/package/@walletconnect/ethereum-provider).
+:::caution
+
+For usage with typescript, make sure you are using Typescript version `5.0.0` or higher.
+
+:::
+
+- Ensure you have a `projectId` from WalletConnect Cloud. You can get one for free [here](https://cloud.walletconnect.com/)
+- Upgrade `@walletconnect/ethereum-provider` from `1.x.x` to `2.x.x`.
+
+Previously, you would have passed in an `infuraId` like:
+
+```typescript
+import WalletConnectProvider from '@walletconnect/ethereum-provider'
+
+const web3Provider = new WalletConnectProvider({
+  infuraId: 'INFURA_ID'
+})
+```
+
+The new implementation requires `projectId` and `chains` instead. Here is an example of the new initialization:
+
+```typescript
+import { EthereumProvider } from '@walletconnect/ethereum-provider'
+
+const provider = await EthereumProvider.init({
+  projectId: 'WALLETCONNECT_PROJECT_ID', // required
+  chains: [1], // required
+  showQrCode: true // requires @web3modal/standalone
+})
+```
+
+- Install `@web3modal/standalone` if you want to use the QR Code modal. You can find more information about Web3Modal [here](https://docs.walletconnect.com/2.0/web3modal/about).
 
 ### Web3Modal v1.0
 
@@ -138,10 +169,27 @@ Sample codes of reference can be found in:
 
 To migrate to WalletConnect V2 using ConnectKit, you need to upgrade `connectkit` and `wagmi` to the latest version
 
+:::caution
+
+WalletConnect V2 is only supported in ConnectKit v1.3.0 and above
+
+:::
+
+:::info
+
+For version 1.4.0 and above, you need to remove `ethers` and install `viem` instead.
+
+```bash
+yarn remove ethers
+yarn add wagmi@latest viem@latest
+```
+
+:::
+
 Run the following command to install it using Yarn:
 
 ```bash
-yarn add connectkit@^1.3.0 wagmi@^0.12.0
+yarn add connectkit@^latest wagmi@^latest
 ```
 
 WalletConnect v2 requires a project ID to be set and included in the configuration.
@@ -169,6 +217,7 @@ const client = createClient(
 
 Note:
 
+- For a version specific upgrade, refer to the [official migration guide](https://docs.family.co/connectkit/migration-guide#migration-guide) by Family.
 - When customizing your configuration for advanced usage, it is important to include the `projectId` within your `WalletConnectConnector` object. You can learn more about it [here](https://wagmi.sh/react/connectors/walletConnect#projectid)
 - Make sure you have compatible versions of ethers and viem. Check your project's dependencies to ensure compatibility with ConnectKit.
 
