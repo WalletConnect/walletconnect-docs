@@ -43,11 +43,11 @@ To check more in details go and visit our Web3Modal implementation app [here](ht
 - Documentation: Prepare comprehensive documentation to assist users in understanding and effectively utilizing the product.
 - Performance Optimization: Optimize the product's performance by fine-tuning code, and addressing any bottlenecks.
 
-### Phase 2: Beta Testing and Feedback (Q3)
+### Phase 2: Alpha Testing and Feedback (Q3)
 - Internal Testing: Conduct extensive testing of the product within the development team to identify any remaining issues or areas for improvement.
-- Beta Testing: Release a limited version of the product to a select group of external users for real-world testing and feedback.
-- User Feedback and Iteration: Gather feedback from beta users and iterate on the product based on their suggestions and observations, prioritizing critical improvements.
-- Bug Fixes and Stability Enhancements: Address reported issues, fix bugs, and enhance the stability of the product based on beta testing feedback.
+- Alpha Testing: Release a limited version of the product to a select group of external users for real-world testing and feedback.
+- User Feedback and Iteration: Gather feedback from alpha users and iterate on the product based on their suggestions and observations, prioritizing critical improvements.
+- Bug Fixes and Stability Enhancements: Address reported issues, fix bugs, and enhance the stability of the product based on alpha testing feedback.
 
 ### Phase 3: Release and Post-Launch (Q3)
 - Final Testing: Conduct comprehensive testing of the product to ensure all reported issues have been resolved and the product is ready for a stable release.
