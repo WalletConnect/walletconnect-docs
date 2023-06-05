@@ -4,7 +4,7 @@
 
 The original WalletConnect protocol, which is often referred to as WalletConnect v1.0, was launched in 2018. Following a redesign aimed at enhancing protocol performance, WalletConnect v2.0 was launched in late 2021. This new version of the WalletConnect protocol offers improvements including multi-chain support, a new Relay URL API, and an end user experience that is faster, reliable, and more seamless.
 
-We are now carrying out this migration as WalletConnect v2.0 is not backward compatible with WalletConnect v1.0, which was sunset in fall 2022. It is therefore necessary to migrate wallets and apps to WalletConnect v2.0 in a coordinated manner to ensure that there is a seamless transition and minimize any potential for disruption for end users. 
+We are now carrying out this migration as WalletConnect v2.0 is not backward compatible with WalletConnect v1.0, for which we announced the sunset in [fall 2022](https://medium.com/walletconnect/walletconnect-v1-0-sunset-notice-and-migration-schedule-8af9d3720d2e). It is therefore necessary to migrate wallets and apps to WalletConnect v2.0 in a coordinated manner to ensure that there is a seamless transition and minimize any potential for disruption for end users.
 
 ## What are the differences between WalletConnect v1.0 and v2.0?
 
