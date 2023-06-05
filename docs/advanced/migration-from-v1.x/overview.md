@@ -2,7 +2,7 @@ import Container from '../../components/Container';
 
 # Migration from v1.x
 
-The WalletConnect v1.0 protocol will be shut down on June 28, 2023, which means that it is necessary for all wallets and dapps to migrate to the WalletConnect v2.0 protocol.
+The WalletConnect v1.0 protocol will be shut down on June 28, 2023 at 2pm (UTC), which means that it is necessary for all wallets and dapps to migrate to the WalletConnect v2.0 protocol.
 
 This migration guide is intended for wallets and dapps still on WalletConnect v1.0 and will cover everything you need to complete a successful migration to WalletConnect v2.0.
 

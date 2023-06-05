@@ -41,10 +41,10 @@ Below are screenshots of testing our Web3Wallet wallet against our dapp.
 
 ![session-request-example](/assets/Web3Wallet.png)
 
-Scanning from the wallet side
+Scanning from the wallet side:
 
 ![session-request-example](/assets/SessionRequestExample.png)
 
-Preview of what eth methods your dapp may use
+Preview of what eth methods your dapp may use:
 
 Once you are confident with the QA process, please check out the [Explorer Submission process](../explorer-submission.md).
