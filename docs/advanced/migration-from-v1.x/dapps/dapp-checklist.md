@@ -45,6 +45,6 @@ Scanning from the wallet side:
 
 ![session-request-example](/assets/SessionRequestExample.png)
 
-Preview of what eth methods your dapp may use
+Preview of what eth methods your dapp may use:
 
 Once you are confident with the QA process, please check out the [Explorer Submission process](../explorer-submission.md).
