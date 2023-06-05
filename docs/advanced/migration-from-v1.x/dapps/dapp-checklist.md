@@ -41,7 +41,7 @@ Below are screenshots of testing our Web3Wallet wallet against our dapp.
 
 ![session-request-example](/assets/Web3Wallet.png)
 
-Scanning from the wallet side
+Scanning from the wallet side:
 
 ![session-request-example](/assets/SessionRequestExample.png)
 
