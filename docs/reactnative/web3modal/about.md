@@ -11,7 +11,7 @@ It's public API and associated documentation may still see significant and break
 
 `@web3modal/react-native` simplifies the modal integration process for dapp developers. It is designed to make complex tasks like connecting wallets, performing transactions and managing accounts easy. Please note that only V2 [WCURIs](../../specs/clients/core/pairing/pairing-uri) will work with this SDK, as V1 is being deprecated by June 28th, 2023.
 
-If you need assistance at any point during development, please feel free to reach out to us via [GitHub Discussions](https://github.com/orgs/WalletConnect/discussions).
+If you need assistance at any point during development, please feel free to reach out to us via [GitHub Discussions](https://github.com/orgs/WalletConnect/discussions/categories/web3modal-sdk-support?discussions_q=is%3Aopen+category%3Aweb3modal-sdk-support).
 
 ## Current features
 - Connect with a wallet through deep linking
