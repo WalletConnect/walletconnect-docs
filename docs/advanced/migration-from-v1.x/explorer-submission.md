@@ -74,6 +74,5 @@ We currently are only accepting apps that are published and out of TestFlight. I
 2.  Add mobile deep links
 3.  Test and confirm app connects with our test Dapp
 
-For wallets: https://lab.web3modal.com/ManagedReact
+For Wallets: https://lab.web3modal.com/ManagedReact
 For Dapps: https://react-web3wallet.vercel.app/
-\
