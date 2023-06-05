@@ -111,8 +111,6 @@ The following is validated for the WalletConnect library:
 
 ✅ If both required and optional namespaces are empty in the session proposal object it means that there're no requirements regarding chains, events or methods
 
-✅ Each object **MUST** contain the accounts [CAIP-10](https://chainagnostic.org/CAIPs/caip-10) array which **MIGHT** be empty, those accounts are authorized for a session and **MUST** be valid in the namespace or chain they are in
-
 ### Rejecting a Session Response
 
 If the user does not approve the requested chains, methods, or accounts, or if the wallet does not support the requested chains or methods, the response should not be considered a success
