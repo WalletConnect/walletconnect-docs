@@ -22,7 +22,14 @@ module.exports = {
           label: 'Migration from v1.x',
           items: [
             'advanced/migration-from-v1.x/overview',
-            'advanced/migration-from-v1.x/dapps',
+            {
+              type: 'category',
+              label: 'Dapps',
+              items: [
+                'advanced/migration-from-v1.x/dapps/dapps',
+                'advanced/migration-from-v1.x/dapps/dapp-checklist'
+              ]
+            },
             {
               type: 'category',
               label: 'Wallets',
@@ -32,7 +39,8 @@ module.exports = {
               ]
             },
             'advanced/migration-from-v1.x/what-changed-from-v1.0',
-            'advanced/migration-from-v1.x/migration-faq'
+            'advanced/migration-from-v1.x/migration-faq',
+            'advanced/migration-from-v1.x/explorer-submission'
           ]
         }
       ]
@@ -104,9 +112,8 @@ module.exports = {
             {
               type: 'doc',
               label: 'Overview',
-              id: 'advanced/migration-from-v1.x/overview',
+              id: 'advanced/migration-from-v1.x/overview'
             },
-            'advanced/migration-from-v1.x/dapps',
             {
               type: 'category',
               label: 'Wallets',

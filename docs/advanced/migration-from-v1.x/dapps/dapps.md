@@ -1,6 +1,16 @@
 # Dapps
 
-The followings steps describe the various paths for dapps to migrate to v2:
+The followings steps describe the various steps necessary for dapps to migrate to v2:
+
+1. [Getting Started](#getting-started)
+2. [Integrations Checklist](./dapp-checklist.md)
+3. [Explorer Submission](../explorer-submission.md#for-dapps)
+
+---
+
+## Getting Started
+
+In order to get started, we recommend identifying which library your dapp utilizes. If none of your approaches are listed, feel free to reach out to us via Github Discussions [here.](https://github.com/orgs/WalletConnect/discussions/new?category=v1-v2-migration-support)
 
 1. [web3-provider](#web3-provider)
 2. [ethereum-provider](#ethereum-provider)
