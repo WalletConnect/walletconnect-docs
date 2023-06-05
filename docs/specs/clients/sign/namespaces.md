@@ -816,6 +816,6 @@ Received Session Namespaces:
 
 Is valid?: Yes
 
-Note: `eth_sendTransaction` and `eth_signTransaction` method is missing in the session namespace
+Note: `eth_sendTransaction` and `eth_signTransaction` method are missing in the session namespace
 
 ---
