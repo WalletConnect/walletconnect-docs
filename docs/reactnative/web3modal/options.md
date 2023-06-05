@@ -18,6 +18,10 @@ providerMetadata: {
   description: string;
   url: string;
   icons: string[];
+  redirect: {
+    native: string;
+    universal?: string;
+  }
 };
 ```
 
@@ -62,4 +66,12 @@ import Clipboard from '@react-native-clipboard/clipboard';
 const onCopyClipboard = (value: string) => {
   Clipboard.setString(value);
 };
+```
+
+## themeMode (optional)
+
+Puts Web3Modal into dark or light mode. Defaults to user's system preference.
+
+```ts
+themeMode: 'dark' | 'light'
 ```
