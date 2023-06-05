@@ -1,6 +1,16 @@
 # Dapps
 
-The followings steps describe the various paths for dapps to migrate to v2:
+The followings steps describe the various steps necessary for dapps to migrate to v2:
+
+1. [Getting Started](#getting-started)
+2. [Integrations Checklist](./dapp-checklist.md)
+3. [Explorer Submission](../explorer-submission.md#for-dapps)
+
+---
+
+## Getting Started
+
+In order to get started, we recommend identifying which library your dapp utilizes. If none of your approaches are listed, feel free to reach out to us via Github Discussions [here.](https://github.com/orgs/WalletConnect/discussions/new?category=v1-v2-migration-support)
 
 1. [web3-provider](#web3-provider)
 2. [ethereum-provider](#ethereum-provider)
@@ -46,18 +56,11 @@ import { EthereumProvider } from '@walletconnect/ethereum-provider'
 const provider = await EthereumProvider.init({
   projectId: 'WALLETCONNECT_PROJECT_ID', // required
   chains: [1], // required
-  showQrModal: true // requires @web3modal/standalone
+  showQrCode: true // requires @web3modal/standalone
 })
 ```
 
-- Install `@web3modal/standalone` if you want to use the QR Code modal.
-
-Further references for the ethereum-provider can be found [here](../../web/providers/ethereum.md).
-
-For more documentation about implementation with Web3Modal, refer to the following:
-
-- [ethereum-provider with Web3Modal (React)](https://docs.walletconnect.com/2.0/web/web3modal/react/ethereum-provider/installation)
-- [ethereum-provider with Web3modal (HTML)](https://docs.walletconnect.com/2.0/web/web3modal/html/ethereum-provider/installation)
+- Install `@web3modal/standalone` if you want to use the QR Code modal. You can find more information about Web3Modal [here](https://docs.walletconnect.com/2.0/web3modal/about).
 
 ### Web3Modal v1.0
 
