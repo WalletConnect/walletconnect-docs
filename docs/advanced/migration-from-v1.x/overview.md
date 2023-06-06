@@ -44,3 +44,9 @@ Despite the internal protocol changes, the overall UX between WalletConnect v1.0
 - The bridge URL is no longer supported. It has been replaced by the relay URL, which is `wss://relay.walletconnect.com`.
 
 To learn more about the protocol changes between WalletConnect v1.0 and v2.0, click [here.](https://docs.walletconnect.com/2.0/advanced/migration-from-v1.x/what-changed-from-v1.0).
+
+## Have a Question?
+
+If you have a migration-related question, please check out the [FAQ section]([url](https://docs.walletconnect.com/2.0/advanced/migration-from-v1.x/migration-faq)) of our migration docs.
+
+If you require technical assistance, please let us know by creating an issue on [WalletConnect's GitHub]([url](https://github.com/orgs/WalletConnect/discussions/categories/v1-v2-migration-support)).
