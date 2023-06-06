@@ -1,10 +1,10 @@
 # Dapps
 
-The followings steps describe the various steps necessary for dapps to migrate to v2:
+The followings steps describe the various steps necessary for dapps to migrate to WalletConnect v2.0.
 
 1. [Getting Started](#getting-started)
-2. [Integrations Checklist](./dapp-checklist.md)
-3. [Explorer Submission](../explorer-submission.md#for-dapps)
+2. [Testing Your Integration](./dapp-checklist.md)
+3. [Submitting Your Dapp to the WalletConnect Explorer](../explorer-submission.md#for-dapps)
 
 ---
 
@@ -32,11 +32,11 @@ If you are using `@walletconnect/web3-provider`, we stopped supporting this prov
 
 :::caution
 
-For usage with typescript, make sure you are using Typescript version `5.0.0` or higher.
+For usage with Typescript, make sure you are using Typescript version `5.0.0` or higher.
 
 :::
 
-- Ensure you have a `projectId` from WalletConnect Cloud. You can get one for free [here](https://cloud.walletconnect.com/)
+- Ensure you have a `projectId` from the WalletConnect Cloud. You can get one [here](https://cloud.walletconnect.com/).
 - Upgrade `@walletconnect/ethereum-provider` from `1.x.x` to `2.x.x`.
 
 Previously, you would have passed in an `infuraId` like:
@@ -65,16 +65,16 @@ const provider = await EthereumProvider.init({
 
 ### Web3Modal v1.0
 
-We recommend that you replace your existing integration with the latest version of Web3Modal, we recommend following one of these paths:
+We recommend that you replace your existing integration with the latest version of Web3Modal by following one of these paths:
 
 - [Full Web3Modal](https://docs.walletconnect.com/2.0/web3modal/about): This provides the full Web3modal experience with [wagmi](https://wagmi.sh/) which allows users to connect wallets, perform transactions and manage accounts easy.
 - [Standalone Web3Modal](https://docs.walletconnect.com/2.0/web3modal/advanced/standalone/sign/about): A leaner version of Web3Modal if you want to use SignClient and your own web3 library.
 
-If you still want to use Web3Modal v1.0 but just upgrade the WalletConnect `ethereum-provider` to v2.0 then you can update to the latest version available on NPM which you can find [here](https://npmjs.com/package/@walletconnect/ethereum-provider).
+If you still want to use Web3Modal v1.0 but just upgrade the WalletConnect `ethereum-provider` to v2.0, you can update to the latest version available on NPM which you can find [here](https://npmjs.com/package/@walletconnect/ethereum-provider).
 
 ### Web3Modal v2.0
 
-If you are using our new redesigned Web3Modal v2.0, you can simply enable v2.0 by using the feature flag `version: 2` when injecting modal connectors. Please ensure that you are using a minimum version of `2.2.0`. Here is a code example:
+If you are using our redesigned Web3Modal (often referred to as Web3Modal v2.0), you can simply enable v2.0 by using the feature flag `version: 2` when injecting modal connectors. Please ensure that you are using a minimum version of `2.2.0`. Here is a code example:
 
 ```typescript
 import { w3mConnectors } from '@web3modal/ethereum'
@@ -101,11 +101,11 @@ For more documentation, follow the docs for Web3Modal [here](https://docs.wallet
 
 If you are using `@walletconnect/react-native-dapp`, we are currently in alpha for `web3modal-react-native`. Please note this is in alpha and subject to change. The repo can be found [here](https://github.com/WalletConnect/web3modal-react-native).
 
-In the meantime, you can check out the other React Native Examples [repo](https://github.com/WalletConnect/react-native-examples/tree/main/dapps/v2Explorer) which integreates [Universal Provider](https://docs.walletconnect.com/2.0/web/providers/universal) + our [Cloud Explorer API](https://docs.walletconnect.com/2.0/cloud/explorer). This provides the foundations for a React Native dapp to connect to wallets.
+In the meantime, you can check out the other React Native examples [repo](https://github.com/WalletConnect/react-native-examples/tree/main/dapps/v2Explorer), which integrate [Universal Provider](https://docs.walletconnect.com/2.0/web/providers/universal) and our [Cloud Explorer API](https://docs.walletconnect.com/2.0/cloud/explorer). This provides the foundations for a React Native dapp to connect to wallets.
 
 ### web3-onboard
 
-If you are using the WalletConnect package with [Blocknative's web3-onboard](https://onboard.blocknative.com/docs/wallets/walletconnect#install) the migration is straight forward. The latest WC package is backwards compatible (until the WC v1 sunset).
+If you are using the WalletConnect package with [Blocknative's web3-onboard](https://onboard.blocknative.com/docs/wallets/walletconnect#install), the migration is straightforward. The latest WalletConnect package is backwards-compatible (until the WalletConnect v1.0 shutdown comes into effect).
 When you are ready to transition, bump the `@web3-onboard/walletconnect` package version to >= `2.3.0` and adjust the initialization params to include:
 
 ```typescript
@@ -126,19 +126,19 @@ _Note: The `@web3-onboard/walletconnect` package will default to `version` 1 unt
 
 ### Dynamic
 
-Switching to v2 is straightforward using [Dynamic](https://www.dynamic.xyz/). To upgrade, ensure you are using v0.15 or later of `@dynamic-labs/sdk-react` . Once set up, visit your Dynamic developer dashboard and head to the integrations page. Select the WalletConnect card, toggle v2 on and add your WalletConnect `project ID`. Once enabled, Dynamic will automatically use WalletConnect v2 for wallets that support it, and v1 for wallets that don’t.
+Switching to WalletConnect v2.0 is straightforward using [Dynamic](https://www.dynamic.xyz/). To upgrade, ensure you are using v0.15 or later for `@dynamic-labs/sdk-react`. Once set up, visit your Dynamic developer dashboard and head to the integrations page. Select the WalletConnect card, toggle v2.0 on and add your WalletConnect `project ID`. Once enabled, Dynamic will automatically use WalletConnect v2.0 for wallets that support it, and v1.0 for wallets that don’t.
 
 ### solana-labs/wallet-adapter
 
-If you are using `solana-labs/wallet-adapter`, this is already working on WalletConnect v2 so there is nothing to change here. There will be a new version released with an updated UI modal coming shortly.
+If you are using `solana-labs/wallet-adapter`, this is already working on WalletConnect v2.0, so there is nothing to change here. There will be a new version released with an updated UI modal shortly.
 
 ### web3-react
 
-[web3-react](https://github.com/Uniswap/web3-react) has created their own modules for WalletConnect v2. You can test their playground [here](https://web3-react-mu.vercel.app/) and read their example implementation [here](https://github.com/Uniswap/web3-react/blob/main/example/connectors/walletConnectV2.ts). In order to get started with the migration, we suggest upgrading your `@web3-react/types`, `@web3-react/store` and `@web3-react/core` as well as installing `@web3-react/walletconnect-v2`.
+[web3-react](https://github.com/Uniswap/web3-react) has created their own modules for WalletConnect v2.0. You can test their playground [here](https://web3-react-mu.vercel.app/) and read their example implementation [here](https://github.com/Uniswap/web3-react/blob/main/example/connectors/walletConnectV2.ts). In order to get started with the migration, we suggest upgrading your `@web3-react/types`, `@web3-react/store` and `@web3-react/core` as well as installing `@web3-react/walletconnect-v2`.
 
-After you have the respective packages, you will have to obtain a projectID from our Cloud Platform and add it your `.env` file.
+After you have the respective packages, you will have to obtain a projectId from the WalletConnect Cloud and add it your `.env` file.
 
-You will need to then initialize WalletConnect v2 as a connector as referenced [here.](https://github.com/Uniswap/web3-react/blob/main/example/components/connectorCards/WalletConnectV2Card.tsx)
+You will need to then initialize WalletConnect v2.0 as a connector as referenced [here](https://github.com/Uniswap/web3-react/blob/main/example/components/connectorCards/WalletConnectV2Card.tsx).
 
 ```typescript
 import { initializeConnector } from '@web3-react/core'
@@ -162,7 +162,7 @@ export const [walletConnectV2, hooks] = initializeConnector<WalletConnectV2>(
 )
 ```
 
-Note: Be sure to test with several chains in order to complete your implementation for WalletConnect v2.
+Note: Be sure to test with several chains in order to complete your implementation of WalletConnect v2.0.
 
 Then use the `@web3-react/walletconnect-v2` package with the following methods in your components.
 
@@ -178,7 +178,7 @@ Sample codes of reference can be found in:
 
 ### ConnectKit
 
-To migrate to WalletConnect V2 using ConnectKit, you need to upgrade `connectkit` and `wagmi` to the latest version
+To migrate to WalletConnect v2.0 using ConnectKit, you need to upgrade `connectkit` and `wagmi` to the latest version.
 
 :::caution
 
@@ -203,10 +203,10 @@ Run the following command to install it using Yarn:
 yarn add connectkit@^latest wagmi@^latest
 ```
 
-WalletConnect v2 requires a project ID to be set and included in the configuration.
-You can get a `projectID` from [WalletConnect Cloud](https://cloud.walletconnect.com/) for free.
+WalletConnect v2.0 requires a projectId to be set and included in the configuration.
+You can easily get a `projectId` by creating an account on the [WalletConnect Cloud](https://cloud.walletconnect.com/).
 
-Create a new environment variable `WALLETCONNECT_PROJECT_ID` in your `.env` file and set it to your project ID.
+Create a new environment variable `WALLETCONNECT_PROJECT_ID` in your `.env` file and set it to your projectId.
 
 ```bash
 WALLETCONNECT_PROJECT_ID=YOUR_PROJECT_ID
@@ -228,8 +228,8 @@ const client = createClient(
 
 Note:
 
-- For a version specific upgrade, refer to the [official migration guide](https://docs.family.co/connectkit/migration-guide#migration-guide) by Family.
-- When customizing your configuration for advanced usage, it is important to include the `projectId` within your `WalletConnectConnector` object. You can learn more about it [here](https://wagmi.sh/react/connectors/walletConnect#projectid)
+- For a version specific upgrade, refer to the [official migration guide](https://docs.family.co/connectkit/migration-guide#migration-guide) from Family.
+- When customizing your configuration for advanced usage, it is important to include the `projectId` within your `WalletConnectConnector` object. You can learn more about it [here](https://wagmi.sh/react/connectors/walletConnect#projectid).
 - Make sure you have compatible versions of ethers and viem. Check your project's dependencies to ensure compatibility with ConnectKit.
 
 For a comprehensive example, refer to the provided sample code:
@@ -240,11 +240,11 @@ For a comprehensive example, refer to the provided sample code:
 
 ### wagmi
 
-To migrate to WalletConnect V2 using wagmi, you need to upgrade `wagmi` to either `0.12.x` if you are using `ethers` or `1.x.x` if you are using `viem`.
+To migrate to WalletConnect v2.0 using wagmi, you need to upgrade `wagmi` to either `0.12.x` if you are using `ethers` or `1.x.x` if you are using `viem`.
 
 :::caution
 
-WalletConnect V2 is only supported in wagmi `0.12.x` and above
+WalletConnect v2.0 is only supported in wagmi `0.12.x` and above.
 
 :::
 
@@ -256,10 +256,10 @@ Run the following command to install it using Yarn:
 yarn add wagmi@^0.12.0
 ```
 
-WalletConnect v2 requires a project ID to be set and included in the configuration.
-You can get a `projectID` from [WalletConnect Cloud](https://cloud.walletconnect.com/) for free.
+WalletConnect v2.0 requires a projectId to be set and included in the configuration.
+You can easily get a `projectId` by creating an account on the [WalletConnect Cloud](https://cloud.walletconnect.com/).
 
-Create a new environment variable `WALLETCONNECT_PROJECT_ID` in your `.env` file and set it to your project ID.
+Create a new environment variable `WALLETCONNECT_PROJECT_ID` in your `.env` file and set it to your projectId.
 
 ```bash
 WALLETCONNECT_PROJECT_ID=YOUR_PROJECT_ID
@@ -295,10 +295,10 @@ yarn remove ethers
 yarn add wagmi viem@latest
 ```
 
-WalletConnect v2 requires a project ID to be set and included in the configuration.
-You can get a `projectID` from [WalletConnect Cloud](https://cloud.walletconnect.com/) for free.
+WalletConnect v2.0 requires a projectId to be set and included in the configuration.
+You can easily get a `projectId` by creating an account on the [WalletConnect Cloud](https://cloud.walletconnect.com/).
 
-Create a new environment variable `WALLETCONNECT_PROJECT_ID` in your `.env` file and set it to your project ID.
+Create a new environment variable `WALLETCONNECT_PROJECT_ID` in your `.env` file and set it to your projectId.
 
 ```bash
 WALLETCONNECT_PROJECT_ID=YOUR_PROJECT_ID
@@ -329,7 +329,7 @@ const config = createConfig({
 ```
 
 wagmi `1.x.x` introduces several breaking changes due to the migration from `ethers` to `viem`.
-For a version specific upgrade, refer to
+For a version-specific upgrade, refer to:
 
-- [official migration guide](https://wagmi.sh/react/migration-guide) for wagmi
-- [ethers.js -> viem migration guide](https://wagmi.sh/react/migration-guide) for viem.
+- [Official migration guide](https://wagmi.sh/react/migration-guide) for wagmi
+- [ethers.js -> viem migration guide](https://wagmi.sh/react/migration-guide) for viem
