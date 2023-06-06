@@ -34,7 +34,7 @@ WalletConnect v2.0 is **NOT** backwards-compatible with v1.0. Therefore, we must
 
 Wallets can support both versions of WalletConnect in parallel, routing connection requests to corresponding clients using the version number specified in the URI present in the QR code or deep link. Wallets should therefore upgrade to WalletConnect v2.0 ASAP.
 
-Dapps can only support one version of WalletConnect at a time. However, that doesn't mean that dapps should wait to get started on their migration. We recommend that dapps set up staging branches ASAP, which will enable immediate testing and allow for an easy switch to WalletConnect v2.0.  
+Dapps can only support one version of WalletConnect at a time. However, that doesn't mean that dapps should wait to get started on their migration. We recommend that dapps set up staging branches ASAP, which will enable immediate testing and allow for an easy switch to WalletConnect v2.0.
 
 ## WalletConnect v1.0 vs. v2.0
 
@@ -43,4 +43,4 @@ Despite the internal protocol changes, the overall UX between WalletConnect v1.0
 - 'projectId': We now require one for all of our SDKs, and it can be easily obtained by registering for a WalletConnect Cloud account at [cloud.walletconnect.com](https://cloud.walletconnect.com/sign-up). You can find more information [here](https://docs.walletconnect.com/2.0/cloud/relay).
 - The bridge URL is no longer supported. It has been replaced by the relay URL, which is `wss://relay.walletconnect.com`.
 
-To learn more about the protocol changes between WalletConnect v1.0 and v2.0, click [here]([url](https://docs.walletconnect.com/2.0/advanced/migration-from-v1.x/what-changed-from-v1.0)).
+To learn more about the protocol changes between WalletConnect v1.0 and v2.0, click [here.](https://docs.walletconnect.com/2.0/advanced/migration-from-v1.x/what-changed-from-v1.0).
