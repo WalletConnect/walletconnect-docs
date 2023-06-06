@@ -40,7 +40,7 @@ Dapps can only support one version of WalletConnect at a time. However, that doe
 
 Despite the internal protocol changes, the overall UX between WalletConnect v1.0 and v2.0 remains consistent. You will find an almost identical developer experience as well, except for two key differences.
 
-- 'projectId': We now require one for all of our SDKs, and it can be easily obtained by registering for a WalletConnect Cloud account at [cloud.walletconnect.com](https://cloud.walletconnect.com/sign-up). You can find more information [here](https://docs.walletconnect.com/2.0/cloud/relay).
+- `projectId`: We now require one for all of our SDKs, and it can be easily obtained by registering for a WalletConnect Cloud account at [cloud.walletconnect.com](https://cloud.walletconnect.com/sign-up). You can find more information [here](https://docs.walletconnect.com/2.0/cloud/relay).
 - The bridge URL is no longer supported. It has been replaced by the relay URL, which is `wss://relay.walletconnect.com`.
 
-To learn more about the protocol changes between WalletConnect v1.0 and v2.0, click [here.](https://docs.walletconnect.com/2.0/advanced/migration-from-v1.x/what-changed-from-v1.0).
+To learn more about the protocol changes between WalletConnect v1.0 and v2.0, click [here.](https://docs.walletconnect.com/2.0/advanced/migration-from-v1.x/what-changed-from-v1.0)
