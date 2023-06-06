@@ -69,3 +69,17 @@ provider.on('display_uri', handler)
 // session disconnect
 provider.on('disconnect', handler)
 ```
+
+## Required and Optional Namespaces
+
+With Ethereum Provider, the package passed the required chains through `chains` and if your dapp wants to provide other optionalNamespaces this is passed through `optionalChains`.
+
+Example code can be found [here](https://github.com/wagmi-dev/references/blob/main/packages/connectors/src/walletConnect.ts#L134) and further documentation on namespaces can be found in this [spec](https://docs.walletconnect.com/2.0/specs/clients/sign/namespaces).
+
+```typescript
+await EthereumProvider.init({
+      projectId: process.env.TEST_PROJECT_ID,
+      chains: [1], // chains added to required namespaces
+      optionalChains: [42], // chains added to optional namespaces
+    });
+```
