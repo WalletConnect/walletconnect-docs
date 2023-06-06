@@ -4,7 +4,7 @@ Web3Modal works with any chain when using [`@web3modal/standalone`](../advanced/
 
 ## Wagmi chains
 
-Wagmi supports most of the popular evm chains out of the box, but also allows you to create custom configurations. Please see [wagmi](https://wagmi.sh/react/chains) or [@wagmi/core](https://wagmi.sh/core/chains) chains documentation for more information.
+Wagmi supports most of the popular EVM chains out of the box, but also allows you to create custom configurations. Please see [wagmi](https://wagmi.sh/react/chains) or [@wagmi/core](https://wagmi.sh/core/chains) chains documentation for more information.
 
 ## Standalone chains
 

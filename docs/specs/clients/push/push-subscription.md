@@ -2,7 +2,7 @@
 
 A Push subscription is an agreement between a dapp and a wallet to receive future notifications.
 
-A Wallet user will be able to authorize a dapp by sending an authenticated payload with a corresponding identity key and dapp url as described by [Push authentication](./push-authentication.md)
+A Wallet user will be able to authorize a dapp by sending an authenticated payload with a corresponding identity key and dapp URL as described by [Push authentication](./push-authentication.md)
 
 There are however two flows for creating a push subscription:
 

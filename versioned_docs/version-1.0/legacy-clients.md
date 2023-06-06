@@ -1,6 +1,6 @@
 # Legacy Clients
 
-During the beta development of the WalletConnect clients, there were NPM packages distributed for Browser, React-Native and NodeJS clients which targeted different platforms.
+During the beta development of the WalletConnect clients, there were NPM packages distributed for Browser, React-Native and Node.js clients which targeted different platforms.
 
 ```bash
 # For Browser apps
@@ -9,7 +9,7 @@ During the beta development of the WalletConnect clients, there were NPM package
 # For React-Native apps
 > @walletconnect/react-native
 
-# For NodeJS apps
+# For Node.js apps
 > @walletconnect/node
 ```
 
@@ -168,16 +168,16 @@ const connector = new WalletConnect(
 );
 ```
 
-## Migrating from NodeJS Client
+## Migrating from Node.js Client
 
-Migrating from the NodeJS client to the isomorphic client you need to replace with the new client package and update the constructor arguments.
+Migrating from the Node.js client to the isomorphic client you need to replace with the new client package and update the constructor arguments.
 
 ```bash npm2yarn
 npm uninstall --save @walletconnect/node
 npm install --save @walletconnect/client
 ```
 
-Previously the NodeJS client required you to pass the clientMeta as part of the second argument, however now the clientMeta is part of the first argument.
+Previously the Node.js client required you to pass the clientMeta as part of the second argument, however now the clientMeta is part of the first argument.
 
 **Before**
 

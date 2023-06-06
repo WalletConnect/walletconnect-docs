@@ -18,7 +18,7 @@ You can add a WalletConnect SDK to your project with the Swift Package Manager. 
 
 1. Open XCode
 2. Go to File -> Add Packages
-3. Paste the repo GitHub url: https://github.com/WalletConnect/WalletConnectSwiftV2
+3. Paste the repo GitHub URL: https://github.com/WalletConnect/WalletConnectSwiftV2
 4. Tap Add Package
 5. Select WalletConnectPush check mark
 

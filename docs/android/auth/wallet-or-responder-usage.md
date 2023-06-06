@@ -1,6 +1,6 @@
 # Wallet / Responder Usage
 
-We recommend looking at example implementations of Responder at our [Kotlin Github repository](https://github.com/WalletConnect/WalletConnectKotlinV2/tree/develop/auth/responder)
+We recommend looking at example implementations of Responder at our [Kotlin GitHub repository](https://github.com/WalletConnect/WalletConnectKotlinV2/tree/develop/auth/responder)
 
 ### **Initialize Auth Client**
 

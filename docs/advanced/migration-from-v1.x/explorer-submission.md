@@ -2,7 +2,7 @@
 
 The Explorer Submission process allows dapps and wallets to be officially be approved on be on our Explorer [page.](https://explorer.walletconnect.com/) Please note, just because your application is not yet approved, it does not restrict your users from using WalletConnect.
 
-If you need specific help with migration please also reach out to us on Github: https://github.com/orgs/WalletConnect/discussions/categories/explorer-support
+If you need specific help with migration please also reach out to us on GitHub: https://github.com/orgs/WalletConnect/discussions/categories/explorer-support
 
 ## For Wallets + Hybrid
 
