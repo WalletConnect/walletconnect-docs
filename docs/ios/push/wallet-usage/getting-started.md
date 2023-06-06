@@ -49,7 +49,7 @@ try await Push.wallet.register(deviceToken: deviceToken)
 
 #### Subscribe Proposal
 
-When your `Push` instance receives a push request or push message from a peer client, it will publish a related event. Subscribe to publishers to receive the requests.
+When your `Push` instance receives a push proposal request or push message from a peer client, it will publish a related event. Subscribe to publishers to receive the requests.
 
 ```swift
 Push.wallet.requestPublisher
