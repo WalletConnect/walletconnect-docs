@@ -22,7 +22,7 @@ Please test your dapp integration with various wallets to ensure that you have t
 
 1. Web3Wallet ([Link](https://react-web3wallet.vercel.app/))
 2. Alpha Wallet ([iOS](https://apps.apple.com/us/app/alphawallet-ethereum-binance/id1358230430)) ([Android](https://play.google.com/store/apps/details?id=io.stormbird.wallet&hl=en&gl=US))
-3. Trust ([iOS](https://play.google.com/store/apps/details?id=com.wallet.crypto.trustapp&hl=en&gl=US)) ([Android](https://play.google.com/store/apps/details?id=com.wallet.crypto.trustapp&hl=en&gl=US))
+3. Trust ([iOS](https://apps.apple.com/us/app/trust-crypto-bitcoin-wallet/id1288339409)) ([Android](https://play.google.com/store/apps/details?id=com.wallet.crypto.trustapp&hl=en&gl=US))
 4. Zerion ([iOS](https://apps.apple.com/us/app/zerion-wallet-crypto-web3/id1456732565)) ([Android](https://play.google.com/store/apps/details?id=io.zerion.android&hl=en&gl=US))
 5. Rainbow ([iOS](https://apps.apple.com/us/app/rainbow-ethereum-wallet/id1457119021)) ([Android](https://play.google.com/store/search?q=rainbow%20wallet&c=apps))
 
