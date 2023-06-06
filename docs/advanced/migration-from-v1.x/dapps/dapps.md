@@ -22,6 +22,7 @@ In order to get started, we recommend identifying which library your dapp utiliz
 8. [solana-labs/wallet-adapter](#solana-labs/wallet-adapter)
 9. [web3-react](#web3-react)
 10. [ConnectKit](#connectkit)
+11. [wagmi](#wagmi)
 
 ### web3-provider
 
@@ -236,3 +237,99 @@ For a comprehensive example, refer to the provided sample code:
 - [ConnectKit with Next.js](https://github.com/family/connectkit/tree/main/examples/nextjs)
 - [ConnectKit with React (Vite)](https://github.com/family/connectkit/tree/main/examples/vite)
 - [ConnectKit with React (CRA)](https://github.com/family/connectkit/tree/main/examples/cra)
+
+### wagmi
+
+To migrate to WalletConnect V2 using wagmi, you need to upgrade `wagmi` to either `0.12.x` if you are using `ethers` or `1.x.x` if you are using `viem`.
+
+:::caution
+
+WalletConnect V2 is only supported in wagmi `0.12.x` and above
+
+:::
+
+#### Upgrading to wagmi `0.12.x`
+
+Run the following command to install it using Yarn:
+
+```bash
+yarn add wagmi@^0.12.0
+```
+
+WalletConnect v2 requires a project ID to be set and included in the configuration.
+You can get a `projectID` from [WalletConnect Cloud](https://cloud.walletconnect.com/) for free.
+
+Create a new environment variable `WALLETCONNECT_PROJECT_ID` in your `.env` file and set it to your project ID.
+
+```bash
+WALLETCONNECT_PROJECT_ID=YOUR_PROJECT_ID
+```
+
+Next, update your code by including the `walletConnectProjectId` inside the config object for `WalletConnectConnector`:
+
+```typescript
+import { WalletConnectConnector } from 'wagmi/connectors/walletConnect'
+
+const connector = new WalletConnectConnector({
+  options: {
+    projectId: process.env.WALLETCONNECT_PROJECT_ID,
+    showQrModal: true
+  }
+})
+
+const client = createClient({
+  autoConnect: true,
+  provider,
+  connectors: [connector],
+});
+
+...
+```
+
+#### Upgrading to wagmi `1.x.x`
+
+wagmi 1.x.x drops support for `ethers` and only supports `viem`. If you are using `ethers`, you will need to migrate to `viem` before upgrading to wagmi `1.x.x`.
+
+```bash
+yarn remove ethers
+yarn add wagmi viem@latest
+```
+
+WalletConnect v2 requires a project ID to be set and included in the configuration.
+You can get a `projectID` from [WalletConnect Cloud](https://cloud.walletconnect.com/) for free.
+
+Create a new environment variable `WALLETCONNECT_PROJECT_ID` in your `.env` file and set it to your project ID.
+
+```bash
+WALLETCONNECT_PROJECT_ID=YOUR_PROJECT_ID
+```
+
+Next, update your code by including the `walletConnectProjectId` inside the config object for `WalletConnectConnector`:
+
+```typescript
+import { createConfig, configureChains, mainnet } from 'wagmi'
+import { publicProvider } from 'wagmi/providers/public'
+import { WalletConnectConnector } from 'wagmi/connectors/walletConnect'
+
+const { chains, publicClient } = configureChains([mainnet], [publicProvider()])
+
+const connector = new WalletConnectConnector({
+  chains,
+  options: {
+    projectId: process.env.WALLETCONNECT_PROJECT_ID,
+  },
+}),
+
+const config = createConfig({
+  connectors: [connector],
+  publicClient,
+})
+
+...
+```
+
+wagmi `1.x.x` introduces several breaking changes due to the migration from `ethers` to `viem`.
+For a version specific upgrade, refer to
+
+- [official migration guide](https://wagmi.sh/react/migration-guide) for wagmi
+- [ethers.js -> viem migration guide](https://wagmi.sh/react/migration-guide) for viem.
