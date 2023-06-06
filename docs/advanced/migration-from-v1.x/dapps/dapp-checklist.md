@@ -37,6 +37,8 @@ The following steps to follow would be:
 - Test with the methods that your dapp uses (i.e. `eth_sendTransaction` etc)
 - Succesful Connect - Disconnect
 
+We have created a sample QA Testing Rubric Guide [here.](https://docs.google.com/spreadsheets/d/12Hqu3yjcqnjSuE2MyHsvFhPfoMkY3DH9MdLaIb2woxw/edit?usp=sharing)
+
 Below are screenshots of testing our Web3Wallet wallet against our dapp.
 
 ![session-request-example](/assets/Web3Wallet.png)
