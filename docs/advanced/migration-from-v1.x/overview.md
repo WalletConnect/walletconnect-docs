@@ -47,6 +47,6 @@ To learn more about the protocol changes between WalletConnect v1.0 and v2.0, cl
 
 ## Have a Question?
 
-If you have a migration-related question, please check out the [FAQ section]([url](https://docs.walletconnect.com/2.0/advanced/migration-from-v1.x/migration-faq)) of our migration docs.
+If you have a migration-related question, please check out the [FAQ section](<[url](https://docs.walletconnect.com/2.0/advanced/migration-from-v1.x/migration-faq)>) of our migration docs.
 
-If you require technical assistance, please let us know by creating an issue on [WalletConnect's GitHub]([url](https://github.com/orgs/WalletConnect/discussions/categories/v1-v2-migration-support)).
+If you require technical assistance, please let us know by creating an issue on [WalletConnect's GitHub](https://github.com/orgs/WalletConnect/discussions/categories/v1-v2-migration-support).
