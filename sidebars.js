@@ -535,8 +535,7 @@ module.exports = {
       items: [
         'web/guides/examples-and-resources',
         'web/guides/nodejs',
-        'web/guides/shared-core',
-        'web/guides/typescript'
+        'web/guides/shared-core'
       ]
     }
   ],
