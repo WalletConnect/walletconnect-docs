@@ -1,6 +1,6 @@
 # FAQs
 
-<details className="box faq"><summary className="faq-question">What blockchains does WalletConnect support?</summary>
+<details className="box faq"><summary className="faq-question">Which blockchains does WalletConnect support?</summary>
 <p className="faq-answer">
 
 WalletConnect is chain-agnostic and supports any chain that follows the [CAIP-25 standard](https://github.com/ChainAgnostic/CAIPs/blob/master/CAIPs/caip-25.md). A list of blockchains that are known to be compatible can be found [here](multichain/chain-list.md).
