@@ -4,7 +4,6 @@
 
 WalletConnect is chain-agnostic and supports any chain that follows the [CAIP-25 standard](https://github.com/ChainAgnostic/CAIPs/blob/master/CAIPs/caip-25.md). A list of blockchains that are known to be compatible can be found [here](multichain/chain-list.md).
 
-Web3Modal Ethereum supports EVM chains only, but Web3Modal Multichain supports all chains WalletConnect does.
 
 ## Will the relay server `bridge.walletconnect.org` still work in v2?
 
