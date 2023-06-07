@@ -10,7 +10,7 @@ The followings steps describe the various steps necessary for dapps to migrate t
 
 ## Getting Started
 
-In order to get started, we recommend identifying which library your dapp utilizes. If none of your approaches are listed, feel free to reach out to us via Github Discussions [here.](https://github.com/orgs/WalletConnect/discussions/new?category=v1-v2-migration-support)
+In order to get started, we recommend identifying which library your dapp utilizes. If none of your approaches are listed, feel free to reach out to us via GitHub Discussions [here.](https://github.com/orgs/WalletConnect/discussions/new?category=v1-v2-migration-support)
 
 1. [web3-provider](#web3-provider)
 2. [ethereum-provider](#ethereum-provider)
@@ -122,7 +122,7 @@ When you are ready to transition, bump the `@web3-onboard/walletconnect` package
 }
 ```
 
-_Note: The `@web3-onboard/walletconnect` package will default to `version` 1 until the WC v1 sunset is complete_
+_Note: The `@web3-onboard/walletconnect` package will default to `version` 1 until the WalletConnect v1 sunset is complete_
 
 ### Dynamic
 

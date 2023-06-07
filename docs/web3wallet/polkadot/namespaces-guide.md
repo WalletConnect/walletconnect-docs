@@ -116,7 +116,7 @@ An example Proposal Namespace for a dapp which supports connecting to Polkadot, 
   }
  }
 
-// In the wallets codebase, you'd add functionality to be called when this new method is called from a Wallet Connect session
+// In the wallets codebase, you'd add functionality to be called when this new method is called from a WalletConnect session
 // Specific Example Implementation:
 
 public async getSignedHex(payload: SignerPayloadJSON) {

@@ -100,6 +100,6 @@ When we are unregistering an Identity Key we must use the following mandatory fi
 * iat - timestamp when jwt was issued 
 * exp - timestamp when jwt must expire
 * iss - public identity key in form of did:key
-* aud - key server url used for registering
+* aud - key server URL used for registering
 * pkh - corresponding blockchain account (did:pkh)
 * act - description of action intent. Must be equal to "unregister_identity"

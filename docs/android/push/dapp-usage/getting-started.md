@@ -44,7 +44,7 @@ Once you've finished the previous step, you're ready to start implementing the P
 
 ### Initialization
 
-The Push Dapp client is responsible for initiating the connection with the cast server and is also in charge of registering and notifying clients. To initialize the Push Dapp client, create a `Push.Dapp.Params.Init` object in the Android Application class with the `CoreClient` and the cast server url if available. The `Push.Dapp.Params.Init` object will then be passed to the `PushDappClient` initialize function.
+The Push Dapp client is responsible for initiating the connection with the cast server and is also in charge of registering and notifying clients. To initialize the Push Dapp client, create a `Push.Dapp.Params.Init` object in the Android Application class with the `CoreClient` and the cast server URL if available. The `Push.Dapp.Params.Init` object will then be passed to the `PushDappClient` initialize function.
 
 The `PushDappClient` should be initialized in the Application class.
 
@@ -56,8 +56,8 @@ val connectionType = ConnectionType.AUTOMATIC or ConnectionType.MANUAL
 val appMetaData = Core.Model.AppMetaData(
     name = "Dapp Name",
     description = "Dapp Description",
-    url = "Dapp Url",
-    icons = /*list of icon url strings*/,
+    url = "Dapp URL",
+    icons = /*list of icon URL strings*/,
     redirect = "kotlin-dapp-wc:/request" // Custom Redirect URI
 )
 CoreClient.initialize(relayServerUrl = serverUrl, connectionType = connectionType, application = this, metaData = appMetaData)

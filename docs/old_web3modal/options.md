@@ -10,7 +10,7 @@ projectId: string
 
 ## mobileWallets (optional)
 
-You can define an array of custom mobile wallets. Note: you will also need to add appropriate wallet images in `walletImages`. Native link represents deeplinking url like `rainbow://` and Universal link represent webpage link that can redirect to the app or fallback page. Defaults to `undefined`.
+You can define an array of custom mobile wallets. Note: you will also need to add appropriate wallet images in `walletImages`. Native link represents deeplinking URL like `rainbow://` and Universal link represent webpage link that can redirect to the app or fallback page. Defaults to `undefined`.
 
 ```ts
 mobileWallets: [
@@ -27,7 +27,7 @@ mobileWallets: [
 
 ## desktopWallets (optional)
 
-You can define an array of custom desktop or web based wallets. Note: you will also need to add appropriate wallet images in `walletImages`. Native link represents deeplinking url like `ledgerlive://` and Universal link represents webpage link that can redirect to the app or fallback page. Defaults to `undefined`.
+You can define an array of custom desktop or web based wallets. Note: you will also need to add appropriate wallet images in `walletImages`. Native link represents deeplinking URL like `ledgerlive://` and Universal link represents webpage link that can redirect to the app or fallback page. Defaults to `undefined`.
 
 ```ts
 desktopWallets: [

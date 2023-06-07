@@ -62,12 +62,12 @@ Core styling variables for the modal. Any valid css value associated to the styl
     },
     {
       variable: { code: "--w3m-background-image-url" },
-      description: "Background image url to be used instead of default animated gradient",
+      description: "Background image URL to be used instead of default animated gradient",
       example: { code: "https://..." },
     },
     {
       variable: { code: "--w3m-logo-image-url" },
-      description: "Image url to be used instead of WalletConnect logo",
+      description: "Image URL to be used instead of WalletConnect logo",
       example: { code: "https://..." },
     },
     {
