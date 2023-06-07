@@ -69,7 +69,7 @@ This method returns a hash for the provided operations. They will be signed by t
 ### Returns
 
     1. `Object` - Signing parameters:
-    	1.1. `operation_hash` : `STRING` - hash of the operation
+    	1.1. `operationHash` : `STRING` - hash of the operation
 
 ### Example
 
@@ -96,7 +96,7 @@ This method returns a hash for the provided operations. They will be signed by t
     "id": 1,
     "jsonrpc": "2.0",
     "result":  {
-        "hash": "op..."
+        "operationHash": "op..."
     }
 }
 ```
