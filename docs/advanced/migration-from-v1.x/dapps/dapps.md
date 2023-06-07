@@ -57,18 +57,18 @@ import { EthereumProvider } from '@walletconnect/ethereum-provider'
 const provider = await EthereumProvider.init({
   projectId: 'WALLETCONNECT_PROJECT_ID', // required
   chains: [1], // required
-  showQrCode: true // requires @web3modal/standalone
+  showQrCode: true // requires @walletconnect/modal
 })
 ```
 
-- Install `@web3modal/standalone` if you want to use the QR Code modal. You can find more information about Web3Modal [here](https://docs.walletconnect.com/2.0/web3modal/about).
+- Install `@walletconnect/modal` if you want to use the QR Code modal. You can find more information about WalletConnectModal [here](https://docs.walletconnect.com/2.0/web3modal/about).
 
 ### Web3Modal v1.0
 
 We recommend that you replace your existing integration with the latest version of Web3Modal by following one of these paths:
 
-- [Full Web3Modal](https://docs.walletconnect.com/2.0/web3modal/about): This provides the full Web3modal experience with [wagmi](https://wagmi.sh/) which allows users to connect wallets, perform transactions and manage accounts easy.
-- [Standalone Web3Modal](https://docs.walletconnect.com/2.0/web3modal/advanced/standalone/sign/about): A leaner version of Web3Modal if you want to use SignClient and your own web3 library.
+- [Web3Modal](https://docs.walletconnect.com/2.0/web3modal/about): Web3modal feature rich modal with [wagmi](https://wagmi.sh/), has walletconnect, extension wallets, connectors, chain switching, account modal and more.
+- [WalletConnectModal](https://docs.walletconnect.com/2.0/web3modal/about): WalletConnectModal is a lightweight modal to add into your existing workflows.
 
 If you still want to use Web3Modal v1.0 but just upgrade the WalletConnect `ethereum-provider` to v2.0, you can update to the latest version available on NPM which you can find [here](https://npmjs.com/package/@walletconnect/ethereum-provider).
 

@@ -12,7 +12,7 @@ Please note that the links to SDK versions and sample wallets can be found in th
 
 🌐 [Web](https://www.npmjs.com/package/@walletconnect/web3wallet?activeTab=versions)
 
-🤖 [Android](https://github.com/WalletConnect/WalletConnectKotlinV2#sdk-chart) 
+🤖 [Android](https://github.com/WalletConnect/WalletConnectKotlinV2#sdk-chart)
 
 🍏 [iOS](https://github.com/WalletConnect/WalletConnectSwiftV2/releases)
 
@@ -28,7 +28,7 @@ Please note that the links to SDK versions and sample wallets can be found in th
 
 Chain Switching enables users to experience a seamless chain agnostic UX. In WalletConnect's v2 functionality, the wallet can switch the active chain by triggering a `chainChanged` event.
 
-- **Test Dapp:** [https://lab.web3modal.com/ManagedReact](https://lab.web3modal.com/ManagedReact)
+- **Test Dapp:** [https://lab.web3modal.com](https://lab.web3modal.com)
 - **JS docs:** [https://docs.walletconnect.com/2.0/web/web3wallet/wallet-usage#-namespaces-builder-util](https://docs.walletconnect.com/2.0/web/web3wallet/wallet-usage#-namespaces-builder-util)
 
 ### Android 🤖
@@ -71,7 +71,7 @@ Auth API plays a critical role when dapps offer off-chain signatures. Wallets sh
 
 ### iOS 🍏
 
-📕 **Swift docs →** [https://docs.walletconnect.com/2.0/ios/web3wallet/wallet-usage#authorization-request-approval](https://docs.walletconnect.com/2.0/ios/web3wallet/wallet-usage#authorization-request-approval) 
+📕 **Swift docs →** [https://docs.walletconnect.com/2.0/ios/web3wallet/wallet-usage#authorization-request-approval](https://docs.walletconnect.com/2.0/ios/web3wallet/wallet-usage#authorization-request-approval)
 
 📱**Example app** → [Link](https://github.com/WalletConnect/WalletConnectSwiftV2/blob/cd55d281ae7cb3c5d14524d0147b9d557cdd1af5/Example/WalletApp/PresentationLayer/Wallet/SessionProposal/SessionProposalInteractor.swift#L6)
 
@@ -134,7 +134,6 @@ Sign Notifications ensure users receive a push notification for any pending dapp
 ## **Account Switching:**
 
 Account Switching is about the user's ability to change accounts and sign a message from a different account than the one proposed initially in the session. The wallet can switch the active account by triggering a `accountsChanged` event.
-
 
 📕 JS docs: [https://docs.walletconnect.com/2.0/web/web3wallet/wallet-usage#updating-a-session](https://docs.walletconnect.com/2.0/web/web3wallet/wallet-usage#updating-a-session)
 

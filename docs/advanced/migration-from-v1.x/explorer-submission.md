@@ -6,10 +6,7 @@ If you need specific help with migration please also reach out to us on Github: 
 
 ## For Wallets + Hybrid
 
-You can test your upgrade using the following links:
-
-- Sign V2: https://lab.web3modal.com/ManagedReact
-- Auth V1: https://lab.web3modal.com/AuthReact
+You can test your upgrade using [https://lab.web3modal.com](https://lab.web3modal.com)
 
 Checklist to update your explorer submission for fast V2 approval:
 

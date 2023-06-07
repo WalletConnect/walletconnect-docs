@@ -5,7 +5,7 @@ Ethereum Provider for WalletConnect v2
 ## Installation
 
 ```bash npm2yarn
-npm install @walletconnect/ethereum-provider @web3modal/standalone
+npm install @walletconnect/ethereum-provider @walletconnect/modal
 ```
 
 ## Initialization
@@ -16,7 +16,7 @@ import { EthereumProvider } from '@walletconnect/ethereum-provider'
 const provider = await EthereumProvider.init({
   projectId, // REQUIRED your projectId
   chains, // REQUIRED chain ids
-  showQrModal, // REQUIRED set to "true" to use @web3modal/standalone,
+  showQrModal, // REQUIRED set to "true" to use @walletconnect/modal,
   methods, // OPTIONAL ethereum methods
   events, // OPTIONAL ethereum events
   rpcMap, // OPTIONAL rpc urls for each chain
@@ -25,11 +25,11 @@ const provider = await EthereumProvider.init({
 })
 ```
 
-## Use with Web3Modal
+## Use with WalletConnectModal
 
-It is easy to enable Web3Modal support for your dApp. Simply pass `showQrModal: true` to the `init()` method. Learn more about this in Web3Modal documentation for [React](../web3modal/react/ethereum-provider/installation) or [HTML](../web3modal/html/ethereum-provider/installation)
+It is easy to enable WalletConnectModal support for your dApp. Simply pass `showQrModal: true` to the `init()` method. Learn more about this in WalletConnectModal documentation for [React](../web3modal/react/ethereum-provider/installation) or [HTML](../web3modal/html/ethereum-provider/installation)
 
-## Use without Web3Modal
+## Use without WalletConnectModal
 
 You can subscribe to the `display_uri` event and handle the URI yourself.
 
@@ -78,8 +78,8 @@ Example code can be found [here](https://github.com/wagmi-dev/references/blob/ma
 
 ```typescript
 await EthereumProvider.init({
-      projectId: process.env.TEST_PROJECT_ID,
-      chains: [1], // chains added to required namespaces
-      optionalChains: [42], // chains added to optional namespaces
-    });
+  projectId: process.env.TEST_PROJECT_ID,
+  chains: [1], // chains added to required namespaces
+  optionalChains: [42] // chains added to optional namespaces
+})
 ```
