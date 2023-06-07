@@ -2,17 +2,17 @@
 
 Submitting your project to the WalletConnect Explorer not only allows you to create a listing for your dapp or wallet on our Explorer [page](https://explorer.walletconnect.com/), but it also makes your project more discoverable to users.
 
-Note: The status of your listing does not impact your users' ability to use WalletConnect. In other words, your users will still be able to use WalletConnect even if your submission has yet to be approved. 
+Note: The status of your listing does not impact your users' ability to use WalletConnect. In other words, your users will still be able to use WalletConnect even if your submission has yet to be approved.
 
 ### WalletConnect v1.0 Shutdown: Impact on Explorer Submissions
 
-The WalletConnect v1.0 shutdown is scheduled to take place on June 28 (read more [here]([url](https://medium.com/walletconnect/t-1-month-last-call-to-migrate-before-the-walletconnect-v1-0-shutdown-692ffa9520aa))). Once the shutdown comes into effect, we will no longer accept submissions from wallets and dapps that support only WalletConnect v1.0. 
+The WalletConnect v1.0 shutdown is scheduled to take place on June 28 (read more [here](<[url](https://medium.com/walletconnect/t-1-month-last-call-to-migrate-before-the-walletconnect-v1-0-shutdown-692ffa9520aa)>)). Once the shutdown comes into effect, we will no longer accept submissions from wallets and dapps that support only WalletConnect v1.0.
 
-If you are a wallet or dapp that currently only supports WalletConnect v1.0, we strongly recommend that you migrate to WalletConnect v2.0 immediately. Please visit the [migration section of our docs]([url](https://docs.walletconnect.com/2.0/advanced/migration-from-v1.x/overview)) to get started right away. 
+If you are a wallet or dapp that currently only supports WalletConnect v1.0, we strongly recommend that you migrate to WalletConnect v2.0 immediately. Please visit the [migration section of our docs](<[url](https://docs.walletconnect.com/2.0/advanced/migration-from-v1.x/overview)>) to get started right away.
 
 ### Have a Question?
 
-If you have a question regarding the WalletConnect Explorer or your project's listing, please send an email to cloud@walletconnect.com. 
+If you have a question regarding the WalletConnect Explorer or your project's listing, please send an email to cloud@walletconnect.com.
 
 ## Submission Process for WalletConnect v2.0 Wallets and Hybrid Apps
 
@@ -52,5 +52,6 @@ We only accept submissions from wallets and dapps that are published and out of 
 1.  Update the download links on the published version
 2.  Add mobile deep links
 3.  Test and confirm that your app connects with our example apps
-- Wallets should test with our example dapp [here]([url](https://lab.web3modal.com/ManagedReact))
-- Dapps should test with our example wallet [here]([url](https://react-web3wallet.vercel.app/))
+
+- Wallets should test with our example dapp [here](https://lab.web3modal.com/ManagedReact)
+- Dapps should test with our example wallet [here](https://react-web3wallet.vercel.app/)
