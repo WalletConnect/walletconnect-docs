@@ -11,10 +11,8 @@ import ThemeVariablesPartial from '../web3modal/_partials/themeVariables.mdx'
 ### Example
 
 ```tsx
-EthereumProvider.init({
-  qrModalOptions: {
-    themeMode: 'dark'
-  }
+new WalletConnectModal({
+  themeMode: 'dark'
 })
 ```
 
@@ -25,12 +23,10 @@ EthereumProvider.init({
 ### Example
 
 ```tsx
-EthereumProvider.init({
-  qrModalOptions: {
-    themeVariables: {
-      '--w3m-font-family': 'Roboto, sans-serif',
-      '--w3m-accent-color': '#F5841F'
-    }
+new WalletConnectModal({
+  themeVariables: {
+    '--w3m-font-family': 'Roboto, sans-serif',
+    '--w3m-accent-color': '#F5841F'
   }
 })
 ```
