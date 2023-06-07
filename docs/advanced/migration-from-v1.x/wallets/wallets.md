@@ -4,6 +4,16 @@ Wallets must support v1.0 and v2.0 in parallel. Our WalletConnect URIs are versi
 
 When your wallet receives a v2.0 URI you must route it to the correct SDK.
 
+The followings steps describe the various steps necessary for dapps to migrate to v2:
+
+1. [Getting Started](#getting-started)
+2. [Integrations Checklist](./wallet-checklist.md)
+3. [Explorer Submission](../explorer-submission.md#for-dapps)
+
+---
+
+## Getting Started
+
 Below we will list the SDK you must integrate for v2.0 protocol for each platform:
 
 1. [iOS](#ios)

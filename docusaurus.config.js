@@ -102,10 +102,10 @@ const config = {
             label: 'Flutter'
           },
           {
-            type: "docSidebar",
-            position: "left",
-            sidebarId: "unity",
-            label: "Unity",
+            type: 'docSidebar',
+            position: 'left',
+            sidebarId: 'unity',
+            label: 'Unity'
           },
           {
             href: 'https://github.com/walletconnect/',

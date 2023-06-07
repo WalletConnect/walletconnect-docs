@@ -152,5 +152,5 @@ These dapps have provided us staging links so that wallets can test functionalit
 
 - [Aave](https://bafybeib3eavuc54ldbpziaql2koo4k7dc5l3gddn5y6zvi4rbrfnnm2sb4.ipfs.cf-ipfs.com/) | [GitHub PR](https://github.com/aave/interface/pull/1470)
 - [Pancake Swap](https://web-git-pan-1047-walletconnect-v2.pancake.run/?_vercel_share=bYy2q8qBAQA6c2CQGIANbgXAcepL9ZT4&chain=eth) | [GitHub](https://github.com/pancakeswap/pancake-frontend/pull/5963)
-- [Uniswap](https://interface-git-feat-add-wc2-uniswap.vercel.app)
+- [Uniswap](https://interface-git-add-wc-v2-uniswap.vercel.app/#/swap)
 - [Polygon Bridge](https://wallet.polygon.technology/)

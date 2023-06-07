@@ -15,7 +15,7 @@ Head over to [WalletConnect Cloud](https://cloud.walletconnect.com/) to sign in 
 Install the WalletConnect ChatClient package.
 
 ```bash npm2yarn
-npm install @walletconnect/chat-client
+npm install @walletconnect/chat-client @walletconnect/sync-client @walletconnect/core
 ```
 
 **If you are using the SDK on a server (such as Node.js), you will need to install an additional package:**

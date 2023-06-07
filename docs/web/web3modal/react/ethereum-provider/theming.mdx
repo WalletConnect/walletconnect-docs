@@ -1,0 +1,40 @@
+import ThemeVariablesTablePartial from '../../_partials/themeVariablesTable.mdx'
+import ThemeModePartial from '../../_partials/themeMode.mdx'
+import ThemeVariablesPartial from '../../_partials/themeVariables.mdx'
+
+# Theming
+
+## themeMode
+
+<ThemeModePartial />
+
+### Example
+
+```tsx
+EthereumProvider.init({
+  qrModalOptions: {
+    themeMode: 'dark'
+  }
+})
+```
+
+## themeVariables
+
+<ThemeVariablesPartial />
+
+### Example
+
+```tsx
+EthereumProvider.init({
+  qrModalOptions: {
+    themeVariables: {
+      '--w3m-font-family': 'Roboto, sans-serif',
+      '--w3m-accent-color': '#F5841F'
+    }
+  }
+})
+```
+
+### List of theme variables
+
+<ThemeVariablesTablePartial />
