@@ -41,7 +41,7 @@ Please follow these steps:
 
 We have created a sample QA Testing Rubric Guide [here](https://docs.google.com/spreadsheets/d/12Hqu3yjcqnjSuE2MyHsvFhPfoMkY3DH9MdLaIb2woxw/edit?usp=sharing).
 
-We also have a list of example wallets and dapps on the [Awesome WalletConnect](<[url](https://github.com/WalletConnect/awesome-walletconnect)>) page. You can use the resources here to test your WalletConnect v2.0 integration!
+We also have a list of example wallets and dapps on the [Awesome WalletConnect](https://github.com/WalletConnect/awesome-walletconnect) page. You can use the resources here to test your WalletConnect v2.0 integration!
 
 Below are screenshots that show testing our [Web3Wallet SDK example wallet](https://react-wallet.walletconnect.com/) against our [WalletConnect v2.0 example dapp](https://react-app.walletconnect.com/).
 
@@ -55,4 +55,4 @@ The above shows a preview of the eth methods your dapp may use.
 
 ## Done with Your Integration?
 
-Once you feel confident with the QA process, please check out the [explorer submission process](../explorer-submission.md) to add your dapp to the [WalletConnect Explorer](<[url](https://walletconnect.com/explorer)>).
+Once you feel confident with the QA process, please check out the [explorer submission process](../explorer-submission.md) to add your dapp to the [WalletConnect Explorer](https://walletconnect.com/explorer).
