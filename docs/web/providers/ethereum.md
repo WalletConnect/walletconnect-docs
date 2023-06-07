@@ -1,6 +1,6 @@
 # Ethereum Provider
 
-Ethereum Provider for WalletConnect v2
+[EIP-1993](https://eips.ethereum.org/EIPS/eip-1193) compliant Provider for WalletConnect v2. You can use this on it's own or pass down to libraries like ethers, viem, web3js and others.
 
 ## Installation
 
@@ -16,7 +16,7 @@ import { EthereumProvider } from '@walletconnect/ethereum-provider'
 const provider = await EthereumProvider.init({
   projectId, // REQUIRED your projectId
   chains, // REQUIRED chain ids
-  showQrModal, // REQUIRED set to "true" to use @walletconnect/modal,
+  showQrModal, // REQUIRED set to "true" to use @walletconnect/modal
   methods, // OPTIONAL ethereum methods
   events, // OPTIONAL ethereum events
   rpcMap, // OPTIONAL rpc urls for each chain
@@ -27,7 +27,7 @@ const provider = await EthereumProvider.init({
 
 ## Use with WalletConnectModal
 
-It is easy to enable WalletConnectModal support for your dApp. Simply pass `showQrModal: true` to the `init()` method. Learn more about this in WalletConnectModal documentation for [React](../web3modal/react/ethereum-provider/installation) or [HTML](../web3modal/html/ethereum-provider/installation)
+When `showQrModal` is enabled and `@walletconnect/modal` package is installed, ethereum provider will automatically show and hide [WalletConnectModal](../walletConnectModal/installation.mdx). You can also pass all relevant modal options under `qrModalOptions`. See [WalletConnectModal options](../walletConnectModal/options.mdx) for all available fields.
 
 ## Use without WalletConnectModal
 

@@ -290,11 +290,11 @@ module.exports = {
       items: [
         {
           type: 'category',
-          label: 'Web3Modal | React',
+          label: 'Web3Modal',
           items: [
             {
               type: 'category',
-              label: 'Ethereum',
+              label: 'React',
               items: [
                 {
                   type: 'category',
@@ -314,26 +314,6 @@ module.exports = {
                     }
                   ]
                 },
-                {
-                  type: 'category',
-                  label: 'With Provider',
-                  items: [
-                    'web/web3modal/react/ethereum-provider/installation',
-                    'web/web3modal/react/ethereum-provider/options',
-                    'web/web3modal/react/ethereum-provider/theming',
-                    {
-                      type: 'link',
-                      label: 'Example',
-                      href: 'https://github.com/WalletConnect/web3modal-examples/tree/main/nextjs-ethereum-provider'
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              type: 'category',
-              label: 'Multichain',
-              items: [
                 {
                   type: 'category',
                   label: 'With Sign API',
@@ -367,16 +347,10 @@ module.exports = {
                   ]
                 }
               ]
-            }
-          ]
-        },
-        {
-          type: 'category',
-          label: 'Web3Modal | HTML',
-          items: [
+            },
             {
               type: 'category',
-              label: 'Ethereum',
+              label: 'HTML',
               items: [
                 {
                   type: 'category',
@@ -396,26 +370,6 @@ module.exports = {
                     }
                   ]
                 },
-                {
-                  type: 'category',
-                  label: 'With Provider',
-                  items: [
-                    'web/web3modal/html/ethereum-provider/installation',
-                    'web/web3modal/html/ethereum-provider/options',
-                    'web/web3modal/html/ethereum-provider/theming',
-                    {
-                      type: 'link',
-                      label: 'Example',
-                      href: 'https://github.com/WalletConnect/web3modal-examples/tree/main/html-ethereum-provider'
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              type: 'category',
-              label: 'Multichain',
-              items: [
                 {
                   type: 'category',
                   label: 'With Sign API',
@@ -524,6 +478,18 @@ module.exports = {
           collapsible: true,
           collapsed: true,
           items: ['web/providers/ethereum', 'web/providers/universal']
+        },
+        {
+          type: 'category',
+          label: 'WalletConnectModal',
+          collapsible: true,
+          collapsed: true,
+          items: [
+            'web/walletConnectModal/installation',
+            'web/walletConnectModal/options',
+            'web/walletConnectModal/actions',
+            'web/walletConnectModal/theming'
+          ]
         }
       ]
     },
