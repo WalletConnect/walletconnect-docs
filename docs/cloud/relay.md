@@ -1,4 +1,4 @@
-# Cloud Relay
+# Relay
 
 ## Project ID
 
