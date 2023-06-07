@@ -59,7 +59,16 @@ For more documentation, follow the docs for Web3Modal [here](https://docs.wallet
 
 We are currently in developing our new SDK [`@web3modal/react-native`](https://github.com/WalletConnect/web3modal-react-native), which is now available in alpha version.
 
-To ensure a seamless transition, we have developed a comprehensive example [here](https://github.com/WalletConnect/react-native-examples/compare/deprecated-example...deprecated-migration) that simplifies the migration process. You can also find detailed documentation on how to utilize the new SDK [here](https://docs.walletconnect.com/2.0/reactnative/web3modal/about).
+To ensure a seamless transition, we have developed a comprehensive example [here](https://github.com/WalletConnect/react-native-examples/compare/deprecated-example...deprecated-migration) that simplifies the migration process. 
+
+Follow this steps along with the migration example:
+1. Remove `@walletconnect/react-native-dapp` and all it's implementation
+2. Remove `crypto` polyfill and `rn-nodeify` logic (if present)
+3. Install new packages: `yarn add @web3modal/react-native react-native-get-random-values react-native-modal react-native-svg @react-native-async-storage/async-storage`
+4. If the project uses react native < 0.70, install `big-integer` and add `BigInt` polyfill
+5. Run `pod install` in `/ios` 
+
+You can also find detailed documentation on how to install & utilize the new SDK [here](https://docs.walletconnect.com/2.0/reactnative/web3modal/about).
 
 The latest SDK introduces a powerful combination of [Universal Provider](https://docs.walletconnect.com/2.0/web/providers/universal) and our [Cloud Explorer API](https://docs.walletconnect.com/2.0/cloud/explorer#cloud-explorer-api). This integration forms the solid foundation for a React Native dapp to effortlessly connect with wallets."
 
