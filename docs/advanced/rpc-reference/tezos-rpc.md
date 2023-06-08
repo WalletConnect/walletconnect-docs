@@ -55,16 +55,15 @@ This method returns a hash for the provided operations. They will be signed by t
     	1.1. `account` : `STRING` - corresponding address for keypair
     	1.2. `operations` : `Array` - operations to be signed:
     		1.2.1. `Object` - identifier of blockchain
-                1.2.1.1. `kind` : `STRING` - type of the transaction
-                1.2.1.2. `destination` : `STRING` - recipient of the transaction
+                1.2.1.1. `kind` : `STRING` - type of the operation
+                1.2.1.2. `destination` : `STRING` - recipient of the operation
                 1.2.1.3. `amount` : `STRING` - mutez amount
-                1.2.1.4. `source` : `STRING` - (optional) transaction origin
-                1.2.1.5. `fee` : `STRING` - (optional) transaction fee
-                1.2.1.6. `counter` : `STRING` - (optional) integer of a counter
-                1.2.1.7. `gas_limit` : `STRING` - (optional) integer of the gas_limit
-                1.2.1.8. `storage_limit` : `STRING` - (optional) integer of the storage_limit
-                1.2.1.9. `parameters` : `Json` - (optional) contract call data
+                1.2.1.4. `fee` : `STRING` - (optional) operation fee - NOTE: Not all wallets will respect this value because it's usually set by the wallet depending on network usage
+                1.2.1.5. `gas_limit` : `STRING` - (optional) integer of the gas_limit
+                1.2.1.6. `storage_limit` : `STRING` - (optional) integer of the storage_limit
+                1.2.1.7. `parameters` : `Object` - (optional) contract call data
                 
+Note: All [RPC Operations](https://github.com/ecadlabs/taquito/blob/4dc6c391047b977b11eb92c7f5a5bc508ca32f01/packages/taquito/src/operations/types.ts#L553C13-L567) are valid. The above definition describes only the most common operation type.
 
 ### Returns
 
