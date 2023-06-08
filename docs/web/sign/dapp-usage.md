@@ -12,10 +12,10 @@ For an example implementation, please refer to our `react-dapp-v2` [example](htt
 
 ## Install Packages
 
-Dapps will also need to install `Web3Modal` for the UI.
+Dapps will also need to install `WalletConnectModal` for the UI.
 
 ```bash npm2yarn
-npm install @web3modal/standalone
+npm install @walletconnect/modal
 ```
 
 ## Create a Session
@@ -23,19 +23,19 @@ npm install @web3modal/standalone
 **1. Initiate your WalletConnect client with the relay server, using [your Project ID](../../cloud/relay.md).**
 
 ```javascript
-import SignClient from "@walletconnect/sign-client";
+import SignClient from '@walletconnect/sign-client'
 
 const signClient = await SignClient.init({
-  projectId: "<YOUR_PROJECT_ID>",
+  projectId: '<YOUR_PROJECT_ID>',
   // optional parameters
-  relayUrl: "<YOUR RELAY URL>",
+  relayUrl: '<YOUR RELAY URL>',
   metadata: {
-    name: "Example Dapp",
-    description: "Example Dapp",
-    url: "#",
-    icons: ["https://walletconnect.com/walletconnect-logo.png"],
-  },
-});
+    name: 'Example Dapp',
+    description: 'Example Dapp',
+    url: '#',
+    icons: ['https://walletconnect.com/walletconnect-logo.png']
+  }
+})
 ```
 
 **2. Add listeners for desired `SignClient` events.**
@@ -45,34 +45,34 @@ To listen to pairing-related events, please follow the guidance for [Pairing API
 :::
 
 ```javascript
-signClient.on("session_event", ({ event }) => {
+signClient.on('session_event', ({ event }) => {
   // Handle session events, such as "chainChanged", "accountsChanged", etc.
-});
+})
 
-signClient.on("session_update", ({ topic, params }) => {
-  const { namespaces } = params;
-  const _session = signClient.session.get(topic);
+signClient.on('session_update', ({ topic, params }) => {
+  const { namespaces } = params
+  const _session = signClient.session.get(topic)
   // Overwrite the `namespaces` of the existing session with the incoming one.
-  const updatedSession = { ..._session, namespaces };
+  const updatedSession = { ..._session, namespaces }
   // Integrate the updated session state into your dapp state.
-  onSessionUpdate(updatedSession);
-});
+  onSessionUpdate(updatedSession)
+})
 
-signClient.on("session_delete", () => {
+signClient.on('session_delete', () => {
   // Session was deleted -> reset the dapp state, clean up from user session, etc.
-});
+})
 ```
 
-**3. Create a new Web3Modal instance.**
+**3. Create a new WalletConnectModal instance.**
 
 ```javascript
-import Web3Modal from "@web3modal/standalone";
+import { WalletConnectModal } from '@walletconnect/modal'
 
-const web3Modal = new Web3Modal({
-  projectId: "<YOUR_PROJECT_ID>",
-  // `standaloneChains` can also be specified when calling `web3Modal.openModal(...)` later on.
-  standaloneChains: ["eip155:1"],
-});
+const walletConnectModal = new WalletConnectModal({
+  projectId: '<YOUR_PROJECT_ID>',
+  // `standaloneChains` can also be specified when calling `walletConnectModal.openModal(...)` later on.
+  standaloneChains: ['eip155:1']
+})
 ```
 
 **4. Connect the application and specify session permissions.**
@@ -86,31 +86,31 @@ try {
     requiredNamespaces: {
       eip155: {
         methods: [
-          "eth_sendTransaction",
-          "eth_signTransaction",
-          "eth_sign",
-          "personal_sign",
-          "eth_signTypedData",
+          'eth_sendTransaction',
+          'eth_signTransaction',
+          'eth_sign',
+          'personal_sign',
+          'eth_signTypedData'
         ],
-        chains: ["eip155:1"],
-        events: ["chainChanged", "accountsChanged"],
-      },
-    },
-  });
+        chains: ['eip155:1'],
+        events: ['chainChanged', 'accountsChanged']
+      }
+    }
+  })
 
   // Open QRCode modal if a URI was returned (i.e. we're not connecting an existing pairing).
   if (uri) {
-    web3Modal.openModal({ uri });
+    walletConnectModal.openModal({ uri })
     // Await session approval from the wallet.
-    const session = await approval();
+    const session = await approval()
     // Handle the returned session (e.g. update UI to "connected" state).
     // * You will need to create this function *
-    onSessionConnect(session);
+    onSessionConnect(session)
     // Close the QRCode modal in case it was open.
-    web3Modal.closeModal();
+    walletConnectModal.closeModal()
   }
 } catch (e) {
-  console.error(e);
+  console.error(e)
 }
 ```
 
@@ -121,17 +121,17 @@ Once the session has been established successfully, you can start making JSON-RP
 ```javascript
 const result = await signClient.request({
   topic: session.topic,
-  chainId: "eip155:1",
+  chainId: 'eip155:1',
   request: {
     id: 1,
-    jsonrpc: "2.0",
-    method: "personal_sign",
+    jsonrpc: '2.0',
+    method: 'personal_sign',
     params: [
-      "0x1d85568eEAbad713fBB5293B45ea066e552A90De",
-      "0x7468697320697320612074657374206d65737361676520746f206265207369676e6564",
-    ],
-  },
-});
+      '0x1d85568eEAbad713fBB5293B45ea066e552A90De',
+      '0x7468697320697320612074657374206d65737361676520746f206265207369676e6564'
+    ]
+  }
+})
 ```
 
 > For more information on available JSON-RPC requests, see the [JSON-RPC reference](../../advanced/rpc-reference/ethereum-rpc.md).
@@ -141,8 +141,8 @@ const result = await signClient.request({
 Sessions are saved to localstorage, meaning that even if the web page is reloaded, the session can still be retrieved, as demonstrated in the following code:
 
 ```ts
-const lastKeyIndex = signClient.session.getAll().length - 1;
-const lastSession = signClient.session.getAll()[lastKeyIndex];
+const lastKeyIndex = signClient.session.getAll().length - 1
+const lastSession = signClient.session.getAll()[lastKeyIndex]
 ```
 
 ## Finding a Specific Session
@@ -154,15 +154,15 @@ const specificSession = _client.find({
   requiredNamespaces: {
     eip155: {
       methods: [
-        "eth_sendTransaction",
-        "eth_signTransaction",
-        "eth_sign",
-        "personal_sign",
-        "eth_signTypedData",
+        'eth_sendTransaction',
+        'eth_signTransaction',
+        'eth_sign',
+        'personal_sign',
+        'eth_signTypedData'
       ],
-      chains: ["eip155:5"],
-      events: ["chainChanged", "accountsChanged"],
-    },
-  },
-});
+      chains: ['eip155:5'],
+      events: ['chainChanged', 'accountsChanged']
+    }
+  }
+})
 ```

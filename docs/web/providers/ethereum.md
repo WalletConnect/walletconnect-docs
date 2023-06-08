@@ -1,11 +1,11 @@
 # Ethereum Provider
 
-Ethereum Provider for WalletConnect v2
+[EIP-1993](https://eips.ethereum.org/EIPS/eip-1193) compliant Provider for WalletConnect v2. You can use this on it's own or pass down to libraries like ethers, viem, web3js and others.
 
 ## Installation
 
 ```bash npm2yarn
-npm install @walletconnect/ethereum-provider @web3modal/standalone
+npm install @walletconnect/ethereum-provider @walletconnect/modal
 ```
 
 ## Initialization
@@ -16,20 +16,20 @@ import { EthereumProvider } from '@walletconnect/ethereum-provider'
 const provider = await EthereumProvider.init({
   projectId, // REQUIRED your projectId
   chains, // REQUIRED chain ids
-  showQrModal, // REQUIRED set to "true" to use @web3modal/standalone,
-  methods, // OPTIONAL Ethereum methods
-  events, // OPTIONAL Ethereum events
-  rpcMap, // OPTIONAL RPC URLs for each chain
+  showQrModal, // REQUIRED set to "true" to use @walletconnect/modal
+  methods, // OPTIONAL ethereum methods
+  events, // OPTIONAL ethereum events
+  rpcMap, // OPTIONAL rpc urls for each chain
   metadata, // OPTIONAL metadata of your app
   qrModalOptions // OPTIONAL - `undefined` by default, see https://docs.walletconnect.com/2.0/web3modal/options
 })
 ```
 
-## Use with Web3Modal
+## Use with WalletConnectModal
 
-It is easy to enable Web3Modal support for your dApp. Simply pass `showQrModal: true` to the `init()` method. Learn more about this in Web3Modal documentation for [React](../web3modal/react/ethereum-provider/installation) or [HTML](../web3modal/html/ethereum-provider/installation)
+When `showQrModal` is enabled and `@walletconnect/modal` package is installed, ethereum provider will automatically show and hide [WalletConnectModal](../walletConnectModal/installation.mdx). You can also pass all relevant modal options under `qrModalOptions`. See [WalletConnectModal options](../walletConnectModal/options.mdx) for all available fields.
 
-## Use without Web3Modal
+## Use without WalletConnectModal
 
 You can subscribe to the `display_uri` event and handle the URI yourself.
 
@@ -78,8 +78,8 @@ Example code can be found [here](https://github.com/wagmi-dev/references/blob/ma
 
 ```typescript
 await EthereumProvider.init({
-      projectId: process.env.TEST_PROJECT_ID,
-      chains: [1], // chains added to required namespaces
-      optionalChains: [42], // chains added to optional namespaces
-    });
+  projectId: process.env.TEST_PROJECT_ID,
+  chains: [1], // chains added to required namespaces
+  optionalChains: [42] // chains added to optional namespaces
+})
 ```
