@@ -337,24 +337,50 @@ For a version specific upgrade, refer to
 
 ### rainbowkit
 
-To migrate to WalletConnect V2 with rainbowkit, you need to upgrade `@rainbow-me/rainbowkit` to either `0.12.x` or `1.x.x` depending on whether or not you are using `wagmi v1.x.x` with support for `viem` instead of `ethers`.
+:::danger Danger Zone
 
-More instructions about Upgrading to `1.x.x` can be found [here](#pre-requisites-for-migrating-to-rainbowkit-1xx).
+Since this is a canary release, we **DO NOT** recommend using it in production. However, you should test it out in your staging environment to ensure you can migrate smoothly once the official release is out.
+
+Before migrating to the canary release, test out your favorite wallet with the example dApp from Rainbow:
+
+- [RainbowKit Example](https://rainbowkit-example-git-daniel-wc-v2-staging-rainbowdotme.vercel.app/)
+
+Alternatively, you can test out the codesandbox embed included in the next section.
+
+This section will be updated once the official release is out.
+:::
+
+<iframe
+  width="800"
+  height="450"
+  style={{
+    width: '100%',
+    height: '40rem',
+    border: 'solid 2px #aaaaaa5youa',
+    borderRadius: '0.4rem',
+    marginBottom: '1rem'
+  }}
+  src="https://codesandbox.io/p/sandbox/tender-farrell-qsptrx?embed=1"
+  allowfullscreen
+></iframe>
+
+To migrate to WalletConnect V2 with rainbowkit, you need to upgrade `@rainbow-me/rainbowkit` to `1.0.2-canary.1` or above
 
 :::caution
 
-WalletConnect V2 is only supported in `@rainbow-me/rainbowkit` version `0.12.x` and above
+WalletConnect V2 is only supported in `@rainbow-me/rainbowkit` version `1.0.2-canary.1` and above.
+
+Since this is a canary release, you will need to upgrade to `1.0.2` once it is released. You can track the progress of the release [here](https://github.com/rainbow-me/rainbowkit/pull/1272)
 
 :::
 
-#### Pre-requisites for migrating to rainbowkit `1.x.x`
+#### Pre-requisites for migrating to rainbowkit `1.0.2-canary.1`
 
-_If you are upgrading to `0.2.x`, feel free to skip this section and follow these steps [instead](#upgrading-to-rainbowkit-012x)._
-
-Upgrade RainbowKit and `wagmi` to the latest version along with viem
+Upgrade `wagmi` to the latest version along with viem.
+Upgrade `@rainbow-me/rainbowkit` to version `1.0.2-canary.1` or above.
 
 ```bash
-yarn add @rainbow-me/rainbowkit@latest wagmi@latest viem
+yarn add @rainbow-me/rainbowkit@1.0.2-canary.1 wagmi@latest viem
 ```
 
 :::info
@@ -365,25 +391,19 @@ If you're relying on the [Authentication](https://www.rainbowkit.com/docs/authen
 yarn add ethers
 ```
 
-`v1.x.x` requires you to carry out additional steps during migration.
+Upgrading to `v1.x.x` requires you to carry out additional steps during migration.
 You can find the full set of instructions here:
 
 - [official migration guide](https://www.rainbowkit.com/docs/migration-guide#1xx-breaking-changes) for RainbowKit
 
 :::
 
-#### Upgrading to rainbowkit `0.12.x`
-
-Upgrade `@rainbow-me/rainbowkit` and `wagmi` to `0.12.x`.
-
-```bash
-yarn add @rainbow-me/rainbowkit@^0.12.0 wagmi@^0.12.0
-```
-
 WalletConnect v2 requires a project ID to be set and included in the configuration.
 You can get a `projectID` from [WalletConnect Cloud](https://cloud.walletconnect.com/) for free.
 
 Create a new environment variable `WALLETCONNECT_PROJECT_ID` in your `.env` file and set it to your project ID.
+
+#### Upgrading to rainbowkit `1.0.2-canary.1`
 
 Provide the `projectId` to `getDefaultWallets` and individual RainbowKit wallet connectors.
 
@@ -410,3 +430,5 @@ const connectors = connectorsForWallets([
 
 ...
 ```
+
+Note: Make sure you have compatible versions of ethers and viem. Check your project's dependencies to ensure compatibility with RainbowKit.
