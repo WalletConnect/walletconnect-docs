@@ -1,4 +1,4 @@
-import Container from '../components/Container'
+import Container from '../../components/Container'
 
 # Using Web3Modal with React
 
