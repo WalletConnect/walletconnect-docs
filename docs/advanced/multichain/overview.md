@@ -25,6 +25,6 @@ Integrate RPC method support into the example wallets and dapp.
 
 For a chain to benefit users, its prominent wallets and dApps must be registered in the Explorer. Encourage them to join the API, allowing users to view the wallets as options when connecting to a dApp.
 
-## [Web3Modal Standalone](../../web/about-web3modal.mdx)
+## [WalletConnectModal](../../web/about-web3modal.mdx)
 
-After adding the chain to the Explorer, Web3Modal Standalone can be utilized to offer users a seamless experience when connecting to their wallet.
+After adding the chain to the Explorer, WalletConnectModal can be utilized to offer users a seamless experience when connecting to their wallet.

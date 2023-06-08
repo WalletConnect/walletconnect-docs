@@ -4,7 +4,7 @@ Chat SDK allows E2EE direct messaging between users, using their wallet address.
 
 ## Chat Sample App
 
-We recommend looking at example implementations of Chat Sample at our [Kotlin Github repository](https://github.com/WalletConnect/WalletConnectKotlinV2/tree/master/chat/sample)
+We recommend looking at example implementations of Chat Sample at our [Kotlin GitHub repository](https://github.com/WalletConnect/WalletConnectKotlinV2/tree/master/chat/sample)
 
 ## ChatClient
 
@@ -58,8 +58,8 @@ val connectionType = ConnectionType.AUTOMATIC or ConnectionType.MANUAL
 val appMetaData = Core.Model.AppMetaData(
     name = "Chat Sample",
     description = "Chat Sample description",
-    url = "Chat Sample Url",
-    icons = /*list of icon url strings*/,
+    url = "Chat Sample URL",
+    icons = /*list of icon URL strings*/,
     redirect = "kotlin-chat-wc:/request" // Custom Redirect URI
 )
 

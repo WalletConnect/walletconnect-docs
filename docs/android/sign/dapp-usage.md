@@ -11,7 +11,7 @@ val connectionType = ConnectionType.AUTOMATIC or ConnectionType.MANUAL
 val appMetaData = Core.Model.AppMetaData(
     name = "Dapp Name",
     description = "Dapp Description",
-    url = "Dapp Url",
+    url = "Dapp URL",
     icons = /*list of icon url strings*/,
     redirect = "kotlin-dapp-wc:/request" // Custom Redirect URI
 )

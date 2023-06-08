@@ -143,7 +143,7 @@ const config = {
             title: 'Community',
             items: [
               {
-                label: 'Github Discussions',
+                label: 'GitHub Discussions',
                 href: 'https://github.com/WalletConnect/walletconnect-monorepo/discussions'
               },
               {

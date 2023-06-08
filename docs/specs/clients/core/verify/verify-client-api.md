@@ -14,7 +14,7 @@ attestation_id = sha256(stringify(json_rpc_payload))
 
 Thus both the sender and recipient can derive the same attestation id before or after decrypting messages sent through the Relay.
 
-The Verify Server only needs to map an attestation id to an origin which will be a url for browser-based applications.
+The Verify Server only needs to map an attestation id to an origin which will be a URL for browser-based applications.
 
 ## Client API
 
