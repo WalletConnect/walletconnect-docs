@@ -23,6 +23,7 @@ In order to get started, we recommend identifying which library your dapp utiliz
 9. [web3-react](#web3-react)
 10. [ConnectKit](#connectkit)
 11. [wagmi](#wagmi)
+12. [rainbowkit](#rainbowkit)
 
 ### web3-provider
 
@@ -218,9 +219,9 @@ Next, update your code by including the `walletConnectProjectId` inside the conf
 ...
 const client = createClient(
   getDefaultClient({
-    ...
+  ...
 +    walletConnectProjectId: process.env.WALLETCONNECT_PROJECT_ID,
-    ...
+  ...
   }),
 );
 ...
@@ -272,8 +273,8 @@ import { WalletConnectConnector } from 'wagmi/connectors/walletConnect'
 
 const connector = new WalletConnectConnector({
   options: {
-    projectId: process.env.WALLETCONNECT_PROJECT_ID,
-    showQrModal: true
+  projectId: process.env.WALLETCONNECT_PROJECT_ID,
+  showQrModal: true
   }
 })
 
@@ -316,7 +317,7 @@ const { chains, publicClient } = configureChains([mainnet], [publicProvider()])
 const connector = new WalletConnectConnector({
   chains,
   options: {
-    projectId: process.env.WALLETCONNECT_PROJECT_ID,
+  projectId: process.env.WALLETCONNECT_PROJECT_ID,
   },
 }),
 
@@ -333,3 +334,79 @@ For a version specific upgrade, refer to
 
 - [official migration guide](https://wagmi.sh/react/migration-guide) for wagmi
 - [ethers.js -> viem migration guide](https://wagmi.sh/react/migration-guide) for viem.
+
+### rainbowkit
+
+To migrate to WalletConnect V2 with rainbowkit, you need to upgrade `@rainbow-me/rainbowkit` to either `0.12.x` or `1.x.x` depending on whether or not you are using `wagmi v1.x.x` with support for `viem` instead of `ethers`.
+
+More instructions about Upgrading to `1.x.x` can be found [here](#pre-requisites-for-migrating-to-rainbowkit-1xx).
+
+:::caution
+
+WalletConnect V2 is only supported in `@rainbow-me/rainbowkit` version `0.12.x` and above
+
+:::
+
+#### Pre-requisites for migrating to rainbowkit `1.x.x`
+
+_If you are upgrading to `0.2.x`, feel free to skip this section and follow these steps [instead](#upgrading-to-rainbowkit-012x)._
+
+Upgrade RainbowKit and `wagmi` to the latest version along with viem
+
+```bash
+yarn add @rainbow-me/rainbowkit@latest wagmi@latest viem
+```
+
+:::info
+
+If you're relying on the [Authentication](https://www.rainbowkit.com/docs/authentication) api, `siwe` still uses `ethers` and you will need to install it separately, considering you don't have it installed already.
+
+```bash
+yarn add ethers
+```
+
+`v1.x.x` requires you to carry out additional steps during migration.
+You can find the full set of instructions here:
+
+- [official migration guide](https://www.rainbowkit.com/docs/migration-guide#1xx-breaking-changes) for RainbowKit
+
+:::
+
+#### Upgrading to rainbowkit `0.12.x`
+
+Upgrade `@rainbow-me/rainbowkit` and `wagmi` to `0.12.x`.
+
+```bash
+yarn add @rainbow-me/rainbowkit@^0.12.0 wagmi@^0.12.0
+```
+
+WalletConnect v2 requires a project ID to be set and included in the configuration.
+You can get a `projectID` from [WalletConnect Cloud](https://cloud.walletconnect.com/) for free.
+
+Create a new environment variable `WALLETCONNECT_PROJECT_ID` in your `.env` file and set it to your project ID.
+
+Provide the `projectId` to `getDefaultWallets` and individual RainbowKit wallet connectors.
+
+```typescript
+...
+
+const {wallets} = getDefaultWallets({
+  appName: 'WalletConnect v2',
+  projectId: process.env.WALLETCONNECT_PROJECT_ID,
+  chains,
+});
+
+const connectors = connectorsForWallets([
+  ...wallets,
+  {
+    groupName: "Other Wallets",
+    wallets: [
+      argentWallet({ projectId, chains }),
+      trustWallet({ projectId, chains }),
+      ledgerWallet({ projectId, chains }),
+    ]
+  }
+])
+
+...
+```
