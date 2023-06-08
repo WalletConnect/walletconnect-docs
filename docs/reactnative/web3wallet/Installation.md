@@ -4,7 +4,7 @@ import Container from '../../components/Container';
 
 The [Web3Wallet SDK](https://medium.com/walletconnect/simplifying-integration-for-wallet-developers-with-the-new-web3wallet-sdk-8706b69e149c) simplifies the integration process for wallet developers by combining our Sign and Auth APIs. Please note that only V2 [WCURIs](../../specs/clients/core/pairing/pairing-uri) will work with this SDK, as V1 is being deprecated by June 28th, 2023.
 
-We have created a simple [tutorial](https://medium.com/walletconnect/how-to-build-a-wallet-in-react-native-with-the-web3wallet-sdk-b6f57bf02f9a) for Expo on how to get started, and this same approach is also applicable for React Native CLI. If you need assistance at any point during development, please feel free to reach out to us via [GitHub Discussions](https://github.com/orgs/WalletConnect/discussions) or Discord in the `wallet-dev-support` [channel.](https://discord.com/channels/492410046307631105/1040018700734038169).
+We have created a simple [tutorial](https://medium.com/walletconnect/how-to-build-a-wallet-in-react-native-with-the-web3wallet-sdk-b6f57bf02f9a) for Expo on how to get started, and this same approach is also applicable for React Native CLI. If you need assistance at any point during development, please feel free to reach out to us via [GitHub Discussions](https://github.com/orgs/WalletConnect/discussions).
 
 ## Obtain Project ID
 
