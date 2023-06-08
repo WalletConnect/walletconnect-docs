@@ -11,7 +11,7 @@ It's public API and associated documentation may still see significant and break
 
 The Web3Modal SDK simplifies the modal integration process for dapp developers. Please note that only V2 [WCURIs](../../specs/clients/core/pairing/pairing-uri) will work with this SDK, as V1 is being deprecated by June 28th, 2023.
 
-If you need assistance at any point during development, please feel free to reach out to us via [GitHub Discussions](https://github.com/orgs/WalletConnect/discussions) or on Discord in the dapp-dev-support [channel](https://discord.com/channels/492410046307631105/1040019697271328838).
+If you need assistance at any point during development, please feel free to reach out to us via [GitHub Discussions](https://github.com/orgs/WalletConnect/discussions).
 
 ## Obtain Project ID
 
