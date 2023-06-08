@@ -4,7 +4,7 @@ description: Quick Start For Dapps using Standalone Client
 
 # Dapp Usage
 
-This library is compatible with NodeJS, browsers and React-Native applications \(NodeJS modules require polyfills for React-Native\).
+This library is compatible with Node.js, browsers and React Native applications \(Node.js modules require polyfills for React Native\).
 
 :::info
 For an example implementation, please refer to our `react-dapp-v2` [example](https://github.com/WalletConnect/web-examples/tree/main/dapps/react-dapp-v2).
