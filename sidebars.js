@@ -296,6 +296,7 @@ module.exports = {
               type: 'category',
               label: 'React',
               items: [
+                'web/web3modal/react/introduction',
                 {
                   type: 'category',
                   label: 'With Wagmi',
@@ -352,6 +353,7 @@ module.exports = {
               type: 'category',
               label: 'HTML',
               items: [
+                'web/web3modal/html/introduction',
                 {
                   type: 'category',
                   label: 'With Wagmi',
