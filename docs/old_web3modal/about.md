@@ -85,4 +85,4 @@ Please stay tuned for future updates and announcements regarding the release of 
 - [Awesome WalletConnect](https://github.com/WalletConnect/awesome-walletconnect) - community-curated collection of WalletConnect-enabled wallets, libraries, and tools.
 - [Web3Modal Laboratory](https://lab.web3modal.com) - A place to test your wallet integrations against various setups of Web3Modal.
 - [Web3Modal GitHub](https://github.com/WalletConnect/web3modal) - Web3Modal GitHub repository.
-- [Web3Modal Discord Forum](https://discord.com/channels/492410046307631105/1040016448157925467) - Get help from community and WalletConnect team members on Discord.
+- [Web3Modal GitHub Discussions](https://github.com/orgs/WalletConnect/discussions/categories/web3modal-sdk-support).
