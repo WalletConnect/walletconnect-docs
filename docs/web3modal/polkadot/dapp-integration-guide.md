@@ -14,11 +14,11 @@
 
 1. **One time step**: Generate a unique `projectId` by visiting and creating your project’s profile on WalletConnect’s project dashboard at: https://cloud.walletconnect.com/.
 
-2. Import `UniversalProvider` and `{ Web3Modal }` from `@walletconnect/universal-provider` and `@web3modal/standalone` respectively.
+2. Import `UniversalProvider` and `{ WalletConnectModal }` from `@walletconnect/universal-provider` and `@walletconnect/modal` respectively.
 
 ```js
 import UniversalProvider from '@walletconnect/universal-provider'
-import { Web3Modal } from '@web3modal/standalone'
+import { WalletConnectModal } from '@walletconnect/modal'
 ```
 
 3. Instatiate a universal provider using the `projectId` created for your app.
@@ -58,9 +58,9 @@ const params = {
       methods: ['polkadot_signTransaction', 'polkadot_signMessage'],
       chains: [
         'polkadot:91b171bb158e2d3848fa23a9f1c25182', // polkadot
-        'polkadot:afdc188f45c71dacbaa0b62e16a91f72',  // hydradx
+        'polkadot:afdc188f45c71dacbaa0b62e16a91f72', // hydradx
         'polkadot:0f62b701fb12d02237a33b84818c11f6' // turing network
-        ],
+      ],
       events: ['chainChanged", "accountsChanged']
     }
   }
@@ -72,7 +72,7 @@ const { uri, approval } = await provider.client.connect(params)
 5. Create a standalone modal using your dapps WalletConnect projectid and specifying version 2 of WalletConnect.
 
 ```js
-const web3modal = new Web3Modal({
+const walletConnectModal = new WalletConnectModal({
   projectId: '2ea3f3ghubh32b8ie2f2',
   walletConnectVersion: 2
 })
@@ -83,7 +83,7 @@ const web3modal = new Web3Modal({
 ```js
 // if there is a URI from the client connect step open the modal
 if (uri) {
-  web3modal.openModal({ uri })
+  walletConnectModal.openModal({ uri })
 }
 // await session approval from the wallet app
 const walletConnectSession = await approval()
@@ -137,27 +137,24 @@ const unsignedTransaction = {
 
 ```js
 // import api and wsprovider
-import { ApiPromise, WsProvider } from '@polkadot/api';
+import { ApiPromise, WsProvider } from '@polkadot/api'
 
 //instantiate wsProvider and api
-const wsProvider = new WsProvider('wss://rpc.polkadot.io');
-const api = await ApiPromise.create({ provider: wsProvider });
+const wsProvider = new WsProvider('wss://rpc.polkadot.io')
+const api = await ApiPromise.create({ provider: wsProvider })
 
-const lastHeader = await api.rpc.chain.getHeader();
-  const blockNumber = api.registry.createType(
-    'BlockNumber',
-    lastHeader.number.toNumber()
-  );
-const tx = api.tx.balances.transfer(keyring.bob.publicKey, 100);
+const lastHeader = await api.rpc.chain.getHeader()
+const blockNumber = api.registry.createType('BlockNumber', lastHeader.number.toNumber())
+const tx = api.tx.balances.transfer(keyring.bob.publicKey, 100)
 
-const method = api.createType('Call', tx);
-  const era = api.registry.createType('ExtrinsicEra', {
+const method = api.createType('Call', tx)
+const era = api.registry.createType('ExtrinsicEra', {
   current: lastHeader.number.toNumber(),
-  period: 64,
-});
+  period: 64
+})
 
-const accountNonce = getBalanceAccount(submitAddress)?.nonce || 0;
-const nonce = api.registry.createType('Compact<Index>', accountNonce);
+const accountNonce = getBalanceAccount(submitAddress)?.nonce || 0
+const nonce = api.registry.createType('Compact<Index>', accountNonce)
 
 const unsignedTransaction = {
   specVersion: api.runtimeVersion.specVersion.toHex(),
@@ -177,11 +174,11 @@ const unsignedTransaction = {
     'CheckMortality',
     'CheckNonce',
     'CheckWeight',
-    'ChargeTransactionPayment',
+    'ChargeTransactionPayment'
   ],
   tip: api.registry.createType('Compact<Balance>', 0).toHex(),
-  version: tx.version,
-};
+  version: tx.version
+}
 ```
 
 # Sending unsigned transactions to the wallet for signing using WalletConnect
@@ -189,6 +186,7 @@ const unsignedTransaction = {
 9. Send the unsigned transaction to the paired wallet for signing using the providers sign client. This triggers a `session_request` event which must be handled by the paired wallet.
 
 ### Polkadot Example
+
 ```js
 const result = await client.request({
   chainId: 'polkadot:91b171bb158e2d3848fa23a9f1c25182',
@@ -204,6 +202,7 @@ const result = await client.request({
 ```
 
 ### Parachain Example (HydraDX)
+
 ```js
 const result = await client.request({
   chainId: 'polkadot:afdc188f45c71dacbaa0b62e16a91f72',
@@ -233,11 +232,11 @@ Using this signature, we can now create an `ExtrinsicPayload` and add the signat
 ```js
 // create the extrinsic payload using the unsigned transaction
 const rawUnsignedTransaction = api.registry.createType('ExtrinsicPayload', unsignedTransaction, {
-    version: unsignedTransaction.version,
-  });
+  version: unsignedTransaction.version
+})
 
-  // add the signature to the extrinsic payload
-tx.addSignature(selectedWalletConnectAddress, result.signature, rawUnsignedTransaction);
+// add the signature to the extrinsic payload
+tx.addSignature(selectedWalletConnectAddress, result.signature, rawUnsignedTransaction)
 ```
 
 # Signing and sending the transaction to the node
@@ -246,36 +245,36 @@ Now, it is just about attaching the returned signature to the transaction and su
 
 ```js
 const rawUnsignedTransaction = api.registry.createType('ExtrinsicPayload', unsignedTransaction, {
-    version: unsignedTransaction.version,
-  });
+  version: unsignedTransaction.version
+})
 
-tx.addSignature(selectedWalletConnectAddress, result.signature, rawUnsignedTransaction);
+tx.addSignature(selectedWalletConnectAddress, result.signature, rawUnsignedTransaction)
 
 // send the signed transaction to the node
 const unsub = await tx.send(({ status, events }) => {
-    // optionally handle ready status, notify user of submission
-    if (status.isReady) {
-          // ...
-    }
+  // optionally handle ready status, notify user of submission
+  if (status.isReady) {
+    // ...
+  }
 
-    // optionally handle in block status, notify user of in block
-    if (status.isInBlock) {
-      // ...
-    }
+  // optionally handle in block status, notify user of in block
+  if (status.isInBlock) {
+    // ...
+  }
 
-    // let user know outcome of transaction
-    if (status.isFinalized) {
-      events.forEach(({ event: { method } }) => {
+  // let user know outcome of transaction
+  if (status.isFinalized) {
+    events.forEach(({ event: { method } }) => {
       // if success optionally notify/update state
-        if (method === 'ExtrinsicSuccess') {
-          // ...
-          unsub(); // unsubscribe from extrinsic
-        } else if (method === 'ExtrinsicFailed') {
+      if (method === 'ExtrinsicSuccess') {
+        // ...
+        unsub() // unsubscribe from extrinsic
+      } else if (method === 'ExtrinsicFailed') {
         // on failure optionally notify/update state
-          // ...
-          unsub(); // unsubscribe from extrinsic
-        }
+        // ...
+        unsub() // unsubscribe from extrinsic
+      }
     })
   }
-});
+})
 ```

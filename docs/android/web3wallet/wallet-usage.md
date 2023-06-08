@@ -10,7 +10,7 @@ val connectionType = ConnectionType.AUTOMATIC or ConnectionType.MANUAL
 val appMetaData = Core.Model.AppMetaData(
     name = "Wallet Name",
     description = "Wallet Description",
-    url = "Wallet Url",
+    url = "Wallet URL",
     icons = /*list of icon url strings*/,
     redirect = "kotlin-wallet-wc:/request" // Custom Redirect URI
 )
