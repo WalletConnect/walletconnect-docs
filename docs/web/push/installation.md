@@ -14,10 +14,6 @@ Head over to [WalletConnect Cloud](https://cloud.walletconnect.com/) to sign in 
 
 Install the WalletConnect client package.
 
-:::info
-For additional type packages refer to our [TypeScript Guide](../guides/typescript).
-:::
-
 ```bash npm2yarn
 npm install @walletconnect/push-client
 ```
