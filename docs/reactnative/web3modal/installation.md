@@ -2,24 +2,11 @@ import Container from '../../components/Container';
 
 # Installation
 
-:::caution
-**The Web3Modal SDK is currently in Alpha and is not production-ready**.
-
-It's public API and associated documentation may still see significant and breaking changes.
-:::
-
-
-The Web3Modal SDK simplifies the modal integration process for dapp developers. Please note that only V2 [WCURIs](../../specs/clients/core/pairing/pairing-uri) will work with this SDK, as V1 is being deprecated by June 28th, 2023.
-
-If you need assistance at any point during development, please feel free to reach out to us via [Github Discussions](https://github.com/orgs/WalletConnect/discussions) or on Discord in the dapp-dev-support [channel](https://discord.com/channels/492410046307631105/1040019697271328838).
-
 ## Obtain Project ID
 
 Every project that uses WalletConnect SDKs needs to obtain a Project ID from [WalletConnect Cloud](https://cloud.walletconnect.com/sign-in). This process is completely free and only takes a few minutes.
 
 ## Add Packages
-
-Install the Web3Modal SDK package.
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';

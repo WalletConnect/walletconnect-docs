@@ -1,6 +1,6 @@
 # Wallet Usage
 
-Sign API establishes a session between a wallet and a dapp in order to expose a set of blockchain accounts that can sign transactions or messages using a secure remote JSON-RPC transport with methods and events. This library is compatible with NodeJS, browsers and React-Native applications (NodeJS modules require polyfills for React-Native).
+Sign API establishes a session between a wallet and a dapp in order to expose a set of blockchain accounts that can sign transactions or messages using a secure remote JSON-RPC transport with methods and events. This library is compatible with Node.js, browsers and React Native applications (Node.js modules require polyfills for React Native).
 
 :::info
 For an example implementation, please refer to our `react-wallet-v2` [example](https://github.com/WalletConnect/web-examples/tree/main/wallets/react-wallet-v2).

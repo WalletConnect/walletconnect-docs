@@ -1,0 +1,36 @@
+import ThemeVariablesTablePartial from '../web3modal/_partials/themeVariablesTable.mdx'
+import ThemeModePartial from '../web3modal/_partials/themeMode.mdx'
+import ThemeVariablesPartial from '../web3modal/_partials/themeVariables.mdx'
+
+# Theming
+
+## themeMode
+
+<ThemeModePartial />
+
+### Example
+
+```tsx
+new WalletConnectModal({
+  themeMode: 'dark'
+})
+```
+
+## themeVariables
+
+<ThemeVariablesPartial />
+
+### Example
+
+```tsx
+new WalletConnectModal({
+  themeVariables: {
+    '--w3m-font-family': 'Roboto, sans-serif',
+    '--w3m-accent-color': '#F5841F'
+  }
+})
+```
+
+### List of theme variables
+
+<ThemeVariablesTablePartial />

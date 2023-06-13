@@ -1,0 +1,59 @@
+import SignApiAbout from '../../_partials/sign-api/about.mdx'
+import ObtainProjectIdPartial from '../../_partials/obtainProjectId.mdx'
+
+# Installation
+
+<SignApiAbout />
+
+## Obtain Project ID
+
+<ObtainProjectIdPartial />
+
+## Add packages
+
+```bash npm2yarn
+npm install @web3modal/sign-html
+```
+
+## Implementation
+
+Start by initializing `Web3ModalSign` in your app.
+
+```js
+import { Web3ModalSign } from '@web3modal/sign-html'
+
+const web3Modal = new Web3ModalSign({
+  projectId,
+  metadata: {
+    name: 'Web3Modal',
+    description: 'Web3Modal',
+    url: 'web3modal.com',
+    icons: ['https://walletconnect.com/_next/static/media/logo_mark.84dd8525.svg']
+  }
+})
+```
+
+## Call connect method
+
+Call connect method to open the modal and start user connection flow.
+
+```html
+<button id="connect-button">Connect with Wallet</button>
+```
+
+```js
+async function onConnect() {
+  const session = await web3Modal.connect({
+    requiredNamespaces: {
+      eip155: {
+        methods: ['eth_sendTransaction', 'personal_sign'],
+        chains: ['eip155:1'],
+        events: ['chainChanged', 'accountsChanged']
+      }
+    }
+  })
+  console.info(session)
+}
+
+document.getElementById('connect-button').addEventListener('click', onConnect)
+```

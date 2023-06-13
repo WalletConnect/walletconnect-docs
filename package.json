@@ -15,16 +15,16 @@
     "typecheck": "tsc"
   },
   "dependencies": {
-    "@docusaurus/core": "2.3.1",
-    "@docusaurus/cssnano-preset": "2.3.1",
-    "@docusaurus/plugin-debug": "2.3.1",
-    "@docusaurus/plugin-google-analytics": "2.3.1",
-    "@docusaurus/plugin-google-gtag": "2.3.1",
-    "@docusaurus/plugin-sitemap": "2.3.1",
-    "@docusaurus/preset-classic": "2.3.1",
-    "@docusaurus/remark-plugin-npm2yarn": "2.3.1",
-    "@docusaurus/theme-classic": "2.3.1",
-    "@docusaurus/theme-search-algolia": "2.3.1",
+    "@docusaurus/core": "2.4.1",
+    "@docusaurus/cssnano-preset": "2.4.1",
+    "@docusaurus/plugin-debug": "2.4.1",
+    "@docusaurus/plugin-google-analytics": "2.4.1",
+    "@docusaurus/plugin-google-gtag": "2.4.1",
+    "@docusaurus/plugin-sitemap": "2.4.1",
+    "@docusaurus/preset-classic": "2.4.1",
+    "@docusaurus/remark-plugin-npm2yarn": "2.4.1",
+    "@docusaurus/theme-classic": "2.4.1",
+    "@docusaurus/theme-search-algolia": "2.4.1",
     "@mdx-js/react": "1.6.22",
     "clsx": "1.2.1",
     "prism-react-renderer": "1.3.5",
@@ -33,8 +33,8 @@
   },
   "devDependencies": {
     "@docusaurus/module-type-aliases": "2.3.1",
-    "prettier": "2.8.4",
-    "typedoc-plugin-markdown": "3.14.0",
+    "prettier": "2.8.8",
+    "typedoc-plugin-markdown": "3.15.3",
     "typescript": "4.9.5"
   },
   "browserslist": {

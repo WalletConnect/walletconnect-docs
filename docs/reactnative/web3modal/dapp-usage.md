@@ -16,6 +16,10 @@ const providerMetadata = {
   description: 'YOUR_PROJECT_DESCRIPTION',
   url: 'https://your-project-website.com/',
   icons: ['https://your-project-logo.com/'],
+  redirect: {
+    native: 'YOUR_APP_SCHEME://',
+    universal: 'YOUR_APP_UNIVERSAL_LINK.com'
+  }
 };
 
 function App() {
@@ -31,6 +35,8 @@ function App() {
 
 Add our pre-built button component in your dapp to open/close connection and account modals. Alternatively, use your own button along with the [useWeb3Modal](#useweb3modal) hook.
 
+*Note: A new session is created automatically when the modal is opened, so avoid calling `provider.connect` by yourself.
+
 ```tsx
 import { Web3Modal, Web3Button } from '@web3modal/react-native';
 
@@ -41,6 +47,10 @@ const providerMetadata = {
   description: 'YOUR_PROJECT_DESCRIPTION',
   url: 'https://your-project-website.com/',
   icons: ['https://your-project-logo.com/'],
+  redirect: {
+    native: 'YOUR_APP_SCHEME://',
+    universal: 'YOUR_APP_UNIVERSAL_LINK.com'
+  }
 };
 
 
@@ -62,7 +72,7 @@ Hook to programmatically control the modal. Useful when you want to use your own
 ```tsx
 import { useWeb3Modal } from "@web3modal/react-native";
 
-const { isOpen, open, close, provider, isConnected } = useWeb3Modal();
+const { isOpen, open, close, provider, isConnected, address } = useWeb3Modal();
 
 // Modal's open state
 isOpen;
@@ -82,6 +92,9 @@ provider;
 // Wallet connection state
 isConnected;
 
+// Connected account's address
+address;
+
 ```
 #### Example
 ```tsx
@@ -95,6 +108,10 @@ const providerMetadata = {
   description: 'YOUR_PROJECT_DESCRIPTION',
   url: 'https://your-project-website.com/',
   icons: ['https://your-project-logo.com/'],
+  redirect: {
+    native: 'YOUR_APP_SCHEME://',
+    universal: 'YOUR_APP_UNIVERSAL_LINK.com'
+  }
 };
 
 

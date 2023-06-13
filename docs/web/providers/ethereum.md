@@ -1,11 +1,11 @@
 # Ethereum Provider
 
-Ethereum Provider for WalletConnect v2
+[EIP-1993](https://eips.ethereum.org/EIPS/eip-1193) compliant Provider for WalletConnect v2. You can use this on it's own or pass down to libraries like ethers, viem, web3js and others.
 
 ## Installation
 
 ```bash npm2yarn
-npm install @walletconnect/ethereum-provider @web3modal/standalone
+npm install @walletconnect/ethereum-provider @walletconnect/modal
 ```
 
 ## Initialization
@@ -16,7 +16,7 @@ import { EthereumProvider } from '@walletconnect/ethereum-provider'
 const provider = await EthereumProvider.init({
   projectId, // REQUIRED your projectId
   chains, // REQUIRED chain ids
-  showQrModal, // REQUIRED set to "true" to use @web3modal/standalone,
+  showQrModal, // REQUIRED set to "true" to use @walletconnect/modal
   methods, // OPTIONAL ethereum methods
   events, // OPTIONAL ethereum events
   rpcMap, // OPTIONAL rpc urls for each chain
@@ -25,22 +25,15 @@ const provider = await EthereumProvider.init({
 })
 ```
 
-## Display Web3Modal with QR code / Handle connection URI
+## Use with WalletConnectModal
 
-```typescript
-// Web3Modal is disabled by default, enable it during init() to display a QR code modal
-await provider.connect({
-  chains, // OPTIONAL chain ids
-  rpcMap, // OPTIONAL rpc urls
-  pairingTopic // OPTIONAL pairing topic
-})
-// or
-await provider.enable()
-```
+When `showQrModal` is enabled and `@walletconnect/modal` package is installed, ethereum provider will automatically show and hide [WalletConnectModal](../walletConnectModal/installation.mdx). You can also pass all relevant modal options under `qrModalOptions`. See [WalletConnectModal options](../walletConnectModal/options.mdx) for all available fields.
 
-```typescript
-// If you are not using Web3Modal,
-// you can subscribe to the `display_uri` event and handle the URI yourself.
+## Use without WalletConnectModal
+
+You can subscribe to the `display_uri` event and handle the URI yourself.
+
+```ts
 provider.on('display_uri', (uri: string) => {
   // ... custom logic
 })
@@ -77,17 +70,16 @@ provider.on('display_uri', handler)
 provider.on('disconnect', handler)
 ```
 
-## Supported Web3Modal options (qrModalOptions)
+## Required and Optional Namespaces
 
-- [themeMode](https://docs.walletconnect.com/2.0/web3modal/options#thememode-optional)
-- [themeVariables](https://docs.walletconnect.com/2.0/web3modal/options#themevariables-optional)
-- [chainImages](https://docs.walletconnect.com/2.0/web3modal/options#chainimages-optional)
-- [tokenImages](https://docs.walletconnect.com/2.0/web3modal/options#tokenimages-optional)
-- [walletImages](https://docs.walletconnect.com/2.0/web3modal/options#walletimages-optional)
-- [desktopWallets](https://docs.walletconnect.com/2.0/web3modal/options#desktopwallets-optional)
-- [mobileWallets](https://docs.walletconnect.com/2.0/web3modal/options#mobilewallets-optional)
-- [enableExplorer](https://docs.walletconnect.com/2.0/web3modal/options#enableexplorer-optional)
-- [explorerRecommendedWalletIds](https://docs.walletconnect.com/2.0/web3modal/options#explorerrecommendedwalletids-optional)
-- [explorerExcludedWalletIds](https://docs.walletconnect.com/2.0/web3modal/options#explorerexcludedwalletids-optional)
-- [privacyPolicyUrl](https://docs.walletconnect.com/2.0/web3modal/options#privacypolicyurl-optional)
-- [termsOfServiceUrl](https://docs.walletconnect.com/2.0/web3modal/options#privacypolicyurl-optional)
+With Ethereum Provider, the package passed the required chains through `chains` and if your dapp wants to provide other optionalNamespaces this is passed through `optionalChains`.
+
+Example code can be found [here](https://github.com/wagmi-dev/references/blob/main/packages/connectors/src/walletConnect.ts#L134) and further documentation on namespaces can be found in this [spec](https://docs.walletconnect.com/2.0/specs/clients/sign/namespaces).
+
+```typescript
+await EthereumProvider.init({
+  projectId: process.env.TEST_PROJECT_ID,
+  chains: [1], // chains added to required namespaces
+  optionalChains: [42] // chains added to optional namespaces
+})
+```
