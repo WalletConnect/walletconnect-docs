@@ -23,6 +23,7 @@ In order to get started, we recommend identifying which library your dapp utiliz
 9. [web3-react](#web3-react)
 10. [ConnectKit](#connectkit)
 11. [wagmi](#wagmi)
+12. [RainbowKit](#rainbowkit)
 
 ### web3-provider
 
@@ -347,3 +348,53 @@ For a version-specific upgrade, refer to:
 
 - [Official migration guide](https://wagmi.sh/react/migration-guide) for wagmi
 - [ethers.js -> viem migration guide](https://wagmi.sh/react/migration-guide) for viem
+
+### RainbowKit
+
+If you've already adopted RainbowKit `0.12.x` and `1.0.x`, then you're almost there! Just upgrade to the latest RainbowKit patch release and give it a try. RainbowKit has been API compatible with WalletConnect v2 since `0.12.8` was released in April.
+
+RainbowKit has enabled WalletConnect v2 by default with `0.12.15` and `1.0.2`. RainbowKit will continue to support `0.12.x` in case your dApp has not yet upgraded to Wagmi and RainbowKit v1.
+
+**1. Upgrading dependencies**
+
+```bash
+npm i @rainbow-me/rainbowkit@^1.0.2 wagmi@^1.2
+```
+
+If you're using a version of RainbowKit before `0.12.x` or `1.0.x`, just follow the [Migration Guides](https://www.rainbowkit.com/docs/migration-guide) to get up-to-date.
+
+It is recommended that `0.12.x` dApps also begin to upgrade [wagmi](https://wagmi.sh/react/migration-guide), as improvements to WalletConnect v2 will only be included in future versions of wagmi.
+
+**2. Supplying a projectId**
+
+Every dApp that relies on WalletConnect now needs to obtain a `projectId` from [WalletConnect Cloud](https://cloud.walletconnect.com/). This is absolutely free and only takes a few minutes.
+
+Supply your `projectId` to `getDefaultWallets` and individual RainbowKit wallet connectors like the following:
+
+```ts
+const projectId = 'YOUR_PROJECT_ID';
+const { wallets } = getDefaultWallets({
+  appName: 'My RainbowKit App',
+  projectId,
+  chains,
+});
+const connectors = connectorsForWallets([
+  ...wallets,
+  {
+    groupName: 'Other',
+    wallets: [
+      argentWallet({ projectId, chains }),
+      trustWallet({ projectId, chains }),
+      ledgerWallet({ projectId, chains }),
+    ],
+  },
+]);
+```
+
+RainbowKit is type-safe and will warn you when a `projectId` is missing. Refer to our examples to see v2 in action:
+
+- [Create React App](https://codesandbox.io/p/sandbox/github/rainbow-me/rainbowkit/tree/main/examples/with-create-react-app)
+- [Next.js](https://codesandbox.io/p/sandbox/github/rainbow-me/rainbowkit/tree/main/examples/with-next)
+- [Next.js App Router](https://codesandbox.io/p/sandbox/github/rainbow-me/rainbowkit/tree/main/examples/with-next-app)
+- [Remix](https://codesandbox.io/p/sandbox/github/rainbow-me/rainbowkit/tree/main/examples/with-remix)
+- [Vite](https://codesandbox.io/p/sandbox/github/rainbow-me/rainbowkit/tree/main/examples/with-vite)
