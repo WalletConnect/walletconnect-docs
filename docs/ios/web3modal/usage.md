@@ -1,76 +1,103 @@
 # Usage
 
-## Web3Modal SDK
+## Configure Networking and Pair clients
 
-The Web3Modal Swift SDK allows for easy integration of [Web3Modal](https://web3modal.com/) in a native iOS application.
+Make sure that you properly configure Networking and Pair Clients first.
+- [Networking](../core/networking-configuration.md)
+
+
+## Initialize Web3Modal Client
+
+In order to initialize a client just call a `configure` method from the Web3Wallet instance wrapper
+
+```swift
+let metadata = AppMetadata(
+    name: "Example Wallet",
+    description: "Wallet description",
+    url: "example.wallet",
+    icons: ["https://avatars.githubusercontent.com/u/37784886"],
+    // Used for the Verify: to opt-out verification ingore this parameter
+    verifyUrl: "verify.walletconnect.com"
+)
+        
+Web3Modal.configure(
+    projectId: PROJECT_ID,
+    metadata: metadata
+)
+```
+
+This example will default to using following namespaces. 
+
+```swift
+let methods: Set<String> = ["eth_sendTransaction", "personal_sign", "eth_signTypedData"]
+let events: Set<String> = ["chainChanged", "accountsChanged"]
+let blockchains: Set<Blockchain> = [Blockchain("eip155:1")!]
+let namespaces: [String: ProposalNamespace] = [
+    "eip155": ProposalNamespace(
+        chains: blockchains,
+        methods: methods,
+        events: events
+    )
+]
+
+let defaultSessionParams =  SessionParams(
+                                requiredNamespaces: namespaces,
+                                optionalNamespaces: nil,
+                                sessionProperties: nil
+                            )
+```
+
+If you want to change that you can call configure and define your own session parameters like this.
+
+```swift
+let metadata = AppMetadata(...)
+
+let sessionParams = SessionParams(...)
+        
+Web3Modal.configure(
+    projectId: PROJECT_ID,
+    metadata: metadata,
+    sessionParams: sessionParams
+)
+```
+
+or you can change them later by calling `Web3Modal.set(sessionParams: SessionParams(...))`
+ 
 
 ## Web3Modal Usage
 
-### UIKit
+To actually present the modal you can simply call.
 
-#### Web3ModalSheetController
+```swift
+Web3Modal.present()
+```
 
-````swift
-import UIKit
+It will traverse the view hierarchy and try to present from top most controller. This is meant more towards SwiftUI.
 
-let viewController: UIViewController = Web3ModalSheetController(
-    projectId: $PROJECT_ID,
-    metadata: AppMetadata(
-        name: "Web3Modal DApp",
-        description: "Dapp with Web3Modal",
-        url: "swift.web3modal.example.dapp",
-        icons: ["https://avatars.githubusercontent.com/u/37784886"]
-    ),
-    webSocketFactory: SocketFactory()
-)
-````
+Otherwise you can specify the viewController to present from.
 
-#### SwiftUI
+```swift
+Web3Modal.present(from: viewController)
+```
 
-````swift
-import Web3Modal
+## Subscribe for Web3Modal Publishers
 
-struct ContentView: View {
+The following publishers are available to subscribe:
 
-    var body: some View {
-        YourContent()
-            .sheet {
-                Web3ModalContainerView(
-                    projectId: $PROJECT_ID,
-                    metadata: AppMetadata(
-                        name: "Web3Modal DApp",
-                        description: "Dapp with Web3Modal",
-                        url: "swift.web3modal.example.dapp",
-                        icons: ["https://avatars.githubusercontent.com/u/37784886"]
-                    ),
-                    webSocketFactory: SocketFactory()
-                )
-            }
-    }
-}
+```swift
+public var sessionPublisher: AnyPublisher<[Session], Never>
+public var sessionSettlePublisher: AnyPublisher<Session, Never>
+public var sessionRejectionPublisher: AnyPublisher<(Session.Proposal, Reason), Never>
+public var sessionDeletePublisher: AnyPublisher<(String, Reason), Never>
+public var sessionResponsePublisher: AnyPublisher<Response, Never>
+public var socketConnectionStatusPublisher: AnyPublisher<SocketConnectionStatus, Never>
+```
 
-````
+## Sign methods
 
-#### SocketFactory
+Web3Modal is internally using Sign SDK and most of its method are being exposed through Web3Modal interface.
 
-WalletConnect Swift SDK does not depend on any websocket library. `webSocketFactory` parameter allows you to pass your own implementation of websocket connection.
 
-Here's an example of WebSocketFactory implementation using Starscream v3. 
-
-````swift
-import Starscream
-
-extension WebSocket: WebSocketConnecting { }
-
-struct SocketFactory: WebSocketFactory {
-    func create(with url: URL) -> WebSocketConnecting {
-        return WebSocket(url: url)
-    }
-}
-````
-
-For more details visit  - [Networking](../core/networking-configuration.md)
-
-## Obtain Project ID
-
-Head over to [WalletConnect Cloud](https://cloud.walletconnect.com/) to sign in or sign up. Create (or use an existing) project and copy its associated Project ID.
+## Where to go from here
+Check the Web3Modal usage in our Example Showcase app that is part of WalletConnectSwiftV2 repository.
+Build API documentation in Xcode by going to `Product -> Build Documentation`
