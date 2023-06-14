@@ -120,20 +120,31 @@ If you need assistance at any point during the migration process, please feel fr
 ### web3-onboard
 
 If you are using the WalletConnect package with [Blocknative's web3-onboard](https://onboard.blocknative.com/docs/wallets/walletconnect#install), the migration is straightforward. The latest WalletConnect package is backwards-compatible (until the WalletConnect v1.0 shutdown comes into effect).
-When you are ready to transition, bump the `@web3-onboard/walletconnect` package version to >= `2.3.0` and adjust the initialization params to include:
+When you are ready to transition, bump the `@web3-onboard/walletconnect` package version to >= `2.3.0` and adjust the initialization params:
 
 ```typescript
-{
-  /**
-  * Defaults to version: 1 - this behavior will be deprecated after the WalletConnect v1 sunset
-  */
-  version: 2,
+const walletConnect = walletConnectModule({
+  version: 2, // **New Param** Defaults to version: 1 - this behavior will be deprecated after the WalletConnect v1 sunset
+  handleUri: uri => console.log(uri),
+  projectId: '', // ***New Param* Project ID associated with [WalletConnect account](https://cloud.walletconnect.com)
+  requiredChains:[1, 56] // chains required to be supported by WC wallet
+})
 
-  /**
-  * Project ID associated with [WalletConnect account](https://cloud.walletconnect.com)
-  */
-  projectId: string
-}
+// for optional chains/optionalNamespaces
+const onboard = Onboard({
+    wallets: [
+      walletConnect
+    ],
+    chains: [ // chains that are passed as optional chains to WC wallet after cleaning and parsing as number[]
+      {
+        id: '0x89',
+        token: 'MATIC',
+        label: 'Polygon',
+        rpcUrl: 'https://matic-mainnet.chainstacklabs.com'
+      }
+      // ...
+    ]
+  })
 ```
 
 _Note: The `@web3-onboard/walletconnect` package will default to `version` 1 until the WalletConnect v1 sunset is complete_
