@@ -49,7 +49,7 @@ object ResponderDelegate : AuthClient.ResponderDelegate {
 }
 ```
 
-`Auth.Event.VerifyContext` provides a domain verification information about AuthRequest. It consists of origin of a Dapp from where the request has been sent, validation Enum that says whether origin is VALID, INVALID or UNKNOWN and verify url server. 
+`Auth.Event.VerifyContext` provides domain verification information about an AuthRequest. It consists of the origin of a Dapp from where the request has been sent, a validation Enum that says whether the origin is `VALID`, `INVALID` or `UNKNOWN`, and the verify url server. 
 
 ```kotlin
 data class VerifyContext(
