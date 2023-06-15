@@ -102,10 +102,10 @@ const config = {
             label: 'Flutter'
           },
           {
-            type: "docSidebar",
-            position: "left",
-            sidebarId: "unity",
-            label: "Unity",
+            type: 'docSidebar',
+            position: 'left',
+            sidebarId: 'unity',
+            label: 'Unity'
           },
           {
             href: 'https://github.com/walletconnect/',
@@ -143,7 +143,7 @@ const config = {
             title: 'Community',
             items: [
               {
-                label: 'Github Discussions',
+                label: 'GitHub Discussions',
                 href: 'https://github.com/WalletConnect/walletconnect-monorepo/discussions'
               },
               {

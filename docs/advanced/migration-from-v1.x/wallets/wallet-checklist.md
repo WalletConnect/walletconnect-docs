@@ -12,7 +12,7 @@ Please note that the links to SDK versions and sample wallets can be found in th
 
 🌐 [Web](https://www.npmjs.com/package/@walletconnect/web3wallet?activeTab=versions)
 
-🤖 [Android](https://github.com/WalletConnect/WalletConnectKotlinV2#sdk-chart) 
+🤖 [Android](https://github.com/WalletConnect/WalletConnectKotlinV2#sdk-chart)
 
 🍏 [iOS](https://github.com/WalletConnect/WalletConnectSwiftV2/releases)
 
@@ -28,7 +28,7 @@ Please note that the links to SDK versions and sample wallets can be found in th
 
 Chain Switching enables users to experience a seamless chain agnostic UX. In WalletConnect's v2 functionality, the wallet can switch the active chain by triggering a `chainChanged` event.
 
-- **Test Dapp:** [https://lab.web3modal.com/ManagedReact](https://lab.web3modal.com/ManagedReact)
+- **Test Dapp:** [https://lab.web3modal.com](https://lab.web3modal.com)
 - **JS docs:** [https://docs.walletconnect.com/2.0/web/web3wallet/wallet-usage#-namespaces-builder-util](https://docs.walletconnect.com/2.0/web/web3wallet/wallet-usage#-namespaces-builder-util)
 
 ### Android 🤖
@@ -71,7 +71,7 @@ Auth API plays a critical role when dapps offer off-chain signatures. Wallets sh
 
 ### iOS 🍏
 
-📕 **Swift docs →** [https://docs.walletconnect.com/2.0/ios/web3wallet/wallet-usage#authorization-request-approval](https://docs.walletconnect.com/2.0/ios/web3wallet/wallet-usage#authorization-request-approval) 
+📕 **Swift docs →** [https://docs.walletconnect.com/2.0/ios/web3wallet/wallet-usage#authorization-request-approval](https://docs.walletconnect.com/2.0/ios/web3wallet/wallet-usage#authorization-request-approval)
 
 📱**Example app** → [Link](https://github.com/WalletConnect/WalletConnectSwiftV2/blob/cd55d281ae7cb3c5d14524d0147b9d557cdd1af5/Example/WalletApp/PresentationLayer/Wallet/SessionProposal/SessionProposalInteractor.swift#L6)
 
@@ -135,7 +135,6 @@ Sign Notifications ensure users receive a push notification for any pending dapp
 
 Account Switching is about the user's ability to change accounts and sign a message from a different account than the one proposed initially in the session. The wallet can switch the active account by triggering a `accountsChanged` event.
 
-
 📕 JS docs: [https://docs.walletconnect.com/2.0/web/web3wallet/wallet-usage#updating-a-session](https://docs.walletconnect.com/2.0/web/web3wallet/wallet-usage#updating-a-session)
 
 📕 Kotlin docs: [https://docs.walletconnect.com/2.0/android/web3wallet/wallet-usage#session-update](https://docs.walletconnect.com/2.0/android/web3wallet/wallet-usage#session-update)
@@ -151,6 +150,13 @@ Account Switching is about the user's ability to change accounts and sign a mess
 These dapps have provided us staging links so that wallets can test functionality.
 
 - [Aave](https://bafybeib3eavuc54ldbpziaql2koo4k7dc5l3gddn5y6zvi4rbrfnnm2sb4.ipfs.cf-ipfs.com/) | [GitHub PR](https://github.com/aave/interface/pull/1470)
-- [Pancake Swap](https://web-git-pan-1047-walletconnect-v2.pancake.run/?_vercel_share=bYy2q8qBAQA6c2CQGIANbgXAcepL9ZT4&chain=eth) | [GitHub](https://github.com/pancakeswap/pancake-frontend/pull/5963)
-- [Uniswap](https://interface-git-feat-add-wc2-uniswap.vercel.app)
+- [PancakeSwap](https://web-git-pan-1047-walletconnect-v2.pancake.run/?_vercel_share=bYy2q8qBAQA6c2CQGIANbgXAcepL9ZT4&chain=eth) | [GitHub](https://github.com/pancakeswap/pancake-frontend/pull/5963)
+- [Uniswap](https://interface-git-add-wc-v2-uniswap.vercel.app/#/swap)
 - [Polygon Bridge](https://wallet.polygon.technology/)
+- [Hop Exchange](https://goerli.hop.exchange/#/send?token=ETH)
+- [Etherscan](https://arbiscan.io/address/0xe592427a0aece92de3edee1f18e0157c05861564#writeProxyContract)
+- [RocketPool](https://stake.rocketpool.net/)
+- [MakerDAO](https://governance-portal-v2-git-walletconnect-v2-dux-core-unit.vercel.app/)
+- [Remix](https://deploy-preview-3752--remixproject.netlify.app/#lang=en&optimize=false&runs=200&evmVersion=null&version=soljson-v0.8.18+commit.87f61d96.js)
+- [Quickswap](https://beta.quickswap.exchange/#/)
+- [ParaSwap](https://thistle-hose.surge.sh/#/?network=ethereum)

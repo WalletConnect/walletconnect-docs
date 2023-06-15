@@ -1,6 +1,6 @@
 # Dapp / Requester Usage
 
-We recommend looking at example implementations of Requester at our [Kotlin Github repository](https://github.com/WalletConnect/WalletConnectKotlinV2/tree/develop/auth/requester)
+We recommend looking at example implementations of Requester at our [Kotlin GitHub repository](https://github.com/WalletConnect/WalletConnectKotlinV2/tree/develop/auth/requester)
 
 ### **Initialize Auth Client**
 

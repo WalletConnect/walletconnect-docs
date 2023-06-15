@@ -35,7 +35,7 @@ To use initialize RelayClient properly you will need a projectId. Go to https://
 #
 ## CoreClient initialization
 
-Before using any of the WalletConnect Kotlin SDKs, it is necessary to initialize the CoreClient. The initialization of CoreClient must always happen in the Android Application class. Provide the projectId generated in the WalletConnect Cloud, the WebSocket url, choose the connection type, and pass the application class. You can also pass your own Relay instance using the `RelayConnectionInterface`.
+Before using any of the WalletConnect Kotlin SDKs, it is necessary to initialize the CoreClient. The initialization of CoreClient must always happen in the Android Application class. Provide the projectId generated in the WalletConnect Cloud, the WebSocket URL, choose the connection type, and pass the application class. You can also pass your own Relay instance using the `RelayConnectionInterface`.
 
 ```kotlin
 val projectId = "" //Get Project ID at https://cloud.walletconnect.com/
