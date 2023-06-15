@@ -18,49 +18,11 @@ error: {
 }
 ```
 
-### wc_pushRequest
-
-Used to request push subscription to a peer through topic P. Response is expected on the same topic.
-
-- Success response is equivalent to push subscription acceptance.
-- Error response is equivalent to push subscription rejection.
-
-**Request**
-
-```jsonc
-// wc_pushRequest params
-{
-  "publicKey": string,
-  "metadata": Metadata,
-  "account": string,
-}
-
-| IRN     |          |
-| ------- | -------- | 
-| TTL     | 86400    |
-| Prompt  | true     |
-| Tag     | 4000     |
-
-```
-
-**Response**
-
-```jsonc
-// Success result
-{
-  "publicKey": string
-}
-
-| IRN     |          |
-| ------- | -------- |
-| TTL     | 86400    |
-| Prompt  | false    |
-| Tag     | 4001     |
-```
+## Methods
 
 ### wc_pushMessage
 
-Used to publish a notification message to a peer through topic P. Response is expected on the same topic.
+Used to publish a notification message to a peer through push topic. Response is expected on the same topic.
 
 - Success response is equivalent to push message acknowledgement.
 - Error response is equivalent to push message failed to decrypt.
@@ -75,12 +37,12 @@ Used to publish a notification message to a peer through topic P. Response is ex
   "body": string,
   "icon": string,
   "url": string,
+  "type": string
 }
 
 | IRN     |          |
 | ------- | -------- |
 | TTL     | 86400    |
-| Prompt  | true     |
 | Tag     | 4002     |
 
 ```
@@ -94,14 +56,13 @@ true
 | IRN     |          |
 | ------- | -------- |
 | TTL     | 86400    |
-| Prompt  | false    |
 | Tag     | 4003     |
 
 ```
 
 ### wc_pushDelete
 
-Used to inform the peer to close and delete a push subscription. The reason field should be a human-readable message defined by the SDK consumer to be shown on the peer's side.
+Used to inform the peer to close and delete a push subscription through push topic. The reason field should be a human-readable message defined by the SDK consumer to be shown on the peer's side.
 
 **Request**
 
@@ -114,7 +75,6 @@ Used to inform the peer to close and delete a push subscription. The reason fiel
 | IRN     |          |
 | ------- | -------- |
 | TTL     | 86400    |
-| Prompt  | true     |
 | Tag     | 4004     |
 ```
 
@@ -126,5 +86,112 @@ true
 | IRN     |          |
 | ------- | -------- |
 | TTL     | 86400    |
-| Prompt  | false    |
 | Tag     | 4005     |
+```
+
+### wc_pushSubscribe
+
+Used to subscribe push subscription to a peer through subscribe topic. Response is expected on the response topic
+
+**Request**
+
+```jsonc
+// wc_pushSubscribe params
+{
+  "subscriptionAuth": string
+}
+
+| IRN     |          |
+| ------- | -------- | 
+| TTL     | 86400    |
+| Tag     | 4006     |
+
+```
+
+**Response**
+
+```jsonc
+// Success result
+{
+  "publicKey": string
+}
+
+| IRN     |          |
+| ------- | -------- |
+| TTL     | 86400    |
+| Tag     | 4007     |
+```
+
+
+### wc_pushUpdate
+
+Used to update a push subscription with a new push subscription, replacing an existing push subscription through push topic.
+
+**Note:** this method is atomically performing two methods (wc_pushDelete + wc_pushSubscribe)
+
+**Request**
+
+```jsonc
+// wc_pushUpdate params
+{
+  "subscriptionAuth": string // new subscription
+}
+
+| IRN     |          |
+| ------- | -------- | 
+| TTL     | 86400    |
+| Tag     | 4008     |
+
+```
+
+**Response**
+
+```jsonc
+// Success result
+true
+
+| IRN     |          |
+| ------- | -------- |
+| TTL     | 86400    |
+| Tag     | 4009     |
+```
+
+### wc_pushPropose
+
+Used to request push subscription to a peer through pairing topic. Response is expected on the response topic.
+
+- Success response is equivalent to push subscription acceptance.
+- Error response is equivalent to push subscription rejection.
+
+**Request**
+
+```jsonc
+// wc_pushPropose params
+{
+  "publicKey": string,
+  "metadata": Metadata,
+  "account": string,
+  "scope": string[]
+}
+
+| IRN     |          |
+| ------- | -------- | 
+| TTL     | 86400    |
+| Tag     | 4010     |
+
+```
+
+**Response**
+
+```jsonc
+// Success result
+{
+  "subscriptionAuth": string,
+  "subscriptionSymKey": string
+}
+
+| IRN     |          |
+| ------- | -------- |
+| TTL     | 86400    |
+| Tag     | 4011     |
+```

@@ -1,3 +1,0 @@
-# Installation
-
-Web3Inbox

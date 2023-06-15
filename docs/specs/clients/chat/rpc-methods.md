@@ -4,7 +4,7 @@ This doc should be used as a _source-of-truth_ and reflect the latest decisions 
 
 ## Definitions
 
-- **Nullables:** Fields flagged as `Optional` can be ommited from the payload.
+- **Nullables:** Fields flagged as `Optional` can be omitted from the payload.
 - Unless explicitly mentioned that a response requires associated data, all methods response's follow a default JSON-RPC pattern for the success and failure cases:
 
 ```jsonc
@@ -17,6 +17,8 @@ error: {
   "message": string
 }
 ```
+
+## Methods
 
 ### wc_chatInvite
 
@@ -36,7 +38,6 @@ Used to invite a peer through topic I. Requires a success response with associat
 | IRN     |          |
 | ------- | -------- |
 | TTL     | 2592000  |
-| Prompt  | true     |
 | Tag     | 2000     |
 
 ```
@@ -52,7 +53,6 @@ Used to invite a peer through topic I. Requires a success response with associat
 | IRN     |          |
 | ------- | -------- |
 | TTL     | 2592000  |
-| Prompt  | false    |
 | Tag     | 2001     |
 ```
 
@@ -74,7 +74,6 @@ Used to send a message to its peer through topic T.
 | IRN     |          |
 | ------- | -------- |
 | TTL     | 2592000  |
-| Prompt  | true     |
 | Tag     | 2002     |
 ```
 
@@ -89,7 +88,6 @@ Used to send a message to its peer through topic T.
 | IRN     |          |
 | ------- | -------- |
 | TTL     | 2592000  |
-| Prompt  | false    |
 | Tag     | 2003     |
 ```
 
@@ -108,7 +106,6 @@ Used to signal to a peer that a chat thread is being left.
 | IRN     |          |
 | ------- | -------- |
 | TTL     | 2592000  |
-| Prompt  | true     |
 | Tag     | 2004     |
 ```
 
@@ -121,7 +118,6 @@ true
 | IRN     |          |
 | ------- | -------- |
 | TTL     | 2592000  |
-| Prompt  | false    |
 | Tag     | 2005     |
 ```
 
@@ -140,7 +136,6 @@ Used to evaluate if peer is currently online. Timeout at 30 seconds
 | IRN     |          |
 | ------- | -------- |
 | TTL     | 30       |
-| Prompt  | false    |
 | Tag     | 2006     |
 ```
 
@@ -153,6 +148,5 @@ true
 | IRN     |          |
 | ------- | -------- |
 | TTL     | 30       |
-| Prompt  | false    |
 | Tag     | 2007     |
 ```

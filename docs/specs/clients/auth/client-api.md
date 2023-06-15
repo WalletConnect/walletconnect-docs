@@ -25,6 +25,6 @@ abstract class Client {
   public abstract on("auth_response", (response: Response) => {}): void;
 
   // for wallet to listen on auth request
-  public abstract on("auth_request", (id: number, payload: PayloadParams) => {}): void;
+  public abstract on("auth_request", (id: number, pairingTopic: String, payload: PayloadParams, verifyContext: VerifyContext) => {}): void;
 }
 ```

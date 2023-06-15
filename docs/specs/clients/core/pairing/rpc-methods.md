@@ -4,7 +4,7 @@ This doc should be used as a _source-of-truth_ and reflect the latest decisions 
 
 ## Definitions
 
-- **Nullables:** Fields flagged as `Optional` can be ommited from the payload.
+- **Nullables:** Fields flagged as `Optional` can be omitted from the payload.
 - Unless explicitly mentioned that a response requires associated data, all methods response's follow a default JSON-RPC pattern for the success and failure cases:
 
 ```jsonc
@@ -17,6 +17,8 @@ error: {
   "message": string
 }
 ```
+
+## Methods
 
 ### wc_pairingDelete
 
@@ -81,6 +83,36 @@ true
 | TTL     | 30       |
 | Prompt  | false    |
 | Tag     | 1003     |
+```
+
+### wc_pairingExtend
+
+Used to update the lifetiem of a pairing.
+
+**Request**
+
+```jsonc
+// wc_pairingUpdateExpiry params
+{
+  "expiry": number
+}
+
+| IRN     |          |
+| ------- | -------- |
+| Prompt  | false    |
+| Tag     | 1004     |
+```
+
+**Response**
+
+```jsonc
+// Success result
+true
+
+| IRN     |          |
+| ------- | -------- |
+| Prompt  | false    |
+| Tag     | 1005     |
 ```
 
 ### unsupported methods response

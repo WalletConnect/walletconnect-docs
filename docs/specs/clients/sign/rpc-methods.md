@@ -4,7 +4,7 @@ This doc should be used as a _source-of-truth_ and reflect the latest decisions 
 
 ## Definitions
 
-- **Nullables:** Fields flagged as `Optional` can be ommited from the payload.
+- **Nullables:** Fields flagged as `Optional` can be omitted from the payload.
 - Unless explicitly mentioned that a response requires associated data, all methods response's follow a default JSON-RPC pattern for the success and failure cases:
 
 ```jsonc
@@ -18,7 +18,7 @@ error: {
 }
 ```
 
-## Session:
+## Methods
 
 ### wc_sessionPropose
 
@@ -48,14 +48,7 @@ Used to propose a session through topic A. Requires a success response with asso
     "<namespace_name>" : {
       "chains": [string],
       "methods": [string],
-      "events": [string],
-      "extension": [ // optional
-        {
-          "chains": [string],
-          "methods": [string],
-          "events": [string],
-        }
-      ]
+      "events": [string]
     }
   },
 }
@@ -63,7 +56,6 @@ Used to propose a session through topic A. Requires a success response with asso
 | IRN     |          |
 | ------- | -------- |
 | TTL     | 300      |
-| Prompt  | true     |
 | Tag     | 1100     |
 ```
 
@@ -82,7 +74,6 @@ Used to propose a session through topic A. Requires a success response with asso
 | IRN     |          |
 | ------- | -------- |
 | TTL     | 300      |
-| Prompt  | false    |
 | Tag     | 1101     |
 ```
 
@@ -107,14 +98,7 @@ Used to settle a session over topic B.
     "<namespace_name>" : {
       "accounts": [string],
       "methods": [string],
-      "events": [string],
-      "extension": [ // optional
-        {
-          "accounts": [string],
-          "methods": [string],
-          "events": [string],
-        }
-      ]
+      "events": [string]
     }
   },
   "expiry": Int64, // seconds
@@ -123,7 +107,6 @@ Used to settle a session over topic B.
 | IRN     |          |
 | ------- | -------- |
 | TTL     | 300      |
-| Prompt  | false    |
 | Tag     | 1102     |
 ```
 
@@ -136,7 +119,6 @@ true
 | IRN     |          |
 | ------- | -------- |
 | TTL     | 300      |
-| Prompt  | false    |
 | Tag     | 1103     |
 ```
 
@@ -153,14 +135,7 @@ Used to update the namespaces of a session.
     "<namespace_name>" : {
       "accounts": [string],
       "methods": [string],
-      "events": [string],
-      "extension": [ // optional
-        {
-          "accounts": [string],
-          "methods": [string],
-          "events": [string],
-        }
-      ]
+      "events": [string]
     }
   }
 }
@@ -168,7 +143,6 @@ Used to update the namespaces of a session.
 | IRN     |          |
 | ------- | -------- |
 | TTL     | 86400    |
-| Prompt  | false    |
 | Tag     | 1104     |
 ```
 
@@ -181,7 +155,6 @@ true
 | IRN     |          |
 | ------- | -------- |
 | TTL     | 86400    |
-| Prompt  | false    |
 | Tag     | 1105     |
 ```
 
@@ -202,7 +175,6 @@ Used to extend the lifetime of a session.
 | IRN     |          |
 | ------- | -------- |
 | TTL     | 86400    |
-| Prompt  | false    |
 | Tag     | 1106     |
 ```
 
@@ -215,7 +187,6 @@ true
 | IRN     |          |
 | ------- | -------- |
 | TTL     | 86400    |
-| Prompt  | false    |
 | Tag     | 1107     |
 ```
 
@@ -227,6 +198,16 @@ Sends a CAIP-27 request to the peer client. The client should immediately reject
 Param `Expiry` is an optional Unix timestamp. Sets the time until which the responder can respond to this request. If request is expired responder should respond with a specific error code.
 
 If this parameter is not specified, the request is considered indefinite.
+
+##### Expiry validation
+`Expiry` should be between `.now() + MIN_INTERVAL` and `.now() + MAX_INTERVAL` where:
+- `MIN_INTERVAL` is 300 (5 mins)
+- `MAX_INTERVAL` is 604800 (7 days)
+
+If expiry validation failed wallet should respond with `.sessionRequestExpired (code 8000)` error
+
+##### TTL extension
+When DApp is setting `expiry` params, client should insure that Relay Publish payload method `ttl` fit `expiry` value. Otherwise request `ttl` must be increased by the required value. Check [Relay Publish payload method](../../servers/relay/relay-server-rpc.md)
 
 **Request**
 
@@ -244,7 +225,6 @@ If this parameter is not specified, the request is considered indefinite.
 | IRN     |          |
 | ------- | -------- |
 | TTL     | 300      |
-| Prompt  | true     |
 | Tag     | 1108     |
 ```
 
@@ -257,7 +237,6 @@ true
 | IRN     |          |
 | ------- | -------- |
 | TTL     | 300      |
-| Prompt  | false    |
 | Tag     | 1109     |
 ```
 
@@ -278,7 +257,6 @@ true
 | IRN     |          |
 | ------- | -------- |
 | TTL     | 300      |
-| Prompt  | true     |
 | Tag     | 1110     |
 ```
 
@@ -291,7 +269,6 @@ true
 | IRN     |          |
 | ------- | -------- |
 | TTL     | 300      |
-| Prompt  | false    |
 | Tag     | 1111     |
 ```
 
@@ -311,7 +288,6 @@ Used to inform the peer to close and delete a session. The reason field should b
 | IRN     |          |
 | ------- | -------- |
 | TTL     | 86400    |
-| Prompt  | false    |
 | Tag     | 1112     |
 ```
 
@@ -324,7 +300,6 @@ true
 | IRN     |          |
 | ------- | -------- |
 | TTL     | 86400    |
-| Prompt  | false    |
 | Tag     | 1113     |
 ```
 
@@ -343,7 +318,6 @@ Used to evaluate if peer is currently online. Timeout at 30 seconds
 | IRN     |          |
 | ------- | -------- |
 | TTL     | 30       |
-| Prompt  | false    |
 | Tag     | 1114     |
 ```
 
@@ -356,6 +330,5 @@ true
 | IRN     |          |
 | ------- | -------- |
 | TTL     | 30       |
-| Prompt  | false    |
 | Tag     | 1115     |
 ```
