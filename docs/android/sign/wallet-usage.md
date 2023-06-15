@@ -34,11 +34,11 @@ To initialize the Sign client, create a `Sign.Params.Init` object in the Android
 
 ```kotlin
 val walletDelegate = object : SignClient.WalletDelegate {
-    override fun onSessionProposal(sessionProposal: Sign.Model.SessionProposal) {
+    override fun onSessionProposal(sessionProposal: Sign.Model.SessionProposal, verifyContext: Sign.Model.VerifyContext) {
         // Triggered when wallet receives the session proposal sent by a Dapp
     }
 
-    override fun onSessionRequest(sessionRequest: Sign.Model.SessionRequest) {
+    override fun onSessionRequest(sessionRequest: Sign.Model.SessionRequest, verifyContext: Sign.Model.VerifyContext) {
         // Triggered when a Dapp sends SessionRequest to sign a transaction or a message
     }
 
@@ -63,6 +63,21 @@ val walletDelegate = object : SignClient.WalletDelegate {
     }
 }
 SignClient.setWalletDelegate(walletDelegate)
+```
+
+`Sign.Model.VerifyContext` provides a domain verification information about SessionProposal and SessionRequest. It consists of origin of a Dapp from where the request has been sent, validation Enum that says whether origin is VALID, INVALID or UNKNOWN and verify url server. 
+
+```kotlin
+data class VerifyContext(
+    val id: Long,
+    val origin: String,
+    val validation: Model.Validation,
+    val verifyUrl: String
+)
+
+enum class Validation {
+    VALID, INVALID, UNKNOWN
+}
 ```
 
 The SignClient needs a `SignClient.WalletDelegate` passed to it for it to be able to expose asynchronous updates sent from the Dapp.
