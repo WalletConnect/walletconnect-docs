@@ -8,7 +8,7 @@ When we are creating claims describing a chat invite key we must use the followi
 * exp - timestamp when jwt must expire
 * iss - public identity key in form of did:key according to the [Ed25519](https://w3c-ccg.github.io/did-method-key/#ed25519-x25519)
 * sub - public key for chat invite key in form of did:key according to the [X25519](https://w3c-ccg.github.io/did-method-key/#x25519)
-* aud - key server url used for registering
+* aud - key server URL used for registering
 * pkh - corresponding blockchain account (did:pkh)
 * act - description of action intent. Must be equal to specific value defined in each claims
 

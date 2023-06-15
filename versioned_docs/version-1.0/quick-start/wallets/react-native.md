@@ -19,7 +19,7 @@ Install NPM Package
 npm install --save @walletconnect/client
 ```
 
-Polyfill NodeJS modules for React-Native
+Polyfill Node.js modules for React-Native
 
 ```bash npm2yarn
 npm install --save rn-nodeify

@@ -12,6 +12,9 @@ abstract class Client {
 
   // register an account to sync
   public abstract register(params: { account: string, signature: string }): Promise<void>;
+
+  // checks if account is already registered in sync
+  public abstract isRegistered(params: { account: string }): boolean;
   
   // create a store
   public abstract create(params: { account: string, store: string }): Promise<void>;
@@ -28,6 +31,6 @@ abstract class Client {
   // ---------- Events ----------------------------------------------- //
 
   // subscribe to session proposal
-  public abstract on("sync_update", (store: string, update: StoreUpdate) => {}): void;
+  public abstract on("sync_update", (account: string, store: string, update: StoreUpdate) => {}): void;
 }
 ```

@@ -118,12 +118,44 @@
       "destination": "/2.0/specs/clients/core/:path*"
     },
     {
-      "source": "/2.0/web3modal/standlone:path*",
-      "destination": "/2.0/web3modal/advanced/standalone/sign:path*"
+      "source": "/2.0/web3modal/standalone:path*",
+      "destination": "/2.0/web3modal/about"
     },
     {
       "source": "/2.0/web3modal/standalone/about",
-      "destination": "/2.0/web3modal/advanced/standalone/sign/about"
+      "destination": "/2.0/web3modal/about"
+    },
+    {
+      "source": "/2.0/reactnative/introduction",
+      "destination": "/2.0/reactnative/overview"
+    },
+    {
+      "source": "/2.0/javascript/:path*",
+      "destination": "/2.0/web/:path*"
+    },
+    {
+      "source": "/2.0/kotlin/:path*",
+      "destination": "/2.0/android/:path*"
+    },
+    {
+      "source": "/2.0/swift/:path*",
+      "destination": "/2.0/ios/:path*"
+    },
+    {
+      "source": "/2.0/csharp/:path*",
+      "destination": "/2.0/unity/:path*"
+    },
+    {
+      "source": "/2.0/specs/servers/echo",
+      "destination": "/2.0/specs/servers/echo/spec"
+    },
+    {
+      "source": "/2.0/specs/servers/cast",
+      "destination": "/2.0/specs/servers/cast/cast-server-api"
+    },
+    {
+      "source": "/2.0/advanced/migration-from-v1.x",
+      "destination": "/2.0/advanced/migration-from-v1.x/overview"
     }
   ]
 }
