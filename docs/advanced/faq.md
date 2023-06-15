@@ -2,7 +2,7 @@
 
 <details className="box faq"><summary className="faq-question">What chains does WalletConnect support?</summary>
 <p className="faq-answer">WalletConnect as a protocol is chain agnostic.</p>
-<p className="faq-answer">However, our specific SDKs are more limited in what chains they support. TODO document this</p>
+<p className="faq-answer">However, our specific SDKs are more limited in what chains they support. If you would like your wallet or dapp to support additional non-EVM chains, first check to see which cross-chain primitives the WC protocol currently supports by reading the relevant entries in the Chain Agnostic Standards Alliance's <a href=https://namespaces.chainagnostic.org/>Namespaces project</a>, and reach out to our community team for guidance.  If the chain you would like to support is not documented there, find an expert in that chain's tooling and open a namespaces PR with them!</p>
 </details>
 
 <details className="box faq"><summary className="faq-question">Will the relay server <code>bridge.walletconnect.org</code> still work in v2?</summary>
