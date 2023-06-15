@@ -2,7 +2,7 @@
 
 ## Introduction
 
-WalletConnect is an open protocol for connecting Dapps to Wallets. The motivation behind it came from the lack of user-friendly Wallets available to the user - In particular solutions which don't require installing browser extensions. In order to solve this it was designed to not require any additional software or hardware to connect a Wallet to a Dapp. The design is mostly tailored to mobile wallets but it could definitely support desktop wallets as well. The protocol relies that both the Dapp and the Wallet use WalletConnect Client and connect to a Bridge server that will relay the communications. The communication is initiated with a standard URI format that contains the topic of the connection request, a symmetric key is then used to decrypt the payload and the bridge server url.
+WalletConnect is an open protocol for connecting Dapps to Wallets. The motivation behind it came from the lack of user-friendly Wallets available to the user - In particular solutions which don't require installing browser extensions. In order to solve this it was designed to not require any additional software or hardware to connect a Wallet to a Dapp. The design is mostly tailored to mobile wallets but it could definitely support desktop wallets as well. The protocol relies that both the Dapp and the Wallet use WalletConnect Client and connect to a Bridge server that will relay the communications. The communication is initiated with a standard URI format that contains the topic of the connection request, a symmetric key is then used to decrypt the payload and the bridge server URL.
 
 ## Core Architecture
 
@@ -18,7 +18,7 @@ wc:{topic...}@{version...}?bridge={url...}&key={key...}
 
 | Required parts | Notes |
 | :--- | :--- |
-| wc: | Wallet Connect protocol defined in [EIP-1328](https://eips.ethereum.org/EIPS/eip-1328) |
+| wc: | WalletConnect protocol defined in [EIP-1328](https://eips.ethereum.org/EIPS/eip-1328) |
 | _topic_ | String |
 | _version_ | Number \(eg. 1.9.0\) |
 | _bridge_ | Bridge URL \(URL Encoded\) |
@@ -210,7 +210,7 @@ Additionally the Bridge Server will trigger any existing push notifications' sub
 
 ## Push Notifications
 
-Push notification subscription is only available for native applications \(current libraries only support mobile applications\). The Push Server will require a topic, bridge url, type of notification and a token for the notification. The topic will match the client id that will receive the call requests, the bridge url is the one to subscribe to, the type of notification will differ for each mobile platform and the token is used to target the specific mobile device.
+Push notification subscription is only available for native applications \(current libraries only support mobile applications\). The Push Server will require a topic, bridge URL, type of notification and a token for the notification. The topic will match the client id that will receive the call requests, the bridge URL is the one to subscribe to, the type of notification will differ for each mobile platform and the token is used to target the specific mobile device.
 
 Additionally there are also options to provide a peerName of the other peer to customize the notification messages and language code \(ISO-639-1\) in order to localize push notification message content.
 

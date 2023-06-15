@@ -1,6 +1,6 @@
 # Data Structures
 
-In this document we define data structures and definitions used in the chat api
+In this document we define data structures and definitions used in the Chat API
 
 ## Invite
 `Invite` is a structure used to call `invite(params: {invite: Invite;}): Promise<number>;`

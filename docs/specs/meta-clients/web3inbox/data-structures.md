@@ -1,3 +1,5 @@
+# Data Structures
+
 ```typescript
 // Read more: https://rxjs.dev/guide/observer
 interface Observer<TObservedValue> {
