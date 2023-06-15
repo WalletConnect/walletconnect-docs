@@ -9,10 +9,23 @@ import ObtainProjectIdPartial from '../../_partials/obtainProjectId.mdx'
 
 <ObtainProjectIdPartial />
 
-## Add packages
+## Add packages (NPM)
 
 ```bash npm2yarn
 npm install @web3modal/sign-html
+```
+
+## Add packages (CDN)
+
+Web3ModalSign uses [unpkg](https://www.unpkg.com/) as its official CDN provider.
+Instead of using the npm package, you can simply import it from their CDN and use it in the same way.
+
+See full [CDN example](https://github.com/WalletConnect/web3modal-examples/tree/main/html-sign-cdn) for more info.
+
+```html
+<script type="module">
+  import { Web3ModalSign } from 'https://unpkg.com/@web3modal/sign-html'
+</script>
 ```
 
 ## Implementation

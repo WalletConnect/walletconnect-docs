@@ -9,10 +9,41 @@ Wagmi makes it easy to display ENS and balance information, sign messages, inter
 
 <ObtainProjectIdPartial />
 
-## Add packages
+## Add packages (NPM)
 
 ```bash npm2yarn
 npm install @web3modal/ethereum @web3modal/html @wagmi/core viem
+```
+
+## Add packages (CDN)
+
+Web3Modal uses [unpkg](https://www.unpkg.com/) as its official CDN provider.
+For majority of use cases you simply need to swap npm imports to cdn ones, however due to some downstream package issues with cdn workflows, we recomend using pre-packaged version of wagmi core as shown below. (`WagmiCore` imports).
+
+See full [CDN example](https://github.com/WalletConnect/web3modal-examples/tree/main/html-wagmi-cdn) for more info.
+
+```html
+<script type="module">
+  import {
+    EthereumClient,
+    w3mConnectors,
+    w3mProvider,
+    WagmiCore,
+    WagmiCoreChains,
+    WagmiCoreConnectors
+  } from 'https://unpkg.com/@web3modal/ethereum'
+
+  import { Web3Modal } from 'https://unpkg.com/@web3modal/html'
+
+  // Equivalent to importing from @wagmi/core
+  const { configureChains, createConfig } = WagmiCore
+
+  // Equivalent to importing from @wagmi/core/chains
+  const { mainnet, polygon, avalanche, arbitrum } = WagmiCoreChains
+
+  // Equivalent to importing from @wagmi/core/providers
+  const { CoinbaseWalletConnector } = WagmiCoreConnectors
+</script>
 ```
 
 ## Implementation
