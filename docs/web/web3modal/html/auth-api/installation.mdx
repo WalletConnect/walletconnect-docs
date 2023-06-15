@@ -9,10 +9,23 @@ import ObtainProjectIdPartial from '../../_partials/obtainProjectId.mdx'
 
 <ObtainProjectIdPartial />
 
-## Add packages
+## Add packages (NPM)
 
 ```bash npm2yarn
 npm install @web3modal/auth-html
+```
+
+## Add packages (CDN)
+
+Web3ModalAuth uses [unpkg](https://www.unpkg.com/) as official CDN provider.
+Simply import from their cdn instead of npm package and use in the same way.
+
+See full [CDN example](https://github.com/WalletConnect/web3modal-examples/tree/main/html-auth-cdn) for more info.
+
+```html
+<script type="module">
+  import { Web3ModalAuth } from 'https://unpkg.com/@web3modal/auth-html'
+</script>
 ```
 
 ## Implementation
