@@ -22,7 +22,7 @@ Please test your dapp's WalletConnect v2.0 integration with as wide a range of w
 
 1. Web3Wallet example wallet ([Link](https://react-web3wallet.vercel.app/))
 2. Alpha Wallet ([iOS](https://apps.apple.com/us/app/alphawallet-ethereum-binance/id1358230430)) ([Android](https://play.google.com/store/apps/details?id=io.stormbird.wallet&hl=en&gl=US))
-3. Trust ([iOS](https://play.google.com/store/apps/details?id=com.wallet.crypto.trustapp&hl=en&gl=US)) ([Android](https://play.google.com/store/apps/details?id=com.wallet.crypto.trustapp&hl=en&gl=US))
+3. Trust ([iOS](https://apps.apple.com/us/app/trust-crypto-bitcoin-wallet/id1288339409)) ([Android](https://play.google.com/store/apps/details?id=com.wallet.crypto.trustapp&hl=en&gl=US))
 4. Zerion ([iOS](https://apps.apple.com/us/app/zerion-wallet-crypto-web3/id1456732565)) ([Android](https://play.google.com/store/apps/details?id=io.zerion.android&hl=en&gl=US))
 
 ### Testing Process
