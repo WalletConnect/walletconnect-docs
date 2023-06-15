@@ -1,10 +1,10 @@
 ---
-description: Quick Start For Dapps using NodeJS Client
+description: Quick Start For Dapps using Node.js Client
 ---
 
-# NodeJS Client
+# Node.js Client
 
-## Quick Start For Dapps (NodeJS Client)
+## Quick Start For Dapps (Node.js Client)
 
 :::info
 You can use the **Test Wallet** to test your integration at [test.walletconnect.org](https://test.walletconnect.org) \([Source code](https://github.com/WalletConnect/walletconnect-test-wallet)\). Keep in mind that this is **not a secure wallet - Do not store funds**.
@@ -34,7 +34,7 @@ const walletConnector = new NodeWalletConnect(
   },
   {
     clientMeta: {
-      description: "WalletConnect NodeJS Client",
+      description: "WalletConnect Node.js Client",
       url: "https://nodejs.org/en/",
       icons: ["https://nodejs.org/static/images/logo.svg"],
       name: "WalletConnect",

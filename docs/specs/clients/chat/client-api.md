@@ -6,7 +6,7 @@ Client manages multiple blockchain account at a time. Client listens to multiple
 abstract class Client {
   // ---------- Methods ----------------------------------------------- //
 
-  // initializes the client with persisted storage and a network connection and keyserver url
+  // initializes the client with persisted storage and a network connection and keyserver URL
   public abstract init(params: {
     keyserverUrl?: string; //optional. If value not supplied default to keys.walletconnect.com
   }): Promise<void>;
@@ -23,10 +23,8 @@ abstract class Client {
 
   // - unregisters a blockchain account with previously registered identity key 
   // - must not unregister invite key but must stop listening for invites
-  // - onSign(message) is a callback for signing CAIP-122 message to verify blockchain account ownership
   public abstract unregister(params: {
     account: string;
-    onSign: (message: string) => Cacao.Signature
   }): Promise<void>;
 
   // queries the keyserver with a blockchain account
@@ -82,12 +80,6 @@ abstract class Client {
   public abstract leave(params: {
     topic: string;
   }): Promise<void>;
-
-  // sets peer account with public key 
-  public abstract setContact(params: {
-    account: string;
-    publicKey: string;
-  }): Promise<void>
 
   // returns all invites matching an inviteeAccount from Invite 
   // returns maps of invites indexed by id

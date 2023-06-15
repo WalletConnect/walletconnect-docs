@@ -2,11 +2,11 @@
 
 ## Motivation
 
-User Agent is an optional url parameter that provides context over the client's platform that is being run to enable Relay to identify issues regarding specific devices and/or operating systems.
+User Agent is an optional URL parameter that provides context over the client's platform that is being run to enable Relay to identify issues regarding specific devices and/or operating systems.
 
 ## Overview
 
-Clients CAN include user agent under a url params or http headers when interfacing with Relay server.
+Clients CAN include user agent under a URL params or http headers when interfacing with Relay server.
 
 Clients MUST derive information used in user agent parameters from native APIs available to the client's platform.
 
@@ -17,7 +17,6 @@ Clients MUST format each platform's parameters to comply with the specification 
 The schema for the client's User Agent will include the following:
 
 - Protocol Version (protocol) - defines WalletConnect protocol version (eg. "wc-relay-2.0")
-- SDK Version (sdk) - defines which SDK is being used (eg. "swift-2.0-rc.0" or "js-2.0-rc.0" or "kotlin-2.0-rc.0")
 - Operating System (os) - defines which operating system is being used (eg "macos-12.4")
 
 Additionally the following optional params can be included if available:
@@ -29,9 +28,9 @@ Additionally the following optional params can be included if available:
     user-agent        = protocol + "/" sdk + "/" + os [ + "/" + id ]
     protocol          = "wc" + protocol-version
     protocol-version  = 1*DIGIT
-    sdk               = sdk-prefix + sdk-version
+    sdk               = sdk-prefix + core-version
     sdk-prefix        = ("js"|"swift"|"kotlin"|"csharp")
-    sdk-version       = STRING
+    core-version      = STRING
     os                = STRING
     id                = id-prefix + id-host
     id-prefix         = ("browser","react-native","nodejs","android","ios")
