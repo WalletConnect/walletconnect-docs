@@ -11,6 +11,8 @@
     "data": string
   },  
   "metadata": Metadata,
+  "scope": Record<string, {description: string, enabled: boolean}>,
+  "expiry": number,
 }
 ```
 
@@ -22,6 +24,7 @@
   "body": string,
   "icon": string,
   "url": string,
+  "type": string
 }
 ```
 

@@ -97,12 +97,13 @@ Message that can then be sent to the blockchain.
     1. signedExtMessage - signed external message;
     2. expireAt - мessage expiration timestamp
 ##### Example:
+
 ```
 // Request
 {
   "id": 1,
   "jsonrpc": "2.0",
-  "method": "ever_signMessage",
+  "method": "ever_processMessage",
   "params": {
         "source_address": "0:695e42...b8d",
         "value": 1000000000,
@@ -126,6 +127,7 @@ Message that can then be sent to the blockchain.
     }
 }
 ```
+
 
 ### ever_sendExternalMessage
 Sends an external message to the contract.
