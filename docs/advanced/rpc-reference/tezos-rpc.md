@@ -68,7 +68,7 @@ Note: All [RPC Operations](https://github.com/ecadlabs/taquito/blob/4dc6c391047b
 ### Returns
 
     1. `Object` - Signing parameters:
-    	1.1. `operation_hash` : `STRING` - hash of the operation
+    	1.1. `operationHash` : `STRING` - hash of the operation
 
 ### Example
 
@@ -95,7 +95,7 @@ Note: All [RPC Operations](https://github.com/ecadlabs/taquito/blob/4dc6c391047b
     "id": 1,
     "jsonrpc": "2.0",
     "result":  {
-        "hash": "op..."
+        "operationHash": "op..."
     }
 }
 ```
