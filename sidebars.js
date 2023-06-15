@@ -113,6 +113,7 @@ module.exports = {
             'advanced/rpc-reference/solana-rpc',
             'advanced/rpc-reference/stellar-rpc',
             'advanced/rpc-reference/tezos-rpc',
+            'advanced/rpc-reference/starknet-rpc',
             'advanced/rpc-reference/near-rpc',
             'advanced/rpc-reference/xrpl-rpc'
           ]
