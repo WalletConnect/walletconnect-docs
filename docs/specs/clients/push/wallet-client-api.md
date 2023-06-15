@@ -11,13 +11,25 @@ abstract class WalletClient {
   public abstract approve(params: {
         id: number 
         onSign: (message: string) => Cacao.Signature
-    ): Promise<boolean>;
+   }): Promise<boolean>;
 
   // reject push subscription 
   public abstract reject(params: { id: number, reason: Reason }): Promise<boolean>;
+  
+  // update push subscription
+  public abstract update(params: { topic: string, scope: string[] }): Promise<boolean>;
+  
+  // send wc_PushSubscription request
+  public abstract subscribe(params: { 
+        metadata: Metadata,
+        account: string,
+        onSign: (message: string) => Cacao.Signature
+  }): Promise<boolean>;
 
   // query all active subscriptions
-  public abstract getActiveSubscriptions(): Promise<Record<string, PushSubscription>>;
+  public abstract getActiveSubscriptions(params: {
+    account?: string
+  }): Promise<Record<string, PushSubscription>>;
 
   // get all messages for a subscription
   public abstract getMessageHistory(params: { topic: string }): Promise<Record<number, PushMessageRecord>>
@@ -33,11 +45,17 @@ abstract class WalletClient {
 
   // ---------- Events ----------------------------------------------- //
 
-  // for wallet to listen on push request
-  public abstract on("push_request", (id: number, account: string, metadata: Metadata) => {}): void;
+  // for wallet to listen for push subscription created
+  public abstract on("push_subscription", (result: PushSubscription | Error) => {}): void;
+
+  // for wallet to listen on push proposal
+  public abstract on("push_proposal", (id: number, account: string, metadata: Metadata) => {}): void;
   
   //  for wallet to listen on push messages
   public abstract on("push_message", (message: PushMessageRecord, metadata: Metadata) => {}): void;
+  
+  // for wallet to listen for result of push subscription update
+  public abstract on("push_update", (result: PushSubscription | Error) => {}): void;
 
   // for wallet to listen on push deletion
   public abstract on("push_delete", (topic: string) => {}): void;

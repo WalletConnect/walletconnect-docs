@@ -18,6 +18,8 @@ error: {
 }
 ```
 
+## Methods
+
 ### wc_pairingDelete
 
 Used to inform the peer to close and delete a pairing. The associated authentication state of the given pairing must also be deleted.
@@ -81,6 +83,36 @@ true
 | TTL     | 30       |
 | Prompt  | false    |
 | Tag     | 1003     |
+```
+
+### wc_pairingExtend
+
+Used to update the lifetiem of a pairing.
+
+**Request**
+
+```jsonc
+// wc_pairingUpdateExpiry params
+{
+  "expiry": number
+}
+
+| IRN     |          |
+| ------- | -------- |
+| Prompt  | false    |
+| Tag     | 1004     |
+```
+
+**Response**
+
+```jsonc
+// Success result
+true
+
+| IRN     |          |
+| ------- | -------- |
+| Prompt  | false    |
+| Tag     | 1005     |
 ```
 
 ### unsupported methods response

@@ -90,3 +90,16 @@ Now that we have generated, authorized and registered Identity Keys we can use t
 - [Chat Authentication](../../clients/chat/chat-authentication.md)
 - [Push Authentication](../../clients/push/push-authentication.md)
 - [Chat Invite Keys registration](../../clients/chat/invite-keys.md)
+
+## Unregistration 
+
+In order to unregister an Identity Key did-jwt needs to be created and sent to designated [API endpoint](./keys-server-api.md#remove-identity-key)
+
+When we are unregistering an Identity Key we must use the following mandatory fields in the jwt:
+
+* iat - timestamp when jwt was issued 
+* exp - timestamp when jwt must expire
+* iss - public identity key in form of did:key
+* aud - key server URL used for registering
+* pkh - corresponding blockchain account (did:pkh)
+* act - description of action intent. Must be equal to "unregister_identity"

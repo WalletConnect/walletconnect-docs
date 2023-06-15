@@ -1,4 +1,4 @@
-# Cloud Relay
+# Relay
 
 ## Project ID
 
@@ -37,7 +37,7 @@ Adding `https://dapp.example.com` to the allowlist will only allow requests from
 
 | Reason                 | Error Code |
 | ---------------------- | ---------- |
-| Project ID doesn't exist | 401        |
+| Project ID doesn't exist OR JWT is expired | 401        |
 | Exists and is invalid  | 403        |
 | Too many requests  | 1013        |
 

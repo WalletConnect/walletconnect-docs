@@ -2,6 +2,7 @@
 // Note: type annotations allow type checking and IDEs autocompletion
 
 const darkCodeTheme = require('prism-react-renderer/themes/dracula')
+const lightCodeTheme = require('prism-react-renderer/themes/github')
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
@@ -62,7 +63,7 @@ const config = {
           {
             type: 'html',
             value:
-              '<a class="navbar__brand" href="/"><div class="navbar__logo"><img src="/img/walletconnect-logo-white.svg" alt="WalletConnect Logo"></div>WalletConnect<span>Docs<span></a>'
+              '<a class="navbar__brand" href="/"><div class="navbar__logo"><img src="/img/walletconnect-logo-white.svg#dark-mode-only"  alt="WalletConnect Logo"><img src="/img/walletconnect-logo-black.svg#light-mode-only"  alt="WalletConnect Logo"></div>WalletConnect<span>Docs<span></a>'
           },
           {
             type: 'doc',
@@ -73,20 +74,26 @@ const config = {
           {
             type: 'docSidebar',
             position: 'left',
-            sidebarId: 'javascript',
-            label: 'JavaScript'
+            sidebarId: 'web',
+            label: 'Web'
           },
           {
             type: 'docSidebar',
             position: 'left',
-            sidebarId: 'kotlin',
-            label: 'Kotlin'
+            sidebarId: 'android',
+            label: 'Android'
           },
           {
             type: 'docSidebar',
             position: 'left',
-            sidebarId: 'swift',
-            label: 'Swift'
+            sidebarId: 'ios',
+            label: 'iOS'
+          },
+          {
+            type: 'docSidebar',
+            position: 'left',
+            sidebarId: 'reactnative',
+            label: 'React Native'
           },
           {
             type: 'docSidebar',
@@ -95,11 +102,18 @@ const config = {
             label: 'Flutter'
           },
           {
+            type: 'docSidebar',
+            position: 'left',
+            sidebarId: 'unity',
+            label: 'Unity'
+          },
+          {
             href: 'https://github.com/walletconnect/',
             position: 'right',
             className: 'header-github-link',
             'aria-label': 'GitHub repository'
           },
+
           {
             type: 'docsVersionDropdown',
             position: 'right'
@@ -107,18 +121,21 @@ const config = {
         ]
       },
       footer: {
-        style: 'dark',
         links: [
           {
             title: 'Docs',
             items: [
               {
-                label: 'V1.0 Getting Started',
-                to: '/#getting-started'
-              },
-              {
                 label: 'v2.0 Getting Started',
                 to: '/2.0/#getting-started'
+              },
+              {
+                label: 'Web3Modal SDK',
+                to: '/2.0/web3modal/about'
+              },
+              {
+                label: 'Web3Wallet SDK',
+                to: '/2.0/web3wallet/about'
               }
             ]
           },
@@ -126,7 +143,7 @@ const config = {
             title: 'Community',
             items: [
               {
-                label: 'Github Discussions',
+                label: 'GitHub Discussions',
                 href: 'https://github.com/WalletConnect/walletconnect-monorepo/discussions'
               },
               {
@@ -157,11 +174,12 @@ const config = {
       },
       colorMode: {
         defaultMode: 'dark',
-        disableSwitch: true,
+        disableSwitch: false,
         respectPrefersColorScheme: false
       },
       prism: {
         darkTheme: darkCodeTheme,
+        theme: lightCodeTheme,
         additionalLanguages: ['swift', 'kotlin']
       },
       algolia: {
@@ -173,7 +191,7 @@ const config = {
       announcementBar: {
         id: 'support_us',
         content:
-          '🚨 v1.0 has been sunset. Wallets and Dapps must upgrade to v2.0 before June 28. <a rel="noopener noreferrer" href="/2.0/advanced/migrating-from-v1.0">Learn more</a>. 🚨',
+          '🚨 v1.0 has been sunset. Wallets and Dapps must upgrade to v2.0 before June 28. <a rel="noopener noreferrer" href="/2.0/advanced/migration-from-v1.x/overview">Learn more</a>. 🚨',
         backgroundColor: '#3182ce',
         textColor: '#fff',
         isCloseable: true
