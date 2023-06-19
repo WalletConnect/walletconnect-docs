@@ -42,6 +42,12 @@ abstract class WalletClient {
   
   // decrypt push subscription message
   public abstract decryptMessage(topic: string, encryptedMessage: string): Promise<PushMessage>;
+  
+  // Enable Sync and Prepare Identity keys Client
+  public abstract register({
+        account: string, 
+        onSign: (message: string) => Cacao.Signature
+  }): Promise<void>;
 
   // ---------- Events ----------------------------------------------- //
 
