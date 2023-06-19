@@ -76,8 +76,8 @@ Subscribe protocol will be established as follows:
 16. W1, Wx receives push subscribe response on the response topic
 17. Wallet derives symmetric key P
 18. Push topic is derived from the sha256 hash of the symmetric key P
-19. W1 syncs the push subscription with Wx
-20. W1 subscribes to push topic for future push messages
+19. W1 subscribes to push topic for future push messages
+20. W1 syncs the push subscription with Wx
 21. Wx stores the push subscription
 22. Wx subscribe to push topic coming from the sync request.
 
