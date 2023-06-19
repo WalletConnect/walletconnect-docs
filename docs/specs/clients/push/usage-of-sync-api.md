@@ -69,7 +69,7 @@ Subscribe protocol will be established as follows:
 7. Response topic is derived from the sha256 hash of symmetric key S
 8. W1 subscribes to response topic
 10. Cast Server receives push subscribe request on subscribe topic
-11. Cast Server derives symmetric key and decrypts subscriptionAuth
+11. Cast Server derives symmetric key S and decrypts subscriptionAuth
 12. Cast Server triggers webhook to notify Dapp of new registered address
 13. Cast Server generates key pair Z
 14. Cast Server derives symmetric key P with keys Y and Z
