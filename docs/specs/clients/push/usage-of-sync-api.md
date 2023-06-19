@@ -10,6 +10,9 @@ registered in Push API. For Push API there are following stores:
 
 ### Push Subscription Store
 
+#### Store Name
+`com.walletconnect.notify.pushSubscription`
+
 #### Store Key
 
 Key of [Push Subscription Store](#push-subscription-store) must be equal to `topic` from
@@ -30,6 +33,9 @@ interface PushSubscription {
 }
 
 ### Push Proposal Store
+
+#### Store Name
+`com.walletconnect.notify.pushProposal`
 
 #### Store Key
 
