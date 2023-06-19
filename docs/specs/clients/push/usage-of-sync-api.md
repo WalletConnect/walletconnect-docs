@@ -18,7 +18,7 @@ Key of [Push Subscription Store](#push-subscription-store) must be equal to `top
 #### PushSubscription
 
 ```typescript
-  interface PushSubscription {
+interface PushSubscription {
     topic: string;
     account: string;
     relay: RelayerTypes.ProtocolOptions;
@@ -27,8 +27,7 @@ Key of [Push Subscription Store](#push-subscription-store) must be equal to `top
     expiry: number;
     selfPublicKey: string;
     dappPublicKey: string;
-  }
-```
+}
 
 ### Push Proposal Store
 
