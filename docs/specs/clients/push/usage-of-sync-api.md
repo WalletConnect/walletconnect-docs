@@ -4,7 +4,7 @@ In order to provide state synchronization between a user's devices we must add [
 
 ## Stores 
 
-State synchronization is achieved by sharing the same key value stores among every client that user
+State synchronization is achieved by sharing the same key value stores among every client that the user
 registered in Push API. For Push API there are following stores:
 
 
