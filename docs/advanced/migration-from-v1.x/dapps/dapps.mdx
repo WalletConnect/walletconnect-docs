@@ -241,7 +241,7 @@ For a comprehensive example, refer to the provided sample code:
 
 ### wagmi
 
-To migrate to WalletConnect v2.0 using wagmi, you need to upgrade `wagmi` to either `0.12.x` if you are using `ethers` or `1.x.x` if you are using `viem`.
+To migrate to WalletConnect v2.0 using wagmi, you need to upgrade `wagmi` to either `0.12.16` if you are using `ethers` or `1.x.x` if you are using `viem`.
 
 :::caution
 
@@ -249,12 +249,12 @@ WalletConnect v2.0 is only supported in wagmi `0.12.x` and above.
 
 :::
 
-#### Upgrading to wagmi `0.12.x`
+#### Upgrading to wagmi `0.12.16`
 
 Run the following command to install it using Yarn:
 
-```bash
-yarn add wagmi@^0.12.0
+```bash npm2yarn
+npm install wagmi@^0.12.16
 ```
 
 WalletConnect v2.0 requires a projectId to be set and included in the configuration.
@@ -291,9 +291,9 @@ const client = createClient({
 
 wagmi 1.x.x drops support for `ethers` and only supports `viem`. If you are using `ethers`, you will need to migrate to `viem` before upgrading to wagmi `1.x.x`.
 
-```bash
-yarn remove ethers
-yarn add wagmi viem@latest
+```bash npm2yarn
+npm uninstall ethers
+npm install wagmi viem@latest
 ```
 
 WalletConnect v2.0 requires a projectId to be set and included in the configuration.
@@ -333,6 +333,7 @@ wagmi `1.x.x` introduces several breaking changes due to the migration from `eth
 For a version-specific upgrade, refer to:
 
 - [official migration guide](https://wagmi.sh/react/migration-guide) for wagmi
+- [Ethers.js Adapters](https://wagmi.sh/react/ethers-adapters) for wagmi
 - [ethers.js -> viem migration guide](https://wagmi.sh/react/migration-guide) for viem.
 
 ### RainbowKit
