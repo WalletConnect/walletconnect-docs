@@ -775,14 +775,14 @@ module.exports = {
         },
         {
           type: 'category',
-          label: 'Web3Modal',
+          label: 'WalletConnectModal',
           collapsible: true,
           collapsed: true,
           items: [
-            'reactnative/web3modal/about',
-            'reactnative/web3modal/installation',
-            'reactnative/web3modal/dapp-usage',
-            'reactnative/web3modal/options'
+            'reactnative/walletconnectmodal/about',
+            'reactnative/walletconnectmodal/installation',
+            'reactnative/walletconnectmodal/dapp-usage',
+            'reactnative/walletconnectmodal/options'
           ]
         }
       ]
