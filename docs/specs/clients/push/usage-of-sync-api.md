@@ -32,6 +32,7 @@ interface PushSubscription {
     selfPrivateKey: string;
     dappPublicKey: string;
 }
+```
 
 ### Push Proposal Store
 
