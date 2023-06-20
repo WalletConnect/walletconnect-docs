@@ -16,6 +16,13 @@ Our primary example of a WalletConnect v2.0 dapp is linked [here](https://react-
 
 The source code for this WalletConnect v2.0 dapp is [here](https://github.com/WalletConnect/web-examples/tree/main/dapps/react-dapp-v2).
 
+## Required and Optional Namespaces and Methods
+
+With V2, we allow for multichain and various methods to be passed through the dapp <> wallet client. If you are looking to add additional chains or methods to your data, please refer to these respective dapps on the ethereum provider:
+
+- [Required and Optional Namespaces](../../../web/providers/ethereum.md/#required-and-optional-namespaces)
+- [Required and Optional Methods](../../../web/providers/ethereum.md/#required-and-optional-methods)
+
 ## Testing
 
 Please test your dapp's WalletConnect v2.0 integration with as wide a range of wallets as possible to ensure a correct implementation that follows a similar flow to our aforementioned example dapp. Wallets that you can test with include:
