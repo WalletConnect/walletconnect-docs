@@ -76,19 +76,19 @@ Subscribe protocol will be established as follows:
 5. W1 sends push subscribe request (type 1 envelope) on subscribe topic with subscriptionAuth
 7. Response topic is derived from the sha256 hash of symmetric key S
 8. W1 subscribes to response topic
-10. Cast Server receives push subscribe request on subscribe topic
-11. Cast Server derives symmetric key S and decrypts subscriptionAuth
-12. Cast Server triggers webhook to notify Dapp of new registered address
-13. Cast Server generates key pair Z
-14. Cast Server derives symmetric key P with keys Y and Z
-15. Cast Server responds to push subscribe request on response topic
-16. W1, Wx receives push subscribe response on the response topic
-17. W1 derives symmetric key P
-18. Push topic is derived from the sha256 hash of the symmetric key P
-19. W1 subscribes to push topic for future push messages
-20. W1 syncs the push subscription with Wx
-21. Wx stores the push subscription
-22. Wx subscribe to push topic coming from the sync request.
+9. Cast Server receives push subscribe request on subscribe topic
+10. Cast Server derives symmetric key S and decrypts subscriptionAuth
+11. Cast Server triggers webhook to notify Dapp of new registered address
+12. Cast Server generates key pair Z
+13. Cast Server derives symmetric key P with keys Y and Z
+14. Cast Server responds to push subscribe request on response topic
+15. W1, Wx receives push subscribe response on the response topic
+16. W1 derives symmetric key P
+17. Push topic is derived from the sha256 hash of the symmetric key P
+18. W1 subscribes to push topic for future push messages
+19. W1 syncs the push subscription with Wx
+20. Wx stores the push subscription
+21. Wx subscribe to push topic coming from the sync request.
 
 ### Push Proposal Protocol in multiclient environment
 
