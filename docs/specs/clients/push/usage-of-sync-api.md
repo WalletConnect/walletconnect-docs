@@ -47,7 +47,7 @@ Key of [Push Proposal Store](#push-proposal-store) must be equal to `responseTop
 #### PushProposal
 
 ```typescript
-interface PushProposalStatus {
+interface PushProposal {
     publicKey: string;
     privateKey: string;
     responseTopic: stirng;
@@ -55,6 +55,7 @@ interface PushProposalStatus {
     account: string;
     scope: string[];
  }
+ ```
 
 ### Push Subscription Protocol in multiclient environment
 
