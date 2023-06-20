@@ -61,7 +61,7 @@ interface PushProposal {
 
 #### Definitions
 - W1 - clients that have access to W (Wallet) blockchain account keys.
-- Wx - peer clients that have access W (Wallet) blockchain account keys. 
+- Wx - peer clients that have access to W (Wallet) blockchain account keys. 
 
 #### Pre-requisities
 The Push subscribe flow will require a dapp to host a static json file which will contain a DID document compliant with `did:web` method as specified [here](https://w3c-ccg.github.io/did-method-web/). In this DID document we will specify a X25519 public key that will be used by the Push API protocol to derive a symmetric key for the Push topic.
