@@ -79,7 +79,7 @@ With Ethereum Provider, the package passed the required chains through `chains` 
 
 Example code can be found [here](https://github.com/wagmi-dev/references/blob/main/packages/connectors/src/walletConnect.ts#L134) and further documentation on namespaces can be found in this [spec](https://docs.walletconnect.com/2.0/specs/clients/sign/namespaces).
 
-The below example shows the usage of passing through with mainnet Ethereum with the id `1` into `chains` and optionalChains of `5`for Goerli
+The example below specifies Ethereum Mainnet  (chainId `1`) as a required chain via `chains`, and Ethereum Goerli (chainId `5`) as an optional chain via `optionalChains`.
 
 ```typescript
 await EthereumProvider.init({
@@ -103,7 +103,8 @@ await EthereumProvider.init({
 
 ## Required and Optional Methods
 
-With Ethereum Provider, it automatically passes through the `eth_sendTransaction` and `personal_sign` through the methods. For those that want to use extra methods, we recommend passing this through `optionalMethods`.
+By default, `EthereumProvider` specifies `eth_sendTransaction` and `personal_sign` as required methods. For those that want to request additional methods for the session, we recommend passing these through `optionalMethods`.
+The default behaviour for the required methods can also be overridden by specifying the `methods` option directly.
 
 For more information of the source code, please refer to [here](https://github.com/WalletConnect/walletconnect-monorepo/blob/v2.0/providers/ethereum-provider/src/EthereumProvider.ts#L167). This optional passing is them consumed in our Sign Client [here.](https://github.com/WalletConnect/walletconnect-monorepo/blob/v2.0/providers/ethereum-provider/src/EthereumProvider.ts#L277)
 
@@ -112,7 +113,7 @@ await EthereumProvider.init({
   projectId: process.env.TEST_PROJECT_ID,
   chains: [1],
   optionalChains,
-  optionalMethods: ['eth_signTypedData', 'eth_signTypedData_v4', 'eth_sign'], // DIFF HERE
+  optionalMethods: ['eth_signTypedData', 'eth_signTypedData_v4', 'eth_sign'],
   ...
 })
 ```

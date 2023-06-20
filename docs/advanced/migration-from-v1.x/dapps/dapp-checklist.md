@@ -6,7 +6,7 @@ To ensure a smooth integration process, we strongly recommend conducting interna
 
 Our primary example of a WalletConnect v2.0 dapp is linked [here](https://react-app.walletconnect.com/). This uses Web3Modal v2.0 + wagmi and supports the following methods:
 
-- `eth_sendTransaction
+- `eth_sendTransaction`
 - `eth_signTransaction`
 - `personal_sign`
 - `eth_sign (standard)`
@@ -18,7 +18,7 @@ The source code for this WalletConnect v2.0 dapp is [here](https://github.com/Wa
 
 ## Required and Optional Namespaces and Methods
 
-With V2, we allow for multichain and various methods to be passed through the dapp and wallet client. If you are looking to add additional chains or methods to your data, please refer to these respective dapps on the ethereum provider:
+With V2, we allow for specific chains or methods to be specified as required or optional via session namespaces. If you are looking to configure specific chains or methods for your session, please refer to these respective guidance on the ethereum provider:
 
 [Required and Optional Chains](../../../web/providers/ethereum#required-and-optional-chains)
 [Required and Optional Methods](../../../web/providers/ethereum#required-and-optional-methods)
