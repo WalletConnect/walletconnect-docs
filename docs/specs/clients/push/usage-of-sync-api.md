@@ -82,7 +82,7 @@ Subscribe protocol will be established as follows:
 12. Cast Server generates key pair Z
 13. Cast Server derives symmetric key P with keys Y and Z
 14. Cast Server responds to push subscribe request on response topic
-15. W1, Wx receives push subscribe response on the response topic
+15. W1 receives push subscribe response on the response topic
 16. W1 derives symmetric key P
 17. Push topic is derived from the sha256 hash of the symmetric key P
 18. W1 subscribes to push topic for future push messages
