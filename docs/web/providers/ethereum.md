@@ -112,7 +112,7 @@ await EthereumProvider.init({
   projectId: process.env.TEST_PROJECT_ID,
   chains: [1],
   optionalChains,
-  optionalMethods: ['eth_signTypedData', 'eth_signTypedData_v4', 'eth_sign'], // DIFF HERE
+  optionalMethods: ['eth_signTypedData', 'eth_signTypedData_v4', 'eth_sign'],
   ...
 })
 ```
