@@ -79,7 +79,7 @@ With Ethereum Provider, the package passed the required chains through `chains` 
 
 Example code can be found [here](https://github.com/wagmi-dev/references/blob/main/packages/connectors/src/walletConnect.ts#L134) and further documentation on namespaces can be found in this [spec](https://docs.walletconnect.com/2.0/specs/clients/sign/namespaces).
 
-The below example shows the usage of passing through with mainnet Ethereum with the id `1` into `chains` and optionalChains of `5`for Goerli
+The example below specifies Ethereum Mainnet  (chainId `1`) as a required chain via `chains`, and Ethereum Goerli (chainId `5`) as an optional chain via `optionalChains`.
 
 ```typescript
 await EthereumProvider.init({
