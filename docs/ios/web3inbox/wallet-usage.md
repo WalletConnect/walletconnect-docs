@@ -5,6 +5,15 @@
 Make sure what you properly configure Networking Client first 
 - [Networking](../core/networking-configuration.md)
 
+### Configure iOS permissions
+
+To use "Scan QR Code" feature you should include `NSCameraUsageDescription` into your `info.plist` file.
+
+```
+<key>NSCameraUsageDescription</key>
+<string>Allow the app to scan for QR codes</string>
+```
+
 ### Configure Web3Inox Client
 
 ```swift

@@ -113,6 +113,7 @@ module.exports = {
             'advanced/rpc-reference/solana-rpc',
             'advanced/rpc-reference/stellar-rpc',
             'advanced/rpc-reference/tezos-rpc',
+            'advanced/rpc-reference/starknet-rpc',
             'advanced/rpc-reference/near-rpc',
             'advanced/rpc-reference/xrpl-rpc'
           ]
@@ -503,8 +504,7 @@ module.exports = {
       items: [
         'web/guides/examples-and-resources',
         'web/guides/nodejs',
-        'web/guides/shared-core',
-        'web/guides/typescript'
+        'web/guides/shared-core'
       ]
     }
   ],
@@ -538,6 +538,13 @@ module.exports = {
           collapsible: true,
           collapsed: true,
           items: ['android/web3inbox/installation', 'android/web3inbox/usage']
+        },
+        {
+           type: 'category',
+           label: 'Web3Modal',
+           collapsible: true,
+           collapsed: true,
+           items: ['android/web3modal/installation', 'android/web3modal/usage']
         }
       ]
     },
@@ -772,6 +779,7 @@ module.exports = {
           collapsible: true,
           collapsed: true,
           items: [
+            'reactnative/web3modal/about',
             'reactnative/web3modal/installation',
             'reactnative/web3modal/dapp-usage',
             'reactnative/web3modal/options'
