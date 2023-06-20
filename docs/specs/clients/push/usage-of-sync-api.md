@@ -60,7 +60,7 @@ interface PushProposal {
 ### Push Subscription Protocol in multiclient environment
 
 #### Definitions
-- W1 - clients that have access W (Wallet) blockchain account keys.
+- W1 - clients that have access to W (Wallet) blockchain account keys.
 - Wx - peer clients that have access W (Wallet) blockchain account keys. 
 
 #### Pre-requisities
