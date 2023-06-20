@@ -73,7 +73,7 @@ provider.on('display_uri', handler)
 provider.on('disconnect', handler)
 ```
 
-## Required and Optional Namespaces
+## Required and Optional Chains
 
 With Ethereum Provider, the package passed the required chains through `chains` and if your dapp wants to provide other optionalNamespaces this is passed through `optionalChains`.
 
