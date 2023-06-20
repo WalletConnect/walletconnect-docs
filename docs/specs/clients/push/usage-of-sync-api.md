@@ -83,7 +83,7 @@ Subscribe protocol will be established as follows:
 14. Cast Server derives symmetric key P with keys Y and Z
 15. Cast Server responds to push subscribe request on response topic
 16. W1, Wx receives push subscribe response on the response topic
-17. Wallet derives symmetric key P
+17. W1 derives symmetric key P
 18. Push topic is derived from the sha256 hash of the symmetric key P
 19. W1 subscribes to push topic for future push messages
 20. W1 syncs the push subscription with Wx
