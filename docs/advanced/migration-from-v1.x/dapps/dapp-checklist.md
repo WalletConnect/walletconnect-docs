@@ -6,7 +6,7 @@ To ensure a smooth integration process, we strongly recommend conducting interna
 
 Our primary example of a WalletConnect v2.0 dapp is linked [here](https://react-app.walletconnect.com/). This uses Web3Modal v2.0 + wagmi and supports the following methods:
 
-- `eth_sendTransaction
+- `eth_sendTransaction`
 - `eth_signTransaction`
 - `personal_sign`
 - `eth_sign (standard)`
