@@ -29,6 +29,7 @@ interface PushSubscription {
     scope: ScopeMap;
     expiry: number;
     selfPublicKey: string;
+    selfPrivateKey: string;
     dappPublicKey: string;
 }
 
