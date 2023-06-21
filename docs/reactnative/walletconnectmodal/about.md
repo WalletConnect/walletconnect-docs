@@ -3,7 +3,7 @@ import Container from '../../components/Container';
 
 # Introduction
 
-`@walletconnect/modal-react-native` simplifies the connect modal integration process for dapp developers.
+WalletConnectModal is a simple ui library intended for advanced use cases where users manage connections strings and associated WalletConnect API's themselves.
 
 If you need assistance at any point during development, please feel free to reach out to us via [GitHub Discussions](https://github.com/orgs/WalletConnect/discussions).
 
