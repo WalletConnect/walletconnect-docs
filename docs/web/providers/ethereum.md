@@ -73,16 +73,47 @@ provider.on('display_uri', handler)
 provider.on('disconnect', handler)
 ```
 
-## Required and Optional Namespaces
+## Required and Optional Chains
 
 With Ethereum Provider, the package passed the required chains through `chains` and if your dapp wants to provide other optionalNamespaces this is passed through `optionalChains`.
 
 Example code can be found [here](https://github.com/wagmi-dev/references/blob/main/packages/connectors/src/walletConnect.ts#L134) and further documentation on namespaces can be found in this [spec](https://docs.walletconnect.com/2.0/specs/clients/sign/namespaces).
 
+The example below specifies Ethereum Mainnet  (chainId `1`) as a required chain via `chains`, and Ethereum Goerli (chainId `5`) as an optional chain via `optionalChains`.
+
 ```typescript
 await EthereumProvider.init({
   projectId: process.env.TEST_PROJECT_ID,
   chains: [1], // chains added to required namespaces
-  optionalChains: [42] // chains added to optional namespaces
+  optionalChains: [5] // chains added to optional namespaces
+  ...
+})
+```
+
+Another example of those that want to pass several optional chains:
+
+```typescript
+await EthereumProvider.init({
+  projectId: process.env.TEST_PROJECT_ID,
+  chains: [1], // chains added to required namespaces
+  optionalChains: [5, 56, 137, 10, 100] // chains added to optional namespaces
+  ...
+})
+```
+
+## Required and Optional Methods
+
+By default, `EthereumProvider` specifies `eth_sendTransaction` and `personal_sign` as required methods. For those that want to request additional methods for the session, we recommend passing these through `optionalMethods`.
+The default behaviour for the required methods can also be overridden by specifying the `methods` option directly.
+
+For more information of the source code, please refer to [here](https://github.com/WalletConnect/walletconnect-monorepo/blob/v2.0/providers/ethereum-provider/src/EthereumProvider.ts#L167). This optional passing is them consumed in our Sign Client [here.](https://github.com/WalletConnect/walletconnect-monorepo/blob/v2.0/providers/ethereum-provider/src/EthereumProvider.ts#L277)
+
+```typescript
+await EthereumProvider.init({
+  projectId: process.env.TEST_PROJECT_ID,
+  chains: [1],
+  optionalChains,
+  optionalMethods: ['eth_signTypedData', 'eth_signTypedData_v4', 'eth_sign'],
+  ...
 })
 ```
