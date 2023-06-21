@@ -105,6 +105,7 @@ We are currently developing our new SDK [`@web3modal/react-native`](https://gith
 To ensure a seamless transition, we have developed a comprehensive example [here](https://github.com/WalletConnect/react-native-examples/compare/deprecated-example...deprecated-migration) that simplifies the migration process. 
 
 Follow this steps along with the migration example:
+
 1. Remove `@walletconnect/react-native-dapp` and all it's implementation
 2. Remove `crypto` polyfill and `rn-nodeify` logic (if present)
 3. Install new packages: `yarn add @web3modal/react-native react-native-get-random-values react-native-modal react-native-svg @react-native-async-storage/async-storage`
@@ -116,7 +117,6 @@ You can also find detailed documentation on how to install & utilize the new SDK
 The latest SDK introduces a powerful combination of [Universal Provider](https://docs.walletconnect.com/2.0/web/providers/universal) and our [Cloud Explorer API](https://docs.walletconnect.com/2.0/cloud/explorer#cloud-explorer-api). This integration forms the solid foundation for a React Native dapp to effortlessly connect with wallets."
 
 If you need assistance at any point during the migration process, please feel free to reach out to us via [GitHub Discussions](https://github.com/orgs/WalletConnect/discussions/categories/web3modal-sdk-support?discussions_q=is%3Aopen+category%3Aweb3modal-sdk-support).
-
 
 ### web3-onboard
 
@@ -266,20 +266,20 @@ For a comprehensive example, refer to the provided sample code:
 
 ### wagmi
 
-To migrate to WalletConnect v2.0 using wagmi, you need to upgrade `wagmi` to either `0.12.x` if you are using `ethers` or `1.x.x` if you are using `viem`.
+To migrate to WalletConnect v2.0 using wagmi, you need to upgrade `wagmi` to either `0.12.16` if you are using `ethers` or `1.x.x` if you are using `viem`.
 
 :::caution
 
-WalletConnect v2.0 is only supported in wagmi `0.12.x` and above.
+WalletConnect v2.0 is only supported in wagmi `0.12.8` and above.
 
 :::
 
-#### Upgrading to wagmi `0.12.x`
+#### Upgrading to wagmi `0.12.16`
 
 Run the following command to install it using Yarn:
 
 ```bash
-yarn add wagmi@^0.12.0
+yarn add wagmi@^0.12.16
 ```
 
 WalletConnect v2.0 requires a projectId to be set and included in the configuration.
@@ -402,7 +402,7 @@ const connectors = connectorsForWallets([
 ]);
 ```
 
-RainbowKit is type-safe and will warn you when a `projectId` is missing. Refer to our examples to see v2 in action:
+RainbowKit is type-safe and will warn you when a `projectId` is missing. Refer to RainbowKits' examples to see v2 in action:
 
 - [Create React App](https://codesandbox.io/p/sandbox/github/rainbow-me/rainbowkit/tree/main/examples/with-create-react-app)
 - [Next.js](https://codesandbox.io/p/sandbox/github/rainbow-me/rainbowkit/tree/main/examples/with-next)
