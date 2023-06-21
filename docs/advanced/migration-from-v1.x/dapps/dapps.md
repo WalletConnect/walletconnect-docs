@@ -102,7 +102,7 @@ For more documentation, follow the docs for Web3Modal [here](https://docs.wallet
 
 We are currently developing our new SDK [`@web3modal/react-native`](https://github.com/WalletConnect/web3modal-react-native), which is now available in alpha version.
 
-To ensure a seamless transition, we have developed a comprehensive example [here](https://github.com/WalletConnect/react-native-examples/compare/deprecated-example...deprecated-migration) that simplifies the migration process.
+To ensure a seamless transition, we have developed a comprehensive example [here](https://github.com/WalletConnect/react-native-examples/compare/deprecated-example...deprecated-migration) that simplifies the migration process. 
 
 Follow this steps along with the migration example:
 
@@ -110,7 +110,7 @@ Follow this steps along with the migration example:
 2. Remove `crypto` polyfill and `rn-nodeify` logic (if present)
 3. Install new packages: `yarn add @web3modal/react-native react-native-get-random-values react-native-modal react-native-svg @react-native-async-storage/async-storage`
 4. If the project uses react native < 0.70, install `big-integer` and add `BigInt` polyfill
-5. Run `pod install` in `/ios`
+5. Run `pod install` in `/ios` 
 
 You can also find detailed documentation on how to install & utilize the new SDK [here](https://docs.walletconnect.com/2.0/reactnative/web3modal/about).
 
@@ -128,23 +128,24 @@ const walletConnect = walletConnectModule({
   version: 2, // **New Param** Defaults to version: 1 - this behavior will be deprecated after the WalletConnect v1 sunset
   handleUri: uri => console.log(uri),
   projectId: '', // ***New Param* Project ID associated with [WalletConnect account](https://cloud.walletconnect.com)
-  requiredChains: [1, 56] // chains required to be supported by WC wallet
+  requiredChains:[1, 56] // chains required to be supported by WC wallet
 })
 
 // for optional chains/optionalNamespaces
 const onboard = Onboard({
-  wallets: [walletConnect],
-  chains: [
-    // chains that are passed as optional chains to WC wallet after cleaning and parsing as number[]
-    {
-      id: '0x89',
-      token: 'MATIC',
-      label: 'Polygon',
-      rpcUrl: 'https://matic-mainnet.chainstacklabs.com'
-    }
-    // ...
-  ]
-})
+    wallets: [
+      walletConnect
+    ],
+    chains: [ // chains that are passed as optional chains to WC wallet after cleaning and parsing as number[]
+      {
+        id: '0x89',
+        token: 'MATIC',
+        label: 'Polygon',
+        rpcUrl: 'https://matic-mainnet.chainstacklabs.com'
+      }
+      // ...
+    ]
+  })
 ```
 
 _Note: The `@web3-onboard/walletconnect` package will default to `version` 1 until the WalletConnect v1 sunset is complete_
@@ -382,12 +383,12 @@ Every dApp that relies on WalletConnect now needs to obtain a `projectId` from [
 Supply your `projectId` to `getDefaultWallets` and individual RainbowKit wallet connectors like the following:
 
 ```ts
-const projectId = 'YOUR_PROJECT_ID'
+const projectId = 'YOUR_PROJECT_ID';
 const { wallets } = getDefaultWallets({
   appName: 'My RainbowKit App',
   projectId,
-  chains
-})
+  chains,
+});
 const connectors = connectorsForWallets([
   ...wallets,
   {
@@ -395,10 +396,10 @@ const connectors = connectorsForWallets([
     wallets: [
       argentWallet({ projectId, chains }),
       trustWallet({ projectId, chains }),
-      ledgerWallet({ projectId, chains })
-    ]
-  }
-])
+      ledgerWallet({ projectId, chains }),
+    ],
+  },
+]);
 ```
 
 RainbowKit is type-safe and will warn you when a `projectId` is missing. Refer to RainbowKits' examples to see v2 in action:
