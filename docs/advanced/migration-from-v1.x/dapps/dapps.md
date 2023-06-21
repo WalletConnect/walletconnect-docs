@@ -75,7 +75,7 @@ If you still want to use Web3Modal v1.0 but just upgrade the WalletConnect `ethe
 
 ### Web3Modal v2.0
 
-If you are using our redesigned Web3Modal (often referred to as Web3Modal v2.0), you can simply enable v2.0 by using the feature flag `version: 2` when injecting modal connectors. Please ensure that you are using a minimum version of `2.2.0`. Here is a code example:
+If you are using our redesigned Web3Modal (often referred to as Web3Modal v2.0), you can simply enable v2.0 by using the feature flag `version: 2` when injecting modal connectors. Please ensure that you are using a minimum version of `2.8.0`. Here is a code example:
 
 ```typescript
 import { w3mConnectors } from '@web3modal/ethereum'
