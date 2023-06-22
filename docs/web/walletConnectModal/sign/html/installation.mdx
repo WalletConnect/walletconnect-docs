@@ -12,36 +12,36 @@ import ObtainProjectIdPartial from '../../../web3modal/_partials/obtainProjectId
 ## Add packages (NPM)
 
 ```bash npm2yarn
-npm install @web3modal/sign-html
+npm install @walletconnect/modal-sign-html
 ```
 
 ## Add packages (CDN)
 
-Web3ModalSign uses [unpkg](https://www.unpkg.com/) as its official CDN provider.
+WalletConnectModalSign uses [unpkg](https://www.unpkg.com/) as its official CDN provider.
 Instead of using the npm package, you can simply import it from their CDN and use it in the same way.
 
-See full [CDN example](https://github.com/WalletConnect/web3modal-examples/tree/main/html-sign-cdn) for more info.
+See full [CDN example](https://github.com/WalletConnect/web3modal-examples/tree/main/walletconnect-modal-sign-html-cdn) for more info.
 
 ```html
 <script type="module">
-  import { Web3ModalSign } from 'https://unpkg.com/@web3modal/sign-html'
+  import { WalletConnectModalSign } from 'https://unpkg.com/@walletconnect/modal-sign-html'
 </script>
 ```
 
 ## Implementation
 
-Start by initializing `Web3ModalSign` in your app.
+Start by initializing `WalletConnectModalSign` in your app.
 
 ```js
-import { Web3ModalSign } from '@web3modal/sign-html'
+import { WalletConnectModalSign } from '@walletconnect/modal-sign-html'
 
-const web3Modal = new Web3ModalSign({
+const modal = new WalletConnectModalSign({
   projectId,
   metadata: {
-    name: 'Web3Modal',
-    description: 'Web3Modal',
-    url: 'web3modal.com',
-    icons: ['https://walletconnect.com/_next/static/media/logo_mark.84dd8525.svg']
+    name: 'My Dapp',
+    description: 'My Dapp Description',
+    url: 'mydapp.com',
+    icons: ['https://mydapp-logo.png']
   }
 })
 ```
@@ -56,7 +56,7 @@ Call connect method to open the modal and start user connection flow.
 
 ```js
 async function onConnect() {
-  const session = await web3Modal.connect({
+  const session = await modal.connect({
     requiredNamespaces: {
       eip155: {
         methods: ['eth_sendTransaction', 'personal_sign'],

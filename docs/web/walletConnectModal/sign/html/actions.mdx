@@ -12,7 +12,7 @@ Action to create connection request with given namespace.
 ### Example
 
 ```js
-const data = await web3modal.connect({
+const data = await modal.connect({
   requiredNamespaces: {
     eip155: {
       methods: ['eth_sendTransaction', 'personal_sign'],
@@ -40,7 +40,7 @@ Action to disconnect from a provided session topic via given reason.
 ```js
 import { getSdkError } from '@walletconnect/utils'
 
-await web3modal.disconnect({
+await modal.disconnect({
   topic: '12345...',
   reason: getSdkError('USER_DISCONNECTED')
 })
@@ -61,7 +61,7 @@ Action to perform a json-rpc request.
 ### Example
 
 ```js
-const response = await web3modal.request({
+const response = await modal.request({
   topic: '12345...',
   chainId: 'eip155:1',
   request: {
@@ -91,7 +91,7 @@ Action to get array of established sessions
 ### Example
 
 ```js
-const sessions = await web3modal.getSessions()
+const sessions = await modal.getSessions()
 ```
 
 ### Reference
@@ -109,7 +109,7 @@ Action to get last established (active) session
 ### Example
 
 ```js
-const session = await web3modal.getSession()
+const session = await modal.getSession()
 ```
 
 ### Reference
@@ -131,7 +131,7 @@ function logData(data) {
   console.info(data)
 }
 
-web3modal.onSessionEvent(logData)
+modal.onSessionEvent(logData)
 ```
 
 ### Reference
@@ -153,7 +153,7 @@ function logData(data) {
   console.info(data)
 }
 
-web3modal.offSessionEvent(logData)
+modal.offSessionEvent(logData)
 ```
 
 ### Reference
@@ -175,7 +175,7 @@ function logData(data) {
   console.info(data)
 }
 
-web3modal.onSessionUpdate(logData)
+modal.onSessionUpdate(logData)
 ```
 
 ### Reference
@@ -197,7 +197,7 @@ function logData(data) {
   console.info(data)
 }
 
-web3modal.offSessionUpdate(logData)
+modal.offSessionUpdate(logData)
 ```
 
 ### Reference
@@ -219,7 +219,7 @@ function logData(data) {
   console.info(data)
 }
 
-web3modal.onSessionDelete(logData)
+modal.onSessionDelete(logData)
 ```
 
 ### Reference
@@ -241,7 +241,7 @@ function logData(data) {
   console.info(data)
 }
 
-web3modal.offSessionDelete(logData)
+modal.offSessionDelete(logData)
 ```
 
 ### Reference
@@ -263,7 +263,7 @@ function logData(data) {
   console.info(data)
 }
 
-web3modal.onSessionExpire(logData)
+modal.onSessionExpire(logData)
 ```
 
 ### Reference
@@ -285,7 +285,7 @@ function logData(data) {
   console.info(data)
 }
 
-web3modal.offSessionExpire(logData)
+modal.offSessionExpire(logData)
 ```
 
 ### Reference

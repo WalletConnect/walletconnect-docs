@@ -156,6 +156,22 @@
     {
       "source": "/2.0/advanced/migration-from-v1.x",
       "destination": "/2.0/advanced/migration-from-v1.x/overview"
+    },
+    {
+      "source": "2.0/web/web3modal/react/sign-api/installation",
+      "destination": "/2.0/web/walletConnectModal/sign/react/installation"
+    },
+    {
+      "source": "2.0/web/web3modal/html/sign-api/installation",
+      "destination": "/2.0/web/walletConnectModal/sign/html/installation"
+    },
+    {
+      "source": "2.0/web/web3modal/react/auth-api/installation",
+      "destination": "/2.0/web/walletConnectModal/auth/react/installation"
+    },
+    {
+      "source": "2.0/web/web3modal/html/auth-api/installation",
+      "destination": "/2.0/web/walletConnectModal/auth/html/installation"
     }
   ]
 }
