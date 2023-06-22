@@ -1,4 +1,4 @@
-import ThemeVariablesTablePartial from '../../../web3modal/_partials/themeVariablesTable.mdx'
+import WcModalThemeVariablesTable from '../../_partials/wcModalThemeVariablesTable.mdx'
 import ThemeModePartial from '../../../web3modal/_partials/themeMode.mdx'
 import ThemeVariablesPartial from '../../../web3modal/_partials/themeVariables.mdx'
 
@@ -11,7 +11,7 @@ import ThemeVariablesPartial from '../../../web3modal/_partials/themeVariables.m
 ### Example
 
 ```js
-const web3modal = new Web3ModalAuth({
+const modal = new WalletConnectModalAuth({
   modalOptions: {
     themeMode: 'dark'
   }
@@ -25,7 +25,7 @@ const web3modal = new Web3ModalAuth({
 ### Example
 
 ```js
-const web3modal = new Web3ModalAuth({
+const modal = new WalletConnectModalAuth({
   modalOptions: {
     themeVariables: {
       '--w3m-font-family': 'Roboto, sans-serif',
@@ -37,4 +37,4 @@ const web3modal = new Web3ModalAuth({
 
 ### List of theme variables
 
-<ThemeVariablesTablePartial />
+<WcModalThemeVariablesTable />

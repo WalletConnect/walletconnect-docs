@@ -7,7 +7,7 @@ Action to open the modal. Returns promise that resolves once modal is visible.
 ### Example
 
 ```js
-await walletConnectModal.openModal({
+await modal.openModal({
   uri: 'YOUR_CONNECTION_URI'
 })
 ```
@@ -22,9 +22,9 @@ openModal: (options?: OpenOptions) => Promise<void>
 interface OpenOptions {
   // Uri that will be used to generate qrcode and mobile links, required
   uri: string
-  // CAIP-2 compliant chain ids to override initial standaloneChains devined when creating the modal
+  // CAIP-2 compliant chain ids to override initial chains defined when creating the modal
   // Learn about CAIP-10: https://github.com/ChainAgnostic/CAIPs/blob/master/CAIPs/caip-10.md
-  standaloneChains?: string
+  chains?: string
 }
 ```
 
@@ -35,7 +35,7 @@ Action to close the modal.
 ### Example
 
 ```js
-walletConnectModal.closeModal()
+modal.closeModal()
 ```
 
 ### Reference
@@ -51,7 +51,7 @@ Action to subscribe to modal state changes.
 ### Example
 
 ```js
-walletConnectModal.subscribeModal(state => console.log(state))
+modal.subscribeModal(state => console.log(state))
 ```
 
 ### Refference

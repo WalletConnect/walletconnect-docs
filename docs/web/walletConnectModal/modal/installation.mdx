@@ -32,9 +32,9 @@ Start by importing `WalletConnectModal` and initializing it.
 ```js
 import { WalletConnectModal } from '@walletconnect/modal'
 
-const walletConnectModal = new WalletConnectModal({
+const modal = new WalletConnectModal({
   projectId: 'YOUR_PROJECT_ID',
-  standaloneChains: ['eip155:1'],
+  chains: ['eip155:1'],
   walletConnectVersion: 2
 })
 ```
@@ -46,11 +46,11 @@ Once you have obtained your connection uri, you can open or close the modal.
 From here on, use `provider` as you normally would, WalletConnectModal will be shown and hidden automatically i.e.
 
 ```js
-await walletConnectModal.openModal({
+await modal.openModal({
   uri: 'YOUR_CONNECTION_URI'
 })
 
 // Do some work...
 
-walletConnectModal.closeModal()
+modal.closeModal()
 ```
