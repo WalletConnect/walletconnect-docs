@@ -655,12 +655,12 @@ module.exports = {
         },
         {
           type: 'category',
-          label: 'Web3Modal',
+          label: 'WalletConnectModal',
           collapsible: true,
           collapsed: true,
           items: [
-            'ios/web3modal/installation',
-            'ios/web3modal/usage',
+            'ios/walletconnectmodal/installation',
+            'ios/walletconnectmodal/usage',
           ]
         },
         {

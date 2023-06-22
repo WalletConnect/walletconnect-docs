@@ -6,7 +6,7 @@ Make sure that you properly configure Networking and Pair Clients first.
 - [Networking](../core/networking-configuration.md)
 
 
-## Initialize Web3Modal Client
+## Initialize WalletConnectModal Client
 
 In order to initialize a client just call a `configure` method from the Web3Wallet instance wrapper
 
@@ -20,7 +20,7 @@ let metadata = AppMetadata(
     verifyUrl: "verify.walletconnect.com"
 )
         
-Web3Modal.configure(
+WalletConnectModal.configure(
     projectId: PROJECT_ID,
     metadata: metadata
 )
@@ -54,22 +54,22 @@ let metadata = AppMetadata(...)
 
 let sessionParams = SessionParams(...)
         
-Web3Modal.configure(
+WalletConnectModal.configure(
     projectId: PROJECT_ID,
     metadata: metadata,
     sessionParams: sessionParams
 )
 ```
 
-or you can change them later by calling `Web3Modal.set(sessionParams: SessionParams(...))`
+or you can change them later by calling `WalletConnectModal.set(sessionParams: SessionParams(...))`
  
 
-## Web3Modal Usage
+## WalletConnectModal Usage
 
 To actually present the modal you can simply call.
 
 ```swift
-Web3Modal.present()
+WalletConnectModal.present()
 ```
 
 It will traverse the view hierarchy and try to present from top most controller. This is meant more towards SwiftUI.
@@ -77,10 +77,10 @@ It will traverse the view hierarchy and try to present from top most controller.
 Otherwise you can specify the viewController to present from.
 
 ```swift
-Web3Modal.present(from: viewController)
+WalletConnectModal.present(from: viewController)
 ```
 
-## Subscribe for Web3Modal Publishers
+## Subscribe for WalletConnectModal Publishers
 
 The following publishers are available to subscribe:
 
@@ -95,9 +95,9 @@ public var socketConnectionStatusPublisher: AnyPublisher<SocketConnectionStatus,
 
 ## Sign methods
 
-Web3Modal is internally using Sign SDK and most of its method are being exposed through Web3Modal interface.
+WalletConnectModal is internally using Sign SDK and most of its method are being exposed through WalletConnectModal interface.
 
 
 ## Where to go from here
-Check the Web3Modal usage in our Example Showcase app that is part of WalletConnectSwiftV2 repository.
+Check the WalletConnectModal usage in our Example Showcase app that is part of WalletConnectSwiftV2 repository.
 Build API documentation in Xcode by going to `Product -> Build Documentation`
