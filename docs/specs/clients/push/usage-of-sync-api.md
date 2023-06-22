@@ -28,9 +28,7 @@ interface PushSubscription {
     metadata: Metadata;
     scope: ScopeMap;
     expiry: number;
-    selfPublicKey: string;
-    selfPrivateKey: string;
-    dappPublicKey: string;
+    symkey: string;
 }
 ```
 
