@@ -297,56 +297,17 @@ module.exports = {
               type: 'category',
               label: 'React',
               items: [
-                'web/web3modal/react/introduction',
+                'web/web3modal/react/wagmi/installation',
+                'web/web3modal/react/wagmi/components',
+                'web/web3modal/react/wagmi/hooks',
+                'web/web3modal/react/wagmi/options',
+                'web/web3modal/react/wagmi/theming',
+                'web/web3modal/react/wagmi/custom-wallets',
+                'web/web3modal/react/wagmi/custom-chains',
                 {
-                  type: 'category',
-                  label: 'With Wagmi',
-                  items: [
-                    'web/web3modal/react/wagmi/installation',
-                    'web/web3modal/react/wagmi/components',
-                    'web/web3modal/react/wagmi/hooks',
-                    'web/web3modal/react/wagmi/options',
-                    'web/web3modal/react/wagmi/theming',
-                    'web/web3modal/react/wagmi/custom-wallets',
-                    'web/web3modal/react/wagmi/custom-chains',
-                    {
-                      type: 'link',
-                      label: 'Example',
-                      href: 'https://github.com/WalletConnect/web3modal-examples/tree/main/nextjs-wagmi'
-                    }
-                  ]
-                },
-                {
-                  type: 'category',
-                  label: 'With Sign API',
-                  items: [
-                    'web/web3modal/react/sign-api/installation',
-                    'web/web3modal/react/sign-api/components',
-                    'web/web3modal/react/sign-api/hooks',
-                    'web/web3modal/react/sign-api/options',
-                    'web/web3modal/react/sign-api/theming',
-                    {
-                      type: 'link',
-                      label: 'Example',
-                      href: 'https://github.com/WalletConnect/web3modal-examples/tree/main/nextjs-sign'
-                    }
-                  ]
-                },
-                {
-                  type: 'category',
-                  label: 'With Auth API',
-                  items: [
-                    'web/web3modal/react/auth-api/installation',
-                    'web/web3modal/react/auth-api/components',
-                    'web/web3modal/react/auth-api/hooks',
-                    'web/web3modal/react/auth-api/options',
-                    'web/web3modal/react/auth-api/theming',
-                    {
-                      type: 'link',
-                      label: 'Example',
-                      href: 'https://github.com/WalletConnect/web3modal-examples/tree/main/nextjs-auth'
-                    }
-                  ]
+                  type: 'link',
+                  label: 'Example',
+                  href: 'https://github.com/WalletConnect/web3modal-examples/tree/main/nextjs-wagmi'
                 }
               ]
             },
@@ -354,54 +315,17 @@ module.exports = {
               type: 'category',
               label: 'HTML',
               items: [
-                'web/web3modal/html/introduction',
+                'web/web3modal/html/wagmi/installation',
+                'web/web3modal/html/wagmi/components',
+                'web/web3modal/html/wagmi/actions',
+                'web/web3modal/html/wagmi/options',
+                'web/web3modal/html/wagmi/theming',
+                'web/web3modal/html/wagmi/custom-wallets',
+                'web/web3modal/html/wagmi/custom-chains',
                 {
-                  type: 'category',
-                  label: 'With Wagmi',
-                  items: [
-                    'web/web3modal/html/wagmi/installation',
-                    'web/web3modal/html/wagmi/components',
-                    'web/web3modal/html/wagmi/actions',
-                    'web/web3modal/html/wagmi/options',
-                    'web/web3modal/html/wagmi/theming',
-                    'web/web3modal/html/wagmi/custom-wallets',
-                    'web/web3modal/html/wagmi/custom-chains',
-                    {
-                      type: 'link',
-                      label: 'Example',
-                      href: 'https://github.com/WalletConnect/web3modal-examples/tree/main/html-wagmi'
-                    }
-                  ]
-                },
-                {
-                  type: 'category',
-                  label: 'With Sign API',
-                  items: [
-                    'web/web3modal/html/sign-api/installation',
-                    'web/web3modal/html/sign-api/actions',
-                    'web/web3modal/html/sign-api/options',
-                    'web/web3modal/html/sign-api/theming',
-                    {
-                      type: 'link',
-                      label: 'Example',
-                      href: 'https://github.com/WalletConnect/web3modal-examples/tree/main/html-sign'
-                    }
-                  ]
-                },
-                {
-                  type: 'category',
-                  label: 'With Auth API',
-                  items: [
-                    'web/web3modal/html/auth-api/installation',
-                    'web/web3modal/html/auth-api/actions',
-                    'web/web3modal/html/auth-api/options',
-                    'web/web3modal/html/auth-api/theming',
-                    {
-                      type: 'link',
-                      label: 'Example',
-                      href: 'https://github.com/WalletConnect/web3modal-examples/tree/main/html-auth'
-                    }
-                  ]
+                  type: 'link',
+                  label: 'Example',
+                  href: 'https://github.com/WalletConnect/web3modal-examples/tree/main/html-wagmi'
                 }
               ]
             }
@@ -482,16 +406,95 @@ module.exports = {
           collapsed: true,
           items: ['web/providers/ethereum', 'web/providers/universal']
         },
+        // WalletConnectModal
         {
           type: 'category',
           label: 'WalletConnectModal',
-          collapsible: true,
-          collapsed: true,
           items: [
-            'web/walletConnectModal/installation',
-            'web/walletConnectModal/options',
-            'web/walletConnectModal/actions',
-            'web/walletConnectModal/theming'
+            {
+              type: 'category',
+              label: 'Just Modal',
+              items: [
+                'web/walletConnectModal/modal/installation',
+                'web/walletConnectModal/modal/options',
+                'web/walletConnectModal/modal/actions',
+                'web/walletConnectModal/modal/theming'
+              ]
+            },
+            {
+              type: 'category',
+              label: 'With Sign API',
+              items: [
+                {
+                  type: 'category',
+                  label: 'HTML',
+                  items: [
+                    'web/walletConnectModal/sign/html/installation',
+                    'web/walletConnectModal/sign/html/options',
+                    'web/walletConnectModal/sign/html/actions',
+                    'web/walletConnectModal/sign/html/theming',
+                    {
+                      type: 'link',
+                      label: 'Example',
+                      href: 'https://github.com/WalletConnect/web3modal-examples/tree/main/walletconnect-modal-sign-html'
+                    }
+                  ]
+                },
+                {
+                  type: 'category',
+                  label: 'React',
+                  items: [
+                    'web/walletConnectModal/sign/react/installation',
+                    'web/walletConnectModal/sign/react/components',
+                    'web/walletConnectModal/sign/react/hooks',
+                    'web/walletConnectModal/sign/react/options',
+                    'web/walletConnectModal/sign/react/theming',
+                    {
+                      type: 'link',
+                      label: 'Example',
+                      href: 'https://github.com/WalletConnect/web3modal-examples/tree/main/walletconnect-modal-sign-react'
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              type: 'category',
+              label: 'With Auth API',
+              items: [
+                {
+                  type: 'category',
+                  label: 'HTML',
+                  items: [
+                    'web/walletConnectModal/auth/html/installation',
+                    'web/walletConnectModal/auth/html/options',
+                    'web/walletConnectModal/auth/html/actions',
+                    'web/walletConnectModal/auth/html/theming',
+                    {
+                      type: 'link',
+                      label: 'Example',
+                      href: 'https://github.com/WalletConnect/web3modal-examples/tree/main/walletconnect-modal-auth-html'
+                    }
+                  ]
+                },
+                {
+                  type: 'category',
+                  label: 'React',
+                  items: [
+                    'web/walletConnectModal/auth/react/installation',
+                    'web/walletConnectModal/auth/react/components',
+                    'web/walletConnectModal/auth/react/hooks',
+                    'web/walletConnectModal/auth/react/options',
+                    'web/walletConnectModal/auth/react/theming',
+                    {
+                      type: 'link',
+                      label: 'Example',
+                      href: 'https://github.com/WalletConnect/web3modal-examples/tree/main/walletconnect-modal-auth-react'
+                    }
+                  ]
+                }
+              ]
+            }
           ]
         }
       ]
@@ -501,11 +504,7 @@ module.exports = {
       label: 'Guides',
       className: 'menu_outer_list',
       collapsible: false,
-      items: [
-        'web/guides/examples-and-resources',
-        'web/guides/nodejs',
-        'web/guides/shared-core'
-      ]
+      items: ['web/guides/examples-and-resources', 'web/guides/nodejs', 'web/guides/shared-core']
     }
   ],
   android: [
@@ -540,11 +539,11 @@ module.exports = {
           items: ['android/web3inbox/installation', 'android/web3inbox/usage']
         },
         {
-           type: 'category',
-           label: 'Web3Modal',
-           collapsible: true,
-           collapsed: true,
-           items: ['android/web3modal/installation', 'android/web3modal/usage']
+          type: 'category',
+          label: 'Web3Modal',
+          collapsible: true,
+          collapsed: true,
+          items: ['android/web3modal/installation', 'android/web3modal/usage']
         }
       ]
     },

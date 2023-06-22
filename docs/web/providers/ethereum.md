@@ -30,7 +30,7 @@ const provider = await EthereumProvider.init({
 
 ## Use with WalletConnectModal
 
-When `showQrModal` is enabled and `@walletconnect/modal` package is installed, ethereum provider will automatically show and hide [WalletConnectModal](../walletConnectModal/installation.mdx). You can also pass all relevant modal options under `qrModalOptions`. See [WalletConnectModal options](../walletConnectModal/options.mdx) for all available fields.
+When `showQrModal` is enabled and `@walletconnect/modal` package is installed, ethereum provider will automatically show and hide [WalletConnectModal](../walletConnectModal/modal/installation.mdx). You can also pass all relevant modal options under `qrModalOptions`. See [WalletConnectModal options](../walletConnectModal/modal/options.mdx) for all available fields.
 
 ## Use without WalletConnectModal
 
@@ -79,7 +79,7 @@ With Ethereum Provider, the package passed the required chains through `chains` 
 
 Example code can be found [here](https://github.com/wagmi-dev/references/blob/main/packages/connectors/src/walletConnect.ts#L134) and further documentation on namespaces can be found in this [spec](https://docs.walletconnect.com/2.0/specs/clients/sign/namespaces).
 
-The example below specifies Ethereum Mainnet  (chainId `1`) as a required chain via `chains`, and Ethereum Goerli (chainId `5`) as an optional chain via `optionalChains`.
+The example below specifies Ethereum Mainnet (chainId `1`) as a required chain via `chains`, and Ethereum Goerli (chainId `5`) as an optional chain via `optionalChains`.
 
 ```typescript
 await EthereumProvider.init({

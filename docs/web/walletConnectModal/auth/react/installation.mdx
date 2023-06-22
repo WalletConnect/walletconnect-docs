@@ -1,5 +1,5 @@
 import AboutAuthApi from '../../_partials/auth-api/about.mdx'
-import ObtainProjectIdPartial from '../../_partials/obtainProjectId.mdx'
+import ObtainProjectIdPartial from '../../../web3modal/_partials/obtainProjectId.mdx'
 
 # Installation
 
@@ -12,28 +12,28 @@ import ObtainProjectIdPartial from '../../_partials/obtainProjectId.mdx'
 ## Add packages
 
 ```bash npm2yarn
-npm install @web3modal/auth-react
+npm install @walletconnect/modal-auth-react
 ```
 
 ## Implementation
 
-Start by adding `Web3ModalAuth` component at the root of your app.
+Start by adding `WalletConnectModalAuth` component at the root of your app.
 
 ```tsx
-import { Web3ModalAuth } from '@web3modal/auth-react'
+import { WalletConnectModalAuth } from '@walletconnect/modal-auth-react'
 
 function App() {
   return (
     <>
       <HomePage />
 
-      <Web3ModalAuth
+      <WalletConnectModalAuth
         projectId="YOUR_PROJECT_ID"
         metadata={{
           name: 'My Dapp',
-          description: 'My Dapp description',
-          url: 'https://my-dapp.com',
-          icons: ['https://my-dapp.com/logo.png']
+          description: 'My Dapp Description',
+          url: 'mydapp.com',
+          icons: ['https://mydapp-logo.png']
         }}
       />
     </>
@@ -46,7 +46,7 @@ function App() {
 Set up and use signIn method to open the modal and start user authentication.
 
 ```tsx
-import { useSignIn } from '@web3modal/auth-react'
+import { useSignIn } from '@walletconnect/modal-auth-react'
 
 function HomePage() {
   const { signIn, data, error, loading } = useSignIn({ statement: 'Connect to my dapp' })
