@@ -34,29 +34,6 @@ interface PushSubscription {
 }
 ```
 
-### Push Proposal Store
-
-#### Store Name
-`com.walletconnect.notify.pushProposal`
-
-#### Store Key
-
-Key of [Push Proposal Store](#push-proposal-store) must be equal to `responseTopic` from
-[`PushProposal`](#pushproposal) data structure. 
-
-#### PushProposal
-
-```typescript
-interface PushProposal {
-    publicKey: string;
-    privateKey: string;
-    responseTopic: stirng;
-    metadata: PushClientTypes.Metadata;
-    account: string;
-    scope: string[];
- }
- ```
-
 ### Push Subscription Protocol in multiclient environment
 
 #### Definitions
@@ -89,39 +66,3 @@ Subscribe protocol will be established as follows:
 19. W1 syncs the push subscription with Wx
 20. Wx stores the push subscription
 21. Wx subscribe to push topic coming from the sync request.
-
-### Push Proposal Protocol in multiclient environment
-
-**WIP**: It is unclear whether or not we want to sync push proposals
-
-Although syncing proposals may seem redundant, due to the fact that wallets already listen to push
-proposals on a pairing topic, this topic is generated at random and not derived from the blockchain
-account. Therefore, not all peers sharing the same blockchain account will receive the proposal.
-
-#### Definitions
-- W1 - *Client performing approve* that have access W (Wallet) blockchain account keys.
-- Wx - peer clients that have access W (Wallet) blockchain account keys. 
-
-#### Pre-requisities
-W1 and Dapp are required to establish pairing topic before proceeding to Push protocol execution.
-
-Additionally Wallet must meet the pre-requisites for [Push Subscribe](./push-subscribe.md) to complete this flow.
-
-#### Protocol
-Proposal protocol will be established as follows:
-
-1. Dapp generates keypair X
-2. Dapp sends push proposal on pairing topic with public key X, relay, metadata and scope
-3. W1 receives push proposal with public key X on pairing topic
-4. W1 generates key pair Y
-5. W1 derives symmetric key with keys X and Y
-6. W1 syncs proposal with Wx
-7. Push topic is derived from sha256 hash of symmetric key 
-8. W1 sends push subscribe request to Push Server with subscriptionAuth
-9. W1 generates key pair Z
-10. Response topic is derived from hash of public key X
-11. W1 responds with type 1 envelope on response topic to Dapp with subscriptionAuth and subscription symmetric key
-12. Dapp receives the response and derives a subscription topic from sha256 hash of subscription symmetric key
-13. Dapp subscribes for subscription topic to receive subscription updates published by the wallet
-
-
