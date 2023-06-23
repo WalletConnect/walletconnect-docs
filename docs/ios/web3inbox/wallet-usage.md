@@ -23,6 +23,7 @@ For utilizing the "Scan QR Code" feature, you need to add `NSCameraUsageDescript
 ```xml
 <key>NSCameraUsageDescription</key>
 <string>Allow the app to scan for QR codes</string>
+```
 
 ### Web3Inbox Client Configuration
 The following Swift code snippet demonstrates how to configure the Web3Inbox Client.
