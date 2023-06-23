@@ -46,7 +46,7 @@ Parameters:
 `environment`: Use debug environment for debug builds and release for release and TestFlight builds.
 `onSign`: Web3Inbox client will request user to sign messages with its account private key. The message may be a Sync Storage derivation key or Identity key registration.
 
-### SDK Usage
+## SDK Usage
 Singleton Access
 Access the Web3Inbox client instance, which is a singleton, by calling:
 
@@ -84,8 +84,22 @@ final class Web3InboxViewController: UIViewController {
 
 ```
 
-### Decrypting Push Notifications
+### Register for Push Notifications
+Communicate with Apple Push Notification service and receive unique device token. Register that token with following method:
 
+```swift
+    func application(
+      _ application: UIApplication,
+      didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data
+    ) {
+
+        Task(priority: .high) {            
+            try await Web3Inbox.instance.register(deviceToken: deviceToken)
+        }
+    }
+```
+
+### Decrypting Push Notifications
 Push notifications sent via APNs are encrypted and carry the following payload:
 
 ```
