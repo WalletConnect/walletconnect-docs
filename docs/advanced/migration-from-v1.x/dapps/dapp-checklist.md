@@ -32,6 +32,28 @@ Please test your dapp's WalletConnect v2.0 integration with as wide a range of w
 3. Trust ([iOS](https://apps.apple.com/us/app/trust-crypto-bitcoin-wallet/id1288339409)) ([Android](https://play.google.com/store/apps/details?id=com.wallet.crypto.trustapp&hl=en&gl=US))
 4. Zerion ([iOS](https://apps.apple.com/us/app/zerion-wallet-crypto-web3/id1456732565)) ([Android](https://play.google.com/store/apps/details?id=io.zerion.android&hl=en&gl=US))
 
+### Common Errors and Fixes
+
+There are several warnings and errors dapp developers may face when integrating with certain libraries during the V2 migration.
+
+`Failed to execute 'postMessage' on 'DOMWindow': the target origin provided ('https://verify.walletconnect.com)' does not match the recipient window's origin (XXX)`.
+This can be ignored until your dapp is ready to be in production. We have a service called Verify API which has been implemented to verify domains and prevent malicious site. When ready to verify your domain:
+
+1. Go to https://cloud.walletconnect.com/sign-in
+2. Access your project with the associated projectID
+3. Submit your dapp project in the `Explorer` tab
+4. Once submitted in your `Settings` you will see a next verification code
+5. Follow the instructions to map your DNS record. This allows Verify API to ensure you are the rightful domain owner.
+6. Allows 48-72 hours for the DNS to propogate.
+
+`Uncaught (in promise)  Error: no matching key.history: XXXXX`
+This can be resolved by clearing local storage cache and refreshing. This is should no longer be appearing in our next release.
+
+`Missing or invalid. request() method: eth_call` or `Missing or invalid. request() method: eth_getBalance`
+This error was fixed and relevant to those using < wagmi `v0.12.16` and ethers `5.7.2`. It usually occurs when getting balance through the provider or `useContract` wagmi hook. Please upgrade to `^v0.12.16`in order to resolve this error.
+
+If you are still facing issues with the above or different issues, feel free to search our [Github Discussions](https://github.com/orgs/WalletConnect/discussions) or file a ticket [here](https://github.com/orgs/WalletConnect/discussions/new?category=v1-v2-migration-support)
+
 ### Testing Process
 
 We highly recommend testing with _ALL_ of the above wallets.
