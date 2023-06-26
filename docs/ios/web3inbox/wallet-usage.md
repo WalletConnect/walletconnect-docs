@@ -42,13 +42,17 @@ Web3Inbox.configure(
 Parameters:
 
 `account`: Wallet account
+
 `bip44`: Provide your implementation of BIP44Provider, necessary for Sync store key derivation.
+
 `config`: The Web3Inbox client will be configured to enable Chat and Push SDKs by default. However, you can disable selected functionalities.
+
 `environment`: Use debug environment for debug builds and release for release and TestFlight builds.
+
 `onSign`: Web3Inbox client will request user to sign messages with its account private key. The message may be a Sync Storage derivation key or Identity key registration.
 
 ## SDK Usage
-Singleton Access
+
 Access the Web3Inbox client instance, which is a singleton, by calling:
 
 ```swift
