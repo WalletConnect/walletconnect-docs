@@ -69,12 +69,11 @@ const params = {
 const { uri, approval } = await provider.client.connect(params)
 ```
 
-5. Create a standalone modal using your dapps WalletConnect projectid and specifying version 2 of WalletConnect.
+5. Create a standalone modal using your dapps WalletConnect projectId.
 
 ```js
 const walletConnectModal = new WalletConnectModal({
-  projectId: '2ea3f3ghubh32b8ie2f2',
-  walletConnectVersion: 2
+  projectId: '2ea3f3ghubh32b8ie2f2'
 })
 ```
 
