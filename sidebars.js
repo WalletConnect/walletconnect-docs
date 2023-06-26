@@ -54,7 +54,7 @@ module.exports = {
       label: 'SDKs',
       collapsible: false,
       className: 'menu_outer_list',
-      items: ['web3modal/about', 'web3wallet/about']
+      items: ['web3modal/about', 'web3wallet/about', 'web3inbox/about']
     },
     {
       type: 'category',
@@ -342,7 +342,8 @@ module.exports = {
             'web/web3wallet/wallet-usage',
             'web/web3wallet/upgrade-guide'
           ]
-        }
+        },
+
       ]
     },
     {
