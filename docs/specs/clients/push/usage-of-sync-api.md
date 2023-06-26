@@ -28,7 +28,7 @@ interface PushSubscription {
     metadata: Metadata;
     scope: ScopeMap;
     expiry: number;
-    symkey: string;
+    symKey: string;
 }
 ```
 
