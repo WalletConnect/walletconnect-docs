@@ -35,6 +35,6 @@ To check more in details go and visit our WalletConnect Modal implementation app
 - [x] Bug Fixes and Stability Enhancements: Address reported issues, fix bugs, and enhance the stability of the product based on alpha testing feedback.
 
 ### Phase 3: Release and Post-Launch (Q2-Q3)
-- [ ] Final Testing: Conduct comprehensive testing of the product to ensure all reported issues have been resolved and the product is ready for a stable release.
-- [ ] Product Launch: Release the stable version of the product to the market.
+- [x] Final Testing: Conduct comprehensive testing of the product to ensure all reported issues have been resolved and the product is ready for a stable release.
+- [x] Product Launch: Release the stable version of the product to the market.
 - [ ] Customer Support and Feedback: Provide ongoing customer support, promptly address any post-launch issues or concerns, and collect feedback to inform future updates and enhancements.
