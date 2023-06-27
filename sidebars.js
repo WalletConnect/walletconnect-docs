@@ -655,6 +655,16 @@ module.exports = {
         },
         {
           type: 'category',
+          label: 'WalletConnectModal',
+          collapsible: true,
+          collapsed: true,
+          items: [
+            'ios/walletconnectmodal/installation',
+            'ios/walletconnectmodal/usage',
+          ]
+        },
+        {
+          type: 'category',
           label: 'Web3Inbox',
           collapsed: true,
           collapsible: true,
