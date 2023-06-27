@@ -1,0 +1,34 @@
+# Cold start of Notify SDK with History API
+
+## Motivation
+
+A cold start means that Push SDK running the first time on a device without any cached state. Account that is using for `enableSync` of PushClient API may already have some kind of history (pushSubscriptions, pushMessages). The purpose of using the HistoryAPI is to restore history and state after a cold start.
+
+## Implementation
+
+1. W1 already have some `pushSubscriptions`, `pushMessages` history
+2. Wn performing cold start on different device and have same account as W1
+3. Wn configuring sync for account with `enableSync` method of PushClient
+4. Wn register HistoryAPI for `wc_syncSet` and `wc_syncDel` SyncAPI methods. Request tags could found in [Sync API](../core/sync/readme.md) specs
+5. Wn fetching sync messages containing PushSubscription payloads. Topic to fetch and keys to decrypt payloads is deriving accoring [Sync API](../core/sync/readme.md). PushSubscriptions description could found in[PushSubscriptions sync storage specs](./usage-of-sync-api.md)
+6. Wn combines `pushSubscriptions` inserts with deletions and updating local database
+7. Wn subscribing for `pushSubscriptions` topics
+8. Wn setting subscription symKey P into keychain to be able to decrypt pushMessages payloads
+9. Wn fetching `wc_pushMessage` messages for every subscription topic from HistoryAPI. Request tags could found in [Push RPC methods](./rpc-methods.md) 
+10. Wn decrypt pusMessages payload with symKey P and updating local database
+
+To configure HistoryAPI client should register tags that will be tracked by History server. 
+
+```swift
+	History.instance.register(tags: ["5000", "5002"])
+```
+
+To fetch payloads from HistoryAPI.
+
+```swift
+let payloads: [PushSubscription] = try await historyClient.getMessages(
+    topic: {pushSubscriptions sync storage topic},
+    count: 200, // TBD: Pagination
+    direction: .backward
+)
+```
