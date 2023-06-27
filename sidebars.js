@@ -307,7 +307,7 @@ module.exports = {
                 {
                   type: 'link',
                   label: 'Example',
-                  href: 'https://github.com/WalletConnect/web3modal-examples/tree/main/nextjs-wagmi'
+                  href: 'https://github.com/WalletConnect/web3modal-examples/tree/main/web3modal-wagmi-react'
                 }
               ]
             },
@@ -325,7 +325,7 @@ module.exports = {
                 {
                   type: 'link',
                   label: 'Example',
-                  href: 'https://github.com/WalletConnect/web3modal-examples/tree/main/html-wagmi'
+                  href: 'https://github.com/WalletConnect/web3modal-examples/tree/main/web3modal-wagmi-html'
                 }
               ]
             }
