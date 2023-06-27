@@ -24,6 +24,7 @@ In order to get started, we recommend identifying which library your dapp utiliz
 10. [ConnectKit](#connectkit)
 11. [wagmi](#wagmi)
 12. [RainbowKit](#rainbowkit)
+13. [Privy](#privy)
 
 ### web3-provider
 
@@ -407,3 +408,38 @@ RainbowKit is type-safe and will warn you when a `projectId` is missing. Refer t
 - [Next.js App Router](https://codesandbox.io/p/sandbox/github/rainbow-me/rainbowkit/tree/main/examples/with-next-app)
 - [Remix](https://codesandbox.io/p/sandbox/github/rainbow-me/rainbowkit/tree/main/examples/with-remix)
 - [Vite](https://codesandbox.io/p/sandbox/github/rainbow-me/rainbowkit/tree/main/examples/with-vite)
+
+### Privy
+
+To upgrade Privy to use WalletConnect v2.0, simply upgrade `@privy-io/react-auth` to version `1.28.0` or higher, and then complete the following two steps:
+
+#### 1. Get a WalletConnect Cloud Project ID
+Go to [**WalletConnect Cloud**](https://cloud.walletconnect.com/) and create a new account. Once your account is created, create a new project and collect the **Project ID**.
+
+#### 2. Configure your Project ID in the PrivyProvider
+In the [`config`](https://docs.privy.io/reference/react-auth/interfaces/PrivyProviderProps#config) property of your [`PrivyProvider`](https://docs.privy.io/reference/react-auth/modules#privyprovider), add a `walletConnectCloudProjectId` with your project ID from step 1.
+
+
+```tsx title='Example configuration of Privy with WalletConnect v2.0 in NextJS'
+import type {AppProps} from 'next/app';
+import Head from 'next/head';
+import {PrivyProvider} from '@privy-io/react-auth';
+
+function MyApp({ Component, pageProps }: AppProps) {
+  return (
+    <PrivyProvider
+      appId={process.env.NEXT_PUBLIC_PRIVY_APP_ID || ''}
+      config={{
+        walletConnectCloudProjectId: 'YOUR_WALLETCONNECT_CLOUD_PROJECT_ID',
+      }}
+    >
+        <Component {...pageProps} />
+    </PrivyProvider>
+  );
+}
+
+```
+
+#### For more information:
+- See Privy's full [WalletConnect v2.0 migration guide](https://docs.privy.io/guide/guides/walletconnect-v2).
+- Learn more about Privy at our [website](https://www.privy.io/).
