@@ -417,9 +417,8 @@ To upgrade Privy to use WalletConnect v2.0, simply upgrade `@privy-io/react-auth
 Go to [**WalletConnect Cloud**](https://cloud.walletconnect.com/) and create a new account. Once your account is created, create a new project and collect the **Project ID**.
 
 #### 2. Configure your Project ID in the PrivyProvider
-At the root-level of your application (`_app.jsx` in [NextJS](https://nextjs.org/) or `index.js` in [`create-react-app`](https://create-react-app.dev/)), in the `config` property of the `PrivyProvider`, add a `walletConnectV2` object with the fields:
-- `enabled`: `true`
-- `walletConnectCloudProjectId`: your project ID from step 1
+In the [`config`](https://docs.privy.io/reference/react-auth/interfaces/PrivyProviderProps#config) property of your [`PrivyProvider`](https://docs.privy.io/reference/react-auth/modules#privyprovider), add a `walletConnectCloudProjectId` with your project ID from step 1.
+
 
 ```tsx title='Example configuration of Privy with WalletConnect v2.0 in NextJS'
 import type {AppProps} from 'next/app';
@@ -429,13 +428,10 @@ import {PrivyProvider} from '@privy-io/react-auth';
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <PrivyProvider
-        appId={process.env.NEXT_PUBLIC_PRIVY_APP_ID || ''}
-        config={{
-            walletConnectV2: {
-                enabled: true,
-                walletConnectCloudProjectId: 'YOUR_WALLETCONNECT_CLOUD_PROJECT_ID',
-            }
-        }}
+      appId={process.env.NEXT_PUBLIC_PRIVY_APP_ID || ''}
+      config={{
+        walletConnectCloudProjectId: 'YOUR_WALLETCONNECT_CLOUD_PROJECT_ID',
+      }}
     >
         <Component {...pageProps} />
     </PrivyProvider>
