@@ -15,7 +15,7 @@ For an example implementation, please refer to our `react-dapp-v2` [example](htt
 Dapps will also need to install `WalletConnectModal` for the UI.
 
 ```bash npm2yarn
-npm install @walletconnect/modal
+npm install @walletconnect/sign-client
 ```
 
 ## Create a Session
@@ -129,12 +129,6 @@ const result = await signClient.request({
       "0x7468697320697320612074657374206d65737361676520746f206265207369676e6564",
     ],
 });
-    method: "personal_sign",
-    params: [
-      "0x1d85568eEAbad713fBB5293B45ea066e552A90De",
-      "0x7468697320697320612074657374206d65737361676520746f206265207369676e6564",
-    ],
-  }
 ```
 
 > For more information on available JSON-RPC requests, see the [JSON-RPC reference](../../advanced/rpc-reference/ethereum-rpc.md).
