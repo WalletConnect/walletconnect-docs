@@ -42,7 +42,7 @@ Used to publish a notification message to a peer through push topic. Response is
 
 | IRN     |          |
 | ------- | -------- |
-| TTL     | 86400    |
+| TTL     | 2592000  |
 | Tag     | 4002     |
 
 ```
