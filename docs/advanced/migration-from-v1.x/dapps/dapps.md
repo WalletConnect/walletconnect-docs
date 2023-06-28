@@ -69,10 +69,8 @@ const provider = await EthereumProvider.init({
 
 We recommend that you replace your existing integration with the latest version of Web3Modal by following one of these paths:
 
-- [Web3Modal](https://docs.walletconnect.com/2.0/web3modal/about): Web3modal feature rich modal with [wagmi](https://wagmi.sh/), has walletconnect, extension wallets, connectors, chain switching, account modal and more.
+- [Web3Modal](https://docs.walletconnect.com/2.0/web3modal/about): Web3modal feature rich modal with [wagmi](https://wagmi.sh/), has WalletConnect, extension wallets, connectors, chain switching, account modal and more.
 - [WalletConnectModal](https://docs.walletconnect.com/2.0/web3modal/about): WalletConnectModal is a lightweight modal to add into your existing workflows.
-
-If you still want to use Web3Modal v1.0 but just upgrade the WalletConnect `ethereum-provider` to v2.0, you can update to the latest version available on NPM which you can find [here](https://npmjs.com/package/@walletconnect/ethereum-provider).
 
 ### Web3Modal v2.0
 
