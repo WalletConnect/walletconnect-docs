@@ -11,6 +11,7 @@ const config = {
   url: 'https://docs.walletconnect.com/',
   baseUrl: '/',
   onBrokenLinks: 'throw',
+  onBrokenMarkdownLinks: 'throw',
   favicon: 'img/favicon.ico',
   organizationName: 'walletconnect',
   projectName: 'walletconnect-docs',
