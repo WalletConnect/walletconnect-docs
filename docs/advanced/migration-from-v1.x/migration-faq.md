@@ -44,4 +44,4 @@ If you are unable to complete your migration before the WalletConnect v1.0 shutd
 
 ### I didn’t migrate before June 28, 2023. What should I do now?
 
-The good news is that you’ve come to the right place! We strongly recommend that you begin your migration immediately, and you can do so by following the instructions laid out in the [migration section](./overview.md) of our docs.
+The good news is that you’ve come to the right place! We strongly recommend that you begin your migration immediately, and you can do so by following the instructions laid out in the [migration section](./overview.mdx) of our docs.

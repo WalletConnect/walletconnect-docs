@@ -9,7 +9,7 @@ Head over to [WalletConnect Cloud](https://cloud.walletconnect.com/) to sign in 
 Install the WalletConnect client package.
 
 :::info
-For platform-specific instructions, refer to our [React Native](../../reactnative/overview.md) and [Node.js](../guides/nodejs.md) guides.
+For platform-specific instructions, refer to our [React Native](../../reactnative/overview.mdx) and [Node.js](../guides/nodejs.md) guides.
 :::
 
 ```bash npm2yarn
