@@ -6,7 +6,7 @@ Note: The status of your listing does not impact your users' ability to use Wall
 
 ### WalletConnect v1.0 Shutdown: Impact on Explorer Submissions
 
-The WalletConnect v1.0 shutdown is scheduled to take place on June 28 (read more [here](https://medium.com/walletconnect/t-1-month-last-call-to-migrate-before-the-walletconnect-v1-0-shutdown-692ffa9520aa)). Once the shutdown comes into effect, we will no longer accept submissions from wallets and dapps that support only WalletConnect v1.0.
+WalletConnect v1.0 was shutdown on June 28 ([read more](https://medium.com/walletconnect/walletconnect-v1-0-has-now-been-shut-down-ff9baec96690)).
 
 If you are a wallet or dapp that currently only supports WalletConnect v1.0, we strongly recommend that you migrate to WalletConnect v2.0 immediately. Please visit the [migration section of our docs](https://docs.walletconnect.com/2.0/advanced/migration-from-v1.x/overview) to get started right away.
 
