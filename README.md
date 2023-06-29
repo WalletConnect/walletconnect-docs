@@ -1,30 +1,35 @@
-# WalletConnect Docs
+---
+id: readme
+slug: /
+position: 1
+---
 
-This repo runs [docs.walletconnect.com](https://docs.walletconnect.com).
+# WalletConnect v1.0
 
-Source can be viewed in [`docs`](./docs/) directory.
+## Introduction
 
-## Running Locally
+WalletConnect is an open protocol to communicate securely between Wallets and Dapps \(Web3 Apps\). The protocol establishes a remote connection between two apps and/or devices using a Bridge server to relay payloads. These payloads are symmetrically encrypted through a shared key between the two peers. The connection is initiated by one peer displaying a **QR Code** or deep link with a standard WalletConnect URI and is established when the counter-party approves this connection request. It also includes an optional Push server to allow Native applications to notify the user of incoming payloads for established connections.
 
-1. `yarn install`
-2. `yarn start`
-3. Open `http://localhost:3000/`
+## Getting Started
 
-## Adding a New Page
+Currently the WalletConnect protocol has references implementations written in Typescript for the Client, the Bridge Server and the Push server.
 
-1. Create a new file in `docs/`
-2. Configure `sidebars.js` to create the sidebar link.
+To quickly setup your Dapp or Wallet, go to the Quick Start section for code examples.
 
-## Editing a Page
+To read in more detail about the WalletConnect protocol, go to [Technical Specification](specs/readme.md)
 
-1. Open the file in `docs/`
+Additionally you can also consult the API references for [Client](client-api.md), [Bridge Server](bridge-server.md) and [Push Server](push-server.md).
 
-Older versions are available in `versioned_docs/`.
+## Useful Links
 
-## Customize Settings & Theme
+| **Test Wallet** | **Example Dapp** |
+| --------------- | --------------- |
+| [![test wallet](/assets-1.0/img_3394.jpg)](https://test.walletconnect.org) | [![example dapp](/assets-1.0/screenshot-2019-01-31-16.52.57.png)](https://example.walletconnect.org) |
+| [test.walletconnect.org](https://test.walletconnect.org) \([Source code](https://github.com/WalletConnect/walletconnect-test-wallet)\) | [example.walletconnect.org](https://example.walletconnect.org) \([Source code](https://github.com/WalletConnect/walletconnect-example-dapp)\) |
 
-1. Open `docusaurus.config.js`
+## Community
 
-## More
+Share your experience, contribute or ask questions with the WalletConnect Community:
 
-For more options, check the [Docusaurus docs](https://docusaurus.io/).
+- **Twitter**: [https://twitter.com/walletconnect](https://twitter.com/walletconnect)
+- **GitHub**: [https://github.com/orgs/WalletConnect/discussions/](https://github.com/orgs/WalletConnect/discussions/)
