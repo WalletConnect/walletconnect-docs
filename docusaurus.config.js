@@ -36,14 +36,9 @@ const config = {
           showLastUpdateTime: true,
           editUrl: 'https://github.com/WalletConnect/walletconnect-docs/blob/main/',
           versions: {
-            '1.0': {
-              badge: false,
-              label: 'v1.x.x',
-              path: '1.0'
-            },
             current: {
               badge: false,
-              label: 'v2.x.x',
+              label: 'v2.x',
               path: '2.0'
             }
           },
