@@ -187,7 +187,7 @@ const config = {
       announcementBar: {
         id: 'support_us',
         content:
-          '🚨 v1.0 has been sunset. Wallets and Dapps must upgrade to v2.0. <a rel="noopener noreferrer" href="/2.0/advanced/migration-from-v1.x/overview">Learn more</a>. 🚨',
+          '🚨 v1.0 has been shut down. Wallets and dapps must upgrade to v2.0 immediately. <a rel="noopener noreferrer" href="/2.0/advanced/migration-from-v1.x/overview">Learn more</a>. 🚨',
         backgroundColor: '#3182ce',
         textColor: '#fff',
         isCloseable: true
