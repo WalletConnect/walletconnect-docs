@@ -136,7 +136,7 @@ await client.request({
                     data: "0x",
                     nonce: "0x00",
                     gasPrice: "0xbb5e",
-                    gasLimit: "0x5208",
+                    gas: "0x5208",
                     value: "0x00"
             }],
         },
