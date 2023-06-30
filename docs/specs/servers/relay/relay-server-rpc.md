@@ -12,7 +12,7 @@ The following definitions are shared concepts across all JSON-RPC methods for th
 - **message** - (utf8 string - variable) a plaintext message to be relayed to any subscribers on the topic.
 - **ttl** - (uint32 - 4 bytes) a storage duration for the message to be cached server-side in **seconds** (aka time-to-live).
 - **tag** - (uint32 - 4 bytes) a label that identifies what type of message is sent based on the RPC method used.
-- **id** - (hex string - 32 bytes) a unique identifier for each subscription targeting a topic.
+- **id** - 19 digit unique identifier. We suggest a 13 digit epoch timestamp plus 6 digit entropy
 
 
 ## Methods
@@ -23,7 +23,7 @@ Used when a client publishes a message to a server.
 ```jsonc
 // Request (client->server)
 {
-  "id" : "1",
+  "id" : 1687239522123456789,
   "jsonrpc": "2.0",
   "method": "irn_publish",
   "params" : {
@@ -36,7 +36,7 @@ Used when a client publishes a message to a server.
 
 // Response (server->client)
 {
-  "id" : "1",
+  "id" : 1687239522123456789,
   "jsonrpc": "2.0",
   "result": true
 }
@@ -67,7 +67,7 @@ Used when a client publishes multiple messages to a server.
 
 // Response (server->client)
 {
-  "id" : "1",
+  "id" : 1687239522123456789,
   "jsonrpc": "2.0",
   "result": true
 }
@@ -80,7 +80,7 @@ Used when a client subscribes a given topic.
 ```jsonc
 // Request (client->server)
 {
-  "id" : "1",
+  "id" : 1687239522123456789,
   "jsonrpc": "2.0",
   "method": "irn_subscribe",
   "params" : {
@@ -90,7 +90,7 @@ Used when a client subscribes a given topic.
 
 // Response (server->client)
 {
-  "id" : "1",
+  "id" : 1687239522123456789,
   "jsonrpc": "2.0",
   "result": string // subscriptionId
 }
@@ -103,7 +103,7 @@ Used when a client subscribes multiple topics.
 ```jsonc
 // Request (client->server)
 {
-  "id" : "1",
+  "id" : 1687239522123456789,
   "jsonrpc": "2.0",
   "method": "irn_batchSubscribe",
   "params" : {
@@ -113,7 +113,7 @@ Used when a client subscribes multiple topics.
 
 // Response (server->client)
 {
-  "id" : "1",
+  "id" : 1687239522123456789,
   "jsonrpc": "2.0",
   "result": string[] // array of subscriptionId's
 }
@@ -126,7 +126,7 @@ Used when a client unsubscribes a given topic.
 ```jsonc
 // Request (client->server)
 {
-  "id" : "1",
+  "id" : 1687239522123456789,
   "jsonrpc": "2.0",
   "method": "irn_unsubscribe",
   "params" : {
@@ -137,7 +137,7 @@ Used when a client unsubscribes a given topic.
 
 // Response (server->client)
 {
-  "id" : "1",
+  "id" : 1687239522123456789,
   "jsonrpc": "2.0",
   "result": true
 }
@@ -156,7 +156,7 @@ Used when a client unsubscribes a given topic.
 
 // Request (client->server)
 {
-  "id" : "1",
+  "id" : 1687239522123456789,
   "jsonrpc": "2.0",
   "method": "irn_batchUnsubscribe",
   "params" : {
@@ -166,7 +166,7 @@ Used when a client unsubscribes a given topic.
 
 // Response (server->client)
 {
-  "id" : "1",
+  "id" : 1687239522123456789,
   "jsonrpc": "2.0",
   "result": true
 }
@@ -180,7 +180,7 @@ Used when a server sends a subscription message to a client.
 ```jsonc
 // Request (server->client)
 {
-  "id" : "1",
+  "id" : 1687239522123456789,
   "jsonrpc": "2.0",
   "method": "irn_subscription",
   "params" : {
@@ -196,7 +196,7 @@ Used when a server sends a subscription message to a client.
 
 // Response (client->server)
 {
-  "id" : "1",
+  "id" : 1687239522123456789,
   "jsonrpc": "2.0",
   "result": true
 }
@@ -219,7 +219,7 @@ Response will include a flag `hasMore`. If true, the consumer should fetch again
 
 // Request (client->server)
 {
-  "id" : "1",
+  "id" : 1687239522123456789,
   "jsonrpc": "2.0",
   "method": "irn_fetchMessages",
   "params" : {
@@ -229,7 +229,7 @@ Response will include a flag `hasMore`. If true, the consumer should fetch again
 
 // Response (server->client)
 {
-  "id" : "1",
+  "id" : 1687239522123456789,
   "jsonrpc": "2.0",
   "result": {
     "messages": ReceivedMessage[],
@@ -257,7 +257,7 @@ Response will include a flag `hasMore`. If true, the consumer should fetch again
 
 // Request (client->server)
 {
-  "id" : "1",
+  "id" : 1687239522123456789,
   "jsonrpc": "2.0",
   "method": "irn_batchFetchMessages",
   "params" : {
@@ -267,7 +267,7 @@ Response will include a flag `hasMore`. If true, the consumer should fetch again
 
 // Response (server->client)
 {
-  "id" : "1",
+  "id" : 1687239522123456789,
   "jsonrpc": "2.0",
   "result": {
     "messages": ReceivedMessage[],
