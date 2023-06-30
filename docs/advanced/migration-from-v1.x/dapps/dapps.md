@@ -77,20 +77,24 @@ We recommend that you replace your existing integration with the latest version 
 If you are using our redesigned Web3Modal (often referred to as Web3Modal v2.0), you are ready to go. Please ensure that you are using a minimum version of `2.6.0`. Here is a code example:
 
 ```typescript
-import { w3mConnectors } from '@web3modal/ethereum'
-import { createClient } from 'wagmi'
+import { w3mConnectors, w3mProvider } from '@web3modal/ethereum'
+import { createConfig } from 'wagmi'
 
 // ...
+const { publicClient } = configureChains(chains, [w3mProvider({ projectId })])
 
-const wagmiClient = createClient({
+const config = createConfig({
   autoConnect: true,
-  connectors: w3mConnectors({
-    projectId,
-    chains
-  }),
-  provider
+  connectors: [
+    w3mConnectors({
+      projectId,
+      chains
+    })
+  ],
+  publicClient
 })
 
+const ethereumClient = new EthereumClient(config, chains)
 // ...
 ```
 
@@ -412,32 +416,33 @@ RainbowKit is type-safe and will warn you when a `projectId` is missing. Refer t
 To upgrade Privy to use WalletConnect v2.0, simply upgrade `@privy-io/react-auth` to version `1.28.0` or higher, and then complete the following two steps:
 
 #### 1. Get a WalletConnect Cloud Project ID
+
 Go to [**WalletConnect Cloud**](https://cloud.walletconnect.com/) and create a new account. Once your account is created, create a new project and collect the **Project ID**.
 
 #### 2. Configure your Project ID in the PrivyProvider
+
 In the [`config`](https://docs.privy.io/reference/react-auth/interfaces/PrivyProviderProps#config) property of your [`PrivyProvider`](https://docs.privy.io/reference/react-auth/modules#privyprovider), add a `walletConnectCloudProjectId` with your project ID from step 1.
 
-
 ```tsx title='Example configuration of Privy with WalletConnect v2.0 in NextJS'
-import type {AppProps} from 'next/app';
-import Head from 'next/head';
-import {PrivyProvider} from '@privy-io/react-auth';
+import type { AppProps } from 'next/app'
+import Head from 'next/head'
+import { PrivyProvider } from '@privy-io/react-auth'
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <PrivyProvider
       appId={process.env.NEXT_PUBLIC_PRIVY_APP_ID || ''}
       config={{
-        walletConnectCloudProjectId: 'YOUR_WALLETCONNECT_CLOUD_PROJECT_ID',
+        walletConnectCloudProjectId: 'YOUR_WALLETCONNECT_CLOUD_PROJECT_ID'
       }}
     >
-        <Component {...pageProps} />
+      <Component {...pageProps} />
     </PrivyProvider>
-  );
+  )
 }
-
 ```
 
 #### For more information:
+
 - See Privy's full [WalletConnect v2.0 migration guide](https://docs.privy.io/guide/guides/walletconnect-v2).
 - Learn more about Privy at our [website](https://www.privy.io/).
