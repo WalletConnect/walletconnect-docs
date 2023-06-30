@@ -2,7 +2,7 @@
 
 ## projectId (required)
 
-Your project’s unique identifier that can be obtained at [cloud.walletconnect.com](https://cloud.walletconnect.com). Enables following functionalities within WalletConnectModal: wallet and chain logos, optional WalletConnect RPC, support for all v2 wallets from [Explorer](https://walletconnect.com/explorer?type=wallet&version=2). Defaults to `undefined`.
+Your project’s unique identifier that can be obtained at [cloud.walletconnect.com](https://cloud.walletconnect.com). Enables following functionalities within WalletConnectModal: wallet and chain logos, optional WalletConnect RPC, support for all v2 wallets from [WalletConnect Explorer](https://walletconnect.com/explorer?type=wallet&version=2). Defaults to `undefined`.
 
 ```ts
 projectId: string
@@ -57,12 +57,8 @@ Now used in:
 
 ```ts
 onCopyClipboard: (value: string) => void;
-```
 
-Example:
-```ts
-import Clipboard from '@react-native-clipboard/clipboard';
-
+//example
 const onCopyClipboard = (value: string) => {
   Clipboard.setString(value);
 };
@@ -74,4 +70,32 @@ Puts WalletConnectModal into dark or light mode. Defaults to user's system prefe
 
 ```ts
 themeMode: 'dark' | 'light'
+```
+
+## explorerRecommendedWalletIds (optional)
+
+Allows to override default recommended wallets that are fetched from [WalletConnect Explorer](https://walletconnect.com/explorer?type=wallet). You can define an array of wallet ids you'd like to prioritise (order is respected). You can get these ids from the explorer link mentioned before by clicking on a copy icon of desired wallet card. If you want to completely disable recommended wallets, you can set this option to `NONE`. Defaults to `undefined`.
+
+```ts
+explorerRecommendedWalletIds: string[] | 'NONE'
+
+//example
+explorerRecommendedWalletIds={[
+  '1ae92b26df02f0abca6304df07debccd18262fdf5fe82daa81593582dac9a369',
+  '4622a2b2d6af1c9844944291e5e7351a6aa24cd7b23099efac1b2fd875da31a0'
+]}
+```
+
+## explorerExcludedWalletIds (optional)
+
+Allows to exclude wallets that are fetched from [WalletConnect Explorer](https://walletconnect.com/explorer?type=wallet). You can define an array of wallet ids you'd like to exclude. You can get these ids from the explorer link mentioned before by clicking on a copy icon of desired wallet card. If you want to exclude all wallets, you can set this option to `ALL`, however if `explorerRecommendedWalletIds` were defined, they will still be fetched. Defaults to `undefined`.
+
+```ts
+explorerRecommendedWalletIds: string[] | 'ALL'
+
+//example
+explorerExcludedWalletIds={[
+  '1ae92b26df02f0abca6304df07debccd18262fdf5fe82daa81593582dac9a369',
+  '4622a2b2d6af1c9844944291e5e7351a6aa24cd7b23099efac1b2fd875da31a0'
+]}
 ```
