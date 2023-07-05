@@ -541,11 +541,11 @@ module.exports = {
         },
         {
           type: 'category',
-          label: 'Web3Modal',
+          label: 'WalletConnectModal',
           collapsible: true,
           collapsed: true,
-          items: ['android/web3modal/installation', 'android/web3modal/usage']
-        }
+          items: ['android/walletconnectmodal/installation', 'android/walletconnectmodal/usage']
+        },
       ]
     },
     {
