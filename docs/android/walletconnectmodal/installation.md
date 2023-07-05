@@ -17,10 +17,6 @@ WalletConnectModal ![Maven Central](https://img.shields.io/maven-central/v/com.w
 * Android min SDK 23
 * Java 11
 
-## Documentation and usage
-* [WalletConnectModal installation](https://docs.walletconnect.com/2.0/android/walletconnectmodal/installation)
-* [WalletConnectModal usage](https://docs.walletconnect.com/2.0/android/walletconnectmodal/usage)
-
 ## Installation
 root/build.gradle.kts:
 ```gradle
