@@ -4,6 +4,8 @@
 
 A cold start means that Push SDK running the first time on a device without any cached state. Account that is using for `enableSync` of PushClient API may already have some kind of history (pushSubscriptions, pushMessages). The purpose of using the HistoryAPI is to restore history and state after a cold start.
 
+Note: Launching a client after 30 days of inactivity is also considered a cold start
+
 ## Implementation
 
 1. W1 already have some `pushSubscriptions`, `pushMessages` history
@@ -15,20 +17,4 @@ A cold start means that Push SDK running the first time on a device without any 
 7. Wn subscribing for `pushSubscriptions` topics
 8. Wn setting subscription symKey P into keychain to be able to decrypt pushMessages payloads
 9. Wn fetching `wc_pushMessage` messages for every subscription topic from HistoryAPI. Request tags could found in [Push RPC methods](./rpc-methods.md) 
-10. Wn decrypt pusMessages payload with symKey P and updating local database
-
-To configure HistoryAPI client should register tags that will be tracked by History server. 
-
-```swift
-	History.instance.register(tags: ["5000", "5002"])
-```
-
-To fetch payloads from HistoryAPI.
-
-```swift
-let payloads: [PushSubscription] = try await historyClient.getMessages(
-    topic: {pushSubscriptions sync storage topic},
-    count: 200, // TBD: Pagination
-    direction: .backward
-)
-```
+10. Wn decrypt pushMessages payload with symKey P and updating local database
