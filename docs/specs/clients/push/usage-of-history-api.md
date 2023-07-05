@@ -12,7 +12,7 @@ Note: Launching a client after 30 days of inactivity is also considered a cold s
 2. Wn performing cold start on different device and have same account as W1
 3. Wn configuring sync for account with `enableSync` method of PushClient
 4. Wn register HistoryAPI for `wc_syncSet` and `wc_syncDel` SyncAPI methods. Request tags could found in [Sync API](../core/sync/readme.md) specs
-5. Wn fetching sync messages containing PushSubscription payloads. Topic to fetch and keys to decrypt payloads is deriving accoring [Sync API](../core/sync/readme.md). PushSubscriptions description could found in[PushSubscriptions sync storage specs](./usage-of-sync-api.md)
+5. Wn fetching sync messages containing PushSubscription payloads. Topic to fetch and keys to decrypt payloads is deriving according [Sync API](../core/sync/readme.md). PushSubscriptions description could found in[PushSubscriptions sync storage specs](./usage-of-sync-api.md)
 6. Wn combines `pushSubscriptions` inserts with deletions and updating local database
 7. Wn subscribing for `pushSubscriptions` topics
 8. Wn setting subscription symKey P into keychain to be able to decrypt pushMessages payloads
