@@ -17,4 +17,4 @@ Note: Launching a client after 30 days of inactivity is also considered a cold s
 7. Wn subscribing for `pushSubscriptions` topics
 8. Wn setting subscription symKey P into keychain to be able to decrypt pushMessages payloads
 9. Wn fetching `wc_pushMessage` messages for every subscription topic from HistoryAPI. Request tags could found in [Push RPC methods](./rpc-methods.md) 
-10. Wn decrypt pushMessages payload with symKey P and updating local database
+10. Wn decrypts pushMessages payload with symKey P and updates local database
