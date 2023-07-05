@@ -2,7 +2,7 @@
 
 ## Motivation
 
-A cold start means that Push SDK running for the first time on a device without any cached state. The account that is used for `enableSync` of PushClient API may already have some kind of history (pushSubscriptions, pushMessages). The HistoryAPI's purpose is to restore history and state after a cold start.
+A cold start represents the Push SDK running for the first time on a device without any cached state. The account that is used for `enableSync` of PushClient API may already have some kind of history (pushSubscriptions, pushMessages). The HistoryAPI's purpose is to restore history and state after a cold start.
 
 Note: Launching a client after 30 days of inactivity is also considered a cold start
 
