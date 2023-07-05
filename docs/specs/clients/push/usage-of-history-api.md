@@ -15,6 +15,6 @@ Note: Launching a client after 30 days of inactivity is also considered a cold s
 5. Wn fetches sync messages containing PushSubscription payloads. Topic to fetch and keys to decrypt payloads are derived according to [Sync API](../core/sync/readme.md). PushSubscriptions description can be found in [PushSubscriptions sync storage specs](./usage-of-sync-api.md)
 6. Wn combines `pushSubscriptions` inserts with deletions and updates the local database
 7. Wn subscribes for `pushSubscriptions` topics
-8. Wn setting subscription symKey P into keychain to be able to decrypt pushMessages payloads
+8. Wn sets subscription symKey P in keychain to be able to decrypt pushMessages payloads
 9. Wn fetching `wc_pushMessage` messages for every subscription topic from HistoryAPI. Request tags could found in [Push RPC methods](./rpc-methods.md) 
 10. Wn decrypts pushMessages payload with symKey P and updates local database
