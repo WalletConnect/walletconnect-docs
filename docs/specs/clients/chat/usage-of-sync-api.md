@@ -183,7 +183,7 @@ Ax and Bx both subscribe to thread topic and encrypt messages with symKey T.
 ### Receiving Messages in multiclient environment
 
 A1,A2 - clients that have access A blockchain account keys.
-Ax - all clients that have access B blockchain account keys. 
+Ax - all clients that have access A blockchain account keys. 
 B1,B2 - clients that have access B blockchain account keys. 
 Bx - all clients that have access B blockchain account keys.
 
