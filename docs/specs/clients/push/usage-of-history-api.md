@@ -16,5 +16,5 @@ Note: Launching a client after 30 days of inactivity is also considered a cold s
 6. Wn combines `pushSubscriptions` inserts with deletions and updates the local database
 7. Wn subscribes for `pushSubscriptions` topics
 8. Wn sets subscription symKey P in keychain to be able to decrypt pushMessages payloads
-9. Wn fetching `wc_pushMessage` messages for every subscription topic from HistoryAPI. Request tags could found in [Push RPC methods](./rpc-methods.md) 
+9. Wn fetches `wc_pushMessage` messages for every subscription topic from HistoryAPI. Request tags can be found in [Push RPC methods](./rpc-methods.md) 
 10. Wn decrypts pushMessages payload with symKey P and updates local database
