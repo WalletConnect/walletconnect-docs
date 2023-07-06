@@ -15,9 +15,7 @@ let metadata = AppMetadata(
     name: "Example Wallet",
     description: "Wallet description",
     url: "example.wallet",
-    icons: ["https://avatars.githubusercontent.com/u/37784886"],
-    // Used for the Verify: to opt-out verification ingore this parameter
-    verifyUrl: "verify.walletconnect.com"
+    icons: ["https://avatars.githubusercontent.com/u/37784886"]
 )
         
 Web3Wallet.configure(
@@ -75,9 +73,9 @@ Web3Wallet.instance.sessionProposalPublisher
 Session proposal is a handshake sent by a dapp and it's purpose is to define a session rules. Handshake procedure is defined by [CAIP-25](https://github.com/ChainAgnostic/CAIPs/blob/master/CAIPs/caip-25.md).
 `Session.Proposal` object conveys set of required and optional `ProposalNamespaces` that contains blockchains methods and events. Dapp requests with methods and wallet will emit events defined in namespaces.
 
-`Session.Context` provides a domain verification information about `Session.Proposal` and `Request`. It consists of origin of a Dapp from where the request has been sent, validation enum that says whether origin is **unknown**, **valid** or **invalid** and verify URL server. 
+`VerifyContext` provides a domain verification information about `Session.Proposal` and `Request`. It consists of origin of a Dapp from where the request has been sent, validation enum that says whether origin is **unknown**, **valid** or **invalid** and verify URL server. 
 
-To enable verification you have to provide `verifyUrl` in your [AppMetadata](https://docs.walletconnect.com/2.0/ios/web3wallet/wallet-usage#initialize-web3wallet-client). To use a default verify server set this value to `verify.walletconnect.com`. To oup-out just ignore this parameter (`nil` by default).
+To enable or disable verification find the **Verify SDK** toggle in your project [cloud](https://cloud.walletconnect.com).
 
  ```swift
 public struct VerifyContext: Equatable, Hashable {
@@ -288,9 +286,9 @@ Web3Wallet.instance.authRequestPublisher
     }.store(in: &publishers)
 ```
 
-Auth context provides a domain verification information about `AuthRequest`. It consists of origin of a Dapp from where the request has been sent, validation enum that says whether origin is **unknown**, **valid** or **invalid** and verify URL server.
+`VerifyContext` provides a domain verification information about `AuthRequest`. It consists of origin of a Dapp from where the request has been sent, validation enum that says whether origin is **unknown**, **valid** or **invalid** and verify URL server.
 
-To enable verification you have to provide `verifyUrl` in your [AppMetadata](https://docs.walletconnect.com/2.0/ios/web3wallet/wallet-usage#initialize-web3wallet-client). To use a default verify server set this value to `verify.walletconnect.com`. To oup-out just ignore this parameter (`nil` by default).
+To enable or disable verification find the **Verify SDK** toggle in your project [cloud](https://cloud.walletconnect.com).
 
  ```swift
 public struct VerifyContext: Equatable, Hashable {
