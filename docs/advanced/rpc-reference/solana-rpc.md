@@ -77,8 +77,8 @@ This method returns a signature over the provided instructions by the targeted p
 ### Parameters
 
     1. `Object` - Signing parameters:
-    	1.1. `feePayer` : `String` -  public key of the transaction fee payer
-    	1.2. `instructions` : `Array` - instructions to be atomically executed:
+    	1.1. [deprecated] `feePayer` : `String` -  public key of the transaction fee payer
+    	1.2. [deprecated] `instructions` : `Array` - instructions to be atomically executed:
     		1.2.1. `Object` - instruction
     			1.2.1.1. `programId` : `String` - public key of the on chain program
     			1.2.1.2. `data` : `String | undefined` - encoded calldata for instruction
@@ -87,11 +87,13 @@ This method returns a signature over the provided instructions by the targeted p
     					1.2.1.3.1.1. `isSigner` : `Boolean` - true if an instruction requires a transaction signature matching `pubkey`
     					1.2.1.3.1.2. `isWritable` : `Boolean` - true if the `pubkey` can be loaded as a read-write account
     					1.2.1.3.1.3. `pubkey` : `String` - public key of authorized program
-    	1.3. `recentBlockhash` : `String` - a recent blockhash
-    	1.4. `partialSignatures` : `Array`, - (optional) previous partial signatures for this instruction set
+    	1.3. [deprecated] `recentBlockhash` : `String` - a recent blockhash
+    	1.4. [deprecated] `partialSignatures` : `Array`, - (optional) previous partial signatures for this instruction set
     		1.4.1. `Object` - partial signature
     			1.4.1.2. `pubkey` : `String` - pubkey of the signer
     			1.4.1.1. `signature` : `String` - signature matching `pubkey`
+    	1.5. `transaction` : `String`, - base64 serialized transaction
+       
 
 ### Returns
 
@@ -121,7 +123,8 @@ This method returns a signature over the provided instructions by the targeted p
 		"signatures": [{
 			"pubkey": "AqP3MyNwDP4L1GJKYhzmaAUdrjzpqJUZjahM7kHpgavm",
 			"signature": "2Lb1KQHWfbV3pWMqXZveFWqneSyhH95YsgCENRWnArSkLydjN1M42oB82zSd6BBdGkM9pE6sQLQf1gyBh8KWM2c4"
-		}]
+		}],
+                "transaction": "r32f2..FD33r"
 	}
 }
 
