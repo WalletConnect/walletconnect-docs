@@ -23,7 +23,7 @@ Used to register a webhook that would return when accounts are subscribed or uns
 
 `POST /register-webhook`
 
-# Authentication
+### Authentication
 Cast server expects `Authorization` header with project secret associated with the project id.
 
 Body:
@@ -61,7 +61,7 @@ Used to retrieve the list of registered webhooks
 
 `GET /webhooks`
 
-# Authentication
+### Authentication
 Cast server expects `Authorization` header with project secret associated with the project id.
 
 Response:
@@ -94,7 +94,7 @@ Used to update the registered webhook
 
 `PUT /webhooks/<webhook_id>`
 
-# Authentication
+### Authentication
 Cast server expects `Authorization` header with project secret associated with the project id.
 
 Body:
@@ -114,7 +114,7 @@ Used to delete the registered webhook
 
 `DELETE /webhooks/<webhook_id>`
 
-# Authentication
+### Authentication
 Cast server expects `Authorization` header with project secret associated with the project id.
 
 ## Notify
@@ -123,7 +123,7 @@ Used to notify a message to a set of accounts
 
 `POST /notify`
 
-# Authentication
+### Authentication
 Cast server expects `Authorization` header with project secret associated with the project id.
 
 Body:
@@ -168,7 +168,7 @@ Used to generate a subscribe topic for a dapp to receive push subscriptions, ret
 
 `GET /subscribe-topic`
 
-# Authentication
+### Authentication
 Cast server expects `Authorization` header with project secret associated with the project id.
 
 Response:
