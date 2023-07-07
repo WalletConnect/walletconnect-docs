@@ -49,9 +49,9 @@ Auth.instance.authRequestPublisher
     }.store(in: &publishers)
 ```
 
-Auth context provides domain verification information about `AuthRequest`. It consists of the origin of a Dapp from where the request has been sent, validation `enum` that says whether origin is **unknown**, **valid** or **invalid** and verify URL server. 
+`VerifyContext` provides domain verification information about `AuthRequest`. It consists of the origin of a Dapp from where the request has been sent, validation `enum` that says whether origin is **unknown**, **valid** or **invalid** and verify URL server. 
 
-To enable verification you have to provide `verifyUrl` in your [AppMetadata](https://docs.walletconnect.com/2.0/ios/core/pairing-usage#pair-configuration). To use the default verify server set this value to `verify.walletconnect.com`. To opt-out just ignore this parameter (`nil` by default).
+To enable or disable verification find the **Verify SDK** toggle in your project [cloud](https://cloud.walletconnect.com).
 
  ```swift
 public struct VerifyContext: Equatable, Hashable {
