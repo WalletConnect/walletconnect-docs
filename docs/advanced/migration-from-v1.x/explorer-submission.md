@@ -16,10 +16,10 @@ If you have a question regarding the WalletConnect Explorer or your project's li
 
 ## Submission Process for WalletConnect v2.0 Wallets and Hybrid Apps
 
-To expedite approval of your submission, it is essential that you test with the following example dapps to ensure a successful WalletConnect v2.0 integration.
+To expedite approval of your submission, it is essential that you test with the following example dapp to ensure a successful WalletConnect v2.0 integration.
 
-- WalletConnect Sign v2.0: https://lab.web3modal.com/ManagedReact
-- WalletConnect Auth: https://lab.web3modal.com/AuthReact
+- Web3Modal Laboratory: https://lab.web3modal.com
+
 
 Please make sure all the items in the following checklist are correct. Failure to meet the following criteria will result in **an automatic rejection and prolong your project's submission process**.
 
@@ -53,5 +53,5 @@ We only accept submissions from wallets and dapps that are published and out of 
 2.  Add mobile deep links
 3.  Test and confirm that your app connects with our example apps
 
-- Wallets should test with our example dapp [here](https://lab.web3modal.com/ManagedReact)
+- Wallets should test with our example dapp [here](https://lab.web3modal.com/)
 - Dapps should test with our example wallet [here](https://react-web3wallet.vercel.app/)
