@@ -23,6 +23,9 @@ Used to register a webhook that would return when accounts are subscribed or uns
 
 `POST /register-webhook`
 
+# Authentication
+Cast server expects `Authorization` header with project secret associated with the project id.
+
 Body:
 
 ```jsonc
@@ -58,6 +61,9 @@ Used to retrieve the list of registered webhooks
 
 `GET /webhooks`
 
+# Authentication
+Cast server expects `Authorization` header with project secret associated with the project id.
+
 Response:
 
 ```jsonc
@@ -88,6 +94,9 @@ Used to update the registered webhook
 
 `PUT /webhooks/<webhook_id>`
 
+# Authentication
+Cast server expects `Authorization` header with project secret associated with the project id.
+
 Body:
 
 ```jsonc
@@ -105,13 +114,17 @@ Used to delete the registered webhook
 
 `DELETE /webhooks/<webhook_id>`
 
-
+# Authentication
+Cast server expects `Authorization` header with project secret associated with the project id.
 
 ## Notify
 
 Used to notify a message to a set of accounts
 
 `POST /notify`
+
+# Authentication
+Cast server expects `Authorization` header with project secret associated with the project id.
 
 Body:
 
@@ -154,6 +167,9 @@ Used to generate a subscribe topic for a dapp to receive push subscriptions, ret
 **Note:** this method is idempotent and will always return the same key.
 
 `GET /subscribe-topic`
+
+# Authentication
+Cast server expects `Authorization` header with project secret associated with the project id.
 
 Response:
 
