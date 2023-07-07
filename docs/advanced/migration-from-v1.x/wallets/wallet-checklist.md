@@ -81,9 +81,9 @@ Auth API plays a critical role when dapps offer off-chain signatures. Wallets sh
 
 ## 🔄 **Automatic Redirect**
 
-Automatic Redirect assesses the user flow after the wallet signs and authorizes an account. The test involves verifying the wallet's ability to redirect to the dapp after a user signs or sends a transaction. Use this [Test Dapp](https://lab.web3modal.com/ManagedReact) to evaluate.
+Automatic Redirect assesses the user flow after the wallet signs and authorizes an account. The test involves verifying the wallet's ability to redirect to the dapp after a user signs or sends a transaction. Use this [Test Dapp](https://lab.web3modal.com) to evaluate.
 
-- **Test Dapp:** [https://lab.web3modal.com/ManagedReact](https://lab.web3modal.com/ManagedReact)
+- **Test Dapp:** [Web3Modal Laboratory](https://lab.web3modal.com)
 
 ### Android 🤖
 
