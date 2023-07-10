@@ -59,7 +59,13 @@ In your root file, add this line:
 ```javascript
 // Only for Expo SDK 48+
 import './expo-crypto-shim.js'
+
+...
+
+import { useWalletConnectModal } from '@walletconnect/modal-react-native';
 ```
+
+* Make sure this line executes before the first `@walletconnect/modal-react-native` import.
 
 </TabItem>
 
