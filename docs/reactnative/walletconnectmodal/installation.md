@@ -44,9 +44,12 @@ Additionally add these extra packages to help with async storage, polyfills, mod
 npx expo install @react-native-async-storage/async-storage react-native-get-random-values react-native-modal react-native-svg
 ```
 
-### Additional Setup for Expo SDK 48+
+<Tabs>
+<TabItem value="sdk48" label="Expo 48">
 
-If you are using Expo SDK 48+, there's an [issue](https://github.com/expo/expo/issues/17270) with `react-native-get-random-values`, so we need to temporarily fix this by installing their crypto library and copying [this](https://github.com/WalletConnect/modal-react-native/blob/main/example/expo-crypto-shim.js) file in your root folder.
+### Additional Setup for Expo SDK 48
+
+If you are using Expo SDK 48, there's an [issue](https://github.com/expo/expo/issues/17270) with `react-native-get-random-values`, so we need to temporarily fix this by installing their crypto library and copying [this](https://github.com/WalletConnect/modal-react-native/blob/main/example/expo-crypto-shim.js) file in your root folder.
 
 ```
 npx expo install expo-crypto
@@ -57,7 +60,7 @@ npx expo install expo-crypto
 In your root file, add this line:
 
 ```javascript
-// Only for Expo SDK 48+
+// Only for Expo SDK 48
 import './expo-crypto-shim.js'
 
 ...
@@ -69,4 +72,38 @@ import { useWalletConnectModal } from '@walletconnect/modal-react-native';
 
 </TabItem>
 
+<TabItem value="sdk49" label="Expo 49+">
+
+### Additional Setup for Expo SDK 49+
+
+If you are using Expo SDK 49+, there's an [issue](https://github.com/expo/expo/issues/17270) with `react-native-get-random-values`, so we need to manually update it's version to `v1.9.0`. For more info, read [Selectively opt out of package version validations](https://blog.expo.dev/expo-sdk-49-c6d398cdf740)
+
+#### Modify your package.json
+
+Exclude `react-native-get-random-values` in your package.json to install a different from the version recommended by `npx expo install`
+
+```json
+"dependencies": {
+  ...
+},
+"expo": {
+  "install": {
+    "exclude": [
+      "react-native-get-random-values"
+    ]
+  }
+},
+"devDependencies": {
+  ...
+}
+```
+
+#### Install latest version of "react-native-get-random-values"
+Run `yarn install react-native-get-random-values@1.9.0`
+
+</TabItem>
+
+</Tabs>
+
+</TabItem>
 </Tabs>
