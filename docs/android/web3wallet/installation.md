@@ -1,6 +1,6 @@
 # Installation
 
-Kotlin implementation of Web3Wallet for Android applications.
+Kotlin implementation of Web3Wallet for Android applications. This SDK is developed in Kotlin and usable in both Java and Kotlin files.
 
 
 Android Core ![Maven Central](https://img.shields.io/maven-central/v/com.walletconnect/android-core)
