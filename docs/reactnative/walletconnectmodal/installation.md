@@ -49,7 +49,7 @@ npx expo install @react-native-async-storage/async-storage react-native-get-rand
 
 ### Additional Setup for Expo SDK 48
 
-If you are using Expo SDK 48, there's an [issue](https://github.com/expo/expo/issues/17270) with `react-native-get-random-values`, so we need to temporarily fix this by installing their crypto library and copying [this](https://github.com/WalletConnect/modal-react-native/blob/main/example/expo-crypto-shim.js) file in your root folder.
+If you are using Expo SDK 48, there's an [issue](https://github.com/expo/expo/issues/17270) with `react-native-get-random-values`, so we need to temporarily fix this by installing expo-crypto library and copying [this](https://github.com/WalletConnect/modal-react-native/blob/main/example/expo-crypto-shim.js) file in your root folder.
 
 ```
 npx expo install expo-crypto
@@ -72,15 +72,15 @@ import { useWalletConnectModal } from '@walletconnect/modal-react-native';
 
 </TabItem>
 
-<TabItem value="sdk49" label="Expo 49+">
+<TabItem value="sdk49" label="Expo 49">
 
-### Additional Setup for Expo SDK 49+
+### Additional Setup for Expo SDK 49
 
-If you are using Expo SDK 49+, there's an [issue](https://github.com/expo/expo/issues/17270) with `react-native-get-random-values`, so we need to manually update it's version to `v1.9.0`. For more info, read [Selectively opt out of package version validations](https://blog.expo.dev/expo-sdk-49-c6d398cdf740)
+If you are using Expo SDK 49, there's an [issue](https://github.com/expo/expo/issues/17270) with `react-native-get-random-values`, so we need to manually update it's version to `v1.9.0` and exclude this package from expo validations. For more info, read [Selectively opt out of package version validations](https://blog.expo.dev/expo-sdk-49-c6d398cdf740)
 
 #### Modify your package.json
 
-Exclude `react-native-get-random-values` in your package.json to install a different from the version recommended by `npx expo install`
+Exclude `react-native-get-random-values` in your package.json to install a different from the version recommended by Expo.
 
 ```json
 "dependencies": {
