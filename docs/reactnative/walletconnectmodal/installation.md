@@ -99,7 +99,10 @@ Exclude `react-native-get-random-values` in your package.json to install a diffe
 ```
 
 #### Install latest version of "react-native-get-random-values"
-Run `yarn install react-native-get-random-values@1.9.0`
+
+```bash npm2yarn
+npm install react-native-get-random-values@1.9.0
+```
 
 </TabItem>
 
