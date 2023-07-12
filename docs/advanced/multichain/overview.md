@@ -10,7 +10,7 @@ The WalletConnect protocol is multi-chain by design. By using the [CAIP-25 stand
 - Browsing the [Chains List](./chain-list.md)
 - Filtering results programmatically via the [Explorer API](../../cloud/explorer.md)
 
-It is up to wallets and dapps to provide concrete support for your chain. **A wallet or dapp can also support your chain without it first being listed in the Explorer.**
+**It is still up to wallets and dapps to provide concrete support for your chain once it is listed as part of the Explorer.**
 :::
 
 If you don't see your chain listed in this [list](./chain-list.md), then you will need to create an issue in GitHub to to get the process started.
