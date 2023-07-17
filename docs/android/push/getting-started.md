@@ -85,9 +85,6 @@ class CustomFirebaseService: PushMessageService() {
 
 ```kotlin
 val walletDelegate = object : PushWalletClient.Delegate {
-    override fun onPushProposal(pushProposal: Push.Wallet.Event.Proposal) {
-        // Triggered when a request has been sent by the Dapp. The pushProposal contains the request ID, account, and dapp metadata
-    }
 
     override fun onPushSubscription(pushSubscribe: Push.Wallet.Event.Subscription) {
         // Triggered when a wallet initiated subscription has been created
