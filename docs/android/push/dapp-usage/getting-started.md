@@ -6,38 +6,6 @@ This doc will walk you through how to get your dapp ready to start using the Pus
 
 2. User Action Push Notifications: Your dapp will send these notifications when you need the user to sign or send a transaction from their wallet. Examples include authorizing your dapp or minting an NFT. These actions must be completed before anything happens. **Push API is not requried** to send these notifications. To read more about User Action Push Notifications, go [here](../../echo/usage.md).
 
-**Android BOM** ![Maven Central](https://img.shields.io/maven-central/v/com.walletconnect/android-bom)
-
-### Prerequisite
-
-:::tip
-Create a new [WalletConnect Project ID](../../../cloud/explorer.md#setting-up-a-new-project).
-:::
-
-### Requirements
-
-* Android min SDK 23
-* Java 11
-
-## Installation
-root/build.gradle.kts:
-```gradle
-allprojects {
- repositories {
-    mavenCentral()
-    maven { url "https://jitpack.io" }
- }
-}
-```
-
-app/build.gradle.kts
-
-```gradle
-implementation(platform("com.walletconnect:android-bom::release_version"))
-implementation("com.walletconnect:android-core")
-implementation("com.walletconnect:push")
-```
-
 ## Implementation
 
 Once you've finished the previous step, you're ready to start implementing the Push API.
