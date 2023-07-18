@@ -1,10 +1,11 @@
+# Push API Overview
+
 :::caution
 
 Push API is not currently stable. Want early access? Join our [Pilot Program](https://walletconnect.com/partners)
 
 :::
 
-# Push API Overview
 
 ## Description
 

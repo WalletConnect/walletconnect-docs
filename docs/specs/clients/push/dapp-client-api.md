@@ -1,10 +1,10 @@
+# Dapp Client API
+
 :::caution
 
 Push API is not currently stable. Want early access? Join our [Pilot Program](https://walletconnect.com/partners)
 
 :::
-
-# Dapp Client API
 
 ```typescript
 abstract class DappClient {

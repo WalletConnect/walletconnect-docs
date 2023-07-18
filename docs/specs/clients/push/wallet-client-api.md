@@ -1,10 +1,10 @@
+# Wallet Client API
+
 :::caution
 
 Push API is not currently stable. Want early access? Join our [Pilot Program](https://walletconnect.com/partners)
 
 :::
-
-# Wallet Client API
 
 ```typescript
 abstract class WalletClient {
