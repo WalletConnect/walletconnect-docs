@@ -582,13 +582,8 @@ module.exports = {
           collapsible: true,
           collapsed: true,
           items: [
-            {
-              type: 'category',
-              label: 'Usage',
-              collapsible: true,
-              collapsed: true,
-              items: [['android/push/getting-started']]
-            },
+            'android/push/installation',
+            'android/push/getting-started'
           ]
         },
         {
