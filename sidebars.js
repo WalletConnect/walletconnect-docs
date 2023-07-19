@@ -584,18 +584,11 @@ module.exports = {
           items: [
             {
               type: 'category',
-              label: 'Dapp Usage',
+              label: 'Usage',
               collapsible: true,
               collapsed: true,
-              items: [['android/push/dapp-usage/getting-started']]
+              items: [['android/push/getting-started']]
             },
-            {
-              type: 'category',
-              label: 'Wallet Usage',
-              collapsible: true,
-              collapsed: true,
-              items: ['android/push/wallet-usage/getting-started']
-            }
           ]
         },
         {

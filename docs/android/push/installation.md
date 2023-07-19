@@ -5,7 +5,7 @@ Kotlin implementation of WalletConnect Push protocol for Android applications.
 ### Prerequisite
 
 :::tip
-Create a new [WalletConnect Project ID](../../../cloud/explorer.md#setting-up-a-new-project).
+Create a new [WalletConnect Project ID](../../cloud/explorer.md#setting-up-a-new-project).
 :::
 
 **Android BOM** ![Maven Central](https://img.shields.io/maven-central/v/com.walletconnect/android-bom)

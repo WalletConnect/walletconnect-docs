@@ -4,7 +4,7 @@ This page will walk you through how to get your wallet ready to start using the 
 
 1. Custom Push Nofications: These notifications can be rendered within your wallet and are always encrypted. Examples include receiving a notification when you have a new follower or when someone wants to buy your NFT. In this example, we will cover **this** scenario.
 
-2. User Action Push Notifications: Your wallet will receive these notifications when you need to sign or send a transaction. Examples include authorizing your wallet or minting an NFT. These actions must be completed before anything happens. **Push API is not requried** to receive these notifications. To read more about User Action Push Notifications, go [here](../../echo/usage.md).
+2. User Action Push Notifications: Your wallet will receive these notifications when you need to sign or send a transaction. Examples include authorizing your wallet or minting an NFT. These actions must be completed before anything happens. **Push API is not requried** to receive these notifications. To read more about User Action Push Notifications, go [here](../echo/usage.md).
 
 ## Implementation
 
