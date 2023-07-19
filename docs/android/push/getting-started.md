@@ -70,8 +70,7 @@ class CustomFirebaseService: PushMessageService() {
 
 ```xml
 <application...>
-    <service
-        android:name=".CustomFirebaseService">
+    <service android:name=".CustomFirebaseService">
         <intent-filter>
             <action android:name="com.google.firebase.MESSAGING_EVENT" />
         </intent-filter>
