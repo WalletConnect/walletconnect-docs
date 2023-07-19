@@ -1,4 +1,6 @@
 import Container from './../components/Container'
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
 
 # Web3Wallet
 
@@ -17,6 +19,111 @@ Some of the key features of the Web3Wallet SDK include:
 ### Getting Started
 
 To get started with the Web3Wallet SDK, choose the programming language you'll be using to build your project. The SDK is available in JavaScript, Swift, and Kotlin, so you can choose the language that best fits your development needs.
+
+## Installation
+<Tabs
+	className="platform-tabs"
+	queryString="platform"
+  groupId="w3w"
+  values={[
+      { label: 'Web', value: 'web', },
+      { label: 'iOS', value: 'ios', },
+      { label: 'Android', value: 'android', },
+      { label: 'Flutter', value: 'flutter', },
+  ]}
+>
+<TabItem value="web">
+
+Install the Web3Wallet SDK package.
+
+```bash npm2yarn
+npm install @walletconnect/web3wallet
+```
+
+</TabItem>
+<TabItem value="ios">
+
+<h2 id="set-up-a-project">Set up a project </h2>
+
+In order to connect to WalletConnect Cloud, you need to create a new project first:
+
+1. Go to https://cloud.walletconnect.com/app
+2. Tap New Project
+3. Give it a name and tap Create button
+4. Your new project should appear on the projects list
+5. You should see a project ID string if you tap on your project
+
+<h2 id="add-sdk-for-your-project"> Add SDK for your project </h2>
+
+<h3 id="SwiftPackageManager"> SwiftPackageManager </h3>
+
+You can add a WalletConnect SDK to your project with Swift Package Manager. In order to do that:
+
+1. Open XCode
+2. Go to File -> Add Packages
+3. Paste the repo GitHub URL: https://github.com/WalletConnect/WalletConnectSwiftV2
+4. Tap Add Package
+5. Select WalletConnect check mark
+
+<h3 id="Cocoapods"> Cocoapods </h3>
+
+1. Update Cocoapods spec repos. Type in terminal `pod repo update`
+2. Initialize Podfile if needed with `pod init`
+3. Add pod to your Podfile:
+```Ruby
+pod 'WalletConnectSwiftV2'
+```
+4. Install pods with `pod install`
+
+If you encounter any problems during package installation, you can specify the exact path to the repository
+```Ruby
+pod 'WalletConnectSwiftV2', :git => 'https://github.com/WalletConnect/WalletConnectSwiftV2.git', :tag => '1.0.5'
+```
+
+
+</TabItem>
+<TabItem value="android">
+
+```java
+class HelloWorld {
+    public static void main(String args[]) {
+      System.out.println("Hello, World");
+  }
+}
+```
+
+</TabItem>
+<TabItem value="flutter">
+
+To get started with [Web3Wallet](../flutter/wallets/wallet-usage.md), [Sign](../flutter/dapps/dapp-sign-usage.md), or [Auth](../flutter/dapps/dapp-auth-usage.md), follow the instructions below.
+
+<h2 id="1-obtain-project-id"> 1. Obtain Project ID </h2>
+
+Head over to [WalletConnect Cloud](https://cloud.walletconnect.com/) to sign in or sign up. Create (or use an existing) project and copy its associated Project ID. We will need this in a later step.
+
+<h2 id="2-install-packages"> 2. Install Packages </h2>
+
+Install the WalletConnect client package.
+
+```dart
+flutter pub add walletconnect_flutter_v2
+```
+
+<h2 id="3-platform-specific-setup"> 3. Platform Specific Setup </h2>
+
+Depending on your platform, you will have to add different permissions to get the package to work.
+
+<h3 id="MacOS"> MacOS </h3>
+
+Add the following to your `DebugProfile.entitlements` and `Release.entitlements` files so that it can connect to the WebSocket server.
+
+```xml
+<key>com.apple.security.network.client</key>
+<true/>
+```
+
+</TabItem>
+</Tabs>
 
 <Container
   items={[

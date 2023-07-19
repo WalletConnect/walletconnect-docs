@@ -24,6 +24,8 @@
   --ifm-list-before-color: rgba(0, 0, 0, 0.4);
   --ifm-navbar-show-bg-color: rgba(235, 235, 235, 1);
   --ifm-background-color: #fff;
+  --ifm-platform-tabs-color-active-border: rgb(28, 138, 255,0.5);
+  --ifm-platform-bg-color: rgb(28, 138, 255,0.1);
 }
 
 html[data-theme='dark'] {
@@ -548,4 +550,35 @@ article img {
 
 .theme-admonition a {
   text-decoration: none;
+}
+
+.platform-tabs{
+	--ifm-tabs-padding-vertical: 0.25rem;
+  	--ifm-tabs-padding-horizontal: 1rem;
+	background-color: var(--ifm-hover-overlay);
+	border-radius: 0.5rem;
+	width: fit-content;
+}
+
+.platform-tabs .tabs__item{
+	border: 2px solid transparent;
+	border-radius: 0;
+	font-size: var(--ifm-h5-font-size);
+	font-weight: var(--ifm-heading-font-weight);
+}
+
+.platform-tabs .tabs__item--active{
+	background: var(--ifm-platform-bg-color);
+	color: var(--ifm-color-primary);
+	border-color: var(--ifm-platform-tabs-color-active-border);
+}
+
+.platform-tabs .tabs__item--active:first-child{
+	border-top-left-radius: 0.5rem;
+	border-bottom-left-radius: 0.5rem;
+}
+
+.platform-tabs .tabs__item--active:last-child{
+	border-top-right-radius: 0.5rem;
+	border-bottom-right-radius: 0.5rem;
 }
