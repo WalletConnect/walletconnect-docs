@@ -12,7 +12,7 @@ Once you've finished the previous step, you're ready to start implementing the P
 
 ### Initialization
 
-The Push Wallet client is responsible for creating and maintaining subscriptions. To initialize the Push Wallet client, create a `Push.Wallet.Params.Init` object in the Android Application class with the `CoreClient`. The `Push.Wallet.Params.Init` object will then be passed to the `PushWalletClient` initialize function.
+The Push Wallet client is responsible for creating and maintaining subscriptions. To initialize the Push Wallet client, create a `Push.Params.Init` object in the Android Application class with the `CoreClient`. The `Push.Params.Init` object will then be passed to the `PushWalletClient` initialize function.
 
 `PushWalletClient` should be initialized in the Application class.
 
@@ -31,7 +31,7 @@ val appMetaData = Core.Model.AppMetaData(
 
 CoreClient.initialize(relayServerUrl = serverUrl, connectionType = connectionType, application = this, metaData = appMetaData)
 
-val init = Push.Wallet.Params.Init(CoreClient)
+val init = Push.Params.Init(CoreClient)
 
 PushWalletClient.initialize(init) { error ->
     // Error will be thrown if there's an issue during initialization
@@ -85,19 +85,19 @@ class CustomFirebaseService: PushMessageService() {
 ```kotlin
 val walletDelegate = object : PushWalletClient.Delegate {
 
-    override fun onPushSubscription(pushSubscribe: Push.Wallet.Event.Subscription) {
+    override fun onPushSubscription(pushSubscribe: Push.Event.Subscription) {
         // Triggered when a wallet initiated subscription has been created
     }
 
-    override fun onPushMessage(message: Push.Wallet.Event.Message) {
+    override fun onPushMessage(message: Push.Event.Message) {
         // Triggered when a message has been sent by the Dapp. The message contains the title, body, icon, and url
     }
 
-    override fun onPushDelete(pushDeletedTopic: Push.Wallet.Event.Delete) {
+    override fun onPushDelete(pushDeletedTopic: Push.Event.Delete) {
         // Triggered when the Dapp deletes the subscription. The pushDelete contains the topic that was deleted
     }
 
-    override fun onPushUpdate(pushUpdate: Push.Wallet.Event.Update) {
+    override fun onPushUpdate(pushUpdate: Push.Event.Update) {
         // Triggered after updating a subscription was successful. The pushUpdate will either contain the updated subscription details or an error
     }
 
@@ -110,14 +110,14 @@ PushWalletClient.setDelegate(walletDelegate)
 ```
 
 ### Subscribe to a Dapp
-Calling `PushWalletClient.subscribe` will establish the subscription with the dapp specified in the `Push.Wallet.Params.Subscribe` params passed into the function. The `Push.Wallet.Params.Subscribe` params requires the uri of the dapp and a CAIP-10 compatible account. To verify ownership over the blockchain account, user's must sign the provided message on the `onSign(message: String)` callback. Currenlty only EIP191 signatures are supported. 
+Calling `PushWalletClient.subscribe` will establish the subscription with the dapp specified in the `Push.Params.Subscribe` params passed into the function. The `Push.Params.Subscribe` params requires the uri of the dapp and a CAIP-10 compatible account. To verify ownership over the blockchain account, user's must sign the provided message on the `onSign(message: String)` callback. Currenlty only EIP191 signatures are supported. 
 
 Our recommendation is to show the message to the user and ask the user to either accept or reject the message.
 * If the user accepts, then you will need to call `CacaoSigner.sign()` with the message, account private key, and a signature type of SignatureType.EIP191.
 * If the user rejects, then you will need to send null as the result of the `onSign` lamda
 
 ```kotlin
-val subscribeParams = Push.Wallet.Params.Subscribe(/*Dapp uri*/, /*CAIP-10 account*/, onSign = fun(message: String): Push.Model.Cacao.Signature? { 
+val subscribeParams = Push.Params.Subscribe(/*Dapp uri*/, /*CAIP-10 account*/, onSign = fun(message: String): Push.Model.Cacao.Signature? { 
     // Message to be signed. When user decides to sign message use CacaoSigner to sign message.
     // CacaoSigner is a util for easy message signing.
     return CacaoSigner.sign(message, /*privateKey*/, SignatureType.EIP191)
@@ -138,14 +138,14 @@ PushWalletClient.subscribe(
 
 ### Approve Request
 
-To send an approval for the subscription proposal, pass `Push.Wallet.Params.Approve` to the `PushWalletClient.approve` function to establish a subscription and notify the Dapp. The request id for `Push.Wallet.Params.Approve` will be available from the `Push.Wallet.Event.Request` of `onPushRequest` from the PushWalletClient.Delegate. To verify ownership over blockchain account, users must sign the provided message on the `onSign(message: String)` callback. Currenlty only EIP191 signatures are supported. 
+To send an approval for the subscription proposal, pass `Push.Params.Approve` to the `PushWalletClient.approve` function to establish a subscription and notify the Dapp. The request id for `Push.Params.Approve` will be available from the `Push.Event.Request` of `onPushRequest` from the PushWalletClient.Delegate. To verify ownership over blockchain account, users must sign the provided message on the `onSign(message: String)` callback. Currenlty only EIP191 signatures are supported. 
 
 Our recommendation is to show the message to the user and ask the user to either accept or reject the message.
 * If the user accepts, then you will need to call `CacaoSigner.sign()` with the message, account private key, and a signature type of SignatureType.EIP191.
 * If the user rejects, then you will need to send null as the result of the `onSign` lamda
 
 ```kotlin
-val approveParams = Push.Wallet.Params.Approve(id = /*request ID*/, onSign = fun(message: String): Push.Model.Cacao.Signature? { 
+val approveParams = Push.Params.Approve(id = /*request ID*/, onSign = fun(message: String): Push.Model.Cacao.Signature? { 
     // Message to be signed. When user decides to sign message use CacaoSigner to sign message.
     // CacaoSigner is a util for easy message signing.
     return CacaoSigner.sign(message, /*privateKey*/, SignatureType.EIP191)
@@ -166,10 +166,10 @@ PushWalletClient.approve(
 
 ### Reject Request
 
-To send a rejection for the subscription propsal, pass `Push.Wallet.Params.Reject` to the `PushWalletClient.reject` function to reject the subscription request and notify the Dapp. The request id for `Push.Wallet.Params.Approve` will be available from the `Push.Wallet.Event.Request` of `onPushRequest` from the PushWalletClient.Delegate.
+To send a rejection for the subscription propsal, pass `Push.Params.Reject` to the `PushWalletClient.reject` function to reject the subscription request and notify the Dapp. The request id for `Push.Params.Approve` will be available from the `Push.Event.Request` of `onPushRequest` from the PushWalletClient.Delegate.
 
 ```kotlin
-val rejectParams = Push.Wallet.Params.Reject(id = /*request ID*/, reason = /*Error Reason*/)
+val rejectParams = Push.Params.Reject(id = /*request ID*/, reason = /*Error Reason*/)
 
 PushWalletClient.reject(
     rejectParams,
@@ -184,11 +184,11 @@ PushWalletClient.reject(
 
 ### Update Subscription
 
-To update a subscription, pass `Push.Wallet.Params.Delete` with the push topic that is to be deleted. If unsuccessful, an error is returned in the callback. The pushTopic can be fetched from the `PushWalletClient.getActiveSubscriptions()`
+To update a subscription, pass `Push.Params.Delete` with the push topic that is to be deleted. If unsuccessful, an error is returned in the callback. The pushTopic can be fetched from the `PushWalletClient.getActiveSubscriptions()`
 
 ```kotlin
 val pushTopic = // active push subscription topic
-val deleteParams = Push.Wallet.Params.Delete(topic = pushTopic)
+val deleteParams = Push.Params.Delete(topic = pushTopic)
 
 PushWalletClient.delete(deleteParams) { error ->
     // callback for when the delete has failed
@@ -197,11 +197,11 @@ PushWalletClient.delete(deleteParams) { error ->
 
 ### Delete Subscription
 
-To delete a subscription, pass `Push.Wallet.Params.Delete` with the push topic that is to be deleted. If unsuccessful, an error is returned in the callback. The pushTopic can be fetched from the `PushWalletClient.getActiveSubscriptions()`
+To delete a subscription, pass `Push.Params.Delete` with the push topic that is to be deleted. If unsuccessful, an error is returned in the callback. The pushTopic can be fetched from the `PushWalletClient.getActiveSubscriptions()`
 
 ```kotlin
 val pushTopic = // active push subscription topic
-val deleteParams = Push.Wallet.Params.Delete(topic = pushTopic)
+val deleteParams = Push.Params.Delete(topic = pushTopic)
 
 PushWalletClient.delete(deleteParams) { error ->
     // callback for when the delete has failed
@@ -210,11 +210,11 @@ PushWalletClient.delete(deleteParams) { error ->
 
 ### Deletea Push Message
 
-To delete a push message, pass `Push.Wallet.Params.Delete` with the push topic that is to be deleted. If unsuccessful, an error is returned in the callback. The pushTopic can be fetched from the `PushWalletClient.getActiveSubscriptions()`
+To delete a push message, pass `Push.Params.Delete` with the push topic that is to be deleted. If unsuccessful, an error is returned in the callback. The pushTopic can be fetched from the `PushWalletClient.getActiveSubscriptions()`
 
 ```kotlin
 val pushTopic = // active push subscription topic
-val deleteParams = Push.Wallet.Params.Delete(topic = pushTopic)
+val deleteParams = Push.Params.Delete(topic = pushTopic)
 
 PushWalletClient.delete(deleteParams) { error ->
     // callback for when the delete has failed
@@ -231,20 +231,20 @@ PushWalletClient.getActiveSubscriptions()
 
 ### Get Message History
 
-To get all the messages for a specific subscription topic, call the `getMessageHistory` function by passing an instance of `Push.Wallet.Params.MessageHistory`. It will return a map with the request ids as the key and `Push.Model.MessageRecord` as the value.
+To get all the messages for a specific subscription topic, call the `getMessageHistory` function by passing an instance of `Push.Params.MessageHistory`. It will return a map with the request ids as the key and `Push.Model.MessageRecord` as the value.
 
 ```kotlin
 val subscriptionTopic =/*Subscription Topic*/
-val messageHistoryParams = Push.Wallet.Params.MessageHistory(subscriptionTopic)
+val messageHistoryParams = Push.Params.MessageHistory(subscriptionTopic)
 val mapOfMessages: Map<Long, Push.Model.MessageRecord> = PushWalletClient.getMessageHistory(messageHistoryParams)
 ```
 
 ### Decrypt Message
 
-To decrypt a message sent by Echo server, pass the topic and encrypted message into `Push.Wallet.Params.DecryptMessage`. Pass the variable into `PushWalletClient.decryptMessage` and use the `onSuccess` and `onError` callbacks to react to the result. This function is not needed when using the `PushMessageService`.
+To decrypt a message sent by Echo server, pass the topic and encrypted message into `Push.Params.DecryptMessage`. Pass the variable into `PushWalletClient.decryptMessage` and use the `onSuccess` and `onError` callbacks to react to the result. This function is not needed when using the `PushMessageService`.
 
 ```kotlin
-val encryptedMessage = Push.Wallet.Params.DecryptMessage(topic = /*topic*/, encryptedMessage = /*encrypted message*/)
+val encryptedMessage = Push.Params.DecryptMessage(topic = /*topic*/, encryptedMessage = /*encrypted message*/)
 
 PushWalletClient.decryptMessage(
     encryptedMessage,
@@ -259,11 +259,11 @@ PushWalletClient.decryptMessage(
 
 ### Enable Sync
 
-To enable the syncing of subscriptions and messages with multiple devices for an account, call `PushWalletClient.enableSync` and pass an instance `Push.Wallet.Params.EnableSync` containing the account to sync. 
+To enable the syncing of subscriptions and messages with multiple devices for an account, call `PushWalletClient.enableSync` and pass an instance `Push.Params.EnableSync` containing the account to sync. 
 
 ```kotlin
 val account: String = /*Account to sync*/
-val enableSyncParams = Push.Wallet.Params.EnableSync(account)
+val enableSyncParams = Push.Params.EnableSync(account)
 PushWalletClient.enableSync(enableSyncParams, 
     onSuccess { 
         // callback for when sync is setup successfully for specified account
