@@ -166,7 +166,7 @@ PushWalletClient.approve(
 
 ### Reject Request
 
-To send a rejection for the subscription propsal, pass `Push.Params.Reject` to the `PushWalletClient.reject` function to reject the subscription request and notify the Dapp. The request id for `Push.Params.Approve` will be available from the `Push.Event.Request` of `onPushRequest` from the PushWalletClient.Delegate.
+To send a rejection for the subscription proposal, pass `Push.Params.Reject` to the `PushWalletClient.reject` function to reject the subscription request and notify the Dapp. The request id for `Push.Params.Approve` will be available from the `Push.Event.Request` of `onPushRequest` from the PushWalletClient.Delegate.
 
 ```kotlin
 val rejectParams = Push.Params.Reject(id = /*request ID*/, reason = /*Error Reason*/)
