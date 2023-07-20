@@ -6,7 +6,7 @@ If you're a wallet looking to incorporarte Sign, please see [Web3Wallet SDK](../
 
 ## Installation
 
-Follow these [steps](../installation.md) to install the Flutter SDK.
+Follow these [steps](./installation.md) to install the Flutter SDK.
 
 ## Initialization
 
