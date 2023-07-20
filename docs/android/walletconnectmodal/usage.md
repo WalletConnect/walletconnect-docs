@@ -61,7 +61,7 @@ setContent {
             composable("home") {
                 HomeScreen()
             }
-            walletConnectModalGraph(navController, modalSheetState)
+            walletConnectModalGraph(navController)
         }
     }
 }
