@@ -816,10 +816,17 @@ module.exports = {
       items: [
         {
           type: 'category',
+          label: 'WalletConnect Modal',
+          collapsible: true,
+          collapsed: true,
+          items: ['flutter/walletconnectmodal/about', 'flutter/walletconnectmodal/installation', 'flutter/walletconnectmodal/dapp-usage']
+        },
+        {
+          type: 'category',
           label: 'Web3Wallet',
           collapsible: true,
           collapsed: true,
-          items: ['flutter/installation', 'flutter/wallets/wallet-usage']
+          items: ['flutter/web3wallet/installation', 'flutter/web3wallet/wallet-usage']
         }
       ]
     },

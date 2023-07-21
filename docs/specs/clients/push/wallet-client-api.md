@@ -1,5 +1,11 @@
 # Wallet Client API
 
+:::caution
+
+Push API is under development. Want early access? Join our [Pilot Program](https://walletconnect.com/partners)
+
+:::
+
 ```typescript
 abstract class WalletClient {
   // ---------- Methods ----------------------------------------------- //

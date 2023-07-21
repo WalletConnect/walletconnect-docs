@@ -91,7 +91,7 @@ explorerRecommendedWalletIds={[
 Allows to exclude wallets that are fetched from [WalletConnect Explorer](https://walletconnect.com/explorer?type=wallet). You can define an array of wallet ids you'd like to exclude. You can get these ids from the explorer link mentioned before by clicking on a copy icon of desired wallet card. If you want to exclude all wallets, you can set this option to `ALL`, however if `explorerRecommendedWalletIds` were defined, they will still be fetched. Defaults to `undefined`.
 
 ```ts
-explorerRecommendedWalletIds: string[] | 'ALL'
+explorerExcludedWalletIds: string[] | 'ALL'
 
 //example
 explorerExcludedWalletIds={[
