@@ -1,12 +1,17 @@
 import Container from './../components/Container'
 import Tabs from '@theme/Tabs'
 import TabItem from '@theme/TabItem'
+import PlatformTabs from '../components/PlatformTabs'
+import PlatformTabItem from '../components/PlatformTabItem'
+import CloudBanner from '../components/CloudBanner'
 
 # Web3Wallet
 
 ## Introduction
 
 The Web3Wallet SDK allows you to easily connect your Web3 wallet with dapps. It provides a simple and intuitive interface for dapps to request actions such as signing transactions and interacting with smart contracts on the blockchain. The SDK is designed to work with any blockchain, making it easy to support multiple chains without the need for separate integration code.
+
+<CloudBanner />
 
 ### Features
 
@@ -21,41 +26,32 @@ Some of the key features of the Web3Wallet SDK include:
 To get started with the Web3Wallet SDK, choose the programming language you'll be using to build your project. The SDK is available in JavaScript, Swift, and Kotlin, so you can choose the language that best fits your development needs.
 
 ## Installation
-<Tabs
-	className="platform-tabs"
-	queryString="platform"
-  groupId="w3w"
-  values={[
-      { label: 'Web', value: 'web', },
-      { label: 'iOS', value: 'ios', },
-      { label: 'Android', value: 'android', },
-      { label: 'Flutter', value: 'flutter', },
-  ]}
->
-<TabItem value="web">
 
-Install the Web3Wallet SDK package.
+<PlatformTabs
+	groupId="w3w"
+	activeOptions={["web","ios","android","flutter"]}
+>
+<PlatformTabItem value="web">
+
+Install the Web3Wallet SDK using npm or yarn.
 
 ```bash npm2yarn
 npm install @walletconnect/web3wallet
 ```
 
-</TabItem>
-<TabItem value="ios">
+</PlatformTabItem>
+<PlatformTabItem value="ios">
 
-<h2 id="set-up-a-project">Set up a project </h2>
+WalletConnect SDK is available via [Swift Package Manager](https://swift.org/package-manager/) or [Cocoapods](https://cocoapods.org/).
 
-In order to connect to WalletConnect Cloud, you need to create a new project first:
-
-1. Go to https://cloud.walletconnect.com/app
-2. Tap New Project
-3. Give it a name and tap Create button
-4. Your new project should appear on the projects list
-5. You should see a project ID string if you tap on your project
-
-<h2 id="add-sdk-for-your-project"> Add SDK for your project </h2>
-
-<h3 id="SwiftPackageManager"> SwiftPackageManager </h3>
+<Tabs
+queryString="ios-method"
+	values={[
+		{ label: 'SwiftPackageManager', value: 'spm', },
+		{ label: 'Cocoapods', value: 'cocoa', },
+	]}
+>
+<TabItem value="spm">
 
 You can add a WalletConnect SDK to your project with Swift Package Manager. In order to do that:
 
@@ -65,55 +61,61 @@ You can add a WalletConnect SDK to your project with Swift Package Manager. In o
 4. Tap Add Package
 5. Select WalletConnect check mark
 
-<h3 id="Cocoapods"> Cocoapods </h3>
+</TabItem>
+<TabItem value="cocoa">
 
 1. Update Cocoapods spec repos. Type in terminal `pod repo update`
 2. Initialize Podfile if needed with `pod init`
 3. Add pod to your Podfile:
+
 ```Ruby
 pod 'WalletConnectSwiftV2'
 ```
+
 4. Install pods with `pod install`
 
 If you encounter any problems during package installation, you can specify the exact path to the repository
+
 ```Ruby
 pod 'WalletConnectSwiftV2', :git => 'https://github.com/WalletConnect/WalletConnectSwiftV2.git', :tag => '1.0.5'
 ```
 
-
 </TabItem>
-<TabItem value="android">
+</Tabs>
 
-```java
-class HelloWorld {
-    public static void main(String args[]) {
-      System.out.println("Hello, World");
-  }
+</PlatformTabItem>
+<PlatformTabItem value="android">
+
+root/build.gradle.kts:
+
+```gradle
+allprojects {
+ repositories {
+    mavenCentral()
+    maven { url "https://jitpack.io" }
+ }
 }
 ```
 
-</TabItem>
-<TabItem value="flutter">
+app/build.gradle.kts
 
-To get started with [Web3Wallet](../flutter/wallets/wallet-usage.md), [Sign](../flutter/dapps/dapp-sign-usage.md), or [Auth](../flutter/dapps/dapp-auth-usage.md), follow the instructions below.
+```gradle
+implementation("com.walletconnect:android-core:release_version")
+implementation("com.walletconnect:web3wallet:release_version")
+```
 
-<h2 id="1-obtain-project-id"> 1. Obtain Project ID </h2>
-
-Head over to [WalletConnect Cloud](https://cloud.walletconnect.com/) to sign in or sign up. Create (or use an existing) project and copy its associated Project ID. We will need this in a later step.
-
-<h2 id="2-install-packages"> 2. Install Packages </h2>
-
-Install the WalletConnect client package.
+</PlatformTabItem>
+<PlatformTabItem value="flutter">
 
 ```dart
 flutter pub add walletconnect_flutter_v2
 ```
 
-<h2 id="3-platform-specific-setup"> 3. Platform Specific Setup </h2>
+:::info
 
 Depending on your platform, you will have to add different permissions to get the package to work.
 
-<h3 id="MacOS"> MacOS </h3>
+**MacOS**
 
 Add the following to your `DebugProfile.entitlements` and `Release.entitlements` files so that it can connect to the WebSocket server.
 
@@ -122,9 +124,12 @@ Add the following to your `DebugProfile.entitlements` and `Release.entitlements`
 <true/>
 ```
 
-</TabItem>
-</Tabs>
+:::
 
+</PlatformTabItem>
+</PlatformTabs>
+
+<!---
 <Container
   items={[
     {
@@ -153,6 +158,467 @@ Add the following to your `DebugProfile.entitlements` and `Release.entitlements`
     }
   ]}
 />
+-->
+
+## Wallet Usage
+
+### Initialization
+
+<PlatformTabs
+	groupId="w3w"
+	activeOptions={["web","ios","android","flutter"]}
+>
+<PlatformTabItem value="web">
+
+Create a new instance from Core and initialize it with a projectId created from installation. Next, create web3Wallet instance by calling init on Web3Wallet. Passing in the options object containing metadata about the app and an optional relay URL.
+
+```javascript
+import { Core } from '@walletconnect/core'
+import { Web3Wallet } from '@walletconnect/web3wallet'
+
+const core = new Core({
+  projectId: process.env.PROJECT_ID
+})
+
+const web3wallet = await Web3Wallet.init({
+  core, // <- pass the shared `core` instance
+  metadata: {
+    name: 'Demo app',
+    description: 'Demo Client as Wallet/Peer',
+    url: 'www.walletconnect.com',
+    icons: []
+  }
+})
+```
+
+</PlatformTabItem>
+<PlatformTabItem value="ios">
+
+In order to initialize a client just call a `configure` method from the Web3Wallet instance wrapper
+
+```swift
+let metadata = AppMetadata(
+    name: "Example Wallet",
+    description: "Wallet description",
+    url: "example.wallet",
+    icons: ["https://avatars.githubusercontent.com/u/37784886"]
+)
+
+Web3Wallet.configure(
+    metadata: metadata,
+    crypto: DefaultCryptoProvider(),
+    // Used for the Echo: "echo.walletconnect.com" will be used by default if not provided
+    echoHost: "echo.walletconnect.com",
+    // Used for the Echo: "APNSEnvironment.production" will be used by default if not provided
+    environment: .production
+)
+```
+
+In order to allow users to receive push notifications you have to communicate with Apple Push Notification service and receive unique device token. Register that token with following method:
+
+```swift
+try await Web3Wallet.instance.registerEchoClient(deviceToken: deviceToken)
+```
+
+</PlatformTabItem>
+<PlatformTabItem value="ios">
+
+In order to initialize a client just call a `configure` method from the Web3Wallet instance wrapper
+
+```swift
+let metadata = AppMetadata(
+    name: "Example Wallet",
+    description: "Wallet description",
+    url: "example.wallet",
+    icons: ["https://avatars.githubusercontent.com/u/37784886"]
+)
+
+Web3Wallet.configure(
+    metadata: metadata,
+    crypto: DefaultCryptoProvider(),
+    // Used for the Echo: "echo.walletconnect.com" will be used by default if not provided
+    echoHost: "echo.walletconnect.com",
+    // Used for the Echo: "APNSEnvironment.production" will be used by default if not provided
+    environment: .production
+)
+```
+
+In order to allow users to receive push notifications you have to communicate with Apple Push Notification service and receive unique device token. Register that token with following method:
+
+```swift
+try await Web3Wallet.instance.registerEchoClient(deviceToken: deviceToken)
+```
+
+</PlatformTabItem>
+<PlatformTabItem value="android">
+
+```kotlin
+val projectId = "" // Get Project ID at https://cloud.walletconnect.com/
+val relayUrl = "relay.walletconnect.com"
+val serverUrl = "wss://$relayUrl?projectId=$projectId"
+val connectionType = ConnectionType.AUTOMATIC or ConnectionType.MANUAL
+val appMetaData = Core.Model.AppMetaData(
+    name = "Wallet Name",
+    description = "Wallet Description",
+    url = "Wallet URL",
+    icons = /*list of icon url strings*/,
+    redirect = "kotlin-wallet-wc:/request" // Custom Redirect URI
+)
+
+CoreClient.initialize(relayServerUrl = serverUrl, connectionType = connectionType, application = this, metaData = appMetaData)
+
+val initParams = Wallet.Params.Init(core = CoreClient)
+
+Web3Wallet.initialize(initParams) { error ->
+    // Error will be thrown if there's an issue during initialization
+}
+```
+
+The Web3Wallet client will always be responsible for exposing accounts (CAPI10 compatible) to a Dapp and therefore is also in charge of signing.
+To initialize the Web3Wallet client, create a `Wallet.Params.Init` object in the Android Application class with the Core Client. The `Wallet.Params.Init` object will then be passed to the `Web3Wallet`initialize function.
+
+</PlatformTabItem>
+<PlatformTabItem value="flutter">
+
+To create an instance of Web3Wallet, you need to pass in the `core` and `metadata` parameters.
+
+```dart
+Web3Wallet web3Wallet = await Web3Wallet.createInstance(
+  relayUrl: 'wss://relay.walletconnect.com', // The relay websocket URL, leave blank to use the default
+  projectId: '123',
+  metadata: PairingMetadata(
+    name: 'Wallet (Responder)',
+    description: 'A wallet that can be requested to sign transactions',
+    url: 'https://walletconnect.com',
+    icons: ['https://avatars.githubusercontent.com/u/37784886'],
+  ),
+);
+
+```
+
+</PlatformTabItem>
+</PlatformTabs>
+
+### NameSpace Builder
+
+<PlatformTabs
+	groupId="w3w"
+	activeOptions={["web","ios","android","flutter"]}
+>
+
+<PlatformTabItem value="web">
+
+With Web3Wallet v1.5.1 (and @walletconnect/utils v2.6.1) we've published a helper utility that greatly reduces the complexity of parsing the `required` and `optional` namespaces. It accepts as parameters a `session proposal` along with your user's `chains/methods/events/accounts` and returns ready-to-use `namespaces` object.
+
+```javascript
+// util params
+{
+  proposal: ProposalTypes.Struct; // the proposal received by `.on("session_proposal")`
+  supportedNamespaces: Record< // your Wallet's supported namespaces
+    string, // the supported namespace key e.g. eip155
+    {
+      chains: string[]; // your supported chains in CAIP-2 format e.g. ["eip155:1", "eip155:2", ...]
+      methods: string[]; // your supported methods e.g. ["personal_sign", "eth_sendTransaction"]
+      events: string[]; // your supported events e.g. ["chainChanged", "accountsChanged"]
+      accounts: string[] // your user's accounts in CAIP-10 format e.g. ["eip155:1:0x453d506b1543dcA64f57Ce6e7Bb048466e85e228"]
+      }
+  >;
+};
+```
+
+Example usage
+
+```javascript
+// import the builder util
+import { buildApprovedNamespaces } from '@walletconnect/utils'
+
+web3wallet.on('session_proposal', async sessionProposal => {
+  const { id, params } = sessionProposal
+
+  // ------- namespaces builder util ------------ //
+  const approvedNamespaces = buildApprovedNamespaces({
+    proposal: params,
+    supportedNamespaces: {
+      eip155: {
+        chains: ['eip155:1', 'eip155:137'],
+        methods: ['eth_sendTransaction', 'personal_sign'],
+        events: ['accountsChanged', 'chainChanged'],
+        accounts: [
+          'eip155:1:0xab16a96d359ec26a11e2c2b3d8f8b8942d5bfcdb',
+          'eip155:137:0xab16a96d359ec26a11e2c2b3d8f8b8942d5bfcdb'
+        ]
+      }
+    }
+  })
+  // ------- end namespaces builder util ------------ //
+
+  const session = await web3wallet.approveSession({
+    id,
+    namespaces: approvedNamespaces
+  })
+})
+```
+
+If your wallet supports multiple namespaces e.g. `eip155`,`cosmos` & `near`
+Your `supportedNamespaces` should look like the following example.
+
+```javascript
+// ------- namespaces builder util ------------ //
+const approvedNamespaces = buildApprovedNamespaces({
+    proposal: params,
+    supportedNamespaces: {
+        eip155: {...},
+        cosmos: {...},
+        near: {...}
+    },
+});
+// ------- end namespaces builder util ------------ //
+```
+
+</PlatformTabItem>
+<PlatformTabItem value="ios">
+
+`AutoNamespaces` is a helper utility that greatly reduces the complexity of parsing the required and optional namespaces. It accepts as parameters a session proposal along with your user's chains/methods/events/accounts and returns ready-to-use `SessionNamespace` object.
+
+```swift
+public static func build(
+    sessionProposal: Session.Proposal,
+    chains: [Blockchain],
+    methods: [String],
+    events: [String],
+    accounts: [Account]
+) throws -> [String: SessionNamespace]
+```
+
+Example usage
+
+```swift
+do {
+    let sessionNamespaces = try AutoNamespaces.build(
+        sessionProposal: proposal,
+        chains: [Blockchain("eip155:1")!, Blockchain("eip155:137")!],
+        methods: ["eth_sendTransaction", "personal_sign"],
+        events: ["accountsChanged", "chainChanged"],
+        accounts: [
+            Account(blockchain: Blockchain("eip155:1")!, address: "0xab16a96d359ec26a11e2c2b3d8f8b8942d5bfcdb")!,
+            Account(blockchain: Blockchain("eip155:137")!, address: "0xab16a96d359ec26a11e2c2b3d8f8b8942d5bfcdb")!
+        ]
+    )
+    try await Web3Wallet.instance.approve(proposalId: proposal.id, namespaces: sessionNamespaces)
+} catch {
+    print(error)
+}
+```
+
+</PlatformTabItem>
+
+<PlatformTabItem value="android">
+
+With Web3Wallet SDK 1.7.0 we've published a helper utility that greatly reduces the complexity of parsing the required and optional namespaces. It accepts as parameters a session proposal along with your wallet's chains, methods, events, and accounts (supported namespaces) and returns ready-to-use namespaces object that has to be passed into `Wallet.Params.SessionApprove` when approving a session.
+
+```kotlin
+val supportedNamespaces: Wallet.Model.Namespaces.Session = /* a map of all supported namespaces created by a wallet */
+val sessionProposal: Wallet.Model.SessionProposal =  /* an object received by `fun onSessionProposal(sessionProposal: Wallet.Model.SessionProposal)` in `Web3Wallet.WalletDelegate` */
+val sessionNamespaces = Web3Wallet.generateApprovedNamespaces(sessionProposal, supportedNamespaces)
+
+val approveParams: Wallet.Params.SessionApprove = Wallet.Params.SessionApprove(proposerPublicKey, sessionNamespaces)
+Web3Wallet.approveSession(approveParams) { error -> /*callback for error while approving a session*/ }
+```
+
+Examples of supported namespaces:
+
+```kotlin
+ val supportedNamespaces = mapOf(
+    "eip155" to Wallet.Model.Namespace.Session(
+        chains = listOf("eip155:1", "eip155:137", "eip155:3"),
+        methods = listOf("personal_sign", "eth_sendTransaction", "eth_signTransaction"),
+        events = listOf("chainChanged"),
+        accounts = listOf("eip155:1:0x57f48fAFeC1d76B27e3f29b8d277b6218CDE6092", "eip155:137:0x57f48fAFeC1d76B27e3f29b8d277b6218CDE6092", "eip155:3:0x57f48fAFeC1d76B27e3f29b8d277b6218CDE6092")
+    )
+)
+
+ val anotherSupportedNamespaces = mapOf(
+    "eip155" to Wallet.Model.Namespace.Session(
+        chains = listOf("eip155:1", "eip155:2", "eip155:4"),
+        methods = listOf("personal_sign", "eth_sendTransaction", "eth_signTransaction"),
+        events = listOf("chainChanged", "accountChanged"),
+        accounts = listOf("eip155:1:0x57f48fAFeC1d76B27e3f29b8d277b6218CDE6092", "eip155:2:0x57f48fAFeC1d76B27e3f29b8d277b6218CDE6092", "eip155:4:0x57f48fAFeC1d76B27e3f29b8d277b6218CDE6092")
+    ),
+    "cosmos" to Wallet.Model.Namespace.Session(
+        chains = listOf("cosmos:cosmoshub-4"),
+        methods = listOf("cosmos_method"),
+        events = listOf("cosmos_event"),
+        accounts = listOf("cosmos:cosmoshub-4:cosmos1hsk6jryyqjfhp5dhc55tc9jtckygx0eph6dd02")
+    )
+)
+
+```
+
+</PlatformTabItem>
+
+<PlatformTabItem value="flutter">
+
+//TODO
+
+</PlatformTabItem>
+
+</PlatformTabs>
+
+### Session Approval
+
+<PlatformTabs
+	groupId="w3w"
+	activeOptions={["web","ios","android","flutter"]}
+>
+
+<PlatformTabItem value="web">
+
+The `session_proposal` event is emitted when a dapp initiates a new session with a user's wallet. The event will include a `proposal` object with information about the dapp and requested permissions. The wallet should display a prompt for the user to approve or reject the session. If approved, call `approveSession` and pass in the `proposal.id` and requested `namespaces`.
+
+The `pair` method initiates a WalletConnect pairing process with a dapp using the given `uri` (QR code from the dapps). To learn more about pairing, checkout out the [docs](../web/core/pairing-api.md).
+
+```javascript
+web3wallet.on('session_proposal', async proposal => {
+  const session = await web3wallet.approveSession({
+    id: proposal.id,
+    namespaces
+  })
+})
+await web3wallet.core.pairing.pair({ uri })
+```
+
+</PlatformTabItem>
+<PlatformTabItem value="ios">
+
+```swift
+ Web3Wallet.instance.approve(
+    proposalId: "proposal_id",
+    namespaces: sessionNamespaces
+)
+```
+
+When session is successfully approved `sessionsPublishers` will publish a `Session`
+
+```swift
+Web3Wallet.instance.sessionsPublishers
+    .receive(on: DispatchQueue.main)
+    .sink { [weak self] _ in
+        self?.reloadSessions()
+    }.store(in: &publishers)
+```
+
+`Session` object represents an active session connection with a dapp. It contains dapp’s metadata (that you may want to use for displaying an active session to the user), namespaces, and expiry date. There is also a topic property that you will use for linking requests with related sessions.
+
+You can always query settled sessions from the client later with:
+
+```swift
+Web3Wallet.instance.getSessions()
+```
+
+</PlatformTabItem>
+<PlatformTabItem value="android">
+
+:::info Note
+
+Addresses provided in `accounts` array should follow [CAPI10](https://github.com/ChainAgnostic/CAIPs/blob/master/CAIPs/caip-10.md)
+semantics.
+
+:::
+
+```kotlin
+val proposerPublicKey: String = /*Proposer publicKey from SessionProposal object*/
+val namespace: String = /*Namespace identifier, see for reference: https://github.com/ChainAgnostic/CAIPs/blob/master/CAIPs/caip-2.md#syntax*/
+val accounts: List<String> = /*List of accounts on chains*/
+val methods: List<String> = /*List of methods that wallet approves*/
+val events: List<String> = /*List of events that wallet approves*/
+val namespaces: Map<String, Wallet.Model.Namespaces.Session> = mapOf(namespace, Wallet.Model.Namespaces.Session(accounts, methods, events))
+
+val approveParams: Wallet.Params.SessionApprove = Wallet.Params.SessionApprove(proposerPublicKey, namespaces)
+Web3Wallet.approveSession(approveParams) { error -> /*callback for error while approving a session*/ }
+```
+
+To send an approval, pass a Proposer's Public Key along with the map of namespaces to the `Web3Wallet.approveSession` function.
+
+</PlatformTabItem>
+
+<PlatformTabItem value="flutter">
+
+Present the UI for approval.
+
+```dart
+final walletNamespaces = {
+    'eip155': Namespace(
+        accounts: ['eip155:1:abc'],
+        methods: ['eth_signTransaction'],
+    ),
+    'kadena': Namespace(
+        accounts: ['kadena:mainnet01:abc'],
+        methods: ['kadena_sign_v1', 'kadena_quicksign_v1'],
+        events: ['kadena_transaction_updated'],
+    ),
+}
+await web3Wallet.approve(
+    id: id,
+    namespaces: walletNamespaces // This will have the accounts requested in params
+);
+```
+
+</PlatformTabItem>
+
+</PlatformTabs>
+
+### Session Rejection
+
+<PlatformTabs groupId="w3w" activeOptions={["web","ios","android","flutter"]}>
+<PlatformTabItem value="web">
+
+In the event you want to reject the session proposal, call the `rejectSession` method. The `getSDKError` function comes from the `@walletconnect/utils` [library](https://github.com/WalletConnect/walletconnect-monorepo/tree/v2.0/packages/utils).
+
+```javascript
+web3wallet.on('session_proposal', async proposal => {
+  const session = await web3wallet.rejectSession({
+    id: proposal.id,
+    reason: getSdkError('USER_REJECTED_METHODS')
+  })
+})
+```
+
+</PlatformTabItem>
+<PlatformTabItem value="ios">
+
+// TODO
+
+</PlatformTabItem>
+<PlatformTabItem value="android">
+
+```kotlin
+val proposerPublicKey: String = /*Proposer publicKey from SessionProposal object*/
+val rejectionReason: String = /*The reason for rejecting the Session Proposal*/
+val rejectionCode: String = /*The code for rejecting the Session Proposal*/
+For reference use CAIP-25: https://github.com/ChainAgnostic/CAIPs/blob/master/CAIPs/caip-25.md
+
+val rejectParams: Wallet.Params.SessionReject = SessionReject(proposerPublicKey, rejectionReason, rejectionCode)
+Web3Wallet.rejectSession(rejectParams) { error -> /*callback for error while rejecting a session*/ }
+```
+
+To send a rejection for the Session Proposal, pass a proposerPublicKey, rejection reason and rejection code to
+the `Web3Wallet.rejectSession` function.
+
+</PlatformTabItem>
+<PlatformTabItem value="flutter">
+
+To reject the request, pass in an error code and reason. They can be found [here](https://docs.walletconnect.com/2.0/specs/clients/sign/error-codes).
+
+```dart
+await web3Wallet.reject(
+    id: id,
+    reason: Errors.getSdkError(Errors.USER_REJECTED_SIGN),
+);
+```
+
+</PlatformTabItem>
+
+</PlatformTabs>
 
 ## Resources
 

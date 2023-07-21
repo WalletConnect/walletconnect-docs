@@ -342,8 +342,7 @@ module.exports = {
             'web/web3wallet/wallet-usage',
             'web/web3wallet/upgrade-guide'
           ]
-        },
-
+        }
       ]
     },
     {
@@ -545,7 +544,7 @@ module.exports = {
           collapsible: true,
           collapsed: true,
           items: ['android/walletconnectmodal/installation', 'android/walletconnectmodal/usage']
-        },
+        }
       ]
     },
     {
@@ -658,10 +657,7 @@ module.exports = {
           label: 'WalletConnectModal',
           collapsible: true,
           collapsed: true,
-          items: [
-            'ios/walletconnectmodal/installation',
-            'ios/walletconnectmodal/usage',
-          ]
+          items: ['ios/walletconnectmodal/installation', 'ios/walletconnectmodal/usage']
         },
         {
           type: 'category',
