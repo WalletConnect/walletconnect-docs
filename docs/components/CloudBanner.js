@@ -9,7 +9,7 @@ export const CloudBanner = props => {
         <p>Head over to WalletConnect Cloud and create a New Project now!</p>
       </div>
       <a href="https://cloud.walletconnect.com" target="_blank">
-        Get started for free
+        Get started
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"

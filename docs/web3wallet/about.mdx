@@ -617,6 +617,166 @@ await web3Wallet.reject(
 ```
 
 </PlatformTabItem>
+</PlatformTabs>
+
+### Session Disconnect
+
+<PlatformTabs groupId="w3w" activeOptions={["web","ios","android","flutter"]}>
+
+<PlatformTabItem value="web">
+
+If either the dapp or the wallet decides to disconnect the session, the `session_delete` event will be emitted. The wallet should listen for this event in order to update the UI.
+
+To disconnect a session from the wallet, call the `disconnectSession` function and pass in the `topic` and `reason`. You can use the `getSDKError` function, which is available in the `@walletconnect/utils` [library](https://github.com/WalletConnect/walletconnect-monorepo/tree/v2.0/packages/utils).
+
+```javascript
+await web3wallet.disconnectSession({
+  topic,
+  reason: getSdkError('USER_DISCONNECTED')
+})
+```
+
+</PlatformTabItem>
+<PlatformTabItem value="ios">
+
+For good user experience your wallet should allow users to disconnect unwanted sessions. In order to terminate a session use `disconnect` method.
+
+```swift
+try await Web3Wallet.instance.disconnect(topic: session.topic)
+```
+
+</PlatformTabItem>
+<PlatformTabItem value="android">
+
+```kotlin
+val disconnectionReason: String = /*The reason for disconnecting the Session*/
+val disconnectionCode: String = /*The code for for disconnecting the Session*/
+val sessionTopic: String = /*Topic from the Session*/
+For reference use CAIP-25: https://github.com/ChainAgnostic/CAIPs/blob/master/CAIPs/caip-25.md
+val disconnectParams = Wallet.Params.SessionDisconnect(sessionTopic, disconnectionReason, disconnectionCode)
+
+Web3Wallet.disconnectSession(disconnectParams) { error -> /*callback for error while disconnecting a session*/ }
+```
+
+To disconnect from un active session, pass a disconnection reason with code and the Session topic to the `Web3Wallet.disconnectSession`
+function.
+
+</PlatformTabItem>
+<PlatformTabItem value="flutter">
+
+//TODO
+
+</PlatformTabItem>
+
+</PlatformTabs>
+
+### Responding to Session requests
+
+<PlatformTabs groupId="w3w" activeOptions={["web","ios","android","flutter"]}>
+
+<PlatformTabItem value="web">
+
+The `session_request` event is triggered by a dapp when it needs the wallet to perform a specific action, such as signing a transaction. The event contains a `topic` and a `request` object, which will vary depending on the action requested.
+
+To respond to the request, the wallet can access the `topic` and `request` object by destructuring them from the event payload. To see a list of possible `request` and `response` objects, refer to the relevant JSON-RPC Methods for [Ethereum](advanced/rpc-reference/ethereum-rpc.md), [Solana](advanced/rpc-reference/solana-rpc.md), [Cosmos](advanced/rpc-reference/cosmos-rpc.md), or [Stellar](advanced/rpc-reference/stellar-rpc.md).
+
+As an example, if the dapp requests a `personal_sign` method, the wallet can extract the `params` array from the `request` object. The first item in the array is the hex version of the message to be signed, which can be converted to UTF-8 and assigned to a `message` variable. The second item in `params` is the user's wallet address.
+
+To sign the message, the wallet can use the `wallet.signMessage` method and pass in the message. The signed message, along with the `id` from the event payload, can then be used to create a `response` object, which can be passed into `respondSessionRequest`.
+
+```javascript
+web3wallet.on('session_request', async event => {
+  const { topic, params, id } = event
+  const { request } = params
+  const requestParamsMessage = request.params[0]
+
+  // convert `requestParamsMessage` by using a method like hexToUtf8
+  const message = hexToUtf8(requestParamsMessage)
+
+  // sign the message
+  const signedMessage = await wallet.signMessage(message)
+
+  const response = { id, result: signedMessage, jsonrpc: '2.0' }
+
+  await web3wallet.respondSessionRequest({ topic, response })
+})
+```
+
+To reject a session request, the response should be similar to this.
+
+```javascript
+const response = {
+  id,
+  jsonrpc: '2.0',
+  error: {
+    code: 5000,
+    message: 'User rejected.'
+  }
+}
+```
+
+</PlatformTabItem>
+<PlatformTabItem value="ios">
+
+After the session is established, a dapp will request your wallet's users to sign a transaction or a message. Requests will be delivered by the following publisher.
+
+```swift
+Web3Wallet.instance.sessionRequestPublisher
+    .receive(on: DispatchQueue.main)
+    .sink { [weak self] session in
+        self?.verifyDapp(session.context)
+        self?.showSessionRequest(session.request)
+    }.store(in: &publishers)
+```
+
+When a wallet receives a session request, you probably want to show it to the user. It’s method will be in scope of session namespaces. And it’s params are represented by `AnyCodable` type. An expected object can be derived as follows:
+
+```swift
+if sessionRequest.method == "personal_sign" {
+    let params = try! sessionRequest.params.get([String].self)
+} else if method == "eth_signTypedData" {
+    let params = try! sessionRequest.params.get([String].self)
+} else if method == "eth_sendTransaction" {
+    let params = try! sessionRequest.params.get([EthereumTransaction].self)
+}
+```
+
+Now, your wallet (as it owns your user’s private keys) is responsible for signing the transaction. After doing it, you can send a response to a dapp.
+
+```swift
+let response: AnyCodable = sign(request: sessionRequest) // Implement your signing method
+try await Web3Wallet.instance.respond(topic: request.topic, requestId: request.id, response: .response(response))
+```
+
+</PlatformTabItem>
+<PlatformTabItem value="android">
+
+```kotlin
+val sessionTopic: String = /*Topic of Session*/
+val jsonRpcResponse: Wallet.Model.JsonRpcResponse.JsonRpcResult = /*Active Session Request ID along with request data*/
+val result = Wallet.Params.SessionRequestResponse(sessionTopic = sessionTopic, jsonRpcResponse = jsonRpcResponse)
+
+Web3Wallet.respondSessionRequest(result) { error -> /*callback for error while responding session request*/ }
+```
+
+To respond to JSON-RPC method that were sent from Dapps for a session, submit a `Wallet.Params.SessionRequestResponse` with the session's topic and request
+ID along with the respond data to the `Web3Wallet.respondSessionRequest` function.
+
+</PlatformTabItem>
+<PlatformTabItem value="flutter">
+
+Set up the proposal handler that will display the proposal to the user after the URI has been scanned.
+
+```dart
+late int id;
+web3Wallet.onSessionProposal.subscribe((SessionProposal? args) async {
+  // Handle UI updates using the args.params
+  // Keep track of the args.id for the approval response
+  id = args!.id;
+})
+```
+
+</PlatformTabItem>
 
 </PlatformTabs>
 
