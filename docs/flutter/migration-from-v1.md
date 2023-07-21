@@ -3,7 +3,7 @@ The main thing that has changed is that WalletConnect v2 supports both wallet an
 
 The second things that has changed is that WalletConnect v2 is chain agnostic, and so no longer relies on Ethereum specific methods.
 
-Assuming you were using the [wallet_connect](https://pub.dev/packages/wallet_connect) by Orange Wallet, the migration is straightforward.
+Assuming you were using [wallet_connect](https://pub.dev/packages/wallet_connect) by Orange Wallet, the migration is straightforward.
 
 This migration guide will be focused on migrating as a wallet, since that is what the original v1 library supported.
 
