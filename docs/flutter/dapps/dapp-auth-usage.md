@@ -1,7 +1,7 @@
 # Dapp Usage
 
 :::info
-If you're a wallet looking to incorporarte Auth, please see [Web3Wallet SDK](../wallets/wallet-usage.md)..
+If you're a wallet looking to incorporarte Auth, please see [Web3Wallet SDK](../web3wallet/wallet-usage.md)..
 :::
 
 ## Installation

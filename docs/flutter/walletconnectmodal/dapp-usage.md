@@ -1,4 +1,4 @@
-## Setup
+# Dapp Usage
 
 To get the modal to work properly you need to create two objects.
 

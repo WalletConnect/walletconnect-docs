@@ -1,6 +1,6 @@
 # Installation
 
-To get started with [Web3Wallet](./wallets/wallet-usage.md), [Sign](./dapps/dapp-sign-usage.md), or [Auth](./dapps/dapp-auth-usage.md), follow the instructions below.
+To get started with [Web3Wallet](../web3wallet/wallet-usage.md), [Sign](../dapps/dapp-sign-usage.md), or [Auth](../dapps/dapp-auth-usage.md), follow the instructions below.
 
 ## 1. Obtain Project ID
 
