@@ -115,7 +115,7 @@ await web3Wallet.pair(uri: uri);
 
 Present the UI for approval.
 
-This is inherently different from v1. Remember, we aren't limited to just EVM, we can do any chain, so we define the chains and methods our wallet supports and respond with those.
+This is inherently different from v1. Remember, you aren't limited to just EVM, you can do any chain, so we define the chains and methods our wallet supports and respond with those.
 
 The `accounts` list has the format `namespace:chainId:address`.
 
