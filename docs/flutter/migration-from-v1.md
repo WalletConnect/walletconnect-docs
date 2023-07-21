@@ -33,7 +33,7 @@ There is no need to call `connectFromSessionStore`.
 
 Set up the methods and chains that your wallet supports.  
 This is a major thing that is different between v1 and v2.  
-We aren't locked into `ethSign`, `ethSendTransaction`, or `ethSignTransaction` anymore. We are chain agnostic. So we can define any of the methods that we want to support, for any chain we want.
+We aren't locked into `ethSign`, `ethSendTransaction`, or `ethSignTransaction` anymore. We are chain agnostic. So we can define any of the methods that you want to support, for any chain you want.
 
 ```dart
 final personalSignHandler = (String topic, dynamic parameters) async {
