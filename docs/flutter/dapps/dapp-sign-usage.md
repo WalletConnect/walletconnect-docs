@@ -1,12 +1,12 @@
 # Dapp Usage
 
 :::info
-If you're a wallet looking to incorporarte Sign, please see [Web3Wallet SDK](../wallets/wallet-usage.md)..
+If you're a wallet looking to incorporarte Sign, please see [Web3Wallet SDK](../web3wallet/wallet-usage.md)..
 :::
 
 ## Installation
 
-Follow these [steps](../installation.md) to install the Flutter SDK.
+Follow these [steps](../dapps/installation.md) to install the Flutter SDK.
 
 ## Initialization
 
@@ -46,9 +46,13 @@ ConnectResponse response = await signClient.connect(
 Uri? uri = response.uri;
 ```
 
+You will use that URI to display a QR code or handle a deep link.
+
+We recommend not handling deep linking yourself. If you want to deep link, then use the [walletconnect_modal_flutter](https://pub.dev/packages/walletconnect_modal_flutter) package.
+
 ## Session Data
 
-Once you've displayed the URI, you can wait for the future and hide the QR code once you've received session data.
+Once you've displayed the URI you can wait for the future and hide the QR code once you've received session data.
 
 ```dart
 final SessionData session = await response.session.future;
