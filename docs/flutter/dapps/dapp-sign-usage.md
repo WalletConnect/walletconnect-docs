@@ -48,7 +48,7 @@ Uri? uri = response.uri;
 
 You will use that URI to display a QR code or handle a deep link.
 
-I recommend not handling deep linking yourself. If you want to deep link, then use the [walletconnect_modal_flutter](https://pub.dev/packages/walletconnect_modal_flutter) package.
+We recommend not handling deep linking yourself. If you want to deep link, then use the [walletconnect_modal_flutter](https://pub.dev/packages/walletconnect_modal_flutter) package.
 
 ## Session Data
 
