@@ -1,0 +1,26 @@
+# Usage
+
+```tsx
+import {W3iWidget, W3iContext} from "@web3inbox/widget-react"
+```
+
+```tsx
+<W3iContext>
+  <W3iWidget 
+		account={account}
+		signMessage={async (message) => {
+			const rs = await signMessage({ message });
+			return rs as string;
+		}}
+		dappIcon={
+			"ICON_URL"
+		}
+		connect={open}
+		dappName={"Test dapp"}
+		dappNotificationsDescription={"Subscribe to get the latest info"}
+		settingsEnabled={false}
+		chatEnabled={false}
+  />
+</W3iContext>
+
+```

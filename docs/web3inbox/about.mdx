@@ -11,9 +11,13 @@ Web3Inbox is under development. Want early access? Join our [Pilot Program](http
 
 ## Introduction
 
+Web3Inbox has two distinctive branches of SDKs.
+
+### Web3Inbox SDK: Wallet Development
+
 The Web3Inbox SDK allows one to easily make use of WalletConnect's [push](../specs/clients/push/wallet-client-api.md) and [chat](../specs/clients/chat/client-api.md) SDKs. This is done by rendering a WebView of the Web3Inbox dapp.
 
-### Features
+#### Features
 
 Some of the key features of the Web3Inbox SDK include:
 
@@ -21,25 +25,42 @@ Some of the key features of the Web3Inbox SDK include:
 - **Display push notification history**
 - **Chat with peers**
 
+### Web3Inbox Widget: Dapp Developement
+The Web3Inbox Widget utilizes `iframe`s to display  Web3Inbox in a widget friendly view. Currently making use of WalletConnect's [push](../specs/clients/push/wallet-client-api.md) to subscribe and display notifications.
+
+#### Features
+Some of the key features of the Web3Inbox Widget include:
+
+- **Inject the account connected to your dapp**
+- **Theme how it looks with vanilla css**
+- **Subscribe to your dapp and display notifications**
+
+
 
 ### Getting Started
 
-To get started with the Web3Modal SDK, choose the platform you'll be using to build your project. The SDK is currentl available for Web and React Native.
+To get started with the Web3Inbox SDK, choose the platform you'll be using to build your project. 
 
 <Container
   items={[
     {
-      name: 'iOS',
+      name: 'Web3Inbox SDK - iOS',
       description: '',
-      url: `/2.0/ios/web3inbox/usage`
+      url: `/2.0/ios/web3inbox/wallet-usage`
     },
     {
-      name: 'Android',
+      name: 'Web3Inbox SDK - Android',
       description: '',
-      url: `/2.0/android/web3inbox/usage`
-    }
+      url: `/2.0/android/web3inbox/wallet-usage`
+    },
+		{
+      name: 'Web3Inbox Widget - Web',
+      description: '',
+      url: `/2.0/web/web3inbox/react/usage`
+		}
   ]}
 />
+
 
 ## Resources
 

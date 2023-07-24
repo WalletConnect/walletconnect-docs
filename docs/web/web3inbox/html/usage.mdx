@@ -1,0 +1,26 @@
+# Using HTML Web3inbox Widget
+
+The widget is powered by web components.
+
+```html
+<w3i-widget 
+	id="widget-id"
+  account="<ETH-Address>" 
+	width="640" 
+	height="500" 
+	dappName="<DAPP_NAME>"
+	dappOrigin="<DAPP_ORIGIN>" 
+	dappNotificationsDescription="<NOTIFICATIONS_DESCRIPTION>"
+  chatEnabled="false" 
+	pushEnabled="true" 
+	settingsEnabled="false"
+/>
+
+<script>
+	document.getElementById("widget-id").addEventListener("signMessage", functionToSign)
+	document.getElementById("widget-id").addEventListener("connectRequest", functionToTriggerModal)
+</script>
+```
+
+Note: dapp origin has to match what is registered in cloud, associated with your project id.
+Furthermore, it needs match the origin of the page the widget is on.
