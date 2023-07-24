@@ -54,7 +54,17 @@ module.exports = {
       label: 'SDKs',
       collapsible: false,
       className: 'menu_outer_list',
-      items: ['web3modal/about', 'web3wallet/about', 'web3inbox/about']
+      items: [
+        'web3modal/about',
+        {
+          type: 'category',
+          label: 'Web3Wallet',
+          collapsed: true,
+          collapsible: true,
+          items: ['web3wallet/about', 'web3wallet/wallet-usage', 'web3wallet/resources']
+        },
+        'web3inbox/about'
+      ]
     },
     {
       type: 'category',
@@ -819,7 +829,11 @@ module.exports = {
           label: 'WalletConnect Modal',
           collapsible: true,
           collapsed: true,
-          items: ['flutter/walletconnectmodal/about', 'flutter/walletconnectmodal/installation', 'flutter/walletconnectmodal/dapp-usage']
+          items: [
+            'flutter/walletconnectmodal/about',
+            'flutter/walletconnectmodal/installation',
+            'flutter/walletconnectmodal/dapp-usage'
+          ]
         },
         {
           type: 'category',

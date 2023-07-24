@@ -596,6 +596,10 @@ article img {
   margin-top: 1rem;
 }
 
+.platform-tabs--items h4 {
+  font-size: 1.375rem;
+}
+
 .platform-tabs .tabs__item {
   border: 2px solid transparent;
   border-radius: 0;
