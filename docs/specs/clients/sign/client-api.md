@@ -7,7 +7,7 @@ abstract class Client {
   // initializes the client with persisted storage and a network connection
   public abstract init(params: {
     metadata?: AppMetadata;
-    specialNamespaces?: SpecialNamespaces[] // optional
+    specialNamespaces?: SpecialNamespaces // optional
   }): Promise<void>;
 
   // for proposer to create a session 
