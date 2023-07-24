@@ -3,7 +3,10 @@
 ```typescript
 class Web3Wallet {
   // initializes the client (BOTH)
-  public abstract init(params: { core: CoreClient }): Promise<void>;
+  public abstract init(params: { 
+    core: CoreClient,
+    specialNamespaces?: SpecialNamespaces[] // optional
+    }): Promise<void>;
   
   // establish pairing from URI (BOTH)
   public abstract pair(params: { uri: string }): Promise<void>;
