@@ -1,11 +1,14 @@
 # Usage
 
+## Import the widget and its context
 ```tsx
 import {W3iWidget, W3iContext} from "@web3inbox/widget-react"
 ```
 
+## Use the widget where it needs to be displayed
+
 ```tsx
-<W3iContext>
+<W3iContext> // Does not need to be W3iWidget's direct parent
   <W3iWidget 
 		account={account}
 		signMessage={async (message) => {
