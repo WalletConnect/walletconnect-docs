@@ -30,6 +30,20 @@ On iOS, use CocoaPods to add the native modules to your project:
 npx pod-install
 ```
 
+### Additional Setup for RN < 0.70
+
+#### Install big-integer
+```bash npm2yarn
+npm install big-integer
+```
+
+#### Apply Polyfill
+Add this line in your project's root file, making sure it's executed before `@walletconnect/modal-react-native` is imported
+
+```js
+if (typeof BigInt === 'undefined') global.BigInt = require('big-integer')
+```
+
 </TabItem>
 
 <TabItem value="expo" label="Expo">
