@@ -354,6 +354,7 @@ module.exports = {
               items: [
                 'web/web3inbox/react/installation',
                 'web/web3inbox/react/usage',
+                'web/web3inbox/react/options',
               ]
             },
             {
@@ -362,6 +363,7 @@ module.exports = {
               items: [
                 'web/web3inbox/html/installation',
                 'web/web3inbox/html/usage',
+                'web/web3inbox/html/options',
               ]
             }
           ]
