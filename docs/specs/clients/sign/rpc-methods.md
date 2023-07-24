@@ -101,6 +101,10 @@ Used to settle a session over topic B.
       "events": [string]
     }
   },
+  "specialNamespaces": { // optional
+    "methods": [string],
+    "events": [string]
+  }
   "expiry": Int64, // seconds
 }
 
