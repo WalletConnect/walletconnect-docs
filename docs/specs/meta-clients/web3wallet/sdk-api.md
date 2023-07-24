@@ -5,7 +5,7 @@ class Web3Wallet {
   // initializes the client (BOTH)
   public abstract init(params: { 
     core: CoreClient,
-    specialNamespaces?: SpecialNamespaces[] // optional
+    specialNamespaces?: SpecialNamespaces // optional
     }): Promise<void>;
   
   // establish pairing from URI (BOTH)
