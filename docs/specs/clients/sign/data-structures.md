@@ -53,8 +53,10 @@ Session is a topic encrypted by a symmetric key derived using a key agreement es
     }
   },
   "specialNamespaces": {
+    "<namespace_name>" : {
       "methods": [string],
       "events": [string]
+    }
   }
 }
 ```
