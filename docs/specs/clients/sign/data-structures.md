@@ -149,8 +149,10 @@ Settlement is sent by the responder after approval and it's broadcasted right af
     }
   },
   "specialNamespaces": {
-    "methods": [string],
-    "events": [string]
+    "<namespace_name>" : {
+      "methods": [string],
+      "events": [string]
+    }
   }
   "sessionProperties": {
     "property": string
