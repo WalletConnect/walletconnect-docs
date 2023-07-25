@@ -60,7 +60,8 @@ If they are valid, then the wallet if free to decide whether to approve the prop
 
 If the wallet (or the user) does NOT approve the session, then it is rejected. Otherwise, the wallet responds with a slightly different namespace schema: Session Namespace. Instead of having a list of `chains`, it has list of `accounts` compatible with the given methods and events. If the wallet approves a session proposal, it needs to approve all methods and events of all Proposal Namespaces. If needed, the Wallet can add permissions for more methods and events than the ones requested, but never less.
 
-Wallet can also define special namespaces that do not require a target chain and are preffixed with "wallet_". Special namespace are always defined by a wallet in the init function of SignSDK and can be used to send method such as: wallet_switchEthereumChain.
+The wallet can also define a special set of methods & events that can be sent without a target chain and are prefixed with "wallet_". Special namespaces are always defined by the wallet in the init function of SignSDK via the `specialNamespaces` parameter. 
+Example: a dapp can request `wallet_addEthereumChain` without targeting a specific chain.
 
 ### Example Session Namespace
 
