@@ -365,7 +365,8 @@ module.exports = {
                 'web/web3inbox/html/usage',
                 'web/web3inbox/html/options',
               ]
-            }
+            },
+            'web/web3inbox/styling'
           ]
         },
 
