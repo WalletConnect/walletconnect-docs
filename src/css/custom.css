@@ -817,7 +817,6 @@ article img {
 .home__contribute {
   border-radius: 1rem;
   border: 1.5px solid var(--ifm-border-color);
-  height: 7rem;
   display: flex;
   align-items: center;
 }
@@ -860,6 +859,7 @@ article img {
 .home__contribute--text {
   max-width: 30rem;
   margin: 0;
+  padding: 1rem 0;
 }
 
 .home__contribute--heading {
@@ -872,6 +872,12 @@ article img {
 }
 
 /* End - HomePage */
+
+@media screen and (max-width: 1320px) {
+  .home__contribute--text {
+    padding-right: 1.5rem;
+  }
+}
 
 @media screen and (max-width: 996px) {
   .platform-tabs {
@@ -895,7 +901,6 @@ article img {
     width: 7rem;
   }
   .home__contribute--text {
-    padding-top: 0;
     padding-right: 2rem;
     max-width: 100%;
   }
