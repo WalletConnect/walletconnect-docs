@@ -1,8 +1,123 @@
-import Container from './components/Container'
 import Table from './components/Table'
+import Banner from './components/Home/Banner'
+import Wrapper from './components/Home/Wrapper'
+import webLogo from '../static/assets/home/webLogo.png'
+import androidLogo from '../static/assets/home/androidLogo.png'
+import iosLogo from '../static/assets/home/iosLogo.png'
+import rnLogo from '../static/assets/home/rnLogo.png'
+import flutterLogo from '../static/assets/home/flutterLogo.png'
+import unityLogo from '../static/assets/home/unityLogo.png'
+import web3modalLogo from '../static/assets/home/web3modalLogo.png'
+import web3walletLogo from '../static/assets/home/web3walletLogo.png'
+import web3inboxLogo from '../static/assets/home/web3inboxLogo.png'
+import bookLogo from '../static/assets/home/bookLogo.png'
 
 # About
 
+<Banner />
+
+## Platforms
+
+Use WalletConnect with your favorite platform
+
+<Wrapper
+  type="small"
+  items={[
+    {
+      name: 'Web',
+      icon: webLogo,
+      href: '/2.0/web/about-web3modal'
+    },
+    {
+      name: 'Android',
+      icon: androidLogo,
+      href: '/2.0/android/web3wallet/installation'
+    },
+    {
+      name: 'iOS',
+      icon: iosLogo,
+      href: '/2.0/ios/web3wallet/installation'
+    },
+    {
+      name: 'React Native',
+      icon: rnLogo,
+      href: '/2.0/react-native/web3wallet/installation'
+    },
+    {
+      name: 'Flutter',
+      icon: flutterLogo,
+      href: '/2.0/flutter/web3wallet/installation'
+    },
+    {
+      name: 'Unity',
+      icon: unityLogo,
+      href: '/2.0/unity/web3wallet/installation'
+    }
+  ]}
+/>
+
+<hr className="home__divider" />
+
+## Tools
+
+Secure and effortless integration using WalletConnect SDKs. and tools
+
+<Wrapper
+  type="large"
+  items={[
+    {
+      name: 'Web3Modal',
+      icon: web3modalLogo,
+      href: '/2.0/web3modal/about',
+      description: 'Simple yet powerful multi-chain wallet connection interface.'
+    },
+    {
+      name: 'Web3Wallet',
+      icon: web3walletLogo,
+      href: '/2.0/web3wallet/about',
+      description: 'Connect your wallet’s users with thousands of apps.'
+    },
+    {
+      name: 'Web3Inbox',
+      icon: web3inboxLogo,
+      href: '/2.0/web3inbox/about',
+      description: "Easily use WalletConnect's Push & Chat SDKs."
+    }
+  ]}
+/>
+
+<hr className="home__divider" />
+
+## How to contribute
+
+<div className="home__contribute">
+  <div className="home__contribute--heading">
+    <img src={bookLogo} alt="Book Logo" />
+    <p className="home__contribute--text">
+      Every page footer has an{' '}
+      <span style={{ color: 'white', fontWeight: '700' }}>Edit this page</span> link. Change the
+      Markdown, make a Pull Request and we’ll merge it!
+    </p>
+  </div>
+  <a href="https://github.com/WalletConnect/walletconnect-docs/" target="_blank">
+    Docs Repo
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      strokeWidth={2}
+      stroke="currentColor"
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75"
+      />
+    </svg>
+  </a>
+</div>
+
+<!--
 ## What is WalletConnect?
 
 WalletConnect is the Web3 messaging layer and a standard to connect blockchain wallets to dapps. Our mission continues to expand the interoperability of the Web3 space by providing the best tooling and infrastructure for Wallets to deliver an outstanding user experience. WalletConnect v2 is chain agnostic and built to work with any blockchain of your choice. To read more in detail about the WalletConnect protocol, check out our [Technical specifications](./specs/readme.md).
@@ -61,3 +176,5 @@ Share your experience, contribute or ask questions with the WalletConnect commun
 
 - [Twitter](https://twitter.com/walletconnect)
 - [GitHub](https://github.com/orgs/WalletConnect/discussions/)
+
+-->
