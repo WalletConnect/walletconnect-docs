@@ -119,7 +119,7 @@ abstract class Web3InboxSDKNotifyFacade {
     Event observing.
     Note: All observers return a method to stop observing.
   */
-  public abstract observe("notify_message", Observer<{id: number, response:{error?: Reason, subscription?: NotifySubscription }>): () => void;
+  public abstract observe("notify_subscription", Observer<{id: number, response:{error?: Reason, subscription?: NotifySubscription }>): () => void;
 }
 
 abstract class Web3InboxSDK {
