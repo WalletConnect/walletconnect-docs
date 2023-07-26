@@ -17,10 +17,10 @@ let metadata = AppMetadata(
     url: "example.wallet",
     icons: ["https://avatars.githubusercontent.com/u/37784886"]
 )
-        
+
 Web3Wallet.configure(
-    metadata: metadata, 
-    crypto: DefaultCryptoProvider(), 
+    metadata: metadata,
+    crypto: DefaultCryptoProvider(),
     // Used for the Echo: "echo.walletconnect.com" will be used by default if not provided
     echoHost: "echo.walletconnect.com",
     // Used for the Echo: "APNSEnvironment.production" will be used by default if not provided
@@ -73,23 +73,23 @@ Web3Wallet.instance.sessionProposalPublisher
 Session proposal is a handshake sent by a dapp and it's purpose is to define a session rules. Handshake procedure is defined by [CAIP-25](https://github.com/ChainAgnostic/CAIPs/blob/master/CAIPs/caip-25.md).
 `Session.Proposal` object conveys set of required and optional `ProposalNamespaces` that contains blockchains methods and events. Dapp requests with methods and wallet will emit events defined in namespaces.
 
-`VerifyContext` provides a domain verification information about `Session.Proposal` and `Request`. It consists of origin of a Dapp from where the request has been sent, validation enum that says whether origin is **unknown**, **valid** or **invalid** and verify URL server. 
+`VerifyContext` provides a domain verification information about `Session.Proposal` and `Request`. It consists of origin of a Dapp from where the request has been sent, validation enum that says whether origin is **unknown**, **valid** or **invalid** and verify URL server.
 
 To enable or disable verification find the **Verify SDK** toggle in your project [cloud](https://cloud.walletconnect.com).
 
- ```swift
+```swift
 public struct VerifyContext: Equatable, Hashable {
-    public enum ValidationStatus {
-        case unknown
-        case valid
-        case invalid
-    }
-        
-    public let origin: String?
-    public let validation: ValidationStatus
-    public let verifyUrl: String
+   public enum ValidationStatus {
+       case unknown
+       case valid
+       case invalid
+   }
+
+   public let origin: String?
+   public let validation: ValidationStatus
+   public let verifyUrl: String
 }
- ```
+```
 
 The user will either approve the session proposal (with session namespaces) or reject it. Session namespaces must at least contain requested methods, events and accounts associated with proposed blockchains.
 
@@ -124,16 +124,14 @@ Example session namespaces response:
 {
   "eip155": {
     "accounts": [
-        "eip155:137:0xab16a96d359ec26a11e2c2b3d8f8b8942d5bfcdb",
-        "eip155:1:0xab16a96d359ec26a11e2c2b3d8f8b8942d5bfcdb"
+      "eip155:137:0xab16a96d359ec26a11e2c2b3d8f8b8942d5bfcdb",
+      "eip155:1:0xab16a96d359ec26a11e2c2b3d8f8b8942d5bfcdb"
     ],
     "methods": ["eth_sign"],
     "events": ["accountsChanged"]
   },
   "cosmos": {
-    "accounts": [
-        "cosmos:cosmoshub-4:cosmos1t2uflqwqe0fsj0shcfkrvpukewcw40yjj6hdc0"
-    ],
+    "accounts": ["cosmos:cosmoshub-4:cosmos1t2uflqwqe0fsj0shcfkrvpukewcw40yjj6hdc0"],
     "methods": ["cosmos_signDirect", "personal_sign"],
     "events": ["someCosmosEvent", "proofFinalized"]
   }
@@ -178,8 +176,17 @@ do {
 
 ```swift
  Web3Wallet.instance.approve(
-    proposalId: "proposal_id", 
+    proposalId: "proposal_id",
     namespaces: sessionNamespaces
+)
+```
+
+### Reject Session
+
+```swift
+Web3Wallet.instance.reject(
+    proposalId: "proposal_id",
+    reason: .userRejected
 )
 ```
 
@@ -290,19 +297,19 @@ Web3Wallet.instance.authRequestPublisher
 
 To enable or disable verification find the **Verify SDK** toggle in your project [cloud](https://cloud.walletconnect.com).
 
- ```swift
+```swift
 public struct VerifyContext: Equatable, Hashable {
-    public enum ValidationStatus {
-        case unknown
-        case valid
-        case invalid
-    }
-    
-    public let origin: String?
-    public let validation: ValidationStatus
-    public let verifyUrl: String
+   public enum ValidationStatus {
+       case unknown
+       case valid
+       case invalid
+   }
+
+   public let origin: String?
+   public let validation: ValidationStatus
+   public let verifyUrl: String
 }
- ```
+```
 
 ### Authorization Request Approval
 
@@ -327,7 +334,8 @@ try await Web3WalletClient.reject(requestId: request.id)
 ### Get Pending Requests
 
 if you've missed some requests you can query them with:
-```swift 
+
+```swift
 Web3WalletClient.getPendingRequests()
 ```
 
