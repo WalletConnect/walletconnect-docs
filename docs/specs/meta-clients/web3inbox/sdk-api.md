@@ -83,6 +83,11 @@ abstract class Web3InboxSDKChatFacade {
   public abstract getMessages(params: {
     topic: string;
   }): Promise<[Message]>;
+
+  // returns all account addresses that are muted for an account
+  public abstract getMutedContacts(params: {
+    account: string;
+  }): Promise<[string]>;
   
   /*
     Event observing.
@@ -99,7 +104,9 @@ abstract class Web3InboxSDKChatFacade {
 
   // subscribe to new chat thread left
   public abstract observe("chat_left",  Observer<{ topic: string }>): () => void;
-  
+
+  // subscribe to updates from sync stores
+  public abstract observe("sync_update", Observer<{ store: string, update: StoreUpdate }>): () => void;
 }
 
 abstract class Web3InboxSDKNotifyFacade {
@@ -119,7 +126,10 @@ abstract class Web3InboxSDKNotifyFacade {
     Event observing.
     Note: All observers return a method to stop observing.
   */
-  public abstract observe("notify_subscription", Observer<{id: number, response:{error?: Reason, subscription?: NotifySubscription }>): () => void;
+  public abstract observe("notify_subscription", Observer<{id: number, response:{error?: Reason, subscription?: NotifySubscription }}>): () => void;
+
+  // subscribe to updates from sync stores
+  public abstract observe("sync_update", Observer<{ store: string, update: StoreUpdate }>): () => void;
 }
 
 abstract class Web3InboxSDK {

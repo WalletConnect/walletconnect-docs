@@ -4,6 +4,8 @@ import Container from '../components/Container';
 
 In this repository, we document and discuss features that are currently under development and experimentation. All content is highly subjected to change and in constant development, so feel free to edit, propose, discuss, comment, rant, etc. If you want to start a technical discussion, just open a PR or an issue.
 
+## Clients
+
 <Container
   items={[
     {
@@ -30,7 +32,14 @@ In this repository, we document and discuss features that are currently under de
       name: "Core API",
       description: "Core API consolidates several core modules that are shared between all other high-level APIs.",
       url: `/2.0/specs/clients/core`
-    },
+    }
+  ]}
+/>
+
+## Servers
+
+<Container
+  items={[
     {
       name: "Relay Server",
       description: "Relay server routes messages between clients using publish-subscribe pattern with topic-based routing.",
@@ -63,4 +72,3 @@ In this repository, we document and discuss features that are currently under de
     }
   ]}
 />
-

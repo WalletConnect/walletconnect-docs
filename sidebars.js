@@ -15,21 +15,46 @@ module.exports = {
       label: 'Introduction',
       className: 'menu_outer_list',
       collapsible: false,
-      items: ['readme']
+      items: [
+        'readme',
+        {
+          type: 'category',
+          label: 'Migration from v1.x',
+          items: [
+            {
+              type: 'doc',
+              id: 'advanced/migration-from-v1.x/overview',
+              label: 'Overview'
+            },
+            {
+              type: 'category',
+              label: 'Dapps',
+              items: [
+                'advanced/migration-from-v1.x/dapps/dapps',
+                'advanced/migration-from-v1.x/dapps/dapp-checklist'
+              ]
+            },
+            {
+              type: 'category',
+              label: 'Wallets',
+              items: [
+                'advanced/migration-from-v1.x/wallets/wallets',
+                'advanced/migration-from-v1.x/wallets/wallet-checklist'
+              ]
+            },
+            'advanced/migration-from-v1.x/what-changed-from-v1.0',
+            'advanced/migration-from-v1.x/migration-faq',
+            'advanced/migration-from-v1.x/explorer-submission'
+          ]
+        }
+      ]
     },
     {
       type: 'category',
       label: 'SDKs',
       collapsible: false,
       className: 'menu_outer_list',
-      items: [
-        {
-          type: 'link',
-          label: 'Web3Modal',
-          href: '/2.0/web3modal/about'
-        },
-        'web3wallet/about'
-      ]
+      items: ['web3modal/about', 'web3wallet/about', 'web3inbox/about']
     },
     {
       type: 'category',
@@ -60,7 +85,11 @@ module.exports = {
             {
               type: 'category',
               label: 'Polkadot',
-              items: ['web3modal/polkadot/dapp-integration-guide', 'web3wallet/polkadot/wallet-integration-guide']
+              items: [
+                'web3modal/polkadot/dapp-integration-guide',
+                'web3wallet/polkadot/wallet-integration-guide',
+                'web3wallet/polkadot/namespaces-guide'
+              ]
             }
           ]
         },
@@ -73,17 +102,6 @@ module.exports = {
       collapsible: false,
       className: 'menu_outer_list',
       items: [
-        {
-          type: 'category',
-          label: 'Migration from v1.x',
-          items: [
-            'advanced/migration-from-v1.x/overview',
-            'advanced/migration-from-v1.x/dapps',
-            'advanced/migration-from-v1.x/wallets',
-            'advanced/migration-from-v1.x/what-changed-from-v1.0'
-          ]
-        },
-        'advanced/faq',
         'advanced/glossary',
         {
           type: 'category',
@@ -95,6 +113,7 @@ module.exports = {
             'advanced/rpc-reference/solana-rpc',
             'advanced/rpc-reference/stellar-rpc',
             'advanced/rpc-reference/tezos-rpc',
+            'advanced/rpc-reference/starknet-rpc',
             'advanced/rpc-reference/near-rpc',
             'advanced/rpc-reference/xrpl-rpc'
           ]
@@ -245,7 +264,8 @@ module.exports = {
               ]
             }
           ]
-        }
+        },
+        'advanced/faq'
       ]
     }
   ],
@@ -258,6 +278,13 @@ module.exports = {
     },
     {
       type: 'category',
+      label: 'Introduction',
+      collapsible: false,
+      className: 'menu_outer_list',
+      items: ['web/about-web3modal', 'web/about-web3wallet']
+    },
+    {
+      type: 'category',
       label: 'SDKs',
       className: 'menu_outer_list',
       collapsible: false,
@@ -265,84 +292,46 @@ module.exports = {
         {
           type: 'category',
           label: 'Web3Modal',
-          collapsible: true,
-          collapsed: true,
           items: [
-            'web3modal/about',
             {
               type: 'category',
-              label: 'Getting Started',
-              collapsed: true,
-              collapsible: true,
+              label: 'React',
               items: [
+                'web/web3modal/react/wagmi/installation',
+                'web/web3modal/react/wagmi/components',
+                'web/web3modal/react/wagmi/hooks',
+                'web/web3modal/react/wagmi/options',
+                'web/web3modal/react/wagmi/theming',
+                'web/web3modal/react/wagmi/custom-wallets',
+                'web/web3modal/react/wagmi/custom-chains',
                 {
-                  type: 'category',
-                  label: 'React',
-                  collapsed: true,
-                  collapsible: true,
-                  items: [
-                    'web3modal/react/installation',
-                    'web3modal/react/hooks',
-                    'web3modal/react/components'
-                  ]
-                },
-                {
-                  type: 'category',
-                  label: 'HTML',
-                  collapsed: true,
-                  collapsible: true,
-                  items: [
-                    'web3modal/html-js/installation',
-                    'web3modal/html-js/actions',
-                    'web3modal/html-js/components'
-                  ]
+                  type: 'link',
+                  label: 'Example',
+                  href: 'https://github.com/WalletConnect/web3modal-examples/tree/main/web3modal-wagmi-react'
                 }
               ]
             },
             {
               type: 'category',
-              label: 'Customization',
-              collapsed: true,
-              collapsible: true,
-              items: ['web3modal/options', 'web3modal/theming']
-            },
-            {
-              type: 'category',
-              label: 'Advanced',
-              collapsed: true,
-              collapsible: true,
+              label: 'HTML',
               items: [
-                'web3modal/advanced/wallets',
-                'web3modal/advanced/chains',
-                'web3modal/advanced/providers',
-                'web3modal/advanced/mobile-linking',
+                'web/web3modal/html/wagmi/installation',
+                'web/web3modal/html/wagmi/components',
+                'web/web3modal/html/wagmi/actions',
+                'web/web3modal/html/wagmi/options',
+                'web/web3modal/html/wagmi/theming',
+                'web/web3modal/html/wagmi/custom-wallets',
+                'web/web3modal/html/wagmi/custom-chains',
                 {
-                  type: 'category',
-                  label: 'Standalone Sign',
-                  collapsed: true,
-                  collapsible: true,
-                  items: [
-                    'web3modal/advanced/standalone/sign/about',
-                    'web3modal/advanced/standalone/sign/installation',
-                    'web3modal/advanced/standalone/sign/actions'
-                  ]
-                },
-                {
-                  type: 'category',
-                  label: 'Standalone Auth',
-                  collapsed: true,
-                  collapsible: true,
-                  items: [
-                    'web3modal/advanced/standalone/auth/about',
-                    'web3modal/advanced/standalone/auth/installation',
-                    'web3modal/advanced/standalone/sign/actions'
-                  ]
+                  type: 'link',
+                  label: 'Example',
+                  href: 'https://github.com/WalletConnect/web3modal-examples/tree/main/web3modal-wagmi-html'
                 }
               ]
-            },
-            'web3modal/faq'
+            }
           ]
         },
+
         {
           type: 'category',
           label: 'Web3Wallet',
@@ -353,7 +342,8 @@ module.exports = {
             'web/web3wallet/wallet-usage',
             'web/web3wallet/upgrade-guide'
           ]
-        }
+        },
+
       ]
     },
     {
@@ -385,22 +375,14 @@ module.exports = {
               label: 'Auth',
               collapsible: true,
               collapsed: true,
-              items: [
-                'web/auth/installation',
-                'web/auth/dapp-usage',
-                'web/auth/wallet-usage'
-              ]
+              items: ['web/auth/installation', 'web/auth/dapp-usage', 'web/auth/wallet-usage']
             },
             {
               type: 'category',
               label: 'Push',
               collapsible: true,
               collapsed: true,
-              items: [
-                'web/push/installation',
-                'web/push/dapp-usage',
-                'web/push/wallet-usage'
-              ]
+              items: ['web/push/installation', 'web/push/dapp-usage', 'web/push/wallet-usage']
             },
             {
               type: 'category',
@@ -424,6 +406,97 @@ module.exports = {
           collapsible: true,
           collapsed: true,
           items: ['web/providers/ethereum', 'web/providers/universal']
+        },
+        // WalletConnectModal
+        {
+          type: 'category',
+          label: 'WalletConnectModal',
+          items: [
+            {
+              type: 'category',
+              label: 'Just Modal',
+              items: [
+                'web/walletConnectModal/modal/installation',
+                'web/walletConnectModal/modal/options',
+                'web/walletConnectModal/modal/actions',
+                'web/walletConnectModal/modal/theming'
+              ]
+            },
+            {
+              type: 'category',
+              label: 'With Sign API',
+              items: [
+                {
+                  type: 'category',
+                  label: 'HTML',
+                  items: [
+                    'web/walletConnectModal/sign/html/installation',
+                    'web/walletConnectModal/sign/html/options',
+                    'web/walletConnectModal/sign/html/actions',
+                    'web/walletConnectModal/sign/html/theming',
+                    {
+                      type: 'link',
+                      label: 'Example',
+                      href: 'https://github.com/WalletConnect/web3modal-examples/tree/main/walletconnect-modal-sign-html'
+                    }
+                  ]
+                },
+                {
+                  type: 'category',
+                  label: 'React',
+                  items: [
+                    'web/walletConnectModal/sign/react/installation',
+                    'web/walletConnectModal/sign/react/components',
+                    'web/walletConnectModal/sign/react/hooks',
+                    'web/walletConnectModal/sign/react/options',
+                    'web/walletConnectModal/sign/react/theming',
+                    {
+                      type: 'link',
+                      label: 'Example',
+                      href: 'https://github.com/WalletConnect/web3modal-examples/tree/main/walletconnect-modal-sign-react'
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              type: 'category',
+              label: 'With Auth API',
+              items: [
+                {
+                  type: 'category',
+                  label: 'HTML',
+                  items: [
+                    'web/walletConnectModal/auth/html/installation',
+                    'web/walletConnectModal/auth/html/options',
+                    'web/walletConnectModal/auth/html/actions',
+                    'web/walletConnectModal/auth/html/theming',
+                    {
+                      type: 'link',
+                      label: 'Example',
+                      href: 'https://github.com/WalletConnect/web3modal-examples/tree/main/walletconnect-modal-auth-html'
+                    }
+                  ]
+                },
+                {
+                  type: 'category',
+                  label: 'React',
+                  items: [
+                    'web/walletConnectModal/auth/react/installation',
+                    'web/walletConnectModal/auth/react/components',
+                    'web/walletConnectModal/auth/react/hooks',
+                    'web/walletConnectModal/auth/react/options',
+                    'web/walletConnectModal/auth/react/theming',
+                    {
+                      type: 'link',
+                      label: 'Example',
+                      href: 'https://github.com/WalletConnect/web3modal-examples/tree/main/walletconnect-modal-auth-react'
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
         }
       ]
     },
@@ -432,12 +505,7 @@ module.exports = {
       label: 'Guides',
       className: 'menu_outer_list',
       collapsible: false,
-      items: [
-        'web/guides/examples-and-resources',
-        'web/guides/nodejs',
-        'web/guides/shared-core',
-        'web/guides/typescript'
-      ]
+      items: ['web/guides/examples-and-resources', 'web/guides/nodejs', 'web/guides/shared-core']
     }
   ],
   android: [
@@ -470,7 +538,14 @@ module.exports = {
           collapsible: true,
           collapsed: true,
           items: ['android/web3inbox/installation', 'android/web3inbox/usage']
-        }
+        },
+        {
+          type: 'category',
+          label: 'WalletConnectModal',
+          collapsible: true,
+          collapsed: true,
+          items: ['android/walletconnectmodal/installation', 'android/walletconnectmodal/usage']
+        },
       ]
     },
     {
@@ -484,7 +559,11 @@ module.exports = {
           label: 'Sign',
           collapsible: true,
           collapsed: true,
-          items: ['android/sign/installation', 'android/sign/dapp-usage', 'android/sign/wallet-usage']
+          items: [
+            'android/sign/installation',
+            'android/sign/dapp-usage',
+            'android/sign/wallet-usage'
+          ]
         },
         {
           type: 'category',
@@ -572,6 +651,16 @@ module.exports = {
             'ios/web3wallet/installation',
             'ios/web3wallet/wallet-usage',
             'ios/web3wallet/upgrade-guide'
+          ]
+        },
+        {
+          type: 'category',
+          label: 'WalletConnectModal',
+          collapsible: true,
+          collapsed: true,
+          items: [
+            'ios/walletconnectmodal/installation',
+            'ios/walletconnectmodal/usage',
           ]
         },
         {
@@ -679,9 +768,7 @@ module.exports = {
       label: 'Introduction',
       className: 'menu_outer_list',
       collapsible: false,
-      items: [
-        'reactnative/overview',
-      ]
+      items: ['reactnative/overview']
     },
     {
       type: 'category',
@@ -698,10 +785,15 @@ module.exports = {
         },
         {
           type: 'category',
-          label: 'Web3Modal',
+          label: 'WalletConnectModal',
           collapsible: true,
           collapsed: true,
-          items: ['reactnative/web3modal/installation', 'reactnative/web3modal/dapp-usage', 'reactnative/web3modal/options']
+          items: [
+            'reactnative/walletconnectmodal/about',
+            'reactnative/walletconnectmodal/installation',
+            'reactnative/walletconnectmodal/dapp-usage',
+            'reactnative/walletconnectmodal/options'
+          ]
         }
       ]
     },
@@ -728,10 +820,17 @@ module.exports = {
       items: [
         {
           type: 'category',
+          label: 'WalletConnect Modal',
+          collapsible: true,
+          collapsed: true,
+          items: ['flutter/walletconnectmodal/about', 'flutter/walletconnectmodal/installation', 'flutter/walletconnectmodal/dapp-usage']
+        },
+        {
+          type: 'category',
           label: 'Web3Wallet',
           collapsible: true,
           collapsed: true,
-          items: ['flutter/installation', 'flutter/wallets/wallet-usage']
+          items: ['flutter/web3wallet/installation', 'flutter/web3wallet/wallet-usage']
         }
       ]
     },

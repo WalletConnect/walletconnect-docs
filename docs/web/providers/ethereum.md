@@ -1,11 +1,11 @@
 # Ethereum Provider
 
-Ethereum Provider for WalletConnect v2
+[EIP-1993](https://eips.ethereum.org/EIPS/eip-1193) compliant Provider for WalletConnect v2. You can use this on it's own or pass down to libraries like ethers, viem, web3js and others.
 
 ## Installation
 
 ```bash npm2yarn
-npm install @walletconnect/ethereum-provider @web3modal/standalone
+npm install @walletconnect/ethereum-provider @walletconnect/modal
 ```
 
 ## Initialization
@@ -16,31 +16,27 @@ import { EthereumProvider } from '@walletconnect/ethereum-provider'
 const provider = await EthereumProvider.init({
   projectId, // REQUIRED your projectId
   chains, // REQUIRED chain ids
-  showQrModal, // REQUIRED set to "true" to use @web3modal/standalone,
-  methods, // OPTIONAL ethereum methods
-  events, // OPTIONAL ethereum events
+  optionalChains, // OPTIONAL chains
+  showQrModal, // REQUIRED set to "true" to use @walletconnect/modal
+  methods, // REQUIRED ethereum methods
+  optionalMethods, // OPTIONAL ethereum methods
+  events, // REQUIRED ethereum events
+  optionalEvents, // OPTIONAL ethereum events
   rpcMap, // OPTIONAL rpc urls for each chain
   metadata, // OPTIONAL metadata of your app
   qrModalOptions // OPTIONAL - `undefined` by default, see https://docs.walletconnect.com/2.0/web3modal/options
 })
 ```
 
-## Display Web3Modal with QR code / Handle connection URI
+## Use with WalletConnectModal
 
-```typescript
-// Web3Modal is disabled by default, enable it during init() to display a QR code modal
-await provider.connect({
-  chains, // OPTIONAL chain ids
-  rpcMap, // OPTIONAL rpc urls
-  pairingTopic // OPTIONAL pairing topic
-})
-// or
-await provider.enable()
-```
+When `showQrModal` is enabled and `@walletconnect/modal` package is installed, ethereum provider will automatically show and hide [WalletConnectModal](../walletConnectModal/modal/installation.mdx). You can also pass all relevant modal options under `qrModalOptions`. See [WalletConnectModal options](../walletConnectModal/modal/options.mdx) for all available fields.
 
-```typescript
-// If you are not using Web3Modal,
-// you can subscribe to the `display_uri` event and handle the URI yourself.
+## Use without WalletConnectModal
+
+You can subscribe to the `display_uri` event and handle the URI yourself.
+
+```ts
 provider.on('display_uri', (uri: string) => {
   // ... custom logic
 })
@@ -77,17 +73,47 @@ provider.on('display_uri', handler)
 provider.on('disconnect', handler)
 ```
 
-## Supported Web3Modal options (qrModalOptions)
+## Required and Optional Chains
 
-- [themeMode](https://docs.walletconnect.com/2.0/web3modal/options#thememode-optional)
-- [themeVariables](https://docs.walletconnect.com/2.0/web3modal/options#themevariables-optional)
-- [chainImages](https://docs.walletconnect.com/2.0/web3modal/options#chainimages-optional)
-- [tokenImages](https://docs.walletconnect.com/2.0/web3modal/options#tokenimages-optional)
-- [walletImages](https://docs.walletconnect.com/2.0/web3modal/options#walletimages-optional)
-- [desktopWallets](https://docs.walletconnect.com/2.0/web3modal/options#desktopwallets-optional)
-- [mobileWallets](https://docs.walletconnect.com/2.0/web3modal/options#mobilewallets-optional)
-- [enableExplorer](https://docs.walletconnect.com/2.0/web3modal/options#enableexplorer-optional)
-- [explorerRecommendedWalletIds](https://docs.walletconnect.com/2.0/web3modal/options#explorerrecommendedwalletids-optional)
-- [explorerExcludedWalletIds](https://docs.walletconnect.com/2.0/web3modal/options#explorerexcludedwalletids-optional)
-- [privacyPolicyUrl](https://docs.walletconnect.com/2.0/web3modal/options#privacypolicyurl-optional)
-- [termsOfServiceUrl](https://docs.walletconnect.com/2.0/web3modal/options#privacypolicyurl-optional)
+With Ethereum Provider, the package passed the required chains through `chains` and if your dapp wants to provide other optionalNamespaces this is passed through `optionalChains`.
+
+Example code can be found [here](https://github.com/wagmi-dev/references/blob/main/packages/connectors/src/walletConnect.ts#L134) and further documentation on namespaces can be found in this [spec](https://docs.walletconnect.com/2.0/specs/clients/sign/namespaces).
+
+The example below specifies Ethereum Mainnet (chainId `1`) as a required chain via `chains`, and Ethereum Goerli (chainId `5`) as an optional chain via `optionalChains`.
+
+```typescript
+await EthereumProvider.init({
+  projectId: process.env.TEST_PROJECT_ID,
+  chains: [1], // chains added to required namespaces
+  optionalChains: [5] // chains added to optional namespaces
+  ...
+})
+```
+
+Another example of those that want to pass several optional chains:
+
+```typescript
+await EthereumProvider.init({
+  projectId: process.env.TEST_PROJECT_ID,
+  chains: [1], // chains added to required namespaces
+  optionalChains: [5, 56, 137, 10, 100] // chains added to optional namespaces
+  ...
+})
+```
+
+## Required and Optional Methods
+
+By default, `EthereumProvider` specifies `eth_sendTransaction` and `personal_sign` as required methods. For those that want to request additional methods for the session, we recommend passing these through `optionalMethods`.
+The default behaviour for the required methods can also be overridden by specifying the `methods` option directly.
+
+For more information of the source code, please refer to [here](https://github.com/WalletConnect/walletconnect-monorepo/blob/v2.0/providers/ethereum-provider/src/EthereumProvider.ts#L167). This optional passing is them consumed in our Sign Client [here.](https://github.com/WalletConnect/walletconnect-monorepo/blob/v2.0/providers/ethereum-provider/src/EthereumProvider.ts#L277)
+
+```typescript
+await EthereumProvider.init({
+  projectId: process.env.TEST_PROJECT_ID,
+  chains: [1],
+  optionalChains,
+  optionalMethods: ['eth_signTypedData', 'eth_signTypedData_v4', 'eth_sign'],
+  ...
+})
+```

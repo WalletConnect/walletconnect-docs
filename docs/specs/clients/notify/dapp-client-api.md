@@ -1,5 +1,11 @@
 # Dapp Client API
 
+:::caution
+
+Push API is under development. Want early access? Join our [Pilot Program](https://walletconnect.com/partners)
+
+:::
+
 ```typescript
 abstract class DappClient {
   // ---------- Methods ----------------------------------------------- //
@@ -10,14 +16,8 @@ abstract class DappClient {
   // propose notify subscription
   public abstract propose(params: { account: string, scope: string[], pairingTopic: string }): Promise<{ id }>;
 
-  // send notify notification message
-  public abstract notify(params: { topic: string, message: NotifyMessage }): Promise<void>
-
   // query all active subscriptions
   public abstract getActiveSubscriptions(): Promise<Record<string, NotifySubscription>>;
-
-  // delete active subscription
-  public abstract deleteSubscription(params: { topic: string }): Promise<void>;
 
   // ---------- Events ----------------------------------------------- //
 

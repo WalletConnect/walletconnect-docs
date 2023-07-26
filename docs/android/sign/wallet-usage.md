@@ -11,7 +11,7 @@ val connectionType = ConnectionType.AUTOMATIC or ConnectionType.MANUAL
 val appMetaData = Core.Model.AppMetaData(
     name = "Wallet Name",
     description = "Wallet Description",
-    url = "Wallet Url",
+    url = "Wallet URL",
     icons = /*list of icon url strings*/,
     redirect = "kotlin-wallet-wc:/request" // Custom Redirect URI
 )
@@ -34,11 +34,11 @@ To initialize the Sign client, create a `Sign.Params.Init` object in the Android
 
 ```kotlin
 val walletDelegate = object : SignClient.WalletDelegate {
-    override fun onSessionProposal(sessionProposal: Sign.Model.SessionProposal) {
+    override fun onSessionProposal(sessionProposal: Sign.Model.SessionProposal, verifyContext: Sign.Model.VerifyContext) {
         // Triggered when wallet receives the session proposal sent by a Dapp
     }
 
-    override fun onSessionRequest(sessionRequest: Sign.Model.SessionRequest) {
+    override fun onSessionRequest(sessionRequest: Sign.Model.SessionRequest, verifyContext: Sign.Model.VerifyContext) {
         // Triggered when a Dapp sends SessionRequest to sign a transaction or a message
     }
 
@@ -63,6 +63,21 @@ val walletDelegate = object : SignClient.WalletDelegate {
     }
 }
 SignClient.setWalletDelegate(walletDelegate)
+```
+
+`Sign.Model.VerifyContext` provides a domain verification information about SessionProposal and SessionRequest. It consists of origin of a Dapp from where the request has been sent, validation Enum that says whether origin is VALID, INVALID or UNKNOWN and verify url server. 
+
+```kotlin
+data class VerifyContext(
+    val id: Long,
+    val origin: String,
+    val validation: Model.Validation,
+    val verifyUrl: String
+)
+
+enum class Validation {
+    VALID, INVALID, UNKNOWN
+}
 ```
 
 The SignClient needs a `SignClient.WalletDelegate` passed to it for it to be able to expose asynchronous updates sent from the Dapp.
@@ -154,13 +169,13 @@ request ID along with the rejection data to the `SignClient.respond` function.
 #
 ### **Session Update**
 
-NOTE: addresses provided in `accounts` array should follow [CAPI10](https://github.com/ChainAgnostic/CAIPs/blob/master/CAIPs/caip-10.md)
-semantics.
+NOTE: addresses provided in `accounts` array should follow [CAIP10](https://github.com/ChainAgnostic/CAIPs/blob/master/CAIPs/caip-10.md)
+semantics and syntax.
 
 ```kotlin
 val sessionTopic: String = /*Topic of Session*/
 val namespace: String = /*Namespace identifier, see for reference: https://github.com/ChainAgnostic/CAIPs/blob/master/CAIPs/caip-2.md#syntax*/
-val accounts: List<String> = /*List of accounts on chains*/
+val accounts: List<String> = /*List of accounts on authorized chains*/
 val methods: List<String> = /*List of methods that wallet approves*/
 val events: List<String> = /*List of events that wallet approves*/
 val namespaces: Map<String, Sign.Model.Namespaces.Session> = mapOf(namespace, Sign.Model.Namespaces.Session(accounts, methods, events))
@@ -169,8 +184,7 @@ val updateParams = Sign.Params.Update(sessionTopic, namespaces)
 SignClient.update(updateParams) { error -> /*callback for error while sending session update*/ }
 ```
 
-To update a session with namespaces, submit a `Sing.Params.Update` object with the session's topic and namespaces to update session with
-to `SignClient.Update`.
+To update a session with namespaces, use `SignClient.Update` to submit a `Sign.Params.Update` object with the session's topic and updated namespace objects (i.e. adding requesting new methods or events, new accounts on authorized chains, or authorizing new chainIds within a multi-chain namespace).
 
 
 #

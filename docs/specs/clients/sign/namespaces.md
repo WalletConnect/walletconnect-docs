@@ -20,26 +20,35 @@ The proposal namespace is what the dapp sends to the wallet and contains the cha
 
 ```json
 {
-	"requiredNamespaces": {
-		"eip155": {
-			"chains": ["eip155:1", "eip155:137"],
-			"methods": ["eth_sendTransaction", "eth_signTransaction", "eth_sign", "get_balance"],
-			"events": ["accountsChanged", "chainChanged"]
-		},
-		"eip155:10": {
-			"methods": ["get_balance"],
-			"events": ["accountsChanged", "chainChanged"]
-		},
-		"cosmos": {
-			...
-		}
-	},
-	"optionalNamespaces": {
-		"eip155:42161": {
-			"methods": ["eth_sendTransaction", "eth_signTransaction", "get_balance", "personal_sign"],
-			"events": ["accountsChanged", "chainChanged"]
-		}
-	}
+  "requiredNamespaces": {
+    "eip155": {
+      "methods": [
+        "eth_sendTransaction",
+        "eth_signTransaction",
+        "eth_sign",
+        "personal_sign",
+        "eth_signTypedData"
+      ],
+      "chains": ["eip155:1", "eip155:10"],
+      "events": ["chainChanged", "accountsChanged"]
+    },
+    "solana": {
+      "methods": ["solana_signTransaction", "solana_signMessage"],
+      "chains": ["solana:4sGjMW1sUnHzSxGspuhpqLDx6wiyjNtZ"],
+      "events": []
+    },
+    "polkadot": {
+      "methods": ["polkadot_signTransaction", "polkadot_signMessage"],
+      "chains": ["polkadot:91b171bb158e2d3848fa23a9f1c25182"],
+      "events": []
+    }
+  },
+  "optionalNamespaces": {
+    "eip155:42161": {
+      "methods": ["eth_sendTransaction", "eth_signTransaction", "personal_sign"],
+      "events": ["accountsChanged", "chainChanged"]
+    }
+  }
 }
 ```
 
@@ -55,25 +64,28 @@ If the wallet (or the user) does NOT approve the session, then it is rejected. O
 
 ```json
 {
-  "sessionNamespaces": {
+  "namespaces": {
     "eip155": {
       "chains": ["eip155:1", "eip155:137"],
-      "methods": ["eth_sendTransaction", "eth_signTransaction", "get_balance", "eth_sign"]
+      "methods": ["eth_sendTransaction", "eth_signTransaction", "personal_sign"]
       "events": ["accountsChanged", "chainChanged"],
       "accounts": ["eip155:1:0xab16a96d359ec26a11e2c2b3d8f8b8942d5bfcdb", "eip155:137:0xab16a96d359ec26a11e2c2b3d8f8b8942d5bfcdb"]
     },
-    "eip155:10": {
-      "methods": ["get_balance"],
-      "events": ["accountsChanged", "chainChanged"],
-      "accounts:" []
-    },
-    "eip155:42161": {
-      "methods": ["personal_sign"],
-      "events": ["accountsChanged", "chainChanged"],
-      "accounts":["eip155:42161:0x0910e12C68d02B561a34569E1367c9AAb42bd810"],
     "cosmos": {
-      ...
-      }
+      "accounts": [
+        "cosmos:cosmoshub-4:cosmos1eeyudtn5p30jek85tq0cyh7k0jnn2z4t84y58y",
+        "cosmos:cosmoshub-4:cosmos1fg2nemunucn496fewakqfe0mllcqfulrmjnj77"
+      ],
+      "methods": ["cosmos_signDirect", "cosmos_signAmino"],
+      "events": []
+    },
+    "polkadot": {
+      "accounts": [
+        "polkadot:91b171bb158e2d3848fa23a9f1c25182:8PSDc8otpZMGviGVSwzCzBCLPi5WuT8K9phaUWbfUtSYet3",
+        "polkadot:91b171bb158e2d3848fa23a9f1c25182:A1MbgM4mdFBH4LiTPZWmtVZ3zBGUJApN24FoSK32ZACPGP6"
+      ],
+      "methods": ["polkadot_signTransaction", "polkadot_signMessage"],
+      "events": []
     }
   }
 }
@@ -86,7 +98,7 @@ The Dapp then validates if the received Session Namespaces comply with the reque
 The following is validated for the WalletConnect library:
 
 - validates structure is correct
-- validates sessionNamespaces match at least all requiredNamespaces
+- validates namespaces match at least all requiredNamespaces
 - validates accounts are included at least one per chain in the requiredNamespaces
 
 ✅ Session namespaces **MUST** be included in the session approval response
@@ -98,8 +110,6 @@ The following is validated for the WalletConnect library:
 ✅ All, none or some of the optional namespaces **MUST** be satisfied by a wallet
 
 ✅ If both required and optional namespaces are empty in the session proposal object it means that there're no requirements regarding chains, events or methods
-
-✅ Each object **MUST** contain the accounts[CAIP-10](https://chainagnostic.org/CAIPs/caip-10) array which **MIGHT** be empty, those accounts are authorized for a session and **MUST** be valid in the namespace or chain they are in
 
 ### Rejecting a Session Response
 
@@ -123,7 +133,7 @@ Requested Proposal Namespaces:
 {
   "requiredNamespaces": {
     "eip155:10": {
-      "methods": ["get_balance"],
+      "methods": ["personal_sign"],
       "events": ["accountsChanged", "chainChanged"]
     }
   }
@@ -170,16 +180,11 @@ Requested Proposal Namespaces:
   "requiredNamespaces": {
     "eip155": {
       "chains": ["eip155:1", "eip155:137"],
-      "methods": [
-        "eth_sendTransaction",
-        "eth_signTransaction",
-        "eth_sign",
-        "get_balance"
-      ],
+      "methods": ["eth_sendTransaction", "eth_signTransaction", "eth_sign"],
       "events": ["accountsChanged", "chainChanged"]
     },
     "eip155:10": {
-      "methods": ["get_balance"],
+      "methods": ["personal_sign"],
       "events": ["accountsChanged", "chainChanged"]
     }
   }
@@ -252,7 +257,7 @@ Requested Proposal Namespaces:
   },
   "optionalNamespaces": {
     "eip155:42161": {
-      "methods": ["get_balance", "personal_sign"],
+      "methods": ["personal_sign"],
       "events": ["accountsChanged", "chainChanged"]
     }
   }
@@ -354,9 +359,7 @@ For example if wallet supports eip155:1, eip155:137, cosmos:cosmoshub-1 chains, 
       "events": []
     },
     "cosmos": {
-      "accounts": [
-        "cosmos:cosmoshub-1:cosmos1pn5a6s4k063608cnt2zue208965lc0m06u9clj"
-      ],
+      "accounts": ["cosmos:cosmoshub-1:cosmos1pn5a6s4k063608cnt2zue208965lc0m06u9clj"],
       "methods": [],
       "events": []
     }
@@ -390,7 +393,7 @@ Received Session Namespaces:
 
 ```json
 {
-  "sessionNamespaces": {
+  "namespaces": {
     "cosmos": {
       "accounts": [],
       "methods": ["cosmos_signDirect"],
@@ -429,7 +432,7 @@ Received Session Namespaces:
 
 ```json
 {
-  "sessionNamespaces": {
+  "namespaces": {
     "eip155": {
       "accounts": ["eip155:0xab16a96d359ec26a11e2c2b3d8f8b8942d5bfcdb"],
       "methods": ["eth_sign"],
@@ -469,7 +472,7 @@ Received Session Namespaces:
 
 ```json
 {
-  "sessionNamespaces": {
+  "namespaces": {
     "eip155": {
       "accounts": ["eip155:1:0xab16a96d359ec26a11e2c2b3d8f8b8942d5bfcdb"],
       "methods": [],
@@ -508,7 +511,7 @@ Received Session Namespaces:
 
 ```json
 {
-  "sessionNamespaces": {
+  "namespaces": {
     "eip155": {
       "accounts": ["eip155:1:0xab16a96d359ec26a11e2c2b3d8f8b8942d5bfcdb"],
       "methods": ["eth_sign"],
@@ -547,7 +550,7 @@ Received Session Namespaces:
 
 ```json
 {
-  "sessionNamespaces": {
+  "namespaces": {
     "eip155": {
       "accounts": [
         "eip155:1:0xab16a96d359ec26a11e2c2b3d8f8b8942d5bfcdb",
@@ -587,7 +590,7 @@ Received Session Namespaces:
 
 ```json
 {
-  "sessionNamespaces": {
+  "namespaces": {
     "eip155": {
       "accounts": ["eip155:1:0xab16a96d359ec26a11e2c2b3d8f8b8942d5bfcdb"],
       "methods": ["eth_sign", "personalSign"],
@@ -621,7 +624,7 @@ Received Session Namespaces:
 
 ```json
 {
-  "sessionNamespaces": {
+  "namespaces": {
     "eip155": {
       "accounts": [
         "eip155:1:0xab16a96d359ec26a11e2c2b3d8f8b8942d5bfcdb",
@@ -663,7 +666,7 @@ Received Session Namespaces:
 
 ```json
 {
-  "sessionNamespaces": {
+  "namespaces": {
     "eip155": {
       "accounts": [
         "eip155:1:0xab16a96d359ec26a11e2c2b3d8f8b8942d5bfcdb",
@@ -705,7 +708,7 @@ Received Session Namespaces:
 
 ```json
 {
-  "sessionNamespaces": {
+  "namespaces": {
     "eip155": {
       "accounts": [
         "eip155:1:0xab16a96d359ec26a11e2c2b3d8f8b8942d5bfcdb",
@@ -747,7 +750,7 @@ Received Session Namespaces:
 
 ```json
 {
-  "sessionNamespaces": {
+  "namespaces": {
     "eip155": {
       "accounts": ["eip155:1:0xab16a96d359ec26a11e2c2b3d8f8b8942d5bfcdb"],
       "methods": [],
@@ -775,23 +778,13 @@ Requested Proposal Namespaces:
   "requiredNamespaces": {
     "eip155": {
       "chains": ["eip155:1", "eip155:137"],
-      "methods": [
-        "eth_sendTransaction",
-        "eth_signTransaction",
-        "eth_sign",
-        "get_balance"
-      ],
+      "methods": ["eth_sendTransaction", "eth_signTransaction", "eth_sign"],
       "events": ["accountsChanged", "chainChanged"]
     }
   },
   "optionalNamespaces": {
     "eip155:42161": {
-      "methods": [
-        "eth_sendTransaction",
-        "eth_signTransaction",
-        "get_balance",
-        "personal_sign"
-      ],
+      "methods": ["eth_sendTransaction", "eth_signTransaction", "personal_sign"],
       "events": ["accountsChanged", "chainChanged"]
     }
   }
@@ -802,15 +795,10 @@ Received Session Namespaces:
 
 ```json
 {
-  "sessionNamespaces": {
+  "namespaces": {
     "eip155": {
       "chains": ["eip155:1", "eip155:137"],
-      "methods": [
-        "eth_sendTransaction",
-        "eth_signTransaction",
-        "get_balance",
-        "eth_sign"
-      ],
+      "methods": ["eth_sendTransaction", "eth_signTransaction", "eth_sign"],
       "events": ["accountsChanged", "chainChanged"],
       "accounts": [
         "eip155:1:0xab16a96d359ec26a11e2c2b3d8f8b8942d5bfcdb",
@@ -828,6 +816,6 @@ Received Session Namespaces:
 
 Is valid?: Yes
 
-Note: `eth_sendTransaction`, `eth_signTransaction`, and `get_balance` method is missing in the session namespace
+Note: `eth_sendTransaction` and `eth_signTransaction` method are missing in the session namespace
 
 ---

@@ -6,68 +6,79 @@
 Its public API and associated documentation may still see breaking changes.
 :::
 
-## Prerequisites
+## Enabling Push Notifications for your Dapp
 
+In order to enable push notifications for your dapp, you will need to:
+
+1. Sign up to [WalletConnect Cloud](https://cloud.walletconnect.com) and create a project. This will also provide you with a Project ID, which is required for all WalletConnect SDKs.
+2. On your project's page, navigate to the `Explorer` tab and fill out the required fields, including the homepage URL of your dapp.
+3. Click `Save` to validate and save your project's details.
+4. Next, navigate to the `Settings` tab.
+5. Under `Push SDK`, download both the `did.json` the `wc-push-config.json` files that have been preconfigured based on your dapp's homepage URL.
+6. Host both files in your dapp's `/.well-known` directory, so that they are accessible at `/.well-known/did.json` and `/.well-known/wc-push-config.json` respectively.
+
+## Usage
+
+:::info
 The **`PushDappClient` requires an existing pairing** in order to send a push subscription request to the wallet.
 This means that the `PushDappClient` should be used alongside the [Sign SDK](../sign/installation.md) or the
 [Auth SDK](../auth/installation.md), via the [Shared Core](../guides/shared-core.md) setup.
-
-## Usage
+:::
 
 **1. Initialize your WalletConnect Core, using [your Project ID](../../cloud/relay.md), and pass it to the SDK clients**
 
 ```javascript
-import { Core } from "@walletconnect/core";
-import SignClient from "@walletconnect/sign-client";
-import { DappClient as PushDappClient } from "@walletconnect/push-client";
+import { Core } from '@walletconnect/core'
+import SignClient from '@walletconnect/sign-client'
+import { DappClient as PushDappClient } from '@walletconnect/push-client'
 
 const core = new Core({
-  projectId: "<YOUR_PROJECT_ID>",
-});
+  projectId: '<YOUR_PROJECT_ID>'
+})
 
 // e.g. for SignClient. See the "Shared Core" guide linked above for details.
 const signClient = await SignClient.init({
   core,
   metadata: {
     /* ... */
-  },
-});
+  }
+})
 
 const pushDappClient = await PushDappClient.init({
   core,
   metadata: {
-    name: "My Push-Enabled Dapp",
-    description: "A dapp using WalletConnect PushClient",
-    url: "https://my-dapp.com",
-    icons: ["https://my-dapp.com/icons/logo.png"],
-  },
-});
+    name: 'My Push-Enabled Dapp',
+    description: 'A dapp using WalletConnect PushClient',
+    url: 'https://my-dapp.com',
+    icons: ['https://my-dapp.com/icons/logo.png']
+  }
+})
 ```
 
 **2. Add listener for the `push_response` event**
 
 ```javascript
-pushDappClient.on("push_response", (event) => {
+pushDappClient.on('push_response', event => {
   if (event.params.error) {
-    console.error("Error on `push_response`:", event.params.error);
+    console.error('Error on `push_response`:', event.params.error)
   } else {
-    console.log("Established PushSubscription:", event.params.subscription);
+    console.log('Established PushSubscription:', event.params.subscription)
   }
-});
+})
 ```
 
 **3. Propose a push subscription to the wallet**
 
 ```javascript
 // Resolve known pairings from the Core's Pairing API.
-const pairings = pushDappClient.core.pairing.getPairings();
+const pairings = pushDappClient.core.pairing.getPairings()
 // Use the latest pairing for this example.
-const latestPairing = pairings[pairings.length - 1];
+const latestPairing = pairings[pairings.length - 1]
 
-const id = await pushDappClient.request({
-  account: "eip155:1:0xafeb...", // Target account to request push notifications for.
-  pairingTopic: latestPairing.topic,
-});
+const id = await pushDappClient.propose({
+  account: 'eip155:1:0xafeb...', // Target account to request push notifications for.
+  pairingTopic: latestPairing.topic
+})
 
 // Next: The `push_response` event will be emitted once the wallet responds.
 ```
@@ -79,55 +90,35 @@ const id = await pushDappClient.request({
 
 :::
 
-### Sending Push Messages via Cast Server (REST)
+### Sending Push Messages via Notify Server (REST)
 
-In order to send a push notification via the Cast server, we can send a `POST` request to the `/notify` endpoint, with the following payload (here via `fetch`):
+In order to send a push notification via the WalletConnect Notify server, we can send a `POST` request to the `/notify` endpoint, with the following payload (here via `fetch`):
 
 ```javascript
-// Construct the payload, including the target `accounts`
-// that should receive the push notification.
 const notificationPayload = {
-  accounts: ["eip155:1:0xafeb..."],
+  // Target `accounts` that should receive the push notification.
+  accounts: ['eip155:1:0xafeb...'],
+  // The `type` of notification. Based on the notification types defined in your `/.well-known/wc-push-config.json`.
+  type: 'alerts',
+  // The notification body itself.
   notification: {
-    title: "Profile Activity",
+    title: 'Profile Activity',
     body: "There's been activity on your profile!",
-    icon: "https://my-dapp.com/icons/logo.png",
-    url: "https://my-dapp.com/profile",
-  },
-};
+    icon: 'https://my-dapp.com/icons/logo.png',
+    url: 'https://my-dapp.com/profile'
+  }
+}
 
-// We can construct the URL to the Cast server using the `castUrl` property
+// We can construct the URL to the Notify Server using the `castUrl` property
 // of the `PushDappClient` (which will be `https://cast.walletconnect.com` by default),
 // together with our Project ID.
-const result = await fetch(
-  `${pushDappClient.castUrl}/${YOUR_PROJECT_ID}/notify`,
-  {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(notificationPayload),
-  }
-);
+const result = await fetch(`${pushDappClient.castUrl}/${YOUR_PROJECT_ID}/notify`, {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify(notificationPayload)
+})
 
-await result.json(); // { "sent": ["eip155:1:0xafeb..."], "failed": [], "not_found": [] }
-```
-
-### Sending Push Messages via PushDappClient (WebSocket)
-
-```javascript
-// Resolve active push subscriptions.
-const subscriptions = pushDappClient.subscriptions.getAll();
-// Use the latest subscription for this example.
-const latestSubscription = subscriptions[subscriptions.length - 1];
-
-// Build the message and associated metadata.
-const message = {
-  title: "Profile Activity"
-  body: "There's been activity on your profile!"
-  icon: "https://my-dapp.com/icons/logo.png",
-  url: "https://my-dapp.com/profile",
-};
-
-await pushDappClient.notify({ topic: latestSubscription.topic, message });
+await result.json() // { "sent": ["eip155:1:0xafeb..."], "failed": [], "not_found": [] }
 ```

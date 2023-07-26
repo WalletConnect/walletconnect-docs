@@ -73,7 +73,7 @@ val redirect = "kotlin-dapp-wc://request" //should be unique for your Dapp
 val appMetaData = Core.Model.AppMetaData(
     name = "Wallet Name",
     description = "Wallet Description",
-    url = "Wallet Url",
+    url = "Wallet URL",
     icons = listOfIconUrlStrings,
     redirect = redirect
 )

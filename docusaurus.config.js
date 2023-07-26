@@ -11,6 +11,7 @@ const config = {
   url: 'https://docs.walletconnect.com/',
   baseUrl: '/',
   onBrokenLinks: 'throw',
+  onBrokenMarkdownLinks: 'throw',
   favicon: 'img/favicon.ico',
   organizationName: 'walletconnect',
   projectName: 'walletconnect-docs',
@@ -35,14 +36,9 @@ const config = {
           showLastUpdateTime: true,
           editUrl: 'https://github.com/WalletConnect/walletconnect-docs/blob/main/',
           versions: {
-            '1.0': {
-              badge: false,
-              label: 'v1.x.x',
-              path: '1.0'
-            },
             current: {
               badge: false,
-              label: 'v2.x.x',
+              label: 'v2.x',
               path: '2.0'
             }
           },
@@ -102,10 +98,10 @@ const config = {
             label: 'Flutter'
           },
           {
-            type: "docSidebar",
-            position: "left",
-            sidebarId: "unity",
-            label: "Unity",
+            type: 'docSidebar',
+            position: 'left',
+            sidebarId: 'unity',
+            label: 'Unity'
           },
           {
             href: 'https://github.com/walletconnect/',
@@ -143,7 +139,7 @@ const config = {
             title: 'Community',
             items: [
               {
-                label: 'Github Discussions',
+                label: 'GitHub Discussions',
                 href: 'https://github.com/WalletConnect/walletconnect-monorepo/discussions'
               },
               {
@@ -191,7 +187,7 @@ const config = {
       announcementBar: {
         id: 'support_us',
         content:
-          '🚨 v1.0 has been sunset. Wallets and Dapps must upgrade to v2.0 before June 28. <a rel="noopener noreferrer" href="/2.0/advanced/migration-from-v1.x/overview">Learn more</a>. 🚨',
+          '🚨 v1.0 has been shut down. Wallets and dapps must upgrade to v2.0 immediately. <a rel="noopener noreferrer" href="/2.0/advanced/migration-from-v1.x/overview">Learn more</a>. 🚨',
         backgroundColor: '#3182ce',
         textColor: '#fff',
         isCloseable: true

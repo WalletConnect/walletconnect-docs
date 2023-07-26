@@ -69,7 +69,7 @@ web3wallet.on("session_proposal", async (sessionProposal) => {
         supportedNamespaces: {
             eip155: {
                 chains: ["eip155:1", "eip155:137"],
-                methods: ["eth_sendTransaction", "personal_sign"]
+                methods: ["eth_sendTransaction", "personal_sign"],
                 events: ["accountsChanged", "chainChanged"],
                 accounts:["eip155:1:0xab16a96d359ec26a11e2c2b3d8f8b8942d5bfcdb","eip155:137:0xab16a96d359ec26a11e2c2b3d8f8b8942d5bfcdb"]
             },

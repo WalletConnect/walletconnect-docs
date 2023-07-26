@@ -10,7 +10,7 @@ val connectionType = ConnectionType.AUTOMATIC or ConnectionType.MANUAL
 val appMetaData = Core.Model.AppMetaData(
     name = "Wallet Name",
     description = "Wallet Description",
-    url = "Wallet Url",
+    url = "Wallet URL",
     icons = /*list of icon url strings*/,
     redirect = "kotlin-wallet-wc:/request" // Custom Redirect URI
 )
@@ -31,15 +31,15 @@ To initialize the Web3Wallet client, create a `Wallet.Params.Init` object in the
 
 ```kotlin
 val walletDelegate = object : Web3Wallet.WalletDelegate {
-    override fun onSessionProposal(sessionProposal: Wallet.Model.SessionProposal) {
+    override fun onSessionProposal(sessionProposal: Wallet.Model.SessionProposal, verifyContext: Wallet.Model.VerifyContext) {
         // Triggered when wallet receives the session proposal sent by a Dapp
     }
 
-    override fun onSessionRequest(sessionRequest: Wallet.Model.SessionRequest) {
+    override fun onSessionRequest(sessionRequest: Wallet.Model.SessionRequest, verifyContext: Wallet.Model.VerifyContext) {
         // Triggered when a Dapp sends SessionRequest to sign a transaction or a message
     }
 
-    override fun onAuthRequest(authRequest: Wallet.Model.AuthRequest) {
+    override fun onAuthRequest(authRequest: Wallet.Model.AuthRequest, verifyContext: Wallet.Model.VerifyContext) {
         // Triggered when Dapp / Requester makes an authorization request
     }
 
@@ -64,6 +64,21 @@ val walletDelegate = object : Web3Wallet.WalletDelegate {
     }
 }
 Web3Wallet.setWalletDelegate(walletDelegate)
+```
+
+`Wallet.Event.VerifyContext` provides a domain verification information about SessionProposal, SessionRequest and AuthRequest. It consists of origin of a Dapp from where the request has been sent, validation Enum that says whether origin is VALID, INVALID or UNKNOWN and verify url server. 
+
+```kotlin
+data class VerifyContext(
+    val id: Long,
+    val origin: String,
+    val validation: Model.Validation,
+    val verifyUrl: String
+)
+
+enum class Validation {
+    VALID, INVALID, UNKNOWN
+}
 ```
 
 The Web3Wallet needs a `Web3Wallet.WalletDelegate` passed to it for it to be able to expose asynchronous updates sent from the Dapp.

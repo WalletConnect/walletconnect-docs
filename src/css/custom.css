@@ -545,3 +545,7 @@ article img {
     width: calc(50% - 20px);
   }
 }
+
+.theme-admonition a {
+  text-decoration: none;
+}

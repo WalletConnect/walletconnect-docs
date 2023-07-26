@@ -1,6 +1,6 @@
 # Wallet / Responder Usage
 
-We recommend looking at example implementations of Responder at our [Kotlin Github repository](https://github.com/WalletConnect/WalletConnectKotlinV2/tree/develop/auth/responder)
+We recommend looking at example implementations of Responder at our [Kotlin GitHub repository](https://github.com/WalletConnect/WalletConnectKotlinV2/tree/develop/auth/responder)
 
 ### **Initialize Auth Client**
 
@@ -35,7 +35,7 @@ object ResponderDelegate : AuthClient.ResponderDelegate {
         AuthClient.setResponderDelegate(this)
     }
 
-    override fun onAuthRequest(authRequest: Auth.Event.AuthRequest) {
+    override fun onAuthRequest(authRequest: Auth.Event.AuthRequest, verifyContext: Auth.Event.VerifyContext) {
         // Triggered when Dapp / Requester makes an authorization request. Wallet / Responder should display message to user and ask him to approve or reject authorization.
     }
 
@@ -46,6 +46,21 @@ object ResponderDelegate : AuthClient.ResponderDelegate {
     override fun onError(error: Auth.Event.Error) {
         //Triggered whenever the error occurs with Relay Server
     }
+}
+```
+
+`Auth.Event.VerifyContext` provides domain verification information about an AuthRequest. It consists of the origin of a Dapp from where the request has been sent, a validation Enum that says whether the origin is `VALID`, `INVALID` or `UNKNOWN`, and the verify url server. 
+
+```kotlin
+data class VerifyContext(
+    val id: Long,
+    val origin: String,
+    val validation: Model.Validation,
+    val verifyUrl: String
+)
+
+enum class Validation {
+    VALID, INVALID, UNKNOWN
 }
 ```
 

@@ -71,7 +71,7 @@ Used to publish a notification message to a peer through notify topic. Response 
 
 | IRN     |          |
 | ------- | -------- |
-| TTL     | 86400    |
+| TTL     | 2592000  |
 | Tag     | 4002     |
 
 ```
@@ -170,7 +170,7 @@ Used to request notify subscription to a peer through pairing topic. Response is
   "publicKey": string,
   "metadata": Metadata,
   "account": string,
-  "scope": string
+  "scope": string[]
 }
 
 | IRN     |          |
@@ -185,7 +185,8 @@ Used to request notify subscription to a peer through pairing topic. Response is
 ```jsonc
 // Success result
 {
-  "subscriptionAuth": string
+  "subscriptionAuth": string,
+  "subscriptionSymKey": string
 }
 
 | IRN     |          |

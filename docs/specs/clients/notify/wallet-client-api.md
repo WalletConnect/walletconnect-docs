@@ -1,5 +1,11 @@
 # Wallet Client API
 
+:::caution
+
+Push API is under development. Want early access? Join our [Pilot Program](https://walletconnect.com/partners)
+
+:::
+
 ```typescript
 abstract class WalletClient {
   // ---------- Methods ----------------------------------------------- //
@@ -27,7 +33,9 @@ abstract class WalletClient {
   }): Promise<boolean>;
 
   // query all active subscriptions
-  public abstract getActiveSubscriptions(): Promise<Record<string, NotifySubscription>>;
+  public abstract getActiveSubscriptions(params: {
+    account?: string
+  }): Promise<Record<string, NotifySubscription>>;
 
   // get all messages for a subscription
   public abstract getMessageHistory(params: { topic: string }): Promise<Record<number, NotifyMessageRecord>>
@@ -40,6 +48,12 @@ abstract class WalletClient {
   
   // decrypt notify subscription message
   public abstract decryptMessage(topic: string, encryptedMessage: string): Promise<NotifyMessage>;
+  
+  // Enable Sync by registering sync keys
+  public abstract enableSync({
+        account: string, 
+        onSign: (message: string) => Cacao.Signature
+  }): Promise<void>;
 
   // ---------- Events ----------------------------------------------- //
 

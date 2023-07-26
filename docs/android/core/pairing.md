@@ -1,5 +1,5 @@
 # Pairing Client
-Pairing API is a lightweight api for establishing an encrypted, protocol agnostic communication layer between peers. It's purpose is to provide a secure channel for proposing protocols or sending requests. The Pairing api can be accessed through the Core Client
+Pairing API is a lightweight API for establishing an encrypted, protocol agnostic communication layer between peers. It's purpose is to provide a secure channel for proposing protocols or sending requests. The Pairing API can be accessed through the Core Client
 
 #
 ### **Create Pairing**

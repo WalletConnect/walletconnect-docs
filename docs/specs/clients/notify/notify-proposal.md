@@ -31,4 +31,6 @@ Proposal protocol will be established as follows:
 7. Wallet sends notify subscribe request to Notify Server with subscriptionAuth
 8. Wallet generates key pair Z
 9. Response topic is derived from hash of public key X
-10. Wallet responds with type 1 envelope on response topic to Dapp with subscriptionAuth
+10. Wallet responds with type 1 envelope on response topic to Dapp with subscriptionAuth and subscription symmetric key
+11. Dapp receives the response and derives a subscription topic from sha256 hash of subscription symmetric key
+12. Dapp subscribes for subscription topic to receive subscription updates published by the wallet
