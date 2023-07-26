@@ -115,7 +115,7 @@
   }
 }
 
-@media screen and (max-width: 522px) {
+@media screen and (max-width: 667px) {
   .banner__image {
     display: none;
   }
