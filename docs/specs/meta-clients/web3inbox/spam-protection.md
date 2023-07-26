@@ -16,7 +16,7 @@ These spam protections come prepackaged with the Chat SDK but require action by 
 
 ### Chat Invite Protection
 
-1. Web3Inbox will not render hyperlinks in invite messages to help prevent users clicking on a suspicious URL by accident.
+Web3Inbox will not render hyperlinks in invite messages to help prevent users clicking on a suspicious URL by accident.
 
 ### Chat Thread Protection
 
