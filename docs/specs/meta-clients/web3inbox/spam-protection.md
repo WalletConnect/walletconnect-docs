@@ -16,15 +16,15 @@ These spam protections come prepackaged with the Chat SDK but require action by 
 
 ### Chat Invite Protection
 
-Web3Inbox will not render hyperlinks in invite messages to help prevent users clicking on a suspicious URL by accident.
+* Web3Inbox will not render hyperlinks in invite messages to help prevent users clicking on a suspicious URL by accident.
 
 ### Chat Thread Protection
 
-1. Web3Inbox's UI exposes all active spam protection actions provided by the Chat SDK. This of course includes the `leave` function which blocks a spamming user.
-2. Web3Inbox sends notifications from peers by default, but if one has a peer that sends many messages in succession, one can use the Web3Inbox SDK's `muteContact` function to prevent receiving notifications from a selected peer.
+* Web3Inbox's UI exposes all active spam protection actions provided by the Chat SDK. This of course includes the `leave` function which blocks a spamming user.
+* Web3Inbox sends notifications from peers by default, but if one has a peer that sends many messages in succession, one can use the Web3Inbox SDK's `muteContact` function to prevent receiving notifications from a selected peer.
 
 ### Notification Protection
 
-1. Web3Inbox's UI exposes all active spam protection actions provided by the Notify SDK. This of course includes the `deleteSubscription` function which blocks a spamming dapp.
+* Web3Inbox's UI exposes all active spam protection actions provided by the Notify SDK. This of course includes the `deleteSubscription` function which blocks a spamming dapp.
 
 
