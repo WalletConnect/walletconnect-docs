@@ -65,7 +65,7 @@ module.exports = {
         },
         {
           type: 'category',
-          label: 'web3inbox',
+          label: 'Web3Inbox',
           collapsed: true,
           collapsible: true,
           items: ['web3inbox/about']
