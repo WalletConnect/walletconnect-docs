@@ -38,4 +38,22 @@
   "message": NotifyMessage
 }
 ```
- 
+
+## Notify Type
+
+```jsonc
+{
+  "name": string,
+  "description": string
+}
+```
+
+## Notify Available Types
+
+```jsonc
+{
+  "version": number,
+  "lastModified": Int64,
+  "types": NotifyType[]
+}
+```

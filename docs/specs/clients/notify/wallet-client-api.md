@@ -29,8 +29,14 @@ abstract class WalletClient {
   public abstract subscribe(params: { 
         metadata: Metadata,
         account: string,
+        scope: string[],
         onSign: (message: string) => Cacao.Signature
   }): Promise<boolean>;
+
+  // query notification types available for a dapp domain
+  public abstract getNotificationTypes(params: {
+      domain: string,
+  }): Promise<NotifyAvailableTypes>
 
   // query all active subscriptions
   public abstract getActiveSubscriptions(params: {
