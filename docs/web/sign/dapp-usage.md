@@ -15,7 +15,7 @@ For an example implementation, please refer to our `react-dapp-v2` [example](htt
 Dapps will also need to install `WalletConnectModal` for the UI.
 
 ```bash npm2yarn
-npm install @walletconnect/sign-client
+npm install @walletconnect/modal
 ```
 
 ## Create a Session
