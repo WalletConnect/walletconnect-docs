@@ -28,7 +28,7 @@ Web3Inbox.configure(
     account: account,
     bip44: DefaultBIP44Provider(),
     config: [.chatEnabled: false, .settingsEnabled: false],
-    environment: BuildConfiguration.shared.apnsEnvironment,
+    environment: .sandbox,
     onSign: onSign()
 )
 ```
