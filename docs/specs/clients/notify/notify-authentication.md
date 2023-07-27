@@ -52,8 +52,8 @@ The message payload is a did-jwt with the following claims:
 
 - act - description of action intent. Must be equal to "notify_message"
 - iss - did:key of an identity key. Enables to resolve which Notify server was used.
-- aud - did:key of an identity key. Enables to resolve attached blockchain account.
-- sub - blockchain account that notify subscription is associated with (did:pkh)
+- aud - blockchain account that notify subscription is associated with (did:pkh)
+- sub - hash of the matching subscription payload
 - app - dapp's domain url
 - msg - message object including the following parameters:
     - title - short message used in the title of the notification
