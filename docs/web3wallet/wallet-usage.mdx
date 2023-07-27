@@ -72,35 +72,6 @@ try await Web3Wallet.instance.registerEchoClient(deviceToken: deviceToken)
 ```
 
 </PlatformTabItem>
-<PlatformTabItem value="ios">
-
-In order to initialize a client just call a `configure` method from the Web3Wallet instance wrapper
-
-```swift
-let metadata = AppMetadata(
-    name: "Example Wallet",
-    description: "Wallet description",
-    url: "example.wallet",
-    icons: ["https://avatars.githubusercontent.com/u/37784886"]
-)
-
-Web3Wallet.configure(
-    metadata: metadata,
-    crypto: DefaultCryptoProvider(),
-    // Used for the Echo: "echo.walletconnect.com" will be used by default if not provided
-    echoHost: "echo.walletconnect.com",
-    // Used for the Echo: "APNSEnvironment.production" will be used by default if not provided
-    environment: .production
-)
-```
-
-In order to allow users to receive push notifications you have to communicate with Apple Push Notification service and receive unique device token. Register that token with following method:
-
-```swift
-try await Web3Wallet.instance.registerEchoClient(deviceToken: deviceToken)
-```
-
-</PlatformTabItem>
 <PlatformTabItem value="android">
 
 ```kotlin
