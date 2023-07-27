@@ -1,0 +1,239 @@
+import Container from './../components/Container'
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
+import PlatformTabs from '../components/PlatformTabs'
+import PlatformTabItem from '../components/PlatformTabItem'
+import CloudBanner from '../components/CloudBanner'
+
+# Usage
+
+This documentation outlines the steps for configuring and using the Web3Inbox SDK within your iOS and Android application.
+
+<CloudBanner />
+
+## Client Configuration
+
+<PlatformTabs
+	groupId="w3w"
+	activeOptions={["ios","android"]}
+>
+<PlatformTabItem value="ios">
+
+The following Swift code snippet demonstrates how to configure the Web3Inbox Client.
+
+```swift
+import Web3Inbox
+
+Web3Inbox.configure(
+    account: account,
+    bip44: DefaultBIP44Provider(),
+    config: [.chatEnabled: false, .settingsEnabled: false],
+    environment: BuildConfiguration.shared.apnsEnvironment,
+    onSign: onSign()
+)
+```
+Parameters:
+
+`account`: Wallet account
+
+`bip44`: Provide your implementation of BIP44Provider, necessary for Sync store key derivation.
+
+`config`: The Web3Inbox client will be configured to enable Chat and Push SDKs by default. However, you can disable selected functionalities.
+
+`environment`: Use debug environment for debug builds and release for release and TestFlight builds.
+
+`onSign`: Web3Inbox client will request user to sign messages with its account private key. The message may be a Sync Storage derivation key or Identity key registration.
+
+#### iOS Permissions Configuration
+
+For utilizing the "Scan QR Code" feature, you need to add `NSCameraUsageDescription` to your `info.plist` file.
+
+```xml
+<key>NSCameraUsageDescription</key>
+<string>Allow the app to scan for QR codes</string>
+```
+
+</PlatformTabItem>
+<PlatformTabItem value="android">
+
+To initialize the Web3Inbox client, create a `Inbox.Params.Init` object in the Android Application class with the Core Client. The `Inbox.Params.Init` object will then be passed to the `Web3Inbox` initialize function.
+
+
+```kotlin
+val accountsPrivateKey: ByteArray = /* address' private key. */
+val caip10Account: String = /*[CAIP-10](https://github.com/ChainAgnostic/CAIPs/blob/master/CAIPs/caip-10.md) compatible accountId*/
+val projectId = PROJECT_ID
+val relayUrl = "relay.walletconnect.com"
+val serverUrl = "wss://$relayUrl?projectId=${projectId}"
+val appMetaData = Core.Model.AppMetaData(
+    name = "Kotlin.Web3Inbox",
+    description = "Kotlin Web3Inbox Implementation",
+    url = "kotlin.web3inbox.walletconnect.com",
+    icons = listOf("https://raw.githubusercontent.com/WalletConnect/walletconnect-assets/master/Icon/Gradient/Icon.png"),
+    redirect = null
+)
+
+CoreClient.initialize(relayServerUrl = serverUrl, connectionType = ConnectionType.AUTOMATIC, application = this, metaData = appMetaData)
+
+Web3Inbox.initialize(Inbox.Params.Init(core = CoreClient, account = Inbox.Type.AccountId(caip10Account), onSign = { message -> 
+    // Message to be signed by the user. 
+    //    If user decides to sign the message, use the CacaoSigner util class to sign the message. 
+    //    If user decides to not sign the message, return null
+    return CacaoSigner.sign(message, accountsPrivateKey, SignatureType.EIP191) OR null
+    }
+)) { error ->
+    // Error will be thrown if there's an issue during initialization
+}
+```
+</PlatformTabItem>
+</PlatformTabs>
+
+## SDK Usage
+
+<PlatformTabs
+	groupId="w3w"
+	activeOptions={["ios","android"]}
+>
+<PlatformTabItem value="ios">
+
+Access the Web3Inbox client instance, which is a singleton, by calling:
+
+```swift
+Web3Inbox.instance
+```
+
+#### Assign Web3Inbox WebView to a ViewController
+Web3Inbox provides a user interface within a webView. Assign the provided webView to a ViewController's view as shown:
+```swift
+import UIKit
+import Web3Inbox
+
+final class Web3InboxViewController: UIViewController {
+
+    override func loadView() {
+        super.loadView()
+
+        // Web3Inbox configuration
+        Web3Inbox.configure(account: importAccount.account, onSign: onSing)
+
+        // Setting Web3Inbox webView as main view
+        view = Web3Inbox.instance.getWebView()
+    }
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        // Other UIViewController customizations
+        edgesForExtendedLayout = []
+        navigationItem.title = "Web3Inbox SDK"
+        navigationItem.largeTitleDisplayMode = .never
+    }
+}
+
+```
+
+</PlatformTabItem>
+<PlatformTabItem value="android">
+
+Once the Web3Inbox client is [initialized](#intialize), all that's left to do is to place the `Web3Inbox.View` in your app.
+We support both [Compose](https://developer.android.com/jetpack/compose), which sample sample implementation can be found in 
+our [sample app](https://github.com/WalletConnect/WalletConnectKotlinV2/blob/develop/samples/web3wallet/src/main/android/com/walletconnect/web3/wallet/ui/routes/composable_routes/web3inbox/Web3InboxRoute.kt)
+
+#### Composable Web3Inbox.View()
+
+To remember Web3Inbox state call `Web3Inbox.rememberWeb3InboxState()` which later needs to be passed to 
+`Web3Inbox.View(state)` composable.To display Web3Inbox with Compose call `Web3Inbox.View(state)` somewhere in your app.
+
+```kotlin
+   setContent {
+        val state = Web3Inbox.rememberWeb3InboxState()
+        Web3Inbox.View(state = state)
+   }
+```
+
+#### Android XML
+
+Adding Web3Inbox to legacy Views should be achieved according to Google's guidelines: 
+https://developer.android.com/jetpack/compose/migrate/interoperability-apis/compose-in-views.
+
+For sample implementation take a look at our 
+[sample app](https://github.com/WalletConnect/WalletConnectKotlinV2/blob/develop/samples/web3inbox/src/main/android/com/walletconnect/web3/inbox/ui/Web3InboxXMLActivity.kt)
+
+#### Prevent reloading of Web3Inbox
+
+**IMPORTANT:** If Web3Inbox's inner WebView is reloaded it will lose state and be displayed as blank page.
+To prevent reloading of Web3Inbox the activity that contains the `Web3Inbox.View` add 
+`android:configChanges="orientation|screenSize"` to `<activity>` element `Manifest.xml` that houses Web3Inbox.
+</PlatformTabItem>
+</PlatformTabs>
+
+## Push Notification
+
+<PlatformTabs
+	groupId="w3w"
+	activeOptions={["ios","android"]}
+>
+<PlatformTabItem value="ios">
+
+#### Register for Push Notifications
+Communicate with Apple Push Notification service and receive unique device token. Register that token with following method:
+
+```swift
+    func application(
+      _ application: UIApplication,
+      didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data
+    ) {
+
+        Task(priority: .high) {            
+            try await Web3Inbox.instance.register(deviceToken: deviceToken)
+        }
+    }
+```
+
+#### Decrypting Push Notifications
+Push notifications sent via APNs are encrypted and carry the following payload:
+
+```
+{
+  "aps":{
+    "content-available":1,
+    "mutable-content":1
+  },
+    "ciphertext":"encrypted-payload",
+    "topic":"subscription_topic",
+}
+```
+
+To decrypt a Push Notification (PN), you need to instantiate a [UNNotificationServiceExtension](https://developer.apple.com/documentation/usernotifications/unnotificationserviceextension). 
+
+For details on how to modify the content in newly delivered notifications, refer to the official Apple Developer Documentation [here](https://developer.apple.com/documentation/usernotifications/modifying_content_in_newly_delivered_notifications).
+
+Additionally, you will need to create a [keychain group](https://developer.apple.com/documentation/security/keychain_services/keychain_items/sharing_access_to_keychain_items_among_a_collection_of_apps) that is shared between your wallet application and the notification service. The keychain group should be named `group.com.walletconnect.sdk`.
+
+Inside your notification service extension file, import Web3Inbox, initialize `PushDecryptionService()`, and decrypt the message with the following Swift code:
+
+```swift
+override func didReceive(_ request: UNNotificationRequest, withContentHandler contentHandler: @escaping (UNNotificationContent) -> Void) {
+    bestAttemptContent = (request.content.mutableCopy() as? UNMutableNotificationContent)
+    if let bestAttemptContent = bestAttemptContent {
+        let topic = bestAttemptContent.userInfo["topic"] as! String
+        let ciphertext = bestAttemptContent.userInfo["blob"] as! String
+        do {
+            let service = PushDecryptionService()
+            let pushMessage = try service.decryptMessage(topic: topic, ciphertext: ciphertext)
+            bestAttemptContent.title = pushMessage.title
+            bestAttemptContent.body = pushMessage.body
+            contentHandler(bestAttemptContent)
+            return
+        }
+    ...
+}
+```
+
+</PlatformTabItem>
+<PlatformTabItem value="android">
+
+Currently Web3Inbox SDK contains Chat SDK features. Push SDK features coming soon.
+
+</PlatformTabItem>
+</PlatformTabs>

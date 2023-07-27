@@ -68,7 +68,7 @@ module.exports = {
           label: 'Web3Inbox',
           collapsed: true,
           collapsible: true,
-          items: ['web3inbox/about']
+          items: ['web3inbox/about', 'web3inbox/usage', 'web3inbox/resources']
         }
       ]
     },
