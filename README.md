@@ -19,8 +19,6 @@ Source can be viewed in [`docs`](./docs/) directory.
 
 1. Open the file in `docs/`
 
-Older versions are available in `versioned_docs/`.
-
 ## Customize Settings & Theme
 
 1. Open `docusaurus.config.js`
