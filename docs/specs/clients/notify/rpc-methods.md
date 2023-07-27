@@ -100,8 +100,7 @@ Used to inform the peer to close and delete a notify subscription through notify
 ```jsonc
 // wc_notifyDelete params
 {
-  "code": Int64,
-  "message": string
+  "deleteAuth": string 
 }
 | IRN     |          |
 | ------- | -------- |
@@ -112,7 +111,9 @@ Used to inform the peer to close and delete a notify subscription through notify
 **Response**
 
 ```jsonc
-// Success result
+{
+  "responseAuth": string
+}
 true
 | IRN     |          |
 | ------- | -------- |

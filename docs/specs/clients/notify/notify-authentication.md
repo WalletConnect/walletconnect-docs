@@ -87,3 +87,23 @@ Once the Notify Server has successfully handled the incoming notify update reque
 - app - dapp's domain url
 
 Expiry should be calculated from the addition of the issuance date and the notify request TTL (86400 seconds)
+
+## Notify Delete
+
+Once the Notify client wants to delete the subscription completely then it should authenticate the following request including the reason for deleting the subscription.
+
+- act - description of action intent. Must be equal to "notify_delete"
+- iss - did:key of an identity key. Enables to resolve attached blockchain account.
+- aud - did:key of an identity key. Enables to resolve which Notify server was used.
+- sub - reason for deleting the subscription
+- app - dapp's domain url
+
+## Notify Delete Response
+
+Once the Notify Server has sucessfully handled the subscription deletion then it should authenticate the following request including the hash of the existing subscription payload.
+
+- act - description of action intent. Must be equal to "notify_delete_response"
+- iss - did:key of an identity key. Enables to resolve which Notify server was used.
+- aud - did:key of an identity key. Enables to resolve attached blockchain account.
+- sub - hash of the existing subscription payload
+- app - dapp's domain url
