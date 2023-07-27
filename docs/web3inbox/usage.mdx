@@ -42,7 +42,7 @@ Parameters:
 
 `environment`: Use `.sandbox` environment for debug builds and `.production` for release and TestFlight builds.
 
-`onSign`: Web3Inbox client will request user to sign messages with its account private key. The message may be a Sync Storage derivation key or Identity key registration.
+`onSign`: Web3Inbox client will request user to sign messages with its account private key. The message may be a Sync Storage derivation key or Identity key registration. `SigningCallback` designed as async closure that allows to connect signature request UI.
 
 #### iOS Permissions Configuration
 
