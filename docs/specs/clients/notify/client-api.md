@@ -1,13 +1,13 @@
-# Wallet Client API
+# Client API
 
 :::caution
 
-Push API is under development. Want early access? Join our [Pilot Program](https://walletconnect.com/partners)
+Notify API is under development. Want early access? Join our [Pilot Program](https://walletconnect.com/partners)
 
 :::
 
 ```typescript
-abstract class WalletClient {
+abstract class Client {
   // ---------- Methods ----------------------------------------------- //
 
   // initializes the client with persisted storage and a network connection
