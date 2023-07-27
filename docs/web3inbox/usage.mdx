@@ -114,7 +114,7 @@ final class Web3InboxViewController: UIViewController {
         super.loadView()
 
         // Web3Inbox configuration
-        Web3Inbox.configure(account: importAccount.account, onSign: onSing)
+        Web3Inbox.configure(account: account, bip44: DefaultBIP44Provider(), config: [.pushEnabled: false], environment: .sandbox, onSign: onSing)
 
         // Setting Web3Inbox webView as main view
         view = Web3Inbox.instance.getWebView()
