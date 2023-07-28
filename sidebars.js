@@ -281,7 +281,7 @@ module.exports = {
       label: 'Introduction',
       collapsible: false,
       className: 'menu_outer_list',
-      items: ['web/about-web3modal', 'web/about-web3wallet']
+      items: ['web/about-web3modal', 'web/about-web3wallet', 'web/about-web3inbox']
     },
     {
       type: 'category',
@@ -341,6 +341,32 @@ module.exports = {
             'web/web3wallet/installation',
             'web/web3wallet/wallet-usage',
             'web/web3wallet/upgrade-guide'
+          ]
+        },
+        {
+
+          type: 'category',
+          label: 'Web3Inbox',
+          items: [
+            {
+              type: 'category',
+              label: 'React',
+              items: [
+                'web/web3inbox/react/installation',
+                'web/web3inbox/react/usage',
+                'web/web3inbox/react/options',
+              ]
+            },
+            {
+              type: 'category',
+              label: 'HTML',
+              items: [
+                'web/web3inbox/html/installation',
+                'web/web3inbox/html/usage',
+                'web/web3inbox/html/options',
+              ]
+            },
+            'web/web3inbox/styling'
           ]
         },
 
