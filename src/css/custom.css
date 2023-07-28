@@ -685,6 +685,7 @@ article img {
 
 .cloud__wrapper .cloud__text-container h2 {
   color: white;
+  margin-top: 0 !important;
 }
 
 .cloud__wrapper a {
@@ -719,6 +720,11 @@ article img {
 
 .cloud__wrapper a:hover svg {
   transform: translateX(0.25rem);
+}
+
+.cloud__wrapper--special {
+  background: linear-gradient(135deg, hsla(250, 25%, 10%, 1) 0%, hsla(250, 45%, 50%, 1) 100%);
+  border-color: hsla(250, 15%, 33%, 1);
 }
 
 /* End - Cloud Banner */
@@ -784,11 +790,11 @@ article img {
   width: 7rem;
   border-radius: 0;
   flex-shrink: 0;
-  flex-grow: 1;
 }
 
 .home__large-container--text {
   padding-right: 1rem;
+  width: 100%;
 }
 
 .home__large-container--text h4,
