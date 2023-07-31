@@ -36,7 +36,7 @@ Once the Notify Server has successfully handled the incoming notify subscription
 
 - act - description of action intent. Must be equal to "notify_subscription_response"
 - iss - did:key of an identity key. Allows for the resolution of which Notify server was used.
-- aud - did:key of an identity key. Enables to resolve attached blockchain account.
+- aud - did:key of an identity key. Allows for the resolution of the attached blockchain account.
 - sub - did:key of the public key used for key agreement on the Notify topic 
 - app - dapp's domain url
 
