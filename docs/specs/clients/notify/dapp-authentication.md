@@ -5,7 +5,7 @@ Notify API requires Dapp developers to host a did:web document to expose public 
     * key agreement - public key used to subscribe to the chosen notify server
     * authentication - public key used to sign message published by the chosen notify server
 
-This should be available as did.json document under the `.well-known` path for the Dapp Domain specified as did:web identifier.
+This should be available as a `did.json` document under the `.well-known` path for the Dapp Domain specified as did:web identifier.
 
 Here is an example for the two public keys being exposed:
 
