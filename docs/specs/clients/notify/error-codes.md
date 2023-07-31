@@ -16,6 +16,7 @@ case .userRejected return 5000
 
 ```sh
 case .userUnsubscribed return 6000
+case .userHasExistingSubscription return 6001
 ```
 
 ## FAILURE
