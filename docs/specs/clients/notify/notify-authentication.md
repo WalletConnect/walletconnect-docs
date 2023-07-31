@@ -25,7 +25,7 @@ This is achieved using [Identity Keys](../../servers/keys/identity-keys) and did
 - act - description of action intent. Must be equal to "notify_subscription"
 - iss - did:key of an identity key. Enables to resolve attached blockchain account.
 - aud - dapp's domain url
-- sub - blockchain account that notify subscription is associated with (did:pkh)
+- sub - blockchain account that this notify subscription is associated with (did:pkh)
 - scp - scope of notification types authorized by the user
 
 Expiry should be calculated from the addition of the issuance date and the notify request TTL (2592000 seconds)
