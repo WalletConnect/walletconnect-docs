@@ -608,20 +608,8 @@ module.exports = {
           collapsible: true,
           collapsed: true,
           items: [
-            {
-              type: 'category',
-              label: 'Dapp Usage',
-              collapsible: true,
-              collapsed: true,
-              items: [['android/push/dapp-usage/getting-started']]
-            },
-            {
-              type: 'category',
-              label: 'Wallet Usage',
-              collapsible: true,
-              collapsed: true,
-              items: ['android/push/wallet-usage/getting-started']
-            }
+            'android/push/installation',
+            'android/push/getting-started'
           ]
         },
         {
