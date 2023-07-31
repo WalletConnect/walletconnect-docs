@@ -549,3 +549,7 @@ article img {
 .theme-admonition a {
   text-decoration: none;
 }
+
+.docs-doc-id-readme .feedback {
+  display: none;
+}
