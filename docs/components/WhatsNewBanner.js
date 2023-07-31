@@ -1,5 +1,5 @@
 import React from 'react'
-import wcGlassImage from '../../static/assets/wc-logo-glass.png'
+import wcGlassImage from '../../static/assets/wc-logo-glass-full.webp'
 
 export const CloudBanner = ({ title, description, href }) => {
   return (
@@ -26,7 +26,14 @@ export const CloudBanner = ({ title, description, href }) => {
           />
         </svg>
       </a>
-      <img className="cloud__image" src={wcGlassImage} alt="cloud illustration" />
+      <img
+        style={{
+          transform: 'scale(1.5)'
+        }}
+        className="cloud__image"
+        src={wcGlassImage}
+        alt="cloud illustration"
+      />
     </div>
   )
 }
