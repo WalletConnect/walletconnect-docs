@@ -46,7 +46,7 @@ Expiry should be calculated from the addition of the issuance date and the notif
 
 For each Notify message sent, the Dapp will have an authenticated payload signed by the chosen Notify Server which will have associated an authentication key for each Dapp domain.
 
-This is achieved using [Dapp Authentication](./dapp-authentication.md) keys which are exposed by the Case Server but hosted on the Dapp's domain.
+This is achieved using [Dapp Authentication](./dapp-authentication.md) keys which are exposed by the Notify Server but hosted on the Dapp's domain.
 
 The message payload is a did-jwt with the following claims:
 
