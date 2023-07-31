@@ -86,7 +86,7 @@ Used to publish a notification message to a peer through notify topic. Response 
 
 | IRN     |          |
 | ------- | -------- |
-| TTL     | 86400    |
+| TTL     | 2592000  |
 | Tag     | 4003     |
 
 ```
@@ -132,7 +132,7 @@ Used to update a notify subscription with a new notify subscription, replacing a
 ```jsonc
 // wc_notifyUpdate params
 {
-  "subscriptionAuth": string // new subscription
+  "updateAuth": string // new subscription
 }
 
 | IRN     |          |
