@@ -35,7 +35,7 @@ Expiry should be calculated from the addition of the issuance date and the notif
 Once the Notify Server has successfully handled the incoming notify subscription request, it will acknowledge it by responding with a public key used for key agreement on the Notify topic.
 
 - act - description of action intent. Must be equal to "notify_subscription_response"
-- iss - did:key of an identity key. Enables to resolve which Notify server was used.
+- iss - did:key of an identity key. Allows for the resolution of which Notify server was used.
 - aud - did:key of an identity key. Enables to resolve attached blockchain account.
 - sub - did:key of the public key used for key agreement on the Notify topic 
 - app - dapp's domain url
