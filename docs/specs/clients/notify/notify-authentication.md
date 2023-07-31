@@ -24,9 +24,10 @@ This is achieved using [Identity Keys](../../servers/keys/identity-keys) and did
 
 - act - description of action intent. Must be equal to "notify_subscription"
 - iss - did:key of an identity key. Enables to resolve attached blockchain account.
-- aud - dapp's domain url
+- aud - did:key of an identity key. Enables to resolve associated Dapp domain used.
 - sub - blockchain account that this notify subscription is associated with (did:pkh)
 - scp - scope of notification types authorized by the user
+- app - dapp's domain url
 
 Expiry should be calculated from the addition of the issuance date and the notify request TTL (2592000 seconds)
 
@@ -84,9 +85,10 @@ This is achieved using [Identity Keys](../../servers/keys/identity-keys) and did
 
 - act - description of action intent. Must be equal to "notify_update"
 - iss - did:key of an identity key. Enables to resolve attached blockchain account.
-- aud - dapp's domain url
+- aud - did:key of an identity key. Enables to resolve associated Dapp domain used.
 - sub - blockchain account that this notify subscription is associated with (did:pkh)
 - scp - scope of notification types authorized by the user
+- app - dapp's domain url
 
 Expiry should be calculated from the addition of the issuance date and the notify request TTL (2592000 seconds)
 
@@ -109,8 +111,9 @@ Once the Notify client wants to delete the subscription completely then it shoul
 
 - act - description of action intent. Must be equal to "notify_delete"
 - iss - did:key of an identity key. Enables to resolve attached blockchain account.
-- aud - dapp's domain url
+- aud - did:key of an identity key. Enables to resolve associated Dapp domain used.
 - sub - reason for deleting the subscription
+- app - dapp's domain url
 
 ## Notify Delete Response
 
