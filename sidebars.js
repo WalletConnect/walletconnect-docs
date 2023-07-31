@@ -61,7 +61,12 @@ module.exports = {
           label: 'Web3Wallet',
           collapsed: true,
           collapsible: true,
-          items: ['web3wallet/about', 'web3wallet/wallet-usage', 'web3wallet/resources']
+          items: [
+            'web3wallet/about',
+            'web3wallet/wallet-usage',
+            'web3wallet/verify',
+            'web3wallet/resources'
+          ]
         },
         'web3inbox/about'
       ]
