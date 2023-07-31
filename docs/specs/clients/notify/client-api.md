@@ -12,18 +12,6 @@ abstract class Client {
 
   // initializes the client with persisted storage and a network connection
   public abstract init(): Promise<void>;
-
-  // approve notify subscription 
-  public abstract approve(params: {
-        id: number 
-        onSign: (message: string) => Cacao.Signature
-   }): Promise<boolean>;
-
-  // reject notify subscription 
-  public abstract reject(params: { id: number, reason: Reason }): Promise<boolean>;
-  
-  // update notify subscription
-  public abstract update(params: { topic: string, scope: string[] }): Promise<boolean>;
   
   // send notify subscription
   public abstract subscribe(params: { 
@@ -32,6 +20,9 @@ abstract class Client {
         scope: string[],
         onSign: (message: string) => Cacao.Signature
   }): Promise<boolean>;
+
+  // update notify subscription
+  public abstract update(params: { topic: string, scope: string[] }): Promise<boolean>;
 
   // query notification types available for a dapp domain
   public abstract getNotificationTypes(params: {
@@ -65,9 +56,6 @@ abstract class Client {
 
   // for wallet to listen for notify subscription created
   public abstract on("notify_subscription", (result: NotifySubscription | Error) => {}): void;
-
-  // for wallet to listen on notify proposal
-  public abstract on("notify_proposal", (id: number, account: string, metadata: Metadata) => {}): void;
   
   //  for wallet to listen on notify messages
   public abstract on("notify_message", (message: NotifyMessageRecord, metadata: Metadata) => {}): void;
