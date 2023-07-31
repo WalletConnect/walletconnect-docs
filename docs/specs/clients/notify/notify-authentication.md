@@ -32,7 +32,7 @@ Expiry should be calculated from the addition of the issuance date and the notif
 
 ## Notify Subscription Response
 
-Once the Notify Server has successfully handled the incoming notify subscription request then it will acknowledge it by responding with a public key used for key agreement on the Notify topic.
+Once the Notify Server has successfully handled the incoming notify subscription request, it will acknowledge it by responding with a public key used for key agreement on the Notify topic.
 
 - act - description of action intent. Must be equal to "notify_subscription_response"
 - iss - did:key of an identity key. Enables to resolve which Notify server was used.
