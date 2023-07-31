@@ -51,7 +51,7 @@ This is achieved using [Dapp Authentication](./dapp-authentication.md) keys whic
 The message payload is a did-jwt with the following claims:
 
 - act - description of action intent. Must be equal to "notify_message"
-- iss - did:key of an identity key. Enables to resolve associated Dapp domain was used.
+- iss - did:key of an identity key. Enables to resolve associated Dapp domain used.
 - aud - blockchain account that notify subscription is associated with (did:pkh)
 - sub - hash of the matching subscription payload
 - app - dapp's domain url
@@ -70,7 +70,7 @@ For each Notify message received, the Wallet will acknowledge its receipt with a
 
 - act - description of action intent. Must be equal to "notify_receipt"
 - iss - did:key of an identity key. Enables to resolve attached blockchain account.
-- aud - did:key of an identity key. Enables to resolve associated Dapp domain was used.
+- aud - did:key of an identity key. Enables to resolve associated Dapp domain used.
 - sub - hash of the stringified notify message object received
 - app - dapp's domain url
 
@@ -96,7 +96,7 @@ Expiry should be calculated from the addition of the issuance date and the notif
 Once the Notify Server has successfully handled the incoming notify update request then it will acknowledge it by responding with a hash of the new subscription payload.
 
 - act - description of action intent. Must be equal to "notify_update_response"
-- iss - did:key of an identity key. Enables to resolve associated Dapp domain was used.
+- iss - did:key of an identity key. Enables to resolve associated Dapp domain used.
 - aud - did:key of an identity key. Enables to resolve attached blockchain account.
 - sub - hash of the new subscription payload
 - app - dapp's domain url
@@ -109,16 +109,15 @@ Once the Notify client wants to delete the subscription completely then it shoul
 
 - act - description of action intent. Must be equal to "notify_delete"
 - iss - did:key of an identity key. Enables to resolve attached blockchain account.
-- aud - did:key of an identity key. Enables to resolve associated Dapp domain was used.
+- aud - dapp's domain url
 - sub - reason for deleting the subscription
-- app - dapp's domain url
 
 ## Notify Delete Response
 
 Once the Notify Server has sucessfully handled the subscription deletion then it should authenticate the following request including the hash of the existing subscription payload.
 
 - act - description of action intent. Must be equal to "notify_delete_response"
-- iss - did:key of an identity key. Enables to resolve associated Dapp domain was used.
+- iss - did:key of an identity key. Enables to resolve associated Dapp domain used.
 - aud - did:key of an identity key. Enables to resolve attached blockchain account.
 - sub - hash of the existing subscription payload
 - app - dapp's domain url
