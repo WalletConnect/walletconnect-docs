@@ -32,6 +32,46 @@ WalletConnectModal.initialize(
 )
 ```
 
+### SessionParams
+
+This example will default to using following namespaces
+```kotlin
+val methods: List<String> = listOf("eth_sendTransaction", "personal_sign", "eth_sign", "eth_signTypedData")
+val events: List<String> = listOf("chainChanged", "accountsChanged")
+val chains: List<String> = listOf("eip155:1")
+val namespaces = mapOf(
+    "eip155" to Modal.Model.Namespace.Proposal(
+        chains = chains,
+        methods = methods,
+        events = events
+    )
+)
+
+val sessionParams = Modal.Params.SessionParams(
+    requiredNamespaces = namespaces,
+    optionalNamespaces = null,
+    properties = null
+)
+```
+
+If you want to change that you can call configure and define your own session parameters like this.
+
+```kotlin
+val sessionParams = Modal.Params.SessionParams(...)
+
+val initParams = Modal.Params.Init(core = CoreClient, sessionParams = sessionParams)
+        
+WalletConnectModal.initialize(
+    init = initParams,
+    onSuccess = {
+        // Callback will be called if initialization is successful
+    },
+    onError = { error ->
+        // Error will be thrown if there's an issue during initialization
+    }
+)
+```
+
 ## WalletConnectModal Usage
 
 ### Android Compose
@@ -46,7 +86,7 @@ import com.google.accompanist.navigation.material.BottomSheetNavigator
 import com.google.accompanist.navigation.material.ExperimentalMaterialNavigationApi
 import com.google.accompanist.navigation.material.ModalBottomSheetLayout
 import com.google.accompanist.navigation.material.bottomSheet
-import com.walletconnect.modal.ui.walletConnectModalGraph
+import com.walletconnect.wcmodal.ui.walletConnectModalGraph
 
 setContent {
     val modalSheetState = rememberModalBottomSheetState(initialValue = ModalBottomSheetValue.Hidden, skipHalfExpanded = true)
@@ -69,10 +109,9 @@ setContent {
 **IMPORTANT**: WalletConnectModal uses accompanist navigation material inside. `ModalBottomSheetLayout` should be imported from [Accompanist Navigation Material](https://google.github.io/accompanist/navigation-material/)
 
 ````kotlin
-import com.walletconnect.modal.ui.openWalletConnectModal
+import com.walletconnect.wcmodal.ui.openWalletConnectModal
 
-val uri = "wc:7f6e504bfad60b485450578e05678ed3e8e8c4751d3c6160be17160d63ec90f9@2"
-navController.openWalletConnectModal(uri = uri)
+navController.openWalletConnectModal()
 ````
 
 ### Android View
@@ -92,20 +131,15 @@ navController.openWalletConnectModal(uri = uri)
 
     <dialog 
         android:id="@+id/bottomSheet" 
-        android:name="com.walletconnect.modal.ui.WalletConnectModalSheet" />
+        android:name="com.walletconnect.wcmodal.ui.WalletConnectModalSheet" />
 </navigation>
 ````
 
 ````kotlin
 import androidx.navigation.fragment.findNavController
-import com.walletconnect.modal.ui.openWalletConnectModal
+import com.walletconnect.wcmodal.ui.openWalletConnectModal
 
-val uri = "wc:7f6e504bfad60b485450578e05678ed3e8e8c4751d3c6160be17160d63ec90f9@2"
-
-findNavController().openWalletConnectModal(
-    id = R.id.action_to_bottomSheet,
-    uri = uri
-)
+findNavController().openWalletConnectModal(id = R.id.action_to_bottomSheet)
 ````
 
 #### Kotlin DSL
@@ -113,7 +147,7 @@ findNavController().openWalletConnectModal(
 ````kotlin
 import androidx.navigation.createGraph
 import androidx.navigation.fragment.fragment
-import com.walletconnect.modal.ui.walletConnectModal
+import com.walletconnect.wcmodal.ui.walletConnectModal
 
 navController.graph = navController.createGraph("Home") {
     fragment<HomeFragment>("Home")
@@ -123,10 +157,9 @@ navController.graph = navController.createGraph("Home") {
 
 ````kotlin
 import androidx.navigation.fragment.findNavController
-import com.walletconnect.modal.ui.openWalletConnectModal
+import com.walletconnect.wcmodal.ui.openWalletConnectModal
 
-val uri = "wc:7f6e504bfad60b485450578e05678ed3e8e8c4751d3c6160be17160d63ec90f9@2"
-findNavController().openWalletConnectModal(uri = uri)
+findNavController().openWalletConnectModal()
 ````
 
 #
