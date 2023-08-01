@@ -116,6 +116,7 @@ Example: a dapp can request `wallet_addEthereumChain` without targeting a specif
       "accounts": ["eip155:1:0xab16a96d359ec26a11e2c2b3d8f8b8942d5bfcdb", "eip155:137:0xab16a96d359ec26a11e2c2b3d8f8b8942d5bfcdb"]
     },
     "cosmos": {
+      "chains": ["cosmos:cosmoshub-4"],
       "accounts": [
         "cosmos:cosmoshub-4:cosmos1eeyudtn5p30jek85tq0cyh7k0jnn2z4t84y58y",
         "cosmos:cosmoshub-4:cosmos1fg2nemunucn496fewakqfe0mllcqfulrmjnj77"
