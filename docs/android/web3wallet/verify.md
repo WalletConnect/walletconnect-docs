@@ -1,6 +1,6 @@
 # Verify
 
-Verify API allows dapps on all platforms (web, Android and iOS) to securely validate if the end-user is on the correct domain, via their Wallet and the Web3Wallet SDK.
+Verify API allows dapps on all platforms (web, Android and iOS) to securely validate if the end-user is interacting with the correct domain, via their Wallet and the Web3Wallet SDK.
 
 Once the wallet knows whether the end-user was on uniswap.com or eviluniswap.com they can cross-reference this with our registry.
 
