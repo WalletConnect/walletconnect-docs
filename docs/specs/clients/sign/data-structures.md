@@ -185,7 +185,8 @@ Namespace Config is set withing the setNamespaceConfig method that is a part of 
     "<namespace_name>": {
       "chains": [string],
       "methods": [string],
-      "events": [string]
+      "events": [string],
+      "accounts": [string]
     }
   },
   "specialNamespaces": {
