@@ -32,7 +32,7 @@ In order to verify your Dapp domain in WalletConnect Cloud follow these steps:
 
 5. Click on the copy button and head over to your Domain Name Registrar/Provider to edit your DNS records.
 
-6. Under “Type”, select “TXT”. In the “Answer” section, paste the text you copied from cloud dashboard. This field may vary across DNS dashboards. If you’re trying to register a subdomain, add it under “Host”. Feel free to leave TTL at its default value.
+6. Under `Type`, select `TXT`. In the “Answer” section, paste the text you copied from cloud dashboard. This field may vary across DNS dashboards. If you’re trying to register a subdomain, add it under `Host`. Feel free to leave TTL at its default value.
 
 <!-- ![create-push-url](/assets/verify/dns-record.png) -->
 
