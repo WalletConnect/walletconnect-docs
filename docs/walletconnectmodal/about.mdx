@@ -19,13 +19,13 @@ WalletConnectModal is a simple ui library intended for advanced use cases where 
 >
 <PlatformTabItem value="web">
 
-## Add packages (NPM)
+#### Add packages (NPM)
 
 ```bash npm2yarn
 npm install @walletconnect/modal
 ```
 
-## Add packages (CDN)
+#### Add packages (CDN)
 
 WalletConnectModal uses [unpkg](https://www.unpkg.com/) as its official CDN provider.
 Instead of using the npm package, you can simply import it from their CDN and use it in the same way.
@@ -99,12 +99,12 @@ Android Core ![Maven Central](https://img.shields.io/maven-central/v/com.walletc
 
 WalletConnectModal ![Maven Central](https://img.shields.io/maven-central/v/com.walletconnect/walletconnect-modal)
 
-## Requirements
+#### Requirements
 
 * Android min SDK 23
 * Java 11
 
-## Installation
+#### Installation
 root/build.gradle.kts:
 ```gradle
 allprojects {
@@ -161,7 +161,7 @@ npx expo install @react-native-async-storage/async-storage react-native-get-rand
 <Tabs>
 <TabItem value="sdk48" label="Expo 48">
 
-### Additional Setup for Expo SDK 48
+#### Additional Setup for Expo SDK 48
 
 If you are using Expo SDK 48, there's an [issue](https://github.com/expo/expo/issues/17270) with `react-native-get-random-values`, so we need to temporarily fix this by installing expo-crypto library and copying [this](https://github.com/WalletConnect/modal-react-native/blob/main/example/expo-crypto-shim.js) file in your root folder.
 
@@ -188,7 +188,7 @@ import { useWalletConnectModal } from '@walletconnect/modal-react-native';
 
 <TabItem value="sdk49" label="Expo 49">
 
-### Additional Setup for Expo SDK 49
+#### Additional Setup for Expo SDK 49
 
 If you are using Expo SDK 49, there's an [issue](https://github.com/expo/expo/issues/17270) with `react-native-get-random-values`, so we need to manually update it's version to `v1.9.0` and exclude this package from expo validations. For more info, read [Selectively opt out of package version validations](https://blog.expo.dev/expo-sdk-49-c6d398cdf740)
 
