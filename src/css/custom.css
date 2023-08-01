@@ -772,24 +772,15 @@ article img {
   border: 2px solid var(--ifm-border-color);
 }
 
-.home__small-container__img-container {
-  position: absolute;
-  top: 0.25rem;
-  right: 0.25rem;
-  bottom: 0.25rem;
-
-  aspect-ratio: 1/1;
-  background: #141414;
-  display: grid;
-  place-items: center;
-  border-radius: 0.5rem;
-}
-
 .home__small-container img {
   border: none;
   height: 1.25rem;
   width: 1.25rem;
   border-radius: 0;
+}
+
+[data-theme='light'] .home__small-container img.white {
+  filter: invert(1);
 }
 
 .home__large-container {

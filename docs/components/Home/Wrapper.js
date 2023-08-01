@@ -12,7 +12,13 @@ const Wrapper = ({ items, type, fit = true }) => {
     >
       {type === 'small'
         ? items.map((item, index) => (
-            <SmallContainer key={index} href={item.href} name={item.name} icon={item.icon} />
+            <SmallContainer
+              key={index}
+              href={item.href}
+              name={item.name}
+              icon={item.icon}
+              isWhite={item.isWhite || false}
+            />
           ))
         : items.map((item, index) => (
             <LargeContainer
