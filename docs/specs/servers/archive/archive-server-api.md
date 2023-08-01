@@ -1,4 +1,4 @@
-# History Server API
+# Archive Server API
 
 ## Register
 
@@ -19,7 +19,7 @@ Body:
 
 ## Get Messages
 
-Used to get message history for a given topic.
+Used to get message archive for a given topic.
 
 `GET /messages`
 
@@ -37,11 +37,11 @@ Used to get message history for a given topic.
 
 The `direction` parameter indicates if the messages should be retrieved forward or backward in time from `originId`.
 `forward` queries can be used to update the client with the latest messages since its last sync.
-`backward` queries can be used to retrieve past history that may have gotten removed from the client storage.
+`backward` queries can be used to retrieve past archive that may have gotten removed from the client storage.
 
 If `originId` is omitted, the absolute origin of the specified direction is used:
-- `forward` retrieves messages forward in time from the beginning of history.
-- `backward` retrieves messages backward in time from the latest one in history. 
+- `forward` retrieves messages forward in time from the beginning of archive.
+- `backward` retrieves messages backward in time from the latest one in archive. 
 
 #### Example
 
@@ -67,5 +67,5 @@ If `originId` is omitted, the absolute origin of the specified direction is used
 
 The `originId` message is included in the results `messages` list.
 
-The triplet `topic`, `direction` and `nextId` can be used to continue history retrieval without necessarily having to keep
+The triplet `topic`, `direction` and `nextId` can be used to continue archive retrieval without necessarily having to keep
 the querying context on the client.

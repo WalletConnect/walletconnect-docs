@@ -70,7 +70,7 @@ class Web3Wallet {
   // query all pending auth requests (AUTH)
   public abstract getPendingAuthRequests(): Promise<Record<number, PendingRequest>>;
   
-  // register device token for Echo server (BOTH)
+  // register device token for Push server (BOTH)
   public abstract registerDeviceToken(token: string): Promise<void>;
 
   // ---------- Events ----------------------------------------------- //

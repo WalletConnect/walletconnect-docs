@@ -1,6 +1,6 @@
-# Push Notification Types
+# Notification Types
 
-Not every message is the same and not every wallet user wants to receive every possible push notification that a dapp targets their wallet account.
+Not every message is the same and not every wallet user wants to receive every possible notification that a dapp targets their wallet account.
 
 Notification Types define a scope of messages that the user authorizes the dapp to notify the user related to their wallet account.
 
@@ -15,7 +15,7 @@ A notification type description is a human-readable case-sensitive string and no
 
 ## Configuration
 
-In order for dapps to expose their notification types they must store a static json file named `wc-push-config.json` in their `.well-known` path under their domain url. 
+In order for dapps to expose their notification types they must store a static json file named `wc-notify-config.json` in their `.well-known` path under their domain url.
 
 The file should include the following schema:
 
@@ -26,9 +26,9 @@ The file should include the following schema:
 For example:
 
 ```jsonc
-https://example.com/.well-known/wc-push-config.json
+https://example.com/.well-known/wc-notify-config.json
 
-// wc-push-config.json
+// wc-notify-config.json
 {
   "version": 1,
   "lastModified": 1681289416,
@@ -55,7 +55,7 @@ https://example.com/.well-known/wc-push-config.json
 
 ## Subscription Scope
 
-A Push Subscription will include a claim labelled `scp` with a string value include the user authorized notification types separated by whitespaces.
+A Notify Subscription will include a claim labelled `scp` with a string value include the user authorized notification types separated by whitespaces.
 
 For example:
 
@@ -67,9 +67,9 @@ For example:
 }
 ```
 
-## Push Message
+## Notify Message
 
-A Push Message will include a parameter called `type` in the message payload which indicates the notification type is being delivered to the wallet user
+A Notify Message will include a parameter called `type` in the message payload which indicates the notification type is being delivered to the wallet user
 
 ```jsonc
 {
