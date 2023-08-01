@@ -7,7 +7,6 @@ abstract class Client {
   // initializes the client with persisted storage and a network connection
   public abstract init(params: {
     metadata?: AppMetadata;
-    specialNamespaces?: SpecialNamespaces // optional
   }): Promise<void>;
 
   // for proposer to create a session 
@@ -17,10 +16,15 @@ abstract class Client {
     pairingTopic: string;
   }): Promise<Sequence>;
 
+// for responder to set supported and special namespaces
+  public abstract setNamespaceConfig(params: {
+    namespaceConfig: NamespaceConfig
+  }): Promise<void>;
+
   // for responder to approve a session proposal
   public abstract approveSession(params: {
     id: number;
-    namespaces: Map<string, SessionNamespace>;
+    namespaces: Map<string, SessionNamespace>; // optional
     relayProtocol?: string;
   }): Promise<Sequence>;
 

@@ -60,9 +60,6 @@ If they are valid, then the wallet if free to decide whether to approve the prop
 
 If the wallet (or the user) does NOT approve the session, then it is rejected. Otherwise, the wallet responds with a slightly different namespace schema: Session Namespace. Instead of having a list of `chains`, it has list of `accounts` compatible with the given methods and events. If the wallet approves a session proposal, it needs to approve all methods and events of all Proposal Namespaces. If needed, the Wallet can add permissions for more methods and events than the ones requested, but never less.
 
-The wallet can also define a special set of methods & events that can be sent without a target chain and one example of this are methods prefixed by "wallet_". Special namespaces are always defined by the wallet in the init function of SignSDK via the `specialNamespaces` parameter. 
-Example: a dapp can request `wallet_addEthereumChain` without targeting a specific chain.
-
 ### Example Session Namespace
 
 ```json
@@ -70,7 +67,7 @@ Example: a dapp can request `wallet_addEthereumChain` without targeting a specif
   "namespaces": {
     "eip155": {
       "chains": ["eip155:1", "eip155:137"],
-      "methods": ["eth_sendTransaction", "eth_signTransaction", "personal_sign"]
+      "methods": ["eth_sendTransaction", "eth_signTransaction", "personal_sign"],
       "events": ["accountsChanged", "chainChanged"],
       "accounts": ["eip155:1:0xab16a96d359ec26a11e2c2b3d8f8b8942d5bfcdb", "eip155:137:0xab16a96d359ec26a11e2c2b3d8f8b8942d5bfcdb"]
     },
@@ -91,14 +88,44 @@ Example: a dapp can request `wallet_addEthereumChain` without targeting a specif
       "events": []
     }
   },
-  "specialNamespaces": {
-    "methods": ["wallet_getPermissions", "wallet_switchEthereumChain", "wallet_creds_store"],
-    "events": []
-  }
 }
 ```
 
 The Dapp then validates if the received Session Namespaces comply with the requested Proposal Namespaces. If so, the session is established / settled. If not, the session is not established and MUST delete all related cached data.
+
+## Namespace Config
+
+The wallet can also define a special set of methods & events that can be sent without a target chain and one example of this are methods prefixed by "wallet_". Special namespaces are always defined by the wallet in the setNamespaceConfig function of SignSDK via the `specialNamespaces` parameter. When `NamespaceConfig` is set, there is no need for a wallet to pass Session Namespaces within the approve session method. In this case, Session Namespaces are generated internally.
+Example: a dapp can request `wallet_addEthereumChain` without targeting a specific chain.
+
+### Example Namespace Config
+
+```json
+{
+  "specialNamespaces": {
+    "wallet": {
+      "methods": ["wallet_getPermissions", "wallet_switchEthereumChain", "wallet_creds_store"],
+      "events": []
+    }
+  },
+  "supportedNamespaces": {
+    "eip155": {
+      "chains": ["eip155:1", "eip155:137"],
+      "methods": ["eth_sendTransaction", "eth_signTransaction", "personal_sign"],
+      "events": ["accountsChanged", "chainChanged"],
+      "accounts": ["eip155:1:0xab16a96d359ec26a11e2c2b3d8f8b8942d5bfcdb", "eip155:137:0xab16a96d359ec26a11e2c2b3d8f8b8942d5bfcdb"]
+    },
+    "cosmos": {
+      "accounts": [
+        "cosmos:cosmoshub-4:cosmos1eeyudtn5p30jek85tq0cyh7k0jnn2z4t84y58y",
+        "cosmos:cosmoshub-4:cosmos1fg2nemunucn496fewakqfe0mllcqfulrmjnj77"
+      ],
+      "methods": ["cosmos_signDirect", "cosmos_signAmino"],
+      "events": []
+    }
+  }
+}
+```
 
 ### Approving a Session Response
 

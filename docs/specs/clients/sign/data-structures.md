@@ -174,3 +174,25 @@ Verify Context is appended to Session Proposals and Session Requests to provide 
   }
 }
 ```
+
+## Namespace Config
+
+Namespace Config is set withing the setNamespaceConfig method that is a part of the Sign client. It defines Special and Supported Namespaces and must be called after initialization of the SDK and before approve session method.
+
+```jsonc
+{
+   "supportedNamespaces": {
+    "<namespace_name>": {
+      "chains": [string],
+      "methods": [string],
+      "events": [string]
+    }
+  },
+  "specialNamespaces": {
+    "<namespace_name>" : {
+      "methods": [string],
+      "events": [string]
+    }
+  }
+}
+```
