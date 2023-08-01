@@ -69,17 +69,17 @@ Allows you to show the `INSTALLED` label under the wallet icon in the list. To u
 Theme customizable parameters:
 | Parameter name | Default value |
 | -------------- | ------------- |
-| accentColor    | ![#FF3496ff](https://placehold.co/15x15/1589F0/3496ff.png) `#3496FF` |
-| onAccentColor  | ![#ffffff](https://placehold.co/15x15/ffffff/ffffff.png) `#FFFFFF` |
+| accentColor    | #3496FF |
+| onAccentColor  | #FFFFFF |
 
 ### Compose
 
 ```kotlin
 WalletConnectModalTheme(
-    accentColor = ...,
-    onAccentColor = ...
+    accentColor = Color(0xFF3496ff),
+    onAccentColor = Color.White
 ) {
-    ModalBottomSheetLayout(...) { ... }
+    ModalBottomSheetLayout() {  }
 }
 ```
 
