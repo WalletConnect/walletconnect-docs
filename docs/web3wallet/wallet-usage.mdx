@@ -121,6 +121,8 @@ Web3Wallet web3Wallet = await Web3Wallet.createInstance(
 </PlatformTabItem>
 </PlatformTabs>
 
+## Session
+
 ### NameSpace Builder
 
 <PlatformTabs
@@ -286,8 +288,6 @@ Examples of supported namespaces:
 
 </PlatformTabs>
 
-## Session
-
 ### Session Approval
 
 <PlatformTabs
@@ -428,6 +428,20 @@ Example session namespaces response:
 }
 ```
 
+#### Track Sessions
+
+When your `Web3Wallet` instance receives requests from a peer it will publish a related event. Set a subscription to handle them.
+
+To track sessions subscribe to `sessionsPublisher` publisher
+
+```swift
+Web3Wallet.instance.sessionsPublisher
+    .receive(on: DispatchQueue.main)
+    .sink { [weak self] sessions in
+        // Reload UI
+    }.store(in: &publishers)
+```
+
 </PlatformTabItem>
 <PlatformTabItem value="android">
 
@@ -542,57 +556,6 @@ await web3Wallet.reject(
 </PlatformTabItem>
 </PlatformTabs>
 
-### Session Disconnect
-
-<PlatformTabs groupId="w3w" activeOptions={["web","ios","android","flutter"]}>
-
-<PlatformTabItem value="web">
-
-If either the dapp or the wallet decides to disconnect the session, the `session_delete` event will be emitted. The wallet should listen for this event in order to update the UI.
-
-To disconnect a session from the wallet, call the `disconnectSession` function and pass in the `topic` and `reason`. You can use the `getSDKError` function, which is available in the `@walletconnect/utils` [library](https://github.com/WalletConnect/walletconnect-monorepo/tree/v2.0/packages/utils).
-
-```javascript
-await web3wallet.disconnectSession({
-  topic,
-  reason: getSdkError('USER_DISCONNECTED')
-})
-```
-
-</PlatformTabItem>
-<PlatformTabItem value="ios">
-
-For good user experience your wallet should allow users to disconnect unwanted sessions. In order to terminate a session use `disconnect` method.
-
-```swift
-try await Web3Wallet.instance.disconnect(topic: session.topic)
-```
-
-</PlatformTabItem>
-<PlatformTabItem value="android">
-
-```kotlin
-val disconnectionReason: String = /*The reason for disconnecting the Session*/
-val disconnectionCode: String = /*The code for for disconnecting the Session*/
-val sessionTopic: String = /*Topic from the Session*/
-For reference use CAIP-25: https://github.com/ChainAgnostic/CAIPs/blob/master/CAIPs/caip-25.md
-val disconnectParams = Wallet.Params.SessionDisconnect(sessionTopic, disconnectionReason, disconnectionCode)
-
-Web3Wallet.disconnectSession(disconnectParams) { error -> /*callback for error while disconnecting a session*/ }
-```
-
-To disconnect from un active session, pass a disconnection reason with code and the Session topic to the `Web3Wallet.disconnectSession`
-function.
-
-</PlatformTabItem>
-<PlatformTabItem value="flutter">
-
-//TODO
-
-</PlatformTabItem>
-
-</PlatformTabs>
-
 ### Responding to Session requests
 
 <PlatformTabs groupId="w3w" activeOptions={["web","ios","android","flutter"]}>
@@ -669,20 +632,6 @@ Now, your wallet (as it owns your user’s private keys) is responsible for sign
 ```swift
 let response: AnyCodable = sign(request: sessionRequest) // Implement your signing method
 try await Web3Wallet.instance.respond(topic: request.topic, requestId: request.id, response: .response(response))
-```
-
-#### Track Sessions
-
-When your `Web3Wallet` instance receives requests from a peer it will publish a related event. Set a subscription to handle them.
-
-To track sessions subscribe to `sessionsPublisher` publisher
-
-```swift
-Web3Wallet.instance.sessionsPublisher
-    .receive(on: DispatchQueue.main)
-    .sink { [weak self] sessions in
-        // Reload UI
-    }.store(in: &publishers)
 ```
 
 </PlatformTabItem>
@@ -803,6 +752,57 @@ Web3Wallet.extendSession(extendParams) { error -> /*callback for error while ext
 
 To extend a session, create a `Wallet.Params.SessionExtend` object with the session's topic to update the session with to `Web3Wallet.extendSession`. Session is
 extended by 7 days.
+
+</PlatformTabItem>
+<PlatformTabItem value="flutter">
+
+//TODO
+
+</PlatformTabItem>
+
+</PlatformTabs>
+
+### Session Disconnect
+
+<PlatformTabs groupId="w3w" activeOptions={["web","ios","android","flutter"]}>
+
+<PlatformTabItem value="web">
+
+When either the dapp or the wallet disconnects from a session, a `session_delete` event will be emitted. It's important to subscribe to this event so you could keep your state up-to-date.
+
+To initiate a session disconnect, call the `disconnectSession` method and pass in the `topic` and `reason`. You can use the `getSDKError` utility function, which is available in the `@walletconnect/utils` [library](https://github.com/WalletConnect/walletconnect-monorepo/tree/v2.0/packages/utils).
+
+```javascript
+await web3wallet.disconnectSession({
+  topic,
+  reason: getSdkError('USER_DISCONNECTED')
+})
+```
+
+</PlatformTabItem>
+<PlatformTabItem value="ios">
+
+For good user experience your wallet should allow users to disconnect unwanted sessions. In order to terminate a session use `disconnect` method.
+
+```swift
+try await Web3Wallet.instance.disconnect(topic: session.topic)
+```
+
+</PlatformTabItem>
+<PlatformTabItem value="android">
+
+```kotlin
+val disconnectionReason: String = /*The reason for disconnecting the Session*/
+val disconnectionCode: String = /*The code for for disconnecting the Session*/
+val sessionTopic: String = /*Topic from the Session*/
+For reference use CAIP-25: https://github.com/ChainAgnostic/CAIPs/blob/master/CAIPs/caip-25.md
+val disconnectParams = Wallet.Params.SessionDisconnect(sessionTopic, disconnectionReason, disconnectionCode)
+
+Web3Wallet.disconnectSession(disconnectParams) { error -> /*callback for error while disconnecting a session*/ }
+```
+
+To disconnect from un active session, pass a disconnection reason with code and the Session topic to the `Web3Wallet.disconnectSession`
+function.
 
 </PlatformTabItem>
 <PlatformTabItem value="flutter">
@@ -951,7 +951,7 @@ await web3Wallet.respondAuthRequest(
 
 </PlatformTabs>
 
-## Miscellaneous
+## Extra (Platform Specific)
 
 <PlatformTabs groupId="w3w" activeOptions={["web","ios","android","flutter"]}>
 
