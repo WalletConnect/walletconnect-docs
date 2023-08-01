@@ -35,6 +35,7 @@ WalletConnectModal.initialize(
 ### SessionParams
 
 This example will default to using following namespaces
+
 ```kotlin
 val methods: List<String> = listOf("eth_sendTransaction", "personal_sign", "eth_sign", "eth_signTypedData")
 val events: List<String> = listOf("chainChanged", "accountsChanged")
@@ -106,6 +107,7 @@ setContent {
     }
 }
 ````
+
 **IMPORTANT**: WalletConnectModal uses accompanist navigation material inside. `ModalBottomSheetLayout` should be imported from [Accompanist Navigation Material](https://google.github.io/accompanist/navigation-material/)
 
 ````kotlin
