@@ -90,7 +90,13 @@ module.exports = {
           label: 'WalletConnectModal',
           collapsed: true,
           collapsible: true,
-          items: ['walletconnectmodal/about', 'walletconnectmodal/usage', 'walletconnectmodal/resources']
+          items: [
+            'walletconnectmodal/about',
+            'walletconnectmodal/usage',
+            'walletconnectmodal/options',
+            'walletconnectmodal/theming',
+            'walletconnectmodal/resources'
+          ]
         },
         {
           type: 'category',
