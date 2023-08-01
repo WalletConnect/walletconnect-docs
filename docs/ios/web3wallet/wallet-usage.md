@@ -73,23 +73,7 @@ Web3Wallet.instance.sessionProposalPublisher
 Session proposal is a handshake sent by a dapp and it's purpose is to define a session rules. Handshake procedure is defined by [CAIP-25](https://github.com/ChainAgnostic/CAIPs/blob/master/CAIPs/caip-25.md).
 `Session.Proposal` object conveys set of required and optional `ProposalNamespaces` that contains blockchains methods and events. Dapp requests with methods and wallet will emit events defined in namespaces.
 
-`VerifyContext` provides a domain verification information about `Session.Proposal` and `Request`. It consists of origin of a Dapp from where the request has been sent, validation enum that says whether origin is **unknown**, **valid** or **invalid** and verify URL server.
-
-To enable or disable verification find the **Verify SDK** toggle in your project [cloud](https://cloud.walletconnect.com).
-
-```swift
-public struct VerifyContext: Equatable, Hashable {
-   public enum ValidationStatus {
-       case unknown
-       case valid
-       case invalid
-   }
-
-   public let origin: String?
-   public let validation: ValidationStatus
-   public let verifyUrl: String
-}
-```
+For more information, regarding the `VerifyContext`, more information in our [Verify Docs here.](verify.md)
 
 The user will either approve the session proposal (with session namespaces) or reject it. Session namespaces must at least contain requested methods, events and accounts associated with proposed blockchains.
 

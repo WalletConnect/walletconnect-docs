@@ -340,11 +340,11 @@ module.exports = {
           items: [
             'web/web3wallet/installation',
             'web/web3wallet/wallet-usage',
+            'web/web3wallet/verify',
             'web/web3wallet/upgrade-guide'
           ]
         },
         {
-
           type: 'category',
           label: 'Web3Inbox',
           items: [
@@ -354,7 +354,7 @@ module.exports = {
               items: [
                 'web/web3inbox/react/installation',
                 'web/web3inbox/react/usage',
-                'web/web3inbox/react/options',
+                'web/web3inbox/react/options'
               ]
             },
             {
@@ -363,13 +363,12 @@ module.exports = {
               items: [
                 'web/web3inbox/html/installation',
                 'web/web3inbox/html/usage',
-                'web/web3inbox/html/options',
+                'web/web3inbox/html/options'
               ]
             },
             'web/web3inbox/styling'
           ]
-        },
-
+        }
       ]
     },
     {
@@ -555,6 +554,7 @@ module.exports = {
           items: [
             'android/web3wallet/installation',
             'android/web3wallet/wallet-usage',
+            'android/web3wallet/verify',
             'android/web3wallet/upgrade-guide'
           ]
         },
@@ -571,7 +571,7 @@ module.exports = {
           collapsible: true,
           collapsed: true,
           items: ['android/walletconnectmodal/installation', 'android/walletconnectmodal/usage']
-        },
+        }
       ]
     },
     {
@@ -607,10 +607,7 @@ module.exports = {
           label: 'Push',
           collapsible: true,
           collapsed: true,
-          items: [
-            'android/push/installation',
-            'android/push/getting-started'
-          ]
+          items: ['android/push/installation', 'android/push/getting-started']
         },
         {
           type: 'category',
@@ -664,6 +661,7 @@ module.exports = {
           items: [
             'ios/web3wallet/installation',
             'ios/web3wallet/wallet-usage',
+            'ios/web3wallet/verify',
             'ios/web3wallet/upgrade-guide'
           ]
         },
@@ -672,10 +670,7 @@ module.exports = {
           label: 'WalletConnectModal',
           collapsible: true,
           collapsed: true,
-          items: [
-            'ios/walletconnectmodal/installation',
-            'ios/walletconnectmodal/usage',
-          ]
+          items: ['ios/walletconnectmodal/installation', 'ios/walletconnectmodal/usage']
         },
         {
           type: 'category',
@@ -837,7 +832,11 @@ module.exports = {
           label: 'WalletConnect Modal',
           collapsible: true,
           collapsed: true,
-          items: ['flutter/walletconnectmodal/about', 'flutter/walletconnectmodal/installation', 'flutter/walletconnectmodal/dapp-usage']
+          items: [
+            'flutter/walletconnectmodal/about',
+            'flutter/walletconnectmodal/installation',
+            'flutter/walletconnectmodal/dapp-usage'
+          ]
         },
         {
           type: 'category',
