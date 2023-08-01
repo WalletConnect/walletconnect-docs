@@ -768,7 +768,7 @@ extended by 7 days.
 
 <PlatformTabItem value="web">
 
-If either the dapp or the wallet decides to disconnect the session, the `session_delete` event will be emitted. The wallet should listen for this event in order to update the UI.
+When either the dapp or the wallet disconnects from a session, a `session_delete` event will be emitted. It's important to subscribe to this event so you could keep your state up-to-date.
 
 To disconnect a session from the wallet, call the `disconnectSession` function and pass in the `topic` and `reason`. You can use the `getSDKError` function, which is available in the `@walletconnect/utils` [library](https://github.com/WalletConnect/walletconnect-monorepo/tree/v2.0/packages/utils).
 
