@@ -52,11 +52,18 @@ Then in your JS/TS file, add in the function with your authorization requests
 // authentcation.js
 import { getVerifyStatus } from '../utils/verify'
 ...
-const authenticationRequest = ModalStore.state.data?.authenticationRequest
-const { params, id, verifyContext } = authenticationRequest
-...
-<p> Message {getVerifyStatus(verifyContext)} </p>
-...
+web3wallet.on("auth_request", async (authRequest) => {
+  const { id, params, verifyContext } = authRequest
+  const validation = getVerifyStatus(verifyContext)
+
+  // 1. prompt the user to approve the auth request
+  ...
+    <p> {verifyContext.verified.origin} {validation} </p>
+  ...
+
+  // 2. respond to the auth request
+  await web3wallet.respondAuthRequest(...)
+})
 ```
 
 </PlatformTabItem>
