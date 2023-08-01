@@ -48,7 +48,7 @@ WalletConnectModal.initialize(
 
 ## Show installed wallets
 
-Allows you to show the `INSTALLED` label under the wallet icon in the list. To use this feature, you need to add selected wallets that you want to handle to `AndroidManifest.xml` as a query. Specs: [Android Specs]("https://developer.android.com/guide/topics/manifest/queries-element")
+Allows you to show the `INSTALLED` label under the wallet icon in the list. To use this feature, you need to add selected wallets that you want to handle to `AndroidManifest.xml` as a query. Specs: [Android Specs](https://developer.android.com/guide/topics/manifest/queries-element)
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
