@@ -83,15 +83,15 @@
     },
     {
       "source": "/2.0/introduction/auth",
-      "destination": "/2.0/api/auth"
+      "destination": "/2.0/api/auth/overview"
     },
     {
       "source": "/2.0/introduction/push",
-      "destination": "/2.0/api/push"
+      "destination": "/2.0/api/push/overview"
     },
     {
       "source": "/2.0/introduction/chat",
-      "destination": "/2.0/api/chat"
+      "destination": "/2.0/api/chat/overview"
     },
     {
       "source": "/2.0/advanced/relay-server",

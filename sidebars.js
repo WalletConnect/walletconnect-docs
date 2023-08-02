@@ -87,13 +87,32 @@ module.exports = {
           items: [
             {
               type: 'category',
-              label: 'Sign',
-              items: [
-                'api/sign/overview',
-              ]
+              label: 'Auth',
+              items: ['api/auth/overview']
             },
-          , 'api/auth', 'api/chat', 'api/push']
-        },        {
+            {
+              type: 'category',
+              label: 'Chat',
+              items: ['api/chat/overview']
+            },
+            {
+              type: 'category',
+              label: 'Core',
+              items: ['api/core/overview']
+            },
+            {
+              type: 'category',
+              label: 'Push',
+              items: ['api/push/overview']
+            },
+            {
+              type: 'category',
+              label: 'Sign',
+              items: ['api/sign/overview']
+            }
+          ]
+        },
+        {
           type: 'category',
           label: 'WalletConnectModal',
           collapsed: true,
