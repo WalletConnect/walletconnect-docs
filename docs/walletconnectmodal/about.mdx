@@ -1,0 +1,242 @@
+import Container from './../components/Container'
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
+import PlatformTabs from '../components/PlatformTabs'
+import PlatformTabItem from '../components/PlatformTabItem'
+import CloudBanner from '../components/CloudBanner'
+
+# Introduction
+
+WalletConnectModal is a simple ui library intended for advanced use cases where users manage connections strings and associated WalletConnect API's themselves.
+
+<CloudBanner />
+
+## Installation
+
+<PlatformTabs
+	groupId="wcm"
+	activeOptions={["web","ios","android", "react-native","flutter"]}
+>
+<PlatformTabItem value="web">
+
+#### Add packages (NPM)
+
+```bash npm2yarn
+npm install @walletconnect/modal
+```
+
+#### Add packages (CDN)
+
+WalletConnectModal uses [unpkg](https://www.unpkg.com/) as its official CDN provider.
+Instead of using the npm package, you can simply import it from their CDN and use it in the same way.
+
+```html
+<script type="module">
+  import { WalletConnectModal } from 'https://unpkg.com/@walletconnect/modal'
+</script>
+```
+
+</PlatformTabItem>
+<PlatformTabItem value="ios">
+
+:::caution
+**The WalletConnectModal SDK is currently in Alpha and is not production-ready**.
+
+It's public API and associated documentation may still see significant and breaking changes.
+:::
+
+#### SwiftPackageManager
+
+You can add a WalletConnect SDK to your project with Swift Package Manager. In order to do that:
+
+1. Open XCode
+2. Go to File -> Add Packages
+3. Paste the repo GitHub url: https://github.com/WalletConnect/WalletConnectSwiftV2
+4. Tap Add Package
+5. Choose the WalletConnectV2 products that you want installed in your app.
+
+#### Alternatively, add WalletConnectModal to a `Package.swift` manifest
+
+To integrate via a `Package.swift` manifest instead of Xcode, you can add
+WalletConnectModal to the dependencies array of your package:
+
+```swift
+dependencies: [
+  .package(
+    name: "WalletConnectV2",
+    url: "https://github.com/WalletConnectV2/WalletConnectSwiftV2.git",
+    .upToNextMajor(from: "1.6.4")
+  ),
+
+  // Any other dependencies you have...
+],
+```
+
+Then, in any target that depends on a WalletConnectV2 product, add it to the `dependencies`
+array of that target:
+
+```swift
+.target(
+  name: "MyTargetName",
+  dependencies: [
+    // The product(s) you want (e.g. WalletConnectModal).
+    .product(name: "WalletConnectModal", package: "WalletConnectV2"),
+  ]
+),
+```
+</PlatformTabItem>
+<PlatformTabItem value="android">
+
+:::caution
+**The WalletConnectModal SDK is currently in Alpha and is not production-ready**.
+
+It's public API and associated documentation may still see significant and breaking changes.
+:::
+
+Kotlin implementation of WalletConnectModal for Android applications.
+
+Android Core ![Maven Central](https://img.shields.io/maven-central/v/com.walletconnect/android-core)
+
+WalletConnectModal ![Maven Central](https://img.shields.io/maven-central/v/com.walletconnect/walletconnect-modal)
+
+#### Requirements
+
+* Android min SDK 23
+* Java 11
+
+#### Installation
+root/build.gradle.kts:
+```gradle
+allprojects {
+   repositories {
+      mavenCentral()
+      maven { url "https://jitpack.io" }
+   }
+}
+```
+
+app/build.gradle.kts
+
+```gradle
+implementation(platform("com.walletconnect:android-bom:$BOM_VERSION"))
+implementation("com.walletconnect:android-core")
+implementation("com.walletconnect:walletconnect-modal")
+```
+
+</PlatformTabItem>
+<PlatformTabItem value="react-native">
+<Tabs>
+<TabItem value="rn-cli" label="React Native CLI">
+
+```bash npm2yarn
+npm install @walletconnect/modal-react-native
+```
+
+Additionally add these extra packages to help with async storage, polyfills, modals and SVG's.
+
+```bash npm2yarn
+npm install @react-native-async-storage/async-storage react-native-get-random-values react-native-modal react-native-svg
+```
+
+On iOS, use CocoaPods to add the native modules to your project:
+
+```
+npx pod-install
+```
+
+</TabItem>
+
+<TabItem value="expo" label="Expo">
+
+```
+npx expo install @walletconnect/modal-react-native
+```
+
+Additionally add these extra packages to help with async storage, polyfills, modals and SVG's.
+
+```
+npx expo install @react-native-async-storage/async-storage react-native-get-random-values react-native-modal react-native-svg
+```
+
+<Tabs>
+<TabItem value="sdk48" label="Expo 48">
+
+#### Additional Setup for Expo SDK 48
+
+If you are using Expo SDK 48, there's an [issue](https://github.com/expo/expo/issues/17270) with `react-native-get-random-values`, so we need to temporarily fix this by installing expo-crypto library and copying [this](https://github.com/WalletConnect/modal-react-native/blob/main/example/expo-crypto-shim.js) file in your root folder.
+
+```
+npx expo install expo-crypto
+```
+
+#### Apply Polyfill
+
+In your root file, add this line:
+
+```javascript
+// Only for Expo SDK 48
+import './expo-crypto-shim.js'
+
+...
+
+import { useWalletConnectModal } from '@walletconnect/modal-react-native';
+```
+
+* Make sure this line executes before the first `@walletconnect/modal-react-native` import.
+
+</TabItem>
+
+<TabItem value="sdk49" label="Expo 49">
+
+#### Additional Setup for Expo SDK 49
+
+If you are using Expo SDK 49, there's an [issue](https://github.com/expo/expo/issues/17270) with `react-native-get-random-values`, so we need to manually update it's version to `v1.9.0` and exclude this package from expo validations. For more info, read [Selectively opt out of package version validations](https://blog.expo.dev/expo-sdk-49-c6d398cdf740)
+
+#### Modify your package.json
+
+Exclude `react-native-get-random-values` in your package.json to install a different from the version recommended by Expo.
+
+```json
+"dependencies": {
+  ...
+},
+"expo": {
+  "install": {
+    "exclude": [
+      "react-native-get-random-values"
+    ]
+  }
+},
+"devDependencies": {
+  ...
+}
+```
+
+#### Install latest version of "react-native-get-random-values"
+
+```bash npm2yarn
+npm install react-native-get-random-values@1.9.0
+```
+
+</TabItem>
+
+</Tabs>
+
+</TabItem>
+</Tabs>
+
+</PlatformTabItem>
+<PlatformTabItem value="flutter">
+
+Install the WalletConnect Modal package.
+
+```dart
+flutter pub add walletconnect_modal_flutter
+```
+
+</PlatformTabItem>
+</PlatformTabs>
+
+## Next Steps
+
+Now that you've installed WalletConnectModal, you're ready to start integrating it. The next section will walk you through the process of setting up your project to use the library.
