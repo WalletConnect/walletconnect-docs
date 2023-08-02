@@ -81,10 +81,10 @@ module.exports = {
       items: [
         {
           type: 'category',
-          label: 'APIs',
-          collapsed: true,
+          label: 'Providers',
           collapsible: true,
-          items: ['api/sign', 'api/auth', 'api/chat', 'api/push']
+          collapsed: true,
+          items: ['providers/ethereum', 'providers/universal']
         },
         {
           type: 'category',
@@ -98,6 +98,13 @@ module.exports = {
             'walletconnectmodal/theming',
             'walletconnectmodal/resources'
           ]
+        },
+        {
+          type: 'category',
+          label: 'APIs',
+          collapsed: true,
+          collapsible: true,
+          items: ['api/sign', 'api/auth', 'api/chat', 'api/push']
         },
         {
           type: 'category',
