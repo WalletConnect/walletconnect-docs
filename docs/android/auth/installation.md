@@ -1,6 +1,6 @@
 # Installation
 
-Kotlin implementation of WalletConnect v2 Auth protocol for Android applications.
+Kotlin implementation of WalletConnect v2 Auth protocol for Android applications. This SDK is developed in Kotlin and usable in both Java and Kotlin files.
 
 Android Core ![Maven Central](https://img.shields.io/maven-central/v/com.walletconnect/android-core)
 Auth ![Maven Central](https://img.shields.io/maven-central/v/com.walletconnect/auth)

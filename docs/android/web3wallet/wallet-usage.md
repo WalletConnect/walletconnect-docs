@@ -66,20 +66,7 @@ val walletDelegate = object : Web3Wallet.WalletDelegate {
 Web3Wallet.setWalletDelegate(walletDelegate)
 ```
 
-`Wallet.Event.VerifyContext` provides a domain verification information about SessionProposal, SessionRequest and AuthRequest. It consists of origin of a Dapp from where the request has been sent, validation Enum that says whether origin is VALID, INVALID or UNKNOWN and verify url server. 
-
-```kotlin
-data class VerifyContext(
-    val id: Long,
-    val origin: String,
-    val validation: Model.Validation,
-    val verifyUrl: String
-)
-
-enum class Validation {
-    VALID, INVALID, UNKNOWN
-}
-```
+For more information on `Wallet.Event.VerifyContext`, check out more information here in our [Verify Docs](verify.md).
 
 The Web3Wallet needs a `Web3Wallet.WalletDelegate` passed to it for it to be able to expose asynchronous updates sent from the Dapp.
 
@@ -145,7 +132,7 @@ Examples of supported namespaces:
         accounts = listOf("cosmos:cosmoshub-4:cosmos1hsk6jryyqjfhp5dhc55tc9jtckygx0eph6dd02")
     )
 )
-    
+
 ```
 
 #
@@ -165,8 +152,8 @@ Web3Wallet.rejectSession(rejectParams) { error -> /*callback for error while rej
 To send a rejection for the Session Proposal, pass a proposerPublicKey, rejection reason and rejection code to
 the `Web3Wallet.rejectSession` function.
 
-
 #
+
 ### **Session Disconnect**
 
 ```kotlin
@@ -182,8 +169,8 @@ Web3Wallet.disconnectSession(disconnectParams) { error -> /*callback for error w
 To disconnect from un active session, pass a disconnection reason with code and the Session topic to the `Web3Wallet.disconnectSession`
 function.
 
-
 #
+
 ### **Respond Request**
 
 ```kotlin
@@ -210,8 +197,8 @@ Web3Wallet.respondSessionRequest(result) { error -> /*callback for error while r
 To reject a JSON-RPC method that was sent from a Dapps for a session, submit a `Wallet.Params.Response` with the settled session's topic and
 request ID along with the rejection data to the `Web3Wallet.respondSessionRequest` function.
 
-
 #
+
 ### **Session Update**
 
 NOTE: addresses provided in `accounts` array should follow [CAPI10](https://github.com/ChainAgnostic/CAIPs/blob/master/CAIPs/caip-10.md)
@@ -232,8 +219,8 @@ Web3Wallet.updateSession(updateParams) { error -> /*callback for error while sen
 To update a session with namespaces, submit a `Wallet.Params.SessionUpdate` object with the session's topic and namespaces to update session with
 to `Web3Wallet.updateSession`.
 
-
 #
+
 ### **Session Extend**
 
 ```kotlin
@@ -246,8 +233,8 @@ Web3Wallet.extendSession(extendParams) { error -> /*callback for error while ext
 To extend a session, create a `Wallet.Params.SessionExtend` object with the session's topic to update the session with to `Web3Wallet.extendSession`. Session is
 extended by 7 days.
 
-
 #
+
 ### **Authorization Request Approval**
 
 To approve authorization request, sign message using `CacaoSigner.sign` which requires private key to sign `Cacao` object that needs to be passed to `Wallet.Params.AuthRequestResponse` object and send to Dapp.
@@ -267,8 +254,8 @@ Web3Wallet.respondSessionRequest(Wallet.Params.AuthRequestResponse(request.id, s
 }
 ```
 
-
 #
+
 ### **Format message**
 
 To receive formatted SIWE message, call formatMessage method with following parameters:
@@ -282,6 +269,7 @@ Web3Wallet.formatMessage(formatMessage)
 ```
 
 #
+
 ### **Register Device Token**
 
 This method enables wallets to receive push notifications from WalletConnect's Echo Server via [Firebase Cloud Messaging](https://firebase.google.com/docs/cloud-messaging). This means you will have to setup your project with Firebase before being able to call registerDeviceToken method.
@@ -304,4 +292,5 @@ Web3Wallet.registerDeviceToken(
 ```
 
 ### **Sample App**
+
 To check more in details go and visit our Web3Wallet implementation app [here](https://github.com/WalletConnect/WalletConnectKotlinV2/tree/develop/sample/wallet).
