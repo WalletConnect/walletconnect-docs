@@ -570,7 +570,7 @@ module.exports = {
           label: 'WalletConnectModal',
           collapsible: true,
           collapsed: true,
-          items: ['android/walletconnectmodal/installation', 'android/walletconnectmodal/usage']
+          items: ['android/walletconnectmodal/installation', 'android/walletconnectmodal/usage', 'android/walletconnectmodal/options']
         },
       ]
     },
