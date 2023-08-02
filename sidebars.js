@@ -61,7 +61,7 @@ module.exports = {
       label: 'Cloud',
       collapsible: false,
       className: 'menu_outer_list',
-      items: ['cloud/explorer', 'cloud/relay']
+      items: ['cloud/explorer', 'cloud/verify', 'cloud/relay']
     },
     {
       type: 'category',
@@ -570,8 +570,8 @@ module.exports = {
           label: 'WalletConnectModal',
           collapsible: true,
           collapsed: true,
-          items: ['android/walletconnectmodal/installation', 'android/walletconnectmodal/usage']
-        }
+          items: ['android/walletconnectmodal/installation', 'android/walletconnectmodal/usage', 'android/walletconnectmodal/options']
+        },
       ]
     },
     {
