@@ -84,7 +84,15 @@ module.exports = {
           label: 'APIs',
           collapsed: true,
           collapsible: true,
-          items: ['api/sign', 'api/auth', 'api/chat', 'api/push']
+          items: [
+            {
+              type: 'category',
+              label: 'Sign',
+              items: [
+                'api/sign/overview',
+              ]
+            },
+          , 'api/auth', 'api/chat', 'api/push']
         },        {
           type: 'category',
           label: 'WalletConnectModal',

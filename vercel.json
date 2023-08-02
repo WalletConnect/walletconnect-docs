@@ -79,7 +79,7 @@
     },
     {
       "source": "/2.0/introduction/sign",
-      "destination": "/2.0/api/sign"
+      "destination": "/2.0/api/sign/overview"
     },
     {
       "source": "/2.0/introduction/auth",
