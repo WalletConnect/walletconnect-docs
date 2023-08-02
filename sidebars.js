@@ -81,6 +81,13 @@ module.exports = {
       items: [
         {
           type: 'category',
+          label: 'Providers',
+          collapsible: true,
+          collapsed: true,
+          items: ['providers/ethereum', 'providers/universal']
+        },
+        {
+          type: 'category',
           label: 'APIs',
           collapsed: true,
           collapsible: true,
