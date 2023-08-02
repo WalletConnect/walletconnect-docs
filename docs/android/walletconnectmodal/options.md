@@ -2,7 +2,7 @@
 
 ## Explorer recommended wallets
 
-Allows to set default recommended wallets tah are fetched from [WalletConnect Explorer](https://walletconnect.com/explorer?type=wallet). You can define a list of wallets ids you'd like to prioritise (order is respected). You can get these ids from the explorer link mentioned before by clicking on a copy icon of desired wallet card.
+Allows to set default recommended wallets that are fetched from [WalletConnect Explorer](https://walletconnect.com/explorer?type=wallet). You can define a list of wallets ids you'd like to prioritise (order is respected). You can get these ids from the explorer link mentioned before by clicking on a copy icon of your desired wallet card.
 
 ```kotlin
 val recommendedWalletsIds = listOf<String>(
