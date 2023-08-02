@@ -25,7 +25,7 @@ WalletConnectModal.initialize(
 
 ## Explorer excluded wallets
 
-Allows to exclude wallets that are fetched from [WalletConnect Explorer](https://walletconnect.com/explorer?type=wallet). You can define an array of wallet ids you'd like to exclude. You can get these ids from the explorer link mentioned before by clicking on a copy icon of desired wallet card.
+Allows to exclude wallets that are fetched from [WalletConnect Explorer](https://walletconnect.com/explorer?type=wallet). You can define an array of wallet ids you'd like to exclude. You can get these ids from the explorer link mentioned before by clicking on a copy icon of your desired wallet card.
 
 ```kotlin
 val excludedWalletIds = listOf<String>(
