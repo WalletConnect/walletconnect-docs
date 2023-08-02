@@ -115,7 +115,7 @@ module.exports = {
             {
               type: 'category',
               label: 'Sign',
-              items: ['api/sign/overview']
+              items: ['api/sign/overview', 'api/sign/installation', 'api/sign/dapp-usage', 'api/sign/wallet-usage', 'api/sign/smart-contract-wallet-usage' ]
             }
           ]
         },
