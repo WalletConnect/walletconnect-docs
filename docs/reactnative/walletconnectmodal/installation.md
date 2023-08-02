@@ -30,6 +30,20 @@ On iOS, use CocoaPods to add the native modules to your project:
 npx pod-install
 ```
 
+### Additional Setup for RN < 0.70
+
+#### Install big-integer
+```bash npm2yarn
+npm install big-integer
+```
+
+#### Apply Polyfill
+Add this line in your project's root file, making sure it's executed before `@walletconnect/modal-react-native` is imported
+
+```js
+if (typeof BigInt === 'undefined') global.BigInt = require('big-integer')
+```
+
 </TabItem>
 
 <TabItem value="expo" label="Expo">
@@ -49,7 +63,34 @@ npx expo install @react-native-async-storage/async-storage react-native-get-rand
 
 ### Additional Setup for Expo SDK 48
 
-If you are using Expo SDK 48, there's an [issue](https://github.com/expo/expo/issues/17270) with `react-native-get-random-values`, so we need to temporarily fix this by installing expo-crypto library and copying [this](https://github.com/WalletConnect/modal-react-native/blob/main/example/expo-crypto-shim.js) file in your root folder.
+If you are using Expo SDK 48, there's an [issue](https://github.com/expo/expo/issues/17270) with `react-native-get-random-values`, so we need to temporarily fix this by installing expo-crypto library and creating a custom  [shim file](https://github.com/WalletConnect/modal-react-native/blob/main/example/expo-crypto-shim.js).
+
+#### Create a shim file
+Create `expo-crypto-shim.js`
+
+```js
+///expo-crypto-shim.js
+import { getRandomValues as expoCryptoGetRandomValues } from 'expo-crypto';
+
+class Crypto {
+  getRandomValues = expoCryptoGetRandomValues;
+}
+
+// eslint-disable-next-line no-undef
+const webCrypto = typeof crypto !== 'undefined' ? crypto : new Crypto();
+
+(() => {
+  if (typeof crypto === 'undefined') {
+    Object.defineProperty(window, 'crypto', {
+      configurable: true,
+      enumerable: true,
+      get: () => webCrypto,
+    });
+  }
+})();
+```
+
+#### Install expo-crypto package
 
 ```
 npx expo install expo-crypto
@@ -57,10 +98,9 @@ npx expo install expo-crypto
 
 #### Apply Polyfill
 
-In your root file, add this line:
+Import the shim file in your project, making sure this line executes before the first `@walletconnect/modal-react-native` import.
 
 ```javascript
-// Only for Expo SDK 48
 import './expo-crypto-shim.js'
 
 ...
@@ -68,19 +108,23 @@ import './expo-crypto-shim.js'
 import { useWalletConnectModal } from '@walletconnect/modal-react-native';
 ```
 
-* Make sure this line executes before the first `@walletconnect/modal-react-native` import.
-
 </TabItem>
 
 <TabItem value="sdk49" label="Expo 49">
 
 ### Additional Setup for Expo SDK 49
 
-If you are using Expo SDK 49, there's an [issue](https://github.com/expo/expo/issues/17270) with `react-native-get-random-values`, so we need to manually update it's version to `v1.9.0` and exclude this package from expo validations. For more info, read [Selectively opt out of package version validations](https://blog.expo.dev/expo-sdk-49-c6d398cdf740)
+If you are using Expo SDK 49, there's an [issue](https://github.com/expo/expo/issues/17270) with `react-native-get-random-values`, so we need to manually update it's version to `v1.9.0` and exclude this package from Expo validations. For more info, read [Selectively opt out of package version validations](https://blog.expo.dev/expo-sdk-49-c6d398cdf740)
+
+#### Install latest version of "react-native-get-random-values"
+
+```bash npm2yarn
+npm install react-native-get-random-values@1.9.0
+```
 
 #### Modify your package.json
 
-Exclude `react-native-get-random-values` in your package.json to install a different from the version recommended by Expo.
+Exclude `react-native-get-random-values` in your package.json to avoid warnings from Expo.
 
 ```json
 "dependencies": {
@@ -96,12 +140,6 @@ Exclude `react-native-get-random-values` in your package.json to install a diffe
 "devDependencies": {
   ...
 }
-```
-
-#### Install latest version of "react-native-get-random-values"
-
-```bash npm2yarn
-npm install react-native-get-random-values@1.9.0
 ```
 
 </TabItem>

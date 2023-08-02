@@ -1,0 +1,184 @@
+import PlatformTabs from '../components/PlatformTabs'
+import PlatformTabItem from '../components/PlatformTabItem'
+
+import MobileWalletsPartial from '../web/web3modal/_partials/options/mobileWallets.mdx'
+import DesktopWalletsPartial from '../web/web3modal/_partials/options/desktopWallets.mdx'
+import WalletImagesPartial from '../web/web3modal/_partials/options/walletImages.mdx'
+import ExplorerRecommendedWalletIdsPartial from '../web/web3modal/_partials/options/explorerRecommendedWalletIds.mdx'
+import ExplorerExcludedWalletIdsPartial from '../web/web3modal/_partials/options/explorerExcludedWalletIds.mdx'
+import TermsOfServiceUrlPartial from '../web/web3modal/_partials/options/termsOfServiceUrl.mdx'
+import PrivacyPolicyUrlPartial from '../web/web3modal/_partials/options/privacyPolicyUrl.mdx'
+import EnableExplorerPartial from '../web/web3modal/_partials/options/enableExplorer.mdx'
+import ThemeModePartial from '../web/web3modal/_partials/options/themeMode.mdx'
+import ThemeVariablesPartial from '../web/web3modal/_partials/options/themeVariables.mdx'
+import ProjectIdPartial from '../web/web3modal/_partials/options/projectId.mdx'
+import EnableAuthModePartial from '../web/web3modal/_partials/options/enableAuthMode.mdx'
+import ChainsPartial from '../web/web3modal/_partials/options/chains.mdx'
+
+# Options
+
+:::note
+The following options are only available for **Web** and  **React Native**.
+:::
+<PlatformTabs
+	groupId="wcm"
+	activeOptions={["web", "react-native"]}
+>
+<PlatformTabItem value="web">
+
+Following options can be passed to `WalletConnectModal` i.e.
+
+```tsx
+new WalletConnectModal({
+  projectId: 'YOUR_PROJECT_ID'
+})
+```
+
+### projectId (required)
+
+<ProjectIdPartial />
+
+### chains (required)
+
+<ChainsPartial />
+
+### mobileWallets (optional)
+
+<MobileWalletsPartial />
+
+### desktopWallets (optional)
+
+<DesktopWalletsPartial />
+
+### walletImages (optional)
+
+<WalletImagesPartial />
+
+### explorerRecommendedWalletIds (optional)
+
+<ExplorerRecommendedWalletIdsPartial />
+
+### explorerExcludedWalletIds (optional)
+
+<ExplorerExcludedWalletIdsPartial />
+
+### termsOfServiceUrl (optional)
+
+<TermsOfServiceUrlPartial />
+
+### privacyPolicyUrl (optional)
+
+<PrivacyPolicyUrlPartial />
+
+### enableExplorer (optional)
+
+<EnableExplorerPartial />
+
+### themeMode (optional)
+
+<ThemeModePartial />
+
+### themeVariables (optional)
+
+<ThemeVariablesPartial />
+
+### enableAuthMode (optional)
+
+<EnableAuthModePartial />
+
+</PlatformTabItem>
+<PlatformTabItem value="react-native">
+
+## projectId (required)
+
+Your project’s unique identifier that can be obtained at [cloud.walletconnect.com](https://cloud.walletconnect.com). Enables following functionalities within WalletConnectModal: wallet and chain logos, optional WalletConnect RPC, support for all v2 wallets from [WalletConnect Explorer](https://walletconnect.com/explorer?type=wallet&version=2). Defaults to `undefined`.
+
+```ts
+projectId: string
+```
+
+## providerMetadata (required)
+
+Object that contains metadata of your app
+
+```ts
+providerMetadata: {
+  name: string;
+  description: string;
+  url: string;
+  icons: string[];
+  redirect: {
+    native: string;
+    universal?: string;
+  }
+};
+```
+
+## sessionParams (optional)
+
+Defaults to:
+```ts
+sessionParams = {
+  namespaces: {
+    eip155: {
+      methods: [
+        'eth_sendTransaction',
+        'personal_sign'
+      ],
+      chains: ['eip155:1'],
+      events: ['chainChanged', 'accountsChanged'],
+      rpcMap: {},
+    },
+  },
+};
+```
+
+## relayUrl (optional)
+
+Define a custom Relay Server URL. Defaults to `"wss://relay.walletconnect.com"`
+
+## onCopyClipboard (optional)
+
+This function is intended to be called when the user wants to copy something to the clipboard, and allows you to add the necessary actions to copy the value to the Clipboard.
+
+Now used in:
+* Copy button in QR Code view
+
+```ts
+onCopyClipboard: (value: string) => void;
+
+//example
+const onCopyClipboard = (value: string) => {
+  Clipboard.setString(value);
+};
+```
+
+## explorerRecommendedWalletIds (optional)
+
+Allows to override default recommended wallets that are fetched from [WalletConnect Explorer](https://walletconnect.com/explorer?type=wallet). You can define an array of wallet ids you'd like to prioritize (order is respected). You can get these ids from the explorer link mentioned before by clicking on a copy icon of desired wallet card. If you want to completely disable recommended wallets, you can set this option to `NONE`. Defaults to `undefined`.
+
+```ts
+explorerRecommendedWalletIds: string[] | 'NONE'
+
+//example
+explorerRecommendedWalletIds={[
+  '1ae92b26df02f0abca6304df07debccd18262fdf5fe82daa81593582dac9a369',
+  '4622a2b2d6af1c9844944291e5e7351a6aa24cd7b23099efac1b2fd875da31a0'
+]}
+```
+
+## explorerExcludedWalletIds (optional)
+
+Allows to exclude wallets that are fetched from [WalletConnect Explorer](https://walletconnect.com/explorer?type=wallet). You can define an array of wallet ids you'd like to exclude. You can get these ids from the explorer link mentioned before by clicking on a copy icon of desired wallet card. If you want to exclude all wallets, you can set this option to `ALL`, however if `explorerRecommendedWalletIds` were defined, they will still be fetched. Defaults to `undefined`.
+
+```ts
+explorerExcludedWalletIds: string[] | 'ALL'
+
+//example
+explorerExcludedWalletIds={[
+  '1ae92b26df02f0abca6304df07debccd18262fdf5fe82daa81593582dac9a369',
+  '4622a2b2d6af1c9844944291e5e7351a6aa24cd7b23099efac1b2fd875da31a0'
+]}
+```
+</PlatformTabItem>
+</PlatformTabs>

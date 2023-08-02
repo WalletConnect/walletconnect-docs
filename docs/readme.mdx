@@ -1,4 +1,5 @@
 import Table from './components/Table'
+import WhatsNewBanner from './components/WhatsNewBanner'
 import Banner from './components/Home/Banner'
 import Wrapper from './components/Home/Wrapper'
 import webLogo from '../static/assets/home/webLogo.png'
@@ -11,56 +12,20 @@ import web3modalLogo from '../static/assets/home/web3modalLogo.png'
 import web3walletLogo from '../static/assets/home/web3walletLogo.png'
 import web3inboxLogo from '../static/assets/home/web3inboxLogo.png'
 import bookLogo from '../static/assets/home/bookLogo.png'
+import twitterLogo from '../static/assets/home/twitterLogo.png'
+import githubLogo from '../static/assets/home/githubLogo.png'
+import universalProviderLogo from '../static/assets/home/universalProviderLogo.png'
+import ethereumProviderLogo from '../static/assets/home/ethereumProviderLogo.png'
+import wcmLogo from '../static/assets/home/wcmLogo.png'
+import cloudLogo from '../static/assets/home/cloudLogo.png'
 
 # About
 
 <Banner />
 
-## Platforms
-
-Use WalletConnect with your favorite platform
-
-<Wrapper
-  type="small"
-  items={[
-    {
-      name: 'Web',
-      icon: webLogo,
-      href: '/2.0/web/about-web3modal'
-    },
-    {
-      name: 'Android',
-      icon: androidLogo,
-      href: '/2.0/android/web3wallet/installation'
-    },
-    {
-      name: 'iOS',
-      icon: iosLogo,
-      href: '/2.0/ios/web3wallet/installation'
-    },
-    {
-      name: 'React Native',
-      icon: rnLogo,
-      href: '/2.0/react-native/web3wallet/installation'
-    },
-    {
-      name: 'Flutter',
-      icon: flutterLogo,
-      href: '/2.0/flutter/web3wallet/installation'
-    },
-    {
-      name: 'Unity',
-      icon: unityLogo,
-      href: '/2.0/unity/web3wallet/installation'
-    }
-  ]}
-/>
-
-<hr className="home__divider" />
-
 ## Tools
 
-Secure and effortless integration using WalletConnect SDKs. and tools
+Secure and effortless integration using WalletConnect SDKs and Tools
 
 <Wrapper
   type="large"
@@ -82,6 +47,76 @@ Secure and effortless integration using WalletConnect SDKs. and tools
       icon: web3inboxLogo,
       href: '/2.0/web3inbox/about',
       description: "Easily use WalletConnect's Push & Chat SDKs."
+    },
+    {
+      name: 'WalletConnect Cloud',
+      icon: cloudLogo,
+      href: 'https://cloud.walletconnect.com',
+      description: 'Manage your projects and check metrics with a WalletConnect Cloud account'
+    }
+  ]}
+/>
+
+<hr className="home__divider" />
+
+## What's new?
+
+<WhatsNewBanner
+  title={'Verify API'}
+  description={
+    'Yo dude, verify API is really cool, maybe you should, like, idk check it out or something'
+  }
+  href={'/2.0/api/auth?utm_source=docs&utm_medium=home&utm_campaign=whats-new'}
+/>
+
+<hr className="home__divider" />
+
+## Standalone
+
+Standalone utility tools for advanced usage with WalletConnect
+
+<Wrapper
+  type="large"
+  items={[
+    {
+      name: 'WalletConnectModal',
+      icon: wcmLogo,
+      href: '/2.0/web/walletConnectModal/modal/installation',
+      description: 'Barebones modal for connecting to WalletConnect.'
+    },
+    {
+      name: 'Ethereum Provider',
+      icon: ethereumProviderLogo,
+      href: '/2.0/web/providers/ethereum',
+      description: 'EIP-1993 compliant Provider for WalletConnect.'
+    },
+    {
+      name: 'Universal Provider',
+      icon: universalProviderLogo,
+      href: '/2.0/web/providers/universal',
+      description: 'Chain Agnostic Provider for WalletConnect.'
+    }
+  ]}
+/>
+
+<hr className="home__divider" />
+
+## Join our community
+
+Share your experience, contribute or ask questions with the WalletConnect community
+
+<Wrapper
+  type="small"
+  items={[
+    {
+      name: 'Twitter',
+      icon: twitterLogo,
+      href: 'https://twitter.com/walletconnect'
+    },
+    {
+      name: 'Github',
+      icon: githubLogo,
+      href: 'https://github.com/orgs/WalletConnect/discussions/'
     }
   ]}
 />
@@ -96,7 +131,7 @@ Secure and effortless integration using WalletConnect SDKs. and tools
     <p className="home__contribute--text">
       Every page footer has an{' '}
       <span style={{ color: 'white', fontWeight: '700' }}>Edit this page</span> link. Change the
-      Markdown, make a Pull Request and we’ll merge it!
+      Markdown, open a Pull Request and we’ll merge it!
     </p>
   </div>
   <a href="https://github.com/WalletConnect/walletconnect-docs/" target="_blank">
@@ -116,65 +151,3 @@ Secure and effortless integration using WalletConnect SDKs. and tools
     </svg>
   </a>
 </div>
-
-<!--
-## What is WalletConnect?
-
-WalletConnect is the Web3 messaging layer and a standard to connect blockchain wallets to dapps. Our mission continues to expand the interoperability of the Web3 space by providing the best tooling and infrastructure for Wallets to deliver an outstanding user experience. WalletConnect v2 is chain agnostic and built to work with any blockchain of your choice. To read more in detail about the WalletConnect protocol, check out our [Technical specifications](./specs/readme.md).
-
-If you'd like to make a PR or create an issue for our docs, you can do so by going to the [WalletConnect Docs repo](https://github.com/WalletConnect/walletconnect-docs).
-
-## Getting Started
-
-At WalletConnect, developers are primarily categorized as either Wallet builders or Dapp builders, as each type requires distinct toolkits for their respective projects.
-
-### 💻 For Dapp builders:
-
-<Container
-  items={[
-    {
-      name: 'Web3Modal',
-      description:
-        'For Dapps. Web3Modal is a library that makes it easy to connect users to your dapp and interact with the blockchain.',
-      url: `/2.0/web3modal/about`
-    },
-    {
-      name: 'Push API',
-      description:
-        'A push notification protocol that enables dapps to notify users of both off-chain and on-chain events.',
-      url: `/2.0/api/push`
-    }
-  ]}
-/>
-
-### 🔐 For Wallet builders:
-
-<Container
-  items={[
-    {
-      name: 'Web3Wallet',
-      description:
-        'For Wallets. Web3Wallet simplifies the process of integrating wallets into dapps by combining the Sign and Auth APIs into a single module.',
-      url: `/2.0/web3wallet/about`
-    },
-    {
-      name: 'Push API',
-      description:
-        'A push notification protocol that enables wallets to recieve dapp off-chain and on-chain events.',
-      url: `/2.0/api/push`
-    }
-  ]}
-/>
-
-## Why use WalletConnect?
-
-WalletConnect improves wallet-to-dapp interoperability in the web3 ecosystem. For dapps, WalletConnect can seamlessly integrate support for more than 300+ crypto wallets without much hassle. Wallets can easily integrate WalletConnect with our JavaScript, Swift or Kotlin SDK's.
-
-## Join our community
-
-Share your experience, contribute or ask questions with the WalletConnect community :
-
-- [Twitter](https://twitter.com/walletconnect)
-- [GitHub](https://github.com/orgs/WalletConnect/discussions/)
-
--->
