@@ -1,6 +1,6 @@
 # Installation
 
-Kotlin implementation of Android CoreClient for all WalletConnect SDKs.
+Kotlin implementation of Android CoreClient for all WalletConnect SDKs. This SDK is developed in Kotlin and usable in both Java and Kotlin files.
 
 ![Maven Central](https://img.shields.io/maven-central/v/com.walletconnect/android-core)
 

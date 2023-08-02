@@ -95,3 +95,25 @@ function App() {
   )
 }
 ```
+
+## Sign a message
+Once connected to the wallet, you can use our provider to send requests calling `provider.request({ method, params }, chainId)`
+
+#### Example:
+```tsx
+import { utf8ToHex } from '@walletconnect/encoding';
+import { useWalletConnectModal } from '@walletconnect/modal-react-native';
+
+function ExampleScreen() {
+  const { provider, address } = useWalletConnectModal();
+
+  const personalSign = async () => {
+    const message = 'Hello World';
+    const hexMsg = utf8ToHex(message, true);
+    const signature = await provider?.request(
+      { method: 'personal_sign', params: [hexMsg, address] },
+      'eip155:1' //optional
+    );
+  };
+}
+```
