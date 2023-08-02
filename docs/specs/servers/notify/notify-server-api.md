@@ -7,7 +7,7 @@ Used to register a webhook that would return when accounts are subscribed or uns
 `POST /register-webhook`
 
 ### Authentication
-Notify server expects an `Authorization` header in the form `Authorization: Bearer <project_secret>` using the project secret associated with a project id. The secret used should be the one that was generated automatically when configuring notify - with the name`cast_subscribe_topic_public_key`  
+Notify server expects an `Authorization` header in the form `Authorization: Bearer <project_secret>` using the project secret associated with a project id. The secret used should be the one that was generated automatically when configuring notify - with the name `notify_subscribe_topic_private_key`  
 
 Body:
 
