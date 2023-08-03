@@ -108,7 +108,8 @@ module.exports = {
               items: [
                 'api/core/about',
                 'api/core/pairing',
-                'api/core/relay'
+                'api/core/relay',
+                'api/core/shared-core'
               ]
             },
             {
