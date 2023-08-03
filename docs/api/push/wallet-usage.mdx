@@ -43,7 +43,7 @@ This step is not required if you are using the SDK on the browser-side.
 
 :::info
 The **`PushWalletClient` requires an existing pairing** in order to receive a push subscription request from a dapp.
-This means that the `PushWalletClient` should be used alongside the [Web3Wallet SDK](../../web3wallet/about.mdx), via the [Shared Core](todo) setup.
+This means that the `PushWalletClient` should be used alongside the [Web3Wallet SDK](../../web3wallet/about.mdx), via the [Shared Core] setup.
 :::
 
 **1. Initialize your WalletConnect Core, using [your Project ID](../../cloud/relay.md), and pass it to the SDK clients**
@@ -132,8 +132,8 @@ You can add a WalletConnect SDK to your project with the Swift Package Manager. 
 ## Initialization
 
 Make sure Networking and Pairing are properly configured.
-- [Networking](todoCore)
-- [Pairing](todoCore)
+- [Networking]
+- [Pairing]
 
 ### Configure a Client
 
@@ -330,7 +330,7 @@ There are two types of push notification a wallet may want to receive.
 1. Custom Push Nofications: These notifications can be rendered within your wallet and are always encrypted. Examples include receiving a notification when you have a new follower or when someone wants to buy your NFT. In this example, we will cover **this** scenario.
 
 2. User Action Push Notifications: Your wallet will receive these notifications when you need to sign or send a transaction. Examples include authorizing your wallet or minting an NFT. These actions must be completed before anything happens. **Push API is not requried** to receive these notifications. 
-To read more about User Action Push Notifications, go [here](todo).
+To read more about User Action Push Notifications, go [here].
 
 ## Implementation
 
