@@ -63,7 +63,27 @@ module.exports = {
           collapsible: true,
           items: ['web3wallet/about', 'web3wallet/wallet-usage', 'web3wallet/resources']
         },
-        'web3inbox/about'
+        {
+          type: 'category',
+          label: 'Web3Inbox',
+          collapsed: true,
+          collapsible: true,
+          items: [
+            'web3inbox/about',
+            'web3inbox/usage',
+            'web3inbox/resources', 
+          {
+            type: 'category',
+            label: 'Dapp Widget',
+            items: [
+              'web3inbox/widget/about',
+              'web3inbox/widget/usage',
+              'web3inbox/widget/options',
+              'web3inbox/widget/theming',
+              'web3inbox/widget/resources'
+            ]
+          }]
+        }
       ]
     },
     {
