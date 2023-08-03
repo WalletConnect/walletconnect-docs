@@ -100,7 +100,7 @@ module.exports = {
             {
               type: 'category',
               label: 'Chat',
-              items: ['api/chat/overview']
+              items: ['api/chat/about', 'api/chat/usage']
             },
             {
               type: 'category',
