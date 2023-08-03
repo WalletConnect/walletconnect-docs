@@ -110,7 +110,7 @@ module.exports = {
             {
               type: 'category',
               label: 'Push',
-              items: ['api/push/overview']
+              items: ['api/push/dapp-usage', 'api/push/wallet-usage']
             },
             {
               type: 'category',
