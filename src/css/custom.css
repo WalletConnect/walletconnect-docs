@@ -605,6 +605,8 @@ article img {
 }
 
 .platform-tabs .tabs__item {
+  display: grid;
+  place-items: center;
   border: 2px solid transparent;
   border-radius: 0;
   font-size: var(--ifm-h5-font-size);
