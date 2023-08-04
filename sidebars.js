@@ -60,7 +60,15 @@ module.exports = {
           label: 'Web3Modal',
           collapsed: true,
           collapsible: true,
-          items: ['web3modal/about', 'web3modal/resources']
+          items: [
+            'web3modal/about',
+            'web3modal/resources',
+            {
+              type: 'link',
+              label: 'V2',
+              href: 'https://w3m-v2-docs.vercel.app/2.0'
+            }
+          ]
         },
         {
           type: 'category',
@@ -77,18 +85,19 @@ module.exports = {
           items: [
             'web3inbox/about',
             'web3inbox/usage',
-            'web3inbox/resources', 
-          {
-            type: 'category',
-            label: 'Dapp Widget',
-            items: [
-              'web3inbox/widget/about',
-              'web3inbox/widget/usage',
-              'web3inbox/widget/options',
-              'web3inbox/widget/theming',
-              'web3inbox/widget/resources'
-            ]
-          }]
+            'web3inbox/resources',
+            {
+              type: 'category',
+              label: 'Dapp Widget',
+              items: [
+                'web3inbox/widget/about',
+                'web3inbox/widget/usage',
+                'web3inbox/widget/options',
+                'web3inbox/widget/theming',
+                'web3inbox/widget/resources'
+              ]
+            }
+          ]
         }
       ]
     },
