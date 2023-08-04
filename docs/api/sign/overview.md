@@ -26,7 +26,6 @@ npm install @walletconnect/sign-client
 </PlatformTabItem>
 
 <PlatformTabItem value="ios">
-  iOS 
   <Tabs
 queryString="ios-method"
 	values={[

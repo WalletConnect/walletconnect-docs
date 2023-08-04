@@ -95,12 +95,7 @@ module.exports = {
             {
               type: 'category',
               label: 'Auth',
-              items: [
-                'api/auth/overview',
-                'api/auth/installation',
-                'api/auth/dapp-usage',
-                'api/auth/wallet-usage'
-              ]
+              items: ['api/auth/overview', 'api/auth/dapp-usage', 'api/auth/wallet-usage']
             },
             {
               type: 'category',
