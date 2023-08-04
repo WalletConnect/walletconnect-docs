@@ -19,7 +19,7 @@ import CloudBanner from '../../components/CloudBanner'
 For an example implementation, please refer to our [react-wallet-chat example](https://github.com/WalletConnect/web-examples/tree/main/wallets/react-wallet-chat) and [demo](https://react-wallet-chat.walletconnect.com/)
 :::
 
-### Initialize your WalletConnect ChatClient, using [your Project ID]
+### Initialize your WalletConnect ChatClient, using your Project ID
 
 ```javascript
 import { Core } from "@walletconnect/core";
@@ -139,7 +139,7 @@ await chatClient.leave({ topic: chatThread.topic });
 <PlatformTabItem value="ios">
 
 Make sure what you properly configure Relay Client first 
-- [Relay]
+- [Relay](../core/relay.mdx)
 
 ### Configure Chat Client
 
@@ -373,7 +373,7 @@ func invite(inviterAccount: Account, inviteeAccount: Account, message: String) a
 }
 ```
 
-The invitee receives invitations via the `newReceivedInvitePublisher`, which provides the necessary data to respond to the invitation. Received invitations are stored and can be retrieved using the `Chat.instance.getReceivedInvites]`.
+The invitee receives invitations via the `newReceivedInvitePublisher`, which provides the necessary data to respond to the invitation. Received invitations are stored and can be retrieved using the `Chat.instance.getReceivedInvites`.
 
 #### Accepting and Rejecting an Invite
 
@@ -501,7 +501,7 @@ func getThreads() -> [WalletConnectChat.Thread] {
 
 #### Getting Messages
 
-Clients can fetch all messages for given thread by calling `Chat.instance.getMessages`. `Message` contains data neccessary to display a message. `Message.Media` can be attached to message for versatility.
+Clients can fetch all messages for given thread by calling `Chat.instance.getMessages`. `Message` contains data necessary to display a message. `Message.Media` can be attached to message for versatility.
 
 ##### `Chat.instance.getMessages`
 
@@ -743,7 +743,7 @@ val params = Chat.Params.Register(account = Chat.Type.AccountId(/*[CAIP-10](http
 ```
 
 #### Resolve invitee public invite key with blockchain address
-In order to invite someone for a chat converstion, inviter must know invitee public invite key. To resolve a invitee's public invite key that is required to invite into a chat thread, call [`ChatClient.resolve`](#chatclientresolve) method.
+In order to invite someone for a chat conversation, inviter must know invitee public invite key. To resolve a invitee's public invite key that is required to invite into a chat thread, call [`ChatClient.resolve`](#chatclientresolve) method.
 
 ##### `ChatClient.resolve`
 ```kotlin
@@ -1000,7 +1000,7 @@ val messages: List<Chat.Model.Message> = ChatClient.getMessages(params)
 </PlatformTabItem>
 <PlatformTabItem value="react-native">
 
-### Initialize your WalletConnect ChatClient, using [your Project ID](../../cloud/relay.md)
+### Initialize your WalletConnect ChatClient, using your Project ID
 
 ```javascript
 import { Core } from "@walletconnect/core";
