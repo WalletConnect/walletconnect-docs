@@ -4,6 +4,8 @@ import Container from '../components/Container';
 
 In this repository, we document and discuss features that are currently under development and experimentation. All content is highly subjected to change and in constant development, so feel free to edit, propose, discuss, comment, rant, etc. If you want to start a technical discussion, just open a PR or an issue.
 
+## Clients
+
 <Container
   items={[
     {
@@ -17,9 +19,9 @@ In this repository, we document and discuss features that are currently under de
       url: `/2.0/specs/clients/auth`
     },
     {
-      name: "Push API",
-      description: "Push is a push notification protocol that enables apps to notify users of both off-chain and on-chain events.",
-      url: `/2.0/specs/clients/push`
+      name: "Notify API",
+      description: "Notify is a notification protocol that enables apps to notify users of both off-chain and on-chain events.",
+      url: `/2.0/specs/clients/notify`
     },
     {
       name: "Chat API",
@@ -30,7 +32,14 @@ In this repository, we document and discuss features that are currently under de
       name: "Core API",
       description: "Core API consolidates several core modules that are shared between all other high-level APIs.",
       url: `/2.0/specs/clients/core`
-    },
+    }
+  ]}
+/>
+
+## Servers
+
+<Container
+  items={[
     {
       name: "Relay Server",
       description: "Relay server routes messages between clients using publish-subscribe pattern with topic-based routing.",
@@ -42,19 +51,19 @@ In this repository, we document and discuss features that are currently under de
       url: `/2.0/specs/servers/keys`
     },
     {
-      name: "Echo Server",
-      description: "Echo server observes incoming messages on the behalf of a Client through a webhook on the Relay Server.",
-      url: `/2.0/specs/servers/echo/spec`
+      name: "Push Server",
+      description: "Push server observes incoming messages on the behalf of a Client through a webhook on the Relay Server.",
+      url: `/2.0/specs/servers/push`
     },
     {
-      name: "Cast Server",
-      description: "Cast server tracks encryption keys on the behalf of a client and publishes messages to the Relay Server.",
-      url: `/2.0/specs/servers/cast/cast-server-api`
+      name: "Notify Server",
+      description: "Notify server tracks encryption keys on the behalf of a client and publishes messages to the Relay Server.",
+      url: `/2.0/specs/servers/notify`
     },
     {
-      name: "History Server",
-      description: "History server persists Relay messages indefinitely on the behalf of a client through a webhook.",
-      url: `/2.0/specs/servers/history`
+      name: "Archive Server",
+      description: "Archive server persists Relay messages indefinitely on the behalf of a client through a webhook.",
+      url: `/2.0/specs/servers/archive`
     },
     {
       name: "Verify Server",
@@ -63,4 +72,3 @@ In this repository, we document and discuss features that are currently under de
     }
   ]}
 />
-

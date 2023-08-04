@@ -607,6 +607,8 @@ article img {
 }
 
 .platform-tabs .tabs__item {
+  display: grid;
+  place-items: center;
   border: 2px solid transparent;
   border-radius: 0;
   font-size: var(--ifm-h5-font-size);
@@ -965,10 +967,16 @@ article img {
   }
 }
 
-@media screen and (max-width: 667px) {
+@media screen and (max-width: 660px) {
   .home__contribute--text {
     padding-top: 1.5rem;
     padding-bottom: 1.5rem;
+  }
+  .home__large-container {
+    width: 100%;
+  }
+  .home__small-container {
+    width: calc(50% - 0.375rem);
   }
   .cloud__wrapper a {
     min-width: 100%;

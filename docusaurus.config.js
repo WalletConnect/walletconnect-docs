@@ -122,16 +122,16 @@ const config = {
             title: 'Docs',
             items: [
               {
-                label: 'v2.0 Getting Started',
-                to: '/2.0/#getting-started'
-              },
-              {
                 label: 'Web3Modal SDK',
                 to: '/2.0/web3modal/about'
               },
               {
                 label: 'Web3Wallet SDK',
                 to: '/2.0/web3wallet/about'
+              },
+              {
+                label: 'Web3Inbox SDK',
+                to: '/2.0/web3inbox/about'
               }
             ]
           },
@@ -176,7 +176,7 @@ const config = {
       prism: {
         darkTheme: darkCodeTheme,
         theme: lightCodeTheme,
-        additionalLanguages: ['swift', 'kotlin', 'dart']
+        additionalLanguages: ['swift', 'kotlin', 'dart', 'csharp']
       },
       algolia: {
         appId: 'KEO8ND6AUT',
