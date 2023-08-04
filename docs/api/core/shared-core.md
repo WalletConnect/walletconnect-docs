@@ -1,5 +1,10 @@
 # Shared Core Instance
 
+
+:::note
+The following content are only available for JavaScript.
+:::
+
 WalletConnect's SDKs are designed to share common logic and resources via the `@walletconnect/core` package.
 
 **If you intend to leverage multiple SDKs together (e.g. Sign + Auth), it is highly recommended to instantiate

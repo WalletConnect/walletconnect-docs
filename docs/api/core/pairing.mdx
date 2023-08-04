@@ -14,9 +14,9 @@ import CloudBanner from '../../components/CloudBanner'
 <PlatformTabItem value="web">
 
 The methods listed below are limited to only the public methods of the Pairing API that we recommend you interact with directly.
-For an exhaustive list, please refer to the spec and/or implementation linked under [Useful Links](#useful-links) above.
+For an exhaustive list, please refer to the spec and/or implementation linked under [Useful Links](https://specs.walletconnect.com/2.0/specs/clients/core/pairing/pairing-methods) above.
 
-The keyword `sdkClient` is used here as a placeholder for any WalletConnect SDK that implements the Pairing API (e.g. `signClient`, `authClient`, ...).
+The keyword `sdkClient` is used here as a placeholder for any WalletConnect SDK that implements the Pairing API (e.g. `signClient`, `authClient`, etc).
 
 ```ts
  // Creates a new (inactive) pairing. Returns the URI for a peer to consume via `pair`, as well as the pairing topic.
@@ -135,9 +135,9 @@ To disconnect from a pairing, just pass the topic of the pairing to disconnect f
 <PlatformTabItem value="react-native">
 
 The methods listed below are limited to only the public methods of the Pairing API that we recommend you interact with directly.
-For an exhaustive list, please refer to the spec and/or implementation linked under [Useful Links](#useful-links) above.
+For an exhaustive list, please refer to the spec and/or implementation linked under [Useful Links](https://specs.walletconnect.com/2.0/specs/clients/core/pairing/pairing-methods) above.
 
-The keyword `sdkClient` is used here as a placeholder for any WalletConnect SDK that implements the Pairing API (e.g. `signClient`, `authClient`, ...).
+The keyword `sdkClient` is used here as a placeholder for any WalletConnect SDK that implements the Pairing API (e.g. `signClient`, `authClient`, etc).
 
 ```ts
  // Creates a new (inactive) pairing. Returns the URI for a peer to consume via `pair`, as well as the pairing topic.
@@ -182,21 +182,6 @@ sdkClient.core.pairing.events.on("pairing_delete", ({ id, topic }) => {
 ```
 </PlatformTabItem>
 <PlatformTabItem value="unity">
-
-Create a Metadata object. It will describe your application and define its appearance in a web browser. Then configure the Pair instance with a metadata object you have instantiated.
-
-Every project needs to obtain a Project ID from [WalletConnect Cloud](https://cloud.walletconnect.com/).
-
-```csharp
-var core = new CoreModule(new CoreOptions() { ProjectId = "...", Name = "my-app" });
-core.Pairing.Configure(new Metadata()
-{
-    Name = "my-app",
-    Description = "My app description",
-    Icons = new[] { "https://walletconnect.com/meta/favicon.ico" },
-    Url = "https://walletconnect.com",
-});
-```
 
 ## Pairing Wallet Usage
 
