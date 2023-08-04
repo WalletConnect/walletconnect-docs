@@ -95,7 +95,12 @@ module.exports = {
             {
               type: 'category',
               label: 'Auth',
-              items: ['api/auth/overview']
+              items: [
+                'api/auth/overview',
+                'api/auth/dapp-usage',
+                'api/auth/wallet-usage',
+                'api/auth/signer-factory'
+              ]
             },
             {
               type: 'category',
@@ -115,12 +120,22 @@ module.exports = {
             {
               type: 'category',
               label: 'Push',
-              items: ['api/push/about', 'api/push/dapp-usage', 'api/push/wallet-usage', 'api/push/echo']
+              items: [
+                'api/push/about',
+                'api/push/dapp-usage',
+                'api/push/wallet-usage',
+                'api/push/echo'
+              ]
             },
             {
               type: 'category',
               label: 'Sign',
-              items: ['api/sign/overview']
+              items: [
+                'api/sign/overview',
+                'api/sign/dapp-usage',
+                'api/sign/wallet-usage',
+                'api/sign/smart-contract-wallet-usage'
+              ]
             }
           ]
         },
