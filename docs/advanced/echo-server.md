@@ -1,6 +1,6 @@
 # Echo Server
 
-The Echo Server is a push server for the WalletConnect v2 Protocol. It allows clients to send push notifications to their users. The Echo Server can be used alongside our [Push API](../api/push/overview.md) and [Web3Wallet SDK](../web/about-web3wallet.mdx).
+The Echo Server is a push server for the WalletConnect v2 Protocol. It allows clients to send push notifications to their users. The Echo Server can be used alongside our [Push API](../api/push/dapp-usage.mdx) and [Web3Wallet SDK](../web3wallet/about.mdx).
 
 ## Options for Receiving Push Notifications
 
