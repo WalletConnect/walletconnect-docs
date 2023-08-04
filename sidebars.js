@@ -99,7 +99,7 @@ module.exports = {
                 'api/auth/overview',
                 'api/auth/installation',
                 'api/auth/dapp-usage',
-                'api/auth/wallet-usage',
+                'api/auth/wallet-usage'
               ]
             },
             {
@@ -121,8 +121,7 @@ module.exports = {
               type: 'category',
               label: 'Sign',
               items: [
-                'api/sign/overview', 
-                'api/sign/installation',
+                'api/sign/overview',
                 'api/sign/dapp-usage',
                 'api/sign/wallet-usage',
                 'api/sign/smart-contract-wallet-usage'
