@@ -91,7 +91,7 @@ module.exports = {
       label: 'Cloud',
       collapsible: false,
       className: 'menu_outer_list',
-      items: ['cloud/explorer', 'cloud/verify', 'cloud/relay']
+      items: ['cloud/explorer', 'cloud/relay']
     },
     {
       type: 'category',
@@ -108,6 +108,59 @@ module.exports = {
         },
         {
           type: 'category',
+          label: 'APIs',
+          collapsed: true,
+          collapsible: true,
+          items: [
+            {
+              type: 'category',
+              label: 'Auth',
+              items: [
+                'api/auth/overview',
+                'api/auth/dapp-usage',
+                'api/auth/wallet-usage',
+                'api/auth/signer-factory'
+              ]
+            },
+            {
+              type: 'category',
+              label: 'Chat',
+              items: ['api/chat/about', 'api/chat/usage', 'api/chat/resources']
+            },
+            {
+              type: 'category',
+              label: 'Core',
+              items: [
+                'api/core/about',
+                'api/core/pairing',
+                'api/core/relay',
+                'api/core/shared-core'
+              ]
+            },
+            {
+              type: 'category',
+              label: 'Push',
+              items: [
+                'api/push/about',
+                'api/push/dapp-usage',
+                'api/push/wallet-usage',
+                'api/push/echo'
+              ]
+            },
+            {
+              type: 'category',
+              label: 'Sign',
+              items: [
+                'api/sign/overview',
+                'api/sign/dapp-usage',
+                'api/sign/wallet-usage',
+                'api/sign/smart-contract-wallet-usage'
+              ]
+            }
+          ]
+        },
+        {
+          type: 'category',
           label: 'WalletConnectModal',
           collapsed: true,
           collapsible: true,
@@ -118,13 +171,6 @@ module.exports = {
             'walletconnectmodal/theming',
             'walletconnectmodal/resources'
           ]
-        },
-        {
-          type: 'category',
-          label: 'APIs',
-          collapsed: true,
-          collapsible: true,
-          items: ['api/sign', 'api/auth', 'api/chat', 'api/push']
         },
         {
           type: 'category',
@@ -173,7 +219,7 @@ module.exports = {
       label: 'Introduction',
       collapsible: false,
       className: 'menu_outer_list',
-      items: ['web/about-web3modal', 'web/about-web3wallet', 'web/about-web3inbox']
+      items: ['web/about-web3modal', 'web/about-web3wallet']
     },
     {
       type: 'category',
@@ -232,33 +278,7 @@ module.exports = {
           items: [
             'web/web3wallet/installation',
             'web/web3wallet/wallet-usage',
-            'web/web3wallet/verify',
             'web/web3wallet/upgrade-guide'
-          ]
-        },
-        {
-          type: 'category',
-          label: 'Web3Inbox',
-          items: [
-            {
-              type: 'category',
-              label: 'React',
-              items: [
-                'web/web3inbox/react/installation',
-                'web/web3inbox/react/usage',
-                'web/web3inbox/react/options'
-              ]
-            },
-            {
-              type: 'category',
-              label: 'HTML',
-              items: [
-                'web/web3inbox/html/installation',
-                'web/web3inbox/html/usage',
-                'web/web3inbox/html/options'
-              ]
-            },
-            'web/web3inbox/styling'
           ]
         }
       ]
@@ -446,7 +466,6 @@ module.exports = {
           items: [
             'android/web3wallet/installation',
             'android/web3wallet/wallet-usage',
-            'android/web3wallet/verify',
             'android/web3wallet/upgrade-guide'
           ]
         },
@@ -462,11 +481,7 @@ module.exports = {
           label: 'WalletConnectModal',
           collapsible: true,
           collapsed: true,
-          items: [
-            'android/walletconnectmodal/installation',
-            'android/walletconnectmodal/usage',
-            'android/walletconnectmodal/options'
-          ]
+          items: ['android/walletconnectmodal/installation', 'android/walletconnectmodal/usage']
         }
       ]
     },
@@ -503,7 +518,22 @@ module.exports = {
           label: 'Push',
           collapsible: true,
           collapsed: true,
-          items: ['android/push/installation', 'android/push/getting-started']
+          items: [
+            {
+              type: 'category',
+              label: 'Dapp Usage',
+              collapsible: true,
+              collapsed: true,
+              items: [['android/push/getting-started']]
+            },
+            {
+              type: 'category',
+              label: 'Wallet Usage',
+              collapsible: true,
+              collapsed: true,
+              items: ['android/push/getting-started']
+            }
+          ]
         },
         {
           type: 'category',
@@ -557,7 +587,6 @@ module.exports = {
           items: [
             'ios/web3wallet/installation',
             'ios/web3wallet/wallet-usage',
-            'ios/web3wallet/verify',
             'ios/web3wallet/upgrade-guide'
           ]
         },
