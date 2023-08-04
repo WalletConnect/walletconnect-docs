@@ -156,8 +156,7 @@ const config = {
       },
       announcementBar: {
         id: 'support_us',
-        content:
-          '🚨 v1.0 has been shut down. Wallets and dapps must upgrade to v2.0 immediately. <a rel="noopener noreferrer" href="/2.0/advanced/migration-from-v1.x/overview">Learn more</a>. 🚨',
+        content: '🚨 XXXX',
         backgroundColor: '#3182ce',
         textColor: '#fff',
         isCloseable: true
