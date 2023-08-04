@@ -1,19 +1,20 @@
 # Notify Server API
 
-## Register Account
+## Register Key Pair
 
-Registers an account and notify subscription symmetric key. The `subscriptionAuth` must be attached in the request so the Notify server can verify if wallet proved ownership of an address.
+Registers key agreement and authentication key pairs at the Notify Server for a registering dapp. Keys will be used on behalf of the dapp for creating subscriptions and signing notify messages. Keys must be stored in the diddoc under the dapp's domain.
 
-`POST /register`
+### Authorization
+The Notify server expects an Authorization header in the format Authorization: Bearer <project_secret>, using the project secret associated with a project id.
 
-Body:
+`GET /register`
+
+Response: 
 
 ```jsonc
 {
-    "account": string,
-    "symKey": string,
-    "subscriptionAuth": string,
-    "relayUrl": string
+  "authenticationPubKey": string,
+  "keyAgreementPubKey": string,
 }
 ```
 
@@ -24,7 +25,7 @@ Used to register a webhook that would return when accounts are subscribed or uns
 `POST /register-webhook`
 
 ### Authentication
-Cast server expects an `Authorization` header in the form `Authorization: Bearer <project_secret>` using the project secret associated with a project id. The secret used should be the one that was generated automatically when configuring notify - with the name`cast_subscribe_topic_public_key`  
+Notify server expects an `Authorization` header in the form `Authorization: Bearer <project_secret>` using the project secret associated with a project id. The secret used should be the one that was generated automatically when configuring notify - with the name`cast_subscribe_topic_public_key`  
 
 Body:
 
@@ -62,7 +63,7 @@ Used to retrieve the list of registered webhooks
 `GET /webhooks`
 
 ### Authentication
-Cast server expects an `Authorization` header in the form `Authorization: Bearer <project_secret>` using the project secret associated with a project id. The secret used should be the one that was generated automatically when configuring notify - with the name`cast_subscribe_topic_public_key`  
+Notify server expects an `Authorization` header in the form `Authorization: Bearer <project_secret>` using the project secret associated with a project id. The secret used should be the one that was generated automatically when configuring notify - with the name`cast_subscribe_topic_public_key`  
 
 Response:
 
