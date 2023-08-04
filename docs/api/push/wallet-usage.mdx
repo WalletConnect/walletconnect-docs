@@ -39,10 +39,10 @@ This step is not required if you are using the SDK on the browser-side.
 
 :::info
 The **`PushWalletClient` requires an existing pairing** in order to receive a push subscription request from a dapp.
-This means that the `PushWalletClient` should be used alongside the [Web3Wallet SDK](../../web3wallet/about.mdx), via the [Shared Core] setup.
+This means that the `PushWalletClient` should be used alongside the [Web3Wallet SDK](../../web3wallet/about.mdx), via the [Shared Core](../core/shared-core.md) setup.
 :::
 
-**1. Initialize your WalletConnect Core, using [your Project ID](../../cloud/relay.md), and pass it to the SDK clients**
+**1. Initialize your WalletConnect Core, using your Project ID, and pass it to the SDK clients**
 
 ```javascript
 import { Core } from '@walletconnect/core'
@@ -128,8 +128,8 @@ You can add a WalletConnect SDK to your project with the Swift Package Manager. 
 ## Initialization
 
 Make sure Networking and Pairing are properly configured.
-- [Networking]
-- [Pairing]
+- [Networking](../core/relay.mdx)
+- [Pairing](../core/about.mdx)
 
 ### Configure a Client
 
@@ -612,10 +612,10 @@ npm install @walletconnect/push-client
 
 :::info
 The **`PushWalletClient` requires an existing pairing** in order to receive a push subscription request from a dapp.
-This means that the `PushWalletClient` should be used alongside the [Web3Wallet SDK](../../web3wallet/about.mdx), via the [Shared Core] setup.
+This means that the `PushWalletClient` should be used alongside the [Web3Wallet SDK](../../web3wallet/about.mdx), via the [Shared Core](../core/shared-core.md) setup.
 :::
 
-**1. Initialize your WalletConnect Core, using [your Project ID](../../cloud/relay.md), and pass it to the SDK clients**
+**1. Initialize your WalletConnect Core, using your Project ID, and pass it to the SDK clients**
 
 ```javascript
 import { Core } from '@walletconnect/core'

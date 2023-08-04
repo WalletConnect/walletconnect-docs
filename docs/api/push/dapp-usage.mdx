@@ -52,11 +52,11 @@ In order to enable push notifications for your dapp, you will need to:
 
 :::info
 The **`PushDappClient` requires an existing pairing** in order to send a push subscription request to the wallet.
-This means that the `PushDappClient` should be used alongside the [Sign SDK] or the
-[Auth SDK], via the [Shared Core] setup.
+This means that the `PushDappClient` should be used alongside the [Sign SDK](../sign/about.mdx) or the
+[Auth SDK](../auth/about.mdx), via the [Shared Core](../core/shared-core.md) setup.
 :::
 
-**1. Initialize your WalletConnect Core, using [your Project ID], and pass it to the SDK clients**
+**1. Initialize your WalletConnect Core, using your Project ID, and pass it to the SDK clients**
 
 ```javascript
 import { Core } from '@walletconnect/core'
@@ -158,11 +158,11 @@ await result.json() // { "sent": ["eip155:1:0xafeb..."], "failed": [], "not_foun
 
 There are two types of push notification a dapp may want to send.
 
-1. Custom Push Nofications: These notifications can be sent from your dapp and are always encrypted. Examples include sending a notification when a user gains a new follower or when someone expresses interest in purchasing their NFT. In this example, we will cover **this** scenario.
+1. Custom Push Notifications: These notifications can be sent from your dapp and are always encrypted. Examples include sending a notification when a user gains a new follower or when someone expresses interest in purchasing their NFT. In this example, we will cover **this** scenario.
 
 2. User Action Push Notifications: Your dapp will send these notifications when you need the user to sign or send a transaction from their wallet. 
 Examples include authorizing your dapp or minting an NFT. These actions must be completed before anything happens. 
-**Push API is not requried** to send these notifications. To read more about User Action Push Notifications, go [here].
+**Push API is not required** to send these notifications. To read more about User Action Push Notifications, go [here].
 
 ## Add SDK for Your Project.
 
@@ -177,8 +177,8 @@ You can add a WalletConnect SDK to your project with the Swift Package Manager. 
 ## Initialization
 
 Make sure Networking and Pairing are properly configured.
-- [Networking]
-- [Pairing]
+- [Networking](../core/relay.mdx)
+- [Pairing](../core/about.mdx)
 
 ### Register for Subscriptions
 
@@ -248,11 +248,11 @@ In order to enable push notifications for your dapp, you will need to:
 
 :::info
 The **`PushDappClient` requires an existing pairing** in order to send a push subscription request to the wallet.
-This means that the `PushDappClient` should be used alongside the [Sign SDK] or the
-[Auth SDK], via the [Shared Core] setup.
+This means that the `PushDappClient` should be used alongside the [Sign SDK](../sign/about.mdx) or the
+[Auth SDK](../auth/about.mdx), via the [Shared Core](../core/shared-core.md) setup.
 :::
 
-**1. Initialize your WalletConnect Core, using [your Project ID], and pass it to the SDK clients**
+**1. Initialize your WalletConnect Core, using your Project ID, and pass it to the SDK clients**
 
 ```javascript
 import { Core } from '@walletconnect/core'
