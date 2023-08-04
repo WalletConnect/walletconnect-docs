@@ -105,7 +105,12 @@ module.exports = {
             {
               type: 'category',
               label: 'Core',
-              items: ['api/core/overview']
+              items: [
+                'api/core/about',
+                'api/core/pairing',
+                'api/core/relay',
+                'api/core/shared-core'
+              ]
             },
             {
               type: 'category',
