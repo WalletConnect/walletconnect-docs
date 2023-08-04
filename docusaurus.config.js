@@ -74,36 +74,6 @@ const config = {
             label: 'Web'
           },
           {
-            type: 'docSidebar',
-            position: 'left',
-            sidebarId: 'android',
-            label: 'Android'
-          },
-          {
-            type: 'docSidebar',
-            position: 'left',
-            sidebarId: 'ios',
-            label: 'iOS'
-          },
-          {
-            type: 'docSidebar',
-            position: 'left',
-            sidebarId: 'reactnative',
-            label: 'React Native'
-          },
-          {
-            type: 'docSidebar',
-            position: 'left',
-            sidebarId: 'flutter',
-            label: 'Flutter'
-          },
-          {
-            type: 'docSidebar',
-            position: 'left',
-            sidebarId: 'unity',
-            label: 'Unity'
-          },
-          {
             href: 'https://github.com/walletconnect/',
             position: 'right',
             className: 'header-github-link',
