@@ -71,18 +71,19 @@ module.exports = {
           items: [
             'web3inbox/about',
             'web3inbox/usage',
-            'web3inbox/resources', 
-          {
-            type: 'category',
-            label: 'Dapp Widget',
-            items: [
-              'web3inbox/widget/about',
-              'web3inbox/widget/usage',
-              'web3inbox/widget/options',
-              'web3inbox/widget/theming',
-              'web3inbox/widget/resources'
-            ]
-          }]
+            'web3inbox/resources',
+            {
+              type: 'category',
+              label: 'Dapp Widget',
+              items: [
+                'web3inbox/widget/about',
+                'web3inbox/widget/usage',
+                'web3inbox/widget/options',
+                'web3inbox/widget/theming',
+                'web3inbox/widget/resources'
+              ]
+            }
+          ]
         }
       ]
     },
@@ -104,7 +105,7 @@ module.exports = {
           label: 'Providers',
           collapsible: true,
           collapsed: true,
-          items: ['providers/ethereum', 'providers/universal']
+          items: ['advanced/providers/ethereum', 'advanced/providers/universal']
         },
         {
           type: 'category',
@@ -112,11 +113,11 @@ module.exports = {
           collapsed: true,
           collapsible: true,
           items: [
-            'walletconnectmodal/about',
-            'walletconnectmodal/usage',
-            'walletconnectmodal/options',
-            'walletconnectmodal/theming',
-            'walletconnectmodal/resources'
+            'advanced/walletconnectmodal/about',
+            'advanced/walletconnectmodal/usage',
+            'advanced/walletconnectmodal/options',
+            'advanced/walletconnectmodal/theming',
+            'advanced/walletconnectmodal/resources'
           ]
         },
         {
@@ -124,7 +125,13 @@ module.exports = {
           label: 'APIs',
           collapsed: true,
           collapsible: true,
-          items: ['api/sign', 'api/auth', 'api/chat', 'api/push']
+          items: [
+            'advanced/api/sign',
+            'advanced/api/auth',
+            'advanced/api/chat',
+            'advanced/api/push',
+            'advanced/api/mobileLinking'
+          ]
         },
         {
           type: 'category',
