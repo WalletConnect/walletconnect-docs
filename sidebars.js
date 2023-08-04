@@ -100,17 +100,22 @@ module.exports = {
             {
               type: 'category',
               label: 'Chat',
-              items: ['api/chat/overview']
+              items: ['api/chat/about', 'api/chat/usage', 'api/chat/resources']
             },
             {
               type: 'category',
               label: 'Core',
-              items: ['api/core/overview']
+              items: [
+                'api/core/about',
+                'api/core/pairing',
+                'api/core/relay',
+                'api/core/shared-core'
+              ]
             },
             {
               type: 'category',
               label: 'Push',
-              items: ['api/push/overview']
+              items: ['api/push/about', 'api/push/dapp-usage', 'api/push/wallet-usage', 'api/push/echo']
             },
             {
               type: 'category',
