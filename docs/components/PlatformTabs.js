@@ -35,16 +35,16 @@ const PLATFORM_MAP = [
     label: 'Other'
   },
   {
+    value: 'viem',
+    label: 'Viem'
+  },
+  {
     value: 'ethers',
     label: 'Ethers'
   },
   {
     value: 'web3js',
     label: 'Web3.js'
-  },
-  {
-    value: 'viem',
-    label: 'Viem'
   }
 ]
 
