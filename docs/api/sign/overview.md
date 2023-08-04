@@ -23,6 +23,16 @@ activeOptions={["web","ios","android","flutter"]}>
 npm install @walletconnect/sign-client
 ```
 
+:::info
+
+For Node.js, the WalletConnect SignClient additionally requires `lokijs` to manage storage internally.
+
+:::
+
+```bash npm2yarn
+npm install --save @walletconnect/sign-client lokijs@1.x
+```
+
 </PlatformTabItem>
 
 <PlatformTabItem value="ios">

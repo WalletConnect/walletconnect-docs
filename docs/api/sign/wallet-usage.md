@@ -11,10 +11,6 @@ Sign API establishes a session between a wallet and a dapp in order to expose a 
 
 <CloudBanner/>
 
-//TODO: For an example implementation, please refer to our react-wallet-v2 example.
-
-//TODO: Add this to the Resources in Web3Wallet Resources.
-
 <PlatformTabs
 groupId="api-sign"
 activeOptions={["web","ios","android"]}>
@@ -70,9 +66,7 @@ an inactive/disconnected state.
 **1. Add listeners for desired `SignClient` events.**
 
 :::info
-To listen to pairing-related events, please follow the guidance for Pairing API event listeners. [TODO: ADD LINK]
-
-//TODO: Link to CORE/PAIRING WHEN READY
+To listen to pairing-related events, please follow the guidance for [Pairing API event listeners.](../core/pairing.mdx)
 :::
 
 ```ts
@@ -188,8 +182,7 @@ To create a pairing proposal, simply pass the `uri` received from the dapp into 
 :::caution
 As of 2.0.0 (stable), calling pairing-specific methods (such as `signClient.pair()`) directly on `signClient` will continue to work, but is considered deprecated and will be removed in a future major version.
 
-It is recommended to instead call these methods directly via the Pairing API. [ADD PAIRING LINK], e.g.: `signClient.core.pairing.pair()`.
-//TODO: ADD LINK TO CORE/PAIRING
+It is recommended to instead call these methods directly via the [Pairing API.](../core//pairing.mdx), e.g.: `signClient.core.pairing.pair()`.
 :::
 
 ```js
@@ -233,11 +226,8 @@ To facilitate better user experience, it is possible to pair wallets with dapps 
 
 Confirm you have configured the Network and Pair Client first
 
-- [Networking] [TODO: ADD LINKS]
-- [Pairing] [TODO: ADD LINKS]
-
-//TODO: ADD LINKS TO CORE/NETWORKING
-//TODO: ADD LINKS TO CORE/PAIRING
+- [Networking](../core/relay.mdx)
+- [Pairing](../core/pairing.mdx)
 
 ### Configure Sign Client
 

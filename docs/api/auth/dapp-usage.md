@@ -38,11 +38,7 @@ const authClient = await AuthClient.init({
 **2. Subscribe to `auth_response`.**
 
 :::info
-To listen to pairing-related events, please follow the guidance for [Pairing API event listeners]
-
-[TODO:ADD LINKS]
-
-//TODO: ADD Links to core/pairing
+To listen to pairing-related events, please follow the guidance for [Pairing API event listeners.](../core/pairing.mdx)
 :::
 
 ```javascript
@@ -128,19 +124,13 @@ The `uri` can then be displayed as a QRCode or as a deep link.
 
 Make sure what you properly configure Networking, Pair Clients and SignerFactory first
 
-- [Networking] [TODO: ADD LINKS]
-- [Pairing] [TODO: ADD LINKS]
-- [SignerFactory] [TODO: ADD LINKS]
-
-//TODO: ADD LINKS FOR core/networking
-//TODO: ADD LINKS FOR core/pairing
-//TODO: ADD LINKS FOR core/signer-factory
+- [Networking](../core/relay.mdx)
+- [Pairing](../core/pairing.mdx)
+- [SignerFactory](../auth/signer-factory.md)
 
 ### Instantiate a client
 
-Configure the `Auth` instance with your own [SignerFactory] [TODO: ADD LINKS] implementation.
-
-//TODO: ADD LINKS FOR core/signer-factory
+Configure the `Auth` instance with your own [SignerFactory](../auth/signer-factory.md) implementation.
 
 ```swift
 Auth.configure(signerFactory: <SignerFactory>)

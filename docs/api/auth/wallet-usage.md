@@ -38,11 +38,7 @@ const authClient = await AuthClient.init({
 **2. Listen to authentication requests**
 
 :::info
-To listen to pairing-related events, please follow the guidance for [Pairing API event listeners]
-
-[TODO: ADD LINKS]
-
-//TODO: ADD links for core/pairing
+To listen to pairing-related events, please follow the guidance for [Pairing API event listeners](../core/pairing.mdx)
 :::
 
 ```javascript
@@ -88,19 +84,13 @@ await authClient.core.pairing.pair({ uri })
 
 Make sure what you properly configure Networking, Pair Clients and SignerFactory first
 
-- [Networking] [TODO: ADD LINKS]
-- [Pairing] [TODO: ADD LINKS]
-- [SignerFactory] [TODO: ADD LINKS]
-
-//TODO: ADD LINKS FOR core/networking
-//TODO: ADD LINKS FOR core/pairing
-//TODO: ADD LINKS FOR core/signer-factory
+- [Networking](../core/relay.mdx)
+- [Pairing](../core/pairing.mdx)
+- [SignerFactory](../auth/signer-factory.md)
 
 ### Instantiate a Client
 
-Configure the `Auth` instance with Account object and your own [SignerFactory] [TODO: ADD LINKS] implementation.
-
-//TODO: ADD LINKS FOR core/signer-factory
+Configure the `Auth` instance with Account object and your own [SignerFactory](../auth/signer-factory.md) implementation.
 
 ```swift
 Auth.configure(

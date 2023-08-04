@@ -18,10 +18,6 @@ activeOptions={["web","ios","android","flutter"]}>
 <PlatformTabItem value="web">
 This library is compatible with Node.js, browsers and React Native applications (Node.js modules require polyfills for React Native).
 
-//TODO: [ADD LINKS]
-
-//TODO: Add in links for Node Later.
-
 Dapps will also need to install WalletConnectModal for the UI.
 
 ```bash npm2yarn
@@ -63,8 +59,7 @@ const signClient = await SignClient.init({
 **2. Add listeners for desired `SignClient` events.**
 
 :::info
-To listen to pairing-related events, please follow the guidance for Pairing API event listeners [LINK]
-//TODO: Add Pairing to core links.
+To listen to pairing-related events, please follow the guidance for [Pairing API event listeners](../core//pairing.mdx).
 :::
 
 ```javascript
@@ -195,12 +190,8 @@ const specificSession = _client.find({
 
 Make sure that you properly configure Networking and Pair Clients first.
 
-- [Networking] [TODO:ADD LINK]
-- [Pairing] [TODO:ADD LINK]
-
-//TODO: Add Core / networking LINKS
-
-//TODO: Add Core / pairing LINKS
+- [Networking](../core/relay.mdx)
+- [Pairing](../core/pairing.mdx)
 
 ### Subscribe for Sign publishers
 
