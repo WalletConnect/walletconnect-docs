@@ -28,7 +28,7 @@ export const CloudBanner = ({ title, description, href }) => {
       </a>
       <img
         style={{
-          transform: 'scale(1.5)'
+          transform: 'scale(1.5) scaleX(-1)'
         }}
         className="cloud__image"
         src={wcGlassImage}
