@@ -50,7 +50,7 @@ function BreadcrumbsItem({ children, active, index, addMicrodata }) {
 export default function DocBreadcrumbs() {
   const breadcrumbs = useSidebarBreadcrumbs()
   const revisedBreadcrumbs =
-    breadcrumbs.filter(item => item.className !== 'menu_outer_list') || null
+    breadcrumbs?.filter(item => item.className !== 'menu_outer_list') || null
   const homePageRoute = useHomePageRoute()
   if (!revisedBreadcrumbs) {
     return null
