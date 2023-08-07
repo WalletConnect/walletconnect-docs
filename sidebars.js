@@ -103,7 +103,7 @@ module.exports = {
       label: 'Cloud',
       collapsible: false,
       className: 'menu_outer_list',
-      items: ['cloud/explorer', 'cloud/relay']
+      items: ['cloud/explorer', 'cloud/verify', 'cloud/relay']
     },
     {
       type: 'category',
