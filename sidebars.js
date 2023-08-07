@@ -126,7 +126,8 @@ module.exports = {
                 'api/auth/overview',
                 'api/auth/dapp-usage',
                 'api/auth/wallet-usage',
-                'api/auth/signer-factory'
+                'api/auth/signer-factory',
+                'api/auth/resources'
               ]
             },
             {

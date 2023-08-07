@@ -134,10 +134,3 @@ Add the following to your `DebugProfile.entitlements` and `Release.entitlements`
 </PlatformTabItem>
 
 </PlatformTabs>
-
-## Useful Links
-
-// TODO: [ADD LINKS]
-// TODO: ADD THESE LINKS TO RESOURCES
-
-We've created some sample apps so that you can get a taste of the WalletConnect Auth experience. Here is our [sample wallet](https://react-auth-wallet.walletconnect.com/) and [sample dapp](https://react-auth-dapp.walletconnect.com/).
