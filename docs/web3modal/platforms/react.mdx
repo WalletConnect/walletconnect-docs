@@ -79,18 +79,12 @@ const wagmiConfig = createConfig({
 
 // 3. Rendering the Page
 export default function App() {
-  const [ready, setReady] = React.useState(false)
 
-  React.useEffect(() => {
-    setReady(true)
-  }, [])
   return (
     <>
-      {ready && (
-        <WagmiConfig config={wagmiConfig}>
-          <ConnectButton />
-        </WagmiConfig>
-      )}
+      <WagmiConfig config={wagmiConfig}>
+        <ConnectButton />
+      </WagmiConfig>
 
       <Web3Modal projectId={projectId} wagmiConfig={wagmiConfig} chains={chains} />
     </>
