@@ -83,12 +83,12 @@ Kotlin implementation of WalletConnect v2 Auth protocol for Android applications
 Android Core ![Maven Central](https://img.shields.io/maven-central/v/com.walletconnect/android-core)
 Auth ![Maven Central](https://img.shields.io/maven-central/v/com.walletconnect/auth)
 
-## Requirements
+#### Requirements
 
 - Android min SDK 23
 - Java 11
 
-## Installation
+#### Installation
 
 root/build.gradle.kts:
 
@@ -118,11 +118,11 @@ Install the WalletConnect client package.
 flutter pub add walletconnect_flutter_v2
 ```
 
-### Platform Specific Setup
+#### Platform Specific Setup
 
 Depending on your platform, you will have to add different permissions to get the package to work.
 
-### MacOS
+#### MacOS
 
 Add the following to your `DebugProfile.entitlements` and `Release.entitlements` files so that it can connect to the WebSocket server.
 

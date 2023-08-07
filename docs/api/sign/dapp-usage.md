@@ -28,7 +28,7 @@ npm install @walletconnect/modal
 For an example implementation, please refer to our `react-dapp-v2` [example](https://github.com/WalletConnect/web-examples/tree/main/dapps/react-dapp-v2).
 :::
 
-## Install Packages
+#### Install Packages
 
 Dapps will also need to install `WalletConnectModal` for the UI.
 
@@ -36,7 +36,7 @@ Dapps will also need to install `WalletConnectModal` for the UI.
 npm install @walletconnect/modal
 ```
 
-## Create a Session
+#### Create a Session
 
 **1. Initiate your WalletConnect client with the relay server, using [your Project ID](../../cloud/relay.md).**
 
@@ -132,7 +132,7 @@ try {
 }
 ```
 
-## Making Requests
+#### Making Requests
 
 Once the session has been established successfully, you can start making JSON-RPC requests to be approved and signed by the wallet:
 
@@ -151,7 +151,7 @@ const result = await signClient.request({
 
 > For more information on available JSON-RPC requests, see the [JSON-RPC reference](../../advanced/rpc-reference/ethereum-rpc.md).
 
-## Restoring a Session
+### Restoring a Session
 
 Sessions are saved to localstorage, meaning that even if the web page is reloaded, the session can still be retrieved, as demonstrated in the following code:
 
@@ -160,7 +160,7 @@ const lastKeyIndex = signClient.session.getAll().length - 1
 const lastSession = signClient.session.getAll()[lastKeyIndex]
 ```
 
-## Finding a Specific Session
+#### Finding a Specific Session
 
 If you need to find a specific session, you can do so by passing in a known `requiredNamespace` and calling `find`.
 
@@ -186,14 +186,14 @@ const specificSession = _client.find({
 
 <PlatformTabItem value="ios">
 
-### Configure Networking and Pair clients
+#### Configure Networking and Pair clients
 
 Make sure that you properly configure Networking and Pair Clients first.
 
 - [Networking](../core/relay.mdx)
 - [Pairing](../core/pairing.mdx)
 
-### Subscribe for Sign publishers
+#### Subscribe for Sign publishers
 
 When your `Sign` instance receives requests from a peer it will publish related event. So you should set subscription to handle them.
 
@@ -223,7 +223,7 @@ Following publishers are available to subscribe:
     public var sessionUpdateExpiryPublisher: AnyPublisher<(sessionTopic: String, expiry: Date), Never>
 ```
 
-### Connect Clients
+#### Connect Clients
 
 1. Prepare namespaces that constraints minimal requirements for your dApp:
 
@@ -242,7 +242,7 @@ let uri = try await Pair.instance.create()
 try await Sign.instance.connect(requiredNamespaces: namespaces, topic: uri.topic)
 ```
 
-### Send Request to the Wallet
+#### Send Request to the Wallet
 
 Once the session has been established `sessionSettlePublisher` will publish an event. Your dApp can start requesting wallet now.
 
@@ -256,7 +256,7 @@ try await Sign.instance.request(params: request)
 
 When wallet respond `sessionResponsePublisher` will publish an event so you can verify the response.
 
-### Where to go from here
+#### Where to go from here
 
 - Try our [Example dApp](https://github.com/WalletConnect/WalletConnectSwiftV2/tree/main/Example) that is part of [WalletConnectSwiftV2 repository](https://github.com/WalletConnect/WalletConnectSwiftV2).
 - Build API documentation in XCode: go to Product -> Build Documentation
@@ -265,7 +265,7 @@ When wallet respond `sessionResponsePublisher` will publish an event so you can 
 
 <PlatformTabItem value="android">
 
-### **Initialization**
+#### **Initialization**
 
 ```kotlin
 val projectId = "" // Get Project ID at https://cloud.walletconnect.com/
@@ -293,9 +293,9 @@ The Dapp client is responsible for initiating the connection with wallets and de
 
 #
 
-## **Dapp**
+# **Dapp**
 
-### **SignClient.DappDelegate**
+#### **SignClient.DappDelegate**
 
 ```kotlin
 val dappDelegate = object : SignClient.DappDelegate {
@@ -343,7 +343,7 @@ The SignClient needs a `SignClient.DappDelegate` passed to it for it to be able 
 
 #
 
-### **Connect**
+#### **Connect**
 
 ```kotlin
 val namespace: String = /*Namespace identifier, see for reference: https://github.com/ChainAgnostic/CAIPs/blob/master/CAIPs/caip-2.md#syntax*/
@@ -369,7 +369,7 @@ More about optional and required namespaces can be found [here](https://github.c
 
 #
 
-### **Get List of Settled Sessions**
+#### **Get List of Settled Sessions**
 
 ```kotlin
 SignClient.getListOfSettledSessions()
@@ -379,7 +379,7 @@ To get a list of the most current settled sessions, call `SignClient.getListOfSe
 
 #
 
-### **Get list of pending session requests for a topic**
+#### **Get list of pending session requests for a topic**
 
 ```kotlin
 SignClient.getPendingRequests(topic: String)
@@ -392,7 +392,7 @@ a `PendingRequest` object containing requestId, method, chainIs and params for p
 
 <PlatformTabItem value="flutter">
 
-### Initialization
+#### Initialization
 
 To create an instance of `SignClient`, you need to pass in the core and metadata parameters.
 
@@ -409,7 +409,7 @@ SignClient signClient = await SignClient.createInstance(
 );
 ```
 
-## Connection
+#### Connection
 
 To connect with specific parameters and display the returned URI, use `connect` with the required namespaces.
 
@@ -434,7 +434,7 @@ You will use that URI to display a QR code or handle a deep link.
 
 We recommend not handling deep linking yourself. If you want to deep link, then use the [walletconnect_modal_flutter](https://pub.dev/packages/walletconnect_modal_flutter) package.
 
-## Session Data
+#### Session Data
 
 Once you've displayed the URI you can wait for the future and hide the QR code once you've received session data.
 
@@ -442,7 +442,7 @@ Once you've displayed the URI you can wait for the future and hide the QR code o
 final SessionData session = await response.session.future;
 ```
 
-## Request Signatures
+#### Request Signatures
 
 Once the session had been created, you can request signatures.
 
@@ -457,7 +457,7 @@ final signature = await signClient.request(
 );
 ```
 
-## Respond to Events
+#### Respond to Events
 
 You can also respond to events from the wallet, like chain changed, using `onSessionEvent` and `registerEventHandler`.
 
