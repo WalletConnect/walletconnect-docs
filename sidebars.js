@@ -55,7 +55,13 @@ module.exports = {
       collapsible: false,
       className: 'menu_outer_list',
       items: [
-        'web3modal/about',
+        {
+          type: 'category',
+          label: 'Web3Modal',
+          collapsed: true,
+          collapsible: true,
+          items: ['web3modal/about', 'web3modal/resources']
+        },
         {
           type: 'category',
           label: 'Web3Wallet',
@@ -71,18 +77,19 @@ module.exports = {
           items: [
             'web3inbox/about',
             'web3inbox/usage',
-            'web3inbox/resources', 
-          {
-            type: 'category',
-            label: 'Dapp Widget',
-            items: [
-              'web3inbox/widget/about',
-              'web3inbox/widget/usage',
-              'web3inbox/widget/options',
-              'web3inbox/widget/theming',
-              'web3inbox/widget/resources'
-            ]
-          }]
+            'web3inbox/resources',
+            {
+              type: 'category',
+              label: 'Dapp Widget',
+              items: [
+                'web3inbox/widget/about',
+                'web3inbox/widget/usage',
+                'web3inbox/widget/options',
+                'web3inbox/widget/theming',
+                'web3inbox/widget/resources'
+              ]
+            }
+          ]
         }
       ]
     },
@@ -445,6 +452,67 @@ module.exports = {
       items: ['web/guides/examples-and-resources', 'web/guides/nodejs', 'web/guides/shared-core']
     }
   ],
+  'web3modal/platforms': [
+    {
+      type: 'html',
+      value:
+        '<a class="navbar__brand" href="/"><div class="navbar__logo"><img src="/img/walletconnect-logo-white.svg#dark-mode-only"  alt="WalletConnect Logo"><img src="/img/walletconnect-logo-black.svg#light-mode-only"  alt="WalletConnect Logo"></div>WalletConnect<span>Docs<span></a>',
+      defaultStyle: true
+    },
+    {
+      type: 'category',
+      label: 'General',
+      className: 'menu_outer_list',
+      collapsible: false,
+      items: [
+        {
+          type: 'link',
+          label: 'Overview',
+          href: '../about'
+        }
+      ]
+    },
+    {
+      type: 'category',
+      label: 'Web',
+      className: 'menu_outer_list',
+      collapsible: false,
+      items: [
+        {
+          type: 'doc',
+          className: 'sidebar__logo sidebar__logo--react ',
+          label: 'React',
+          id: 'web3modal/platforms/react'
+        },
+        {
+          type: 'doc',
+          className: 'sidebar__logo sidebar__logo--html ',
+          label: 'HTML',
+          id: 'web3modal/platforms/html'
+        }
+      ]
+    }
+    // {
+    //   type: 'category',
+    //   label: 'Mobile',
+    //   className: 'menu_outer_list',
+    //   collapsible: false,
+    //   items: [
+    //     'web3modal/platforms/android',
+    //     'web3modal/platforms/ios',
+    //     'web3modal/platforms/react-native',
+    //     'web3modal/platforms/flutter'
+    //   ]
+    // },
+    // {
+    //   type: 'category',
+    //   label: 'Other',
+    //   className: 'menu_outer_list',
+    //   collapsible: false,
+    //   items: ['web3modal/platforms/unity']
+    // }
+  ],
+
   android: [
     {
       type: 'html',

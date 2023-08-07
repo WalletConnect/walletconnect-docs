@@ -2,12 +2,23 @@ import React from 'react'
 import SmallContainer from './SmallContainer'
 import LargeContainer from './LargeContainer'
 
-const Wrapper = ({ items, type }) => {
+const Wrapper = ({ items, type, fit = true }) => {
   return (
-    <div className="home__wrapper">
+    <div
+      className="home__wrapper"
+      style={{
+        paddingTop: !fit ? '1rem' : 'inherit'
+      }}
+    >
       {type === 'small'
         ? items.map((item, index) => (
-            <SmallContainer key={index} href={item.href} name={item.name} icon={item.icon} />
+            <SmallContainer
+              key={index}
+              href={item.href}
+              name={item.name}
+              icon={item.icon}
+              isWhite={item.isWhite || false}
+            />
           ))
         : items.map((item, index) => (
             <LargeContainer
@@ -15,6 +26,7 @@ const Wrapper = ({ items, type }) => {
               href={item.href}
               name={item.name}
               icon={item.icon}
+              fit={fit}
               description={item.description}
             />
           ))}

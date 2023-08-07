@@ -33,6 +33,26 @@ const PLATFORM_MAP = [
   {
     value: 'unity',
     label: 'Unity'
+  },
+  {
+    value: 'mobile',
+    label: 'Mobile'
+  },
+  {
+    value: 'other',
+    label: 'Other'
+  },
+  {
+    value: 'viem',
+    label: 'Viem'
+  },
+  {
+    value: 'ethers',
+    label: 'Ethers'
+  },
+  {
+    value: 'web3js',
+    label: 'Web3.js'
   }
 ]
 
@@ -45,7 +65,12 @@ export default function PlatformTabs(props) {
   const values = valuesBuilder(props.activeOptions)
   return (
     <>
-      <Tabs className="platform-tabs" queryString="platform" values={values} {...props} />
+      <Tabs
+        className="platform-tabs"
+        queryString={props.queryString || 'platform'}
+        values={values}
+        {...props}
+      />
     </>
   )
 }
