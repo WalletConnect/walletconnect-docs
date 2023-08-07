@@ -11,7 +11,7 @@ const Banner = () => {
           WalletConnect is the Web3 messaging layer and a standard to connect blockchain wallets to
           dapps.
         </p>
-        <a href="">
+        <a href="/2.0/web3modal/platforms/react">
           Get Started
           <svg
             xmlns="http://www.w3.org/2000/svg"

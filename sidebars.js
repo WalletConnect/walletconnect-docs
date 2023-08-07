@@ -535,27 +535,40 @@ module.exports = {
       label: 'Web',
       className: 'menu_outer_list',
       collapsible: false,
-      items: ['web3modal/platforms/react', 'web3modal/platforms/html']
-    },
-    {
-      type: 'category',
-      label: 'Mobile',
-      className: 'menu_outer_list',
-      collapsible: false,
       items: [
-        'web3modal/platforms/android',
-        'web3modal/platforms/ios',
-        'web3modal/platforms/react-native',
-        'web3modal/platforms/flutter'
+        {
+          type: 'doc',
+          className: 'sidebar__logo sidebar__logo--react ',
+          label: 'React',
+          id: 'web3modal/platforms/react'
+        },
+        {
+          type: 'doc',
+          className: 'sidebar__logo sidebar__logo--html ',
+          label: 'HTML',
+          id: 'web3modal/platforms/html'
+        }
       ]
-    },
-    {
-      type: 'category',
-      label: 'Other',
-      className: 'menu_outer_list',
-      collapsible: false,
-      items: ['web3modal/platforms/unity']
     }
+    // {
+    //   type: 'category',
+    //   label: 'Mobile',
+    //   className: 'menu_outer_list',
+    //   collapsible: false,
+    //   items: [
+    //     'web3modal/platforms/android',
+    //     'web3modal/platforms/ios',
+    //     'web3modal/platforms/react-native',
+    //     'web3modal/platforms/flutter'
+    //   ]
+    // },
+    // {
+    //   type: 'category',
+    //   label: 'Other',
+    //   className: 'menu_outer_list',
+    //   collapsible: false,
+    //   items: ['web3modal/platforms/unity']
+    // }
   ],
 
   android: [
