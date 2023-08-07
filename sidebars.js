@@ -67,7 +67,12 @@ module.exports = {
           label: 'Web3Wallet',
           collapsed: true,
           collapsible: true,
-          items: ['web3wallet/about', 'web3wallet/wallet-usage', 'web3wallet/resources']
+          items: [
+            'web3wallet/about',
+            'web3wallet/wallet-usage',
+            'web3wallet/verify',
+            'web3wallet/resources'
+          ]
         },
         {
           type: 'category',
@@ -98,7 +103,7 @@ module.exports = {
       label: 'Cloud',
       collapsible: false,
       className: 'menu_outer_list',
-      items: ['cloud/explorer', 'cloud/relay']
+      items: ['cloud/explorer', 'cloud/verify', 'cloud/relay']
     },
     {
       type: 'category',
@@ -126,7 +131,8 @@ module.exports = {
                 'api/auth/overview',
                 'api/auth/dapp-usage',
                 'api/auth/wallet-usage',
-                'api/auth/signer-factory'
+                'api/auth/signer-factory',
+                'api/auth/resources'
               ]
             },
             {

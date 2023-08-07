@@ -115,7 +115,7 @@ pushWalletClient.on("push_proposal", async ({ id, topic, params }) => {
 </PlatformTabItem>
 <PlatformTabItem value="ios">
 
-### Add SDK for Your Project.
+#### Add SDK for Your Project.
 
 You can add a WalletConnect SDK to your project with the Swift Package Manager. In order to do that:
 
@@ -125,13 +125,13 @@ You can add a WalletConnect SDK to your project with the Swift Package Manager. 
 4. Tap Add Package
 5. Select WalletConnectPush check mark
 
-## Initialization
+#### Initialization
 
 Make sure Networking and Pairing are properly configured.
 - [Networking](../core/relay.mdx)
 - [Pairing](../core/about.mdx)
 
-### Configure a Client
+#### Configure a Client
 
 Configure the `Push` instance with:
 
@@ -140,7 +140,7 @@ try Push.configure(environment: APNSEnvironment)
 ```
 Use `debug` environment for debug builds and `release` for release and TestFlight builds
 
-### Register for Push Notifications
+#### Register for Push Notifications
 
 Communicate with Apple Push Notification service and receive unique device token. Register that token with following method:
 
@@ -195,7 +195,7 @@ public var subscriptionsPublisher: AnyPublisher<[PushSubscription], Never>
 ```
 
 
-### Create Push Subscription
+#### Create Push Subscription
 
 To enable seamless communication between a Dapp and a wallet, the wallet must first establish a Push Subscription. This crucial step allows the Dapp and its associated services to transmit push messages directly to the wallet. Upon granting permission for the wallet's iOS application to display Push Notifications, users will experience real-time updates in the form of push notifications on their devices. For an enhanced user experience, consider subscribing to the `pushMessagePublisher` channel. This option ensures that push messages are delivered promptly when the app is active and a web socket connection is established, keeping users informed and engaged.
 
@@ -223,13 +223,13 @@ public func subscribe(metadata: AppMetadata, account: Account, onSign: @escaping
 `onSign` - callback that requres a signature from a user
  
  
-### Get Active Subscriptions
+#### Get Active Subscriptions
 
 ```swift 
 Push.wallet.getActiveSubscriptions()
 ```
 
-### Delete Subscription
+#### Delete Subscription
 
 To delete a subscription.
 
@@ -237,7 +237,7 @@ To delete a subscription.
 try await Push.wallet.delete(topic: String)
 ```
 
-### Get Push Messages
+#### Get Push Messages
 
 To get messages by topic call:
 
@@ -245,7 +245,7 @@ To get messages by topic call:
 Push.wallet.getMessageHistory(topic: subscription.topic) 
 ```
 
-### Decrypt Push Notifications
+#### Decrypt Push Notifications
 
 All push notifications that are sent via APNs are decrypted. They have following payload:
 
@@ -283,7 +283,7 @@ Import WalletConnectPush inside your notification service extension file, initia
     }
 ```
 
-## Where to Go from Here
+#### Where to Go from Here
 - Try our [Wallet App](https://github.com/WalletConnect/WalletConnectSwiftV2/tree/main/Example/WalletApp) and to test notifications.
 - Build API documentation in XCode: go to Product -> Build Documentation
 
@@ -292,16 +292,16 @@ Import WalletConnectPush inside your notification service extension file, initia
 
 Kotlin implementation of WalletConnect Push protocol for Android applications.
 
-### Prerequisite
+#### Prerequisite
 
 **Android BOM** ![Maven Central](https://img.shields.io/maven-central/v/com.walletconnect/android-bom)
 
-### Requirements
+#### Requirements
 
 * Android min SDK 23
 * Java 11
 
-## Implementation
+#### Implementation
 root/build.gradle.kts:
 ```gradle
 allprojects {
@@ -320,7 +320,7 @@ implementation("com.walletconnect:android-core")
 implementation("com.walletconnect:push")
 ```
 
-## Getting Started
+#### Getting Started
 There are two types of push notification a wallet may want to receive.
 
 1. Custom Push Nofications: These notifications can be rendered within your wallet and are always encrypted. Examples include receiving a notification when you have a new follower or when someone wants to buy your NFT. In this example, we will cover **this** scenario.
@@ -328,11 +328,11 @@ There are two types of push notification a wallet may want to receive.
 2. User Action Push Notifications: Your wallet will receive these notifications when you need to sign or send a transaction. Examples include authorizing your wallet or minting an NFT. These actions must be completed before anything happens. **Push API is not requried** to receive these notifications. 
 To read more about User Action Push Notifications, go [here].
 
-## Implementation
+#### Implementation
 
 Once you've finished the previous step, you're ready to start implementing the Push API.
 
-### Initialization
+#### Initialization
 
 The Push Wallet client is responsible for creating and maintaining subscriptions. To initialize the Push Wallet client, create a `Push.Params.Init` object in the Android Application class with the `CoreClient`. The `Push.Params.Init` object will then be passed to the `PushWalletClient` initialize function.
 
@@ -360,7 +360,7 @@ PushWalletClient.initialize(init) { error ->
 }
 ```
 
-### Register for Push Notifications
+#### Register for Push Notifications
 
 The `PushMessageService` is a wrapper around the `FirebaseMessagingService`. This wrapper class needs to be implemented for the Push SDK to be able to decrypt and notify wallets of a push notification sent from the Dapp in the background. 
 This service also needs to be registered in the AndroidManifest.xml file similar to the example in the [FCM documentation](https://firebase.google.com/docs/cloud-messaging/android/client#manifest).
@@ -400,7 +400,7 @@ class CustomFirebaseService: PushMessageService() {
 </application>
 ```
 
-### Register for Subscriptions
+#### Register for Subscriptions
 
 `PushWalletClient` needs a `PushWalletClient.Delegate` passed to it for it to be able to expose asynchronous updates sent from the dapp.
 
@@ -431,7 +431,7 @@ val walletDelegate = object : PushWalletClient.Delegate {
 PushWalletClient.setDelegate(walletDelegate)
 ```
 
-### Subscribe to a Dapp
+#### Subscribe to a Dapp
 Calling `PushWalletClient.subscribe` will establish the subscription with the dapp specified in the `Push.Params.Subscribe` params passed into the function. The `Push.Params.Subscribe` params requires the uri of the dapp and a CAIP-10 compatible account. To verify ownership over the blockchain account, user's must sign the provided message on the `onSign(message: String)` callback. Currenlty only EIP191 signatures are supported. 
 
 Our recommendation is to show the message to the user and ask the user to either accept or reject the message.
@@ -458,7 +458,7 @@ PushWalletClient.subscribe(
 )
 ```
 
-### Approve Request
+#### Approve Request
 
 To send an approval for the subscription proposal, pass `Push.Params.Approve` to the `PushWalletClient.approve` function to establish a subscription and notify the Dapp. The request id for `Push.Params.Approve` will be available from the `Push.Event.Request` of `onPushRequest` from the PushWalletClient.Delegate. To verify ownership over blockchain account, users must sign the provided message on the `onSign(message: String)` callback. Currenlty only EIP191 signatures are supported. 
 
@@ -486,7 +486,7 @@ PushWalletClient.approve(
 )
 ```
 
-### Reject Request
+#### Reject Request
 
 To send a rejection for the subscription proposal, pass `Push.Params.Reject` to the `PushWalletClient.reject` function to reject the subscription request and notify the Dapp. The request id for `Push.Params.Approve` will be available from the `Push.Event.Request` of `onPushRequest` from the PushWalletClient.Delegate.
 
@@ -504,7 +504,7 @@ PushWalletClient.reject(
 )
 ```
 
-### Update Subscription
+#### Update Subscription
 
 To update a subscription, pass `Push.Params.Delete` with the push topic that is to be deleted. If unsuccessful, an error is returned in the callback. The pushTopic can be fetched from the `PushWalletClient.getActiveSubscriptions()`
 
@@ -517,7 +517,7 @@ PushWalletClient.delete(deleteParams) { error ->
 }
 ```
 
-### Delete Subscription
+#### Delete Subscription
 
 To delete a subscription, pass `Push.Params.Delete` with the push topic that is to be deleted. If unsuccessful, an error is returned in the callback. The pushTopic can be fetched from the `PushWalletClient.getActiveSubscriptions()`
 
@@ -530,7 +530,7 @@ PushWalletClient.delete(deleteParams) { error ->
 }
 ```
 
-### Deletea Push Message
+#### Deletea Push Message
 
 To delete a push message, pass `Push.Params.Delete` with the push topic that is to be deleted. If unsuccessful, an error is returned in the callback. The pushTopic can be fetched from the `PushWalletClient.getActiveSubscriptions()`
 
@@ -543,7 +543,7 @@ PushWalletClient.delete(deleteParams) { error ->
 }
 ```
 
-### Get Active Subscriptions
+#### Get Active Subscriptions
 
 To get a list of all the active subscriptions, call the `getActiveSubscriptions` function. It will return a map with the topic as the key and `Push.Model.Subscription` as the value.
 
@@ -551,7 +551,7 @@ To get a list of all the active subscriptions, call the `getActiveSubscriptions`
 PushWalletClient.getActiveSubscriptions()
 ```
 
-### Get Message History
+#### Get Message History
 
 To get all the messages for a specific subscription topic, call the `getMessageHistory` function by passing an instance of `Push.Params.MessageHistory`. It will return a map with the request ids as the key and `Push.Model.MessageRecord` as the value.
 
@@ -561,7 +561,7 @@ val messageHistoryParams = Push.Params.MessageHistory(subscriptionTopic)
 val mapOfMessages: Map<Long, Push.Model.MessageRecord> = PushWalletClient.getMessageHistory(messageHistoryParams)
 ```
 
-### Decrypt Message
+#### Decrypt Message
 
 To decrypt a message sent by Echo server, pass the topic and encrypted message into `Push.Params.DecryptMessage`. Pass the variable into `PushWalletClient.decryptMessage` and use the `onSuccess` and `onError` callbacks to react to the result. This function is not needed when using the `PushMessageService`.
 
@@ -579,7 +579,7 @@ PushWalletClient.decryptMessage(
 )
 ```
 
-### Enable Sync
+#### Enable Sync
 
 To enable the syncing of subscriptions and messages with multiple devices for an account, call `PushWalletClient.enableSync` and pass an instance `Push.Params.EnableSync` containing the account to sync. 
 
