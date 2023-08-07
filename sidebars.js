@@ -77,18 +77,19 @@ module.exports = {
           items: [
             'web3inbox/about',
             'web3inbox/usage',
-            'web3inbox/resources', 
-          {
-            type: 'category',
-            label: 'Dapp Widget',
-            items: [
-              'web3inbox/widget/about',
-              'web3inbox/widget/usage',
-              'web3inbox/widget/options',
-              'web3inbox/widget/theming',
-              'web3inbox/widget/resources'
-            ]
-          }]
+            'web3inbox/resources',
+            {
+              type: 'category',
+              label: 'Dapp Widget',
+              items: [
+                'web3inbox/widget/about',
+                'web3inbox/widget/usage',
+                'web3inbox/widget/options',
+                'web3inbox/widget/theming',
+                'web3inbox/widget/resources'
+              ]
+            }
+          ]
         }
       ]
     },
@@ -595,6 +596,19 @@ module.exports = {
       value:
         '<a class="navbar__brand" href="/"><div class="navbar__logo"><img src="/img/walletconnect-logo-white.svg#dark-mode-only"  alt="WalletConnect Logo"><img src="/img/walletconnect-logo-black.svg#light-mode-only"  alt="WalletConnect Logo"></div>WalletConnect<span>Docs<span></a>',
       defaultStyle: true
+    },
+    {
+      type: 'category',
+      label: 'General',
+      className: 'menu_outer_list',
+      collapsible: false,
+      items: [
+        {
+          type: 'link',
+          label: 'Overview',
+          href: '../about'
+        }
+      ]
     },
     {
       type: 'category',
