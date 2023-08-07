@@ -13,11 +13,11 @@ Once the wallet knows whether the end-user was on uniswap.com or eviluniswap.com
 
 These simple solutions make phishing attacks significantly harder and hence make a more anxiety free crypto experience for end-users.
 
+For those looking to enable the Verify on the dapp side, check out our reference guide [here.]( TODO)
+
 <CloudBanner />
 
 ### Initialization
-
-To enable or disable verification find the Verify SDK toggle in your project Cloud. [ADD LINKS/MORE HERE]
 
 <PlatformTabs
 	groupId="w3w"
@@ -106,9 +106,6 @@ enum class Validation {
     VALID, INVALID, UNKNOWN
 }
 ```
-
-The Web3Wallet client will always be responsible for exposing accounts (CAIP10 compatible) to a Dapp and therefore is also in charge of signing.
-To initialize the Web3Wallet client, create a `Wallet.Params.Init` object in the Android Application class with the Core Client. The `Wallet.Params.Init` object will then be passed to the `Web3Wallet`initialize function.
 
 </PlatformTabItem>
 </PlatformTabs>
