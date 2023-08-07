@@ -2,13 +2,21 @@ import React from 'react'
 import wcGlassImage from '../../static/assets/wc-logo-glass.png'
 
 export const CloudBanner = props => {
+  const handleAnalytics = () => {
+    const props = {
+      path: window.location.pathname
+    }
+    plausible('cloud-banner-click', {
+      props
+    })
+  }
   return (
     <div className="cloud__wrapper">
       <div className="cloud__text-container">
         <h2>Don't have a project ID?</h2>
         <p>Head over to WalletConnect Cloud and create a New Project now!</p>
       </div>
-      <a href="https://cloud.walletconnect.com" target="_blank">
+      <a href="https://cloud.walletconnect.com" target="_blank" onClick={handleAnalytics}>
         Get started
         <svg
           xmlns="http://www.w3.org/2000/svg"

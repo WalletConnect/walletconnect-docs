@@ -23,42 +23,30 @@ import cloudLogo from '../static/assets/home/cloudLogo.png'
 
 <Banner />
 
-## Platforms
+## SDKs
 
-Use WalletConnect with your favorite platform
+Secure and effortless integration using WalletConnect SDKs
 
 <Wrapper
-  type="small"
+  type="large"
   items={[
     {
-      name: 'Web',
-      icon: webLogo,
-      href: '/2.0/web/about-web3modal'
+      name: 'Web3Modal',
+      icon: web3modalLogo,
+      href: '/2.0/web3modal/about',
+      description: 'All in one SDK for connecting your dapp to any wallet.'
     },
     {
-      name: 'Android',
-      icon: androidLogo,
-      href: '/2.0/android/web3wallet/installation'
+      name: 'Web3Wallet',
+      icon: web3walletLogo,
+      href: '/2.0/web3wallet/about',
+      description: 'Connect your wallet’s users with thousands of dapps.'
     },
     {
-      name: 'iOS',
-      icon: iosLogo,
-      href: '/2.0/ios/web3wallet/installation'
-    },
-    {
-      name: 'React Native',
-      icon: rnLogo,
-      href: '/2.0/react-native/web3wallet/installation'
-    },
-    {
-      name: 'Flutter',
-      icon: flutterLogo,
-      href: '/2.0/flutter/web3wallet/installation'
-    },
-    {
-      name: 'Unity',
-      icon: unityLogo,
-      href: '/2.0/unity/web3wallet/installation'
+      name: 'Web3Inbox',
+      icon: web3inboxLogo,
+      href: '/2.0/web3inbox/about',
+      description: "Easily use WalletConnect's Push & Chat SDKs."
     }
   ]}
 />
@@ -69,53 +57,15 @@ Use WalletConnect with your favorite platform
 
 <WhatsNewBanner
   title={'Verify API'}
-  description={
-    'Yo dude, verify API is really cool, maybe you should, like, idk check it out or something'
-  }
+  description={'Securely validate and prevent phishing with domain verification.'}
   href={'/2.0/api/auth?utm_source=docs&utm_medium=home&utm_campaign=whats-new'}
 />
 
 <hr className="home__divider" />
 
-## Tools
+## Advanced
 
-Secure and effortless integration using WalletConnect SDKs and Tools
-
-<Wrapper
-  type="large"
-  items={[
-    {
-      name: 'Web3Modal',
-      icon: web3modalLogo,
-      href: '/2.0/web3modal/about',
-      description: 'Simple yet powerful multi-chain wallet connection interface.'
-    },
-    {
-      name: 'Web3Wallet',
-      icon: web3walletLogo,
-      href: '/2.0/web3wallet/about',
-      description: 'Connect your wallet’s users with thousands of apps.'
-    },
-    {
-      name: 'Web3Inbox',
-      icon: web3inboxLogo,
-      href: '/2.0/web3inbox/about',
-      description: "Easily use WalletConnect's Push & Chat SDKs."
-    },
-    {
-      name: 'WalletConnect Cloud',
-      icon: cloudLogo,
-      href: 'https://cloud.walletconnect.com',
-      description: 'Manage your projects and check metrics with a WalletConnect Cloud account'
-    }
-  ]}
-/>
-
-<hr className="home__divider" />
-
-## Standalone
-
-Standalone utility tools for advanced usage with WalletConnect
+Utility tools for advanced usage with WalletConnect
 
 <Wrapper
   type="large"
@@ -130,7 +80,7 @@ Standalone utility tools for advanced usage with WalletConnect
       name: 'Ethereum Provider',
       icon: ethereumProviderLogo,
       href: '/2.0/web/providers/ethereum',
-      description: 'EIP-1993 compliant Provider for WalletConnect.'
+      description: 'EVM Compatible Provider for WalletConnect.'
     },
     {
       name: 'Universal Provider',
@@ -158,7 +108,8 @@ Share your experience, contribute or ask questions with the WalletConnect commun
     {
       name: 'Github',
       icon: githubLogo,
-      href: 'https://github.com/orgs/WalletConnect/discussions/'
+      href: 'https://github.com/orgs/WalletConnect/discussions/',
+      isWhite: true
     }
   ]}
 />
@@ -171,9 +122,8 @@ Share your experience, contribute or ask questions with the WalletConnect commun
   <div className="home__contribute--heading">
     <img src={bookLogo} alt="Book Logo" />
     <p className="home__contribute--text">
-      Every page footer has an{' '}
-      <span style={{ color: 'white', fontWeight: '700' }}>Edit this page</span> link. Change the
-      Markdown, open a Pull Request and we’ll merge it!
+      Every page footer has an <strong>Edit this page</strong> link. Change the Markdown, open a
+      Pull Request and we’ll merge it!
     </p>
   </div>
   <a href="https://github.com/WalletConnect/walletconnect-docs/" target="_blank">

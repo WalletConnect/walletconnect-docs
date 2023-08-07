@@ -1,12 +1,12 @@
 # Echo Server
 
-The Echo Server is a push server for the WalletConnect v2 Protocol. It allows clients to send push notifications to their users. The Echo Server can be used alongside our [Push API](../api/push.md) and [Web3Wallet SDK](../web/about-web3wallet.mdx).
+The Echo Server is a push server for the WalletConnect v2 Protocol. It allows clients to send push notifications to their users. The Echo Server can be used alongside our [Push API](../api/push/dapp-usage.mdx) and [Web3Wallet SDK](../web3wallet/about.mdx).
 
 ## Options for Receiving Push Notifications
 
 1. Use the [hosted](#hosted-platform-recommended) platform (recommended).
 2. Self-Host our [server](https://github.com/WalletConnect/echo-server).
-3. Write your own implementation using the [spec](../specs/servers/echo/spec.md).
+3. Write your own implementation using the [spec](../specs/servers/push/spec.md).
 
 :::note
 For inquiries about self-hosting, please contact [Luther](https://t.me/lutherwc) or [Harry](https://t.me/theharryet) on Telegram.

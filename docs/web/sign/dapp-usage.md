@@ -125,16 +125,10 @@ const result = await signClient.request({
   request: {
     method: "personal_sign",
     params: [
-      "0x1d85568eEAbad713fBB5293B45ea066e552A90De",
       "0x7468697320697320612074657374206d65737361676520746f206265207369676e6564",
+      "0x1d85568eEAbad713fBB5293B45ea066e552A90De",
     ],
 });
-    method: "personal_sign",
-    params: [
-      "0x1d85568eEAbad713fBB5293B45ea066e552A90De",
-      "0x7468697320697320612074657374206d65737361676520746f206265207369676e6564",
-    ],
-  }
 ```
 
 > For more information on available JSON-RPC requests, see the [JSON-RPC reference](../../advanced/rpc-reference/ethereum-rpc.md).

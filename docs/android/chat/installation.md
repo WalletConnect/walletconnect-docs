@@ -1,6 +1,6 @@
 # Installation
 
-Kotlin implementation of WalletConnect v2 Chat protocol for Android applications.
+Kotlin implementation of WalletConnect v2 Chat protocol for Android applications. This SDK is developed in Kotlin and usable in both Java and Kotlin files.
 
 Android Core ![Maven Central](https://img.shields.io/maven-central/v/com.walletconnect/android-core)
 Chat ![Maven Central](https://img.shields.io/maven-central/v/com.walletconnect/chat)

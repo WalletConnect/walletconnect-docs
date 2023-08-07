@@ -59,7 +59,8 @@ Once the session has been established `sessionSettlePublisher` will publish an e
 
 ```Swift
 let method = "personal_sign"
-let requestParams = AnyCodable(["0x4d7920656d61696c206973206a6f686e40646f652e636f6d202d2031363533333933373535313531", "0x9b2055d370f73ec7d8a03e965129118dc8f5bf83"])
+let walletAddress = "0x9b2055d370f73ec7d8a03e965129118dc8f5bf83" // This should match the connected address
+let requestParams = AnyCodable(["0x4d7920656d61696c206973206a6f686e40646f652e636f6d202d2031363533333933373535313531", walletAddress])
 let request = Request(topic: session.topic, method: method, params: requestParams, chainId: Blockchain(chainId)!)
 try await Sign.instance.request(params: request)
 ```
