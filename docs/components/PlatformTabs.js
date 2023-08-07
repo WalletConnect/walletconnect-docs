@@ -19,6 +19,14 @@ const PLATFORM_MAP = [
     label: 'Flutter'
   },
   {
+    value: 'react',
+    label: 'React'
+  },
+  {
+    value: 'html',
+    label: 'HTML'
+  },
+  {
     value: 'react-native',
     label: 'React Native'
   },

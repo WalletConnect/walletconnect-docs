@@ -29,7 +29,7 @@ WalletConnectModal to the dependencies array of your package:
 dependencies: [
   .package(
     name: "WalletConnectV2",
-    url: "https://github.com/WalletConnectV2/WalletConnectSwiftV2.git",
+    url: "https://github.com/WalletConnect/WalletConnectSwiftV2.git",
     .upToNextMajor(from: "1.6.4")
   ),
 
