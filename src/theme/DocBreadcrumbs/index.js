@@ -48,13 +48,15 @@ function BreadcrumbsItem({ children, active, index, addMicrodata }) {
   )
 }
 export default function DocBreadcrumbs() {
-  const breadcrumbs = useSidebarBreadcrumbs()
-  const revisedBreadcrumbs =
-    breadcrumbs?.filter(item => item.className !== 'menu_outer_list') || null
-  const homePageRoute = useHomePageRoute()
-  if (!revisedBreadcrumbs) {
+  if (typeof window === 'undefined') {
     return null
   }
+  const breadcrumbs = useSidebarBreadcrumbs()
+  const homePageRoute = useHomePageRoute()
+  if (!breadcrumbs) {
+    return null
+  }
+  const revisedBreadcrumb = breadcrumbs.filter(item => item.className !== 'menu_outer_list')
   return (
     <nav
       className={clsx(ThemeClassNames.docs.docBreadcrumbs, styles.breadcrumbsContainer)}
@@ -66,8 +68,8 @@ export default function DocBreadcrumbs() {
     >
       <ul className="breadcrumbs" itemScope itemType="https://schema.org/BreadcrumbList">
         {homePageRoute && <HomeBreadcrumbItem />}
-        {revisedBreadcrumbs.map((item, idx) => {
-          const isLast = idx === revisedBreadcrumbs.length - 1
+        {revisedBreadcrumb.map((item, idx) => {
+          const isLast = idx === revisedBreadcrumb.length - 1
           return (
             <BreadcrumbsItem key={idx} active={isLast} index={idx} addMicrodata={!!item.href}>
               <BreadcrumbsItemLink href={item.href} isLast={isLast}>

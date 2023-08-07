@@ -8,7 +8,28 @@ import NavbarMobileSidebarToggle from '@theme/Navbar/MobileSidebar/Toggle'
 import NavbarLogo from '@theme/Navbar/Logo'
 import NavbarSearch from '@theme/Navbar/Search'
 import DocBreadcrumbs from '@theme/DocBreadcrumbs'
+import { DocsSidebarProvider } from '@docusaurus/theme-common/internal'
 import styles from './styles.module.css'
+
+class ErrorBoundary extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = { hasError: false }
+  }
+
+  static getDerivedStateFromError(error) {
+    return { hasError: true }
+  }
+
+  render() {
+    if (this.state.hasError) {
+      return this.props.fallback
+    }
+
+    return this.props.children
+  }
+}
+
 function useNavbarItems() {
   // TODO temporary casting until ThemeConfig type is improved
   return useThemeConfig().navbar.items
@@ -38,7 +59,9 @@ function NavbarContentLayout({ left, right }) {
   return (
     <div className="navbar__inner">
       <div className="navbar__items">
-        <DocBreadcrumbs />
+        <ErrorBoundary fallback={<a href="/">🏠 Back to home</a>}>
+          <DocBreadcrumbs />
+        </ErrorBoundary>
         {left}
       </div>
       <div className="navbar__items navbar__items--right">{right}</div>
