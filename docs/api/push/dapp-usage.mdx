@@ -37,7 +37,7 @@ npm install lokijs --save
 
 This step is not required if you are using the SDK on the browser-side.
 
-## Enabling Push Notifications for your Dapp
+#### Enabling Push Notifications for your Dapp
 
 In order to enable push notifications for your dapp, you will need to:
 
@@ -48,7 +48,7 @@ In order to enable push notifications for your dapp, you will need to:
 5. Under `Push SDK`, download both the `did.json` the `wc-push-config.json` files that have been preconfigured based on your dapp's homepage URL.
 6. Host both files in your dapp's `/.well-known` directory, so that they are accessible at `/.well-known/did.json` and `/.well-known/wc-push-config.json` respectively.
 
-## Usage
+#### Usage
 
 :::info
 The **`PushDappClient` requires an existing pairing** in order to send a push subscription request to the wallet.
@@ -121,7 +121,7 @@ const id = await pushDappClient.propose({
 
 :::
 
-### Sending Push Messages via Notify Server (REST)
+#### Sending Push Messages via Notify Server (REST)
 
 In order to send a push notification via the WalletConnect Notify server, we can send a `POST` request to the `/notify` endpoint, with the following payload (here via `fetch`):
 
@@ -164,7 +164,7 @@ There are two types of push notification a dapp may want to send.
 Examples include authorizing your dapp or minting an NFT. These actions must be completed before anything happens. 
 **Push API is not required** to send these notifications. To read more about User Action Push Notifications, go [here].
 
-## Add SDK for Your Project.
+#### Add SDK for Your Project.
 
 You can add a WalletConnect SDK to your project with the Swift Package Manager. In order to do that:
 
@@ -174,13 +174,13 @@ You can add a WalletConnect SDK to your project with the Swift Package Manager. 
 4. Tap Add Package
 5. Select WalletConnectPush check mark
 
-## Initialization
+#### Initialization
 
 Make sure Networking and Pairing are properly configured.
 - [Networking](../core/relay.mdx)
 - [Pairing](../core/about.mdx)
 
-### Register for Subscriptions
+#### Register for Subscriptions
 
 When your `Push` dapp instance receives a push proposal response or delete request, it will publish a related event. Subscribe to publishers to receive the requests.
 
@@ -198,7 +198,7 @@ public var proposalResponsePublisher: AnyPublisher<(Result<PushSubscription, Pus
 public var deleteSubscriptionPublisher: AnyPublisher<String, Never> 
 ```
 
-### Request to Send Push Notifications
+#### Request to Send Push Notifications
 
 Once you have an active pairing with a wallet, you are able to send a push subscription proposal on a pairing topic.
 
@@ -206,7 +206,7 @@ Once you have an active pairing with a wallet, you are able to send a push subsc
 try await Push.dapp.propose(account: Account, topic: String)
 ```
 
-### Get Active Subscriptions
+#### Get Active Subscriptions
 
 Get a list of all the active subscriptions.
 
@@ -214,7 +214,7 @@ Get a list of all the active subscriptions.
 Push.wallet.getActiveSubscriptions()
 ```
 
-### Where to Go from Here
+#### Where to Go from Here
 - Try our [Wallet App](https://github.com/WalletConnect/WalletConnectSwiftV2/tree/main/Example/WalletApp) and to test notifications.
 - Build API documentation in XCode: go to Product -> Build Documentation
 
@@ -233,7 +233,7 @@ Install the WalletConnect client package.
 npm install @walletconnect/push-client
 ```
 
-## Enabling Push Notifications for your Dapp
+#### Enabling Push Notifications for your Dapp
 
 In order to enable push notifications for your dapp, you will need to:
 
@@ -244,7 +244,7 @@ In order to enable push notifications for your dapp, you will need to:
 5. Under `Push SDK`, download both the `did.json` the `wc-push-config.json` files that have been preconfigured based on your dapp's homepage URL.
 6. Host both files in your dapp's `/.well-known` directory, so that they are accessible at `/.well-known/did.json` and `/.well-known/wc-push-config.json` respectively.
 
-## Usage
+#### Usage
 
 :::info
 The **`PushDappClient` requires an existing pairing** in order to send a push subscription request to the wallet.
@@ -317,7 +317,7 @@ const id = await pushDappClient.propose({
 
 :::
 
-### Sending Push Messages via Notify Server (REST)
+#### Sending Push Messages via Notify Server (REST)
 
 In order to send a push notification via the WalletConnect Notify server, we can send a `POST` request to the `/notify` endpoint, with the following payload (here via `fetch`):
 

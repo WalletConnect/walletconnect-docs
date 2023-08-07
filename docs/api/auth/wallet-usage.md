@@ -80,7 +80,7 @@ await authClient.core.pairing.pair({ uri })
 
 <PlatformTabItem value="ios">
 
-### Initial configurations
+#### Initial configurations
 
 Make sure what you properly configure Networking, Pair Clients and SignerFactory first
 
@@ -88,7 +88,7 @@ Make sure what you properly configure Networking, Pair Clients and SignerFactory
 - [Pairing](../core/pairing.mdx)
 - [SignerFactory](../auth/signer-factory.md)
 
-### Instantiate a Client
+#### Instantiate a Client
 
 Configure the `Auth` instance with Account object and your own [SignerFactory](../auth/signer-factory.md) implementation.
 
@@ -99,7 +99,7 @@ Auth.configure(
 )
 ```
 
-### Completed Auth SDK Configuration:
+#### Completed Auth SDK Configuration:
 
 ```swift
 Networking.configure(projectId: <Project ID>, socketFactory: <SocketFactory>)
@@ -107,7 +107,7 @@ Pair.configure(metadata: <AppMetadata>)
 Auth.configure(account: <Account>, signerFactory: <SignerFactory>)
 ```
 
-### Subscribe for Authorization Publishers
+#### Subscribe for Authorization Publishers
 
 Following publishers are available to subscribe:
 
@@ -117,7 +117,7 @@ public var authResponsePublisher: AnyPublisher<(id: RPCID, result: Result<Cacao,
 public let socketConnectionStatusPublisher: AnyPublisher<SocketConnectionStatus, Never>
 ```
 
-### Authorization Requests
+#### Authorization Requests
 
 When your `Auth` instance receives requests or responses from a peer client, it will publish a related event. So you should set a subscription to handle them.
 
@@ -148,7 +148,7 @@ public struct VerifyContext: Equatable, Hashable {
 }
 ```
 
-### Handle Requests from a Dapp
+#### Handle Requests from a Dapp
 
 After pairing with dapp, your wallet will be subscribing for authentication requests. Requests will be published by `authRequestPublisher`. When a wallet receives a request, you want to present it to the user and request a signature. After the user signs the authentication message, the wallet should respond to a dapp.
 
@@ -166,7 +166,7 @@ In case user rejects an authentication request, call:
 try await Auth.instance.reject(requestId: request.id)
 ```
 
-### Get Pending Requests
+#### Get Pending Requests
 
 if you've missed some requests you can query them with
 
@@ -174,7 +174,7 @@ if you've missed some requests you can query them with
 Auth.instance.getPendingRequests()
 ```
 
-### Where to go from here
+#### Where to go from here
 
 - Try our Showcase wallet that is part of WalletConnectSwiftV2 repository.
 - Build API documentation in XCode: go to Product -> Build Documentation
@@ -185,7 +185,7 @@ Auth.instance.getPendingRequests()
 
 We recommend looking at example implementations of Responder at our [Kotlin GitHub repository](https://github.com/WalletConnect/WalletConnectKotlinV2/tree/develop/auth/responder)
 
-### **Initialize Auth Client**
+#### **Initialize Auth Client**
 
 To initialize the Auth client, initialize first a `CoreClient` in the Android Application class. It will need the application class,
 the server URL, connection type and the application AppMetaData. Next, pass CoreClient to AuthClient initialize function.
@@ -210,7 +210,7 @@ For more context on how to initialize CoreClient, go to [CoreClient docs](../../
 
 ---
 
-### **AuthClient.ResponderDelegate**
+#### **AuthClient.ResponderDelegate**
 
 The AuthClient needs a `AuthClient.ResponderDelegate` passed to it for it to be able to expose asynchronously updates sent from the Dapp / Requester.
 
@@ -251,9 +251,9 @@ enum class Validation {
 
 ---
 
-## **Methods**
+#### **Methods**
 
-### **Authorization Request Approval**
+#### **Authorization Request Approval**
 
 To approve authorization request, sign message using `CacaoSigner.sign` which requires private key to sign `Cacao` object that needs to be passed to `Auth.Params.Respond.Result` object and send to Dapp / Requester.
 `issuer` parameter describes what did responder authorizes. Example `iss` for Ethereum Mainnet: `did:pkh:eip155:1:0xb9c5714089478a327f09197987f16f9e5d936e8a`. More about `did:pkh` method [here](https://github.com/w3c-ccg/did-pkh/blob/main/did-pkh-method-draft.md).
@@ -272,7 +272,7 @@ AuthClient.respond(Auth.Params.Respond.Result(request.id, signature, issuer)) { 
 }
 ```
 
-### **Authorization Request Rejection**
+#### **Authorization Request Rejection**
 
 To reject authorization request respond Dapp / Requester with `Auth.Params.Respond.Error`. Note: We recommend using defined below error message and error code.
 
@@ -285,7 +285,7 @@ AuthClient.respond(
 }
 ```
 
-### **Format message**
+#### **Format message**
 
 To receive formatted SIWE message, call formatMessage method with following parameters:
 
@@ -297,7 +297,7 @@ val formatMessage = Auth.Params.FormatMessage(event.payloadParams, issuer)
 AuthClient.formatMessage(formatMessage)
 ```
 
-### **Get List of Pending Requests**
+#### **Get List of Pending Requests**
 
 ```kotlin
 val pendingRequest: List<Auth.Model.PendingRequest> = AuthClient.getPendingRequest()
@@ -306,7 +306,7 @@ val pendingRequest: List<Auth.Model.PendingRequest> = AuthClient.getPendingReque
 
 To get a list of pending request, call `AuthClient.getPendingRequest()` which will return a list of type `Auth.Model.PendingRequest`.
 
-### **Sample App**
+#### **Sample App**
 
 To check more in details go and visit our responder implementation app [here](https://github.com/WalletConnect/WalletConnectKotlinV2/tree/develop/auth/responder)
 </PlatformTabItem>
