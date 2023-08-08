@@ -60,7 +60,15 @@ module.exports = {
           label: 'Web3Modal',
           collapsed: true,
           collapsible: true,
-          items: ['web3modal/about', 'web3modal/resources']
+          items: [
+            'web3modal/about',
+            'web3modal/resources',
+            {
+              type: 'link',
+              label: 'V2',
+              href: 'https://w3m-v2-docs.vercel.app/2.0'
+            }
+          ]
         },
         {
           type: 'category',
