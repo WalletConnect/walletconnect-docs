@@ -7,8 +7,131 @@ import CloudBanner from '../../components/CloudBanner'
 
 # Pairing API
 
+The Pairing API is a lightweight API for establishing an encrypted, protocol-agnostic communication layer between peers. 
+Its purpose is to provide a secure channel for proposing protocols or sending requests between dapp and wallet.
+<CloudBanner />
+
+## Installation
+
 <PlatformTabs
-	groupId="w3w"
+	groupId="api"
+	activeOptions={["web","ios","android","react-native", "unity"]}
+>
+<PlatformTabItem value="web">
+
+WalletConnect currently offers Sign and Auth SDKs. 
+To allow a reusable communication channel between peers, 
+the Pairing API exposes a standard interface and allows for sending and receiving multi-protocol requests over a single pairing.
+
+Each SDK uses the same implementation of `core/pairing` (via `@walletconnect/core`) to manage pairings. 
+To run multiple SDKs side-by-side (e.g. Sign and Auth), please refer to the [Sharing a Core instance] guide.
+
+</PlatformTabItem>
+<PlatformTabItem value="ios">
+
+#### Add SDK for your project.
+
+You can add a WalletConnect Core SDKs to your project with Swift Package Manager. In order to do that:
+
+1. Open XCode
+2. Go to File -> Add Packages
+3. Paste the repo GitHub URL: https://github.com/WalletConnect/WalletConnectSwiftV2
+4. Tap Add Package
+5. Select WalletConnectPairing check mark
+
+</PlatformTabItem>
+<PlatformTabItem value="android">
+
+Kotlin implementation of Android CoreClient for all WalletConnect SDKs. This SDK is developed in Kotlin and usable in both Java and Kotlin files.
+
+![Maven Central](https://img.shields.io/maven-central/v/com.walletconnect/android-core)
+
+#### Requirements
+
+* Android min SDK 23
+* Java 11
+
+#### Installation
+
+root/build.gradle.kts:
+
+```gradle
+allprojects {
+ repositories {
+    mavenCentral()
+    maven { url "https://jitpack.io" }
+ }
+}
+```
+
+app/build.gradle
+
+```gradle
+implementation("com.walletconnect:android-core:release_version")
+```
+
+#### Project set up
+
+To use initialize RelayClient properly you will need a projectId. Go to https://cloud.walletconnect.com/app, register your project and get projectId.
+
+
+#### CoreClient initialization
+
+Before using any of the WalletConnect Kotlin SDKs, it is necessary to initialize the CoreClient. The initialization of CoreClient must always happen in the Android Application class. Provide the projectId generated in the WalletConnect Cloud, the WebSocket URL, choose the connection type, and pass the application class. You can also pass your own Relay instance using the `RelayConnectionInterface`.
+
+```kotlin
+val projectId = "" //Get Project ID at https://cloud.walletconnect.com/
+val relayUrl = "relay.walletconnect.com"
+val serverUrl = "wss://$relayUrl?projectId=${projectId}"
+val connectionType = ConnectionType.AUTOMATIC or ConnectionType.MANUAL
+val application = //Android Application level class
+[Optional] val optionalRelay: RelayConnectionInterface? = /*implement interface*/
+
+CoreClient.initialize(relayServerUrl = serverUrl, connectionType = connectionType, application = application, relay = optionalRelay)
+```
+
+#### Using your own Relay instance
+The CoreClient offers the ability to use a custom Relay client. Just creating an instance of `RelayConnectionInterface` and passing it to `CoreClient.initialize`. 
+
+```kotlin
+...
+val optionalRelay: RelayConnectionInterface = /*implement interface*/
+
+CoreClient.initialize(relayServerUrl = serverUrl, connectionType = connectionType, application = application, relay = optionalRelay)
+```
+
+</PlatformTabItem>
+<PlatformTabItem value="react-native">
+
+WalletConnect currently offers Sign and Auth SDKs. 
+To allow a reusable communication channel between peers, 
+the Pairing API exposes a standard interface and allows for sending and receiving multi-protocol requests over a single pairing.
+
+Each SDK uses the same implementation of `core/pairing` (via `@walletconnect/core`) to manage pairings. 
+To run multiple SDKs side-by-side (e.g. Sign and Auth), please refer to the [Sharing a Core instance] guide.
+
+</PlatformTabItem>
+<PlatformTabItem value="unity">
+
+Create a Metadata object. It will describe your application and define its appearance in a web browser. Then configure the Pair instance with a metadata object you have instantiated.
+
+```csharp
+var core = new CoreModule(new CoreOptions() { ProjectId = "...", Name = "my-app" });
+core.Pairing.Configure(new Metadata()
+{
+    Name = "my-app",
+    Description = "My app description",
+    Icons = new[] { "https://walletconnect.com/meta/favicon.ico" },
+    Url = "https://walletconnect.com",
+});
+```
+
+</PlatformTabItem>
+</PlatformTabs>
+
+## Usage
+<PlatformTabs
+	groupId="api"
 	activeOptions={["web","ios","android","react-native", "unity"]}
 >
 <PlatformTabItem value="web">
@@ -44,7 +167,7 @@ await sdkClient.core.pairing.ping({ topic: "1b3eda3f4..." })
 await sdkClient.core.pairing.disconnect({ topic: "1b3eda3f4..." })
 ```
 
-## Listeners for pairing-related events
+#### Listeners for pairing-related events
 
 The Pairing API currently emits the following events:
 
@@ -75,7 +198,7 @@ let metadata = AppMetadata(name: <String>,
 Pair.configure(metadata: metadata)
 ```
 
-## Pairing Wallet Usage
+#### Pairing Wallet Usage
 
 In pair wallet with dapp, the user needs to scan a QR code or open a deep link generated by dapp, then instantiate `WalletConnectURI` from the scanned QR code string and call the `pair()` function as follows.
 
@@ -85,7 +208,7 @@ try! await Pair.instance.pair(uri: uri)
 ```
 Now wallet and a dapp have a secure communication channel that will be used by top level APIs.
 
-## Pairing Dapp Usage
+#### Pairing Dapp Usage
 
 In order to pair dapp and a wallet, dapp needs to generate and share a uri with wallet. 
 To generate a uri call `create()` function on Pair instance as follows.
@@ -104,7 +227,7 @@ val pairing: Pairing? = CoreClient.Pairing.create() { error -> }
 When first establishing a pairing with a Peer, call `CoreClient.Pairing.create`. This will try and generate a new pairing with a URI parameter that can be used to establish a connection with the other Peer as well as other meta data related to the pairing.
 
 #
-### **Pair Clients**
+#### **Pair Clients**
 
 ```kotlin
 val pairingParams = Core.Params.Pair(pairingUri)
@@ -114,7 +237,7 @@ CoreClient.Pairing.pair(pairingParams) { error -> }
 To pair the wallet with the Dapp, call the CoreClient.Pairing's pair function which needs a `Core.Params.Pair` parameter. `Core.Params.Pair` is where the WC Uri will be passed.
 
 #
-### **Get List of Active Pairings**
+#### **Get List of Active Pairings**
 
 ```kotlin
 val listOfActivePairings: List<Core.Model.Pairing> = CoreClient.Pairing.getPairings()
@@ -123,7 +246,7 @@ val listOfActivePairings: List<Core.Model.Pairing> = CoreClient.Pairing.getPairi
 To get a list of the most current active pairings, call `CoreClient.Pairing.getPairings()` which will return a list of type `Core.Model.Pairing`.
 
 #
-### **Disconnect a Pairing**
+#### **Disconnect a Pairing**
 
 ```kotlin
 CoreClient.Pairing.disconnect(topic = /*Pairing topic*/") { error -> }
@@ -165,7 +288,7 @@ await sdkClient.core.pairing.ping({ topic: "1b3eda3f4..." })
 await sdkClient.core.pairing.disconnect({ topic: "1b3eda3f4..." })
 ```
 
-## Listeners for pairing-related events
+#### Listeners for pairing-related events
 
 The Pairing API currently emits the following events:
 
@@ -183,7 +306,7 @@ sdkClient.core.pairing.events.on("pairing_delete", ({ id, topic }) => {
 </PlatformTabItem>
 <PlatformTabItem value="unity">
 
-## Pairing Wallet Usage
+#### Pairing Wallet Usage
 
 When paring a wallet with a dapp, the user needs to scan a QR code or open a deep link generated by the dapp. Grab the string from the scanned QR code string or from the deep link and call the `Pair()` function as follows.
 
@@ -194,7 +317,7 @@ PairingStruct pairingData = await core.Pairing.Pair(uri);
 
 Now wallet and a dapp have a secure communication channel that will be used by top level APIs. 
 
-## Pairing Dapp Usage
+#### Pairing Dapp Usage
 
 In order to pair dapp and a wallet, dapp needs to generate and share a uri with wallet. To generate a uri call `create()` function on Pair instance as follows.
 
@@ -207,7 +330,7 @@ string uri = pairData.Uri;
 
 Now you can share the uri with the wallet either through a QR Code or by using a deep link. 
 
-## Message Sending / Handling
+#### Message Sending / Handling
 
 Once a wallet and dapp has been paired, they can send messages securely to the pairing topic. 
 

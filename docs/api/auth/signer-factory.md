@@ -1,4 +1,4 @@
-# Signer Factory
+# Signer Factory (iOS only)
 
 :::info
 This only applies to Swift SDK for Auth
