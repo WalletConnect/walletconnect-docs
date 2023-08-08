@@ -183,7 +183,7 @@ Auth.instance.getPendingRequests()
 
 <PlatformTabItem value="android">
 
-We recommend looking at example implementations of Responder at our [Kotlin GitHub repository](https://github.com/WalletConnect/WalletConnectKotlinV2/tree/develop/auth/responder)
+We recommend looking at example implementations of Responder at our [Kotlin GitHub repository](https://github.com/WalletConnect/WalletConnectKotlinV2/tree/develop/sample/wallet)
 
 #### **Initialize Auth Client**
 
@@ -308,7 +308,7 @@ To get a list of pending request, call `AuthClient.getPendingRequest()` which wi
 
 #### **Sample App**
 
-To check more in details go and visit our responder implementation app [here](https://github.com/WalletConnect/WalletConnectKotlinV2/tree/develop/auth/responder)
+To check more in details go and visit our responder implementation app [here](https://github.com/WalletConnect/WalletConnectKotlinV2/tree/develop/sample/wallet)
 </PlatformTabItem>
 
 </PlatformTabs>
