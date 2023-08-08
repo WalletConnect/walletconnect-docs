@@ -75,7 +75,12 @@ module.exports = {
           label: 'Web3Wallet',
           collapsed: true,
           collapsible: true,
-          items: ['web3wallet/about', 'web3wallet/wallet-usage', 'web3wallet/resources']
+          items: [
+            'web3wallet/about',
+            'web3wallet/wallet-usage',
+            'web3wallet/verify',
+            'web3wallet/resources'
+          ]
         },
         {
           type: 'category',
@@ -106,7 +111,7 @@ module.exports = {
       label: 'Cloud',
       collapsible: false,
       className: 'menu_outer_list',
-      items: ['cloud/explorer', 'cloud/relay']
+      items: ['cloud/explorer', 'cloud/verify', 'cloud/relay']
     },
     {
       type: 'category',
@@ -119,7 +124,7 @@ module.exports = {
           label: 'Providers',
           collapsible: true,
           collapsed: true,
-          items: ['providers/ethereum', 'providers/universal']
+          items: ['advanced/providers/ethereum', 'advanced/providers/universal']
         },
         {
           type: 'category',
@@ -134,7 +139,8 @@ module.exports = {
                 'api/auth/overview',
                 'api/auth/dapp-usage',
                 'api/auth/wallet-usage',
-                'api/auth/signer-factory'
+                'api/auth/signer-factory',
+                'api/auth/resources'
               ]
             },
             {
@@ -180,11 +186,24 @@ module.exports = {
           collapsed: true,
           collapsible: true,
           items: [
-            'walletconnectmodal/about',
-            'walletconnectmodal/usage',
-            'walletconnectmodal/options',
-            'walletconnectmodal/theming',
-            'walletconnectmodal/resources'
+            'advanced/walletconnectmodal/about',
+            'advanced/walletconnectmodal/usage',
+            'advanced/walletconnectmodal/options',
+            'advanced/walletconnectmodal/theming',
+            'advanced/walletconnectmodal/resources'
+          ]
+        },
+        {
+          type: 'category',
+          label: 'APIs',
+          collapsed: true,
+          collapsible: true,
+          items: [
+            'advanced/api/sign',
+            'advanced/api/auth',
+            'advanced/api/chat',
+            'advanced/api/push',
+            'advanced/api/mobileLinking'
           ]
         },
         {

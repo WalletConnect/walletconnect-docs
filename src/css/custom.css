@@ -171,6 +171,14 @@ h1::after {
   width: var(--normal-width);
 }
 
+article nav[aria-label='Breadcrumbs'] {
+  display: none;
+}
+
+.navbar__items > nav {
+  margin-bottom: 0;
+}
+
 @media (max-width: 996px) {
   .navbar--fixed-top {
     width: 100vw;
@@ -951,6 +959,9 @@ article img {
 }
 
 @media screen and (max-width: 996px) {
+  nav[aria-label='Breadcrumbs'] {
+    display: none;
+  }
   .platform-tabs {
     width: 100%;
   }

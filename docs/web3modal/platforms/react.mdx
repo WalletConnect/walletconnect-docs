@@ -30,7 +30,7 @@ Coming soon!
 
 <PlatformTabItem value="web3js">
 
-//TODO
+<!-- TODO: -->
 
 ```npm2yarn
 yarn add @web3modal/wagmi@3.0.0-91ecf92a web3
@@ -75,18 +75,12 @@ const wagmiConfig = createConfig({
 
 // 3. Rendering the Page
 export default function App() {
-  const [ready, setReady] = React.useState(false)
 
-  React.useEffect(() => {
-    setReady(true)
-  }, [])
   return (
     <>
-      {ready && (
-        <WagmiConfig config={wagmiConfig}>
-          <ConnectButton />
-        </WagmiConfig>
-      )}
+      <WagmiConfig config={wagmiConfig}>
+        <ConnectButton />
+      </WagmiConfig>
 
       <Web3Modal projectId={projectId} wagmiConfig={wagmiConfig} chains={chains} />
     </>
@@ -104,7 +98,7 @@ Coming soon!
 
 <PlatformTabItem value="web3js">
 
-//TODO
+<!-- TODO: -->
 
 </PlatformTabItem>
 
@@ -165,7 +159,7 @@ Coming soon!
 
 <PlatformTabItem value="web3js">
 
-//TODO
+<!-- TODO: -->
 
 </PlatformTabItem>
 
@@ -193,7 +187,7 @@ Coming soon!
 
 <PlatformTabItem value="web3js">
 
-//TODO
+<!-- TODO: -->
 
 </PlatformTabItem>
 

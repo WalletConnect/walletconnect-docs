@@ -120,7 +120,7 @@ The `uri` can then be displayed as a QRCode or as a deep link.
 
 <PlatformTabItem value="ios">
 
-### Initial configurations
+#### Initial configurations
 
 Make sure what you properly configure Networking, Pair Clients and SignerFactory first
 
@@ -128,7 +128,7 @@ Make sure what you properly configure Networking, Pair Clients and SignerFactory
 - [Pairing](../core/pairing.mdx)
 - [SignerFactory](../auth/signer-factory.md)
 
-### Instantiate a client
+#### Instantiate a client
 
 Configure the `Auth` instance with your own [SignerFactory](../auth/signer-factory.md) implementation.
 
@@ -136,7 +136,7 @@ Configure the `Auth` instance with your own [SignerFactory](../auth/signer-facto
 Auth.configure(signerFactory: <SignerFactory>)
 ```
 
-### Completed Auth SDK configuration:
+#### Completed Auth SDK configuration:
 
 ```swift
 Networking.configure(projectId: <Project ID>, socketFactory: <SocketFactory>)
@@ -144,7 +144,7 @@ Pair.configure(metadata: <AppMetadata>)
 Auth.configure(signerFactory: <SignerFactory>)
 ```
 
-### Subscribe for Auth publishers
+#### Subscribe for Auth publishers
 
 When your `Auth` instance receives requests or responses from a peer client it will publish related event. So you should set subscription to handle them.
 
@@ -164,7 +164,7 @@ public var authResponsePublisher: AnyPublisher<(id: RPCID, result: Result<Cacao,
 public let socketConnectionStatusPublisher: AnyPublisher<SocketConnectionStatus, Never>
 ```
 
-### Connect Clients and Send Authentication Request
+#### Connect Clients and Send Authentication Request
 
 Your App should generate a pairing URI and share it with the wallet. URI can be presented as a QR code or sent via a universal link. Wallet begins subscribing to your App's authentication requests after scanning URI. To create a pairing and send an authentication request, you need to call:
 
@@ -173,12 +173,12 @@ let uri = try await Pair.instance.create()
 try await Auth.instance.request(<RequestParams>, topic: uri.topic)
 ```
 
-### Handle Authentication Response
+#### Handle Authentication Response
 
 Subscribe for `authResponsePublisher` events.
 A response will be either signed CAIP-74 `Cacao` object or `AuthError` in case the signature is invalid, or the requested message has been compromised.
 
-### Where to go from here
+#### Where to go from here
 
 - Try our [Example dApp](https://github.com/WalletConnect/WalletConnectSwiftV2/tree/main/Example) that is part of [WalletConnectSwiftV2 repository](https://github.com/WalletConnect/WalletConnectSwiftV2).
 - Build API documentation in XCode: go to Product -> Build Documentation
@@ -189,7 +189,7 @@ A response will be either signed CAIP-74 `Cacao` object or `AuthError` in case t
 
 We recommend looking at example implementations of Requester at our [Kotlin GitHub repository](https://github.com/WalletConnect/WalletConnectKotlinV2/tree/develop/auth/requester)
 
-### **Initialize Auth Client**
+#### **Initialize Auth Client**
 
 To initialize the Auth client, initialize first a `CoreClient` in the Android Application class. It will need the application class,
 the server URL, connection type and the application AppMetaData. Next, pass CoreClient to AuthClient initialize function.
@@ -214,7 +214,7 @@ For more context on how to initialize CoreClient, go to [CoreClient docs](../../
 
 ---
 
-### **AuthClient.RequesterDelegate**
+#### **AuthClient.RequesterDelegate**
 
 The AuthClient needs a `AuthClient.RequesterDelegate` passed to it to be able to expose asynchronously updates sent from the Wallet / Responder.
 
@@ -240,9 +240,9 @@ object RequesterDelegate : AuthClient.RequesterDelegate {
 
 ---
 
-## **Methods**
+#### **Methods**
 
-### **Request**
+#### **Request**
 
 The `AuthClient.request` sends the authentication request to the responder/wallet.
 
@@ -276,15 +276,15 @@ AuthClient.request(requestParams,
 
 ---
 
-### **CACAO**
+#### **CACAO**
 
 More about CACAO can be found [here](https://github.com/ChainAgnostic/CAIPs/blob/master/CAIPs/caip-74.md)
 
-### **SIWE / EIP-4361**
+#### **SIWE / EIP-4361**
 
 More about SIWE can be found [here](https://eips.ethereum.org/EIPS/eip-4361)
 
-### **Sample App**
+#### **Sample App**
 
 To check more in details go and visit our requester implementation app [here](https://github.com/WalletConnect/WalletConnectKotlinV2/tree/develop/auth/requester)
 </PlatformTabItem>
@@ -306,7 +306,7 @@ AuthClient authClient = await AuthClient.createInstance(
 );
 ```
 
-### Request Authentication
+#### Request Authentication
 
 To request authentication use the `request` method on the `authClient` object.
 
@@ -334,7 +334,7 @@ The `uri` can then be displayed as a QRCode or as a deep link.
 
 `https://mywallet.com/wc?uri={uri}`
 
-### Handling Session Approval and Rejection
+#### Handling Session Approval and Rejection
 
 To handle a session approval and rejection using `AuthResponse` await the response and check for a non-null result to determine approval or rejection.
 
@@ -354,12 +354,12 @@ else {
 }
 ```
 
-### To Test
+#### To Test
 
 Run tests using `flutter test`.
 Expected flutter version is: >`3.3.10`
 
-### Useful Commands
+#### Useful Commands
 
 - `flutter pub run build_runner build --delete-conflicting-outputs` - Regenerates JSON Generators
 - `flutter doctor -v` - get paths of everything installed.

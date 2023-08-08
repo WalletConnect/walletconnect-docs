@@ -19,7 +19,7 @@ import CloudBanner from '../../components/CloudBanner'
 For an example implementation, please refer to our [react-wallet-chat example](https://github.com/WalletConnect/web-examples/tree/main/wallets/react-wallet-chat) and [demo](https://react-wallet-chat.walletconnect.com/)
 :::
 
-### Initialize your WalletConnect ChatClient, using your Project ID
+#### Initialize your WalletConnect ChatClient, using your Project ID
 
 ```javascript
 import { Core } from "@walletconnect/core";
@@ -46,7 +46,7 @@ const chatClient = await ChatClient.init({
 });
 ```
 
-### Set up listeners for chat-related events
+#### Set up listeners for chat-related events
 
 ```javascript
 chatClient.on("chat_invite", async (event) => {
@@ -74,7 +74,7 @@ chatClient.on("chat_left", (event) => {
 });
 ```
 
-### Register your blockchain address with the key server
+#### Register your blockchain address with the key server
 
 To allow for other Chat SDK user's to invite you to a chat, you need to register your account with the public key server.
 
@@ -86,7 +86,7 @@ The key server expects a full CAIP-2 account for the address (as shown below).
 await chatClient.register({ account: `eip155:1:0xa6de541...`, onSign: async () => {} });
 ```
 
-### Inviting another peer to chat
+#### Inviting another peer to chat
 
 To send a chat invitation to a peer, you can call `.invite()` with your account and an `invite` object:
 
@@ -100,7 +100,7 @@ await chatClient.invite({
 });
 ```
 
-### Accepting or rejecting an incoming invite
+#### Accepting or rejecting an incoming invite
 
 When your client receives an invite from a peer, you're able to accept/reject it by calling `.accept()/.reject()` with the invite's `id`.
 
@@ -112,7 +112,7 @@ await chatClient.accept({ id: invite.id });
 await chatClient.reject({ id: invite.id });
 ```
 
-### Sending a chat message
+#### Sending a chat message
 
 To send a message to a peer in an established chat thread (i.e. after you or the peer have accepted an invite),
 you can call `.message()` with the following parameters:
@@ -126,7 +126,7 @@ await chatClient.message({
 });
 ```
 
-### Leaving a chat thread
+#### Leaving a chat thread
 
 To leave an established chat thread (deleting the thread and its associated messages), call `.leave()` with
 the chat thread's topic:
@@ -141,13 +141,13 @@ await chatClient.leave({ topic: chatThread.topic });
 Make sure what you properly configure Relay Client first 
 - [Relay](../core/relay.mdx)
 
-### Configure Chat Client
+#### Configure Chat Client
 
 ```swift
 Chat.configure(account: Account("eip155:56:0xe5EeF1368781911d265fDB6946613dA61915a501")!)
 ```
 
-### Use client instance
+#### Use client instance
 
 Chat client instance is a singleton and you can access it by calling
 
@@ -155,7 +155,7 @@ Chat client instance is a singleton and you can access it by calling
 Chat.instance
 ```
 
-### Chat Client interface
+#### Chat Client interface
 
 ```swift
 public protocol ChatClient {
@@ -259,7 +259,7 @@ public protocol ChatClient {
 }
 ```
 
-### Chat Client Objects
+#### Chat Client Objects
 
 #### ReceivedInvite
 
@@ -325,7 +325,7 @@ public struct Thread: Codable, Equatable {
 }
 ```
 
-### Methods
+#### Methods
 
 
 #### Register Identity at a Keyserver
@@ -516,16 +516,16 @@ func getMessages(thread: WalletConnectChat.Thread) -> [Message] {
 
 Chat SDK allows E2EE direct messaging between users, using their wallet address.
 
-## Chat Sample App
+#### Chat Sample App
 
 We recommend looking at example implementations of Chat Sample at our [Kotlin GitHub repository](https://github.com/WalletConnect/WalletConnectKotlinV2/tree/master/chat/sample)
 
-## ChatClient
+#### ChatClient
 
 `ChatClient` is an object that interacts with the Chat SDK and implements the [ChatInterface](#chatinterface). It contains asynchronous events that notify you of occurrences, such as receiving a message, and methods that you can use with the Chat SDK, such as sending messages.
 
 
-### ChatInterface
+#### ChatInterface
 
 ```kotlin
 interface ChatInterface {
@@ -562,7 +562,7 @@ interface ChatInterface {
 }
 ```
 
-### Initialize Chat Client
+#### Initialize Chat Client
 
 ```kotlin
 val projectId = "" // Get Project ID at https://cloud.walletconnect.com/
@@ -588,7 +588,7 @@ ChatClient.initialize(init) { error ->
 
 To initialize the Chat client, create a `Chat.Params.Init` object in the `Application.onCreate` method of the Android Application class with the Core Client. Then, pass the `Chat.Params.Init` object to the [ChatClient](#chatclient) initialization function.
 
-### ChatClient.ChatDelegate
+#### ChatClient.ChatDelegate
 
 ```kotlin
 val chatDelegate = object : ChatClient.ChatDelegate {
@@ -626,7 +626,7 @@ ChatClient.setChatDelegate(chatDelegate)
 
 The ChatClient needs a [`ChatClient.ChatDelegate`](#chatclientchatdelegate) passed to it for it to be able to expose asynchronous updates sent from the other peer.
 
-### Chat.Model.Events
+#### Chat.Model.Events
 
 The contents of [`ChatClient.ChatDelegate`](#chatclientchatdelegate) callback functions are of type [`Chat.Model.Events`](#event-structures) for chat specific events and [`Chat.Model.ConnectionState`](#event-structures) or [`Chat.Model.Error`](#event-structures) for Relay Server specific events. 
 
@@ -705,7 +705,7 @@ data class Media(
 ) : Model()
 ```
 
-### Methods
+#### Methods
 
 
 #### Register Identity at a Keyserver
@@ -1000,7 +1000,7 @@ val messages: List<Chat.Model.Message> = ChatClient.getMessages(params)
 </PlatformTabItem>
 <PlatformTabItem value="react-native">
 
-### Initialize your WalletConnect ChatClient, using your Project ID
+#### Initialize your WalletConnect ChatClient, using your Project ID
 
 ```javascript
 import { Core } from "@walletconnect/core";
@@ -1027,7 +1027,7 @@ const chatClient = await ChatClient.init({
 });
 ```
 
-### Set up listeners for chat-related events
+#### Set up listeners for chat-related events
 
 ```javascript
 chatClient.on("chat_invite", async (event) => {
@@ -1055,7 +1055,7 @@ chatClient.on("chat_left", (event) => {
 });
 ```
 
-### Register your blockchain address with the key server
+#### Register your blockchain address with the key server
 
 To allow for other Chat SDK user's to invite you to a chat, you need to register your account with the public key server.
 
@@ -1067,7 +1067,7 @@ The key server expects a full CAIP-2 account for the address (as shown below).
 await chatClient.register({ account: `eip155:1:0xa6de541...`, onSign: async () => {} });
 ```
 
-### Inviting another peer to chat
+#### Inviting another peer to chat
 
 To send a chat invitation to a peer, you can call `.invite()` with your account and an `invite` object:
 
@@ -1081,7 +1081,7 @@ await chatClient.invite({
 });
 ```
 
-### Accepting or rejecting an incoming invite
+#### Accepting or rejecting an incoming invite
 
 When your client receives an invite from a peer, you're able to accept/reject it by calling `.accept()/.reject()` with the invite's `id`.
 
@@ -1093,7 +1093,7 @@ await chatClient.accept({ id: invite.id });
 await chatClient.reject({ id: invite.id });
 ```
 
-### Sending a chat message
+#### Sending a chat message
 
 To send a message to a peer in an established chat thread (i.e. after you or the peer have accepted an invite),
 you can call `.message()` with the following parameters:
@@ -1107,7 +1107,7 @@ await chatClient.message({
 });
 ```
 
-### Leaving a chat thread
+#### Leaving a chat thread
 
 To leave an established chat thread (deleting the thread and its associated messages), call `.leave()` with
 the chat thread's topic:
