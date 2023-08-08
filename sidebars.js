@@ -98,8 +98,7 @@ module.exports = {
                 'web3inbox/widget/about',
                 'web3inbox/widget/usage',
                 'web3inbox/widget/options',
-                'web3inbox/widget/theming',
-                'web3inbox/widget/resources'
+                'web3inbox/widget/theming'
               ]
             }
           ]
