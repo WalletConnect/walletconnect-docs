@@ -2,12 +2,14 @@ import React from 'react'
 import SmallContainer from './SmallContainer'
 import LargeContainer from './LargeContainer'
 
-const Wrapper = ({ items, type, fit = true }) => {
+const Wrapper = ({ items, type, fit = true, ...props }) => {
   return (
     <div
+      {...props}
       className="home__wrapper"
       style={{
-        paddingTop: !fit ? '1rem' : 'inherit'
+        paddingTop: !fit ? '1rem' : 'inherit',
+        ...props.style
       }}
     >
       {type === 'small'
