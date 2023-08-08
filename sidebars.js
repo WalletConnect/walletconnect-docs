@@ -116,7 +116,7 @@ module.exports = {
           label: 'Providers',
           collapsible: true,
           collapsed: true,
-          items: ['providers/ethereum', 'providers/universal']
+          items: ['advanced/providers/ethereum', 'advanced/providers/universal']
         },
         {
           type: 'category',
@@ -178,11 +178,24 @@ module.exports = {
           collapsed: true,
           collapsible: true,
           items: [
-            'walletconnectmodal/about',
-            'walletconnectmodal/usage',
-            'walletconnectmodal/options',
-            'walletconnectmodal/theming',
-            'walletconnectmodal/resources'
+            'advanced/walletconnectmodal/about',
+            'advanced/walletconnectmodal/usage',
+            'advanced/walletconnectmodal/options',
+            'advanced/walletconnectmodal/theming',
+            'advanced/walletconnectmodal/resources'
+          ]
+        },
+        {
+          type: 'category',
+          label: 'APIs',
+          collapsed: true,
+          collapsible: true,
+          items: [
+            'advanced/api/sign',
+            'advanced/api/auth',
+            'advanced/api/chat',
+            'advanced/api/push',
+            'advanced/api/mobileLinking'
           ]
         },
         {
