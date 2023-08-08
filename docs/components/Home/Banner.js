@@ -8,11 +8,11 @@ const Banner = () => {
       <div className={styles.banner__text}>
         <h2>WalletConnect Docs</h2>
         <p>
-          WalletConnect is the Web3 messaging layer and a standard to connect blockchain wallets to
-          dapps.
+          WalletConnect provides developer toolkits empowering you to build engaging web3
+          experiences.
         </p>
         <a href="/2.0/web3modal/platforms/react?platform=viem">
-          Get Started
+          Get started
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
