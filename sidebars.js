@@ -202,7 +202,8 @@ module.exports = {
                 'api/sign/wallet-usage',
                 'api/sign/smart-contract-wallet-usage'
               ]
-            }
+            },
+            'advanced/api/mobileLinking'
           ]
         },
         {
@@ -216,19 +217,6 @@ module.exports = {
             'advanced/walletconnectmodal/options',
             'advanced/walletconnectmodal/theming',
             'advanced/walletconnectmodal/resources'
-          ]
-        },
-        {
-          type: 'category',
-          label: 'APIs',
-          collapsed: true,
-          collapsible: true,
-          items: [
-            'advanced/api/sign',
-            'advanced/api/auth',
-            'advanced/api/chat',
-            'advanced/api/push',
-            'advanced/api/mobileLinking'
           ]
         },
         {

@@ -10,21 +10,21 @@ Please note that the links to SDK versions and sample wallets can be found in th
 
 **Please use the latest Web3Wallet SDK version which can be found here ⬇️**
 
-🌐 [Web](https://www.npmjs.com/package/@walletconnect/web3wallet?activeTab=versions)
+🌐 [Web](https://www.npmjs.com/package/@walletconnect/web3wallet?activeTab=versions)
 
-🤖 [Android](https://github.com/WalletConnect/WalletConnectKotlinV2#sdk-chart)
+🤖 [Android](https://github.com/WalletConnect/WalletConnectKotlinV2#sdk-chart)
 
-🍏 [iOS](https://github.com/WalletConnect/WalletConnectSwiftV2/releases)
+🍏 [iOS](https://github.com/WalletConnect/WalletConnectSwiftV2/releases)
 
 **Sample wallets:**
 
-🌐 [Web GitHub Repo](https://github.com/WalletConnect/web-examples/tree/main/wallets/react-web3wallet)
+🌐 [Web GitHub Repo](https://github.com/WalletConnect/web-examples/tree/main/wallets/react-web3wallet)
 
-🤖 [Android GitHub Repo](https://github.com/WalletConnect/WalletConnectKotlinV2/tree/develop/sample/wallet)
+🤖 [Android GitHub Repo](https://github.com/WalletConnect/WalletConnectKotlinV2/tree/develop/sample/wallet)
 
-🍏 [iOS GitHub Repo](https://github.com/WalletConnect/WalletConnectSwiftV2/tree/main/Example/WalletApp)
+🍏 [iOS GitHub Repo](https://github.com/WalletConnect/WalletConnectSwiftV2/tree/main/Example/WalletApp)
 
-## 🔗 **Chain Switching**
+## 🔗 **Chain Switching**
 
 Chain Switching enables users to experience a seamless chain agnostic UX. In WalletConnect's v2 functionality, the wallet can switch the active chain by triggering a `chainChanged` event.
 
@@ -33,7 +33,7 @@ Chain Switching enables users to experience a seamless chain agnostic UX. In Wal
 
 ### Android 🤖
 
-📕 **Kotlin docs →** [https://docs.walletconnect.com/2.0/web3wallet/wallet-usage?platform=android#namespace-builder](../../../web3wallet/wallet-usage?platform=android#namespace-builder)
+📕 **Kotlin docs →** [https://docs.walletconnect.com/2.0/web3wallet/wallet-usage?platform=android#namespace-builder](../../../web3wallet/wallet-usage?platform=android#namespace-builder)
 
 📱**Example app** → [Link](https://github.com/WalletConnect/WalletConnectKotlinV2/tree/develop/sample/wallet)
 
@@ -43,7 +43,7 @@ Chain Switching enables users to experience a seamless chain agnostic UX. In Wal
 
 ### iOS 🍏
 
-📕 **Swift docs →** [https://docs.walletconnect.com/2.0/web3wallet/wallet-usage?platform=ios#namespace-builder](../../../web3wallet/wallet-usage?platform=ios#namespace-builder)
+📕 **Swift docs →** [https://docs.walletconnect.com/2.0/web3wallet/wallet-usage?platform=ios#namespace-builder](../../../web3wallet/wallet-usage?platform=ios#namespace-builder)
 
 📱**Example app** → [Link](https://github.com/WalletConnect/WalletConnectSwiftV2/blob/cd55d281ae7cb3c5d14524d0147b9d557cdd1af5/Example/WalletApp/PresentationLayer/Wallet/SessionProposal/SessionProposalInteractor.swift#L6)
 
@@ -51,7 +51,7 @@ Chain Switching enables users to experience a seamless chain agnostic UX. In Wal
   <source src="/assets/chain-switching-ios.mov" type="video/mp4" />
 </video>
 
-## ✍🏻 **Auth API**
+## ✍🏻 **Auth API**
 
 Auth API plays a critical role when dapps offer off-chain signatures. Wallets should authenticate dapps via this API, which can be tested [here](https://react-auth-dapp.vercel.app/).
 
@@ -61,7 +61,7 @@ Auth API plays a critical role when dapps offer off-chain signatures. Wallets sh
 
 ### Android 🤖
 
-📕 **Kotlin docs →** [https://docs.walletconnect.com/2.0/web3wallet/wallet-usage?platform=android#auth-requests](../../../web3wallet/wallet-usage?platform=android#auth-requests)
+📕 **Kotlin docs →** [https://docs.walletconnect.com/2.0/web3wallet/wallet-usage?platform=android#auth-requests](../../../web3wallet/wallet-usage?platform=android#auth-requests)
 
 📱**Example app** → [Link](https://github.com/WalletConnect/WalletConnectKotlinV2/tree/develop/sample/wallet)
 
@@ -71,7 +71,7 @@ Auth API plays a critical role when dapps offer off-chain signatures. Wallets sh
 
 ### iOS 🍏
 
-📕 **Swift docs →** [https://docs.walletconnect.com/2.0/web3wallet/wallet-usage?platform=ios#auth-requests](../../../web3wallet/wallet-usage?platform=ios#auth-requests)
+📕 **Swift docs →** [https://docs.walletconnect.com/2.0/web3wallet/wallet-usage?platform=ios#auth-requests](../../../web3wallet/wallet-usage?platform=ios#auth-requests)
 
 📱**Example app** → [Link](https://github.com/WalletConnect/WalletConnectSwiftV2/blob/cd55d281ae7cb3c5d14524d0147b9d557cdd1af5/Example/WalletApp/PresentationLayer/Wallet/SessionProposal/SessionProposalInteractor.swift#L6)
 
@@ -79,7 +79,7 @@ Auth API plays a critical role when dapps offer off-chain signatures. Wallets sh
   <source src="/assets/auth-ios.mov" type="video/mp4" />
 </video>
 
-## 🔄 **Automatic Redirect**
+## 🔄 **Automatic Redirect**
 
 Automatic Redirect assesses the user flow after the wallet signs and authorizes an account. The test involves verifying the wallet's ability to redirect to the dapp after a user signs or sends a transaction. Use this [Test Dapp](https://lab.web3modal.com) to evaluate.
 
@@ -87,7 +87,7 @@ Automatic Redirect assesses the user flow after the wallet signs and authorizes 
 
 ### Android 🤖
 
-📕 **Kotlin docs →** [https://docs.walletconnect.com/2.0/advanced/api/mobileLinking?platform=android](../../../advanced/api/mobileLinking?platform=android)
+📕 **Kotlin docs →** [https://docs.walletconnect.com/2.0/advanced/api/mobileLinking?platform=android](../../../advanced/api/mobileLinking?platform=android)
 
 <video controls width="448" height="336">
   <source src="/assets/auto-redirect-android.mp4" type="video/mp4" />
@@ -95,7 +95,7 @@ Automatic Redirect assesses the user flow after the wallet signs and authorizes 
 
 ### iOS 🍏
 
-📕 **Swift docs** → [https://docs.walletconnect.com/2.0/advanced/api/mobileLinking?platform=ios](../../../advanced/api/mobileLinking?platform=ios)
+📕 **Swift docs** → [https://docs.walletconnect.com/2.0/advanced/api/mobileLinking?platform=ios](../../../advanced/api/mobileLinking?platform=ios)
 
 📱**Example app** → [Link](https://github.com/WalletConnect/WalletConnectSwiftV2/blob/cd55d281ae7cb3c5d14524d0147b9d557cdd1af5/Example/WalletApp/PresentationLayer/Wallet/SessionProposal/SessionProposalInteractor.swift#L6)
 
@@ -105,7 +105,7 @@ Automatic Redirect assesses the user flow after the wallet signs and authorizes 
   <source src="/assets/auto-redirect-ios.mov" type="video/mp4" />
 </video>
 
-## 📢 **Sign Notifications**
+## 📢 **Sign Notifications**
 
 Sign Notifications ensure users receive a push notification for any pending dapp request, even when their wallet isn't open. To test this functionality, follow this [link](https://react-app.walletconnect.com/).
 
@@ -113,7 +113,7 @@ Sign Notifications ensure users receive a push notification for any pending dapp
 
 ### Android 🤖
 
-📕 **Kotlin docs →** [https://docs.walletconnect.com/2.0/web3wallet/wallet-usage?platform=android#extra-platform-specificn](../../../web3wallet/wallet-usage?platform=android#extra-platform-specific)
+📕 **Kotlin docs →** [https://docs.walletconnect.com/2.0/web3wallet/wallet-usage?platform=android#extra-platform-specificn](../../../web3wallet/wallet-usage?platform=android#extra-platform-specific)
 
 📱**Example app** → [Link](https://github.com/WalletConnect/WalletConnectKotlinV2/blob/develop/samples/wallet/src/main/kotlin/com/walletconnect/sample/wallet/WalletFirebaseMessagingService.kt#L21)
 
@@ -123,7 +123,7 @@ Sign Notifications ensure users receive a push notification for any pending dapp
 
 ### iOS 🍏
 
-📕 **Swift docs** → [https://docs.walletconnect.com/2.0/api/push/wallet-usage?platform=ios](../../../api/push/wallet-usage?platform=ios)
+📕 **Swift docs** → [https://docs.walletconnect.com/2.0/api/push/wallet-usage?platform=ios](../../../api/push/wallet-usage?platform=ios)
 
 📱**Example app** → [Link](https://github.com/WalletConnect/WalletConnectSwiftV2/blob/cd55d281ae7cb3c5d14524d0147b9d557cdd1af5/Example/WalletApp/PresentationLayer/Wallet/Main/MainPresenter.swift#L34)
 
@@ -135,11 +135,11 @@ Sign Notifications ensure users receive a push notification for any pending dapp
 
 Account Switching is about the user's ability to change accounts and sign a message from a different account than the one proposed initially in the session. The wallet can switch the active account by triggering a `accountsChanged` event.
 
-📕 JS docs: [https://docs.walletconnect.com/2.0/web3wallet/wallet-usage?platform=web#updating-a-session](../../../web3wallet/wallet-usage?platform=web#updating-a-session)
+📕 JS docs: [https://docs.walletconnect.com/2.0/web3wallet/wallet-usage?platform=web#updating-a-session](../../../web3wallet/wallet-usage?platform=web#updating-a-session)
 
-📕 Kotlin docs: [https://docs.walletconnect.com/2.0/web3wallet/wallet-usage?platform=android#updating-a-session](../../../web3wallet/wallet-usage?platform=android#updating-a-session)
+📕 Kotlin docs: [https://docs.walletconnect.com/2.0/web3wallet/wallet-usage?platform=android#updating-a-session](../../../web3wallet/wallet-usage?platform=android#updating-a-session)
 
-📕 Swift docs: [https://docs.walletconnect.com/2.0/web3wallet/wallet-usage?platform=ios#updating-a-session](../../../web3wallet/wallet-usage?platform=ios#updating-a-session)
+📕 Swift docs: [https://docs.walletconnect.com/2.0/web3wallet/wallet-usage?platform=ios#updating-a-session](../../../web3wallet/wallet-usage?platform=ios#updating-a-session)
 
 <video controls width="448" height="336">
   <source src="/assets/account_switching.mov" type="video/mp4" />
