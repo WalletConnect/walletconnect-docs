@@ -66,11 +66,6 @@ const config = {
             position: 'right',
             className: 'header-github-link',
             'aria-label': 'GitHub repository'
-          },
-
-          {
-            type: 'docsVersionDropdown',
-            position: 'right'
           }
         ]
       },
