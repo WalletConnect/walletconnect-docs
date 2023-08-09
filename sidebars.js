@@ -194,19 +194,6 @@ module.exports = {
         },
         {
           type: 'category',
-          label: 'APIs',
-          collapsed: true,
-          collapsible: true,
-          items: [
-            'advanced/api/sign',
-            'advanced/api/auth',
-            'advanced/api/chat',
-            'advanced/api/push',
-            'advanced/api/mobileLinking'
-          ]
-        },
-        {
-          type: 'category',
           label: 'Multi-Chain',
           items: [
             'advanced/multichain/overview',

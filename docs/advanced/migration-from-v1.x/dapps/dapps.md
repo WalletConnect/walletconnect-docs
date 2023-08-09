@@ -63,14 +63,14 @@ const provider = await EthereumProvider.init({
 })
 ```
 
-- Install `@walletconnect/modal` if you want to use the QR Code modal. You can find more information about WalletConnectModal [here](https://docs.walletconnect.com/2.0/web3modal/about).
+- Install `@walletconnect/modal` if you want to use the QR Code modal. You can find more information about WalletConnectModal [here](../../../advanced/walletconnectmodal/about.mdx).
 
 ### Web3Modal v1.0
 
 We recommend that you replace your existing integration with the latest version of Web3Modal by following one of these paths:
 
 - [Web3Modal](../../../web/web3modal/react/wagmi/installation.mdx): Web3modal feature rich modal with [wagmi](https://wagmi.sh/), has WalletConnect, extension wallets, connectors, chain switching, account modal and more.
-- [WalletConnectModal](../../../web/walletConnectModal/modal/installation.mdx): WalletConnectModal is a lightweight modal to add into your existing workflows.
+- [WalletConnectModal](../../../advanced/walletconnectmodal/about.mdx): WalletConnectModal is a lightweight modal to add into your existing workflows.
 
 ### Web3Modal v2.0
 
@@ -98,7 +98,7 @@ const ethereumClient = new EthereumClient(config, chains)
 // ...
 ```
 
-For more documentation, follow the docs for Web3Modal [here](https://docs.walletconnect.com/2.0/web3modal/about).
+For more documentation, follow the docs for Web3Modal [here](../../../web3modal/about).
 
 ### react-native-dapp
 
@@ -114,9 +114,9 @@ Follow this steps along with the migration example:
 4. If the project uses react native < 0.70, install `big-integer` and add `BigInt` polyfill
 5. Run `pod install` in `/ios`
 
-You can also find detailed documentation on how to install & utilize the new SDK [here](https://docs.walletconnect.com/2.0/reactnative/walletconnectmodal/about).
+You can also find detailed documentation on how to install & utilize the new SDK [here](/2.0/advanced/walletconnectmodal/about?platform=react-native).
 
-The latest SDK introduces a powerful combination of [Universal Provider](https://docs.walletconnect.com/2.0/web/providers/universal) and our [Cloud Explorer API](https://docs.walletconnect.com/2.0/cloud/explorer#cloud-explorer-api). This integration forms the solid foundation for a React Native dapp to effortlessly connect with wallets."
+The latest SDK introduces a powerful combination of [Universal Provider](/2.0/providers/universal) and our [Cloud Explorer API](/2.0/cloud/explorer#cloud-explorer-api). This integration forms the solid foundation for a React Native dapp to effortlessly connect with wallets."
 
 If you need assistance at any point during the migration process, please feel free to reach out to us via [GitHub Discussions](https://github.com/orgs/WalletConnect/discussions).
 
