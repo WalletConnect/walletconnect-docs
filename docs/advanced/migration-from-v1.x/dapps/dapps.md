@@ -116,7 +116,7 @@ Follow this steps along with the migration example:
 
 You can also find detailed documentation on how to install & utilize the new SDK [here](/2.0/advanced/walletconnectmodal/about?platform=react-native).
 
-The latest SDK introduces a powerful combination of [Universal Provider](/2.0/providers/universal) and our [Cloud Explorer API](/2.0/cloud/explorer#cloud-explorer-api). This integration forms the solid foundation for a React Native dapp to effortlessly connect with wallets."
+The latest SDK introduces a powerful combination of [Universal Provider](../../providers/universal) and our [Cloud Explorer API](/2.0/cloud/explorer#cloud-explorer-api). This integration forms the solid foundation for a React Native dapp to effortlessly connect with wallets."
 
 If you need assistance at any point during the migration process, please feel free to reach out to us via [GitHub Discussions](https://github.com/orgs/WalletConnect/discussions).
 
