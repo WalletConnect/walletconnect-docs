@@ -1,4 +1,4 @@
-# Wallets
+# Wallet Migration Guide
 
 Wallets must support v1.0 and v2.0 in parallel. Our WalletConnect URIs are versioned and you can route the URI that was either scanned from a QR Code or redirected from a Deep Link, following the schema described in the [EIP-1328](https://eips.ethereum.org/EIPS/eip-1328).
 
