@@ -66,7 +66,7 @@ module.exports = {
             {
               type: 'link',
               label: 'V2',
-              href: 'https://w3m-v2-docs.vercel.app/2.0'
+              href: 'https://w3m-v2-docs.walletconnect.com/2.0/'
             }
           ]
         },
