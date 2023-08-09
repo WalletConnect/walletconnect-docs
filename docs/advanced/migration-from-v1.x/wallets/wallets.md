@@ -25,19 +25,19 @@ Below we will list the SDK you must integrate for v2.0 protocol for each platfor
 
 ### iOS
 
-If you were using our [WalletConnectSwift SDK](https://github.com/WalletConnect/WalletConnectSwift) (or any other community SDK), you must integrate the Web3Wallet SDK for Swift, for which you can find docs [here](https://docs.walletconnect.com/2.0/ios/web3wallet/installation).
+If you were using our [WalletConnectSwift SDK](https://github.com/WalletConnect/WalletConnectSwift) (or any other community SDK), you must integrate the Web3Wallet SDK for Swift, for which you can find docs [here](../../../web3wallet/about?platform=ios).
 
 ### Android
 
-If you were using our [WalletConnectKotlin SDK](https://github.com/WalletConnect/kotlin-walletconnect-lib) (or any other community SDK), you must integrate the Web3Wallet SDK for Kotlin, for which you can find docs [here](https://docs.walletconnect.com/2.0/android/web3wallet/installation).
+If you were using our [WalletConnectKotlin SDK](https://github.com/WalletConnect/kotlin-walletconnect-lib) (or any other community SDK), you must integrate the Web3Wallet SDK for Kotlin, for which you can find docs [here](../../../web3wallet/about?platform=android).
 
 ### React Native
 
-If you were using our [WalletConnectClient SDK](https://www.npmjs.com/package/@walletconnect/client) (or any other community SDK), you must integrate the Web3Wallet SDK for Javascript which you can find docs [here](https://docs.walletconnect.com/2.0/web/web3wallet/installation) and check out the RN Examples [here](https://github.com/WalletConnect/react-native-examples).
+If you were using our [WalletConnectClient SDK](https://www.npmjs.com/package/@walletconnect/client) (or any other community SDK), you must integrate the Web3Wallet SDK for Javascript which you can find docs [here](../../../web3wallet/about?platform=react-native) and check out the RN Examples [here](https://github.com/WalletConnect/react-native-examples).
 
 ### Browser-based
 
-If you were using our [WalletConnectClient SDK](https://www.npmjs.com/package/@walletconnect/client) (or any other community SDK), you must integrate the Web3Wallet SDK for Javascript which you can find docs [here](https://docs.walletconnect.com/2.0/web/web3wallet/installation) and check out the Web Examples [here](https://github.com/WalletConnect/web-examples).
+If you were using our [WalletConnectClient SDK](https://www.npmjs.com/package/@walletconnect/client) (or any other community SDK), you must integrate the Web3Wallet SDK for Javascript which you can find docs [here](../../../web3wallet/about?platform=web) and check out the Web Examples [here](https://github.com/WalletConnect/web-examples).
 
 ### Unity
 
