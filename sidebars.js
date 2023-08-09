@@ -62,12 +62,43 @@ module.exports = {
           collapsible: true,
           items: [
             'web3modal/about',
-            'web3modal/resources',
             {
-              type: 'link',
-              label: 'V2',
-              href: 'https://w3m-v2-docs.walletconnect.com/2.0/'
-            }
+              type: 'category',
+              label: 'React',
+              items: [
+                'web3modal/react/wagmi/installation',
+                'web3modal/react/wagmi/components',
+                'web3modal/react/wagmi/hooks',
+                'web3modal/react/wagmi/options',
+                'web3modal/react/wagmi/theming',
+                'web3modal/react/wagmi/custom-wallets',
+                'web3modal/react/wagmi/custom-chains',
+                {
+                  type: 'link',
+                  label: 'Example',
+                  href: 'https://github.com/WalletConnect/web3modal-examples/tree/main/web3modal-wagmi-react'
+                }
+              ]
+            },
+            {
+              type: 'category',
+              label: 'HTML',
+              items: [
+                'web3modal/html/wagmi/installation',
+                'web3modal/html/wagmi/components',
+                'web3modal/html/wagmi/actions',
+                'web3modal/html/wagmi/options',
+                'web3modal/html/wagmi/theming',
+                'web3modal/html/wagmi/custom-wallets',
+                'web3modal/html/wagmi/custom-chains',
+                {
+                  type: 'link',
+                  label: 'Example',
+                  href: 'https://github.com/WalletConnect/web3modal-examples/tree/main/web3modal-wagmi-html'
+                }
+              ]
+            },
+            'web3modal/resources'
           ]
         },
         {
@@ -150,11 +181,7 @@ module.exports = {
             {
               type: 'category',
               label: 'Core',
-              items: [
-                'api/core/pairing',
-                'api/core/relay',
-                'api/core/shared-core'
-              ]
+              items: ['api/core/pairing', 'api/core/relay', 'api/core/shared-core']
             },
             {
               type: 'category',
