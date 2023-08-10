@@ -1,5 +1,4 @@
-import Container from '../../components/Container'
-import Wrapper from '../../components/Home/Wrapper'
+import Container from '../../components/Container';
 
 # Migration from v1.x
 
@@ -14,23 +13,19 @@ There are different migration paths for wallets and dapps.
 - Wallets can and should support WalletConnect v1.0 and v2.0 in parallel.
 - Dapps can only support one version at a time. We therefore recommend dapps to put WalletConnect v2.0 support in staging as early as possible to allow testing with wallets.
 
-<Wrapper
-  type="large"
-  fit={false}
-  items={[
-    {
-      name: 'Dapps',
-      description: 'Upgrade your Web3Modal or other dapp libraries',
-      href: `/2.0/advanced/migration-from-v1.x/dapps`,
-      icon: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 24 24'%3E%3Cpath fill='%2366b0ff' fill-rule='evenodd' d='M2.25 5.25a3 3 0 0 1 3-3h13.5a3 3 0 0 1 3 3V15a3 3 0 0 1-3 3h-3v.257c0 .597.237 1.17.659 1.591l.621.622a.75.75 0 0 1-.53 1.28h-9a.75.75 0 0 1-.53-1.28l.621-.622a2.25 2.25 0 0 0 .659-1.59V18h-3a3 3 0 0 1-3-3V5.25Zm1.5 0v7.5a1.5 1.5 0 0 0 1.5 1.5h13.5a1.5 1.5 0 0 0 1.5-1.5v-7.5a1.5 1.5 0 0 0-1.5-1.5H5.25a1.5 1.5 0 0 0-1.5 1.5Z' clip-rule='evenodd'/%3E%3C/svg%3E"
-    },
-    {
-      name: 'Wallets',
-      description: 'Support v1.0 and v2.0 in parallel',
-      href: `/2.0/advanced/migration-from-v1.x/wallets`,
-      icon: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 24 24'%3E%3Cpath fill='%2366b0ff' d='M2.273 5.625A4.483 4.483 0 0 1 5.25 4.5h13.5c1.141 0 2.183.425 2.977 1.125A3 3 0 0 0 18.75 3H5.25a3 3 0 0 0-2.977 2.625Zm0 3A4.483 4.483 0 0 1 5.25 7.5h13.5c1.141 0 2.183.425 2.977 1.125A3 3 0 0 0 18.75 6H5.25a3 3 0 0 0-2.977 2.625ZM5.25 9a3 3 0 0 0-3 3v6a3 3 0 0 0 3 3h13.5a3 3 0 0 0 3-3v-6a3 3 0 0 0-3-3H15a.75.75 0 0 0-.75.75a2.25 2.25 0 0 1-4.5 0A.75.75 0 0 0 9 9H5.25Z'/%3E%3C/svg%3E"
-    }
-  ]}
+<Container
+items={[
+{
+name: "Dapps",
+description: "Upgrade your Web3Modal or other dapp libraries",
+url: `/2.0/advanced/migration-from-v1.x/dapps`
+},
+{
+name: "Wallets",
+description: "Support v1.0 and v2.0 in parallel",
+url: `/2.0/advanced/migration-from-v1.x/wallets`
+}
+]}
 />
 
 ## Wallet-Dapp Coordination

@@ -11,7 +11,7 @@ const Banner = () => {
           WalletConnect provides developer toolkits empowering you to build engaging web3
           experiences.
         </p>
-        <a href="/2.0/web3modal/platforms/react?platform=viem">
+        <a href="/2.0/web3modal/react/wagmi/installation">
           Get started
           <svg
             xmlns="http://www.w3.org/2000/svg"
