@@ -269,3 +269,15 @@ var result = new EthSendTransaction(new Transaction()
 // Returns the transaction hash or throws an error
 string result = await dappClient.Request<EthSendTransaction, string>(sessionTopic, request, wallet.ChainId);
 ```
+
+## Disconnecting
+
+To disconnect a session, use the `Disconnect` function. You may optional provide a reason for the disconnect
+
+```csharp
+await dappClient.Disconnect(sessionTopic);
+
+// or
+
+await dappClient.Disconnect(sessionTopic, Error.FromErrorType(ErrorType.USER_DISCONNECTED));
+```
