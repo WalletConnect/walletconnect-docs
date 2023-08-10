@@ -921,7 +921,7 @@ module.exports = {
           label: 'Web3Wallet',
           collapsible: true,
           collapsed: true,
-          items: ['unity/sign/installation', 'unity/sign/dapp-usage', 'unity/sign/wallet-usage']
+          items: ['unity/sign/installation', 'unity/auth/installation', 'unity/sign/dapp-usage', 'unity/sign/wallet-usage', 'unity/auth/dapp-usage', 'unity/auth/wallet-usage']
         }
       ]
     },
