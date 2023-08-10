@@ -1,0 +1,111 @@
+import Container from '../../components/Container'
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
+import PlatformTabs from '../../components/PlatformTabs'
+import PlatformTabItem from '../../components/PlatformTabItem'
+import CloudBanner from '../../components/CloudBanner'
+
+# Introduction
+
+WalletConnect Chat is a direct messaging protocol that can enable wallets to message each other. 
+The Chat API allows wallet users to message 1-on-1 with other wallet users in the WalletConnect network by using wallet addresses as identities to establish end-to-end messaging between peers.
+
+<CloudBanner />
+
+## Installation
+
+<PlatformTabs
+	groupId="w3w"
+	activeOptions={["web","ios","android","react-native"]}
+>
+<PlatformTabItem value="web">
+
+:::caution
+**The WalletConnect Chat SDK is currently in Alpha and is not production-ready**.
+
+Its public API and associated documentation may still see significant and breaking changes.
+:::
+
+#### Install Packages
+
+Install the WalletConnect ChatClient package.
+
+```bash npm2yarn
+npm install @walletconnect/chat-client @walletconnect/sync-client @walletconnect/core
+```
+
+**If you are using the SDK on a server (such as Node.js), you will need to install an additional package:**
+
+```bash npm2yarn
+npm install lokijs --save
+```
+
+This step is not required if you are using the SDK on the browser-side.
+</PlatformTabItem>
+<PlatformTabItem value="ios">
+
+Swift implementation of WalletConnect Chat protocol for native iOS applications.
+
+#### Add SDK for your project.
+
+You can add a WalletConnect SDK to your project with Swift Package Manager. In order to do that:
+
+1. Open XCode
+2. Go to File -> Add Packages
+3. Paste the repo GitHub URL: https://github.com/WalletConnect/WalletConnectSwiftV2
+4. Tap Add Package
+5. Select WalletConnectChat check mark
+
+</PlatformTabItem>
+<PlatformTabItem value="android">
+
+Kotlin implementation of WalletConnect v2 Chat protocol for Android applications. This SDK is developed in Kotlin and usable in both Java and Kotlin files.
+
+Android Core ![Maven Central](https://img.shields.io/maven-central/v/com.walletconnect/android-core)
+Chat ![Maven Central](https://img.shields.io/maven-central/v/com.walletconnect/chat)
+
+#### Requirements
+
+* Android min SDK 23
+* Java 11
+
+#### Installation
+root/build.gradle.kts:
+```gradle
+allprojects {
+ repositories {
+    mavenCentral()
+    maven { url "https://jitpack.io" }
+ }
+}
+```
+
+app/build.gradle(kts)
+
+```gradle
+implementation("com.walletconnect:android-core:release_version")
+implementation("com.walletconnect:chat:release_version")
+```
+
+</PlatformTabItem>
+<PlatformTabItem value="react-native">
+
+:::caution
+**The WalletConnect Chat SDK is currently in Alpha and is not production-ready**.
+
+Its public API and associated documentation may still see significant and breaking changes.
+:::
+
+#### Install Packages
+
+Install the WalletConnect ChatClient package.
+
+```bash npm2yarn
+npm install @walletconnect/chat-client @walletconnect/sync-client @walletconnect/core
+```
+</PlatformTabItem>
+</PlatformTabs>
+
+## Next Steps
+
+The next section will walk you through the process of setting up your project to use the library.

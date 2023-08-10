@@ -1,10 +1,15 @@
 import Container from './../components/Container'
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
+import PlatformTabs from '../components/PlatformTabs'
+import PlatformTabItem from '../components/PlatformTabItem'
+import CloudBanner from '../components/CloudBanner'
 
-# Web3Wallet
-
-## Introduction
+# Introduction
 
 The Web3Wallet SDK allows you to easily connect your Web3 wallet with dapps. It provides a simple and intuitive interface for dapps to request actions such as signing transactions and interacting with smart contracts on the blockchain. The SDK is designed to work with any blockchain, making it easy to support multiple chains without the need for separate integration code.
+
+<CloudBanner />
 
 ### Features
 
@@ -18,37 +23,140 @@ Some of the key features of the Web3Wallet SDK include:
 
 To get started with the Web3Wallet SDK, choose the programming language you'll be using to build your project. The SDK is available in JavaScript, Swift, and Kotlin, so you can choose the language that best fits your development needs.
 
-<Container
-  items={[
-    {
-      name: 'Web',
-      description: '',
-      url: `/2.0/web/web3wallet/installation`
-    },
-    {
-      name: 'iOS',
-      description: '',
-      url: `/2.0/ios/web3wallet/installation`
-    }
-  ]}
-/>
-<Container
-  items={[
-    {
-      name: 'Android',
-      description: '',
-      url: `/2.0/android/web3wallet/installation`
-    },
-    {
-      name: 'Flutter',
-      description: '',
-      url: `/2.0/dart/wallets/installation`
-    }
-  ]}
-/>
+## Installation
 
-## Resources
+<PlatformTabs
+	groupId="w3w"
+	activeOptions={["web","ios","android","flutter","react-native","unity"]}
+>
+<PlatformTabItem value="web">
 
-- [Awesome WalletConnect](https://github.com/WalletConnect/awesome-walletconnect) - Community-curated collection of WalletConnect-enabled wallets, libraries, and tools.
-- [Web3Modal Laboratory](https://lab.web3modal.com) - A place to test your wallet integrations against various setups of Web3Modal.
-- [Web3Wallet GitHub](https://github.com/WalletConnect/walletconnect-monorepo/tree/v2.0/packages/web3wallet) - Web3Wallet GitHub repository.
+Install the Web3Wallet SDK using npm or yarn.
+
+```bash npm2yarn
+npm install @walletconnect/web3wallet
+```
+
+</PlatformTabItem>
+<PlatformTabItem value="ios">
+
+WalletConnect SDK is available via [Swift Package Manager](https://swift.org/package-manager/) or [Cocoapods](https://cocoapods.org/).
+
+<Tabs
+queryString="ios-method"
+	values={[
+		{ label: 'SwiftPackageManager', value: 'spm', },
+		{ label: 'Cocoapods', value: 'cocoa', },
+	]}
+>
+<TabItem value="spm">
+
+You can add a WalletConnect SDK to your project with Swift Package Manager. In order to do that:
+
+1. Open XCode
+2. Go to File -> Add Packages
+3. Paste the repo GitHub URL: https://github.com/WalletConnect/WalletConnectSwiftV2
+4. Tap Add Package
+5. Select WalletConnect check mark
+
+</TabItem>
+<TabItem value="cocoa">
+
+1. Update Cocoapods spec repos. Type in terminal `pod repo update`
+2. Initialize Podfile if needed with `pod init`
+3. Add pod to your Podfile:
+
+```Ruby
+pod 'WalletConnectSwiftV2'
+```
+
+4. Install pods with `pod install`
+
+If you encounter any problems during package installation, you can specify the exact path to the repository
+
+```Ruby
+pod 'WalletConnectSwiftV2', :git => 'https://github.com/WalletConnect/WalletConnectSwiftV2.git', :tag => '1.0.5'
+```
+
+</TabItem>
+</Tabs>
+
+</PlatformTabItem>
+<PlatformTabItem value="android">
+
+root/build.gradle.kts:
+
+```gradle
+allprojects {
+ repositories {
+    mavenCentral()
+    maven { url "https://jitpack.io" }
+ }
+}
+```
+
+app/build.gradle.kts
+
+```gradle
+implementation("com.walletconnect:android-core:release_version")
+implementation("com.walletconnect:web3wallet:release_version")
+```
+
+</PlatformTabItem>
+<PlatformTabItem value="flutter">
+
+```dart
+flutter pub add walletconnect_flutter_v2
+```
+
+:::info
+
+Depending on your platform, you will have to add different permissions to get the package to work.
+
+**MacOS**
+
+Add the following to your `DebugProfile.entitlements` and `Release.entitlements` files so that it can connect to the WebSocket server.
+
+```xml
+<key>com.apple.security.network.client</key>
+<true/>
+```
+
+:::
+
+</PlatformTabItem>
+<PlatformTabItem value="react-native">
+
+Install the Web3Wallet SDK package.
+
+```bash npm2yarn
+npm install @walletconnect/web3wallet @walletconnect/react-native-compat
+```
+
+Additionally add these extra packages to help with async storage, polyfills and the instance of ethers.
+
+```bash npm2yarn
+npm install @react-native-async-storage/async-storage react-native-get-random-values fast-text-encoding @ethersproject/shims ethers@5.7.2 @json-rpc-tools/utils
+```
+
+For those using Typescript, we recommend adding these dev dependencies:
+
+```bash npm2yarn
+npm install --save @walletconnect/jsonrpc-types
+```
+
+</PlatformTabItem>
+<PlatformTabItem value="unity">
+
+Install the WalletConnect client package via Nuget.
+
+```bash
+dotnet add package WalletConnect.Sign
+```
+
+</PlatformTabItem>
+</PlatformTabs>
+
+## Next Steps
+
+Now that you've installed Web3Wallet SDK, you're ready to start integrating it. The next section will walk you through the process of setting up your project to use the SDK.

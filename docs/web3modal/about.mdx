@@ -1,12 +1,109 @@
 import Container from './../components/Container'
+import Wrapper from '../components/Home/Wrapper'
+import CloudBanner from '../components/CloudBanner'
+import androidLogo from '../../static/assets/home/androidLogo.png'
+import iosLogo from '../../static/assets/home/iosLogo.png'
+import rnLogo from '../../static/assets/home/rnLogo.png'
+import flutterLogo from '../../static/assets/home/flutterLogo.png'
+import unityLogo from '../../static/assets/home/unityLogo.png'
+import reactLogo from '../../static/assets/home/reactLogo.png'
+import htmlLogo from '../../static/assets/home/htmlLogo.png'
 
-# Web3Modal
-
-## Introduction
+# Introduction
 
 The Web3Modal SDK allows you to easily connect your Web3 dapp with wallets. It provides a simple and intuitive interface for dapps to request actions such as signing transactions and interacting with smart contracts on the blockchain. The SDK is designed to work with any blockchain, making it easy to support multiple chains without the need for separate integration code.
 
-### Features
+<CloudBanner />
+
+## QuickStart
+
+<Wrapper
+  type="large"
+  fit={false}
+  items={[
+    {
+      name: 'React + wagmi',
+      description: 'Get started with Web3Modal and wagmi in React.',
+      icon: reactLogo,
+      href: '/2.0/web3modal/react/wagmi/installation'
+    },
+    {
+      name: 'HTML + wagmi',
+      description: 'Get started with Web3Modal and wagmi in HTML.',
+      icon: htmlLogo,
+      href: '/2.0/web3modal/html/wagmi/installation'
+    }
+  ]}
+/>
+
+<!---
+## Framework Guides
+
+Web3Modal is designed to work with a variety of frameworks. These framework-specific guides will help you get started with Web3Modal in your favorite environment.
+
+### Web
+
+<Wrapper
+  type="small"
+  items={[
+    {
+      name: 'React',
+      icon: reactLogo,
+      href: '/2.0/web3modal/platforms/react'
+    },
+    {
+      name: 'HTML',
+      icon: htmlLogo,
+      href: '/2.0/web3modal/platforms/html'
+    }
+  ]}
+/>
+
+### Mobile
+
+<Wrapper
+  type="small"
+  items={[
+    {
+      name: 'Android',
+      icon: androidLogo,
+      href: '/2.0/web3modal/platforms/android'
+    },
+    {
+      name: 'iOS',
+      icon: iosLogo,
+      href: '/2.0/web3modal/platforms/ios',
+      isWhite: true
+    },
+    {
+      name: 'React Native',
+      icon: rnLogo,
+      href: '/2.0/web3modal/platforms/react-native'
+    },
+    {
+      name: 'Flutter',
+      icon: flutterLogo,
+      href: '/2.0/web3modal/platforms/flutter'
+    }
+  ]}
+/>
+
+### Other
+
+<Wrapper
+  type="small"
+  items={[
+    {
+      name: 'Unity',
+      icon: unityLogo,
+      href: '/2.0/web3modal/platforms/unity',
+      isWhite: true
+    }
+  ]}
+/>
+-->
+
+## Features
 
 Some of the key features of the Web3Modal SDK include:
 
@@ -14,33 +111,3 @@ Some of the key features of the Web3Modal SDK include:
 - **Customizable UI**. Choose between light and dark modes and accent colors, or even infuse it with your own branding.
 - **Multi-chain ready.** Easily set up support for EVM and non-EVM chains.
 - **Hundreds of Wallets.** Connect with MetaMask, Rainbow, Coinbase and many more.
-
-### Getting Started
-
-To get started with the Web3Modal SDK, choose the platform you'll be using to build your project. The SDK is currentl available for Web and React Native.
-
-<Container
-  items={[
-    {
-      name: 'Web',
-      description: '',
-      url: `/2.0/web/about-web3modal`
-    },
-    {
-      name: 'React Native',
-      description: '',
-      url: `/2.0/reactnative/walletconnectmodal/about`
-    }
-  ]}
-/>
-
-### Comming Soon:
-
-- iOS
-- Android
-
-## Resources
-
-- [Awesome WalletConnect](https://github.com/WalletConnect/awesome-walletconnect) - Community-curated collection of WalletConnect-enabled wallets, libraries, and tools.
-- [Web3Modal Laboratory](https://lab.web3modal.com) - A place to test your wallet integrations against various setups of Web3Modal.
-- [Web3Wallet GitHub](https://github.com/WalletConnect/walletconnect-monorepo/tree/v2.0/packages/web3wallet) - Web3Wallet GitHub repository.
