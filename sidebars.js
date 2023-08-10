@@ -98,7 +98,8 @@ module.exports = {
                 }
               ]
             },
-            'web3modal/resources'
+            'web3modal/resources',
+            'web3modal/v3/about'
           ]
         },
         {
