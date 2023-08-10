@@ -1,9 +1,9 @@
 # Dapp Usage
 
-First you must setup `SignClientOptions` which stores both the `ProjectId` and `Metadata`. You may also optionally specify the storage module to use. By default, the `FileSystemStorage` module is used if none is specified.
+First you must setup `AuthOptions` which stores both the `ProjectId` and `Metadata`. You may also optionally specify the storage module to use. By default, the `FileSystemStorage` module is used if none is specified.
 
 ```csharp
-var dappOptions = new SignClientOptions()
+var dappOptions = new AuthOptions()
 {
     ProjectId = "39f3dc0a2c604ec9885799f9fc5feb7c",
     Metadata = new Metadata()
