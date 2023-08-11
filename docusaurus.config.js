@@ -66,11 +66,6 @@ const config = {
             position: 'right',
             className: 'header-github-link',
             'aria-label': 'GitHub repository'
-          },
-
-          {
-            type: 'docsVersionDropdown',
-            position: 'right'
           }
         ]
       },
@@ -142,14 +137,6 @@ const config = {
         indexName: 'walletconnect',
         contextualSearch: true
       },
-      announcementBar: {
-        id: 'support_us',
-        content:
-          '🎉 Web3Modal V3 is now in Alpha! <a rel="noopener noreferrer" href="/2.0/web3modal/about">Learn more</a>.🎉',
-        backgroundColor: '#3182ce',
-        textColor: '#fff',
-        isCloseable: true
-      }
     }
 }
 

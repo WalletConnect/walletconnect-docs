@@ -1,0 +1,14 @@
+You can define an array of custom desktop or web based wallets. Note: you will also need to add appropriate wallet images in `walletImages`. Native link represents deeplinking URL like `ledgerlive://` and Universal link represents webpage link that can redirect to the app or fallback page. Defaults to `undefined`.
+
+```ts
+desktopWallets: [
+  {
+    id: string,
+    name: string,
+    links: {
+      native: string
+      universal: string,
+    },
+  },
+];
+```

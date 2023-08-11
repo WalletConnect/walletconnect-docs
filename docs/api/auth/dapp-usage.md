@@ -187,7 +187,7 @@ A response will be either signed CAIP-74 `Cacao` object or `AuthError` in case t
 
 <PlatformTabItem value="android">
 
-We recommend looking at example implementations of Requester at our [Kotlin GitHub repository](https://github.com/WalletConnect/WalletConnectKotlinV2/tree/develop/sample/wallet)
+We recommend looking at example implementations of Requester at our [Kotlin GitHub repository](https://github.com/WalletConnect/WalletConnectKotlinV2/tree/develop/sample/dapp)
 
 #### **Initialize Auth Client**
 
@@ -286,7 +286,7 @@ More about SIWE can be found [here](https://eips.ethereum.org/EIPS/eip-4361)
 
 #### **Sample App**
 
-To check more in details go and visit our requester implementation app [here](https://github.com/WalletConnect/WalletConnectKotlinV2/tree/develop/sample/wallet)
+To check more in details go and visit our requester implementation app [here](https://github.com/WalletConnect/WalletConnectKotlinV2/tree/develop/sample/dapp)
 </PlatformTabItem>
 
 <PlatformTabItem value="flutter">

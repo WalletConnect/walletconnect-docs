@@ -4,15 +4,37 @@ import TabItem from '@theme/TabItem'
 import PlatformTabs from '../components/PlatformTabs'
 import PlatformTabItem from '../components/PlatformTabItem'
 import CloudBanner from '../components/CloudBanner'
+import Wrapper from '../components/Home/Wrapper'
+import w3iLogo from '../../static/assets/home/web3inboxLogo.png'
 
 # Introduction
+
 The Web3Inbox SDK allows one to easily make use of WalletConnect's [notify](../specs/clients/notify/client-api.md) and [chat](../specs/clients/chat/client-api.md) SDKs. This is done by rendering a WebView of the Web3Inbox dapp.
+
+<CloudBanner />
 
 :::caution
 
 Web3Inbox is under development. Want early access? Join our [Pilot Program](https://walletconnect.com/partners)
 
 :::
+
+## QuickStart
+
+<Wrapper
+  type="large"
+  style={{
+    marginTop: '2rem'
+  }}
+  items={[
+    {
+      name: 'Dapp Widget',
+      description: 'Get started with web3inbox by embedding the dapp widget in your website.',
+      icon: w3iLogo,
+      href: '/2.0/web3inbox/widget/about'
+    }
+  ]}
+/>
 
 ## Features
 

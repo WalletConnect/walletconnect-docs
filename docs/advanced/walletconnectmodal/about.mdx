@@ -1,9 +1,9 @@
-import Container from './../components/Container'
+import Container from '../../components/Container'
 import Tabs from '@theme/Tabs'
 import TabItem from '@theme/TabItem'
-import PlatformTabs from '../components/PlatformTabs'
-import PlatformTabItem from '../components/PlatformTabItem'
-import CloudBanner from '../components/CloudBanner'
+import PlatformTabs from '../../components/PlatformTabs'
+import PlatformTabItem from '../../components/PlatformTabItem'
+import CloudBanner from '../../components/CloudBanner'
 
 # Introduction
 
@@ -84,6 +84,7 @@ array of that target:
   ]
 ),
 ```
+
 </PlatformTabItem>
 <PlatformTabItem value="android">
 
@@ -101,11 +102,13 @@ WalletConnectModal ![Maven Central](https://img.shields.io/maven-central/v/com.w
 
 #### Requirements
 
-* Android min SDK 23
-* Java 11
+- Android min SDK 23
+- Java 11
 
 #### Installation
+
 root/build.gradle.kts:
+
 ```gradle
 allprojects {
    repositories {
@@ -182,7 +185,7 @@ import './expo-crypto-shim.js'
 import { useWalletConnectModal } from '@walletconnect/modal-react-native';
 ```
 
-* Make sure this line executes before the first `@walletconnect/modal-react-native` import.
+- Make sure this line executes before the first `@walletconnect/modal-react-native` import.
 
 </TabItem>
 

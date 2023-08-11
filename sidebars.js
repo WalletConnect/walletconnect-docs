@@ -60,7 +60,46 @@ module.exports = {
           label: 'Web3Modal',
           collapsed: true,
           collapsible: true,
-          items: ['web3modal/about', 'web3modal/resources']
+          items: [
+            'web3modal/about',
+            {
+              type: 'category',
+              label: 'React',
+              items: [
+                'web3modal/react/wagmi/installation',
+                'web3modal/react/wagmi/components',
+                'web3modal/react/wagmi/hooks',
+                'web3modal/react/wagmi/options',
+                'web3modal/react/wagmi/theming',
+                'web3modal/react/wagmi/custom-wallets',
+                'web3modal/react/wagmi/custom-chains',
+                {
+                  type: 'link',
+                  label: 'Example',
+                  href: 'https://github.com/WalletConnect/web3modal-examples/tree/main/web3modal-wagmi-react'
+                }
+              ]
+            },
+            {
+              type: 'category',
+              label: 'HTML',
+              items: [
+                'web3modal/html/wagmi/installation',
+                'web3modal/html/wagmi/components',
+                'web3modal/html/wagmi/actions',
+                'web3modal/html/wagmi/options',
+                'web3modal/html/wagmi/theming',
+                'web3modal/html/wagmi/custom-wallets',
+                'web3modal/html/wagmi/custom-chains',
+                {
+                  type: 'link',
+                  label: 'Example',
+                  href: 'https://github.com/WalletConnect/web3modal-examples/tree/main/web3modal-wagmi-html'
+                }
+              ]
+            },
+            'web3modal/resources'
+          ]
         },
         {
           type: 'category',
@@ -90,8 +129,7 @@ module.exports = {
                 'web3inbox/widget/about',
                 'web3inbox/widget/usage',
                 'web3inbox/widget/options',
-                'web3inbox/widget/theming',
-                'web3inbox/widget/resources'
+                'web3inbox/widget/theming'
               ]
             }
           ]
@@ -116,7 +154,7 @@ module.exports = {
           label: 'Providers',
           collapsible: true,
           collapsed: true,
-          items: ['providers/ethereum', 'providers/universal']
+          items: ['advanced/providers/ethereum', 'advanced/providers/universal']
         },
         {
           type: 'category',
@@ -143,12 +181,7 @@ module.exports = {
             {
               type: 'category',
               label: 'Core',
-              items: [
-                'api/core/about',
-                'api/core/pairing',
-                'api/core/relay',
-                'api/core/shared-core'
-              ]
+              items: ['api/core/pairing', 'api/core/relay', 'api/core/shared-core']
             },
             {
               type: 'category',
@@ -169,7 +202,8 @@ module.exports = {
                 'api/sign/wallet-usage',
                 'api/sign/smart-contract-wallet-usage'
               ]
-            }
+            },
+            'advanced/api/mobileLinking'
           ]
         },
         {
@@ -178,11 +212,11 @@ module.exports = {
           collapsed: true,
           collapsible: true,
           items: [
-            'walletconnectmodal/about',
-            'walletconnectmodal/usage',
-            'walletconnectmodal/options',
-            'walletconnectmodal/theming',
-            'walletconnectmodal/resources'
+            'advanced/walletconnectmodal/about',
+            'advanced/walletconnectmodal/usage',
+            'advanced/walletconnectmodal/options',
+            'advanced/walletconnectmodal/theming',
+            'advanced/walletconnectmodal/resources'
           ]
         },
         {
