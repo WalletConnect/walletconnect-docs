@@ -4,7 +4,7 @@ const SmallContainer = ({ href, name, icon, isWhite }) => {
   return (
     <a href={href} className="home__small-container">
       <span>{name}</span>
-      <img src={icon} alt={name} className={isWhite && `white`} />
+      <img src={icon} alt={name} className={isWhite ? `white` : undefined} />
     </a>
   )
 }
