@@ -47,12 +47,12 @@ const config = {
           ){
             // Redirect from /web/X to /X and /android/X to /X
             return [
-              existingPath.replace('/', '/web/'),
-              existingPath.replace('/', '/android/'),
-              existingPath.replace('/', '/ios/'),
-              existingPath.replace('/', '/reactnative/'),
-              existingPath.replace('/', '/flutter/'),
-              existingPath.replace('/', '/unity/'),
+              existingPath.replace('/2.0/', '/2.0/web/'),
+              existingPath.replace('/2.0/', '/2.0/android/'),
+              existingPath.replace('/2.0/', '/2.0/ios/'),
+              existingPath.replace('/2.0/', '/2.0/reactnative/'),
+              existingPath.replace('/2.0/', '/2.0/flutter/'),
+              existingPath.replace('/2.0/', '/2.0/unity/'),
             ];
           }
           return undefined;
