@@ -22,7 +22,44 @@ const config = {
       'data-domain': 'docs.walletconnect.com'
     }
   ],
-
+  plugins:[
+    [
+      '@docusaurus/plugin-client-redirects',
+      {
+        redirects: [
+          // {
+          //   to: '/docs/newDoc',
+          //   from: '/docs/oldDoc',
+          // },
+          // {
+          //   to: '/docs/newDoc2',
+          //   from: ['/docs/oldDocFrom2019', '/docs/legacyDocFrom2016'],
+          // },
+        ],
+        createRedirects(existingPath) {
+          if (
+            existingPath.includes('/web/') || 
+            existingPath.includes('/android/') || 
+            existingPath.includes('/ios/') || 
+            existingPath.includes('/reactnative/') ||
+            existingPath.includes('/flutter/') ||
+            existingPath.includes('/unity/')
+          ){
+            // Redirect from /web/X to /X and /android/X to /X
+            return [
+              existingPath.replace('/web/', '/'),
+              existingPath.replace('/android/', '/'),
+              existingPath.replace('/ios/', '/'),
+              existingPath.replace('/reactnative/', '/'),
+              existingPath.replace('/flutter/', '/'),
+              existingPath.replace('/unity/', '/'),
+            ];
+          }
+          return undefined;
+        },
+      },
+    ],
+  ],
   presets: [
     [
       'classic',
