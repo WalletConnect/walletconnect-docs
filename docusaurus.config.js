@@ -22,23 +22,6 @@ const config = {
       'data-domain': 'docs.walletconnect.com'
     }
   ],
-  plugins:[
-    [
-      '@docusaurus/plugin-client-redirects',
-      {
-        redirects: [
-          // {
-          //   to: '/docs/newDoc',
-          //   from: '/docs/oldDoc',
-          // },
-          // {
-          //   to: '/docs/newDoc2',
-          //   from: ['/docs/oldDocFrom2019', '/docs/legacyDocFrom2016'],
-          // },
-        ],
-      },
-    ],
-  ],
   presets: [
     [
       'classic',
