@@ -55,7 +55,7 @@ const config = {
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     {
       image: 'img/Docs-OG.png',
-      metadata: [{name: 'twitter:card', content: 'summary'}],
+      metadata: [{name: 'twitter:card', content: 'summary_large_image'}],
       navbar: {
         items: [
           {
