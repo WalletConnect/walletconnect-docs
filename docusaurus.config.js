@@ -36,27 +36,6 @@ const config = {
           //   from: ['/docs/oldDocFrom2019', '/docs/legacyDocFrom2016'],
           // },
         ],
-        createRedirects(existingPath) {
-          if (
-            existingPath.includes('/web/') || 
-            existingPath.includes('/android/') || 
-            existingPath.includes('/ios/') || 
-            existingPath.includes('/reactnative/') ||
-            existingPath.includes('/flutter/') ||
-            existingPath.includes('/unity/')
-          ){
-            // Redirect from /web/X to /X and /android/X to /X
-            return [
-              existingPath.replace('/2.0/', '/2.0/web/'),
-              existingPath.replace('/2.0/', '/2.0/android/'),
-              existingPath.replace('/2.0/', '/2.0/ios/'),
-              existingPath.replace('/2.0/', '/2.0/reactnative/'),
-              existingPath.replace('/2.0/', '/2.0/flutter/'),
-              existingPath.replace('/2.0/', '/2.0/unity/'),
-            ];
-          }
-          return undefined;
-        },
       },
     ],
   ],
