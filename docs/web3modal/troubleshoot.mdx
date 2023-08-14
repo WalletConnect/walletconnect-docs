@@ -1,0 +1,49 @@
+# Troubleshooting
+
+Here you will find the required documentation to resolve technical errors and implement alternative solutions.
+
+## No Matching Key: Error
+
+//TODO
+## Process is undefined, Buffer is undefined or global is undefined errors
+
+These errors appear when some global variable that the library is using are not defined on your working environment.
+ This can be fixed adding some polyfills in your js file before importing modal packages.
+
+```ts
+import { Buffer } from 'buffer'
+
+if (typeof window !== 'undefined') {
+  if (!window.Buffer) {
+    window.Buffer = Buffer // Fixes Buffer is undefined error
+  }
+  if (!window.global) {
+    window.global = window // Fixes global is undefined error
+  }
+  if (!window.process) {
+    window.process = { env: {} } // Fixes process is undefined error
+  }
+}
+```
+
+## Integrating Wagmi with Angular
+
+**Angular and Wagmi have a typescript compatibility issue due to the use of different versions.**
+
+- If you're having trouble when trying to install WalletConnect's SDKs you can run the installation using the `--legacy-peer-deps` flag:
+
+Example:
+
+```bash npm2yarn
+npm install @web3modal/ethereum @web3modal/html @wagmi/core viem --legacy-peer-deps
+```
+
+- If you are facing typescript errors during compilation when trying to run your project, make sure you add `“SkipLibCheck”: true` to the tsconfig.json file.
+
+## In Next.js the QR Code doesn’t work in production, but it works in development
+
+We've found that relatively old Next.js version will have some compatibility issues when using SWC to build your project. In this case we 
+recommend updating your project's Next version to the latest or disabling the `SWCMinify` flag in your `next.config.js`.
+
+## Does my project need to be verified and approved before using WalletConnect SDKs?
+No, the Project ID is  pre-verified when created. You can have your project in Draft state and still use your ID without any inconvenient.
