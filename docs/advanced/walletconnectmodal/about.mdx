@@ -147,6 +147,52 @@ On iOS, use CocoaPods to add the native modules to your project:
 npx pod-install
 ```
 
+#### (Optional) Enable Wallet Detection
+
+To enable WalletConnectModal to detect wallets installed on the device, you need to make specific changes to the native code of your project.
+
+##### For iOS:
+
+1. Open your `Info.plist` file.
+2. Locate the `<key>LSApplicationQueriesSchemes</key>` section.
+3. Add the desired wallet schemes as string entries within the `<array>`. These schemes represent the wallets you want to detect.
+4. Refer to our [Info.plist example file]((https://github.com/WalletConnect/react-native-examples/blob/main/dapps/v2Explorer/ios/Web3Modal/Info.plist)) for a detailed illustration.
+
+Example:
+```xml
+<key>LSApplicationQueriesSchemes</key>
+<array>
+  <string>metamask</string>
+  <string>trust</string>
+  <string>safe</string>
+  <string>rainbow</string>
+  <string>uniswap</string>
+  <!-- Add other wallet schemes names here -->
+</array>
+```
+
+##### For Android:
+
+1. Open your `AndroidManifest.xml` file.
+2. Locate the `<queries>` section.
+3. Add the desired wallet package names as `<package>` entries within the `<queries>`. These package names correspond to the wallets you want to detect.
+4. Refer to our [AndroidManifest.xml example file](https://github.com/WalletConnect/react-native-examples/blob/main/dapps/v2Explorer/android/app/src/main/AndroidManifest.xml) for detailed guidance.
+
+Example:
+```xml
+<queries>
+  <package android:name="io.metamask"/>
+  <package android:name="com.wallet.crypto.trustapp"/>
+  <package android:name="io.gnosis.safe"/>
+  <package android:name="me.rainbow"/>
+  <!-- Add other wallet package names here -->
+</queries>
+```
+
+Important Note: The WalletConnect SDK will only be able to detect the wallets that you explicitly list in your native files. Make sure to include all the relevant wallet schemes/packages you want to support.
+
+For additional wallet schemes and package names, you can explore our [Explorer API](../../cloud/explorer.md). This API offers an up-to-date list of wallet identifiers that you can integrate into your project for enhanced wallet detection.
+
 </TabItem>
 
 <TabItem value="expo" label="Expo">
@@ -224,6 +270,43 @@ npm install react-native-get-random-values@1.9.0
 </TabItem>
 
 </Tabs>
+
+#### (Optional) Enable Wallet Detection (iOS Only)
+
+To enable WalletConnectModal to detect wallets installed on the device in your Expo project for iOS, follow these steps:
+
+1. Open your `app.json` (or `app.config.js`) file.
+2. Locate the ios section within the configuration.
+3. Add the `infoPlist` object if it doesn't exist, and within it, include the `LSApplicationQueriesSchemes` array. This array will contain the desired wallet schemes you want to detect.
+4. Add the wallet schemes to the `LSApplicationQueriesSchemes` array.
+
+Your configuration should look like this:
+
+```json
+{
+  "expo": {
+    "ios": {
+      "bundleIdentifier": "com.your.app",
+      "infoPlist": {
+        "LSApplicationQueriesSchemes": [
+          "metamask",
+          "trust",
+          "safe",
+          "rainbow",
+          "uniswap",
+          // Add other wallet schemes names here
+        ]
+      }
+    }
+  }
+}
+```
+
+Configuring wallet detection for Android is not supported through Expo, as there's no direct way to add the required queries. This configuration is specifically for iOS in an Expo project.
+
+Important Note: The WalletConnect SDK will only be able to detect the wallets that you explicitly list in your native files. Make sure to include all the relevant wallet schemes you want to support.
+
+For additional wallet schemes, you can explore our [Explorer API](../../cloud/explorer.md). This API offers an up-to-date list of wallet identifiers that you can integrate into your project for enhanced wallet detection.
 
 </TabItem>
 </Tabs>
