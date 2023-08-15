@@ -8,16 +8,20 @@ import CloudBanner from '../components/CloudBanner'
 # Verify
 
 Verify API allows dapps on all platforms (web, Android and iOS) to securely validate if the end-user is on the correct domain, via their Wallet and the Web3Wallet SDK.
-
 Once the wallet knows whether the end-user was on uniswap.com or eviluniswap.com they can cross-reference this with our registry.
 
 These simple solutions make phishing attacks significantly harder and hence make a more anxiety free crypto experience for end-users.
-
 For those looking to enable the Verify on the dapp side, check out our reference guide [here.](../cloud/verify)
 
 <CloudBanner />
 
-### Initialization
+The Verify security system will discriminate session requests in three different cases:
+
+- Invalid: The domain is not verified for the application that is trying to connect (Domain impersonation detected).
+- unknown: The domain has not been verified. It cannot determine its legitimacy.
+- Verified: The domain is verified as authentic and the connection is secure.
+
+### Implementation
 
 <PlatformTabs
 	groupId="w3w"
@@ -49,7 +53,7 @@ export function getVerifyStatus(context?: Verify.Context) {
 Then in your JS/TS file, add in the function with your authorization requests
 
 ```javascript
-// authentcation.js
+// authentication.js
 import { getVerifyStatus } from '../utils/verify'
 ...
 web3wallet.on("auth_request", async (authRequest) => {
