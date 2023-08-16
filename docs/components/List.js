@@ -30,8 +30,8 @@ const List = () => {
   }, [isTestnetSelected, isMainnetSelected])
 
   useEffect(() => {
+    inputRef.current.value = ''
     if (isMainnetSelected) {
-      inputRef.current.value = ''
       const filteredChains = originalChainsArray.filter(chain => {
         return !chain.testnet
       })
@@ -42,9 +42,8 @@ const List = () => {
   }, [isMainnetSelected])
 
   useEffect(() => {
+    inputRef.current.value = ''
     if (isTestnetSelected) {
-      inputRef.current.value = ''
-
       const filteredChains = originalChainsArray.filter(chain => {
         return chain.testnet
       })
