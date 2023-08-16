@@ -22,7 +22,6 @@ const config = {
       'data-domain': 'docs.walletconnect.com'
     }
   ],
-
   presets: [
     [
       'classic',
@@ -54,6 +53,8 @@ const config = {
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     {
+      image: 'img/Docs-OG.png',
+      metadata: [{name: 'twitter:card', content: 'summary_large_image'}],
       navbar: {
         items: [
           {
@@ -137,6 +138,7 @@ const config = {
         indexName: 'walletconnect',
         contextualSearch: true
       },
+      
     }
 }
 

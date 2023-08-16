@@ -204,7 +204,7 @@ module.exports = {
                 'api/sign/smart-contract-wallet-usage'
               ]
             },
-            'advanced/api/mobileLinking'
+            'api/mobileLinking'
           ]
         },
         {
