@@ -113,17 +113,31 @@ To run multiple SDKs side-by-side (e.g. Sign and Auth), please refer to the [Sha
 </PlatformTabItem>
 <PlatformTabItem value="unity">
 
-Create a Metadata object. It will describe your application and define its appearance in a web browser. Then configure the Pair instance with a metadata object you have instantiated.
+Install the `WalletConnect.Core` nuget package, which implements the Pairing API
+
+```shell
+dotnet add package WalletConnect.Core
+```
+
+Once the `WalletConnect.Core` library is created, create a Metadata object. It will describe your application and define its appearance in a web browser. Then configure the Pair instance with a metadata object you have instantiated.
 
 ```csharp
-var core = new CoreModule(new CoreOptions() { ProjectId = "...", Name = "my-app" });
-core.Pairing.Configure(new Metadata()
+var metadata = new Metadata()
 {
     Name = "my-app",
     Description = "My app description",
     Icons = new[] { "https://walletconnect.com/meta/favicon.ico" },
     Url = "https://walletconnect.com",
-});
+}
+
+var options = new CoreOptions() 
+{ 
+    ProjectId = "...", 
+    Name = "my-app", 
+}
+
+var core = new WalletConnectCore(options);
+core.Pairing.Configure(metadata);
 ```
 
 </PlatformTabItem>
@@ -315,7 +329,7 @@ var uri = "...";
 PairingStruct pairingData = await core.Pairing.Pair(uri);
 ```
 
-Now wallet and a dapp have a secure communication channel that will be used by top level APIs. 
+Now the wallet and a dapp have a secure communication channel that will be used by top level APIs. 
 
 #### Pairing Dapp Usage
 
