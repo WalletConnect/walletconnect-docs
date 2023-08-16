@@ -8,16 +8,22 @@ import CloudBanner from '../components/CloudBanner'
 # Verify
 
 Verify API allows apps on all platforms (web, Android and iOS) to securely validate if the end-user is on the correct domain, via their Wallet and the Web3Wallet SDK.
-
 Once the wallet knows whether the end-user was on uniswap.com or eviluniswap.com they can cross-reference this with our registry.
 
 These simple solutions make phishing attacks significantly harder and hence make a more anxiety free crypto experience for end-users.
-
 For those looking to enable the Verify on the app side, check out our reference guide [here.](../cloud/verify)
 
 <CloudBanner />
 
-### Initialization
+## Domain verification
+
+The Verify security system will discriminate session requests in three different cases:
+
+- Invalid: The application's domain doesn't match the sender of this request. (Potential domain impersonation detected).
+- Unknown: The domain sending the request cannot be verified. We cannot determine the request origin. Proceed with caution.
+- Verified: The domain sending the request is verified as authentic.
+
+### Implementation
 
 <PlatformTabs
 	groupId="w3w"

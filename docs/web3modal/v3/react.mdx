@@ -1,0 +1,94 @@
+# React
+
+:::caution
+This documentation is for Web3Modal v3 which is currently in Alpha. You can find Web3Modal v2 documentation [here](../react/wagmi/installation.mdx)
+:::
+
+With Web3Modal React, we work with the Wagmi library which is a collection of React Hooks to make your dapp development flow easier. You can sign messages, interact with smart contracts, and much more.
+
+Let’s get started with the installation and configuration!
+
+## Installation
+
+```bash npm2yarn
+npm install @web3modal/wagmi@3.0.0-alpha.1 wagmi viem
+```
+
+## Implementation
+
+Start by importing `createWeb3Modal`, `walletConnectProvider` and wagmi packages, then create wagmi config using your own settings or our default presets as shown below.
+ Finally, pass wagmi config to `createWeb3Modal`.
+
+:::note
+Make sure to set your configuration outside the App component to avoid unwanted rerenders.
+:::
+```tsx
+import { createWeb3Modal } from '@web3modal/wagmi/react'
+import { walletConnectProvider } from '@web3modal/wagmi'
+
+import { WagmiConfig, configureChains, createConfig } from 'wagmi'
+import { mainnet } from 'wagmi/chains'
+import { CoinbaseWalletConnector } from 'wagmi/connectors/coinbaseWallet'
+import { InjectedConnector } from 'wagmi/connectors/injected'
+import { WalletConnectConnector } from 'wagmi/connectors/walletConnect'
+
+// 1. Get projectId
+const projectId = 'YOUR_PROJECT_ID'
+
+// 2. Create wagmiConfig
+const { chains, publicClient } = configureChains(
+  [mainnet],
+  [walletConnectProvider({ projectId })]
+)
+
+const wagmiConfig = createConfig({
+  autoConnect: true,
+  connectors: [
+    new WalletConnectConnector({ options: { projectId, showQrModal: false } }),
+    new InjectedConnector({ options: { shimDisconnect: true } }),
+    new CoinbaseWalletConnector({ options: { appName: 'Web3Modal' } })
+  ],
+  publicClient
+})
+
+// 3. Create modal
+createWeb3Modal({ wagmiConfig, projectId, chains })
+
+export default function App() {
+
+  return (
+    <WagmiConfig config={wagmiConfig}>
+        // Rest of your app ...
+    </WagmiConfig>
+  )
+}
+```
+
+## Trigger the modal
+
+You can trigger the modal by calling the `open()` method on a modal instance with `useWeb3Modal` hook.
+
+```tsx
+import { useWeb3Modal } from '@web3modal/wagmi/react'
+import { useState } from 'react'
+
+export default function ConnectButton() {
+  // 4. Use modal hook
+  const modal = useWeb3Modal()
+
+  return (
+    <>
+      <button onClick={() => modal.open()}>Open Connect Modal</button>
+      <button onClick={() => modal.open({ view: 'Networks' })}>Open Network Modal</button>
+    </>
+  )
+}
+```
+
+## Use wagmi hooks
+
+[wagmi](https://wagmi.sh) provides everything you'll need to start working with accounts, contracts, chains and much more.
+
+```tsx
+import { useAccount, useContract, useBalance } from 'wagmi'
+```
