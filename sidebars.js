@@ -339,12 +339,12 @@ module.exports = {
           label: 'React',
           id: 'web3modal/v3/react'
         },
-        // {
-        //   type: 'doc',
-        //   className: 'sidebar__logo sidebar__logo--vue',
-        //   label: 'Vue',
-        //   id: 'web3modal/v3/vue'
-        // },
+        {
+          type: 'doc',
+          className: 'sidebar__logo sidebar__logo--vue',
+          label: 'Vue',
+          id: 'web3modal/v3/vue'
+        },
         {
           type: 'doc',
           className: 'sidebar__logo sidebar__logo--html',
