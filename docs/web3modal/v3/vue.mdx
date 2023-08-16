@@ -21,22 +21,20 @@ npm install @web3modal/wagmi@3.0.0-alpha.1 @wagmi/core viem
 <script setup lang="ts">
 import ConnectButton from './components/ConnectButton.vue'
 import { configureChains, createConfig } from '@wagmi/core'
-import { mainnet, arbitrum } from '@wagmi/core/chains'
+import { mainnet } from '@wagmi/core/chains'
 import { CoinbaseWalletConnector } from '@wagmi/core/connectors/coinbaseWallet'
 import { InjectedConnector } from '@wagmi/core/connectors/injected'
 import { WalletConnectConnector } from '@wagmi/core/connectors/walletConnect'
+
 import { walletConnectProvider } from '@web3modal/wagmi'
 import { createWeb3Modal } from '@web3modal/wagmi/vue'
 
 // 1. Get projectId
-const projectId = import.meta.env.VITE_PROJECT_ID
-if (!projectId) {
-  throw new Error('VITE_PROJECT_ID is not set')
-}
+const projectId = 'YOUR_PROJECT_ID'
 
 // 2. Create wagmiConfig
 const { chains, publicClient } = configureChains(
-  [mainnet, arbitrum],
+  [mainnet],
   [walletConnectProvider({ projectId })]
 )
 
@@ -55,7 +53,7 @@ createWeb3Modal({ wagmiConfig, projectId, chains })
 </script>
 
 <template>
-  <ConnectButton />
+  // Rest of your app ...
 </template>
 ```
 
@@ -75,4 +73,12 @@ const modal = useWeb3Modal()
   <button @click="modal.open()">Open Connect Modal</button>
   <button @click="modal.open({ view: 'Networks' })">Open Network Modal</button>
 </template>
+```
+
+## Use wagmi Actions
+
+[wagmi](https://wagmi.sh) provides everything you'll need to start working with accounts, contracts, chains and much more.
+
+```tsx
+import { getAccount, writeContract, disconnect, watchAccount } from '@wagmi/core'
 ```

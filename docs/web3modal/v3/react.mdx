@@ -10,8 +10,8 @@ Let’s get started with the installation and configuration!
 
 ## Installation
 
-```npm2yarn
-yarn add @web3modal/wagmi@3.0.0-alpha.1 wagmi viem
+```bash npm2yarn
+npm install @web3modal/wagmi@3.0.0-alpha.1 wagmi viem
 ```
 
 ## Implementation
@@ -25,21 +25,19 @@ Make sure to set your configuration outside the App component to avoid unwanted 
 ```tsx
 import { createWeb3Modal } from '@web3modal/wagmi/react'
 import { walletConnectProvider } from '@web3modal/wagmi'
+
 import { WagmiConfig, configureChains, createConfig } from 'wagmi'
-import { arbitrum, mainnet } from 'wagmi/chains'
+import { mainnet } from 'wagmi/chains'
 import { CoinbaseWalletConnector } from 'wagmi/connectors/coinbaseWallet'
 import { InjectedConnector } from 'wagmi/connectors/injected'
 import { WalletConnectConnector } from 'wagmi/connectors/walletConnect'
 
 // 1. Get projectId
-const projectId = import.meta.env.VITE_PROJECT_ID
-if (!projectId) {
-  throw new Error('VITE_PROJECT_ID is not set')
-}
+const projectId = 'YOUR_PROJECT_ID'
 
 // 2. Create wagmiConfig
 const { chains, publicClient } = configureChains(
-  [mainnet, arbitrum],
+  [mainnet],
   [walletConnectProvider({ projectId })]
 )
 
@@ -60,7 +58,7 @@ export default function App() {
 
   return (
     <WagmiConfig config={wagmiConfig}>
-        <ConnectButton />
+        // Rest of your app ...
     </WagmiConfig>
   )
 }
