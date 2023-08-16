@@ -7,11 +7,11 @@ import CloudBanner from '../components/CloudBanner'
 
 # Verify
 
-Verify API allows dapps on all platforms (web, Android and iOS) to securely validate if the end-user is on the correct domain, via their Wallet and the Web3Wallet SDK.
+Verify API allows apps on all platforms (web, Android and iOS) to securely validate if the end-user is on the correct domain, via their Wallet and the Web3Wallet SDK.
 Once the wallet knows whether the end-user was on uniswap.com or eviluniswap.com they can cross-reference this with our registry.
 
 These simple solutions make phishing attacks significantly harder and hence make a more anxiety free crypto experience for end-users.
-For those looking to enable the Verify on the dapp side, check out our reference guide [here.](../cloud/verify)
+For those looking to enable the Verify on the app side, check out our reference guide [here.](../cloud/verify)
 
 <CloudBanner />
 
@@ -77,7 +77,7 @@ web3wallet.on("auth_request", async (authRequest) => {
 
 VerifyContext provides a domain verification information about Session.Proposal and Request and is relevant to the `verifyDapp` function.
 
-It consists of origin of a Dapp from where the request has been sent, validation enum that says whether origin is unknown, valid or invalid and verify URL server.
+It consists of origin of an app from where the request has been sent, validation enum that says whether origin is unknown, valid or invalid and verify URL server.
 
 ```swift
 public struct VerifyContext: Equatable, Hashable {
@@ -98,7 +98,7 @@ public struct VerifyContext: Equatable, Hashable {
 
 Wallet.Event.VerifyContext provides a domain verification information about SessionProposal, SessionRequest and AuthRequest.
 
-It consists of origin of a Dapp from where the request has been sent, validation Enum that says whether origin is `VALID`, `INVALID` or `UNKNOWN` and verify url server.
+It consists of origin of a app from where the request has been sent, validation Enum that says whether origin is `VALID`, `INVALID` or `UNKNOWN` and verify url server.
 
 ```kotlin
 data class VerifyContext(
