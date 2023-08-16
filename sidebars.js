@@ -98,7 +98,8 @@ module.exports = {
                 }
               ]
             },
-            'web3modal/resources'
+            'web3modal/resources',
+            'web3modal/v3/about'
           ]
         },
         {
@@ -314,4 +315,43 @@ module.exports = {
     //   items: ['web3modal/platforms/unity']
     // }
   ],
+  v3: [
+    {
+      type: 'html',
+      value:
+        '<a class="navbar__brand" href="/"><div class="navbar__logo"><img src="/img/walletconnect-logo-white.svg#dark-mode-only"  alt="WalletConnect Logo"><img src="/img/walletconnect-logo-black.svg#light-mode-only"  alt="WalletConnect Logo"></div>WalletConnect<span>Docs<span></a>',
+      defaultStyle: true
+    },
+    {
+      type: 'category',
+      label: 'General',
+      className: 'menu_outer_list',
+      collapsible: false,
+      items: [
+        {
+          type: 'link',
+          label: 'Overview',
+          href: '../about'
+        },
+        {
+          type: 'doc',
+          className: 'sidebar__logo sidebar__logo--react',
+          label: 'React',
+          id: 'web3modal/v3/react'
+        },
+        {
+          type: 'doc',
+          className: 'sidebar__logo sidebar__logo--vue',
+          label: 'Vue',
+          id: 'web3modal/v3/vue'
+        },
+        {
+          type: 'doc',
+          className: 'sidebar__logo sidebar__logo--html',
+          label: 'HTML',
+          id: 'web3modal/v3/html'
+        },
+      ]
+    },
+  ]
 }

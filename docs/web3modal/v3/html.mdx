@@ -1,0 +1,107 @@
+# HTML
+
+:::caution
+This documentation is for Web3Modal v3 which is currently in Alpha. You can find Web3Modal v2 documentation [here](../html/wagmi/installation.mdx)
+:::
+
+With Web3Modal HTML, we work with the Wagmi library which contains everything you need to start working with Ethereum. You can sign messages, interact with smart contracts, and much more.
+
+Let’s get started with the installation and configuration!
+
+## Installation
+
+```bash npm2yarn
+npm install @web3modal/wagmi@3.0.0-alpha.1 @wagmi/core viem
+```
+
+## Implementation
+
+```ts
+import { configureChains, createConfig, disconnect, getAccount } from "@wagmi/core"
+import { mainnet } from "@wagmi/core/chains"
+import { InjectedConnector } from '@wagmi/core'
+import { CoinbaseWalletConnector } from '@wagmi/core/connectors/coinbaseWallet'
+import { WalletConnectConnector } from '@wagmi/core/connectors/walletConnect'
+import { publicProvider } from '@wagmi/core/providers/public'
+import { watchAccount } from '@wagmi/core'
+
+import { Web3Modal } from "@web3modal/wagmi"
+
+// 1. Define constants
+const projectId = 'YOUR_PROJECT_ID';
+
+// 2. Configure wagmi client
+const { chains, publicClient } = configureChains(
+  [mainnet],
+  [publicProvider()]
+)
+const wagmiConfig = createConfig({
+  autoConnect: true,
+  connectors: [
+    new WalletConnectConnector({ chains, options: { projectId, showQrModal: false } }),
+    new InjectedConnector({ chains, options: { shimDisconnect: true } }),
+    new CoinbaseWalletConnector({ chains, options: { appName: 'Web3Modal' } })
+  ],
+  publicClient
+})
+
+// 3. Create Web3Modal
+const modal = new Web3Modal({ wagmiConfig, projectId, chains })
+```
+
+## Trigger the modal
+
+You can trigger the modal by calling the `open()` method on a modal instance of the `Web3Modal` class.
+
+Let's first add two html elements to display information to the user:
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>HTML Example</title>
+  </head>
+  <body>
+    <button id="btn">Connect</button>
+    <span id="user" ></span>
+    <script type="module" src="main.js"></script>
+  </body>
+</html>
+```
+
+Following with our main.js file, we can now add the needed logic to open the modal and display information in the DOM:  
+```ts
+//main.js
+
+function connect(){
+  if(getAccount().isConnected){
+    disconnect()
+  } else {
+    modal.open()
+  }
+}
+
+const btnEl = document.getElementById('btn')
+const userEl = document.getElementById('user')
+
+btnEl.addEventListener('click', connect)
+
+// listening for account changes
+watchAccount((account) => {
+  userEl.innerText = account.address ?? ''
+  if(account.isConnected){
+    btnEl.innerText = "Disconnect"
+  }else{
+    btnEl.innerText = "Connect"
+  }
+})
+```
+
+## Use wagmi Actions
+
+[wagmi](https://wagmi.sh) provides everything you'll need to start working with accounts, contracts, chains and much more.
+
+```tsx
+import { getAccount, writeContract, disconnect, watchAccount } from '@wagmi/core'
+```
