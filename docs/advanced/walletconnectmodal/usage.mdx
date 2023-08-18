@@ -143,6 +143,7 @@ WalletConnectModal.initialize(
         // Error will be thrown if there's an issue during initialization
     }
 )
+```
 
 ### SessionParams
 
@@ -165,25 +166,11 @@ val sessionParams = Modal.Params.SessionParams(
     optionalNamespaces = null,
     properties = null
 )
+
+WalletConnectModal.setSessionParams(sessionParams)
 ```
 
-If you want to change that you can call configure and define your own session parameters like this.
-
-```kotlin
-val sessionParams = Modal.Params.SessionParams(...)
-
-val initParams = Modal.Params.Init(core = CoreClient, sessionParams = sessionParams)
-
-WalletConnectModal.initialize(
-    init = initParams,
-    onSuccess = {
-        // Callback will be called if initialization is successful
-    },
-    onError = { error ->
-        // Error will be thrown if there's an issue during initialization
-    }
-)
-```
+**IMPORTANT**: `SessionParams` must be set before opening the modal.
 
 </PlatformTabItem>
 <PlatformTabItem value="flutter">
