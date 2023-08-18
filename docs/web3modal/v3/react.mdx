@@ -24,6 +24,7 @@ Make sure to set your configuration outside the App component to avoid unwanted 
 :::
 <Tabs>
 <TabItem value="default" label="Default">
+
 Start by importing `createWeb3Modal`, `defaultWagmiConfig` and wagmi packages, then create wagmi config using `defaultWagmiConfig` function as shown below.
  Finally, pass wagmi config to `createWeb3Modal`.
 
@@ -54,6 +55,7 @@ export default function App() {
 ```
 </TabItem>
 <TabItem value="custom" label="Advanced">
+
 Start by importing `createWeb3Modal`, `walletConnectProvider` and wagmi packages, then create wagmi config using your own settings or our default presets as shown below.
  Finally, pass wagmi config to `createWeb3Modal`.
 
