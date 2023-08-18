@@ -71,4 +71,35 @@ Allows to override Modal's accent color. Defaults to `undefined`.
 ```
 
 </PlatformTabItem>
+
+<PlatformTabItem value="android">
+
+## WalletConnectModal Theme
+
+Allows to override Modal's accent color.
+
+### Compose
+
+Wrap Modal in `WalletConnectModalTheme`.
+
+```kotlin
+WalletConnectModalTheme(
+    accentColor = Color(0xFF3496ff),
+    onAccentColor = Color.White
+) {
+    ModalBottomSheetLayout() {  }
+}
+```
+
+### Android View
+
+You can override the default Modal style color by creating a `WalletConnectModalTheme`.
+
+```xml
+<style name="WalletConnectModalTheme">
+    <item name="accentColor">#FF47A1FF</item>
+    <item name="onAccentColor">#FFFFFFFF</item>
+</style>
+```
+</PlatformTabItem>
 </PlatformTabs>
