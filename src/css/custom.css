@@ -661,8 +661,25 @@ article img {
 }
 
 .tabs {
-  --ifm-tabs-padding-vertical: 0.25rem;
-  --ifm-tabs-padding-horizontal: 1rem;
+  position: relative;
+  isolation: isolate;
+  --ifm-tabs-padding-vertical: 0.5rem;
+  --ifm-tabs-padding-horizontal: 1.25rem;
+}
+
+.tabs:not(.platform-tabs) {
+  padding-bottom: 1px;
+}
+
+.tabs:not(.platform-tabs):before {
+  content: '';
+  z-index: -1;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 1px;
+  width: 100%;
+  background: linear-gradient(90deg, var(--ifm-border-color) 0, transparent 100%);
 }
 
 .tabs__item {
@@ -682,13 +699,13 @@ article img {
 .tabs__item:first-child,
 .tabs__item--active:first-child {
   border-top-left-radius: 0.5rem;
-  border-bottom-left-radius: 0.5rem;
+  border-bottom-left-radius: 0rem;
 }
 
 .tabs__item:last-child,
 .tabs__item--active:last-child {
   border-top-right-radius: 0.5rem;
-  border-bottom-right-radius: 0.5rem;
+  border-bottom-right-radius: 0rem;
 }
 
 /* Start - Platform Tabs */
