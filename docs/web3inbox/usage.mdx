@@ -177,8 +177,36 @@ To prevent reloading of Web3Inbox the activity that contains the `Web3Inbox.View
 >
 <PlatformTabItem value="ios">
 
+#### Configure your project to enable Push Notifications
+
+[Configure Project](https://docs.walletconnect.com/2.0/advanced/echo-server)
+
 #### Register for Push Notifications
-Communicate with Apple Push Notification service and receive unique device token. Register that token with following method:
+
+In order to enable Push Notifications for your app you need to follow standard procedure:
+
+[Enable Push Notifications Capability](https://developer.apple.com/documentation/usernotifications/registering_your_app_with_apns#2980170)
+
+Ask for user permissions:
+
+call registerForPushNotifications() early in your app's lifecycle to initiate the registration process with Apple Push Notification service:
+
+```swift
+    func registerForPushNotifications() {
+        UNUserNotificationCenter.current()
+            .requestAuthorization(
+                options: [.alert, .sound, .badge]
+            ) { granted, error in
+                guard granted else { return }
+                DispatchQueue.main.async {
+                    UIApplication.shared.registerForRemoteNotifications()
+                }
+            }
+    }
+```
+
+Receive token from Apple Push Notification Services and register it at the Push Server:
+
 
 ```swift
     func application(
@@ -212,7 +240,7 @@ For details on how to modify the content in newly delivered notifications, refer
 
 Additionally, you will need to create a [keychain group](https://developer.apple.com/documentation/security/keychain_services/keychain_items/sharing_access_to_keychain_items_among_a_collection_of_apps) that is shared between your wallet application and the notification service. The keychain group should be named `group.com.walletconnect.sdk`.
 
-Inside your notification service extension file, import Web3Inbox, initialize `PushDecryptionService()`, and decrypt the message with the following Swift code:
+Inside your notification service extension file, import Web3Inbox, initialize `NotifyDecryptionService()`, and decrypt the message with the following Swift code:
 
 ```swift
 override func didReceive(_ request: UNNotificationRequest, withContentHandler contentHandler: @escaping (UNNotificationContent) -> Void) {
@@ -221,7 +249,7 @@ override func didReceive(_ request: UNNotificationRequest, withContentHandler co
         let topic = bestAttemptContent.userInfo["topic"] as! String
         let ciphertext = bestAttemptContent.userInfo["blob"] as! String
         do {
-            let service = PushDecryptionService()
+            let service = NotifyDecryptionService()
             let pushMessage = try service.decryptMessage(topic: topic, ciphertext: ciphertext)
             bestAttemptContent.title = pushMessage.title
             bestAttemptContent.body = pushMessage.body
