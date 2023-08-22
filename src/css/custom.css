@@ -679,7 +679,7 @@ article img {
   left: 0;
   height: 1px;
   width: 100%;
-  background: linear-gradient(90deg, var(--ifm-border-color) 0, transparent 100%);
+  background: linear-gradient(90deg, var(--ifm-border-color) 0%, transparent 100%);
 }
 
 .tabs__item {
