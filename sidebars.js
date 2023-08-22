@@ -331,7 +331,7 @@ module.exports = {
         {
           type: 'link',
           label: 'Overview',
-          href: '../about'
+          href: './about'
         },
         {
           type: 'doc',
