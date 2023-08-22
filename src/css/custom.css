@@ -698,13 +698,13 @@ article img {
 
 .tabs__item:first-child,
 .tabs__item--active:first-child {
-  border-top-left-radius: 0.5rem;
+  border-top-left-radius: 0.75rem;
   border-bottom-left-radius: 0rem;
 }
 
 .tabs__item:last-child,
 .tabs__item--active:last-child {
-  border-top-right-radius: 0.5rem;
+  border-top-right-radius: 0.75rem;
   border-bottom-right-radius: 0rem;
 }
 
