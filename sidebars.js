@@ -315,7 +315,7 @@ module.exports = {
     //   items: ['web3modal/platforms/unity']
     // }
   ],
-  v3: [
+  'web3modal/v3': [
     {
       type: 'html',
       value:
