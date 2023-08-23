@@ -329,10 +329,18 @@ module.exports = {
       collapsible: false,
       items: [
         {
-          type: 'link',
+          type: 'ref',
           label: 'Overview',
-          href: './about'
-        },
+          id: 'web3modal/v3/about'
+        }
+      ]
+    },
+    {
+      type: 'category',
+      label: 'Web',
+      className: 'menu_outer_list',
+      collapsible: false,
+      items: [
         {
           type: 'category',
           className: 'sidebar__logo sidebar__logo--react',
