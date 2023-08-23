@@ -356,6 +356,11 @@ module.exports = {
           label: 'Theming',
           id: 'web3modal/v3/theming'
         },
+        {
+          type: 'doc',
+          label: 'Options',
+          id: 'web3modal/v3/options'
+        },
       ]
     },
   ]
