@@ -1,0 +1,95 @@
+import Table from '../../components/Table'
+import PlatformTabs from '../../components/PlatformTabs'
+import PlatformTabItem from '../../components/PlatformTabItem'
+
+# Theming
+
+## ThemeMode
+
+By default `themeMode` option will be set to user system settings 'light' or 'dark'. But user's can override it like this:
+
+```ts
+createWeb3Modal({ wagmiConfig, projectId, chains, themeMode: 'light' })
+```
+
+## themeVariables
+
+By default `themeVariables` are undefined. User can set them like this:
+
+```ts
+createWeb3Modal({
+  wagmiConfig,
+  projectId,
+  chains,
+  themeVariables: {
+    '--w3m-color-mix': '#00BB7F',
+    '--w3m-color-mix-strength': 40
+  }
+})
+```
+
+the following list shows the theme variables you can override:
+
+<Table
+  headers={['Variable', 'Description', 'Type']}
+  data={[
+    {
+      variable: { code: '--w3m-font-family' },
+      description: 'Base font family',
+      type: { code: 'string' }
+    },
+    {
+      variable: { code: '--w3m-accent' },
+      description: 'Color used for buttons, icons, labels, etc.',
+      type: { code: 'string' }
+    },
+    {
+      variable: { code: '--w3m-color-mix' },
+      description: 'The color that blends in with the default colors',
+      type: { code: 'string' }
+    },
+    {
+      variable: { code: '--w3m-color-mix-strength' },
+      description: 'The percentage on how much "--w3m-color-mix" should blend in',
+      type: { code: 'number' }
+    },
+    {
+      variable: { code: '--w3m-font-size-master' },
+      description: 'The base pixel size for fonts.',
+      type: { code: 'string' }
+    },
+    {
+      variable: { code: '--w3m-border-radius-master' },
+      description: 'The base border radius for fonts.',
+      type: { code: 'string' }
+    }
+  ]}
+/>
+
+## Hooks & Composables
+
+Hook to programmatically control the modal. Useful when you want to use your own UI elements and subscribe to modals state
+
+### useWeb3ModalTheme
+
+<PlatformTabs groupId="w3w" activeOptions={["vue","react"]}>
+<PlatformTabItem value="react">
+
+```ts
+const {themeMode, themeVariables, setThemeMode, setThemeVariables} = useWeb3ModalTheme()
+```
+
+</PlatformTabItem>
+<PlatformTabItem value="vue">
+
+```ts
+const theme = useWeb3ModalTheme()
+
+const themeMode = theme.themeMode
+const themeVariables = theme.themeVariables
+theme.setThemeVariables('--w3m-accent': '#ff0000')
+theme.setThemeMode('dark')
+```
+
+</PlatformTabItem>
+</PlatformTabs>
