@@ -1046,8 +1046,13 @@ article img {
 .sidebar__logo {
   background-repeat: no-repeat;
   background-size: 16px 16px;
-  background-position-y: center;
+  background-position-y: 7.5px;
   background-position-x: 12px;
+  padding-left: 24px;
+}
+
+.sidebar__logo .menu__list-item-collapsible {
+  margin-left: -24px;
   padding-left: 24px;
 }
 

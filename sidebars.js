@@ -334,34 +334,36 @@ module.exports = {
           href: './about'
         },
         {
-          type: 'doc',
+          type: 'category',
           className: 'sidebar__logo sidebar__logo--react',
           label: 'React',
-          id: 'web3modal/v3/react'
+          items: [
+            { type: 'doc', label: 'About', id: 'web3modal/v3/react/about' },
+            'web3modal/v3/react/theming',
+            'web3modal/v3/react/options'
+          ]
         },
         {
-          type: 'doc',
+          type: 'category',
           className: 'sidebar__logo sidebar__logo--vue',
           label: 'Vue',
-          id: 'web3modal/v3/vue'
+          items: [
+            { type: 'doc', label: 'About', id: 'web3modal/v3/vue/about' },
+            'web3modal/v3/vue/theming',
+            'web3modal/v3/vue/options'
+          ]
         },
         {
-          type: 'doc',
+          type: 'category',
           className: 'sidebar__logo sidebar__logo--html',
           label: 'HTML',
-          id: 'web3modal/v3/html'
-        },
-        {
-          type: 'doc',
-          label: 'Theming',
-          id: 'web3modal/v3/theming'
-        },
-        {
-          type: 'doc',
-          label: 'Options',
-          id: 'web3modal/v3/options'
-        },
+          items: [
+            { type: 'doc', label: 'About', id: 'web3modal/v3/html/about' },
+            // 'web3modal/v3/html/theming', // TODO: Add theming
+            'web3modal/v3/html/options'
+          ]
+        }
       ]
-    },
+    }
   ]
 }

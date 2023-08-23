@@ -1,3 +1,5 @@
+import Table from '../../../components/Table'
+
 # Theming
 
 ## ThemeMode
@@ -82,24 +84,6 @@ Programmatically control the modal. Useful when you want to use your own UI elem
 
 ### useWeb3ModalTheme
 
-<PlatformTabs groupId="w3m" activeOptions={["vue","react"]}>
-<PlatformTabItem value="react">
-
 ```ts
 const { themeMode, themeVariables, setThemeMode, setThemeVariables } = useWeb3ModalTheme()
 ```
-
-</PlatformTabItem>
-<PlatformTabItem value="vue">
-
-```ts
-const theme = useWeb3ModalTheme()
-
-const themeMode = theme.themeMode
-const themeVariables = theme.themeVariables
-theme.setThemeVariables('--w3m-accent': '#ff0000')
-theme.setThemeMode('dark')
-```
-
-</PlatformTabItem>
-</PlatformTabs>
