@@ -367,7 +367,7 @@ module.exports = {
           label: 'HTML',
           items: [
             { type: 'doc', label: 'About', id: 'web3modal/v3/html/about' },
-            // 'web3modal/v3/html/theming', // TODO: Add theming
+            'web3modal/v3/html/theming',
             'web3modal/v3/html/options'
           ]
         }

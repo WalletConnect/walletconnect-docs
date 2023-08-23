@@ -26,20 +26,6 @@ createWeb3Modal({
 })
 ```
 
-or HTML:
-
-```ts
-const modal = new Web3Modal({
-  wagmiConfig,
-  projectId,
-  chains,
-  themeVariables: {
-    '--w3m-color-mix': '#00BB7F',
-    '--w3m-color-mix-strength': 40
-  }
-})
-```
-
 The following list shows the theme variables you can override:
 
 <Table
@@ -78,7 +64,7 @@ The following list shows the theme variables you can override:
   ]}
 />
 
-## Hooks & Composables
+## Composables
 
 Programmatically control the modal. Useful when you want to use your own UI elements and subscribe to modals state
 
