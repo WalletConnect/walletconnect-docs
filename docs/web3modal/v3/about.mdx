@@ -1,3 +1,7 @@
+---
+pagination_next: web3modal/v3/react/about
+---
+
 import Container from '../../components/Container.js'
 import Wrapper from '../../components/Home/Wrapper'
 import CloudBanner from '../../components/CloudBanner'
@@ -11,7 +15,34 @@ import vueLogo from '../../../static/assets/home/vueLogo.png'
 This documentation is for Web3Modal v3 which is currently in Alpha. You can find Web3Modal v2 documentation [here](../html/wagmi/installation.mdx)
 :::
 
-<CloudBanner />
+## QuickStart
+
+<Wrapper
+  type="large"
+  fit={false}
+  items={[
+    {
+      name: 'React + wagmi',
+      description: 'Get started with Web3Modal and wagmi in React.',
+      icon: reactLogo,
+      href: '/2.0/web3modal/v3/react/about'
+    },
+    {
+      name: 'Vue + wagmi',
+      description: 'Get started with Web3Modal and wagmi in Vue.',
+      icon: vueLogo,
+      href: '/2.0/web3modal/v3/vue/about'
+    },
+    {
+      name: 'HTML + wagmi',
+      description: 'Get started with Web3Modal and wagmi in HTML.',
+      icon: htmlLogo,
+      href: '/2.0/web3modal/v3/html/about'
+    }
+  ]}
+/>
+
+## Introduction
 
 The Web3Modal SDK allows you to easily connect your Web3 dapp with wallets. It provides a simple and
 intuitive interface for dapps to request actions such as signing transactions and interacting with smart
@@ -33,33 +64,6 @@ multiple chains without the need for separate integration code.
 </p>
 
 Try out Web3Modal v3 Alpha demo [here](https://web3modal-laboratory-v3.vercel.app/)
-
-## QuickStart
-
-<Wrapper
-  type="large"
-  fit={false}
-  items={[
-    {
-      name: 'React + wagmi',
-      description: 'Get started with Web3Modal and wagmi in React.',
-      icon: reactLogo,
-      href: '/2.0/web3modal/v3/react'
-    },
-    {
-      name: 'Vue + wagmi',
-      description: 'Get started with Web3Modal and wagmi in Vue.',
-      icon: vueLogo,
-      href: '/2.0/web3modal/v3/vue'
-    },
-    {
-      name: 'HTML + wagmi',
-      description: 'Get started with Web3Modal and wagmi in HTML.',
-      icon: htmlLogo,
-      href: '/2.0/web3modal/v3/html'
-    }
-  ]}
-/>
 
 ## Features
 

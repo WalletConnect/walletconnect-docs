@@ -23,6 +23,10 @@ const PLATFORM_MAP = [
     label: 'React'
   },
   {
+    value: 'vue',
+    label: 'Vue'
+  },
+  {
     value: 'html',
     label: 'HTML'
   },
