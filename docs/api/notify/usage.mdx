@@ -122,6 +122,7 @@ You can add a WalletConnect SDK to your project with the Swift Package Manager. 
 #### Initialization
 
 Make sure Networking and Pairing are properly configured.
+
 - [Networking](../core/relay.mdx)
 
 #### Configure your project to enable Push Notifications
@@ -135,6 +136,7 @@ Configure the `Notify` instance with:
 ```swift
 try Notify.configure(environment: APNSEnvironment, crypto: CryptoProvider)
 ```
+
 environment - Use `debug` environment for debug builds and `release` for release and TestFlight builds
 crypto - CruptoProvider is a protocol, you are required to provide an implementation of two methods recoverPubKey and keccak256.
 
@@ -162,7 +164,6 @@ call registerForPushNotifications() early in your app's lifecycle to initiate th
     }
 ```
 
-
 Receive token from Apple Push Notification Services and register it at the Push Server:
 
 ```swift
@@ -170,18 +171,20 @@ Receive token from Apple Push Notification Services and register it at the Push 
       _ application: UIApplication,
       didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data
     ) {
-        Task(priority: .high) {            
+        Task(priority: .high) {
             try await Notify.instance.register(deviceToken: deviceToken)
         }
     }
 ```
-#
-# Subscribe Events
 
+#
+
+# Subscribe Events
 
 #### Subscribe new subscription
 
 Emits on new subscription created.
+
 ```swift
 public var newSubscriptionPublisher: AnyPublisher<NotifySubscription, Never> {
 ```
@@ -191,20 +194,20 @@ public var newSubscriptionPublisher: AnyPublisher<NotifySubscription, Never> {
 Emits new notify message from a dapp.
 
 ```swift
-public var notifyMessagePublisher: AnyPublisher<PushMessage, Never> 
+public var notifyMessagePublisher: AnyPublisher<PushMessage, Never>
 ```
 
 #### Subscribe Subscription Deletion
 
-Emits  a topic of a deleted subscription.
+Emits a topic of a deleted subscription.
 
 ```swift
-public var deleteSubscriptionPublisher: AnyPublisher<String, Never> 
+public var deleteSubscriptionPublisher: AnyPublisher<String, Never>
 ```
 
 #### Subscribe Subscription Update
 
-Emits a result of a subscription update, containing updated subscription if successful. 
+Emits a result of a subscription update, containing updated subscription if successful.
 
 ```swift
 public var updateSubscriptionPublisher: AnyPublisher<Result<PushSubscription, Error>, Never> {
@@ -215,35 +218,32 @@ public var updateSubscriptionPublisher: AnyPublisher<Result<PushSubscription, Er
 Emits a list of active subscriptions.
 
 ```swift
-public var subscriptionsPublisher: AnyPublisher<[PushSubscription], Never> 
+public var subscriptionsPublisher: AnyPublisher<[PushSubscription], Never>
 ```
-
 
 #### Create Notify Subscription
 
 To enable seamless communication between a Dapp and a wallet, the wallet must first establish a Notify Subscription. This crucial step allows the Dapp and its associated services to publish notify messages directly to the wallet. Upon granting permission for the wallet's iOS application to display Push Notifications, users will experience real-time updates in the form of push notifications on their devices. For an enhanced user experience, consider subscribing to the `notifyMessagePublisher` channel. This option ensures that notify messages are delivered promptly when the app is active and a web socket connection is established, keeping users informed and engaged.
 
-
 To subscribe to dapp's notify messages first fetch publicly discoverable dapps with WalletConnet explorer:
 
 https://explorer-api.walletconnect.com/v3/dapps?projectId={your_project_id}&is_notify_enabled=true
-
 
 and request a subscription directly from the wallet:
 
 ```swift
 public func subscribe(metadata: AppMetadata, account: Account, onSign: @escaping SigningCallback) async throws {
 ```
+
 `metadata` - metadata object of publicly discoverable dapp fetched from WalletConnect explorer
 
 `account` - an account you want to associate a sebscription with
 
 `onSign` - callback that requres a signature from a user
- 
- 
+
 #### Get Active Subscriptions
 
-```swift 
+```swift
 Notify.instance.getActiveSubscriptions()
 ```
 
@@ -260,7 +260,7 @@ try await Notify.instance.deleteSubscription(topic: String)
 To get messages by topic call:
 
 ```swift
-Notify.instance.getMessageHistory(topic: subscription.topic) 
+Notify.instance.getMessageHistory(topic: subscription.topic)
 ```
 
 #### Decrypt Push Notifications
@@ -302,6 +302,7 @@ Import WalletConnectNotify inside your notification service extension file, init
 ```
 
 #### Where to Go from Here
+
 - Try our [Wallet App](https://github.com/WalletConnect/WalletConnectSwiftV2/tree/main/Example/WalletApp) and to test notifications.
 - Build API documentation in XCode: go to Product -> Build Documentation
 
@@ -316,11 +317,13 @@ Kotlin implementation of WalletConnect Push protocol for Android applications.
 
 #### Requirements
 
-* Android min SDK 23
-* Java 11
+- Android min SDK 23
+- Java 11
 
 #### Implementation
+
 root/build.gradle.kts:
+
 ```gradle
 allprojects {
  repositories {
@@ -339,11 +342,13 @@ implementation("com.walletconnect:push")
 ```
 
 #### Getting Started
+
 There are two types of push notification a wallet may want to receive.
 
 1. Custom Push Nofications: These notifications can be rendered within your wallet and are always encrypted. Examples include receiving a notification when you have a new follower or when someone wants to buy your NFT. In this example, we will cover **this** scenario.
 
-2. User Action Push Notifications: Your wallet will receive these notifications when you need to sign or send a transaction. Examples include authorizing your wallet or minting an NFT. These actions must be completed before anything happens. **Push API is not requried** to receive these notifications. 
+2. User Action Push Notifications: Your wallet will receive these notifications when you need to sign or send a transaction. Examples include authorizing your wallet or minting an NFT. These actions must be completed before anything happens. **Push API is not requried** to receive these notifications.
+
 To read more about User Action Push Notifications, go [here].
 
 #### Implementation
@@ -380,7 +385,7 @@ PushWalletClient.initialize(init) { error ->
 
 #### Register for Push Notifications
 
-The `PushMessageService` is a wrapper around the `FirebaseMessagingService`. This wrapper class needs to be implemented for the Push SDK to be able to decrypt and notify wallets of a push notification sent from the Dapp in the background. 
+The `PushMessageService` is a wrapper around the `FirebaseMessagingService`. This wrapper class needs to be implemented for the Push SDK to be able to decrypt and notify wallets of a push notification sent from the Dapp in the background.
 This service also needs to be registered in the AndroidManifest.xml file similar to the example in the [FCM documentation](https://firebase.google.com/docs/cloud-messaging/android/client#manifest).
 
 ```kotlin
@@ -450,14 +455,16 @@ PushWalletClient.setDelegate(walletDelegate)
 ```
 
 #### Subscribe to a Dapp
-Calling `PushWalletClient.subscribe` will establish the subscription with the dapp specified in the `Push.Params.Subscribe` params passed into the function. The `Push.Params.Subscribe` params requires the uri of the dapp and a CAIP-10 compatible account. To verify ownership over the blockchain account, user's must sign the provided message on the `onSign(message: String)` callback. Currenlty only EIP191 signatures are supported. 
+
+Calling `PushWalletClient.subscribe` will establish the subscription with the dapp specified in the `Push.Params.Subscribe` params passed into the function. The `Push.Params.Subscribe` params requires the uri of the dapp and a CAIP-10 compatible account. To verify ownership over the blockchain account, user's must sign the provided message on the `onSign(message: String)` callback. Currenlty only EIP191 signatures are supported.
 
 Our recommendation is to show the message to the user and ask the user to either accept or reject the message.
-* If the user accepts, then you will need to call `CacaoSigner.sign()` with the message, account private key, and a signature type of SignatureType.EIP191.
-* If the user rejects, then you will need to send null as the result of the `onSign` lamda
+
+- If the user accepts, then you will need to call `CacaoSigner.sign()` with the message, account private key, and a signature type of SignatureType.EIP191.
+- If the user rejects, then you will need to send null as the result of the `onSign` lamda
 
 ```kotlin
-val subscribeParams = Push.Params.Subscribe(/*Dapp uri*/, /*CAIP-10 account*/, onSign = fun(message: String): Push.Model.Cacao.Signature? { 
+val subscribeParams = Push.Params.Subscribe(/*Dapp uri*/, /*CAIP-10 account*/, onSign = fun(message: String): Push.Model.Cacao.Signature? {
     // Message to be signed. When user decides to sign message use CacaoSigner to sign message.
     // CacaoSigner is a util for easy message signing.
     return CacaoSigner.sign(message, /*privateKey*/, SignatureType.EIP191)
@@ -478,14 +485,15 @@ PushWalletClient.subscribe(
 
 #### Approve Request
 
-To send an approval for the subscription proposal, pass `Push.Params.Approve` to the `PushWalletClient.approve` function to establish a subscription and notify the Dapp. The request id for `Push.Params.Approve` will be available from the `Push.Event.Request` of `onPushRequest` from the PushWalletClient.Delegate. To verify ownership over blockchain account, users must sign the provided message on the `onSign(message: String)` callback. Currenlty only EIP191 signatures are supported. 
+To send an approval for the subscription proposal, pass `Push.Params.Approve` to the `PushWalletClient.approve` function to establish a subscription and notify the Dapp. The request id for `Push.Params.Approve` will be available from the `Push.Event.Request` of `onPushRequest` from the PushWalletClient.Delegate. To verify ownership over blockchain account, users must sign the provided message on the `onSign(message: String)` callback. Currenlty only EIP191 signatures are supported.
 
 Our recommendation is to show the message to the user and ask the user to either accept or reject the message.
-* If the user accepts, then you will need to call `CacaoSigner.sign()` with the message, account private key, and a signature type of SignatureType.EIP191.
-* If the user rejects, then you will need to send null as the result of the `onSign` lamda
+
+- If the user accepts, then you will need to call `CacaoSigner.sign()` with the message, account private key, and a signature type of SignatureType.EIP191.
+- If the user rejects, then you will need to send null as the result of the `onSign` lamda
 
 ```kotlin
-val approveParams = Push.Params.Approve(id = /*request ID*/, onSign = fun(message: String): Push.Model.Cacao.Signature? { 
+val approveParams = Push.Params.Approve(id = /*request ID*/, onSign = fun(message: String): Push.Model.Cacao.Signature? {
     // Message to be signed. When user decides to sign message use CacaoSigner to sign message.
     // CacaoSigner is a util for easy message signing.
     return CacaoSigner.sign(message, /*privateKey*/, SignatureType.EIP191)
@@ -495,7 +503,7 @@ val approveParams = Push.Params.Approve(id = /*request ID*/, onSign = fun(messag
 
 PushWalletClient.approve(
     params = approveParams,
-    onSuccess = { 
+    onSuccess = {
         // callback for when the approval is successful
     },
     onError = { error: Push.Model.Error ->
@@ -513,7 +521,7 @@ val rejectParams = Push.Params.Reject(id = /*request ID*/, reason = /*Error Reas
 
 PushWalletClient.reject(
     rejectParams,
-    onSuccess = { 
+    onSuccess = {
         // callback for when the rejection is successful
     },
     onError = { error: Push.Model.Error ->
@@ -588,10 +596,10 @@ val encryptedMessage = Push.Params.DecryptMessage(topic = /*topic*/, encryptedMe
 
 PushWalletClient.decryptMessage(
     encryptedMessage,
-    onSuccess = { pushMessage: Push.Model.Message -> 
+    onSuccess = { pushMessage: Push.Model.Message ->
         // callback for when the decryption is successful
     },
-    onError = { error: Push.Model.Error -> 
+    onError = { error: Push.Model.Error ->
         // callback for when the decryption has failed
     }
 )
@@ -599,20 +607,21 @@ PushWalletClient.decryptMessage(
 
 #### Enable Sync
 
-To enable the syncing of subscriptions and messages with multiple devices for an account, call `PushWalletClient.enableSync` and pass an instance `Push.Params.EnableSync` containing the account to sync. 
+To enable the syncing of subscriptions and messages with multiple devices for an account, call `PushWalletClient.enableSync` and pass an instance `Push.Params.EnableSync` containing the account to sync.
 
 ```kotlin
 val account: String = /*Account to sync*/
 val enableSyncParams = Push.Params.EnableSync(account)
-PushWalletClient.enableSync(enableSyncParams, 
-    onSuccess { 
+PushWalletClient.enableSync(enableSyncParams,
+    onSuccess {
         // callback for when sync is setup successfully for specified account
     },
     onError { error: Push.Model.Error ->
         // callback for when the sync process has failed
     }
-) 
+)
 ```
+
 </PlatformTabItem>
 <PlatformTabItem value="react-native">
 
