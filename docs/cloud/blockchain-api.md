@@ -18,7 +18,7 @@ The Blockchain API is designed to work with all of the chains that WalletConnect
 
 The Blockchain API supports popular chains such as Ethereum, Binance Smart Chain, Solana, and more.
 
-See the full list of [supported chains](../advanced/multichain/chain-list.md).
+See the full list of [supported chains](https://github.com/WalletConnect/rpc-proxy/blob/master/SUPPORTED_CHAINS.md).
 
 ## Using the Blockchain API
 
@@ -30,6 +30,6 @@ The Blockchain API is free for 100k requests/day.
 
 ## Links
 
-- [Supported chains](../advanced/multichain/chain-list.md)
+- [Supported chains](https://github.com/WalletConnect/rpc-proxy/blob/master/SUPPORTED_CHAINS.md)
 - [The Blockchain API Github repo](https://github.com/WalletConnect/rpc-proxy)
 
