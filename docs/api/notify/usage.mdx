@@ -307,14 +307,12 @@ To register an identity key, you must provide a callback to the ` onSign: @escap
 In order to register identity keys and enable cross device sync, the SDK will trigger this callback with a messages to sign, expecting the signature for that message to be returned.
 
 ```swift
-const account = `eip155:1:0x63Be2c680685d2A9620c11b0068291261aa62d76`
-const onSign = (message: string) => ethersWallet.signMessage(message)
 
-Notify.instance.register(account: params.account, onSign: onSign)
+Notify.instance.register(account: account, onSign: onSign)
 
 func onSign(message: String) -> SigningResult {
 
-    // Provide your own sing function implementation that return CacaoSignature
+    // Provide your own sing function implementation that returns CacaoSignature
     // For more detailed example see our sample WalletApp
     let signature = try! signer.sign(message: message)
     return .signed(signature)
