@@ -31,5 +31,5 @@ The Blockchain API is free for 100k requests/day.
 ## Links
 
 - [Supported chains](https://github.com/WalletConnect/rpc-proxy/blob/master/SUPPORTED_CHAINS.md)
-- [The Blockchain API Github repo](https://github.com/WalletConnect/rpc-proxy)
+- [The Blockchain API GitHub repo](https://github.com/WalletConnect/rpc-proxy)
 
