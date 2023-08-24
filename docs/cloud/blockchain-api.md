@@ -9,10 +9,10 @@ The Blockchain API is designed to work with all of the chains that WalletConnect
 
 - Web3Modal built-in integration
 - Multi-chain mainnet and testnets
-- HTTP RPC & websocket RPC support
+- HTTP RPC support
 - Cloud metrics and reporting
 - The Identity API with near-instant ENS resolution
-- Transaction history
+- Transaction history (coming soon)
 
 ## Supported Chains
 
