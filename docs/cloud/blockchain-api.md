@@ -22,7 +22,7 @@ See the full list of [supported chains](https://github.com/WalletConnect/rpc-pro
 
 ## Using the Blockchain API
 
-The Blockchain API is built into Web3Modal. No config or setup is needed. 
+No config or setup is needed for Web3Modal integrations. For other usage, see the [Usage](https://github.com/walletconnect/rpc-proxy#usage) section.
 
 ## Limits
 
