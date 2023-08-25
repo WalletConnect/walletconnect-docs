@@ -544,7 +544,6 @@ NotifyClient.setDelegate(walletDelegate)
 #### Register Identity at a Keyserver
 
 In order to use Notify SDK account must register identity in [Keyserver](https://docs.walletconnect.com/2.0/specs/servers/keys/). To verify ownership over blockchain account when registering identities in [Keyserver](https://docs.walletconnect.com/2.0/specs/servers/keys/) user's must sign message provided on `onSign(message: String)` callback. Currenlty only [`EIP191`](https://eips.ethereum.org/EIPS/eip-191) signatures are supported in [Keyserver](https://docs.walletconnect.com/2.0/specs/servers/keys/)
-<!-- TODO: Chat milestone 2 remove EIP191 signatures only comment -->
 
 ##### NotifyClient.register
 ```kotlin
