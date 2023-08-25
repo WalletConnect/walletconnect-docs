@@ -615,7 +615,7 @@ NotifyClient.deleteSubscription(params) { error ->
 
 #### Delete Notify Message
 
-To delete a notify record message, pass `Notify.Params.Delete` with the request id of the record to be deleted. If unsuccessful, an error is returned in the callback. The id can be fetched from the `NotifyClient.getMessageHistory()`
+To delete a notify record message, pass `Notify.Params.DeleteMessage` with the request id of the record to be deleted. If unsuccessful, an error is returned in the callback. The id can be fetched from the `NotifyClient.getMessageHistory()`
 
 ```kotlin
 val id = // id of notify record to be deleted
