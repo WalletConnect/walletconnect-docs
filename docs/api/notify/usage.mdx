@@ -602,7 +602,7 @@ NotifyClient.update(params) { error ->
 
 #### Delete Subscription
 
-To delete a subscription, pass `Notify.Params.Delete` with the subscription topic that is to be deleted. If unsuccessful, an error is returned in the callback. The subscription topic can be fetched from the `NotifyClient.getActiveSubscriptions()`
+To delete a subscription, pass `Notify.Params.DeleteSubscription` with the subscription topic that is to be deleted. If unsuccessful, an error is returned in the callback. The subscription topic can be fetched from the `NotifyClient.getActiveSubscriptions()`
 
 ```kotlin
 val topic = // active subscription topic
