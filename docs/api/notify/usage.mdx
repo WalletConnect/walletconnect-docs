@@ -646,7 +646,7 @@ val mapOfMessages: Map<Long, Notify.Model.MessageRecord> = NotifyClient.getMessa
 
 #### Decrypt Message
 
-To decrypt a message sent by Echo server, pass the topic and encrypted message into `Notify.Params.DecryptMessage`. Pass the variable into `NotifyClient.decryptMessage` and use the `onSuccess` and `onError` callbacks to react to the result. This function is not needed when using the `NotifyMessageService`.
+To decrypt a message sent by Push server, pass the topic and encrypted message into `Notify.Params.DecryptMessage`. Pass the variable into `NotifyClient.decryptMessage` and use the `onSuccess` and `onError` callbacks to react to the result. This function is not needed when using the `NotifyMessageService`.
 
 ```kotlin
 val params = Notify.Params.DecryptMessage(topic = /*topic*/, encryptedMessage = /*encrypted message*/)
