@@ -186,12 +186,10 @@ module.exports = {
             },
             {
               type: 'category',
-              label: 'Push',
+              label: 'Notify',
               items: [
-                'api/push/about',
-                'api/push/dapp-usage',
-                'api/push/wallet-usage',
-                'api/push/echo'
+                'api/notify/about',
+                'api/notify/usage',
               ]
             },
             {
