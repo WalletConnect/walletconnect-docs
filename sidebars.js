@@ -290,6 +290,12 @@ module.exports = {
           className: 'sidebar__logo sidebar__logo--html ',
           label: 'HTML',
           id: 'web3modal/platforms/html'
+        },
+        {
+          type: 'doc',
+          className: 'sidebar__logo sidebar__logo--flutter ',
+          label: 'Flutter',
+          id: 'web3modal/platforms/flutter'
         }
       ]
     }

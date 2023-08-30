@@ -178,9 +178,11 @@ WalletConnectModal.setSessionParams(sessionParams)
 
 Create your `WalletConnectModalService` which is your primary class for opening, closing, disconnecting, etc.
 
+Be sure to update the project ID and metadata with your own.
+
 ```dart
 WalletConnectModalService service = WalletConnectModalService(
-  projectId: projectId,
+  projectId: 'YOUR_PROJECT_ID',
   metadata: const PairingMetadata(
     name: 'Flutter WalletConnect',
     description: 'Flutter WalletConnectModal Sign Example',
