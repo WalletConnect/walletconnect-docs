@@ -55,3 +55,11 @@ W3MNetworkSelect(
   service: _w3mService!,
 )
 ```
+
+## Custom Chain Selection
+
+You can select your own chain by calling the `setSelectedChain` method on the `W3MService` object.
+
+The chain must be EVM compatible.
+
+A list of preset chains that are available to you can be accessed at `ChainData.chainPresets`.
