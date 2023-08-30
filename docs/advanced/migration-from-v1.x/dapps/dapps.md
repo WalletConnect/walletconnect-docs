@@ -110,7 +110,7 @@ Follow this steps along with the migration example:
 
 1. Remove `@walletconnect/react-native-dapp` and all it's implementation
 2. Remove `crypto` polyfill and `rn-nodeify` logic (if present)
-3. Install new packages: `yarn add @walletconnect/modal-react-native react-native-get-random-values react-native-modal react-native-svg @react-native-async-storage/async-storage`
+3. Install new packages: `yarn add @walletconnect/modal-react-native react-native-get-random-values react-native-modal react-native-svg @react-native-async-storage/async-storage @react-native-community/netinfo`
 4. If the project uses react native < 0.70, install `big-integer` and add `BigInt` polyfill
 5. Run `pod install` in `/ios`
 
