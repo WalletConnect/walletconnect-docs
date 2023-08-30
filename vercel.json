@@ -2,6 +2,30 @@
   "trailingSlash": false,
   "redirects": [
     {
+      "source": "/2.0/web/:path*",
+      "destination": "/2.0/:path*"
+    },
+    {
+      "source": "/2.0/android/:path*",
+      "destination": "/2.0/:path*"
+    },
+    {
+      "source": "/2.0/ios/:path*",
+      "destination": "/2.0/:path*"
+    },
+    {
+      "source": "/2.0/reactnative/:path*",
+      "destination": "/2.0/:path*"
+    },
+    {
+      "source": "/2.0/flutter/:path*",
+      "destination": "/2.0/:path*"
+    },
+    {
+      "source": "/2.0/unity/:path*",
+      "destination": "/2.0/:path*"
+    },
+    {
       "source": "/v/1.0/:path*",
       "destination": "/:path*"
     },
@@ -79,19 +103,19 @@
     },
     {
       "source": "/2.0/introduction/sign",
-      "destination": "/2.0/api/sign"
+      "destination": "/2.0/api/sign/overview"
     },
     {
       "source": "/2.0/introduction/auth",
-      "destination": "/2.0/api/auth"
+      "destination": "/2.0/api/auth/overview"
     },
     {
       "source": "/2.0/introduction/push",
-      "destination": "/2.0/api/push"
+      "destination": "/2.0/api/push/overview"
     },
     {
       "source": "/2.0/introduction/chat",
-      "destination": "/2.0/api/chat"
+      "destination": "/2.0/api/chat/overview"
     },
     {
       "source": "/2.0/advanced/relay-server",
@@ -127,23 +151,23 @@
     },
     {
       "source": "/2.0/reactnative/introduction",
-      "destination": "/2.0/reactnative/overview"
+      "destination": "/2.0/advanced/walletconnectmodal/about"
     },
     {
       "source": "/2.0/javascript/:path*",
-      "destination": "/2.0/web/:path*"
+      "destination": "/2.0/:path*"
     },
     {
       "source": "/2.0/kotlin/:path*",
-      "destination": "/2.0/android/:path*"
+      "destination": "/2.0/:path*"
     },
     {
       "source": "/2.0/swift/:path*",
-      "destination": "/2.0/ios/:path*"
+      "destination": "/2.0/:path*"
     },
     {
       "source": "/2.0/csharp/:path*",
-      "destination": "/2.0/unity/:path*"
+      "destination": "/2.0/:path*"
     },
     {
       "source": "/2.0/specs/servers/echo",
@@ -159,19 +183,19 @@
     },
     {
       "source": "2.0/web/web3modal/react/sign-api/installation",
-      "destination": "/2.0/web/walletConnectModal/sign/react/installation"
+      "destination": "/2.0/web3modal/react/wagmi/installation"
     },
     {
       "source": "2.0/web/web3modal/html/sign-api/installation",
-      "destination": "/2.0/web/walletConnectModal/sign/html/installation"
+      "destination": "/2.0/web3modal/html/wagmi/installation"
     },
     {
       "source": "2.0/web/web3modal/react/auth-api/installation",
-      "destination": "/2.0/web/walletConnectModal/auth/react/installation"
+      "destination": "/2.0/api/auth/overview"
     },
     {
       "source": "2.0/web/web3modal/html/auth-api/installation",
-      "destination": "/2.0/web/walletConnectModal/auth/html/installation"
+      "destination": "/2.0/api/auth/overview"
     }
   ]
 }

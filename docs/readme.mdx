@@ -1,63 +1,145 @@
-import Container from './components/Container'
 import Table from './components/Table'
+import WhatsNewBanner from './components/WhatsNewBanner'
+import Banner from './components/Home/Banner'
+import Wrapper from './components/Home/Wrapper'
+import webLogo from '../static/assets/home/webLogo.png'
+import androidLogo from '../static/assets/home/androidLogo.png'
+import iosLogo from '../static/assets/home/iosLogo.png'
+import rnLogo from '../static/assets/home/rnLogo.png'
+import flutterLogo from '../static/assets/home/flutterLogo.png'
+import unityLogo from '../static/assets/home/unityLogo.png'
+import web3modalLogo from '../static/assets/home/web3modalLogo.png'
+import web3walletLogo from '../static/assets/home/web3walletLogo.png'
+import web3inboxLogo from '../static/assets/home/web3inboxLogo.png'
+import bookLogo from '../static/assets/home/bookLogo.png'
+import twitterLogo from '../static/assets/home/twitterLogo.png'
+import githubLogo from '../static/assets/home/githubLogo.png'
+import universalProviderLogo from '../static/assets/home/universalProviderLogo.png'
+import ethereumProviderLogo from '../static/assets/home/ethereumProviderLogo.png'
+import wcmLogo from '../static/assets/home/wcmLogo.png'
+import cloudLogo from '../static/assets/home/cloudLogo.png'
 
 # About
 
-## What is WalletConnect?
+<Banner />
 
-WalletConnect is the Web3 messaging layer and a standard to connect blockchain wallets to dapps. Our mission continues to expand the interoperability of the Web3 space by providing the best tooling and infrastructure for Wallets to deliver an outstanding user experience. WalletConnect v2 is chain agnostic and built to work with any blockchain of your choice. To read more in detail about the WalletConnect protocol, check out our [Technical specifications](./specs/readme.md).
+## WalletConnect SDKs
 
-If you'd like to make a PR or create an issue for our docs, you can do so by going to the [WalletConnect Docs repo](https://github.com/WalletConnect/walletconnect-docs).
+Effortlessly integrate our suite of SDKs
 
-## Getting Started
-
-At WalletConnect, developers are primarily categorized as either Wallet builders or Dapp builders, as each type requires distinct toolkits for their respective projects.
-
-### 💻 For Dapp builders:
-
-<Container
+<Wrapper
+  type="large"
   items={[
     {
       name: 'Web3Modal',
-      description:
-        'For Dapps. Web3Modal is a library that makes it easy to connect users to your dapp and interact with the blockchain.',
-      url: `/2.0/web3modal/about`
+      icon: web3modalLogo,
+      href: '/2.0/web3modal/about',
+      description: 'All in one SDK for connecting your app to your wallet.'
     },
-    {
-      name: 'Push API',
-      description:
-        'A push notification protocol that enables dapps to notify users of both off-chain and on-chain events.',
-      url: `/2.0/api/push`
-    }
-  ]}
-/>
-
-### 🔐 For Wallet builders:
-
-<Container
-  items={[
     {
       name: 'Web3Wallet',
-      description:
-        'For Wallets. Web3Wallet simplifies the process of integrating wallets into dapps by combining the Sign and Auth APIs into a single module.',
-      url: `/2.0/web3wallet/about`
+      icon: web3walletLogo,
+      href: '/2.0/web3wallet/about',
+      description: 'All-in-one SDK for connecting your wallet’s users to any app.'
     },
     {
-      name: 'Push API',
-      description:
-        'A push notification protocol that enables wallets to recieve dapp off-chain and on-chain events.',
-      url: `/2.0/api/push`
+      name: 'Web3Inbox',
+      icon: web3inboxLogo,
+      href: '/2.0/web3inbox/about',
+      description: 'All-in-one SDK for your push notifications and wallet messaging.'
     }
   ]}
 />
 
-## Why use WalletConnect?
+<hr className="home__divider" />
 
-WalletConnect improves wallet-to-dapp interoperability in the web3 ecosystem. For dapps, WalletConnect can seamlessly integrate support for more than 300+ crypto wallets without much hassle. Wallets can easily integrate WalletConnect with our JavaScript, Swift or Kotlin SDK's.
+## What's new?
+
+<WhatsNewBanner
+  title={'Verify API'}
+  description={'Securely validate and prevent phishing with domain verification.'}
+  href={'/2.0/web3wallet/verify'}
+/>
+
+<hr className="home__divider" />
+
+## Advanced
+
+Utility tools for advanced usage with WalletConnect
+
+<Wrapper
+  type="large"
+  items={[
+    {
+      name: 'WalletConnectModal',
+      icon: wcmLogo,
+      href: '/2.0/advanced/walletConnectModal/about',
+      description: 'A no-frills modal for wallet connections'
+    },
+    {
+      name: 'Ethereum Provider',
+      icon: ethereumProviderLogo,
+      href: '/2.0/advanced/providers/ethereum',
+      description: 'EVM Compatible Provider for WalletConnect.'
+    },
+    {
+      name: 'Universal Provider',
+      icon: universalProviderLogo,
+      href: '/2.0/advanced/providers/universal',
+      description: 'Chain Agnostic Provider for WalletConnect.'
+    }
+  ]}
+/>
+
+<hr className="home__divider" />
 
 ## Join our community
 
-Share your experience, contribute or ask questions with the WalletConnect community :
+Share your experience, contribute, or ask questions
 
-- [Twitter](https://twitter.com/walletconnect)
-- [GitHub](https://github.com/orgs/WalletConnect/discussions/)
+<Wrapper
+  type="small"
+  items={[
+    {
+      name: 'Twitter',
+      icon: twitterLogo,
+      href: 'https://twitter.com/walletconnect'
+    },
+    {
+      name: 'GitHub',
+      icon: githubLogo,
+      href: 'https://github.com/orgs/WalletConnect/discussions/',
+      isWhite: true
+    }
+  ]}
+/>
+
+<hr className="home__divider" />
+
+## How to contribute
+
+<div className="home__contribute">
+  <div className="home__contribute--heading">
+    <img src={bookLogo} alt="Book Logo" />
+    <p className="home__contribute--text">
+      Every page footer has an <strong>Edit this page</strong> link. Change the Markdown, open a
+      Pull Request and we’ll merge it!
+    </p>
+  </div>
+  <a href="https://github.com/WalletConnect/walletconnect-docs/" target="_blank">
+    Docs Repo
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      strokeWidth={2}
+      stroke="currentColor"
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75"
+      />
+    </svg>
+  </a>
+</div>

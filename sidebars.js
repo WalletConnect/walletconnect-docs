@@ -54,14 +54,95 @@ module.exports = {
       label: 'SDKs',
       collapsible: false,
       className: 'menu_outer_list',
-      items: ['web3modal/about', 'web3wallet/about', 'web3inbox/about']
+      items: [
+        {
+          type: 'category',
+          label: 'Web3Modal',
+          collapsed: true,
+          collapsible: true,
+          items: [
+            'web3modal/about',
+            {
+              type: 'category',
+              label: 'React',
+              items: [
+                'web3modal/react/wagmi/installation',
+                'web3modal/react/wagmi/components',
+                'web3modal/react/wagmi/hooks',
+                'web3modal/react/wagmi/options',
+                'web3modal/react/wagmi/theming',
+                'web3modal/react/wagmi/custom-wallets',
+                'web3modal/react/wagmi/custom-chains',
+                {
+                  type: 'link',
+                  label: 'Example',
+                  href: 'https://github.com/WalletConnect/web3modal-examples/tree/main/web3modal-wagmi-react'
+                }
+              ]
+            },
+            {
+              type: 'category',
+              label: 'HTML',
+              items: [
+                'web3modal/html/wagmi/installation',
+                'web3modal/html/wagmi/components',
+                'web3modal/html/wagmi/actions',
+                'web3modal/html/wagmi/options',
+                'web3modal/html/wagmi/theming',
+                'web3modal/html/wagmi/custom-wallets',
+                'web3modal/html/wagmi/custom-chains',
+                {
+                  type: 'link',
+                  label: 'Example',
+                  href: 'https://github.com/WalletConnect/web3modal-examples/tree/main/web3modal-wagmi-html'
+                }
+              ]
+            },
+            'web3modal/resources',
+            'web3modal/v3/about'
+          ]
+        },
+        {
+          type: 'category',
+          label: 'Web3Wallet',
+          collapsed: true,
+          collapsible: true,
+          items: [
+            'web3wallet/about',
+            'web3wallet/wallet-usage',
+            'web3wallet/verify',
+            'web3wallet/resources'
+          ]
+        },
+        {
+          type: 'category',
+          label: 'Web3Inbox',
+          collapsed: true,
+          collapsible: true,
+          items: [
+            'web3inbox/about',
+            'web3inbox/usage',
+            'web3inbox/resources',
+            {
+              type: 'category',
+              label: 'Dapp Widget',
+              items: [
+                'web3inbox/widget/about',
+                'web3inbox/widget/usage',
+                'web3inbox/widget/options',
+                'web3inbox/widget/theming'
+              ]
+            }
+          ]
+        }
+      ]
     },
     {
       type: 'category',
       label: 'Cloud',
       collapsible: false,
       className: 'menu_outer_list',
-      items: ['cloud/explorer', 'cloud/relay']
+      items: ['cloud/explorer', 'cloud/verify', 'cloud/relay', 'cloud/blockchain-api']
     },
     {
       type: 'category',
@@ -71,10 +152,71 @@ module.exports = {
       items: [
         {
           type: 'category',
+          label: 'Providers',
+          collapsible: true,
+          collapsed: true,
+          items: ['advanced/providers/ethereum', 'advanced/providers/universal']
+        },
+        {
+          type: 'category',
           label: 'APIs',
           collapsed: true,
           collapsible: true,
-          items: ['api/sign', 'api/auth', 'api/chat', 'api/push']
+          items: [
+            {
+              type: 'category',
+              label: 'Auth',
+              items: [
+                'api/auth/overview',
+                'api/auth/dapp-usage',
+                'api/auth/wallet-usage',
+                'api/auth/signer-factory',
+                'api/auth/resources'
+              ]
+            },
+            {
+              type: 'category',
+              label: 'Chat',
+              items: ['api/chat/about', 'api/chat/usage', 'api/chat/resources']
+            },
+            {
+              type: 'category',
+              label: 'Core',
+              items: ['api/core/pairing', 'api/core/relay', 'api/core/shared-core']
+            },
+            {
+              type: 'category',
+              label: 'Notify',
+              items: [
+                'api/notify/about',
+                'api/notify/usage',
+              ]
+            },
+            {
+              type: 'category',
+              label: 'Sign',
+              items: [
+                'api/sign/overview',
+                'api/sign/dapp-usage',
+                'api/sign/wallet-usage',
+                'api/sign/smart-contract-wallet-usage'
+              ]
+            },
+            'api/mobileLinking'
+          ]
+        },
+        {
+          type: 'category',
+          label: 'WalletConnectModal',
+          collapsed: true,
+          collapsible: true,
+          items: [
+            'advanced/walletconnectmodal/about',
+            'advanced/walletconnectmodal/usage',
+            'advanced/walletconnectmodal/options',
+            'advanced/walletconnectmodal/theming',
+            'advanced/walletconnectmodal/resources'
+          ]
         },
         {
           type: 'category',
@@ -102,174 +244,16 @@ module.exports = {
       collapsible: false,
       className: 'menu_outer_list',
       items: [
-        'advanced/glossary',
         {
-          type: 'category',
-          label: 'RPC Reference',
-          items: [
-            'advanced/rpc-reference/everscale-rpc',
-            'advanced/rpc-reference/ethereum-rpc',
-            'advanced/rpc-reference/cosmos-rpc',
-            'advanced/rpc-reference/solana-rpc',
-            'advanced/rpc-reference/stellar-rpc',
-            'advanced/rpc-reference/tezos-rpc',
-            'advanced/rpc-reference/starknet-rpc',
-            'advanced/rpc-reference/near-rpc',
-            'advanced/rpc-reference/xrpl-rpc'
-          ]
-        },
-        {
-          type: 'category',
+          type: 'link',
           label: 'Specs',
-          collapsed: true,
-          collapsible: true,
-          items: [
-            'specs/readme',
-            {
-              type: 'category',
-              label: 'Client APIs',
-              items: [
-                {
-                  type: 'category',
-                  label: 'Sign API',
-                  items: [
-                    {
-                      type: 'autogenerated',
-                      dirName: 'specs/clients/sign'
-                    }
-                  ]
-                },
-                {
-                  type: 'category',
-                  label: 'Auth API',
-                  items: [
-                    {
-                      type: 'autogenerated',
-                      dirName: 'specs/clients/auth'
-                    }
-                  ]
-                },
-                {
-                  type: 'category',
-                  label: 'Chat API',
-                  items: [
-                    {
-                      type: 'autogenerated',
-                      dirName: 'specs/clients/chat'
-                    }
-                  ]
-                },
-                {
-                  type: 'category',
-                  label: 'Push API',
-                  items: [
-                    {
-                      type: 'autogenerated',
-                      dirName: 'specs/clients/push'
-                    }
-                  ]
-                },
-                {
-                  type: 'category',
-                  label: 'Core API',
-                  items: [
-                    {
-                      type: 'autogenerated',
-                      dirName: 'specs/clients/core'
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              type: 'category',
-              label: 'Meta-Clients API',
-              items: [
-                {
-                  type: 'category',
-                  label: 'Web3Inbox',
-                  items: [
-                    {
-                      type: 'autogenerated',
-                      dirName: 'specs/meta-clients/web3inbox'
-                    }
-                  ]
-                },
-                {
-                  type: 'category',
-                  label: 'Web3Wallet',
-                  items: [
-                    {
-                      type: 'autogenerated',
-                      dirName: 'specs/meta-clients/web3wallet'
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              type: 'category',
-              label: 'Server APIs',
-              items: [
-                {
-                  type: 'category',
-                  label: 'Relay Server',
-                  items: [
-                    {
-                      type: 'autogenerated',
-                      dirName: 'specs/servers/relay'
-                    }
-                  ]
-                },
-                {
-                  type: 'category',
-                  label: 'Keys Server',
-                  items: [
-                    {
-                      type: 'autogenerated',
-                      dirName: 'specs/servers/keys'
-                    }
-                  ]
-                },
-                {
-                  type: 'category',
-                  label: 'Echo Server',
-                  items: [
-                    {
-                      type: 'autogenerated',
-                      dirName: 'specs/servers/echo'
-                    }
-                  ]
-                },
-                {
-                  type: 'category',
-                  label: 'Cast Server',
-                  items: [
-                    {
-                      type: 'autogenerated',
-                      dirName: 'specs/servers/cast'
-                    }
-                  ]
-                },
-                {
-                  type: 'category',
-                  label: 'History Server',
-                  items: [
-                    {
-                      type: 'autogenerated',
-                      dirName: 'specs/servers/history'
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
+          href: 'https://specs.walletconnect.com/'
         },
         'advanced/faq'
       ]
     }
   ],
-  web: [
+  'web3modal/platforms': [
     {
       type: 'html',
       value:
@@ -278,237 +262,58 @@ module.exports = {
     },
     {
       type: 'category',
-      label: 'Introduction',
-      collapsible: false,
-      className: 'menu_outer_list',
-      items: ['web/about-web3modal', 'web/about-web3wallet']
-    },
-    {
-      type: 'category',
-      label: 'SDKs',
+      label: 'General',
       className: 'menu_outer_list',
       collapsible: false,
       items: [
         {
-          type: 'category',
-          label: 'Web3Modal',
-          items: [
-            {
-              type: 'category',
-              label: 'React',
-              items: [
-                'web/web3modal/react/wagmi/installation',
-                'web/web3modal/react/wagmi/components',
-                'web/web3modal/react/wagmi/hooks',
-                'web/web3modal/react/wagmi/options',
-                'web/web3modal/react/wagmi/theming',
-                'web/web3modal/react/wagmi/custom-wallets',
-                'web/web3modal/react/wagmi/custom-chains',
-                {
-                  type: 'link',
-                  label: 'Example',
-                  href: 'https://github.com/WalletConnect/web3modal-examples/tree/main/web3modal-wagmi-react'
-                }
-              ]
-            },
-            {
-              type: 'category',
-              label: 'HTML',
-              items: [
-                'web/web3modal/html/wagmi/installation',
-                'web/web3modal/html/wagmi/components',
-                'web/web3modal/html/wagmi/actions',
-                'web/web3modal/html/wagmi/options',
-                'web/web3modal/html/wagmi/theming',
-                'web/web3modal/html/wagmi/custom-wallets',
-                'web/web3modal/html/wagmi/custom-chains',
-                {
-                  type: 'link',
-                  label: 'Example',
-                  href: 'https://github.com/WalletConnect/web3modal-examples/tree/main/web3modal-wagmi-html'
-                }
-              ]
-            }
-          ]
-        },
-
-        {
-          type: 'category',
-          label: 'Web3Wallet',
-          collapsible: true,
-          collapsed: true,
-          items: [
-            'web/web3wallet/installation',
-            'web/web3wallet/wallet-usage',
-            'web/web3wallet/upgrade-guide'
-          ]
-        },
-
-      ]
-    },
-    {
-      type: 'category',
-      label: 'Advanced',
-      className: 'menu_outer_list',
-      collapsible: false,
-      items: [
-        {
-          type: 'category',
-          label: 'APIs',
-          collapsed: true,
-          collapsible: true,
-          items: [
-            {
-              type: 'category',
-              label: 'Sign',
-              collapsible: true,
-              collapsed: true,
-              items: [
-                'web/sign/installation',
-                'web/sign/dapp-usage',
-                'web/sign/wallet-usage',
-                'web/sign/smart-wallets'
-              ]
-            },
-            {
-              type: 'category',
-              label: 'Auth',
-              collapsible: true,
-              collapsed: true,
-              items: ['web/auth/installation', 'web/auth/dapp-usage', 'web/auth/wallet-usage']
-            },
-            {
-              type: 'category',
-              label: 'Push',
-              collapsible: true,
-              collapsed: true,
-              items: ['web/push/installation', 'web/push/dapp-usage', 'web/push/wallet-usage']
-            },
-            {
-              type: 'category',
-              label: 'Chat',
-              collapsible: true,
-              collapsed: true,
-              items: ['web/chat/installation', 'web/chat/usage']
-            },
-            {
-              type: 'category',
-              label: 'Core',
-              collapsible: true,
-              collapsed: true,
-              items: ['web/core/pairing-api']
-            }
-          ]
-        },
-        {
-          type: 'category',
-          label: 'Providers',
-          collapsible: true,
-          collapsed: true,
-          items: ['web/providers/ethereum', 'web/providers/universal']
-        },
-        // WalletConnectModal
-        {
-          type: 'category',
-          label: 'WalletConnectModal',
-          items: [
-            {
-              type: 'category',
-              label: 'Just Modal',
-              items: [
-                'web/walletConnectModal/modal/installation',
-                'web/walletConnectModal/modal/options',
-                'web/walletConnectModal/modal/actions',
-                'web/walletConnectModal/modal/theming'
-              ]
-            },
-            {
-              type: 'category',
-              label: 'With Sign API',
-              items: [
-                {
-                  type: 'category',
-                  label: 'HTML',
-                  items: [
-                    'web/walletConnectModal/sign/html/installation',
-                    'web/walletConnectModal/sign/html/options',
-                    'web/walletConnectModal/sign/html/actions',
-                    'web/walletConnectModal/sign/html/theming',
-                    {
-                      type: 'link',
-                      label: 'Example',
-                      href: 'https://github.com/WalletConnect/web3modal-examples/tree/main/walletconnect-modal-sign-html'
-                    }
-                  ]
-                },
-                {
-                  type: 'category',
-                  label: 'React',
-                  items: [
-                    'web/walletConnectModal/sign/react/installation',
-                    'web/walletConnectModal/sign/react/components',
-                    'web/walletConnectModal/sign/react/hooks',
-                    'web/walletConnectModal/sign/react/options',
-                    'web/walletConnectModal/sign/react/theming',
-                    {
-                      type: 'link',
-                      label: 'Example',
-                      href: 'https://github.com/WalletConnect/web3modal-examples/tree/main/walletconnect-modal-sign-react'
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              type: 'category',
-              label: 'With Auth API',
-              items: [
-                {
-                  type: 'category',
-                  label: 'HTML',
-                  items: [
-                    'web/walletConnectModal/auth/html/installation',
-                    'web/walletConnectModal/auth/html/options',
-                    'web/walletConnectModal/auth/html/actions',
-                    'web/walletConnectModal/auth/html/theming',
-                    {
-                      type: 'link',
-                      label: 'Example',
-                      href: 'https://github.com/WalletConnect/web3modal-examples/tree/main/walletconnect-modal-auth-html'
-                    }
-                  ]
-                },
-                {
-                  type: 'category',
-                  label: 'React',
-                  items: [
-                    'web/walletConnectModal/auth/react/installation',
-                    'web/walletConnectModal/auth/react/components',
-                    'web/walletConnectModal/auth/react/hooks',
-                    'web/walletConnectModal/auth/react/options',
-                    'web/walletConnectModal/auth/react/theming',
-                    {
-                      type: 'link',
-                      label: 'Example',
-                      href: 'https://github.com/WalletConnect/web3modal-examples/tree/main/walletconnect-modal-auth-react'
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
+          type: 'link',
+          label: 'Overview',
+          href: '../about'
         }
       ]
     },
     {
       type: 'category',
-      label: 'Guides',
+      label: 'Web',
       className: 'menu_outer_list',
       collapsible: false,
-      items: ['web/guides/examples-and-resources', 'web/guides/nodejs', 'web/guides/shared-core']
+      items: [
+        {
+          type: 'doc',
+          className: 'sidebar__logo sidebar__logo--react ',
+          label: 'React',
+          id: 'web3modal/platforms/react'
+        },
+        {
+          type: 'doc',
+          className: 'sidebar__logo sidebar__logo--html ',
+          label: 'HTML',
+          id: 'web3modal/platforms/html'
+        }
+      ]
     }
+    // {
+    //   type: 'category',
+    //   label: 'Mobile',
+    //   className: 'menu_outer_list',
+    //   collapsible: false,
+    //   items: [
+    //     'web3modal/platforms/android',
+    //     'web3modal/platforms/ios',
+    //     'web3modal/platforms/react-native',
+    //     'web3modal/platforms/flutter'
+    //   ]
+    // },
+    // {
+    //   type: 'category',
+    //   label: 'Other',
+    //   className: 'menu_outer_list',
+    //   collapsible: false,
+    //   items: ['web3modal/platforms/unity']
+    // }
   ],
-  android: [
+  'web3modal/v3': [
     {
       type: 'html',
       value:
@@ -517,373 +322,52 @@ module.exports = {
     },
     {
       type: 'category',
-      label: 'SDKs',
+      label: 'General',
       className: 'menu_outer_list',
       collapsible: false,
       items: [
         {
-          type: 'category',
-          label: 'Web3Wallet',
-          collapsible: true,
-          collapsed: true,
-          items: [
-            'android/web3wallet/installation',
-            'android/web3wallet/wallet-usage',
-            'android/web3wallet/upgrade-guide'
-          ]
-        },
-        {
-          type: 'category',
-          label: 'Web3Inbox',
-          collapsible: true,
-          collapsed: true,
-          items: ['android/web3inbox/installation', 'android/web3inbox/usage']
-        },
-        {
-          type: 'category',
-          label: 'WalletConnectModal',
-          collapsible: true,
-          collapsed: true,
-          items: ['android/walletconnectmodal/installation', 'android/walletconnectmodal/usage']
-        },
-      ]
-    },
-    {
-      type: 'category',
-      label: 'Advanced',
-      className: 'menu_outer_list',
-      collapsible: false,
-      items: [
-        {
-          type: 'category',
-          label: 'Sign',
-          collapsible: true,
-          collapsed: true,
-          items: [
-            'android/sign/installation',
-            'android/sign/dapp-usage',
-            'android/sign/wallet-usage'
-          ]
-        },
-        {
-          type: 'category',
-          label: 'Auth',
-          collapsible: true,
-          collapsed: true,
-          items: [
-            'android/auth/installation',
-            'android/auth/dapp-or-requester-usage',
-            'android/auth/wallet-or-responder-usage'
-          ]
-        },
-        {
-          type: 'category',
-          label: 'Push',
-          collapsible: true,
-          collapsed: true,
-          items: [
-            {
-              type: 'category',
-              label: 'Dapp Usage',
-              collapsible: true,
-              collapsed: true,
-              items: [['android/push/dapp-usage/getting-started']]
-            },
-            {
-              type: 'category',
-              label: 'Wallet Usage',
-              collapsible: true,
-              collapsed: true,
-              items: ['android/push/wallet-usage/getting-started']
-            }
-          ]
-        },
-        {
-          type: 'category',
-          label: 'Echo',
-          collapsible: true,
-          collapsed: true,
-          items: ['android/echo/usage']
-        },
-        {
-          type: 'category',
-          label: 'Chat',
-          collapsible: true,
-          collapsed: true,
-          items: ['android/chat/installation', 'android/chat/usage']
-        },
-        {
-          type: 'category',
-          label: 'Core',
-          collapsible: true,
-          collapsed: true,
-          items: ['android/core/installation', 'android/core/pairing', 'android/core/relay']
+          type: 'ref',
+          label: 'Overview',
+          id: 'web3modal/v3/about'
         }
       ]
     },
     {
       type: 'category',
-      label: 'Guides',
-      className: 'menu_outer_list',
-      collapsible: false,
-      items: ['android/guides/examples-and-resources', 'android/guides/mobile-linking']
-    }
-  ],
-  ios: [
-    {
-      type: 'html',
-      value:
-        '<a class="navbar__brand" href="/"><div class="navbar__logo"><img src="/img/walletconnect-logo-white.svg#dark-mode-only"  alt="WalletConnect Logo"><img src="/img/walletconnect-logo-black.svg#light-mode-only"  alt="WalletConnect Logo"></div>WalletConnect<span>Docs<span></a>',
-      defaultStyle: true
-    },
-    {
-      type: 'category',
-      label: 'SDKs',
+      label: 'Web',
       className: 'menu_outer_list',
       collapsible: false,
       items: [
         {
           type: 'category',
-          label: 'Web3Wallet',
-          collapsible: true,
-          collapsed: true,
+          className: 'sidebar__logo sidebar__logo--react',
+          label: 'React',
           items: [
-            'ios/web3wallet/installation',
-            'ios/web3wallet/wallet-usage',
-            'ios/web3wallet/upgrade-guide'
+            { type: 'doc', label: 'About', id: 'web3modal/v3/react/about' },
+            'web3modal/v3/react/options',
+            'web3modal/v3/react/theming',
           ]
         },
         {
           type: 'category',
-          label: 'WalletConnectModal',
-          collapsible: true,
-          collapsed: true,
+          className: 'sidebar__logo sidebar__logo--vue',
+          label: 'Vue',
           items: [
-            'ios/walletconnectmodal/installation',
-            'ios/walletconnectmodal/usage',
+            { type: 'doc', label: 'About', id: 'web3modal/v3/vue/about' },
+            'web3modal/v3/vue/options',
+            'web3modal/v3/vue/theming',
           ]
         },
         {
           type: 'category',
-          label: 'Web3Inbox',
-          collapsed: true,
-          collapsible: true,
-          items: ['ios/web3inbox/installation', 'ios/web3inbox/wallet-usage']
-        }
-      ]
-    },
-    {
-      type: 'category',
-      label: 'Advanced',
-      className: 'menu_outer_list',
-      collapsible: false,
-      items: [
-        {
-          type: 'category',
-          label: 'Sign',
-          collapsible: true,
-          collapsed: true,
-          items: ['ios/sign/installation', 'ios/sign/dapp-usage', 'ios/sign/wallet-usage']
-        },
-        {
-          type: 'category',
-          label: 'Auth',
-          collapsible: true,
-          collapsed: true,
-          items: ['ios/auth/installation', 'ios/auth/dapp-usage', 'ios/auth/wallet-usage']
-        },
-        {
-          type: 'category',
-          label: 'Push',
-          collapsible: true,
-          collapsed: true,
+          className: 'sidebar__logo sidebar__logo--html',
+          label: 'HTML',
           items: [
-            {
-              type: 'category',
-              label: 'Dapp Usage',
-              collapsible: true,
-              collapsed: true,
-              items: [['ios/push/dapp-usage/getting-started']]
-            },
-            {
-              type: 'category',
-              label: 'Wallet Usage',
-              collapsible: true,
-              collapsed: true,
-              items: [['ios/push/wallet-usage/getting-started']]
-            }
+            { type: 'doc', label: 'About', id: 'web3modal/v3/html/about' },
+            'web3modal/v3/html/options',
+            'web3modal/v3/html/theming',
           ]
-        },
-        {
-          type: 'category',
-          label: 'Echo',
-          collapsible: true,
-          collapsed: true,
-          items: ['ios/echo/installation', 'ios/echo/usage']
-        },
-        {
-          type: 'category',
-          label: 'Chat',
-          collapsible: true,
-          collapsed: true,
-          items: ['ios/chat/installation', 'ios/chat/usage']
-        },
-        {
-          type: 'category',
-          label: 'Core',
-          collapsible: true,
-          collapsed: true,
-          items: [
-            'ios/core/installation',
-            'ios/core/pairing-usage',
-            'ios/core/networking-configuration'
-          ]
-        },
-        {
-          type: 'category',
-          label: 'Router',
-          collapsible: true,
-          collapsed: true,
-          items: ['ios/router/installation']
-        }
-      ]
-    },
-    {
-      type: 'category',
-      label: 'Guides',
-      className: 'menu_outer_list',
-      collapsible: false,
-      items: ['ios/guides/examples-and-resources', 'ios/guides/mobile-linking']
-    }
-  ],
-  reactnative: [
-    {
-      type: 'html',
-      value:
-        '<a class="navbar__brand" href="/"><div class="navbar__logo"><img src="/img/walletconnect-logo-white.svg#dark-mode-only"  alt="WalletConnect Logo"><img src="/img/walletconnect-logo-black.svg#light-mode-only"  alt="WalletConnect Logo"></div>WalletConnect<span>Docs<span></a>',
-      defaultStyle: true
-    },
-    {
-      type: 'category',
-      label: 'Introduction',
-      className: 'menu_outer_list',
-      collapsible: false,
-      items: ['reactnative/overview']
-    },
-    {
-      type: 'category',
-      label: 'SDKs',
-      className: 'menu_outer_list',
-      collapsible: false,
-      items: [
-        {
-          type: 'category',
-          label: 'Web3Wallet',
-          collapsible: true,
-          collapsed: true,
-          items: ['reactnative/web3wallet/Installation', 'reactnative/web3wallet/wallet-usage']
-        },
-        {
-          type: 'category',
-          label: 'WalletConnectModal',
-          collapsible: true,
-          collapsed: true,
-          items: [
-            'reactnative/walletconnectmodal/about',
-            'reactnative/walletconnectmodal/installation',
-            'reactnative/walletconnectmodal/dapp-usage',
-            'reactnative/walletconnectmodal/options'
-          ]
-        }
-      ]
-    },
-    {
-      type: 'category',
-      label: 'Guides',
-      className: 'menu_outer_list',
-      collapsible: false,
-      items: ['reactnative/guides/tutorials']
-    }
-  ],
-  flutter: [
-    {
-      type: 'html',
-      value:
-        '<a class="navbar__brand" href="/"><div class="navbar__logo"><img src="/img/walletconnect-logo-white.svg#dark-mode-only"  alt="WalletConnect Logo"><img src="/img/walletconnect-logo-black.svg#light-mode-only"  alt="WalletConnect Logo"></div>WalletConnect<span>Docs<span></a>',
-      defaultStyle: true
-    },
-    {
-      type: 'category',
-      label: 'SDKs',
-      className: 'menu_outer_list',
-      collapsible: false,
-      items: [
-        {
-          type: 'category',
-          label: 'Web3Wallet',
-          collapsible: true,
-          collapsed: true,
-          items: ['flutter/installation', 'flutter/wallets/wallet-usage']
-        }
-      ]
-    },
-    {
-      type: 'category',
-      label: 'Advanced',
-      className: 'menu_outer_list',
-      collapsible: false,
-      items: [
-        {
-          type: 'category',
-          label: 'Sign',
-          collapsible: true,
-          collapsed: true,
-          items: ['flutter/dapps/dapp-sign-usage']
-        },
-        {
-          type: 'category',
-          label: 'Auth',
-          collapsible: true,
-          collapsed: true,
-          items: ['flutter/dapps/dapp-auth-usage']
-        }
-      ]
-    }
-  ],
-  unity: [
-    {
-      type: 'html',
-      value:
-        '<a class="navbar__brand sidebar__brand" href="/"><div class="navbar__logo"><img src="/img/walletconnect-logo-white.svg" alt="WalletConnect Logo"></div>WalletConnect<span>Docs<span></a>',
-      defaultStyle: true
-    },
-    {
-      type: 'category',
-      label: 'SDKs',
-      className: 'menu_outer_list',
-      collapsible: false,
-      items: [
-        {
-          type: 'category',
-          label: 'Web3Wallet',
-          collapsible: true,
-          collapsed: true,
-          items: ['unity/sign/installation', 'unity/sign/dapp-usage', 'unity/sign/wallet-usage']
-        }
-      ]
-    },
-    {
-      type: 'category',
-      label: 'Advanced',
-      className: 'menu_outer_list',
-      collapsible: false,
-      items: [
-        {
-          type: 'category',
-          label: 'Core',
-          collapsible: true,
-          collapsed: true,
-          items: ['unity/core/pairing-api']
         }
       ]
     }

@@ -1,0 +1,125 @@
+import CloudBanner from '../../../components/CloudBanner'
+
+# Vue
+
+:::caution
+This documentation is for Web3Modal v3 which is currently in Alpha. You can find Web3Modal v2 documentation [here](../../html/wagmi/installation.mdx)
+:::
+
+With Web3Modal Vue, we work with the Wagmi library which contains everything you need to start working with Ethereum. You can sign messages, interact with smart contracts, and much more.
+
+<CloudBanner />
+
+## Installation
+
+```bash npm2yarn
+npm install @web3modal/wagmi@3.0.0-alpha.4 @wagmi/core viem
+```
+
+## Implementation
+
+You can start Web3Modal configuration using either **default** or **advanced** mode.
+
+Default mode will implement WalletConnect, Browser Wallets (injected) and Coinbase options in addition to Wagmi's public clients and [WalletConnect's provider](../../../cloud/blockchain-api.md).
+
+<Tabs>
+<TabItem value="default" label="Default">
+
+Start by importing `createWeb3Modal`, `defaultWagmiConfig` and wagmi packages, then create `wagmiConfig` using `defaultWagmiConfig` function as shown below.
+Finally, pass `wagmiConfig` to `createWeb3Modal`.
+
+```html
+// src/App.vue
+<script setup>
+  import { createWeb3Modal, defaultWagmiConfig } from '@web3modal/wagmi/vue'
+  import { mainnet, arbitrum } from '@wagmi/core/chains'
+
+  // 1. Get projectId
+  const projectId = import.meta.env.VITE_PROJECT_ID
+  if (!projectId) {
+    throw new Error('VITE_PROJECT_ID is not set')
+  }
+
+  // 2. Create wagmiConfig
+  const chains = [mainnet, arbitrum]
+  const wagmiConfig = defaultWagmiConfig({ chains, projectId, appName: 'Web3Modal' })
+
+  // 3. Create modal
+  createWeb3Modal({ wagmiConfig, projectId, chains })
+</script>
+
+<template> // Rest of your app ... </template>
+```
+
+</TabItem>
+<TabItem value="custom" label="Advanced">
+
+Start by importing `createWeb3Modal`, `walletConnectProvider` and wagmi packages, then create wagmi config using your own settings or our default presets as shown below.
+Finally, pass wagmi config to `createWeb3Modal`.
+
+```html
+// src/App.vue
+<script setup lang="ts">
+  import { walletConnectProvider } from '@web3modal/wagmi'
+  import { createWeb3Modal } from '@web3modal/wagmi/vue'
+
+  import { configureChains, createConfig } from '@wagmi/core'
+  import { mainnet } from '@wagmi/core/chains'
+  import { CoinbaseWalletConnector } from '@wagmi/core/connectors/coinbaseWallet'
+  import { InjectedConnector } from '@wagmi/core/connectors/injected'
+  import { WalletConnectConnector } from '@wagmi/core/connectors/walletConnect'
+
+  // 1. Get projectId
+  const projectId = 'YOUR_PROJECT_ID'
+
+  // 2. Create wagmiConfig
+  const { chains, publicClient } = configureChains(
+    [mainnet],
+    [walletConnectProvider({ projectId })]
+  )
+
+  const wagmiConfig = createConfig({
+    autoConnect: true,
+    connectors: [
+      new WalletConnectConnector({ options: { projectId, showQrModal: false } }),
+      new InjectedConnector({ options: { shimDisconnect: true } }),
+      new CoinbaseWalletConnector({ options: { appName: 'Web3Modal' } })
+    ],
+    publicClient
+  })
+
+  // 3. Create modal
+  createWeb3Modal({ wagmiConfig, projectId, chains })
+</script>
+
+<template> // Rest of your app ... </template>
+```
+
+</TabItem>
+</Tabs>
+
+## Trigger the modal
+
+You can trigger the modal by calling the `open` method from `useWeb3Modal` function.
+
+```html
+// src/components/ConnectButton.vue
+<script setup lang="ts">
+  import { useWeb3Modal } from '@web3modal/wagmi/vue'
+  // 4. Use modal composable
+  const modal = useWeb3Modal()
+</script>
+
+<template>
+  <button @click="modal.open()">Open Connect Modal</button>
+  <button @click="modal.open({ view: 'Networks' })">Open Network Modal</button>
+</template>
+```
+
+## Use wagmi Actions
+
+[wagmi](https://wagmi.sh) provides everything you'll need to start working with accounts, contracts, chains and much more.
+
+```tsx
+import { getAccount, writeContract, disconnect, watchAccount } from '@wagmi/core'
+```
