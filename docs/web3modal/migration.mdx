@@ -1,0 +1,210 @@
+import Container from './../components/Container'
+import Wrapper from '../components/Home/Wrapper'
+import CloudBanner from '../components/CloudBanner'
+import androidLogo from '../../static/assets/home/androidLogo.png'
+import iosLogo from '../../static/assets/home/iosLogo.png'
+import rnLogo from '../../static/assets/home/rnLogo.png'
+import flutterLogo from '../../static/assets/home/flutterLogo.png'
+import unityLogo from '../../static/assets/home/unityLogo.png'
+import reactLogo from '../../static/assets/home/reactLogo.png'
+import htmlLogo from '../../static/assets/home/htmlLogo.png'
+
+# Migration v2 → v3
+
+## Web3Modal v2 → v3 Migration Guide
+
+<CloudBanner />
+
+## Web3Modal v3 React
+
+### Installation
+
+To migrate from Web3Modal v2 to v3 start by removing Web3Modal v2 dependencies `@web3modal/ethereum` and `@web3modal/react`,
+while keeping `wagmi` and `viem` installed. Now you can install Web3Modal v3 library
+
+```bash npm2yarn
+npm install @web3modal/wagmi@3.0.0-alpha.5
+```
+
+### Implementation
+
+
+You can start Web3Modal configuration using either **default** or **advanced** mode.
+
+Default mode will implement WalletConnect, Browser Wallets (injected) and Coinbase options in addition to Wagmi's public clients and [WalletConnect's provider](../cloud/blockchain-api.md).
+:::note
+Make sure to set your configuration outside the App component to avoid unwanted rerenders.
+:::
+
+<Tabs>
+<TabItem value="default" label="Default">
+
+Start by importing `createWeb3Modal`, `defaultWagmiConfig` and wagmi packages
+
+```tsx
+/* highlight-add-start */
++ import { createWeb3Modal, defaultWagmiConfig } from '@web3modal/wagmi/react'
+/* highlight-add-end */
+/* highlight-delete-start */
+- import { EthereumClient, w3mConnectors, w3mProvider } from '@web3modal/ethereum'
+- import { Web3Modal } from '@web3modal/react'
+/* highlight-delete-end */
+
+import { WagmiConfig } from 'wagmi'
+import { arbitrum, mainnet } from 'wagmi/chains'
+```
+
+Then create `wagmiConfig` using `defaultWagmiConfig` function as shown below
+```tsx
+const chains = [arbitrum, mainnet]
+const projectId = 'YOUR_PROJECT_ID'
+
+/* Create Wagmi Config */
+/* highlight-delete-start */
+- const { publicClient } = configureChains(chains, [w3mProvider({ projectId })])
+- const wagmiConfig = createConfig({
+-   autoConnect: true,
+-   connectors: w3mConnectors({ projectId, chains }),
+-   publicClient
+- })
+/* highlight-delete-end */
+/* highlight-add-start */
++ const wagmiConfig = defaultWagmiConfig({ chains, projectId, appName: 'Web3Modal' })
+/* highlight-add-end */
+
+```
+
+Finally, pass `wagmiConfig` to `createWeb3Modal`
+```tsx
+/* Call createWeb3Modal function */
+/* highlight-delete-start */
+- const ethereumClient = new EthereumClient(wagmiConfig, chains)
+/* highlight-delete-end */
+/* highlight-add-start */
++ createWeb3Modal({ wagmiConfig, projectId, chains })
+/* highlight-add-end */
+
+export default function App() {
+  return (
+    <>
+      <WagmiConfig config={wagmiConfig}>
+        <HomePage />
+      </WagmiConfig>
+
+      /* highlight-delete-start */
+-     <Web3Modal projectId={projectId} ethereumClient={ethereumClient} />
+      /* highlight-delete-end */
+    </>
+  )
+}
+```
+
+</TabItem>
+<TabItem value="custom" label="Advanced">
+
+Start by importing `createWeb3Modal`, `walletConnectProvider` and wagmi packages
+
+```tsx
+/* highlight-delete-start */
+- import { EthereumClient, w3mConnectors, w3mProvider } from '@web3modal/ethereum'
+- import { Web3Modal } from '@web3modal/react'
+/* highlight-delete-end */
+/* highlight-add-start */
++ import { createWeb3Modal } from '@web3modal/wagmi/react'
++ import { walletConnectProvider } from '@web3modal/wagmi'
+/* highlight-add-end */
+
+import { WagmiConfig, configureChains, createConfig } from 'wagmi'
+import { mainnet } from 'wagmi/chains'
+/* highlight-add-start */
++ import { CoinbaseWalletConnector } from 'wagmi/connectors/coinbaseWallet'
++ import { InjectedConnector } from 'wagmi/connectors/injected'
++ import { WalletConnectConnector } from 'wagmi/connectors/walletConnect'
+/* highlight-add-end */
+```
+
+Then create `wagmiConfig` using your own settings
+```tsx
+// 1. Get projectId
+const projectId = 'YOUR_PROJECT_ID'
+
+// 2. Create wagmiConfig
+/* highlight-delete-start */
+const { publicClient } = configureChains([mainnet], [w3mProvider({ projectId })])
+/* highlight-delete-end */
+/* highlight-add-start */
+const { publicClient } = configureChains([mainnet], [walletConnectProvider({ projectId })])
+/* highlight-add-end */
+
+/* highlight-delete-start */
+const wagmiConfig = createConfig({
+  autoConnect: true,
+  connectors: w3mConnectors({ projectId, chains }),
+  publicClient
+})
+/* highlight-delete-end */
+
+/* highlight-add-start */
+const wagmiConfig = createConfig({
+  autoConnect: true,
+  connectors: [
+    new WalletConnectConnector({ options: { projectId, showQrModal: false } }),
+    new InjectedConnector({ options: { shimDisconnect: true } }),
+    new CoinbaseWalletConnector({ options: { appName: 'Web3Modal' } })
+  ],
+  publicClient
+})
+/* highlight-add-end */
+```
+
+Finally, pass wagmi config to `createWeb3Modal`
+```tsx
+/* Call createWeb3Modal function */
+/* highlight-delete-start */
+- const ethereumClient = new EthereumClient(wagmiConfig, chains)
+/* highlight-delete-end */
+/* highlight-add-start */
++ createWeb3Modal({ wagmiConfig, projectId, chains })
+/* highlight-add-end */
+
+export default function App() {
+  return (
+    <>
+      <WagmiConfig config={wagmiConfig}>
+        <HomePage />
+      </WagmiConfig>
+
+      /* highlight-delete-start */
+-     <Web3Modal projectId={projectId} ethereumClient={ethereumClient} />
+      /* highlight-delete-end */
+    </>
+  )
+}
+```
+</TabItem>
+</Tabs>
+
+### Trigger the modal
+
+```tsx
+/* highlight-delete-start */
+- import { useWeb3Modal } from '@web3modal/react'
+/* highlight-delete-end */
+/* highlight-add-start */
++ import { useWeb3Modal } from '@web3modal/wagmi/react'
+/* highlight-add-end */
+
+function HomePage() {
+  const { open } = useWeb3Modal()
+
+  return <button onClick={() => open()}>Connect</button>
+}
+```
+
+### Use wagmi hooks
+
+[wagmi](https://wagmi.sh) provides everything you'll need to start working with accounts, contracts, chains and much more.
+
+```tsx
+import { useAccount, useContract, useBalance } from 'wagmi'
+```
