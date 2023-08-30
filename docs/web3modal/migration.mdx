@@ -42,13 +42,13 @@ Make sure to set your configuration outside the App component to avoid unwanted 
 Start by importing `createWeb3Modal`, `defaultWagmiConfig` and wagmi packages
 
 ```tsx
-/* highlight-add-start */
-+ import { createWeb3Modal, defaultWagmiConfig } from '@web3modal/wagmi/react'
-/* highlight-add-end */
 /* highlight-delete-start */
 - import { EthereumClient, w3mConnectors, w3mProvider } from '@web3modal/ethereum'
 - import { Web3Modal } from '@web3modal/react'
 /* highlight-delete-end */
+/* highlight-add-start */
++ import { createWeb3Modal, defaultWagmiConfig } from '@web3modal/wagmi/react'
+/* highlight-add-end */
 
 import { WagmiConfig } from 'wagmi'
 import { arbitrum, mainnet } from 'wagmi/chains'
@@ -143,7 +143,6 @@ const projectId = 'YOUR_PROJECT_ID'
 -   publicClient
 - })
 /* highlight-delete-end */
-
 /* highlight-add-start */
 + const wagmiConfig = createConfig({
 +   autoConnect: true,
