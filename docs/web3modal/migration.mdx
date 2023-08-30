@@ -130,30 +130,30 @@ const projectId = 'YOUR_PROJECT_ID'
 
 // 2. Create wagmiConfig
 /* highlight-delete-start */
-const { publicClient } = configureChains([mainnet], [w3mProvider({ projectId })])
+- const { publicClient } = configureChains([mainnet], [w3mProvider({ projectId })])
 /* highlight-delete-end */
 /* highlight-add-start */
-const { publicClient } = configureChains([mainnet], [walletConnectProvider({ projectId })])
++ const { publicClient } = configureChains([mainnet], [walletConnectProvider({ projectId })])
 /* highlight-add-end */
 
 /* highlight-delete-start */
-const wagmiConfig = createConfig({
-  autoConnect: true,
-  connectors: w3mConnectors({ projectId, chains }),
-  publicClient
-})
+- const wagmiConfig = createConfig({
+-   autoConnect: true,
+-   connectors: w3mConnectors({ projectId, chains }),
+-   publicClient
+- })
 /* highlight-delete-end */
 
 /* highlight-add-start */
-const wagmiConfig = createConfig({
-  autoConnect: true,
-  connectors: [
-    new WalletConnectConnector({ options: { projectId, showQrModal: false } }),
-    new InjectedConnector({ options: { shimDisconnect: true } }),
-    new CoinbaseWalletConnector({ options: { appName: 'Web3Modal' } })
-  ],
-  publicClient
-})
++ const wagmiConfig = createConfig({
++   autoConnect: true,
++   connectors: [
++     new WalletConnectConnector({ options: { projectId, showQrModal: false } }),
++     new InjectedConnector({ options: { shimDisconnect: true } }),
++     new CoinbaseWalletConnector({ options: { appName: 'Web3Modal' } })
++   ],
++   publicClient
++ })
 /* highlight-add-end */
 ```
 
