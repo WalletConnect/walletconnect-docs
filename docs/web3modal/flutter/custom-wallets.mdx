@@ -5,3 +5,20 @@ import CloudBanner from '../../components/CloudBanner'
 With Web3Modal Flutter, you can easily let people interact with multiple EVM compatible wallets and blockchains.
 
 <CloudBanner />
+
+## recommendedWalletIds (optional)
+
+Allows to override default recommended wallets that are fetched from [WalletConnect Explorer](https://walletconnect.com/explorer?type=wallet). You can define an array of wallet ids you'd like to prioritize (order is respected). You can get these ids from the explorer link mentioned before by clicking on a copy icon of desired wallet card. Defaults to `null`.
+
+```dart
+final Set<String> recommendedWalletIds = {
+  'c57ca95b47569778a828d19178114f4db188b89b763c899ba0be274e97267d96', // MetaMask
+  '4622a2b2d6af1c9844944291e5e7351a6aa24cd7b23099efac1b2fd875da31a0', // Trust
+}
+```
+
+## excludedWalletState & excludedWalletids (optional)
+
+The `excludedWalletState` Determines the state of the excluded wallets. Defaults to `ExcludedWalletState.list`.
+
+If the `excludedWalletState` is `ExcludedWalletState.list`, the `excludedWalletIds` will be used to remove items from the list of wallets returned from the [WalletConnect Explorer](https://walletconnect.com/explorer?type=wallet). If the `excludedWalletState` is `ExcludedWalletState.all`, all wallets will be excluded except for the ones defined in `recommendedWalletIds`.
