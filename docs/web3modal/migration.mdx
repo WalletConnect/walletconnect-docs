@@ -1,13 +1,6 @@
-import Container from './../components/Container'
-import Wrapper from '../components/Home/Wrapper'
 import CloudBanner from '../components/CloudBanner'
-import androidLogo from '../../static/assets/home/androidLogo.png'
-import iosLogo from '../../static/assets/home/iosLogo.png'
-import rnLogo from '../../static/assets/home/rnLogo.png'
-import flutterLogo from '../../static/assets/home/flutterLogo.png'
-import unityLogo from '../../static/assets/home/unityLogo.png'
-import reactLogo from '../../static/assets/home/reactLogo.png'
-import htmlLogo from '../../static/assets/home/htmlLogo.png'
+import PlatformTabs from '../components/PlatformTabs'
+import PlatformTabItem from '../components/PlatformTabItem'
 
 # Migration v2 → v3
 
@@ -15,9 +8,13 @@ import htmlLogo from '../../static/assets/home/htmlLogo.png'
 
 <CloudBanner />
 
-## Web3Modal v3 React
-
 ### Installation
+
+<PlatformTabs
+	groupId="w3m"
+	activeOptions={["react","html"]}
+>
+<PlatformTabItem value="react">
 
 To migrate from Web3Modal v2 to v3 start by removing Web3Modal v2 dependencies `@web3modal/ethereum` and `@web3modal/react`,
 while keeping `wagmi` and `viem` installed. Now you can install Web3Modal v3 library
@@ -26,7 +23,27 @@ while keeping `wagmi` and `viem` installed. Now you can install Web3Modal v3 lib
 npm install @web3modal/wagmi@3.0.0-alpha.5
 ```
 
+</PlatformTabItem>
+<PlatformTabItem value="html">
+
+To migrate from Web3Modal v2 to v3 start by removing Web3Modal v2 dependencies `@web3modal/ethereum` and `@web3modal/html`,
+while keeping `@wagmi/core` and `viem` installed. Now you can install Web3Modal v3 library
+
+```bash npm2yarn
+npm install @web3modal/wagmi@3.0.0-alpha.5
+```
+
+</PlatformTabItem>
+</PlatformTabs>
+
 ### Implementation
+
+<PlatformTabs
+	groupId="w3m"
+	activeOptions={["react","html"]}
+>
+<PlatformTabItem value="react">
+
 
 You can start Web3Modal configuration using either **default** or **advanced** mode.
 
@@ -181,37 +198,8 @@ export default function App() {
 </TabItem>
 </Tabs>
 
-### Trigger the modal
-
-```tsx
-/* highlight-delete-start */
-- import { useWeb3Modal } from '@web3modal/react'
-/* highlight-delete-end */
-/* highlight-add-start */
-+ import { useWeb3Modal } from '@web3modal/wagmi/react'
-/* highlight-add-end */
-
-function HomePage() {
-  const { open } = useWeb3Modal()
-
-  return <button onClick={() => open()}>Connect</button>
-}
-```
-
-Learn more about Web3Modal v3 [here](./v3/react/about.mdx)
-
-## Web3Modal v3 HTML
-
-### Add packages
-
-To migrate from Web3Modal v2 to v3 start by removing Web3Modal v2 dependencies `@web3modal/ethereum` and `@web3modal/html`,
-while keeping `@wagmi/core` and `viem` installed. Now you can install Web3Modal v3 library
-
-```bash npm2yarn
-npm install @web3modal/wagmi@3.0.0-alpha.5
-```
-
-### Implementation
+</PlatformTabItem>
+<PlatformTabItem value="html">
 
 Start by importing Web3Modal and wagmi packages, then create wagmi config using your own settings or our default presets as shown below. Finally, pass wagmi config to Web3Modal as ethereumClient.
 
@@ -329,8 +317,38 @@ Finally, pass `wagmiConfig` to `Web3Modal` class
 </TabItem>
 </Tabs>
 
+</PlatformTabItem>
+</PlatformTabs>
+
 
 ### Trigger the modal
+
+<PlatformTabs
+	groupId="w3m"
+	activeOptions={["react","html"]}
+>
+<PlatformTabItem value="react">
+
+```tsx
+/* highlight-delete-start */
+- import { useWeb3Modal } from '@web3modal/react'
+/* highlight-delete-end */
+/* highlight-add-start */
++ import { useWeb3Modal } from '@web3modal/wagmi/react'
+/* highlight-add-end */
+
+function HomePage() {
+  const { open } = useWeb3Modal()
+
+  return <button onClick={() => open()}>Connect</button>
+}
+```
+
+Learn more about Web3Modal v3 [here](./v3/react/about.mdx)
+
+</PlatformTabItem>
+<PlatformTabItem value="html">
+
 
 Use your own button with to open the modal
 
@@ -348,3 +366,6 @@ document.getElementById('my-button').addEventListener('click', () => {
 ```
 
 Learn more about Web3Modal v3 HTML [here](./v3/html/about.mdx)
+
+</PlatformTabItem>
+</PlatformTabs>
