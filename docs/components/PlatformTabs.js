@@ -47,6 +47,10 @@ const PLATFORM_MAP = [
     label: 'Other'
   },
   {
+    value: 'wagmi',
+    label: 'Wagmi'
+  },
+  {
     value: 'viem',
     label: 'Viem'
   },
