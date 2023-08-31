@@ -17,6 +17,7 @@ module.exports = {
       collapsible: false,
       items: [
         'readme',
+        'gettingStarted',
         {
           type: 'category',
           label: 'Migration from v1.x',
@@ -187,10 +188,7 @@ module.exports = {
             {
               type: 'category',
               label: 'Notify',
-              items: [
-                'api/notify/about',
-                'api/notify/usage',
-              ]
+              items: ['api/notify/about', 'api/notify/usage']
             },
             {
               type: 'category',
@@ -346,7 +344,7 @@ module.exports = {
           items: [
             { type: 'doc', label: 'About', id: 'web3modal/v3/react/about' },
             'web3modal/v3/react/options',
-            'web3modal/v3/react/theming',
+            'web3modal/v3/react/theming'
           ]
         },
         {
@@ -356,7 +354,7 @@ module.exports = {
           items: [
             { type: 'doc', label: 'About', id: 'web3modal/v3/vue/about' },
             'web3modal/v3/vue/options',
-            'web3modal/v3/vue/theming',
+            'web3modal/v3/vue/theming'
           ]
         },
         {
@@ -366,7 +364,7 @@ module.exports = {
           items: [
             { type: 'doc', label: 'About', id: 'web3modal/v3/html/about' },
             'web3modal/v3/html/options',
-            'web3modal/v3/html/theming',
+            'web3modal/v3/html/theming'
           ]
         }
       ]

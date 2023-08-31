@@ -20,6 +20,7 @@ const Wrapper = ({ items, type, fit = true, ...props }) => {
               name={item.name}
               icon={item.icon}
               isWhite={item.isWhite || false}
+              hasEmoji={item.hasEmoji || false}
             />
           ))
         : items.map((item, index) => (
