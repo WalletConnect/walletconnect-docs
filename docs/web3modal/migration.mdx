@@ -97,19 +97,6 @@ export default function App() {
   )
 }
 ```
-
-Finally, pass wagmi config to `createWeb3Modal`
-```tsx
-/* Call createWeb3Modal function */
-/* highlight-delete-start */
-- const ethereumClient = new EthereumClient(wagmiConfig, chains)
-- const web3modal = new Web3Modal({ projectId }, ethereumClient)
-/* highlight-delete-end */
-/* highlight-add-start */
-+ cconst modal = new Web3Modal({ wagmiConfig, projectId, chains })
-/* highlight-add-end */
-```
-
 </TabItem>
 <TabItem value="custom" label="Advanced">
 
