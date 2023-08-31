@@ -1,0 +1,19 @@
+import CloudBanner from '../../components/CloudBanner'
+
+# Custom Chains
+
+With Web3Modal Flutter, you can easily let people interact with multiple EVM compatible wallets and blockchains.
+
+Let’s get started with the installation and configuration!
+
+<CloudBanner />
+
+## Custom Chain Selection
+
+You can select your own chain by calling the `setSelectedChain` method on the `W3MService` object.
+
+The chain must be EVM compatible.
+
+A list of preset chains that are available to you can be accessed at `ChainData.chainPresets`.
+
+If you modify the presets, it will be reflected in the `W3MNetworkSelect` widget.

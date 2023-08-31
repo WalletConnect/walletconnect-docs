@@ -1,0 +1,28 @@
+import CloudBanner from '../../components/CloudBanner'
+
+# Actions
+
+With Web3Modal Flutter, you can easily let people interact with multiple EVM compatible wallets and blockchains.
+
+<CloudBanner />
+
+## Launch the current wallet
+
+```dart
+await service.launchCurrentWallet();
+```
+
+## Send a request
+
+```dart
+await service.web3App.request(
+  topic: service.session.topic,
+  chainId: 'eip155:1',
+  request: SessionRequestParams(
+    method: 'personalSign',
+    params: ['Sign this', '0xdeadbeef'],
+  ),
+);
+```
+
+For more examples see the example app (link in side bar)
