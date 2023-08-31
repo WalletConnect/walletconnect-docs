@@ -98,6 +98,23 @@ module.exports = {
                 }
               ]
             },
+            {
+              type: 'category',
+              label: 'Flutter',
+              items: [
+                'web3modal/flutter/installation',
+                'web3modal/flutter/actions',
+                'web3modal/flutter/options',
+                'web3modal/flutter/theming',
+                'web3modal/flutter/custom-wallets',
+                'web3modal/flutter/custom-chains',
+                {
+                  type: 'link',
+                  label: 'Example',
+                  href: 'https://github.com/WalletConnect/Web3ModalFlutter/tree/master/example/sign'
+                }
+              ]
+            },
             'web3modal/resources',
             'web3modal/v3/about'
           ]
@@ -290,6 +307,12 @@ module.exports = {
           className: 'sidebar__logo sidebar__logo--html ',
           label: 'HTML',
           id: 'web3modal/platforms/html'
+        },
+        {
+          type: 'doc',
+          className: 'sidebar__logo sidebar__logo--flutter ',
+          label: 'Flutter',
+          id: 'web3modal/platforms/flutter'
         }
       ]
     }

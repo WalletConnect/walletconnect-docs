@@ -176,30 +176,13 @@ WalletConnectModal.setSessionParams(sessionParams)
 </PlatformTabItem>
 <PlatformTabItem value="flutter">
 
-To get the modal to work properly you need to create two objects.
+Create your `WalletConnectModalService` which is your primary class for opening, closing, disconnecting, etc.
 
-The first is the `WalletConnectModalTheme` which is used to style the modal.
-
-```dart
-// Example of WalletConnectModalTheme
-return WalletConnectModalTheme(
-  data: WalletConnectModalThemeData.darkMode,
-  child: MaterialApp(
-    title: 'Flutter Demo',
-    theme: ThemeData(
-      colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-      useMaterial3: true,
-    ),
-    home: const MyHomePage(title: 'WalletConnectModal Sign Example'),
-  ),
-);
-```
-
-The second is the WalletConnectModalService which is your primary class for opening, closing, disconnecting, etc.
+Be sure to update the project ID and metadata with your own.
 
 ```dart
 WalletConnectModalService service = WalletConnectModalService(
-  projectId: projectId,
+  projectId: 'YOUR_PROJECT_ID',
   metadata: const PairingMetadata(
     name: 'Flutter WalletConnect',
     description: 'Flutter WalletConnectModal Sign Example',
@@ -216,7 +199,7 @@ await service.init();
 
 The service must be initialized before it can be used.
 
-Now that those two things are setup in your application, you can call `_service.open()` to open the modal.
+With the `WalletConnectModalService` created and ready, you can call `_service.open()` to open the modal.
 
 To make things easy, you can use the WalletConnectModalConnect widget to open the modal.
 This is a button that changes its state based on the modal and connection.
@@ -259,7 +242,7 @@ To handle deep linking to your app, you will also need to add the following to t
 
 #### Android Setup
 
-On android 11+ you must specify that use can use the internet, along with the different schemes you would like to be able to deep link to in the `android/app/src/main/AndroidManifest.xml` file like so:
+On android 11+ you must specify that use can use the internet, along with the different packages you would like to be able to deep link to in the `android/app/src/main/AndroidManifest.xml` file like so:
 
 ```xml
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
@@ -270,10 +253,13 @@ On android 11+ you must specify that use can use the internet, along with the di
             <category android:name="android.intent.category.BROWSABLE" />
             <data android:scheme="https" />
         </intent>
-        <intent>
-            <action android:name="android.intent.action.VIEW" />
-            <data android:scheme="metamask" />
-        </intent>
+        <package android:name="io.metamask"/>
+        <package android:name="com.wallet.crypto.trustapp"/>
+        <package android:name="io.gnosis.safe"/>
+        <package android:name="me.rainbow"/>
+        <package android:name="io.zerion.android"/>
+        <package android:name="com.imtoken.app"/>
+        <!-- Add other wallets you would like to launch from within the app -->      
     </queries>
     <!-- Permission to access the internet -->
     <uses-permission android:name="android.permission.INTERNET"/>
@@ -292,6 +278,8 @@ On android 11+ you must specify that use can use the internet, along with the di
     ...
 </manifest>
 ```
+
+For other packages, see the [example project]( https://github.com/WalletConnect/Web3ModalFlutter/blob/2981053456ecd3511ca2e3a7f0def7c75e22af62/example/sign/android/app/src/main/AndroidManifest.xml#L2)
 
 For some reason, multiple wallets have the `metamask` intent, and will launch metamask as a result.
 This is a bug in the wallets, not this package.
