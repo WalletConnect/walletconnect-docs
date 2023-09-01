@@ -731,7 +731,7 @@ web3wallet.on("session_proposal", async (proposal) => {
 });
 
 // Call this after WCURI is received
-await web3wallet.core.pairing.pair({ wcuri });
+await web3wallet.pair({ wcuri });
 
 ```
 
