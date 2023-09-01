@@ -1,13 +1,13 @@
 # Relay Client
+
 import Container from '../../components/Container'
 import Tabs from '@theme/Tabs'
 import TabItem from '@theme/TabItem'
 import PlatformTabs from '../../components/PlatformTabs'
 import PlatformTabItem from '../../components/PlatformTabItem'
-import CloudBanner from '../../components/CloudBanner'
 
-Relay client provides transport layer for Sign, Auth and Chat SDKs. 
-You can configure it once and every SDK will transport protocol messages via same instance of a relay client with only one opened websocket connection. 
+Relay client provides transport layer for Sign, Auth and Chat SDKs.
+You can configure it once and every SDK will transport protocol messages via same instance of a relay client with only one opened websocket connection.
 The Relay API can be accessed through the Core Client
 
 <PlatformTabs
@@ -50,7 +50,7 @@ struct DefaultSocketFactory: WebSocketFactory {
 }
 ```
 
-#### Networking client configuration 
+#### Networking client configuration
 
 ```swift
 Networking.configure(projectId: <String>, socketFactory: SocketFactory())
@@ -60,14 +60,18 @@ Networking.configure(projectId: <String>, socketFactory: SocketFactory())
 
 By default web socket connection is handled internally by the SDK. That means that Web socket will be safely disconnected when apps go to background and it will connect back when app reaches foreground. But if it is not expected for your app and you want to handle socket connection manually you can do it as follows:
 
-1. set socketConnectionType for manual  
+1. set socketConnectionType for manual
+
 ```swift
 Networking.configure(projectId: <String>, socketFactory: SocketFactory(), socketConnectionType: .manual)
-```  
-2. control socket connection:  
+```
+
+2. control socket connection:
+
 ```swift
 try Networking.instance.connect()
 ```
+
 ```swift
 try Networking.instance.disconnect()
 ```
@@ -82,6 +86,7 @@ There are two connection types, Automatic and Manual.
 Automatic connection type enables SDK to control web socket connection internally. Meaning, web socket connection is closed when app goes to the background and is opened when app goes to the foreground.
 
 Manual connection type enables developers to control web socket connection.
+
 ```kotlin
 CoreClient.initialize(relayServerUrl = serverUrl, connectionType = ConnectionType.MANUAL, application = application)
 
