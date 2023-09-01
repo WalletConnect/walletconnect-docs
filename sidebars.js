@@ -121,18 +121,28 @@ module.exports = {
           collapsible: true,
           items: [
             'web3inbox/about',
-            'web3inbox/usage',
-            'web3inbox/resources',
             {
               type: 'category',
-              label: 'Dapp Widget',
+              label: 'Wallet',
+              items: ['web3inbox/wallet/installation', 'web3inbox/wallet/usage']
+            },
+            {
+              type: 'category',
+              label: 'Dapp',
               items: [
-                'web3inbox/widget/about',
-                'web3inbox/widget/usage',
-                'web3inbox/widget/options',
-                'web3inbox/widget/theming'
+                {
+                  type: 'category',
+                  label: 'Widget',
+                  items: [
+                    'web3inbox/widget/about',
+                    'web3inbox/widget/usage',
+                    'web3inbox/widget/options',
+                    'web3inbox/widget/theming'
+                  ]
+                }
               ]
-            }
+            },
+            'web3inbox/resources'
           ]
         }
       ]
@@ -187,10 +197,7 @@ module.exports = {
             {
               type: 'category',
               label: 'Notify',
-              items: [
-                'api/notify/about',
-                'api/notify/usage',
-              ]
+              items: ['api/notify/about', 'api/notify/usage']
             },
             {
               type: 'category',
@@ -346,7 +353,7 @@ module.exports = {
           items: [
             { type: 'doc', label: 'About', id: 'web3modal/v3/react/about' },
             'web3modal/v3/react/options',
-            'web3modal/v3/react/theming',
+            'web3modal/v3/react/theming'
           ]
         },
         {
@@ -356,7 +363,7 @@ module.exports = {
           items: [
             { type: 'doc', label: 'About', id: 'web3modal/v3/vue/about' },
             'web3modal/v3/vue/options',
-            'web3modal/v3/vue/theming',
+            'web3modal/v3/vue/theming'
           ]
         },
         {
@@ -366,7 +373,7 @@ module.exports = {
           items: [
             { type: 'doc', label: 'About', id: 'web3modal/v3/html/about' },
             'web3modal/v3/html/options',
-            'web3modal/v3/html/theming',
+            'web3modal/v3/html/theming'
           ]
         }
       ]
