@@ -3,11 +3,8 @@ import Tabs from '@theme/Tabs'
 import TabItem from '@theme/TabItem'
 import PlatformTabs from '../../components/PlatformTabs'
 import PlatformTabItem from '../../components/PlatformTabItem'
-import CloudBanner from '../../components/CloudBanner'
 
 # Wallet Usage
-
-<CloudBanner/>
 
 <PlatformTabs
 groupId="api-auth"
