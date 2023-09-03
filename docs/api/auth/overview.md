@@ -25,7 +25,7 @@ Domain binding to prevent phishing (coming in beta!): WalletConnect Auth seeks t
 
 <PlatformTabs
 groupId="api-auth"
-activeOptions={["web","ios","android","flutter","c#"]}>
+activeOptions={["web","ios","android","flutter","csharp"]}>
 
 <PlatformTabItem value="web">
 Install the WalletConnect client package.
@@ -133,7 +133,7 @@ Add the following to your `DebugProfile.entitlements` and `Release.entitlements`
 
 </PlatformTabItem>
 
-<PlatformTabItem value="c#">
+<PlatformTabItem value="csharp">
 
 #### Install vis Nuget
 

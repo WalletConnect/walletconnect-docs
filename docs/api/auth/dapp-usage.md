@@ -8,7 +8,7 @@ import PlatformTabItem from '../../components/PlatformTabItem'
 
 <PlatformTabs
 groupId="api-auth"
-activeOptions={["web","ios","android","flutter","c#"]}>
+activeOptions={["web","ios","android","flutter","csharp"]}>
 
 <PlatformTabItem value="web">
 
@@ -371,7 +371,7 @@ Expected flutter version is: >`3.3.10`
 
 </PlatformTabItem>
 
-<PlatformTabItem value="c#">
+<PlatformTabItem value="csharp">
 
 #### Setup
 

@@ -8,7 +8,7 @@ import PlatformTabItem from '../../components/PlatformTabItem'
 
 <PlatformTabs
 groupId="api-auth"
-activeOptions={["web","ios","android","c#"]}>
+activeOptions={["web","ios","android","csharp"]}>
 
 <PlatformTabItem value="web">
 
@@ -308,7 +308,7 @@ To get a list of pending request, call `AuthClient.getPendingRequest()` which wi
 To check more in details go and visit our responder implementation app [here](https://github.com/WalletConnect/WalletConnectKotlinV2/tree/develop/sample/wallet)
 </PlatformTabItem>
 
-<PlatformTabItem value="c#">
+<PlatformTabItem value="csharp">
 
 #### **Setup**
 
