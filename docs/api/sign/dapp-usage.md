@@ -780,4 +780,32 @@ await dappClient.Disconnect(sessionTopic, Error.FromErrorType(ErrorType.USER_DIS
 
 </PlatformTabItem>
 
+<PlatformTabItem value="unity">
+
+:::tip
+
+Since `WalletConnectUnity` is a wrapper around `WalletConnectSharp`, usage of the Sign API is identical to `C#`. Please refer to `C#` documentation on how to use the Sign API inside `WalletConnectUnity`.
+
+:::
+
+The `WalletConnectUnity` package comes with a `QRCodeHandler` component that can be used to show a QR Code to the user when the
+`dappClient.Connect()` function is used. It also introduces Unity Event handlers to handle connection related events natively in Unity.
+
+![walletconnectunity-qrcode-handler-editor](/assets/walletconnectunity-qrcode-handler-editor.png)
+
+You **MUST** set the `QR Code Image` field to be the `Image` that will displayed the generated QR Code.
+
+Currently the component offers 4 Unity Events:
+
+* On Sign Client Ready
+  - This event is invoked when a connection URI is ready to be displayed to the user. This can be used to show the `QR Code Image` game object or perform some other custom logic.
+* On Sign Client Ready With Args (ConnectedData)
+  - This event is the same as `On Sign Client Ready`, but provides the `ConnectedData` that contains the connection `URI`. Use this event if your custom logic needs the `URI`. Since the QR Code Handler automatically generates the `QR Code Image`, this usually is not needed.
+* On Sign Client Authorized
+  - This event is invoked when the displayed connection has been authorized by a wallet. This can be used to hide the `QR Code Image` game object or perform some other custom logic.
+* On Sign Client Authorized With Args (SessionStruct)
+  - This event is the same as `On Sign Client Authorized`, but provides the `SessionStruct` that contains the authorized session.
+
+</PlatformTabItem>
+
 </PlatformTabs>

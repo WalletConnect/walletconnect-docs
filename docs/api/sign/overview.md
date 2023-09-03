@@ -155,7 +155,7 @@ Install the `WalletConnectUnity` package from the [Github repo](https://github.c
 
 Once the `WalletConnectUnity` package is imported, create a new empty Game Object in your scene. This will hold the `WCSignClient` component and other required components.
 
-<-- TODO: Add image -->
+![walletconnectunity-sign-editor](/assets/walletconnectunity-sign-editor.png)
 
 Inside the `WCSignClient` component, you can configure the `Metadata` and other settings inside to the C# `SignClientOptions` class.
 
