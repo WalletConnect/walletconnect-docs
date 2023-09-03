@@ -25,7 +25,7 @@ Domain binding to prevent phishing (coming in beta!): WalletConnect Auth seeks t
 
 <PlatformTabs
 groupId="api-auth"
-activeOptions={["web","ios","android","flutter"]}>
+activeOptions={["web","ios","android","flutter","c#"]}>
 
 <PlatformTabItem value="web">
 Install the WalletConnect client package.
@@ -129,6 +129,19 @@ Add the following to your `DebugProfile.entitlements` and `Release.entitlements`
 ```xml
 <key>com.apple.security.network.client</key>
 <true/>
+```
+
+</PlatformTabItem>
+
+<PlatformTabItem value="c#">
+
+#### Install vis Nuget
+
+Install the WalletConnect Auth client package via Nuget.
+
+install via Nuget
+```shell
+dotnet add package WalletConnect.Auth
 ```
 
 </PlatformTabItem>
