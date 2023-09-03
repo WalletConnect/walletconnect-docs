@@ -87,7 +87,7 @@ Automatic Redirect assesses the user flow after the wallet signs and authorizes 
 
 ### Android 🤖
 
-📕 **Kotlin docs →** [https://docs.walletconnect.com/2.0/advanced/api/mobileLinking?platform=android](../../../advanced/api/mobileLinking?platform=android)
+📕 **Kotlin docs →** [https://docs.walletconnect.com/2.0/api/mobileLinking?platform=android](../../../api/mobileLinking?platform=android)
 
 <video controls width="448" height="336">
   <source src="/assets/auto-redirect-android.mp4" type="video/mp4" />
@@ -95,7 +95,7 @@ Automatic Redirect assesses the user flow after the wallet signs and authorizes 
 
 ### iOS 🍏
 
-📕 **Swift docs** → [https://docs.walletconnect.com/2.0/advanced/api/mobileLinking?platform=ios](../../../advanced/api/mobileLinking?platform=ios)
+📕 **Swift docs** → [https://docs.walletconnect.com/2.0/api/mobileLinking?platform=ios](../../../api/mobileLinking?platform=ios)
 
 📱**Example app** → [Link](https://github.com/WalletConnect/WalletConnectSwiftV2/blob/cd55d281ae7cb3c5d14524d0147b9d557cdd1af5/Example/WalletApp/PresentationLayer/Wallet/SessionProposal/SessionProposalInteractor.swift#L6)
 
@@ -123,7 +123,7 @@ Sign Notifications ensure users receive a push notification for any pending dapp
 
 ### iOS 🍏
 
-📕 **Swift docs** → [https://docs.walletconnect.com/2.0/api/push/wallet-usage?platform=ios](../../../api/push/wallet-usage?platform=ios)
+📕 **Swift docs** → [https://docs.walletconnect.com/2.0/api/notify/usage?platform=ios](../../../api/notify/usage?platform=ios)
 
 📱**Example app** → [Link](https://github.com/WalletConnect/WalletConnectSwiftV2/blob/cd55d281ae7cb3c5d14524d0147b9d557cdd1af5/Example/WalletApp/PresentationLayer/Wallet/Main/MainPresenter.swift#L34)
 

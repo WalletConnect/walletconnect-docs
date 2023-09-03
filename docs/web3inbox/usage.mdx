@@ -19,6 +19,8 @@ This documentation outlines the steps for configuring and using the Web3Inbox SD
 >
 <PlatformTabItem value="ios">
 
+Before configuring Web3Inbox, make sure you have properly configured the [Networking Client](../api/core/relay.mdx) first
+
 The following Swift code snippet demonstrates how to configure the Web3Inbox Client.
 
 ```swift
@@ -29,6 +31,7 @@ Web3Inbox.configure(
     bip44: DefaultBIP44Provider(),
     config: [.chatEnabled: false, .settingsEnabled: false],
     environment: .sandbox,
+    crypto: CryptoProvider,
     onSign: onSign()
 )
 ```
@@ -42,7 +45,32 @@ Parameters:
 
 `environment`: Use `.sandbox` environment for debug builds and `.production` for release and TestFlight builds.
 
+`crypto`: Provide your own implementation of the CryptoProvider protocol.
+
 `onSign`: Web3Inbox client will request user to sign messages with its account private key. The message may be a Sync Storage derivation key or Identity key registration. `SigningCallback` designed as async closure that allows to connect signature request UI.
+
+
+#### Register an identity key and enable cross-device account syncing
+
+:::note
+This is a one-time action that does not need to be repeated after initial registration of the new account.
+:::
+
+To register an identity key, you must provide a callback to the ` onSign: @escaping SigningCallback` parameter of the `register` method.
+In order to register identity keys and enable cross device sync, the SDK will trigger this callback with a messages to sign, expecting the signature for that message to be returned.
+
+```swift
+Web3Inbox.instance.register(account: account, onSign: onSign)
+
+func onSign(message: String) -> SigningResult {
+
+    // Provide your own sing function implementation that return CacaoSignature
+    // For more detailed example see our sample WalletApp
+    let signature = try! signer.sign(message: message)
+    return .signed(signature)
+}
+```
+
 
 #### iOS Permissions Configuration
 
@@ -114,7 +142,7 @@ final class Web3InboxViewController: UIViewController {
         super.loadView()
 
         // Web3Inbox configuration
-        Web3Inbox.configure(account: account, bip44: DefaultBIP44Provider(), config: [.pushEnabled: false], environment: .sandbox, onSign: onSing)
+        Web3Inbox.configure(account: account, bip44: DefaultBIP44Provider(), config: [.pushEnabled: false], environment: .sandbox, crypto: DefaultCryptoProvider(), onSign: onSing)
 
         // Setting Web3Inbox webView as main view
         view = Web3Inbox.instance.getWebView()
@@ -172,8 +200,36 @@ To prevent reloading of Web3Inbox the activity that contains the `Web3Inbox.View
 >
 <PlatformTabItem value="ios">
 
+#### Configure your project to enable Push Notifications
+
+[Configure Project](../advanced/echo-server.md)
+
 #### Register for Push Notifications
-Communicate with Apple Push Notification service and receive unique device token. Register that token with following method:
+
+In order to enable Push Notifications for your app you need to follow standard procedure:
+
+[Enable Push Notifications Capability](https://developer.apple.com/documentation/usernotifications/registering_your_app_with_apns#2980170)
+
+Ask for user permissions:
+
+call registerForPushNotifications() early in your app's lifecycle to initiate the registration process with Apple Push Notification service:
+
+```swift
+    func registerForPushNotifications() {
+        UNUserNotificationCenter.current()
+            .requestAuthorization(
+                options: [.alert, .sound, .badge]
+            ) { granted, error in
+                guard granted else { return }
+                DispatchQueue.main.async {
+                    UIApplication.shared.registerForRemoteNotifications()
+                }
+            }
+    }
+```
+
+Receive token from Apple Push Notification Services and register it at the Push Server:
+
 
 ```swift
     func application(
@@ -207,7 +263,7 @@ For details on how to modify the content in newly delivered notifications, refer
 
 Additionally, you will need to create a [keychain group](https://developer.apple.com/documentation/security/keychain_services/keychain_items/sharing_access_to_keychain_items_among_a_collection_of_apps) that is shared between your wallet application and the notification service. The keychain group should be named `group.com.walletconnect.sdk`.
 
-Inside your notification service extension file, import Web3Inbox, initialize `PushDecryptionService()`, and decrypt the message with the following Swift code:
+Inside your notification service extension file, import Web3Inbox, initialize `NotifyDecryptionService()`, and decrypt the message with the following Swift code:
 
 ```swift
 override func didReceive(_ request: UNNotificationRequest, withContentHandler contentHandler: @escaping (UNNotificationContent) -> Void) {
@@ -216,7 +272,7 @@ override func didReceive(_ request: UNNotificationRequest, withContentHandler co
         let topic = bestAttemptContent.userInfo["topic"] as! String
         let ciphertext = bestAttemptContent.userInfo["blob"] as! String
         do {
-            let service = PushDecryptionService()
+            let service = NotifyDecryptionService()
             let pushMessage = try service.decryptMessage(topic: topic, ciphertext: ciphertext)
             bestAttemptContent.title = pushMessage.title
             bestAttemptContent.body = pushMessage.body

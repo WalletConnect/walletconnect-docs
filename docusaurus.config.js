@@ -22,7 +22,6 @@ const config = {
       'data-domain': 'docs.walletconnect.com'
     }
   ],
-
   presets: [
     [
       'classic',
@@ -54,6 +53,8 @@ const config = {
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     {
+      image: 'img/Docs-OG.png',
+      metadata: [{name: 'twitter:card', content: 'summary_large_image'}],
       navbar: {
         items: [
           {
@@ -129,7 +130,20 @@ const config = {
       prism: {
         darkTheme: darkCodeTheme,
         theme: lightCodeTheme,
-        additionalLanguages: ['swift', 'kotlin', 'dart', 'csharp']
+        additionalLanguages: ['swift', 'kotlin', 'dart', 'csharp'],
+        magicComments: [
+          // Remember to extend the default highlight class name as well!
+          {
+            className: 'theme-code-block-highlighted-delete',
+            line: 'highlight-delete',
+            block: {start: 'highlight-delete-start', end: 'highlight-delete-end'},
+          },
+          {
+            className: 'theme-code-block-highlighted-add',
+            line: 'highlight-add',
+            block: {start: 'highlight-add-start', end: 'highlight-add-end'},
+          },
+        ]
       },
       algolia: {
         appId: 'KEO8ND6AUT',
@@ -137,6 +151,7 @@ const config = {
         indexName: 'walletconnect',
         contextualSearch: true
       },
+      
     }
 }
 

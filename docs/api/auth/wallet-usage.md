@@ -3,11 +3,8 @@ import Tabs from '@theme/Tabs'
 import TabItem from '@theme/TabItem'
 import PlatformTabs from '../../components/PlatformTabs'
 import PlatformTabItem from '../../components/PlatformTabItem'
-import CloudBanner from '../../components/CloudBanner'
 
 # Wallet Usage
-
-<CloudBanner/>
 
 <PlatformTabs
 groupId="api-auth"
@@ -206,7 +203,7 @@ CoreClient.initialize(relayServerUrl = serverUrl, connectionType = ConnectionTyp
 AuthClient.initialize(init = Auth.Params.Init(core = CoreClient)) { error -> Log.e(tag(this), error.throwable.stackTraceToString()) }
 ```
 
-For more context on how to initialize CoreClient, go to [CoreClient docs](../../android/core/installation.md) section.
+For more context on how to initialize CoreClient, go to [CoreClient docs](../core/pairing.mdx) section.
 
 ---
 

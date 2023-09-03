@@ -3,8 +3,7 @@ import CloudBanner from '../../../components/CloudBanner'
 
 # Installation
 
-[Wagmi](https://wagmi.sh/react/getting-started) is a collection of actions containing everything you need to start working with Ethereum.
-Wagmi makes it easy to display ENS and balance information, sign messages, interact with contracts, and much more.
+With Web3Modal HTML, we work with the Wagmi library which is a collection of React Hooks to make your dapp development flow easier. You can sign messages, interact with smart contracts, and much more.
 
 <CloudBanner />
 
@@ -19,7 +18,7 @@ npm install @web3modal/ethereum @web3modal/html @wagmi/core viem
 Web3Modal uses [unpkg](https://www.unpkg.com/) as its official CDN provider.
 For majority of use cases you simply need to swap npm imports to cdn ones, however due to some downstream package issues with cdn workflows, we recomend using pre-packaged version of wagmi core as shown below. (`WagmiCore` imports).
 
-See full [CDN example](https://github.com/WalletConnect/web3modal-examples/tree/main/html-wagmi-cdn) for more info.
+See full [CDN example](https://github.com/WalletConnect/web3modal-examples/tree/main/web3modal-wagmi-html-cdn) for more info.
 
 ```html
 <script type="module">
