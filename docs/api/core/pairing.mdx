@@ -15,7 +15,7 @@ Its purpose is to provide a secure channel for proposing protocols or sending re
 
 <PlatformTabs
 	groupId="api"
-	activeOptions={["web","ios","android","react-native","csharp","unity"]}
+	activeOptions={["web","ios","android","react-native","unity","csharp"]}
 >
 <PlatformTabItem value="web">
 
@@ -143,6 +143,13 @@ core.Pairing.Configure(metadata);
 </PlatformTabItem>
 <PlatformTabItem value="unity">
 
+:::tip
+
+Since `WalletConnectUnity` is a wrapper around `WalletConnectSharp`, usage of the pairing API is identical to `C#`. Please refer to C# documentation on how to use Pairing inside `WalletConnectUnity`.
+
+:::
+
+
 Install the `WalletConnectUnity` package from the [Github repo](https://github.com/WalletConnect/WalletConnectUnity)
 
 Once the `WalletConnectUnity` package is imported, create a new empty Game Object in your scene. This will hold the `WalletConnectUnity` component and other required components. 
@@ -166,12 +173,6 @@ void Start()
 
 `WalletConnectUnity` will automatically initialize the `WalletConnectCore` module as well as run `core.Pairing.Configure(metadata)`. Therefore, no additional
 configuration is required. All settings, including `Metadata`, can be modified in the Unity Editor.
-
-:::
-
-:::tip
-
-Since `WalletConnectUnity` is a wrapper around `WalletConnectSharp`, usage of the pairing API is identical to `C#`. Please refer to C# documentation on how to use Pairing inside `WalletConnectUnity`.
 
 :::
 
