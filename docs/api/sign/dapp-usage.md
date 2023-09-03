@@ -10,7 +10,7 @@ import PlatformTabItem from '../../components/PlatformTabItem'
 
 <PlatformTabs
 groupId="api-sign"
-activeOptions={["web","ios","android","flutter"]}>
+activeOptions={["web","ios","android","flutter","csharp"]}>
 
 <PlatformTabItem value="web">
 This library is compatible with Node.js, browsers and React Native applications (Node.js modules require polyfills for React Native).
@@ -777,14 +777,6 @@ await dappClient.Disconnect(sessionTopic);
 
 await dappClient.Disconnect(sessionTopic, Error.FromErrorType(ErrorType.USER_DISCONNECTED));
 ```
-
-</PlatformTabItem>
-
-<PlatformTabItem value="unity">
-
-:::tip
-
-:::
 
 </PlatformTabItem>
 
