@@ -15,7 +15,7 @@ This section provides instructions on how to initialize the Web3Wallet client, a
 
 <PlatformTabs
 	groupId="w3w"
-	activeOptions={["web","ios","android","flutter","react-native","unity"]}
+	activeOptions={["web","ios","android","flutter","react-native","csharp"]}
 >
 <PlatformTabItem value="web">
 
@@ -159,7 +159,7 @@ export async function pair(params: { uri: string }) {
 
 </PlatformTabItem>
 
-<PlatformTabItem value="unity">
+<PlatformTabItem value="csharp">
 
 First you must setup a `WalletConnectCore` instance with a specific `Name` and `ProjectId`. You may optionally specify other `CoreOption`
 values, such as `RelayUrl` and `Storage`
@@ -204,7 +204,7 @@ A session is a connection between a dapp and a wallet. It is established when a 
 
 <PlatformTabs
 	groupId="w3w"
-	activeOptions={["web","ios","android","flutter","react-native","unity"]}
+	activeOptions={["web","ios","android","flutter","react-native","csharp"]}
 >
 
 <PlatformTabItem value="web">
@@ -434,7 +434,7 @@ const approvedNamespaces = buildApprovedNamespaces({
 
 </PlatformTabItem>
 
-<PlatformTabItem value="unity">
+<PlatformTabItem value="csharp">
 
 To build a namespace mapping for either proposing a session **OR** approving a session, you can use C# dictionary + class constructors
 directly, or use the built-in builder methods
@@ -496,7 +496,7 @@ dApp will provide a `RequiredNamespaces` when proposing the session. The `Requir
 
 <PlatformTabs
 	groupId="w3w"
-	activeOptions={["web","ios","android","flutter","react-native","unity"]}
+	activeOptions={["web","ios","android","flutter","react-native","csharp"]}
 >
 
 <PlatformTabItem value="web">
@@ -737,7 +737,7 @@ await web3wallet.core.pairing.pair({ wcuri });
 
 </PlatformTabItem>
 
-<PlatformTabItem value="unity">
+<PlatformTabItem value="csharp">
 
 Wallets can pair an incoming session using the session's Uri. Pairing a session lets the Wallet obtain the connection proposal which can then be approved or denied.
 
@@ -794,7 +794,7 @@ sdk.On<SessionProposalEvent>(EngineEvents.SessionProposal, async (sender, @event
 
 ### Session Rejection
 
-<PlatformTabs groupId="w3w" activeOptions={["web","ios","android","flutter","react-native","unity"]}>
+<PlatformTabs groupId="w3w" activeOptions={["web","ios","android","flutter","react-native","csharp"]}>
 <PlatformTabItem value="web">
 
 In the event you want to reject the session proposal, call the `rejectSession` method. The `getSDKError` function comes from the `@walletconnect/utils` [library](https://github.com/WalletConnect/walletconnect-monorepo/tree/v2.0/packages/utils).
@@ -868,7 +868,7 @@ await web3wallet.core.pairing.pair({ wcuri });
 
 </PlatformTabItem>
 
-<PlatformTabItem value="unity">
+<PlatformTabItem value="csharp">
 
 The wallet can reject the proposal using the following:
 
@@ -885,7 +885,7 @@ sdk.On<SessionProposalEvent>(EngineEvents.SessionProposal, async (sender, @event
 
 ### Responding to Session requests
 
-<PlatformTabs groupId="w3w" activeOptions={["web","ios","android","flutter","react-native","unity"]}>
+<PlatformTabs groupId="w3w" activeOptions={["web","ios","android","flutter","react-native","csharp"]}>
 
 <PlatformTabItem value="web">
 
@@ -1038,7 +1038,7 @@ const response = {
 
 </PlatformTabItem>
 
-<PlatformTabItem value="unity">
+<PlatformTabItem value="csharp">
 
 Responding to session requests is very similar to sending session requests. See dApp usage on how sending session requests works. All custom session requests requires a request class **and** response class to be created that matches the `params` field type in the custom session request. C# is a staticly typed language, so these types must be given whenever you do a session request (or do any querying for session requests). 
 
@@ -1156,7 +1156,7 @@ private async Task OnEthTransactionReceiptRequest(RequestEventArgs<EthGetTransac
 
 ### Updating a Session
 
-<PlatformTabs groupId="w3w" activeOptions={["web","ios","android","flutter","react-native","unity"]}>
+<PlatformTabs groupId="w3w" activeOptions={["web","ios","android","flutter","react-native","csharp"]}>
 
 <PlatformTabItem value="web">
 
@@ -1211,7 +1211,7 @@ await web3wallet.updateSession({ topic, namespaces: newNs })
 ```
 
 </PlatformTabItem>
-<PlatformTabItem value="unity">
+<PlatformTabItem value="csharp">
 
 
 Update a session, adding/removing additional namespaces in the given topic.
@@ -1227,7 +1227,7 @@ await request.Acknowledged();
 
 ### Extending a Session
 
-<PlatformTabs groupId="w3w" activeOptions={["web","ios","android","flutter","react-native","unity"]}>
+<PlatformTabs groupId="w3w" activeOptions={["web","ios","android","flutter","react-native","csharp"]}>
 
 <PlatformTabItem value="web">
 
@@ -1276,7 +1276,7 @@ await web3wallet.extendSession({ topic })
 ```
 
 </PlatformTabItem>
-<PlatformTabItem value="unity">
+<PlatformTabItem value="csharp">
 
 Extend a session's expiry time so the session remains open
 
@@ -1290,7 +1290,7 @@ await request.Acknowledged();
 
 ### Session Disconnect
 
-<PlatformTabs groupId="w3w" activeOptions={["web","ios","android","flutter","react-native","unity"]}>
+<PlatformTabs groupId="w3w" activeOptions={["web","ios","android","flutter","react-native","csharp"]}>
 
 <PlatformTabItem value="web">
 
@@ -1350,7 +1350,7 @@ await web3wallet.disconnectSession({
 ```
 
 </PlatformTabItem>
-<PlatformTabItem value="unity">
+<PlatformTabItem value="csharp">
 
 ## Disconnecting
 
