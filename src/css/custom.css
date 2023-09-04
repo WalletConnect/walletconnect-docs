@@ -34,7 +34,7 @@
   --ifm-container-background-color: #fff;
 }
 
-.theme-code-block-highlighted-delete{
+.theme-code-block-highlighted-delete {
   display: block;
   border-left: 3px solid #ff000080;
   background-color: #ff000020;
@@ -42,7 +42,7 @@
   padding: 0 var(--ifm-pre-padding);
 }
 
-.theme-code-block-highlighted-add{
+.theme-code-block-highlighted-add {
   display: block;
   border-left: 3px solid rgba(0, 255, 0, 0.502);
   background-color: rgba(0, 255, 0, 0.125);
