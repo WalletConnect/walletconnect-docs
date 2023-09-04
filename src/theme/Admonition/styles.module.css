@@ -1,0 +1,52 @@
+.admonition {
+  margin-bottom: 1em;
+  overflow: hidden;
+  border: none;
+  padding: 0;
+  --ifm-alert-padding-vertical: 0.75rem;
+  --ifm-alert-padding-horizontal: 0.75rem;
+  border-radius: 0.75rem;
+}
+
+.admonitionHeading {
+  font: var(--ifm-heading-font-weight) var(--ifm-h5-font-size) / var(--ifm-heading-line-height)
+    var(--ifm-heading-font-family);
+  text-transform: uppercase;
+  border: var(--ifm-alert-border-width) solid var(--ifm-alert-border-color);
+  padding: 0.5rem 0.75rem;
+  background: var(--ifm-alert-border-color);
+  color: var(--ifm-alert-background-color);
+  display: flex;
+  align-items: center;
+  box-shadow: rgba(255, 255, 255, 0.1) 0px 1px 1px 0px inset,
+    rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+}
+
+.admonitionHeading code {
+  text-transform: none;
+}
+
+.admonitionIcon {
+  display: flex;
+  margin-right: 0.25em;
+}
+
+.admonitionTitle {
+  padding-top: 0.105rem;
+  font-size: 0.75rem;
+}
+
+.admonitionIcon svg {
+  display: inline-block;
+  height: 1em;
+  width: 1em;
+  fill: var(--ifm-alert-background-color);
+}
+
+.admonitionContent {
+  padding: var(--ifm-alert-padding-vertical) var(--ifm-alert-padding-horizontal);
+}
+
+.admonitionContent > :last-child {
+  margin-bottom: 0;
+}
