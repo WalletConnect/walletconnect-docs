@@ -419,6 +419,8 @@ npm i @privy-io/react-auth@latest
 ```
 **That's it! You've upgraded to WalletConnect v2.0.**
 
+#### Optional
+
 If you want to configure your own WalletConnect Cloud Project instead of using the default one provided by Privy, proceed to the following steps. This is optional.
 
 #### 1. Get a WalletConnect Cloud Project ID
