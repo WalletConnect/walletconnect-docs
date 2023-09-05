@@ -1,0 +1,737 @@
+import Container from '../../components/Container'
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
+import PlatformTabs from '../../components/PlatformTabs'
+import PlatformTabItem from '../../components/PlatformTabItem'
+
+# Usage
+
+This section provides instructions on how to initialize the Web3Wallet client, approve sessions with supported namespaces, and respond to session requests, enabling easy integration of Web3 wallets with dapps through a simple and intuitive interface.
+
+## Implementation
+
+<PlatformTabs
+	groupId="wcm"
+	activeOptions={["web","ios","android","flutter","react-native"]}
+>
+<PlatformTabItem value="web">
+
+Start by importing `WalletConnectModal` and initializing it.
+
+```js
+import { WalletConnectModal } from '@walletconnect/modal'
+
+const modal = new WalletConnectModal({
+  projectId: 'YOUR_PROJECT_ID',
+  chains: ['eip155:1']
+})
+```
+
+#### Trigger the modal
+
+Once you have obtained your connection uri, you can open or close the modal.
+
+From here on, use `provider` as you normally would, WalletConnectModal will be shown and hidden automatically i.e.
+
+```js
+await modal.openModal({
+  uri: 'YOUR_CONNECTION_URI'
+})
+
+// Do some work...
+
+modal.closeModal()
+```
+
+</PlatformTabItem>
+<PlatformTabItem value="ios">
+
+#### Configure Networking and Pair clients
+
+Make sure that you properly configure Networking and Pair Clients first.
+
+- [Networking](../../api/core/relay.mdx)
+
+#### Initialize WalletConnectModal Client
+
+In order to initialize a client just call a `configure` method from the Web3Wallet instance wrapper
+
+```swift
+let metadata = AppMetadata(
+    name: "Example Wallet",
+    description: "Wallet description",
+    url: "example.wallet",
+    icons: ["https://avatars.githubusercontent.com/u/37784886"],
+    // Used for the Verify: to opt-out verification ignore this parameter
+    verifyUrl: "verify.walletconnect.com"
+)
+
+WalletConnectModal.configure(
+    projectId: PROJECT_ID,
+    metadata: metadata
+)
+```
+
+This example will default to using following namespaces.
+
+```swift
+let methods: Set<String> = ["eth_sendTransaction", "personal_sign", "eth_signTypedData"]
+let events: Set<String> = ["chainChanged", "accountsChanged"]
+let blockchains: Set<Blockchain> = [Blockchain("eip155:1")!]
+let namespaces: [String: ProposalNamespace] = [
+    "eip155": ProposalNamespace(
+        chains: blockchains,
+        methods: methods,
+        events: events
+    )
+]
+
+let defaultSessionParams =  SessionParams(
+                                requiredNamespaces: namespaces,
+                                optionalNamespaces: nil,
+                                sessionProperties: nil
+                            )
+```
+
+If you want to change that you can call configure and define your own session parameters like this.
+
+```swift
+let metadata = AppMetadata(...)
+
+let sessionParams = SessionParams(...)
+
+WalletConnectModal.configure(
+    projectId: PROJECT_ID,
+    metadata: metadata,
+    sessionParams: sessionParams
+)
+```
+
+or you can change them later by calling `WalletConnectModal.set(sessionParams: SessionParams(...))`
+
+</PlatformTabItem>
+<PlatformTabItem value="android">
+
+`WalletConnectModal` is a singleton that interacts with the WalletConnectModal SDK.
+
+#### Initialize
+
+```kotlin
+val connectionType = ConnectionType.AUTOMATIC or ConnectionType.MANUAL
+val projectId = "" // Get Project ID at https://cloud.walletconnect.com/
+val relayUrl = "relay.walletconnect.com"
+val serverUrl = "wss://$relayUrl?projectId=${projectId}"
+val appMetaData = Core.Model.AppMetaData(
+    name = "Kotlin.WalletConnectModal",
+    description = "Kotlin WalletConnectModal Implementation",
+    url = "kotlin.walletconnect.com",
+    icons = listOf("https://raw.githubusercontent.com/WalletConnect/walletconnect-assets/master/Icon/Gradient/Icon.png"),
+    redirect = "kotlin-modal://request"
+)
+
+CoreClient.initialize(relayServerUrl = serverUrl, connectionType = connectionType, application = this, metaData = appMetaData)
+
+WalletConnectModal.initialize(
+    init = Modal.Params.Init(CoreClient),
+    onSuccess = {
+        // Callback will be called if initialization is successful
+     },
+    onError = { error ->
+        // Error will be thrown if there's an issue during initialization
+    }
+)
+```
+
+#### SessionParams
+
+This example will default to using following namespaces.
+You can define your own session parameters like this.
+
+```kotlin
+val methods: List<String> = listOf("eth_sendTransaction", "personal_sign", "eth_sign", "eth_signTypedData")
+val events: List<String> = listOf("chainChanged", "accountsChanged")
+val chains: List<String> = listOf("eip155:1")
+val namespaces = mapOf(
+    "eip155" to Modal.Model.Namespace.Proposal(
+        chains = chains,
+        methods = methods,
+        events = events
+    )
+)
+
+val sessionParams = Modal.Params.SessionParams(
+    requiredNamespaces = namespaces,
+    optionalNamespaces = null,
+    properties = null
+)
+
+WalletConnectModal.setSessionParams(sessionParams)
+```
+
+**IMPORTANT**: `SessionParams` must be set before opening the modal.
+
+</PlatformTabItem>
+<PlatformTabItem value="flutter">
+
+To get the modal to work properly you need to create two objects.
+
+The first is the `WalletConnectModalTheme` which is used to style the modal.
+
+```dart
+// Example of WalletConnectModalTheme
+return WalletConnectModalTheme(
+  data: WalletConnectModalThemeData.darkMode,
+  child: MaterialApp(
+    title: 'Flutter Demo',
+    theme: ThemeData(
+      colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+      useMaterial3: true,
+    ),
+    home: const MyHomePage(title: 'WalletConnectModal Sign Example'),
+  ),
+);
+```
+
+The second is the WalletConnectModalService which is your primary class for opening, closing, disconnecting, etc.
+
+```dart
+WalletConnectModalService service = WalletConnectModalService(
+  projectId: projectId,
+  metadata: const PairingMetadata(
+    name: 'Flutter WalletConnect',
+    description: 'Flutter WalletConnectModal Sign Example',
+    url: 'https://walletconnect.com/',
+    icons: ['https://walletconnect.com/walletconnect-logo.png'],
+    redirect: Redirect(
+      native: 'flutterdapp://',
+      universal: 'https://www.walletconnect.com',
+    ),
+  ),
+);
+await service.init();
+```
+
+The service must be initialized before it can be used.
+
+Now that those two things are setup in your application, you can call `_service.open()` to open the modal.
+
+To make things easy, you can use the WalletConnectModalConnect widget to open the modal.
+This is a button that changes its state based on the modal and connection.
+This widget requires the WalletConnectModalService to be passed in.
+
+```dart
+WalletConnectModalConnect(
+  walletConnectModalService: _service,
+),
+```
+
+#### iOS Setup
+
+For each app you would like to be able to deep link to, you must add that app's link into the `ios/Runner/Info.plist` file like so:
+
+```xml
+<key>LSApplicationQueriesSchemes</key>
+<array>
+  <string>metamask</string>
+  <string>rainbow</string>
+  <string>trust</string>
+</array>
+```
+
+To handle deep linking to your app, you will also need to add the following to the plist file:
+
+```xml
+<key>CFBundleURLTypes</key>
+<array>
+    <dict>
+        <key>CFBundleURLSchemes</key>
+        <array>
+            <string>flutterdapp</string> <!-- Change "flutterdapp" to be your deep link -->
+        </array>
+        <key>CFBundleURLName</key>
+        <string>com.walletconnect.flutterdapp</string> <!-- Change this package name to be your package -->
+    </dict>
+</array>
+```
+
+#### Android Setup
+
+On android 11+ you must specify that use can use the internet, along with the different schemes you would like to be able to deep link to in the `android/app/src/main/AndroidManifest.xml` file like so:
+
+```xml
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Intent so you can deep link to wallets -->
+    <queries>
+        <intent>
+            <action android:name="android.intent.action.VIEW" />
+            <category android:name="android.intent.category.BROWSABLE" />
+            <data android:scheme="https" />
+        </intent>
+        <intent>
+            <action android:name="android.intent.action.VIEW" />
+            <data android:scheme="metamask" />
+        </intent>
+    </queries>
+    <!-- Permission to access the internet -->
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <!-- Update your activity to handle the deep linking from other apps -->
+    <activity
+            ...>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <!-- Accepts URIs that begin with "flutterdapp://”, change this to be your deep link -->
+                <data android:scheme="flutterdapp" />
+            </intent-filter>
+        </activity>
+    ...
+</manifest>
+```
+
+For some reason, multiple wallets have the `metamask` intent, and will launch metamask as a result.
+This is a bug in the wallets, not this package.
+
+</PlatformTabItem>
+
+<PlatformTabItem value="react-native">
+
+Import WalletConnect Modal package, replace `YOUR_PROJECT_ID` with your [WalletConnect Cloud](https://cloud.walletconnect.com/sign-in) Project ID and add your Project's info in `providerMetadata`
+
+```tsx
+import { WalletConnectModal } from '@walletconnect/modal-react-native'
+
+const projectId = 'YOUR_PROJECT_ID'
+
+const providerMetadata = {
+  name: 'YOUR_PROJECT_NAME',
+  description: 'YOUR_PROJECT_DESCRIPTION',
+  url: 'https://your-project-website.com/',
+  icons: ['https://your-project-logo.com/'],
+  redirect: {
+    native: 'YOUR_APP_SCHEME://',
+    universal: 'YOUR_APP_UNIVERSAL_LINK.com'
+  }
+}
+
+function App() {
+  return (
+    <>
+      <WalletConnectModal projectId={projectId} providerMetadata={providerMetadata} />
+    </>
+  )
+}
+```
+
+</PlatformTabItem>
+</PlatformTabs>
+
+## Usage
+
+<PlatformTabs
+	groupId="wcm"
+	activeOptions={["web","ios","android","flutter", "react-native"]}
+>
+
+<PlatformTabItem value="web">
+
+#### openModal
+
+Action to open the modal. Returns promise that resolves once modal is visible.
+
+#### Example
+
+```js
+await modal.openModal({
+  uri: 'YOUR_CONNECTION_URI'
+})
+```
+
+#### Reference
+
+```ts
+openModal: (options?: OpenOptions) => Promise<void>
+```
+
+```ts
+interface OpenOptions {
+  // Uri that will be used to generate qrcode and mobile links, required
+  uri: string
+  // CAIP-2 compliant chain ids to override initial chains defined when creating the modal
+  // Learn about CAIP-10: https://github.com/ChainAgnostic/CAIPs/blob/master/CAIPs/caip-10.md
+  chains?: string
+}
+```
+
+#### closeModal
+
+Action to close the modal.
+
+#### Example
+
+```js
+modal.closeModal()
+```
+
+#### Reference
+
+```ts
+closeModal: () => void
+```
+
+#### subscribeModal
+
+Action to subscribe to modal state changes.
+
+#### Example
+
+```js
+modal.subscribeModal(state => console.log(state))
+```
+
+#### Reference
+
+```ts
+subscribeModal: (callback: (state: ModalState) => void) => void
+```
+
+```ts
+interface ModalState {
+  open: boolean
+}
+```
+
+</PlatformTabItem>
+<PlatformTabItem value="ios">
+
+To actually present the modal you can simply call.
+
+```swift
+WalletConnectModal.present()
+```
+
+It will traverse the view hierarchy and try to present from top most controller. This is meant more towards SwiftUI.
+
+Otherwise you can specify the viewController to present from.
+
+```swift
+WalletConnectModal.present(from: viewController)
+```
+
+#### Subscribe for WalletConnectModal Publishers
+
+The following publishers are available to subscribe:
+
+```swift
+public var sessionPublisher: AnyPublisher<[Session], Never>
+public var sessionSettlePublisher: AnyPublisher<Session, Never>
+public var sessionRejectionPublisher: AnyPublisher<(Session.Proposal, Reason), Never>
+public var sessionDeletePublisher: AnyPublisher<(String, Reason), Never>
+public var sessionResponsePublisher: AnyPublisher<Response, Never>
+public var socketConnectionStatusPublisher: AnyPublisher<SocketConnectionStatus, Never>
+```
+
+#### Sign methods
+
+WalletConnectModal is internally using Sign SDK and most of its method are being exposed through WalletConnectModal interface.
+
+#### Where to go from here
+
+Check the WalletConnectModal usage in our Example Showcase app that is part of WalletConnectSwiftV2 repository.
+Build API documentation in Xcode by going to `Product -> Build Documentation`
+
+</PlatformTabItem>
+
+<PlatformTabItem value="android">
+
+#### Android Compose
+
+```kotlin
+import androidx.compose.material.ExperimentalMaterialApi
+import androidx.compose.material.ModalBottomSheetState
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import com.google.accompanist.navigation.material.BottomSheetNavigator
+import com.google.accompanist.navigation.material.ExperimentalMaterialNavigationApi
+import com.google.accompanist.navigation.material.ModalBottomSheetLayout
+import com.google.accompanist.navigation.material.bottomSheet
+import com.walletconnect.wcmodal.ui.walletConnectModalGraph
+
+setContent {
+    val modalSheetState = rememberModalBottomSheetState(initialValue = ModalBottomSheetValue.Hidden, skipHalfExpanded = true)
+    val bottomSheetNavigator = BottomSheetNavigator(modalSheetState)
+    val navController = rememberNavController(bottomSheetNavigator)
+
+    ModalBottomSheetLayout(bottomSheetNavigator = bottomSheetNavigator) {
+        NavHost(
+            navController = navController,
+            startDestination = "home"
+        ) {
+            composable("home") {
+                HomeScreen()
+            }
+            walletConnectModalGraph(navController)
+        }
+    }
+}
+```
+
+**IMPORTANT**: WalletConnectModal uses accompanist navigation material inside. `ModalBottomSheetLayout` should be imported from [Accompanist Navigation Material](https://google.github.io/accompanist/navigation-material/)
+
+```kotlin
+import com.walletconnect.wcmodal.ui.openWalletConnectModal
+
+navController.openWalletConnectModal()
+```
+
+#### Android View
+
+#### Navigation Component
+
+```xml
+<navigation >
+    <fragment
+        android:id="@+id/HomeFragment"
+        android:name="com.walletconnect.sample.HomeFragment">
+
+        <action
+            android:id="@+id/action_to_bottomSheet"
+            app:destination="@id/bottomSheet" />
+    </fragment>
+
+    <dialog
+        android:id="@+id/bottomSheet"
+        android:name="com.walletconnect.wcmodal.ui.WalletConnectModalSheet" />
+</navigation>
+```
+
+```kotlin
+import androidx.navigation.fragment.findNavController
+import com.walletconnect.wcmodal.ui.openWalletConnectModal
+
+findNavController().openWalletConnectModal(id = R.id.action_to_bottomSheet)
+```
+
+#### Kotlin DSL
+
+```kotlin
+import androidx.navigation.createGraph
+import androidx.navigation.fragment.fragment
+import com.walletconnect.wcmodal.ui.walletConnectModal
+
+navController.graph = navController.createGraph("Home") {
+    fragment<HomeFragment>("Home")
+    walletConnectModal()
+}
+```
+
+```kotlin
+import androidx.navigation.fragment.findNavController
+import com.walletconnect.wcmodal.ui.openWalletConnectModal
+
+findNavController().openWalletConnectModal()
+```
+
+#### WalletConnectModal.ModalDelegate
+
+```kotlin
+val walletConnectModalDelegate = object : WalletConnectModal.ModalDelegate {
+    override fun onSessionApproved(approvedSession: Modal.Model.ApprovedSession) {
+        // Triggered when receives the session approval from wallet
+    }
+
+    override fun onSessionRejected(rejectedSession: Modal.Model.RejectedSession) {
+        // Triggered when receives the session rejection from wallet
+    }
+
+    override fun onSessionUpdate(updatedSession: Modal.Model.UpdatedSession) {
+        // Triggered when receives the session update from wallet
+    }
+
+    override fun onSessionExtend(session: Modal.Model.Session) {
+        // Triggered when receives the session extend from wallet
+    }
+
+    override fun onSessionEvent(sessionEvent: Modal.Model.SessionEvent) {
+        // Triggered when the peer emits events that match the list of events agreed upon session settlement
+    }
+
+    override fun onSessionDelete(deletedSession: Modal.Model.DeletedSession) {
+        // Triggered when receives the session delete from wallet
+    }
+
+    override fun onSessionRequestResponse(response: Modal.Model.SessionRequestResponse) {
+        // Triggered when receives the session request response from wallet
+    }
+
+    override fun onConnectionStateChange(state: Modal.Model.ConnectionState) {
+        //Triggered whenever the connection state is changed
+    }
+
+    override fun onError(error: Modal.Model.Error) {
+        // Triggered whenever there is an issue inside the SDK
+    }
+}
+```
+
+The WalletConnectModal needs a `WalletConnectModal.ModalDelegate` passed to it for it to be able to expose asynchronously updates sent from the Wallet. It can only be called after successful `WalletConnectModal` initialization
+
+#### Connect
+
+```kotlin
+val namespace: String = /*Namespace identifier, see for reference: https://github.com/ChainAgnostic/CAIPs/blob/master/CAIPs/caip-2.md#syntax*/
+val chains: List<String> = /*List of chains that wallet will be requested for*/
+val methods: List<String> = /*List of methods that wallet will be requested for*/
+val events: List<String> = /*List of events that wallet will be requested for*/
+val requiredNamespaces: Map<String, Modal.Model.Namespaces.Proposal> = mapOf(namespace, Modal.Model.Namespaces.Proposal(accounts, methods, events)) /*Required namespaces to setup a session*/
+val optionalNamespaces: Map<String, Modal.Model.Namespaces.Proposal> = mapOf(namespace, Modal.Model.Namespaces.Proposal(accounts, methods, events)) /*Optional namespaces to setup a session*/
+val pairing: Core.Model.Pairing = /*Either an active or inactive pairing*/
+val connectParams = Modal.Params.Connect(requiredNamespaces, optionalNamespaces, pairing)
+
+WalletConnectModal.connect(
+    connect = connectParams,
+    onSuccess = {
+        /* callback that letting you know that you have successfully initiated connecting */
+    },
+    onError = { error =>
+        /* callback for error while trying to initiate a connection with a peer */
+    }
+)
+```
+
+More about optional and required namespaces can be found [here](https://github.com/ChainAgnostic/CAIPs/blob/master/CAIPs/caip-25.md)
+
+#### Disconnect
+
+```kotlin
+val disconnectParams = WalletConnectModal.Params.Disconnect(topic)
+
+WalletConnectModal.disconnect(
+    disconnect = disconnectParams,
+    onSuccess = {
+    /* callback that letting you know that you have successfully disconnected */
+    },
+    onError = { error ->
+    /* callback for error while trying to disconnection with a peer */
+    }
+)
+```
+
+#### Request
+
+```kotlin
+val requestParams = Modal.Params.Request(
+    sessionTopic = sessionTopic,
+    method = /* Selected method */,
+    params = /* Method params  */,
+    chainId = /* Chain id */
+)
+
+WalletConnectModal.request(
+    request = requestParams,
+    onSuccess = {
+    /* callback that letting you know that you have successful request */
+    },
+    onError = { error ->
+    /* callback for error */
+    }
+)
+```
+
+#### Get List of Active Sessions
+
+```kotlin
+WalletConnectModal.getListOfActiveSessions()
+```
+
+To get a list of active sessions, call `WalletConnectModal.getListOfActiveSessions()` which will return a list of type `Modal.Model.Session`.
+
+#### Get list of pending session requests for a topic
+
+```kotlin
+WalletConnectModal.getActiveSessionByTopic(topic)
+```
+
+To get a active session for a topic, call `WalletConnectModal.getActiveSessionByTopic()` and pass a topic which will return
+a `Modal.Model.Session` object containing requestId, method, chainIs and params for pending request.
+
+</PlatformTabItem>
+
+<PlatformTabItem value="flutter">
+
+You can launch the currently connected wallet by calling `service.launchCurrentWallet()`.
+
+</PlatformTabItem>
+
+<PlatformTabItem value="react-native">
+
+#### useWalletConnectModal
+
+Hook to programmatically control the modal. Useful when you want to use your own UI elements and subscribe to modals state.
+
+\*Note: A new session is created automatically when the modal is opened, so avoid calling `provider.connect` by yourself.
+
+```tsx
+import { useWalletConnectModal } from "@walletconnect/modal-react-native";
+
+const { isOpen, open, close, provider, isConnected, address } = useWalletConnectModal();
+
+// Modal's open state
+isOpen;
+
+// Open modal
+interface Options {
+  route?: 'ConnectWallet' | 'Qrcode' | 'WalletExplorer';
+}
+await open(options?: Options);
+
+// Close modal
+close();
+
+// Initialized provider
+provider;
+
+// Wallet connection state
+isConnected;
+
+// Connected account's address
+address;
+
+```
+
+#### Example
+
+```tsx
+import { Pressable, Text } from 'react-native'
+import { WalletConnectModal, useWalletConnectModal } from '@walletconnect/modal-react-native'
+
+const projectId = 'YOUR_PROJECT_ID'
+
+const providerMetadata = {
+  name: 'YOUR_PROJECT_NAME',
+  description: 'YOUR_PROJECT_DESCRIPTION',
+  url: 'https://your-project-website.com/',
+  icons: ['https://your-project-logo.com/'],
+  redirect: {
+    native: 'YOUR_APP_SCHEME://',
+    universal: 'YOUR_APP_UNIVERSAL_LINK.com'
+  }
+}
+
+function App() {
+  const { open, isConnected } = useWalletConnectModal()
+  return (
+    <>
+      <Pressable onPress={open}>
+        <Text>{isConnected ? 'View Account' : 'Connect'}</Text>
+      </Pressable>
+      <WalletConnectModal projectId={projectId} providerMetadata={providerMetadata} />
+    </>
+  )
+}
+```
+
+</PlatformTabItem>
+</PlatformTabs>

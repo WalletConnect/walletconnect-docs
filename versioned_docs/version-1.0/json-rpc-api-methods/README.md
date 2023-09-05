@@ -1,2 +1,0 @@
-# JSON-RPC API Methods
-

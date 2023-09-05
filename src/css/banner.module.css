@@ -1,0 +1,139 @@
+.container {
+  padding-left: 2rem !important;
+}
+
+.banner__container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: linear-gradient(to right, var(--ifm-background-color), var(--ifm-background-color))
+      padding-box,
+    linear-gradient(to right, transparent, transparent, var(--ifm-color-gray-600)) border-box;
+  border-radius: 0 1.5rem 1.5rem 0;
+  border: 1px solid transparent;
+  overflow: hidden;
+  min-height: 15rem;
+  max-height: 25rem;
+  width: 100%;
+  margin-top: 1rem;
+  position: relative;
+  isolation: isolate;
+}
+
+.banner__text {
+  position: relative;
+  z-index: 2;
+}
+
+.banner__text h2,
+.banner__text p,
+.banner__text a {
+  margin: 0 !important;
+}
+
+.banner__text p {
+  margin-top: 0.5rem !important;
+  max-width: 24rem;
+}
+
+.banner__text a {
+  width: fit-content;
+  white-space: pre;
+  padding: 0.5rem 1.125rem;
+  border-radius: 0.875rem;
+  border: none;
+  background: linear-gradient(
+    180deg,
+    var(--ifm-color-primary-lighter) 0%,
+    var(--ifm-color-primary-dark) 100%
+  );
+  box-shadow: 0px 0px 8px -1px var(--ifm-color-primary-darker) inset;
+  color: white !important;
+  font-weight: 700;
+  letter-spacing: 0.25px;
+  display: flex;
+  align-items: center;
+  gap: 5rem;
+  margin-top: 1.25rem !important;
+  transition: background 0.2s ease-in-out;
+}
+
+.banner__text a:hover {
+  background: linear-gradient(
+    180deg,
+    var(--ifm-color-primary-light) 0%,
+    var(--ifm-color-primary-darker) 100%
+  );
+}
+
+.banner__text a > svg {
+  width: 1.25rem;
+  height: 1.25rem;
+  transition: transform 0.2s ease-in-out;
+}
+
+.banner__text a:hover > svg {
+  transform: translateX(0.25rem);
+}
+
+.banner__text h2 {
+  font-size: 2.5rem;
+}
+
+.banner__backdrop {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(
+    90deg,
+    var(--ifm-background-color) 0%,
+    var(--ifm-background-color) 33%,
+    transparent 100%
+  );
+}
+
+.banner__image {
+  border: none;
+  border-radius: 0;
+  height: 100%;
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: 0;
+  object-fit: cover;
+}
+
+@media screen and (max-width: 996px) {
+  .banner__container {
+    height: fit-content;
+  }
+  .container {
+    padding-left: 1rem !important;
+  }
+  .banner__text p {
+    max-width: fit-content;
+  }
+}
+
+@media screen and (max-width: 660px) {
+  .banner__image {
+    display: none;
+  }
+  .banner__container {
+    height: fit-content;
+    border-radius: 0;
+    border: none !important;
+  }
+  .banner__backdrop {
+    display: none;
+  }
+  .banner__text a {
+    margin-left: 1rem;
+    margin-right: 1rem;
+    margin-bottom: 1rem;
+    width: calc(100% - 1rem);
+  }
+  .banner__text a > svg {
+    margin-left: auto;
+  }
+}

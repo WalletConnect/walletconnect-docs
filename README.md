@@ -21,6 +21,11 @@ Source can be viewed in [`docs`](./docs/) directory.
 
 Older versions are available in `versioned_docs/`.
 
+## Modifying routes
+
+Whenever a route is changed DocSearch needs to crawls the website in order to keep the search engine working properly, this is scheduled once a week, it is therefore
+recommended to use redirects to avoid broken links. See [link](https://vercel.com/docs/concepts/projects/project-configuration#redirects).
+
 ## Customize Settings & Theme
 
 1. Open `docusaurus.config.js`
@@ -28,3 +33,5 @@ Older versions are available in `versioned_docs/`.
 ## More
 
 For more options, check the [Docusaurus docs](https://docusaurus.io/).
+
+Archived v1.0 docs can be viewed in the [v1.0 branch](https://github.com/WalletConnect/walletconnect-docs/tree/v1.0).

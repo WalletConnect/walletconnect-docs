@@ -11,6 +11,7 @@ const config = {
   url: 'https://docs.walletconnect.com/',
   baseUrl: '/',
   onBrokenLinks: 'throw',
+  onBrokenMarkdownLinks: 'throw',
   favicon: 'img/favicon.ico',
   organizationName: 'walletconnect',
   projectName: 'walletconnect-docs',
@@ -21,28 +22,22 @@ const config = {
       'data-domain': 'docs.walletconnect.com'
     }
   ],
-
   presets: [
     [
       'classic',
       /** @type {import('@docusaurus/preset-classic').Options} */
       {
         docs: {
-          breadcrumbs: false,
+          breadcrumbs: true,
           lastVersion: 'current',
           routeBasePath: '/',
           sidebarPath: require.resolve('./sidebars.js'),
           showLastUpdateTime: true,
           editUrl: 'https://github.com/WalletConnect/walletconnect-docs/blob/main/',
           versions: {
-            '1.0': {
-              badge: false,
-              label: 'v1.x.x',
-              path: '1.0'
-            },
             current: {
               badge: false,
-              label: 'v2.x.x',
+              label: 'v2.x',
               path: '2.0'
             }
           },
@@ -58,6 +53,8 @@ const config = {
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     {
+      image: 'img/Docs-OG.png',
+      metadata: [{name: 'twitter:card', content: 'summary_large_image'}],
       navbar: {
         items: [
           {
@@ -66,57 +63,10 @@ const config = {
               '<a class="navbar__brand" href="/"><div class="navbar__logo"><img src="/img/walletconnect-logo-white.svg#dark-mode-only"  alt="WalletConnect Logo"><img src="/img/walletconnect-logo-black.svg#light-mode-only"  alt="WalletConnect Logo"></div>WalletConnect<span>Docs<span></a>'
           },
           {
-            type: 'doc',
-            position: 'left',
-            docId: 'readme',
-            label: 'Overview'
-          },
-          {
-            type: 'docSidebar',
-            position: 'left',
-            sidebarId: 'web',
-            label: 'Web'
-          },
-          {
-            type: 'docSidebar',
-            position: 'left',
-            sidebarId: 'android',
-            label: 'Android'
-          },
-          {
-            type: 'docSidebar',
-            position: 'left',
-            sidebarId: 'ios',
-            label: 'iOS'
-          },
-          {
-            type: 'docSidebar',
-            position: 'left',
-            sidebarId: 'reactnative',
-            label: 'React Native'
-          },
-          {
-            type: 'docSidebar',
-            position: 'left',
-            sidebarId: 'flutter',
-            label: 'Flutter'
-          },
-          {
-            type: 'docSidebar',
-            position: 'left',
-            sidebarId: 'unity',
-            label: 'Unity'
-          },
-          {
             href: 'https://github.com/walletconnect/',
             position: 'right',
             className: 'header-github-link',
             'aria-label': 'GitHub repository'
-          },
-
-          {
-            type: 'docsVersionDropdown',
-            position: 'right'
           }
         ]
       },
@@ -126,16 +76,16 @@ const config = {
             title: 'Docs',
             items: [
               {
-                label: 'v2.0 Getting Started',
-                to: '/2.0/#getting-started'
-              },
-              {
                 label: 'Web3Modal SDK',
                 to: '/2.0/web3modal/about'
               },
               {
                 label: 'Web3Wallet SDK',
                 to: '/2.0/web3wallet/about'
+              },
+              {
+                label: 'Web3Inbox SDK',
+                to: '/2.0/web3inbox/about'
               }
             ]
           },
@@ -180,7 +130,20 @@ const config = {
       prism: {
         darkTheme: darkCodeTheme,
         theme: lightCodeTheme,
-        additionalLanguages: ['swift', 'kotlin']
+        additionalLanguages: ['swift', 'kotlin', 'dart', 'csharp'],
+        magicComments: [
+          // Remember to extend the default highlight class name as well!
+          {
+            className: 'theme-code-block-highlighted-delete',
+            line: 'highlight-delete',
+            block: {start: 'highlight-delete-start', end: 'highlight-delete-end'},
+          },
+          {
+            className: 'theme-code-block-highlighted-add',
+            line: 'highlight-add',
+            block: {start: 'highlight-add-start', end: 'highlight-add-end'},
+          },
+        ]
       },
       algolia: {
         appId: 'KEO8ND6AUT',
@@ -188,14 +151,7 @@ const config = {
         indexName: 'walletconnect',
         contextualSearch: true
       },
-      announcementBar: {
-        id: 'support_us',
-        content:
-          '🚨 v1.0 has been sunset. Wallets and Dapps must upgrade to v2.0 before June 28. <a rel="noopener noreferrer" href="/2.0/advanced/migration-from-v1.x/overview">Learn more</a>. 🚨',
-        backgroundColor: '#3182ce',
-        textColor: '#fff',
-        isCloseable: true
-      }
+      
     }
 }
 

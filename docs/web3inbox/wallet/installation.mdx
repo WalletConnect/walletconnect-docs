@@ -1,0 +1,94 @@
+import Container from '../../components/Container'
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
+import PlatformTabs from '../../components/PlatformTabs'
+import PlatformTabItem from '../../components/PlatformTabItem'
+import Wrapper from '../../components/Home/Wrapper'
+
+# Installation
+
+This installation step is for Web3Inbox SDK into your project by embedding the widget.
+
+:::info
+For those looking for a native integration via the Notify API, we suggest you to check out the [Notify API documentation](../../api/notify/about).
+:::info
+
+<PlatformTabs
+	groupId="w3w"
+	activeOptions={["ios","android"]}
+>
+<PlatformTabItem value="ios">
+
+Web3Inbox SDK is available via [Swift Package Manager](https://swift.org/package-manager/) or [Cocoapods](https://cocoapods.org/).
+
+<Tabs
+queryString="ios-method"
+	values={[
+		{ label: 'SwiftPackageManager', value: 'spm', },
+		{ label: 'Cocoapods', value: 'cocoa', },
+	]}
+>
+<TabItem value="spm">
+
+You can add a Web3Inbox SDK to your project with Swift Package Manager. In order to do that:
+
+1. Open XCode
+2. Go to File -> Add Packages
+3. Paste the repo GitHub URL: https://github.com/WalletConnect/WalletConnectSwiftV2
+4. Tap Add Package
+5. Select Web3Inbox check mark
+
+</TabItem>
+<TabItem value="cocoa">
+
+1. Update Cocoapods spec repos. Type in terminal `pod repo update`
+2. Initialize Podfile if needed with `pod init`
+3. Add pod to your Podfile:
+
+```Ruby
+pod 'WalletConnectSwiftV2/Web3Inbox'
+```
+
+4. Install pods with `pod install`
+
+If you encounter any problems during package installation, you can specify the exact path to the repository
+
+```Ruby
+pod 'WalletConnectSwiftV2/Web3Inbox', :git => 'https://github.com/WalletConnect/WalletConnectSwiftV2.git', :tag => '1.5.0'
+```
+
+</TabItem>
+</Tabs>
+
+</PlatformTabItem>
+<PlatformTabItem value="android">
+
+root/build.gradle.kts:
+
+```gradle
+allprojects {
+ repositories {
+    mavenCentral()
+    maven { url "https://jitpack.io" }
+ }
+}
+```
+
+app/build.gradle.kts
+
+```gradle
+implementation("com.walletconnect:android-core:release_version")
+implementation("com.walletconnect:web3inbox:release_version")
+```
+
+#### Requirements
+
+- Android min SDK 23
+- Java 11
+
+</PlatformTabItem>
+</PlatformTabs>
+
+## Next Steps
+
+Now that you've installed Web3Inbox SDK, you're ready to start integrating it. The next section will walk you through the process of setting up your project to use the SDK.

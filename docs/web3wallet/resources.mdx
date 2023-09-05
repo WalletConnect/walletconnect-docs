@@ -1,0 +1,150 @@
+import PlatformTabs from '../components/PlatformTabs'
+import PlatformTabItem from '../components/PlatformTabItem'
+
+# Resources
+
+Valuable assets for developers and users interested in integrating Web3Wallet into their applications.
+
+<!--Todo: Prettify this section-->
+
+- [Awesome WalletConnect](https://github.com/WalletConnect/awesome-walletconnect) - Community-curated collection of WalletConnect-enabled wallets, libraries, and tools.
+- [Web3Modal Laboratory](https://lab.web3modal.com) - A place to test your wallet integrations against various setups of Web3Modal.
+- [Web3Wallet GitHub](https://github.com/WalletConnect/walletconnect-monorepo/tree/v2.0/packages/web3wallet) - Web3Wallet GitHub repository.
+
+### Wallet Resources
+
+<PlatformTabs groupId="w3w" activeOptions={["web","ios","android","react-native"]}>
+
+<PlatformTabItem value="web">
+
+We have a set of official examples in our [web-examples](https://github.com/WalletConnect/web-examples) repository to help you get started. Our React Native examples documentation is available [here](./about.mdx)
+
+**Web3Wallet**
+
+This wallet can be used with any dapp using Sign v2 or Auth.
+
+- [React Web3Wallet](https://github.com/WalletConnect/web-examples/tree/main/wallets/react-web3wallet) ([Demo](https://react-web3wallet.vercel.app))
+
+**Sign**
+
+- [React Wallet Ethers - v2](https://github.com/WalletConnect/web-examples/tree/main/wallets/react-wallet-v2) ([Demo](https://react-wallet.walletconnect.com/))
+
+**Auth**
+
+- [React Auth Wallet](https://github.com/WalletConnect/web-examples/tree/main/wallets/react-wallet-auth) ([Demo](https://react-auth-wallet.vercel.app/))
+
+**Chat**
+
+- [React Chat Wallet](https://github.com/WalletConnect/web-examples/tree/main/wallets/react-wallet-chat) ([Demo](https://react-wallet-chat.walletconnect.com/))
+
+</PlatformTabItem>
+<PlatformTabItem value="ios">
+
+To check more in details go and visit our [Web3Wallet Swift implementation app](https://github.com/WalletConnect/WalletConnectSwiftV2/tree/main/Example/WalletApp). Sample Wallet and Dapp sample apps can be found under the Example directory in [Swift's V2 repository](https://github.com/WalletConnect/WalletConnectSwiftV2/tree/main/Example)
+
+If you need to test your app's integration, you can use one of our following demo wallets and/or dapps.
+
+**Sign**
+
+- [React Wallet Ethers - v2](https://github.com/WalletConnect/web-examples/tree/main/wallets/react-wallet-v2) ([Demo](https://react-wallet.walletconnect.com/))
+
+**Auth**
+
+- [React Auth Wallet](https://github.com/WalletConnect/web-examples/tree/main/wallets/react-wallet-auth) ([Demo](https://react-auth-wallet.vercel.app/))
+
+**Chat**
+
+- [React Chat Wallet](https://github.com/WalletConnect/web-examples/tree/main/wallets/react-wallet-chat) ([Demo](https://react-wallet-chat.walletconnect.com/))
+
+</PlatformTabItem>
+<PlatformTabItem value="android">
+
+To check more in details go and visit our [Web3Wallet Kotlin implementation app](https://github.com/WalletConnect/WalletConnectKotlinV2/tree/develop/sample/wallet). Sample Wallet and Dapp .apk files can be found under the latest release tag in [Kotlin's V2 repository](https://github.com/WalletConnect/WalletConnectKotlinV2/tags)
+
+If you need to test your app's integration, you can use one of our following demo wallets and/or dapps.
+
+**Sign**
+
+- [React Wallet Ethers - v2](https://github.com/WalletConnect/web-examples/tree/main/wallets/react-wallet-v2) ([Demo](https://react-wallet.walletconnect.com/))
+
+**Auth**
+
+- [React Auth Wallet](https://github.com/WalletConnect/web-examples/tree/main/wallets/react-wallet-auth) ([Demo](https://react-auth-wallet.vercel.app/))
+
+**Chat**
+
+- [React Chat Wallet](https://github.com/WalletConnect/web-examples/tree/main/wallets/react-wallet-chat) ([Demo](https://react-wallet-chat.walletconnect.com/))
+
+</PlatformTabItem>
+
+<PlatformTabItem value="react-native">
+
+The [Web3Wallet SDK](https://medium.com/walletconnect/simplifying-integration-for-wallet-developers-with-the-new-web3wallet-sdk-8706b69e149c) simplifies the integration process for wallet developers by combining our Sign and Auth APIs. Please note that only V2 [WCURIs](https://specs.walletconnect.com/2.0/specs/clients/core/pairing/pairing-uri) will work with this SDK, as V1 is being deprecated by June 28th, 2023.
+
+#### Expo
+
+Experimental: For Expo, we have an unofficial npx starter command. `newWallet` represents the name of your project.
+
+```bash
+npx create-wc-wallet-expo@latest newWallet
+```
+
+This downloads an Expo template with Web3Wallet installed. More information available in this [tutorial](https://medium.com/walletconnect/how-to-build-a-wallet-in-react-native-with-the-web3wallet-sdk-b6f57bf02f9a)
+
+</PlatformTabItem>
+
+</PlatformTabs>
+
+### Dapp Resources
+
+<PlatformTabs groupId="w3w" activeOptions={["web","ios","android"]}>
+
+<PlatformTabItem value="web">
+
+If you need to test your app's integration, you can use one of our following demo wallets and/or dapps.
+
+**Sign**
+
+- [React dApp (with standalone client) - v2](https://github.com/WalletConnect/web-examples/tree/main/dapps/react-dapp-v2) ([Demo](https://react-app.walletconnect.com/))
+- [React dApp (with EthereumProvider + Ethers.js) - v2](https://github.com/WalletConnect/web-examples/tree/main/dapps/react-dapp-v2-with-ethers) ([Demo](https://react-dapp-v2-with-ethers.vercel.app/))
+- [React dApp (with EthereumProvider + web3.js) - v2](https://github.com/WalletConnect/web-examples/tree/main/dapps/react-dapp-v2-with-web3js) ([Demo](https://react-dapp-v2-with-web3js.vercel.app/))
+- [React dApp (with CosmosProvider) - v2](https://github.com/WalletConnect/web-examples/tree/main/dapps/react-dapp-v2-cosmos-provider) ([Demo](https://react-dapp-v2-cosmos-provider.vercel.app/))
+
+**Auth**
+
+- [React dApp (with auth client)](https://github.com/WalletConnect/web-examples/tree/main/dapps/react-dapp-auth) ([Demo](https://react-auth-dapp.vercel.app/))
+
+</PlatformTabItem>
+<PlatformTabItem value="ios">
+
+Sample Wallet and Dapp sample apps can be found under the Example directory in [Swift's V2 repository](https://github.com/WalletConnect/WalletConnectSwiftV2/tree/main/Example)
+
+**Sign**
+
+- [React dApp (with standalone client) - v2](https://github.com/WalletConnect/web-examples/tree/main/dapps/react-dapp-v2) ([Demo](https://react-app.walletconnect.com/))
+- [React dApp (with EthereumProvider + Ethers.js) - v2](https://github.com/WalletConnect/web-examples/tree/main/dapps/react-dapp-v2-with-ethers) ([Demo](https://react-dapp-v2-with-ethers.vercel.app/))
+- [React dApp (with EthereumProvider + web3.js) - v2](https://github.com/WalletConnect/web-examples/tree/main/dapps/react-dapp-v2-with-web3js) ([Demo](https://react-dapp-v2-with-web3js.vercel.app/))
+- [React dApp (with CosmosProvider) - v2](https://github.com/WalletConnect/web-examples/tree/main/dapps/react-dapp-v2-cosmos-provider) ([Demo](https://react-dapp-v2-cosmos-provider.vercel.app/))
+
+**Auth**
+
+- [React dApp (with auth client)](https://github.com/WalletConnect/web-examples/tree/main/dapps/react-dapp-auth) ([Demo](https://react-auth-dapp.vercel.app/))
+
+</PlatformTabItem>
+<PlatformTabItem value="android">
+
+Sample Wallet and Dapp .apk files can be found under the latest release tag in [Kotlin's V2 repository](https://github.com/WalletConnect/WalletConnectKotlinV2/tags)
+
+**Sign**
+
+- [React dApp (with standalone client) - v2](https://github.com/WalletConnect/web-examples/tree/main/dapps/react-dapp-v2) ([Demo](https://react-app.walletconnect.com/))
+- [React dApp (with EthereumProvider + Ethers.js) - v2](https://github.com/WalletConnect/web-examples/tree/main/dapps/react-dapp-v2-with-ethers) ([Demo](https://react-dapp-v2-with-ethers.vercel.app/))
+- [React dApp (with EthereumProvider + web3.js) - v2](https://github.com/WalletConnect/web-examples/tree/main/dapps/react-dapp-v2-with-web3js) ([Demo](https://react-dapp-v2-with-web3js.vercel.app/))
+- [React dApp (with CosmosProvider) - v2](https://github.com/WalletConnect/web-examples/tree/main/dapps/react-dapp-v2-cosmos-provider) ([Demo](https://react-dapp-v2-cosmos-provider.vercel.app/))
+
+**Auth**
+
+- [React dApp (with auth client)](https://github.com/WalletConnect/web-examples/tree/main/dapps/react-dapp-auth) ([Demo](https://react-auth-dapp.vercel.app/))
+
+</PlatformTabItem>
+</PlatformTabs>

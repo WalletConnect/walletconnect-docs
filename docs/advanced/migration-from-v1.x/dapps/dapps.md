@@ -59,48 +59,50 @@ import { EthereumProvider } from '@walletconnect/ethereum-provider'
 const provider = await EthereumProvider.init({
   projectId: 'WALLETCONNECT_PROJECT_ID', // required
   chains: [1], // required
-  showQrCode: true // requires @walletconnect/modal
+  showQrModal: true // requires @walletconnect/modal
 })
 ```
 
-- Install `@walletconnect/modal` if you want to use the QR Code modal. You can find more information about WalletConnectModal [here](https://docs.walletconnect.com/2.0/web3modal/about).
+- Install `@walletconnect/modal` if you want to use the QR Code modal. You can find more information about WalletConnectModal [here](../../walletconnectmodal/about.mdx).
 
 ### Web3Modal v1.0
 
 We recommend that you replace your existing integration with the latest version of Web3Modal by following one of these paths:
 
-- [Web3Modal](https://docs.walletconnect.com/2.0/web3modal/about): Web3modal feature rich modal with [wagmi](https://wagmi.sh/), has walletconnect, extension wallets, connectors, chain switching, account modal and more.
-- [WalletConnectModal](https://docs.walletconnect.com/2.0/web3modal/about): WalletConnectModal is a lightweight modal to add into your existing workflows.
-
-If you still want to use Web3Modal v1.0 but just upgrade the WalletConnect `ethereum-provider` to v2.0, you can update to the latest version available on NPM which you can find [here](https://npmjs.com/package/@walletconnect/ethereum-provider).
+- [Web3Modal](../../../web3modal/about.mdx): Web3modal feature rich modal with [wagmi](https://wagmi.sh/), has WalletConnect, extension wallets, connectors, chain switching, account modal and more.
+- [WalletConnectModal](../../walletconnectmodal/about.mdx): WalletConnectModal is a lightweight modal to add into your existing workflows.
 
 ### Web3Modal v2.0
 
 If you are using our redesigned Web3Modal (often referred to as Web3Modal v2.0), you are ready to go. Please ensure that you are using a minimum version of `2.6.0`. Here is a code example:
 
 ```typescript
-import { w3mConnectors } from '@web3modal/ethereum'
-import { createClient } from 'wagmi'
+import { w3mConnectors, w3mProvider } from '@web3modal/ethereum'
+import { createConfig } from 'wagmi'
 
 // ...
+const { publicClient } = configureChains(chains, [w3mProvider({ projectId })])
 
-const wagmiClient = createClient({
+const config = createConfig({
   autoConnect: true,
-  connectors: w3mConnectors({
-    projectId,
-    chains
-  }),
-  provider
+  connectors: [
+    w3mConnectors({
+      projectId,
+      chains
+    })
+  ],
+  publicClient
 })
 
+const ethereumClient = new EthereumClient(config, chains)
 // ...
 ```
 
-For more documentation, follow the docs for Web3Modal [here](https://docs.walletconnect.com/2.0/web3modal/about).
+For more documentation, follow the docs for Web3Modal [here](../../../web3modal/about.mdx).
 
 ### react-native-dapp
 
-We are currently developing our new SDK [`@walletconnect/modal-react-native`](https://github.com/WalletConnect/modal-react-native), which is now available in release-candidate version.
+We are currently developing our new SDK [`@walletconnect/modal-react-native`](../../walletconnectmodal/about.mdx), which is now available in release-candidate version.
 
 To ensure a seamless transition, we have developed a comprehensive example [here](https://github.com/WalletConnect/react-native-examples/compare/deprecated-example...deprecated-migration) that simplifies the migration process.
 
@@ -108,13 +110,13 @@ Follow this steps along with the migration example:
 
 1. Remove `@walletconnect/react-native-dapp` and all it's implementation
 2. Remove `crypto` polyfill and `rn-nodeify` logic (if present)
-3. Install new packages: `yarn add @walletconnect/modal-react-native react-native-get-random-values react-native-modal react-native-svg @react-native-async-storage/async-storage`
+3. Install new packages: `yarn add @walletconnect/modal-react-native react-native-get-random-values react-native-modal react-native-svg @react-native-async-storage/async-storage @react-native-community/netinfo`
 4. If the project uses react native < 0.70, install `big-integer` and add `BigInt` polyfill
 5. Run `pod install` in `/ios`
 
-You can also find detailed documentation on how to install & utilize the new SDK [here](https://docs.walletconnect.com/2.0/reactnative/walletconnectmodal/about).
+You can also find detailed documentation on how to install & utilize the new SDK [here](../../walletconnectmodal/about.mdx).
 
-The latest SDK introduces a powerful combination of [Universal Provider](https://docs.walletconnect.com/2.0/web/providers/universal) and our [Cloud Explorer API](https://docs.walletconnect.com/2.0/cloud/explorer#cloud-explorer-api). This integration forms the solid foundation for a React Native dapp to effortlessly connect with wallets."
+The latest SDK introduces a powerful combination of [Universal Provider](../../providers/universal.md) and our [Cloud Explorer API](../../../cloud//explorer.md). This integration forms the solid foundation for a React Native dapp to effortlessly connect with wallets."
 
 If you need assistance at any point during the migration process, please feel free to reach out to us via [GitHub Discussions](https://github.com/orgs/WalletConnect/discussions).
 
@@ -419,33 +421,35 @@ npm i @privy-io/react-auth@latest
 
 If you want to configure your own WalletConnect Cloud Project instead of using the default one provided by Privy, proceed to the following steps. This is optional.
 
-#### 1. [Optional] Get a WalletConnect Cloud Project ID
+#### 1. Get a WalletConnect Cloud Project ID
+
 Go to [**WalletConnect Cloud**](https://cloud.walletconnect.com/) and create a new account. Once your account is created, create a new project and collect the **Project ID**.
 
-#### 2. [Optional] Configure your Project ID in the PrivyProvider
-In the [`config`](https://docs.privy.io/reference/react-auth/interfaces/PrivyProviderProps#config) property of your [`PrivyProvider`](https://docs.privy.io/reference/react-auth/modules#privyprovider), add a `walletConnectCloudProjectId` with your **Project ID** from step 2:
+#### 2. Configure your Project ID in the PrivyProvider
 
+
+In the [`config`](https://docs.privy.io/reference/react-auth/interfaces/PrivyProviderProps#config) property of your [`PrivyProvider`](https://docs.privy.io/reference/react-auth/modules#privyprovider), add a `walletConnectCloudProjectId` with your project ID from step 1.
 
 ```tsx title='Example configuration of Privy with WalletConnect v2.0 in NextJS'
-import type {AppProps} from 'next/app';
-import Head from 'next/head';
-import {PrivyProvider} from '@privy-io/react-auth';
+import type { AppProps } from 'next/app'
+import Head from 'next/head'
+import { PrivyProvider } from '@privy-io/react-auth'
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <PrivyProvider
       appId={process.env.NEXT_PUBLIC_PRIVY_APP_ID || ''}
       config={{
-        walletConnectCloudProjectId: 'YOUR_WALLETCONNECT_CLOUD_PROJECT_ID',
+        walletConnectCloudProjectId: 'YOUR_WALLETCONNECT_CLOUD_PROJECT_ID'
       }}
     >
-        <Component {...pageProps} />
+      <Component {...pageProps} />
     </PrivyProvider>
-  );
+  )
 }
-
 ```
 
 #### For more information:
+
 - See Privy's full [WalletConnect v2.0 migration guide](https://docs.privy.io/guide/guides/walletconnect-v2).
 - Learn more about Privy at our [website](https://www.privy.io/).

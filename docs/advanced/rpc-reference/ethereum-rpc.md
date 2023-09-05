@@ -218,7 +218,7 @@ Creates new message call transaction or a contract creation, if the data field c
     to: "0xBDE1EAE59cE082505bB73fedBa56252b1b9C60Ce",
     data: "0x",
     gasPrice: "0x029104e28c",
-    gasLimit: "0x5208",
+    gas: "0x5208",
     value: "0x00",
   },
 ];

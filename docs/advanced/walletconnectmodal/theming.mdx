@@ -1,0 +1,106 @@
+import PlatformTabs from '../../components/PlatformTabs'
+import PlatformTabItem from '../../components/PlatformTabItem'
+
+import WcModalThemeVariablesTable from '../../web3modal/_partials/wcModalThemeVariablesTable.mdx'
+import ThemeModePartial from '../../web3modal/_partials/themeMode.mdx'
+import ThemeVariablesPartial from '../../web3modal/_partials/themeVariables.mdx'
+
+# Theming
+
+:::note
+The following theme configuration is only available for **Web** and **React Native**.
+:::
+
+<PlatformTabs
+	groupId="wcm"
+	activeOptions={["web", "react-native", "android"]}
+>
+<PlatformTabItem value="web">
+
+#### themeMode
+
+<ThemeModePartial />
+
+### Example
+
+```tsx
+const modal = new WalletConnectModal({
+  themeMode: 'dark'
+})
+```
+
+## themeVariables
+
+<ThemeVariablesPartial />
+
+### Example
+
+```tsx
+const modal = new WalletConnectModal({
+  themeVariables: {
+    '--wcm-font-family': 'Roboto, sans-serif',
+    '--wcm-accent-color': '#F5841F'
+  }
+})
+```
+
+### List of theme variables
+
+<WcModalThemeVariablesTable />
+
+</PlatformTabItem>
+<PlatformTabItem value="react-native">
+
+## themeMode (optional)
+
+Puts WalletConnectModal into dark or light mode. Defaults to user's system preference.
+
+```ts
+themeMode: 'dark' | 'light'
+```
+
+## accentColor (optional)
+
+Allows to override Modal's accent color. Defaults to `undefined`.
+
+```ts
+<WalletConnectModal
+  ...
+  accentColor="#9090FF"
+/>
+```
+
+</PlatformTabItem>
+
+<PlatformTabItem value="android">
+
+#### WalletConnectModal Theme
+
+Allows to override Modal's accent color.
+
+#### Compose
+
+Wrap your composables in `WalletConnectModalTheme`.
+
+```kotlin
+WalletConnectModalTheme(
+    accentColor = Color(0xFF3496ff),
+    onAccentColor = Color.White
+) {
+    ModalBottomSheetLayout() {  }
+}
+```
+
+#### Android View
+
+You can override the default Modal's accent color by creating a `WalletConnectModalTheme`.
+
+```xml
+<style name="WalletConnectModalTheme">
+    <item name="accentColor">#FF47A1FF</item>
+    <item name="onAccentColor">#FFFFFFFF</item>
+</style>
+```
+</PlatformTabItem>
+
+</PlatformTabs>

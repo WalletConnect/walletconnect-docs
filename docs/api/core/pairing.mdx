@@ -1,0 +1,377 @@
+import Container from '../../components/Container'
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
+import PlatformTabs from '../../components/PlatformTabs'
+import PlatformTabItem from '../../components/PlatformTabItem'
+import CloudBanner from '../../components/CloudBanner'
+
+# Pairing API
+
+The Pairing API is a lightweight API for establishing an encrypted, protocol-agnostic communication layer between peers. 
+Its purpose is to provide a secure channel for proposing protocols or sending requests between dapp and wallet.
+<CloudBanner />
+
+## Installation
+
+<PlatformTabs
+	groupId="api"
+	activeOptions={["web","ios","android","react-native", "unity"]}
+>
+<PlatformTabItem value="web">
+
+WalletConnect currently offers Sign and Auth SDKs. 
+To allow a reusable communication channel between peers, 
+the Pairing API exposes a standard interface and allows for sending and receiving multi-protocol requests over a single pairing.
+
+Each SDK uses the same implementation of `core/pairing` (via `@walletconnect/core`) to manage pairings. 
+To run multiple SDKs side-by-side (e.g. Sign and Auth), please refer to the [Sharing a Core instance] guide.
+
+</PlatformTabItem>
+<PlatformTabItem value="ios">
+
+#### Add SDK for your project.
+
+You can add a WalletConnect Core SDKs to your project with Swift Package Manager. In order to do that:
+
+1. Open XCode
+2. Go to File -> Add Packages
+3. Paste the repo GitHub URL: https://github.com/WalletConnect/WalletConnectSwiftV2
+4. Tap Add Package
+5. Select WalletConnectPairing check mark
+
+</PlatformTabItem>
+<PlatformTabItem value="android">
+
+Kotlin implementation of Android CoreClient for all WalletConnect SDKs. This SDK is developed in Kotlin and usable in both Java and Kotlin files.
+
+![Maven Central](https://img.shields.io/maven-central/v/com.walletconnect/android-core)
+
+#### Requirements
+
+* Android min SDK 23
+* Java 11
+
+#### Installation
+
+root/build.gradle.kts:
+
+```gradle
+allprojects {
+ repositories {
+    mavenCentral()
+    maven { url "https://jitpack.io" }
+ }
+}
+```
+
+app/build.gradle
+
+```gradle
+implementation("com.walletconnect:android-core:release_version")
+```
+
+#### Project set up
+
+To use initialize RelayClient properly you will need a projectId. Go to https://cloud.walletconnect.com/app, register your project and get projectId.
+
+
+#### CoreClient initialization
+
+Before using any of the WalletConnect Kotlin SDKs, it is necessary to initialize the CoreClient. The initialization of CoreClient must always happen in the Android Application class. Provide the projectId generated in the WalletConnect Cloud, the WebSocket URL, choose the connection type, and pass the application class. You can also pass your own Relay instance using the `RelayConnectionInterface`.
+
+```kotlin
+val projectId = "" //Get Project ID at https://cloud.walletconnect.com/
+val relayUrl = "relay.walletconnect.com"
+val serverUrl = "wss://$relayUrl?projectId=${projectId}"
+val connectionType = ConnectionType.AUTOMATIC or ConnectionType.MANUAL
+val application = //Android Application level class
+[Optional] val optionalRelay: RelayConnectionInterface? = /*implement interface*/
+
+CoreClient.initialize(relayServerUrl = serverUrl, connectionType = connectionType, application = application, relay = optionalRelay)
+```
+
+#### Using your own Relay instance
+The CoreClient offers the ability to use a custom Relay client. Just creating an instance of `RelayConnectionInterface` and passing it to `CoreClient.initialize`. 
+
+```kotlin
+...
+val optionalRelay: RelayConnectionInterface = /*implement interface*/
+
+CoreClient.initialize(relayServerUrl = serverUrl, connectionType = connectionType, application = application, relay = optionalRelay)
+```
+
+</PlatformTabItem>
+<PlatformTabItem value="react-native">
+
+WalletConnect currently offers Sign and Auth SDKs. 
+To allow a reusable communication channel between peers, 
+the Pairing API exposes a standard interface and allows for sending and receiving multi-protocol requests over a single pairing.
+
+Each SDK uses the same implementation of `core/pairing` (via `@walletconnect/core`) to manage pairings. 
+To run multiple SDKs side-by-side (e.g. Sign and Auth), please refer to the [Sharing a Core instance] guide.
+
+</PlatformTabItem>
+<PlatformTabItem value="unity">
+
+Install the `WalletConnect.Core` nuget package, which implements the Pairing API
+
+```shell
+dotnet add package WalletConnect.Core
+```
+
+Once the `WalletConnect.Core` library is created, create a Metadata object. It will describe your application and define its appearance in a web browser. Then configure the Pair instance with a metadata object you have instantiated.
+
+```csharp
+var metadata = new Metadata()
+{
+    Name = "my-app",
+    Description = "My app description",
+    Icons = new[] { "https://walletconnect.com/meta/favicon.ico" },
+    Url = "https://walletconnect.com",
+}
+
+var options = new CoreOptions() 
+{ 
+    ProjectId = "...", 
+    Name = "my-app", 
+}
+
+var core = new WalletConnectCore(options);
+core.Pairing.Configure(metadata);
+```
+
+</PlatformTabItem>
+</PlatformTabs>
+
+## Usage
+<PlatformTabs
+	groupId="api"
+	activeOptions={["web","ios","android","react-native", "unity"]}
+>
+<PlatformTabItem value="web">
+
+The methods listed below are limited to only the public methods of the Pairing API that we recommend you interact with directly.
+For an exhaustive list, please refer to the spec and/or implementation linked under [Useful Links](https://specs.walletconnect.com/2.0/specs/clients/core/pairing/pairing-methods) above.
+
+The keyword `sdkClient` is used here as a placeholder for any WalletConnect SDK that implements the Pairing API (e.g. `signClient`, `authClient`, etc).
+
+```ts
+ // Creates a new (inactive) pairing. Returns the URI for a peer to consume via `pair`, as well as the pairing topic.
+const {topic, uri} = await sdkClient.core.pairing.create()
+
+// Pair with a peer's proposed pairing, extracted from the provided `uri` parameter.
+await sdkClient.core.pairing.pair({ uri: "wc:1b3eda3f4..." })
+
+// Activate a previously created pairing (e.g. after the peer has paired), by providing the pairing topic.
+await sdkClient.core.pairing.activate({ topic: "1b3eda3f4..." })
+
+// Updates the expiry of an existing pairing, by providing the pairing topic and an `expiry` in seconds (e.g. `60` for one minute from now)
+await sdkClient.core.pairing.updateExpiry({ topic: "1b3eda3f4...", expiry: 60 })
+
+// Updates a pairing's metadata, by providing the pairing topic and the desired metadata.
+await sdkClient.core.pairing.updateMetadata({ topic: "1b3eda3f4...", metadata: { name: "MyDapp", ... } })
+
+// Returns an array of all existing pairings.
+const pairings = sdkClient.core.pairing.getPairings()
+
+// Pings a pairing's peer, by providing the pairing topic.
+await sdkClient.core.pairing.ping({ topic: "1b3eda3f4..." })
+
+// Disconnects/Removes a pairing, by providing the pairing topic.
+await sdkClient.core.pairing.disconnect({ topic: "1b3eda3f4..." })
+```
+
+#### Listeners for pairing-related events
+
+The Pairing API currently emits the following events:
+
+- `pairing_ping`
+- `pairing_delete`
+- `pairing_expire`
+
+Any of these events can be listened for via the standard Node [`EventEmitter` interface](https://nodejs.org/api/events.html#class-eventemitter):
+
+```ts
+sdkClient.core.pairing.events.on("pairing_delete", ({ id, topic }) => {
+  // clean up after the pairing for `topic` was deleted.
+});
+```
+
+</PlatformTabItem>
+<PlatformTabItem value="ios">
+
+Create an AppMetadata object. It will describe your application and define its appearance in a web browser.
+Then configure the Pair instance with a metadata object you have instantiated.
+
+```swift
+let metadata = AppMetadata(name: <String>,
+                           description: <String>,
+                           url: <String>,
+                           icons: <[String]>)
+
+Pair.configure(metadata: metadata)
+```
+
+#### Pairing Wallet Usage
+
+In pair wallet with dapp, the user needs to scan a QR code or open a deep link generated by dapp, then instantiate `WalletConnectURI` from the scanned QR code string and call the `pair()` function as follows.
+
+```swift
+let uri WalletConnectURI(string: <String>)
+try! await Pair.instance.pair(uri: uri)
+```
+Now wallet and a dapp have a secure communication channel that will be used by top level APIs.
+
+#### Pairing Dapp Usage
+
+In order to pair dapp and a wallet, dapp needs to generate and share a uri with wallet. 
+To generate a uri call `create()` function on Pair instance as follows.
+
+```swift
+let uri = try await Pair.instance.create()
+```
+Now you can share the uri with the wallet.
+</PlatformTabItem>
+<PlatformTabItem value="android">
+
+#### **Create Pairing**
+```kotlin
+val pairing: Pairing? = CoreClient.Pairing.create() { error -> }
+```
+When first establishing a pairing with a Peer, call `CoreClient.Pairing.create`. This will try and generate a new pairing with a URI parameter that can be used to establish a connection with the other Peer as well as other meta data related to the pairing.
+
+#
+#### **Pair Clients**
+
+```kotlin
+val pairingParams = Core.Params.Pair(pairingUri)
+CoreClient.Pairing.pair(pairingParams) { error -> }
+```
+
+To pair the wallet with the Dapp, call the CoreClient.Pairing's pair function which needs a `Core.Params.Pair` parameter. `Core.Params.Pair` is where the WC Uri will be passed.
+
+#
+#### **Get List of Active Pairings**
+
+```kotlin
+val listOfActivePairings: List<Core.Model.Pairing> = CoreClient.Pairing.getPairings()
+```
+
+To get a list of the most current active pairings, call `CoreClient.Pairing.getPairings()` which will return a list of type `Core.Model.Pairing`.
+
+#
+#### **Disconnect a Pairing**
+
+```kotlin
+CoreClient.Pairing.disconnect(topic = /*Pairing topic*/") { error -> }
+```
+
+To disconnect from a pairing, just pass the topic of the pairing to disconnect from (use `getPairings()` to get a list of all active pairings and their topics). 
+
+</PlatformTabItem>
+<PlatformTabItem value="react-native">
+
+The methods listed below are limited to only the public methods of the Pairing API that we recommend you interact with directly.
+For an exhaustive list, please refer to the spec and/or implementation linked under [Useful Links](https://specs.walletconnect.com/2.0/specs/clients/core/pairing/pairing-methods) above.
+
+The keyword `sdkClient` is used here as a placeholder for any WalletConnect SDK that implements the Pairing API (e.g. `signClient`, `authClient`, etc).
+
+```ts
+ // Creates a new (inactive) pairing. Returns the URI for a peer to consume via `pair`, as well as the pairing topic.
+const {topic, uri} = await sdkClient.core.pairing.create()
+
+// Pair with a peer's proposed pairing, extracted from the provided `uri` parameter.
+await sdkClient.core.pairing.pair({ uri: "wc:1b3eda3f4..." })
+
+// Activate a previously created pairing (e.g. after the peer has paired), by providing the pairing topic.
+await sdkClient.core.pairing.activate({ topic: "1b3eda3f4..." })
+
+// Updates the expiry of an existing pairing, by providing the pairing topic and an `expiry` in seconds (e.g. `60` for one minute from now)
+await sdkClient.core.pairing.updateExpiry({ topic: "1b3eda3f4...", expiry: 60 })
+
+// Updates a pairing's metadata, by providing the pairing topic and the desired metadata.
+await sdkClient.core.pairing.updateMetadata({ topic: "1b3eda3f4...", metadata: { name: "MyDapp", ... } })
+
+// Returns an array of all existing pairings.
+const pairings = sdkClient.core.pairing.getPairings()
+
+// Pings a pairing's peer, by providing the pairing topic.
+await sdkClient.core.pairing.ping({ topic: "1b3eda3f4..." })
+
+// Disconnects/Removes a pairing, by providing the pairing topic.
+await sdkClient.core.pairing.disconnect({ topic: "1b3eda3f4..." })
+```
+
+#### Listeners for pairing-related events
+
+The Pairing API currently emits the following events:
+
+- `pairing_ping`
+- `pairing_delete`
+- `pairing_expire`
+
+Any of these events can be listened for via the standard Node [`EventEmitter` interface](https://nodejs.org/api/events.html#class-eventemitter):
+
+```ts
+sdkClient.core.pairing.events.on("pairing_delete", ({ id, topic }) => {
+  // clean up after the pairing for `topic` was deleted.
+});
+```
+</PlatformTabItem>
+<PlatformTabItem value="unity">
+
+#### Pairing Wallet Usage
+
+When paring a wallet with a dapp, the user needs to scan a QR code or open a deep link generated by the dapp. Grab the string from the scanned QR code string or from the deep link and call the `Pair()` function as follows.
+
+```csharp
+var uri = "...";
+PairingStruct pairingData = await core.Pairing.Pair(uri);
+```
+
+Now the wallet and a dapp have a secure communication channel that will be used by top level APIs. 
+
+#### Pairing Dapp Usage
+
+In order to pair dapp and a wallet, dapp needs to generate and share a uri with wallet. To generate a uri call `create()` function on Pair instance as follows.
+
+```csharp
+
+var pairData = await core.Pairing.Create();
+string topic = pairData.Topic;
+string uri = pairData.Uri;
+```
+
+Now you can share the uri with the wallet either through a QR Code or by using a deep link. 
+
+#### Message Sending / Handling
+
+Once a wallet and dapp has been paired, they can send messages securely to the pairing topic. 
+
+Requests can be received from the dapp by handling the message callback in the `MessageHandler` module.
+
+```csharp
+core.MessageHandler.MessageEventHandler<MyRequest, MyResponse>()
+    .FilterRequests(r => r.Topic == pairingData.Topic)
+    .OnRequest +=
+		async delegate(RequestEventArgs<MyRequest, MyResponse> eventArgs)
+		{
+		    Console.WriteLine(eventArgs.Request);
+		    eventArgs.Response = new MyResponse()
+		    {
+		        // ...
+		    };
+		};
+```
+
+A response can be sent for any request by setting the `Response` field in the `eventArgs` parameter.
+
+Receiving responses is handled the same way, but instead of the `OnRequest` event you would use the `OnResponse` event.
+
+Request, Responses and Errors can be sent using the `SendRequest` , `SendResult` and `SendError` functions in the `MessageHandler` module.
+
+```csharp
+long id = await core.MessageHandler.SendRequest<MyRequest, MyResponse>(pairingTopic, data);
+```
+</PlatformTabItem>
+</PlatformTabs>
