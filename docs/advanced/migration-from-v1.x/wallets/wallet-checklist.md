@@ -123,7 +123,7 @@ Sign Notifications ensure users receive a push notification for any pending dapp
 
 ### iOS 🍏
 
-📕 **Swift docs** → [https://docs.walletconnect.com/2.0/api/push/wallet-usage?platform=ios](../../../api/push/wallet-usage?platform=ios)
+📕 **Swift docs** → [https://docs.walletconnect.com/2.0/api/notify/usage?platform=ios](../../../api/notify/usage?platform=ios)
 
 📱**Example app** → [Link](https://github.com/WalletConnect/WalletConnectSwiftV2/blob/cd55d281ae7cb3c5d14524d0147b9d557cdd1af5/Example/WalletApp/PresentationLayer/Wallet/Main/MainPresenter.swift#L34)
 

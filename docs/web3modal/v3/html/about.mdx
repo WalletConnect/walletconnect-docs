@@ -1,0 +1,142 @@
+import CloudBanner from '../../../components/CloudBanner'
+
+# HTML
+
+:::caution
+This documentation is for Web3Modal v3 which is currently in Alpha. You can find Web3Modal v2 documentation [here](../../html/wagmi/installation.mdx)
+:::
+
+With Web3Modal HTML we work with the [@wagmi/core](https://wagmi.sh/core/getting-started) library which contains everything you need to start working with Ethereum. You can sign messages, interact with smart contracts, and much more.
+
+<CloudBanner />
+
+## Installation
+
+```bash npm2yarn
+npm install @web3modal/wagmi@3.0.0-alpha.5 @wagmi/core viem
+```
+
+## Implementation
+
+You can start Web3Modal configuration using either **default** or **advanced** mode.
+
+Default mode will implement WalletConnect, Browser Wallets (injected) and Coinbase options in addition to Wagmi's public clients and [WalletConnect's provider](../../../cloud/blockchain-api.md).
+
+<Tabs>
+<TabItem value="default" label="Default">
+
+Start by importing `Web3Modal`, `defaultWagmiConfig` and wagmi packages, then create `wagmiConfig` using `defaultWagmiConfig` function as shown below.
+Finally, pass `wagmiConfig` to the `Web3Modal` class.
+
+```ts
+import { Web3Modal, defaultWagmiConfig } from '@web3modal/wagmi'
+
+import { disconnect, getAccount, watchAccount } from '@wagmi/core'
+import { mainnet, arbitrum } from '@wagmi/core/chains'
+
+// 1. Define constants
+const projectId = 'YOUR_PROJECT_ID'
+
+// 2. Create wagmiConfig
+const chains = [mainnet, arbitrum]
+const wagmiConfig = defaultWagmiConfig({ chains, projectId, appName: 'Web3Modal' })
+
+// 3. Create Web3Modal
+const modal = new Web3Modal({ wagmiConfig, projectId, chains })
+```
+
+</TabItem>
+<TabItem value="custom" label="Advanced">
+
+Start by importing `Web3Modal`, `walletConnectProvider` and wagmi packages, then create `wagmiConfig` using your own settings.
+Finally, pass wagmi config to the `Web3Modal` class.
+
+```ts
+import { Web3Modal, walletConnectProvider } from '@web3modal/wagmi'
+
+import { configureChains, createConfig, disconnect, getAccount } from '@wagmi/core'
+import { mainnet } from '@wagmi/core/chains'
+import { InjectedConnector } from '@wagmi/core'
+import { CoinbaseWalletConnector } from '@wagmi/core/connectors/coinbaseWallet'
+import { WalletConnectConnector } from '@wagmi/core/connectors/walletConnect'
+import { watchAccount } from '@wagmi/core'
+
+// 1. Define constants
+const projectId = 'YOUR_PROJECT_ID'
+
+// 2. Configure wagmi client
+const { chains, publicClient } = configureChains([mainnet], [walletConnectProvider({ projectId })])
+const wagmiConfig = createConfig({
+  autoConnect: true,
+  connectors: [
+    new WalletConnectConnector({ chains, options: { projectId, showQrModal: false } }),
+    new InjectedConnector({ chains, options: { shimDisconnect: true } }),
+    new CoinbaseWalletConnector({ chains, options: { appName: 'Web3Modal' } })
+  ],
+  publicClient
+})
+
+// 3. Create Web3Modal
+const modal = new Web3Modal({ wagmiConfig, projectId, chains })
+```
+
+</TabItem>
+</Tabs>
+
+## Trigger the modal
+
+You can trigger the modal by calling the `open()` method on a modal instance of the `Web3Modal` class.
+
+Let's first add two html elements to display information to the user:
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>HTML Example</title>
+  </head>
+  <body>
+    <button id="btn">Connect</button>
+    <span id="user"></span>
+    <script type="module" src="main.js"></script>
+  </body>
+</html>
+```
+
+Following with our main.js file, we can now add the needed logic to open the modal and display information in the DOM:
+
+```ts
+//main.js
+
+function connect() {
+  if (getAccount().isConnected) {
+    disconnect()
+  } else {
+    modal.open()
+  }
+}
+
+const btnEl = document.getElementById('btn')
+const userEl = document.getElementById('user')
+
+btnEl.addEventListener('click', connect)
+
+// listening for account changes
+watchAccount(account => {
+  userEl.innerText = account.address ?? ''
+  if (account.isConnected) {
+    btnEl.innerText = 'Disconnect'
+  } else {
+    btnEl.innerText = 'Connect'
+  }
+})
+```
+
+## Use wagmi Actions
+
+[wagmi](https://wagmi.sh) provides everything you'll need to start working with accounts, contracts, chains and much more.
+
+```tsx
+import { getAccount, writeContract, disconnect, watchAccount } from '@wagmi/core'
+```

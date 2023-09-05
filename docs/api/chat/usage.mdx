@@ -3,7 +3,6 @@ import Tabs from '@theme/Tabs'
 import TabItem from '@theme/TabItem'
 import PlatformTabs from '../../components/PlatformTabs'
 import PlatformTabItem from '../../components/PlatformTabItem'
-import CloudBanner from '../../components/CloudBanner'
 
 # Usage
 
@@ -22,56 +21,56 @@ For an example implementation, please refer to our [react-wallet-chat example](h
 #### Initialize your WalletConnect ChatClient, using your Project ID
 
 ```javascript
-import { Core } from "@walletconnect/core";
-import { SyncClient, SyncStore } from "@walletconnect/sync-client";
-import { ChatClient } from "@walletconnect/chat-client";
+import { Core } from '@walletconnect/core'
+import { SyncClient, SyncStore } from '@walletconnect/sync-client'
+import { ChatClient } from '@walletconnect/chat-client'
 
 // Initialize core separately to allow sharing it between sync and chat
 const core = new Core({
-  projectId: "<YOUR PROJECT ID>",
+  projectId: '<YOUR PROJECT ID>'
 })
 
 // SyncClient enables syncing data across devices
 const syncClient = await SyncClient.init({
-  projectId: "<YOUR PROJECT ID>",
-  core,
+  projectId: '<YOUR PROJECT ID>',
+  core
 })
 
 const chatClient = await ChatClient.init({
   core,
-  projectId: "<YOUR PROJECT ID>",
-  keyserverUrl: "<YOUR KEYSERVER URL: eg: https://keys.walletconnect.com",
+  projectId: '<YOUR PROJECT ID>',
+  keyserverUrl: '<YOUR KEYSERVER URL: eg: https://keys.walletconnect.com',
   syncClient,
-  SyncStoreController: SyncStore,
-});
+  SyncStoreController: SyncStore
+})
 ```
 
 #### Set up listeners for chat-related events
 
 ```javascript
-chatClient.on("chat_invite", async (event) => {
+chatClient.on('chat_invite', async event => {
   // React to an incoming invite to chat.
-});
+})
 
-chatClient.on("chat_invite_accepted", async (event) => {
+chatClient.on('chat_invite_accepted', async event => {
   // React to your peer joining a given chat.
-});
+})
 
-chatClient.on("chat_invite_rejected", async (event) => {
+chatClient.on('chat_invite_rejected', async event => {
   // React to your peer declining your invite
-});
+})
 
-chatClient.on("chat_message", (event) => {
+chatClient.on('chat_message', event => {
   // React to an incoming messages for a given chat.
-});
+})
 
-chatClient.on("chat_ping", (event) => {
+chatClient.on('chat_ping', event => {
   // React to an incoming ping event from a peer on a given chat topic.
-});
+})
 
-chatClient.on("chat_left", (event) => {
+chatClient.on('chat_left', event => {
   // React to a peer leaving a given chat.
-});
+})
 ```
 
 #### Register your blockchain address with the key server
@@ -83,7 +82,7 @@ The key server expects a full CAIP-2 account for the address (as shown below).
 `onSign` will be used to sign the identity key using a wallet, one could supply `wagmi`'s [signMessage](https://wagmi.sh/core/actions/signMessage) function here for example.
 
 ```javascript
-await chatClient.register({ account: `eip155:1:0xa6de541...`, onSign: async () => {} });
+await chatClient.register({ account: `eip155:1:0xa6de541...`, onSign: async () => {} })
 ```
 
 #### Inviting another peer to chat
@@ -105,11 +104,11 @@ await chatClient.invite({
 When your client receives an invite from a peer, you're able to accept/reject it by calling `.accept()/.reject()` with the invite's `id`.
 
 ```javascript
-await chatClient.accept({ id: invite.id });
+await chatClient.accept({ id: invite.id })
 
 // or
 
-await chatClient.reject({ id: invite.id });
+await chatClient.reject({ id: invite.id })
 ```
 
 #### Sending a chat message
@@ -120,10 +119,10 @@ you can call `.message()` with the following parameters:
 ```javascript
 await chatClient.message({
   topic: chatThread.topic,
-  message: "Hey, good to hear from you!",
+  message: 'Hey, good to hear from you!',
   authorAccount: `eip155:1:0xa6de541...`, // your CAIP-2 formatted account that you registered previously.
-  timestamp: Date.now(),
-});
+  timestamp: Date.now()
+})
 ```
 
 #### Leaving a chat thread
@@ -132,13 +131,14 @@ To leave an established chat thread (deleting the thread and its associated mess
 the chat thread's topic:
 
 ```javascript
-await chatClient.leave({ topic: chatThread.topic });
+await chatClient.leave({ topic: chatThread.topic })
 ```
 
 </PlatformTabItem>
 <PlatformTabItem value="ios">
 
-Make sure what you properly configure Relay Client first 
+Make sure what you properly configure Relay Client first
+
 - [Relay](../core/relay.mdx)
 
 #### Configure Chat Client
@@ -276,7 +276,7 @@ public struct ReceivedInvite: Codable, Equatable {
     public let inviteeAccount: Account
     public let inviterPublicKey: String
     public let inviteePublicKey: String
-    public let timestamp: UInt64    
+    public let timestamp: UInt64
     public var status: Status
 }
 ```
@@ -327,12 +327,12 @@ public struct Thread: Codable, Equatable {
 
 #### Methods
 
-
 #### Register Identity at a Keyserver
 
 In order to use Chat SDK account must register identity in [Keyserver](https://docs.walletconnect.com/2.0/specs/servers/keys/). To verify ownership over blockchain account when registering identities in [Keyserver](https://docs.walletconnect.com/2.0/specs/servers/keys/) user's must sign message provided on `onSign(message: String)` callback. Currenlty only [`EIP191`](https://eips.ethereum.org/EIPS/eip-191) signatures are supported in [Keyserver](https://docs.walletconnect.com/2.0/specs/servers/keys/)
 
 ##### `Chat.instance.register`
+
 ```swift
 func register(account: Account, privateKey: String) async throws {
     _ = try await Chat.instance.register(account: account) { [unowned self] message in
@@ -351,9 +351,11 @@ func onSign(message: String, privateKey: String) -> CacaoSignature {
 To not be discoverable to everyone, set `private` param to `true`. If this flag is `true` then only identity is restored in [Keyserver](https://docs.walletconnect.com/2.0/specs/servers/keys/). Parameter `private` is set to `false` by default.
 
 #### Resolve invitee public invite key with blockchain address
+
 In order to invite someone for a chat conversation, inviter must know invitee public invite key. To resolve a invitee's public invite key that is required to invite into a chat thread, call `Chat.instance.resolve`
 
 ##### `Chat.instance.resolve`
+
 ```swift
 func resolve(account: Account) async throws -> String {
     return try await Chat.instance.resolve(account: account)
@@ -365,6 +367,7 @@ func resolve(account: Account) async throws -> String {
 After acquiring the invitee's public key, you can send an invitation. Invitations can include short messages to encourage the invitee to accept. To send an invitation, use the `Chat.instance.invite` method. Sent invitations are stored and can be retrieved using the `Chat.instance.getSentInvites`.
 
 ##### `Chat.instance.invite`
+
 ```swift
 func invite(inviterAccount: Account, inviteeAccount: Account, message: String) async throws {
     let inviteePublicKey = try await Chat.instance.resolve(account: inviteeAccount)
@@ -380,6 +383,7 @@ The invitee receives invitations via the `newReceivedInvitePublisher`, which pro
 The invitee has the option to accept or reject the invitation. To accept an invitation, call the `Chat.instance.accept` method. To reject an invitation, call the `Chat.instance.reject` method.
 
 ##### `Chat.instance.accept`
+
 ```swift
 func accept(invite: ReceivedInvite) async throws {
     try await Chat.instance.accept(inviteId: invite.id)
@@ -387,17 +391,18 @@ func accept(invite: ReceivedInvite) async throws {
 ```
 
 ##### `Chat.instance.reject`
+
 ```swift
 func reject(invite: ReceivedInvite) async throws {
     try await Chat.instance.reject(inviteId: invite.id)
 }
 ```
 
-Inviter receives invite response on either `acceptPublisher` when invitee accepted the invite or on `rejectPublisher` when invitee rejected the invite. 
+Inviter receives invite response on either `acceptPublisher` when invitee accepted the invite or on `rejectPublisher` when invitee rejected the invite.
 
 #### Sending a Chat Message
 
-After successful invite inviter and invitee can E2EE direct messages with attached media. To send message call `Chat.instance.message` method. 
+After successful invite inviter and invitee can E2EE direct messages with attached media. To send message call `Chat.instance.message` method.
 
 ##### `Chat.instance.message`
 
@@ -481,6 +486,7 @@ func getReceivedInvites() -> [ReceivedInvite] {
 Clients can retrieve all sent invitations for a given account by calling `Chat.instance.getSentInvites`. `SentInvite` contains a status of type `SentInvite.Status` to describe whether the invitation is still pending, was rejected, or has been approved.
 
 ##### `Chat.instance.getSentInvites`
+
 ```swift
 func getSentInvites() -> [SentInvite] {
     return Chat.instance.getSentInvites()
@@ -523,7 +529,6 @@ We recommend looking at example implementations of Chat Sample at our [Kotlin Gi
 #### ChatClient
 
 `ChatClient` is an object that interacts with the Chat SDK and implements the [ChatInterface](#chatinterface). It contains asynchronous events that notify you of occurrences, such as receiving a message, and methods that you can use with the Chat SDK, such as sending messages.
-
 
 #### ChatInterface
 
@@ -628,9 +633,10 @@ The ChatClient needs a [`ChatClient.ChatDelegate`](#chatclientchatdelegate) pass
 
 #### Chat.Model.Events
 
-The contents of [`ChatClient.ChatDelegate`](#chatclientchatdelegate) callback functions are of type [`Chat.Model.Events`](#event-structures) for chat specific events and [`Chat.Model.ConnectionState`](#event-structures) or [`Chat.Model.Error`](#event-structures) for Relay Server specific events. 
+The contents of [`ChatClient.ChatDelegate`](#chatclientchatdelegate) callback functions are of type [`Chat.Model.Events`](#event-structures) for chat specific events and [`Chat.Model.ConnectionState`](#event-structures) or [`Chat.Model.Error`](#event-structures) for Relay Server specific events.
 
 #### Event Structures
+
 ```kotlin
 // error of onError(error)
 data class Error(val throwable: Throwable) : Model()
@@ -641,16 +647,16 @@ data class ConnectionState(val isAvailable: Boolean) : Model()
 sealed class Events : Model() {
     //onInvite corresponds to ChatDelegate.onInvite() parameter
     data class OnInvite(val invite: Invite.Received) : Events()
-    
+
     //onInviteAccepted corresponds to ChatDelegate.onInviteAccepted() parameter
     data class OnInviteAccepted(val topic: String, val invite: Chat.Model.Invite.Sent) : Events()
-    
+
     //onInviteRejected corresponds to ChatDelegate.onInviteRejected() parameter
     data class OnInviteRejected(val invite: Chat.Model.Invite.Sent) : Events()
-    
+
     //onMessage corresponds to ChatDelegate.onMessage() parameter
     data class OnMessage(val message: Message) : Events()
-    
+
     //onLeft corresponds to ChatDelegate.onLeft() parameter
     data class OnLeft(val topic: String) : Events()
 }
@@ -707,13 +713,14 @@ data class Media(
 
 #### Methods
 
-
 #### Register Identity at a Keyserver
 
 In order to use Chat SDK account must register identity in [Keyserver](https://docs.walletconnect.com/2.0/specs/servers/keys/). To verify ownership over blockchain account when registering identities in [Keyserver](https://docs.walletconnect.com/2.0/specs/servers/keys/) user's must sign message provided on `onSign(message: String)` callback. Currenlty only [`EIP191`](https://eips.ethereum.org/EIPS/eip-191) signatures are supported in [Keyserver](https://docs.walletconnect.com/2.0/specs/servers/keys/)
+
 <!-- TODO: Chat milestone 2 remove EIP191 signatures only comment -->
 
 ##### ChatClient.register
+
 ```kotlin
 val params = Chat.Params.Register(account = Chat.Type.AccountId(/*[CAIP-10](https://github.com/ChainAgnostic/CAIPs/blob/master/CAIPs/caip-10.md) compatible accountId*/))
 ChatClient.register(params, object : Chat.Listeners.Register {
@@ -724,7 +731,7 @@ ChatClient.register(params, object : Chat.Listeners.Register {
         // When users decides to not sign message return null
         return null
     }
-    
+
     override fun onError(error: Chat.Model.Error) {
         // Error while registering an address
     }
@@ -738,14 +745,17 @@ ChatClient.register(params, object : Chat.Listeners.Register {
 To not be discoverable to everyone, set `private` in `Chat.Params.Register` to `true`. If this flag is `true` then only identity is restored in [Keyserver](https://docs.walletconnect.com/2.0/specs/servers/keys/). Parameter `private` is set to `false` by default.
 
 ##### Chat.Params.Register with private = false
+
 ```kotlin
 val params = Chat.Params.Register(account = Chat.Type.AccountId(/*[CAIP-10](https://github.com/ChainAgnostic/CAIPs/blob/master/CAIPs/caip-10.md) compatible accountId*/), private = true)
 ```
 
 #### Resolve invitee public invite key with blockchain address
+
 In order to invite someone for a chat conversation, inviter must know invitee public invite key. To resolve a invitee's public invite key that is required to invite into a chat thread, call [`ChatClient.resolve`](#chatclientresolve) method.
 
 ##### `ChatClient.resolve`
+
 ```kotlin
 val params = Chat.Params.Resolve(account = Chat.Type.AccountId(/*[CAIP-10](https://github.com/ChainAgnostic/CAIPs/blob/master/CAIPs/caip-10.md) compatible accountId*/))
 ChatClient.resolve(params), object : Chat.Listeners.Resolve {
@@ -764,6 +774,7 @@ ChatClient.resolve(params), object : Chat.Listeners.Resolve {
 After acquiring the invitee's public key, you can send an invitation. Invitations can include short messages to encourage the invitee to accept. To send an invitation, use the [ChatClient.invite](#chatclientinvite) method. Sent invitations are stored and can be retrieved using the [ChatClient.getSentInvites](#chatclientgetsentinvites) method, which is described in the [Getting Sent Invitations](#getting-sent-invites) section.
 
 ##### `ChatClient.invite`
+
 ```kotlin
 val params = Chat.Params.Invite(inviterAccount = Chat.Type.AccountId(/*[CAIP-10](https://github.com/ChainAgnostic/CAIPs/blob/master/CAIPs/caip-10.md) compatible accountId*/)), inviteeAccount = Chat.Type.AccountId(/*[CAIP-10](https://github.com/ChainAgnostic/CAIPs/blob/master/CAIPs/caip-10.md) compatible accountId*/), message = Chat.Type.InviteMessage(/* Opening message string that's 200 char limited */), inviteePublicKey = /*Resolved public invite key from ChatClient.resolve() method*/)
 ChatClient.invite(
@@ -780,6 +791,7 @@ The invitee receives invitations via the [ChatClient.ChatDelegate.onInvite](#cha
 The invitee has the option to accept or reject the invitation. To accept an invitation, call the [ChatClient.accept](#chatclientaccept) method. To reject an invitation, call the [ChatClient.reject](#chatclientreject) method.
 
 ##### `ChatClient.accept`
+
 ```kotlin
 val acceptParams = Chat.Params.Accept(inviteId = /*Id of invite received onInvite() event in ChatDelegate*/)
 ChatClient.accept(acceptParams,
@@ -788,16 +800,17 @@ ChatClient.accept(acceptParams,
 ```
 
 ##### `ChatClient.reject`
+
 ```kotlin
 val params = Chat.Params.Reject(inviteId = /*Id of invite received onInvite() event in ChatDelegate*/)
 ChatClient.reject(params, onError = { error -> /* Error when rejecting */ })
 ```
 
-Inviter receives invite response on either [`ChatClient.ChatDelegate.onInviteAccepted`](#chatclientchatdelegate) when invitee accepted the invite or on [`ChatClient.ChatDelegate.onInviteRejected`](#chatclientchatdelegate) when invitee rejected the invite. 
+Inviter receives invite response on either [`ChatClient.ChatDelegate.onInviteAccepted`](#chatclientchatdelegate) when invitee accepted the invite or on [`ChatClient.ChatDelegate.onInviteRejected`](#chatclientchatdelegate) when invitee rejected the invite.
 
 #### Sending a Chat Message
 
-After successful invite inviter and invitee can E2EE direct messages with attached media. To send message call [`ChatClient.message`](#chatclientmessage) method. 
+After successful invite inviter and invitee can E2EE direct messages with attached media. To send message call [`ChatClient.message`](#chatclientmessage) method.
 
 ##### `ChatClient.message`
 
@@ -835,7 +848,7 @@ val params = Chat.Params.GoPrivate(account = Chat.Type.AccountId(/*[CAIP-10](htt
 ChatClient.goPrivate(
     params,
     onSuccess = { /* Success callback */ },
-    onError = { error -> /* Error while going private */ } 
+    onError = { error -> /* Error while going private */ }
 )
 ```
 
@@ -851,7 +864,7 @@ val params = Chat.Params.GoPublic(account = Chat.Type.AccountId(/*[CAIP-10](http
 ChatClient.goPublic(
     params,
     onSuccess = { /* Success callback */ },
-    onError = { error -> /* Error while going Public */ } 
+    onError = { error -> /* Error while going Public */ }
 )
 ```
 
@@ -872,7 +885,7 @@ ChatClient.unregister(params, object : Chat.Listeners.Unregister {
         // When users decides to not sign message return null
         return null
     }
-    
+
     override fun onError(error: Chat.Model.Error) {
         //Error while unregistering an address
     }
@@ -882,6 +895,7 @@ ChatClient.unregister(params, object : Chat.Listeners.Unregister {
     }
 })
 ```
+
 <!-- Add once we implement it -->
 <!-- ### Adding Contact -->
 
@@ -892,7 +906,7 @@ Clients can retrieve all received invitations for a given account by calling [Ch
 ##### Type.InviteStatus
 
 ```kotlin
-enum class InviteStatus : Type { 
+enum class InviteStatus : Type {
     PENDING, // Invite that was not yet responded to
     REJECTED, // Invite that was rejected by client
     APPROVED // Invite that was approved by client
@@ -914,7 +928,7 @@ Clients can retrieve all sent invitations for a given account by calling [`ChatC
 ##### Type.InviteStatus
 
 ```kotlin
-enum class InviteStatus : Type { 
+enum class InviteStatus : Type {
     PENDING, // Invite that was not yet responded to
     REJECTED, // Invite that was rejected by client
     APPROVED // Invite that was approved by client
@@ -937,6 +951,7 @@ data class Sent(
 ```
 
 ##### `ChatClient.getSentInvites`
+
 ```kotlin
 val params = Chat.Params.GetSentInvites(account = Chat.Type.AccountId(/*[CAIP-10](https://github.com/ChainAgnostic/CAIPs/blob/master/CAIPs/caip-10.md) compatible accountId*/))
 
@@ -997,62 +1012,63 @@ val params = Chat.Params.GetMessages(topic = /*Thread topic*/))
 
 val messages: List<Chat.Model.Message> = ChatClient.getMessages(params)
 ```
+
 </PlatformTabItem>
 <PlatformTabItem value="react-native">
 
 #### Initialize your WalletConnect ChatClient, using your Project ID
 
 ```javascript
-import { Core } from "@walletconnect/core";
-import { SyncClient, SyncStore } from "@walletconnect/sync-client";
-import { ChatClient } from "@walletconnect/chat-client";
+import { Core } from '@walletconnect/core'
+import { SyncClient, SyncStore } from '@walletconnect/sync-client'
+import { ChatClient } from '@walletconnect/chat-client'
 
 // Initialize core separately to allow sharing it between sync and chat
 const core = new Core({
-  projectId: "<YOUR PROJECT ID>",
+  projectId: '<YOUR PROJECT ID>'
 })
 
 // SyncClient enables syncing data across devices
 const syncClient = await SyncClient.init({
-  projectId: "<YOUR PROJECT ID>",
-  core,
+  projectId: '<YOUR PROJECT ID>',
+  core
 })
 
 const chatClient = await ChatClient.init({
   core,
-  projectId: "<YOUR PROJECT ID>",
-  keyserverUrl: "<YOUR KEYSERVER URL: eg: https://keys.walletconnect.com",
+  projectId: '<YOUR PROJECT ID>',
+  keyserverUrl: '<YOUR KEYSERVER URL: eg: https://keys.walletconnect.com',
   syncClient,
-  SyncStoreController: SyncStore,
-});
+  SyncStoreController: SyncStore
+})
 ```
 
 #### Set up listeners for chat-related events
 
 ```javascript
-chatClient.on("chat_invite", async (event) => {
+chatClient.on('chat_invite', async event => {
   // React to an incoming invite to chat.
-});
+})
 
-chatClient.on("chat_invite_accepted", async (event) => {
+chatClient.on('chat_invite_accepted', async event => {
   // React to your peer joining a given chat.
-});
+})
 
-chatClient.on("chat_invite_rejected", async (event) => {
+chatClient.on('chat_invite_rejected', async event => {
   // React to your peer declining your invite
-});
+})
 
-chatClient.on("chat_message", (event) => {
+chatClient.on('chat_message', event => {
   // React to an incoming messages for a given chat.
-});
+})
 
-chatClient.on("chat_ping", (event) => {
+chatClient.on('chat_ping', event => {
   // React to an incoming ping event from a peer on a given chat topic.
-});
+})
 
-chatClient.on("chat_left", (event) => {
+chatClient.on('chat_left', event => {
   // React to a peer leaving a given chat.
-});
+})
 ```
 
 #### Register your blockchain address with the key server
@@ -1064,7 +1080,7 @@ The key server expects a full CAIP-2 account for the address (as shown below).
 `onSign` will be used to sign the identity key using a wallet, one could supply `wagmi`'s [signMessage](https://wagmi.sh/core/actions/signMessage) function here for example.
 
 ```javascript
-await chatClient.register({ account: `eip155:1:0xa6de541...`, onSign: async () => {} });
+await chatClient.register({ account: `eip155:1:0xa6de541...`, onSign: async () => {} })
 ```
 
 #### Inviting another peer to chat
@@ -1086,11 +1102,11 @@ await chatClient.invite({
 When your client receives an invite from a peer, you're able to accept/reject it by calling `.accept()/.reject()` with the invite's `id`.
 
 ```javascript
-await chatClient.accept({ id: invite.id });
+await chatClient.accept({ id: invite.id })
 
 // or
 
-await chatClient.reject({ id: invite.id });
+await chatClient.reject({ id: invite.id })
 ```
 
 #### Sending a chat message
@@ -1101,10 +1117,10 @@ you can call `.message()` with the following parameters:
 ```javascript
 await chatClient.message({
   topic: chatThread.topic,
-  message: "Hey, good to hear from you!",
+  message: 'Hey, good to hear from you!',
   authorAccount: `eip155:1:0xa6de541...`, // your CAIP-2 formatted account that you registered previously.
-  timestamp: Date.now(),
-});
+  timestamp: Date.now()
+})
 ```
 
 #### Leaving a chat thread
@@ -1113,7 +1129,7 @@ To leave an established chat thread (deleting the thread and its associated mess
 the chat thread's topic:
 
 ```javascript
-await chatClient.leave({ topic: chatThread.topic });
+await chatClient.leave({ topic: chatThread.topic })
 ```
 
 </PlatformTabItem>

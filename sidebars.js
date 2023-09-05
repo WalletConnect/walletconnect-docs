@@ -99,6 +99,7 @@ module.exports = {
               ]
             },
             'web3modal/resources',
+            'web3modal/migration',
             'web3modal/v3/about'
           ]
         },
@@ -121,18 +122,28 @@ module.exports = {
           collapsible: true,
           items: [
             'web3inbox/about',
-            'web3inbox/usage',
-            'web3inbox/resources',
             {
               type: 'category',
-              label: 'Dapp Widget',
+              label: 'Wallet',
+              items: ['web3inbox/wallet/installation', 'web3inbox/wallet/usage']
+            },
+            {
+              type: 'category',
+              label: 'Dapp',
               items: [
-                'web3inbox/widget/about',
-                'web3inbox/widget/usage',
-                'web3inbox/widget/options',
-                'web3inbox/widget/theming'
+                {
+                  type: 'category',
+                  label: 'Widget',
+                  items: [
+                    'web3inbox/widget/about',
+                    'web3inbox/widget/usage',
+                    'web3inbox/widget/options',
+                    'web3inbox/widget/theming'
+                  ]
+                }
               ]
-            }
+            },
+            'web3inbox/resources'
           ]
         }
       ]
@@ -142,7 +153,7 @@ module.exports = {
       label: 'Cloud',
       collapsible: false,
       className: 'menu_outer_list',
-      items: ['cloud/explorer', 'cloud/verify', 'cloud/relay']
+      items: ['cloud/explorer', 'cloud/verify', 'cloud/relay', 'cloud/blockchain-api']
     },
     {
       type: 'category',
@@ -186,13 +197,8 @@ module.exports = {
             },
             {
               type: 'category',
-              label: 'Push',
-              items: [
-                'api/push/about',
-                'api/push/dapp-usage',
-                'api/push/wallet-usage',
-                'api/push/echo'
-              ]
+              label: 'Notify',
+              items: ['api/notify/about', 'api/notify/usage']
             },
             {
               type: 'category',
@@ -315,7 +321,7 @@ module.exports = {
     //   items: ['web3modal/platforms/unity']
     // }
   ],
-  v3: [
+  'web3modal/v3': [
     {
       type: 'html',
       value:
@@ -329,29 +335,49 @@ module.exports = {
       collapsible: false,
       items: [
         {
-          type: 'link',
+          type: 'ref',
           label: 'Overview',
-          href: '../about'
-        },
-        {
-          type: 'doc',
-          className: 'sidebar__logo sidebar__logo--react',
-          label: 'React',
-          id: 'web3modal/v3/react'
-        },
-        {
-          type: 'doc',
-          className: 'sidebar__logo sidebar__logo--vue',
-          label: 'Vue',
-          id: 'web3modal/v3/vue'
-        },
-        {
-          type: 'doc',
-          className: 'sidebar__logo sidebar__logo--html',
-          label: 'HTML',
-          id: 'web3modal/v3/html'
-        },
+          id: 'web3modal/v3/about'
+        }
       ]
     },
+    {
+      type: 'category',
+      label: 'Web',
+      className: 'menu_outer_list',
+      collapsible: false,
+      items: [
+        {
+          type: 'category',
+          className: 'sidebar__logo sidebar__logo--react',
+          label: 'React',
+          items: [
+            { type: 'doc', label: 'About', id: 'web3modal/v3/react/about' },
+            'web3modal/v3/react/options',
+            'web3modal/v3/react/theming'
+          ]
+        },
+        {
+          type: 'category',
+          className: 'sidebar__logo sidebar__logo--vue',
+          label: 'Vue',
+          items: [
+            { type: 'doc', label: 'About', id: 'web3modal/v3/vue/about' },
+            'web3modal/v3/vue/options',
+            'web3modal/v3/vue/theming'
+          ]
+        },
+        {
+          type: 'category',
+          className: 'sidebar__logo sidebar__logo--html',
+          label: 'HTML',
+          items: [
+            { type: 'doc', label: 'About', id: 'web3modal/v3/html/about' },
+            'web3modal/v3/html/options',
+            'web3modal/v3/html/theming'
+          ]
+        }
+      ]
+    }
   ]
 }
