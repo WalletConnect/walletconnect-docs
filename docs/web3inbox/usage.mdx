@@ -176,29 +176,9 @@ To prevent reloading of Web3Inbox the activity that contains the `Web3Inbox.View
 </PlatformTabItem>
 <PlatformTabItem value="react-native">
 
-This example makes use of [WalletConnect Modal](/2.0/advanced/walletconnectmodal/about?platform=react-native) for simplicity but you can integrate Web3Inbox into your React Native Wallet by providing the following props.
+This example makes use of [WalletConnect Modal](/2.0/advanced/walletconnectmodal/about?platform=react-native) for simplicity but you can also integrate Web3Inbox into your React Native Wallet by providing the following props.
 
-#### Required Props
-
-`projectId`: Get your project ID key on [WalletConnect Cloud](https://cloud.walletconnect.com).
-
-`ethAddress`: Ethereum wallet address.
-
-`onSign`: Web3Inbox client will request user to sign messages with its account private key. The message may be a Sync Storage derivation key or Identity key registration.
-
-`clientMetadata`: Web3Inbox will consume your metadata for various use use cases, such as displaying your logo and the name of your project.
-
-`visible` & `setVisible`: Those props are used to handle visibility of Web3Inbox webview.
-
-#### Optional Props
-
-`closeButton`: Provide a custom component to close Web3Inbox webview.
-
-`chatEnabled`: Boolean to enable or disable Chat SDK in Web3Inbox (default: `true`), setting it to `false` will also remove the navigation item.
-
-`pushEnabled`: Boolean to enable or disable Push SDK in Web3Inbox (default: `true`), setting it to `false` will also remove the navigation item.
-
-`settingsEnabled`: Boolean to enable or disable settigns page in Web3Inbox (default: `true`), setting it to `false` will also remove the navigation item.
+For more context, feel free to check our [example](https://github.com/WalletConnect/react-native-examples/tree/web3inbox-dapp/dapps/web3inbox).
 
 ```tsx
 import { Web3Inbox } from '@walletconnect/web3inbox-webview'
@@ -213,6 +193,20 @@ export default function Example() {
     []
   )
 
+  const handleSign = useCallback(
+    async (message: string) => {
+      const response = await provider?.request(
+        {
+          method: 'personal_sign',
+          params: [message, address]
+        },
+        'eip155:1'
+      )
+      return response as string
+    },
+    [provider, address]
+  )
+
   const clientMetadata = {
     name: 'Web3Inbox React Native Example',
     description: 'An example app to showcase how to use Web3Inbox React Native SDK',
@@ -225,16 +219,7 @@ export default function Example() {
       <Web3Inbox
         projectId={projectId}
         ethAddress={address}
-        onSign={async (message: string) => {
-          const response = await provider?.request(
-            {
-              method: 'personal_sign',
-              params: [message, address]
-            },
-            'eip155:1'
-          )
-          return response as string
-        }}
+        onSign={handleSign}
         visible={isVisible}
         setVisible={toggleWeb3InboxModal}
         clientMetadata={clientMetadata}
@@ -244,6 +229,59 @@ export default function Example() {
 }
 ```
 
+#### Required Props
+
+#### projectId `string`
+
+Get your project ID key on [WalletConnect Cloud](https://cloud.walletconnect.com).
+
+#### ethAddress `string`
+
+Ethereum wallet address of the current user.
+
+#### onSign `(message: string) => Promise<string>`
+
+Web3Inbox client will request user to sign messages with its account private key. The message may be a Sync Storage derivation key or Identity key registration.
+
+#### clientMetadata
+
+Web3Inbox will consume your metadata for various use cases, such as displaying your logo and the name of your project.
+
+```ts
+interface IClientMetadata {
+  name: string
+  description: string
+  url: string
+  icons: string[]
+}
+```
+
+#### visible `boolean`
+
+Determines visibility of Web3Inbox webview.
+
+#### setVisible `() => void`
+
+Function to set `visible` prop to true or false.
+
+#### Optional Props
+
+#### closeButton `React.ReactNode`
+
+Provide a custom component to close Web3Inbox webview.
+
+#### chatEnabled `boolean`
+
+Enable or disable Chat SDK in Web3Inbox (default: `true`), setting it to `false` will also remove the navigation item.
+
+#### notifyEnabled `boolean`
+
+Enable or disable Notify SDK in Web3Inbox (default: `true`), setting it to `false` will also remove the navigation item.
+
+#### settingsEnabled `boolean`
+
+Enable or disable settigns page in Web3Inbox (default: `true`), setting it to `false` will also remove the navigation item.
+
 </PlatformTabItem>
 </PlatformTabs>
 
@@ -251,7 +289,7 @@ export default function Example() {
 
 <PlatformTabs
 	groupId="w3w"
-	activeOptions={["ios","android"]}
+	activeOptions={["ios","android", "react-native"]}
 >
 <PlatformTabItem value="ios">
 
@@ -315,7 +353,12 @@ override func didReceive(_ request: UNNotificationRequest, withContentHandler co
 </PlatformTabItem>
 <PlatformTabItem value="android">
 
-Currently Web3Inbox SDK contains Chat SDK features. Push SDK features coming soon.
+Currently Web3Inbox SDK contains Chat SDK features. Notify SDK features coming soon.
+
+</PlatformTabItem>
+<PlatformTabItem value="react-native">
+
+Currently Web3Inbox SDK contains Chat SDK features. Notify SDK features coming soon.
 
 </PlatformTabItem>
 </PlatformTabs>

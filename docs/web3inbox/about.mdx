@@ -132,6 +132,7 @@ npm i @walletconnect/web3inbox-webview @walletconnect/react-native-compat
 ```
 
 You will need to polyfill crypto depending on your environment. See instructions below.
+
 <Tabs
 queryString="rn-method"
 	values={[
@@ -147,43 +148,34 @@ npm i expo-crypto
 
 1. Create a file called `expo-crypto-shim.js` at the root of your project
 2. Go to `expo-crypto-shim.js`and paste the following snippet into it.
-```js
-// https://github.com/expo/expo/issues/17270#issuecomment-1445149952
-// Polyfill for expo-crypto until issue with react-native-get-random-values is solved
-// Apply only with Expo SDK >= 48
-import "@ethersproject/shims";
-import {
-  digest,
-  getRandomValues as expoCryptoGetRandomValues,
-} from "expo-crypto";
 
-class Crypto {
-  getRandomValues = expoCryptoGetRandomValues;
-}
+```js
+import { digest } from 'expo-crypto'
 
 // eslint-disable-next-line no-undef
-const webCrypto = typeof crypto !== "undefined" ? crypto : new Crypto();
+const webCrypto = typeof crypto !== 'undefined' ? crypto : new Crypto()
 webCrypto.subtle = {
   digest: (algo, data) => {
-    const buf = Buffer.from(data);
-    return digest(algo, buf);
-  },
-};
-
-(() => {
-  if (typeof crypto === "undefined") {
-    Object.defineProperty(window, "crypto", {
+    const buf = Buffer.from(data)
+    return digest(algo, buf)
+  }
+}
+;(() => {
+  if (typeof crypto === 'undefined') {
+    Object.defineProperty(window, 'crypto', {
       configurable: true,
       enumerable: true,
-      get: () => webCrypto,
-    });
+      get: () => webCrypto
+    })
   }
-})();
+})()
 ```
+
 3. Then head over your `index.js` file at the root of your project and add the following imports.
+
 ```js
-import "@walletconnect/react-native-compat";
-import "./expo-crypto-shim.js";
+import '@walletconnect/react-native-compat'
+import './expo-crypto-shim.js'
 ```
 
 </TabItem>
@@ -193,29 +185,37 @@ import "./expo-crypto-shim.js";
 npm i react-native-quick-crypto react-native-quick-base64 stream-browserify @craftzdog/react-native-buffer babel-plugin-module-resolver
 ```
 
+For iOS only
+
+```bash
+cd ios && pod install
+```
+
 1. Go to your `index.js` file at the root of your project and add the following polyfill
+
 ```js
-import {AppRegistry} from 'react-native';
-import App from './App';
-import {name as appName} from './app.json';
-import crypto from 'react-native-quick-crypto';
+import { AppRegistry } from 'react-native'
+import App from './App'
+import { name as appName } from './app.json'
+import crypto from 'react-native-quick-crypto'
 
 const polyfillDigest = async (algorithm, data) => {
-  const algo = algorithm.replace('-', '').toLowerCase();
-  const hash = crypto.createHash(algo);
-  hash.update(data);
-  return hash.digest();
-};
+  const algo = algorithm.replace('-', '').toLowerCase()
+  const hash = crypto.createHash(algo)
+  hash.update(data)
+  return hash.digest()
+}
 
-globalThis.crypto = crypto;
+globalThis.crypto = crypto
 globalThis.crypto.subtle = {
-  digest: polyfillDigest,
-};
+  digest: polyfillDigest
+}
 
-AppRegistry.registerComponent(appName, () => App);
+AppRegistry.registerComponent(appName, () => App)
 ```
 
 2. Update your `babel.config.js` with the following configuration
+
 ```js
 module.exports = {
   presets: ['module:metro-react-native-babel-preset'],
@@ -234,6 +234,7 @@ module.exports = {
   ],
 };
 ```
+
 </TabItem>
 </Tabs>
 </PlatformTabItem>
