@@ -16,7 +16,7 @@ This usage step is to configure and use the Web3Inbox SDK Widget in your project
 
 <PlatformTabs
 	groupId="w3w"
-	activeOptions={["ios","android"]}
+	activeOptions={["ios","android", "react-native"]}
 >
 <PlatformTabItem value="ios">
 
@@ -114,13 +114,18 @@ Web3Inbox.initialize(Inbox.Params.Init(core = CoreClient, account = Inbox.Type.A
 ```
 
 </PlatformTabItem>
+<PlatformTabItem value="react-native">
+
+All clients will be initialized as soon as the Web3Inbox component is rendered for the first time.
+
+</PlatformTabItem>
 </PlatformTabs>
 
 ## SDK Usage
 
 <PlatformTabs
 	groupId="w3w"
-	activeOptions={["ios","android"]}
+	activeOptions={["ios","android", "react-native"]}
 >
 <PlatformTabItem value="ios">
 
@@ -193,13 +198,123 @@ To prevent reloading of Web3Inbox the activity that contains the `Web3Inbox.View
 `android:configChanges="orientation|screenSize"` to `<activity>` element `Manifest.xml` that houses Web3Inbox.
 
 </PlatformTabItem>
+
+<PlatformTabItem value="react-native">
+
+This example makes use of [WalletConnect Modal](/2.0/advanced/walletconnectmodal/about?platform=react-native) for simplicity but you can also integrate Web3Inbox into your React Native Wallet by providing the following props.
+
+For more context, feel free to check our [example](https://github.com/WalletConnect/react-native-examples/tree/web3inbox-dapp/dapps/web3inbox).
+
+```tsx
+import { Web3Inbox } from '@walletconnect/web3inbox-webview'
+import { useCallback, useState } from 'react'
+
+export default function Example() {
+  const { provider, isConnected, address } = useWalletConnectModal()
+  const [isVisible, setIsVisible] = useState(true)
+
+  const toggleWeb3InboxModal = useCallback(
+    () => setIsVisible(isCurrentlyVisible => !isCurrentlyVisible),
+    []
+  )
+
+  const handleSign = useCallback(
+    async (message: string) => {
+      const response = await provider?.request(
+        {
+          method: 'personal_sign',
+          params: [message, address]
+        },
+        'eip155:1'
+      )
+      return response as string
+    },
+    [provider, address]
+  )
+
+  const clientMetadata = {
+    name: 'Web3Inbox React Native Example',
+    description: 'An example app to showcase how to use Web3Inbox React Native SDK',
+    url: 'https://github.com/WalletConnect/web3inbox-js-sdk',
+    icons: ['https://avatars.githubusercontent.com/u/37784886']
+  }
+
+  return (
+    <View>
+      <Web3Inbox
+        projectId={projectId}
+        ethAddress={address}
+        onSign={handleSign}
+        visible={isVisible}
+        setVisible={toggleWeb3InboxModal}
+        clientMetadata={clientMetadata}
+      />
+    </View>
+  )
+}
+```
+
+#### Required Props
+
+#### projectId `string`
+
+Get your project ID key on [WalletConnect Cloud](https://cloud.walletconnect.com).
+
+#### ethAddress `string`
+
+Ethereum wallet address of the current user.
+
+#### onSign `(message: string) => Promise<string>`
+
+Web3Inbox client will request user to sign messages with its account private key. The message may be a Sync Storage derivation key or Identity key registration.
+
+#### clientMetadata
+
+Web3Inbox will consume your metadata for various use cases, such as displaying your logo and the name of your project.
+
+```ts
+interface IClientMetadata {
+  name: string
+  description: string
+  url: string
+  icons: string[]
+}
+```
+
+#### visible `boolean`
+
+Determines visibility of Web3Inbox webview.
+
+#### setVisible `() => void`
+
+Function to set `visible` prop to true or false.
+
+#### Optional Props
+
+#### closeButton `React.ReactNode`
+
+Provide a custom component to close Web3Inbox webview.
+
+#### chatEnabled `boolean`
+
+Enable or disable Chat SDK in Web3Inbox (default: `true`), setting it to `false` will also remove the navigation item.
+
+#### notifyEnabled `boolean`
+
+Enable or disable Notify SDK in Web3Inbox (default: `true`), setting it to `false` will also remove the navigation item.
+
+#### settingsEnabled `boolean`
+
+Enable or disable settigns page in Web3Inbox (default: `true`), setting it to `false` will also remove the navigation item.
+
+</PlatformTabItem>
 </PlatformTabs>
 
 ## Push Notification
 
 <PlatformTabs
 	groupId="w3w"
-	activeOptions={["ios","android"]}
+	activeOptions={["ios","android", "react-native"]}
 >
 <PlatformTabItem value="ios">
 
@@ -290,6 +405,11 @@ override func didReceive(_ request: UNNotificationRequest, withContentHandler co
 <PlatformTabItem value="android">
 
 Currently Web3Inbox SDK contains Chat SDK features. Push SDK features coming soon.
+
+</PlatformTabItem>
+<PlatformTabItem value="react-native">
+
+Currently Web3Inbox SDK contains Chat SDK features. Notify SDK features coming soon.
 
 </PlatformTabItem>
 </PlatformTabs>
