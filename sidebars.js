@@ -65,6 +65,7 @@ module.exports = {
             {
               type: 'category',
               label: 'React',
+              className: 'sidebar__logo sidebar__logo--react',
               items: [
                 'web3modal/react/wagmi/installation',
                 'web3modal/react/wagmi/components',
@@ -83,6 +84,7 @@ module.exports = {
             {
               type: 'category',
               label: 'HTML',
+              className: 'sidebar__logo sidebar__logo--html',
               items: [
                 'web3modal/html/wagmi/installation',
                 'web3modal/html/wagmi/components',

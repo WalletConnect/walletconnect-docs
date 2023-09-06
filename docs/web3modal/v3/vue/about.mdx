@@ -100,6 +100,33 @@ Finally, pass wagmi config to `createWeb3Modal`.
 
 ## Trigger the modal
 
+<Tabs>
+<TabItem value="default" label="Default">
+
+You can use default web components to open the modal
+
+```html
+// src/components/ConnectButton.vue
+<template>
+  <w3m-button />
+</template>
+```
+Additional pre-built web components:
+
+```html
+// src/components/ConnectButton.vue
+<template>
+  <w3m-network-button />
+  <w3m-connect-button />
+  <w3m-account-button />
+</template>
+```
+:::note
+Web components are global html elements that don't require importing.
+:::
+</TabItem>
+<TabItem value="advanced" label="Advanced">
+
 You can trigger the modal by calling the `open` method from `useWeb3Modal` function.
 
 ```html
@@ -115,6 +142,8 @@ You can trigger the modal by calling the `open` method from `useWeb3Modal` funct
   <button @click="modal.open({ view: 'Networks' })">Open Network Modal</button>
 </template>
 ```
+</TabItem>
+</Tabs>
 
 ## Use wagmi Actions
 

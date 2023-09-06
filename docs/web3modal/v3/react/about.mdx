@@ -50,7 +50,11 @@ const wagmiConfig = defaultWagmiConfig({ chains, projectId, appName: 'Web3Modal'
 createWeb3Modal({ wagmiConfig, projectId, chains })
 
 export default function App() {
-  return <WagmiConfig config={wagmiConfig}>// Rest of your app ...</WagmiConfig>
+  return (
+    <WagmiConfig config={wagmiConfig}>
+      // Rest of your app...
+    </WagmiConfig>
+  )
 }
 ```
 
@@ -90,7 +94,11 @@ const wagmiConfig = createConfig({
 createWeb3Modal({ wagmiConfig, projectId, chains })
 
 export default function App() {
-  return <WagmiConfig config={wagmiConfig}>// Rest of your app ...</WagmiConfig>
+  return (
+    <WagmiConfig config={wagmiConfig}>
+      // Rest of your app...
+    </WagmiConfig>
+  )
 }
 ```
 
@@ -99,23 +107,56 @@ export default function App() {
 
 ## Trigger the modal
 
-You can trigger the modal by calling the `open()` method on a modal instance with `useWeb3Modal` hook.
+<Tabs>
+<TabItem value="default" label="Default">
+You can use default web components to open the modal
+
+```tsx
+export default function ConnectButton() {
+  return <w3m-button />
+}
+```
+Additional pre-built web components:
+
+```tsx
+export default function ConnectButton() {
+
+return (
+  <>
+    <w3m-network-button />
+    <w3m-connect-button />
+    <w3m-account-button />
+  </>
+)
+}
+```
+
+:::note
+Web components are global html elements that don't require importing.
+:::
+</TabItem>
+<TabItem value="advanced" label="Advanced">
+
+You can trigger the modal by calling the `open` function from `useWeb3Modal` hook.
 
 ```tsx
 import { useWeb3Modal } from '@web3modal/wagmi/react'
 
 export default function ConnectButton() {
   // 4. Use modal hook
-  const modal = useWeb3Modal()
+  const { open } = useWeb3Modal()
 
   return (
     <>
-      <button onClick={() => modal.open()}>Open Connect Modal</button>
-      <button onClick={() => modal.open({ view: 'Networks' })}>Open Network Modal</button>
+      <button onClick={() => open()}>Open Connect Modal</button>
+      <button onClick={() => open({ view: 'Networks' })}>Open Network Modal</button>
     </>
   )
 }
 ```
+</TabItem>
+</Tabs>
+
 
 ## Use wagmi hooks
 

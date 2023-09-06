@@ -85,7 +85,49 @@ const modal = new Web3Modal({ wagmiConfig, projectId, chains })
 
 ## Trigger the modal
 
-You can trigger the modal by calling the `open()` method on a modal instance of the `Web3Modal` class.
+
+<Tabs>
+<TabItem value="default" label="Default">
+You can use default web components to open the modal
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>HTML Example</title>
+  </head>
+  <body>
+    <w3m-button />
+    <script type="module" src="main.js"></script>
+  </body>
+</html>
+```
+Additional pre-built web components:
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>HTML Example</title>
+  </head>
+  <body>
+    <w3m-network-button />
+    <w3m-connect-button />
+    <w3m-account-button />
+    <script type="module" src="main.js"></script>
+  </body>
+</html>
+```
+
+:::note
+Web components are global html elements that don't require importing.
+:::
+</TabItem>
+<TabItem value="advanced" label="Advanced">
+
+You can trigger the modal by calling the `open` method on a modal instance of the `Web3Modal` class.
 
 Let's first add two html elements to display information to the user:
 
@@ -132,6 +174,8 @@ watchAccount(account => {
   }
 })
 ```
+</TabItem>
+</Tabs>
 
 ## Use wagmi Actions
 
