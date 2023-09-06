@@ -93,6 +93,7 @@ module.exports = {
               ]
             },
             'web3modal/upgrade',
+            'web3modal/v2/about',
           ]
         },
         {
@@ -335,7 +336,7 @@ module.exports = {
     },
     {
       type: 'category',
-      label: 'Web',
+      label: 'V2',
       className: 'menu_outer_list',
       collapsible: false,
       items: [
@@ -377,7 +378,7 @@ module.exports = {
             }
           ]
         },
-        'web3modal/v2/about'
+        'web3modal/v2/upgrade'
       ]
     }
   ]
