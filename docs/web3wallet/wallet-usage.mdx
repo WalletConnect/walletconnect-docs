@@ -165,10 +165,10 @@ First you must setup a `WalletConnectCore` instance with a specific `Name` and `
 values, such as `RelayUrl` and `Storage`
 
 ```csharp
-var options = new CoreOptions() 
-{ 
-    ProjectId = "...", 
-    Name = "my-app", 
+var options = new CoreOptions()
+{
+    ProjectId = "...",
+    Name = "my-app",
 }
 
 var core = new WalletConnectCore(options);
@@ -486,7 +486,7 @@ sdk.On<SessionProposalEvent>(EngineEvents.SessionProposal, async (sender, @event
 
 The `RequiredNamespaces` is required when setting up a session between a dApp and Wallet. The
 dApp will provide a `RequiredNamespaces` when proposing the session. The `RequiredNamespaces` and
-`ProposedNamespace` use the same style constructors + builder functions as `Namespaces` and `Namespace`. 
+`ProposedNamespace` use the same style constructors + builder functions as `Namespaces` and `Namespace`.
 
 </PlatformTabItem>
 
@@ -512,8 +512,32 @@ web3wallet.on('session_proposal', async proposal => {
     namespaces
   })
 })
-await web3wallet.core.pairing.pair({ uri })
+await web3wallet.pair({ uri })
 ```
+
+#### 🛠️ Usage examples
+
+- [in a demo wallet app](https://github.com/WalletConnect/web-examples/blob/main/wallets/react-web3wallet/src/views/SessionProposalModal.tsx#L75)
+- [in integration tests](https://github.com/WalletConnect/walletconnect-monorepo/blob/v2.0/packages/web3wallet/test/sign.spec.ts#L55)
+
+#### ⚠️ Expected Errors
+
+- `No matching key. proposal id doesn't exist: 1`
+
+This rejection means the SDK can't find a record with the given `proposal.id` - in this example `1`.
+This can happen when the proposal has expired (by default 5 minutes) or if you attempt to respond to a proposal that has already been approved/rejected.
+If you are seeing this error, please make sure that you are calling `approveSession` with the correct `proposal.id` that is available whithin the proposal payload.
+
+- `Error: Missing or invalid. approve(), namespaces should be an object with data`
+
+This error means that the `namespaces` parameter passed to `approveSession` is either missing or invalid. Please check that you are passing a valid `namespaces` object that satisfies all required properties.
+
+- `Non conforming namespaces. approve() namespaces <property> don't satisfy required namespaces.`
+
+This error indicates that some value(s) in your `namespaces` object do not satisfy the required namespaces requested by the dapp.
+To provide additional guidance, the message might include info about the exact property that is missing or invalid e.g. `Required: eip155:1 Approved: eip155:137`.
+Please check [CAIP-25](https://github.com/ChainAgnostic/CAIPs/blob/master/CAIPs/caip-25.md) to familiarize yourself with the standard and it's nuanses.
+Additonaly, we highly recommend you to use our `namespace` builder utility that would greatly simplify the process of parsing & building a valid `namespaces` object.
 
 </PlatformTabItem>
 <PlatformTabItem value="ios">
@@ -757,7 +781,7 @@ sdk.On<SessionProposalEvent>(EngineEvents.SessionProposal, async (sender, @event
     var requiredNamespaces = proposal.RequiredNamespaces;
     var approvedNamespaces = new Namespaces(requiredNamespaces);
     approvedNamespaces["eip155"].WithAccount("eip155:1:0xab16a96d359ec26a11e2c2b3d8f8b8942d5bfcdb");
-    
+
     var sessionData = await sdk.ApproveSession(proposal.Id, approvedNamespaces);
     var sessionTopic = sessionData.Topic;
 });
@@ -807,6 +831,24 @@ web3wallet.on('session_proposal', async proposal => {
   })
 })
 ```
+
+#### 🛠️ Usage examples
+
+- [in a demo wallet app](https://github.com/WalletConnect/web-examples/blob/main/wallets/react-web3wallet/src/views/SessionProposalModal.tsx#L87)
+- [in integration tests](https://github.com/WalletConnect/walletconnect-monorepo/blob/v2.0/packages/web3wallet/test/sign.spec.ts#L79)
+
+#### ⚠️ Expected Errors
+
+- `No matching key. proposal id doesn't exist: 1`
+
+This rejection means the SDK can't find a record with the given `proposal.id` - in this example `1`.
+This can happen when the proposal has expired (by default 5 minutes) or if you attempt to respond to a proposal that has already been approved/rejected.
+If you are seeing this error, please make sure that you are calling `rejectSession` with the correct `proposal.id` that is available whithin the proposal payload.
+
+- `Error: Missing or invalid. reject() reason:`
+
+This rejection means the `reason` parameter passed to `rejectSession` is either missing or invalid.
+We recommend using the `getSDKError` function from the `@walletconnect/utils` library that will populate & format the parameter for you.
 
 </PlatformTabItem>
 <PlatformTabItem value="ios">
@@ -928,6 +970,37 @@ const response = {
 }
 ```
 
+#### 🛠️ Usage examples
+
+- [in a demo wallet app](https://github.com/WalletConnect/web-examples/blob/main/wallets/react-web3wallet/src/views/SessionSignModal.tsx#L33)
+- [in integration tests](https://github.com/WalletConnect/walletconnect-monorepo/blob/v2.0/packages/web3wallet/test/sign.spec.ts#L165)
+
+#### ⚠️ Expected Errors
+
+- `Error: No matching key. session topic doesn't exist: 'xyz...'`
+
+This rejection means the SDK can't find a session with the given `topic` - in this example `xyz...`.
+This can happen when the session has been disconnected by either the wallet or the dapp while the session request was being processed or if a session with such topic doesn't exist.
+If you are seeing this error, please make sure that you are using a correct topic that is available whithin the request payload.
+
+- `Error: Missing or invalid. respond() response:`
+
+This rejection means the `response` parameter passed to `respondSessionRequest` is either missing or invalid. The response should be a valid [JSON-RPC 2.0](https://www.jsonrpc.org/specification) response object.
+We recommend you to use our `formatJsonRpcResult` utility from `"@walletconnect/jsonrpc-utils"` that will format the response for you.
+
+Example usage:
+`id` argument being the request id from the request payload.
+
+```javascript
+import { formatJsonRpcResult } from '@walletconnect/jsonrpc-utils'
+
+const signature = await cryptoWallet.signTransaction(signTransaction)
+const response = await web3wallet.respondSessionRequest({
+  topic: session.topic,
+  response: formatJsonRpcResult(id, signature)
+})
+```
+
 </PlatformTabItem>
 <PlatformTabItem value="ios">
 
@@ -935,11 +1008,11 @@ After the session is established, a dapp will request your wallet's users to sig
 
 ```swift
 Web3Wallet.instance.sessionRequestPublisher
-    .receive(on: DispatchQueue.main)
-    .sink { [weak self] session in
-        self?.verifyDapp(session.context)
-        self?.showSessionRequest(session.request)
-    }.store(in: &publishers)
+  .receive(on: DispatchQueue.main)
+  .sink { [weak self] session in
+      self?.verifyDapp(session.context)
+      self?.showSessionRequest(session.request)
+  }.store(in: &publishers)
 ```
 
 When a wallet receives a session request, you probably want to show it to the user. It’s method will be in scope of session namespaces. And it’s params are represented by `AnyCodable` type. An expected object can be derived as follows:
@@ -1040,9 +1113,9 @@ const response = {
 
 <PlatformTabItem value="unity">
 
-Responding to session requests is very similar to sending session requests. See dApp usage on how sending session requests works. All custom session requests requires a request class **and** response class to be created that matches the `params` field type in the custom session request. C# is a staticly typed language, so these types must be given whenever you do a session request (or do any querying for session requests). 
+Responding to session requests is very similar to sending session requests. See dApp usage on how sending session requests works. All custom session requests requires a request class **and** response class to be created that matches the `params` field type in the custom session request. C# is a staticly typed language, so these types must be given whenever you do a session request (or do any querying for session requests).
 
-Currently, **WalletConnectSharp does not automatically assume the object type for `params` is an array**. This is very important, since most EVM RPC requests have `params` as an array type. **Use `List<T>` to workaround this**. For example, for `eth_sendTransaction`, use `List<Transaction>` instead of `Transaction`. 
+Currently, **WalletConnectSharp does not automatically assume the object type for `params` is an array**. This is very important, since most EVM RPC requests have `params` as an array type. **Use `List<T>` to workaround this**. For example, for `eth_sendTransaction`, use `List<Transaction>` instead of `Transaction`.
 
 Newtonsoft.Json is used for JSON serialization/deserialization, therefor you can use Newtonsoft.Json attributes when defining fields in your request/response classes.
 
@@ -1061,49 +1134,49 @@ public class TransactionReceipt
 {
     [JsonProperty("transactionHash")]
     public string TransactionHash;
-    
+
     [JsonProperty("transactionIndex")]
     public BigInteger TransactionIndex;
-    
+
     [JsonProperty("blockHash")]
     public string BlockHash;
-    
+
     [JsonProperty("blockNumber")]
     public BigInteger BlockNumber;
-    
+
     [JsonProperty("from")]
     public string From;
-            
+
     [JsonProperty("to")]
     public string To;
-    
+
     [JsonProperty("cumulativeGasUsed")]
     public BigInteger CumulativeGasUsed;
-    
+
     [JsonProperty("effectiveGasPrice ")]
     public BigInteger EffectiveGasPrice ;
-    
+
     [JsonProperty("gasUsed")]
     public BigInteger GasUsed;
-    
+
     [JsonProperty("contractAddress")]
     public string ContractAddress;
-    
+
     [JsonProperty("logs")]
     public object[] Logs;
-    
+
     [JsonProperty("logsBloom")]
     public string LogBloom;
-    
+
     [JsonProperty("type")]
     public BigInteger Type;
-    
+
     [JsonProperty("status")]
     public BigInteger Status;
 }
 ```
 
-The `RpcMethod` class attributes defines the rpc method this response uses, this is optional. The `RpcResponseOptions` class attributes define the expiry time and tag attached to the response, **this is required**. 
+The `RpcMethod` class attributes defines the rpc method this response uses, this is optional. The `RpcResponseOptions` class attributes define the expiry time and tag attached to the response, **this is required**.
 
 ### Sending a response
 
@@ -1131,7 +1204,7 @@ private Task OnEthTransactionReceiptRequest(RequestEventArgs<EthGetTransactionRe
 }
 ```
 
-The callback function gets invoked whenever the wallet receives the `eth_getTransactionReceipt` request from a connected dApp. You may optionally filter further which requests are handled using the `FilterRequests` function 
+The callback function gets invoked whenever the wallet receives the `eth_getTransactionReceipt` request from a connected dApp. You may optionally filter further which requests are handled using the `FilterRequests` function
 
 ```csharp
 walletClient.Engine.SessionRequestEvents<EthGetTransactionReceipt, TransactionReceipt>()
@@ -1159,12 +1232,73 @@ private async Task OnEthTransactionReceiptRequest(RequestEventArgs<EthGetTransac
 <PlatformTabs groupId="w3w" activeOptions={["web","ios","android","flutter","react-native","unity"]}>
 
 <PlatformTabItem value="web">
+If you wish to include new accounts or chains or methods in an existing session, `updateSession` allows you to do so.
+You need pass in the `topic` and a new `Namespaces` object that contains all of the existing namespaces as well as the new data you wish to include.
+After you update the session, the other peer will receive a `session_update` event.
 
-The `session_update` event is emitted from the wallet when the session is updated by calling `updateSession`. To update a session, pass in the `topic` and the new namespace.
+An example adding a new account to an existing session:
 
 ```javascript
-await web3wallet.updateSession({ topic, namespaces: newNs })
+const namespaces = session.namespaces
+const acounts = [
+  'eip155:1:0xab16a96d359ec26a11e2c2b3d8f8b8942d5bfcdb',
+  'eip155:1:0x1234567890123456789012345678901234567890'
+]
+const updatedNamespaces = {
+  ...namespaces,
+  eip155: {
+    ...namespaces.eip155,
+    accounts
+  }
+}
+await web3wallet.updateSession({ topic: session.topic, namespaces: updatedNamespaces })
 ```
+
+An example adding a new chain to an existing session:
+
+```javascript
+const namespaces = session.namespaces
+const chains = ['eip155:1', 'eip155:137']
+const acounts = [
+  'eip155:1:0xab16a96d359ec26a11e2c2b3d8f8b8942d5bfcdb',
+  'eip155:137:0x1234567890123456789012345678901234567890'
+]
+const updatedNamespaces = {
+  ...namespaces,
+  eip155: {
+    ...namespaces.eip155,
+    accounts,
+    chains
+  }
+}
+await web3wallet.updateSession({ topic: session.topic, namespaces: updatedNamespaces })
+```
+
+#### 🛠️ Usage examples
+
+- [in a demo wallet app](https://github.com/WalletConnect/web-examples/blob/main/wallets/react-web3wallet/src/pages/session.tsx#L73)
+- [in integration tests](https://github.com/WalletConnect/walletconnect-monorepo/blob/v2.0/packages/web3wallet/test/sign.spec.ts#L98)
+
+#### ⚠️ Expected Errors
+
+Note that all `namespaces` validation applies and you still have to satisfy the required namespaces requested by the dapp.
+
+- `Error: No matching key. session topic doesn't exist: 'xyz...'`
+
+This rejection means the SDK can't find a session with the given `topic` - in this example `xyz...`.
+This can happen when the session you're trying to update has already been disconnected by either the wallet or the dapp or if a session with such topic doesn't exist.
+If you are seeing this error, please make sure that you are using a correct topic of an active session.
+
+- `Error: Missing or invalid. update(), namespaces should be an object with data`
+
+This error means that the `namespaces` parameter passed to `updateSession` is either missing or invalid. Please check that you are passing a valid `namespaces` object that satisfies all required properties.
+
+- `Non conforming namespaces. update() namespaces <property> don't satisfy required namespaces.`
+
+This error indicates that some value(s) in your `namespaces` object do not satisfy the required namespaces requested by the dapp.
+To provide additional guidance, the message might include info about the exact property that is missing or invalid e.g. `Required: eip155:1 Approved: eip155:137`.
+Please check [CAIP-25](https://github.com/ChainAgnostic/CAIPs/blob/master/CAIPs/caip-25.md) to familiarize yourself with the standard and it's nuanses.
+Additonaly, we highly recommend you to use our `namespace` builder utility that would greatly simplify the process of parsing & building a valid `namespaces` object.
 
 </PlatformTabItem>
 <PlatformTabItem value="ios">
@@ -1212,7 +1346,6 @@ await web3wallet.updateSession({ topic, namespaces: newNs })
 
 </PlatformTabItem>
 <PlatformTabItem value="unity">
-
 
 Update a session, adding/removing additional namespaces in the given topic.
 
