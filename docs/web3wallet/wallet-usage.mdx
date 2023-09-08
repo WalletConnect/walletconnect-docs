@@ -1119,7 +1119,7 @@ Currently, **WalletConnectSharp does not automatically assume the object type fo
 
 Newtonsoft.Json is used for JSON serialization/deserialization, therefor you can use Newtonsoft.Json attributes when defining fields in your request/response classes.
 
-### Building a Response type
+#### Building a Response type
 
 Create a class for the response and populate it with the JSON properties the response object has. For this example, we will use `eth_getTransactionReceipt`
 
@@ -1178,7 +1178,7 @@ public class TransactionReceipt
 
 The `RpcMethod` class attributes defines the rpc method this response uses, this is optional. The `RpcResponseOptions` class attributes define the expiry time and tag attached to the response, **this is required**.
 
-### Sending a response
+#### Sending a response
 
 To respond to requests from a dApp, you must define the class representing the request object type. The request type for `eth_getTransactionReceipt` is the following:
 
