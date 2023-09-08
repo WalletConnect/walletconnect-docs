@@ -931,13 +931,13 @@ sdk.On<SessionProposalEvent>(EngineEvents.SessionProposal, async (sender, @event
 
 <PlatformTabItem value="web">
 
-The `session_request` event is triggered by a dapp when it needs the wallet to perform a specific action, such as signing a transaction. The event contains a `topic` and a `request` object, which will vary depending on the action requested.
+The `session_request` event is emitted when the SDK received a request from the peer and it needs the wallet to perform a specific action, such as signing a transaction. The event contains a `topic` and a `request` object, which will vary depending on the action requested.
 
-To respond to the request, the wallet can access the `topic` and `request` object by destructuring them from the event payload. To see a list of possible `request` and `response` objects, refer to the relevant JSON-RPC Methods for [Ethereum](advanced/rpc-reference/ethereum-rpc.md), [Solana](advanced/rpc-reference/solana-rpc.md), [Cosmos](advanced/rpc-reference/cosmos-rpc.md), or [Stellar](advanced/rpc-reference/stellar-rpc.md).
+To respond to the request, you can access the `topic` and `request` object by destructuring them from the event payload. To see a list of possible `request` and `response` objects, refer to the relevant JSON-RPC Methods for [Ethereum](advanced/rpc-reference/ethereum-rpc.md), [Solana](advanced/rpc-reference/solana-rpc.md), [Cosmos](advanced/rpc-reference/cosmos-rpc.md), or [Stellar](advanced/rpc-reference/stellar-rpc.md).
 
-As an example, if the dapp requests a `personal_sign` method, the wallet can extract the `params` array from the `request` object. The first item in the array is the hex version of the message to be signed, which can be converted to UTF-8 and assigned to a `message` variable. The second item in `params` is the user's wallet address.
+As an example, if the dapp requests a `personal_sign` method, you can extract the `params` array from the `request` object. The first item in the array is the hex version of the message to be signed, which can be converted to UTF-8 and assigned to a `message` variable. The second item in `params` is the user's wallet address.
 
-To sign the message, the wallet can use the `wallet.signMessage` method and pass in the message. The signed message, along with the `id` from the event payload, can then be used to create a `response` object, which can be passed into `respondSessionRequest`.
+To sign the message, you can use your wallet's `signMessage` method and pass in the message. The signed message, along with the `id` from the event payload, can then be used to create a `response` object, which can be passed into `respondSessionRequest`.
 
 ```javascript
 web3wallet.on('session_request', async event => {
@@ -1364,11 +1364,23 @@ await request.Acknowledged();
 
 <PlatformTabItem value="web">
 
-To extend the session, call the `extendSession` method and pass in the new `topic`. The `session_update` event will be emitted from the wallet.
+Sessions have a default expiry of 7 days. To extend a session by an additional 7 days, call `.extendSession` method and pass in the `topic` of the session you wish to extend.
 
 ```javascript
 await web3wallet.extendSession({ topic })
 ```
+
+#### 🛠️ Usage examples
+
+- [in integration tests](https://github.com/WalletConnect/walletconnect-monorepo/blob/v2.0/packages/web3wallet/test/sign.spec.ts#L130)
+
+#### ⚠️ Expected Errors
+
+- `Error: No matching key. session topic doesn't exist: 'xyz...'`
+
+This rejection means the SDK can't find a session with the given `topic` - in this example `xyz...`.
+This can happen when the session you're trying to update has already been disconnected by either the wallet or the dapp or if a session with such topic doesn't exist.
+If you are seeing this error, please make sure that you are using a correct topic of an active session.
 
 </PlatformTabItem>
 <PlatformTabItem value="ios">
@@ -1427,9 +1439,15 @@ await request.Acknowledged();
 
 <PlatformTabItem value="web">
 
-When either the dapp or the wallet disconnects from a session, a `session_delete` event will be emitted. It's important to subscribe to this event so you could keep your state up-to-date.
+To initiate disconnnect from a session(think session delete), call `.disconnectSession` by passing a `topic` & `reason` for the disconnect.
+The other peer will receive a `session_delete` and be notified that the session has been disconnected.
 
-To initiate a session disconnect, call the `disconnectSession` method and pass in the `topic` and `reason`. You can use the `getSDKError` utility function, which is available in the `@walletconnect/utils` [library](https://github.com/WalletConnect/walletconnect-monorepo/tree/v2.0/packages/utils).
+:::info Note
+It's important that you're subscribed to the `session_delete` event as well, to be notified when the other peer initiates a disconnect.
+:::
+:::note Tip
+We recommend using the `getSDKError` utility function, that will provide ready-to-use `reason` payloads and is available in the `@walletconnect/utils` [library](https://github.com/WalletConnect/walletconnect-monorepo/tree/v2.0/packages/utils).
+:::
 
 ```javascript
 await web3wallet.disconnectSession({
@@ -1437,6 +1455,18 @@ await web3wallet.disconnectSession({
   reason: getSdkError('USER_DISCONNECTED')
 })
 ```
+
+#### 🛠️ Usage examples
+
+- [in integration tests](https://github.com/WalletConnect/walletconnect-monorepo/blob/v2.0/packages/web3wallet/test/sign.spec.ts#L222)
+
+#### ⚠️ Expected Errors
+
+- `Error: No matching key. session topic doesn't exist: 'xyz...'`
+
+This rejection means the SDK can't find a session with the given `topic` - in this example `xyz...`.
+This can happen when the session you're trying to update has already been disconnected by either the wallet or the dapp or if a session with such topic doesn't exist.
+If you are seeing this error, please make sure that you are using a correct topic of an active session.
 
 </PlatformTabItem>
 <PlatformTabItem value="ios">
