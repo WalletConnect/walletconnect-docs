@@ -439,7 +439,7 @@ const approvedNamespaces = buildApprovedNamespaces({
 To build a namespace mapping for either proposing a session **OR** approving a session, you can use C# dictionary + class constructors
 directly, or use the built-in builder methods
 
-### C# Constructor Style
+#### C# Constructor Style
 
 ```csharp
 var TestNamespaces = new Namespaces()
@@ -456,7 +456,7 @@ var TestNamespaces = new Namespaces()
 };
 ```
 
-### Builder Style
+#### Builder Style
 
 ```csharp
 var TestNamespaces = new Namespaces()
@@ -472,7 +472,7 @@ The `Namespaces` mapping is required when approving a proposed session from a dA
 also construct a `Namespaces` from a `RequiredNamespaces`, which auto-populates all `Methods`, `Events` and
 `Chains` from the given `RequiredNamespaces`. This is provided for convenience.
 
-### RequiredNamespaces
+#### RequiredNamespaces
 
 ```csharp
 sdk.On<SessionProposalEvent>(EngineEvents.SessionProposal, async (sender, @event) =>
