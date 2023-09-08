@@ -130,7 +130,20 @@ const config = {
       prism: {
         darkTheme: darkCodeTheme,
         theme: lightCodeTheme,
-        additionalLanguages: ['swift', 'kotlin', 'dart', 'csharp']
+        additionalLanguages: ['swift', 'kotlin', 'dart', 'csharp'],
+        magicComments: [
+          // Remember to extend the default highlight class name as well!
+          {
+            className: 'theme-code-block-highlighted-delete',
+            line: 'highlight-delete',
+            block: {start: 'highlight-delete-start', end: 'highlight-delete-end'},
+          },
+          {
+            className: 'theme-code-block-highlighted-add',
+            line: 'highlight-add',
+            block: {start: 'highlight-add-start', end: 'highlight-add-end'},
+          },
+        ]
       },
       algolia: {
         appId: 'KEO8ND6AUT',

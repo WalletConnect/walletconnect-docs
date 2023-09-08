@@ -1,0 +1,215 @@
+import Container from '../../components/Container'
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
+import PlatformTabs from '../../components/PlatformTabs'
+import PlatformTabItem from '../../components/PlatformTabItem'
+import Wrapper from '../../components/Home/Wrapper'
+
+# Installation
+
+:::caution
+
+Web3Inbox is under development. Want early access? Join our [Pilot Program](https://walletconnect.com/partners)
+
+:::
+
+This installation step is for Web3Inbox SDK into your project by embedding the widget.
+
+:::info
+For those looking for a native integration via the Notify API, we suggest you to check out the [Notify API documentation](../../api/notify/about).
+:::info
+
+<PlatformTabs
+	groupId="w3w"
+	activeOptions={["ios","android", "react-native"]}
+>
+<PlatformTabItem value="ios">
+
+Web3Inbox SDK is available via [Swift Package Manager](https://swift.org/package-manager/) or [Cocoapods](https://cocoapods.org/).
+
+<Tabs
+queryString="ios-method"
+	values={[
+		{ label: 'SwiftPackageManager', value: 'spm', },
+		{ label: 'Cocoapods', value: 'cocoa', },
+	]}
+>
+<TabItem value="spm">
+
+You can add a Web3Inbox SDK to your project with Swift Package Manager. In order to do that:
+
+1. Open XCode
+2. Go to File -> Add Packages
+3. Paste the repo GitHub URL: https://github.com/WalletConnect/WalletConnectSwiftV2
+4. Tap Add Package
+5. Select Web3Inbox check mark
+
+</TabItem>
+<TabItem value="cocoa">
+
+1. Update Cocoapods spec repos. Type in terminal `pod repo update`
+2. Initialize Podfile if needed with `pod init`
+3. Add pod to your Podfile:
+
+```Ruby
+pod 'WalletConnectSwiftV2/Web3Inbox'
+```
+
+4. Install pods with `pod install`
+
+If you encounter any problems during package installation, you can specify the exact path to the repository
+
+```Ruby
+pod 'WalletConnectSwiftV2/Web3Inbox', :git => 'https://github.com/WalletConnect/WalletConnectSwiftV2.git', :tag => '1.5.0'
+```
+
+</TabItem>
+</Tabs>
+
+</PlatformTabItem>
+<PlatformTabItem value="android">
+
+root/build.gradle.kts:
+
+```gradle
+allprojects {
+ repositories {
+    mavenCentral()
+    maven { url "https://jitpack.io" }
+ }
+}
+```
+
+app/build.gradle.kts
+
+```gradle
+implementation("com.walletconnect:android-core:release_version")
+implementation("com.walletconnect:web3inbox:release_version")
+```
+
+#### Requirements
+
+- Android min SDK 23
+- Java 11
+
+</PlatformTabItem>
+
+<PlatformTabItem value="react-native">
+
+```bash npm2yarn
+npm i @walletconnect/web3inbox-webview @walletconnect/react-native-compat
+```
+
+You will need to polyfill crypto depending on your environment. See instructions below.
+
+<Tabs
+queryString="rn-method"
+	values={[
+		{ label: 'Expo', value: 'expo', },
+		{ label: 'React Native CLI', value: 'rn-cli', },
+	]}
+>
+<TabItem value="expo">
+
+```bash npm2yarn
+npm i expo-crypto
+```
+
+1. Create a file called `expo-crypto-shim.js` at the root of your project
+2. Go to `expo-crypto-shim.js`and paste the following snippet into it.
+
+```js
+import { digest } from 'expo-crypto'
+
+// eslint-disable-next-line no-undef
+const webCrypto = typeof crypto !== 'undefined' ? crypto : new Crypto()
+webCrypto.subtle = {
+  digest: (algo, data) => {
+    const buf = Buffer.from(data)
+    return digest(algo, buf)
+  }
+}
+;(() => {
+  if (typeof crypto === 'undefined') {
+    Object.defineProperty(window, 'crypto', {
+      configurable: true,
+      enumerable: true,
+      get: () => webCrypto
+    })
+  }
+})()
+```
+
+3. Then head over your `index.js` file at the root of your project and add the following imports.
+
+```js
+import '@walletconnect/react-native-compat'
+import './expo-crypto-shim.js'
+```
+
+</TabItem>
+<TabItem value="rn-cli">
+
+```bash npm2yarn
+npm i react-native-quick-crypto react-native-quick-base64 stream-browserify @craftzdog/react-native-buffer babel-plugin-module-resolver
+```
+
+For iOS only
+
+```bash
+cd ios && pod install
+```
+
+1. Go to your `index.js` file at the root of your project and add the following polyfill
+
+```js
+import { AppRegistry } from 'react-native'
+import App from './App'
+import { name as appName } from './app.json'
+import crypto from 'react-native-quick-crypto'
+
+const polyfillDigest = async (algorithm, data) => {
+  const algo = algorithm.replace('-', '').toLowerCase()
+  const hash = crypto.createHash(algo)
+  hash.update(data)
+  return hash.digest()
+}
+
+globalThis.crypto = crypto
+globalThis.crypto.subtle = {
+  digest: polyfillDigest
+}
+
+AppRegistry.registerComponent(appName, () => App)
+```
+
+2. Update your `babel.config.js` with the following configuration
+
+```js
+module.exports = {
+  presets: ['module:metro-react-native-babel-preset'],
+  plugins: [
+   [
+     'module-resolver',
+     {
+       alias: {
+         'crypto': 'react-native-quick-crypto',
+         'stream': 'stream-browserify',
+         'buffer': '@craftzdog/react-native-buffer',
+       },
+     },
+   ],
+    ...
+  ],
+};
+```
+
+</TabItem>
+</Tabs>
+</PlatformTabItem>
+
+</PlatformTabs>
+
+## Next Steps
+
+Now that you've installed Web3Inbox SDK, you're ready to start integrating it. The next section will walk you through the process of setting up your project to use the SDK.

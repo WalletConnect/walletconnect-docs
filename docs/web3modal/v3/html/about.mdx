@@ -13,7 +13,7 @@ With Web3Modal HTML we work with the [@wagmi/core](https://wagmi.sh/core/getting
 ## Installation
 
 ```bash npm2yarn
-npm install @web3modal/wagmi@3.0.0-alpha.4 @wagmi/core viem
+npm install @web3modal/wagmi@3.0.0-alpha.5 @wagmi/core viem
 ```
 
 ## Implementation
@@ -31,9 +31,8 @@ Finally, pass `wagmiConfig` to the `Web3Modal` class.
 ```ts
 import { Web3Modal, defaultWagmiConfig } from '@web3modal/wagmi'
 
-import { disconnect, getAccount } from '@wagmi/core'
+import { disconnect, getAccount, watchAccount } from '@wagmi/core'
 import { mainnet, arbitrum } from '@wagmi/core/chains'
-import { watchAccount } from '@wagmi/core'
 
 // 1. Define constants
 const projectId = 'YOUR_PROJECT_ID'

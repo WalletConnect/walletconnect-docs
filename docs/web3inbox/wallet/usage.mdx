@@ -1,13 +1,14 @@
-import Container from './../components/Container'
+import Container from '../../components/Container'
 import Tabs from '@theme/Tabs'
 import TabItem from '@theme/TabItem'
-import PlatformTabs from '../components/PlatformTabs'
-import PlatformTabItem from '../components/PlatformTabItem'
-import CloudBanner from '../components/CloudBanner'
+import PlatformTabs from '../../components/PlatformTabs'
+import PlatformTabItem from '../../components/PlatformTabItem'
+import Wrapper from '../../components/Home/Wrapper'
+import CloudBanner from '../../components/CloudBanner'
 
 # Usage
 
-This documentation outlines the steps for configuring and using the Web3Inbox SDK within your iOS and Android application.
+This usage step is to configure and use the Web3Inbox SDK Widget in your project.
 
 <CloudBanner />
 
@@ -15,11 +16,11 @@ This documentation outlines the steps for configuring and using the Web3Inbox SD
 
 <PlatformTabs
 	groupId="w3w"
-	activeOptions={["ios","android"]}
+	activeOptions={["ios","android", "react-native"]}
 >
 <PlatformTabItem value="ios">
 
-Before configuring Web3Inbox, make sure you have properly configured the [Networking Client](../api/core/relay.mdx) first
+Before configuring Web3Inbox, make sure you have properly configured the [Networking Client](../../api/core/relay.mdx) first
 
 The following Swift code snippet demonstrates how to configure the Web3Inbox Client.
 
@@ -35,6 +36,7 @@ Web3Inbox.configure(
     onSign: onSign()
 )
 ```
+
 Parameters:
 
 `account`: Wallet account
@@ -48,7 +50,6 @@ Parameters:
 `crypto`: Provide your own implementation of the CryptoProvider protocol.
 
 `onSign`: Web3Inbox client will request user to sign messages with its account private key. The message may be a Sync Storage derivation key or Identity key registration. `SigningCallback` designed as async closure that allows to connect signature request UI.
-
 
 #### Register an identity key and enable cross-device account syncing
 
@@ -71,7 +72,6 @@ func onSign(message: String) -> SigningResult {
 }
 ```
 
-
 #### iOS Permissions Configuration
 
 For utilizing the "Scan QR Code" feature, you need to add `NSCameraUsageDescription` to your `info.plist` file.
@@ -85,7 +85,6 @@ For utilizing the "Scan QR Code" feature, you need to add `NSCameraUsageDescript
 <PlatformTabItem value="android">
 
 To initialize the Web3Inbox client, create a `Inbox.Params.Init` object in the Android Application class with the Core Client. The `Inbox.Params.Init` object will then be passed to the `Web3Inbox` initialize function.
-
 
 ```kotlin
 val accountsPrivateKey: ByteArray = /* address' private key. */
@@ -103,9 +102,9 @@ val appMetaData = Core.Model.AppMetaData(
 
 CoreClient.initialize(relayServerUrl = serverUrl, connectionType = ConnectionType.AUTOMATIC, application = this, metaData = appMetaData)
 
-Web3Inbox.initialize(Inbox.Params.Init(core = CoreClient, account = Inbox.Type.AccountId(caip10Account), onSign = { message -> 
-    // Message to be signed by the user. 
-    //    If user decides to sign the message, use the CacaoSigner util class to sign the message. 
+Web3Inbox.initialize(Inbox.Params.Init(core = CoreClient, account = Inbox.Type.AccountId(caip10Account), onSign = { message ->
+    // Message to be signed by the user.
+    //    If user decides to sign the message, use the CacaoSigner util class to sign the message.
     //    If user decides to not sign the message, return null
     return CacaoSigner.sign(message, accountsPrivateKey, SignatureType.EIP191) OR null
     }
@@ -113,6 +112,12 @@ Web3Inbox.initialize(Inbox.Params.Init(core = CoreClient, account = Inbox.Type.A
     // Error will be thrown if there's an issue during initialization
 }
 ```
+
+</PlatformTabItem>
+<PlatformTabItem value="react-native">
+
+All clients will be initialized as soon as the Web3Inbox component is rendered for the first time.
+
 </PlatformTabItem>
 </PlatformTabs>
 
@@ -120,7 +125,7 @@ Web3Inbox.initialize(Inbox.Params.Init(core = CoreClient, account = Inbox.Type.A
 
 <PlatformTabs
 	groupId="w3w"
-	activeOptions={["ios","android"]}
+	activeOptions={["ios","android", "react-native"]}
 >
 <PlatformTabItem value="ios">
 
@@ -131,7 +136,9 @@ Web3Inbox.instance
 ```
 
 #### Assign Web3Inbox WebView to a ViewController
+
 Web3Inbox provides a user interface within a webView. Assign the provided webView to a ViewController's view as shown:
+
 ```swift
 import UIKit
 import Web3Inbox
@@ -164,12 +171,12 @@ final class Web3InboxViewController: UIViewController {
 <PlatformTabItem value="android">
 
 Once the Web3Inbox client is [initialized](#client-configuration), all that's left to do is to place the `Web3Inbox.View` in your app.
-We support both [Compose](https://developer.android.com/jetpack/compose), which sample sample implementation can be found in 
+We support both [Compose](https://developer.android.com/jetpack/compose), which sample sample implementation can be found in
 our [sample app](https://github.com/WalletConnect/WalletConnectKotlinV2/blob/develop/samples/web3wallet/src/main/android/com/walletconnect/web3/wallet/ui/routes/composable_routes/web3inbox/Web3InboxRoute.kt)
 
 #### Composable Web3Inbox.View()
 
-To remember Web3Inbox state call `Web3Inbox.rememberWeb3InboxState()` which later needs to be passed to 
+To remember Web3Inbox state call `Web3Inbox.rememberWeb3InboxState()` which later needs to be passed to
 `Web3Inbox.View(state)` composable.To display Web3Inbox with Compose call `Web3Inbox.View(state)` somewhere in your app.
 
 ```kotlin
@@ -181,14 +188,125 @@ To remember Web3Inbox state call `Web3Inbox.rememberWeb3InboxState()` which late
 
 #### Android XML
 
-Adding Web3Inbox to legacy Views should be achieved according to Google's guidelines: 
+Adding Web3Inbox to legacy Views should be achieved according to Google's guidelines:
 https://developer.android.com/jetpack/compose/migrate/interoperability-apis/compose-in-views.
 
 #### Prevent reloading of Web3Inbox
 
 **IMPORTANT:** If Web3Inbox's inner WebView is reloaded it will lose state and be displayed as blank page.
-To prevent reloading of Web3Inbox the activity that contains the `Web3Inbox.View` add 
+To prevent reloading of Web3Inbox the activity that contains the `Web3Inbox.View` add
 `android:configChanges="orientation|screenSize"` to `<activity>` element `Manifest.xml` that houses Web3Inbox.
+
+</PlatformTabItem>
+
+<PlatformTabItem value="react-native">
+
+This example makes use of [WalletConnect Modal](/2.0/advanced/walletconnectmodal/about?platform=react-native) for simplicity but you can also integrate Web3Inbox into your React Native Wallet by providing the following props.
+
+For more context, feel free to check our [example](https://github.com/WalletConnect/react-native-examples/tree/web3inbox-dapp/dapps/web3inbox).
+
+```tsx
+import { Web3Inbox } from '@walletconnect/web3inbox-webview'
+import { useCallback, useState } from 'react'
+
+export default function Example() {
+  const { provider, isConnected, address } = useWalletConnectModal()
+  const [isVisible, setIsVisible] = useState(true)
+
+  const toggleWeb3InboxModal = useCallback(
+    () => setIsVisible(isCurrentlyVisible => !isCurrentlyVisible),
+    []
+  )
+
+  const handleSign = useCallback(
+    async (message: string) => {
+      const response = await provider?.request(
+        {
+          method: 'personal_sign',
+          params: [message, address]
+        },
+        'eip155:1'
+      )
+      return response as string
+    },
+    [provider, address]
+  )
+
+  const clientMetadata = {
+    name: 'Web3Inbox React Native Example',
+    description: 'An example app to showcase how to use Web3Inbox React Native SDK',
+    url: 'https://github.com/WalletConnect/web3inbox-js-sdk',
+    icons: ['https://avatars.githubusercontent.com/u/37784886']
+  }
+
+  return (
+    <View>
+      <Web3Inbox
+        projectId={projectId}
+        ethAddress={address}
+        onSign={handleSign}
+        visible={isVisible}
+        setVisible={toggleWeb3InboxModal}
+        clientMetadata={clientMetadata}
+      />
+    </View>
+  )
+}
+```
+
+#### Required Props
+
+#### projectId `string`
+
+Get your project ID key on [WalletConnect Cloud](https://cloud.walletconnect.com).
+
+#### ethAddress `string`
+
+Ethereum wallet address of the current user.
+
+#### onSign `(message: string) => Promise<string>`
+
+Web3Inbox client will request user to sign messages with its account private key. The message may be a Sync Storage derivation key or Identity key registration.
+
+#### clientMetadata
+
+Web3Inbox will consume your metadata for various use cases, such as displaying your logo and the name of your project.
+
+```ts
+interface IClientMetadata {
+  name: string
+  description: string
+  url: string
+  icons: string[]
+}
+```
+
+#### visible `boolean`
+
+Determines visibility of Web3Inbox webview.
+
+#### setVisible `() => void`
+
+Function to set `visible` prop to true or false.
+
+#### Optional Props
+
+#### closeButton `React.ReactNode`
+
+Provide a custom component to close Web3Inbox webview.
+
+#### chatEnabled `boolean`
+
+Enable or disable Chat SDK in Web3Inbox (default: `true`), setting it to `false` will also remove the navigation item.
+
+#### notifyEnabled `boolean`
+
+Enable or disable Notify SDK in Web3Inbox (default: `true`), setting it to `false` will also remove the navigation item.
+
+#### settingsEnabled `boolean`
+
+Enable or disable settigns page in Web3Inbox (default: `true`), setting it to `false` will also remove the navigation item.
+
 </PlatformTabItem>
 </PlatformTabs>
 
@@ -196,13 +314,13 @@ To prevent reloading of Web3Inbox the activity that contains the `Web3Inbox.View
 
 <PlatformTabs
 	groupId="w3w"
-	activeOptions={["ios","android"]}
+	activeOptions={["ios","android", "react-native"]}
 >
 <PlatformTabItem value="ios">
 
 #### Configure your project to enable Push Notifications
 
-[Configure Project](../advanced/echo-server.md)
+[Configure Project](../../advanced/echo-server.md)
 
 #### Register for Push Notifications
 
@@ -230,20 +348,20 @@ call registerForPushNotifications() early in your app's lifecycle to initiate th
 
 Receive token from Apple Push Notification Services and register it at the Push Server:
 
-
 ```swift
     func application(
       _ application: UIApplication,
       didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data
     ) {
 
-        Task(priority: .high) {            
+        Task(priority: .high) {
             try await Web3Inbox.instance.register(deviceToken: deviceToken)
         }
     }
 ```
 
 #### Decrypting Push Notifications
+
 Push notifications sent via APNs are encrypted and carry the following payload:
 
 ```
@@ -257,7 +375,7 @@ Push notifications sent via APNs are encrypted and carry the following payload:
 }
 ```
 
-To decrypt a Push Notification (PN), you need to instantiate a [UNNotificationServiceExtension](https://developer.apple.com/documentation/usernotifications/unnotificationserviceextension). 
+To decrypt a Push Notification (PN), you need to instantiate a [UNNotificationServiceExtension](https://developer.apple.com/documentation/usernotifications/unnotificationserviceextension).
 
 For details on how to modify the content in newly delivered notifications, refer to the official Apple Developer Documentation [here](https://developer.apple.com/documentation/usernotifications/modifying_content_in_newly_delivered_notifications).
 
@@ -287,6 +405,11 @@ override func didReceive(_ request: UNNotificationRequest, withContentHandler co
 <PlatformTabItem value="android">
 
 Currently Web3Inbox SDK contains Chat SDK features. Push SDK features coming soon.
+
+</PlatformTabItem>
+<PlatformTabItem value="react-native">
+
+Currently Web3Inbox SDK contains Chat SDK features. Notify SDK features coming soon.
 
 </PlatformTabItem>
 </PlatformTabs>
