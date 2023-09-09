@@ -15,7 +15,7 @@ Its purpose is to provide a secure channel for proposing protocols or sending re
 
 <PlatformTabs
 	groupId="api"
-	activeOptions={["web","ios","android","react-native", "unity"]}
+	activeOptions={["web","ios","android","react-native","unity","csharp"]}
 >
 <PlatformTabItem value="web">
 
@@ -111,7 +111,7 @@ Each SDK uses the same implementation of `core/pairing` (via `@walletconnect/cor
 To run multiple SDKs side-by-side (e.g. Sign and Auth), please refer to the [Sharing a Core instance] guide.
 
 </PlatformTabItem>
-<PlatformTabItem value="unity">
+<PlatformTabItem value="csharp">
 
 Install the `WalletConnect.Core` nuget package, which implements the Pairing API
 
@@ -119,7 +119,7 @@ Install the `WalletConnect.Core` nuget package, which implements the Pairing API
 dotnet add package WalletConnect.Core
 ```
 
-Once the `WalletConnect.Core` library is created, create a Metadata object. It will describe your application and define its appearance in a web browser. Then configure the Pair instance with a metadata object you have instantiated.
+Once the `WalletConnect.Core` library is installed, create a Metadata object. It will describe your application and define its appearance in a web browser. Then configure the Pair instance with a metadata object you have instantiated.
 
 ```csharp
 var metadata = new Metadata()
@@ -141,12 +141,48 @@ core.Pairing.Configure(metadata);
 ```
 
 </PlatformTabItem>
+<PlatformTabItem value="unity">
+
+:::tip
+
+Since `WalletConnectUnity` is a wrapper around `WalletConnectSharp`, usage of the pairing API is identical to `C#`. Please refer to C# documentation on how to use Pairing inside `WalletConnectUnity`.
+
+:::
+
+
+Install the `WalletConnectUnity` package from the [Github repo](https://github.com/WalletConnect/WalletConnectUnity)
+
+Once the `WalletConnectUnity` package is imported, create a new empty Game Object in your scene. This will hold the `WalletConnectUnity` component and other required components. 
+
+<-- TODO: Add image -->
+
+Inside the `WalletConnectUnity` component, you can configure the `Metadata` and other settings inside to the C# `CoreOptions` class.
+
+With `WalletConnectUnity` configured, you can grab `WalletConnectUnity.Instance.Core` field to access the `WalletConnectCore` API.
+
+```csharp
+void Start() 
+{
+  WalletConnectCore core = WalletConnectUnity.Instance.Core
+
+  // ... 
+}
+```
+
+:::info
+
+`WalletConnectUnity` will automatically initialize the `WalletConnectCore` module as well as run `core.Pairing.Configure(metadata)`. Therefore, no additional
+configuration is required. All settings, including `Metadata`, can be modified in the Unity Editor.
+
+:::
+
+</PlatformTabItem>
 </PlatformTabs>
 
 ## Usage
 <PlatformTabs
 	groupId="api"
-	activeOptions={["web","ios","android","react-native", "unity"]}
+	activeOptions={["web","ios","android","react-native","csharp"]}
 >
 <PlatformTabItem value="web">
 
@@ -318,7 +354,7 @@ sdkClient.core.pairing.events.on("pairing_delete", ({ id, topic }) => {
 });
 ```
 </PlatformTabItem>
-<PlatformTabItem value="unity">
+<PlatformTabItem value="csharp">
 
 #### Pairing Wallet Usage
 
