@@ -1189,6 +1189,11 @@ public class EthGetTransactionReceipt : List<string>
     public EthGetTransactionReceipt(params string[] hashes) : base(hashes)
     {
     }
+
+    // needed for proper json deserialization
+    public EthGetTransactionReceipt() 
+    {
+    }
 }
 ```
 
@@ -1540,13 +1545,13 @@ Auth requests are used to authenticate a user with a dapp. The dapp will send a 
 
 :::info Note
 
-Auth requests are only supported on iOS, Android & Flutter
+Auth requests are only supported on iOS, Android, Flutter & C#
 
 :::
 
 ### Setup Auth Requests Handling
 
-<PlatformTabs groupId="w3w" activeOptions={["ios","android","flutter"]}>
+<PlatformTabs groupId="w3w" activeOptions={["ios","android","flutter","csharp"]}>
 
 <PlatformTabItem value="ios">
 
@@ -1605,12 +1610,44 @@ Web3Wallet.respondSessionRequest(Wallet.Params.AuthRequestResponse(request.id, s
 <!-- TODO: -->
 
 </PlatformTabItem>
+<PlatformTabItem value="csharp">
+
+Subscribe to the `AuthRequested` event handler to listen for auth requests. This event handler
+triggers whenever a new auth request is sent to the wallet. The event is given the following object
+
+```csharp
+public class AuthRequest : TopicMessage
+{
+    [JsonProperty("params")]
+    public AuthRequestData Parameters;
+    
+    [JsonProperty("verifyContext")]
+    public VerifiedContext VerifyContext { get; set; }
+}
+```
+
+Where `AuthRequestData` provides the parameters for the new auth request.
+
+`VerifiedContext` provides a domain verification information about `AuthRequest`. It consists of origin of a Dapp from where the request has been sent, validation enum that says whether origin is **unknown**, **valid** or **invalid** and verify URL server.
+
+To enable or disable verification find the **Verify SDK** toggle in your project [cloud](https://cloud.walletconnect.com).
+
+Example `AuthRequested` event usage:
+
+```csharp
+sdk.AuthRequested += async (sender, authRequest) =>
+{
+    // code here
+};
+```
+
+</PlatformTabItem>
 
 </PlatformTabs>
 
 ### Approve Auth Requests
 
-<PlatformTabs groupId="w3w" activeOptions={["ios","android","flutter"]}>
+<PlatformTabs groupId="w3w" activeOptions={["ios","android","flutter","csharp"]}>
 
 <PlatformTabItem value="ios">
 
@@ -1644,11 +1681,38 @@ await web3Wallet.respondAuthRequest(
 ```
 
 </PlatformTabItem>
+<PlatformTabItem value="csharp">
+
+You can approve a dapp's auth request by responding with the user's signature.
+
+```csharp
+// TEST: Create NEthereum wallet to simulate signing
+var wallet = new Wallet(Wordlist.English, WordCount.Twelve);
+var walletAddress = wallet.GetAddresses(1)[0];
+var iss = $"did:pkh:eip155:1:{walletAddress}";
+
+sdk.AuthRequested += async (sender, authRequest) =>
+{
+    var message = sdk.FormatMessage(authRequest.Parameters.CacaoPayload, iss);
+
+    var signature = await wallet
+                            .GetAccount(walletAddress)
+                            .AccountSigningService
+                            .PersonalSign
+                            .SendRequestAsync(
+                              Encoding.UTF8.GetBytes(message)
+                            );
+    
+    await sdk.RespondAuthRequest(authRequest, signature, iss);
+};
+```
+
+</PlatformTabItem>
 </PlatformTabs>
 
 ### Reject Auth Requests
 
-<PlatformTabs groupId="w3w" activeOptions={["ios","android","flutter"]}>
+<PlatformTabs groupId="w3w" activeOptions={["ios","android","flutter","csharp"]}>
 
 <PlatformTabItem value="ios">
 
@@ -1674,6 +1738,28 @@ await web3Wallet.respondAuthRequest(
   iss: 'did:pkh:eip155:1:0x06C6A22feB5f8CcEDA0db0D593e6F26A3611d5fa',
   error: Errors.getSdkError(Errors.USER_REJECTED_AUTH),
 );
+```
+
+</PlatformTabItem>
+<PlatformTabItem value="csharp">
+
+To reject the request, pass in an error code and reason. They can be found [here](https://docs.walletconnect.com/2.0/specs/clients/sign/error-codes).
+
+```csharp
+// TEST: Create NEthereum wallet to simulate signing
+var wallet = new Wallet(Wordlist.English, WordCount.Twelve);
+var walletAddress = wallet.GetAddresses(1)[0];
+var iss = $"did:pkh:eip155:1:{walletAddress}";
+
+sdk.AuthRequested += (sender, authRequest) =>
+{
+    var errorResponse = new Error()
+    {
+        Code = 14001,
+        Message = "Can not login"
+    };
+    sdk.RespondAuthRequest(authRequest, errorResponse, iss);
+};
 ```
 
 </PlatformTabItem>
