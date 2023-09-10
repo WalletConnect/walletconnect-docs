@@ -7,7 +7,7 @@ import Table from '../../../components/Table'
 By default `themeMode` option will be set to user system settings 'light' or 'dark'. But you can override it like this:
 
 ```ts
-const modal = new Web3Modal({ wagmiConfig, projectId, chains, themeMode: 'light' })
+createWeb3Modal({ wagmiConfig, projectId, chains, themeMode: 'light' })
 ```
 
 ## themeVariables
@@ -15,7 +15,7 @@ const modal = new Web3Modal({ wagmiConfig, projectId, chains, themeMode: 'light'
 By default `themeVariables` are undefined. You can set them like this:
 
 ```ts
-const modal = new Web3Modal({
+createWeb3Modal({
   wagmiConfig,
   projectId,
   chains,

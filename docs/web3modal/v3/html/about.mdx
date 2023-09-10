@@ -13,7 +13,7 @@ With Web3Modal HTML we work with the [@wagmi/core](https://wagmi.sh/core/getting
 ## Installation
 
 ```bash npm2yarn
-npm install @web3modal/wagmi@beta @wagmi/core viem
+npm install @web3modal/wagmi@3.0.0-alpha.6 @wagmi/core viem
 ```
 
 ## Implementation
@@ -48,11 +48,11 @@ const modal = new Web3Modal({ wagmiConfig, projectId, chains })
 </TabItem>
 <TabItem value="custom" label="Advanced">
 
-Start by importing `Web3Modal`, `walletConnectProvider` and wagmi packages, then create `wagmiConfig` using your own settings.
-Finally, pass wagmi config to the `Web3Modal` class.
+Start by importing `createWeb3Modal`, `walletConnectProvider` and wagmi packages, then create `wagmiConfig` using your own settings.
+Finally, pass wagmi config to `createWeb3Modal`.
 
 ```ts
-import { Web3Modal, walletConnectProvider } from '@web3modal/wagmi'
+import { createWeb3Modal, walletConnectProvider } from '@web3modal/wagmi'
 
 import { configureChains, createConfig, disconnect, getAccount } from '@wagmi/core'
 import { mainnet } from '@wagmi/core/chains'
@@ -76,8 +76,8 @@ const wagmiConfig = createConfig({
   publicClient
 })
 
-// 3. Create Web3Modal
-const modal = new Web3Modal({ wagmiConfig, projectId, chains })
+// 3. Create modal
+createWeb3Modal({ wagmiConfig, projectId, chains })
 ```
 
 </TabItem>
