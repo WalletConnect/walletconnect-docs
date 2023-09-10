@@ -151,14 +151,14 @@ const config = {
         indexName: 'walletconnect',
         contextualSearch: true
       },
-      announcementBar: {
-        id: 'support_us',
-        content:
-          '🎉 Web3Modal v3 Beta is out. <a rel="noopener noreferrer" href="/2.0/web3modal/v3/about">Learn more</a>. 🎉',
-        backgroundColor: '#3182ce',
-        textColor: '#fff',
-        isCloseable: true
-      }
+      // announcementBar: {
+      //   id: 'support_us',
+      //   content:
+      //     '🎉 Web3Modal v3 Beta is out. <a rel="noopener noreferrer" href="/2.0/web3modal/v3/about">Learn more</a>. 🎉',
+      //   backgroundColor: '#3182ce',
+      //   textColor: '#fff',
+      //   isCloseable: true
+      // }
     }
 }
 
