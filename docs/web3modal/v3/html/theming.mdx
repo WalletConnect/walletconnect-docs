@@ -7,7 +7,23 @@ import Table from '../../../components/Table'
 By default `themeMode` option will be set to user system settings 'light' or 'dark'. But you can override it like this:
 
 ```ts
-createWeb3Modal({ wagmiConfig, projectId, chains, themeMode: 'light' })
+const modal = createWeb3Modal({ wagmiConfig, projectId, chains, themeMode: 'light' })
+```
+
+Alternatively you can set the `themeMode` after creating the modal
+
+```ts
+const modal = createWeb3Modal({ wagmiConfig, projectId, chains })
+
+modal.setThemeMode('dark')
+```
+
+You can also get the current `themeMode` value by calling the `getThemeMode` function
+
+```ts
+const modal = createWeb3Modal({ wagmiConfig, projectId, chains })
+
+const themeMode = modal.getThemeMode()
 ```
 
 ## themeVariables
@@ -15,7 +31,7 @@ createWeb3Modal({ wagmiConfig, projectId, chains, themeMode: 'light' })
 By default `themeVariables` are undefined. You can set them like this:
 
 ```ts
-createWeb3Modal({
+const modal = createWeb3Modal({
   wagmiConfig,
   projectId,
   chains,
@@ -24,6 +40,22 @@ createWeb3Modal({
     '--w3m-color-mix-strength': 40
   }
 })
+```
+
+Alternatively you can set the `themeVariables` after creating the modal
+
+```ts
+const modal = createWeb3Modal({ wagmiConfig, projectId, chains })
+
+modal.setThemeVariables({ ... })
+```
+
+You can also get the current `themeVariables` value by calling the `getThemeVariables` function
+
+```ts
+const modal = createWeb3Modal({ wagmiConfig, projectId, chains })
+
+const themeMode = modal.getThemeVariables()
 ```
 
 The following list shows the theme variables you can override:
@@ -63,3 +95,9 @@ The following list shows the theme variables you can override:
     }
   ]}
 />
+
+## Subscribe to theme changes
+
+```ts
+const unsubscribe = modal.subscribeTheme(newTheme => console.log(newTheme))
+```

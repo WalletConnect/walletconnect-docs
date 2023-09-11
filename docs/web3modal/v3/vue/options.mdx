@@ -54,15 +54,14 @@ createWeb3Modal({
       id:"myCustomWallet",
       name:"My Custom Wallet",
       image_url:"my_custom_wallet_image",  //optional
-      webapp_link:"",  //optional
       homepage: "www.mycustomwallet.com",  //optional
       image_id: "image_id",  //optional
       image_url: "wallet_image",  //optional
       order: 2,  //optional
 
       /* for Mobile wallets */
-      mobile_link: "mobile_link",  //optional
-      desktop_link: "desktop_link", //optional
+      mobile_link: "mobile_link",  //optional - Deeplink or universal
+      desktop_link: "desktop_link", //optional - Deeplink
       webapp_link: "webapp_link", //optional
       app_store: "app_store", //optional
       play_store: "play_store", //optional
@@ -82,7 +81,7 @@ createWeb3Modal({
 ## featuredWalletIds
 
 You can select the wallets that are going to be shown on the modal's main view. Default wallets are MetaMask and Trust Wallet. 
-You can find the wallets ids in [WalletConnect explorer](https://walletconnect.com/explorer?type=wallet)
+You can find the wallets ids in the [WalletConnect Explorer](https://walletconnect.com/explorer?type=wallet)
 
 ```ts
 createWeb3Modal({

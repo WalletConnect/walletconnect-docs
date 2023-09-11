@@ -2,10 +2,10 @@ import Table from '../../../components/Table'
 
 # Options
 
-The following options can be passed to the `createWeb3Modal` function:
+The following options can be passed to the `const modal = createWeb3Modal` function:
 
 ```ts
-createWeb3Modal({ wagmiConfig, projectId, chains, ...options })
+const modal = createWeb3Modal({ wagmiConfig, projectId, chains, ...options })
 ```
 
 ## defaultChain
@@ -15,7 +15,7 @@ You can set a desired chain for the initial connection:
 ```ts
 import { mainnet } from 'wagmi/chains'
 
-createWeb3Modal({
+const modal = createWeb3Modal({
   //...
   defaultChain: mainnet
 })
@@ -28,7 +28,7 @@ You can define an array of wallet ids you'd like to prioritize (order is respect
 You can get these ids from the explorer link mentioned before by clicking on a copy icon of desired wallet card.
 
 ```ts
-createWeb3Modal({
+const modal = createWeb3Modal({
   //...
   includeWalletIds: [
     '1ae92b26df02f0abca6304df07debccd18262fdf5fe82daa81593582dac9a369',
@@ -44,7 +44,7 @@ You can define an array of wallet ids you'd like to exclude.
 You can get these ids from the explorer link mentioned before by clicking on a copy icon of desired wallet card.
 
 ```ts
-createWeb3Modal({
+const modal = createWeb3Modal({
   //...
   excludeWalletIds: [
     '1ae92b26df02f0abca6304df07debccd18262fdf5fe82daa81593582dac9a369',
