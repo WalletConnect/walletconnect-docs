@@ -1,4 +1,5 @@
 import CloudBanner from '../../../components/CloudBanner'
+import Table from '../../../components/Table'
 
 # Vue
 
@@ -48,7 +49,9 @@ Finally, pass `wagmiConfig` to `createWeb3Modal`.
   createWeb3Modal({ wagmiConfig, projectId, chains })
 </script>
 
-<template> // Rest of your app ... </template>
+<template>
+  // Rest of your app ... 
+</template>
 ```
 
 </TabItem>
@@ -101,6 +104,7 @@ Finally, pass wagmi config to `createWeb3Modal`.
 ## Trigger the modal
 
 To open Web3Modal you can use our **default** web components or build your own logic yourself
+
 <Tabs>
 <TabItem value="default" label="Default">
 
@@ -112,6 +116,7 @@ You can use default web components to open the modal
   <w3m-button />
 </template>
 ```
+
 Additional pre-built web components:
 
 ```html
@@ -122,9 +127,13 @@ Additional pre-built web components:
   <w3m-account-button />
 </template>
 ```
+
+Learn how to customize the Web3Modal web components [here](./options.mdx#web-components-properties)
+
 :::note
 Web components are global html elements that don't require importing.
 :::
+
 </TabItem>
 <TabItem value="advanced" label="Advanced">
 
