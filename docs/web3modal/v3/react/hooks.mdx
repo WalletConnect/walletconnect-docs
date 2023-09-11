@@ -1,0 +1,24 @@
+# Hooks
+
+Programmatically control the modal. Useful when you want to use your own UI elements and subscribe to modals state
+
+### useWeb3ModalTheme
+
+```ts
+const { themeMode, themeVariables, setThemeMode, setThemeVariables } = useWeb3ModalTheme()
+```
+
+### useWeb3Modal
+
+Control the modal with the `useWeb3Modal` hook
+```ts
+import { useWeb3Modal } from '@web3modal/wagmi/react'
+
+export default function Component() {
+//...
+  const { open, close } = useWeb3Modal()
+//...
+  open()
+//...
+```
+

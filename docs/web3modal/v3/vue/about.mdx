@@ -1,5 +1,4 @@
 import CloudBanner from '../../../components/CloudBanner'
-import Table from '../../../components/Table'
 
 # Vue
 
@@ -95,7 +94,9 @@ Finally, pass wagmi config to `createWeb3Modal`.
   createWeb3Modal({ wagmiConfig, projectId, chains })
 </script>
 
-<template> // Rest of your app ... </template>
+<template>
+  // Rest of your app ...
+</template>
 ```
 
 </TabItem>
@@ -128,7 +129,7 @@ Additional pre-built web components:
 </template>
 ```
 
-Learn how to customize the Web3Modal web components [here](./options.mdx#web-components-properties)
+Learn how to customize the Web3Modal web components [here](../shared/options.mdx#web-components-properties)
 
 :::note
 Web components are global html elements that don't require importing.

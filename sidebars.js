@@ -353,9 +353,11 @@ module.exports = {
           className: 'sidebar__logo sidebar__logo--react',
           label: 'React',
           items: [
-            { type: 'doc', label: 'About', id: 'web3modal/v3/react/about' },
+            { type: 'doc', label: 'Getting started', id: 'web3modal/v3/react/about' },
             'web3modal/v3/react/options',
-            'web3modal/v3/react/theming'
+            'web3modal/v3/react/components',
+            'web3modal/v3/react/theming',
+            'web3modal/v3/react/hooks',
           ]
         },
         {
@@ -363,9 +365,11 @@ module.exports = {
           className: 'sidebar__logo sidebar__logo--vue',
           label: 'Vue',
           items: [
-            { type: 'doc', label: 'About', id: 'web3modal/v3/vue/about' },
+            { type: 'doc', label: 'Getting started', id: 'web3modal/v3/vue/about' },
             'web3modal/v3/vue/options',
-            'web3modal/v3/vue/theming'
+            'web3modal/v3/vue/components',
+            'web3modal/v3/vue/theming',
+            'web3modal/v3/vue/composables',
           ]
         },
         {
@@ -373,9 +377,11 @@ module.exports = {
           className: 'sidebar__logo sidebar__logo--html',
           label: 'HTML',
           items: [
-            { type: 'doc', label: 'About', id: 'web3modal/v3/html/about' },
+            { type: 'doc', label: 'Getting started', id: 'web3modal/v3/html/about' },
             'web3modal/v3/html/options',
-            'web3modal/v3/html/theming'
+            'web3modal/v3/html/components',
+            'web3modal/v3/html/theming',
+            'web3modal/v3/html/actions',
           ]
         },
         'web3modal/v3/upgrade',

@@ -1,0 +1,20 @@
+# Composables
+
+Programmatically control the modal. Useful when you want to use your own UI elements and subscribe to modals state
+
+### useWeb3ModalTheme
+
+```ts
+const { setThemeMode, setThemeVariables, themeMode, themeVariables } = useWeb3ModalTheme()
+```
+
+### useWeb3Modal
+
+Control the modal with the `useWeb3Modal` function
+```ts
+import { useWeb3Modal } from '@web3modal/wagmi/react'
+
+const { open, close } = useWeb3Modal()
+
+open()
+```

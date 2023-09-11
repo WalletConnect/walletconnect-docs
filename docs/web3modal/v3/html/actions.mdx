@@ -1,0 +1,53 @@
+# Actions
+
+## ThemeMode
+
+Set the `themeMode` after creating the modal
+
+```ts
+const modal = createWeb3Modal({ wagmiConfig, projectId, chains })
+
+modal.setThemeMode('dark')
+```
+
+Get the current `themeMode` value by calling the `getThemeMode` function
+
+```ts
+const modal = createWeb3Modal({ wagmiConfig, projectId, chains })
+
+const themeMode = modal.getThemeMode()
+```
+
+## themeVariables
+
+Set the `themeVariables` after creating the modal
+
+```ts
+const modal = createWeb3Modal({ wagmiConfig, projectId, chains })
+
+modal.setThemeVariables({ ... })
+```
+
+Get the current `themeVariables` value by calling the `getThemeVariables` function
+
+```ts
+const modal = createWeb3Modal({ wagmiConfig, projectId, chains })
+
+const themeMode = modal.getThemeVariables()
+```
+
+## Subscribe to theme changes
+
+```ts
+const unsubscribe = modal.subscribeTheme(newTheme => console.log(newTheme))
+```
+
+## open and close the modal
+
+```ts
+const modal = createWeb3Modal({ wagmiConfig, projectId, chains })
+
+modal.open()
+//...
+modal.close()
+```
