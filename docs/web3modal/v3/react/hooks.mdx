@@ -6,6 +6,13 @@ Programmatically control the modal. Useful when you want to use your own UI elem
 
 ```ts
 const { themeMode, themeVariables, setThemeMode, setThemeVariables } = useWeb3ModalTheme()
+
+setThemeMode('dark')
+
+setThemeVariables({
+  '--w3m-color-mix': '#00BB7F',
+  '--w3m-color-mix-strength': 40
+})
 ```
 
 ### useWeb3Modal

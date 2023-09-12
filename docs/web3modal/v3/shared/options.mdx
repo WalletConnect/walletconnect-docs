@@ -51,26 +51,26 @@ createWeb3Modal({
     {
       id:"myCustomWallet",
       name:"My Custom Wallet",
-      image_url:"my_custom_wallet_image",  //optional
-      homepage: "www.mycustomwallet.com",  //optional
-      image_id: "image_id",  //optional
-      image_url: "wallet_image",  //optional
-      order: 2,  //optional
+      image_url:"my_custom_wallet_image",  // Optional
+      homepage: "www.mycustomwallet.com",  // Optional
+      image_id: "image_id",  // Optional
+      image_url: "wallet_image",  // Optional
+      order: 2,  // Optional
 
       /* for Mobile wallets */
-      mobile_link: "mobile_link",  //optional - Deeplink or universal
-      desktop_link: "desktop_link", //optional - Deeplink
-      webapp_link: "webapp_link", //optional
-      app_store: "app_store", //optional
-      play_store: "play_store", //optional
+      mobile_link: "mobile_link",  // Optional - Deeplink or universal
+      desktop_link: "desktop_link", // Optional - Deeplink
+      webapp_link: "webapp_link", // Optional
+      app_store: "app_store", // Optional
+      play_store: "play_store", // Optional
 
       /* for Browser Extension wallets */
       injected:[
         {
-          namespace:'eip:155',
-          injected_id:'isMetaMask'
+          namespace:'trustwallet',
+          injected_id:'isTrust'
         }
-      ] //optional
+      ] // Optional
     }
   ]
 })

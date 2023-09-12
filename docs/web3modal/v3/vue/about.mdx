@@ -13,12 +13,12 @@ With Web3Modal Vue, we work with the Wagmi library which contains everything you
 ## Installation
 
 ```bash npm2yarn
-npm install @web3modal/wagmi@3.0.0-alpha.6 @wagmi/core viem
+npm install @web3modal/wagmi@3.0.0-alpha.8 @wagmi/core viem
 ```
 
 ## Implementation
 
-You can start Web3Modal configuration using either **default** or **advanced** mode.
+You can start Web3Modal configuration using either **default** or **custom** mode.
 
 Default mode will implement WalletConnect, Browser Wallets (injected) and Coinbase options in addition to Wagmi's public clients and [WalletConnect's provider](../../../cloud/blockchain-api.md).
 
@@ -54,9 +54,9 @@ Finally, pass `wagmiConfig` to `createWeb3Modal`.
 ```
 
 </TabItem>
-<TabItem value="custom" label="Advanced">
+<TabItem value="custom" label="Custom">
 
-Start by importing `createWeb3Modal`, `walletConnectProvider` and wagmi packages, then create wagmi config using your own settings or our default presets as shown below.
+Start by importing `createWeb3Modal`, `walletConnectProvider` and wagmi packages, then create wagmi config using your own settings.
 Finally, pass wagmi config to `createWeb3Modal`.
 
 ```html
@@ -104,10 +104,10 @@ Finally, pass wagmi config to `createWeb3Modal`.
 
 ## Trigger the modal
 
-To open Web3Modal you can use our **default** web components or build your own logic yourself
+To open Web3Modal you can use our **default** web components or build your own logic with Web3Modal composables.
 
 <Tabs>
-<TabItem value="default" label="Default">
+<TabItem value="components" label="Components">
 
 You can use default web components to open the modal
 
@@ -118,27 +118,16 @@ You can use default web components to open the modal
 </template>
 ```
 
-Additional pre-built web components:
-
-```html
-// src/components/ConnectButton.vue
-<template>
-  <w3m-network-button />
-  <w3m-connect-button />
-  <w3m-account-button />
-</template>
-```
-
-Learn how to customize the Web3Modal web components [here](../shared/options.mdx#web-components-properties)
+Learn more about the Web3Modal web components [here](./components.mdx)
 
 :::note
 Web components are global html elements that don't require importing.
 :::
 
 </TabItem>
-<TabItem value="advanced" label="Advanced">
+<TabItem value="composables" label="Composables">
 
-You can trigger the modal by calling the `open` method from `useWeb3Modal` function.
+You can trigger the modal by calling the `open` method from `useWeb3Modal` composable.
 
 ```html
 // src/components/ConnectButton.vue

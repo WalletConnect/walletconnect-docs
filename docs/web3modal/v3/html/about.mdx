@@ -19,7 +19,7 @@ Yo can install Web3Modal SDK by using a package manager like *npm* or with CDN i
 
 Choose your preferred package manager
 ```bash npm2yarn
-npm install @web3modal/wagmi@3.0.0-alpha.6 @wagmi/core viem
+npm install @web3modal/wagmi@3.0.0-alpha.8 @wagmi/core viem
 ```
 
 </TabItem>
@@ -36,7 +36,7 @@ import { mainnet, arbitrum } from 'https://esm.sh/@wagmi/core/chains?bundle'
 
 ## Implementation
 
-You can start Web3Modal configuration using either **default** or **advanced** mode.
+You can start Web3Modal configuration using either **default** or **custom** mode.
 
 Default mode will implement WalletConnect, Browser Wallets (injected) and Coinbase options in addition to Wagmi's public clients and [WalletConnect's provider](../../../cloud/blockchain-api.md).
 
@@ -63,7 +63,7 @@ const modal = createWeb3Modal({ wagmiConfig, projectId, chains })
 ```
 
 </TabItem>
-<TabItem value="custom" label="Advanced">
+<TabItem value="custom" label="Custom">
 
 Start by importing `createWeb3Modal`, `walletConnectProvider` and wagmi packages, then create `wagmiConfig` using your own settings.
 Finally, pass wagmi config to `createWeb3Modal`.
@@ -71,12 +71,11 @@ Finally, pass wagmi config to `createWeb3Modal`.
 ```ts
 import { createWeb3Modal, walletConnectProvider } from '@web3modal/wagmi'
 
-import { configureChains, createConfig, disconnect, getAccount } from '@wagmi/core'
+import { configureChains, createConfig } from '@wagmi/core'
 import { mainnet } from '@wagmi/core/chains'
 import { InjectedConnector } from '@wagmi/core'
 import { CoinbaseWalletConnector } from '@wagmi/core/connectors/coinbaseWallet'
 import { WalletConnectConnector } from '@wagmi/core/connectors/walletConnect'
-import { watchAccount } from '@wagmi/core'
 
 // 1. Define constants
 const projectId = 'YOUR_PROJECT_ID'
@@ -102,9 +101,9 @@ const modal = createWeb3Modal({ wagmiConfig, projectId, chains })
 
 ## Trigger the modal
 
-To open Web3Modal you can use our **default** web components or build your own logic yourself
+To open Web3Modal you can use our web components or build your own logic with Web3Modal actions
 <Tabs>
-<TabItem value="default" label="Default">
+<TabItem value="components" label="Components">
 You can use default web components to open the modal
 
 ```html
@@ -120,31 +119,15 @@ You can use default web components to open the modal
   </body>
 </html>
 ```
-Additional pre-built web components:
-
-```html
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title>HTML Example</title>
-  </head>
-  <body>
-    <w3m-network-button />
-    <w3m-connect-button />
-    <w3m-account-button />
-    <script type="module" src="main.js"></script>
-  </body>
-</html>
-```
+Learn more about the Web3Modal web components [here](./components.mdx)
 
 :::note
 Web components are global html elements that don't require importing.
 :::
 </TabItem>
-<TabItem value="advanced" label="Advanced">
+<TabItem value="actions" label="Actions">
 
-You can trigger the modal by calling the `open` method on a modal instance of the `Web3Modal` class.
+You can trigger the modal by calling the `open` function from a modal instance returned by `createWeb3Modal`.
 
 Let's first add two html elements to display information to the user:
 
@@ -167,6 +150,7 @@ Following with our main.js file, we can now add the needed logic to open the mod
 
 ```ts
 //main.js
+import { watchAccount, disconnect, getAccount } from '@wagmi/core'
 
 function connect() {
   if (getAccount().isConnected) {
