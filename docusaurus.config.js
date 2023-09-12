@@ -41,7 +41,15 @@ const config = {
               path: '2.0'
             }
           },
-          remarkPlugins: [[require('@docusaurus/remark-plugin-npm2yarn'), { sync: true }]]
+          remarkPlugins: [
+            [
+              require('@docusaurus/remark-plugin-npm2yarn'),
+              {
+                sync: true,
+                converters: ['yarn', 'pnpm', ['Bun', code => code.replace(/npm/g, 'bun')]]
+              }
+            ]
+          ]
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css')
@@ -54,7 +62,7 @@ const config = {
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     {
       image: 'img/Docs-OG.png',
-      metadata: [{name: 'twitter:card', content: 'summary_large_image'}],
+      metadata: [{ name: 'twitter:card', content: 'summary_large_image' }],
       navbar: {
         items: [
           {
@@ -136,13 +144,13 @@ const config = {
           {
             className: 'theme-code-block-highlighted-delete',
             line: 'highlight-delete',
-            block: {start: 'highlight-delete-start', end: 'highlight-delete-end'},
+            block: { start: 'highlight-delete-start', end: 'highlight-delete-end' }
           },
           {
             className: 'theme-code-block-highlighted-add',
             line: 'highlight-add',
-            block: {start: 'highlight-add-start', end: 'highlight-add-end'},
-          },
+            block: { start: 'highlight-add-start', end: 'highlight-add-end' }
+          }
         ]
       },
       algolia: {
@@ -150,8 +158,7 @@ const config = {
         apiKey: '5921626237dc9040afc258af25d4e77d',
         indexName: 'walletconnect',
         contextualSearch: true
-      },
-      
+      }
     }
 }
 
