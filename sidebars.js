@@ -124,26 +124,25 @@ module.exports = {
             'web3inbox/about',
             {
               type: 'category',
-              label: 'Wallet',
-              items: ['web3inbox/wallet/installation', 'web3inbox/wallet/usage']
+              label: 'React',
+              items: [
+                'web3inbox/react/about',
+                'web3inbox/react/usage',
+                'web3inbox/react/options',
+                'web3inbox/react/theming']
             },
             {
               type: 'category',
-              label: 'Dapp',
-              items: [
-                {
-                  type: 'category',
-                  label: 'Widget',
-                  items: [
-                    'web3inbox/widget/about',
-                    'web3inbox/widget/usage',
-                    'web3inbox/widget/options',
-                    'web3inbox/widget/theming'
-                  ]
-                }
-              ]
+              label: 'HTML',
+              items: ['web3inbox/html/about']
             },
-            'web3inbox/resources'
+            {
+              type: 'category',
+              label: 'Vue',
+              items: ['web3inbox/react/about']
+            },
+            'web3inbox/resources',
+            'web3inbox/demo'
           ]
         }
       ]
