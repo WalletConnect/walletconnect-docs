@@ -1,0 +1,31 @@
+# Usage
+
+Using Embedded Widget is the way to go if you want a ready made UI that's ready for plug-and-play.
+
+
+
+## Getting Started
+
+<PlatformTabs
+	groupId="w3iw"
+	activeOptions={["react"]}
+>
+<PlatformTabItem value="react">
+
+```ts
+import { W3iWidget } from "@web3inbox/react-widget";
+import "@web3inbox/widget-react/dist/compiled.css";
+...
+
+return (
+	<W3iWidget 
+		account="0x..."
+		onSign={yourSignFunction}
+		onConnect={connectFunction}
+	/>
+)
+
+```
+
+</PlatformTabItem>
+</PlatformTabs>
