@@ -2,7 +2,9 @@
 
 ## Try Web3Inbox
 
-The fastest way to try Web3Inbox is to go to [preview.web3inbox.com](https://preview.web3inbox.com/) and try subscribing to some dapps. 
+The fastest way to try Web3Inbox.com is to go to [preview.web3inbox.com](https://preview.web3inbox.com/) and try subscribing to some dapps. Web3Inbox.com is a universal inbox for web3 users to access all their notifications and chats all in one place.
+
+- [Web3inbox.com](https://preview.web3inbox.com/
 
 Or access the repo at [github.com/WalletConnect/web3inbox](https://github.com/WalletConnect/web3inbox/).
 
