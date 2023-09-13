@@ -2,22 +2,7 @@ import Table from '../../../components/Table'
 
 # Hooks
 
-Programmatically control the modal. Useful when you want to use your own UI elements and subscribe to modals state
-
-### useWeb3ModalTheme
-
-```ts
-const { themeMode, themeVariables, setThemeMode, setThemeVariables } = useWeb3ModalTheme()
-
-setThemeMode('dark')
-
-setThemeVariables({
-  '--w3m-color-mix': '#00BB7F',
-  '--w3m-color-mix-strength': 40
-})
-```
-
-### useWeb3Modal
+## useWeb3Modal
 
 Control the modal with the `useWeb3Modal` hook
 ```ts
@@ -76,3 +61,16 @@ import { useAccount, useContract, useBalance } from 'wagmi'
 ```
 
 Learn more about Wagmi hooks [here](https://wagmi.sh/react/hooks/useAccount)
+
+## useWeb3ModalTheme
+
+```ts
+const { themeMode, themeVariables, setThemeMode, setThemeVariables } = useWeb3ModalTheme()
+
+setThemeMode('dark')
+
+setThemeVariables({
+  '--w3m-color-mix': '#00BB7F',
+  '--w3m-color-mix-strength': 40
+})
+```

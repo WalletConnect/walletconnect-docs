@@ -2,22 +2,7 @@ import Table from '../../../components/Table'
 
 # Composables
 
-Programmatically control the modal. Useful when you want to use your own UI elements and subscribe to modals state
-
-### useWeb3ModalTheme
-
-```ts
-const { setThemeMode, setThemeVariables, themeMode, themeVariables } = useWeb3ModalTheme()
-
-setThemeMode('dark')
-
-setThemeVariables({
-  '--w3m-color-mix': '#00BB7F',
-  '--w3m-color-mix-strength': 40
-})
-```
-
-### useWeb3Modal
+## useWeb3Modal
 
 Control the modal with the `useWeb3Modal` function
 ```ts
@@ -74,3 +59,16 @@ import { getAccount, writeContract, disconnect, watchAccount } from '@wagmi/core
 ```
 
 Learn more about Wagmi actions [here](https://wagmi.sh/core/actions/connect)
+
+## useWeb3ModalTheme
+
+```ts
+const { setThemeMode, setThemeVariables, themeMode, themeVariables } = useWeb3ModalTheme()
+
+setThemeMode('dark')
+
+setThemeVariables({
+  '--w3m-color-mix': '#00BB7F',
+  '--w3m-color-mix-strength': 40
+})
+```

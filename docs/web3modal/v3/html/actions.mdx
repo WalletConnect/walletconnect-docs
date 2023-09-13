@@ -2,48 +2,6 @@ import Table from '../../../components/Table'
 
 # Actions
 
-## ThemeMode
-
-Set the `themeMode` after creating the modal
-
-```ts
-const modal = createWeb3Modal({ wagmiConfig, projectId, chains })
-
-modal.setThemeMode('dark')
-```
-
-Get the current `themeMode` value by calling the `getThemeMode` function
-
-```ts
-const modal = createWeb3Modal({ wagmiConfig, projectId, chains })
-
-const themeMode = modal.getThemeMode()
-```
-
-## themeVariables
-
-Set the `themeVariables` after creating the modal
-
-```ts
-const modal = createWeb3Modal({ wagmiConfig, projectId, chains })
-
-modal.setThemeVariables({ ... })
-```
-
-Get the current `themeVariables` value by calling the `getThemeVariables` function
-
-```ts
-const modal = createWeb3Modal({ wagmiConfig, projectId, chains })
-
-const themeMode = modal.getThemeVariables()
-```
-
-## Subscribe to theme changes
-
-```ts
-const unsubscribe = modal.subscribeTheme(newTheme => console.log(newTheme))
-```
-
 ## Open and close the modal
 
 ```ts
@@ -99,3 +57,45 @@ import { getAccount, writeContract, disconnect, watchAccount } from '@wagmi/core
 ```
 
 Learn more about Wagmi actions [here](https://wagmi.sh/core/actions/connect)
+
+## ThemeMode
+
+Set the `themeMode` after creating the modal
+
+```ts
+const modal = createWeb3Modal({ wagmiConfig, projectId, chains })
+
+modal.setThemeMode('dark')
+```
+
+Get the current `themeMode` value by calling the `getThemeMode` function
+
+```ts
+const modal = createWeb3Modal({ wagmiConfig, projectId, chains })
+
+const themeMode = modal.getThemeMode()
+```
+
+## themeVariables
+
+Set the `themeVariables` after creating the modal
+
+```ts
+const modal = createWeb3Modal({ wagmiConfig, projectId, chains })
+
+modal.setThemeVariables({ ... })
+```
+
+Get the current `themeVariables` value by calling the `getThemeVariables` function
+
+```ts
+const modal = createWeb3Modal({ wagmiConfig, projectId, chains })
+
+const themeMode = modal.getThemeVariables()
+```
+
+## Subscribe to theme changes
+
+```ts
+const unsubscribe = modal.subscribeTheme(newTheme => console.log(newTheme))
+```
