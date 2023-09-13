@@ -126,12 +126,14 @@ module.exports = {
               type: 'category',
               label: 'Embedded widget',
               items: [
-                'web3inbox/embedded-widget/about']
+                'web3inbox/embedded-widget/about',
+                'web3inbox/embedded-widget/usage',
+              ]
             },
             {
               type: 'category',
               label: 'Core components',
-              items: ['web3inbox/core-components/about']
+              items: ['web3inbox/core-components/about', 'web3inbox/core-components/usage' ]
             },
             'web3inbox/resources',
             'web3inbox/demo'
