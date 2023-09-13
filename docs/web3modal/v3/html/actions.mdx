@@ -1,3 +1,5 @@
+import Table from '../../../components/Table'
+
 # Actions
 
 ## ThemeMode
@@ -51,3 +53,49 @@ modal.open()
 //...
 modal.close()
 ```
+
+You can also select the modal's view when calling the `open` function
+
+```ts
+modal.open({ view: 'Account' })
+```
+
+List of views you can select
+
+<Table
+  headers={['Variable', 'Description']}
+  data={[
+    {
+      variable: { code: 'Connect' },
+      description: 'Principal view of the modal - default view when disconnected',
+    },
+    {
+      variable: { code: 'Account' },
+      description: 'User profile - default view when connected',
+    },
+    {
+      variable: { code: 'All wallets' },
+      description: 'Shows the list of all available wallets',
+    },
+    {
+      variable: { code: 'Network' },
+      description: 'List of available networks - you can select and target a specific network before connecting',
+    },
+    {
+      variable: { code: 'WhatIsANetwork' },
+      description: '"What is a network" onboarding view',
+    },
+    {
+      variable: { code: 'WhatIsAWallet' },
+      description: '"What is a wallet" onboarding view',
+    }
+  ]}
+/>
+
+## Use wagmi actions
+
+```tsx
+import { getAccount, writeContract, disconnect, watchAccount } from '@wagmi/core'
+```
+
+Learn more about Wagmi actions [here](https://wagmi.sh/core/actions/connect)
