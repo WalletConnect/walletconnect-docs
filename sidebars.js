@@ -124,22 +124,14 @@ module.exports = {
             'web3inbox/about',
             {
               type: 'category',
-              label: 'React',
+              label: 'Embedded widget',
               items: [
-                'web3inbox/react/about',
-                'web3inbox/react/usage',
-                'web3inbox/react/options',
-                'web3inbox/react/theming']
+                'web3inbox/embedded-widget/about']
             },
             {
               type: 'category',
-              label: 'HTML',
-              items: ['web3inbox/html/about']
-            },
-            {
-              type: 'category',
-              label: 'Vue',
-              items: ['web3inbox/react/about']
+              label: 'Core components',
+              items: ['web3inbox/core-components/about']
             },
             'web3inbox/resources',
             'web3inbox/demo'
