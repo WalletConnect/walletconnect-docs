@@ -56,11 +56,48 @@ List of views you can select
 
 ## Use wagmi hooks
 
+### useAccount
+
+Hook for accessing account data and connection status.
+
+
 ```tsx
-import { useAccount, useContract, useBalance } from 'wagmi'
+import { useAccount } from 'wagmi'
+ 
+function App() {
+  const { address, isConnecting, isDisconnected } = useAccount()
+ 
+  if (isConnecting) return <div>Connecting…</div>
+  if (isDisconnected) return <div>Disconnected</div>
+  return <div>{address}</div>
+}
 ```
 
-Learn more about Wagmi hooks [here](https://wagmi.sh/react/hooks/useAccount)
+### useSignMessage
+
+Hook for signing messages with connected account.
+
+```tsx
+import { useSignMessage } from 'wagmi'
+ 
+function App() {
+  const { data, isError, isLoading, isSuccess, signMessage } = useSignMessage({
+    message: 'gm wagmi frens',
+  })
+ 
+  return (
+    <div>
+      <button disabled={isLoading} onClick={() => signMessage()}>
+        Sign message
+      </button>
+      {isSuccess && <div>Signature: {data}</div>}
+      {isError && <div>Error signing message</div>}
+    </div>
+  )
+}
+```
+
+Learn more about Wagmi hooks [here](https://wagmi.sh/react/hooks/useContractRead)
 
 ## useWeb3ModalTheme
 

@@ -54,11 +54,29 @@ List of views you can select
 
 ## Use wagmi actions
 
+### getAccount
+
+Action for accessing account data and connection status.
+
 ```tsx
-import { getAccount, writeContract, disconnect, watchAccount } from '@wagmi/core'
+import { getAccount } from '@wagmi/core'
+ 
+const account = getAccount()
 ```
 
-Learn more about Wagmi actions [here](https://wagmi.sh/core/actions/connect)
+### signMessage
+
+Action for signing messages with connected account.
+
+```ts
+import { signMessage } from '@wagmi/core'
+ 
+const signature = await signMessage({
+  message: 'gm wagmi frens',
+})
+```
+
+Learn more about Wagmi actions [here](https://wagmi.sh/core/actions/readContract)
 
 ## useWeb3ModalTheme
 
