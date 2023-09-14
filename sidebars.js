@@ -118,6 +118,8 @@ module.exports = {
               items: ['web3wallet/notify/installation','web3wallet/notify/usage']
             },
             'web3wallet/resources'
+            'web3wallet/mobileLinking'
+
           ]
         },
         {
@@ -208,7 +210,6 @@ module.exports = {
                 'api/sign/smart-contract-wallet-usage'
               ]
             },
-            'api/mobileLinking'
           ]
         },
         {
