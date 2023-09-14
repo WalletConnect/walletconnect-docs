@@ -112,6 +112,11 @@ module.exports = {
             'web3wallet/about',
             'web3wallet/wallet-usage',
             'web3wallet/verify',
+            {
+              type: 'category',
+              label: 'Notify',
+              items: ['web3wallet/notify/installation','web3wallet/notify/usage']
+            },
             'web3wallet/resources'
           ]
         },
