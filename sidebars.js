@@ -138,7 +138,7 @@ module.exports = {
             {
               type: 'category',
               label: 'Core components',
-              items: ['web3inbox/core-components/about', 'web3inbox/core-components/usage' ]
+              items: ['web3inbox/core-components/about', 'web3inbox/core-components/usage', 'web3inbox/core-components/api' ]
             },
             'web3inbox/resources',
             'web3inbox/demo'
