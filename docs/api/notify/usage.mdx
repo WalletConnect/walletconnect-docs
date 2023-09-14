@@ -216,6 +216,35 @@ try Notify.configure(environment: APNSEnvironment, crypto: CryptoProvider)
 environment - Use `debug` environment for debug builds and `release` for release and TestFlight builds
 crypto - CruptoProvider is a protocol, you are required to provide an implementation of two methods recoverPubKey and keccak256.
 
+
+#### Register an identity key and enable cross-device account syncing
+
+:::note
+This is a one-time action that does not need to be repeated after initial registration of the new account.
+:::
+
+To register an identity key, you must provide a callback to the ` onSign: @escaping SigningCallback` parameter of the `register` method.
+In order to register identity keys and enable cross device sync, the SDK will trigger this callback with a messages to sign, expecting the signature for that message to be returned.
+
+```swift
+
+Notify.instance.register(account: account, domain: domain, onSign: onSign)
+
+`account` - An account that the identity key will be issued for
+
+`domain` - A domain of your wallet, you should use your bundle id
+
+`onSign` - callback that requres a signature from a user
+
+func onSign(message: String) -> SigningResult {
+
+    // Provide your own sing function implementation that returns CacaoSignature
+    // For more detailed example see our sample WalletApp
+    let signature = try! signer.sign(message: message)
+    return .signed(signature)
+}
+```
+
 #### Register for Push Notifications
 
 In order to enable Push Notifications for your app you need to follow standard procedure:
@@ -257,36 +286,12 @@ Receive token from Apple Push Notification Services and register it at the Push 
 
 # Subscribe Events
 
-#### Subscribe new subscription
-
-Emits on new subscription created.
-
-```swift
-public var newSubscriptionPublisher: AnyPublisher<NotifySubscription, Never> {
-```
-
 #### Subscribe Notify Message
 
 Emits new notify message from a dapp.
 
 ```swift
 public var notifyMessagePublisher: AnyPublisher<PushMessage, Never>
-```
-
-#### Subscribe Subscription Deletion
-
-Emits a topic of a deleted subscription.
-
-```swift
-public var deleteSubscriptionPublisher: AnyPublisher<String, Never>
-```
-
-#### Subscribe Subscription Update
-
-Emits a result of a subscription update, containing updated subscription if successful.
-
-```swift
-public var updateSubscriptionPublisher: AnyPublisher<Result<PushSubscription, Error>, Never> {
 ```
 
 #### Subscribe Active Subscriptions
@@ -297,28 +302,6 @@ Emits a list of active subscriptions.
 public var subscriptionsPublisher: AnyPublisher<[PushSubscription], Never>
 ```
 
-#### Register an identity key and enable cross-device account syncing
-
-:::note
-This is a one-time action that does not need to be repeated after initial registration of the new account.
-:::
-
-To register an identity key, you must provide a callback to the ` onSign: @escaping SigningCallback` parameter of the `register` method.
-In order to register identity keys and enable cross device sync, the SDK will trigger this callback with a messages to sign, expecting the signature for that message to be returned.
-
-```swift
-
-Notify.instance.register(account: account, onSign: onSign)
-
-func onSign(message: String) -> SigningResult {
-
-    // Provide your own sing function implementation that returns CacaoSignature
-    // For more detailed example see our sample WalletApp
-    let signature = try! signer.sign(message: message)
-    return .signed(signature)
-}
-```
-
 #### Create Notify Subscription
 
 To enable seamless communication between a Dapp and a wallet, the wallet must first establish a Notify Subscription. This crucial step allows the Dapp and its associated services to publish notify messages directly to the wallet. Upon granting permission for the wallet's iOS application to display Push Notifications, users will experience real-time updates in the form of push notifications on their devices. For an enhanced user experience, consider subscribing to the `notifyMessagePublisher` channel. This option ensures that notify messages are delivered promptly when the app is active and a web socket connection is established, keeping users informed and engaged.
@@ -327,17 +310,18 @@ To subscribe to dapp's notify messages first fetch publicly discoverable dapps w
 
 https://explorer-api.walletconnect.com/v3/dapps?projectId={your_project_id}&is_notify_enabled=true
 
-and request a subscription directly from the wallet:
+and request a subscription directly from the wallet.
+
+You can also subscribe on web3inbox.com, the subscription will be synced accross devices and will appear in the wallet.
 
 ```swift
-public func subscribe(metadata: AppMetadata, account: Account, onSign: @escaping SigningCallback) async throws {
+public func subscribe(appDomain: String, account: Account) async throws {
 ```
 
-`metadata` - metadata object of publicly discoverable dapp fetched from WalletConnect explorer
+`appDomain` - A domain of the dapp that you want to subscribe to
 
-`account` - an account you want to associate a sebscription with
+`account` - an account you want to associate the subscription with
 
-`onSign` - callback that requres a signature from a user
 
 #### Get Active Subscriptions
 
