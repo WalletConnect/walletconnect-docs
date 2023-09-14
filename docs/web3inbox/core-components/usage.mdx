@@ -24,21 +24,21 @@ and are very mealleable.
 import { useManageSubscription, useSubscription, useAccount, useInitWeb3InboxClient, useMessages } from "@web3inbox/react-widget";
 ...
 
-	const isReady = useInitWeb3InboxClient({projectId: "..."})
+const isReady = useInitWeb3InboxClient({projectId: "..."})
 
-	// Getting the account -- Pass the onSign function at least once to allow registering
-  const { account } = useAccount(yourOnSignFunction)
+// Getting the account -- Pass the onSign function at least once to allow registering
+const { account } = useAccount(yourOnSignFunction)
 
-	// Checking if subscribed
-  const { subscribe, isSubscribed } = useManageSubscription({account})
+// Checking if subscribed
+const { subscribe, isSubscribed } = useManageSubscription({account})
 
-	// Get the subscription
-  const { subscription } = useSubscription({account})
+// Get the subscription
+const { subscription } = useSubscription({account})
 
-	// subscribing -- It will automatically detect the dapp
-	subscribe({account})
+// subscribing -- It will automatically detect the dapp
+subscribe({account})
 
-	const { messages } = useMessages({account})
+const { messages } = useMessages({account})
 
 ```
 
