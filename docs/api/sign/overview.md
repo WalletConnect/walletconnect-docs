@@ -15,7 +15,7 @@ WalletConnect Sign is a remote signer protocol to communicate securely between w
 
 <PlatformTabs
 groupId="api-sign"
-activeOptions={["web","ios","android","flutter"]}>
+activeOptions={["web","ios","android","flutter","csharp","unity"]}>
 
 <PlatformTabItem value="web">
 
@@ -128,6 +128,54 @@ Add the following to your `DebugProfile.entitlements` and `Release.entitlements`
 <key>com.apple.security.network.client</key>
 <true/>
 ```
+
+</PlatformTabItem>
+
+<PlatformTabItem value="csharp">
+
+#### Install via Packages
+
+Install the WalletConnect Sign Client package via Nuget.
+
+```shell
+dotnet add package WalletConnect.Sign
+```
+
+</PlatformTabItem>
+
+<PlatformTabItem value="unity">
+
+:::tip
+
+Since `WalletConnectUnity` is a wrapper around `WalletConnectSharp`, usage of the Sign API is identical to `C#`. Please refer to C# documentation on how to use the Sign API inside `WalletConnectUnity`.
+
+:::
+
+Install the `WalletConnectUnity` package from the [Github repo](https://github.com/WalletConnect/WalletConnectUnity)
+
+Once the `WalletConnectUnity` package is imported, create a new empty Game Object in your scene. This will hold the `WCSignClient` component and other required components.
+
+![walletconnectunity-sign-editor](/assets/walletconnectunity-sign-editor.png)
+
+Inside the `WCSignClient` component, you can configure the `Metadata` and other settings inside to the C# `SignClientOptions` class.
+
+With `WCSignClient` configured, you can grab `WCSignClient.Instance.SignClient` field to access the `WalletConnectSignClient` API.
+
+```csharp
+void Start() 
+{
+  WalletConnectSignClient dappClient = WCSignClient.Instance.SignClient
+
+  // ... 
+}
+```
+
+:::info
+
+`WalletConnectUnity` will automatically initialize the `WalletConnectSignClient` module as well as initialize any required components. Therefore, no additional
+configuration is required. All settings, including `Metadata`, can be modified in the Unity Editor.
+
+:::
 
 </PlatformTabItem>
 

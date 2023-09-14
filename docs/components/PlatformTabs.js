@@ -39,6 +39,10 @@ const PLATFORM_MAP = [
     label: 'Unity'
   },
   {
+    value: 'csharp',
+    label: 'C#'
+  },
+  {
     value: 'mobile',
     label: 'Mobile'
   },

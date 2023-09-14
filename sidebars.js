@@ -113,7 +113,9 @@ module.exports = {
             'web3wallet/about',
             'web3wallet/wallet-usage',
             'web3wallet/verify',
-            'web3wallet/resources'
+            'web3wallet/resources',
+            'web3wallet/mobileLinking'
+
           ]
         },
         {
@@ -211,7 +213,6 @@ module.exports = {
                 'api/sign/smart-contract-wallet-usage'
               ]
             },
-            'api/mobileLinking'
           ]
         },
         {
