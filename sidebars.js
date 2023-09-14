@@ -117,9 +117,8 @@ module.exports = {
               label: 'Notify',
               items: ['web3wallet/notify/installation','web3wallet/notify/usage']
             },
-            'web3wallet/resources'
+            'web3wallet/resources',
             'web3wallet/mobileLinking'
-
           ]
         },
         {
