@@ -35,7 +35,6 @@ The above step is not required if you are using the SDK on the browser-side.
 
 ```javascript
 import { Core } from '@walletconnect/core'
-import { SyncClient, SyncStore } from '@walletconnect/sync-client'
 import { NotifyClient } from '@walletconnect/notify-client'
 
 // Initialize core separately to allow sharing it between Sync and Notify
@@ -43,16 +42,9 @@ const core = new Core({
   projectId: '<YOUR PROJECT ID>'
 })
 
-// SyncClient enables syncing data across devices
-const syncClient = await SyncClient.init({
-  projectId: '<YOUR PROJECT ID>',
-  core // <- pass the shared `core` instance
-})
-
 const notifyClient = await NotifyClient.init({
   core, // <- pass the shared `core` instance
-  SyncStoreController: SyncStore,
-  syncClient: syncClient
+  projectId: '<YOUR PROJECT ID>'
 })
 ```
 
@@ -61,46 +53,52 @@ const notifyClient = await NotifyClient.init({
 ```javascript
 // Handle response to a `notifyClient.subscribe(...)` call
 notifyClient.on('notify_subscription', async ({ params }) => {
-  const { error, subscription } = params
+  const { error } = params
 
-  if (subscription) {
-    // New subscription was successfully created.
-    // Inform the user and/or update app state to reflect the new subscription.
-    console.log(`Successfully subscribed to ${subscription.metadata.name}.`)
-  } else if (error) {
+  if (error) {
     // Setting up the subscription failed.
     // Inform the user of the error and/or clean up app state.
     console.error('Setting up subscription failed: ', error)
+  } else {
+    // New subscription was successfully created.
+    // Inform the user and/or update app state to reflect the new subscription.
+    console.log(`Successfully subscribed to ${subscription.metadata.name}.`)
   }
 })
 
 // Handle an incoming notification
-notifyClient.on('notify_message', async ({ params }) => {
+notifyClient.on('notify_message', ({ params }) => {
   const { message } = params
   // e.g. build a notification using the metadata from `message` and show to the user.
 })
 
-
 // Handle response to a `notifyClient.update(...)` call
-notifyClient.on('notify_update', async ({ params }) => {
-  const { error, subscription } = params
+notifyClient.on('notify_update', ({ params }) => {
+  const { error } = params
 
-  if (subscription) {
-    // Subscription's scope was updated successfully.
-    // Inform the user and/or update app state to reflect the updated subscription.
-    console.log(`Successfully updated subscription scope for ${subscription.metadata.name}.`)
-    console.log("New subscription scope is: ", subscription.scope)
-  } else if (error) {
+  if (error) {
     // Updating the subscription's scope failed.
     // Inform the user of the error and/or clean up app state.
     console.error('Setting up subscription failed: ', error)
+  } else {
+    // Subscription's scope was updated successfully.
+    // Inform the user and/or update app state to reflect the updated subscription.
+    console.log(`Successfully updated subscription scope.`)
   }
+})
+
+notifyClient.on('notify_subscriptions_changed', ({ params }) => {
+  const { subscriptions } = params
+  // e.g. update app state to reflect changes in specific subscriptions
+  // `subscriptions` will contain any *changed* subscriptions since the last time this event was emitted.
+  // To get a full list of subscriptions for a given account you can use `notifyClient.getActiveSubscriptions({ account: 'eip155:1:0x63Be...' })`
+})
 ```
 
 ## Register an identity key for cross-device account syncing
 
 :::note
-This is a one-time action that does not need to be repeated after initial registration of the new account.
+This is a one-time action per account. It does not need to be repeated after initial registration of the new account.
 :::
 
 To register an identity key, you must provide a callback to the `onSign: (message: string) => string` parameter of the `register` method.
@@ -111,13 +109,31 @@ Some suggested ways to implement the `onSign` callback are via:
 - Ethers.js [`Wallet.signMessage` method](https://docs.ethers.org/v5/api/signer/#Signer-signMessage)
 - The [`signMessage` method](https://wagmi.sh/core/actions/signMessage) in `@wagmi/core`
 
+### Registering as a dapp
+
 ```javascript
 const account = `eip155:1:0x63Be2c680685d2A9620c11b0068291261aa62d76`
 const onSign = (message: string) => ethersWallet.signMessage(message)
 
 await notifyClient.register({
   account,
-  onSign
+  onSign,
+  domain: 'app.mydomain.com', // pass the domain (i.e. the hostname) where your dapp is hosted.
+  isLimited: true // The user will be prompted to authorize this dapp to send and receive messages on their behalf for this domain using their WalletConnect identity.
+})
+```
+
+### Registering as a wallet
+
+```javascript
+const account = `eip155:1:0x63Be2c680685d2A9620c11b0068291261aa62d76`
+const onSign = (message: string) => ethersWallet.signMessage(message)
+
+await notifyClient.register({
+  account,
+  onSign,
+  domain: 'com.mydomain.app.rn', // pass your app's bundle identifier.
+  isLimited: false // The user will be prompted to authorize this wallet to send and receive messages on their behalf for ALL domains using their WalletConnect identity.
 })
 ```
 
@@ -128,35 +144,32 @@ await notifyClient.register({
 :::info
 To identify dapps that can be subscribed to via Notify, we can query the following Explorer API endpoint:
 
-https://explorer-api.walletconnect.com/v3/dapps?projectId={YOUR_PROJECT_ID}&is_notify_enabled=true
+https://explorer-api.walletconnect.com/v3/dapps?projectId=YOUR_PROJECT_ID&is_notify_enabled=true
 :::
 
 ```javascript
 // Subscribe to `fetchedExplorerDapp` by passing the account to be subscribed and the relevant metadata for the target dapp.
 await notifyClient.subscribe({
   account,
-  metadata: {
-    name: fetchedExplorerDapp.name,
-    description: fetchedExplorerDapp.description,
-    icons: Object.values(fetchedExplorerDapp.image_url),
-    url: fetchedExplorerDapp.homepage
-  }
+  appDomain
 })
 
-// -> Result will be received via the `notify_subscription` event registered previously.
+// -> Success/Failure will be received via the `notify_update` event registered previously.
+// -> New subscription will be emitted via the `notify_subscriptions_changed` watcher event.
 ```
 
 #### Updating notification types on an existing subscription
 
 ```javascript
 // `topic` - subscription topic of the subscription that should be updated.
-// `scope` - an array of notification types that should be enabled going forward. The current scope is found under `subscription.scope`.
+// `scope` - an array of notification types that should be enabled going forward. The current scopes can be found under `subscription.scope`.
 await notifyClient.update({
   topic,
   scope: ['alerts']
 })
 
-// -> Result will be received via the `notify_update` event registered previously.
+// -> Success/Failure will be received via the `notify_update` event registered previously.
+// -> Updated subscription will be emitted via the `notify_subscriptions_changed` watcher event.
 ```
 
 #### Removing an existing subscription
@@ -541,11 +554,13 @@ val walletDelegate = object : NotifyClient.Delegate {
 
 NotifyClient.setDelegate(walletDelegate)
 ```
+
 #### Register Identity at a Keyserver
 
 In order to use Notify SDK account must register identity in [Keyserver](https://docs.walletconnect.com/2.0/specs/servers/keys/). To verify ownership over blockchain account when registering identities in [Keyserver](https://docs.walletconnect.com/2.0/specs/servers/keys/) user's must sign message provided on `onSign(message: String)` callback. Currenlty only [`EIP191`](https://eips.ethereum.org/EIPS/eip-191) signatures are supported in [Keyserver](https://docs.walletconnect.com/2.0/specs/servers/keys/)
 
 ##### NotifyClient.register
+
 ```kotlin
 val params = Notify.Params.Registration(
     account = /*[CAIP-10](https://github.com/ChainAgnostic/CAIPs/blob/master/CAIPs/caip-10.md) compatible accountId*/,
@@ -674,7 +689,6 @@ npm install @walletconnect/notify-client @walletconnect/react-native-compat
 
 ```javascript
 import { Core } from '@walletconnect/core'
-import { SyncClient, SyncStore } from '@walletconnect/sync-client'
 import { NotifyClient } from '@walletconnect/notify-client'
 
 // Initialize core separately to allow sharing it between Sync and Notify
@@ -682,16 +696,9 @@ const core = new Core({
   projectId: '<YOUR PROJECT ID>'
 })
 
-// SyncClient enables syncing data across devices
-const syncClient = await SyncClient.init({
-  projectId: '<YOUR PROJECT ID>',
-  core // <- pass the shared `core` instance
-})
-
 const notifyClient = await NotifyClient.init({
   core, // <- pass the shared `core` instance
-  SyncStoreController: SyncStore,
-  syncClient: syncClient
+  projectId: '<YOUR PROJECT ID>'
 })
 ```
 
@@ -700,46 +707,52 @@ const notifyClient = await NotifyClient.init({
 ```javascript
 // Handle response to a `notifyClient.subscribe(...)` call
 notifyClient.on('notify_subscription', async ({ params }) => {
-  const { error, subscription } = params
+  const { error } = params
 
-  if (subscription) {
-    // New subscription was successfully created.
-    // Inform the user and/or update app state to reflect the new subscription.
-    console.log(`Successfully subscribed to ${subscription.metadata.name}.`)
-  } else if (error) {
+  if (error) {
     // Setting up the subscription failed.
     // Inform the user of the error and/or clean up app state.
     console.error('Setting up subscription failed: ', error)
+  } else {
+    // New subscription was successfully created.
+    // Inform the user and/or update app state to reflect the new subscription.
+    console.log(`Successfully subscribed to ${subscription.metadata.name}.`)
   }
 })
 
 // Handle an incoming notification
-notifyClient.on('notify_message', async ({ params }) => {
+notifyClient.on('notify_message', ({ params }) => {
   const { message } = params
   // e.g. build a notification using the metadata from `message` and show to the user.
 })
 
-
 // Handle response to a `notifyClient.update(...)` call
-notifyClient.on('notify_update', async ({ params }) => {
-  const { error, subscription } = params
+notifyClient.on('notify_update', ({ params }) => {
+  const { error } = params
 
-  if (subscription) {
-    // Subscription's scope was updated successfully.
-    // Inform the user and/or update app state to reflect the updated subscription.
-    console.log(`Successfully updated subscription scope for ${subscription.metadata.name}.`)
-    console.log("New subscription scope is: ", subscription.scope)
-  } else if (error) {
+  if (error) {
     // Updating the subscription's scope failed.
     // Inform the user of the error and/or clean up app state.
     console.error('Setting up subscription failed: ', error)
+  } else {
+    // Subscription's scope was updated successfully.
+    // Inform the user and/or update app state to reflect the updated subscription.
+    console.log(`Successfully updated subscription scope.`)
   }
+})
+
+notifyClient.on('notify_subscriptions_changed', ({ params }) => {
+  const { subscriptions } = params
+  // e.g. update app state to reflect changes in specific subscriptions
+  // `subscriptions` will contain any *changed* subscriptions since the last time this event was emitted.
+  // To get a full list of subscriptions for a given account you can use `notifyClient.getActiveSubscriptions({ account: 'eip155:1:0x63Be...' })`
+})
 ```
 
 ## Register an identity key for cross-device account syncing
 
 :::note
-This is a one-time action that does not need to be repeated after initial registration of the new account.
+This is a one-time action per account. It does not need to be repeated after initial registration of the new account.
 :::
 
 To register an identity key, you must provide a callback to the `onSign: (message: string) => string` parameter of the `register` method.
@@ -750,13 +763,31 @@ Some suggested ways to implement the `onSign` callback are via:
 - Ethers.js [`Wallet.signMessage` method](https://docs.ethers.org/v5/api/signer/#Signer-signMessage)
 - The [`signMessage` method](https://wagmi.sh/core/actions/signMessage) in `@wagmi/core`
 
+### Registering as a dapp
+
 ```javascript
 const account = `eip155:1:0x63Be2c680685d2A9620c11b0068291261aa62d76`
 const onSign = (message: string) => ethersWallet.signMessage(message)
 
 await notifyClient.register({
   account,
-  onSign
+  onSign,
+  domain: 'app.mydomain.com', // pass the domain (i.e. the hostname) where your dapp is hosted.
+  isLimited: true // The user will be prompted to authorize this dapp to send and receive messages on their behalf for this domain using their WalletConnect identity.
+})
+```
+
+### Registering as a wallet
+
+```javascript
+const account = `eip155:1:0x63Be2c680685d2A9620c11b0068291261aa62d76`
+const onSign = (message: string) => ethersWallet.signMessage(message)
+
+await notifyClient.register({
+  account,
+  onSign,
+  domain: 'com.mydomain.app.rn', // pass your app's bundle identifier.
+  isLimited: false // The user will be prompted to authorize this wallet to send and receive messages on their behalf for ALL domains using their WalletConnect identity.
 })
 ```
 
@@ -767,35 +798,32 @@ await notifyClient.register({
 :::info
 To identify dapps that can be subscribed to via Notify, we can query the following Explorer API endpoint:
 
-https://explorer-api.walletconnect.com/v3/dapps?projectId={YOUR_PROJECT_ID}&is_notify_enabled=true
+https://explorer-api.walletconnect.com/v3/dapps?projectId=YOUR_PROJECT_ID&is_notify_enabled=true
 :::
 
 ```javascript
 // Subscribe to `fetchedExplorerDapp` by passing the account to be subscribed and the relevant metadata for the target dapp.
 await notifyClient.subscribe({
   account,
-  metadata: {
-    name: fetchedExplorerDapp.name,
-    description: fetchedExplorerDapp.description,
-    icons: Object.values(fetchedExplorerDapp.image_url),
-    url: fetchedExplorerDapp.homepage
-  }
+  appDomain
 })
 
-// -> Result will be received via the `notify_subscription` event registered previously.
+// -> Success/Failure will be received via the `notify_update` event registered previously.
+// -> New subscription will be emitted via the `notify_subscriptions_changed` watcher event.
 ```
 
 #### Updating notification types on an existing subscription
 
 ```javascript
 // `topic` - subscription topic of the subscription that should be updated.
-// `scope` - an array of notification types that should be enabled going forward. The current scope is found under `subscription.scope`.
+// `scope` - an array of notification types that should be enabled going forward. The current scopes can be found under `subscription.scope`.
 await notifyClient.update({
   topic,
   scope: ['alerts']
 })
 
-// -> Result will be received via the `notify_update` event registered previously.
+// -> Success/Failure will be received via the `notify_update` event registered previously.
+// -> Updated subscription will be emitted via the `notify_subscriptions_changed` watcher event.
 ```
 
 #### Removing an existing subscription
