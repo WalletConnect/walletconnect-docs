@@ -8,7 +8,7 @@ import CloudBanner from '../../components/CloudBanner'
 
 # Usage
 
-This usage step is to configure and use the Web3Inbox SDK Widget in your project.
+This usage step is to configure and use Notify in your project.
 
 <CloudBanner />
 
@@ -20,66 +20,7 @@ This usage step is to configure and use the Web3Inbox SDK Widget in your project
 >
 <PlatformTabItem value="ios">
 
-Before configuring Web3Inbox, make sure you have properly configured the [Networking Client](../../api/core/relay.mdx) first
-
-The following Swift code snippet demonstrates how to configure the Web3Inbox Client.
-
-```swift
-import Web3Inbox
-
-Web3Inbox.configure(
-    account: account,
-    bip44: DefaultBIP44Provider(),
-    config: [.chatEnabled: false, .settingsEnabled: false],
-    environment: .sandbox,
-    crypto: CryptoProvider,
-    onSign: onSign()
-)
-```
-
-Parameters:
-
-`account`: Wallet account
-
-`bip44`: Provide your implementation of BIP44Provider, necessary for Sync store key derivation.
-
-`config`: The Web3Inbox client will be configured to enable Chat and Push SDKs by default. However, you can disable selected functionalities.
-
-`environment`: Use `.sandbox` environment for debug builds and `.production` for release and TestFlight builds.
-
-`crypto`: Provide your own implementation of the CryptoProvider protocol.
-
-`onSign`: Web3Inbox client will request user to sign messages with its account private key. The message may be a Sync Storage derivation key or Identity key registration. `SigningCallback` designed as async closure that allows to connect signature request UI.
-
-#### Register an identity key and enable cross-device account syncing
-
-:::note
-This is a one-time action that does not need to be repeated after initial registration of the new account.
-:::
-
-To register an identity key, you must provide a callback to the ` onSign: @escaping SigningCallback` parameter of the `register` method.
-In order to register identity keys and enable cross device sync, the SDK will trigger this callback with a messages to sign, expecting the signature for that message to be returned.
-
-```swift
-Web3Inbox.instance.register(account: account, onSign: onSign)
-
-func onSign(message: String) -> SigningResult {
-
-    // Provide your own sing function implementation that return CacaoSignature
-    // For more detailed example see our sample WalletApp
-    let signature = try! signer.sign(message: message)
-    return .signed(signature)
-}
-```
-
-#### iOS Permissions Configuration
-
-For utilizing the "Scan QR Code" feature, you need to add `NSCameraUsageDescription` to your `info.plist` file.
-
-```xml
-<key>NSCameraUsageDescription</key>
-<string>Allow the app to scan for QR codes</string>
-```
+bartek bartek bartek
 
 </PlatformTabItem>
 <PlatformTabItem value="android">
