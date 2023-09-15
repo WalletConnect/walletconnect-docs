@@ -66,31 +66,24 @@ func onSign(message: String) -> SigningResult {
 </PlatformTabItem>
 <PlatformTabItem value="android">
 
-To initialize the Web3Inbox client, create a `Inbox.Params.Init` object in the Android Application class with the Core Client. The `Inbox.Params.Init` object will then be passed to the `Web3Inbox` initialize function.
+To initialize the Notify client, create a `Notify.Params.Init` object in the Android Application class with the Core Client passed as a parameter. The `Notify.Params.Init` object will then be passed to the `Notify.initialize` function. There is also an `onError` callback that will need to be provided which will return an instance of `Notify.Model.Error` if there's an issue initializing the client.
+
+**Note:** The CoreClient used here will be the same instance of the CoreClient used in other WalletConnect Kotlin SDKs
 
 ```kotlin
-val accountsPrivateKey: ByteArray = /* address' private key. */
-val caip10Account: String = /*[CAIP-10](https://github.com/ChainAgnostic/CAIPs/blob/master/CAIPs/caip-10.md) compatible accountId*/
 val projectId = PROJECT_ID
-val relayUrl = "relay.walletconnect.com"
-val serverUrl = "wss://$relayUrl?projectId=${projectId}"
+val serverUrl = "wss://relay.walletconnect.com?projectId=$projectId"
 val appMetaData = Core.Model.AppMetaData(
-    name = "Kotlin.Web3Inbox",
-    description = "Kotlin Web3Inbox Implementation",
-    url = "kotlin.web3inbox.walletconnect.com",
-    icons = listOf("https://raw.githubusercontent.com/WalletConnect/walletconnect-assets/master/Icon/Gradient/Icon.png"),
-    redirect = null
+    name = /* The name of your project as a String */,
+    description = /* A description of your project as a String */,
+    url = /* A url for your project as a String */,
+    icons = /* A list of URLs to icons related to your project as Strings */,
+    redirect = /* A redirect URI used by Dapps to deeplink back to your wallet. This is a String value  */
 )
 
 CoreClient.initialize(relayServerUrl = serverUrl, connectionType = ConnectionType.AUTOMATIC, application = this, metaData = appMetaData)
 
-Web3Inbox.initialize(Inbox.Params.Init(core = CoreClient, account = Inbox.Type.AccountId(caip10Account), onSign = { message ->
-    // Message to be signed by the user.
-    //    If user decides to sign the message, use the CacaoSigner util class to sign the message.
-    //    If user decides to not sign the message, return null
-    return CacaoSigner.sign(message, accountsPrivateKey, SignatureType.EIP191) OR null
-    }
-)) { error ->
+Notify.initialize(init = Notify.Params.Init(core = CoreClient) { error: Notify.Model.Error ->
     // Error will be thrown if there's an issue during initialization
 }
 ```
@@ -176,32 +169,185 @@ Notify.instance.getMessageHistory(topic: subscription.topic)
 </PlatformTabItem>
 <PlatformTabItem value="android">
 
-Once the Web3Inbox client is [initialized](#client-configuration), all that's left to do is to place the `Web3Inbox.View` in your app.
-We support both [Compose](https://developer.android.com/jetpack/compose), which sample sample implementation can be found in
-our [sample app](https://github.com/WalletConnect/WalletConnectKotlinV2/blob/develop/samples/web3wallet/src/main/android/com/walletconnect/web3/wallet/ui/routes/composable_routes/web3inbox/Web3InboxRoute.kt)
+#### Register for Subscriptions
 
-#### Composable Web3Inbox.View()
-
-To remember Web3Inbox state call `Web3Inbox.rememberWeb3InboxState()` which later needs to be passed to
-`Web3Inbox.View(state)` composable.To display Web3Inbox with Compose call `Web3Inbox.View(state)` somewhere in your app.
+`NotifyClient` needs a `NotifyClient.Delegate` passed to it for it to be able to expose asynchronous updates sent from the dapp.
 
 ```kotlin
-   setContent {
-        val state = Web3Inbox.rememberWeb3InboxState()
-        Web3Inbox.View(state = state)
-   }
+val walletDelegate = object : NotifyClient.Delegate {
+
+    override fun onNotifySubscription(notifySubscribe: Notify.Event.Subscription) {
+        // Triggered when a wallet initiated subscription has been created
+    }
+
+    override fun onNotifyMessage(notifyMessage: Notify.Event.Message) {
+        // Triggered when a message has been sent by the Dapp. The message contains the title, body, icon, and url
+    }
+
+    override fun onNotifyDelete(notifyDelete: Notify.Event.Delete) {
+        // Triggered when the Dapp deletes the subscription. The notifyDelete contains the topic that was deleted
+    }
+
+    override fun onNotifyUpdate(notifyUpdate: Notify.Event.Update) {
+        // Triggered after updating a subscription was successful. The notifyUpdate will either contain the updated subscription details or an error
+    }
+
+    override fun onError(error: Notify.Model.Error) {
+        // Triggered when there's an error inside the SDK
+    }
+}
+
+NotifyClient.setDelegate(walletDelegate)
 ```
 
-#### Android XML
+#### Register an identity key and enable cross-device account syncing
 
-Adding Web3Inbox to legacy Views should be achieved according to Google's guidelines:
-https://developer.android.com/jetpack/compose/migrate/interoperability-apis/compose-in-views.
+:::note
+This is a one-time action that does not need to be repeated after initial registration for each account address and must be called before using the SDK.
+:::
 
-#### Prevent reloading of Web3Inbox
+Once the NotifyClient is [initialized](#client-configuration), you'll need to register a [CAIP-10 account](https://github.com/ChainAgnostic/CAIPs/blob/master/CAIPs/caip-10.md) with the NotifyClient to enable receiving notifications and syncing of the account across multiple devices. 
 
-**IMPORTANT:** If Web3Inbox's inner WebView is reloaded it will lose state and be displayed as blank page.
-To prevent reloading of Web3Inbox the activity that contains the `Web3Inbox.View` add
-`android:configChanges="orientation|screenSize"` to `<activity>` element `Manifest.xml` that houses Web3Inbox.
+You'll need to create an instance of `Notify.Params.Registration` which will need the CAIP-10 account, the domain which should be your `ApplicationId`, and a lamda that will need to ask the user for permission to sign a message using their private key.
+
+The `Notify.Model.Registration` object will need to be passed into `NotifyClient.register` which has a `onSuccess` method which will return the WalletConnect Identity public key. This public key is strictly for debugging and more information can be found [here](https://specs.walletconnect.com/2.0/specs/clients/core/identity/identity-keys). There is also an `onError` callback which will return an instance of `Notify.Model.Error` in case there is an error while registering the account.
+
+**Note** The `NotifyClient.Register` function is to verify the ownership over blockchain account when registering identities in [WalletConnect's Keyserver](https://specs.walletconnect.com/2.0/specs/servers/keys/). End users must sign the message provided on the `onSign(message: String)` callback. Currenlty only EIP191 signatures are supported in Keyserver.
+
+```kotlin
+val caip10Account: String = /* CAIP-10 compatible accountId */
+val accountsPrivateKey: ByteArray = /* address' private key */
+
+val registeration = Notify.Params.Registration(
+  account = caip10Account,
+  domain = /* ApplicationId as String */,
+  onSign = { message ->
+    // Message to be signed by the user.
+    //    If user decides to sign the message, use the CacaoSigner util class to sign the message.
+    //    If user decides to not sign the message, return null
+    return CacaoSigner.sign(message, accountsPrivateKey, SignatureType.EIP191) OR null
+  }
+)
+
+NotifyClient.register(
+  params = registeration, 
+  onSuccess = { identityPublicKey: String ->
+    // Registeration was successful
+   }, 
+   onError = { error ->
+    // Error will be thrown if there's an issue during initialization
+  }
+)
+``` 
+
+#### Subscribe to a new Dapp
+
+```kotlin
+val dappUri: Uri = // The Dapp Uri to subscribe to
+val caip10Account: String = // The CAIP-10 account that was used in `NotifyClient.register`
+
+val subscribeParams = Notify.Params.Subscribe(
+  appDomain = dappUri, 
+  account = caip10Account
+)
+
+NotifyClient.subscribe(
+    params = subscribeParams,
+    onSuccess = {
+        // Subscribing to the dapp was successful
+    },
+    onError = { error: Notify.Model.Error ->
+        // There was an error while trying to subscribe to the dapp
+    }
+)
+```
+
+#### Update a subscription with new Scopes
+
+[Scopes information](https://specs.walletconnect.com/2.0/specs/clients/notify/notify-config#notification-types)
+
+```kotlin
+val updateParams = Notify.Params.Update(
+  topic = /* Topic of the subscription to update */,
+  scope = /* The new space delimited list of scopes */
+)
+
+NotifyClient.update(
+    params  = updateParams,
+  onSuccess = { 
+      // Updating the subscription was successful 
+    },
+    onError = { error: Notify.Model.Error -> 
+      // There was an error while trying to update the subscription
+    }
+)
+```
+
+#### Update a subscription with new Scopes
+
+```kotlin
+val updateParams = Notify.Params.Update(
+  topic = /* Topic of the subscription to update */,
+  scope = /* The new space delimited list of scopes */
+)
+
+NotifyClient.update(
+    params  = updateParams,
+    onSuccess = { 
+      // Updating the subscription was successful 
+    },
+    onError = { error: Notify.Model.Error -> 
+      // There was an error while trying to update the subscription
+    }
+)
+```
+
+#### Get a map of Active Subscriptions
+
+```kotlin
+val activeSubscriptions: Map<String, Notify.Model.Subscription> = NotifyClient.getActiveSubscriptions()
+```
+
+#### Get a map of the Message History for a Subscription
+
+```kotlin
+val messageHistoryParamsForSubscriptionTopic = Notify.Params.MessageHistory(/* The topic of an active subscription */)
+val messageHistory: Map<Long, Notify.Model.MessageRecord> = NotifyClient.getMessageHistory(params = messageHistoryParamsForSubscriptionTopic)
+```
+
+#### Get a map of the Message History for a Subscription
+
+```kotlin
+val messageHistoryParamsForSubscriptionTopic = Notify.Params.MessageHistory(topic = /* The topic of an active subscription */)
+val messageHistory: Map<Long, Notify.Model.MessageRecord> = NotifyClient.getMessageHistory(params = messageHistoryParamsForSubscriptionTopic)
+```
+
+#### Delete a Subscription
+
+```kotlin
+val deleteSubscriptionParam = Notify.Params.DeleteSubscription(topic = /* The topic of the active subscription to delete */)
+NotifyClient.deleteSubscription(
+  params = deleteSubscriptionParam, 
+  onError: { error: Notify.Model.Error ->
+    // Error will be thrown if there's an issue with trying to delete the subscription
+  }
+)
+```
+
+#### Delete a Message
+
+```kotlin
+val deleteMessageParams = Notify.Params.DeleteMessage(id = /* The request id of the message fetched from Notify. */)
+Notify.deleteNotifyMessage(
+  params = deleteMessageParams, 
+  onSuccess = {
+    // Triggered when the message has been successfully deleted
+  }, 
+  onError = { error: Notify.Model.Error -> 
+    // Error will be thrown if there's an issue with trying to delete the specific message
+  }
+)
+```
 
 </PlatformTabItem>
 

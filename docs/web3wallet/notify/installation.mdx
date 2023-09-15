@@ -80,8 +80,9 @@ allprojects {
 app/build.gradle.kts
 
 ```gradle
-implementation("com.walletconnect:android-core:release_version")
-implementation("com.walletconnect:web3inbox:release_version")
+implementation(platform("com.walletconnect:android-bom:release_version"))
+implementation("com.walletconnect:android-core")
+implementation("com.walletconnect:notify")
 ```
 
 #### Requirements
