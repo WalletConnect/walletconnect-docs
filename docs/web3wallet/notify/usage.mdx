@@ -51,6 +51,8 @@ Notify.instance.register(account: account, domain: domain, onSign: onSign)
 
 `onSign` - callback that requres a signature from a user
 
+
+```swift
 func onSign(message: String) -> SigningResult {
 
     // Provide your own sing function implementation that returns CacaoSignature
