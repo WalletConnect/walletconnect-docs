@@ -7,7 +7,7 @@ import CloudBanner from '../../components/CloudBanner'
 
 # Introduction
 
-The Web3Inbox Widget utilizes `iframes` to display Web3Inbox in a widget friendly view, currently making use of WalletConnect's [notify](../../specs/clients/notify/client-api.md) to subscribe and display notifications.
+** Embedded widget **: Drop-in widget for fast integration. Limited customization.
 
 :::caution
 
@@ -15,31 +15,16 @@ Web3Inbox is under development. Want early access? Join our [Pilot Program](http
 
 :::
 
-## Features
-
-Some of the key features of the Web3Inbox Widget include:
-
-- **Inject the account connected to your dapp**
-- **Theme how it looks with vanilla css**
-- **Subscribe to your dapp and display notifications**
-
 ## Installation
 
 <PlatformTabs
 	groupId="w3iw"
-	activeOptions={["react", "html"]}
+	activeOptions={["react"]}
 >
 <PlatformTabItem value="react">
 
 ```bash npm2yarn
-npm i @web3inbox/widget-html @web3inbox/widget-react
-```
-
-</PlatformTabItem>
-<PlatformTabItem value="html">
-
-```bash npm2yarn
-npm i @web3inbox/widget-html
+npm i @web3inbox/core @web3inbox/widget-react
 ```
 
 </PlatformTabItem>

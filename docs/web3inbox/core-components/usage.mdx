@@ -1,0 +1,68 @@
+import Container from './../../components/Container'
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
+import PlatformTabs from '../../components/PlatformTabs'
+import PlatformTabItem from '../../components/PlatformTabItem'
+import CloudBanner from '../../components/CloudBanner'
+
+# Usage
+
+Using Core components is naturally very simple because they are a simple set of utilities at heart
+and are very mealleable. 
+
+
+
+## Getting Started
+
+<PlatformTabs
+	groupId="w3iw"
+	activeOptions={["react", "html"]}
+>
+<PlatformTabItem value="react">
+
+```ts
+import { useManageSubscription, useSubscription, useAccount, useInitWeb3InboxClient, useMessages } from "@web3inbox/react-widget";
+...
+
+const isReady = useInitWeb3InboxClient({projectId: "..."})
+
+// Getting the account -- Use register before attempting to subscribe
+const { account, register } = useAccount()
+
+register({onSign})
+
+// Checking if subscribed
+const { subscribe, isSubscribed } = useManageSubscription({account})
+
+// Get the subscription
+const { subscription } = useSubscription({account})
+
+// subscribing -- It will automatically detect the dapp
+subscribe({account})
+
+const { messages } = useMessages({account})
+
+```
+
+</PlatformTabItem>
+<PlatformTabItem value="html">
+
+```ts
+import { Web3InboxClient } from '@web3inbox/core'
+
+const client = Web3InboxClient.init({projectId: ""})
+
+let accountState = "";
+let subscriptionState = "";
+
+client.watchAccount((acc => accountState = acc))
+
+client.watchSubscription((sub => subscriptionState = sub))
+
+client.subscribe({account: accountState})
+
+const messages = client.getMessageHistory({account: accountState})
+```
+
+</PlatformTabItem>
+</PlatformTabs>

@@ -113,9 +113,13 @@ module.exports = {
             'web3wallet/about',
             'web3wallet/wallet-usage',
             'web3wallet/verify',
+            {
+              type: 'category',
+              label: 'Notify',
+              items: ['web3wallet/notify/installation','web3wallet/notify/usage']
+            },
             'web3wallet/resources',
             'web3wallet/mobileLinking'
-
           ]
         },
         {
@@ -127,26 +131,19 @@ module.exports = {
             'web3inbox/about',
             {
               type: 'category',
-              label: 'Wallet',
-              items: ['web3inbox/wallet/installation', 'web3inbox/wallet/usage']
+              label: 'Embedded widget',
+              items: [
+                'web3inbox/embedded-widget/about',
+                'web3inbox/embedded-widget/usage',
+              ]
             },
             {
               type: 'category',
-              label: 'Dapp',
-              items: [
-                {
-                  type: 'category',
-                  label: 'Widget',
-                  items: [
-                    'web3inbox/widget/about',
-                    'web3inbox/widget/usage',
-                    'web3inbox/widget/options',
-                    'web3inbox/widget/theming'
-                  ]
-                }
-              ]
+              label: 'Core components',
+              items: ['web3inbox/core-components/about', 'web3inbox/core-components/usage', 'web3inbox/core-components/api' ]
             },
-            'web3inbox/resources'
+            'web3inbox/resources',
+            'web3inbox/demo'
           ]
         }
       ]

@@ -8,16 +8,14 @@ import Wrapper from '../../components/Home/Wrapper'
 # Installation
 
 :::caution
-
-Web3Inbox is under development. Want early access? Join our [Pilot Program](https://walletconnect.com/partners)
-
+Notify API is under development. Want early access? Join our [Pilot Program](https://walletconnect.com/partners)
 :::
 
-This installation step is for Web3Inbox SDK into your project by embedding the widget.
+The WalletConnect Notify API allows wallet developers to build native messaging and chat UIs together with support for iOS and Android device push notifications.
 
-:::info
-For those looking for a native integration via the Notify API, we suggest you to check out the [Notify API documentation](../../api/notify/about).
-:::info
+Notify API works together with the WalletConnect Web3Inbox SDK providing a toolkit for integrating web3 communications messaging features into dapps.
+
+![Web3Inbox](/img/web3wallet-notify-screenshots.png)
 
 <PlatformTabs
 	groupId="w3w"
@@ -25,7 +23,7 @@ For those looking for a native integration via the Notify API, we suggest you to
 >
 <PlatformTabItem value="ios">
 
-Web3Inbox SDK is available via [Swift Package Manager](https://swift.org/package-manager/) or [Cocoapods](https://cocoapods.org/).
+Notify SDK is available via [Swift Package Manager](https://swift.org/package-manager/) or [Cocoapods](https://cocoapods.org/).
 
 <Tabs
 queryString="ios-method"
@@ -36,13 +34,13 @@ queryString="ios-method"
 >
 <TabItem value="spm">
 
-You can add a Web3Inbox SDK to your project with Swift Package Manager. In order to do that:
+You can add a WalletConnect SDK to your project with the Swift Package Manager. In order to do that:
 
 1. Open XCode
 2. Go to File -> Add Packages
 3. Paste the repo GitHub URL: https://github.com/WalletConnect/WalletConnectSwiftV2
 4. Tap Add Package
-5. Select Web3Inbox check mark
+5. Select WalletConnectNotify check mark
 
 </TabItem>
 <TabItem value="cocoa">
@@ -52,7 +50,7 @@ You can add a Web3Inbox SDK to your project with Swift Package Manager. In order
 3. Add pod to your Podfile:
 
 ```Ruby
-pod 'WalletConnectSwiftV2/Web3Inbox'
+pod 'WalletConnectSwiftV2/WalletConnectNotify'
 ```
 
 4. Install pods with `pod install`
@@ -60,9 +58,8 @@ pod 'WalletConnectSwiftV2/Web3Inbox'
 If you encounter any problems during package installation, you can specify the exact path to the repository
 
 ```Ruby
-pod 'WalletConnectSwiftV2/Web3Inbox', :git => 'https://github.com/WalletConnect/WalletConnectSwiftV2.git', :tag => '1.5.0'
+pod 'WalletConnectSwiftV2/WalletConnectNotify', :git => 'https://github.com/WalletConnect/WalletConnectSwiftV2.git', :tag => '1.8.0'
 ```
-
 </TabItem>
 </Tabs>
 
@@ -83,8 +80,9 @@ allprojects {
 app/build.gradle.kts
 
 ```gradle
-implementation("com.walletconnect:android-core:release_version")
-implementation("com.walletconnect:web3inbox:release_version")
+implementation(platform("com.walletconnect:android-bom:release_version"))
+implementation("com.walletconnect:android-core")
+implementation("com.walletconnect:notify")
 ```
 
 #### Requirements
