@@ -20,7 +20,45 @@ This usage step is to configure and use Notify in your project.
 >
 <PlatformTabItem value="ios">
 
-bartek bartek bartek
+Configure the `Notify` instance with:
+
+```swift
+try Notify.configure(groupIdentifier: String, environment: APNSEnvironment, crypto: CryptoProvider)
+```
+
+`groupIdentifier` - identifier of your group keychain, enables to share keychain items between your wallet and a UNNotificationServiceExtension that decrupts remote Push Notifications.
+`environment` - Use `debug` environment for debug builds and `release` for release and TestFlight builds
+`crypto` - CruptoProvider is a protocol, you are required to provide an implementation of two methods recoverPubKey and keccak256.
+
+
+#### Register an identity key and enable cross-device account syncing
+
+:::note
+This is a one-time action that does not need to be repeated after initial registration of the new account.
+:::
+
+To register an identity key, you must provide a callback to the ` onSign: @escaping SigningCallback` parameter of the `register` method.
+In order to register identity keys and enable cross device sync, the SDK will trigger this callback with a messages to sign, expecting the signature for that message to be returned.
+
+```swift
+
+Notify.instance.register(account: account, domain: domain, onSign: onSign)
+```
+
+`account` - An account that the identity key will be issued for
+
+`domain` - A domain of your wallet, you should use your bundle id
+
+`onSign` - callback that requres a signature from a user
+
+func onSign(message: String) -> SigningResult {
+
+    // Provide your own sing function implementation that returns CacaoSignature
+    // For more detailed example see our sample WalletApp
+    let signature = try! signer.sign(message: message)
+    return .signed(signature)
+}
+```
 
 </PlatformTabItem>
 <PlatformTabItem value="android">
@@ -70,43 +108,67 @@ All clients will be initialized as soon as the Web3Inbox component is rendered f
 >
 <PlatformTabItem value="ios">
 
-Access the Web3Inbox client instance, which is a singleton, by calling:
+# Subscribe Events
+
+#### Subscribe Notify Message
+
+Emits new notify message from a dapp.
 
 ```swift
-Web3Inbox.instance
+public var notifyMessagePublisher: AnyPublisher<PushMessage, Never>
 ```
 
-#### Assign Web3Inbox WebView to a ViewController
+#### Subscribe Active Subscriptions
 
-Web3Inbox provides a user interface within a webView. Assign the provided webView to a ViewController's view as shown:
+Emits a list of active subscriptions.
 
 ```swift
-import UIKit
-import Web3Inbox
-
-final class Web3InboxViewController: UIViewController {
-
-    override func loadView() {
-        super.loadView()
-
-        // Web3Inbox configuration
-        Web3Inbox.configure(account: account, bip44: DefaultBIP44Provider(), config: [.pushEnabled: false], environment: .sandbox, crypto: DefaultCryptoProvider(), onSign: onSing)
-
-        // Setting Web3Inbox webView as main view
-        view = Web3Inbox.instance.getWebView()
-    }
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Other UIViewController customizations
-        edgesForExtendedLayout = []
-        navigationItem.title = "Web3Inbox SDK"
-        navigationItem.largeTitleDisplayMode = .never
-    }
-}
-
+public var subscriptionsPublisher: AnyPublisher<[PushSubscription], Never>
 ```
+
+#### Create Notify Subscription
+
+To enable seamless communication between a Dapp and a wallet, the wallet must first establish a Notify Subscription. This crucial step allows the Dapp and its associated services to publish notify messages directly to the wallet. Upon granting permission for the wallet's iOS application to display Push Notifications, users will experience real-time updates in the form of push notifications on their devices. For an enhanced user experience, consider subscribing to the `notifyMessagePublisher` channel. This option ensures that notify messages are delivered promptly when the app is active and a web socket connection is established, keeping users informed and engaged.
+
+To subscribe to dapp's notify messages first fetch publicly discoverable dapps with WalletConnet explorer:
+
+https://explorer-api.walletconnect.com/v3/dapps?projectId={your_project_id}&is_notify_enabled=true
+
+and request a subscription directly from the wallet.
+
+You can also subscribe on web3inbox.com, the subscription will be synced accross devices and will appear in the wallet.
+
+```swift
+public func subscribe(appDomain: String, account: Account) async throws {
+```
+
+`appDomain` - A domain of the dapp that you want to subscribe to
+
+`account` - an account you want to associate the subscription with
+
+
+#### Get Active Subscriptions
+
+```swift
+Notify.instance.getActiveSubscriptions()
+```
+
+#### Delete Subscription
+
+To delete a subscription.
+
+```swift
+try await Notify.instance.deleteSubscription(topic: String)
+```
+
+#### Get Notify Messages
+
+To get messages by topic call:
+
+```swift
+Notify.instance.getMessageHistory(topic: subscription.topic)
+```
+
 
 </PlatformTabItem>
 <PlatformTabItem value="android">
@@ -294,9 +356,8 @@ Receive token from Apple Push Notification Services and register it at the Push 
       _ application: UIApplication,
       didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data
     ) {
-
         Task(priority: .high) {
-            try await Web3Inbox.instance.register(deviceToken: deviceToken)
+            try await Notify.instance.register(deviceToken: deviceToken)
         }
     }
 ```
@@ -320,9 +381,9 @@ To decrypt a Push Notification (PN), you need to instantiate a [UNNotificationSe
 
 For details on how to modify the content in newly delivered notifications, refer to the official Apple Developer Documentation [here](https://developer.apple.com/documentation/usernotifications/modifying_content_in_newly_delivered_notifications).
 
-Additionally, you will need to create a [keychain group](https://developer.apple.com/documentation/security/keychain_services/keychain_items/sharing_access_to_keychain_items_among_a_collection_of_apps) that is shared between your wallet application and the notification service. The keychain group should be named `group.com.walletconnect.sdk`.
+Additionally, you will need to create a [keychain group](https://developer.apple.com/documentation/security/keychain_services/keychain_items/sharing_access_to_keychain_items_among_a_collection_of_apps) that is shared between your wallet application and the notification service. 
 
-Inside your notification service extension file, import Web3Inbox, initialize `NotifyDecryptionService()`, and decrypt the message with the following Swift code:
+Inside your notification service extension file, import WalletConnectNotify, initialize `NotifyDecryptionService()`, and decrypt the message with the following Swift code:
 
 ```swift
 override func didReceive(_ request: UNNotificationRequest, withContentHandler contentHandler: @escaping (UNNotificationContent) -> Void) {
@@ -331,7 +392,7 @@ override func didReceive(_ request: UNNotificationRequest, withContentHandler co
         let topic = bestAttemptContent.userInfo["topic"] as! String
         let ciphertext = bestAttemptContent.userInfo["blob"] as! String
         do {
-            let service = NotifyDecryptionService()
+            let service = NotifyDecryptionService(groupIdentifier: "your_keychain_group_identifier")
             let pushMessage = try service.decryptMessage(topic: topic, ciphertext: ciphertext)
             bestAttemptContent.title = pushMessage.title
             bestAttemptContent.body = pushMessage.body
