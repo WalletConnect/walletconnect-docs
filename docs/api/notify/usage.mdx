@@ -87,9 +87,9 @@ notifyClient.on('notify_update', ({ params }) => {
   }
 })
 
+// Handle a change in the existing subscriptions (e.g after a subscribe or update)
 notifyClient.on('notify_subscriptions_changed', ({ params }) => {
   const { subscriptions } = params
-  // e.g. update app state to reflect changes in specific subscriptions
   // `subscriptions` will contain any *changed* subscriptions since the last time this event was emitted.
   // To get a full list of subscriptions for a given account you can use `notifyClient.getActiveSubscriptions({ account: 'eip155:1:0x63Be...' })`
 })
@@ -744,9 +744,9 @@ notifyClient.on('notify_update', ({ params }) => {
   }
 })
 
+// Handle a change in the existing subscriptions (e.g after a subscribe or update)
 notifyClient.on('notify_subscriptions_changed', ({ params }) => {
   const { subscriptions } = params
-  // e.g. update app state to reflect changes in specific subscriptions
   // `subscriptions` will contain any *changed* subscriptions since the last time this event was emitted.
   // To get a full list of subscriptions for a given account you can use `notifyClient.getActiveSubscriptions({ account: 'eip155:1:0x63Be...' })`
 })
