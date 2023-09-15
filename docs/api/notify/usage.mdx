@@ -148,7 +148,10 @@ https://explorer-api.walletconnect.com/v3/dapps?projectId=YOUR_PROJECT_ID&is_not
 :::
 
 ```javascript
-// Subscribe to `fetchedExplorerDapp` by passing the account to be subscribed and the relevant metadata for the target dapp.
+// Get the domain of the target dapp from the Explorer API response
+const appDomain = new URL(fetchedExplorerDapp.platform_browser).hostname
+
+// Subscribe to `fetchedExplorerDapp` by passing the account to be subscribed and the domain of the target dapp.
 await notifyClient.subscribe({
   account,
   appDomain
@@ -802,7 +805,10 @@ https://explorer-api.walletconnect.com/v3/dapps?projectId=YOUR_PROJECT_ID&is_not
 :::
 
 ```javascript
-// Subscribe to `fetchedExplorerDapp` by passing the account to be subscribed and the relevant metadata for the target dapp.
+// Get the domain of the target dapp from the Explorer API response
+const appDomain = new URL(fetchedExplorerDapp.platform_browser).hostname
+
+// Subscribe to `fetchedExplorerDapp` by passing the account to be subscribed and the domain of the target dapp.
 await notifyClient.subscribe({
   account,
   appDomain
