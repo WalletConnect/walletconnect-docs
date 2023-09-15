@@ -26,8 +26,10 @@ import { useManageSubscription, useSubscription, useAccount, useInitWeb3InboxCli
 
 const isReady = useInitWeb3InboxClient({projectId: "..."})
 
-// Getting the account -- Pass the onSign function at least once to allow registering
-const { account } = useAccount(yourOnSignFunction)
+// Getting the account -- Use register before attempting to subscribe
+const { account, register } = useAccount()
+
+register({onSign})
 
 // Checking if subscribed
 const { subscribe, isSubscribed } = useManageSubscription({account})

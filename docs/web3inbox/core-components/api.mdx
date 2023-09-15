@@ -49,16 +49,21 @@ Register, set and fetch account.
 <PlatformTabItem value="react">
 
 ```ts
-const { account, setAccount } = useAccount(onSignFunction)
+const { account, setAccount, register } = useAccount()
+
+register({onSign})
 ```
 
 - account -> CAIP-10 account currently active in Web3Inbox
 - setAccount -> Change actively managed account in Web3Inbox
-- onSignFunction -> Async function used to sign a message (for registering) of type:
+- onSign-> Async function used to sign a message (for registering) of type:
 
 ```ts
 (message: string) => Promise<string>
 ```
+
+- register -> Async function used to register a message
+
 
 </PlatformTabItem>
 
