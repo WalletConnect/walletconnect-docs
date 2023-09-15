@@ -27,7 +27,9 @@ try Notify.configure(groupIdentifier: String, environment: APNSEnvironment, cryp
 ```
 
 `groupIdentifier` - identifier of your group keychain, enables to share keychain items between your wallet and a UNNotificationServiceExtension that decrupts remote Push Notifications.
+
 `environment` - Use `debug` environment for debug builds and `release` for release and TestFlight builds
+
 `crypto` - CruptoProvider is a protocol, you are required to provide an implementation of two methods recoverPubKey and keccak256.
 
 
@@ -41,7 +43,6 @@ To register an identity key, you must provide a callback to the ` onSign: @escap
 In order to register identity keys and enable cross device sync, the SDK will trigger this callback with a messages to sign, expecting the signature for that message to be returned.
 
 ```swift
-
 Notify.instance.register(account: account, domain: domain, onSign: onSign)
 ```
 
