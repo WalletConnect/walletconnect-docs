@@ -1,3 +1,6 @@
+import PlatformTabs from './../components/PlatformTabs'
+import PlatformTabItem from './../components/PlatformTabItem'
+
 # Demo
 
 ## Try Web3Inbox
@@ -12,17 +15,29 @@ Or access the repo at [github.com/WalletConnect/web3inbox](https://github.com/Wa
 
 To try native notifications on a iOS or Android device, use a wallet that supports Notify. Alternatively, try building one of our sample apps, or grab a sample wallet preview build from Testflight or Firebase.
 
-### iOS
+<PlatformTabs
+	groupId="w3iw"
+	activeOptions={["ios", "android", "web"]}
+>
+
+<PlatformTabItem value="web">
+
+- [React Native](https://docs.walletconnect.com/2.0/api/notify/usage?platform=react-native)
+- [Web](https://docs.walletconnect.com/2.0/api/notify/usage?platform=web)
+
+</PlatformTabItem>
+
+<PlatformTabItem value="ios">
 
 - [Swift](https://docs.walletconnect.com/2.0/api/notify/usage?platform=ios)
 - [Testflight](https://testflight.apple.com/join/09bTAryp)
 
-### Android
+</PlatformTabItem>
+
+<PlatformTabItem value="android">
 
 - [Kotlin](https://docs.walletconnect.com/2.0/api/notify/usage?platform=android)
 - [Firebase](https://appdistribution.firebase.dev/i/d2c86e879abd5a86)
 
-### Javascript
-
-- [React Native](https://docs.walletconnect.com/2.0/api/notify/usage?platform=react-native)
-- [Web](https://docs.walletconnect.com/2.0/api/notify/usage?platform=web)
+</PlatformTabItem>
+</PlatformTabs>

@@ -7,10 +7,10 @@ import CloudBanner from '../../components/CloudBanner'
 
 # Usage
 
+<CloudBanner />
+
 Using Core components is naturally very simple because they are a simple set of utilities at heart
-and are very mealleable. 
-
-
+and are very mealleable.
 
 ## Getting Started
 
@@ -50,18 +50,18 @@ const { messages } = useMessages({account})
 ```ts
 import { Web3InboxClient } from '@web3inbox/core'
 
-const client = Web3InboxClient.init({projectId: ""})
+const client = Web3InboxClient.init({ projectId: '...' })
 
-let accountState = "";
-let subscriptionState = "";
+let accountState = ''
+let subscriptionState = ''
 
-client.watchAccount((acc => accountState = acc))
+client.watchAccount(acc => (accountState = acc))
 
-client.watchSubscription((sub => subscriptionState = sub))
+client.watchSubscription(sub => (subscriptionState = sub))
 
-client.subscribe({account: accountState})
+client.subscribe({ account: accountState })
 
-const messages = client.getMessageHistory({account: accountState})
+const messages = client.getMessageHistory({ account: accountState })
 ```
 
 </PlatformTabItem>

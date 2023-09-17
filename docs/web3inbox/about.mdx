@@ -1,4 +1,13 @@
+import Wrapper from '../components/Home/Wrapper'
+import w3iLogo from '../../static/assets/home/web3inboxLogo.png'
+import w3wLogo from '../../static/assets/home/web3walletLogo.png'
+import walletNative from '../../static/assets/home/walletNative.png'
+
 # Introduction
+
+:::caution
+Web3Inbox is in alpha development
+:::
 
 The Web3Inbox SDK provides a toolkit for integrating web3 communications messaging features into dapps. It utilizes WalletConnect's Notify and Chat APIs to support app notifications and wallet-to-wallet messaging, enhancing user interaction and feature availability.
 
@@ -10,9 +19,28 @@ Chat facilitates direct messaging between wallets, support chats for dapps, and 
 
 ![Web3Inbox](/img/web3inbox.png)
 
-:::caution
-Web3Inbox is in alpha development
-:::
+## QuickStart
+
+<Wrapper
+  type="large"
+  style={{
+    marginTop: '2rem'
+  }}
+  items={[
+    {
+      name: 'Embeddable Widget',
+      description: 'Drop-in widget for fast Web3Inbox integration with limited customization',
+      icon: w3wLogo,
+      href: '/2.0/web3inbox/embedded-widget/about'
+    },
+    {
+      name: 'Core Components',
+      description: 'For a fully-customized Web3Inbox experience.',
+      icon: w3iLogo,
+      href: '/2.0/web3inbox/widget/about'
+    }
+  ]}
+/>
 
 ## Use Cases
 
@@ -32,10 +60,10 @@ Improve customer relationships with 1-1 support chats and reach your users even 
 
 Some of the key features of the Web3Inbox SDK include:
 
-- E2E encryption: Messages that run through the WalletConnect protocol are end-to-end encrypted, always.
-- Device push notifications.
-- Notifications history: Messages published through the relay server are stored.
-- Spam protection/subscription control.
+- **E2E encryption:** Messages that run through the WalletConnect protocol are end-to-end encrypted, always.
+- **Device push notifications.**
+- **Notifications history:** Messages published through the relay server are stored.
+- **Spam protection/subscription control.**
 
 ## Getting Started
 
