@@ -1,21 +1,23 @@
-import Table from '../../../components/Table'
+import Table from '../../components/Table'
 
-# Actions
+# Composables
 
-## Open and close the modal
+## useWeb3Modal
 
+Control the modal with the `useWeb3Modal` function
 ```ts
-const modal = createWeb3Modal({ wagmiConfig, projectId, chains })
+import { useWeb3Modal } from '@web3modal/wagmi/react'
 
-modal.open()
-//...
-modal.close()
+const { open, close } = useWeb3Modal()
+
+open()
 ```
+
 
 You can also select the modal's view when calling the `open` function
 
 ```ts
-modal.open({ view: 'Account' })
+open({ view: 'Account' })
 ```
 
 List of views you can select
@@ -76,44 +78,15 @@ const signature = await signMessage({
 
 Learn more about Wagmi actions [here](https://wagmi.sh/core/actions/readContract)
 
-## ThemeMode
-
-Set the `themeMode` after creating the modal
+## useWeb3ModalTheme
 
 ```ts
-const modal = createWeb3Modal({ wagmiConfig, projectId, chains })
+const { setThemeMode, setThemeVariables, themeMode, themeVariables } = useWeb3ModalTheme()
 
-modal.setThemeMode('dark')
-```
+setThemeMode('dark')
 
-Get the current `themeMode` value by calling the `getThemeMode` function
-
-```ts
-const modal = createWeb3Modal({ wagmiConfig, projectId, chains })
-
-const themeMode = modal.getThemeMode()
-```
-
-## themeVariables
-
-Set the `themeVariables` after creating the modal
-
-```ts
-const modal = createWeb3Modal({ wagmiConfig, projectId, chains })
-
-modal.setThemeVariables({ ... })
-```
-
-Get the current `themeVariables` value by calling the `getThemeVariables` function
-
-```ts
-const modal = createWeb3Modal({ wagmiConfig, projectId, chains })
-
-const themeMode = modal.getThemeVariables()
-```
-
-## Subscribe to theme changes
-
-```ts
-const unsubscribe = modal.subscribeTheme(newTheme => console.log(newTheme))
+setThemeVariables({
+  '--w3m-color-mix': '#00BB7F',
+  '--w3m-color-mix-strength': 40
+})
 ```

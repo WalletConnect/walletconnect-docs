@@ -1,9 +1,7 @@
-import PlatformTabs from '../../components/PlatformTabs'
-import PlatformTabItem from '../../components/PlatformTabItem'
+import PlatformTabs from '../components/PlatformTabs'
+import PlatformTabItem from '../components/PlatformTabItem'
 
 # Upgrade Guide
-
-![v3 banner](../../../static/img/v3.png)
 
 ## What's new in v3
 
@@ -28,7 +26,7 @@ To upgrade from Web3Modal v2 to v3 start by removing Web3Modal v2 dependencies `
 while keeping `wagmi` and `viem` installed. Now you can install Web3Modal v3 library
 
 ```bash npm2yarn
-npm install @web3modal/wagmi@beta
+npm install @web3modal/wagmi
 ```
 
 </PlatformTabItem>
@@ -38,7 +36,7 @@ To upgrade from Web3Modal v2 to v3 start by removing Web3Modal v2 dependencies `
 while keeping `@wagmi/core` and `viem` installed. Now you can install Web3Modal v3 library
 
 ```bash npm2yarn
-npm install @web3modal/wagmi@beta
+npm install @web3modal/wagmi
 ```
 
 </PlatformTabItem>
@@ -55,7 +53,7 @@ npm install @web3modal/wagmi@beta
 
 You can start the Web3Modal configuration by using either the **default** or **advanced** mode.
 
-Default mode will implement WalletConnect, Browser Wallets (injected) and Coinbase options in addition to Wagmi's public clients and [WalletConnect's provider](../../cloud/blockchain-api.md).
+Default mode will implement WalletConnect, Browser Wallets (injected) and Coinbase options in addition to Wagmi's public clients and [WalletConnect's provider](../cloud/blockchain-api.md).
 :::note
 Make sure to set your configuration outside the App component to avoid unwanted rerenders.
 :::
