@@ -32,15 +32,15 @@ const { account, register } = useAccount()
 register({onSign})
 
 // Checking if subscribed
-const { subscribe, isSubscribed } = useManageSubscription({account})
+const { subscribe, isSubscribed } = useManageSubscription()
 
 // Get the subscription
-const { subscription } = useSubscription({account})
+const { subscription } = useSubscription()
 
 // subscribing -- It will automatically detect the dapp
-subscribe({account})
+subscribe()
 
-const { messages } = useMessages({account})
+const { messages } = useMessages()
 
 ```
 
@@ -59,9 +59,9 @@ client.watchAccount(acc => (accountState = acc))
 
 client.watchSubscription(sub => (subscriptionState = sub))
 
-client.subscribe({ account: accountState })
+client.subscribe()
 
-const messages = client.getMessageHistory({ account: accountState })
+const messages = client.getMessageHistory()
 ```
 
 </PlatformTabItem>
