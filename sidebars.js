@@ -98,6 +98,7 @@ module.exports = {
                 'web3modal/html/theming',
               ]
             },
+            'web3modal/resources',
             'web3modal/upgrade',
             'web3modal/v2/about'
           ]
@@ -322,7 +323,6 @@ module.exports = {
             }
           ]
         },
-        'web3modal/v2/resources',
       ]
     }
   ]
