@@ -1,6 +1,36 @@
 # Resources
 
+- [Notify API Specs](https://specs.walletconnect.com/2.0/specs/clients/notify/)
 - [Web3Inbox Dapp Docs](https://github.com/WalletConnect/web3inbox/wiki) - Wiki of how web3inbox works internally and how to develop SDKs for it.
 
 ## Examples
+
 - [Web3Inbox Android Sample](https://github.com/WalletConnect/WalletConnectKotlinV2/tree/develop/sample/inbox)
+- [Swift sample](https://github.com/WalletConnect/WalletConnectSwiftV2)
+- [JS client](https://github.com/WalletConnect/notify-client-js)
+
+## Get your first push notification
+
+Getting your first push notification is straightforward:
+
+1. Subscribe using your preferred client's subscribe method
+2. Run the following `cURL`:
+
+```bash
+curl --location 'https://dev.notify.walletconnect.com/<YOUR_PROJECT_ID>/notify' \
+--header 'Accept: */*' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer <YOUR_PROJECT_SECRET>' \
+--data '{
+    "notification": {
+        "body": "Push Notification Body",
+        "title": "Push Notification Title",
+        "icon": "https://push.notification.image/icon.png",
+        "url": "https://your.project.url",
+        "type": "notification_type"
+    },
+    "accounts": [
+        "eip155:1:<YOUR_EIP155_ACCOUNT>"
+    ]
+}'
+```

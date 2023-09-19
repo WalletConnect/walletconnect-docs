@@ -413,13 +413,22 @@ RainbowKit is type-safe and will warn you when a `projectId` is missing. Refer t
 
 ### Privy
 
-To upgrade Privy to use WalletConnect v2.0, simply upgrade `@privy-io/react-auth` to version `1.28.0` or higher, and then complete the following two steps:
+To upgrade [Privy](https://www.privy.io/) to use WalletConnect v2.0, **the only thing you need to do is install the [latest version](https://docs.privy.io/reference/react-auth/changelog) of the Privy SDK:**
+```sh
+npm i @privy-io/react-auth@latest
+```
+**That's it! You've upgraded to WalletConnect v2.0.**
+
+#### Optional
+
+If you want to configure your own WalletConnect Cloud Project instead of using the default one provided by Privy, proceed to the following steps. This is optional.
 
 #### 1. Get a WalletConnect Cloud Project ID
 
 Go to [**WalletConnect Cloud**](https://cloud.walletconnect.com/) and create a new account. Once your account is created, create a new project and collect the **Project ID**.
 
 #### 2. Configure your Project ID in the PrivyProvider
+
 
 In the [`config`](https://docs.privy.io/reference/react-auth/interfaces/PrivyProviderProps#config) property of your [`PrivyProvider`](https://docs.privy.io/reference/react-auth/modules#privyprovider), add a `walletConnectCloudProjectId` with your project ID from step 1.
 

@@ -1,6 +1,7 @@
 @import url(fonts.css);
 
 :root {
+  /*Code block highlight*/
   --ifm-color-primary: #1c8aff;
   --ifm-link-hover-color: #006eff;
   --ifm-heading-font-family: 'ABC Diatype Bold', sans-serif;
@@ -31,6 +32,29 @@
   --ifm-cloud-bg-secondary: var(--ifm-color-primary-darkest);
   --ifm-feedback-heading: var(--ifm-color-gray-900);
   --ifm-container-background-color: #fff;
+  --ifm-color-success: #5ec269;
+  --ifm-color-success-dark: #49ba56;
+  --ifm-color-success-darker: #43b24f;
+  --ifm-color-success-darkest: #379241;
+  --ifm-color-success-light: #73ca7c;
+  --ifm-color-success-lighter: #7dce86;
+  --ifm-color-success-lightest: #9ddaa3;
+}
+
+.theme-code-block-highlighted-delete {
+  display: block;
+  border-left: 3px solid #ff000080;
+  background-color: #ff000020;
+  margin: 0 calc(-1 * var(--ifm-pre-padding));
+  padding: 0 var(--ifm-pre-padding);
+}
+
+.theme-code-block-highlighted-add {
+  display: block;
+  border-left: 3px solid rgba(0, 255, 0, 0.502);
+  background-color: rgba(0, 255, 0, 0.125);
+  margin: 0 calc(-1 * var(--ifm-pre-padding));
+  padding: 0 var(--ifm-pre-padding);
 }
 
 html[data-theme='dark'] {
