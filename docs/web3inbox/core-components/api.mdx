@@ -130,7 +130,7 @@ unsubscribe()
 
 #### References
 
-- **account:** **Optional** CAIP-10 account currently active in Web3Inbox
+- **account *(Optional)*:** CAIP-10 account currently active in Web3Inbox
 - **subscribe:** Function to subscribe to current dApp `() => void`
 - **unsubscribe:** Function to unsubscribe to current dApp `() => void`
 - **isSubscribed:** Reactive state, checking if subscribed to dApp `Boolean`
@@ -166,7 +166,7 @@ const subscription = client.getSubscription(account)
 
 #### References
 
-- **account:** **Optional** CAIP-10 account currently active in Web3Inbox
+- **account *(Optional)*:** CAIP-10 account currently active in Web3Inbox
 - **subscription:** _Non-Reactive_ state, returning current subscription information, of type:
 
 ```ts
@@ -203,7 +203,7 @@ deleteMessage(messages[0].id)
 
 #### References
 
-- **account:** **Optional** CAIP-10 account currently active in Web3Inbox
+- **account *(Optional)*:** CAIP-10 account currently active in Web3Inbox
 - **messages:** Array of messages, of type
 
 ```ts
@@ -226,7 +226,7 @@ client.watchMessages(m => (reactiveMessageState = m))
 
 #### References
 
-- **account:** **Optional** CAIP-10 account currently active in Web3Inbox
+- **account *(Optional)*:** CAIP-10 account currently active in Web3Inbox
 - **messages:** Array of messages, of type
 
 ```ts
@@ -260,7 +260,7 @@ updateScopes(Object.keys(scopes))
 
 #### References
 
-- **account:** **Optional** CAIP-10 account currently active in Web3Inbox
+- **account *(Optional)*:** CAIP-10 account currently active in Web3Inbox
 - **scopes:** Map of scopes (Notification types)
 - **updateScopes:** `(enabledScopeNames: string[]) -> void`
 
@@ -288,7 +288,7 @@ client.update(account, Object.keys(scopes))
 
 #### References
 
-- **account:** **Optional** CAIP-10 account currently active in Web3Inbox
+- **account *(Optional)*:** CAIP-10 account currently active in Web3Inbox
 - **scopes:** Map of scopes (Notification types)
 - **updateScopes:** `(enabledScopeNames: string[]) -> void`
 
