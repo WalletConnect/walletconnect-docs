@@ -1,4 +1,5 @@
 import Table from '../../components/Table'
+import Button from '../../components/Button'
 
 # Composables
 
@@ -92,6 +93,8 @@ The modal state consists of two reactive values:
 
 ## Use wagmi actions
 
+You can use [Wagmi actions](https://wagmi.sh/core/actions/getAccount) to sign messages, interact with smart contracts, and much more.
+
 ### getAccount
 
 Action for accessing account data and connection status.
@@ -114,7 +117,7 @@ const signature = await signMessage({
 })
 ```
 
-Learn more about Wagmi actions [here](https://wagmi.sh/core/actions/readContract)
+<Button name="Learn More" url="https://wagmi.sh/core/actions/readContract" />
 
 ## useWeb3ModalTheme
 
