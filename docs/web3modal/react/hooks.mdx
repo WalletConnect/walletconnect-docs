@@ -54,6 +54,36 @@ List of views you can select
   ]}
 />
 
+## useWeb3ModalState
+
+Get the current value of the modal's state
+
+```ts
+import { useWeb3ModalState } from '@web3modal/wagmi/react'
+```
+
+```ts
+const { open, selectedNetworkId } = useWeb3ModalState()
+```
+
+The modal state consists of two reactive values:
+
+<Table
+  headers={['State', 'Description', 'Type']}
+  data={[
+    {
+      variable: { code: 'open' },
+      description: 'Open state will be true when the modal is open and false when closed.',
+      type: { code: 'boolean' }
+    },
+    {
+      variable: { code: 'selectedNetworkId' },
+      description: 'The current chain id selected by the user',
+      type: { code: 'number' }
+    }
+  ]}
+/>
+
 ## Use wagmi hooks
 
 ### useAccount

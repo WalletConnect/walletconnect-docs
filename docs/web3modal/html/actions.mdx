@@ -50,6 +50,45 @@ List of views you can select
   ]}
 />
 
+## Modal State
+
+Get the current value of the modal's state
+```ts
+const modal = createWeb3Modal({
+  //...
+})
+
+const { open, selectedNetworkId } = modal.getState()
+```
+
+The modal state is an object of two properties:
+
+<Table
+  headers={['Property', 'Description', 'Type']}
+  data={[
+    {
+      variable: { code: 'open' },
+      description: 'Open state will be true when the modal is open and false when closed.',
+      type: { code: 'boolean' }
+    },
+    {
+      variable: { code: 'selectedNetworkId' },
+      description: 'The current chain id selected by the user',
+      type: { code: 'number' }
+    }
+  ]}
+/>
+
+You can also subscribe to the modal's state changes.
+
+```ts
+const modal = createWeb3Modal({
+  //...
+})
+
+modal.subscribeState(( newState ) => console.log(newState))
+```
+
 ## Use wagmi actions
 
 ### getAccount
