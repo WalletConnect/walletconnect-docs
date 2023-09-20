@@ -453,7 +453,7 @@ Enable or disable settigns page in Web3Inbox (default: `true`), setting it to `f
 
 #### Configure your project to enable Push Notifications
 
-[Configure Project](../../advanced/echo-server.md)
+[Configure Project](/docs/advanced/push-server.md)
 
 #### Register for Push Notifications
 
@@ -536,7 +536,7 @@ override func didReceive(_ request: UNNotificationRequest, withContentHandler co
 </PlatformTabItem>
 <PlatformTabItem value="android">
 
-To enable push notifications, first you'll need to [configure your project](/docs/advanced/echo-server.md) with Firebase Messaging service.
+To enable push notifications, first you'll need to [configure your project](/docs/advanced/push-server.md) with Firebase Messaging service.
 
 The `NotifyMessageService` is a wrapper around the `FirebaseMessagingService`. The `NotifyMessageService` class needs to be implemented for the Notify SDK to be able to decrypt and notify wallets of a push notification sent from the Dapp in the background.
 This service also needs to be registered in the AndroidManifest.xml file similar to the example in the [FCM documentation](https://firebase.google.com/docs/cloud-messaging/android/client#manifest).

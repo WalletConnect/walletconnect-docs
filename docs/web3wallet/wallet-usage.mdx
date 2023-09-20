@@ -58,9 +58,9 @@ let metadata = AppMetadata(
 Web3Wallet.configure(
     metadata: metadata,
     crypto: DefaultCryptoProvider(),
-    // Used for the Echo: "echo.walletconnect.com" will be used by default if not provided
-    echoHost: "echo.walletconnect.com",
-    // Used for the Echo: "APNSEnvironment.production" will be used by default if not provided
+    // Used for the Push: "push.walletconnect.com" will be used by default if not provided
+    pushHost: "push.walletconnect.com",
+    // Used for the Push: "APNSEnvironment.production" will be used by default if not provided
     environment: .production
 )
 ```
@@ -68,7 +68,7 @@ Web3Wallet.configure(
 In order to allow users to receive push notifications you have to communicate with Apple Push Notification service and receive unique device token. Register that token with following method:
 
 ```swift
-try await Web3Wallet.instance.registerEchoClient(deviceToken: deviceToken)
+try await Web3Wallet.instance.registerPushClient(deviceToken: deviceToken)
 ```
 
 </PlatformTabItem>
@@ -1893,7 +1893,7 @@ Web3Wallet.formatMessage(formatMessage)
 
 #### Register Device Token
 
-This method enables wallets to receive push notifications from WalletConnect's Echo Server via [Firebase Cloud Messaging](https://firebase.google.com/docs/cloud-messaging). This means you will have to setup your project with Firebase before being able to call registerDeviceToken method.
+This method enables wallets to receive push notifications from WalletConnect's Push Server via [Firebase Cloud Messaging](https://firebase.google.com/docs/cloud-messaging). This means you will have to setup your project with Firebase before being able to call registerDeviceToken method.
 
 Make sure that a service extending the FirebaseMessagingService is added to your manifest as per the [Firebase FCM documentation](https://firebase.google.com/docs/cloud-messaging/android/client#manifest) as well as any other setup Firebase requires [Firebase setup documentation](https://firebase.google.com/docs/android/setup).
 
@@ -1905,7 +1905,7 @@ val firebaseAccessToken: String = //FCM access token received through the Fireba
 Web3Wallet.registerDeviceToken(
     firebaseAccessToken,
     onSuccess = {
-        // callback triggered once registered successfully with the Echo Server
+        // callback triggered once registered successfully with the Push Server
     },
     onError = { error: Wallet.Model.Error ->
         // callback triggered if there's an exception thrown during the registration process

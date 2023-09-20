@@ -57,7 +57,7 @@ OK, push-server v0.1.0
 ### Register Client
 
 ```
-POST <ECHO_SERVER_URL>/clients
+POST <PUSH_SERVER_URL>/clients
 {
     "client_id": <CLIENT_ID>,
     "type": <TYPE>,
@@ -73,7 +73,7 @@ POST <ECHO_SERVER_URL>/clients
 ### Unregister Client
 
 ```
-DELETE <ECHO_SERVER_URL>/clients/<CLIENT_ID>
+DELETE <PUSH_SERVER_URL>/clients/<CLIENT_ID>
 ```
 
 - `CLIENT_ID`: The Client's ID from the Relay pairing.
@@ -81,7 +81,7 @@ DELETE <ECHO_SERVER_URL>/clients/<CLIENT_ID>
 ### Send Notification
 
 ```
-POST <ECHO_SERVER_URL>/clients/<CLIENT_ID>
+POST <PUSH_SERVER_URL>/clients/<CLIENT_ID>
 {
     "id": "0000-0000-0000-0000"
     "payload": {

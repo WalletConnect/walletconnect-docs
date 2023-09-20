@@ -170,8 +170,8 @@
       "destination": "/2.0/:path*"
     },
     {
-      "source": "/2.0/specs/servers/echo",
-      "destination": "/2.0/specs/servers/echo/spec"
+      "source": "/2.0/specs/servers/push",
+      "destination": "/2.0/specs/servers/push/spec"
     },
     {
       "source": "/2.0/specs/servers/cast",
