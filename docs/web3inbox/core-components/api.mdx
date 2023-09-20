@@ -72,9 +72,14 @@ register({ onSign })
 (message: string) => Promise<string>
 ```
 
+Some suggested ways to implement the `onSign` callback are via:
+
+- Ethers.js [`Wallet.signMessage` method](https://docs.ethers.org/v5/api/signer/#Signer-signMessage)
+- The [`useSignMessage` hook](https://wagmi.sh/react/hooks/useSignMessage) in `@wagmi`
+
 <!-- prettier-ignore-end -->
 
-- **register:** Async function used to register a message
+- **register:** Async function used to register an account
 
 </PlatformTabItem>
 
@@ -103,6 +108,11 @@ client.register({
 ```ts
 (message: string) => Promise
 ```
+
+Some suggested ways to implement the `onSign` callback are via:
+
+- Ethers.js [`Wallet.signMessage` method](https://docs.ethers.org/v5/api/signer/#Signer-signMessage)
+- The [`signMessage` method](https://wagmi.sh/core/actions/signMessage) in `@wagmi/core`
 <!-- prettier-ignore-end -->
 
 </PlatformTabItem>
