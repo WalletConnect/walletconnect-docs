@@ -2,6 +2,10 @@
   "trailingSlash": false,
   "redirects": [
     {
+      "source": "/2.0/web3modal/v3/:path*",
+      "destination": "/2.0/web3modal/:path*"
+    },
+    {
       "source": "/2.0/web/:path*",
       "destination": "/2.0/:path*"
     },
