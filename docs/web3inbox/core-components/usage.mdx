@@ -21,13 +21,13 @@ and are very mealleable.
 <PlatformTabItem value="react">
 
 ```ts
-import { useManageSubscription, useSubscription, useAccount, useInitWeb3InboxClient, useMessages } from "@web3inbox/react-widget";
+import { useManageSubscription, useSubscription, useW3iAccount, useInitWeb3InboxClient, useMessages } from "@web3inbox/react-widget";
 ...
 
 const isReady = useInitWeb3InboxClient({projectId: "..."})
 
 // Getting the account -- Use register before attempting to subscribe
-const { account, register } = useAccount()
+const { account, register } = useW3iAccount()
 
 register({onSign})
 
