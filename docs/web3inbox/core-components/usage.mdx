@@ -20,27 +20,38 @@ and are very mealleable.
 >
 <PlatformTabItem value="react">
 
-```ts
+```tsx
 import { useManageSubscription, useSubscription, useW3iAccount, useInitWeb3InboxClient, useMessages } from "@web3inbox/react-widget";
+import { useSignMessage } from 'wagmi'
 ...
 
-const isReady = useInitWeb3InboxClient({projectId: "..."})
 
-// Getting the account -- Use register before attempting to subscribe
-const { account, register } = useW3iAccount()
+const ExampleComponent = () => {
+  const isReady = useInitWeb3InboxClient({projectId: "..."})
+  
+  // Getting the account -- Use register before attempting to subscribe
+  const { account, register } = useW3iAccount()
+  
+  const { signMessageAsync } = useSignMessage();
+  
+  // Checking if subscribed
+  const { subscribe, isSubscribed } = useManageSubscription()
+  
+  // Get the subscription
+  const { subscription } = useSubscription()
+  
+  const { messages } = useMessages()
 
-register({onSign})
-
-// Checking if subscribed
-const { subscribe, isSubscribed } = useManageSubscription()
-
-// Get the subscription
-const { subscription } = useSubscription()
-
-// subscribing -- It will automatically detect the dapp
-subscribe()
-
-const { messages } = useMessages()
+  return ( 
+    <div>
+      <span>Client is {isReady? "Ready" : "Not Ready"}</span>
+      <span>You are {isSubscribed? "Subscribed" : "Not Subscribed"} Subscribed</span>
+      <button onClick={() => register({onSign: signMessageAsync})}> Register </button>
+      <button onClick={() => subscribe()}> Subscribe to current dapp </button>
+      <div> All your messages in JSON: {JSON.stringify(messages)}</div>
+    </div>
+  );
+}
 
 ```
 
