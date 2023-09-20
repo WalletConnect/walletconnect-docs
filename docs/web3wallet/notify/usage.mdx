@@ -241,6 +241,7 @@ NotifyClient.register(
 ``` 
 
 #### Subscribe to a new Dapp
+Calling `NotifyClient.subscribe` will establish the subscription with the dapp specified in the `Notify.Params.Subscribe` params passed into the function. The `Notify.Params.Subscribe` params requires the uri of the dapp and a CAIP-10 compatible account.
 
 ```kotlin
 val dappUri: Uri = // The Dapp Uri to subscribe to
@@ -263,27 +264,7 @@ NotifyClient.subscribe(
 ```
 
 #### Update a subscription with new Scopes
-
-[Scopes information](https://specs.walletconnect.com/2.0/specs/clients/notify/notify-config#notification-types)
-
-```kotlin
-val updateParams = Notify.Params.Update(
-  topic = /* Topic of the subscription to update */,
-  scope = /* The new space delimited list of scopes */
-)
-
-NotifyClient.update(
-    params  = updateParams,
-  onSuccess = { 
-      // Updating the subscription was successful 
-    },
-    onError = { error: Notify.Model.Error -> 
-      // There was an error while trying to update the subscription
-    }
-)
-```
-
-#### Update a subscription with new Scopes
+To update a subscription, pass `Notify.Params.Update` with the subscription topic that is to be updated and the new [scope](https://specs.walletconnect.com/2.0/specs/clients/notify/notify-config#notification-types) to be sent to the dapp. The subscription topic can be fetched from the `NotifyClient.getActiveSubscriptions()`
 
 ```kotlin
 val updateParams = Notify.Params.Update(
@@ -303,29 +284,27 @@ NotifyClient.update(
 ```
 
 #### Get a map of Active Subscriptions
+To get a list of all the active subscriptions, call `NotifyClient.getActiveSubscriptions()`. It will return a map with the topic as the key and `Notify.Model.Subscription` as the value.
 
 ```kotlin
 val activeSubscriptions: Map<String, Notify.Model.Subscription> = NotifyClient.getActiveSubscriptions()
 ```
 
 #### Get a map of the Message History for a Subscription
+To get all the messages for a specific subscription topic, call `NotifyClient.getMessageHistory()` and pass an instance of `Notify.Params.MessageHistory`. It will return a map with the request ids as the key and `Notify.Model.MessageRecord` as the value.
 
 ```kotlin
 val messageHistoryParamsForSubscriptionTopic = Notify.Params.MessageHistory(/* The topic of an active subscription */)
-val messageHistory: Map<Long, Notify.Model.MessageRecord> = NotifyClient.getMessageHistory(params = messageHistoryParamsForSubscriptionTopic)
-```
 
-#### Get a map of the Message History for a Subscription
-
-```kotlin
-val messageHistoryParamsForSubscriptionTopic = Notify.Params.MessageHistory(topic = /* The topic of an active subscription */)
 val messageHistory: Map<Long, Notify.Model.MessageRecord> = NotifyClient.getMessageHistory(params = messageHistoryParamsForSubscriptionTopic)
 ```
 
 #### Delete a Subscription
+To delete a subscription, pass `Notify.Params.DeleteSubscription` with the subscription topic that is to be deleted. The subscription topic can be fetched from the `NotifyClient.getActiveSubscriptions()`
 
 ```kotlin
 val deleteSubscriptionParam = Notify.Params.DeleteSubscription(topic = /* The topic of the active subscription to delete */)
+
 NotifyClient.deleteSubscription(
   params = deleteSubscriptionParam, 
   onError: { error: Notify.Model.Error ->
@@ -335,9 +314,11 @@ NotifyClient.deleteSubscription(
 ```
 
 #### Delete a Message
+To delete a notify record message, pass `Notify.Params.DeleteMessage` with the request id of the record to be deleted. The id can be fetched from the `NotifyClient.getMessageHistory()`
 
 ```kotlin
 val deleteMessageParams = Notify.Params.DeleteMessage(id = /* The request id of the message fetched from Notify. */)
+
 Notify.deleteNotifyMessage(
   params = deleteMessageParams, 
   onSuccess = {
@@ -555,7 +536,45 @@ override func didReceive(_ request: UNNotificationRequest, withContentHandler co
 </PlatformTabItem>
 <PlatformTabItem value="android">
 
-Currently Web3Inbox SDK contains Chat SDK features. Push SDK features coming soon.
+To enable push notifications, first you'll need to [configure your project](/docs/advanced/echo-server.md) with Firebase Messaging service.
+
+The `NotifyMessageService` is a wrapper around the `FirebaseMessagingService`. The `NotifyMessageService` class needs to be implemented for the Notify SDK to be able to decrypt and notify wallets of a push notification sent from the Dapp in the background.
+This service also needs to be registered in the AndroidManifest.xml file similar to the example in the [FCM documentation](https://firebase.google.com/docs/cloud-messaging/android/client#manifest).
+
+```kotlin
+class SampleFirebaseService: NotifyMessageService() {
+
+    override fun newToken(token: String) {
+        // Triggered when Firebase Cloud Messaging creates a new token and that token is registered with the Push server
+    }
+
+    override fun registeringFailed(token: String, throwable: Throwable) {
+        // Triggered when Firebase Cloud Messaging if there is an error with registering with the Push server with a new token
+    }
+
+    override fun onMessage(message: Notify.Model.Message, originalMessage: RemoteMessage) {
+        // Triggered when a message is sent from the Push server through Firebase Cloud Messaging and the message contains `Notify.Model.Message`. The original FCM RemoteMessage is also returned
+    }
+
+    override fun onDefaultBehavior(message: RemoteMessage) {
+        // Triggered when a message is sent from the Push server through Firebase Cloud Messaging and the message does not contain `Notify.Model.Message` in the payload. The original FCM RemoteMessage returned instead
+    }
+
+    override fun onError(throwable: Throwable, defaultMessage: RemoteMessage) {
+        // Triggered when there is an error that occurs when a message is received from the Push server
+    }
+}
+```
+
+```xml
+<application...>
+    <service android:name=".SampleFirebaseService">
+        <intent-filter>
+            <action android:name="com.google.firebase.MESSAGING_EVENT" />
+        </intent-filter>
+    </service>
+</application>
+```
 
 </PlatformTabItem>
 <PlatformTabItem value="react-native">
