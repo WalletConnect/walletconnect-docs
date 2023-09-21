@@ -60,18 +60,19 @@ Finally, pass wagmi config to `createWeb3Modal`.
 
   import { configureChains, createConfig } from '@wagmi/core'
   import { mainnet } from '@wagmi/core/chains'
+  import { publicProvider } from '@wagmi/core/providers/public'
+  import { InjectedConnector } from '@wagmi/core'
   import { CoinbaseWalletConnector } from '@wagmi/core/connectors/coinbaseWallet'
-  import { InjectedConnector } from '@wagmi/core/connectors/injected'
   import { WalletConnectConnector } from '@wagmi/core/connectors/walletConnect'
 
-  // 1. Get projectId
+  // 1. Define constants
   const projectId = 'YOUR_PROJECT_ID'
 
-  // 2. Create wagmiConfig
-  const { chains, publicClient } = configureChains(
-    [mainnet],
-    [walletConnectProvider({ projectId })]
-  )
+  // 2. Configure wagmi client
+  const { chains, publicClient } = configureChains([mainnet], [
+    walletConnectProvider({ projectId }),
+    publicProvider()
+  ])
 
   const wagmiConfig = createConfig({
     autoConnect: true,
