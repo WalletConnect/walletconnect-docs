@@ -66,6 +66,8 @@ const client = Web3InboxClient.init({ projectId: '...' })
 let accountState = ''
 let subscriptionState = ''
 
+client.register({onSign})
+
 client.watchAccount(acc => (accountState = acc))
 
 client.watchSubscription(sub => (subscriptionState = sub))
