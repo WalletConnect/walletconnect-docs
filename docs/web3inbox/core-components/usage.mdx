@@ -45,9 +45,24 @@ const ExampleComponent = () => {
   const { messages } = useMessages()
   
   useEffect(() => {
-    setAccount(`eip155:1:${account}`)
-    register({onSign: signMessageAsync})
-  }, [account, register, signMessageAsync])
+    if (!Boolean(address)) return;
+    setAccount(`eip155:1:${address}`);
+  }, [address, setAccount]);
+
+  const handleRegistration = useCallback(async () => {
+    if (!account) return;
+    try {
+      await registerIdentity(signMessageAsync);
+    } catch (registerIdentityError) {
+      console.error({ registerIdentityError });
+    }
+  }, [signMessageAsync, registerIdentity, account]);
+
+  useEffect(() => {
+    if (!identityKey) {
+      handleRegistration();
+    }
+  }, [handleRegistration, identityKey]);
   
   return ( 
     <div>
