@@ -54,8 +54,8 @@ const client = Web3InboxClient.init({ projectId })
 
 Register, set and fetch account.
 
-**NOTE:** Register needs to be called every time, even if the account is registered. This is to
-enable state synchronization.
+**NOTE:** Register needs to be called after every page load or Web3InboxClient `init`, even if the
+account is registered. This is to enable state synchronization.
 
 <PlatformTabItem value="react">
 
