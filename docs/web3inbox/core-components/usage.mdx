@@ -22,15 +22,17 @@ and are very mealleable.
 
 ```tsx
 import { useManageSubscription, useSubscription, useW3iAccount, useInitWeb3InboxClient, useMessages } from "@web3inbox/react-widget";
-import { useSignMessage } from 'wagmi'
+import { useSignMessage, useAccount } from 'wagmi'
 ...
 
 
 const ExampleComponent = () => {
   const isReady = useInitWeb3InboxClient({projectId: "..."})
   
+  const { account } = useAccount();
+  
   // Getting the account -- Use register before attempting to subscribe
-  const { account, register } = useW3iAccount()
+  const { setAccount, register } = useW3iAccount()
   
   const { signMessageAsync } = useSignMessage();
   
@@ -41,12 +43,31 @@ const ExampleComponent = () => {
   const { subscription } = useSubscription()
   
   const { messages } = useMessages()
+  
+  useEffect(() => {
+    if (!Boolean(address)) return;
+    setAccount(`eip155:1:${address}`);
+  }, [address, setAccount]);
 
+  const handleRegistration = useCallback(async () => {
+    if (!account) return;
+    try {
+      await registerIdentity(signMessageAsync);
+    } catch (registerIdentityError) {
+      console.error({ registerIdentityError });
+    }
+  }, [signMessageAsync, registerIdentity, account]);
+
+  useEffect(() => {
+    if (!identityKey) {
+      handleRegistration();
+    }
+  }, [handleRegistration, identityKey]);
+  
   return ( 
     <div>
       <span>Client is {isReady? "Ready" : "Not Ready"}</span>
       <span>You are {isSubscribed? "Subscribed" : "Not Subscribed"} Subscribed</span>
-      <button onClick={() => register({onSign: signMessageAsync})}> Register </button>
       <button onClick={() => subscribe()}> Subscribe to current dapp </button>
       <div> All your messages in JSON: {JSON.stringify(messages)}</div>
     </div>
@@ -65,6 +86,8 @@ const client = Web3InboxClient.init({ projectId: '...' })
 
 let accountState = ''
 let subscriptionState = ''
+
+client.register({onSign})
 
 client.watchAccount(acc => (accountState = acc))
 
