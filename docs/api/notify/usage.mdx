@@ -34,16 +34,9 @@ The above step is not required if you are using the SDK on the browser-side.
 ## Initialize the SDK clients
 
 ```javascript
-import { Core } from '@walletconnect/core'
 import { NotifyClient } from '@walletconnect/notify-client'
 
-// Initialize core separately to allow sharing it between Sync and Notify
-const core = new Core({
-  projectId: '<YOUR PROJECT ID>'
-})
-
 const notifyClient = await NotifyClient.init({
-  core, // <- pass the shared `core` instance
   projectId: '<YOUR PROJECT ID>'
 })
 ```
@@ -62,7 +55,7 @@ notifyClient.on('notify_subscription', async ({ params }) => {
   } else {
     // New subscription was successfully created.
     // Inform the user and/or update app state to reflect the new subscription.
-    console.log(`Successfully subscribed to ${subscription.metadata.name}.`)
+    console.log(`Subscribed successfully.`)
   }
 })
 
@@ -691,16 +684,9 @@ npm install @walletconnect/notify-client @walletconnect/react-native-compat
 ## Initialize the SDK clients
 
 ```javascript
-import { Core } from '@walletconnect/core'
 import { NotifyClient } from '@walletconnect/notify-client'
 
-// Initialize core separately to allow sharing it between Sync and Notify
-const core = new Core({
-  projectId: '<YOUR PROJECT ID>'
-})
-
 const notifyClient = await NotifyClient.init({
-  core, // <- pass the shared `core` instance
   projectId: '<YOUR PROJECT ID>'
 })
 ```
@@ -719,7 +705,7 @@ notifyClient.on('notify_subscription', async ({ params }) => {
   } else {
     // New subscription was successfully created.
     // Inform the user and/or update app state to reflect the new subscription.
-    console.log(`Successfully subscribed to ${subscription.metadata.name}.`)
+    console.log(`Subscribed successfully.`)
   }
 })
 
