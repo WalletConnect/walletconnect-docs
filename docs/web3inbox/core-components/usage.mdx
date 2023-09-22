@@ -22,15 +22,17 @@ and are very mealleable.
 
 ```tsx
 import { useManageSubscription, useSubscription, useW3iAccount, useInitWeb3InboxClient, useMessages } from "@web3inbox/react-widget";
-import { useSignMessage } from 'wagmi'
+import { useSignMessage, useAccount } from 'wagmi'
 ...
 
 
 const ExampleComponent = () => {
   const isReady = useInitWeb3InboxClient({projectId: "..."})
   
+  const { account } = useAccount();
+  
   // Getting the account -- Use register before attempting to subscribe
-  const { account, register } = useW3iAccount()
+  const { setAccount, register } = useW3iAccount()
   
   const { signMessageAsync } = useSignMessage();
   
@@ -41,12 +43,16 @@ const ExampleComponent = () => {
   const { subscription } = useSubscription()
   
   const { messages } = useMessages()
-
+  
+  useEffect(() => {
+    setAccount(`eip155:1:${account}`)
+    register({onSign: signMessageAsync})
+  }, [account, register, signMessageAsync])
+  
   return ( 
     <div>
       <span>Client is {isReady? "Ready" : "Not Ready"}</span>
       <span>You are {isSubscribed? "Subscribed" : "Not Subscribed"} Subscribed</span>
-      <button onClick={() => register({onSign: signMessageAsync})}> Register </button>
       <button onClick={() => subscribe()}> Subscribe to current dapp </button>
       <div> All your messages in JSON: {JSON.stringify(messages)}</div>
     </div>
