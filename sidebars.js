@@ -72,6 +72,7 @@ module.exports = {
                 'web3modal/react/hooks',
                 'web3modal/react/components',
                 'web3modal/react/theming',
+                'web3modal/react/experimental',
               ]
             },
             {
@@ -84,6 +85,7 @@ module.exports = {
                 'web3modal/vue/composables',
                 'web3modal/vue/components',
                 'web3modal/vue/theming',
+                'web3modal/vue/experimental',
               ]
             },
             {
@@ -96,9 +98,9 @@ module.exports = {
                 'web3modal/html/actions',
                 'web3modal/html/components',
                 'web3modal/html/theming',
+                'web3modal/html/experimental',
               ]
             },
-            'web3modal/eip-6963',
             'web3modal/resources',
             'web3modal/upgrade',
             'web3modal/v2/about'
