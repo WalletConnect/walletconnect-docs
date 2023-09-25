@@ -35,8 +35,15 @@ Finally, pass `wagmiConfig` to `createWeb3Modal`.
   const projectId = 'YOUR_PROJECT_ID'
 
   // 2. Create wagmiConfig
+  const metadata = {
+    name: "React App",
+    description: "React App for WalletConnect",
+    url: "https://walletconnect.com/",
+    icons: ["https://avatars.githubusercontent.com/u/37784886"],
+  }
+
   const chains = [mainnet, arbitrum]
-  const wagmiConfig = defaultWagmiConfig({ chains, projectId, appName: 'Web3Modal' })
+  const wagmiConfig = defaultWagmiConfig({ chains, projectId, metadata })
 
   // 3. Create modal
   createWeb3Modal({ wagmiConfig, projectId, chains })
@@ -74,10 +81,17 @@ Finally, pass wagmi config to `createWeb3Modal`.
     publicProvider()
   ])
 
+  const metadata = {
+    name: "Vue App",
+    description: "Vue App for WalletConnect",
+    url: "https://walletconnect.com/",
+    icons: ["https://avatars.githubusercontent.com/u/37784886"],
+  }
+
   const wagmiConfig = createConfig({
     autoConnect: true,
     connectors: [
-      new WalletConnectConnector({ options: { projectId, showQrModal: false } }),
+      new WalletConnectConnector({ options: { projectId, showQrModal: false, metadata } }),
       new InjectedConnector({ options: { shimDisconnect: true } }),
       new CoinbaseWalletConnector({ options: { appName: 'Web3Modal' } })
     ],
