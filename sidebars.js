@@ -98,6 +98,7 @@ module.exports = {
                 'web3modal/html/theming',
               ]
             },
+            'web3modal/eip-6963',
             'web3modal/resources',
             'web3modal/upgrade',
             'web3modal/v2/about'
