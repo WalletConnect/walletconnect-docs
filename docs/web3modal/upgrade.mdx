@@ -91,7 +91,14 @@ const projectId = 'YOUR_PROJECT_ID'
 - })
 /* highlight-delete-end */
 /* highlight-add-start */
-+ const wagmiConfig = defaultWagmiConfig({ chains, projectId, appName: 'Web3Modal' })
++ const metadata = {
++   name: 'Web3Modal',
++   description: 'Web3Modal Example',
++   url: 'https://web3modal.com',
++   icons: ['https://avatars.githubusercontent.com/u/37784886']
++ }
+
++ const wagmiConfig = defaultWagmiConfig({ chains, projectId, metadata })
 /* highlight-add-end */
 
 ```
@@ -151,10 +158,13 @@ const projectId = 'YOUR_PROJECT_ID'
 
 // 2. Create wagmiConfig
 /* highlight-delete-start */
-- const { publicClient } = configureChains([mainnet], [w3mProvider({ projectId })])
+- const { chains, publicClient } = configureChains([mainnet], [w3mProvider({ projectId })])
 /* highlight-delete-end */
 /* highlight-add-start */
-+ const { publicClient } = configureChains([mainnet], [walletConnectProvider({ projectId })])
++ const { chains, publicClient } = configureChains([mainnet], [
++   walletConnectProvider({ projectId }),
++   publicProvider()
++ ])
 /* highlight-add-end */
 
 /* highlight-delete-start */
@@ -165,12 +175,19 @@ const projectId = 'YOUR_PROJECT_ID'
 - })
 /* highlight-delete-end */
 /* highlight-add-start */
++ const metadata = {
++   name: 'Web3Modal',
++   description: 'Web3Modal Example',
++   url: 'https://web3modal.com',
++   icons: ['https://avatars.githubusercontent.com/u/37784886']
++ }
+
 + const wagmiConfig = createConfig({
 +   autoConnect: true,
 +   connectors: [
-+     new WalletConnectConnector({ options: { projectId, showQrModal: false } }),
-+     new InjectedConnector({ options: { shimDisconnect: true } }),
-+     new CoinbaseWalletConnector({ options: { appName: 'Web3Modal' } })
++     new WalletConnectConnector({ chains, options: { projectId, showQrModal: false, metadata } }),
++     new InjectedConnector({ chains, options: { shimDisconnect: true } }),
++     new CoinbaseWalletConnector({ chains, options: { appName: metadata.name } })
 +   ],
 +   publicClient
 + })
@@ -242,7 +259,13 @@ const projectId = 'YOUR_PROJECT_ID'
 - })
 /* highlight-delete-end */
 /* highlight-add-start */
-+ const wagmiConfig = defaultWagmiConfig({ chains, projectId, appName: 'Web3Modal' })
++ const metadata = {
++   name: 'Web3Modal',
++   description: 'Web3Modal Example',
++   url: 'https://web3modal.com',
++   icons: ['https://avatars.githubusercontent.com/u/37784886']
++ }
++ const wagmiConfig = defaultWagmiConfig({ chains, projectId, appName: metadata.name })
 /* highlight-add-end */
 ```
 
@@ -285,10 +308,13 @@ const projectId = 'YOUR_PROJECT_ID'
 
 // 2. Create wagmiConfig
 /* highlight-delete-start */
-- const { publicClient } = configureChains([mainnet], [w3mProvider({ projectId })])
+- const { chains, publicClient } = configureChains([mainnet], [w3mProvider({ projectId })])
 /* highlight-delete-end */
 /* highlight-add-start */
-+ const { publicClient } = configureChains([mainnet], [walletConnectProvider({ projectId })])
++ const { chains, publicClient } = configureChains([mainnet], [
++   walletConnectProvider({ projectId }),
++   publicProvider()
++ ])
 /* highlight-add-end */
 
 /* highlight-delete-start */
@@ -299,12 +325,21 @@ const projectId = 'YOUR_PROJECT_ID'
 - })
 /* highlight-delete-end */
 /* highlight-add-start */
++ const metadata = {
++   name: 'Web3Modal',
++   description: 'Web3Modal Example',
++   url: 'https://web3modal.com',
++   icons: ['https://avatars.githubusercontent.com/u/37784886']
++ }
+/* highlight-add-end */
+
+/* highlight-add-start */
 + const wagmiConfig = createConfig({
 +   autoConnect: true,
 +   connectors: [
-+     new WalletConnectConnector({ options: { projectId, showQrModal: false } }),
-+     new InjectedConnector({ options: { shimDisconnect: true } }),
-+     new CoinbaseWalletConnector({ options: { appName: 'Web3Modal' } })
++     new WalletConnectConnector({ chains, options: { projectId, showQrModal: false, metadata } }),
++     new InjectedConnector({ chains, options: { shimDisconnect: true } }),
++     new CoinbaseWalletConnector({ chains, options: { appName: metadata.name } })
 +   ],
 +   publicClient
 + })
