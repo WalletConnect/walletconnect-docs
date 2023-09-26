@@ -6,6 +6,7 @@ import Button from '../../components/button'
 ## useWeb3Modal
 
 Control the modal with the `useWeb3Modal` function
+
 ```ts
 import { useWeb3Modal } from '@web3modal/wagmi/react'
 
@@ -13,7 +14,6 @@ const { open, close } = useWeb3Modal()
 
 open()
 ```
-
 
 You can also select the modal's view when calling the `open` function
 
@@ -28,27 +28,28 @@ List of views you can select
   data={[
     {
       variable: { code: 'Connect' },
-      description: 'Principal view of the modal - default view when disconnected',
+      description: 'Principal view of the modal - default view when disconnected'
     },
     {
       variable: { code: 'Account' },
-      description: 'User profile - default view when connected',
+      description: 'User profile - default view when connected'
     },
     {
       variable: { code: 'All wallets' },
-      description: 'Shows the list of all available wallets',
+      description: 'Shows the list of all available wallets'
     },
     {
       variable: { code: 'Network' },
-      description: 'List of available networks - you can select and target a specific network before connecting',
+      description:
+        'List of available networks - you can select and target a specific network before connecting'
     },
     {
       variable: { code: 'WhatIsANetwork' },
-      description: '"What is a network" onboarding view',
+      description: '"What is a network" onboarding view'
     },
     {
       variable: { code: 'WhatIsAWallet' },
-      description: '"What is a wallet" onboarding view',
+      description: '"What is a wallet" onboarding view'
     }
   ]}
 />
@@ -59,17 +60,17 @@ Get the current value of the modal's state
 
 ```html
 <script setup lang="ts">
-import { useWeb3ModalState } from '@web3modal/wagmi/vue'
+  import { useWeb3ModalState } from '@web3modal/wagmi/vue'
 
-const state = useWeb3ModalState()
+  const state = useWeb3ModalState()
 
-console.log(state.open)
+  console.log(state.open)
 
-console.log(state.selectedNetworkId)
+  console.log(state.selectedNetworkId)
 </script>
 
 <template>
-  <div> Selected Network Id: {{ state.selectedNetworkId }} </div>
+  <div>Selected Network Id: {{ state.selectedNetworkId }}</div>
 </template>
 ```
 
@@ -91,34 +92,6 @@ The modal state consists of two reactive values:
   ]}
 />
 
-## Use wagmi actions
-
-You can use [Wagmi actions](https://wagmi.sh/core/actions/getAccount) to sign messages, interact with smart contracts, and much more.
-
-### getAccount
-
-Action for accessing account data and connection status.
-
-```tsx
-import { getAccount } from '@wagmi/core'
- 
-const account = getAccount()
-```
-
-### signMessage
-
-Action for signing messages with connected account.
-
-```ts
-import { signMessage } from '@wagmi/core'
- 
-const signature = await signMessage({
-  message: 'gm wagmi frens',
-})
-```
-
-<Button name="Learn More" url="https://wagmi.sh/core/actions/readContract" />
-
 ## useWeb3ModalTheme
 
 ```ts
@@ -131,3 +104,31 @@ setThemeVariables({
   '--w3m-color-mix-strength': 40
 })
 ```
+
+## Use wagmi actions
+
+You can use [Wagmi actions](https://wagmi.sh/core/actions/getAccount) to sign messages, interact with smart contracts, and much more.
+
+### getAccount
+
+Action for accessing account data and connection status.
+
+```tsx
+import { getAccount } from '@wagmi/core'
+
+const account = getAccount()
+```
+
+### signMessage
+
+Action for signing messages with connected account.
+
+```ts
+import { signMessage } from '@wagmi/core'
+
+const signature = await signMessage({
+  message: 'gm wagmi frens'
+})
+```
+
+<Button name="Learn More" url="https://wagmi.sh/core/actions/readContract" />
