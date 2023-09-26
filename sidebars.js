@@ -103,6 +103,7 @@ module.exports = {
             {
               type: 'category',
               label: 'Flutter',
+              className: 'sidebar__logo sidebar__logo--flutter',
               items: [
                 'web3modal/flutter/installation',
                 'web3modal/flutter/actions',

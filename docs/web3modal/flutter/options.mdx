@@ -1,15 +1,19 @@
 # Options
 
-With Web3Modal Flutter, you can easily let people interact with multiple EVM compatible wallets and blockchains.
+:::caution
+Web3Modal for Flutter is in alpha version. Documentation may also be innacurate and/or incomplete.
+:::
 
 ## Web3App or projectId & PairingMetadata (required)
 
-You must provide either a Web3App or a projectId and PairingMetadata.
-Providing the Web3App lets you register callbacks on the Web3App you'd like to use.
-Otherwise, we recommend just providing the projectId and PairingMetadata to the WalletConnectModalService directly.
+You must provide either a Web3App or a projectId as well as a PairingMetadata in both cases.
+Providing the `Web3App` instance lets you register callbacks on the `Web3App` you'd like to use.
+Otherwise, we recommend just providing the projectId and `PairingMetadata` to the `W3MService` directly.
+
+#### W3MService with Web3App:
 
 ```dart
-final Web3App web3App = await Web3App.createInstance(
+final _web3App = await Web3App.createInstance(
   projectId: 'YOUR_PROJECT_ID',
   metadata: const PairingMetadata(
     name: 'Flutter Dapp Example',
@@ -25,16 +29,14 @@ final Web3App web3App = await Web3App.createInstance(
 
 // Register callbacks on the Web3App you'd like to use
 
-W3MService service = W3MService(
-  web3App: web3App,
-);
+final _w3mService = W3MService(web3App: _web3App);
 ```
 
-or
+#### W3MService with Project ID:
 
 ```dart
-W3MService service = W3MService(
-  projectId: projectId, 
+final _w3mService = W3MService(
+  projectId: 'YOUR_PROJECT_ID', 
   metadata: const PairingMetadata(
     name: 'Flutter Dapp Example',
     description: 'Flutter Dapp Example',
@@ -67,8 +69,8 @@ final Set<String> recommendedWalletIds = {
 }
 ```
 
-## excludedWalletState & excludedWalletids (optional)
+## excludedWalletState & excludedWalletIds (optional)
 
-The `excludedWalletState` Determines the state of the excluded wallets. Defaults to `ExcludedWalletState.list`.
+The `excludedWalletState` determines the state of the excluded wallets. Defaults to `ExcludedWalletState.list`.
 
 If the `excludedWalletState` is `ExcludedWalletState.list`, the `excludedWalletIds` will be used to remove items from the list of wallets returned from the [WalletConnect Explorer](https://walletconnect.com/explorer?type=wallet). If the `excludedWalletState` is `ExcludedWalletState.all`, all wallets will be excluded except for the ones defined in `recommendedWalletIds`.

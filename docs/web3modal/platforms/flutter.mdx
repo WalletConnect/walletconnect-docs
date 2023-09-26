@@ -2,6 +2,10 @@ import CloudBanner from '../../components/CloudBanner'
 
 # Flutter
 
+:::caution
+Web3Modal for Flutter is in alpha version. Documentation may also be innacurate and/or incomplete.
+:::
+
 With Web3Modal Flutter, you can easily let people interact with multiple EVM compatible wallets and blockchains.
 
 Let’s get started with the installation and configuration!
@@ -23,7 +27,7 @@ Create your `W3MService` which is your primary class for opening, closing, disco
 Be sure to update the project ID and metadata with your own.
 
 ```dart
-Web3ModalService service = W3MService(
+final _w3mService = W3MService(
   projectId: 'YOUR_PROJECT_ID',
   metadata: const PairingMetadata(
     name: 'Flutter Dapp Example',
@@ -41,19 +45,15 @@ Web3ModalService service = W3MService(
     'c57ca95b47569778a828d19178114f4db188b89b763c899ba0be274e97267d96',
   },
 );
-await service.init();
+await _w3mService.init();
 ```
 
-Now you can use the `W3MConnect` or `W3MNetworkSelect` widget:
+Now you can use the `W3MConnectWalletButton` or `W3MNetworkSelectButton` widget:
 
 ```dart
-W3MConnect(
-  service: _w3mService!,
-)
+W3MConnectWalletButton(service: _w3mService!,)
 // OR
-W3MNetworkSelect(
-  service: _w3mService!,
-)
+W3MNetworkSelectButton(service: _w3mService!)
 ```
 
 ## Custom Chain Selection
@@ -62,6 +62,6 @@ You can select your own chain by calling the `setSelectedChain` method on the `W
 
 The chain must be EVM compatible.
 
-A list of preset chains that are available to you can be accessed at `ChainData.chainPresets`.
+A list of preset chains that are available to you can be accessed at `ChainData` class on `lib/utils/chain_data.dart` file.
 
-If you modify the presets, it will be reflected in the `W3MNetworkSelect` widget.
+If you modify the presets, it will be reflected in the `W3MNetworkSelectButton` widget.

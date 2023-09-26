@@ -1,18 +1,20 @@
 # Actions
 
-With Web3Modal Flutter, you can easily let people interact with multiple EVM compatible wallets and blockchains.
+:::caution
+Web3Modal for Flutter is in alpha version. Documentation may also be innacurate and/or incomplete.
+:::
 
 ## Launch the current wallet
 
 ```dart
-await service.launchCurrentWallet();
+await _w3mService.launchCurrentWallet();
 ```
 
 ## Send a request
 
 ```dart
-await service.web3App.request(
-  topic: service.session.topic,
+await _w3mService.web3App.request(
+  topic: _w3mService.session.topic,
   chainId: 'eip155:1',
   request: SessionRequestParams(
     method: 'personalSign',
@@ -21,4 +23,4 @@ await service.web3App.request(
 );
 ```
 
-For more examples see the example app (link in side bar)
+For more examples check out the [example app](https://github.com/WalletConnect/Web3ModalFlutter/tree/master/example/sign)
