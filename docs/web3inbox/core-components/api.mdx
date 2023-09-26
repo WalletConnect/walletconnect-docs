@@ -1,0 +1,322 @@
+import Container from './../../components/Container'
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
+import PlatformTabs from '../../components/PlatformTabs'
+import PlatformTabItem from '../../components/PlatformTabItem'
+import CloudBanner from '../../components/CloudBanner'
+
+# API
+
+## Init
+
+<PlatformTabs
+	groupId="w3iw"
+	activeOptions={["react", "html"]}
+>
+
+Init the client
+
+<PlatformTabItem value="react">
+
+```ts
+// You can optionally pass a domain to override the behavior of using window.location
+const clientIsReady = useInitWeb3inboxClient({ projectId })
+const client = useWeb3InboxClient()
+```
+
+#### References
+
+- **projectId:** Your WalletConnect project ID
+
+</PlatformTabItem>
+
+<PlatformTabItem value="html">
+
+```ts
+const client = Web3InboxClient.init({ projectId })
+```
+
+#### References
+
+- **projectId:** Your WalletConnect project ID
+
+</PlatformTabItem>
+</PlatformTabs>
+
+## Managing Account
+
+Register, set and fetch account.
+
+:::note
+Register needs to be called after every page load or Web3InboxClient `init`, even if the
+account is registered. This is to enable state synchronization.
+:::
+
+<PlatformTabs
+	groupId="w3iw"
+	activeOptions={["react", "html"]}
+>
+
+
+<PlatformTabItem value="react">
+
+```ts
+const { account, setAccount, register } = useW3iAccount()
+
+register({ onSign })
+```
+
+#### References
+
+- **account:** CAIP-10 account currently active in Web3Inbox
+- **setAccount:** Change actively managed account in Web3Inbox
+- **onSign:** Async function used to sign a message (for registering) of type:
+
+<!-- prettier-ignore-start -->
+
+```ts
+(message: string) => Promise<string>
+```
+
+Some suggested ways to implement the `onSign` callback are via:
+
+- Ethers.js [`Wallet.signMessage` method](https://docs.ethers.org/v5/api/signer/#Signer-signMessage)
+- The [`useSignMessage` hook](https://wagmi.sh/react/hooks/useSignMessage) in `@wagmi`
+
+<!-- prettier-ignore-end -->
+
+- **register:** Async function used to register an account
+
+</PlatformTabItem>
+
+<PlatformTabItem value="html">
+
+```ts
+const account = client.getAccount()
+client.setAccount('eip155:1:...')
+
+let reactiveAccountState = ''
+client.watchAccount(acc => (reactiveAccountState = acc))
+
+client.register({
+  account,
+  onSign
+})
+```
+
+#### References
+
+- **account:** CAIP-10 account currently active in Web3Inbox
+- **setAccount:** Change actively managed account in Web3Inbox
+- **onSign:** Async function used to sign a message (for registering) of type:
+
+<!-- prettier-ignore-start -->
+```ts
+(message: string) => Promise
+```
+
+Some suggested ways to implement the `onSign` callback are via:
+
+- Ethers.js [`Wallet.signMessage` method](https://docs.ethers.org/v5/api/signer/#Signer-signMessage)
+- The [`signMessage` method](https://wagmi.sh/core/actions/signMessage) in `@wagmi/core`
+<!-- prettier-ignore-end -->
+
+</PlatformTabItem>
+</PlatformTabs>
+
+## Managing Subscription
+
+Subscribe, Unsubscribe, Get Subscription, Check if Subscribed.
+
+<PlatformTabs
+	groupId="w3iw"
+	activeOptions={["react", "html"]}
+>
+
+<PlatformTabItem value="react">
+
+```ts
+const { subscribe, unsubscribe, isSubscribed } = useManageSubscription(account)
+
+const { subscription } = useSubscription(account)
+
+subscribe()
+unsubscribe()
+```
+
+#### References
+
+- **account *(Optional)*:** CAIP-10 account currently active in Web3Inbox
+- **subscribe:** Function to subscribe to current dApp `() => void`
+- **unsubscribe:** Function to unsubscribe to current dApp `() => void`
+- **isSubscribed:** Reactive state, checking if subscribed to dApp `Boolean`
+- **subscription:** Reactive state, returning current subscription information, of type:
+
+```ts
+{
+  topic: string
+  account: string
+  relay: relayertypes.protocoloptions
+  metadata: metadata
+  scope: scopemap
+  expiry: number
+  symkey: string
+}
+```
+
+</PlatformTabItem>
+<PlatformTabItem value="html">
+
+```ts
+const isSubscribed = client.getIsSubscribedToCurrentDapp(account)
+
+let isSubscribedReactive = false
+client.watchIsSubscribed(account, isSubbed => (isSubscribedReactive = isSubbed))
+
+client.subscribeToCurrentDapp(account)
+
+client.unSubscribeToCurrentDapp(account)
+
+const subscription = client.getSubscription(account)
+```
+
+#### References
+
+- **account *(Optional)*:** CAIP-10 account currently active in Web3Inbox
+- **subscription:** _Non-Reactive_ state, returning current subscription information, of type:
+
+```ts
+{
+  topic: string
+  account: string
+  relay: relayertypes.protocoloptions
+  metadata: metadata
+  scope: scopemap
+  expiry: number
+  symkey: string
+}
+```
+
+</PlatformTabItem>
+</PlatformTabs>
+
+## Managing Messages
+
+Get and delete messages
+
+<PlatformTabs
+	groupId="w3iw"
+	activeOptions={["react", "html"]}
+>
+
+<PlatformTabItem value="react">
+
+```ts
+const { messages, deleteMessage } = useMessages(account)
+
+deleteMessage(messages[0].id)
+```
+
+#### References
+
+- **account *(Optional)*:** CAIP-10 account currently active in Web3Inbox
+- **messages:** Array of messages, of type
+
+```ts
+{
+  id: number
+  topic: string
+  message: NotifyMessage
+  publishedAt: number
+}
+```
+
+</PlatformTabItem>
+<PlatformTabItem value="html">
+
+```ts
+const nonReactiveMessageState = client.getMessageHistory(account)
+let reactiveMessageState = []
+client.watchMessages(m => (reactiveMessageState = m))
+```
+
+#### References
+
+- **account *(Optional)*:** CAIP-10 account currently active in Web3Inbox
+- **messages:** Array of messages, of type
+
+```ts
+{
+  id: number
+  topic: string
+  message: NotifyMessage
+  publishedAt: number
+}
+```
+
+</PlatformTabItem>
+</PlatformTabs>
+
+## Subscription Scopes
+
+Manage and fetch subscription scopes.
+
+<PlatformTabs
+	groupId="w3iw"
+	activeOptions={["react", "html"]}
+>
+
+<PlatformTabItem value="react">
+
+```ts
+const { scopes, updateScopes } = useSubscriptionScopes(account)
+
+updateScopes(Object.keys(scopes))
+```
+
+#### References
+
+- **account *(Optional)*:** CAIP-10 account currently active in Web3Inbox
+- **scopes:** Map of scopes (Notification types)
+- **updateScopes:** `(enabledScopeNames: string[]) -> void`
+
+```ts
+type ScopeMap = Record<
+  string,
+  {
+    description: string
+    enabled: boolean
+  }
+>
+```
+
+</PlatformTabItem>
+<PlatformTabItem value="html">
+
+```ts
+const scopes = client.getNotificationTypes(account)
+let reactiveScopes = {}
+
+client.watchScopeMap(scp => (reactiveScopes = scp))
+
+client.update(account, Object.keys(scopes))
+```
+
+#### References
+
+- **account *(Optional)*:** CAIP-10 account currently active in Web3Inbox
+- **scopes:** Map of scopes (Notification types)
+- **updateScopes:** `(enabledScopeNames: string[]) -> void`
+
+```ts
+type ScopeMap = Record<
+  string,
+  {
+    description: string
+    enabled: boolean
+  }
+>
+```
+
+</PlatformTabItem>
+</PlatformTabs>

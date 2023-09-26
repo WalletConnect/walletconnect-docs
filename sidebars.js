@@ -65,6 +65,7 @@ module.exports = {
             {
               type: 'category',
               label: 'React',
+              className: 'sidebar__logo sidebar__logo--react',
               items: [
                 'web3modal/react/wagmi/installation',
                 'web3modal/react/wagmi/components',
@@ -83,6 +84,7 @@ module.exports = {
             {
               type: 'category',
               label: 'HTML',
+              className: 'sidebar__logo sidebar__logo--html',
               items: [
                 'web3modal/html/wagmi/installation',
                 'web3modal/html/wagmi/components',
@@ -128,7 +130,13 @@ module.exports = {
             'web3wallet/about',
             'web3wallet/wallet-usage',
             'web3wallet/verify',
-            'web3wallet/resources'
+            {
+              type: 'category',
+              label: 'Notify',
+              items: ['web3wallet/notify/installation','web3wallet/notify/usage']
+            },
+            'web3wallet/resources',
+            'web3wallet/mobileLinking'
           ]
         },
         {
@@ -138,18 +146,13 @@ module.exports = {
           collapsible: true,
           items: [
             'web3inbox/about',
-            'web3inbox/usage',
-            'web3inbox/resources',
             {
               type: 'category',
-              label: 'Dapp Widget',
-              items: [
-                'web3inbox/widget/about',
-                'web3inbox/widget/usage',
-                'web3inbox/widget/options',
-                'web3inbox/widget/theming'
-              ]
-            }
+              label: 'Core components',
+              items: ['web3inbox/core-components/about', 'web3inbox/core-components/usage', 'web3inbox/core-components/api' ]
+            },
+            'web3inbox/resources',
+            'web3inbox/demo'
           ]
         }
       ]
@@ -204,10 +207,7 @@ module.exports = {
             {
               type: 'category',
               label: 'Notify',
-              items: [
-                'api/notify/about',
-                'api/notify/usage',
-              ]
+              items: ['api/notify/about', 'api/notify/usage']
             },
             {
               type: 'category',
@@ -219,7 +219,6 @@ module.exports = {
                 'api/sign/smart-contract-wallet-usage'
               ]
             },
-            'api/mobileLinking'
           ]
         },
         {
@@ -367,8 +366,10 @@ module.exports = {
           className: 'sidebar__logo sidebar__logo--react',
           label: 'React',
           items: [
-            { type: 'doc', label: 'About', id: 'web3modal/v3/react/about' },
+            { type: 'doc', label: 'Getting started', id: 'web3modal/v3/react/about' },
             'web3modal/v3/react/options',
+            'web3modal/v3/react/hooks',
+            'web3modal/v3/react/components',
             'web3modal/v3/react/theming',
           ]
         },
@@ -377,8 +378,10 @@ module.exports = {
           className: 'sidebar__logo sidebar__logo--vue',
           label: 'Vue',
           items: [
-            { type: 'doc', label: 'About', id: 'web3modal/v3/vue/about' },
+            { type: 'doc', label: 'Getting started', id: 'web3modal/v3/vue/about' },
             'web3modal/v3/vue/options',
+            'web3modal/v3/vue/composables',
+            'web3modal/v3/vue/components',
             'web3modal/v3/vue/theming',
           ]
         },
@@ -387,11 +390,14 @@ module.exports = {
           className: 'sidebar__logo sidebar__logo--html',
           label: 'HTML',
           items: [
-            { type: 'doc', label: 'About', id: 'web3modal/v3/html/about' },
+            { type: 'doc', label: 'Getting started', id: 'web3modal/v3/html/about' },
             'web3modal/v3/html/options',
+            'web3modal/v3/html/actions',
+            'web3modal/v3/html/components',
             'web3modal/v3/html/theming',
           ]
-        }
+        },
+        'web3modal/v3/upgrade',
       ]
     }
   ]

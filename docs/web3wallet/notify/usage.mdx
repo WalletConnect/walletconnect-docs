@@ -1,0 +1,585 @@
+import Container from '../../components/Container'
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
+import PlatformTabs from '../../components/PlatformTabs'
+import PlatformTabItem from '../../components/PlatformTabItem'
+import Wrapper from '../../components/Home/Wrapper'
+import CloudBanner from '../../components/CloudBanner'
+
+# Usage
+
+This usage step is to configure and use Notify in your project.
+
+<CloudBanner />
+
+## Client Configuration
+
+<PlatformTabs
+	groupId="w3w"
+	activeOptions={["ios","android", "react-native"]}
+>
+<PlatformTabItem value="ios">
+
+Configure the `Notify` instance with:
+
+```swift
+try Notify.configure(groupIdentifier: String, environment: APNSEnvironment, crypto: CryptoProvider)
+```
+
+`groupIdentifier` - identifier of your group keychain, enables to share keychain items between your wallet and a UNNotificationServiceExtension that decrupts remote Push Notifications.
+
+`environment` - Use `debug` environment for debug builds and `release` for release and TestFlight builds
+
+`crypto` - CruptoProvider is a protocol, you are required to provide an implementation of two methods recoverPubKey and keccak256.
+
+
+#### Register an identity key and enable cross-device account syncing
+
+:::note
+This is a one-time action that does not need to be repeated after initial registration of the new account.
+:::
+
+To register an identity key, you must provide a callback to the ` onSign: @escaping SigningCallback` parameter of the `register` method.
+In order to register identity keys and enable cross device sync, the SDK will trigger this callback with a messages to sign, expecting the signature for that message to be returned.
+
+```swift
+Notify.instance.register(account: account, domain: domain, onSign: onSign)
+```
+
+`account` - An account that the identity key will be issued for
+
+`domain` - A domain of your wallet, you should use your bundle id
+
+`onSign` - callback that requres a signature from a user
+
+
+```swift
+func onSign(message: String) -> SigningResult {
+
+    // Provide your own sing function implementation that returns CacaoSignature
+    // For more detailed example see our sample WalletApp
+    let signature = try! signer.sign(message: message)
+    return .signed(signature)
+}
+```
+
+</PlatformTabItem>
+<PlatformTabItem value="android">
+
+To initialize the Notify client, create a `Notify.Params.Init` object in the Android Application class with the Core Client passed as a parameter. The `Notify.Params.Init` object will then be passed to the `Notify.initialize` function. There is also an `onError` callback that will need to be provided which will return an instance of `Notify.Model.Error` if there's an issue initializing the client.
+
+**Note:** The CoreClient used here will be the same instance of the CoreClient used in other WalletConnect Kotlin SDKs
+
+```kotlin
+val projectId = PROJECT_ID
+val serverUrl = "wss://relay.walletconnect.com?projectId=$projectId"
+val appMetaData = Core.Model.AppMetaData(
+    name = /* The name of your project as a String */,
+    description = /* A description of your project as a String */,
+    url = /* A url for your project as a String */,
+    icons = /* A list of URLs to icons related to your project as Strings */,
+    redirect = /* A redirect URI used by Dapps to deeplink back to your wallet. This is a String value  */
+)
+
+CoreClient.initialize(relayServerUrl = serverUrl, connectionType = ConnectionType.AUTOMATIC, application = this, metaData = appMetaData)
+
+Notify.initialize(init = Notify.Params.Init(core = CoreClient) { error: Notify.Model.Error ->
+    // Error will be thrown if there's an issue during initialization
+}
+```
+
+</PlatformTabItem>
+<PlatformTabItem value="react-native">
+
+All clients will be initialized as soon as the Web3Inbox component is rendered for the first time.
+
+</PlatformTabItem>
+</PlatformTabs>
+
+## SDK Usage
+
+<PlatformTabs
+	groupId="w3w"
+	activeOptions={["ios","android", "react-native"]}
+>
+<PlatformTabItem value="ios">
+
+# Subscribe Events
+
+#### Subscribe Notify Message
+
+Emits new notify message from a dapp.
+
+```swift
+public var notifyMessagePublisher: AnyPublisher<PushMessage, Never>
+```
+
+#### Subscribe Active Subscriptions
+
+Emits a list of active subscriptions.
+
+```swift
+public var subscriptionsPublisher: AnyPublisher<[PushSubscription], Never>
+```
+
+#### Create Notify Subscription
+
+To enable seamless communication between a Dapp and a wallet, the wallet must first establish a Notify Subscription. This crucial step allows the Dapp and its associated services to publish notify messages directly to the wallet. Upon granting permission for the wallet's iOS application to display Push Notifications, users will experience real-time updates in the form of push notifications on their devices. For an enhanced user experience, consider subscribing to the `notifyMessagePublisher` channel. This option ensures that notify messages are delivered promptly when the app is active and a web socket connection is established, keeping users informed and engaged.
+
+To subscribe to dapp's notify messages first fetch publicly discoverable dapps with WalletConnet explorer:
+
+https://explorer-api.walletconnect.com/v3/dapps?projectId={your_project_id}&is_notify_enabled=true
+
+and request a subscription directly from the wallet.
+
+You can also subscribe on web3inbox.com, the subscription will be synced accross devices and will appear in the wallet.
+
+```swift
+public func subscribe(appDomain: String, account: Account) async throws {
+```
+
+`appDomain` - A domain of the dapp that you want to subscribe to
+
+`account` - an account you want to associate the subscription with
+
+
+#### Get Active Subscriptions
+
+```swift
+Notify.instance.getActiveSubscriptions()
+```
+
+#### Delete Subscription
+
+To delete a subscription.
+
+```swift
+try await Notify.instance.deleteSubscription(topic: String)
+```
+
+#### Get Notify Messages
+
+To get messages by topic call:
+
+```swift
+Notify.instance.getMessageHistory(topic: subscription.topic)
+```
+
+
+</PlatformTabItem>
+<PlatformTabItem value="android">
+
+#### Register for Subscriptions
+
+`NotifyClient` needs a `NotifyClient.Delegate` passed to it for it to be able to expose asynchronous updates sent from the dapp.
+
+```kotlin
+val walletDelegate = object : NotifyClient.Delegate {
+
+    override fun onNotifySubscription(notifySubscribe: Notify.Event.Subscription) {
+        // Triggered when a wallet initiated subscription has been created
+    }
+
+    override fun onNotifyMessage(notifyMessage: Notify.Event.Message) {
+        // Triggered when a message has been sent by the Dapp. The message contains the title, body, icon, and url
+    }
+
+    override fun onNotifyDelete(notifyDelete: Notify.Event.Delete) {
+        // Triggered when the Dapp deletes the subscription. The notifyDelete contains the topic that was deleted
+    }
+
+    override fun onNotifyUpdate(notifyUpdate: Notify.Event.Update) {
+        // Triggered after updating a subscription was successful. The notifyUpdate will either contain the updated subscription details or an error
+    }
+
+    override fun onError(error: Notify.Model.Error) {
+        // Triggered when there's an error inside the SDK
+    }
+}
+
+NotifyClient.setDelegate(walletDelegate)
+```
+
+#### Register an identity key and enable cross-device account syncing
+
+:::note
+This is a one-time action that does not need to be repeated after initial registration for each account address and must be called before using the SDK.
+:::
+
+Once the NotifyClient is [initialized](#client-configuration), you'll need to register a [CAIP-10 account](https://github.com/ChainAgnostic/CAIPs/blob/master/CAIPs/caip-10.md) with the NotifyClient to enable receiving notifications and syncing of the account across multiple devices. 
+
+You'll need to create an instance of `Notify.Params.Registration` which will need the CAIP-10 account, the domain which should be your `ApplicationId`, and a lamda that will need to ask the user for permission to sign a message using their private key.
+
+The `Notify.Model.Registration` object will need to be passed into `NotifyClient.register` which has a `onSuccess` method which will return the WalletConnect Identity public key. This public key is strictly for debugging and more information can be found [here](https://specs.walletconnect.com/2.0/specs/clients/core/identity/identity-keys). There is also an `onError` callback which will return an instance of `Notify.Model.Error` in case there is an error while registering the account.
+
+**Note** The `NotifyClient.Register` function is to verify the ownership over blockchain account when registering identities in [WalletConnect's Keyserver](https://specs.walletconnect.com/2.0/specs/servers/keys/). End users must sign the message provided on the `onSign(message: String)` callback. Currenlty only EIP191 signatures are supported in Keyserver.
+
+```kotlin
+val caip10Account: String = /* CAIP-10 compatible accountId */
+val accountsPrivateKey: ByteArray = /* address' private key */
+
+val registeration = Notify.Params.Registration(
+  account = caip10Account,
+  domain = /* ApplicationId as String */,
+  onSign = { message ->
+    // Message to be signed by the user.
+    //    If user decides to sign the message, use the CacaoSigner util class to sign the message.
+    //    If user decides to not sign the message, return null
+    return CacaoSigner.sign(message, accountsPrivateKey, SignatureType.EIP191) OR null
+  }
+)
+
+NotifyClient.register(
+  params = registeration, 
+  onSuccess = { identityPublicKey: String ->
+    // Registeration was successful
+   }, 
+   onError = { error ->
+    // Error will be thrown if there's an issue during initialization
+  }
+)
+``` 
+
+#### Subscribe to a new Dapp
+Calling `NotifyClient.subscribe` will establish the subscription with the dapp specified in the `Notify.Params.Subscribe` params passed into the function. The `Notify.Params.Subscribe` params requires the uri of the dapp and a CAIP-10 compatible account.
+
+```kotlin
+val dappUri: Uri = // The Dapp Uri to subscribe to
+val caip10Account: String = // The CAIP-10 account that was used in `NotifyClient.register`
+
+val subscribeParams = Notify.Params.Subscribe(
+  appDomain = dappUri, 
+  account = caip10Account
+)
+
+NotifyClient.subscribe(
+    params = subscribeParams,
+    onSuccess = {
+        // Subscribing to the dapp was successful
+    },
+    onError = { error: Notify.Model.Error ->
+        // There was an error while trying to subscribe to the dapp
+    }
+)
+```
+
+#### Update a subscription with new Scopes
+To update a subscription, pass `Notify.Params.Update` with the subscription topic that is to be updated and the new [scope](https://specs.walletconnect.com/2.0/specs/clients/notify/notify-config#notification-types) to be sent to the dapp. The subscription topic can be fetched from the `NotifyClient.getActiveSubscriptions()`
+
+```kotlin
+val updateParams = Notify.Params.Update(
+  topic = /* Topic of the subscription to update */,
+  scope = /* The new space delimited list of scopes */
+)
+
+NotifyClient.update(
+    params  = updateParams,
+    onSuccess = { 
+      // Updating the subscription was successful 
+    },
+    onError = { error: Notify.Model.Error -> 
+      // There was an error while trying to update the subscription
+    }
+)
+```
+
+#### Get a map of Active Subscriptions
+To get a list of all the active subscriptions, call `NotifyClient.getActiveSubscriptions()`. It will return a map with the topic as the key and `Notify.Model.Subscription` as the value.
+
+```kotlin
+val activeSubscriptions: Map<String, Notify.Model.Subscription> = NotifyClient.getActiveSubscriptions()
+```
+
+#### Get a map of the Message History for a Subscription
+To get all the messages for a specific subscription topic, call `NotifyClient.getMessageHistory()` and pass an instance of `Notify.Params.MessageHistory`. It will return a map with the request ids as the key and `Notify.Model.MessageRecord` as the value.
+
+```kotlin
+val messageHistoryParamsForSubscriptionTopic = Notify.Params.MessageHistory(/* The topic of an active subscription */)
+
+val messageHistory: Map<Long, Notify.Model.MessageRecord> = NotifyClient.getMessageHistory(params = messageHistoryParamsForSubscriptionTopic)
+```
+
+#### Delete a Subscription
+To delete a subscription, pass `Notify.Params.DeleteSubscription` with the subscription topic that is to be deleted. The subscription topic can be fetched from the `NotifyClient.getActiveSubscriptions()`
+
+```kotlin
+val deleteSubscriptionParam = Notify.Params.DeleteSubscription(topic = /* The topic of the active subscription to delete */)
+
+NotifyClient.deleteSubscription(
+  params = deleteSubscriptionParam, 
+  onError: { error: Notify.Model.Error ->
+    // Error will be thrown if there's an issue with trying to delete the subscription
+  }
+)
+```
+
+#### Delete a Message
+To delete a notify record message, pass `Notify.Params.DeleteMessage` with the request id of the record to be deleted. The id can be fetched from the `NotifyClient.getMessageHistory()`
+
+```kotlin
+val deleteMessageParams = Notify.Params.DeleteMessage(id = /* The request id of the message fetched from Notify. */)
+
+Notify.deleteNotifyMessage(
+  params = deleteMessageParams, 
+  onSuccess = {
+    // Triggered when the message has been successfully deleted
+  }, 
+  onError = { error: Notify.Model.Error -> 
+    // Error will be thrown if there's an issue with trying to delete the specific message
+  }
+)
+```
+
+</PlatformTabItem>
+
+<PlatformTabItem value="react-native">
+
+This example makes use of [WalletConnect Modal](/2.0/advanced/walletconnectmodal/about?platform=react-native) for simplicity but you can also integrate Web3Inbox into your React Native Wallet by providing the following props.
+
+For more context, feel free to check our [example](https://github.com/WalletConnect/react-native-examples/tree/web3inbox-dapp/dapps/web3inbox).
+
+```tsx
+import { Web3Inbox } from '@walletconnect/web3inbox-webview'
+import { useCallback, useState } from 'react'
+
+export default function Example() {
+  const { provider, isConnected, address } = useWalletConnectModal()
+  const [isVisible, setIsVisible] = useState(true)
+
+  const toggleWeb3InboxModal = useCallback(
+    () => setIsVisible(isCurrentlyVisible => !isCurrentlyVisible),
+    []
+  )
+
+  const handleSign = useCallback(
+    async (message: string) => {
+      const response = await provider?.request(
+        {
+          method: 'personal_sign',
+          params: [message, address]
+        },
+        'eip155:1'
+      )
+      return response as string
+    },
+    [provider, address]
+  )
+
+  const clientMetadata = {
+    name: 'Web3Inbox React Native Example',
+    description: 'An example app to showcase how to use Web3Inbox React Native SDK',
+    url: 'https://github.com/WalletConnect/web3inbox-js-sdk',
+    icons: ['https://avatars.githubusercontent.com/u/37784886']
+  }
+
+  return (
+    <View>
+      <Web3Inbox
+        projectId={projectId}
+        ethAddress={address}
+        onSign={handleSign}
+        visible={isVisible}
+        setVisible={toggleWeb3InboxModal}
+        clientMetadata={clientMetadata}
+      />
+    </View>
+  )
+}
+```
+
+#### Required Props
+
+#### projectId `string`
+
+Get your project ID key on [WalletConnect Cloud](https://cloud.walletconnect.com).
+
+#### ethAddress `string`
+
+Ethereum wallet address of the current user.
+
+#### onSign `(message: string) => Promise<string>`
+
+Web3Inbox client will request user to sign messages with its account private key. The message may be a Sync Storage derivation key or Identity key registration.
+
+#### clientMetadata
+
+Web3Inbox will consume your metadata for various use cases, such as displaying your logo and the name of your project.
+
+```ts
+interface IClientMetadata {
+  name: string
+  description: string
+  url: string
+  icons: string[]
+}
+```
+
+#### visible `boolean`
+
+Determines visibility of Web3Inbox webview.
+
+#### setVisible `() => void`
+
+Function to set `visible` prop to true or false.
+
+#### Optional Props
+
+#### closeButton `React.ReactNode`
+
+Provide a custom component to close Web3Inbox webview.
+
+#### chatEnabled `boolean`
+
+Enable or disable Chat SDK in Web3Inbox (default: `true`), setting it to `false` will also remove the navigation item.
+
+#### notifyEnabled `boolean`
+
+Enable or disable Notify SDK in Web3Inbox (default: `true`), setting it to `false` will also remove the navigation item.
+
+#### settingsEnabled `boolean`
+
+Enable or disable settigns page in Web3Inbox (default: `true`), setting it to `false` will also remove the navigation item.
+
+</PlatformTabItem>
+</PlatformTabs>
+
+## Push Notification
+
+<PlatformTabs
+	groupId="w3w"
+	activeOptions={["ios","android", "react-native"]}
+>
+<PlatformTabItem value="ios">
+
+#### Configure your project to enable Push Notifications
+
+[Configure Project](../../advanced/echo-server.md)
+
+#### Register for Push Notifications
+
+In order to enable Push Notifications for your app you need to follow standard procedure:
+
+[Enable Push Notifications Capability](https://developer.apple.com/documentation/usernotifications/registering_your_app_with_apns#2980170)
+
+Ask for user permissions:
+
+call registerForPushNotifications() early in your app's lifecycle to initiate the registration process with Apple Push Notification service:
+
+```swift
+    func registerForPushNotifications() {
+        UNUserNotificationCenter.current()
+            .requestAuthorization(
+                options: [.alert, .sound, .badge]
+            ) { granted, error in
+                guard granted else { return }
+                DispatchQueue.main.async {
+                    UIApplication.shared.registerForRemoteNotifications()
+                }
+            }
+    }
+```
+
+Receive token from Apple Push Notification Services and register it at the Push Server:
+
+```swift
+    func application(
+      _ application: UIApplication,
+      didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data
+    ) {
+        Task(priority: .high) {
+            try await Notify.instance.register(deviceToken: deviceToken)
+        }
+    }
+```
+
+#### Decrypting Push Notifications
+
+Push notifications sent via APNs are encrypted and carry the following payload:
+
+```
+{
+  "aps": {
+    "content-available": 1,
+    "mutable-content": 1
+  },
+  "ciphertext": "encrypted-payload",
+  "topic": "subscription_topic",
+}
+```
+
+To decrypt a Push Notification (PN), you need to instantiate a [UNNotificationServiceExtension](https://developer.apple.com/documentation/usernotifications/unnotificationserviceextension).
+
+For details on how to modify the content in newly delivered notifications, refer to the official Apple Developer Documentation [here](https://developer.apple.com/documentation/usernotifications/modifying_content_in_newly_delivered_notifications).
+
+Additionally, you will need to create a [keychain group](https://developer.apple.com/documentation/security/keychain_services/keychain_items/sharing_access_to_keychain_items_among_a_collection_of_apps) that is shared between your wallet application and the notification service. 
+
+Inside your notification service extension file, import WalletConnectNotify, initialize `NotifyDecryptionService()`, and decrypt the message with the following Swift code:
+
+```swift
+override func didReceive(_ request: UNNotificationRequest, withContentHandler contentHandler: @escaping (UNNotificationContent) -> Void) {
+    bestAttemptContent = (request.content.mutableCopy() as? UNMutableNotificationContent)
+    if let bestAttemptContent = bestAttemptContent {
+        let topic = bestAttemptContent.userInfo["topic"] as! String
+        let ciphertext = bestAttemptContent.userInfo["blob"] as! String
+        do {
+            let service = NotifyDecryptionService(groupIdentifier: "your_keychain_group_identifier")
+            let pushMessage = try service.decryptMessage(topic: topic, ciphertext: ciphertext)
+            bestAttemptContent.title = pushMessage.title
+            bestAttemptContent.body = pushMessage.body
+            contentHandler(bestAttemptContent)
+            return
+        }
+    ...
+}
+```
+
+</PlatformTabItem>
+<PlatformTabItem value="android">
+
+To enable push notifications, first you'll need to [configure your project](/docs/advanced/echo-server.md) with Firebase Messaging service.
+
+The `NotifyMessageService` is a wrapper around the `FirebaseMessagingService`. The `NotifyMessageService` class needs to be implemented for the Notify SDK to be able to decrypt and notify wallets of a push notification sent from the Dapp in the background.
+This service also needs to be registered in the AndroidManifest.xml file similar to the example in the [FCM documentation](https://firebase.google.com/docs/cloud-messaging/android/client#manifest).
+
+```kotlin
+class SampleFirebaseService: NotifyMessageService() {
+
+    override fun newToken(token: String) {
+        // Triggered when Firebase Cloud Messaging creates a new token and that token is registered with the Push server
+    }
+
+    override fun registeringFailed(token: String, throwable: Throwable) {
+        // Triggered when Firebase Cloud Messaging if there is an error with registering with the Push server with a new token
+    }
+
+    override fun onMessage(message: Notify.Model.Message, originalMessage: RemoteMessage) {
+        // Triggered when a message is sent from the Push server through Firebase Cloud Messaging and the message contains `Notify.Model.Message`. The original FCM RemoteMessage is also returned
+    }
+
+    override fun onDefaultBehavior(message: RemoteMessage) {
+        // Triggered when a message is sent from the Push server through Firebase Cloud Messaging and the message does not contain `Notify.Model.Message` in the payload. The original FCM RemoteMessage returned instead
+    }
+
+    override fun onError(throwable: Throwable, defaultMessage: RemoteMessage) {
+        // Triggered when there is an error that occurs when a message is received from the Push server
+    }
+}
+```
+
+```xml
+<application...>
+    <service android:name=".SampleFirebaseService">
+        <intent-filter>
+            <action android:name="com.google.firebase.MESSAGING_EVENT" />
+        </intent-filter>
+    </service>
+</application>
+```
+
+</PlatformTabItem>
+<PlatformTabItem value="react-native">
+
+Currently Web3Inbox SDK contains Chat SDK features. Notify SDK features coming soon.
+
+</PlatformTabItem>
+</PlatformTabs>
