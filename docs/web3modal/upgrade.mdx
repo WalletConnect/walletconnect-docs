@@ -1,0 +1,412 @@
+import PlatformTabs from '../components/PlatformTabs'
+import PlatformTabItem from '../components/PlatformTabItem'
+
+# Upgrade Guide
+
+## What's new in v3
+
+- Support for [Vue & Nuxt](./vue/about.mdx)
+- Simpler design and new theming mechanism
+- More optimized multi platform wallet support
+- Smaller bundle size
+- New Explorer API integration
+- Unified experience for iOS, Android and Desktop
+
+## Web3Modal v3 Upgrade Guide
+
+### Installation
+
+<PlatformTabs
+	groupId="w3m"
+	activeOptions={["react","html"]}
+>
+<PlatformTabItem value="react">
+
+To upgrade from Web3Modal v2 to v3 start by removing Web3Modal v2 dependencies `@web3modal/ethereum` and `@web3modal/react`,
+while keeping `wagmi` and `viem` installed. Now you can install Web3Modal v3 library
+
+```bash npm2yarn
+npm install @web3modal/wagmi
+```
+
+</PlatformTabItem>
+<PlatformTabItem value="html">
+
+To upgrade from Web3Modal v2 to v3 start by removing Web3Modal v2 dependencies `@web3modal/ethereum` and `@web3modal/html`,
+while keeping `@wagmi/core` and `viem` installed. Now you can install Web3Modal v3 library
+
+```bash npm2yarn
+npm install @web3modal/wagmi
+```
+
+</PlatformTabItem>
+</PlatformTabs>
+
+### Implementation
+
+<PlatformTabs
+	groupId="w3m"
+	activeOptions={["react","html"]}
+>
+<PlatformTabItem value="react">
+
+
+You can start the Web3Modal configuration by using either the **default** or **advanced** mode.
+
+Default mode will implement WalletConnect, Browser Wallets (injected) and Coinbase options in addition to Wagmi's public clients and [WalletConnect's provider](../cloud/blockchain-api.md).
+:::note
+Make sure to set your configuration outside the App component to avoid unwanted rerenders.
+:::
+
+<Tabs>
+<TabItem value="default" label="Default">
+
+Start by importing `createWeb3Modal`, `defaultWagmiConfig` and wagmi packages
+
+```tsx
+/* highlight-delete-start */
+- import { EthereumClient, w3mConnectors, w3mProvider } from '@web3modal/ethereum'
+- import { Web3Modal } from '@web3modal/react'
+/* highlight-delete-end */
+/* highlight-add-start */
++ import { createWeb3Modal, defaultWagmiConfig } from '@web3modal/wagmi/react'
+/* highlight-add-end */
+
+import { WagmiConfig } from 'wagmi'
+import { arbitrum, mainnet } from 'wagmi/chains'
+```
+
+Then create `wagmiConfig` using `defaultWagmiConfig` function as shown below
+```tsx
+const chains = [arbitrum, mainnet]
+const projectId = 'YOUR_PROJECT_ID'
+
+/* Create Wagmi Config */
+/* highlight-delete-start */
+- const { publicClient } = configureChains(chains, [w3mProvider({ projectId })])
+- const wagmiConfig = createConfig({
+-   autoConnect: true,
+-   connectors: w3mConnectors({ projectId, chains }),
+-   publicClient
+- })
+/* highlight-delete-end */
+/* highlight-add-start */
++ const metadata = {
++   name: 'Web3Modal',
++   description: 'Web3Modal Example',
++   url: 'https://web3modal.com',
++   icons: ['https://avatars.githubusercontent.com/u/37784886']
++ }
+
++ const wagmiConfig = defaultWagmiConfig({ chains, projectId, metadata })
+/* highlight-add-end */
+
+```
+
+Finally, pass `wagmiConfig` to `createWeb3Modal`
+```tsx
+/* Call createWeb3Modal function */
+/* highlight-delete-start */
+- const ethereumClient = new EthereumClient(wagmiConfig, chains)
+/* highlight-delete-end */
+/* highlight-add-start */
++ createWeb3Modal({ wagmiConfig, projectId, chains })
+/* highlight-add-end */
+
+export default function App() {
+  return (
+    <>
+      <WagmiConfig config={wagmiConfig}>
+        <HomePage />
+      </WagmiConfig>
+
+      /* highlight-delete-start */
+-     <Web3Modal projectId={projectId} ethereumClient={ethereumClient} />
+      /* highlight-delete-end */
+    </>
+  )
+}
+```
+</TabItem>
+<TabItem value="custom" label="Advanced">
+
+Start by importing `createWeb3Modal`, `walletConnectProvider` and wagmi packages
+
+```tsx
+/* highlight-delete-start */
+- import { EthereumClient, w3mConnectors, w3mProvider } from '@web3modal/ethereum'
+- import { Web3Modal } from '@web3modal/react'
+/* highlight-delete-end */
+/* highlight-add-start */
++ import { createWeb3Modal } from '@web3modal/wagmi/react'
++ import { walletConnectProvider } from '@web3modal/wagmi'
+/* highlight-add-end */
+
+import { WagmiConfig, configureChains, createConfig } from 'wagmi'
+import { mainnet } from 'wagmi/chains'
+/* highlight-add-start */
++ import { CoinbaseWalletConnector } from 'wagmi/connectors/coinbaseWallet'
++ import { InjectedConnector } from 'wagmi/connectors/injected'
++ import { WalletConnectConnector } from 'wagmi/connectors/walletConnect'
+/* highlight-add-end */
+```
+
+Then create `wagmiConfig` using your own settings
+```tsx
+// 1. Get projectId
+const projectId = 'YOUR_PROJECT_ID'
+
+// 2. Create wagmiConfig
+/* highlight-delete-start */
+- const { chains, publicClient } = configureChains([mainnet], [w3mProvider({ projectId })])
+/* highlight-delete-end */
+/* highlight-add-start */
++ const { chains, publicClient } = configureChains([mainnet], [
++   walletConnectProvider({ projectId }),
++   publicProvider()
++ ])
+/* highlight-add-end */
+
+/* highlight-delete-start */
+- const wagmiConfig = createConfig({
+-   autoConnect: true,
+-   connectors: w3mConnectors({ projectId, chains }),
+-   publicClient
+- })
+/* highlight-delete-end */
+/* highlight-add-start */
++ const metadata = {
++   name: 'Web3Modal',
++   description: 'Web3Modal Example',
++   url: 'https://web3modal.com',
++   icons: ['https://avatars.githubusercontent.com/u/37784886']
++ }
+
++ const wagmiConfig = createConfig({
++   autoConnect: true,
++   connectors: [
++     new WalletConnectConnector({ chains, options: { projectId, showQrModal: false, metadata } }),
++     new InjectedConnector({ chains, options: { shimDisconnect: true } }),
++     new CoinbaseWalletConnector({ chains, options: { appName: metadata.name } })
++   ],
++   publicClient
++ })
+/* highlight-add-end */
+```
+
+Finally, pass wagmi config to `createWeb3Modal`
+```tsx
+/* Call createWeb3Modal function */
+/* highlight-delete-start */
+- const ethereumClient = new EthereumClient(wagmiConfig, chains)
+/* highlight-delete-end */
+/* highlight-add-start */
++ createWeb3Modal({ wagmiConfig, projectId, chains })
+/* highlight-add-end */
+
+export default function App() {
+  return (
+    <>
+      <WagmiConfig config={wagmiConfig}>
+        <HomePage />
+      </WagmiConfig>
+
+      /* highlight-delete-start */
+-     <Web3Modal projectId={projectId} ethereumClient={ethereumClient} />
+      /* highlight-delete-end */
+    </>
+  )
+}
+```
+</TabItem>
+</Tabs>
+
+</PlatformTabItem>
+<PlatformTabItem value="html">
+
+Start by importing Web3Modal and wagmi packages, then create wagmi config using your own settings or our default presets as shown below. Finally, pass wagmi config to Web3Modal as ethereumClient.
+
+<Tabs>
+<TabItem value="default" label="Default">
+
+Start by importing `createWeb3Modal`, `defaultWagmiConfig` and wagmi packages
+
+```ts
+/* highlight-delete-start */
+- import { EthereumClient, w3mConnectors, w3mProvider } from '@web3modal/ethereum'
+- import { Web3Modal } from '@web3modal/html'
+/* highlight-delete-end */
+/* highlight-add-start */
++ import { createWeb3Modal, defaultWagmiConfig } from '@web3modal/wagmi/react'
+/* highlight-add-end */
+
+import { configureChains, createConfig } from '@wagmi/core'
+import { arbitrum, mainnet } from '@wagmi/core/chains'
+```
+
+Then create `wagmiConfig` using `defaultWagmiConfig` function as shown below
+```tsx
+const chains = [arbitrum, mainnet]
+const projectId = 'YOUR_PROJECT_ID'
+
+/* Create Wagmi Config */
+/* highlight-delete-start */
+- const { publicClient } = configureChains(chains, [w3mProvider({ projectId })])
+- const wagmiConfig = createConfig({
+-   autoConnect: true,
+-   connectors: w3mConnectors({ projectId, chains }),
+-   publicClient
+- })
+/* highlight-delete-end */
+/* highlight-add-start */
++ const metadata = {
++   name: 'Web3Modal',
++   description: 'Web3Modal Example',
++   url: 'https://web3modal.com',
++   icons: ['https://avatars.githubusercontent.com/u/37784886']
++ }
++ const wagmiConfig = defaultWagmiConfig({ chains, projectId, appName: metadata.name })
+/* highlight-add-end */
+```
+
+Finally, pass `wagmiConfig` to `createWeb3Modal`
+```ts
+/* highlight-delete-start */
+- const ethereumClient = new EthereumClient(wagmiConfig, chains)
+/* highlight-delete-end */
+/* highlight-add-start */
++ createWeb3Modal({ wagmiConfig, projectId, chains })
+/* highlight-add-end */
+```
+</TabItem>
+<TabItem value="custom" label="Advanced">
+
+Start by importing `Web3Modal`, `walletConnectProvider` and wagmi packages
+
+```tsx
+/* highlight-delete-start */
+- import { EthereumClient, w3mConnectors, w3mProvider } from '@web3modal/ethereum'
+- import { Web3Modal } from '@web3modal/react'
+/* highlight-delete-end */
+/* highlight-add-start */
++ import { Web3Modal, walletConnectProvider } from '@web3modal/wagmi'
+/* highlight-add-end */
+
+import { configureChains, createConfig } from '@wagmi/core'
+import { mainnet } from '@wagmi/core/chains'
+/* highlight-add-start */
++ import { CoinbaseWalletConnector } from 'wagmi/connectors/coinbaseWallet'
++ import { InjectedConnector } from 'wagmi/connectors/injected'
++ import { WalletConnectConnector } from 'wagmi/connectors/walletConnect'
+/* highlight-add-end */
+```
+
+Then create `wagmiConfig` using your own settings
+```tsx
+// 1. Get projectId
+const projectId = 'YOUR_PROJECT_ID'
+
+// 2. Create wagmiConfig
+/* highlight-delete-start */
+- const { chains, publicClient } = configureChains([mainnet], [w3mProvider({ projectId })])
+/* highlight-delete-end */
+/* highlight-add-start */
++ const { chains, publicClient } = configureChains([mainnet], [
++   walletConnectProvider({ projectId }),
++   publicProvider()
++ ])
+/* highlight-add-end */
+
+/* highlight-delete-start */
+- const wagmiConfig = createConfig({
+-   autoConnect: true,
+-   connectors: w3mConnectors({ projectId, chains }),
+-   publicClient
+- })
+/* highlight-delete-end */
+/* highlight-add-start */
++ const metadata = {
++   name: 'Web3Modal',
++   description: 'Web3Modal Example',
++   url: 'https://web3modal.com',
++   icons: ['https://avatars.githubusercontent.com/u/37784886']
++ }
+/* highlight-add-end */
+
+/* highlight-add-start */
++ const wagmiConfig = createConfig({
++   autoConnect: true,
++   connectors: [
++     new WalletConnectConnector({ chains, options: { projectId, showQrModal: false, metadata } }),
++     new InjectedConnector({ chains, options: { shimDisconnect: true } }),
++     new CoinbaseWalletConnector({ chains, options: { appName: metadata.name } })
++   ],
++   publicClient
++ })
+/* highlight-add-end */
+```
+
+Finally, pass `wagmiConfig` to `createWeb3Modal`
+```tsx
+/* highlight-delete-start */
+- const ethereumClient = new EthereumClient(wagmiConfig, chains)
+/* highlight-delete-end */
+/* highlight-add-start */
++ createWeb3Modal({ wagmiConfig, projectId, chains })
+/* highlight-add-end */
+```
+</TabItem>
+</Tabs>
+
+</PlatformTabItem>
+</PlatformTabs>
+
+
+### Trigger the modal
+
+<PlatformTabs
+	groupId="w3m"
+	activeOptions={["react","html"]}
+>
+<PlatformTabItem value="react">
+
+```tsx
+/* highlight-delete-start */
+- import { useWeb3Modal } from '@web3modal/react'
+/* highlight-delete-end */
+/* highlight-add-start */
++ import { useWeb3Modal } from '@web3modal/wagmi/react'
+/* highlight-add-end */
+
+function HomePage() {
+  const { open } = useWeb3Modal()
+
+  return <button onClick={() => open()}>Connect</button>
+}
+```
+
+Learn more about Web3Modal v3 [here](./react/about.mdx)
+
+</PlatformTabItem>
+<PlatformTabItem value="html">
+
+
+Use your own button with to open the modal
+
+```js
+document.getElementById('my-button').addEventListener('click', () => {
+/* highlight-delete-start */
+-   web3modal.openModal()
+/* highlight-delete-end */
+/* highlight-add-start */
++   modal.open()
+/* highlight-add-end */
+})
+
+<button id="my-button">Connect Wallet</button>
+```
+
+Learn more about Web3Modal v3 HTML [here](./html/about.mdx)
+
+</PlatformTabItem>
+</PlatformTabs>

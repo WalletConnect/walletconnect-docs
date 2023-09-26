@@ -1,0 +1,69 @@
+import Table from '../../components/Table'
+
+## ThemeMode
+
+By default `themeMode` option will be set to user system settings 'light' or 'dark'. But you can override it like this:
+
+```ts
+createWeb3Modal({ 
+  //...
+  themeMode: 'light'
+ })
+```
+
+## themeVariables
+
+By default `themeVariables` are undefined. You can set them like this:
+
+```ts
+createWeb3Modal({
+  //...
+  themeVariables: {
+    '--w3m-color-mix': '#00BB7F',
+    '--w3m-color-mix-strength': 40
+  }
+})
+```
+
+The following list shows the theme variables you can override:
+
+<Table
+  headers={['Variable', 'Description', 'Type']}
+  data={[
+    {
+      variable: { code: '--w3m-font-family' },
+      description: 'Base font family',
+      type: { code: 'string' }
+    },
+    {
+      variable: { code: '--w3m-accent' },
+      description: 'Color used for buttons, icons, labels, etc.',
+      type: { code: 'string' }
+    },
+    {
+      variable: { code: '--w3m-color-mix' },
+      description: 'The color that blends in with the default colors',
+      type: { code: 'string' }
+    },
+    {
+      variable: { code: '--w3m-color-mix-strength' },
+      description: 'The percentage on how much "--w3m-color-mix" should blend in',
+      type: { code: 'number' }
+    },
+    {
+      variable: { code: '--w3m-font-size-master' },
+      description: 'The base pixel size for fonts.',
+      type: { code: 'string' }
+    },
+    {
+      variable: { code: '--w3m-border-radius-master' },
+      description: 'The base border radius for fonts.',
+      type: { code: 'string' }
+    },
+    {
+      variable: { code: '--w3m-z-index' },
+      description: 'The z-index of the modal.',
+      type: { code: 'number' }
+    }
+  ]}
+/>
