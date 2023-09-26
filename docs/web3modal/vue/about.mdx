@@ -93,9 +93,9 @@ Finally, pass wagmi config to `createWeb3Modal`.
   const wagmiConfig = createConfig({
     autoConnect: true,
     connectors: [
-      new WalletConnectConnector({ options: { projectId, showQrModal: false, metadata } }),
-      new InjectedConnector({ options: { shimDisconnect: true } }),
-      new CoinbaseWalletConnector({ options: { appName: 'Web3Modal' } })
+      new WalletConnectConnector({ chains, options: { projectId, showQrModal: false, metadata } }),
+      new InjectedConnector({ chains, options: { shimDisconnect: true } }),
+      new CoinbaseWalletConnector({ chains, options: { appName: metadata.name } })
     ],
     publicClient
   })

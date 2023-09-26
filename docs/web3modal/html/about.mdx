@@ -112,7 +112,7 @@ const wagmiConfig = createConfig({
   connectors: [
     new WalletConnectConnector({ chains, options: { projectId, showQrModal: false, metadata } }),
     new InjectedConnector({ chains, options: { shimDisconnect: true } }),
-    new CoinbaseWalletConnector({ chains, options: { appName: 'Web3Modal' } })
+    new CoinbaseWalletConnector({ chains, options: { appName: metadata.name } })
   ],
   publicClient
 })
