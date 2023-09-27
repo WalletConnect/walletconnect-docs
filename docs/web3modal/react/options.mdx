@@ -1,0 +1,166 @@
+import Table from '../../components/Table'
+
+# Options
+
+The following options can be passed to the `createWeb3Modal` function:
+
+```ts
+createWeb3Modal({ wagmiConfig, projectId, chains, ...options })
+```
+
+## defaultChain
+
+You can set a desired chain for the initial connection:
+
+```ts
+import { mainnet } from 'wagmi/chains'
+
+createWeb3Modal({
+  //...
+  defaultChain: mainnet
+})
+```
+
+## tokens
+
+You can select tokens for Web3Modal to show the user's balance of. Each key represents the chain id of the token's blockchain.
+
+```ts
+import { mainnet } from 'wagmi/chains'
+
+createWeb3Modal({
+  //...
+  tokens: {
+    1: {
+      address: '0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48',
+      image: 'token_image_url' //optional
+    },
+    137: {
+      address: '0x7ceB23fD6bC0adD59E62ac25578270cFf1b9f619',
+      image: 'token_image_url' //optional
+    }
+  }
+})
+```
+
+## customWallets
+
+Add custom wallets to the modal. `CustomWallets` is an array of objects, where each object contains specific information of a custom wallet.
+
+```ts
+createWeb3Modal({
+  //...
+  customWallets: [
+    {
+      id: 'myCustomWallet',
+      name: 'My Custom Wallet',
+      homepage: 'www.mycustomwallet.com', // Optional
+      image_url: 'my_custom_wallet_image', // Optional
+      mobile_link: 'mobile_link', // Optional - Deeplink or universal
+      desktop_link: 'desktop_link', // Optional - Deeplink
+      webapp_link: 'webapp_link', // Optional
+      app_store: 'app_store', // Optional
+      play_store: 'play_store' // Optional
+    }
+  ]
+})
+```
+
+## featuredWalletIds
+
+Select wallets that are going to be shown on the modal's main view. Default wallets are MetaMask and Trust Wallet.
+Array of wallet ids defined will be prioritized (order is respected).
+These wallets will also show up first in `All Wallets` view.
+You can find the wallets ids in [WalletConnect Explorer](https://walletconnect.com/explorer?type=wallet)
+
+```ts
+createWeb3Modal({
+  //...
+  featuredWalletIds: [
+    '1ae92b26df02f0abca6304df07debccd18262fdf5fe82daa81593582dac9a369',
+    '4622a2b2d6af1c9844944291e5e7351a6aa24cd7b23099efac1b2fd875da31a0'
+  ]
+})
+```
+
+## includeWalletIds
+
+Override default recommended wallets that are fetched from [WalletConnect explorer](https://walletconnect.com/explorer?type=wallet).
+Array of wallet ids defined will be shown (order is respected).
+Unlike `featuredWalletIds`, these wallets will be the **only** ones shown in `All Wallets` view and as recommended wallets.
+You can get these ids from the explorer link mentioned before by clicking on a copy icon of desired wallet card.
+
+```ts
+createWeb3Modal({
+  //...
+  includeWalletIds: [
+    '1ae92b26df02f0abca6304df07debccd18262fdf5fe82daa81593582dac9a369',
+    '4622a2b2d6af1c9844944291e5e7351a6aa24cd7b23099efac1b2fd875da31a0'
+  ]
+})
+```
+
+## excludeWalletIds
+
+Exclude wallets that are fetched from [WalletConnect explorer](https://walletconnect.com/explorer?type=wallet).
+Array of wallet ids defined will be excluded.
+All other wallets will be shown in respective places.
+You can get these ids from the explorer link mentioned before by clicking on a copy icon of desired wallet card.
+
+```ts
+createWeb3Modal({
+  //...
+  excludeWalletIds: [
+    '1ae92b26df02f0abca6304df07debccd18262fdf5fe82daa81593582dac9a369',
+    '4622a2b2d6af1c9844944291e5e7351a6aa24cd7b23099efac1b2fd875da31a0'
+  ]
+})
+```
+
+## chainImages
+
+Add or override the modal's network images.
+
+```ts
+createWeb3Modal({
+  // ...
+  chainImages: {
+    1: 'https://my.images.com/eth.png'
+  }
+})
+```
+
+## connectorImages
+
+Set or override the images for any [Wagmi connector](https://wagmi.sh/react/connectors/injected). The key of each property must match the id of the connector.
+
+```ts
+createWeb3Modal({
+   connectorImages: {
+      coinbaseWallet: 'https://images.mydapp.com/coinbase.png',
+      metamask: 'https://images.mydapp.com/metamask.png'
+   }
+})
+```
+
+## termsConditionsUrl
+
+You can add an url for the _terms and conditions_ link.
+
+```ts
+createWeb3Modal({
+  //...
+  termsConditionsUrl: 'https://www.mytermsandconditions.com'
+})
+```
+
+## privacyPolicyUrl
+
+You can add an url for the _privacy policy_ link.
+
+```ts
+createWeb3Modal({
+  //...
+  privacyPolicyUrl: 'https://www.myprivacypolicy.com'
+})
+```

@@ -1,0 +1,214 @@
+import CloudBanner from '../../components/CloudBanner'
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
+
+# HTML
+
+## Introduction
+
+With Web3Modal HTML we work with the [@wagmi/core](https://wagmi.sh/core/getting-started) library which contains everything you need to start working with Ethereum. You can sign messages, interact with smart contracts, and much more.
+
+<CloudBanner />
+
+## Installation
+
+Choose your preferred package manager
+```bash npm2yarn
+npm install @web3modal/wagmi @wagmi/core viem
+```
+
+<!-- Yo can install Web3Modal SDK by using a package manager like *npm* or with CDN imports.
+
+<Tabs>
+<TabItem value="npm" label="NPM">
+
+Choose your preferred package manager
+```bash npm2yarn
+npm install @web3modal/wagmi @wagmi/core viem
+```
+
+</TabItem>
+<TabItem value="cdn" label="CDN">
+
+In order to use CDN replace the imports from the implementation example with the following ones
+```ts
+import { createWeb3Modal, defaultWagmiConfig } from 'https://esm.sh/@web3modal/wagmi?bundle'
+import { mainnet, arbitrum } from 'https://esm.sh/@wagmi/core/chains?bundle'
+```
+
+</TabItem>
+</Tabs>
+-->
+
+## Implementation
+
+You can start Web3Modal configuration using either **default** or **custom** mode.
+
+Default mode will implement WalletConnect, Browser Wallets (injected) and Coinbase options in addition to [Wagmi's public provider](https://wagmi.sh/react/providers/public) and [WalletConnect's provider](../../cloud/blockchain-api.md).
+
+<Tabs>
+<TabItem value="default" label="Default">
+
+Start by importing `Web3Modal`, `defaultWagmiConfig` and wagmi packages, then create `wagmiConfig` using `defaultWagmiConfig` function as shown below.
+Finally, pass `wagmiConfig` to the `Web3Modal` class.
+
+```ts
+import { createWeb3Modal, defaultWagmiConfig } from '@web3modal/wagmi'
+
+import { mainnet, arbitrum } from '@wagmi/core/chains'
+
+// 1. Define constants
+const projectId = 'YOUR_PROJECT_ID'
+
+// 2. Create wagmiConfig
+const metadata = {
+  name: 'Web3Modal',
+  description: 'Web3Modal Example',
+  url: 'https://web3modal.com',
+  icons: ['https://avatars.githubusercontent.com/u/37784886']
+}
+
+const chains = [mainnet, arbitrum]
+const wagmiConfig = defaultWagmiConfig({ chains, projectId, metadata })
+
+// 3. Create modal
+const modal = createWeb3Modal({ wagmiConfig, projectId, chains })
+```
+
+</TabItem>
+<TabItem value="custom" label="Custom">
+
+Start by importing `createWeb3Modal`, `walletConnectProvider` and wagmi packages, then create `wagmiConfig` using your own settings.
+Finally, pass wagmi config to `createWeb3Modal`.
+
+```ts
+import { createWeb3Modal, walletConnectProvider } from '@web3modal/wagmi'
+
+import { configureChains, createConfig } from '@wagmi/core'
+import { mainnet } from '@wagmi/core/chains'
+import { publicProvider } from '@wagmi/core/providers/public'
+import { InjectedConnector } from '@wagmi/core'
+import { CoinbaseWalletConnector } from '@wagmi/core/connectors/coinbaseWallet'
+import { WalletConnectConnector } from '@wagmi/core/connectors/walletConnect'
+
+// 1. Define constants
+const projectId = 'YOUR_PROJECT_ID'
+
+// 2. Configure wagmi client
+const { chains, publicClient } = configureChains([mainnet], [
+  walletConnectProvider({ projectId }),
+  publicProvider()
+])
+
+const metadata = {
+  name: 'Web3Modal',
+  description: 'Web3Modal Example',
+  url: 'https://web3modal.com',
+  icons: ['https://avatars.githubusercontent.com/u/37784886']
+}
+
+const wagmiConfig = createConfig({
+  autoConnect: true,
+  connectors: [
+    new WalletConnectConnector({ chains, options: { projectId, showQrModal: false, metadata } }),
+    new InjectedConnector({ chains, options: { shimDisconnect: true } }),
+    new CoinbaseWalletConnector({ chains, options: { appName: metadata.name } })
+  ],
+  publicClient
+})
+
+// 3. Create modal
+const modal = createWeb3Modal({ wagmiConfig, projectId, chains })
+```
+
+</TabItem>
+</Tabs>
+
+## Trigger the modal
+
+To open Web3Modal you can use our web components or build your own logic with Web3Modal actions
+<Tabs>
+<TabItem value="components" label="Components">
+You can use default web components to open the modal
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>HTML Example</title>
+  </head>
+  <body>
+    <w3m-button />
+    <script type="module" src="main.js"></script>
+  </body>
+</html>
+```
+Learn more about the Web3Modal web components [here](./components.mdx)
+
+:::note
+Web components are global html elements that don't require importing.
+:::
+</TabItem>
+<TabItem value="actions" label="Actions">
+
+You can trigger the modal by calling the `open` function from a modal instance returned by `createWeb3Modal`.
+
+Let's first add two html elements to display information to the user:
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>HTML Example</title>
+  </head>
+  <body>
+    <button id="btn">Connect</button>
+    <span id="user"></span>
+    <script type="module" src="main.js"></script>
+  </body>
+</html>
+```
+
+Following with our main.js file, we can now add the needed logic to open the modal and display information in the DOM:
+
+```ts
+//main.js
+import { watchAccount, disconnect, getAccount } from '@wagmi/core'
+
+function connect() {
+  if (getAccount().isConnected) {
+    disconnect()
+  } else {
+    modal.open()
+  }
+}
+
+const btnEl = document.getElementById('btn')
+const userEl = document.getElementById('user')
+
+btnEl.addEventListener('click', connect)
+
+// listening for account changes
+watchAccount(account => {
+  userEl.innerText = account.address ?? ''
+  if (account.isConnected) {
+    btnEl.innerText = 'Disconnect'
+  } else {
+    btnEl.innerText = 'Connect'
+  }
+})
+```
+
+Learn more about the Web3Modal actions [here](./actions.mdx)
+</TabItem>
+</Tabs>
+
+## Use wagmi Actions
+
+[wagmi](https://wagmi.sh) provides everything you'll need to start working with accounts, contracts, chains and much more.
+
+```tsx
+import { getAccount, writeContract, disconnect, watchAccount } from '@wagmi/core'
+```

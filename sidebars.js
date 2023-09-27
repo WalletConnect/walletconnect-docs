@@ -64,40 +64,41 @@ module.exports = {
             'web3modal/about',
             {
               type: 'category',
-              label: 'React',
               className: 'sidebar__logo sidebar__logo--react',
+              label: 'React',
               items: [
-                'web3modal/react/wagmi/installation',
-                'web3modal/react/wagmi/components',
-                'web3modal/react/wagmi/hooks',
-                'web3modal/react/wagmi/options',
-                'web3modal/react/wagmi/theming',
-                'web3modal/react/wagmi/custom-wallets',
-                'web3modal/react/wagmi/custom-chains',
-                {
-                  type: 'link',
-                  label: 'Example',
-                  href: 'https://github.com/WalletConnect/web3modal-examples/tree/main/web3modal-wagmi-react'
-                }
+                { type: 'doc', label: 'Getting started', id: 'web3modal/react/about' },
+                'web3modal/react/options',
+                'web3modal/react/hooks',
+                'web3modal/react/components',
+                'web3modal/react/theming',
+                'web3modal/react/experimental',
               ]
             },
             {
               type: 'category',
-              label: 'HTML',
-              className: 'sidebar__logo sidebar__logo--html',
+              className: 'sidebar__logo sidebar__logo--vue',
+              label: 'Vue',
               items: [
-                'web3modal/html/wagmi/installation',
-                'web3modal/html/wagmi/components',
-                'web3modal/html/wagmi/actions',
-                'web3modal/html/wagmi/options',
-                'web3modal/html/wagmi/theming',
-                'web3modal/html/wagmi/custom-wallets',
-                'web3modal/html/wagmi/custom-chains',
-                {
-                  type: 'link',
-                  label: 'Example',
-                  href: 'https://github.com/WalletConnect/web3modal-examples/tree/main/web3modal-wagmi-html'
-                }
+                { type: 'doc', label: 'Getting started', id: 'web3modal/vue/about' },
+                'web3modal/vue/options',
+                'web3modal/vue/composables',
+                'web3modal/vue/components',
+                'web3modal/vue/theming',
+                'web3modal/vue/experimental',
+              ]
+            },
+            {
+              type: 'category',
+              className: 'sidebar__logo sidebar__logo--html',
+              label: 'HTML',
+              items: [
+                { type: 'doc', label: 'Getting started', id: 'web3modal/html/about' },
+                'web3modal/html/options',
+                'web3modal/html/actions',
+                'web3modal/html/components',
+                'web3modal/html/theming',
+                'web3modal/html/experimental',
               ]
             },
             {
@@ -119,7 +120,8 @@ module.exports = {
               ]
             },
             'web3modal/resources',
-            'web3modal/v3/about'
+            'web3modal/upgrade',
+            'web3modal/v2/about'
           ]
         },
         {
@@ -245,9 +247,9 @@ module.exports = {
               type: 'category',
               label: 'Polkadot',
               items: [
-                'web3modal/polkadot/dapp-integration-guide',
-                'web3wallet/polkadot/wallet-integration-guide',
-                'web3wallet/polkadot/namespaces-guide'
+                'advanced/multichain/polkadot/dapp-integration-guide',
+                'advanced/multichain/polkadot/wallet-integration-guide',
+                'advanced/multichain/polkadot/namespaces-guide'
               ]
             }
           ]
@@ -270,73 +272,7 @@ module.exports = {
       ]
     }
   ],
-  'web3modal/platforms': [
-    {
-      type: 'html',
-      value:
-        '<a class="navbar__brand" href="/"><div class="navbar__logo"><img src="/img/walletconnect-logo-white.svg#dark-mode-only"  alt="WalletConnect Logo"><img src="/img/walletconnect-logo-black.svg#light-mode-only"  alt="WalletConnect Logo"></div>WalletConnect<span>Docs<span></a>',
-      defaultStyle: true
-    },
-    {
-      type: 'category',
-      label: 'General',
-      className: 'menu_outer_list',
-      collapsible: false,
-      items: [
-        {
-          type: 'link',
-          label: 'Overview',
-          href: '../about'
-        }
-      ]
-    },
-    {
-      type: 'category',
-      label: 'Web',
-      className: 'menu_outer_list',
-      collapsible: false,
-      items: [
-        {
-          type: 'doc',
-          className: 'sidebar__logo sidebar__logo--react ',
-          label: 'React',
-          id: 'web3modal/platforms/react'
-        },
-        {
-          type: 'doc',
-          className: 'sidebar__logo sidebar__logo--html ',
-          label: 'HTML',
-          id: 'web3modal/platforms/html'
-        },
-        {
-          type: 'doc',
-          className: 'sidebar__logo sidebar__logo--flutter ',
-          label: 'Flutter',
-          id: 'web3modal/platforms/flutter'
-        }
-      ]
-    }
-    // {
-    //   type: 'category',
-    //   label: 'Mobile',
-    //   className: 'menu_outer_list',
-    //   collapsible: false,
-    //   items: [
-    //     'web3modal/platforms/android',
-    //     'web3modal/platforms/ios',
-    //     'web3modal/platforms/react-native',
-    //     'web3modal/platforms/flutter'
-    //   ]
-    // },
-    // {
-    //   type: 'category',
-    //   label: 'Other',
-    //   className: 'menu_outer_list',
-    //   collapsible: false,
-    //   items: ['web3modal/platforms/unity']
-    // }
-  ],
-  'web3modal/v3': [
+  'web3modal/v2': [
     {
       type: 'html',
       value:
@@ -352,7 +288,7 @@ module.exports = {
         {
           type: 'ref',
           label: 'Overview',
-          id: 'web3modal/v3/about'
+          id: 'web3modal/v2/about'
         }
       ]
     },
@@ -364,41 +300,42 @@ module.exports = {
       items: [
         {
           type: 'category',
-          className: 'sidebar__logo sidebar__logo--react',
           label: 'React',
+          className: 'sidebar__logo sidebar__logo--react',
           items: [
-            { type: 'doc', label: 'Getting started', id: 'web3modal/v3/react/about' },
-            'web3modal/v3/react/options',
-            'web3modal/v3/react/hooks',
-            'web3modal/v3/react/components',
-            'web3modal/v3/react/theming',
+            'web3modal/v2/react/wagmi/installation',
+            'web3modal/v2/react/wagmi/components',
+            'web3modal/v2/react/wagmi/hooks',
+            'web3modal/v2/react/wagmi/options',
+            'web3modal/v2/react/wagmi/theming',
+            'web3modal/v2/react/wagmi/custom-wallets',
+            'web3modal/v2/react/wagmi/custom-chains',
+            {
+              type: 'link',
+              label: 'Example',
+              href: 'https://github.com/WalletConnect/web3modal-examples/tree/main/web3modal-wagmi-react'
+            }
           ]
         },
         {
           type: 'category',
-          className: 'sidebar__logo sidebar__logo--vue',
-          label: 'Vue',
-          items: [
-            { type: 'doc', label: 'Getting started', id: 'web3modal/v3/vue/about' },
-            'web3modal/v3/vue/options',
-            'web3modal/v3/vue/composables',
-            'web3modal/v3/vue/components',
-            'web3modal/v3/vue/theming',
-          ]
-        },
-        {
-          type: 'category',
-          className: 'sidebar__logo sidebar__logo--html',
           label: 'HTML',
+          className: 'sidebar__logo sidebar__logo--html',
           items: [
-            { type: 'doc', label: 'Getting started', id: 'web3modal/v3/html/about' },
-            'web3modal/v3/html/options',
-            'web3modal/v3/html/actions',
-            'web3modal/v3/html/components',
-            'web3modal/v3/html/theming',
+            'web3modal/v2/html/wagmi/installation',
+            'web3modal/v2/html/wagmi/components',
+            'web3modal/v2/html/wagmi/actions',
+            'web3modal/v2/html/wagmi/options',
+            'web3modal/v2/html/wagmi/theming',
+            'web3modal/v2/html/wagmi/custom-wallets',
+            'web3modal/v2/html/wagmi/custom-chains',
+            {
+              type: 'link',
+              label: 'Example',
+              href: 'https://github.com/WalletConnect/web3modal-examples/tree/main/web3modal-wagmi-html'
+            }
           ]
         },
-        'web3modal/v3/upgrade',
       ]
     }
   ]

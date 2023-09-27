@@ -1,0 +1,38 @@
+---
+title: Experimental
+---
+
+import Button from '../../components/button'
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
+
+# EIP-6963 - Multi Injected Provider Discovery
+
+The [EIP-6963](https://eips.ethereum.org/EIPS/eip-6963) standard is an alternative discovery mechanism to `window.ethereum` for wallets and web applications.
+
+- It removes conflicts that may arise when having multiple browser extension wallets installed.
+- Wallets inject their names and icons in addition to their providers, allowing them to automatically appear on the Web3Modal interface.
+
+:::caution
+This feature is experimental
+:::
+
+You can add Web3Modal's EIP-6963 connector as part of your custom Wagmi setup
+
+```ts
+import { EIP6963Connector } from '@web3modal/wagmi/react'
+
+createConfig({
+  connectors: [
+    new WalletConnectConnector({ chains, options: { projectId, showQrModal: false, metadata } }),
+    /* highlight-add-start */
+    new EIP6963Connector({ chains }), // <-- Add new connector
+    /* highlight-add-end */
+    new InjectedConnector({ chains, options: { shimDisconnect: true } }),
+    new CoinbaseWalletConnector({ chains, options: { appName: 'Web3Modal' } })
+  ]
+  // ...
+})
+```
+
+You can find a list of supported wallets and a demo of EIP-6963 at https://eip6963.org/
