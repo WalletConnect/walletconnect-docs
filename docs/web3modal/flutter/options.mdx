@@ -1,7 +1,9 @@
-# Options
+# Usage
 
 :::caution
-Web3Modal for Flutter is in alpha version. Documentation may also be inaccurate and/or incomplete.
+**The Web3Modal SDK for Flutter is currently in Alpha and is not production-ready**.
+
+It's public API and associated documentation may still see significant and breaking changes.
 :::
 
 ## Web3App or projectId & PairingMetadata (required)
@@ -14,7 +16,7 @@ Otherwise, we recommend just providing the projectId and `PairingMetadata` to th
 
 ```dart
 final _web3App = await Web3App.createInstance(
-  projectId: 'YOUR_PROJECT_ID',
+  projectId: '{YOUR_PROJECT_ID}',
   metadata: const PairingMetadata(
     name: 'Flutter Dapp Example',
     description: 'Flutter Dapp Example',
@@ -36,7 +38,7 @@ final _w3mService = W3MService(web3App: _web3App);
 
 ```dart
 final _w3mService = W3MService(
-  projectId: 'YOUR_PROJECT_ID', 
+  projectId: '{YOUR_PROJECT_ID}', 
   metadata: const PairingMetadata(
     name: 'Flutter Dapp Example',
     description: 'Flutter Dapp Example',
@@ -50,27 +52,29 @@ final _w3mService = W3MService(
 );
 ```
 
-## requiredNamespaces (optional)
+## Network selection or direct wallet connection
 
-Defaults to null.
+You can choose either to enable **Connect Wallet** button only after selecting a network (default behaviour) or to not display a **Select Network** button and directly navigate users to connect a wallet.
 
-This is the initial set of namespaces that will be requested from the wallet.
+If you decide to take first approach of showing a `W3MNetworkSelectButton` **and** `W3MConnectWalletButton` (which is enabled only after selecting a Network) you simple have to add these two buttons on your code:
 
-You can change it at any time with the `setRequiredNamespaces` method.
-
-## recommendedWalletIds (optional)
-
-Allows to override default recommended wallets that are fetched from [WalletConnect Explorer](https://walletconnect.com/explorer?type=wallet). You can define an array of wallet ids you'd like to prioritize (order is respected). You can get these ids from the explorer link mentioned before by clicking on a copy icon of desired wallet card. Defaults to `null`.
-
+For instance:
 ```dart
-final Set<String> recommendedWalletIds = {
-  'c57ca95b47569778a828d19178114f4db188b89b763c899ba0be274e97267d96', // MetaMask
-  '4622a2b2d6af1c9844944291e5e7351a6aa24cd7b23099efac1b2fd875da31a0', // Trust
-}
+Column(
+  mainAxisAlignment: MainAxisAlignment.center,
+  children: [
+    W3MNetworkSelectButton(service: _w3mService),
+    W3MConnectWalletButton(service: _w3mService),
+  ],
+),
 ```
+and `W3MConnectWalletButton` will handle it's state automatically.
 
-## excludedWalletState & excludedWalletIds (optional)
-
-The `excludedWalletState` determines the state of the excluded wallets. Defaults to `ExcludedWalletState.list`.
-
-If the `excludedWalletState` is `ExcludedWalletState.list`, the `excludedWalletIds` will be used to remove items from the list of wallets returned from the [WalletConnect Explorer](https://walletconnect.com/explorer?type=wallet). If the `excludedWalletState` is `ExcludedWalletState.all`, all wallets will be excluded except for the ones defined in `recommendedWalletIds`.
+But, as mentioned before, you can decide to just show the **Connect Wallet** button alone, in this case you would need to set it's state to `ConnectButtonState.none` like so:
+```dart
+W3MConnectWalletButton(
+  service: _w3mService,
+  state: ConnectButtonState.none,
+),
+```
+this way `W3MConnectWalletButton` will be always enabled.
