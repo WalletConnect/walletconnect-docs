@@ -130,6 +130,19 @@ createWeb3Modal({
 })
 ```
 
+## connectorImages
+
+Set or override the images for any [Wagmi connector](https://wagmi.sh/react/connectors/injected). The key of each property must match the id of the connector.
+
+```ts
+createWeb3Modal({
+   connectorImages: {
+      coinbaseWallet: 'https://images.mydapp.com/coinbase.png',
+      metamask: 'https://images.mydapp.com/metamask.png'
+   }
+})
+```
+
 ## termsConditionsUrl
 
 You can add an url for the _terms and conditions_ link.
@@ -137,7 +150,6 @@ You can add an url for the _terms and conditions_ link.
 ```ts
 createWeb3Modal({
   //...
-
   termsConditionsUrl: 'https://www.mytermsandconditions.com'
 })
 ```
@@ -149,7 +161,6 @@ You can add an url for the _privacy policy_ link.
 ```ts
 createWeb3Modal({
   //...
-
   privacyPolicyUrl: 'https://www.myprivacypolicy.com'
 })
 ```
