@@ -33,7 +33,7 @@ recommended to use redirects to avoid broken links. See [link](https://vercel.co
 # Tab Components
 
 > [!IMPORTANT]
-> When using tabs it is recommended to use **four** number signs (#) to avoid overpopulating the table of content.
+> When creating titles inside a tab it is recommended to use **four** number signs (#) to avoid overpopulating the table of content.
 
 ### Platform Tabs
 
