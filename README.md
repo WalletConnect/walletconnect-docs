@@ -32,37 +32,38 @@ recommended to use redirects to avoid broken links. See [link](https://vercel.co
 
 ## Components
 
-### Installation tabs
-
-````
-```bash npm2yarn
-npm install package
-```
-````
+**Important**: When using tabs it is recommended to use **four** number signs (#) to avoid overpopulating the table of content.
 
 ### Platform Tabs
 
-In your mdx file first import PlatformTabs and PlatformTabItem from the docs/components folder and wrap your content around them
+In your mdx file first import `PlatformTabs` and `PlatformTabItem` from `docs/components/PlatformTabs` and `docs/components/PlatformTabItem` relatively, and wrap your content around them
 
+You can find the supported platform in `docs/components/PlatformTabs.js`, they are grouped in an array called `PLATFORM_MAP`
 ```mdx
 import PlatformTabs from '../components/PlatformTabs'
 import PlatformTabItem from '../components/PlatformTabItem'
 
 <PlatformTabs
-	groupId="w3w"
+	groupId="anyId"
 	activeOptions={["web","ios","android"]}
 >
 <PlatformTabItem value="web">
+
+#### Subtitle here
 
 Information related to web
 
 </PlatformTabItem>
 <PlatformTabItem value="ios">
 
+#### Subtitle here
+
 Information related to ios
 
 </PlatformTabItem>
 <PlatformTabItem value="android">
+
+#### Subtitle here
 
 Information related to android
 
@@ -81,10 +82,14 @@ import TabItem from '@theme/TabItem'
 <Tabs>
 <TabItem value="custom-a" label="Custom A">
 
+#### Subtitle here
+
 Here you can add all the information related to Custom A
 
 </TabItem>
 <TabItem value="custom-b" label="Custom B">
+
+#### Subtitle here
 
 Here you can add all the information related to Custom B
 
