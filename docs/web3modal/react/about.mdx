@@ -52,7 +52,11 @@ const wagmiConfig = defaultWagmiConfig({ chains, projectId, metadata })
 createWeb3Modal({ wagmiConfig, projectId, chains })
 
 export default function App() {
-  return <WagmiConfig config={wagmiConfig}>// Rest of your app...</WagmiConfig>
+  return (
+    <WagmiConfig config={wagmiConfig}>
+      // Rest of your app...
+    </WagmiConfig>
+  )
 }
 ```
 
@@ -77,7 +81,7 @@ import { WalletConnectConnector } from 'wagmi/connectors/walletConnect'
 const projectId = 'YOUR_PROJECT_ID'
 
 // 2. Create wagmiConfig
-const { publicClient } = configureChains(
+const { chains, publicClient } = configureChains(
   [mainnet],
   [walletConnectProvider({ projectId }), publicProvider()]
 )
@@ -103,7 +107,11 @@ const wagmiConfig = createConfig({
 createWeb3Modal({ wagmiConfig, projectId, chains })
 
 export default function App() {
-  return <WagmiConfig config={wagmiConfig}>// Rest of your app...</WagmiConfig>
+  return (
+    <WagmiConfig config={wagmiConfig}>
+      // Rest of your app...
+    </WagmiConfig>
+  )
 }
 ```
 
