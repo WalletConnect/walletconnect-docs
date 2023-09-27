@@ -126,6 +126,7 @@ module.exports = {
                 { type: 'doc', label: 'Getting started', id: 'web3modal/android/about' },
                 'web3modal/android/options',
                 'web3modal/android/usage',
+                'web3modal/android/actions',
               ]
             },
             'web3modal/resources',
