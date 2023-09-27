@@ -127,6 +127,11 @@ module.exports = {
                 'web3modal/android/options',
                 'web3modal/android/usage',
                 'web3modal/android/actions',
+                {
+                    type: 'link',
+                    label: 'Example',
+                    href: 'https://github.com/WalletConnect/WalletConnectKotlinV2/tree/master/sample/modals/src/main/kotlin/com/walletconnect/modals'
+                }
               ]
             },
             'web3modal/resources',
