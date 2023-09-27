@@ -30,9 +30,10 @@ recommended to use redirects to avoid broken links. See [link](https://vercel.co
 
 1. Open `docusaurus.config.js`
 
-## Components
+# Tab Components
 
-**Important**: When using tabs it is recommended to use **four** number signs (#) to avoid overpopulating the table of content.
+> [!IMPORTANT]
+> When using tabs it is recommended to use **four** number signs (#) to avoid overpopulating the table of content.
 
 ### Platform Tabs
 
