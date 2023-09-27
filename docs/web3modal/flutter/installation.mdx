@@ -1,0 +1,69 @@
+import CloudBanner from '../../components/CloudBanner'
+
+# Installation
+
+:::caution
+Web3Modal for Flutter is in alpha version. Documentation may also be inaccurate and/or incomplete.
+:::
+
+With Web3Modal Flutter, you can easily let people interact with multiple EVM compatible wallets and blockchains.
+
+Let’s get started with the installation and configuration!
+
+<CloudBanner />
+
+## Installation
+
+Run the following command in your flutter project:
+
+```bash
+flutter pub add web3modal_flutter
+```
+
+## Implementation
+
+Import the package:
+
+```
+import 'package:web3modal_flutter/web3modal_flutter.dart';
+```
+
+Create your `W3MService` which is your primary class for opening, closing, disconnecting, etc.
+
+Be sure to update the project ID and metadata with your own.
+
+```dart
+final _w3mService = W3MService(
+  projectId: 'YOUR_PROJECT_ID',
+  metadata: const PairingMetadata(
+    name: 'Flutter Dapp Example',
+    description: 'Flutter Dapp Example',
+    url: 'https://www.walletconnect.com/',
+    icons: ['https://walletconnect.com/walletconnect-logo.png'],
+    redirect: Redirect(
+      native: 'flutterdapp://',
+      universal: 'https://www.walletconnect.com',
+    ),
+  ),
+  recommendedWalletIds: {
+    'afbd95522f4041c71dd4f1a065f971fd32372865b416f95a0b1db759ae33f2a7',
+    '38f5d18bd8522c244bdd70cb4a68e0e718865155811c043f052fb9f1c51de662',
+    'c57ca95b47569778a828d19178114f4db188b89b763c899ba0be274e97267d96',
+  },
+);
+await _w3mService.init();
+```
+
+Now you can use the `W3MConnectWalletButton` or `W3MNetworkSelectButton` widget:
+
+```dart
+W3MConnectWalletButton(service: _w3mService)
+// OR
+W3MNetworkSelectButton(service: _w3mService)
+```
+
+Once session is approved you can use `W3MAccountButton` widget to show basic account data and to open Account data modal:
+
+```dart
+W3MAccountButton(service: _w3mService)
+```

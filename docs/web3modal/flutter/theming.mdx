@@ -1,0 +1,25 @@
+# Theming
+
+:::caution
+Web3Modal for Flutter is in alpha version. Documentation may also be inaccurate and/or incomplete.
+:::
+
+To theme the `Web3Modal` you must wrap your `MaterialApp` with a `Web3ModalTheme` widget.
+
+```dart
+return Web3ModalTheme(
+  data: Web3ModalThemeData.darkMode,
+  child: MaterialApp(
+    title: 'Flutter Demo',
+    theme: ThemeData(
+      colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+      useMaterial3: true,
+    ),
+    home: const MyHomePage(title: 'W3M Sign Example'),
+  ),
+);
+```
+
+If you don't wrap your `MaterialApp` with a `Web3ModalTheme` widget, the `Web3Modal` will use the default light theme.
+
+You can build your own theme by creating a `Web3ModalThemeData` object. (More and easier customization options will come in the near future)

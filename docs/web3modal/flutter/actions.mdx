@@ -1,0 +1,26 @@
+# Actions
+
+:::caution
+Web3Modal for Flutter is in alpha version. Documentation may also be inaccurate and/or incomplete.
+:::
+
+## Launch the current wallet
+
+```dart
+await _w3mService.launchCurrentWallet();
+```
+
+## Send a request
+
+```dart
+await _w3mService.web3App.request(
+  topic: _w3mService.session.topic,
+  chainId: 'eip155:1',
+  request: SessionRequestParams(
+    method: 'personalSign',
+    params: ['Sign this', '0xdeadbeef'],
+  ),
+);
+```
+
+For more examples check out the [example app](https://github.com/WalletConnect/Web3ModalFlutter/tree/master/example/sign)
