@@ -1,0 +1,139 @@
+# Actions
+
+## Web3Modal Chains
+
+### Chain selection
+
+You can select your own chain by calling the `selectChain(chain: Modal.Model.Chain)` method on the `Web3Modal` object.
+
+### Get selected chain
+
+You can get selected chain by calling the `getSelectedChain()` on the `Web3Modal` object.
+
+## Web3Modal.ModalDelegate
+
+```kotlin
+val web3ModalModalDelegate = object : Web3Modal.ModalDelegate {
+    override fun onSessionApproved(approvedSession: Modal.Model.ApprovedSession) {
+        // Triggered when receives the session approval from wallet
+    }
+
+    override fun onSessionRejected(rejectedSession: Modal.Model.RejectedSession) {
+        // Triggered when receives the session rejection from wallet
+    }
+
+    override fun onSessionUpdate(updatedSession: Modal.Model.UpdatedSession) {
+        // Triggered when receives the session update from wallet
+    }
+
+    override fun onSessionExtend(session: Modal.Model.Session) {
+        // Triggered when receives the session extend from wallet
+    }
+
+    override fun onSessionEvent(sessionEvent: Modal.Model.SessionEvent) {
+        // Triggered when the peer emits events that match the list of events agreed upon session settlement
+    }
+
+    override fun onSessionDelete(deletedSession: Modal.Model.DeletedSession) {
+        // Triggered when receives the session delete from wallet
+    }
+
+    override fun onSessionRequestResponse(response: Modal.Model.SessionRequestResponse) {
+        // Triggered when receives the session request response from wallet
+    }
+
+    override fun onConnectionStateChange(state: Modal.Model.ConnectionState) {
+        //Triggered whenever the connection state is changed
+    }
+
+    override fun onError(error: Modal.Model.Error) {
+        // Triggered whenever there is an issue inside the SDK
+    }
+}
+```
+
+You have set delegate on Web3Modal to start getting updates from Wallet.
+```kotlin
+    Web3Modal.setDelegate(web3ModalModalDelegate)
+```
+
+## Sign Actions
+
+### Connect
+
+```kotlin
+val namespace: String = /*Namespace identifier, see for reference: https://github.com/ChainAgnostic/CAIPs/blob/master/CAIPs/caip-2.md#syntax*/
+val chains: List<String> = /*List of chains that wallet will be requested for*/
+val methods: List<String> = /*List of methods that wallet will be requested for*/
+val events: List<String> = /*List of events that wallet will be requested for*/
+val requiredNamespaces: Map<String, Modal.Model.Namespaces.Proposal> = mapOf(namespace, Modal.Model.Namespaces.Proposal(accounts, methods, events)) /*Required namespaces to setup a session*/
+val optionalNamespaces: Map<String, Modal.Model.Namespaces.Proposal> = mapOf(namespace, Modal.Model.Namespaces.Proposal(accounts, methods, events)) /*Optional namespaces to setup a session*/
+val pairing: Core.Model.Pairing = /*Either an active or inactive pairing*/
+val connectParams = Modal.Params.Connect(requiredNamespaces, optionalNamespaces, pairing)
+
+Web3Modal.connect(
+    connect = connectParams,
+    onSuccess = {
+        /* callback that letting you know that you have successfully initiated connecting */
+    },
+    onError = { error =>
+        /* callback for error while trying to initiate a connection with a peer */
+    }
+)
+```
+
+More about optional and required namespaces can be found [here](https://github.com/ChainAgnostic/CAIPs/blob/master/CAIPs/caip-25.md)
+
+### Disconnect
+
+```kotlin
+val disconnectParams = Web3Modal.Params.Disconnect(topic)
+
+Web3Modal.disconnect(
+    disconnect = disconnectParams,
+    onSuccess = {
+    /* callback that letting you know that you have successfully disconnected */
+    },
+    onError = { error ->
+    /* callback for error while trying to disconnection with a peer */
+    }
+)
+```
+
+### Request
+
+```kotlin
+val requestParams = Modal.Params.Request(
+    sessionTopic = sessionTopic,
+    method = /* Selected method */,
+    params = /* Method params  */,
+    chainId = /* Chain id */
+)
+
+Web3Modal.request(
+    request = requestParams,
+    onSuccess = {
+    /* callback that letting you know that you have successful request */
+    },
+    onError = { error ->
+    /* callback for error */
+    }
+)
+```
+
+### Get List of Active Sessions
+
+```kotlin
+Web3Modal.getListOfActiveSessions()
+```
+
+To get a list of active sessions, call `Web3Modal.getListOfActiveSessions()` which will return a list of type `Modal.Model.Session`.
+
+### Get list of pending session requests for a topic
+
+```kotlin
+Web3Modal.getActiveSessionByTopic(topic)
+```
+
+To get a active session for a topic, call `Web3Modal.getActiveSessionByTopic()` and pass a topic which will return
+a `Modal.Model.Session` object containing requestId, method, chainIs and params for pending request.
