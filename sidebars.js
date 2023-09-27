@@ -122,6 +122,7 @@ module.exports = {
             {
               type: 'category',
               label: 'Android',
+              className: 'sidebar__logo sidebar__logo--android',
               items: [
                 { type: 'doc', label: 'Getting started', id: 'web3modal/android/about' },
                 'web3modal/android/options',
