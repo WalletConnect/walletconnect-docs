@@ -1,3 +1,6 @@
+import Container from '../../components/Container'
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
 import PlatformTabs from '../../components/PlatformTabs'
 import PlatformTabItem from '../../components/PlatformTabItem'
 
@@ -68,66 +71,6 @@ Web3Modal.setChains(chains)
 
 ## Usage
 
-#### Android Compose
-
-```kotlin
-import androidx.compose.material.ExperimentalMaterialApi
-import androidx.compose.material.ModalBottomSheetState
-import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
-import androidx.navigation.compose.rememberNavController
-import com.google.accompanist.navigation.material.BottomSheetNavigator
-import com.google.accompanist.navigation.material.ExperimentalMaterialNavigationApi
-import com.google.accompanist.navigation.material.ModalBottomSheetLayout
-import com.google.accompanist.navigation.material.bottomSheet
-import com.walletconnect.web3.modal.ui.web3ModalGraph
-
-setContent {
-    val modalSheetState = rememberModalBottomSheetState(initialValue = ModalBottomSheetValue.Hidden, skipHalfExpanded = true)
-    val bottomSheetNavigator = BottomSheetNavigator(modalSheetState)
-    val navController = rememberNavController(bottomSheetNavigator)
-
-    ModalBottomSheetLayout(bottomSheetNavigator = bottomSheetNavigator) {
-        NavHost(
-            navController = navController,
-            startDestination = "home"
-        ) {
-            composable("home") {
-                HomeScreen()
-            }
-            web3ModalGraph(navController)
-        }
-    }
-}
-```
-
-**IMPORTANT**: WalletConnectModal uses accompanist navigation material inside. `ModalBottomSheetLayout` should be imported from [Accompanist Navigation Material](https://google.github.io/accompanist/navigation-material/)
-
-```kotlin
-import com.walletconnect.web3.modal.ui.openWeb3Modal
-
-navController.openWeb3Modal()
-```
-
-#### Kotlin DSL
-
-```kotlin
-import androidx.navigation.createGraph
-import androidx.navigation.fragment.fragment
-import com.walletconnect.web3.modal.ui.web3ModalGraph
-
-navController.graph = navController.createGraph("Home") {
-    fragment<HomeFragment>("Home")
-    walletConnectModal()
-}
-```
-
-```kotlin
-import androidx.navigation.fragment.findNavController
-import com.walletconnect.web3.modal.ui.openWeb3Modal
-
-findNavController().openWeb3Modal()
-```
 <PlatformTabs
     groupId="android"
     activeOptions={["compose", "kotlindsl", "navgraph"]}
