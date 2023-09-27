@@ -119,6 +119,15 @@ module.exports = {
                 }
               ]
             },
+            {
+              type: 'category',
+              label: 'Android',
+              items: [
+                { type: 'doc', label: 'Getting started', id: 'web3modal/android/about' },
+                'web3modal/android/options',
+                'web3modal/android/usage',
+              ]
+            },
             'web3modal/resources',
             'web3modal/upgrade',
             'web3modal/v2/about'
