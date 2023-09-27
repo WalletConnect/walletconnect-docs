@@ -50,21 +50,21 @@ import PlatformTabItem from '../components/PlatformTabItem'
 >
 <PlatformTabItem value="web">
 
-#### Subtitle here
+#### Heading here
 
 Information related to web
 
 </PlatformTabItem>
 <PlatformTabItem value="ios">
 
-#### Subtitle here
+#### Heading here
 
 Information related to ios
 
 </PlatformTabItem>
 <PlatformTabItem value="android">
 
-#### Subtitle here
+#### Heading here
 
 Information related to android
 
@@ -83,14 +83,14 @@ import TabItem from '@theme/TabItem'
 <Tabs>
 <TabItem value="custom-a" label="Custom A">
 
-#### Subtitle here
+#### Heading here
 
 Here you can add all the information related to Custom A
 
 </TabItem>
 <TabItem value="custom-b" label="Custom B">
 
-#### Subtitle here
+#### Heading here
 
 Here you can add all the information related to Custom B
 
