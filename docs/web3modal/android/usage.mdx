@@ -75,11 +75,11 @@ Web3Modal.setChains(chains)
 
 ## Usage
 
-<PlatformTabs
+<Tabs
     groupId="android"
     activeOptions={["compose", "kotlin-dsl", "nav-graph"]}
 >
-<PlatformTabItem value="compose">
+<TabItem value="compose" label="Compose">
 ```kotlin
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.ModalBottomSheetState
@@ -119,9 +119,9 @@ import com.walletconnect.web3.modal.ui.openWeb3Modal
 navController.openWeb3Modal()
 ```
 
-</PlatformTabItem>
+</TabItem>
 
-<PlatformTabItem value="kotlin-dsl">
+<TabItem value="kotlin-dsl" label="Kotlin DSL">
 
 ```kotlin
 import androidx.navigation.createGraph
@@ -140,8 +140,8 @@ import com.walletconnect.web3.modal.ui.openWeb3Modal
 
 findNavController().openWeb3Modal()
 ```
-</PlatformTabItem>
-<PlatformTabItem value="nav-graph">
+</TabItem>
+<TabItem value="nav-graph" label="Nav graph">
 
 ```xml
 <navigation >
@@ -166,5 +166,5 @@ import com.walletconnect.wcmodal.ui.openWalletConnectModal
 
 findNavController().openWalletConnectModal(id = R.id.action_to_bottomSheet)
 ```
-</PlatformTabItem>
-</PlatformTabs>
+</TabItem>
+</Tabs>

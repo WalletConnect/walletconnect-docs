@@ -61,19 +61,7 @@ const PLATFORM_MAP = [
   {
     value: 'web3js',
     label: 'Web3.js'
-  },
-  {
-    value: 'compose',
-    label: 'Compose'
-  },
-  {
-    value: 'kotli-ndsl',
-    label: 'Kotlin DSL'
-  },
-  {
-    value: 'nav-graph',
-    label: 'Nav Graph'
-  },
+  }
 ]
 
 const valuesBuilder = activeOptions => {
