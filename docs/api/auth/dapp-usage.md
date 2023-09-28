@@ -52,7 +52,7 @@ authClient.on('auth_response', ({ params }) => {
 You can derive the users' wallet address by destructing and splitting `params.result.p.iss`.
 
 ```javascript
-const { iss } = params.result.p.iss
+const { iss } = params.result.p
 const walletAddress = iss.split(':')[4]
 console.log(walletAddress)
 // "0x977aeFEC1879160eC9560cd16f08e12B6DF52ed1"
@@ -456,6 +456,7 @@ void OnAuthError(object sender, AuthErrorResponse args)
 
 dappClient.AuthError += OnAuthError;
 ```
+
 </PlatformTabItem>
 
 </PlatformTabs>
