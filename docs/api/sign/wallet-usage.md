@@ -495,7 +495,7 @@ try await Sign.instance.disconnect(topic: session.topic)
 #### Where to go from here
 
 - Try our example wallet implementation [here](https://github.com/WalletConnect/WalletConnectSwiftV2/tree/main/Example/WalletApp).
-- To dive deeper into protocol concepts check out our [documentation](https://docs.walletconnect.com/2.0/protocol/glossary)
+<!-- - To dive deeper into protocol concepts check out our [documentation](https://docs.walletconnect.com/protocol/glossary) -->
 - Build API documentation in XCode: go to Product -> Build Documentation
 
 </PlatformTabItem>
@@ -814,9 +814,9 @@ await request.Acknowledged();
 
 #### Responding to Session Requests
 
-Responding to session requests is very similar to sending session requests. See dApp usage on how sending session requests works. All custom session requests requires a request class **and** response class to be created that matches the `params` field type in the custom session request. C# is a staticly typed language, so these types must be given whenever you do a session request (or do any querying for session requests). 
+Responding to session requests is very similar to sending session requests. See dApp usage on how sending session requests works. All custom session requests requires a request class **and** response class to be created that matches the `params` field type in the custom session request. C# is a staticly typed language, so these types must be given whenever you do a session request (or do any querying for session requests).
 
-Currently, **WalletConnectSharp does not automatically assume the object type for `params` is an array**. This is very important, since most EVM RPC requests have `params` as an array type. **Use `List<T>` to workaround this**. For example, for `eth_sendTransaction`, use `List<Transaction>` instead of `Transaction`. 
+Currently, **WalletConnectSharp does not automatically assume the object type for `params` is an array**. This is very important, since most EVM RPC requests have `params` as an array type. **Use `List<T>` to workaround this**. For example, for `eth_sendTransaction`, use `List<Transaction>` instead of `Transaction`.
 
 Newtonsoft.Json is used for JSON serialization/deserialization, therefor you can use Newtonsoft.Json attributes when defining fields in your request/response classes.
 
@@ -835,49 +835,49 @@ public class TransactionReceipt
 {
     [JsonProperty("transactionHash")]
     public string TransactionHash;
-    
+
     [JsonProperty("transactionIndex")]
     public BigInteger TransactionIndex;
-    
+
     [JsonProperty("blockHash")]
     public string BlockHash;
-    
+
     [JsonProperty("blockNumber")]
     public BigInteger BlockNumber;
-    
+
     [JsonProperty("from")]
     public string From;
-            
+
     [JsonProperty("to")]
     public string To;
-    
+
     [JsonProperty("cumulativeGasUsed")]
     public BigInteger CumulativeGasUsed;
-    
+
     [JsonProperty("effectiveGasPrice ")]
     public BigInteger EffectiveGasPrice ;
-    
+
     [JsonProperty("gasUsed")]
     public BigInteger GasUsed;
-    
+
     [JsonProperty("contractAddress")]
     public string ContractAddress;
-    
+
     [JsonProperty("logs")]
     public object[] Logs;
-    
+
     [JsonProperty("logsBloom")]
     public string LogBloom;
-    
+
     [JsonProperty("type")]
     public BigInteger Type;
-    
+
     [JsonProperty("status")]
     public BigInteger Status;
 }
 ```
 
-The `RpcMethod` class attributes defines the rpc method this response uses, this is optional. The `RpcResponseOptions` class attributes define the expiry time and tag attached to the response, **this is required**. 
+The `RpcMethod` class attributes defines the rpc method this response uses, this is optional. The `RpcResponseOptions` class attributes define the expiry time and tag attached to the response, **this is required**.
 
 ##### Sending a response
 
@@ -905,7 +905,7 @@ private Task OnEthTransactionReceiptRequest(RequestEventArgs<EthGetTransactionRe
 }
 ```
 
-The callback function gets invoked whenever the wallet receives the `eth_getTransactionReceipt` request from a connected dApp. You may optionally filter further which requests are handled using the `FilterRequests` function 
+The callback function gets invoked whenever the wallet receives the `eth_getTransactionReceipt` request from a connected dApp. You may optionally filter further which requests are handled using the `FilterRequests` function
 
 ```csharp
 walletClient.Engine.SessionRequestEvents<EthGetTransactionReceipt, TransactionReceipt>()

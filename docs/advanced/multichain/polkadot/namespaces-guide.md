@@ -159,7 +159,7 @@ await signClient.emit({
 })
 ```
 
-This can be useful in a wallet if a user is adding additional accounts to a session so that the wallet or dapp can respond and update their respective states using events such as `session_update` to update the accounts, chains, methods or events for the session or `session_delete` to end a session. [(More on events)](https://docs.walletconnect.com/2.0/specs/clients/sign/session-events#session_request).
+This can be useful in a wallet if a user is adding additional accounts to a session so that the wallet or dapp can respond and update their respective states using events such as `session_update` to update the accounts, chains, methods or events for the session or `session_delete` to end a session. [(More on events)](https://docs.walletconnect.com/specs/clients/sign/session-events#session_request).
 
 ### Using Namespaces
 
@@ -215,4 +215,4 @@ const session = await web3wallet.approveSession({
 })
 ```
 
-More information on namespaces can be found [here](https://docs.walletconnect.com/2.0/specs/clients/sign/namespaces#controller-side-validation-of-incoming-proposal-namespaces-wallet).
+More information on namespaces can be found [here](https://docs.walletconnect.com/specs/clients/sign/namespaces#controller-side-validation-of-incoming-proposal-namespaces-wallet).

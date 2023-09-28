@@ -4,7 +4,7 @@ Verify API is a security-focused feature that allows apps on all platforms (web,
 
 Once a wallet knows whether an end-user is on uniswap.com or eviluniswap.com, it can help them to detect potentially harmful connections through Verify's combined offering of WalletConnect’s domain registry and industry-leading security tools.
 
-For wallets looking to implement Verify into their product, find out how to get started [here](https://docs.walletconnect.com/2.0/web3wallet/verify).
+For wallets looking to implement Verify into their product, find out how to get started [here](../web3wallet/verify).
 
 ## Cloud Verification
 

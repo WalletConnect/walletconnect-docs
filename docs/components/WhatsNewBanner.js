@@ -1,5 +1,6 @@
 import React from 'react'
 import wcGlassImage from '../../static/assets/wc-logo-glass-full.webp'
+import Link from '@docusaurus/Link'
 
 export const CloudBanner = ({ title, description, href }) => {
   return (
@@ -8,7 +9,7 @@ export const CloudBanner = ({ title, description, href }) => {
         <h2>{title}</h2>
         <p>{description}</p>
       </div>
-      <a href={href}>
+      <Link to={href}>
         Learn More
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -25,7 +26,7 @@ export const CloudBanner = ({ title, description, href }) => {
             d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3"
           />
         </svg>
-      </a>
+      </Link>
       <img
         style={{
           transform: 'scale(1.5) scaleX(-1)'

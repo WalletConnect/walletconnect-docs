@@ -1,26 +1,27 @@
-import React from "react";
-import { useHistory } from "react-router-dom";
+import Link from '@docusaurus/Link'
+import React from 'react'
+import { useHistory } from 'react-router-dom'
 
 const Box = ({ name, description, url }) => {
-  let history = useHistory();
+  let history = useHistory()
 
-  const handleClick = (e) => {
-    e.preventDefault();
-    if (url.includes("https://")) {
-      window.open(url, "_blank");
+  const handleClick = e => {
+    e.preventDefault()
+    if (url.includes('https://')) {
+      window.open(url, '_blank')
     } else {
-      history.push(url);
+      history.push(url)
     }
-  };
+  }
 
   return (
     <div className="box">
-      <a href={url} target="_blank" rel="noopener noreferrer" onClick={handleClick}>
-        <h1 style={{ fontSize: "20px" }}>{name}</h1>
+      <Link to={url} onClick={handleClick}>
+        <h1 style={{ fontSize: '20px' }}>{name}</h1>
         <p>{description}</p>
-      </a>
+      </Link>
     </div>
-  );
-};
+  )
+}
 
-export default Box;
+export default Box
