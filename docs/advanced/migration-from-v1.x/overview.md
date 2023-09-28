@@ -18,12 +18,12 @@ items={[
 {
 name: "Dapps",
 description: "Upgrade your Web3Modal or other dapp libraries",
-url: `/advanced/migration-from-v1.x/dapps`
+url: `dapps`
 },
 {
 name: "Wallets",
 description: "Support v1.0 and v2.0 in parallel",
-url: `/advanced/migration-from-v1.x/wallets`
+url: `wallets`
 }
 ]}
 />
