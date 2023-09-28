@@ -1,8 +1,9 @@
+import Link from '@docusaurus/Link'
 import React from 'react'
 
 const LargeContainer = ({ href, name, icon, description, fit }) => {
   return (
-    <a href={href} className="home__large-container">
+    <Link to={href} className="home__large-container">
       {fit ? (
         <img src={icon} alt={name} />
       ) : (
@@ -16,7 +17,7 @@ const LargeContainer = ({ href, name, icon, description, fit }) => {
         <h4>{name}</h4>
         <p>{description}</p>
       </div>
-    </a>
+    </Link>
   )
 }
 

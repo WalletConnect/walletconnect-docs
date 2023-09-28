@@ -874,7 +874,7 @@ the `Web3Wallet.rejectSession` function.
 </PlatformTabItem>
 <PlatformTabItem value="flutter">
 
-To reject the request, pass in an error code and reason. They can be found [here](https://docs.walletconnect.com/2.0/specs/clients/sign/error-codes).
+To reject the request, pass in an error code and reason. They can be found [here](https://specs.walletconnect.com/2.0/specs/clients/sign/error-codes).
 
 ```dart
 await web3Wallet.reject(
@@ -1191,7 +1191,7 @@ public class EthGetTransactionReceipt : List<string>
     }
 
     // needed for proper json deserialization
-    public EthGetTransactionReceipt() 
+    public EthGetTransactionReceipt()
     {
     }
 }
@@ -1620,7 +1620,7 @@ public class AuthRequest : TopicMessage
 {
     [JsonProperty("params")]
     public AuthRequestData Parameters;
-    
+
     [JsonProperty("verifyContext")]
     public VerifiedContext VerifyContext { get; set; }
 }
@@ -1702,7 +1702,7 @@ sdk.AuthRequested += async (sender, authRequest) =>
                             .SendRequestAsync(
                               Encoding.UTF8.GetBytes(message)
                             );
-    
+
     await sdk.RespondAuthRequest(authRequest, signature, iss);
 };
 ```
@@ -1730,7 +1730,7 @@ try await Web3WalletClient.reject(requestId: request.id)
 </PlatformTabItem>
 <PlatformTabItem value="flutter">
 
-To reject the request, pass in an error code and reason. They can be found [here](https://docs.walletconnect.com/2.0/specs/clients/sign/error-codes).
+To reject the request, pass in an error code and reason. They can be found [here](https://specs.walletconnect.com/2.0/specs/clients/sign/error-codes).
 
 ```dart
 await web3Wallet.respondAuthRequest(
@@ -1743,7 +1743,7 @@ await web3Wallet.respondAuthRequest(
 </PlatformTabItem>
 <PlatformTabItem value="csharp">
 
-To reject the request, pass in an error code and reason. They can be found [here](https://docs.walletconnect.com/2.0/specs/clients/sign/error-codes).
+To reject the request, pass in an error code and reason. They can be found [here](https://specs.walletconnect.com/2.0/specs/clients/sign/error-codes).
 
 ```csharp
 // TEST: Create NEthereum wallet to simulate signing

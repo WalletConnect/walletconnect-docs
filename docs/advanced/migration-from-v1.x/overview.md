@@ -18,12 +18,12 @@ items={[
 {
 name: "Dapps",
 description: "Upgrade your Web3Modal or other dapp libraries",
-url: `/2.0/advanced/migration-from-v1.x/dapps`
+url: `dapps`
 },
 {
 name: "Wallets",
 description: "Support v1.0 and v2.0 in parallel",
-url: `/2.0/advanced/migration-from-v1.x/wallets`
+url: `wallets`
 }
 ]}
 />
@@ -44,7 +44,6 @@ Despite the internal protocol changes, the overall UX between WalletConnect v1.0
 - The bridge URL is no longer supported. It has been replaced by the relay URL, which is `wss://relay.walletconnect.com`.
 
 To learn more about the protocol changes between WalletConnect v1.0 and v2.0, click [here.](./what-changed-from-v1.0.md)
-
 
 ## Have a Question?
 

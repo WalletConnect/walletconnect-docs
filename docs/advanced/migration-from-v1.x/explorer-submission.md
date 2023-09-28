@@ -8,7 +8,7 @@ Note: The status of your listing does not impact your users' ability to use Wall
 
 WalletConnect v1.0 was shutdown on June 28 ([read more](https://medium.com/walletconnect/walletconnect-v1-0-has-now-been-shut-down-ff9baec96690)).
 
-If you are a wallet or dapp that currently only supports WalletConnect v1.0, we strongly recommend that you migrate to WalletConnect v2.0 immediately. Please visit the [migration section of our docs](https://docs.walletconnect.com/2.0/advanced/migration-from-v1.x/overview) to get started right away.
+If you are a wallet or dapp that currently only supports WalletConnect v1.0, we strongly recommend that you migrate to WalletConnect v2.0 immediately. Please visit the [migration section of our docs](../migration-from-v1.x/overview) to get started right away.
 
 ### Have a Question?
 
@@ -19,7 +19,6 @@ If you have a question regarding the WalletConnect Explorer or your project's li
 To expedite approval of your submission, it is essential that you test with the following example dapp to ensure a successful WalletConnect v2.0 integration.
 
 - Web3Modal Laboratory: https://lab.web3modal.com
-
 
 Please make sure all the items in the following checklist are correct. Failure to meet the following criteria will result in **an automatic rejection and prolong your project's submission process**.
 
