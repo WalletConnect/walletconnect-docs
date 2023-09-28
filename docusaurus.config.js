@@ -29,18 +29,10 @@ const config = {
       {
         docs: {
           breadcrumbs: true,
-          lastVersion: 'current',
           routeBasePath: '/',
           sidebarPath: require.resolve('./sidebars.js'),
           showLastUpdateTime: true,
           editUrl: 'https://github.com/WalletConnect/walletconnect-docs/blob/main/',
-          versions: {
-            current: {
-              badge: false,
-              label: 'v2.x',
-              path: '2.0'
-            }
-          },
           remarkPlugins: [
             [
               require('@docusaurus/remark-plugin-npm2yarn'),
@@ -85,15 +77,15 @@ const config = {
             items: [
               {
                 label: 'Web3Modal SDK',
-                to: '/2.0/web3modal/about'
+                to: '/web3modal/about'
               },
               {
                 label: 'Web3Wallet SDK',
-                to: '/2.0/web3wallet/about'
+                to: '/web3wallet/about'
               },
               {
                 label: 'Web3Inbox SDK',
-                to: '/2.0/web3inbox/about'
+                to: '/web3inbox/about'
               }
             ]
           },
@@ -162,7 +154,7 @@ const config = {
       announcementBar: {
         id: 'support_us',
         content:
-          '🎉 Web3Modal v3 is out. <a rel="noopener noreferrer" href="/2.0/web3modal/about">Learn more</a>. 🎉',
+          '🎉 Web3Modal v3 is out. <a rel="noopener noreferrer" href="/web3modal/about">Learn more</a>. 🎉',
         backgroundColor: '#3182ce',
         textColor: '#fff',
         isCloseable: true
