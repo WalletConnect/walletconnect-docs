@@ -1,8 +1,18 @@
 # Custom Wallets
 
 :::caution
-Web3Modal for Flutter is in alpha version. Documentation may also be inaccurate and/or incomplete.
+**The Web3Modal SDK for Flutter is currently in Alpha and is not production-ready**.
+
+It's public API and associated documentation may still see significant and breaking changes.
 :::
+
+## requiredNamespaces (optional)
+
+Defaults to null.
+
+This is the initial set of namespaces that will be requested from the wallet.
+
+You can change it at any time with the `setRequiredNamespaces` method.
 
 ## recommendedWalletIds (optional)
 
@@ -17,6 +27,6 @@ final Set<String> recommendedWalletIds = {
 
 ## excludedWalletState & excludedWalletIds (optional)
 
-The `excludedWalletState` Determines the state of the excluded wallets. Defaults to `ExcludedWalletState.list`.
+The `excludedWalletState` determines the state of the excluded wallets. Defaults to `ExcludedWalletState.list`.
 
 If the `excludedWalletState` is `ExcludedWalletState.list`, the `excludedWalletIds` will be used to remove items from the list of wallets returned from the [WalletConnect Explorer](https://walletconnect.com/explorer?type=wallet). If the `excludedWalletState` is `ExcludedWalletState.all`, all wallets will be excluded except for the ones defined in `recommendedWalletIds`.
