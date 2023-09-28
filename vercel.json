@@ -134,26 +134,6 @@
       "destination": "/2.0/cloud/relay"
     },
     {
-      "source": "/2.0/specs/sign/:path*",
-      "destination": "/2.0/specs/clients/sign/:path*"
-    },
-    {
-      "source": "/2.0/specs/auth/:path*",
-      "destination": "/2.0/specs/clients/auth/:path*"
-    },
-    {
-      "source": "/2.0/specs/push/:path*",
-      "destination": "/2.0/specs/clients/push/:path*"
-    },
-    {
-      "source": "/2.0/specs/chat/:path*",
-      "destination": "/2.0/specs/clients/chat/:path*"
-    },
-    {
-      "source": "/2.0/specs/core/:path*",
-      "destination": "/2.0/specs/clients/core/:path*"
-    },
-    {
       "source": "/2.0/web3modal/standalone:path*",
       "destination": "/2.0/web3modal/about"
     },
@@ -180,14 +160,6 @@
     {
       "source": "/2.0/csharp/:path*",
       "destination": "/2.0/:path*"
-    },
-    {
-      "source": "/2.0/specs/servers/echo",
-      "destination": "/2.0/specs/servers/echo/spec"
-    },
-    {
-      "source": "/2.0/specs/servers/cast",
-      "destination": "/2.0/specs/servers/cast/cast-server-api"
     },
     {
       "source": "/2.0/advanced/migration-from-v1.x",
