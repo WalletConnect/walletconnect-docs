@@ -6,8 +6,8 @@
       "destination": "/:path*"
     },
     {
-      "source": "/2.0/specs/:path*",
-      "destination": "https://specs.walletconnect.com/specs/:path*"
+      "source": "/specs/:path*",
+      "destination": "https://specs.walletconnect.com/2.0/specs/:path*"
     },
     {
       "source": "/2.0/web3modal/v3/:path*",
