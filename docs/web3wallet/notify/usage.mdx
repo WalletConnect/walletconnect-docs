@@ -26,9 +26,9 @@ Configure the `Notify` instance with:
 try Notify.configure(groupIdentifier: String, environment: APNSEnvironment, crypto: CryptoProvider)
 ```
 
-`groupIdentifier` - identifier of your group keychain, enables to share keychain items between your wallet and a UNNotificationServiceExtension that decrupts remote Push Notifications.
+`groupIdentifier` - App group identifier, enables to share keychain items between SDK and a UNNotificationServiceExtension to decrypts remote Push Notifications. Can be created on apple developer portal. 
 
-`environment` - Use `debug` environment for debug builds and `release` for release and TestFlight builds
+`environment` - Use `debug` environment for debug builds and `release` for release and TestFlight builds.
 
 `crypto` - CruptoProvider is a protocol, you are required to provide an implementation of two methods recoverPubKey and keccak256.
 
@@ -111,7 +111,7 @@ All clients will be initialized as soon as the Web3Inbox component is rendered f
 Emits new notify message from a dapp.
 
 ```swift
-public var notifyMessagePublisher: AnyPublisher<PushMessage, Never>
+public var notifyMessagePublisher: AnyPublisher<NotifyMessageRecord, Never>
 ```
 
 #### Subscribe Active Subscriptions
@@ -119,7 +119,15 @@ public var notifyMessagePublisher: AnyPublisher<PushMessage, Never>
 Emits a list of active subscriptions.
 
 ```swift
-public var subscriptionsPublisher: AnyPublisher<[PushSubscription], Never>
+public var subscriptionsPublisher: AnyPublisher<[NotifySubscription], Never>
+```
+
+#### Subscribe Messages for topic
+
+Emits a list of messages for specific topic.
+
+```swift
+public func messagesPublisher(topic: String) -> AnyPublisher<[NotifyMessageRecord], Never>
 ```
 
 #### Create Notify Subscription
@@ -522,7 +530,7 @@ override func didReceive(_ request: UNNotificationRequest, withContentHandler co
         let topic = bestAttemptContent.userInfo["topic"] as! String
         let ciphertext = bestAttemptContent.userInfo["blob"] as! String
         do {
-            let service = NotifyDecryptionService(groupIdentifier: "your_keychain_group_identifier")
+            let service = NotifyDecryptionService(groupIdentifier: "your_app_group_identifier")
             let pushMessage = try service.decryptMessage(topic: topic, ciphertext: ciphertext)
             bestAttemptContent.title = pushMessage.title
             bestAttemptContent.body = pushMessage.body
