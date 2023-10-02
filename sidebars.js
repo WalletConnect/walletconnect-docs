@@ -152,7 +152,7 @@ module.exports = {
             {
               type: 'category',
               label: 'Notify',
-              items: ['web3wallet/notify/installation','web3wallet/notify/usage']
+              items: ['web3wallet/notify/installation', 'web3wallet/notify/usage', 'web3wallet/notify/spam-protection']
             },
             'web3wallet/resources',
             'web3wallet/mobileLinking'
@@ -168,7 +168,7 @@ module.exports = {
             {
               type: 'category',
               label: 'Core components',
-              items: ['web3inbox/core-components/about', 'web3inbox/core-components/usage', 'web3inbox/core-components/api' ]
+              items: ['web3inbox/core-components/about', 'web3inbox/core-components/usage', 'web3inbox/core-components/api']
             },
             'web3inbox/resources',
             'web3inbox/demo'
