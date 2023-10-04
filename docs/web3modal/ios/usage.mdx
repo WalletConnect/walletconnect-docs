@@ -2,13 +2,13 @@ import CloudBanner from '../../components/CloudBanner'
 
 # Usage
 
-#### Configure Networking and Pair clients
+### Configure Networking and Pair clients
 
 Make sure that you properly configure Networking and Pair Clients first.
 
 - [Networking](../../api/core/relay.mdx)
 
-#### Initialize Web3Modal Client
+### Initialize Web3Modal Client
 
 In order to initialize a client just call a `configure` method from the Web3Modal instance wrapper
 
@@ -81,7 +81,7 @@ Otherwise you can specify the viewController to present from.
 Web3Modal.present(from: viewController)
 ```
 
-#### Subscribe for Web3Modal Publishers
+### Subscribe for Web3Modal Publishers
 
 The following publishers are available to subscribe:
 
@@ -94,10 +94,10 @@ public var sessionResponsePublisher: AnyPublisher<Response, Never>
 public var socketConnectionStatusPublisher: AnyPublisher<SocketConnectionStatus, Never>
 ```
 
-#### Sign methods
+### Sign methods
 
 Web3Modal is internally using Sign SDK and most of its method are being exposed through Web3Modal interface.
 
-#### Where to go from here
+### Where to go from here
 
 Check the Web3Modal usage in our Example Showcase app that is part of Web3Modal repository.
