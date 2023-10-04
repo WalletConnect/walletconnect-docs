@@ -1,0 +1,49 @@
+# Options
+
+### Explorer recommended wallets
+
+Allows to set default recommended wallets that are fetched from [WalletConnect Explorer](https://walletconnect.com/explorer?type=wallet). You can define a list of wallets ids you'd like to prioritize (order is respected). You can get these ids from the explorer link mentioned before by clicking on a copy icon of your desired wallet card.
+
+```swift
+Web3Modal.configure(
+    ...
+    recommendedWalletIds: [String]
+    ...
+)
+```
+
+### Explorer excluded wallets
+
+Allows to exclude wallets that are fetched from [WalletConnect Explorer](https://walletconnect.com/explorer?type=wallet). You can define an array of wallet ids you'd like to exclude. You can get these ids from the explorer link mentioned before by clicking on a copy icon of your desired wallet card.
+
+```swift
+Web3Modal.configure(
+    ...
+    excludedWalletIds: [String]
+    ...
+)
+```
+
+### Enable Installed Wallet Detection
+
+To enable Web3Modal to detect wallets installed on the device, you need to make specific changes your project Info.plist.
+
+#### For iOS:
+
+1. Open your `Info.plist` file.
+2. Locate the `<key>LSApplicationQueriesSchemes</key>` section.
+3. Add the desired wallet schemes as string entries within the `<array>`. These schemes represent the wallets you want to detect.
+4. Refer to our [Info.plist example file](https://github.com/WalletConnect/react-native-examples/blob/main/dapps/ModalUProvider/ios/ModalUProvider/Info.plist) for a detailed illustration.
+
+Example:
+```xml
+<key>LSApplicationQueriesSchemes</key>
+<array>
+  <string>metamask</string>
+  <string>trust</string>
+  <string>safe</string>
+  <string>rainbow</string>
+  <string>uniswap</string>
+  <!-- Add other wallet schemes names here -->
+</array>
+```

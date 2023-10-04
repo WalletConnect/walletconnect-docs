@@ -137,6 +137,21 @@ module.exports = {
                 }
               ]
             },
+            {
+              type: 'category',
+              label: 'iOS',
+              className: 'sidebar__logo sidebar__logo--ios',
+              items: [
+                { type: 'doc', label: 'Getting started', id: 'web3modal/ios/about' },
+                'web3modal/ios/options',
+                'web3modal/ios/usage',
+                {
+                    type: 'link',
+                    label: 'Example',
+                    href: 'https://github.com/WalletConnect/web3modal-swift/tree/develop/Example'
+                }
+              ]
+            },
             'web3modal/resources',
             'web3modal/upgrade',
             'web3modal/v2/about'
