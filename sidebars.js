@@ -17,6 +17,7 @@ module.exports = {
       collapsible: false,
       items: [
         'readme',
+        'quickstart',
         {
           type: 'category',
           label: 'Migration from v1.x',
@@ -72,7 +73,7 @@ module.exports = {
                 'web3modal/react/hooks',
                 'web3modal/react/components',
                 'web3modal/react/theming',
-                'web3modal/react/experimental',
+                'web3modal/react/experimental'
               ]
             },
             {
@@ -85,7 +86,7 @@ module.exports = {
                 'web3modal/vue/composables',
                 'web3modal/vue/components',
                 'web3modal/vue/theming',
-                'web3modal/vue/experimental',
+                'web3modal/vue/experimental'
               ]
             },
             {
@@ -98,14 +99,15 @@ module.exports = {
                 'web3modal/html/actions',
                 'web3modal/html/components',
                 'web3modal/html/theming',
-                'web3modal/html/experimental',
+                'web3modal/html/experimental'
               ]
             },
             {
               type: 'category',
               label: 'Flutter',
               className: 'sidebar__logo sidebar__logo--flutter',
-              items: [,
+              items: [
+                ,
                 { type: 'doc', label: 'Getting started', id: 'web3modal/flutter/installation' },
                 { type: 'doc', label: 'Usage', id: 'web3modal/flutter/options' },
                 { type: 'doc', label: 'Options', id: 'web3modal/flutter/custom-wallets' },
@@ -129,9 +131,9 @@ module.exports = {
                 'web3modal/android/usage',
                 'web3modal/android/actions',
                 {
-                    type: 'link',
-                    label: 'Example',
-                    href: 'https://github.com/WalletConnect/WalletConnectKotlinV2/tree/master/sample/modals/src/main/kotlin/com/walletconnect/modals'
+                  type: 'link',
+                  label: 'Example',
+                  href: 'https://github.com/WalletConnect/WalletConnectKotlinV2/tree/master/sample/modals/src/main/kotlin/com/walletconnect/modals'
                 }
               ]
             },
@@ -152,7 +154,11 @@ module.exports = {
             {
               type: 'category',
               label: 'Notify',
-              items: ['web3wallet/notify/installation', 'web3wallet/notify/usage', 'web3wallet/notify/spam-protection']
+              items: [
+                'web3wallet/notify/installation',
+                'web3wallet/notify/usage',
+                'web3wallet/notify/spam-protection'
+              ]
             },
             'web3wallet/resources',
             'web3wallet/mobileLinking'
@@ -168,7 +174,11 @@ module.exports = {
             {
               type: 'category',
               label: 'Core components',
-              items: ['web3inbox/core-components/about', 'web3inbox/core-components/usage', 'web3inbox/core-components/api']
+              items: [
+                'web3inbox/core-components/about',
+                'web3inbox/core-components/usage',
+                'web3inbox/core-components/api'
+              ]
             },
             'web3inbox/resources',
             'web3inbox/demo'
@@ -237,7 +247,7 @@ module.exports = {
                 'api/sign/wallet-usage',
                 'api/sign/smart-contract-wallet-usage'
               ]
-            },
+            }
           ]
         },
         {
@@ -351,7 +361,7 @@ module.exports = {
               href: 'https://github.com/WalletConnect/web3modal-examples/tree/main/web3modal-wagmi-html'
             }
           ]
-        },
+        }
       ]
     }
   ]
