@@ -107,11 +107,12 @@ module.exports = {
               label: 'Flutter',
               className: 'sidebar__logo sidebar__logo--flutter',
               items: [
-                'web3modal/flutter/installation',
+                ,
+                { type: 'doc', label: 'Getting started', id: 'web3modal/flutter/installation' },
+                { type: 'doc', label: 'Usage', id: 'web3modal/flutter/options' },
+                { type: 'doc', label: 'Options', id: 'web3modal/flutter/custom-wallets' },
                 'web3modal/flutter/actions',
-                'web3modal/flutter/options',
                 'web3modal/flutter/theming',
-                'web3modal/flutter/custom-wallets',
                 'web3modal/flutter/custom-chains',
                 {
                   type: 'link',
@@ -153,7 +154,11 @@ module.exports = {
             {
               type: 'category',
               label: 'Notify',
-              items: ['web3wallet/notify/installation', 'web3wallet/notify/usage']
+              items: [
+                'web3wallet/notify/installation',
+                'web3wallet/notify/usage',
+                'web3wallet/notify/spam-protection'
+              ]
             },
             'web3wallet/resources',
             'web3wallet/mobileLinking'

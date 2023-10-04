@@ -6,6 +6,10 @@
       "destination": "/:path*"
     },
     {
+      "source": "/2.0/specs/",
+      "destination": "https://specs.walletconnect.com/2.0/"
+    },
+    {
       "source": "/specs/:path*",
       "destination": "https://specs.walletconnect.com/2.0/specs/:path*"
     },

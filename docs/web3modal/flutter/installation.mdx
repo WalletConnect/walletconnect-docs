@@ -1,9 +1,11 @@
 import CloudBanner from '../../components/CloudBanner'
 
-# Installation
+# Flutter
 
 :::caution
-Web3Modal for Flutter is in alpha version. Documentation may also be inaccurate and/or incomplete.
+**The Web3Modal SDK for Flutter is currently in Alpha and is not production-ready**.
+
+It's public API and associated documentation may still see significant and breaking changes.
 :::
 
 With Web3Modal Flutter, you can easily let people interact with multiple EVM compatible wallets and blockchains.
@@ -24,7 +26,7 @@ flutter pub add web3modal_flutter
 
 Import the package:
 
-```
+```dart
 import 'package:web3modal_flutter/web3modal_flutter.dart';
 ```
 
@@ -34,7 +36,7 @@ Be sure to update the project ID and metadata with your own.
 
 ```dart
 final _w3mService = W3MService(
-  projectId: 'YOUR_PROJECT_ID',
+  projectId: '{YOUR_PROJECT_ID}',
   metadata: const PairingMetadata(
     name: 'Flutter Dapp Example',
     description: 'Flutter Dapp Example',
