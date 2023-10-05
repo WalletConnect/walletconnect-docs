@@ -1097,6 +1097,10 @@ article img {
   background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAYAAACM/rhtAAAACXBIWXMAABYlAAAWJQFJUiTwAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAHjSURBVHgBzZiPVcIwEMYPJ2CEugFu0A1kA7uBbgBOgE4ATIBMUJwAN0g3wA0+70zUGpImpTTt7717vNcmj6/J/cmFqGcATNme2Eq2E40JFpSzKdSgscBaFjjnSGOAhczh5oWGhkVk9rbWyGhoWEThEbekMSB+NlrfExzidmxTGgPG/34oZbupIxNqiXH07HvyZHJwvM/5p+J3lTVnxiYrWdnvOwOdcNdsJ88WFo45M+hcqOBGnj+iS2RDl6kV4lDmI1Zme2NRbHNqixF3RDoe2goskRaF2GiH9o3U4max4ppKVV/iMp+eG8eznEwaScRzq5SDtL5XhvT4VjAV29CAfwIR66jX4y00wF7BpEWdfe8zNOaGhiMoThhSoFSq4I7ZAqO+6ooEfd4WWFFa8tCAs/MgdHOdKlhkx26bgsXlgx+UDlmIddMAl8A9pUV66EX0aOiT8BDIyTyz9Uw8IqVG5jQMd+yTv27my4PvNAxVXZwX6OP+CekpbC3OFTRh/0ppqdgO9sOmUic3USkry7Z1rwx9M5oCRZcCHf59k9GlQAeMQn8sqSvQybuPqN6E/jv68gi6HdiRu+OTYJL8tae/wJLx9+TvECUoCrom0D3zpraapWwRGg6e0BdPMkcZkzkFRfIFK061Z74gD/kAAAAASUVORK5CYII=');
 }
 
+.image-margin {
+  margin-top: 0.5rem;
+}
+
 /* End - Sidebar */
 
 @media screen and (max-width: 1320px) {
