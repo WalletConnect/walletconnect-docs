@@ -15,6 +15,7 @@ const config = {
   favicon: 'img/favicon.ico',
   organizationName: 'walletconnect',
   projectName: 'walletconnect-docs',
+  staticDirectories: ['static'],
   scripts: [
     {
       src: 'https://plausible.io/js/plausible.js',

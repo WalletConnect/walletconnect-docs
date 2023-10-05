@@ -1,0 +1,77 @@
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
+
+# Sending Notifications
+
+Once an account is subscribed to your app's notifications you can test sending notifications to the account.
+
+We recommend testing receiving notifications at [app.web3inbox.com](https://app.web3inbox.com).
+
+To experience native push notifications, you can try one of our sample wallets:
+
+- [iOS sample wallet](https://testflight.apple.com/join/09bTAryp)
+- [Android sample wallet](https://appdistribution.firebase.dev/i/d2c86e879abd5a86)
+
+## Authentication
+
+To send a notification, you will need your `notify_api_secret` which you can find under the Secrets section of your project on [WalletConnect Cloud](https://cloud.walletconnect.com). This secret allows publishing notifications to any account subscribed to your app, so should not be published and should only be used by your app backend.
+
+You will also need your project ID.
+
+## Sending
+
+Accounts are identified by their [CAIP-10](https://github.com/ChainAgnostic/CAIPs/blob/main/CAIPs/caip-10.md) format.
+
+<Tabs queryString={'send-client'}>
+
+<TabItem value="curl" label="cURL">
+
+```bash
+curl -X POST 'https://notify.walletconnect.com/<PROJECT_ID>/notify' \
+  --header 'Content-Type: application/json' \
+  --header 'Authorization: Bearer <NOTIFY_API_SECRET>' \
+  --data '{
+    "notification": {
+      "title": "Push Notification Title",
+      "body": "Push Notification Body",
+      "icon": "https://app.example.com/icon.png",
+      "url": "https://app.example.com",
+      "type": "private"
+    },
+    "accounts": [
+      "eip155:1:0xABC123"
+    ]
+  }'
+```
+
+</TabItem>
+
+<TabItem value="javascript" label="JavaScript">
+
+```javascript
+const response = await fetch(
+  'https://notify.walletconnect.com/<PROJECT_ID>/notify',
+  {
+    method: "POST",
+    headers: {
+      Authorization: 'Bearer <NOTIFY_API_SECRET>'
+    },
+    body: JSON.stringify({
+      notification: {
+        title: "Push Notification Title",
+        body: "Push Notification Body",
+        icon: "https://app.example.com/icon.png",
+        url: "https://app.example.com",
+        type: "private"
+      },
+      accounts: [
+        "eip155:1:0xABC123"
+      ]
+    })
+  }
+);
+```
+
+</TabItem>
+
+</Tabs>

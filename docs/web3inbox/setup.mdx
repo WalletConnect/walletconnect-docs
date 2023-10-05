@@ -1,0 +1,31 @@
+import CloudBanner from '../components/CloudBanner'
+import useBaseUrl from '@docusaurus/useBaseUrl'
+
+# Setup
+
+Follow these steps to obtain a Notify API Secret and enable your domain to send notifications.
+
+For a quick start to experiment with, you can try the [gm-hackers template](https://github.com/WalletConnect/gm-hackers) and following the steps in the README.
+
+## Enable notifications
+
+<CloudBanner />
+
+1. In [WalletConnect Cloud](https://cloud.walletconnect.com) navigate to the APIs tab of your project.
+   <img className="image-margin" src={useBaseUrl('/img/w3i/1.png')} />
+2. Under the Notify API section, enter in the public domain of your app that you will use to publish notifications as the dapp URL. For example, `https://app.example.com`. Click Save.
+   <img className="image-margin" src={useBaseUrl('/img/w3i/2.png')} />
+   -> Take note of your new Notify API Secret. You will need this to publish notifications.
+   <img className="image-margin" src={useBaseUrl('/img/w3i/3.png')} />
+3. Next, you will need to host the two files on this page at the `/.well-known/` directory of your public URL.
+   - Download `did.json` (Step 2: “Download did:web”) and host it at, for example, `https://app.example.com/.well-known/did.json`
+   - Download `wc-notify-config.json` (Step 3: “Download template”) and host it at, for example, `https://app.example.com/.well-known/wc-notify-config.json`. You can customize this template to suite your app:
+     - Update the `description` to the description of your app.
+     - Provide an icon in the `icon` field.
+     - Customize any notification types in the `types` section.
+       <img className="image-margin" src={useBaseUrl('/img/w3i/4.png')} />
+4. Once these two files have been deployed, switch on the toggle switch in the Notify API section of your WalletConnect Cloud project. If the files are correctly hosted, you should see a success toast: "Notify configuration successfully verified"
+   <img className="image-margin" src={useBaseUrl('/img/w3i/5.png')} />
+   <img className="image-margin" src={useBaseUrl('/img/w3i/6.png')} />
+5. Now you are ready for accounts to subscribe to your app and send notifications to them using your Notify API Secret.
+   - Read more on [sending notifications](sending-notifications)

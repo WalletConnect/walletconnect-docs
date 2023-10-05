@@ -139,7 +139,8 @@ module.exports = {
               items: [
                 'web3wallet/notify/installation',
                 'web3wallet/notify/usage',
-                'web3wallet/notify/spam-protection'
+                'web3wallet/notify/spam-protection',
+                'web3wallet/notify/examples'
               ]
             },
             'web3wallet/resources',
@@ -153,16 +154,18 @@ module.exports = {
           collapsible: true,
           items: [
             'web3inbox/about',
+            'web3inbox/setup',
             {
               type: 'category',
               label: 'Core components',
               items: [
                 'web3inbox/core-components/about',
                 'web3inbox/core-components/usage',
-                'web3inbox/core-components/api'
+                'web3inbox/core-components/api',
+                'web3inbox/core-components/examples'
               ]
             },
-            'web3inbox/resources',
+            'web3inbox/sending-notifications',
             'web3inbox/demo'
           ]
         }
