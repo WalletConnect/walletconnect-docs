@@ -119,6 +119,17 @@ module.exports = {
                 }
               ]
             },
+            {
+              type: 'category',
+              className: 'sidebar__logo sidebar__logo--react',
+              label: 'React Native',
+              items: [
+                { type: 'doc', label: 'Getting started', id: 'web3modal/react-native/about' },
+                'web3modal/react-native/options',
+                'web3modal/react-native/hooks',
+                'web3modal/react-native/components',
+              ]
+            },
             'web3modal/resources',
             'web3modal/upgrade',
             'web3modal/v2/about'
