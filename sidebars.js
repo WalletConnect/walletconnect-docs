@@ -15,40 +15,7 @@ module.exports = {
       label: 'Introduction',
       className: 'menu_outer_list',
       collapsible: false,
-      items: [
-        'readme',
-        'quickstart',
-        {
-          type: 'category',
-          label: 'Migration from v1.x',
-          items: [
-            {
-              type: 'doc',
-              id: 'advanced/migration-from-v1.x/overview',
-              label: 'Overview'
-            },
-            {
-              type: 'category',
-              label: 'Dapps',
-              items: [
-                'advanced/migration-from-v1.x/dapps/dapps',
-                'advanced/migration-from-v1.x/dapps/dapp-checklist'
-              ]
-            },
-            {
-              type: 'category',
-              label: 'Wallets',
-              items: [
-                'advanced/migration-from-v1.x/wallets/wallets',
-                'advanced/migration-from-v1.x/wallets/wallet-checklist'
-              ]
-            },
-            'advanced/migration-from-v1.x/what-changed-from-v1.0',
-            'advanced/migration-from-v1.x/migration-faq',
-            'advanced/migration-from-v1.x/explorer-submission'
-          ]
-        }
-      ]
+      items: ['readme', 'quickstart']
     },
     {
       type: 'category',
@@ -146,9 +113,9 @@ module.exports = {
                 'web3modal/ios/options',
                 'web3modal/ios/usage',
                 {
-                    type: 'link',
-                    label: 'Example',
-                    href: 'https://github.com/WalletConnect/web3modal-swift/tree/develop/Example'
+                  type: 'link',
+                  label: 'Example',
+                  href: 'https://github.com/WalletConnect/web3modal-swift/tree/develop/Example'
                 }
               ]
             },
@@ -295,7 +262,37 @@ module.exports = {
             }
           ]
         },
-        'advanced/echo-server'
+        'advanced/echo-server',
+        {
+          type: 'category',
+          label: 'Migration from v1.x',
+          items: [
+            {
+              type: 'doc',
+              id: 'advanced/migration-from-v1.x/overview',
+              label: 'Overview'
+            },
+            {
+              type: 'category',
+              label: 'Dapps',
+              items: [
+                'advanced/migration-from-v1.x/dapps/dapps',
+                'advanced/migration-from-v1.x/dapps/dapp-checklist'
+              ]
+            },
+            {
+              type: 'category',
+              label: 'Wallets',
+              items: [
+                'advanced/migration-from-v1.x/wallets/wallets',
+                'advanced/migration-from-v1.x/wallets/wallet-checklist'
+              ]
+            },
+            'advanced/migration-from-v1.x/what-changed-from-v1.0',
+            'advanced/migration-from-v1.x/migration-faq',
+            'advanced/migration-from-v1.x/explorer-submission'
+          ]
+        }
       ]
     },
     {
