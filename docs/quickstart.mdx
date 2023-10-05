@@ -24,8 +24,8 @@ The Web3Modal SDK allows you to easily connect your Web3 dapp with wallets. It p
 We are using [create-wc-dapp](https://github.com/WalletConnect/create-wc-dapp), the official quickstart CLI for Web3Modal from WalletConnect
 
 ```bash
-npx create-wc-dapp -y
-cd my-wc-dapp
+npx create-wc-dapp@latest -y web3modal
+cd web3modal
 yarn dev
 ```
 
@@ -50,11 +50,6 @@ The default values are as follows:
       option: 'Install Dependencies',
       description: 'Whether to install dependencies after project creation',
       value: { code: 'true' }
-    },
-    {
-      option: 'Folder',
-      description: 'Folder to create the project in',
-      value: { code: 'my-wc-dapp' }
     }
   ]}
 />
