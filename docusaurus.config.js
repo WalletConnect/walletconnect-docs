@@ -39,7 +39,13 @@ const config = {
               require('@docusaurus/remark-plugin-npm2yarn'),
               {
                 sync: true,
-                converters: ['yarn', ['Bun', code => code.replace(/npm/g, 'bun')], 'pnpm']
+                converters: [
+                  'yarn',
+                  ['Bun', code => code
+                      .replace(/npm i /g, 'bun a ')
+                      .replace(/npm install /g, 'bun add ')],
+                  'pnpm'
+                ]
               }
             ]
           ]
