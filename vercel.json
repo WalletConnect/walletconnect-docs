@@ -6,12 +6,12 @@
       "destination": "/:path*"
     },
     {
-      "source": "/2.0/web3modal/v2/html/:path*",
-      "destination": "/2.0/web3modal/v2/javascript/:path*"
+      "source": "/web3modal/v2/html/:path*",
+      "destination": "/web3modal/v2/javascript/:path*"
     },
     {
-      "source": "/2.0/web3modal/html/:path*",
-      "destination": "/2.0/web3modal/javascript/:path*"
+      "source": "/web3modal/html/:path*",
+      "destination": "/web3modal/javascript/:path*"
     },
     {
       "source": "/2.0/specs/",
@@ -22,40 +22,40 @@
       "destination": "https://specs.walletconnect.com/2.0/specs/:path*"
     },
     {
-      "source": "/2.0/web3modal/v3/:path*",
-      "destination": "/2.0/web3modal/:path*"
+      "source": "/web3modal/v3/:path*",
+      "destination": "/web3modal/:path*"
     },
     {
-      "source": "/2.0/web/:path*",
-      "destination": "/2.0/:path*"
+      "source": "/web/:path*",
+      "destination": "/:path*"
     },
     {
-      "source": "/2.0/android/:path*",
-      "destination": "/2.0/:path*"
+      "source": "/android/:path*",
+      "destination": "/:path*"
     },
     {
-      "source": "/2.0/ios/:path*",
-      "destination": "/2.0/:path*"
+      "source": "/ios/:path*",
+      "destination": "/:path*"
     },
     {
-      "source": "/2.0/reactnative/:path*",
-      "destination": "/2.0/:path*"
+      "source": "/reactnative/:path*",
+      "destination": "/:path*"
     },
     {
-      "source": "/2.0/flutter/:path*",
-      "destination": "/2.0/:path*"
+      "source": "/flutter/:path*",
+      "destination": "/:path*"
     },
     {
-      "source": "/2.0/unity/:path*",
-      "destination": "/2.0/:path*"
+      "source": "/unity/:path*",
+      "destination": "/:path*"
     },
     {
       "source": "/v/1.0/:path*",
       "destination": "/:path*"
     },
     {
-      "source": "/v/2.0/:path*",
-      "destination": "/2.0/:path*"
+      "source": "/v/:path*",
+      "destination": "/:path*"
     },
     {
       "source": "/quick-start/dapps/client",
