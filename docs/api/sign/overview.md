@@ -151,7 +151,7 @@ Since `WalletConnectUnity` is a wrapper around `WalletConnectSharp`, usage of th
 
 :::
 
-Install the `WalletConnectUnity` package from the [Github repo](https://github.com/WalletConnect/WalletConnectUnity)
+Install the `WalletConnectUnity` package from the [GitHub repo](https://github.com/WalletConnect/WalletConnectUnity)
 
 Once the `WalletConnectUnity` package is imported, create a new empty Game Object in your scene. This will hold the `WCSignClient` component and other required components.
 

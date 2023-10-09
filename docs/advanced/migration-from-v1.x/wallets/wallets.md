@@ -33,11 +33,11 @@ If you were using our [WalletConnectKotlin SDK](https://github.com/WalletConnect
 
 ### React Native
 
-If you were using our [WalletConnectClient SDK](https://www.npmjs.com/package/@walletconnect/client) (or any other community SDK), you must integrate the Web3Wallet SDK for Javascript which you can find docs [here](../../../web3wallet/about.mdx) and check out the RN Examples [here](https://github.com/WalletConnect/react-native-examples).
+If you were using our [WalletConnectClient SDK](https://www.npmjs.com/package/@walletconnect/client) (or any other community SDK), you must integrate the Web3Wallet SDK for JavaScript which you can find docs [here](../../../web3wallet/about.mdx) and check out the RN Examples [here](https://github.com/WalletConnect/react-native-examples).
 
 ### Browser-based
 
-If you were using our [WalletConnectClient SDK](https://www.npmjs.com/package/@walletconnect/client) (or any other community SDK), you must integrate the Web3Wallet SDK for Javascript which you can find docs [here](../../../web3wallet/about.mdx) and check out the Web Examples [here](https://github.com/WalletConnect/web-examples).
+If you were using our [WalletConnectClient SDK](https://www.npmjs.com/package/@walletconnect/client) (or any other community SDK), you must integrate the Web3Wallet SDK for JavaScript which you can find docs [here](../../../web3wallet/about.mdx) and check out the Web Examples [here](https://github.com/WalletConnect/web-examples).
 
 ### Unity
 
