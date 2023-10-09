@@ -59,7 +59,7 @@ module.exports = {
             {
               type: 'category',
               className: 'sidebar__logo sidebar__logo--javascript',
-              label: 'Javascript',
+              label: 'JavaScript',
               items: [
                 { type: 'doc', label: 'Getting started', id: 'web3modal/javascript/about' },
                 'web3modal/javascript/options',
@@ -360,7 +360,7 @@ module.exports = {
         },
         {
           type: 'category',
-          label: 'Javascript',
+          label: 'JavaScript',
           className: 'sidebar__logo sidebar__logo--javascript',
           items: [
             'web3modal/v2/javascript/wagmi/installation',

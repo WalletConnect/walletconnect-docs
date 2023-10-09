@@ -52,7 +52,7 @@ This can be resolved by clearing local storage cache and refreshing. This is sho
 `Missing or invalid. request() method: eth_call` or `Missing or invalid. request() method: eth_getBalance`
 This error was fixed and relevant to those using < wagmi `v0.12.16` and ethers `5.7.2`. It usually occurs when getting balance through the provider or `useContract` wagmi hook. Please upgrade to `^v0.12.16`in order to resolve this error.
 
-If you are still facing issues with the above or different issues, feel free to search our [Github Discussions](https://github.com/orgs/WalletConnect/discussions) or file a ticket [here](https://github.com/orgs/WalletConnect/discussions/new?category=v1-v2-migration-support)
+If you are still facing issues with the above or different issues, feel free to search our [GitHub Discussions](https://github.com/orgs/WalletConnect/discussions) or file a ticket [here](https://github.com/orgs/WalletConnect/discussions/new?category=v1-v2-migration-support)
 
 ### Testing Process
 
