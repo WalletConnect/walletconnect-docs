@@ -18,7 +18,7 @@ import PlatformTabItem from '../components/PlatformTabItem'
 
 <PlatformTabs
 	groupId="w3m"
-	activeOptions={["react","html"]}
+	activeOptions={["react","javascript"]}
 >
 <PlatformTabItem value="react">
 
@@ -30,7 +30,7 @@ npm install @web3modal/wagmi
 ```
 
 </PlatformTabItem>
-<PlatformTabItem value="html">
+<PlatformTabItem value="javascript">
 
 To upgrade from Web3Modal v2 to v3 start by removing Web3Modal v2 dependencies `@web3modal/ethereum` and `@web3modal/html`,
 while keeping `@wagmi/core` and `viem` installed. Now you can install Web3Modal v3 library
@@ -46,7 +46,7 @@ npm install @web3modal/wagmi
 
 <PlatformTabs
 	groupId="w3m"
-	activeOptions={["react","html"]}
+	activeOptions={["react","javascript"]}
 >
 <PlatformTabItem value="react">
 
@@ -222,7 +222,7 @@ export default function App() {
 </Tabs>
 
 </PlatformTabItem>
-<PlatformTabItem value="html">
+<PlatformTabItem value="javascript">
 
 Start by importing Web3Modal and wagmi packages, then create wagmi config using your own settings or our default presets as shown below. Finally, pass wagmi config to Web3Modal as ethereumClient.
 
@@ -366,7 +366,7 @@ Finally, pass `wagmiConfig` to `createWeb3Modal`
 
 <PlatformTabs
 	groupId="w3m"
-	activeOptions={["react","html"]}
+	activeOptions={["react","javascript"]}
 >
 <PlatformTabItem value="react">
 
@@ -388,7 +388,7 @@ function HomePage() {
 Learn more about Web3Modal v3 [here](./react/about.mdx)
 
 </PlatformTabItem>
-<PlatformTabItem value="html">
+<PlatformTabItem value="javascript">
 
 
 Use your own button with to open the modal
@@ -406,7 +406,7 @@ document.getElementById('my-button').addEventListener('click', () => {
 <button id="my-button">Connect Wallet</button>
 ```
 
-Learn more about Web3Modal v3 HTML [here](./html/about.mdx)
+Learn more about Web3Modal v3 Javascript [here](./javascript/about.mdx)
 
 </PlatformTabItem>
 </PlatformTabs>

@@ -58,15 +58,15 @@ module.exports = {
             },
             {
               type: 'category',
-              className: 'sidebar__logo sidebar__logo--html',
-              label: 'HTML',
+              className: 'sidebar__logo sidebar__logo--javascript',
+              label: 'Javascript',
               items: [
-                { type: 'doc', label: 'Getting started', id: 'web3modal/html/about' },
-                'web3modal/html/options',
-                'web3modal/html/actions',
-                'web3modal/html/components',
-                'web3modal/html/theming',
-                'web3modal/html/experimental'
+                { type: 'doc', label: 'Getting started', id: 'web3modal/javascript/about' },
+                'web3modal/javascript/options',
+                'web3modal/javascript/actions',
+                'web3modal/javascript/components',
+                'web3modal/javascript/theming',
+                'web3modal/javascript/experimental'
               ]
             },
             {
@@ -360,16 +360,16 @@ module.exports = {
         },
         {
           type: 'category',
-          label: 'HTML',
-          className: 'sidebar__logo sidebar__logo--html',
+          label: 'Javascript',
+          className: 'sidebar__logo sidebar__logo--javascript',
           items: [
-            'web3modal/v2/html/wagmi/installation',
-            'web3modal/v2/html/wagmi/components',
-            'web3modal/v2/html/wagmi/actions',
-            'web3modal/v2/html/wagmi/options',
-            'web3modal/v2/html/wagmi/theming',
-            'web3modal/v2/html/wagmi/custom-wallets',
-            'web3modal/v2/html/wagmi/custom-chains',
+            'web3modal/v2/javascript/wagmi/installation',
+            'web3modal/v2/javascript/wagmi/components',
+            'web3modal/v2/javascript/wagmi/actions',
+            'web3modal/v2/javascript/wagmi/options',
+            'web3modal/v2/javascript/wagmi/theming',
+            'web3modal/v2/javascript/wagmi/custom-wallets',
+            'web3modal/v2/javascript/wagmi/custom-chains',
             {
               type: 'link',
               label: 'Example',

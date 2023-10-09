@@ -31,6 +31,10 @@ const PLATFORM_MAP = [
     label: 'HTML'
   },
   {
+    value: 'javascript',
+    label: 'Javascript'
+  },
+  {
     value: 'react-native',
     label: 'React Native'
   },
