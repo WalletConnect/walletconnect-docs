@@ -6,6 +6,14 @@
       "destination": "/:path*"
     },
     {
+      "source": "/2.0/web3modal/v2/html/:path*",
+      "destination": "/2.0/web3modal/v2/javascript/:path*"
+    },
+    {
+      "source": "/2.0/web3modal/html/:path*",
+      "destination": "/2.0/web3modal/javascript/:path*"
+    },
+    {
       "source": "/2.0/specs/",
       "destination": "https://specs.walletconnect.com/2.0/"
     },
