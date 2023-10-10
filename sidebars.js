@@ -141,7 +141,8 @@ module.exports = {
               ]
             },
             'web3wallet/resources',
-            'web3wallet/mobileLinking'
+            'web3wallet/mobileLinking',
+            'web3wallet/namespaces'
           ]
         },
         {
