@@ -55,7 +55,7 @@ You can start the Web3Modal configuration by using either the **default** or **a
 
 Default mode will implement WalletConnect, Browser Wallets (injected) and Coinbase options in addition to Wagmi's public clients and [WalletConnect's provider](../cloud/blockchain-api.md).
 :::note
-Make sure to set your configuration outside the App component to avoid unwanted rerenders.
+Make sure to set your configuration outside the App component to avoid unwanted rerenders. Or use `useMemo`/`useEffect` hooks to generate configuration and create Web3Modal only once.
 :::
 
 <Tabs>
