@@ -12,8 +12,8 @@ const Banner = () => {
           WalletConnect provides developer toolkits empowering you to build engaging web3
           experiences.
         </p>
-        <Link to="/web3modal/about">
-          Get started
+        <Link to="/quickstart">
+          QuickStart
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
