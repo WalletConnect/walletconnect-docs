@@ -134,10 +134,10 @@ module.exports = {
               type: 'category',
               label: 'Notify',
               items: [
-                'web3wallet/notify/installation',
-                'web3wallet/notify/usage',
-                'web3wallet/notify/spam-protection',
-                'web3wallet/notify/examples'
+                'web3wallet/notify-api/installation',
+                'web3wallet/notify-api/usage',
+                'web3wallet/notify-api/spam-protection',
+                'web3wallet/notify-api/examples'
               ]
             },
             'web3wallet/resources',
