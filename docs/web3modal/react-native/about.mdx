@@ -25,7 +25,7 @@ npm install @web3modal/wagmi-react-native wagmi viem
 Additionally add these extra packages to help with async storage, polyfills, and SVG's.
 
 ```bash npm2yarn
-npm install @react-native-async-storage/async-storage react-native-get-random-values react-native-svg @react-native-community/netinfo
+npm install @react-native-async-storage/async-storage react-native-get-random-values react-native-svg react-native-modal @react-native-community/netinfo
 ```
 
 On iOS, use CocoaPods to add the native modules to your project:
@@ -67,7 +67,6 @@ const wagmiConfig = defaultWagmiConfig({ chains, projectId, metadata });
 createWeb3Modal({ 
   projectId,
   chains,
-  metadata,
   wagmiConfig
 })
 
