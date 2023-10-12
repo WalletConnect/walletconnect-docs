@@ -40,7 +40,6 @@ module.exports = {
                 'web3modal/react/hooks',
                 'web3modal/react/components',
                 'web3modal/react/theming',
-                'web3modal/react/experimental'
               ]
             },
             {
@@ -53,20 +52,18 @@ module.exports = {
                 'web3modal/vue/composables',
                 'web3modal/vue/components',
                 'web3modal/vue/theming',
-                'web3modal/vue/experimental'
               ]
             },
             {
               type: 'category',
-              className: 'sidebar__logo sidebar__logo--html',
-              label: 'HTML',
+              className: 'sidebar__logo sidebar__logo--javascript',
+              label: 'JavaScript',
               items: [
-                { type: 'doc', label: 'Getting started', id: 'web3modal/html/about' },
-                'web3modal/html/options',
-                'web3modal/html/actions',
-                'web3modal/html/components',
-                'web3modal/html/theming',
-                'web3modal/html/experimental'
+                { type: 'doc', label: 'Getting started', id: 'web3modal/javascript/about' },
+                'web3modal/javascript/options',
+                'web3modal/javascript/actions',
+                'web3modal/javascript/components',
+                'web3modal/javascript/theming',
               ]
             },
             {
@@ -148,13 +145,15 @@ module.exports = {
               type: 'category',
               label: 'Notify',
               items: [
-                'web3wallet/notify/installation',
-                'web3wallet/notify/usage',
-                'web3wallet/notify/spam-protection'
+                'web3wallet/notify-api/installation',
+                'web3wallet/notify-api/usage',
+                'web3wallet/notify-api/spam-protection',
+                'web3wallet/notify-api/examples'
               ]
             },
             'web3wallet/resources',
-            'web3wallet/mobileLinking'
+            'web3wallet/mobileLinking',
+            'web3wallet/namespaces'
           ]
         },
         {
@@ -164,16 +163,18 @@ module.exports = {
           collapsible: true,
           items: [
             'web3inbox/about',
+            'web3inbox/domain-setup',
             {
               type: 'category',
-              label: 'Core components',
+              label: 'Frontend Integration',
               items: [
-                'web3inbox/core-components/about',
-                'web3inbox/core-components/usage',
-                'web3inbox/core-components/api'
+                'web3inbox/frontend-integration/about',
+                'web3inbox/frontend-integration/usage',
+                'web3inbox/frontend-integration/api',
+                'web3inbox/frontend-integration/examples'
               ]
             },
-            'web3inbox/resources',
+            'web3inbox/sending-notifications',
             'web3inbox/demo'
           ]
         }
@@ -228,7 +229,7 @@ module.exports = {
             },
             {
               type: 'category',
-              label: 'Notify',
+              label: 'Notify API',
               items: ['api/notify/about', 'api/notify/usage']
             },
             {
@@ -368,16 +369,16 @@ module.exports = {
         },
         {
           type: 'category',
-          label: 'HTML',
-          className: 'sidebar__logo sidebar__logo--html',
+          label: 'JavaScript',
+          className: 'sidebar__logo sidebar__logo--javascript',
           items: [
-            'web3modal/v2/html/wagmi/installation',
-            'web3modal/v2/html/wagmi/components',
-            'web3modal/v2/html/wagmi/actions',
-            'web3modal/v2/html/wagmi/options',
-            'web3modal/v2/html/wagmi/theming',
-            'web3modal/v2/html/wagmi/custom-wallets',
-            'web3modal/v2/html/wagmi/custom-chains',
+            'web3modal/v2/javascript/wagmi/installation',
+            'web3modal/v2/javascript/wagmi/components',
+            'web3modal/v2/javascript/wagmi/actions',
+            'web3modal/v2/javascript/wagmi/options',
+            'web3modal/v2/javascript/wagmi/theming',
+            'web3modal/v2/javascript/wagmi/custom-wallets',
+            'web3modal/v2/javascript/wagmi/custom-chains',
             {
               type: 'link',
               label: 'Example',

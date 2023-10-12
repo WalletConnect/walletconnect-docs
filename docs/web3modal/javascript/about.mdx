@@ -2,11 +2,11 @@ import CloudBanner from '../../components/CloudBanner'
 import Tabs from '@theme/Tabs'
 import TabItem from '@theme/TabItem'
 
-# HTML
+# JavaScript
 
 ## Introduction
 
-With Web3Modal HTML we work with the [@wagmi/core](https://wagmi.sh/core/getting-started) library which contains everything you need to start working with Ethereum. You can sign messages, interact with smart contracts, and much more.
+With Web3Modal JavaScript we work with the [@wagmi/core](https://wagmi.sh/core/getting-started) library which contains everything you need to start working with Ethereum. You can sign messages, interact with smart contracts, and much more.
 
 <CloudBanner />
 
@@ -82,7 +82,7 @@ Start by importing `createWeb3Modal`, `walletConnectProvider` and wagmi packages
 Finally, pass wagmi config to `createWeb3Modal`.
 
 ```ts
-import { createWeb3Modal, walletConnectProvider } from '@web3modal/wagmi'
+import { createWeb3Modal, walletConnectProvider, EIP6963Connector } from '@web3modal/wagmi'
 
 import { configureChains, createConfig } from '@wagmi/core'
 import { mainnet } from '@wagmi/core/chains'
@@ -111,6 +111,7 @@ const wagmiConfig = createConfig({
   autoConnect: true,
   connectors: [
     new WalletConnectConnector({ chains, options: { projectId, showQrModal: false, metadata } }),
+    new EIP6963Connector({ chains }),
     new InjectedConnector({ chains, options: { shimDisconnect: true } }),
     new CoinbaseWalletConnector({ chains, options: { appName: metadata.name } })
   ],

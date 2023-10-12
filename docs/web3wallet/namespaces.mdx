@@ -1,0 +1,60 @@
+import PlatformTabs from '../components/PlatformTabs'
+import PlatformTabItem from '../components/PlatformTabItem'
+
+# Namespaces
+
+## What are Namespaces?
+
+The WalletConnect v2.0 protocol was designed with a better web3 end-user experience in mind, with the goal of being chain-, event-, method-, and even wallet-agnostic. To achieve this, WalletConnect v2.0 exposes a developer-friendly abstraction called [“namespaces”](https://docs.walletconnect.com/advanced/glossary#namespaces), designed in accordance with [CAIP-25](https://github.com/ChainAgnostic/CAIPs/blob/main/CAIPs/caip-25.md).
+
+During the WalletConnect v2.0 migration, many apps opted to require all of the most critical chains, methods, and events **at first connection** (i.e. required namespaces), leaving others as optional for end user flexibility (i.e. optional namespaces). While this implementation works well for many wallets, it creates challenges for others. This includes smart contract wallets like Safe as well as non-smart contract wallets that also run on only one chain at a time as a matter of design.
+
+## Testing Your Wallet's Implementation
+
+_Updated October 10, 2023_
+
+If you are a wallet that has implemented WalletConnect's Web3Wallet SDK, we highly recommend for you to test your wallet's implementation of [“namespaces”](https://docs.walletconnect.com/advanced/glossary#namespaces) immediately. Testing only takes a few minutes and is extremely important as it may impact your wallet's ability to connect with apps.
+
+## How to Test
+
+Simply connect your wallet to our example app here: https://se-sdk-dapp.vercel.app/.
+
+If you can connect, it is a good indicator that your wallet correctly supports namespaces. Hooray - there’s nothing for you to do!
+
+If you can’t connect, we recommend updating your wallet as soon as possible by following the steps outlined below.
+
+## Updating Your Wallet's Namespaces Implementation
+
+Ensure you are leveraging our [namespace builder util tool](https://docs.walletconnect.com/web3wallet/wallet-usage#namespace-builder), which does namespace parsing for you and allows your wallet to handle all possible namespace scenarios that apps may have as supported by [CAIP-25](https://github.com/ChainAgnostic/CAIPs/blob/main/CAIPs/caip-25.md). You should also support the latest version of the Web3Wallet SDK as indicated below:
+
+- Swift: 1.8.6
+- Kotlin: BOM-1.17.0
+- JavaScript: ^1.9.1
+
+If you choose not to leverage our namespace builder (**not recommended**) or if it is not available on your platform of choice, ensure at a minimum that your wallet can handle the following common usage patterns:
+
+### Case No. 1 - Recommended Default for All Apps
+
+- requiredNamespace is empty / undefined
+- optionalNamespace is defined
+
+### Case No. 2
+
+- requiredNamespace is defined
+- optionalNamespace is defined
+
+### Case No. 3
+
+- requiredNamespace is defined
+- optionalNamespace is empty / undefined
+
+### Case No. 4
+
+- requiredNamespace is empty / undefined
+- optionalNamespace is empty / undefined
+
+And that's it! By simply following the steps above, your wallet should now support all scenarios in regards to namespaces.
+
+## Need Technical Support?
+
+If you require technical support along the way, please drop a message on the [WalletConnect GitHub](https://github.com/orgs/WalletConnect/discussions/categories/v1-v2-migration-support) and our team will get back to you as soon as possible.

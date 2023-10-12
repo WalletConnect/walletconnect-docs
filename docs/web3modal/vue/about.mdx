@@ -64,8 +64,8 @@ Finally, pass wagmi config to `createWeb3Modal`.
 
 ```html
 <script setup lang="ts">
-  import { walletConnectProvider } from '@web3modal/wagmi'
   import { createWeb3Modal } from '@web3modal/wagmi/vue'
+  import { walletConnectProvider, EIP6963Connector } from '@web3modal/wagmi'
 
   import { configureChains, createConfig } from '@wagmi/core'
   import { mainnet } from '@wagmi/core/chains'
@@ -94,6 +94,7 @@ Finally, pass wagmi config to `createWeb3Modal`.
     autoConnect: true,
     connectors: [
       new WalletConnectConnector({ chains, options: { projectId, showQrModal: false, metadata } }),
+      new EIP6963Connector({ chains }),
       new InjectedConnector({ chains, options: { shimDisconnect: true } }),
       new CoinbaseWalletConnector({ chains, options: { appName: metadata.name } })
     ],

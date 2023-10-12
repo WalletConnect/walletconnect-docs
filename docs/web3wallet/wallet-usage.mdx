@@ -122,6 +122,17 @@ Web3Wallet web3Wallet = await Web3Wallet.createInstance(
 
 <PlatformTabItem value="react-native">
 
+:::info Note
+
+`@walletconnect/react-native-compat` must be installed and imported before any `@walletconnect/*` dependencies for proper React Native polyfills.
+
+```ts
+import '@walletconnect/react-native-compat'
+// Other imports
+```
+
+:::
+
 Create a new instance from `Core` and initialize it with your `projectId`. Next, create a Web3Wallet instance by calling `init` on `Web3Wallet`. Passing in the options object containing metadata about the app.
 
 In this code example, we wrapped it in a `createWeb3Wallet` function as this will be easier to call from your `App.tsx` or an initialization function as seen [here.](https://github.com/WalletConnect/react-native-examples/blob/main/wallets/rn_cli_wallet_068_5/src/utils/Web3WalletClient.ts)

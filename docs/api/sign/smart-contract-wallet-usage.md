@@ -7,7 +7,7 @@ import PlatformTabItem from '../../components/PlatformTabItem'
 # Smart Contract Wallet Usage
 
 :::info
-This section is limited to just for Web/Javascript at the present moment
+This section is limited to just for Web/JavaScript at the present moment
 :::
 
 Smart Contract wallets like [Argent](https://argent.gitbook.io/argent/wallet-connect-and-argent) are fully supported by the WalletConnect protocol.

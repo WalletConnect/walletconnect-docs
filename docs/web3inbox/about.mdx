@@ -9,15 +9,11 @@ import walletNative from '../../static/assets/home/walletNative.png'
 Web3Inbox is in alpha development
 :::
 
-The Web3Inbox SDK provides a toolkit for integrating web3 communications messaging features into dapps. It utilizes WalletConnect's Notify and Chat APIs to support app notifications and wallet-to-wallet messaging, enhancing user interaction and feature availability.
+The Web3Inbox SDK provides a toolkit for integrating Web3 notification features into apps.
 
-The Web3Inbox SDK offers tools to incorporate web3 messaging capabilities into dapps. It leverages WalletConnect's Notify and Chat APIs for dapp notifications and direct messaging between wallets.
+This SDK utilizes WalletConnect's Notify API and is designed for Web3 scenarios, providing event-based notifications for activities like DAO votes, DeFi transaction alerts, and updates for NFT holders. Apps can send notifications to subscribed accounts, and users can receive and view their notifications in a supporting wallet, in the Web3Inbox.com App, or in the app's frontend. Users can also discover Notify-compatible apps in their wallet or the Web3Inbox.com app to subscribe to.
 
-Notify is designed for web3 scenarios, providing event-based notifications for activities like DAO votes, DeFi transaction alerts, and updates for NFT holders.
-
-Chat facilitates direct messaging between wallets, support chats for dapps, and interactions with automated bots.
-
-![Web3Inbox](/img/web3inbox.png)
+The Web3Inbox SDK is not to be confused with the [Web3Inbox.com App](https://app.web3inbox.com) which allows users to receive and manage their notifications from all apps, as they would in a wallet.
 
 ## QuickStart
 
@@ -28,42 +24,43 @@ Chat facilitates direct messaging between wallets, support chats for dapps, and 
   }}
   items={[
     {
-      name: 'Core Components',
+      name: 'Frontend Integration',
       description: 'For a fully-customized Web3Inbox experience.',
       icon: w3iLogo,
-      href: './core-components/about'
+      href: './frontend-integration/about'
     }
   ]}
 />
 
 ## Use Cases
 
-### Dapp Notifications
-
-Dapps can send web3-native messages directly to wallets with device push notifications. Reach users instantly with real-time notifications such as DAO proposals, token launches, NFT drops, and more.
-
-### Wallet Messaging
-
-Enable users to chat and transact with any wallet securely via wallet-wallet encrypted, author-authenticated messaging.
-
-### Dapp Support & Messaging
-
-Improve customer relationships with 1-1 support chats and reach your users even when they’re offline
+Apps can send web3-native messages directly to wallets with device push notifications. Reach users instantly with real-time notifications such as DAO proposals, price changes, token launches, and more.
 
 ## Features
 
 Some of the key features of the Web3Inbox SDK include:
 
-- **E2E encryption:** Messages that run through the WalletConnect protocol are end-to-end encrypted, always.
-- **Device push notifications.**
-- **Notifications history:** Messages published through the relay server are stored.
+- **Device push notifications:** Push notifications to the user's native wallet.
+- **Notifications history:** Messages are stored and can be accessed from any device.
 - **Spam protection/subscription control.**
+
+## How do users receive notifications?
+
+Users can subscribe to and receive notifications in several ways:
+- Natively in their wallet if the wallet supports the Web3Inbox SDK.
+  - You can also test this with one of our sample wallets:
+    - [iOS sample wallet](https://testflight.apple.com/join/09bTAryp)
+    - [Android sample wallet](https://appdistribution.firebase.dev/i/d2c86e879abd5a86)
+- In your app's frontend using our [frontend SDK](frontend-integration/about)
+- In [Web3Inbox.com](https://app.web3inbox.com) App
 
 ## Getting Started
 
-Web3Inbox can be integrated with the following approach:
+Web3Inbox can be added to your app in a few steps:
 
-- [Core components](core-components/about): For a fully-customized experience. Bring-your-own components.
+- [Setup your domain](domain-setup) to send authenticated notifications.
+- Optionally, allow users to subscribe to notifications in your app frontend with our [frontend SDK](frontend-integration/about).
+- Finally, implement [sending notifications](sending-notifications) from your backend.
 
 ## Try it out
 
