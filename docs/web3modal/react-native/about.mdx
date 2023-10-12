@@ -12,14 +12,14 @@ It's public API and associated documentation may still see significant and break
 
 ## Introduction
 
-With Web3Modal React Native, we work with the [Viem](https://viem.sh) library, which is a TypeScript Interface for Ethereum that provides low-level stateless primitives for interacting with Ethereum. You can sign messages, interact with smart contracts, and much more.
+With Web3Modal React Native, we work with the [Wagmi](https://wagmi.sh) library which is a collection of React Hooks to make your dapp development flow easier. You can sign messages, interact with smart contracts, and much more.
 
 <CloudBanner />
 
 ## Installation
 
 ```bash npm2yarn
-npm install @web3modal/viem-react-native viem
+npm install @web3modal/wagmi-react-native wagmi viem
 ```
 
 Additionally add these extra packages to help with async storage, polyfills, and SVG's.
@@ -36,12 +36,13 @@ npx pod-install
 
 ## Implementation
 
-Start by importing `createWeb3Modal`, and viem packages, then create your configs as shown below.
+Start by importing `createWeb3Modal`, and wagmi packages, then create your configs as shown below.
 Finally, pass your configuration to `createWeb3Modal`.
 
 ```tsx
-import { createWeb3Modal, Web3Modal } from '@web3modal/viem-react-native'
-import { mainnet, polygon, arbitrum } from 'viem/chains';
+import { createWeb3Modal, defaultWagmiConfig, Web3Modal } from '@web3modal/wagmi-react-native'
+import { WagmiConfig } from 'wagmi';
+import { mainnet, polygon, arbitrum } from 'wagmi/chains';
 
 // 1. Get projectId
 const projectId = 'YOUR_PROJECT_ID'
@@ -60,18 +61,22 @@ const metadata = {
 
 const chains = [mainnet, polygon, arbitrum]
 
+const wagmiConfig = defaultWagmiConfig({ chains, projectId, metadata });
+
 // 3. Create modal
 createWeb3Modal({ 
   projectId,
   chains,
-  metadata
+  metadata,
+  wagmiConfig
 })
 
 export default function App() {
   return (
-    
-    // Rest of your app...
-    <Web3Modal />
+    <WagmiConfig config={wagmiConfig}>
+      // Rest of your app...
+      <Web3Modal />
+    </WagmiConfig>
   )
 }
 ```
@@ -85,7 +90,7 @@ To open Web3Modal you can use our **default** button component or build your own
 You can use default components to open the modal
 
 ```tsx
-import { W3mButton } from '@web3modal/viem-react-native'
+import { W3mButton } from '@web3modal/wagmi-react-native'
 
 export default function ConnectView() {
   return (
@@ -105,7 +110,7 @@ You can trigger the modal by calling the `open` function from `useWeb3Modal` hoo
 
 ```tsx
 import { Pressable, Text } from 'react-native';
-import { useWeb3Modal } from '@web3modal/viem-react-native'
+import { useWeb3Modal } from '@web3modal/wagmi-react-native'
 
 export default function ConnectView() {
   const { open } = useWeb3Modal()

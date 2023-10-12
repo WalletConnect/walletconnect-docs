@@ -8,7 +8,7 @@ import Button from '../../components/button'
 Control the modal with the `useWeb3Modal` hook
 
 ```ts
-import { useWeb3Modal } from '@web3modal/viem-react-native'
+import { useWeb3Modal } from '@web3modal/wagmi-react-native'
 
 export default function Component() {
 
@@ -61,7 +61,7 @@ List of views you can select
 Get the current value of the modal's state
 
 ```ts
-import { useWeb3ModalState } from '@web3modal/viem-react-native'
+import { useWeb3ModalState } from '@web3modal/wagmi-react-native'
 ```
 
 ```ts
@@ -82,32 +82,54 @@ The modal state consists of two reactive values:
       variable: { code: 'selectedNetworkId' },
       description: 'The current chain id selected by the user',
       type: { code: 'number' }
-    },
-    {
-      variable: { code: 'isConnected' },
-      description: 'The current state of the connection',
-      type: { code: 'boolean' }
-    },
-    {
-      variable: { code: 'address' },
-      description: 'The address of the wallet (if connected)',
-      type: { code: 'string' }
     }
   ]}
 />
 
+## Use wagmi hooks
 
-## useAccount
+You can use [Wagmi hooks](https://wagmi.sh/react/hooks/useAccount) to sign messages, interact with smart contracts, and much more.
+
+### useAccount
 
 Hook for accessing account data and connection status.
 
 ```tsx
-import { useAccount } from '@web3modal/viem-react-native'
+import { Text } from 'react-native'
+import { useAccount } from 'wagmi'
 
 function App() {
-  const { address, isConnected } = useAccount()
+  const { address, isConnecting, isDisconnected } = useAccount()
 
-  if (!isConnected) return <Text>Not connected</Text>
+  if (isConnecting) return <Text>Connecting…</Text>
+  if (isDisconnected) return <Text>Disconnected</Text>
   return <Text>{address}</Text>
 }
 ```
+
+### useSignMessage
+
+Hook for signing messages with connected account.
+
+```tsx
+import { View, Text, Pressable } from 'react-native'
+import { useSignMessage } from 'wagmi'
+
+function App() {
+  const { data, isError, isLoading, isSuccess, signMessage } = useSignMessage({
+    message: 'gm wagmi frens'
+  })
+
+  return (
+    <View>
+      <Pressable disabled={isLoading} onPress={() => signMessage()}>
+        Sign message
+      </Pressable>
+      {isSuccess && <Text>Signature: {data}</Text>}
+      {isError && <Text>Error signing message</Text>}
+    </View>
+  )
+}
+```
+
+<Button name="Learn More" url="https://wagmi.sh/react/hooks/useAccount" />
