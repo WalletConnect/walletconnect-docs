@@ -134,10 +134,10 @@ module.exports = {
               type: 'category',
               label: 'Notify',
               items: [
-                'web3wallet/notify/installation',
-                'web3wallet/notify/usage',
-                'web3wallet/notify/spam-protection',
-                'web3wallet/notify/examples'
+                'web3wallet/notify-api/installation',
+                'web3wallet/notify-api/usage',
+                'web3wallet/notify-api/spam-protection',
+                'web3wallet/notify-api/examples'
               ]
             },
             'web3wallet/resources',
@@ -152,15 +152,15 @@ module.exports = {
           collapsible: true,
           items: [
             'web3inbox/about',
-            'web3inbox/setup',
+            'web3inbox/domain-setup',
             {
               type: 'category',
-              label: 'Core components',
+              label: 'Frontend Integration',
               items: [
-                'web3inbox/core-components/about',
-                'web3inbox/core-components/usage',
-                'web3inbox/core-components/api',
-                'web3inbox/core-components/examples'
+                'web3inbox/frontend-integration/about',
+                'web3inbox/frontend-integration/usage',
+                'web3inbox/frontend-integration/api',
+                'web3inbox/frontend-integration/examples'
               ]
             },
             'web3inbox/sending-notifications',
@@ -218,7 +218,7 @@ module.exports = {
             },
             {
               type: 'category',
-              label: 'Notify',
+              label: 'Notify API',
               items: ['api/notify/about', 'api/notify/usage']
             },
             {

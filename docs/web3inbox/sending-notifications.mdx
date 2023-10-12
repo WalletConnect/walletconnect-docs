@@ -3,48 +3,24 @@ import TabItem from '@theme/TabItem'
 
 # Sending Notifications
 
-Once an account is subscribed to your app's notifications you can test sending notifications to the account.
+Once an account is subscribed to your app's notifications you can test sending notifications to the account. User can subscribe in your app directly with [Frontend Integration](frontend-integration/about), or with one of the below testing options.
 
-We recommend testing receiving notifications at [app.web3inbox.com](https://app.web3inbox.com).
-
-To experience native push notifications, you can try one of our sample wallets:
+We recommend testing notifications with the [Web3Inbox.com App](https://app.web3inbox.com). To experience native push notifications, you can try one of our sample wallets:
 
 - [iOS sample wallet](https://testflight.apple.com/join/09bTAryp)
 - [Android sample wallet](https://appdistribution.firebase.dev/i/d2c86e879abd5a86)
 
 ## Authentication
 
-To send a notification, you will need your `notify_api_secret` which you can find under the Secrets section of your project on [WalletConnect Cloud](https://cloud.walletconnect.com). This secret allows publishing notifications to any account subscribed to your app, so should not be published and should only be used by your app backend.
+To send a notification, you will need your Notify API Secret and project ID.
 
-You will also need your project ID.
+You can find the Notify API Secret under the Secrets section of your project on [WalletConnect Cloud](https://cloud.walletconnect.com). Follow steps on the [Domain Setup](domain-setup) page to configure this. This secret allows publishing notifications to any account subscribed to your app, so should not be published and should only be used by your app backend.
 
 ## Sending
 
 Accounts are identified by their [CAIP-10](https://github.com/ChainAgnostic/CAIPs/blob/main/CAIPs/caip-10.md) format.
 
 <Tabs queryString={'send-client'}>
-
-<TabItem value="curl" label="cURL">
-
-```bash
-curl -X POST 'https://notify.walletconnect.com/<PROJECT_ID>/notify' \
-  --header 'Content-Type: application/json' \
-  --header 'Authorization: Bearer <NOTIFY_API_SECRET>' \
-  --data '{
-    "notification": {
-      "title": "Push Notification Title",
-      "body": "Push Notification Body",
-      "icon": "https://app.example.com/icon.png",
-      "url": "https://app.example.com",
-      "type": "private"
-    },
-    "accounts": [
-      "eip155:1:0xABC123"
-    ]
-  }'
-```
-
-</TabItem>
 
 <TabItem value="javascript" label="JavaScript">
 
@@ -58,18 +34,38 @@ const response = await fetch(
     },
     body: JSON.stringify({
       notification: {
-        title: "Push Notification Title",
-        body: "Push Notification Body",
-        icon: "https://app.example.com/icon.png",
-        url: "https://app.example.com",
-        type: "private"
+        type: "private",
+        title: "Notification Title",
+        body: "Notification body",
+        icon: "https://app.example.com/icon.png", // optional
+        url: "https://app.example.com", // optional
       },
       accounts: [
-        "eip155:1:0xABC123"
+        "eip155:1:0xABC123" // CAIP-10 account ID
       ]
     })
   }
 );
+```
+
+</TabItem>
+
+<TabItem value="curl" label="cURL">
+
+```bash
+curl -X POST 'https://notify.walletconnect.com/<PROJECT_ID>/notify' \
+  --header 'Content-Type: application/json' \
+  --header 'Authorization: Bearer <NOTIFY_API_SECRET>' \
+  --data '{
+    "notification": {
+      "type": "private",
+      "title": "Notification Title",
+      "body": "Notification body"
+    },
+    "accounts": [
+      "eip155:1:0xABC123"
+    ]
+  }'
 ```
 
 </TabItem>
