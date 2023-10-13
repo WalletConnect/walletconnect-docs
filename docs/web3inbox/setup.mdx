@@ -1,11 +1,9 @@
 import CloudBanner from '../components/CloudBanner'
 import useBaseUrl from '@docusaurus/useBaseUrl'
 
-# Domain Setup
+# Setup
 
 Follow these steps to obtain a Notify API Secret and enable your domain to send notifications.
-
-During development it is optional to use your production domain for testing. Instead, you can use a staging domain, or even a entirerly separate domain e.g. Vercel test site. However, because notification subscriptions are tied to the domain, once you move to production you will need to deploy these files to your production domain.
 
 For a quick start to experiment with, you can try the [gm-hackers template](https://github.com/WalletConnect/gm-hackers) and following the steps in the README.
 
@@ -17,7 +15,7 @@ For a quick start to experiment with, you can try the [gm-hackers template](http
    <img className="image-margin" src={useBaseUrl('/img/w3i/1.png')} />
 2. Under the Notify API section, enter in the public domain of your app that you will use to publish notifications as the dapp URL. For example, `https://app.example.com`. Click Save.
    <img className="image-margin" src={useBaseUrl('/img/w3i/2.png')} />
-   -> Take note of your new Notify API Secret. You will need this to publish notifications. This secret allows publishing notifications to any account subscribed to your app, so should not be published and should only be used by your app backend.
+   -> Take note of your new Notify API Secret. You will need this to publish notifications.
    <img className="image-margin" src={useBaseUrl('/img/w3i/3.png')} />
 3. Next, you will need to host the two files on this page at the `/.well-known/` directory of your public URL.
    - Download `did.json` (Step 2: “Download did:web”) and host it at, for example, `https://app.example.com/.well-known/did.json`
