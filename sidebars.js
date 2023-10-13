@@ -39,7 +39,7 @@ module.exports = {
                 'web3modal/react/options',
                 'web3modal/react/hooks',
                 'web3modal/react/components',
-                'web3modal/react/theming',
+                'web3modal/react/theming'
               ]
             },
             {
@@ -51,7 +51,7 @@ module.exports = {
                 'web3modal/vue/options',
                 'web3modal/vue/composables',
                 'web3modal/vue/components',
-                'web3modal/vue/theming',
+                'web3modal/vue/theming'
               ]
             },
             {
@@ -63,7 +63,7 @@ module.exports = {
                 'web3modal/javascript/options',
                 'web3modal/javascript/actions',
                 'web3modal/javascript/components',
-                'web3modal/javascript/theming',
+                'web3modal/javascript/theming'
               ]
             },
             {
@@ -134,10 +134,10 @@ module.exports = {
               type: 'category',
               label: 'Notify',
               items: [
-                'web3wallet/notify-api/installation',
-                'web3wallet/notify-api/usage',
-                'web3wallet/notify-api/spam-protection',
-                'web3wallet/notify-api/examples'
+                'web3wallet/notify/installation',
+                'web3wallet/notify/usage',
+                'web3wallet/notify/spam-protection',
+                'web3wallet/notify/examples'
               ]
             },
             'web3wallet/resources',

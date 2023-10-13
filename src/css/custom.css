@@ -1103,6 +1103,31 @@ article img {
 
 /* End - Sidebar */
 
+.w3m-qs__wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 2rem;
+  width: 100%;
+  background: var(--ifm-color-emphasis-100);
+  border-radius: 1rem;
+  padding: 2.5rem 1.67rem;
+  border: 1px solid var(--ifm-color-emphasis-300);
+}
+
+.w3m-qs__text-container h2,
+.w3m-qs__text-container p {
+  margin: 0 !important;
+}
+
+.w3m-qs__text-container p {
+  margin-top: 0.125rem !important;
+}
+
+.w3m-qs__code-block {
+  margin-bottom: 0 !important;
+}
+
 @media screen and (max-width: 1320px) {
   .home__contribute--text {
     padding-right: 1.5rem;
