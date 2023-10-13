@@ -38,8 +38,8 @@ Be sure to update the project ID and metadata with your own.
 final _w3mService = W3MService(
   projectId: '{YOUR_PROJECT_ID}',
   metadata: const PairingMetadata(
-    name: 'Flutter Dapp Example',
-    description: 'Flutter Dapp Example',
+    name: 'Web3Modal Flutter Example',
+    description: 'Web3Modal Flutter Example',
     url: 'https://www.walletconnect.com/',
     icons: ['https://walletconnect.com/walletconnect-logo.png'],
     redirect: Redirect(
@@ -47,11 +47,6 @@ final _w3mService = W3MService(
       universal: 'https://www.walletconnect.com',
     ),
   ),
-  recommendedWalletIds: {
-    'afbd95522f4041c71dd4f1a065f971fd32372865b416f95a0b1db759ae33f2a7',
-    '38f5d18bd8522c244bdd70cb4a68e0e718865155811c043f052fb9f1c51de662',
-    'c57ca95b47569778a828d19178114f4db188b89b763c899ba0be274e97267d96',
-  },
 );
 await _w3mService.init();
 ```

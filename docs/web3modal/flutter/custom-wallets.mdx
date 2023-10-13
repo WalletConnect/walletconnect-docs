@@ -14,19 +14,35 @@ This is the initial set of namespaces that will be requested from the wallet.
 
 You can change it at any time with the `setRequiredNamespaces` method.
 
-## recommendedWalletIds (optional)
+## featuredWalletIds (optional)
 
-Allows to override default recommended wallets that are fetched from [WalletConnect Explorer](https://walletconnect.com/explorer?type=wallet). You can define an array of wallet ids you'd like to prioritize (order is respected). You can get these ids from the explorer link mentioned before by clicking on a copy icon of desired wallet card. Defaults to `null`.
+Allows to override default recommended wallets that are fetched from the API. You can define an array of wallet ids you'd like to prioritize (order is respected). You can get these ids from the [WalletConnect Explorer](https://walletconnect.com/explorer?type=wallet) by clicking on the copy icon of desired wallet card. Defaults to `null`.
 
 ```dart
-final Set<String> recommendedWalletIds = {
+final Set<String> featuredWalletIds = {
   'c57ca95b47569778a828d19178114f4db188b89b763c899ba0be274e97267d96', // MetaMask
   '4622a2b2d6af1c9844944291e5e7351a6aa24cd7b23099efac1b2fd875da31a0', // Trust
 }
 ```
 
-## excludedWalletState & excludedWalletIds (optional)
+## includedWalletIds (optional)
 
-The `excludedWalletState` determines the state of the excluded wallets. Defaults to `ExcludedWalletState.list`.
+Similar to `featuredWalletIds` this options allows you to override determine which wallets do you want to show. If `includedWalletIds` is set then only the wallets listed in this object are going to be displayed in the modal.
 
-If the `excludedWalletState` is `ExcludedWalletState.list`, the `excludedWalletIds` will be used to remove items from the list of wallets returned from the [WalletConnect Explorer](https://walletconnect.com/explorer?type=wallet). If the `excludedWalletState` is `ExcludedWalletState.all`, all wallets will be excluded except for the ones defined in `recommendedWalletIds`.
+```dart
+final Set<String> includedWalletIds = {
+  'c57ca95b47569778a828d19178114f4db188b89b763c899ba0be274e97267d96', // MetaMask
+  '4622a2b2d6af1c9844944291e5e7351a6aa24cd7b23099efac1b2fd875da31a0', // Trust
+}
+```
+
+## excludedWalletIds (optional)
+
+This last option is used to exlude a list of wallets from the API response.
+
+```dart
+final Set<String> excludedWalletIds = {
+  'c57ca95b47569778a828d19178114f4db188b89b763c899ba0be274e97267d96', // MetaMask
+  '4622a2b2d6af1c9844944291e5e7351a6aa24cd7b23099efac1b2fd875da31a0', // Trust
+}
+```
