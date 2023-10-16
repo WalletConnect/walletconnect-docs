@@ -15,7 +15,7 @@ export const CloudBanner = props => {
   return (
     <div className="w3m-qs__wrapper">
       <div className="w3m-qs__text-container">
-        <h2>QuickStart</h2>
+        <h2>⚡️ QuickStart</h2>
         <p>Setup a dapp with Web3Modal in minutes!</p>
       </div>
       <CodeBlock
