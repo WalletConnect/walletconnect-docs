@@ -1,4 +1,8 @@
 import CloudBanner from '../../components/CloudBanner'
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
+import PlatformTabs from '../../components/PlatformTabs'
+import PlatformTabItem from '../../components/PlatformTabItem'
 
 # Flutter
 
@@ -25,7 +29,11 @@ dependencies:
 
 To enable Web3Modal to detect wallets installed on the device, you need to make specific changes to the native sides of the project.
 
-#### For iOS:
+<PlatformTabs
+	groupId="w3m_flutter"
+	activeOptions={["ios","android"]}
+>
+<PlatformTabItem value="ios">
 
 1. Open your `Info.plist` file.
 2. Locate the `<key>LSApplicationQueriesSchemes</key>` section.
@@ -44,8 +52,8 @@ Example:
   <!-- Add other wallet schemes names here -->
 </array>
 ```
-
-#### For Android:
+</PlatformTabItem>
+<PlatformTabItem value="android">
 
 1. Open your `AndroidManifest.xml` file.
 2. Add your `<queries>...</queries>` schemes outside of `<application />` scope.
@@ -70,3 +78,5 @@ Example:
     </application>
 </manifest>
 ```
+</PlatformTabItem>
+</PlatformTabs>
