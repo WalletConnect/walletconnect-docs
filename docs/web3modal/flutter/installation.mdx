@@ -1,4 +1,8 @@
 import CloudBanner from '../../components/CloudBanner'
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
+import PlatformTabs from '../../components/PlatformTabs'
+import PlatformTabItem from '../../components/PlatformTabItem'
 
 # Flutter
 
@@ -14,51 +18,65 @@ Let’s get started with the installation and configuration!
 
 ## Installation
 
-Run the following command in your flutter project:
+Check out [pub.dev](https://pub.dev/packages/web3modal_flutter/versions) for the version you would like to install and add it as dependency in your pubspec.yaml (and run an implicit `flutter pub get` ):
 
-```bash
-flutter pub add web3modal_flutter
+```ruby
+dependencies:
+  web3modal_flutter: ^3.0.0-beta01
 ```
 
-## Implementation
+### Enable Installed Wallet Detection
 
-Import the package:
+To enable Web3Modal to detect wallets installed on the device, you need to make specific changes to the native sides of the project.
 
-```dart
-import 'package:web3modal_flutter/web3modal_flutter.dart';
+<PlatformTabs
+	groupId="w3m_flutter"
+	activeOptions={["ios","android"]}
+>
+<PlatformTabItem value="ios">
+
+1. Open your `Info.plist` file.
+2. Locate the `<key>LSApplicationQueriesSchemes</key>` section.
+3. Add the desired wallet schemes as string entries within the `<array>`. These schemes represent the wallets you want to detect.
+4. Refer to our [Info.plist example file](https://github.com/WalletConnect/react-native-examples/blob/main/dapps/ModalUProvider/ios/ModalUProvider/Info.plist) for a detailed illustration.
+
+Example:
+
+```xml
+<key>LSApplicationQueriesSchemes</key>
+<array>
+  <string>metamask</string>
+  <string>trust</string>
+  <string>safe</string>
+  <string>rainbow</string>
+  <!-- Add other wallet schemes names here -->
+</array>
 ```
+</PlatformTabItem>
+<PlatformTabItem value="android">
 
-Create your `W3MService` which is your primary class for opening, closing, disconnecting, etc.
+1. Open your `AndroidManifest.xml` file.
+2. Add your `<queries>...</queries>` schemes outside of `<application />` scope.
+3. Refer to [Android Specs](https://developer.android.com/guide/topics/manifest/queries-element) for more information.
 
-Be sure to update the project ID and metadata with your own.
+Example:
 
-```dart
-final _w3mService = W3MService(
-  projectId: '{YOUR_PROJECT_ID}',
-  metadata: const PairingMetadata(
-    name: 'Web3Modal Flutter Example',
-    description: 'Web3Modal Flutter Example',
-    url: 'https://www.walletconnect.com/',
-    icons: ['https://walletconnect.com/walletconnect-logo.png'],
-    redirect: Redirect(
-      native: 'flutterdapp://',
-      universal: 'https://www.walletconnect.com',
-    ),
-  ),
-);
-await _w3mService.init();
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <queries>
+        <package android:name="io.metamask"/>
+        <package android:name="com.wallet.crypto.trustapp"/>
+        <package android:name="io.gnosis.safe"/>
+        <package android:name="me.rainbow"/>
+        <!-- Add other wallet schemes names here -->
+    </queries>
+
+    <application>
+        ...
+    </application>
+</manifest>
 ```
-
-Now you can use the `W3MConnectWalletButton` or `W3MNetworkSelectButton` widget:
-
-```dart
-W3MConnectWalletButton(service: _w3mService)
-// OR
-W3MNetworkSelectButton(service: _w3mService)
-```
-
-Once session is approved you can use `W3MAccountButton` widget to show basic account data and to open Account data modal:
-
-```dart
-W3MAccountButton(service: _w3mService)
-```
+</PlatformTabItem>
+</PlatformTabs>
