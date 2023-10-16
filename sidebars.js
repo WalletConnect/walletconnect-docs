@@ -70,13 +70,7 @@ module.exports = {
               type: 'category',
               className: 'sidebar__logo sidebar__logo--react-native',
               label: 'React Native',
-              items: [
-                { type: 'doc', label: 'Getting started', id: 'web3modal/react-native/about' },
-                'web3modal/react-native/options',
-                'web3modal/react-native/actions',
-                'web3modal/react-native/components',
-                'web3modal/react-native/theming'
-              ]
+              items: [{ type: 'doc', label: 'Getting started', id: 'web3modal/react-native/about' }]
             },
             {
               type: 'category',
