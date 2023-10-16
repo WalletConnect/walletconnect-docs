@@ -206,3 +206,55 @@ The result of `signTransactions` and are encoded [SignedTransaction](https://nom
 
 ```
 
+## near_signMessage
+
+Signs message based on the [NEP-413](https://github.com/near/NEPs/blob/master/neps/nep-0413.md) standard that allows users to sign a message for a specific recipient using their NEAR account.
+
+### Parameters
+
+    1. `Object` - SignMessageParams:
+    	1.1. `message`: `string` - The message that wants to be transmitted.
+    	1.2. `nonce`: `Buffer` - A nonce that uniquely identifies this instance of the message, denoted as a 32 bytes array (a fixed `Buffer` in JS/TS).
+    	1.3. `recipient`: `string` - The recipient to whom the message is destined (e.g. "alice.near" or "myapp.com").
+    	1.4. `callbackUrl`: `string?` - Optional, applicable to browser wallets (e.g. MyNearWallet). The URL to call after the signing process. Defaults to `window.location.href`.
+    	1.5. `state`: `string?` - Optional, applicable to browser wallets (e.g. MyNearWallet). A state for authentication purposes.
+
+
+### Returns
+
+The result of `SignedMessage`:
+
+     1. `Object` - SignedMessage:
+    	1.1. `accountId`: `string` - The account name to which the publicKey corresponds as plain text (e.g. "alice.near")
+    	1.2. `publicKey`: `string` - The public counterpart of the key used to sign, expressed as a string with format "<key-type>:<base58-key-bytes>" (e.g. "ed25519:6TupyNrcHGTt5XRLmHTc2KGaiSbjhQi1KHtCXTgbcr4Y")
+    	1.3. `signature`: `string` - The base64 representation of the signature.
+    	1.4. `state`: `string?` - Optional, applicable to browser wallets (e.g. MyNearWallet). The same state passed in SignMessageParams
+
+### Example
+
+```javascript
+// Request
+{
+  "id": 1,
+  "jsonrpc": "2.0",
+  "method": "near_signTransactions",
+  "params": {
+    "message": "text message to sign",
+    "nonce": { "type": "Buffer", "data": [0...31] },
+    "recipient": "myapp.com",
+    "callbackUrl": "myapp.com/callback"
+  }
+}
+
+// Result
+{
+  "id": 1,
+  "jsonrpc": "2.0",
+  "result": {
+    "accountId": "alice.near",
+    "publicKey": "ed25519:9kVV7WjX12avJXQhpySixVmmKfgZTnjm5ctq9MLu6p4T",
+    "signature": "CnEjJ+WGRvUeBXsvhUfHLezO4rsHs3If3prLn0z5F/o0G37yu4JA8O+O0TB0hS3kCMJO2S3Z3Aqtn4rBKfufCA=="
+    }
+}
+
+```
