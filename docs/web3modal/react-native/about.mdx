@@ -2,7 +2,7 @@ import CloudBanner from '../../components/CloudBanner'
 import Tabs from '@theme/Tabs'
 import TabItem from '@theme/TabItem'
 
-# JavaScript
+# React Native
 
 ## Introduction
 
@@ -13,6 +13,7 @@ With Web3Modal JavaScript we work with the [@wagmi/core](https://wagmi.sh/core/g
 ## Installation
 
 Choose your preferred package manager
+
 ```bash npm2yarn
 npm install @web3modal/wagmi @wagmi/core viem
 ```
@@ -95,10 +96,10 @@ import { WalletConnectConnector } from '@wagmi/core/connectors/walletConnect'
 const projectId = 'YOUR_PROJECT_ID'
 
 // 2. Configure wagmi client
-const { chains, publicClient } = configureChains([mainnet], [
-  walletConnectProvider({ projectId }),
-  publicProvider()
-])
+const { chains, publicClient } = configureChains(
+  [mainnet],
+  [walletConnectProvider({ projectId }), publicProvider()]
+)
 
 const metadata = {
   name: 'Web3Modal',
@@ -128,6 +129,7 @@ const modal = createWeb3Modal({ wagmiConfig, projectId, chains })
 ## Trigger the modal
 
 To open Web3Modal you can use our web components or build your own logic with Web3Modal actions
+
 <Tabs>
 <TabItem value="components" label="Components">
 You can use default web components to open the modal
@@ -145,11 +147,13 @@ You can use default web components to open the modal
   </body>
 </html>
 ```
+
 Learn more about the Web3Modal web components [here](./components.mdx)
 
 :::note
 Web components are global html elements that don't require importing.
 :::
+
 </TabItem>
 <TabItem value="actions" label="Actions">
 
@@ -203,6 +207,7 @@ watchAccount(account => {
 ```
 
 Learn more about the Web3Modal actions [here](./actions.mdx)
+
 </TabItem>
 </Tabs>
 
