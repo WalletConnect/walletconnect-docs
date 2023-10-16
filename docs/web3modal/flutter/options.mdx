@@ -4,7 +4,48 @@
 **The Web3Modal SDK for Flutter is currently in Beta and is not production-ready**.
 :::
 
-## Web3App or projectId & PairingMetadata (required)
+## Import the package:
+
+```dart
+import 'package:web3modal_flutter/web3modal_flutter.dart';
+```
+
+Create your `W3MService` which is your primary class for opening, closing, disconnecting, etc.
+
+Be sure to update the project ID and metadata with your own.
+
+```dart
+final _w3mService = W3MService(
+  projectId: '{YOUR_PROJECT_ID}',
+  metadata: const PairingMetadata(
+    name: 'Web3Modal Flutter Example',
+    description: 'Web3Modal Flutter Example',
+    url: 'https://www.walletconnect.com/',
+    icons: ['https://walletconnect.com/walletconnect-logo.png'],
+    redirect: Redirect(
+      native: 'flutterdapp://',
+      universal: 'https://www.walletconnect.com',
+    ),
+  ),
+);
+await _w3mService.init();
+```
+
+Now you can use the `W3MConnectWalletButton` or `W3MNetworkSelectButton` widget:
+
+```dart
+W3MConnectWalletButton(service: _w3mService)
+// OR
+W3MNetworkSelectButton(service: _w3mService)
+```
+
+Once session is approved you can use `W3MAccountButton` widget to show basic account data and to open Account data modal:
+
+```dart
+W3MAccountButton(service: _w3mService)
+```
+
+## Web3App or projectId + required PairingMetadata
 
 You must provide either a Web3App or a projectId as well as a PairingMetadata in both cases.
 Providing the `Web3App` instance lets you register callbacks on the `Web3App` you'd like to use.
