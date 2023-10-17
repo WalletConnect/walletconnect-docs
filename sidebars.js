@@ -35,12 +35,32 @@ module.exports = {
               className: 'sidebar__logo sidebar__logo--react',
               label: 'React',
               items: [
-                { type: 'doc', label: 'Getting started', id: 'web3modal/react/about' },
-                'web3modal/react/options',
-                'web3modal/react/hooks',
-                'web3modal/react/components',
-                'web3modal/react/theming',
-                'web3modal/react/resources'
+                'web3modal/react/about',
+                {
+                  type: 'category',
+                  label: 'Wagmi',
+                  className: 'sidebar__logo sidebar__logo--wagmi',
+                  items: [
+                    { type: 'doc', label: 'Getting started', id: 'web3modal/react/wagmi/about' },
+                    'web3modal/react/wagmi/options',
+                    'web3modal/react/wagmi/hooks',
+                    'web3modal/react/wagmi/components',
+                    'web3modal/react/wagmi/theming',
+                  ]
+                },
+                {
+                  type: 'category',
+                  label: 'Ethers',
+                  className: 'sidebar__logo sidebar__logo--ethers',
+                  items: [
+                    { type: 'doc', label: 'Getting started', id: 'web3modal/react/ethers/about' },
+                    'web3modal/react/ethers/options',
+                    'web3modal/react/ethers/hooks',
+                    'web3modal/react/ethers/components',
+                    'web3modal/react/ethers/theming',
+                  ]
+                },
+                'web3modal/react/resources',
               ]
             },
             {
@@ -53,7 +73,6 @@ module.exports = {
                 'web3modal/vue/composables',
                 'web3modal/vue/components',
                 'web3modal/vue/theming',
-                'web3modal/vue/resources'
               ]
             },
             {
@@ -66,7 +85,6 @@ module.exports = {
                 'web3modal/javascript/actions',
                 'web3modal/javascript/components',
                 'web3modal/javascript/theming',
-                'web3modal/javascript/resources'
               ]
             },
             {
