@@ -35,7 +35,6 @@ module.exports = {
               className: 'sidebar__logo sidebar__logo--react',
               label: 'React',
               items: [
-                'web3modal/react/about',
                 {
                   type: 'category',
                   label: 'Wagmi',
