@@ -39,7 +39,6 @@ module.exports = {
                 {
                   type: 'category',
                   label: 'Wagmi',
-                  className: 'sidebar__logo sidebar__logo--wagmi',
                   items: [
                     { type: 'doc', label: 'Getting started', id: 'web3modal/react/wagmi/about' },
                     'web3modal/react/wagmi/options',
@@ -51,7 +50,6 @@ module.exports = {
                 {
                   type: 'category',
                   label: 'Ethers',
-                  className: 'sidebar__logo sidebar__logo--ethers',
                   items: [
                     { type: 'doc', label: 'Getting started', id: 'web3modal/react/ethers/about' },
                     'web3modal/react/ethers/options',
