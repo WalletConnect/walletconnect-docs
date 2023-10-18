@@ -1,0 +1,124 @@
+import useBaseUrl from '@docusaurus/useBaseUrl'
+import Table from '../components/Table'
+
+# Explorer Submission
+
+:::info Note
+
+Submitting a project to the WalletConnect Cloud Explorer is recommended but optional. You can still use WalletConnect services without submitting your project.
+However, doing so ensures that your project is listed under [WalletConnect Explorer](https://walletconnect.com/explorer?utm_source=walletconnect-docs&utm_medium=cloud&utm_campaign=explorer-submission) and [Cloud Explorer API](./explorer.md#cloud-explorer-api).
+
+:::
+
+## Creating a New Project
+
+- Head over to [cloud.walletconnect.com](https://cloud.walletconnect.com/) and create a new project by clicking the "New Project" button in top right corner of the dashboard.
+- Give a suitable name to your project and click the "Create" button. (You can change this later)
+  <img className="image-margin" src={useBaseUrl('/img/cloud/1.png')} />
+
+## Project Details
+
+- Go to the "Explorer" tab and fill in the details of your project.
+  <img className="image-margin" src={useBaseUrl('/img/cloud/2.png')} />
+
+<Table
+  headers={['Field', 'Description', 'Required']}
+  data={[
+    {
+      field: 'Name',
+      description: 'The name to display in the explorer',
+      required: 'yes'
+    },
+    {
+      field: 'Description',
+      description: 'A short description explaining your project (dapp/wallet)',
+      required: 'yes'
+    },
+    {
+      field: 'Type',
+      description: 'Whether your project is a dapp or a wallet',
+      required: 'yes'
+    },
+    {
+      field: 'Category',
+      description:
+        'Appropriate category for your project. This field is dependent on the type of your project',
+      required: 'yes'
+    },
+    {
+      field: 'Homepage',
+      description: 'The URL of your project',
+      required: 'yes'
+    },
+    {
+      field: 'Web App',
+      description: 'The URL of your web app. This field is only applicable for dapps',
+      required: 'yes'
+    },
+    {
+      field: 'Supports Sign v2',
+      description:
+        'Indicates v2 support for WalletConnect Sign SDK. Detailed testing instructions are provided in the explorer submission form',
+      required: 'yes'
+    },
+    {
+      field: 'Supports Auth v1',
+      description:
+        'Indicates v1 support for WalletConnect Auth SDK. Detailed testing instructions are provided in the explorer submission form',
+      required: 'yes'
+    },
+    {
+      field: 'Chains',
+      description: 'Chains supported by your project',
+      required: 'yes'
+    },
+    {
+      field: 'Logo',
+      description:
+        'The logo of your project. Further requirements are provided in the explorer submission form',
+      required: 'yes'
+    },
+    {
+      field: 'Testing Instructions',
+      description: 'Instructions on how to test your WalletConnect Integration',
+      required: 'yes'
+    },
+    {
+      field: 'Download Links',
+      description: 'Links to download your project (if applicable)',
+      required: 'no'
+    },
+    {
+      field: 'Mobile Linking',
+      description:
+        'Required for mobile wallets targeting Web3modal. Deep Link is recommended over Universal Link',
+      required: 'no'
+    },
+    {
+      field: 'Desktop Linking',
+      description: 'Required for desktop wallets targeting Web3modal.',
+      required: 'no'
+    },
+    {
+      field: 'Injected Wallet Identifiers',
+      description:
+        'Required for injected wallets targeting Web3modal. RDNS (from EIP-6963 metadata) is recommended over Provider Flags(Legacy)',
+      required: 'no'
+    },
+    {
+      field: 'Metadata',
+      description: 'User facing UI metadata for your project. Only Short Name is required.',
+      required: 'no'
+    }
+  ]}
+/>
+
+## Project Submission
+
+- Once you've filled the applicable fields, click the "Submit" button to submit your project for review. Alternatively, you can save your changes and submit later. Additional information will be visible in the modal that appears after clicking the "Submit" button.
+  <img className="image-margin" src={useBaseUrl('/img/cloud/3.png')} />
+
+## What's Next?
+
+Now depending on whether or not your submission met all parameters, you will receive an email from the WalletConnect team with the status of your submission. This change will also be reflected with more directions in the "Explorer" tab of your project.
+If your submission was not accepted, you can make the necessary changes and resubmit your project for review. The reason for rejection will be mentioned in the email and in the "Explorer" tab of your project.

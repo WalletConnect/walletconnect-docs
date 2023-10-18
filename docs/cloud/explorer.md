@@ -16,6 +16,8 @@ In order to connect to WalletConnect Cloud, you need to create a new project:
 
 Head over to [cloud.walletconnect.com](https://cloud.walletconnect.com/) and create an account if you don't already have one. Once you sign in, simply fill out our project form under the "Explorer" section and submit it for review. To ensure fast approval make sure you follow our [submission guidelines](https://walletconnect.com/guidelines). Once approved your project will automatically appear on our website and API.
 
+You can also checkout the [Explorer Submission](./explorer-submission) guide for more details.
+
 If you would like to edit or claim an existing cloud explorer item, email us at support@walletconnect.com to help migrate the listing to your account.
 
 ## Cloud Explorer API
@@ -86,14 +88,16 @@ Examples:
 
 ### Chains
 
-By default chains endpoint returns all the chains supported by WalletConnect. 
+By default chains endpoint returns all the chains supported by WalletConnect.
+
 #### Query Parameters
+
 You can use following query params to query chains by its namespace and exclude testnets:
 
-| Param      | Description                                                                                                                 |
-| ---------- | --------------------------------------------------------------------------------------------------------------------------- |
-| testnets   | Determines if testnets should be included in the response <br/> (e.g. `?testnets=false`, defaults to `true` if not provided)  |
-| namespaces | Returns chains that belong to one of the provided namespaces<br/>(e.g. `?namespaces=eip155,cosmos,solana`)                  |
+| Param      | Description                                                                                                                  |
+| ---------- | ---------------------------------------------------------------------------------------------------------------------------- |
+| testnets   | Determines if testnets should be included in the response <br/> (e.g. `?testnets=false`, defaults to `true` if not provided) |
+| namespaces | Returns chains that belong to one of the provided namespaces<br/>(e.g. `?namespaces=eip155,cosmos,solana`)                   |
 
 #### `GET /v3/chains`
 
