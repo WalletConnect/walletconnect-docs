@@ -6,10 +6,24 @@ The Web3Modal SDK for Flutter is currently in Beta.
 
 ## Custom Chain Selection
 
-You can select your own chain by calling the `setSelectedChain` method on the `W3MService` object.
+You can add your chain to the `W3MChainPresets.chains` object **before initialization**:
 
-The chain must be EVM compatible.
+```dart
+W3MChainPresets.chains.putIfAbsent('<chainID>', () => <Your W3MChainInfo>);
+await _w3mService.init();
+```
 
-A list of preset chains that are available to you can be accessed at `ChainData.chainPresets`.
+:::info
+If you modify the presets, it will be reflected in the `W3MNetworkSelectButton` widget.
+:::
 
-If you modify the presets, it will be reflected in the `W3MNetworkSelect` widget.
+Or you can select your own chain by calling the `selectChain()` method from `W3MService` **after initialization**:.
+
+```dart
+await _w3mService.init();
+_w3mService.selectChain(<Your W3MChainInfo>);
+```
+
+:::note
+The chain must be EVM compatible
+:::
