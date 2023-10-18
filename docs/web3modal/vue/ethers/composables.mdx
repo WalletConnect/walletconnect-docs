@@ -1,0 +1,53 @@
+import Table from '../../../components/Table'
+import Button from '../../../components/button'
+
+
+### useWeb3ModalAccount
+
+Hook that returns the client's information.
+
+```tsx
+import { useWeb3ModalAccount } from '@web3modal/ethers-5/vue'
+
+const { address, chainId, isConnected } = useWeb3ModalAccount()
+```
+
+### useWeb3ModalSigner
+
+Hook that returns the `signer`, the `walletProvider` and the `WalletProviderType`.
+
+```tsx
+import { useWeb3ModalSigner } from '@web3modal/ethers-5/vue'
+
+const { signer } = useWeb3ModalSigner()
+
+ async function onSignMessage() {
+  const signature = await signer?.signMessage('Hello Web3Modal Ethers')
+  console.log(signature)
+}
+```
+
+The **useWeb3ModalSigner** hook returns the following states:
+
+<Table
+  headers={['State', 'Description', 'Type']}
+  data={[
+    {
+      variable: { code: 'signer' },
+      description: 'The Signer object of the connected wallet.',
+      type: { code: 'ethers.providers.JsonRpcSigner' }
+    },
+    {
+      variable: { code: 'walletProvider' },
+      description: 'A wallet provider instance, created with the ethers Web3Provider class.',
+      type: { code: 'ethers.providers.Web3Provider' }
+    },
+    {
+      variable: { code: 'WalletProviderType' },
+      description: 'The wallet or protocol which the walletProvider was obtained from.',
+      type: { code: "'walletConnect' | 'injected' | 'coinbaseWallet' | 'eip6963'" }
+    }
+  ]}
+/>
+
+<Button name="Learn More About Ethers" url="https://docs.ethers.org/v5/getting-started/#getting-started--contracts" />
