@@ -7,6 +7,9 @@ import TabItem from '@theme/TabItem'
 import WagmiImplementation from './wagmi/about/implementation.mdx'
 import WagmiModal from './wagmi/about/triggermodal.mdx'
 
+import EthersImplementation from './ethers/about/implementation.mdx'
+import EthersModal from './ethers/about/triggermodal.mdx'
+
 # React
 
 ## Installation
@@ -44,25 +47,22 @@ npm install @web3modal/ethers-5 ethers@5.7.2
 </PlatformTabItem>
 <PlatformTabItem value="ethers">
 
+<EthersImplementation/>
 
 </PlatformTabItem>
 </PlatformTabs>
 
 ## Trigger the modal
 
-<WagmiModal/>
-
-## Use wagmi hooks
-
-
 <PlatformTabs groupId="eth-lib" activeOptions={["wagmi","ethers"]}>
 <PlatformTabItem value="wagmi">
 
-<WagmiImplementation/>
+<WagmiModal/>
 
 </PlatformTabItem>
 <PlatformTabItem value="ethers">
 
+<EthersModal/>
 
 </PlatformTabItem>
 </PlatformTabs>
