@@ -8,8 +8,7 @@ Default mode will implement WalletConnect, Browser Wallets (injected) and Coinba
 <Tabs>
 <TabItem value="default" label="Default">
 
-Start by importing `createWeb3Modal`, `defaultWagmiConfig` and wagmi packages, then create `wagmiConfig` using `defaultWagmiConfig` function as shown below.
-Finally, pass `wagmiConfig` to `createWeb3Modal`.
+In your `_app.tsx` file set up the following configuration, making sure that all functions are called **outside** the App component.
 
 ```tsx
 import { createWeb3Modal, defaultWagmiConfig } from '@web3modal/wagmi/react'
@@ -46,8 +45,7 @@ export default function App() {
 </TabItem>
 <TabItem value="custom" label="Custom">
 
-Start by importing `createWeb3Modal`, `walletConnectProvider` and wagmi packages, then create wagmi config using your own settings.
-Finally, pass wagmi config to `createWeb3Modal`.
+In your `_app.tsx` file set up the following configuration, making sure that all functions are called **outside** the App component.
 
 ```tsx
 import { createWeb3Modal } from '@web3modal/wagmi/react'
