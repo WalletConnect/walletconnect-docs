@@ -88,7 +88,7 @@ Examples:
 
 ### Chains
 
-By default chains endpoint returns all the chains supported by WalletConnect.
+By default chains endpoint returns all chains registered under [CASA Namespace](https://github.com/ChainAgnostic/CASA) and that were approved by following our [Add Chain issue template](https://github.com/WalletConnect/walletconnect-monorepo/issues/new?assignees=&labels=type%3A+new+chain+request&template=new_chain_to_explorer.md&title=)
 
 #### Query Parameters
 
@@ -101,7 +101,7 @@ You can use following query params to query chains by its namespace and exclude 
 
 #### `GET /v3/chains`
 
-Returns all the chains supported by WalletConnect.
+Returns all chains registered under [CASA Namespace](https://github.com/ChainAgnostic/CASA) and that were approved by following our [Add Chain issue template](https://github.com/WalletConnect/walletconnect-monorepo/issues/new?assignees=&labels=type%3A+new+chain+request&template=new_chain_to_explorer.md&title=)
 
 Examples:
 
