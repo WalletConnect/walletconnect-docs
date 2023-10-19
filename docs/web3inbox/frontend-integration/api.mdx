@@ -285,13 +285,22 @@ Get and delete messages
 <PlatformTabItem value="react">
 
 ```ts
+
+// watch messages of current account's susbcription to current dapp
 const { messages, deleteMessage } = useMessages(account)
+
+// watch messages of specific account's susbcription to current dapp
+const { messages, deleteMessage } = useMessages(account)
+
+// watch messages of specific account's susbcription to specific dapp
+const { messages, deleteMessage } = useMessages(account, domain)
 
 deleteMessage(messages[0].id)
 ```
 
 #### References
 
+- **account *(Optional)*:** CAIP 10 account
 - **domain *(Optional)*:** Domain of dapp
 - **messages:** Array of messages, of type
 
