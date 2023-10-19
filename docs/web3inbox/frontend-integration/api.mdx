@@ -20,25 +20,29 @@ Init the client
 
 ```ts
 // You can optionally pass a domain to override the behavior of using window.location
-const clientIsReady = useInitWeb3inboxClient({ projectId })
+const clientIsReady = useInitWeb3inboxClient({ projectId, domain, isLimited })
 const client = useWeb3InboxClient()
 ```
 
 #### References
 
 - **projectId:** Your WalletConnect project ID
+- **domain *(Optional)*:** your dapp domain 
+- **isLimited:** Manage your dapp's state alone, or all an account's subscriptions. Recommended to set this to true or keep undefined.
 
 </PlatformTabItem>
 
 <PlatformTabItem value="html">
 
 ```ts
-const client = Web3InboxClient.init({ projectId })
+const client = Web3InboxClient.init({ projectId, domain, isLimited })
 ```
 
 #### References
 
 - **projectId:** Your WalletConnect project ID
+- **domain *(Optional)*:** your dapp domain 
+- **isLimited:** Manage your dapp's state alone, or all an account's subscriptions. Recommended to set this to true or keep undefined.
 
 </PlatformTabItem>
 </PlatformTabs>
