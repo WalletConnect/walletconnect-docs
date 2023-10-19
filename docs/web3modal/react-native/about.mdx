@@ -198,6 +198,13 @@ Learn more about the Web3Modal hooks [here](./hooks.mdx)
 ## Enable Wallet Detection
 To enable WalletConnectModal to detect wallets installed on the device, you need to make specific changes to the native code of your project.
 
+First, add our core dependency to your package.json file so React Native links it's native code to your project
+
+```bash npm2yarn
+npm install @web3modal/core-react-native
+```
+
+
 <Tabs groupId="platform">
   <TabItem value="rn-cli" label="React Native CLI">
 
@@ -222,6 +229,7 @@ To enable WalletConnectModal to detect wallets installed on the device, you need
   ```
 
   #### For Android:
+
 
   1. Open your `AndroidManifest.xml` file.
   2. Locate the `<queries>` section.
