@@ -19,8 +19,15 @@ const projectId = 'YOUR_PROJECT_ID'
 const chains = [1, 42161]
 
 // 3. Create modal
+const metadata = {
+  name: 'My Website',
+  description: 'My Website description',
+  url: 'https://mywebsite.com',
+  icons: ['https://avatars.mywebsite.com/']
+}
+
 createWeb3Modal({
-  ethersConfig: defaultConfig(),
+  ethersConfig: defaultConfig({ metadata }),
   chains,
   projectId
 })
@@ -46,13 +53,23 @@ const projectId = 'YOUR_PROJECT_ID'
 // 2. Set chains
 const chains = [1, 42161]
 
-const ethersConfig = {
-
+// 3. Create modal
+const metadata = {
+  name: 'My Website',
+  description: 'My Website description',
+  url: 'https://mywebsite.com',
+  icons: ['https://avatars.mywebsite.com/']
 }
 
-// 3. Create modal
 createWeb3Modal({
-  ethersConfig,
+  ethersConfig: defaultConfig({ 
+    metadata,
+    enableEIP6963: true
+    enableInjected: true
+    enableCoinbase: true
+    coinbaseRpcUrl: 'https://mainnet.infura.io/v3/<YOUR_INFURA_API_KEY>'
+    coinbaseDefaultChainId: 1 
+  }),
   chains,
   projectId
 })

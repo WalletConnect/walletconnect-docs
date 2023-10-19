@@ -1,5 +1,8 @@
 
-To open Web3Modal you can use our **default** web components or build your own logic with Web3Modal composables.
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
+
+To open Web3Modal you can use our **default** web components or build your own logic with Web3Modal *actions*.
 
 <Tabs>
 <TabItem value="components" label="Components">
@@ -7,9 +10,14 @@ To open Web3Modal you can use our **default** web components or build your own l
 You can use default web components to open the modal
 
 ```html
-<template>
-  <w3m-button />
-</template>
+  <body>
+    <div id="app">
+      <w3m-button></w3m-button>
+      <w3m-network-button> </w3m-network-button>
+    </div>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
 ```
 
 Learn more about the Web3Modal web components [here](../../components.mdx)
@@ -19,24 +27,38 @@ Web components are global html elements that don't require importing.
 :::
 
 </TabItem>
-<TabItem value="composables" label="Composables">
+<TabItem value="actions" label="actions">
 
-You can trigger the modal by calling the `open` method from `useWeb3Modal` composable.
+You can trigger the modal by calling the `open` function from a modal instance returned by `createWeb3Modal`.
+
+Let's first add two html elements to display information to the user:
 
 ```html
-<script setup lang="ts">
-import { useWeb3Modal } from '@web3modal/ethers-5/vue'
-  // 4. Use modal composable
-  const modal = useWeb3Modal()
-</script>
-
-<template>
-  <button @click="modal.open()">Open Connect Modal</button>
-  <button @click="modal.open({ view: 'Networks' })">Open Network Modal</button>
-</template>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>HTML Example</title>
+  </head>
+  <body>
+    <button id="open-connect-modal">Open Modal</button>
+    <button id="open-network-modal">Open Networks</button>
+    <script type="module" src="main.js"></script>
+  </body>
+</html>
 ```
 
-Learn more about the Web3Modal composables [here](../../actions.mdx)
+Following with our `main.js` file, we can now add the needed logic to open the modal and display information in the DOM:
+
+```ts
+const openConnectModalBtn = document.getElementById('open-connect-modal')
+const openNetworkModalBtn = document.getElementById('open-network-modal')
+
+openConnectModalBtn.addEventListener('click', () => modal.open())
+openNetworkModalBtn.addEventListener('click', () => modal.open({ view: 'Networks' }))
+```
+
+Learn more about the Web3Modal actions [here](../../actions.mdx)
 
 </TabItem>
 </Tabs>

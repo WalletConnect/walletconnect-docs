@@ -1,24 +1,47 @@
-import Table from '../../../components/Table'
 import Button from '../../../components/button'
 
-### useWeb3ModalAccount
+You can use the following methods to get data and subscribe to changes:
 
-Hook that returns the client's information.
+### getAddress
 
-```tsx
-import { useWeb3ModalAccount } from '@web3modal/ethers-5/vue'
-
-const { address, chainId, isConnected } = useWeb3ModalAccount()
+```ts
+const address = modal.getAddress()
 ```
 
-### useWeb3ModalSigner
+### getChainId
 
-Hook that returns the `signer`, the `walletProvider` and the `WalletProviderType`.
+```ts
+const chainId = modal.getChainId()
+```
 
-```tsx
-import { useWeb3ModalSigner } from '@web3modal/ethers-5/vue'
+### getIsConnected
 
-const { signer } = useWeb3ModalSigner()
+```ts
+const isConnected = modal.getIsConnected()
+```
+
+### getWalletProvider
+
+A wallet provider instance, created with the ethers Web3Provider class.
+
+```ts
+const walletProvider = modal.getWalletProvider()
+```
+
+### getWalletProviderType
+
+The wallet or protocol which the walletProvider was obtained from.
+
+```ts
+const walletProviderType = modal.getWalletProviderType()
+```
+
+### getSigner
+
+You can use the signer to sign messages or interact with smart contracts.
+
+```ts
+const signer = modal.getSigner()
 
 async function onSignMessage() {
   const signature = await signer?.signMessage('Hello Web3Modal Ethers')
@@ -26,27 +49,16 @@ async function onSignMessage() {
 }
 ```
 
-The **useWeb3ModalSigner** hook returns the following states:
+### subscribeProvider
 
-<Table
-  headers={['State', 'Description', 'Type']}
-  data={[
-    {
-      variable: { code: 'signer' },
-      description: 'The Signer object of the connected wallet.',
-      type: { code: 'ethers.providers.JsonRpcSigner' }
-    },
-    {
-      variable: { code: 'walletProvider' },
-      description: 'A wallet provider instance, created with the ethers Web3Provider class.',
-      type: { code: 'ethers.providers.Web3Provider' }
-    },
-    {
-      variable: { code: 'WalletProviderType' },
-      description: 'The wallet or protocol which the walletProvider was obtained from.',
-      type: { code: "'walletConnect' | 'injected' | 'coinbaseWallet' | 'eip6963'" }
-    }
-  ]}
-/>
+subscribe to chainId, address, provider and signer changes.
 
-<Button name="Learn More About Ethers" url="https://docs.ethers.org/v5/getting-started/#getting-started--contracts" />
+```ts
+function handleChange({ provider, providerType, address, chainId, isConnected }){
+  //...
+}
+
+modal.subscribeProvider(handleChange)
+```
+
+<Button name="Learn More" url="https://docs.ethers.org/v5/getting-started/#getting-started--contracts" />

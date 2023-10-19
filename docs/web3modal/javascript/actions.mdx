@@ -3,7 +3,6 @@ import PlatformTabs from '../../components/PlatformTabs'
 import PlatformTabItem from '../../components/PlatformTabItem'
 
 import WagmiActions from './wagmi/actions.mdx'
-
 import EthersActions from './ethers/actions.mdx'
 
 # Actions
@@ -135,30 +134,15 @@ const themeMode = modal.getThemeVariables()
 const unsubscribe = modal.subscribeTheme(newTheme => console.log(newTheme))
 ```
 
-## Use wagmi actions
+<PlatformTabs groupId="eth-lib" activeOptions={["wagmi","ethers"]}>
+<PlatformTabItem value="wagmi">
 
-You can use [Wagmi actions](https://wagmi.sh/core/actions/getAccount) to sign messages, interact with smart contracts, and much more.
+<WagmiActions/>
 
-### getAccount
+</PlatformTabItem>
+<PlatformTabItem value="ethers">
 
-Action for accessing account data and connection status.
+<EthersActions/>
 
-```tsx
-import { getAccount } from '@wagmi/core'
-
-const account = getAccount()
-```
-
-### signMessage
-
-Action for signing messages with connected account.
-
-```ts
-import { signMessage } from '@wagmi/core'
-
-const signature = await signMessage({
-  message: 'gm wagmi frens'
-})
-```
-
-<Button name="Learn More" url="https://wagmi.sh/core/actions/readContract" />
+</PlatformTabItem>
+</PlatformTabs>
