@@ -1,5 +1,10 @@
 import Table from '../../components/Table'
-import Button from '../../components/button'
+import PlatformTabs from '../../components/PlatformTabs'
+import PlatformTabItem from '../../components/PlatformTabItem'
+
+import WagmiComposables from './wagmi/composables.mdx'
+
+import EthersComposables from './ethers/composables.mdx'
 
 # Composables
 
@@ -7,13 +12,35 @@ import Button from '../../components/button'
 
 Control the modal with the `useWeb3Modal` function
 
+
+<PlatformTabs groupId="eth-lib" activeOptions={["wagmi","ethers"]}>
+<PlatformTabItem value="wagmi">
+
 ```ts
-import { useWeb3Modal } from '@web3modal/wagmi/react'
+import { useWeb3Modal } from '@web3modal/wagmi/vue'
+
+export default function Component() {
 
 const { open, close } = useWeb3Modal()
 
 open()
 ```
+
+</PlatformTabItem>
+<PlatformTabItem value="ethers">
+
+```ts
+import { useWeb3Modal } from '@web3modal/ethers5/vue'
+
+export default function Component() {
+
+const { open, close } = useWeb3Modal()
+
+open()
+```
+
+</PlatformTabItem>
+</PlatformTabs>
 
 You can also select the modal's view when calling the `open` function
 
@@ -39,7 +66,7 @@ List of views you can select
       description: 'Shows the list of all available wallets'
     },
     {
-      variable: { code: 'Network' },
+      variable: { code: 'Networks' },
       description:
         'List of available networks - you can select and target a specific network before connecting'
     },
@@ -58,21 +85,26 @@ List of views you can select
 
 Get the current value of the modal's state
 
-```html
-<script setup lang="ts">
-  import { useWeb3ModalState } from '@web3modal/wagmi/vue'
+<PlatformTabs groupId="eth-lib" activeOptions={["wagmi","ethers"]}>
+<PlatformTabItem value="wagmi">
 
-  const state = useWeb3ModalState()
+```ts
+import { useWeb3ModalState } from '@web3modal/wagmi/vue'
 
-  console.log(state.open)
-
-  console.log(state.selectedNetworkId)
-</script>
-
-<template>
-  <div>Selected Network Id: {{ state.selectedNetworkId }}</div>
-</template>
+const { open, selectedNetworkId } = useWeb3ModalState()
 ```
+
+</PlatformTabItem>
+<PlatformTabItem value="ethers">
+
+```ts
+import { useWeb3ModalState } from '@web3modal/ethers5/vue'
+
+const { open, selectedNetworkId } = useWeb3ModalState()
+```
+
+</PlatformTabItem>
+</PlatformTabs>
 
 The modal state consists of two reactive values:
 
@@ -105,30 +137,15 @@ setThemeVariables({
 })
 ```
 
-## Use wagmi actions
+<PlatformTabs groupId="eth-lib" activeOptions={["wagmi","ethers"]}>
+<PlatformTabItem value="wagmi">
 
-You can use [Wagmi actions](https://wagmi.sh/core/actions/getAccount) to sign messages, interact with smart contracts, and much more.
+<WagmiComposables/>
 
-### getAccount
+</PlatformTabItem>
+<PlatformTabItem value="ethers">
 
-Action for accessing account data and connection status.
+<EthersComposables/>
 
-```tsx
-import { getAccount } from '@wagmi/core'
-
-const account = getAccount()
-```
-
-### signMessage
-
-Action for signing messages with connected account.
-
-```ts
-import { signMessage } from '@wagmi/core'
-
-const signature = await signMessage({
-  message: 'gm wagmi frens'
-})
-```
-
-<Button name="Learn More" url="https://wagmi.sh/core/actions/readContract" />
+</PlatformTabItem>
+</PlatformTabs>

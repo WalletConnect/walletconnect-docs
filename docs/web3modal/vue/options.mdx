@@ -1,4 +1,6 @@
 import Table from '../../components/Table'
+import PlatformTabs from '../../components/PlatformTabs'
+import PlatformTabItem from '../../components/PlatformTabItem'
 
 # Options
 
@@ -12,8 +14,11 @@ createWeb3Modal({ wagmiConfig, projectId, chains, ...options })
 
 You can set a desired chain for the initial connection:
 
+<PlatformTabs groupId="eth-lib" activeOptions={["wagmi","ethers"]}>
+<PlatformTabItem value="wagmi">
+
 ```ts
-import { mainnet } from 'wagmi/chains'
+import { mainnet } from '@wagmi/core/chains'
 
 createWeb3Modal({
   //...
@@ -21,13 +26,24 @@ createWeb3Modal({
 })
 ```
 
+</PlatformTabItem>
+<PlatformTabItem value="ethers">
+
+```ts
+createWeb3Modal({
+  //...
+  defaultChain: 1
+})
+```
+
+</PlatformTabItem>
+</PlatformTabs>
+
 ## tokens
 
 You can select tokens for Web3Modal to show the user's balance of. Each key represents the chain id of the token's blockchain.
 
 ```ts
-import { mainnet } from 'wagmi/chains'
-
 createWeb3Modal({
   //...
   tokens: {
@@ -136,7 +152,10 @@ createWeb3Modal({
 
 ## connectorImages
 
-Set or override the images for any [Wagmi connector](https://wagmi.sh/core/connectors/injected). The key of each property must match the id of the connector.
+<PlatformTabs groupId="eth-lib" activeOptions={["wagmi","ethers"]}>
+<PlatformTabItem value="wagmi">
+
+Set or override the images of any [connector](https://wagmi.sh/core/connectors/injected). The key of each property must match the id of the connector.
 
 ```ts
 createWeb3Modal({
@@ -146,6 +165,23 @@ createWeb3Modal({
    }
 })
 ```
+
+</PlatformTabItem>
+<PlatformTabItem value="ethers">
+
+Set or override the images of any connector.
+
+```ts
+createWeb3Modal({
+connectorImages: {
+  coinbaseWallet: 'https://images.mydapp.com/coinbase.png',
+  walletConnect: 'https://images.mydapp.com/walletconnect.png',
+}
+})
+```
+
+</PlatformTabItem>
+</PlatformTabs>
 
 ## termsConditionsUrl
 
