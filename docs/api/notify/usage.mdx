@@ -638,10 +638,21 @@ NotifyClient.deleteNotifyMessage(params) { error ->
 
 #### Get Active Subscriptions
 
-To get a list of all the active subscriptions, call the `getActiveSubscriptions` function. It will return a map with the topic as the key and `Notify.Model.Subscription` as the value.
+To get a map of all the active subscriptions, call the `getActiveSubscriptions` function. It will return a map with the topic as the key and `Notify.Model.Subscription` as the value.
 
 ```kotlin
 NotifyClient.getActiveSubscriptions()
+```
+
+#### Get Notification Types
+
+To get a map of all the active subscriptions, call the `getNotificationTypes` function. It will return a map with the notification type id as the key and `Notify.Model.NotificationType` as the value.
+
+```kotlin
+val appMetadata = /*App Metadata*/
+val appDomain = /*App Domain*/ // URI(appMetadata.url).host
+val notificationTypesParams = Notify.Params.NotificationTypes(appDomain)
+NotifyClient.getNotificationTypes(notificationTypesParams)
 ```
 
 #### Get Message History
