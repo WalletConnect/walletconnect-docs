@@ -36,8 +36,8 @@ module.exports = {
               label: 'React',
               items: [
                 { type: 'doc', label: 'Getting started', id: 'web3modal/react/about' },
-                'web3modal/react/options',
                 'web3modal/react/hooks',
+                'web3modal/react/options',
                 'web3modal/react/components',
                 'web3modal/react/theming',
                 'web3modal/react/resources'
@@ -49,8 +49,8 @@ module.exports = {
               label: 'Vue',
               items: [
                 { type: 'doc', label: 'Getting started', id: 'web3modal/vue/about' },
-                'web3modal/vue/options',
                 'web3modal/vue/composables',
+                'web3modal/vue/options',
                 'web3modal/vue/components',
                 'web3modal/vue/theming',
                 'web3modal/vue/resources'
@@ -62,8 +62,8 @@ module.exports = {
               label: 'JavaScript',
               items: [
                 { type: 'doc', label: 'Getting started', id: 'web3modal/javascript/about' },
-                'web3modal/javascript/options',
                 'web3modal/javascript/actions',
+                'web3modal/javascript/options',
                 'web3modal/javascript/components',
                 'web3modal/javascript/theming',
                 'web3modal/javascript/resources'
