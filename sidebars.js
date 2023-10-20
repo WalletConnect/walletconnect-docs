@@ -111,7 +111,7 @@ module.exports = {
                 {
                   type: 'link',
                   label: 'Example',
-                  href: 'https://github.com/WalletConnect/WalletConnectKotlinV2/tree/master/sample/modals/src/main/kotlin/com/walletconnect/modals'
+                  href: 'https://github.com/WalletConnect/WalletConnectKotlinV2/tree/master/sample/modal/src/main/kotlin/com/walletconnect/sample/modal'
                 }
               ]
             },
