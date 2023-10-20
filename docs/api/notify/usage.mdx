@@ -551,7 +551,7 @@ val walletDelegate = object : NotifyClient.Delegate {
 NotifyClient.setDelegate(walletDelegate)
 ```
 
-#### Register Identity at a Keyserver
+#### Register blockchain account 
 
 In order to use Notify SDK account must register identity in [Keyserver](https://specs.walletconnect.com/2.0/specs/servers/keys/). To verify ownership over blockchain account when registering identities in [Keyserver](https://specs.walletconnect.com/2.0/specs/servers/keys/) user's must sign message provided on `onSign(message: String)` callback. Currenlty only [`EIP191`](https://eips.ethereum.org/EIPS/eip-191) signatures are supported in [Keyserver](https://specs.walletconnect.com/2.0/specs/servers/keys/)
 
@@ -576,6 +576,23 @@ NotifyClient.register(
           // callback for when the subscription request has failed
       }
   )
+```
+
+#### Unregister blockchain account 
+
+To stop receiving notifications for specific blockchain account call `NotifyClient.unregister`. This will delete all local data of subscriptions and messages associated with the account, locally remove and unregister Identity from [Keyserver](https://specs.walletconnect.com/2.0/specs/servers/keys/) and unsubscribe from all active subscriptions.
+
+```kotlin
+val unregistrationParams = Notify.Params.Unregistration(/*CAIP-10 account*/)
+NotifyClient.unregister(
+  unregistrationParams,
+  onSuccess = {
+      // callback for when the unregistration was successful
+  },
+  onError = { error ->
+    // callback for when the unregistration has failed
+  }
+)
 ```
 
 #### Subscribe to a Dapp
