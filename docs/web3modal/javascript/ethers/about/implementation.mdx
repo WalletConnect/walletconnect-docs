@@ -12,7 +12,7 @@ Default mode will implement WalletConnect, Browser Wallets (injected), [EIP-6963
 In your `main.js` file set up the following configuration.
 
 ```js
-import { createWeb3Modal, defaultConfig } from '@web3modal/ethers-5/vue'
+import { createWeb3Modal, defaultConfig } from '@web3modal/ethers5/vue'
 
 // 1. Get projectId
 const projectId = 'YOUR_PROJECT_ID'
@@ -41,7 +41,7 @@ const modal = createWeb3Modal({
 In your `main.js` file set up the following configuration.
 
 ```ts
-import { createWeb3Modal, defaultConfig } from '@web3modal/ethers-5/vue'
+import { createWeb3Modal, defaultConfig } from '@web3modal/ethers5/vue'
 
 // 1. Get projectId
 const projectId = 'YOUR_PROJECT_ID'
@@ -60,11 +60,11 @@ const metadata = {
 const modal = createWeb3Modal({
   ethersConfig: defaultConfig({ 
     metadata,
-    enableEIP6963: true
-    enableInjected: true
-    enableCoinbase: true
-    coinbaseRpcUrl: 'https://mainnet.infura.io/v3/<YOUR_INFURA_API_KEY>'
-    coinbaseDefaultChainId: 1 
+    defaultChainId: 1,
+    enableEIP6963: true,
+    enableInjected: true,
+    enableCoinbase: true,
+    rpcUrl: '...' // used for the Coinbase SDK
   }),
   chains,
   projectId
