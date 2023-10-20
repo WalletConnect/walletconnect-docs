@@ -672,6 +672,41 @@ NotifyClient.decryptMessage(
 )
 ```
 
+#### Push Notification best practices
+
+To allow users to granularly control which notifications they want to receive within system settings, it is recommended to use different notification channels for different types of notifications. For example, one channel for alerts and another channel for campaigns will allow users to turn off campaigns while still receiving alerts.
+
+```kotlin
+override fun onMessage(message: Notify.Model.Message, originalMessage: RemoteMessage) {
+    val appMetadata = NotifyClient.getActiveSubscriptions()[message.topic]?.metadata ?: throw IllegalStateException("No active subscription for topic: ${message.topic}")
+    val appDomain = URI(appMetadata.url).host ?: throw IllegalStateException("Unable to parse domain from $appMetadata.url")
+
+    val typeName = NotifyClient.getNotificationTypes(Notify.Params.NotificationTypes(appDomain))[message.type]?.name
+        ?: throw IllegalStateException("No notification type for topic:${message.topic} and type: ${message.type}")
+    
+    val channelId = message.type
+    val channelName = (appMetadata.name + ": " + typeName)
+
+    val notificationBuilder = NotificationCompat.Builder(this, channelId)
+        .setContentTitle(message.title)
+        .setSmallIcon(android.R.drawable.ic_popup_reminder) // specify icon for notification
+        .setContentText(message.body)
+        .setAutoCancel(true) // clear notification after click
+        .setSound(defaultSoundUri) // specify sound for notification
+        .setContentIntent(pendingIntent) // specify pendingIntent
+
+    // Since android Oreo notification channel is needed.
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+        val channel = NotificationChannel(channelId, channelName, NotificationManager.IMPORTANCE_HIGH)
+        notificationManager.createNotificationChannel(channel)
+    }
+
+    notificationManager.notify(message.hashCode(), notificationBuilder.build()) // specify id of notification
+}
+
+
+```
+
 </PlatformTabItem>
 <PlatformTabItem value="react-native">
 
