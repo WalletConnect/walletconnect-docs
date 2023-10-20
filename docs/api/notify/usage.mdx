@@ -560,11 +560,13 @@ In order to use Notify SDK account must register identity in [Keyserver](https:/
 ```kotlin
 val params = Notify.Params.Registration(
     account = /*[CAIP-10](https://github.com/ChainAgnostic/CAIPs/blob/master/CAIPs/caip-10.md) compatible accountId*/,
-    onSign = {// Message to be signed. When user decides to sign message use CacaoSigner to sign message.
-    // CacaoSigner is a util for easy message signing.
-    return CacaoSigner.sign(message, /*privateKey*/, SignatureType.EIP191)
-    // When users decides to not sign message return null
-    return null }
+    onSign = {
+        // Message to be signed. When user decides to sign message use CacaoSigner to sign message.
+        // CacaoSigner is a util for easy message signing.
+        return CacaoSigner.sign(message, /*privateKey*/, SignatureType.EIP191)
+        // When users decides to not sign message return null
+        return null 
+    }
 )
 
 NotifyClient.register(
