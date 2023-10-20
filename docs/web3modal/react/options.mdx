@@ -150,9 +150,12 @@ createWeb3Modal({
 })
 ```
 
-## connectorImages (Wagmi)
+## connectorImages
 
-Set or override the images for any [Wagmi connector](https://wagmi.sh/react/connectors/injected). The key of each property must match the id of the connector.
+<PlatformTabs groupId="eth-lib" activeOptions={["wagmi","ethers"]}>
+<PlatformTabItem value="wagmi">
+
+Set or override the images of any [connector](https://wagmi.sh/core/connectors/injected). The key of each property must match the id of the connector.
 
 ```ts
 createWeb3Modal({
@@ -162,6 +165,23 @@ createWeb3Modal({
    }
 })
 ```
+
+</PlatformTabItem>
+<PlatformTabItem value="ethers">
+
+Set or override the images of any connector.
+
+```ts
+createWeb3Modal({
+connectorImages: {
+  coinbaseWallet: 'https://images.mydapp.com/coinbase.png',
+  walletConnect: 'https://images.mydapp.com/walletconnect.png',
+}
+})
+```
+
+</PlatformTabItem>
+</PlatformTabs>
 
 ## termsConditionsUrl
 
