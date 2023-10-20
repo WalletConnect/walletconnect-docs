@@ -237,7 +237,7 @@ module.exports = {
             },
             {
               type: 'category',
-              label: 'Notify API',
+              label: 'Notify',
               items: ['api/notify/about', 'api/notify/usage']
             },
             {
