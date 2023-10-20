@@ -616,7 +616,7 @@ class SampleFirebaseService: NotifyMessageService() {
 
 #### Push Notification best practices
 
-To allow users to granularly control which notifications they want to receive within system settings, it is recommended to use different notification channels for different types of notifications. For example, one channel for alerts and another channel for campaigns will allow users to turn off campaigns while still receiving alerts.
+`Notify.Model.Message` contains a `type` field, which is a unique id of the notification type. It is recommended to use this field as a notification channel id. By doing so it will create a channel for each notification type. To allow users to granularly control which notifications they want to receive within system settings, it is recommended to create a separate channel for every dapp and every notification type they might have. By doing so user would be able to turn off notifications for specific notification type per every subscribed dapp.
 
 ```kotlin
 override fun onMessage(message: Notify.Model.Message, originalMessage: RemoteMessage) {
