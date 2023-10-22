@@ -101,42 +101,6 @@ createWeb3Modal({
 
 If you would like to remove default wallets completely, you can set the `featuredWalletIds` property to an empty array.
 
-<!---
-## includeWalletIds
-
-Override default recommended wallets that are fetched from [WalletConnect explorer](https://walletconnect.com/explorer?type=wallet).
-Array of wallet ids defined will be shown (order is respected).
-Unlike `featuredWalletIds`, these wallets will be the **only** ones shown in `All Wallets` view and as recommended wallets.
-You can get these ids from the explorer link mentioned before by clicking on a copy icon of desired wallet card.
-
-```ts
-createWeb3Modal({
-  //...
-  includeWalletIds: [
-    '1ae92b26df02f0abca6304df07debccd18262fdf5fe82daa81593582dac9a369',
-    '4622a2b2d6af1c9844944291e5e7351a6aa24cd7b23099efac1b2fd875da31a0'
-  ]
-})
-```
-
-## excludeWalletIds
-
-Exclude wallets that are fetched from [WalletConnect explorer](https://walletconnect.com/explorer?type=wallet).
-Array of wallet ids defined will be excluded.
-All other wallets will be shown in respective places.
-You can get these ids from the explorer link mentioned before by clicking on a copy icon of desired wallet card.
-
-```ts
-createWeb3Modal({
-  //...
-  excludeWalletIds: [
-    '1ae92b26df02f0abca6304df07debccd18262fdf5fe82daa81593582dac9a369',
-    '4622a2b2d6af1c9844944291e5e7351a6aa24cd7b23099efac1b2fd875da31a0'
-  ]
-})
-```
--->
-
 ## chainImages
 
 Add or override the modal's network images.
@@ -196,11 +160,57 @@ createWeb3Modal({
 
 ## privacyPolicyUrl
 
+:::caution
+
+Excluded wallets **won't** be able to connect to your website on mobile via WalletConnect protocol.
+
+:::
+
 You can add an url for the _privacy policy_ link.
 
 ```ts
 createWeb3Modal({
   //...
   privacyPolicyUrl: 'https://www.myprivacypolicy.com'
+})
+```
+
+## includeWalletIds
+
+:::caution
+
+Excluded wallets **won't** be able to connect to your website on mobile via WalletConnect protocol.
+
+:::
+
+Override default recommended wallets that are fetched from [WalletConnect explorer](https://walletconnect.com/explorer?type=wallet).
+Array of wallet ids defined will be shown (order is respected).
+Unlike `featuredWalletIds`, these wallets will be the **only** ones shown in `All Wallets` view and as recommended wallets.
+You can get these ids from the explorer link mentioned before by clicking on a copy icon of desired wallet card.
+
+```ts
+createWeb3Modal({
+  //...
+  includeWalletIds: [
+    '1ae92b26df02f0abca6304df07debccd18262fdf5fe82daa81593582dac9a369',
+    '4622a2b2d6af1c9844944291e5e7351a6aa24cd7b23099efac1b2fd875da31a0'
+  ]
+})
+```
+
+## excludeWalletIds
+
+Exclude wallets that are fetched from [WalletConnect explorer](https://walletconnect.com/explorer?type=wallet).
+Array of wallet ids defined will be excluded.
+All other wallets will be shown in respective places.
+You can get these ids from the explorer link mentioned before by clicking on a copy icon of desired wallet card.
+
+```ts
+createWeb3Modal({
+  //...
+  excludeWalletIds: [
+    '1ae92b26df02f0abca6304df07debccd18262fdf5fe82daa81593582dac9a369',
+    '4622a2b2d6af1c9844944291e5e7351a6aa24cd7b23099efac1b2fd875da31a0'
+  ]
 })
 ```
