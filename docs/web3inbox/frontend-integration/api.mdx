@@ -63,7 +63,7 @@ account is registered. This is to enable state synchronization.
 ```ts
 const { account, setAccount, register } = useW3iAccount()
 
-register({ onSign })
+register(onSign)
 ```
 
 #### References
@@ -157,8 +157,8 @@ unsubscribe()
   topic: string
   account: string
   relay: relayertypes.protocoloptions
-  metadata: metadata
-  scope: scopemap
+  metadata: Metadata
+  scope: ScopeMap
   expiry: number
   symkey: string
 }
@@ -190,8 +190,8 @@ const subscription = client.getSubscription(account)
   topic: string
   account: string
   relay: relayertypes.protocoloptions
-  metadata: metadata
-  scope: scopemap
+  metadata: Metadata
+  scope: ScopeMap
   expiry: number
   symkey: string
 }
@@ -284,6 +284,7 @@ updateScopes(Object.keys(scopes))
 type ScopeMap = Record<
   string,
   {
+    name: string,
     description: string
     enabled: boolean
   }
@@ -312,6 +313,7 @@ client.update(account, Object.keys(scopes))
 type ScopeMap = Record<
   string,
   {
+    name: string,
     description: string
     enabled: boolean
   }
