@@ -1674,6 +1674,20 @@ Web3Wallet.respondAuthRequest(Wallet.Params.AuthRequestResponse.Result(request.i
 }
 ```
 
+Respond without giving sdk the private key:
+
+```kotlin
+val request: Wallet.Event.AuthRequest = // Request from onAuthRequest
+val signature: String = // Here developers provide signed message from request.message
+val cacaoSignature = Wallet.Model.Cacao.Signature(SignatureType.EIP191.header, Signature.fromString(signature).toCacaoSignature())
+
+val issuer = //Check following link for more reference: https://github.com/w3c-ccg/did-pkh/blob/main/did-pkh-method-draft.md
+
+Web3Wallet.respondAuthRequest(Wallet.Params.AuthRequestResponse.Result(request.id, cacaoSignature, issuer)) { error ->
+    Log.e("Wallet respond approve", error.throwable.stackTraceToString())
+}
+```
+
 </PlatformTabItem>
 <PlatformTabItem value="flutter">
 
