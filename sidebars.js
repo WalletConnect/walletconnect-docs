@@ -127,7 +127,7 @@ module.exports = {
                 {
                   type: 'link',
                   label: 'Example',
-                  href: 'https://github.com/WalletConnect/web3modal-swift/tree/develop/Example'
+                  href: 'https://github.com/WalletConnect/web3modal-swift/tree/develop/Sample/Example'
                 }
               ]
             },
