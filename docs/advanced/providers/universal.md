@@ -46,9 +46,9 @@ await provider.connect({
           "https://rpc.walletconnect.com?chainId=eip155:80001&projectId=<your walletconnect project id>",
       },
     },
-    pairingTopic: "<123...topic>", // optional topic to connect to
-    skipPairing: false, // optional to skip pairing ( later it can be resumed by invoking .pair())
   },
+  pairingTopic: "<123...topic>", // optional topic to connect to
+  skipPairing: false, // optional to skip pairing ( later it can be resumed by invoking .pair())
 });
 
 //  Create Web3 Provider
