@@ -1597,24 +1597,6 @@ public struct VerifyContext: Equatable, Hashable {
 
 </PlatformTabItem>
 <PlatformTabItem value="android">
-
-To approve authorization request, sign message using `CacaoSigner.sign` which requires private key to sign `Cacao` object that needs to be passed to `Wallet.Params.AuthRequestResponse` object and send to Dapp.
-`issuer` parameter describes what did responder authorizes. Example `iss` for Ethereum Mainnet: `did:pkh:eip155:1:0xb9c5714089478a327f09197987f16f9e5d936e8a`. More about `did:pkh` method [here](https://github.com/w3c-ccg/did-pkh/blob/main/did-pkh-method-draft.md).
-
-```kotlin
-val request: Wallet.Event.AuthRequest = // Request from onAuthRequest
-val signature: Wallet.Model.Cacao.Signature = CacaoSigner.sign(
-    request.message, // Message to be signed
-    PRIVATE_KEY, // Private key used to signing a message
-    SignatureType.EIP191 // or EIP1271
-)
-val issuer = //Check following link for more reference: https://github.com/w3c-ccg/did-pkh/blob/main/did-pkh-method-draft.md
-
-Web3Wallet.respondSessionRequest(Wallet.Params.AuthRequestResponse(request.id, signature, issuer)) { error ->
-    Log.e("Wallet respond approve", error.throwable.stackTraceToString())
-}
-```
-
 </PlatformTabItem>
 <PlatformTabItem value="flutter">
 
@@ -1675,7 +1657,36 @@ try await Web3WalletClient.respond(requestId: request.id, signature: signature, 
 </PlatformTabItem>
 <PlatformTabItem value="android">
 
-<!-- TODO: -->
+To approve authorization request, sign message using `CacaoSigner.sign` which requires private key to sign `Cacao` object that needs to be passed to `Wallet.Params.AuthRequestResponse` object and send to Dapp.
+`issuer` parameter describes what did responder authorizes. Example `iss` for Ethereum Mainnet: `did:pkh:eip155:1:0xb9c5714089478a327f09197987f16f9e5d936e8a`. More about `did:pkh` method [here](https://github.com/w3c-ccg/did-pkh/blob/main/did-pkh-method-draft.md).
+
+```kotlin
+val request: Wallet.Event.AuthRequest = // Request from onAuthRequest
+val signature: Wallet.Model.Cacao.Signature = CacaoSigner.sign(
+    request.message, // Message to be signed
+    PRIVATE_KEY, // Private key used to signing a message
+    SignatureType.EIP191 // or EIP1271
+)
+val issuer = //Check following link for more reference: https://github.com/w3c-ccg/did-pkh/blob/main/did-pkh-method-draft.md
+
+Web3Wallet.respondAuthRequest(Wallet.Params.AuthRequestResponse.Result(request.id, signature, issuer)) { error ->
+    Log.e("Wallet respond approve", error.throwable.stackTraceToString())
+}
+```
+
+Respond without giving sdk the private key:
+
+```kotlin
+val request: Wallet.Event.AuthRequest = // Request from onAuthRequest
+val signature: String = // Here developers provide signed message from request.message
+val cacaoSignature = Wallet.Model.Cacao.Signature(SignatureType.EIP191.header, Signature.fromString(signature).toCacaoSignature())
+
+val issuer = //Check following link for more reference: https://github.com/w3c-ccg/did-pkh/blob/main/did-pkh-method-draft.md
+
+Web3Wallet.respondAuthRequest(Wallet.Params.AuthRequestResponse.Result(request.id, cacaoSignature, issuer)) { error ->
+    Log.e("Wallet respond approve", error.throwable.stackTraceToString())
+}
+```
 
 </PlatformTabItem>
 <PlatformTabItem value="flutter">
@@ -1736,7 +1747,15 @@ try await Web3WalletClient.reject(requestId: request.id)
 </PlatformTabItem>
 <PlatformTabItem value="android">
 
-<!-- TODO: -->
+```kotlin
+val request: Wallet.Event.AuthRequest = // Request from onAuthRequest
+val errorCode: Int = 12001
+val errorMessage: String = "User Rejected Request"
+
+Web3Wallet.respondAuthRequest(Wallet.Params.AuthRequestResponse.Error(request.id, errorCode, errorMessage)) { error ->
+    Log.e("Wallet respond reject", error.throwable.stackTraceToString())
+}
+```
 
 </PlatformTabItem>
 <PlatformTabItem value="flutter">
