@@ -20,25 +20,29 @@ Init the client
 
 ```ts
 // You can optionally pass a domain to override the behavior of using window.location
-const clientIsReady = useInitWeb3inboxClient({ projectId })
+const clientIsReady = useInitWeb3inboxClient({ projectId, domain, isLimited })
 const client = useWeb3InboxClient()
 ```
 
 #### References
 
 - **projectId:** Your WalletConnect project ID
+- **domain *(Optional)*:** your dapp domain 
+- **isLimited:** Manage your dapp's state alone, or all an account's subscriptions. Recommended to set this to true or keep undefined.
 
 </PlatformTabItem>
 
 <PlatformTabItem value="html">
 
 ```ts
-const client = Web3InboxClient.init({ projectId })
+const client = Web3InboxClient.init({ projectId, domain, isLimited })
 ```
 
 #### References
 
 - **projectId:** Your WalletConnect project ID
+- **domain *(Optional)*:** your dapp domain 
+- **isLimited:** Manage your dapp's state alone, or all an account's subscriptions. Recommended to set this to true or keep undefined.
 
 </PlatformTabItem>
 </PlatformTabs>
@@ -63,7 +67,7 @@ account is registered. This is to enable state synchronization.
 ```ts
 const { account, setAccount, register } = useW3iAccount()
 
-register({ onSign })
+register(onSign)
 ```
 
 #### References
@@ -100,7 +104,7 @@ client.watchAccount(acc => (reactiveAccountState = acc))
 
 client.register({
   account,
-  onSign
+  onSign,
 })
 ```
 
@@ -136,17 +140,39 @@ Subscribe, Unsubscribe, Get Subscription, Check if Subscribed.
 <PlatformTabItem value="react">
 
 ```ts
+// manage subscription of current account's subscription to current dapp
+const { subscribe, unsubscribe, isSubscribed } = useManageSubscription()
+
+// manage subscription of specific account's subscription to current dapp
 const { subscribe, unsubscribe, isSubscribed } = useManageSubscription(account)
 
+// manage subscription of specific account's subscription to specific dapp
+const { subscribe, unsubscribe, isSubscribed } = useManageSubscription(account, domain)
+
+// get current account's subscription to current dapp
+const { subscription } = useSubscription()
+
+// get specific account's subscription to current dapp
 const { subscription } = useSubscription(account)
 
+// get specific account's subscription to specific dapp
+const { subscription } = useSubscription(account, domain)
+
 subscribe()
+
 unsubscribe()
+
+// get all subscriptions for current account
+const subscriptions = useSubscriptions()
+
+// get all subscriptions for specific account
+const subscriptions = useSubscriptions(account)
 ```
 
 #### References
 
-- **account *(Optional)*:** CAIP-10 account currently active in Web3Inbox
+- **account *(Optional)*:** CAIP-10 account 
+- **domain *(Optional)*:** dapp domain 
 - **subscribe:** Function to subscribe to current dApp `() => void`
 - **unsubscribe:** Function to unsubscribe to current dApp `() => void`
 - **isSubscribed:** Reactive state, checking if subscribed to dApp `Boolean`
@@ -157,32 +183,76 @@ unsubscribe()
   topic: string
   account: string
   relay: relayertypes.protocoloptions
-  metadata: metadata
-  scope: scopemap
+  metadata: Metadata
+  scope: ScopeMap
   expiry: number
   symkey: string
 }
 ```
 
+- **subscriptions:** Reactive state, returning array of current subscriptions 
+
 </PlatformTabItem>
 <PlatformTabItem value="html">
 
 ```ts
-const isSubscribed = client.getIsSubscribedToCurrentDapp(account)
+// check if current account is subscribed to current dapp
+const isSubscribed = client.getIsSubscribedTo()
+
+// check if specific account is subscribed to current dapp
+const isSubscribed = client.getIsSubscribedTo(account)
+
+// check if specific account is subscribed to specfic dapp
+const isSubscribed = client.getIsSubscribedTo(account, domain)
 
 let isSubscribedReactive = false
-client.watchIsSubscribed(account, isSubbed => (isSubscribedReactive = isSubbed))
+// watch if current account is subscribed to current dapp
+client.watchIsSubscribed(isSubbed => (isSubscribedReactive = isSubbed))
 
-client.subscribeToCurrentDapp(account)
+// watch if specific account is subscribed to current dapp
+client.watchIsSubscribed(isSubbed => (isSubscribedReactive = isSubbed), account)
 
-client.unSubscribeToCurrentDapp(account)
+// watch if specific account is subscribed to specific dapp
+client.watchIsSubscribed(isSubbed => (isSubscribedReactive = isSubbed), account, domain)
 
+// subscribe to current dapp with current account
+client.subscribeToDapp()
+
+// subscribe to current dapp with specific account
+client.subscribeToDapp(account)
+
+// subscribe to specific dapp with specific account
+client.subscribeToDapp(account, domain)
+
+// unsubscribe from current dapp with current account
+client.unsubscribeFromDapp()
+
+// unsubscribe from current dapp with specific account
+client.unsubscribeFromDapp(account)
+
+// subscribe from specific dapp with specific account
+client.unsubscribeToDapp(account, domain)
+
+// get current account's subscription to current dapp
+const subscription = client.getSubscription()
+
+// get specific account's subscription to current dapp
 const subscription = client.getSubscription(account)
+
+// get specific account's subscription to specific dapp
+const subscription = client.getSubscription(account, domain)
+
+// get current account's subscriptions.
+const subscriptions = client.getSubscriptions();
+
+// get specific account's subscriptions.
+const subscriptions = client.getSubscriptions(account);
 ```
 
 #### References
 
-- **account *(Optional)*:** CAIP-10 account currently active in Web3Inbox
+- **account *(Optional)*:** CAIP-10 account 
+- **domain *(Optional)*:** dapp domain 
 - **subscription:** _Non-Reactive_ state, returning current subscription information, of type:
 
 ```ts
@@ -190,15 +260,18 @@ const subscription = client.getSubscription(account)
   topic: string
   account: string
   relay: relayertypes.protocoloptions
-  metadata: metadata
-  scope: scopemap
+  metadata: Metadata
+  scope: ScopeMap
   expiry: number
   symkey: string
 }
 ```
 
+- **subscription:** _Non-Reactive_ state, returning array of current subscriptions
+
 </PlatformTabItem>
 </PlatformTabs>
+	
 
 ## Managing Messages
 
@@ -212,14 +285,23 @@ Get and delete messages
 <PlatformTabItem value="react">
 
 ```ts
+
+// watch messages of current account's susbcription to current dapp
+const { messages, deleteMessage } = useMessages()
+
+// watch messages of specific account's susbcription to current dapp
 const { messages, deleteMessage } = useMessages(account)
+
+// watch messages of specific account's susbcription to specific dapp
+const { messages, deleteMessage } = useMessages(account, domain)
 
 deleteMessage(messages[0].id)
 ```
 
 #### References
 
-- **account *(Optional)*:** CAIP-10 account currently active in Web3Inbox
+- **account *(Optional)*:** CAIP 10 account
+- **domain *(Optional)*:** Domain of dapp
 - **messages:** Array of messages, of type
 
 ```ts
@@ -237,12 +319,21 @@ deleteMessage(messages[0].id)
 ```ts
 const nonReactiveMessageState = client.getMessageHistory(account)
 let reactiveMessageState = []
+
+// watch messages of current account's susbcription to current dapp
 client.watchMessages(m => (reactiveMessageState = m))
+
+// watch messages of specific account's susbcription to current dapp
+client.watchMessages(m => (reactiveMessageState = m), account)
+
+// watch messages of specific account's susbcription to specific dapp
+client.watchMessages(m => (reactiveMessageState = m), account, domain)
 ```
 
 #### References
 
-- **account *(Optional)*:** CAIP-10 account currently active in Web3Inbox
+- **account *(Optional)*:** CAIP-10 account 
+- **domain *(Optional)*:** Domain of dapp
 - **messages:** Array of messages, of type
 
 ```ts
@@ -269,14 +360,25 @@ Manage and fetch subscription scopes.
 <PlatformTabItem value="react">
 
 ```ts
+
+
+// watch and manage scopes of current account's subscription to current dapp
+const { scopes, updateScopes } = useSubscriptionScopes()
+
+// watch and manage scopes of specific account's subscription to current dapp
 const { scopes, updateScopes } = useSubscriptionScopes(account)
+
+
+// watch and manage scopes of specific account's subscription to specific dapp
+const { scopes, updateScopes } = useSubscriptionScopes(account, domain)
 
 updateScopes(Object.keys(scopes))
 ```
 
 #### References
 
-- **account *(Optional)*:** CAIP-10 account currently active in Web3Inbox
+- **account *(Optional)*:** CAIP-10 account 
+- **domain *(Optional)*:** dapp domain
 - **scopes:** Map of scopes (Notification types)
 - **updateScopes:** `(enabledScopeNames: string[]) -> void`
 
@@ -284,6 +386,7 @@ updateScopes(Object.keys(scopes))
 type ScopeMap = Record<
   string,
   {
+    name: string
     description: string
     enabled: boolean
   }
@@ -294,17 +397,42 @@ type ScopeMap = Record<
 <PlatformTabItem value="html">
 
 ```ts
+
+// get scopes of current account's subscription to current dapp
+const scopes = client.getNotificationTypes()
+
+// get scopes of specific account's subscription to current dapp
 const scopes = client.getNotificationTypes(account)
+
+// get scopes of specific account's subscription to specific dapp
+const scopes = client.getNotificationTypes(account, domain)
+
+
 let reactiveScopes = {}
 
+// watch scopes of current account's subscription to current dapp
 client.watchScopeMap(scp => (reactiveScopes = scp))
 
-client.update(account, Object.keys(scopes))
+// watch scopes of specific account's subscription to current dapp
+client.watchScopeMap(scp => (reactiveScopes = scp), account)
+
+// watch scopes of specific account's subscription to specific dapp
+client.watchScopeMap(scp => (reactiveScopes = scp), account, domain)
+
+// update scopes of current account's subscription to current dapp
+client.update(Object.keys(scopes))
+
+// update scopes of specific account's subscription to current dapp
+client.update(Object.keys(scopes), account)
+
+// update scopes of specific account's subscription to specific dapp
+client.update(Object.keys(scopes), account, domain)
 ```
 
 #### References
 
-- **account *(Optional)*:** CAIP-10 account currently active in Web3Inbox
+- **account *(Optional)*:** CAIP-10 account 
+- **domain *(Optional)*:** dapp domain
 - **scopes:** Map of scopes (Notification types)
 - **updateScopes:** `(enabledScopeNames: string[]) -> void`
 
@@ -312,6 +440,7 @@ client.update(account, Object.keys(scopes))
 type ScopeMap = Record<
   string,
   {
+    name: string
     description: string
     enabled: boolean
   }

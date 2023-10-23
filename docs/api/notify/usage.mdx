@@ -128,7 +128,20 @@ await notifyClient.register({
   domain: 'com.mydomain.app.rn', // pass your app's bundle identifier.
   isLimited: false // The user will be prompted to authorize this wallet to send and receive messages on their behalf for ALL domains using their WalletConnect identity.
 })
+
 ```
+
+### Unregistering
+Any identity registered can be unregistered via the `unregister` method.
+
+```javascript
+const account = `eip155:1:0x63Be2c680685d2A9620c11b0068291261aa62d76`
+
+await notifyClient.unregister({
+  account
+})
+```
+
 
 ## Managing Subscriptions
 
