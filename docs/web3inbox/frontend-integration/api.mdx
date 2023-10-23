@@ -67,7 +67,7 @@ account is registered. This is to enable state synchronization.
 ```ts
 const { account, setAccount, register } = useW3iAccount()
 
-register({ onSign })
+register({ onSign, account })
 ```
 
 #### References
@@ -104,7 +104,7 @@ client.watchAccount(acc => (reactiveAccountState = acc))
 
 client.register({
   account,
-  onSign
+  onSign,
 })
 ```
 
