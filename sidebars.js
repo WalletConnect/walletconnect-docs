@@ -96,7 +96,7 @@ module.exports = {
                 {
                   type: 'link',
                   label: 'Example',
-                  href: 'https://github.com/WalletConnect/Web3ModalFlutter/tree/master/example/sign'
+                  href: 'https://github.com/WalletConnect/Web3ModalFlutter/tree/master/example'
                 }
               ]
             },
