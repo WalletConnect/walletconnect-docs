@@ -1753,7 +1753,7 @@ val errorCode: Int = 12001
 val errorMessage: String = "User Rejected Request"
 
 Web3Wallet.respondAuthRequest(Wallet.Params.AuthRequestResponse.Error(request.id, errorCode, errorMessage)) { error ->
-    Log.e("Wallet respond approve", error.throwable.stackTraceToString())
+    Log.e("Wallet respond reject", error.throwable.stackTraceToString())
 }
 ```
 
