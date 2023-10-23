@@ -1,3 +1,7 @@
+import Container from '../../components/Container'
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
+
 # Theming
 
 ## Usage
@@ -87,7 +91,6 @@ To override colors you need to use methods `Web3ModalTheme.provideLightWeb3Modal
 To override foreground or background `ColorPalette` you can define new palette or use one of the Web3ModalTheme methods to provide Palette and override selected colors
 
 ```kotlin
-import com.walletconnect.web3.modal.ui.Web3ModalTheme
 
     interface Colors {
         val accent100: Color
@@ -99,7 +102,10 @@ import com.walletconnect.web3.modal.ui.Web3ModalTheme
         val success: Color
         val error: Color
     }
+```
 
+ColorPalette
+```kotlin
     data class ColorPalette(
         val color100: Color,
         val color125: Color,
@@ -111,7 +117,6 @@ import com.walletconnect.web3.modal.ui.Web3ModalTheme
         val color275: Color,
         val color300: Color,
     )
-
 ```
 </TabItem>
 
