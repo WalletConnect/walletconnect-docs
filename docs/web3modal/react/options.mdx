@@ -169,14 +169,15 @@ createWeb3Modal({
 })
 ```
 
-
-## includeWalletIds
+## includeWalletIds & excludeWalletIds
 
 :::caution
 
-Excluded wallets **won't** be able to connect to your website on mobile via WalletConnect protocol.
+Wallets that are either not included or excluded **won't** be able to connect to your website on mobile via WalletConnect protocol.
 
 :::
+
+### includeWalletIds
 
 Override default recommended wallets that are fetched from [WalletConnect explorer](https://walletconnect.com/explorer?type=wallet).
 Array of wallet ids defined will be shown (order is respected).
@@ -193,13 +194,7 @@ createWeb3Modal({
 })
 ```
 
-## excludeWalletIds
-
-:::caution
-
-Excluded wallets **won't** be able to connect to your website on mobile via WalletConnect protocol.
-
-:::
+### excludeWalletIds
 
 Exclude wallets that are fetched from [WalletConnect explorer](https://walletconnect.com/explorer?type=wallet).
 Array of wallet ids defined will be excluded.
