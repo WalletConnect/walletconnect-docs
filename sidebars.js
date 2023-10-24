@@ -109,6 +109,8 @@ module.exports = {
                 'web3modal/android/options',
                 'web3modal/android/usage',
                 'web3modal/android/actions',
+                'web3modal/android/components',
+                'web3modal/android/theming',
                 {
                   type: 'link',
                   label: 'Example',
