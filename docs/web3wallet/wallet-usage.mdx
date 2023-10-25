@@ -259,6 +259,8 @@ async function onSessionProposal({ id, params }: Web3WalletTypes.SessionProposal
       namespaces: approvedNamespaces
     })
   }catch(error){
+    // use the error.message to show toast/info-box letting the user know that the connection attempt was unsuccessful
+    ....
     await web3wallet.rejectSession({
       id: proposal.id,
       reason: getSdkError("USER_REJECTED")
@@ -424,6 +426,9 @@ async function onSessionProposal({ id, params }: Web3WalletTypes.SessionProposal
       namespaces: approvedNamespaces
     })
   }catch(error){
+    // use the error.message to show toast/info-box letting the user know that the connection attempt was unsuccessful
+   ....
+
     await web3wallet.rejectSession({
       id: proposal.id,
       reason: getSdkError("USER_REJECTED")
