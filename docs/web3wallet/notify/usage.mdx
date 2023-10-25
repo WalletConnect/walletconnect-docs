@@ -320,8 +320,8 @@ val activeSubscriptions: Map<String, Notify.Model.Subscription> = NotifyClient.g
 To get a map of all the active subscriptions, call the `getNotificationTypes` function. It will return a map with the notification type id as the key and `Notify.Model.NotificationType` as the value.
 
 ```kotlin
-val appMetadata = /*App Metadata*/
-val appDomain = /*App Domain*/ // URI(appMetadata.url).host
+val appMetadata: Core.Model.AppMetaData = /*App Metadata could be fetched from NotifyClient.getActiveSubscriptions()*/
+val appDomain: String = /*App Domain*/ // URI(appMetadata.url).host
 val notificationTypesParams = Notify.Params.NotificationTypes(appDomain)
 NotifyClient.getNotificationTypes(notificationTypesParams)
 ```
