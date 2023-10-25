@@ -537,7 +537,7 @@ await web3wallet.pair({ uri })
 
 This rejection means the SDK can't find a record with the given `proposal.id` - in this example `1`.
 This can happen when the proposal has expired (by default 5 minutes) or if you attempt to respond to a proposal that has already been approved/rejected.
-If you are seeing this error, please make sure that you are calling `approveSession` with the correct `proposal.id` that is available whithin the proposal payload.
+If you are seeing this error, please make sure that you are calling `approveSession` with the correct `proposal.id` that is available within the proposal payload.
 
 - `Error: Missing or invalid. approve(), namespaces should be an object with data`
 
@@ -547,8 +547,8 @@ This error means that the `namespaces` parameter passed to `approveSession` is e
 
 This error indicates that some value(s) in your `namespaces` object do not satisfy the required namespaces requested by the dapp.
 To provide additional guidance, the message might include info about the exact property that is missing or invalid e.g. `Required: eip155:1 Approved: eip155:137`.
-Please check [CAIP-25](https://github.com/ChainAgnostic/CAIPs/blob/master/CAIPs/caip-25.md) to familiarize yourself with the standard and it's nuanses.
-Additonaly, we highly recommend you to use our `namespace` builder utility that would greatly simplify the process of parsing & building a valid `namespaces` object.
+Please check [CAIP-25](https://github.com/ChainAgnostic/CAIPs/blob/master/CAIPs/caip-25.md) to familiarize yourself with the standard and it's nuances.
+Additionally, we highly recommend you to use our `namespace` builder utility that would greatly simplify the process of parsing & building a valid `namespaces` object.
 
 </PlatformTabItem>
 <PlatformTabItem value="ios">
@@ -686,7 +686,7 @@ Web3Wallet.instance.sessionsPublisher
 
 :::info Note
 
-Addresses provided in `accounts` array should follow [CAPI10](https://github.com/ChainAgnostic/CAIPs/blob/master/CAIPs/caip-10.md)
+Addresses provided in `accounts` array should follow [CAIP-10](https://github.com/ChainAgnostic/CAIPs/blob/master/CAIPs/caip-10.md)
 semantics.
 
 :::
@@ -854,7 +854,7 @@ web3wallet.on('session_proposal', async proposal => {
 
 This rejection means the SDK can't find a record with the given `proposal.id` - in this example `1`.
 This can happen when the proposal has expired (by default 5 minutes) or if you attempt to respond to a proposal that has already been approved/rejected.
-If you are seeing this error, please make sure that you are calling `rejectSession` with the correct `proposal.id` that is available whithin the proposal payload.
+If you are seeing this error, please make sure that you are calling `rejectSession` with the correct `proposal.id` that is available within the proposal payload.
 
 - `Error: Missing or invalid. reject() reason:`
 
@@ -992,7 +992,7 @@ const response = {
 
 This rejection means the SDK can't find a session with the given `topic` - in this example `xyz...`.
 This can happen when the session has been disconnected by either the wallet or the dapp while the session request was being processed or if a session with such topic doesn't exist.
-If you are seeing this error, please make sure that you are using a correct topic that is available whithin the request payload.
+If you are seeing this error, please make sure that you are using a correct topic that is available within the request payload.
 
 - `Error: Missing or invalid. respond() response:`
 
@@ -1124,7 +1124,7 @@ const response = {
 
 <PlatformTabItem value="csharp">
 
-Responding to session requests is very similar to sending session requests. See dApp usage on how sending session requests works. All custom session requests requires a request class **and** response class to be created that matches the `params` field type in the custom session request. C# is a staticly typed language, so these types must be given whenever you do a session request (or do any querying for session requests).
+Responding to session requests is very similar to sending session requests. See dApp usage on how sending session requests works. All custom session requests requires a request class **and** response class to be created that matches the `params` field type in the custom session request. C# is a static typed language, so these types must be given whenever you do a session request (or do any querying for session requests).
 
 Currently, **WalletConnectSharp does not automatically assume the object type for `params` is an array**. This is very important, since most EVM RPC requests have `params` as an array type. **Use `List<T>` to workaround this**. For example, for `eth_sendTransaction`, use `List<Transaction>` instead of `Transaction`.
 
@@ -1313,8 +1313,8 @@ This error means that the `namespaces` parameter passed to `updateSession` is ei
 
 This error indicates that some value(s) in your `namespaces` object do not satisfy the required namespaces requested by the dapp.
 To provide additional guidance, the message might include info about the exact property that is missing or invalid e.g. `Required: eip155:1 Approved: eip155:137`.
-Please check [CAIP-25](https://github.com/ChainAgnostic/CAIPs/blob/master/CAIPs/caip-25.md) to familiarize yourself with the standard and it's nuanses.
-Additonaly, we highly recommend you to use our `namespace` builder utility that would greatly simplify the process of parsing & building a valid `namespaces` object.
+Please check [CAIP-25](https://github.com/ChainAgnostic/CAIPs/blob/master/CAIPs/caip-25.md) to familiarize yourself with the standard and it's nuances.
+Additionally, we highly recommend you to use our `namespace` builder utility that would greatly simplify the process of parsing & building a valid `namespaces` object.
 
 </PlatformTabItem>
 <PlatformTabItem value="ios">
@@ -1455,7 +1455,7 @@ await request.Acknowledged();
 
 <PlatformTabItem value="web">
 
-To initiate disconnnect from a session(think session delete), call `.disconnectSession` by passing a `topic` & `reason` for the disconnect.
+To initiate disconnect from a session(think session delete), call `.disconnectSession` by passing a `topic` & `reason` for the disconnect.
 The other peer will receive a `session_delete` and be notified that the session has been disconnected.
 
 :::info Note

@@ -30,7 +30,7 @@ try Notify.configure(groupIdentifier: String, environment: APNSEnvironment, cryp
 
 `environment` - Use `debug` environment for debug builds and `release` for release and TestFlight builds.
 
-`crypto` - CruptoProvider is a protocol, you are required to provide an implementation of two methods recoverPubKey and keccak256.
+`crypto` - CryptoProvider is a protocol, you are required to provide an implementation of two methods recoverPubKey and keccak256.
 
 
 #### Register an identity key and enable cross-device account syncing
@@ -50,7 +50,7 @@ Notify.instance.register(account: account, domain: domain, onSign: onSign)
 
 `domain` - A domain of your wallet, you should use your bundle id
 
-`onSign` - callback that requres a signature from a user
+`onSign` - callback that requires a signature from a user
 
 
 ```swift
@@ -134,13 +134,13 @@ public func messagesPublisher(topic: String) -> AnyPublisher<[NotifyMessageRecor
 
 To enable seamless communication between a Dapp and a wallet, the wallet must first establish a Notify Subscription. This crucial step allows the Dapp and its associated services to publish notify messages directly to the wallet. Upon granting permission for the wallet's iOS application to display Push Notifications, users will experience real-time updates in the form of push notifications on their devices. For an enhanced user experience, consider subscribing to the `notifyMessagePublisher` channel. This option ensures that notify messages are delivered promptly when the app is active and a web socket connection is established, keeping users informed and engaged.
 
-To subscribe to dapp's notify messages first fetch publicly discoverable dapps with WalletConnet explorer:
+To subscribe to dapp's notify messages first fetch publicly discoverable dapps with WalletConnect explorer:
 
 https://explorer-api.walletconnect.com/v3/dapps?projectId={your_project_id}&is_notify_enabled=true
 
 and request a subscription directly from the wallet.
 
-You can also subscribe on web3inbox.com, the subscription will be synced accross devices and will appear in the wallet.
+You can also subscribe on web3inbox.com, the subscription will be synced across devices and will appear in the wallet.
 
 ```swift
 public func subscribe(appDomain: String, account: Account) async throws {
@@ -220,13 +220,13 @@ You'll need to create an instance of `Notify.Params.Registration` which will nee
 
 The `Notify.Model.Registration` object will need to be passed into `NotifyClient.register` which has a `onSuccess` method which will return the WalletConnect Identity public key. This public key is strictly for debugging and more information can be found [here](https://specs.walletconnect.com/2.0/specs/clients/core/identity/identity-keys). There is also an `onError` callback which will return an instance of `Notify.Model.Error` in case there is an error while registering the account.
 
-**Note** The `NotifyClient.Register` function is to verify the ownership over blockchain account when registering identities in [WalletConnect's Keyserver](https://specs.walletconnect.com/2.0/specs/servers/keys/). End users must sign the message provided on the `onSign(message: String)` callback. Currenlty only EIP191 signatures are supported in Keyserver.
+**Note** The `NotifyClient.Register` function is to verify the ownership over blockchain account when registering identities in [WalletConnect's Keyserver](https://specs.walletconnect.com/2.0/specs/servers/keys/). End users must sign the message provided on the `onSign(message: String)` callback. Currently only EIP191 signatures are supported in Keyserver.
 
 ```kotlin
 val caip10Account: String = /* CAIP-10 compatible accountId */
 val accountsPrivateKey: ByteArray = /* address' private key */
 
-val registeration = Notify.Params.Registration(
+val registration = Notify.Params.Registration(
   account = caip10Account,
   domain = /* ApplicationId as String */,
   onSign = { message ->
@@ -238,9 +238,9 @@ val registeration = Notify.Params.Registration(
 )
 
 NotifyClient.register(
-  params = registeration, 
+  params = registration, 
   onSuccess = { identityPublicKey: String ->
-    // Registeration was successful
+    // Registration was successful
    }, 
    onError = { error ->
     // Error will be thrown if there's an issue during initialization
@@ -446,7 +446,7 @@ Enable or disable Notify SDK in Web3Inbox (default: `true`), setting it to `fals
 
 #### settingsEnabled `boolean`
 
-Enable or disable settigns page in Web3Inbox (default: `true`), setting it to `false` will also remove the navigation item.
+Enable or disable settings page in Web3Inbox (default: `true`), setting it to `false` will also remove the navigation item.
 
 </PlatformTabItem>
 </PlatformTabs>
