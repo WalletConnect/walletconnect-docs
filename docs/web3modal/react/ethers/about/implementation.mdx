@@ -17,13 +17,7 @@ import { createWeb3Modal, defaultConfig } from '@web3modal/ethers5/react'
 const projectId = 'YOUR_PROJECT_ID'
 
 // 2. Set chains
-const mainnet = {
-  chainId: 1,
-  name: 'Ethereum',
-  currency: 'ETH',
-  explorerUrl: 'https://etherscan.io',
-  rpcUrl: 'https://cloudflare-eth.com'
-}
+const chains = [1, 42161]
 
 // 3. Create modal
 const metadata = {
@@ -35,7 +29,7 @@ const metadata = {
 
 createWeb3Modal({
   ethersConfig: defaultConfig({ metadata }),
-  chains: [mainnet],
+  chains,
   projectId
 })
 
@@ -57,13 +51,7 @@ import { createWeb3Modal, defaultConfig } from '@web3modal/ethers5/react'
 const projectId = 'YOUR_PROJECT_ID'
 
 // 2. Set chains
-const mainnet = {
-  chainId: 1,
-  name: 'Ethereum',
-  currency: 'ETH',
-  explorerUrl: 'https://etherscan.io',
-  rpcUrl: 'https://cloudflare-eth.com'
-}
+const chains = [1, 42161]
 
 // 3. Create modal
 const metadata = {
@@ -82,7 +70,7 @@ createWeb3Modal({
     enableCoinbase: true,
     rpcUrl: '...' // used for the Coinbase SDK
   }),
-  chains: [mainnet],
+  chains,
   projectId
 })
 
