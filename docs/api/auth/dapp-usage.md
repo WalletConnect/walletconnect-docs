@@ -388,12 +388,12 @@ var dappOptions = new AuthOptions()
         Name = "WalletConnectSharpv2 Dapp Example",
         Url = "https://walletconnect.com"
     },
-    // Uncomment to disable persistant storage
+    // Uncomment to disable persistent storage
     // Storage = new InMemoryStorage()
 };
 ```
 
-Once you have `AuthOptions` defined, you can use `WalletConnectAuthClient.Init` to initalize the client
+Once you have `AuthOptions` defined, you can use `WalletConnectAuthClient.Init` to initialize the client
 
 ```csharp
 var dappClient = await WalletConnectAuthClient.Init(dappOptions);

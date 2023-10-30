@@ -202,7 +202,7 @@ Used when a server sends a subscription message to a client.
 }
 ```
 
-### Fetch Messsages payload
+### Fetch Messages payload
 
 Used when a client wants to fetch all undelivered messages matching a single topic before subscribing.
 
@@ -240,7 +240,7 @@ Response will include a flag `hasMore`. If true, the consumer should fetch again
 
 
 
-### Batch Fetch Messsages payload
+### Batch Fetch Messages payload
 
 Used when a client wants to fetch all undelivered messages matching multiple topics before subscribing.
 

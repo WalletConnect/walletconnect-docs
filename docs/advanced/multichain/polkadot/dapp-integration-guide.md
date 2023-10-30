@@ -21,7 +21,7 @@ import UniversalProvider from '@walletconnect/universal-provider'
 import { WalletConnectModal } from '@walletconnect/modal'
 ```
 
-3. Instatiate a universal provider using the `projectId` created for your app.
+3. Instantiate a universal provider using the `projectId` created for your app.
 
 ```js
 const provider = await UniversalProvider.init({

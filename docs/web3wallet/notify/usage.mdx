@@ -216,7 +216,7 @@ This is a one-time action that does not need to be repeated after initial regist
 
 Once the NotifyClient is [initialized](#client-configuration), you'll need to register a [CAIP-10 account](https://github.com/ChainAgnostic/CAIPs/blob/master/CAIPs/caip-10.md) with the NotifyClient to enable receiving notifications and syncing of the account across multiple devices. 
 
-You'll need to create an instance of `Notify.Params.Registration` which will need the CAIP-10 account, the domain which should be your `ApplicationId`, and a lamda that will need to ask the user for permission to sign a message using their private key.
+You'll need to create an instance of `Notify.Params.Registration` which will need the CAIP-10 account, the domain which should be your `ApplicationId`, and a lambda that will need to ask the user for permission to sign a message using their private key.
 
 The `Notify.Model.Registration` object will need to be passed into `NotifyClient.register` which has a `onSuccess` method which will return the WalletConnect Identity public key. This public key is strictly for debugging and more information can be found [here](https://specs.walletconnect.com/2.0/specs/clients/core/identity/identity-keys). There is also an `onError` callback which will return an instance of `Notify.Model.Error` in case there is an error while registering the account.
 

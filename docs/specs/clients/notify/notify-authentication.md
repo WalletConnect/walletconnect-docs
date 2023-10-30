@@ -18,7 +18,7 @@ All of the above authentication payloads will share the following claims:
 
 ## Notify Subscription
 
-The wallet creates a notify subscription by signing a JWT with the Identity Key corrresponding the blockchain account subscribed
+The wallet creates a notify subscription by signing a JWT with the Identity Key corresponding the blockchain account subscribed
 
 This is achieved using [Identity Keys](../../servers/keys/identity-keys) and did-jwt with the following claims:
 
@@ -79,7 +79,7 @@ Expiry should be calculated from the addition of the issuance date and the notif
 
 ## Notify Update
 
-The wallet creates a notify update by signing a JWT with the Identity Key corrresponding the blockchain account subscribed
+The wallet creates a notify update by signing a JWT with the Identity Key corresponding the blockchain account subscribed
 
 This is achieved using [Identity Keys](../../servers/keys/identity-keys) and did-jwt with the following claims:
 
@@ -117,7 +117,7 @@ Once the Notify client wants to delete the subscription completely then it shoul
 
 ## Notify Delete Response
 
-Once the Notify Server has sucessfully handled the subscription deletion then it should authenticate the following request including the hash of the existing subscription payload.
+Once the Notify Server has successfully handled the subscription deletion then it should authenticate the following request including the hash of the existing subscription payload.
 
 - act - description of action intent. Must be equal to "notify_delete_response"
 - iss - did:key of an identity key. Enables to resolve associated Dapp domain used.

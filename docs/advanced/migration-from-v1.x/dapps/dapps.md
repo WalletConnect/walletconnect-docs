@@ -1,6 +1,6 @@
 # Dapps
 
-The followings steps describe the various steps necessary for dapps to migrate to WalletConnect v2.0.
+The following steps describe the various steps necessary for dapps to migrate to WalletConnect v2.0.
 
 1. [Getting Started](#getting-started)
 2. [Testing Your Integration](./dapp-checklist.md)

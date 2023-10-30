@@ -741,7 +741,7 @@ var walletOptions = new SignClientOptions()
         Name = "WalletConnectSharpv2 Wallet Example",
         Url = "https://walletconnect.com"
     },
-    // Uncomment to disable persistant storage
+    // Uncomment to disable persistent storage
     // Storage = new InMemoryStorage()
 };
 ```
@@ -814,11 +814,11 @@ await request.Acknowledged();
 
 #### Responding to Session Requests
 
-Responding to session requests is very similar to sending session requests. See dApp usage on how sending session requests works. All custom session requests requires a request class **and** response class to be created that matches the `params` field type in the custom session request. C# is a staticly typed language, so these types must be given whenever you do a session request (or do any querying for session requests).
+Responding to session requests is very similar to sending session requests. See dApp usage on how sending session requests works. All custom session requests requires a request class **and** response class to be created that matches the `params` field type in the custom session request. C# is a statically typed language, so these types must be given whenever you do a session request (or do any querying for session requests).
 
 Currently, **WalletConnectSharp does not automatically assume the object type for `params` is an array**. This is very important, since most EVM RPC requests have `params` as an array type. **Use `List<T>` to workaround this**. For example, for `eth_sendTransaction`, use `List<Transaction>` instead of `Transaction`.
 
-Newtonsoft.Json is used for JSON serialization/deserialization, therefor you can use Newtonsoft.Json attributes when defining fields in your request/response classes.
+Newtonsoft.Json is used for JSON serialization/deserialization, therefore you can use Newtonsoft.Json attributes when defining fields in your request/response classes.
 
 ##### Building a Response type
 

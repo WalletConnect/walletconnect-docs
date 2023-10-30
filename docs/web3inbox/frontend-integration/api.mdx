@@ -202,7 +202,7 @@ const isSubscribed = client.getIsSubscribedTo()
 // check if specific account is subscribed to current dapp
 const isSubscribed = client.getIsSubscribedTo(account)
 
-// check if specific account is subscribed to specfic dapp
+// check if specific account is subscribed to specific dapp
 const isSubscribed = client.getIsSubscribedTo(account, domain)
 
 let isSubscribedReactive = false
@@ -286,13 +286,13 @@ Get and delete messages
 
 ```ts
 
-// watch messages of current account's susbcription to current dapp
+// watch messages of current account's subscription to current dapp
 const { messages, deleteMessage } = useMessages()
 
-// watch messages of specific account's susbcription to current dapp
+// watch messages of specific account's subscription to current dapp
 const { messages, deleteMessage } = useMessages(account)
 
-// watch messages of specific account's susbcription to specific dapp
+// watch messages of specific account's subscription to specific dapp
 const { messages, deleteMessage } = useMessages(account, domain)
 
 deleteMessage(messages[0].id)
@@ -320,13 +320,13 @@ deleteMessage(messages[0].id)
 const nonReactiveMessageState = client.getMessageHistory(account)
 let reactiveMessageState = []
 
-// watch messages of current account's susbcription to current dapp
+// watch messages of current account's subscription to current dapp
 client.watchMessages(m => (reactiveMessageState = m))
 
-// watch messages of specific account's susbcription to current dapp
+// watch messages of specific account's subscription to current dapp
 client.watchMessages(m => (reactiveMessageState = m), account)
 
-// watch messages of specific account's susbcription to specific dapp
+// watch messages of specific account's subscription to specific dapp
 client.watchMessages(m => (reactiveMessageState = m), account, domain)
 ```
 

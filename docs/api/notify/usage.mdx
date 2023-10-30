@@ -359,7 +359,7 @@ public func subscribe(metadata: AppMetadata, account: Account, onSign: @escaping
 
 `account` - an account you want to associate a sebscription with
 
-`onSign` - callback that requres a signature from a user
+`onSign` - callback that requires a signature from a user
 
 #### Get Active Subscriptions
 
@@ -566,7 +566,7 @@ NotifyClient.setDelegate(walletDelegate)
 
 #### Register blockchain account 
 
-In order to use Notify SDK account must register identity in [Keyserver](https://specs.walletconnect.com/2.0/specs/servers/keys/). To verify ownership over blockchain account when registering identities in [Keyserver](https://specs.walletconnect.com/2.0/specs/servers/keys/) user's must sign message provided on `onSign(message: String)` callback. Currenlty only [`EIP191`](https://eips.ethereum.org/EIPS/eip-191) signatures are supported in [Keyserver](https://specs.walletconnect.com/2.0/specs/servers/keys/)
+In order to use Notify SDK account must register identity in [Keyserver](https://specs.walletconnect.com/2.0/specs/servers/keys/). To verify ownership over blockchain account when registering identities in [Keyserver](https://specs.walletconnect.com/2.0/specs/servers/keys/) user's must sign message provided on `onSign(message: String)` callback. Currently only [`EIP191`](https://eips.ethereum.org/EIPS/eip-191) signatures are supported in [Keyserver](https://specs.walletconnect.com/2.0/specs/servers/keys/)
 
 ##### NotifyClient.register
 
