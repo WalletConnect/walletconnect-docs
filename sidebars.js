@@ -77,7 +77,7 @@ module.exports = {
                 { type: 'doc', label: 'Getting started', id: 'web3modal/react-native/about' },
                 'web3modal/react-native/options',
                 'web3modal/react-native/hooks',
-                'web3modal/react-native/components',
+                'web3modal/react-native/components'
               ]
             },
             {
@@ -171,7 +171,6 @@ module.exports = {
               label: 'Frontend Integration',
               items: [
                 'web3inbox/frontend-integration/about',
-                'web3inbox/frontend-integration/usage',
                 'web3inbox/frontend-integration/api',
                 'web3inbox/frontend-integration/examples'
               ]

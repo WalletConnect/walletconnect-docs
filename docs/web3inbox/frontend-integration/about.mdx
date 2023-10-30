@@ -3,20 +3,23 @@ import Tabs from '@theme/Tabs'
 import TabItem from '@theme/TabItem'
 import PlatformTabs from '../../components/PlatformTabs'
 import PlatformTabItem from '../../components/PlatformTabItem'
+import CloudBanner from '../../components/CloudBanner'
 
 # Introduction
+
+<CloudBanner />
+
+While users can subscribe to notifications directly in a supporting wallet, or via Web3Inbox.com, users can also subscribe directly in your app. These Core Components provide you the building blocks necessary to allow users to subscribe, receive notifications, and manage notification preferences, all from your app's UI.
 
 :::caution
 Web3Inbox is in alpha development
 :::
 
-While users can subscribe to notifications directly in a supporting wallet, or via Web3Inbox.com, users can also subscribe directly in your app. These Core Components provide you the building blocks necessary to allow users to subscribe, receive notifications, and manage notification preferences, all from your app's UI.
-
 ## Installation
 
 <PlatformTabs
 	groupId="w3iw"
-	activeOptions={["react", "html"]}
+	activeOptions={["react", "js"]}
 >
 <PlatformTabItem value="react">
 
@@ -25,7 +28,7 @@ npm i @web3inbox/core @web3inbox/widget-react
 ```
 
 </PlatformTabItem>
-<PlatformTabItem value="html">
+<PlatformTabItem value="js">
 
 ```bash npm2yarn
 npm i @web3inbox/core
@@ -34,6 +37,98 @@ npm i @web3inbox/core
 </PlatformTabItem>
 </PlatformTabs>
 
+Using Core components is naturally very simple because they are a simple set of utilities at heart
+and are very malleable.
+
+## Getting Started
+
+<PlatformTabs
+	groupId="w3iw"
+	activeOptions={["react", "js"]}
+>
+<PlatformTabItem value="react">
+
+```tsx
+import { useManageSubscription, useSubscription, useW3iAccount, useInitWeb3InboxClient, useMessages } from "@web3inbox/widget-react";
+import { useSignMessage, useAccount } from 'wagmi'
+...
+
+
+const ExampleComponent = () => {
+  const isReady = useInitWeb3InboxClient({projectId: "..."})
+
+  const { account } = useAccount();
+
+  // Getting the account -- Use register before attempting to subscribe
+  const { setAccount, register } = useW3iAccount()
+
+  const { signMessageAsync } = useSignMessage();
+
+  // Checking if subscribed
+  const { subscribe, isSubscribed } = useManageSubscription()
+
+  // Get the subscription
+  const { subscription } = useSubscription()
+
+  const { messages } = useMessages()
+
+  useEffect(() => {
+    if (!Boolean(address)) return;
+    setAccount(`eip155:1:${address}`);
+  }, [address, setAccount]);
+
+  const handleRegistration = useCallback(async () => {
+    if (!account) return;
+    try {
+      await registerIdentity(signMessageAsync);
+    } catch (registerIdentityError) {
+      console.error({ registerIdentityError });
+    }
+  }, [signMessageAsync, registerIdentity, account]);
+
+  useEffect(() => {
+    if (!identityKey) {
+      handleRegistration();
+    }
+  }, [handleRegistration, identityKey]);
+
+  return (
+    <div>
+      <span>Client is {isReady? "Ready" : "Not Ready"}</span>
+      <span>You are {isSubscribed? "Subscribed" : "Not Subscribed"} Subscribed</span>
+      <button onClick={() => subscribe()}> Subscribe to current dapp </button>
+      <div> All your messages in JSON: {JSON.stringify(messages)}</div>
+    </div>
+  );
+}
+
+```
+
+</PlatformTabItem>
+<PlatformTabItem value="js">
+
+```ts
+import { Web3InboxClient } from '@web3inbox/core'
+
+const client = Web3InboxClient.init({ projectId: '...' })
+
+let accountState = ''
+let subscriptionState = ''
+
+client.register({ onSign })
+
+client.watchAccount(acc => (accountState = acc))
+
+client.watchSubscription(sub => (subscriptionState = sub))
+
+client.subscribe()
+
+const messages = client.getMessageHistory()
+```
+
+</PlatformTabItem>
+</PlatformTabs>
+
 ## Next Steps
 
-Now that you've installed Web3Inbox Core, you're ready to start integrating it. The next section will walk you through the process of setting up your project to use the library.
+Now that you've installed Web3Inbox Core and set it up, you're ready to use the API. Check out the [API Reference](/api) to learn more about the available methods and how to use them.
