@@ -1,4 +1,6 @@
 import Table from '../../components/Table'
+import PlatformTabs from '../../components/PlatformTabs'
+import PlatformTabItem from '../../components/PlatformTabItem'
 
 # Options
 
@@ -12,14 +14,38 @@ createWeb3Modal({ wagmiConfig, projectId, chains, ...options })
 
 You can set a desired chain for the initial connection:
 
+<PlatformTabs groupId="eth-lib" activeOptions={["wagmi","ethers"]}>
+<PlatformTabItem value="wagmi">
+
 ```ts
-import { mainnet } from 'wagmi/chains'
+import { mainnet } from '@wagmi/core/chains'
 
 createWeb3Modal({
   //...
   defaultChain: mainnet
 })
 ```
+
+</PlatformTabItem>
+<PlatformTabItem value="ethers">
+
+```ts
+const mainnet = {
+  chainId: 1,
+  name: 'Ethereum',
+  currency: 'ETH',
+  explorerUrl: 'https://etherscan.io',
+  rpcUrl: 'https://cloudflare-eth.com'
+}
+
+createWeb3Modal({
+  //...
+  defaultChain: [mainnet]
+})
+```
+
+</PlatformTabItem>
+</PlatformTabs>
 
 ## tokens
 
@@ -85,43 +111,6 @@ createWeb3Modal({
 
 If you would like to remove default wallets completely, you can set the `featuredWalletIds` property to an empty array.
 
-
-<!---
-## includeWalletIds
-
-Override default recommended wallets that are fetched from [WalletConnect explorer](https://walletconnect.com/explorer?type=wallet).
-Array of wallet ids defined will be shown (order is respected).
-Unlike `featuredWalletIds`, these wallets will be the **only** ones shown in `All Wallets` view and as recommended wallets.
-You can get these ids from the explorer link mentioned before by clicking on a copy icon of desired wallet card.
-
-```ts
-createWeb3Modal({
-  //...
-  includeWalletIds: [
-    '1ae92b26df02f0abca6304df07debccd18262fdf5fe82daa81593582dac9a369',
-    '4622a2b2d6af1c9844944291e5e7351a6aa24cd7b23099efac1b2fd875da31a0'
-  ]
-})
-```
-
-## excludeWalletIds
-
-Exclude wallets that are fetched from [WalletConnect explorer](https://walletconnect.com/explorer?type=wallet).
-Array of wallet ids defined will be excluded.
-All other wallets will be shown in respective places.
-You can get these ids from the explorer link mentioned before by clicking on a copy icon of desired wallet card.
-
-```ts
-createWeb3Modal({
-  //...
-  excludeWalletIds: [
-    '1ae92b26df02f0abca6304df07debccd18262fdf5fe82daa81593582dac9a369',
-    '4622a2b2d6af1c9844944291e5e7351a6aa24cd7b23099efac1b2fd875da31a0'
-  ]
-})
-```
--->
-
 ## chainImages
 
 Add or override the modal's network images.
@@ -137,7 +126,10 @@ createWeb3Modal({
 
 ## connectorImages
 
-Set or override the images for any [Wagmi connector](https://wagmi.sh/core/connectors/injected). The key of each property must match the id of the connector.
+<PlatformTabs groupId="eth-lib" activeOptions={["wagmi","ethers"]}>
+<PlatformTabItem value="wagmi">
+
+Set or override the images of any [connector](https://wagmi.sh/core/connectors/injected). The key of each property must match the id of the connector.
 
 ```ts
 createWeb3Modal({
@@ -147,6 +139,23 @@ createWeb3Modal({
    }
 })
 ```
+
+</PlatformTabItem>
+<PlatformTabItem value="ethers">
+
+Set or override the images of any connector.
+
+```ts
+createWeb3Modal({
+connectorImages: {
+  coinbaseWallet: 'https://images.mydapp.com/coinbase.png',
+  walletConnect: 'https://images.mydapp.com/walletconnect.png',
+}
+})
+```
+
+</PlatformTabItem>
+</PlatformTabs>
 
 ## termsConditionsUrl
 
@@ -167,5 +176,47 @@ You can add an url for the _privacy policy_ link.
 createWeb3Modal({
   //...
   privacyPolicyUrl: 'https://www.myprivacypolicy.com'
+})
+```
+
+## includeWalletIds & excludeWalletIds
+
+:::caution
+
+Wallets that are either not included or excluded **won't** be able to connect to your website on mobile via WalletConnect protocol.
+
+:::
+
+### includeWalletIds
+
+Override default recommended wallets that are fetched from [WalletConnect explorer](https://walletconnect.com/explorer?type=wallet).
+Array of wallet ids defined will be shown (order is respected).
+Unlike `featuredWalletIds`, these wallets will be the **only** ones shown in `All Wallets` view and as recommended wallets.
+You can get these ids from the explorer link mentioned before by clicking on a copy icon of desired wallet card.
+
+```ts
+createWeb3Modal({
+  //...
+  includeWalletIds: [
+    '1ae92b26df02f0abca6304df07debccd18262fdf5fe82daa81593582dac9a369',
+    '4622a2b2d6af1c9844944291e5e7351a6aa24cd7b23099efac1b2fd875da31a0'
+  ]
+})
+```
+
+### excludeWalletIds
+
+Exclude wallets that are fetched from [WalletConnect explorer](https://walletconnect.com/explorer?type=wallet).
+Array of wallet ids defined will be excluded.
+All other wallets will be shown in respective places.
+You can get these ids from the explorer link mentioned before by clicking on a copy icon of desired wallet card.
+
+```ts
+createWeb3Modal({
+  //...
+  excludeWalletIds: [
+    '1ae92b26df02f0abca6304df07debccd18262fdf5fe82daa81593582dac9a369',
+    '4622a2b2d6af1c9844944291e5e7351a6aa24cd7b23099efac1b2fd875da31a0'
+  ]
 })
 ```

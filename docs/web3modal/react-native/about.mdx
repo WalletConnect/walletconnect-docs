@@ -18,6 +18,9 @@ With Web3Modal React Native, we work with the [Wagmi](https://wagmi.sh) library 
 
 ## Installation
 
+<Tabs groupId="platform">
+<TabItem value="rn-cli" label="React Native CLI">
+
 ```bash npm2yarn
 npm install @web3modal/wagmi-react-native wagmi viem
 ```
@@ -33,6 +36,68 @@ On iOS, use CocoaPods to add the native modules to your project:
 ```
 npx pod-install
 ```
+</TabItem>
+
+<TabItem value="expo" label="Expo">
+
+```
+npx expo install @web3modal/wagmi-react-native wagmi viem
+```
+
+Additionally add these extra packages to help with async storage, polyfills, and SVG's.
+
+```
+npx expo install @react-native-async-storage/async-storage react-native-get-random-values react-native-svg react-native-modal @react-native-community/netinfo
+```
+
+#### Additional Setup for Expo SDK 48
+If you are using Expo SDK 48, you also need to polyfill `crypto` with expo-crypto library.
+
+1. Add `expo-crypto`
+```
+npx expo install expo-crypto
+```
+
+2. Create a file named `expo-shim.js`
+```js
+// src/expo-shim.js
+
+// Apply only with Expo SDK 48
+import { getRandomValues as expoCryptoGetRandomValues } from 'expo-crypto';
+
+class Crypto {
+  getRandomValues = expoCryptoGetRandomValues;
+}
+
+// eslint-disable-next-line no-undef
+const webCrypto = typeof crypto !== 'undefined' ? crypto : new Crypto();
+
+(() => {
+  if (typeof crypto === 'undefined') {
+    Object.defineProperty(window, 'crypto', {
+      configurable: true,
+      enumerable: true,
+      get: () => webCrypto,
+    });
+  }
+})();
+```
+
+3. Import `expo-shim.js` in your App root file
+
+```js
+// src/App.js
+
+import './expo-crypto-shim.js'
+...
+import { createWeb3Modal, defaultWagmiConfig } from '@web3modal/wagmi-react-native'
+```
+
+- Make sure this line executes before the first `@web3modal/wagmi-react-native` import.
+
+</TabItem>
+
+</Tabs>
 
 ## Implementation
 
@@ -130,3 +195,91 @@ Learn more about the Web3Modal hooks [here](./hooks.mdx)
 </TabItem>
 </Tabs>
 
+## Enable Wallet Detection
+To enable WalletConnectModal to detect wallets installed on the device, you need to make specific changes to the native code of your project.
+
+First, add our core dependency to your package.json file so React Native links it's native code to your project
+
+```bash npm2yarn
+npm install @web3modal/core-react-native
+```
+
+
+<Tabs groupId="platform">
+  <TabItem value="rn-cli" label="React Native CLI">
+
+  #### For iOS:
+
+  1. Open your `Info.plist` file.
+  2. Locate the `<key>LSApplicationQueriesSchemes</key>` section.
+  3. Add the desired wallet schemes as string entries within the `<array>`. These schemes represent the wallets you want to detect.
+  4. Refer to our [Info.plist example file](https://github.com/WalletConnect/react-native-examples/blob/main/dapps/ModalUProvider/ios/ModalUProvider/Info.plist) for a detailed illustration.
+
+  Example:
+  ```xml
+  <key>LSApplicationQueriesSchemes</key>
+  <array>
+    <string>metamask</string>
+    <string>trust</string>
+    <string>safe</string>
+    <string>rainbow</string>
+    <string>uniswap</string>
+    <!-- Add other wallet schemes names here -->
+  </array>
+  ```
+
+  #### For Android:
+
+
+  1. Open your `AndroidManifest.xml` file.
+  2. Locate the `<queries>` section.
+  3. Add the desired wallet package names as `<package>` entries within the `<queries>`. These package names correspond to the wallets you want to detect.
+  4. Refer to our [AndroidManifest.xml example file](https://github.com/WalletConnect/react-native-examples/blob/main/dapps/ModalUProvider/android/app/src/main/AndroidManifest.xml) for detailed guidance.
+
+  Example:
+  ```xml
+  <queries>
+    <package android:name="io.metamask"/>
+    <package android:name="com.wallet.crypto.trustapp"/>
+    <package android:name="io.gnosis.safe"/>
+    <package android:name="me.rainbow"/>
+    <!-- Add other wallet package names here -->
+  </queries>
+  ```
+
+</TabItem>
+
+<TabItem value="expo" label="Expo">
+
+#### For iOS only:
+
+To enable WalletConnectModal to detect wallets installed on the device in your Expo project for iOS, follow these steps:
+
+1. Open your `app.json` (or `app.config.js`) file.
+2. Locate the ios section within the configuration.
+3. Add the `infoPlist` object if it doesn't exist, and within it, include the `LSApplicationQueriesSchemes` array. This array will contain the desired wallet schemes you want to detect.
+4. Add the wallet schemes to the `LSApplicationQueriesSchemes` array.
+
+Your configuration should look like this:
+
+```json
+{
+  "expo": {
+    "ios": {
+      "infoPlist": {
+        "LSApplicationQueriesSchemes": [
+          "metamask",
+          "trust",
+          "safe",
+          "rainbow",
+          "uniswap",
+          // Add other wallet schemes names here
+        ]
+      }
+    }
+  }
+}
+```
+</TabItem>
+
+</Tabs>

@@ -36,8 +36,8 @@ module.exports = {
               label: 'React',
               items: [
                 { type: 'doc', label: 'Getting started', id: 'web3modal/react/about' },
-                'web3modal/react/options',
                 'web3modal/react/hooks',
+                'web3modal/react/options',
                 'web3modal/react/components',
                 'web3modal/react/theming',
                 'web3modal/react/resources'
@@ -49,8 +49,8 @@ module.exports = {
               label: 'Vue',
               items: [
                 { type: 'doc', label: 'Getting started', id: 'web3modal/vue/about' },
-                'web3modal/vue/options',
                 'web3modal/vue/composables',
+                'web3modal/vue/options',
                 'web3modal/vue/components',
                 'web3modal/vue/theming',
                 'web3modal/vue/resources'
@@ -62,8 +62,8 @@ module.exports = {
               label: 'JavaScript',
               items: [
                 { type: 'doc', label: 'Getting started', id: 'web3modal/javascript/about' },
-                'web3modal/javascript/options',
                 'web3modal/javascript/actions',
+                'web3modal/javascript/options',
                 'web3modal/javascript/components',
                 'web3modal/javascript/theming',
                 'web3modal/javascript/resources'
@@ -77,7 +77,8 @@ module.exports = {
                 { type: 'doc', label: 'Getting started', id: 'web3modal/react-native/about' },
                 'web3modal/react-native/options',
                 'web3modal/react-native/hooks',
-                'web3modal/react-native/components'
+                'web3modal/react-native/components',
+                'web3modal/react-native/resources'
               ]
             },
             {
@@ -95,7 +96,7 @@ module.exports = {
                 {
                   type: 'link',
                   label: 'Example',
-                  href: 'https://github.com/WalletConnect/Web3ModalFlutter/tree/master/example/sign'
+                  href: 'https://github.com/WalletConnect/Web3ModalFlutter/tree/master/example'
                 }
               ]
             },
@@ -108,10 +109,12 @@ module.exports = {
                 'web3modal/android/options',
                 'web3modal/android/usage',
                 'web3modal/android/actions',
+                'web3modal/android/components',
+                'web3modal/android/theming',
                 {
                   type: 'link',
                   label: 'Example',
-                  href: 'https://github.com/WalletConnect/WalletConnectKotlinV2/tree/master/sample/modals/src/main/kotlin/com/walletconnect/modals'
+                  href: 'https://github.com/WalletConnect/WalletConnectKotlinV2/tree/master/sample/modal/src/main/kotlin/com/walletconnect/sample/modal'
                 }
               ]
             },
@@ -126,7 +129,7 @@ module.exports = {
                 {
                   type: 'link',
                   label: 'Example',
-                  href: 'https://github.com/WalletConnect/web3modal-swift/tree/develop/Example'
+                  href: 'https://github.com/WalletConnect/web3modal-swift/tree/develop/Sample/Example'
                 }
               ]
             },
@@ -186,7 +189,13 @@ module.exports = {
       label: 'Cloud',
       collapsible: false,
       className: 'menu_outer_list',
-      items: ['cloud/explorer', 'cloud/verify', 'cloud/relay', 'cloud/blockchain-api']
+      items: [
+        'cloud/explorer',
+        'cloud/explorer-submission',
+        'cloud/verify',
+        'cloud/relay',
+        'cloud/blockchain-api'
+      ]
     },
     {
       type: 'category',
@@ -230,7 +239,7 @@ module.exports = {
             },
             {
               type: 'category',
-              label: 'Notify API',
+              label: 'Notify',
               items: ['api/notify/about', 'api/notify/usage']
             },
             {

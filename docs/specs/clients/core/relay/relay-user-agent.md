@@ -29,7 +29,7 @@ Additionally the following optional params can be included if available:
     protocol          = "wc" + protocol-version
     protocol-version  = 1*DIGIT
     sdk               = sdk-prefix + core-version
-    sdk-prefix        = ("js"|"swift"|"kotlin"|"csharp")
+    sdk-prefix        = ("js"|"swift"|"kotlin"|"csharp"|"unity")
     core-version      = STRING
     os                = STRING
     id                = id-prefix + id-host

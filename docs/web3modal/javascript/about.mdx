@@ -1,21 +1,40 @@
 import CloudBanner from '../../components/CloudBanner'
+import PlatformTabs from '../../components/PlatformTabs'
+import PlatformTabItem from '../../components/PlatformTabItem'
 import Tabs from '@theme/Tabs'
 import TabItem from '@theme/TabItem'
 
+import WagmiImplementation from './wagmi/about/implementation.mdx'
+import WagmiModal from './wagmi/about/triggermodal.mdx'
+
+import EthersImplementation from './ethers/about/implementation.mdx'
+import EthersModal from './ethers/about/triggermodal.mdx'
+
 # JavaScript
 
-## Introduction
-
-With Web3Modal JavaScript we work with the [@wagmi/core](https://wagmi.sh/core/getting-started) library which contains everything you need to start working with Ethereum. You can sign messages, interact with smart contracts, and much more.
-
-<CloudBanner />
+Web3Modal SDK has support for [Wagmi](https://wagmi.sh/) and [Ethers v5](https://docs.ethers.org/v5/getting-started/).
+Choose one of these ethereum libraries to get started.
 
 ## Installation
 
-Choose your preferred package manager
+<PlatformTabs groupId="eth-lib" activeOptions={["wagmi","ethers"]}>
+<PlatformTabItem value="wagmi">
+
 ```bash npm2yarn
 npm install @web3modal/wagmi @wagmi/core viem
 ```
+
+</PlatformTabItem>
+<PlatformTabItem value="ethers">
+
+```bash npm2yarn
+npm install @web3modal/ethers5 ethers@5.7.2
+```
+
+</PlatformTabItem>
+</PlatformTabs>
+
+<CloudBanner />
 
 <!-- Yo can install Web3Modal SDK by using a package manager like *npm* or with CDN imports.
 
@@ -42,174 +61,30 @@ import { mainnet, arbitrum } from 'https://esm.sh/@wagmi/core/chains?bundle'
 
 ## Implementation
 
-You can start Web3Modal configuration using either **default** or **custom** mode.
+<PlatformTabs groupId="eth-lib" activeOptions={["wagmi","ethers"]}>
+<PlatformTabItem value="wagmi">
 
-Default mode will implement WalletConnect, Browser Wallets (injected) and Coinbase options in addition to [Wagmi's public provider](https://wagmi.sh/react/providers/public) and [WalletConnect's provider](../../cloud/blockchain-api.md).
+<WagmiImplementation/>
 
-<Tabs>
-<TabItem value="default" label="Default">
+</PlatformTabItem>
+<PlatformTabItem value="ethers">
 
-Start by importing `Web3Modal`, `defaultWagmiConfig` and wagmi packages, then create `wagmiConfig` using `defaultWagmiConfig` function as shown below.
-Finally, pass `wagmiConfig` to the `Web3Modal` class.
+<EthersImplementation/>
 
-```ts
-import { createWeb3Modal, defaultWagmiConfig } from '@web3modal/wagmi'
-
-import { mainnet, arbitrum } from '@wagmi/core/chains'
-
-// 1. Define constants
-const projectId = 'YOUR_PROJECT_ID'
-
-// 2. Create wagmiConfig
-const metadata = {
-  name: 'Web3Modal',
-  description: 'Web3Modal Example',
-  url: 'https://web3modal.com',
-  icons: ['https://avatars.githubusercontent.com/u/37784886']
-}
-
-const chains = [mainnet, arbitrum]
-const wagmiConfig = defaultWagmiConfig({ chains, projectId, metadata })
-
-// 3. Create modal
-const modal = createWeb3Modal({ wagmiConfig, projectId, chains })
-```
-
-</TabItem>
-<TabItem value="custom" label="Custom">
-
-Start by importing `createWeb3Modal`, `walletConnectProvider` and wagmi packages, then create `wagmiConfig` using your own settings.
-Finally, pass wagmi config to `createWeb3Modal`.
-
-```ts
-import { createWeb3Modal, walletConnectProvider, EIP6963Connector } from '@web3modal/wagmi'
-
-import { configureChains, createConfig } from '@wagmi/core'
-import { mainnet } from '@wagmi/core/chains'
-import { publicProvider } from '@wagmi/core/providers/public'
-import { InjectedConnector } from '@wagmi/core'
-import { CoinbaseWalletConnector } from '@wagmi/core/connectors/coinbaseWallet'
-import { WalletConnectConnector } from '@wagmi/core/connectors/walletConnect'
-
-// 1. Define constants
-const projectId = 'YOUR_PROJECT_ID'
-
-// 2. Configure wagmi client
-const { chains, publicClient } = configureChains([mainnet], [
-  walletConnectProvider({ projectId }),
-  publicProvider()
-])
-
-const metadata = {
-  name: 'Web3Modal',
-  description: 'Web3Modal Example',
-  url: 'https://web3modal.com',
-  icons: ['https://avatars.githubusercontent.com/u/37784886']
-}
-
-const wagmiConfig = createConfig({
-  autoConnect: true,
-  connectors: [
-    new WalletConnectConnector({ chains, options: { projectId, showQrModal: false, metadata } }),
-    new EIP6963Connector({ chains }),
-    new InjectedConnector({ chains, options: { shimDisconnect: true } }),
-    new CoinbaseWalletConnector({ chains, options: { appName: metadata.name } })
-  ],
-  publicClient
-})
-
-// 3. Create modal
-const modal = createWeb3Modal({ wagmiConfig, projectId, chains })
-```
-
-</TabItem>
-</Tabs>
+</PlatformTabItem>
+</PlatformTabs>
 
 ## Trigger the modal
 
-To open Web3Modal you can use our web components or build your own logic with Web3Modal actions
-<Tabs>
-<TabItem value="components" label="Components">
-You can use default web components to open the modal
+<PlatformTabs groupId="eth-lib" activeOptions={["wagmi","ethers"]}>
+<PlatformTabItem value="wagmi">
 
-```html
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title>HTML Example</title>
-  </head>
-  <body>
-    <w3m-button />
-    <script type="module" src="main.js"></script>
-  </body>
-</html>
-```
-Learn more about the Web3Modal web components [here](./components.mdx)
+<WagmiModal/>
 
-:::note
-Web components are global html elements that don't require importing.
-:::
-</TabItem>
-<TabItem value="actions" label="Actions">
+</PlatformTabItem>
+<PlatformTabItem value="ethers">
 
-You can trigger the modal by calling the `open` function from a modal instance returned by `createWeb3Modal`.
+<EthersModal/>
 
-Let's first add two html elements to display information to the user:
-
-```html
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title>HTML Example</title>
-  </head>
-  <body>
-    <button id="btn">Connect</button>
-    <span id="user"></span>
-    <script type="module" src="main.js"></script>
-  </body>
-</html>
-```
-
-Following with our main.js file, we can now add the needed logic to open the modal and display information in the DOM:
-
-```ts
-//main.js
-import { watchAccount, disconnect, getAccount } from '@wagmi/core'
-
-function connect() {
-  if (getAccount().isConnected) {
-    disconnect()
-  } else {
-    modal.open()
-  }
-}
-
-const btnEl = document.getElementById('btn')
-const userEl = document.getElementById('user')
-
-btnEl.addEventListener('click', connect)
-
-// listening for account changes
-watchAccount(account => {
-  userEl.innerText = account.address ?? ''
-  if (account.isConnected) {
-    btnEl.innerText = 'Disconnect'
-  } else {
-    btnEl.innerText = 'Connect'
-  }
-})
-```
-
-Learn more about the Web3Modal actions [here](./actions.mdx)
-</TabItem>
-</Tabs>
-
-## Use wagmi Actions
-
-[wagmi](https://wagmi.sh) provides everything you'll need to start working with accounts, contracts, chains and much more.
-
-```tsx
-import { getAccount, writeContract, disconnect, watchAccount } from '@wagmi/core'
-```
+</PlatformTabItem>
+</PlatformTabs>

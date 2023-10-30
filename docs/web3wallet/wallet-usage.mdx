@@ -141,31 +141,21 @@ The `pair` function will help us pair between the dapp and wallet and will be us
 
 ```javascript
 import { Core } from '@walletconnect/core'
-// import { ICore } from '@walletconnect/types' <- Add if using TS
-import { Web3Wallet, IWeb3Wallet } from '@walletconnect/web3wallet'
-
-// export let web3wallet: IWeb3Wallet <- Add if using TS
-// export let core: ICore <- Add if using TS
+import { Web3Wallet } from '@walletconnect/web3wallet'
 
 const core = new Core({
   projectId: process.env.PROJECT_ID
 })
 
-export async function createWeb3Wallet() {
-  const web3wallet = await Web3Wallet.init({
-    core, // <- pass the shared `core` instance
-    metadata: {
-      name: 'Demo React Native Wallet',
-      description: 'Demo RN Wallet to interface with Dapps',
-      url: 'www.walletconnect.com',
-      icons: []
-    }
-  })
-}
-
-export async function pair(params: { uri: string }) {
-  return await core.pairing.pair({ uri: params.uri })
-}
+const web3wallet = await Web3Wallet.init({
+  core, // <- pass the shared `core` instance
+  metadata: {
+    name: 'Demo React Native Wallet',
+    description: 'Demo RN Wallet to interface with Dapps',
+    url: 'www.walletconnect.com',
+    icons: []
+  }
+})
 ```
 
 </PlatformTabItem>
@@ -242,33 +232,44 @@ Example usage
 
 ```javascript
 // import the builder util
-import { buildApprovedNamespaces } from '@walletconnect/utils'
+import { Web3Wallet, Web3WalletTypes } from '@walletconnect/web3wallet'
+import { buildApprovedNamespaces, getSdkError } from '@walletconnect/utils'
 
-web3wallet.on('session_proposal', async sessionProposal => {
-  const { id, params } = sessionProposal
-
-  // ------- namespaces builder util ------------ //
-  const approvedNamespaces = buildApprovedNamespaces({
-    proposal: params,
-    supportedNamespaces: {
-      eip155: {
-        chains: ['eip155:1', 'eip155:137'],
-        methods: ['eth_sendTransaction', 'personal_sign'],
-        events: ['accountsChanged', 'chainChanged'],
-        accounts: [
-          'eip155:1:0xab16a96d359ec26a11e2c2b3d8f8b8942d5bfcdb',
-          'eip155:137:0xab16a96d359ec26a11e2c2b3d8f8b8942d5bfcdb'
-        ]
+async function onSessionProposal({ id, params }: Web3WalletTypes.SessionProposal){
+  try{
+    // ------- namespaces builder util ------------ //
+    const approvedNamespaces = buildApprovedNamespaces({
+      proposal: params,
+      supportedNamespaces: {
+        eip155: {
+          chains: ['eip155:1', 'eip155:137'],
+          methods: ['eth_sendTransaction', 'personal_sign'],
+          events: ['accountsChanged', 'chainChanged'],
+          accounts: [
+            'eip155:1:0xab16a96d359ec26a11e2c2b3d8f8b8942d5bfcdb',
+            'eip155:137:0xab16a96d359ec26a11e2c2b3d8f8b8942d5bfcdb'
+          ]
+        }
       }
-    }
-  })
-  // ------- end namespaces builder util ------------ //
+    })
+    // ------- end namespaces builder util ------------ //
 
-  const session = await web3wallet.approveSession({
-    id,
-    namespaces: approvedNamespaces
-  })
-})
+    const session = await web3wallet.approveSession({
+      id,
+      namespaces: approvedNamespaces
+    })
+  }catch(error){
+    // use the error.message to show toast/info-box letting the user know that the connection attempt was unsuccessful
+    ....
+    await web3wallet.rejectSession({
+      id: proposal.id,
+      reason: getSdkError("USER_REJECTED")
+    })
+  }
+}
+
+
+web3wallet.on('session_proposal', onSessionProposal)
 ```
 
 If your wallet supports multiple namespaces e.g. `eip155`,`cosmos` & `near`
@@ -398,33 +399,45 @@ Example usage
 
 ```javascript
 // import the builder util
-import { buildApprovedNamespaces } from '@walletconnect/utils'
+import { Web3Wallet, Web3WalletTypes } from '@walletconnect/web3wallet'
+import { buildApprovedNamespaces, getSdkError } from '@walletconnect/utils'
 
-web3wallet.on('session_proposal', async sessionProposal => {
-  const { id, params } = sessionProposal
-
-  // ------- namespaces builder util ------------ //
-  const approvedNamespaces = buildApprovedNamespaces({
-    proposal: params,
-    supportedNamespaces: {
-      eip155: {
-        chains: ['eip155:1', 'eip155:137'],
-        methods: ['eth_sendTransaction', 'personal_sign'],
-        events: ['accountsChanged', 'chainChanged'],
-        accounts: [
-          'eip155:1:0xab16a96d359ec26a11e2c2b3d8f8b8942d5bfcdb',
-          'eip155:137:0xab16a96d359ec26a11e2c2b3d8f8b8942d5bfcdb'
-        ]
+async function onSessionProposal({ id, params }: Web3WalletTypes.SessionProposal){
+  try{
+    // ------- namespaces builder util ------------ //
+    const approvedNamespaces = buildApprovedNamespaces({
+      proposal: params,
+      supportedNamespaces: {
+        eip155: {
+          chains: ['eip155:1', 'eip155:137'],
+          methods: ['eth_sendTransaction', 'personal_sign'],
+          events: ['accountsChanged', 'chainChanged'],
+          accounts: [
+            'eip155:1:0xab16a96d359ec26a11e2c2b3d8f8b8942d5bfcdb',
+            'eip155:137:0xab16a96d359ec26a11e2c2b3d8f8b8942d5bfcdb'
+          ]
+        }
       }
-    }
-  })
-  // ------- end namespaces builder util ------------ //
+    })
+    // ------- end namespaces builder util ------------ //
 
-  const session = await web3wallet.approveSession({
-    id,
-    namespaces: approvedNamespaces
-  })
-})
+    const session = await web3wallet.approveSession({
+      id,
+      namespaces: approvedNamespaces
+    })
+  }catch(error){
+    // use the error.message to show toast/info-box letting the user know that the connection attempt was unsuccessful
+   ....
+
+    await web3wallet.rejectSession({
+      id: proposal.id,
+      reason: getSdkError("USER_REJECTED")
+    })
+  }
+}
+
+
+web3wallet.on('session_proposal', onSessionProposal)
 ```
 
 If your wallet supports multiple namespaces e.g. `eip155`,`cosmos` & `near`
@@ -537,7 +550,7 @@ await web3wallet.pair({ uri })
 
 This rejection means the SDK can't find a record with the given `proposal.id` - in this example `1`.
 This can happen when the proposal has expired (by default 5 minutes) or if you attempt to respond to a proposal that has already been approved/rejected.
-If you are seeing this error, please make sure that you are calling `approveSession` with the correct `proposal.id` that is available whithin the proposal payload.
+If you are seeing this error, please make sure that you are calling `approveSession` with the correct `proposal.id` that is available within the proposal payload.
 
 - `Error: Missing or invalid. approve(), namespaces should be an object with data`
 
@@ -547,8 +560,8 @@ This error means that the `namespaces` parameter passed to `approveSession` is e
 
 This error indicates that some value(s) in your `namespaces` object do not satisfy the required namespaces requested by the dapp.
 To provide additional guidance, the message might include info about the exact property that is missing or invalid e.g. `Required: eip155:1 Approved: eip155:137`.
-Please check [CAIP-25](https://github.com/ChainAgnostic/CAIPs/blob/master/CAIPs/caip-25.md) to familiarize yourself with the standard and it's nuanses.
-Additonaly, we highly recommend you to use our `namespace` builder utility that would greatly simplify the process of parsing & building a valid `namespaces` object.
+Please check [CAIP-25](https://github.com/ChainAgnostic/CAIPs/blob/master/CAIPs/caip-25.md) to familiarize yourself with the standard and it's nuances.
+Additionally, we highly recommend you to use our `namespace` builder utility that would greatly simplify the process of parsing & building a valid `namespaces` object.
 
 </PlatformTabItem>
 <PlatformTabItem value="ios">
@@ -686,7 +699,7 @@ Web3Wallet.instance.sessionsPublisher
 
 :::info Note
 
-Addresses provided in `accounts` array should follow [CAPI10](https://github.com/ChainAgnostic/CAIPs/blob/master/CAIPs/caip-10.md)
+Addresses provided in `accounts` array should follow [CAIP-10](https://github.com/ChainAgnostic/CAIPs/blob/master/CAIPs/caip-10.md)
 semantics.
 
 :::
@@ -752,10 +765,7 @@ The `session_proposal` event is emitted when a dapp initiates a new session with
 The `pair` method initiates a WalletConnect pairing process with a dapp using the given `uri` (QR code from the dapps). To learn more about pairing, checkout out the [docs](https://specs.walletconnect.com/2.0/specs/clients/core/pairing/).
 
 ```javascript
-import {getSdkError} from '@walletconnect/utils';
-...
-
-const [wcuri, setWCUri] = useState<string>();
+import {getSdkError} from '@walletconnect/utils'
 
 // Approval: Using this listener for sessionProposal, you can accept the session
 web3wallet.on("session_proposal", async (proposal) => {
@@ -836,7 +846,7 @@ In the event you want to reject the session proposal, call the `rejectSession` m
 
 ```javascript
 web3wallet.on('session_proposal', async proposal => {
-  const session = await web3wallet.rejectSession({
+  await web3wallet.rejectSession({
     id: proposal.id,
     reason: getSdkError('USER_REJECTED_METHODS')
   })
@@ -854,7 +864,7 @@ web3wallet.on('session_proposal', async proposal => {
 
 This rejection means the SDK can't find a record with the given `proposal.id` - in this example `1`.
 This can happen when the proposal has expired (by default 5 minutes) or if you attempt to respond to a proposal that has already been approved/rejected.
-If you are seeing this error, please make sure that you are calling `rejectSession` with the correct `proposal.id` that is available whithin the proposal payload.
+If you are seeing this error, please make sure that you are calling `rejectSession` with the correct `proposal.id` that is available within the proposal payload.
 
 - `Error: Missing or invalid. reject() reason:`
 
@@ -901,14 +911,11 @@ await web3Wallet.reject(
 You can use the `getSDKError` function, which is available in the `@walletconnect/utils` for the rejection function [library](https://github.com/WalletConnect/walletconnect-monorepo/tree/v2.0/packages/utils).
 
 ```javascript
-import {getSdkError} from '@walletconnect/utils';
-...
-
-const [wcuri, setWCUri] = useState<string>();
+import {getSdkError} from '@walletconnect/utils'
 
 // Reject: Using this listener for sessionProposal, you can reject the session
 web3wallet.on("session_proposal", async (proposal) => {
-  const session = await web3wallet.rejectSession({
+  await web3wallet.rejectSession({
     id: proposal.id,
     reason: getSdkError("USER_REJECTED_METHODS"),
   });
@@ -992,7 +999,7 @@ const response = {
 
 This rejection means the SDK can't find a session with the given `topic` - in this example `xyz...`.
 This can happen when the session has been disconnected by either the wallet or the dapp while the session request was being processed or if a session with such topic doesn't exist.
-If you are seeing this error, please make sure that you are using a correct topic that is available whithin the request payload.
+If you are seeing this error, please make sure that you are using a correct topic that is available within the request payload.
 
 - `Error: Missing or invalid. respond() response:`
 
@@ -1124,7 +1131,7 @@ const response = {
 
 <PlatformTabItem value="csharp">
 
-Responding to session requests is very similar to sending session requests. See dApp usage on how sending session requests works. All custom session requests requires a request class **and** response class to be created that matches the `params` field type in the custom session request. C# is a staticly typed language, so these types must be given whenever you do a session request (or do any querying for session requests).
+Responding to session requests is very similar to sending session requests. See dApp usage on how sending session requests works. All custom session requests requires a request class **and** response class to be created that matches the `params` field type in the custom session request. C# is a static typed language, so these types must be given whenever you do a session request (or do any querying for session requests).
 
 Currently, **WalletConnectSharp does not automatically assume the object type for `params` is an array**. This is very important, since most EVM RPC requests have `params` as an array type. **Use `List<T>` to workaround this**. For example, for `eth_sendTransaction`, use `List<Transaction>` instead of `Transaction`.
 
@@ -1313,8 +1320,8 @@ This error means that the `namespaces` parameter passed to `updateSession` is ei
 
 This error indicates that some value(s) in your `namespaces` object do not satisfy the required namespaces requested by the dapp.
 To provide additional guidance, the message might include info about the exact property that is missing or invalid e.g. `Required: eip155:1 Approved: eip155:137`.
-Please check [CAIP-25](https://github.com/ChainAgnostic/CAIPs/blob/master/CAIPs/caip-25.md) to familiarize yourself with the standard and it's nuanses.
-Additonaly, we highly recommend you to use our `namespace` builder utility that would greatly simplify the process of parsing & building a valid `namespaces` object.
+Please check [CAIP-25](https://github.com/ChainAgnostic/CAIPs/blob/master/CAIPs/caip-25.md) to familiarize yourself with the standard and it's nuances.
+Additionally, we highly recommend you to use our `namespace` builder utility that would greatly simplify the process of parsing & building a valid `namespaces` object.
 
 </PlatformTabItem>
 <PlatformTabItem value="ios">
@@ -1455,7 +1462,7 @@ await request.Acknowledged();
 
 <PlatformTabItem value="web">
 
-To initiate disconnnect from a session(think session delete), call `.disconnectSession` by passing a `topic` & `reason` for the disconnect.
+To initiate disconnect from a session(think session delete), call `.disconnectSession` by passing a `topic` & `reason` for the disconnect.
 The other peer will receive a `session_delete` and be notified that the session has been disconnected.
 
 :::info Note
@@ -1597,24 +1604,6 @@ public struct VerifyContext: Equatable, Hashable {
 
 </PlatformTabItem>
 <PlatformTabItem value="android">
-
-To approve authorization request, sign message using `CacaoSigner.sign` which requires private key to sign `Cacao` object that needs to be passed to `Wallet.Params.AuthRequestResponse` object and send to Dapp.
-`issuer` parameter describes what did responder authorizes. Example `iss` for Ethereum Mainnet: `did:pkh:eip155:1:0xb9c5714089478a327f09197987f16f9e5d936e8a`. More about `did:pkh` method [here](https://github.com/w3c-ccg/did-pkh/blob/main/did-pkh-method-draft.md).
-
-```kotlin
-val request: Wallet.Event.AuthRequest = // Request from onAuthRequest
-val signature: Wallet.Model.Cacao.Signature = CacaoSigner.sign(
-    request.message, // Message to be signed
-    PRIVATE_KEY, // Private key used to signing a message
-    SignatureType.EIP191 // or EIP1271
-)
-val issuer = //Check following link for more reference: https://github.com/w3c-ccg/did-pkh/blob/main/did-pkh-method-draft.md
-
-Web3Wallet.respondSessionRequest(Wallet.Params.AuthRequestResponse(request.id, signature, issuer)) { error ->
-    Log.e("Wallet respond approve", error.throwable.stackTraceToString())
-}
-```
-
 </PlatformTabItem>
 <PlatformTabItem value="flutter">
 
@@ -1675,7 +1664,36 @@ try await Web3WalletClient.respond(requestId: request.id, signature: signature, 
 </PlatformTabItem>
 <PlatformTabItem value="android">
 
-<!-- TODO: -->
+To approve authorization request, sign message using `CacaoSigner.sign` which requires private key to sign `Cacao` object that needs to be passed to `Wallet.Params.AuthRequestResponse` object and send to Dapp.
+`issuer` parameter describes what did responder authorizes. Example `iss` for Ethereum Mainnet: `did:pkh:eip155:1:0xb9c5714089478a327f09197987f16f9e5d936e8a`. More about `did:pkh` method [here](https://github.com/w3c-ccg/did-pkh/blob/main/did-pkh-method-draft.md).
+
+```kotlin
+val request: Wallet.Event.AuthRequest = // Request from onAuthRequest
+val signature: Wallet.Model.Cacao.Signature = CacaoSigner.sign(
+    request.message, // Message to be signed
+    PRIVATE_KEY, // Private key used to signing a message
+    SignatureType.EIP191 // or EIP1271
+)
+val issuer = //Check following link for more reference: https://github.com/w3c-ccg/did-pkh/blob/main/did-pkh-method-draft.md
+
+Web3Wallet.respondAuthRequest(Wallet.Params.AuthRequestResponse.Result(request.id, signature, issuer)) { error ->
+    Log.e("Wallet respond approve", error.throwable.stackTraceToString())
+}
+```
+
+Respond without giving sdk the private key:
+
+```kotlin
+val request: Wallet.Event.AuthRequest = // Request from onAuthRequest
+val signature: String = // Here developers provide signed message from request.message
+val cacaoSignature = Wallet.Model.Cacao.Signature(SignatureType.EIP191.header, Signature.fromString(signature).toCacaoSignature())
+
+val issuer = //Check following link for more reference: https://github.com/w3c-ccg/did-pkh/blob/main/did-pkh-method-draft.md
+
+Web3Wallet.respondAuthRequest(Wallet.Params.AuthRequestResponse.Result(request.id, cacaoSignature, issuer)) { error ->
+    Log.e("Wallet respond approve", error.throwable.stackTraceToString())
+}
+```
 
 </PlatformTabItem>
 <PlatformTabItem value="flutter">
@@ -1736,7 +1754,15 @@ try await Web3WalletClient.reject(requestId: request.id)
 </PlatformTabItem>
 <PlatformTabItem value="android">
 
-<!-- TODO: -->
+```kotlin
+val request: Wallet.Event.AuthRequest = // Request from onAuthRequest
+val errorCode: Int = 12001
+val errorMessage: String = "User Rejected Request"
+
+Web3Wallet.respondAuthRequest(Wallet.Params.AuthRequestResponse.Error(request.id, errorCode, errorMessage)) { error ->
+    Log.e("Wallet respond reject", error.throwable.stackTraceToString())
+}
+```
 
 </PlatformTabItem>
 <PlatformTabItem value="flutter">
@@ -1970,7 +1996,7 @@ await web3wallet.emitSessionEvent({
   topic,
   event: {
     name: 'chainChanged',
-    data: ['0xab16a96D359eC26a11e2C2b3d8f8B8942d5Bfcdb']
+    data: 1
   },
   chainId: 'eip155:1'
 })

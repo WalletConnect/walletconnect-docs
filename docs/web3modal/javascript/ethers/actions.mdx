@@ -1,0 +1,64 @@
+import Button from '../../../components/button'
+
+You can use the following methods to get data and subscribe to changes:
+
+### getAddress
+
+```ts
+const address = modal.getAddress()
+```
+
+### getChainId
+
+```ts
+const chainId = modal.getChainId()
+```
+
+### getIsConnected
+
+```ts
+const isConnected = modal.getIsConnected()
+```
+
+### getWalletProvider
+
+A wallet provider instance, created with the ethers Web3Provider class.
+
+```ts
+const walletProvider = modal.getWalletProvider()
+```
+
+### getWalletProviderType
+
+The wallet or protocol which the walletProvider was obtained from.
+
+```ts
+const walletProviderType = modal.getWalletProviderType()
+```
+
+### getSigner
+
+You can use the signer to sign messages or interact with smart contracts.
+
+```ts
+const signer = modal.getSigner()
+
+async function onSignMessage() {
+  const signature = await signer?.signMessage('Hello Web3Modal Ethers')
+  console.log(signature)
+}
+```
+
+### subscribeProvider
+
+subscribe to chainId, address, provider and signer changes.
+
+```ts
+function handleChange({ provider, providerType, address, chainId, isConnected }){
+  //...
+}
+
+modal.subscribeProvider(handleChange)
+```
+
+<Button name="Learn More" url="https://docs.ethers.org/v5/getting-started/#getting-started--contracts" />

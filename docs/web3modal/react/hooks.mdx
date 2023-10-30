@@ -1,11 +1,19 @@
 import Table from '../../components/Table'
-import Button from '../../components/button'
+import PlatformTabs from '../../components/PlatformTabs'
+import PlatformTabItem from '../../components/PlatformTabItem'
+
+import WagmiHooks from './wagmi/hooks.mdx'
+
+import EthersHooks from './ethers/hooks.mdx'
 
 # Hooks
 
 ## useWeb3Modal
 
 Control the modal with the `useWeb3Modal` hook
+
+<PlatformTabs groupId="eth-lib" activeOptions={["wagmi","ethers"]}>
+<PlatformTabItem value="wagmi">
 
 ```ts
 import { useWeb3Modal } from '@web3modal/wagmi/react'
@@ -16,6 +24,22 @@ const { open, close } = useWeb3Modal()
 
 open()
 ```
+
+</PlatformTabItem>
+<PlatformTabItem value="ethers">
+
+```ts
+import { useWeb3Modal } from '@web3modal/ethers5/react'
+
+export default function Component() {
+
+const { open, close } = useWeb3Modal()
+
+open()
+```
+
+</PlatformTabItem>
+</PlatformTabs>
 
 You can also select the modal's view when calling the `open` function
 
@@ -41,7 +65,7 @@ List of views you can select
       description: 'Shows the list of all available wallets'
     },
     {
-      variable: { code: 'Network' },
+      variable: { code: 'Networks' },
       description:
         'List of available networks - you can select and target a specific network before connecting'
     },
@@ -60,13 +84,26 @@ List of views you can select
 
 Get the current value of the modal's state
 
-```ts
-import { useWeb3ModalState } from '@web3modal/wagmi/react'
-```
+<PlatformTabs groupId="eth-lib" activeOptions={["wagmi","ethers"]}>
+<PlatformTabItem value="wagmi">
 
 ```ts
+import { useWeb3ModalState } from '@web3modal/wagmi/react'
+
 const { open, selectedNetworkId } = useWeb3ModalState()
 ```
+
+</PlatformTabItem>
+<PlatformTabItem value="ethers">
+
+```ts
+import { useWeb3ModalState } from '@web3modal/ethers5/react'
+
+const { open, selectedNetworkId } = useWeb3ModalState()
+```
+
+</PlatformTabItem>
+</PlatformTabs>
 
 The modal state consists of two reactive values:
 
@@ -99,48 +136,15 @@ setThemeVariables({
 })
 ```
 
-## Use wagmi hooks
+<PlatformTabs groupId="eth-lib" activeOptions={["wagmi","ethers"]}>
+<PlatformTabItem value="wagmi">
 
-You can use [Wagmi hooks](https://wagmi.sh/react/hooks/useAccount) to sign messages, interact with smart contracts, and much more.
+<WagmiHooks/>
 
-### useAccount
+</PlatformTabItem>
+<PlatformTabItem value="ethers">
 
-Hook for accessing account data and connection status.
+<EthersHooks/>
 
-```tsx
-import { useAccount } from 'wagmi'
-
-function App() {
-  const { address, isConnecting, isDisconnected } = useAccount()
-
-  if (isConnecting) return <div>Connecting…</div>
-  if (isDisconnected) return <div>Disconnected</div>
-  return <div>{address}</div>
-}
-```
-
-### useSignMessage
-
-Hook for signing messages with connected account.
-
-```tsx
-import { useSignMessage } from 'wagmi'
-
-function App() {
-  const { data, isError, isLoading, isSuccess, signMessage } = useSignMessage({
-    message: 'gm wagmi frens'
-  })
-
-  return (
-    <div>
-      <button disabled={isLoading} onClick={() => signMessage()}>
-        Sign message
-      </button>
-      {isSuccess && <div>Signature: {data}</div>}
-      {isError && <div>Error signing message</div>}
-    </div>
-  )
-}
-```
-
-<Button name="Learn More" url="https://wagmi.sh/react/hooks/useContractRead" />
+</PlatformTabItem>
+</PlatformTabs>
