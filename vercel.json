@@ -34,6 +34,10 @@
       "destination": "/2.0/:path*"
     },
     {
+      "source": "/advanced/echo-server",
+      "destination": "/advanced/push-server"
+    },
+    {
       "source": "/quick-start/dapps/client",
       "destination": "/1.0/quick-start/dapps/client"
     },
