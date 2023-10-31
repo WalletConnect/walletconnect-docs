@@ -18,6 +18,8 @@ You can find the Notify API Secret under the Secrets section of your project on 
 
 ## Sending
 
+To send a notification, you need the Notification type ID which you can copy from Cloud.
+
 Accounts are identified by their [CAIP-10](https://github.com/ChainAgnostic/CAIPs/blob/main/CAIPs/caip-10.md) format.
 
 <Tabs queryString={'send-client'}>
@@ -34,7 +36,7 @@ const response = await fetch(
     },
     body: JSON.stringify({
       notification: {
-        type: "private",
+        type: "a1e53b95-18e5-4af8-9f03-9308ec87b687", // Notification type ID copied from Cloud 
         title: "Notification Title",
         body: "Notification body",
         icon: "https://app.example.com/icon.png", // optional
@@ -58,12 +60,12 @@ curl -X POST 'https://notify.walletconnect.com/<PROJECT_ID>/notify' \
   --header 'Authorization: Bearer <NOTIFY_API_SECRET>' \
   --data '{
     "notification": {
-      "type": "private",
+      "type": "a1e53b95-18e5-4af8-9f03-9308ec87b687", // Notification type ID copied from Cloud 
       "title": "Notification Title",
       "body": "Notification body"
     },
     "accounts": [
-      "eip155:1:0xABC123"
+      "eip155:1:0xABC123" // CAIP-10 account ID
     ]
   }'
 ```

@@ -192,6 +192,10 @@
     {
       "source": "2.0/web/web3modal/html/auth-api/installation",
       "destination": "/2.0/api/auth/overview"
+    },
+    {
+      "source": "/web3inbox/frontend-integration/about",
+      "destination": "/web3inbox/frontend-integration/usage"
     }
   ]
 }

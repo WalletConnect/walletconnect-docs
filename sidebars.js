@@ -173,7 +173,7 @@ module.exports = {
               type: 'category',
               label: 'Frontend Integration',
               items: [
-                'web3inbox/frontend-integration/about',
+                'web3inbox/frontend-integration/usage',
                 'web3inbox/frontend-integration/api',
                 'web3inbox/frontend-integration/examples'
               ]
