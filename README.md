@@ -23,7 +23,7 @@ Older versions are available in `versioned_docs/`.
 
 ## Modifying routes
 
-Whenever a route is changed DocSearch needs to crawls the website in order to keep the search engine working properly, this is scheduled once a week, it is therefore
+Whenever a route is changed DocSearch needs to crawl the website in order to keep the search engine working properly, this is scheduled once a week, it is therefore
 recommended to use redirects to avoid broken links. See [link](https://vercel.com/docs/concepts/projects/project-configuration#redirects).
 
 ## Customize Settings & Theme
@@ -33,11 +33,11 @@ recommended to use redirects to avoid broken links. See [link](https://vercel.co
 # Tab Components
 
 > [!IMPORTANT]
-> When creating titles inside a tab it is recommended to use **four** number signs (#) to avoid overpopulating the table of content.
+> While creating titles inside a tab it is recommended to use **four** number signs (#) to avoid overpopulating the table of content.
 
 ### Platform Tabs
 
-In your mdx file first import `PlatformTabs` and `PlatformTabItem` from `docs/components/PlatformTabs` and `docs/components/PlatformTabItem` relatively, and wrap your content around them
+In your mdx file first import `PlatformTabs` and `PlatformTabItem` from `docs/components/PlatformTabs` and `docs/components/PlatformTabItem` relatively and wrap your content around them
 
 You can find the supported platform in `docs/components/PlatformTabs.js`, they are grouped in an array called `PLATFORM_MAP`
 ```mdx
