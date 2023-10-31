@@ -46,8 +46,6 @@ npm i @web3inbox/core
 
 Below is an example of adding the Web3Inbox SDK to a React project with wagmi. Wagmi is not required to use the Web3Inbox React hooks.
 
-In order to authorize the dapp to control subscriptions, the user needs to sign a SIWE message which happens automatically when `register()` is called. Depending on the configuration of `domain` and `isLimited`, a different message is generated.
-
 ```tsx
 import {
   useManageSubscription,
@@ -81,6 +79,8 @@ export default function App() {
     setAccount(`eip155:1:${address}`)
   }, [address, setAccount])
 
+  // In order to authorize the dapp to control subscriptions, the user needs to sign a SIWE message which happens automatically when `register()` is called.
+  // Depending on the configuration of `domain` and `isLimited`, a different message is generated.
   const performRegistration = useCallback(async () => {
     if (!address) return
     try {
