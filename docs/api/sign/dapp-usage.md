@@ -517,7 +517,7 @@ var dappOptions = new SignClientOptions()
         Name = "WalletConnectSharpv2 Dapp Example",
         Url = "https://walletconnect.com"
     },
-    // Uncomment to disable persistant storage
+    // Uncomment to disable persistent storage
     // Storage = new InMemoryStorage()
 };
 ```
@@ -596,7 +596,7 @@ SessionStruct sessionData = await sessionConnectTask;
 // SessionStruct sessionData = await connectData.Approval;
 ```
 
-This `Task` will return the `SessionStruct` when the session was approved, or throw an exception when the session rquest has either
+This `Task` will return the `SessionStruct` when the session was approved, or throw an exception when the session request has either
 
 - Timed out
 - Been Rejected
@@ -686,11 +686,12 @@ await request.Acknowledged();
 
 #### Session Requests
 
-Sending session requests as a dapp requires to build the request **and** response classes that the session request `params` will be structured. C# is a staticly typed language, so these types must be given whenever you do a session request (or do any querying for session requests).
+
+Sending session requests as a dapp requires to build the request **and** response classes that the session request `params` will be structured. C# is a statically typed language, so these types must be given whenever you do a session request (or do any querying for session requests). 
 
 Currently, **WalletConnectSharp does not automatically assume the object type for `params` is an array**. This is very important, since most EVM RPC requests have `params` as an array type. **Use `List<T>` to workaround this**. For example, for `eth_sendTransaction`, use `List<Transaction>` instead of `Transaction`.
 
-Newtonsoft.Json is used for JSON serialization/deserialization, therefor you can use Newtonsoft.Json attributes when defining fields in your request/response classes.
+Newtonsoft.Json is used for JSON serialization/deserialization, therefore you can use Newtonsoft.Json attributes when defining fields in your request/response classes.
 
 ##### Building a Request type
 

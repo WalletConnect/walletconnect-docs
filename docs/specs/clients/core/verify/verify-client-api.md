@@ -4,7 +4,7 @@
 
 Verify Client will authenticate and verify the origin of a message by registering an attestation on the Verify Server.
 
-To ensure that attestations are privacy-perserving we use the decrytped contents of the Relay messages and hash them.
+To ensure that attestations are privacy-preserving we use the decrytped contents of the Relay messages and hash them.
 
 High-level APIs will stringify a JSON-RPC payload before encrypting therefore we will use the stringified JSON and hash it.
 

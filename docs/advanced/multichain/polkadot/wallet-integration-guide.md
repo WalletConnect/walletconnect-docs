@@ -141,7 +141,7 @@ web3wallet.on('session_request', async requestEvent => {
       // create the response containing the signature in the result
       const response = { id, result: { signature: signature }, jsonrpc: '2.0' }
 
-      // respond to the dapp request with the responde and topic
+      // respond to the dapp request with the response and topic
       await web3wallet.respondSessionRequest({ topic, response })
 
     case 'polkadot_signTransaction':
@@ -151,7 +151,7 @@ web3wallet.on('session_request', async requestEvent => {
       // create the response containing the signature in the result
       const response = { id, result: { signature: signature }, jsonrpc: '2.0' }
 
-      // respond to the dapp request with the responde and topic
+      // respond to the dapp request with the response and topic
       await web3wallet.respondSessionRequest({ topic, response })
 
     // throw error for methods your wallet doesn't support
