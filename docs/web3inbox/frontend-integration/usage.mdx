@@ -10,11 +10,9 @@ import PlatformTabItem from '../../components/PlatformTabItem'
 Web3Inbox is in alpha development
 :::
 
-While users can subscribe to notifications directly in a supporting wallet, or via Web3Inbox.com, users can also subscribe directly in your app. These Core Components provide you the building blocks necessary to allow users to subscribe, receive notifications, and manage notification preferences, all from your app's UI. To do this, you can use the Web3Inbox frontend SDK.
+While users can subscribe to notifications directly in a supporting wallet, or via Web3Inbox.com, users can also subscribe directly in your app. This Web3Inbox SDK provides you the building blocks necessary to allow users to subscribe, receive notifications, and manage notification preferences, all from your app's UI. The Web3Inbox SDK supports both React hooks and vanilla JavaScript integrations.
 
 Before begin using Web3Inbox, you will first need to [setup your domain](../domain-setup) to send notifications.
-
-The frontend SDK supports both React hooks and vanilla JavaScript integrations.
 
 ## Installation
 
@@ -48,6 +46,8 @@ npm i @web3inbox/core
 
 Below is an example of adding the Web3Inbox SDK to a React project with wagmi. Wagmi is not required to use the Web3Inbox React hooks.
 
+In order to authorize the dapp to control subscriptions, the user needs to sign a SIWE message which happens automatically when `register()` is called. Depending on the configuration of `domain` and `isLimited`, a different message is generated.
+
 ```tsx
 import {
   useManageSubscription,
@@ -69,7 +69,8 @@ export default function App() {
     projectId,
     domain: 'app.example.com',
 
-    // Allow localhost development
+    // Allow localhost development with "unlimited" mode.
+    // This authorizes this dapp to control notification subscriptions for all domains (including `app.example.com`), not just `window.location.host`
     isLimited: false
   })
 
@@ -121,7 +122,7 @@ export default function App() {
                 <div>
                   To manage notifications, sign and register an identity key:&nbsp;
                   <button onClick={performRegistration} disabled={isRegistering}>
-                    {isRegistering ? "Signing..." : "Sign"}
+                    {isRegistering ? 'Signing...' : 'Sign'}
                   </button>
                 </div>
               ) : (
@@ -129,7 +130,7 @@ export default function App() {
                   {!isSubscribed ? (
                     <>
                       <button onClick={performSubscribe} disabled={isSubscribing}>
-                        {isSubscribing ? "Subscribing..." : "Subscribe to notifications"}
+                        {isSubscribing ? 'Subscribing...' : 'Subscribe to notifications'}
                       </button>
                     </>
                   ) : (
