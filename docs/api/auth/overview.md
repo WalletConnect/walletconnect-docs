@@ -7,7 +7,7 @@ import CloudBanner from '../../components/CloudBanner'
 
 # Introduction
 
-WalletConnect Auth is an authentication protocol that can be used to log-in blockchain wallets into apps. With a simple and lean interface, this API verifies wallet address ownership through a single signature request, realizing login in one action. It enables apps to set up a decentralized and passwordless onboarding flow.
+WalletConnect Auth is an authentication protocol that can be used to log-in blockchain wallets into apps. With a simple and lean interface, this API verifies wallet address ownership through a single signature request, realizing login in one action. It enables apps to set up a centralized and passwordless onboarding flow.
 
 ## Key Features
 

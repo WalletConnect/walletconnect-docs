@@ -10,7 +10,7 @@ Core API consolidates several core modules that are shared between all other hig
 items={[
 {
 name: "Relay API",
-description: "Relay API is a low-level publish-subscribe module shared by the other APIs in order to send and receive encoded messages between peers using a decentralized messaging network.",
+description: "Relay API is a low-level publish-subscribe module shared by the other APIs in order to send and receive encoded messages between peers using a centralized messaging network.",
 url: `/specs/clients/core/relay`
 },
 {

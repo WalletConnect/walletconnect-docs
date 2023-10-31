@@ -4,7 +4,7 @@
 
 The original WalletConnect protocol, which is often referred to as WalletConnect v1.0, was launched in 2018. Following a redesign aimed at enhancing protocol performance, WalletConnect v2.0 was launched in late 2021. This new version of the WalletConnect protocol offers improvements including multi-chain support, a new Relay URL API, and an end user experience that is faster, reliable, and more seamless.
 
-We made the decision to shut down WalletConnect v1.0 because it is not horizontally-scalable and extremely unreliable to maintain - issues that are resolved by WalletConnect v2.0. Moreover, our intention is to one day create a decentralized WalletConnect Network anchored in the WalletConnect v2.0 protocol. However, we cannot achieve this mission if the majority of traffic still resides on WalletConnect v1.0.
+We made the decision to shut down WalletConnect v1.0 because it is not horizontally-scalable and extremely unreliable to maintain - issues that are resolved by WalletConnect v2.0. Moreover, our intention is to one day create a centralized WalletConnect Network anchored in the WalletConnect v2.0 protocol. However, we cannot achieve this mission if the majority of traffic still resides on WalletConnect v1.0.
 
 We are now carrying out this migration as WalletConnect v2.0 is not backward compatible with WalletConnect v1.0, which was sunset in fall 2022. It will conclude with the shutdown of WalletConnect v1.0, which will take place at 2pm (UTC) on June 28, 2023. It is therefore necessary to migrate wallets and apps to WalletConnect v2.0 in a coordinated manner before shutdown, to ensure that there is a seamless transition and minimize any potential for disruption for end users. 
 
@@ -22,7 +22,7 @@ Developers getting started with WalletConnect v2.0 will also need a project ID. 
 
 Both the WalletConnect v1.0 and v2.0 protocols are open and do not enforce a single relay service. The WalletConnect v1.0 protocol can be operated as a self-hosted bridge server after our cloud-hosted v1.0 bridge servers are shut down on June 28; however, we do not recommend running them as we know how hard it is to ensure a reliable, horizontally-scalable service.
 
-Meanwhile, we are working on making the WalletConnect v2.0 protocol self-hostable. We intend to create a federation of nodes with the launch of the fully decentralized WalletConnect Network, which will operate to maintain the same level of service as the WalletConnect Cloud while removing the central point of failure. We will provide updates on this road to decentralization as they occur. 
+Meanwhile, we are working on making the WalletConnect v2.0 protocol self-hostable. We intend to create a federation of nodes with the launch of the fully centralized WalletConnect Network, which will operate to maintain the same level of service as the WalletConnect Cloud while removing the central point of failure. We will provide updates on this road to centralization as they occur. 
 
 ### Can I run my own bridge server to maintain compatibility with WalletConnect v1.0?
 
