@@ -15,22 +15,13 @@ This SDK utilizes WalletConnect's Notify API and is designed for Web3 scenarios,
 
 The Web3Inbox SDK is not to be confused with the [Web3Inbox.com App](https://app.web3inbox.com) which allows users to receive and manage their notifications from all apps, as they would in a wallet.
 
-## QuickStart
+## Getting Started
 
-<Wrapper
-  type="large"
-  style={{
-    marginTop: '2rem'
-  }}
-  items={[
-    {
-      name: 'Frontend Integration',
-      description: 'For a fully-customized Web3Inbox experience.',
-      icon: w3iLogo,
-      href: './frontend-integration/about'
-    }
-  ]}
-/>
+Web3Inbox can be added to your app in a few steps:
+
+- [Setup your domain](domain-setup) to send authenticated notifications.
+- Optionally, allow users to subscribe to notifications in your app frontend with our [frontend SDK](frontend-integration/usage).
+- Finally, implement [sending notifications](sending-notifications) from your backend.
 
 ## Use Cases
 
@@ -47,20 +38,13 @@ Some of the key features of the Web3Inbox SDK include:
 ## How do users receive notifications?
 
 Users can subscribe to and receive notifications in several ways:
+
 - Natively in their wallet if the wallet supports the Web3Inbox SDK.
   - You can also test this with one of our sample wallets:
     - [iOS sample wallet](https://testflight.apple.com/join/09bTAryp)
     - [Android sample wallet](https://appdistribution.firebase.dev/i/d2c86e879abd5a86)
-- In your app's frontend using our [frontend SDK](frontend-integration/about)
+- In your app's frontend using our [frontend SDK](frontend-integration/usage)
 - In [Web3Inbox.com](https://app.web3inbox.com) App
-
-## Getting Started
-
-Web3Inbox can be added to your app in a few steps:
-
-- [Setup your domain](domain-setup) to send authenticated notifications.
-- Optionally, allow users to subscribe to notifications in your app frontend with our [frontend SDK](frontend-integration/about).
-- Finally, implement [sending notifications](sending-notifications) from your backend.
 
 ## Try it out
 
