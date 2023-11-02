@@ -45,6 +45,8 @@ const web3wallet = await Web3Wallet.init({
 
 Confirm you have configured the [Network Client](../api/core/relay.mdx) first.
 
+Starting from WalletConnect SDK version 1.9.5, the `redirect` field in the `AppMetadata` object is mandatory. Ensure that the provided value matches your app's URL scheme to prevent redirection-related issues.
+
 Once you're done, in order to initialize a client just call a `configure` method from the Web3Wallet instance wrapper
 
 ```swift
@@ -52,7 +54,8 @@ let metadata = AppMetadata(
     name: "Example Wallet",
     description: "Wallet description",
     url: "example.wallet",
-    icons: ["https://avatars.githubusercontent.com/u/37784886"]
+    icons: ["https://avatars.githubusercontent.com/u/37784886"],
+    redirect: AppMetadata.Redirect(native: "example://", universal: nil)
 )
 
 Web3Wallet.configure(

@@ -237,13 +237,17 @@ sdkClient.core.pairing.events.on("pairing_delete", ({ id, topic }) => {
 <PlatformTabItem value="ios">
 
 Create an AppMetadata object. It will describe your application and define its appearance in a web browser.
+
+Starting from WalletConnect SDK version 1.9.5, the `redirect` field in the `AppMetadata` object is mandatory. Ensure that the provided value matches your app's URL scheme to prevent redirection-related issues.
+
 Then configure the Pair instance with a metadata object you have instantiated.
 
 ```swift
 let metadata = AppMetadata(name: <String>,
                            description: <String>,
                            url: <String>,
-                           icons: <[String]>)
+                           icons: <[String]>,
+                           redirect: AppMetadata.Redirect(native: "example://", universal: nil))
 
 Pair.configure(metadata: metadata)
 ```
