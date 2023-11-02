@@ -3,81 +3,158 @@ import Tabs from '@theme/Tabs'
 import TabItem from '@theme/TabItem'
 import PlatformTabs from '../../components/PlatformTabs'
 import PlatformTabItem from '../../components/PlatformTabItem'
-import CloudBanner from '../../components/CloudBanner'
 
 # Usage
 
-<CloudBanner />
+:::caution
+Web3Inbox is in beta
+:::
 
-Using Core components is naturally very simple because they are a simple set of utilities at heart
-and are very malleable.
+While users can subscribe to notifications directly in a supporting wallet, or via Web3Inbox.com, users can also subscribe directly in your app. This Web3Inbox SDK provides you the building blocks necessary to allow users to subscribe, receive notifications, and manage notification preferences, all from your app's UI. The Web3Inbox SDK supports both React hooks and vanilla JavaScript integrations.
 
-## Getting Started
+Before begin using Web3Inbox, you will first need to [setup your domain](../domain-setup) to send notifications.
+
+## Installation
 
 <PlatformTabs
 	groupId="w3iw"
-	activeOptions={["react", "html"]}
+	activeOptions={["react", "js"]}
 >
 <PlatformTabItem value="react">
 
-```tsx
-import { useManageSubscription, useSubscription, useW3iAccount, useInitWeb3InboxClient, useMessages } from "@web3inbox/widget-react";
-import { useSignMessage, useAccount } from 'wagmi'
-...
-
-
-const ExampleComponent = () => {
-  const isReady = useInitWeb3InboxClient({projectId: "..."})
-  
-  const { account } = useAccount();
-  
-  // Getting the account -- Use register before attempting to subscribe
-  const { setAccount, register } = useW3iAccount()
-  
-  const { signMessageAsync } = useSignMessage();
-  
-  // Checking if subscribed
-  const { subscribe, isSubscribed } = useManageSubscription()
-  
-  // Get the subscription
-  const { subscription } = useSubscription()
-  
-  const { messages } = useMessages()
-  
-  useEffect(() => {
-    if (!Boolean(address)) return;
-    setAccount(`eip155:1:${address}`);
-  }, [address, setAccount]);
-
-  const handleRegistration = useCallback(async () => {
-    if (!account) return;
-    try {
-      await registerIdentity(signMessageAsync);
-    } catch (registerIdentityError) {
-      console.error({ registerIdentityError });
-    }
-  }, [signMessageAsync, registerIdentity, account]);
-
-  useEffect(() => {
-    if (!identityKey) {
-      handleRegistration();
-    }
-  }, [handleRegistration, identityKey]);
-  
-  return ( 
-    <div>
-      <span>Client is {isReady? "Ready" : "Not Ready"}</span>
-      <span>You are {isSubscribed? "Subscribed" : "Not Subscribed"} Subscribed</span>
-      <button onClick={() => subscribe()}> Subscribe to current dapp </button>
-      <div> All your messages in JSON: {JSON.stringify(messages)}</div>
-    </div>
-  );
-}
-
+```bash npm2yarn
+npm i @web3inbox/core @web3inbox/widget-react
 ```
 
 </PlatformTabItem>
-<PlatformTabItem value="html">
+<PlatformTabItem value="js">
+
+```bash npm2yarn
+npm i @web3inbox/core
+```
+
+</PlatformTabItem>
+</PlatformTabs>
+
+## Example Usage
+
+This basic example demonstrates how to use the Web3Inbox SDK to subscribe to notifications and receive them in your app. Refer to the [API Reference](./api) for more details on the available methods.
+
+<PlatformTabs
+	groupId="w3iw"
+	activeOptions={["react", "js"]}
+>
+<PlatformTabItem value="react">
+
+Below is an example of adding the Web3Inbox SDK to a React project with wagmi. Wagmi is not required to use the Web3Inbox React hooks.
+
+```tsx
+import {
+  useManageSubscription,
+  useSubscription,
+  useW3iAccount,
+  useInitWeb3InboxClient,
+  useMessages
+} from '@web3inbox/widget-react'
+import { useCallback, useEffect } from 'react'
+import { useSignMessage, useAccount } from 'wagmi'
+
+export default function App() {
+  const { address } = useAccount()
+  const { signMessageAsync } = useSignMessage()
+
+  // Initialize the Web3Inbox SDK
+  const isReady = useInitWeb3InboxClient({
+    // The project ID and domain you setup in the Domain Setup section
+    projectId,
+    domain: 'app.example.com',
+
+    // Allow localhost development with "unlimited" mode.
+    // This authorizes this dapp to control notification subscriptions for all domains (including `app.example.com`), not just `window.location.host`
+    isLimited: false
+  })
+
+  const { account, setAccount, isRegistered, isRegistering, register } = useW3iAccount()
+  useEffect(() => {
+    if (!address) return
+    // Convert the address into a CAIP-10 blockchain-agnostic account ID and update the Web3Inbox SDK with it
+    setAccount(`eip155:1:${address}`)
+  }, [address, setAccount])
+
+  // In order to authorize the dapp to control subscriptions, the user needs to sign a SIWE message which happens automatically when `register()` is called.
+  // Depending on the configuration of `domain` and `isLimited`, a different message is generated.
+  const performRegistration = useCallback(async () => {
+    if (!address) return
+    try {
+      await register(message => signMessageAsync({ message }))
+    } catch (registerIdentityError) {
+      alert(registerIdentityError)
+    }
+  }, [signMessageAsync, register, address])
+
+  useEffect(() => {
+    // Register even if an identity key exists, to account for stale keys
+    performRegistration()
+  }, [performRegistration])
+
+  const { isSubscribed, isSubscribing, subscribe } = useManageSubscription()
+
+  const performSubscribe = useCallback(async () => {
+    // Register again just in case
+    await performRegistration()
+    await subscribe()
+  }, [subscribe, isRegistered])
+
+  const { subscription } = useSubscription()
+  const { messages } = useMessages()
+
+  return (
+    <>
+      {!isReady ? (
+        <div>Loading client...</div>
+      ) : (
+        <>
+          {!address ? (
+            <div>Connect your wallet</div>
+          ) : (
+            <>
+              <div>Address: {address}</div>
+              <div>Account ID: {account}</div>
+              {!isRegistered ? (
+                <div>
+                  To manage notifications, sign and register an identity key:&nbsp;
+                  <button onClick={performRegistration} disabled={isRegistering}>
+                    {isRegistering ? 'Signing...' : 'Sign'}
+                  </button>
+                </div>
+              ) : (
+                <>
+                  {!isSubscribed ? (
+                    <>
+                      <button onClick={performSubscribe} disabled={isSubscribing}>
+                        {isSubscribing ? 'Subscribing...' : 'Subscribe to notifications'}
+                      </button>
+                    </>
+                  ) : (
+                    <>
+                      <div>You are subscribed</div>
+                      <div>Subscription: {JSON.stringify(subscription)}</div>
+                      <div>Messages: {JSON.stringify(messages)}</div>
+                    </>
+                  )}
+                </>
+              )}
+            </>
+          )}
+        </>
+      )}
+    </>
+  )
+}
+```
+
+</PlatformTabItem>
+<PlatformTabItem value="js">
 
 ```ts
 import { Web3InboxClient } from '@web3inbox/core'
@@ -87,7 +164,7 @@ const client = Web3InboxClient.init({ projectId: '...' })
 let accountState = ''
 let subscriptionState = ''
 
-client.register({onSign})
+client.register({ onSign })
 
 client.watchAccount(acc => (accountState = acc))
 
@@ -100,3 +177,7 @@ const messages = client.getMessageHistory()
 
 </PlatformTabItem>
 </PlatformTabs>
+
+## Next Steps
+
+Now that you've installed Web3Inbox Core and set it up, you're ready to use the API.

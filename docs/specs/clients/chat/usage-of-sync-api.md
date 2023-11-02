@@ -1,6 +1,6 @@
 # Usage of Sync API
 
-In order to provide state synchronization between user's devices we must add [Sync API](../core/sync/readme.md) support. As per Sync API requierments user [must sign additional message](../core/sync/sync-protocol.md#generating-a-message-to-sign) to enable state synchronization. 
+In order to provide state synchronization between user's devices we must add [Sync API](../core/sync/readme.md) support. As per Sync API requirements user [must sign additional message](../core/sync/sync-protocol.md#generating-a-message-to-sign) to enable state synchronization. 
 
 ## Stores 
 

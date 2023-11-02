@@ -73,9 +73,9 @@ store_key = "02fe412cf77b84f7e1dcac2ac036ba5da857ef6c683e6e93a39005734cb289f4"
 store_topic = "7a73cffc9951264511549e64222a612a27199b01d30fa952b708bcafce96ea3f"
 ```
 
-There will be only two operations for state changes: setting values and deleting values. Both the keys and values are restricted to strings. The state can be overriden or "updated" by simplying setting a different value with the same key.
+There will be only two operations for state changes: setting values and deleting values. Both the keys and values are restricted to strings. The state can be overridden or "updated" by simply setting a different value with the same key.
 
-These state changes will be published as JSON-RPC requests that will be stringified and encrypted with the store key and similarly to other WalletConnect clients they will use a time-based JSON-RPC id which is a timestamp in miliseconds appended by 3 random digits. The state changes will be "optimistic" in that they should be published in an async manner and the client's "set" and "delete" should resolve before the completion of the successful publishing of the message. 
+These state changes will be published as JSON-RPC requests that will be stringified and encrypted with the store key and similarly to other WalletConnect clients they will use a time-based JSON-RPC id which is a timestamp in milliseconds appended by 3 random digits. The state changes will be "optimistic" in that they should be published in an async manner and the client's "set" and "delete" should resolve before the completion of the successful publishing of the message. 
 
 Therefore we can solve conflicts by using the JSON-RPC id published for the last state change on that specific key-value pair by prioritizing the highest integer.
 
@@ -95,7 +95,7 @@ A and B are synced with the same store and A publishes the following state chang
 }
 ```
 
-Now the store has one key ("username") with a value "@johndoe98". Then coincidently A and B publish a state change within the same milisecond (`1675012321135`):
+Now the store has one key ("username") with a value "@johndoe98". Then coincidently A and B publish a state change within the same millisecond (`1675012321135`):
 
 ```js
 // published by A
@@ -152,7 +152,7 @@ Whenever a client wants to delete state associated with a key-value pair it will
 }
 ```
 
-The state has been completely removed for the key-value pair associated with key `username` but the jsonrpc id for the lastest state change was persisted and this would allow us to resolve future conflicts with state changes with the exact same key.
+The state has been completely removed for the key-value pair associated with key `username` but the jsonrpc id for the latest state change was persisted and this would allow us to resolve future conflicts with state changes with the exact same key.
 
 ## State History
 

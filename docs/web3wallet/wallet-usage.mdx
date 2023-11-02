@@ -1135,7 +1135,7 @@ Responding to session requests is very similar to sending session requests. See 
 
 Currently, **WalletConnectSharp does not automatically assume the object type for `params` is an array**. This is very important, since most EVM RPC requests have `params` as an array type. **Use `List<T>` to workaround this**. For example, for `eth_sendTransaction`, use `List<Transaction>` instead of `Transaction`.
 
-Newtonsoft.Json is used for JSON serialization/deserialization, therefor you can use Newtonsoft.Json attributes when defining fields in your request/response classes.
+Newtonsoft.Json is used for JSON serialization/deserialization, therefore you can use Newtonsoft.Json attributes when defining fields in your request/response classes.
 
 #### Building a Response type
 
