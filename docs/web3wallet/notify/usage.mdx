@@ -16,7 +16,7 @@ This usage step is to configure and use Notify in your project.
 
 <PlatformTabs
 	groupId="w3w"
-	activeOptions={["ios","android", "react-native"]}
+	activeOptions={["ios","android", "js"]}
 >
 <PlatformTabItem value="ios">
 
@@ -26,12 +26,11 @@ Configure the `Notify` instance with:
 try Notify.configure(groupIdentifier: String, environment: APNSEnvironment, crypto: CryptoProvider)
 ```
 
-`groupIdentifier` - App group identifier, enables to share keychain items between SDK and a UNNotificationServiceExtension to decrypts remote Push Notifications. Can be created on apple developer portal. 
+`groupIdentifier` - App group identifier, enables to share keychain items between SDK and a UNNotificationServiceExtension to decrypts remote Push Notifications. Can be created on apple developer portal.
 
 `environment` - Use `debug` environment for debug builds and `release` for release and TestFlight builds.
 
 `crypto` - CryptoProvider is a protocol, you are required to provide an implementation of two methods recoverPubKey and keccak256.
-
 
 #### Register an identity key and enable cross-device account syncing
 
@@ -51,7 +50,6 @@ Notify.instance.register(account: account, domain: domain, onSign: onSign)
 `domain` - A domain of your wallet, you should use your bundle id
 
 `onSign` - callback that requires a signature from a user
-
 
 ```swift
 func onSign(message: String) -> SigningResult {
@@ -89,9 +87,9 @@ Notify.initialize(init = Notify.Params.Init(core = CoreClient) { error: Notify.M
 ```
 
 </PlatformTabItem>
-<PlatformTabItem value="react-native">
+<PlatformTabItem value="js">
 
-All clients will be initialized as soon as the Web3Inbox component is rendered for the first time.
+// TODO
 
 </PlatformTabItem>
 </PlatformTabs>
@@ -100,7 +98,7 @@ All clients will be initialized as soon as the Web3Inbox component is rendered f
 
 <PlatformTabs
 	groupId="w3w"
-	activeOptions={["ios","android", "react-native"]}
+	activeOptions={["ios","android", "js"]}
 >
 <PlatformTabItem value="ios">
 
@@ -150,7 +148,6 @@ public func subscribe(appDomain: String, account: Account) async throws {
 
 `account` - an account you want to associate the subscription with
 
-
 #### Get Active Subscriptions
 
 ```swift
@@ -172,7 +169,6 @@ To get messages by topic call:
 ```swift
 Notify.instance.getMessageHistory(topic: subscription.topic)
 ```
-
 
 </PlatformTabItem>
 <PlatformTabItem value="android">
@@ -214,14 +210,13 @@ NotifyClient.setDelegate(walletDelegate)
 This is a one-time action that does not need to be repeated after initial registration for each account address and must be called before using the SDK.
 :::
 
-Once the NotifyClient is [initialized](#client-configuration), you'll need to register a [CAIP-10 account](https://github.com/ChainAgnostic/CAIPs/blob/master/CAIPs/caip-10.md) with the NotifyClient to enable receiving notifications and syncing of the account across multiple devices. 
+Once the NotifyClient is [initialized](#client-configuration), you'll need to register a [CAIP-10 account](https://github.com/ChainAgnostic/CAIPs/blob/master/CAIPs/caip-10.md) with the NotifyClient to enable receiving notifications and syncing of the account across multiple devices.
 
 You'll need to create an instance of `Notify.Params.Registration` which will need the CAIP-10 account, the domain which should be your `ApplicationId`, and a lambda that will need to ask the user for permission to sign a message using their private key.
 
 The `Notify.Model.Registration` object will need to be passed into `NotifyClient.register` which has a `onSuccess` method which will return the WalletConnect Identity public key. This public key is strictly for debugging and more information can be found [here](https://specs.walletconnect.com/2.0/specs/clients/core/identity/identity-keys). There is also an `onError` callback which will return an instance of `Notify.Model.Error` in case there is an error while registering the account.
 
 **Note** The `NotifyClient.Register` function is to verify the ownership over blockchain account when registering identities in [WalletConnect's Keyserver](https://specs.walletconnect.com/2.0/specs/servers/keys/). End users must sign the message provided on the `onSign(message: String)` callback. Currently only EIP191 signatures are supported in Keyserver.
-
 
 ##### NotifyClient.register
 
@@ -233,7 +228,7 @@ val params = Notify.Params.Registration(
         // CacaoSigner is a util for easy message signing.
         return CacaoSigner.sign(message, /*privateKey*/, SignatureType.EIP191)
         // When users decides to not sign message return null
-        return null 
+        return null
     }
 )
 
@@ -248,7 +243,7 @@ NotifyClient.register(
   )
 ```
 
-#### Unregister blockchain account 
+#### Unregister blockchain account
 
 To stop receiving notifications for specific blockchain account call `NotifyClient.unregister`. This will delete all local data of subscriptions and messages associated with the account, locally remove and unregister Identity from [Keyserver](https://specs.walletconnect.com/2.0/specs/servers/keys/) and unsubscribe from all active subscriptions.
 
@@ -265,8 +260,8 @@ NotifyClient.unregister(
 )
 ```
 
-
 #### Subscribe to a new Dapp
+
 Calling `NotifyClient.subscribe` will establish the subscription with the dapp specified in the `Notify.Params.Subscribe` params passed into the function. The `Notify.Params.Subscribe` params requires the uri of the dapp and a CAIP-10 compatible account.
 
 ```kotlin
@@ -274,7 +269,7 @@ val dappUri: Uri = // The Dapp Uri to subscribe to
 val caip10Account: String = // The CAIP-10 account that was used in `NotifyClient.register`
 
 val subscribeParams = Notify.Params.Subscribe(
-  appDomain = dappUri, 
+  appDomain = dappUri,
   account = caip10Account
 )
 
@@ -290,6 +285,7 @@ NotifyClient.subscribe(
 ```
 
 #### Update a subscription with new Scopes
+
 To update a subscription, pass `Notify.Params.Update` with the subscription topic that is to be updated and the new [scope](https://specs.walletconnect.com/2.0/specs/clients/notify/notify-config#notification-types) to be sent to the dapp. The subscription topic can be fetched from the `NotifyClient.getActiveSubscriptions()`
 
 ```kotlin
@@ -300,16 +296,17 @@ val updateParams = Notify.Params.Update(
 
 NotifyClient.update(
     params  = updateParams,
-    onSuccess = { 
-      // Updating the subscription was successful 
+    onSuccess = {
+      // Updating the subscription was successful
     },
-    onError = { error: Notify.Model.Error -> 
+    onError = { error: Notify.Model.Error ->
       // There was an error while trying to update the subscription
     }
 )
 ```
 
 #### Get a map of Active Subscriptions
+
 To get a map of all the active subscriptions, call `NotifyClient.getActiveSubscriptions()`. It will return a map with the topic as the key and `Notify.Model.Subscription` as the value.
 
 ```kotlin
@@ -317,6 +314,7 @@ val activeSubscriptions: Map<String, Notify.Model.Subscription> = NotifyClient.g
 ```
 
 #### Get Notification Types
+
 To get a map of all the active subscriptions, call the `getNotificationTypes` function. It will return a map with the notification type id as the key and `Notify.Model.NotificationType` as the value.
 
 ```kotlin
@@ -326,8 +324,8 @@ val notificationTypesParams = Notify.Params.NotificationTypes(appDomain)
 NotifyClient.getNotificationTypes(notificationTypesParams)
 ```
 
-
 #### Get a map of the Message History for a Subscription
+
 To get all the messages for a specific subscription topic, call `NotifyClient.getMessageHistory()` and pass an instance of `Notify.Params.MessageHistory`. It will return a map with the request ids as the key and `Notify.Model.MessageRecord` as the value.
 
 ```kotlin
@@ -337,13 +335,14 @@ val messageHistory: Map<Long, Notify.Model.MessageRecord> = NotifyClient.getMess
 ```
 
 #### Delete a Subscription
+
 To delete a subscription, pass `Notify.Params.DeleteSubscription` with the subscription topic that is to be deleted. The subscription topic can be fetched from the `NotifyClient.getActiveSubscriptions()`
 
 ```kotlin
 val deleteSubscriptionParam = Notify.Params.DeleteSubscription(topic = /* The topic of the active subscription to delete */)
 
 NotifyClient.deleteSubscription(
-  params = deleteSubscriptionParam, 
+  params = deleteSubscriptionParam,
   onError: { error: Notify.Model.Error ->
     // Error will be thrown if there's an issue with trying to delete the subscription
   }
@@ -351,17 +350,18 @@ NotifyClient.deleteSubscription(
 ```
 
 #### Delete a Message
+
 To delete a notify record message, pass `Notify.Params.DeleteMessage` with the request id of the record to be deleted. The id can be fetched from the `NotifyClient.getMessageHistory()`
 
 ```kotlin
 val deleteMessageParams = Notify.Params.DeleteMessage(id = /* The request id of the message fetched from Notify. */)
 
 Notify.deleteNotifyMessage(
-  params = deleteMessageParams, 
+  params = deleteMessageParams,
   onSuccess = {
     // Triggered when the message has been successfully deleted
-  }, 
-  onError = { error: Notify.Model.Error -> 
+  },
+  onError = { error: Notify.Model.Error ->
     // Error will be thrown if there's an issue with trying to delete the specific message
   }
 )
@@ -369,113 +369,9 @@ Notify.deleteNotifyMessage(
 
 </PlatformTabItem>
 
-<PlatformTabItem value="react-native">
+<PlatformTabItem value="js">
 
-This example makes use of [WalletConnect Modal](../../advanced/walletconnectmodal/about?platform=react-native) for simplicity but you can also integrate Web3Inbox into your React Native Wallet by providing the following props.
-
-For more context, feel free to check our [example](https://github.com/WalletConnect/react-native-examples/tree/web3inbox-dapp/dapps/web3inbox).
-
-```tsx
-import { Web3Inbox } from '@walletconnect/web3inbox-webview'
-import { useCallback, useState } from 'react'
-
-export default function Example() {
-  const { provider, isConnected, address } = useWalletConnectModal()
-  const [isVisible, setIsVisible] = useState(true)
-
-  const toggleWeb3InboxModal = useCallback(
-    () => setIsVisible(isCurrentlyVisible => !isCurrentlyVisible),
-    []
-  )
-
-  const handleSign = useCallback(
-    async (message: string) => {
-      const response = await provider?.request(
-        {
-          method: 'personal_sign',
-          params: [message, address]
-        },
-        'eip155:1'
-      )
-      return response as string
-    },
-    [provider, address]
-  )
-
-  const clientMetadata = {
-    name: 'Web3Inbox React Native Example',
-    description: 'An example app to showcase how to use Web3Inbox React Native SDK',
-    url: 'https://github.com/WalletConnect/web3inbox-js-sdk',
-    icons: ['https://avatars.githubusercontent.com/u/37784886']
-  }
-
-  return (
-    <View>
-      <Web3Inbox
-        projectId={projectId}
-        ethAddress={address}
-        onSign={handleSign}
-        visible={isVisible}
-        setVisible={toggleWeb3InboxModal}
-        clientMetadata={clientMetadata}
-      />
-    </View>
-  )
-}
-```
-
-#### Required Props
-
-#### projectId `string`
-
-Get your project ID key on [WalletConnect Cloud](https://cloud.walletconnect.com).
-
-#### ethAddress `string`
-
-Ethereum wallet address of the current user.
-
-#### onSign `(message: string) => Promise<string>`
-
-Web3Inbox client will request user to sign messages with its account private key. The message may be a Sync Storage derivation key or Identity key registration.
-
-#### clientMetadata
-
-Web3Inbox will consume your metadata for various use cases, such as displaying your logo and the name of your project.
-
-```ts
-interface IClientMetadata {
-  name: string
-  description: string
-  url: string
-  icons: string[]
-}
-```
-
-#### visible `boolean`
-
-Determines visibility of Web3Inbox webview.
-
-#### setVisible `() => void`
-
-Function to set `visible` prop to true or false.
-
-#### Optional Props
-
-#### closeButton `React.ReactNode`
-
-Provide a custom component to close Web3Inbox webview.
-
-#### chatEnabled `boolean`
-
-Enable or disable Chat SDK in Web3Inbox (default: `true`), setting it to `false` will also remove the navigation item.
-
-#### notifyEnabled `boolean`
-
-Enable or disable Notify SDK in Web3Inbox (default: `true`), setting it to `false` will also remove the navigation item.
-
-#### settingsEnabled `boolean`
-
-Enable or disable settings page in Web3Inbox (default: `true`), setting it to `false` will also remove the navigation item.
+// TODO
 
 </PlatformTabItem>
 </PlatformTabs>
@@ -484,7 +380,7 @@ Enable or disable settings page in Web3Inbox (default: `true`), setting it to `f
 
 <PlatformTabs
 	groupId="w3w"
-	activeOptions={["ios","android", "react-native"]}
+	activeOptions={["ios","android", "js"]}
 >
 <PlatformTabItem value="ios">
 
@@ -548,7 +444,7 @@ To decrypt a Push Notification (PN), you need to instantiate a [UNNotificationSe
 
 For details on how to modify the content in newly delivered notifications, refer to the official Apple Developer Documentation [here](https://developer.apple.com/documentation/usernotifications/modifying_content_in_newly_delivered_notifications).
 
-Additionally, you will need to create a [keychain group](https://developer.apple.com/documentation/security/keychain_services/keychain_items/sharing_access_to_keychain_items_among_a_collection_of_apps) that is shared between your wallet application and the notification service. 
+Additionally, you will need to create a [keychain group](https://developer.apple.com/documentation/security/keychain_services/keychain_items/sharing_access_to_keychain_items_among_a_collection_of_apps) that is shared between your wallet application and the notification service.
 
 Inside your notification service extension file, import WalletConnectNotify, initialize `NotifyDecryptionService()`, and decrypt the message with the following Swift code:
 
@@ -613,7 +509,6 @@ class SampleFirebaseService: NotifyMessageService() {
 </application>
 ```
 
-
 #### Push Notification best practices
 
 `Notify.Model.Message` contains a `type` field, which is a unique id of the notification type. It is recommended to use this field as a notification channel id. By doing so it will create a channel for each notification type. To allow users to granularly control which notifications they want to receive within system settings, it is recommended to create a separate channel for every dapp and every notification type they might have. By doing so user would be able to turn off notifications for specific notification type per every subscribed dapp.
@@ -625,7 +520,7 @@ override fun onMessage(message: Notify.Model.Message, originalMessage: RemoteMes
 
     val typeName = NotifyClient.getNotificationTypes(Notify.Params.NotificationTypes(appDomain))[message.type]?.name
         ?: throw IllegalStateException("No notification type for topic:${message.topic} and type: ${message.type}")
-    
+
     val channelId = message.type
     val channelName = (appMetadata.name + ": " + typeName)
 
@@ -648,9 +543,9 @@ override fun onMessage(message: Notify.Model.Message, originalMessage: RemoteMes
 ```
 
 </PlatformTabItem>
-<PlatformTabItem value="react-native">
+<PlatformTabItem value="js">
 
-Currently Web3Inbox SDK contains Chat SDK features. Notify SDK features coming soon.
+// TODO
 
 </PlatformTabItem>
 </PlatformTabs>
