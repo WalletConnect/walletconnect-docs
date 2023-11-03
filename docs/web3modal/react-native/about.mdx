@@ -36,6 +36,7 @@ On iOS, use CocoaPods to add the native modules to your project:
 ```
 npx pod-install
 ```
+
 </TabItem>
 
 <TabItem value="expo" label="Expo">
@@ -51,36 +52,39 @@ npx expo install @react-native-async-storage/async-storage react-native-get-rand
 ```
 
 #### Additional Setup for Expo SDK 48
+
 If you are using Expo SDK 48, you also need to polyfill `crypto` with expo-crypto library.
 
 1. Add `expo-crypto`
+
 ```
 npx expo install expo-crypto
 ```
 
 2. Create a file named `expo-shim.js`
+
 ```js
 // src/expo-shim.js
 
 // Apply only with Expo SDK 48
-import { getRandomValues as expoCryptoGetRandomValues } from 'expo-crypto';
+import { getRandomValues as expoCryptoGetRandomValues } from 'expo-crypto'
 
 class Crypto {
-  getRandomValues = expoCryptoGetRandomValues;
+  getRandomValues = expoCryptoGetRandomValues
 }
 
 // eslint-disable-next-line no-undef
-const webCrypto = typeof crypto !== 'undefined' ? crypto : new Crypto();
+const webCrypto = typeof crypto !== 'undefined' ? crypto : new Crypto()
 
-(() => {
+;(() => {
   if (typeof crypto === 'undefined') {
     Object.defineProperty(window, 'crypto', {
       configurable: true,
       enumerable: true,
-      get: () => webCrypto,
-    });
+      get: () => webCrypto
+    })
   }
-})();
+})()
 ```
 
 3. Import `expo-shim.js` in your App root file
@@ -104,10 +108,16 @@ import { createWeb3Modal, defaultWagmiConfig } from '@web3modal/wagmi-react-nati
 Start by importing `createWeb3Modal`, and wagmi packages, then create your configs as shown below.
 Finally, pass your configuration to `createWeb3Modal`.
 
+:::info Note
+
+Make sure you import `@web3modal/wagmi-react-native` before `wagmi` to avoid any issues.
+
+:::
+
 ```tsx
 import { createWeb3Modal, defaultWagmiConfig, Web3Modal } from '@web3modal/wagmi-react-native'
-import { WagmiConfig } from 'wagmi';
-import { mainnet, polygon, arbitrum } from 'wagmi/chains';
+import { WagmiConfig } from 'wagmi'
+import { mainnet, polygon, arbitrum } from 'wagmi/chains'
 
 // 1. Get projectId
 const projectId = 'YOUR_PROJECT_ID'
@@ -126,10 +136,10 @@ const metadata = {
 
 const chains = [mainnet, polygon, arbitrum]
 
-const wagmiConfig = defaultWagmiConfig({ chains, projectId, metadata });
+const wagmiConfig = defaultWagmiConfig({ chains, projectId, metadata })
 
 // 3. Create modal
-createWeb3Modal({ 
+createWeb3Modal({
   projectId,
   chains,
   wagmiConfig
@@ -174,7 +184,7 @@ Learn more about the Web3Modal components [here](./components.mdx)
 You can trigger the modal by calling the `open` function from `useWeb3Modal` hook.
 
 ```tsx
-import { Pressable, Text } from 'react-native';
+import { Pressable, Text } from 'react-native'
 import { useWeb3Modal } from '@web3modal/wagmi-react-native'
 
 export default function ConnectView() {
@@ -196,6 +206,7 @@ Learn more about the Web3Modal hooks [here](./hooks.mdx)
 </Tabs>
 
 ## Enable Wallet Detection
+
 To enable WalletConnectModal to detect wallets installed on the device, you need to make specific changes to the native code of your project.
 
 First, add our core dependency to your package.json file so React Native links it's native code to your project
@@ -204,48 +215,48 @@ First, add our core dependency to your package.json file so React Native links i
 npm install @web3modal/core-react-native
 ```
 
-
 <Tabs groupId="platform">
   <TabItem value="rn-cli" label="React Native CLI">
 
-  #### For iOS:
+#### For iOS:
 
-  1. Open your `Info.plist` file.
-  2. Locate the `<key>LSApplicationQueriesSchemes</key>` section.
-  3. Add the desired wallet schemes as string entries within the `<array>`. These schemes represent the wallets you want to detect.
-  4. Refer to our [Info.plist example file](https://github.com/WalletConnect/react-native-examples/blob/main/dapps/ModalUProvider/ios/ModalUProvider/Info.plist) for a detailed illustration.
+1. Open your `Info.plist` file.
+2. Locate the `<key>LSApplicationQueriesSchemes</key>` section.
+3. Add the desired wallet schemes as string entries within the `<array>`. These schemes represent the wallets you want to detect.
+4. Refer to our [Info.plist example file](https://github.com/WalletConnect/react-native-examples/blob/main/dapps/ModalUProvider/ios/ModalUProvider/Info.plist) for a detailed illustration.
 
-  Example:
-  ```xml
-  <key>LSApplicationQueriesSchemes</key>
-  <array>
-    <string>metamask</string>
-    <string>trust</string>
-    <string>safe</string>
-    <string>rainbow</string>
-    <string>uniswap</string>
-    <!-- Add other wallet schemes names here -->
-  </array>
-  ```
+Example:
 
-  #### For Android:
+```xml
+<key>LSApplicationQueriesSchemes</key>
+<array>
+  <string>metamask</string>
+  <string>trust</string>
+  <string>safe</string>
+  <string>rainbow</string>
+  <string>uniswap</string>
+  <!-- Add other wallet schemes names here -->
+</array>
+```
 
+#### For Android:
 
-  1. Open your `AndroidManifest.xml` file.
-  2. Locate the `<queries>` section.
-  3. Add the desired wallet package names as `<package>` entries within the `<queries>`. These package names correspond to the wallets you want to detect.
-  4. Refer to our [AndroidManifest.xml example file](https://github.com/WalletConnect/react-native-examples/blob/main/dapps/ModalUProvider/android/app/src/main/AndroidManifest.xml) for detailed guidance.
+1. Open your `AndroidManifest.xml` file.
+2. Locate the `<queries>` section.
+3. Add the desired wallet package names as `<package>` entries within the `<queries>`. These package names correspond to the wallets you want to detect.
+4. Refer to our [AndroidManifest.xml example file](https://github.com/WalletConnect/react-native-examples/blob/main/dapps/ModalUProvider/android/app/src/main/AndroidManifest.xml) for detailed guidance.
 
-  Example:
-  ```xml
-  <queries>
-    <package android:name="io.metamask"/>
-    <package android:name="com.wallet.crypto.trustapp"/>
-    <package android:name="io.gnosis.safe"/>
-    <package android:name="me.rainbow"/>
-    <!-- Add other wallet package names here -->
-  </queries>
-  ```
+Example:
+
+```xml
+<queries>
+  <package android:name="io.metamask"/>
+  <package android:name="com.wallet.crypto.trustapp"/>
+  <package android:name="io.gnosis.safe"/>
+  <package android:name="me.rainbow"/>
+  <!-- Add other wallet package names here -->
+</queries>
+```
 
 </TabItem>
 
@@ -272,7 +283,7 @@ Your configuration should look like this:
           "trust",
           "safe",
           "rainbow",
-          "uniswap",
+          "uniswap"
           // Add other wallet schemes names here
         ]
       }
@@ -280,6 +291,7 @@ Your configuration should look like this:
   }
 }
 ```
+
 </TabItem>
 
 </Tabs>
