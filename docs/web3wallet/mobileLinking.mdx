@@ -217,29 +217,35 @@ https://github.com/WalletConnect/WalletConnectKotlinV2/tree/master/sample/dapp
 
 ## WalletConnectRouter
 
-:::info Note
-
-This feature is only available for iOS versions lower than 17.
-
-For iOS 17.0 and higher, it's recommended for wallets to present a toast/alert message instructing the user to manually switch back to a dapp.
-
-:::
-
 ### Overview
 
 WalletConnectRouter framework can make working with WalletConnect on a mobile device even more convenient.
-For example you are interacting with a DApp from your mobile browser and redirect to your wallet through a deeplink to confirm the transaction. After confirmation, you need to return to the browser by yourself. WalletConnectRouter eliminates this unnecessary step.
 
-By calling `goBack()` you can return to DApp automatically
+For example you are interacting with a DApp from your iOS device and redirect to your wallet through a deeplink to confirm the transaction. After confirmation, you need to return to the DApp by yourself. WalletConnectRouter eliminates this unnecessary step.
+
+By calling `WalletConnectRouter.goBack(uri: "example://")` you can return to DApp automatically.
+
+Starting from WalletConnect SDK version 1.9.5, the `redirect` field in the `AppMetadata` object is mandatory. Ensure that the provided value matches your app's URL scheme to prevent redirection-related issues.
 
 ### Installation example
 
 ```swift
 import WalletConnectRouter
 
-Task { @MainActor in
-  try await Sign.instance.approve(proposalId: <proposalId>, namespaces: <namespaces>)
+try await Sign.instance.approve(proposalId: <proposalId>, namespaces: <namespaces>)
 
-  Router.goBack()
+if let uri = proposal.proposer.redirect?.native {
+    WalletConnectRouter.goBack(uri: uri)
+} else {
+  // Please inform the user to return to the browser
 }
 ```
+
+Unfortunately, if you are interacting with a DApp from your browser, it's not possible to automatically redirect a user back since iOS 17. 
+It is highly recommended to modify your app's UI to inform the user about the necessity of manually returning to the browser.
+
+:::info Note
+If your iOS version is lower than 17, calling `WalletConnectRouter.goBack(uri: uri)` will trigger the automatic redirect. Additionally, you can manually trigger the automatic redirect using the old API call `Router.goBack()` within the `WalletConnectRouter` package.
+:::
+
+![Redirect](/img/ios-redirect.png)
