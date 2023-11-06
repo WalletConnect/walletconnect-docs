@@ -125,7 +125,9 @@ module.exports = {
               items: [
                 { type: 'doc', label: 'Getting started', id: 'web3modal/ios/about' },
                 'web3modal/ios/options',
+                'web3modal/ios/actions',
                 'web3modal/ios/usage',
+                'web3modal/ios/custom-chains',
                 {
                   type: 'link',
                   label: 'Example',
