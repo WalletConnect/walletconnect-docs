@@ -67,7 +67,15 @@ Web3Modal.configure(
 
 or you can change them later by calling `Web3Modal.set(sessionParams: SessionParams(...))`
 
-To actually present the modal you can simply call.
+### Provided UI components
+
+Now you can use the `Web3ModalButton` or `Web3ModalNetworkButton` components. These two components reflect the state of the Web3Modal client, 
+including the session state, account address and balance, currently selected network, and will automatically update when the state changes.
+More can be found in https://github.com/WalletConnect/web3modal-swift/blob/develop/Sample/Example/ContentView.swift as part of the Sample app.
+
+### Custom UI
+
+If you want to use custom UI you can present the modal by simply calling.
 
 ```swift
 Web3Modal.present()
@@ -100,4 +108,4 @@ Web3Modal is internally using Sign SDK and most of its method are being exposed 
 
 ### Where to go from here
 
-Check the Web3Modal usage in our Example Showcase app that is part of Web3Modal repository.
+Check the Web3Modal usage in our Sample app that is part of Web3Modal repository.
