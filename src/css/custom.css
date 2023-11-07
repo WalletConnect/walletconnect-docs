@@ -915,7 +915,7 @@ article img {
   border-radius: 0;
 }
 
-[data-theme='light'] .home__small-container img.white {
+[data-theme='light'] .home__small-container img.white{
   filter: invert(1);
 }
 
@@ -969,6 +969,14 @@ article img {
   z-index: 0;
   filter: blur(20px);
   pointer-events: none;
+}
+
+[data-theme='light'] .home__large-container--nofit img.white{
+	filter: invert(1);
+}
+
+[data-theme='light'] .home__large-container--nofit img.white.blur {
+  display: none;
 }
 
 .home__large-container--text {
