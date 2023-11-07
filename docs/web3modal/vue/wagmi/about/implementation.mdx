@@ -14,7 +14,7 @@ In your `App.vue` file set up the following configuration.
 ```html
 <script setup>
   import { createWeb3Modal, defaultWagmiConfig } from '@web3modal/wagmi/vue'
-  import { mainnet, arbitrum } from '@wagmi/core/chains'
+  import { mainnet, arbitrum } from 'viem/chains'
 
   // 1. Get projectId
   const projectId = 'YOUR_PROJECT_ID'
@@ -50,7 +50,7 @@ In your `App.vue` file set up the following configuration.
   import { walletConnectProvider, EIP6963Connector } from '@web3modal/wagmi'
 
   import { configureChains, createConfig } from '@wagmi/core'
-  import { mainnet } from '@wagmi/core/chains'
+  import { mainnet } from 'viem/chains'
   import { publicProvider } from '@wagmi/core/providers/public'
   import { InjectedConnector } from '@wagmi/core'
   import { CoinbaseWalletConnector } from '@wagmi/core/connectors/coinbaseWallet'

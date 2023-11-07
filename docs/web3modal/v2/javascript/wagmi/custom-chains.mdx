@@ -12,7 +12,7 @@ import CustomChainImagesPartial from '../../_partials/customisation/customChainI
 ```js
 import { w3mProvider } from '@web3modal/ethereum'
 import { configureChains } from '@wagmi/core'
-import { arbitrum, mainnet, avalanche } from '@wagmi/core/chains'
+import { arbitrum, mainnet, avalanche } from 'viem/chains'
 
 const chains = [mainnet, avalanche, arbitrum]
 const { publicClient } = configureChains(chains, [
@@ -27,7 +27,7 @@ const { publicClient } = configureChains(chains, [
 <CustomDefaultChainPartial />
 
 ```js
-import { optimism } from '@wagmi/core/chains'
+import { optimism } from 'viem/chains'
 
 const web3modal = new Web3Modal({
   defaultChain: optimism
@@ -39,7 +39,7 @@ const web3modal = new Web3Modal({
 <CustomChainProvidersPartial />
 
 ```js
-import { mainnet } from '@wagmi/core/chains'
+import { mainnet } from 'viem/chains'
 import { infuraProvider } from '@wagmi/core/providers/infura'
 import { w3mProvider } from '@web3modal/ethereum'
 
