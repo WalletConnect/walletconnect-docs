@@ -8,7 +8,7 @@ Default mode will implement WalletConnect, Browser Wallets (injected), [EIP-6963
 <Tabs>
 <TabItem value="default" label="Default">
 
-On top of your app set up the following configuration, making sure that all functions are called **outside** the App component.
+On top of your app set up the following configuration, making sure that all functions are called **outside** any React component to avoid unwanted rerenders.
 
 ```tsx
 import { createWeb3Modal, defaultConfig } from '@web3modal/ethers5/react'
@@ -48,7 +48,7 @@ export default function App() {
 <TabItem value="custom" label="Custom">
 
 
-On top of your app set up the following configuration, making sure that all functions are called outside the App component.
+On top of your app set up the following configuration, making sure that all functions are called outside any React component to avoid unwanted rerenders.
 
 ```tsx
 import { createWeb3Modal, defaultConfig } from '@web3modal/ethers5/react'
