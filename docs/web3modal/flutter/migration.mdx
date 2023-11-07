@@ -1,6 +1,3 @@
-import Tabs from '@theme/Tabs'
-import TabItem from '@theme/TabItem'
-
 # Migration from WCM
 
 :::caution
@@ -9,33 +6,33 @@ The Web3Modal SDK for Flutter is currently in Beta.
 
 <!--As you may know, **Web3Modal** is a better, more simply, modal to connect your wallet and if you are coming from **WalletConnectModal** you are wondering what are really the differences:-->
 
-If you are currently using WalletConnectModalFlutter and willing to switch to Web3Modal the migration steps couldn't be easier!
+If you are currently using WalletConnectModalFlutter, migrating to Web3Modal couldn't be easier!
 
-First, of course, uninstall `walletconnect_modal_flutter` and install `web3modal_flutter`, then change imports:
+## Imports
 
-<Tabs groupId="w3m_migration">
-<TabItem value="wcm" label="WCM">
+Uninstall `walletconnect_modal_flutter` and install `web3modal_flutter`, then change imports:
+
 
 ```dart
+// WalletConnectModal (Remove the following)
+// highlight-delete-start
 import 'package:walletconnect_flutter_v2/walletconnect_flutter_v2.dart';
 import 'package:walletconnect_modal_flutter/services/explorer/i_explorer_service.dart';
 import 'package:walletconnect_modal_flutter/walletconnect_modal_flutter.dart';
-```
-</TabItem>
-<TabItem value="w3m" label="W3M">
+// highlight-delete-end
 
-```dart
+// Web3Modal (Add the following)
+// highlight-add-start
 import 'package:web3modal_flutter/web3modal_flutter.dart';
+// highlight-add-end
 ```
-</TabItem>
-</Tabs>
 
-Service instance:
 
-<Tabs groupId="w3m_migration">
-<TabItem value="wcm" label="WCM">
+## Service instance
 
 ```dart
+// WalletConnectModal (Remove the following)
+// highlight-delete-start
 _w3mService = WalletConnectModalService(
   projectId: '****************',
   recommendedWalletIds: {
@@ -43,53 +40,46 @@ _w3mService = WalletConnectModalService(
   },
   excludedWalletState: ExcludedWalletState.list,
 );
-```
-</TabItem>
-<TabItem value="w3m" label="W3M">
+// highlight-delete-end
 
-```dart
+// Web3Modal (Add the following)
+// highlight-add-start
 _w3mService = W3MService(
   projectId: '****************',
   featuredWalletIds: {
     'WALLET_ID_HERE',
   },
-  // excludedWalletState: ExcludedWalletState.list, NO NEEDED
+  // excludedWalletState: ExcludedWalletState.list, NOT NEEDED
 );
+// highlight-add-end
 ```
-</TabItem>
-</Tabs>
 
-Launching connected wallet:
-
-<Tabs groupId="w3m_migration">
-<TabItem value="wcm" label="WCM">
+## Launching connected wallet
 
 ```dart
+// WalletConnectModal (Remove the following)
+// highlight-delete-start
 _w3mService.launchCurrentWallet();
-```
-</TabItem>
-<TabItem value="w3m" label="W3M">
+// highlight-delete-end
 
-```dart
+// Web3Modal (Add the following)
+// highlight-add-start
 _w3mService.launchConnectedWallet();
+// highlight-add-end
 ```
-</TabItem>
-</Tabs>
 
-Connect wallet button:
-
-<Tabs groupId="w3m_migration">
-<TabItem value="wcm" label="WCM">
+## Connect wallet button
 
 ```dart
+// WalletConnectModal (Remove the following)
+// highlight-delete-start
 WalletConnectModalConnect(service: _w3mService),
-```
-</TabItem>
-<TabItem value="w3m" label="W3M">
+// highlight-delete-end
 
-```dart
-// W3MNetworkSelectButton(service: _w3mService) => Additinal (not required) button
+// Web3Modal (Add the following)
+// highlight-add-start
+// W3MNetworkSelectButton(service: _w3mService) => This button is optional
 W3MConnectWalletButton(service: _w3mService),
+// highlight-add-end
 ```
-</TabItem>
-</Tabs>
+

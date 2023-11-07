@@ -139,7 +139,6 @@ const config = {
         theme: lightCodeTheme,
         additionalLanguages: ['swift', 'kotlin', 'dart', 'csharp'],
         magicComments: [
-          // Remember to extend the default highlight class name as well!
           {
             className: 'theme-code-block-highlighted-delete',
             line: 'highlight-delete',
