@@ -35,7 +35,7 @@ const wagmiConfig = defaultWagmiConfig({ chains, projectId, metadata })
 // 3. Create modal
 createWeb3Modal({ wagmiConfig, projectId, chains })
 
-export function Web3Modal({ children }: PropsWithChildren) {
+export function Web3Modal({ children }) {
   return <WagmiConfig config={wagmiConfig}>{children}</WagmiConfig>;
 }
 ```
