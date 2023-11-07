@@ -1,0 +1,95 @@
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
+
+# Migration from WCM
+
+:::caution
+The Web3Modal SDK for Flutter is currently in Beta.
+:::
+
+<!--As you may know, **Web3Modal** is a better, more simply, modal to connect your wallet and if you are coming from **WalletConnectModal** you are wondering what are really the differences:-->
+
+If you are currently using WalletConnectModalFlutter and willing to switch to Web3Modal the migration steps couldn't be easier!
+
+First, of course, uninstall `walletconnect_modal_flutter` and install `web3modal_flutter`, then change imports:
+
+<Tabs groupId="w3m_migration">
+<TabItem value="wcm" label="WCM">
+
+```dart
+import 'package:walletconnect_flutter_v2/walletconnect_flutter_v2.dart';
+import 'package:walletconnect_modal_flutter/services/explorer/i_explorer_service.dart';
+import 'package:walletconnect_modal_flutter/walletconnect_modal_flutter.dart';
+```
+</TabItem>
+<TabItem value="w3m" label="W3M">
+
+```dart
+import 'package:web3modal_flutter/web3modal_flutter.dart';
+```
+</TabItem>
+</Tabs>
+
+Service instance:
+
+<Tabs groupId="w3m_migration">
+<TabItem value="wcm" label="WCM">
+
+```dart
+_w3mService = WalletConnectModalService(
+  projectId: '****************',
+  recommendedWalletIds: {
+    'WALLET_ID_HERE',
+  },
+  excludedWalletState: ExcludedWalletState.list,
+);
+```
+</TabItem>
+<TabItem value="w3m" label="W3M">
+
+```dart
+_w3mService = W3MService(
+  projectId: '****************',
+  featuredWalletIds: {
+    'WALLET_ID_HERE',
+  },
+  // excludedWalletState: ExcludedWalletState.list, NO NEEDED
+);
+```
+</TabItem>
+</Tabs>
+
+Launching connected wallet:
+
+<Tabs groupId="w3m_migration">
+<TabItem value="wcm" label="WCM">
+
+```dart
+_w3mService.launchCurrentWallet();
+```
+</TabItem>
+<TabItem value="w3m" label="W3M">
+
+```dart
+_w3mService.launchConnectedWallet();
+```
+</TabItem>
+</Tabs>
+
+Connect wallet button:
+
+<Tabs groupId="w3m_migration">
+<TabItem value="wcm" label="WCM">
+
+```dart
+WalletConnectModalConnect(service: _w3mService),
+```
+</TabItem>
+<TabItem value="w3m" label="W3M">
+
+```dart
+// W3MNetworkSelectButton(service: _w3mService) => Additinal (not required) button
+W3MConnectWalletButton(service: _w3mService),
+```
+</TabItem>
+</Tabs>
