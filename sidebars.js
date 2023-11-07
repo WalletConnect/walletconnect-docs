@@ -30,6 +30,19 @@ module.exports = {
           collapsible: true,
           items: [
             'web3modal/about',
+			{
+			  type: 'category',
+			  className: 'sidebar__logo sidebar__logo--nextjs',
+			  label: 'Next.js',
+			  items: [
+				{ type: 'doc', label: 'Getting started', id: 'web3modal/nextjs/about' },
+				'web3modal/nextjs/hooks',
+				'web3modal/nextjs/options',
+				'web3modal/nextjs/components',
+				'web3modal/nextjs/theming',
+				'web3modal/nextjs/resources'
+			  ]
+			},
             {
               type: 'category',
               className: 'sidebar__logo sidebar__logo--react',
@@ -43,19 +56,6 @@ module.exports = {
                 'web3modal/react/resources'
               ]
 			  },
-			{
-              type: 'category',
-              className: 'sidebar__logo sidebar__logo--nextjs',
-              label: 'Next.js',
-              items: [
-                { type: 'doc', label: 'Getting started', id: 'web3modal/nextjs/about' },
-                'web3modal/nextjs/hooks',
-                'web3modal/nextjs/options',
-                'web3modal/nextjs/components',
-                'web3modal/nextjs/theming',
-                'web3modal/nextjs/resources'
-              ]
-            },
             {
               type: 'category',
               className: 'sidebar__logo sidebar__logo--vue',
