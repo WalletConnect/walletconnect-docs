@@ -8,9 +8,11 @@ Default mode will implement WalletConnect, Browser Wallets (injected) and Coinba
 <Tabs>
 <TabItem value="default" label="Default">
 
-On top of your app set up the following configuration, making sure that all functions are called **outside** any React component to avoid unwanted rerenders.
+Create a new file called `context/Web3Modal.tsx` or `context/Web3Modal.jsx` (outside your app directory) and set up the following configuration, making sure that all functions are called **outside** any React component to avoid unwanted rerenders.
 
 ```tsx
+"use client";
+
 import { createWeb3Modal, defaultWagmiConfig } from '@web3modal/wagmi/react'
 
 import { WagmiConfig } from 'wagmi'
@@ -33,21 +35,44 @@ const wagmiConfig = defaultWagmiConfig({ chains, projectId, metadata })
 // 3. Create modal
 createWeb3Modal({ wagmiConfig, projectId, chains })
 
-export default function App() {
+export function Web3Modal({ children }: PropsWithChildren) {
+  return <WagmiConfig config={wagmiConfig}>{children}</WagmiConfig>;
+}
+```
+
+Next, in your `app/layout.tsx` or `app/layout.jsx`  file, import the custom Web3Modal component.
+
+```tsx
+import type { Metadata } from "next";
+import "./globals.css";
+
+import { Web3Modal } from "../context/Web3Modal";
+
+export const metadata: Metadata = {
+  title: "Web3Modal",
+  description: "Web3Modal Example",
+};
+
+export default function RootLayout({ children }) {
   return (
-    <WagmiConfig config={wagmiConfig}>
-      // Rest of your app...
-    </WagmiConfig>
-  )
+    <html lang="en">
+      <body>
+        <Web3Modal>{children}</Web3Modal>
+      </body>
+    </html>
+  );
 }
 ```
 
 </TabItem>
 <TabItem value="custom" label="Custom">
 
-On top of your app set up the following configuration, making sure that all functions are called **outside** any React component to avoid unwanted rerenders.
+
+Create a new file called `context/Web3Modal.tsx` or `context/Web3Modal.jsx` (outside your app directory) and set up the following configuration, making sure that all functions are called **outside** any React component to avoid unwanted rerenders.
 
 ```tsx
+"use client";
+
 import { createWeb3Modal } from '@web3modal/wagmi/react'
 import { walletConnectProvider, EIP6963Connector } from '@web3modal/wagmi'
 
@@ -87,6 +112,41 @@ const wagmiConfig = createConfig({
 
 // 3. Create modal
 createWeb3Modal({ wagmiConfig, projectId, chains })
+
+export function Web3Modal({ children }) {
+  return <WagmiConfig config={wagmiConfig}>{children}</WagmiConfig>;
+}
+```
+
+Next, in your `app/layout.tsx` or `app/layout.jsx` file, import the custom Web3Modal component.
+
+```tsx
+import type { Metadata } from "next";
+import "./globals.css";
+
+import { Web3Modal } from "../context/Web3Modal";
+
+export const metadata: Metadata = {
+  title: "Web3Modal",
+  description: "Web3Modal Example",
+};
+
+export default function RootLayout({ children }) {
+  return (
+    <html lang="en">
+      <body>
+        <Web3Modal>{children}</Web3Modal>
+      </body>
+    </html>
+  );
+}
+```
+
+
+On top of your app set up the following configuration, making sure that all functions are called **outside** any React component to avoid unwanted rerenders.
+
+```tsx
+
 
 export default function App() {
   return (
