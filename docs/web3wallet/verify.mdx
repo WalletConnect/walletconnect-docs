@@ -37,7 +37,7 @@ The Verify security system will discriminate session proposals & session request
 
 <PlatformTabs
 	groupId="w3w"
-	activeOptions={["web","ios","android","csharp"]}
+	activeOptions={["web","ios","android","csharp", "flutter"]}
 >
 <PlatformTabItem value="web">
 To check the Verify API validations and whether or not your user is interacting with potentially malicious app, you can do so by accessing the `verifyContext` included in the request payload.
@@ -189,6 +189,23 @@ public enum Validation
     Valid,
     Invalid,
 }
+```
+
+</PlatformTabItem>
+<PlatformTabItem value="flutter">
+To check the Verify API validations and whether or not your user is interacting with potentially malicious dapp, you can do so by accessing the `verifyContext` included in the `SessionProposalEvent`:
+
+<br /><br />
+
+```dart
+_web3Wallet!.onSessionProposal.subscribe((SessionProposalEvent? args) {
+  if (args != null) {
+    final scamApp = args.verifyContext?.validation.scam;
+    final invalidApp = args.verifyContext?.validation.invalid;
+    final validApp = args.verifyContext?.validation.valid;
+    final unknown = args.verifyContext?.validation.unknown;
+  }
+});
 ```
 
 </PlatformTabItem>

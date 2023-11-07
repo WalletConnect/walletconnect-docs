@@ -93,6 +93,7 @@ module.exports = {
                 'web3modal/flutter/actions',
                 'web3modal/flutter/theming',
                 'web3modal/flutter/custom-chains',
+                { type: 'doc', label: 'Migration', id: 'web3modal/flutter/migration' },
                 {
                   type: 'link',
                   label: 'Example',
