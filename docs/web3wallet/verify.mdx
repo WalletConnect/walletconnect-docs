@@ -25,7 +25,7 @@ Verify API is not designed to be bulletproof but to make the impersonation attac
 The Verify security system will discriminate session proposals & session requests with distinct validations that can be either `VALID`, `INVALID` or `UNKNOWN`.
 
 - Domain match: The domain linked to this request has been verified as this application's domain.
-  - This interface appears when the domain a user is attempting to connect to has been ‘verified’ in our domain registry as the registered domain of the application the user is trying to connect to, and the domain has not returned as suspicious by Blowfish. The `verifyContext` included in the request will have a validation of `VALID`.
+  - This interface appears when the domain a user is attempting to connect to has been ‘verified’ in our domain registry as the registered domain of the application the user is trying to connect to, and the domain has not been labeled as suspicious by Blowfish. The `verifyContext` included in the request will have a validation of `VALID`.
 - Unverified: The domain sending the request cannot be verified.
   - This interface appears when the domain a user is attempting to connect to has not been verified in our domain registry, but the domain has not returned as suspicious by Blowfish. The `verifyContext` included in the request will have a validation of `UNKNOWN`.
 - Mismatch: The application's domain doesn't match the sender of this request.
