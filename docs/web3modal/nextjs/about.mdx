@@ -72,7 +72,9 @@ npm install @web3modal/ethers5 ethers@5.7.2
 
 ## Extra configuration
 
-Add the following code in the `next.config.js` file
+Next.js relies on [SSR](https://nextjs.org/docs/pages/building-your-application/rendering/server-side-rendering). This means some specific steps are required to make Web3Modal work properly.
+
+- Add the following code in the `next.config.js` file
 
 ```ts
 // Path: next.config.js
@@ -88,5 +90,5 @@ const nextConfig = {
 ```
 
 - If `SWCMinify` is flagged, it must be false in the `next.config.js` file
-- If you are using Wagmi, [dynamic imports](https://nextjs.org/docs/app/building-your-application/optimizing/lazy-loading#nextdynamic) or `supressHydrationWarning` is recommended to avoid `Hydration mismatch` errors
+- If you are using Wagmi, [dynamic imports](https://nextjs.org/docs/app/building-your-application/optimizing/lazy-loading#nextdynamic) or `supressHydrationWarning` are recommended tro prevent `Hydration mismatch` errors
 
