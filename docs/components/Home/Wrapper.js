@@ -28,7 +28,8 @@ const Wrapper = ({ items, type, fit = true, ...props }) => {
               href={item.href}
               name={item.name}
               icon={item.icon}
-              fit={fit}
+				fit={fit}
+				isWhite={item.isWhite || false}
               description={item.description}
             />
           ))}

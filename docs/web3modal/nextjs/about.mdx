@@ -1,0 +1,94 @@
+import CloudBanner from '../../components/CloudBanner'
+import PlatformTabs from '../../components/PlatformTabs'
+import PlatformTabItem from '../../components/PlatformTabItem'
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
+
+import WagmiImplementation from './wagmi/about/implementation.mdx'
+import WagmiModal from './wagmi/about/triggermodal.mdx'
+
+import EthersImplementation from './ethers/about/implementation.mdx'
+import EthersModal from './ethers/about/triggermodal.mdx'
+
+# Next.js
+
+Web3Modal SDK has support for [Wagmi](https://wagmi.sh/) and [Ethers v5](https://docs.ethers.org/v5/getting-started/).
+Choose one of these ethereum libraries to get started.
+
+:::info Note
+These steps are specific to [Next.js](https://nextjs.org/) app router.
+:::
+
+## Installation
+
+<PlatformTabs groupId="eth-lib" activeOptions={["wagmi","ethers"]}>
+<PlatformTabItem value="wagmi">
+
+```bash npm2yarn
+npm install @web3modal/wagmi wagmi viem
+```
+
+</PlatformTabItem>
+<PlatformTabItem value="ethers">
+
+```bash npm2yarn
+npm install @web3modal/ethers5 ethers@5.7.2
+```
+
+</PlatformTabItem>
+</PlatformTabs>
+
+<CloudBanner />
+
+## Implementation
+
+<PlatformTabs groupId="eth-lib" activeOptions={["wagmi","ethers"]}>
+<PlatformTabItem value="wagmi">
+
+<WagmiImplementation/>
+
+</PlatformTabItem>
+<PlatformTabItem value="ethers">
+
+<EthersImplementation/>
+
+</PlatformTabItem>
+</PlatformTabs>
+
+## Trigger the modal
+
+<PlatformTabs groupId="eth-lib" activeOptions={["wagmi","ethers"]}>
+<PlatformTabItem value="wagmi">
+
+<WagmiModal/>
+
+</PlatformTabItem>
+<PlatformTabItem value="ethers">
+
+<EthersModal/>
+
+</PlatformTabItem>
+</PlatformTabs>
+
+## Extra configuration
+
+Next.js relies on [SSR](https://nextjs.org/docs/pages/building-your-application/rendering/server-side-rendering). This means some specific steps are required to make Web3Modal work properly.
+
+- Add the following code in the `next.config.js` file
+
+```ts
+// Path: next.config.js
+const nextConfig = {
+  webpack: (config) => {
+    config.externals.push(
+      "pino-pretty",
+      "lokijs",
+      "encoding"
+    );
+  return config;
+}
+```
+
+- If `SWCMinify` is flagged, it must be false in the `next.config.js` file
+- If you are using Wagmi, [dynamic imports](https://nextjs.org/docs/app/building-your-application/optimizing/lazy-loading#nextdynamic) or `supressHydrationWarning` are recommended tro prevent `Hydration mismatch` errors
+
