@@ -6,6 +6,10 @@ import PlatformTabItem from '../../components/PlatformTabItem'
 
 # Wallet Usage
 
+:::caution
+Auth API is in the process of being greatly simplified, and will involve breaking changes. Please stand by.
+:::
+
 <PlatformTabs
 groupId="api-auth"
 activeOptions={["web","ios","android","csharp"]}>

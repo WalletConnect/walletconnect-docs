@@ -1,5 +1,9 @@
 # Signer Factory (iOS only)
 
+:::caution
+Auth API is in the process of being greatly simplified, and will involve breaking changes. Please stand by.
+:::
+
 :::info
 This only applies to Swift SDK for Auth
 :::
