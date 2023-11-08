@@ -69,3 +69,21 @@ npm install @web3modal/ethers5 ethers@5.7.2
 
 </PlatformTabItem>
 </PlatformTabs>
+
+## Extra configuration
+
+Add the following code in the `next.config.js` file
+
+```ts
+// Path: next.config.js
+const nextConfig = {
+  webpack: (config) => {
+    config.externals.push(
+      "pino-pretty",
+      "lokijs",
+      "encoding"
+    );
+  return config;
+}
+```
+
