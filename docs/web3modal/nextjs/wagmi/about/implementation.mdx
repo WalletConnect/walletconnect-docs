@@ -43,12 +43,11 @@ export function Web3Modal({ children }) {
 Next, in your `app/layout.tsx` or `app/layout.jsx`  file, import the custom Web3Modal component.
 
 ```tsx
-import type { Metadata } from "next";
 import "./globals.css";
 
 import { Web3Modal } from "../context/Web3Modal";
 
-export const metadata: Metadata = {
+export const metadata = {
   title: "Web3Modal",
   description: "Web3Modal Example",
 };
@@ -66,7 +65,6 @@ export default function RootLayout({ children }) {
 
 </TabItem>
 <TabItem value="custom" label="Custom">
-
 
 Create a new file called `context/Web3Modal.tsx` or `context/Web3Modal.jsx` (outside your app directory) and set up the following configuration, making sure that all functions are called **outside** any React component to avoid unwanted rerenders.
 
@@ -121,12 +119,11 @@ export function Web3Modal({ children }) {
 Next, in your `app/layout.tsx` or `app/layout.jsx` file, import the custom Web3Modal component.
 
 ```tsx
-import type { Metadata } from "next";
 import "./globals.css";
 
 import { Web3Modal } from "../context/Web3Modal";
 
-export const metadata: Metadata = {
+export const metadata = {
   title: "Web3Modal",
   description: "Web3Modal Example",
 };
@@ -142,20 +139,6 @@ export default function RootLayout({ children }) {
 }
 ```
 
-
-On top of your app set up the following configuration, making sure that all functions are called **outside** any React component to avoid unwanted rerenders.
-
-```tsx
-
-
-export default function App() {
-  return (
-    <WagmiConfig config={wagmiConfig}>
-      // Rest of your app...
-    </WagmiConfig>
-  )
-}
-```
 :::note
 The provided code utilizes [Wagmi](https://wagmi.sh/), a React library for wallet and provider connections, along with the [Web3Modal](https://web3modal.com/) library to create a wallet connection modal. It features various connectors:
 

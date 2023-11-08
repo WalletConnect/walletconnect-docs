@@ -8,9 +8,11 @@ Default mode will implement WalletConnect, Browser Wallets (injected), [EIP-6963
 <Tabs>
 <TabItem value="default" label="Default">
 
-On top of your app set up the following configuration, making sure that all functions are called **outside** any React component to avoid unwanted rerenders.
+Create a new file called `context/Web3Modal.tsx` or `context/Web3Modal.jsx` (outside your app directory) and set up the following configuration, making sure that all functions are called **outside** any React component to avoid unwanted rerenders.
 
 ```tsx
+"use client"
+
 import { createWeb3Modal, defaultConfig } from '@web3modal/ethers5/react'
 
 // 1. Get projectId
@@ -39,8 +41,31 @@ createWeb3Modal({
   projectId
 })
 
-export default function App() {
-  return <YourApp/>
+export function Web3Modal({ children }) {
+  return <WagmiConfig config={wagmiConfig}>{children}</WagmiConfig>;
+}
+```
+
+Next, in your `app/layout.tsx` or `app/layout.jsx`  file, import the custom Web3Modal component.
+
+```tsx
+import "./globals.css";
+
+import { Web3Modal } from "../context/Web3Modal";
+
+export const metadata = {
+  title: "Web3Modal",
+  description: "Web3Modal Example",
+};
+
+export default function RootLayout({ children }) {
+  return (
+    <html lang="en">
+      <body>
+        <Web3Modal>{children}</Web3Modal>
+      </body>
+    </html>
+  );
 }
 ```
 
@@ -48,9 +73,11 @@ export default function App() {
 <TabItem value="custom" label="Custom">
 
 
-On top of your app set up the following configuration, making sure that all functions are called outside any React component to avoid unwanted rerenders.
+Create a new file called `context/Web3Modal.tsx` or `context/Web3Modal.jsx` (outside your app directory) and set up the following configuration, making sure that all functions are called **outside** any React component to avoid unwanted rerenders.
 
 ```tsx
+"use client"
+
 import { createWeb3Modal, defaultConfig } from '@web3modal/ethers5/react'
 
 // 1. Get projectId
@@ -74,7 +101,7 @@ const metadata = {
 }
 
 createWeb3Modal({
-  ethersConfig: defaultConfig({ 
+  ethersConfig: defaultConfig({
     metadata,
     defaultChainId: 1,
     enableEIP6963: true,
@@ -86,10 +113,47 @@ createWeb3Modal({
   projectId
 })
 
-export default function App() {
-  return <YourApp/>
+export function Web3Modal({ children }) {
+  return <WagmiConfig config={wagmiConfig}>{children}</WagmiConfig>;
 }
 ```
+
+Next, in your `app/layout.tsx` or `app/layout.jsx`  file, import the custom Web3Modal component.
+
+```tsx
+import "./globals.css";
+
+import { Web3Modal } from "../context/Web3Modal";
+
+export const metadata = {
+  title: "Web3Modal",
+  description: "Web3Modal Example",
+};
+
+export default function RootLayout({ children }) {
+  return (
+    <html lang="en">
+      <body>
+        <Web3Modal>{children}</Web3Modal>
+      </body>
+    </html>
+  );
+}
+```
+
+:::note
+The provided code utilizes [Wagmi](https://wagmi.sh/), a React library for wallet and provider connections, along with the [Web3Modal](https://web3modal.com/) library to create a wallet connection modal. It features various connectors:
+
+1. **WalletConnectConnector**: Enables cross-device wallet connections using the WalletConnect protocol, adhering to [EIP-1193](https://eips.ethereum.org/EIPS/eip-1193).
+
+2. **EIP6963Connector**: Connects to wallets supporting the [EIP-6963](https://eips.ethereum.org/EIPS/eip-6963) standard, an Ethereum wallet extension specification.
+
+3. **InjectedConnector**: Interfaces with browser wallet injections, e.g., MetaMask.
+
+4. **CoinbaseWalletConnector**: Specifically for Coinbase Wallet.
+
+Additionally, there's a `publicProvider` for reading blockchain data through public nodes like Infura. The `walletConnectProvider`, which operates in a manner akin to the public provider but employs the [Blockchain API](https://docs.walletconnect.com/cloud/blockchain-api), is additionally accessible. The `WagmiConfig` component shares `wagmiConfig` with child components.
+:::
 
 </TabItem>
 </Tabs>
