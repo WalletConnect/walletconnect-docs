@@ -5,9 +5,9 @@ import TabItem from '@theme/TabItem'
 # React Native
 
 :::caution
-**The Web3Modal SDK is currently in Alpha and is not production-ready**.
+**The Web3Modal SDK is currently in Beta and is not production-ready**.
 
-Its public API and associated documentation may still see significant and breaking changes.
+However, it is stable and its public API and associated documentation will not undergo significant changes.
 :::
 
 ## Introduction
@@ -28,7 +28,7 @@ npm install @web3modal/wagmi-react-native wagmi viem
 Additionally add these extra packages to help with async storage, polyfills, and SVG's.
 
 ```bash npm2yarn
-npm install @react-native-async-storage/async-storage react-native-get-random-values react-native-svg react-native-modal @react-native-community/netinfo
+npm install @react-native-async-storage/async-storage react-native-get-random-values react-native-svg react-native-modal @react-native-community/netinfo @walletconnect/react-native-compat
 ```
 
 On iOS, use CocoaPods to add the native modules to your project:
@@ -48,10 +48,12 @@ npx expo install @web3modal/wagmi-react-native wagmi viem
 Additionally add these extra packages to help with async storage, polyfills, and SVG's.
 
 ```
-npx expo install @react-native-async-storage/async-storage react-native-get-random-values react-native-svg react-native-modal @react-native-community/netinfo
+npx expo install @react-native-async-storage/async-storage react-native-get-random-values react-native-svg react-native-modal @react-native-community/netinfo @walletconnect/react-native-compat
 ```
 
-#### Additional Setup for Expo SDK 48
+<details>
+<summary>Additional setup for Expo SDK 48 only</summary>
+<div>
 
 If you are using Expo SDK 48, you also need to polyfill `crypto` with expo-crypto library.
 
@@ -61,10 +63,10 @@ If you are using Expo SDK 48, you also need to polyfill `crypto` with expo-crypt
 npx expo install expo-crypto
 ```
 
-2. Create a file named `expo-shim.js`
+2. Create a file named `crypto-polyfill.js`
 
 ```js
-// src/expo-shim.js
+// src/crypto-polyfill.js
 
 // Apply only with Expo SDK 48
 import { getRandomValues as expoCryptoGetRandomValues } from 'expo-crypto'
@@ -87,17 +89,19 @@ const webCrypto = typeof crypto !== 'undefined' ? crypto : new Crypto()
 })()
 ```
 
-3. Import `expo-shim.js` in your App root file
+3. Import `crypto-polyfill.js` in your App root file
 
 ```js
 // src/App.js
 
-import './expo-crypto-shim.js'
+import './crypto-polyfill.js'
+import '@walletconnect/react-native-compat';
 ...
 import { createWeb3Modal, defaultWagmiConfig } from '@web3modal/wagmi-react-native'
 ```
 
-- Make sure this line executes before the first `@web3modal/wagmi-react-native` import.
+</div>
+</details>
 
 </TabItem>
 
@@ -110,14 +114,15 @@ Finally, pass your configuration to `createWeb3Modal`.
 
 :::info Note
 
-Make sure you import `@web3modal/wagmi-react-native` before `wagmi` to avoid any issues.
+Make sure you import `@walletconnect/react-native-compat` before `wagmi` to avoid any issues.
 
 :::
 
 ```tsx
-import { createWeb3Modal, defaultWagmiConfig, Web3Modal } from '@web3modal/wagmi-react-native'
+import '@walletconnect/react-native-compat';
 import { WagmiConfig } from 'wagmi'
 import { mainnet, polygon, arbitrum } from 'viem/chains'
+import { createWeb3Modal, defaultWagmiConfig, Web3Modal } from '@web3modal/wagmi-react-native'
 
 // 1. Get projectId
 const projectId = 'YOUR_PROJECT_ID'
