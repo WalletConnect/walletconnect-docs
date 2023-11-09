@@ -2,7 +2,7 @@
 
 Verify API is a security-focused feature that allows wallets to notify end-users when they may be connecting to a suspicious or malicious domain, helping to prevent phishing attacks across the industry.
 
-Once a wallet knows whether an end-user is on uniswap.com or eviluniswap.com, it can help them to detect potentially harmful connections through Verify's combined offering of WalletConnect’s domain registry and industry-leading security tools.
+Once a wallet knows whether an end-user is on uniswap.com or eviluniswap.com, it can help them to detect potentially harmful connections through Verify's combined offering of WalletConnect’s domain registry and [Blowfish's domain scanner](https://docs.blowfish.xyz/reference/scan-domain-1).
 
 For wallets looking to implement Verify into their product, find out how to get started [here](../web3wallet/verify).
 
