@@ -207,69 +207,54 @@ Additionally add these extra packages to help with async storage, polyfills, mod
 npx expo install @react-native-async-storage/async-storage react-native-get-random-values react-native-modal react-native-svg @react-native-community/netinfo
 ```
 
-<Tabs>
-<TabItem value="sdk48" label="Expo 48">
+<details>
+<summary>Additional setup for Expo SDK 48 only</summary>
+<div>
 
-#### Additional Setup for Expo SDK 48
+If you are using Expo SDK 48, you also need to polyfill `crypto` with expo-crypto library.
 
-If you are using Expo SDK 48, there's an [issue](https://github.com/expo/expo/issues/17270) with `react-native-get-random-values`, so we need to temporarily fix this by installing expo-crypto library and copying [this](https://github.com/WalletConnect/modal-react-native/blob/main/example/expo-crypto-shim.js) file in your root folder.
+1. Add `expo-crypto`
 
 ```
 npx expo install expo-crypto
 ```
 
-#### Apply Polyfill
+2. Create a file named `crypto-polyfill.js`
 
-In your root file, add this line:
+```js
+// src/crypto-polyfill.js
 
-```javascript
-// Only for Expo SDK 48
-import './expo-crypto-shim.js'
+// Apply only with Expo SDK 48
+import { getRandomValues as expoCryptoGetRandomValues } from 'expo-crypto'
 
+class Crypto {
+  getRandomValues = expoCryptoGetRandomValues
+}
+
+// eslint-disable-next-line no-undef
+const webCrypto = typeof crypto !== 'undefined' ? crypto : new Crypto()
+
+;(() => {
+  if (typeof crypto === 'undefined') {
+    Object.defineProperty(window, 'crypto', {
+      configurable: true,
+      enumerable: true,
+      get: () => webCrypto
+    })
+  }
+})()
+```
+
+3. Import `crypto-polyfill.js` in your App root file
+
+```js
+import './crypto-polyfill.js'
 ...
-
 import { useWalletConnectModal } from '@walletconnect/modal-react-native';
 ```
 
-- Make sure this line executes before the first `@walletconnect/modal-react-native` import.
-
-</TabItem>
-
-<TabItem value="sdk49" label="Expo 49">
-
-#### Additional Setup for Expo SDK 49
-
-If you are using Expo SDK 49, there's an [issue](https://github.com/expo/expo/issues/17270) with `react-native-get-random-values`, so we need to manually update it's version to `v1.9.0` and exclude this package from expo validations. For more info, read [Selectively opt out of package version validations](https://blog.expo.dev/expo-sdk-49-c6d398cdf740)
-
-#### Modify your package.json
-
-Exclude `react-native-get-random-values` in your package.json to install a different from the version recommended by Expo.
-
-```json
-"dependencies": {
-  ...
-},
-"expo": {
-  "install": {
-    "exclude": [
-      "react-native-get-random-values"
-    ]
-  }
-},
-"devDependencies": {
-  ...
-}
-```
-
-#### Install latest version of "react-native-get-random-values"
-
-```bash npm2yarn
-npm install react-native-get-random-values@1.9.0
-```
-
-</TabItem>
-
-</Tabs>
+</div>
+</details>
 
 #### (Optional) Enable Wallet Detection (iOS Only)
 
