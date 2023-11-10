@@ -709,11 +709,20 @@ const providerMetadata = {
 }
 
 function App() {
-  const { open, isConnected } = useWalletConnectModal()
+  const { open, isConnected, provider } = useWalletConnectModal()
+
+  const onPress = () => {
+    if(isConnected){
+      provider.disconnect()
+    } else {
+      open();
+    }
+  }
+
   return (
     <>
-      <Pressable onPress={open}>
-        <Text>{isConnected ? 'View Account' : 'Connect'}</Text>
+      <Pressable onPress={onPress}>
+        <Text>{isConnected ? 'Disconnect' : 'Connect'}</Text>
       </Pressable>
       <WalletConnectModal projectId={projectId} providerMetadata={providerMetadata} />
     </>
