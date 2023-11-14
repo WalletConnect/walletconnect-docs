@@ -6,9 +6,11 @@ Source can be viewed in [`docs`](./docs/) directory.
 
 ## Running Locally
 
+1. `echo "MARKPROMPT_KEY=..." > .env`
+   - You can get this key from the Engineering team or leave it empty to bypass the AI powered Ask feature.`
 1. `yarn install`
-2. `yarn start`
-3. Open `http://localhost:3000/`
+1. `yarn start`
+1. Open `http://localhost:3000/`
 
 ## Adding a New Page
 
@@ -40,6 +42,7 @@ recommended to use redirects to avoid broken links. See [link](https://vercel.co
 In your mdx file first import `PlatformTabs` and `PlatformTabItem` from `docs/components/PlatformTabs` and `docs/components/PlatformTabItem` relatively and wrap your content around them
 
 You can find the supported platform in `docs/components/PlatformTabs.js`, they are grouped in an array called `PLATFORM_MAP`
+
 ```mdx
 import PlatformTabs from '../components/PlatformTabs'
 import PlatformTabItem from '../components/PlatformTabItem'
