@@ -1,6 +1,8 @@
 // @ts-check
 // Note: type annotations allow type checking and IDEs autocompletion
 
+require('dotenv').config()
+
 const darkCodeTheme = require('prism-react-renderer/themes/dracula')
 const lightCodeTheme = require('prism-react-renderer/themes/github')
 
@@ -23,6 +25,7 @@ const config = {
       'data-domain': 'docs.walletconnect.com'
     }
   ],
+  themes: ['@markprompt/docusaurus-theme-search'],
   presets: [
     [
       'classic',
@@ -41,9 +44,10 @@ const config = {
                 sync: true,
                 converters: [
                   'yarn',
-                  ['Bun', code => code
-                      .replace(/npm i /g, 'bun a ')
-                      .replace(/npm install /g, 'bun add ')],
+                  [
+                    'Bun',
+                    code => code.replace(/npm i /g, 'bun a ').replace(/npm install /g, 'bun add ')
+                  ],
                   'pnpm'
                 ]
               }
@@ -60,6 +64,26 @@ const config = {
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     {
+      markprompt: {
+        projectKey: process.env.MARKPROMPT_KEY,
+        trigger: {
+          floating: false,
+          placeholder: 'Search or Ask AI'
+        },
+        feedback: {
+          enabled: true
+        },
+        search: {
+          enabled: true,
+          provider: {
+            name: 'algolia',
+            appId: 'KEO8ND6AUT',
+            apiKey: '5921626237dc9040afc258af25d4e77d',
+            indexName: 'walletconnect',
+            contextualSearch: true
+          }
+        }
+      },
       image: 'img/Docs-OG.png',
       metadata: [{ name: 'twitter:card', content: 'summary_large_image' }],
       navbar: {
@@ -150,12 +174,6 @@ const config = {
             block: { start: 'highlight-add-start', end: 'highlight-add-end' }
           }
         ]
-      },
-      algolia: {
-        appId: 'KEO8ND6AUT',
-        apiKey: '5921626237dc9040afc258af25d4e77d',
-        indexName: 'walletconnect',
-        contextualSearch: true
       },
       announcementBar: {
         id: 'support_us',
