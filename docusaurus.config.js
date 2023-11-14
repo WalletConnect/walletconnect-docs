@@ -25,7 +25,6 @@ const config = {
       'data-domain': 'docs.walletconnect.com'
     }
   ],
-  clientModules: [require.resolve('./src/markprompt-config.js')],
   themes: ['@markprompt/docusaurus-theme-search'],
   presets: [
     [
@@ -68,10 +67,14 @@ const config = {
       markprompt: {
         projectKey: process.env.MARKPROMPT_KEY,
         trigger: {
-          floating: false
+          floating: false,
+          placeholder: 'Search or Ask AI'
         },
         feedback: {
-          enabled: true
+          enabled: true,
+          onFeedbackSubmitted: feedback => {
+            console.log(feedback)
+          }
         },
         search: {
           enabled: true,
@@ -174,12 +177,6 @@ const config = {
             block: { start: 'highlight-add-start', end: 'highlight-add-end' }
           }
         ]
-      },
-      algolia: {
-        appId: 'KEO8ND6AUT',
-        apiKey: '5921626237dc9040afc258af25d4e77d',
-        indexName: 'walletconnect',
-        contextualSearch: true
       },
       announcementBar: {
         id: 'support_us',

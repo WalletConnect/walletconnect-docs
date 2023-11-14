@@ -1798,7 +1798,7 @@
   resolved "https://registry.yarnpkg.com/@leichtgewicht/ip-codec/-/ip-codec-2.0.4.tgz#b2ac626d6cb9c8718ab459166d4bb405b8ffa78b"
   integrity sha512-Hcv+nVC0kZnQ3tD9GVu5xSMR4VVYOteQIr/hwFPVEvPdlXqgGEuRjiheChHgdM+JyqdgNcmzZOX/tnl0JOiI7A==
 
-"@markprompt/core@^0.17.0":
+"@markprompt/core@0.17.1", "@markprompt/core@^0.17.0":
   version "0.17.1"
   resolved "https://registry.yarnpkg.com/@markprompt/core/-/core-0.17.1.tgz#99756a4bbd632695ffc3f50a3272f9360ce2c22e"
   integrity sha512-nnSfoRYRvoYb4SIl2t2YWabr5CEuMBAbEkoVYXhB6PFfEQwjJ6RMybMKiavogW4Y4sREpl+3YMxkwCeRen3jnQ==
@@ -1807,7 +1807,7 @@
     defaults "^2.0.2"
     type-fest "^4.3.1"
 
-"@markprompt/css@^0.17.2":
+"@markprompt/css@^0.17.2", "@markprompt/css@^0.17.3":
   version "0.17.3"
   resolved "https://registry.yarnpkg.com/@markprompt/css/-/css-0.17.3.tgz#36119a0add333246fbb386580c20a92ced6e45c1"
   integrity sha512-e8wEhYGnyjvEnZuzbEThCvVFLMe7jqp78BeNIHxkhYyCIsZqMl6RJoxY/55wLyll7lJ+wMOx7BMq5+kNDIeKqg==
@@ -1844,6 +1844,14 @@
     react-merge-refs "^2.0.2"
     remark-gfm "^3.0.1"
     zustand "^4.4.1"
+
+"@markprompt/web@^0.20.5":
+  version "0.20.5"
+  resolved "https://registry.yarnpkg.com/@markprompt/web/-/web-0.20.5.tgz#9a4a3a20396cbeaab06ce238b168ffd987b4adca"
+  integrity sha512-kLmEyjTWPkgVxINAuZKaqoeWaVJ+j7U6Z5pWECT0mppkNLg0LeSDI7k54OsHWGwmoQsuOxYezLSjNZ9mqhPvLA==
+  dependencies:
+    "@markprompt/core" "0.17.1"
+    "@markprompt/react" "0.28.1"
 
 "@mdx-js/mdx@^1.6.22":
   version "1.6.22"
