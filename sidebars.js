@@ -203,7 +203,7 @@ module.exports = {
             },
             { type: 'doc', label: 'Wallets', id: 'web3inbox/wallets' }
           ]
-        },
+        }
       ]
     },
     {
