@@ -70,8 +70,20 @@
 }
 
 .MarkpromptSearchBoxTriggerText > svg {
-  stroke: white;
+  stroke: var(--markprompt-foreground);
   stroke-width: 2;
+}
+
+.MarkpromptSearchResults {
+  padding-left: 0;
+}
+
+:where([aria-selected='true'] .MarkpromptSearchResultLink) {
+  background-color: #6366f15a !important;
+}
+
+:where([aria-selected='true'] .MarkpromptSearchResultHeading) {
+  color: var(--markprompt-primaryForeground);
 }
 
 .theme-code-block-highlighted-delete {
