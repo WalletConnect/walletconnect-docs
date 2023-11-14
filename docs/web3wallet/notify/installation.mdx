@@ -11,19 +11,21 @@ import Wrapper from '../../components/Home/Wrapper'
 Web3Inbox is in beta
 :::
 
-The WalletConnect Notify API allows wallet developers to build native messaging and chat UIs together with support for iOS and Android device push notifications.
+The WalletConnect Notify API allows wallet developers to build engaging notification experiences from dapps directly to wallet addresses giving the end user the ability to subscribe to and receive notifications in their wallet.
 
-Notify API works together with the WalletConnect Web3Inbox SDK providing a toolkit for integrating web3 communications messaging features into dapps.
+The SDK is cross-platform supporting iOS and Android wallets.
 
-![Web3Inbox](/img/web3wallet-notify-screenshots.png)
+Notify API works together with the WalletConnect [Web3Inbox SDK](../../web3inbox/about) providing a toolkit for integrating web3 communications messaging features into dapps.
+
+![Web3Inbox](/img/web3wallet-notify-screenshots.jpg)
 
 <PlatformTabs
 	groupId="w3w"
-	activeOptions={["ios","android", "react-native"]}
+	activeOptions={["ios","android"]}
 >
 <PlatformTabItem value="ios">
 
-Notify SDK is available via [Swift Package Manager](https://swift.org/package-manager/) or [Cocoapods](https://cocoapods.org/).
+Notify API is available via [Swift Package Manager](https://swift.org/package-manager/) or [Cocoapods](https://cocoapods.org/).
 
 <Tabs
 queryString="ios-method"
@@ -34,13 +36,13 @@ queryString="ios-method"
 >
 <TabItem value="spm">
 
-You can add a WalletConnect SDK to your project with the Swift Package Manager. In order to do that:
+You can add the WalletConnect Notify package to your project with the Swift Package Manager. In order to do that:
 
 1. Open XCode
 2. Go to File -> Add Packages
 3. Paste the repo GitHub URL: https://github.com/WalletConnect/WalletConnectSwiftV2
 4. Tap Add Package
-5. Select WalletConnectNotify check mark
+5. Select `WalletConnectNotify` check mark
 
 </TabItem>
 <TabItem value="cocoa">
@@ -67,7 +69,7 @@ pod 'WalletConnectSwiftV2/WalletConnectNotify', :git => 'https://github.com/Wall
 </PlatformTabItem>
 <PlatformTabItem value="android">
 
-root/build.gradle.kts:
+Add the `jitpack.io` Maven repository to your `root/build.gradle.kts` file. For example:
 
 ```gradle
 allprojects {
@@ -78,7 +80,7 @@ allprojects {
 }
 ```
 
-app/build.gradle.kts
+In `app/build.gradle.kts` add the notify package and its dependencies:
 
 ```gradle
 implementation(platform("com.walletconnect:android-bom:release_version"))
@@ -88,11 +90,12 @@ implementation("com.walletconnect:notify")
 
 #### Requirements
 
-- Android min SDK 23
-- Java 11
+- Android API level minimum 23
+- Java minimum version 11
 
 </PlatformTabItem>
 
+<!--
 <PlatformTabItem value="react-native">
 
 ```bash npm2yarn
@@ -206,9 +209,10 @@ module.exports = {
 </TabItem>
 </Tabs>
 </PlatformTabItem>
+-->
 
 </PlatformTabs>
 
 ## Next Steps
 
-Now that you've installed Web3Inbox SDK, you're ready to start integrating it. The next section will walk you through the process of setting up your project to use the SDK.
+Now that you've installed WalletConnect Notify, you're ready to start integrating it. The next section will walk you through the process of setting up your project to use the Notify API.
