@@ -45,12 +45,12 @@ npm install @web3modal/ethers5 ethers@5.7.2
 <PlatformTabs groupId="eth-lib" activeOptions={["wagmi","ethers"]}>
 <PlatformTabItem value="wagmi">
 
-<WagmiImplementation/>
+<WagmiImplementation />
 
 </PlatformTabItem>
 <PlatformTabItem value="ethers">
 
-<EthersImplementation/>
+<EthersImplementation />
 
 </PlatformTabItem>
 </PlatformTabs>
@@ -60,12 +60,12 @@ npm install @web3modal/ethers5 ethers@5.7.2
 <PlatformTabs groupId="eth-lib" activeOptions={["wagmi","ethers"]}>
 <PlatformTabItem value="wagmi">
 
-<WagmiModal/>
+<WagmiModal />
 
 </PlatformTabItem>
 <PlatformTabItem value="ethers">
 
-<EthersModal/>
+<EthersModal />
 
 </PlatformTabItem>
 </PlatformTabs>
@@ -79,16 +79,12 @@ Next.js relies on [SSR](https://nextjs.org/docs/pages/building-your-application/
 ```ts
 // Path: next.config.js
 const nextConfig = {
-  webpack: (config) => {
-    config.externals.push(
-      "pino-pretty",
-      "lokijs",
-      "encoding"
-    );
-  return config;
+  webpack: config => {
+    config.externals.push('pino-pretty', 'lokijs', 'encoding')
+    return config
+  }
 }
 ```
 
 - If `SWCMinify` is flagged, it must be false in the `next.config.js` file
 - If you are using Wagmi, [dynamic imports](https://nextjs.org/docs/app/building-your-application/optimizing/lazy-loading#nextdynamic) or `supressHydrationWarning` are recommended tro prevent `Hydration mismatch` errors
-
