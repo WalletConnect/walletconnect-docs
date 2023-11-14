@@ -71,10 +71,7 @@ const config = {
           placeholder: 'Search or Ask AI'
         },
         feedback: {
-          enabled: true,
-          onFeedbackSubmitted: feedback => {
-            console.log(feedback)
-          }
+          enabled: true
         },
         search: {
           enabled: true,
