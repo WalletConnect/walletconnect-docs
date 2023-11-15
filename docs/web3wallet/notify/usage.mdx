@@ -91,7 +91,16 @@ Notify.initialize(init = Notify.Params.Init(core = CoreClient) { error: Notify.M
 </PlatformTabItem>
 <PlatformTabItem value="react-native">
 
-All clients will be initialized as soon as the Web3Inbox component is rendered for the first time.
+
+#### Initialize the SDK clients
+
+```javascript
+import { NotifyClient } from '@walletconnect/notify-client'
+
+const notifyClient = await NotifyClient.init({
+  projectId: '<YOUR PROJECT ID>'
+})
+```
 
 </PlatformTabItem>
 </PlatformTabs>
@@ -371,111 +380,155 @@ Notify.deleteNotifyMessage(
 
 <PlatformTabItem value="react-native">
 
-This example makes use of [WalletConnect Modal](../../advanced/walletconnectmodal/about?platform=react-native) for simplicity but you can also integrate Web3Inbox into your React Native Wallet by providing the following props.
+#### Add listeners for relevant events
 
-For more context, feel free to check our [example](https://github.com/WalletConnect/react-native-examples/tree/web3inbox-dapp/dapps/web3inbox).
+```javascript
+// Handle response to a `notifyClient.subscribe(...)` call
+notifyClient.on('notify_subscription', async ({ params }) => {
+  const { error } = params
 
-```tsx
-import { Web3Inbox } from '@walletconnect/web3inbox-webview'
-import { useCallback, useState } from 'react'
-
-export default function Example() {
-  const { provider, isConnected, address } = useWalletConnectModal()
-  const [isVisible, setIsVisible] = useState(true)
-
-  const toggleWeb3InboxModal = useCallback(
-    () => setIsVisible(isCurrentlyVisible => !isCurrentlyVisible),
-    []
-  )
-
-  const handleSign = useCallback(
-    async (message: string) => {
-      const response = await provider?.request(
-        {
-          method: 'personal_sign',
-          params: [message, address]
-        },
-        'eip155:1'
-      )
-      return response as string
-    },
-    [provider, address]
-  )
-
-  const clientMetadata = {
-    name: 'Web3Inbox React Native Example',
-    description: 'An example app to showcase how to use Web3Inbox React Native SDK',
-    url: 'https://github.com/WalletConnect/web3inbox-js-sdk',
-    icons: ['https://avatars.githubusercontent.com/u/37784886']
+  if (error) {
+    // Setting up the subscription failed.
+    // Inform the user of the error and/or clean up app state.
+    console.error('Setting up subscription failed: ', error)
+  } else {
+    // New subscription was successfully created.
+    // Inform the user and/or update app state to reflect the new subscription.
+    console.log(`Subscribed successfully.`)
   }
+})
 
-  return (
-    <View>
-      <Web3Inbox
-        projectId={projectId}
-        ethAddress={address}
-        onSign={handleSign}
-        visible={isVisible}
-        setVisible={toggleWeb3InboxModal}
-        clientMetadata={clientMetadata}
-      />
-    </View>
-  )
-}
+// Handle an incoming notification
+notifyClient.on('notify_message', ({ params }) => {
+  const { message } = params
+  // e.g. build a notification using the metadata from `message` and show to the user.
+})
+
+// Handle response to a `notifyClient.update(...)` call
+notifyClient.on('notify_update', ({ params }) => {
+  const { error } = params
+
+  if (error) {
+    // Updating the subscription's scope failed.
+    // Inform the user of the error and/or clean up app state.
+    console.error('Setting up subscription failed: ', error)
+  } else {
+    // Subscription's scope was updated successfully.
+    // Inform the user and/or update app state to reflect the updated subscription.
+    console.log(`Successfully updated subscription scope.`)
+  }
+})
+
+// Handle a change in the existing subscriptions (e.g after a subscribe or update)
+notifyClient.on('notify_subscriptions_changed', ({ params }) => {
+  const { subscriptions } = params
+  // `subscriptions` will contain any *changed* subscriptions since the last time this event was emitted.
+  // To get a full list of subscriptions for a given account you can use `notifyClient.getActiveSubscriptions({ account: 'eip155:1:0x63Be...' })`
+})
 ```
 
-#### Required Props
+#### Register an identity key for cross-device account syncing
 
-#### projectId `string`
+:::note
+This is a one-time action per account. It does not need to be repeated after initial registration of the new account.
+:::
 
-Get your project ID key on [WalletConnect Cloud](https://cloud.walletconnect.com).
+To register an identity key, you must provide a callback to the `onSign: (message: string) => string` parameter of the `register` method.
+In order to authorize the Notify subscription, the SDK will trigger this callback with a message to sign, expecting the signature for that message to be returned.
 
-#### ethAddress `string`
+Some suggested ways to implement the `onSign` callback are via:
 
-Ethereum wallet address of the current user.
+- Ethers.js [`Wallet.signMessage` method](https://docs.ethers.org/v5/api/signer/#Signer-signMessage)
+- The [`signMessage` method](https://wagmi.sh/core/actions/signMessage) in `@wagmi/core`
 
-#### onSign `(message: string) => Promise<string>`
+### Registering as a dapp
 
-Web3Inbox client will request user to sign messages with its account private key. The message may be a Sync Storage derivation key or Identity key registration.
+```javascript
+const account = `eip155:1:0x63Be2c680685d2A9620c11b0068291261aa62d76`
+const onSign = (message: string) => ethersWallet.signMessage(message)
 
-#### clientMetadata
-
-Web3Inbox will consume your metadata for various use cases, such as displaying your logo and the name of your project.
-
-```ts
-interface IClientMetadata {
-  name: string
-  description: string
-  url: string
-  icons: string[]
-}
+await notifyClient.register({
+  account,
+  onSign,
+  domain: 'app.mydomain.com', // pass the domain (i.e. the hostname) where your dapp is hosted.
+  isLimited: true // The user will be prompted to authorize this dapp to send and receive messages on their behalf for this domain using their WalletConnect identity.
+})
 ```
 
-#### visible `boolean`
+### Registering as a wallet
 
-Determines visibility of Web3Inbox webview.
+```javascript
+const account = `eip155:1:0x63Be2c680685d2A9620c11b0068291261aa62d76`
+const onSign = (message: string) => ethersWallet.signMessage(message)
 
-#### setVisible `() => void`
+await notifyClient.register({
+  account,
+  onSign,
+  domain: 'com.mydomain.app.rn', // pass your app's bundle identifier.
+  isLimited: false // The user will be prompted to authorize this wallet to send and receive messages on their behalf for ALL domains using their WalletConnect identity.
+})
+```
 
-Function to set `visible` prop to true or false.
+### Managing Subscriptions
 
-#### Optional Props
+#### Creating a new subscription
 
-#### closeButton `React.ReactNode`
+:::info
+To identify dapps that can be subscribed to via Notify, we can query the following Explorer API endpoint:
 
-Provide a custom component to close Web3Inbox webview.
+https://explorer-api.walletconnect.com/v3/dapps?projectId=YOUR_PROJECT_ID&is_notify_enabled=true
+:::
 
-#### chatEnabled `boolean`
+```javascript
+// Get the domain of the target dapp from the Explorer API response
+const appDomain = new URL(fetchedExplorerDapp.platform_browser).hostname
 
-Enable or disable Chat SDK in Web3Inbox (default: `true`), setting it to `false` will also remove the navigation item.
+// Subscribe to `fetchedExplorerDapp` by passing the account to be subscribed and the domain of the target dapp.
+await notifyClient.subscribe({
+  account,
+  appDomain
+})
 
-#### notifyEnabled `boolean`
+// -> Success/Failure will be received via the `notify_update` event registered previously.
+// -> New subscription will be emitted via the `notify_subscriptions_changed` watcher event.
+```
 
-Enable or disable Notify SDK in Web3Inbox (default: `true`), setting it to `false` will also remove the navigation item.
+#### Updating notification types on an existing subscription
 
-#### settingsEnabled `boolean`
+```javascript
+// `topic` - subscription topic of the subscription that should be updated.
+// `scope` - an array of notification types that should be enabled going forward. The current scopes can be found under `subscription.scope`.
+await notifyClient.update({
+  topic,
+  scope: ['alerts']
+})
 
-Enable or disable settings page in Web3Inbox (default: `true`), setting it to `false` will also remove the navigation item.
+// -> Success/Failure will be received via the `notify_update` event registered previously.
+// -> Updated subscription will be emitted via the `notify_subscriptions_changed` watcher event.
+```
+
+#### Removing an existing subscription
+
+```javascript
+// `topic` - subscription topic of the subscription that should be deleted.
+await notifyClient.deleteSubscription({ topic })
+```
+
+#### Retrieving all currently active subscriptions
+
+```javascript
+// Will return all active subscriptions for the provided account, keyed by subscription topic.
+const accountSubscriptions = notifyClient.getActiveSubscriptions({
+  account: `eip155:1:0x63Be...`
+})
+```
+
+#### Retrieving all past messages for a given subscription
+
+```javascript
+// Will return all past Notify messages for the provided subscription topic, keyed by messageId.
+const messageHistory = notifyClient.getMessageHistory({ topic })
+```
 
 </PlatformTabItem>
 </PlatformTabs>
@@ -650,7 +703,152 @@ override fun onMessage(message: Notify.Model.Message, originalMessage: RemoteMes
 </PlatformTabItem>
 <PlatformTabItem value="react-native">
 
-Currently Web3Inbox SDK contains Chat SDK features. Notify SDK features coming soon.
+Install [`@react-native-firebase/messaging`](https://www.npmjs.com/package/@react-native-firebase/messaging) and [`@notifee/react-native`](https://www.npmjs.com/package/@notifee/react-native) to handle Push Notifications.
+Please refer to the respective package documentation to configure them properly.
 
+```bash npm2yarn
+npm install @notifee/react-native @react-native-firebase/messaging
+```
+
+Update your index.js file to include the following logic.
+
+```js
+import {AppRegistry, PermissionsAndroid} from 'react-native';
+import App from './App';
+import {name as appName} from './app.json';
+import './expo-crypto-shim.js'
+import messaging from '@react-native-firebase/messaging';
+import notifee, {
+  AndroidImportance,
+  AndroidVisibility,
+  EventType,
+} from '@notifee/react-native';
+import {NotifyClient} from '@walletconnect/notify-client';
+import {Core} from '@walletconnect/core';
+
+let notifyClient;
+
+const projectId = process.env.ENV_PROJECT_ID;
+const relayUrl = process.env.ENV_RELAY_URL;
+const core = new Core({
+  projectId,
+  relayUrl,
+});
+
+async function registerClient(deviceToken, clientId) {
+  const body = JSON.stringify({
+    client_id: clientId,
+    token: deviceToken,
+    type: 'fcm',
+  });
+
+  const requestOptions = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body,
+  };
+
+  return fetch(
+    `https://echo.walletconnect.com/${projectId}/clients`,
+    requestOptions,
+  )
+    .then(response => response.json())
+    .then(result => console.log(result))
+    .catch(error => console.log('error', error));
+}
+
+messaging()
+  .getToken()
+  .then(token => console.log({token}));
+
+messaging().onTokenRefresh(async token => {
+  const status = await messaging().requestPermission(
+    PermissionsAndroid.PERMISSIONS.POST_NOTIFICATIONS,
+  );
+  const enabled =
+    status === messaging.AuthorizationStatus.AUTHORIZED ||
+    status === messaging.AuthorizationStatus.PROVISIONAL;
+
+  if (enabled) {
+    notifyClient = await NotifyClient.init({
+      core,
+      projectId,
+      relayUrl,
+    });
+    const clientId = await notifyClient.core.crypto.getClientId();
+    return registerClient(token, clientId);
+  }
+
+  return;
+});
+
+notifee.createChannel({
+  id: 'default',
+  name: 'Default Channel',
+  lights: false,
+  vibration: true,
+  importance: AndroidImportance.HIGH,
+  visibility: AndroidVisibility.PUBLIC,
+});
+
+messaging().setBackgroundMessageHandler(async remoteMessage => {
+  if (!notifyClient) {
+    notifyClient = await NotifyClient.init({
+      core,
+      projectId,
+      relayUrl,
+    });
+  }
+  if (!remoteMessage.data?.blob || !remoteMessage.data?.topic) {
+    console.log('Missing blob or topic on notification message.');
+    return;
+  }
+
+  const decryptedMessage = await notifyClient?.decryptMessage({
+    topic: remoteMessage.data?.topic,
+    encryptedMessage: remoteMessage.data?.blob,
+  });
+
+  // Display a notification
+  return notifee.displayNotification({
+    title: decryptedMessage.title,
+    body: decryptedMessage.body,
+    android: {
+      channelId: 'default',
+      importance: AndroidImportance.HIGH,
+      visibility: AndroidVisibility.PUBLIC,
+      smallIcon: 'ic_launcher', // optional, defaults to 'ic_launcher'.
+      // pressAction is needed if you want the notification to open the app when pressed
+      pressAction: {
+        id: 'default',
+      },
+    },
+  });
+});
+
+notifee.onBackgroundEvent(async ({type, detail}) => {
+  const {notification, pressAction} = detail;
+
+  // Check if the user pressed the "Mark as read" action
+  if (type === EventType.ACTION_PRESS && pressAction.id === 'mark-as-read') {
+    // Remove the notification
+    await notifee.cancelNotification(notification.id);
+  }
+});
+
+function HeadlessCheck({isHeadless}) {
+  if (isHeadless) {
+    // App has been launched in the background by iOS, ignore
+    return null;
+  }
+
+  // Render the app component on foreground launch
+  return <App />;
+}
+
+AppRegistry.registerComponent(appName, () => HeadlessCheck);
+```
 </PlatformTabItem>
 </PlatformTabs>
