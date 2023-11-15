@@ -12,7 +12,7 @@ This usage step is to configure and use Notify in your project.
 
 <CloudBanner />
 
-## Client Configuration
+## Client Setup
 
 <PlatformTabs
 	groupId="w3w"
@@ -26,38 +26,29 @@ Configure the `Notify` instance with:
 try Notify.configure(groupIdentifier: String, environment: APNSEnvironment, crypto: CryptoProvider)
 ```
 
-`groupIdentifier` - App group identifier, enables to share keychain items between SDK and a UNNotificationServiceExtension to decrypts remote Push Notifications. Can be created on apple developer portal. 
+`groupIdentifier` - App group identifier, created on Apple Developer portal. Enables to share keychain items between the Notify SDK and a UNNotificationServiceExtension to receive and decrypt push notifications.
 
 `environment` - Use `debug` environment for debug builds and `release` for release and TestFlight builds.
 
-`crypto` - CryptoProvider is a protocol, you are required to provide an implementation of two methods recoverPubKey and keccak256.
+`crypto` - CryptoProvider is a protocol, you are required to provide an implementation of `recoverPubKey` and `keccak256` methods.
 
 
-#### Register an identity key and enable cross-device account syncing
+#### Sign a SIWE message to view and manage notifications
 
-:::note
-This is a one-time action that does not need to be repeated after initial registration of the new account.
-:::
-
-To register an identity key, you must provide a callback to the ` onSign: @escaping SigningCallback` parameter of the `register` method.
-In order to register identity keys and enable cross device sync, the SDK will trigger this callback with a messages to sign, expecting the signature for that message to be returned.
+To login to manage notifications, you must call the `register()` method and supply an `onSign` callback. The Notify SDK will call this callback with the SIWE message to sign, and the signature to be returned. Once logged in, cross-device syncing will be enabled.
 
 ```swift
 Notify.instance.register(account: account, domain: domain, onSign: onSign)
 ```
 
-`account` - An account that the identity key will be issued for
+- `account` - An CAIP-10 account that the identity key will be issued for
+- `domain` - A domain of your wallet, you should use your bundle ID
+- `onSign` - callback that requests a signature from the user  
 
-`domain` - A domain of your wallet, you should use your bundle id
-
-`onSign` - callback that requires a signature from a user
-
+Provide your own sign function implementation that returns CacaoSignature. See our sample wallet app for a [more detailed example](https://github.com/WalletConnect/WalletConnectSwiftV2/blob/5ab573d9d3cd1cd641bf6d422c33e29b30226d36/Example/Shared/ImportAccount.swift#L94).
 
 ```swift
 func onSign(message: String) -> SigningResult {
-
-    // Provide your own sing function implementation that returns CacaoSignature
-    // For more detailed example see our sample WalletApp
     let signature = try! signer.sign(message: message)
     return .signed(signature)
 }
@@ -96,7 +87,7 @@ All clients will be initialized as soon as the Web3Inbox component is rendered f
 </PlatformTabItem>
 </PlatformTabs>
 
-## SDK Usage
+## Usage
 
 <PlatformTabs
 	groupId="w3w"
