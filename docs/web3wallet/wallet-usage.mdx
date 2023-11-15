@@ -1648,6 +1648,16 @@ public var sessionDeletePublisher: AnyPublisher<(String, Reason), Never>
 public var sessionResponsePublisher: AnyPublisher<Response, Never>
 ```
 
+#### Register Device Token
+
+To register a wallet to receive WalletConnect push notifications, call `Web3Wallet.registerPushClient` and pass the device token received from the `didRegisterForRemoteNotificationsWithDeviceToken` method in the `AppDelegate`.
+
+```swift
+public func registerPushClient(deviceToken: Data) async throws {
+    try await pushClient.register(deviceToken: deviceToken)
+}
+```
+
 </PlatformTabItem>
 <PlatformTabItem value="android">
 
