@@ -9,9 +9,47 @@ import CloudBanner from '../components/CloudBanner'
 
 This section provides instructions on how to initialize the Web3Wallet client, approve sessions with supported namespaces, and respond to session requests, enabling easy integration of Web3 wallets with dapps through a simple and intuitive interface.
 
+## Content
+
+Links to sections on this page. Some sections are platform specific and are only visible when the platform is selected. To view a summary of useful platform specific topics, check out **Extra (Platform Specific)** under this section.
+
+**[Initialization](#initialization)**: Creating a new Web3Wallet instance and initializing it with a projectId from [Cloud](https://cloud.walletconnect.com).
+
+**[Session](#session-)**: Connection between a dapp and a wallet.
+
+- [Namespace Builder](#namespace-builder):
+  Namespace Builder is a helper utility that greatly reduces the complexity of parsing the required and optional namespaces. It accepts as parameters a session proposal along with your user's chains/methods/events/accounts and returns a ready-to-use object
+- [Session Approval](#session-approval):
+  Approving a session sent from a dapp
+- [Session Rejection](#session-rejection):
+  Rejecting a session sent from a dapp
+- [Responding to Session Requests](#responding-to-session-requests):
+  Responding to session requests sent from a dapp
+- [Updating a Session](#updating-a-session):
+  Updating a session sent between a dapp and wallet
+- [Extending a Session](#extending-a-session):
+  Extending a session between a dapp and wallet
+- [Session Disconnect](#session-disconnect):
+  Disconnecting a session between a dapp and wallet
+
+**[Extra (Platform Specific)](#extra-platform-specific)**: Additional information for platform specific usage. Some useful topics covered in this section are:
+
+- [Register Device Token (Android)](?platform=android#register-device-token)
+  Enabling Wallet Push Notifcations by registering a device token.
+- [Web3Wallet.WalletDelegate (Android)](?platform=android#web3walletwalletdelegate)
+  Setting and overriding functions through Web3Wallet delegate. Also includes instructions about VerifyContext.
+- [Format Message (Android)](?platform=android#format-message)
+  Receiving formatted SIWE message
+- [Emitting Session Events (Web)](?platform=web#emitting-session-events)
+  Custom Session Events to emit from the Wallet
+- [Subscribe for Web3Wallet Publishers (iOS)](?platform=ios#subscribe-for-web3wallet-publishers)
+  Publishers available to subscribe to for Web3Wallet
+
+To check the full list of platform specific instructions for your preferred platform, go to [Extra (Platform Specific)](#extra-platform-specific) and select your platform.
+
 <CloudBanner />
 
-### Initialization
+## Initialization
 
 <PlatformTabs
 	groupId="w3w"
@@ -768,19 +806,18 @@ The `session_proposal` event is emitted when a dapp initiates a new session with
 The `pair` method initiates a WalletConnect pairing process with a dapp using the given `uri` (QR code from the dapps). To learn more about pairing, checkout out the [docs](https://specs.walletconnect.com/2.0/specs/clients/core/pairing/).
 
 ```javascript
-import {getSdkError} from '@walletconnect/utils'
+import { getSdkError } from '@walletconnect/utils'
 
 // Approval: Using this listener for sessionProposal, you can accept the session
-web3wallet.on("session_proposal", async (proposal) => {
+web3wallet.on('session_proposal', async proposal => {
   const session = await web3wallet.approveSession({
     id: proposal.id,
-    namespaces,
-  });
-});
+    namespaces
+  })
+})
 
 // Call this after WCURI is received
-await web3wallet.pair({ wcuri });
-
+await web3wallet.pair({ wcuri })
 ```
 
 </PlatformTabItem>
@@ -914,19 +951,18 @@ await web3Wallet.reject(
 You can use the `getSDKError` function, which is available in the `@walletconnect/utils` for the rejection function [library](https://github.com/WalletConnect/walletconnect-monorepo/tree/v2.0/packages/utils).
 
 ```javascript
-import {getSdkError} from '@walletconnect/utils'
+import { getSdkError } from '@walletconnect/utils'
 
 // Reject: Using this listener for sessionProposal, you can reject the session
-web3wallet.on("session_proposal", async (proposal) => {
+web3wallet.on('session_proposal', async proposal => {
   await web3wallet.rejectSession({
     id: proposal.id,
-    reason: getSdkError("USER_REJECTED_METHODS"),
-  });
-});
+    reason: getSdkError('USER_REJECTED_METHODS')
+  })
+})
 
 // Call this after WCURI is received
-await web3wallet.core.pairing.pair({ wcuri });
-
+await web3wallet.core.pairing.pair({ wcuri })
 ```
 
 </PlatformTabItem>
@@ -1541,7 +1577,7 @@ await web3wallet.disconnectSession({
 </PlatformTabItem>
 <PlatformTabItem value="csharp">
 
-## Disconnecting
+#### Disconnecting
 
 To disconnect a session, use the `Disconnect` function. You may optional provide a reason for the disconnect.
 
