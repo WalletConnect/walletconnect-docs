@@ -6,11 +6,9 @@ Source can be viewed in [`docs`](./docs/) directory.
 
 ## Running Locally
 
-1. `echo "MARKPROMPT_KEY=..." > .env`
-   - You can get this key from the Engineering team or leave it empty to bypass the AI powered Ask feature.`
 1. `yarn install`
-1. `yarn start`
-1. Open `http://localhost:3000/`
+2. `yarn start`
+3. Open `http://localhost:3000/`
 
 ## Adding a New Page
 
