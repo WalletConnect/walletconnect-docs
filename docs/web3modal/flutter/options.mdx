@@ -1,8 +1,6 @@
-# Usage
+import CloudBanner from '../../components/CloudBanner'
 
-:::caution
-The Web3Modal SDK for Flutter is currently in Beta.
-:::
+# Usage
 
 ## Import the package:
 
@@ -12,7 +10,9 @@ import 'package:web3modal_flutter/web3modal_flutter.dart';
 
 Create your `W3MService` which is your primary class for opening, closing, disconnecting, etc.
 
-Be sure to update the project ID and metadata with your own.
+Be sure to update the **project ID** and metadata with your own.
+
+<CloudBanner />
 
 ```dart
 final _w3mService = W3MService(
@@ -30,6 +30,8 @@ final _w3mService = W3MService(
 );
 await _w3mService.init();
 ```
+
+The `metadata` object should contain your dApp's name, description, url and icon. The `redirect` object inside it serves the purpose of redirecting from the wallet to back to your dApp once is connected.
 
 Now you can use the `W3MConnectWalletButton` or `W3MNetworkSelectButton` widget:
 
