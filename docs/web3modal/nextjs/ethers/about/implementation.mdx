@@ -41,8 +41,8 @@ createWeb3Modal({
   projectId
 })
 
-export function Web3Modal({ children }) {
-  return <WagmiConfig config={wagmiConfig}>{children}</WagmiConfig>;
+export function Web3ModalProvider({ children }) {
+  return children;
 }
 ```
 
@@ -62,7 +62,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body>
-        <Web3Modal>{children}</Web3Modal>
+        <Web3ModalProvider>{children}</Web3ModalProvider>
       </body>
     </html>
   );
