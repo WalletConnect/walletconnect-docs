@@ -1,10 +1,13 @@
 // @ts-check
 // Note: type annotations allow type checking and IDEs autocompletion
 
-require('dotenv').config()
-
 const darkCodeTheme = require('prism-react-renderer/themes/dracula')
 const lightCodeTheme = require('prism-react-renderer/themes/github')
+
+const projectKey =
+  process.env.NODE_ENV === 'production'
+    ? 'Uuv6kG5tEsMxJaTbj66ljUoei91qg1La'
+    : 'sk_test_uH7GmxPmqXDxpn4x6EXi4V5Hg4PsQFFh'
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
@@ -65,7 +68,7 @@ const config = {
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     {
       markprompt: {
-        projectKey: process.env.MARKPROMPT_KEY,
+        projectKey,
         trigger: {
           floating: false,
           placeholder: 'Search or Ask AI'
