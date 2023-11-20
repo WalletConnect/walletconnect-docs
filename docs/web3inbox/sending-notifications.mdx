@@ -32,7 +32,8 @@ const response = await fetch(
   {
     method: "POST",
     headers: {
-      Authorization: 'Bearer <NOTIFY_API_SECRET>'
+      Authorization: 'Bearer <NOTIFY_API_SECRET>',
+      'Content-Type': 'application/json',
     },
     body: JSON.stringify({
       notification: {
@@ -56,8 +57,8 @@ const response = await fetch(
 
 ```bash
 curl -X POST 'https://notify.walletconnect.com/<PROJECT_ID>/notify' \
-  --header 'Content-Type: application/json' \
   --header 'Authorization: Bearer <NOTIFY_API_SECRET>' \
+  --header 'Content-Type: application/json' \
   --data '{
     "notification": {
       "type": "a1e53b95-18e5-4af8-9f03-9308ec87b687", // Notification type ID copied from Cloud 
