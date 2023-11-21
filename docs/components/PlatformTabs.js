@@ -31,6 +31,10 @@ const PLATFORM_MAP = [
     label: 'HTML'
   },
   {
+    value: 'javascript',
+    label: 'JavaScript'
+  },
+  {
     value: 'react-native',
     label: 'React Native'
   },
@@ -65,10 +69,6 @@ const PLATFORM_MAP = [
   {
     value: 'web3js',
     label: 'Web3.js'
-  },
-  {
-    value: 'js',
-    label: 'JavaScript'
   }
 ]
 
