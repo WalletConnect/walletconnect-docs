@@ -159,7 +159,7 @@ export default function App() {
 ```ts
 import { Web3InboxClient } from '@web3inbox/core'
 
-const client = Web3InboxClient.init({ projectId: '...' })
+const client = await Web3InboxClient.init({ projectId: '...' })
 
 let accountState = ''
 let subscriptionState = ''

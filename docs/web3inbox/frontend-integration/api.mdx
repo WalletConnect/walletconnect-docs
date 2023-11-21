@@ -11,7 +11,7 @@ import CloudBanner from '../../components/CloudBanner'
 
 <PlatformTabs
 	groupId="w3iw"
-	activeOptions={["react", "html"]}
+	activeOptions={["react", "javascript"]}
 >
 
 Init the client
@@ -32,10 +32,10 @@ const client = useWeb3InboxClient()
 
 </PlatformTabItem>
 
-<PlatformTabItem value="html">
+<PlatformTabItem value="javascript">
 
 ```ts
-const client = Web3InboxClient.init({ projectId, domain, isLimited })
+const client = await Web3InboxClient.init({ projectId, domain, isLimited })
 ```
 
 #### References
@@ -58,7 +58,7 @@ account is registered. This is to enable state synchronization.
 
 <PlatformTabs
 	groupId="w3iw"
-	activeOptions={["react", "html"]}
+	activeOptions={["react", "javascript"]}
 >
 
 
@@ -93,7 +93,7 @@ Some suggested ways to implement the `onSign` callback are via:
 
 </PlatformTabItem>
 
-<PlatformTabItem value="html">
+<PlatformTabItem value="javascript">
 
 ```ts
 const account = client.getAccount()
@@ -134,7 +134,7 @@ Subscribe, Unsubscribe, Get Subscription, Check if Subscribed.
 
 <PlatformTabs
 	groupId="w3iw"
-	activeOptions={["react", "html"]}
+	activeOptions={["react", "javascript"]}
 >
 
 <PlatformTabItem value="react">
@@ -193,7 +193,7 @@ const subscriptions = useSubscriptions(account)
 - **subscriptions:** Reactive state, returning array of current subscriptions 
 
 </PlatformTabItem>
-<PlatformTabItem value="html">
+<PlatformTabItem value="javascript">
 
 ```ts
 // check if current account is subscribed to current dapp
@@ -279,7 +279,7 @@ Get and delete messages
 
 <PlatformTabs
 	groupId="w3iw"
-	activeOptions={["react", "html"]}
+	activeOptions={["react", "javascript"]}
 >
 
 <PlatformTabItem value="react">
@@ -314,7 +314,7 @@ deleteMessage(messages[0].id)
 ```
 
 </PlatformTabItem>
-<PlatformTabItem value="html">
+<PlatformTabItem value="javascript">
 
 ```ts
 const nonReactiveMessageState = client.getMessageHistory(account)
@@ -354,7 +354,7 @@ Manage and fetch subscription scopes.
 
 <PlatformTabs
 	groupId="w3iw"
-	activeOptions={["react", "html"]}
+	activeOptions={["react", "javascript"]}
 >
 
 <PlatformTabItem value="react">
@@ -394,7 +394,7 @@ type ScopeMap = Record<
 ```
 
 </PlatformTabItem>
-<PlatformTabItem value="html">
+<PlatformTabItem value="javascript">
 
 ```ts
 
