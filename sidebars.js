@@ -150,6 +150,7 @@ module.exports = {
                 }
               ]
             },
+            'web3modal/namespaces',
             'web3modal/upgrade',
             'web3modal/v2/about'
           ]
