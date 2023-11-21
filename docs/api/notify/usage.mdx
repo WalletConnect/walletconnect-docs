@@ -111,7 +111,7 @@ const onSign = (message: string) => ethersWallet.signMessage(message)
 await notifyClient.register({
   account,
   onSign,
-  domain: 'app.mydomain.com', // pass the domain (i.e. the hostname) where your dapp is hosted.
+  domain: 'app.example.com', // pass the domain (i.e. the hostname) where your dapp is hosted.
   isLimited: true // The user will be prompted to authorize this dapp to send and receive messages on their behalf for this domain using their WalletConnect identity.
 })
 ```
@@ -125,7 +125,7 @@ const onSign = (message: string) => ethersWallet.signMessage(message)
 await notifyClient.register({
   account,
   onSign,
-  domain: 'com.mydomain.app.rn', // pass your app's bundle identifier.
+  domain: 'com.example.app.rn', // pass your app's bundle identifier.
   isLimited: false // The user will be prompted to authorize this wallet to send and receive messages on their behalf for ALL domains using their WalletConnect identity.
 })
 
@@ -840,7 +840,7 @@ const onSign = (message: string) => ethersWallet.signMessage(message)
 await notifyClient.register({
   account,
   onSign,
-  domain: 'app.mydomain.com', // pass the domain (i.e. the hostname) where your dapp is hosted.
+  domain: 'app.example.com', // pass the domain (i.e. the hostname) where your dapp is hosted.
   isLimited: true // The user will be prompted to authorize this dapp to send and receive messages on their behalf for this domain using their WalletConnect identity.
 })
 ```
@@ -854,7 +854,7 @@ const onSign = (message: string) => ethersWallet.signMessage(message)
 await notifyClient.register({
   account,
   onSign,
-  domain: 'com.mydomain.app.rn', // pass your app's bundle identifier.
+  domain: 'com.example.app.rn', // pass your app's bundle identifier.
   isLimited: false // The user will be prompted to authorize this wallet to send and receive messages on their behalf for ALL domains using their WalletConnect identity.
 })
 ```
