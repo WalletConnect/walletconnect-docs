@@ -28,7 +28,7 @@ const client = useWeb3InboxClient()
 
 - **projectId:** Your WalletConnect project ID
 - **domain *(Optional)*:** your dapp domain 
-- **isLimited:** Manage your dapp's state alone, or all an account's subscriptions. Recommended to set this to true or keep undefined.
+- **isLimited:** Set to `false` to request access to all of the user's notification subscriptions for all apps. Most do not need to set this, as they only need access to their own subscriptions.
 
 </PlatformTabItem>
 
@@ -42,7 +42,7 @@ const client = await Web3InboxClient.init({ projectId, domain, isLimited })
 
 - **projectId:** Your WalletConnect project ID
 - **domain *(Optional)*:** your dapp domain 
-- **isLimited:** Manage your dapp's state alone, or all an account's subscriptions. Recommended to set this to true or keep undefined.
+- **isLimited:** Set to `false` to request access to all of the user's notification subscriptions for all apps. Most do not need to set this, as they only need access to their own subscriptions.
 
 </PlatformTabItem>
 </PlatformTabs>
