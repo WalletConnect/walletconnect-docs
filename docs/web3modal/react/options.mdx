@@ -14,7 +14,7 @@ createWeb3Modal({ wagmiConfig, projectId, chains, ...options })
 
 You can set a desired chain for the initial connection:
 
-<PlatformTabs groupId="eth-lib" activeOptions={["wagmi","ethers"]}>
+<PlatformTabs groupId="eth-lib" activeOptions={["wagmi","other"]}>
 <PlatformTabItem value="wagmi">
 
 ```ts
@@ -27,7 +27,7 @@ createWeb3Modal({
 ```
 
 </PlatformTabItem>
-<PlatformTabItem value="ethers">
+<PlatformTabItem value="other">
 
 ```ts
 const mainnet = {
@@ -124,7 +124,7 @@ createWeb3Modal({
 
 ## connectorImages
 
-<PlatformTabs groupId="eth-lib" activeOptions={["wagmi","ethers"]}>
+<PlatformTabs groupId="eth-lib" activeOptions={["wagmi","other"]}>
 <PlatformTabItem value="wagmi">
 
 Set or override the images of any [connector](https://wagmi.sh/core/connectors/injected). The key of each property must match the id of the connector.
@@ -139,7 +139,7 @@ createWeb3Modal({
 ```
 
 </PlatformTabItem>
-<PlatformTabItem value="ethers">
+<PlatformTabItem value="other">
 
 Set or override the images of any connector.
 

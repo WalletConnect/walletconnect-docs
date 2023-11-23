@@ -13,7 +13,7 @@ Create a new file called `context/Web3Modal.tsx` or `context/Web3Modal.jsx` (out
 ```tsx
 "use client"
 
-import { createWeb3Modal, defaultConfig } from '@web3modal/ethers/react'
+import { createWeb3Modal, defaultConfig } from '@web3modal/web3js/react'
 
 // 1. Get projectId
 const projectId = 'YOUR_PROJECT_ID'
@@ -36,7 +36,7 @@ const metadata = {
 }
 
 createWeb3Modal({
-  ethersConfig: defaultConfig({ metadata }),
+  web3Config: defaultConfig({ metadata }),
   chains: [mainnet],
   projectId
 })
@@ -78,7 +78,7 @@ Create a new file called `context/Web3Modal.tsx` or `context/Web3Modal.jsx` (out
 ```tsx
 "use client"
 
-import { createWeb3Modal, defaultConfig } from '@web3modal/ethers/react'
+import { createWeb3Modal, defaultConfig } from '@web3modal/web3js/react'
 
 // 1. Get projectId
 const projectId = 'YOUR_PROJECT_ID'
@@ -101,7 +101,7 @@ const metadata = {
 }
 
 createWeb3Modal({
-  ethersConfig: defaultConfig({
+  web3Config: defaultConfig({
     metadata,
     defaultChainId: 1,
     enableEIP6963: true,

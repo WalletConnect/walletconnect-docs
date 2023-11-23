@@ -8,11 +8,10 @@ Default mode will implement WalletConnect, Browser Wallets (injected), [EIP-6963
 <Tabs>
 <TabItem value="default" label="Default">
 
+On top of your app set up the following configuration, making sure that all functions are called **outside** any React component to avoid unwanted rerenders.
 
-In your `main.js` file set up the following configuration.
-
-```js
-import { createWeb3Modal, defaultConfig } from '@web3modal/ethers'
+```tsx
+import { createWeb3Modal, defaultConfig } from '@web3modal/ethers5/react'
 
 // 1. Get projectId
 const projectId = 'YOUR_PROJECT_ID'
@@ -34,20 +33,25 @@ const metadata = {
   icons: ['https://avatars.mywebsite.com/']
 }
 
-const modal = createWeb3Modal({
+createWeb3Modal({
   ethersConfig: defaultConfig({ metadata }),
   chains: [mainnet],
   projectId
 })
+
+export default function App() {
+  return <YourApp/>
+}
 ```
 
 </TabItem>
 <TabItem value="custom" label="Custom">
 
-In your `main.js` file set up the following configuration.
 
-```ts
-import { createWeb3Modal, defaultConfig } from '@web3modal/ethers'
+On top of your app set up the following configuration, making sure that all functions are called outside any React component to avoid unwanted rerenders.
+
+```tsx
+import { createWeb3Modal, defaultConfig } from '@web3modal/ethers5/react'
 
 // 1. Get projectId
 const projectId = 'YOUR_PROJECT_ID'
@@ -69,7 +73,7 @@ const metadata = {
   icons: ['https://avatars.mywebsite.com/']
 }
 
-const modal = createWeb3Modal({
+createWeb3Modal({
   ethersConfig: defaultConfig({ 
     metadata,
     defaultChainId: 1,
@@ -81,6 +85,10 @@ const modal = createWeb3Modal({
   chains: [mainnet],
   projectId
 })
+
+export default function App() {
+  return <YourApp/>
+}
 ```
 
 </TabItem>
