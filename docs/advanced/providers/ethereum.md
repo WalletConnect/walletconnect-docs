@@ -2,7 +2,7 @@
 
 :::info
 
-Web3Modal SDK v3 is out! Learn how to integrate it [here](http://localhost:3000/web3modal/about)
+Web3Modal SDK v3 is out! Learn how to integrate it [here](../../web3modal/about.mdx)
 
 :::
 
