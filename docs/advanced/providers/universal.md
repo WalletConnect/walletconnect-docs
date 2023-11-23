@@ -1,6 +1,12 @@
 # Universal Provider
 
-Universal Provider for WalletConnect v2
+:::info
+
+Web3Modal SDK v3 is out! Learn how to integrate it [here](../../web3modal/about.mdx)
+
+:::
+
+Universal Provider is a multi-chain provider for WalletConnect v2 protocol.
 
 ## Installation
 
