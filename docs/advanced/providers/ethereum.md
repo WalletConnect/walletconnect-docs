@@ -1,5 +1,11 @@
 # Ethereum Provider
 
+:::info
+
+Web3Modal SDK v3 is out! Learn how to integrate it [here](http://localhost:3000/web3modal/about)
+
+:::
+
 [EIP-1193](https://eips.ethereum.org/EIPS/eip-1193) compliant Provider for WalletConnect v2. You can use this on it's own or pass down to libraries like ethers, viem, web3js and others.
 
 ## Installation
