@@ -18,7 +18,7 @@ Before begin using Web3Inbox, you will first need to [setup your domain](../doma
 
 <PlatformTabs
 	groupId="w3iw"
-	activeOptions={["react", "js"]}
+	activeOptions={["react", "javascript"]}
 >
 <PlatformTabItem value="react">
 
@@ -27,7 +27,7 @@ npm i @web3inbox/core @web3inbox/widget-react
 ```
 
 </PlatformTabItem>
-<PlatformTabItem value="js">
+<PlatformTabItem value="javascript">
 
 ```bash npm2yarn
 npm i @web3inbox/core
@@ -42,7 +42,7 @@ This basic example demonstrates how to use the Web3Inbox SDK to subscribe to not
 
 <PlatformTabs
 	groupId="w3iw"
-	activeOptions={["react", "js"]}
+	activeOptions={["react", "javascript"]}
 >
 <PlatformTabItem value="react">
 
@@ -154,30 +154,34 @@ export default function App() {
 ```
 
 </PlatformTabItem>
-<PlatformTabItem value="js">
+<PlatformTabItem value="javascript">
 
 ```ts
 import { Web3InboxClient } from '@web3inbox/core'
 
 const client = await Web3InboxClient.init({ projectId: '...' })
 
-let accountState = ''
-let subscriptionState = ''
+// Setup the register hook. Whenever account changes, and on startup, we need to re-register.
+client.watchAccount(account => {
+  client.register({
+    account,
+    onSign,
+  })
+})
 
-client.register({ onSign })
+// Set the account to a CAIP-10 account ID
+await client.setAccount('eip155:1:0x9AfEaC202C837df470b5A145e0EfD6a574B21029')
 
-client.watchAccount(acc => (accountState = acc))
+// Get the current notification subscription or watch for updates
+const subscription = client.getSubscription()
+client.watchSubscription(subscription => console.log({ subscription }))
 
-client.watchSubscription(sub => (subscriptionState = sub))
+// Subscribe to the app
+await client.subscribeToDapp()
 
-client.subscribe()
-
+// Get notification history
 const messages = client.getMessageHistory()
 ```
 
 </PlatformTabItem>
 </PlatformTabs>
-
-## Next Steps
-
-Now that you've installed Web3Inbox Core and set it up, you're ready to use the API.

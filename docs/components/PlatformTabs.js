@@ -69,10 +69,6 @@ const PLATFORM_MAP = [
   {
     value: 'web3js',
     label: 'Web3.js'
-  },
-  {
-    value: 'js',
-    label: 'JavaScript'
   }
 ]
 
