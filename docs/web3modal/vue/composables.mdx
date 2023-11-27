@@ -13,7 +13,7 @@ import EthersComposables from './ethers/composables.mdx'
 Control the modal with the `useWeb3Modal` function
 
 
-<PlatformTabs groupId="eth-lib" activeOptions={["wagmi","ethers5","ethers","web3js"]}>
+<PlatformTabs groupId="eth-lib" activeOptions={["wagmi","ethers5","ethers"]}>
 <PlatformTabItem value="wagmi">
 
 ```ts
@@ -50,22 +50,6 @@ open()
 
 ```ts
 import { useWeb3Modal } from '@web3modal/ethers/vue'
-
-export default function Component() {
-
-const { open, close } = useWeb3Modal()
-
-open()
-
-//...
-}
-```
-
-</PlatformTabItem>
-<PlatformTabItem value="web3js">
-
-```ts
-import { useWeb3Modal } from '@web3modal/web3js/vue'
 
 export default function Component() {
 
@@ -133,7 +117,7 @@ disconnect()
 
 Get the current value of the modal's state
 
-<PlatformTabs groupId="eth-lib" activeOptions={["wagmi","ethers5","ethers","web3js"]}>
+<PlatformTabs groupId="eth-lib" activeOptions={["wagmi","ethers5","ethers"]}>
 <PlatformTabItem value="wagmi">
 
 ```ts
@@ -156,15 +140,6 @@ const { open, selectedNetworkId } = useWeb3ModalState()
 
 ```ts
 import { useWeb3ModalState } from '@web3modal/ethers/vue'
-
-const { open, selectedNetworkId } = useWeb3ModalState()
-```
-
-</PlatformTabItem>
-<PlatformTabItem value="web3js">
-
-```ts
-import { useWeb3ModalState } from '@web3modal/web3js/vue'
 
 const { open, selectedNetworkId } = useWeb3ModalState()
 ```
@@ -203,7 +178,7 @@ setThemeVariables({
 })
 ```
 
-<PlatformTabs groupId="eth-lib" activeOptions={["wagmi","ethers5","ethers","web3js"]}>
+<PlatformTabs groupId="eth-lib" activeOptions={["wagmi","ethers5","ethers"]}>
 <PlatformTabItem value="wagmi">
 
 <WagmiComposables/>
@@ -217,11 +192,6 @@ setThemeVariables({
 <PlatformTabItem value="ethers">
 
 <EthersComposables/>
-
-</PlatformTabItem>
-<PlatformTabItem value="web3js">
-
-<Web3jsComposables/>
 
 </PlatformTabItem>
 </PlatformTabs>

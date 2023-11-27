@@ -68,7 +68,7 @@ const PLATFORM_MAP = [
   },
   {
     value: 'ethers',
-    label: 'Ethers v6'
+    label: 'Ethers'
   },
   {
     value: 'web3js',

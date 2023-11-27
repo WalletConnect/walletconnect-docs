@@ -5,7 +5,6 @@ import PlatformTabItem from '../../components/PlatformTabItem'
 import WagmiHooks from './wagmi/hooks.mdx'
 import Ethers5Hooks from './ethers5/hooks.mdx'
 import EthersHooks from './ethers/hooks.mdx'
-import Web3jsHooks from './web3js/hooks.mdx'
 
 # Hooks
 
@@ -13,7 +12,7 @@ import Web3jsHooks from './web3js/hooks.mdx'
 
 Control the modal with the `useWeb3Modal` hook
 
-<PlatformTabs groupId="eth-lib" activeOptions={["wagmi","ethers5","ethers","web3js"]}>
+<PlatformTabs groupId="eth-lib" activeOptions={["wagmi","ethers5","ethers"]}>
 <PlatformTabItem value="wagmi">
 
 ```ts
@@ -50,22 +49,6 @@ open()
 
 ```ts
 import { useWeb3Modal } from '@web3modal/ethers/react'
-
-export default function Component() {
-
-const { open, close } = useWeb3Modal()
-
-open()
-
-//...
-}
-```
-
-</PlatformTabItem>
-<PlatformTabItem value="web3js">
-
-```ts
-import { useWeb3Modal } from '@web3modal/web3js/react'
 
 export default function Component() {
 
@@ -133,7 +116,7 @@ disconnect()
 
 Get the current value of the modal's state
 
-<PlatformTabs groupId="eth-lib" activeOptions={["wagmi","ethers5","ethers","web3js"]}>
+<PlatformTabs groupId="eth-lib" activeOptions={["wagmi","ethers5","ethers"]}>
 <PlatformTabItem value="wagmi">
 
 ```ts
@@ -156,15 +139,6 @@ const { open, selectedNetworkId } = useWeb3ModalState()
 
 ```ts
 import { useWeb3ModalState } from '@web3modal/ethers/react'
-
-const { open, selectedNetworkId } = useWeb3ModalState()
-```
-
-</PlatformTabItem>
-<PlatformTabItem value="web3js">
-
-```ts
-import { useWeb3ModalState } from '@web3modal/web3js/react'
 
 const { open, selectedNetworkId } = useWeb3ModalState()
 ```
@@ -203,7 +177,7 @@ setThemeVariables({
 })
 ```
 
-<PlatformTabs groupId="eth-lib" activeOptions={["wagmi","ethers5", "ethers", "web3js"]}>
+<PlatformTabs groupId="eth-lib" activeOptions={["wagmi","ethers5", "ethers"]}>
 <PlatformTabItem value="wagmi">
 
 <WagmiHooks/>
@@ -217,11 +191,6 @@ setThemeVariables({
 <PlatformTabItem value="ethers">
 
 <EthersHooks/>
-
-</PlatformTabItem>
-<PlatformTabItem value="web3js">
-
-<Web3jsHooks/>
 
 </PlatformTabItem>
 </PlatformTabs>

@@ -11,9 +11,6 @@ import Ethers5Modal from './ethers5/about/triggermodal.mdx'
 import EthersImplementation from './ethers/about/implementation.mdx'
 import EthersModal from './ethers/about/triggermodal.mdx'
 
-import Web3jsImplementation from './web3js/about/implementation.mdx'
-import Web3jsModal from './web3js/about/triggermodal.mdx'
-
 # JavaScript
 
 Web3Modal SDK has support for [Wagmi](https://wagmi.sh/), [Ethers v5](https://docs.ethers.org/v5/getting-started/),
@@ -22,7 +19,7 @@ Choose one of these ethereum libraries to get started.
 
 ## Installation
 
-<PlatformTabs groupId="eth-lib" activeOptions={["wagmi","ethers5", "ethers", "web3js"]}>
+<PlatformTabs groupId="eth-lib" activeOptions={["wagmi","ethers5", "ethers"]}>
 <PlatformTabItem value="wagmi">
 
 ```bash npm2yarn
@@ -44,20 +41,13 @@ npm install @web3modal/ethers ethers
 ```
 
 </PlatformTabItem>
-<PlatformTabItem value="web3js">
-
-```bash npm2yarn
-npm install @web3modal/web3js web3
-```
-
-</PlatformTabItem>
 </PlatformTabs>
 
 <CloudBanner />
 
 ## Implementation
 
-<PlatformTabs groupId="eth-lib" activeOptions={["wagmi","ethers5", "ethers", "web3js"]}>
+<PlatformTabs groupId="eth-lib" activeOptions={["wagmi","ethers5", "ethers"]}>
 <PlatformTabItem value="wagmi">
 
 <WagmiImplementation/>
@@ -73,16 +63,11 @@ npm install @web3modal/web3js web3
 <EthersImplementation/>
 
 </PlatformTabItem>
-<PlatformTabItem value="web3js">
-
-<Web3jsImplementation/>
-
-</PlatformTabItem>
 </PlatformTabs>
 
 ## Trigger the modal
 
-<PlatformTabs groupId="eth-lib" activeOptions={["wagmi","ethers5", "ethers", "web3js"]}>
+<PlatformTabs groupId="eth-lib" activeOptions={["wagmi","ethers5", "ethers"]}>
 <PlatformTabItem value="wagmi">
 
 <WagmiModal/>
@@ -96,11 +81,6 @@ npm install @web3modal/web3js web3
 <PlatformTabItem value="ethers">
 
 <EthersModal/>
-
-</PlatformTabItem>
-<PlatformTabItem value="web3js">
-
-<Web3jsModal/>
 
 </PlatformTabItem>
 </PlatformTabs>
