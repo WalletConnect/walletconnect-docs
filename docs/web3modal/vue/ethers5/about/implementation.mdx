@@ -9,12 +9,13 @@ Default mode will implement WalletConnect, Browser Wallets (injected), [EIP-6963
 <TabItem value="default" label="Default">
 
 
-In your `main.js` file set up the following configuration.
+In your `App.vue` file set up the following configuration.
 
-```js
-import { createWeb3Modal, defaultConfig } from '@web3modal/ethers'
+```html
+<script setup>
+import { createWeb3Modal, defaultConfig } from '@web3modal/ethers5/vue'
 
-// 1. Get projectId at https://cloud.walletconnect.com
+// 1. Get projectId
 const projectId = 'YOUR_PROJECT_ID'
 
 // 2. Set chains
@@ -34,22 +35,28 @@ const metadata = {
   icons: ['https://avatars.mywebsite.com/']
 }
 
-const modal = createWeb3Modal({
+createWeb3Modal({
   ethersConfig: defaultConfig({ metadata }),
   chains: [mainnet],
   projectId
 })
+</script>
+
+<template>
+  // Rest of your app ...
+</template>
 ```
 
 </TabItem>
 <TabItem value="custom" label="Custom">
 
-In your `main.js` file set up the following configuration.
+In your `App.vue` file set up the following configuration.
 
-```ts
-import { createWeb3Modal, defaultConfig } from '@web3modal/ethers'
+```html
+<script setup lang="ts">
+import { createWeb3Modal, defaultConfig } from '@web3modal/ethers5/vue'
 
-// 1. Get projectId at https://cloud.walletconnect.com
+// 1. Get projectId
 const projectId = 'YOUR_PROJECT_ID'
 
 // 2. Set chains
@@ -69,7 +76,7 @@ const metadata = {
   icons: ['https://avatars.mywebsite.com/']
 }
 
-const modal = createWeb3Modal({
+createWeb3Modal({
   ethersConfig: defaultConfig({ 
     metadata,
     defaultChainId: 1,
@@ -81,6 +88,11 @@ const modal = createWeb3Modal({
   chains: [mainnet],
   projectId
 })
+</script>
+
+<template>
+  // Rest of your app ...
+</template>
 ```
 
 </TabItem>

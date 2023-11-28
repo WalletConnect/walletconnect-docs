@@ -1,23 +1,25 @@
 import CloudBanner from '../../components/CloudBanner'
 import PlatformTabs from '../../components/PlatformTabs'
 import PlatformTabItem from '../../components/PlatformTabItem'
-import Tabs from '@theme/Tabs'
-import TabItem from '@theme/TabItem'
 
 import WagmiImplementation from './wagmi/about/implementation.mdx'
 import WagmiModal from './wagmi/about/triggermodal.mdx'
+
+import Ethers5Implementation from './ethers5/about/implementation.mdx'
+import Ethers5Modal from './ethers5/about/triggermodal.mdx'
 
 import EthersImplementation from './ethers/about/implementation.mdx'
 import EthersModal from './ethers/about/triggermodal.mdx'
 
 # JavaScript
 
-Web3Modal SDK has support for [Wagmi](https://wagmi.sh/) and [Ethers v5](https://docs.ethers.org/v5/getting-started/).
+Web3Modal SDK has support for [Wagmi](https://wagmi.sh/), [Ethers v5](https://docs.ethers.org/v5/getting-started/) and
+[Ethers v6](https://docs.ethers.org/v6/).
 Choose one of these ethereum libraries to get started.
 
 ## Installation
 
-<PlatformTabs groupId="eth-lib" activeOptions={["wagmi","ethers"]}>
+<PlatformTabs groupId="eth-lib" activeOptions={["wagmi","ethers5", "ethers"]}>
 <PlatformTabItem value="wagmi">
 
 ```bash npm2yarn
@@ -25,10 +27,17 @@ npm install @web3modal/wagmi @wagmi/core viem
 ```
 
 </PlatformTabItem>
-<PlatformTabItem value="ethers">
+<PlatformTabItem value="ethers5">
 
 ```bash npm2yarn
 npm install @web3modal/ethers5 ethers@5.7.2
+```
+
+</PlatformTabItem>
+<PlatformTabItem value="ethers">
+
+```bash npm2yarn
+npm install @web3modal/ethers ethers
 ```
 
 </PlatformTabItem>
@@ -36,35 +45,17 @@ npm install @web3modal/ethers5 ethers@5.7.2
 
 <CloudBanner />
 
-<!-- Yo can install Web3Modal SDK by using a package manager like *npm* or with CDN imports.
-
-<Tabs>
-<TabItem value="npm" label="NPM">
-
-Choose your preferred package manager
-```bash npm2yarn
-npm install @web3modal/wagmi @wagmi/core viem
-```
-
-</TabItem>
-<TabItem value="cdn" label="CDN">
-
-In order to use CDN replace the imports from the implementation example with the following ones
-```ts
-import { createWeb3Modal, defaultWagmiConfig } from 'https://esm.sh/@web3modal/wagmi?bundle'
-import { mainnet, arbitrum } from 'https://esm.sh/viem/chains?bundle'
-```
-
-</TabItem>
-</Tabs>
--->
-
 ## Implementation
 
-<PlatformTabs groupId="eth-lib" activeOptions={["wagmi","ethers"]}>
+<PlatformTabs groupId="eth-lib" activeOptions={["wagmi","ethers5", "ethers"]}>
 <PlatformTabItem value="wagmi">
 
 <WagmiImplementation/>
+
+</PlatformTabItem>
+<PlatformTabItem value="ethers5">
+
+<Ethers5Implementation/>
 
 </PlatformTabItem>
 <PlatformTabItem value="ethers">
@@ -76,10 +67,15 @@ import { mainnet, arbitrum } from 'https://esm.sh/viem/chains?bundle'
 
 ## Trigger the modal
 
-<PlatformTabs groupId="eth-lib" activeOptions={["wagmi","ethers"]}>
+<PlatformTabs groupId="eth-lib" activeOptions={["wagmi","ethers5", "ethers"]}>
 <PlatformTabItem value="wagmi">
 
 <WagmiModal/>
+
+</PlatformTabItem>
+<PlatformTabItem value="ethers5">
+
+<Ethers5Modal/>
 
 </PlatformTabItem>
 <PlatformTabItem value="ethers">

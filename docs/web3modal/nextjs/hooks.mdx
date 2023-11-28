@@ -3,7 +3,7 @@ import PlatformTabs from '../../components/PlatformTabs'
 import PlatformTabItem from '../../components/PlatformTabItem'
 
 import WagmiHooks from './wagmi/hooks.mdx'
-
+import Ethers5Hooks from './ethers5/hooks.mdx'
 import EthersHooks from './ethers/hooks.mdx'
 
 # Hooks
@@ -12,7 +12,7 @@ import EthersHooks from './ethers/hooks.mdx'
 
 Control the modal with the `useWeb3Modal` hook
 
-<PlatformTabs groupId="eth-lib" activeOptions={["wagmi","ethers"]}>
+<PlatformTabs groupId="eth-lib" activeOptions={["wagmi","ethers5","ethers"]}>
 <PlatformTabItem value="wagmi">
 
 ```ts
@@ -23,10 +23,13 @@ export default function Component() {
 const { open, close } = useWeb3Modal()
 
 open()
+
+//...
+}
 ```
 
 </PlatformTabItem>
-<PlatformTabItem value="ethers">
+<PlatformTabItem value="ethers5">
 
 ```ts
 import { useWeb3Modal } from '@web3modal/ethers5/react'
@@ -36,6 +39,25 @@ export default function Component() {
 const { open, close } = useWeb3Modal()
 
 open()
+
+//...
+}
+```
+
+</PlatformTabItem>
+<PlatformTabItem value="ethers">
+
+```ts
+import { useWeb3Modal } from '@web3modal/ethers/react'
+
+export default function Component() {
+
+const { open, close } = useWeb3Modal()
+
+open()
+
+//...
+}
 ```
 
 </PlatformTabItem>
@@ -80,11 +102,21 @@ List of views you can select
   ]}
 />
 
+## useDisconnect
+
+Disconnect currently connected account. 
+
+```ts
+const { disconnect } = useDisconnect()
+
+disconnect()
+```
+
 ## useWeb3ModalState
 
 Get the current value of the modal's state
 
-<PlatformTabs groupId="eth-lib" activeOptions={["wagmi","ethers"]}>
+<PlatformTabs groupId="eth-lib" activeOptions={["wagmi","ethers5","ethers"]}>
 <PlatformTabItem value="wagmi">
 
 ```ts
@@ -94,10 +126,19 @@ const { open, selectedNetworkId } = useWeb3ModalState()
 ```
 
 </PlatformTabItem>
-<PlatformTabItem value="ethers">
+<PlatformTabItem value="ethers5">
 
 ```ts
 import { useWeb3ModalState } from '@web3modal/ethers5/react'
+
+const { open, selectedNetworkId } = useWeb3ModalState()
+```
+
+</PlatformTabItem>
+<PlatformTabItem value="ethers">
+
+```ts
+import { useWeb3ModalState } from '@web3modal/ethers/react'
 
 const { open, selectedNetworkId } = useWeb3ModalState()
 ```
@@ -136,10 +177,15 @@ setThemeVariables({
 })
 ```
 
-<PlatformTabs groupId="eth-lib" activeOptions={["wagmi","ethers"]}>
+<PlatformTabs groupId="eth-lib" activeOptions={["wagmi","ethers5", "ethers"]}>
 <PlatformTabItem value="wagmi">
 
 <WagmiHooks/>
+
+</PlatformTabItem>
+<PlatformTabItem value="ethers5">
+
+<Ethers5Hooks/>
 
 </PlatformTabItem>
 <PlatformTabItem value="ethers">

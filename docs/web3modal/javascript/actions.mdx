@@ -3,6 +3,7 @@ import PlatformTabs from '../../components/PlatformTabs'
 import PlatformTabItem from '../../components/PlatformTabItem'
 
 import WagmiActions from './wagmi/actions.mdx'
+import Ethers5Actions from './ethers5/actions.mdx'
 import EthersActions from './ethers/actions.mdx'
 
 # Actions
@@ -142,10 +143,15 @@ const themeMode = modal.getThemeVariables()
 const unsubscribe = modal.subscribeTheme(newTheme => console.log(newTheme))
 ```
 
-<PlatformTabs groupId="eth-lib" activeOptions={["wagmi","ethers"]}>
+<PlatformTabs groupId="eth-lib" activeOptions={["wagmi","ethers5", "ethers"]}>
 <PlatformTabItem value="wagmi">
 
 <WagmiActions/>
+
+</PlatformTabItem>
+<PlatformTabItem value="ethers5">
+
+<Ethers5Actions/>
 
 </PlatformTabItem>
 <PlatformTabItem value="ethers">
