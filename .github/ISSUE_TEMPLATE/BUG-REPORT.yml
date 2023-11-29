@@ -27,7 +27,7 @@ body:
         4. See error
       render: bash
     validations:
-      required: true
+      required: false
   - type: textarea
     id: expected-behaviour
     attributes:
@@ -43,7 +43,7 @@ body:
       description: If applicable, add screenshots to help explain your problem.
       placeholder: Enter related screenshots
     validations:
-      required: true
+      required: false
   - type: textarea
     id: environment
     attributes:
