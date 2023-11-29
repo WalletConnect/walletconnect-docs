@@ -1,0 +1,29 @@
+# Signing the message: “I further authorize this app to send me notifications”
+
+When subscribing to notifications from an app that uses Web3Inbox, you’ll usually be asked to sign a message containing the following message:
+
+> I further authorize this app to send me notifications. Read more at https://walletconnect.com/notifications
+
+For any signature request, it’s critical that you always read the message attached before signing to fully understand the permissions you’re granting. 
+
+By signing this request, you’re allowing the app to:
+
+- Subscribe you to notifications from only this app
+- Manage your notifications for only this app
+- View your notifications from only this app
+
+The app will not be able to:
+
+- Sign blockchain transactions or additional messages
+- Subscribe to, manage, or view notifications from other apps
+
+Most apps that wants to send you notifications using Web3Inbox will request you to sign this message. This will allow the app to simply interact with you directly via notifications, and if you wish to opt-in to receiving notifications it is safe to sign this message.
+
+If you’ve signed up to notifications but have received a different message, head [here](all-apps) to learn about other scenarios in which you may receive a signature request regarding notifications.
+
+### Example wallet signature requests
+
+<div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gridGap: 16 }}>
+    <img src="/assets/web3inbox/authorization-signatures/this-app/sign-this-message.jpg"/>
+    <img src="/assets/web3inbox/authorization-signatures/this-app/message.jpg"/>
+</div>
