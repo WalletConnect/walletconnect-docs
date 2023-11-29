@@ -36,7 +36,7 @@ const provider = await UniversalProvider.init({
 
 //  create sub providers for each namespace/chain
 await provider.connect({
-  namespaces: {
+  optionalNamespaces: {
     eip155: {
       methods: [
         "eth_sendTransaction",
