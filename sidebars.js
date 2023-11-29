@@ -150,7 +150,6 @@ module.exports = {
                 }
               ]
             },
-            'web3modal/namespaces',
             'web3modal/upgrade',
             'web3modal/v2/about'
           ]
@@ -316,6 +315,11 @@ module.exports = {
               type: 'doc',
               id: 'advanced/migration-from-v1.x/overview',
               label: 'Overview'
+            },
+            {
+              type: 'doc',
+              id: 'advanced/migration-from-v1.x/namespaces',
+              label: 'Namespaces'
             },
             {
               type: 'category',
