@@ -59,7 +59,6 @@ body:
         - OS:
         - Browser:
         - Version:
-    render: markdown
   - type: textarea
     id: additional-context
     attributes:
