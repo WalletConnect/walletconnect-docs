@@ -326,6 +326,11 @@ module.exports = {
               label: 'Overview'
             },
             {
+              type: 'doc',
+              id: 'advanced/migration-from-v1.x/namespaces',
+              label: 'Namespaces'
+            },
+            {
               type: 'category',
               label: 'Dapps',
               items: [
