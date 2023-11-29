@@ -30,7 +30,7 @@ body:
       description: A clear and concise description of any alternative solutions or features you've considered.
       placeholder: Enter the alternatives you've considered
     validations:
-      required: true
+      required: false
   - type: textarea
     id: additional-context
     attributes:
@@ -38,4 +38,4 @@ body:
       description: Add any other context or screenshots about the feature request here.
       placeholder: Enter some additional context
     validations:
-      required: true
+      required: false
