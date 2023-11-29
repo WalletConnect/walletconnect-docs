@@ -115,18 +115,16 @@ if(notifyClient.isRegistered({account})) {
 const domain =  'app.mydomain.com', // pass the domain (i.e. the hostname) where your dapp is hosted.
 const isLimited =  true // The user will be prompted to authorize this dapp to send and receive messages on their behalf for this domain using their WalletConnect identity.
 
-const siweMessage = notifyClient.formatSiweMessage({
+const {registerParams, message}  = notifyClient.prepareRegistration({
   account,
   domain,
   isLimited
 });
 
-const signature = await ethersWallet.signMessage(siweMessage);
+const signature = await ethersWallet.signMessage(message);
 
 await notifyClient.register({
-  account,
-  domain,
-  isLimited,
+  registerParams,
   signature,
 })
 ```
