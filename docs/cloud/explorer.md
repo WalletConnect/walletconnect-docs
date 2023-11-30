@@ -125,13 +125,13 @@ These endpoints are legacy artifacts from the WalletConnect Protocol v1.0 era. T
 
 #### What does this mean for you?
 
-This deprecation only affects you if you are still relying on: registry.walletconnect.ORG and/or the affected endpoints listed below
+This deprecation only affects you if you are still relying on: registry.walletconnect.**ORG** and/or the affected endpoints listed below
 
 The following will no longer be supported from **1pm (13:00) GMT on January 30, 2024 onwards.**
 
 #### Affected domains
 
-The registry.walletconnect.org subdomain will be shut down, while the registry subdomain on .com (i.e. registry.walletconnect.com) will continue to operate
+The `registry.walletconnect.org` subdomain will be shut down, while the registry subdomain on .com (i.e. `registry.walletconnect.com`) will continue to operate
 
 #### Affected endpoints
 
@@ -172,9 +172,9 @@ https://registry.walletconnect.com/v2/all
 #### What do you need to do?
 
 If you are still using these legacy endpoints, all you need to do is simply upgrade before **January 30, 2024**. You can do so by updating any custom API requests to:
-use the `/v3/` prefix
 
-adding your dapp’s/wallet’s projectId to each request via `?projectId=` query parameter
+- use the `/v3/` prefix
+- adding your dapp’s/wallet’s projectId to each request via `?projectId=` query parameter
 
 Below are a few upgrade examples that you can refer to.
 
@@ -185,34 +185,42 @@ Below are a few upgrade examples that you can refer to.
 Your dapp is querying the deprecated [registry.walletconnect.org/data/wallets.json](https://registry.walletconnect.org/data/wallets.json) endpoint for wallet metadata.
 
 **Issues:**
-[registry.walletconnect.org](https://registry.walletconnect.org) - the registry...org subdomain will be shut down.The /data/wallets.json endpoint will be shut down.
 
-**Solution:** You should upgrade to the `explorer-api.walletconnect.com/v3/wallets` endpoint, which returns the equivalent data with additional filtering options.
-The equivalent, upgraded request would be: GET https://explorer-api.walletconnect.com/v3/wallets?projectId=YOUR_PROJECT_ID
+- [registry.walletconnect.org](https://registry.walletconnect.org) - the registry...org subdomain will be shut down.
+- The /data/wallets.json endpoint will be shut down.
+
+**Solution:**
+
+- You should upgrade to the `explorer-api.walletconnect.com/v3/wallets` endpoint, which returns the equivalent data with additional filtering options.
+- The equivalent, upgraded request would be: GET https://explorer-api.walletconnect.com/v3/wallets?projectId=YOUR_PROJECT_ID
 
 #### Scenario 2
 
 Your dapp is querying the deprecated `registry.walletconnect.com/v2/wallets` endpoint for wallet metadata
 
 **Issues:**
-The `/v2/wallets` endpoint will be shut down.
 
-**Solution:** You should upgrade to the `explorer-api.walletconnect.com/v3/wallets` endpoint, which returns the equivalent data with additional filtering options.
-The equivalent, upgraded request would be: GET https://explorer-api.walletconnect.com/v3/wallets?projectId=YOUR_PROJECT_ID
+- The `/v2/wallets` endpoint will be shut down.
+
+**Solution:**
+
+- You should upgrade to the `explorer-api.walletconnect.com/v3/wallets` endpoint, which returns the equivalent data with additional filtering options.
+- The equivalent, upgraded request would be: GET https://explorer-api.walletconnect.com/v3/wallets?projectId=YOUR_PROJECT_ID
 
 #### Scenario 3
 
 Your dapp is querying the deprecated `registry.walletconnect.org/logo/{size}/{id}.jpeg` endpoint for wallet logos.
 
 **Issues:**
-[registry.walletconnect.org](https://registry.walletconnect.org) - the registry...org subdomain will be shut down.
-The `/logo/` endpoints (without /v3/ prefix) will be shut down.
+
+- [registry.walletconnect.org](https://registry.walletconnect.org) - the registry...org subdomain will be shut down.
+- The `/logo/` endpoints (without /v3/ prefix) will be shut down.
 
 **Solution:**
 
 - You should upgrade to the [explorer-api.walletconnect.com/v3/logo/{size}/{image_id}](https://explorer-api.walletconnect.com/v3/logo/{size}/{image_id}) endpoint, which returns the equivalent logo.
 - A specific dapp’s/wallet’s image_id can be looked up via the data endpoints, e.g. /`v3/wallets`, as shown above.
-- For your convenience, endpoints like /v3/wallets already provide an image_url object with the relevant `/logo/` requests for each entry.
+- For your convenience, **endpoints like /v3/wallets already provide an image_url object with the relevant `/logo/` requests for each entry.**
 - Taking MetaMask as an example:
   - Deprecated: GET https://registry.walletconnect.org/logo/md/c57ca95b47569778a828d19178114f4db188b89b763c899ba0be274e97267d96.jpeg
   - Equivalent upgraded request: GET [explorer-api.walletconnect.com/v3/logo/md/5195e9db-94d8-4579-6f11-ef553be95100?projectId=YOUR_PROJECT_ID](https://explorer-api.walletconnect.com/v3/logo/md/5195e9db-94d8-4579-6f11-ef553be95100?projectId=YOUR_PROJECT_ID)
