@@ -36,7 +36,13 @@ In order to verify your app domain in WalletConnect Cloud follow these steps:
 
 6. Depending on your DNS settings, this might take a while to reflect. You can check out DNS settings for your website with CLI tools like Dig or with websites like [MXToolbox](https://mxtoolbox.com/SuperTool.aspx?action=txt)
 
-7. Once this is done and you have confirmed this change is reflected, head on back to your Cloud Dashboard and click on Verify. You should see a Toast pop up in the bottom right section of your screen and the domain verification section should have a green tick next to it.
+7. Once this is done and you have confirmed this change is reflected, head on back to your Cloud Dashboard and click on Verify.
+
+<p align="center">
+  <img src="/assets/verify/verify-btn.png" />
+</p>
+
+8. You should see a Toast pop up in the bottom right section of your screen and the domain verification section should have a green tick next to it.
 
 <p align="center">
   <img src="/assets/verify/verified.png" />
