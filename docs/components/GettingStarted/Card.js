@@ -12,7 +12,13 @@ const typeToImageMap = {
   rn: 'assets/home/rnLogo.png',
   web: 'assets/home/webLogo.png',
   flutter: 'assets/home/flutterLogo2.png',
-  csharp: 'assets/home/unityLogo.png'
+  csharp: 'assets/home/csharpLogo.png'
+}
+
+const productToLinkMap = {
+  w3m: './web3modal/about',
+  w3w: './web3wallet/about',
+  w3i: './web3inbox/about'
 }
 
 export const Card = ({ title, description, links, product, children, image }) => {
@@ -33,6 +39,27 @@ export const Card = ({ title, description, links, product, children, image }) =>
             />
           </Link>
         ))}
+        {product && (
+          <Link
+            className="gs__platform gs__platform--lm"
+            to={useBaseUrl(productToLinkMap[product])}
+          >
+            Learn More
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={2}
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75"
+              />
+            </svg>
+          </Link>
+        )}
       </div>
       <img className="gs__image" src={useBaseUrl(image)} alt="cloud illustration" />
     </div>

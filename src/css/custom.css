@@ -979,9 +979,52 @@ article img {
     rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
 }
 
+.gs__platform--lm {
+  width: fit-content;
+  font-size: 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.25rem 0.5rem;
+  background: hsla(0, 0%, 100%, 0.2);
+  color: white;
+}
+
+.gs__platform--lm svg {
+  height: 0.75rem;
+  width: 0.75rem;
+}
+
+.gs__platform--lm:hover {
+  background: hsla(0, 0%, 100%, 0.25) !important;
+  color: white !important;
+}
+
+.gs__platform:hover {
+  background: hsla(0, 0%, 100%, 0.2);
+  filter: saturate(1.5) grayscale(0);
+}
+
+.gs__platform:hover .gs__platform--image {
+  filter: grayscale(0);
+}
+
 .gs__platform--image {
   border: none;
   border-radius: 0;
+  filter: grayscale(0.1);
+}
+
+[data-theme='light'] .gs__platform,
+[data-theme='light'] .gs__platform-lm {
+  background: hsla(0, 0%, 0%, 0.2);
+  box-shadow: none;
+}
+
+[data-theme='light'] .gs__platform:hover,
+[data-theme='light'] .gs__platform-lm:hover {
+  background: hsla(0, 0%, 0%, 0.3) !important;
+  box-shadow: none;
 }
 
 .gs__wrapper .gs__text-container {
@@ -1004,8 +1047,17 @@ article img {
     rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
 }
 
+[data-theme='light'] .gs__wrapper .gs__text-container p {
+  box-shadow: none;
+}
+
 .gs__wrapper .gs__text-container h2 {
   color: white;
+  margin-top: 0 !important;
+}
+
+[data-theme='light'] .gs__wrapper .gs__text-container h2 {
+  color: #1a1b1c;
   margin-top: 0 !important;
 }
 
@@ -1013,6 +1065,11 @@ article img {
   max-width: 30rem;
   font-size: 0.875rem;
   opacity: 0.875;
+  color: #c9cfcf;
+}
+
+[data-theme='light'] .gs__text {
+  color: #2a2b2c;
 }
 
 .gs__wrapper--w3m {
@@ -1036,6 +1093,28 @@ article img {
   --gs-pill-color: #f2fafa;
   background: linear-gradient(135deg, hsla(161.45, 25%, 10%, 1) 0%, hsla(161.45, 66%, 16%, 1) 100%);
   border-color: hsla(161.45, 15%, 33%, 1);
+}
+
+[data-theme='light'] .gs__wrapper--w3m {
+  --gs-pill-bg: rgba(82, 101, 223, 0.5);
+  --gs-pill-color: #f5f9fc;
+
+  background: linear-gradient(135deg, hsla(250, 25%, 80%, 1) 0%, hsla(233.65, 64%, 40%, 1) 100%);
+  border-width: 0;
+}
+
+[data-theme='light'] .gs__wrapper--w3w {
+  --gs-pill-bg: rgba(135, 70, 223, 0.5);
+  --gs-pill-color: #faf5fc;
+  background: linear-gradient(135deg, hsla(260, 25%, 80%, 1) 0%, hsla(260, 68%, 40%, 1) 100%);
+  border-width: 0;
+}
+
+[data-theme='light'] .gs__wrapper--w3i {
+  --gs-pill-bg: rgba(39, 115, 101, 0.5);
+  --gs-pill-color: #f2fafa;
+  background: linear-gradient(135deg, hsla(161.45, 25%, 80%, 1) 0%, hsla(161.45, 66%, 40%, 1) 100%);
+  border-width: 0;
 }
 
 /* End - Getting Started Banner */
