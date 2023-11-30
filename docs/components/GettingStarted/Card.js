@@ -31,7 +31,7 @@ export const Card = ({ title, description, links, product, children, image }) =>
       <div className="gs__text">{children}</div>
       <div className="gs__platform__wrapper">
         {links.map(({ type, url }) => (
-          <Link key={type} className="gs__platform" to={useBaseUrl(url)}>
+          <Link key={type} className="gs__platform" to={url}>
             <img
               className="gs__platform--image"
               src={useBaseUrl(typeToImageMap[type])}
@@ -40,10 +40,7 @@ export const Card = ({ title, description, links, product, children, image }) =>
           </Link>
         ))}
         {product && (
-          <Link
-            className="gs__platform gs__platform--lm"
-            to={useBaseUrl(productToLinkMap[product])}
-          >
+          <Link className="gs__platform gs__platform--lm" to={productToLinkMap[product]}>
             Learn More
             <svg
               xmlns="http://www.w3.org/2000/svg"
