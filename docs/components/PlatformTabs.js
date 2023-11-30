@@ -51,16 +51,20 @@ const PLATFORM_MAP = [
     label: 'Mobile'
   },
   {
-    value: 'other',
-    label: 'Other'
-  },
-  {
     value: 'wagmi',
     label: 'Wagmi'
   },
   {
+    value: 'other',
+    label: 'Other'
+  },
+  {
     value: 'viem',
     label: 'Viem'
+  },
+  {
+    value: 'ethers5',
+    label: 'Ethers v5'
   },
   {
     value: 'ethers',

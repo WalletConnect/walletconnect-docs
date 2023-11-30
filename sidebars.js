@@ -198,7 +198,16 @@ module.exports = {
                   ]
                 },
                 'web3inbox/sending-notifications',
-                'web3inbox/demo'
+                'web3inbox/demo',
+                {
+                  type: 'category',
+                  label: 'Authorization Signatures',
+                  items: [
+                    { type: 'doc', label: "About", id: 'web3inbox/authorization-signatures/about' },
+                    { type: 'doc', label: "This App", id: 'web3inbox/authorization-signatures/this-app' },
+                    { type: 'doc', label: "All Apps", id: 'web3inbox/authorization-signatures/all-apps' }
+                  ]
+                }
               ]
             },
             { type: 'doc', label: 'Wallets', id: 'web3inbox/wallets' }
@@ -315,6 +324,11 @@ module.exports = {
               type: 'doc',
               id: 'advanced/migration-from-v1.x/overview',
               label: 'Overview'
+            },
+            {
+              type: 'doc',
+              id: 'advanced/migration-from-v1.x/namespaces',
+              label: 'Namespaces'
             },
             {
               type: 'category',

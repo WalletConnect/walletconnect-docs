@@ -21,13 +21,18 @@ import { EthereumProvider } from '@walletconnect/ethereum-provider'
 
 const provider = await EthereumProvider.init({
   projectId, // REQUIRED your projectId
-  chains, // REQUIRED chain ids
-  optionalChains, // OPTIONAL chains
   showQrModal, // REQUIRED set to "true" to use @walletconnect/modal
-  methods, // REQUIRED ethereum methods
-  optionalMethods, // OPTIONAL ethereum methods
-  events, // REQUIRED ethereum events
-  optionalEvents, // OPTIONAL ethereum events
+
+  /* Optional Namespaces - RECOMMENDED FOR MULTI-CHAIN APPS */
+  optionalChains, // chains - required for optional namespaces
+  optionalMethods, // ethereum methods - all ethereum methods are already set by default so this is not required
+  optionalEvents, // ethereum events - all ethereum events are already set by default so this is not required
+
+  /* Required Namespaces - NOT RECOMMENDED FOR MULTI-CHAIN APPS*/
+  chains, //  chain ids
+  methods, // ethereum methods
+  events, // ethereum events
+  
   rpcMap, // OPTIONAL rpc urls for each chain
   metadata, // OPTIONAL metadata of your app
   qrModalOptions // OPTIONAL - `undefined` by default, see https://docs.walletconnect.com/web3modal/options

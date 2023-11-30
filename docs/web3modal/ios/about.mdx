@@ -1,6 +1,16 @@
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
+
 # iOS
 
+With Web3Modal Swift, you can easily let people interact with multiple EVM compatible wallets and blockchains.
+
+Let's get started with the installation and configuration!
+
 ## Installation
+
+<Tabs>
+<TabItem value="spm" label="SPM">
 
 ### SwiftPackageManager
 
@@ -22,7 +32,7 @@ dependencies: [
   .package(
     name: "Web3Modal",
     url: "https://github.com/WalletConnectV2/web3modal-swift.git",
-    .upToNextMajor(from: "1.0.11")
+    .upToNextMajor(from: "1.0.13")
   ),
 
   // Any other dependencies you have...
@@ -41,3 +51,22 @@ array of that target:
   ]
 ),
 ```
+</TabItem>
+<TabItem value="cocoapods" label="Cocoapods">
+
+1. Update Cocoapods spec repos. Type in terminal `pod repo update`
+2. Initialize Podfile if needed with `pod init`
+3. Add pod to your Podfile like this:
+
+```ruby
+pod 'Web3Modal', '~> 1.0'
+```
+
+4. Install pods with `pod install`
+If you encounter any problems during package installation, you can specify the exact path to the repository
+
+```ruby
+pod 'Web3Modal', :git => 'https://github.com/WalletConnect/web3modal-swift.git', :tag => '1.0.13'
+```
+</TabItem>
+</Tabs>

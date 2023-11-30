@@ -22,7 +22,7 @@ const isConnected = modal.getIsConnected()
 
 ### getWalletProvider
 
-A wallet provider instance, created with the ethers Web3Provider class.
+The wallet provider.
 
 ```ts
 const walletProvider = modal.getWalletProvider()
@@ -30,28 +30,15 @@ const walletProvider = modal.getWalletProvider()
 
 ### getWalletProviderType
 
-The wallet or protocol which the walletProvider was obtained from.
+The wallet or protocol of the walletProvider.
 
 ```ts
 const walletProviderType = modal.getWalletProviderType()
 ```
 
-### getSigner
-
-You can use the signer to sign messages or interact with smart contracts.
-
-```ts
-const signer = modal.getSigner()
-
-async function onSignMessage() {
-  const signature = await signer?.signMessage('Hello Web3Modal Ethers')
-  console.log(signature)
-}
-```
-
 ### subscribeProvider
 
-subscribe to chainId, address, provider and signer changes.
+subscribe to chainId, address, provider changes.
 
 ```ts
 function handleChange({ provider, providerType, address, chainId, isConnected }){
@@ -61,4 +48,4 @@ function handleChange({ provider, providerType, address, chainId, isConnected })
 modal.subscribeProvider(handleChange)
 ```
 
-<Button name="Learn More" url="https://docs.ethers.org/v5/getting-started/#getting-started--contracts" />
+<Button name="Learn More" url="https://docs.ethers.org/v6/getting-started/#starting-blockchain" />

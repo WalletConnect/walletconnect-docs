@@ -1,4 +1,3 @@
-import Table from '../../../components/Table'
 import Button from '../../../components/button'
 
 
@@ -7,7 +6,7 @@ import Button from '../../../components/button'
 Hook that returns the client's information.
 
 ```tsx
-import { useWeb3ModalAccount } from '@web3modal/ethers5/react'
+import { useWeb3ModalAccount } from '@web3modal/ethers/react'
 
 function Components() {
   const { address, chainId, isConnected } = useWeb3ModalAccount()
@@ -16,17 +15,20 @@ function Components() {
 }
 ```
 
-### useWeb3ModalSigner
+### useWeb3ModalProvider
 
-Hook that returns the `signer`, the `walletProvider` and the `WalletProviderType`.
+Hook that returns the `walletProvider` and the `WalletProviderType`.
 
 ```tsx
-import { useWeb3ModalSigner } from '@web3modal/ethers5/react'
+import { BrowserProvider } from 'ethers'
+import { useWeb3ModalProvider } from '@web3modal/ethers/react'
 
 function Components() {
-  const { signer } = useWeb3ModalSigner()
+  const { walletProvider } = useWeb3ModalProvider()
 
   async function onSignMessage() {
+    const provider = new BrowserProvider(walletProvider)
+    const signer = await provider.getSigner()
     const signature = await signer?.signMessage('Hello Web3Modal Ethers')
     console.log(signature)
   }
@@ -37,27 +39,4 @@ function Components() {
 }
 ```
 
-The **useWeb3ModalSigner** hook returns the following states:
-
-<Table
-  headers={['State', 'Description', 'Type']}
-  data={[
-    {
-      variable: { code: 'signer' },
-      description: 'The Signer object of the connected wallet.',
-      type: { code: 'ethers.providers.JsonRpcSigner' }
-    },
-    {
-      variable: { code: 'walletProvider' },
-      description: 'A wallet provider instance, created with the ethers Web3Provider class.',
-      type: { code: 'ethers.providers.Web3Provider' }
-    },
-    {
-      variable: { code: 'WalletProviderType' },
-      description: 'The wallet or protocol which the walletProvider was obtained from.',
-      type: { code: "'walletConnect' | 'injected' | 'coinbaseWallet' | 'eip6963'" }
-    }
-  ]}
-/>
-
-<Button name="Learn More About Ethers" url="https://docs.ethers.org/v5/getting-started/#getting-started--contracts" />
+<Button name="Learn More About Ethers" url="https://docs.ethers.org/v6/getting-started/#starting-blockchain" />
