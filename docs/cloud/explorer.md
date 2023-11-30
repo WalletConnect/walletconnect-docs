@@ -187,7 +187,7 @@ Your dapp is querying the deprecated [registry.walletconnect.org/data/wallets.js
 **Issues:**
 
 - [registry.walletconnect.org](https://registry.walletconnect.org) - the registry...org subdomain will be shut down.
-- The /data/wallets.json endpoint will be shut down.
+- The `/data/wallets.json` endpoint will be shut down.
 
 **Solution:**
 
