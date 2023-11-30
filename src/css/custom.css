@@ -1076,8 +1076,6 @@ article img {
   --gs-pill-bg: rgba(82, 101, 223, 0.5);
   --gs-pill-color: #f5f9fc;
   background: linear-gradient(135deg, hsla(250, 25%, 10%, 1) 0%, hsla(233.65, 64%, 32%, 1) 100%);
-  box-shadow: rgba(255, 255, 255, 0.1) 0px 1px 1px 0px inset,
-    rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
   border-color: hsla(233.65, 15%, 33%, 1);
 }
 
@@ -1099,21 +1097,21 @@ article img {
   --gs-pill-bg: rgba(82, 101, 223, 0.5);
   --gs-pill-color: #f5f9fc;
 
-  background: linear-gradient(135deg, hsla(250, 25%, 80%, 1) 0%, hsla(233.65, 64%, 40%, 1) 100%);
+  background: linear-gradient(135deg, hsla(250, 25%, 88%, 1) 0%, hsla(233.65, 64%, 50%, 1) 100%);
   border-width: 0;
 }
 
 [data-theme='light'] .gs__wrapper--w3w {
   --gs-pill-bg: rgba(135, 70, 223, 0.5);
   --gs-pill-color: #faf5fc;
-  background: linear-gradient(135deg, hsla(260, 25%, 80%, 1) 0%, hsla(260, 68%, 40%, 1) 100%);
+  background: linear-gradient(135deg, hsla(260, 25%, 88%, 1) 0%, hsla(260, 68%, 50%, 1) 100%);
   border-width: 0;
 }
 
 [data-theme='light'] .gs__wrapper--w3i {
   --gs-pill-bg: rgba(39, 115, 101, 0.5);
   --gs-pill-color: #f2fafa;
-  background: linear-gradient(135deg, hsla(161.45, 25%, 80%, 1) 0%, hsla(161.45, 66%, 40%, 1) 100%);
+  background: linear-gradient(135deg, hsla(161.45, 25%, 88%, 1) 0%, hsla(161.45, 66%, 40%, 1) 100%);
   border-width: 0;
 }
 
