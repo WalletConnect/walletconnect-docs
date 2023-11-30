@@ -15,7 +15,7 @@ module.exports = {
       label: 'Introduction',
       className: 'menu_outer_list',
       collapsible: false,
-      items: ['readme', 'quickstart']
+      items: ['readme', 'getting-started', 'quickstart']
     },
     {
       type: 'category',
@@ -185,7 +185,9 @@ module.exports = {
           collapsible: true,
           items: [
             {
-              type: 'category', label: 'Apps', items: [
+              type: 'category',
+              label: 'Apps',
+              items: [
                 'web3inbox/about',
                 'web3inbox/domain-setup',
                 {
@@ -203,9 +205,17 @@ module.exports = {
                   type: 'category',
                   label: 'Authorization Signatures',
                   items: [
-                    { type: 'doc', label: "About", id: 'web3inbox/authorization-signatures/about' },
-                    { type: 'doc', label: "This App", id: 'web3inbox/authorization-signatures/this-app' },
-                    { type: 'doc', label: "All Apps", id: 'web3inbox/authorization-signatures/all-apps' }
+                    { type: 'doc', label: 'About', id: 'web3inbox/authorization-signatures/about' },
+                    {
+                      type: 'doc',
+                      label: 'This App',
+                      id: 'web3inbox/authorization-signatures/this-app'
+                    },
+                    {
+                      type: 'doc',
+                      label: 'All Apps',
+                      id: 'web3inbox/authorization-signatures/all-apps'
+                    }
                   ]
                 }
               ]
