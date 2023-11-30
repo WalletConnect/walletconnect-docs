@@ -84,3 +84,92 @@ npm install @web3modal/ethers ethers
 
 </PlatformTabItem>
 </PlatformTabs>
+
+## Smart Contract Interaction
+
+<PlatformTabs groupId="eth-lib" activeOptions={["wagmi","ethers5", "ethers"]}>
+<PlatformTabItem value="wagmi">
+
+```tsx
+import { readContract } from '@wagmi/core'
+import { USDTAbi } from '../abi/USDTAbi'
+
+const USDTAddress = '0x...'
+
+const data = readContract({
+  address: USDTAddress,
+  abi: USDTAbi,
+  functionName: 'symbol',
+})
+```
+
+Read more about Wagmi actions for smart contract interaction [here](https://wagmi.sh/core/actions/readContract).
+
+</PlatformTabItem>
+<PlatformTabItem value="ethers5">
+
+```tsx
+import { ethers } from 'ethers'
+
+const USDTAddress = '0x...'
+
+// The ERC-20 Contract ABI, which is a common contract interface
+// for tokens (this is the Human-Readable ABI format)
+const USDTAbi = [
+  "function name() view returns (string)",
+  "function symbol() view returns (string)",
+  "function balanceOf(address) view returns (uint)",
+  "function transfer(address to, uint amount)",
+  "event Transfer(address indexed from, address indexed to, uint amount)"
+];
+
+const walletProvider = modal.getWalletProvider()
+
+async function getBalance(){
+  if(!walletProvider) throw Error("User disconnected")
+
+  const ethersProvider =  new ethers.providers.Web3Provider(walletProvider)
+  const signer = await ethersProvider.getSigner()
+  // The Contract object
+  const USDTContract = new ethers.Contract(USDTAddress, USDTAbi, signer)
+  const USDTBalance = await USDTContract.balanceOf(address)
+
+  console.log(ethers.utils.formatUnits(USDTBalance, 18))
+}
+```
+
+</PlatformTabItem>
+<PlatformTabItem value="ethers">
+
+```tsx
+import { BrowserProvider, Contract, formatUnits } from 'ethers'
+
+const USDTAddress = '0x617f3112bf5397D0467D315cC709EF968D9ba546'
+
+// The ERC-20 Contract ABI, which is a common contract interface
+// for tokens (this is the Human-Readable ABI format)
+const USDTAbi = [
+  "function name() view returns (string)",
+  "function symbol() view returns (string)",
+  "function balanceOf(address) view returns (uint)",
+  "function transfer(address to, uint amount)",
+  "event Transfer(address indexed from, address indexed to, uint amount)"
+];
+
+const walletProvider = modal.getWalletProvider()
+
+async function getBalance(){
+  if(!isConnected) throw Error("User disconnected")
+
+  const ethersProvider =  new BrowserProvider(walletProvider)
+  const signer = await ethersProvider.getSigner()
+  // The Contract object
+  const USDTContract = new Contract(USDTAddress, USDTAbi, signer)
+  const USDTBalance = await USDTContract.balanceOf(address)
+
+  console.log(formatUnits(USDTBalance, 18))
+}
+```
+
+</PlatformTabItem>
+</PlatformTabs>
