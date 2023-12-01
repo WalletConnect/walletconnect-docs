@@ -12,7 +12,7 @@ This section provides instructions on how to initialize the Web3Wallet client, a
 
 <PlatformTabs
 	groupId="wcm"
-	activeOptions={["web","ios","android","flutter","react-native"]}
+	activeOptions={["web","ios","android","flutter","react-native", "unity"]}
 >
 <PlatformTabItem value="web">
 
@@ -313,13 +313,21 @@ function App() {
 ```
 
 </PlatformTabItem>
+
+<PlatformTabItem value="unity">
+
+1. Add Name of your game (can be anything) and your Project ID to the `Assets/WalletConnectUnity/Resources/WalletConnectProjectConfig` asset.
+    - If you don't have Project ID, you can create one in [WalletConnect Cloud](https://cloud.walletconnect.com).
+2. Add `WalletConnectModal` prefab from `WalletConnectUnity Modal` package to the first scene in your game.
+
+</PlatformTabItem>
 </PlatformTabs>
 
 ## Usage
 
 <PlatformTabs
 	groupId="wcm"
-	activeOptions={["web","ios","android","flutter", "react-native"]}
+	activeOptions={["web","ios","android","flutter", "react-native", "unity"]}
 >
 
 <PlatformTabItem value="web">
@@ -729,6 +737,96 @@ function App() {
   )
 }
 ```
+
+</PlatformTabItem>
+<PlatformTabItem value="unity">
+
+#### Connection and Events
+- WalletConnect Modal is a singleton that can be accessed from any scene.
+- By default Modal will initialize itself asynchronously on Awake. During initialization it will also try to connect
+to the last
+session.
+- After initialization, Modal invokes `WalletConnectModal.Ready` static event.
+- If `Ready` argument's `SessionResumed` is `true`, it means that Modal has successfully connected to the last
+session. In this case you don't need to open the modal. Otherwise, open the modal with `WalletConnectModal.Open()`
+static method.
+
+```csharp
+private void Start()
+{
+    WalletConnectModal.Ready += (sender, args) =>
+    {
+        if (args.SessionResumed)
+        {
+            // Session has been resumed, proceed to the game
+        }
+        else
+        {
+            // Session hasn't been resumed
+
+            // Define required namespaces for new session
+            var requiredNamespaces = new RequiredNamespaces
+            {
+                {
+                    "eip155", new ProposedNamespace
+                    {
+                        Methods = new[]
+                        {
+                            "eth_sendTransaction",
+                            "personal_sign",
+                            "eth_signTypedData"
+                        },
+                        Chains = new[]
+                        {
+                            "eip155:1"
+                        },
+                        Events = new[]
+                        {
+                            "chainChanged",
+                            "accountsChanged"
+                        }
+                    }
+                }
+            };
+
+            var connectOptions = new ConnectOptions
+            {
+                RequiredNamespaces = requiredNamespaces
+            };
+
+            // Open the modal
+            WalletConnectModal.Open(new WalletConnectModalOptions
+            {
+                ConnectOptions = connectOptions
+            });
+        }
+    };
+}
+```
+
+Subscribe to `ActiveSessionChanged` and `SessionDeleted` events. It's recommended to do it in `Ready` event handler.
+
+```csharp
+WalletConnectModal.Ready += (sender, args) =>
+{
+    // ....
+
+    // Invoked after wallet connected
+    WalletConnect.Instance.ActiveSessionChanged += (_, sessionStruct) =>
+    {
+        // Session connected/updated, proceed to the game
+    };
+
+    // Invoked after wallet disconnected
+    WalletConnectModal.SignClient.SessionDeleted += (_, sessionEvent) =>
+    {
+        // Session deleted, show sign in screen
+    };
+};
+```
+
+#### Disconnection
+To disconnect from the current session, call `WalletConnectModal.Disconnect()` static method.
 
 </PlatformTabItem>
 </PlatformTabs>
