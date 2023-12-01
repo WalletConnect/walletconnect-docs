@@ -51,34 +51,6 @@ Chain Switching enables users to experience a seamless chain agnostic UX. In Wal
   <source src="/assets/chain-switching-ios.mov" type="video/mp4" />
 </video>
 
-## ✍🏻 **Auth API**
-
-Auth API plays a critical role when dapps offer off-chain signatures. Wallets should authenticate dapps via this API, which can be tested [here](https://react-auth-dapp.vercel.app/).
-
-- **Docs:** [https://docs.walletconnect.com/api/auth/overview](../../../api/auth/overview)
-- **Test Dapp:** [https://react-auth-dapp.vercel.app/](https://react-auth-dapp.vercel.app/)
-- **JS docs:** [https://docs.walletconnect.com/api/auth/overview?platform=web](../../../api/auth/overview?platform=web)
-
-### Android 🤖
-
-📕 **Kotlin docs →** [https://docs.walletconnect.com/web3wallet/wallet-usage?platform=android#auth-requests](../../../web3wallet/wallet-usage?platform=android#auth-requests)
-
-📱**Example app** → [Link](https://github.com/WalletConnect/WalletConnectKotlinV2/tree/develop/sample/wallet)
-
-<video controls width="448" height="336">
-  <source src="/assets/auth-android.mov" type="video/mp4" />
-</video>
-
-### iOS 🍏
-
-📕 **Swift docs →** [https://docs.walletconnect.com/web3wallet/wallet-usage?platform=ios#auth-requests](../../../web3wallet/wallet-usage?platform=ios#auth-requests)
-
-📱**Example app** → [Link](https://github.com/WalletConnect/WalletConnectSwiftV2/blob/cd55d281ae7cb3c5d14524d0147b9d557cdd1af5/Example/WalletApp/PresentationLayer/Wallet/SessionProposal/SessionProposalInteractor.swift#L6)
-
-<video controls width="448" height="336">
-  <source src="/assets/auth-ios.mov" type="video/mp4" />
-</video>
-
 ## 🔄 **Automatic Redirect**
 
 Automatic Redirect assesses the user flow after the wallet signs and authorizes an account. The test involves verifying the wallet's ability to redirect to the dapp after a user signs or sends a transaction. Use this [Test Dapp](https://lab.web3modal.com) to evaluate.
