@@ -11,6 +11,6 @@ To ensure a positive end-user experience, it's essential to protect users and wa
     - The client generates a CAIP-122 (SIWE) message that authorizes the keypair to control subscriptions for a specific app (or in the case of a wallet, all apps) for the user's account. The user then signs this message with their wallet. We call this an [Identity Key](https://specs.walletconnect.com/2.0/specs/clients/core/identity/identity-keys).
     - The client then uses the Identity Key to sign requests to create, read, update, or delete notification subscriptions.
 2. The opt-in process allows the user to customize which notification types they'd like to receive from the app (e.g. promotional, transactional, etc.). The user can change these at any time. The user can also opt-out at any time by unsubscribing from the app or editing their OS notification preferences to ignore notifications from that particular app (assuming their wallet implements this).
-3. Notifications from an app to an account are rate limited. See our [rate limits](/web3inbox/sending-notifications#limits) for more details.
+3. Notifications from an app to an account are rate limited. See our [rate limits](/web3inbox/sending-notifications#rate-limits) for more details.
 
 We are also working on some more advanced spam mitigation strategies including publisher scoring based on heuristics such as open rate and manually reported spam complaints.
