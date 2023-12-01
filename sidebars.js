@@ -43,10 +43,7 @@ module.exports = {
                 {
                   type: 'category',
                   label: 'SIWE',
-                  items: [
-                    'web3modal/react/siwe/about',
-                    'web3modal/react/siwe/usage',
-                  ]
+                  items: ['web3modal/react/siwe/about', 'web3modal/react/siwe/usage']
                 },
                 'web3modal/react/theming',
                 'web3modal/react/resources'
@@ -67,6 +64,7 @@ module.exports = {
                   items: [
                     'web3modal/nextjs/siwe/about',
                     'web3modal/nextjs/siwe/usage',
+                    'web3modal/nextjs/siwe/next-auth'
                   ]
                 },
                 'web3modal/nextjs/theming',
@@ -85,10 +83,7 @@ module.exports = {
                 {
                   type: 'category',
                   label: 'SIWE',
-                  items: [
-                    'web3modal/vue/siwe/about',
-                    'web3modal/vue/siwe/usage',
-                  ]
+                  items: ['web3modal/vue/siwe/about', 'web3modal/vue/siwe/usage']
                 },
                 'web3modal/vue/theming',
                 'web3modal/vue/resources'
@@ -106,10 +101,7 @@ module.exports = {
                 {
                   type: 'category',
                   label: 'SIWE',
-                  items: [
-                    'web3modal/javascript/siwe/about',
-                    'web3modal/javascript/siwe/usage',
-                  ]
+                  items: ['web3modal/javascript/siwe/about', 'web3modal/javascript/siwe/usage']
                 },
                 'web3modal/javascript/theming',
                 'web3modal/javascript/resources'
@@ -217,7 +209,9 @@ module.exports = {
           collapsible: true,
           items: [
             {
-              type: 'category', label: 'Apps', items: [
+              type: 'category',
+              label: 'Apps',
+              items: [
                 'web3inbox/about',
                 'web3inbox/domain-setup',
                 {
