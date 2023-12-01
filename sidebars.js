@@ -40,6 +40,11 @@ module.exports = {
                 'web3modal/react/hooks',
                 'web3modal/react/options',
                 'web3modal/react/components',
+                {
+                  type: 'category',
+                  label: 'SIWE',
+                  items: ['web3modal/react/siwe/about', 'web3modal/react/siwe/usage']
+                },
                 'web3modal/react/theming',
                 'web3modal/react/resources'
               ]
@@ -53,6 +58,15 @@ module.exports = {
                 'web3modal/nextjs/hooks',
                 'web3modal/nextjs/options',
                 'web3modal/nextjs/components',
+                {
+                  type: 'category',
+                  label: 'SIWE',
+                  items: [
+                    'web3modal/nextjs/siwe/about',
+                    'web3modal/nextjs/siwe/usage',
+                    'web3modal/nextjs/siwe/next-auth'
+                  ]
+                },
                 'web3modal/nextjs/theming',
                 'web3modal/nextjs/resources'
               ]
@@ -66,6 +80,11 @@ module.exports = {
                 'web3modal/vue/composables',
                 'web3modal/vue/options',
                 'web3modal/vue/components',
+                {
+                  type: 'category',
+                  label: 'SIWE',
+                  items: ['web3modal/vue/siwe/about', 'web3modal/vue/siwe/usage']
+                },
                 'web3modal/vue/theming',
                 'web3modal/vue/resources'
               ]
@@ -79,6 +98,11 @@ module.exports = {
                 'web3modal/javascript/actions',
                 'web3modal/javascript/options',
                 'web3modal/javascript/components',
+                {
+                  type: 'category',
+                  label: 'SIWE',
+                  items: ['web3modal/javascript/siwe/about', 'web3modal/javascript/siwe/usage']
+                },
                 'web3modal/javascript/theming',
                 'web3modal/javascript/resources'
               ]
@@ -185,7 +209,9 @@ module.exports = {
           collapsible: true,
           items: [
             {
-              type: 'category', label: 'Apps', items: [
+              type: 'category',
+              label: 'Apps',
+              items: [
                 'web3inbox/about',
                 'web3inbox/domain-setup',
                 {
