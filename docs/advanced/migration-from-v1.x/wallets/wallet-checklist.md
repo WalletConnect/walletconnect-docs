@@ -51,14 +51,6 @@ Chain Switching enables users to experience a seamless chain agnostic UX. In Wal
   <source src="/assets/chain-switching-ios.mov" type="video/mp4" />
 </video>
 
-## ✍🏻 **Auth API**
-
-Auth API plays a critical role when dapps offer off-chain signatures. Wallets should authenticate dapps via this API, which can be tested [here](https://react-auth-dapp.vercel.app/).
-
-- **Docs:** [https://docs.walletconnect.com/api/auth/overview](../../../api/auth/overview)
-- **Test Dapp:** [https://react-auth-dapp.vercel.app/](https://react-auth-dapp.vercel.app/)
-- **JS docs:** [https://docs.walletconnect.com/api/auth/overview?platform=web](../../../api/auth/overview?platform=web)
-
 ### Android 🤖
 
 📕 **Kotlin docs →** [https://docs.walletconnect.com/web3wallet/wallet-usage?platform=android#auth-requests](../../../web3wallet/wallet-usage?platform=android#auth-requests)
