@@ -1,12 +1,19 @@
+:::caution
+**The Web3Modal SIWE SDK is currently in Alpha and is not production-ready**.
+
+It's public API and associated documentation may still see significant and breaking changes.
+:::
+
 ## Install the Web3Modal SIWE package.
 
 ```bash npm2yarn
-npm install @web3modal/siwe
+npm i @web3modal/siwe@3.4.0-alpha.0 siwe
 ```
 
 ## Configure your SIWE Client
 
 ```js
+import { SiweMessage } from 'siwe'
 import { createSIWEConfig } from '@web3modal/siwe'
 import type { SIWECreateMessageArgs, SIWESession, SIWEVerifyMessageArgs } from '@web3modal/core'
 
@@ -23,7 +30,8 @@ const siweConfig = createSIWEConfig({
       statement: 'Sign in With Ethereum.'
     }).prepareMessage(),
   getNonce: async () => {
-    const nonce = await getCsrfToken()
+    // Fetch nonce from your SIWE server
+    const nonce = await getNonce()
     if (!nonce) {
       throw new Error('Failed to get nonce!')
     }
@@ -31,34 +39,31 @@ const siweConfig = createSIWEConfig({
     return nonce
   },
   getSession: async () => {
+    // Fetch currently authenticated user
     const session = await getSession()
     if (!session) {
       throw new Error('Failed to get session!')
     }
 
-    const { address, chainId } = session as unknown as SIWESession
+    const { address, chainId } = session
 
     return { address, chainId }
   },
   verifyMessage: async ({ message, signature }: SIWEVerifyMessageArgs) => {
     try {
-      const success = await signIn('credentials', {
-        message,
-        redirect: false,
-        signature,
-        callbackUrl: '/protected'
-      })
-
-      return Boolean(success?.ok)
+      // Use your SIWE server to verify if the message and the signature are valid
+      // Your back-end will tipically rely on SiweMessage(message).validate(signature)
+      const isValid = await validateMessage({ message, signature })
+ 
+      return isValid
     } catch (error) {
       return false
     }
   },
   signOut: async () => {
     try {
-      await signOut({
-        redirect: false
-      })
+      // Sign out by calling the relevant endpoint on your back-end
+      await signOut()
 
       return true
     } catch (error) {

@@ -4,17 +4,136 @@
 It's public API and associated documentation may still see significant and breaking changes.
 :::
 
+## About NextAuth
+[NextAuth](https://next-auth.js.org/) is a complete open-source authentication solution for Next.js applications.
+
+It is designed from the ground up to support Next.js and Serverless.
+
 ## Install the Web3Modal SIWE package.
 
 ```bash npm2yarn
-npm i @web3modal/siwe@3.4.0-alpha.0 siwe
+npm i @web3modal/siwe@3.4.0-alpha.0 siwe ethers next-auth
+```
+
+## Set up your API route
+
+Add `NEXTAUTH_SECRET` as an environment variable, it will be used to encrypt and decrypt user sessions.
+
+Create your API route `api/auth/[...nextauth].ts` and paste the following code into it.
+
+```ts
+import type { SIWESession } from '@web3modal/core'
+import type { NextApiRequest, NextApiResponse } from 'next'
+import type { DefaultSession } from 'next-auth'
+import nextAuth from 'next-auth'
+import credentialsProvider from 'next-auth/providers/credentials'
+import { getCsrfToken } from 'next-auth/react'
+import { SiweMessage } from 'siwe'
+import { ethers } from 'ethers'
+
+declare module 'next-auth' {
+  interface Session extends SIWESession {
+    user?: DefaultSession['user']
+  }
+}
+
+/*
+ * For more information on each option (and a full list of options) go to
+ * https://next-auth.js.org/configuration/options
+ */
+export default async function auth(req: NextApiRequest, res: NextApiResponse) {
+  const nextAuthSecret = process.env['NEXTAUTH_SECRET']
+  if (!nextAuthSecret) {
+    throw new Error('NEXTAUTH_SECRET is not set')
+  }
+
+  const providers = [
+    credentialsProvider({
+      name: 'Ethereum',
+      credentials: {
+        message: {
+          label: 'Message',
+          type: 'text',
+          placeholder: '0x0'
+        },
+        signature: {
+          label: 'Signature',
+          type: 'text',
+          placeholder: '0x0'
+        }
+      },
+      async authorize(credentials) {
+        try {
+          if (!credentials?.message) {
+            throw new Error('SiweMessage is undefined')
+          }
+          const siwe = new SiweMessage(credentials.message)
+          const provider = new ethers.InfuraProvider(siwe.chainId)
+          const nonce = await getCsrfToken({ req: { headers: req.headers } })
+          const result = await siwe.verify(
+            {
+              signature: credentials?.signature || '',
+              nonce
+            },
+            {
+              provider
+            }
+          )
+
+          if (result.success) {
+            return {
+              id: `eip155:${siwe.chainId}:${siwe.address}`
+            }
+          }
+
+          return null
+        } catch (e) {
+          return null
+        }
+      }
+    })
+  ]
+
+  const isDefaultSigninPage = req.method === 'GET' && req.query?.['nextauth']?.includes('signin')
+
+  // Hide Sign-In with Ethereum from default sign page
+  if (isDefaultSigninPage) {
+    providers.pop()
+  }
+
+  return await nextAuth(req, res, {
+    // https://next-auth.js.org/configuration/providers/oauth
+    providers,
+    session: {
+      strategy: 'jwt'
+    },
+    secret: nextAuthSecret,
+    callbacks: {
+      session({ session, token }) {
+        if (!token.sub) {
+          return session
+        }
+
+        const [, chainId, address] = token.sub.split(':')
+
+        if (chainId && address) {
+          session.address = address
+          session.chainId = parseInt(chainId, 10)
+        }
+
+        return session
+      }
+    }
+  })
+}
 ```
 
 ## Configure your SIWE Client
 
-```js
+```ts
 import { SiweMessage } from 'siwe'
 import { createSIWEConfig } from '@web3modal/siwe'
+import { getCsrfToken, signIn, signOut, getSession } from 'next-auth/react'
 import type { SIWECreateMessageArgs, SIWESession, SIWEVerifyMessageArgs } from '@web3modal/core'
 
 const siweConfig = createSIWEConfig({
@@ -30,8 +149,7 @@ const siweConfig = createSIWEConfig({
       statement: 'Sign in With Ethereum.'
     }).prepareMessage(),
   getNonce: async () => {
-    // Fetch nonce from your SIWE server
-    const nonce = await getNonce()
+    const nonce = await getCsrfToken()
     if (!nonce) {
       throw new Error('Failed to get nonce!')
     }
@@ -39,31 +157,34 @@ const siweConfig = createSIWEConfig({
     return nonce
   },
   getSession: async () => {
-    // Fetch currently authenticated user
     const session = await getSession()
     if (!session) {
       throw new Error('Failed to get session!')
     }
 
-    const { address, chainId } = session
+    const { address, chainId } = session as unknown as SIWESession
 
     return { address, chainId }
   },
   verifyMessage: async ({ message, signature }: SIWEVerifyMessageArgs) => {
     try {
-      // Use your SIWE server to verify if the message and the signature are valid
-      // Your back-end will tipically rely on SiweMessage(message).validate(signature)
-      const isValid = await validateMessage({ message, signature })
- 
-      return isValid
+      const success = await signIn('credentials', {
+        message,
+        redirect: false,
+        signature,
+        callbackUrl: '/protected'
+      })
+
+      return Boolean(success?.ok)
     } catch (error) {
       return false
     }
   },
   signOut: async () => {
     try {
-      // Sign out by calling the relevant endpoint on your back-end
-      await signOut()
+      await signOut({
+        redirect: false
+      })
 
       return true
     } catch (error) {
@@ -83,6 +204,26 @@ createWeb3Modal({
   projectId,
   chains
 })
+```
+
+## Add the SessionProvider in your `_app.tsx`
+
+```tsx
+import { SessionProvider } from 'next-auth/react'
+// Use of the <SessionProvider> is mandatory to allow components that call
+// `useSession()` anywhere in your application to access the `session` object.
+export default function App({
+  Component,
+  pageProps,
+}: AppProps<{
+  session: Session;
+}>) {
+  return (
+    <SessionProvider session={pageProps.session} refetchInterval={0}>
+      <Component {...pageProps} />
+    </SessionProvider>
+  )
+}
 ```
 
 ### SIWE Config reference
@@ -174,4 +315,3 @@ Users will be signed out and redirected to the SIWE view to sign a new message i
 #### signOutOnNetworkChange `boolean` - defaults to true
 
 Users will be signed out and redirected to the SIWE view to sign a new message in order to keep the SIWE session in sync with the connected account/network.
-
