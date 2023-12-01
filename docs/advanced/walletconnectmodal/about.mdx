@@ -21,7 +21,7 @@ WalletConnectModal is a simple ui library intended for advanced use cases where 
 
 <PlatformTabs
 	groupId="wcm"
-	activeOptions={["web","ios","android", "react-native","flutter"]}
+	activeOptions={["web","ios","android", "react-native","flutter","unity"]}
 >
 <PlatformTabItem value="web">
 
@@ -311,6 +311,70 @@ Install the WalletConnect Modal package.
 flutter pub add walletconnect_modal_flutter
 ```
 
+</PlatformTabItem>
+<PlatformTabItem value="unity">
+
+
+:::caution
+**The WalletConnectModal SDK is currently in Beta and is not production-ready**.
+
+It's public API, prefab structure, and associated documentation may still see significant and breaking changes.
+:::
+
+#### Prerequisites
+* Unity 2021.3 or above
+* IL2CPP code stripping level: Minimal (or lower)
+
+<Tabs>
+
+<TabItem value="openupm-cli" label="OpenUPM CLI">
+
+To install packages via OpenUPM, you need to have [Node.js](https://nodejs.org/en/) and [openupm-cli](https://openupm.com/docs/getting-started.html#installing-openupm-cli) installed. Once you have them installed, you can run the following commands:
+
+```bash
+openupm add com.walletconnect.modal
+```
+</TabItem>
+
+<TabItem value="pm-openupm" label="Package Manager with OpenUPM">
+
+1. Open `Advanced Project Settings` from the gear ⚙ menu located at the top right of the Package Manager’s toolbar
+2. Add a new scoped registry with the following details:
+    - Name: `OpenUPM`
+    - URL: `https://package.openupm.com`
+    - Scope(s): `com.walletconnect`
+3. Press plus ➕ and then `Save` buttons
+4. In the Package Manager windows open the add ➕ menu from the toolbar
+5. Select `Add package by name...`
+6. Enter the npackage name:
+    - `com.walletconnect.modal`
+7. Press `Add` button
+
+</TabItem>
+
+<TabItem value="pm-git-utl" label="Package Manager with Git URL">
+
+1. Open the add ➕  menu in the Package Manager’s toolbar
+2. Select `Add package from git URL...`
+3. Enter the package URL. You will need to install 3 packages in the following order:
+
+**WalletConnectUnity Core**
+```
+https://github.com/WalletConnect/WalletConnectUnity.git?path=Packages/com.walletconnect.core
+```
+**WalletConnectUnity UI**
+```
+https://github.com/WalletConnect/WalletConnectUnity.git?path=Packages/com.walletconnect.ui
+```
+
+**WalletConnectUnity Modal**
+```
+https://github.com/WalletConnect/WalletConnectUnity.git?path=Packages/com.walletconnect.modal
+```
+4. Press `Add` button
+
+</TabItem>
+</Tabs>
 </PlatformTabItem>
 </PlatformTabs>
 
