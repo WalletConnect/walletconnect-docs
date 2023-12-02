@@ -121,10 +121,10 @@ curl 'https://notify.walletconnect.com/<PROJECT_ID>/subscribers' \
 
 To protect our system and subscribers, various limits and rate limits are in-place.
 
-Rate limits are implemented as [token bucket](https://en.wikipedia.org/wiki/Token_bucket) and contain both rate and burst values. On average, a rate of requests can be made. However, since real-world applications often make requests in bursts, this fixed rate can be surpassed temporarily up to the burst value, provided the app subsequently makes requests below the average in order to recover its bursting capability.
+Rate limits are implemented as [token bucket](https://en.wikipedia.org/wiki/Token_bucket) and contain both rate and burst amounts. On average, a rate of requests can be made. However, since real-world applications often make requests in bursts, this fixed rate can be surpassed temporarily up to the burst amount, provided the app subsequently makes requests below the average in order to recover its bursting capability.
 
 - `POST /notify`:
   - Each app can send 2 notifications per hour to an account, with a burst up to 50. Accounts that have been rate limited will be returned in the request response. Exceptions may be made on a per-project basis for special circumstances.
-  - Each app can call this endpoint 1 time per second with a burst up to 5. Rate limited requests will return a 429 status code.
+  - Each app can call this endpoint 2 times per second with a burst up to 20. Rate limited requests will return a 429 status code.
 - `GET /subscribers`
   - Each app can call this endpoint 1 time per second with a burst up to 5. Rate limited requests will return a 429 status code.
