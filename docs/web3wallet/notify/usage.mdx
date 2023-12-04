@@ -1,9 +1,5 @@
-import Container from '../../components/Container'
-import Tabs from '@theme/Tabs'
-import TabItem from '@theme/TabItem'
 import PlatformTabs from '../../components/PlatformTabs'
 import PlatformTabItem from '../../components/PlatformTabItem'
-import Wrapper from '../../components/Home/Wrapper'
 import CloudBanner from '../../components/CloudBanner'
 
 # Usage
@@ -14,27 +10,27 @@ In this section, we showcase the aspects of using the Notify API. We'll guide yo
 
 Links to sections on this page. Some sections are platform specific and are only visible when the platform is selected. To view a summary of useful platform specific topics, check out Extra (Platform Specific) under this section.
 
-- Initialization:
+- [Initialization](#initialization):
   Creating a new Notify Client instance and initializing it with a projectId from [Cloud](https://cloud.walletconnect.com/).
-- Account login: 
+- [Account login](#account-login): 
   A SIWE message must be signed by the user in order to authorize the client to use Notify API
-- Subscribing to a new dapp: 
+- [Subscribing to a new dapp](#subscribing-to-a-new-dapp): 
   Opt-in to receive notifications from dapp
-- Fetching active subscriptions: 
+- [Fetching active subscriptions](#fetching-active-subscriptions): 
   Get active subscriptions
-- Fetching subscription’s notification: 
+- [Fetching subscription’s notification](#fetching-subscription’s-notifications): 
   Get notifications of a subscription
-- Updating subscriptions notification settings: 
+- [Updating subscriptions notification settings](#updating-subscriptions-notification-settings): 
   Change allowed notification types sent by dapp
-- Fetching available notification types: 
+- [Fetching available notification types](#fetching-available-notification-types): 
   Get latest notification types
-- Unsubscribe from a dapp: 
+- [Unsubscribe from a dapp](#unsubscribe-from-a-dapp): 
   Opt-out from receiving notifications from a dapp
-- Delete subscription message: 
+- [Delete subscription message](#delete-subscription-message): 
   Delete a single message from local storage
-- Account logout: 
+- [Account logout](#account-logout):
   To stop receiving notifications to this client, accounts can logout of using Notify API
-- Push Notification best practices: 
+- [Push Notification best practices](#push-notification-best-practices): 
   Guidelines on how to implement Push Notifications across different platforms
 
 
@@ -42,9 +38,9 @@ Links to sections on this page. Some sections are platform specific and are only
 section are:
 
 
-- Firebase Cloud Messaging setup **(Android)**:
+- [Firebase Cloud Messaging setup **(Android)**](?platform=android#firebase-cloud-messaging-setup):
   Configuring `FirebaseMessagingService` wrapper in order to decrypt notifications
-- NotifyClient.Delegate **(Android)**: 
+- [NotifyClient.Delegate **(Android)**](?platform=android#notifyclientdelegate): 
   Setting and overriding functions through NotifyDelegate.
 - @Artur are there any iOS platform specific sections to be added?
 
@@ -282,7 +278,7 @@ Once a notification is viewed, you may want to remove the message from the clien
 </PlatformTabs>
 
 
-## Account unregistration
+## Account logout
 
 If an account is removed from the client or a user no longer wants to receive notifications for this account, you can logout the account from Notify API by calling **`NotifyClient.unregister()`**. This will remove all subscriptions and messages for this account from the client’s storage.
 
