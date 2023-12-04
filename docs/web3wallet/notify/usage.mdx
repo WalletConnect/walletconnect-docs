@@ -8,11 +8,51 @@ import CloudBanner from '../../components/CloudBanner'
 
 # Usage
 
-This usage step is to configure and use Notify in your project.
+In this section, we showcase the aspects of using the Notify API. We'll guide you through the initial steps of initializing the Notify client and logging in a blockchain account. You'll also learn how to manage your subscriptions and messages. Additionally, we cover the process of setting up and displaying push notifications on your preferred platform. To ensure a good user experience, we include best practices for spam protection, helping you to enable the users to maintain control over the notifications wallet receives.
+
+## Content
+
+Links to sections on this page. Some sections are platform specific and are only visible when the platform is selected. To view a summary of useful platform specific topics, check out Extra (Platform Specific) under this section.
+
+- Initialization:
+  Creating a new Notify Client instance and initializing it with a projectId from [Cloud](https://cloud.walletconnect.com/).
+- Account login: 
+  A SIWE message must be signed by the user in order to authorize the client to use Notify API
+- Subscribing to a new dapp: 
+  Opt-in to receive notifications from dapp
+- Fetching active subscriptions: 
+  Get active subscriptions
+- Fetching subscription’s notification: 
+  Get notifications of a subscription
+- Updating subscriptions notification settings: 
+  Change allowed notification types sent by dapp
+- Fetching available notification types: 
+  Get latest notification types
+- Unsubscribe from a dapp: 
+  Opt-out from receiving notifications from a dapp
+- Delete subscription message: 
+  Delete a single message from local storage
+- Account logout: 
+  To stop receiving notifications to this client, accounts can logout of using Notify API
+- Push Notification best practices: 
+  Guidelines on how to implement Push Notifications across different platforms
+
+
+**Extra (Platform Specific)**: Additional information for platform specific usage. Some useful topics covered in this 
+section are:
+
+
+- Firebase Cloud Messaging setup **(Android)**:
+  Configuring `FirebaseMessagingService` wrapper in order to decrypt notifications
+- NotifyClient.Delegate **(Android)**: 
+  Setting and overriding functions through NotifyDelegate.
+- @Artur are there any iOS platform specific sections to be added?
+
+To check the full list of platform specific instructions for your preferred platform, go to [Extra (Platform Specific)](#extra-platform-specific) and select your platform.
+
+## Initialization
 
 <CloudBanner />
-
-## Client Setup
 
 <PlatformTabs
 	groupId="w3w"
@@ -96,440 +136,217 @@ const notifyClient = await NotifyClient.init({
 </PlatformTabItem>
 </PlatformTabs>
 
-## Usage
+## Account login
 
-<PlatformTabs
-	groupId="w3w"
-	activeOptions={["ios","android", "react-native"]}
->
+:::caution
+Update me after new specs change of the new registration flow
+:::
+
+The NotifyClient, once [initialized](#initialization), requires the registration of a [CAIP-10 account](https://github.com/ChainAgnostic/CAIPs/blob/master/CAIPs/caip-10.md) to receive notifications for given blockchain account
+
+**`NotifyClient.register`**: This method is utilized to authenticate ownership of a blockchain account during the registration of Identity Keys with [WalletConnect's Keys Server](../../specs/servers/keys/readme.md). It requires end users to sign a message using the **`onSign(message: String)`** callback. Presently, the Keys Server supports only EIP191 signatures. The use of Identity Keys aims to enhance the User Experience by reducing the frequency of signature requests while maintaining authenticated actions. 
+
+Message in **`onSign(message: String)`** is a SIWE message that varies depending if the app is requesting access to manage all app notifications, or just that app's own notifications. Read more [here](../../web3inbox/authorization-signatures/about.mdx)
+
+**Best Practices**
+
+It’s advised to call this method at least once per app start up, it will ensure that account is registered with the latest valid SIWE statement required by Notify API
+
+<PlatformTabs activeOptions={["ios","android", "react-native"]}>
 <PlatformTabItem value="ios">
-
-# Subscribe Events
-
-#### Subscribe Notify Message
-
-Emits new notify message from a dapp.
-
-```swift
-public var notifyMessagePublisher: AnyPublisher<NotifyMessageRecord, Never>
-```
-
-#### Subscribe Active Subscriptions
-
-Emits a list of active subscriptions.
-
-```swift
-public var subscriptionsPublisher: AnyPublisher<[NotifySubscription], Never>
-```
-
-#### Subscribe Messages for topic
-
-Emits a list of messages for specific topic.
-
-```swift
-public func messagesPublisher(topic: String) -> AnyPublisher<[NotifyMessageRecord], Never>
-```
-
-#### Create Notify Subscription
-
-To enable seamless communication between a Dapp and a wallet, the wallet must first establish a Notify Subscription. This crucial step allows the Dapp and its associated services to publish notify messages directly to the wallet. Upon granting permission for the wallet's iOS application to display Push Notifications, users will experience real-time updates in the form of push notifications on their devices. For an enhanced user experience, consider subscribing to the `notifyMessagePublisher` channel. This option ensures that notify messages are delivered promptly when the app is active and a web socket connection is established, keeping users informed and engaged.
-
-To subscribe to dapp's notify messages first fetch publicly discoverable dapps with WalletConnect explorer:
-
-https://explorer-api.walletconnect.com/v3/dapps?projectId={your_project_id}&is_notify_enabled=true
-
-and request a subscription directly from the wallet.
-
-You can also subscribe on web3inbox.com, the subscription will be synced across devices and will appear in the wallet.
-
-```swift
-public func subscribe(appDomain: String, account: Account) async throws {
-```
-
-`appDomain` - A domain of the dapp that you want to subscribe to
-
-`account` - an account you want to associate the subscription with
-
-
-#### Get Active Subscriptions
-
-```swift
-Notify.instance.getActiveSubscriptions()
-```
-
-#### Delete Subscription
-
-To delete a subscription.
-
-```swift
-try await Notify.instance.deleteSubscription(topic: String)
-```
-
-#### Get Notify Messages
-
-To get messages by topic call:
-
-```swift
-Notify.instance.getMessageHistory(topic: subscription.topic)
-```
-
 
 </PlatformTabItem>
 <PlatformTabItem value="android">
 
-#### Register for Subscriptions
-
-`NotifyClient` needs a `NotifyClient.Delegate` passed to it for it to be able to expose asynchronous updates sent from the dapp.
-
-```kotlin
-val walletDelegate = object : NotifyClient.Delegate {
-
-    override fun onNotifySubscription(notifySubscribe: Notify.Event.Subscription) {
-        // Triggered when a wallet initiated subscription has been created
-    }
-
-    override fun onNotifyMessage(notifyMessage: Notify.Event.Message) {
-        // Triggered when a message has been sent by the Dapp. The message contains the title, body, icon, and url
-    }
-
-    override fun onNotifyDelete(notifyDelete: Notify.Event.Delete) {
-        // Triggered when the Dapp deletes the subscription. The notifyDelete contains the topic that was deleted
-    }
-
-    override fun onNotifyUpdate(notifyUpdate: Notify.Event.Update) {
-        // Triggered after updating a subscription was successful. The notifyUpdate will either contain the updated subscription details or an error
-    }
-
-    override fun onError(error: Notify.Model.Error) {
-        // Triggered when there's an error inside the SDK
-    }
-}
-
-NotifyClient.setDelegate(walletDelegate)
-```
-
-#### Register an identity key and enable cross-device account syncing
-
-:::note
-This is a one-time action that does not need to be repeated after initial registration for each account address and must be called before using the SDK.
-:::
-
-Once the NotifyClient is [initialized](#client-configuration), you'll need to register a [CAIP-10 account](https://github.com/ChainAgnostic/CAIPs/blob/master/CAIPs/caip-10.md) with the NotifyClient to enable receiving notifications and syncing of the account across multiple devices. 
-
-You'll need to create an instance of `Notify.Params.Registration` which will need the CAIP-10 account, the domain which should be your `ApplicationId`, and a lambda that will need to ask the user for permission to sign a message using their private key.
-
-The `Notify.Model.Registration` object will need to be passed into `NotifyClient.register` which has a `onSuccess` method which will return the WalletConnect Identity public key. This public key is strictly for debugging and more information can be found [here](https://specs.walletconnect.com/2.0/specs/clients/core/identity/identity-keys). There is also an `onError` callback which will return an instance of `Notify.Model.Error` in case there is an error while registering the account.
-
-**Note** The `NotifyClient.Register` function is to verify the ownership over blockchain account when registering identities in [WalletConnect's Keyserver](https://specs.walletconnect.com/2.0/specs/servers/keys/). End users must sign the message provided on the `onSign(message: String)` callback. Currently only EIP191 signatures are supported in Keyserver.
-
-
-##### NotifyClient.register
-
-```kotlin
-val params = Notify.Params.Registration(
-    account = /*[CAIP-10](https://github.com/ChainAgnostic/CAIPs/blob/master/CAIPs/caip-10.md) compatible accountId*/,
-    onSign = {
-        // Message to be signed. When user decides to sign message use CacaoSigner to sign message.
-        // CacaoSigner is a util for easy message signing.
-        return CacaoSigner.sign(message, /*privateKey*/, SignatureType.EIP191)
-        // When users decides to not sign message return null
-        return null 
-    }
-)
-
-NotifyClient.register(
-      params,
-      onSuccess = {
-          // callback for when the subscription request was successfully sent
-      },
-      onError = { error: Notify.Model.Error ->
-          // callback for when the subscription request has failed
-      }
-  )
-```
-
-#### Unregister blockchain account 
-
-To stop receiving notifications for specific blockchain account call `NotifyClient.unregister`. This will delete all local data of subscriptions and messages associated with the account, locally remove and unregister Identity from [Keyserver](https://specs.walletconnect.com/2.0/specs/servers/keys/) and unsubscribe from all active subscriptions.
-
-```kotlin
-val unregistrationParams = Notify.Params.Unregistration(/*CAIP-10 account*/)
-NotifyClient.unregister(
-  unregistrationParams,
-  onSuccess = {
-      // callback for when the unregistration was successful
-  },
-  onError = { error ->
-    // callback for when the unregistration has failed
-  }
-)
-```
-
-
-#### Subscribe to a new Dapp
-Calling `NotifyClient.subscribe` will establish the subscription with the dapp specified in the `Notify.Params.Subscribe` params passed into the function. The `Notify.Params.Subscribe` params requires the uri of the dapp and a CAIP-10 compatible account.
-
-```kotlin
-val dappUri: Uri = // The Dapp Uri to subscribe to
-val caip10Account: String = // The CAIP-10 account that was used in `NotifyClient.register`
-
-val subscribeParams = Notify.Params.Subscribe(
-  appDomain = dappUri, 
-  account = caip10Account
-)
-
-NotifyClient.subscribe(
-    params = subscribeParams,
-    onSuccess = {
-        // Subscribing to the dapp was successful
-    },
-    onError = { error: Notify.Model.Error ->
-        // There was an error while trying to subscribe to the dapp
-    }
-)
-```
-
-#### Update a subscription with new Scopes
-To update a subscription, pass `Notify.Params.Update` with the subscription topic that is to be updated and the new [scope](https://specs.walletconnect.com/2.0/specs/clients/notify/notify-config#notification-types) to be sent to the dapp. The subscription topic can be fetched from the `NotifyClient.getActiveSubscriptions()`
-
-```kotlin
-val updateParams = Notify.Params.Update(
-  topic = /* Topic of the subscription to update */,
-  scope = /* The new space delimited list of scopes */
-)
-
-NotifyClient.update(
-    params  = updateParams,
-    onSuccess = { 
-      // Updating the subscription was successful 
-    },
-    onError = { error: Notify.Model.Error -> 
-      // There was an error while trying to update the subscription
-    }
-)
-```
-
-#### Get a map of Active Subscriptions
-To get a map of all the active subscriptions, call `NotifyClient.getActiveSubscriptions()`. It will return a map with the topic as the key and `Notify.Model.Subscription` as the value.
-
-```kotlin
-val activeSubscriptions: Map<String, Notify.Model.Subscription> = NotifyClient.getActiveSubscriptions()
-```
-
-#### Get Notification Types
-To get a map of all the active subscriptions, call the `getNotificationTypes` function. It will return a map with the notification type id as the key and `Notify.Model.NotificationType` as the value.
-
-```kotlin
-val appMetadata: Core.Model.AppMetaData = /*App Metadata could be fetched from NotifyClient.getActiveSubscriptions()*/
-val appDomain: String = /*App Domain*/ // URI(appMetadata.url).host
-val notificationTypesParams = Notify.Params.NotificationTypes(appDomain)
-NotifyClient.getNotificationTypes(notificationTypesParams)
-```
-
-
-#### Get a map of the Message History for a Subscription
-To get all the messages for a specific subscription topic, call `NotifyClient.getMessageHistory()` and pass an instance of `Notify.Params.MessageHistory`. It will return a map with the request ids as the key and `Notify.Model.MessageRecord` as the value.
-
-```kotlin
-val messageHistoryParamsForSubscriptionTopic = Notify.Params.MessageHistory(/* The topic of an active subscription */)
-
-val messageHistory: Map<Long, Notify.Model.MessageRecord> = NotifyClient.getMessageHistory(params = messageHistoryParamsForSubscriptionTopic)
-```
-
-#### Delete a Subscription
-To delete a subscription, pass `Notify.Params.DeleteSubscription` with the subscription topic that is to be deleted. The subscription topic can be fetched from the `NotifyClient.getActiveSubscriptions()`
-
-```kotlin
-val deleteSubscriptionParam = Notify.Params.DeleteSubscription(topic = /* The topic of the active subscription to delete */)
-
-NotifyClient.deleteSubscription(
-  params = deleteSubscriptionParam, 
-  onError: { error: Notify.Model.Error ->
-    // Error will be thrown if there's an issue with trying to delete the subscription
-  }
-)
-```
-
-#### Delete a Message
-To delete a notify record message, pass `Notify.Params.DeleteMessage` with the request id of the record to be deleted. The id can be fetched from the `NotifyClient.getMessageHistory()`
-
-```kotlin
-val deleteMessageParams = Notify.Params.DeleteMessage(id = /* The request id of the message fetched from Notify. */)
-
-Notify.deleteNotifyMessage(
-  params = deleteMessageParams, 
-  onSuccess = {
-    // Triggered when the message has been successfully deleted
-  }, 
-  onError = { error: Notify.Model.Error -> 
-    // Error will be thrown if there's an issue with trying to delete the specific message
-  }
-)
-```
-
 </PlatformTabItem>
-
 <PlatformTabItem value="react-native">
-
-#### Add listeners for relevant events
-
-```javascript
-// Handle response to a `notifyClient.subscribe(...)` call
-notifyClient.on('notify_subscription', async ({ params }) => {
-  const { error } = params
-
-  if (error) {
-    // Setting up the subscription failed.
-    // Inform the user of the error and/or clean up app state.
-    console.error('Setting up subscription failed: ', error)
-  } else {
-    // New subscription was successfully created.
-    // Inform the user and/or update app state to reflect the new subscription.
-    console.log(`Subscribed successfully.`)
-  }
-})
-
-// Handle an incoming notification
-notifyClient.on('notify_message', ({ params }) => {
-  const { message } = params
-  // e.g. build a notification using the metadata from `message` and show to the user.
-})
-
-// Handle response to a `notifyClient.update(...)` call
-notifyClient.on('notify_update', ({ params }) => {
-  const { error } = params
-
-  if (error) {
-    // Updating the subscription's scope failed.
-    // Inform the user of the error and/or clean up app state.
-    console.error('Setting up subscription failed: ', error)
-  } else {
-    // Subscription's scope was updated successfully.
-    // Inform the user and/or update app state to reflect the updated subscription.
-    console.log(`Successfully updated subscription scope.`)
-  }
-})
-
-// Handle a change in the existing subscriptions (e.g after a subscribe or update)
-notifyClient.on('notify_subscriptions_changed', ({ params }) => {
-  const { subscriptions } = params
-  // `subscriptions` will contain any *changed* subscriptions since the last time this event was emitted.
-  // To get a full list of subscriptions for a given account you can use `notifyClient.getActiveSubscriptions({ account: 'eip155:1:0x63Be...' })`
-})
-```
-
-#### Register an identity key for cross-device account syncing
-
-:::note
-This is a one-time action per account. It does not need to be repeated after initial registration of the new account.
-:::
-
-To register an identity key, you must provide a callback to the `onSign: (message: string) => string` parameter of the `register` method.
-In order to authorize the Notify subscription, the SDK will trigger this callback with a message to sign, expecting the signature for that message to be returned.
-
-Some suggested ways to implement the `onSign` callback are via:
-
-- Ethers.js [`Wallet.signMessage` method](https://docs.ethers.org/v5/api/signer/#Signer-signMessage)
-- The [`signMessage` method](https://wagmi.sh/core/actions/signMessage) in `@wagmi/core`
-
-### Registering as a dapp
-
-```javascript
-const account = `eip155:1:0x63Be2c680685d2A9620c11b0068291261aa62d76`
-const onSign = (message: string) => ethersWallet.signMessage(message)
-
-await notifyClient.register({
-  account,
-  onSign,
-  domain: 'app.example.com', // pass the domain (i.e. the hostname) where your dapp is hosted.
-  isLimited: true // The user will be prompted to authorize this dapp to send and receive messages on their behalf for this domain using their WalletConnect identity.
-})
-```
-
-### Registering as a wallet
-
-```javascript
-const account = `eip155:1:0x63Be2c680685d2A9620c11b0068291261aa62d76`
-const onSign = (message: string) => ethersWallet.signMessage(message)
-
-await notifyClient.register({
-  account,
-  onSign,
-  domain: 'com.example.app.rn', // pass your app's bundle identifier.
-  isLimited: false // The user will be prompted to authorize this wallet to send and receive messages on their behalf for ALL domains using their WalletConnect identity.
-})
-```
-
-### Managing Subscriptions
-
-#### Creating a new subscription
-
-:::info
-To identify dapps that can be subscribed to via Notify, we can query the following Explorer API endpoint:
-
-https://explorer-api.walletconnect.com/v3/dapps?projectId=YOUR_PROJECT_ID&is_notify_enabled=true
-:::
-
-```javascript
-// Get the domain of the target dapp from the Explorer API response
-const appDomain = new URL(fetchedExplorerDapp.platform_browser).hostname
-
-// Subscribe to `fetchedExplorerDapp` by passing the account to be subscribed and the domain of the target dapp.
-await notifyClient.subscribe({
-  account,
-  appDomain
-})
-
-// -> Success/Failure will be received via the `notify_update` event registered previously.
-// -> New subscription will be emitted via the `notify_subscriptions_changed` watcher event.
-```
-
-#### Updating notification types on an existing subscription
-
-```javascript
-// `topic` - subscription topic of the subscription that should be updated.
-// `scope` - an array of notification types that should be enabled going forward. The current scopes can be found under `subscription.scope`.
-await notifyClient.update({
-  topic,
-  scope: ['alerts']
-})
-
-// -> Success/Failure will be received via the `notify_update` event registered previously.
-// -> Updated subscription will be emitted via the `notify_subscriptions_changed` watcher event.
-```
-
-#### Removing an existing subscription
-
-```javascript
-// `topic` - subscription topic of the subscription that should be deleted.
-await notifyClient.deleteSubscription({ topic })
-```
-
-#### Retrieving all currently active subscriptions
-
-```javascript
-// Will return all active subscriptions for the provided account, keyed by subscription topic.
-const accountSubscriptions = notifyClient.getActiveSubscriptions({
-  account: `eip155:1:0x63Be...`
-})
-```
-
-#### Retrieving all past messages for a given subscription
-
-```javascript
-// Will return all past Notify messages for the provided subscription topic, keyed by messageId.
-const messageHistory = notifyClient.getMessageHistory({ topic })
-```
 
 </PlatformTabItem>
 </PlatformTabs>
 
-## Push Notification
+## Subscribing to a new dapp
 
-<PlatformTabs
-	groupId="w3w"
-	activeOptions={["ios","android", "react-native"]}
->
+To begin receiving notifications from a dapp, users must opt-in by subscribing. This subscription process grants permission for the dapp to send notifications to the user. These notifications can serve a variety of purposes, such as providing updates on the user's blockchain account activities or informing them about ongoing campaigns within the dapp. Upon initial subscription, clients will be automatically enrolled to receive all types of notifications as defined by the dapp at that moment. Users have the flexibility to modify their notification settings later, allowing them to tailor the types of alerts they receive according to their preferences. 
+
+<PlatformTabs activeOptions={["ios","android", "react-native"]}>
+<PlatformTabItem value="ios">
+
+</PlatformTabItem>
+<PlatformTabItem value="android">
+
+</PlatformTabItem>
+<PlatformTabItem value="react-native">
+
+</PlatformTabItem>
+</PlatformTabs>
+
+## Fetching active subscriptions
+
+To fetch the current list of subscriptions an account has, call **`NotifyClient.getActiveSubscriptions()`**. 
+
+<PlatformTabs activeOptions={["ios","android", "react-native"]}>
+<PlatformTabItem value="ios">
+
+</PlatformTabItem>
+<PlatformTabItem value="android">
+
+</PlatformTabItem>
+<PlatformTabItem value="react-native">
+
+</PlatformTabItem>
+</PlatformTabs>
+
+
+## Fetching subscription’s notifications
+
+To fetch subscription’s notifications by calling **`NotifyClient.getMessageHistory()`**.
+
+<PlatformTabs activeOptions={["ios","android", "react-native"]}>
+<PlatformTabItem value="ios">
+
+</PlatformTabItem>
+<PlatformTabItem value="android">
+
+</PlatformTabItem>
+<PlatformTabItem value="react-native">
+
+</PlatformTabItem>
+</PlatformTabs>
+
+
+## Updating subscriptions notification settings
+
+Users can alter their notification settings to filter out unwanted alerts from a dapp. During this process, they review and select the types of notifications they wish to receive, based on the latest options provided by the dapp. Available notification types fetching is shown in the [next section](#fetching-available-notification-types).
+
+<PlatformTabs activeOptions={["ios","android", "react-native"]}>
+<PlatformTabItem value="ios">
+
+</PlatformTabItem>
+<PlatformTabItem value="android">
+
+</PlatformTabItem>
+<PlatformTabItem value="react-native">
+
+</PlatformTabItem>
+</PlatformTabs>
+
+
+## Fetching available notification types
+
+Developers can fetch latest notification types specified by dapp by calling **`NotifyClient.getNotificationTypes()`** function. 
+
+<PlatformTabs activeOptions={["ios","android", "react-native"]}>
+<PlatformTabItem value="ios">
+
+</PlatformTabItem>
+<PlatformTabItem value="android">
+
+</PlatformTabItem>
+<PlatformTabItem value="react-native">
+
+</PlatformTabItem>
+</PlatformTabs>
+
+
+## Unsubscribe from a dapp
+
+To opt-out of receiving notifications from a dap, a user can decide to unsubscribe from dapp.
+
+<PlatformTabs activeOptions={["ios","android", "react-native"]}>
+<PlatformTabItem value="ios">
+
+</PlatformTabItem>
+<PlatformTabItem value="android">
+
+</PlatformTabItem>
+<PlatformTabItem value="react-native">
+
+</PlatformTabItem>
+</PlatformTabs>
+
+
+## Delete subscription message
+
+Once a notification is viewed, you may want to remove the message from the client’s storage to keep the UI/UX clean for users.
+
+<PlatformTabs activeOptions={["ios","android", "react-native"]}>
+<PlatformTabItem value="ios">
+
+</PlatformTabItem>
+<PlatformTabItem value="android">
+
+</PlatformTabItem>
+<PlatformTabItem value="react-native">
+
+</PlatformTabItem>
+</PlatformTabs>
+
+
+## Account unregistration
+
+If an account is removed from the client or a user no longer wants to receive notifications for this account, you can logout the account from Notify API by calling **`NotifyClient.unregister()`**. This will remove all subscriptions and messages for this account from the client’s storage.
+
+<PlatformTabs activeOptions={["ios","android", "react-native"]}>
+<PlatformTabItem value="ios">
+
+</PlatformTabItem>
+<PlatformTabItem value="android">
+
+</PlatformTabItem>
+<PlatformTabItem value="react-native">
+
+</PlatformTabItem>
+</PlatformTabs>
+
+## Push Notification best practices
+
+To create a good user experience and to guide users into unsubscribing from the correct dapp, there are certain best practices when displaying push notifications.
+
+<PlatformTabs activeOptions={["ios","android", "react-native"]}>
+<PlatformTabItem value="ios">
+
+</PlatformTabItem>
+<PlatformTabItem value="android">
+
+`Notify.Model.Message` contains a `type` field, which is a unique id of the notification type. It is recommended to use this field as a notification channel id. By doing so it will create a channel for each notification type. To allow users to granularly control which notifications they want to receive within system settings, it is recommended to create a separate channel for every dapp and every notification type they might have. By doing so user would be able to turn off notifications for specific notification type per every subscribed dapp.
+
+```kotlin
+override fun onMessage(message: Notify.Model.Message, originalMessage: RemoteMessage) {
+    val appMetadata = NotifyClient.getActiveSubscriptions()[message.topic]?.metadata ?: throw IllegalStateException("No active subscription for topic: ${message.topic}")
+    val appDomain = URI(appMetadata.url).host ?: throw IllegalStateException("Unable to parse domain from $appMetadata.url")
+
+    val typeName = NotifyClient.getNotificationTypes(Notify.Params.NotificationTypes(appDomain))[message.type]?.name
+        ?: throw IllegalStateException("No notification type for topic:${message.topic} and type: ${message.type}")
+    
+    val channelId = message.type
+    val channelName = (appMetadata.name + ": " + typeName)
+
+    val notificationBuilder = NotificationCompat.Builder(this, channelId)
+        .setContentTitle(message.title)
+        .setSmallIcon(android.R.drawable.ic_popup_reminder) // specify icon for notification
+        .setContentText(message.body)
+        .setAutoCancel(true) // clear notification after click
+        .setSound(defaultSoundUri) // specify sound for notification
+        .setContentIntent(pendingIntent) // specify pendingIntent
+
+    // Since android Oreo notification channel is needed.
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+        val channel = NotificationChannel(channelId, channelName, NotificationManager.IMPORTANCE_HIGH)
+        notificationManager.createNotificationChannel(channel)
+    }
+
+    notificationManager.notify(message.hashCode(), notificationBuilder.build()) // specify id of notification
+}
+```
+</PlatformTabItem>
+<PlatformTabItem value="react-native">
+
+</PlatformTabItem>
+</PlatformTabs>
+
+## Extra (Platform Specific)
+
+<PlatformTabs activeOptions={["ios","android", "react-native"]}>
 <PlatformTabItem value="ios">
 
 #### Configure your project to enable Push Notifications
@@ -617,7 +434,15 @@ override func didReceive(_ request: UNNotificationRequest, withContentHandler co
 </PlatformTabItem>
 <PlatformTabItem value="android">
 
+### Firebase Cloud Messaging setup
+
 To enable push notifications, first you'll need to [configure your project](/docs/advanced/echo-server.md) with Firebase Messaging service.
+
+### NotifyClient.Delegate
+
+:::caution
+Needs update. This should link to push notification tab from web3wallet. Using old content for now
+:::caution
 
 The `NotifyMessageService` is a wrapper around the `FirebaseMessagingService`. The `NotifyMessageService` class needs to be implemented for the Notify SDK to be able to decrypt and notify wallets of a push notification sent from the Dapp in the background.
 This service also needs to be registered in the AndroidManifest.xml file similar to the example in the [FCM documentation](https://firebase.google.com/docs/cloud-messaging/android/client#manifest).
@@ -655,40 +480,6 @@ class SampleFirebaseService: NotifyMessageService() {
         </intent-filter>
     </service>
 </application>
-```
-
-
-#### Push Notification best practices
-
-`Notify.Model.Message` contains a `type` field, which is a unique id of the notification type. It is recommended to use this field as a notification channel id. By doing so it will create a channel for each notification type. To allow users to granularly control which notifications they want to receive within system settings, it is recommended to create a separate channel for every dapp and every notification type they might have. By doing so user would be able to turn off notifications for specific notification type per every subscribed dapp.
-
-```kotlin
-override fun onMessage(message: Notify.Model.Message, originalMessage: RemoteMessage) {
-    val appMetadata = NotifyClient.getActiveSubscriptions()[message.topic]?.metadata ?: throw IllegalStateException("No active subscription for topic: ${message.topic}")
-    val appDomain = URI(appMetadata.url).host ?: throw IllegalStateException("Unable to parse domain from $appMetadata.url")
-
-    val typeName = NotifyClient.getNotificationTypes(Notify.Params.NotificationTypes(appDomain))[message.type]?.name
-        ?: throw IllegalStateException("No notification type for topic:${message.topic} and type: ${message.type}")
-    
-    val channelId = message.type
-    val channelName = (appMetadata.name + ": " + typeName)
-
-    val notificationBuilder = NotificationCompat.Builder(this, channelId)
-        .setContentTitle(message.title)
-        .setSmallIcon(android.R.drawable.ic_popup_reminder) // specify icon for notification
-        .setContentText(message.body)
-        .setAutoCancel(true) // clear notification after click
-        .setSound(defaultSoundUri) // specify sound for notification
-        .setContentIntent(pendingIntent) // specify pendingIntent
-
-    // Since android Oreo notification channel is needed.
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-        val channel = NotificationChannel(channelId, channelName, NotificationManager.IMPORTANCE_HIGH)
-        notificationManager.createNotificationChannel(channel)
-    }
-
-    notificationManager.notify(message.hashCode(), notificationBuilder.build()) // specify id of notification
-}
 ```
 
 </PlatformTabItem>
@@ -843,3 +634,5 @@ AppRegistry.registerComponent(appName, () => HeadlessCheck);
 ```
 </PlatformTabItem>
 </PlatformTabs>
+
+
