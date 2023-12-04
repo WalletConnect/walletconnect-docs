@@ -1073,7 +1073,7 @@ article img {
 }
 
 .gs__text {
-  max-width: 30rem;
+  max-width: 25rem;
   font-size: 0.875rem;
   opacity: 0.875;
   color: #c9cfcf;
@@ -1118,6 +1118,36 @@ article img {
   --gs-pill-bg: rgba(39, 115, 101, 0.5);
   --gs-pill-color: #f2fafa;
   background: linear-gradient(135deg, hsla(161.45, 25%, 88%, 1) 0%, hsla(161.45, 66%, 40%, 1) 100%);
+}
+
+@media screen and (max-width: 660px) {
+  .gs__wrapper {
+    flex-direction: column;
+    padding: 1.5rem 1.67rem;
+  }
+  .gs__wrapper .gs__image {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    margin-top: 1.25rem;
+    margin-bottom: 1rem;
+    border-radius: 1.75rem;
+  }
+  .gs__wrapper .gs__text-container {
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+    margin-top: 1rem;
+  }
+  .gs__wrapper .gs__text-container p {
+    max-width: 100%;
+  }
+  .gs__wrapper .gs__text-container h2 {
+    margin-top: 0 !important;
+  }
+  .gs__wrapper .gs__platform__wrapper {
+    flex-wrap: wrap;
+  }
 }
 
 /* End - Getting Started Banner */
