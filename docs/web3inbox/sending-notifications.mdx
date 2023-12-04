@@ -20,12 +20,24 @@ You can find the Notify API Secret under the Notify API section of the APIs tab 
 
 To send a notification notification you can call the `/notify` endpoint. This endpoint supports the following fields:
 
-- `type` - The Notification type ID copied from WalletConnect Cloud.
-- `title` - The title of the notification. Max 64 characters.
-- `body` - The body of the notification containing more detail. Max 255 characters.
-- `url` (optional) - A URL attached to the notification that the user can navigate to. Max 255 characters.
-- `accounts` - A list of [CAIP-10](https://github.com/ChainAgnostic/CAIPs/blob/main/CAIPs/caip-10.md) account IDs for which to send the notification to. Max 500 accounts per request. Also see the [rate limits](#rate-limits) below.
-- `notification_id` (optional) - An idempotency key of arbitrary format used to dedup multiple requests. Max 255 characters. Multiple calls with the same `notification_id` will use the first call's `notification` content, but will send to any additional account IDs listed in `accounts`.
+```typescript
+type RequestBody = {
+  // Optional: An idempotency key of arbitrary format used to dedup multiple requests. Max 255 characters. Multiple calls with the same `notification_id` will use the first call's `notification` content, but will send to any additional account IDs listed in `accounts`.
+  notification_id?: string | null,
+  notification: {
+    // The Notification type ID copied from WalletConnect Cloud.
+    type: string,
+    // The title of the notification. Max 64 characters.
+    title: string,
+    // The body of the notification containing more detail. Max 255 characters.
+    body: string,
+    // Optional: A URL attached to the notification that the user can navigate to. Max 255 characters.
+    url?: string | null,
+  },
+  // A list of [CAIP-10](https://github.com/ChainAgnostic/CAIPs/blob/main/CAIPs/caip-10.md) account IDs for which to send the notification to. Max 500 accounts per request. Also see the [rate limits](#rate-limits) below.
+  accounts: string[],
+}
+```
 
 Example usage:
 
