@@ -1,9 +1,37 @@
-import Container from './../components/Container'
-import Tabs from '@theme/Tabs'
-import TabItem from '@theme/TabItem'
 import PlatformTabs from '../components/PlatformTabs'
 import PlatformTabItem from '../components/PlatformTabItem'
 
-# Introduction
+# Push Notifications
 
-The Web3Wallet SDK allows you to easily connect your Web3 wallet with dapps. It provides a simple and intuitive interface for dapps to request actions such as signing transactions and interacting with smart contracts on the blockchain. The SDK is designed to work with any blockchain, making it easy to support multiple chains without the need for separate integration code.
+The WalletConnect Web3Wallet SDK provides the functionality for wallets to receive push notifications through Firebase Cloud Messaging (FCM) and Apple Push Notification Service (APNS) via the Echo Server. This feature ensures that wallets are promptly notified of incoming signature requests. Each push notification contains the encrypted details of the signature request. Upon receiving the notification, it can be decrypted and presented to the developer, allowing for customization of the message according to their requirements.
+
+## Setup
+
+To enable a device for push notifications, it's essential to register the device token using `Web3Wallet.registerDeviceToken`. This token can be obtained from either FCM or APNS, depending on the platform used.
+
+<PlatformTabs activeOptions={["ios", "android"]}>
+<PlatformTabItem value="ios">
+{/* Fill ios tab */}
+</PlatformTabItem>
+
+<PlatformTabItem value="android">
+{/* Fill android tab */}
+</PlatformTabItem>
+</PlatformTabs>
+
+
+## Usage
+
+After the device token is registered, the next step involves setting up the notification service specific to the platform being used. This service will decrypt the incoming requests and forward them to the developer for further processing and integration.
+
+<PlatformTabs activeOptions={["ios", "android"]}>
+
+<PlatformTabItem value="ios">
+{/* Fill ios tab */}
+</PlatformTabItem>
+
+<PlatformTabItem value="android">
+{/* Fill android tab */}
+</PlatformTabItem>
+
+</PlatformTabs>
