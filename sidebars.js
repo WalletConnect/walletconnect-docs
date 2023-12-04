@@ -187,8 +187,8 @@ module.exports = {
             'web3wallet/about',
             'web3wallet/wallet-usage',
             'web3wallet/namespaces',
-            'web3wallet/verify',
             'web3wallet/mobileLinking',
+            'web3wallet/verify',
             'web3wallet/push-notifications',
             {
               type: 'category',
