@@ -27,6 +27,19 @@ To send a notification notification you can call the `/notify` endpoint. This en
 - `accounts` - A list of [CAIP-10](https://github.com/ChainAgnostic/CAIPs/blob/main/CAIPs/caip-10.md) account IDs for which to send the notification to. Max 500 accounts per request. Also see the [rate limits](#rate-limits) below.
 - `notification_id` (optional) - An idempotency key of arbitrary format used to dedup multiple requests. Max 255 characters. Multiple calls with the same `notification_id` will use the first call's `notification` content, but will send to any additional account IDs listed in `accounts`.
 
+```typescript
+type RequestBody = {
+  notification_id?: string | null,
+  notification: {
+    type: string,
+    title: string,
+    body: string,
+    url?: string | null,
+  },
+  accounts: string[],
+}
+```
+
 Example usage:
 
 <Tabs queryString={'api-client'}>
