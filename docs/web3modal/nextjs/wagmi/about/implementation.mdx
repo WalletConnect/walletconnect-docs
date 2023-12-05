@@ -38,7 +38,6 @@ const wagmiConfig = defaultWagmiConfig({
   enableInjected: true, // Optional - true by default
   enableEIP6963: true, // Optional - true by default
   enableCoinbase: true, // Optional - true by default
-  enableEmail: true, // Optional - false by default
 })
 
 // 3. Create modal
@@ -81,7 +80,7 @@ Create a new file called `context/Web3Modal.tsx` or `context/Web3Modal.jsx` (out
 "use client";
 
 import { createWeb3Modal } from '@web3modal/wagmi/react'
-import { walletConnectProvider, EIP6963Connector, EmailConnector } from '@web3modal/wagmi'
+import { walletConnectProvider, EIP6963Connector } from '@web3modal/wagmi'
 
 import { WagmiConfig, configureChains, createConfig } from 'wagmi'
 import { publicProvider } from 'wagmi/providers/public'
@@ -112,7 +111,6 @@ const wagmiConfig = createConfig({
     new WalletConnectConnector({ chains, options: { projectId, showQrModal: false, metadata } }),
     new EIP6963Connector({ chains }),
     new InjectedConnector({ chains, options: { shimDisconnect: true } }),
-    new EmailConnector({ chains, options: { projectId } }),
     new CoinbaseWalletConnector({ chains, options: { appName: metadata.name } })
   ],
   publicClient

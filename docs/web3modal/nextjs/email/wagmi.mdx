@@ -1,16 +1,14 @@
 import Tabs from '@theme/Tabs'
 import TabItem from '@theme/TabItem'
 
-You can start Web3Modal configuration using either **default** or **custom** mode.
-
-Default mode will implement WalletConnect, Browser Wallets (injected) and Coinbase options in addition to [Wagmi's public provider](https://wagmi.sh/react/providers/public) and [WalletConnect's provider](../../../../cloud/blockchain-api.md).
+You can start integrating Email Login into Web3Modal SDK using either **default** or **custom** mode.
 
 <Tabs>
 <TabItem value="default" label="Default">
 
-On top of your app set up the following configuration, making sure that all functions are called **outside** any React component to avoid unwanted rerenders.
-
 ```tsx
+"use client"
+
 import { createWeb3Modal, defaultWagmiConfig } from '@web3modal/wagmi/react'
 
 import { WagmiConfig } from 'wagmi'
@@ -36,28 +34,33 @@ const wagmiConfig = defaultWagmiConfig({
   enableInjected: true, // Optional - true by default
   enableEIP6963: true, // Optional - true by default
   enableCoinbase: true, // Optional - true by default
+  /* highlight-add-start */
+  enableEmail: true, // Optional - false by default
+  /* highlight-add-end */
 })
 
 // 3. Create modal
 createWeb3Modal({ wagmiConfig, projectId, chains })
 
-export default function App() {
-  return (
-    <WagmiConfig config={wagmiConfig}>
-      // Rest of your app...
-    </WagmiConfig>
-  )
+export function Web3Modal({ children }) {
+  return <WagmiConfig config={wagmiConfig}>{children}</WagmiConfig>;
 }
 ```
 
 </TabItem>
 <TabItem value="custom" label="Custom">
 
-On top of your app set up the following configuration, making sure that all functions are called **outside** any React component to avoid unwanted rerenders.
-
 ```tsx
+"use client"
+
 import { createWeb3Modal } from '@web3modal/wagmi/react'
-import { walletConnectProvider, EIP6963Connector } from '@web3modal/wagmi'
+import {
+  walletConnectProvider, 
+  EIP6963Connector, 
+  /* highlight-add-start */
+  EmailConnector
+  /* highlight-add-end */
+} from '@web3modal/wagmi'
 
 import { WagmiConfig, configureChains, createConfig } from 'wagmi'
 import { publicProvider } from 'wagmi/providers/public'
@@ -88,6 +91,9 @@ const wagmiConfig = createConfig({
     new WalletConnectConnector({ chains, options: { projectId, showQrModal: false, metadata } }),
     new EIP6963Connector({ chains }),
     new InjectedConnector({ chains, options: { shimDisconnect: true } }),
+    /* highlight-add-start */
+    new EmailConnector({ chains, options: { projectId } }),
+    /* highlight-add-end */
     new CoinbaseWalletConnector({ chains, options: { appName: metadata.name } })
   ],
   publicClient
@@ -96,27 +102,10 @@ const wagmiConfig = createConfig({
 // 3. Create modal
 createWeb3Modal({ wagmiConfig, projectId, chains })
 
-export default function App() {
-  return (
-    <WagmiConfig config={wagmiConfig}>
-      // Rest of your app...
-    </WagmiConfig>
-  )
+export function Web3Modal({ children }) {
+  return <WagmiConfig config={wagmiConfig}>{children}</WagmiConfig>;
 }
 ```
-:::note
-The provided code utilizes [Wagmi](https://wagmi.sh/), a React library for wallet and provider connections, along with the [Web3Modal](https://web3modal.com/) library to create a wallet connection modal. It features various connectors:
-
-1. **WalletConnectConnector**: Enables cross-device wallet connections using the WalletConnect protocol, adhering to [EIP-1193](https://eips.ethereum.org/EIPS/eip-1193).
-
-2. **EIP6963Connector**: Connects to wallets supporting the [EIP-6963](https://eips.ethereum.org/EIPS/eip-6963) standard, an Ethereum wallet extension specification.
-
-3. **InjectedConnector**: Interfaces with browser wallet injections, e.g., MetaMask.
-
-4. **CoinbaseWalletConnector**: Specifically for Coinbase Wallet.
-
-Additionally, there's a `publicProvider` for reading blockchain data through public nodes like Infura. The `walletConnectProvider`, which operates in a manner akin to the public provider but employs the [Blockchain API](https://docs.walletconnect.com/cloud/blockchain-api), is additionally accessible. The `WagmiConfig` component shares `wagmiConfig` with child components.
-:::
 
 </TabItem>
 </Tabs>
