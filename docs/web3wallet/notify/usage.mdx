@@ -139,18 +139,8 @@ const notifyClient = await NotifyClient.init({
 ## Account login
 
 :::caution
-Update me after new specs change of the new registration flow
+Update me after new specs change of the new registration flow. Szymon will update me.
 :::
-
-The NotifyClient, once [initialized](#initialization), requires the registration of a [CAIP-10 account](https://github.com/ChainAgnostic/CAIPs/blob/master/CAIPs/caip-10.md) to receive notifications for given blockchain account
-
-**`NotifyClient.register`**: This method is utilized to authenticate ownership of a blockchain account during the registration of Identity Keys with [WalletConnect's Keys Server](../../specs/servers/keys/readme.md). It requires end users to sign a message using the **`onSign(message: String)`** callback. Presently, the Keys Server supports only EIP191 signatures. The use of Identity Keys aims to enhance the User Experience by reducing the frequency of signature requests while maintaining authenticated actions. 
-
-Message in **`onSign(message: String)`** is a SIWE message that varies depending if the app is requesting access to manage all app notifications, or just that app's own notifications. Read more [here](../../web3inbox/authorization-signatures/about.mdx)
-
-**Best Practices**
-
-It’s advised to call this method at least once per app start up, it will ensure that account is registered with the latest valid SIWE statement required by Notify API
 
 <PlatformTabs activeOptions={["ios","android", "react-native"]}>
 <PlatformTabItem value="ios">
@@ -158,7 +148,11 @@ It’s advised to call this method at least once per app start up, it will ensur
 </PlatformTabItem>
 <PlatformTabItem value="android">
 
+:::caution
+I need to implement it in the client first. Will update afterwards. Szymon will update me.
+:::
 </PlatformTabItem>
+
 <PlatformTabItem value="react-native">
 
 </PlatformTabItem>
@@ -174,6 +168,28 @@ To begin receiving notifications from a dapp, users must opt-in by subscribing. 
 </PlatformTabItem>
 <PlatformTabItem value="android">
 
+Calling `NotifyClient.subscribe` will establish the subscription with the dapp specified in the `Notify.Params.Subscribe` params passed into the function. The `Notify.Params.Subscribe` params requires the uri of the dapp and a CAIP-10 compatible account.
+
+```kotlin
+val dappUri: Uri = Uri("")// The Dapp Uri to subscribe to
+val caip10Account: String = ""// The CAIP-10 account that was used in `NotifyClient.register`
+
+val subscribeParams = Notify.Params.Subscribe(
+    appDomain = dappUri, 
+    account = caip10Account
+)
+
+NotifyClient.subscribe(
+    params = subscribeParams,
+    onSuccess = {
+        // Subscribing to the dapp was successful
+    },
+    onError = { error: Notify.Model.Error ->
+        // There was an error while trying to subscribe to the dapp
+    }
+)
+```
+
 </PlatformTabItem>
 <PlatformTabItem value="react-native">
 
@@ -182,13 +198,17 @@ To begin receiving notifications from a dapp, users must opt-in by subscribing. 
 
 ## Fetching active subscriptions
 
-To fetch the current list of subscriptions an account has, call **`NotifyClient.getActiveSubscriptions()`**. 
+To fetch the current list of subscriptions an account has, call **`getActiveSubscriptions()`**. 
 
 <PlatformTabs activeOptions={["ios","android", "react-native"]}>
 <PlatformTabItem value="ios">
 
 </PlatformTabItem>
 <PlatformTabItem value="android">
+
+```kotlin
+val activeSubscriptions: Map<String, Notify.Model.Subscription> = NotifyClient.getActiveSubscriptions()
+```
 
 </PlatformTabItem>
 <PlatformTabItem value="react-native">
@@ -199,13 +219,19 @@ To fetch the current list of subscriptions an account has, call **`NotifyClient.
 
 ## Fetching subscription’s notifications
 
-To fetch subscription’s notifications by calling **`NotifyClient.getMessageHistory()`**.
+To fetch subscription’s notifications by calling **`getMessageHistory()`**.
 
 <PlatformTabs activeOptions={["ios","android", "react-native"]}>
 <PlatformTabItem value="ios">
 
 </PlatformTabItem>
 <PlatformTabItem value="android">
+
+```kotlin
+val messageHistoryParamsForSubscriptionTopic = Notify.Params.MessageHistory(/* The topic of an active subscription */)
+
+val messageHistory: Map<Long, Notify.Model.MessageRecord> = NotifyClient.getMessageHistory(params = messageHistoryParamsForSubscriptionTopic)
+```
 
 </PlatformTabItem>
 <PlatformTabItem value="react-native">
@@ -224,6 +250,23 @@ Users can alter their notification settings to filter out unwanted alerts from a
 </PlatformTabItem>
 <PlatformTabItem value="android">
 
+```kotlin
+val updateParams = Notify.Params.Update(
+  topic = /* Topic of the subscription to update */,
+  scope = /* The new space delimited list of scopes */
+)
+
+NotifyClient.update(
+    params = updateParams,
+    onSuccess = { 
+      // Updating the subscription was successful 
+    },
+    onError = { error: Notify.Model.Error -> 
+      // There was an error while trying to update the subscription
+    }
+)
+```
+
 </PlatformTabItem>
 <PlatformTabItem value="react-native">
 
@@ -233,13 +276,20 @@ Users can alter their notification settings to filter out unwanted alerts from a
 
 ## Fetching available notification types
 
-Developers can fetch latest notification types specified by dapp by calling **`NotifyClient.getNotificationTypes()`** function. 
+Developers can fetch latest notification types specified by dapp by calling **`getNotificationTypes()`** function. 
 
 <PlatformTabs activeOptions={["ios","android", "react-native"]}>
 <PlatformTabItem value="ios">
 
 </PlatformTabItem>
 <PlatformTabItem value="android">
+
+```kotlin
+val appMetadata: Core.Model.AppMetaData = /*App Metadata could be fetched from NotifyClient.getActiveSubscriptions()*/
+val appDomain: String = /*App Domain*/ // URI(appMetadata.url).host
+val notificationTypesParams = Notify.Params.NotificationTypes(appDomain)
+NotifyClient.getNotificationTypes(params = notificationTypesParams)
+```
 
 </PlatformTabItem>
 <PlatformTabItem value="react-native">
@@ -258,6 +308,17 @@ To opt-out of receiving notifications from a dap, a user can decide to unsubscri
 </PlatformTabItem>
 <PlatformTabItem value="android">
 
+```kotlin
+val deleteSubscriptionParams = Notify.Params.DeleteSubscription(topic = /* The topic of the active subscription to delete */)
+
+NotifyClient.deleteSubscription(
+  params = deleteSubscriptionParams, 
+  onError: { error: Notify.Model.Error ->
+    // Error will be thrown if there's an issue with trying to delete the subscription
+  }
+)
+```
+
 </PlatformTabItem>
 <PlatformTabItem value="react-native">
 
@@ -275,6 +336,20 @@ Once a notification is viewed, you may want to remove the message from the clien
 </PlatformTabItem>
 <PlatformTabItem value="android">
 
+```kotlin
+val deleteMessageParams = Notify.Params.DeleteMessage(id = /* The request id of the message fetched from Notify. */)
+
+Notify.deleteNotifyMessage(
+  params = deleteMessageParams, 
+  onSuccess = {
+    // Triggered when the message has been successfully deleted
+  }, 
+  onError = { error: Notify.Model.Error -> 
+    // Error will be thrown if there's an issue with trying to delete the specific message
+  }
+)
+```
+
 </PlatformTabItem>
 <PlatformTabItem value="react-native">
 
@@ -284,13 +359,26 @@ Once a notification is viewed, you may want to remove the message from the clien
 
 ## Account logout
 
-If an account is removed from the client or a user no longer wants to receive notifications for this account, you can logout the account from Notify API by calling **`NotifyClient.unregister()`**. This will remove all subscriptions and messages for this account from the client’s storage.
+If an account is removed from the client or a user no longer wants to receive notifications for this account, you can logout the account from Notify API by calling **`unregister()`**. This will remove all subscriptions and messages for this account from the client’s storage.
 
 <PlatformTabs activeOptions={["ios","android", "react-native"]}>
 <PlatformTabItem value="ios">
 
 </PlatformTabItem>
 <PlatformTabItem value="android">
+
+```kotlin
+val unregistrationParams = Notify.Params.Unregistration(/*CAIP-10 account*/)
+NotifyClient.unregister(
+  unregistrationParams,
+  onSuccess = {
+      // callback for when the unregistration was successful
+  },
+  onError = { error ->
+    // callback for when the unregistration has failed
+  }
+)
+```
 
 </PlatformTabItem>
 <PlatformTabItem value="react-native">
@@ -436,51 +524,45 @@ override func didReceive(_ request: UNNotificationRequest, withContentHandler co
 
 ### Firebase Cloud Messaging setup
 
-To enable push notifications, first you'll need to [configure your project](/docs/advanced/echo-server.md) with Firebase Messaging service.
+:::caution
+Needs update after w3w push notification page is changed. Szymon will update me.
+:::
 
 ### NotifyClient.Delegate
 
-:::caution
-Needs update. This should link to push notification tab from web3wallet. Using old content for now
-:::caution
+:::caution 
+Update after delegate change. Szymon will update me.
+:::
 
-The `NotifyMessageService` is a wrapper around the `FirebaseMessagingService`. The `NotifyMessageService` class needs to be implemented for the Notify SDK to be able to decrypt and notify wallets of a push notification sent from the Dapp in the background.
-This service also needs to be registered in the AndroidManifest.xml file similar to the example in the [FCM documentation](https://firebase.google.com/docs/cloud-messaging/android/client#manifest).
+`NotifyClient` needs a `NotifyClient.Delegate` passed to it for it to be able to expose asynchronous updates sent from the dapp. It's recommended to set the delegate in the `onCreate` function of the `Application` class.
 
 ```kotlin
-class SampleFirebaseService: NotifyMessageService() {
+val walletDelegate = object : NotifyClient.Delegate {
 
-    override fun newToken(token: String) {
-        // Triggered when Firebase Cloud Messaging creates a new token and that token is registered with the Push server
+    override fun onNotifySubscription(notifySubscribe: Notify.Event.Subscription) {
+        // Triggered when a wallet initiated subscription has been created
     }
 
-    override fun registeringFailed(token: String, throwable: Throwable) {
-        // Triggered when Firebase Cloud Messaging if there is an error with registering with the Push server with a new token
+    override fun onNotifyMessage(notifyMessage: Notify.Event.Message) {
+        // Triggered when a message has been sent by the Dapp. The message contains the title, body, icon, and url
     }
 
-    override fun onMessage(message: Notify.Model.Message, originalMessage: RemoteMessage) {
-        // Triggered when a message is sent from the Push server through Firebase Cloud Messaging and the message contains `Notify.Model.Message`. The original FCM RemoteMessage is also returned
+    override fun onNotifyDelete(notifyDelete: Notify.Event.Delete) {
+        // Triggered when the Dapp deletes the subscription. The notifyDelete contains the topic that was deleted
     }
 
-    override fun onDefaultBehavior(message: RemoteMessage) {
-        // Triggered when a message is sent from the Push server through Firebase Cloud Messaging and the message does not contain `Notify.Model.Message` in the payload. The original FCM RemoteMessage returned instead
+    override fun onNotifyUpdate(notifyUpdate: Notify.Event.Update) {
+        // Triggered after updating a subscription was successful. The notifyUpdate will either contain the updated subscription details or an error
     }
 
-    override fun onError(throwable: Throwable, defaultMessage: RemoteMessage) {
-        // Triggered when there is an error that occurs when a message is received from the Push server
+    override fun onError(error: Notify.Model.Error) {
+        // Triggered when there's an error inside the SDK
     }
 }
+
+NotifyClient.setDelegate(walletDelegate)
 ```
 
-```xml
-<application...>
-    <service android:name=".SampleFirebaseService">
-        <intent-filter>
-            <action android:name="com.google.firebase.MESSAGING_EVENT" />
-        </intent-filter>
-    </service>
-</application>
-```
 
 </PlatformTabItem>
 <PlatformTabItem value="react-native">
