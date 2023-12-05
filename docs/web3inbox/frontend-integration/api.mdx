@@ -185,6 +185,8 @@ const subscriptions = useSubscriptions(account)
 - **subscribe:** Function to subscribe to current dApp `() => void`
 - **unsubscribe:** Function to unsubscribe to current dApp `() => void`
 - **isSubscribed:** Reactive state, checking if subscribed to dApp `Boolean`
+- **isSubscribing:** If `subscribe()` is in-progress and has not finished yet
+- **isUnsubscribing:** If `unsubscribe()` is in-progress and has not finished yet
 - **subscription:** Reactive state, returning current subscription information, of type:
 
 ```ts
