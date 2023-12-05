@@ -1156,6 +1156,11 @@ article img {
     display: none;
   }
 }
+
+:where(.MarkpromptContentDialog) {
+  z-index: 200;
+}
+
 /* End - HomePage */
 
 /* Start - Sidebar */
