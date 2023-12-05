@@ -28,7 +28,15 @@ const metadata = {
 }
 
 const chains = [mainnet, arbitrum]
-const wagmiConfig = defaultWagmiConfig({ chains, projectId, metadata })
+const wagmiConfig = defaultWagmiConfig({ 
+  chains, // required
+  projectId, // required
+  metadata // required
+  enableInjected: true, // Optional - true by default
+  enableEIP6963: true, // Optional - true by default
+  enableCoinbase: true, // Optional - true by default
+  enableEmail: true, // Optional - false by default
+})
 
 // 3. Create modal
 createWeb3Modal({ wagmiConfig, projectId, chains })

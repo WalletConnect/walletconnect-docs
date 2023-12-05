@@ -35,7 +35,7 @@ const metadata = {
 }
 
 const modal = createWeb3Modal({
-  ethersConfig: defaultConfig({ metadata }),
+  ethersConfig: defaultConfig({ metadata, enableEmail: true }),
   chains: [mainnet],
   projectId
 })
@@ -76,6 +76,7 @@ const modal = createWeb3Modal({
     enableEIP6963: true,
     enableInjected: true,
     enableCoinbase: true,
+    enableEmail: true,
     rpcUrl: '...' // used for the Coinbase SDK
   }),
   chains: [mainnet],
