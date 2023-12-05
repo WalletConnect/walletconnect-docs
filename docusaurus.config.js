@@ -97,6 +97,13 @@ const config = {
               '<a class="navbar__brand" href="/"><div class="navbar__logo"><img src="/img/walletconnect-logo-white.svg#dark-mode-only"  alt="WalletConnect Logo"><img src="/img/walletconnect-logo-black.svg#light-mode-only"  alt="WalletConnect Logo"></div>WalletConnect<span>Docs<span></a>'
           },
           {
+            label: 'Dashboard',
+            href: 'https://cloud.walletconnect.com/?utm_source=website&utm_medium=docs&utm_campaign=walletconnectdocs',
+            position: 'right',
+            className: 'header-cloud-link',
+            'aria-label': 'Cloud'
+          },
+          {
             href: 'https://github.com/walletconnect/',
             position: 'right',
             className: 'header-github-link',
