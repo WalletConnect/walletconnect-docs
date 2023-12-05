@@ -98,7 +98,7 @@ const config = {
           },
           {
             label: 'Dashboard',
-            href: 'https://cloud.walletconnect.com',
+            href: 'https://cloud.walletconnect.com/?utm_source=website&utm_medium=docs&utm_campaign=walletconnectdocs',
             position: 'right',
             className: 'header-cloud-link',
             'aria-label': 'Cloud'
