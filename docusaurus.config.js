@@ -164,7 +164,7 @@ const config = {
       prism: {
         darkTheme: darkCodeTheme,
         theme: lightCodeTheme,
-        additionalLanguages: ['swift', 'kotlin', 'dart', 'csharp'],
+        additionalLanguages: ['swift', 'kotlin', 'dart', 'csharp', 'gradle', 'ruby'],
         magicComments: [
           {
             className: 'theme-code-block-highlighted-delete',
