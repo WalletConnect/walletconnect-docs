@@ -229,9 +229,17 @@ module.exports = {
                   type: 'category',
                   label: 'Authorization Signatures',
                   items: [
-                    { type: 'doc', label: "About", id: 'web3inbox/authorization-signatures/about' },
-                    { type: 'doc', label: "This App", id: 'web3inbox/authorization-signatures/this-app' },
-                    { type: 'doc', label: "All Apps", id: 'web3inbox/authorization-signatures/all-apps' }
+                    { type: 'doc', label: 'About', id: 'web3inbox/authorization-signatures/about' },
+                    {
+                      type: 'doc',
+                      label: 'This App',
+                      id: 'web3inbox/authorization-signatures/this-app'
+                    },
+                    {
+                      type: 'doc',
+                      label: 'All Apps',
+                      id: 'web3inbox/authorization-signatures/all-apps'
+                    }
                   ]
                 }
               ]
@@ -262,10 +270,75 @@ module.exports = {
       items: [
         {
           type: 'category',
+          label: 'Multi-Chain',
+          items: [
+            'advanced/multichain/overview',
+            'advanced/multichain/chain-list',
+            {
+              type: 'category',
+              label: 'Polkadot',
+              items: [
+                'advanced/multichain/polkadot/dapp-integration-guide',
+                'advanced/multichain/polkadot/wallet-integration-guide',
+                'advanced/multichain/polkadot/namespaces-guide'
+              ]
+            }
+          ]
+        },
+        {
+          type: 'category',
+          label: 'Migration from v1.x',
+          items: [
+            {
+              type: 'doc',
+              id: 'advanced/migration-from-v1.x/overview',
+              label: 'Overview'
+            },
+            {
+              type: 'doc',
+              id: 'advanced/migration-from-v1.x/namespaces',
+              label: 'Namespaces'
+            },
+            {
+              type: 'category',
+              label: 'Dapps',
+              items: [
+                'advanced/migration-from-v1.x/dapps/dapps',
+                'advanced/migration-from-v1.x/dapps/dapp-checklist'
+              ]
+            },
+            {
+              type: 'category',
+              label: 'Wallets',
+              items: [
+                'advanced/migration-from-v1.x/wallets/wallets',
+                'advanced/migration-from-v1.x/wallets/wallet-checklist'
+              ]
+            },
+            'advanced/migration-from-v1.x/what-changed-from-v1.0',
+            'advanced/migration-from-v1.x/migration-faq',
+            'advanced/migration-from-v1.x/explorer-submission'
+          ]
+        },
+        {
+          type: 'category',
           label: 'Providers',
           collapsible: true,
           collapsed: true,
           items: ['advanced/providers/ethereum', 'advanced/providers/universal']
+        },
+        {
+          type: 'category',
+          label: 'WalletConnectModal',
+          collapsed: true,
+          collapsible: true,
+          items: [
+            'advanced/walletconnectmodal/about',
+            'advanced/walletconnectmodal/usage',
+            'advanced/walletconnectmodal/options',
+            'advanced/walletconnectmodal/theming',
+            'advanced/walletconnectmodal/resources'
+          ]
         },
         {
           type: 'category',
@@ -311,72 +384,7 @@ module.exports = {
             }
           ]
         },
-        {
-          type: 'category',
-          label: 'WalletConnectModal',
-          collapsed: true,
-          collapsible: true,
-          items: [
-            'advanced/walletconnectmodal/about',
-            'advanced/walletconnectmodal/usage',
-            'advanced/walletconnectmodal/options',
-            'advanced/walletconnectmodal/theming',
-            'advanced/walletconnectmodal/resources'
-          ]
-        },
-        {
-          type: 'category',
-          label: 'Multi-Chain',
-          items: [
-            'advanced/multichain/overview',
-            'advanced/multichain/chain-list',
-            {
-              type: 'category',
-              label: 'Polkadot',
-              items: [
-                'advanced/multichain/polkadot/dapp-integration-guide',
-                'advanced/multichain/polkadot/wallet-integration-guide',
-                'advanced/multichain/polkadot/namespaces-guide'
-              ]
-            }
-          ]
-        },
-        'advanced/echo-server',
-        {
-          type: 'category',
-          label: 'Migration from v1.x',
-          items: [
-            {
-              type: 'doc',
-              id: 'advanced/migration-from-v1.x/overview',
-              label: 'Overview'
-            },
-            {
-              type: 'doc',
-              id: 'advanced/migration-from-v1.x/namespaces',
-              label: 'Namespaces'
-            },
-            {
-              type: 'category',
-              label: 'Dapps',
-              items: [
-                'advanced/migration-from-v1.x/dapps/dapps',
-                'advanced/migration-from-v1.x/dapps/dapp-checklist'
-              ]
-            },
-            {
-              type: 'category',
-              label: 'Wallets',
-              items: [
-                'advanced/migration-from-v1.x/wallets/wallets',
-                'advanced/migration-from-v1.x/wallets/wallet-checklist'
-              ]
-            },
-            'advanced/migration-from-v1.x/what-changed-from-v1.0',
-            'advanced/migration-from-v1.x/migration-faq',
-            'advanced/migration-from-v1.x/explorer-submission'
-          ]
-        }
+        'advanced/echo-server'
       ]
     },
     {
