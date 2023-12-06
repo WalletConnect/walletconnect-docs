@@ -15,7 +15,7 @@ To enable a device for push notifications, it's essential to register the device
 </PlatformTabItem>
 
 <PlatformTabItem value="android">
-This method enables wallets to receive push notifications from WalletConnect's [CAIP10](https://github.com/ChainAgnostic/CAIPs/blob/master/CAIPs/caip-10.md)Push Server via [Firebase Cloud Messaging](https://firebase.google.com/docs/cloud-messaging). This means you will have to setup your project with Firebase before being able to call registerDeviceToken method.
+This method enables wallets to receive push notifications from WalletConnect's Push Server via Firebase Cloud Messaging. This means you will have to setup your project with Firebase before being able to call registerDeviceToken method.
 
 To register a wallet to receive WalletConnect push notifications, call Web3Wallet.registerDeviceToken and pass the Firebase Access Token.
 ```kotlin
@@ -47,7 +47,7 @@ After the device token is registered, the next step involves setting up the noti
 </PlatformTabItem>
 
 <PlatformTabItem value="android">
-The PushMessagingService is a wrapper around the FirebaseMessagingService. The PushMessagingService class needs to be implemented for the Web3Wallet SDK to be able to decrypt and notify wallets of a push notification sent from the Dapp in the background. This service also needs to be registered in the AndroidManifest.xml file similar to the example in the [FCM documentation](https://firebase.google.com/docs/cloud-messaging/android/client#manifest).
+The PushMessagingService is a wrapper around the FirebaseMessagingService. The PushMessagingService class needs to be implemented for the Web3Wallet SDK to be able to decrypt and notify wallets of a push notification sent from the Dapp in the background. This service also needs to be registered in the AndroidManifest.xml file similar to the example in the FCM documentation.
 
 ```kotlin
 class SampleFirebaseService: PushMessagingService() {
