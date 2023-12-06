@@ -294,3 +294,77 @@ Your configuration should look like this:
 </TabItem>
 
 </Tabs>
+
+## Others
+
+<details>
+<summary>Enable Coinbase Wallet</summary>
+<div>
+Follow these steps to install Coinbase SDK in your project along with out custom wagmi connector.
+
+Check <a href="https://coinbase.github.io/wallet-mobile-sdk/docs/client-sdk/rn-install">Coinbase official docs</a> for more detailed information.
+
+* Note: The SDK is not compatible with Expo Go
+
+
+1. Enable Expo Modules in your project running: `npx install-expo-modules@latest`
+
+2. Install Coinbase SDK: `yarn add @coinbase/wallet-mobile-sdk react-native-mmkv` and `npx pod-install`
+
+3. Install our custom wagmi connector `yarn add @web3modal/coinbase-react-native`
+
+4. Enable Deeplink handling in your project following <a href="https://reactnative.dev/docs/linking?syntax=android#enabling-deep-links">React Native Docs</a>
+
+5. Add Coinbase package in your AndroidManifest.xml queries
+```xml
+/// AndroidManifest.xml
+<queries>
+      ///other queries
+      <package android:name="org.toshi" />
+</queries>
+```
+
+6. Add SDK responses listener in your project following <a href="https://coinbase.github.io/wallet-mobile-sdk/docs/client-sdk/rn-setup#listening-for-responses">Coinbase Docs</a>
+```tsx
+import { handleResponse } from "@coinbase/wallet-mobile-sdk";
+
+// Your app's deeplink handling code
+useEffect(() => {
+  const sub = Linking.addEventListener("url", ({ url }) => {
+    const handledBySdk = handleResponse(new URL(url));
+    if (!handledBySdk) {
+      // Handle other deeplinks
+    }
+  });
+
+  return () => sub.remove();
+}, []);
+```
+
+7. Initialize Coinbase Connector and add it in `extraConnectors`
+
+```tsx
+import { CoinbaseWagmiConnector } from '@web3modal/coinbase-react-native';
+
+
+const coinbaseConnector = new CoinbaseWagmiConnector({
+  chains,
+  options: {
+    redirect: 'YOUR_APP_SCHEME://',
+  },
+});
+
+const wagmiConfig = defaultWagmiConfig({
+  chains,
+  projectId,
+  metadata,
+  extraConnectors: [coinbaseConnector],
+});
+
+
+```
+
+Check <a href="https://coinbase.github.io/wallet-mobile-sdk/docs/client-sdk/rn-install">Coinbase Official Docs</a> for more detailed information.
+
+</div>
+</details>
