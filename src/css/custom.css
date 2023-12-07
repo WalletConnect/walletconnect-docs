@@ -34,6 +34,10 @@
   --ifm-container-background-color: #fff;
 }
 
+:where(.MarkpromptSearchBoxTrigger) {
+  border-radius: 1000rem !important;
+}
+
 .MarkpromptSearchBoxTriggerContent {
   margin: 0;
   transition: all var(--ifm-transition-fast) var(--ifm-transition-timing-default);
