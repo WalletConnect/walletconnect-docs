@@ -103,7 +103,10 @@ messaging().onMessage(async notification => {
 
     // decrypt the message
     // note this is static method and can be called without initializing the Web3Wallet
-    const decryptedMessage = await Web3wallet.notifications.decryptMessage(topic, message);
+    const decryptedMessage = await Web3wallet.notifications.decryptMessage({
+    topic,
+    encryptedMessage: message,
+  });
 
     /*
     * `decryptedMessage` is JsonRpcRequest object, with the full payload of the incorming request such as method, params, id, etc.
