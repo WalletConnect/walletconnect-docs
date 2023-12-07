@@ -12,14 +12,127 @@ It is designed from the ground up to support Next.js and Serverless.
 ## Install the Web3Modal SIWE package.
 
 ```bash npm2yarn
-npm i @web3modal/siwe@3.4.0-alpha.0 siwe ethers next-auth
+npm i @web3modal/siwe@3.4.0-alpha.1 @web3modal/ethers5@3.4.0-alpha.1 siwe ethers@5.7.2 next-auth
 ```
 
 ## Set up your API route
 
 Add `NEXTAUTH_SECRET` as an environment variable, it will be used to encrypt and decrypt user sessions.
 
-Create your API route `api/auth/[...nextauth].ts` and paste the following code into it.
+Create your API route `api/auth/[...nextauth]/route.ts` and paste the following code into it.
+
+```ts
+import NextAuth from "next-auth";
+import type { NextAuthOptions } from "next-auth";
+import credentialsProvider from 'next-auth/providers/credentials';
+import { getCsrfToken } from 'next-auth/react';
+import { SiweMessage } from 'siwe';
+import { ethers } from 'ethers';
+
+export const authOptions: NextAuthOptions = {  
+  providers: [
+    credentialsProvider({
+			name: 'Ethereum',
+			credentials: {
+				message: {
+					label: 'Message',
+					type: 'text',
+					placeholder: '0x0',
+				},
+				signature: {
+					label: 'Signature',
+					type: 'text',
+					placeholder: '0x0',
+				},
+			},
+			async authorize(credentials, req) {
+				try {
+					if (!credentials?.message) {
+						throw new Error('SiweMessage is undefined');
+					}
+					const siwe = new SiweMessage(credentials.message);
+					const provider = new ethers.providers.InfuraProvider(siwe.chainId);
+					const nonce = await getCsrfToken({ req: { headers: req.headers } });
+					const result = await siwe.verify(
+						{
+							signature: credentials?.signature || '',
+							nonce,
+						},
+						{
+							provider,
+						}
+					);
+
+					if (result.success) {
+						return {
+							id: `eip155:${siwe.chainId}:${siwe.address}`,
+						};
+					}
+
+					return null;
+				} catch (e) {
+					return null;
+				}
+			},
+		}),
+  ],
+  session: {
+    strategy: "jwt",
+  },
+
+  secret: process.env.NEXTAUTH_SECRET,
+  callbacks: {
+    async session({ session, token }) {
+        if (!token.sub) {
+          return session
+        }
+
+        const [, chainId, address] = token.sub.split(':')
+
+        if (chainId && address) {
+          session.address = address
+          session.chainId = parseInt(chainId, 10)
+        }
+
+        return session
+    }
+  },
+};
+
+const handler = NextAuth(authOptions);
+
+export { handler as GET, handler as POST };
+```
+
+Extend Sessions interface. Create a `types/next-auth.d.ts` file. Read more about Nextauth [Module Augmentation](https://next-auth.js.org/getting-started/typescript#module-augmentation)
+
+```ts
+import NextAuth, { DefaultSession } from 'next-auth';
+import type { SIWESession } from '@web3modal/core';
+
+declare module 'next-auth' {
+	/**
+	 * Returned by `useSession`, `getSession` and received as a prop on the `SessionProvider` React Context
+	 */
+	interface Session extends SIWESession {
+		user: DefaultSession['user'];
+	}
+}
+```
+
+:::note
+These steps are specific to [Next.js](https://nextjs.org/) app api routes.
+:::
+
+## Pages API route
+
+:::info Note
+The following steps are specific to [Next.js](https://nextjs.org/) page api routes.
+:::
+
+Add `NEXTAUTH_SECRET` as an environment variable, it will be used to encrypt and decrypt user sessions.
+
+Create your API route `pages/api/auth/[...nextauth].ts` and paste the following code into it.
 
 ```ts
 import type { SIWESession } from '@web3modal/core'
@@ -208,6 +321,10 @@ createWeb3Modal({
 
 ## Add the SessionProvider in your `_app.tsx`
 
+:::info Note
+The following steps are specific to [Next.js](https://nextjs.org/) page router.
+:::
+
 ```tsx
 import { SessionProvider } from 'next-auth/react'
 // Use of the <SessionProvider> is mandatory to allow components that call
@@ -225,6 +342,27 @@ export default function App({
   )
 }
 ```
+
+## Add the SessionProvider in your `context/Web3Modal.tsx`
+
+:::info Note
+The following steps are specific to [Next.js](https://nextjs.org/) app router.
+:::
+
+Add the following code into `context/Web3Modal.tsx` [Refer web3modal implementation](https://docs.walletconnect.com/web3modal/nextjs/about#implementation)
+
+```ts
+// Refer to https://docs.walletconnect.com/web3modal/nextjs/about#implementation
+import { SessionProvider } from 'next-auth/react'
+// Use of the <SessionProvider> is mandatory to allow components that call
+// `useSession()` anywhere in your application to access the `session` object.
+
+
+export default function Web3ModalProvider({ children }: { children: React.ReactNode }) {
+	return <SessionProvider>{children}</SessionProvider>;
+}
+```
+
 
 ### SIWE Config reference
 ```ts
