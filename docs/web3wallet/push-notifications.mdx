@@ -47,7 +47,7 @@ After the device token is registered, the next step involves setting up the noti
 </PlatformTabItem>
 
 <PlatformTabItem value="android">
-The PushMessagingService is a wrapper around the FirebaseMessagingService. The PushMessagingService class needs to be implemented for the Web3Wallet SDK to be able to decrypt and notify wallets of a push notification sent from the Dapp in the background. This service also needs to be registered in the AndroidManifest.xml file similar to the example in the FCM documentation.
+The `PushMessagingService` is a wrapper around the `FirebaseMessagingService`. The `PushMessagingService` class needs to be implemented for the Web3Wallet SDK to be able to decrypt and notify wallets of a push notification sent from the Dapp in the background. This service also needs to be registered in the `AndroidManifest.xml` file similar to the example in the FCM documentation.
 
 ```kotlin
 class SampleFirebaseService: PushMessagingService() {
