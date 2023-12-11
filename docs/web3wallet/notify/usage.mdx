@@ -145,6 +145,7 @@ func onSign(message: String) -> CacaoSignature {
     let signature = try! signer.sign(message: message, privateKey: privateKey, type: .eip191)
     return signature
 }
+```
 </PlatformTabItem>
 <PlatformTabItem value="android">
 
@@ -605,7 +606,7 @@ Additionally, you will need to create a [keychain group](https://developer.apple
 Inside your notification service extension file, import WalletConnectNotify, initialize `Web3WalletDecryptionService()` for Web3Wallet or NotifyDecryptionService for Notify , and decrypt the message with the following Swift code:
 
 :::caution
-See full [UNNotificationServiceExtension](https://developer.apple.com/documentation/usernotifications/unnotificationserviceextension) implementation in our [SampleApp](https://github.com/WalletConnect/WalletConnectSwiftV2/blob/main/Example/PNDecryptionService/NotificationService.swift) 
+See full [UNNotificationServiceExtension](https://developer.apple.com/documentation/usernotifications/unnotificationserviceextension) implementation in our [SampleApp](https://github.com/WalletConnect/WalletConnectSwiftV2/blob/main/Example/PNDecryptionService/NotificationService.swift) implementation in our [SampleApp](https://github.com/WalletConnect/WalletConnectSwiftV2/blob/main/Example/PNDecryptionService/NotificationService.swift) 
 :::
 
 ```swift
