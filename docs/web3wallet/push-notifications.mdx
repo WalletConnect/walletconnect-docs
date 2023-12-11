@@ -26,16 +26,23 @@ func application(_ application: UIApplication, didRegisterForRemoteNotifications
 </PlatformTabItem>
 
 <PlatformTabItem value="android">
-### Registering Device Token and Enabling Encrypted Push Notifications
+This method enables wallets to receive push notifications from WalletConnect's Push Server via Firebase Cloud Messaging. This means you will have to setup your project with Firebase before being able to call `registerDeviceToken()` method.
 
-In your AppDelegate, you need to register your device token for push notifications. To enable encrypted push notifications, set the `enableEncrypted` flag to `true`.
+To register a wallet to receive WalletConnect push notifications, call `Web3Wallet.registerDeviceToken` and pass the Firebase Access Token.
+```kotlin
+val firebaseAccessToken: String = //FCM access token received through the Firebase Messaging SDK
+val enableEncrypted: Boolean = true //Flag that enables receiveing the detailed notifications
 
-```Swift
-func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-    Task(priority: .high) {
-        try await Web3Wallet.instance.register(deviceToken: deviceToken, enableEncrypted: true)
-    }
-}
+Web3Wallet.registerDeviceToken(
+    firebaseAccessToken = firebaseAccessToken,
+    enableEncrypted = enableEncrypted,
+    onSuccess = {
+        // callback triggered once registered successfully with the Push Server
+    },
+    onError = { error: Wallet.Model.Error ->
+        // callback triggered if there's an exception thrown during the registration process
+    })
+```
 
 </PlatformTabItem>
 
