@@ -15,7 +15,7 @@ module.exports = {
       label: 'Introduction',
       className: 'menu_outer_list',
       collapsible: false,
-      items: ['readme', 'quickstart']
+      items: ['readme', 'getting-started']
     },
     {
       type: 'category',
@@ -30,6 +30,7 @@ module.exports = {
           collapsible: true,
           items: [
             'web3modal/about',
+            'web3modal/quickstart',
 
             {
               type: 'category',
