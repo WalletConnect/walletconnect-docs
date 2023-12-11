@@ -60,38 +60,17 @@ To check the full list of platform specific instructions for your preferred plat
 >
 <PlatformTabItem value="ios">
 
+Important: Confirm you have configured the [Network Client](../api/core/relay.mdx) first.
+
 Configure the `Notify` instance with:
 
 ```swift
-try Notify.configure(groupIdentifier: String, environment: APNSEnvironment, crypto: CryptoProvider)
+try Notify.configure(environment: APNSEnvironment, crypto: CryptoProvider)
 ```
-
-`groupIdentifier` - App group identifier, created on Apple Developer portal. Enables to share keychain items between the Notify SDK and a UNNotificationServiceExtension to receive and decrypt push notifications.
 
 `environment` - Use `debug` environment for debug builds and `release` for release and TestFlight builds.
 
 `crypto` - CryptoProvider is a protocol, you are required to provide an implementation of `recoverPubKey` and `keccak256` methods.
-
-
-#### Sign a SIWE message to view and manage notifications
-
-To login to manage notifications, you must call the `register()` method and supply an `onSign` callback. The Notify SDK will call this callback with the SIWE message to sign, and the signature to be returned. Once logged in, cross-device syncing will be enabled.
-
-```swift
-Notify.instance.register(account: account, domain: domain, onSign: onSign)
-```
-
-- `account` - An CAIP-10 account that the identity key will be issued for
-- `domain` - A domain of your wallet, you should use your bundle ID
-- `onSign` - callback that requests a signature from the user  
-
-Provide your own sign function implementation that returns CacaoSignature. See our sample wallet app for a [more detailed example](https://github.com/WalletConnect/WalletConnectSwiftV2/blob/5ab573d9d3cd1cd641bf6d422c33e29b30226d36/Example/Shared/ImportAccount.swift#L94).
-
-```swift
-func onSign(message: String) -> SigningResult {
-    let signature = try! signer.sign(message: message)
-    return .signed(signature)
-}
 ```
 
 </PlatformTabItem>
@@ -144,7 +123,28 @@ In order to register account in Notify API to be able to subscribe to any dapp t
 
 <PlatformTabs activeOptions={["ios","android", "react-native"]}>
 <PlatformTabItem value="ios">
+#### Sign a SIWE message to view and manage notifications
 
+To login to manage notifications, you must request message to sign with `prepareRegistration()` method and register signature with `register()` method. Once logged in, cross-device syncing will be enabled.
+
+```swift
+let params = try await Notify.instance.prepareRegistration(account: account, domain: "com.YOURAPPDOMAIN")
+let signature = onSign(message: params.message) // Sign message with your signer
+try await Notify.instance.register(params: params, signature: signature)
+```
+
+- `account` - An CAIP-10 account that the identity key will be issued for
+- `domain` - A domain of your wallet, you should use your bundle ID  
+
+Provide your own sign function implementation that returns CacaoSignature. If SIWE is not implemented on your app you can always use our [MessageSignerFactory](https://github.com/WalletConnect/WalletConnectSwiftV2/blob/main/Sources/WalletConnectSigner/Signer/MessageSignerFactory.swift) and [DefaultSignerFactory](https://github.com/WalletConnect/WalletConnectSwiftV2/blob/main/Example/Shared/DefaultSignerFactory.swift) from our sample app that uses Web3 SPM package.
+
+```swift
+func onSign(message: String) -> CacaoSignature {
+    let privateKey = Data(hex: privateKey)
+    let signer = MessageSignerFactory(signerFactory: DefaultSignerFactory()).create()
+    let signature = try! signer.sign(message: message, privateKey: privateKey, type: .eip191)
+    return signature
+}
 </PlatformTabItem>
 <PlatformTabItem value="android">
 
@@ -219,6 +219,22 @@ To begin receiving notifications from a dapp, users must opt-in by subscribing. 
 <PlatformTabs activeOptions={["ios","android", "react-native"]}>
 <PlatformTabItem value="ios">
 
+```swift
+public func subscribe(metadata: AppMetadata, account: Account, onSign: @escaping SigningCallback) async throws {
+```
+
+`metadata` - metadata object of publicly discoverable dapp fetched from WalletConnect explorer
+
+`account` - an account you want to associate a sebscription with
+
+`onSign` - callback that requires a signature from a user
+
+#### Combine event
+
+```swift
+public var subscriptionsPublisher: AnyPublisher<[NotifySubscription], Never>
+```
+
 </PlatformTabItem>
 <PlatformTabItem value="android">
 
@@ -257,6 +273,10 @@ To fetch the current list of subscriptions an account has, call **`getActiveSubs
 <PlatformTabs activeOptions={["ios","android", "react-native"]}>
 <PlatformTabItem value="ios">
 
+```swift
+public func getActiveSubscriptions(account: Account) -> [NotifySubscription]
+```
+
 </PlatformTabItem>
 <PlatformTabItem value="android">
 
@@ -277,6 +297,12 @@ To fetch subscription’s notifications by calling **`getMessageHistory()`**.
 
 <PlatformTabs activeOptions={["ios","android", "react-native"]}>
 <PlatformTabItem value="ios">
+
+```swift
+public func getMessageHistory(topic: String) -> [NotifyMessageRecord]
+```
+
+`topic` - unique subscription's topic
 
 </PlatformTabItem>
 <PlatformTabItem value="android">
@@ -300,6 +326,13 @@ Users can alter their notification settings to filter out unwanted alerts from a
 
 <PlatformTabs activeOptions={["ios","android", "react-native"]}>
 <PlatformTabItem value="ios">
+```swift
+public func update(topic: String, scope: Set<String>) async throws
+```
+
+`topic` - topic of the subscription to update
+
+`scope` - The new space delimited list of scopes
 
 </PlatformTabItem>
 <PlatformTabItem value="android">
@@ -334,7 +367,7 @@ Developers can fetch latest notification types specified by dapp by calling **`g
 
 <PlatformTabs activeOptions={["ios","android", "react-native"]}>
 <PlatformTabItem value="ios">
-
+TBD
 </PlatformTabItem>
 <PlatformTabItem value="android">
 
@@ -358,6 +391,11 @@ To opt-out of receiving notifications from a dap, a user can decide to unsubscri
 
 <PlatformTabs activeOptions={["ios","android", "react-native"]}>
 <PlatformTabItem value="ios">
+```swift
+try await Notify.instance.deleteSubscription(topic: String)
+```
+
+`topic` - subscription's topic 
 
 </PlatformTabItem>
 <PlatformTabItem value="android">
@@ -386,6 +424,12 @@ Once a notification is viewed, you may want to remove the message from the clien
 
 <PlatformTabs activeOptions={["ios","android", "react-native"]}>
 <PlatformTabItem value="ios">
+
+```swift
+public func deleteNotifyMessage(id: String)
+```
+
+`id` - notify message id
 
 </PlatformTabItem>
 <PlatformTabItem value="android">
@@ -417,6 +461,11 @@ If an account is removed from the client or a user no longer wants to receive no
 
 <PlatformTabs activeOptions={["ios","android", "react-native"]}>
 <PlatformTabItem value="ios">
+```swift
+public func unregister(account: Account) async throws
+```
+
+`account` -  account ot unregister
 
 </PlatformTabItem>
 <PlatformTabItem value="android">
@@ -553,23 +602,34 @@ For details on how to modify the content in newly delivered notifications, refer
 
 Additionally, you will need to create a [keychain group](https://developer.apple.com/documentation/security/keychain_services/keychain_items/sharing_access_to_keychain_items_among_a_collection_of_apps) that is shared between your wallet application and the notification service. 
 
-Inside your notification service extension file, import WalletConnectNotify, initialize `NotifyDecryptionService()`, and decrypt the message with the following Swift code:
+Inside your notification service extension file, import WalletConnectNotify, initialize `Web3WalletDecryptionService()` for Web3Wallet or NotifyDecryptionService for Notify , and decrypt the message with the following Swift code:
+
+:::caution
+See full [UNNotificationServiceExtension](https://developer.apple.com/documentation/usernotifications/unnotificationserviceextension) implementation in our [SampleApp](https://github.com/WalletConnect/WalletConnectSwiftV2/blob/main/Example/PNDecryptionService/NotificationService.swift) 
+:::
 
 ```swift
 override func didReceive(_ request: UNNotificationRequest, withContentHandler contentHandler: @escaping (UNNotificationContent) -> Void) {
-    bestAttemptContent = (request.content.mutableCopy() as? UNMutableNotificationContent)
-    if let bestAttemptContent = bestAttemptContent {
-        let topic = bestAttemptContent.userInfo["topic"] as! String
-        let ciphertext = bestAttemptContent.userInfo["blob"] as! String
-        do {
-            let service = NotifyDecryptionService(groupIdentifier: "your_app_group_identifier")
-            let pushMessage = try service.decryptMessage(topic: topic, ciphertext: ciphertext)
-            bestAttemptContent.title = pushMessage.title
-            bestAttemptContent.body = pushMessage.body
-            contentHandler(bestAttemptContent)
-            return
+        self.contentHandler = contentHandler
+        self.bestAttemptContent = request.content
+
+        if let content = bestAttemptContent,
+           let topic = content.userInfo["topic"] as? String,
+           let ciphertext = content.userInfo["message"] as? String,
+           let tag = content.userInfo["tag"] as? UInt {
+
+            if Web3WalletDecryptionService.canHandle(tag: tag) {
+                let mutableContent = handleWeb3WalletNotification(content: content, topic: topic, tag: tag, ciphertext: ciphertext)
+                contentHandler(mutableContent)
+            } else if NotifyDecryptionService.canHandle(tag: tag) {
+                let mutableContent = handleNotifyNotification(content: content, topic: topic, ciphertext: ciphertext)
+                contentHandler(mutableContent)
+            } else {
+                let mutableContent = content.mutableCopy() as! UNMutableNotificationContent
+                mutableContent.title = "Error: unknown message tag"
+            }
         }
-    ...
+    }
 }
 ```
 

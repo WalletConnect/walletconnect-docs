@@ -36,6 +36,8 @@ struct SocketFactory: WebSocketFactory {
 
 Please note that if you have made changes to the list of **Allowed Domains** in the **WalletConnect Cloud Dashboard**, then you may encounter an error with the connection if you use **Starscream** or any other socket client. For example, the native implementation of **Starscream** will use the `relay.walletconnect.com` as an `Origin` parameter if not provided, which will be missing from the list of **Allowed Domains**. The solution to this could be the inclusion of the `relay.walletconnect.com` in the **Allowed Domains**, corresponding changes in the socket client implementation, or following changes in the `WebSocketFactory`.
 
+Create and register App Group Identifier in [Apple Developer portal](https://developer.apple.com/account/resources/identifiers/list/applicationGroup) if needed and provide it during Networking client configuration.
+
 ```swift
 import Starscream
 
@@ -53,8 +55,10 @@ struct DefaultSocketFactory: WebSocketFactory {
 #### Networking client configuration
 
 ```swift
-Networking.configure(projectId: <String>, socketFactory: SocketFactory())
+Networking.configure(groupIdentifier: <String>, projectId: <String>, socketFactory: SocketFactory())
 ```
+
+`groupIdentifier` - App group identifier, created on [Apple Developer portal](Developer Center](https://developer.apple.com/account/resources/identifiers/list/applicationGrou). Enables to share keychain items between the Notify SDK and a UNNotificationServiceExtension to receive and decrypt push notifications.
 
 #### Web Socket Connection
 
