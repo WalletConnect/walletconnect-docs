@@ -23,15 +23,22 @@ const signClient = await SignClient.init({
 
 ## Allowlist
 
-Limit access to known HTTP [origin](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Origin).
+To help prevent malicious use of your project ID you are strongly encouraged to set an allowlist of [origins](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Origin) where the project ID is used. This supports a list of origins in the format `[scheme://]<hostname[:port]`. Requests from other origins will be denied.
 
-Possible values for the origin value:
+Using `localhost` (or `127.0.0.1`) is always permitted, and if empty all origins are allowed. Updates take 15 minutes to apply.
 
-- `<scheme>://<hostname>`
-- `<scheme>://<hostname>:<port>`
-- `<scheme>://*.<hostname>`
+If scheme or port is specified, it must match exactly. Hostname must also match exactly, but wildcards can be used for individual labels within the hostname.
 
-Adding `https://dapp.example.com` to the allowlist will only allow requests from that origin. Requests from other origins will be denied. Using localhost (or 127.0.0.1) is also always permitted.  Updates take 15 minutes to apply.
+Example of possible origins in the allowlist:
+
+- `example.com` - allows `https://example.com` or `http://example.com` but not `https://www.example.com`
+- `https://example.com` - allows `https://example.com` but not `http://example.com`
+- `https://www.example.com` - allows `https://www.example.com` but not `https://example.com`
+- `https://example.com:8080` - allows `https://example.com:8080` but not `https://example.com`
+- `https://*.example.com` - allows `https://www.example.com` but not `https://example.com`
+- `https://*.*.example.com` - allows `https://www.subdomain.example.com` but not `https://www.example.com` or `https://example.com`
+- `https://www.*.example.com` - allows `https://www.subdomain.example.com` but not `https://www.example.com`
+- `https://www-*.example.com` - invalid; `*` must be the full label
 
 ## Error Codes
 
