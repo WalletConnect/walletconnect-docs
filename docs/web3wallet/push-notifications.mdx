@@ -11,7 +11,18 @@ To enable a device for push notifications, it's essential to register the device
 
 <PlatformTabs activeOptions={["ios", "android", "react-native"]}>
 <PlatformTabItem value="ios">
-{/* Fill ios tab */}
+
+### Registering Device Token and Enabling Encrypted Push Notifications
+
+In your AppDelegate, you need to register your device token for push notifications. To enable encrypted push notifications, set the `enableEncrypted` flag to `true`.
+
+```Swift
+func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+    Task(priority: .high) {
+        try await Web3Wallet.instance.register(deviceToken: deviceToken, enableEncrypted: true)
+    }
+}
+
 </PlatformTabItem>
 
 <PlatformTabItem value="android">
@@ -82,7 +93,76 @@ After the device token is registered, the next step involves setting up the noti
 <PlatformTabs activeOptions={["ios", "android", "react-native"]}>
 
 <PlatformTabItem value="ios">
-{/* Fill ios tab */}
+
+### Decrypting Push Notifications
+
+When using encrypted push notifications via APNs, the payload will look like this:
+
+```json
+{
+  "aps": {
+    "content-available": 1,
+    "mutable-content": 1
+  },
+  "message": "String", // Encrypted payload
+  "topic": "String",  // Subscription topic
+  "tag": "String" // Tag of the associated relay message
+}
+```
+To decrypt a push notification, follow these steps:
+
+#### Instantiate [UNNotificationServiceExtension](https://developer.apple.com/documentation/usernotifications/unnotificationserviceextension)
+
+#### Modify the content of newly delivered notifications.
+Learn more about [modifying content in newly delivered notifications](https://developer.apple.com/documentation/usernotifications/modifying_content_in_newly_delivered_notifications).
+
+#### Create a Shared [Keychain Group](https://developer.apple.com/documentation/security/keychain_services/keychain_items/sharing_access_to_keychain_items_among_a_collection_of_apps)
+
+Ensure you have a keychain group that is shared between your wallet application and the notification service. This is set in the app during the Networking Client configuration as shown below:
+
+```Swift
+Networking.configure(
+    groupIdentifier: "group.com.walletconnect.sdk",
+    projectId: InputConfig.projectId,
+    socketFactory: DefaultSocketFactory()
+)
+```
+
+Instantiate Web3WalletDecryptionService
+Use the same group name inside your notification service extension.
+
+```Swift
+if let content = bestAttemptContent,
+   let topic = content.userInfo["topic"] as? String,
+   let ciphertext = content.userInfo["message"] as? String,
+   let tag = content.userInfo["tag"] as? UInt {
+
+    if Web3WalletDecryptionService.canHandle(tag: tag) {
+        let web3WalletDecryptionService = try Web3WalletDecryptionService(groupIdentifier: "group.com.walletconnect.sdk")
+        
+        // Decrypt the notification payload
+        let decryptedPayload = try web3WalletDecryptionService.decryptMessage(topic: topic, ciphertext: ciphertext, tag: tag)
+        let mutableContent = content.mutableCopy() as! UNMutableNotificationContent
+
+        // Retrieve metadata associated with your peer
+        guard let metadata = web3WalletDecryptionService.getMetadata(topic: topic) else {
+            mutableContent.title = "Error: Cannot get peer's metadata"
+            return mutableContent
+        }
+
+        // Customise the notification based on the decrypted payload and metadata
+        switch decryptedPayload.requestMethod {
+        case .sessionProposal, .sessionRequest, .authRequest:
+            mutableContent.title = "" // Customise the notification title here based on metadata
+            mutableContent.body = "" // Customise the notification body here based on metadata
+        }
+
+        // Pass the customised notification content to the content handler
+        contentHandler(mutableContent)
+    }
+}
+```
+
 </PlatformTabItem>
 
 <PlatformTabItem value="android">
