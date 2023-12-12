@@ -138,9 +138,9 @@ const notifyClient = await NotifyClient.init({
 
 ## Account login
 
-:::caution
-Update me after new specs change of the new registration flow. Szymon will update me.
-:::
+In order to register account in Notify API to be able to subscribe to any dapp to start receving notifications, account needs to sign SIWE message to prove ownership. Developers can check if an account is registered by calling **`isRegistered()`** function. If the account is not registered, developers should call **`prepareRegistration()`** and then **`register()`** function to register the account.
+
+
 
 <PlatformTabs activeOptions={["ios","android", "react-native"]}>
 <PlatformTabItem value="ios">
@@ -148,9 +148,63 @@ Update me after new specs change of the new registration flow. Szymon will updat
 </PlatformTabItem>
 <PlatformTabItem value="android">
 
-:::caution
-I need to implement it in the client first. Will update afterwards. Szymon will update me.
-:::
+Snippet below shows how to check if an account is registered and how to register an account if it's not registered yet. Developers could use `CacaoSigner` to sign the message or use their own signing method.
+
+
+```kotlin
+val account: String = ""// The CAIP-10 account i.e. "eip155:1:0xAbC1234567890DefABC1234567890dEFABC12345"
+val domain = BuildConfig.APPLICATION_ID
+val allApps = true
+
+// Caution: This function is blocking and runs on the current thread. It is advised that this function be called from background operation
+val isRegistered = NotifyClient.isRegistered(params = Notify.Params.IsRegistered(account = account, domain = domain, allApps = allApps))
+
+if (!isRegistered) {
+    NotifyClient.prepareRegistration(
+        params = Notify.Params.PrepareRegistration(account = account, domain = domain, allApps = allApps),
+        onSuccess = { cacaoPayloadWithIdentityPrivateKey, message ->
+
+            // Pick one of the following methods to sign the message:
+
+            // 1. Using CacaoSigner to sign the message
+            val signature = CacaoSigner.sign(
+              message,
+              PRIVATE_KEY, // Private key used to signing a message,
+              SignatureType.EIP191
+            )
+
+            // 2. Alternatively, you can use your own signing method
+            /** Add imports:
+                import com.walletconnect.android.cacao.signature.SignatureType
+                import com.walletconnect.android.internal.common.signing.signature.Signature
+                import com.walletconnect.android.internal.common.signing.signature.toCacaoSignature
+             */
+             
+            val signature: String = // Here developers provide signed message using their own signing method
+            val cacaoSignature = Notify.Model.Cacao.Signature(SignatureType.EIP191.header, Signature.fromString(signature).toCacaoSignature())
+
+            // Once the message has been signed, call the register function
+
+            NotifyClient.register(
+                params = Notify.Params.Register(cacaoPayloadWithIdentityPrivateKey = cacaoPayloadWithIdentityPrivateKey, signature = signature),
+                onSuccess = { 
+                  // Registration was successful
+                 },
+                onError = { 
+                  // There was an error while trying to register the account
+                }
+            )
+
+        },
+        onError = { 
+          // There was an error while trying to prepare the registration
+        }
+    )
+} else {
+  // Great! Account is already registered
+}
+```
+
 </PlatformTabItem>
 
 <PlatformTabItem value="react-native">
@@ -524,15 +578,9 @@ override func didReceive(_ request: UNNotificationRequest, withContentHandler co
 
 ### Firebase Cloud Messaging setup
 
-:::caution
-Needs update after w3w push notification page is changed. Szymon will update me.
-:::
+To setup Firebase Cloud Messaging please follow our [Push Notifications docs](../push-notifications.mdx).
 
 ### NotifyClient.Delegate
-
-:::caution 
-Update after delegate change. Szymon will update me.
-:::
 
 `NotifyClient` needs a `NotifyClient.Delegate` passed to it for it to be able to expose asynchronous updates sent from the dapp. It's recommended to set the delegate in the `onCreate` function of the `Application` class.
 
@@ -543,6 +591,13 @@ val walletDelegate = object : NotifyClient.Delegate {
         // Triggered when a wallet initiated subscription has been created
     }
 
+    override fun onNotifyNotification(notifyNotification: Notify.Event.Notification) {
+        // Triggered when a message has been sent by the Dapp. The message contains the title, body, icon, and url
+    }
+
+    // Deprecated
+    // Use onNotifyNotification instead
+    // Will be removed in future versions
     override fun onNotifyMessage(notifyMessage: Notify.Event.Message) {
         // Triggered when a message has been sent by the Dapp. The message contains the title, body, icon, and url
     }
