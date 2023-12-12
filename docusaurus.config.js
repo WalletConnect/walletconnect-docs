@@ -189,7 +189,7 @@ const config = {
       announcementBar: {
         id: 'support_us',
         content:
-          'The Web3Inbox SDK is in beta! <a rel="noopener noreferrer" href="/web3inbox/about?utm_source=docs&utm_medium=banner&utm_campaign=sdkpubliclaunch">Explore the new SDK</a>',
+          '🎉 The Web3Inbox SDK is in beta! <a rel="noopener noreferrer" href="/web3inbox/about?utm_source=docs&utm_medium=banner&utm_campaign=sdkpubliclaunch">Explore the new SDK</a> 🎉',
         backgroundColor: '#3182ce',
         textColor: '#fff',
         isCloseable: true
