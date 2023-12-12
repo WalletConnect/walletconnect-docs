@@ -71,9 +71,9 @@ try Notify.configure(environment: APNSEnvironment, crypto: CryptoProvider)
 `environment` - Use `debug` environment for debug builds and `release` for release and TestFlight builds.
 
 `crypto` - CryptoProvider is a protocol, you are required to provide an implementation of `recoverPubKey` and `keccak256` methods.
-```
 
 </PlatformTabItem>
+
 <PlatformTabItem value="android">
 
 To initialize the Notify client, create a `Notify.Params.Init` object in the Android Application class with the Core Client passed as a parameter. The `Notify.Params.Init` object will then be passed to the `Notify.initialize` function. There is also an `onError` callback that will need to be provided which will return an instance of `Notify.Model.Error` if there's an issue initializing the client.
@@ -123,6 +123,7 @@ In order to register account in Notify API to be able to subscribe to any dapp t
 
 <PlatformTabs activeOptions={["ios","android", "react-native"]}>
 <PlatformTabItem value="ios">
+
 #### Sign a SIWE message to view and manage notifications
 
 To login to manage notifications, you must request message to sign with `prepareRegistration()` method and register signature with `register()` method. Once logged in, cross-device syncing will be enabled.
@@ -221,14 +222,12 @@ To begin receiving notifications from a dapp, users must opt-in by subscribing. 
 <PlatformTabItem value="ios">
 
 ```swift
-public func subscribe(metadata: AppMetadata, account: Account, onSign: @escaping SigningCallback) async throws {
+public func subscribe(appDomain: String, account: Account) async throws
 ```
 
-`metadata` - metadata object of publicly discoverable dapp fetched from WalletConnect explorer
+`appDomain` - dapp domain fetched from WalletConnect explorer
 
 `account` - an account you want to associate a sebscription with
-
-`onSign` - callback that requires a signature from a user
 
 #### Combine event
 
@@ -607,7 +606,7 @@ Additionally, you will need to create a [keychain group](https://developer.apple
 Inside your notification service extension file, import WalletConnectNotify, initialize `Web3WalletDecryptionService()` for Web3Wallet or NotifyDecryptionService for Notify , and decrypt the message with the following Swift code:
 
 :::caution
-See full [UNNotificationServiceExtension](https://developer.apple.com/documentation/usernotifications/unnotificationserviceextension) implementation in our [SampleApp](https://github.com/WalletConnect/WalletConnectSwiftV2/blob/main/Example/PNDecryptionService/NotificationService.swift) implementation in our [SampleApp](https://github.com/WalletConnect/WalletConnectSwiftV2/blob/main/Example/PNDecryptionService/NotificationService.swift) 
+See full [UNNotificationServiceExtension](https://developer.apple.com/documentation/usernotifications/unnotificationserviceextension) implementation in our [SampleApp](https://github.com/WalletConnect/WalletConnectSwiftV2/blob/main/Example/PNDecryptionService/NotificationService.swift)
 :::
 
 ```swift
