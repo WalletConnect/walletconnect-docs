@@ -113,6 +113,53 @@ const notifyClient = await NotifyClient.init({
 })
 ```
 
+## Add listeners for relevant events
+
+```javascript
+// Handle response to a `notifyClient.subscribe(...)` call
+notifyClient.on('notify_subscription', async ({ params }) => {
+  const { error } = params
+
+  if (error) {
+    // Setting up the subscription failed.
+    // Inform the user of the error and/or clean up app state.
+    console.error('Setting up subscription failed: ', error)
+  } else {
+    // New subscription was successfully created.
+    // Inform the user and/or update app state to reflect the new subscription.
+    console.log(`Subscribed successfully.`)
+  }
+})
+
+// Handle an incoming notification
+notifyClient.on('notify_message', ({ params }) => {
+  const { message } = params
+  // e.g. build a notification using the metadata from `message` and show to the user.
+})
+
+// Handle response to a `notifyClient.update(...)` call
+notifyClient.on('notify_update', ({ params }) => {
+  const { error } = params
+
+  if (error) {
+    // Updating the subscription's scope failed.
+    // Inform the user of the error and/or clean up app state.
+    console.error('Setting up subscription failed: ', error)
+  } else {
+    // Subscription's scope was updated successfully.
+    // Inform the user and/or update app state to reflect the updated subscription.
+    console.log(`Successfully updated subscription scope.`)
+  }
+})
+
+// Handle a change in the existing subscriptions (e.g after a subscribe or update)
+notifyClient.on('notify_subscriptions_changed', ({ params }) => {
+  const { subscriptions } = params
+  // `subscriptions` will contain any *changed* subscriptions since the last time this event was emitted.
+  // To get a full list of subscriptions for a given account you can use `notifyClient.getActiveSubscriptions({ account: 'eip155:1:0x63Be...' })`
+})
+```
+
 </PlatformTabItem>
 </PlatformTabs>
 
@@ -210,6 +257,33 @@ if (!isRegistered) {
 
 <PlatformTabItem value="react-native">
 
+
+:::note
+This is a one-time action per account. It does not need to be repeated after initial registration of the new account.
+:::
+
+To register an identity key, you must provide a callback to the `onSign: (message: string) => string` parameter of the `register` method.
+In order to authorize the Notify subscription, the SDK will trigger this callback with a message to sign, expecting the signature for that message to be returned.
+
+Some suggested ways to implement the `onSign` callback are via:
+
+- Ethers.js [`Wallet.signMessage` method](https://docs.ethers.org/v5/api/signer/#Signer-signMessage)
+- The [`signMessage` method](https://wagmi.sh/core/actions/signMessage) in `@wagmi/core`
+
+### Registering as a wallet
+
+```javascript
+const account = `eip155:1:0x63Be2c680685d2A9620c11b0068291261aa62d76`
+const onSign = (message: string) => ethersWallet.signMessage(message)
+
+await notifyClient.register({
+  account,
+  onSign,
+  domain: 'com.example.app.rn', // pass your app's bundle identifier.
+  isLimited: false // The user will be prompted to authorize this wallet to send and receive messages on their behalf for ALL domains using their WalletConnect identity.
+})
+```
+
 </PlatformTabItem>
 </PlatformTabs>
 
@@ -262,6 +336,25 @@ NotifyClient.subscribe(
 </PlatformTabItem>
 <PlatformTabItem value="react-native">
 
+:::info
+To identify dapps that can be subscribed to via Notify, we can query the following Explorer API endpoint:
+
+https://explorer-api.walletconnect.com/v3/dapps?projectId=YOUR_PROJECT_ID&is_notify_enabled=true
+:::
+
+```javascript
+// Get the domain of the target dapp from the Explorer API response
+const appDomain = new URL(fetchedExplorerDapp.platform_browser).hostname
+
+// Subscribe to `fetchedExplorerDapp` by passing the account to be subscribed and the domain of the target dapp.
+await notifyClient.subscribe({
+  account,
+  appDomain
+})
+
+// -> Success/Failure will be received via the `notify_update` event registered previously.
+// -> New subscription will be emitted via the `notify_subscriptions_changed` watcher event.
+```
 </PlatformTabItem>
 </PlatformTabs>
 
@@ -286,6 +379,12 @@ val activeSubscriptions: Map<String, Notify.Model.Subscription> = NotifyClient.g
 </PlatformTabItem>
 <PlatformTabItem value="react-native">
 
+```javascript
+// Will return all active subscriptions for the provided account, keyed by subscription topic.
+const accountSubscriptions = notifyClient.getActiveSubscriptions({
+  account: `eip155:1:0x63Be...`
+})
+```
 </PlatformTabItem>
 </PlatformTabs>
 
@@ -315,6 +414,9 @@ val messageHistory: Map<Long, Notify.Model.MessageRecord> = NotifyClient.getMess
 </PlatformTabItem>
 <PlatformTabItem value="react-native">
 
+```javascript
+const notifications = notifyClient.getMessageHistory(account)
+```
 </PlatformTabItem>
 </PlatformTabs>
 
@@ -357,6 +459,9 @@ NotifyClient.update(
 </PlatformTabItem>
 <PlatformTabItem value="react-native">
 
+```javascript
+const updatedScopes = notifyClient.update(scope, account, domain);
+```
 </PlatformTabItem>
 </PlatformTabs>
 
@@ -383,6 +488,9 @@ NotifyClient.getNotificationTypes(params = notificationTypesParams)
 </PlatformTabItem>
 <PlatformTabItem value="react-native">
 
+```javascript
+// TODO: not available atm.
+```
 </PlatformTabItem>
 </PlatformTabs>
 
@@ -416,6 +524,10 @@ NotifyClient.deleteSubscription(
 
 </PlatformTabItem>
 <PlatformTabItem value="react-native">
+
+```javascript
+notifyClient.deleteSubscription({ topic: "subscription_topic_to_unsubscribe_from" })
+```
 
 </PlatformTabItem>
 </PlatformTabs>
@@ -454,6 +566,10 @@ Notify.deleteNotifyMessage(
 </PlatformTabItem>
 <PlatformTabItem value="react-native">
 
+```javascript
+notifyClient.deleteNotifyMessage({ id: 123456 })
+```
+
 </PlatformTabItem>
 </PlatformTabs>
 
@@ -489,6 +605,14 @@ NotifyClient.unregister(
 
 </PlatformTabItem>
 <PlatformTabItem value="react-native">
+
+```javascript
+const account = `eip155:1:0x63Be2c680685d2A9620c11b0068291261aa62d76`
+
+await notifyClient.unregister({
+  account
+})
+```
 
 </PlatformTabItem>
 </PlatformTabs>
