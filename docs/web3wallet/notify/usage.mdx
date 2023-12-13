@@ -41,9 +41,10 @@ Links to sections on this page. Some sections are platform specific and are only
 **Extra (Platform Specific)**: Additional information for platform specific usage. Some useful topics covered in this 
 section are:
 
-
+- [Apple Push Notification service setup **(iOS)**](?platform=ios#apple-push-notification-service-setup):
+  Configuring iOS app in order to decrypt notifications
 - [Firebase Cloud Messaging setup **(Android)**](?platform=android#firebase-cloud-messaging-setup):
-  Configuring `FirebaseMessagingService` wrapper in order to decrypt notifications
+  Configuring Android app in order to decrypt notifications
 - [NotifyClient.Delegate **(Android)**](?platform=android#notifyclientdelegate): 
   Setting and overriding functions through NotifyDelegate.
 
@@ -499,6 +500,8 @@ To create a good user experience and to guide users into unsubscribing from the 
 <PlatformTabs activeOptions={["ios","android", "react-native"]}>
 <PlatformTabItem value="ios">
 
+This section will be added shortly
+
 </PlatformTabItem>
 <PlatformTabItem value="android">
 
@@ -543,98 +546,9 @@ override fun onMessage(message: Notify.Model.Message, originalMessage: RemoteMes
 <PlatformTabs activeOptions={["ios","android", "react-native"]}>
 <PlatformTabItem value="ios">
 
-#### Configure your project to enable Push Notifications
+### Apple Push Notification service setup
 
-[Configure Project](../../advanced/echo-server.md)
-
-#### Register for Push Notifications
-
-In order to enable Push Notifications for your app you need to follow standard procedure:
-
-[Enable Push Notifications Capability](https://developer.apple.com/documentation/usernotifications/registering_your_app_with_apns#2980170)
-
-Ask for user permissions:
-
-call registerForPushNotifications() early in your app's lifecycle to initiate the registration process with Apple Push Notification service:
-
-```swift
-    func registerForPushNotifications() {
-        UNUserNotificationCenter.current()
-            .requestAuthorization(
-                options: [.alert, .sound, .badge]
-            ) { granted, error in
-                guard granted else { return }
-                DispatchQueue.main.async {
-                    UIApplication.shared.registerForRemoteNotifications()
-                }
-            }
-    }
-```
-
-Receive token from Apple Push Notification Services and register it at the Push Server:
-
-```swift
-    func application(
-      _ application: UIApplication,
-      didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data
-    ) {
-        Task(priority: .high) {
-            try await Notify.instance.register(deviceToken: deviceToken)
-        }
-    }
-```
-
-#### Decrypting Push Notifications
-
-Push notifications sent via APNs are encrypted and carry the following payload:
-
-```
-{
-  "aps": {
-    "content-available": 1,
-    "mutable-content": 1
-  },
-  "ciphertext": "encrypted-payload",
-  "topic": "subscription_topic",
-}
-```
-
-To decrypt a Push Notification (PN), you need to instantiate a [UNNotificationServiceExtension](https://developer.apple.com/documentation/usernotifications/unnotificationserviceextension).
-
-For details on how to modify the content in newly delivered notifications, refer to the official Apple Developer Documentation [here](https://developer.apple.com/documentation/usernotifications/modifying_content_in_newly_delivered_notifications).
-
-Additionally, you will need to create a [keychain group](https://developer.apple.com/documentation/security/keychain_services/keychain_items/sharing_access_to_keychain_items_among_a_collection_of_apps) that is shared between your wallet application and the notification service. 
-
-Inside your notification service extension file, import WalletConnectNotify, initialize `Web3WalletDecryptionService()` for Web3Wallet or NotifyDecryptionService for Notify , and decrypt the message with the following Swift code:
-
-:::caution
-See full [UNNotificationServiceExtension](https://developer.apple.com/documentation/usernotifications/unnotificationserviceextension) implementation in our [SampleApp](https://github.com/WalletConnect/WalletConnectSwiftV2/blob/main/Example/PNDecryptionService/NotificationService.swift)
-:::
-
-```swift
-override func didReceive(_ request: UNNotificationRequest, withContentHandler contentHandler: @escaping (UNNotificationContent) -> Void) {
-        self.contentHandler = contentHandler
-        self.bestAttemptContent = request.content
-
-        if let content = bestAttemptContent,
-           let topic = content.userInfo["topic"] as? String,
-           let ciphertext = content.userInfo["message"] as? String,
-           let tag = content.userInfo["tag"] as? UInt {
-
-            if Web3WalletDecryptionService.canHandle(tag: tag) {
-                let mutableContent = handleWeb3WalletNotification(content: content, topic: topic, tag: tag, ciphertext: ciphertext)
-                contentHandler(mutableContent)
-            } else if NotifyDecryptionService.canHandle(tag: tag) {
-                let mutableContent = handleNotifyNotification(content: content, topic: topic, ciphertext: ciphertext)
-                contentHandler(mutableContent)
-            } else {
-                let mutableContent = content.mutableCopy() as! UNMutableNotificationContent
-                mutableContent.title = "Error: unknown message tag"
-            }
-        }
-    }
-}
-```
+To setup Apple Push Notification service please follow our [Push Notifications docs](../push-notifications.mdx).
 
 </PlatformTabItem>
 <PlatformTabItem value="android">
