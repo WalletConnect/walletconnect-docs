@@ -12,8 +12,6 @@ To enable a device for push notifications, it's essential to register the device
 <PlatformTabs activeOptions={["ios", "android", "react-native"]}>
 <PlatformTabItem value="ios">
 
-### Registering Device Token and Enabling Encrypted Push Notifications
-
 In your AppDelegate, you need to register your device token for push notifications. To enable encrypted push notifications, set the `enableEncrypted` flag to `true`.
 
 ```Swift
@@ -97,8 +95,6 @@ After the device token is registered, the next step involves setting up the noti
 
 <PlatformTabItem value="ios">
 
-### Decrypting Push Notifications
-
 When using encrypted push notifications via APNs, the payload will look like this:
 
 ```json
@@ -114,12 +110,12 @@ When using encrypted push notifications via APNs, the payload will look like thi
 ```
 To decrypt a push notification, follow these steps:
 
-#### Instantiate [UNNotificationServiceExtension](https://developer.apple.com/documentation/usernotifications/unnotificationserviceextension)
+1. Instantiate [UNNotificationServiceExtension](https://developer.apple.com/documentation/usernotifications/unnotificationserviceextension)
 
-#### Modify the content of newly delivered notifications.
+2. Modify the content of newly delivered notifications.
 Learn more about [modifying content in newly delivered notifications](https://developer.apple.com/documentation/usernotifications/modifying_content_in_newly_delivered_notifications).
 
-#### Create a Shared [Keychain Group](https://developer.apple.com/documentation/security/keychain_services/keychain_items/sharing_access_to_keychain_items_among_a_collection_of_apps)
+3. Create a Shared [Keychain Group](https://developer.apple.com/documentation/security/keychain_services/keychain_items/sharing_access_to_keychain_items_among_a_collection_of_apps)
 
 Ensure you have a keychain group that is shared between your wallet application and the notification service. This is set in the app during the Networking Client configuration as shown below:
 
@@ -131,7 +127,8 @@ Networking.configure(
 )
 ```
 
-Instantiate Web3WalletDecryptionService
+4. Instantiate Web3WalletDecryptionService
+
 Use the same group name inside your notification service extension.
 
 ```Swift
