@@ -46,7 +46,7 @@ section are:
   Configuring `FirebaseMessagingService` wrapper in order to decrypt notifications
 - [NotifyClient.Delegate **(Android)**](?platform=android#notifyclientdelegate): 
   Setting and overriding functions through NotifyDelegate.
-- @Artur are there any iOS platform specific sections to be added?
+
 
 To check the full list of platform specific instructions for your preferred platform, go to [Extra (Platform Specific)](#extra-platform-specific) and select your platform.
 
@@ -123,8 +123,6 @@ In order to register account in Notify API to be able to subscribe to any dapp t
 
 <PlatformTabs activeOptions={["ios","android", "react-native"]}>
 <PlatformTabItem value="ios">
-
-#### Sign a SIWE message to view and manage notifications
 
 To login to manage notifications, you must request message to sign with `prepareRegistration()` method and register signature with `register()` method. Once logged in, cross-device syncing will be enabled.
 
@@ -394,6 +392,7 @@ To opt-out of receiving notifications from a dap, a user can decide to unsubscri
 
 <PlatformTabs activeOptions={["ios","android", "react-native"]}>
 <PlatformTabItem value="ios">
+
 ```swift
 try await Notify.instance.deleteSubscription(topic: String)
 ```
@@ -464,6 +463,7 @@ If an account is removed from the client or a user no longer wants to receive no
 
 <PlatformTabs activeOptions={["ios","android", "react-native"]}>
 <PlatformTabItem value="ios">
+
 ```swift
 public func unregister(account: Account) async throws
 ```
