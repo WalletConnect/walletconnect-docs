@@ -17,7 +17,7 @@ activeOptions={["web","ios","android","csharp"]}>
 <PlatformTabItem value="web">
 
 :::info
-For an example implementation, please refer to our [`react-wallet-auth` example](https://github.com/WalletConnect/web-examples/tree/main/wallets/react-wallet-auth).
+For an example implementation, please refer to our [`react-wallet-auth` example](https://github.com/WalletConnect/web-examples/tree/main/advanced/wallets/react-wallet-auth).
 :::
 
 **1. Initialize your WalletConnect AuthClient, using [your Project ID](../../cloud/relay.md).**
