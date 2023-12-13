@@ -14,7 +14,7 @@ Our primary example of a WalletConnect v2.0 dapp is linked [here](https://react-
 - `connect`
 - `disconnect`
 
-The source code for this WalletConnect v2.0 dapp is [here](https://github.com/WalletConnect/web-examples/tree/main/dapps/react-dapp-v2).
+The source code for this WalletConnect v2.0 dapp is [here](https://github.com/WalletConnect/web-examples/tree/main/advanced/dapps/react-dapp-v2).
 
 ## Required and Optional Namespaces and Methods
 
