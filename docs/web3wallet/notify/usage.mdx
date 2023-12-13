@@ -47,6 +47,8 @@ section are:
   Configuring Android app in order to decrypt notifications
 - [NotifyClient.Delegate **(Android)**](?platform=android#notifyclientdelegate): 
   Setting and overriding functions through NotifyDelegate.
+- [Push Notification Setup **(React Native)**](?platform=react-native#push-notification-setup): 
+  Configuring app in order to decrypt notifications
 
 
 To check the full list of platform specific instructions for your preferred platform, go to [Extra (Platform Specific)](#extra-platform-specific) and select your platform.
@@ -270,7 +272,7 @@ Some suggested ways to implement the `onSign` callback are via:
 - Ethers.js [`Wallet.signMessage` method](https://docs.ethers.org/v5/api/signer/#Signer-signMessage)
 - The [`signMessage` method](https://wagmi.sh/core/actions/signMessage) in `@wagmi/core`
 
-### Registering as a wallet
+##### Registering as a wallet
 
 ```javascript
 const account = `eip155:1:0x63Be2c680685d2A9620c11b0068291261aa62d76`
@@ -488,9 +490,8 @@ NotifyClient.getNotificationTypes(params = notificationTypesParams)
 </PlatformTabItem>
 <PlatformTabItem value="react-native">
 
-```javascript
-// TODO: not available atm.
-```
+This feature will be added shortly
+
 </PlatformTabItem>
 </PlatformTabs>
 
@@ -662,6 +663,8 @@ override fun onMessage(message: Notify.Model.Message, originalMessage: RemoteMes
 </PlatformTabItem>
 <PlatformTabItem value="react-native">
 
+This section will be added shortly
+
 </PlatformTabItem>
 </PlatformTabs>
 
@@ -722,6 +725,8 @@ NotifyClient.setDelegate(walletDelegate)
 
 </PlatformTabItem>
 <PlatformTabItem value="react-native">
+
+### Push Notification Setup
 
 Install [`@react-native-firebase/messaging`](https://www.npmjs.com/package/@react-native-firebase/messaging) and [`@notifee/react-native`](https://www.npmjs.com/package/@notifee/react-native) to handle Push Notifications.
 Please refer to the respective package documentation to configure them properly.
