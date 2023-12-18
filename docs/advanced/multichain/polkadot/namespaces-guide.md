@@ -96,7 +96,7 @@ An example Proposal Namespace for a dapp which supports connecting to Polkadot, 
 
 - `methods` is represented as an array of wallet defined methods that a session supports.
 - These are not pre-defined or centrally implemented and can be modified/extended as needed by a wallet.
-- In the above Polkadot session namespace example there are two given methods `polkadot_signMessage` and `polkadot_signTransaction`. The idea for the functionality of these methods is to sign the relevant data (either a message or unsigned transaction) and return the signature. [An example for each method](https://github.com/WalletConnect/web-examples/blob/main/wallets/react-wallet-v2/src/lib/PolkadotLib.ts).
+- In the above Polkadot session namespace example there are two given methods `polkadot_signMessage` and `polkadot_signTransaction`. The idea for the functionality of these methods is to sign the relevant data (either a message or unsigned transaction) and return the signature. [An example for each method](https://github.com/WalletConnect/web-examples/blob/main/advanced/wallets/react-wallet-v2/src/lib/PolkadotLib.ts).
 - If a dapp required additional method support such as receiving the signed hex for a transaction in order to submit it rather than the signature, a wallet only needs to define and add support for the method so that any dapp that requires that functionality can use it when making requests.
 - An example would be adding a method named `polkadot_getSignedHex` and creating an implementation that signs, and returns the hash of the signed transaction.
 

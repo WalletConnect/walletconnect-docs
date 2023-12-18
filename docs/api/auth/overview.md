@@ -65,7 +65,7 @@ You can add a WalletConnect SDK to your project with Swift Package Manager. In o
 2. Initialize Podfile if needed with `pod init`
 3. Add pod to your Podfile:
 
-```Ruby
+```ruby
 pod 'WalletConnectSwiftV2'
 ```
 
@@ -73,7 +73,7 @@ pod 'WalletConnectSwiftV2'
 
 If you encounter any problems during package installation, you can specify the exact path to the repository
 
-```Ruby
+```ruby
 pod 'WalletConnectSwiftV2', :git => 'https://github.com/WalletConnect/WalletConnectSwiftV2.git', :tag => '1.0.5'
 ```
 

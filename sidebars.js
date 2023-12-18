@@ -15,7 +15,7 @@ module.exports = {
       label: 'Introduction',
       className: 'menu_outer_list',
       collapsible: false,
-      items: ['readme', 'quickstart']
+      items: ['readme', 'getting-started']
     },
     {
       type: 'category',
@@ -30,6 +30,7 @@ module.exports = {
           collapsible: true,
           items: [
             'web3modal/about',
+            'web3modal/quickstart',
 
             {
               type: 'category',
@@ -186,20 +187,22 @@ module.exports = {
           items: [
             'web3wallet/about',
             'web3wallet/wallet-usage',
+            'web3wallet/namespaces',
+            'web3wallet/mobileLinking',
             'web3wallet/verify',
+            'web3wallet/push-notifications',
             {
               type: 'category',
               label: 'Notify API',
               items: [
+                'web3wallet/notify/introduction',
                 'web3wallet/notify/installation',
                 'web3wallet/notify/usage',
                 'web3wallet/notify/spam-protection',
-                'web3wallet/notify/examples'
+                'web3wallet/notify/resources'
               ]
             },
             'web3wallet/resources',
-            'web3wallet/mobileLinking',
-            'web3wallet/namespaces'
           ]
         },
         {

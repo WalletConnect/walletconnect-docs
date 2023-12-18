@@ -172,7 +172,7 @@ const config = {
       prism: {
         darkTheme: darkCodeTheme,
         theme: lightCodeTheme,
-        additionalLanguages: ['swift', 'kotlin', 'dart', 'csharp'],
+        additionalLanguages: ['swift', 'kotlin', 'dart', 'csharp', 'gradle', 'ruby'],
         magicComments: [
           {
             className: 'theme-code-block-highlighted-delete',
@@ -189,7 +189,7 @@ const config = {
       announcementBar: {
         id: 'support_us',
         content:
-          '🎉 Web3Modal v3 is out. <a rel="noopener noreferrer" href="/web3modal/about">Learn more</a>. 🎉',
+          '🎉 The Web3Inbox SDK is in beta! <a rel="noopener noreferrer" href="/web3inbox/about?utm_source=docs&utm_medium=banner&utm_campaign=sdkpubliclaunch">Explore the new SDK</a> 🎉',
         backgroundColor: '#3182ce',
         textColor: '#fff',
         isCloseable: true

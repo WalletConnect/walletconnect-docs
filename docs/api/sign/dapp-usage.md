@@ -22,7 +22,7 @@ npm install @walletconnect/modal
 ```
 
 :::info
-For an example implementation, please refer to our `react-dapp-v2` [example](https://github.com/WalletConnect/web-examples/tree/main/dapps/react-dapp-v2).
+For an example implementation, please refer to our `react-dapp-v2` [example](https://github.com/WalletConnect/web-examples/tree/main/advanced/dapps/react-dapp-v2).
 :::
 
 #### Install Packages
