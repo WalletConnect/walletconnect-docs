@@ -3,7 +3,7 @@
 ## Launch the current wallet
 
 ```dart
-await _w3mService.launchCurrentWallet();
+await _w3mService.launchConnectedWallet();
 ```
 
 ## Send a request
@@ -19,4 +19,38 @@ await _w3mService.web3App.request(
 );
 ```
 
-For more examples check out the [example app](https://github.com/WalletConnect/Web3ModalFlutter/tree/master/example)
+## Read a contract
+
+In order to interact with Contracts, Web3Modal relies on web3dart package.
+
+This is a simple example on how to call a contract function.
+
+```dart
+Future<void> contractCall() async {
+  final deployedContract = DeployedContract(contractAbi, contractAddress);
+  final balanceFunction = deployedContract.function('balanceOf');
+
+  final transaction = Transaction.callContract(
+    contract: deployedContract,
+    function: balanceFunction,
+    parameters: [
+      EthereumAddress.fromHex(ContractDetails.balanceAddress),
+    ],
+  );
+
+  await _w3mService.web3App.request(
+    topic: _w3mService.session.topic,
+    chainId: 'eip155:1',
+    request: SessionRequestParams(
+      method: 'eth_sendTransaction',
+      params: [
+        // Your transaction params as Map
+      ],
+    ),
+  );
+}
+```
+
+For more information about how to interact with conctracts please refer to [web3dart](https://pub.dev/packages/web3dart)
+
+For a complete example app check out the [example folder](https://github.com/WalletConnect/Web3ModalFlutter/tree/master/example) for Web3Modal
