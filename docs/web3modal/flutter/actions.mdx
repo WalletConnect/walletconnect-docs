@@ -13,7 +13,7 @@ await _w3mService.web3App.request(
   topic: _w3mService.session.topic,
   chainId: 'eip155:1',
   request: SessionRequestParams(
-    method: 'personalSign',
+    method: 'personal_sign',
     params: ['Sign this', '0xdeadbeef'],
   ),
 );
