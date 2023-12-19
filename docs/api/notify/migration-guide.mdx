@@ -42,7 +42,7 @@ await notifyClient.register({
 ```javascript
 const account = `eip155:1:0x63Be2c680685d2A9620c11b0068291261aa62d76`
 const domain =  'app.mydomain.com', // pass the domain (i.e. the hostname) where your dapp is hosted.
-const allApps =  false 
+const allApps = true
 
 // No need to register and sign message if already registered.
 if (notifyClient.isRegistered({ account, domain, allApps })) return;
