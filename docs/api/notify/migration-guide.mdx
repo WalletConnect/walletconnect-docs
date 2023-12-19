@@ -7,10 +7,13 @@ import CloudBanner from '../../components/CloudBanner'
 
 # Migration Guide
 
-<PlatformTabs>
+<PlatformTabs
+  groupId="api"
+  activeOptions={["web"]}
+>
 
 <PlatformTabItem value="web">
-## Migrating from 0.14.x to 0.15.x 
+# Migrating from 0.14.x to 0.15.x 
 
 There is a breaking change with registering between the minor versions.
 - Instead of passing an `onSign` function, signing must be done separately
