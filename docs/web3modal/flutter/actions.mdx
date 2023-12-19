@@ -23,31 +23,51 @@ await _w3mService.web3App.request(
 
 In order to interact with Contracts, Web3Modal relies on web3dart package.
 
-This is a simple example on how to call a contract function.
+This is a simple example on how to interact with [TetherToken contract](https://etherscan.io/address/0xdac17f958d2ee523a2206206994597c13d831ec7#code).
 
 ```dart
-Future<void> contractCall() async {
-  final deployedContract = DeployedContract(contractAbi, contractAddress);
+Future<void> testTetherTokenContract() async {
+  // Create a Web3Client by passing a chain rpcUrl and an http client
+  final ethChain = W3MChainPresets.chains['1']!;
+  final ethClient = Web3Client(ethChain.rpcUrl, http.Client());
+
+  // Create DeployedContract object using contract's ABI and address
+  final deployedContract = DeployedContract(
+    ContractAbi.fromJson(
+      jsonEncode(ContractDetails.readContractAbi),
+      'TetherToken',
+    ),
+    EthereumAddress.fromHex(ContractDetails.contractAddress),
+  );
+
+  // Query contract's functions
+  final nameFunction = deployedContract.function('name');
+  final totalSupplyFunction = deployedContract.function('totalSupply');
   final balanceFunction = deployedContract.function('balanceOf');
 
-  final transaction = Transaction.callContract(
+  final nameResult = await ethClient.call(
+    contract: deployedContract,
+    function: nameFunction,
+    params: [],
+  );
+  debugPrint('name: ${nameResult.first}');
+
+  final totalSupply = await ethClient.call(
+    contract: deployedContract,
+    function: totalSupplyFunction,
+    params: [],
+  );
+  debugPrint('totalSupply: ${totalSupply.first}');
+
+  final balanceOf = await ethClient.call(
     contract: deployedContract,
     function: balanceFunction,
-    parameters: [
-      EthereumAddress.fromHex(ContractDetails.balanceAddress),
+    params: [
+      // Vitalik address as an example
+      EthereumAddress.fromHex('0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045'),
     ],
   );
-
-  await _w3mService.web3App.request(
-    topic: _w3mService.session.topic,
-    chainId: 'eip155:1',
-    request: SessionRequestParams(
-      method: 'eth_sendTransaction',
-      params: [
-        // Your transaction params as Map
-      ],
-    ),
-  );
+  debugPrint('balanceOf: ${balanceOf.first}');
 }
 ```
 
