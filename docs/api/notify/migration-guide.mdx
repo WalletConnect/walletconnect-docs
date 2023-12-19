@@ -13,12 +13,15 @@ import CloudBanner from '../../components/CloudBanner'
 >
 
 <PlatformTabItem value="web">
-# Migrating from 0.14.x to 0.15.x 
+
+## Migrating from 0.14.x to 0.15.x 
 
 There is a breaking change with registering between the minor versions.
 - Instead of passing an `onSign` function, signing must be done separately
 - `isLimited` has been removed in favor of `allApps`, its inverse. Wherever `isLimited` was true, `allApps` would be false.
-- Instead of calling register, one must first prepare a registration via `prepareRegistration`
+- Instead of calling register immediately, one must first prepare a registration via `prepareRegistration`
+- After getting the `registerParams` and a `message`, the message must be signed and the signature passed to `register` along with `registerParams`.
+
 
 ### Old
 ```javascript
@@ -31,11 +34,10 @@ await notifyClient.register({
   domain: 'com.example.app.rn', // pass your app's bundle identifier.
   isLimited: false 
 })
-
 ```
 
 
-### New Equivelent
+### New Equivalent
 ```javascript
 const account = `eip155:1:0x63Be2c680685d2A9620c11b0068291261aa62d76`
 const domain =  'app.mydomain.com', // pass the domain (i.e. the hostname) where your dapp is hosted.
