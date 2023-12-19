@@ -19,6 +19,8 @@ await _w3mService.web3App.request(
 );
 ```
 
+A list of all available methods can be found [eth_constants.dart](https://github.com/WalletConnect/Web3ModalFlutter/blob/master/lib/constants/eth_constants.dart) file, which is already exported for you to use directly from web3modal package.
+
 ## Read a contract
 
 In order to interact with Contracts, Web3Modal relies on web3dart package.
@@ -28,8 +30,7 @@ This is a simple example on how to interact with [TetherToken contract](https://
 ```dart
 Future<void> testTetherTokenContract() async {
   // Create a Web3Client by passing a chain rpcUrl and an http client
-  final ethChain = W3MChainPresets.chains['1']!;
-  final ethClient = Web3Client(ethChain.rpcUrl, http.Client());
+  final ethClient = Web3Client('https://eth.drpc.org', http.Client());
 
   // Create DeployedContract object using contract's ABI and address
   final deployedContract = DeployedContract(
