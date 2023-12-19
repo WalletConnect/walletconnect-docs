@@ -20,8 +20,8 @@ There is a breaking change with registering between the minor versions.
 
 - `isLimited` has been replaced with `allApps`, its inverse, to avoid double-negatives. Whenever `isLimited` is set to false, `allApps` should now be true and vise-versa.
 - Instead of passing an `onSign` callback to `register()`, registration takes place in multiple steps: `prepareRegistration()`, the signature, and `register()`
-  - Instead of calling `register()` immediately, one must first prepare a registration via `prepareRegistration()`
-  - After getting the `registerParams` and a `message`, the message must be signed and the signature passed to `register()` along with `registerParams`.
+- Instead of calling `register()` immediately, one must first prepare a registration via `prepareRegistration()`
+- After getting the `registerParams` and a `message`, the message must be signed and the signature passed to `register()` along with `registerParams`.
 
 
 ### Old
