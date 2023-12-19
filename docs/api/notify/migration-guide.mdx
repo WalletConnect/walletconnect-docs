@@ -17,10 +17,11 @@ import CloudBanner from '../../components/CloudBanner'
 ## Migrating from 0.14.x to 0.15.x 
 
 There is a breaking change with registering between the minor versions.
-- Instead of passing an `onSign` function, signing must be done separately
-- `isLimited` has been removed in favor of `allApps`, its inverse. Wherever `isLimited` was true, `allApps` would be false.
-- Instead of calling register immediately, one must first prepare a registration via `prepareRegistration`
-- After getting the `registerParams` and a `message`, the message must be signed and the signature passed to `register` along with `registerParams`.
+
+- `isLimited` has been replaced with `allApps`, its inverse, to avoid double-negatives. Whenever `isLimited` is set to false, `allApps` should now be true and vise-versa.
+- Instead of passing an `onSign` callback to `register()`, registration takes place in multiple steps: `prepareRegistration()`, the signature, and `register()`
+  - Instead of calling `register()` immediately, one must first prepare a registration via `prepareRegistration()`
+  - After getting the `registerParams` and a `message`, the message must be signed and the signature passed to `register()` along with `registerParams`.
 
 
 ### Old
@@ -46,7 +47,7 @@ const allApps =  false
 // No need to register and sign message if already registered.
 if (notifyClient.isRegistered({ account, domain, allApps })) return;
 
-const {registerParams, message}  = notifyClient.prepareRegistration({
+const { registerParams, message }  = notifyClient.prepareRegistration({
   account,
   domain,
   allApps
