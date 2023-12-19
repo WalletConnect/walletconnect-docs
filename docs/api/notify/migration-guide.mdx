@@ -1,0 +1,61 @@
+import Container from '../../components/Container'
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
+import PlatformTabs from '../../components/PlatformTabs'
+import PlatformTabItem from '../../components/PlatformTabItem'
+import CloudBanner from '../../components/CloudBanner'
+
+# Migration Guide
+
+<PlatformTabs>
+
+<PlatformTabItem value="web">
+## Migrating from 0.14.x to 0.15.x 
+
+There is a breaking change with registering between the minor versions.
+- Instead of passing an `onSign` function, signing must be done separately
+- `isLimited` has been removed in favor of `allApps`, its inverse. Wherever `isLimited` was true, `allApps` would be false.
+- Instead of calling register, one must first prepare a registration via `prepareRegistration`
+
+### Old
+```javascript
+const account = `eip155:1:0x63Be2c680685d2A9620c11b0068291261aa62d76`
+const onSign = (message: string) => ethersWallet.signMessage(message)
+
+await notifyClient.register({
+  account,
+  onSign,
+  domain: 'com.example.app.rn', // pass your app's bundle identifier.
+  isLimited: false 
+})
+
+```
+
+
+### New Equivelent
+```javascript
+const account = `eip155:1:0x63Be2c680685d2A9620c11b0068291261aa62d76`
+const domain =  'app.mydomain.com', // pass the domain (i.e. the hostname) where your dapp is hosted.
+const allApps =  false 
+
+// No need to register and sign message if already registered.
+if (notifyClient.isRegistered({ account, domain, allApps })) return;
+
+const {registerParams, message}  = notifyClient.prepareRegistration({
+  account,
+  domain,
+  allApps
+});
+
+const signature = await ethersWallet.signMessage(message);
+
+await notifyClient.register({
+  registerParams,
+  signature,
+})
+```
+
+
+</PlatformTabItem>
+
+</PlatformTabs>
