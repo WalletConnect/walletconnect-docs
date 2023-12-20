@@ -840,7 +840,7 @@ private static async Task GetAccountBalance()
 {
     var session = WalletConnect.Instance.ActiveSession;
 
-    // Because one session have multiple namespaces, we need to select one.
+    // Because one session can have multiple namespaces, we need to select one.
     // In most cases, especially in games, dapp will use only one namespace.
     var @namespace = session.RequiredNamespaces.First();
     var address = session.CurrentAddress(@namespace.Key).Address;
@@ -871,7 +871,7 @@ public async Task ContractTransaction()
 {
     var session = WalletConnect.Instance.ActiveSession;
 
-    // Because one session have multiple namespaces, we need to select one.
+    // Because one session can have multiple namespaces, we need to select one.
     // In most cases, especially in games, dapp will use only one namespace.
     var @namespace = session.RequiredNamespaces.First();
     var myAddress = session.CurrentAddress(@namespace.Key).Address;
