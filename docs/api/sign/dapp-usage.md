@@ -808,8 +808,9 @@ WalletConnectUnity is a wrapper for WalletConnectSharp. It simplifies managing a
 
 To use WalletConnectUnity in your project:
 
-1. Set up project id and metadata in `WalletConnectProjectConfig` ScriptableAsset (located at `Assets/WalletConnectUnity/Resources/WalletConnectProjectConfig.asset`). Do not move this asset from the `Resources` directory.
-
+1. Fill in the Project ID and Metadata fields in the `Assets/WalletConnectUnity/Resources/WalletConnectProjectConfig` asset.
+    - If you don’t have a Project ID, you can create one at [WalletConnect Cloud](https://cloud.walletconnect.com).
+    - The `Redirect` fields are optional. They are used to redirect the user back to your app after they approve or reject the session.
 2. Initialize `WalletConnect` and connect the wallet:
 
 ```csharp

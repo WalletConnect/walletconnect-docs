@@ -316,8 +316,9 @@ function App() {
 
 <PlatformTabItem value="unity">
 
-1. Add Name of your game (can be anything) and your Project ID to the `Assets/WalletConnectUnity/Resources/WalletConnectProjectConfig` asset.
-    - If you don't have Project ID, you can create one in [WalletConnect Cloud](https://cloud.walletconnect.com).
+1. Fill in the Project ID and Metadata fields in the `Assets/WalletConnectUnity/Resources/WalletConnectProjectConfig` asset.
+    - If you don’t have a Project ID, you can create one at [WalletConnect Cloud](https://cloud.walletconnect.com).
+    - The `Redirect` fields are optional. They are used to redirect the user back to your app after they approve or reject the session.
 2. Add `WalletConnectModal` prefab from `WalletConnectUnity Modal` package to the first scene in your game.
 
 </PlatformTabItem>
