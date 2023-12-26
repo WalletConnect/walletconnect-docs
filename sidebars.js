@@ -216,7 +216,7 @@ module.exports = {
               label: 'Apps',
               items: [
                 'web3inbox/about',
-                'web3inbox/domain-setup',
+                'web3inbox/cloud-setup',
                 {
                   type: 'category',
                   label: 'Frontend Integration',
