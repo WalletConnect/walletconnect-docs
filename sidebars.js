@@ -181,32 +181,6 @@ module.exports = {
         },
         {
           type: 'category',
-          label: 'Web3Wallet',
-          collapsed: true,
-          collapsible: true,
-          items: [
-            'web3wallet/about',
-            'web3wallet/wallet-usage',
-            'web3wallet/namespaces',
-            'web3wallet/mobileLinking',
-            'web3wallet/verify',
-            'web3wallet/push-notifications',
-            {
-              type: 'category',
-              label: 'Notify API',
-              items: [
-                'web3wallet/notify/introduction',
-                'web3wallet/notify/installation',
-                'web3wallet/notify/usage',
-                'web3wallet/notify/spam-protection',
-                'web3wallet/notify/resources'
-              ]
-            },
-            'web3wallet/resources',
-          ]
-        },
-        {
-          type: 'category',
           label: 'Web3Inbox',
           collapsed: true,
           collapsible: true,
@@ -248,6 +222,32 @@ module.exports = {
               ]
             },
             { type: 'doc', label: 'Wallets', id: 'web3inbox/wallets' }
+          ]
+        },
+        {
+          type: 'category',
+          label: 'Web3Wallet',
+          collapsed: true,
+          collapsible: true,
+          items: [
+            'web3wallet/about',
+            'web3wallet/wallet-usage',
+            'web3wallet/namespaces',
+            'web3wallet/mobileLinking',
+            'web3wallet/verify',
+            'web3wallet/push-notifications',
+            {
+              type: 'category',
+              label: 'Notify API',
+              items: [
+                'web3wallet/notify/introduction',
+                'web3wallet/notify/installation',
+                'web3wallet/notify/usage',
+                'web3wallet/notify/spam-protection',
+                'web3wallet/notify/resources'
+              ]
+            },
+            'web3wallet/resources',
           ]
         }
       ]
