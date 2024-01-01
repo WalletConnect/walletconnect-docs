@@ -14,9 +14,11 @@ We recommend testing notifications with the [Web3Inbox.com app](https://app.web3
 
 To send notifications and access all subscriber information for your dapp, you will need your Notify API Secret and project ID.
 
-You can find the Notify API Secret under the Notify API section of the APIs tab of your project on [WalletConnect Cloud](https://cloud.walletconnect.com). Follow steps on the [Domain Setup](domain-setup) page to configure this. This secret allows publishing notifications to any account subscribed to your app, so should not be published and should only be used by your app backend.
+You can find the Notify API Secret under the Notify API section of the APIs tab of your project on [WalletConnect Cloud](https://cloud.walletconnect.com). Follow steps on the [Cloud Setup](cloud-setup) page to configure this. This secret allows publishing notifications to any account subscribed to your app, so should not be published and should only be used by your app backend.
 
 ## Sending notifications
+
+Only plaintext is supported, and newlines are ignored.
 
 To send a notification notification you can call the `/notify` endpoint. This endpoint supports the following fields:
 
