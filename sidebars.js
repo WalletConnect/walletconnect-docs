@@ -130,6 +130,7 @@ module.exports = {
                 { type: 'doc', label: 'Usage', id: 'web3modal/flutter/options' },
                 { type: 'doc', label: 'Options', id: 'web3modal/flutter/custom-wallets' },
                 'web3modal/flutter/actions',
+                'web3modal/flutter/events',
                 'web3modal/flutter/theming',
                 'web3modal/flutter/custom-chains',
                 { type: 'doc', label: 'Migration', id: 'web3modal/flutter/migration' },
