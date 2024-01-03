@@ -8,7 +8,7 @@ With Web3Modal Flutter, you can easily let people interact with multiple EVM com
 Let's get started with the installation and configuration!
 
 :::tip
-If you are looking to migrate from WalletConnectModal to Web3Modal, please refer to our [migration guide](./migration).
+If you are looking to migrate from WalletConnectModal to Web3Modal, please refer to our [migration guide](/migration).
 :::
 
 
@@ -75,3 +75,55 @@ Example:
 ```
 </PlatformTabItem>
 </PlatformTabs>
+
+<details>
+<summary>Coinbase Wallet specific steps</summary>
+<div>
+
+:::caution
+Coinbase Wallet support is still in beta. If you want to try it out please installs Web3Modla verion **3.1.0-beta01**
+:::
+
+Since Coinbase Wallet uses it own SDK there are a few simply steps to do if you are planning to include and support it
+
+1. You must include `<string>cbwallet</string>` on iOS and `<package android:name="org.toshi"/>` on Android. (See "Enable Installed Wallet Detection" section above to look on how to do it)
+2. Make sure pods are installed, otherwise run `pod install` inside your `/ios` folder.
+3. Open your `/ios/Runner.xcworkspace` file with Xcode and add the following code in `AppDelegate.swift` file:
+
+```swift
+import CoinbaseWalletSDK
+```
+
+```swift
+override func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+    if #available(iOS 13.0, *) {
+        if (try? CoinbaseWalletSDK.shared.handleResponse(url)) == true {
+            return true
+        }
+    } else {
+        // Fallback on earlier versions
+    }
+    // handle other types of deep links
+    return false
+}
+
+override func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
+    if #available(iOS 13.0, *) {
+        if let url = userActivity.webpageURL,
+            (try? CoinbaseWalletSDK.shared.handleResponse(url)) == true {
+            return true
+        }
+    } else {
+        // Fallback on earlier versions
+    }
+    // handle other types of deep links
+    return false
+}
+```
+
+:::note
+If you don't want to include/support Coinbase Wallet you just need to pass the walletId `fd20dc426fb37566d803205b19bbc1d4096b248ac04548e3cfb6b3a38bd033aa` to [excludedWalletIds](/web3modal/flutter/custom-wallets#excludedwalletids) options Array.
+:::
+
+</div>
+</details>

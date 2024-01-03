@@ -9,7 +9,7 @@ await _w3mService.launchConnectedWallet();
 ## Send a request
 
 ```dart
-await _w3mService.web3App.request(
+await _w3mService.request(
   topic: _w3mService.session.topic,
   chainId: 'eip155:1',
   request: SessionRequestParams(
@@ -21,7 +21,26 @@ await _w3mService.web3App.request(
 
 A list of all available methods can be found [eth_constants.dart](https://github.com/WalletConnect/Web3ModalFlutter/blob/master/lib/constants/eth_constants.dart) file, which is already exported for you to use directly from web3modal package.
 
-## Read a contract
+## List of approved chains by the connected wallet
+
+```dart
+_w3mService.getApprovedChains();
+```
+
+## List of approved methods by connected wallet
+
+```dart
+_w3mService.getApprovedMethods();
+```
+
+## List of approved events by the connected wallet
+
+```dart
+_w3mService.getApprovedEvents();
+```
+
+
+## How to Read a contract
 
 In order to interact with Contracts, Web3Modal relies on web3dart package.
 

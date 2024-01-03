@@ -33,11 +33,15 @@ await _w3mService.init();
 
 The `metadata` object should contain your dApp's name, description, url and icon. The `redirect` object inside it serves the purpose of redirecting from the wallet to back to your dApp once is connected.
 
-Now you can use the `W3MConnectWalletButton` or `W3MNetworkSelectButton` widget:
+Now you can use the `W3MConnectWalletButton`, which will open the Web3Modal with no prior network selected
 
 ```dart
 W3MConnectWalletButton(service: _w3mService)
-// OR
+```
+
+Or you can use `W3MNetworkSelectButton` which will first show a network selection prompt:
+
+```dart
 W3MNetworkSelectButton(service: _w3mService)
 ```
 
@@ -112,6 +116,7 @@ Column(
 and `W3MConnectWalletButton` will handle it's state automatically.
 
 But, as mentioned before, you can decide to just show the **Connect Wallet** button alone, in this case you would need to set it's state to `ConnectButtonState.none` like so:
+
 ```dart
 W3MConnectWalletButton(
   service: _w3mService,
