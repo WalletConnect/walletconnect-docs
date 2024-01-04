@@ -6,6 +6,10 @@
       "destination": "/:path*"
     },
     {
+      "source": "/advanced/multichain/overview",
+      "destination": "/advanced/multichain/chain-onboarding/overview"
+    },
+    {
       "source": "/web3modal/v2/html/:path*",
       "destination": "/web3modal/v2/javascript/:path*"
     },
