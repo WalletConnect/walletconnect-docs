@@ -47,7 +47,3 @@ In order to verify your app domain in WalletConnect Cloud follow these steps:
 <p align="center">
   <img src="/assets/verify/verified.png" />
 </p>
-
-9. If you haven't already, [Verify your apps domain](./verify) for improved security.
-
-10. Ensure your app has a [published Explorer listing](./explorer-submission)https://docs.walletconnect.com/cloud/explorer-submission for discoverability.
