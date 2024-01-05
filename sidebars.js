@@ -15,7 +15,7 @@ module.exports = {
       label: 'Introduction',
       className: 'menu_outer_list',
       collapsible: false,
-      items: ['readme', 'quickstart']
+      items: ['readme', 'getting-started']
     },
     {
       type: 'category',
@@ -30,6 +30,7 @@ module.exports = {
           collapsible: true,
           items: [
             'web3modal/about',
+            'web3modal/quickstart',
 
             {
               type: 'category',
@@ -133,6 +134,7 @@ module.exports = {
                 { type: 'doc', label: 'Usage', id: 'web3modal/flutter/options' },
                 { type: 'doc', label: 'Options', id: 'web3modal/flutter/custom-wallets' },
                 'web3modal/flutter/actions',
+                'web3modal/flutter/events',
                 'web3modal/flutter/theming',
                 'web3modal/flutter/custom-chains',
                 { type: 'doc', label: 'Migration', id: 'web3modal/flutter/migration' },
@@ -184,30 +186,6 @@ module.exports = {
         },
         {
           type: 'category',
-          label: 'Web3Wallet',
-          collapsed: true,
-          collapsible: true,
-          items: [
-            'web3wallet/about',
-            'web3wallet/wallet-usage',
-            'web3wallet/verify',
-            {
-              type: 'category',
-              label: 'Notify API',
-              items: [
-                'web3wallet/notify/installation',
-                'web3wallet/notify/usage',
-                'web3wallet/notify/spam-protection',
-                'web3wallet/notify/examples'
-              ]
-            },
-            'web3wallet/resources',
-            'web3wallet/mobileLinking',
-            'web3wallet/namespaces'
-          ]
-        },
-        {
-          type: 'category',
           label: 'Web3Inbox',
           collapsed: true,
           collapsible: true,
@@ -217,7 +195,7 @@ module.exports = {
               label: 'Apps',
               items: [
                 'web3inbox/about',
-                'web3inbox/domain-setup',
+                'web3inbox/cloud-setup',
                 {
                   type: 'category',
                   label: 'Frontend Integration',
@@ -233,14 +211,48 @@ module.exports = {
                   type: 'category',
                   label: 'Authorization Signatures',
                   items: [
-                    { type: 'doc', label: "About", id: 'web3inbox/authorization-signatures/about' },
-                    { type: 'doc', label: "This App", id: 'web3inbox/authorization-signatures/this-app' },
-                    { type: 'doc', label: "All Apps", id: 'web3inbox/authorization-signatures/all-apps' }
+                    { type: 'doc', label: 'About', id: 'web3inbox/authorization-signatures/about' },
+                    {
+                      type: 'doc',
+                      label: 'This App',
+                      id: 'web3inbox/authorization-signatures/this-app'
+                    },
+                    {
+                      type: 'doc',
+                      label: 'All Apps',
+                      id: 'web3inbox/authorization-signatures/all-apps'
+                    }
                   ]
                 }
               ]
             },
             { type: 'doc', label: 'Wallets', id: 'web3inbox/wallets' }
+          ]
+        },
+        {
+          type: 'category',
+          label: 'Web3Wallet',
+          collapsed: true,
+          collapsible: true,
+          items: [
+            'web3wallet/about',
+            'web3wallet/wallet-usage',
+            'web3wallet/namespaces',
+            'web3wallet/mobileLinking',
+            'web3wallet/verify',
+            'web3wallet/push-notifications',
+            {
+              type: 'category',
+              label: 'Notify API',
+              items: [
+                'web3wallet/notify/introduction',
+                'web3wallet/notify/installation',
+                'web3wallet/notify/usage',
+                'web3wallet/notify/spam-protection',
+                'web3wallet/notify/resources'
+              ]
+            },
+            'web3wallet/resources',
           ]
         }
       ]
@@ -266,70 +278,6 @@ module.exports = {
       items: [
         {
           type: 'category',
-          label: 'Providers',
-          collapsible: true,
-          collapsed: true,
-          items: ['advanced/providers/ethereum', 'advanced/providers/universal']
-        },
-        {
-          type: 'category',
-          label: 'APIs',
-          collapsed: true,
-          collapsible: true,
-          items: [
-            {
-              type: 'category',
-              label: 'Auth',
-              items: [
-                'api/auth/overview',
-                'api/auth/dapp-usage',
-                'api/auth/wallet-usage',
-                'api/auth/signer-factory',
-                'api/auth/resources'
-              ]
-            },
-            {
-              type: 'category',
-              label: 'Chat',
-              items: ['api/chat/about', 'api/chat/usage', 'api/chat/resources']
-            },
-            {
-              type: 'category',
-              label: 'Core',
-              items: ['api/core/pairing', 'api/core/relay', 'api/core/shared-core']
-            },
-            {
-              type: 'category',
-              label: 'Notify',
-              items: ['api/notify/about', 'api/notify/usage']
-            },
-            {
-              type: 'category',
-              label: 'Sign',
-              items: [
-                'api/sign/overview',
-                'api/sign/dapp-usage',
-                'api/sign/wallet-usage',
-                'api/sign/smart-contract-wallet-usage'
-              ]
-            }
-          ]
-        },
-        {
-          type: 'category',
-          label: 'WalletConnectModal',
-          collapsed: true,
-          collapsible: true,
-          items: [
-            'advanced/walletconnectmodal/about',
-            'advanced/walletconnectmodal/usage',
-            'advanced/walletconnectmodal/options',
-            'advanced/walletconnectmodal/theming',
-            'advanced/walletconnectmodal/resources'
-          ]
-        },
-        {
-          type: 'category',
           label: 'Multi-Chain',
           items: [
             'advanced/multichain/overview',
@@ -345,7 +293,6 @@ module.exports = {
             }
           ]
         },
-        'advanced/echo-server',
         {
           type: 'category',
           label: 'Migration from v1.x',
@@ -380,7 +327,72 @@ module.exports = {
             'advanced/migration-from-v1.x/migration-faq',
             'advanced/migration-from-v1.x/explorer-submission'
           ]
-        }
+        },
+        {
+          type: 'category',
+          label: 'Providers',
+          collapsible: true,
+          collapsed: true,
+          items: ['advanced/providers/ethereum', 'advanced/providers/universal']
+        },
+        {
+          type: 'category',
+          label: 'WalletConnectModal',
+          collapsed: true,
+          collapsible: true,
+          items: [
+            'advanced/walletconnectmodal/about',
+            'advanced/walletconnectmodal/usage',
+            'advanced/walletconnectmodal/options',
+            'advanced/walletconnectmodal/theming',
+            'advanced/walletconnectmodal/resources'
+          ]
+        },
+        {
+          type: 'category',
+          label: 'APIs',
+          collapsed: true,
+          collapsible: true,
+          items: [
+            {
+              type: 'category',
+              label: 'Auth',
+              items: [
+                'api/auth/overview',
+                'api/auth/dapp-usage',
+                'api/auth/wallet-usage',
+                'api/auth/signer-factory',
+                'api/auth/resources'
+              ]
+            },
+            {
+              type: 'category',
+              label: 'Chat',
+              items: ['api/chat/about', 'api/chat/usage', 'api/chat/resources']
+            },
+            {
+              type: 'category',
+              label: 'Core',
+              items: ['api/core/pairing', 'api/core/relay', 'api/core/shared-core']
+            },
+            {
+              type: 'category',
+              label: 'Notify',
+              items: ['api/notify/about', 'api/notify/usage', 'api/notify/migration-guide']
+            },
+            {
+              type: 'category',
+              label: 'Sign',
+              items: [
+                'api/sign/overview',
+                'api/sign/dapp-usage',
+                'api/sign/wallet-usage',
+                'api/sign/smart-contract-wallet-usage'
+              ]
+            }
+          ]
+        },
+        'advanced/echo-server'
       ]
     },
     {

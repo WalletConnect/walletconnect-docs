@@ -66,16 +66,20 @@ const userEl = document.getElementById('user')
 btnEl.addEventListener('click', connect)
 
 // listening for account changes
-watchAccount(account => {
-  userEl.innerText = account.address ?? ''
-  if (account.isConnected) {
-    btnEl.innerText = 'Disconnect'
-  } else {
-    btnEl.innerText = 'Connect'
+watchAccount(wagmiConfig,
+  {
+    onChange(account) {
+      userEl.innerText = account.address ?? ''
+      if (account.isConnected) {
+        btnEl.innerText = 'Disconnect'
+      } else {
+        btnEl.innerText = 'Connect'
+      }
+    }
   }
-})
 ```
 
 Learn more about the Web3Modal actions [here](../../actions.mdx)
+
 </TabItem>
 </Tabs>

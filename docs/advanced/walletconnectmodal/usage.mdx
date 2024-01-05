@@ -316,8 +316,9 @@ function App() {
 
 <PlatformTabItem value="unity">
 
-1. Add Name of your game (can be anything) and your Project ID to the `Assets/WalletConnectUnity/Resources/WalletConnectProjectConfig` asset.
-    - If you don't have Project ID, you can create one in [WalletConnect Cloud](https://cloud.walletconnect.com).
+1. Fill in the Project ID and Metadata fields in the `Assets/WalletConnectUnity/Resources/WalletConnectProjectConfig` asset.
+    - If you don’t have a Project ID, you can create one at [WalletConnect Cloud](https://cloud.walletconnect.com).
+    - The `Redirect` fields are optional. They are used to redirect the user back to your app after they approve or reject the session.
 2. Add `WalletConnectModal` prefab from `WalletConnectUnity Modal` package to the first scene in your game.
 
 </PlatformTabItem>
@@ -827,6 +828,130 @@ WalletConnectModal.Ready += (sender, args) =>
 
 #### Disconnection
 To disconnect from the current session, call `WalletConnectModal.Disconnect()` static method.
+
+### Interaction with RPC
+The WalletConnect Modal is responsible for facilitating communication between the game and the wallet.
+Some methods do not require the user to interact with the wallet. For example, `eth_getBalance` is used to get the address balance,
+and `eth_call` is used to read data from a smart contract without modifying its state, hence no signature is required.
+
+To call these methods, you can use the [Nethereum.Web3](https://www.nuget.org/packages/nethereum.web3) package.
+
+```csharp
+private static async Task GetAccountBalance()
+{
+    var session = WalletConnect.Instance.ActiveSession;
+
+    // Because one session can have multiple namespaces, we need to select one.
+    // In most cases, especially in games, dapp will use only one namespace.
+    var @namespace = session.RequiredNamespaces.First();
+    var address = session.CurrentAddress(@namespace.Key).Address;
+
+    var config = ProjectConfiguration.Load();
+
+    // Using WalletConnect Blockchain API: https://docs.walletconnect.com/cloud/blockchain-api
+    var url = $"https://rpc.walletconnect.com/v1?chainId={@namespace.Value.Chains[0]}&projectId={config.Id}";
+
+    var web3 = new Nethereum.Web3.Web3(url);
+    var balance = await web3.Eth.GetBalance.SendRequestAsync(address);
+    Debug.Log($"Balance of {address} in Wei: {balance.Value}");
+
+    var etherAmount = Nethereum.Web3.Web3.Convert.FromWei(balance.Value);
+    Debug.Log($"Balance of {address} in Ether: {etherAmount}");
+}
+```
+
+#### Interaction with Smart Contracts
+To query smart contracts, you can use [Nethereum.Web3](https://www.nuget.org/packages/nethereum.web3) package
+to make `eth_call` requests directly to the RPC endpoint.
+However, to call methods that modify the state of the smart contract, you need user to sign the transaction in the wallet.
+
+The example below shows how to call `approve` method of WETH9 (Wrapped Ether) smart contract. It encodes data with Nethereum and makes request with WalletConnect.
+
+```csharp
+public async Task ContractTransaction()
+{
+    var session = WalletConnect.Instance.ActiveSession;
+
+    // Because one session can have multiple namespaces, we need to select one.
+    // In most cases, especially in games, dapp will use only one namespace.
+    var @namespace = session.RequiredNamespaces.First();
+    var myAddress = session.CurrentAddress(@namespace.Key).Address;
+
+    // Define contract and function details
+    var contractAddress = "0x4200000000000000000000000000000000000006";
+    var toAddress = myAddress; // Use sender's address for the sake of example
+    var amount = new BigInteger(12345);
+
+    // Define the parameters for the approve function
+    var parameters = new Parameter[] {
+        new("address", "guy"),
+        new("uint256", "wad")
+    };
+
+    var functionCallEncoder = new FunctionCallEncoder();
+    var sha3Signature = new Sha3Keccack().CalculateHash("approve(address,uint256)");
+
+    // Encode the parameters
+    var encodedParameters = functionCallEncoder
+        .EncodeParameters(parameters, toAddress, amount)
+        .ToHex();
+
+    // Combine signature and parameters
+    var data = "0x" + sha3Signature[..8] + encodedParameters;
+
+    // Create transaction
+    var ethSendTransaction = new EthSendTransaction(new Transaction
+    {
+        From = myAddress,
+        To = contractAddress,
+        Value = "0",
+        Data = data
+    });
+
+    try
+    {
+        var result = await WalletConnect.Instance.RequestAsync<EthSendTransaction, string>(ethSendTransaction);
+        Debug.Log($"Transaction success! TxHash: {result}", this);
+    }
+    catch (Exception e)
+    {
+        Debug.LogError(e, this);
+    }
+}
+
+public class Transaction
+{
+    [JsonProperty("from")] public string From { get; set; }
+
+    [JsonProperty("to")] public string To { get; set; }
+
+    [JsonProperty("gas", NullValueHandling = NullValueHandling.Ignore)]
+    public string Gas { get; set; }
+
+    [JsonProperty("gasPrice", NullValueHandling = NullValueHandling.Ignore)]
+    public string GasPrice { get; set; }
+
+    [JsonProperty("value")] public string Value { get; set; }
+
+    [JsonProperty("data", NullValueHandling = NullValueHandling.Ignore)]
+    public string Data { get; set; } = "0x";
+}
+
+[RpcMethod("eth_sendTransaction"), RpcRequestOptions(Clock.ONE_MINUTE, 99997)]
+public class EthSendTransaction : List<Transaction>
+{
+    public EthSendTransaction(params Transaction[] transactions) : base(transactions)
+    {
+    }
+
+    [Preserve]
+    public EthSendTransaction()
+    {
+    }
+}
+```
+Please refer to [Nethereum](https://nethereum.com/) documentation for more details. Nethereum provides tools to simplify encoding and decoding.
+These tools hadn't been used in the example above to better illustrate the process.
 
 </PlatformTabItem>
 </PlatformTabs>

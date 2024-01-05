@@ -10,7 +10,7 @@ import PlatformTabItem from '../../components/PlatformTabItem'
 
 <PlatformTabs
 groupId="api-sign"
-activeOptions={["web","ios","android","flutter","csharp"]}>
+activeOptions={["web","ios","android","flutter","csharp", "unity"]}>
 
 <PlatformTabItem value="web">
 This library is compatible with Node.js, browsers and React Native applications (Node.js modules require polyfills for React Native).
@@ -22,7 +22,7 @@ npm install @walletconnect/modal
 ```
 
 :::info
-For an example implementation, please refer to our `react-dapp-v2` [example](https://github.com/WalletConnect/web-examples/tree/main/dapps/react-dapp-v2).
+For an example implementation, please refer to our `react-dapp-v2` [example](https://github.com/WalletConnect/web-examples/tree/main/advanced/dapps/react-dapp-v2).
 :::
 
 #### Install Packages
@@ -792,29 +792,57 @@ await dappClient.Disconnect(sessionTopic, Error.FromErrorType(ErrorType.USER_DIS
 
 <PlatformTabItem value="unity">
 
-:::tip
+WalletConnectUnity is a wrapper for WalletConnectSharp. It simplifies managing a single active session, addressing a common challenge with the original library.
 
-Since `WalletConnectUnity` is a wrapper around `WalletConnectSharp`, usage of the Sign API is identical to `C#`. Please refer to `C#` documentation on how to use the Sign API inside `WalletConnectUnity`.
+#### Features of WalletConnectUnity
 
-:::
+1. **Simplified Session Management**: WalletConnectSharp is designed to support multiple sessions, requiring developers to manually track and restore the active session. WalletConnectUnity simplifies this process by focusing on a single session, making it easier to manage session restoration.
 
-The `WalletConnectUnity` package comes with a `QRCodeHandler` component that can be used to show a QR Code to the user when the
-`dappClient.Connect()` function is used. It also introduces Unity Event handlers to handle connection related events natively in Unity.
+2. **Session Restoration**: WalletConnectUnity includes methods to easily access and restore the active session from storage.
 
-![walletconnectunity-qrcode-handler-editor](/assets/walletconnectunity-qrcode-handler-editor.png)
+3. **Deep Linking Support**: WalletConnectUnity automatically handles deep linking for mobile and desktop wallets.
 
-You **MUST** set the `QR Code Image` field to be the `Image` that will displayed the generated QR Code.
+4. **QR Code Generation**: WalletConnectUnity provides a utility for generating QR codes.
 
-Currently the component offers 4 Unity Events:
+#### Usage
 
-- On Sign Client Ready
-  - This event is invoked when a connection URI is ready to be displayed to the user. This can be used to show the `QR Code Image` game object or perform some other custom logic.
-- On Sign Client Ready With Args (ConnectedData)
-  - This event is the same as `On Sign Client Ready`, but provides the `ConnectedData` that contains the connection `URI`. Use this event if your custom logic needs the `URI`. Since the QR Code Handler automatically generates the `QR Code Image`, this usually is not needed.
-- On Sign Client Authorized
-  - This event is invoked when the displayed connection has been authorized by a wallet. This can be used to hide the `QR Code Image` game object or perform some other custom logic.
-- On Sign Client Authorized With Args (SessionStruct)
-  - This event is the same as `On Sign Client Authorized`, but provides the `SessionStruct` that contains the authorized session.
+To use WalletConnectUnity in your project:
+
+1. Fill in the Project ID and Metadata fields in the `Assets/WalletConnectUnity/Resources/WalletConnectProjectConfig` asset.
+    - If you don’t have a Project ID, you can create one at [WalletConnect Cloud](https://cloud.walletconnect.com).
+    - The `Redirect` fields are optional. They are used to redirect the user back to your app after they approve or reject the session.
+2. Initialize `WalletConnect` and connect the wallet:
+
+```csharp
+// Initialize singleton
+await WalletConnect.Instance.InitializeAsync();
+
+// Or handle instancing manually
+var walletConnectUnity = new WalletConnect();
+await walletConnectUnity.InitializeAsync();
+
+// Try to resume the last session
+var sessionResumed = await WalletConnect.Instance.TryResumeSessionAsync();              
+if (!sessionResumed)                                                                         
+{                                                                                            
+    var connectedData = await WalletConnect.Instance.ConnectAsync(connectOptions);
+
+    // Create QR code texture
+    var texture = WalletConnectUnity.Core.Utils.QRCode.EncodeTexture(connectedData.Uri);
+    
+    // ... Display QR code texture
+
+    // Wait for wallet approval
+    await connectedData.Approval;                                                            
+}                                                                                            
+```
+
+
+All features of WalletConnectSharp are accessible in WalletConnectUnity. 
+For complex scenarios, the `SignClient` can be accessed directly through `WalletConnect.SignClient`.
+
+Refer to the `C#` documentation for details on using the Sign API within WalletConnectUnity. 
+The usage of the WalletConnectSharp.Sign API remains consistent with `C#`.
 
 </PlatformTabItem>
 

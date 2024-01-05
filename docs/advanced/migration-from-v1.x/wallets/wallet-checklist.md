@@ -18,7 +18,7 @@ Please note that the links to SDK versions and sample wallets can be found in th
 
 **Sample wallets:**
 
-🌐 [Web GitHub Repo](https://github.com/WalletConnect/web-examples/tree/main/wallets/react-web3wallet)
+🌐 [Web GitHub Repo](https://github.com/WalletConnect/web-examples/tree/main/advanced/wallets/react-web3wallet)
 
 🤖 [Android GitHub Repo](https://github.com/WalletConnect/WalletConnectKotlinV2/tree/develop/sample/wallet)
 

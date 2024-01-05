@@ -69,6 +69,7 @@ const config = {
     {
       markprompt: {
         projectKey,
+        defaultView: 'chat',
         trigger: {
           floating: false,
           placeholder: 'Search or Ask AI'
@@ -95,6 +96,13 @@ const config = {
             type: 'html',
             value:
               '<a class="navbar__brand" href="/"><div class="navbar__logo"><img src="/img/walletconnect-logo-white.svg#dark-mode-only"  alt="WalletConnect Logo"><img src="/img/walletconnect-logo-black.svg#light-mode-only"  alt="WalletConnect Logo"></div>WalletConnect<span>Docs<span></a>'
+          },
+          {
+            label: 'Dashboard',
+            href: 'https://cloud.walletconnect.com/?utm_source=website&utm_medium=docs&utm_campaign=walletconnectdocs',
+            position: 'right',
+            className: 'header-cloud-link',
+            'aria-label': 'Cloud'
           },
           {
             href: 'https://github.com/walletconnect/',
@@ -164,7 +172,7 @@ const config = {
       prism: {
         darkTheme: darkCodeTheme,
         theme: lightCodeTheme,
-        additionalLanguages: ['swift', 'kotlin', 'dart', 'csharp'],
+        additionalLanguages: ['swift', 'kotlin', 'dart', 'csharp', 'gradle', 'ruby'],
         magicComments: [
           {
             className: 'theme-code-block-highlighted-delete',
@@ -181,7 +189,7 @@ const config = {
       announcementBar: {
         id: 'support_us',
         content:
-          '🎉 Web3Modal v3 is out. <a rel="noopener noreferrer" href="/web3modal/about">Learn more</a>. 🎉',
+          '🎉 The Web3Inbox SDK is in beta! <a rel="noopener noreferrer" href="/web3inbox/about?utm_source=docs&utm_medium=banner&utm_campaign=sdkpubliclaunch">Explore the new SDK</a> 🎉',
         backgroundColor: '#3182ce',
         textColor: '#fff',
         isCloseable: true

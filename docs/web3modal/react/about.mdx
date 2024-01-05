@@ -19,15 +19,18 @@ Choose one of these ethereum libraries to get started.
 
 ## Installation
 
-:::caution
-Email Login is currently in alpha and only supported in Wagmi & Ethers v6. Email is only for testing and not recommended for production apps.
-:::
-
-<PlatformTabs groupId="eth-lib" activeOptions={["wagmi","ethers5","ethers"]}>
+<PlatformTabs groupId="eth-lib" activeOptions={["wagmi", "wagmi1", "ethers5","ethers"]}>
 <PlatformTabItem value="wagmi">
 
 ```bash npm2yarn
-npm install @web3modal/wagmi wagmi viem
+npm install @web3modal/wagmi wagmi viem @tanstack/react-query
+```
+
+</PlatformTabItem>
+<PlatformTabItem value="wagmi1">
+
+```bash npm2yarn
+npm install @web3modal/wagmi1 wagmi@1.4.13 viem@1.21.4
 ```
 
 </PlatformTabItem>
@@ -51,10 +54,15 @@ npm install @web3modal/ethers ethers
 
 ## Implementation
 
-<PlatformTabs groupId="eth-lib" activeOptions={["wagmi","ethers5","ethers"]}>
+<PlatformTabs groupId="eth-lib" activeOptions={["wagmi", "wagmi1", "ethers5","ethers"]}>
 <PlatformTabItem value="wagmi">
 
 <WagmiImplementation/>
+
+</PlatformTabItem>
+<PlatformTabItem value="wagmi1">
+
+<Wagmi1Implementation/>
 
 </PlatformTabItem>
 <PlatformTabItem value="ethers5">
@@ -71,10 +79,15 @@ npm install @web3modal/ethers ethers
 
 ## Trigger the modal
 
-<PlatformTabs groupId="eth-lib" activeOptions={["wagmi","ethers5","ethers"]}>
+<PlatformTabs groupId="eth-lib" activeOptions={["wagmi", "wagmi1", "ethers5","ethers"]}>
 <PlatformTabItem value="wagmi">
 
 <WagmiModal/>
+
+</PlatformTabItem>
+<PlatformTabItem value="wagmi1">
+
+<Wagmi1Modal/>
 
 </PlatformTabItem>
 <PlatformTabItem value="ethers5">
@@ -91,8 +104,28 @@ npm install @web3modal/ethers ethers
 
 ## Smart Contract Interaction
 
-<PlatformTabs groupId="eth-lib" activeOptions={["wagmi","ethers5", "ethers"]}>
+<PlatformTabs groupId="eth-lib" activeOptions={["wagmi", "wagmi1", "ethers5", "ethers"]}>
 <PlatformTabItem value="wagmi">
+
+```tsx
+import { useContractRead } from 'wagmi'
+import { USDTAbi } from '../abi/USDTAbi'
+
+const USDTAddress = '0x...'
+
+function App() {
+  const result = useContractRead({
+    abi: USDTAbi,
+    address: USDTAddress,
+    functionName: 'totalSupply',
+  })
+}
+```
+
+Read more about Wagmi hooks for smart contract interaction [here](https://wagmi.sh/react/hooks/useContractRead).
+
+</PlatformTabItem>
+<PlatformTabItem value="wagmi1">
 
 ```tsx
 import { useContractRead } from 'wagmi'
