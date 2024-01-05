@@ -843,7 +843,7 @@ private static async Task GetAccountBalance()
 
     // Because one session can have multiple namespaces, we need to select one.
     // In most cases, especially in games, dapp will use only one namespace.
-    var @namespace = session.RequiredNamespaces.First();
+    var @namespace = session.Namespaces.First();
     var address = session.CurrentAddress(@namespace.Key).Address;
 
     var config = ProjectConfiguration.Load();
@@ -874,7 +874,7 @@ public async Task ContractTransaction()
 
     // Because one session can have multiple namespaces, we need to select one.
     // In most cases, especially in games, dapp will use only one namespace.
-    var @namespace = session.RequiredNamespaces.First();
+    var @namespace = session.Namespaces.First();
     var myAddress = session.CurrentAddress(@namespace.Key).Address;
 
     // Define contract and function details
