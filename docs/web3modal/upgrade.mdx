@@ -26,7 +26,7 @@ To upgrade from Web3Modal v2 to v3 start by removing Web3Modal v2 dependencies `
 while keeping `wagmi` and `viem` installed. Now you can install Web3Modal v3 library
 
 ```bash npm2yarn
-npm install @web3modal/wagmi
+npm install @web3modal/wagmi11 wagmi@1.4.13 viem@1.21.4
 ```
 
 </PlatformTabItem>
@@ -36,7 +36,7 @@ To upgrade from Web3Modal v2 to v3 start by removing Web3Modal v2 dependencies `
 while keeping `@wagmi/core` and `viem` installed. Now you can install Web3Modal v3 library
 
 ```bash npm2yarn
-npm install @web3modal/wagmi
+npm install @web3modal/wagmi1 @core/wagmi@1.4.13 viem@1.21.4
 ```
 
 </PlatformTabItem>
@@ -69,7 +69,7 @@ Start by importing `createWeb3Modal`, `defaultWagmiConfig` and wagmi packages
 - import { Web3Modal } from '@web3modal/react'
 /* highlight-delete-end */
 /* highlight-add-start */
-+ import { createWeb3Modal, defaultWagmiConfig } from '@web3modal/wagmi/react'
++ import { createWeb3Modal, defaultWagmiConfig } from '@web3modal/wagmi1/react'
 /* highlight-add-end */
 
 import { WagmiConfig } from 'wagmi'
@@ -138,8 +138,8 @@ Start by importing `createWeb3Modal`, `walletConnectProvider` and wagmi packages
 - import { Web3Modal } from '@web3modal/react'
 /* highlight-delete-end */
 /* highlight-add-start */
-+ import { createWeb3Modal } from '@web3modal/wagmi/react'
-+ import { walletConnectProvider } from '@web3modal/wagmi'
++ import { createWeb3Modal } from '@web3modal/wagmi1/react'
++ import { walletConnectProvider } from '@web3modal/wagmi1'
 /* highlight-add-end */
 
 import { WagmiConfig, configureChains, createConfig } from 'wagmi'
@@ -237,7 +237,7 @@ Start by importing `createWeb3Modal`, `defaultWagmiConfig` and wagmi packages
 - import { Web3Modal } from '@web3modal/html'
 /* highlight-delete-end */
 /* highlight-add-start */
-+ import { createWeb3Modal, defaultWagmiConfig } from '@web3modal/wagmi/react'
++ import { createWeb3Modal, defaultWagmiConfig } from '@web3modal/wagmi1/react'
 /* highlight-add-end */
 
 import { configureChains, createConfig } from '@wagmi/core'
@@ -289,7 +289,7 @@ Start by importing `Web3Modal`, `walletConnectProvider` and wagmi packages
 - import { Web3Modal } from '@web3modal/react'
 /* highlight-delete-end */
 /* highlight-add-start */
-+ import { Web3Modal, walletConnectProvider } from '@web3modal/wagmi'
++ import { Web3Modal, walletConnectProvider } from '@web3modal/wagmi1'
 /* highlight-add-end */
 
 import { configureChains, createConfig } from '@wagmi/core'
@@ -375,7 +375,7 @@ Finally, pass `wagmiConfig` to `createWeb3Modal`
 - import { useWeb3Modal } from '@web3modal/react'
 /* highlight-delete-end */
 /* highlight-add-start */
-+ import { useWeb3Modal } from '@web3modal/wagmi/react'
++ import { useWeb3Modal } from '@web3modal/wagmi1/react'
 /* highlight-add-end */
 
 function HomePage() {
