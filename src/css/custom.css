@@ -1257,6 +1257,7 @@ article img {
   transform: translate(-50%, -50%);
   z-index: 0;
   filter: blur(20px);
+  opacity: 0.75;
   pointer-events: none;
 }
 
