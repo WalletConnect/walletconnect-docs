@@ -1,4 +1,3 @@
-import Table from '../../../components/Table'
 import Button from '../../../components/button'
 
 
@@ -37,6 +36,18 @@ function Components() {
   return (
     <button onClick={() => onSignMessage()}>Sign Message</button>
   )
+}
+```
+
+### useWeb3ModalError
+
+```ts
+import { useWeb3ModalError } from '@web3modal/ethers/react'
+
+function Components() {
+  const { error } = useWeb3ModalError()
+  
+  //...
 }
 ```
 
