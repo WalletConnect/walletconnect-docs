@@ -5,6 +5,9 @@ import PlatformTabItem from '../../components/PlatformTabItem'
 import WagmiImplementation from './wagmi/about/implementation.mdx'
 import WagmiModal from './wagmi/about/triggermodal.mdx'
 
+import Wagmi1Implementation from './wagmi1/about/implementation.mdx'
+import Wagmi1Modal from './wagmi1/about/triggermodal.mdx'
+
 import Ethers5Implementation from './ethers5/about/implementation.mdx'
 import Ethers5Modal from './ethers5/about/triggermodal.mdx'
 
@@ -19,11 +22,18 @@ Choose one of these ethereum libraries to get started.
 
 ## Installation
 
-<PlatformTabs groupId="eth-lib" activeOptions={["wagmi","ethers5", "ethers"]}>
+<PlatformTabs groupId="eth-lib" activeOptions={["wagmi", "wagmi1", "ethers5", "ethers"]}>
 <PlatformTabItem value="wagmi">
 
 ```bash npm2yarn
-npm install @web3modal/wagmi @wagmi/core@1.4.13 viem@1.21.4
+npm install @web3modal/wagmi @wagmi/core @wagmi/connectors viem
+```
+
+</PlatformTabItem>
+<PlatformTabItem value="wagmi1">
+
+```bash npm2yarn
+npm install @web3modal/wagmi1 @core/wagmi@1.4.13 viem@1.21.4
 ```
 
 </PlatformTabItem>
@@ -47,10 +57,15 @@ npm install @web3modal/ethers ethers
 
 ## Implementation
 
-<PlatformTabs groupId="eth-lib" activeOptions={["wagmi","ethers5", "ethers"]}>
+<PlatformTabs groupId="eth-lib" activeOptions={["wagmi", "wagmi1", "ethers5", "ethers"]}>
 <PlatformTabItem value="wagmi">
 
 <WagmiImplementation/>
+
+</PlatformTabItem>
+<PlatformTabItem value="wagmi1">
+
+<Wagmi1Implementation/>
 
 </PlatformTabItem>
 <PlatformTabItem value="ethers5">
@@ -67,10 +82,15 @@ npm install @web3modal/ethers ethers
 
 ## Trigger the modal
 
-<PlatformTabs groupId="eth-lib" activeOptions={["wagmi","ethers5", "ethers"]}>
+<PlatformTabs groupId="eth-lib" activeOptions={["wagmi", "wagmi1","ethers5", "ethers"]}>
 <PlatformTabItem value="wagmi">
 
 <WagmiModal/>
+
+</PlatformTabItem>
+<PlatformTabItem value="wagmi1">
+
+<Wagmi1Modal/>
 
 </PlatformTabItem>
 <PlatformTabItem value="ethers5">
@@ -87,7 +107,7 @@ npm install @web3modal/ethers ethers
 
 ## Smart Contract Interaction
 
-<PlatformTabs groupId="eth-lib" activeOptions={["wagmi","ethers5", "ethers"]}>
+<PlatformTabs groupId="eth-lib" activeOptions={["wagmi", "wagmi1","ethers5", "ethers"]}>
 <PlatformTabItem value="wagmi">
 
 ```tsx
@@ -100,6 +120,25 @@ const data = readContract({
   address: USDTAddress,
   abi: USDTAbi,
   functionName: 'symbol',
+})
+```
+
+Read more about Wagmi actions for smart contract interaction [here](https://1.x.wagmi.sh/core/actions/readContract).
+
+</PlatformTabItem>
+<PlatformTabItem value="wagmi1">
+
+```tsx
+import { readContract } from '@wagmi/core'
+import { USDTAbi } from '../abi/USDTAbi'
+import { wagmiConfig } from './main'
+
+const USDTAddress = '0x...'
+
+const result = await readContract(wagmiConfig, {
+  abi: USDTAbi,
+  address: USDTAddress,
+  functionName: 'totalSupply',
 })
 ```
 

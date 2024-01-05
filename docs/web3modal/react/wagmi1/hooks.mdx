@@ -26,12 +26,18 @@ Hook for signing messages with connected account.
 import { useSignMessage } from 'wagmi'
 
 function App() {
-  const { signMessage } = useSignMessage()
+  const { data, isError, isLoading, isSuccess, signMessage } = useSignMessage({
+    message: 'gm wagmi frens'
+  })
 
   return (
-    <button onClick={() => signMessage({ message: 'hello world' })}>
-      Sign message
-    </button>
+    <div>
+      <button disabled={isLoading} onClick={() => signMessage()}>
+        Sign message
+      </button>
+      {isSuccess && <div>Signature: {data}</div>}
+      {isError && <div>Error signing message</div>}
+    </div>
   )
 }
 ```

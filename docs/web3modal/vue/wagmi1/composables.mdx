@@ -8,9 +8,8 @@ Action for accessing account data and connection status.
 
 ```tsx
 import { getAccount } from '@wagmi/core'
-import { wagmiConfig } from './main'
 
-const account = getAccount(wagmiConfig)
+const account = getAccount()
 ```
 
 ### signMessage
@@ -19,9 +18,10 @@ Action for signing messages with connected account.
 
 ```ts
 import { signMessage } from '@wagmi/core'
-import { wagmiConfig } from './main'
 
-await signMessage(wagmiConfig, { message: 'hello world' })
+const signature = await signMessage({
+  message: 'gm wagmi frens'
+})
 ```
 
 <Button name="Learn More" url="https://wagmi.sh/core/actions/readContract" />
