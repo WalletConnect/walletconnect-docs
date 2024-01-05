@@ -1,14 +1,10 @@
 import Tabs from '@theme/Tabs'
 import TabItem from '@theme/TabItem'
 
-You can start Web3Modal configuration using either **default** or **custom** mode.
-
-Default mode will implement WalletConnect, Browser Wallets (injected), [EIP-6963](https://eips.ethereum.org/EIPS/eip-6963) and Coinbase connectors.
+You can start integrating Email Login into Web3Modal SDK using either **default** or **custom** mode.
 
 <Tabs>
 <TabItem value="default" label="Default">
-
-Create a new file called `context/Web3Modal.tsx` or `context/Web3Modal.jsx` (outside your app directory) and set up the following configuration, making sure that all functions are called **outside** any React component to avoid unwanted rerenders.
 
 ```tsx
 "use client"
@@ -36,7 +32,12 @@ const metadata = {
 }
 
 createWeb3Modal({
-  ethersConfig: defaultConfig({ metadata, enableEmail: true }),
+  ethersConfig: defaultConfig({ 
+    metadata, 
+    /* highlight-add-start */
+    enableEmail: true
+    /* highlight-add-end */
+  }),
   chains: [mainnet],
   projectId
 })
@@ -46,34 +47,8 @@ export function Web3ModalProvider({ children }) {
 }
 ```
 
-Next, in your `app/layout.tsx` or `app/layout.jsx`  file, import the custom Web3Modal component.
-
-```tsx
-import "./globals.css";
-
-import { Web3Modal } from "../context/Web3Modal";
-
-export const metadata = {
-  title: "Web3Modal",
-  description: "Web3Modal Example",
-};
-
-export default function RootLayout({ children }) {
-  return (
-    <html lang="en">
-      <body>
-        <Web3ModalProvider>{children}</Web3ModalProvider>
-      </body>
-    </html>
-  );
-}
-```
-
 </TabItem>
 <TabItem value="custom" label="Custom">
-
-
-Create a new file called `context/Web3Modal.tsx` or `context/Web3Modal.jsx` (outside your app directory) and set up the following configuration, making sure that all functions are called **outside** any React component to avoid unwanted rerenders.
 
 ```tsx
 "use client"
@@ -107,6 +82,9 @@ createWeb3Modal({
     enableEIP6963: true,
     enableInjected: true,
     enableCoinbase: true,
+    /* highlight-add-start */
+    enableEmail: true 
+    /* highlight-add-end */
     rpcUrl: '...' // used for the Coinbase SDK
   }),
   chains: [mainnet],
@@ -115,29 +93,6 @@ createWeb3Modal({
 
 export function Web3Modal({ children }) {
   return <WagmiConfig config={wagmiConfig}>{children}</WagmiConfig>;
-}
-```
-
-Next, in your `app/layout.tsx` or `app/layout.jsx`  file, import the custom Web3Modal component.
-
-```tsx
-import "./globals.css";
-
-import { Web3Modal } from "../context/Web3Modal";
-
-export const metadata = {
-  title: "Web3Modal",
-  description: "Web3Modal Example",
-};
-
-export default function RootLayout({ children }) {
-  return (
-    <html lang="en">
-      <body>
-        <Web3Modal>{children}</Web3Modal>
-      </body>
-    </html>
-  );
 }
 ```
 

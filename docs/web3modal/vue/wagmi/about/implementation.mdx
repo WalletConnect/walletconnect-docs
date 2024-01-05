@@ -29,7 +29,15 @@ In your `App.vue` file set up the following configuration.
   }
 
   const chains = [mainnet, arbitrum]
-  const wagmiConfig = defaultWagmiConfig({ chains, projectId, metadata })
+  const wagmiConfig = defaultWagmiConfig({ 
+    chains, // required
+    projectId, // required
+    metadata, // required
+    enableWalletConnect: true, // Optional - true by default
+    enableInjected: true, // Optional - true by default
+    enableEIP6963: true, // Optional - true by default
+    enableCoinbase: true, // Optional - true by default
+  })
 
   // 3. Create modal
   createWeb3Modal({ wagmiConfig, projectId, chains })
