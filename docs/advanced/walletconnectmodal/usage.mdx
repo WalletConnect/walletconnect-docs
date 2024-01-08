@@ -285,9 +285,10 @@ This is a bug in the wallets, not this package.
 
 <PlatformTabItem value="react-native">
 
-Import WalletConnect Modal package, replace `YOUR_PROJECT_ID` with your [WalletConnect Cloud](https://cloud.walletconnect.com/sign-in) Project ID and add your Project's info in `providerMetadata`
+Start by importing `@walletconnect/react-native-compat` at the top of your app. Then import the WalletConnect Modal package, replace `YOUR_PROJECT_ID` with your [WalletConnect Cloud](https://cloud.walletconnect.com/sign-in) Project ID and add your Project's info in `providerMetadata`
 
 ```tsx
+import '@walletconnect/react-native-compat'
 import { WalletConnectModal } from '@walletconnect/modal-react-native'
 
 const projectId = 'YOUR_PROJECT_ID'
@@ -702,6 +703,7 @@ address;
 
 ```tsx
 import { Pressable, Text } from 'react-native'
+import '@walletconnect/react-native-compat'
 import { WalletConnectModal, useWalletConnectModal } from '@walletconnect/modal-react-native'
 
 const projectId = 'YOUR_PROJECT_ID'
