@@ -6,7 +6,7 @@ import PlatformTabItem from '../../components/PlatformTabItem'
 
 # Usage
 
-This section provides instructions on how to initialize the Web3Wallet client, approve sessions with supported namespaces, and respond to session requests, enabling easy integration of Web3 wallets with dapps through a simple and intuitive interface.
+This section provides instructions on how to use WalletConnectModal in your project.
 
 ## Implementation
 
@@ -256,7 +256,7 @@ On android 11+ you must specify that use can use the internet, along with the di
         <package android:name="me.rainbow"/>
         <package android:name="io.zerion.android"/>
         <package android:name="com.imtoken.app"/>
-        <!-- Add other wallets you would like to launch from within the app -->      
+        <!-- Add other wallets you would like to launch from within the app -->
     </queries>
     <!-- Permission to access the internet -->
     <uses-permission android:name="android.permission.INTERNET"/>
@@ -276,7 +276,7 @@ On android 11+ you must specify that use can use the internet, along with the di
 </manifest>
 ```
 
-For other packages, see the [example project]( https://github.com/WalletConnect/Web3ModalFlutter/blob/2981053456ecd3511ca2e3a7f0def7c75e22af62/example/sign/android/app/src/main/AndroidManifest.xml#L2)
+For other packages, see the [example project](https://github.com/WalletConnect/Web3ModalFlutter/blob/2981053456ecd3511ca2e3a7f0def7c75e22af62/example/sign/android/app/src/main/AndroidManifest.xml#L2)
 
 For some reason, multiple wallets have the `metamask` intent, and will launch metamask as a result.
 This is a bug in the wallets, not this package.
@@ -318,8 +318,8 @@ function App() {
 <PlatformTabItem value="unity">
 
 1. Fill in the Project ID and Metadata fields in the `Assets/WalletConnectUnity/Resources/WalletConnectProjectConfig` asset.
-    - If you don’t have a Project ID, you can create one at [WalletConnect Cloud](https://cloud.walletconnect.com).
-    - The `Redirect` fields are optional. They are used to redirect the user back to your app after they approve or reject the session.
+   - If you don’t have a Project ID, you can create one at [WalletConnect Cloud](https://cloud.walletconnect.com).
+   - The `Redirect` fields are optional. They are used to redirect the user back to your app after they approve or reject the session.
 2. Add `WalletConnectModal` prefab from `WalletConnectUnity Modal` package to the first scene in your game.
 
 </PlatformTabItem>
@@ -723,10 +723,10 @@ function App() {
   const { open, isConnected, provider } = useWalletConnectModal()
 
   const onPress = () => {
-    if(isConnected){
+    if (isConnected) {
       provider.disconnect()
     } else {
-      open();
+      open()
     }
   }
 
@@ -745,14 +745,15 @@ function App() {
 <PlatformTabItem value="unity">
 
 #### Connection and Events
+
 - WalletConnect Modal is a singleton that can be accessed from any scene.
 - By default Modal will initialize itself asynchronously on Awake. During initialization it will also try to connect
-to the last
-session.
+  to the last
+  session.
 - After initialization, Modal invokes `WalletConnectModal.Ready` static event.
 - If `Ready` argument's `SessionResumed` is `true`, it means that Modal has successfully connected to the last
-session. In this case you don't need to open the modal. Otherwise, open the modal with `WalletConnectModal.Open()`
-static method.
+  session. In this case you don't need to open the modal. Otherwise, open the modal with `WalletConnectModal.Open()`
+  static method.
 
 ```csharp
 private void Start()
@@ -829,9 +830,11 @@ WalletConnectModal.Ready += (sender, args) =>
 ```
 
 #### Disconnection
+
 To disconnect from the current session, call `WalletConnectModal.Disconnect()` static method.
 
 ### Interaction with RPC
+
 The WalletConnect Modal is responsible for facilitating communication between the game and the wallet.
 Some methods do not require the user to interact with the wallet. For example, `eth_getBalance` is used to get the address balance,
 and `eth_call` is used to read data from a smart contract without modifying its state, hence no signature is required.
@@ -863,6 +866,7 @@ private static async Task GetAccountBalance()
 ```
 
 #### Interaction with Smart Contracts
+
 To query smart contracts, you can use [Nethereum.Web3](https://www.nuget.org/packages/nethereum.web3) package
 to make `eth_call` requests directly to the RPC endpoint.
 However, to call methods that modify the state of the smart contract, you need user to sign the transaction in the wallet.
@@ -952,6 +956,7 @@ public class EthSendTransaction : List<Transaction>
     }
 }
 ```
+
 Please refer to [Nethereum](https://nethereum.com/) documentation for more details. Nethereum provides tools to simplify encoding and decoding.
 These tools hadn't been used in the example above to better illustrate the process.
 
