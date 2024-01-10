@@ -33,36 +33,81 @@ By default users are subscribed to all available notification types. However, it
 
 ## Setup steps
 
-1. In [WalletConnect Cloud](https://cloud.walletconnect.com), navigate to the APIs tab of your project.
+### Navigating to Notify API section
 
-   <img className="image-margin" src={useBaseUrl('/img/w3i/1.png')} />
+In [WalletConnect Cloud](https://cloud.walletconnect.com), navigate to the APIs tab of your project.
 
-2. Under Notify API > Configuration > `DAPP INFORMATION`, fill in the Dapp URL field. This is the domain of your app that you will use to publish notifications.
+<img className="image-margin" src={useBaseUrl('/img/w3i/1.png')} />
 
-   <img className="image-margin" src={useBaseUrl('/img/w3i/dapp-info.png')} />
+### Configuring Notify API
 
-3. Under the same section, next to Notification types, click on the "Add Notification Type" button and add a title and description for your notification type. This is the type of notification that your app will publish.
+Under Notify API > Configuration > `DAPP INFORMATION`, fill in the Dapp URL field. This is the domain of your app that you will use to publish notifications.
 
-   For example, if you are going to send promotional content as notification, you might want to add a notification type called "Promotional" with a description "Promotional content from the XYZ Team.".
+<img className="image-margin" src={useBaseUrl('/img/w3i/dapp-info.png')} />
+
+### Adding Notification Image and Types
+
+Under the same section, next to Notification types, click on the "Add Notification Type" button and add a title, notification image and description for your notification type. This is the type of notification that your app will publish.
+
+For example, if you are going to send promotional content as notification, you might want to add a notification type called "Promotional" with a description "Promotional content from the XYZ Team.".
+You can also add a relevant image for the notification type.
 
 <img className="image-margin" src={useBaseUrl('/img/w3i/notification-type.png')} />
 
-4. Optionally, you can add a logo and description for your project. This will be shown to users when they subscribe to your app. Click "Save" to save your changes.
+### Saving Changes
 
-5. Take note of your new Notify API Secret. You will need this to publish notifications. This secret
-   allows publishing notifications to any account subscribed to your app, so should not be published
-   and should only be used by your app backend.
-   <img className="image-margin" src={useBaseUrl('/img/w3i/3.png')} />
-6. Next, you will need to host `did.json` file on this page at the `/.well-known/` directory of your public URL.
-   - Download `did.json` (click on `DID:WEB` section to show the download button ) and host it at, for example, `https://app.example.com/.well-known/did.json`
-     <img className="image-margin" src={useBaseUrl('/img/w3i/did.png')} />
-7. Once this file has been deployed, switch on the toggle switch in the Notify API section of your WalletConnect Cloud project. If the file is correctly hosted, you should see a success toast: "Notify configuration successfully verified"
-   <img className="image-margin" src={useBaseUrl('/img/w3i/5.png')} />
-   <img className="image-margin" src={useBaseUrl('/img/w3i/6.png')} />
-8. Now you are ready for accounts to subscribe to your app and send notifications to them using your Notify API Secret.
+Optionally, you can add a logo and description for your project. This will be shown to users when they subscribe to your app. Click "Save" to save your changes.
+
+### Notify Secret
+
+Take note of your new Notify API Secret. You will need this to publish notifications. This secret
+allows publishing notifications to any account subscribed to your app, so should not be published
+and should only be used by your app backend.
+
+<img className="image-margin" src={useBaseUrl('/img/w3i/3.png')} />
+
+### Hosting did.json file
+
+Next, you will need to host `did.json` file on this page at the `/.well-known/` directory of your public URL.
+
+- Download `did.json` (click on `DID:WEB` section to show the download button ) and host it at, for example, `https://app.example.com/.well-known/did.json`
+  <img className="image-margin" src={useBaseUrl('/img/w3i/did.png')} />
+
+### Enabling Welcome Notifications
+
+Weclome notifications are notifications that are sent to users when they subscribe to your app. This is a great way to welcome users to your app and explain what types of notifications they will receive.
+
+To enable Welcome Notifications, switch on the toggle in the Welcome Notifications section of your WalletConnect Cloud project after adding relevant Notification Type, Title, Body & Link.
+
+<img className="image-margin" src={useBaseUrl('/img/w3i/welcome.png')} />
+
+### Enabling Notify API
+
+Once all changes have been saved and the `did.json` file has been deployed successfully, switch on the toggle switch in the Notify API section of your WalletConnect Cloud project. If everything is configured correctly, you should see a success toast: "Notify configuration successfully verified"
+
+<img className="image-margin" src={useBaseUrl('/img/w3i/5.png')} />
+<img className="image-margin" src={useBaseUrl('/img/w3i/6.png')} />
+
+## Send Notifications in Cloud
+
+Once you have completed the setup steps, you can now send notifications to users who have subscribed to your app.
+To test this, you can use the utility provided in cloud under the Notify API section.
+
+1. In the APIs tab of your project, navigate to the Notify API section. You should see a banner with a link to the Send Notification playground.
+
+   <img className="image-margin" src={useBaseUrl('/img/w3i/notify-playground.png')} />
+
+1. The Send Notification playground allows you to send notifications to your subscribers. After you select the associated project, you can select the notification type, title, body, and link to send to your subscribers.
+
+   <img className="image-margin" src={useBaseUrl('/img/w3i/notify-playground-send.png')} />
+
+## Next steps
+
+1. Now you are ready for accounts to subscribe to your app and send notifications to them using your Notify API Secret.
+
    - Read more on [sending notifications](./sending-notifications)
    - Read more on [frontend integration](./frontend-integration/usage)
 
-9. If you haven't already, [Verify your apps domain](../cloud/verify) for improved security.
+1. If you haven't already, [Verify your apps domain](../cloud/verify) for improved security.
 
-10. Ensure your app has a [published Explorer listing](../cloud/explorer) for discoverability.
+1. Ensure your app has a [published Explorer listing](../cloud/explorer) for discoverability.
