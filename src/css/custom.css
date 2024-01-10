@@ -132,6 +132,10 @@ html[data-theme='dark'] {
   --ifm-container-background-color: #141414;
 }
 
+html[data-theme='light'] {
+  --ifm-blockquote-color: var(--ifm-color-gray-900);
+}
+
 [data-theme='light'] img[src$='#dark-mode-only'],
 [data-theme='dark'] img[src$='#light-mode-only'] {
   display: none;
