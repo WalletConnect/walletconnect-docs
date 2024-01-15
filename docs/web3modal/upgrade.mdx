@@ -12,7 +12,11 @@ import PlatformTabItem from '../components/PlatformTabItem'
 - New Explorer API integration
 - Unified experience for iOS, Android and Desktop
 
-## Web3Modal v3 Upgrade Guide
+## Web3Modal v2 to v3 Upgrade Guide
+
+This guide is useful for those that have used a previous Web3Modal V2 version and are looking to upgrade to V3.
+
+<img src="/assets/w3m-upgrade.png" />
 
 ### Installation
 
@@ -50,7 +54,6 @@ npm install @web3modal/wagmi
 >
 <PlatformTabItem value="react">
 
-
 You can start the Web3Modal configuration by using either the **default** or **advanced** mode.
 
 Default mode will implement WalletConnect, Browser Wallets (injected) and Coinbase options in addition to Wagmi's public clients and [WalletConnect's provider](../cloud/blockchain-api.md).
@@ -77,6 +80,7 @@ import { arbitrum, mainnet } from 'viem/chains'
 ```
 
 Then create `wagmiConfig` using `defaultWagmiConfig` function as shown below
+
 ```tsx
 const chains = [arbitrum, mainnet]
 const projectId = 'YOUR_PROJECT_ID'
@@ -104,6 +108,7 @@ const projectId = 'YOUR_PROJECT_ID'
 ```
 
 Finally, pass `wagmiConfig` to `createWeb3Modal`
+
 ```tsx
 /* Call createWeb3Modal function */
 /* highlight-delete-start */
@@ -127,6 +132,7 @@ export default function App() {
   )
 }
 ```
+
 </TabItem>
 <TabItem value="custom" label="Advanced">
 
@@ -152,6 +158,7 @@ import { mainnet } from 'viem/chains'
 ```
 
 Then create `wagmiConfig` using your own settings
+
 ```tsx
 // 1. Get projectId at https://cloud.walletconnect.com
 const projectId = 'YOUR_PROJECT_ID'
@@ -195,6 +202,7 @@ const projectId = 'YOUR_PROJECT_ID'
 ```
 
 Finally, pass wagmi config to `createWeb3Modal`
+
 ```tsx
 /* Call createWeb3Modal function */
 /* highlight-delete-start */
@@ -218,6 +226,7 @@ export default function App() {
   )
 }
 ```
+
 </TabItem>
 </Tabs>
 
@@ -245,6 +254,7 @@ import { arbitrum, mainnet } from 'viem/chains'
 ```
 
 Then create `wagmiConfig` using `defaultWagmiConfig` function as shown below
+
 ```tsx
 const chains = [arbitrum, mainnet]
 const projectId = 'YOUR_PROJECT_ID'
@@ -270,6 +280,7 @@ const projectId = 'YOUR_PROJECT_ID'
 ```
 
 Finally, pass `wagmiConfig` to `createWeb3Modal`
+
 ```ts
 /* highlight-delete-start */
 - const ethereumClient = new EthereumClient(wagmiConfig, chains)
@@ -278,6 +289,7 @@ Finally, pass `wagmiConfig` to `createWeb3Modal`
 + createWeb3Modal({ wagmiConfig, projectId, chains })
 /* highlight-add-end */
 ```
+
 </TabItem>
 <TabItem value="custom" label="Advanced">
 
@@ -302,6 +314,7 @@ import { mainnet } from 'viem/chains'
 ```
 
 Then create `wagmiConfig` using your own settings
+
 ```tsx
 // 1. Get projectId at https://cloud.walletconnect.com
 const projectId = 'YOUR_PROJECT_ID'
@@ -347,6 +360,7 @@ const projectId = 'YOUR_PROJECT_ID'
 ```
 
 Finally, pass `wagmiConfig` to `createWeb3Modal`
+
 ```tsx
 /* highlight-delete-start */
 - const ethereumClient = new EthereumClient(wagmiConfig, chains)
@@ -355,12 +369,12 @@ Finally, pass `wagmiConfig` to `createWeb3Modal`
 + createWeb3Modal({ wagmiConfig, projectId, chains })
 /* highlight-add-end */
 ```
+
 </TabItem>
 </Tabs>
 
 </PlatformTabItem>
 </PlatformTabs>
-
 
 ### Trigger the modal
 
@@ -389,7 +403,6 @@ Learn more about Web3Modal v3 [here](./react/about.mdx)
 
 </PlatformTabItem>
 <PlatformTabItem value="javascript">
-
 
 Use your own button with to open the modal
 
