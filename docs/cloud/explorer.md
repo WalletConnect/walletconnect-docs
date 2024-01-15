@@ -218,7 +218,7 @@ Your dapp is querying the deprecated `registry.walletconnect.org/logo/{size}/{id
 
 **Solution:**
 
-- You should upgrade to the [explorer-api.walletconnect.com/v3/logo/{size}/{image_id}](https://explorer-api.walletconnect.com/v3/logo/{size}/{image_id}) endpoint, which returns the equivalent logo.
+- You should upgrade to the `explorer-api.walletconnect.com/v3/logo/{size}/{image_id}` endpoint, which returns the equivalent logo.
 - A specific dapp’s/wallet’s image_id can be looked up via the data endpoints, e.g. /`v3/wallets`, as shown above.
 - For your convenience, **endpoints like /v3/wallets already provide an image_url object with the relevant `/logo/` requests for each entry.**
 - Taking MetaMask as an example:
