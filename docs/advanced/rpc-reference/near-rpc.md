@@ -19,7 +19,7 @@ Retrieve all accounts visible to the session. `publicKey` references the underly
     1.`Array` - Array of accounts:
         1.1. `Object`
             1.1.1. `accountId` : `String` - The account name to which the publicKey corresponds as plain text
-            1.1.2. `publicKey` : `String` - The public counterpart of the key used to sign, expressed as a string with format "<key-type>:<base58-key-bytes>"
+            1.1.2. `publicKey` : `String` - The public counterpart of the key used to sign, expressed as a string with format `<key-type>:<base58-key-bytes>`
 
 ### Example
 
@@ -56,7 +56,7 @@ For dApps that often sign gas-only transactions, `FunctionCall` access keys can 
     	1.2. `accounts` : `Array` - list of accounts for which a FunctionCall access key will be added:
                 1.2.1. `Object` - Account
                     1.2.1.1. `accountId` : `String` - The account name to which the publicKey corresponds as plain text
-                    1.2.1.2. `publicKey` : `String` - The public counterpart of the key used to sign, expressed as a string with format "<key-type>:<base58-key-bytes>"
+                    1.2.1.2. `publicKey` : `String` - The public counterpart of the key used to sign, expressed as a string with format `<key-type>:<base58-key-bytes>`
 
 ### Returns
 
@@ -93,7 +93,7 @@ Delete one or more `FunctionCall` access keys created with `signIn`. While this 
     1.`Array` - Array of accounts:
         1.1. `Object`
             1.1.1. `accountId` : `String` - The account name to which the publicKey corresponds as plain text
-            1.1.2. `publicKey` : `String` - The public counterpart of the key used to sign, expressed as a string with format "<key-type>:<base58-key-bytes>"
+            1.1.2. `publicKey` : `String` - The public counterpart of the key used to sign, expressed as a string with format `<key-type>:<base58-key-bytes>`
 
 
 ### Returns
