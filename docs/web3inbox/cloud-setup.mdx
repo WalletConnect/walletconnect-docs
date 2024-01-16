@@ -68,7 +68,7 @@ and should only be used by your app backend.
 
 ### Hosting did.json file
 
-Next, you will need to host `did.json` file on this page at the `/.well-known/` directory of your public URL.
+Next, you will need to host `did.json` file on this page at the `/.well-known/` directory of your public URL. Please also ensure that your application has CORS enabled. An example is linked [here.](https://github.com/WalletConnect/gm-dapp/blob/main/next.config.js)
 
 - Download `did.json` (click on `DID:WEB` section to show the download button ) and host it at, for example, `https://app.example.com/.well-known/did.json`
   <img className="image-margin" src={useBaseUrl('/img/w3i/did.png')} />
