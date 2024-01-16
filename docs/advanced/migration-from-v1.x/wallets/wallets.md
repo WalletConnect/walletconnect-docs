@@ -8,7 +8,7 @@ The following steps describe the various steps necessary for dapps to migrate to
 
 1. [Getting Started](#getting-started)
 2. [Integrations Checklist](./wallet-checklist.md)
-3. [Explorer Submission](../explorer-submission.md#for-dapps)
+3. [Explorer Submission](../explorer-submission.md)
 
 ---
 
