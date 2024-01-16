@@ -276,7 +276,15 @@ module.exports = {
           type: 'category',
           label: 'Multi-Chain',
           items: [
-            'advanced/multichain/overview',
+            {
+              type: 'category',
+              label: 'Chain Onboarding',
+              items: [
+                'advanced/multichain/chain-onboarding/overview',
+                'advanced/multichain/chain-onboarding/evm',
+                'advanced/multichain/chain-onboarding/non-evm'
+              ]
+            },
             'advanced/multichain/chain-list',
             {
               type: 'category',
