@@ -115,13 +115,13 @@ npm install @web3modal/ethers ethers
 <PlatformTabItem value="wagmi">
 
 ```tsx
-import { useContractRead } from 'wagmi'
+import { useReadContract } from 'wagmi'
 import { USDTAbi } from '../abi/USDTAbi'
 
 const USDTAddress = '0x...'
 
 function App() {
-  const result = useContractRead({
+  const result = useReadContract({
     abi: USDTAbi,
     address: USDTAddress,
     functionName: 'totalSupply',
@@ -129,7 +129,7 @@ function App() {
 }
 ```
 
-Read more about Wagmi hooks for smart contract interaction [here](https://wagmi.sh/react/hooks/useContractRead).
+Read more about Wagmi hooks for smart contract interaction [here](https://wagmi.sh/react/hooks/useReadContract).
 
 </PlatformTabItem>
 <PlatformTabItem value="wagmi1">
@@ -149,7 +149,7 @@ function App() {
 }
 ```
 
-Read more about Wagmi hooks for smart contract interaction [here](https://wagmi.sh/react/hooks/useContractRead).
+Read more about Wagmi hooks for smart contract interaction [here](https://1.x.wagmi.sh/react/hooks/useContractRead).
 
 </PlatformTabItem>
 <PlatformTabItem value="ethers5">
