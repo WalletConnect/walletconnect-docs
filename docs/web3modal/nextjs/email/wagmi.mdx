@@ -64,17 +64,17 @@ export function Web3Modal({ children }) {
 ```tsx
 "use client";
 
-import { createWeb3Modal } from '@web3modal/wagmi/react'
-  /* highlight-add-start */
-import { emailConnector } from '@web3modal/wagmi'
-/* highlight-add-end */
+import type { ReactNode } from 'react'
 
-import { http, createConfig, WagmiProvider } from 'wagmi'
-import { mainnet, sepolia } from 'wagmi/chains'
+import { createWeb3Modal } from "@web3modal/wagmi"
 
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query' 
+import { WagmiProvider, cookieStorage, createStorage, createConfig, http } from "wagmi";
+import { mainnet, sepolia } from "wagmi/chains";
+import { walletConnect, injected, coinbaseWallet } from "wagmi/connectors"
 
-// 0. Setup queryClient
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+
+// 0. Setup queryClient 
 const queryClient = new QueryClient()
 
 // 1. Get projectId at https://cloud.walletconnect.com
@@ -88,9 +88,11 @@ const metadata = {
   icons: ['https://avatars.githubusercontent.com/u/37784886']
 }
 
-const wagmiConfig = createConfig({
-  chains: [mainnet, sepolia],
-  transports: {
+const chains = [mainnet, sepolia] as const
+
+export const wagmiConfig = createConfig({
+  chains,
+  transports: { 
     [mainnet.id]: http(),
     [sepolia.id]: http(),
   },
@@ -104,19 +106,22 @@ const wagmiConfig = createConfig({
     /* highlight-add-start */
     emailConnector({ chains, options: { projectId } })
     /* highlight-add-end */
-  ]
+  ],
+  ssr: true,
+  storage: createStorage({  
+    storage: cookieStorage, 
+  }),
 })
 
-// 3. Create modal
 createWeb3Modal({ wagmiConfig, projectId, chains })
 
-export function Web3Modal({ children }) {
+export function Web3Modal({ children, initialState }: { children: ReactNode, initialState?: State }) {
   return (
-    <WagmiConfig config={wagmiConfig}>
+    <WagmiProvider config={wagmiConfig}  initialState={initialState}>
       <QueryClientProvider client={queryClient}>
         {children}
       </QueryClientProvider>
-    </WagmiConfig>
+    </WagmiProvider>
   );
 }
 ```
