@@ -4,7 +4,7 @@ import Button from '../../../components/button'
 
 Hook that returns the client's information.
 
-```tsx
+```ts
 import { useWeb3ModalAccount } from '@web3modal/ethers5/vue'
 
 const { address, chainId, isConnected } = useWeb3ModalAccount()
@@ -14,7 +14,7 @@ const { address, chainId, isConnected } = useWeb3ModalAccount()
 
 Hook that returns the `walletProvider` and the `WalletProviderType`.
 
-```tsx
+```ts
 import { ethers } from 'ethers'
 import { useWeb3ModalProvider } from '@web3modal/ethers5/vue'
 
@@ -26,6 +26,14 @@ async function onSignMessage() {
   const signature = await signer?.signMessage('Hello Web3Modal Ethers')
   console.log(signature)
 }
+```
+
+### useWeb3ModalError
+
+```ts
+import { useWeb3ModalError } from '@web3modal/ethers/react'
+
+  const { error } = useWeb3ModalError()
 ```
 
 <Button name="Learn More About Ethers" url="https://docs.ethers.org/v5/getting-started/#getting-started--contracts" />

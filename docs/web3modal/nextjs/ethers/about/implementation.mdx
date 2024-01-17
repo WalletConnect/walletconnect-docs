@@ -36,7 +36,7 @@ const metadata = {
 }
 
 createWeb3Modal({
-  ethersConfig: defaultConfig({ metadata }),
+  ethersConfig: defaultConfig({ metadata, enableEmail: true }),
   chains: [mainnet],
   projectId
 })
