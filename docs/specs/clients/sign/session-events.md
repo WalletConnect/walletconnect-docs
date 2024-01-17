@@ -71,7 +71,7 @@ await client.connect({
 Here's an example payload when the dapp is initiating a session proposal on the Goerli Network.
 
 :::tip
-For a properly formatted namespace, refer to the documentation [here](../../../specs/clients/sign/namespaces.md#example-proposal-namespaces-request).
+For a properly formatted namespace, refer to the documentation [here](../../../specs/clients/sign/namespaces.md).
 :::
 
 ```ts

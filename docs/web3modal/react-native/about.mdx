@@ -36,7 +36,7 @@ npx pod-install
 <TabItem value="expo" label="Expo">
 
 ```
-npx expo install @web3modal/wagmi-react-native wagmi viem
+npx expo install @web3modal/wagmi-react-native wagmi@1.4.13 viem@1.21.4
 ```
 
 Additionally add these extra packages to help with async storage, polyfills, and SVG's.
@@ -294,3 +294,90 @@ Your configuration should look like this:
 </TabItem>
 
 </Tabs>
+
+## Enable Coinbase Wallet
+
+Follow these steps to install Coinbase SDK in your project along with our custom Wagmi connector. Check <a href="https://mobilewalletprotocol.github.io/wallet-mobile-sdk/docs/client-sdk/rn-install">here</a> for more detailed information.
+
+* Note: Coinbase SDK is [not compatible with Expo Go](https://github.com/MobileWalletProtocol/wallet-mobile-sdk/issues/206) 
+
+
+1. Enable Expo Modules in your project running: `npx install-expo-modules@latest`
+
+2. Install Coinbase SDK
+
+```bash npm2yarn
+npm install @coinbase/wallet-mobile-sdk react-native-mmkv
+```
+
+3. Install our custom connector
+```bash npm2yarn
+npm install @web3modal/coinbase-react-native
+```
+
+4. Run pod-install
+```
+npx pod-install
+```
+
+5. Enable Deeplink handling in your project following <a href="https://reactnative.dev/docs/linking?syntax=android#enabling-deep-links">React Native docs</a>
+
+6. Add Coinbase package in your AndroidManifest.xml and Info.Plist
+```xml
+/// AndroidManifest.xml
+<queries>
+      ///other queries
+      <package android:name="org.toshi" />
+</queries>
+```
+
+```xml
+/// Info.plist
+<key>LSApplicationQueriesSchemes</key>
+<array>
+  // other schemes
+  <string>cbwallet</string>
+</array>
+```
+
+7. Add Coinbase reponse handler in your app. More info <a href="https://mobilewalletprotocol.github.io/wallet-mobile-sdk/docs/client-sdk/rn-setup#listening-for-responses">here</a>
+```tsx
+import { handleResponse } from "@coinbase/wallet-mobile-sdk";
+
+// Your app's deeplink handling code
+useEffect(() => {
+  const sub = Linking.addEventListener("url", ({ url }) => {
+    const handledBySdk = handleResponse(new URL(url));
+    if (!handledBySdk) {
+      // Handle other deeplinks
+    }
+  });
+
+  return () => sub.remove();
+}, []);
+```
+
+8. Initialize `CoinbaseWagmiConnector` and add it in `extraConnectors`
+
+```tsx
+import { CoinbaseWagmiConnector } from '@web3modal/coinbase-react-native';
+
+
+const coinbaseConnector = new CoinbaseWagmiConnector({
+  chains,
+  options: {
+    redirect: 'YOUR_APP_SCHEME://',
+  },
+});
+
+const wagmiConfig = defaultWagmiConfig({
+  chains,
+  projectId,
+  metadata,
+  extraConnectors: [coinbaseConnector],
+});
+
+
+```
+
+Check <a href="https://mobilewalletprotocol.github.io/wallet-mobile-sdk/docs/client-sdk/rn-install">Coinbase docs</a> for more detailed information.

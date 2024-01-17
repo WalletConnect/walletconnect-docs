@@ -4,7 +4,7 @@ The following steps describe the various steps necessary for dapps to migrate to
 
 1. [Getting Started](#getting-started)
 2. [Testing Your Integration](./dapp-checklist.md)
-3. [Submitting Your Dapp to the WalletConnect Explorer](../explorer-submission.md#for-dapps)
+3. [Submitting Your Dapp to the WalletConnect Explorer](../explorer-submission.md)
 
 ---
 
