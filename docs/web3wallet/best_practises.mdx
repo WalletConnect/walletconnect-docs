@@ -61,10 +61,8 @@ val coreDelegate = object : CoreClient.CoreDelegate {
     override fun onPairingState(pairingState: Core.Model.PairingState) {
         //Here a pairing state is triggered
     }
-
-    override fun onPairingExpired(expiredPairing: Core.Model.ExpiredPairing) {}
-
-    override onPairingDelete(deletedPairing: Core.Model.DeletedPairing) {}
+    ...other callbacks
+}
 
 CoreClient.setDelegate(coreDelegate)
 ```
@@ -92,13 +90,11 @@ A pairing expiry event is triggered whenever a pairing is expired. The expiry fo
 <PlatformTabItem value="android">
 ```kotlin
 val coreDelegate = object : CoreClient.CoreDelegate {
-    override fun onPairingState(pairingState: Core.Model.PairingState) {}
-
     override fun onPairingExpired(expiredPairing: Core.Model.ExpiredPairing) {
         //Here a pairing expiry is triggered
     }
-
-    override onPairingDelete(deletedPairing: Core.Model.DeletedPairing) {}
+    ...other callbacks
+}
 
 CoreClient.setDelegate(coreDelegate)
 ```
@@ -147,8 +143,7 @@ Session approve
     }
     onError = { error ->
         //Error while sending session approval - update your UI
-    }
-)
+    })
 ```
 
 Session reject
@@ -188,7 +183,7 @@ val walletDelegate = object : Web3Wallet.WalletDelegate {
     override fun onProposalExpired(proposal: Wallet.Model.ExpiredProposal) {
             //Here this event is triggered when a proposal expires - update your UI
     }
-    ... other callbacks
+    ...other callbacks
 }
 Web3Wallet.setWalletDelegate(walletDelegate)
 ```
@@ -266,7 +261,7 @@ val walletDelegate = object : Web3Wallet.WalletDelegate {
     override fun onRequestExpired(request: Wallet.Model.ExpiredRequest) {
         //Here this event is triggered when a session request expires - update your UI
     }
-    ... other callbacks
+    ...other callbacks
 }
 Web3Wallet.setWalletDelegate(walletDelegate)
 ```
@@ -307,7 +302,7 @@ val walletDelegate = object : Web3Wallet.WalletDelegate {
     override fun onConnectionStateChange(state: Wallet.Model.ConnectionState) {
         //Here this event is triggered when a connection state has changed
     }
-    ... other callbacks
+    ...other callbacks
 }
 Web3Wallet.setWalletDelegate(walletDelegate)
 ```
