@@ -16,7 +16,17 @@ A piring is a connection between a wallet and a dapp that has fixed permissions 
 </PlatformTabItem>
 
 <PlatformTabItem value="android">
-// TODO add how to pair with web3wallet
+```kotlin
+val pairingParams = Wallet.Params.Pair(pairingUri)
+Web3Wallet.pair(pairingParams, 
+    onSuccess = {
+        //Subscribed on the pairing topic successfully. Wallet should await for a session proposal
+    },
+    onError = { error ->
+        //Some error happens while pairing - check Expected errors section
+    }
+}
+```
 </PlatformTabItem>
 
 <PlatformTabItem value="ios">
@@ -38,7 +48,18 @@ When `true` wallet should show a loading indicator awaiting a session proposal, 
 </PlatformTabItem>
 
 <PlatformTabItem value="android">
-// TODO add how to consume pairing state 
+```kotlin
+val coreDelegate = object : CoreClient.CoreDelegate {
+    override fun onPairingState(pairingState: Core.Model.PairingState) {
+        //Here a pairing state is triggered
+    }
+
+    override fun onPairingExpired(expiredPairing: Core.Model.ExpiredPairing) {}
+
+    override onPairingDelete(deletedPairing: Core.Model.DeletedPairing) {}
+
+CoreClient.setDelegate(coreDelegate)
+```
 </PlatformTabItem>
 
 <PlatformTabItem value="ios">
@@ -59,7 +80,18 @@ A pairing expiry event is triggered whenever a pairing is expired. The expiry fo
 </PlatformTabItem>
 
 <PlatformTabItem value="android">
-// TODO add how to consume pairing expiry
+```kotlin
+val coreDelegate = object : CoreClient.CoreDelegate {
+    override fun onPairingState(pairingState: Core.Model.PairingState) {}
+
+    override fun onPairingExpired(expiredPairing: Core.Model.ExpiredPairing) {
+        //Here a pairing expiry is triggered
+    }
+
+    override onPairingDelete(deletedPairing: Core.Model.DeletedPairing) {}
+
+CoreClient.setDelegate(coreDelegate)
+```
 </PlatformTabItem>
 
 <PlatformTabItem value="ios">
