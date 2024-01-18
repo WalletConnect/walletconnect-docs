@@ -33,6 +33,8 @@ Web3Wallet.pair(pairingParams,
 // TODO add how to pair with web3wallet
 </PlatformTabItem>
 
+</PlatformTabs>
+
 ### Pairing State
 
 A pairing state is a primitive exposed by Web3Wallet client for a wallet to indicate whether it should await a session propsal. The pairing state is `true` when a wallet scans a QR and awaits a session proposal. Once the session proposal is received by the wallet, the pairing state is changed to `false`.
@@ -198,6 +200,8 @@ Whenever user approves or rejects a session request, wallet should show loading 
 <PlatformTabItem value="ios">
 // TODO add how to await for Relay acknowledgement for approve and reject request
 </PlatformTabItem>
+
+</PlatformTabs>
 
 ### Session Request Expiry
 
