@@ -66,6 +66,8 @@ CoreClient.setDelegate(coreDelegate)
 // TODO add how to consume pairing state 
 </PlatformTabItem>
 
+</PlatformTabs>
+
 ### Pairing Expiry
 
 A pairing expiry event is triggered whenever a pairing is expired. The expiry for inactive pairing is 5 mins, whereas for active pairing is 30 days. A pairing becomes active when a session proposal is received and use successfully approves it. This event helps to know when given pairing expires and update UI accordingly.
@@ -97,6 +99,8 @@ CoreClient.setDelegate(coreDelegate)
 <PlatformTabItem value="ios">
 // TODO add how to consume pairing expiry
 </PlatformTabItem>
+
+</PlatformTabs>
 
 ### Expected Errors
 
@@ -133,6 +137,8 @@ Whenever user approves or rejects a session proposal, wallet should show loading
 // TODO add how to await for Relay acknowledgement for approve and reject proposal
 </PlatformTabItem>
 
+</PlatformTabs>
+
 ### Session Proposal Expiry
 
 A session proposal expiry is 5 mins. It means a given proposal is stored for 5 mins in the SDK storage and user has 5 mins for approval or rejection decision. After that time the below event is emmited and proposal modal should be removed from the app's UI.
@@ -153,6 +159,8 @@ A session proposal expiry is 5 mins. It means a given proposal is stored for 5 m
 <PlatformTabItem value="ios">
 // TODO add how to consume proposal expiry event
 </PlatformTabItem>
+
+</PlatformTabs>
 
 ### Expected Errors
 
@@ -212,6 +220,7 @@ Whenever user approves or rejects a session request, wallet should show loading 
 // TODO add how to consume session expiry event
 </PlatformTabItem>
 
+</PlatformTabs>
 
 ### Expected Errors
 
@@ -243,3 +252,5 @@ A connection state event is emitted whenever a connection state has changed. Web
 <PlatformTabItem value="ios">
 // TODO add how to consume connection state event
 </PlatformTabItem>
+
+</PlatformTabs>
