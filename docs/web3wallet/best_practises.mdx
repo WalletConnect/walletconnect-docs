@@ -1,0 +1,213 @@
+# Web3Wallet Best Practices
+
+The purpose of this guide is to show the best prectices in regards of Web3Wallet client usage. The goal is to provide the best user expirience that just works in every circumstances.
+
+## Pairing
+
+A piring is a connection between a wallet and a dapp that has fixed permissions to only allow a dapp to propose a session through it. Dapp can propose infinite number of sessions on one pairing. Wallet must use a pair method from Web3Wallet client to pair with dapp.
+
+<PlatformTabs
+	groupId="w3w"
+	activeOptions={["web","android","ios"]}
+>
+
+<PlatformTabItem value="web">
+// TODO add how to pair with web3wallet
+</PlatformTabItem>
+
+<PlatformTabItem value="android">
+// TODO add how to pair with web3wallet
+</PlatformTabItem>
+
+<PlatformTabItem value="ios">
+// TODO add how to pair with web3wallet
+</PlatformTabItem>
+
+### Pairing State
+
+A pairing state is a primitive exposed by Web3Wallet client for a wallet to indicate whether it should await a session propsal. The pairing state is `true` when a wallet scans a QR and awaits a session proposal. Once the session proposal is received by the wallet, the pairing state is changed to `false`.
+When `true` wallet should show a loading indicator awaiting a session proposal, when changed to `false` a proposal dialog should be displayed.
+
+<PlatformTabs
+	groupId="w3w"
+	activeOptions={["web","android","ios"]}
+>
+
+<PlatformTabItem value="web">
+// TODO add how to consume pairing state 
+</PlatformTabItem>
+
+<PlatformTabItem value="android">
+// TODO add how to consume pairing state 
+</PlatformTabItem>
+
+<PlatformTabItem value="ios">
+// TODO add how to consume pairing state 
+</PlatformTabItem>
+
+### Pairing Expiry
+
+A pairing expiry event is triggered whenever a pairing is expired. The expiry for inactive pairing is 5 mins, whereas for active pairing is 30 days. A pairing becomes active when a session proposal is received and use successfully approves it. This event helps to know when given pairing expires and update UI accordingly.
+
+<PlatformTabs
+	groupId="w3w"
+	activeOptions={["web","android","ios"]}
+>
+
+<PlatformTabItem value="web">
+// TODO add how to consume pairing expiry 
+</PlatformTabItem>
+
+<PlatformTabItem value="android">
+// TODO add how to consume pairing expiry
+</PlatformTabItem>
+
+<PlatformTabItem value="ios">
+// TODO add how to consume pairing expiry
+</PlatformTabItem>
+
+### Expected Errors
+
+While pairing the following errors might occur:
+ - No Internet connection error or pairing timeout when scanning QR with no Internet connection
+    - User should pair again with Internet connection
+ - Pairing expired error when scanning a QR code with expired pairing
+    - User should refresh a QR code and scan again
+- Pairing with existing pairing is not allowed
+    - User should refresh a QR code and scan again. I usually happens when user scans an already paired QR code.  
+
+## Session Proposal
+
+A session proposal is a handshake sent by a dapp and it's purpose is to define a session rules. Whenever a user wants to establish a connection between a wallet and a dapp, one should approve a session proposal.
+
+### User Action Feedback
+
+Whenever user approves or rejects a session proposal, wallet should show loading indicators in a moment of the button press until Relay acknowledgement is received for any of this actions.
+
+<PlatformTabs
+	groupId="w3w"
+	activeOptions={["web","android","ios"]}
+>
+
+<PlatformTabItem value="web">
+// TODO add how to await for Relay acknowledgement for approve and reject proposal
+</PlatformTabItem>
+
+<PlatformTabItem value="android">
+// TODO add how to await for Relay acknowledgement for approve and reject proposal
+</PlatformTabItem>
+
+<PlatformTabItem value="ios">
+// TODO add how to await for Relay acknowledgement for approve and reject proposal
+</PlatformTabItem>
+
+### Session Proposal Expiry
+
+A session proposal expiry is 5 mins. It means a given proposal is stored for 5 mins in the SDK storage and user has 5 mins for approval or rejection decision. After that time the below event is emmited and proposal modal should be removed from the app's UI.
+
+<PlatformTabs
+	groupId="w3w"
+	activeOptions={["web","android","ios"]}
+>
+
+<PlatformTabItem value="web">
+// TODO add how to consume proposal expiry event
+</PlatformTabItem>
+
+<PlatformTabItem value="android">
+// TODO add how to consume proposal expiry event
+</PlatformTabItem>
+
+<PlatformTabItem value="ios">
+// TODO add how to consume proposal expiry event
+</PlatformTabItem>
+
+### Expected Errors
+
+While approving or rejecting a session proposal the following errors might occurs:
+- No Internet connection
+    - It happens when a user tries to approve or reject session proposal with no Internet connection
+- Session proposal expired
+    - It happens when users tries to approve or reject expired session proposal
+- Invalid namespaces
+    - It happens when a validation of session namespaces fails
+- Timeout
+    - It happens when Relay doesn't acknowledge session settle publish within 10s
+
+## Session Request
+
+A session request represents the request sent by a dapp to a wallet.
+
+### User Action Feedback
+
+Whenever user approves or rejects a session request, wallet should show loading indicators in a moment of the button press until Relay acknowledgement is received for any of this actions.
+
+<PlatformTabs
+	groupId="w3w"
+	activeOptions={["web","android","ios"]}
+>
+
+<PlatformTabItem value="web">
+// TODO add how to await for Relay acknowledgement for approve and reject request
+</PlatformTabItem>
+
+<PlatformTabItem value="android">
+// TODO add how to await for Relay acknowledgement for approve and reject request
+</PlatformTabItem>
+
+<PlatformTabItem value="ios">
+// TODO add how to await for Relay acknowledgement for approve and reject request
+</PlatformTabItem>
+
+### Session Request Expiry
+
+//TBD
+
+<PlatformTabs
+	groupId="w3w"
+	activeOptions={["web","android","ios"]}
+>
+
+<PlatformTabItem value="web">
+// TODO add how to consume session expiry expiry event
+</PlatformTabItem>
+
+<PlatformTabItem value="android">
+// TODO add how to consume session expiry event
+</PlatformTabItem>
+
+<PlatformTabItem value="ios">
+// TODO add how to consume session expiry event
+</PlatformTabItem>
+
+
+### Expected Errors
+
+While approving or rejecting a session request the following error might occur:
+- Invalid session
+    - This error might happen when user approves or rejects a session request on expired session
+- Session request expired
+    - This error might happen when user approves or rejects a session request that already expires
+- Timeout
+    - It happens when Relay doesn't acknowledge session settle publish within 10s
+
+## Connection State
+
+A connection state event is emitted whenever a connection state has changed. Web3Wallet client tracks the Internet connection status as well as the Relay wss connection. The connection state is `true` when both Internet connection and Relay are online, and it is set to `false` otherwise.
+
+<PlatformTabs
+	groupId="w3w"
+	activeOptions={["web","android","ios"]}
+>
+
+<PlatformTabItem value="web">
+// TODO add how to consume connection state event
+</PlatformTabItem>
+
+<PlatformTabItem value="android">
+// TODO add how to consume connection state event
+</PlatformTabItem>
+
+<PlatformTabItem value="ios">
+// TODO add how to consume connection state event
+</PlatformTabItem>

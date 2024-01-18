@@ -248,6 +248,7 @@ module.exports = {
                 'web3wallet/notify/resources'
               ]
             },
+            'web3wallet/best_practises',
             'web3wallet/resources',
           ]
         }
