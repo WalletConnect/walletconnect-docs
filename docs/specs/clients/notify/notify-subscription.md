@@ -5,6 +5,7 @@ A Notify subscription is an agreement between a dapp and a wallet to receive fut
 A Wallet user will be able to authorize a dapp by sending an authenticated payload with a corresponding identity key and dapp URL as described by [Notify authentication](./notify-authentication.md)
 
 In order to create subscription a wallet is subscribed by the wallet and sent to the dapp using the Subscribe protocol which is described below.
+
 ## User Flow
 
 The Notify subscribe flow will require a dapp to host a static json file which will contain a DID document compliant with `did:web` method as specified [here](https://w3c-ccg.github.io/did-method-web/). In this DID document we will specify a X25519 public key that will be used by the Notify API protocol to derive a symmetric key for the Notify topic.
@@ -18,7 +19,6 @@ Once the wallet user has selected the dapp which they intend to subscribe to, th
 ### Pre-requisites
 
 The Notify subscribe flow will require a dapp to host a static json file which will contain a DID document compliant with `did:web` method as specified [here](https://w3c-ccg.github.io/did-method-web/). In this DID document we will specify a X25519 public key that will be used by the Notify API protocol to derive a symmetric key for the Notify topic.
-
 
 ### Protocol
 

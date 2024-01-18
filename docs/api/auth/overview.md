@@ -144,6 +144,7 @@ Add the following to your `DebugProfile.entitlements` and `Release.entitlements`
 Install the WalletConnect Auth client package via Nuget.
 
 install via Nuget
+
 ```shell
 dotnet add package WalletConnect.Auth
 ```

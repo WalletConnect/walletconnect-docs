@@ -9,7 +9,7 @@ abstract class Client {
     metadata?: AppMetadata;
   }): Promise<void>;
 
-  // for proposer to create a session 
+  // for proposer to create a session
   public abstract connect(params: {
     requiredNamespaces: Map<string, ProposalNamespace>;
     relays?: RelayProtocolOptions[];

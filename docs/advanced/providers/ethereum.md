@@ -32,7 +32,7 @@ const provider = await EthereumProvider.init({
   chains, //  chain ids
   methods, // ethereum methods
   events, // ethereum events
-  
+
   rpcMap, // OPTIONAL rpc urls for each chain
   metadata, // OPTIONAL metadata of your app
   qrModalOptions // OPTIONAL - `undefined` by default, see https://docs.walletconnect.com/web3modal/options

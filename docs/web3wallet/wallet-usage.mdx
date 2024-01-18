@@ -414,14 +414,15 @@ Examples of supported namespaces:
 
 <PlatformTabItem value="flutter">
 
-On flutter you don't need to worry about Namespace Builder as Flutter SDK would handle that for you and generate a namespace object with the supported ones. 
+On flutter you don't need to worry about Namespace Builder as Flutter SDK would handle that for you and generate a namespace object with the supported ones.
 
-All you have to do is make sure you are registering 
-  1. **events emitters** with `web3Wallet.registerEventEmitter()` for events you want to support on your wallet
-  2. **methods handlers** with `web3Wallet.registerRequestHandler()` for methods you want to support on your wallet
-  3. **wallet's accounts** with `web3Wallet.registerAccount()` for accounts you want these events and methods to be enabled on
+All you have to do is make sure you are registering
 
-for every **chain** you want to support. 
+1. **events emitters** with `web3Wallet.registerEventEmitter()` for events you want to support on your wallet
+2. **methods handlers** with `web3Wallet.registerRequestHandler()` for methods you want to support on your wallet
+3. **wallet's accounts** with `web3Wallet.registerAccount()` for accounts you want these events and methods to be enabled on
+
+for every **chain** you want to support.
 
 When a dApp propose a session, with declared required and/or optional namespaces, your wallet will be able to approve an **already generated set of namespaces** based on your registered events, methods and accounts.
 
@@ -776,7 +777,7 @@ To send an approval, pass a Proposer's Public Key along with the map of namespac
 
 <PlatformTabItem value="flutter">
 
-As mentioned before, the `SessionProposalEvent` event is emitted when a dapp initiates a new session with your wallet. The event will include a `event` object with information about the dapp and requested namespaces. The wallet should display a prompt for the user to approve or reject the session. 
+As mentioned before, the `SessionProposalEvent` event is emitted when a dapp initiates a new session with your wallet. The event will include a `event` object with information about the dapp and requested namespaces. The wallet should display a prompt for the user to approve or reject the session.
 
 To approve a session, call `approveSession` and pass in the `event.id` and `generatedNamespaces`.
 

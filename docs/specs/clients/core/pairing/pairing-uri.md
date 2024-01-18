@@ -1,4 +1,3 @@
-
 # Pairing URI
 
 ## Schema ([EIP-1328](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-1328.md))

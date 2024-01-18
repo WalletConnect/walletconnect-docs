@@ -15,10 +15,10 @@ Example URL:
 This can be instantiated from the client with the `projectId` in the `SignClient` constructor.
 
 ```javascript
-import SignClient from "@walletconnect/sign-client";
+import SignClient from '@walletconnect/sign-client'
 const signClient = await SignClient.init({
-  projectId: "c4f79cc821944d9680842e34466bfb",
-});
+  projectId: 'c4f79cc821944d9680842e34466bfb'
+})
 ```
 
 ## Allowlist
@@ -42,19 +42,19 @@ Example of possible origins in the allowlist:
 
 ## Error Codes
 
-| Reason                 | Error Code |
-| ---------------------- | ---------- |
+| Reason                                     | Error Code |
+| ------------------------------------------ | ---------- |
 | Project ID doesn't exist OR JWT is expired | 401        |
-| Exists and is invalid  | 403        |
-| Too many requests  | 1013        |
+| Exists and is invalid                      | 403        |
+| Too many requests                          | 1013       |
 
 ## Websocket Close Codes
 
-| Code        | Description | Reconnect  |
-| ----------- | ----------- |----------- |
-| 1001        | Server terminating | Yes |
-| 4008        | Client stale: connected without a prior subscription and is not sending data | When needed |
-| 4010        | Load Rebalancing | Yes |
+| Code | Description                                                                  | Reconnect   |
+| ---- | ---------------------------------------------------------------------------- | ----------- |
+| 1001 | Server terminating                                                           | Yes         |
+| 4008 | Client stale: connected without a prior subscription and is not sending data | When needed |
+| 4010 | Load Rebalancing                                                             | Yes         |
 
 ## Best Practices
 

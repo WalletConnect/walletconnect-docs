@@ -12,16 +12,15 @@ A notification type name is a machine-readable lowercase string and not internat
 
 A notification type description is a human-readable case-sensitive string and not internationalized which matches the following regex: `[\w\s.]{3,100}`.
 
-
 ## Configuration
 
 In order for dapps to expose their notification types they must store a static json file named `wc-notify-config.json` in their `.well-known` path under their domain url.
 
 The file should include the following schema:
 
-* version = schema version number
-* lastModified = date last modified in unix epoch timestamp in seconds
-* types = array of available types with `name` and `description` schema
+- version = schema version number
+- lastModified = date last modified in unix epoch timestamp in seconds
+- types = array of available types with `name` and `description` schema
 
 For example:
 

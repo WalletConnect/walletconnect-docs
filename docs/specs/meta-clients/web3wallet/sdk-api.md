@@ -4,10 +4,10 @@
 class Web3Wallet {
   // initializes the client (BOTH)
   public abstract init(params: { core: CoreClient }): Promise<void>;
-  
+
   // establish pairing from URI (BOTH)
   public abstract pair(params: { uri: string }): Promise<void>;
-  
+
    // approve a session proposal (SIGN)
   public abstract approveSession(params: {
     id: number;
@@ -20,7 +20,7 @@ class Web3Wallet {
     proposerPublicKey: string;
     reason: Reason;
   }): Promise<void>;
-  
+
   // update session namespaces (SIGN)
   public abstract updateSession(params: {
     topic: string;
@@ -37,39 +37,39 @@ class Web3Wallet {
     topic: string;
     response: JsonRpcResponse;
   }): Promise<void>;
-  
+
   // respond Auth Request (AUTH)
   public abstract respondAuthRequest(params: RespondParams, iss: string): Promise<boolean>;
-  
+
   // emit session events (SIGN)
   public abstract emitSessionEvent(params: {
     topic: string;
     event: SessionEvent;
     chainId: string;
   }): Promise<void>;
-  
+
 
  // disconnect a session (SIGN)
   public abstract disconnectSession(params: {
     topic: string;
     reason: Reason;
   }): Promise<void>;
-  
+
   // query all active sessions (SIGN)
   public abstract getActiveSessions(): Promise<Record<string, Session>>;
-  
+
   // format payload to message string (AUTH)
   public abstract formatMessage(payload: PayloadParams, iss: string): Promise<string>;
-  
+
   // query all pending session requests (SIGN)
   public abstract getPendingSessionProposals(): Promise<Record<number, SessionProposal>>;
-  
+
   // query all pending session requests (SIGN)
   public abstract getPendingSessionRequests(): Promise<Record<number, SessionRequest>>;
-  
+
   // query all pending auth requests (AUTH)
   public abstract getPendingAuthRequests(): Promise<Record<number, PendingRequest>>;
-  
+
   // register device token for Push server (BOTH)
   public abstract registerDeviceToken(token: string): Promise<void>;
 

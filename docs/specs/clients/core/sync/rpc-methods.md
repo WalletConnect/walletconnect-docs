@@ -30,7 +30,7 @@ Used to set a new value to a new or existing key in the synced store for the pub
 // wc_syncSet params
 {
   "key": string,
-  "value": string 
+  "value": string
 }
 
 | IRN     |          |
@@ -40,7 +40,6 @@ Used to set a new value to a new or existing key in the synced store for the pub
 | Tag     | 5000     |
 
 ```
-
 
 ### wc_syncDel
 

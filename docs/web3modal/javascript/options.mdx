@@ -51,8 +51,6 @@ createWeb3Modal({
 You can select tokens for Web3Modal to show the user's balance of. Each key represents the chain id of the token's blockchain.
 
 ```ts
-import { mainnet } from 'viem/chains'
-
 createWeb3Modal({
   //...
   tokens: {
@@ -132,10 +130,10 @@ Set or override the images of any [connector](https://wagmi.sh/core/connectors/i
 
 ```ts
 createWeb3Modal({
-   connectorImages: {
-      coinbaseWallet: 'https://images.mydapp.com/coinbase.png',
-      metamask: 'https://images.mydapp.com/metamask.png'
-   }
+  connectorImages: {
+    coinbaseWallet: 'https://images.mydapp.com/coinbase.png',
+    metamask: 'https://images.mydapp.com/metamask.png'
+  }
 })
 ```
 
@@ -146,10 +144,10 @@ Set or override the images of any connector.
 
 ```ts
 createWeb3Modal({
-connectorImages: {
-  coinbaseWallet: 'https://images.mydapp.com/coinbase.png',
-  walletConnect: 'https://images.mydapp.com/walletconnect.png',
-}
+  connectorImages: {
+    coinbaseWallet: 'https://images.mydapp.com/coinbase.png',
+    walletConnect: 'https://images.mydapp.com/walletconnect.png'
+  }
 })
 ```
 

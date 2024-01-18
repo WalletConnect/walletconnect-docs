@@ -1,12 +1,12 @@
 # NextAuth
 
 ## About NextAuth
+
 [NextAuth](https://next-auth.js.org/) is a complete open-source authentication solution for Next.js applications.
 
 It is designed from the ground up to support Next.js and Serverless.
 
 ## Requirements
-
 
 ## Install the Web3Modal SIWE package.
 
@@ -129,7 +129,6 @@ export default async function auth(req: NextApiRequest, res: NextApiResponse) {
     }
   })
 }
-
 ```
 
 ## Configure your SIWE Client
@@ -218,9 +217,9 @@ import { SessionProvider } from 'next-auth/react'
 // `useSession()` anywhere in your application to access the `session` object.
 export default function App({
   Component,
-  pageProps,
+  pageProps
 }: AppProps<{
-  session: Session;
+  session: Session
 }>) {
   return (
     <SessionProvider session={pageProps.session} refetchInterval={0}>
@@ -231,6 +230,7 @@ export default function App({
 ```
 
 ### SIWE Config reference
+
 ```ts
 interface SIWEConfig {
   // Required

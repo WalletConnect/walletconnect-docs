@@ -95,7 +95,6 @@ Delete one or more `FunctionCall` access keys created with `signIn`. While this 
             1.1.1. `accountId` : `String` - The account name to which the publicKey corresponds as plain text
             1.1.2. `publicKey` : `String` - The public counterpart of the key used to sign, expressed as a string with format `<key-type>:<base58-key-bytes>`
 
-
 ### Returns
 
     void
@@ -119,9 +118,9 @@ Delete one or more `FunctionCall` access keys created with `signIn`. While this 
 
 ## near_signTransaction
 
-Sign a transaction. It makes use of [near-api-js](https://github.com/near/near-api-js) to enable interoperability with dApps that will already use it for constructing transactions and communicating with RPC endpoints.  
+Sign a transaction. It makes use of [near-api-js](https://github.com/near/near-api-js) to enable interoperability with dApps that will already use it for constructing transactions and communicating with RPC endpoints.
 
-[Transaction](https://nomicon.io/RuntimeSpec/Transactions) passed to `signTransaction`  must be encoded.
+[Transaction](https://nomicon.io/RuntimeSpec/Transactions) passed to `signTransaction` must be encoded.
 
 ### Parameters
 
@@ -129,10 +128,11 @@ Sign a transaction. It makes use of [near-api-js](https://github.com/near/near-a
     	1.1. `transaction` : `Uint8Array` - Encoded Transaction via transactions.Transaction.encode()
 
 ### Returns
+
 The result of `signTransaction` and is encoded [SignedTransaction](https://nomicon.io/RuntimeSpec/Transactions#signed-transaction) model.
-    
+
      1. `Uint8Array` - Encoded SignedTransaction via transactions.SignedTransaction.encode()
-    
+
 ### Example
 
 ```javascript
@@ -177,7 +177,6 @@ The result of `signTransactions` and are encoded [SignedTransaction](https://nom
 
     1. `Array<Uint8Array>` - Array of Encoded SignedTransaction via transactions.SignedTransaction.encode()
 
-
 ### Example
 
 ```javascript
@@ -205,4 +204,3 @@ The result of `signTransactions` and are encoded [SignedTransaction](https://nom
 }
 
 ```
-

@@ -1,6 +1,5 @@
 # Shared Core Instance
 
-
 :::note
 The following content are only available for JavaScript.
 :::
@@ -15,25 +14,25 @@ In the following example, we first instantiate a `Core` instance, and then proce
 and Auth SDK with this shared `Core`:
 
 ```ts
-import { Core } from "@walletconnect/core";
-import SignClient from "@walletconnect/sign-client";
-import { AuthClient } from "@walletconnect/auth-client";
+import { Core } from '@walletconnect/core'
+import SignClient from '@walletconnect/sign-client'
+import { AuthClient } from '@walletconnect/auth-client'
 
 // First instantiate a separate `Core` instance.
 const core = new Core({
-  projectId: "<YOUR_PROJECT_ID>",
-});
+  projectId: '<YOUR_PROJECT_ID>'
+})
 
 const metadata = {
-  name: "Example Dapp",
-  description: "Example Dapp",
-  url: "#",
-  icons: ["https://walletconnect.com/walletconnect-logo.png"],
-};
+  name: 'Example Dapp',
+  description: 'Example Dapp',
+  url: '#',
+  icons: ['https://walletconnect.com/walletconnect-logo.png']
+}
 
 // Pass `core` to the SignClient on init.
-const signClient = await SignClient.init({ core, metadata });
+const signClient = await SignClient.init({ core, metadata })
 
 // Pass `core` to the AuthClient on init.
-const authClient = await AuthClient.init({ core, metadata });
+const authClient = await AuthClient.init({ core, metadata })
 ```

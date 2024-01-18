@@ -17,7 +17,6 @@ This will be achieved using did-jwt which the different purposes above will have
 
 Expiry will be calculated 30 days (2592000 seconds) from issued date
 
-
 ## Invite Proposals
 
 When we are validating invite proposal we must use the following additional fields in the jwt:

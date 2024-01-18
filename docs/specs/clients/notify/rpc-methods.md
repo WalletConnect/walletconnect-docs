@@ -33,7 +33,7 @@ Used to subscribe notify subscription to a peer through subscribe topic. Respons
 }
 
 | IRN     |          |
-| ------- | -------- | 
+| ------- | -------- |
 | TTL     | 86400    |
 | Tag     | 4000     |
 
@@ -59,7 +59,6 @@ Used to publish a notification message to a peer through notify topic. Response 
 
 - Success response is equivalent to notify message acknowledgement.
 - Error response is equivalent to notify message failed to decrypt.
-
 
 **Request**
 
@@ -100,7 +99,7 @@ Used to inform the peer to close and delete a notify subscription through notify
 ```jsonc
 // wc_notifyDelete params
 {
-  "deleteAuth": string 
+  "deleteAuth": string
 }
 | IRN     |          |
 | ------- | -------- |
@@ -136,7 +135,7 @@ Used to update a notify subscription with a new notify subscription, replacing a
 }
 
 | IRN     |          |
-| ------- | -------- | 
+| ------- | -------- |
 | TTL     | 86400    |
 | Tag     | 4008     |
 

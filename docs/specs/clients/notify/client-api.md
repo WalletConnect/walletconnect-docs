@@ -12,9 +12,9 @@ abstract class Client {
 
   // initializes the client with persisted storage and a network connection
   public abstract init(): Promise<void>;
-  
+
   // send notify subscription
-  public abstract subscribe(params: { 
+  public abstract subscribe(params: {
         metadata: Metadata,
         account: string,
         scope: string[],
@@ -39,16 +39,16 @@ abstract class Client {
 
   // delete active subscription
   public abstract deleteSubscription(params: { topic: string }): Promise<void>;
-  
+
   // delete notify message
   public abstract deleteNotifyMessage(params: { id: number }): Promise<void>;
-  
+
   // decrypt notify subscription message
   public abstract decryptMessage(topic: string, encryptedMessage: string): Promise<NotifyMessage>;
-  
+
   // Enable Sync by registering sync keys
   public abstract enableSync({
-        account: string, 
+        account: string,
         onSign: (message: string) => Cacao.Signature
   }): Promise<void>;
 
@@ -56,10 +56,10 @@ abstract class Client {
 
   // for wallet to listen for notify subscription created
   public abstract on("notify_subscription", (result: NotifySubscription | Error) => {}): void;
-  
+
   //  for wallet to listen on notify messages
   public abstract on("notify_message", (message: NotifyMessageRecord, metadata: Metadata) => {}): void;
-  
+
   // for wallet to listen for result of notify subscription update
   public abstract on("notify_update", (result: NotifySubscription | Error) => {}): void;
 

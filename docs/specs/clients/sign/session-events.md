@@ -64,8 +64,8 @@ An event is triggered when the dapp establishes a connection with the wallet by 
 ```ts
 await client.connect({
   pairingTopic: pairing?.topic, // optional, only provided when connecting via existing pairing.
-  requiredNamespaces,
-});
+  requiredNamespaces
+})
 ```
 
 Here's an example payload when the dapp is initiating a session proposal on the Goerli Network.
@@ -179,16 +179,16 @@ Here's an example. The user has a session that appears as follows. From this obj
 const currentRequiredNamespace = {
   eip155: {
     methods: [
-      "eth_sendTransaction",
-      "eth_signTransaction",
-      "eth_sign",
-      "personal_sign",
-      "eth_signTypedData",
+      'eth_sendTransaction',
+      'eth_signTransaction',
+      'eth_sign',
+      'personal_sign',
+      'eth_signTypedData'
     ],
-    chains: ["eip155:5"],
-    events: ["chainChanged", "accountsChanged"],
-  },
-};
+    chains: ['eip155:5'],
+    events: ['chainChanged', 'accountsChanged']
+  }
+}
 ```
 
 If you want to add another chain to the session you can do so by calling `update` and passing in the session's `topic` and new namespace. Note, the new namespace can only **append** new items, it cannot remove.
@@ -199,22 +199,22 @@ const newNamespace = {
     accounts: [
       // this already existed from the initial namespace
       // chain:id:walletNumber
-      "eip155:5:0x1456225dE90927193F7A171E64a600416f96f2C8",
+      'eip155:5:0x1456225dE90927193F7A171E64a600416f96f2C8',
       // this is how we update the session to add a new chain
-      "eip155:137:0x1456225dE90927193F7A171E64a600416f96f2C8",
+      'eip155:137:0x1456225dE90927193F7A171E64a600416f96f2C8'
     ],
     methods: [
-      "eth_sendTransaction",
-      "eth_signTransaction",
-      "eth_sign",
-      "personal_sign",
-      "eth_signTypedData",
+      'eth_sendTransaction',
+      'eth_signTransaction',
+      'eth_sign',
+      'personal_sign',
+      'eth_signTypedData'
     ],
-    events: ["chainChanged", "accountsChanged"],
-  },
-};
+    events: ['chainChanged', 'accountsChanged']
+  }
+}
 
-await signClient.update({ topic, namespaces: newNamespace });
+await signClient.update({ topic, namespaces: newNamespace })
 ```
 
 Once `update` is called, `session_update` is triggered. An example payload request is as follows.
@@ -255,9 +255,9 @@ await client.disconnect({
   topic: session.topic,
   reason: {
     code: 6000,
-    message: "User disconnected.",
-  },
-});
+    message: 'User disconnected.'
+  }
+})
 ```
 
 An example of a payload from `session_delete`:
@@ -277,11 +277,11 @@ This event can be triggered by either the wallet or dapp by calling the `emit` m
 await signClient.emit({
   topic,
   event: {
-    name: "accountsChanged",
-    data: ["0xab16a96D359eC26a11e2C2b3d8f8B8942d5Bfcdb"],
+    name: 'accountsChanged',
+    data: ['0xab16a96D359eC26a11e2C2b3d8f8B8942d5Bfcdb']
   },
-  chainId: "eip155:5",
-});
+  chainId: 'eip155:5'
+})
 ```
 
 A payload example from `session_event`:
@@ -305,7 +305,7 @@ A payload example from `session_event`:
 This event can be emitted be either the wallet or dapp. It is emitted by calling `ping`.
 
 ```ts
-await client.ping({ topic: session.topic });
+await client.ping({ topic: session.topic })
 ```
 
 A payload example from `session_ping`
@@ -334,7 +334,7 @@ A payload example from `session_expire`
 This event can be emitted by either wallet or dapp by calling the `extend` method.
 
 ```ts
-await signClient.extend({ topic });
+await signClient.extend({ topic })
 ```
 
 A payload example from `session_extend`:

@@ -41,6 +41,7 @@ module.exports = {
                 'web3modal/react/hooks',
                 'web3modal/react/options',
                 'web3modal/react/components',
+                'web3modal/react/email/index',
                 {
                   type: 'category',
                   label: 'SIWE',
@@ -59,6 +60,7 @@ module.exports = {
                 'web3modal/nextjs/hooks',
                 'web3modal/nextjs/options',
                 'web3modal/nextjs/components',
+                'web3modal/nextjs/email/index',
                 {
                   type: 'category',
                   label: 'SIWE',
@@ -81,6 +83,7 @@ module.exports = {
                 'web3modal/vue/composables',
                 'web3modal/vue/options',
                 'web3modal/vue/components',
+                'web3modal/vue/email/index',
                 {
                   type: 'category',
                   label: 'SIWE',
@@ -99,6 +102,7 @@ module.exports = {
                 'web3modal/javascript/actions',
                 'web3modal/javascript/options',
                 'web3modal/javascript/components',
+                'web3modal/javascript/email/index',
                 {
                   type: 'category',
                   label: 'SIWE',
@@ -249,7 +253,7 @@ module.exports = {
               ]
             },
             'web3wallet/best_practises',
-            'web3wallet/resources',
+            'web3wallet/resources'
           ]
         }
       ]

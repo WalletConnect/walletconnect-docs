@@ -1,6 +1,6 @@
 # Client API
 
-Client manages multiple blockchain account at a time. Client listens to multiple topic for invites at a time. 
+Client manages multiple blockchain account at a time. Client listens to multiple topic for invites at a time.
 
 ```typescript
 abstract class Client {
@@ -14,14 +14,14 @@ abstract class Client {
   // - registers a blockchain account with an identity key if not yet registered on this client
   // - registers invite key if not yet registered on this client and starts listening on invites if private is false
   // - onSign(message) promise for signing CAIP-122 message to verify blockchain account ownership
-  // returns the public identity key. Method should throw 'signatureRejected' if any errors comes from onSign promise. 
+  // returns the public identity key. Method should throw 'signatureRejected' if any errors comes from onSign promise.
   public abstract register(params: {
     account: string;
     private?: boolean;
     onSign: (message: string) => Promise<Cacao.Signature>
   }): Promise<string>;
 
-  // - unregisters a blockchain account with previously registered identity key 
+  // - unregisters a blockchain account with previously registered identity key
   // - must not unregister invite key but must stop listening for invites
   public abstract unregister(params: {
     account: string;
@@ -33,20 +33,20 @@ abstract class Client {
     account: string;
   }): Promise<string>;
 
-  // unregisters an invite key from keyserver 
+  // unregisters an invite key from keyserver
   // stops listening for invites
   public abstract goPrivate(params: {
     account: string;
   }): Promise<void>;
 
-  // registers an invite key if not yet registered on this client from keyserver 
+  // registers an invite key if not yet registered on this client from keyserver
   // starts listening for invites
   // returns the public invite key
   public abstract goPublic(params: {
     account: string;
   }): Promise<string>;
 
-  // sends a chat invite 
+  // sends a chat invite
   // creates and stores SentInvite with `pending` state
   // returns an invite id
   public abstract invite(params: {
@@ -81,19 +81,19 @@ abstract class Client {
     topic: string;
   }): Promise<void>;
 
-  // returns all invites matching an inviteeAccount from Invite 
+  // returns all invites matching an inviteeAccount from Invite
   // returns maps of invites indexed by id
   public abstract getReceivedInvites(params: {
     account: string;
   }): Promise<Map<number, ReceivedInvite>>
 
-  // returns all pending invites matching an inviterAccount from SentInvite 
+  // returns all pending invites matching an inviterAccount from SentInvite
   // returns maps of invites indexed by id
   public abstract getSentInvites(params: {
     account: string;
   }): Promise<Map<number, SentInvite>>;
 
-  // returns all threads matching an selfAccount from Thread 
+  // returns all threads matching an selfAccount from Thread
   // returns map of threads indexed by topic
   public abstract getThreads(params: {
     account: string;
@@ -111,7 +111,7 @@ abstract class Client {
 
   // subscribe to chat invite being accepted
   public abstract on("chat_invite_accepted", ({ topic: string, invite: SentInvite}) => {}): void;
-  
+
   // subscribe to chat invite being rejected
   public abstract on("chat_invite_rejected", ({ invite: SentInvite}) => {}): void;
 

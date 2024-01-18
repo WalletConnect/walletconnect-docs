@@ -7,7 +7,7 @@ To open Web3Modal you can use our web components or build your own logic with We
 <TabItem value="components" label="Components">
 
 ```html
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -19,11 +19,13 @@ To open Web3Modal you can use our web components or build your own logic with We
   </body>
 </html>
 ```
+
 Learn more about the Web3Modal web components [here](../../components.mdx)
 
 :::note
 Web components are global html elements that don't require importing.
 :::
+
 </TabItem>
 <TabItem value="actions" label="Actions">
 
@@ -32,7 +34,7 @@ You can trigger the modal by calling the `open` function from a modal instance r
 Let's first add two html elements to display information to the user:
 
 ```html
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -66,16 +68,20 @@ const userEl = document.getElementById('user')
 btnEl.addEventListener('click', connect)
 
 // listening for account changes
-watchAccount(account => {
-  userEl.innerText = account.address ?? ''
-  if (account.isConnected) {
-    btnEl.innerText = 'Disconnect'
-  } else {
-    btnEl.innerText = 'Connect'
+watchAccount(wagmiConfig,
+  {
+    onChange(account) {
+      userEl.innerText = account.address ?? ''
+      if (account.isConnected) {
+        btnEl.innerText = 'Disconnect'
+      } else {
+        btnEl.innerText = 'Connect'
+      }
+    }
   }
-})
 ```
 
 Learn more about the Web3Modal actions [here](../../actions.mdx)
+
 </TabItem>
 </Tabs>

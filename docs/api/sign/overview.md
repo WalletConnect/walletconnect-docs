@@ -148,10 +148,12 @@ dotnet add package WalletConnect.Sign
 WalletConnectUnity.Core is a Unity package that provides a client implementation of the WalletConnect v2 protocol. It is built on top of the [WalletConnectSharp.Sign](https://github.com/WalletConnect/WalletConnectSharp) library, which provides the core functionality for the WalletConnect protocol.
 
 #### Prerequisites
-* Unity 2021.3 or above
-* IL2CPP code stripping level: Minimal (or lower)
+
+- Unity 2021.3 or above
+- IL2CPP code stripping level: Minimal (or lower)
 
 #### Package Installation
+
 <Tabs>
 
 <TabItem value="openupm-cli" label="OpenUPM CLI">
@@ -161,38 +163,42 @@ To install packages via OpenUPM, you need to have [Node.js](https://nodejs.org/e
 ```bash
 openupm add com.walletconnect.core
 ```
+
 </TabItem>
 
 <TabItem value="pm-openupm" label="Package Manager with OpenUPM">
 
 1. Open `Advanced Project Settings` from the gear ⚙ menu located at the top right of the Package Manager’s toolbar
 2. Add a new scoped registry with the following details:
-    - Name: `OpenUPM`
-    - URL: `https://package.openupm.com`
-    - Scope(s): `com.walletconnect`
+   - Name: `OpenUPM`
+   - URL: `https://package.openupm.com`
+   - Scope(s): `com.walletconnect`
 3. Press plus ➕ and then `Save` buttons
 4. In the Package Manager windows open the add ➕ menu from the toolbar
 5. Select `Add package by name...`
 6. Enter the package name:
-    - `com.walletconnect.core`
+   - `com.walletconnect.core`
 7. Press `Add` button
 
 </TabItem>
 
 <TabItem value="pm-git-utl" label="Package Manager with Git URL">
 
-1. Open the add ➕  menu in the Package Manager’s toolbar
+1. Open the add ➕ menu in the Package Manager’s toolbar
 2. Select `Add package from git URL...`
 3. Enter the package URL:
 
 **WalletConnectUnity Core**
+
 ```
 https://github.com/WalletConnect/WalletConnectUnity.git?path=Packages/com.walletconnect.core
 ```
+
 4. Press `Add` button
 
 It's possible to lock the version of the package by adding `#{version}` at the end of the git URL, where `#{version}` is the git tag of the version you want to use.
 For example, to install version `1.0.1` of WalletConnectUnity Modal, use the following URL:
+
 ```
 https://github.com/WalletConnect/WalletConnectUnity.git?path=Packages/com.walletconnect.core#core/1.0.1
 ```
@@ -201,11 +207,13 @@ https://github.com/WalletConnect/WalletConnectUnity.git?path=Packages/com.wallet
 </Tabs>
 
 #### WebGL
+
 Due to WebGL's single-threaded nature, certain asynchronous operations like `Task.Run`, `Task.ContinueWith`, `Task.Delay`, and `ConfigureAwait(false)` are not natively supported.
 
 To enable these operations in WebGL builds, an additional third-party package, [WebGLThreadingPatcher](https://github.com/VolodymyrBS/WebGLThreadingPatcher), is required. This package modifies the Unity WebGL build to delegate work to the `SynchronizationContext`, allowing these operations to be executed on the same thread without blocking the main application. Please note that all tasks are still executed on a single thread, and any blocking calls will freeze the entire application.
 
 The [WebGLThreadingPatcher](https://github.com/VolodymyrBS/WebGLThreadingPatcher) package can be added via git URL:
+
 ```
 https://github.com/VolodymyrBS/WebGLThreadingPatcher.git
 ```
