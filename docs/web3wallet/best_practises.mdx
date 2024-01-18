@@ -138,7 +138,29 @@ Whenever user approves or rejects a session proposal, wallet should show loading
 </PlatformTabItem>
 
 <PlatformTabItem value="android">
-// TODO add how to await for Relay acknowledgement for approve and reject proposal
+Session approve
+
+```kotlin
+ Web3Wallet.approveSession(approveProposal,
+    onSuccess = {
+        //Session approval response was sent successfully - update your UI
+    }
+    onError = { error ->
+        //Error while sending session approval - update your UI
+    }
+)
+```
+
+Session reject
+```kotlin
+ Web3Wallet.rejectSession(reject,
+    onSuccess = {
+        //Session rejection response was sent successfully - update your UI
+    },
+    onError = { error ->
+          //Error while sending session rejection - update your UI
+    })
+```
 </PlatformTabItem>
 
 <PlatformTabItem value="ios">
@@ -161,7 +183,15 @@ A session proposal expiry is 5 mins. It means a given proposal is stored for 5 m
 </PlatformTabItem>
 
 <PlatformTabItem value="android">
-// TODO add how to consume proposal expiry event
+```kotlin
+val walletDelegate = object : Web3Wallet.WalletDelegate {
+    override fun onProposalExpired(proposal: Wallet.Model.ExpiredProposal) {
+            //Here this event is triggered when a proposal expires - update your UI
+    }
+    ... other callbacks
+}
+Web3Wallet.setWalletDelegate(walletDelegate)
+```
 </PlatformTabItem>
 
 <PlatformTabItem value="ios">
@@ -200,7 +230,15 @@ Whenever user approves or rejects a session request, wallet should show loading 
 </PlatformTabItem>
 
 <PlatformTabItem value="android">
-// TODO add how to await for Relay acknowledgement for approve and reject request
+```kotlin
+Web3Wallet.respondSessionRequest(Wallet.Params.SessionRequestResponse,
+    onSuccess = {
+        //Session request response was sent successfully - update your UI
+    },
+    onError = { error ->
+        //Error while sending session response - update your UI
+    })
+```
 </PlatformTabItem>
 
 <PlatformTabItem value="ios">
@@ -211,7 +249,7 @@ Whenever user approves or rejects a session request, wallet should show loading 
 
 ### Session Request Expiry
 
-//TBD
+A session request expiry is defined by a dapp. It's value must be between now() + 5mins and now() + 7 days. After the session request expires the below event is emmited and session request modal should be removed from the app's UI.
 
 <PlatformTabs
 	groupId="w3w"
@@ -223,7 +261,15 @@ Whenever user approves or rejects a session request, wallet should show loading 
 </PlatformTabItem>
 
 <PlatformTabItem value="android">
-// TODO add how to consume session expiry event
+```kotlin
+val walletDelegate = object : Web3Wallet.WalletDelegate {
+    override fun onRequestExpired(request: Wallet.Model.ExpiredRequest) {
+        //Here this event is triggered when a session request expires - update your UI
+    }
+    ... other callbacks
+}
+Web3Wallet.setWalletDelegate(walletDelegate)
+```
 </PlatformTabItem>
 
 <PlatformTabItem value="ios">
@@ -256,7 +302,15 @@ A connection state event is emitted whenever a connection state has changed. Web
 </PlatformTabItem>
 
 <PlatformTabItem value="android">
-// TODO add how to consume connection state event
+```kotlin
+val walletDelegate = object : Web3Wallet.WalletDelegate {
+    override fun onConnectionStateChange(state: Wallet.Model.ConnectionState) {
+        //Here this event is triggered when a connection state has changed
+    }
+    ... other callbacks
+}
+Web3Wallet.setWalletDelegate(walletDelegate)
+```
 </PlatformTabItem>
 
 <PlatformTabItem value="ios">
