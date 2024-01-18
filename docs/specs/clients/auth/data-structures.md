@@ -4,23 +4,23 @@
 
 ```typescript
 interface RequestParams {
-  chainId: string;
-  domain: string;
-  aud: string;
-  nonce: string;
-  type?: string;
-  nbf?: string;
-  exp?: string;
-  statement?: string;
-  requestId?: string;
-  resources?: string[];
+  chainId: string
+  domain: string
+  aud: string
+  nonce: string
+  type?: string
+  nbf?: string
+  exp?: string
+  statement?: string
+  requestId?: string
+  resources?: string[]
 }
 ```
 
 ## Respond Params
 
 ```typescript
-type RespondParams = ResultResponse | ErrorResponse;
+type RespondParams = ResultResponse | ErrorResponse
 ```
 
 ## Payload Params (partial Cacao)
@@ -29,34 +29,34 @@ Used for requester to authenticate wallet
 
 ```typescript
 interface PayloadParams {
-  type: string; // same as Cacao Header type (t)
-  chainId: string;
-  domain: string;
-  aud: string;
-  version: string;
-  nonce: string;
-  iat: string;
-  nbf?: string;
-  exp?: string;
-  statement?: string;
-  requestId?: string;
-  resources?: string[];
+  type: string // same as Cacao Header type (t)
+  chainId: string
+  domain: string
+  aud: string
+  version: string
+  nonce: string
+  iat: string
+  nbf?: string
+  exp?: string
+  statement?: string
+  requestId?: string
+  resources?: string[]
 }
 ```
 
 ## Response
 
 ```typescript
-type Response = Cacao | ErrorResponse;
+type Response = Cacao | ErrorResponse
 ```
 
 ## Pending Request
 
 ```typescript
 interface PendingRequest {
-  id: number;
-  pairingTopic: String;
-  payloadParams: PayloadParams;
+  id: number
+  pairingTopic: String
+  payloadParams: PayloadParams
 }
 ```
 
@@ -64,7 +64,7 @@ interface PendingRequest {
 
 ```typescript
 interface CacaoHeader {
-  t: string;
+  t: string
 }
 ```
 
@@ -72,17 +72,17 @@ interface CacaoHeader {
 
 ```typescript
 interface CacaoPayload {
-  iss: string;
-  domain: string;
-  aud: string;
-  version: string;
-  nonce: string;
-  iat: string;
-  nbf?: string;
-  exp?: string;
-  statement?: string;
-  requestId?: string;
-  resources?: string[];
+  iss: string
+  domain: string
+  aud: string
+  version: string
+  nonce: string
+  iat: string
+  nbf?: string
+  exp?: string
+  statement?: string
+  requestId?: string
+  resources?: string[]
 }
 ```
 
@@ -90,9 +90,9 @@ interface CacaoPayload {
 
 ```typescript
 interface CacaoSignature {
-  t: string;
-  s: string;
-  m?: string;
+  t: string
+  s: string
+  m?: string
 }
 ```
 
@@ -100,9 +100,9 @@ interface CacaoSignature {
 
 ```typescript
 interface Cacao {
-  h: CacaoHeader;
-  p: CacaoPayload;
-  s: CacaoSignature;
+  h: CacaoHeader
+  p: CacaoPayload
+  s: CacaoSignature
 }
 ```
 
@@ -110,8 +110,8 @@ interface Cacao {
 
 ```typescript
 interface ResultResponse {
-  id: number;
-  signature: CacaoSignature;
+  id: number
+  signature: CacaoSignature
 }
 ```
 
@@ -119,11 +119,11 @@ interface ResultResponse {
 
 ```typescript
 interface ErrorResponse {
-  id: number;
+  id: number
   error: {
-    code: number;
-    message: string;
-  };
+    code: number
+    message: string
+  }
 }
 ```
 

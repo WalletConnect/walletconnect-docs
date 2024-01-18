@@ -8,7 +8,6 @@ In this document we will describe the authentication payloads for different meth
 - Notify Receipt
 - Notify Update Response
 
-
 All of the above authentication payloads will share the following claims:
 
 - act - description of action intent. Must be equal to specific value defined in each payload
@@ -38,7 +37,7 @@ Once the Notify Server has successfully handled the incoming notify subscription
 - act - description of action intent. Must be equal to "notify_subscription_response"
 - iss - did:key of an identity key. Allows for the resolution of which Notify server was used.
 - aud - did:key of an identity key. Allows for the resolution of the attached blockchain account.
-- sub - did:key of the public key used for key agreement on the Notify topic 
+- sub - did:key of the public key used for key agreement on the Notify topic
 - app - dapp's domain url
 
 Expiry should be calculated from the addition of the issuance date and the notify request TTL (86400 seconds)
@@ -57,11 +56,11 @@ The message payload is a did-jwt with the following claims:
 - sub - hash of the matching subscription payload
 - app - dapp's domain url
 - msg - message object including the following parameters:
-    - title - short message used in the title of the notification
-    - body - long messages ued in the body of the notification
-    - icon - image url used to display with the notification
-    - url -  redirect url for call-to-action related to notification
-    - type - notification type which matches the scope of notify subscription
+  - title - short message used in the title of the notification
+  - body - long messages ued in the body of the notification
+  - icon - image url used to display with the notification
+  - url - redirect url for call-to-action related to notification
+  - type - notification type which matches the scope of notify subscription
 
 Expiry should be calculated from the addition of the issuance date and the notify request TTL (86400 seconds)
 
@@ -91,7 +90,6 @@ This is achieved using [Identity Keys](../../servers/keys/identity-keys) and did
 - app - dapp's domain url
 
 Expiry should be calculated from the addition of the issuance date and the notify request TTL (2592000 seconds)
-
 
 ## Notify Update Response
 

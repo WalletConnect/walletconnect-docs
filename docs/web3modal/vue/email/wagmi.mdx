@@ -23,7 +23,7 @@ You can start integrating Email Login into Web3Modal SDK using either **default*
   }
 
   const chains = [mainnet, arbitrum]
-  const wagmiConfig = defaultWagmiConfig({ 
+  const wagmiConfig = defaultWagmiConfig({
     chains, // required
     projectId, // required
     metadata, // required
@@ -32,7 +32,7 @@ You can start integrating Email Login into Web3Modal SDK using either **default*
     enableEIP6963: true, // Optional - true by default
     enableCoinbase: true, // Optional - true by default
     /* highlight-add-start */
-    enableEmail: true, // Optional - false by default
+    enableEmail: true // Optional - false by default
     /* highlight-add-end */
   })
 
@@ -40,9 +40,7 @@ You can start integrating Email Login into Web3Modal SDK using either **default*
   createWeb3Modal({ wagmiConfig, projectId, chains })
 </script>
 
-<template>
-  // Rest of your app ...
-</template>
+<template> // Rest of your app ... </template>
 ```
 
 </TabItem>
@@ -73,9 +71,9 @@ You can start integrating Email Login into Web3Modal SDK using either **default*
     chains: [mainnet, sepolia],
     transports: {
       [mainnet.id]: http(),
-      [sepolia.id]: http(),
+      [sepolia.id]: http()
     },
-    connectors:[
+    connectors: [
       walletConnect({ projectId, metadata, showQrModal: false }),
       injected({ shimDisconnect: true }),
       coinbaseWallet({
@@ -92,9 +90,7 @@ You can start integrating Email Login into Web3Modal SDK using either **default*
   createWeb3Modal({ wagmiConfig, projectId, chains })
 </script>
 
-<template>
-  // Rest of your app ...
-</template>
+<template> // Rest of your app ... </template>
 ```
 
 </TabItem>

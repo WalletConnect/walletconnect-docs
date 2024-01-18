@@ -11,7 +11,7 @@ Default mode will implement WalletConnect, Browser Wallets (injected) and Coinba
 Create a new file called `context/Web3Modal.tsx` or `context/Web3Modal.jsx` (outside your app directory) and set up the following configuration, making sure that all functions are called **outside** any React component to avoid unwanted rerenders.
 
 ```tsx
-"use client";
+'use client'
 
 import { createWeb3Modal, defaultWagmiConfig } from '@web3modal/wagmi/react'
 
@@ -35,45 +35,49 @@ const metadata = {
 }
 
 const chains = [mainnet, arbitrum]
-const wagmiConfig = defaultWagmiConfig({ 
+const wagmiConfig = defaultWagmiConfig({
   chains, // required
   projectId, // required
   metadata, // required
   ssr: true,
-  storage: createStorage({  
-    storage: cookieStorage, 
+  storage: createStorage({
+    storage: cookieStorage
   }),
   enableWalletConnect: true, // Optional - true by default
   enableInjected: true, // Optional - true by default
   enableEIP6963: true, // Optional - true by default
-  enableCoinbase: true, // Optional - true by default
+  enableCoinbase: true // Optional - true by default
 })
 
 // 3. Create modal
 createWeb3Modal({ wagmiConfig, projectId, chains })
 
-export function Web3Modal({ children, initialState }: { children: ReactNode, initialState?: State }) {
+export function Web3Modal({
+  children,
+  initialState
+}: {
+  children: ReactNode
+  initialState?: State
+}) {
   return (
-    <WagmiProvider config={wagmiConfig}  initialState={initialState}>
-      <QueryClientProvider client={queryClient}>
-        {children}
-      </QueryClientProvider>
+    <WagmiProvider config={wagmiConfig} initialState={initialState}>
+      <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
     </WagmiProvider>
-  );
+  )
 }
 ```
 
-Next, in your `app/layout.tsx` or `app/layout.jsx`  file, import the custom Web3Modal component.
+Next, in your `app/layout.tsx` or `app/layout.jsx` file, import the custom Web3Modal component.
 
 ```tsx
-import "./globals.css";
+import './globals.css'
 
-import { Web3Modal } from "../context/Web3Modal";
+import { Web3Modal } from '../context/Web3Modal'
 
 export const metadata = {
-  title: "Web3Modal",
-  description: "Web3Modal Example",
-};
+  title: 'Web3Modal',
+  description: 'Web3Modal Example'
+}
 
 export default function RootLayout({ children }) {
   return (
@@ -82,7 +86,7 @@ export default function RootLayout({ children }) {
         <Web3Modal>{children}</Web3Modal>
       </body>
     </html>
-  );
+  )
 }
 ```
 
@@ -92,19 +96,19 @@ export default function RootLayout({ children }) {
 Create a new file called `context/Web3Modal.tsx` or `context/Web3Modal.jsx` (outside your app directory) and set up the following configuration, making sure that all functions are called **outside** any React component to avoid unwanted rerenders.
 
 ```tsx
-"use client";
+'use client'
 
 import type { ReactNode } from 'react'
 
-import { createWeb3Modal } from "@web3modal/wagmi"
+import { createWeb3Modal } from '@web3modal/wagmi'
 
-import { WagmiProvider, cookieStorage, createStorage, createConfig, http } from "wagmi";
-import { mainnet, sepolia } from "wagmi/chains";
-import { walletConnect, injected, coinbaseWallet } from "wagmi/connectors"
+import { WagmiProvider, cookieStorage, createStorage, createConfig, http } from 'wagmi'
+import { mainnet, sepolia } from 'wagmi/chains'
+import { walletConnect, injected, coinbaseWallet } from 'wagmi/connectors'
 
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 
-// 0. Setup queryClient 
+// 0. Setup queryClient
 const queryClient = new QueryClient()
 
 // 1. Get projectId at https://cloud.walletconnect.com
@@ -122,34 +126,38 @@ const chains = [mainnet, sepolia] as const
 
 export const wagmiConfig = createConfig({
   chains,
-  transports: { 
+  transports: {
     [mainnet.id]: http(),
-    [sepolia.id]: http(),
+    [sepolia.id]: http()
   },
-  connectors:[
+  connectors: [
     walletConnect({ projectId, metadata, showQrModal: false }),
     injected({ shimDisconnect: true }),
     coinbaseWallet({
       appName: metadata.name,
       appLogoUrl: metadata.icons[0]
-    }),
+    })
   ],
   ssr: true,
-  storage: createStorage({  
-    storage: cookieStorage, 
-  }),
+  storage: createStorage({
+    storage: cookieStorage
+  })
 })
 
 createWeb3Modal({ wagmiConfig, projectId, chains })
 
-export function Web3Modal({ children, initialState }: { children: ReactNode, initialState?: State }) {
+export function Web3Modal({
+  children,
+  initialState
+}: {
+  children: ReactNode
+  initialState?: State
+}) {
   return (
-    <WagmiProvider config={wagmiConfig}  initialState={initialState}>
-      <QueryClientProvider client={queryClient}>
-        {children}
-      </QueryClientProvider>
+    <WagmiProvider config={wagmiConfig} initialState={initialState}>
+      <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
     </WagmiProvider>
-  );
+  )
 }
 ```
 
@@ -157,7 +165,7 @@ Next, in your `app/layout.tsx` or `app/layout.jsx` file, import the custom Web3M
 
 ```tsx
 import type { Metadata } from 'next'
-import { headers } from 'next/headers' 
+import { headers } from 'next/headers'
 import './globals.css'
 
 import { Web3Modal, wagmiConfig } from '@/context/Web3Modal'
@@ -165,29 +173,19 @@ import { cookieToInitialState } from 'wagmi'
 
 export const metadata: Metadata = {
   title: 'Create Next App',
-  description: 'Generated by create next app',
+  description: 'Generated by create next app'
 }
 
-export default async function RootLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
-  const initialState = cookieToInitialState( 
-    wagmiConfig, 
-    headers().get('cookie') 
-  )
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  const initialState = cookieToInitialState(wagmiConfig, headers().get('cookie'))
   return (
     <html lang="en">
       <body className={inter.className}>
-        <Web3Modal initialState={initialState}>
-          {children}
-        </Web3Modal>
+        <Web3Modal initialState={initialState}>{children}</Web3Modal>
       </body>
     </html>
   )
 }
-
 ```
 
 </TabItem>

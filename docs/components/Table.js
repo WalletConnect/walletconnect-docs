@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react'
 
 export const Table = ({ headers, data }) => {
   return (
@@ -13,7 +13,7 @@ export const Table = ({ headers, data }) => {
       <tbody>
         {data.map((row, index) => (
           <tr key={`${index}-tr`}>
-            {Object.values(row).map((cell) => (
+            {Object.values(row).map(cell => (
               <td key={`${index}-td-${cell.code ?? cell}`}>
                 {cell.code ? <code>{cell.code}</code> : cell}
               </td>
@@ -22,7 +22,7 @@ export const Table = ({ headers, data }) => {
         ))}
       </tbody>
     </table>
-  );
-};
+  )
+}
 
-export default Table;
+export default Table

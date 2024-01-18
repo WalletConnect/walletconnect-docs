@@ -30,10 +30,10 @@ const metadata = {
 }
 
 createWeb3Modal({
-  ethersConfig: defaultConfig({ 
-    metadata, 
+  ethersConfig: defaultConfig({
+    metadata,
     /* highlight-add-start */
-    enableEmail: true 
+    enableEmail: true
     /* highlight-add-end */
   }),
   chains: [mainnet],
@@ -41,7 +41,7 @@ createWeb3Modal({
 })
 
 export default function App() {
-  return <YourApp/>
+  return <YourApp />
 }
 ```
 
@@ -72,7 +72,7 @@ const metadata = {
 }
 
 createWeb3Modal({
-  ethersConfig: defaultConfig({ 
+  ethersConfig: defaultConfig({
     metadata,
     defaultChainId: 1,
     enableEIP6963: true,
@@ -88,7 +88,7 @@ createWeb3Modal({
 })
 
 export default function App() {
-  return <YourApp/>
+  return <YourApp />
 }
 ```
 

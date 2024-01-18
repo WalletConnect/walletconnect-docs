@@ -178,12 +178,14 @@ explorerExcludedWalletIds={[
 ```
 
 #### accentColor (optional)
+
 Allows to override WalletConnectModal's accent accentColor
+
 ```ts
 accentColor: 'string' | undefined
 
 //example
-accentColor="#9090FF"
+accentColor = '#9090FF'
 ```
 
 </PlatformTabItem>
@@ -253,6 +255,7 @@ Allows you to show the `INSTALLED` label under the wallet icon in the list. To u
     </application>
 </manifest>
 ```
+
 </PlatformTabItem>
 
 <PlatformTabItem value="flutter">
@@ -289,7 +292,7 @@ or
 
 ```dart
 WalletConnectModalService service = WalletConnectModalService(
-  projectId: projectId, 
+  projectId: projectId,
   metadata: const PairingMetadata(
     name: 'Flutter Dapp Example',
     description: 'Flutter Dapp Example',
@@ -341,6 +344,7 @@ If the `excludedWalletState` is `ExcludedWalletState.list`, the `excludedWalletI
 <PlatformTabItem value="unity">
 
 #### ConnectOptions
+
 Session connection options
 
 ```csharp
@@ -373,6 +377,7 @@ ConnectOptions = new ConnectOptions
 ```
 
 #### IncludedWalletIds
+
 Allows to override default recommended wallets that are fetched from [WalletConnect Explorer](https://walletconnect.com/explorer?type=wallet). You can define an array of wallet ids you'd like to prioritize (order is respected). You can get these ids from the explorer link mentioned before by clicking on a copy icon of desired wallet card. Defaults to `null`.
 
 ```csharp
@@ -384,6 +389,7 @@ IncludedWalletIds = new[]
 ```
 
 #### ExcludedWalletIds
+
 Allows to exclude wallets that are fetched from [WalletConnect Explorer](https://walletconnect.com/explorer?type=wallet). You can define an array of wallet ids you'd like to exclude. You can get these ids from the explorer link mentioned before by clicking on a copy icon of desired wallet card. Defaults to `null`.
 
 ```csharp

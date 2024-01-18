@@ -8,10 +8,10 @@ type StoreUpdate = StoreSet | StoreDelete
 
 ## Store Set
 
-``` typescript
+```typescript
 interface StoreSet {
-  id: number,
-  key: string,
+  id: number
+  key: string
   value: string
 }
 ```
@@ -20,7 +20,7 @@ interface StoreSet {
 
 ```typescript
 interface StoreDelete {
-  id: number,
+  id: number
   key: string
 }
 ```

@@ -20,8 +20,7 @@ additional configuration.
    state and prevents inviting a peer who exists in the `sentInvites` store.
 2. Invite messages are limited to 200 characters to prevent spammers sending
    invites with spam content.
-   
-   
+
 ### Message Protection
 
 1. The SDK prevents absurdly long messages, with a character limit of 2000
@@ -37,5 +36,4 @@ the end user.
 1. A user can leave a thread at anytime, effectively "blocking" a peer using the
    `leave` function. This works inherently because of the above innate invite
    protection. For example, if a peer was compromised and began sending spam
-   messages, one could immediately block them. 
-
+   messages, one could immediately block them.

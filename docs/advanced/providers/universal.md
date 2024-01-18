@@ -17,77 +17,77 @@ npm install @walletconnect/universal-provider
 ## Usage
 
 ```typescript
-import { ethers } from "ethers";
-import UniversalProvider from "@walletconnect/universal-provider";
+import { ethers } from 'ethers'
+import UniversalProvider from '@walletconnect/universal-provider'
 
 //  Initialize the provider
 const provider = await UniversalProvider.init({
-  logger: "info",
-  relayUrl: "ws://<relay-url>",
-  projectId: "12345678",
+  logger: 'info',
+  relayUrl: 'ws://<relay-url>',
+  projectId: '12345678',
   metadata: {
-    name: "React App",
-    description: "React App for WalletConnect",
-    url: "https://walletconnect.com/",
-    icons: ["https://avatars.githubusercontent.com/u/37784886"],
+    name: 'React App',
+    description: 'React App for WalletConnect',
+    url: 'https://walletconnect.com/',
+    icons: ['https://avatars.githubusercontent.com/u/37784886']
   },
-  client: undefined, // optional instance of @walletconnect/sign-client
-});
+  client: undefined // optional instance of @walletconnect/sign-client
+})
 
 //  create sub providers for each namespace/chain
 await provider.connect({
   optionalNamespaces: {
     eip155: {
       methods: [
-        "eth_sendTransaction",
-        "eth_signTransaction",
-        "eth_sign",
-        "personal_sign",
-        "eth_signTypedData",
+        'eth_sendTransaction',
+        'eth_signTransaction',
+        'eth_sign',
+        'personal_sign',
+        'eth_signTypedData'
       ],
-      chains: ["eip155:80001"],
-      events: ["chainChanged", "accountsChanged"],
+      chains: ['eip155:80001'],
+      events: ['chainChanged', 'accountsChanged'],
       rpcMap: {
         80001:
-          "https://rpc.walletconnect.com?chainId=eip155:80001&projectId=<your walletconnect project id>",
-      },
-    },
+          'https://rpc.walletconnect.com?chainId=eip155:80001&projectId=<your walletconnect project id>'
+      }
+    }
   },
-  pairingTopic: "<123...topic>", // optional topic to connect to
-  skipPairing: false, // optional to skip pairing ( later it can be resumed by invoking .pair())
-});
+  pairingTopic: '<123...topic>', // optional topic to connect to
+  skipPairing: false // optional to skip pairing ( later it can be resumed by invoking .pair())
+})
 
 //  Create Web3 Provider
-const web3Provider = new ethers.providers.Web3Provider(provider);
+const web3Provider = new ethers.providers.Web3Provider(provider)
 ```
 
 ## Events
 
 ```typescript
 // Subscribe for pairing URI
-provider.on("display_uri", (uri) => {
-  console.log("display_uri", uri);
-});
+provider.on('display_uri', uri => {
+  console.log('display_uri', uri)
+})
 
 // Subscribe to session ping
-provider.on("session_ping", ({ id, topic }) => {
-  console.log("session_ping", id, topic);
-});
+provider.on('session_ping', ({ id, topic }) => {
+  console.log('session_ping', id, topic)
+})
 
 // Subscribe to session event
-provider.on("session_event", ({ event, chainId }) => {
-  console.log("session_event", event, chainId);
-});
+provider.on('session_event', ({ event, chainId }) => {
+  console.log('session_event', event, chainId)
+})
 
 // Subscribe to session update
-provider.on("session_update", ({ topic, params }) => {
-  console.log("session_update", topic, params);
-});
+provider.on('session_update', ({ topic, params }) => {
+  console.log('session_update', topic, params)
+})
 
 // Subscribe to session delete
-provider.on("session_delete", ({ id, topic }) => {
-  console.log("session_delete", id, topic);
-});
+provider.on('session_delete', ({ id, topic }) => {
+  console.log('session_delete', id, topic)
+})
 ```
 
 ## Provider Methods

@@ -40,13 +40,12 @@ createWeb3Modal({
 })
 
 export default function App() {
-  return <YourApp/>
+  return <YourApp />
 }
 ```
 
 </TabItem>
 <TabItem value="custom" label="Custom">
-
 
 On top of your app set up the following configuration, making sure that all functions are called outside any React component to avoid unwanted rerenders.
 
@@ -74,7 +73,7 @@ const metadata = {
 }
 
 createWeb3Modal({
-  ethersConfig: defaultConfig({ 
+  ethersConfig: defaultConfig({
     metadata,
     defaultChainId: 1,
     enableEIP6963: true,
@@ -87,7 +86,7 @@ createWeb3Modal({
 })
 
 export default function App() {
-  return <YourApp/>
+  return <YourApp />
 }
 ```
 

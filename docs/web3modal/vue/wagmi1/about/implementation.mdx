@@ -8,7 +8,6 @@ Default mode will implement WalletConnect, Browser Wallets (injected) and Coinba
 <Tabs>
 <TabItem value="default" label="Default">
 
-
 In your `App.vue` file set up the following configuration.
 
 ```html
@@ -34,9 +33,7 @@ In your `App.vue` file set up the following configuration.
   createWeb3Modal({ wagmiConfig, projectId, chains })
 </script>
 
-<template>
-  // Rest of your app ...
-</template>
+<template> // Rest of your app ... </template>
 ```
 
 </TabItem>
@@ -87,9 +84,7 @@ In your `App.vue` file set up the following configuration.
   createWeb3Modal({ wagmiConfig, projectId, chains })
 </script>
 
-<template>
-  // Rest of your app ...
-</template>
+<template> // Rest of your app ... </template>
 ```
 
 :::note
@@ -105,7 +100,6 @@ The provided code utilizes [Wagmi](https://1.x.wagmi.sh/), a Vue library for wal
 
 Additionally, there's a `publicProvider` for reading blockchain data through public nodes like Infura. The `walletConnectProvider`, which operates in a manner akin to the public provider but employs the [Blockchain API](https://docs.walletconnect.com/cloud/blockchain-api), is additionally accessible. The `WagmiConfig` component shares `wagmiConfig` with child components.
 :::
-
 
 </TabItem>
 </Tabs>

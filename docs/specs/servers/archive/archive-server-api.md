@@ -15,8 +15,6 @@ Body:
 }
 ```
 
-
-
 ## Get Messages
 
 Used to get message archive for a given topic.
@@ -27,12 +25,12 @@ Used to get message archive for a given topic.
 
 #### Required
 
-- `topic` (STRING)               = The topic id for which to retrieve the messages. 
+- `topic` (STRING) = The topic id for which to retrieve the messages.
 
 #### Optional
 
-- `originId` (NUMBER)            = The ID of the message used as a starting point for the query. 
-- `messageCount` (NUMBER)        = The maximum number of messages to retrieve for this query (max possible value is 200).
+- `originId` (NUMBER) = The ID of the message used as a starting point for the query.
+- `messageCount` (NUMBER) = The maximum number of messages to retrieve for this query (max possible value is 200).
 - `direction` (`forward`|`backward`) = The direction in which messages are retrieved, default is `forward`.
 
 The `direction` parameter indicates if the messages should be retrieved forward or backward in time from `originId`.
@@ -40,8 +38,9 @@ The `direction` parameter indicates if the messages should be retrieved forward 
 `backward` queries can be used to retrieve past archive that may have gotten removed from the client storage.
 
 If `originId` is omitted, the absolute origin of the specified direction is used:
+
 - `forward` retrieves messages forward in time from the beginning of archive.
-- `backward` retrieves messages backward in time from the latest one in archive. 
+- `backward` retrieves messages backward in time from the latest one in archive.
 
 #### Example
 

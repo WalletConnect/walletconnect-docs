@@ -20,12 +20,11 @@ Control the modal with the `useWeb3Modal` hook
 import { useWeb3Modal } from '@web3modal/wagmi/react'
 
 export default function Component() {
+  const { open, close } = useWeb3Modal()
 
-const { open, close } = useWeb3Modal()
+  open()
 
-open()
-
-//...
+  //...
 }
 ```
 
@@ -36,12 +35,11 @@ open()
 import { useWeb3Modal } from '@web3modal/wagmi1/react'
 
 export default function Component() {
+  const { open, close } = useWeb3Modal()
 
-const { open, close } = useWeb3Modal()
+  open()
 
-open()
-
-//...
+  //...
 }
 ```
 
@@ -52,12 +50,11 @@ open()
 import { useWeb3Modal } from '@web3modal/ethers5/react'
 
 export default function Component() {
+  const { open, close } = useWeb3Modal()
 
-const { open, close } = useWeb3Modal()
+  open()
 
-open()
-
-//...
+  //...
 }
 ```
 
@@ -68,12 +65,11 @@ open()
 import { useWeb3Modal } from '@web3modal/ethers/react'
 
 export default function Component() {
+  const { open, close } = useWeb3Modal()
 
-const { open, close } = useWeb3Modal()
+  open()
 
-open()
-
-//...
+  //...
 }
 ```
 
@@ -121,7 +117,7 @@ List of views you can select
 
 ## useDisconnect
 
-Disconnect currently connected account. 
+Disconnect currently connected account.
 
 ```ts
 const { disconnect } = useDisconnect()
@@ -206,7 +202,7 @@ setThemeVariables({
 ## Track modal events
 
 ```ts
-import {  useWeb3ModalEvents } from '@web3modal/wagmi/react'
+import { useWeb3ModalEvents } from '@web3modal/wagmi/react'
 
 const events = useWeb3ModalEvents()
 ```
@@ -216,22 +212,22 @@ const events = useWeb3ModalEvents()
 <PlatformTabs groupId="eth-lib" activeOptions={["wagmi", "wagmi1", "ethers5", "ethers"]}>
 <PlatformTabItem value="wagmi">
 
-<WagmiHooks/>
+<WagmiHooks />
 
 </PlatformTabItem>
 <PlatformTabItem value="wagmi1">
 
-<Wagmi1Hooks/>
+<Wagmi1Hooks />
 
 </PlatformTabItem>
 <PlatformTabItem value="ethers5">
 
-<Ethers5Hooks/>
+<Ethers5Hooks />
 
 </PlatformTabItem>
 <PlatformTabItem value="ethers">
 
-<EthersHooks/>
+<EthersHooks />
 
 </PlatformTabItem>
 </PlatformTabs>

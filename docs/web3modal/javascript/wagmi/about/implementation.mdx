@@ -1,4 +1,3 @@
-
 import Tabs from '@theme/Tabs'
 import TabItem from '@theme/TabItem'
 
@@ -28,14 +27,14 @@ const metadata = {
 }
 
 const chains = [mainnet, arbitrum]
-const wagmiConfig = defaultWagmiConfig({ 
+const wagmiConfig = defaultWagmiConfig({
   chains, // required
   projectId, // required
   metadata, // required
   enableWalletConnect: true, // Optional - true by default
   enableInjected: true, // Optional - true by default
   enableEIP6963: true, // Optional - true by default
-  enableCoinbase: true, // Optional - true by default
+  enableCoinbase: true // Optional - true by default
 })
 
 // 3. Create modal
@@ -68,15 +67,15 @@ const wagmiConfig = createConfig({
   chains: [mainnet, sepolia],
   transports: {
     [mainnet.id]: http(),
-    [sepolia.id]: http(),
+    [sepolia.id]: http()
   },
-  connectors:[
+  connectors: [
     walletConnect({ projectId, metadata, showQrModal: false }),
     injected({ shimDisconnect: true }),
     coinbaseWallet({
       appName: metadata.name,
       appLogoUrl: metadata.icons[0]
-    }),
+    })
   ]
 })
 

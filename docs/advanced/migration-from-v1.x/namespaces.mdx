@@ -54,13 +54,14 @@ And that's it! By simply following the steps above, your wallet should now suppo
 
 ## Technical Implementation Guide for Apps
 
-Please follow the instructions according to your setup. 
+Please follow the instructions according to your setup.
 
 ### Ethereum Provider package
+
 If you’re an app developer that uses the Ethereum provider package, we recommend the following:
 
 Move all chains to optionalChains and leave the chains property as undefined/unset.
-Set Events and Methods to undefined/unset.  
+Set Events and Methods to undefined/unset.
 
 optionalMethods and optionalEvents are populated by default by the library, so you don’t need to add them unless you’d like to be selective on which methods and events are proposed for sessions.
 Implementation example:
@@ -68,20 +69,20 @@ Implementation example:
 ```ts
 const provider = await EthereumProvider.init({
   projectId: 'YOUR_PROJECT_ID',
-  optionalChains:[1, 5, 56, 42161, 137],
+  optionalChains: [1, 5, 56, 42161, 137],
   showQrModal: true,
   metadata: {
-    name: "My Dapp",
-    description: "My Dapp description",
-    url: "<https://my-dapp.com>",
-    icons: ["<https://my-dapp.com/logo.png>"],
-  },
+    name: 'My Dapp',
+    description: 'My Dapp description',
+    url: '<https://my-dapp.com>',
+    icons: ['<https://my-dapp.com/logo.png>']
+  }
 })
 ```
 
 ### Web3Modal SDK
 
-Update wagmi to version 1.4.9 or higher. Please note that this version will be released on December 7. 
+Update wagmi to version 1.4.9 or higher. Please note that this version will be released on December 7.
 
 ```bash npm2yarn
 npm install wagmi@latest

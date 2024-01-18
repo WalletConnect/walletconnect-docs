@@ -83,7 +83,7 @@ final _w3mService = W3MService(web3App: _web3App);
 
 ```dart
 final _w3mService = W3MService(
-  projectId: '{YOUR_PROJECT_ID}', 
+  projectId: '{YOUR_PROJECT_ID}',
   metadata: const PairingMetadata(
     name: 'Web3Modal Flutter Example',
     description: 'Web3Modal Flutter Example',
@@ -104,6 +104,7 @@ You can choose either to enable **Connect Wallet** button only after selecting a
 If you decide to take first approach of showing a `W3MNetworkSelectButton` **and** `W3MConnectWalletButton` (which is enabled only after selecting a Network) you simple have to add these two buttons on your code:
 
 For instance:
+
 ```dart
 Column(
   mainAxisAlignment: MainAxisAlignment.center,
@@ -113,6 +114,7 @@ Column(
   ],
 ),
 ```
+
 and `W3MConnectWalletButton` will handle it's state automatically.
 
 But, as mentioned before, you can decide to just show the **Connect Wallet** button alone, in this case you would need to set it's state to `ConnectButtonState.none` like so:
@@ -123,4 +125,5 @@ W3MConnectWalletButton(
   state: ConnectButtonState.none,
 ),
 ```
+
 this way `W3MConnectWalletButton` will be always enabled.

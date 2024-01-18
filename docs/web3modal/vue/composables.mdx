@@ -14,7 +14,6 @@ import Ethers5Composables from './ethers5/composables.mdx'
 
 Control the modal with the `useWeb3Modal` function
 
-
 <PlatformTabs groupId="eth-lib" activeOptions={["wagmi", "wagmi1", "ethers5","ethers"]}>
 <PlatformTabItem value="wagmi">
 
@@ -22,12 +21,11 @@ Control the modal with the `useWeb3Modal` function
 import { useWeb3Modal } from '@web3modal/wagmi/vue'
 
 export default function Component() {
+  const { open, close } = useWeb3Modal()
 
-const { open, close } = useWeb3Modal()
+  open()
 
-open()
-
-//...
+  //...
 }
 ```
 
@@ -38,12 +36,11 @@ open()
 import { useWeb3Modal } from '@web3modal/wagmi1/vue'
 
 export default function Component() {
+  const { open, close } = useWeb3Modal()
 
-const { open, close } = useWeb3Modal()
+  open()
 
-open()
-
-//...
+  //...
 }
 ```
 
@@ -54,12 +51,11 @@ open()
 import { useWeb3Modal } from '@web3modal/ethers5/vue'
 
 export default function Component() {
+  const { open, close } = useWeb3Modal()
 
-const { open, close } = useWeb3Modal()
+  open()
 
-open()
-
-//...
+  //...
 }
 ```
 
@@ -70,12 +66,11 @@ open()
 import { useWeb3Modal } from '@web3modal/ethers/vue'
 
 export default function Component() {
+  const { open, close } = useWeb3Modal()
 
-const { open, close } = useWeb3Modal()
+  open()
 
-open()
-
-//...
+  //...
 }
 ```
 
@@ -123,7 +118,7 @@ List of views you can select
 
 ## useDisconnect
 
-Disconnect currently connected account. 
+Disconnect currently connected account.
 
 ```ts
 const { disconnect } = useDisconnect()
@@ -208,7 +203,7 @@ setThemeVariables({
 ## Track modal events
 
 ```ts
-import {  useWeb3ModalEvents } from '@web3modal/wagmi/vue'
+import { useWeb3ModalEvents } from '@web3modal/wagmi/vue'
 
 const events = useWeb3ModalEvents()
 ```
@@ -216,22 +211,22 @@ const events = useWeb3ModalEvents()
 <PlatformTabs groupId="eth-lib" activeOptions={["wagmi", "wagmi1", "ethers5","ethers"]}>
 <PlatformTabItem value="wagmi">
 
-<WagmiComposables/>
+<WagmiComposables />
 
 </PlatformTabItem>
 <PlatformTabItem value="wagmi1">
 
-<Wagmi1Composables/>
+<Wagmi1Composables />
 
 </PlatformTabItem>
 <PlatformTabItem value="ethers5">
 
-<Ethers5Composables/>
+<Ethers5Composables />
 
 </PlatformTabItem>
 <PlatformTabItem value="ethers">
 
-<EthersComposables/>
+<EthersComposables />
 
 </PlatformTabItem>
 </PlatformTabs>

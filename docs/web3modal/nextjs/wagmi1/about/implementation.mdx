@@ -11,7 +11,7 @@ Default mode will implement WalletConnect, Browser Wallets (injected) and Coinba
 Create a new file called `context/Web3Modal.tsx` or `context/Web3Modal.jsx` (outside your app directory) and set up the following configuration, making sure that all functions are called **outside** any React component to avoid unwanted rerenders.
 
 ```tsx
-"use client";
+'use client'
 
 import { createWeb3Modal, defaultWagmiConfig } from '@web3modal/wagmi1/react'
 
@@ -36,21 +36,21 @@ const wagmiConfig = defaultWagmiConfig({ chains, projectId, metadata })
 createWeb3Modal({ wagmiConfig, projectId, chains })
 
 export function Web3Modal({ children }) {
-  return <WagmiConfig config={wagmiConfig}>{children}</WagmiConfig>;
+  return <WagmiConfig config={wagmiConfig}>{children}</WagmiConfig>
 }
 ```
 
-Next, in your `app/layout.tsx` or `app/layout.jsx`  file, import the custom Web3Modal component.
+Next, in your `app/layout.tsx` or `app/layout.jsx` file, import the custom Web3Modal component.
 
 ```tsx
-import "./globals.css";
+import './globals.css'
 
-import { Web3Modal } from "../context/Web3Modal";
+import { Web3Modal } from '../context/Web3Modal'
 
 export const metadata = {
-  title: "Web3Modal",
-  description: "Web3Modal Example",
-};
+  title: 'Web3Modal',
+  description: 'Web3Modal Example'
+}
 
 export default function RootLayout({ children }) {
   return (
@@ -59,7 +59,7 @@ export default function RootLayout({ children }) {
         <Web3Modal>{children}</Web3Modal>
       </body>
     </html>
-  );
+  )
 }
 ```
 
@@ -69,7 +69,7 @@ export default function RootLayout({ children }) {
 Create a new file called `context/Web3Modal.tsx` or `context/Web3Modal.jsx` (outside your app directory) and set up the following configuration, making sure that all functions are called **outside** any React component to avoid unwanted rerenders.
 
 ```tsx
-"use client";
+'use client'
 
 import { createWeb3Modal } from '@web3modal/wagmi1/react'
 import { walletConnectProvider, EIP6963Connector } from '@web3modal/wagmi1'
@@ -112,21 +112,21 @@ const wagmiConfig = createConfig({
 createWeb3Modal({ wagmiConfig, projectId, chains })
 
 export function Web3Modal({ children }) {
-  return <WagmiConfig config={wagmiConfig}>{children}</WagmiConfig>;
+  return <WagmiConfig config={wagmiConfig}>{children}</WagmiConfig>
 }
 ```
 
 Next, in your `app/layout.tsx` or `app/layout.jsx` file, import the custom Web3Modal component.
 
 ```tsx
-import "./globals.css";
+import './globals.css'
 
-import { Web3Modal } from "../context/Web3Modal";
+import { Web3Modal } from '../context/Web3Modal'
 
 export const metadata = {
-  title: "Web3Modal",
-  description: "Web3Modal Example",
-};
+  title: 'Web3Modal',
+  description: 'Web3Modal Example'
+}
 
 export default function RootLayout({ children }) {
   return (
@@ -135,7 +135,7 @@ export default function RootLayout({ children }) {
         <Web3Modal>{children}</Web3Modal>
       </body>
     </html>
-  );
+  )
 }
 ```
 

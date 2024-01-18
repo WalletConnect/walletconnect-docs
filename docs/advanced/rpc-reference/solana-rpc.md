@@ -93,7 +93,6 @@ This method returns a signature over the provided instructions by the targeted p
     			1.4.1.2. `pubkey` : `String` - pubkey of the signer
     			1.4.1.1. `signature` : `String` - signature matching `pubkey`
     	1.5. `transaction` : `String`, - base64-encoded serialized transaction
-       
 
 ### Returns
 

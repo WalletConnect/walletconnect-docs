@@ -7,14 +7,14 @@ You can start integrating Email Login into Web3Modal SDK using either **default*
 <TabItem value="default" label="Default">
 
 ```tsx
-"use client"
+'use client'
 
 import { createWeb3Modal, defaultWagmiConfig } from '@web3modal/wagmi/react'
 
 import { WagmiConfig } from 'wagmi'
 import { arbitrum, mainnet } from 'viem/chains'
 
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query' 
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 
 // 0. Setup queryClient
 const queryClient = new QueryClient()
@@ -31,7 +31,7 @@ const metadata = {
 }
 
 const chains = [mainnet, arbitrum]
-const wagmiConfig = defaultWagmiConfig({ 
+const wagmiConfig = defaultWagmiConfig({
   chains, // required
   projectId, // required
   metadata, // required
@@ -40,7 +40,7 @@ const wagmiConfig = defaultWagmiConfig({
   enableEIP6963: true, // Optional - true by default
   enableCoinbase: true, // Optional - true by default
   /* highlight-add-start */
-  enableEmail: true, // Optional - false by default
+  enableEmail: true // Optional - false by default
   /* highlight-add-end */
 })
 
@@ -50,11 +50,9 @@ createWeb3Modal({ wagmiConfig, projectId, chains })
 export function Web3Modal({ children }) {
   return (
     <WagmiConfig config={wagmiConfig}>
-      <QueryClientProvider client={queryClient}>
-        {children}
-      </QueryClientProvider>
+      <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
     </WagmiConfig>
-  );
+  )
 }
 ```
 
@@ -62,20 +60,20 @@ export function Web3Modal({ children }) {
 <TabItem value="custom" label="Custom">
 
 ```tsx
-"use client";
+'use client'
 
 import type { ReactNode } from 'react'
 
-import { createWeb3Modal } from "@web3modal/wagmi/react"
-import { emailConnector } from "@web3modal/wagmi"
+import { createWeb3Modal } from '@web3modal/wagmi/react'
+import { emailConnector } from '@web3modal/wagmi'
 
-import { WagmiProvider, cookieStorage, createStorage, createConfig, http } from "wagmi";
-import { mainnet, sepolia } from "wagmi/chains";
-import { walletConnect, injected, coinbaseWallet } from "wagmi/connectors"
+import { WagmiProvider, cookieStorage, createStorage, createConfig, http } from 'wagmi'
+import { mainnet, sepolia } from 'wagmi/chains'
+import { walletConnect, injected, coinbaseWallet } from 'wagmi/connectors'
 
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 
-// 0. Setup queryClient 
+// 0. Setup queryClient
 const queryClient = new QueryClient()
 
 // 1. Get projectId at https://cloud.walletconnect.com
@@ -93,11 +91,11 @@ const chains = [mainnet, sepolia] as const
 
 export const wagmiConfig = createConfig({
   chains,
-  transports: { 
+  transports: {
     [mainnet.id]: http(),
-    [sepolia.id]: http(),
+    [sepolia.id]: http()
   },
-  connectors:[
+  connectors: [
     walletConnect({ projectId, metadata, showQrModal: false }),
     injected({ shimDisconnect: true }),
     coinbaseWallet({
@@ -109,21 +107,25 @@ export const wagmiConfig = createConfig({
     /* highlight-add-end */
   ],
   ssr: true,
-  storage: createStorage({  
-    storage: cookieStorage, 
-  }),
+  storage: createStorage({
+    storage: cookieStorage
+  })
 })
 
 createWeb3Modal({ wagmiConfig, projectId, chains })
 
-export function Web3Modal({ children, initialState }: { children: ReactNode, initialState?: State }) {
+export function Web3Modal({
+  children,
+  initialState
+}: {
+  children: ReactNode
+  initialState?: State
+}) {
   return (
-    <WagmiProvider config={wagmiConfig}  initialState={initialState}>
-      <QueryClientProvider client={queryClient}>
-        {children}
-      </QueryClientProvider>
+    <WagmiProvider config={wagmiConfig} initialState={initialState}>
+      <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
     </WagmiProvider>
-  );
+  )
 }
 ```
 
