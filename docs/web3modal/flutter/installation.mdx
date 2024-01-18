@@ -77,19 +77,36 @@ Example:
 </PlatformTabItem>
 </PlatformTabs>
 
-<details>
-<summary>Coinbase Wallet specific steps</summary>
-<div>
+### Enable Coinbase Wallet
 
-:::caution
-Coinbase Wallet support is still in beta. If you want to try it out please installs Web3Modal version **3.1.0-beta01**
+:::info
+Coinbase Wallet is available from Web3Modal **version 3.1.0** and higher
 :::
 
 Since Coinbase Wallet uses it own SDK there are a few simply steps to do if you are planning to include and support it
 
-1. You must include `<string>cbwallet</string>` on iOS and `<package android:name="org.toshi"/>` on Android. (See "Enable Installed Wallet Detection" section above to look on how to do it)
-2. Make sure pods are installed, otherwise run `pod install` inside your `/ios` folder.
-3. Open your `/ios/Runner.xcworkspace` file with Xcode and add the following code in `AppDelegate.swift` file:
+<PlatformTabs
+	groupId="w3m_flutter"
+	activeOptions={["ios","android"]}
+>
+<PlatformTabItem value="ios">
+
+1. Open your `Info.plist` file.
+2. Locate the `<key>LSApplicationQueriesSchemes</key>` section.
+3. Include `<string>cbwallet</string>` scheme as mentioned above in previous section
+
+Example:
+
+```xml
+<key>LSApplicationQueriesSchemes</key>
+<array>
+  <string>cbwallet</string>
+  <!-- Any other scheme previously added -->
+</array>
+```
+
+4. Make sure pods are installed, otherwise run `pod install` inside your `/ios` folder.
+5. Open your `/ios/Runner.xcworkspace` file with Xcode and add the following code in `AppDelegate.swift` file:
 
 ```swift
 import CoinbaseWalletSDK
@@ -122,9 +139,33 @@ override func application(_ application: UIApplication, continue userActivity: N
 }
 ```
 
+</PlatformTabItem>
+<PlatformTabItem value="android">
+
+1. Open your `AndroidManifest.xml` file.
+2. Add `<package android:name="org.toshi"/>` scheme inside `<queries>...</queries>` as mentioned above in previous section
+
+Example:
+
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <queries>
+        <package android:name="org.toshi"/>
+        <!-- Any other scheme previously added -->
+    </queries>
+
+    <application>
+        ...
+    </application>
+</manifest>
+```
+
+</PlatformTabItem>
+</PlatformTabs>
+
+
 :::note
 If you don't want to include/support Coinbase Wallet you just need to pass the walletId `fd20dc426fb37566d803205b19bbc1d4096b248ac04548e3cfb6b3a38bd033aa` to [excludedWalletIds](/web3modal/flutter/custom-wallets#excludedwalletids) options Array.
 :::
-
-</div>
-</details>
