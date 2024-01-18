@@ -66,22 +66,22 @@ npm install @web3modal/ethers ethers
 <PlatformTabs groupId="eth-lib" activeOptions={["wagmi", "wagmi1", "ethers5","ethers"]}>
 <PlatformTabItem value="wagmi">
 
-<WagmiImplementation/>
+<WagmiImplementation />
 
 </PlatformTabItem>
 <PlatformTabItem value="wagmi1">
 
-<Wagmi1Implementation/>
+<Wagmi1Implementation />
 
 </PlatformTabItem>
 <PlatformTabItem value="ethers5">
 
-<Ethers5Implementation/>
+<Ethers5Implementation />
 
 </PlatformTabItem>
 <PlatformTabItem value="ethers">
 
-<EthersImplementation/>
+<EthersImplementation />
 
 </PlatformTabItem>
 </PlatformTabs>
@@ -91,22 +91,22 @@ npm install @web3modal/ethers ethers
 <PlatformTabs groupId="eth-lib" activeOptions={["wagmi", "wagmi1", "ethers5","ethers"]}>
 <PlatformTabItem value="wagmi">
 
-<WagmiModal/>
+<WagmiModal />
 
 </PlatformTabItem>
 <PlatformTabItem value="wagmi1">
 
-<Wagmi1Modal/>
+<Wagmi1Modal />
 
 </PlatformTabItem>
 <PlatformTabItem value="ethers5">
 
-<Ethers5Modal/>
+<Ethers5Modal />
 
 </PlatformTabItem>
 <PlatformTabItem value="ethers">
 
-<EthersModal/>
+<EthersModal />
 
 </PlatformTabItem>
 </PlatformTabs>
@@ -118,16 +118,16 @@ npm install @web3modal/ethers ethers
 
 ```html
 <script setup lang="ts">
-import { readContract } from '@wagmi/core'
-import { USDTAbi } from '../abi/USDTAbi'
+  import { readContract } from '@wagmi/core'
+  import { USDTAbi } from '../abi/USDTAbi'
 
-const USDTAddress = '0x...'
+  const USDTAddress = '0x...'
 
-const data = readContract({
-  abi: USDTAbi,
-  address: USDTAddress,
-  functionName: 'symbol',
-})
+  const data = readContract({
+    abi: USDTAbi,
+    address: USDTAddress,
+    functionName: 'symbol'
+  })
 </script>
 ```
 
@@ -138,16 +138,16 @@ Read more about Wagmi actions for smart contract interaction [here](https://wagm
 
 ```html
 <script setup lang="ts">
-import { readContract } from '@wagmi/core'
-import { USDTAbi } from '../abi/USDTAbi'
+  import { readContract } from '@wagmi/core'
+  import { USDTAbi } from '../abi/USDTAbi'
 
-const USDTAddress = '0x...'
+  const USDTAddress = '0x...'
 
-const data = readContract({
-  abi: USDTAbi,
-  address: USDTAddress,
-  functionName: 'symbol',
-})
+  const data = readContract({
+    abi: USDTAbi,
+    address: USDTAddress,
+    functionName: 'symbol'
+  })
 </script>
 ```
 
@@ -158,33 +158,33 @@ Read more about Wagmi actions for smart contract interaction [here](https://1.x.
 
 ```html
 <script setup lang="ts">
-import { ethers } from 'ethers'
+  import { ethers } from 'ethers'
 
-const USDTAddress = '0x...'
+  const USDTAddress = '0x...'
 
-// The ERC-20 Contract ABI, which is a common contract interface
-// for tokens (this is the Human-Readable ABI format)
-const USDTAbi = [
-  "function name() view returns (string)",
-  "function symbol() view returns (string)",
-  "function balanceOf(address) view returns (uint)",
-  "function transfer(address to, uint amount)",
-  "event Transfer(address indexed from, address indexed to, uint amount)"
-];
+  // The ERC-20 Contract ABI, which is a common contract interface
+  // for tokens (this is the Human-Readable ABI format)
+  const USDTAbi = [
+    'function name() view returns (string)',
+    'function symbol() view returns (string)',
+    'function balanceOf(address) view returns (uint)',
+    'function transfer(address to, uint amount)',
+    'event Transfer(address indexed from, address indexed to, uint amount)'
+  ]
 
-const walletProvider = modal.getWalletProvider()
+  const walletProvider = modal.getWalletProvider()
 
-async function getBalance(){
-  if(!walletProvider) throw Error("User disconnected")
+  async function getBalance() {
+    if (!walletProvider) throw Error('User disconnected')
 
-  const ethersProvider =  new ethers.providers.Web3Provider(walletProvider)
-  const signer = await ethersProvider.getSigner()
-  // The Contract object
-  const USDTContract = new ethers.Contract(USDTAddress, USDTAbi, signer)
-  const USDTBalance = await USDTContract.balanceOf(address)
+    const ethersProvider = new ethers.providers.Web3Provider(walletProvider)
+    const signer = await ethersProvider.getSigner()
+    // The Contract object
+    const USDTContract = new ethers.Contract(USDTAddress, USDTAbi, signer)
+    const USDTBalance = await USDTContract.balanceOf(address)
 
-  console.log(ethers.utils.formatUnits(USDTBalance, 18))
-}
+    console.log(ethers.utils.formatUnits(USDTBalance, 18))
+  }
 </script>
 ```
 
@@ -193,33 +193,33 @@ async function getBalance(){
 
 ```html
 <script setup lang="ts">
-import { BrowserProvider, Contract, formatUnits } from 'ethers'
+  import { BrowserProvider, Contract, formatUnits } from 'ethers'
 
-const USDTAddress = '0x617f3112bf5397D0467D315cC709EF968D9ba546'
+  const USDTAddress = '0x617f3112bf5397D0467D315cC709EF968D9ba546'
 
-// The ERC-20 Contract ABI, which is a common contract interface
-// for tokens (this is the Human-Readable ABI format)
-const USDTAbi = [
-  "function name() view returns (string)",
-  "function symbol() view returns (string)",
-  "function balanceOf(address) view returns (uint)",
-  "function transfer(address to, uint amount)",
-  "event Transfer(address indexed from, address indexed to, uint amount)"
-];
+  // The ERC-20 Contract ABI, which is a common contract interface
+  // for tokens (this is the Human-Readable ABI format)
+  const USDTAbi = [
+    'function name() view returns (string)',
+    'function symbol() view returns (string)',
+    'function balanceOf(address) view returns (uint)',
+    'function transfer(address to, uint amount)',
+    'event Transfer(address indexed from, address indexed to, uint amount)'
+  ]
 
-const walletProvider = modal.getWalletProvider()
+  const walletProvider = modal.getWalletProvider()
 
-async function getBalance(){
-  if(!isConnected) throw Error("User disconnected")
+  async function getBalance() {
+    if (!isConnected) throw Error('User disconnected')
 
-  const ethersProvider =  new BrowserProvider(walletProvider)
-  const signer = await ethersProvider.getSigner()
-  // The Contract object
-  const USDTContract = new Contract(USDTAddress, USDTAbi, signer)
-  const USDTBalance = await USDTContract.balanceOf(address)
+    const ethersProvider = new BrowserProvider(walletProvider)
+    const signer = await ethersProvider.getSigner()
+    // The Contract object
+    const USDTContract = new Contract(USDTAddress, USDTAbi, signer)
+    const USDTBalance = await USDTContract.balanceOf(address)
 
-  console.log(formatUnits(USDTBalance, 18))
-}
+    console.log(formatUnits(USDTBalance, 18))
+  }
 </script>
 ```
 

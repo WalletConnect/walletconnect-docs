@@ -24,7 +24,7 @@ const metadata = {
 }
 
 const chains = [mainnet, arbitrum]
-const wagmiConfig = defaultWagmiConfig({ 
+const wagmiConfig = defaultWagmiConfig({
   chains, // required
   projectId, // required
   metadata, // required
@@ -33,7 +33,7 @@ const wagmiConfig = defaultWagmiConfig({
   enableEIP6963: true, // Optional - true by default
   enableCoinbase: true, // Optional - true by default
   /* highlight-add-start */
-  enableEmail: true, // Optional - false by default
+  enableEmail: true // Optional - false by default
   /* highlight-add-end */
 })
 
@@ -41,11 +41,7 @@ const wagmiConfig = defaultWagmiConfig({
 createWeb3Modal({ wagmiConfig, projectId, chains })
 
 export default function App() {
-  return (
-    <WagmiConfig config={wagmiConfig}>
-      // Rest of your app...
-    </WagmiConfig>
-  )
+  return <WagmiConfig config={wagmiConfig}>// Rest of your app...</WagmiConfig>
 }
 ```
 
@@ -54,9 +50,9 @@ export default function App() {
 
 ```tsx
 import { createWeb3Modal } from '@web3modal/wagmi1/react'
-import { 
-  walletConnectProvider, 
-  EIP6963Connector, 
+import {
+  walletConnectProvider,
+  EIP6963Connector,
   /* highlight-add-start */
   EmailConnector
   /* highlight-add-end */
@@ -103,11 +99,7 @@ const wagmiConfig = createConfig({
 createWeb3Modal({ wagmiConfig, projectId, chains })
 
 export default function App() {
-  return (
-    <WagmiConfig config={wagmiConfig}>
-      // Rest of your app...
-    </WagmiConfig>
-  )
+  return <WagmiConfig config={wagmiConfig}>// Rest of your app...</WagmiConfig>
 }
 ```
 

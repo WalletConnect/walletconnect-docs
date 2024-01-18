@@ -47,11 +47,14 @@ const walletProviderType = modal.getWalletProviderType()
 subscribe to chainId, address, provider changes.
 
 ```ts
-function handleChange({ provider, providerType, address, error, chainId, isConnected }){
+function handleChange({ provider, providerType, address, error, chainId, isConnected }) {
   //...
 }
 
 modal.subscribeProvider(handleChange)
 ```
 
-<Button name="Learn More" url="https://docs.ethers.org/v5/getting-started/#getting-started--contracts" />
+<Button
+  name="Learn More"
+  url="https://docs.ethers.org/v5/getting-started/#getting-started--contracts"
+/>

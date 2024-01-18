@@ -138,13 +138,13 @@ const result = await signClient.request({
   topic: session.topic,
   chainId: 'eip155:1',
   request: {
-    method: "personal_sign",
+    method: 'personal_sign',
     params: [
-      "0x7468697320697320612074657374206d65737361676520746f206265207369676e6564",
-      "0x1d85568eEAbad713fBB5293B45ea066e552A90De",
-    ],
-  },
-});
+      '0x7468697320697320612074657374206d65737361676520746f206265207369676e6564',
+      '0x1d85568eEAbad713fBB5293B45ea066e552A90De'
+    ]
+  }
+})
 ```
 
 > For more information on available JSON-RPC requests, see the [JSON-RPC reference](../../advanced/rpc-reference/ethereum-rpc.md).
@@ -686,8 +686,7 @@ await request.Acknowledged();
 
 #### Session Requests
 
-
-Sending session requests as a dapp requires to build the request **and** response classes that the session request `params` will be structured. C# is a statically typed language, so these types must be given whenever you do a session request (or do any querying for session requests). 
+Sending session requests as a dapp requires to build the request **and** response classes that the session request `params` will be structured. C# is a statically typed language, so these types must be given whenever you do a session request (or do any querying for session requests).
 
 Currently, **WalletConnectSharp does not automatically assume the object type for `params` is an array**. This is very important, since most EVM RPC requests have `params` as an array type. **Use `List<T>` to workaround this**. For example, for `eth_sendTransaction`, use `List<Transaction>` instead of `Transaction`.
 
@@ -809,8 +808,8 @@ WalletConnectUnity is a wrapper for WalletConnectSharp. It simplifies managing a
 To use WalletConnectUnity in your project:
 
 1. Fill in the Project ID and Metadata fields in the `Assets/WalletConnectUnity/Resources/WalletConnectProjectConfig` asset.
-    - If you don’t have a Project ID, you can create one at [WalletConnect Cloud](https://cloud.walletconnect.com).
-    - The `Redirect` fields are optional. They are used to redirect the user back to your app after they approve or reject the session.
+   - If you don’t have a Project ID, you can create one at [WalletConnect Cloud](https://cloud.walletconnect.com).
+   - The `Redirect` fields are optional. They are used to redirect the user back to your app after they approve or reject the session.
 2. Initialize `WalletConnect` and connect the wallet:
 
 ```csharp
@@ -822,26 +821,25 @@ var walletConnectUnity = new WalletConnect();
 await walletConnectUnity.InitializeAsync();
 
 // Try to resume the last session
-var sessionResumed = await WalletConnect.Instance.TryResumeSessionAsync();              
-if (!sessionResumed)                                                                         
-{                                                                                            
+var sessionResumed = await WalletConnect.Instance.TryResumeSessionAsync();
+if (!sessionResumed)
+{
     var connectedData = await WalletConnect.Instance.ConnectAsync(connectOptions);
 
     // Create QR code texture
     var texture = WalletConnectUnity.Core.Utils.QRCode.EncodeTexture(connectedData.Uri);
-    
+
     // ... Display QR code texture
 
     // Wait for wallet approval
-    await connectedData.Approval;                                                            
-}                                                                                            
+    await connectedData.Approval;
+}
 ```
 
-
-All features of WalletConnectSharp are accessible in WalletConnectUnity. 
+All features of WalletConnectSharp are accessible in WalletConnectUnity.
 For complex scenarios, the `SignClient` can be accessed directly through `WalletConnect.SignClient`.
 
-Refer to the `C#` documentation for details on using the Sign API within WalletConnectUnity. 
+Refer to the `C#` documentation for details on using the Sign API within WalletConnectUnity.
 The usage of the WalletConnectSharp.Sign API remains consistent with `C#`.
 
 </PlatformTabItem>

@@ -252,7 +252,7 @@ module.exports = {
                 'web3wallet/notify/resources'
               ]
             },
-            'web3wallet/resources',
+            'web3wallet/resources'
           ]
         }
       ]

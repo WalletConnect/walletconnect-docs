@@ -34,11 +34,7 @@ const wagmiConfig = defaultWagmiConfig({ chains, projectId, metadata })
 createWeb3Modal({ wagmiConfig, projectId, chains })
 
 export default function App() {
-  return (
-    <WagmiConfig config={wagmiConfig}>
-      // Rest of your app...
-    </WagmiConfig>
-  )
+  return <WagmiConfig config={wagmiConfig}>// Rest of your app...</WagmiConfig>
 }
 ```
 
@@ -89,13 +85,10 @@ const wagmiConfig = createConfig({
 createWeb3Modal({ wagmiConfig, projectId, chains })
 
 export default function App() {
-  return (
-    <WagmiConfig config={wagmiConfig}>
-      // Rest of your app...
-    </WagmiConfig>
-  )
+  return <WagmiConfig config={wagmiConfig}>// Rest of your app...</WagmiConfig>
 }
 ```
+
 :::note
 The provided code utilizes [Wagmi](https://1.x.wagmi.sh/), a React library for wallet and provider connections, along with the [Web3Modal](https://web3modal.com/) library to create a wallet connection modal. It features various connectors:
 

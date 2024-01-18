@@ -3,6 +3,7 @@
 In this document we define data structures and definitions used in the Chat API
 
 ## Invite
+
 `Invite` is a structure used to call `invite(params: {invite: Invite;}): Promise<number>;`
 
 ```jsonc
@@ -17,7 +18,6 @@ In this document we define data structures and definitions used in the Chat API
 ## ReceivedInvite
 
 `ReceivedInvite` is a structure that is returned by SDK. Is extracted from Invite Proposals did-jwt claims. To get author account identity must be resolved from `iss` field. `inviteePublicKey` should be attach based on topic this invite was sent. A map of type `Map<number, ReceivedInvite>` is returned on `getReceivedInvites(params: {account: string})`. InviteId is the key of the map.
-
 
 ```jsonc
 {
@@ -35,6 +35,7 @@ In this document we define data structures and definitions used in the Chat API
 ## SentInvite
 
 `SentInvite` structure keeps track of state of sent Invites. If Invite is approved by peer it should be removed from storage, if rejected should stay in storage. An array of `SentInvite` is returned on `getSentInvites(params: {account: string})`
+
 ```jsonc
 {
   "id": number,

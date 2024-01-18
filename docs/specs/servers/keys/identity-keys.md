@@ -12,7 +12,6 @@ Client only generates a single identity key per blockchain account per client. T
 
 Identity Keys are ed25519 key pairs generated internally and the client will expose a CAIP-122 message which includes the public key of the Identity Key pair in the Resources in the form of a did-key.
 
-
 ### Message Format
 
 Template Message (CAIP-122)
@@ -28,17 +27,17 @@ Nonce: ${nonce}
 Issued At: ${issued-at}
 ```
 
-Let's use the account `eip155:1:0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2` and identity key  use the following fields:
+Let's use the account `eip155:1:0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2` and identity key use the following fields:
 
-* Domain = keys.walletconnect.com
-* Namespace Name = Ethereum
-* Address = 0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2
-* URI = https://keys.walletconnect.com
-* Version = 1
-* Chain ID = 1
-* Nonce = bb0b6514e8a5e817
-* Issued At = 2022-12-09T15:29:36.509Z
-* Resources = ["did:key:z6MkqJ6qV18zBazggzhGMHNgadEQGbX9RceEH3j2G6kNTbKq"]
+- Domain = keys.walletconnect.com
+- Namespace Name = Ethereum
+- Address = 0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2
+- URI = https://keys.walletconnect.com
+- Version = 1
+- Chain ID = 1
+- Nonce = bb0b6514e8a5e817
+- Issued At = 2022-12-09T15:29:36.509Z
+- Resources = ["did:key:z6MkqJ6qV18zBazggzhGMHNgadEQGbX9RceEH3j2G6kNTbKq"]
 
 Formatted Message (CAIP-122)
 
@@ -52,6 +51,7 @@ Chain ID: 1
 Nonce: bb0b6514e8a5e817
 Issued At: 2022-12-09T15:29:36.509Z
 Resources:
+
 - did:key:z6MkqJ6qV18zBazggzhGMHNgadEQGbX9RceEH3j2G6kNTbKq
 ```
 
@@ -88,19 +88,19 @@ When two clients are using a peer to peer API for some requests they need to ver
 
 Now that we have generated, authorized and registered Identity Keys we can use them for authentication for different purposes:
 
-* [Chat Authentication](../../clients/chat/chat-authentication.md)
-* [Notify Authentication](../../clients/notify/notify-authentication.md)
-* [Chat Invite Keys registration](../../clients/chat/invite-keys.md)
+- [Chat Authentication](../../clients/chat/chat-authentication.md)
+- [Notify Authentication](../../clients/notify/notify-authentication.md)
+- [Chat Invite Keys registration](../../clients/chat/invite-keys.md)
 
-## Unregistration 
+## Unregistration
 
 In order to unregister an Identity Key did-jwt needs to be created and sent to designated [API endpoint](./keys-server-api.md#remove-identity-key)
 
 When we are unregistering an Identity Key we must use the following mandatory fields in the jwt:
 
-* iat - timestamp when jwt was issued 
-* exp - timestamp when jwt must expire
-* iss - public identity key in form of did:key
-* aud - key server URL used for registering
-* pkh - corresponding blockchain account (did:pkh)
-* act - description of action intent. Must be equal to "unregister_identity"
+- iat - timestamp when jwt was issued
+- exp - timestamp when jwt must expire
+- iss - public identity key in form of did:key
+- aud - key server URL used for registering
+- pkh - corresponding blockchain account (did:pkh)
+- act - description of action intent. Must be equal to "unregister_identity"

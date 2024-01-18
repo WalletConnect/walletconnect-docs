@@ -6,8 +6,8 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: linear-gradient(to right, var(--ifm-background-color), var(--ifm-background-color))
-      padding-box,
+  background:
+    linear-gradient(to right, var(--ifm-background-color), var(--ifm-background-color)) padding-box,
     linear-gradient(to right, transparent, transparent, var(--ifm-color-gray-600)) border-box;
   border-radius: 0 1.5rem 1.5rem 0;
   border: 1px solid transparent;

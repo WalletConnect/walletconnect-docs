@@ -32,14 +32,14 @@ const metadata = {
 }
 
 const chains = [mainnet, arbitrum]
-const wagmiConfig = defaultWagmiConfig({ 
+const wagmiConfig = defaultWagmiConfig({
   chains, // required
   projectId, // required
   metadata, // required
   enableWalletConnect: true, // Optional - true by default
   enableInjected: true, // Optional - true by default
   enableEIP6963: true, // Optional - true by default
-  enableCoinbase: true, // Optional - true by default
+  enableCoinbase: true // Optional - true by default
 })
 
 // 3. Create modal
@@ -48,11 +48,9 @@ createWeb3Modal({ wagmiConfig, projectId, chains })
 export function Web3Modal({ children }) {
   return (
     <WagmiConfig config={wagmiConfig}>
-      <QueryClientProvider client={queryClient}>
-        {children}
-      </QueryClientProvider>
+      <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
     </WagmiConfig>
-  );
+  )
 }
 ```
 
@@ -66,9 +64,9 @@ import { createWeb3Modal } from '@web3modal/wagmi/react'
 
 import { http, createConfig, WagmiProvider } from 'wagmi'
 import { mainnet, sepolia } from 'wagmi/chains'
-import { walletConnect, injected, coinbaseWallet } from "wagmi/connectors"
+import { walletConnect, injected, coinbaseWallet } from 'wagmi/connectors'
 
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query' 
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 
 // 0. Setup queryClient
 const queryClient = new QueryClient()
@@ -88,15 +86,15 @@ const wagmiConfig = createConfig({
   chains: [mainnet, sepolia],
   transports: {
     [mainnet.id]: http(),
-    [sepolia.id]: http(),
+    [sepolia.id]: http()
   },
-  connectors:[
+  connectors: [
     walletConnect({ projectId, metadata, showQrModal: false }),
     injected({ shimDisconnect: true }),
     coinbaseWallet({
       appName: metadata.name,
       appLogoUrl: metadata.icons[0]
-    }),
+    })
   ]
 })
 
@@ -106,11 +104,9 @@ createWeb3Modal({ wagmiConfig, projectId, chains })
 export function Web3Modal({ children }) {
   return (
     <WagmiConfig config={wagmiConfig}>
-      <QueryClientProvider client={queryClient}>
-        {children}
-      </QueryClientProvider>
+      <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
     </WagmiConfig>
-  );
+  )
 }
 ```
 

@@ -4,7 +4,6 @@
 
 Pairing API is a lightweight API for establishing an encrypted, protocol agnostic communication layer between peers. It's purpose is to provide a secure channel for proposing protocols or sending requests.
 
-
 ## Context
 
 WalletConnect offers Sign, Auth and Notify Protocols. In order to allow reusable communication channel between peers, the Pairing API exposes a common interface and allows for sending and receiving multi-protocol requests over a single pairing.
@@ -33,7 +32,6 @@ User visits a new website that requires a Sign session for submitting transactio
 5. B verifies that the URI's "methods" query parameter's value against B's cached "registered methods" list of protocol methods. If verification being valid then B subscribes to pairing topic from provided URI
 6. B receives protocol P request.
 
-
 #### Error case where B did not registered protocol P
 
 1. A creates random symKey S and pairing topic that is a sha256 hash of symKey S.
@@ -53,5 +51,3 @@ User visits a new website that requires a Sign session for submitting transactio
 - Responding peer should always create an active pairing on its side after calling `pair()` function.
 
 - Pairing expiry should be updated to another 30 days on each peer after any request or response from its peer has been delivered proving that pairing remains active.
-
-

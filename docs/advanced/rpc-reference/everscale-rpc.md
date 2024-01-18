@@ -7,15 +7,22 @@ description: Everscale JSON-RPC Methods
 # WC JSON-RPC for Everscale
 
 ### ever_sign
+
 Signature of a random message for authentication.
+
 ##### Parameters:
+
     1. message - some message in base64;
     2. withSignatureId - bool or number
     3. hashData - bool
+
 ##### Returns:
+
     1. signature - string signature in base64;
     2. pubkey - public key of the wallet's address;
+
 ##### Example:
+
 ```
 // Request
 {
@@ -28,7 +35,7 @@ Signature of a random message for authentication.
         "hashData": true
     }
 }
- 
+
 // Result
 {
   "id": 1,
@@ -41,18 +48,25 @@ Signature of a random message for authentication.
 ```
 
 ### ever_sendMessage
+
 Creates message, sends it to the network, monitors its processing and returns transaction's id.
+
 ##### Parameters:
+
     1. value - amount of coins attached to the message;
     2. bounce - should the answer message be generated in case of an error;
-    3. destAddress - message destination address; 
+    3. destAddress - message destination address;
     4. destPayload - message destination payload;
         4.1. abi - destination contract ABI;
         4.2. method - destination contract method;
         4.3. params - destination contract method params
+
 ##### Returns:
+
     1. txId - transaction's id in blockchain;
+
 ##### Example:
+
 ```
 // Request
 {
@@ -71,7 +85,7 @@ Creates message, sends it to the network, monitors its processing and returns tr
         },
     }
 }
- 
+
 // Result
 {
   "id": 1,
@@ -83,19 +97,24 @@ Creates message, sends it to the network, monitors its processing and returns tr
 ```
 
 ### ever_signMessage
+
 Message that can then be sent to the blockchain.
+
 ##### Parameters:
 
     1. value - amount of coins attached to the message;
     2. bounce - should the answer message be generated in case of an error;
-    3. destAddress - message destination address; 
+    3. destAddress - message destination address;
     4. destPayload - message destination payload;
        4.1. abi - destination contract ABI;
        4.2. method - destination contract method;
        4.3. params - destination contract method params
+
 ##### Returns:
+
     1. signedExtMessage - signed external message;
     2. expireAt - мessage expiration timestamp
+
 ##### Example:
 
 ```
@@ -116,7 +135,7 @@ Message that can then be sent to the blockchain.
         },
     }
 }
- 
+
 // Result
 {
   "id": 1,
@@ -128,18 +147,24 @@ Message that can then be sent to the blockchain.
 }
 ```
 
-
 ### ever_sendExternalMessage
+
 Sends an external message to the contract.
+
 ##### Parameters:
-    1. destAddress - message destination address; 
+
+    1. destAddress - message destination address;
     2. destPayload - message destination payload;
         2.1. abi - destination contract ABI;
         2.2. method - destination contract method;
         2.3. params - destination contract method params
+
 ##### Returns:
+
     1. txId - transaction's id in blockchain;
+
 ##### Example:
+
 ```
 // Request
 {
@@ -150,13 +175,13 @@ Sends an external message to the contract.
         "sourceAddress": "0:695e42...b8d",
         "destAddress": "0:b38d96...708",
         "destPayload": {
-            "abi": "", 
-            "method": "", 
+            "abi": "",
+            "method": "",
             "params": {}
         },
     }
 }
- 
+
 // Result
 {
   "id": 1,
@@ -168,21 +193,27 @@ Sends an external message to the contract.
 ```
 
 ### ever_broadcastMessage
+
 Sends an internal message from the user account without waiting for the transaction.
+
 ##### Parameters:
+
     1. value - amount of coins attached to the message;
     2. bounce - should the answer message be generated in case of an error;
-    3. destAddress - message destination address; 
+    3. destAddress - message destination address;
     4. destPayload - message destination payload;
         4.1. abi - destination contract ABI;
         4.2. method - destination contract method;
         4.3. params - destination contract method params
+
 ##### Returns:
+
     1. hash: string - external message hash;
     2. account: string - destination account address (equals to source_address);
     3. expireAt: number - мessage expiration timestamp
 
 ##### Example:
+
 ```
 // Request
 {
@@ -195,13 +226,13 @@ Sends an internal message from the user account without waiting for the transact
         "bounce": False,
         "destAddress": "0:b38d96...708",
         "destPayload": {
-            "abi": "", 
-            "method": "", 
+            "abi": "",
+            "method": "",
             "params": {}
         },
     }
 }
- 
+
 // Result
 {
   "id": 1,
@@ -215,18 +246,25 @@ Sends an internal message from the user account without waiting for the transact
 ```
 
 ### ever_broadcastExternalMessage
+
 Sends an external message to the contract without waiting for the transaction.
+
 ##### Parameters:
-    1. destAddress - message destination address; 
+
+    1. destAddress - message destination address;
     2. destPayload - message destination payload;
         2.1. abi - destination contract ABI;
         2.2. method - destination contract method;
         2.3. params - destination contract method params
+
 ##### Returns:
+
     1. hash: string - external message hash;
     2. account: string - destination account address (equals to source_address);
     3. expireAt: number - мessage expiration timestamp
+
 ##### Example:
+
 ```
 // Request
 {
@@ -237,13 +275,13 @@ Sends an external message to the contract without waiting for the transaction.
         "sourceAddress": "0:695e42...b8d",
         "destAddress": "0:b38d96...708",
         "destPayload": {
-            "abi": "", 
-            "method": "", 
+            "abi": "",
+            "method": "",
             "params": {}
         },
     }
 }
- 
+
 // Result
 {
   "id": 1,
@@ -257,12 +295,19 @@ Sends an external message to the contract without waiting for the transaction.
 ```
 
 ### ever_addTokenAsset
+
 Adds asset (TIP-3 or native tokens) to the selected account.
+
 ##### Parameters:
+
     1. rootContract - asset root address. Note: you can add native coin by leaving this field empty
+
 ##### Returns:
+
     1. newAsset: bool - returns true if the account did not have this asset before
+
 ##### Example:
+
 ```
 // Request
 {
@@ -274,7 +319,7 @@ Adds asset (TIP-3 or native tokens) to the selected account.
         "rootContract": "0:b38d96...708"
     }
 }
- 
+
 // Result
 {
   "id": 1,
@@ -286,13 +331,17 @@ Adds asset (TIP-3 or native tokens) to the selected account.
 ```
 
 ### ever_encryptData
+
 Encrypts arbitrary data with specified algorithm for each specified recipient.
+
 ##### Parameters:
+
     1. recipientPublicKeys - public keys of recipients. Hex encoded;
     2. algorithm - encryption algorithm. Currently supports only “ChaCha20Poly1305”
     3. data - base64 encoded data;
 
 ##### Returns:
+
     1. encryptedData - encrypted data for each recipient
         1.1. algorithm - encryption algorithm
         1.2. sourcePublicKey - hex encoded encryptor's public key
@@ -301,6 +350,7 @@ Encrypts arbitrary data with specified algorithm for each specified recipient.
         1.5. nonce - base64 encoded nonce
 
 ##### Example:
+
 ```
 // Request
 {
@@ -314,7 +364,7 @@ Encrypts arbitrary data with specified algorithm for each specified recipient.
        "data": "ZGF0YQ=="
   }
 }
- 
+
 // Result
 {
   "id": 1,
@@ -325,14 +375,14 @@ Encrypts arbitrary data with specified algorithm for each specified recipient.
             "algorithm": "ChaCha20Poly1305",
             "sourcePublicKey": "0x209f...d08f",
 	      "recipientPublicKey": "0x6e74...4e95",
-            "data": "ZW5jRGF0YTE=", 
+            "data": "ZW5jRGF0YTE=",
             "nonce": "bm9uY2Ux"
-           }, 
+           },
            {
             "algorithm": "ChaCha20Poly1305",
             "sourcePublicKey": "0x209f...d08f",
             "recipientPublicKey": "0x6e74...4e95",
-            "data":"ZW5jRGF0YTI=", 
+            "data":"ZW5jRGF0YTI=",
             "nonce":"bm9uY2Uy"
            }
         ]
@@ -341,16 +391,22 @@ Encrypts arbitrary data with specified algorithm for each specified recipient.
 ```
 
 ### ever_decryptData
+
 Decrypts encrypted data.
+
 ##### Parameters:
+
     1. algorithm - encryption algorithm. Currently supports only “ChaCha20Poly1305”
     2. recipientPublicKey - hex encoded recipient public key
     3. data - base64 encoded data
     4. nonce - base64 encoded nonce
 
 ##### Returns:
+
     1. data - base64 encoded decrypted data
+
 ##### Example:
+
 ```
 // Request
 {
@@ -361,11 +417,11 @@ Decrypts encrypted data.
        "sourceAddress": "0:695e42...b8d",
        "algorithm": "ChaCha20Poly1305",
        "recipientPublicKey": "0x6e74...4e95",
-       "data": "ZW5jRGF0YTE=", 
+       "data": "ZW5jRGF0YTE=",
        "nonce": "bm9uY2Ux"
   }
 }
- 
+
 // Result
 {
   "id": 1,
@@ -375,4 +431,3 @@ Decrypts encrypted data.
    }
 };
 ```
-

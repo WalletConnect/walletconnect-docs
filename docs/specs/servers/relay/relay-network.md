@@ -10,7 +10,6 @@ Relay Network is a publish-subscribe network that routes messages between client
 - Relay Servers will cache messages that are undelivered until TTL is reached.
 - Relay Servers will exchange messages with other peers if they are not connected to a subscribed client.
 
-
 ## Concepts
 
 - Topic is a string identifier that is used by clients to publish and subscribe to messages.

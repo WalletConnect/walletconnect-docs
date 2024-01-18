@@ -8,7 +8,7 @@ const LargeContainer = ({ href, name, icon, description, fit, isWhite }) => {
         <img src={icon} alt={name} />
       ) : (
         <div className="home__large-container--nofit">
-		<img src={icon} alt={name} className={isWhite ? `white` : undefined} />
+          <img src={icon} alt={name} className={isWhite ? `white` : undefined} />
           <img className={`blur ${isWhite ? `white` : undefined}`} src={icon} alt={name} />
         </div>
       )}

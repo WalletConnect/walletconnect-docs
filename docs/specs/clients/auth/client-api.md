@@ -16,7 +16,7 @@ abstract class Client {
   // query all pending requests
   public abstract getPendingRequests(): Promise<Record<number, PendingRequest>>;
 
-  // format payload to message string 
+  // format payload to message string
   public abstract formatMessage(payload: PayloadParams, iss: string): Promise<string>;
 
   // ---------- Events ----------------------------------------------- //

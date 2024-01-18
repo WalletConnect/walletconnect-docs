@@ -5,6 +5,7 @@
 You can add your own custom chain to the `W3MChainPresets.chains` object **before initialization**:
 
 Like so...
+
 ```dart
 W3MChainPresets.chains.putIfAbsent('<chainID>', () => <Your W3MChainInfo>);
 await _w3mService.init();

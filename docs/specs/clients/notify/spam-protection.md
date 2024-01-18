@@ -19,7 +19,6 @@ additional configuration.
 2. Permissioned dapps: Initially, only vetted partners are allowed in the
    program via [WalletConnect Cloud](https://cloud.walletconnect.com).
 
-
 ## User-Triggered Protection
 
 These spam protections come prepackaged with the Notify SDK but require action by

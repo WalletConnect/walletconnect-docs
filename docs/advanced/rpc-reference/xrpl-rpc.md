@@ -9,18 +9,21 @@ description: XRPL JSON-RPC Methods
 This method is used to sign and submit a transaction to the XRP Ledger (XRPL). Every transaction has the same set of [common fields][XRPL Transaction Common Fields], plus additional fields based on the [transaction type][XRPL Transaction Types]. It is expected that the dapp provides all transaction fields defined as `required`, but not necessarily the `auto-fillable`.
 
 ### Parameters
-* `Object`
-    * `tx_json` : `Object` - _(Required)_ JSON specification of the transaction.
-    * `autofill` : `Boolean` - _(Optional)_ Defaults to `true`. Set to `false` to skip auto-filling parameters.
-    * `submit` : `Boolean` - _(Optional)_ Defaults to `true`. Set to `false` to skip submitting the transaction.
+
+- `Object`
+  - `tx_json` : `Object` - _(Required)_ JSON specification of the transaction.
+  - `autofill` : `Boolean` - _(Optional)_ Defaults to `true`. Set to `false` to skip auto-filling parameters.
+  - `submit` : `Boolean` - _(Optional)_ Defaults to `true`. Set to `false` to skip submitting the transaction.
 
 Please note that if you set `submit` to `false`, your dapp will need to encode the signed `tx_json` to the required [binary format][XRPL Serialization], before you can send it as `tx_blob` to an XRPL node using the [submit][XRPL Signed Transaction] command.
 
 ### Returns
-* `Object` 
-    * `tx_json` : `Object` - JSON specification of the complete transaction as signed, including any fields that were auto-filled.
+
+- `Object`
+  - `tx_json` : `Object` - JSON specification of the complete transaction as signed, including any fields that were auto-filled.
 
 ### Example
+
 The example below specifies a simple DEX order for selling 15,000 XRP in exchange for 7,072.8 USD.
 
 ```javascript
@@ -79,19 +82,22 @@ The example below specifies a simple DEX order for selling 15,000 XRP in exchang
 This method is used to add a signature to a [multi-signed][XRPL Multisign] transaction. The same common fields and transaction types as single-signed transactions are supported.
 
 ### Parameters
-* `Object`
-    * `tx_signer` : `String` - _(Required)_ The XRPL address of the signer.
-    * `tx_json` : `Object` -  _(Required)_ JSON specification of the transaction.
-    * `autofill` : `Boolean` - _(Optional)_ Defaults to `false`. Set to `true` to auto-fill parameters.
-    * `submit` : `Boolean` - _(Optional)_ Defaults to `false`. Set to `true` to submit the transaction.
+
+- `Object`
+  - `tx_signer` : `String` - _(Required)_ The XRPL address of the signer.
+  - `tx_json` : `Object` - _(Required)_ JSON specification of the transaction.
+  - `autofill` : `Boolean` - _(Optional)_ Defaults to `false`. Set to `true` to auto-fill parameters.
+  - `submit` : `Boolean` - _(Optional)_ Defaults to `false`. Set to `true` to submit the transaction.
 
 Please note that `autofill` and `submit` both defaults to `false`, since explicit transaction specification and controlled submission is typically needed for multi-signed transactions.
 
 ### Returns
-* `Object` 
-    * `tx_json` : `Object` - JSON specification of the complete transaction as signed, including any fields that were auto-filled.
+
+- `Object`
+  - `tx_json` : `Object` - JSON specification of the complete transaction as signed, including any fields that were auto-filled.
 
 ### Example
+
 The example below specifies a multi-signed payment transaction, already signed ([in serial][XRPL Multisign Methods]) by 3 of 4 required signers. Since only one more signature is required, the optional `submit` parameter has been set to `true`.
 
 ```javascript

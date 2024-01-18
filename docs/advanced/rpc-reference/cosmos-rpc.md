@@ -126,7 +126,7 @@ This method returns a signature for the provided document to be signed targeting
     		1.2.2. `chain_id` : `STRING` - identifier of blockchain
     		1.2.1. `account_number` : `STRING` - blockchain account number
     		1.2.3. `sequence` : `STRING` - blockchain account sequence
-				1.2.4. `memo` : `STRING` - amino message memo
+    			1.2.4. `memo` : `STRING` - amino message memo
     		1.2.5. `msgs` : `Array` - array of amino messages to be signed:
     			1.2.5.1. `Object` - amino message object:
     				1.2.5.1.1. - `type` : `STRING` - amino message type
@@ -150,8 +150,8 @@ This method returns a signature for the provided document to be signed targeting
     		1.2.2. `chain_id` : `STRING` - identifier of blockchain
     		1.2.1. `account_number` : `STRING` - blockchain account number
     		1.2.3. `sequence` : `STRING` - blockchain account sequence
-				1.2.4. `memo` : `STRING` - amino message memo
-				1.2.5. `msgs` : `Array` - array of amino messages to be signed:
+    			1.2.4. `memo` : `STRING` - amino message memo
+    			1.2.5. `msgs` : `Array` - array of amino messages to be signed:
     			1.2.5.1. `Object` - amino message object:
     				1.2.5.1.1. - `type` : `STRING` - amino message type
     				1.2.5.1.2. - `value` : `STRING` - amino message value

@@ -23,7 +23,7 @@ const metadata = {
 }
 
 const chains = [mainnet, arbitrum]
-const wagmiConfig = defaultWagmiConfig({ 
+const wagmiConfig = defaultWagmiConfig({
   chains, // required
   projectId, // required
   metadata, // required
@@ -32,7 +32,7 @@ const wagmiConfig = defaultWagmiConfig({
   enableEIP6963: true, // Optional - true by default
   enableCoinbase: true, // Optional - true by default
   /* highlight-add-start */
-  enableEmail: true, // Optional - false by default
+  enableEmail: true // Optional - false by default
   /* highlight-add-end */
 })
 
@@ -44,7 +44,7 @@ const modal = createWeb3Modal({ wagmiConfig, projectId, chains })
 <TabItem value="custom" label="Custom">
 
 ```ts
-import { 
+import {
   createWeb3Modal
   /* highlight-add-start */
   emailConnector

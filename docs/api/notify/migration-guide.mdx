@@ -14,7 +14,7 @@ import CloudBanner from '../../components/CloudBanner'
 
 <PlatformTabItem value="web">
 
-## Migrating from 0.14.x to 0.15.x 
+## Migrating from 0.14.x to 0.15.x
 
 There is a breaking change with registering between the minor versions.
 
@@ -23,8 +23,8 @@ There is a breaking change with registering between the minor versions.
 - Instead of calling `register()` immediately, one must first prepare a registration via `prepareRegistration()`
 - After getting the `registerParams` and a `message`, the message must be signed and the signature passed to `register()` along with `registerParams`.
 
-
 ### Old
+
 ```javascript
 const account = `eip155:1:0x63Be2c680685d2A9620c11b0068291261aa62d76`
 const onSign = (message: string) => ethersWallet.signMessage(message)
@@ -33,12 +33,12 @@ await notifyClient.register({
   account,
   onSign,
   domain: 'com.example.app.rn', // pass your app's bundle identifier.
-  isLimited: false 
+  isLimited: false
 })
 ```
 
-
 ### New Equivalent
+
 ```javascript
 const account = `eip155:1:0x63Be2c680685d2A9620c11b0068291261aa62d76`
 const domain =  'app.mydomain.com', // pass the domain (i.e. the hostname) where your dapp is hosted.
@@ -60,7 +60,6 @@ await notifyClient.register({
   signature,
 })
 ```
-
 
 </PlatformTabItem>
 

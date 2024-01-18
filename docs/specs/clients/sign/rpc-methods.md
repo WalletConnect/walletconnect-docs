@@ -195,18 +195,22 @@ true
 Sends a CAIP-27 request to the peer client. The client should immediately reject the request and respond an error if the target session permissions doesn't include the requested method or chain ID.
 
 ##### Expiry
+
 Param `Expiry` is an optional Unix timestamp. Sets the time until which the responder can respond to this request. If request is expired responder should respond with a specific error code.
 
 If this parameter is not specified, the request is considered indefinite.
 
 ##### Expiry validation
+
 `Expiry` should be between `.now() + MIN_INTERVAL` and `.now() + MAX_INTERVAL` where:
+
 - `MIN_INTERVAL` is 300 (5 mins)
 - `MAX_INTERVAL` is 604800 (7 days)
 
 If expiry validation failed wallet should respond with `.sessionRequestExpired (code 8000)` error
 
 ##### TTL extension
+
 When DApp is setting `expiry` params, client should insure that Relay Publish payload method `ttl` fit `expiry` value. Otherwise request `ttl` must be increased by the required value. Check [Relay Publish payload method](../../servers/relay/relay-server-rpc.md)
 
 **Request**

@@ -52,7 +52,7 @@ const siweConfig = createSIWEConfig({
       // Use your SIWE server to verify if the message and the signature are valid
       // Your back-end will tipically rely on SiweMessage(message).validate(signature)
       const isValid = await validateMessage({ message, signature })
- 
+
       return isValid
     } catch (error) {
       return false
@@ -84,6 +84,7 @@ createWeb3Modal({
 ```
 
 ### SIWE Config reference
+
 ```ts
 interface SIWEConfig {
   // Required
@@ -172,4 +173,3 @@ Users will be signed out and redirected to the SIWE view to sign a new message i
 #### signOutOnNetworkChange `boolean` - defaults to true
 
 Users will be signed out and redirected to the SIWE view to sign a new message in order to keep the SIWE session in sync with the connected account/network.
-

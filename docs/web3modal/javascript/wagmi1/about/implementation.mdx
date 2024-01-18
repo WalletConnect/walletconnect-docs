@@ -1,4 +1,3 @@
-
 import Tabs from '@theme/Tabs'
 import TabItem from '@theme/TabItem'
 
@@ -53,10 +52,10 @@ import { WalletConnectConnector } from '@wagmi/core/connectors/walletConnect'
 const projectId = 'YOUR_PROJECT_ID'
 
 // 2. Configure wagmi client
-const { chains, publicClient } = configureChains([mainnet], [
-  walletConnectProvider({ projectId }),
-  publicProvider()
-])
+const { chains, publicClient } = configureChains(
+  [mainnet],
+  [walletConnectProvider({ projectId }), publicProvider()]
+)
 
 const metadata = {
   name: 'Web3Modal',
@@ -93,7 +92,6 @@ The provided code utilizes [Wagmi](https://1.x.wagmi.sh/), a JavaScript library 
 
 Additionally, there's a `publicProvider` for reading blockchain data through public nodes like Infura. The `walletConnectProvider`, which operates in a manner akin to the public provider but employs the [Blockchain API](https://docs.walletconnect.com/cloud/blockchain-api), is additionally accessible. The `WagmiConfig` component shares `wagmiConfig` with child components.
 :::
-
 
 </TabItem>
 </Tabs>

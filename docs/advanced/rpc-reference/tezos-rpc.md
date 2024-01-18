@@ -62,7 +62,7 @@ This method returns a hash for the provided operations. They will be signed by t
                 1.2.1.5. `gas_limit` : `STRING` - (optional) integer of the gas_limit
                 1.2.1.6. `storage_limit` : `STRING` - (optional) integer of the storage_limit
                 1.2.1.7. `parameters` : `Object` - (optional) contract call data
-                
+
 Note: All [RPC Operations](https://github.com/ecadlabs/taquito/blob/4dc6c391047b977b11eb92c7f5a5bc508ca32f01/packages/taquito/src/operations/types.ts#L553C13-L567) are valid. The above definition describes only the most common operation type.
 
 ### Returns

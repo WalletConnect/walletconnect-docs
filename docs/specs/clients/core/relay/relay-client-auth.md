@@ -30,11 +30,10 @@ Client authentication is described with a did-jwt using the following claims:
 
 `exp` - timestamp when jwt must expire
 
-`iss` - did:key of client id key. 
+`iss` - did:key of client id key.
 
 `aud` - relay server URL
 
 `sub` - random nonce (unique per connection)
 
 `act` - description of action intent. Must be equal to "client_auth"
-

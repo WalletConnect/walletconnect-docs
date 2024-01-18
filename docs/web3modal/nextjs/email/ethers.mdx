@@ -7,7 +7,7 @@ You can start integrating Email Login into Web3Modal SDK using either **default*
 <TabItem value="default" label="Default">
 
 ```tsx
-"use client"
+'use client'
 
 import { createWeb3Modal, defaultConfig } from '@web3modal/ethers/react'
 
@@ -32,8 +32,8 @@ const metadata = {
 }
 
 createWeb3Modal({
-  ethersConfig: defaultConfig({ 
-    metadata, 
+  ethersConfig: defaultConfig({
+    metadata,
     /* highlight-add-start */
     enableEmail: true
     /* highlight-add-end */
@@ -43,7 +43,7 @@ createWeb3Modal({
 })
 
 export function Web3ModalProvider({ children }) {
-  return children;
+  return children
 }
 ```
 
@@ -83,7 +83,7 @@ createWeb3Modal({
     enableInjected: true,
     enableCoinbase: true,
     /* highlight-add-start */
-    enableEmail: true 
+    enableEmail: true
     /* highlight-add-end */
     rpcUrl: '...' // used for the Coinbase SDK
   }),
