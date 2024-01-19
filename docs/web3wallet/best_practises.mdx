@@ -36,7 +36,15 @@ Web3Wallet.pair(pairingParams,
 </PlatformTabItem>
 
 <PlatformTabItem value="ios">
-// TODO add how to pair with web3wallet
+```swift
+let uri = WalletConnectURI(string: urlString)
+
+if let uri {
+    Task {
+        try await Web3Wallet.instance.pair(uri: uri)
+    }
+}
+```
 </PlatformTabItem>
 
 </PlatformTabs>
@@ -69,14 +77,20 @@ CoreClient.setDelegate(coreDelegate)
 </PlatformTabItem>
 
 <PlatformTabItem value="ios">
-// TODO add how to consume pairing state 
+```swift
+Web3Wallet.instance.pairingStatePublisher
+    .receive(on: DispatchQueue.main)
+    .sink { [weak self] isPairing in
+    self?.showPairingLoading = isPairing
+}.store(in: &disposeBag)
+```
 </PlatformTabItem>
 
 </PlatformTabs>
 
 ### Pairing Expiry
 
-A pairing expiry event is triggered whenever a pairing is expired. The expiry for inactive pairing is 5 mins, whereas for active pairing is 30 days. A pairing becomes active when a session proposal is received and use successfully approves it. This event helps to know when given pairing expires and update UI accordingly.
+A pairing expiry event is triggered whenever a pairing is expired. The expiry for inactive pairing is 5 mins, whereas for active pairing is 30 days. A pairing becomes active when a session proposal is received and user successfully approves it. This event helps to know when given pairing expires and update UI accordingly.
 
 <PlatformTabs
 	groupId="w3w"
@@ -101,7 +115,12 @@ CoreClient.setDelegate(coreDelegate)
 </PlatformTabItem>
 
 <PlatformTabItem value="ios">
-// TODO add how to consume pairing expiry
+Web3Wallet.instance.pairingExpirationPublisher
+    .receive(on: DispatchQueue.main)
+    .sink { pairing in
+    guard !pairing.active else { return }
+    // let user know that pairing has expired
+}.store(in: &publishers)
 </PlatformTabItem>
 
 </PlatformTabs>
