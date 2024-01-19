@@ -115,12 +115,14 @@ CoreClient.setDelegate(coreDelegate)
 </PlatformTabItem>
 
 <PlatformTabItem value="ios">
+```Swift
 Web3Wallet.instance.pairingExpirationPublisher
     .receive(on: DispatchQueue.main)
     .sink { pairing in
     guard !pairing.active else { return }
     // let user know that pairing has expired
 }.store(in: &publishers)
+```
 </PlatformTabItem>
 
 </PlatformTabs>
