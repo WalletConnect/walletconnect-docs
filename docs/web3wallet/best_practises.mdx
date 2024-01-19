@@ -180,7 +180,25 @@ Session reject
 </PlatformTabItem>
 
 <PlatformTabItem value="ios">
-// TODO add how to await for Relay acknowledgement for approve and reject proposal
+Session Approve
+```swift
+do {
+    try await Web3Wallet.instance.approve(proposalId: proposal.id, namespaces: sessionNamespaces, sessionProperties: proposal.sessionProperties)
+    // Update UI, remove loader
+} catch {
+    // present error
+}
+```
+
+Session Reject
+```swift
+do {
+    try await Web3Wallet.instance.reject(proposalId: proposal.id, reason: .userRejected)
+    // Update UI, remove loader
+} catch {
+    // present error
+}
+```
 </PlatformTabItem>
 
 </PlatformTabs>
@@ -211,7 +229,11 @@ Web3Wallet.setWalletDelegate(walletDelegate)
 </PlatformTabItem>
 
 <PlatformTabItem value="ios">
-// TODO add how to consume proposal expiry event
+```swift
+Web3Wallet.instance.sessionProposalExpirationPublisher.sink { _ in
+    // let user know that session proposal has expired, update UI
+}.store(in: &publishers)
+```
 </PlatformTabItem>
 
 </PlatformTabs>
@@ -258,7 +280,14 @@ Web3Wallet.respondSessionRequest(Wallet.Params.SessionRequestResponse,
 </PlatformTabItem>
 
 <PlatformTabItem value="ios">
-// TODO add how to await for Relay acknowledgement for approve and reject request
+```swift
+do {
+    try await Web3Wallet.instance.respond(requestId: request.id, signature: signature, from: account)
+    // update UI -> remove the loader
+} catch {
+    // present error to the user
+}
+```
 </PlatformTabItem>
 
 </PlatformTabs>
@@ -289,7 +318,11 @@ Web3Wallet.setWalletDelegate(walletDelegate)
 </PlatformTabItem>
 
 <PlatformTabItem value="ios">
-// TODO add how to consume session expiry event
+```swift
+Web3Wallet.instance.requestExpirationPublisher.sink { _ in
+    // let user know that request has expired
+}.store(in: &publishers)
+```
 </PlatformTabItem>
 
 </PlatformTabs>
@@ -330,7 +363,8 @@ Web3Wallet.setWalletDelegate(walletDelegate)
 </PlatformTabItem>
 
 <PlatformTabItem value="ios">
-// TODO add how to consume connection state event
+```swift
+```
 </PlatformTabItem>
 
 </PlatformTabs>
