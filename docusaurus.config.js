@@ -70,7 +70,6 @@ const config = {
     {
       markprompt: {
         projectKey,
-        defaultView: 'chat',
         trigger: {
           floating: false,
           placeholder: 'Search or Ask AI'
