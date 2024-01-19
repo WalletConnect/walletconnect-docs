@@ -47,9 +47,9 @@ createWeb3Modal({ wagmiConfig, projectId, chains })
 
 export function Web3Modal({ children }) {
   return (
-    <WagmiConfig config={wagmiConfig}>
+    <WagmiProvider config={wagmiConfig}>
       <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
-    </WagmiConfig>
+    </WagmiProvider>
   )
 }
 ```
@@ -103,9 +103,9 @@ createWeb3Modal({ wagmiConfig, projectId, chains })
 
 export function Web3Modal({ children }) {
   return (
-    <WagmiConfig config={wagmiConfig}>
+    <WagmiProvider config={wagmiConfig}>
       <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
-    </WagmiConfig>
+    </WagmiProvider>
   )
 }
 ```
