@@ -934,6 +934,7 @@ article img {
 [data-theme='light'] .cloud__wrapper--special {
   background: linear-gradient(135deg, hsla(161.45, 25%, 88%, 1) 0%, hsla(161.45, 66%, 40%, 1) 100%);
   box-shadow: none;
+  border: none;
 }
 
 [data-theme='light'] .cloud__wrapper .cloud__text-container p {
@@ -1406,6 +1407,7 @@ article img {
 [data-theme='light'] .header-cloud-link {
   background: rgba(0, 0, 0, 0.1);
   box-shadow: none;
+  border: none;
 }
 
 [data-theme='light'] .header-cloud-link:hover {
