@@ -926,8 +926,37 @@ article img {
 }
 
 .cloud__wrapper--special {
-  background: linear-gradient(135deg, hsla(250, 25%, 10%, 1) 0%, hsla(250, 45%, 50%, 1) 100%);
-  border-color: hsla(250, 15%, 33%, 1);
+  background: linear-gradient(135deg, hsla(161.45, 25%, 10%, 1) 0%, hsla(161.45, 66%, 16%, 1) 100%);
+  border: none;
+  box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.1);
+}
+
+[data-theme='light'] .cloud__wrapper--special {
+  background: linear-gradient(135deg, hsla(161.45, 25%, 88%, 1) 0%, hsla(161.45, 66%, 40%, 1) 100%);
+  box-shadow: none;
+}
+
+[data-theme='light'] .cloud__wrapper .cloud__text-container p {
+  color: #2a2b2c;
+  max-width: 30rem;
+}
+
+[data-theme='light'] .cloud__wrapper .cloud__text-container h2 {
+  color: #1a1b1c;
+  margin-top: 0 !important;
+}
+
+[data-theme='light'] .cloud__wrapper a {
+  border: 1px solid var(--ifm-color-primary-lightest);
+  border: none;
+  color: white;
+  background: rgba(0, 0, 0, 0.15);
+  box-shadow: rgba(255, 255, 255, 0.1) 0px 1px 1px 0px inset,
+    rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+  min-width: 11rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /* End - Cloud Banner */
@@ -1360,11 +1389,12 @@ article img {
 .header-cloud-link {
   height: 1.675rem;
   padding: 0 0.75rem;
-  border-radius: 1000rem;
+  border-radius: 0.25rem;
   background: var(--ifm-hover-overlay);
   display: flex;
   align-items: center;
-  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+  box-shadow: rgba(255, 255, 255, 0.1) 0px 1px 1px 0px inset,
+    rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
   font-size: 0.875rem;
   margin-right: 1rem;
 }
@@ -1374,9 +1404,8 @@ article img {
 }
 
 [data-theme='light'] .header-cloud-link {
-  background: #3a3b3c;
-  color: white;
-  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.15);
+  background: rgba(0, 0, 0, 0.1);
+  box-shadow: none;
 }
 
 [data-theme='light'] .header-cloud-link:hover {
