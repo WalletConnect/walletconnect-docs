@@ -13,9 +13,10 @@ Create a new file called `context/Web3Modal.tsx` or `context/Web3Modal.jsx` (out
 ```tsx
 'use client'
 
+import { ReactNode } from 'react';
 import { createWeb3Modal, defaultWagmiConfig } from '@web3modal/wagmi/react'
 
-import { cookieStorage, createStorage, WagmiProvider } from 'wagmi'
+import { cookieStorage, createStorage, State, WagmiProvider } from 'wagmi'
 import { arbitrum, mainnet } from 'wagmi/chains'
 
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
