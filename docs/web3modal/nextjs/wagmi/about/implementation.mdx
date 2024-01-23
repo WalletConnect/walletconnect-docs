@@ -11,30 +11,29 @@ Default mode will implement WalletConnect, Browser Wallets (injected) and Coinba
 Create a new file called `context/Web3Modal.tsx` or `context/Web3Modal.jsx` (outside your app directory) and set up the following configuration, making sure that all functions are called **outside** any React component to avoid unwanted rerenders.
 
 ```tsx
-'use client'
+'use client';
 
-import { createWeb3Modal, defaultWagmiConfig } from '@web3modal/wagmi/react'
-
-import { cookieStorage, createStorage, WagmiProvider } from 'wagmi'
-import { arbitrum, mainnet } from 'wagmi/chains'
-
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { type State } from '@wagmi/core';
+import { createWeb3Modal, defaultWagmiConfig } from '@web3modal/wagmi/react';
+import { type Chain } from 'viem';
+import { arbitrum, mainnet } from 'viem/chains';
+import { WagmiProvider, cookieStorage, createStorage } from 'wagmi';
 // 0. Setup queryClient
-const queryClient = new QueryClient()
+const queryClient = new QueryClient();
 
 // 1. Get projectId at https://cloud.walletconnect.com
-const projectId = 'YOUR_PROJECT_ID'
+const projectId = '<YOUR_PROJECT_ID>';
 
 // 2. Create wagmiConfig
 const metadata = {
   name: 'Web3Modal',
   description: 'Web3Modal Example',
   url: 'https://web3modal.com',
-  icons: ['https://avatars.githubusercontent.com/u/37784886']
-}
-
-const chains = [mainnet, arbitrum]
+  icons: ['https://avatars.githubusercontent.com/u/37784886'],
+  verifyUrl: ''
+};
+const chains: [Chain, ...Chain[]] = [mainnet, arbitrum];
 const wagmiConfig = defaultWagmiConfig({
   chains, // required
   projectId, // required
@@ -47,23 +46,23 @@ const wagmiConfig = defaultWagmiConfig({
   enableInjected: true, // Optional - true by default
   enableEIP6963: true, // Optional - true by default
   enableCoinbase: true // Optional - true by default
-})
+});
 
 // 3. Create modal
-createWeb3Modal({ wagmiConfig, projectId, chains })
+createWeb3Modal({ wagmiConfig, projectId, chains });
 
 export function Web3Modal({
   children,
   initialState
 }: {
-  children: ReactNode
-  initialState?: State
+  children: React.ReactNode;
+  initialState?: State;
 }) {
   return (
     <WagmiProvider config={wagmiConfig} initialState={initialState}>
       <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
     </WagmiProvider>
-  )
+  );
 }
 ```
 
