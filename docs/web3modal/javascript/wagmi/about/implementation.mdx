@@ -28,7 +28,7 @@ const metadata = {
 }
 
 const chains = [mainnet, arbitrum]
-export const wagmiConfig = defaultWagmiConfig({
+export const config = defaultWagmiConfig({
   chains, // required
   projectId, // required
   metadata, // required
@@ -39,10 +39,10 @@ export const wagmiConfig = defaultWagmiConfig({
   ...wagmiOptions // Optional - Override createConfig parameters
 })
 
-reconnect(wagmiConfig)
+reconnect(config)
 
 // 3. Create modal
-const modal = createWeb3Modal({ wagmiConfig, projectId })
+const modal = createWeb3Modal({ wagmiConfig: config, projectId })
 ```
 
 </TabItem>
@@ -67,7 +67,7 @@ const metadata = {
   icons: ['https://avatars.githubusercontent.com/u/37784886']
 }
 
-const wagmiConfig = createConfig({
+const config = createConfig({
   chains: [mainnet, sepolia],
   transports: {
     [mainnet.id]: http(),
@@ -83,10 +83,10 @@ const wagmiConfig = createConfig({
   ]
 })
 
-reconnect(wagmiConfig)
+reconnect(config)
 
 // 3. Create modal
-const modal = createWeb3Modal({ wagmiConfig, projectId })
+const modal = createWeb3Modal({ wagmiConfig: config, projectId })
 ```
 
 </TabItem>

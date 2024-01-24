@@ -71,7 +71,7 @@ In your `App.vue` file set up the following configuration.
     icons: ['https://avatars.githubusercontent.com/u/37784886']
   }
 
-  const wagmiConfig = createConfig({
+  const config = createConfig({
     chains: [mainnet, sepolia],
     transports: {
       [mainnet.id]: http(),
@@ -87,10 +87,10 @@ In your `App.vue` file set up the following configuration.
     ]
   })
 
-  reconnect(wagmiConfig)
+  reconnect(config)
 
   // 3. Create modal
-  createWeb3Modal({ wagmiConfig, projectId })
+  createWeb3Modal({ wagmiConfig: config, projectId })
 </script>
 
 <template> // Rest of your app ... </template>

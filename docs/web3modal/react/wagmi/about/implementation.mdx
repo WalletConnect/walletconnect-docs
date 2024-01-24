@@ -33,7 +33,7 @@ const metadata = {
 }
 
 const chains = [mainnet, arbitrum]
-const wagmiConfig = defaultWagmiConfig({
+const config = defaultWagmiConfig({
   chains, // required
   projectId, // required
   metadata, // required
@@ -45,11 +45,11 @@ const wagmiConfig = defaultWagmiConfig({
 })
 
 // 3. Create modal
-createWeb3Modal({ wagmiConfig, projectId, chains })
+createWeb3Modal({ wagmiConfig: config, projectId, chains })
 
 export function Web3Modal({ children }) {
   return (
-    <WagmiProvider config={wagmiConfig}>
+    <WagmiProvider config={config}>
       <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
     </WagmiProvider>
   )
@@ -88,7 +88,7 @@ const metadata = {
   icons: ['https://avatars.githubusercontent.com/u/37784886']
 }
 
-const wagmiConfig = createConfig({
+const config = createConfig({
   chains: [mainnet, sepolia],
   transports: {
     [mainnet.id]: http(),
@@ -105,11 +105,11 @@ const wagmiConfig = createConfig({
 })
 
 // 3. Create modal
-createWeb3Modal({ wagmiConfig, projectId })
+createWeb3Modal({ wagmiConfig: config, projectId })
 
 export function Web3Modal({ children }) {
   return (
-    <WagmiProvider config={wagmiConfig}>
+    <WagmiProvider config={config}>
       <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
     </WagmiProvider>
   )
