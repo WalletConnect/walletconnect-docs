@@ -11,7 +11,8 @@ Default mode will implement WalletConnect, Browser Wallets (injected) and Coinba
 On top of your app set up the following configuration, making sure that all functions are called **outside** any React component to avoid unwanted rerenders.
 
 ```tsx
-import { createWeb3Modal, defaultWagmiConfig } from '@web3modal/wagmi/react'
+import { createWeb3Modal } from '@web3modal/wagmi/react'
+import { defaultWagmiConfig } from '@web3modal/wagmi/react/config'
 
 import { WagmiProvider } from 'wagmi'
 import { arbitrum, mainnet } from 'wagmi/chains'
@@ -27,32 +28,37 @@ const projectId = 'YOUR_PROJECT_ID'
 const metadata = {
   name: 'Web3Modal',
   description: 'Web3Modal Example',
-  url: 'https://web3modal.com',
+  url: 'https://web3modal.com', // origin must match your domain & subdomain
   icons: ['https://avatars.githubusercontent.com/u/37784886']
 }
 
 const chains = [mainnet, arbitrum]
-const wagmiConfig = defaultWagmiConfig({
+const config = defaultWagmiConfig({
   chains, // required
   projectId, // required
   metadata, // required
   enableWalletConnect: true, // Optional - true by default
   enableInjected: true, // Optional - true by default
   enableEIP6963: true, // Optional - true by default
-  enableCoinbase: true // Optional - true by default
+  enableCoinbase: true, // Optional - true by default
+  ...wagmiOptions // Optional - Override createConfig parameters
 })
 
 // 3. Create modal
-createWeb3Modal({ wagmiConfig, projectId, chains })
+createWeb3Modal({ wagmiConfig: config, projectId, chains })
 
 export function Web3Modal({ children }) {
   return (
-    <WagmiProvider config={wagmiConfig}>
+    <WagmiProvider config={config}>
       <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
     </WagmiProvider>
   )
 }
 ```
+
+:::info
+Notice that `defaultWagmiConfig` is now imported from `'@web3modal/wagmi/react/config'`
+:::
 
 </TabItem>
 <TabItem value="custom" label="Custom">
@@ -78,11 +84,11 @@ const projectId = 'YOUR_PROJECT_ID'
 const metadata = {
   name: 'Web3Modal',
   description: 'Web3Modal Example',
-  url: 'https://web3modal.com',
+  url: 'https://web3modal.com', // origin must match your domain & subdomain
   icons: ['https://avatars.githubusercontent.com/u/37784886']
 }
 
-const wagmiConfig = createConfig({
+const config = createConfig({
   chains: [mainnet, sepolia],
   transports: {
     [mainnet.id]: http(),
@@ -99,11 +105,11 @@ const wagmiConfig = createConfig({
 })
 
 // 3. Create modal
-createWeb3Modal({ wagmiConfig, projectId, chains })
+createWeb3Modal({ wagmiConfig: config, projectId })
 
 export function Web3Modal({ children }) {
   return (
-    <WagmiProvider config={wagmiConfig}>
+    <WagmiProvider config={config}>
       <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
     </WagmiProvider>
   )
