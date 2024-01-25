@@ -69,7 +69,11 @@ const queryClient = new QueryClient()
 if (!projectId) throw new Error('Project ID is not defined')
 
 // Create modal
-createWeb3Modal({ wagmiConfig: config, projectId })
+createWeb3Modal({
+  wagmiConfig: config,
+  projectId,
+  enableAnalytics: true // Optional - true by default
+})
 
 export function Web3Modal({
   children,
@@ -184,7 +188,11 @@ const queryClient = new QueryClient()
 if (!projectId) throw new Error('Project ID is not defined')
 
 // Create modal
-createWeb3Modal({ wagmiConfig: config, projectId })
+createWeb3Modal({
+  wagmiConfig: config,
+  projectId,
+  enableAnalytics: true // Optional - true by default
+})
 
 export function Web3Modal({
   children,

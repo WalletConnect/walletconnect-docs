@@ -28,7 +28,12 @@ const metadata = {
 }
 
 const chains = [mainnet, arbitrum]
-const wagmiConfig = defaultWagmiConfig({ chains, projectId, metadata })
+const wagmiConfig = defaultWagmiConfig({
+  chains,
+  projectId,
+  metadata,
+  enableAnalytics: true // Optional - true by default
+})
 
 // 3. Create modal
 createWeb3Modal({ wagmiConfig, projectId, chains })
@@ -82,7 +87,12 @@ const wagmiConfig = createConfig({
 })
 
 // 3. Create modal
-createWeb3Modal({ wagmiConfig, projectId, chains })
+createWeb3Modal({
+  wagmiConfig,
+  projectId,
+  chains,
+  enableAnalytics: true // Optional - true by default
+})
 
 export default function App() {
   return <WagmiConfig config={wagmiConfig}>// Rest of your app...</WagmiConfig>

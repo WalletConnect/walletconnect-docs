@@ -37,7 +37,9 @@ In your `App.vue` file set up the following configuration.
   createWeb3Modal({
     ethersConfig: defaultConfig({ metadata }),
     chains: [mainnet],
-    projectId
+    projectId,
+
+    enableAnalytics: true // Optional - true by default
   })
 </script>
 
@@ -83,7 +85,8 @@ In your `App.vue` file set up the following configuration.
       rpcUrl: '...' // used for the Coinbase SDK
     }),
     chains: [mainnet],
-    projectId
+    projectId,
+    enableAnalytics: true // Optional - true by default
   })
 </script>
 

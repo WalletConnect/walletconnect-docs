@@ -38,7 +38,8 @@ const metadata = {
 createWeb3Modal({
   ethersConfig: defaultConfig({ metadata, enableEmail: true }),
   chains: [mainnet],
-  projectId
+  projectId,
+  enableAnalytics: true // Optional - true by default
 })
 
 export function Web3ModalProvider({ children }) {
@@ -109,7 +110,8 @@ createWeb3Modal({
     rpcUrl: '...' // used for the Coinbase SDK
   }),
   chains: [mainnet],
-  projectId
+  projectId,
+  enableAnalytics: true // Optional - true by default
 })
 
 export function Web3Modal({ children }) {
