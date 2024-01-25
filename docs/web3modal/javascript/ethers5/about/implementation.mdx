@@ -36,7 +36,8 @@ const metadata = {
 const modal = createWeb3Modal({
   ethersConfig: defaultConfig({ metadata }),
   chains: [mainnet],
-  projectId
+  projectId,
+  enableAnalytics: true // Optional - defaults to your Cloud configuration
 })
 ```
 
