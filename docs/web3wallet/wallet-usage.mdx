@@ -923,7 +923,7 @@ We recommend using the `getSDKError` function from the `@walletconnect/utils` li
 </PlatformTabItem>
 <PlatformTabItem value="ios">
 
-<!-- TODO: -->
+try await Web3Wallet.instance.reject(requestId: request.id)
 
 </PlatformTabItem>
 <PlatformTabItem value="android">
@@ -1680,12 +1680,12 @@ public var sessionResponsePublisher: AnyPublisher<Response, Never>
 
 #### Register Device Token
 
-To register a wallet to receive WalletConnect push notifications, call `Web3Wallet.registerPushClient` and pass the device token received from the `didRegisterForRemoteNotificationsWithDeviceToken` method in the `AppDelegate`.
+To register a wallet to receive WalletConnect push notifications, call `register` method and pass the device token received from the `didRegisterForRemoteNotificationsWithDeviceToken` method in the `AppDelegate`.
 
 ```swift
-public func registerPushClient(deviceToken: Data) async throws {
-    try await pushClient.register(deviceToken: deviceToken)
-}
+
+Web3Wallet.instance.register(deviceToken: deviceToken, enableEncrypted: true)
+
 ```
 
 </PlatformTabItem>
