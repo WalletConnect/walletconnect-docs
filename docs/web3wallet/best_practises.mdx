@@ -361,9 +361,9 @@ While approving or rejecting a session request the following error might occur:
 - Timeout
     - It happens when Relay doesn't acknowledge session settle publish within 10s
 
-## Connection State
+## Web Socket Connection State
 
-A connection state event is emitted whenever a connection state has changed. Web3Wallet client tracks Relay wss connection. The connection state is `true` when both Internet connection and Relay are online, and it is set to `false` otherwise.
+The Web Socket connection state tracks the connection with the relay server, event is emitted whenever a connection state changes.
 
 <PlatformTabs
 	groupId="w3w"
@@ -388,6 +388,16 @@ Web3Wallet.setWalletDelegate(walletDelegate)
 
 <PlatformTabItem value="ios">
 ```swift
+Web3Wallet.instance.socketConnectionStatusPublisher
+    .receive(on: DispatchQueue.main)
+    .sink { status in
+    switch status {
+    case .connected:
+        // ...
+    case .disconnected:
+        // ...
+    }
+}.store(in: &publishers)
 ```
 </PlatformTabItem>
 
