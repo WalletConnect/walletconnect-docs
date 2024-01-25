@@ -37,7 +37,7 @@ In your `App.vue` file set up the following configuration.
     enableInjected: true, // Optional - true by default
     enableEIP6963: true, // Optional - true by default
     enableCoinbase: true, // Optional - true by default
-    enableAnalytics: true // Optional
+    enableAnalytics: true // Optional - defaults to your Cloud configuration
   })
 
   reconnect(wagmiConfig)
@@ -94,7 +94,7 @@ In your `App.vue` file set up the following configuration.
   createWeb3Modal({
     wagmiConfig: config,
     projectId,
-    enableAnalytics: true // Optional
+    enableAnalytics: true // Optional - defaults to your Cloud configuration
   })
 </script>
 
