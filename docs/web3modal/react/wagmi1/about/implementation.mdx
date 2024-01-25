@@ -32,7 +32,7 @@ const wagmiConfig = defaultWagmiConfig({
   chains,
   projectId,
   metadata,
-  enableAnalytics: true // Optional
+  enableAnalytics: true // Optional - defaults to your Cloud configuration
 })
 
 // 3. Create modal
@@ -91,7 +91,7 @@ createWeb3Modal({
   wagmiConfig,
   projectId,
   chains,
-  enableAnalytics: true // Optional
+  enableAnalytics: true // Optional - defaults to your Cloud configuration
 })
 
 export default function App() {
