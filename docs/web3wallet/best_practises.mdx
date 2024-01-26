@@ -355,7 +355,12 @@ A session request expiry is defined by a dapp. It's value must be between now() 
 >
 
 <PlatformTabItem value="web">
-// TODO add how to consume session expiry expiry event
+```typescript
+web3wallet.on("session_request_expire", (event) => {
+    // request expired and any modal displaying it should be removed
+    const { id } = event;
+});
+```
 </PlatformTabItem>
 
 <PlatformTabItem value="android">
