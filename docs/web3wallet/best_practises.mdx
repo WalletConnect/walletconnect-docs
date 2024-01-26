@@ -18,7 +18,14 @@ A piring is a connection between a wallet and a dapp that has fixed permissions 
 >
 
 <PlatformTabItem value="web">
-// TODO add how to pair with web3wallet
+```typescript
+const uri = 'xxx'; // pairing uri
+try {
+    await web3Wallet.pair({ uri });
+} catch (error) {
+    // some error happens while pairing - check Expected errors section
+}
+``` 
 </PlatformTabItem>
 
 <PlatformTabItem value="android">
@@ -56,12 +63,8 @@ When `true` wallet should show a loading indicator awaiting a session proposal, 
 
 <PlatformTabs
 	groupId="w3w"
-	activeOptions={["web","android","ios"]}
+	activeOptions={["android","ios"]}
 >
-
-<PlatformTabItem value="web">
-// TODO add how to consume pairing state 
-</PlatformTabItem>
 
 <PlatformTabItem value="android">
 ```kotlin
@@ -98,7 +101,12 @@ A pairing expiry event is triggered whenever a pairing is expired. The expiry fo
 >
 
 <PlatformTabItem value="web">
-// TODO add how to consume pairing expiry 
+```typescript
+core.pairing.events.on("pairing_expire", (event) => {
+    // pairing expired before user approved/rejected a session proposal
+    const { topic } = topic;
+});
+```
 </PlatformTabItem>
 
 <PlatformTabItem value="android">
@@ -159,7 +167,24 @@ Whenever user approves or rejects a session proposal, wallet should show loading
 >
 
 <PlatformTabItem value="web">
-// TODO add how to await for Relay acknowledgement for approve and reject proposal
+Approving session
+```typescript
+    try {
+        await web3Wallet.approveSession(params);
+        // update UI -> remove the loader
+    } catch (error) {
+        // present error to the user
+    }
+```
+Rejecting session
+```typescript
+    try {
+        await web3Wallet.rejectSession(params);
+        // update UI -> remove the loader
+    } catch (error) {
+        // present error to the user
+    }
+```
 </PlatformTabItem>
 
 <PlatformTabItem value="android">
@@ -221,7 +246,12 @@ A session proposal expiry is 5 mins. It means a given proposal is stored for 5 m
 >
 
 <PlatformTabItem value="web">
-// TODO add how to consume proposal expiry event
+```typescript
+web3wallet.on("proposal_expire", (event) => {
+    // proposal expired and any modal displaying it should be removed
+    const { id } = event;
+});
+```
 </PlatformTabItem>
 
 <PlatformTabItem value="android">
@@ -280,7 +310,14 @@ Whenever user approves or rejects a session request, wallet should show loading 
 >
 
 <PlatformTabItem value="web">
-// TODO add how to await for Relay acknowledgement for approve and reject request
+```typescript
+    try {
+        await web3Wallet.respondSessionRequest(params);
+        // update UI -> remove the loader
+    } catch (error) {
+        // present error to the user
+    }
+```
 </PlatformTabItem>
 
 <PlatformTabItem value="android">
@@ -371,7 +408,15 @@ The Web Socket connection state tracks the connection with the relay server, eve
 >
 
 <PlatformTabItem value="web">
-// TODO add how to consume connection state event
+```typescript
+core.relayer.on("relayer_connect", () => {
+    // connection to the relay server is established
+})
+
+core.relayer.on("relayer_disconnect", () => {
+    // connection to the relay server is lost
+})
+```
 </PlatformTabItem>
 
 <PlatformTabItem value="android">
