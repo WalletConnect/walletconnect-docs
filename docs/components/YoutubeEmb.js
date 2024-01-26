@@ -1,7 +1,7 @@
 import React from 'react'
 
 const YoutubeEmb = ({ videoId }) => (
-    <div className='youtube-embed-container'>
+    <div className='youtube-embed-container' style={{ margin: '30px' }}>
         <iframe
             width='560'
             height='315'
