@@ -10,7 +10,7 @@ The purpose of this guide is to show the best practices in regards of Web3Wallet
 
 ## Pairing
 
-A piring is a connection between a wallet and a dapp that has fixed permissions to only allow a dapp to propose a session through it. Dapp can propose infinite number of sessions on one pairing. Wallet must use a pair method from Web3Wallet client to pair with dapp.
+A pairing is a connection between a wallet and a dapp that has fixed permissions to only allow a dapp to propose a session through it. Dapp can propose infinite number of sessions on one pairing. Wallet must use a pair method from Web3Wallet client to pair with dapp.
 
 <PlatformTabs
 	groupId="w3w"
@@ -278,7 +278,7 @@ Web3Wallet.instance.sessionProposalExpirationPublisher.sink { _ in
 
 ### Expected User flow
 
-### Aprove or Reject Session Proposal
+### Approve or Reject Session Proposal
 ![](/assets/pairing.gif)
 
 ### Error Handling
@@ -347,7 +347,7 @@ do {
 
 ### Session Request Expiry
 
-A session request expiry is defined by a dapp. It's value must be between now() + 5mins and now() + 7 days. After the session request expires the below event is emmited and session request modal should be removed from the app's UI.
+A session request expiry is defined by a dapp. It's value must be between now() + 5mins and now() + 7 days. After the session request expires the below event is emitted and session request modal should be removed from the app's UI.
 
 <PlatformTabs
 	groupId="w3w"
@@ -387,7 +387,7 @@ Web3Wallet.instance.requestExpirationPublisher.sink { _ in
 
 ### Expected User flow
 
-### Aprove or Reject Session Proposal
+### Approve or Reject Session Proposal
 ![](/assets/session_request.gif)
 
 ### Error Handling
