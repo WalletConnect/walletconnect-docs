@@ -267,7 +267,8 @@ module.exports = {
         'cloud/explorer-submission',
         'cloud/verify',
         'cloud/relay',
-        'cloud/blockchain-api'
+        'cloud/blockchain-api',
+        'cloud/analytics'
       ]
     },
     {
