@@ -9,9 +9,8 @@ import CloudBanner from '../../components/CloudBanner'
 
 <PlatformTabs
   groupId="api"
-  activeOptions={["react"]}
+  activeOptions={["react", "vanilla"]}
 >
-
 <PlatformTabItem value="react">
 
 ## Migrating from 0.x to 1.0.0 
@@ -20,68 +19,98 @@ There are numerous breaking changes in the stable release.
 ### Package rename
 While `@web3inbox/core` is still named the same way, `@web3inbox/widget-react` is now `@web3inbox/react`. 
 
+### Initializing the client
+Previously, a use of hook was required to init the client and a separate hook was required to check for ready status.
+Now, there is only a hook for checking ready status which is **recommended** to be used to be sure if web3inbox functionality is ready to use.
+However, initting the client is now done with a simple function call. 
+
+```typescript
+/* highlight-delete-start */ 
+import { useInitWeb3InboxClient } from "@web3inbox/widget-react"
+/* highlight-delete-end */ 
+/* highlight-add-start */ 
+import { initWeb3inboxClient } from "@web3inbox/react"
+/* highlight-add-end */ 
+
+/* highlight-delete-start */ 
+useInitWeb3inboxClient({ projectId, domain, isLimited })
+/* highlight-delete-end */ 
+/* highlight-add-start */ 
+initWeb3inboxClient({ projectId, domain, isLimited })
+/* highlight-add-end */ 
+```
+
+### Checking for client ready status
+
+```typescript
+import { useWeb3InboxClient } from "@web3inbox/react"
+
+const { isLoading: w3iClientIsLoading } = useWeb3InboxClient()
+```
+
 ### Managing Accounts
 Previously, the account needed to be set using `setAccount` and still had to be passed down to hooks like `useManageSubscriptions`. This is no longer
 the case. Also, registration management was included in the same hook. Now they all follow single responsibility principle. 
 
 #### Setting accounts
 
-##### Old
+```typescript
+/* highlight-delete-start */ 
+- import { useW3iAccount } from "@web3inbox/widget-react"
+/* highlight-delete-end */ 
+/* highlight-add-start */ 
++ import { useWeb3InboxAccount } from "@web3inbox/react"
+/* highlight-add-end */ 
 
-```javascript
-import { useW3iAccount } from "@web3inbox/widget-react"
-
-const { setAccount } = useW3iAccount()
+/* highlight-delete-start */ 
+- const { setAccount } = useW3iAccount()
+/* highlight-delete-end */ 
+/* highlight-add-start */ 
++ const { data: account } = useWeb3InboxAccount(`eip155:1:0x...`)
+/* highlight-add-end */ 
 
 setAccount(`eip155:1:0x...`)
-```
-
-##### New
-
-```javascript
-import { useWeb3InboxAccount } from "@web3inbox/react"
-
-const { data: account } = useWeb3InboxAccount(`eip155:1:0x...`)
 ```
 
 #### Handling registration
 
-##### Old
+```typescript
+/* highlight-delete-start */ 
+- import { useW3iAccount } from "@web3inbox/widget-react"
+- import { signMessageAsync } from "@wagmi/core"
+/* highlight-delete-end */ 
+/* highlight-add-start */ 
++ import { useWeb3InboxAccount, useRegister, usePrepareRegistration } from "@web3inbox/react"
++ import { signMessageAsync } from "@wagmi/core"
+/* highlight-add-end */ 
 
-```javascript
-import { useW3iAccount } from "@web3inbox/widget-react"
-import { signMessageAsync } from "@wagmi/core"
+/* highlight-delete-start */ 
+- const { setAccount, register } = useW3iAccount()
+- 
+- setAccount(`eip155:1:0x...`)
+/* highlight-delete-end */ 
+/* highlight-add-start */ 
++ const { data: account, isRegistered } = useWeb3InboxAccount(`eip155:1:0x...`)
+/* highlight-add-end */ 
 
-const { setAccount, register } = useW3iAccount()
-
-setAccount(`eip155:1:0x...`)
-
-const handleRegistration = () => {
-  register(signMessageAsync)
-}
-```
-
-##### New 
-
-With this new methodology, there is full control over where and how the user is registered as opposed to the previous method.
-
-```javascript
-import { useWeb3InboxAccount, useRegister, usePrepareRegistration } from "@web3inbox/react"
-import { signMessageAsync } from "@wagmi/core"
-
-const { data: account, isRegistered } = useWeb3InboxAccount(`eip155:1:0x...`)
-const { prepareRegistration } = usePrepareRegistration();
-const { register, isLoading: isLoadingRegister } = useRegister();
-
-const handleRegistration = async () => {
-  try {
-    const { message, registerParams } = await prepareRegistration();
-    const signature = await signMessageAsync({ message: message });
-    await register({ registerParams, signature });
-  } catch (registerIdentityError: any) {
-    console.error(registerIdentityError)
-  }
-};
+/* highlight-delete-start */ 
+- const handleRegistration = () => {
+-   register(signMessageAsync)
+- }
+/* highlight-delete-end */ 
+/* highlight-add-start */ 
++ const { prepareRegistration } = usePrepareRegistration();
++ const { register, isLoading: isLoadingRegister } = useRegister();
++ const handleRegistration = async () => {
++   try {
++     const { message, registerParams } = await prepareRegistration();
++     const signature = await signMessageAsync({ message: message });
++     await register({ registerParams, signature });
++   } catch (registerIdentityError: any) {
++     console.error(registerIdentityError)
++   }
++ };
+/* highlight-add-end */ 
 ```
 
 ### Managing notifications
@@ -91,73 +120,106 @@ returned array.
 
 #### Retrieving notifications
 
-##### Old
+```typescript
+/* highlight-delete-start */ 
+- import { useMessages } from "@web3inbox/widget-react"
+/* highlight-delete-end */ 
+/* highlight-add-start */
++ import { useNotifications } from "@web3inbox/react"
+/* highlight-add-end */
 
-```javascript
-import { useMessages } from "@web3inbox/widget-react"
-
-const { messages } = useMessages()
-```
-
-##### New
-
-```javascript
-import { useNotifications } from "@web3inbox/react"
-
-const notificationsPerPage = 5
-const isInfiniteScroll = true
-
-const { data: notifications, nextPage } = useNotifications(notificationsPerPage, isInfiniteScroll)
-
-const getMoreNotifications = () => {
-  nextPage()
-}
+/* highlight-delete-start */ 
+- const { messages } = useMessages()
+/* highlight-delete-end */ 
+/* highlight-add-start */
++ const notificationsPerPage = 5
++ const isInfiniteScroll = true
++ 
++ const { data: notifications, nextPage } = useNotifications(
++   notificationsPerPage, 
++   isInfiniteScroll
++ )
++
++ const getMoreNotifications = () => {
++   nextPage()
++ }
+/* highlight-add-end */
 ```
 
 #### Retrieving notification types
-
-##### Old
-
-```javascript
-import { useSubscriptionScopes } from "@web3inbox/widget-react"
-
-const { scopes } = useSubscriptionScopes()
-```
-
-##### New
 
 **Important note**: Notification images are retrieved from notification types now. 
 
 Sizes of images available are: `sm`, `md` and `lg` for small, medium and large respectively.
 
-```javascript
-import { useNotificationTypes } from "@web3inbox/react"
+```typescript
+/* highlight-delete-start */ 
+- import { useSubscriptionScopes } from "@web3inbox/widget-react"
+/* highlight-delete-end */ 
+/* highlight-add-start */ 
++ import { useNotificationTypes } from "@web3inbox/react"
+/* highlight-add-end */ 
 
-const { data: notificationTypes } = useNotificationTypes()
-
-const notificationImageUrl = notificationTypes[notification.type].imageUrls.md; 
+/* highlight-delete-start */ 
+- const { scopes } = useSubscriptionScopes()
+/* highlight-delete-end */ 
+/* highlight-add-start */ 
++ const { data: notificationTypes } = useNotificationTypes()
++ 
++ const notificationImageUrl = notificationTypes[notification.type].imageUrls.md; 
+/* highlight-add-end */ 
 ```
 
 ### Managing Subscriptions
 Managing subscriptions has changed considerably. Previously there was a single hook and now there are numerous single responsibility hooks.
 
-#### Old
+```typescript
+/* highlight-delete-start */ 
+- import { useManageSubscription } from "@web3inbox/widget-react"
+/* highlight-delete-end */
+/* highlight-add-start */
++ import { useSubscribe, useUnsubscribe, useSubscription } from "@web3inbox/react"
+/* highlight-add-end */
 
-```javascript
-import { useManageSubscription } from "@web3inbox/widget-react"
-
-const { subscribe, unsubscribe, isSubscribed } = useManageSubscription()
+/* highlight-delete-start */ 
+- const { subscribe, unsubscribe, isSubscribed } = useManageSubscription()
+/* highlight-delete-end */
+/* highlight-add-start */
++ const { subscribe } = useSubscribe()
++ const { unsubscribe } = useUnsubscribe()
++ const { data: subscription } = useSubscription()
+/* highlight-add-end */
 ```
 
-#### New
 
-```javascript
-import { useSubscribe, useUnsubscribe, useSubscription } from "@web3inbox/react"
+</PlatformTabItem>
 
-const { subscribe } = useSubscribe()
-const { unsubscribe } = useUnsubscribe()
-const { data: subscription } = useSubscription()
+<PlatformTabItem value="vanilla">
+## Migrating from 0.x to 1.0.0 
+For developers using `@web3inbox/core` without the hooks, there are far less breaking changes.
+
+### Managing registration
+Registration is now split into 2 steps to avoid the opinionated approach of passing `onSign` callback.
+
+```typescript
+import { signMessageAsync } from "@wagmi/core"
+
+/* highlight-delete-start */ 
+client.register(signMessageAsync)
+/* highlight-delete-end */ 
+/* highlight-add-start */ 
+const { registerParams, message } = client.prepareRegistration({account: "eip155:1:0x.."})
+const signature = await signMessageAsync(message)
+client.register({registerParams, signature})
+/* highlight-add-end */ 
 ```
+
+### Managing Notifications
+- `deleteMessage` has been removed.
+- `pageNotifications` has been added to allow paging notifications
+
+
+
 
 </PlatformTabItem>
 
