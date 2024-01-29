@@ -205,7 +205,7 @@ module.exports = {
                     'web3inbox/frontend-integration/examples'
                   ]
                 },
-                'web3inbox/sending-notifications',
+                'web3inbox/backend-integration',
                 'web3inbox/demo',
                 {
                   type: 'category',
