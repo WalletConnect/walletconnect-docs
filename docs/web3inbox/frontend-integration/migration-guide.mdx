@@ -7,6 +7,13 @@ import CloudBanner from '../../components/CloudBanner'
 
 # Migration Guide
 
+## General Migration notes
+
+- `isLimited` flag has been removed in favor of `allApps` flag. They essentially mean the opposite thing.
+- Deleting messages is no longer possible
+- Messages are now stored on notify server and can be paged
+- Registration is more flexible since it is now split into 2 functions
+
 <PlatformTabs
   groupId="api-auth"
   activeOptions={["react", "javascript"]}>
@@ -63,7 +70,7 @@ import { initWeb3inboxClient } from "@web3inbox/react"
 useInitWeb3inboxClient({ projectId, domain, isLimited })
 /* highlight-delete-end */ 
 /* highlight-add-start */ 
-initWeb3inboxClient({ projectId, domain, isLimited })
+initWeb3inboxClient({ projectId, domain, allApps })
 /* highlight-add-end */ 
 ```
 
