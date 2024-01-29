@@ -50,7 +50,7 @@ web3wallet.on("auth_request", async (authRequest) => {
   const origin = verifyContext.verified.origin // the actual verified origin of the request
   const isScam = verifyContext.verified.isScam // true if the domain is flagged as malicious
 
-  // if the domain is flagged as malicious, you can should warn the user as they may lose their funds - check the `Threat` case for more info
+  // if the domain is flagged as malicious, you should warn the user as they may lose their funds - check the `Threat` case for more info
   if(isScam) {
     // show a warning screen to the user
     // and proceed only if the user accepts the risk
@@ -107,7 +107,7 @@ public struct VerifyContext: Equatable, Hashable {
 
 Wallet.Event.VerifyContext provides a domain verification information about SessionProposal, SessionRequest and AuthRequest.
 
-It consists of origin of a app from where the request has been sent, validation Enum that says whether origin is `VALID`, `INVALID` or `UNKNOWN` and verify url server.
+It consists of origin of an app from where the request has been sent, validation Enum that says whether origin is `VALID`, `INVALID` or `UNKNOWN` and verify url server.
 
 ```kotlin
 data class VerifyContext(
@@ -127,7 +127,7 @@ enum class Validation {
 
 `WalletConnectSharp.Core.Models.Verify.VerifiedContext` provides a domain verification information about `SessionProposal`, `SessionRequest` and `AuthRequest`.
 
-It consists of origin of a app from where the request has been sent, validation Enum that says whether origin is `VALID`, `INVALID` or `UNKNOWN` and verify url server.
+It consists of origin of an app from where the request has been sent, validation Enum that says whether origin is `VALID`, `INVALID` or `UNKNOWN` and verify url server.
 
 ```csharp
 public class VerifiedContext
