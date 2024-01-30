@@ -52,8 +52,8 @@ import { initWeb3InboxClient } from "@web3inbox/react";
 
 ...
 // The project ID and domain you setup in the Domain Setup section
-const projectId = process.env.NEXT_PUBLIC_PROJECT_ID || "";
-const appDomain = process.env.NEXT_PUBLIC_APP_DOMAIN as string;
+const projectId = process.env.NEXT_PUBLIC_PROJECT_ID!;
+const appDomain = process.env.NEXT_PUBLIC_APP_DOMAIN!;
 
 initWeb3InboxClient({
   projectId,
