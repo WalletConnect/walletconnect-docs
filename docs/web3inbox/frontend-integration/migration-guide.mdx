@@ -36,7 +36,7 @@ client.register(signMessageAsync)
 /* highlight-add-start */ 
 const { registerParams, message } = client.prepareRegistration({account: "eip155:1:0x.."})
 const signature = await signMessageAsync(message)
-client.register({registerParams, signature})
+client.register({ registerParams, signature })
 /* highlight-add-end */ 
 ```
 
