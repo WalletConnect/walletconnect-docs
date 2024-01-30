@@ -223,6 +223,13 @@ Managing subscriptions has changed considerably. Previously there was a single h
 + const { unsubscribe } = useUnsubscribe()
 + const { data: subscription } = useSubscription()
 /* highlight-add-end */
+
+/* highlight-delete-start */ 
+- const { subscriptions } = useSubscriptions()
+/* highlight-delete-end */
+/* highlight-add-start */
++ const { data: subscriptions } = useSubscriptions()
+/* highlight-add-end */
 ```
 </PlatformTabItem>
 
