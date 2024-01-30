@@ -189,10 +189,14 @@ Subscribe, Unsubscribe, Get Subscription, Check if Subscribed.
 ```ts
 const { subscribe, isLoading: isSubscribing } = useSubscribe();
 const { unsubscribe, isLoading: isUnsubscribing } = useUnsubscribe();
+
+// get subscription of current user to current dapp
 const { data: subscription } = useSubscription();
 
+// subscribe to current dapp
 subscribe()
 
+// unsubscribe from current dapp
 unsubscribe()
 
 // get all subscriptions for current account
