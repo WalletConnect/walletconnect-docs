@@ -26,8 +26,6 @@ Links to sections on this page. Some sections are platform specific and are only
   Get latest notification types
 - [Unsubscribe from a dapp](#unsubscribe-from-a-dapp):
   Opt-out from receiving notifications from a dapp
-- [Delete subscription message](#delete-subscription-message):
-  Delete a single message from local storage
 - [Account logout](#account-logout):
   To stop receiving notifications to this client, accounts can logout of using Notify API
 - [Push Notification best practices](#push-notification-best-practices):
@@ -303,26 +301,24 @@ public var subscriptionsPublisher: AnyPublisher<[NotifySubscription], Never>
 </PlatformTabItem>
 <PlatformTabItem value="android">
 
-Calling `NotifyClient.subscribe` will establish the subscription with the dapp specified in the `Notify.Params.Subscribe` params passed into the function. The `Notify.Params.Subscribe` params requires the uri of the dapp and a CAIP-10 compatible account.
-
 ```kotlin
-val dappUri: Uri = Uri("")// The Dapp Uri to subscribe to
-val caip10Account: String = ""// The CAIP-10 account that was used in `NotifyClient.register`
+val appDomain: Uri = // Dapp uri. e.g. gm.walletconnect.com
+val account: String = // CAIP-10 account
+val timeout: Duration? = // Optional. Timeout - min 5 sec, max 60 sec, default 60 sec
+val params = Notify.Params.Subscribe(appDomain, account, timeout)
 
-val subscribeParams = Notify.Params.Subscribe(
-    appDomain = dappUri,
-    account = caip10Account
-)
+NotifyClient.subscribe(params = params).let { result ->
+    when (result) {
+        is Notify.Result.Subscribe.Success -> {
+          // callback for when the subscription request was successful
+        }
 
-NotifyClient.subscribe(
-    params = subscribeParams,
-    onSuccess = {
-        // Subscribing to the dapp was successful
-    },
-    onError = { error: Notify.Model.Error ->
-        // There was an error while trying to subscribe to the dapp
+        is Notify.Result.Subscribe.Error -> {
+          // callback for when the subscription request has failed
+        } 
+      
     }
-)
+}
 ```
 
 </PlatformTabItem>
@@ -365,8 +361,18 @@ public func getActiveSubscriptions(account: Account) -> [NotifySubscription]
 </PlatformTabItem>
 <PlatformTabItem value="android">
 
+Method will return a map with the topic as the key and `Notify.Model.Subscription` as the value.
+
 ```kotlin
-val activeSubscriptions: Map<String, Notify.Model.Subscription> = NotifyClient.getActiveSubscriptions()
+val account: String = // CAIP-10 account
+val timeout: Duration? = // Optional. Timeout - min 5 sec, max 60 sec, default 60 sec
+val params = Notify.Params.GetActiveSubscriptions(account, timeout)
+
+try {
+  val result: Map<String, Notify.Model.Subscription> = NotifyClient.getActiveSubscriptions(params)
+} catch (e: Exception) {
+  // callback for when the get active subscriptions request has failed
+}
 ```
 
 </PlatformTabItem>
@@ -384,7 +390,7 @@ const accountSubscriptions = notifyClient.getActiveSubscriptions({
 
 ## Fetching subscription’s notifications
 
-To fetch subscription’s notifications by calling **`getMessageHistory()`**.
+To fetch subscription’s notifications by calling **`getNotificationHistory()`**.
 
 <PlatformTabs activeOptions={["ios","android", "react-native"]}>
 <PlatformTabItem value="ios">
@@ -399,9 +405,24 @@ public func getMessageHistory(topic: String) -> [NotifyMessageRecord]
 <PlatformTabItem value="android">
 
 ```kotlin
-val messageHistoryParamsForSubscriptionTopic = Notify.Params.MessageHistory(/* The topic of an active subscription */)
+val topic: String = // active subscription topic
+val limit: Int? = // Optional. Limit - min 1, max 50, default 10
+val startingAfter: String? = // Optional. Id of the notification to start after
+val timeout: Duration? = // Optional. Timeout - min 5 sec, max 60 sec, default 60 sec
 
-val messageHistory: Map<Long, Notify.Model.MessageRecord> = NotifyClient.getMessageHistory(params = messageHistoryParamsForSubscriptionTopic)
+val params = Notify.Params.GetNotificationHistory(topic, limit, startingAfter, timeout)
+
+NotifyClient.getNotificationHistory(params).let { result ->
+    when (result) {
+        is Notify.Result.GetNotificationHistory.Success -> {
+          // callback for when the get notification history request was successful
+        }
+
+        is Notify.Result.GetNotificationHistory.Error -> {
+          // callback for when the get notification history request has failed
+        }
+    }
+}
 ```
 
 </PlatformTabItem>
@@ -433,20 +454,21 @@ public func update(topic: String, scope: Set<String>) async throws
 <PlatformTabItem value="android">
 
 ```kotlin
-val updateParams = Notify.Params.Update(
-  topic = /* Topic of the subscription to update */,
-  scope = /* The new space delimited list of scopes */
-)
+val topic: String = // active subscription topic
+val scope: List<String> = // list of notification types
+val timeout: Duration? = // Optional. Timeout - min 5 sec, max 60 sec, default 60 sec
+val params = Notify.Params.UpdateSubscription(topic, scope, timeout)
 
-NotifyClient.update(
-    params = updateParams,
-    onSuccess = {
-      // Updating the subscription was successful
-    },
-    onError = { error: Notify.Model.Error ->
-      // There was an error while trying to update the subscription
+NotifyClient.update(params).let { result ->
+    when (result) {
+        is Notify.Result.UpdateSubscription.Success -> {
+          // callback for when the update request was successful
+        }
+        is Notify.Result.UpdateSubscription.Error -> {
+          // callback for when the update request has failed
+        }
     }
-)
+}
 ```
 
 </PlatformTabItem>
@@ -471,11 +493,19 @@ This feature will be added shortly
 </PlatformTabItem>
 <PlatformTabItem value="android">
 
+Method will return a map with the notification type id as the key and `Notify.Model.NotificationType` as the value.
+
 ```kotlin
-val appMetadata: Core.Model.AppMetaData = /*App Metadata could be fetched from NotifyClient.getActiveSubscriptions()*/
-val appDomain: String = /*App Domain*/ // URI(appMetadata.url).host
-val notificationTypesParams = Notify.Params.NotificationTypes(appDomain)
-NotifyClient.getNotificationTypes(params = notificationTypesParams)
+val appMetadata: Core.Model.AppMetaData = // App Metadata could be fetched from NotifyClient.getActiveSubscriptions()
+val appDomain: String = URI(appMetadata.url).host
+val timeout: Duration? = // Optional. Timeout - min 5 sec, max 60 sec, default 60 sec
+
+val params = Notify.Params.NotificationTypes(appDomain, timeout)
+try {
+  val result: Map<String, Notify.Model.NotificationType> = NotifyClient.getNotificationTypes(params)
+} catch (e: Exception) {
+  // callback for when the get notification types request has failed
+}
 ```
 
 </PlatformTabItem>
@@ -503,14 +533,21 @@ try await Notify.instance.deleteSubscription(topic: String)
 <PlatformTabItem value="android">
 
 ```kotlin
-val deleteSubscriptionParams = Notify.Params.DeleteSubscription(topic = /* The topic of the active subscription to delete */)
+val topic: String = // active subscription topic
+val timeout: Duration? = // Optional. Timeout - min 5 sec, max 60 sec, default 60 sec
+val params = Notify.Params.DeleteSubscription(topic)
 
-NotifyClient.deleteSubscription(
-  params = deleteSubscriptionParams,
-  onError: { error: Notify.Model.Error ->
-    // Error will be thrown if there's an issue with trying to delete the subscription
-  }
-)
+NotifyClient.deleteSubscription(params).let { result ->
+    when (result) {
+        is Notify.Result.DeleteSubscription.Success -> {
+          // callback for when the delete request was successful
+        }
+
+        is Notify.Result.DeleteSubscription.Error -> {
+          // callback for when the delete request has failed
+        }
+    }
+}
 ```
 
 </PlatformTabItem>
@@ -518,46 +555,6 @@ NotifyClient.deleteSubscription(
 
 ```javascript
 notifyClient.deleteSubscription({ topic: 'subscription_topic_to_unsubscribe_from' })
-```
-
-</PlatformTabItem>
-</PlatformTabs>
-
-## Delete subscription message
-
-Once a notification is viewed, you may want to remove the message from the client’s storage to keep the UI/UX clean for users.
-
-<PlatformTabs activeOptions={["ios","android", "react-native"]}>
-<PlatformTabItem value="ios">
-
-```swift
-public func deleteNotifyMessage(id: String)
-```
-
-`id` - notify message id
-
-</PlatformTabItem>
-<PlatformTabItem value="android">
-
-```kotlin
-val deleteMessageParams = Notify.Params.DeleteMessage(id = /* The request id of the message fetched from Notify. */)
-
-Notify.deleteNotifyMessage(
-  params = deleteMessageParams,
-  onSuccess = {
-    // Triggered when the message has been successfully deleted
-  },
-  onError = { error: Notify.Model.Error ->
-    // Error will be thrown if there's an issue with trying to delete the specific message
-  }
-)
-```
-
-</PlatformTabItem>
-<PlatformTabItem value="react-native">
-
-```javascript
-notifyClient.deleteNotifyMessage({ id: 123456 })
 ```
 
 </PlatformTabItem>
@@ -580,9 +577,9 @@ public func unregister(account: Account) async throws
 <PlatformTabItem value="android">
 
 ```kotlin
-val unregistrationParams = Notify.Params.Unregistration(/*CAIP-10 account*/)
+val params = Notify.Params.Unregistration(/*CAIP-10 account*/)
 NotifyClient.unregister(
-  unregistrationParams,
+  params,
   onSuccess = {
       // callback for when the unregistration was successful
   },
@@ -618,35 +615,44 @@ This section will be added shortly
 </PlatformTabItem>
 <PlatformTabItem value="android">
 
-`Notify.Model.Message` contains a `type` field, which is a unique id of the notification type. It is recommended to use this field as a notification channel id. By doing so it will create a channel for each notification type. To allow users to granularly control which notifications they want to receive within system settings, it is recommended to create a separate channel for every dapp and every notification type they might have. By doing so user would be able to turn off notifications for specific notification type per every subscribed dapp.
+`Core.Model.Message` contains a `type` field, which is a unique id of the notification type. It is recommended to use this field as a notification channel id. By doing so it will create a channel for each notification type. To allow users to granularly control which notifications they want to receive within system settings, it is recommended to create a separate channel for every dapp and every notification type they might have. By doing so user would be able to turn off notifications for specific notification type per every subscribed dapp.
 
 ```kotlin
-override fun onMessage(message: Notify.Model.Message, originalMessage: RemoteMessage) {
-    val appMetadata = NotifyClient.getActiveSubscriptions()[message.topic]?.metadata ?: throw IllegalStateException("No active subscription for topic: ${message.topic}")
-    val appDomain = URI(appMetadata.url).host ?: throw IllegalStateException("Unable to parse domain from $appMetadata.url")
+class SampleFirebaseService: PushMessagingService() {
+  //...
+  override fun onMessage(message: Core.Model.Message, originalMessage: RemoteMessage) {
+      if (message is Core.Model.Message.Notify) {
+        val account: String = // CAIP-10 account
+        val appMetadata = NotifyClient.getActiveSubscriptions(Notify.Params.GetActiveSubscriptions(account))[topic]?.metadata
+            ?: throw IllegalStateException("No active subscription for topic: $topic")
 
-    val typeName = NotifyClient.getNotificationTypes(Notify.Params.NotificationTypes(appDomain))[message.type]?.name
-        ?: throw IllegalStateException("No notification type for topic:${message.topic} and type: ${message.type}")
+        val appDomain = URI(appMetadata.url).host
+            ?: throw IllegalStateException("Unable to parse domain from $appMetadata.url")
 
-    val channelId = message.type
-    val channelName = (appMetadata.name + ": " + typeName)
+        val notificationType = NotifyClient.getNotificationTypes(Notify.Params.GetNotificationTypes(appDomain))[channelId]
+            ?: throw IllegalStateException("No notification type for topic:${topic} and type: $channelId")
 
-    val notificationBuilder = NotificationCompat.Builder(this, channelId)
-        .setContentTitle(message.title)
-        .setSmallIcon(android.R.drawable.ic_popup_reminder) // specify icon for notification
-        .setContentText(message.body)
-        .setAutoCancel(true) // clear notification after click
-        .setSound(defaultSoundUri) // specify sound for notification
-        .setContentIntent(pendingIntent) // specify pendingIntent
+        val channelName = appMetadata.name + ": " + notificationType.name
+        val channelId = message.type
 
-    // Since android Oreo notification channel is needed.
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-        val channel = NotificationChannel(channelId, channelName, NotificationManager.IMPORTANCE_HIGH)
-        notificationManager.createNotificationChannel(channel)
-    }
+        val notificationBuilder = NotificationCompat.Builder(this, channelId)
+            .setContentTitle(message.title)
+            .setSmallIcon(android.R.drawable.ic_popup_reminder) // specify icon for notification
+            .setContentText(message.body)
+            .setAutoCancel(true) // clear notification after click
+            .setSound(defaultSoundUri) // specify sound for notification
+            .setContentIntent(pendingIntent) // specify pendingIntent
 
-    notificationManager.notify(message.hashCode(), notificationBuilder.build()) // specify id of notification
-}
+        // Since android Oreo notification channel is needed.
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val channel = NotificationChannel(channelId, channelName, NotificationManager.IMPORTANCE_HIGH)
+            notificationManager.createNotificationChannel(channel)
+        }
+
+        notificationManager.notify(message.hashCode(), notificationBuilder.build()) // specify id of notification
+      }
+  }
+//...
 ```
 
 </PlatformTabItem>
@@ -686,21 +692,6 @@ val walletDelegate = object : NotifyClient.Delegate {
 
     override fun onNotifyNotification(notifyNotification: Notify.Event.Notification) {
         // Triggered when a message has been sent by the Dapp. The message contains the title, body, icon, and url
-    }
-
-    // Deprecated
-    // Use onNotifyNotification instead
-    // Will be removed in future versions
-    override fun onNotifyMessage(notifyMessage: Notify.Event.Message) {
-        // Triggered when a message has been sent by the Dapp. The message contains the title, body, icon, and url
-    }
-
-    override fun onNotifyDelete(notifyDelete: Notify.Event.Delete) {
-        // Triggered when the Dapp deletes the subscription. The notifyDelete contains the topic that was deleted
-    }
-
-    override fun onNotifyUpdate(notifyUpdate: Notify.Event.Update) {
-        // Triggered after updating a subscription was successful. The notifyUpdate will either contain the updated subscription details or an error
     }
 
     override fun onError(error: Notify.Model.Error) {
