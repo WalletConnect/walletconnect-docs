@@ -618,38 +618,41 @@ This section will be added shortly
 `Core.Model.Message` contains a `type` field, which is a unique id of the notification type. It is recommended to use this field as a notification channel id. By doing so it will create a channel for each notification type. To allow users to granularly control which notifications they want to receive within system settings, it is recommended to create a separate channel for every dapp and every notification type they might have. By doing so user would be able to turn off notifications for specific notification type per every subscribed dapp.
 
 ```kotlin
-override fun onMessage(message: Core.Model.Message, originalMessage: RemoteMessage) {
-    if (message is Core.Model.Message.Notify) {
-      val account: String = // CAIP-10 account
-      val appMetadata = NotifyClient.getActiveSubscriptions(Notify.Params.GetActiveSubscriptions(account))[topic]?.metadata
-          ?: throw IllegalStateException("No active subscription for topic: $topic")
+class SampleFirebaseService: PushMessagingService() {
+  //...
+  override fun onMessage(message: Core.Model.Message, originalMessage: RemoteMessage) {
+      if (message is Core.Model.Message.Notify) {
+        val account: String = // CAIP-10 account
+        val appMetadata = NotifyClient.getActiveSubscriptions(Notify.Params.GetActiveSubscriptions(account))[topic]?.metadata
+            ?: throw IllegalStateException("No active subscription for topic: $topic")
 
-      val appDomain = URI(appMetadata.url).host
-          ?: throw IllegalStateException("Unable to parse domain from $appMetadata.url")
+        val appDomain = URI(appMetadata.url).host
+            ?: throw IllegalStateException("Unable to parse domain from $appMetadata.url")
 
-      val notificationType = NotifyClient.getNotificationTypes(Notify.Params.GetNotificationTypes(appDomain))[channelId]
-          ?: throw IllegalStateException("No notification type for topic:${topic} and type: $channelId")
+        val notificationType = NotifyClient.getNotificationTypes(Notify.Params.GetNotificationTypes(appDomain))[channelId]
+            ?: throw IllegalStateException("No notification type for topic:${topic} and type: $channelId")
 
-      val channelName = appMetadata.name + ": " + notificationType.name
-      val channelId = message.type
+        val channelName = appMetadata.name + ": " + notificationType.name
+        val channelId = message.type
 
-      val notificationBuilder = NotificationCompat.Builder(this, channelId)
-          .setContentTitle(message.title)
-          .setSmallIcon(android.R.drawable.ic_popup_reminder) // specify icon for notification
-          .setContentText(message.body)
-          .setAutoCancel(true) // clear notification after click
-          .setSound(defaultSoundUri) // specify sound for notification
-          .setContentIntent(pendingIntent) // specify pendingIntent
+        val notificationBuilder = NotificationCompat.Builder(this, channelId)
+            .setContentTitle(message.title)
+            .setSmallIcon(android.R.drawable.ic_popup_reminder) // specify icon for notification
+            .setContentText(message.body)
+            .setAutoCancel(true) // clear notification after click
+            .setSound(defaultSoundUri) // specify sound for notification
+            .setContentIntent(pendingIntent) // specify pendingIntent
 
-      // Since android Oreo notification channel is needed.
-      if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-          val channel = NotificationChannel(channelId, channelName, NotificationManager.IMPORTANCE_HIGH)
-          notificationManager.createNotificationChannel(channel)
+        // Since android Oreo notification channel is needed.
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val channel = NotificationChannel(channelId, channelName, NotificationManager.IMPORTANCE_HIGH)
+            notificationManager.createNotificationChannel(channel)
+        }
+
+        notificationManager.notify(message.hashCode(), notificationBuilder.build()) // specify id of notification
       }
-
-      notificationManager.notify(message.hashCode(), notificationBuilder.build()) // specify id of notification
-    }
-}
+  }
+//...
 ```
 
 </PlatformTabItem>
