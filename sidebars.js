@@ -394,7 +394,7 @@ module.exports = {
             }
           ]
         },
-        'advanced/echo-server'
+        'advanced/push-server'
       ]
     },
     {
