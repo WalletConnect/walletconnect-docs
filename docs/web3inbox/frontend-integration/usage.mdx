@@ -122,10 +122,10 @@ export default function App() {
             <h1>W3I QuickStart</h1>
             <w3m-button />
             <div className={styles.flexColumn}>
-              <button onClick={handleRegistration}>
+              <button onClick={handleRegistration} disabled={isRegistered}>
                 {isRegistered ? 'Registered' : 'Register'}
               </button>
-              <button onClick={subscribe}>
+              <button onClick={subscribe} disabled={isSubscribed}>
                 {isSubscribed ? 'Subscribed' : 'Subscribe'}
               </button>
               <hr />

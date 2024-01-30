@@ -27,7 +27,8 @@ For developers using `@web3inbox/core` without the hooks, there are far less bre
 Registration is now split into 2 steps to avoid the opinionated approach of passing `onSign` callback.
 
 ```typescript
-import { signMessageAsync } from "@wagmi/core"
+import { useSignMessage } from "@wagmi"
+const { signMessageAsync } = useSignMessage();
 
 /* highlight-delete-start */ 
 client.register(signMessageAsync)
@@ -111,11 +112,8 @@ setAccount(`eip155:1:0x...`)
 ```typescript
 /* highlight-delete-start */ 
 - import { useW3iAccount } from "@web3inbox/widget-react"
-- import { signMessageAsync } from "@wagmi/core"
-/* highlight-delete-end */ 
 /* highlight-add-start */ 
 + import { useWeb3InboxAccount, useRegister, usePrepareRegistration } from "@web3inbox/react"
-+ import { signMessageAsync } from "@wagmi/core"
 /* highlight-add-end */ 
 
 /* highlight-delete-start */ 

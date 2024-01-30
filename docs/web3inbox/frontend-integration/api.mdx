@@ -114,7 +114,8 @@ client.watchAccount(account => {
 <PlatformTabItem value="react">
 
 ```ts
-import { signMessageAsync } from "@wagmi/core"
+import { useSignMessage } from "@wagmi"
+const { signMessageAsync } = useSignMessage();
 
 const { isRegistered } = useW3iAccount('eip155:1:0x9A...')
 
@@ -329,6 +330,7 @@ You can retrieve notifications using pagination. One approach is to provide the 
 ```ts
 const nonReactiveMessageState = client.getNotificationHistory({
   limit: 3,
+  // The `id` of the last notification, for example:
   startingAfter: "some-notification-id"
 })
 
