@@ -304,7 +304,7 @@ public var subscriptionsPublisher: AnyPublisher<[NotifySubscription], Never>
 ```kotlin
 val appDomain: Uri = // Dapp uri. e.g. gm.walletconnect.com
 val account: String = // CAIP-10 account
-val timeout: Duration = // Optional. Timeout - min 5 sec, max 60 sec, default 60 sec
+val timeout: Duration? = // Optional. Timeout - min 5 sec, max 60 sec, default 60 sec
 val params = Notify.Params.Subscribe(appDomain, account, timeout)
 
 NotifyClient.subscribe(params = params).let { result ->
@@ -365,7 +365,7 @@ Method will return a map with the topic as the key and `Notify.Model.Subscriptio
 
 ```kotlin
 val account: String = // CAIP-10 account
-val timeout: Duration = // Optional. Timeout - min 5 sec, max 60 sec, default 60 sec
+val timeout: Duration? = // Optional. Timeout - min 5 sec, max 60 sec, default 60 sec
 val params = Notify.Params.GetActiveSubscriptions(account, timeout)
 
 try {
@@ -406,9 +406,9 @@ public func getMessageHistory(topic: String) -> [NotifyMessageRecord]
 
 ```kotlin
 val topic: String = // active subscription topic
-val limit: Int = // Optional. Limit - min 1, max 50, default 10
-val startingAfter: String = // Optional. Id of the notification to start after
-val timeout: Duration = // Optional. Timeout - min 5 sec, max 60 sec, default 60 sec
+val limit: Int? = // Optional. Limit - min 1, max 50, default 10
+val startingAfter: String? = // Optional. Id of the notification to start after
+val timeout: Duration? = // Optional. Timeout - min 5 sec, max 60 sec, default 60 sec
 
 val params = Notify.Params.GetNotificationHistory(topic, limit, startingAfter, timeout)
 
@@ -456,7 +456,7 @@ public func update(topic: String, scope: Set<String>) async throws
 ```kotlin
 val topic: String = // active subscription topic
 val scope: List<String> = // list of notification types
-val timeout: Duration = // Optional. Timeout - min 5 sec, max 60 sec, default 60 sec
+val timeout: Duration? = // Optional. Timeout - min 5 sec, max 60 sec, default 60 sec
 val params = Notify.Params.UpdateSubscription(topic, scope, timeout)
 
 NotifyClient.update(params).let { result ->
@@ -498,7 +498,7 @@ Method will return a map with the notification type id as the key and `Notify.Mo
 ```kotlin
 val appMetadata: Core.Model.AppMetaData = // App Metadata could be fetched from NotifyClient.getActiveSubscriptions()
 val appDomain: String = URI(appMetadata.url).host
-val timeout: Duration = // Optional. Timeout - min 5 sec, max 60 sec, default 60 sec
+val timeout: Duration? = // Optional. Timeout - min 5 sec, max 60 sec, default 60 sec
 
 val params = Notify.Params.NotificationTypes(appDomain, timeout)
 try {
@@ -534,7 +534,7 @@ try await Notify.instance.deleteSubscription(topic: String)
 
 ```kotlin
 val topic: String = // active subscription topic
-val timeout: Duration = // Optional. Timeout - min 5 sec, max 60 sec, default 60 sec
+val timeout: Duration? = // Optional. Timeout - min 5 sec, max 60 sec, default 60 sec
 val params = Notify.Params.DeleteSubscription(topic)
 
 NotifyClient.deleteSubscription(params).let { result ->
