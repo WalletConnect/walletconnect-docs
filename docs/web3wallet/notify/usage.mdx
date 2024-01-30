@@ -302,7 +302,7 @@ public var subscriptionsPublisher: AnyPublisher<[NotifySubscription], Never>
 <PlatformTabItem value="android">
 
 ```kotlin
-val appDomain: Uri = // Dapp uri
+val appDomain: Uri = // Dapp uri. e.g. gm.walletconnect.com
 val account: String = // CAIP-10 account
 val timeout: Duration = // Optional. Timeout - min 5 sec, max 60 sec, default 60 sec
 val params = Notify.Params.Subscribe(appDomain, account, timeout)
@@ -690,7 +690,7 @@ val walletDelegate = object : NotifyClient.Delegate {
     override fun onNotifyNotification(notifyNotification: Notify.Event.Notification) {
         // Triggered when a message has been sent by the Dapp. The message contains the title, body, icon, and url
     }
-    
+
     override fun onError(error: Notify.Model.Error) {
         // Triggered when there's an error inside the SDK
     }
