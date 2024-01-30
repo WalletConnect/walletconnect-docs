@@ -101,8 +101,8 @@ let metadata = AppMetadata(
 Web3Wallet.configure(
     metadata: metadata,
     crypto: DefaultCryptoProvider(),
-    // Used for the Push: "push.walletconnect.com" will be used by default if not provided
-    pushHost: "push.walletconnect.com",
+    // Used for the Push: "echo.walletconnect.com" will be used by default if not provided
+    pushHost: "echo.walletconnect.com",
     // Used for the Push: "APNSEnvironment.production" will be used by default if not provided
     environment: .production
 )
@@ -111,7 +111,7 @@ Web3Wallet.configure(
 In order to allow users to receive push notifications you have to communicate with Apple Push Notification service and receive unique device token. Register that token with following method:
 
 ```swift
-try await Web3Wallet.instance.registerPushClient(deviceToken: deviceToken)
+try await Web3Wallet.instance.register(deviceToken: deviceToken)
 ```
 
 </PlatformTabItem>
