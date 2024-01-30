@@ -380,7 +380,7 @@ module.exports = {
             {
               type: 'category',
               label: 'Notify',
-              items: ['api/notify/about', 'api/notify/usage', 'api/notify/migration-guide']
+              items: ['api/notify/about']
             },
             {
               type: 'category',
