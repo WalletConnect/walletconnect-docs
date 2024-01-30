@@ -139,6 +139,12 @@ const handleRegistration = async () => {
 - **register:** Register using a signature and register params
 - **isLoading:** A boolean, representing if an account is being registered
 
+Some suggested methods of signing the message:
+
+- Ethers.js [`Wallet.signMessage` method](https://docs.ethers.org/v5/api/signer/#Signer-signMessage)
+- `@wagmi/core` [`signMessage` method](https://wagmi.sh/core/api/actions/signMessage)
+- The [`useSignMessage` hook](https://wagmi.sh/react/hooks/useSignMessage) in `@wagmi`
+
 </PlatformTabItem>
 
 <PlatformTabItem value="javascript">
@@ -159,6 +165,12 @@ await register({ registerParams, signature });
 - **prepareRegistration:** Prepare registration params
 - **register:** Register using a signature and register params
 - **getAccountIsRegistered:** Returns if account is registered
+
+Some suggested methods of signing the message:
+
+- Ethers.js [`Wallet.signMessage` method](https://docs.ethers.org/v5/api/signer/#Signer-signMessage)
+- `@wagmi/core` [`signMessage` method](https://wagmi.sh/core/api/actions/signMessage)
+- The [`useSignMessage` hook](https://wagmi.sh/react/hooks/useSignMessage) in `@wagmi`
 
 </PlatformTabItem>
 </PlatformTabs>
