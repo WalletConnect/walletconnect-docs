@@ -690,22 +690,7 @@ val walletDelegate = object : NotifyClient.Delegate {
     override fun onNotifyNotification(notifyNotification: Notify.Event.Notification) {
         // Triggered when a message has been sent by the Dapp. The message contains the title, body, icon, and url
     }
-
-    // Deprecated
-    // Use onNotifyNotification instead
-    // Will be removed in future versions
-    override fun onNotifyMessage(notifyMessage: Notify.Event.Message) {
-        // Triggered when a message has been sent by the Dapp. The message contains the title, body, icon, and url
-    }
-
-    override fun onNotifyDelete(notifyDelete: Notify.Event.Delete) {
-        // Triggered when the Dapp deletes the subscription. The notifyDelete contains the topic that was deleted
-    }
-
-    override fun onNotifyUpdate(notifyUpdate: Notify.Event.Update) {
-        // Triggered after updating a subscription was successful. The notifyUpdate will either contain the updated subscription details or an error
-    }
-
+    
     override fun onError(error: Notify.Model.Error) {
         // Triggered when there's an error inside the SDK
     }
