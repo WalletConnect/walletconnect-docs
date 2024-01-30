@@ -157,7 +157,7 @@ const { registerParams, signature } = await client.prepareRegistration({
   account
 })
 const isRegistered = await client.getAccountIsRegistered(account)
-const signature = await signMessageAsync({ message: message });
+const signature = await signMessageAsync({ message });
 await register({ registerParams, signature });
 ```
 #### References
