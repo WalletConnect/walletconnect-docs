@@ -125,7 +125,9 @@ export default function App() {
               <button onClick={handleRegistration}>
                 {isRegistered ? 'Registered' : 'Register'}
               </button>
-              <button onClick={subscribe}>{isSubscribed ? 'Subscribed' : 'Subscribe'}</button>
+              <button onClick={subscribe}>
+                {isSubscribed ? 'Subscribed' : 'Subscribe'}
+              </button>
               <hr />
               <Messages />
             </div>
