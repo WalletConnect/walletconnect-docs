@@ -126,16 +126,14 @@ export default function App() {
         ) : (
           <div>
             <h1>W3I QuickStart</h1>
-            <w3m-button /> 
+            <w3m-button />
             <div className={styles.flexColumn}>
               <button onClick={handleRegistration}>
                 {isRegistered ? 'Registered' : 'Register'}
               </button>
-              <button onClick={subscribe}>
-                {isSubscribed ? 'Subscribed' : 'Subscribe'}
-              </button>
-              <hr/>
-              <Messages/>
+              <button onClick={subscribe}>{isSubscribed ? 'Subscribed' : 'Subscribe'}</button>
+              <hr />
+              <Messages />
             </div>
           </div>
         )}
@@ -143,6 +141,12 @@ export default function App() {
     </>
   )
 }
+```
+
+Messages Component
+
+```tsx
+//To Add Code Here.
 ```
 
 </PlatformTabItem>
