@@ -114,6 +114,8 @@ client.watchAccount(account => {
 <PlatformTabItem value="react">
 
 ```ts
+import { signMessageAsync } from "@wagmi/core"
+
 const { isRegistered } = useW3iAccount('eip155:1:0x9A...')
 
 const { prepareRegistration } = usePrepareRegistration()
@@ -142,6 +144,9 @@ const handleRegistration = async () => {
 <PlatformTabItem value="javascript">
 
 ```ts
+import { signMessageAsync } from "@wagmi/core"
+
+
 const { registerParams, signature } = await client.prepareRegistration({
   account
 })
