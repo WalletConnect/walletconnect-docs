@@ -1,0 +1,469 @@
+import Container from './../../components/Container'
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
+import PlatformTabs from '../../components/PlatformTabs'
+import PlatformTabItem from '../../components/PlatformTabItem'
+import CloudBanner from '../../components/CloudBanner'
+
+# API
+
+## Init
+
+To setup the client you need to configure it with your `projectId` which you can obtain from [WalletConnect Cloud](https://cloud.walletconnect.com).
+
+Furthremore you may need to configure the `domain` and `isLimited` parameters:
+
+- `domain` defaults to `window.location.host` and must be set to the domain setup in [Cloud Setup](../cloud-setup). For example `app.example.com`. Do not add the scheme (`https://`).
+- `isLimited` determines if your app has access to all of the user's subscriptions, or only the ones that the app is hosted on. By setting it to `false`, it enables setting `domain` to a value other than `window.location.host`. Setting `isLimited: false` can be useful during development to allow your localhost-deployed app to access the subscriptions for the domain you setup. Note that most apps do not need to set this in production environments, as they only need access to their own subscriptions. When enabled, the user has to sign a SIWE message granting your app more permissions, and this requires additional consideration from the user. Read [here](../authorization-signatures/about) for more details.
+
+<PlatformTabs
+	groupId="w3iw"
+	activeOptions={["react", "javascript"]}
+>
+
+<PlatformTabItem value="react">
+
+```ts
+const isReady = useInitWeb3inboxClient({ projectId, domain, isLimited })
+```
+
+#### References
+
+- **projectId:** Your WalletConnect project ID
+- **domain _(Optional)_:** Your app's domain. Defaults to `window.location.host`.
+- **isLimited _(Optional)_:** Set to `false` to request access to all of the user's notification subscriptions for all apps, instead of only `domain`. Defaults to `true`.
+
+</PlatformTabItem>
+
+<PlatformTabItem value="javascript">
+
+```ts
+const client = await Web3InboxClient.init({ projectId, domain, isLimited })
+```
+
+#### References
+
+- **projectId:** Your WalletConnect project ID
+- **domain _(Optional)_:** Your app's domain. Defaults to `window.location.host`.
+- **isLimited _(Optional)_:** Set to `false` to request access to all of the user's notification subscriptions for all apps, instead of only `domain`. Defaults to `true`.
+
+</PlatformTabItem>
+</PlatformTabs>
+
+## Managing Account
+
+Register, set and fetch account.
+
+:::note
+Register needs to be called after every page load or Web3InboxClient `init`, even if the
+account is already registered. This is to enable state synchronization.
+:::
+
+<PlatformTabs
+	groupId="w3iw"
+	activeOptions={["react", "javascript"]}
+>
+
+<PlatformTabItem value="react">
+
+```ts
+const { account, setAccount, register } = useW3iAccount()
+
+setAccount('eip155:1:0x9AfEaC202C837df470b5A145e0EfD6a574B21029')
+
+useEffect(async () => {
+  console.log({ account }) // eip155:1:0x9AfEaC202C837df470b5A145e0EfD6a574B21029
+  await register(onSign)
+}, [account])
+```
+
+#### References
+
+- **account:** CAIP-10 account currently active in Web3Inbox
+- **setAccount:** Change actively managed account in Web3Inbox
+- **register:** Async function used to register an account
+- **onSign:** Async function used to sign a message (for registering) of type:
+
+<!-- prettier-ignore-start -->
+
+```ts
+(message: string) => Promise<string>
+```
+
+Some suggested ways to implement the `onSign` callback are via:
+
+- Ethers.js [`Wallet.signMessage` method](https://docs.ethers.org/v5/api/signer/#Signer-signMessage)
+- The [`useSignMessage` hook](https://wagmi.sh/react/hooks/useSignMessage) in `@wagmi`
+
+<!-- prettier-ignore-end -->
+
+</PlatformTabItem>
+
+<PlatformTabItem value="javascript">
+
+```ts
+await client.setAccount('eip155:1:0x9AfEaC202C837df470b5A145e0EfD6a574B21029')
+
+const account = client.getAccount() // eip155:1:0x9AfEaC202C837df470b5A145e0EfD6a574B21029
+client.watchAccount(account => {
+  console.log({ account }) // eip155:1:0x9AfEaC202C837df470b5A145e0EfD6a574B21029
+
+  client.register({
+    account,
+    onSign
+  })
+})
+```
+
+#### References
+
+- **account:** CAIP-10 account currently active in Web3Inbox
+- **setAccount:** Change actively managed account in Web3Inbox
+- **register:** Async function used to register an account
+- **onSign:** Async function used to sign a message (for registering) of type:
+
+<!-- prettier-ignore-start -->
+
+```ts
+;(message: string) => Promise<string>
+```
+
+Some suggested ways to implement the `onSign` callback are via:
+
+- Ethers.js [`Wallet.signMessage` method](https://docs.ethers.org/v5/api/signer/#Signer-signMessage)
+- The [`signMessage` method](https://wagmi.sh/core/actions/signMessage) in `@wagmi/core`
+<!-- prettier-ignore-end -->
+
+</PlatformTabItem>
+</PlatformTabs>
+
+## Managing Subscription
+
+Subscribe, Unsubscribe, Get Subscription, Check if Subscribed.
+
+<PlatformTabs
+	groupId="w3iw"
+	activeOptions={["react", "javascript"]}
+>
+
+<PlatformTabItem value="react">
+
+```ts
+// manage subscription of current account's subscription to current dapp
+const { subscribe, unsubscribe, isSubscribed } = useManageSubscription()
+
+// manage subscription of specific account's subscription to current dapp
+const { subscribe, unsubscribe, isSubscribed } = useManageSubscription(account)
+
+// manage subscription of specific account's subscription to specific dapp
+const { subscribe, unsubscribe, isSubscribed } = useManageSubscription(account, domain)
+
+// get current account's subscription to current dapp
+const { subscription } = useSubscription()
+
+// get specific account's subscription to current dapp
+const { subscription } = useSubscription(account)
+
+// get specific account's subscription to specific dapp
+const { subscription } = useSubscription(account, domain)
+
+subscribe()
+
+unsubscribe()
+
+// get all subscriptions for current account
+const subscriptions = useSubscriptions()
+
+// get all subscriptions for specific account
+const subscriptions = useSubscriptions(account)
+```
+
+#### References
+
+- **account _(Optional)_:** CAIP-10 account
+- **domain _(Optional)_:** dapp domain
+- **subscribe:** Function to subscribe to current dApp `() => void`
+- **unsubscribe:** Function to unsubscribe to current dApp `() => void`
+- **isSubscribed:** Reactive state, checking if subscribed to dApp `Boolean`
+- **isSubscribing:** If `subscribe()` is in-progress and has not finished yet
+- **isUnsubscribing:** If `unsubscribe()` is in-progress and has not finished yet
+- **subscription:** Reactive state, returning current subscription information, of type:
+
+```ts
+{
+  topic: string
+  account: string
+  relay: relayertypes.protocoloptions
+  metadata: Metadata
+  scope: ScopeMap
+  expiry: number
+  symkey: string
+}
+```
+
+- **subscriptions:** Reactive state, returning array of current subscriptions
+
+</PlatformTabItem>
+<PlatformTabItem value="javascript">
+
+```ts
+// check if current account is subscribed to current dapp
+const isSubscribed = client.isSubscribedToDapp()
+
+// check if specific account is subscribed to current dapp
+const isSubscribed = client.isSubscribedToDapp(account)
+
+// check if specific account is subscribed to specific dapp
+const isSubscribed = client.isSubscribedToDapp(account, domain)
+
+// watch if current account is subscribed to current dapp
+client.watchIsSubscribed(isSubbed => console.log({ isSubbed }))
+
+// watch if specific account is subscribed to current dapp
+client.watchIsSubscribed(isSubbed => console.log({ isSubbed }), account)
+
+// watch if specific account is subscribed to specific dapp
+client.watchIsSubscribed(isSubbed => console.log({ isSubbed }), account, domain)
+
+// subscribe to current dapp with current account
+await client.subscribeToDapp()
+
+// subscribe to current dapp with specific account
+await client.subscribeToDapp(account)
+
+// subscribe to specific dapp with specific account
+await client.subscribeToDapp(account, domain)
+
+// unsubscribe from current dapp with current account
+await client.unsubscribeFromDapp()
+
+// unsubscribe from current dapp with specific account
+await client.unsubscribeFromDapp(account)
+
+// subscribe from specific dapp with specific account
+await client.unsubscribeToDapp(account, domain)
+
+// get current account's subscription to current dapp
+const subscription = client.getSubscription()
+
+// get specific account's subscription to current dapp
+const subscription = client.getSubscription(account)
+
+// get specific account's subscription to specific dapp
+const subscription = client.getSubscription(account, domain)
+
+// watch current account's subscription to current dapp
+client.watchSubscription(subscription => console.log({ subscription }))
+
+// watch specific account's subscription to current dapp
+client.watchSubscription(subscription => console.log({ subscription }), account)
+
+// watch specific account's subscription to specific dapp
+client.watchSubscription(subscription => console.log({ subscription }), account, domain)
+
+// get current account's subscriptions
+const subscriptions = client.getSubscriptions()
+
+// get specific account's subscriptions
+const subscriptions = client.getSubscriptions(account)
+
+// watch current account's subscriptions
+client.watchSubscriptions(subscriptions => console.log({ subscriptions }))
+
+// watch specific account's subscriptions
+client.watchSubscriptions(subscriptions => console.log({ subscriptions }), account)
+```
+
+#### References
+
+- **account _(Optional)_:** CAIP-10 account
+- **domain _(Optional)_:** dapp domain
+- **subscription:** _Non-Reactive_ state, returning current subscription information, of type:
+
+```ts
+{
+  topic: string
+  account: string
+  relay: relayertypes.protocoloptions
+  metadata: Metadata
+  scope: ScopeMap
+  expiry: number
+  symkey: string
+}
+```
+
+- **subscription:** _Non-Reactive_ state, returning array of current subscriptions
+
+</PlatformTabItem>
+</PlatformTabs>
+
+## Managing Messages
+
+Get and delete messages
+
+<PlatformTabs
+	groupId="w3iw"
+	activeOptions={["react", "javascript"]}
+>
+
+<PlatformTabItem value="react">
+
+```ts
+// watch messages of current account's subscription to current dapp
+const { messages, deleteMessage } = useMessages()
+
+// watch messages of specific account's subscription to current dapp
+const { messages, deleteMessage } = useMessages(account)
+
+// watch messages of specific account's subscription to specific dapp
+const { messages, deleteMessage } = useMessages(account, domain)
+
+deleteMessage(messages[0].id)
+```
+
+#### References
+
+- **account _(Optional)_:** CAIP 10 account
+- **domain _(Optional)_:** Domain of dapp
+- **messages:** Array of messages, of type
+
+```ts
+{
+  id: number
+  topic: string
+  message: NotifyMessage
+  publishedAt: number
+}
+```
+
+</PlatformTabItem>
+<PlatformTabItem value="javascript">
+
+```ts
+const nonReactiveMessageState = client.getMessageHistory(account)
+let reactiveMessageState = []
+
+// watch messages of current account's subscription to current dapp
+client.watchMessages(m => (reactiveMessageState = m))
+
+// watch messages of specific account's subscription to current dapp
+client.watchMessages(m => (reactiveMessageState = m), account)
+
+// watch messages of specific account's subscription to specific dapp
+client.watchMessages(m => (reactiveMessageState = m), account, domain)
+```
+
+#### References
+
+- **account _(Optional)_:** CAIP-10 account
+- **domain _(Optional)_:** Domain of dapp
+- **messages:** Array of messages, of type
+
+```ts
+{
+  id: number
+  topic: string
+  message: NotifyMessage
+  publishedAt: number
+}
+```
+
+</PlatformTabItem>
+</PlatformTabs>
+
+## Subscription Scopes
+
+Manage and fetch subscription scopes.
+
+<PlatformTabs
+	groupId="w3iw"
+	activeOptions={["react", "javascript"]}
+>
+
+<PlatformTabItem value="react">
+
+```ts
+// watch and manage scopes of current account's subscription to current dapp
+const { scopes, updateScopes } = useSubscriptionScopes()
+
+// watch and manage scopes of specific account's subscription to current dapp
+const { scopes, updateScopes } = useSubscriptionScopes(account)
+
+// watch and manage scopes of specific account's subscription to specific dapp
+const { scopes, updateScopes } = useSubscriptionScopes(account, domain)
+
+updateScopes(Object.keys(scopes))
+```
+
+#### References
+
+- **account _(Optional)_:** CAIP-10 account
+- **domain _(Optional)_:** dapp domain
+- **scopes:** Map of scopes (Notification types)
+- **updateScopes:** `(enabledScopeNames: string[]) -> void`
+
+```ts
+type ScopeMap = Record<
+  string,
+  {
+    name: string
+    description: string
+    enabled: boolean
+  }
+>
+```
+
+</PlatformTabItem>
+<PlatformTabItem value="javascript">
+
+```ts
+// get scopes of current account's subscription to current dapp
+const scopes = client.getNotificationTypes()
+
+// get scopes of specific account's subscription to current dapp
+const scopes = client.getNotificationTypes(account)
+
+// get scopes of specific account's subscription to specific dapp
+const scopes = client.getNotificationTypes(account, domain)
+
+let reactiveScopes = {}
+
+// watch scopes of current account's subscription to current dapp
+client.watchScopeMap(scp => (reactiveScopes = scp))
+
+// watch scopes of specific account's subscription to current dapp
+client.watchScopeMap(scp => (reactiveScopes = scp), account)
+
+// watch scopes of specific account's subscription to specific dapp
+client.watchScopeMap(scp => (reactiveScopes = scp), account, domain)
+
+// update scopes of current account's subscription to current dapp
+client.update(Object.keys(scopes))
+
+// update scopes of specific account's subscription to current dapp
+client.update(Object.keys(scopes), account)
+
+// update scopes of specific account's subscription to specific dapp
+client.update(Object.keys(scopes), account, domain)
+```
+
+#### References
+
+- **account _(Optional)_:** CAIP-10 account
+- **domain _(Optional)_:** dapp domain
+- **scopes:** Map of scopes (Notification types)
+- **updateScopes:** `(enabledScopeNames: string[]) -> void`
+
+```ts
+type ScopeMap = Record<
+  string,
+  {
+    name: string
+    description: string
+    enabled: boolean
+  }
+>
+```
+
+</PlatformTabItem>
+</PlatformTabs>

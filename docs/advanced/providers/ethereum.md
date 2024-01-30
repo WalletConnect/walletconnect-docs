@@ -1,6 +1,12 @@
 # Ethereum Provider
 
-[EIP-1993](https://eips.ethereum.org/EIPS/eip-1193) compliant Provider for WalletConnect v2. You can use this on it's own or pass down to libraries like ethers, viem, web3js and others.
+:::info
+
+Web3Modal SDK v3 is out! Learn how to integrate it [here](../../web3modal/about.mdx)
+
+:::
+
+[EIP-1193](https://eips.ethereum.org/EIPS/eip-1193) compliant Provider for WalletConnect v2. You can use this on it's own or pass down to libraries like ethers, viem, web3js and others.
 
 ## Installation
 
@@ -15,16 +21,21 @@ import { EthereumProvider } from '@walletconnect/ethereum-provider'
 
 const provider = await EthereumProvider.init({
   projectId, // REQUIRED your projectId
-  chains, // REQUIRED chain ids
-  optionalChains, // OPTIONAL chains
   showQrModal, // REQUIRED set to "true" to use @walletconnect/modal
-  methods, // REQUIRED ethereum methods
-  optionalMethods, // OPTIONAL ethereum methods
-  events, // REQUIRED ethereum events
-  optionalEvents, // OPTIONAL ethereum events
+
+  /* Optional Namespaces - RECOMMENDED FOR MULTI-CHAIN APPS */
+  optionalChains, // chains - required for optional namespaces
+  optionalMethods, // ethereum methods - all ethereum methods are already set by default so this is not required
+  optionalEvents, // ethereum events - all ethereum events are already set by default so this is not required
+
+  /* Required Namespaces - NOT RECOMMENDED FOR MULTI-CHAIN APPS*/
+  chains, //  chain ids
+  methods, // ethereum methods
+  events, // ethereum events
+
   rpcMap, // OPTIONAL rpc urls for each chain
   metadata, // OPTIONAL metadata of your app
-  qrModalOptions // OPTIONAL - `undefined` by default, see https://docs.walletconnect.com/2.0/web3modal/options
+  qrModalOptions // OPTIONAL - `undefined` by default, see https://docs.walletconnect.com/web3modal/options
 })
 ```
 
@@ -77,7 +88,7 @@ provider.on('disconnect', handler)
 
 With Ethereum Provider, the package passed the required chains through `chains` and if your dapp wants to provide other optionalNamespaces this is passed through `optionalChains`.
 
-Example code can be found [here](https://github.com/wagmi-dev/references/blob/main/packages/connectors/src/walletConnect.ts#L134) and further documentation on namespaces can be found in this [spec](https://docs.walletconnect.com/2.0/specs/clients/sign/namespaces).
+Example code can be found [here](https://github.com/wagmi-dev/references/blob/main/packages/connectors/src/walletConnect.ts#L134) and further documentation on namespaces can be found in this [spec](https://docs.walletconnect.com/specs/clients/sign/namespaces).
 
 The example below specifies Ethereum Mainnet (chainId `1`) as a required chain via `chains`, and Ethereum Goerli (chainId `5`) as an optional chain via `optionalChains`.
 

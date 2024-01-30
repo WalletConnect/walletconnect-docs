@@ -39,11 +39,11 @@ Pairing is a topic encrypted by a symmetric key shared through a URI between two
 
 ```typescript
 interface ErrorResponse {
-  id: number;
+  id: number
   error: {
-    code: number;
-    message: string;
-  };
+    code: number
+    message: string
+  }
 }
 ```
 

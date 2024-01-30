@@ -1,0 +1,8 @@
+Web3Modal includes wallets from 3 sources: [WalletConnect explorer](https://walletconnect.com/explorer), wagmi connectors and manually defined wallets.
+Below are defaults for each source:
+
+1. All WalletConnect explorer wallets that satisfy your options
+2. When using `w3mConnectors` helper, modal includes [WalletConnectConnector](https://wagmi.sh/react/connectors/walletConnect) and [InjectedConnector](https://wagmi.sh/react/connectors/injected)
+3. No manual wallets are defined by default
+
+Wallets are ordered with following priority: wagmi connectors, manual wallets, explorer wallets.

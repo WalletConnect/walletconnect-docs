@@ -6,13 +6,13 @@ import PlatformTabItem from '../../components/PlatformTabItem'
 
 # Usage
 
-This section provides instructions on how to initialize the Web3Wallet client, approve sessions with supported namespaces, and respond to session requests, enabling easy integration of Web3 wallets with dapps through a simple and intuitive interface.
+This section provides instructions on how to use WalletConnectModal in your project.
 
 ## Implementation
 
 <PlatformTabs
 	groupId="wcm"
-	activeOptions={["web","ios","android","flutter","react-native"]}
+	activeOptions={["web","ios","android","flutter","react-native", "unity"]}
 >
 <PlatformTabItem value="web">
 
@@ -173,30 +173,13 @@ WalletConnectModal.setSessionParams(sessionParams)
 </PlatformTabItem>
 <PlatformTabItem value="flutter">
 
-To get the modal to work properly you need to create two objects.
+Create your `WalletConnectModalService` which is your primary class for opening, closing, disconnecting, etc.
 
-The first is the `WalletConnectModalTheme` which is used to style the modal.
-
-```dart
-// Example of WalletConnectModalTheme
-return WalletConnectModalTheme(
-  data: WalletConnectModalThemeData.darkMode,
-  child: MaterialApp(
-    title: 'Flutter Demo',
-    theme: ThemeData(
-      colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-      useMaterial3: true,
-    ),
-    home: const MyHomePage(title: 'WalletConnectModal Sign Example'),
-  ),
-);
-```
-
-The second is the WalletConnectModalService which is your primary class for opening, closing, disconnecting, etc.
+Be sure to update the project ID and metadata with your own.
 
 ```dart
 WalletConnectModalService service = WalletConnectModalService(
-  projectId: projectId,
+  projectId: 'YOUR_PROJECT_ID',
   metadata: const PairingMetadata(
     name: 'Flutter WalletConnect',
     description: 'Flutter WalletConnectModal Sign Example',
@@ -213,7 +196,7 @@ await service.init();
 
 The service must be initialized before it can be used.
 
-Now that those two things are setup in your application, you can call `_service.open()` to open the modal.
+With the `WalletConnectModalService` created and ready, you can call `_service.open()` to open the modal.
 
 To make things easy, you can use the WalletConnectModalConnect widget to open the modal.
 This is a button that changes its state based on the modal and connection.
@@ -256,7 +239,7 @@ To handle deep linking to your app, you will also need to add the following to t
 
 #### Android Setup
 
-On android 11+ you must specify that use can use the internet, along with the different schemes you would like to be able to deep link to in the `android/app/src/main/AndroidManifest.xml` file like so:
+On android 11+ you must specify that use can use the internet, along with the different packages you would like to be able to deep link to in the `android/app/src/main/AndroidManifest.xml` file like so:
 
 ```xml
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
@@ -267,10 +250,13 @@ On android 11+ you must specify that use can use the internet, along with the di
             <category android:name="android.intent.category.BROWSABLE" />
             <data android:scheme="https" />
         </intent>
-        <intent>
-            <action android:name="android.intent.action.VIEW" />
-            <data android:scheme="metamask" />
-        </intent>
+        <package android:name="io.metamask"/>
+        <package android:name="com.wallet.crypto.trustapp"/>
+        <package android:name="io.gnosis.safe"/>
+        <package android:name="me.rainbow"/>
+        <package android:name="io.zerion.android"/>
+        <package android:name="com.imtoken.app"/>
+        <!-- Add other wallets you would like to launch from within the app -->
     </queries>
     <!-- Permission to access the internet -->
     <uses-permission android:name="android.permission.INTERNET"/>
@@ -290,6 +276,8 @@ On android 11+ you must specify that use can use the internet, along with the di
 </manifest>
 ```
 
+For other packages, see the [example project](https://github.com/WalletConnect/Web3ModalFlutter/blob/2981053456ecd3511ca2e3a7f0def7c75e22af62/example/sign/android/app/src/main/AndroidManifest.xml#L2)
+
 For some reason, multiple wallets have the `metamask` intent, and will launch metamask as a result.
 This is a bug in the wallets, not this package.
 
@@ -297,9 +285,10 @@ This is a bug in the wallets, not this package.
 
 <PlatformTabItem value="react-native">
 
-Import WalletConnect Modal package, replace `YOUR_PROJECT_ID` with your [WalletConnect Cloud](https://cloud.walletconnect.com/sign-in) Project ID and add your Project's info in `providerMetadata`
+Start by importing `@walletconnect/react-native-compat` at the top of your app. Then import the WalletConnect Modal package, replace `YOUR_PROJECT_ID` with your [WalletConnect Cloud](https://cloud.walletconnect.com/sign-in) Project ID and add your Project's info in `providerMetadata`
 
 ```tsx
+import '@walletconnect/react-native-compat'
 import { WalletConnectModal } from '@walletconnect/modal-react-native'
 
 const projectId = 'YOUR_PROJECT_ID'
@@ -325,13 +314,22 @@ function App() {
 ```
 
 </PlatformTabItem>
+
+<PlatformTabItem value="unity">
+
+1. Fill in the Project ID and Metadata fields in the `Assets/WalletConnectUnity/Resources/WalletConnectProjectConfig` asset.
+   - If you don’t have a Project ID, you can create one at [WalletConnect Cloud](https://cloud.walletconnect.com).
+   - The `Redirect` fields are optional. They are used to redirect the user back to your app after they approve or reject the session.
+2. Add `WalletConnectModal` prefab from `WalletConnectUnity Modal` package to the first scene in your game.
+
+</PlatformTabItem>
 </PlatformTabs>
 
 ## Usage
 
 <PlatformTabs
 	groupId="wcm"
-	activeOptions={["web","ios","android","flutter", "react-native"]}
+	activeOptions={["web","ios","android","flutter", "react-native", "unity"]}
 >
 
 <PlatformTabItem value="web">
@@ -360,7 +358,7 @@ interface OpenOptions {
   uri: string
   // CAIP-2 compliant chain ids to override initial chains defined when creating the modal
   // Learn about CAIP-10: https://github.com/ChainAgnostic/CAIPs/blob/master/CAIPs/caip-10.md
-  chains?: string
+  chains?: string[]
 }
 ```
 
@@ -654,7 +652,7 @@ To get a list of active sessions, call `WalletConnectModal.getListOfActiveSessio
 WalletConnectModal.getActiveSessionByTopic(topic)
 ```
 
-To get a active session for a topic, call `WalletConnectModal.getActiveSessionByTopic()` and pass a topic which will return
+To get an active session for a topic, call `WalletConnectModal.getActiveSessionByTopic()` and pass a topic which will return
 a `Modal.Model.Session` object containing requestId, method, chainIs and params for pending request.
 
 </PlatformTabItem>
@@ -705,6 +703,7 @@ address;
 
 ```tsx
 import { Pressable, Text } from 'react-native'
+import '@walletconnect/react-native-compat'
 import { WalletConnectModal, useWalletConnectModal } from '@walletconnect/modal-react-native'
 
 const projectId = 'YOUR_PROJECT_ID'
@@ -721,17 +720,245 @@ const providerMetadata = {
 }
 
 function App() {
-  const { open, isConnected } = useWalletConnectModal()
+  const { open, isConnected, provider } = useWalletConnectModal()
+
+  const onPress = () => {
+    if (isConnected) {
+      provider.disconnect()
+    } else {
+      open()
+    }
+  }
+
   return (
     <>
-      <Pressable onPress={open}>
-        <Text>{isConnected ? 'View Account' : 'Connect'}</Text>
+      <Pressable onPress={onPress}>
+        <Text>{isConnected ? 'Disconnect' : 'Connect'}</Text>
       </Pressable>
       <WalletConnectModal projectId={projectId} providerMetadata={providerMetadata} />
     </>
   )
 }
 ```
+
+</PlatformTabItem>
+<PlatformTabItem value="unity">
+
+#### Connection and Events
+
+- WalletConnect Modal is a singleton that can be accessed from any scene.
+- By default Modal will initialize itself asynchronously on Awake. During initialization it will also try to connect
+  to the last
+  session.
+- After initialization, Modal invokes `WalletConnectModal.Ready` static event.
+- If `Ready` argument's `SessionResumed` is `true`, it means that Modal has successfully connected to the last
+  session. In this case you don't need to open the modal. Otherwise, open the modal with `WalletConnectModal.Open()`
+  static method.
+
+```csharp
+private void Start()
+{
+    WalletConnectModal.Ready += (sender, args) =>
+    {
+        if (args.SessionResumed)
+        {
+            // Session has been resumed, proceed to the game
+        }
+        else
+        {
+            // Session hasn't been resumed
+
+            // Define required namespaces for new session
+            var requiredNamespaces = new RequiredNamespaces
+            {
+                {
+                    "eip155", new ProposedNamespace
+                    {
+                        Methods = new[]
+                        {
+                            "eth_sendTransaction",
+                            "personal_sign",
+                            "eth_signTypedData"
+                        },
+                        Chains = new[]
+                        {
+                            "eip155:1"
+                        },
+                        Events = new[]
+                        {
+                            "chainChanged",
+                            "accountsChanged"
+                        }
+                    }
+                }
+            };
+
+            var connectOptions = new ConnectOptions
+            {
+                RequiredNamespaces = requiredNamespaces
+            };
+
+            // Open the modal
+            WalletConnectModal.Open(new WalletConnectModalOptions
+            {
+                ConnectOptions = connectOptions
+            });
+        }
+    };
+}
+```
+
+Subscribe to `ActiveSessionChanged` and `SessionDeleted` events. It's recommended to do it in `Ready` event handler.
+
+```csharp
+WalletConnectModal.Ready += (sender, args) =>
+{
+    // ....
+
+    // Invoked after wallet connected
+    WalletConnect.Instance.ActiveSessionChanged += (_, sessionStruct) =>
+    {
+        // Session connected/updated, proceed to the game
+    };
+
+    // Invoked after wallet disconnected
+    WalletConnectModal.SignClient.SessionDeleted += (_, sessionEvent) =>
+    {
+        // Session deleted, show sign in screen
+    };
+};
+```
+
+#### Disconnection
+
+To disconnect from the current session, call `WalletConnectModal.Disconnect()` static method.
+
+### Interaction with RPC
+
+The WalletConnect Modal is responsible for facilitating communication between the game and the wallet.
+Some methods do not require the user to interact with the wallet. For example, `eth_getBalance` is used to get the address balance,
+and `eth_call` is used to read data from a smart contract without modifying its state, hence no signature is required.
+
+To call these methods, you can use the [Nethereum.Web3](https://www.nuget.org/packages/nethereum.web3) package.
+
+```csharp
+private static async Task GetAccountBalance()
+{
+    var session = WalletConnect.Instance.ActiveSession;
+
+    // Because one session can have multiple namespaces, we need to select one.
+    // In most cases, especially in games, dapp will use only one namespace.
+    var @namespace = session.Namespaces.First();
+    var address = session.CurrentAddress(@namespace.Key).Address;
+
+    var config = ProjectConfiguration.Load();
+
+    // Using WalletConnect Blockchain API: https://docs.walletconnect.com/cloud/blockchain-api
+    var url = $"https://rpc.walletconnect.com/v1?chainId={@namespace.Value.Chains[0]}&projectId={config.Id}";
+
+    var web3 = new Nethereum.Web3.Web3(url);
+    var balance = await web3.Eth.GetBalance.SendRequestAsync(address);
+    Debug.Log($"Balance of {address} in Wei: {balance.Value}");
+
+    var etherAmount = Nethereum.Web3.Web3.Convert.FromWei(balance.Value);
+    Debug.Log($"Balance of {address} in Ether: {etherAmount}");
+}
+```
+
+#### Interaction with Smart Contracts
+
+To query smart contracts, you can use [Nethereum.Web3](https://www.nuget.org/packages/nethereum.web3) package
+to make `eth_call` requests directly to the RPC endpoint.
+However, to call methods that modify the state of the smart contract, you need user to sign the transaction in the wallet.
+
+The example below shows how to call `approve` method of WETH9 (Wrapped Ether) smart contract. It encodes data with Nethereum and makes request with WalletConnect.
+
+```csharp
+public async Task ContractTransaction()
+{
+    var session = WalletConnect.Instance.ActiveSession;
+
+    // Because one session can have multiple namespaces, we need to select one.
+    // In most cases, especially in games, dapp will use only one namespace.
+    var @namespace = session.Namespaces.First();
+    var myAddress = session.CurrentAddress(@namespace.Key).Address;
+
+    // Define contract and function details
+    var contractAddress = "0x4200000000000000000000000000000000000006";
+    var toAddress = myAddress; // Use sender's address for the sake of example
+    var amount = new BigInteger(12345);
+
+    // Define the parameters for the approve function
+    var parameters = new Parameter[] {
+        new("address", "guy"),
+        new("uint256", "wad")
+    };
+
+    var functionCallEncoder = new FunctionCallEncoder();
+    var sha3Signature = new Sha3Keccack().CalculateHash("approve(address,uint256)");
+
+    // Encode the parameters
+    var encodedParameters = functionCallEncoder
+        .EncodeParameters(parameters, toAddress, amount)
+        .ToHex();
+
+    // Combine signature and parameters
+    var data = "0x" + sha3Signature[..8] + encodedParameters;
+
+    // Create transaction
+    var ethSendTransaction = new EthSendTransaction(new Transaction
+    {
+        From = myAddress,
+        To = contractAddress,
+        Value = "0",
+        Data = data
+    });
+
+    try
+    {
+        var result = await WalletConnect.Instance.RequestAsync<EthSendTransaction, string>(ethSendTransaction);
+        Debug.Log($"Transaction success! TxHash: {result}", this);
+    }
+    catch (Exception e)
+    {
+        Debug.LogError(e, this);
+    }
+}
+
+public class Transaction
+{
+    [JsonProperty("from")] public string From { get; set; }
+
+    [JsonProperty("to")] public string To { get; set; }
+
+    [JsonProperty("gas", NullValueHandling = NullValueHandling.Ignore)]
+    public string Gas { get; set; }
+
+    [JsonProperty("gasPrice", NullValueHandling = NullValueHandling.Ignore)]
+    public string GasPrice { get; set; }
+
+    [JsonProperty("value")] public string Value { get; set; }
+
+    [JsonProperty("data", NullValueHandling = NullValueHandling.Ignore)]
+    public string Data { get; set; } = "0x";
+}
+
+[RpcMethod("eth_sendTransaction"), RpcRequestOptions(Clock.ONE_MINUTE, 99997)]
+public class EthSendTransaction : List<Transaction>
+{
+    public EthSendTransaction(params Transaction[] transactions) : base(transactions)
+    {
+    }
+
+    [Preserve]
+    public EthSendTransaction()
+    {
+    }
+}
+```
+
+Please refer to [Nethereum](https://nethereum.com/) documentation for more details. Nethereum provides tools to simplify encoding and decoding.
+These tools hadn't been used in the example above to better illustrate the process.
 
 </PlatformTabItem>
 </PlatformTabs>

@@ -61,149 +61,137 @@ The verification should be performed every time a did-jwt is received and the re
 ```typescript
 // ---------- API ----------------------------------------------- //
 
-function signJWT(subject: string, keyPair: ed25519.KeyPair): Promise<string>;
-function verifyJWT(jwt: string): Promise<boolean>;
+function signJWT(subject: string, keyPair: ed25519.KeyPair): Promise<string>
+function verifyJWT(jwt: string): Promise<boolean>
 
 // ---------- Utilities ----------------------------------------------- //
 
-function decodeJSON(str: string): any;
-function encodeJSON(val: any): string;
+function decodeJSON(str: string): any
+function encodeJSON(val: any): string
 
-function encodeIss(publicKey: Uint8Array): string;
-function decodeIss(issuer: string): Uint8Array;
+function encodeIss(publicKey: Uint8Array): string
+function decodeIss(issuer: string): Uint8Array
 
-function encodeSig(bytes: Uint8Array): string;
-function decodeSig(encoded: string): Uint8Array;
+function encodeSig(bytes: Uint8Array): string
+function decodeSig(encoded: string): Uint8Array
 
-function encodeData(params: JWTData): string;
-function decodeData(jwt: string): JWTData;
+function encodeData(params: JWTData): string
+function decodeData(jwt: string): JWTData
 
-function encodeJWT(params: JWTSigned): string;
-function decodeJWT(jwt: string): JWTSigned;
+function encodeJWT(params: JWTSigned): string
+function decodeJWT(jwt: string): JWTSigned
 ```
 
 ### Reference Implementation
 
 ```typescript
-import * as ed25519 from "@stablelib/ed25519";
-import { concat } from "uint8arrays/concat";
-import { toString } from "uint8arrays/to-string";
-import { fromString } from "uint8arrays/from-string";
-import { fromMiliseconds } from "@walletconnect/time";
-import { safeJsonParse, safeJsonStringify } from "@walletconnect/safe-json";
+import * as ed25519 from '@stablelib/ed25519'
+import { concat } from 'uint8arrays/concat'
+import { toString } from 'uint8arrays/to-string'
+import { fromString } from 'uint8arrays/from-string'
+import { fromMiliseconds } from '@walletconnect/time'
+import { safeJsonParse, safeJsonStringify } from '@walletconnect/safe-json'
 
 // ---------- Interfaces ----------------------------------------------- //
 
 interface JWTHeader {
-  alg: "EdDSA";
-  typ: "JWT";
+  alg: 'EdDSA'
+  typ: 'JWT'
 }
 
 interface JWTPayload {
-  iss: string;
-  sub: string;
+  iss: string
+  sub: string
 }
 
 interface JWTData {
-  header: JWTHeader;
-  payload: JWTPayload;
+  header: JWTHeader
+  payload: JWTPayload
 }
 
 interface JWTSigned extends JWTData {
-  signature: Uint8Array;
+  signature: Uint8Array
 }
 
 // ---------- Constants ----------------------------------------------- //
 
-const JWT_ALG: JWTHeader["alg"] = "EdDSA";
+const JWT_ALG: JWTHeader['alg'] = 'EdDSA'
 
-const JWT_TYP: JWTHeader["typ"] = "JWT";
+const JWT_TYP: JWTHeader['typ'] = 'JWT'
 
-const JWT_DELIMITER = ".";
+const JWT_DELIMITER = '.'
 
-const JWT_ENCODING = "base64url";
+const JWT_ENCODING = 'base64url'
 
-const JSON_ENCODING = "utf8";
+const JSON_ENCODING = 'utf8'
 
-const DATA_ENCODING = "utf8";
+const DATA_ENCODING = 'utf8'
 
-const DID_DELIMITER = ":";
+const DID_DELIMITER = ':'
 
-const DID_PREFIX = "did";
+const DID_PREFIX = 'did'
 
-const DID_METHOD = "key";
+const DID_METHOD = 'key'
 
-const MULTICODEC_ED25519_ENCODING = "base58btc";
+const MULTICODEC_ED25519_ENCODING = 'base58btc'
 
-const MULTICODEC_ED25519_BASE = "z";
+const MULTICODEC_ED25519_BASE = 'z'
 
-const MULTICODEC_ED25519_HEADER = "K36";
+const MULTICODEC_ED25519_HEADER = 'K36'
 
-const MULTICODEC_ED25519_LENGTH = 32;
+const MULTICODEC_ED25519_LENGTH = 32
 
 const MULTIBASE_BASE58BTC_PREFIX = 'z'
 
 // ---------- JSON ----------------------------------------------- //
 
 function decodeJSON(str: string): any {
-  return safeJsonParse(toString(fromString(str, JWT_ENCODING), JSON_ENCODING));
+  return safeJsonParse(toString(fromString(str, JWT_ENCODING), JSON_ENCODING))
 }
 
 function encodeJSON(val: any): string {
-  return toString(
-    fromString(safeJsonStringify(val), JSON_ENCODING),
-    JWT_ENCODING
-  );
+  return toString(fromString(safeJsonStringify(val), JSON_ENCODING), JWT_ENCODING)
 }
 
 // ---------- Issuer ----------------------------------------------- //
 
 function encodeIss(publicKey: Uint8Array): string {
-  const keyType = fromString(
-    MULTICODEC_ED25519_KEY_TYPE,
-    MULTICODEC_ED25519_ENCODING
-  );
-  const header = fromString(MULTICODEC_ED25519_HEADER, MULTICODEC_ED25519_ENCODING);
-  const multicodec = toString(
-    concat([header, publicKey]),
-    MULTICODEC_ED25519_ENCODING
-  );
-  const multibase = MULTIBASE_BASE58BTC_PREFIX + multicodec;
-  return [DID_PREFIX, DID_METHOD, multibase].join(DID_DELIMITER);
+  const keyType = fromString(MULTICODEC_ED25519_KEY_TYPE, MULTICODEC_ED25519_ENCODING)
+  const header = fromString(MULTICODEC_ED25519_HEADER, MULTICODEC_ED25519_ENCODING)
+  const multicodec = toString(concat([header, publicKey]), MULTICODEC_ED25519_ENCODING)
+  const multibase = MULTIBASE_BASE58BTC_PREFIX + multicodec
+  return [DID_PREFIX, DID_METHOD, multibase].join(DID_DELIMITER)
 }
 
 function decodeIss(issuer: string): Uint8Array {
-  const [prefix, method, multibase] = issuer.split(DID_DELIMITER);
+  const [prefix, method, multibase] = issuer.split(DID_DELIMITER)
   if (prefix !== DID_PREFIX || method !== DID_METHOD) {
-    throw new Error(`Issuer must be a DID with method "key"`);
+    throw new Error(`Issuer must be a DID with method "key"`)
   }
-  const base = multibase.slice(0, 1);
+  const base = multibase.slice(0, 1)
   if (base !== MULTIBASE_BASE58BTC_PREFIX) {
-    throw new Error(`Issuer must be a multibase with encoding base58btc`);
+    throw new Error(`Issuer must be a multibase with encoding base58btc`)
   }
-  const multicodec = fromString(
-    multibase.slice(1),
-    MULTICODEC_ED25519_ENCODING
-  );
-  const keyType = toString(multicodec.slice(0, 2), MULTICODEC_ED25519_ENCODING);
+  const multicodec = fromString(multibase.slice(1), MULTICODEC_ED25519_ENCODING)
+  const keyType = toString(multicodec.slice(0, 2), MULTICODEC_ED25519_ENCODING)
   if (keyType !== MULTICODEC_ED25519_HEADER) {
-    throw new Error(`Issuer must be a public key with type "Ed25519"`);
+    throw new Error(`Issuer must be a public key with type "Ed25519"`)
   }
-  const publicKey = multicodec.slice(2);
+  const publicKey = multicodec.slice(2)
   if (publicKey.length !== MULTICODEC_ED25519_LENGTH) {
-    throw new Error(`Issuer must be a public key with length 32 bytes`);
+    throw new Error(`Issuer must be a public key with length 32 bytes`)
   }
-  return publicKey;
+  return publicKey
 }
 
 // ---------- Sig ----------------------------------------------- //
 
 function encodeSig(bytes: Uint8Array): string {
-  return toString(bytes, JWT_ENCODING);
+  return toString(bytes, JWT_ENCODING)
 }
 
 function decodeSig(encoded: string): Uint8Array {
-  return fromString(encoded, JWT_ENCODING);
+  return fromString(encoded, JWT_ENCODING)
 }
 
 // ---------- Data ----------------------------------------------- //
@@ -212,32 +200,30 @@ function encodeData(params: JWTData): Uint8Array {
   return fromString(
     [encodeJSON(params.header), encodeJSON(params.payload)].join(JWT_DELIMITER),
     DATA_ENCODING
-  );
+  )
 }
 
 function decodeData(data: Uint8Array): JWTData {
-  const params = toString(data, DATA_ENCODING).split(JWT_DELIMITER);
-  const header = decodeJSON(params[0]);
-  const payload = decodeJSON(params[1]);
-  return { header, payload };
+  const params = toString(data, DATA_ENCODING).split(JWT_DELIMITER)
+  const header = decodeJSON(params[0])
+  const payload = decodeJSON(params[1])
+  return { header, payload }
 }
 
 // ---------- JWT ----------------------------------------------- //
 
 function encodeJWT(params: JWTSigned): string {
-  return [
-    encodeJSON(params.header),
-    encodeJSON(params.payload),
-    encodeSig(params.signature),
-  ].join(JWT_DELIMITER);
+  return [encodeJSON(params.header), encodeJSON(params.payload), encodeSig(params.signature)].join(
+    JWT_DELIMITER
+  )
 }
 
 function decodeJWT(jwt: string): JWTSigned {
-  const params = jwt.split(JWT_DELIMITER);
-  const header = decodeJSON(params[0]);
-  const payload = decodeJSON(params[1]);
-  const signature = decodeSig(params[2]);
-  return { header, payload, signature };
+  const params = jwt.split(JWT_DELIMITER)
+  const header = decodeJSON(params[0])
+  const payload = decodeJSON(params[1])
+  const signature = decodeSig(params[2])
+  return { header, payload, signature }
 }
 
 // ---------- API ----------------------------------------------- //
@@ -249,24 +235,24 @@ async function signJWT(
   ttl: number,
   keyPair: ed25519.KeyPair
 ) {
-  const header = { alg: JWT_ALG, typ: JWT_TYP };
-  const iss = encodeIss(keyPair.publicKey);
-  const iat = fromMiliseconds(Date.now());
-  const exp = iat + ttl;
-  const payload = { iat, exp, act, iss, sub, aud };
-  const data = encodeData({ header, payload });
-  const signature = ed25519.sign(keyPair.secretKey, data);
-  return encodeJWT({ header, payload, signature });
+  const header = { alg: JWT_ALG, typ: JWT_TYP }
+  const iss = encodeIss(keyPair.publicKey)
+  const iat = fromMiliseconds(Date.now())
+  const exp = iat + ttl
+  const payload = { iat, exp, act, iss, sub, aud }
+  const data = encodeData({ header, payload })
+  const signature = ed25519.sign(keyPair.secretKey, data)
+  return encodeJWT({ header, payload, signature })
 }
 
 async function verifyJWT(jwt: string) {
-  const { header, payload, signature } = decodeJWT(jwt);
+  const { header, payload, signature } = decodeJWT(jwt)
   if (header.alg !== JWT_ALG || header.typ !== JWT_TYP) {
-    throw new Error("JWT must use EdDSA algorithm");
+    throw new Error('JWT must use EdDSA algorithm')
   }
-  const publicKey = decodeIss(payload.iss);
-  const data = encodeData({ header, payload });
-  return ed25519.verify(publicKey, data, signature);
+  const publicKey = decodeIss(payload.iss)
+  const data = encodeData({ header, payload })
+  return ed25519.verify(publicKey, data, signature)
 }
 ```
 

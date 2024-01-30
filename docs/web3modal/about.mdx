@@ -1,151 +1,138 @@
-import Container from './../components/Container'
+---
+pagination_next: web3modal/react/about
+title: Introduction
+---
+
+import Container from '../components/Container.js'
 import Wrapper from '../components/Home/Wrapper'
+import Button from '../components/button'
+import W3MQuickStart from '../components/W3MQuickStart'
+
+import reactLogo from '../../static/assets/home/reactLogo.png'
+import nextjsLogo from '../../static/assets/home/nextjsLogo.png'
+import htmlLogo from '../../static/assets/home/htmlLogo.png'
+import vueLogo from '../../static/assets/home/vueLogo.png'
 import androidLogo from '../../static/assets/home/androidLogo.png'
 import iosLogo from '../../static/assets/home/iosLogo.png'
 import rnLogo from '../../static/assets/home/rnLogo.png'
 import flutterLogo from '../../static/assets/home/flutterLogo.png'
 import unityLogo from '../../static/assets/home/unityLogo.png'
-import reactLogo from '../../static/assets/home/reactLogo.png'
-import htmlLogo from '../../static/assets/home/htmlLogo.png'
+import javascriptLogo from '../../static/assets/home/javascriptLogo.png'
 
-# Introduction
+# Web3Modal v3
 
-The Web3Modal SDK allows you to easily connect your Web3 dapp with wallets. It provides a simple and intuitive interface for dapps to request actions such as signing transactions and interacting with smart contracts on the blockchain. The SDK is designed to work with any blockchain, making it easy to support multiple chains without the need for separate integration code.
+The Web3Modal SDK allows you to easily connect your Web3 dapp with wallets. It provides a simple and
+intuitive interface for dapps to request actions such as signing transactions and interacting with smart
+contracts on the blockchain.
 
-:::info
-This documentation is for Web3Modal v2. You can find Web3Modal v3 in its Beta version [here](./v3/about.mdx)
+<W3MQuickStart />
+
+## Get Started
+
+:::info Note
+Looking to upgrade from Web3Modal v2? Check out the [upgrade guide](./upgrade.mdx).
 :::
-
-## QuickStart
 
 <Wrapper
   type="large"
   fit={false}
   items={[
     {
-      name: 'React + wagmi',
-      description: 'Get started with Web3Modal and wagmi in React.',
+      name: 'React',
+      description: 'Get started with Web3Modal in React.',
       icon: reactLogo,
-      href: '/2.0/web3modal/react/wagmi/installation'
+      href: './react/about'
     },
     {
-      name: 'HTML + wagmi',
-      description: 'Get started with Web3Modal and wagmi in HTML.',
-      icon: htmlLogo,
-      href: '/2.0/web3modal/html/wagmi/installation'
+      name: 'Next.js',
+      description: 'Get started with Web3Modal in Next.js.',
+      icon: nextjsLogo,
+      href: './nextjs/about',
+      isWhite: true
+    },
+    {
+      name: 'Vue',
+      description: 'Get started with Web3Modal in Vue.',
+      icon: vueLogo,
+      href: './vue/about'
+    },
+    {
+      name: 'JavaScript',
+      description: 'Get started with Web3Modal in JavaScript.',
+      icon: javascriptLogo,
+      href: './javascript/about'
+    },
+    {
+      name: 'React Native',
+      description: 'Get started with Web3Modal in React Native.',
+      icon: rnLogo,
+      href: './react-native/about'
+    },
+    {
+      name: 'Flutter',
+      description: 'Get started with Web3Modal in Flutter.',
+      icon: flutterLogo,
+      href: './flutter/installation'
+    },
+    {
+      name: 'Android',
+      description: 'Get started with Web3Modal in Android.',
+      icon: androidLogo,
+      href: './android/about'
+    },
+    {
+      name: 'iOS',
+      description: 'Get started with Web3Modal in iOS.',
+      icon: iosLogo,
+      href: './ios/about',
+      isWhite: true
     }
   ]}
 />
 
 ## Features
 
+![v3 banner](../../static/img/v3.png)
+
 Some of the key features of the Web3Modal SDK include:
 
-- **Support for multiple frameworks.** Easily integrate with React, Vue, Vite, and more.
+- **Support for multiple frameworks.** Easily integrate with React, Vue, vanilla JavaScript, and more.
 - **Customizable UI**. Choose between light and dark modes and accent colors, or even infuse it with your own branding.
-- **Multi-chain ready.** Easily set up support for EVM and non-EVM chains.
+- **[EIP-6963](https://eips.ethereum.org/EIPS/eip-6963) support** for browser extension wallets.
+- **Multi-chain ready.** Easily set up support for any EVM chain.
 - **Hundreds of Wallets.** Connect with MetaMask, Rainbow, Coinbase and many more.
-- **Built-in RPC**. Our [Blockchain API](../cloud/blockchain-api) powers Web3Modal's RPC for balances, ENS names, and more.
+- **Transaction History.** View all transactions from the account view.
+
+<Button name="Try Demo" url="https://web3modal.com/" />
 
 ## WalletConnectModal
 
 Alternatively to **Web3Modal** you can integrate **WalletConnectModal** which is intended for advanced use cases where users manage connection strings and associated WalletConnect API's themselves.
 
 <Wrapper
-  type="large"
+  type="small"
   fit={false}
   items={[
     {
       name: 'React Native',
-      description: 'Get started with WalletConnectModal in React Native.',
       icon: rnLogo,
-      href: '/2.0/advanced/walletconnectmodal/about?platform=react-native'
+      href: '/advanced/walletconnectmodal/about?platform=react-native'
     },
     {
       name: 'Flutter',
-      description: 'Get started with WalletConnectModal in Flutter.',
       icon: flutterLogo,
-      href: '/2.0/advanced/walletconnectmodal/about?platform=flutter'
+      href: '/advanced/walletconnectmodal/about?platform=flutter'
     },
     {
       name: 'Kotlin',
-      description: 'Get started with WalletConnectModal in Kotlin.',
       icon: androidLogo,
-      href: '/2.0/advanced/walletconnectmodal/about?platform=android'
+      href: '/advanced/walletconnectmodal/about?platform=android'
     },
     {
       name: 'Swift',
-      description: 'Get started with WalletConnectModal in Swift.',
+      isWhite: true,
       icon: iosLogo,
-      href: '/2.0/advanced/walletconnectmodal/about?platform=ios'
-    },
-  ]}
-/>
-
-<!---
-## Framework Guides
-
-Web3Modal is designed to work with a variety of frameworks. These framework-specific guides will help you get started with Web3Modal in your favorite environment.
-
-### Web
-
-<Wrapper
-  type="small"
-  items={[
-    {
-      name: 'React',
-      icon: reactLogo,
-      href: '/2.0/web3modal/platforms/react'
-    },
-    {
-      name: 'HTML',
-      icon: htmlLogo,
-      href: '/2.0/web3modal/platforms/html'
+      href: '/advanced/walletconnectmodal/about?platform=ios'
     }
   ]}
 />
-
-### Mobile
-
-<Wrapper
-  type="small"
-  items={[
-    {
-      name: 'Android',
-      icon: androidLogo,
-      href: '/2.0/web3modal/platforms/android'
-    },
-    {
-      name: 'iOS',
-      icon: iosLogo,
-      href: '/2.0/web3modal/platforms/ios',
-      isWhite: true
-    },
-    {
-      name: 'React Native',
-      icon: rnLogo,
-      href: '/2.0/web3modal/platforms/react-native'
-    },
-    {
-      name: 'Flutter',
-      icon: flutterLogo,
-      href: '/2.0/web3modal/platforms/flutter'
-    }
-  ]}
-/>
-
-### Other
-
-<Wrapper
-  type="small"
-  items={[
-    {
-      name: 'Unity',
-      icon: unityLogo,
-      href: '/2.0/web3modal/platforms/unity',
-      isWhite: true
-    }
-  ]}
-/>
--->
-

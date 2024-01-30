@@ -1,0 +1,246 @@
+import Container from '../../components/Container'
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
+
+# Components
+
+## Web3Modal Component
+
+You can use predefined Web3ModalComponent and add it in your application. As a view, dialog or modal.
+
+```kotlin
+import androidx.compose.material.ExperimentalMaterialApi
+import androidx.compose.material.ModalBottomSheetState
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import androidx.compose.material.ModalBottomSheetLayout
+
+setContent {
+    val modalSheetState = rememberModalBottomSheetState(initialValue = ModalBottomSheetValue.Hidden, skipHalfExpanded = true)
+    val coroutineScope = rememberCoroutineScope()
+    val navController = rememberNavController()
+
+    ModalBottomSheetLayout(
+        sheetContent = {
+            Web3ModalComponent(
+                shouldOpenChooseNetwork = true | false,
+                closeModal = { coroutineScope.launch { modalSheetState.hide() }
+            )
+        }
+    ) {
+        // content
+    }
+}
+```
+
+## Buttons
+
+You can add ready made button components to your application
+
+### Web3Button
+
+<Tabs
+    groupId="android_web3button"
+    activeOptions={["compose", "view"]}
+>
+<TabItem value="compose" label="Compose">
+
+```kotlin
+import com.walletconnect.web3.modal.ui.components.button.Web3Button
+import com.walletconnect.web3.modal.ui.components.button.ConnectButtonSize
+import com.walletconnect.web3.modal.ui.components.button.AccountButtonType
+import com.walletconnect.web3.modal.ui.components.button.rememberWeb3ModalState
+
+YourAppScreen(navController: NavController) {
+    val web3ModalState = rememberWeb3ModalState(navController = navController)
+    Web3Button(
+        state = web3ModalState,
+        accountButtonType = AccountButtonType.NORMAL || AccountButtonType.MIXED,
+        connectButtonSize = ConnectButtonSize.NORMAL || ConnectButtonSize.SMALL
+    )
+}
+```
+
+</TabItem>
+
+<TabItem value="view" label="View">
+
+```xml
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical">
+
+        <com.walletconnect.web3.modal.ui.components.button.views.Web3Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:connect_button_size="NORMAL" || "SMALL"
+            app:account_button_type="NORMAL" || "MIXED"
+        />
+</LinearLayout>
+```
+
+</TabItem>
+</Tabs>
+
+### Network Button
+
+<Tabs
+    groupId="android_network_button"
+    activeOptions={["compose", "view"]}
+>
+<TabItem value="compose" label="Compose">
+
+```kotlin
+import com.walletconnect.web3.modal.ui.components.button.NetworkButton
+import com.walletconnect.web3.modal.ui.components.button.rememberWeb3ModalState
+
+YourAppScreen(navController: NavController) {
+    val web3ModalState = rememberWeb3ModalState(navController = navController)
+    NetworkButton(state = web3ModalState)
+}
+```
+
+</TabItem>
+
+<TabItem value="view" label="View">
+
+```xml
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical">
+
+        <com.walletconnect.web3.modal.ui.components.button.views.NetworkButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+        />
+</LinearLayout>
+```
+
+</TabItem>
+</Tabs>
+
+### Connect Button
+
+<Tabs
+    groupId="android_connect_button"
+    activeOptions={["compose", "view"]}
+>
+<TabItem value="compose" label="Compose">
+
+```kotlin
+import com.walletconnect.web3.modal.ui.components.button.ConnectButton
+import com.walletconnect.web3.modal.ui.components.button.ConnectButtonSize
+import com.walletconnect.web3.modal.ui.components.button.rememberWeb3ModalState
+
+YourAppScreen(navController: NavController) {
+    val web3ModalState = rememberWeb3ModalState(navController = navController)
+    ConnectButton(
+        state = web3ModalState,
+        buttonSize = ConnectButtonSize.NORMAL || ConnectButtonSize.SMALL
+    )
+}
+```
+
+</TabItem>
+
+<TabItem value="view" label="View">
+
+```xml
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical">
+
+        <com.walletconnect.web3.modal.ui.components.button.views.ConnectButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:connect_button_size="NORMAL" || "SMALL"
+        />
+</LinearLayout>
+```
+
+</TabItem>
+</Tabs>
+
+### Account Button
+
+<Tabs
+    groupId="android_account_button"
+    activeOptions={["compose", "view"]}
+>
+<TabItem value="compose" label="Compose">
+
+```kotlin
+import com.walletconnect.web3.modal.ui.components.button.AccountButton
+import com.walletconnect.web3.modal.ui.components.button.AccountButtonType
+import com.walletconnect.web3.modal.ui.components.button.rememberWeb3ModalState
+
+YourAppScreen(navController: NavController) {
+    val web3ModalState = rememberWeb3ModalState(navController = navController)
+    AccountButton(
+        state = web3ModalState,
+        buttonSize = AccountButtonType.NORMAL || AccountButtonType.MIXED
+    )
+}
+```
+
+</TabItem>
+
+<TabItem value="view" label="View">
+
+```xml
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical">
+
+        <com.walletconnect.web3.modal.ui.components.button.views.AccountButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:account_button_type="NORMAL" || "MIXED"
+        />
+</LinearLayout>
+```
+
+</TabItem>
+</Tabs>
+
+### Web3Modal State
+
+Web3modalState is an object that ensures communication between your application and the state of the Web3Modal.
+
+#### Create web3ModalState:
+
+NavController is required to create Web3ModalState
+
+```kotlin
+    val web3modalState = rememberWeb3ModalState(navController)
+```
+
+#### Web3ModalState methods
+
+```kotlin
+    web3ModalState.isOpen
+```
+
+returns `StateFlow<Boolean>` whose value is updated depending on whether the web3modal component is open
+
+```kotlin
+    web3modalState.isConnected
+```
+
+returns `StateFlow<Boolean>` whose value depends on the active session in Web3Modal

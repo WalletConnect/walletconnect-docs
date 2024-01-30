@@ -1,0 +1,38 @@
+import ThemeVariablesTablePartial from '../../_partials/themeVariablesTable.mdx'
+import ThemeModePartial from '../../_partials/themeMode.mdx'
+import ThemeVariablesPartial from '../../_partials/themeVariables.mdx'
+
+# Theming
+
+:::caution
+This documentation is for Web3Modal v2. You can find Web3Modal v3 docs [here](../../../about.mdx)
+:::
+
+## themeMode
+
+<ThemeModePartial />
+
+### Example
+
+```tsx
+<Web3Modal themeMode="dark" />
+```
+
+## themeVariables
+
+<ThemeVariablesPartial />
+
+### Example
+
+```tsx
+<Web3Modal
+  themeVariables={{
+    '--w3m-font-family': 'Roboto, sans-serif',
+    '--w3m-accent-color': '#F5841F'
+  }}
+/>
+```
+
+### List of theme variables
+
+<ThemeVariablesTablePartial />

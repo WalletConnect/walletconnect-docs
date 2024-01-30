@@ -1,0 +1,165 @@
+import Container from '../../components/Container'
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
+
+# Theming
+
+## Usage
+
+<Tabs
+    groupId="android_theming"
+    activeOptions={["compose", "view"]}
+>
+<TabItem value="compose" label="Compose">
+
+Wrap your composable component with `Web3ModalTheme`
+
+```kotlin
+import com.walletconnect.web3.modal.ui.Web3ModalTheme
+
+Web3ModalTheme(
+    mode = Web3ModalTheme.Mode.AUTO || Web3ModalTheme.Mode.LIGHT || Web3ModalTheme.Mode.DARK,
+    lightColors = Web3ModalTheme.provideLightWeb3ModalColors(
+        // Override colors
+    ),
+    darkColors = Web3ModalTheme.provideDarkWeb3ModalColors(
+        // Override colors
+    )
+)    {
+    /* any Web3Modal component or graph */
+}
+
+```
+
+</TabItem>
+
+<TabItem value="view" label="View">
+
+You can define Web3ModalTheme in yours `style.xml` files
+
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Web3ModalTheme">
+        <item name="modalMode">AUTO || LIGHT || DARK</item>
+        /* Override colors */
+    </style>
+</resources>
+```
+
+</TabItem>
+</Tabs>
+
+## Mode
+
+<Tabs
+    groupId="android_mode_colors"
+    activeOptions={["compose", "view"]}
+>
+<TabItem value="compose" label="Compose">
+
+```kotlin
+    enum class Mode {
+        LIGHT, DARK, AUTO
+    }
+```
+
+</TabItem>
+
+<TabItem value="view" label="View">
+
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr name="modalMode" format="enum">
+        <enum name="AUTO" value="0"/>
+        <enum name="DARK" value="1"/>
+        <enum name="LIGHT" value="2"/>
+    </attr>
+</resources>
+```
+
+</TabItem>
+</Tabs>
+
+## Colors
+
+<Tabs
+    groupId="android_theming_colors"
+    activeOptions={["compose", "view"]}
+>
+<TabItem value="compose" label="Compose">
+
+Customizable colors in Web3ModalTheme.
+To override colors you need to use methods `Web3ModalTheme.provideLightWeb3ModalColors` or Web3ModalTheme.provideDarkWeb3ModalColors
+To override foreground or background `ColorPalette` you can define new palette or use one of the Web3ModalTheme methods to provide Palette and override selected colors
+
+```kotlin
+    interface Colors {
+        val accent100: Color
+        val accent90: Color
+        val accent80: Color
+        val foreground: ColorPalette
+        val background: ColorPalette
+        val grayGlass: Color
+        val success: Color
+        val error: Color
+    }
+```
+
+ColorPalette
+
+```kotlin
+    data class ColorPalette(
+        val color100: Color,
+        val color125: Color,
+        val color150: Color,
+        val color175: Color,
+        val color200: Color,
+        val color225: Color,
+        val color250: Color,
+        val color275: Color,
+        val color300: Color,
+    )
+```
+
+</TabItem>
+
+<TabItem value="view" label="View">
+
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+
+You can override those values in Web3ModalTheme in your style.xml file
+
+<resources>
+    <attr name="modalAccent100" format="color"/>
+    <attr name="modalAccent90" format="color"/>
+    <attr name="modalAccent80" format="color"/>
+    <attr name="modalForeground100" format="color"/>
+    <attr name="modalForeground125" format="color"/>
+    <attr name="modalForeground150" format="color"/>
+    <attr name="modalForeground175" format="color"/>
+    <attr name="modalForeground200" format="color"/>
+    <attr name="modalForeground225" format="color"/>
+    <attr name="modalForeground250" format="color"/>
+    <attr name="modalForeground275" format="color"/>
+    <attr name="modalForeground300" format="color"/>
+    <attr name="modalBackground100" format="color"/>
+    <attr name="modalBackground125" format="color"/>
+    <attr name="modalBackground150" format="color"/>
+    <attr name="modalBackground175" format="color"/>
+    <attr name="modalBackground200" format="color"/>
+    <attr name="modalBackground225" format="color"/>
+    <attr name="modalBackground250" format="color"/>
+    <attr name="modalBackground275" format="color"/>
+    <attr name="modalBackground300" format="color"/>
+    <attr name="modalGrayGlass" format="color"/>
+    <attr name="modalSuccess" format="color"/>
+    <attr name="modalError" format="color"/>
+
+</resources>
+```
+
+</TabItem>
+</Tabs>

@@ -101,73 +101,73 @@ account, message
 ### Example Parameters
 
 ```javascript
-[
-  "0xCD2a3d9F938E13CD947Ec05AbC7FE734Df8DD826",
+;[
+  '0xCD2a3d9F938E13CD947Ec05AbC7FE734Df8DD826',
   {
     types: {
       EIP712Domain: [
         {
-          name: "name",
-          type: "string",
+          name: 'name',
+          type: 'string'
         },
         {
-          name: "version",
-          type: "string",
+          name: 'version',
+          type: 'string'
         },
         {
-          name: "chainId",
-          type: "uint256",
+          name: 'chainId',
+          type: 'uint256'
         },
         {
-          name: "verifyingContract",
-          type: "address",
-        },
+          name: 'verifyingContract',
+          type: 'address'
+        }
       ],
       Person: [
         {
-          name: "name",
-          type: "string",
+          name: 'name',
+          type: 'string'
         },
         {
-          name: "wallet",
-          type: "address",
-        },
+          name: 'wallet',
+          type: 'address'
+        }
       ],
       Mail: [
         {
-          name: "from",
-          type: "Person",
+          name: 'from',
+          type: 'Person'
         },
         {
-          name: "to",
-          type: "Person",
+          name: 'to',
+          type: 'Person'
         },
         {
-          name: "contents",
-          type: "string",
-        },
-      ],
+          name: 'contents',
+          type: 'string'
+        }
+      ]
     },
-    primaryType: "Mail",
+    primaryType: 'Mail',
     domain: {
-      name: "Ether Mail",
-      version: "1",
+      name: 'Ether Mail',
+      version: '1',
       chainId: 1,
-      verifyingContract: "0xCcCCccccCCCCcCCCCCCcCcCccCcCCCcCcccccccC",
+      verifyingContract: '0xCcCCccccCCCCcCCCCCCcCcCccCcCCCcCcccccccC'
     },
     message: {
       from: {
-        name: "Cow",
-        wallet: "0xCD2a3d9F938E13CD947Ec05AbC7FE734Df8DD826",
+        name: 'Cow',
+        wallet: '0xCD2a3d9F938E13CD947Ec05AbC7FE734Df8DD826'
       },
       to: {
-        name: "Bob",
-        wallet: "0xbBbBBBBbbBBBbbbBbbBbbbbBBbBbbbbBbBbbBBbB",
+        name: 'Bob',
+        wallet: '0xbBbBBBBbbBBBbbbBbbBbbbbBBbBbbbbBbBbbBBbB'
       },
-      contents: "Hello, Bob!",
-    },
-  },
-];
+      contents: 'Hello, Bob!'
+    }
+  }
+]
 ```
 
 ### Returns
@@ -212,16 +212,16 @@ Creates new message call transaction or a contract creation, if the data field c
 ### Example Parameters
 
 ```javascript
-[
+;[
   {
-    from: "0xb60e8dd61c5d32be8058bb8eb970870f07233155",
-    to: "0xBDE1EAE59cE082505bB73fedBa56252b1b9C60Ce",
-    data: "0x",
-    gasPrice: "0x029104e28c",
-    gas: "0x5208",
-    value: "0x00",
-  },
-];
+    from: '0xb60e8dd61c5d32be8058bb8eb970870f07233155',
+    to: '0xBDE1EAE59cE082505bB73fedBa56252b1b9C60Ce',
+    data: '0x',
+    gasPrice: '0x029104e28c',
+    gas: '0x5208',
+    value: '0x00'
+  }
+]
 ```
 
 ### Returns
@@ -267,17 +267,17 @@ Signs a transaction that can be submitted to the network at a later time using w
 ### Example Parameters
 
 ```javascript
-[
+;[
   {
-    from: "0xb60e8dd61c5d32be8058bb8eb970870f07233155",
-    to: "0xd46e8dd67c5d32be8058bb8eb970870f07244567",
-    data: "0xd46e8dd67c5d32be8d46e8dd67c5d32be8058bb8eb970870f072445675058bb8eb970870f072445675",
-    gas: "0x76c0", // 30400
-    gasPrice: "0x9184e72a000", // 10000000000000
-    value: "0x9184e72a", // 2441406250
-    nonce: "0x117", // 279
-  },
-];
+    from: '0xb60e8dd61c5d32be8058bb8eb970870f07233155',
+    to: '0xd46e8dd67c5d32be8058bb8eb970870f07244567',
+    data: '0xd46e8dd67c5d32be8d46e8dd67c5d32be8058bb8eb970870f072445675058bb8eb970870f072445675',
+    gas: '0x76c0', // 30400
+    gasPrice: '0x9184e72a000', // 10000000000000
+    value: '0x9184e72a', // 2441406250
+    nonce: '0x117' // 279
+  }
+]
 ```
 
 ### Returns

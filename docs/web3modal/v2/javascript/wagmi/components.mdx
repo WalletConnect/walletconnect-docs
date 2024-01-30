@@ -1,0 +1,50 @@
+# Components
+
+:::caution
+This documentation is for Web3Modal v2. You can find Web3Modal v3 docs [here](../../../about.mdx)
+:::
+
+## w3m-core-button
+
+Pre-styled connect/disconnect web-component button that reacts to modal's theme changes.
+
+```html
+<w3m-core-button icon="hide"></w3m-core-button>
+```
+
+Following attributes can be set
+
+```ts
+interface Attributes {
+  icon?: 'show' | 'hide'
+  label?: string
+  balance?: 'show' | 'hide'
+}
+```
+
+## w3m-network-switch
+
+Pre-styled network switch button that reacts to modal's theme and network changes.
+
+```html
+<w3m-network-switch></w3m-network-switch>
+```
+
+## w3m-qrcode
+
+WalletConnect styled QRCode that allows for an image in the center
+
+```html
+<w3m-qrcode imageUrl="url/to/image" size="200" uri="..."></w3m-qrcode>
+```
+
+Following attributes can be set
+
+```ts
+interface Attributes {
+  imageUrl?: string
+  size?: number
+  // The data embedded in the QRCode
+  uri?: string
+}
+```

@@ -5,9 +5,10 @@ The Web3InboxSDK encompasses both [Notify](../../clients/notify/README.md) and
 within the class documented here are used internally by the web3inbox web
 app. Internally, the state is managed through [RxJS](https://rxjs.dev/),
 which allows the SDK to cleanly listen to events from anywhere. This of
-course includes the Chat & Notify clients in the webapp. 
+course includes the Chat & Notify clients in the webapp.
 
 ## Stateless Mode
+
 In the case of the webapp being integrated in a native webview, RxJS hooks
 into the `message` event on the window, receiving messages from the
 `postMessage` calls. Note, this also enables communication with any parent
@@ -88,7 +89,7 @@ abstract class Web3InboxSDKChatFacade {
   public abstract getMutedContacts(params: {
     account: string;
   }): Promise<[string]>;
-  
+
   /*
     Event observing.
     Note: All observers return a method to stop observing.
@@ -112,16 +113,16 @@ abstract class Web3InboxSDKChatFacade {
 abstract class Web3InboxSDKNotifyFacade {
   // request notify subscription
   public abstract request(params: { account: string, pairingTopic: string }): Promise<{ id }>;
-  
+
   // send notify message
   public abstract notify(params: { topic: string, message: NotifyMessage }): Promise<void>
-  
+
   // query all active subscriptions
   public abstract getActiveSubscriptions(): Promise<Record<string, NotifySubscription>>;
-  
+
   // delete active subscription
   public abstract delete(params: { topic: string }): Promise<void>;
-  
+
   /*
     Event observing.
     Note: All observers return a method to stop observing.
@@ -140,7 +141,7 @@ abstract class Web3InboxSDK {
   public readonly get chat: Web3InboxSDKChatFacade
   public readonly get notify: Web3InboxSDKNotifyFacade
 
-  // If the init function does not receive `params`, Web3InboxSDK operates in a 
+  // If the init function does not receive `params`, Web3InboxSDK operates in a
   // stateless manner where it does not maintain chat/notify clients and only
   // listens to external events.
   public static abstract init(params?: {
@@ -148,7 +149,6 @@ abstract class Web3InboxSDK {
     projectId: string;
     castUrl?: string;
   }): Promise<Web3InboxSDK>
-  
+
 }
 ```
-

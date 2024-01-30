@@ -31,6 +31,10 @@ const PLATFORM_MAP = [
     label: 'HTML'
   },
   {
+    value: 'javascript',
+    label: 'JavaScript'
+  },
+  {
     value: 'react-native',
     label: 'React Native'
   },
@@ -47,6 +51,14 @@ const PLATFORM_MAP = [
     label: 'Mobile'
   },
   {
+    value: 'wagmi1',
+    label: 'Wagmi v1'
+  },
+  {
+    value: 'wagmi',
+    label: 'Wagmi v2'
+  },
+  {
     value: 'other',
     label: 'Other'
   },
@@ -57,6 +69,10 @@ const PLATFORM_MAP = [
   {
     value: 'ethers',
     label: 'Ethers'
+  },
+  {
+    value: 'ethers5',
+    label: 'Ethers v5'
   },
   {
     value: 'web3js',

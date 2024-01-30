@@ -1,0 +1,95 @@
+# Actions
+
+## Launch the current wallet
+
+```dart
+await _w3mService.launchConnectedWallet();
+```
+
+## Send a request
+
+```dart
+await _w3mService.web3App!.request(
+  topic: _w3mService.session.topic,
+  chainId: 'eip155:1',
+  request: SessionRequestParams(
+    method: 'personal_sign',
+    params: ['Sign this', '0xdeadbeef'],
+  ),
+);
+```
+
+A list of all available methods can be found [eth_constants.dart](https://github.com/WalletConnect/Web3ModalFlutter/blob/master/lib/constants/eth_constants.dart) file, which is already exported for you to use directly from web3modal package.
+
+## List of approved chains by the connected wallet
+
+```dart
+_w3mService.getApprovedChains();
+```
+
+## List of approved methods by connected wallet
+
+```dart
+_w3mService.getApprovedMethods();
+```
+
+## List of approved events by the connected wallet
+
+```dart
+_w3mService.getApprovedEvents();
+```
+
+## How to Read a contract
+
+In order to interact with Contracts, Web3Modal relies on web3dart package.
+
+This is a simple example on how to interact with [TetherToken contract](https://etherscan.io/address/0xdac17f958d2ee523a2206206994597c13d831ec7#code).
+
+```dart
+Future<void> testTetherTokenContract() async {
+  // Create a Web3Client by passing a chain rpcUrl and an http client
+  final ethClient = Web3Client('https://eth.drpc.org', http.Client());
+
+  // Create DeployedContract object using contract's ABI and address
+  final deployedContract = DeployedContract(
+    ContractAbi.fromJson(
+      jsonEncode(ContractDetails.readContractAbi),
+      'TetherToken',
+    ),
+    EthereumAddress.fromHex(ContractDetails.contractAddress),
+  );
+
+  // Query contract's functions
+  final nameFunction = deployedContract.function('name');
+  final totalSupplyFunction = deployedContract.function('totalSupply');
+  final balanceFunction = deployedContract.function('balanceOf');
+
+  final nameResult = await ethClient.call(
+    contract: deployedContract,
+    function: nameFunction,
+    params: [],
+  );
+  debugPrint('name: ${nameResult.first}');
+
+  final totalSupply = await ethClient.call(
+    contract: deployedContract,
+    function: totalSupplyFunction,
+    params: [],
+  );
+  debugPrint('totalSupply: ${totalSupply.first}');
+
+  final balanceOf = await ethClient.call(
+    contract: deployedContract,
+    function: balanceFunction,
+    params: [
+      // Vitalik address as an example
+      EthereumAddress.fromHex('0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045'),
+    ],
+  );
+  debugPrint('balanceOf: ${balanceOf.first}');
+}
+```
+
+For more information about how to interact with conctracts please refer to [web3dart](https://pub.dev/packages/web3dart)
+
+For a complete example app check out the [example folder](https://github.com/WalletConnect/Web3ModalFlutter/tree/master/example) for Web3Modal

@@ -9,7 +9,7 @@
   "relay": {
     "protocol": string,
     "data": string
-  },  
+  },
   "metadata": Metadata,
   "scope": Record<string, {description: string, enabled: boolean}>,
   "expiry": number,

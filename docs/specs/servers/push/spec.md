@@ -33,8 +33,8 @@ These are the default responses and are only different if otherwise specified.
 }
 ```
 
-This is sent whenever push server encounters an error. 
-The `fields` property will only be available if it is a user provided field that caused the error. 
+This is sent whenever push server encounters an error.
+The `fields` property will only be available if it is a user provided field that caused the error.
 The `errors` property will only be available when we can provide more generic errors e.g. Postgres error.
 
 > **Note** `location` should be treated as an enum (`body`, `query`, `header`, `path`) where `body` is the
@@ -103,4 +103,4 @@ POST <PUSH_SERVER_URL>/clients/<CLIENT_ID>
     Chat       = 1 << 3
     Notify     = 1 << 4
     ```
-  - `blob`: If the payload is encrypted this is just the encrypted blob, when this is cleartext it should be base64 encoded. The blob should follow the format from of the [Notify Message](https://docs.walletconnect.com/2.0/specs/clients/notify/data-structures#notify-message) 
+  - `blob`: If the payload is encrypted this is just the encrypted blob, when this is cleartext it should be base64 encoded. The blob should follow the format from of the [Notify Message](https://specs.walletconnect.com/2.0/specs/clients/notify/data-structures#notify-message)

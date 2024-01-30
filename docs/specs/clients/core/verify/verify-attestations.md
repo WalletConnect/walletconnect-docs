@@ -8,14 +8,18 @@ The Verify Client will call [window.postMessage](https://developer.mozilla.org/e
 
 ```typescript
 // method called by Verify Client
-postMessage("<Attestation_Id>", "<Verify_Enclave_URL>")
+postMessage('<Attestation_Id>', '<Verify_Enclave_URL>')
 
 // event subscribed by Verify Enclave
-window.addEventListener("message", (event) => {
-  const attestationId = event.data
-  const origin = event.origin
-  fetch("<Verify_Server_URL>", { method: "POST", body: { attestationId, origin }})
-}, false);
+window.addEventListener(
+  'message',
+  event => {
+    const attestationId = event.data
+    const origin = event.origin
+    fetch('<Verify_Server_URL>', { method: 'POST', body: { attestationId, origin } })
+  },
+  false
+)
 ```
 
 ## Mobile Attestations

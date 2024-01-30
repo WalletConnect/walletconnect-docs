@@ -10,7 +10,7 @@ import PlatformTabItem from '../../components/PlatformTabItem'
 
 <PlatformTabs
 groupId="api-sign"
-activeOptions={["web","ios","android","flutter","csharp"]}>
+activeOptions={["web","ios","android","flutter","csharp", "unity"]}>
 
 <PlatformTabItem value="web">
 This library is compatible with Node.js, browsers and React Native applications (Node.js modules require polyfills for React Native).
@@ -22,7 +22,7 @@ npm install @walletconnect/modal
 ```
 
 :::info
-For an example implementation, please refer to our `react-dapp-v2` [example](https://github.com/WalletConnect/web-examples/tree/main/dapps/react-dapp-v2).
+For an example implementation, please refer to our `react-dapp-v2` [example](https://github.com/WalletConnect/web-examples/tree/main/advanced/dapps/react-dapp-v2).
 :::
 
 #### Install Packages
@@ -138,12 +138,13 @@ const result = await signClient.request({
   topic: session.topic,
   chainId: 'eip155:1',
   request: {
-    method: "personal_sign",
+    method: 'personal_sign',
     params: [
-      "0x7468697320697320612074657374206d65737361676520746f206265207369676e6564",
-      "0x1d85568eEAbad713fBB5293B45ea066e552A90De",
-    ],
-});
+      '0x7468697320697320612074657374206d65737361676520746f206265207369676e6564',
+      '0x1d85568eEAbad713fBB5293B45ea066e552A90De'
+    ]
+  }
+})
 ```
 
 > For more information on available JSON-RPC requests, see the [JSON-RPC reference](../../advanced/rpc-reference/ethereum-rpc.md).
@@ -252,6 +253,16 @@ try await Sign.instance.request(params: request)
 ```
 
 When wallet respond `sessionResponsePublisher` will publish an event so you can verify the response.
+
+#### Extending a Session
+
+By default, session lifetime is set for 7 days and after that time user's session will expire. But if you consider that a session should be extended you can call:
+
+```Swift
+try await Sign.instance.extend(topic: session.topic)
+```
+
+Above method will extend a user's session to a week.
 
 #### Where to go from here
 
@@ -506,14 +517,14 @@ var dappOptions = new SignClientOptions()
         Name = "WalletConnectSharpv2 Dapp Example",
         Url = "https://walletconnect.com"
     },
-    // Uncomment to disable persistant storage
+    // Uncomment to disable persistent storage
     // Storage = new InMemoryStorage()
 };
 ```
 
 Then, you must setup the `ConnectOptions` which define what blockchain, RPC methods and events your dapp will use.
 
-*C# Constructor*
+_C# Constructor_
 
 ```csharp
 var dappConnectOptions = new ConnectOptions()
@@ -546,7 +557,7 @@ var dappConnectOptions = new ConnectOptions()
 };
 ```
 
-*Builder Functions Style*
+_Builder Functions Style_
 
 ```csharp
 var dappConnectOptions1 = new ConnectOptions()
@@ -585,17 +596,17 @@ SessionStruct sessionData = await sessionConnectTask;
 // SessionStruct sessionData = await connectData.Approval;
 ```
 
-This `Task` will return the `SessionStruct` when the session was approved, or throw an exception when the session rquest has either
+This `Task` will return the `SessionStruct` when the session was approved, or throw an exception when the session request has either
 
-* Timed out
-* Been Rejected
+- Timed out
+- Been Rejected
 
 #### Connected Address
 
 To get the currently connected address, use the following function
 
 ```csharp
-public class Caip25Address 
+public class Caip25Address
 {
     public string Address;
     public string ChainId;
@@ -610,14 +621,14 @@ public Caip25Address GetCurrentAddress(string chain)
 
     if (defaultNamespace.Accounts.Length == 0)
         return null;
-        
+
     var fullAddress = defaultNamespace.Accounts[0];
     var addressParts = fullAddress.Split(":");
-        
+
     var address = addressParts[2];
     var chainId = string.Join(':', addressParts.Take(2));
 
-    return new Caip25Address() 
+    return new Caip25Address()
     {
         Address = address,
         ChainId = chainId,
@@ -629,7 +640,7 @@ public Caip25Address GetCurrentAddress()
     var currentSession = dappClient.Session.Get(dappClient.Session.Keys[0]);
 
     var defaultChain = currentSession.Namespaces.Keys.FirstOrDefault();
-        
+
     if (string.IsNullOrWhiteSpace(defaultChain))
         return null;
 
@@ -673,14 +684,13 @@ var request = await dappClient.Ping(sessionTopic);
 await request.Acknowledged();
 ```
 
-
 #### Session Requests
 
-Sending session requests as a dapp requires to build the request **and** response classes that the session request `params` will be structured. C# is a staticly typed language, so these types must be given whenever you do a session request (or do any querying for session requests). 
+Sending session requests as a dapp requires to build the request **and** response classes that the session request `params` will be structured. C# is a statically typed language, so these types must be given whenever you do a session request (or do any querying for session requests).
 
-Currently, **WalletConnectSharp does not automatically assume the object type for `params` is an array**. This is very important, since most EVM RPC requests have `params` as an array type. **Use `List<T>` to workaround this**. For example, for `eth_sendTransaction`, use `List<Transaction>` instead of `Transaction`. 
+Currently, **WalletConnectSharp does not automatically assume the object type for `params` is an array**. This is very important, since most EVM RPC requests have `params` as an array type. **Use `List<T>` to workaround this**. For example, for `eth_sendTransaction`, use `List<Transaction>` instead of `Transaction`.
 
-Newtonsoft.Json is used for JSON serialization/deserialization, therefor you can use Newtonsoft.Json attributes when defining fields in your request/response classes.
+Newtonsoft.Json is used for JSON serialization/deserialization, therefore you can use Newtonsoft.Json attributes when defining fields in your request/response classes.
 
 ##### Building a Request type
 
@@ -694,18 +704,18 @@ using Newtonsoft.Json;
 public class Transaction
 {
     public string from;
-    
+
     // Newtonsoft.Json attributes can be used
     [JsonProperty("to")]
     public string To;
-    
+
     [JsonProperty("gas", NullValueHandling = NullValueHandling.Ignore)]
     public string Gas;
-    
+
     // Properties have limited support
     [JsonProperty("gasPrice", NullValueHandling = NullValueHandling.Ignore)]
     public string GasPrice { get; set; }
-    
+
     [JsonProperty("value")]
     public string Value { get; set; }
 
@@ -714,7 +724,7 @@ public class Transaction
 }
 ```
 
-:::note 
+:::note
 
 [**the `params` field is an array of this object**](https://ethereum.org/en/developers/docs/apis/json-rpc/#eth_sendtransaction)
 :::
@@ -731,7 +741,6 @@ params: [
   },
 ]
 ```
-
 
 Now, let's define the actual request class we'll use in `dappClient.Request`
 
@@ -751,7 +760,7 @@ We use `List<Transaction>` since the `params` field for `eth_sendTransaction` is
 
 ##### Sending a request
 
-The response type for `eth_sendTransaction` is a `string`, so no response type is required to be made. You only need to create a response type if the response type is a custom object. 
+The response type for `eth_sendTransaction` is a `string`, so no response type is required to be made. You only need to create a response type if the response type is a custom object.
 
 ```csharp
 var wallet = GetCurrentAddress();
@@ -782,29 +791,56 @@ await dappClient.Disconnect(sessionTopic, Error.FromErrorType(ErrorType.USER_DIS
 
 <PlatformTabItem value="unity">
 
-:::tip
+WalletConnectUnity is a wrapper for WalletConnectSharp. It simplifies managing a single active session, addressing a common challenge with the original library.
 
-Since `WalletConnectUnity` is a wrapper around `WalletConnectSharp`, usage of the Sign API is identical to `C#`. Please refer to `C#` documentation on how to use the Sign API inside `WalletConnectUnity`.
+#### Features of WalletConnectUnity
 
-:::
+1. **Simplified Session Management**: WalletConnectSharp is designed to support multiple sessions, requiring developers to manually track and restore the active session. WalletConnectUnity simplifies this process by focusing on a single session, making it easier to manage session restoration.
 
-The `WalletConnectUnity` package comes with a `QRCodeHandler` component that can be used to show a QR Code to the user when the
-`dappClient.Connect()` function is used. It also introduces Unity Event handlers to handle connection related events natively in Unity.
+2. **Session Restoration**: WalletConnectUnity includes methods to easily access and restore the active session from storage.
 
-![walletconnectunity-qrcode-handler-editor](/assets/walletconnectunity-qrcode-handler-editor.png)
+3. **Deep Linking Support**: WalletConnectUnity automatically handles deep linking for mobile and desktop wallets.
 
-You **MUST** set the `QR Code Image` field to be the `Image` that will displayed the generated QR Code.
+4. **QR Code Generation**: WalletConnectUnity provides a utility for generating QR codes.
 
-Currently the component offers 4 Unity Events:
+#### Usage
 
-* On Sign Client Ready
-  - This event is invoked when a connection URI is ready to be displayed to the user. This can be used to show the `QR Code Image` game object or perform some other custom logic.
-* On Sign Client Ready With Args (ConnectedData)
-  - This event is the same as `On Sign Client Ready`, but provides the `ConnectedData` that contains the connection `URI`. Use this event if your custom logic needs the `URI`. Since the QR Code Handler automatically generates the `QR Code Image`, this usually is not needed.
-* On Sign Client Authorized
-  - This event is invoked when the displayed connection has been authorized by a wallet. This can be used to hide the `QR Code Image` game object or perform some other custom logic.
-* On Sign Client Authorized With Args (SessionStruct)
-  - This event is the same as `On Sign Client Authorized`, but provides the `SessionStruct` that contains the authorized session.
+To use WalletConnectUnity in your project:
+
+1. Fill in the Project ID and Metadata fields in the `Assets/WalletConnectUnity/Resources/WalletConnectProjectConfig` asset.
+   - If you don’t have a Project ID, you can create one at [WalletConnect Cloud](https://cloud.walletconnect.com).
+   - The `Redirect` fields are optional. They are used to redirect the user back to your app after they approve or reject the session.
+2. Initialize `WalletConnect` and connect the wallet:
+
+```csharp
+// Initialize singleton
+await WalletConnect.Instance.InitializeAsync();
+
+// Or handle instancing manually
+var walletConnectUnity = new WalletConnect();
+await walletConnectUnity.InitializeAsync();
+
+// Try to resume the last session
+var sessionResumed = await WalletConnect.Instance.TryResumeSessionAsync();
+if (!sessionResumed)
+{
+    var connectedData = await WalletConnect.Instance.ConnectAsync(connectOptions);
+
+    // Create QR code texture
+    var texture = WalletConnectUnity.Core.Utils.QRCode.EncodeTexture(connectedData.Uri);
+
+    // ... Display QR code texture
+
+    // Wait for wallet approval
+    await connectedData.Approval;
+}
+```
+
+All features of WalletConnectSharp are accessible in WalletConnectUnity.
+For complex scenarios, the `SignClient` can be accessed directly through `WalletConnect.SignClient`.
+
+Refer to the `C#` documentation for details on using the Sign API within WalletConnectUnity.
+The usage of the WalletConnectSharp.Sign API remains consistent with `C#`.
 
 </PlatformTabItem>
 

@@ -16,5 +16,5 @@ Note: Launching a client after 30 days of inactivity is also considered a cold s
 6. Wn combines `notifySubscriptions` inserts with deletions and updates the local database
 7. Wn subscribes for `notifySubscriptions` topics
 8. Wn sets subscription symKey P in keychain to be able to decrypt notifyMessages payloads
-9. Wn fetches `wc_notifyMessage` messages for every subscription topic from Archive API. Request tags can be found in [Notify RPC methods](./rpc-methods.md) 
+9. Wn fetches `wc_notifyMessage` messages for every subscription topic from Archive API. Request tags can be found in [Notify RPC methods](./rpc-methods.md)
 10. Wn decrypts notifyMessages payload with symKey P and updates local database

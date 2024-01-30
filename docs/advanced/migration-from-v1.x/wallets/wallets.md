@@ -4,11 +4,11 @@ Wallets must support v1.0 and v2.0 in parallel. Our WalletConnect URIs are versi
 
 When your wallet receives a v2.0 URI you must route it to the correct SDK.
 
-The followings steps describe the various steps necessary for dapps to migrate to v2:
+The following steps describe the various steps necessary for dapps to migrate to v2:
 
 1. [Getting Started](#getting-started)
 2. [Integrations Checklist](./wallet-checklist.md)
-3. [Explorer Submission](../explorer-submission.md#for-dapps)
+3. [Explorer Submission](../explorer-submission.md)
 
 ---
 
@@ -33,11 +33,11 @@ If you were using our [WalletConnectKotlin SDK](https://github.com/WalletConnect
 
 ### React Native
 
-If you were using our [WalletConnectClient SDK](https://www.npmjs.com/package/@walletconnect/client) (or any other community SDK), you must integrate the Web3Wallet SDK for Javascript which you can find docs [here](../../../web3wallet/about.mdx) and check out the RN Examples [here](https://github.com/WalletConnect/react-native-examples).
+If you were using our [WalletConnectClient SDK](https://www.npmjs.com/package/@walletconnect/client) (or any other community SDK), you must integrate the Web3Wallet SDK for JavaScript which you can find docs [here](../../../web3wallet/about.mdx) and check out the RN Examples [here](https://github.com/WalletConnect/react-native-examples).
 
 ### Browser-based
 
-If you were using our [WalletConnectClient SDK](https://www.npmjs.com/package/@walletconnect/client) (or any other community SDK), you must integrate the Web3Wallet SDK for Javascript which you can find docs [here](../../../web3wallet/about.mdx) and check out the Web Examples [here](https://github.com/WalletConnect/web-examples).
+If you were using our [WalletConnectClient SDK](https://www.npmjs.com/package/@walletconnect/client) (or any other community SDK), you must integrate the Web3Wallet SDK for JavaScript which you can find docs [here](../../../web3wallet/about.mdx) and check out the Web Examples [here](https://github.com/WalletConnect/web-examples).
 
 ### Unity
 

@@ -1,0 +1,96 @@
+---
+title: Components
+---
+
+# Components
+
+import Table from '../../components/Table'
+
+### List of components available in Web3Modal package
+
+### `<W3mButton />`
+
+<Table
+  headers={['Variable', 'Description', 'Type']}
+  data={[
+    {
+      variable: { code: 'disabled' },
+      description: 'Enable or disable the button.',
+      type: { code: 'boolean' }
+    },
+    {
+      variable: { code: 'balance' },
+      description: "Show or hide the user's balance.",
+      type: { code: "'show' or 'hide'" }
+    },
+    {
+      variable: { code: 'size' },
+      description: 'Default size for the button.',
+      type: { code: "'md' or 'sm'" }
+    },
+    {
+      variable: { code: 'label' },
+      description: 'The text shown in the button.',
+      type: { code: 'string' }
+    },
+    {
+      variable: { code: 'loadingLabel' },
+      description: 'The text shown in the button when the modal is open.',
+      type: { code: 'string' }
+    }
+  ]}
+/>
+
+### `<W3mAccountButton />`
+
+<Table
+  headers={['Variable', 'Description', 'Type']}
+  data={[
+    {
+      variable: { code: 'disabled' },
+      description: 'Enable or disable the button.',
+      type: { code: 'boolean' }
+    },
+    {
+      variable: { code: 'balance' },
+      description: "Show or hide the user's balance.",
+      type: { code: "'show' or 'hide'" }
+    }
+  ]}
+/>
+
+### `<W3mConnectButton />`
+
+<Table
+  headers={['Variable', 'Description', 'Type']}
+  data={[
+    {
+      variable: { code: 'size' },
+      description: 'Default size for the button.',
+      type: { code: "'md' or 'sm'" }
+    },
+    {
+      variable: { code: 'label' },
+      description: 'The text shown in the button.',
+      type: { code: 'string' }
+    },
+    {
+      variable: { code: 'loadingLabel' },
+      description: 'The text shown in the button when the modal is open.',
+      type: { code: 'string' }
+    }
+  ]}
+/>
+
+### `<W3mNetworkButton />`
+
+<Table
+  headers={['Variable', 'Description', 'Type']}
+  data={[
+    {
+      variable: { code: 'disabled' },
+      description: 'Enable or disable the button.',
+      type: { code: 'boolean' }
+    }
+  ]}
+/>

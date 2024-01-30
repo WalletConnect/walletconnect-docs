@@ -1,24 +1,9 @@
-# Explorer
+# Explorer API
 
-The WalletConnect Cloud Explorer is an open-source solution to submit and showcase wallets and dApps that support WalletConnect. You can view existing entries over at our [Explorer](https://walletconnect.com/explorer) or use the [Cloud Explorer API](#cloud-explorer-api) to fetch them programmatically.
+:::info
 
-## Setting Up a New Project
-
-In order to connect to WalletConnect Cloud, you need to create a new project:
-
-1. Go to https://cloud.walletconnect.com/app
-2. Tap New Project
-3. Give it a name and tap Create button
-4. Your new project should appear on the projects list
-5. You should see a project ID string if you tap on your project
-
-## Submitting a project
-
-Head over to [cloud.walletconnect.com](https://cloud.walletconnect.com/) and create an account if you don't already have one. Once you sign in, simply fill out our project form under the "Explorer" section and submit it for review. To ensure fast approval make sure you follow our [submission guidelines](https://walletconnect.com/guidelines). Once approved your project will automatically appear on our website and API.
-
-If you would like to edit or claim an existing cloud explorer item, email us at support@walletconnect.com to help migrate the listing to your account.
-
-## Cloud Explorer API
+Some of our Legacy Explorer endpoints will be deprecated from 30 Jan 2024 onwards. Please read [here](#legacy-endpoints) for further information.
+:::
 
 The Cloud Explorer API currently offers the following functionality:
 
@@ -86,18 +71,20 @@ Examples:
 
 ### Chains
 
-By default chains endpoint returns all the chains supported by WalletConnect. 
+By default chains endpoint returns all chains registered under [CASA Namespace](https://github.com/ChainAgnostic/CASA) and that were approved by following our [Add Chain issue template](https://github.com/WalletConnect/walletconnect-monorepo/issues/new?assignees=&labels=type%3A+new+chain+request&template=new_chain_to_explorer.md&title=)
+
 #### Query Parameters
+
 You can use following query params to query chains by its namespace and exclude testnets:
 
-| Param      | Description                                                                                                                 |
-| ---------- | --------------------------------------------------------------------------------------------------------------------------- |
-| testnets   | Determines if testnets should be included in the response <br/> (e.g. `?testnets=false`, defaults to `true` if not provided)  |
-| namespaces | Returns chains that belong to one of the provided namespaces<br/>(e.g. `?namespaces=eip155,cosmos,solana`)                  |
+| Param      | Description                                                                                                                  |
+| ---------- | ---------------------------------------------------------------------------------------------------------------------------- |
+| testnets   | Determines if testnets should be included in the response <br/> (e.g. `?testnets=false`, defaults to `true` if not provided) |
+| namespaces | Returns chains that belong to one of the provided namespaces<br/>(e.g. `?namespaces=eip155,cosmos,solana`)                   |
 
 #### `GET /v3/chains`
 
-Returns all the chains supported by WalletConnect.
+Returns all chains registered under [CASA Namespace](https://github.com/ChainAgnostic/CASA) and that were approved by following our [Add Chain issue template](https://github.com/WalletConnect/walletconnect-monorepo/issues/new?assignees=&labels=type%3A+new+chain+request&template=new_chain_to_explorer.md&title=)
 
 Examples:
 
@@ -127,3 +114,113 @@ Returns the image source of the logo for `image_id` sized according `size`.
 Examples:
 
 - `GET https://explorer-api.walletconnect.com/v3/logo/md/32a77b79-ffe8-42c3-61a7-3e02e019ca00?projectId=YOUR_PROJECT_ID`
+
+### Legacy Endpoints
+
+As part of our ongoing commitment to providing secure, efficient, and up-to-date services, we are announcing the deprecation of certain legacy endpoints within the Explorer API.
+
+#### Why are we deprecating these endpoints?
+
+These endpoints are legacy artifacts from the WalletConnect Protocol v1.0 era. The decision to deprecate these endpoints is driven by our commitment to maintaining the highest standards of security, performance, and scalability.
+
+#### What does this mean for you?
+
+This deprecation only affects you if you are still relying on: registry.walletconnect.**ORG** and/or the affected endpoints listed below
+
+The following will no longer be supported from **1pm (13:00) GMT on January 30, 2024 onwards.**
+
+#### Affected domains
+
+The `registry.walletconnect.org` subdomain will be shut down, while the registry subdomain on .com (i.e. `registry.walletconnect.com`) will continue to operate
+
+#### Affected endpoints
+
+`/data/{type}.json`
+
+https://registry.walletconnect.org/data/wallets.json
+
+`/logo/{size}/{id}`
+
+https://registry.walletconnect.org/logo/md/c57ca95b47569778a828d19178114f4db188b89b763c899ba0be274e97267d96.jpeg
+
+`/v1/logo/{size}/{id}` and `/api/v1/logo/{size}/{id}`
+https://registry.walletconnect.com/api/v1/logo/md/d01c7758d741b363e637a817a09bcf579feae4db9f5bb16f599fdd1f66e2f974
+
+https://registry.walletconnect.com/v1/logo/md/d01c7758d741b363e637a817a09bcf579feae4db9f5bb16f599fdd1f66e2f974
+
+`/v1/{type}`
+
+https://registry.walletconnect.com/v1/wallets
+
+https://registry.walletconnect.com/v1/dapps
+
+https://registry.walletconnect.com/v1/all
+
+`/v2/logo/{size}/{id}` and `/api/v2/logo/{size}/{id}`
+https://registry.walletconnect.com/api/v2/logo/lg/32a77b79-ffe8-42c3-61a7-3e02e019ca00
+
+https://registry.walletconnect.com/v2/logo/lg/32a77b79-ffe8-42c3-61a7-3e02e019ca00
+
+`/v2/{type}`
+
+https://registry.walletconnect.com/v2/wallets
+
+https://registry.walletconnect.com/v2/dapps
+
+https://registry.walletconnect.com/v2/all
+
+#### What do you need to do?
+
+If you are still using these legacy endpoints, all you need to do is simply upgrade before **January 30, 2024**. You can do so by updating any custom API requests to:
+
+- use the `/v3/` prefix
+- adding your dapp’s/wallet’s projectId to each request via `?projectId=` query parameter
+
+Below are a few upgrade examples that you can refer to.
+
+### Upgrade examples
+
+#### Scenario 1
+
+Your dapp is querying the deprecated [registry.walletconnect.org/data/wallets.json](https://registry.walletconnect.org/data/wallets.json) endpoint for wallet metadata.
+
+**Issues:**
+
+- [registry.walletconnect.org](https://registry.walletconnect.org) - the registry...org subdomain will be shut down.
+- The `/data/wallets.json` endpoint will be shut down.
+
+**Solution:**
+
+- You should upgrade to the `explorer-api.walletconnect.com/v3/wallets` endpoint, which returns the equivalent data with additional filtering options.
+- The equivalent, upgraded request would be: GET https://explorer-api.walletconnect.com/v3/wallets?projectId=YOUR_PROJECT_ID
+
+#### Scenario 2
+
+Your dapp is querying the deprecated `registry.walletconnect.com/v2/wallets` endpoint for wallet metadata
+
+**Issues:**
+
+- The `/v2/wallets` endpoint will be shut down.
+
+**Solution:**
+
+- You should upgrade to the `explorer-api.walletconnect.com/v3/wallets` endpoint, which returns the equivalent data with additional filtering options.
+- The equivalent, upgraded request would be: GET https://explorer-api.walletconnect.com/v3/wallets?projectId=YOUR_PROJECT_ID
+
+#### Scenario 3
+
+Your dapp is querying the deprecated `registry.walletconnect.org/logo/{size}/{id}.jpeg` endpoint for wallet logos.
+
+**Issues:**
+
+- [registry.walletconnect.org](https://registry.walletconnect.org) - the registry...org subdomain will be shut down.
+- The `/logo/` endpoints (without /v3/ prefix) will be shut down.
+
+**Solution:**
+
+- You should upgrade to the `explorer-api.walletconnect.com/v3/logo/{size}/{image_id}` endpoint, which returns the equivalent logo.
+- A specific dapp’s/wallet’s image_id can be looked up via the data endpoints, e.g. /`v3/wallets`, as shown above.
+- For your convenience, **endpoints like /v3/wallets already provide an image_url object with the relevant `/logo/` requests for each entry.**
+- Taking MetaMask as an example:
+  - Deprecated: GET https://registry.walletconnect.org/logo/md/c57ca95b47569778a828d19178114f4db188b89b763c899ba0be274e97267d96.jpeg
+  - Equivalent upgraded request: GET [explorer-api.walletconnect.com/v3/logo/md/5195e9db-94d8-4579-6f11-ef553be95100?projectId=YOUR_PROJECT_ID](https://explorer-api.walletconnect.com/v3/logo/md/5195e9db-94d8-4579-6f11-ef553be95100?projectId=YOUR_PROJECT_ID)

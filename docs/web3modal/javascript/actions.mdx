@@ -1,0 +1,177 @@
+import Table from '../../components/Table'
+import PlatformTabs from '../../components/PlatformTabs'
+import PlatformTabItem from '../../components/PlatformTabItem'
+
+import WagmiActions from './wagmi/actions.mdx'
+import Wagmi1Actions from './wagmi1/actions.mdx'
+import Ethers5Actions from './ethers5/actions.mdx'
+import EthersActions from './ethers/actions.mdx'
+
+# Actions
+
+## Open and close the modal
+
+```ts
+const modal = createWeb3Modal({ wagmiConfig, projectId, chains })
+
+modal.open()
+
+modal.close()
+```
+
+You can also select the modal's view when calling the `open` function
+
+```ts
+modal.open({ view: 'Account' })
+```
+
+List of views you can select
+
+<Table
+  headers={['Variable', 'Description']}
+  data={[
+    {
+      variable: { code: 'Connect' },
+      description: 'Principal view of the modal - default view when disconnected'
+    },
+    {
+      variable: { code: 'Account' },
+      description: 'User profile - default view when connected'
+    },
+    {
+      variable: { code: 'AllWallets' },
+      description: 'Shows the list of all available wallets'
+    },
+    {
+      variable: { code: 'Networks' },
+      description:
+        'List of available networks - you can select and target a specific network before connecting'
+    },
+    {
+      variable: { code: 'WhatIsANetwork' },
+      description: '"What is a network" onboarding view'
+    },
+    {
+      variable: { code: 'WhatIsAWallet' },
+      description: '"What is a wallet" onboarding view'
+    }
+  ]}
+/>
+
+## Disconnect
+
+Disconnect currently connected account.
+
+```ts
+modal.disconnect()
+```
+
+## Modal State
+
+Get the current value of the modal's state
+
+```ts
+const modal = createWeb3Modal({ wagmiConfig, projectId, chains })
+
+const { open, selectedNetworkId } = modal.getState()
+```
+
+The modal state is an object of two properties:
+
+<Table
+  headers={['Property', 'Description', 'Type']}
+  data={[
+    {
+      variable: { code: 'open' },
+      description: 'Open state will be true when the modal is open and false when closed.',
+      type: { code: 'boolean' }
+    },
+    {
+      variable: { code: 'selectedNetworkId' },
+      description: 'The current chain id selected by the user',
+      type: { code: 'number' }
+    }
+  ]}
+/>
+
+You can also subscribe to the modal's state changes.
+
+```ts
+const modal = createWeb3Modal({ wagmiConfig, projectId, chains })
+
+modal.subscribeState(newState => console.log(newState))
+```
+
+## ThemeMode
+
+Set the `themeMode` after creating the modal
+
+```ts
+const modal = createWeb3Modal({ wagmiConfig, projectId, chains })
+
+modal.setThemeMode('dark')
+```
+
+Get the current `themeMode` value by calling the `getThemeMode` function
+
+```ts
+const modal = createWeb3Modal({ wagmiConfig, projectId, chains })
+
+const themeMode = modal.getThemeMode()
+```
+
+## themeVariables
+
+Set the `themeVariables` after creating the modal
+
+```ts
+const modal = createWeb3Modal({ wagmiConfig, projectId, chains })
+
+modal.setThemeVariables({ ... })
+```
+
+Get the current `themeVariables` value by calling the `getThemeVariables` function
+
+```ts
+const modal = createWeb3Modal({ wagmiConfig, projectId, chains })
+
+const themeMode = modal.getThemeVariables()
+```
+
+## Subscribe to theme changes
+
+```ts
+const unsubscribe = modal.subscribeTheme(newTheme => console.log(newTheme))
+```
+
+## Track modal events
+
+```ts
+modal.getEvent() // get last event
+modal.subscribeEvents(event => console.log(event)) // subscribe to events
+```
+
+## Ethereum Library
+
+<PlatformTabs groupId="eth-lib" activeOptions={["wagmi", "wagmi1", "ethers5", "ethers"]}>
+<PlatformTabItem value="wagmi">
+
+<WagmiActions />
+
+</PlatformTabItem>
+<PlatformTabItem value="wagmi1">
+
+<Wagmi1Actions />
+
+</PlatformTabItem>
+<PlatformTabItem value="ethers5">
+
+<Ethers5Actions />
+
+</PlatformTabItem>
+<PlatformTabItem value="ethers">
+
+<EthersActions />
+
+</PlatformTabItem>
+</PlatformTabs>

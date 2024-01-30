@@ -1,0 +1,112 @@
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
+
+You can start Web3Modal configuration using either **default** or **custom** mode.
+
+Default mode will implement WalletConnect, Browser Wallets (injected) and Coinbase options in addition to the [WalletConnect's provider](../../../../cloud/blockchain-api.md).
+
+<Tabs>
+<TabItem value="default" label="Default">
+
+In your `App.vue` file set up the following configuration.
+
+```html
+<script setup>
+  import { createWeb3Modal, defaultWagmiConfig } from '@web3modal/wagmi'
+
+  import { mainnet, arbitrum } from 'viem/chains'
+  import { reconnect } from '@wagmi/core'
+
+  // 1. Define constants
+  const projectId = 'YOUR_PROJECT_ID'
+
+  // 2. Create wagmiConfig
+  const metadata = {
+    name: 'Web3Modal',
+    description: 'Web3Modal Example',
+    url: 'https://web3modal.com', // origin must match your domain & subdomain
+    icons: ['https://avatars.githubusercontent.com/u/37784886']
+  }
+
+  const chains = [mainnet, arbitrum]
+  const config = defaultWagmiConfig({
+    chains, // required
+    projectId, // required
+    metadata, // required
+    enableWalletConnect: true, // Optional - true by default
+    enableInjected: true, // Optional - true by default
+    enableEIP6963: true, // Optional - true by default
+    enableCoinbase: true, // Optional - true by default
+  })
+
+  reconnect(config)
+
+  // 3. Create modal
+  createWeb3Modal({
+    wagmiConfig: config,
+    projectId,
+    enableAnalytics: true // Optional - defaults to your Cloud configuration
+  })
+</script>
+
+<template> // Rest of your app ... </template>
+```
+
+</TabItem>
+<TabItem value="custom" label="Custom">
+
+In your `App.vue` file set up the following configuration.
+
+```html
+<script setup lang="ts">
+  import { createWeb3Modal } from '@web3modal/wagmi'
+
+  import { http, createConfig, reconnect } from '@wagmi/core'
+  import { mainnet, sepolia } from '@wagmi/core/chains'
+  import { coinbaseWallet, walletConnect, injected } from '@wagmi/connectors'
+
+  // 1. Define constants
+  const projectId = 'YOUR_PROJECT_ID'
+
+  const metadata = {
+    name: 'Web3Modal',
+    description: 'Web3Modal Example',
+    url: 'https://web3modal.com', // origin must match your domain & subdomain
+    icons: ['https://avatars.githubusercontent.com/u/37784886']
+  }
+
+  const config = createConfig({
+    chains: [mainnet, sepolia],
+    transports: {
+      [mainnet.id]: http(),
+      [sepolia.id]: http()
+    },
+    connectors: [
+      walletConnect({ projectId, metadata, showQrModal: false }),
+      injected({ shimDisconnect: true }),
+      coinbaseWallet({
+        appName: metadata.name,
+        appLogoUrl: metadata.icons[0]
+      })
+    ]
+  })
+
+  reconnect(config)
+
+  // 3. Create modal
+  createWeb3Modal({
+    wagmiConfig: config,
+    projectId,
+    enableAnalytics: true // Optional - defaults to your Cloud configuration
+  })
+</script>
+
+<template> // Rest of your app ... </template>
+```
+
+</TabItem>
+</Tabs>
+
+:::info
+If you're using Nuxt, you can set wagmi's `ssr` option to true and call the `reconnect` function after your application mounts.
+:::

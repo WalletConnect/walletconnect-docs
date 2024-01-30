@@ -1,0 +1,185 @@
+import Container from '../../components/Container'
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
+
+# Usage
+
+`Web3Modal` is a singleton that interacts with the WalletConnectModal SDK.
+
+## Implementation
+
+#### Initialize
+
+```kotlin
+val connectionType = ConnectionType.AUTOMATIC or ConnectionType.MANUAL
+val projectId = "" // Get Project ID at https://cloud.walletconnect.com/
+val relayUrl = "relay.walletconnect.com"
+val serverUrl = "wss://$relayUrl?projectId=${projectId}"
+val appMetaData = Core.Model.AppMetaData(
+    name = "Kotlin.Web3Modal",
+    description = "Kotlin Web3Modal Implementation",
+    url = "kotlin.walletconnect.com",
+    icons = listOf("https://raw.githubusercontent.com/WalletConnect/walletconnect-assets/master/Icon/Gradient/Icon.png"),
+    redirect = "kotlin-web3modal://request"
+)
+
+CoreClient.initialize(relayServerUrl = serverUrl, connectionType = connectionType, application = this, metaData = appMetaData)
+
+Web3Modal.initialize(
+    init = Modal.Params.Init(CoreClient),
+    onSuccess = {
+        // Callback will be called if initialization is successful
+     },
+    onError = { error ->
+        // Error will be thrown if there's an issue during initialization
+    }
+)
+```
+
+#### Session properties
+
+You can define session properties by calling the `setSessionProperties` method on the `Web3Modal` object.
+
+#### Chains
+
+This example of define ethereum chain. You can define the chains you want to use. The chain must be EVM compatible.
+
+```kotlin
+Example of definition chains: https://github.com/WalletConnect/WalletConnectKotlinV2/blob/master/product/web3modal/src/main/kotlin/com/walletconnect/web3/modal/presets/Web3ModalChainsPresets.kt
+
+Web3Modal.setChains(Web3ModalChainsPresets.ethChains.values.toList())
+```
+
+**IMPORTANT**: `Chains` must be set before opening the modal.
+
+## Usage
+
+<Tabs
+    groupId="android"
+    activeOptions={["compose_accompanist", "compose_component", "kotlin-dsl", "nav-graph"]}
+>
+<TabItem value="compose_accompanist" label="Compose Accompanist">
+
+```kotlin
+import androidx.compose.material.ExperimentalMaterialApi
+import androidx.compose.material.ModalBottomSheetState
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import com.google.accompanist.navigation.material.BottomSheetNavigator
+import com.google.accompanist.navigation.material.ExperimentalMaterialNavigationApi
+import com.google.accompanist.navigation.material.ModalBottomSheetLayout
+import com.google.accompanist.navigation.material.bottomSheet
+import com.walletconnect.web3.modal.ui.web3ModalGraph
+
+setContent {
+    val modalSheetState = rememberModalBottomSheetState(initialValue = ModalBottomSheetValue.Hidden, skipHalfExpanded = true)
+    val bottomSheetNavigator = BottomSheetNavigator(modalSheetState)
+    val navController = rememberNavController(bottomSheetNavigator)
+
+    ModalBottomSheetLayout(bottomSheetNavigator = bottomSheetNavigator) {
+        NavHost(
+            navController = navController,
+            startDestination = "home"
+        ) {
+            composable("home") {
+                HomeScreen()
+            }
+            web3ModalGraph(navController)
+        }
+    }
+}
+```
+
+**IMPORTANT**: Web3Modal uses accompanist navigation material inside. `ModalBottomSheetLayout` should be imported from [Accompanist Navigation Material](https://google.github.io/accompanist/navigation-material/)
+
+```kotlin
+import com.walletconnect.web3.modal.ui.openWeb3Modal
+
+navController().openWeb3Modal(
+    shouldOpenChooseNetwork = true | false
+    onError = {  }
+)
+```
+
+</TabItem>
+
+<TabItem value="compose_component" label="Compose Component">
+
+```kotlin
+import androidx.compose.material.ExperimentalMaterialApi
+import androidx.compose.material.ModalBottomSheetState
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import androidx.compose.material.ModalBottomSheetLayout
+
+setContent {
+    val modalSheetState = rememberModalBottomSheetState(initialValue = ModalBottomSheetValue.Hidden, skipHalfExpanded = true)
+    val coroutineScope = rememberCoroutineScope()
+    val navController = rememberNavController()
+
+    ModalBottomSheetLayout(
+        sheetContent = {
+            Web3ModalComponent(
+                shouldOpenChooseNetwork = true | false,
+                closeModal = { coroutineScope.launch { modalSheetState.hide() }
+            )
+        }
+    ) {
+        // content
+    }
+}
+```
+
+</TabItem>
+
+<TabItem value="kotlin-dsl" label="Kotlin DSL">
+
+```kotlin
+import androidx.navigation.createGraph
+import androidx.navigation.fragment.fragment
+import com.walletconnect.web3.modal.ui.web3ModalGraph
+
+navController.graph = navController.createGraph("Home") {
+    fragment<HomeFragment>("Home")
+    web3Modal()
+}
+```
+
+```kotlin
+import androidx.navigation.fragment.findNavController
+import com.walletconnect.web3.modal.ui.openWeb3Modal
+
+findNavController().openWeb3Modal(
+    shouldOpenChooseNetwork = true | false
+    onError = {  }
+)
+```
+
+</TabItem>
+<TabItem value="nav-graph" label="Nav graph">
+
+```xml
+<navigation >
+    <fragment
+        android:id="@+id/HomeFragment"
+        android:name="com.walletconnect.sample.HomeFragment">
+    </fragment>
+
+    <include app:graph ="@navigation/web3modal_graph"/>
+</navigation>
+```
+
+```kotlin
+import androidx.navigation.fragment.findNavController
+import com.walletconnect.web3.modal.ui.openWeb3Modal
+
+findNavController().openWeb3Modal(
+    shouldOpenChooseNetwork = true | false
+    onError = {  }
+)
+```
+
+</TabItem>
+</Tabs>

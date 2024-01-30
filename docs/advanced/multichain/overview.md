@@ -23,12 +23,12 @@ Integrate RPC method support into the example wallets and dapp.
 **Example Wallet**
 
 - [Demo](https://react-web3wallet.vercel.app/)
-- [GitHub](https://github.com/WalletConnect/web-examples/tree/main/wallets/react-web3wallet)
+- [GitHub](https://github.com/WalletConnect/web-examples/tree/main/advanced/wallets/react-web3wallet)
 
 **Example Dapp**
 
 - [Demo](https://react-app.walletconnect.com/)
-- [GitHub](https://github.com/WalletConnect/web-examples/tree/main/dapps/react-dapp-v2)
+- [GitHub](https://github.com/WalletConnect/web-examples/tree/main/advanced/dapps/react-dapp-v2)
 
 ## Promote
 
@@ -37,3 +37,9 @@ For a chain to benefit users, its prominent wallets and dApps must be registered
 ## [Web3Modal](../../web3modal/about.mdx)
 
 After adding the chain to the Explorer, Web3Modal can be utilized to offer users a seamless experience when connecting to their wallet.
+
+## Wagmi & Viem
+
+If the chain you are registering is EVM compliant, we highly recommend you to integrate it with [Viem](https://viem.sh/docs/clients/chains.html), an ethereum library used by Wagmi and Web3Modal. To accomplish this you will need to open a GitHub Pull Request in the Viem repository.
+
+- [Viem GitHub Repository](https://github.com/wagmi-dev/viem/tree/main/src/chains/definitions)

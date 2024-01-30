@@ -1,8 +1,14 @@
 // @ts-check
 // Note: type annotations allow type checking and IDEs autocompletion
 
-const darkCodeTheme = require('prism-react-renderer/themes/dracula')
-const lightCodeTheme = require('prism-react-renderer/themes/github')
+const { themes } = require('prism-react-renderer')
+const lightCodeTheme = themes.github
+const darkCodeTheme = themes.dracula
+
+const projectKey =
+  process.env.NODE_ENV === 'production'
+    ? 'Uuv6kG5tEsMxJaTbj66ljUoei91qg1La'
+    : 'sk_test_uH7GmxPmqXDxpn4x6EXi4V5Hg4PsQFFh'
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
@@ -15,6 +21,7 @@ const config = {
   favicon: 'img/favicon.ico',
   organizationName: 'walletconnect',
   projectName: 'walletconnect-docs',
+  staticDirectories: ['static'],
   scripts: [
     {
       src: 'https://plausible.io/js/plausible.js',
@@ -22,6 +29,7 @@ const config = {
       'data-domain': 'docs.walletconnect.com'
     }
   ],
+  themes: ['@markprompt/docusaurus-theme-search'],
   presets: [
     [
       'classic',
@@ -29,24 +37,23 @@ const config = {
       {
         docs: {
           breadcrumbs: true,
-          lastVersion: 'current',
           routeBasePath: '/',
           sidebarPath: require.resolve('./sidebars.js'),
           showLastUpdateTime: true,
           editUrl: 'https://github.com/WalletConnect/walletconnect-docs/blob/main/',
-          versions: {
-            current: {
-              badge: false,
-              label: 'v2.x',
-              path: '2.0'
-            }
-          },
           remarkPlugins: [
             [
               require('@docusaurus/remark-plugin-npm2yarn'),
               {
                 sync: true,
-                converters: ['yarn', ['Bun', code => code.replace(/npm/g, 'bun')], 'pnpm']
+                converters: [
+                  'yarn',
+                  [
+                    'Bun',
+                    code => code.replace(/npm i /g, 'bun a ').replace(/npm install /g, 'bun add ')
+                  ],
+                  'pnpm'
+                ]
               }
             ]
           ]
@@ -61,6 +68,26 @@ const config = {
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     {
+      markprompt: {
+        projectKey,
+        trigger: {
+          floating: false,
+          placeholder: 'Search or Ask AI'
+        },
+        feedback: {
+          enabled: true
+        },
+        search: {
+          enabled: true,
+          provider: {
+            name: 'algolia',
+            appId: 'KEO8ND6AUT',
+            apiKey: '5921626237dc9040afc258af25d4e77d',
+            indexName: 'walletconnect',
+            contextualSearch: true
+          }
+        }
+      },
       image: 'img/Docs-OG.png',
       metadata: [{ name: 'twitter:card', content: 'summary_large_image' }],
       navbar: {
@@ -69,6 +96,13 @@ const config = {
             type: 'html',
             value:
               '<a class="navbar__brand" href="/"><div class="navbar__logo"><img src="/img/walletconnect-logo-white.svg#dark-mode-only"  alt="WalletConnect Logo"><img src="/img/walletconnect-logo-black.svg#light-mode-only"  alt="WalletConnect Logo"></div>WalletConnect<span>Docs<span></a>'
+          },
+          {
+            label: 'Dashboard',
+            href: 'https://cloud.walletconnect.com/?utm_source=website&utm_medium=docs&utm_campaign=walletconnectdocs',
+            position: 'right',
+            className: 'header-cloud-link',
+            'aria-label': 'Cloud'
           },
           {
             href: 'https://github.com/walletconnect/',
@@ -85,15 +119,15 @@ const config = {
             items: [
               {
                 label: 'Web3Modal SDK',
-                to: '/2.0/web3modal/about'
+                to: '/web3modal/about'
               },
               {
                 label: 'Web3Wallet SDK',
-                to: '/2.0/web3wallet/about'
+                to: '/web3wallet/about'
               },
               {
                 label: 'Web3Inbox SDK',
-                to: '/2.0/web3inbox/about'
+                to: '/web3inbox/about'
               }
             ]
           },
@@ -138,9 +172,8 @@ const config = {
       prism: {
         darkTheme: darkCodeTheme,
         theme: lightCodeTheme,
-        additionalLanguages: ['swift', 'kotlin', 'dart', 'csharp'],
+        additionalLanguages: ['swift', 'kotlin', 'dart', 'csharp', 'gradle', 'ruby'],
         magicComments: [
-          // Remember to extend the default highlight class name as well!
           {
             className: 'theme-code-block-highlighted-delete',
             line: 'highlight-delete',
@@ -153,16 +186,10 @@ const config = {
           }
         ]
       },
-      algolia: {
-        appId: 'KEO8ND6AUT',
-        apiKey: '5921626237dc9040afc258af25d4e77d',
-        indexName: 'walletconnect',
-        contextualSearch: true
-      },
       announcementBar: {
         id: 'support_us',
         content:
-          '🎉 Web3Modal v3 Beta is out. <a rel="noopener noreferrer" href="/2.0/web3modal/v3/about">Learn more</a>. 🎉',
+          '🎉 The Web3Inbox SDK is in beta! <a rel="noopener noreferrer" href="/web3inbox/about?utm_source=docs&utm_medium=banner&utm_campaign=sdkpubliclaunch">Explore the new SDK</a> 🎉',
         backgroundColor: '#3182ce',
         textColor: '#fff',
         isCloseable: true

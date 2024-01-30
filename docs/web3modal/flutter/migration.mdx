@@ -1,0 +1,78 @@
+# Migration from WCM
+
+<!--As you may know, **Web3Modal** is a better, more simply, modal to connect your wallet and if you are coming from **WalletConnectModal** you are wondering what are really the differences:-->
+
+If you are currently using WalletConnectModalFlutter, migrating to Web3Modal couldn't be easier!
+
+## Imports
+
+Uninstall `walletconnect_modal_flutter` and install `web3modal_flutter`, then change imports:
+
+```dart
+// WalletConnectModal (Remove the following)
+// highlight-delete-start
+import 'package:walletconnect_flutter_v2/walletconnect_flutter_v2.dart';
+import 'package:walletconnect_modal_flutter/services/explorer/i_explorer_service.dart';
+import 'package:walletconnect_modal_flutter/walletconnect_modal_flutter.dart';
+// highlight-delete-end
+
+// Web3Modal (Add the following)
+// highlight-add-start
+import 'package:web3modal_flutter/web3modal_flutter.dart';
+// highlight-add-end
+```
+
+## Service instance
+
+```dart
+// WalletConnectModal (Remove the following)
+// highlight-delete-start
+_w3mService = WalletConnectModalService(
+  projectId: '****************',
+  recommendedWalletIds: {
+    'WALLET_ID_HERE',
+  },
+  excludedWalletState: ExcludedWalletState.list,
+);
+// highlight-delete-end
+
+// Web3Modal (Add the following)
+// highlight-add-start
+_w3mService = W3MService(
+  projectId: '****************',
+  featuredWalletIds: {
+    'WALLET_ID_HERE',
+  },
+  // excludedWalletState: ExcludedWalletState.list, NOT NEEDED
+);
+// highlight-add-end
+```
+
+## Launching connected wallet
+
+```dart
+// WalletConnectModal (Remove the following)
+// highlight-delete-start
+_w3mService.launchCurrentWallet();
+// highlight-delete-end
+
+// Web3Modal (Add the following)
+// highlight-add-start
+_w3mService.launchConnectedWallet();
+// highlight-add-end
+```
+
+## Connect wallet button
+
+```dart
+// WalletConnectModal (Remove the following)
+// highlight-delete-start
+WalletConnectModalConnect(service: _w3mService),
+// highlight-delete-end
+
+// Web3Modal (Add the following)
+// highlight-add-start
+// W3MNetworkSelectButton(service: _w3mService) => This button is optional
+W3MConnectWalletButton(service: _w3mService),
+// highlight-add-end
+```

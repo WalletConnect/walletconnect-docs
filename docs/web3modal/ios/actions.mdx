@@ -1,0 +1,81 @@
+# Actions
+
+## Web3Modal Chains
+
+### Chain selection
+
+You can select your own chain by calling the `selectChain(_ chain: Chain)` static method on the `Web3Modal` object.
+
+### Get selected chain
+
+You can get selected chain by calling the `getSelectedChain()` static method on the `Web3Modal` object.
+
+## Sign Actions
+
+### Create pairing
+
+```swift
+let uri: WalletConnectURI = try await Web3Modal.instance.createPairing()
+```
+
+### Connect
+
+```swift
+try await Web3Modal.instance.connect(
+    requiredNamespaces: [String: ProposalNamespace],
+    optionalNamespaces: [String: ProposalNamespace]?,
+    sessionProperties: [String: String]?,
+    topic: topic // Can be existing topic or nil to create new one
+)
+
+// Or without specifying namespaces to stick with default values
+
+try await Web3Modal.instance.connect(
+    topic: topic // Can be existing topic or nil to create new one
+)
+```
+
+More about optional and required namespaces can be found [here](https://github.com/ChainAgnostic/CAIPs/blob/master/CAIPs/caip-25.md)
+
+### Disconnect
+
+```swift
+try await Web3Modal.instance.disconnect(topic: topic)
+```
+
+### Request
+
+```swift
+try await Web3Modal.instance.request(
+    params: .init(
+        topic: session.topic,
+        method: "some_method",
+        params: AnyCodable(payload),
+        chainId: Blockchain
+    )
+)
+```
+
+### Get List of Active Sessions
+
+```swift
+Web3Modal.instance.getSessions()
+```
+
+To get a list of active sessions, call `Web3Modal.instance.getSessions()` which will return `[Session]`.
+
+### Get Pairings
+
+```swift
+Web3Modal.instance.getPairings()
+```
+
+Get list of all pairings by calling `Web3Modal.instance.getPairings()` which will return `[Pairing]`.
+
+### Cleanup
+
+```swift
+Web3Modal.instance.cleanup(topic)
+```
+
+Delete all stored data such as: pairings, sessions, keys

@@ -1,0 +1,80 @@
+# Hooks
+
+:::caution
+This documentation is for Web3Modal v2. You can find Web3Modal v3 docs [here](../../../about.mdx)
+:::
+
+## useWeb3Modal
+
+Hook to programmatically control the modal. Useful when you want to use your own UI elements and subscribe to modals state
+
+### Example
+
+```tsx
+import { useWeb3Modal } from '@web3modal/react'
+
+const { isOpen, open, close, setDefaultChain } = useWeb3Modal()
+```
+
+### Reference
+
+```ts
+// Boolean that indicates if modal is open or closed
+isOpen: boolean
+```
+
+```ts
+// Function to open the modal. Takes in optional object with options
+open: (options?: Options) => Promise<void>
+
+interface Options {
+  route?: 'Account' | 'ConnectWallet' | 'Help' | 'SelectNetwork'
+}
+```
+
+```ts
+// Function to close the modal
+close: () => void
+```
+
+```ts
+// Function to set a default chain before user connects
+setDefaultChain: (chain: WagmiChain) => void
+```
+
+## useWeb3ModalTheme
+
+Hook to set or update theme options for [`themeVariables`](./options#themevariables-optional) and [`themeMode`](./options#thememode-optional).
+
+### Example
+
+```tsx
+import { useWeb3ModalTheme } from '@web3modal/react'
+
+const { theme, setTheme } = useWeb3ModalTheme()
+```
+
+### Reference
+
+```tsx
+// Object that reflects current modal theme
+theme: {
+  themeMode, themeVariables
+}
+```
+
+```tsx
+// Function to set modal's themeMode and themeVariables options
+setTheme({
+  themeMode: 'dark',
+  themeVariables: {
+    '--w3m-font-family': 'Roboto, sans-serif',
+    '--w3m-accent-color': '#F5841F'
+    // ...
+  }
+})
+```
+
+## Wagmi hooks
+
+Other hooks like [`useAccount`](https://wagmi.sh/react/hooks/useAccount), [`useConnect`](https://wagmi.sh/react/hooks/useConnect) and many more are available from [wagmi](https://wagmi.sh/react/getting-started).

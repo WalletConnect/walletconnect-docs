@@ -1,0 +1,129 @@
+import CloudBanner from '../../components/CloudBanner'
+
+# Usage
+
+## Import the package:
+
+```dart
+import 'package:web3modal_flutter/web3modal_flutter.dart';
+```
+
+Create your `W3MService` which is your primary class for opening, closing, disconnecting, etc.
+
+Be sure to update the **project ID** and metadata with your own.
+
+<CloudBanner />
+
+```dart
+final _w3mService = W3MService(
+  projectId: '{YOUR_PROJECT_ID}',
+  metadata: const PairingMetadata(
+    name: 'Web3Modal Flutter Example',
+    description: 'Web3Modal Flutter Example',
+    url: 'https://www.walletconnect.com/',
+    icons: ['https://walletconnect.com/walletconnect-logo.png'],
+    redirect: Redirect(
+      native: 'flutterdapp://',
+      universal: 'https://www.walletconnect.com',
+    ),
+  ),
+);
+await _w3mService.init();
+```
+
+The `metadata` object should contain your dApp's name, description, url and icon. The `redirect` object inside it serves the purpose of redirecting from the wallet to back to your dApp once is connected.
+
+Now you can use the `W3MConnectWalletButton`, which will open the Web3Modal with no prior network selected
+
+```dart
+W3MConnectWalletButton(service: _w3mService)
+```
+
+Or you can use `W3MNetworkSelectButton` which will first show a network selection prompt:
+
+```dart
+W3MNetworkSelectButton(service: _w3mService)
+```
+
+Once session is approved you can use `W3MAccountButton` widget to show basic account data and to open Account data modal:
+
+```dart
+W3MAccountButton(service: _w3mService)
+```
+
+## Web3App or projectId + required PairingMetadata
+
+You must provide either a Web3App or a projectId as well as a PairingMetadata in both cases.
+Providing the `Web3App` instance lets you register callbacks on the `Web3App` you'd like to use.
+Otherwise, we recommend just providing the projectId and `PairingMetadata` to the `W3MService` directly.
+
+#### W3MService with Web3App:
+
+```dart
+final _web3App = await Web3App.createInstance(
+  projectId: '{YOUR_PROJECT_ID}',
+  metadata: const PairingMetadata(
+    name: 'Web3Modal Flutter Example',
+    description: 'Web3Modal Flutter Example',
+    url: 'https://www.walletconnect.com/',
+    icons: ['https://walletconnect.com/walletconnect-logo.png'],
+    redirect: Redirect(
+      native: 'flutterdapp://',
+      universal: 'https://www.walletconnect.com',
+    ),
+  ),
+);
+
+// Register callbacks on the Web3App you'd like to use
+
+final _w3mService = W3MService(web3App: _web3App);
+```
+
+#### W3MService with Project ID:
+
+```dart
+final _w3mService = W3MService(
+  projectId: '{YOUR_PROJECT_ID}',
+  metadata: const PairingMetadata(
+    name: 'Web3Modal Flutter Example',
+    description: 'Web3Modal Flutter Example',
+    url: 'https://www.walletconnect.com/',
+    icons: ['https://walletconnect.com/walletconnect-logo.png'],
+    redirect: Redirect(
+      native: 'flutterdapp://',
+      universal: 'https://www.walletconnect.com',
+    ),
+  ),
+);
+```
+
+## Network selection or direct wallet connection
+
+You can choose either to enable **Connect Wallet** button only after selecting a network (default behaviour) or to not display a **Select Network** button and directly navigate users to connect a wallet.
+
+If you decide to take first approach of showing a `W3MNetworkSelectButton` **and** `W3MConnectWalletButton` (which is enabled only after selecting a Network) you simple have to add these two buttons on your code:
+
+For instance:
+
+```dart
+Column(
+  mainAxisAlignment: MainAxisAlignment.center,
+  children: [
+    W3MNetworkSelectButton(service: _w3mService),
+    W3MConnectWalletButton(service: _w3mService),
+  ],
+),
+```
+
+and `W3MConnectWalletButton` will handle it's state automatically.
+
+But, as mentioned before, you can decide to just show the **Connect Wallet** button alone, in this case you would need to set it's state to `ConnectButtonState.none` like so:
+
+```dart
+W3MConnectWalletButton(
+  service: _w3mService,
+  state: ConnectButtonState.none,
+),
+```
+
+this way `W3MConnectWalletButton` will be always enabled.

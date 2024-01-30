@@ -18,7 +18,7 @@ This method returns an array of key pairs available to sign from the wallet mapp
     	1.1. `Object` - Account Data object with parameters:
     		1.1.1. `algo` : `STRING` - algorithm used for signing
     		1.1.2. `address` : `STRING` - corresponding address for keypair
-    		1.1.3. `pubkey` : `STRING` - public key for keypair
+    		1.1.3. `pubkey` : `STRING` - base64 encoded public key for keypair
 
 ### Example
 
@@ -104,7 +104,7 @@ This method returns a signature for the provided document to be signed targeting
             },
             "signature": "AnTrXtS2lr9CBwhTpRa8ZlKcVR9PeIXGaTpvodyJU05QvRKVjIkQfOZl5JhdkfxCY+a6rhwCOYVcbKQTJlMw4w=="
         },
-        "signDoc": {
+        "signed": {
             "chainId": "cosmoshub-4",
             "accountNumber": "1"
             "authInfoBytes": "CgoKABIECgIIARgBEhMKDQoFdWNvc20SBDIwMDAQwJoM",
@@ -126,7 +126,7 @@ This method returns a signature for the provided document to be signed targeting
     		1.2.2. `chain_id` : `STRING` - identifier of blockchain
     		1.2.1. `account_number` : `STRING` - blockchain account number
     		1.2.3. `sequence` : `STRING` - blockchain account sequence
-				1.2.4. `memo` : `STRING` - amino message memo
+    			1.2.4. `memo` : `STRING` - amino message memo
     		1.2.5. `msgs` : `Array` - array of amino messages to be signed:
     			1.2.5.1. `Object` - amino message object:
     				1.2.5.1.1. - `type` : `STRING` - amino message type
@@ -150,8 +150,8 @@ This method returns a signature for the provided document to be signed targeting
     		1.2.2. `chain_id` : `STRING` - identifier of blockchain
     		1.2.1. `account_number` : `STRING` - blockchain account number
     		1.2.3. `sequence` : `STRING` - blockchain account sequence
-				1.2.4. `memo` : `STRING` - amino message memo
-				1.2.5. `msgs` : `Array` - array of amino messages to be signed:
+    			1.2.4. `memo` : `STRING` - amino message memo
+    			1.2.5. `msgs` : `Array` - array of amino messages to be signed:
     			1.2.5.1. `Object` - amino message object:
     				1.2.5.1.1. - `type` : `STRING` - amino message type
     				1.2.5.1.2. - `value` : `STRING` - amino message value
@@ -195,13 +195,13 @@ This method returns a signature for the provided document to be signed targeting
             },
             "signature": "AnTrXtS2lr9CBwhTpRa8ZlKcVR9PeIXGaTpvodyJU05QvRKVjIkQfOZl5JhdkfxCY+a6rhwCOYVcbKQTJlMw4w=="
         },
-        "signDoc": {
+        "signed": {
             "chain_id": "foochain",
             "account_number": "7",
             "sequence": "54"
             "memo": "hello, world",
             "msgs": [],
-            "fee": { "amount": [], "gas": "23" }
+            "fee": { "amount": [{"denom": "ufoo", "amount": "10000"}], "gas": "23" }
         }
     }
 }

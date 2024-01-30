@@ -6,6 +6,10 @@ import PlatformTabItem from '../../components/PlatformTabItem'
 
 # Dapp Usage
 
+:::caution
+Auth API is in the process of being greatly simplified, and will involve breaking changes. Please stand by.
+:::
+
 <PlatformTabs
 groupId="api-auth"
 activeOptions={["web","ios","android","flutter","csharp"]}>
@@ -13,7 +17,7 @@ activeOptions={["web","ios","android","flutter","csharp"]}>
 <PlatformTabItem value="web">
 
 :::info
-For an example implementation, please refer to our [`react-dapp-auth` example](https://github.com/WalletConnect/web-examples/tree/main/dapps/react-dapp-auth).
+For an example implementation, please refer to our [`react-dapp-auth` example](https://github.com/WalletConnect/web-examples/tree/main/advanced/dapps/react-dapp-auth).
 :::
 
 **1. Initialize your WalletConnect AuthClient, using [your Project ID](../../cloud/relay.md).**
@@ -52,7 +56,7 @@ authClient.on('auth_response', ({ params }) => {
 You can derive the users' wallet address by destructing and splitting `params.result.p.iss`.
 
 ```javascript
-const { iss } = params.result.p.iss
+const { iss } = params.result.p
 const walletAddress = iss.split(':')[4]
 console.log(walletAddress)
 // "0x977aeFEC1879160eC9560cd16f08e12B6DF52ed1"
@@ -119,7 +123,7 @@ The `uri` can then be displayed as a QRCode or as a deep link.
 
 #### Initial configurations
 
-Make sure what you properly configure Networking, Pair Clients and SignerFactory first
+Make sure that you properly configure Networking, Pair Clients and SignerFactory first
 
 - [Networking](../core/relay.mdx)
 - [Pairing](../core/pairing.mdx)
@@ -247,7 +251,7 @@ The `AuthClient.request` sends the authentication request to the responder/walle
 fun randomNonce(): String = Random.nextBytes(16).bytesToHex()
 
 val requestParams = Auth.Params.Request(
-    topic = pairingTopic // a pairing topic is used to send a authentication request, pass it from [Pairing API](../core/pairing.mdx)
+    topic = pairingTopic // a pairing topic is used to send an authentication request, pass it from [Pairing API](../core/pairing.mdx)
     chainId = "1", // is the EIP-155 Chain ID to which the session is bound, and the network where Contract Accounts MUST be resolved.
     domain = "kotlin.requester.walletconnect.com", // is the RFC 3986 authority that is requesting the signing.
     nonce = randomNonce(), // is a randomized token typically chosen by the relying party and used to prevent replay attacks, at least 8 alphanumeric characters.
@@ -256,7 +260,7 @@ val requestParams = Auth.Params.Request(
     nbf = null, // (optional) is the ISO 8601 datetime string that, if present, indicates when the signed authentication message will become valid.
     exp = null, // (optional) is the ISO 8601 datetime string that, if present, indicates when the signed authentication message is no longer valid.
     statement = "Sign in with wallet.", // (optional) is a human-readable ASCII assertion that the user will sign, and it must not contain '\n' (the byte 0x0a).
-    requestId = null, // (optional) is an system-specific identifier that may be used to uniquely refer to the sign-in request.
+    requestId = null, // (optional) is a system-specific identifier that may be used to uniquely refer to the sign-in request.
     resources = null, // (optional) is a list of information or references to information the user wishes to have resolved as part of authentication by the relying party. They are expressed
     // as RFC 3986 URIs.
 )
@@ -388,12 +392,12 @@ var dappOptions = new AuthOptions()
         Name = "WalletConnectSharpv2 Dapp Example",
         Url = "https://walletconnect.com"
     },
-    // Uncomment to disable persistant storage
+    // Uncomment to disable persistent storage
     // Storage = new InMemoryStorage()
 };
 ```
 
-Once you have `AuthOptions` defined, you can use `WalletConnectAuthClient.Init` to initalize the client
+Once you have `AuthOptions` defined, you can use `WalletConnectAuthClient.Init` to initialize the client
 
 ```csharp
 var dappClient = await WalletConnectAuthClient.Init(dappOptions);
@@ -456,6 +460,7 @@ void OnAuthError(object sender, AuthErrorResponse args)
 
 dappClient.AuthError += OnAuthError;
 ```
+
 </PlatformTabItem>
 
 </PlatformTabs>

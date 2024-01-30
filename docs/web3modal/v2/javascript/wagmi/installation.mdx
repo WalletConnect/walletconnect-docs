@@ -1,0 +1,98 @@
+import ObtainProjectIdPartial from '../../_partials/obtainProjectId.mdx'
+import CloudBanner from '../../../../components/CloudBanner'
+
+# Installation
+
+:::caution
+This documentation is for Web3Modal v2. You can find Web3Modal v3 docs [here](../../../about.mdx)
+:::
+
+With Web3Modal JavaScript, we work with the Wagmi library which is a collection of React Hooks to make your dapp development flow easier. You can sign messages, interact with smart contracts, and much more.
+
+<CloudBanner />
+
+## Add packages (NPM)
+
+```bash npm2yarn
+npm install @web3modal/ethereum @web3modal/html @wagmi/core viem
+```
+
+## Add packages (CDN)
+
+Web3Modal uses [unpkg](https://www.unpkg.com/) as its official CDN provider.
+For a majority of use cases you simply need to swap npm imports to cdn ones, however due to some downstream package issues with cdn workflows, we recommend using pre-packaged version of wagmi core as shown below. (`WagmiCore` imports).
+
+See full [CDN example](https://github.com/WalletConnect/web3modal-examples/tree/main/web3modal-wagmi-html-cdn) for more info.
+
+```html
+<script type="module">
+  import {
+    EthereumClient,
+    w3mConnectors,
+    w3mProvider,
+    WagmiCore,
+    WagmiCoreChains,
+    WagmiCoreConnectors
+  } from 'https://unpkg.com/@web3modal/ethereum'
+
+  import { Web3Modal } from 'https://unpkg.com/@web3modal/html'
+
+  // Equivalent to importing from @wagmi/core
+  const { configureChains, createConfig } = WagmiCore
+
+  // Equivalent to importing from viem/chains
+  const { mainnet, polygon, avalanche, arbitrum } = WagmiCoreChains
+
+  // Equivalent to importing from @wagmi/core/providers
+  const { CoinbaseWalletConnector } = WagmiCoreConnectors
+</script>
+```
+
+## Implementation
+
+Start by importing Web3Modal and wagmi packages, then create wagmi config using your own settings or our default presets as shown below. Finally, pass wagmi config to Web3Modal as ethereumClient.
+
+```tsx
+import { EthereumClient, w3mConnectors, w3mProvider } from '@web3modal/ethereum'
+import { Web3Modal } from '@web3modal/html'
+import { configureChains, createConfig } from '@wagmi/core'
+import { arbitrum, mainnet, polygon } from 'viem/chains'
+
+const chains = [arbitrum, mainnet, polygon]
+const projectId = 'YOUR_PROJECT_ID'
+
+const { publicClient } = configureChains(chains, [w3mProvider({ projectId })])
+const wagmiConfig = createConfig({
+  autoConnect: true,
+  connectors: w3mConnectors({ projectId, chains }),
+  publicClient
+})
+const ethereumClient = new EthereumClient(wagmiConfig, chains)
+const web3modal = new Web3Modal({ projectId }, ethereumClient)
+```
+
+## Trigger the modal
+
+Use pre-built [w3m-core-button](./components#w3m-core-button) web component.
+
+```html
+<w3m-core-button></w3m-core-button>
+```
+
+Alternatively, use your own button with [openModal](./actions#openmodal) action.
+
+```js
+document.getElementById('my-button').addEventListener('click', () => {
+  web3modal.openModal()
+})
+
+<button id="my-button">Connect Wallet</button>
+```
+
+## Use wagmi actions
+
+[wagmi](https://wagmi.sh) provides everything you'll need to start working with accounts, contracts, chains and much more.
+
+```js
+import { getAccount, getContract } from '@wagmi/core'
+```

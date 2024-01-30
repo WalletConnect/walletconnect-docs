@@ -34,16 +34,9 @@ The above step is not required if you are using the SDK on the browser-side.
 ## Initialize the SDK clients
 
 ```javascript
-import { Core } from '@walletconnect/core'
 import { NotifyClient } from '@walletconnect/notify-client'
 
-// Initialize core separately to allow sharing it between Sync and Notify
-const core = new Core({
-  projectId: '<YOUR PROJECT ID>'
-})
-
 const notifyClient = await NotifyClient.init({
-  core, // <- pass the shared `core` instance
   projectId: '<YOUR PROJECT ID>'
 })
 ```
@@ -62,7 +55,7 @@ notifyClient.on('notify_subscription', async ({ params }) => {
   } else {
     // New subscription was successfully created.
     // Inform the user and/or update app state to reflect the new subscription.
-    console.log(`Successfully subscribed to ${subscription.metadata.name}.`)
+    console.log(`Subscribed successfully.`)
   }
 })
 
@@ -113,13 +106,24 @@ Some suggested ways to implement the `onSign` callback are via:
 
 ```javascript
 const account = `eip155:1:0x63Be2c680685d2A9620c11b0068291261aa62d76`
-const onSign = (message: string) => ethersWallet.signMessage(message)
+const domain =  'app.mydomain.com', // pass the domain (i.e. the hostname) where your dapp is hosted.
+const allApps =  false // The user will be prompted to authorize this dapp to send and receive messages on their behalf for only this specific domain using their WalletConnect identity.
+
+
+// No need to register and sign message if already registered.
+if (notifyClient.isRegistered({ account, domain, allApps })) return;
+
+const {registerParams, message}  = notifyClient.prepareRegistration({
+  account,
+  domain,
+  allApps
+});
+
+const signature = await ethersWallet.signMessage(message);
 
 await notifyClient.register({
-  account,
-  onSign,
-  domain: 'app.mydomain.com', // pass the domain (i.e. the hostname) where your dapp is hosted.
-  isLimited: true // The user will be prompted to authorize this dapp to send and receive messages on their behalf for this domain using their WalletConnect identity.
+  registerParams,
+  signature,
 })
 ```
 
@@ -127,13 +131,36 @@ await notifyClient.register({
 
 ```javascript
 const account = `eip155:1:0x63Be2c680685d2A9620c11b0068291261aa62d76`
-const onSign = (message: string) => ethersWallet.signMessage(message)
+const domain =  'app.mydomain.com', // pass the domain (i.e. the hostname) where your dapp is hosted.
+const allApps =  true // The user will be prompted to authorize this wallet to send and receive messages on their behalf for ALL domains using their WalletConnect identity.
+
+// No need to register and sign message if already registered.
+if (notifyClient.isRegistered({ account, domain, allApps })) return;
+
+const {registerParams, message}  = notifyClient.prepareRegistration({
+  account,
+  domain,
+  allApps
+});
+
+const signature = await ethersWallet.signMessage(message);
 
 await notifyClient.register({
-  account,
-  onSign,
-  domain: 'com.mydomain.app.rn', // pass your app's bundle identifier.
-  isLimited: false // The user will be prompted to authorize this wallet to send and receive messages on their behalf for ALL domains using their WalletConnect identity.
+  registerParams,
+  signature,
+})
+
+```
+
+### Unregistering
+
+Any identity registered can be unregistered via the `unregister` method.
+
+```javascript
+const account = `eip155:1:0x63Be2c680685d2A9620c11b0068291261aa62d76`
+
+await notifyClient.unregister({
+  account
 })
 ```
 
@@ -219,7 +246,7 @@ Make sure Networking and Pairing are properly configured.
 
 #### Configure your project to enable Push Notifications
 
-[Configure Project](/docs/advanced/push-server.md)
+[Configure Project](/advanced/push-server.md)
 
 #### Configure a Client
 
@@ -353,7 +380,7 @@ public func subscribe(metadata: AppMetadata, account: Account, onSign: @escaping
 
 `account` - an account you want to associate a sebscription with
 
-`onSign` - callback that requres a signature from a user
+`onSign` - callback that requires a signature from a user
 
 #### Get Active Subscriptions
 
@@ -558,20 +585,22 @@ val walletDelegate = object : NotifyClient.Delegate {
 NotifyClient.setDelegate(walletDelegate)
 ```
 
-#### Register Identity at a Keyserver
+#### Register blockchain account
 
-In order to use Notify SDK account must register identity in [Keyserver](https://docs.walletconnect.com/2.0/specs/servers/keys/). To verify ownership over blockchain account when registering identities in [Keyserver](https://docs.walletconnect.com/2.0/specs/servers/keys/) user's must sign message provided on `onSign(message: String)` callback. Currenlty only [`EIP191`](https://eips.ethereum.org/EIPS/eip-191) signatures are supported in [Keyserver](https://docs.walletconnect.com/2.0/specs/servers/keys/)
+In order to use Notify SDK account must register identity in [Keyserver](https://specs.walletconnect.com/2.0/specs/servers/keys/). To verify ownership over blockchain account when registering identities in [Keyserver](https://specs.walletconnect.com/2.0/specs/servers/keys/) user's must sign message provided on `onSign(message: String)` callback. Currently only [`EIP191`](https://eips.ethereum.org/EIPS/eip-191) signatures are supported in [Keyserver](https://specs.walletconnect.com/2.0/specs/servers/keys/)
 
 ##### NotifyClient.register
 
 ```kotlin
 val params = Notify.Params.Registration(
     account = /*[CAIP-10](https://github.com/ChainAgnostic/CAIPs/blob/master/CAIPs/caip-10.md) compatible accountId*/,
-    onSign = {// Message to be signed. When user decides to sign message use CacaoSigner to sign message.
-    // CacaoSigner is a util for easy message signing.
-    return CacaoSigner.sign(message, /*privateKey*/, SignatureType.EIP191)
-    // When users decides to not sign message return null
-    return null }
+    onSign = {
+        // Message to be signed. When user decides to sign message use CacaoSigner to sign message.
+        // CacaoSigner is a util for easy message signing.
+        return CacaoSigner.sign(message, /*privateKey*/, SignatureType.EIP191)
+        // When users decides to not sign message return null
+        return null
+    }
 )
 
 NotifyClient.register(
@@ -583,6 +612,23 @@ NotifyClient.register(
           // callback for when the subscription request has failed
       }
   )
+```
+
+#### Unregister blockchain account
+
+To stop receiving notifications for specific blockchain account call `NotifyClient.unregister`. This will delete all local data of subscriptions and messages associated with the account, locally remove and unregister Identity from [Keyserver](https://specs.walletconnect.com/2.0/specs/servers/keys/) and unsubscribe from all active subscriptions.
+
+```kotlin
+val unregistrationParams = Notify.Params.Unregistration(/*CAIP-10 account*/)
+NotifyClient.unregister(
+  unregistrationParams,
+  onSuccess = {
+      // callback for when the unregistration was successful
+  },
+  onError = { error ->
+    // callback for when the unregistration has failed
+  }
+)
 ```
 
 #### Subscribe to a Dapp
@@ -645,10 +691,21 @@ NotifyClient.deleteNotifyMessage(params) { error ->
 
 #### Get Active Subscriptions
 
-To get a list of all the active subscriptions, call the `getActiveSubscriptions` function. It will return a map with the topic as the key and `Notify.Model.Subscription` as the value.
+To get a map of all the active subscriptions, call the `getActiveSubscriptions` function. It will return a map with the topic as the key and `Notify.Model.Subscription` as the value.
 
 ```kotlin
 NotifyClient.getActiveSubscriptions()
+```
+
+#### Get Notification Types
+
+To get a map of all the active subscriptions, call the `getNotificationTypes` function. It will return a map with the notification type id as the key and `Notify.Model.NotificationType` as the value.
+
+```kotlin
+val appMetadata: Core.Model.AppMetaData = /*App Metadata could be fetched from NotifyClient.getActiveSubscriptions()*/
+val appDomain: String = /*App Domain*/ // URI(appMetadata.url).host
+val notificationTypesParams = Notify.Params.NotificationTypes(appDomain)
+NotifyClient.getNotificationTypes(notificationTypesParams)
 ```
 
 #### Get Message History
@@ -679,6 +736,41 @@ NotifyClient.decryptMessage(
 )
 ```
 
+#### Push Notification best practices
+
+`Notify.Model.Message` contains a `type` field, which is a unique id of the notification type. It is recommended to use this field as a notification channel id. By doing so it will create a channel for each notification type. To allow users to granularly control which notifications they want to receive within system settings, it is recommended to create a separate channel for every dapp and every notification type they might have. By doing so user would be able to turn off notifications for specific notification type per every subscribed dapp.
+
+```kotlin
+override fun onMessage(message: Notify.Model.Message, originalMessage: RemoteMessage) {
+    val appMetadata = NotifyClient.getActiveSubscriptions()[message.topic]?.metadata ?: throw IllegalStateException("No active subscription for topic: ${message.topic}")
+    val appDomain = URI(appMetadata.url).host ?: throw IllegalStateException("Unable to parse domain from $appMetadata.url")
+
+    val typeName = NotifyClient.getNotificationTypes(Notify.Params.NotificationTypes(appDomain))[message.type]?.name
+        ?: throw IllegalStateException("No notification type for topic:${message.topic} and type: ${message.type}")
+
+    val channelId = message.type
+    val channelName = (appMetadata.name + ": " + typeName)
+
+    val notificationBuilder = NotificationCompat.Builder(this, channelId)
+        .setContentTitle(message.title)
+        .setSmallIcon(android.R.drawable.ic_popup_reminder) // specify icon for notification
+        .setContentText(message.body)
+        .setAutoCancel(true) // clear notification after click
+        .setSound(defaultSoundUri) // specify sound for notification
+        .setContentIntent(pendingIntent) // specify pendingIntent
+
+    // Since android Oreo notification channel is needed.
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+        val channel = NotificationChannel(channelId, channelName, NotificationManager.IMPORTANCE_HIGH)
+        notificationManager.createNotificationChannel(channel)
+    }
+
+    notificationManager.notify(message.hashCode(), notificationBuilder.build()) // specify id of notification
+}
+
+
+```
+
 </PlatformTabItem>
 <PlatformTabItem value="react-native">
 
@@ -688,19 +780,12 @@ Install the WalletConnect NotifyClient package.
 npm install @walletconnect/notify-client @walletconnect/react-native-compat
 ```
 
-## Initialize the SDK clients
+## Initialize the Notify SDK client.
 
 ```javascript
-import { Core } from '@walletconnect/core'
 import { NotifyClient } from '@walletconnect/notify-client'
 
-// Initialize core separately to allow sharing it between Sync and Notify
-const core = new Core({
-  projectId: '<YOUR PROJECT ID>'
-})
-
 const notifyClient = await NotifyClient.init({
-  core, // <- pass the shared `core` instance
   projectId: '<YOUR PROJECT ID>'
 })
 ```
@@ -719,7 +804,7 @@ notifyClient.on('notify_subscription', async ({ params }) => {
   } else {
     // New subscription was successfully created.
     // Inform the user and/or update app state to reflect the new subscription.
-    console.log(`Successfully subscribed to ${subscription.metadata.name}.`)
+    console.log(`Subscribed successfully.`)
   }
 })
 
@@ -770,13 +855,24 @@ Some suggested ways to implement the `onSign` callback are via:
 
 ```javascript
 const account = `eip155:1:0x63Be2c680685d2A9620c11b0068291261aa62d76`
-const onSign = (message: string) => ethersWallet.signMessage(message)
+const domain =  'app.mydomain.com', // pass the domain (i.e. the hostname) where your dapp is hosted.
+const allApps =  false // The user will be prompted to authorize this dapp to send and receive messages on their behalf for only this specific domain using their WalletConnect identity.
+
+
+// No need to register and sign message if already registered.
+if (notifyClient.isRegistered({ account, domain, allApps })) return;
+
+const {registerParams, message}  = notifyClient.prepareRegistration({
+  account,
+  domain,
+  allApps
+});
+
+const signature = await ethersWallet.signMessage(message);
 
 await notifyClient.register({
-  account,
-  onSign,
-  domain: 'app.mydomain.com', // pass the domain (i.e. the hostname) where your dapp is hosted.
-  isLimited: true // The user will be prompted to authorize this dapp to send and receive messages on their behalf for this domain using their WalletConnect identity.
+  registerParams,
+  signature,
 })
 ```
 
@@ -784,13 +880,25 @@ await notifyClient.register({
 
 ```javascript
 const account = `eip155:1:0x63Be2c680685d2A9620c11b0068291261aa62d76`
-const onSign = (message: string) => ethersWallet.signMessage(message)
+const domain =  'app.mydomain.com', // pass the domain (i.e. the hostname) where your dapp is hosted.
+const allApps =  true // The user will be prompted to authorize this wallet to send and receive messages on their behalf for ALL domains using their WalletConnect identity.
+
+
+
+// No need to register and sign message if already registered.
+if (notifyClient.isRegistered({ account, domain, allApps })) return;
+
+const {registerParams, message}  = notifyClient.prepareRegistration({
+  account,
+  domain,
+  allApps
+});
+
+const signature = await ethersWallet.signMessage(message);
 
 await notifyClient.register({
-  account,
-  onSign,
-  domain: 'com.mydomain.app.rn', // pass your app's bundle identifier.
-  isLimited: false // The user will be prompted to authorize this wallet to send and receive messages on their behalf for ALL domains using their WalletConnect identity.
+  registerParams,
+  signature,
 })
 ```
 

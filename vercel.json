@@ -2,36 +2,60 @@
   "trailingSlash": false,
   "redirects": [
     {
-      "source": "/2.0/web/:path*",
-      "destination": "/2.0/:path*"
+      "source": "/2.0/:path*",
+      "destination": "/:path*"
     },
     {
-      "source": "/2.0/android/:path*",
-      "destination": "/2.0/:path*"
+      "source": "/web3modal/v2/html/:path*",
+      "destination": "/web3modal/v2/javascript/:path*"
     },
     {
-      "source": "/2.0/ios/:path*",
-      "destination": "/2.0/:path*"
+      "source": "/web3modal/html/:path*",
+      "destination": "/web3modal/javascript/:path*"
     },
     {
-      "source": "/2.0/reactnative/:path*",
-      "destination": "/2.0/:path*"
+      "source": "/2.0/specs/",
+      "destination": "https://specs.walletconnect.com/2.0/"
     },
     {
-      "source": "/2.0/flutter/:path*",
-      "destination": "/2.0/:path*"
+      "source": "/specs/:path*",
+      "destination": "https://specs.walletconnect.com/2.0/specs/:path*"
     },
     {
-      "source": "/2.0/unity/:path*",
-      "destination": "/2.0/:path*"
+      "source": "/web3modal/v3/:path*",
+      "destination": "/web3modal/:path*"
+    },
+    {
+      "source": "/web/:path*",
+      "destination": "/:path*"
+    },
+    {
+      "source": "/android/:path*",
+      "destination": "/:path*"
+    },
+    {
+      "source": "/ios/:path*",
+      "destination": "/:path*"
+    },
+    {
+      "source": "/reactnative/:path*",
+      "destination": "/:path*"
+    },
+    {
+      "source": "/flutter/:path*",
+      "destination": "/:path*"
+    },
+    {
+      "source": "/unity/:path*",
+      "destination": "/:path*"
     },
     {
       "source": "/v/1.0/:path*",
       "destination": "/:path*"
     },
     {
-      "source": "/v/2.0/:path*",
-      "destination": "/2.0/:path*"
+      "source": "/v/:path*",
+      "destination": "/:path*"
     },
     {
       "source": "/advanced/echo-server",
@@ -126,26 +150,6 @@
       "destination": "/2.0/cloud/relay"
     },
     {
-      "source": "/2.0/specs/sign/:path*",
-      "destination": "/2.0/specs/clients/sign/:path*"
-    },
-    {
-      "source": "/2.0/specs/auth/:path*",
-      "destination": "/2.0/specs/clients/auth/:path*"
-    },
-    {
-      "source": "/2.0/specs/push/:path*",
-      "destination": "/2.0/specs/clients/push/:path*"
-    },
-    {
-      "source": "/2.0/specs/chat/:path*",
-      "destination": "/2.0/specs/clients/chat/:path*"
-    },
-    {
-      "source": "/2.0/specs/core/:path*",
-      "destination": "/2.0/specs/clients/core/:path*"
-    },
-    {
       "source": "/2.0/web3modal/standalone:path*",
       "destination": "/2.0/web3modal/about"
     },
@@ -174,14 +178,6 @@
       "destination": "/2.0/:path*"
     },
     {
-      "source": "/2.0/specs/servers/push",
-      "destination": "/2.0/specs/servers/push/spec"
-    },
-    {
-      "source": "/2.0/specs/servers/cast",
-      "destination": "/2.0/specs/servers/cast/cast-server-api"
-    },
-    {
       "source": "/2.0/advanced/migration-from-v1.x",
       "destination": "/2.0/advanced/migration-from-v1.x/overview"
     },
@@ -200,6 +196,14 @@
     {
       "source": "2.0/web/web3modal/html/auth-api/installation",
       "destination": "/2.0/api/auth/overview"
+    },
+    {
+      "source": "/web3inbox/frontend-integration/about",
+      "destination": "/web3inbox/frontend-integration/usage"
+    },
+    {
+      "source": "/web3inbox/domain-setup",
+      "destination": "/web3inbox/cloud-setup"
     }
   ]
 }

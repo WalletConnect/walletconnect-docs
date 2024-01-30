@@ -15,7 +15,7 @@ import PlatformTabItem from '../../components/PlatformTabItem'
 <PlatformTabItem value="web">
 
 :::info
-For an example implementation, please refer to our [react-wallet-chat example](https://github.com/WalletConnect/web-examples/tree/main/wallets/react-wallet-chat) and [demo](https://react-wallet-chat.walletconnect.com/)
+For an example implementation, please refer to our [react-wallet-chat example](https://github.com/WalletConnect/web-examples/tree/main/advanced/wallets/react-wallet-chat) and [demo](https://react-wallet-chat.walletconnect.com/)
 :::
 
 #### Initialize your WalletConnect ChatClient, using your Project ID
@@ -329,7 +329,7 @@ public struct Thread: Codable, Equatable {
 
 #### Register Identity at a Keyserver
 
-In order to use Chat SDK account must register identity in [Keyserver](https://docs.walletconnect.com/2.0/specs/servers/keys/). To verify ownership over blockchain account when registering identities in [Keyserver](https://docs.walletconnect.com/2.0/specs/servers/keys/) user's must sign message provided on `onSign(message: String)` callback. Currenlty only [`EIP191`](https://eips.ethereum.org/EIPS/eip-191) signatures are supported in [Keyserver](https://docs.walletconnect.com/2.0/specs/servers/keys/)
+In order to use Chat SDK account must register identity in [Keyserver](https://specs.walletconnect.com/2.0/specs/servers/keys/). To verify ownership over blockchain account when registering identities in [Keyserver](https://specs.walletconnect.com/2.0/specs/servers/keys/) user's must sign message provided on `onSign(message: String)` callback. Currently only [`EIP191`](https://eips.ethereum.org/EIPS/eip-191) signatures are supported in [Keyserver](https://specs.walletconnect.com/2.0/specs/servers/keys/)
 
 ##### `Chat.instance.register`
 
@@ -348,7 +348,7 @@ func onSign(message: String, privateKey: String) -> CacaoSignature {
 }
 ```
 
-To not be discoverable to everyone, set `private` param to `true`. If this flag is `true` then only identity is restored in [Keyserver](https://docs.walletconnect.com/2.0/specs/servers/keys/). Parameter `private` is set to `false` by default.
+To not be discoverable to everyone, set `private` param to `true`. If this flag is `true` then only identity is restored in [Keyserver](https://specs.walletconnect.com/2.0/specs/servers/keys/). Parameter `private` is set to `false` by default.
 
 #### Resolve invitee public invite key with blockchain address
 
@@ -623,7 +623,7 @@ val chatDelegate = object : ChatClient.ChatDelegate {
 
     override fun onError(error: Chat.Model.Error) {
         // Triggered whenever there is an issue inside the SDK
-        // I.e failure to subsribe to a topic
+        // I.e failure to subscribe to a topic
     }
 }
 ChatClient.setChatDelegate(chatDelegate)
@@ -715,7 +715,7 @@ data class Media(
 
 #### Register Identity at a Keyserver
 
-In order to use Chat SDK account must register identity in [Keyserver](https://docs.walletconnect.com/2.0/specs/servers/keys/). To verify ownership over blockchain account when registering identities in [Keyserver](https://docs.walletconnect.com/2.0/specs/servers/keys/) user's must sign message provided on `onSign(message: String)` callback. Currenlty only [`EIP191`](https://eips.ethereum.org/EIPS/eip-191) signatures are supported in [Keyserver](https://docs.walletconnect.com/2.0/specs/servers/keys/)
+In order to use Chat SDK account must register identity in [Keyserver](https://specs.walletconnect.com/2.0/specs/servers/keys/). To verify ownership over blockchain account when registering identities in [Keyserver](https://specs.walletconnect.com/2.0/specs/servers/keys/) user's must sign message provided on `onSign(message: String)` callback. Currently only [`EIP191`](https://eips.ethereum.org/EIPS/eip-191) signatures are supported in [Keyserver](https://specs.walletconnect.com/2.0/specs/servers/keys/)
 
 <!-- TODO: Chat milestone 2 remove EIP191 signatures only comment -->
 
@@ -742,7 +742,7 @@ ChatClient.register(params, object : Chat.Listeners.Register {
 })
 ```
 
-To not be discoverable to everyone, set `private` in `Chat.Params.Register` to `true`. If this flag is `true` then only identity is restored in [Keyserver](https://docs.walletconnect.com/2.0/specs/servers/keys/). Parameter `private` is set to `false` by default.
+To not be discoverable to everyone, set `private` in `Chat.Params.Register` to `true`. If this flag is `true` then only identity is restored in [Keyserver](https://specs.walletconnect.com/2.0/specs/servers/keys/). Parameter `private` is set to `false` by default.
 
 ##### Chat.Params.Register with private = false
 
@@ -982,7 +982,7 @@ val threads: Map<String, Chat.Model.Thread> = ChatClient.getThreads(params)
 
 #### Getting Messages
 
-Clients can fetch all messages for given thread by calling [`ChatClient.getMessages`](#chatclientgetmessages). [`Model.Message`](#modelmessage) contains data neccessary to display a message. [`Model.Media`](#modelmedia) can be attached to message for versatility.
+Clients can fetch all messages for given thread by calling [`ChatClient.getMessages`](#chatclientgetmessages). [`Model.Message`](#modelmessage) contains data necessary to display a message. [`Model.Media`](#modelmedia) can be attached to message for versatility.
 
 ##### `Model.Message`
 

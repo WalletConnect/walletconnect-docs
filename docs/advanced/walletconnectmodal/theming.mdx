@@ -1,9 +1,9 @@
 import PlatformTabs from '../../components/PlatformTabs'
 import PlatformTabItem from '../../components/PlatformTabItem'
 
-import WcModalThemeVariablesTable from '../../web3modal/_partials/wcModalThemeVariablesTable.mdx'
-import ThemeModePartial from '../../web3modal/_partials/themeMode.mdx'
-import ThemeVariablesPartial from '../../web3modal/_partials/themeVariables.mdx'
+import WcModalThemeVariablesTable from '../../web3modal/v2/_partials/wcModalThemeVariablesTable.mdx'
+import ThemeModePartial from '../../web3modal/v2/_partials/themeMode.mdx'
+import ThemeVariablesPartial from '../../web3modal/v2/_partials/themeVariables.mdx'
 
 # Theming
 
@@ -13,7 +13,7 @@ The following theme configuration is only available for **Web** and **React Nati
 
 <PlatformTabs
 	groupId="wcm"
-	activeOptions={["web", "react-native", "android"]}
+	activeOptions={["web", "react-native", "android", "flutter"]}
 >
 <PlatformTabItem value="web">
 
@@ -101,6 +101,67 @@ You can override the default Modal's accent color by creating a `WalletConnectMo
     <item name="onAccentColor">#FFFFFFFF</item>
 </style>
 ```
+
+</PlatformTabItem>
+
+<PlatformTabItem value="flutter">
+
+To theme the `WalletConnectModal` you must wrap your `MaterialApp` with a `WalletConnectModalTheme` widget.
+
+```dart
+return WalletConnectModalTheme(
+  data: WalletConnectModalThemeData.darkMode,
+  child: MaterialApp(
+    title: 'Flutter Demo',
+    theme: ThemeData(
+      colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+      useMaterial3: true,
+    ),
+    home: const MyHomePage(title: 'WalletConnectModal Sign Example'),
+  ),
+);
+```
+
+If you don't wrap your `MaterialApp` with a `WalletConnectModalTheme` widget, the `WalletConnectModal` will use the default light theme.
+
+You can build your own theme by creating a `WalletConnectModalThemeData` object.
+
+Here is how the dark mode theme is built:
+
+```dart
+// Dark Mode Theme
+WalletConnectModalThemeData(
+  primary100: Color(0xFF47A1FF),
+  primary090: Color(0xFF59AAFF),
+  primary080: Color(0xFF6CB4FF),
+  overlay002: Color.fromARGB(5, 255, 255, 255),
+  overlay005: Color.fromARGB(13, 255, 255, 255),
+  overlay010: Color.fromARGB(26, 255, 255, 255),
+  overlay020: Color.fromARGB(51, 255, 255, 255),
+  overlay030: Color.fromARGB(77, 255, 255, 255),
+  foreground100: Color(0xFFE4E7E7),
+  foreground200: Color(0xFF949E9E),
+  foreground275: Color(0xFF788181),
+  foreground300: Color(0xFF6E7777),
+  background100: Color(0xFF141414),
+  background200: Color(0xFF272A2A),
+  background300: Color(0xFF3B4040),
+  inverse000: Color(0xFF000000),
+  inverse100: Color(0xFFFFFFFF),
+  error: Color(0xFFF25A67),
+  success: Color(0xFF26D962),
+  fontFamily: 'roboto',
+  radius4XS: 6.0,
+  radius3XS: 8.0,
+  radius2XS: 12.0,
+  radiusXS: 16.0,
+  radiusS: 20.0,
+  radiusM: 28.0,
+  radiusL: 36.0,
+  radius3XL: 80.0,
+);
+```
+
 </PlatformTabItem>
 
 </PlatformTabs>

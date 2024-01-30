@@ -4,75 +4,82 @@ import TabItem from '@theme/TabItem'
 import PlatformTabs from '../components/PlatformTabs'
 import PlatformTabItem from '../components/PlatformTabItem'
 
-# Verify
+# Verify API
 
-Verify API allows apps on all platforms (web, Android and iOS) to securely validate if the end-user is on the correct domain, via their Wallet and the Web3Wallet SDK.
-Once the wallet knows whether the end-user was on uniswap.com or eviluniswap.com they can cross-reference this with our registry.
-
-These simple solutions make phishing attacks significantly harder and hence make a more anxiety-free crypto experience for end-users.
+Verify API is a security-focused feature that allows wallets to notify end-users when they may be connecting to a suspicious or malicious domain, helping to prevent phishing attacks across the industry.
+Once a wallet knows whether an end-user is on uniswap.com or eviluniswap.com, it can help them to detect potentially harmful connections through Verify's combined offering of WalletConnect’s domain registry and [Blowfish's domain scanner](https://docs.blowfish.xyz/reference/scan-domain-1).
 For those looking to enable Verify on the app side, check out our reference guide [here.](../cloud/verify)
 
-For convenience, we flag commonly known phishing websites as such.
+When a user initiates a connection with an application, Verify API enables wallets to present their users with four key states that can help them determine whether the domain they’re about to connect to might be malicious.
+
+These are:
 
 ![Verify Banner](/img/verify-banner.png)
 
-## Domain verification
+## Disclaimer
 
-The Verify security system will discriminate session requests in three different cases:
+Verify API is not designed to be bulletproof but to make the impersonation attack harder and require a somewhat sophisticated attacker. We are working on a new standard with various partners to close those gaps and make it bulletproof.
 
-- Invalid: The application's domain doesn't match the sender of this request. (Potential domain impersonation detected).
-- Unknown: The domain sending the request cannot be verified. We cannot determine the request origin. Proceed with caution.
-- Verified: The domain sending the request is verified as authentic.
-- IsScam: The domain sending the request is commonly known as a scam and/or phishing website.
+## Domain risk detection
+
+The Verify security system will discriminate session proposals & session requests with distinct validations that can be either `VALID`, `INVALID` or `UNKNOWN`.
+
+- Domain match: The domain linked to this request has been verified as this application's domain.
+  - This interface appears when the domain a user is attempting to connect to has been ‘verified’ in our domain registry as the registered domain of the application the user is trying to connect to, and the domain has not returned as suspicious from either of the security tools we work with. The `verifyContext` included in the request will have a validation of `VALID`.
+- Unverified: The domain sending the request cannot be verified.
+  - This interface appears when the domain a user is attempting to connect to has not been verified in our domain registry, but the domain has not returned as suspicious from either of the security tools we work with. The `verifyContext` included in the request will have a validation of `UNKNOWN`.
+- Mismatch: The application's domain doesn't match the sender of this request.
+  - This interface appears when the domain a user is attempting to connect to has been flagged as a different domain to the one this application has verified in our domain registry, but the domain has not returned as suspicious from either of the security tools we work with. The `verifyContext` included in the request will have a validation of `INVALID`
+- Threat: This domain is flagged as malicious and potentially harmful.
+  - This interface appears when the domain a user is attempting to connect to has been flagged as malicious on one or more of the security tools we work with. The `verifyContext` included in the request will contain parameter `isScam` with value `true`.
 
 ### Implementation
 
 <PlatformTabs
 	groupId="w3w"
-	activeOptions={["web","ios","android","csharp"]}
+	activeOptions={["web","ios","android","csharp", "flutter"]}
 >
 <PlatformTabItem value="web">
-
-Create a utility function within your project to help you import the Verify API function.
-
-```javascript
-// utils/verify.js
-import { Verify } from '@walletconnect/types''
-
-export function getVerifyStatus(context?: Verify.Context) {
-  if (!context) return ''
-  switch (context.verified.validation) {
-    case 'VALID':
-      return '✅'
-    case 'INVALID':
-      return '❌'
-    case 'UNKNOWN':
-      return '❓'
-    default:
-      return ''
-  }
-}
-```
-
-Then in your JS/TS file, add in the function with your authorization requests
+To check the Verify API validations and whether or not your user is interacting with potentially malicious app, you can do so by accessing the `verifyContext` included in the request payload.
 
 ```javascript
-// authentication.js
-import { getVerifyStatus } from '../utils/verify'
 ...
 web3wallet.on("auth_request", async (authRequest) => {
-  const { id, params, verifyContext } = authRequest
-  const validation = getVerifyStatus(verifyContext)
+  const { verifyContext } = authRequest
+  const validation = verifyContext.verified.validation // can be VALID, INVALID or UNKNOWN
+  const origin = verifyContext.verified.origin // the actual verified origin of the request
+  const isScam = verifyContext.verified.isScam // true if the domain is flagged as malicious
 
-  // 1. prompt the user to approve the auth request
-  ...
-    <p> {verifyContext.verified.origin} {validation} </p>
-  ...
+  // if the domain is flagged as malicious, you should warn the user as they may lose their funds - check the `Threat` case for more info
+  if(isScam) {
+    // show a warning screen to the user
+    // and proceed only if the user accepts the risk
+  }
 
-  // 2. respond to the auth request
+  switch(validation) {
+    case "VALID":
+      // proceed with the request - check the `Domain match` case for more info
+      break
+    case "INVALID":
+      // show a warning dialog to the user - check the `Mismatch` case for more info
+      // and proceed only if the user accepts the risk
+      break
+    case "UNKNOWN":
+      // show a warning dialog to the user - check the `Unverified` case for more info
+      // and proceed only if the user accepts the risk
+      break
+  }
+
+  // respond to the request after the user has approved the request
   await web3wallet.respondAuthRequest(...)
 })
 ```
+
+For live demo examples of the intended Verify API flows, check out our demo apps:
+
+- [Demo Wallet](https://react-wallet.walletconnect.com)
+- [Demo App](https://react-app.walletconnect.com/) - you can toggle between the verify states by clicking on the `gear` & selecting the decided Validation before connecting to the wallet
+- [Demo Malicious App](https://malicious-app-verify-simulation.vercel.app/) - this app is flagged as malicious and will have the `isScam` parameter set to `true` in the `verifyContext` of the request
 
 </PlatformTabItem>
 <PlatformTabItem value="ios">
@@ -100,7 +107,7 @@ public struct VerifyContext: Equatable, Hashable {
 
 Wallet.Event.VerifyContext provides a domain verification information about SessionProposal, SessionRequest and AuthRequest.
 
-It consists of origin of a app from where the request has been sent, validation Enum that says whether origin is `VALID`, `INVALID` or `UNKNOWN` and verify url server.
+It consists of origin of an app from where the request has been sent, validation Enum that says whether origin is `VALID`, `INVALID` or `UNKNOWN` and verify url server.
 
 ```kotlin
 data class VerifyContext(
@@ -120,7 +127,7 @@ enum class Validation {
 
 `WalletConnectSharp.Core.Models.Verify.VerifiedContext` provides a domain verification information about `SessionProposal`, `SessionRequest` and `AuthRequest`.
 
-It consists of origin of a app from where the request has been sent, validation Enum that says whether origin is `VALID`, `INVALID` or `UNKNOWN` and verify url server.
+It consists of origin of an app from where the request has been sent, validation Enum that says whether origin is `VALID`, `INVALID` or `UNKNOWN` and verify url server.
 
 ```csharp
 public class VerifiedContext
@@ -145,7 +152,7 @@ public class VerifiedContext
             _validation = AsString(value);
         }
     }
-    
+
     [JsonProperty("verifyUrl")]
     public string VerifyUrl { get; set; }
 
@@ -182,6 +189,22 @@ public enum Validation
     Valid,
     Invalid,
 }
+```
+
+</PlatformTabItem>
+<PlatformTabItem value="flutter">
+
+To check the Verify API validations and whether or not your user is interacting with potentially malicious dapp, you can do so by accessing the `verifyContext` included in the `SessionProposalEvent`:
+
+```dart
+_web3Wallet!.onSessionProposal.subscribe((SessionProposalEvent? args) {
+  if (args != null) {
+    final scamApp = args.verifyContext?.validation.scam;
+    final invalidApp = args.verifyContext?.validation.invalid;
+    final validApp = args.verifyContext?.validation.valid;
+    final unknown = args.verifyContext?.validation.unknown;
+  }
+});
 ```
 
 </PlatformTabItem>

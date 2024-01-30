@@ -1,0 +1,129 @@
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
+
+You can start Web3Modal configuration using either **default** or **custom** mode.
+
+Default mode will implement WalletConnect, Browser Wallets (injected) and Coinbase options in addition to the [WalletConnect's provider](../../../../cloud/blockchain-api.md).
+
+<Tabs>
+<TabItem value="default" label="Default">
+
+On top of your app set up the following configuration, making sure that all functions are called **outside** any React component to avoid unwanted rerenders.
+
+```tsx
+import { createWeb3Modal } from '@web3modal/wagmi/react'
+import { defaultWagmiConfig } from '@web3modal/wagmi/react/config'
+
+import { WagmiProvider } from 'wagmi'
+import { arbitrum, mainnet } from 'wagmi/chains'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+
+// 0. Setup queryClient
+const queryClient = new QueryClient()
+
+// 1. Get projectId at https://cloud.walletconnect.com
+const projectId = 'YOUR_PROJECT_ID'
+
+// 2. Create wagmiConfig
+const metadata = {
+  name: 'Web3Modal',
+  description: 'Web3Modal Example',
+  url: 'https://web3modal.com', // origin must match your domain & subdomain
+  icons: ['https://avatars.githubusercontent.com/u/37784886']
+}
+
+const chains = [mainnet, arbitrum]
+const config = defaultWagmiConfig({
+  chains, // required
+  projectId, // required
+  metadata, // required
+  enableWalletConnect: true, // Optional - true by default
+  enableInjected: true, // Optional - true by default
+  enableEIP6963: true, // Optional - true by default
+  enableCoinbase: true, // Optional - true by default
+  ...wagmiOptions // Optional - Override createConfig parameters
+})
+
+// 3. Create modal
+createWeb3Modal({
+  wagmiConfig: config,
+  projectId,
+  chains,
+  enableAnalytics: true // Optional - defaults to your Cloud configuration
+})
+
+export function Web3Modal({ children }) {
+  return (
+    <WagmiProvider config={config}>
+      <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
+    </WagmiProvider>
+  )
+}
+```
+
+:::info
+Notice that `defaultWagmiConfig` is now imported from `'@web3modal/wagmi/react/config'`
+:::
+
+</TabItem>
+<TabItem value="custom" label="Custom">
+
+On top of your app set up the following configuration, making sure that all functions are called **outside** any React component to avoid unwanted rerenders.
+
+```tsx
+import { createWeb3Modal } from '@web3modal/wagmi/react'
+
+import { http, createConfig, WagmiProvider } from 'wagmi'
+import { mainnet, sepolia } from 'wagmi/chains'
+import { walletConnect, injected, coinbaseWallet } from 'wagmi/connectors'
+
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+
+// 0. Setup queryClient
+const queryClient = new QueryClient()
+
+// 1. Get projectId at https://cloud.walletconnect.com
+const projectId = 'YOUR_PROJECT_ID'
+
+// 2. Create wagmiConfig
+const metadata = {
+  name: 'Web3Modal',
+  description: 'Web3Modal Example',
+  url: 'https://web3modal.com', // origin must match your domain & subdomain
+  icons: ['https://avatars.githubusercontent.com/u/37784886']
+}
+
+const config = createConfig({
+  chains: [mainnet, sepolia],
+  transports: {
+    [mainnet.id]: http(),
+    [sepolia.id]: http()
+  },
+  connectors: [
+    walletConnect({ projectId, metadata, showQrModal: false }),
+    injected({ shimDisconnect: true }),
+    coinbaseWallet({
+      appName: metadata.name,
+      appLogoUrl: metadata.icons[0]
+    })
+  ]
+})
+
+// 3. Create modal
+createWeb3Modal({
+  wagmiConfig: config,
+  projectId,
+  enableAnalytics: true // Optional - defaults to your Cloud configuration
+})
+
+export function Web3Modal({ children }) {
+  return (
+    <WagmiProvider config={config}>
+      <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
+    </WagmiProvider>
+  )
+}
+```
+
+</TabItem>
+</Tabs>

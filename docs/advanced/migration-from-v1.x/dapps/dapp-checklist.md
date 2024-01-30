@@ -14,7 +14,7 @@ Our primary example of a WalletConnect v2.0 dapp is linked [here](https://react-
 - `connect`
 - `disconnect`
 
-The source code for this WalletConnect v2.0 dapp is [here](https://github.com/WalletConnect/web-examples/tree/main/dapps/react-dapp-v2).
+The source code for this WalletConnect v2.0 dapp is [here](https://github.com/WalletConnect/web-examples/tree/main/advanced/dapps/react-dapp-v2).
 
 ## Required and Optional Namespaces and Methods
 
@@ -44,7 +44,7 @@ This can be ignored until your dapp is ready to be in production. We have a serv
 3. Submit your dapp project in the `Explorer` tab
 4. Once submitted in your `Settings` you will see a next verification code
 5. Follow the instructions to map your DNS record. This allows Verify API to ensure you are the rightful domain owner.
-6. Allows 48-72 hours for the DNS to propogate.
+6. Allows 48-72 hours for the DNS to propagate.
 
 `Uncaught (in promise)  Error: no matching key.history: XXXXX`
 This can be resolved by clearing local storage cache and refreshing. This is should no longer be appearing in our next release.
@@ -52,7 +52,7 @@ This can be resolved by clearing local storage cache and refreshing. This is sho
 `Missing or invalid. request() method: eth_call` or `Missing or invalid. request() method: eth_getBalance`
 This error was fixed and relevant to those using < wagmi `v0.12.16` and ethers `5.7.2`. It usually occurs when getting balance through the provider or `useContract` wagmi hook. Please upgrade to `^v0.12.16`in order to resolve this error.
 
-If you are still facing issues with the above or different issues, feel free to search our [Github Discussions](https://github.com/orgs/WalletConnect/discussions) or file a ticket [here](https://github.com/orgs/WalletConnect/discussions/new?category=v1-v2-migration-support)
+If you are still facing issues with the above or different issues, feel free to search our [GitHub Discussions](https://github.com/orgs/WalletConnect/discussions) or file a ticket [here](https://github.com/orgs/WalletConnect/discussions/new?category=v1-v2-migration-support)
 
 ### Testing Process
 
@@ -64,7 +64,7 @@ Please follow these steps:
 - Scan with the respective wallet
 - Approve the methods
 - Test with the methods that your dapp uses (i.e. `eth_sendTransaction`)
-- Succesful connect - disconnect experience
+- Successful connect - disconnect experience
 
 ### Testing Resources
 

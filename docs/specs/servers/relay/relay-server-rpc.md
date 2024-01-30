@@ -14,8 +14,8 @@ The following definitions are shared concepts across all JSON-RPC methods for th
 - **tag** - (uint32 - 4 bytes) a label that identifies what type of message is sent based on the RPC method used.
 - **id** - 19 digit unique identifier. We suggest a 13 digit epoch timestamp plus 6 digit entropy
 
-
 ## Methods
+
 ### Publish payload
 
 Used when a client publishes a message to a server.
@@ -172,7 +172,6 @@ Used when a client unsubscribes a given topic.
 }
 ```
 
-
 ### Subscription payload
 
 Used when a server sends a subscription message to a client.
@@ -202,7 +201,7 @@ Used when a server sends a subscription message to a client.
 }
 ```
 
-### Fetch Messsages payload
+### Fetch Messages payload
 
 Used when a client wants to fetch all undelivered messages matching a single topic before subscribing.
 
@@ -238,9 +237,7 @@ Response will include a flag `hasMore`. If true, the consumer should fetch again
 }
 ```
 
-
-
-### Batch Fetch Messsages payload
+### Batch Fetch Messages payload
 
 Used when a client wants to fetch all undelivered messages matching multiple topics before subscribing.
 

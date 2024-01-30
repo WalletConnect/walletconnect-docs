@@ -7,6 +7,12 @@ import CloudBanner from '../../components/CloudBanner'
 
 # Introduction
 
+:::info
+
+Web3Modal SDK v3 is out! Learn how to integrate it [here](../../web3modal/about.mdx)
+
+:::
+
 WalletConnectModal is a simple ui library intended for advanced use cases where users manage connections strings and associated WalletConnect API's themselves.
 
 <CloudBanner />
@@ -15,7 +21,7 @@ WalletConnectModal is a simple ui library intended for advanced use cases where 
 
 <PlatformTabs
 	groupId="wcm"
-	activeOptions={["web","ios","android", "react-native","flutter"]}
+	activeOptions={["web","ios","android", "react-native","flutter","unity"]}
 >
 <PlatformTabItem value="web">
 
@@ -138,7 +144,7 @@ npm install @walletconnect/modal-react-native
 Additionally add these extra packages to help with async storage, polyfills, modals and SVG's.
 
 ```bash npm2yarn
-npm install @react-native-async-storage/async-storage react-native-get-random-values react-native-modal react-native-svg @react-native-community/netinfo
+npm install @react-native-async-storage/async-storage react-native-get-random-values react-native-modal react-native-svg @react-native-community/netinfo @walletconnect/react-native-compat
 ```
 
 On iOS, use CocoaPods to add the native modules to your project:
@@ -156,9 +162,10 @@ To enable WalletConnectModal to detect wallets installed on the device, you need
 1. Open your `Info.plist` file.
 2. Locate the `<key>LSApplicationQueriesSchemes</key>` section.
 3. Add the desired wallet schemes as string entries within the `<array>`. These schemes represent the wallets you want to detect.
-4. Refer to our [Info.plist example file](https://github.com/WalletConnect/react-native-examples/blob/main/dapps/v2Explorer/ios/Web3Modal/Info.plist) for a detailed illustration.
+4. Refer to our [Info.plist example file](https://github.com/WalletConnect/react-native-examples/blob/main/dapps/ModalUProvider/ios/ModalUProvider/Info.plist) for a detailed illustration.
 
 Example:
+
 ```xml
 <key>LSApplicationQueriesSchemes</key>
 <array>
@@ -176,9 +183,10 @@ Example:
 1. Open your `AndroidManifest.xml` file.
 2. Locate the `<queries>` section.
 3. Add the desired wallet package names as `<package>` entries within the `<queries>`. These package names correspond to the wallets you want to detect.
-4. Refer to our [AndroidManifest.xml example file](https://github.com/WalletConnect/react-native-examples/blob/main/dapps/v2Explorer/android/app/src/main/AndroidManifest.xml) for detailed guidance.
+4. Refer to our [AndroidManifest.xml example file](https://github.com/WalletConnect/react-native-examples/blob/main/dapps/ModalUProvider/android/app/src/main/AndroidManifest.xml) for detailed guidance.
 
 Example:
+
 ```xml
 <queries>
   <package android:name="io.metamask"/>
@@ -204,72 +212,57 @@ npx expo install @walletconnect/modal-react-native
 Additionally add these extra packages to help with async storage, polyfills, modals and SVG's.
 
 ```
-npx expo install @react-native-async-storage/async-storage react-native-get-random-values react-native-modal react-native-svg @react-native-community/netinfo
+npx expo install @react-native-async-storage/async-storage react-native-get-random-values react-native-modal react-native-svg @react-native-community/netinfo @walletconnect/react-native-compat
 ```
 
-<Tabs>
-<TabItem value="sdk48" label="Expo 48">
+<details>
+<summary>Additional setup for Expo SDK 48 only</summary>
+<div>
 
-#### Additional Setup for Expo SDK 48
+If you are using Expo SDK 48, you also need to polyfill `crypto` with expo-crypto library.
 
-If you are using Expo SDK 48, there's an [issue](https://github.com/expo/expo/issues/17270) with `react-native-get-random-values`, so we need to temporarily fix this by installing expo-crypto library and copying [this](https://github.com/WalletConnect/modal-react-native/blob/main/example/expo-crypto-shim.js) file in your root folder.
+1. Add `expo-crypto`
 
 ```
 npx expo install expo-crypto
 ```
 
-#### Apply Polyfill
+2. Create a file named `crypto-polyfill.js`
 
-In your root file, add this line:
+```js
+// src/crypto-polyfill.js
 
-```javascript
-// Only for Expo SDK 48
-import './expo-crypto-shim.js'
+// Apply only with Expo SDK 48
+import { getRandomValues as expoCryptoGetRandomValues } from 'expo-crypto'
 
+class Crypto {
+  getRandomValues = expoCryptoGetRandomValues
+}
+
+// eslint-disable-next-line no-undef
+const webCrypto = typeof crypto !== 'undefined' ? crypto : new Crypto()
+
+;(() => {
+  if (typeof crypto === 'undefined') {
+    Object.defineProperty(window, 'crypto', {
+      configurable: true,
+      enumerable: true,
+      get: () => webCrypto
+    })
+  }
+})()
+```
+
+3. Import `crypto-polyfill.js` in your App root file
+
+```js
+import './crypto-polyfill.js'
 ...
-
 import { useWalletConnectModal } from '@walletconnect/modal-react-native';
 ```
 
-- Make sure this line executes before the first `@walletconnect/modal-react-native` import.
-
-</TabItem>
-
-<TabItem value="sdk49" label="Expo 49">
-
-#### Additional Setup for Expo SDK 49
-
-If you are using Expo SDK 49, there's an [issue](https://github.com/expo/expo/issues/17270) with `react-native-get-random-values`, so we need to manually update it's version to `v1.9.0` and exclude this package from expo validations. For more info, read [Selectively opt out of package version validations](https://blog.expo.dev/expo-sdk-49-c6d398cdf740)
-
-#### Modify your package.json
-
-Exclude `react-native-get-random-values` in your package.json to install a different from the version recommended by Expo.
-
-```json
-"dependencies": {
-  ...
-},
-"expo": {
-  "install": {
-    "exclude": [
-      "react-native-get-random-values"
-    ]
-  }
-},
-"devDependencies": {
-  ...
-}
-```
-
-#### Install latest version of "react-native-get-random-values"
-
-```bash npm2yarn
-npm install react-native-get-random-values@1.9.0
-```
-
-</TabItem>
-
-</Tabs>
+</div>
+</details>
 
 #### (Optional) Enable Wallet Detection (iOS Only)
 
@@ -293,7 +286,7 @@ Your configuration should look like this:
           "trust",
           "safe",
           "rainbow",
-          "uniswap",
+          "uniswap"
           // Add other wallet schemes names here
         ]
       }
@@ -320,6 +313,76 @@ Install the WalletConnect Modal package.
 flutter pub add walletconnect_modal_flutter
 ```
 
+</PlatformTabItem>
+<PlatformTabItem value="unity">
+
+:::caution
+**The WalletConnectModal SDK is currently in Beta and is not production-ready**.
+
+It's public API, prefab structure, and associated documentation may still see significant and breaking changes.
+:::
+
+#### Prerequisites
+
+- Unity 2021.3 or above
+- IL2CPP code stripping level: Minimal (or lower)
+
+<Tabs>
+
+<TabItem value="openupm-cli" label="OpenUPM CLI">
+
+To install packages via OpenUPM, you need to have [Node.js](https://nodejs.org/en/) and [openupm-cli](https://openupm.com/docs/getting-started.html#installing-openupm-cli) installed. Once you have them installed, you can run the following commands:
+
+```bash
+openupm add com.walletconnect.modal
+```
+
+</TabItem>
+
+<TabItem value="pm-openupm" label="Package Manager with OpenUPM">
+
+1. Open `Advanced Project Settings` from the gear ⚙ menu located at the top right of the Package Manager’s toolbar
+2. Add a new scoped registry with the following details:
+   - Name: `OpenUPM`
+   - URL: `https://package.openupm.com`
+   - Scope(s): `com.walletconnect`
+3. Press plus ➕ and then `Save` buttons
+4. In the Package Manager windows open the add ➕ menu from the toolbar
+5. Select `Add package by name...`
+6. Enter the package name:
+   - `com.walletconnect.modal`
+7. Press `Add` button
+
+</TabItem>
+
+<TabItem value="pm-git-utl" label="Package Manager with Git URL">
+
+1. Open the add ➕ menu in the Package Manager’s toolbar
+2. Select `Add package from git URL...`
+3. Enter the package URL. You will need to install 3 packages in the following order:
+
+**WalletConnectUnity Core**
+
+```
+https://github.com/WalletConnect/WalletConnectUnity.git?path=Packages/com.walletconnect.core
+```
+
+**WalletConnectUnity UI**
+
+```
+https://github.com/WalletConnect/WalletConnectUnity.git?path=Packages/com.walletconnect.ui
+```
+
+**WalletConnectUnity Modal**
+
+```
+https://github.com/WalletConnect/WalletConnectUnity.git?path=Packages/com.walletconnect.modal
+```
+
+4. Press `Add` button
+
+</TabItem>
+</Tabs>
 </PlatformTabItem>
 </PlatformTabs>
 

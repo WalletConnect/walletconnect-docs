@@ -21,8 +21,10 @@ Read more about it here: https://walletconnect.com/faq
 Once the wallet returns us the signature we must convert it into a BIP-32 seed. For example:
 
 ```js
-message = "I authorize this app to sync my account: eip155:1:0x51352a3A0c7168C57e3831B6812B005B120645C6\n\nRead more about it here: https://walletconnect.com/faq"
-signature = "0xee6567bf0763ce704d4cc3ec919cb74bbb484222e19ad72f51072fbdc2af7add063c00ac334a510c51fd25daf14f87337c23a81d45ac4f1dde469a0d8dc5724b1b"
+message =
+  'I authorize this app to sync my account: eip155:1:0x51352a3A0c7168C57e3831B6812B005B120645C6\n\nRead more about it here: https://walletconnect.com/faq'
+signature =
+  '0xee6567bf0763ce704d4cc3ec919cb74bbb484222e19ad72f51072fbdc2af7add063c00ac334a510c51fd25daf14f87337c23a81d45ac4f1dde469a0d8dc5724b1b'
 ```
 
 ### Converting a signature to a seed
@@ -32,8 +34,9 @@ The signature can be encoded differently depending on the namespace the blockcha
 We take the resulting utf8 bytes from the signature and we hash it using SHA-256 to obtain an entropy with 32 bytes. For example:
 
 ```js
-signature = "0xee6567bf0763ce704d4cc3ec919cb74bbb484222e19ad72f51072fbdc2af7add063c00ac334a510c51fd25daf14f87337c23a81d45ac4f1dde469a0d8dc5724b1b"
-entropy = "98363a603bb3aeb12b2a1686e54190822ca39ba6593aa512679630ee42f77dc4"
+signature =
+  '0xee6567bf0763ce704d4cc3ec919cb74bbb484222e19ad72f51072fbdc2af7add063c00ac334a510c51fd25daf14f87337c23a81d45ac4f1dde469a0d8dc5724b1b'
+entropy = '98363a603bb3aeb12b2a1686e54190822ca39ba6593aa512679630ee42f77dc4'
 ```
 
 Using the derived entropy from the signature we will deterministically generate the seed for our HD wallet to coordinate keys across clients.
@@ -73,9 +76,9 @@ store_key = "02fe412cf77b84f7e1dcac2ac036ba5da857ef6c683e6e93a39005734cb289f4"
 store_topic = "7a73cffc9951264511549e64222a612a27199b01d30fa952b708bcafce96ea3f"
 ```
 
-There will be only two operations for state changes: setting values and deleting values. Both the keys and values are restricted to strings. The state can be overriden or "updated" by simplying setting a different value with the same key.
+There will be only two operations for state changes: setting values and deleting values. Both the keys and values are restricted to strings. The state can be overridden or "updated" by simply setting a different value with the same key.
 
-These state changes will be published as JSON-RPC requests that will be stringified and encrypted with the store key and similarly to other WalletConnect clients they will use a time-based JSON-RPC id which is a timestamp in miliseconds appended by 3 random digits. The state changes will be "optimistic" in that they should be published in an async manner and the client's "set" and "delete" should resolve before the completion of the successful publishing of the message. 
+These state changes will be published as JSON-RPC requests that will be stringified and encrypted with the store key and similarly to other WalletConnect clients they will use a time-based JSON-RPC id which is a timestamp in milliseconds appended by 3 random digits. The state changes will be "optimistic" in that they should be published in an async manner and the client's "set" and "delete" should resolve before the completion of the successful publishing of the message.
 
 Therefore we can solve conflicts by using the JSON-RPC id published for the last state change on that specific key-value pair by prioritizing the highest integer.
 
@@ -95,7 +98,7 @@ A and B are synced with the same store and A publishes the following state chang
 }
 ```
 
-Now the store has one key ("username") with a value "@johndoe98". Then coincidently A and B publish a state change within the same milisecond (`1675012321135`):
+Now the store has one key ("username") with a value "@johndoe98". Then coincidently A and B publish a state change within the same millisecond (`1675012321135`):
 
 ```js
 // published by A
@@ -118,7 +121,7 @@ Now the store has one key ("username") with a value "@johndoe98". Then coinciden
 
 Given that A's payload has an id with a higher integer than B's payload then its corresponding state change is prioritized as the latest change. Now the store has one key ("username") with a value "@johndoe123".
 
-Another critical detail to note is that we must persist keys that are deleted with `wc_syncDel` in order to detect state changes for keys that had values erased. 
+Another critical detail to note is that we must persist keys that are deleted with `wc_syncDel` in order to detect state changes for keys that had values erased.
 
 ### Deleting State
 
@@ -152,7 +155,7 @@ Whenever a client wants to delete state associated with a key-value pair it will
 }
 ```
 
-The state has been completely removed for the key-value pair associated with key `username` but the jsonrpc id for the lastest state change was persisted and this would allow us to resolve future conflicts with state changes with the exact same key.
+The state has been completely removed for the key-value pair associated with key `username` but the jsonrpc id for the latest state change was persisted and this would allow us to resolve future conflicts with state changes with the exact same key.
 
 ## State History
 

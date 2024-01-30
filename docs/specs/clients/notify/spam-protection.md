@@ -17,8 +17,7 @@ additional configuration.
 1. Limited notifications: Only one notification per dapp per hour is
    allowed. This is to prevent dapps spamming a user as seen in Web2.
 2. Permissioned dapps: Initially, only vetted partners are allowed in the
-   program via our Cloud app.
-
+   program via [WalletConnect Cloud](https://cloud.walletconnect.com).
 
 ## User-Triggered Protection
 

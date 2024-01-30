@@ -80,8 +80,6 @@ JSON-RPC is a stateless, light weight remote procedure call (RPC) protocol which
 
 Relay refers to the system, network and/or mechanism used to send and receives messages between the two clients.
 
-By default, the clients will use a proxy server connected to the Waku network and it will connect to clients through a WebSocket using the reference Relay API
-
 ## Publish-Subscribe pattern
 
 Publish-Subscribe (also known as PubSub) is a messaging pattern where senders of messages (publishers) do not send messages directly to receivers but instead label messages with a topic that can be listened to by subscribers. Subscribers only receive messages matching the topics that have expressed interest on.
@@ -90,12 +88,12 @@ Publish-Subscribe (also known as PubSub) is a messaging pattern where senders of
 
 Topics are 32 bytes hexadecimal strings which are used to identify messages sent between two clients regarding either proposed sequences or settled sequences. Proposed sequences use a randomly generated topic while Settled sequences use a SHA256 hash of the sharedKey.
 
-
 ## Namespaces
 
 Namespaces are used to specify the chains, methods and events that are intended to be used in a particular session. They establish the minimal requirement for a wallet and a dapp to get paired. There are two types of namespaces,
 
 ### Proposal namespaces
+
 A dapp sends a proposal namespace to the wallet for pairing. The proposal namespace contains the list of chains, methods and events that are required for the dapp. The wallet validates if the received proposal namespaces are valid and returns a session namespace as a response if it is valid. If the requested proposal namespaces are not valid, the session cannot be established and the wallet rejects it with an error code that tells the dapp if the proposal namespaces have invalid chains, methods, events or if it was rejected by the user
 
 **Example :** If a dapp wants access to Ethereum Mainnet, Polygon and Cosmos Mainnet - the required chains, methods and events should be mentioned in the proposal namespaces request as follows :
@@ -116,6 +114,7 @@ A dapp sends a proposal namespace to the wallet for pairing. The proposal namesp
 ```
 
 ### Session namespaces
+
 The dapp validates if the received proposal namespaces comply with the session namespaces. If they comply, a session is established successfully and pairing is completed. If not, the session is not established and all the cached data related to the namespaces are deleted. The session namespace can also choose to provide access to more chains, methods or events that were not a part of the proposal namespaces.
 
 **Example :** The following is an example for a session namespace which complies with the requested proposal namespace example,
