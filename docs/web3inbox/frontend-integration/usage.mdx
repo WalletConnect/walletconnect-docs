@@ -87,13 +87,7 @@ export default function App() {
   const { prepareRegistration } = usePrepareRegistration()
   const { register, isLoading: isRegistering } = useRegister()
   const { data: w3iClient, isLoading: w3iClientIsLoading } = useWeb3InboxClient()
-  const { isRegistered, setAccount } = useWeb3InboxAccount(address)
-
-  // Retrieving the W3IClient from the initialization
-  useEffect(() => {
-    if (!address || !w3iClient) return
-    setAccount(`eip155:1:${address}`)
-  }, [w3iClient, address, setAccount])
+  const { isRegistered } = useWeb3InboxAccount(`eip155:1:${address}`);
 
   // Registration of your address to allow notifications
   // This is done via a signature of a message (SIWE) and the
