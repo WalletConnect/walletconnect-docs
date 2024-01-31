@@ -87,7 +87,7 @@ export default function App() {
   const { prepareRegistration } = usePrepareRegistration()
   const { register, isLoading: isRegistering } = useRegister()
   const { data: w3iClient, isLoading: w3iClientIsLoading } = useWeb3InboxClient()
-  const { isRegistered } = useWeb3InboxAccount(`eip155:1:${address}`);
+  const { isRegistered } = useWeb3InboxAccount(`eip155:1:${address}`)
 
   // Registration of your address to allow notifications
   // This is done via a signature of a message (SIWE) and the
@@ -129,7 +129,7 @@ export default function App() {
                 {isSubscribed ? 'Subscribed' : 'Subscribe'}
               </button>
               <hr />
-              <Messages />
+              {isSubscribed ? <Messages /> : null}
             </div>
           </div>
         )}
@@ -142,7 +142,33 @@ export default function App() {
 Messages Component
 
 ```tsx
-//To Add Code Here.
+import { useNotifications } from '@web3inbox/react'
+import React from 'react'
+import styles from '@/styles/Messages.module.css'
+
+function Messages() {
+  const { data: notifications } = useNotifications(3, false)
+
+  return (
+    <div>
+      <h2 className={styles.heading}>Previous Messages</h2>
+      <div className={styles.messageContainer}>
+        {!notifications?.length ? (
+          <p className={styles.fallbackText}>No messages yet.</p>
+        ) : (
+          notifications.map(({ id, ...message }) => (
+            <div key={id} className={styles.message}>
+              <h3>{message.title}</h3>
+              <p>{message.body}</p>
+            </div>
+          ))
+        )}
+      </div>
+    </div>
+  )
+}
+
+export default Messages
 ```
 
 </PlatformTabItem>
