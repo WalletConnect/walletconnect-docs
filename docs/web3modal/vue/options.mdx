@@ -1,6 +1,7 @@
 import Table from '../../components/Table'
 import PlatformTabs from '../../components/PlatformTabs'
 import PlatformTabItem from '../../components/PlatformTabItem'
+import Button from '../../components/button'
 
 # Options
 
@@ -174,6 +175,54 @@ You can add an url for the _privacy policy_ link.
 createWeb3Modal({
   //...
   privacyPolicyUrl: 'https://www.myprivacypolicy.com'
+})
+```
+
+## enableAnalytics
+
+Enable analytics to get more insights on your users activity within your [WalletConnect Cloud's dashboard](https://cloud.walletconnect.com)
+
+```ts
+createWeb3Modal({
+  //...
+  enableAnalytics: true
+})
+```
+
+<Button name="Learn More" url="/cloud/analytics" />
+
+## AllWallets
+
+:::caution
+
+If the "All Wallets" button is removed on mobile, all the mobile wallets that were not added on the main view of the modal **won't** be able to connect to your website via WalletConnect protocol.
+
+:::
+
+The `allWallets` parameter allows you to add or remove the "All Wallets" button on the modal.
+
+<Table
+  headers={['Value', 'Description']}
+  data={[
+    {
+      value: { code: 'SHOW' },
+      description: 'Shows the "All Wallets" button on Web3Modal.'
+    },
+    {
+      value: { code: 'HIDE' },
+      description: 'Removes the "All Wallets" button from Web3Modal.'
+    },
+    {
+      value: { code: 'ONLY_MOBILE' },
+      description: 'Shows the "All Wallets" button on Web3Modal only on mobile.'
+    }
+  ]}
+/>
+
+```ts
+createWeb3Modal({
+  //...
+  allWallets: 'ONLY_MOBILE'
 })
 ```
 

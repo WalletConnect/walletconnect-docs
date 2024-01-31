@@ -15,6 +15,7 @@ In your `App.vue` file set up the following configuration.
   import { createWeb3Modal, defaultWagmiConfig } from '@web3modal/wagmi'
 
   import { mainnet, arbitrum } from 'viem/chains'
+  import { reconnect } from '@wagmi/core'
 
   // 1. Define constants
   const projectId = 'YOUR_PROJECT_ID'
@@ -23,23 +24,29 @@ In your `App.vue` file set up the following configuration.
   const metadata = {
     name: 'Web3Modal',
     description: 'Web3Modal Example',
-    url: 'https://web3modal.com',
+    url: 'https://web3modal.com', // origin must match your domain & subdomain
     icons: ['https://avatars.githubusercontent.com/u/37784886']
   }
 
   const chains = [mainnet, arbitrum]
-  const wagmiConfig = defaultWagmiConfig({
+  const config = defaultWagmiConfig({
     chains, // required
     projectId, // required
     metadata, // required
     enableWalletConnect: true, // Optional - true by default
     enableInjected: true, // Optional - true by default
     enableEIP6963: true, // Optional - true by default
-    enableCoinbase: true // Optional - true by default
+    enableCoinbase: true, // Optional - true by default
   })
 
+  reconnect(config)
+
   // 3. Create modal
-  createWeb3Modal({ wagmiConfig, projectId, chains })
+  createWeb3Modal({
+    wagmiConfig: config,
+    projectId,
+    enableAnalytics: true // Optional - defaults to your Cloud configuration
+  })
 </script>
 
 <template> // Rest of your app ... </template>
@@ -54,7 +61,7 @@ In your `App.vue` file set up the following configuration.
 <script setup lang="ts">
   import { createWeb3Modal } from '@web3modal/wagmi'
 
-  import { http, createConfig } from '@wagmi/core'
+  import { http, createConfig, reconnect } from '@wagmi/core'
   import { mainnet, sepolia } from '@wagmi/core/chains'
   import { coinbaseWallet, walletConnect, injected } from '@wagmi/connectors'
 
@@ -64,11 +71,11 @@ In your `App.vue` file set up the following configuration.
   const metadata = {
     name: 'Web3Modal',
     description: 'Web3Modal Example',
-    url: 'https://web3modal.com',
+    url: 'https://web3modal.com', // origin must match your domain & subdomain
     icons: ['https://avatars.githubusercontent.com/u/37784886']
   }
 
-  const wagmiConfig = createConfig({
+  const config = createConfig({
     chains: [mainnet, sepolia],
     transports: {
       [mainnet.id]: http(),
@@ -84,8 +91,14 @@ In your `App.vue` file set up the following configuration.
     ]
   })
 
+  reconnect(config)
+
   // 3. Create modal
-  createWeb3Modal({ wagmiConfig, projectId, chains })
+  createWeb3Modal({
+    wagmiConfig: config,
+    projectId,
+    enableAnalytics: true // Optional - defaults to your Cloud configuration
+  })
 </script>
 
 <template> // Rest of your app ... </template>
@@ -93,3 +106,7 @@ In your `App.vue` file set up the following configuration.
 
 </TabItem>
 </Tabs>
+
+:::info
+If you're using Nuxt, you can set wagmi's `ssr` option to true and call the `reconnect` function after your application mounts.
+:::

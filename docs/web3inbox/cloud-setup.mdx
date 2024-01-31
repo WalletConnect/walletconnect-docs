@@ -29,7 +29,9 @@ Notification types are an important feature of Notify API and are a way for a us
 
 Notification types are configured with a name, description, and icon which allow the user understand what types of notifications they would receive for that type. When a user receives a push notification on their device, they will see the icon that is configured with the notification type. Examples of notification types may include "Account updates" or "Service updates".
 
+:::info
 By default users are subscribed to all available notification types. However, it's worth nothing that if you add new notification types later users will not be automatically subscribed to them. If you have new notification types available, you may consider sending a notification informing users of this new available notification type and ask users to enable it. You may also add functionality to your app frontend to subscribe the user to the new notification type when they visit your app. Because of the additional effort in subscribing users to notification types after they initially subscribe, it is worth considering in advance what notification types you may need in the future.
+:::
 
 ## Setup steps
 

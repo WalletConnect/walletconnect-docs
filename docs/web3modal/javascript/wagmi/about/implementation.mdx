@@ -14,6 +14,7 @@ In your `main.ts` file set up the following configuration.
 import { createWeb3Modal, defaultWagmiConfig } from '@web3modal/wagmi'
 
 import { mainnet, arbitrum } from 'viem/chains'
+import { reconnect } from '@wagmi/core'
 
 // 1. Define constants
 const projectId = 'YOUR_PROJECT_ID'
@@ -22,23 +23,30 @@ const projectId = 'YOUR_PROJECT_ID'
 const metadata = {
   name: 'Web3Modal',
   description: 'Web3Modal Example',
-  url: 'https://web3modal.com',
+  url: 'https://web3modal.com', // origin must match your domain & subdomain
   icons: ['https://avatars.githubusercontent.com/u/37784886']
 }
 
 const chains = [mainnet, arbitrum]
-const wagmiConfig = defaultWagmiConfig({
+export const config = defaultWagmiConfig({
   chains, // required
   projectId, // required
   metadata, // required
   enableWalletConnect: true, // Optional - true by default
   enableInjected: true, // Optional - true by default
   enableEIP6963: true, // Optional - true by default
-  enableCoinbase: true // Optional - true by default
+  enableCoinbase: true, // Optional - true by default
+  ...wagmiOptions // Optional - Override createConfig parameters
 })
 
+reconnect(config)
+
 // 3. Create modal
-const modal = createWeb3Modal({ wagmiConfig, projectId, chains })
+const modal = createWeb3Modal({
+  wagmiConfig: config,
+  projectId,
+  enableAnalytics: true // Optional - defaults to your Cloud configuration
+})
 ```
 
 </TabItem>
@@ -49,7 +57,7 @@ In your `main.ts` file set up the following configuration.
 ```ts
 import { createWeb3Modal } from '@web3modal/wagmi'
 
-import { http, createConfig } from '@wagmi/core'
+import { reconnect, http, createConfig } from '@wagmi/core'
 import { mainnet, sepolia } from '@wagmi/core/chains'
 import { coinbaseWallet, walletConnect, injected } from '@wagmi/connectors'
 
@@ -59,11 +67,11 @@ const projectId = 'YOUR_PROJECT_ID'
 const metadata = {
   name: 'Web3Modal',
   description: 'Web3Modal Example',
-  url: 'https://web3modal.com',
+  url: 'https://web3modal.com', // origin must match your domain & subdomain
   icons: ['https://avatars.githubusercontent.com/u/37784886']
 }
 
-const wagmiConfig = createConfig({
+const config = createConfig({
   chains: [mainnet, sepolia],
   transports: {
     [mainnet.id]: http(),
@@ -79,8 +87,13 @@ const wagmiConfig = createConfig({
   ]
 })
 
-// 3. Create modal
-const modal = createWeb3Modal({ wagmiConfig, projectId, chains })
+reconnect(config)
+
+const modal = createWeb3Modal({
+  wagmiConfig: config,
+  projectId,
+  enableAnalytics: true // Optional - defaults to your Cloud configuration
+})
 ```
 
 </TabItem>

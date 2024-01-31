@@ -30,7 +30,12 @@ In your `App.vue` file set up the following configuration.
   const wagmiConfig = defaultWagmiConfig({ chains, projectId, metadata })
 
   // 3. Create modal
-  createWeb3Modal({ wagmiConfig, projectId, chains })
+  createWeb3Modal({
+    wagmiConfig,
+    projectId,
+    chains,
+    enableAnalytics: true // Optional - defaults to your Cloud configuration
+  })
 </script>
 
 <template> // Rest of your app ... </template>
@@ -81,7 +86,12 @@ In your `App.vue` file set up the following configuration.
   })
 
   // 3. Create modal
-  createWeb3Modal({ wagmiConfig, projectId, chains })
+  createWeb3Modal({
+    wagmiConfig,
+    projectId,
+    chains,
+    enableAnalytics: true // Optional - defaults to your Cloud configuration
+  })
 </script>
 
 <template> // Rest of your app ... </template>

@@ -252,6 +252,7 @@ module.exports = {
                 'web3wallet/notify/resources'
               ]
             },
+            'web3wallet/best_practises',
             'web3wallet/resources'
           ]
         }
@@ -267,7 +268,8 @@ module.exports = {
         'cloud/explorer-submission',
         'cloud/verify',
         'cloud/relay',
-        'cloud/blockchain-api'
+        'cloud/blockchain-api',
+        'cloud/analytics'
       ]
     },
     {
@@ -378,7 +380,7 @@ module.exports = {
             {
               type: 'category',
               label: 'Notify',
-              items: ['api/notify/about', 'api/notify/usage', 'api/notify/migration-guide']
+              items: ['api/notify/about']
             },
             {
               type: 'category',

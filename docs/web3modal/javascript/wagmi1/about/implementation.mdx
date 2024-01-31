@@ -27,10 +27,13 @@ const metadata = {
 }
 
 const chains = [mainnet, arbitrum]
-const wagmiConfig = defaultWagmiConfig({ chains, projectId, metadata })
+const config = defaultWagmiConfig({ chains, projectId, metadata })
 
-// 3. Create modal
-const modal = createWeb3Modal({ wagmiConfig, projectId, chains })
+const modal = createWeb3Modal({
+  wagmiConfig: config,
+  projectId,
+  enableAnalytics: true // Optional - defaults to your Cloud configuration
+})
 ```
 
 </TabItem>
@@ -64,7 +67,7 @@ const metadata = {
   icons: ['https://avatars.githubusercontent.com/u/37784886']
 }
 
-const wagmiConfig = createConfig({
+const config = createConfig({
   autoConnect: true,
   connectors: [
     new WalletConnectConnector({ chains, options: { projectId, showQrModal: false, metadata } }),
@@ -75,8 +78,11 @@ const wagmiConfig = createConfig({
   publicClient
 })
 
-// 3. Create modal
-const modal = createWeb3Modal({ wagmiConfig, projectId, chains })
+const modal = createWeb3Modal({
+  wagmiConfig: config,
+  projectId,
+  enableAnalytics: true // Optional - defaults to your Cloud configuration
+})
 ```
 
 :::note
