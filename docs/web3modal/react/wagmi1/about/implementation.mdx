@@ -11,7 +11,7 @@ Default mode will implement WalletConnect, Browser Wallets (injected) and Coinba
 On top of your app set up the following configuration, making sure that all functions are called **outside** any React component to avoid unwanted rerenders.
 
 ```tsx
-import { createWeb3Modal, defaultWagmiConfig } from '@web3modal/wagmi1/react'
+import { createWeb3Modal, defaultWagmiConfig } from '@web3modal/wagmi/react'
 
 import { WagmiConfig } from 'wagmi'
 import { arbitrum, mainnet } from 'viem/chains'
@@ -49,8 +49,8 @@ export default function App() {
 On top of your app set up the following configuration, making sure that all functions are called **outside** any React component to avoid unwanted rerenders.
 
 ```tsx
-import { createWeb3Modal } from '@web3modal/wagmi1/react'
-import { walletConnectProvider, EIP6963Connector } from '@web3modal/wagmi1'
+import { createWeb3Modal } from '@web3modal/wagmi/react'
+import { walletConnectProvider, EIP6963Connector } from '@web3modal/wagmi'
 
 import { WagmiConfig, configureChains, createConfig } from 'wagmi'
 import { publicProvider } from 'wagmi/providers/public'

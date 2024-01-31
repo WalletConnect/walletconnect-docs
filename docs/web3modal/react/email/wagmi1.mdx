@@ -7,7 +7,7 @@ You can start integrating Email Login into Web3Modal SDK using either **default*
 <TabItem value="default" label="Default">
 
 ```tsx
-import { createWeb3Modal, defaultWagmiConfig } from '@web3modal/wagmi1/react'
+import { createWeb3Modal, defaultWagmiConfig } from '@web3modal/wagmi/react'
 
 import { WagmiConfig } from 'wagmi'
 import { arbitrum, mainnet } from 'viem/chains'
@@ -49,14 +49,14 @@ export default function App() {
 <TabItem value="custom" label="Custom">
 
 ```tsx
-import { createWeb3Modal } from '@web3modal/wagmi1/react'
+import { createWeb3Modal } from '@web3modal/wagmi/react'
 import {
   walletConnectProvider,
   EIP6963Connector,
   /* highlight-add-start */
   EmailConnector
   /* highlight-add-end */
-} from '@web3modal/wagmi1'
+} from '@web3modal/wagmi'
 
 import { WagmiConfig, configureChains, createConfig } from 'wagmi'
 import { publicProvider } from 'wagmi/providers/public'

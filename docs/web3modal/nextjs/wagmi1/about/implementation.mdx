@@ -13,7 +13,7 @@ Create a new file called `context/Web3Modal.tsx` or `context/Web3Modal.jsx` (out
 ```tsx
 'use client'
 
-import { createWeb3Modal, defaultWagmiConfig } from '@web3modal/wagmi1/react'
+import { createWeb3Modal, defaultWagmiConfig } from '@web3modal/wagmi/react'
 
 import { WagmiConfig } from 'wagmi'
 import { arbitrum, mainnet } from 'viem/chains'
@@ -76,8 +76,8 @@ Create a new file called `context/Web3Modal.tsx` or `context/Web3Modal.jsx` (out
 ```tsx
 'use client'
 
-import { createWeb3Modal } from '@web3modal/wagmi1/react'
-import { walletConnectProvider, EIP6963Connector } from '@web3modal/wagmi1'
+import { createWeb3Modal } from '@web3modal/wagmi/react'
+import { walletConnectProvider, EIP6963Connector } from '@web3modal/wagmi'
 
 import { WagmiConfig, configureChains, createConfig } from 'wagmi'
 import { publicProvider } from 'wagmi/providers/public'
