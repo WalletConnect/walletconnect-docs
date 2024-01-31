@@ -200,6 +200,10 @@
     {
       "source": "/web3inbox/domain-setup",
       "destination": "/web3inbox/cloud-setup"
+    },
+    {
+      "source": "/advanced/echo-server",
+      "destination": "/advanced/push-server"
     }
   ]
 }
