@@ -1,6 +1,6 @@
 # Push Server
 
-The Push Server is a push server for the WalletConnect v2 Protocol. It allows clients to send push notifications to their users. The Push Server can be used with our [Web3Wallet SDK](../web3wallet/about.mdx).
+The Push Server is a push server for the WalletConnect v2 Protocol. It allows clients to send push notifications to their users. The Push Server can be used with our [Notify API](../web3wallet/notify/introduction.mdx) and [Web3Wallet SDK](../web3wallet/about.mdx).
 
 ## Options for Receiving Push Notifications
 

@@ -202,6 +202,10 @@
       "destination": "/web3inbox/cloud-setup"
     },
     {
+      "source": "/web3inbox/sending-notifications",
+      "destination": "/web3inbox/backend-integration"
+    },
+    {
       "source": "/advanced/echo-server",
       "destination": "/advanced/push-server"
     }
