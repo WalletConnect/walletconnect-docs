@@ -334,6 +334,14 @@ val dappDelegate = object : SignClient.DappDelegate {
     override fun onSessionRequestResponse(response: Sign.Model.SessionRequestResponse) {
         // Triggered when Dapp receives the session request response from wallet
     }
+   
+    override fun onProposalExpired(proposal: Modal.Model.ExpiredProposal) {
+        // Triggered when a proposal becomes expired
+    }
+
+    override fun onRequestExpired(request: Modal.Model.ExpiredRequest) {
+        // Triggered when a request becomes expired
+    }
 
     override fun onConnectionStateChange(state: Sign.Model.ConnectionState) {
         //Triggered whenever the connection state is changed
