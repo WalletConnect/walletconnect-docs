@@ -78,6 +78,8 @@ import {
 import { useCallback, useEffect } from 'react'
 import { useSignMessage, useAccount } from 'wagmi'
 
+import Messages from './Messages'
+
 export default function App() {
   // Wagmi Hooks
   const { address } = useAccount()
@@ -125,8 +127,11 @@ export default function App() {
               <button onClick={handleRegistration} disabled={isRegistered}>
                 {isRegistered ? 'Registered' : 'Register'}
               </button>
-              <button onClick={subscribe} disabled={isSubscribed}>
-                {isSubscribed ? 'Subscribed' : 'Subscribe'}
+              <button
+                onClick={isSubscribed ? unsubscribe : subscribe}
+                disabled={isSubscribing || isUnsubscribing}
+              >
+                {isSubscribed ? 'Unsubscribe' : 'Subscribe'}
               </button>
               <hr />
               {isSubscribed ? <Messages /> : null}
@@ -139,9 +144,8 @@ export default function App() {
 }
 ```
 
-Messages Component
-
 ```tsx
+//Messages.tsx
 import { useNotifications } from '@web3inbox/react'
 import React from 'react'
 import styles from '@/styles/Messages.module.css'
