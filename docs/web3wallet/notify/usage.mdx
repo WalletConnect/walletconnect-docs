@@ -358,9 +358,13 @@ To fetch the current list of subscriptions an account has, call **`getActiveSubs
 <PlatformTabs activeOptions={["ios","android", "react-native"]}>
 <PlatformTabItem value="ios">
 
+Method will return an array of NotifySubscription objects that indicates actual subscriptions state
+
 ```swift
 public func getActiveSubscriptions(account: Account) -> [NotifySubscription]
 ```
+
+`account` - subscriptions owner account
 
 </PlatformTabItem>
 <PlatformTabItem value="android">
@@ -399,11 +403,31 @@ To fetch subscription’s notifications by calling **`getNotificationHistory()`*
 <PlatformTabs activeOptions={["ios","android", "react-native"]}>
 <PlatformTabItem value="ios">
 
+Method will return an array of NotifyMessageRecord objects that indicates current notify messages state. This do not include old messages that aren't loaded yet. Useful for displaying initial notifications view state. For more info about pagination, check `fetchHistory` method.
+
+Use this method together with: 
+- `messagesPublisher(topic: String)`
+- `fetchHistory`
+
 ```swift
 public func getMessageHistory(topic: String) -> [NotifyMessageRecord]
 ```
 
 `topic` - unique subscription's topic
+
+#### Combine events
+
+Publisher that send messages update event for specific topic only
+
+```swift
+public func messagesPublisher(topic: String) -> AnyPublisher<[NotifyMessageRecord], Never>
+```
+
+Publisher that send event on every messages update (for all subscriptions)
+
+```swift
+public var messagesPublisher: AnyPublisher<[NotifyMessageRecord], Never>
+```
 
 </PlatformTabItem>
 <PlatformTabItem value="android">
@@ -612,6 +636,37 @@ await notifyClient.unregister({
   account
 })
 ```
+
+</PlatformTabItem>
+</PlatformTabs>
+
+## Fetch messages history (Pagination)
+
+
+<PlatformTabs activeOptions={["ios","android", "react-native"]}>
+<PlatformTabItem value="ios">
+
+Method that fetches message history and saves it to SDK's database. When async method finishes execution,  `messagesPublisher(topic: String)` will send the event with actual Notify messages for the specified topic. 
+
+```swift
+func fetchHistory(subscription: NotifySubscription, after: String?, limit: Int) async throws -> Bool
+```
+
+`subscription` - subscription for which message history is requested
+`after?` - id of last message loaded. Recent messages will be loaded if provided nil
+`limit` - messages to load count
+
+`Returns` - Returns True if there are still not fetched messages
+
+</PlatformTabItem>
+<PlatformTabItem value="android">
+
+This section will be added shortly
+
+</PlatformTabItem>
+<PlatformTabItem value="react-native">
+
+This section will be added shortly
 
 </PlatformTabItem>
 </PlatformTabs>

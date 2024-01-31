@@ -35,9 +35,9 @@ Links to sections on this page. Some sections are platform specific and are only
 **[Extra (Platform Specific)](#extra-platform-specific)**: Additional information for platform specific usage. Some useful topics covered in this section are:
 
 - [Register Device Token (iOS)](?platform=ios#register-device-token)
-  Enabling Wallet Push Notifcations by registering a device token.
+  Enabling Wallet Push Notifications by registering a device token.
 - [Register Device Token (Android)](?platform=android#register-device-token)
-  Enabling Wallet Push Notifcations by registering a device token.
+  Enabling Wallet Push Notifications by registering a device token.
 - [Web3Wallet.WalletDelegate (Android)](?platform=android#web3walletwalletdelegate)
   Setting and overriding functions through Web3Wallet delegate. Also includes instructions about VerifyContext.
 - [Format Message (Android)](?platform=android#format-message)
@@ -788,7 +788,7 @@ await web3Wallet.approveSession(
 );
 ```
 
-As mentioned before, `event.params.generatedNamespaces` is a set of approved namespaces automatically generated for wallet to approve. You can as well pass your hand-writted set of namespaces.
+As mentioned before, `event.params.generatedNamespaces` is a set of approved namespaces automatically generated for wallet to approve. You can as well pass your hand-written set of namespaces.
 
 #### Pairing
 
@@ -923,7 +923,7 @@ We recommend using the `getSDKError` function from the `@walletconnect/utils` li
 </PlatformTabItem>
 <PlatformTabItem value="ios">
 
-<!-- TODO: -->
+try await Web3Wallet.instance.reject(requestId: request.id)
 
 </PlatformTabItem>
 <PlatformTabItem value="android">
@@ -1680,12 +1680,12 @@ public var sessionResponsePublisher: AnyPublisher<Response, Never>
 
 #### Register Device Token
 
-To register a wallet to receive WalletConnect push notifications, call `Web3Wallet.registerPushClient` and pass the device token received from the `didRegisterForRemoteNotificationsWithDeviceToken` method in the `AppDelegate`.
+To register a wallet to receive WalletConnect push notifications, call `register` method and pass the device token received from the `didRegisterForRemoteNotificationsWithDeviceToken` method in the `AppDelegate`.
 
 ```swift
-public func registerPushClient(deviceToken: Data) async throws {
-    try await pushClient.register(deviceToken: deviceToken)
-}
+
+Web3Wallet.instance.register(deviceToken: deviceToken, enableEncrypted: true)
+
 ```
 
 </PlatformTabItem>
