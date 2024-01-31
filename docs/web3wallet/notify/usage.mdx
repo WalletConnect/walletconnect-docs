@@ -252,25 +252,29 @@ if (!isRegistered) {
 This is a one-time action per account. It does not need to be repeated after initial registration of the new account.
 :::
 
-To register an identity key, you must provide a callback to the `onSign: (message: string) => string` parameter of the `register` method.
-In order to authorize the Notify subscription, the SDK will trigger this callback with a message to sign, expecting the signature for that message to be returned.
-
-Some suggested ways to implement the `onSign` callback are via:
-
-- Ethers.js [`Wallet.signMessage` method](https://docs.ethers.org/v5/api/signer/#Signer-signMessage)
-- The [`signMessage` method](https://wagmi.sh/core/actions/signMessage) in `@wagmi/core`
-
-##### Registering as a wallet
+### Registering as a wallet
 
 ```javascript
 const account = `eip155:1:0x63Be2c680685d2A9620c11b0068291261aa62d76`
-const onSign = (message: string) => ethersWallet.signMessage(message)
+const domain =  'app.mydomain.com', // pass the domain (i.e. the hostname) where your dapp is hosted.
+const allApps =  true // The user will be prompted to authorize this wallet to send and receive messages on their behalf for ALL domains using their WalletConnect identity.
+
+
+
+// No need to register and sign message if already registered.
+if (notifyClient.isRegistered({ account, domain, allApps })) return;
+
+const {registerParams, message}  = notifyClient.prepareRegistration({
+  account,
+  domain,
+  allApps
+});
+
+const signature = await ethersWallet.signMessage(message);
 
 await notifyClient.register({
-  account,
-  onSign,
-  domain: 'com.example.app.rn', // pass your app's bundle identifier.
-  isLimited: false // The user will be prompted to authorize this wallet to send and receive messages on their behalf for ALL domains using their WalletConnect identity.
+  registerParams,
+  signature,
 })
 ```
 
@@ -475,7 +479,12 @@ NotifyClient.update(params).let { result ->
 <PlatformTabItem value="react-native">
 
 ```javascript
-const updatedScopes = notifyClient.update(scope, account, domain)
+// `topic` - subscription topic of the subscription that should be updated.
+// `scope` - an array of notification types that should be enabled going forward. The current scopes can be found under `subscription.scope`.
+await notifyClient.update({
+  topic,
+  scope: ['alerts']
+})
 ```
 
 </PlatformTabItem>
@@ -512,6 +521,10 @@ try {
 <PlatformTabItem value="react-native">
 
 This feature will be added shortly
+```typescript
+// get notification types by accessing `scope` member of a dapp's subscription
+const notificationTypes = notifyClient.getActiveSubscriptions({ account }).filter(subscription => subscription.topic === topic).scope
+```
 
 </PlatformTabItem>
 </PlatformTabs>
