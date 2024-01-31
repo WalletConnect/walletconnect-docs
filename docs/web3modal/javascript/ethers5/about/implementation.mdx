@@ -29,14 +29,15 @@ const mainnet = {
 const metadata = {
   name: 'My Website',
   description: 'My Website description',
-  url: 'https://mywebsite.com',
+  url: 'https://mywebsite.com', // origin must match your domain & subdomain
   icons: ['https://avatars.mywebsite.com/']
 }
 
 const modal = createWeb3Modal({
   ethersConfig: defaultConfig({ metadata }),
   chains: [mainnet],
-  projectId
+  projectId,
+  enableAnalytics: true // Optional - defaults to your Cloud configuration
 })
 ```
 
@@ -64,7 +65,7 @@ const mainnet = {
 const metadata = {
   name: 'My Website',
   description: 'My Website description',
-  url: 'https://mywebsite.com',
+  url: 'https://mywebsite.com', // origin must match your domain & subdomain
   icons: ['https://avatars.mywebsite.com/']
 }
 
@@ -78,6 +79,7 @@ const modal = createWeb3Modal({
     rpcUrl: '...' // used for the Coinbase SDK
   }),
   chains: [mainnet],
+  enableAnalytics: true, // Optional - true by default
   projectId
 })
 ```
