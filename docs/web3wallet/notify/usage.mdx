@@ -640,7 +640,7 @@ await notifyClient.unregister({
 <PlatformTabs activeOptions={["ios","android", "react-native"]}>
 <PlatformTabItem value="ios">
 
-Method that fetch messages history and save it to SDK's database. When method async execution finished `messagesPublisher(topic: String)` will send event with actual notify messages for specific topic. 
+Method that fetches message history and saves it to SDK's database. When async method finishes execution,  `messagesPublisher(topic: String)` will send the event with actual Notify messages for the specified topic. 
 
 ```swift
 func fetchHistory(subscription: NotifySubscription, after: String?, limit: Int) async throws -> Bool
