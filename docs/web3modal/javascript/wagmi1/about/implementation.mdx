@@ -11,7 +11,7 @@ Default mode will implement WalletConnect, Browser Wallets (injected) and Coinba
 In your `main.ts` file set up the following configuration.
 
 ```ts
-import { createWeb3Modal, defaultWagmiConfig } from '@web3modal/wagmi1'
+import { createWeb3Modal, defaultWagmiConfig } from '@web3modal/wagmi'
 
 import { mainnet, arbitrum } from 'viem/chains'
 
@@ -42,7 +42,7 @@ const modal = createWeb3Modal({
 In your `main.ts` file set up the following configuration.
 
 ```ts
-import { createWeb3Modal, walletConnectProvider, EIP6963Connector } from '@web3modal/wagmi1'
+import { createWeb3Modal, walletConnectProvider, EIP6963Connector } from '@web3modal/wagmi'
 
 import { configureChains, createConfig } from '@wagmi/core'
 import { mainnet } from 'viem/chains'
