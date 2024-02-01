@@ -56,7 +56,7 @@ const signClient = await SignClient.init({
 **2. Add listeners for desired `SignClient` events.**
 
 :::info
-To listen to pairing-related events, please follow the guidance for [Pairing API event listeners](../core//pairing.mdx).
+To listen to pairing-related events, please follow the guidance for [Pairing API event listeners](https://specs.walletconnect.com/2.0/specs/clients/core/pairing/pairing-api).
 :::
 
 ```javascript
@@ -231,7 +231,7 @@ let blockchains: Set<Blockchain> = [Blockchain("eip155:1")!, Blockchain("eip155:
 let namespaces: [String: ProposalNamespace] = ["eip155": ProposalNamespace(chains: blockchains, methods: methods, events: []]
 ```
 
-To learn more on namespaces, check out our [specs](../../specs/clients/sign/namespaces).
+To learn more on namespaces, check out our [specs](https://specs.walletconnect.com/2.0/specs/clients/sign/namespaces).
 
 2. Your App should generate a pairing URI and share it with a wallet. Uri can be presented as a QR code or sent via a universal link. Wallet begins subscribing for session proposals after receiving URI. In order to create a pairing and send a session proposal, you need to call the following:
 

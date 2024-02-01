@@ -6,7 +6,7 @@ The Push Server is a push server for the WalletConnect v2 Protocol. It allows cl
 
 1. Use the [hosted](#hosted-platform-recommended) platform (recommended).
 2. Self-Host our [server](https://github.com/WalletConnect/echo-server).
-3. Write your own implementation using the [spec](../specs/servers/push/spec.md).
+3. Write your own implementation using the [spec](https://specs.walletconnect.com/2.0/specs/servers/push/spec).
 
 :::note
 For inquiries about self-hosting, please send an email to devrel@walletconnect.com.
