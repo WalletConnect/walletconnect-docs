@@ -59,7 +59,7 @@ In your `App.vue` file set up the following configuration.
 <script setup lang="ts">
   import { createWeb3Modal } from '@web3modal/wagmi'
 
-  import { http, createConfig } from '@wagmi/core'
+  import { reconnect, http, createConfig } from '@wagmi/core'
   import { mainnet, sepolia } from '@wagmi/core/chains'
   import { coinbaseWallet, walletConnect, injected } from '@wagmi/connectors'
 
