@@ -14,6 +14,7 @@ In your `main.ts` file set up the following configuration.
 import { createWeb3Modal, defaultWagmiConfig } from '@web3modal/wagmi'
 
 import { mainnet, arbitrum } from 'viem/chains'
+import { reconnect } from '@wagmi/core'
 
 // 1. Define constants
 const projectId = 'YOUR_PROJECT_ID'
