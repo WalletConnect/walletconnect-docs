@@ -83,6 +83,7 @@ const config = createConfig({
     })
   ]
 })
+reconnect(config)
 
 const modal = createWeb3Modal({
   wagmiConfig: config,
