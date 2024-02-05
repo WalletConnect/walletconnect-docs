@@ -38,6 +38,7 @@ export const config = defaultWagmiConfig({
   enableCoinbase: true, // Optional - true by default
   ...wagmiOptions // Optional - Override createConfig parameters
 })
+reconnect(config)
 
 // 3. Create modal
 const modal = createWeb3Modal({
