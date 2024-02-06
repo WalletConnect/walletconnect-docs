@@ -336,7 +336,7 @@ markNotificationsAsRead(notifications.slice(2).map(n => n.id))
   isUnread: boolean;
   url: string | null;
   type: string;
-  markAsRead: () => void
+  markAsRead: () => Promise<void>
 }
 ```
 
@@ -400,7 +400,7 @@ markNotificationsAsRead(notifications.slice(2).map(n => n.id))
   isUnread: boolean;
   url: string | null;
   type: string;
-  markAsRead: () => void
+  markAsRead: () => Promise<void>
 }
 ```
 
