@@ -19,6 +19,12 @@ WalletConnect Cloud now includes Analytics to help you better understand your pr
 
 ## Analytics Sections
 
+:::info Definitions
+
+Refer to [Definitions](#definitions) for the meaning of terms used in WalletConnect Analytics.
+
+:::
+
 ### Relay
 
 #### Overview - Wallet/Dapp Sessions
@@ -115,7 +121,7 @@ Indicates the daily average of unique visitors to your app’s Web3Modal.
 
 #### Avg. Daily Sessions
 
-Indicates the daily average of sessions created when the user signs a message with their connected wallet.
+Indicates the daily average of sessions.
 
 <img src="/img/analytics/web3modal/2.png" />
 
@@ -127,7 +133,7 @@ Indicates the daily average of connections made through Web3Modal.
 
 #### Sessions
 
-Total number of sessions created when the user signs a message with their connected wallet.
+Indicates the total count of sessions.
 
 <img src="/img/analytics/web3modal/4.png" />
 
@@ -226,7 +232,7 @@ Definitions of terms used in WalletConnect Analytics.
   data={[
     [
       'Session',
-      'A session represents the connection established between your project and your user’s device (includes browsers).'
+      'A session represents the connection established between your project and your user’s device (includes browsers). Sessions are created when the user interacts with a WalletConnect SDK on your app. If user events are tracked within 30min range they will be considered within the same session.'
     ],
     [
       'Message',
