@@ -126,13 +126,13 @@ const response = await fetch(`https://notify.walletconnect.com/v1/${PROJECT_ID}/
   body: JSON.stringify(requestBody)
 })
 
-const subscribers: Subscribers = await response.json()
+const subscribers: ResponseBody = await response.json()
 
 type RequestBody = {
   // Max 100 accounts
   accounts: string[]
 }
-type Subscribers = {
+type ResponseBody = {
   [account: string]: Subscriber | null
 }
 type Subscriber = {
