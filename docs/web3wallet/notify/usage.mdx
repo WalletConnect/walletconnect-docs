@@ -45,6 +45,13 @@ section are:
 
 To check the full list of platform specific instructions for your preferred platform, go to [Extra (Platform Specific)](#extra-platform-specific) and select your platform.
 
+[**Researched features**](#researched-features): Features that are in research state and if proved to be useful will be added to the API.
+
+- [Chaning messages as read state](#chaning-messages-as-read-state):
+  Marking messages as read or unread across all devices
+- [Receiving notifications state changes](#receiving-notifications-state-changes):
+  Listening to notifications state changes
+
 ## Initialization
 
 <CloudBanner />
@@ -916,5 +923,67 @@ function HeadlessCheck({ isHeadless }) {
 AppRegistry.registerComponent(appName, () => HeadlessCheck)
 ```
 
+</PlatformTabItem>
+</PlatformTabs>
+
+## Researched features
+
+### Chaning messages as read state
+
+Changing a messages read state allows the user to know that they already seen the message across all synced devices. 
+
+<PlatformTabs activeOptions={["ios","android", "react-native"]}>
+<PlatformTabItem value="ios">
+</PlatformTabItem>
+<PlatformTabItem value="android">
+
+
+```kotlin
+val topic: String = // active subscription topic
+val notificationIds: List<String> = // List of notification ids to mark as read
+val read: Boolean = // Read state to set the notifications to
+
+val params = Notify.Params.ChangeNotificationsReadState(topic, notificationIds)
+
+NotifyClient.changeNotificationsReadState(
+  params,
+  onSuccess = {
+      // callback for when the change notifications read state request was successful
+  },
+  onError = { error ->
+    // callback for when the change notifications read state request has failed
+  }
+)
+}
+```
+
+</PlatformTabItem>
+<PlatformTabItem value="react-native">
+</PlatformTabItem>
+</PlatformTabs>
+
+
+### Receiving notifications state changes
+
+To receive notifications state changes, you can use the `notify_subscriptions_changed` event. This event will be emitted whenever there is a change in the existing notifications after it's marked as read or unread
+
+
+<PlatformTabs activeOptions={["ios","android", "react-native"]}>
+<PlatformTabItem value="ios">
+</PlatformTabItem>
+<PlatformTabItem value="android">
+
+This would be a part of the `NotifyClient.Delegate` implementation. You can use the `onNotifyNotificationsChanged` method to listen to notifications state changes.
+
+
+
+```kotlin
+override fun onNotifyNotificationsChanged(onNotifyNotificationsChanged: Notify.Event.NotificationsChanged) {
+    // Triggered when a state was changed in the notifications
+}
+```
+
+</PlatformTabItem>
+<PlatformTabItem value="react-native">
 </PlatformTabItem>
 </PlatformTabs>
