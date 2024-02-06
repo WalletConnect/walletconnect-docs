@@ -51,11 +51,12 @@ Web3Wallet.pair(pairingParams,
 let uri = WalletConnectURI(string: urlString)
 
 if let uri {
-    Task {
-        try await Web3Wallet.instance.pair(uri: uri)
-    }
+Task {
+try await Web3Wallet.instance.pair(uri: uri)
 }
-```
+}
+
+````
 </PlatformTabItem>
 
 </PlatformTabs>
@@ -80,7 +81,8 @@ val coreDelegate = object : CoreClient.CoreDelegate {
 }
 
 CoreClient.setDelegate(coreDelegate)
-```
+````
+
 </PlatformTabItem>
 
 <PlatformTabItem value="ios">
@@ -123,7 +125,8 @@ val coreDelegate = object : CoreClient.CoreDelegate {
 }
 
 CoreClient.setDelegate(coreDelegate)
-```
+
+````
 </PlatformTabItem>
 
 <PlatformTabItem value="ios">
@@ -134,7 +137,8 @@ Web3Wallet.instance.pairingExpirationPublisher
     guard !pairing.active else { return }
     // let user know that pairing has expired
 }.store(in: &publishers)
-```
+````
+
 </PlatformTabItem>
 
 </PlatformTabs>
@@ -142,20 +146,23 @@ Web3Wallet.instance.pairingExpirationPublisher
 ### Expected User flow
 
 ### Pairing Flow
+
 ![](/assets/pairing.gif)
 
 ### Pairing Error
+
 ![](/assets/pairing_error.gif)
 
 ### Expected Errors
 
 While pairing the following errors might occur:
- - No Internet connection error or pairing timeout when scanning QR with no Internet connection
-    - User should pair again with Internet connection
- - Pairing expired error when scanning a QR code with expired pairing
-    - User should refresh a QR code and scan again
+
+- No Internet connection error or pairing timeout when scanning QR with no Internet connection
+  - User should pair again with Internet connection
+- Pairing expired error when scanning a QR code with expired pairing
+  - User should refresh a QR code and scan again
 - Pairing with existing pairing is not allowed
-    - User should refresh a QR code and scan again. I usually happens when user scans an already paired QR code.  
+  - User should refresh a QR code and scan again. I usually happens when user scans an already paired QR code.
 
 ## Session Proposal
 
@@ -205,6 +212,7 @@ Session approve
 ```
 
 Session reject
+
 ```kotlin
  Web3Wallet.rejectSession(reject,
     onSuccess = {
@@ -214,6 +222,7 @@ Session reject
           //Error while sending session rejection - update your UI
     })
 ```
+
 </PlatformTabItem>
 
 <PlatformTabItem value="ios">
@@ -228,6 +237,7 @@ do {
 ```
 
 Session Reject
+
 ```swift
 do {
     try await Web3Wallet.instance.reject(proposalId: proposal.id, reason: .userRejected)
@@ -236,6 +246,7 @@ do {
     // present error
 }
 ```
+
 </PlatformTabItem>
 
 </PlatformTabs>
@@ -283,22 +294,25 @@ Web3Wallet.instance.sessionProposalExpirationPublisher.sink { _ in
 ### Expected User flow
 
 ### Approve or Reject Session Proposal
+
 ![](/assets/pairing.gif)
 
 ### Error Handling
+
 ![](/assets/proposal_error.gif)
 
 ### Expected Errors
 
 While approving or rejecting a session proposal the following errors might occurs:
+
 - No Internet connection
-    - It happens when a user tries to approve or reject session proposal with no Internet connection
+  - It happens when a user tries to approve or reject session proposal with no Internet connection
 - Session proposal expired
-    - It happens when users tries to approve or reject expired session proposal
+  - It happens when users tries to approve or reject expired session proposal
 - Invalid namespaces
-    - It happens when a validation of session namespaces fails
+  - It happens when a validation of session namespaces fails
 - Timeout
-    - It happens when Relay doesn't acknowledge session settle publish within 10s
+  - It happens when Relay doesn't acknowledge session settle publish within 10s
 
 ## Session Request
 
@@ -392,20 +406,23 @@ Web3Wallet.instance.requestExpirationPublisher.sink { _ in
 ### Expected User flow
 
 ### Approve or Reject Session Proposal
+
 ![](/assets/session_request.gif)
 
 ### Error Handling
+
 ![](/assets/session_request_error.gif)
 
 ### Expected Errors
 
 While approving or rejecting a session request the following error might occur:
+
 - Invalid session
-    - This error might happen when user approves or rejects a session request on expired session
+  - This error might happen when user approves or rejects a session request on expired session
 - Session request expired
-    - This error might happen when user approves or rejects a session request that already expires
+  - This error might happen when user approves or rejects a session request that already expires
 - Timeout
-    - It happens when Relay doesn't acknowledge session settle publish within 10s
+  - It happens when Relay doesn't acknowledge session settle publish within 10s
 
 ## Web Socket Connection State
 
@@ -423,9 +440,10 @@ core.relayer.on("relayer_connect", () => {
 })
 
 core.relayer.on("relayer_disconnect", () => {
-    // connection to the relay server is lost
+// connection to the relay server is lost
 })
-```
+
+````
 </PlatformTabItem>
 
 <PlatformTabItem value="android">
@@ -437,7 +455,8 @@ val walletDelegate = object : Web3Wallet.WalletDelegate {
     ...other callbacks
 }
 Web3Wallet.setWalletDelegate(walletDelegate)
-```
+````
+
 </PlatformTabItem>
 
 <PlatformTabItem value="ios">
@@ -460,4 +479,5 @@ Web3Wallet.instance.socketConnectionStatusPublisher
 ### Expected User flow
 
 ### Connection State
+
 ![](/assets/connection_state.gif)

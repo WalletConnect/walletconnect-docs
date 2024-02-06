@@ -28,14 +28,19 @@ Web3Modal SDK has support for [Wagmi v1](https://1.x.wagmi.sh/) and [Ethers v5](
 <PlatformTabs groupId="eth-lib" activeOptions={["wagmi1", "ethers5"]}>
 
 <PlatformTabItem value="wagmi1">
+
   <WagmiInstallation />
+
 </PlatformTabItem>
 
 <PlatformTabItem value="ethers5">
+  
   :::caution
-  Ethers v5 support is currently in alpha.
+  Ethers v5 support is currently in alpha. 
   :::
+
   <Ethers5Installation />
+
 </PlatformTabItem>
 
 </PlatformTabs>
@@ -47,18 +52,22 @@ Web3Modal SDK has support for [Wagmi v1](https://1.x.wagmi.sh/) and [Ethers v5](
 <PlatformTabs groupId="eth-lib" activeOptions={["wagmi1", "ethers5"]}>
 
 <PlatformTabItem value="wagmi1">
+
   <WagmiInstallationExpo />
+
 </PlatformTabItem>
 
 <PlatformTabItem value="ethers5">
+
   :::caution
-  Ethers v5 support is currently in alpha.
+  Ethers v5 support is currently in alpha. 
   :::
+
   <Ethers5InstallationExpo />
+
 </PlatformTabItem>
 
 </PlatformTabs>
-
 
 </TabItem>
 
@@ -191,15 +200,11 @@ npm install @coinbase/wallet-mobile-sdk react-native-mmkv
 <PlatformTabs groupId="eth-lib" activeOptions={["wagmi1", "ethers5"]}>
 
 <PlatformTabItem value="wagmi1">
-  ```bash npm2yarn
-    npm install @web3modal/coinbase-wagmi-react-native
-  ```
+  ```bash npm2yarn npm install @web3modal/coinbase-wagmi-react-native ```
 </PlatformTabItem>
 
 <PlatformTabItem value="ethers5">
-  ```bash npm2yarn
-    npm install @web3modal/coinbase-ethers-react-native
-  ```
+  ```bash npm2yarn npm install @web3modal/coinbase-ethers-react-native ```
 </PlatformTabItem>
 
 </PlatformTabs>
@@ -251,7 +256,6 @@ useEffect(() => {
 }, [])
 ```
 
-
 8. Initialize `CoinbaseWagmiConnector` and add it in `extraConnectors`
 
 <PlatformTabs groupId="eth-lib" activeOptions={["wagmi1", "ethers5"]}>
@@ -273,34 +277,38 @@ useEffect(() => {
       metadata,
       extraConnectors: [coinbaseConnector]
     })
-  ```
+
+````
 </PlatformTabItem>
 
 <PlatformTabItem value="ethers5">
-  ```tsx
-    import { CoinbaseProvider } from '@web3modal/coinbase-ethers-react-native'
+```tsx
+  import { CoinbaseProvider } from '@web3modal/coinbase-ethers-react-native'
 
-    const coinbaseProvider = new CoinbaseProvider({
-      redirect: 'YOUR_APP_SCHEME://',
-      rpcUrl: mainnet.rpcUrl,
-    })
+  const coinbaseProvider = new CoinbaseProvider({
+    redirect: 'YOUR_APP_SCHEME://',
+    rpcUrl: mainnet.rpcUrl,
+  })
 
-    const config = defaultConfig({
-      metadata,
-      coinbase: coinbaseProvider,
-    })
-  ```
+  const config = defaultConfig({
+    metadata,
+    coinbase: coinbaseProvider,
+  })
+````
+
 </PlatformTabItem>
 
 </PlatformTabs>
-
 
 Check <a href="https://mobilewalletprotocol.github.io/wallet-mobile-sdk/docs/client-sdk/rn-install">Coinbase docs</a> for more detailed information.
 
 </TabItem>
 
 <TabItem value="expo" label="Expo">
-  Coinbase SDK doesn't support Expo Projects. More info <a href="https://github.com/MobileWalletProtocol/wallet-mobile-sdk/issues/206#issuecomment-1468836345">here</a>
+  Coinbase SDK doesn't support Expo Projects. More info{' '}
+  <a href="https://github.com/MobileWalletProtocol/wallet-mobile-sdk/issues/206#issuecomment-1468836345">
+    here
+  </a>
 </TabItem>
 
 </Tabs>

@@ -201,7 +201,9 @@ await notifyClient.update({
 // -> Updated subscription will be emitted via the `notify_subscriptions_changed` watcher event.
 
 // get notification types by accessing `scope` member of a dapp's subscription
-const notificationTypes = notifyClient.getActiveSubscriptions({ account }).filter(subscription => subscription.topic === topic).scope
+const notificationTypes = notifyClient
+  .getActiveSubscriptions({ account })
+  .filter(subscription => subscription.topic === topic).scope
 ```
 
 #### Removing an existing subscription
@@ -224,7 +226,11 @@ const accountSubscriptions = notifyClient.getActiveSubscriptions({
 
 ```javascript
 // Will return all past Notify messages for the provided subscription topic, keyed by messageId.
-const messageHistory = notifyClient.getNotificationHistory({ topic, limit: 10, startingAfter: "notification-id" })
+const messageHistory = notifyClient.getNotificationHistory({
+  topic,
+  limit: 10,
+  startingAfter: 'notification-id'
+})
 ```
 
 </PlatformTabItem>
@@ -921,7 +927,9 @@ await notifyClient.update({
 // -> Updated subscription will be emitted via the `notify_subscriptions_changed` watcher event.
 
 // get notification types by accessing `scope` member of a dapp's subscription
-const notificationTypes = notifyClient.getActiveSubscriptions({ account }).filter(subscription => subscription.topic === topic).scope
+const notificationTypes = notifyClient
+  .getActiveSubscriptions({ account })
+  .filter(subscription => subscription.topic === topic).scope
 ```
 
 #### Removing an existing subscription

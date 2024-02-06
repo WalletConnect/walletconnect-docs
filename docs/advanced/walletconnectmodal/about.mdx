@@ -385,6 +385,7 @@ https://github.com/WalletConnect/WalletConnectUnity.git?path=Packages/com.wallet
 </Tabs>
 
 #### (Optional) Installed Wallet Detection
+
 To enable WalletConnect Modal to detect wallets installed on the device, you need to make specific changes to the native sides of the project.
 
 <Tabs>
@@ -413,6 +414,7 @@ Example:
     </application>
 </manifest>
 ```
+
 More wallet package names can be found in [our sample AndroidManifest.xml](https://github.com/WalletConnect/WalletConnectUnity/blob/project/modal-sample/Assets/Plugins/Android/AndroidManifest.xml).
 
 </TabItem>
@@ -454,13 +456,13 @@ Example:
     </dict>
 </plist>
 ```
+
 </TabItem>
 </Tabs>
 
 Important Note: The WalletConnect SDK will only be able to detect the wallets that you explicitly list in your native files. Make sure to include all the relevant wallet schemes/packages you want to support.
 
 For additional wallet schemes and package names, you can explore our [Explorer API](../../cloud/explorer.md). This API offers an up-to-date list of wallet identifiers that you can integrate into your project for enhanced wallet detection.
-
 
 </PlatformTabItem>
 </PlatformTabs>
