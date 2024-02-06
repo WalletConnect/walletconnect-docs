@@ -231,10 +231,7 @@ const messageHistory = notifyClient.getNotificationHistory({ topic, limit: 10, s
 
 ```javascript
 // Will mark the 2 specific notifications as read
-const messageHistory = notifyClient.markNotificationsAsRead({ topic, notificationIds: ["notification-1", "notification-2" ], all: false })
-
-// Will mark all notifications in provided topic as read. When all is true, the notificationIds array is ignored.
-const messageHistory = notifyClient.markNotificationsAsRead({ topic, notificationIds: [], all: true })
+const messageHistory = notifyClient.markNotificationsAsRead({ topic, notificationIds: ["notification-1", "notification-2" ] })
 ```
 
 </PlatformTabItem>
