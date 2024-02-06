@@ -319,8 +319,8 @@ NotifyClient.subscribe(params = params).let { result ->
 
         is Notify.Result.Subscribe.Error -> {
           // callback for when the subscription request has failed
-        } 
-      
+        }
+
     }
 }
 ```
@@ -405,7 +405,8 @@ To fetch subscription’s notifications by calling **`getNotificationHistory()`*
 
 Method will return an array of NotifyMessageRecord objects that indicates current notify messages state. This do not include old messages that aren't loaded yet. Useful for displaying initial notifications view state. For more info about pagination, check `fetchHistory` method.
 
-Use this method together with: 
+Use this method together with:
+
 - `messagesPublisher(topic: String)`
 - `fetchHistory`
 
@@ -545,9 +546,12 @@ try {
 <PlatformTabItem value="react-native">
 
 This feature will be added shortly
+
 ```typescript
 // get notification types by accessing `scope` member of a dapp's subscription
-const notificationTypes = notifyClient.getActiveSubscriptions({ account }).filter(subscription => subscription.topic === topic).scope
+const notificationTypes = notifyClient
+  .getActiveSubscriptions({ account })
+  .filter(subscription => subscription.topic === topic).scope
 ```
 
 </PlatformTabItem>
@@ -642,11 +646,10 @@ await notifyClient.unregister({
 
 ## Fetch messages history (Pagination)
 
-
 <PlatformTabs activeOptions={["ios","android", "react-native"]}>
 <PlatformTabItem value="ios">
 
-Method that fetches message history and saves it to SDK's database. When async method finishes execution,  `messagesPublisher(topic: String)` will send the event with actual Notify messages for the specified topic. 
+Method that fetches message history and saves it to SDK's database. When async method finishes execution, `messagesPublisher(topic: String)` will send the event with actual Notify messages for the specified topic.
 
 ```swift
 func fetchHistory(subscription: NotifySubscription, after: String?, limit: Int) async throws -> Bool

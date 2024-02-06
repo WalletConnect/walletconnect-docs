@@ -24,29 +24,29 @@ You can set a desired chain for the initial connection:
       //...
       defaultChain: mainnet
     })
-  ```
+
+````
 </PlatformTabItem>
 
 <PlatformTabItem value="ethers5">
-  ```ts
-  const mainnet = {
-    chainId: 1,
-    name: 'Ethereum',
-    currency: 'ETH',
-    explorerUrl: 'https://etherscan.io',
-    rpcUrl: 'https://cloudflare-eth.com',
-  };
+```ts
+const mainnet = {
+  chainId: 1,
+  name: 'Ethereum',
+  currency: 'ETH',
+  explorerUrl: 'https://etherscan.io',
+  rpcUrl: 'https://cloudflare-eth.com',
+};
 
-  createWeb3Modal({
-    //...
-    defaultChain: mainnet
-  })
-  ```
+createWeb3Modal({
+  //...
+  defaultChain: mainnet
+})
+````
+
 </PlatformTabItem>
 
 </PlatformTabs>
-
-
 
 ## clipboardClient
 

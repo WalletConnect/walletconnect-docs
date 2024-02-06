@@ -62,13 +62,13 @@ const client = await Web3InboxClient.init({ projectId, domain, allApps })
 <PlatformTabItem value="react">
 
 ```ts
-const { 
-  data: account, 
-  isRegistered, 
-  identityKey, 
+const {
+  data: account,
+  isRegistered,
+  identityKey,
   setAccount,
-  error, 
-  isLoading,
+  error,
+  isLoading
 } = useW3iAccount('eip155:1:0x9A...')
 ```
 
@@ -78,9 +78,8 @@ const {
 - **setAccount:** Change actively managed account in Web3Inbox. Does not need to be used as you can set the account directly in the params.
 - **isRegistered:** A boolean of whether or not the account currently set is registered
 - **identityKey:** Currently set account's identity key
-- **error:** A string, representing possible error of setting an account. 
+- **error:** A string, representing possible error of setting an account.
 - **isLoading:** A boolean, representing if an account is being set
-
 
 </PlatformTabItem>
 
@@ -95,6 +94,7 @@ client.watchAccount(account => {
   console.log({ account }) // eip155:1:0x9AfEaC202C837df470b5A145e0EfD6a574B21029
 })
 ```
+
 #### References
 
 - **account:** CAIP-10 account currently active in Web3Inbox
@@ -114,8 +114,8 @@ client.watchAccount(account => {
 <PlatformTabItem value="react">
 
 ```ts
-import { useSignMessage } from "@wagmi"
-const { signMessageAsync } = useSignMessage();
+import { useSignMessage } from '@wagmi'
+const { signMessageAsync } = useSignMessage()
 
 const { isRegistered } = useW3iAccount('eip155:1:0x9A...')
 
@@ -124,13 +124,13 @@ const { register, isLoading: isRegistering } = useRegister()
 
 const handleRegistration = async () => {
   try {
-    const { message, registerParams } = await prepareRegistration();
-    const signature = await signMessageAsync({ message: message });
-    await register({ registerParams, signature });
+    const { message, registerParams } = await prepareRegistration()
+    const signature = await signMessageAsync({ message: message })
+    await register({ registerParams, signature })
   } catch (registerIdentityError: any) {
     console.error(registerIdentityError)
   }
-};
+}
 ```
 
 #### References
@@ -151,16 +151,16 @@ Some suggested methods of signing the message:
 <PlatformTabItem value="javascript">
 
 ```ts
-import { signMessageAsync } from "@wagmi/core"
-
+import { signMessageAsync } from '@wagmi/core'
 
 const { registerParams, signature } = await client.prepareRegistration({
   account
 })
 const isRegistered = await client.getAccountIsRegistered(account)
-const signature = await signMessageAsync({ message });
-await register({ registerParams, signature });
+const signature = await signMessageAsync({ message })
+await register({ registerParams, signature })
 ```
+
 #### References
 
 - **prepareRegistration:** Prepare registration params
@@ -188,11 +188,11 @@ Subscribe, Unsubscribe, Get Subscription, Check if Subscribed.
 <PlatformTabItem value="react">
 
 ```ts
-const { subscribe, isLoading: isSubscribing } = useSubscribe();
-const { unsubscribe, isLoading: isUnsubscribing } = useUnsubscribe();
+const { subscribe, isLoading: isSubscribing } = useSubscribe()
+const { unsubscribe, isLoading: isUnsubscribing } = useUnsubscribe()
 
 // get subscription of current user to current dapp
-const { data: subscription } = useSubscription();
+const { data: subscription } = useSubscription()
 
 // subscribe to current dapp
 subscribe()
@@ -299,10 +299,7 @@ Get notifications
 const notificationsPerPage = 5
 const isInfiniteScroll = true
 
-const { data: notifications, nextPage } = useNotifications(
-  notificationsPerPage, 
-  isInfiniteScroll
-)
+const { data: notifications, nextPage } = useNotifications(notificationsPerPage, isInfiniteScroll)
 ```
 
 #### References
@@ -313,12 +310,12 @@ const { data: notifications, nextPage } = useNotifications(
 
 ```ts
 {
-  title: string;
-  sentAt: number;
-  body: string;
-  id: string;
-  url: string | null;
-  type: string;
+  title: string
+  sentAt: number
+  body: string
+  id: string
+  url: string | null
+  type: string
 }
 ```
 
@@ -331,16 +328,13 @@ You can retrieve notifications using pagination. One approach is to provide the 
 const notificationsPage = client.getNotificationHistory({
   limit: 3,
   // The `id` of the last notification, for example:
-  startingAfter: "some-notification-id"
+  startingAfter: 'some-notification-id'
 })
 
 const notificationsPerPage = 5
 const isInfiniteScroll = true
 
-const { nextPage } = client.pageNotifications(
-  notificationsPerPage,
-  isInfiniteScroll
-)(onUpdate)
+const { nextPage } = client.pageNotifications(notificationsPerPage, isInfiniteScroll)(onUpdate)
 ```
 
 #### References
@@ -353,12 +347,12 @@ const { nextPage } = client.pageNotifications(
 
 ```ts
 {
-  title: string;
-  sentAt: number;
-  body: string;
-  id: string;
-  url: string | null;
-  type: string;
+  title: string
+  sentAt: number
+  body: string
+  id: string
+  url: string | null
+  type: string
 }
 ```
 
@@ -377,7 +371,7 @@ Manage and fetch notification types.
 <PlatformTabItem value="react">
 
 ```ts
-const { data: types, update} = useNotificationTypes()
+const { data: types, update } = useNotificationTypes()
 ```
 
 #### References
@@ -404,9 +398,11 @@ type ScopeMap = Record<
 const types = client.getNotificationTypes()
 
 // watch scopes of specific account's subscription to specific dapp
-client.watchNotificationTypes(scp => { console.log(scp) })
+client.watchNotificationTypes(scp => {
+  console.log(scp)
+})
 
-client.update(["enabledType-1", "enabledType-2"])
+client.update(['enabledType-1', 'enabledType-2'])
 ```
 
 #### References
