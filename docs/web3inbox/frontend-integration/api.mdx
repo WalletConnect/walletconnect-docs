@@ -430,8 +430,11 @@ type ScopeMap = Record<
 
 ## Event handling
 
-If you are building a wallet or just need more fine grained control over events, the following methods are available
+If you are building a wallet or just need more fine grained control over events, the following methods are available.
 
+**Note**:
+- With the react package, the event watcher follows the component's life cycle. When the component is unmounted, it will die.
+- With the javascript package, the event watcher needs to be manually stopped when it is no longer needed. Not doing this may cause memory leaks.
 
 ### On notify subscription
 
