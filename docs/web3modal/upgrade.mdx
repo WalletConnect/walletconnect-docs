@@ -3,7 +3,9 @@ import PlatformTabItem from '../components/PlatformTabItem'
 
 # Upgrade Guide
 
-## What's new in v3
+## What's new in v4
+
+{/* Add new features for v4 */}
 
 - Support for [Vue & Nuxt](./vue/about.mdx)
 - Simpler design and new theming mechanism
@@ -12,7 +14,7 @@ import PlatformTabItem from '../components/PlatformTabItem'
 - New Explorer API integration
 - Unified experience for iOS, Android and Desktop
 
-## Web3Modal v2 to v3 Upgrade Guide
+## Web3Modal v2 to v4 Upgrade Guide
 
 This guide is useful for those that have used a previous Web3Modal V2 version and are looking to upgrade to V3.
 
@@ -30,7 +32,7 @@ To upgrade from Web3Modal v2 to v3 start by removing Web3Modal v2 dependencies `
 while keeping `wagmi` and `viem` installed. Now you can install Web3Modal v3 library
 
 ```bash npm2yarn
-npm install @web3modal/wagmi@3.5.7 wagmi@1.4.13 viem@1.21.4
+npm install @web3modal/wagmi@latest wagmi viem@2.x @tanstack/react-query
 ```
 
 </PlatformTabItem>
@@ -40,7 +42,7 @@ To upgrade from Web3Modal v2 to v3 start by removing Web3Modal v2 dependencies `
 while keeping `@wagmi/core` and `viem` installed. Now you can install Web3Modal v3 library
 
 ```bash npm2yarn
-npm install @web3modal/wagmi@3.5.7 @wagmi/core@1.4.13 viem@1.21.4
+npm install @web3modal/wagmi@latest @wagmi/core@1.4.13 viem@1.21.4
 ```
 
 </PlatformTabItem>
@@ -73,6 +75,7 @@ Start by importing `createWeb3Modal`, `defaultWagmiConfig` and wagmi packages
 /* highlight-delete-end */
 /* highlight-add-start */
 + import { createWeb3Modal, defaultWagmiConfig } from '@web3modal/wagmi/react'
++ import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 /* highlight-add-end */
 
 import { WagmiConfig } from 'wagmi'
@@ -116,13 +119,22 @@ Finally, pass `wagmiConfig` to `createWeb3Modal`
 /* highlight-delete-end */
 /* highlight-add-start */
 + createWeb3Modal({ wagmiConfig, projectId, chains })
++ const queryClient = new QueryClient()
 /* highlight-add-end */
 
 export default function App() {
   return (
     <>
       <WagmiConfig config={wagmiConfig}>
-        <HomePage />
+/* highlight-delete-start */
+-       <HomePage />
+/* highlight-delete-end */
+/* highlight-add-start */
++       <QueryClientProvider client={queryClient}>
++         <HomePage />
++       </QueryClientProvider>
+/* highlight-add-end */
+
       </WagmiConfig>
 
       /* highlight-delete-start */
@@ -154,6 +166,8 @@ import { mainnet } from 'viem/chains'
 + import { CoinbaseWalletConnector } from 'wagmi/connectors/coinbaseWallet'
 + import { InjectedConnector } from 'wagmi/connectors/injected'
 + import { WalletConnectConnector } from 'wagmi/connectors/walletConnect'
+
++ import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 /* highlight-add-end */
 ```
 
@@ -216,7 +230,14 @@ export default function App() {
   return (
     <>
       <WagmiConfig config={wagmiConfig}>
-        <HomePage />
+/* highlight-delete-start */
+-       <HomePage />
+/* highlight-delete-end */
+/* highlight-add-start */
++       <QueryClientProvider client={queryClient}>
++         <HomePage />
++       </QueryClientProvider>
+/* highlight-add-end */
       </WagmiConfig>
 
       /* highlight-delete-start */
