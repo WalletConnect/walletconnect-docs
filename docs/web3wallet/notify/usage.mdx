@@ -24,10 +24,8 @@ Links to sections on this page. Some sections are platform specific and are only
   Change allowed notification types sent by dapp
 - [Fetching available notification types](#fetching-available-notification-types):
   Get latest notification types
-- [Chagning messages read state](#chaning-messages-read-state):
+- [Chagning messages read state](#changing-messages-read-state):
   Marking messages as read or unread across all devices
-- [Receiving notifications state changes](#receiving-notifications-state-changes):
-  Listening to notifications state changes
 - [Unsubscribe from a dapp](#unsubscribe-from-a-dapp):
   Opt-out from receiving notifications from a dapp
 - [Account logout](#account-logout):
@@ -576,43 +574,17 @@ val topic: String = // active subscription topic
 val notificationIds: List<String> = // List of notification ids to mark as read
 val read: Boolean = // Read state to set the notifications to
 
-val params = Notify.Params.ChangeNotificationsReadState(topic, notificationIds)
+val params = Notify.Params.ChangeNotificationsReadState(topic, notificationIds, read)
 
 NotifyClient.changeNotificationsReadState(
-  params,
-  onSuccess = {
-      // callback for when the change notifications read state request was successful
-  },
-  onError = { error ->
-    // callback for when the change notifications read state request has failed
-  }
+    params,
+    onSuccess = {
+        // callback for when the change notifications read state request was successful
+    },
+    onError = { error ->
+      // callback for when the change notifications read state request has failed
+    }
 )
-}
-```
-
-</PlatformTabItem>
-<PlatformTabItem value="react-native">
-</PlatformTabItem>
-</PlatformTabs>
-
-
-## Receiving notifications state changes
-
-To receive notifications state changes, you can use the `notify_subscriptions_changed` event. This event will be emitted whenever there is a change in the existing notifications after it's marked as read or unread
-
-
-<PlatformTabs activeOptions={["ios","android", "react-native"]}>
-<PlatformTabItem value="ios">
-</PlatformTabItem>
-<PlatformTabItem value="android">
-
-This would be a part of the `NotifyClient.Delegate` implementation. You can use the `onNotifyNotificationsChanged` method to listen to notifications state changes.
-
-
-
-```kotlin
-override fun onNotifyNotificationsChanged(onNotifyNotificationsChanged: Notify.Event.NotificationsChanged) {
-    // Triggered when a state was changed in the notifications
 }
 ```
 
@@ -833,6 +805,10 @@ val walletDelegate = object : NotifyClient.Delegate {
     override fun onError(error: Notify.Model.Error) {
         // Triggered when there's an error inside the SDK
     }
+
+    override fun onNotifyNotificationsChanged(notifyNotificationsChanged: Notify.Event.NotificationsChanged) {
+        // Triggered when a state was changed in the notifications
+    } 
 }
 
 NotifyClient.setDelegate(walletDelegate)
