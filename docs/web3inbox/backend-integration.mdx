@@ -98,9 +98,11 @@ curl -X POST 'https://notify.walletconnect.com/<PROJECT_ID>/notify' \
 
 ## Get subscribers
 
-You can tell if an account is subscribed and get information about subscribers using the `/get-subscribers` endpoint. You can provide up to 100 accounts in the request.
+You can tell if an account is subscribed and get information about subscribers using the `/v1/<project-id>/get-subscribers` endpoint. You can provide up to 100 accounts in the request.
 
 If the account is not a subscriber, it will be `null`. If the account is subscribed, it will include a list of notification types the subscriber has opted-into receiving.
+
+Example usage:
 
 <Tabs queryString={'api-client'}>
 
@@ -175,7 +177,9 @@ Example response:
 This endpoint will download _all_ subscribers of your app, which is an expensive operation and can take several seconds to complete. Because of this, it has a low rate limit.
 :::
 
-You can get a list of all of the currently-subscribed accounts by calling the `/subscribers` endpoint:
+You can get a list of all of the currently-subscribed accounts by calling the `/<project-id>/subscribers` endpoint.
+
+Example usage:
 
 <Tabs queryString={'api-client'}>
 
@@ -216,5 +220,5 @@ Rate limits are implemented as [token bucket](https://en.wikipedia.org/wiki/Toke
   - Each app can call this endpoint 2 times per second with a burst up to 20. Rate limited requests will return a 429 status code.
 - `POST /v1/<project-id>/get-subscribers`
   - Each app can call this endpoint 100 times per second with a burst up to 100. Rate limited requests will return a 429 status code.
-- `GET /subscribers`
+- `GET /<project-id>/subscribers`
   - Each app can call this endpoint 1 time every 5 minutes with a burst up to 2. Rate limited requests will return a 429 status code.
