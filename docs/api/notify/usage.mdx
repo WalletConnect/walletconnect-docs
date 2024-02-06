@@ -224,7 +224,17 @@ const accountSubscriptions = notifyClient.getActiveSubscriptions({
 
 ```javascript
 // Will return all past Notify messages for the provided subscription topic, keyed by messageId.
-const messageHistory = notifyClient.getNotificationHistory({ topic, limit: 10, startingAfter: "notification-id" })
+const messageHistory = notifyClient.getNotificationHistory({ topic, limit: 10, startingAfter: "notification-id", unreadFirst: true })
+```
+
+#### Marking notification as unread
+
+```javascript
+// Will mark the 2 specific notifications as read
+const messageHistory = notifyClient.markNotificationsAsRead({ topic, notificationIds: ["notification-1", "notification-2" ], all: false })
+
+// Will mark all notifications in provided topic as read. When all is true, the notificationIds array is ignored.
+const messageHistory = notifyClient.markNotificationsAsRead({ topic, notificationIds: [], all: true })
 ```
 
 </PlatformTabItem>
