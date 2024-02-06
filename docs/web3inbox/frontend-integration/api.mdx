@@ -298,18 +298,34 @@ Get notifications
 // watch notifications of current account's subscription to current dapp
 const notificationsPerPage = 5
 const isInfiniteScroll = true
+const unreadFirst = true
 
-const { data: notifications, nextPage } = useNotifications(
+const { data: notifications, nextPage, markAllNotificationsAsRead, markNotificationsAsRead } = useNotifications(
   notificationsPerPage, 
-  isInfiniteScroll
+  isInfiniteScroll,
+  unreadFirst 
 )
+
+// marking a single notification as read
+notifications[0].markAsRead();
+
+// mark all notifications currently in `notifications` returned array as read
+markAllNotificationsAsRead();
+
+// mark specific notifications as read
+markNotificationsAsRead(notifications.slice(2).map(n => n.id))
+
 ```
 
 #### References
 
 - **notificationsPerPage:** Number representing how many notifications to get per fetch
 - **isInfiniteScroll:** Whether or not to keep already fetched notifications when getting next page
+- **unreadFirst:** Whether or not unread messages should be sorted at the top, regardless of timestamp
 - **notifications:** Array of notifications, of type
+- **notification.markAsRead:** Mark the notification as read
+- **markAllNotificationsAsRead**: Mark currently fetched notifications as read. *This does not mark all notifications on notify server as read, only those available on the client*.
+- **markNotificationsAsRead**: Takes an array of notification IDs and marks them as read
 
 ```ts
 {
@@ -317,8 +333,10 @@ const { data: notifications, nextPage } = useNotifications(
   sentAt: number;
   body: string;
   id: string;
+  isUnread: boolean;
   url: string | null;
   type: string;
+  markAsRead: () => void
 }
 ```
 
@@ -336,10 +354,12 @@ const notificationsPage = client.getNotificationHistory({
 
 const notificationsPerPage = 5
 const isInfiniteScroll = true
+const unreadFirst = true
 
-const { nextPage } = client.pageNotifications(
+const { nextPage, markAllNotificationsAsRead, markNotificationAsRead } = client.pageNotifications(
   notificationsPerPage,
-  isInfiniteScroll
+  isInfiniteScroll,
+  unreadFirst,
 )(onUpdate)
 ```
 
@@ -347,9 +367,13 @@ const { nextPage } = client.pageNotifications(
 
 - **notificationsPerPage:** Number representing how many notifications to get per fetch
 - **isInfiniteScroll:** Whether or not to keep already fetched notifications when getting next page
+- **unreadFirst:** Whether or not unread messages should be sorted at the top, regardless of timestamp
 - **onUpdate:**: A callback that will be called whenever notifications get updated
 - **nextPage:**: A function to be called to fetch the next page of notifications
 - **notifications:** Array of notifications, of type
+- **notification.markAsRead:** Mark the notification as read
+- **markAllNotificationsAsRead**: Mark currently fetched notifications as read. *This does not mark all notifications on notify server as read, only those available on the client*.
+- **markNotificationsAsRead**: Takes an array of notification IDs and marks them as read
 
 ```ts
 {
@@ -357,8 +381,10 @@ const { nextPage } = client.pageNotifications(
   sentAt: number;
   body: string;
   id: string;
+  isUnread: boolean;
   url: string | null;
   type: string;
+  markAsRead: () => void
 }
 ```
 
