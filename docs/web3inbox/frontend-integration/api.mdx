@@ -427,3 +427,356 @@ type ScopeMap = Record<
 
 </PlatformTabItem>
 </PlatformTabs>
+
+## Event handling
+
+If you are building a wallet or just need more fine grained control over events, the following methods are available
+
+
+### On notify subscription
+
+<PlatformTabs
+	groupId="w3iw"
+	activeOptions={["react", "javascript"]}
+>
+
+<PlatformTabItem value="react">
+
+```ts
+useNotifyEvent("notify_subscription", ({subscription, allSubscriptions}) => {
+  const newSubscription = subscription;
+  const allSubscriptionsIncludingNewOne = allSubscriptions
+  
+  // add handling for new subscription here
+})
+```
+
+#### References
+
+- **allSubscriptions:** Array of Notify Subscriptions
+- **subscription:** Notify subscription of type:
+
+```ts
+{
+  topic: string
+  account: string
+  relay: relayertypes.protocoloptions
+  metadata: Metadata
+  scope: ScopeMap
+  expiry: number
+  symkey: string
+}
+```
+
+</PlatformTabItem>
+<PlatformTabItem value="javascript">
+
+```ts
+const stopWatcher = client.onNotifyEvent("notify_subscription", ({subscription, allSubscriptions} => {
+  const newSubscription = subscription;
+  const allSubscriptionsIncludingNewOne = allSubscriptions
+  
+  // add handling for new subscription here
+})
+
+// when event watcher needs to be killed
+stopWatcher()
+```
+
+
+#### References
+
+- **allSubscriptions:** Array of Notify Subscriptions
+- **subscription:** Notify subscription of type:
+
+```ts
+{
+  topic: string
+  account: string
+  relay: relayertypes.protocoloptions
+  metadata: Metadata
+  scope: ScopeMap
+  expiry: number
+  symkey: string
+}
+```
+
+</PlatformTabItem>
+</PlatformTabs>
+
+
+### On notify message
+
+<PlatformTabs
+	groupId="w3iw"
+	activeOptions={["react", "javascript"]}
+>
+
+<PlatformTabItem value="react">
+
+```ts
+useNotifyEvent("notify_message", ({message}) => {
+  const newMessage = subscription;
+  
+  // add handling for new subscription here
+})
+```
+
+#### References
+
+- **message:** Notify Notification of type:
+
+```ts
+{
+  title: string;
+  sentAt: number;
+  body: string;
+  id: string;
+  url: string | null;
+  type: string;
+}
+```
+
+</PlatformTabItem>
+<PlatformTabItem value="javascript">
+
+```ts
+const stopWatcher = client.onNotifyEvent("notify_message", ({ message } => {
+  const newMessage = message;
+
+  // add handling for new message here
+})
+
+// when event watcher needs to be killed
+stopWatcher()
+```
+
+#### References
+
+- **message:** Notify Notification of type:
+
+```ts
+{
+  title: string;
+  sentAt: number;
+  body: string;
+  id: string;
+  url: string | null;
+  type: string;
+}
+```
+
+
+</PlatformTabItem>
+
+</PlatformTabs>
+
+### On notify delete
+
+<PlatformTabs
+	groupId="w3iw"
+	activeOptions={["react", "javascript"]}
+>
+
+<PlatformTabItem value="react">
+
+```ts
+useNotifyEvent("notify_delete", ({allSubscriptions}) => {
+  const subscriptionsWithoutDeletedOne = allSubscriptions;
+  
+  // add handling for deletion now
+})
+```
+
+#### References
+
+- **allSubscriptions:** Array of Notify Subscriptions
+- **subscription:** Notify subscription of type:
+
+```ts
+{
+  topic: string
+  account: string
+  relay: relayertypes.protocoloptions
+  metadata: Metadata
+  scope: ScopeMap
+  expiry: number
+  symkey: string
+}
+```
+
+</PlatformTabItem>
+<PlatformTabItem value="javascript">
+
+```ts
+const stopWatching = client.onNotifyEvent("notify_delete", ({ subscriptions } => {
+  const newMessage = message;
+
+  // add handling for new message here
+})
+
+// when event watcher needs to be killed
+stopWatcher()
+```
+
+#### References
+
+- **allSubscriptions:** Array of Notify Subscriptions
+- **subscription:** Notify subscription of type:
+
+```ts
+{
+  topic: string
+  account: string
+  relay: relayertypes.protocoloptions
+  metadata: Metadata
+  scope: ScopeMap
+  expiry: number
+  symkey: string
+}
+```
+
+
+</PlatformTabItem>
+</PlatformTabs>
+
+
+### On notify update: When a subscription gets updated
+
+<PlatformTabs
+	groupId="w3iw"
+	activeOptions={["react", "javascript"]}
+>
+<PlatformTabItem value="react">
+
+```ts
+useNotifyEvent("notify_update", ({subscription, allSubscriptions}) => {
+  const updatedSubscription = subscription;
+  const allSubscriptionsIncludingUpdatedOne = allSubscriptions
+  
+  // add handling for updated subscription here
+})
+```
+
+#### References
+
+- **allSubscriptions:** Array of Notify Subscriptions
+- **subscription:** Notify subscription of type:
+
+```ts
+{
+  topic: string
+  account: string
+  relay: relayertypes.protocoloptions
+  metadata: Metadata
+  scope: ScopeMap
+  expiry: number
+  symkey: string
+}
+```
+
+</PlatformTabItem>
+<PlatformTabItem value="javascript">
+
+```ts
+const stopWatcher = client.onNotifyEvent("notify_update", ({subscription, allSubscriptions} => {
+  const newSubscription = subscription;
+  const allSubscriptionsIncludingNewOne = allSubscriptions
+  
+  // add handling for new subscription here
+})
+
+// when event watcher needs to be killed
+stopWatcher()
+```
+
+#### References
+
+- **allSubscriptions:** Array of Notify Subscriptions
+- **subscription:** Notify subscription of type:
+
+```ts
+{
+  topic: string
+  account: string
+  relay: relayertypes.protocoloptions
+  metadata: Metadata
+  scope: ScopeMap
+  expiry: number
+  symkey: string
+}
+```
+
+
+</PlatformTabItem>
+</PlatformTabs>
+
+### On notify subscriptions changed: When a subscriptions are externally added, deleted or updated
+
+<PlatformTabs
+	groupId="w3iw"
+	activeOptions={["react", "javascript"]}
+>
+
+<PlatformTabItem value="react">
+
+```ts
+useNotifyEvent("notify_subscriptions_changed", ({subscriptions}) => {
+  const allSubscriptions = subscriptions
+  
+  // add handling for new state of subscriptions here
+})
+```
+
+#### References
+
+- **subscriptions:** Array of Notify Subscriptions
+- **subscription:** Notify subscription of type:
+
+```ts
+{
+  topic: string
+  account: string
+  relay: relayertypes.protocoloptions
+  metadata: Metadata
+  scope: ScopeMap
+  expiry: number
+  symkey: string
+}
+```
+
+</PlatformTabItem>
+<PlatformTabItem value="javascript">
+
+```ts
+const stopWatcher = client.onNotifyEvent("notify_subscriptions_changed", ({subscriptions} => {
+  const allSubscriptions = subscriptions
+  
+  // add handling for new subscription state here
+})
+
+// when event watcher needs to be killed
+stopWatcher()
+```
+
+#### References
+
+- **allSubscriptions:** Array of Notify Subscriptions
+- **subscription:** Notify subscription of type:
+
+```ts
+{
+  topic: string
+  account: string
+  relay: relayertypes.protocoloptions
+  metadata: Metadata
+  scope: ScopeMap
+  expiry: number
+  symkey: string
+}
+```
+
+
+</PlatformTabItem>
+</PlatformTabs>
+
