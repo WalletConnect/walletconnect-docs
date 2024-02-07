@@ -14,18 +14,34 @@ createWeb3Modal({ projectId, chains, ...options })
 
 You can set a desired chain for the initial connection:
 
-<PlatformTabs groupId="eth-lib" activeOptions={["wagmi1", "ethers5"]}>
+<PlatformTabs groupId="eth-lib" activeOptions={["wagmi1", "ethers", "ethers5"]}>
 
 <PlatformTabItem value="wagmi1">
-  ```ts
-    import { mainnet } from 'viem/chains'
+```ts
+  import { mainnet } from 'viem/chains'
 
-    createWeb3Modal({
-      //...
-      defaultChain: mainnet
-    })
+  createWeb3Modal({
+    //...
+    defaultChain: mainnet
+  })
+```
+</PlatformTabItem>
 
-````
+<PlatformTabItem value="ethers">
+```ts
+const mainnet = {
+  chainId: 1,
+  name: 'Ethereum',
+  currency: 'ETH',
+  explorerUrl: 'https://etherscan.io',
+  rpcUrl: 'https://cloudflare-eth.com',
+};
+
+createWeb3Modal({
+  //...
+  defaultChain: mainnet
+})
+```
 </PlatformTabItem>
 
 <PlatformTabItem value="ethers5">
@@ -42,8 +58,7 @@ createWeb3Modal({
   //...
   defaultChain: mainnet
 })
-````
-
+```
 </PlatformTabItem>
 
 </PlatformTabs>
