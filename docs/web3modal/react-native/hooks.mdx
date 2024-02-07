@@ -3,7 +3,8 @@ import Button from '../../components/button'
 import PlatformTabs from '../../components/PlatformTabs'
 import PlatformTabItem from '../../components/PlatformTabItem'
 
-import WagmiHooks from './wagmi/hooks.mdx'
+import WagmiHooks from './wagmi1/hooks.mdx'
+import EthersHooks from './ethers/hooks.mdx'
 import Ethers5Hooks from './ethers5/hooks.mdx'
 
 # Hooks
@@ -12,20 +13,32 @@ import Ethers5Hooks from './ethers5/hooks.mdx'
 
 Control the modal with the `useWeb3Modal` hook
 
-<PlatformTabs groupId="eth-lib" activeOptions={["wagmi1", "ethers5"]}>
+<PlatformTabs groupId="eth-lib" activeOptions={["wagmi1", "ethers", "ethers5"]}>
 
 <PlatformTabItem value="wagmi1">
-  ```ts
-    import { useWeb3Modal } from '@web3modal/wagmi-react-native'
+```ts
+  import { useWeb3Modal } from '@web3modal/wagmi-react-native'
 
-    export default function Component() {
+  export default function Component() {
 
-      const { open, close } = useWeb3Modal()
+    const { open, close } = useWeb3Modal()
 
-      open()
-    }
+    open()
+  }
+```
+</PlatformTabItem>
 
-````
+<PlatformTabItem value="ethers">
+```ts
+  import { useWeb3Modal } from '@web3modal/ethers-react-native'
+
+  export default function Component() {
+
+    const { open, close } = useWeb3Modal()
+
+    open()
+  }
+```
 </PlatformTabItem>
 
 <PlatformTabItem value="ethers5">
@@ -38,8 +51,7 @@ Control the modal with the `useWeb3Modal` hook
 
     open()
   }
-````
-
+```
 </PlatformTabItem>
 
 </PlatformTabs>
@@ -83,15 +95,22 @@ List of views you can select
 
 Get the current value of the modal's state
 
-<PlatformTabs groupId="eth-lib" activeOptions={["wagmi1", "ethers5"]}>
+<PlatformTabs groupId="eth-lib" activeOptions={["wagmi1", "ethers", "ethers5"]}>
 
 <PlatformTabItem value="wagmi1">
   ```ts
     import { useWeb3ModalState } from '@web3modal/wagmi-react-native'
 
     const { open, selectedNetworkId } = useWeb3ModalState()
+  ```
+</PlatformTabItem>
 
-````
+<PlatformTabItem value="ethers">
+```ts
+  import { useWeb3ModalState } from '@web3modal/ethers-react-native'
+
+  const { open, selectedNetworkId } = useWeb3ModalState()
+```
 </PlatformTabItem>
 
 <PlatformTabItem value="ethers5">
@@ -99,8 +118,7 @@ Get the current value of the modal's state
   import { useWeb3ModalState } from '@web3modal/ethers5-react-native'
 
   const { open, selectedNetworkId } = useWeb3ModalState()
-````
-
+```
 </PlatformTabItem>
 
 </PlatformTabs>
@@ -125,10 +143,14 @@ The modal state consists of two reactive values:
 
 ## Ethereum Library
 
-<PlatformTabs groupId="eth-lib" activeOptions={["wagmi1", "ethers5"]}>
+<PlatformTabs groupId="eth-lib" activeOptions={["wagmi1", "ethers", "ethers5"]}>
 
 <PlatformTabItem value="wagmi1">
   <WagmiHooks />
+</PlatformTabItem>
+
+<PlatformTabItem value="ethers">
+  <EthersHooks />
 </PlatformTabItem>
 
 <PlatformTabItem value="ethers5">
