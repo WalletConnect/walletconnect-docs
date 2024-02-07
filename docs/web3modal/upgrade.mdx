@@ -16,7 +16,7 @@ import PlatformTabItem from '../components/PlatformTabItem'
 
 ## Web3Modal v2 to v4 Upgrade Guide
 
-This guide is useful for those that have used a previous Web3Modal V2 version and are looking to upgrade to V3.
+This guide is useful for those that have used a previous Web3Modal V2 version and are looking to upgrade to V4.
 
 <img src="/assets/w3m-upgrade.png" />
 
@@ -28,8 +28,7 @@ This guide is useful for those that have used a previous Web3Modal V2 version an
 >
 <PlatformTabItem value="react">
 
-To upgrade from Web3Modal v2 to v3 start by removing Web3Modal v2 dependencies `@web3modal/ethereum` and `@web3modal/react`,
-while keeping `wagmi` and `viem` installed. Now you can install Web3Modal v3 library
+To upgrade from Web3Modal v2 to v4 start by removing Web3Modal v2 dependencies `@web3modal/ethereum` and `@web3modal/react`. Now you can install Web3Modal v4 library and update `Wagmi` and `Viem`.
 
 ```bash npm2yarn
 npm install @web3modal/wagmi@latest wagmi@2.x viem@2.x @tanstack/react-query@5.x
@@ -38,8 +37,7 @@ npm install @web3modal/wagmi@latest wagmi@2.x viem@2.x @tanstack/react-query@5.x
 </PlatformTabItem>
 <PlatformTabItem value="javascript">
 
-To upgrade from Web3Modal v2 to v3 start by removing Web3Modal v2 dependencies `@web3modal/ethereum` and `@web3modal/html`,
-while keeping `@wagmi/core` and `viem` installed. Now you can install Web3Modal v3 library
+To upgrade from Web3Modal v2 to v4 start by removing Web3Modal v2 dependencies `@web3modal/ethereum` and `@web3modal/html`. Now you can install Web3Modal v4 library and update `@wagmi/core` and `Viem`.
 
 ```bash npm2yarn
 npm install @web3modal/wagmi@latest @wagmi/connectors @wagmi/core@2.x viem@2.x
@@ -434,7 +432,7 @@ function HomePage() {
 }
 ```
 
-Learn more about Web3Modal v3 [here](./react/about.mdx)
+Learn more about Web3Modal v4 [here](./react/about.mdx)
 
 </PlatformTabItem>
 <PlatformTabItem value="javascript">
@@ -454,7 +452,7 @@ document.getElementById('my-button').addEventListener('click', () => {
 <button id="my-button">Connect Wallet</button>
 ```
 
-Learn more about Web3Modal v3 JavaScript [here](./javascript/about.mdx)
+Learn more about Web3Modal v4 JavaScript [here](./javascript/about.mdx)
 
 </PlatformTabItem>
 </PlatformTabs>
