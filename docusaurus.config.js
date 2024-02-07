@@ -143,7 +143,7 @@ const config = {
                 href: 'https://discord.com/invite/kdTQHQ6AFQ'
               },
               {
-                label: 'Twitter',
+                label: 'X',
                 href: 'https://twitter.com/walletconnect'
               }
             ]
