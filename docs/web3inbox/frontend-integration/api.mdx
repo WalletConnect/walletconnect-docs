@@ -324,7 +324,7 @@ markNotificationsAsRead(notifications.slice(2).map(n => n.id))
 - **unreadFirst:** Whether or not unread messages should be sorted at the top, regardless of timestamp
 - **notifications:** Array of notifications, of type
 - **notification.markAsRead:** Mark the notification as read
-- **markAllReturnedNotificationsAsRead**: Mark currently fetched notifications as read. *This does not mark all notifications on notify server as read, only those available on the client*.
+- **markAllReturnedNotificationsAsRead**: Mark currently fetched notifications as read. *This does not mark all notifications as read, just the ones that have been fetched and returned here.*.
 - **markNotificationsAsRead**: Takes an array of notification IDs and marks them as read
 
 ```ts
@@ -333,7 +333,7 @@ markNotificationsAsRead(notifications.slice(2).map(n => n.id))
   sentAt: number;
   body: string;
   id: string;
-  isUnread: boolean;
+  isRead: boolean;
   url: string | null;
   type: string;
   markAsRead: () => Promise<void>
@@ -397,7 +397,7 @@ markNotificationsAsRead(notifications.slice(2).map(n => n.id))
   sentAt: number;
   body: string;
   id: string;
-  isUnread: boolean;
+  isRead: boolean;
   url: string | null;
   type: string;
   markAsRead: () => Promise<void>
