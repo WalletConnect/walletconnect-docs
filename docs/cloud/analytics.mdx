@@ -231,8 +231,12 @@ Definitions of terms used in WalletConnect Analytics.
   headers={['Term', 'Description']}
   data={[
     [
-      'Session',
-      'A session represents the connection established between your project and your user’s device (includes browsers). Sessions are created when the user interacts with a WalletConnect SDK on your app. If user events are tracked within 30min range they will be considered within the same session.'
+      'Relay:Session',
+      'A session within the context of Relay analytics denotes meaningful user actions, like signing transactions for NFT sales or trades, within a wallet or dapp. It emphasizes core SDK functionality.'
+    ],
+    [
+      'Web3Modal:Session',
+      'A session within the context of Web3modal analytics represents the connection established between your project and your user’s device (includes browsers). Sessions are created when the user interacts with Web3modal on your app. If user events are tracked within 30min range they will be considered within the same session.'
     ],
     [
       'Message',
