@@ -627,7 +627,7 @@ the `SignClient.rejectSession` function.
 
 ```kotlin
 val disconnectionReason: String = /*The reason for disconnecting the Session*/
-val disconnectionCode: String = /*The code for for disconnecting the Session*/
+val disconnectionCode: String = /*The code for disconnecting the Session*/
 val sessionTopic: String = /*Topic from the Session*/
 For reference use CAIP-25: https://github.com/ChainAgnostic/CAIPs/blob/master/CAIPs/caip-25.md
 val disconnectParams = Sign.Params.Disconnect(sessionTopic, disconnectionReason, disconnectionCode)

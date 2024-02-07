@@ -32,7 +32,7 @@ export default function Component() {
 <PlatformTabItem value="wagmi1">
 
 ```ts
-import { useWeb3Modal } from '@web3modal/wagmi1/react'
+import { useWeb3Modal } from '@web3modal/wagmi/react'
 
 export default function Component() {
   const { open, close } = useWeb3Modal()
@@ -96,7 +96,7 @@ List of views you can select
       description: 'User profile - default view when connected'
     },
     {
-      variable: { code: 'All wallets' },
+      variable: { code: 'AllWallets' },
       description: 'Shows the list of all available wallets'
     },
     {
@@ -142,7 +142,7 @@ const { open, selectedNetworkId } = useWeb3ModalState()
 <PlatformTabItem value="wagmi1">
 
 ```ts
-import { useWeb3ModalState } from '@web3modal/wagmi1/react'
+import { useWeb3ModalState } from '@web3modal/wagmi/react'
 
 const { open, selectedNetworkId } = useWeb3ModalState()
 ```

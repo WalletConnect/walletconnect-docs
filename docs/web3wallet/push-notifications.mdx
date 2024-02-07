@@ -135,36 +135,30 @@ Networking.configure(
 Use the same group name inside your notification service extension.
 
 ```Swift
-if let content = bestAttemptContent,
-   let topic = content.userInfo["topic"] as? String,
-   let ciphertext = content.userInfo["message"] as? String,
-   let tag = content.userInfo["tag"] as? UInt {
+override func didReceive(_ request: UNNotificationRequest, withContentHandler contentHandler: @escaping (UNNotificationContent) -> Void) {
+        self.contentHandler = contentHandler
+        self.bestAttemptContent = request.content
 
-    if Web3WalletDecryptionService.canHandle(tag: tag) {
-        let web3WalletDecryptionService = try Web3WalletDecryptionService(groupIdentifier: "group.com.walletconnect.sdk")
+        if let content = bestAttemptContent,
+           let topic = content.userInfo["topic"] as? String,
+           let ciphertext = content.userInfo["message"] as? String,
+           let tag = content.userInfo["tag"] as? UInt {
 
-        // Decrypt the notification payload
-        let decryptedPayload = try web3WalletDecryptionService.decryptMessage(topic: topic, ciphertext: ciphertext, tag: tag)
-        let mutableContent = content.mutableCopy() as! UNMutableNotificationContent
-
-        // Retrieve metadata associated with your peer
-        guard let metadata = web3WalletDecryptionService.getMetadata(topic: topic) else {
-            mutableContent.title = "Error: Cannot get peer's metadata"
-            return mutableContent
+            if Web3WalletDecryptionService.canHandle(tag: tag) {
+                let mutableContent = handleWeb3WalletNotification(content: content, topic: topic, tag: tag, ciphertext: ciphertext)
+                contentHandler(mutableContent)
+            } else if NotifyDecryptionService.canHandle(tag: tag) {
+                let mutableContent = handleNotifyNotification(content: content, topic: topic, ciphertext: ciphertext)
+                contentHandler(mutableContent)
+            } else {
+                let mutableContent = content.mutableCopy() as! UNMutableNotificationContent
+                mutableContent.title = "Error: unknown message tag"
+            }
         }
-
-        // Customise the notification based on the decrypted payload and metadata
-        switch decryptedPayload.requestMethod {
-        case .sessionProposal, .sessionRequest, .authRequest:
-            mutableContent.title = "" // Customise the notification title here based on metadata
-            mutableContent.body = "" // Customise the notification body here based on metadata
-        }
-
-        // Pass the customised notification content to the content handler
-        contentHandler(mutableContent)
     }
-}
 ```
+
+`handleWeb3WalletNotification` and `handleNotifyNotification` methods can be found in our [Sample App](https://github.com/WalletConnect/WalletConnectSwiftV2/blob/main/Example/PNDecryptionService/NotificationService.swift)
 
 </PlatformTabItem>
 
@@ -179,19 +173,19 @@ class SampleFirebaseService: PushMessagingService() {
     }
 
     override fun registeringFailed(token: String, throwable: Throwable) {
-        // Triggered when Firebase Cloud Messaging if there is an error with registering with the Push server with a new token
+        // Triggered when Firebase Cloud Messaging if there is an error with registering with the Push Server with a new token
     }
 
     override fun onMessage(message: Core.Model.Message, originalMessage: RemoteMessage) {
-        // Triggered when a message is sent from the Push server through Firebase Cloud Messaging and the message contains `Core.Model.Message`. The original FCM RemoteMessage is also returned
+        // Triggered when a message is sent from the Push Server through Firebase Cloud Messaging and the message contains `Core.Model.Message`. The original FCM RemoteMessage is also returned
     }
 
     override fun onDefaultBehavior(message: RemoteMessage) {
-        // Triggered when a message is sent from the Push server through Firebase Cloud Messaging and the message does not contain `Core.Model.Message` in the payload. The original FCM RemoteMessage returned instead
+        // Triggered when a message is sent from the Push Server through Firebase Cloud Messaging and the message does not contain `Core.Model.Message` in the payload. The original FCM RemoteMessage returned instead
     }
 
     override fun onError(throwable: Throwable, defaultMessage: RemoteMessage) {
-        // Triggered when there is an error that occurs when a message is received from the Push server
+        // Triggered when there is an error that occurs when a message is received from the Push Server
     }
 }
 ```

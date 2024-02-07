@@ -31,14 +31,15 @@ const mainnet = {
 const metadata = {
   name: 'My Website',
   description: 'My Website description',
-  url: 'https://mywebsite.com',
+  url: 'https://mywebsite.com', // origin must match your domain & subdomain
   icons: ['https://avatars.mywebsite.com/']
 }
 
 createWeb3Modal({
   ethersConfig: defaultConfig({ metadata }),
   chains: [mainnet],
-  projectId
+  projectId,
+  enableAnalytics: true // Optional - defaults to your Cloud configuration
 })
 
 export function Web3ModalProvider({ children }) {
@@ -95,7 +96,7 @@ const mainnet = {
 const metadata = {
   name: 'My Website',
   description: 'My Website description',
-  url: 'https://mywebsite.com',
+  url: 'https://mywebsite.com', // origin must match your domain & subdomain
   icons: ['https://avatars.mywebsite.com/']
 }
 
@@ -109,7 +110,8 @@ createWeb3Modal({
     rpcUrl: '...' // used for the Coinbase SDK
   }),
   chains: [mainnet],
-  projectId
+  projectId,
+  enableAnalytics: true // Optional - defaults to your Cloud configuration
 })
 
 export function Web3Modal({ children }) {

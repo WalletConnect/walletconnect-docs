@@ -12,7 +12,7 @@ In your `App.vue` file set up the following configuration.
 
 ```html
 <script setup>
-  import { createWeb3Modal, defaultWagmiConfig } from '@web3modal/wagmi1/vue'
+  import { createWeb3Modal, defaultWagmiConfig } from '@web3modal/wagmi/vue'
   import { mainnet, arbitrum } from 'viem/chains'
 
   // 1. Get projectId at https://cloud.walletconnect.com
@@ -30,7 +30,12 @@ In your `App.vue` file set up the following configuration.
   const wagmiConfig = defaultWagmiConfig({ chains, projectId, metadata })
 
   // 3. Create modal
-  createWeb3Modal({ wagmiConfig, projectId, chains })
+  createWeb3Modal({
+    wagmiConfig,
+    projectId,
+    chains,
+    enableAnalytics: true // Optional - defaults to your Cloud configuration
+  })
 </script>
 
 <template> // Rest of your app ... </template>
@@ -43,8 +48,8 @@ In your `App.vue` file set up the following configuration.
 
 ```html
 <script setup lang="ts">
-  import { createWeb3Modal } from '@web3modal/wagmi1/vue'
-  import { walletConnectProvider, EIP6963Connector } from '@web3modal/wagmi1'
+  import { createWeb3Modal } from '@web3modal/wagmi/vue'
+  import { walletConnectProvider, EIP6963Connector } from '@web3modal/wagmi'
 
   import { configureChains, createConfig } from '@wagmi/core'
   import { mainnet } from 'viem/chains'
@@ -81,7 +86,12 @@ In your `App.vue` file set up the following configuration.
   })
 
   // 3. Create modal
-  createWeb3Modal({ wagmiConfig, projectId, chains })
+  createWeb3Modal({
+    wagmiConfig,
+    projectId,
+    chains,
+    enableAnalytics: true // Optional - defaults to your Cloud configuration
+  })
 </script>
 
 <template> // Rest of your app ... </template>

@@ -202,10 +202,11 @@ module.exports = {
                   items: [
                     'web3inbox/frontend-integration/usage',
                     'web3inbox/frontend-integration/api',
-                    'web3inbox/frontend-integration/examples'
+                    'web3inbox/frontend-integration/examples',
+                    'web3inbox/frontend-integration/migration-guide'
                   ]
                 },
-                'web3inbox/sending-notifications',
+                'web3inbox/backend-integration',
                 'web3inbox/demo',
                 {
                   type: 'category',
@@ -252,6 +253,7 @@ module.exports = {
                 'web3wallet/notify/resources'
               ]
             },
+            'web3wallet/best_practises',
             'web3wallet/resources'
           ]
         }
@@ -267,7 +269,8 @@ module.exports = {
         'cloud/explorer-submission',
         'cloud/verify',
         'cloud/relay',
-        'cloud/blockchain-api'
+        'cloud/blockchain-api',
+        'cloud/analytics'
       ]
     },
     {
@@ -378,7 +381,7 @@ module.exports = {
             {
               type: 'category',
               label: 'Notify',
-              items: ['api/notify/about', 'api/notify/usage', 'api/notify/migration-guide']
+              items: ['api/notify/about']
             },
             {
               type: 'category',
@@ -392,7 +395,7 @@ module.exports = {
             }
           ]
         },
-        'advanced/echo-server'
+        'advanced/push-server'
       ]
     },
     {

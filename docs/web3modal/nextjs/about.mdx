@@ -29,19 +29,15 @@ These steps are specific to [Next.js](https://nextjs.org/) app router.
 <PlatformTabs groupId="eth-lib" activeOptions={["wagmi", "wagmi1", "ethers5","ethers"]}>
 <PlatformTabItem value="wagmi">
 
-:::caution
-Wagmi v2 support is currently in alpha.
-:::
-
 ```bash npm2yarn
-npm install @web3modal/wagmi@4.0.0-alpha.0 wagmi viem @tanstack/react-query
+npm install @web3modal/wagmi wagmi viem @tanstack/react-query
 ```
 
 </PlatformTabItem>
 <PlatformTabItem value="wagmi1">
 
 ```bash npm2yarn
-npm install @web3modal/wagmi1 wagmi@1.4.13 viem@1.21.4
+npm install @web3modal/wagmi@3.5.7 wagmi@1.4.13 viem@1.21.4
 ```
 
 </PlatformTabItem>
@@ -252,5 +248,4 @@ const nextConfig = {
 }
 ```
 
-- If `SWCMinify` is flagged, it must be false in the `next.config.js` file
-- If you are using Wagmi, [dynamic imports](https://nextjs.org/docs/app/building-your-application/optimizing/lazy-loading#nextdynamic) or `supressHydrationWarning` are recommended tro prevent `Hydration mismatch` errors
+- [Learn more about SSR with Wagmi](https://wagmi.sh/react/guides/ssr)
