@@ -1648,7 +1648,7 @@ await web3Wallet.disconnectSession(
 );
 ```
 
-Using `disconnectSession()` alone will make the pairing toppic to persist so it can be re-used until it expires. If you want to disconnect (remove) the pairing topic as well you would have add another call as follows:
+Using `disconnectSession()` alone will make the pairing topic persist, i.e, it can be re-used until it expires. If you want to disconnect (remove) the pairing topic as well you would have add another call as follows:
 
 ```dart
 await web3Wallet.core.pairing.disconnect(
