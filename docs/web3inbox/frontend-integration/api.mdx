@@ -326,6 +326,7 @@ markNotificationsAsRead(notifications.slice(2).map(n => n.id))
   - **isInfiniteScroll:** Whether or not to keep already fetched notifications when getting next page
   - **params:* (optional) Additional parameters
 - **unreadFirst:** (optional, default `false`) Whether or not unread messages should be sorted at the top, regardless of timestamp
+- **nextPage:**: A function to be called to fetch the next page of notifications
 - **notifications:** Array of notifications, of type
 - **notification.markAsRead:** Mark the notification as read
 - **markAllReturnedNotificationsAsRead**: Mark currently fetched notifications as read. *This does not mark all notifications as read, just the ones that have been fetched and returned here.*.
