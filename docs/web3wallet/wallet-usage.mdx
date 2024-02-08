@@ -1136,7 +1136,7 @@ ID along with the respond data to the `Web3Wallet.respondSessionRequest` functio
 
 To handle a session request, such as `personal_sign`, you would have to register a request handler as mentioned in point 2 of Namespace Builder section.
 
-You would have to register a handler for every chain and method you want to support. So let's say your wallet support `eip155:1` and `eip155:137`, this would a simply code for it:
+You would have to register a handler for every chain and method you want to support. So let's say your wallet supports `eip155:1` and `eip155:137`. This would translate to:
 
 ```dart
 final supportedChains = ['eip155:1', 'eip155:137'];
