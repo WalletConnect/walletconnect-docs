@@ -1853,7 +1853,7 @@ Web3Wallet.registerDeviceToken(
 
 #### Supporting session events
 
-In order to support session events, such as `chainChanged` or `accountChanged` your would have first to register an event emitter for such events for every chain you want to emit an event for similar to, similar to request handlers.
+In order to support session events, such as `chainChanged` or `accountChanged`, you would have to to register an event emitter for such events, for every chain you want to emit an event for (similar to request handlers).
 
 ```dart
 final supportedChains = ['eip155:1', 'eip155:137'];
