@@ -164,6 +164,8 @@ function Messages() {
             <div key={id} className={styles.message}>
               <h3>{message.title}</h3>
               <p>{message.body}</p>
+              <p>{message.isRead ? "Read" : "Unread"}</p>
+              <button onClick={message.markAsRead}>Mark as read</button>
             </div>
           ))
         )}
@@ -206,7 +208,8 @@ const isInfiniteScroll = true;
 
 client.pageNotifications(notificationsPerPage, isInfiniteScroll)((notifications) => {
   // add logic to display notifications here. 
-  //if isInfiniteScroll is true, notifications will contain all notifications fetched so far, else it will only fetch current page
+  // if isInfiniteScroll is true, notifications will contain all notifications fetched so far, else it will only fetch current page
+  // See API docs for more information on `pageNotifications()`
 })
 ```
 
