@@ -325,7 +325,7 @@ markNotificationsAsRead(notifications.slice(2).map(n => n.id))
 - **notifications:** Array of notifications, of type
 - **notification.markAsRead:** Mark the notification as read
 - **markAllReturnedNotificationsAsRead**: Mark currently fetched notifications as read. *This does not mark all notifications as read, just the ones that have been fetched and returned here.*.
-- **markNotificationsAsRead**: Takes an array of notification IDs and marks them as read
+- **markNotificationsAsRead**: Takes an array of notification IDs and marks them as read. Max 1000 IDs
 
 ```ts
 {
@@ -389,7 +389,7 @@ markNotificationsAsRead(notifications.slice(2).map(n => n.id))
 - **notifications:** Array of notifications, of type
 - **notification.markAsRead:** Mark the notification as read
 - **markAllReturnedNotificationsAsRead**: Mark currently fetched notifications as read. *This does not mark all notifications as read, just the ones that have been fetched and returned here.*.
-- **markNotificationsAsRead**: Takes an array of notification IDs and marks them as read
+- **markNotificationsAsRead**: Takes an array of notification IDs and marks them as read. Max 1000 IDs
 
 ```ts
 {
