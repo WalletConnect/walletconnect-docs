@@ -226,6 +226,7 @@ const isSubscribed = Boolean(subscription)
   scope: ScopeMap
   expiry: number
   symkey: string
+  unreadCount: number
 }
 ```
 
@@ -275,6 +276,7 @@ client.watchSubscriptions(subscriptions => console.log({ subscriptions }))
   scope: ScopeMap
   expiry: number
   symkey: string
+  unreadCount: number
 }
 ```
 
