@@ -48,7 +48,7 @@ Web3Modal.initialize(
 
 ### Show installed wallets
 
-Allows you to show the `INSTALLED` label under the wallet icon in the list. To use this feature, you need to add selected wallets that you want to handle to `AndroidManifest.xml` as a query. Specs: [Android Specs](https://developer.android.com/guide/topics/manifest/queries-element)
+Allows you to show the `INSTALLED` icon in the list. To use this feature, you need to add selected wallets that you want to handle to `AndroidManifest.xml` as a query. Specs: [Android Specs](https://developer.android.com/guide/topics/manifest/queries-element)
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
@@ -62,4 +62,37 @@ Allows you to show the `INSTALLED` label under the wallet icon in the list. To u
         ...
     </application>
 </manifest>
+```
+
+### Enable coinbase
+
+:::caution
+**The Coinbase integration is Experimental**.
+It's public API and associated documentation may still see significant and breaking changes.
+:::
+
+Coinbase has been added since version 1.2.0
+
+```kotlin
+val initParams = Modal.Params.Init(core = CoreClient, coinbaseEnabled = true)
+
+Web3Modal.initialize(
+    init = initParams,
+    onSuccess = {
+        // Callback will be called if initialization is successful
+    },
+    onError = { error ->
+        // Error will be thrown if there's an issue during initialization
+    }
+)
+```
+
+Coinbase Wallet SDK requires Web3Modal registration in Activity to receive responses from Coinbase wallet
+
+```kotlin
+    fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        Web3Modal.register(this)
+        // Your content
+    }
 ```

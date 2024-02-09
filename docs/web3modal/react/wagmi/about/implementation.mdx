@@ -32,7 +32,7 @@ const metadata = {
   icons: ['https://avatars.githubusercontent.com/u/37784886']
 }
 
-const chains = [mainnet, arbitrum]
+const chains = [mainnet, arbitrum] as const
 const config = defaultWagmiConfig({
   chains, // required
   projectId, // required
@@ -48,11 +48,10 @@ const config = defaultWagmiConfig({
 createWeb3Modal({
   wagmiConfig: config,
   projectId,
-  chains,
   enableAnalytics: true // Optional - defaults to your Cloud configuration
 })
 
-export function Web3Modal({ children }) {
+export function ContextProvider({ children }) {
   return (
     <WagmiProvider config={config}>
       <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
@@ -116,7 +115,7 @@ createWeb3Modal({
   enableAnalytics: true // Optional - defaults to your Cloud configuration
 })
 
-export function Web3Modal({ children }) {
+export function ContextProvider({ children }) {
   return (
     <WagmiProvider config={config}>
       <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>

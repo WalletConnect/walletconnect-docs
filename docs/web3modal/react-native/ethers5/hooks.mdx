@@ -1,0 +1,54 @@
+import Button from '../../../components/button'
+
+### useWeb3ModalAccount
+
+Hook that returns the client's information.
+
+```tsx
+import { useWeb3ModalAccount } from '@web3modal/ethers5-react-native'
+
+function Components() {
+  const { address, chainId, isConnected } = useWeb3ModalAccount()
+
+  //...
+}
+```
+
+### useWeb3ModalProvider
+
+Hook that returns the `walletProvider` and the `WalletProviderType`.
+
+```tsx
+import { ethers } from 'ethers'
+import { useWeb3ModalProvider } from '@web3modal/ethers5-react-native'
+
+function Components() {
+  const { walletProvider } = useWeb3ModalProvider()
+
+  async function onSignMessage() {
+    const provider = new ethers.providers.Web3Provider(walletProvider)
+    const signer = provider.getSigner()
+    const signature = await signer?.signMessage('Hello Web3Modal Ethers')
+    console.log(signature)
+  }
+
+  return <button onClick={() => onSignMessage()}>Sign Message</button>
+}
+```
+
+### useWeb3ModalError
+
+```ts
+import { useWeb3ModalError } from '@web3modal/ethers5-react-native'
+
+function Components() {
+  const { error } = useWeb3ModalError()
+
+  //...
+}
+```
+
+<Button
+  name="Learn More About Ethers v5"
+  url="https://docs.ethers.org/v5/getting-started/#getting-started--contracts"
+/>

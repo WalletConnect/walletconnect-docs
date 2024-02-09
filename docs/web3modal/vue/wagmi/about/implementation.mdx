@@ -36,11 +36,10 @@ In your `App.vue` file set up the following configuration.
     enableWalletConnect: true, // Optional - true by default
     enableInjected: true, // Optional - true by default
     enableEIP6963: true, // Optional - true by default
-    enableCoinbase: true, // Optional - true by default
+    enableCoinbase: true // Optional - true by default
   })
 
   reconnect(config)
-
   // 3. Create modal
   createWeb3Modal({
     wagmiConfig: config,
@@ -61,7 +60,7 @@ In your `App.vue` file set up the following configuration.
 <script setup lang="ts">
   import { createWeb3Modal } from '@web3modal/wagmi'
 
-  import { http, createConfig, reconnect } from '@wagmi/core'
+  import { reconnect, http, createConfig } from '@wagmi/core'
   import { mainnet, sepolia } from '@wagmi/core/chains'
   import { coinbaseWallet, walletConnect, injected } from '@wagmi/connectors'
 
@@ -92,7 +91,6 @@ In your `App.vue` file set up the following configuration.
   })
 
   reconnect(config)
-
   // 3. Create modal
   createWeb3Modal({
     wagmiConfig: config,

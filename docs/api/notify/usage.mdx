@@ -197,9 +197,13 @@ await notifyClient.update({
   topic,
   scope: ['alerts']
 })
-
 // -> Success/Failure will be received via the `notify_update` event registered previously.
 // -> Updated subscription will be emitted via the `notify_subscriptions_changed` watcher event.
+
+// get notification types by accessing `scope` member of a dapp's subscription
+const notificationTypes = notifyClient
+  .getActiveSubscriptions({ account })
+  .filter(subscription => subscription.topic === topic).scope
 ```
 
 #### Removing an existing subscription
@@ -218,11 +222,15 @@ const accountSubscriptions = notifyClient.getActiveSubscriptions({
 })
 ```
 
-#### Retrieving all past messages for a given subscription
+#### Retrieving past messages for a given subscription
 
 ```javascript
 // Will return all past Notify messages for the provided subscription topic, keyed by messageId.
-const messageHistory = notifyClient.getMessageHistory({ topic })
+const messageHistory = notifyClient.getNotificationHistory({
+  topic,
+  limit: 10,
+  startingAfter: 'notification-id'
+})
 ```
 
 </PlatformTabItem>
@@ -676,19 +684,6 @@ NotifyClient.deleteSubscription(params) { error ->
 }
 ```
 
-#### Delete Notify Message
-
-To delete a notify record message, pass `Notify.Params.DeleteMessage` with the request id of the record to be deleted. If unsuccessful, an error is returned in the callback. The id can be fetched from the `NotifyClient.getMessageHistory()`
-
-```kotlin
-val id = // id of notify record to be deleted
-val params = Notify.Params.DeleteMessage(topic)
-
-NotifyClient.deleteNotifyMessage(params) { error ->
-    // callback for when the delete has failed
-}
-```
-
 #### Get Active Subscriptions
 
 To get a map of all the active subscriptions, call the `getActiveSubscriptions` function. It will return a map with the topic as the key and `Notify.Model.Subscription` as the value.
@@ -843,14 +838,6 @@ notifyClient.on('notify_subscriptions_changed', ({ params }) => {
 This is a one-time action per account. It does not need to be repeated after initial registration of the new account.
 :::
 
-To register an identity key, you must provide a callback to the `onSign: (message: string) => string` parameter of the `register` method.
-In order to authorize the Notify subscription, the SDK will trigger this callback with a message to sign, expecting the signature for that message to be returned.
-
-Some suggested ways to implement the `onSign` callback are via:
-
-- Ethers.js [`Wallet.signMessage` method](https://docs.ethers.org/v5/api/signer/#Signer-signMessage)
-- The [`signMessage` method](https://wagmi.sh/core/actions/signMessage) in `@wagmi/core`
-
 ### Registering as a dapp
 
 ```javascript
@@ -938,6 +925,11 @@ await notifyClient.update({
 
 // -> Success/Failure will be received via the `notify_update` event registered previously.
 // -> Updated subscription will be emitted via the `notify_subscriptions_changed` watcher event.
+
+// get notification types by accessing `scope` member of a dapp's subscription
+const notificationTypes = notifyClient
+  .getActiveSubscriptions({ account })
+  .filter(subscription => subscription.topic === topic).scope
 ```
 
 #### Removing an existing subscription
@@ -960,7 +952,7 @@ const accountSubscriptions = notifyClient.getActiveSubscriptions({
 
 ```javascript
 // Will return all past Notify messages for the provided subscription topic, keyed by messageId.
-const messageHistory = notifyClient.getMessageHistory({ topic })
+const messageHistory = notifyClient.getNotificationHistory({ topic })
 ```
 
 </PlatformTabItem>

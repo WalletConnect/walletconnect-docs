@@ -1,4 +1,6 @@
 import Table from '../../components/Table'
+import PlatformTabs from '../../components/PlatformTabs'
+import PlatformTabItem from '../../components/PlatformTabItem'
 
 # Options
 
@@ -12,14 +14,54 @@ createWeb3Modal({ projectId, chains, ...options })
 
 You can set a desired chain for the initial connection:
 
+<PlatformTabs groupId="eth-lib" activeOptions={["wagmi1", "ethers", "ethers5"]}>
+
+<PlatformTabItem value="wagmi1">
 ```ts
-import { mainnet } from 'viem/chains'
+  import { mainnet } from 'viem/chains'
+
+  createWeb3Modal({
+    //...
+    defaultChain: mainnet
+  })
+```
+</PlatformTabItem>
+
+<PlatformTabItem value="ethers">
+```ts
+const mainnet = {
+  chainId: 1,
+  name: 'Ethereum',
+  currency: 'ETH',
+  explorerUrl: 'https://etherscan.io',
+  rpcUrl: 'https://cloudflare-eth.com',
+};
 
 createWeb3Modal({
   //...
   defaultChain: mainnet
 })
 ```
+</PlatformTabItem>
+
+<PlatformTabItem value="ethers5">
+```ts
+const mainnet = {
+  chainId: 1,
+  name: 'Ethereum',
+  currency: 'ETH',
+  explorerUrl: 'https://etherscan.io',
+  rpcUrl: 'https://cloudflare-eth.com',
+};
+
+createWeb3Modal({
+  //...
+  defaultChain: mainnet
+})
+```
+</PlatformTabItem>
+
+</PlatformTabs>
 
 ## clipboardClient
 
@@ -53,6 +95,29 @@ createWeb3Modal({
       address: '0x7ceB23fD6bC0adD59E62ac25578270cFf1b9f619'
     }
   }
+})
+```
+
+## customWallets
+
+Add custom wallets to the modal's main view. `customWallets` is an array of objects, where each object contains specific information of a custom wallet.
+
+```ts
+createWeb3Modal({
+  //...
+  customWallets: [
+    {
+      id: 'myCustomWallet',
+      name: 'My Custom Wallet',
+      homepage: 'www.mycustomwallet.com', // Optional
+      image_url: 'my_custom_wallet_image', // Optional
+      mobile_link: 'mobile_link', // Optional - Deeplink or universal
+      desktop_link: 'desktop_link', // Optional - Deeplink
+      webapp_link: 'webapp_link', // Optional
+      app_store: 'app_store', // Optional
+      play_store: 'play_store' // Optional
+    }
+  ]
 })
 ```
 

@@ -5,7 +5,7 @@ import useBaseUrl from '@docusaurus/useBaseUrl'
 
 This page explains the configuration required in order to obtain a Notify API Secret and configure your project to send notifications.
 
-For a quick start to experiment with, you can try the [gm-hackers template](https://github.com/WalletConnect/gm-hackers) and following the steps in the README.
+For a quick start to experiment with, you can try the [web3inbox template](https://github.com/WalletConnect/web3inbox-client/tree/main/apps/web) and following the steps in the README.
 
 <CloudBanner />
 
@@ -107,9 +107,13 @@ To test this, you can use the utility provided in cloud under the Notify API sec
 
 1. Now you are ready for accounts to subscribe to your app and send notifications to them using your Notify API Secret.
 
-   - Read more on [sending notifications](./sending-notifications)
    - Read more on [frontend integration](./frontend-integration/usage)
+   - Read more on [backend integration](./backend-integration)
 
-1. If you haven't already, [Verify your apps domain](../cloud/verify) for improved security.
+1. If you haven't already, [verify your apps domain](../cloud/verify) for improved security.
 
 1. Ensure your app has a [published Explorer listing](../cloud/explorer) for discoverability.
+
+1. Navigate to the `Metrics` tab and select Web3Inbox from the dropdown to access analytics for your app. [Learn more about Web3Inbox Analytics](../cloud/analytics#web3inbox).
+
+   <img className="image-margin" src={useBaseUrl('/img/w3i/metrics.png')} />
