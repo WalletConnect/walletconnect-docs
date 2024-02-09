@@ -142,6 +142,10 @@ const config = {
             {
               label: 'GitHub',
               href: 'https://github.com/walletconnect/walletconnect-docs/'
+            },
+            {
+              label: 'Farcaster',
+              href: 'https://warpcast.com/walletconnect/'
             }
           ]
         }
