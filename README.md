@@ -6,8 +6,8 @@ Source can be viewed in [`docs`](./docs/) directory.
 
 ## Running Locally
 
-1. `yarn install`
-2. `yarn start`
+1. `pnpm install`
+2. `pnpm start`
 3. Open `http://localhost:3000/`
 
 ## Adding a New Page
