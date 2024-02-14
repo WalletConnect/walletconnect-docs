@@ -20,7 +20,7 @@ For inquiries about self-hosting, please send an email to devrel@walletconnect.c
 
 ![create-push-url](/assets/create-push-url.png)
 
-3. From the same settings tab, add the [FCM](#firebase-cloud-messaging-fcm) and/or [APNS](#apple-push-notifications-apns) details.
+3. From the same settings tab, you will see the FCM and the APNS settings becomes available to setup. Add your [FCM](#firebase-cloud-messaging-fcm) and/or [APNS](#apple-push-notifications-apns) details.
 
 ![fmc-and-apns-details-form](/assets/apns-fmc-details.png)
 
