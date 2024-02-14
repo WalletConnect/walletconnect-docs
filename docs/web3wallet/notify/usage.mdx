@@ -939,7 +939,8 @@ async function onMessageReceived(remoteMessage) {
       channelId: 'default',
       importance: AndroidImportance.HIGH,
       visibility: AndroidVisibility.PUBLIC,
-      smallIcon: 'ic_launcher',
+      smallIcon: 'ic_launcher', // optional, defaults to 'ic_launcher'.
+      // pressAction is needed if you want the notification to open the app when pressed. See https://notifee.app/react-native/docs/ios/interaction#press-action
       pressAction: {
         id: 'default'
       }
