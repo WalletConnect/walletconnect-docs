@@ -355,7 +355,7 @@ Example usage
 
 ```swift
 do {
-    let sessionNamespaces = try AutoNamespaces.build(
+    sessionNamespaces = try AutoNamespaces.build(
         sessionProposal: proposal,
         chains: [Blockchain("eip155:1")!, Blockchain("eip155:137")!],
         methods: ["eth_sendTransaction", "personal_sign"],
@@ -365,10 +365,14 @@ do {
             Account(blockchain: Blockchain("eip155:137")!, address: "0xab16a96d359ec26a11e2c2b3d8f8b8942d5bfcdb")!
         ]
     )
-    try await Web3Wallet.instance.approve(proposalId: proposal.id, namespaces: sessionNamespaces)
-} catch {
-    print(error)
+} catch let error as AutoNamespacesError {
+    // reject session proposal if AutoNamespace build function threw
+    try await reject(proposal: proposal, reason: RejectionReason(from: error))
+    return
 }
+// approve session with sessionNamespaces
+try await Web3Wallet.instance.approve(proposalId: proposal.id, namespaces: sessionNamespaces)
+
 ```
 
 </PlatformTabItem>
