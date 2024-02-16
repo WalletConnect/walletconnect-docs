@@ -31,6 +31,11 @@ module.exports = {
           items: [
             'web3modal/about',
             'web3modal/quickstart',
+            {
+              type: 'category',
+              label: 'Solana',
+              items: [{ type: 'doc', label: 'Getting started', id: 'web3modal/solana/about' }]
+            },
 
             {
               type: 'category',
