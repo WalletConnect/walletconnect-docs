@@ -55,7 +55,7 @@ Following with our main.js file, we can now add the needed logic to open the mod
 import { watchAccount, disconnect, getAccount } from '@wagmi/core'
 
 function connect() {
-  if (getAccount().isConnected) {
+  if (getAccount(wagmiConfig).isConnected) {
     disconnect()
   } else {
     modal.open()
