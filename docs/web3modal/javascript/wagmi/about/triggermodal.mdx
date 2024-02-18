@@ -55,7 +55,7 @@ Following with our main.js file, we can now add the needed logic to open the mod
 import { watchAccount, disconnect, getAccount } from '@wagmi/core'
 
 function connect() {
-  if (getAccount(wagmiConfig).isConnected) {
+  if (getAccount(config).isConnected) {
     disconnect()
   } else {
     modal.open()
@@ -68,7 +68,7 @@ const userEl = document.getElementById('user')
 btnEl.addEventListener('click', connect)
 
 // listening for account changes
-watchAccount(wagmiConfig,
+watchAccount(config,
   {
     onChange(account) {
       userEl.innerText = account.address ?? ''
