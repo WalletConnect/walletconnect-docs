@@ -56,7 +56,7 @@ import { watchAccount, disconnect, getAccount } from '@wagmi/core'
 
 function connect() {
   if (getAccount(config).isConnected) {
-    disconnect()
+    disconnect(config)
   } else {
     modal.open()
   }
