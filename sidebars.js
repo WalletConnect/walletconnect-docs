@@ -33,12 +33,6 @@ module.exports = {
             'web3modal/quickstart',
             {
               type: 'category',
-              label: 'Solana',
-              items: [{ type: 'doc', label: 'Getting started', id: 'web3modal/solana/about' }]
-            },
-
-            {
-              type: 'category',
               className: 'sidebar__logo sidebar__logo--react',
               label: 'React',
               items: [

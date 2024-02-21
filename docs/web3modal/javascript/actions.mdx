@@ -6,6 +6,7 @@ import WagmiActions from './wagmi/actions.mdx'
 import Wagmi1Actions from './wagmi1/actions.mdx'
 import Ethers5Actions from './ethers5/actions.mdx'
 import EthersActions from './ethers/actions.mdx'
+import SolanaActions from './solana/actions.mdx'
 
 # Actions
 
@@ -151,9 +152,9 @@ modal.getEvent() // get last event
 modal.subscribeEvents(event => console.log(event)) // subscribe to events
 ```
 
-## Ethereum Library
+## Library
 
-<PlatformTabs groupId="eth-lib" activeOptions={["wagmi", "wagmi1", "ethers5", "ethers"]}>
+<PlatformTabs groupId="eth-lib" activeOptions={["wagmi", "wagmi1", "ethers5", "ethers","solana"]}>
 <PlatformTabItem value="wagmi">
 
 <WagmiActions />
@@ -172,6 +173,11 @@ modal.subscribeEvents(event => console.log(event)) // subscribe to events
 <PlatformTabItem value="ethers">
 
 <EthersActions />
+
+</PlatformTabItem>
+<PlatformTabItem value="solana">
+
+<SolanaActions />
 
 </PlatformTabItem>
 </PlatformTabs>

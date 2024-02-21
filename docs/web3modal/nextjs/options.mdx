@@ -15,7 +15,7 @@ createWeb3Modal({ wagmiConfig, projectId, chains, ...options })
 
 You can set a desired chain for the initial connection:
 
-<PlatformTabs groupId="eth-lib" activeOptions={["wagmi","ethers"]}>
+<PlatformTabs groupId="eth-lib" activeOptions={["wagmi","ethers","solana"]}>
 <PlatformTabItem value="wagmi">
 
 ```ts
@@ -42,6 +42,24 @@ const mainnet = {
 createWeb3Modal({
   //...
   defaultChain: mainnet
+})
+```
+
+</PlatformTabItem>
+<PlatformTabItem value="solana">
+
+```ts
+const solanaMainnet = {
+  chainId: '4sGjMW1sUnHzSxGspuhpqLDx6wiyjNtZ',
+  name: 'Solana',
+  currency: 'SOL',
+  explorerUrl: 'https://solscan.io',
+  rpcUrl: `https://rpc.walletconnect.com/v1?chainId=solana:4sGjMW1sUnHzSxGspuhpqLDx6wiyjNtZ&projectId=${projectId}` // Get projectId from https://cloud.walletconnect.com
+}
+
+createWeb3Modal({
+  //...
+  defaultChain: solanaMainnet
 })
 ```
 
@@ -125,7 +143,7 @@ createWeb3Modal({
 
 ## connectorImages
 
-<PlatformTabs groupId="eth-lib" activeOptions={["wagmi","ethers"]}>
+<PlatformTabs groupId="eth-lib" activeOptions={["wagmi","ethers","solana"]}>
 <PlatformTabItem value="wagmi">
 
 Set or override the images of any [connector](https://wagmi.sh/core/connectors/injected). The key of each property must match the id of the connector.
@@ -148,6 +166,21 @@ Set or override the images of any connector.
 createWeb3Modal({
   connectorImages: {
     coinbaseWallet: 'https://images.mydapp.com/coinbase.png',
+    walletConnect: 'https://images.mydapp.com/walletconnect.png'
+  }
+})
+```
+
+</PlatformTabItem>
+<PlatformTabItem value="solana">
+
+Set or override the images of any connector.
+
+```ts
+createWeb3Modal({
+  connectorImages: {
+    coinbaseWallet: 'https://images.mydapp.com/coinbase.png',
+    phantom: 'https://images.mydapp.com/phantom.png',
     walletConnect: 'https://images.mydapp.com/walletconnect.png'
   }
 })
