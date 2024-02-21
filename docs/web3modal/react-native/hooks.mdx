@@ -141,6 +141,39 @@ The modal state consists of two reactive values:
   ]}
 />
 
+
+## useWeb3ModalEvents
+
+Get the last tracked modal event
+
+<PlatformTabs groupId="eth-lib" activeOptions={["wagmi1", "ethers", "ethers5"]}>
+
+<PlatformTabItem value="wagmi1">
+  ```ts
+    import { useWeb3ModalEvents } from '@web3modal/wagmi-react-native'
+
+    const event = useWeb3ModalEvents()
+  ```
+</PlatformTabItem>
+
+<PlatformTabItem value="ethers">
+```ts
+  import { useWeb3ModalEvents } from '@web3modal/ethers-react-native'
+
+  const event = useWeb3ModalEvents()
+```
+</PlatformTabItem>
+
+<PlatformTabItem value="ethers5">
+```ts
+  import { useWeb3ModalEvents } from '@web3modal/ethers5-react-native'
+
+  const event = useWeb3ModalEvents()
+```
+</PlatformTabItem>
+
+</PlatformTabs>
+
 ## Ethereum Library
 
 <PlatformTabs groupId="eth-lib" activeOptions={["wagmi1", "ethers", "ethers5"]}>

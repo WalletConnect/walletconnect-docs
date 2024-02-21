@@ -54,7 +54,8 @@ const chains = [mainnet, polygon]
 createWeb3Modal({
   projectId,
   chains,
-  config
+  config,
+  enableAnalytics: true // Optional - must also be enabled in your Cloud configuration
 })
 
 export default function App() {
