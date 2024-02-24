@@ -98,7 +98,7 @@ curl -X POST 'https://notify.walletconnect.com/<PROJECT_ID>/notify' \
 
 ## Get subscribers
 
-You can tell if an account is subscribed and get information about subscribers using the `/v1/<project-id>/get-subscribers` endpoint. You can provide up to 100 accounts in the request.
+You can tell if an account is subscribed and get information about subscribers using the `/v1/<project-id>/subscribers` endpoint. You can provide up to 100 accounts in the request.
 
 If the account is not a subscriber, it will be `null`. If the account is subscribed, it will include a list of notification types the subscriber has opted-into receiving.
 
@@ -118,7 +118,7 @@ const requestBody: RequestBody = {
   ]
 }
 
-const response = await fetch(`https://notify.walletconnect.com/v1/${PROJECT_ID}/get-subscribers`, {
+const response = await fetch(`https://notify.walletconnect.com/v1/${PROJECT_ID}/subscribers`, {
   method: 'POST',
   headers: {
     Authorization: `Bearer ${NOTIFY_API_SECRET}`
@@ -145,7 +145,7 @@ type Subscriber = {
 <TabItem value="curl" label="cURL">
 
 ```bash
-curl -X POST 'https://notify.walletconnect.com/v1/<PROJECT_ID>/get-subscribers' \
+curl -X POST 'https://notify.walletconnect.com/v1/<PROJECT_ID>/subscribers' \
   --header 'Authorization: Bearer <NOTIFY_API_SECRET>' \
   --header 'Content-Type: application/json' \
   --data '{
@@ -218,7 +218,7 @@ Rate limits are implemented as [token bucket](https://en.wikipedia.org/wiki/Toke
 - `POST /<project-id>/notify`:
   - Each app can send 2 notifications per hour to an account, with a burst up to 50. Accounts that have been rate limited will be returned in the request response. Exceptions may be made on a per-project basis for special circumstances.
   - Each app can call this endpoint 2 times per second with a burst up to 20. Rate limited requests will return a 429 status code.
-- `POST /v1/<project-id>/get-subscribers`
+- `POST /v1/<project-id>/subscribers`
   - Each app can call this endpoint 100 times per second with a burst up to 100. Rate limited requests will return a 429 status code.
 - `GET /<project-id>/subscribers`
   - Each app can call this endpoint 1 time every 5 minutes with a burst up to 2. Rate limited requests will return a 429 status code.
