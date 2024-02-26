@@ -48,7 +48,7 @@ Example usage:
 
 <TabItem value="javascript" label="JavaScript">
 
-```javascript
+```typescript
 const PROJECT_ID = '<PROJECT_ID>'
 const NOTIFY_API_SECRET = '<NOTIFY_API_SECRET>'
 const response = await fetch(`https://notify.walletconnect.com/${PROJECT_ID}/notify`, {
@@ -64,8 +64,10 @@ const response = await fetch(`https://notify.walletconnect.com/${PROJECT_ID}/not
       body: 'The price of Ethereum has gone up 10%',
       url: 'https://app.example.com'
     },
-    accounts: ['eip155:1:0x9AfEaC202C837df470b5A145e0EfD6a574B21029']
-  })
+    accounts: [
+      'eip155:1:0x9AfEaC202C837df470b5A145e0EfD6a574B21029'
+    ]
+  }),
 })
 ```
 
@@ -96,7 +98,87 @@ curl -X POST 'https://notify.walletconnect.com/<PROJECT_ID>/notify' \
 
 ## Get subscribers
 
-You can get a list of all of the currently-subscribed accounts by calling the `/subscribers` endpoint:
+You can tell if an account is subscribed and get information about subscribers using the `/v1/<project-id>/subscribers` endpoint. You can provide up to 100 accounts in the request.
+
+If the account is subscribed, it will be returned as a key in the response along with a list of subscribed notification types as the value. If the account is not a subscriber, it will not be returned in the response.
+
+Example usage:
+
+<Tabs queryString={'api-client'}>
+
+<TabItem value="javascript" label="JavaScript">
+
+```typescript
+const PROJECT_ID = '<PROJECT_ID>'
+const NOTIFY_API_SECRET = '<NOTIFY_API_SECRET>'
+const requestBody: RequestBody = {
+  accounts: [
+    'eip155:1:0x9AfEaC202C837df470b5A145e0EfD6a574B21029',
+    'eip155:1:0x0000000000000000000000000000000000000000'
+  ]
+}
+
+const response = await fetch(`https://notify.walletconnect.com/v1/${PROJECT_ID}/subscribers`, {
+  method: 'POST',
+  headers: {
+    Authorization: `Bearer ${NOTIFY_API_SECRET}`
+  }
+  body: JSON.stringify(requestBody)
+})
+
+const subscribers: ResponseBody = await response.json()
+
+type RequestBody = {
+  // Max 100 accounts
+  accounts: string[]
+}
+type ResponseBody = {
+  [account: string]: Subscriber
+}
+type Subscriber = {
+  notification_types: string[]
+}
+```
+
+</TabItem>
+
+<TabItem value="curl" label="cURL">
+
+```bash
+curl -X POST 'https://notify.walletconnect.com/v1/<PROJECT_ID>/subscribers' \
+  --header 'Authorization: Bearer <NOTIFY_API_SECRET>' \
+  --header 'Content-Type: application/json' \
+  --data '{
+    "accounts": [
+      "eip155:1:0x9AfEaC202C837df470b5A145e0EfD6a574B21029",
+      "eip155:1:0x0000000000000000000000000000000000000000"
+    ]
+  }'
+```
+
+</TabItem>
+
+</Tabs>
+
+Example response:
+
+```jsonc
+{
+  "eip155:1:0x9AfEaC202C837df470b5A145e0EfD6a574B21029": {
+    "notification_types": ["4d1c97ad-c182-4097-8f2c-8f80c0674df2"]
+  }
+}
+```
+
+## Get all subscribers
+
+:::caution
+This endpoint will download _all_ subscribers of your app, which is an expensive operation and can take several seconds to complete. Because of this, it has a low rate limit.
+:::
+
+You can get a list of all of the currently-subscribed accounts by calling the `/<project-id>/subscribers` endpoint.
+
+Example usage:
 
 <Tabs queryString={'api-client'}>
 
@@ -132,8 +214,10 @@ To protect our system and subscribers, various limits and rate limits are in-pla
 
 Rate limits are implemented as [token bucket](https://en.wikipedia.org/wiki/Token_bucket) and contain both rate and burst amounts. On average, a rate of requests can be made. However, since real-world applications often make requests in bursts, this fixed rate can be surpassed temporarily up to the burst amount, provided the app subsequently makes requests below the average in order to recover its bursting capability.
 
-- `POST /notify`:
+- `POST /<project-id>/notify`:
   - Each app can send 2 notifications per hour to an account, with a burst up to 50. Accounts that have been rate limited will be returned in the request response. Exceptions may be made on a per-project basis for special circumstances.
   - Each app can call this endpoint 2 times per second with a burst up to 20. Rate limited requests will return a 429 status code.
-- `GET /subscribers`
-  - Each app can call this endpoint 1 time per second with a burst up to 5. Rate limited requests will return a 429 status code.
+- `POST /v1/<project-id>/subscribers`
+  - Each app can call this endpoint 100 times per second with a burst up to 100. Rate limited requests will return a 429 status code.
+- `GET /<project-id>/subscribers`
+  - Each app can call this endpoint 1 time every 5 minutes with a burst up to 2. Rate limited requests will return a 429 status code.
