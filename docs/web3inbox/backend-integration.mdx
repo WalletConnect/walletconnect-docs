@@ -100,7 +100,7 @@ curl -X POST 'https://notify.walletconnect.com/<PROJECT_ID>/notify' \
 
 You can tell if an account is subscribed and get information about subscribers using the `/v1/<project-id>/subscribers` endpoint. You can provide up to 100 accounts in the request.
 
-If the account is not a subscriber, it will be `null`. If the account is subscribed, it will include a list of notification types the subscriber has opted-into receiving.
+If the account is subscribed, it will be returned as a key in the response along with a list of subscribed notification types as the value. If the account is not a subscriber, it will not be returned in the response.
 
 Example usage:
 
@@ -133,7 +133,7 @@ type RequestBody = {
   accounts: string[]
 }
 type ResponseBody = {
-  [account: string]: Subscriber | null
+  [account: string]: Subscriber
 }
 type Subscriber = {
   notification_types: string[]
@@ -166,8 +166,7 @@ Example response:
 {
   "eip155:1:0x9AfEaC202C837df470b5A145e0EfD6a574B21029": {
     "notification_types": ["4d1c97ad-c182-4097-8f2c-8f80c0674df2"]
-  },
-  "eip155:1:0x0000000000000000000000000000000000000000": null
+  }
 }
 ```
 
