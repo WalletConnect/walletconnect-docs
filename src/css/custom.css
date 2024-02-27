@@ -1549,6 +1549,15 @@ article img {
   margin-bottom: 0 !important;
 }
 
+.youtube-embed-container {
+  margin: 2rem 0;
+}
+
+.youtube-embed-container iframe {
+  aspect-ratio: 16 / 9;
+  width: 100%;
+}
+
 @media screen and (max-width: 1320px) {
   .home__contribute--text {
     padding-right: 1.5rem;
