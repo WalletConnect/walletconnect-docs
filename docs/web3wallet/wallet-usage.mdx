@@ -437,7 +437,7 @@ When a dApp propose a session, with declared required and/or optional namespaces
 
 You can access this object in **SessionProposalEvent** during `onSessionProposal` event by querying `event.params.generatedNamespaces`. (See next section)
 
-However, if you decide not to use `web3Wallet.registerRequestHandler()` and, instead, you decide to handler session requests by subscribing to the `web3Wallet.onSessionRequest` events then all you have to do is construnct your approved namespaces as follows:
+However, if you decide not to use `web3Wallet.registerRequestHandler()` and, instead, you decide to handle session requests by subscribing to the `web3Wallet.onSessionRequest` events then all you have to do is construct your approved namespaces as follows:
 
 ```dart
 final approvedNamespaces = {
