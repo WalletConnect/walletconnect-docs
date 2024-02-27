@@ -1211,7 +1211,7 @@ void _onSessionRequest(SessionRequestEvent? event) async {
 }
 ```
 
-2. The second way is registering a request handler for the methods and chains you want to support. So let's say your wallet supports `eip155:1` and `eip155:137`. This would translate to:
+2. The second way is to register a request handler for the methods and chains you want to support. So let's say your wallet supports `eip155:1` and `eip155:137`. This would translate to:
 
 ```dart
 final supportedChains = ['eip155:1', 'eip155:137'];
