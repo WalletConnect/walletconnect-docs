@@ -813,7 +813,7 @@ As mentioned before, the `SessionProposalEvent` is emitted when a dapp initiates
 
 To approve a session, call `approveSession()` and pass in the `event.id` and your approved namespaces. 
 
-- If you decided to use the `registerRequestHandler()` method to register handlers for supported methods, as explained in previous section, then you would use the `generatedNamespaces` object in the `approveSession`
+- If you decide to use the `registerRequestHandler()` method to register handlers for supported methods, as explained in previous section, you would use the `generatedNamespaces` object in the `approveSession`
 - If you decided to handle session requests by subscribing to the `onSessionRequest` events then you would need to pass your own set of approved namespaces.
 
 Either way you decide you would subscribe to the `onSessionProposal` event and use `approveSession()` as follows:
