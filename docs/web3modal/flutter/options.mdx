@@ -1,4 +1,6 @@
 import CloudBanner from '../../components/CloudBanner'
+import PlatformTabs from '../../components/PlatformTabs'
+import PlatformTabItem from '../../components/PlatformTabItem'
 
 # Usage
 
@@ -23,7 +25,7 @@ final _w3mService = W3MService(
     url: 'https://www.walletconnect.com/',
     icons: ['https://walletconnect.com/walletconnect-logo.png'],
     redirect: Redirect(
-      native: 'flutterdapp://',
+      native: 'flutterdapp://', // your own custom scheme
       universal: 'https://www.walletconnect.com',
     ),
   ),
@@ -31,7 +33,56 @@ final _w3mService = W3MService(
 await _w3mService.init();
 ```
 
-The `metadata` object should contain your dApp's name, description, url and icon. The `redirect` object inside it serves the purpose of redirecting from the wallet to back to your dApp once is connected.
+The `metadata` object should contain your dApp's name, description, url and icon. The `redirect` object inside serves the purpose of redirecting from the wallet back to your dApp once is connected. You would also need to add the following in the iOS/Android native side:
+
+<PlatformTabs
+	groupId="w3m_flutter"
+	activeOptions={["ios","android"]}
+>
+<PlatformTabItem value="ios">
+
+1. Open your `Info.plist` file.
+2. Locate the `<key>CFBundleURLTypes</key>` section.
+3. Add your schema as `<dict>` entry within the `<array>` object.
+
+Example:
+
+```xml
+<key>CFBundleURLTypes</key>
+<array>
+  <dict>
+    <key>CFBundleTypeRole</key>
+    <string>Editor</string>
+    <key>CFBundleURLName</key>
+    <string>com.example.yourBundleId</string>
+    <key>CFBundleURLSchemes</key>
+    <array>
+      <string>flutterdapp</string> <!-- your own custom scheme -->
+    </array>
+  </dict>
+</array>
+```
+
+</PlatformTabItem>
+<PlatformTabItem value="android">
+
+1. Open your `AndroidManifest.xml` file.
+2. Locate your `<Activity .MainActivity` inside `<application />` scope.
+3. Add the following intent
+
+Example:
+
+```xml
+<intent-filter>
+    <action android:name="android.intent.action.VIEW" />
+    <category android:name="android.intent.category.DEFAULT" />
+    <category android:name="android.intent.category.BROWSABLE" />
+    <data android:scheme="flutterdapp" /> <!-- your own custom scheme -->
+</intent-filter>
+```
+
+</PlatformTabItem>
+</PlatformTabs>
 
 Now you can use the `W3MConnectWalletButton`, which will open the Web3Modal with no prior network selected
 
