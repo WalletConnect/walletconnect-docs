@@ -135,7 +135,7 @@ Get the current value of the modal's state
 ```ts
 import { useWeb3ModalState } from '@web3modal/wagmi/react'
 
-const { open, selectedNetworkId } = useWeb3ModalState()
+const { open, loading, selectedNetworkId } = useWeb3ModalState()
 ```
 
 </PlatformTabItem>
@@ -144,7 +144,7 @@ const { open, selectedNetworkId } = useWeb3ModalState()
 ```ts
 import { useWeb3ModalState } from '@web3modal/wagmi/react'
 
-const { open, selectedNetworkId } = useWeb3ModalState()
+const { open, loading, selectedNetworkId } = useWeb3ModalState()
 ```
 
 </PlatformTabItem>
@@ -153,7 +153,7 @@ const { open, selectedNetworkId } = useWeb3ModalState()
 ```ts
 import { useWeb3ModalState } from '@web3modal/ethers5/react'
 
-const { open, selectedNetworkId } = useWeb3ModalState()
+const { open, loading, selectedNetworkId } = useWeb3ModalState()
 ```
 
 </PlatformTabItem>
@@ -162,13 +162,13 @@ const { open, selectedNetworkId } = useWeb3ModalState()
 ```ts
 import { useWeb3ModalState } from '@web3modal/ethers/react'
 
-const { open, selectedNetworkId } = useWeb3ModalState()
+const { open, loading, selectedNetworkId } = useWeb3ModalState()
 ```
 
 </PlatformTabItem>
 </PlatformTabs>
 
-The modal state consists of two reactive values:
+The modal state consists of three reactive values:
 
 <Table
   headers={['State', 'Description', 'Type']}
@@ -176,6 +176,11 @@ The modal state consists of two reactive values:
     {
       variable: { code: 'open' },
       description: 'Open state will be true when the modal is open and false when closed.',
+      type: { code: 'boolean' }
+    },
+    {
+      variable: { code: 'loading' },
+      description: 'Loading state will be true when the modal is loading and false when not.',
       type: { code: 'boolean' }
     },
     {
