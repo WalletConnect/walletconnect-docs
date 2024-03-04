@@ -16,12 +16,17 @@ const List = () => {
       .then(response => response.json())
       .then(data => {
         setChains(data.chains)
-        setOriginalChainsArray(Object.keys(data.chains).map(key => data.chains[key]))
+        setOriginalChainsArray(
+          Object.keys(data.chains).map(key => ({ ...data.chains[key], namespace: key }))
+        )
       })
       .catch(error => console.error(error))
   }, [])
 
-  const chainsArray = Object.keys(chains).map(key => chains[key])
+  const chainsArray = Object.keys(chains).map(key => ({
+    ...chains[key],
+    namespace: chains[key].namespace || key
+  }))
 
   useEffect(() => {
     if (isTestnetSelected && isMainnetSelected) {
@@ -52,6 +57,10 @@ const List = () => {
       setChains(originalChainsArray)
     }
   }, [isTestnetSelected])
+
+  useEffect(() => {
+    console.log(chains, chainsArray)
+  }, [chains])
 
   return (
     <div className="chain-list">
@@ -115,14 +124,14 @@ const List = () => {
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"
-              stroke-width="1.5"
+              strokeWidth="1.5"
               width={20}
               height={20}
               stroke="currentColor"
             >
               <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
+                strokeLinecap="round"
+                strokeLinejoin="round"
                 d="M12 3c2.755 0 5.455.232 8.083.678.533.09.917.556.917 1.096v1.044a2.25 2.25 0 01-.659 1.591l-5.432 5.432a2.25 2.25 0 00-.659 1.591v2.927a2.25 2.25 0 01-1.244 2.013L9.75 21v-6.568a2.25 2.25 0 00-.659-1.591L3.659 7.409A2.25 2.25 0 013 5.818V4.774c0-.54.384-1.006.917-1.096A48.32 48.32 0 0112 3z"
               />
             </svg>
@@ -168,7 +177,7 @@ const List = () => {
       </div>
       <div className="chain-card-container">
         {chainsArray?.map((chain, index) => (
-          <ChainCard key={index} chainName={chain.name} />
+          <ChainCard key={index} chainName={chain.name} namespace={chain.namespace} />
         ))}
       </div>
     </div>
