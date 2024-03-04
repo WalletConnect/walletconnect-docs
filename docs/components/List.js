@@ -58,10 +58,6 @@ const List = () => {
     }
   }, [isTestnetSelected])
 
-  useEffect(() => {
-    console.log(chains, chainsArray)
-  }, [chains])
-
   return (
     <div className="chain-list">
       <div className="chain-list__header">
