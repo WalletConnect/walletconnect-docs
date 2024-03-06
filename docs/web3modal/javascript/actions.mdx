@@ -73,10 +73,10 @@ Get the current value of the modal's state
 ```ts
 const modal = createWeb3Modal({ wagmiConfig, projectId })
 
-const { open, selectedNetworkId } = modal.getState()
+const { open, loading, selectedNetworkId } = modal.getState()
 ```
 
-The modal state is an object of two properties:
+The modal state is an object of three properties:
 
 <Table
   headers={['Property', 'Description', 'Type']}
@@ -84,6 +84,11 @@ The modal state is an object of two properties:
     {
       variable: { code: 'open' },
       description: 'Open state will be true when the modal is open and false when closed.',
+      type: { code: 'boolean' }
+    },
+    {
+      variable: { code: 'loading' },
+      description: 'Loading state will be true when the modal is loading and false when not.',
       type: { code: 'boolean' }
     },
     {
