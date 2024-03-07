@@ -60,7 +60,7 @@ In order for dApps to be able to trigger your wallet for a connection or sign re
 ```
 </PlatformTabItem>
 <PlatformTabItem value="android">
-In order for dApps to be able to trigger your wallet for a connection or sign request using deep links you first need to declare an [`<intent-filter>`](https://developer.android.com/training/app-links/deep-linking#adding-filters) in your Manifest.xml as follows:
+In order for dApps to be able to trigger your wallet for a connection or sign request using deep links you first need to declare an [`<intent-filter>`](https://developer.android.com/training/app-links/deep-linking#adding-filters) in your wallet's Manifest.xml as follows:
 
 ```xml
 <intent-filter>
@@ -234,6 +234,25 @@ val init = Wallet.Params.Init(coreClient = CoreClient)
 Web3Wallet.initialize(init)
 ```
 
+Redirect when responding to a session proposal:
+```kotlin
+ Web3Wallet.approveSession(approveProposal, 
+        onSuccess = {
+            // trigger deeplink: proposal.redirect
+    }
+)
+```
+
+Redirect when responding to a request:
+```kotlin
+val redirect = Web3Wallet.getActiveSessionByTopic(sessionRequest.topic)?.redirect?.toUri()
+Web3Wallet.respondSessionRequest(response,
+        onSuccess = {   
+        // trigger deeplink: redirect
+    }
+)
+```
+
 **Heads-up:** To make this flow working well, Wallet must register one of its Android components with the same deep link that it initialized with.
 
 To check the flow implementation described above have a look on our sample wallet:
@@ -253,9 +272,9 @@ In order to add support for mobile linking within your Dapp and receive signing 
 val redirect = "kotlin-dapp-wc://request" //should be unique for your Dapp
 
 val appMetaData = Core.Model.AppMetaData(
-    name = "Wallet Name",
-    description = "Wallet Description",
-    url = "Wallet URL",
+    name = "Dapp Name",
+    description = "Dapp Description",
+    url = "Dapp URL",
     icons = listOfIconUrlStrings,
     redirect = redirect
 )
