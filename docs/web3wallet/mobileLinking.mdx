@@ -105,11 +105,9 @@ Dapps developers must do the same for their own custom schemes if they want the 
 
 #### iOS Wallet Support
 
-iOS has some more caveats to the integration but we ensure to make it as straightforward as possible. Since its operating system is not designed to handle multiple applications subscribing to the same deep linking schema, we've designed the QRCode Modal to list supporting wallets on our [Explorer](https://walletconnect.com/explorer) and target specific deep links or universal links for each wallet.
+iOS has some more caveats to the integration but we ensure to make it as straightforward as possible. Since its operating system is not designed to handle multiple applications subscribing to the same deep linking schema, we've designed the Web3Modal to list supporting wallets on our [Explorer](https://walletconnect.com/explorer) and target specific deep links or universal links for each wallet.
 
-To add your own wallet to the Explorer, login to your [WalletConnect Cloud](https://walletconnect.com) account.
-
-We recommend that universal links are used instead of deep links for iOS since they provide smoother UX with less prompts. When a dapp triggers a mobile connection on iOS, you should expect the following links
+To add your own wallet to the Explorer, login to your [WalletConnect Cloud](https://cloud.walletconnect.com/sign-in) account.
 
 ```bash
 # For deep links
@@ -173,19 +171,17 @@ These are the known workarounds for avoiding app linking issues on iOS when usin
 
 ### Overview
 
-WalletConnectRouter framework can make the redirection back to the dapp even more convenient.
+WalletConnectRouter simplifies navigation by automatically redirecting users back to the DApp after they've interacted with a wallet via a deep link. This eliminates the need for users to manually navigate back after approving a session or confirming a transaction.
 
-For example you are interacting with a DApp that redirects to your wallet through a deeplink to approve a session or confirm a transaction. After response, you need to return to the DApp by yourself. WalletConnectRouter eliminates this unnecessary step.
+#### Key Features
 
-By calling `WalletConnectRouter.goBack(uri: "example://")` (where `example://` is the custom scheme of the dapp declared in their `redirect` field for `AppMetadata`) you can return to DApp automatically.
+**Automatic Redirection:** By invoking WalletConnectRouter.goBack(uri: "example://")—where "example://" is the DApp's custom scheme as declared in their AppMetadata redirect field—users are seamlessly returned to the DApp.
 
-:::info Note
+#### Important Consideration
 
-Starting from WalletConnect SDK version 1.9.5, the `redirect` field in the `AppMetadata` object is mandatory. Ensure that the provided value matches your app's URL scheme to prevent redirection-related issues.
+**Mandatory redirect Field:** Starting with WalletConnect SDK version 1.9.5, specifying the redirect field in the AppMetadata object is mandatory to avoid redirection issues.
 
-:::
-
-### Installation example
+### Installation and Usage
 
 ```swift
 import WalletConnectRouter
@@ -195,16 +191,12 @@ try await Sign.instance.approve(proposalId: <proposalId>, namespaces: <namespace
 if let uri = proposal.proposer.redirect?.native {
     WalletConnectRouter.goBack(uri: uri)
 } else {
-  // Please inform the user to return to the browser
+    // Inform the user to manually return to the DApp
 }
 ```
+### Limitations
 
-Unfortunately, if you are interacting with a DApp from your browser, it's not possible to automatically redirect a user back since iOS 17.
-It is highly recommended to modify your app's UI to inform the user about the necessity of manually returning to the browser.
-
-:::info Note
-If your iOS version is lower than 17, calling `WalletConnectRouter.goBack(uri: uri)` will trigger the automatic redirect. Additionally, you can manually trigger the automatic redirect using the old API call `Router.goBack()` within the `WalletConnectRouter` package.
-:::
+Automatic redirection to browser-based DApps after wallet interaction is not possible from iOS 17 onwards. Developers should adjust their app's UI to inform users about manual navigation back to the browser. For iOS versions below 17, WalletConnectRouter.goBack(uri: uri) facilitates automatic redirection.
 
 ![Redirect](/img/ios-redirect.png)
 
