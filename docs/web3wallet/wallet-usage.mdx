@@ -1696,9 +1696,9 @@ await walletClient.Disconnect(sessionTopic, Error.FromErrorType(ErrorType.USER_D
 
 </PlatformTabs>
 
-## Sign 2.5
+## Authenticated Sessions
 
-// Explain what Sign 2.5 is here //
+This section introduces a novel protocol method that streamlines the process of establishing a Sign session while simultaneously authenticating a wallet using a Sign-In with Ethereum (SIWE) message. This dual functionality provides instant authentication for dApps, opening up new possibilities for immediate user logins. Furthermore, this method allows dApps to request authorization to perform actions on behalf of the wallet user. These requested permissions are explicitly described to the user within the SIWE message. Consequently, dApps can leverage these authenticated messages to obtain authorization and perform specific actions on behalf of the user.
 
 <PlatformTabs
 	groupId="w3w"
