@@ -37,12 +37,10 @@ Similar pattern happens when signing requests are required from the user:
     2. Wallet automatically returns to Dapp
 4. User returns to Dapp
 
+### Platform preparations
 
-<PlatformTabs groupId="" activeOptions={["ios","android"]}>
-
+<PlatformTabs groupId="" activeOptions={["ios","android","flutter","react-native"]}>
 <PlatformTabItem value="ios">
-
-#### Preparations
 
 In order for dApps to be able to trigger your wallet for a connection or sign request using deep links you first need to add your custom scheme under [`CFBundleURLTypes`](https://developer.apple.com/documentation/bundleresources/information_property_list/cfbundleurltypes) key in your Info.plist file.
 ```ruby
@@ -60,12 +58,41 @@ In order for dApps to be able to trigger your wallet for a connection or sign re
 	</dict>
 </array>
 ```
+</PlatformTabItem>
+<PlatformTabItem value="android">
+In order for dApps to be able to trigger your wallet for a connection or sign request using deep links you first need to declare an [`<intent-filter>`](https://developer.android.com/training/app-links/deep-linking#adding-filters) in your Manifest.xml as follows:
 
-:::info Note
+```xml
+<intent-filter>
+    <action android:name="android.intent.action.VIEW" />
+    <category android:name="android.intent.category.DEFAULT" />
+    <category android:name="android.intent.category.BROWSABLE" />
+    <data android:scheme="examplewallet" /> <!-- your own custom scheme -->
+</intent-filter>
+```
+</PlatformTabItem>
+<PlatformTabItem value="flutter">
 
-Dapps developers must to the same for their own custom schemes if they want the wallet to be able to navigate back after a session approval or a sign request response
+Since Flutter leverages native plaftoms APIs you must follow iOS and Android steps for each native platform
+
+</PlatformTabItem>
+<PlatformTabItem value="react-native">
+
+Since React Native leverages native plaftoms APIs you must follow iOS and Android steps for each native platform
+
+</PlatformTabItem>
+</PlatformTabs>
+
+:::tip
+
+Dapps developers must do the same for their own custom schemes if they want the wallet to be able to navigate back after a session approval or a sign request response
 
 :::
+
+
+<PlatformTabs groupId="" activeOptions={["ios","android","flutter","react-native"]}>
+
+<PlatformTabItem value="ios">
 
 #### iOS Wallet Support
 
@@ -176,25 +203,6 @@ If your iOS version is lower than 17, calling `WalletConnectRouter.goBack(uri: u
 
 <PlatformTabItem value="android">
 
-#### Preparations
-
-In order for dApps to be able to trigger your wallet for a connection or sign request using deep links you first need to declare an [`<intent-filter>`](https://developer.android.com/training/app-links/deep-linking#adding-filters) in your Manifest.xml as follows:
-
-```xml
-<intent-filter>
-    <action android:name="android.intent.action.VIEW" />
-    <category android:name="android.intent.category.DEFAULT" />
-    <category android:name="android.intent.category.BROWSABLE" />
-    <data android:scheme="examplewallet" /> <!-- your own custom scheme -->
-</intent-filter>
-```
-
-:::info Note
-
-Dapps developers must to the same for their own custom schemes if they want the wallet to be able to navigate back after a session approval or a sign request response
-
-:::
-
 #### Android Wallet Support
 
 **Disclaimer:** The below solution is designed for the communication between native Android dapps and native Android wallets. In the case of mobile browser dapps and native Android wallets communication, we recommend moving wallets into the background after both approving and rejecting sessions or approving and rejecting requests to persist smooth deep-link UX.
@@ -264,6 +272,15 @@ https://github.com/WalletConnect/WalletConnectKotlinV2/tree/master/sample/dapp
 - https://developer.android.com/guide/navigation/navigation-deep-link#implicit
 - https://developer.android.com/training/app-links#deep-links
 
+</PlatformTabItem>
+<PlatformTabItem value="flutter">
+
+```dart
+launchUrlString('examplewallet://wc?uri=$encodedUri', mode: LaunchMode.externalApplication);
+```
+
+</PlatformTabItem>
+<PlatformTabItem value="react-native">
 </PlatformTabItem>
 
 </PlatformTabs>
