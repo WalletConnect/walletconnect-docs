@@ -182,6 +182,11 @@ Some suggested methods of signing the message:
 
 Subscribe, Unsubscribe, Get Subscription, Check if Subscribed.
 
+> [!NOTE]
+> When using `differentAccount`, the passed account needs to be previously registered.
+> This use case is for Dapps that have multile active accounts or wallets with multiple active accounts.
+> `differentAccount` can be used for all the below hooks and functions that accept `account`
+
 <PlatformTabs
 	groupId="w3iw"
 	activeOptions={["react", "javascript"]}
@@ -256,6 +261,15 @@ client.watchIsSubscribed(isSubbed => console.log({ isSubbed }))
 
 // subscribe to current dapp with current account
 await client.subscribeToDapp()
+
+// subscribe to same dapp with different account
+await client.subscribeToDapp(differentAccount)
+
+// subscribe to different dapp with current account
+await client.subscribeToDapp(undefined, differentDomain)
+
+// subscribe to different dapp with different account
+await client.subscribeToDapp(differentAccount, differentDomain)
 
 // unsubscribe from current dapp with current account
 await client.unsubscribeFromDapp()
