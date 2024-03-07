@@ -201,7 +201,10 @@ const web3wallet = await Web3Wallet.init({
     name: 'Demo React Native Wallet',
     description: 'Demo RN Wallet to interface with Dapps',
     url: 'www.walletconnect.com',
-    icons: []
+    icons: ['https://your_wallet_icon.png'],
+    redirect: {
+      native: 'yourwalletscheme://',
+    },
   }
 })
 ```
