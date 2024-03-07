@@ -194,16 +194,27 @@ const { subscribe, isLoading: isSubscribing } = useSubscribe()
 const { unsubscribe, isLoading: isUnsubscribing } = useUnsubscribe()
 
 // get subscription of current user to current dapp
-const { data: subscription } = useSubscription()
+const { data: subscription, getSubscription } = useSubscription()
 
-// subscribe to current dapp
+// getSubscription can be used to get information about different dapps programatically
+const subscriptionToSameDappFromDifferentAccount = getSubscription(differentAccount)
+const subscriptionToDifferentDappFromSameAccount = getSubscription(undefined, differentDappDomain)
+const subscriptionToDifferentDappFromDifferentAccount = getSubscription(differentAccount, differentDappDomain)
+
+// subscribe to current dapp from current user
 subscribe()
+// subscribe to current dapp from different user
+subscribe(differentAccount)
+// subscribe to different dapp from current user
+subscribe(undefined, differentDappDomain)
+// subscribe to different dapp from different user
+subscribe(differentAccount, differentDappDomain)
 
 // unsubscribe from current dapp
 unsubscribe()
 
 // get all subscriptions for current account
-const subscriptions = useSubscriptions()
+const subscriptions = useAllSubscriptions()
 
 const isSubscribed = Boolean(subscription)
 ```
@@ -425,3 +436,106 @@ type ScopeMap = Record<
 
 </PlatformTabItem>
 </PlatformTabs>
+
+
+## Registering for Device Push Notifications
+Recieve push notifications. Whether on Mobile (React Native) or Web via Firebase, the following needs to be performed.
+
+More information about firebase messaging setup found here: https://firebase.google.com/docs/cloud-messaging
+
+<PlatformTabs>
+
+<PlatformTabItem value="react" >
+
+```ts
+import { getToken } from 'firebase/messaging
+
+const { data: client } = useWeb3InboxClient()
+
+const firebaseToken = getToken(firebaseMessaging, {
+  vapidKey: "YOUR_FIREBASE_VAPID_KEY"
+})
+
+client.registerWithPushServer(firebaseToken)
+```
+
+#### References
+- `registerWithPushServer`: `(token: string, platform: 'fcm' | 'apns') => void`
+
+Either APNS or FCM can be used to recieve push notifications. Token here is the respective platform's token.
+
+</PlatformTabItem>
+
+<PlatformTabItem value="javascript" >
+
+```ts
+import { getToken } from 'firebase/messaging
+
+const firebaseToken = getToken(firebaseMessaging, {
+  vapidKey: "YOUR_FIREBASE_VAPID_KEY"
+})
+
+client.registerWithPushServer(firebaseToken)
+```
+
+#### References
+- `registerWithPushServer`: `(token: string, platform: 'fcm' | 'apns') => void`
+
+Either APNS or FCM can be used to recieve push notifications. Token here is the respective platform's token.
+
+</PlatformTabItem>
+
+</PlatformTabs>
+
+<PlatformTabs>
+## Listening For Events
+This can be used to listen to, for example, messages recieved in realtime.
+
+<PlatformTabItem value="react" >
+
+```ts
+const { data: client } = useWeb3InboxClient()
+
+client.on("notify_message", ({ message }) => {
+ // handle new realtime notifications here.
+})
+```
+
+#### References
+- `message`: Notification of type:
+```
+interface NotifyNotification {
+  title: string;
+  sentAt: number;
+  body: string;
+  id: string;
+  url: string | null;
+  type: string;
+}
+```
+
+</PlatformTabItem>
+
+<PlatformTabItem value="javascript" >
+
+```ts
+client.on("notify_message", ({ notification }) => {
+ // handle new realtime notifications here.
+})
+```
+
+#### References
+- `message`: Notification of type:
+```
+interface NotifyNotification {
+  title: string;
+  sentAt: number;
+  body: string;
+  id: string;
+  url: string | null;
+  type: string;
+}
+```
+
+</PlatformTabItem>
+
