@@ -298,21 +298,23 @@ https://github.com/WalletConnect/WalletConnectKotlinV2/tree/master/sample/dapp
 </PlatformTabItem>
 <PlatformTabItem value="flutter">
 
-Either you are a dApp requesting an action to a wallet or a Wallet redirecting back to the dApp after it the idea is to call the [redirect option passed through the PairingMetadata](wallet-usage?platform=flutter#initialization)
+Either you are approving a session proposal or responding to a session request, redirecting back to the dapp is as simply as launching requester's `redirect` object in `PairingMetadata`:
 
-Most common way for Flutter developers is to use `url_launcher` package and call `launchUrlString()`
+For session approval:
 
-So a dapp would request a session approval to a Wallet as follows:
 ```dart
-launchUrlString('examplewallet://wc?uri=$encodedUri', mode: LaunchMode.externalApplication);
+// Where event is a SessionProposalEvent
+final scheme = event.params.proposer.metadata.redirect?.native ?? '';
+launchUrlString(scheme, mode: LaunchMode.externalApplication);
 ```
 
-And the wallet would call back to the dapp as simple as this:
-```dart
-launchUrlString('exampledapp://', mode: LaunchMode.externalApplication);
-```
+For session requests:
 
-where `examplewallet://` or `exampledapp://` is the custom scheme declared in the `redirect` field for `AppMetadata`
+```dart
+final session = web3Wallet.sessions.get(topic);
+final scheme = session?.peer.metadata.redirect?.native ?? '';
+launchUrlString(scheme, mode: LaunchMode.externalApplication);
+```
 
 </PlatformTabItem>
 <PlatformTabItem value="react-native">
