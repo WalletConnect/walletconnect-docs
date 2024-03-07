@@ -1698,7 +1698,9 @@ await walletClient.Disconnect(sessionTopic, Error.FromErrorType(ErrorType.USER_D
 
 ## Authenticated Sessions
 
-This section introduces a novel protocol method that streamlines the process of establishing a Sign session while simultaneously authenticating a wallet using a Sign-In with Ethereum (SIWE) message. This dual functionality provides instant authentication for dApps, opening up new possibilities for immediate user logins. Furthermore, this method allows dApps to request authorization to perform actions on behalf of the wallet user. These requested permissions are explicitly described to the user within the SIWE message. Consequently, dApps can leverage these authenticated messages to obtain authorization and perform specific actions on behalf of the user.
+This section outlines an innovative protocol method that facilitates the initiation of a Sign session and the authentication of a wallet through a Sign-In with Ethereum (SIWE) message, enhanced by ReCaps (ReCap Capabilities). This enhancement not only offers immediate authentication for dApps, paving the way for prompt user logins, but also integrates informed consent for authorization. Through this mechanism, dApps can request the delegation of specific capabilities to perform actions on behalf of the wallet user. These capabilities, encapsulated within SIWE messages as ReCap URIs, detail the scope of actions authorized by the user in an explicit and human-readable form.
+
+By incorporating ReCaps, this method extends the utility of SIWE messages, allowing dApps to combine authentication with a nuanced authorization model. This model specifies the actions a dApp is authorized to execute on the user's behalf, enhancing security and user autonomy by providing clear consent for each delegated capability. As a result, dApps can utilize these consent-backed messages to perform predetermined actions, significantly enriching the interaction between dApps, wallets, and users within the Ethereum ecosystem.
 
 <PlatformTabs
 	groupId="w3w"

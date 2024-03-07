@@ -239,12 +239,15 @@ To learn more on namespaces, check out our [specs](https://specs.walletconnect.c
 let uri = try await Sign.instance.connect(requiredNamespaces: namespaces, topic: uri.topic)
 ```
 
-#### Session Authenticate
+#### Session Authenticate with ReCaps
 
-The authenticate() method is a new addition to the WalletConnect protocol, providing a streamlined way for EVM dApps to request authentication from wallets and establish a session at the same time.
-To initiate an authentication request, your dApp should call authenticate() with the necessary authentication parameters. This method generates a pairing URI that your dApp can present to the user, typically as a QR code or through a deep link.
+The authenticate() method enhances the WalletConnect protocol, offering EVM dApps a sophisticated mechanism to request wallet authentication and simultaneously establish a session. This innovative approach not only authenticates the user but also facilitates a seamless session creation, integrating the capabilities defined by ERC-5573, also known as ReCaps.
 
-Example implementation for initiating an authentication request:
+ReCaps extend the SIWE protocol, enabling users to give informed consent for dApps to exercise scoped capabilities on their behalf. This consent mechanism is crucial for authorizing a dApp to perform actions or access resources, thus ensuring security and trust in dApp interactions. These scoped capabilities are specified through ReCap URIs in the resources field of the AuthRequestParams, which translate to human-readable consent in the SIWE message, detailing the actions a dApp is authorized to undertake.
+
+To initiate an authentication and authorization request, a dApp invokes the authenticate() method, passing in parameters that include desired capabilities as outlined in EIP-5573. The method generates a pairing URI for user interaction, facilitating a streamlined authentication and consent process.
+
+Example of initiating an authentication request with ReCaps:
 
 ```swift
 func initiateAuthentication() {
@@ -289,6 +292,32 @@ Sign.instance.authResponsePublisher
 ```
 
 In this setup, the authResponsePublisher notifies your dApp of the outcome of the authentication request. Your dApp can then proceed based on whether the authentication was successful, rejected, or failed due to an error.
+
+Example of AuthRequestParams:
+
+```swift
+extension AuthRequestParams {
+    static func stub(
+        domain: String = "yourDappDomain.com",
+        chains: [String] = ["eip155:1", "eip155:137"],
+        nonce: String = "uniqueNonce",
+        uri: String = "https://yourDappDomain.com/login",
+        statement: String? = "I accept the Terms of Service: https://yourDappDomain.com/tos",
+        resources: [String]? = nil, // here your dapp may request authorization with recaps
+        methods: [String]? = ["personal_sign", "eth_sendTransaction"]
+    ) -> AuthRequestParams {
+        return try! AuthRequestParams(
+            domain: domain,
+            chains: chains,
+            nonce: nonce,
+            uri: uri,
+            statement: statement,
+            resources: resources,
+            methods: methods
+        )
+    }
+}
+```
 
 #### Send Request to the Wallet
 
