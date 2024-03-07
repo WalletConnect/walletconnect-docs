@@ -315,6 +315,10 @@ val dappDelegate = object : SignClient.DappDelegate {
         // Triggered when Dapp receives the session rejection from wallet
     }
 
+    fun onSessionAuthenticateResponse(sessionAuthenticateResponse: Sign.Model.SessionAuthenticateResponse) {
+        // Triggered when Dapp receives the session authenticate response from wallet
+    }
+
     override fun onSessionUpdate(updatedSession: Sign.Model.UpdatedSession) {
         // Triggered when Dapp receives the session update from wallet
     }
@@ -382,6 +386,57 @@ fun SignClient.connect(connectParams,
 ```
 
 More about optional and required namespaces can be found [here](https://github.com/ChainAgnostic/CAIPs/blob/master/CAIPs/caip-25.md)
+
+#
+
+#### **Authenticate**
+
+The authenticate() method enhances the WalletConnect protocol, offering EVM dApps a sophisticated mechanism to request wallet authentication and simultaneously establish a session. This innovative approach not only authenticates the user but also facilitates a seamless session creation, integrating the capabilities defined by ERC-5573, also known as ReCaps.
+
+Capabilities are specified through ReCap URIs in the resources field of the Sign.Params.Authenticate, which translate to human-readable consent in the SIWE message, detailing the actions a dApp is authorized to undertake.
+
+To initiate an authentication and authorization request, a dApp invokes the authenticate() method, passing in parameters that include desired capabilities as outlined in EIP-5573. The method generates a pairing URI for user interaction, facilitating a streamlined authentication and consent process.
+
+Example of initiating an authentication request with ReCaps:
+```kotlin
+ val authenticateParams = Sign.Params.Authenticate(
+            domain = "your.domain",
+            chains = listof("eip155:1", "eip155:137"),
+            methods = listOf("personal_sign", "eth_signTypedData"),
+            uri = "https://yourDappDomain.com/login",
+            nonce = randomNonce,
+            statement = "Sign in with wallet.",
+            resources = null, // here your dapp may request authorization with recaps
+        )
+
+SignClient.authenticate(authenticateParams,
+        onSuccess = { url ->
+        //Handle authentication URI. Show as a QR code a send via deeplink
+    },
+        onError = { error ->
+        //Handle error
+    }
+)
+```
+
+Once you have sent an authentication request, await for responses from wallets. Responses will indicate whether the authentication request was approved or rejected. Use the onSessionAuthenticateResponse callback to receive a response:
+
+```kotlin
+ fun onSessionAuthenticateResponse(sessionAuthenticateResponse: Sign.Model.SessionAuthenticateResponse) {
+        // Triggered when Dapp receives the session authenticate response from wallet
+
+        if (sessionAuthenticateResponse is Sign.Model.SessionAuthenticateResponse.Result) {
+            if(sessionAuthenticateResponse.session != null) {
+                // Authentication successful, session established
+            } else {
+                // Authentication successful, but no session created (SIWE-only flow)
+            }
+        } else {
+            // Authentication request was rejected or failed
+        }
+
+}
+```
 
 #
 
