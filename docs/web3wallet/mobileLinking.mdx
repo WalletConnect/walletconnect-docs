@@ -89,6 +89,9 @@ More information in official documentation: https://docs.flutter.dev/ui/navigati
 
 Since React Native leverages on native APIs, you must follow iOS and Android steps for each native platform
 
+
+More information in official documentation: https://reactnative.dev/docs/linking?syntax=android#enabling-deep-links
+
 </PlatformTabItem>
 </PlatformTabs>
 
@@ -294,6 +297,25 @@ where `examplewallet://` or `exampledapp://` is the custom scheme declared in th
 
 </PlatformTabItem>
 <PlatformTabItem value="react-native">
+
+In order to redirect to the dapp, you'll need to use `Linking` from `react-native` and call `openURL()` method with the dapp scheme that comes in the proposal metadata.
+
+```js
+import { Linking } from 'react-native';
+
+async function onApprove(proposal, namespaces) {
+  await web3wallet.approveSession({ id: proposal.id, namespaces });
+  
+  const dappScheme = proposal.params.proposer.metadata.redirect?.native;
+  
+  if(dappScheme){
+    Linking.openURL(dappScheme);
+  } else {
+    // Inform the user to manually return to the DApp
+  }
+}
+```
+
 </PlatformTabItem>
 
 </PlatformTabs>
