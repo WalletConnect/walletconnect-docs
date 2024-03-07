@@ -236,9 +236,59 @@ To learn more on namespaces, check out our [specs](https://specs.walletconnect.c
 2. Your App should generate a pairing URI and share it with a wallet. Uri can be presented as a QR code or sent via a universal link. Wallet begins subscribing for session proposals after receiving URI. In order to create a pairing and send a session proposal, you need to call the following:
 
 ```Swift
-let uri = try await Pair.instance.create()
-try await Sign.instance.connect(requiredNamespaces: namespaces, topic: uri.topic)
+let uri = try await Sign.instance.connect(requiredNamespaces: namespaces, topic: uri.topic)
 ```
+
+#### Session Authenticate
+
+The authenticate() method is a new addition to the WalletConnect protocol, providing a streamlined way for EVM dApps to request authentication from wallets and establish a session at the same time.
+To initiate an authentication request, your dApp should call authenticate() with the necessary authentication parameters. This method generates a pairing URI that your dApp can present to the user, typically as a QR code or through a deep link.
+
+Example implementation for initiating an authentication request:
+
+```swift
+func initiateAuthentication() {
+    Task {
+        do {
+            let authParams = AuthRequestParams.stub() // Customize your AuthRequestParams as needed
+            let uri = try await Sign.instance.authenticate(authParams)
+            // Present the URI to the user, e.g., show a QR code or send a deep link
+            presentAuthenticationURI(uri)
+        } catch {
+            print("Failed to initiate authentication request: \(error)")
+        }
+    }
+}
+```
+
+##### Subscribe to Authentication Responses
+
+Once you have initiated an authentication request, you need to listen for responses from wallets. Responses will indicate whether the authentication request was approved or rejected. Use the authResponsePublisher to subscribe to these events.
+
+Example subscription to authentication responses:
+
+```swift
+Sign.instance.authResponsePublisher
+    .receive(on: DispatchQueue.main)
+    .sink { response in
+        switch response.result {
+        case .success(let (session, _)):
+            if let session = session {
+                // Authentication successful, session established
+                handleSuccessfulAuthentication(session)
+            } else {
+                // Authentication successful, but no session created (SIWE-only flow)
+                handleSuccessfulAuthenticationWithoutSession()
+            }
+        case .failure(let error):
+            // Authentication request was rejected or failed
+            handleAuthenticationFailure(error)
+        }
+    }
+    .store(in: &subscriptions)
+```
+
+In this setup, the authResponsePublisher notifies your dApp of the outcome of the authentication request. Your dApp can then proceed based on whether the authentication was successful, rejected, or failed due to an error.
 
 #### Send Request to the Wallet
 
