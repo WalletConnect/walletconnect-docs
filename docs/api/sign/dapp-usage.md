@@ -410,10 +410,10 @@ Example of initiating an authentication request with ReCaps:
         )
 
 SignClient.authenticate(authenticateParams,
-        onSuccess = { url ->
+    onSuccess = { url ->
         //Handle authentication URI. Show as a QR code a send via deeplink
     },
-        onError = { error ->
+    onError = { error ->
         //Handle error
     }
 )
@@ -426,7 +426,7 @@ Once you have sent an authentication request, await for responses from wallets. 
         // Triggered when Dapp receives the session authenticate response from wallet
 
         if (sessionAuthenticateResponse is Sign.Model.SessionAuthenticateResponse.Result) {
-            if(sessionAuthenticateResponse.session != null) {
+            if (sessionAuthenticateResponse.session != null) {
                 // Authentication successful, session established
             } else {
                 // Authentication successful, but no session created (SIWE-only flow)
