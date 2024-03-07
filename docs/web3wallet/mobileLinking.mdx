@@ -73,7 +73,16 @@ In order for dApps to be able to trigger your wallet for a connection or sign re
 </PlatformTabItem>
 <PlatformTabItem value="flutter">
 
-Since Flutter leverages native plaftoms APIs you must follow iOS and Android steps for each native platform
+Since Flutter leverages native plaftoms APIs you must follow iOS and Android steps for each native platform.
+
+__Additionally__, you would have to set FlutterDeepLinkingEnabled key to true on iOS's Info.plist file.
+
+```xml
+<key>FlutterDeepLinkingEnabled</key>
+<true/>
+```
+
+More information in official documentation: https://docs.flutter.dev/ui/navigation/deep-linking
 
 </PlatformTabItem>
 <PlatformTabItem value="react-native">
@@ -274,6 +283,10 @@ https://github.com/WalletConnect/WalletConnectKotlinV2/tree/master/sample/dapp
 
 </PlatformTabItem>
 <PlatformTabItem value="flutter">
+
+Either you are a dApp requesting a session approval or a sign request to a wallet or a Wallet redirecting back to a dApp after approval or signing the idea is to call the [redirect options passed through PairingMetadata](wallet-usage?platform=flutter#initialization)
+
+Most commong way for Flutter developers is to use `url_launcher` package and call `launchUrlString()`
 
 ```dart
 launchUrlString('examplewallet://wc?uri=$encodedUri', mode: LaunchMode.externalApplication);
