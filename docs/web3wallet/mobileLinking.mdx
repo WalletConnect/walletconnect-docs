@@ -284,13 +284,21 @@ https://github.com/WalletConnect/WalletConnectKotlinV2/tree/master/sample/dapp
 </PlatformTabItem>
 <PlatformTabItem value="flutter">
 
-Either you are a dApp requesting a session approval or a sign request to a wallet or a Wallet redirecting back to a dApp after approval or signing the idea is to call the [redirect options passed through PairingMetadata](wallet-usage?platform=flutter#initialization)
+Either you are a dApp requesting an action to a wallet or a Wallet redirecting back to the dApp after it the idea is to call the [redirect option passed through the PairingMetadata](wallet-usage?platform=flutter#initialization)
 
-Most commong way for Flutter developers is to use `url_launcher` package and call `launchUrlString()`
+Most common way for Flutter developers is to use `url_launcher` package and call `launchUrlString()`
 
+So a dapp would request a session approval to a Wallet as follows:
 ```dart
 launchUrlString('examplewallet://wc?uri=$encodedUri', mode: LaunchMode.externalApplication);
 ```
+
+And the wallet would call back to the dapp as simple as this:
+```dart
+launchUrlString('exampledapp://', mode: LaunchMode.externalApplication);
+```
+
+where `examplewallet://` or `exampledapp://` is the custom scheme declared in the `redirect` field for `AppMetadata`
 
 </PlatformTabItem>
 <PlatformTabItem value="react-native">
