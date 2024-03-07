@@ -13,37 +13,59 @@ This feature is only available for iOS and Android.
 
 Communication between a mobile wallet and a mobile application is possible by design. Using the URI displayed by the QR-code it is possible to establish connection by sharing this URI via deep-link.
 
-<PlatformTabs groupId="" activeOptions={["ios","android"]}>
-
-<PlatformTabItem value="ios">
-
 Using the URI commonly displayed in the QRCode it is possible to establish a connection by sharing this URI through a deep link or universal link on both Android and iOS.
 
 The pattern we chose to adhere for a consistent UX across platforms for connection establishment is the following:
 
+::info
 1. Dapp prompts user to connect
 2. User presses button to connect and is shown a list of iOS compatible wallets
 3. User is redirected to the wallet of choice
 4. Wallet prompts user to approve or reject session
 5. Return To Dapp
-
-   5a. Wallet prompts user to return to Dapp manually
-
-   5b. Wallet automatically returns to Dapp using [`WalletConnectRouter`](#WalletConnectRouter)
-
+    1. Wallet prompts user to return to Dapp manually
+    2. Wallet automatically returns to Dapp
 6. User returns to Dapp
+::
 
 Similar pattern happens when signing requests are required from the user:
 
 1. Dapp redirects user automatically to previously chosen wallet
 2. Wallet prompts user to approve or reject request
 3. Return To Dapp
-
-   3a. Wallet prompts user to return to Dapp manually
-
-   3b. Wallet automatically returns to Dapp using [`WalletConnectRouter`](#WalletConnectRouter)
-
+    1. Wallet prompts user to return to Dapp manually
+    2. Wallet automatically returns to Dapp
 4. User returns to Dapp
+
+
+<PlatformTabs groupId="" activeOptions={["ios","android"]}>
+
+<PlatformTabItem value="ios">
+
+#### Preparations
+
+In order for dApps to be able to trigger your wallet for a connection or sign request using deep links you first need to add your custom scheme under [`CFBundleURLTypes`](https://developer.apple.com/documentation/bundleresources/information_property_list/cfbundleurltypes) key in your Info.plist file.
+```ruby
+<key>CFBundleURLTypes</key>
+<array>
+	<dict>
+		<key>CFBundleTypeRole</key>
+		<string>Editor</string>
+		<key>CFBundleURLName</key>
+		<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
+		<key>CFBundleURLSchemes</key>
+		<array>
+			<string>examplewallet</string> <!-- your custom scheme goes here -->
+		</array>
+	</dict>
+</array>
+```
+
+:::info Note
+
+Dapps developers must to the same for their own custom schemes if they want the wallet to be able to navigate back after a session approval or a sign request response
+
+:::
 
 #### iOS Wallet Support
 
@@ -70,6 +92,7 @@ examplewallet://wc?uri=wc:00e46b69-d0cc-4b3e-b6a2-cee442f97188@2
 # For universal links
 https://example.wallet/wc?uri=wc:00e46b69-d0cc-4b3e-b6a2-cee442f97188@2
 ```
+---
 
 #### iOS App Link Constraints
 
@@ -88,61 +111,91 @@ These are the known workarounds for avoiding app linking issues on iOS when usin
 
 #### When sending a transaction
 
-- **[`signer.sendTransaction`](https://docs.ethers.io/v5/api/signer/#Signer-sendTransaction) should be avoided in favor of [`signer.sendUncheckedTransaction`](https://docs.ethers.io/v5/api/providers/jsonrpc-provider/#JsonRpcSigner-sendUncheckedTransaction).**
-
-  This avoids an asynchronous call to retrieve the internal block number which Ethers uses to resolve a complete [`TransactionResponse`](https://docs.ethers.io/v5/api/providers/types/#providers-TransactionResponse) object.
-
-  Note that as a result of this optimization, `sendUncheckedTransaction` returns a mock transaction response that only contains the `hash` property and a `wait` method. All other properties are `null`.
-
-- **The transaction's `to` property should be a plain address rather than an ENS name.**
-
-  This avoids an asynchronous call to automatically resolve ENS names during the send process.
-
-  If you still want to support ENS name resolution, you should manually run [`provider.resolveName`](https://docs.ethers.io/v5/api/providers/provider/#Provider-ResolveName) ahead of time, storing the result before the user attempts to send a transaction. Do not resolve ENS names in the event handler.
-
-- **The transaction's `gasLimit` property should be set.**
-
-  This avoids the asynchronous work performed in `sendTransaction` which automatically estimates the gas limit if it's missing.
-
-  If you still want to use the same gas limit estimation logic from `sendTransaction`, you should manually run [`provider.estimateGas`](https://docs.ethers.io/v5/api/providers/provider/#Provider-estimateGas) ahead of time, storing the result before the user attempts to send the transaction. Do not estimate gas in the event handler.
+<ul>
+<li>__[`signer.sendTransaction`](https://docs.ethers.io/v5/api/signer/#Signer-sendTransaction) should be avoided in favor of [`signer.sendUncheckedTransaction`](https://docs.ethers.io/v5/api/providers/jsonrpc-provider/#JsonRpcSigner-sendUncheckedTransaction)__<br />
+&nbsp;This avoids an asynchronous call to retrieve the internal block number which Ethers uses to resolve a complete [`TransactionResponse`](https://docs.ethers.io/v5/api/providers/types/#providers-TransactionResponse) object.<br />
+&nbsp;Note that as a result of this optimization, `sendUncheckedTransaction` returns a mock transaction response that only contains the `hash` property and a `wait` method. All other properties are `null`.</li>
+<li>__The transaction's `to` property should be a plain address rather than an ENS name__<br />This avoids an asynchronous call to automatically resolve ENS names during the send process.<br />
+&nbsp;If you still want to support ENS name resolution, you should manually run [`provider.resolveName`](https://docs.ethers.io/v5/api/providers/provider/#Provider-ResolveName) ahead of time, storing the result before the user attempts to send a transaction. Do not resolve ENS names in the event handler.</li>
+<li>__The transaction's `gasLimit` property should be set__<br />This avoids the asynchronous work performed in `sendTransaction` which automatically estimates the gas limit if it's missing.<br />
+&nbsp;If you still want to use the same gas limit estimation logic from `sendTransaction`, you should manually run [`provider.estimateGas`](https://docs.ethers.io/v5/api/providers/provider/#Provider-estimateGas) ahead of time, storing the result before the user attempts to send the transaction. Do not estimate gas in the event handler.</li>
+</ul>
 
 #### When calling a write method on a contract
 
-- **[`contract.METHOD_NAME`](https://docs.ethers.io/v5/api/contract/contract/#contract-functionsSend) should be avoided if favor of calling [`contract.populateTransaction.METHOD_NAME`](https://docs.ethers.io/v5/api/contract/contract/#contract-populateTransaction) ahead of time, then sending the populated transaction with [`signer.sendUncheckedTransaction`](https://docs.ethers.io/v5/api/providers/jsonrpc-provider/#JsonRpcSigner-sendUncheckedTransaction).**
-
-- When sending the populated transaction, you should [follow the same guidelines as regular transactions](#when-sending-a-transaction) to avoid any asynchronous logic breaking the app link navigation. Do not populate the contract transaction in the event handler.
+<ul>
+<li>__[`contract.METHOD_NAME`](https://docs.ethers.io/v5/api/contract/contract/#contract-functionsSend) should be avoided if favor of calling [`contract.populateTransaction.METHOD_NAME`](https://docs.ethers.io/v5/api/contract/contract/#contract-populateTransaction) ahead of time, then sending the populated transaction with [`signer.sendUncheckedTransaction`](https://docs.ethers.io/v5/api/providers/jsonrpc-provider/#JsonRpcSigner-sendUncheckedTransaction).__</li>
+<li>When sending the populated transaction, you should [follow the same guidelines as regular transactions](#when-sending-a-transaction) to avoid any asynchronous logic breaking the app link navigation. Do not populate the contract transaction in the event handler.</li>
+</ul>
 
 #### When signing a message
 
 - If the message depends on the result of an asynchronous call (e.g. retrieving a nonce when implementing [Sign-In With Ethereum](https://login.xyz)), you should do this work ahead of time, storing the result before the user attempts to sign the message. Do not perform this asynchronous work in the event handler.
 
+---
+## WalletConnectRouter
+
+### Overview
+
+WalletConnectRouter framework can make the redirection back to the dapp even more convenient.
+
+For example you are interacting with a DApp that redirects to your wallet through a deeplink to approve a session or confirm a transaction. After response, you need to return to the DApp by yourself. WalletConnectRouter eliminates this unnecessary step.
+
+By calling `WalletConnectRouter.goBack(uri: "example://")` (where `example://` is the custom scheme of the dapp declared in their `redirect` field for `AppMetadata`) you can return to DApp automatically.
+
+:::info Note
+
+Starting from WalletConnect SDK version 1.9.5, the `redirect` field in the `AppMetadata` object is mandatory. Ensure that the provided value matches your app's URL scheme to prevent redirection-related issues.
+
+:::
+
+### Installation example
+
+```swift
+import WalletConnectRouter
+
+try await Sign.instance.approve(proposalId: <proposalId>, namespaces: <namespaces>)
+
+if let uri = proposal.proposer.redirect?.native {
+    WalletConnectRouter.goBack(uri: uri)
+} else {
+  // Please inform the user to return to the browser
+}
+```
+
+Unfortunately, if you are interacting with a DApp from your browser, it's not possible to automatically redirect a user back since iOS 17.
+It is highly recommended to modify your app's UI to inform the user about the necessity of manually returning to the browser.
+
+:::info Note
+If your iOS version is lower than 17, calling `WalletConnectRouter.goBack(uri: uri)` will trigger the automatic redirect. Additionally, you can manually trigger the automatic redirect using the old API call `Router.goBack()` within the `WalletConnectRouter` package.
+:::
+
+![Redirect](/img/ios-redirect.png)
+
 </PlatformTabItem>
 
 <PlatformTabItem value="android">
 
-:::note
+#### Preparations
 
-Deeplinking flow works in the same way in all our products (Sign, Auth, Push, Chat)
+In order for dApps to be able to trigger your wallet for a connection or sign request using deep links you first need to declare an [`<intent-filter>`](https://developer.android.com/training/app-links/deep-linking#adding-filters) in your Manifest.xml as follows:
+
+```xml
+<intent-filter>
+    <action android:name="android.intent.action.VIEW" />
+    <category android:name="android.intent.category.DEFAULT" />
+    <category android:name="android.intent.category.BROWSABLE" />
+    <data android:scheme="examplewallet" /> <!-- your own custom scheme -->
+</intent-filter>
+```
+
+:::info Note
+
+Dapps developers must to the same for their own custom schemes if they want the wallet to be able to navigate back after a session approval or a sign request response
 
 :::
 
-The common pattern of establishing a connection between a mobile wallet and a mobile application is the following:
-
-1. Dapp shows user a connection button
-2. User presses the button and Android system shows an app chooser
-3. User is redirected to the wallet of choice
-4. Wallet prompts user to approve or reject a session
-5. User returns to Dapp manually
-6. After returning to a Dapp a connection between Dapp and wallet is established
-
-Similar pattern happens when Dapp wants to send a signing request to wallet:
-
-1. User presses a button to send a signing request to wallet
-2. User is redirected automatically to already connected wallet
-3. Wallet prompts user to approve or reject request
-4. User presses approve or reject request and is redirected automatically to the already connected Dapp
-
-#### Wallet Support
+#### Android Wallet Support
 
 **Disclaimer:** The below solution is designed for the communication between native Android dapps and native Android wallets. In the case of mobile browser dapps and native Android wallets communication, we recommend moving wallets into the background after both approving and rejecting sessions or approving and rejecting requests to persist smooth deep-link UX.
 
@@ -153,7 +206,7 @@ Deep link example: `examplewallet://wc?uri={pairingUri}`
 To receive signing request in your Wallet, you'll need to initialize Kotlin SDK with the `Redirect` object where you pass a deep link that redirects to your wallet when it comes to receiving signing request from Dapp.
 
 ```kotlin
-val redirect = "kotlin-wallet-wc://request" //should be unique for your wallet
+val redirect = "examplewallet://request" //should be unique for your wallet
 
 val appMetaData = Core.Model.AppMetaData(
     name = "Wallet Name",
@@ -214,38 +267,3 @@ https://github.com/WalletConnect/WalletConnectKotlinV2/tree/master/sample/dapp
 </PlatformTabItem>
 
 </PlatformTabs>
-
-## WalletConnectRouter
-
-### Overview
-
-WalletConnectRouter framework can make working with WalletConnect on a mobile device even more convenient.
-
-For example you are interacting with a DApp from your iOS device and redirect to your wallet through a deeplink to confirm the transaction. After confirmation, you need to return to the DApp by yourself. WalletConnectRouter eliminates this unnecessary step.
-
-By calling `WalletConnectRouter.goBack(uri: "example://")` you can return to DApp automatically.
-
-Starting from WalletConnect SDK version 1.9.5, the `redirect` field in the `AppMetadata` object is mandatory. Ensure that the provided value matches your app's URL scheme to prevent redirection-related issues.
-
-### Installation example
-
-```swift
-import WalletConnectRouter
-
-try await Sign.instance.approve(proposalId: <proposalId>, namespaces: <namespaces>)
-
-if let uri = proposal.proposer.redirect?.native {
-    WalletConnectRouter.goBack(uri: uri)
-} else {
-  // Please inform the user to return to the browser
-}
-```
-
-Unfortunately, if you are interacting with a DApp from your browser, it's not possible to automatically redirect a user back since iOS 17.
-It is highly recommended to modify your app's UI to inform the user about the necessity of manually returning to the browser.
-
-:::info Note
-If your iOS version is lower than 17, calling `WalletConnectRouter.goBack(uri: uri)` will trigger the automatic redirect. Additionally, you can manually trigger the automatic redirect using the old API call `Router.goBack()` within the `WalletConnectRouter` package.
-:::
-
-![Redirect](/img/ios-redirect.png)
