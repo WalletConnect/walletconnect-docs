@@ -37,7 +37,7 @@ Similar pattern happens when signing requests are required from the user:
     2. Wallet automatically returns to Dapp
 4. User returns to Dapp
 
-### Platform preparations
+## Platform preparations
 
 <PlatformTabs groupId="" activeOptions={["ios","android","flutter","react-native"]}>
 <PlatformTabItem value="ios">
@@ -73,7 +73,7 @@ In order for dApps to be able to trigger your wallet for a connection or sign re
 </PlatformTabItem>
 <PlatformTabItem value="flutter">
 
-Since Flutter leverages native plaftoms APIs you must follow iOS and Android steps for each native platform.
+Since Flutter leverages on native APIs, you must follow iOS and Android steps for each native platform.
 
 __Additionally__, you would have to set FlutterDeepLinkingEnabled key to true on iOS's Info.plist file.
 
@@ -87,7 +87,7 @@ More information in official documentation: https://docs.flutter.dev/ui/navigati
 </PlatformTabItem>
 <PlatformTabItem value="react-native">
 
-Since React Native leverages native plaftoms APIs you must follow iOS and Android steps for each native platform
+Since React Native leverages on native APIs, you must follow iOS and Android steps for each native platform
 
 </PlatformTabItem>
 </PlatformTabs>
@@ -167,9 +167,9 @@ These are the known workarounds for avoiding app linking issues on iOS when usin
 - If the message depends on the result of an asynchronous call (e.g. retrieving a nonce when implementing [Sign-In With Ethereum](https://login.xyz)), you should do this work ahead of time, storing the result before the user attempts to sign the message. Do not perform this asynchronous work in the event handler.
 
 ---
-## WalletConnectRouter
+#### WalletConnectRouter
 
-### Overview
+#### Overview
 
 WalletConnectRouter simplifies navigation by automatically redirecting users back to the DApp after they've interacted with a wallet via a deep link. This eliminates the need for users to manually navigate back after approving a session or confirming a transaction.
 
@@ -181,7 +181,7 @@ WalletConnectRouter simplifies navigation by automatically redirecting users bac
 
 **Mandatory redirect Field:** Starting with WalletConnect SDK version 1.9.5, specifying the redirect field in the AppMetadata object is mandatory to avoid redirection issues.
 
-### Installation and Usage
+#### Installation and Usage
 
 ```swift
 import WalletConnectRouter
@@ -194,7 +194,7 @@ if let uri = proposal.proposer.redirect?.native {
     // Inform the user to manually return to the DApp
 }
 ```
-### Limitations
+#### Limitations
 
 Automatic redirection to browser-based DApps after wallet interaction is not possible from iOS 17 onwards. Developers should adjust their app's UI to inform users about manual navigation back to the browser. For iOS versions below 17, WalletConnectRouter.goBack(uri: uri) facilitates automatic redirection.
 
