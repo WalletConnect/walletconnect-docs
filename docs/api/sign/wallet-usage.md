@@ -539,6 +539,10 @@ val walletDelegate = object : SignClient.WalletDelegate {
         // Triggered when wallet receives the session proposal sent by a Dapp
     }
 
+    fun onSessionAuthenticate(sessionAuthenticate: Sign.Model.SessionAuthenticate, verifyContext: Sign.Model.VerifyContext) {
+      // Triggered when wallet receives the session authenticate sent by a Dapp
+    }
+
     override fun onSessionRequest(sessionRequest: Sign.Model.SessionRequest, verifyContext: Sign.Model.VerifyContext) {
         // Triggered when a Dapp sends SessionRequest to sign a transaction or a message
     }
@@ -721,6 +725,91 @@ SignClient.ping(pingParams, listener)
 
 To ping a peer with a session, call `SignClient.ping` with the `Sign.Params.Ping` with a session's topic. If ping is successful, topic is
 echo'd in listener.
+
+#
+
+#### **Authenticated Session**
+An authenticated session represents a secure connection established between a wallet and a dApp after successful authentication.
+
+### Authentication Requests
+To handle incoming authentication requests, set up SignClient.WalletDelegate. The onSessionAuthenticate callback will notify you of any authentication requests that need to be processed, allowing you to either approve or reject them based on your application logic.
+
+```kotlin
+fun onSessionAuthenticate(sessionAuthenticate: Sign.Model.SessionAuthenticate, verifyContext: Sign.Model.VerifyContext) {
+      // Triggered when wallet receives the session authenticate sent by a Dapp
+      // Process the authentication request here
+      // This involves displaying UI to the user
+}
+```
+
+### Responding Authentication Request
+To interact with authentication requests, build authentication objects (Wallet.Model.Cacao). It involves the following steps:
+
+**Creating an Authentication Payload Params** - Generate an authentication payload params that matches your application's supported chains and methods.
+**Formatting Authentication Messages** - Format the authentication message using the payload and the user's account.
+**Signing the Authentication Message** - Sign the formatted message to create a verifiable authentication object.
+
+Example:
+```kotlin
+override fun onSessionAuthenticate(sessionAuthenticate: Sign.Model.SessionAuthenticate, verifyContext: Sign.Model.VerifyContext) {
+  val auths = mutableListOf<Sign.Model.Cacao>()
+
+  val authPayloadParams =
+    generateAuthPayloadParams(
+      sessionAuthenticate.payloadParams,
+      supportedChains = listOf("eip155:1", "eip155:137", "eip155:56"), // Note: Only EVM chains are supported
+      supportedMethods = listOf("personal_sign", "eth_signTypedData", "eth_sign")
+  )
+
+  authPayloadParams.chains.forEach { chain ->
+    val issuer = "did:pkh:$chain:$address"
+    val formattedMessage = WalletSignClient.formatAuthMessage(Sign.Params.FormatMessage(authPayloadParams, issuer))
+
+    val signature = signMessage(message: formattedMessage, privateKey: privateKey) //Note: Assume `signMessage` is a function you've implemented to sign messages.
+    val auth = generateAuthObject(authPayloadParams, issuer, signature)
+    auths.add(auth)
+  }
+}
+```
+
+### Approving Authentication Requests
+To approve an authentication request, construct Sign.Model.Cacao instances for each supported chain, sign the authentication messages, build AuthObjects and call approveSessionAuthenticate with the request ID and the authentication objects.
+
+```kotlin
+ val approveProposal = Wallet.Params.ApproveSessionAuthenticate(id = sessionAuthenticate.id, auths = auths)
+Web3Wallet.approveSessionAuthenticate(approveProposal,
+  onSuccess = {
+    //Redirect back to the dapp if redirect is set: sessionAuthenticate.participant.metadata?.redirect
+  },
+  onError = { error ->
+      //Handle error
+  }
+)
+```
+
+:::info Note
+1. The recommended approach for secure authentication across multiple chains involves signing a SIWE (Sign-In with Ethereum) message for each chain and account. However, at a minimum, one SIWE message must be signed to establish a session. It is possible to create a session for multiple chains with just one issued authentication object.
+2. Sometimes a dapp may want to only authenticate the user without creating a session, not every approval will result with a new session.
+:::
+
+### Rejecting Authentication Requests
+If the authentication request cannot be approved or if the user chooses to reject it, use the rejectSession method.
+
+```kotlin
+val rejectParams = Wallet.Params.RejectSessionAuthenticate(
+    id = sessionAuthenticate.id,
+    reason = "Reason"
+)
+
+Web3Wallet.rejectSessionAuthenticate(rejectParams,
+  onSuccess = {
+        //Success
+  },
+  onError = { error ->
+      //Handle error
+  }
+)
+```
 
 </PlatformTabItem>
 
