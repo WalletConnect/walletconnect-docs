@@ -13,6 +13,8 @@ This feature is only available for native platforms.
 
 ## Usage
 
+Mobile Linking allows your wallet to automatically redirect back to the Dapp allowing for less user interactions and hence a better UX for your users.
+
 ### Establishing Communication Between Mobile Wallets and Apps
 
 When integrating a wallet with a mobile application, it's essential to understand how they communicate. The process involves two main steps:
@@ -66,7 +68,7 @@ When the Dapp needs the user to sign something (like a transaction), a similar p
 <PlatformTabs groupId="" activeOptions={["ios","android","flutter","react-native"]}>
 <PlatformTabItem value="ios">
 
-In order for dApps to be able to trigger your wallet for a connection or sign request using deep links you first need to add your custom scheme under [`CFBundleURLTypes`](https://developer.apple.com/documentation/bundleresources/information_property_list/cfbundleurltypes) key in your Info.plist file.
+In order for Dapps to be able to trigger your wallet for a connection or sign request using deep links you first need to add your custom scheme under [`CFBundleURLTypes`](https://developer.apple.com/documentation/bundleresources/information_property_list/cfbundleurltypes) key in your Info.plist file.
 
 ```ruby
 <key>CFBundleURLTypes</key>
@@ -86,7 +88,7 @@ In order for dApps to be able to trigger your wallet for a connection or sign re
 
 </PlatformTabItem>
 <PlatformTabItem value="android">
-In order for dApps to be able to trigger your wallet for a connection or sign request using deep links you first need to declare an [`<intent-filter>`](https://developer.android.com/training/app-links/deep-linking#adding-filters) in your wallet's Manifest.xml as follows:
+In order for Dapps to be able to trigger your wallet for a connection or sign request using deep links you first need to declare an [`<intent-filter>`](https://developer.android.com/training/app-links/deep-linking#adding-filters) in your wallet's Manifest.xml as follows:
 
 ```xml
 <intent-filter>
@@ -145,7 +147,7 @@ examplewallet://wc?uri=wc:94caa59c77dae0dd234b5818fb7292540d017b27d41f7f387ee75b
 https://example.wallet/wc?uri=wc:94caa59c77dae0dd234b5818fb7292540d017b27d41f7f387ee75b22b9738c94@2?relay-protocol=irn&symKey=ce3a2c7724c03cf1769ba8b1bdedad5414cc7b920aa3fb72112b997d1916266f
 ```
 
-Additionally when there is a signing request triggered by the dapp it will hit the deep link with an incomplete URI, this should be ignored and not considered valid as it's only used for automatically redirecting the users to approve or reject a signing request.
+Additionally when there is a signing request triggered by the Dapp it will hit the deep link with an incomplete URI, this should be ignored and not considered valid as it's only used for automatically redirecting the users to approve or reject a signing request.
 
 ```bash
 # For deep links
@@ -261,7 +263,7 @@ For iOS versions below 17, `WalletConnectRouter.goBack(uri: uri)` facilitates au
 
 #### Android Wallet Support
 
-**Disclaimer:** The below solution is designed for the communication between native Android dapps and native Android wallets. In the case of mobile browser dapps and native Android wallets communication, we recommend moving wallets into the background after both approving and rejecting sessions or approving and rejecting requests to persist smooth deep-link UX.
+**Disclaimer:** The below solution is designed for the communication between native Android Dapps and native Android wallets. In the case of mobile browser Dapps and native Android wallets communication, we recommend moving wallets into the background after both approving and rejecting sessions or approving and rejecting requests to persist smooth deep-link UX.
 
 In order to add support for mobile linking within your wallet and receive session proposals, register following deep link in your mobile wallet using intent filters in your Activity/Fragment or deepLink tag in your navigation graph.
 
@@ -341,7 +343,7 @@ SignClient.initialize(init)
 
 **Heads-up:** To make this flow working well, Dapp must register one of its Android components with the same deep link that it initialized with.
 
-To check the flow implementation described above have a look on our sample Dapp:
+To check the flow implementation described above have a look on our Sample Dapp:
 https://github.com/WalletConnect/WalletConnectKotlinV2/tree/master/sample/dapp
 
 #### References
@@ -352,7 +354,7 @@ https://github.com/WalletConnect/WalletConnectKotlinV2/tree/master/sample/dapp
 </PlatformTabItem>
 <PlatformTabItem value="flutter">
 
-Either you are approving a session proposal or responding to a session request, redirecting back to the dapp is as simply as launching requester's `redirect` object in `PairingMetadata`:
+Either you are approving a session proposal or responding to a session request, redirecting back to the Dapp is as simply as launching requester's `redirect` object in `PairingMetadata`:
 
 For session approval:
 
@@ -373,7 +375,7 @@ launchUrlString(scheme, mode: LaunchMode.externalApplication);
 </PlatformTabItem>
 <PlatformTabItem value="react-native">
 
-In order to redirect to the dapp, you'll need to use `Linking` from `react-native` and call `openURL()` method with the dapp scheme that comes in the proposal metadata.
+In order to redirect to the Dapp, you'll need to use `Linking` from `react-native` and call `openURL()` method with the Dapp scheme that comes in the proposal metadata.
 
 ```js
 import { Linking } from 'react-native'
