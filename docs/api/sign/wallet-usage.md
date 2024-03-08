@@ -743,7 +743,7 @@ fun onSessionAuthenticate(sessionAuthenticate: Sign.Model.SessionAuthenticate, v
 ```
 
 ### Responding Authentication Request
-To interact with authentication requests, build authentication objects (Wallet.Model.Cacao). It involves the following steps:
+To interact with authentication requests, build authentication objects (Sign.Model.Cacao). It involves the following steps:
 
 **Creating an Authentication Payload Params** - Generate an authentication payload params that matches your application's supported chains and methods.
 **Formatting Authentication Messages** - Format the authentication message using the payload and the user's account.
@@ -763,7 +763,7 @@ override fun onSessionAuthenticate(sessionAuthenticate: Sign.Model.SessionAuthen
 
   authPayloadParams.chains.forEach { chain ->
     val issuer = "did:pkh:$chain:$address"
-    val formattedMessage = WalletSignClient.formatAuthMessage(Sign.Params.FormatMessage(authPayloadParams, issuer))
+    val formattedMessage = formatAuthMessage(Sign.Params.FormatMessage(authPayloadParams, issuer))
 
     val signature = signMessage(message: formattedMessage, privateKey: privateKey) //Note: Assume `signMessage` is a function you've implemented to sign messages.
     val auth = generateAuthObject(authPayloadParams, issuer, signature)
@@ -773,11 +773,11 @@ override fun onSessionAuthenticate(sessionAuthenticate: Sign.Model.SessionAuthen
 ```
 
 ### Approving Authentication Requests
-To approve an authentication request, construct Sign.Model.Cacao instances for each supported chain, sign the authentication messages, build AuthObjects and call approveSessionAuthenticate with the request ID and the authentication objects.
+To approve an authentication request, construct Sign.Model.Cacao instances for each supported chain, sign the authentication messages, build AuthObjects and call approveAuthenticate with the request ID and the authentication objects.
 
 ```kotlin
- val approveProposal = Wallet.Params.ApproveSessionAuthenticate(id = sessionAuthenticate.id, auths = auths)
-Web3Wallet.approveSessionAuthenticate(approveProposal,
+ val approveAuthenticate = Sign.Params.ApproveAuthenticate(id = sessionAuthenticate.id, auths = auths)
+SignClient.approveAuthenticate(approveProposal,
   onSuccess = {
     //Redirect back to the dapp if redirect is set: sessionAuthenticate.participant.metadata?.redirect
   },
@@ -793,15 +793,15 @@ Web3Wallet.approveSessionAuthenticate(approveProposal,
 :::
 
 ### Rejecting Authentication Requests
-If the authentication request cannot be approved or if the user chooses to reject it, use the rejectSession method.
+If the authentication request cannot be approved or if the user chooses to reject it, use the rejectAuthenticate method.
 
 ```kotlin
-val rejectParams = Wallet.Params.RejectSessionAuthenticate(
+val rejectParams = Sign.Params.RejectAuthenticate(
     id = sessionAuthenticate.id,
     reason = "Reason"
 )
 
-Web3Wallet.rejectSessionAuthenticate(rejectParams,
+SignClient.rejectAuthenticate(rejectParams,
   onSuccess = {
         //Success
   },
