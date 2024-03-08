@@ -129,6 +129,38 @@ try {
 }
 ```
 
+#### Session Authenticate with ReCaps
+
+The authenticate() method enhances the WalletConnect protocol, offering EVM dApps a sophisticated mechanism to request wallet authentication and simultaneously establish a session. This innovative approach not only authenticates the user but also facilitates a seamless session creation, integrating the capabilities defined by ERC-5573, also known as ReCaps.
+
+ReCaps extend the SIWE protocol, enabling users to give informed consent for dApps to exercise scoped capabilities on their behalf. This consent mechanism is crucial for authorizing a dApp to perform actions or access resources, thus ensuring security and trust in dApp interactions. These scoped capabilities are specified through ReCap URIs in the resources field of the AuthRequestParams, which translate to human-readable consent in the SIWE message, detailing the actions a dApp is authorized to undertake.
+
+To initiate an authentication and authorization request, a dApp invokes the authenticate() method, passing in parameters that include desired capabilities as outlined in EIP-5573. The method generates a pairing URI for user interaction, facilitating a streamlined authentication and consent process.
+
+Example of initiating an authentication request with ReCaps:
+
+```typescript
+const { uri, response } = await signClient.authenticate({
+  chains: ['eip155:1', 'eip155:2'], // chains your dapp requests authentication for
+  domain: 'localhost', // your domain
+  uri: 'http://localhost/login', // uri
+  nonce: '1239812982', // random nonce
+  methods: ['personal_sign', 'eth_chainId', 'eth_signTypedData_v4'], // the methods you wish to use
+  resources: ['https://example.com'] // any resources relevant to the connection
+})
+
+// Present the URI to users as QR code to be able to connect with a wallet
+...
+
+// wait for response
+const result = await response()
+
+// after a Wallet establishes a connection response will resolve with auths ( authentication objects ) & the established session
+const { auths, session } = result;
+
+// now you can send requests to that session
+```
+
 #### Making Requests
 
 Once the session has been established successfully, you can start making JSON-RPC requests to be approved and signed by the wallet:
