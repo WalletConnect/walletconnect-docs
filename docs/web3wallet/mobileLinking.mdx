@@ -30,7 +30,7 @@ The next section provides a high-level overview of both flows.
 - **Redirect to Wallet:** The user is redirected to their chosen wallet.
 - **Wallet Approval:** The wallet prompts the user to approve or reject the session (similar to granting permission).
 - **Return to Dapp:**
-  - **Manual Return:** The wallet asks the user to manually return to the Dapp.
+  - **Manual Return:** The wallet asks the user to manually return to the Dapp. [(See iOS Limitations)](?platform=ios#limitations)
   - **Automatic Return:** Alternatively, the wallet automatically takes the user back to the Dapp.
 - **User Reunites with Dapp:** After all the interactions, the user ends up back in the Dapp.
 
@@ -46,10 +46,12 @@ The next section provides a high-level overview of both flows.
 
 When the Dapp needs the user to sign something (like a transaction), a similar pattern occurs:
 
-- Automatic Redirect: The Dapp automatically sends the user to their previously chosen wallet.
-- Approval Prompt: The wallet asks the user to approve or reject the request.
-- Return to Dapp: Again, the wallet may require manual or automatic return to the Dapp.
-- User Reconnects: Eventually, the user returns to the Dapp.
+- **Automatic Redirect:** The Dapp automatically sends the user to their previously chosen wallet.
+- **Approval Prompt:** The wallet asks the user to approve or reject the request.
+- **Return to Dapp:**
+  - **Manual Return:** The wallet asks the user to manually return to the Dapp. [(See iOS Limitations)](?platform=ios#limitations)
+  - **Automatic Return:** Alternatively, the wallet automatically takes the user back to the Dapp.
+- **User Reconnects:** Eventually, the user returns to the Dapp.
 
 <ThemedImage
   alt="Mobile Linking Sign Flow"
@@ -172,65 +174,48 @@ These are the known workarounds for avoiding app linking issues on iOS when usin
 
 #### When sending a transaction
 
-<ul>
-  <li>
-    __[`signer.sendTransaction`](https://docs.ethers.io/v5/api/signer/#Signer-sendTransaction)
-    should be avoided in favor of
-    [`signer.sendUncheckedTransaction`](https://docs.ethers.io/v5/api/providers/jsonrpc-provider/#JsonRpcSigner-sendUncheckedTransaction)__
-    <br />
-    &nbsp;This avoids an asynchronous call to retrieve the internal block number which Ethers uses
-    to resolve a complete
-    [`TransactionResponse`](https://docs.ethers.io/v5/api/providers/types/#providers-TransactionResponse)
-    object.
-    <br />
-    &nbsp;Note that as a result of this optimization, `sendUncheckedTransaction` returns a mock
-    transaction response that only contains the `hash` property and a `wait` method. All other
-    properties are `null`.
-  </li>
-  <li>
-    __The transaction's `to` property should be a plain address rather than an ENS name__
-    <br />
-    This avoids an asynchronous call to automatically resolve ENS names during the send process.
-    <br />
-    &nbsp;If you still want to support ENS name resolution, you should manually run
-    [`provider.resolveName`](https://docs.ethers.io/v5/api/providers/provider/#Provider-ResolveName)
-    ahead of time, storing the result before the user attempts to send a transaction. Do not resolve
-    ENS names in the event handler.
-  </li>
-  <li>
-    __The transaction's `gasLimit` property should be set__
-    <br />
-    This avoids the asynchronous work performed in `sendTransaction` which automatically estimates
-    the gas limit if it's missing.
-    <br />
-    &nbsp;If you still want to use the same gas limit estimation logic from `sendTransaction`, you
-    should manually run
-    [`provider.estimateGas`](https://docs.ethers.io/v5/api/providers/provider/#Provider-estimateGas)
-    ahead of time, storing the result before the user attempts to send the transaction. Do not
-    estimate gas in the event handler.
-  </li>
-</ul>
+1. **[`signer.sendTransaction`](https://docs.ethers.io/v5/api/signer/#Signer-sendTransaction)
+   should be avoided in favor of
+   [`signer.sendUncheckedTransaction`](https://docs.ethers.io/v5/api/providers/jsonrpc-provider/#JsonRpcSigner-sendUncheckedTransaction)**
+   <br />
+   &nbsp;This avoids an asynchronous call to retrieve the internal block number which Ethers uses to
+   resolve a complete [`TransactionResponse`](https://docs.ethers.io/v5/api/providers/types/#providers-TransactionResponse)
+   object.
+   <br />
+   &nbsp;Note that as a result of this optimization, `sendUncheckedTransaction` returns a mock transaction
+   response that only contains the `hash` property and a `wait` method. All other properties are `null`.
+1. **The transaction's `to` property should be a plain address rather than an ENS name**
+   <br />
+   This avoids an asynchronous call to automatically resolve ENS names during the send process.
+   <br />
+   &nbsp;If you still want to support ENS name resolution, you should manually run [`provider.resolveName`](https://docs.ethers.io/v5/api/providers/provider/#Provider-ResolveName)
+   ahead of time, storing the result before the user attempts to send a transaction. Do not resolve ENS
+   names in the event handler.
+1. **The transaction's `gasLimit` property should be set**
+   <br />
+   This avoids the asynchronous work performed in `sendTransaction` which automatically estimates the
+   gas limit if it's missing.
+   <br />
+   &nbsp;If you still want to use the same gas limit estimation logic from `sendTransaction`, you should
+   manually run [`provider.estimateGas`](https://docs.ethers.io/v5/api/providers/provider/#Provider-estimateGas)
+   ahead of time, storing the result before the user attempts to send the transaction. Do not estimate
+   gas in the event handler.
 
 #### When calling a write method on a contract
 
-<ul>
-  <li>
-    __[`contract.METHOD_NAME`](https://docs.ethers.io/v5/api/contract/contract/#contract-functionsSend)
-    should be avoided if favor of calling
-    [`contract.populateTransaction.METHOD_NAME`](https://docs.ethers.io/v5/api/contract/contract/#contract-populateTransaction)
-    ahead of time, then sending the populated transaction with
-    [`signer.sendUncheckedTransaction`](https://docs.ethers.io/v5/api/providers/jsonrpc-provider/#JsonRpcSigner-sendUncheckedTransaction).__
-  </li>
-  <li>
-    When sending the populated transaction, you should [follow the same guidelines as regular
-    transactions](#when-sending-a-transaction) to avoid any asynchronous logic breaking the app link
-    navigation. Do not populate the contract transaction in the event handler.
-  </li>
-</ul>
+1. **[`contract.METHOD_NAME`](https://docs.ethers.io/v5/api/contract/contract/#contract-functionsSend)
+   should be avoided if favor of calling
+   [`contract.populateTransaction.METHOD_NAME`](https://docs.ethers.io/v5/api/contract/contract/#contract-populateTransaction)
+   ahead of time, then sending the populated transaction with
+   [`signer.sendUncheckedTransaction`](https://docs.ethers.io/v5/api/providers/jsonrpc-provider/#JsonRpcSigner-sendUncheckedTransaction).**
+
+1. When sending the populated transaction, you should [follow the same guidelines as regular
+   transactions](#when-sending-a-transaction) to avoid any asynchronous logic breaking the app link
+   navigation. Do not populate the contract transaction in the event handler.
 
 #### When signing a message
 
-- If the message depends on the result of an asynchronous call (e.g. retrieving a nonce when implementing [Sign-In With Ethereum](https://login.xyz)), you should do this work ahead of time, storing the result before the user attempts to sign the message. Do not perform this asynchronous work in the event handler.
+If the message depends on the result of an asynchronous call (e.g. retrieving a nonce when implementing [Sign-In With Ethereum](https://login.xyz)), you should do this work ahead of time, storing the result before the user attempts to sign the message. Do not perform this asynchronous work in the event handler.
 
 ---
 
@@ -264,7 +249,9 @@ if let uri = proposal.proposer.redirect?.native {
 
 #### Limitations
 
-Automatic redirection to browser-based DApps after wallet interaction is not possible from iOS 17 onwards. Developers should adjust their app's UI to inform users about manual navigation back to the browser. For iOS versions below 17, WalletConnectRouter.goBack(uri: uri) facilitates automatic redirection.
+Automatic redirection to browser-based DApps after wallet interaction is not possible from iOS 17 onwards. Developers should adjust their app's UI to inform users about manual navigation back to the browser.
+
+For iOS versions below 17, `WalletConnectRouter.goBack(uri: uri)` facilitates automatic redirection.
 
 ![Redirect](/img/ios-redirect.png)
 
