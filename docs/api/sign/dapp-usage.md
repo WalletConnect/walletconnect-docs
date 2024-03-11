@@ -236,8 +236,87 @@ To learn more on namespaces, check out our [specs](https://specs.walletconnect.c
 2. Your App should generate a pairing URI and share it with a wallet. Uri can be presented as a QR code or sent via a universal link. Wallet begins subscribing for session proposals after receiving URI. In order to create a pairing and send a session proposal, you need to call the following:
 
 ```Swift
-let uri = try await Pair.instance.create()
-try await Sign.instance.connect(requiredNamespaces: namespaces, topic: uri.topic)
+let uri = try await Sign.instance.connect(requiredNamespaces: namespaces, topic: uri.topic)
+```
+
+#### Session Authenticate with ReCaps
+
+The authenticate() method enhances the WalletConnect protocol, offering EVM dApps a sophisticated mechanism to request wallet authentication and simultaneously establish a session. This innovative approach not only authenticates the user but also facilitates a seamless session creation, integrating the capabilities defined by ERC-5573, also known as ReCaps.
+
+ReCaps extend the SIWE protocol, enabling users to give informed consent for dApps to exercise scoped capabilities on their behalf. This consent mechanism is crucial for authorizing a dApp to perform actions or access resources, thus ensuring security and trust in dApp interactions. These scoped capabilities are specified through ReCap URIs in the resources field of the AuthRequestParams, which translate to human-readable consent in the SIWE message, detailing the actions a dApp is authorized to undertake.
+
+To initiate an authentication and authorization request, a dApp invokes the authenticate() method, passing in parameters that include desired capabilities as outlined in EIP-5573. The method generates a pairing URI for user interaction, facilitating a streamlined authentication and consent process.
+
+Example of initiating an authentication request with ReCaps:
+
+```swift
+func initiateAuthentication() {
+    Task {
+        do {
+            let authParams = AuthRequestParams.stub() // Customize your AuthRequestParams as needed
+            let uri = try await Sign.instance.authenticate(authParams)
+            // Present the URI to the user, e.g., show a QR code or send a deep link
+            presentAuthenticationURI(uri)
+        } catch {
+            print("Failed to initiate authentication request: \(error)")
+        }
+    }
+}
+```
+
+##### Subscribe to Authentication Responses
+
+Once you have initiated an authentication request, you need to listen for responses from wallets. Responses will indicate whether the authentication request was approved or rejected. Use the authResponsePublisher to subscribe to these events.
+
+Example subscription to authentication responses:
+
+```swift
+Sign.instance.authResponsePublisher
+    .receive(on: DispatchQueue.main)
+    .sink { response in
+        switch response.result {
+        case .success(let (session, _)):
+            if let session = session {
+                // Authentication successful, session established
+                handleSuccessfulAuthentication(session)
+            } else {
+                // Authentication successful, but no session created (SIWE-only flow)
+                handleSuccessfulAuthenticationWithoutSession()
+            }
+        case .failure(let error):
+            // Authentication request was rejected or failed
+            handleAuthenticationFailure(error)
+        }
+    }
+    .store(in: &subscriptions)
+```
+
+In this setup, the authResponsePublisher notifies your dApp of the outcome of the authentication request. Your dApp can then proceed based on whether the authentication was successful, rejected, or failed due to an error.
+
+Example of AuthRequestParams:
+
+```swift
+extension AuthRequestParams {
+    static func stub(
+        domain: String = "yourDappDomain.com",
+        chains: [String] = ["eip155:1", "eip155:137"],
+        nonce: String = "uniqueNonce",
+        uri: String = "https://yourDappDomain.com/login",
+        statement: String? = "I accept the Terms of Service: https://yourDappDomain.com/tos",
+        resources: [String]? = nil, // here your dapp may request authorization with recaps
+        methods: [String]? = ["personal_sign", "eth_sendTransaction"]
+    ) -> AuthRequestParams {
+        return try! AuthRequestParams(
+            domain: domain,
+            chains: chains,
+            nonce: nonce,
+            uri: uri,
+            statement: statement,
+            resources: resources,
+            methods: methods
+        )
+    }
+}
 ```
 
 #### Send Request to the Wallet

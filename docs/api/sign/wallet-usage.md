@@ -492,6 +492,81 @@ For good user experience your wallet should allow users to disconnect unwanted s
 try await Sign.instance.disconnect(topic: session.topic)
 ```
 
+### Authenticated Session
+An authenticated session represents a secure connection established between a wallet and a dApp after successful authentication.
+
+#### Handling Authentication Requests
+To handle incoming authentication requests, subscribe to the authenticateRequestPublisher. This will notify you of any authentication requests that need to be processed, allowing you to either approve or reject them based on your application logic.
+
+```swift
+Sign.instance.authenticateRequestPublisher
+    .receive(on: DispatchQueue.main)
+    .sink { result in
+        // Process the authentication request here.
+        // This involves displaying UI to the user.
+    }
+    .store(in: &subscriptions) // Assuming `subscriptions` is where you store your Combine subscriptions.
+```
+
+#### Building Authentication Objects
+To interact with authentication requests, first build authentication objects (AuthObject). These objects are crucial for approving authentication requests. This involves:
+
+**Creating an Authentication Payload** - Generate an authentication payload that matches your application's supported chains and methods.
+**Formatting Authentication Messages** - Format the authentication message using the payload and the user's account.
+**Signing the Authentication Message** - Sign the formatted message to create a verifiable authentication object.
+
+Example Implementation:
+
+```swift
+func buildAuthObjects(request: AuthenticationRequest, account: Account, privateKey: String) throws -> [AuthObject] {
+    let requestedChains = Set(request.payload.chains.compactMap { Blockchain($0) })
+    let supportedChains: Set<Blockchain> = [Blockchain("eip155:1")!, Blockchain("eip155:137")!, Blockchain("eip155:69")!]
+    let commonChains = requestedChains.intersection(supportedChains)
+    let supportedMethods = ["personal_sign", "eth_sendTransaction"]
+
+    var authObjects = [AuthObject]()
+    for chain in commonChains {
+        let accountForChain = Account(blockchain: chain, address: account.address)!
+        let supportedAuthPayload = try Sign.instance.buildAuthPayload(
+            payload: request.payload, 
+            supportedEVMChains: Array(commonChains), 
+            supportedMethods: supportedMethods
+        )
+        let formattedMessage = try Sign.instance.formatAuthMessage(payload: supportedAuthPayload, account: accountForChain)
+        let signature = // Assume `signMessage` is a function you've implemented to sign messages.
+            signMessage(message: formattedMessage, privateKey: privateKey)
+        
+        let authObject = try Sign.instance.buildSignedAuthObject(
+            authPayload: supportedAuthPayload, 
+            signature: signature, 
+            account: accountForChain
+        )
+        authObjects.append(authObject)
+    }
+    return authObjects
+}
+
+```
+
+#### Approving Authentication Requests
+To approve an authentication request, construct AuthObject instances for each supported blockchain, sign the authentication messages, build AuthObjects and call approveSessionAuthenticate with the request ID and the authentication objects.
+
+```swift
+let session = try await Sign.instance.approveSessionAuthenticate(requestId: requestId, auths: authObjects)
+```
+
+:::info Note
+1. The recommended approach for secure authentication across multiple chains involves signing a SIWE (Sign-In with Ethereum) message for each chain and account. However, at a minimum, one SIWE message must be signed to establish a session. It is possible to create a session for multiple chains with just one issued authentication object.
+2. Sometimes a dapp may want to only authenticate the user without creating a session, not every approval will result with a new session.
+:::
+
+#### Rejecting Authentication Requests
+If the authentication request cannot be approved or if the user chooses to reject it, use the rejectSession method.
+
+```swift
+try await Sign.instance.rejectSession(requestId: requestId)
+```
+
 #### Where to go from here
 
 - Try our example wallet implementation [here](https://github.com/WalletConnect/WalletConnectSwiftV2/tree/main/Example/WalletApp).
