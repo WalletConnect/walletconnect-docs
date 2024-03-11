@@ -103,11 +103,7 @@ module.exports = {
                 'web3modal/javascript/options',
                 'web3modal/javascript/components',
                 'web3modal/javascript/email/index',
-                {
-                  type: 'category',
-                  label: 'SIWE',
-                  items: ['web3modal/javascript/siwe/about', 'web3modal/javascript/siwe/usage']
-                },
+                'web3modal/javascript/siwe',
                 'web3modal/javascript/theming',
                 'web3modal/javascript/resources'
               ]

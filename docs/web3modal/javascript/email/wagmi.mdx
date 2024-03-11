@@ -16,21 +16,14 @@ const projectId = 'YOUR_PROJECT_ID'
 
 // 2. Create wagmiConfig
 const metadata = {
-  name: 'Web3Modal',
-  description: 'Web3Modal Example',
-  url: 'https://web3modal.com',
-  icons: ['https://avatars.githubusercontent.com/u/37784886']
+  //...
 }
 
 const chains = [mainnet, arbitrum]
 const wagmiConfig = defaultWagmiConfig({
-  chains, // required
-  projectId, // required
-  metadata, // required
-  enableWalletConnect: true, // Optional - true by default
-  enableInjected: true, // Optional - true by default
-  enableEIP6963: true, // Optional - true by default
-  enableCoinbase: true, // Optional - true by default
+  chains,
+  projectId,
+  metadata,
   /* highlight-add-start */
   enableEmail: true // Optional - false by default
   /* highlight-add-end */
@@ -59,10 +52,7 @@ import { coinbaseWallet, walletConnect, injected } from '@wagmi/connectors'
 const projectId = 'YOUR_PROJECT_ID'
 
 const metadata = {
-  name: 'Web3Modal',
-  description: 'Web3Modal Example',
-  url: 'https://web3modal.com',
-  icons: ['https://avatars.githubusercontent.com/u/37784886']
+  //...
 }
 
 const wagmiConfig = createConfig({

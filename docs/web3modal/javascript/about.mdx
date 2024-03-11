@@ -17,8 +17,12 @@ import EthersModal from './ethers/about/triggermodal.mdx'
 # JavaScript
 
 Web3Modal SDK has support for [Wagmi](https://wagmi.sh/) and
-[Ethers v6](https://docs.ethers.org/v6/).
-Choose one of these ethereum libraries to get started.
+[Ethers](https://docs.ethers.org/v6/), which will help you interact with wallets and smart contracts.
+Choose one of these Ethereum libraries to get started.
+
+:::info Note
+We recommend using [Vite](https://vitejs.dev/guide/#scaffolding-your-first-vite-project) to get started with Web3Modal JavaScript.
+:::
 
 ## Installation
 
@@ -107,8 +111,10 @@ npm install @web3modal/ethers ethers
 
 ## Smart Contract Interaction
 
-<PlatformTabs groupId="eth-lib" activeOptions={["wagmi", "wagmi1","ethers5", "ethers"]}>
+<PlatformTabs groupId="eth-lib" activeOptions={["wagmi", "ethers"]}>
 <PlatformTabItem value="wagmi">
+
+[Wagmi actions](https://wagmi.sh/core/api/actions/readContract) can help us interact with wallets and smart contracts:
 
 ```tsx
 import { readContract } from '@wagmi/core'
@@ -126,59 +132,9 @@ const data = readContract({
 Read more about Wagmi actions for smart contract interaction [here](https://wagmi.sh/core/actions/readContract).
 
 </PlatformTabItem>
-<PlatformTabItem value="wagmi1">
-
-```tsx
-import { readContract } from '@wagmi/core'
-import { USDTAbi } from '../abi/USDTAbi'
-import { wagmiConfig } from './main'
-
-const USDTAddress = '0x...'
-
-const result = await readContract(wagmiConfig, {
-  abi: USDTAbi,
-  address: USDTAddress,
-  functionName: 'totalSupply'
-})
-```
-
-Read more about Wagmi actions for smart contract interaction [here](https://1.x.wagmi.sh/core/actions/readContract).
-
-</PlatformTabItem>
-<PlatformTabItem value="ethers5">
-
-```tsx
-import { ethers } from 'ethers'
-
-const USDTAddress = '0x...'
-
-// The ERC-20 Contract ABI, which is a common contract interface
-// for tokens (this is the Human-Readable ABI format)
-const USDTAbi = [
-  'function name() view returns (string)',
-  'function symbol() view returns (string)',
-  'function balanceOf(address) view returns (uint)',
-  'function transfer(address to, uint amount)',
-  'event Transfer(address indexed from, address indexed to, uint amount)'
-]
-
-const walletProvider = modal.getWalletProvider()
-
-async function getBalance() {
-  if (!walletProvider) throw Error('User disconnected')
-
-  const ethersProvider = new ethers.providers.Web3Provider(walletProvider)
-  const signer = await ethersProvider.getSigner()
-  // The Contract object
-  const USDTContract = new ethers.Contract(USDTAddress, USDTAbi, signer)
-  const USDTBalance = await USDTContract.balanceOf(address)
-
-  console.log(ethers.utils.formatUnits(USDTBalance, 18))
-}
-```
-
-</PlatformTabItem>
 <PlatformTabItem value="ethers">
+
+[Ethers](https://docs.ethers.org/v6/) can help us interact with wallets and smart contracts:
 
 ```tsx
 import { BrowserProvider, Contract, formatUnits } from 'ethers'
