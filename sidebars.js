@@ -42,6 +42,7 @@ module.exports = {
                 'web3modal/react/options',
                 'web3modal/react/components',
                 'web3modal/react/email/index',
+                'web3modal/react/onramp',
                 {
                   type: 'category',
                   label: 'SIWE',
@@ -61,6 +62,7 @@ module.exports = {
                 'web3modal/nextjs/options',
                 'web3modal/nextjs/components',
                 'web3modal/nextjs/email/index',
+                'web3modal/nextjs/onramp',
                 {
                   type: 'category',
                   label: 'SIWE',
@@ -84,6 +86,7 @@ module.exports = {
                 'web3modal/vue/options',
                 'web3modal/vue/components',
                 'web3modal/vue/email/index',
+                'web3modal/vue/onramp',
                 {
                   type: 'category',
                   label: 'SIWE',
@@ -104,6 +107,7 @@ module.exports = {
                 'web3modal/javascript/components',
                 'web3modal/javascript/email/index',
                 'web3modal/javascript/siwe',
+                'web3modal/javascript/onramp',
                 'web3modal/javascript/theming',
                 'web3modal/javascript/resources'
               ]
