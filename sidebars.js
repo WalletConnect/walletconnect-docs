@@ -171,6 +171,11 @@ module.exports = {
                 }
               ]
             },
+            {
+              type: 'category',
+              label: 'Features',
+              items: [{ type: 'doc', label: 'Email Login', id: 'web3modal/features/email' }]
+            },
             'web3modal/upgrade',
             'web3modal/v2/about'
           ]
