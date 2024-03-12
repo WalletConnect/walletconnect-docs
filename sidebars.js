@@ -41,13 +41,9 @@ module.exports = {
                 'web3modal/react/hooks',
                 'web3modal/react/options',
                 'web3modal/react/components',
-                'web3modal/react/email/index',
+                'web3modal/react/email',
                 'web3modal/react/onramp',
-                {
-                  type: 'category',
-                  label: 'SIWE',
-                  items: ['web3modal/react/siwe/about', 'web3modal/react/siwe/usage']
-                },
+                'web3modal/react/siwe',
                 'web3modal/react/theming',
                 'web3modal/react/resources'
               ]
@@ -61,14 +57,13 @@ module.exports = {
                 'web3modal/nextjs/hooks',
                 'web3modal/nextjs/options',
                 'web3modal/nextjs/components',
-                'web3modal/nextjs/email/index',
+                'web3modal/nextjs/email',
                 'web3modal/nextjs/onramp',
                 {
                   type: 'category',
                   label: 'SIWE',
                   items: [
                     'web3modal/nextjs/siwe/about',
-                    'web3modal/nextjs/siwe/usage',
                     'web3modal/nextjs/siwe/next-auth'
                   ]
                 },
@@ -85,13 +80,9 @@ module.exports = {
                 'web3modal/vue/composables',
                 'web3modal/vue/options',
                 'web3modal/vue/components',
-                'web3modal/vue/email/index',
+                'web3modal/vue/email',
                 'web3modal/vue/onramp',
-                {
-                  type: 'category',
-                  label: 'SIWE',
-                  items: ['web3modal/vue/siwe/about', 'web3modal/vue/siwe/usage']
-                },
+                'web3modal/vue/siwe',
                 'web3modal/vue/theming',
                 'web3modal/vue/resources'
               ]
@@ -105,13 +96,9 @@ module.exports = {
                 'web3modal/javascript/actions',
                 'web3modal/javascript/options',
                 'web3modal/javascript/components',
-                'web3modal/javascript/email/index',
+                'web3modal/javascript/email',
+                'web3modal/javascript/siwe',
                 'web3modal/javascript/onramp',
-                {
-                  type: 'category',
-                  label: 'SIWE',
-                  items: ['web3modal/javascript/siwe/about', 'web3modal/javascript/siwe/usage']
-                },
                 'web3modal/javascript/theming',
                 'web3modal/javascript/resources'
               ]

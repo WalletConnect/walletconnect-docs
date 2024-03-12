@@ -1,10 +1,10 @@
 import Tabs from '@theme/Tabs'
 import TabItem from '@theme/TabItem'
 
-To open Web3Modal you can use our **default** web components or build your own logic with Web3Modal _actions_.
+To open Web3Modal you can use our [**web component**](../../components.mdx) or build your own button with Web3Modal [**actions**](../../actions.mdx#open-and-close-the-modal).
 
 <Tabs>
-<TabItem value="components" label="Components">
+<TabItem value="components" label="Web Component">
 
 ```html
   <body>
@@ -45,7 +45,7 @@ Let's first add two html button elements into our `index.html` file:
 </html>
 ```
 
-Following with our `main.js` file, we can now add the needed logic to open the modal:
+Following with our `main.ts` file, we can now add the needed logic to open the modal:
 
 ```ts
 const openConnectModalBtn = document.getElementById('open-connect-modal')

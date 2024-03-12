@@ -1,12 +1,12 @@
 import Tabs from '@theme/Tabs'
 import TabItem from '@theme/TabItem'
 
-In your `main.ts` file set up the following configuration.
+On top of your app set up the following configuration, making sure that all functions are called outside any React component to avoid unwanted rerenders.
 
-```ts
-import { createWeb3Modal, defaultConfig } from '@web3modal/ethers'
+```tsx
+import { createWeb3Modal, defaultConfig } from '@web3modal/ethers5/react'
 
-// 1. Get projectId at https://cloud.walletconnect.com
+// 1. Get projectId
 const projectId = 'YOUR_PROJECT_ID'
 
 // 2. Set chains
@@ -18,11 +18,11 @@ const mainnet = {
   rpcUrl: 'https://cloudflare-eth.com'
 }
 
-// 3. Create your application's metadata object
+// 3. Create a metadata object
 const metadata = {
   name: 'My Website',
   description: 'My Website description',
-  url: 'https://mywebsite.com', // url must match your domain & subdomain
+  url: 'https://mywebsite.com', // origin must match your domain & subdomain
   icons: ['https://avatars.mywebsite.com/']
 }
 
@@ -40,15 +40,18 @@ const ethersConfig = defaultConfig({
 }),
 
 // 5. Create a Web3Modal instance
-const modal = createWeb3Modal({
+createWeb3Modal({
   ethersConfig,
   chains: [mainnet],
   projectId,
-  enableAnalytics: true, // Optional - defaults to your Cloud configuration
-  enableOnramp: true // Optional - false as default
+  enableAnalytics: true // Optional - defaults to your Cloud configuration
 })
+
+export default function App() {
+  return <YourApp />
+}
 ```
 
 :::note IMPORTANT
-Make sure that the `url` from the `metadata` matches your domain and subdomain. This will later be used by the [Verify API](../../../../cloud/verify.md) to tell wallets if your application has been verified or not.
+Make sure that the `url` from the `metadata` matches your domain and subdomain. This will later be used by the [Verify API](../../../cloud/verify.md) to tell wallets if your application has been verified or not.
 :::
