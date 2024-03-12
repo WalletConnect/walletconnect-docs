@@ -6,31 +6,14 @@ import WagmiComposables from './wagmi/composables.mdx'
 import Wagmi1Composables from './wagmi1/composables.mdx'
 import EthersComposables from './ethers/composables.mdx'
 
-import Ethers5Composables from './ethers5/composables.mdx'
-
 # Composables
 
 ## useWeb3Modal
 
 Control the modal with the `useWeb3Modal` function
 
-<PlatformTabs groupId="eth-lib" activeOptions={["wagmi", "wagmi1", "ethers5","ethers"]}>
+<PlatformTabs groupId="eth-lib" activeOptions={["wagmi", "ethers5","ethers"]}>
 <PlatformTabItem value="wagmi">
-
-```ts
-import { useWeb3Modal } from '@web3modal/wagmi/vue'
-
-export default function Component() {
-  const { open, close } = useWeb3Modal()
-
-  open()
-
-  //...
-}
-```
-
-</PlatformTabItem>
-<PlatformTabItem value="wagmi1">
 
 ```ts
 import { useWeb3Modal } from '@web3modal/wagmi/vue'
@@ -118,32 +101,36 @@ List of views you can select
 
 ## useDisconnect
 
-Disconnect currently connected account.
-
 ```ts
 const { disconnect } = useDisconnect()
 
 disconnect()
 ```
 
+## Ethereum Library
+
+<PlatformTabs groupId="eth-lib" activeOptions={["wagmi", "ethers"]}>
+<PlatformTabItem value="wagmi">
+
+<WagmiComposables />
+
+</PlatformTabItem>
+<PlatformTabItem value="ethers">
+
+<EthersComposables />
+
+</PlatformTabItem>
+</PlatformTabs>
+
 ## useWeb3ModalState
 
 Get the current value of the modal's state
 
-<PlatformTabs groupId="eth-lib" activeOptions={["wagmi", "wagmi1", "ethers5","ethers"]}>
+<PlatformTabs groupId="eth-lib" activeOptions={["wagmi", "ethers5","ethers"]}>
 <PlatformTabItem value="wagmi">
 
 ```ts
 import { useWeb3ModalState } from '@web3modal/wagmi/vue'
-
-const { open, selectedNetworkId } = useWeb3ModalState()
-```
-
-</PlatformTabItem>
-<PlatformTabItem value="wagmi1">
-
-```ts
-i1mport { useWeb3ModalState } from '@web3modal/wagmi/vue'
 
 const { open, selectedNetworkId } = useWeb3ModalState()
 ```
@@ -207,26 +194,3 @@ import { useWeb3ModalEvents } from '@web3modal/wagmi/vue'
 
 const events = useWeb3ModalEvents()
 ```
-
-<PlatformTabs groupId="eth-lib" activeOptions={["wagmi", "wagmi1", "ethers5","ethers"]}>
-<PlatformTabItem value="wagmi">
-
-<WagmiComposables />
-
-</PlatformTabItem>
-<PlatformTabItem value="wagmi1">
-
-<Wagmi1Composables />
-
-</PlatformTabItem>
-<PlatformTabItem value="ethers5">
-
-<Ethers5Composables />
-
-</PlatformTabItem>
-<PlatformTabItem value="ethers">
-
-<EthersComposables />
-
-</PlatformTabItem>
-</PlatformTabs>

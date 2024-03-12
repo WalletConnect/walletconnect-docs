@@ -1,9 +1,15 @@
 import Tabs from '@theme/Tabs'
 import TabItem from '@theme/TabItem'
 
-You can start Web3Modal configuration using either **default** or **custom** mode.
+Web3Modal can be configured in **two** different ways:
 
-Default mode will implement WalletConnect, Browser Wallets (injected) and Coinbase options in addition to the [WalletConnect's provider](../../../../cloud/blockchain-api.md).
+- **Default**: For a quick integration you can use `defaultWagmiConfig` function which wraps Wagmi's [`creatConfig`](https://wagmi.sh/core/api/createConfig) function with predefined configuration.
+This includes WalletConnect, Coinbase and Injected connectors, and our [Blockchain API](../../../../cloud/blockchain-api.md) as a [transport](https://wagmi.sh/core/api/createConfig#transports) (if the chain is not support by the Blockchain API it will fallback to the chain's default RPC).
+<br/> As shown in the code example, this configuration (with the exception of the connectors) can be overridden.
+<br/>
+- **Custom**: This configuration setup is great for projects that already have Wagmi integrated or that would like to have more control over the Wagmi configuration. Once [Wagmi](https://wagmi.sh/core/getting-started) is integrated in your project you will need to add `showQrModal: false` to the WalletConnect connector and call `createWeb3Modal` with its required parameters.
+
+Select your preferred configuration mode below:
 
 <Tabs>
 <TabItem value="default" label="Default">
@@ -34,13 +40,9 @@ const metadata = {
 
 const chains = [mainnet, arbitrum] as const
 const config = defaultWagmiConfig({
-  chains, // required
-  projectId, // required
-  metadata, // required
-  enableWalletConnect: true, // Optional - true by default
-  enableInjected: true, // Optional - true by default
-  enableEIP6963: true, // Optional - true by default
-  enableCoinbase: true, // Optional - true by default
+  chains,
+  projectId,
+  metadata,
   ...wagmiOptions // Optional - Override createConfig parameters
 })
 
@@ -52,7 +54,7 @@ createWeb3Modal({
   enableOnramp: true // Optional - false as default
 })
 
-export function ContextProvider({ children }) {
+export function Web3ModalProvider({ children }) {
   return (
     <WagmiProvider config={config}>
       <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
@@ -60,10 +62,6 @@ export function ContextProvider({ children }) {
   )
 }
 ```
-
-:::info
-Notice that `defaultWagmiConfig` is now imported from `'@web3modal/wagmi/react/config'`
-:::
 
 </TabItem>
 <TabItem value="custom" label="Custom">
@@ -128,3 +126,7 @@ export function ContextProvider({ children }) {
 
 </TabItem>
 </Tabs>
+
+:::note IMPORTANT
+Make sure that the `url` from the `metadata` matches your domain and subdomain. This will later be used by the [Verify API](../../../../cloud/verify.md) to tell wallets if your application has been verified or not.
+:::

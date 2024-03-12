@@ -3,7 +3,6 @@ import PlatformTabs from '../../components/PlatformTabs'
 import PlatformTabItem from '../../components/PlatformTabItem'
 
 import WagmiHooks from './wagmi/hooks.mdx'
-import Wagmi1Hooks from './wagmi1/hooks.mdx'
 import EthersHooks from './ethers/hooks.mdx'
 
 # Hooks
@@ -12,23 +11,8 @@ import EthersHooks from './ethers/hooks.mdx'
 
 Control the modal with the `useWeb3Modal` hook
 
-<PlatformTabs groupId="eth-lib" activeOptions={["wagmi", "wagmi1", "ethers5","ethers"]}>
+<PlatformTabs groupId="eth-lib" activeOptions={["wagmi", "ethers5","ethers"]}>
 <PlatformTabItem value="wagmi">
-
-```ts
-import { useWeb3Modal } from '@web3modal/wagmi/react'
-
-export default function Component() {
-  const { open, close } = useWeb3Modal()
-
-  open()
-
-  //...
-}
-```
-
-</PlatformTabItem>
-<PlatformTabItem value="wagmi1">
 
 ```ts
 import { useWeb3Modal } from '@web3modal/wagmi/react'
@@ -116,13 +100,26 @@ List of views you can select
 
 ## useDisconnect
 
-Disconnect currently connected account.
-
 ```ts
 const { disconnect } = useDisconnect()
 
 disconnect()
 ```
+
+## Ethereum Library
+
+<PlatformTabs groupId="eth-lib" activeOptions={["wagmi", "ethers"]}>
+<PlatformTabItem value="wagmi">
+
+<WagmiHooks />
+
+</PlatformTabItem>
+<PlatformTabItem value="ethers">
+
+<EthersHooks />
+
+</PlatformTabItem>
+</PlatformTabs>
 
 ## useWeb3ModalState
 
@@ -196,18 +193,3 @@ import { useWeb3ModalEvents } from '@web3modal/wagmi/react'
 
 const events = useWeb3ModalEvents()
 ```
-
-## Ethereum Library
-
-<PlatformTabs groupId="eth-lib" activeOptions={["wagmi", "ethers"]}>
-<PlatformTabItem value="wagmi">
-
-<WagmiHooks />
-
-</PlatformTabItem>
-<PlatformTabItem value="ethers">
-
-<EthersHooks />
-
-</PlatformTabItem>
-</PlatformTabs>

@@ -1,10 +1,10 @@
 import Tabs from '@theme/Tabs'
 import TabItem from '@theme/TabItem'
 
-To open Web3Modal you can use our **default** web components or build your own logic using Web3Modal hooks.
+To open Web3Modal you can use our [**web component**](../components.mdx) or build your own button with Web3Modal [**hooks**](../hooks.mdx#open-and-close-the-modal).
 
 <Tabs>
-<TabItem value="components" label="Components">
+<TabItem value="components" label="Web Component">
 
 ```tsx
 export default function ConnectButton() {
@@ -12,7 +12,7 @@ export default function ConnectButton() {
 }
 ```
 
-Learn more about the Web3Modal web components [here](../../components.mdx)
+Learn more about the Web3Modal web components [here](../components.mdx)
 
 :::note
 Web components are global html elements that don't require importing.
@@ -24,7 +24,7 @@ Web components are global html elements that don't require importing.
 You can trigger the modal by calling the `open` function from `useWeb3Modal` hook.
 
 ```tsx
-import { useWeb3Modal } from '@web3modal/ethers5/react'
+import { useWeb3Modal } from '@web3modal/ethers/react'
 
 export default function ConnectButton() {
   // 4. Use modal hook
@@ -39,7 +39,7 @@ export default function ConnectButton() {
 }
 ```
 
-Learn more about the Web3Modal hooks [here](../../hooks.mdx)
+Learn more about the Web3Modal hooks [here](../hooks.mdx)
 
 </TabItem>
 </Tabs>

@@ -1,14 +1,24 @@
 import Tabs from '@theme/Tabs'
 import TabItem from '@theme/TabItem'
 
-You can start Web3Modal configuration using either **default** or **custom** mode.
+Web3Modal can be configured in **two** different ways:
 
-Default mode will implement WalletConnect, Browser Wallets (injected) and Coinbase options in addition to the [WalletConnect's provider](../../../../cloud/blockchain-api.md).
+- **Default**: For a quick integration you can use `defaultWagmiConfig` function which wraps Wagmi's [`creatConfig`](https://wagmi.sh/core/api/createConfig) function with predefined configuration.
+This includes WalletConnect, Coinbase and Injected connectors, and our [Blockchain API](../../../../cloud/blockchain-api.md) as a [transport](https://wagmi.sh/core/api/createConfig#transports) (if the chain is not support by the Blockchain API it will fallback to the chain's default RPC).
+<br/> As shown in the code example, this configuration (with the exception of the connectors) can be overridden.
+<br/>
+- **Custom**: This configuration setup is great for projects that already have Wagmi integrated or that would like to have more control over the Wagmi configuration. Once [Wagmi](https://wagmi.sh/core/getting-started) is integrated in your project you will need to add `showQrModal: false` to the WalletConnect connector and call `createWeb3Modal` with its required parameters.
+
+Select your preferred configuration mode below:
 
 <Tabs>
 <TabItem value="default" label="Default">
 
-Create a new file called `config/index.tsx` or `config/index.jsx` (outside your app directory) and set up the following configuration
+### Wagmi config
+
+Create a new file for your Wagmi configuration, since we are going to be calling this function on the client and the server it cannot live inside a file with the 'use client' directive.
+
+For this example we will create a file called `config/index.tsx` outside our app directory and set up the following configuration
 
 ```tsx
 import { defaultWagmiConfig } from '@web3modal/wagmi/react/config'
@@ -29,27 +39,32 @@ const metadata = {
 }
 
 // Create wagmiConfig
+const chains = [mainnet, sepolia] as const
 export const config = defaultWagmiConfig({
-  chains: [mainnet, sepolia], // required
-  projectId, // required
-  metadata, // required
+  chains: ,
+  projectId,
+  metadata,
   ssr: true,
   storage: createStorage({
     storage: cookieStorage
   }),
-  enableWalletConnect: true, // Optional - true by default
-  enableInjected: true, // Optional - true by default
-  enableEIP6963: true, // Optional - true by default
-  enableCoinbase: true, // Optional - true by default
   ...wagmiOptions // Optional - Override createConfig parameters
 })
 ```
 
 :::info
-Notice that `defaultWagmiConfig` is now imported from `'@web3modal/wagmi/react/config'`
+- Notice that we are using here the [recommended configuration from Wagmi for SSR](https://wagmi.sh/react/guides/ssr).
+- Using cookies is completely optional and by default Wagmi will use `localStorage` instead if the `storage` param is not defined.
+- The `ssr` flag will delay the hydration of the Wagmi's store to avoid hydration mismatch errors.
 :::
 
-Create another file called `context/index.tsx` or `context/index.jsx` (outside your app directory) and set up the following configuration, making sure that all functions are called **outside** any React component to avoid unwanted rerenders.
+<br/>
+
+### Context Provider
+
+Let's create now a context provider that will wrap our application and initialized Web3Modal (`createWeb3Modal` needs to be called inside a React Client Component file).
+
+In this example we will create a file called `context/index.tsx` outside our app directory and set up the following configuration
 
 ```tsx
 'use client'
@@ -76,7 +91,7 @@ createWeb3Modal({
   enableOnramp: true // Optional - false as default
 })
 
-export function ContextProvider({
+export default function Web3ModalProvider({
   children,
   initialState
 }: {
@@ -91,7 +106,11 @@ export function ContextProvider({
 }
 ```
 
-Next, in your `app/layout.tsx` or `app/layout.jsx` file, import the custom Web3Modal component and call `cookieToInitialState`
+### Layout
+
+Next, in our `app/layout.tsx` file, we will import our `Web3ModalProvider` component and call [the Wagmi's function `cookieToInitialState`.](https://wagmi.sh/react/guides/ssr#_2-hydrate-the-cookie)
+
+The `initialState` returned by `cookieToInitialState`, contains the optimistic values that will populate the Wagmi's store both on the server and client.
 
 ```tsx
 import './globals.css'
@@ -101,7 +120,7 @@ import { headers } from 'next/headers'
 import { cookieToInitialState } from 'wagmi'
 
 import { config } from '@/config'
-import { ContextProvider } from '@/context'
+import Web3ModalProvider from '@/context'
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -117,17 +136,25 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <ContextProvider initialState={initialState}>{children}</ContextProvider>
+        <Web3ModalProvider initialState={initialState}>{children}</Web3ModalProvider>
       </body>
     </html>
   )
 }
 ```
 
+:::note
+The `cookieToInitialState` function is only needed when using cookies for the Wagmi's storage.
+:::
+
 </TabItem>
 <TabItem value="custom" label="Custom">
 
-Create a new file called `config/index.tsx` or `config/index.jsx` (outside your app directory) and set up the following configuration
+### Wagmi config
+
+Create a new file for your Wagmi configuration, since we are going to be calling this function on the client and the server it cannot live inside a file with the 'use client' directive.
+
+For this example we will create a file called `config/index.tsx` outside our app directory and set up the following configuration
 
 ```tsx
 import { defaultWagmiConfig } from '@web3modal/wagmi/react/config'
@@ -169,7 +196,19 @@ export const config = createConfig({
 })
 ```
 
-Create another file called `context/index.tsx` or `context/index.jsx` (outside your app directory) and set up the following configuration, making sure that all functions are called **outside** any React component to avoid unwanted rerenders.
+:::info
+- Notice that we are using here the [recommended configuration from Wagmi for SSR](https://wagmi.sh/react/guides/ssr).
+- Using cookies is completely optional and by default Wagmi will use `localStorage` instead if the `storage` param is not defined.
+- The `ssr` flag will delay the hydration of the Wagmi's store to avoid hydration mismatch errors.
+:::
+
+<br/>
+
+### Context Provider
+
+Let's create now a context provider that will wrap our application and initialized Web3Modal (`createWeb3Modal` needs to be called inside a React Client Component file).
+
+In this example we will create a file called `context/index.tsx` outside our app directory and set up the following configuration
 
 ```tsx
 'use client'
@@ -196,7 +235,7 @@ createWeb3Modal({
   enableOnramp: true // Optional - false as default
 })
 
-export function ContextProvider({
+export default function Web3ModalProvider({
   children,
   initialState
 }: {
@@ -211,7 +250,11 @@ export function ContextProvider({
 }
 ```
 
-Next, in your `app/layout.tsx` or `app/layout.jsx` file, import the custom Web3Modal component and call `cookieToInitialState`
+### Layout
+
+Next, in our `app/layout.tsx` file, we will import our `Web3ModalProvider` component and call [the Wagmi's function `cookieToInitialState`.](https://wagmi.sh/react/guides/ssr#_2-hydrate-the-cookie)
+
+The `initialState` returned by `cookieToInitialState`, contains the optimistic values that will populate the Wagmi's store both on the server and client.
 
 ```tsx
 import './globals.css'
@@ -237,16 +280,20 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <ContextProvider initialState={initialState}>{children}</ContextProvider>
+        <Web3ModalProvider initialState={initialState}>{children}</Web3ModalProvider>
       </body>
     </html>
   )
 }
 ```
 
+:::note
+The `cookieToInitialState` function is only needed when using cookies for the Wagmi's storage.
+:::
+
 </TabItem>
 </Tabs>
 
-:::info
-`createWeb3Modal` must be called inside a client file, apart from Wagmi's configuration.
+:::note IMPORTANT
+Make sure that the `url` from the `metadata` matches your domain and subdomain. This will later be used by the [Verify API](../../../../cloud/verify.md) to tell wallets if your application has been verified or not.
 :::
