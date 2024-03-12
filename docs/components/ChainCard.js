@@ -12,7 +12,7 @@ const ChainCard = ({ chainName, namespace }) => {
   }
   return (
     <button className="card__small-container" onClick={handleCopy}>
-      {copied ? <span>Namespace copied!</span> : <span>{chainName}</span>}
+      {copied ? <span>Chain ID copied!</span> : <span>{chainName}</span>}
     </button>
   )
 }
