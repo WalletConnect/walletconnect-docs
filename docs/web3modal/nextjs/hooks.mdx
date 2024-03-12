@@ -4,7 +4,6 @@ import PlatformTabItem from '../../components/PlatformTabItem'
 
 import WagmiHooks from './wagmi/hooks.mdx'
 import Wagmi1Hooks from './wagmi1/hooks.mdx'
-import Ethers5Hooks from './ethers5/hooks.mdx'
 import EthersHooks from './ethers/hooks.mdx'
 
 # Hooks
@@ -129,17 +128,8 @@ disconnect()
 
 Get the current value of the modal's state
 
-<PlatformTabs groupId="eth-lib" activeOptions={["wagmi", "wagmi1", "ethers5","ethers"]}>
+<PlatformTabs groupId="eth-lib" activeOptions={["wagmi", "ethers5","ethers"]}>
 <PlatformTabItem value="wagmi">
-
-```ts
-import { useWeb3ModalState } from '@web3modal/wagmi/react'
-
-const { open, selectedNetworkId } = useWeb3ModalState()
-```
-
-</PlatformTabItem>
-<PlatformTabItem value="wagmi1">
 
 ```ts
 import { useWeb3ModalState } from '@web3modal/wagmi/react'
@@ -209,20 +199,10 @@ const events = useWeb3ModalEvents()
 
 ## Ethereum Library
 
-<PlatformTabs groupId="eth-lib" activeOptions={["wagmi", "wagmi1", "ethers5", "ethers"]}>
+<PlatformTabs groupId="eth-lib" activeOptions={["wagmi", "ethers"]}>
 <PlatformTabItem value="wagmi">
 
 <WagmiHooks />
-
-</PlatformTabItem>
-<PlatformTabItem value="wagmi1">
-
-<Wagmi1Hooks />
-
-</PlatformTabItem>
-<PlatformTabItem value="ethers5">
-
-<Ethers5Hooks />
 
 </PlatformTabItem>
 <PlatformTabItem value="ethers">
