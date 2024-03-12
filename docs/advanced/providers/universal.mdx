@@ -1,12 +1,10 @@
 # Universal Provider
 
-:::info
-
-Web3Modal SDK v3 is out! Learn how to integrate it [here](../../web3modal/about.mdx)
-
-:::
-
 Universal Provider is a multi-chain provider for WalletConnect v2 protocol.
+
+:::note
+Find more about different supported chains [here](../multichain/overview.md).
+:::
 
 ## Installation
 
@@ -17,14 +15,11 @@ npm install @walletconnect/universal-provider
 ## Usage
 
 ```typescript
-import { ethers } from 'ethers'
 import UniversalProvider from '@walletconnect/universal-provider'
 
 //  Initialize the provider
 const provider = await UniversalProvider.init({
-  logger: 'info',
-  relayUrl: 'ws://<relay-url>',
-  projectId: '12345678',
+  projectId: 'YOUR_PROJECT_ID',
   metadata: {
     name: 'React App',
     description: 'React App for WalletConnect',
@@ -56,9 +51,6 @@ await provider.connect({
   pairingTopic: '<123...topic>', // optional topic to connect to
   skipPairing: false // optional to skip pairing ( later it can be resumed by invoking .pair())
 })
-
-//  Create Web3 Provider
-const web3Provider = new ethers.providers.Web3Provider(provider)
 ```
 
 ## Events
@@ -108,20 +100,13 @@ interface RequestArguments {
 const result = await provider.request(payload: RequestArguments, chain: string | undefined);
 ```
 
-## Multi-chain
+## Chain switching
+
+`DefaultChain` is the current chain that the provider will target to the next requested transaction.
 
 ```typescript
-const web3 = new Web3(provider);
-
-// default chainId is the FIRST chain during setup
-const chainId = await web3.eth.getChainId();
-
 // set the default chain to 56
 provider.setDefaultChain(`eip155:56`, rpcUrl?: string | undefined);
-
-// get the updated default chainId
-const updatedDefaultChainId = await web3.eth.getChainId();
-
 ```
 
 ## Creating a provider file

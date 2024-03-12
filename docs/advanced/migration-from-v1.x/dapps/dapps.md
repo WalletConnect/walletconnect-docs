@@ -116,7 +116,7 @@ Follow this steps along with the migration example:
 
 You can also find detailed documentation on how to install & utilize the new SDK [here](../../walletconnectmodal/about.mdx).
 
-The latest SDK introduces a powerful combination of [Universal Provider](../../providers/universal.md) and our [Cloud Explorer API](../../../cloud//explorer.md). This integration forms the solid foundation for a React Native dapp to effortlessly connect with wallets."
+The latest SDK introduces a powerful combination of [Universal Provider](../../providers/universal.mdx) and our [Cloud Explorer API](../../../cloud//explorer.md). This integration forms the solid foundation for a React Native dapp to effortlessly connect with wallets."
 
 If you need assistance at any point during the migration process, please feel free to reach out to us via [GitHub Discussions](https://github.com/orgs/WalletConnect/discussions).
 

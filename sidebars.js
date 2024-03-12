@@ -280,6 +280,22 @@ module.exports = {
             'advanced/multichain/chain-list',
             {
               type: 'category',
+              label: 'RPC Reference',
+              items: [
+                'advanced/multichain/rpc-reference/cosmos-rpc',
+                'advanced/multichain/rpc-reference/ethereum-rpc',
+                'advanced/multichain/rpc-reference/solana-rpc',
+                'advanced/multichain/rpc-reference/near-rpc',
+                'advanced/multichain/rpc-reference/starknet-rpc',
+                'advanced/multichain/rpc-reference/stellar-rpc',
+                'advanced/multichain/rpc-reference/tezos-rpc',
+                'advanced/multichain/rpc-reference/xrpl-rpc',
+                'advanced/multichain/rpc-reference/casper-rpc',
+                'advanced/multichain/rpc-reference/everscale-rpc'
+              ]
+            },
+            {
+              type: 'category',
               label: 'Polkadot',
               items: [
                 'advanced/multichain/polkadot/dapp-integration-guide',

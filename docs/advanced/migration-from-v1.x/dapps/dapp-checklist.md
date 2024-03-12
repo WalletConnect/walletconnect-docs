@@ -20,8 +20,8 @@ The source code for this WalletConnect v2.0 dapp is [here](https://github.com/Wa
 
 With V2, we allow for specific chains or methods to be specified as required or optional via session namespaces. If you are looking to configure specific chains or methods for your session, please refer to these respective guidance on the ethereum provider:
 
-[Required and Optional Chains](../../../advanced/providers/ethereum.md#required-and-optional-chains)
-[Required and Optional Methods](../../../advanced/providers/ethereum.md#required-and-optional-methods)
+[Required and Optional Chains](../../providers/ethereum.mdx#required-and-optional-chains)
+[Required and Optional Methods](../../providers/ethereum.mdx#required-and-optional-methods)
 
 ## Testing
 
