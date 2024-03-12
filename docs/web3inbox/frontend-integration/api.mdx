@@ -547,7 +547,7 @@ interface NotifyNotification {
 
 ```ts
 client.on("notify_message", ({ notification }) => {
- // handle new realtime notifications here.
+  console.log(notification.title)
 })
 ```
 
