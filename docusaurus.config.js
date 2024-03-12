@@ -177,7 +177,7 @@ const config = {
     announcementBar: {
       id: 'support_us',
       content:
-        'New to Web3Modal: Email Wallets! <a rel="noopener noreferrer" href="/web3modal/features/email?utm_source=docs&utm_medium=banner">Tap to explore the latest onboarding feature</a> :zap:',
+        'New to Web3Modal: Email Wallets! <a rel="noopener noreferrer" href="/web3modal/features/email?utm_source=docs&utm_medium=banner">Tap to explore the latest onboarding feature</a> ⚡',
       backgroundColor: '#3182ce',
       textColor: '#fff',
       isCloseable: true
