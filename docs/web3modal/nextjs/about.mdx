@@ -118,6 +118,8 @@ npm install @web3modal/ethers ethers
 <PlatformTabs groupId="eth-lib" activeOptions={["wagmi", "ethers"]}>
 <PlatformTabItem value="wagmi">
 
+[Wagmi hooks](https://wagmi.sh/react/api/hooks/useReadContract) can help us interact with wallets and smart contracts:
+
 ```tsx
 import { useReadContract } from 'wagmi'
 import { USDTAbi } from '../abi/USDTAbi'
@@ -137,6 +139,8 @@ Read more about Wagmi hooks for smart contract interaction [here](https://wagmi.
 
 </PlatformTabItem>
 <PlatformTabItem value="ethers">
+
+[Ethers](https://docs.ethers.org/v6/) can help us interact with wallets and smart contracts:
 
 ```tsx
 import { useWeb3ModalProvider, useWeb3ModalAccount } from '@web3modal/ethers/react'
