@@ -455,9 +455,10 @@ type ScopeMap = Record<
 
 
 ## Registering for Device Push Notifications
-Recieve push notifications. Whether on Mobile (React Native) or Web via Firebase, the following needs to be performed.
 
-More information about firebase messaging setup found here: https://firebase.google.com/docs/cloud-messaging
+If you wish to receive live push notifications to your React Native or Web app, you must integrate with Firebase Messaging. More information about how to integrate with Firebase can be found [here](https://firebase.google.com/docs/cloud-messaging).
+
+Your integration will obtain a token from Firebase and you will need to pass this token to the Web3Inbox SDK using the `registerWithPushServer()` function.
 
 <PlatformTabs
 	groupId="w3iw"
