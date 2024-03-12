@@ -471,6 +471,8 @@ import { getToken } from 'firebase/messaging
 
 const { data: client } = useWeb3InboxClient()
 
+// initialize firebaseMessaging per Firebase docs
+
 const firebaseToken = getToken(firebaseMessaging, {
   vapidKey: "YOUR_FIREBASE_VAPID_KEY"
 })
