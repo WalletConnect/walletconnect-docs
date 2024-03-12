@@ -24,7 +24,7 @@ Furthremore you may need to configure the `domain` and `isLimited` parameters:
 <PlatformTabItem value="react">
 
 ```ts
-initWeb3inboxClient({ projectId, domain, allApps })
+initWeb3inboxClient({ projectId, domain, allApps, logLevel })
 ```
 
 #### References
@@ -32,6 +32,7 @@ initWeb3inboxClient({ projectId, domain, allApps })
 - **projectId:** Your WalletConnect project ID
 - **domain _(Optional)_:** Your app's domain. Defaults to `window.location.host`.
 - **allApps _(Optional)_:** Set to `true` to request access to all of the user's notification subscriptions for all apps, instead of only `domain`. Defaults to `false`.
+- **logLevel _(Optional)_:** Increase verbosity of console logging. Defaults to `error`. Can be set to `error`, `info`, or `debug`.
 
 </PlatformTabItem>
 
@@ -182,6 +183,12 @@ Some suggested methods of signing the message:
 
 Subscribe, Unsubscribe, Get Subscription, Check if Subscribed.
 
+:::note
+When using `differentAccount`, the passed account needs to be previously registered.
+This use case is for Dapps that have multile active accounts or wallets with multiple active accounts.
+`differentAccount` can be used for all the below hooks and functions that accept `account`
+:::
+
 <PlatformTabs
 	groupId="w3iw"
 	activeOptions={["react", "javascript"]}
@@ -194,16 +201,27 @@ const { subscribe, isLoading: isSubscribing } = useSubscribe()
 const { unsubscribe, isLoading: isUnsubscribing } = useUnsubscribe()
 
 // get subscription of current user to current dapp
-const { data: subscription } = useSubscription()
+const { data: subscription, getSubscription } = useSubscription()
 
-// subscribe to current dapp
+// getSubscription can be used to get information about different dapps programatically
+const subscriptionToSameDappFromDifferentAccount = getSubscription(differentAccount)
+const subscriptionToDifferentDappFromSameAccount = getSubscription(undefined, differentDappDomain)
+const subscriptionToDifferentDappFromDifferentAccount = getSubscription(differentAccount, differentDappDomain)
+
+// subscribe to current dapp from current user
 subscribe()
+// subscribe to current dapp from different user
+subscribe(differentAccount)
+// subscribe to different dapp from current user
+subscribe(undefined, differentDappDomain)
+// subscribe to different dapp from different user
+subscribe(differentAccount, differentDappDomain)
 
 // unsubscribe from current dapp
 unsubscribe()
 
 // get all subscriptions for current account
-const subscriptions = useSubscriptions()
+const subscriptions = useAllSubscriptions()
 
 const isSubscribed = Boolean(subscription)
 ```
@@ -245,6 +263,15 @@ client.watchIsSubscribed(isSubbed => console.log({ isSubbed }))
 
 // subscribe to current dapp with current account
 await client.subscribeToDapp()
+
+// subscribe to same dapp with different account
+await client.subscribeToDapp(differentAccount)
+
+// subscribe to different dapp with current account
+await client.subscribeToDapp(undefined, differentDomain)
+
+// subscribe to different dapp with different account
+await client.subscribeToDapp(differentAccount, differentDomain)
 
 // unsubscribe from current dapp with current account
 await client.unsubscribeFromDapp()
@@ -425,3 +452,120 @@ type ScopeMap = Record<
 
 </PlatformTabItem>
 </PlatformTabs>
+
+
+## Registering for Device Push Notifications
+
+If you wish to receive live push notifications to your React Native or Web app, you must integrate with Firebase Messaging. More information about how to integrate with Firebase can be found [here](https://firebase.google.com/docs/cloud-messaging).
+
+Your integration will obtain a token from Firebase and you will need to pass this token to the Web3Inbox SDK using the `registerWithPushServer()` function.
+
+<PlatformTabs
+	groupId="w3iw"
+	activeOptions={["react", "javascript"]}
+>
+
+<PlatformTabItem value="react" >
+
+```ts
+import { getToken } from 'firebase/messaging'
+
+const { data: client } = useWeb3InboxClient()
+
+// initialize Firebase's messaging object via Firebase's `getMessaging` function
+
+const firebaseToken = getToken(firebaseMessaging, {
+  vapidKey: "YOUR_FIREBASE_VAPID_KEY"
+})
+
+client.registerWithPushServer(firebaseToken)
+```
+
+#### References
+- `registerWithPushServer`: `(token: string, platform: 'fcm' | 'apns' = 'fcm') => void`
+
+Either APNs or FCM can be used to receive push notifications to the device. The `token` you provide may be a token from either platform, provided the `platform` argument matches.
+
+</PlatformTabItem>
+
+<PlatformTabItem value="javascript" >
+
+```ts
+import { getToken } from 'firebase/messaging
+
+// initialize Firebase's messaging object via Firebase's `getMessaging` function
+
+const firebaseToken = getToken(firebaseMessaging, {
+  vapidKey: "YOUR_FIREBASE_VAPID_KEY"
+})
+
+// The Client ID that registered with this token, can be used for debugging purposes or logs
+const clientId = client.registerWithPushServer(firebaseToken)
+```
+
+#### References
+- `registerWithPushServer`: `(token: string, platform: 'fcm' | 'apns') => string`
+
+Either APNS or FCM can be used to recieve push notifications. Token here is the respective platform's token.
+
+</PlatformTabItem>
+
+</PlatformTabs>
+
+<PlatformTabs
+	groupId="w3iw"
+	activeOptions={["react", "javascript"]}
+>
+
+## Listening For Events
+This can be used to listen to, for example, messages recieved in realtime.
+
+<PlatformTabItem value="react" >
+
+```ts
+const { data: client } = useWeb3InboxClient()
+
+client.on("notify_message", ({ message }) => {
+  console.log(notification.title)
+})
+```
+
+#### References
+- `message`: Notification of type:
+```ts
+interface NotifyNotification {
+  title: string;
+  sentAt: number;
+  body: string;
+  id: string;
+  url: string | null;
+  type: string;
+}
+```
+
+</PlatformTabItem>
+
+<PlatformTabItem value="javascript" >
+
+```ts
+client.on("notify_message", ({ notification }) => {
+  console.log(notification.title)
+})
+```
+
+#### References
+- `message`: Notification of type:
+```ts
+interface NotifyNotification {
+  title: string;
+  sentAt: number;
+  body: string;
+  id: string;
+  url: string | null;
+  type: string;
+}
+```
+
+</PlatformTabItem>
+</PlatformTabs>
+
