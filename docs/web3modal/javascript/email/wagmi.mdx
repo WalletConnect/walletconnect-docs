@@ -1,25 +1,16 @@
 import Tabs from '@theme/Tabs'
 import TabItem from '@theme/TabItem'
 
-You can start integrating Email Login into Web3Modal SDK using either **default** or **custom** mode.
-
 <Tabs>
 <TabItem value="default" label="Default">
+
+If you're using the `defaultWagmiConfig` function you can enable email login by just adding `enableEmail: true` as a configuration parameter.
 
 ```ts
 import { createWeb3Modal, defaultWagmiConfig } from '@web3modal/wagmi'
 
-import { mainnet, arbitrum } from 'viem/chains'
+//...
 
-// 1. Define constants
-const projectId = 'YOUR_PROJECT_ID'
-
-// 2. Create wagmiConfig
-const metadata = {
-  //...
-}
-
-const chains = [mainnet, arbitrum]
 const wagmiConfig = defaultWagmiConfig({
   chains,
   projectId,
@@ -28,9 +19,6 @@ const wagmiConfig = defaultWagmiConfig({
   enableEmail: true // Optional - false by default
   /* highlight-add-end */
 })
-
-// 3. Create modal
-const modal = createWeb3Modal({ wagmiConfig, projectId, chains })
 ```
 
 </TabItem>
@@ -44,38 +32,17 @@ import {
   /* highlight-add-end */
 } from '@web3modal/wagmi'
 
-import { http, createConfig } from '@wagmi/core'
-import { mainnet, sepolia } from '@wagmi/core/chains'
-import { coinbaseWallet, walletConnect, injected } from '@wagmi/connectors'
-
-// 1. Define constants
-const projectId = 'YOUR_PROJECT_ID'
-
-const metadata = {
-  //...
-}
+//...
 
 const wagmiConfig = createConfig({
-  chains: [mainnet, sepolia],
-  transports: {
-    [mainnet.id]: http(),
-    [sepolia.id]: http(),
-  },
+    //...
   connectors:[
-    walletConnect({ projectId, metadata, showQrModal: false }),
-    injected({ shimDisconnect: true }),
-    coinbaseWallet({
-      appName: metadata.name,
-      appLogoUrl: metadata.icons[0]
-    }),
+    //...
     /* highlight-add-start */
     emailConnector({ chains, options: { projectId } })
     /* highlight-add-end */
   ]
 })
-
-// 3. Create modal
-const modal = createWeb3Modal({ wagmiConfig, projectId, chains })
 ```
 
 </TabItem>
