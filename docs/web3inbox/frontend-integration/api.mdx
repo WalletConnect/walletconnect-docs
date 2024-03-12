@@ -472,7 +472,7 @@ import { getToken } from 'firebase/messaging'
 
 const { data: client } = useWeb3InboxClient()
 
-// initialize firebaseMessaging per Firebase docs
+// initialize Firebase's messaging object via Firebase's `getMessaging` function
 
 const firebaseToken = getToken(firebaseMessaging, {
   vapidKey: "YOUR_FIREBASE_VAPID_KEY"
@@ -492,6 +492,8 @@ Either APNs or FCM can be used to receive push notifications to the device. The 
 
 ```ts
 import { getToken } from 'firebase/messaging
+
+// initialize Firebase's messaging object via Firebase's `getMessaging` function
 
 const firebaseToken = getToken(firebaseMessaging, {
   vapidKey: "YOUR_FIREBASE_VAPID_KEY"
