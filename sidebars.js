@@ -62,10 +62,7 @@ module.exports = {
                 {
                   type: 'category',
                   label: 'SIWE',
-                  items: [
-                    'web3modal/nextjs/siwe/about',
-                    'web3modal/nextjs/siwe/next-auth'
-                  ]
+                  items: ['web3modal/nextjs/siwe/about', 'web3modal/nextjs/siwe/next-auth']
                 },
                 'web3modal/nextjs/theming',
                 'web3modal/nextjs/resources'
@@ -174,7 +171,7 @@ module.exports = {
             {
               type: 'category',
               label: 'Features',
-              items: [{ type: 'doc', label: 'Email Login', id: 'web3modal/features/email' }]
+              items: [{ type: 'doc', label: 'Email Wallets', id: 'web3modal/features/email' }]
             },
             'web3modal/upgrade',
             'web3modal/v2/about'
