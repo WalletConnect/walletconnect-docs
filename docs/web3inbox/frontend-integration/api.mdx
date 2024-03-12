@@ -524,7 +524,7 @@ This can be used to listen to, for example, messages recieved in realtime.
 const { data: client } = useWeb3InboxClient()
 
 client.on("notify_message", ({ message }) => {
- // handle new realtime notifications here.
+  console.log(notification.title)
 })
 ```
 
