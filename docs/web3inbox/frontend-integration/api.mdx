@@ -24,7 +24,7 @@ Furthremore you may need to configure the `domain` and `isLimited` parameters:
 <PlatformTabItem value="react">
 
 ```ts
-initWeb3inboxClient({ projectId, domain, allApps })
+initWeb3inboxClient({ projectId, domain, allApps, logLevel })
 ```
 
 #### References
@@ -32,6 +32,7 @@ initWeb3inboxClient({ projectId, domain, allApps })
 - **projectId:** Your WalletConnect project ID
 - **domain _(Optional)_:** Your app's domain. Defaults to `window.location.host`.
 - **allApps _(Optional)_:** Set to `true` to request access to all of the user's notification subscriptions for all apps, instead of only `domain`. Defaults to `false`.
+- **logLevel _(Optional)_:** `"info" | "debug" | "error"`. Controls which logs show up on the console.
 
 </PlatformTabItem>
 
