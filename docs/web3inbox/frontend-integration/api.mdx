@@ -484,7 +484,7 @@ client.registerWithPushServer(firebaseToken)
 #### References
 - `registerWithPushServer`: `(token: string, platform: 'fcm' | 'apns' = 'fcm') => void`
 
-Either APNS or FCM can be used to recieve push notifications. Token here is the respective platform's token.
+Either APNs or FCM can be used to receive push notifications to the device. The `token` you provide may be a token from either platform, provided the `platform` argument matches.
 
 </PlatformTabItem>
 
