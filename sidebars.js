@@ -238,6 +238,7 @@ module.exports = {
           items: [
             'web3wallet/about',
             'web3wallet/wallet-usage',
+            'web3wallet/authenticatedSessions',
             'web3wallet/namespaces',
             'web3wallet/mobileLinking',
             'web3wallet/verify',
