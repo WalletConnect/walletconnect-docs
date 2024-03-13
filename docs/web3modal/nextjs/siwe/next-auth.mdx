@@ -21,7 +21,7 @@ Add `NEXTAUTH_SECRET` as an environment variable, it will be used to encrypt and
 Create your API route `api/auth/[...nextauth].ts` and paste the following code into it.
 
 ```ts
-import type { SIWESession } from '@web3modal/core'
+import type { SIWESession } from '@web3modal/siwe'
 import type { NextApiRequest, NextApiResponse } from 'next'
 import nextAuth from 'next-auth'
 import credentialsProvider from 'next-auth/providers/credentials'
