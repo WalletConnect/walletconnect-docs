@@ -203,8 +203,8 @@ const web3wallet = await Web3Wallet.init({
     url: 'www.walletconnect.com',
     icons: ['https://your_wallet_icon.png'],
     redirect: {
-      native: 'yourwalletscheme://',
-    },
+      native: 'yourwalletscheme://'
+    }
   }
 })
 ```
@@ -814,7 +814,7 @@ To send an approval, pass a Proposer's Public Key along with the map of namespac
 
 As mentioned before, the `SessionProposalEvent` is emitted when a dapp initiates a new session with your wallet. The event object will include the information about the dapp and requested namespaces. The wallet should display a prompt for the user to approve or reject the session.
 
-To approve a session, call `approveSession()` and pass in the `event.id` and your approved namespaces. 
+To approve a session, call `approveSession()` and pass in the `event.id` and your approved namespaces.
 
 - If you decide to use the `registerRequestHandler()` method to register handlers for supported methods, as explained in previous section, you would use the `generatedNamespaces` object in the `approveSession`
 - If you decide to handle session requests by subscribing to the `onSessionRequest` event, you would need to pass your own set of approved namespaces.
@@ -1970,6 +1970,7 @@ await web3wallet.emitSessionEvent(
 ```
 
 For a better understanding please check out the [example wallet](https://github.com/WalletConnect/WalletConnectFlutterV2/blob/master/example/wallet/lib/) and, in particular, the [EVMService](https://github.com/WalletConnect/WalletConnectFlutterV2/blob/master/example/wallet/lib/dependencies/chains/evm_service.dart) inside of it.
+
 </PlatformTabItem>
 
 <PlatformTabItem value="react-native">
