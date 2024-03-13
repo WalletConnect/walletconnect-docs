@@ -1,0 +1,179 @@
+import Table from '../../components/Table'
+
+# Ethereum Provider
+
+[EIP-1193](https://eips.ethereum.org/EIPS/eip-1193) compliant Provider for the WalletConnect v2 protocol.
+Built on top of [Universal Provider](./universal.mdx) and [WalletConnectModal](../walletconnectmodal/about.mdx).
+You can use this on it's own or pass it down to libraries like ethers, viem or web3js.
+
+## Installation
+
+```bash npm2yarn
+npm install @walletconnect/ethereum-provider
+```
+
+## Initialization
+
+Initialize Ethereum Provider by calling its `init` method and passing down the required arguments:
+
+```ts
+import { EthereumProvider } from '@walletconnect/ethereum-provider'
+
+const provider = await EthereumProvider.init({
+  projectId: 'YOUR_PROJECT_ID',
+  metadata: {
+    name: 'My Website',
+    description: 'My Website Description',
+    url: 'https://mywebsite.com', // origin must match your domain & subdomain
+    icons: ['https://avatars.githubusercontent.com/u/37784886']
+  },
+  showQrModal: true,
+  optionalChains: [1, 137, 2020],
+
+/*Optional - Add custom RPCs for each supported chain*/
+  rpcMap: {
+    1: 'mainnet.rpc...',
+    137: 'polygon.rpc...'
+  },
+})
+```
+:::info
+- Make sure that `url` from `metadata` matches your domain and subdomain. This will later be used by [Verify API](../../cloud/verify.md) to confirm if your application has been verified or not.
+- We recommend using `optionalChains` (optional namespaces) over `chains` (required namespaces).  
+_Required namespaces_ will block wallets from connecting to your application if any of the chains are not supported by the wallet. Smart Contract Wallets can only support one chain, 
+the one that they had been deployed to, this might cause issues when using required namespaces.
+- Using `chains`, `methods` or `events` will create a _Required Namespaces_ object internally.
+- `optionalMethods` and `optionalChains` default to the following methods and events: [Read source code](https://github.com/WalletConnect/walletconnect-monorepo/blob/v2.0/providers/ethereum-provider/src/constants/rpc.ts). 
+- If `rpcMap` is not defined it will fallback to [Blockchain API](../../cloud/blockchain-api.md) RPCs. Keep in mind that Blockchain API supports a limited [list of chains](https://github.com/WalletConnect/rpc-proxy/blob/master/SUPPORTED_CHAINS.md).
+:::
+
+### Init Params
+
+The Ethereum Provider's `init` method takes the following parameters:
+
+<Table
+  headers={['Value', 'Description', 'type', 'Required']}
+  data={[
+    {
+      value: 'projectId',
+      description: 'Your project ID obtained from WalletConnect Cloud: https://cloud.walletconnect.com/',
+      type: { code: 'string' },
+      required: 'true'
+    },
+    {
+      value: 'showQrModal',
+      description: 'Ethereum Provider integrates WalletConnectModal internally. When set to true it will open the UI modal when the connect function is called.',
+      type: { code: 'boolean' },
+      required: 'true'
+    },
+    {
+      value: 'optionalChains',
+      description: 'An array of the chain IDs you want to support. It is highly recommended to use "optionalChains" over "chains" for multi-chain dapps, this will ensure compatibility with Smart Contract Wallets.',
+      type: { code: 'number[]' },
+      required: 'false'
+    },
+    {
+      value: 'optionalMethods',
+      description: 'The Ethereum methods you want to support and send in the session proposal under the "optionalNamespaces" scope. If undefined it will default to all the EIP-1193 compatible methods.',
+      type: { code: 'string[]' },
+      required: 'false'
+    },
+    {
+      value: 'optionalEvents',
+      description: 'The Ethereum events you want to support and send in the session proposal under the "optionalNamespaces" scope. If undefined it will default to all the EIP-1193 compatible events.',
+      type: { code: 'string[]' },
+      required: 'false'
+    },
+    {
+      value: 'rpcMap',
+      description: 'An object which keys are chain IDs and values are their RPC endpoints.',
+      type: { code: 'Record<number, string>' },
+      required: 'false'
+    },
+    {
+      value: 'metadata',
+      description: 'Your applications metadata. It is important to set the correct URL as this will later be used by the Verify API to check if your domain has been verified.',
+      type: { code: 'Metadata' },
+      required: 'false'
+    },
+    {
+      value: 'qrModalOptions',
+      description: 'An array of WalletConnectModal options. See https://docs.walletconnect.com/web3modal/options',
+      type: { code: 'QrModalOptions' },
+      required: 'false'
+    },
+    {
+      value: 'chains',
+      description: 'An array of required chain IDs you want to support. If the wallet does not support this chains it will not be able to connect. Not recommended for multi-chain applications.',
+      type: { code: 'number[]' },
+      required: 'false'
+    },
+    {
+      value: 'methods',
+      description: 'The required methods you want to support.  Not recommended for multi-chain applications.',
+      type: { code: 'string[]' },
+      required: 'false'
+    },
+    {
+      value: 'events',
+      description: 'The required events you want to support. Not recommended for multi-chain applications.',
+      type: { code: 'string[]' },
+      required: 'false'
+    },
+  ]}
+/>
+
+## Use with WalletConnectModal
+
+When `showQrModal` is enabled, EthereumProvider will automatically show and hide [WalletConnectModal](../walletconnectmodal/about.mdx).
+You can also pass all relevant modal options under `qrModalOptions`. See [WalletConnectModal options](../walletconnectmodal/options.mdx) for all available fields.
+
+## Use without WalletConnectModal
+
+You can subscribe to the `display_uri` event and handle the URI yourself.
+
+```ts
+function handleURI(uri: string){
+  //code...
+}
+
+provider.on('display_uri', handleURI)
+
+await provider.connect()
+// or
+const accounts = await provider.enable()
+```
+
+You can then use the URI to generate a QR Code or redirect the user from the mobile browser to the wallet and request to connect. 
+The later one will require you to use the wallet's deep link and the URI. You can get the deep link of wallets that support the WalletConnect v2 protocol from the [Explorer API](../../cloud/explorer.md).
+
+## Sending Requests
+
+```typescript
+const result = await provider.request({ method: 'eth_requestAccounts' })
+
+// OR
+
+provider.sendAsync({ method: 'eth_requestAccounts' }, CallBackFunction)
+```
+
+## Session data
+
+Once a wallet is connected you can find the session data in `provider.session`. This includes the connected wallet metadata (name, description, icon, etc).
+
+## Events
+
+```typescript
+// chain changed
+provider.on('chainChanged', handler)
+// accounts changed
+provider.on('accountsChanged', handler)
+// session established
+provider.on('connect', handler)
+// session event - chainChanged/accountsChanged/custom events
+provider.on('session_event', handler)
+// connection uri
+provider.on('display_uri', handler)
+// session disconnected from the wallet - this won't be called when the disconnect function is called from the dapp.
+provider.on('disconnect', handler)
+```

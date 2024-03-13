@@ -51,11 +51,12 @@ const polygon = {
 
 const chains = [mainnet, polygon]
 
-// 3. Create modal
+// 4. Create modal
 createWeb3Modal({
   projectId,
   chains,
-  config
+  config,
+  enableAnalytics: true // Optional - defaults to your Cloud configuration
 })
 
 export default function App() {

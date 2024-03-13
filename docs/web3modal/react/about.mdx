@@ -1,6 +1,7 @@
 import CloudBanner from '../../components/CloudBanner'
 import PlatformTabs from '../../components/PlatformTabs'
 import PlatformTabItem from '../../components/PlatformTabItem'
+import YoutubeEmbed from '../../components/YoutubeEmbed'
 
 import WagmiImplementation from './wagmi/about/implementation.mdx'
 import WagmiModal from './wagmi/about/triggermodal.mdx'
@@ -8,8 +9,8 @@ import WagmiModal from './wagmi/about/triggermodal.mdx'
 import Wagmi1Implementation from './wagmi1/about/implementation.mdx'
 import Wagmi1Modal from './wagmi1/about/triggermodal.mdx'
 
-import Ethers5Implementation from './ethers5/about/implementation.mdx'
-import Ethers5Modal from './ethers5/about/triggermodal.mdx'
+import Ethers5Implementation from './ethers5/implementation.mdx'
+import Ethers5Modal from './ethers5/triggermodal.mdx'
 
 import EthersImplementation from './ethers/about/implementation.mdx'
 import EthersModal from './ethers/about/triggermodal.mdx'
@@ -17,8 +18,8 @@ import EthersModal from './ethers/about/triggermodal.mdx'
 # React
 
 Web3Modal SDK has support for [Wagmi](https://wagmi.sh/) and
-[Ethers v6](https://docs.ethers.org/v6/).
-Choose one of these ethereum libraries to get started.
+[Ethers](https://docs.ethers.org/v6/), which will help you interact with wallets and smart contracts.
+Choose one of these Ethereum libraries to get started.
 
 ## Installation
 
@@ -31,6 +32,10 @@ npm install @web3modal/wagmi wagmi viem @tanstack/react-query
 
 </PlatformTabItem>
 <PlatformTabItem value="wagmi1">
+
+:::caution
+Wagmi v1 has been deprecated. Please upgrade to Wagmi v2. Read the [migration guide.](https://wagmi.sh/react/guides/migrate-from-v1-to-v2)
+:::
 
 ```bash npm2yarn
 npm install @web3modal/wagmi@3.5.7 wagmi@1.4.13 viem@1.21.4
@@ -107,8 +112,10 @@ npm install @web3modal/ethers ethers
 
 ## Smart Contract Interaction
 
-<PlatformTabs groupId="eth-lib" activeOptions={["wagmi", "wagmi1", "ethers5", "ethers"]}>
+<PlatformTabs groupId="eth-lib" activeOptions={["wagmi", "ethers"]}>
 <PlatformTabItem value="wagmi">
+
+[Wagmi hooks](https://wagmi.sh/react/api/hooks/useReadContract) can help us interact with wallets and smart contracts:
 
 ```tsx
 import { useReadContract } from 'wagmi'
@@ -128,66 +135,9 @@ function App() {
 Read more about Wagmi hooks for smart contract interaction [here](https://wagmi.sh/react/hooks/useReadContract).
 
 </PlatformTabItem>
-<PlatformTabItem value="wagmi1">
-
-```tsx
-import { useContractRead } from 'wagmi'
-import { USDTAbi } from '../abi/USDTAbi'
-
-const USDTAddress = '0x...'
-
-function App() {
-  const { data, isError, isLoading } = useContractRead({
-    address: USDTAddress,
-    abi: USDTAbi,
-    functionName: 'symbol'
-  })
-}
-```
-
-Read more about Wagmi hooks for smart contract interaction [here](https://1.x.wagmi.sh/react/hooks/useContractRead).
-
-</PlatformTabItem>
-<PlatformTabItem value="ethers5">
-
-```tsx
-import { useWeb3ModalProvider, useWeb3ModalAccount } from '@web3modal/ethers5/react'
-import { ethers } from 'ethers'
-
-const USDTAddress = '0x...'
-
-// The ERC-20 Contract ABI, which is a common contract interface
-// for tokens (this is the Human-Readable ABI format)
-const USDTAbi = [
-  'function name() view returns (string)',
-  'function symbol() view returns (string)',
-  'function balanceOf(address) view returns (uint)',
-  'function transfer(address to, uint amount)',
-  'event Transfer(address indexed from, address indexed to, uint amount)'
-]
-
-function Components() {
-  const { address, chainId, isConnected } = useWeb3ModalAccount()
-  const { walletProvider } = useWeb3ModalProvider()
-
-  async function getBalance() {
-    if (!isConnected) throw Error('User disconnected')
-
-    const ethersProvider = new ethers.providers.Web3Provider(walletProvider)
-    const signer = await ethersProvider.getSigner()
-    // The Contract object
-    const USDTContract = new ethers.Contract(USDTAddress, USDTAbi, signer)
-    const USDTBalance = await USDTContract.balanceOf(address)
-
-    console.log(ethers.utils.formatUnits(USDTBalance, 18))
-  }
-
-  return <button onClick={getBalance}>Get User Balance</button>
-}
-```
-
-</PlatformTabItem>
 <PlatformTabItem value="ethers">
+
+[Ethers](https://docs.ethers.org/v6/) can help us interact with wallets and smart contracts:
 
 ```tsx
 import { useWeb3ModalProvider, useWeb3ModalAccount } from '@web3modal/ethers/react'
@@ -227,3 +177,8 @@ function Components() {
 
 </PlatformTabItem>
 </PlatformTabs>
+
+## Video Tutorial
+
+<YoutubeEmbed videoId="SGeXcva3amY" />
+./ethers5/implementation.mdx

@@ -21,17 +21,13 @@ import javascriptLogo from '../../static/assets/home/javascriptLogo.png'
 
 # Web3Modal
 
-The Web3Modal SDK allows you to easily connect your Web3 dapp with wallets. It provides a simple and
-intuitive interface for dapps to request actions such as signing transactions and interacting with smart
+The Web3Modal SDK allows you to easily connect your Web3 app with wallets. It provides a simple and
+intuitive interface for requesting actions such as signing transactions and interacting with smart
 contracts on the blockchain.
 
 <W3MQuickStart />
 
 ## Get Started
-
-:::info Note
-Looking to upgrade from Web3Modal v2? Check out the [upgrade guide](./upgrade.mdx).
-:::
 
 <Wrapper
   type="large"
@@ -96,43 +92,13 @@ Looking to upgrade from Web3Modal v2? Check out the [upgrade guide](./upgrade.md
 
 Some of the key features of the Web3Modal SDK include:
 
-- **Support for multiple frameworks.** Easily integrate with React, Vue, vanilla JavaScript, and more.
+- **Support for multiple frameworks.** Easily integrate with React, Vue, Svelte, vanilla JavaScript, and more.
+- **[EIP-6963.](https://eips.ethereum.org/EIPS/eip-6963) support** for browser extension wallets.
+- **[Email Wallets.](./features/email).** Allow users to seamlessly connect to dapps with their email address.
+- **[OnRamp.](./features/onramp)** Enable users to buy crypto with fiat currency.
 - **Customizable UI**. Choose between light and dark modes and accent colors, or even infuse it with your own branding.
-- **[EIP-6963](https://eips.ethereum.org/EIPS/eip-6963) support** for browser extension wallets.
 - **Multi-chain ready.** Easily set up support for any EVM chain.
 - **Hundreds of Wallets.** Connect with MetaMask, Rainbow, Coinbase and many more.
 - **Transaction History.** View all transactions from the account view.
 
 <Button name="Try Demo" url="https://web3modal.com/" />
-
-## WalletConnectModal
-
-Alternatively to **Web3Modal** you can integrate **WalletConnectModal** which is intended for advanced use cases where users manage connection strings and associated WalletConnect API's themselves.
-
-<Wrapper
-  type="small"
-  fit={false}
-  items={[
-    {
-      name: 'React Native',
-      icon: rnLogo,
-      href: '/advanced/walletconnectmodal/about?platform=react-native'
-    },
-    {
-      name: 'Flutter',
-      icon: flutterLogo,
-      href: '/advanced/walletconnectmodal/about?platform=flutter'
-    },
-    {
-      name: 'Kotlin',
-      icon: androidLogo,
-      href: '/advanced/walletconnectmodal/about?platform=android'
-    },
-    {
-      name: 'Swift',
-      isWhite: true,
-      icon: iosLogo,
-      href: '/advanced/walletconnectmodal/about?platform=ios'
-    }
-  ]}
-/>

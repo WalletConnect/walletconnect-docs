@@ -1,6 +1,6 @@
 # Introduction
 
-The Web3Inbox SDK provides a toolkit for integrating Web3 notification features into apps.
+The Web3Inbox SDK provides a toolkit for integrating Web3 notification features into apps. Web3Inbox can be used to send notifications from your app directly to wallets.
 
 This SDK utilizes WalletConnect's Notify API and is designed for Web3 scenarios, providing event-based notifications for activities like DAO votes, DeFi transaction alerts, and updates for NFT holders. Apps can send notifications to subscribed accounts, and users can receive and view their notifications in a supporting wallet, in the [Web3Inbox.com app](https://app.web3inbox.com), or in the app's frontend. Users can also discover Notify-compatible apps in their wallet or the [Web3Inbox.com app](https://app.web3inbox.com) to subscribe to.
 
@@ -16,17 +16,13 @@ Web3Inbox can be added to your app in a few steps:
 - Use our [frontend SDK](frontend-integration/usage) to enable users to subscribe to notifications in your app.
 - Finally, use our [API in your backend](backend-integration) to send notifications to subscribed users.
 
-## Use Cases
-
-Apps can send web3-native messages directly to wallets with device push notifications. Reach users instantly with real-time notifications such as DAO proposals, price changes, token launches, and more.
-
-## Features
+## Overview
 
 Some of the key features of the Web3Inbox SDK include:
 
 - **Device push notifications:** Push notifications to the user's wallet (if it supports Notify API) or the [Web3Inbox.com app](https://app.web3inbox.com).
-- **Notifications history:** Messages are stored and can be accessed from any device.
-- **Spam protection/subscription control.**
+- **Notification history:** Notifications are stored and can be accessed from any device.
+- **Spam protection/subscription control.** Using notification types, subscribers can opt-out of certain notification types they do not want to receive.
 
 ## How do users receive notifications?
 
@@ -44,3 +40,9 @@ Users can subscribe to notifications in your frontend, and if you are a featured
 ## Try it out
 
 See the [demo section](demo) for sample apps and the Web3Inbox universal inbox app.
+
+## FAQ
+
+### What chains does Web3Inbox support?
+
+Web3Inbox supports EOA accounts on all `eip155` (EVM) chains, and smart accounts on all `eip155` chains that our Blockchain API [supports](https://github.com/WalletConnect/blockchain-api/blob/master/SUPPORTED_CHAINS.md). We have plans to expand support in the future.
