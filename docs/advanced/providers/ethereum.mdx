@@ -44,7 +44,7 @@ _Required namespaces_ will block wallets from connecting to your application if 
 the one that they had been deployed to, this might cause issues when using required namespaces.
 - Using `chains`, `methods` or `events` will create a _Required Namespaces_ object internally.
 - `optionalMethods` and `optionalChains` default to the following methods and events: [Read source code](https://github.com/WalletConnect/walletconnect-monorepo/blob/v2.0/providers/ethereum-provider/src/constants/rpc.ts). 
-- If `rpcMap` is not defined it will fallback into the [Blockchain API](../../cloud/blockchain-api.md) RPCs. Keep in mind that the Blockchain API supports a limited [list of chains](https://github.com/WalletConnect/rpc-proxy/blob/master/SUPPORTED_CHAINS.md).
+- If `rpcMap` is not defined it will fallback to [Blockchain API](../../cloud/blockchain-api.md) RPCs. Keep in mind that Blockchain API supports a limited [list of chains](https://github.com/WalletConnect/rpc-proxy/blob/master/SUPPORTED_CHAINS.md).
 :::
 
 ### Init Params
