@@ -177,7 +177,7 @@ const config = {
     announcementBar: {
       id: 'support_us',
       content:
-        '🎉 The Web3Inbox SDK is in stable! <a rel="noopener noreferrer" href="/web3inbox/about?utm_source=docs&utm_medium=banner&utm_campaign=sdkpubliclaunch">Explore the new SDK</a> 🎉',
+        'New to Web3Modal: Email Wallets! <a rel="noopener noreferrer" href="/web3modal/features/email?utm_source=docs&utm_medium=banner">Explore the latest feature</a> ⚡',
       backgroundColor: '#3182ce',
       textColor: '#fff',
       isCloseable: true
