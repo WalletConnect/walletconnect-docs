@@ -348,16 +348,10 @@ Confirm you have configured the Network and Pair Client first
 
 #### Configure Sign Client
 
-In order to initialize a client, call a `configure` method from the Sign instance wrapper
+In order to initialize a client, call a `configure` method on the Sign instance
 
 ```swift
-let metadata = AppMetadata(
-    name: "Swift wallet",
-    description: "wallet",
-    url: "wallet.connect",
-    icons: ["https://my_icon.com/1"]
-)
-Sign.configure(metadata: metadata)
+Sign.configure(crypto: CryptoProvider)
 ```
 
 #### Subscribe for Sign Publishers
