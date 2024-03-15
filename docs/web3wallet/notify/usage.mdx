@@ -193,14 +193,13 @@ Snippet below shows how to check if an account is registered and how to register
 ```kotlin
 val account: String = ""// The CAIP-10 account i.e. "eip155:1:0xAbC1234567890DefABC1234567890dEFABC12345"
 val domain = BuildConfig.APPLICATION_ID
-val allApps = true
 
 // Caution: This function is blocking and runs on the current thread. It is advised that this function be called from background operation
-val isRegistered = NotifyClient.isRegistered(params = Notify.Params.IsRegistered(account = account, domain = domain, allApps = allApps))
+val isRegistered = NotifyClient.isRegistered(params = Notify.Params.IsRegistered(account = account, domain = domain))
 
 if (!isRegistered) {
     NotifyClient.prepareRegistration(
-        params = Notify.Params.PrepareRegistration(account = account, domain = domain, allApps = allApps),
+        params = Notify.Params.PrepareRegistration(account = account, domain = domain),
         onSuccess = { cacaoPayloadWithIdentityPrivateKey, message ->
 
             // Pick one of the following methods to sign the message:
