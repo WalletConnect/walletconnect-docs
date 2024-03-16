@@ -223,6 +223,14 @@ Make sure that you properly configure Networking and Pair Clients first.
 - [Networking](../core/relay.mdx)
 - [Pairing](../core/pairing.mdx)
 
+#### Configure Sign Client
+
+In order to initialize a client, call a `configure` method on the Sign instance
+
+```swift
+Sign.configure(crypto: CryptoProvider)
+```
+
 #### Subscribe for Sign publishers
 
 When your `Sign` instance receives requests from a peer it will publish related event. So you should set subscription to handle them.
