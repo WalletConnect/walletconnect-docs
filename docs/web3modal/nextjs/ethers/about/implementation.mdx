@@ -51,6 +51,7 @@ createWeb3Modal({
 
 export function Web3Modal({ children }) {
   return <WagmiConfig config={wagmiConfig}>{children}</WagmiConfig>
+// ??why are you returning wagmi in an ethers implementation ? Shouldn't this be web3modal ?
 }
 ```
 
