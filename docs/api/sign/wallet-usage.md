@@ -725,9 +725,8 @@ val walletDelegate = object : SignClient.WalletDelegate {
         // Triggered when wallet receives the session proposal sent by a Dapp
     }
 
-    fun onSessionAuthenticate(sessionAuthenticate: Sign.Model.SessionAuthenticate, verifyContext: Sign.Model.VerifyContext) {
-      // Triggered when wallet receives the session authenticate sent by a Dapp
-    }
+    val onSessionAuthenticate: ((Sign.Model.SessionAuthenticate, Sign.Model.VerifyContext) -> Unit)? get() = null
+    // Triggered when wallet receives the session authenticate sent by a Dapp
 
     override fun onSessionRequest(sessionRequest: Sign.Model.SessionRequest, verifyContext: Sign.Model.VerifyContext) {
         // Triggered when a Dapp sends SessionRequest to sign a transaction or a message
@@ -921,7 +920,8 @@ An authenticated session represents a secure connection established between a wa
 To handle incoming authentication requests, set up SignClient.WalletDelegate. The onSessionAuthenticate callback will notify you of any authentication requests that need to be processed, allowing you to either approve or reject them based on your application logic.
 
 ```kotlin
-fun onSessionAuthenticate(sessionAuthenticate: Sign.Model.SessionAuthenticate, verifyContext: Sign.Model.VerifyContext) {
+override val onSessionAuthenticate: ((Wallet.Model.SessionAuthenticate, Wallet.Model.VerifyContext) -> Unit)
+  get() = { sessionAuthenticate, verifyContext ->
       // Triggered when wallet receives the session authenticate sent by a Dapp
       // Process the authentication request here
       // This involves displaying UI to the user
@@ -937,7 +937,8 @@ To interact with authentication requests, build authentication objects (Sign.Mod
 
 Example:
 ```kotlin
-override fun onSessionAuthenticate(sessionAuthenticate: Sign.Model.SessionAuthenticate, verifyContext: Sign.Model.VerifyContext) {
+override val onSessionAuthenticate: ((Wallet.Model.SessionAuthenticate, Wallet.Model.VerifyContext) -> Unit)
+  get() = { sessionAuthenticate, verifyContext ->
   val auths = mutableListOf<Sign.Model.Cacao>()
 
   val authPayloadParams =
