@@ -1,10 +1,10 @@
 import Tabs from '@theme/Tabs'
 import TabItem from '@theme/TabItem'
 
-To open Web3Modal you can use our web components or build your own logic with Web3Modal actions
+To open Web3Modal you can use our [**web component**](../../components.mdx) or build your own button with Web3Modal [**actions**](../../actions.mdx#open-and-close-the-modal).
 
 <Tabs>
-<TabItem value="components" label="Components">
+<TabItem value="components" label="Web Component">
 
 ```html
 <!doctype html>
@@ -15,7 +15,7 @@ To open Web3Modal you can use our web components or build your own logic with We
   </head>
   <body>
     <w3m-button />
-    <script type="module" src="main.js"></script>
+    <script type="module" src="main.ts"></script>
   </body>
 </html>
 ```
@@ -43,20 +43,20 @@ Let's first add two html elements to display information to the user:
   <body>
     <button id="btn">Connect</button>
     <span id="user"></span>
-    <script type="module" src="main.js"></script>
+    <script type="module" src="main.ts"></script>
   </body>
 </html>
 ```
 
-Following with our main.js file, we can now add the needed logic to open the modal and display information in the DOM:
+Following with our `main.ts` file, we can now add the needed logic to open the modal and display information on the DOM. Here we're also using [Wagmi's actions](https://wagmi.sh/core/api/actions/watchAccount) to track account changes:
 
 ```ts
-//main.js
+//main.ts
 import { watchAccount, disconnect, getAccount } from '@wagmi/core'
 
 function connect() {
-  if (getAccount().isConnected) {
-    disconnect()
+  if (getAccount(config).isConnected) {
+    disconnect(config)
   } else {
     modal.open()
   }
@@ -68,7 +68,7 @@ const userEl = document.getElementById('user')
 btnEl.addEventListener('click', connect)
 
 // listening for account changes
-watchAccount(wagmiConfig,
+watchAccount(config,
   {
     onChange(account) {
       userEl.innerText = account.address ?? ''

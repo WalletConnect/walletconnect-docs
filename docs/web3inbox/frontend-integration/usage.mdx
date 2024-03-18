@@ -206,11 +206,14 @@ client.watchSubscription(subscription => console.log({ subscription }))
 await client.subscribeToDapp()
 
 // Get notification history
-const notificationsPerPage = 5;
-const isInfiniteScroll = true;
+const notificationsPerPage = 5
+const isInfiniteScroll = true
 
-client.pageNotifications(notificationsPerPage, isInfiniteScroll)((notifications) => {
-  // add logic to display notifications here. 
+client.pageNotifications(
+  notificationsPerPage,
+  isInfiniteScroll
+)(notifications => {
+  // add logic to display notifications here.
   // if isInfiniteScroll is true, notifications will contain all notifications fetched so far, else it will only fetch current page
   // See API docs for more information on `pageNotifications()` and how to use `notifications`
 })

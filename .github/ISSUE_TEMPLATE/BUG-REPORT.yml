@@ -66,4 +66,4 @@ body:
       description: Add any other context about the problem here.
       placeholder: Enter some additional context
     validations:
-      required: true
+      required: false

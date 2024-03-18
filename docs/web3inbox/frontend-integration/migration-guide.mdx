@@ -14,17 +14,17 @@ import CloudBanner from '../../components/CloudBanner'
 - Messages are now stored on notify server and can be paged
 - Registration is more flexible since it is now split into 2 functions
 
+## Migrating from 0.x to 1.0.0
+
 <PlatformTabs
   groupId="api-auth"
   activeOptions={["react", "javascript"]}>
 
 <PlatformTabItem value="javascript">
 
-## Migrating from 0.x to 1.0.0
-
 For developers using `@web3inbox/core` without the hooks, there are far less breaking changes.
 
-### Managing registration
+#### Managing registration
 
 Registration is now split into 2 steps to avoid the opinionated approach of passing `onSign` callback.
 
@@ -42,7 +42,7 @@ client.register({ registerParams, signature })
 /* highlight-add-end */
 ```
 
-### Managing Notifications
+#### Managing Notifications
 
 - `deleteMessage` has been removed.
 - `pageNotifications` has been added to allow paging notifications
@@ -51,17 +51,15 @@ client.register({ registerParams, signature })
 
 <PlatformTabItem value="react">
 
-## Migrating from 0.x to 1.0.0
-
 There are numerous breaking changes in the stable release.
 
-### Package rename
+#### Package rename
 
 `@web3inbox/widget-react` has been renamed to `@web3inbox/react`
 
 `@web3inbox/core` is still named the same.
 
-### Initializing the client
+#### Initializing the client
 
 Previously, a use of hook was required to init the client and a separate hook was required to check for ready status.
 Now, there is only a hook for checking ready status which is **recommended** to be used to be sure if web3inbox functionality is ready to use.
@@ -83,7 +81,7 @@ initWeb3inboxClient({ projectId, domain, allApps })
 /* highlight-add-end */
 ```
 
-### Checking for client ready status
+#### Checking for client ready status
 
 ```typescript
 import { useWeb3InboxClient } from '@web3inbox/react'
@@ -91,12 +89,12 @@ import { useWeb3InboxClient } from '@web3inbox/react'
 const { isLoading: w3iClientIsLoading } = useWeb3InboxClient()
 ```
 
-### Managing Accounts
+#### Managing Accounts
 
 Previously, the account needed to be set using `setAccount` and still had to be passed down to hooks like `useManageSubscriptions`. This is no longer
 the case. Also, registration management was included in the same hook. Now they all follow single responsibility principle.
 
-#### Setting accounts
+- **Setting accounts**
 
 ```typescript
 /* highlight-delete-start */
@@ -116,7 +114,7 @@ setAccount(`eip155:1:0x...`)
 /* highlight-add-end */
 ```
 
-#### Handling registration
+- **Handling registration**
 
 ```typescript
 /* highlight-delete-start */
@@ -139,13 +137,13 @@ setAccount(`eip155:1:0x...`)
 /* highlight-add-end */
 ```
 
-### Managing notifications
+#### Managing notifications
 
 Messages (notifications) function a little differently now. One of the big changes is that you can no longer delete messages.
 Furthermore, messages can now be paged. For convenience, "infinte scroll" paging functionality is available, as in keeping older pages in the
 returned array.
 
-#### Retrieving notifications
+- **Retrieving notifications**
 
 ```typescript
 /* highlight-delete-start */
@@ -173,9 +171,13 @@ returned array.
 /* highlight-add-end */
 ```
 
-#### Retrieving notification types
+- **Retrieving notification types**
 
-**Important note**: Notification images are retrieved from notification types now.
+:::info Note
+
+Notification images are retrieved from notification types now.
+
+:::
 
 Sizes of images available are: `sm`, `md` and `lg` for small, medium and large respectively.
 
@@ -197,7 +199,7 @@ Sizes of images available are: `sm`, `md` and `lg` for small, medium and large r
 /* highlight-add-end */
 ```
 
-### Managing Subscriptions
+#### Managing Subscriptions
 
 Managing subscriptions has changed considerably. Previously there was a single hook and now there are numerous single responsibility hooks.
 

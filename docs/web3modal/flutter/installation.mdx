@@ -1,5 +1,6 @@
 import PlatformTabs from '../../components/PlatformTabs'
 import PlatformTabItem from '../../components/PlatformTabItem'
+import YoutubeEmbed from '../../components/YoutubeEmbed'
 
 # Flutter
 
@@ -13,11 +14,16 @@ If you are looking to migrate from WalletConnectModal to Web3Modal, please refer
 
 ## Installation
 
-Check out [pub.dev](https://pub.dev/packages/web3modal_flutter/install) for detailed instructions on how to install or simply add it as dependency in your pubspec.yaml (and run an implicit `flutter pub get` ):
+1.  - Add `web3modal_flutter` as dependency in your `/pubspec.yaml` and run `flutter pub get` (check out the [latest version](https://pub.dev/packages/web3modal_flutter/install))
+    - Or simply run `flutter pub add web3modal_flutter`
+2.  - Locate your `/ios/Podfile` file and add the following as the first line:
 
 ```ruby
-flutter pub add web3modal_flutter
+platform :ios, '13.0'
 ```
+
+3.  - Run `$ pod install` inside `/ios` folder.
+4.  - You should now be able to run your app with `flutter run --dart-define=PROJECT_ID={your_project_id}`
 
 ### Enable Installed Wallet Detection
 
@@ -168,3 +174,7 @@ Example:
 :::note
 If you don't want to include/support Coinbase Wallet you just need to pass the walletId `fd20dc426fb37566d803205b19bbc1d4096b248ac04548e3cfb6b3a38bd033aa` to [excludedWalletIds](/web3modal/flutter/custom-wallets#excludedwalletids) options Array.
 :::
+
+## Tutorial
+
+<YoutubeEmbed videoId="v_M2buHCpc4" />

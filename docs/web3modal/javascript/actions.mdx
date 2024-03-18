@@ -3,11 +3,11 @@ import PlatformTabs from '../../components/PlatformTabs'
 import PlatformTabItem from '../../components/PlatformTabItem'
 
 import WagmiActions from './wagmi/actions.mdx'
-import Wagmi1Actions from './wagmi1/actions.mdx'
-import Ethers5Actions from './ethers5/actions.mdx'
 import EthersActions from './ethers/actions.mdx'
 
 # Actions
+
+Actions are functions that will help you control the modal, subscribe to wallet events and interact with them and smart contracts.
 
 ## Open and close the modal
 
@@ -60,11 +60,25 @@ List of views you can select
 
 ## Disconnect
 
-Disconnect currently connected account.
-
 ```ts
 modal.disconnect()
 ```
+
+## Ethereum Library
+
+<PlatformTabs groupId="eth-lib" activeOptions={["wagmi", "ethers"]}>
+<PlatformTabItem value="wagmi">
+
+<WagmiActions />
+
+</PlatformTabItem>
+<PlatformTabItem value="ethers">
+
+<EthersActions />
+
+</PlatformTabItem>
+</PlatformTabs>
+
 
 ## Modal State
 
@@ -150,28 +164,3 @@ const unsubscribe = modal.subscribeTheme(newTheme => console.log(newTheme))
 modal.getEvent() // get last event
 modal.subscribeEvents(event => console.log(event)) // subscribe to events
 ```
-
-## Ethereum Library
-
-<PlatformTabs groupId="eth-lib" activeOptions={["wagmi", "wagmi1", "ethers5", "ethers"]}>
-<PlatformTabItem value="wagmi">
-
-<WagmiActions />
-
-</PlatformTabItem>
-<PlatformTabItem value="wagmi1">
-
-<Wagmi1Actions />
-
-</PlatformTabItem>
-<PlatformTabItem value="ethers5">
-
-<Ethers5Actions />
-
-</PlatformTabItem>
-<PlatformTabItem value="ethers">
-
-<EthersActions />
-
-</PlatformTabItem>
-</PlatformTabs>

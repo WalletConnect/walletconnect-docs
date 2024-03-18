@@ -48,6 +48,23 @@ createWeb3Modal({
 </PlatformTabItem>
 </PlatformTabs>
 
+## featuredWalletIds
+
+Select wallets that are going to be shown on the modal's main view. Default wallets are MetaMask and Trust Wallet.
+Array of wallet ids defined will be prioritized (order is respected).
+These wallets will also show up first in `All Wallets` view.
+You can find the wallets ids in [WalletConnect Explorer](https://walletconnect.com/explorer?type=wallet)
+
+```ts
+createWeb3Modal({
+  //...
+  featuredWalletIds: [
+    '1ae92b26df02f0abca6304df07debccd18262fdf5fe82daa81593582dac9a369',
+    '4622a2b2d6af1c9844944291e5e7351a6aa24cd7b23099efac1b2fd875da31a0'
+  ]
+})
+```
+
 ## tokens
 
 You can select tokens for Web3Modal to show the user's balance of. Each key represents the chain id of the token's blockchain.
@@ -65,46 +82,6 @@ createWeb3Modal({
       image: 'token_image_url' //optional
     }
   }
-})
-```
-
-## customWallets
-
-Add custom wallets to the modal. `CustomWallets` is an array of objects, where each object contains specific information of a custom wallet.
-
-```ts
-createWeb3Modal({
-  //...
-  customWallets: [
-    {
-      id: 'myCustomWallet',
-      name: 'My Custom Wallet',
-      homepage: 'www.mycustomwallet.com', // Optional
-      image_url: 'my_custom_wallet_image', // Optional
-      mobile_link: 'mobile_link', // Optional - Deeplink or universal
-      desktop_link: 'desktop_link', // Optional - Deeplink
-      webapp_link: 'webapp_link', // Optional
-      app_store: 'app_store', // Optional
-      play_store: 'play_store' // Optional
-    }
-  ]
-})
-```
-
-## featuredWalletIds
-
-Select wallets that are going to be shown on the modal's main view. Default wallets are MetaMask and Trust Wallet.
-Array of wallet ids defined will be prioritized (order is respected).
-These wallets will also show up first in `All Wallets` view.
-You can find the wallets ids in [WalletConnect Explorer](https://walletconnect.com/explorer?type=wallet)
-
-```ts
-createWeb3Modal({
-  //...
-  featuredWalletIds: [
-    '1ae92b26df02f0abca6304df07debccd18262fdf5fe82daa81593582dac9a369',
-    '4622a2b2d6af1c9844944291e5e7351a6aa24cd7b23099efac1b2fd875da31a0'
-  ]
 })
 ```
 
@@ -191,7 +168,30 @@ createWeb3Modal({
 
 <Button name="Learn More" url="/cloud/analytics" />
 
-## AllWallets (v4)
+## customWallets
+
+Add custom wallets to the modal. `CustomWallets` is an array of objects, where each object contains specific information of a custom wallet.
+
+```ts
+createWeb3Modal({
+  //...
+  customWallets: [
+    {
+      id: 'myCustomWallet',
+      name: 'My Custom Wallet',
+      homepage: 'www.mycustomwallet.com', // Optional
+      image_url: 'my_custom_wallet_image', // Optional
+      mobile_link: 'mobile_link', // Optional - Deeplink or universal
+      desktop_link: 'desktop_link', // Optional - Deeplink
+      webapp_link: 'webapp_link', // Optional
+      app_store: 'app_store', // Optional
+      play_store: 'play_store' // Optional
+    }
+  ]
+})
+```
+
+## AllWallets
 
 :::caution
 

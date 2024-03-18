@@ -25,7 +25,7 @@ No config or setup is needed for Web3Modal integrations. For other usage, see th
 
 ## Limits
 
-The Blockchain API is free for 100k requests/day.
+The Blockchain API is free for 6 million requests per 30 days.
 
 ## Links
 

@@ -1,0 +1,38 @@
+import PlatformTabs from '../../components/PlatformTabs'
+import PlatformTabItem from '../../components/PlatformTabItem'
+
+import EmailAlert from '../shared/email/alert.mdx'
+import UserFlow from '../shared/email/user-flow.mdx'
+
+import WagmiImplementation from '../shared/email/wagmi.mdx'
+import EthersImplementation from '../shared/email/ethers.mdx'
+import YoutubeEmbed from '../../components/YoutubeEmbed'
+
+# Email Wallets
+
+Web3Modal SDK enables passwordless Web3 onboarding and authentication, allowing your users interact with your application by creating a non-custodial wallet with just their emails.
+
+<EmailAlert />
+
+## Integration
+
+<PlatformTabs groupId="eth-lib" activeOptions={["wagmi", "ethers"]}>
+<PlatformTabItem value="wagmi">
+
+<WagmiImplementation />
+
+</PlatformTabItem>
+<PlatformTabItem value="ethers">
+
+<EthersImplementation />
+
+</PlatformTabItem>
+</PlatformTabs>
+
+## User Flow
+
+<UserFlow />
+
+## Video Tutorial
+
+<YoutubeEmbed videoId="I1B9eAJk9aI" />

@@ -36,15 +36,11 @@ const walletProvider = modal.getWalletProvider()
 
 ### getWalletProviderType
 
-The wallet or protocol of the walletProvider.
-
 ```ts
 const walletProviderType = modal.getWalletProviderType()
 ```
 
 ### subscribeProvider
-
-subscribe to chainId, address, provider changes.
 
 ```ts
 function handleChange({ provider, providerType, address, error, chainId, isConnected }) {

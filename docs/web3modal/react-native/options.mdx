@@ -14,39 +14,54 @@ createWeb3Modal({ projectId, chains, ...options })
 
 You can set a desired chain for the initial connection:
 
-<PlatformTabs groupId="eth-lib" activeOptions={["wagmi1", "ethers5"]}>
+<PlatformTabs groupId="eth-lib" activeOptions={["wagmi1", "ethers", "ethers5"]}>
 
 <PlatformTabItem value="wagmi1">
-  ```ts
-    import { mainnet } from 'viem/chains'
-
-    createWeb3Modal({
-      //...
-      defaultChain: mainnet
-    })
-  ```
-</PlatformTabItem>
-
-<PlatformTabItem value="ethers5">
-  ```ts
-  const mainnet = {
-    chainId: 1,
-    name: 'Ethereum',
-    currency: 'ETH',
-    explorerUrl: 'https://etherscan.io',
-    rpcUrl: 'https://cloudflare-eth.com',
-  };
+```ts
+  import { mainnet } from 'viem/chains'
 
   createWeb3Modal({
     //...
     defaultChain: mainnet
   })
-  ```
+```
+</PlatformTabItem>
+
+<PlatformTabItem value="ethers">
+```ts
+const mainnet = {
+  chainId: 1,
+  name: 'Ethereum',
+  currency: 'ETH',
+  explorerUrl: 'https://etherscan.io',
+  rpcUrl: 'https://cloudflare-eth.com',
+};
+
+createWeb3Modal({
+  //...
+  defaultChain: mainnet
+})
+```
+</PlatformTabItem>
+
+<PlatformTabItem value="ethers5">
+```ts
+const mainnet = {
+  chainId: 1,
+  name: 'Ethereum',
+  currency: 'ETH',
+  explorerUrl: 'https://etherscan.io',
+  rpcUrl: 'https://cloudflare-eth.com',
+};
+
+createWeb3Modal({
+  //...
+  defaultChain: mainnet
+})
+```
 </PlatformTabItem>
 
 </PlatformTabs>
-
-
 
 ## clipboardClient
 
@@ -154,6 +169,18 @@ createWeb3Modal({
     '4622a2b2d6af1c9844944291e5e7351a6aa24cd7b23099efac1b2fd875da31a0', // Trust
     'fd20dc426fb37566d803205b19bbc1d4096b248ac04548e3cfb6b3a38bd033aa' // Coinbase
   ]
+})
+```
+## enableAnalytics
+:::caution
+  Analytics is currently in alpha. 
+:::
+Enable analytics to get more insights on your users activity within your [WalletConnect Cloud's dashboard](https://cloud.walletconnect.com)
+
+```ts
+createWeb3Modal({
+  //...
+  enableAnalytics: true
 })
 ```
 
