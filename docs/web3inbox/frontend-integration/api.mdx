@@ -331,7 +331,13 @@ const notificationsPerPage = 5
 const isInfiniteScroll = true
 const unreadFirst = true
 
-const { data: notifications, nextPage, markAllReturnedNotificationsAsRead, markNotificationsAsRead } = useNotifications(
+const {
+  data: notifications,
+  nextPage,
+  markNotificationsAsRead,
+  markAllNotificationsAsRead,
+  markReturnedNotificationsAsRead
+} = useNotifications(
   notificationsPerPage, 
   isInfiniteScroll, {
     unreadFirst,
@@ -339,13 +345,16 @@ const { data: notifications, nextPage, markAllReturnedNotificationsAsRead, markN
 )
 
 // marking a single notification as read
-notifications[0].markAsRead();
-
-// mark all notifications currently in `notifications` returned array as read
-markAllReturnedNotificationsAsRead();
+await notifications[0].markAsRead();
 
 // mark specific notifications as read
-markNotificationsAsRead(notifications.slice(2).map(n => n.id))
+await markNotificationsAsRead(notifications.slice(2).map(n => n.id));
+
+// mark all notifications as read
+await markAllNotificationsAsRead();
+
+// mark notifications currently in `notifications` returned array as read
+await markReturnedNotificationsAsRead();
 ```
 
 #### References
@@ -358,8 +367,9 @@ markNotificationsAsRead(notifications.slice(2).map(n => n.id))
 - **nextPage:**: A function to be called to fetch the next page of notifications
 - **notifications:** Array of notifications, of type
 - **notification.markAsRead:** Mark the notification as read
-- **markAllReturnedNotificationsAsRead**: Mark currently fetched notifications as read. *This does not mark all notifications as read, just the ones that have been fetched and returned here.*.
 - **markNotificationsAsRead**: Takes an array of notification IDs and marks them as read. Max 1000 IDs
+- **markAllNotificationsAsRead**: Mark all notifications as read.
+- **markReturnedNotificationsAsRead**: Mark currently fetched notifications as read. *This does not mark all notifications as read, just the ones that have been fetched and returned here.*.
 
 ```ts
 {
@@ -396,7 +406,12 @@ const onUpdate = ({notifications: fetchedNotifications}: GetNotificationsReturn)
   notifications = fetchedNotifications
 }
 
-const { nextPage, markAllReturnedNotificationsAsRead, markNotificationAsRead } = client.pageNotifications(
+const {
+  nextPage,
+  markNotificationAsRead,
+  markAllNotificationsAsRead,
+  markReturnedNotificationsAsRead
+} = client.pageNotifications(
   notificationsPerPage,
   isInfiniteScroll, {
     unreadFirst,
@@ -405,13 +420,16 @@ const { nextPage, markAllReturnedNotificationsAsRead, markNotificationAsRead } =
 
 
 // marking a single notification as read
-notifications[0].markAsRead();
-
-// mark all notifications currently in `notifications` returned array as read
-markAllReturnedNotificationsAsRead();
+await notifications[0].markAsRead();
 
 // mark specific notifications as read
-markNotificationsAsRead(notifications.slice(2).map(n => n.id))
+await markNotificationsAsRead(notifications.slice(2).map(n => n.id));
+
+// mark all notifications as read
+await markAllNotificationsAsRead();
+
+// mark notifications currently in `notifications` returned array as read
+await markReturnedNotificationsAsRead();
 ```
 
 #### References
@@ -425,8 +443,9 @@ markNotificationsAsRead(notifications.slice(2).map(n => n.id))
 - **nextPage:**: A function to be called to fetch the next page of notifications
 - **notifications:** Array of notifications, of type
 - **notification.markAsRead:** Mark the notification as read
-- **markAllReturnedNotificationsAsRead**: Mark currently fetched notifications as read. *This does not mark all notifications as read, just the ones that have been fetched and returned here.*.
 - **markNotificationsAsRead**: Takes an array of notification IDs and marks them as read. Max 1000 IDs
+- **markAllNotificationsAsRead**: Mark all notifications as read.
+- **markReturnedNotificationsAsRead**: Mark currently fetched notifications as read. *This does not mark all notifications as read, just the ones that have been fetched and returned here.*.
 
 ```ts
 {
