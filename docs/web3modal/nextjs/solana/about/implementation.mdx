@@ -1,45 +1,10 @@
 Web3Modal Solana is built on top of the Web3Modal library and provides a set of React components and hooks to easily connect Solana wallets with your application.
 
-Before getting started, create a new file `constants/chains.ts` and set up the following configuration for Solana, Solana Testnet and Solana Devnet chains.
-
-```tsx
-// constants/chains.ts
-
-// 0. Get projectId from https://cloud.walletconnect.com
-const projectId = 'YOUR_PROJECT_ID'
-
-export const solana = {
-  chainId: '4sGjMW1sUnHzSxGspuhpqLDx6wiyjNtZ',
-  name: 'Solana',
-  currency: 'SOL',
-  explorerUrl: 'https://solscan.io',
-  rpcUrl: `https://rpc.walletconnect.com/v1?chainId=solana:4sGjMW1sUnHzSxGspuhpqLDx6wiyjNtZ&projectId=${projectId}`
-}
-
-export const solanaTestnet = {
-  chainId: '8E9rvCKLFQia2Y35HXjjpWzj8weVo44K',
-  name: 'Solana Testnet',
-  currency: 'SOL',
-  explorerUrl: 'https://solscan.io',
-  rpcUrl: 'https://api.testnet.solana.com'
-}
-
-export const solanaDevnet = {
-  chainId: '8E9rvCKLFQia2Y35HXjjpWzj8weVo44K',
-  name: 'Solana Devnet',
-  currency: 'SOL',
-  explorerUrl: 'https://solscan.io',
-  rpcUrl: 'https://api.devnet.solana.com'
-}
-```
-
 On top of your app set up the following configuration, making sure that all functions are called outside any React component to avoid unwanted rerenders.
 
 ```tsx
-// App.tsx
-
 import { createWeb3Modal, defaultSolanaConfig } from '@web3modal/solana/react'
-import { solana, solanaTestnet, solanaDevnet } from './constants/chains'
+import { solana, solanaTestnet, solanaDevnet } from '@web3modal/solana/chains'
 
 // 0. Setup chains
 const chains = [solana, solanaTestnet, solanaDevnet]
@@ -62,17 +27,9 @@ const solanaConfig = defaultSolanaConfig({
 })
 
 // 3. Create modal
-createWeb3Modal({
+const modal = createWeb3Modal({
   solanaConfig,
   chains,
   projectId
 })
-
-export default function App() {
-  return (
-    <div>
-      <w3m-button />
-    </div>
-  )
-}
 ```
