@@ -335,8 +335,7 @@ const {
   data: notifications,
   nextPage,
   markNotificationsAsRead,
-  markAllNotificationsAsRead,
-  markReturnedNotificationsAsRead
+  markAllNotificationsAsRead
 } = useNotifications(
   notificationsPerPage, 
   isInfiniteScroll, {
@@ -352,9 +351,6 @@ await markNotificationsAsRead(notifications.slice(2).map(n => n.id));
 
 // mark all notifications as read
 await markAllNotificationsAsRead();
-
-// mark notifications currently in `notifications` returned array as read
-await markReturnedNotificationsAsRead();
 ```
 
 #### References
@@ -369,7 +365,6 @@ await markReturnedNotificationsAsRead();
 - **notification.markAsRead:** Mark the notification as read
 - **markNotificationsAsRead**: Takes an array of notification IDs and marks them as read. Max 1000 IDs
 - **markAllNotificationsAsRead**: Mark all notifications as read.
-- **markReturnedNotificationsAsRead**: Mark currently fetched notifications as read. *This does not mark all notifications as read, just the ones that have been fetched and returned here.*.
 
 ```ts
 {
@@ -409,8 +404,7 @@ const onUpdate = ({notifications: fetchedNotifications}: GetNotificationsReturn)
 const {
   nextPage,
   markNotificationAsRead,
-  markAllNotificationsAsRead,
-  markReturnedNotificationsAsRead
+  markAllNotificationsAsRead
 } = client.pageNotifications(
   notificationsPerPage,
   isInfiniteScroll, {
@@ -427,9 +421,6 @@ await markNotificationsAsRead(notifications.slice(2).map(n => n.id));
 
 // mark all notifications as read
 await markAllNotificationsAsRead();
-
-// mark notifications currently in `notifications` returned array as read
-await markReturnedNotificationsAsRead();
 ```
 
 #### References
@@ -445,7 +436,6 @@ await markReturnedNotificationsAsRead();
 - **notification.markAsRead:** Mark the notification as read
 - **markNotificationsAsRead**: Takes an array of notification IDs and marks them as read. Max 1000 IDs
 - **markAllNotificationsAsRead**: Mark all notifications as read.
-- **markReturnedNotificationsAsRead**: Mark currently fetched notifications as read. *This does not mark all notifications as read, just the ones that have been fetched and returned here.*.
 
 ```ts
 {
