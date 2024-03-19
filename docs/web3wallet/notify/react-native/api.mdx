@@ -13,8 +13,8 @@ To setup the client you need to configure it with your `projectId` which you can
 
 Furthremore you may need to configure the `domain` and `isLimited` parameters:
 
-- `domain` defaults to `window.location.host` and must be set to the domain setup in [Cloud Setup](../cloud-setup). For example `app.example.com`. Do not add the scheme (`https://`).
-- `allApps` determines if your app has access to all of the user's subscriptions, or only the ones that the app is hosted on. By setting it to `true`, it enables setting `domain` to a value other than `window.location.host`. Setting `allApps: true` can be useful during development to allow your localhost-deployed app to access the subscriptions for the domain you setup. Note that most apps do not need to set this in production environments, as they only need access to their own subscriptions. When enabled, the user has to sign a SIWE message granting your app more permissions, and this requires additional consideration from the user. Read [here](../authorization-signatures/about) for more details.
+- `domain` defaults to `window.location.host` and must be set to the domain setup in [Cloud Setup](../../../web3inbox/cloud-setup). For example `app.example.com`. Do not add the scheme (`https://`).
+- `allApps` determines if your app has access to all of the user's subscriptions, or only the ones that the app is hosted on. By setting it to `true`, it enables setting `domain` to a value other than `window.location.host`. Setting `allApps: true` can be useful during development to allow your localhost-deployed app to access the subscriptions for the domain you setup. Note that most apps do not need to set this in production environments, as they only need access to their own subscriptions. When enabled, the user has to sign a SIWE message granting your app more permissions, and this requires additional consideration from the user. Read [here](../../../web3inbox/authorization-signatures/about) for more details.
 
 <PlatformTabs
 	groupId="w3iw"
