@@ -172,7 +172,8 @@ module.exports = {
               label: 'Features',
               items: [
                 { type: 'doc', label: 'Email Wallets', id: 'web3modal/features/email' },
-                { type: 'doc', label: 'Onramp', id: 'web3modal/features/onramp' }
+                { type: 'doc', label: 'Onramp', id: 'web3modal/features/onramp' },
+                { type: 'doc', label: 'Solana', id: 'web3modal/features/solana' }
               ]
             },
             'web3modal/upgrade',
