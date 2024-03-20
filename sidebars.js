@@ -249,11 +249,11 @@ module.exports = {
                 'web3wallet/notify/resources',
 		{
 		    type: 'category',
-		    label: 'React Native',
+		    label: 'React Native Wallets',
                     items: [
-                      'web3wallet/notify/react-native/usage',
-                      'web3wallet/notify/react-native/api',
-                      'web3wallet/notify/react-native/examples',
+                      'web3wallet/notify/react-native-sdk',
+                      'web3inbox/frontend-integration/usage',
+                      'web3inbox/frontend-integration/api',
                   ]
 
 		}
