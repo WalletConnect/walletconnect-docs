@@ -310,41 +310,6 @@ module.exports = {
         },
         {
           type: 'category',
-          label: 'Migration from v1.x',
-          items: [
-            {
-              type: 'doc',
-              id: 'advanced/migration-from-v1.x/overview',
-              label: 'Overview'
-            },
-            {
-              type: 'doc',
-              id: 'advanced/migration-from-v1.x/namespaces',
-              label: 'Namespaces'
-            },
-            {
-              type: 'category',
-              label: 'Dapps',
-              items: [
-                'advanced/migration-from-v1.x/dapps/dapps',
-                'advanced/migration-from-v1.x/dapps/dapp-checklist'
-              ]
-            },
-            {
-              type: 'category',
-              label: 'Wallets',
-              items: [
-                'advanced/migration-from-v1.x/wallets/wallets',
-                'advanced/migration-from-v1.x/wallets/wallet-checklist'
-              ]
-            },
-            'advanced/migration-from-v1.x/what-changed-from-v1.0',
-            'advanced/migration-from-v1.x/migration-faq',
-            'advanced/migration-from-v1.x/explorer-submission'
-          ]
-        },
-        {
-          type: 'category',
           label: 'Providers',
           collapsible: true,
           collapsed: true,
