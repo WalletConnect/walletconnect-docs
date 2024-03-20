@@ -71,9 +71,7 @@ const solanaConfig = defaultSolanaConfig({
 const modal = createWeb3Modal({
   solanaConfig: defaultSolanaConfig({
     metadata,
-    defaultChainId: solanaDevnet.chainId, // Optional - defaults to the first chain
-    enableInjected: true, // Optional - defaults to true
-    rpcUrl: '...' // Optional - defaults to the chain's rpcUrl
+    enableInjected: true // Optional - defaults to true
   }), // required
   chains, // required
   projectId, // required
