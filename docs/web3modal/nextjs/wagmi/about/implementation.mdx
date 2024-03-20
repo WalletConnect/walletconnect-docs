@@ -4,9 +4,10 @@ import TabItem from '@theme/TabItem'
 Web3Modal can be configured in **two** different ways:
 
 - **Default**: For a quick integration you can use `defaultWagmiConfig` function which wraps Wagmi's [`creatConfig`](https://wagmi.sh/core/api/createConfig) function with predefined configuration.
-This includes WalletConnect, Coinbase and Injected connectors, and our [Blockchain API](../../../../cloud/blockchain-api.md) as a [transport](https://wagmi.sh/core/api/createConfig#transports) (if the chain is not support by the Blockchain API it will fallback to the chain's default RPC).
-<br/> As shown in the code example, this configuration (with the exception of the connectors) can be overridden.
-<br/>
+  This includes WalletConnect, Coinbase and Injected connectors, and our [Blockchain API](../../../../cloud/blockchain-api.md) as a [transport](https://wagmi.sh/core/api/createConfig#transports) (if the chain is not support by the Blockchain API it will fallback to the chain's default RPC).
+  <br /> As shown in the code example, this configuration (with the exception of the connectors) can
+  be overridden.
+  <br />
 - **Custom**: This configuration setup is great for projects that already have Wagmi integrated or that would like to have more control over the Wagmi configuration. Once [Wagmi](https://wagmi.sh/core/getting-started) is integrated in your project you will need to add `showQrModal: false` to the WalletConnect connector and call `createWeb3Modal` with its required parameters.
 
 Select your preferred configuration mode below:
@@ -53,12 +54,13 @@ export const config = defaultWagmiConfig({
 ```
 
 :::info
+
 - Notice that we are using here the [recommended configuration from Wagmi for SSR](https://wagmi.sh/react/guides/ssr).
 - Using cookies is completely optional and by default Wagmi will use `localStorage` instead if the `storage` param is not defined.
 - The `ssr` flag will delay the hydration of the Wagmi's store to avoid hydration mismatch errors.
-:::
+  :::
 
-<br/>
+<br />
 
 ### Context Provider
 
@@ -197,12 +199,13 @@ export const config = createConfig({
 ```
 
 :::info
+
 - Notice that we are using here the [recommended configuration from Wagmi for SSR](https://wagmi.sh/react/guides/ssr).
 - Using cookies is completely optional and by default Wagmi will use `localStorage` instead if the `storage` param is not defined.
 - The `ssr` flag will delay the hydration of the Wagmi's store to avoid hydration mismatch errors.
-:::
+  :::
 
-<br/>
+<br />
 
 ### Context Provider
 

@@ -19,18 +19,18 @@ function Components() {
 Hook that returns the `walletProvider` and the `WalletProviderType`.
 
 ```tsx
-import { BrowserProvider } from 'ethers';
+import { BrowserProvider } from 'ethers'
 import { useWeb3ModalProvider } from '@web3modal/ethers-react-native'
 
 function Components() {
   const { walletProvider } = useWeb3ModalProvider()
 
   async function onSignMessage() {
-    const ethersProvider = new BrowserProvider(walletProvider);
-    const signer = await ethersProvider.getSigner();
-    const message = 'hello web3modal + ethers';
-    const signature = await signer.signMessage(message);
-    console.log(signature.toString());
+    const ethersProvider = new BrowserProvider(walletProvider)
+    const signer = await ethersProvider.getSigner()
+    const message = 'hello web3modal + ethers'
+    const signature = await signer.signMessage(message)
+    console.log(signature.toString())
   }
 
   return <button onClick={() => onSignMessage()}>Sign Message</button>

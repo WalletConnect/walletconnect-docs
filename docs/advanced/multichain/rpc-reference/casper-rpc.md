@@ -8,12 +8,12 @@ Use the `casper_sign_deploy` method to request the user to approve or reject the
 
 #### Parameters
 
-* `address`. Type: `string`. The chain namespace and the public key corresponding to the key pair that signs the transaction separated with a colon character.
-* `deploy`. Type: `object`. A Deploy object as per the Casper protocol specificatio.
+- `address`. Type: `string`. The chain namespace and the public key corresponding to the key pair that signs the transaction separated with a colon character.
+- `deploy`. Type: `object`. A Deploy object as per the Casper protocol specificatio.
 
 #### Returns
 
-* `deploy`. Type: `object`. The Deploy object including the newly generated approval item as per the Casper protocol specification.
+- `deploy`. Type: `object`. The Deploy object including the newly generated approval item as per the Casper protocol specification.
 
 If the user rejects the signature, the wallet returns the WalletConnect SDK error `USER_REJECTED`.
 
@@ -41,17 +41,21 @@ Request:
       "payment": {
         "ModuleBytes": {
           "module_bytes": "",
-          "args": [
-            ["amount", {"bytes": "0400e1f505", "cl_type": "U512"}]
-          ]
+          "args": [["amount", { "bytes": "0400e1f505", "cl_type": "U512" }]]
         }
       },
       "session": {
         "Transfer": {
           "args": [
-            ["amount", {"bytes": "0500f2052a01", "cl_type": "U512"}],
-            ["target", {"bytes": "0202e99759649fa63a72c685b72e696b30c90f1deabb02d0d9b1de45eb371a73e5bb", "cl_type": "PublicKey"}],
-            ["id", {"bytes": "01d204000000000000", "cl_type": {"Option": "U64"}}]
+            ["amount", { "bytes": "0500f2052a01", "cl_type": "U512" }],
+            [
+              "target",
+              {
+                "bytes": "0202e99759649fa63a72c685b72e696b30c90f1deabb02d0d9b1de45eb371a73e5bb",
+                "cl_type": "PublicKey"
+              }
+            ],
+            ["id", { "bytes": "01d204000000000000", "cl_type": { "Option": "U64" } }]
           ]
         }
       },
@@ -83,17 +87,21 @@ Response:
       "payment": {
         "ModuleBytes": {
           "module_bytes": "",
-          "args": [
-            ["amount", {"bytes": "0400e1f505", "cl_type": "U512"}]
-          ]
+          "args": [["amount", { "bytes": "0400e1f505", "cl_type": "U512" }]]
         }
       },
       "session": {
         "Transfer": {
           "args": [
-            ["amount", {"bytes": "0500f2052a01", "cl_type": "U512"}],
-            ["target", {"bytes": "0202e99759649fa63a72c685b72e696b30c90f1deabb02d0d9b1de45eb371a73e5bb", "cl_type": "PublicKey"}],
-            ["id", {"bytes": "01d204000000000000", "cl_type": {"Option": "U64"}}]
+            ["amount", { "bytes": "0500f2052a01", "cl_type": "U512" }],
+            [
+              "target",
+              {
+                "bytes": "0202e99759649fa63a72c685b72e696b30c90f1deabb02d0d9b1de45eb371a73e5bb",
+                "cl_type": "PublicKey"
+              }
+            ],
+            ["id", { "bytes": "01d204000000000000", "cl_type": { "Option": "U64" } }]
           ]
         }
       },
@@ -104,21 +112,22 @@ Response:
         }
       ]
     }
-  }  
+  }
 }
 ```
+
 ### casper_sign_message
 
 Use `casper_sign_message` to request the user to sign a message. It's recommended to use this method with human-readable text messages. Upon user approval, the wallet must generate a signature for the prefixed message `"Casper Message:\n" + message`. The prefix protects the user against misuse of this method, preventing a malicious actor from trying to trick the user into signing arbitrary data, like a network transaction.
 
 #### Parameters
 
-* `address`. Type: `string`. The chain namespace and the public key corresponding to the key pair that signs the transaction separated with a colon character.
-* `message`. Type: `string`. The message to be signed.
+- `address`. Type: `string`. The chain namespace and the public key corresponding to the key pair that signs the transaction separated with a colon character.
+- `message`. Type: `string`. The message to be signed.
 
 #### Returns
 
-* `signature`. Type: `string`. The signature of the message.
+- `signature`. Type: `string`. The signature of the message.
 
 If the user rejects the signature, the wallet returns the WalletConnect SDK error `USER_REJECTED`.
 
@@ -132,8 +141,8 @@ Request:
   "jsonrpc": "2.0",
   "method": "casper_sign_message",
   "params": {
-      "message": "CSPR.studio wants you to sign in with your Casper account:\n0x01953...808f3 \n\nIssued At: 07/21/2023 10:07:25\nnonce: 428b62e4",
-      "address": "casper:casper-test:0202a8e3e5E32800792F37F738d95BF2610d86E97922D13ab97945bb062824ed9E8A"
+    "message": "CSPR.studio wants you to sign in with your Casper account:\n0x01953...808f3 \n\nIssued At: 07/21/2023 10:07:25\nnonce: 428b62e4",
+    "address": "casper:casper-test:0202a8e3e5E32800792F37F738d95BF2610d86E97922D13ab97945bb062824ed9E8A"
   }
 }
 ```
@@ -146,7 +155,7 @@ Response:
   "jsonrpc": "2.0",
   "method": "casper_sign_message",
   "result": {
-      "signature": "b52482afd2392b715cc43d9ad9f1f7067752a10ba5b49b89bc61b398e478841e6d8a4a224aeb944a34f23d98a232cdab6e5a60a5e886e8b0719d7b84277c405f"
+    "signature": "b52482afd2392b715cc43d9ad9f1f7067752a10ba5b49b89bc61b398e478841e6d8a4a224aeb944a34f23d98a232cdab6e5a60a5e886e8b0719d7b84277c405f"
   }
 }
 ```

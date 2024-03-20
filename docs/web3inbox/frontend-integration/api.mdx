@@ -206,7 +206,10 @@ const { data: subscription, getSubscription } = useSubscription()
 // getSubscription can be used to get information about different dapps programatically
 const subscriptionToSameDappFromDifferentAccount = getSubscription(differentAccount)
 const subscriptionToDifferentDappFromSameAccount = getSubscription(undefined, differentDappDomain)
-const subscriptionToDifferentDappFromDifferentAccount = getSubscription(differentAccount, differentDappDomain)
+const subscriptionToDifferentDappFromDifferentAccount = getSubscription(
+  differentAccount,
+  differentDappDomain
+)
 
 // subscribe to current dapp from current user
 subscribe()
@@ -453,7 +456,6 @@ type ScopeMap = Record<
 </PlatformTabItem>
 </PlatformTabs>
 
-
 ## Registering for Device Push Notifications
 
 If you wish to receive live push notifications to your React Native or Web app, you must integrate with Firebase Messaging. More information about how to integrate with Firebase can be found [here](https://firebase.google.com/docs/cloud-messaging).
@@ -475,13 +477,14 @@ const { data: client } = useWeb3InboxClient()
 // initialize Firebase's messaging object via Firebase's `getMessaging` function
 
 const firebaseToken = getToken(firebaseMessaging, {
-  vapidKey: "YOUR_FIREBASE_VAPID_KEY"
+  vapidKey: 'YOUR_FIREBASE_VAPID_KEY'
 })
 
 client.registerWithPushServer(firebaseToken)
 ```
 
 #### References
+
 - `registerWithPushServer`: `(token: string, platform: 'fcm' | 'apns' = 'fcm') => void`
 
 Either APNs or FCM can be used to receive push notifications to the device. The `token` you provide may be a token from either platform, provided the `platform` argument matches.
@@ -504,6 +507,7 @@ const clientId = client.registerWithPushServer(firebaseToken)
 ```
 
 #### References
+
 - `registerWithPushServer`: `(token: string, platform: 'fcm' | 'apns') => string`
 
 Either APNS or FCM can be used to recieve push notifications. Token here is the respective platform's token.
@@ -518,6 +522,7 @@ Either APNS or FCM can be used to recieve push notifications. Token here is the 
 >
 
 ## Listening For Events
+
 This can be used to listen to, for example, messages recieved in realtime.
 
 <PlatformTabItem value="react" >
@@ -525,21 +530,23 @@ This can be used to listen to, for example, messages recieved in realtime.
 ```ts
 const { data: client } = useWeb3InboxClient()
 
-client.on("notify_message", ({ message }) => {
+client.on('notify_message', ({ message }) => {
   console.log(notification.title)
 })
 ```
 
 #### References
+
 - `message`: Notification of type:
+
 ```ts
 interface NotifyNotification {
-  title: string;
-  sentAt: number;
-  body: string;
-  id: string;
-  url: string | null;
-  type: string;
+  title: string
+  sentAt: number
+  body: string
+  id: string
+  url: string | null
+  type: string
 }
 ```
 
@@ -548,24 +555,25 @@ interface NotifyNotification {
 <PlatformTabItem value="javascript" >
 
 ```ts
-client.on("notify_message", ({ notification }) => {
+client.on('notify_message', ({ notification }) => {
   console.log(notification.title)
 })
 ```
 
 #### References
+
 - `message`: Notification of type:
+
 ```ts
 interface NotifyNotification {
-  title: string;
-  sentAt: number;
-  body: string;
-  id: string;
-  url: string | null;
-  type: string;
+  title: string
+  sentAt: number
+  body: string
+  id: string
+  url: string | null
+  type: string
 }
 ```
 
 </PlatformTabItem>
 </PlatformTabs>
-
