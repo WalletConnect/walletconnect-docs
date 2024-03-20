@@ -1,0 +1,123 @@
+---
+pagination_next: web3modal/react/about
+title: Introduction
+---
+
+import Button from '../../components/button'
+import Container from '../../components/Container.js'
+import Wrapper from '../../components/Home/Wrapper'
+import W3MQuickStart from '../../components/W3MQuickStart'
+import YoutubeEmbed from '../../components/YoutubeEmbed'
+import useBaseUrl from '@docusaurus/useBaseUrl'
+
+import reactLogo from '../../../static/assets/home/reactLogo.png'
+import nextjsLogo from '../../../static/assets/home/nextjsLogo.png'
+import vueLogo from '../../../static/assets/home/vueLogo.png'
+import javascriptLogo from '../../../static/assets/home/javascriptLogo.png'
+
+# Web3Modal Email Wallets
+
+Web3Modal SDK enables passwordless Web3 onboarding (no seed phrases) and authentication.
+It offers blazing-fast, hardware-secured, passwordless login, Web3 onboarding, and access to over 20 blockchains with a few lines of code — even if you have an existing auth solution.
+
+<YoutubeEmbed videoId="I1B9eAJk9aI" />
+
+<Button name="Try Demo" url="https://lab.web3modal.com/library/wagmi-email/" />
+
+## Get Started
+
+<Wrapper
+  type="large"
+  fit={false}
+  items={[
+    {
+      name: 'React',
+      description: 'Get started with Web3Modal in React.',
+      icon: reactLogo,
+      href: '../react/email'
+    },
+    {
+      name: 'Next.js',
+      description: 'Get started with Web3Modal in Next.js.',
+      icon: nextjsLogo,
+      href: '../nextjs/email',
+      isWhite: true
+    },
+    {
+      name: 'Vue',
+      description: 'Get started with Web3Modal in Vue.',
+      icon: vueLogo,
+      href: '../vue/email'
+    },
+    {
+      name: 'JavaScript',
+      description: 'Get started with Web3Modal in JavaScript.',
+      icon: javascriptLogo,
+      href: '../javascript/email'
+    }
+  ]}
+/>
+
+## Process Overview
+
+Connecting with Web3Modal's Email Wallet is a simple and secure process for both new and existing users. It allows users to sign in with their email address via a One Time Password (OTP) sent to their email.
+
+### User enters email
+
+User opens Web3Modal and enters their email address.
+
+<img className="image-margin" src={useBaseUrl('/img/w3m/email/1.png')} />
+
+### Email with OTP sent
+
+If the user is not already registered or signing in from a new device, an email is sent with a link to approve login.
+An email is sent to the user's email address with a One Time Password.
+
+<img className="image-margin" src={useBaseUrl('/img/w3m/email/2.png')} />
+
+### User enters OTP
+
+User enters the OTP from email and clicks "Login".
+
+<img className="image-margin" src={useBaseUrl('/img/w3m/email/3.png')} />
+
+### User is Connected
+
+A dedicated Web3 account is created for the user and the user is logged in.
+
+<img className="image-margin" src={useBaseUrl('/img/w3m/email/4.png')} />
+
+## Migrating to Self Custody
+
+Users can easily migrate to self custody solution in a few clicks. This allows users to take full control of their account and assets.
+
+### Upgrade your wallet
+
+User clicks "Upgrade your wallet" in the modal to start the migration process.
+
+<img className="image-margin" src={useBaseUrl('/img/w3m/email/4.png')} />
+
+### WalletConnect Secure
+
+User is redirected to [WalletConnect Secure](https://secure.walletconnect.com/dashboard) to complete the migration process.
+
+<img className="image-margin" src={useBaseUrl('/img/w3m/email/5.png')} />
+
+### Migrate to Self Custody
+
+Once they are redirected to WalletConnect Secure, the user can migrate to a self custody solution.
+This process can be divided into 3 steps:
+
+1. Connect your new wallet
+2. Export your recovery phrase
+3. Import it into your new wallet
+
+Upon completion, they have successfully migrated to a self custody solution.
+
+:::info Note
+
+The user can still use their email to login with Web3Modal, but now they have full control of their account and assets.
+
+:::
+
+<img className="image-margin" src={useBaseUrl('/img/w3m/email/6.png')} />

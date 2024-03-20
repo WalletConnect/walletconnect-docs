@@ -13,7 +13,7 @@ However, doing so ensures that your project is listed under [WalletConnect Explo
 ## Creating a New Project
 
 - Head over to [cloud.walletconnect.com](https://cloud.walletconnect.com/) and create a new project by clicking the "New Project" button in top right corner of the dashboard.
-- Give a suitable name to your project and click the "Create" button. (You can change this later)
+- Give a suitable name to your project, select whether its an App or Wallet and click the "Create" button. (You can change this later)
   <img className="image-margin" src={useBaseUrl('/img/cloud/1.png')} />
 
 ## Project Details
@@ -117,6 +117,109 @@ However, doing so ensures that your project is listed under [WalletConnect Explo
 
 - Once you've filled the applicable fields, click the "Submit" button to submit your project for review. Alternatively, you can save your changes and submit later. Additional information will be visible in the modal that appears after clicking the "Submit" button.
   <img className="image-margin" src={useBaseUrl('/img/cloud/3.png')} />
+
+## How do we test wallets?
+
+In order to offer a great user experience in our APIs and SDKs every Cloud submission goes through a QA process to make sure that the integration of the WalletConnect protocol is working correctly.
+
+The following list details our QA flow and how to reproduce it:
+
+<Table
+  headers={['Test Case', 'Steps', 'Expected Results']}
+  data={[
+    {
+      testCase: 'Set Up',
+      steps: `1. Download the wallet
+              2. Install the wallet app
+              3. Sign up for an account with the wallet app
+              4. Create one or more accounts`,
+      expectedResults: `1. N/A
+                        2. The app is installed
+                        3. I have an account
+                        4. I have one or more accounts`
+    },
+    {
+      testCase: 'Connect to dapp via web browser',
+      steps: `1. Open the WalletConnect connection page https://evmtest.walletconnect.com from a PC
+              2. Press on the “Connect Wallet” button and select the “WalletConnect” option.
+              3. Open the wallet app and use the scan QR option to connect.
+              4. Accept on the wallet the connection request`,
+      expectedResults: `1. The app has been correctly set-up
+                        2. A modal with wallet options is opened
+                        3. A QR code is shown on the website and the wallet is able to scan it.
+                        4. The connection is successfully established. The wallet data is now shown in the website.`
+    },
+    {
+      testCase: 'Supporting personal_sign',
+      steps: `1. Once the wallet is connected a card with the personal_sign label will show up
+              2. Press the “Sign Message” button on the card.
+              3. Accept the signature request on the wallet.`,
+      expectedResults: `1. N/A
+                        2. A modal should popup on the wallet app requesting for a signature.
+                        3. Once accepted and signed the hash should show up on the website.`
+    },
+    {
+      testCase: 'Supporting eth_signTypedData_v4',
+      steps: `1. Once the wallet is connected a card with the signTypedData_v4 label will show up
+              2. Press the “Sign Typed Data” button on the card.
+              3. Accept the signature request on the wallet.`,
+      expectedResults: `1. N/A
+                        2. A modal should popup on the wallet app requesting for a signature.
+                        3. Once accepted and signed the hash should show up on the website.`
+    },
+    {
+      testCase: 'Supporting eth_sendTransaction',
+      steps: `1. Once the wallet is connected a card with the eth_sendTransaction label will show up
+              2. Press the “Send Transaction” button on the card.`,
+      expectedResults: `1. N/A
+                        2. A modal should popup on the wallet app requesting for a signature.`
+    },
+    {
+      testCase: 'Switch chains - dapp side',
+      steps: `1. Once the wallet is connected press on the modal button on the top right of the website.
+              2. Press the first button of the modal to switch the chain.
+              3. Select any available chain, close the modal and press the “Send Transaction” button on the eth_sendTransaction card.`,
+      expectedResults: `1. A modal with the account information should pop up on the website.
+                        2. A new view with supported chains should show up.
+                        3. The transaction request that pops up on the wallet should show in their information the correct chain that we previously selected.`
+    },
+    {
+      testCase: 'Switch Chains - wallet side (if supported)',
+      steps: `1. Check if the wallet supports chain switching. If so select a different chain to the connected one.`,
+      expectedResults: `1. The chain change should be reflected on the website. The first card shows the current chain ID.`
+    },
+    {
+      testCase: 'Accounts Switching - wallet side',
+      steps: `1. In the wallet app switch from one account to the other.`,
+      expectedResults: `1. The account switch event should be reflected in the modal’s account view on the website.`
+    },
+    {
+      testCase: 'Connect to dapp via mobile browser (Deep-link)',
+      steps: `1. Open https://evmtest.walletconnect.com/ in your mobile device.
+              2. Fill in the wallet’s name and it’s deeplink (Mobile Link) in the “Add a Custom Wallet to Web3Modal” form. Press the “Apply”. After the website reloads press the “Connect Wallet” button and select the new created wallet.
+              3. Accept the connection request in the wallet application.`,
+      expectedResults: `1. N/A
+                        2. A form should show up in the website to fill in the wallet’s data. After the changes are applied the modal should show the new created wallet on the main view.
+                        3. The user should be redirected to the wallet application and a modal with a connection request should show up on the wallet application. The wallet should connect successfully. On an Android devices the user should be redirected back to the website after accepting the connection request.`
+    },
+    {
+      testCase: ' Disconnect a wallet',
+      steps: `1. Select "Disconnect" button from the Wallet App (Ideally wallets should have a section where users could see all their existing dApp connections, and give the user the ability to manage connections / disconnect from dapps in one spot - this is not always true so if this is not possible just skip this)
+              2. Repeat above steps and press "Disconnect" button from the dApp (this should be always available)`,
+      expectedResults: `1. The related session should disappear from dApp and from the Wallet App
+                        2. The related session should disappear from dApp and from the Wallet App`
+    },
+    {
+      testCase: 'Verify API',
+      steps: `1. Open https://malicious-app-verify-simulation.vercel.app/
+              2. Select a supported chain by the wallet (some wallets don’t support testnets) and press the “Connect” button.
+              3. Scan with the wallet the generated QR code.`,
+      expectedResults: `1. N/A
+                        2. A modal should show up with a QR code to scan.
+                        3. The connection request in the wallet should flag the website as malicious. `
+    },
+  ]}
+/>
 
 ## What's Next?
 

@@ -201,7 +201,10 @@ const web3wallet = await Web3Wallet.init({
     name: 'Demo React Native Wallet',
     description: 'Demo RN Wallet to interface with Dapps',
     url: 'www.walletconnect.com',
-    icons: []
+    icons: ['https://your_wallet_icon.png'],
+    redirect: {
+      native: 'yourwalletscheme://'
+    }
   }
 })
 ```
@@ -436,6 +439,29 @@ for every **chain** you want to support.
 When a dApp propose a session, with declared required and/or optional namespaces, your wallet will be able to approve an **already generated set of namespaces** based on your registered events, methods and accounts.
 
 You can access this object in **SessionProposalEvent** during `onSessionProposal` event by querying `event.params.generatedNamespaces`. (See next section)
+
+However, if you decide not to use `web3Wallet.registerRequestHandler()` and, instead, you decide to handle session requests by subscribing to the `web3Wallet.onSessionRequest` events then all you have to do is construct your approved namespaces as follows:
+
+```dart
+final approvedNamespaces = {
+  'eip155': const Namespace(
+    accounts: [ // every account you want to support
+      'eip155:1:0x76..........',
+      'eip155:137:0x76..........',
+    ],
+    methods: [ // every method you want to support
+      'personal_sign',
+      'eth_sendTransaction',
+    ],
+    events: [ // every event you want to support
+      'chainChanged',
+      'accountsChanged',
+    ],
+  ),
+};
+```
+
+Flutter SDK provides a handy `MethodsConstants` and `EventsConstants` for already defined set of required and optional values.
 
 </PlatformTabItem>
 
@@ -786,9 +812,14 @@ To send an approval, pass a Proposer's Public Key along with the map of namespac
 
 <PlatformTabItem value="flutter">
 
-As mentioned before, the `SessionProposalEvent` event is emitted when a dapp initiates a new session with your wallet. The event will include an `event` object with information about the dapp and requested namespaces. The wallet should display a prompt for the user to approve or reject the session.
+As mentioned before, the `SessionProposalEvent` is emitted when a dapp initiates a new session with your wallet. The event object will include the information about the dapp and requested namespaces. The wallet should display a prompt for the user to approve or reject the session.
 
-To approve a session, call `approveSession` and pass in the `event.id` and `generatedNamespaces`.
+To approve a session, call `approveSession()` and pass in the `event.id` and your approved namespaces.
+
+- If you decide to use the `registerRequestHandler()` method to register handlers for supported methods, as explained in previous section, you would use the `generatedNamespaces` object in the `approveSession`
+- If you decide to handle session requests by subscribing to the `onSessionRequest` event, you would need to pass your own set of approved namespaces.
+
+Either way you decide you would subscribe to the `onSessionProposal` event and use `approveSession()` as follows:
 
 ```dart
 web3Wallet.onSessionProposal.subscribe((SessionProposalEvent? event) {
@@ -797,12 +828,10 @@ web3Wallet.onSessionProposal.subscribe((SessionProposalEvent? event) {
   // If approved
   web3Wallet.approveSession(
     id: event.id,
-    namespaces: event.params.generatedNamespaces!,
+    namespaces: // event.params.generatedNamespaces! or approvedNamespaces,
   );
 });
 ```
-
-As mentioned before, `event.params.generatedNamespaces` is a set of approved namespaces automatically generated for wallet to approve. You can as well pass your hand-written set of namespaces.
 
 #### Pairing
 
@@ -1020,7 +1049,7 @@ sdk.On<SessionProposalEvent>(EngineEvents.SessionProposal, async (sender, @event
 
 The `session_request` event is emitted when the SDK received a request from the peer and it needs the wallet to perform a specific action, such as signing a transaction. The event contains a `topic` and a `request` object, which will vary depending on the action requested.
 
-To respond to the request, you can access the `topic` and `request` object by destructuring them from the event payload. To see a list of possible `request` and `response` objects, refer to the relevant JSON-RPC Methods for [Ethereum](advanced/rpc-reference/ethereum-rpc.md), [Solana](advanced/rpc-reference/solana-rpc.md), [Cosmos](advanced/rpc-reference/cosmos-rpc.md), or [Stellar](advanced/rpc-reference/stellar-rpc.md).
+To respond to the request, you can access the `topic` and `request` object by destructuring them from the event payload. To see a list of possible `request` and `response` objects, refer to the relevant JSON-RPC Methods for [Ethereum](../advanced/multichain/rpc-reference/ethereum-rpc.md), [Solana](../advanced/multichain/rpc-reference/solana-rpc.md), [Cosmos](../advanced/multichain/rpc-reference/cosmos-rpc.md), or [Stellar](../advanced/multichain/rpc-reference/stellar-rpc.md).
 
 As an example, if the dapp requests a `personal_sign` method, you can extract the `params` array from the `request` object. The first item in the array is the hex version of the message to be signed, which can be converted to UTF-8 and assigned to a `message` variable. The second item in `params` is the user's wallet address.
 
@@ -1138,9 +1167,54 @@ ID along with the respond data to the `Web3Wallet.respondSessionRequest` functio
 </PlatformTabItem>
 <PlatformTabItem value="flutter">
 
-To handle a session request, such as `personal_sign`, you would have to register a request handler as mentioned in point 2 of Namespace Builder section.
+To handle a session request, such as `personal_sign`, you have two ways and they are mutually exclusive, so, you use either one way or the other:
 
-You would have to register a handler for every chain and method you want to support. So let's say your wallet supports `eip155:1` and `eip155:137`. This would translate to:
+1. The default one is subscribing to onSessionRequest events and handle the request based on the method that is firing the event
+
+```dart
+web3Wallet.onSessionRequest.subscribe(_onSessionRequest);
+
+void _onSessionRequest(SessionRequestEvent? event) async {
+  if (event != null) {
+    final id = event.id;
+    final topic = event.topic;
+    final method = event.method;
+    final chainId = event.chainId;
+    final params = event.params as List;
+
+    // message should arrive encoded
+    final decoded = hex.decode(params.first.substring(2));
+    final message = utf8.decode(decoded);
+
+    // display a prompt for the user to approve or reject the request
+    // if approved
+    if (approved) {
+      // Your code to sign the message here
+      final signature = ...
+
+      return web3Wallet.respondSessionRequest(
+        topic: topic,
+        response: JsonRpcResponse(
+          id: id,
+          jsonrpc: '2.0',
+          result: signature,
+        ),
+      );
+    }
+    // if rejected
+    return web3Wallet.respondSessionRequest(
+      topic: topic,
+      response: JsonRpcResponse(
+        id: id,
+        jsonrpc: '2.0',
+        error: const JsonRpcError(code: 5001, message: 'User rejected method'),
+      ),
+    );
+  }
+}
+```
+
+2. The second way is to register a request handler for the methods and chains you want to support. So let's say your wallet supports `eip155:1` and `eip155:137`. This would translate to:
 
 ```dart
 final supportedChains = ['eip155:1', 'eip155:137'];
@@ -1157,24 +1231,26 @@ for (var chainId in supportedChains) {
     );
   }
 }
-```
 
-Once you have your handlers, you can use `web3Wallet.respondSessionRequest()` to respond to the request as follows:
+Future<void> _personalSignHandler(String topic, dynamic params) async {
+  final id = web3Wallet.pendingRequests.getAll().first;
 
-```dart
-Future<void> _personalSignHandler(String topic, dynamic parameters) async {
-  final requestId = web3Wallet.pendingRequests.getAll().first;
+  // message should arrive encoded
+  final decoded = hex.decode(params.first.substring(2));
+  final message = utf8.decode(decoded);
+
   // display a prompt for the user to approve or reject the request
   // if approved
   if (approved) {
-    // do your signing
-    //....
+    // Your code to sign the message here
+    final signature = ...
+
     return web3Wallet.respondSessionRequest(
       topic: topic,
       response: JsonRpcResponse(
-        id: requestId,
+        id: id,
         jsonrpc: '2.0',
-        result: signingResult,
+        result: signature,
       ),
     );
   }
@@ -1182,13 +1258,21 @@ Future<void> _personalSignHandler(String topic, dynamic parameters) async {
   return web3Wallet.respondSessionRequest(
     topic: topic,
     response: JsonRpcResponse(
-      id: requestId,
+      id: id,
       jsonrpc: '2.0',
       error: const JsonRpcError(code: 5001, message: 'User rejected method'),
     ),
   );
 }
+
+Future<void> _ethSendTransactionHandler(String topic, dynamic params) async {
+  // ...
+}
 ```
+
+Once you have your handlers registered, this are going to be triggered **INSTEAD OF** the `onSessionRequest` event.
+
+The main difference between these 2 ways of handling session requests is that the default one, using `onSessionRequest` events, carry more useful information such as the **request id** and the **chain id** which are not carried when using the reqeust handlers registration.
 
 </PlatformTabItem>
 
@@ -1198,7 +1282,7 @@ Future<void> _personalSignHandler(String topic, dynamic parameters) async {
 
 The `session_request` event is triggered by a dapp when it needs the wallet to perform a specific action, such as signing a transaction. The event contains a `topic` and a `request` object, which will vary depending on the action requested.
 
-To respond to the request, the wallet can access the `topic` and `request` object by destructuring them from the event payload. To see a list of possible `request` and `response` objects, refer to the relevant JSON-RPC Methods for [Ethereum](../advanced/rpc-reference/ethereum-rpc.md), [Solana](../advanced/rpc-reference/solana-rpc.md), [Cosmos](../advanced/rpc-reference/cosmos-rpc.md), or [Stellar](../advanced/rpc-reference/stellar-rpc.md).
+To respond to the request, the wallet can access the `topic` and `request` object by destructuring them from the event payload. To see a list of possible `request` and `response` objects, refer to the relevant JSON-RPC Methods for [Ethereum](../advanced/multichain/rpc-reference/ethereum-rpc.md), [Solana](../advanced/multichain/rpc-reference/solana-rpc.md), [Cosmos](../advanced/multichain/rpc-reference/cosmos-rpc.md), or [Stellar](../advanced/multichain/rpc-reference/stellar-rpc.md).
 
 As an example, if the dapp requests a `personal_sign` method, the wallet can extract the `params` array from the `request` object. The first item in the array is the hex version of the message to be signed, which can be converted to UTF-8 and assigned to a `message` variable. The second item in `params` is the user's wallet address.
 
@@ -1886,6 +1970,7 @@ await web3wallet.emitSessionEvent(
 ```
 
 For a better understanding please check out the [example wallet](https://github.com/WalletConnect/WalletConnectFlutterV2/blob/master/example/wallet/lib/) and, in particular, the [EVMService](https://github.com/WalletConnect/WalletConnectFlutterV2/blob/master/example/wallet/lib/dependencies/chains/evm_service.dart) inside of it.
+
 </PlatformTabItem>
 
 <PlatformTabItem value="react-native">

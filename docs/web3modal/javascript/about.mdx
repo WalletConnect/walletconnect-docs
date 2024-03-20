@@ -8,8 +8,7 @@ import WagmiModal from './wagmi/about/triggermodal.mdx'
 import Wagmi1Implementation from './wagmi1/about/implementation.mdx'
 import Wagmi1Modal from './wagmi1/about/triggermodal.mdx'
 
-import Ethers5Implementation from './ethers5/about/implementation.mdx'
-import Ethers5Modal from './ethers5/about/triggermodal.mdx'
+import Ethers5Implementation from './ethers5/implementation.mdx'
 
 import EthersImplementation from './ethers/about/implementation.mdx'
 import EthersModal from './ethers/about/triggermodal.mdx'
@@ -24,6 +23,10 @@ Web3Modal SDK has support for [Wagmi](https://wagmi.sh/) and
 [Ethers v6](https://docs.ethers.org/v6/) on Ethereum and [@solana/web3.js](https://solana-labs.github.io/solana-web3.js/) on Solana.
 Choose one of these Ethereum Libraries or 'Solana' to get started.
 
+:::info Note
+We recommend using [Vite](https://vitejs.dev/guide/#scaffolding-your-first-vite-project) to get started with Web3Modal JavaScript.
+:::
+
 ## Installation
 
 <PlatformTabs groupId="eth-lib" activeOptions={["wagmi", "wagmi1", "ethers5", "ethers","solana"]}>
@@ -35,6 +38,10 @@ npm install @web3modal/wagmi @wagmi/core @wagmi/connectors viem
 
 </PlatformTabItem>
 <PlatformTabItem value="wagmi1">
+
+:::caution
+Wagmi v1 has been deprecated. Please upgrade to Wagmi v2. Read the [migration guide.](https://wagmi.sh/react/guides/migrate-from-v1-to-v2)
+:::
 
 ```bash npm2yarn
 npm install @web3modal/wagmi@3.5.7 @wagmi/core@1.4.13 viem@1.21.4
@@ -116,7 +123,7 @@ npm install @web3modal/solana
 </PlatformTabItem>
 <PlatformTabItem value="ethers5">
 
-<Ethers5Modal />
+<EthersModal />
 
 </PlatformTabItem>
 <PlatformTabItem value="ethers">
@@ -133,8 +140,15 @@ npm install @web3modal/solana
 
 ## Smart Contract Interaction
 
-<PlatformTabs groupId="eth-lib" activeOptions={["wagmi", "wagmi1","ethers5", "ethers","solana"]}>
+<<<<<<< HEAD
+
+# <PlatformTabs groupId="eth-lib" activeOptions={["wagmi", "wagmi1","ethers5", "ethers","solana"]}>
+
+<PlatformTabs groupId="eth-lib" activeOptions={["wagmi", "ethers"]}>
+>>>>>>> main
 <PlatformTabItem value="wagmi">
+
+[Wagmi actions](https://wagmi.sh/core/api/actions/readContract) can help us interact with wallets and smart contracts:
 
 ```tsx
 import { readContract } from '@wagmi/core'
@@ -152,59 +166,9 @@ const data = readContract({
 Read more about Wagmi actions for smart contract interaction [here](https://wagmi.sh/core/actions/readContract).
 
 </PlatformTabItem>
-<PlatformTabItem value="wagmi1">
-
-```tsx
-import { readContract } from '@wagmi/core'
-import { USDTAbi } from '../abi/USDTAbi'
-import { wagmiConfig } from './main'
-
-const USDTAddress = '0x...'
-
-const result = await readContract(wagmiConfig, {
-  abi: USDTAbi,
-  address: USDTAddress,
-  functionName: 'totalSupply'
-})
-```
-
-Read more about Wagmi actions for smart contract interaction [here](https://1.x.wagmi.sh/core/actions/readContract).
-
-</PlatformTabItem>
-<PlatformTabItem value="ethers5">
-
-```tsx
-import { ethers } from 'ethers'
-
-const USDTAddress = '0x...'
-
-// The ERC-20 Contract ABI, which is a common contract interface
-// for tokens (this is the Human-Readable ABI format)
-const USDTAbi = [
-  'function name() view returns (string)',
-  'function symbol() view returns (string)',
-  'function balanceOf(address) view returns (uint)',
-  'function transfer(address to, uint amount)',
-  'event Transfer(address indexed from, address indexed to, uint amount)'
-]
-
-const walletProvider = modal.getWalletProvider()
-
-async function getBalance() {
-  if (!walletProvider) throw Error('User disconnected')
-
-  const ethersProvider = new ethers.providers.Web3Provider(walletProvider)
-  const signer = await ethersProvider.getSigner()
-  // The Contract object
-  const USDTContract = new ethers.Contract(USDTAddress, USDTAbi, signer)
-  const USDTBalance = await USDTContract.balanceOf(address)
-
-  console.log(ethers.utils.formatUnits(USDTBalance, 18))
-}
-```
-
-</PlatformTabItem>
 <PlatformTabItem value="ethers">
+
+[Ethers](https://docs.ethers.org/v6/) can help us interact with wallets and smart contracts:
 
 ```tsx
 import { BrowserProvider, Contract, formatUnits } from 'ethers'

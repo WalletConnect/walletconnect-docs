@@ -40,12 +40,9 @@ module.exports = {
                 'web3modal/react/hooks',
                 'web3modal/react/options',
                 'web3modal/react/components',
-                'web3modal/react/email/index',
-                {
-                  type: 'category',
-                  label: 'SIWE',
-                  items: ['web3modal/react/siwe/about', 'web3modal/react/siwe/usage']
-                },
+                'web3modal/react/email',
+                'web3modal/react/onramp',
+                'web3modal/react/siwe',
                 'web3modal/react/theming',
                 'web3modal/react/resources'
               ]
@@ -59,15 +56,12 @@ module.exports = {
                 'web3modal/nextjs/hooks',
                 'web3modal/nextjs/options',
                 'web3modal/nextjs/components',
-                'web3modal/nextjs/email/index',
+                'web3modal/nextjs/email',
+                'web3modal/nextjs/onramp',
                 {
                   type: 'category',
                   label: 'SIWE',
-                  items: [
-                    'web3modal/nextjs/siwe/about',
-                    'web3modal/nextjs/siwe/usage',
-                    'web3modal/nextjs/siwe/next-auth'
-                  ]
+                  items: ['web3modal/nextjs/siwe/about', 'web3modal/nextjs/siwe/next-auth']
                 },
                 'web3modal/nextjs/theming',
                 'web3modal/nextjs/resources'
@@ -82,12 +76,9 @@ module.exports = {
                 'web3modal/vue/composables',
                 'web3modal/vue/options',
                 'web3modal/vue/components',
-                'web3modal/vue/email/index',
-                {
-                  type: 'category',
-                  label: 'SIWE',
-                  items: ['web3modal/vue/siwe/about', 'web3modal/vue/siwe/usage']
-                },
+                'web3modal/vue/email',
+                'web3modal/vue/onramp',
+                'web3modal/vue/siwe',
                 'web3modal/vue/theming',
                 'web3modal/vue/resources'
               ]
@@ -101,12 +92,9 @@ module.exports = {
                 'web3modal/javascript/actions',
                 'web3modal/javascript/options',
                 'web3modal/javascript/components',
-                'web3modal/javascript/email/index',
-                {
-                  type: 'category',
-                  label: 'SIWE',
-                  items: ['web3modal/javascript/siwe/about', 'web3modal/javascript/siwe/usage']
-                },
+                'web3modal/javascript/email',
+                'web3modal/javascript/siwe',
+                'web3modal/javascript/onramp',
                 'web3modal/javascript/theming',
                 'web3modal/javascript/resources'
               ]
@@ -177,6 +165,14 @@ module.exports = {
                   label: 'Example',
                   href: 'https://github.com/WalletConnect/web3modal-swift/tree/develop/Sample/Example'
                 }
+              ]
+            },
+            {
+              type: 'category',
+              label: 'Features',
+              items: [
+                { type: 'doc', label: 'Email Wallets', id: 'web3modal/features/email' },
+                { type: 'doc', label: 'Onramp', id: 'web3modal/features/onramp' }
               ]
             },
             'web3modal/upgrade',
@@ -286,6 +282,22 @@ module.exports = {
             'advanced/multichain/chain-list',
             {
               type: 'category',
+              label: 'RPC Reference',
+              items: [
+                'advanced/multichain/rpc-reference/cosmos-rpc',
+                'advanced/multichain/rpc-reference/ethereum-rpc',
+                'advanced/multichain/rpc-reference/solana-rpc',
+                'advanced/multichain/rpc-reference/near-rpc',
+                'advanced/multichain/rpc-reference/starknet-rpc',
+                'advanced/multichain/rpc-reference/stellar-rpc',
+                'advanced/multichain/rpc-reference/tezos-rpc',
+                'advanced/multichain/rpc-reference/xrpl-rpc',
+                'advanced/multichain/rpc-reference/casper-rpc',
+                'advanced/multichain/rpc-reference/everscale-rpc'
+              ]
+            },
+            {
+              type: 'category',
               label: 'Polkadot',
               items: [
                 'advanced/multichain/polkadot/dapp-integration-guide',
@@ -293,41 +305,6 @@ module.exports = {
                 'advanced/multichain/polkadot/namespaces-guide'
               ]
             }
-          ]
-        },
-        {
-          type: 'category',
-          label: 'Migration from v1.x',
-          items: [
-            {
-              type: 'doc',
-              id: 'advanced/migration-from-v1.x/overview',
-              label: 'Overview'
-            },
-            {
-              type: 'doc',
-              id: 'advanced/migration-from-v1.x/namespaces',
-              label: 'Namespaces'
-            },
-            {
-              type: 'category',
-              label: 'Dapps',
-              items: [
-                'advanced/migration-from-v1.x/dapps/dapps',
-                'advanced/migration-from-v1.x/dapps/dapp-checklist'
-              ]
-            },
-            {
-              type: 'category',
-              label: 'Wallets',
-              items: [
-                'advanced/migration-from-v1.x/wallets/wallets',
-                'advanced/migration-from-v1.x/wallets/wallet-checklist'
-              ]
-            },
-            'advanced/migration-from-v1.x/what-changed-from-v1.0',
-            'advanced/migration-from-v1.x/migration-faq',
-            'advanced/migration-from-v1.x/explorer-submission'
           ]
         },
         {

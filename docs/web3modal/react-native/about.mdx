@@ -3,6 +3,7 @@ import Tabs from '@theme/Tabs'
 import TabItem from '@theme/TabItem'
 import PlatformTabs from '../../components/PlatformTabs'
 import PlatformTabItem from '../../components/PlatformTabItem'
+import YoutubeEmbed from '../../components/YoutubeEmbed'
 
 import WagmiInstallation from './wagmi1/about/installation.mdx'
 import WagmiInstallationExpo from './wagmi1/about/installation-expo.mdx'
@@ -33,7 +34,8 @@ Web3Modal SDK has support for [Wagmi v1](https://1.x.wagmi.sh/) and [Ethers v5](
 
 <PlatformTabItem value="wagmi1">
 
-  <WagmiInstallation />
+{' '}
+<WagmiInstallation />
 
 </PlatformTabItem>
 
@@ -43,7 +45,8 @@ Web3Modal SDK has support for [Wagmi v1](https://1.x.wagmi.sh/) and [Ethers v5](
   Ethers support is currently in alpha. 
   :::
 
-  <EthersInstallation />
+{' '}
+<EthersInstallation />
 
 </PlatformTabItem>
 
@@ -53,7 +56,8 @@ Web3Modal SDK has support for [Wagmi v1](https://1.x.wagmi.sh/) and [Ethers v5](
   Ethers v5 support is currently in alpha. 
   :::
 
-  <Ethers5Installation />
+{' '}
+<Ethers5Installation />
 
 </PlatformTabItem>
 
@@ -67,27 +71,30 @@ Web3Modal SDK has support for [Wagmi v1](https://1.x.wagmi.sh/) and [Ethers v5](
 
 <PlatformTabItem value="wagmi1">
 
-  <WagmiInstallationExpo />
+{' '}
+<WagmiInstallationExpo />
 
 </PlatformTabItem>
 
 <PlatformTabItem value="ethers">
 
-  :::caution
-  Ethers support is currently in alpha. 
-  :::
+:::caution
+Ethers support is currently in alpha.
+:::
 
-  <EthersInstallationExpo />
+{' '}
+<EthersInstallationExpo />
 
 </PlatformTabItem>
 
 <PlatformTabItem value="ethers5">
 
-  :::caution
-  Ethers v5 support is currently in alpha. 
-  :::
+:::caution
+Ethers v5 support is currently in alpha.
+:::
 
-  <Ethers5InstallationExpo />
+{' '}
+<Ethers5InstallationExpo />
 
 </PlatformTabItem>
 
@@ -215,7 +222,7 @@ Follow these steps to install Coinbase SDK in your project along with our Coinba
 
 - Note: Coinbase SDK is [not compatible with Expo Go](https://github.com/MobileWalletProtocol/wallet-mobile-sdk/issues/206)
 
-1. Enable Expo Modules in your project running: 
+1. Enable Expo Modules in your project running:
 
 ```
 npx install-expo-modules@latest
@@ -232,21 +239,15 @@ npm install @coinbase/wallet-mobile-sdk react-native-mmkv
 <PlatformTabs groupId="eth-lib" activeOptions={["wagmi1", "ethers", "ethers5"]}>
 
 <PlatformTabItem value="wagmi1">
-```bash npm2yarn
-  npm install @web3modal/coinbase-wagmi-react-native 
-```
+  ```bash npm2yarn npm install @web3modal/coinbase-wagmi-react-native ```
 </PlatformTabItem>
 
 <PlatformTabItem value="ethers">
-```bash npm2yarn
-  npm install @web3modal/coinbase-ethers-react-native
-```
+  ```bash npm2yarn npm install @web3modal/coinbase-ethers-react-native ```
 </PlatformTabItem>
 
 <PlatformTabItem value="ethers5">
-```bash npm2yarn
-  npm install @web3modal/coinbase-ethers-react-native
-```
+  ```bash npm2yarn npm install @web3modal/coinbase-ethers-react-native ```
 </PlatformTabItem>
 
 </PlatformTabs>
@@ -298,7 +299,6 @@ useEffect(() => {
 }, [])
 ```
 
-
 <PlatformTabs groupId="eth-lib" activeOptions={["wagmi1", "ethers", "ethers5"]}>
 
 <PlatformTabItem value="wagmi1">
@@ -306,21 +306,21 @@ useEffect(() => {
 8. Initialize `CoinbaseWagmiConnector` and add it in `extraConnectors`
 
 ```tsx
-  import { CoinbaseConnector } from '@web3modal/coinbase-wagmi-react-native'
+import { CoinbaseConnector } from '@web3modal/coinbase-wagmi-react-native'
 
-  const coinbaseConnector = new CoinbaseConnector({
-    chains,
-    options: {
-      redirect: 'YOUR_APP_SCHEME://'
-    }
-  })
+const coinbaseConnector = new CoinbaseConnector({
+  chains,
+  options: {
+    redirect: 'YOUR_APP_SCHEME://'
+  }
+})
 
-  const wagmiConfig = defaultWagmiConfig({
-    chains,
-    projectId,
-    metadata,
-    extraConnectors: [coinbaseConnector]
-  })
+const wagmiConfig = defaultWagmiConfig({
+  chains,
+  projectId,
+  metadata,
+  extraConnectors: [coinbaseConnector]
+})
 ```
 
 </PlatformTabItem>
@@ -330,18 +330,19 @@ useEffect(() => {
 8. Initialize `CoinbaseProvider` and add it in the default config
 
 ```tsx
-  import { CoinbaseProvider } from '@web3modal/coinbase-ethers-react-native'
+import { CoinbaseProvider } from '@web3modal/coinbase-ethers-react-native'
 
-  const coinbaseProvider = new CoinbaseProvider({
-    redirect: 'YOUR_APP_SCHEME://',
-    rpcUrl: mainnet.rpcUrl,
-  })
+const coinbaseProvider = new CoinbaseProvider({
+  redirect: 'YOUR_APP_SCHEME://',
+  rpcUrl: mainnet.rpcUrl
+})
 
-  const config = defaultConfig({
-    metadata,
-    coinbase: coinbaseProvider,
-  })
+const config = defaultConfig({
+  metadata,
+  coinbase: coinbaseProvider
+})
 ```
+
 </PlatformTabItem>
 
 <PlatformTabItem value="ethers5">
@@ -349,17 +350,17 @@ useEffect(() => {
 8. Initialize `CoinbaseProvider` and add it in the default config
 
 ```tsx
-  import { CoinbaseProvider } from '@web3modal/coinbase-ethers-react-native'
+import { CoinbaseProvider } from '@web3modal/coinbase-ethers-react-native'
 
-  const coinbaseProvider = new CoinbaseProvider({
-    redirect: 'YOUR_APP_SCHEME://',
-    rpcUrl: mainnet.rpcUrl,
-  })
+const coinbaseProvider = new CoinbaseProvider({
+  redirect: 'YOUR_APP_SCHEME://',
+  rpcUrl: mainnet.rpcUrl
+})
 
-  const config = defaultConfig({
-    metadata,
-    coinbase: coinbaseProvider,
-  })
+const config = defaultConfig({
+  metadata,
+  coinbase: coinbaseProvider
+})
 ```
 
 </PlatformTabItem>
@@ -372,7 +373,13 @@ Check <a href="https://mobilewalletprotocol.github.io/wallet-mobile-sdk/docs/cli
 
 <TabItem value="expo" label="Expo">
   Coinbase SDK doesn't support Expo Projects. More info{' '}
-  <a href="https://github.com/MobileWalletProtocol/wallet-mobile-sdk/issues/206#issuecomment-1468836345">here</a>
+  <a href="https://github.com/MobileWalletProtocol/wallet-mobile-sdk/issues/206#issuecomment-1468836345">
+    here
+  </a>
 </TabItem>
 
 </Tabs>
+
+## Tutorial
+
+<YoutubeEmbed videoId="R0edIW72fHo" />

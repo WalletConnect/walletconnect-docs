@@ -3,12 +3,12 @@ import PlatformTabs from '../../components/PlatformTabs'
 import PlatformTabItem from '../../components/PlatformTabItem'
 
 import WagmiHooks from './wagmi/hooks.mdx'
-import Wagmi1Hooks from './wagmi1/hooks.mdx'
-import Ethers5Hooks from './ethers5/hooks.mdx'
 import EthersHooks from './ethers/hooks.mdx'
 import SolanaHooks from './solana/hooks.mdx'
 
 # Hooks
+
+Hooks are functions that will help you control the modal, subscribe to wallet events and interact with them and smart contracts.
 
 ## useWeb3Modal
 
@@ -133,13 +133,26 @@ List of views you can select
 
 ## useDisconnect
 
-Disconnect currently connected account.
-
 ```ts
 const { disconnect } = useDisconnect()
 
 disconnect()
 ```
+
+## Ethereum Library
+
+<PlatformTabs groupId="eth-lib" activeOptions={["wagmi", "ethers"]}>
+<PlatformTabItem value="wagmi">
+
+<WagmiHooks />
+
+</PlatformTabItem>
+<PlatformTabItem value="ethers">
+
+<EthersHooks />
+
+</PlatformTabItem>
+</PlatformTabs>
 
 ## useWeb3ModalState
 
@@ -231,33 +244,3 @@ import { useWeb3ModalEvents } from '@web3modal/wagmi/react'
 
 const events = useWeb3ModalEvents()
 ```
-
-## Library
-
-<PlatformTabs groupId="eth-lib" activeOptions={["wagmi", "wagmi1", "ethers5", "ethers", "solana"]}>
-<PlatformTabItem value="wagmi">
-
-<WagmiHooks />
-
-</PlatformTabItem>
-<PlatformTabItem value="wagmi1">
-
-<Wagmi1Hooks />
-
-</PlatformTabItem>
-<PlatformTabItem value="ethers5">
-
-<Ethers5Hooks />
-
-</PlatformTabItem>
-<PlatformTabItem value="ethers">
-
-<EthersHooks />
-
-</PlatformTabItem>
-<PlatformTabItem value="solana">
-
-<SolanaHooks />
-
-</PlatformTabItem>
-</PlatformTabs>

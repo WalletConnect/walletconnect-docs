@@ -1,0 +1,14 @@
+To enable email wallets in Web3Modal add `enableEmail: true` as a configuration parameter of the `defaultConfig` function.
+
+```ts
+const modal = createWeb3Modal({
+  ethersConfig: defaultConfig({
+    metadata,
+    //..
+    /* highlight-add-start */
+    enableEmail: true
+    /* highlight-add-end */
+  })
+  //...
+})
+```

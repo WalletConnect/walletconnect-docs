@@ -155,7 +155,7 @@ await signClient.emit({
     name: 'accountsChanged',
     data: ['AZBEwbZhYeiofodZnM2iAoshP3pXRPNSJEKFqEPDmvv1mY7']
   },
-  chainId: 'polkadot:91b171bb158e2d3848fa23a9f1c25182:'
+  chainId: 'polkadot:91b171bb158e2d3848fa23a9f1c25182'
 })
 ```
 
@@ -185,7 +185,7 @@ const proposalNamespace = {
     polkadot: {
       methods: ['polkadot_signTransaction', 'polkadot_signMessage'],
       chains: ['polkadot:91b171bb158e2d3848fa23a9f1c25182'],
-      events: ['chainChanged", "accountsChanged']
+      events: ['chainChanged', 'accountsChanged']
     }
   }
 }
@@ -209,7 +209,7 @@ const session = await web3wallet.approveSession({
       ],
       methods: ['polkadot_signTransaction', 'polkadot_signMessage'],
       chains: ['polkadot:91b171bb158e2d3848fa23a9f1c25182'],
-      events: ['chainChanged", "accountsChanged']
+      events: ['chainChanged', 'accountsChanged']
     }
   }
 })

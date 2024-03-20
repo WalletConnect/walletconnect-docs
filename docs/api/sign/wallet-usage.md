@@ -31,8 +31,6 @@ in your wallet's top-level dependencies, please refer to the [`legacy` packages]
 
 In the above scenario, you would replace `@walletconnect/types@1.x.x` with `@walletconnect/legacy-types` and then install `@walletconnect/types@2.x.x`.
 
-For more information check our [migration guide](../../advanced/migration-from-v1.x/overview.md) and the [repository for `legacy` packages](https://github.com/WalletConnect/walletconnect-legacy).
-
 #### Integrating Auth
 
 We strongly encourage wallets to also integrate the [Auth](../auth/overview.md) API so that dapps using only Auth can still participate in the same ecosystem.
