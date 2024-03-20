@@ -26,6 +26,7 @@ To send a notification notification you can call the `/notify` endpoint. This en
 - `title` - The title of the notification. Max 64 characters.
 - `body` - The body of the notification containing more detail. Max 255 characters.
 - `url` (optional) - A URL attached to the notification that the user can navigate to. Max 255 characters.
+- `data` (optional) - Arbitrary custom data that can be attached to the notification. Accessible by apps that display notifications. Max 255 characters.
 - `accounts` - A list of [CAIP-10](https://github.com/ChainAgnostic/CAIPs/blob/main/CAIPs/caip-10.md) account IDs for which to send the notification to. Max 500 accounts per request. Also see the [rate limits](#rate-limits) below.
 - `notification_id` (optional) - An idempotency key of arbitrary format used to dedup multiple requests. Max 255 characters. Multiple calls with the same `notification_id` will use the first call's `notification` content, but will send to any additional account IDs listed in `accounts`.
 
@@ -37,6 +38,7 @@ type RequestBody = {
     title: string
     body: string
     url?: string | null
+    data?: string | null
   }
   accounts: string[]
 }
