@@ -19,13 +19,15 @@ Control the modal with the `useWeb3Modal` hook
 ```ts
   import { useWeb3Modal } from '@web3modal/wagmi-react-native'
 
-  export default function Component() {
+export default function Component() {
 
     const { open, close } = useWeb3Modal()
 
     open()
-  }
-```
+
+}
+
+````
 </PlatformTabItem>
 
 <PlatformTabItem value="ethers">
@@ -38,20 +40,23 @@ Control the modal with the `useWeb3Modal` hook
 
     open()
   }
-```
+````
+
 </PlatformTabItem>
 
 <PlatformTabItem value="ethers5">
 ```ts
   import { useWeb3Modal } from '@web3modal/ethers5-react-native'
 
-  export default function Component() {
+export default function Component() {
 
     const { open, close } = useWeb3Modal()
 
     open()
-  }
-```
+
+}
+
+````
 </PlatformTabItem>
 
 </PlatformTabs>
@@ -60,7 +65,7 @@ You can also select the modal's view when calling the `open` function
 
 ```ts
 open({ view: 'Account' })
-```
+````
 
 List of views you can select
 
@@ -102,23 +107,26 @@ Get the current value of the modal's state
     import { useWeb3ModalState } from '@web3modal/wagmi-react-native'
 
     const { open, selectedNetworkId } = useWeb3ModalState()
-  ```
+
+````
 </PlatformTabItem>
 
 <PlatformTabItem value="ethers">
 ```ts
-  import { useWeb3ModalState } from '@web3modal/ethers-react-native'
+import { useWeb3ModalState } from '@web3modal/ethers-react-native'
 
-  const { open, selectedNetworkId } = useWeb3ModalState()
-```
+const { open, selectedNetworkId } = useWeb3ModalState()
+````
+
 </PlatformTabItem>
 
 <PlatformTabItem value="ethers5">
 ```ts
   import { useWeb3ModalState } from '@web3modal/ethers5-react-native'
 
-  const { open, selectedNetworkId } = useWeb3ModalState()
-```
+const { open, selectedNetworkId } = useWeb3ModalState()
+
+````
 </PlatformTabItem>
 
 </PlatformTabs>
@@ -153,15 +161,17 @@ Get the last tracked modal event
     import { useWeb3ModalEvents } from '@web3modal/wagmi-react-native'
 
     const event = useWeb3ModalEvents()
-  ```
+````
+
 </PlatformTabItem>
 
 <PlatformTabItem value="ethers">
 ```ts
   import { useWeb3ModalEvents } from '@web3modal/ethers-react-native'
 
-  const event = useWeb3ModalEvents()
-```
+const event = useWeb3ModalEvents()
+
+````
 </PlatformTabItem>
 
 <PlatformTabItem value="ethers5">
@@ -169,7 +179,8 @@ Get the last tracked modal event
   import { useWeb3ModalEvents } from '@web3modal/ethers5-react-native'
 
   const event = useWeb3ModalEvents()
-```
+````
+
 </PlatformTabItem>
 
 </PlatformTabs>
