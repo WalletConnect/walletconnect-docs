@@ -228,11 +228,10 @@ reset the unread state for all of your existing notifications.
 const PROJECT_ID = '<PROJECT_ID>'
 const NOTIFY_API_SECRET = '<NOTIFY_API_SECRET>'
 const response = await fetch(`https://notify.walletconnect.com/v1/${PROJECT_ID}/mark-all-as-read`, {
+  method: 'POST',
   headers: {
-    method: 'POST',
     Authorization: `Bearer ${NOTIFY_API_SECRET}`
-  },
-  body: JSON.stringify({})
+  }
 })
 ```
 
