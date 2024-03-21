@@ -246,7 +246,17 @@ module.exports = {
                 'web3wallet/notify/installation',
                 'web3wallet/notify/usage',
                 'web3wallet/notify/spam-protection',
-                'web3wallet/notify/resources'
+                'web3wallet/notify/resources',
+		{
+		    type: 'category',
+		    label: 'React Native Wallets',
+                    items: [
+                      'web3wallet/notify/react-native-sdk',
+                      'web3inbox/frontend-integration/usage',
+                      'web3inbox/frontend-integration/api',
+                  ]
+
+		}
               ]
             },
             'web3wallet/best_practises',
