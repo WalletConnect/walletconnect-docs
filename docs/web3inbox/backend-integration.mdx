@@ -261,3 +261,5 @@ Rate limits are implemented as [token bucket](https://en.wikipedia.org/wiki/Toke
   - Each app can call this endpoint 100 times per second with a burst up to 100. Rate limited requests will return a 429 status code.
 - `GET /<project-id>/subscribers`
   - Each app can call this endpoint 1 time every 5 minutes with a burst up to 2. Rate limited requests will return a 429 status code.
+- `POST /v1/<project-id>/mark-all-as-read`
+  - Each app can call this endpoint 1 time per hour with a burst up to 5. Rate limited requests will return a 429 status code.
