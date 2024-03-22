@@ -1,0 +1,61 @@
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
+
+To open Web3Modal you can use our **default** web components or build your own logic with Web3Modal _actions_.
+
+<Tabs>
+<TabItem value="components" label="Components">
+
+```html
+  <body>
+    <div id="app">
+      <w3m-button></w3m-button>
+      <w3m-network-button> </w3m-network-button>
+    </div>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
+```
+
+Learn more about the Web3Modal web components [here](../../components.mdx)
+
+:::note
+Web components are global html elements that don't require importing.
+:::
+
+</TabItem>
+<TabItem value="actions" label="Actions">
+
+You can trigger the modal by calling the `open` function from a modal instance returned by `createWeb3Modal`.
+
+Let's first add two html button elements into our `index.html` file:
+
+```html
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>HTML Example</title>
+  </head>
+  <body>
+    <button id="open-connect-modal">Open Modal</button>
+    <button id="open-network-modal">Open Networks</button>
+    <script type="module" src="main.js"></script>
+  </body>
+</html>
+```
+
+Following with our `main.js` file, we can now add the needed logic to open the modal:
+
+```ts
+const openConnectModalBtn = document.getElementById('open-connect-modal')
+const openNetworkModalBtn = document.getElementById('open-network-modal')
+
+openConnectModalBtn.addEventListener('click', () => modal.open())
+openNetworkModalBtn.addEventListener('click', () => modal.open({ view: 'Networks' }))
+```
+
+Learn more about the Web3Modal actions [here](../../actions.mdx)
+
+</TabItem>
+</Tabs>

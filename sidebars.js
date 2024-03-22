@@ -31,7 +31,6 @@ module.exports = {
           items: [
             'web3modal/about',
             'web3modal/quickstart',
-
             {
               type: 'category',
               className: 'sidebar__logo sidebar__logo--react',
@@ -173,7 +172,8 @@ module.exports = {
               label: 'Features',
               items: [
                 { type: 'doc', label: 'Email Wallets', id: 'web3modal/features/email' },
-                { type: 'doc', label: 'Onramp', id: 'web3modal/features/onramp' }
+                { type: 'doc', label: 'Onramp', id: 'web3modal/features/onramp' },
+                { type: 'doc', label: 'Solana', id: 'web3modal/features/solana' }
               ]
             },
             'web3modal/upgrade',

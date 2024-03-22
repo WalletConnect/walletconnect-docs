@@ -1,0 +1,88 @@
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
+
+You can start integrating Email Login into Web3Modal SDK using either **default** or **custom** mode.
+
+<Tabs>
+<TabItem value="default" label="Default">
+
+```js
+import { createWeb3Modal, defaultConfig } from '@web3modal/ethers'
+
+// 1. Get projectId from https://cloud.walletconnect.com
+const projectId = 'YOUR_PROJECT_ID'
+
+// 2. Set chains
+const mainnet = {
+  chainId: 1,
+  name: 'Ethereum',
+  currency: 'ETH',
+  explorerUrl: 'https://etherscan.io',
+  rpcUrl: 'https://cloudflare-eth.com'
+}
+
+// 3. Create modal
+const metadata = {
+  name: 'My Website',
+  description: 'My Website description',
+  url: 'https://mywebsite.com',
+  icons: ['https://avatars.mywebsite.com/']
+}
+
+const modal = createWeb3Modal({
+  ethersConfig: defaultConfig({
+    metadata,
+    /* highlight-add-start */
+    enableEmail: true
+    /* highlight-add-end */
+  }),
+  chains: [mainnet],
+  projectId
+})
+```
+
+</TabItem>
+<TabItem value="custom" label="Custom">
+
+```ts
+import { createWeb3Modal, defaultConfig } from '@web3modal/ethers'
+
+// 1. Get projectId from https://cloud.walletconnect.com
+const projectId = 'YOUR_PROJECT_ID'
+
+// 2. Set chains
+const mainnet = {
+  chainId: 1,
+  name: 'Ethereum',
+  currency: 'ETH',
+  explorerUrl: 'https://etherscan.io',
+  rpcUrl: 'https://cloudflare-eth.com'
+}
+
+// 3. Create modal
+const metadata = {
+  name: 'My Website',
+  description: 'My Website description',
+  url: 'https://mywebsite.com',
+  icons: ['https://avatars.mywebsite.com/']
+}
+
+const modal = createWeb3Modal({
+  ethersConfig: defaultConfig({
+    metadata,
+    defaultChainId: 1,
+    enableEIP6963: true,
+    enableInjected: true,
+    enableCoinbase: true,
+    /* highlight-add-start */
+    enableEmail: true
+    /* highlight-add-end */
+    rpcUrl: '...' // used for the Coinbase SDK
+  }),
+  chains: [mainnet],
+  projectId
+})
+```
+
+</TabItem>
+</Tabs>

@@ -1,0 +1,59 @@
+import Button from '../../../components/button'
+
+You can use the following methods to get data and subscribe to changes:
+
+### getAddress
+
+```ts
+const address = modal.getAddress()
+```
+
+### getError
+
+```ts
+const error = modal.getError()
+```
+
+### getChainId
+
+```ts
+const chainId = modal.getChainId()
+```
+
+### getIsConnected
+
+```ts
+const isConnected = modal.getIsConnected()
+```
+
+### getWalletProvider
+
+The wallet provider.
+
+```ts
+const walletProvider = modal.getWalletProvider()
+```
+
+// TODO - add sign message example
+
+### getWalletProviderType
+
+The wallet or protocol of the walletProvider.
+
+```ts
+const walletProviderType = modal.getWalletProviderType()
+```
+
+### subscribeProvider
+
+subscribe to chainId, address, provider changes.
+
+```ts
+function handleChange({ provider, providerType, address, error, chainId, isConnected }) {
+  //...
+}
+
+modal.subscribeProvider(handleChange)
+```
+
+<Button name="Learn More" url="https://docs.ethers.org/v6/getting-started/#starting-blockchain" />
