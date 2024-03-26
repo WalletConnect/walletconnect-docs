@@ -65,7 +65,8 @@ Web3Wallet.instance.authenticateRequestPublisher
 To handle incoming authentication requests, set up Web3Wallet.WalletDelegate. The onSessionAuthenticate callback will notify you of any authentication requests that need to be processed, allowing you to either approve or reject them based on your application logic.
 
 ```kotlin
-fun onSessionAuthenticate(sessionAuthenticate: Wallet.Model.SessionAuthenticate, verifyContext: Wallet.Model.VerifyContext) {
+override val onSessionAuthenticate: ((Wallet.Model.SessionAuthenticate, Wallet.Model.VerifyContext) -> Unit)
+  get() = { sessionAuthenticate, verifyContext ->
       // Triggered when wallet receives the session authenticate sent by a Dapp
       // Process the authentication request here
       // This involves displaying UI to the user
@@ -189,7 +190,8 @@ To interact with authentication requests, build authentication objects (Wallet.M
 Example:
 
 ```kotlin
-override fun onSessionAuthenticate(sessionAuthenticate: Wallet.Model.SessionAuthenticate, verifyContext: Wallet.Model.VerifyContext) {
+ooverride val onSessionAuthenticate: ((Wallet.Model.SessionAuthenticate, Wallet.Model.VerifyContext) -> Unit)
+  get() = { sessionAuthenticate, verifyContext ->
   val auths = mutableListOf<Wallet.Model.Cacao>()
 
   val authPayloadParams =
