@@ -1853,6 +1853,10 @@ val walletDelegate = object : Web3Wallet.WalletDelegate {
         // Triggered when wallet receives the session proposal sent by a Dapp
     }
 
+    fun onSessionAuthenticate(sessionAuthenticate: Wallet.Model.SessionAuthenticate, verifyContext: Wallet.Model.VerifyContext) {
+      // Triggered when wallet receives the session authenticate sent by a Dapp
+    }
+
     override fun onSessionRequest(sessionRequest: Wallet.Model.SessionRequest, verifyContext: Wallet.Model.VerifyContext) {
         // Triggered when a Dapp sends SessionRequest to sign a transaction or a message
     }
