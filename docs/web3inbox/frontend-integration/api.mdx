@@ -338,16 +338,24 @@ const { data: notifications, nextPage } = useNotifications(notificationsPerPage,
 
 - **notificationsPerPage:** Number representing how many notifications to get per fetch
 - **isInfiniteScroll:** Whether or not to keep already fetched notifications when getting next page
-- **notifications:** Array of notifications, of type
+- **notifications:** Array of notifications:
 
 ```ts
-{
-  title: string
-  sentAt: number
-  body: string
+type Notification = {
+  // Unique ID of this notification assigned by the Notify Server
   id: string
-  url: string | null
+  // The timestamp when this notification was sent to the Notify Server
+  sentAt: number
+  // The notification type ID of the notification
   type: string
+  // The title of the notification
+  title: string
+  // The body of the notification
+  body: string
+  // A call-to-action URL for when clicking on the notification
+  url: string | null
+  // Arbitrary custom data set by the sender of the notification
+  data: string | null
 }
 ```
 
@@ -375,16 +383,24 @@ const { nextPage } = client.pageNotifications(notificationsPerPage, isInfiniteSc
 - **isInfiniteScroll:** Whether or not to keep already fetched notifications when getting next page
 - **onUpdate:**: A callback that will be called whenever notifications get updated
 - **nextPage:**: A function to be called to fetch the next page of notifications
-- **notifications:** Array of notifications, of type
+- **notifications:** Array of notifications:
 
 ```ts
-{
-  title: string
-  sentAt: number
-  body: string
+type Notification = {
+  // Unique ID of this notification assigned by the Notify Server
   id: string
-  url: string | null
+  // The timestamp when this notification was sent to the Notify Server
+  sentAt: number
+  // The notification type ID of the notification
   type: string
+  // The title of the notification
+  title: string
+  // The body of the notification
+  body: string
+  // A call-to-action URL for when clicking on the notification
+  url: string | null
+  // Arbitrary custom data set by the sender of the notification
+  data: string | null
 }
 ```
 
