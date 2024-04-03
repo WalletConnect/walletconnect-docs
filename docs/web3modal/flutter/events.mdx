@@ -9,12 +9,17 @@ Since Coinbase Wallet uses it own connection channel, these methods are not avai
 
 ```dart
 // A connection is settled
-_w3mService.onSessionConnectEvent.subscribe((SessionEvent? event) {});
+_w3mService.onModalConnect.subscribe((ModalConnect? event) {});
 ```
 
 ```dart
 // A connection is deleted (disconnected)
-_w3mService.onSessionDeleteEvent.subscribe((SessionDelete? event) {});
+_w3mService.onModalDisconnect.subscribe((ModalDisconnect? event) {});
+```
+
+```dart
+// An error occurs during connection
+_w3mService.onModalError.subscribe((ModalError? event) {});
 ```
 
 ```dart
@@ -28,11 +33,6 @@ _w3mService.onSessionUpdateEvent.subscribe((SessionUpdate? event) {});
 ```
 
 ```dart
-// A pairing expires
-_w3mService.onPairingExpire.subscribe((PairingEvent? event) {});
-```
-
-```dart
-// An error occurs during connection
-_w3mService.onWalletConnectionError.subscribe((WalletErrorEvent? event) {});
+// A request event is happening
+_w3mService.onSessionEventEvent.subscribe((SessionEvent? event) {});
 ```

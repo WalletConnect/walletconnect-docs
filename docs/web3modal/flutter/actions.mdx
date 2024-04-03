@@ -1,17 +1,27 @@
 # Actions
 
-## Launch the current wallet
+### Launch the current wallet
+
+If you connected your dApp through deep linkining to a Wallet app you can launch that wallet app with the following:
 
 ```dart
-await _w3mService.launchConnectedWallet();
+_w3mService.launchConnectedWallet();
 ```
 
-## Send a request
+### Launch block explorer
+
+You can open the selected chain's block explorer easily:
 
 ```dart
-await _w3mService.web3App!.request(
-  topic: _w3mService.session.topic,
-  chainId: 'eip155:1',
+_w3mService.launchBlockExplorer();
+```
+
+### Send an RPC request
+
+```dart
+final result = await _w3mService.request(
+  topic: _w3mService.session?.topic ?? '',
+  chainId: 'eip155:1', // Connected chain id
   request: SessionRequestParams(
     method: 'personal_sign',
     params: ['Sign this', '0xdeadbeef'],
@@ -19,57 +29,59 @@ await _w3mService.web3App!.request(
 );
 ```
 
-A list of all available methods can be found [eth_constants.dart](https://github.com/WalletConnect/Web3ModalFlutter/blob/master/lib/constants/eth_constants.dart) file, which is already exported for you to use directly from web3modal package.
+A list of all available methods can be found in [constants.dart](https://github.com/WalletConnect/WalletConnectFlutterV2/blob/master/lib/apis/utils/constants.dart#L70) file, which is already exported for you to use directly from web3modal package.
 
-## List of approved chains by the connected wallet
+### List of approved chains by the connected wallet
 
 ```dart
 _w3mService.getApprovedChains();
 ```
 
-## List of approved methods by connected wallet
+### List of approved methods by connected wallet
 
 ```dart
 _w3mService.getApprovedMethods();
 ```
 
-## List of approved events by the connected wallet
+### List of approved events by the connected wallet
 
 ```dart
 _w3mService.getApprovedEvents();
 ```
 
-## Interact with Smart Contracts
+### Interact with Smart Contracts
 
-:::caution
-Smart Contracts interaction features are currently in beta. Please install version `3.1.1-beta02` if you want to try it out.
-:::
-
-#### How to use a read function of a Smart Contract
+1. Create a DeployedContract object
 
 ```dart
-Future<void> callReadFunction() async {
-  // Create DeployedContract object using contract's ABI and address
-  final deployedContract = DeployedContract(
-    ContractAbi.fromJson(
-      jsonEncode([{.....}]), // ABI object
-      'TokenName',
-    ),
-    EthereumAddress.fromHex('0xaddress.......'),
-  );
+// Create DeployedContract object using contract's ABI and address
+final deployedContract = DeployedContract(
+  ContractAbi.fromJson(
+    jsonEncode([{.....}]), // ABI object
+    'TokenName',
+  ),
+  EthereumAddress.fromHex('0xaddress.......'), // Contract address
+);
+```
 
+2. Read from it by calling a read function
+
+```dart
+Future<void> getWalletBalance() async {
   // Get balance of wallet
-  return await _w3mService.requestReadContract(
+  final result = await _w3mService.requestReadContract(
     deployedContract: deployedContract,
     functionName: 'balanceOf',
     rpcUrl: 'https://{rpc-url}.com',
     parameters: [
-      EthereumAddress.fromHex('0xaddress....'),
+      EthereumAddress.fromHex('0xaddress....'), // Your address
     ],
   );
+}
 
+Future<void> getTotalSupply() async {
   // Get token total supply
-  return await _w3mService.requestReadContract(
+  final result = await _w3mService.requestReadContract(
     deployedContract: deployedContract,
     functionName: 'totalSupply',
     rpcUrl: 'https://{rpc-url}.com',
@@ -77,21 +89,12 @@ Future<void> callReadFunction() async {
 }
 ```
 
-#### How to use a write frunction of a Smart Contract
+3. Write to it by calling a write function
 
 ```dart
-Future<void> callWriteFunction() async {
-  // Create DeployedContract object using contract's ABI and address
-  final deployedContract = DeployedContract(
-    ContractAbi.fromJson(
-      jsonEncode([{.....}]), // ABI object
-      'TokenName',
-    ),
-    EthereumAddress.fromHex('0xaddress.......'),
-  );
-
+Future<void> transferToken() async {
   // Transfer 0.01 amount of Token using Smart Contract's transfer function
-  return await _w3mService.requestWriteContract(
+  final result = await _w3mService.requestWriteContract(
     topic: _w3mService.session.topic,
     chainId: 'eip155:1',
     rpcUrl: 'https://{rpc-url}.com',
@@ -99,9 +102,24 @@ Future<void> callWriteFunction() async {
     functionName: 'transfer',
     transaction: Transaction(
       from: EthereumAddress.fromHex('0xaddressFrom....'),
-      to: EthereumAddress.fromHex('0xaddressTo....')
+      to: EthereumAddress.fromHex('0xaddressTo....'),
       value: EtherAmount.fromInt(EtherUnit.finney, 10), // == 0.010
     ),
+  );
+}
+
+Future<void> writeMessage() async {
+  // Write a message data
+  final result = await _w3mService.requestWriteContract(
+    topic: _w3mService.session.topic,
+    chainId: 'eip155:1',
+    rpcUrl: 'https://{rpc-url}.com',
+    deployedContract: contract,
+    functionName: 'sayHello',
+    transaction: Transaction(
+      from: EthereumAddress.fromHex('0xaddressFrom....'),
+    ),
+    parameters: ['Hello world!'],
   );
 }
 ```
