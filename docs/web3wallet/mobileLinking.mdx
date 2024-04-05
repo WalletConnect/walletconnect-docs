@@ -289,6 +289,8 @@ If the message depends on the result of an asynchronous call (e.g. retrieving a 
 
 In order to add support for mobile linking within your wallet and receive session proposals, register following deep link in your mobile wallet using intent filters in your Activity/Fragment or deepLink tag in your navigation graph.
 
+To support universal native modal and WalletConnectModal register: `wc://`
+
 Deep link example: `examplewallet://wc?uri={pairingUri}`
 
 To receive signing request in your Wallet, you'll need to initialize Kotlin SDK with the `Redirect` object where you pass a deep link that redirects to your wallet when it comes to receiving signing request from Dapp.
