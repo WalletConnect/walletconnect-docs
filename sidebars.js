@@ -172,6 +172,7 @@ module.exports = {
               type: 'category',
               label: 'Features',
               items: [
+                { type: 'doc', label: 'One-Click Auth', id: 'web3modal/features/siwe' },
                 { type: 'doc', label: 'Email Wallets', id: 'web3modal/features/email' },
                 { type: 'doc', label: 'Onramp', id: 'web3modal/features/onramp' }
               ]
