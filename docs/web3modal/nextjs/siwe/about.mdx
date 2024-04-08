@@ -11,17 +11,39 @@ import YoutubeEmbed from '../../../components/YoutubeEmbed'
 Web3Modal SDK provides a simple solution for integrating with "Sign In With Ethereum" (SIWE), a new form of authentication that enables users to control their digital identity with their Ethereum account.
 SIWE is a standard also known as [EIP-4361](https://docs.login.xyz/general-information/siwe-overview/eip-4361).
 
+## One Click Auth
+
+**One Click Auth** is a WalletConnect v2 feature that allows users to to Connect with a wallet and sign a SIWE message in a single request.
+ It implements **CACAO** ([CAIP-74](https://chainagnostic.org/CAIPs/caip-74)) and **SIWX** ([CAIP-122](https://chainagnostic.org/CAIPs/caip-122)) internally.
+
+## Installation
+
+<Tabs>
+<TabItem value="one-click-auth" label="One Click Auth">
+
+```bash npm2yarn
+npm i @web3modal/siwe
+```
+
+</TabItem>
+<TabItem value="legacy" label="Legacy">
+
 ## Video Tutorial
 
 <YoutubeEmbed videoId="SX6ercNOvc8" />
 
-## Installation
+:::caution
+For a better UX we recommend using One Click Auth.
+:::
 
 Install the Web3Modal SIWE package, additionally we also recommend installing [siwe](https://docs.login.xyz/) which will abstract a lot of the required logic.
 
 ```bash npm2yarn
 npm i @web3modal/siwe siwe
 ```
+
+</TabItem>
+</Tabs>
 
 ## Configure your SIWE Client
 
