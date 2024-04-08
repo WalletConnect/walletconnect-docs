@@ -1,0 +1,53 @@
+import Button from '../../components/button'
+import Container from '../../components/Container.js'
+import Wrapper from '../../components/Home/Wrapper'
+import W3MQuickStart from '../../components/W3MQuickStart'
+import YoutubeEmbed from '../../components/YoutubeEmbed'
+import useBaseUrl from '@docusaurus/useBaseUrl'
+
+import reactLogo from '../../../static/assets/home/reactLogo.png'
+import nextjsLogo from '../../../static/assets/home/nextjsLogo.png'
+import vueLogo from '../../../static/assets/home/vueLogo.png'
+import javascriptLogo from '../../../static/assets/home/javascriptLogo.png'
+
+# One-Click Auth
+
+**One-Click Auth** represents a key advancement within WalletConnect v2, streamlining the user authentication process by enabling them to seamlessly connect with a wallet and sign a SIWE message with just one click. 
+ It internally integrates **CACAO** ([CAIP-74](https://chainagnostic.org/CAIPs/caip-74)) and **SIWX** ([CAIP-122](https://chainagnostic.org/CAIPs/caip-122)) standards.
+
+## Get Started
+
+<Wrapper
+  type="large"
+  fit={false}
+  items={[
+    {
+      name: 'React',
+      description: 'Get started with Web3Modal in React.',
+      icon: reactLogo,
+      href: '../react/siwe'
+    },
+    {
+      name: 'Next.js',
+      description: 'Get started with Web3Modal in Next.js.',
+      icon: nextjsLogo,
+      href: '../nextjs/siwe/about',
+      isWhite: true
+    },
+    {
+      name: 'Vue',
+      description: 'Get started with Web3Modal in Vue.',
+      icon: vueLogo,
+      href: '../vue/siwe'
+    },
+    {
+      name: 'JavaScript',
+      description: 'Get started with Web3Modal in JavaScript.',
+      icon: javascriptLogo,
+      href: '../javascript/siwe'
+    }
+  ]}
+/>
+
+<br/>
+<Button name="Try Demo" url="https://lab.web3modal.com/library/wagmi-siwe/" />

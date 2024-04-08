@@ -10,25 +10,25 @@ import SiweParams from '../shared/siwe/parameters.mdx'
 Web3Modal SDK provides a simple solution for integrating with "Sign In With Ethereum" (SIWE), a new form of authentication that enables users to control their digital identity with their Ethereum account.
 SIWE is a standard also known as [EIP-4361](https://docs.login.xyz/general-information/siwe-overview/eip-4361).
 
-## One Click Auth
+## One-Click Auth
 
-**One Click Auth** is a WalletConnect v2 feature that allows users to to Connect with a wallet and sign a SIWE message in a single request.
- It implements **CACAO** ([CAIP-74](https://chainagnostic.org/CAIPs/caip-74)) and **SIWX** ([CAIP-122](https://chainagnostic.org/CAIPs/caip-122)) internally.
+**One-Click Auth** represents a key advancement within WalletConnect v2, streamlining the user authentication process by enabling them to seamlessly connect with a wallet and sign a SIWE message with just one click. 
+ It internally integrates **CACAO** ([CAIP-74](https://chainagnostic.org/CAIPs/caip-74)) and **SIWX** ([CAIP-122](https://chainagnostic.org/CAIPs/caip-122)) standards.
 
 ## Installation
 
 <Tabs>
-<TabItem value="one-click-auth" label="One Click Auth">
+<TabItem value="one-click-auth" label="One-Click Auth">
 
 ```bash npm2yarn
-npm i @web3modal/siwe
+npm i @web3modal/siwe@canary
 ```
 
 </TabItem>
 <TabItem value="legacy" label="Legacy">
 
 :::caution
-For a better UX we recommend using One Click Auth.
+For a better UX we recommend using One-Click Auth.
 :::
 
 Install the Web3Modal SIWE package, additionally we also recommend installing [siwe](https://docs.login.xyz/) which will abstract a lot of the required logic.
