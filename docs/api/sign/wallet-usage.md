@@ -602,9 +602,11 @@ try await Sign.instance.disconnect(topic: session.topic)
 ```
 
 ### Authenticated Session
+
 An authenticated session represents a secure connection established between a wallet and a dApp after successful authentication.
 
 #### Handling Authentication Requests
+
 To handle incoming authentication requests, subscribe to the authenticateRequestPublisher. This will notify you of any authentication requests that need to be processed, allowing you to either approve or reject them based on your application logic.
 
 ```swift
@@ -618,6 +620,7 @@ Sign.instance.authenticateRequestPublisher
 ```
 
 #### Building Authentication Objects
+
 To interact with authentication requests, first build authentication objects (AuthObject). These objects are crucial for approving authentication requests. This involves:
 
 **Creating an Authentication Payload** - Generate an authentication payload that matches your application's supported chains and methods.
@@ -637,17 +640,17 @@ func buildAuthObjects(request: AuthenticationRequest, account: Account, privateK
     for chain in commonChains {
         let accountForChain = Account(blockchain: chain, address: account.address)!
         let supportedAuthPayload = try Sign.instance.buildAuthPayload(
-            payload: request.payload, 
-            supportedEVMChains: Array(commonChains), 
+            payload: request.payload,
+            supportedEVMChains: Array(commonChains),
             supportedMethods: supportedMethods
         )
         let formattedMessage = try Sign.instance.formatAuthMessage(payload: supportedAuthPayload, account: accountForChain)
         let signature = // Assume `signMessage` is a function you've implemented to sign messages.
             signMessage(message: formattedMessage, privateKey: privateKey)
-        
+
         let authObject = try Sign.instance.buildSignedAuthObject(
-            authPayload: supportedAuthPayload, 
-            signature: signature, 
+            authPayload: supportedAuthPayload,
+            signature: signature,
             account: accountForChain
         )
         authObjects.append(authObject)
@@ -658,6 +661,7 @@ func buildAuthObjects(request: AuthenticationRequest, account: Account, privateK
 ```
 
 #### Approving Authentication Requests
+
 To approve an authentication request, construct AuthObject instances for each supported blockchain, sign the authentication messages, build AuthObjects and call approveSessionAuthenticate with the request ID and the authentication objects.
 
 ```swift
@@ -665,11 +669,13 @@ let session = try await Sign.instance.approveSessionAuthenticate(requestId: requ
 ```
 
 :::info Note
+
 1. The recommended approach for secure authentication across multiple chains involves signing a SIWE (Sign-In with Ethereum) message for each chain and account. However, at a minimum, one SIWE message must be signed to establish a session. It is possible to create a session for multiple chains with just one issued authentication object.
 2. Sometimes a dapp may want to only authenticate the user without creating a session, not every approval will result with a new session.
-:::
+   :::
 
 #### Rejecting Authentication Requests
+
 If the authentication request cannot be approved or if the user chooses to reject it, use the rejectSession method.
 
 ```swift
@@ -912,9 +918,11 @@ echo'd in listener.
 #
 
 #### **Authenticated Session**
+
 An authenticated session represents a secure connection established between a wallet and a dApp after successful authentication.
 
 ### Authentication Requests
+
 To handle incoming authentication requests, set up SignClient.WalletDelegate. The onSessionAuthenticate callback will notify you of any authentication requests that need to be processed, allowing you to either approve or reject them based on your application logic.
 
 ```kotlin
@@ -927,6 +935,7 @@ override val onSessionAuthenticate: ((Wallet.Model.SessionAuthenticate, Wallet.M
 ```
 
 ### Responding Authentication Request
+
 To interact with authentication requests, build authentication objects (Sign.Model.Cacao). It involves the following steps:
 
 **Creating an Authentication Payload Params** - Generate an authentication payload params that matches your application's supported chains and methods.
@@ -934,6 +943,7 @@ To interact with authentication requests, build authentication objects (Sign.Mod
 **Signing the Authentication Message** - Sign the formatted message to create a verifiable authentication object.
 
 Example:
+
 ```kotlin
 override val onSessionAuthenticate: ((Wallet.Model.SessionAuthenticate, Wallet.Model.VerifyContext) -> Unit)
   get() = { sessionAuthenticate, verifyContext ->
@@ -958,6 +968,7 @@ override val onSessionAuthenticate: ((Wallet.Model.SessionAuthenticate, Wallet.M
 ```
 
 ### Approving Authentication Requests
+
 To approve an authentication request, construct Sign.Model.Cacao instances for each supported chain, sign the authentication messages, build AuthObjects and call approveAuthenticate with the request ID and the authentication objects.
 
 ```kotlin
@@ -973,11 +984,13 @@ SignClient.approveAuthenticate(approveProposal,
 ```
 
 :::info Note
+
 1. The recommended approach for secure authentication across multiple chains involves signing a SIWE (Sign-In with Ethereum) message for each chain and account. However, at a minimum, one SIWE message must be signed to establish a session. It is possible to create a session for multiple chains with just one issued authentication object.
 2. Sometimes a dapp may want to only authenticate the user without creating a session, not every approval will result with a new session.
-:::
+   :::
 
 ### Rejecting Authentication Requests
+
 If the authentication request cannot be approved or if the user chooses to reject it, use the rejectAuthenticate method.
 
 ```kotlin
