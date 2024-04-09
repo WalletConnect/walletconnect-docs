@@ -13,8 +13,13 @@ SIWE is a standard also known as [EIP-4361](https://docs.login.xyz/general-infor
 
 ## One-Click Auth
 
-**One-Click Auth** represents a key advancement within WalletConnect v2, streamlining the user authentication process by enabling them to seamlessly connect with a wallet and sign a SIWE message with just one click. 
- It internally integrates **CACAO** ([CAIP-74](https://chainagnostic.org/CAIPs/caip-74)) and **SIWX** ([CAIP-122](https://chainagnostic.org/CAIPs/caip-122)) standards.
+**One-Click Auth** represents a key advancement within WalletConnect v2, streamlining the user authentication process in Web3Modal by enabling them to seamlessly connect with a wallet and sign a SIWE message with just one click. 
+
+As [Sign In With Ethereum](https://eips.ethereum.org/EIPS/eip-4361) has gradually become table-stakes for web3 UX in the Ethereum ecosystem, WalletConnect has made integrating the familiar "Sign In With Ethereum" offchain message and its standard, replayable "receipts" (known as [CACAO](https://chainagnostic.org/CAIPs/caip-74)s) simple and easy.
+The more dapps support SIWE, the more wallets can integrate it securely into specialized user-experiences, collectively building a more solid foundation for the "sign-in" experience web3-wide.
+
+Connecting a wallet (and exposing one or more addresses to it), proving control of an address with an off-chain signature, authorizing specific actions (like "I authorize this dapp to send me notifications through WalletConnect"). These are the kinds of authorizations that can be encoded as ["ReCaps"](https://eips.ethereum.org/EIPS/eip-5573), permissions for a specific website or dapp that can be compactly encoded as a long string in the message you sign and translated by any wallet into a straight-forward one-sentence summary.
+WalletConnect uses permissions expressed as ReCaps to enable One-Click Authentication, that is also a One-Click Authorization, making a powerful extension to SIWE that also enables any number of user-stories, from notifications, to subscriptions, to spending allowances or programmable recurring transactions.
 
 ## Installation
 
