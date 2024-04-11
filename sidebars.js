@@ -61,7 +61,7 @@ module.exports = {
                 'web3modal/nextjs/onramp',
                 {
                   type: 'category',
-                  label: 'SIWE',
+                  label: 'One-Click Auth / SIWE',
                   items: ['web3modal/nextjs/siwe/about', 'web3modal/nextjs/siwe/next-auth']
                 },
                 'web3modal/nextjs/theming',
