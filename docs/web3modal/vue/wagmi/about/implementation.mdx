@@ -67,11 +67,11 @@ In your `App.vue` file set up the following configuration.
 
 ```html
 <script setup lang="ts">
-  import { createWeb3Modal } from '@web3modal/wagmi'
+  import { createWeb3Modal, alphaWalletConnect } from '@web3modal/wagmi'
 
   import { reconnect, http, createConfig } from '@wagmi/core'
   import { mainnet, sepolia } from '@wagmi/core/chains'
-  import { coinbaseWallet, walletConnect, injected } from '@wagmi/connectors'
+  import { coinbaseWallet, injected } from '@wagmi/connectors'
 
   // 1. Define constants
   const projectId = 'YOUR_PROJECT_ID'
@@ -90,7 +90,7 @@ In your `App.vue` file set up the following configuration.
       [sepolia.id]: http()
     },
     connectors: [
-      walletConnect({ projectId, metadata, showQrModal: false }),
+      alphaWalletConnect({ projectId, metadata, showQrModal: false }),
       injected({ shimDisconnect: true }),
       coinbaseWallet({
         appName: metadata.name,
