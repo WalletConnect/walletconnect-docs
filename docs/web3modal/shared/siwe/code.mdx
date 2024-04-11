@@ -13,7 +13,7 @@ function getMessageParams(){
   return {
     domain: window.location.host,
     uri: window.location.origin,
-    chains: WagmiConstantsUtil.chains.map(chain => chain.id),
+    chains: [1, 2020],
     statement: 'Please sign with your account'
   }
 }
