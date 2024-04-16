@@ -348,8 +348,17 @@ const {
 // marking a single notification as read
 await notifications[0].markAsRead();
 
-// mark specific notifications as read
+// mark specific notifications as read for default account and under default domain
 await markNotificationsAsRead(notifications.slice(2).map(n => n.id));
+
+// mark specific notifications as read for specified account under default domain
+await markNotificationsAsRead(notifications.slice(2).map(n => n.id), differentAccount);
+
+// mark specific notifications as read for default account under specified domain
+await markNotificationsAsRead(notifications.slice(2).map(n => n.id), undefined, differentDomain);
+
+// mark specific notifications as read for specified account under specified domain
+await markNotificationsAsRead(notifications.slice(2).map(n => n.id), differentAccount, differentDomain);
 
 // mark all notifications as read for default account under default domain
 await markAllNotificationsAsRead();
