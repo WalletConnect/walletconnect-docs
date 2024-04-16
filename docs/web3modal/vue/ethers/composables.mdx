@@ -10,6 +10,18 @@ import { useWeb3ModalAccount } from '@web3modal/ethers/vue'
 const { address, chainId, isConnected } = useWeb3ModalAccount()
 ```
 
+### useSwitchNetwork
+
+```tsx
+import { useSwitchNetwork } from '@web3modal/ethers/vue'
+
+const chainId = 137
+
+const { switchNetwork } = useSwitchNetwork()
+
+switchNetwork(chainId)
+```
+
 ### useWeb3ModalProvider
 
 Hook that returns the `walletProvider` and the `WalletProviderType`.
