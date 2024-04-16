@@ -24,8 +24,6 @@ Links to sections on this page. Some sections are platform specific and are only
   Get latest notification types
 - [Updating subscriptions notification settings](#updating-subscriptions-notification-settings):
   Change allowed notification types sent by dapp
-- [Marking notifications as read](#marking-notifications-as-read):
-  Marking messages as read or unread across all devices
 - [Unsubscribe from a dapp](#unsubscribe-from-a-dapp):
   Opt-out from receiving notifications from a dapp
 - [Account logout](#account-logout):
@@ -46,9 +44,6 @@ section are:
   Configuring app in order to decrypt notifications
 
 To check the full list of platform specific instructions for your preferred platform, go to [Extra (Platform Specific)](#extra-platform-specific) and select your platform.
-
-
-
 
 ## Initialization
 
@@ -559,82 +554,6 @@ await notifyClient.update({
 </PlatformTabItem>
 </PlatformTabs>
 
-
-## Marking notifications as read
-
-Marking notifications as read allows the user to know that they already looked at and seen the message. The state of being read is also synced across all devices where the user can see the notification.
-
-This method could be used in several ways in your UI, for example the user may click a button to mark the notification as read. Or you may automatically mark the notification is read when the notification is within the viewport. How you choose implement this is up to you.
-
-<PlatformTabs activeOptions={["ios","android", "react-native"]}>
-<PlatformTabItem value="ios">
-
-TODO
-
-</PlatformTabItem>
-<PlatformTabItem value="android">
-
-Mark specific notifications as read:
-
-```kotlin
-val topic: String = // active subscription topic
-val notificationIds: List<String> = // List of notification IDs to mark as read
-
-val params = Notify.Params.MarkNotificationsAsRead(topic, notificationIds)
-
-NotifyClient.markNotificationsAsRead(
-    params,
-    onSuccess = {
-        // callback for when the mark notifications as read request was successful
-    },
-    onError = { error ->
-      // callback for when the mark notifications as read request has failed
-    }
-)
-```
-
-Mark all notifications as read:
-
-```kotlin
-val topic: String = // active subscription topic
-val notificationIds: List<String> = // List of notification IDs to mark as read
-
-val params = Notify.Params.MarkAllNotificationsAsRead(topic)
-
-NotifyClient.markAllNotificationsAsRead(
-    params,
-    onSuccess = {
-        // callback for when the mark all notifications as read request was successful
-    },
-    onError = { error ->
-      // callback for when the mark all notifications as read request has failed
-    }
-)
-```
-
-</PlatformTabItem>
-<PlatformTabItem value="react-native">
-
-Mark specific notifications as read:
-
-```typescript
-notifyClient.markNotificationsAsRead({
-  topic: string,
-  notificationIds: ["notification-id1", "notification-id2"],
-})
-```
-
-Mark all notifications as read:
-
-```typescript
-notifyClient.markAllNotificationsAsRead({
-  topic: string,
-})
-```
-
-</PlatformTabItem>
-</PlatformTabs>
-
 ## Unsubscribe from a dapp
 
 To opt-out of receiving notifications from a dap, a user can decide to unsubscribe from dapp.
@@ -900,10 +819,6 @@ val walletDelegate = object : NotifyClient.Delegate {
     override fun onError(error: Notify.Model.Error) {
         // Triggered when there's an error inside the SDK
     }
-
-    override fun onNotifyNotificationsChanged(notifyNotificationsChanged: Notify.Event.NotificationsChanged) {
-        // Triggered when a state was changed in the notifications
-    } 
 }
 
 NotifyClient.setDelegate(walletDelegate)
