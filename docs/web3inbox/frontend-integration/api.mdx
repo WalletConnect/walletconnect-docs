@@ -338,9 +338,11 @@ const {
   markAllNotificationsAsRead
 } = useNotifications(
   notificationsPerPage, 
-  isInfiniteScroll, {
-    unreadFirst,
-  },
+  isInfiniteScroll,
+  account,
+  domain,
+  unreadFirst,
+  onRead // optional function to run whenever messages are read
 )
 
 // marking a single notification as read
