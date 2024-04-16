@@ -97,6 +97,10 @@ List of views you can select
     {
       variable: { code: 'WhatIsAWallet' },
       description: '"What is a wallet" onboarding view'
+    },
+    {
+      variable: { code: 'OnRampProviders' },
+      description: '"OnRamp main view'
     }
   ]}
 />
@@ -107,6 +111,18 @@ List of views you can select
 const { disconnect } = useDisconnect()
 
 disconnect()
+```
+
+## useWalletInfo
+
+Metadata information from the connected wallet
+
+```ts
+import { useWalletInfo } from '@web3modal/wagmi/vue'
+
+const { walletInfo } = useWalletInfo()
+
+console.log(walletInfo.name, walletInfo.icon)
 ```
 
 ## Ethereum Library
