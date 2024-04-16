@@ -409,9 +409,10 @@ const {
   markAllNotificationsAsRead
 } = client.pageNotifications(
   notificationsPerPage,
-  isInfiniteScroll, {
-    unreadFirst,
-  },
+  isInfiniteScroll,
+  specifiedAccount // OR undefined,
+  specifiedDomain // OR undefined,
+  unreadFirst
 )(onUpdate)
 
 
