@@ -197,4 +197,17 @@ const nextConfig = {
 }
 ```
 
+- You may need to update Web3Modal related import statements like so:
+
+```ts
+// change:
+import Web3Modal from '../context/web3modal'
+
+// to:
+const Web3Modal = dynamic(() => import('../context/web3modal'), {
+    ssr: false,
+})
+```
+
+
 - [Learn more about SSR with Wagmi](https://wagmi.sh/react/guides/ssr)
