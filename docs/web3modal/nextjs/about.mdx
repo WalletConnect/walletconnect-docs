@@ -200,6 +200,9 @@ const nextConfig = {
 - You may need to update Web3Modal related import statements like so:
 
 ```ts
+// import next.js lazy loading composite
+import dynamic from 'next/dynamic'
+
 // change:
 import Web3Modal from '../context/web3modal'
 
@@ -208,6 +211,5 @@ const Web3Modal = dynamic(() => import('../context/web3modal'), {
     ssr: false,
 })
 ```
-
 
 - [Learn more about SSR with Wagmi](https://wagmi.sh/react/guides/ssr)
