@@ -2,7 +2,7 @@
 
 ## What chains does WalletConnect support?
 
-WalletConnect operates as a chain-agnostic protocol, adhering to the [CAIP-25](https://github.com/ChainAgnostic/CAIPs/blob/master/CAIPs/caip-25.md) standard. While the WalletConnect protocol supports various chains, you can refer to the [list](../advanced/multichain/chain-list.mdx) for the known compatible blockchains. However, please note that our SDKs have certain limitations on the chains they support.
+WalletConnect operates as a chain-agnostic protocol, adhering to the [CAIP-25](https://github.com/ChainAgnostic/CAIPs/blob/master/CAIPs/caip-25.md) standard. While the WalletConnect protocol supports various chains, you can refer to the [list](../cloud/chains/chain-list.mdx) for the known compatible blockchains. However, please note that our SDKs have certain limitations on the chains they support.
 
 If you intend to extend support for non-EVM chains in your wallet or dapp, it is recommended to review the cross-chain primitives supported by the WalletConnect protocol through the Chain Agnostic Standards Alliance's [Namespaces](https://namespaces.chainagnostic.org/) project. Additionally, feel free to reach out to our community team for further guidance. In the event that the desired chain lacks documentation in the Namespaces project, you can collaborate with an expert in the respective chain's tooling and submit a namespaces PR.
 
