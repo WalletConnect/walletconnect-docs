@@ -293,6 +293,21 @@ module.exports = {
                 'cloud/chains/rpc-reference/casper-rpc',
                 'cloud/chains/rpc-reference/everscale-rpc'
               ]
+            },
+            {
+              type: 'category',
+              label: 'Examples',
+              items: [,
+                {
+                  type: 'category',
+                  label: 'Polkadot',
+                  items: [
+                    'cloud/chains/polkadot/dapp-integration-guide',
+                    'cloud/chains/polkadot/namespaces-guide',
+                    'cloud/chains/polkadot/wallet-integration-guide'
+                  ]
+                }
+              ]
             }
           ]
         },
