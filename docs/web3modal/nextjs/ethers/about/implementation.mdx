@@ -49,7 +49,7 @@ createWeb3Modal({
   enableOnramp: true // Optional - false as default
 })
 
-export function Web3Modal({ children }) {
+export default function Web3Modal({ children }) {
   return children
 }
 ```
@@ -59,7 +59,7 @@ Next, in your `app/layout.tsx` or `app/layout.jsx` file, import the custom Web3M
 ```tsx
 import './globals.css'
 
-import { Web3Modal } from '../context/web3modal'
+import Web3Modal from '../context/web3modal'
 
 export const metadata = {
   title: 'Web3Modal',
