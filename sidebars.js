@@ -274,6 +274,14 @@ module.exports = {
       items: [
         'cloud/explorer',
         'cloud/explorer-submission',
+        {
+          type: 'category',
+          label: 'Explorer Chains',
+          items: [
+            'cloud/chains/overview',
+            'cloud/chains/chain-list'
+          ]
+        },
         'cloud/verify',
         'cloud/relay',
         'cloud/blockchain-api',
@@ -286,12 +294,11 @@ module.exports = {
       collapsible: false,
       className: 'menu_outer_list',
       items: [
+        
         {
           type: 'category',
           label: 'Multi-Chain',
           items: [
-            'advanced/multichain/overview',
-            'advanced/multichain/chain-list',
             {
               type: 'category',
               label: 'RPC Reference',
@@ -310,11 +317,17 @@ module.exports = {
             },
             {
               type: 'category',
-              label: 'Polkadot',
-              items: [
-                'advanced/multichain/polkadot/dapp-integration-guide',
-                'advanced/multichain/polkadot/wallet-integration-guide',
-                'advanced/multichain/polkadot/namespaces-guide'
+              label: 'Examples',
+              items: [,
+                {
+                  type: 'category',
+                  label: 'Polkadot',
+                  items: [
+                    'advanced/multichain/polkadot/dapp-integration-guide',
+                    'advanced/multichain/polkadot/namespaces-guide',
+                    'advanced/multichain/polkadot/wallet-integration-guide'
+                  ]
+                }
               ]
             }
           ]
