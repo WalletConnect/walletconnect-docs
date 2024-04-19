@@ -272,49 +272,18 @@ module.exports = {
       collapsible: false,
       className: 'menu_outer_list',
       items: [
-        {
-          type: 'category',
-          label: 'Multi-Chain',
-          items: [
-            'cloud/chains/overview',
-            'cloud/chains/chain-list',
-            {
-              type: 'category',
-              label: 'RPC Reference',
-              items: [
-                'cloud/chains/rpc-reference/cosmos-rpc',
-                'cloud/chains/rpc-reference/ethereum-rpc',
-                'cloud/chains/rpc-reference/solana-rpc',
-                'cloud/chains/rpc-reference/near-rpc',
-                'cloud/chains/rpc-reference/starknet-rpc',
-                'cloud/chains/rpc-reference/stellar-rpc',
-                'cloud/chains/rpc-reference/tezos-rpc',
-                'cloud/chains/rpc-reference/xrpl-rpc',
-                'cloud/chains/rpc-reference/casper-rpc',
-                'cloud/chains/rpc-reference/everscale-rpc'
-              ]
-            },
-            {
-              type: 'category',
-              label: 'Examples',
-              items: [,
-                {
-                  type: 'category',
-                  label: 'Polkadot',
-                  items: [
-                    'cloud/chains/polkadot/dapp-integration-guide',
-                    'cloud/chains/polkadot/namespaces-guide',
-                    'cloud/chains/polkadot/wallet-integration-guide'
-                  ]
-                }
-              ]
-            }
-          ]
-        },
         'cloud/explorer',
         'cloud/explorer-submission',
         'cloud/verify',
         'cloud/relay',
+        {
+          type: 'category',
+          label: 'Explorer Chains',
+          items: [
+            'cloud/chains/overview',
+            'cloud/chains/chain-list'
+          ]
+        },
         'cloud/blockchain-api',
         'cloud/analytics'
       ]
@@ -325,6 +294,44 @@ module.exports = {
       collapsible: false,
       className: 'menu_outer_list',
       items: [
+        
+        {
+          type: 'category',
+          label: 'Multi-Chain',
+          items: [
+            {
+              type: 'category',
+              label: 'RPC Reference',
+              items: [
+                'advanced/multichain/rpc-reference/cosmos-rpc',
+                'advanced/multichain/rpc-reference/ethereum-rpc',
+                'advanced/multichain/rpc-reference/solana-rpc',
+                'advanced/multichain/rpc-reference/near-rpc',
+                'advanced/multichain/rpc-reference/starknet-rpc',
+                'advanced/multichain/rpc-reference/stellar-rpc',
+                'advanced/multichain/rpc-reference/tezos-rpc',
+                'advanced/multichain/rpc-reference/xrpl-rpc',
+                'advanced/multichain/rpc-reference/casper-rpc',
+                'advanced/multichain/rpc-reference/everscale-rpc'
+              ]
+            },
+            {
+              type: 'category',
+              label: 'Examples',
+              items: [,
+                {
+                  type: 'category',
+                  label: 'Polkadot',
+                  items: [
+                    'advanced/multichain/polkadot/dapp-integration-guide',
+                    'advanced/multichain/polkadot/namespaces-guide',
+                    'advanced/multichain/polkadot/wallet-integration-guide'
+                  ]
+                }
+              ]
+            }
+          ]
+        },
         {
           type: 'category',
           label: 'Providers',

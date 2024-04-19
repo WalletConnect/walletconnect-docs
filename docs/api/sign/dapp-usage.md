@@ -179,7 +179,7 @@ const result = await signClient.request({
 })
 ```
 
-> For more information on available JSON-RPC requests, see the [JSON-RPC reference](../../cloud/chains/rpc-reference/ethereum-rpc.md).
+> For more information on available JSON-RPC requests, see the [JSON-RPC reference](../../advanced/multichain/rpc-reference/ethereum-rpc.md).
 
 ### Restoring a Session
 
