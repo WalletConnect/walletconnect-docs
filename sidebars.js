@@ -274,8 +274,6 @@ module.exports = {
       items: [
         'cloud/explorer',
         'cloud/explorer-submission',
-        'cloud/verify',
-        'cloud/relay',
         {
           type: 'category',
           label: 'Explorer Chains',
@@ -284,6 +282,8 @@ module.exports = {
             'cloud/chains/chain-list'
           ]
         },
+        'cloud/verify',
+        'cloud/relay',
         'cloud/blockchain-api',
         'cloud/analytics'
       ]
