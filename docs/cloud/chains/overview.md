@@ -18,7 +18,7 @@ You can do so by clicking [here](https://github.com/WalletConnect/walletconnect-
 
 ## CASA
 
-To register a chain, you must know both its native representation (the chainID used with that kind of blockchain) _and_ its Chain Agnostic Standards Alliance representation, which can be found reading the relevant CAIP-2 profiles on the [CASA Namespaces Project Docs](https://namespaces.chainagnostic.org/).
+To register a chain, you must know both its native representation (the chainID used with that kind of blockchain) _and_ its Chain Agnostic Standards Alliance representation, which can be found reading the relevant CAIP-2 profiles on the [CASA Namespaces Project Docs](https://namespaces.chainagnostic.org/). If no such profile yet exists, you can collaborate with an expert in the respective chain's tooling and submit a [namespaces PR](https://github.com/ChainAgnostic/namespaces/?tab=readme-ov-file#namespaces) to add one.
 
 ## Add RPC Methods
 
