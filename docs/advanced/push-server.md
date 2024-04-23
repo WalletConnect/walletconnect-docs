@@ -1,18 +1,16 @@
 # Push Server
 
-The Push Server is a push server for the WalletConnect v2 Protocol. It allows clients to send push notifications to their users. The Push Server can be used with our [Notify API](../web3wallet/notify/introduction.mdx) and [Web3Wallet SDK](../web3wallet/about.mdx).
+The Push Server sends WalletConnect protocol activity using FCM or APNs to users. The Push Server can be used with our [Notify API](../web3wallet/notify/introduction.mdx) and [Web3Wallet SDK](../web3wallet/about.mdx).
 
-## Options for Receiving Push Notifications
+Several options exist for setting up the Push Server:
 
-1. Use the [hosted](#hosted-platform-recommended) platform (recommended).
-2. Self-Host our [server](https://github.com/WalletConnect/echo-server).
-3. Write your own implementation using the [spec](https://specs.walletconnect.com/2.0/specs/servers/push/spec).
+1. Using our [hosted](#hosted-platform-recommended) solution (recommended)
+2. Self-host the [Push Server](https://github.com/WalletConnect/push-server)
+3. Write your own implementation using the [spec](https://specs.walletconnect.com/2.0/specs/servers/push/spec)
 
-:::note
-For inquiries about self-hosting, please send an email to devrel@walletconnect.com.
-:::
+It is recommended that you use our hosted platform for simplicity and ease of integration. Typically you only need to self-host if you have concerns about our hosted platform having access to your FCM or APNs server credentials, such as for regulatory reasons. If you want to self-host or implement against the spec, please reach out to devrel@walletconnect.com for assistance.
 
-## Hosted Platform (recommended)
+## Hosted platform (recommended)
 
 1. Create a Project in the Cloud App. Go to [WalletConnect Cloud](https://cloud.walletconnect.com/) and sign up for an account.
 
