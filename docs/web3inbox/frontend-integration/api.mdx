@@ -17,8 +17,8 @@ Furthremore you may need to configure the `domain` and `isLimited` parameters:
 - `allApps` determines if your app has access to all of the user's subscriptions, or only the ones that the app is hosted on. By setting it to `true`, it enables setting `domain` to a value other than `window.location.host`. Setting `allApps: true` can be useful during development to allow your localhost-deployed app to access the subscriptions for the domain you setup. Note that most apps do not need to set this in production environments, as they only need access to their own subscriptions. When enabled, the user has to sign a SIWE message granting your app more permissions, and this requires additional consideration from the user. Read [here](../authorization-signatures/about) for more details.
 
 <PlatformTabs
-	groupId="w3iw"
-	activeOptions={["react", "javascript"]}
+    groupId="w3iw"
+    activeOptions={["react", "javascript"]}
 >
 
 <PlatformTabItem value="react">
@@ -56,8 +56,8 @@ const client = await Web3InboxClient.init({ projectId, domain, allApps })
 ### Setting account for web3inbox
 
 <PlatformTabs
-	groupId="w3iw"
-	activeOptions={["react", "javascript"]}
+    groupId="w3iw"
+    activeOptions={["react", "javascript"]}
 >
 
 <PlatformTabItem value="react">
@@ -108,8 +108,8 @@ client.watchAccount(account => {
 ### Registering an account
 
 <PlatformTabs
-	groupId="w3iw"
-	activeOptions={["react", "javascript"]}
+    groupId="w3iw"
+    activeOptions={["react", "javascript"]}
 >
 
 **Note**: [EIP-1271 signatures](https://eips.ethereum.org/EIPS/eip-1271) coming from smart wallets are supported in version `1.1.0` and above.
@@ -190,8 +190,8 @@ This use case is for Dapps that have multile active accounts or wallets with mul
 :::
 
 <PlatformTabs
-	groupId="w3iw"
-	activeOptions={["react", "javascript"]}
+    groupId="w3iw"
+    activeOptions={["react", "javascript"]}
 >
 
 <PlatformTabItem value="react">
@@ -322,8 +322,8 @@ client.watchSubscriptions(subscriptions => console.log({ subscriptions }))
 Get notifications
 
 <PlatformTabs
-	groupId="w3iw"
-	activeOptions={["react", "javascript"]}
+    groupId="w3iw"
+    activeOptions={["react", "javascript"]}
 >
 
 <PlatformTabItem value="react">
@@ -484,8 +484,8 @@ await markAllNotificationsAsRead();
 Manage and fetch notification types.
 
 <PlatformTabs
-	groupId="w3iw"
-	activeOptions={["react", "javascript"]}
+    groupId="w3iw"
+    activeOptions={["react", "javascript"]}
 >
 
 <PlatformTabItem value="react">
@@ -551,8 +551,8 @@ If you wish to receive live push notifications to your React Native or Web app, 
 Your integration will obtain a token from Firebase and you will need to pass this token to the Web3Inbox SDK using the `registerWithPushServer()` function.
 
 <PlatformTabs
-	groupId="w3iw"
-	activeOptions={["react", "javascript"]}
+    groupId="w3iw"
+    activeOptions={["react", "javascript"]}
 >
 
 <PlatformTabItem value="react" >
@@ -605,8 +605,8 @@ Either APNS or FCM can be used to recieve push notifications. Token here is the 
 </PlatformTabs>
 
 <PlatformTabs
-	groupId="w3iw"
-	activeOptions={["react", "javascript"]}
+    groupId="w3iw"
+    activeOptions={["react", "javascript"]}
 >
 
 ## Listening For Events
@@ -669,8 +669,8 @@ interface NotifyNotification {
 ### Discover apps to subscribe to
 
 <PlatformTabs
-	groupId="w3iw"
-	activeOptions={["react", "javascript"]}
+    groupId="w3iw"
+    activeOptions={["react", "javascript"]}
 >
 
 <PlatformTabItem value="react">
@@ -683,16 +683,16 @@ return (
   <div>
     <button onClick={discover}> Refresh list </button>
     {apps.map(app => (
-	  <div onClick={() => {
-	    const url = new URL(app.url);
-		subscribe(url.hostname);
-	  }} key={app.id}>
-	    <img src={app.icon} />
-	    <span> {app.name} </span>
-	    <span> {app.description} </span>
-	    <span> {app.url} </span>
-	  </div>
-	)}
+      <div onClick={() => {
+        const url = new URL(app.url);
+        subscribe(url.hostname);
+      }} key={app.id}>
+        <img src={app.icon} />
+        <span> {app.name} </span>
+        <span> {app.description} </span>
+        <span> {app.url} </span>
+      </div>
+    )}
   </div>
 )
 ```
