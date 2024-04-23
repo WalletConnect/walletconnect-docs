@@ -683,10 +683,7 @@ return (
   <div>
     <button onClick={discover}> Refresh list </button>
     {apps.map(app => (
-      <div onClick={() => {
-        const url = new URL(app.url);
-        subscribe(url.hostname);
-      }} key={app.id}>
+      <div onClick={app.subscribe} key={app.id}>
         <img src={app.icon} />
         <span> {app.name} </span>
         <span> {app.description} </span>
@@ -712,6 +709,7 @@ interface NotifyApp {
   isVerified: boolean
   isFeatured: boolean
   isComingSoon: boolean
+  subscribe: () => Promise<void>
 }
 ```
 
@@ -736,8 +734,7 @@ for(const app of apps) {
 }
 
 // subscribe to the first app
-const appUrl = new URL(apps[0].url)
-client.subscribeToDapp(undefined, appUrl.hostname)
+await app[0].subscribe()
 ```
 
 #### References
@@ -753,6 +750,7 @@ interface NotifyApp {
   isVerified: boolean
   isFeatured: boolean
   isComingSoon: boolean
+  subscribe: () => Promise<void>
 }
 ```
 
