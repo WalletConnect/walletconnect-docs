@@ -8,7 +8,7 @@ Several options exist for setting up the Push Server:
 2. Self-host the [Push Server](https://github.com/WalletConnect/push-server)
 3. Write your own implementation using the [spec](https://specs.walletconnect.com/2.0/specs/servers/push/spec)
 
-It is recommended that you use our hosted platform for simplicity and ease of integration. Typically you only need to self-host if you have concerns about our hosted platform having access to your FCM or APNs server credentials, such as for regulatory reasons. If you want to self-host or implement against the spec, please reach out to devrel@walletconnect.com for assistance.
+It is recommended that you use WalletConnect Cloud for simplicity and ease of integration. Typically you only need to self-host if you have concerns about our hosted platform having access to your FCM or APNs server credentials, such as for regulatory reasons. If you want to self-host or implement against the spec, please reach out to devrel@walletconnect.com for assistance.
 
 ## Setup in WalletConnect Cloud
 
