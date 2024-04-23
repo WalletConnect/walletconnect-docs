@@ -18,20 +18,22 @@ It is recommended that you use WalletConnect Cloud for simplicity and ease of in
 
 ![create-push-url](/assets/create-push-url.png)
 
-3. From the same settings tab, you will see the FCM and the APNS settings becomes available to setup. Add your [FCM](#firebase-cloud-messaging-fcm) and/or [APNS](#apple-push-notifications-apns) details.
+3. From the same settings tab, you will see the FCM and the APNS settings becomes available to setup. Add your [FCM](#firebase-cloud-messaging-fcm) and/or [APNs](#apple-push-notifications-apns) details.
 
 ![fmc-and-apns-details-form](/assets/apns-fmc-details.png)
 
 ### Firebase Cloud Messaging (FCM)
 
-Google's FCM allows you to use send notifications to both Android and Apple devices. At this time, we only support the API. Please refer to their docs on set up.
+Google's FCM allows you to use send notifications to both Android and Apple devices. At this time, we only support Android devices via FCM.
+
+Currently we only support Cloud Messaging API (Legacy) but are currently working on supporting Firebase Cloud Messaging API (V1) very soon.
 
 - Enable Legacy Cloud Messaging API in the Firebase Project Settings
   ![legacy-fcm-cloud-messaging](/assets/legacy-fcm-cloud-messaging-api.png)
 - [Set up Android](https://firebase.google.com/docs/cloud-messaging/android/client)
 - [Set up Apple](https://firebase.google.com/docs/cloud-messaging/ios/client)
 
-### Apple Push Notifications (APNS)
+### Apple Push Notifications (APNs)
 
 Apple recommends using a Token-Based Connection for APNS over a Certificate-Based connection. Please refer to their documentation for instructions on obtaining either.
 
