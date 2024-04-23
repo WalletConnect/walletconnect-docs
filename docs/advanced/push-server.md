@@ -4,13 +4,13 @@ The Push Server sends WalletConnect protocol activity using FCM or APNs to users
 
 Several options exist for setting up the Push Server:
 
-1. Using our [hosted](#hosted-platform-recommended) solution (recommended)
+1. Using [WalletConnect Cloud](#hosted-platform-recommended) (recommended)
 2. Self-host the [Push Server](https://github.com/WalletConnect/push-server)
 3. Write your own implementation using the [spec](https://specs.walletconnect.com/2.0/specs/servers/push/spec)
 
 It is recommended that you use our hosted platform for simplicity and ease of integration. Typically you only need to self-host if you have concerns about our hosted platform having access to your FCM or APNs server credentials, such as for regulatory reasons. If you want to self-host or implement against the spec, please reach out to devrel@walletconnect.com for assistance.
 
-## Hosted platform (recommended)
+## WalletConnect Cloud (recommended)
 
 1. Create a Project in the Cloud App. Go to [WalletConnect Cloud](https://cloud.walletconnect.com/) and sign up for an account.
 
