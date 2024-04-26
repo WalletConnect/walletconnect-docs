@@ -1,0 +1,87 @@
+import CloudBanner from '../../components/CloudBanner'
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
+
+# Unity
+
+With Web3Modal Unity, you can easily let people interact with multiple EVM compatible wallets and blockchains.
+
+:::caution
+
+The **Web3Modal SDK for Unity** is currently in **Alpha**. Breaking changes may occur in future versions.
+
+:::
+
+## Install
+
+Let's get started by installing the package!
+
+### Prerequisites
+
+- Unity 2022.3 or above
+- IL2CPP code stripping level: Minimal (or lower)
+- Target platform: Android, iOS, Windows, macOS
+
+### Package
+
+<Tabs>
+<TabItem value="openupm-cli" label="OpenUPM CLI">
+
+To install packages via OpenUPM, you need to have [Node.js](https://nodejs.org/en/) and [openupm-cli](https://openupm.com/docs/getting-started.html#installing-openupm-cli) installed. Once you have them installed, you can run the following commands:
+
+```bash
+openupm add com.walletconnect.web3modal
+```
+
+</TabItem>
+<TabItem value="pm-openupm" label="Package Manager with OpenUPM">
+
+1. Open `Advanced Project Settings` from the gear ⚙ menu located at the top right of the Package Manager’s toolbar
+2. Add a new scoped registry with the following details:
+    - Name: `OpenUPM`
+    - URL: `https://package.openupm.com`
+    - Scope(s): `com.walletconnect`
+3. Press plus ➕ and then `Save` buttons
+4. In the Package Manager windows open the add ➕ menu from the toolbar
+5. Select `Add package by name...`
+6. Enter the package name:
+    - `com.walletconnect.web3modal`
+7. Press `Add` button
+
+</TabItem>
+</Tabs>
+
+## Configure
+
+The minimum configuration required is filling in a `Project ID` and `Metadata` fields inside of `WalletConnectProjectConfig` scriptable object. The scriptable object is automatically created after package installation. You can find it in the `Assets/WalletConnect/Resources` directory.
+
+<CloudBanner />
+
+- **Id**: The project ID is a unique identifier for your project.
+    - If you don’t have a Project ID, you can create one at [WalletConnect Cloud](https://cloud.walletconnect.com).
+- **Name**: The project name is a human-readable name for your project.
+- **Description**: The project description is a human-readable description for your project.
+- **URL**: The project URL
+- **Icons**: At least one icon is required for the project.
+
+Other fields are optional and will be covered in the next sections.
+
+<img width="500px" src="/assets/unity-project-config.jpg" />
+
+## Implement
+
+1. Add `Web3Modal` prefab from `Packages/Web3Modal/Prefabs` to your scene.
+2. Initialize Web3Modal from your script
+```csharp
+public async void Start()
+{
+    await Web3Modal.InitializeAsync();
+}
+```
+3. Open the modal
+```csharp
+public void OpenModal()
+{
+    Web3Modal.OpenModal();
+}
+```

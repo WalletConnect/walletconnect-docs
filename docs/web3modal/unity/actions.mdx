@@ -1,0 +1,54 @@
+# Actions
+
+## Modal Actions
+
+### Open Modal
+
+```csharp
+// Open default view
+Web3Modal.OpenModal();
+
+// Open network selection view
+Web3Modal.OpenModal(ViewType.NetworkSearch);
+
+// Open account view
+Web3Modal.OpenModal(ViewType.Account);
+```
+
+### Close Modal
+```csharp
+Web3Modal.CloseModal();
+```
+
+## Chain Actions
+
+### Set active chain
+
+```csharp
+Chain newChain = ChainConstants.Chains.Ethereum;
+await Web3Modal.NetworkController.ChangeActiveChainAsync(newChain);
+```
+
+### Get active chain
+
+```csharp
+Chain activeChain = Web3Modal.NetworkController.ActiveChain;
+```
+
+## Account Actions
+
+### Get active account
+```csharp
+// Get active account in CAIP-10 format
+Account account = Web3Modal.GetAccount();
+
+Debug.Log(account.Address); // e.g. '0x12345...'
+Debug.Log(account.ChainId); // e.g. 'eip155:1'
+Debug.Log(account.AccountId); // e.g. 'eip155:1:0x12345...'
+```
+
+### Disconnect
+
+```csharp
+await Web3Modal.DisconnectAsync();
+```

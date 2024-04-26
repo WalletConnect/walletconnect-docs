@@ -170,6 +170,18 @@ module.exports = {
             },
             {
               type: 'category',
+              label: 'Unity',
+              className: 'sidebar__logo sidebar__logo--unity',
+              items: [
+                { type: 'doc', label: 'Getting started', id: 'web3modal/unity/about' },
+                'web3modal/unity/usage',
+                'web3modal/unity/options',
+                'web3modal/unity/actions',
+                'web3modal/unity/events'
+              ]
+            },
+            {
+              type: 'category',
               label: 'Features',
               items: [
                 { type: 'doc', label: 'Email Wallets', id: 'web3modal/features/email' },
