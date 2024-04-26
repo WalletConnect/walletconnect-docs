@@ -879,94 +879,162 @@ To query smart contracts, you can use [Nethereum.Web3](https://www.nuget.org/pac
 to make `eth_call` requests directly to the RPC endpoint.
 However, to call methods that modify the state of the smart contract, you need user to sign the transaction in the wallet.
 
-The example below shows how to call `approve` method of WETH9 (Wrapped Ether) smart contract. It encodes data with Nethereum and makes request with WalletConnect.
+There are two ways to interact with smart contracts:
+- **With Interceptor**: using Nethereum's `RequestInterceptor` (recommended)
+- **Manual**: using Netherum's tools to encode data and make requests directly with WalletConnect
+
+
+<Tabs>
+
+<TabItem value="interceptor" label="Interceptor (recommended)">
+
+    WalletConnect provides a Nethereum interceptor utility that will route requests that require user signature to the wallet.
+    With this approach, you don't need to manually encode data and make requests. Use convenient Nethereum's methods to interact with smart contracts, and interceptor
+    will automatically route requests to the wallet.
+
+    [WalletConnectUnity Nethereum source code](https://github.com/WalletConnect/WalletConnectUnity/tree/main/Packages/con.walletconnect.nethereum)
+
+   #### Install interceptor
+
+    ```bash
+    openupm add com.walletconnect.nethereum
+    ```
+
+    #### Use interceptor
+
+    This example shows how to call `transfer` method of ERC20 smart contract using interceptor.
+
+    ```csharp
+    // Nethereum's Web3 instance
+    var web3 = new Web3();
+
+    // Instance of WalletConnect singleton
+    var walletConnect = WalletConnect.Instance;
+
+    // Interceptor that will route requests requiring signing to the wallet connected with WalletConnect
+    var walletConnectUnityInterceptor = new WalletConnectUnityInterceptor(walletConnect);
+
+    // Assign the interceptor to the Web3 instance
+    web3.Client.OverridingRequestInterceptor = walletConnectUnityInterceptor;
+
+    const string contractAddress = "0x1f9840a85d5aF5bf1D1762F925BDADdC4201F984";
+    const string recipientAddress = "0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045";
+    const BigInteger amount = 1;
+
+    // Get ERC20 contract service
+    var contractService = Web3Modal.Web3.Eth.ERC20.GetContractService(contractAddress);
+
+    // Call transfer method of ERC20 contract
+    await contractService.TransferRequestAsync(recipientAddress, amount);
+    ```
+
+    Nethereum allows to deploy and interact with custom smart contracts as well.
+    Refer to the [Nethereum documentation](https://docs.nethereum.com/en/latest/nethereum-smartcontrats-gettingstarted/) for more information.
+
+
+</TabItem>
+
+<TabItem value="manual" label="Manual">
+
+    The example below shows how to call `approve` method of WETH9 (Wrapped Ether) smart contract. It encodes data with Nethereum and makes request with WalletConnect.
+
+    ```csharp
+    public async Task ContractTransaction()
+    {
+        var session = WalletConnect.Instance.ActiveSession;
+
+        // Because one session can have multiple namespaces, we need to select one.
+        // In most cases, especially in games, dapp will use only one namespace.
+        var @namespace = session.Namespaces.First();
+        var myAddress = session.CurrentAddress(@namespace.Key).Address;
+
+        // Define contract and function details
+        var contractAddress = "0x4200000000000000000000000000000000000006";
+        var toAddress = myAddress; // Use sender's address for the sake of example
+        var amount = new BigInteger(12345);
+
+        // Define the parameters for the approve function
+        var parameters = new Parameter[] {
+            new("address", "guy"),
+            new("uint256", "wad")
+        };
+
+        var functionCallEncoder = new FunctionCallEncoder();
+        var sha3Signature = new Sha3Keccack().CalculateHash("approve(address,uint256)");
+
+        // Encode the parameters
+        var encodedParameters = functionCallEncoder
+            .EncodeParameters(parameters, toAddress, amount)
+            .ToHex();
+
+        // Combine signature and parameters
+        var data = "0x" + sha3Signature[..8] + encodedParameters;
+
+        // Create transaction
+        var ethSendTransaction = new EthSendTransaction(new Transaction
+        {
+            From = myAddress,
+            To = contractAddress,
+            Value = "0",
+            Data = data
+        });
+
+        try
+        {
+            var result = await WalletConnect.Instance.RequestAsync<EthSendTransaction, string>(ethSendTransaction);
+            Debug.Log($"Transaction success! TxHash: {result}", this);
+        }
+        catch (Exception e)
+        {
+            Debug.LogError(e, this);
+        }
+    }
+
+    public class Transaction
+    {
+        [JsonProperty("from")] public string From { get; set; }
+
+        [JsonProperty("to")] public string To { get; set; }
+
+        [JsonProperty("gas", NullValueHandling = NullValueHandling.Ignore)]
+        public string Gas { get; set; }
+
+        [JsonProperty("gasPrice", NullValueHandling = NullValueHandling.Ignore)]
+        public string GasPrice { get; set; }
+
+        [JsonProperty("value")] public string Value { get; set; }
+
+        [JsonProperty("data", NullValueHandling = NullValueHandling.Ignore)]
+        public string Data { get; set; } = "0x";
+    }
+
+    [RpcMethod("eth_sendTransaction"), RpcRequestOptions(Clock.ONE_MINUTE, 99997)]
+    public class EthSendTransaction : List<Transaction>
+    {
+        public EthSendTransaction(params Transaction[] transactions) : base(transactions)
+        {
+        }
+
+        [Preserve]
+        public EthSendTransaction()
+        {
+        }
+    }
+    ```
+
+    Please refer to [Nethereum](https://nethereum.com/) documentation for more details. Nethereum provides tools to simplify encoding and decoding.
+    These tools hadn't been used in the example above to better illustrate the process.
+
+</TabItem>
+
+</Tabs>
+
+#### Subscribe to session events
 
 ```csharp
-public async Task ContractTransaction()
-{
-    var session = WalletConnect.Instance.ActiveSession;
-
-    // Because one session can have multiple namespaces, we need to select one.
-    // In most cases, especially in games, dapp will use only one namespace.
-    var @namespace = session.Namespaces.First();
-    var myAddress = session.CurrentAddress(@namespace.Key).Address;
-
-    // Define contract and function details
-    var contractAddress = "0x4200000000000000000000000000000000000006";
-    var toAddress = myAddress; // Use sender's address for the sake of example
-    var amount = new BigInteger(12345);
-
-    // Define the parameters for the approve function
-    var parameters = new Parameter[] {
-        new("address", "guy"),
-        new("uint256", "wad")
-    };
-
-    var functionCallEncoder = new FunctionCallEncoder();
-    var sha3Signature = new Sha3Keccack().CalculateHash("approve(address,uint256)");
-
-    // Encode the parameters
-    var encodedParameters = functionCallEncoder
-        .EncodeParameters(parameters, toAddress, amount)
-        .ToHex();
-
-    // Combine signature and parameters
-    var data = "0x" + sha3Signature[..8] + encodedParameters;
-
-    // Create transaction
-    var ethSendTransaction = new EthSendTransaction(new Transaction
-    {
-        From = myAddress,
-        To = contractAddress,
-        Value = "0",
-        Data = data
-    });
-
-    try
-    {
-        var result = await WalletConnect.Instance.RequestAsync<EthSendTransaction, string>(ethSendTransaction);
-        Debug.Log($"Transaction success! TxHash: {result}", this);
-    }
-    catch (Exception e)
-    {
-        Debug.LogError(e, this);
-    }
-}
-
-public class Transaction
-{
-    [JsonProperty("from")] public string From { get; set; }
-
-    [JsonProperty("to")] public string To { get; set; }
-
-    [JsonProperty("gas", NullValueHandling = NullValueHandling.Ignore)]
-    public string Gas { get; set; }
-
-    [JsonProperty("gasPrice", NullValueHandling = NullValueHandling.Ignore)]
-    public string GasPrice { get; set; }
-
-    [JsonProperty("value")] public string Value { get; set; }
-
-    [JsonProperty("data", NullValueHandling = NullValueHandling.Ignore)]
-    public string Data { get; set; } = "0x";
-}
-
-[RpcMethod("eth_sendTransaction"), RpcRequestOptions(Clock.ONE_MINUTE, 99997)]
-public class EthSendTransaction : List<Transaction>
-{
-    public EthSendTransaction(params Transaction[] transactions) : base(transactions)
-    {
-    }
-
-    [Preserve]
-    public EthSendTransaction()
-    {
-    }
-}
+var signClient = WalletConnect.Instance.SignClient;
+signClient.SubscribeToSessionEvent("chainChanged", OnChainChanged);
 ```
-
-Please refer to [Nethereum](https://nethereum.com/) documentation for more details. Nethereum provides tools to simplify encoding and decoding.
-These tools hadn't been used in the example above to better illustrate the process.
 
 </PlatformTabItem>
 </PlatformTabs>
