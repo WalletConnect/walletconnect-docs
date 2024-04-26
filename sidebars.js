@@ -109,6 +109,7 @@ module.exports = {
                 'web3modal/react-native/options',
                 'web3modal/react-native/hooks',
                 'web3modal/react-native/components',
+                'web3modal/react-native/email',
                 'web3modal/react-native/resources'
               ]
             },
