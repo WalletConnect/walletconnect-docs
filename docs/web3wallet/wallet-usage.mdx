@@ -589,9 +589,9 @@ also construct a `Namespaces` from a `RequiredNamespaces`, which auto-populates 
 #### RequiredNamespaces
 
 ```csharp
-sdk.On<SessionProposalEvent>(EngineEvents.SessionProposal, async (sender, @event) =>
+sdk.SessionProposed += async (sender, @event) =>
 {
-    var proposal = @event.EventData.Proposal;
+    var proposal = @event.Proposal;
     var requiredNamespaces = proposal.RequiredNamespaces;
     var approvedNamespaces = new Namespaces(requiredNamespaces);
     approvedNamespaces["eip155"].WithAccount("eip155:1:0xab16a96d359ec26a11e2c2b3d8f8b8942d5bfcdb");
@@ -888,9 +888,9 @@ The wallet can then approve the proposal by constructing an approved `Namespaces
 specified under `proposal.OptionalNamespaces`
 
 ```csharp
-sdk.On<SessionProposalEvent>(EngineEvents.SessionProposal, async (sender, @event) =>
+sdk.SessionProposed += async (sender, @event) =>
 {
-    var proposal = @event.EventData.Proposal;
+    var proposal = @event.Proposal;
     var requiredNamespaces = proposal.RequiredNamespaces;
     var approvedNamespaces = new Namespaces(requiredNamespaces);
     approvedNamespaces["eip155"].WithAccount("eip155:1:0xab16a96d359ec26a11e2c2b3d8f8b8942d5bfcdb");
@@ -904,9 +904,9 @@ You may also just provide the addresses that will connect, and the SDK will crea
 `Namespaces` for you. This function **will not approve optional namespaces**
 
 ```csharp
-sdk.On<SessionProposalEvent>(EngineEvents.SessionProposal, async (sender, @event) =>
+sdk.SessionProposed += async (sender, @event) =>
 {
-    var proposal = @event.EventData.Proposal;
+    var proposal = @event.Proposal;
 
     var sessionData = await sdk.ApproveSession(proposal, new[] { "eip155:1:0xab16a96d359ec26a11e2c2b3d8f8b8942d5bfcdb" });
     var sessionTopic = sessionData.Topic;
@@ -916,9 +916,9 @@ sdk.On<SessionProposalEvent>(EngineEvents.SessionProposal, async (sender, @event
 or
 
 ```csharp
-sdk.On<SessionProposalEvent>(EngineEvents.SessionProposal, async (sender, @event) =>
+sdk.SessionProposed += async (sender, @event) =>
 {
-    var proposal = @event.EventData.Proposal;
+    var proposal = @event.Proposal;
 
     var sessionData = await sdk.ApproveSession(proposal, "eip155:1:0xab16a96d359ec26a11e2c2b3d8f8b8942d5bfcdb");
     var sessionTopic = sessionData.Topic;
@@ -1031,9 +1031,9 @@ await web3wallet.core.pairing.pair({ wcuri })
 The wallet can reject the proposal using the following:
 
 ```csharp
-sdk.On<SessionProposalEvent>(EngineEvents.SessionProposal, async (sender, @event) =>
+sdk.SessionProposed += async (sender, @event) =>
 {
-    var proposal = @event.EventData.Proposal;
+    var proposal = @event.Proposal;
     await sdk.Reject(proposal, "User rejected");
 });
 ```

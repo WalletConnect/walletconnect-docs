@@ -1,0 +1,109 @@
+import Button from "../../components/button";
+
+# Usage
+
+:::caution
+
+The **Web3Modal SDK for Unity** is currently in **Alpha**. Breaking changes may occur in future versions.
+
+:::
+
+After you have [installed](/web3modal/unity/about#install) and [configured](/web3modal/unity/about#configure) Web3Modal,
+you can start using it to interact with the wallet provider and blockchain.
+
+Web3Modal comes with the [Nethereum](https://nethereum.com/) integration out of the box.
+You can use it to interact with the EVM chains, smart contracts, convert between different units, etc.
+
+An instance of Nethereum's `Web3` class is available in the `Web3Modal` at `Web3Modal.Web3`.
+It's already preconfigured with RPC URL and interceptor that will route the requests between the wallet provider and RPC node.
+
+
+:::info Warning
+
+Under some circumstances, Web3Modal may create a new instance of `Web3` class with a different configuration.
+Therefore, refrain from caching a reference to the `Web3` instance and always use `Web3Modal.Web3` to access it.
+
+```csharp
+// ❌ Don't do this
+var web3 = Web3Modal.Web3;
+await web3.Eth.Blocks.GetBlockNumber.SendRequestAsync();
+
+// ✅ Instead, always use
+await Web3Modal.Web3.Eth.Blocks.GetBlockNumber.SendRequestAsync();
+```
+:::
+
+<Button
+    name="Learn More About Nethereum"
+    url="https://docs.nethereum.com/en/latest/getting-started/"
+/>
+
+## Sending Ether
+
+To send ether, you can use the `SendTransactionAsync` method of the `Web3.Eth` class.
+
+```csharp
+const string toAddress = "0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045";
+await Web3Modal.Web3.Eth
+    .GetEtherTransferService()
+    .TransferEtherAndWaitForReceiptAsync(toAddress, 0.00001m); // 0.00001 ETH
+```
+
+This type of transaction uses the default amount of Gas 21000. Gas price is determined by the wallet provider.
+It's possible to specify the gas price and gas limit manually. Refer to the [Nethereum documentation](https://docs.nethereum.com/en/latest/nethereum-transferring-ether/#sending-a-transaction) for more information.
+
+## Reading Blockchain State
+
+#### Get Ether Balance
+
+```csharp
+var account = Web3Modal.GetAccount();
+var balance = await Web3Modal.Web3.Eth.GetBalance.SendRequestAsync(account.Address);
+
+Debug.Log($"Balance: {Web3.Convert.FromWei(balance.Value)} ETH");
+```
+
+## Smart Contract Interaction
+
+It's possible to interact with smart contracts using `Web3Modal.Web3.Eth`.
+It comes with a set of popular contract services like `ERC20`, `ERC721`, etc. You can use them to interact with the smart contracts without any additional setup.
+
+### Get ERC20 Token Balance
+
+To get the balance of an ERC20 token, you need to know the contract address and the owner address.
+This operation doesn't involve state change on the blockchain, so it's a read-only action that doesn't require a transaction.
+
+```csharp
+const string contractAddress = "0x1f9840a85d5aF5bf1D1762F925BDADdC4201F984";
+const string ownerAddress = "0x3D30B1aB88D487B0F3061F40De76845Bec3F1e94";
+
+var contractService = Web3Modal.Web3.Eth.ERC20.GetContractService(contractAddress);
+
+var tokenBalance = await contractService.BalanceOfQueryAsync(ownerAddress);
+var tokenDecimal = await contractService.DecimalsQueryAsync();
+
+var finalBalance = tokenBalance / BigInteger.Pow(10, tokenDecimal);
+```
+###
+
+### Send ERC20 Token
+
+To send an ERC20 token, you need to know the contract address, recipient address, and the amount of tokens to send.
+This operation requires a transaction and gas fees because it changes the state of the blockchain. User will need to confirm the transaction in the wallet.
+
+```csharp
+const string contractAddress = "0x1f9840a85d5aF5bf1D1762F925BDADdC4201F984";
+const string recipientAddress = "0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045";
+const BigInteger amount = 1;
+
+var contractService = Web3Modal.Web3.Eth.ERC20.GetContractService(contractAddress);
+
+await contractService.TransferRequestAsync(recipientAddress, amount);
+```
+
+### Interact with Custom Smart Contracts
+
+Nethereum allows to deploy and interact with custom smart contracts as well.
+Refer to the [Nethereum documentation](https://docs.nethereum.com/en/latest/nethereum-smartcontrats-gettingstarted/) for more information.
+
+
