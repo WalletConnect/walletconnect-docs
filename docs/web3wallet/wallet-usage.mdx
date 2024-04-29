@@ -606,6 +606,51 @@ dApp will provide a `RequiredNamespaces` when proposing the session. The `Requir
 
 </PlatformTabs>
 
+### EVM methods & events
+
+In @walletconnect/ethereum-provider, (our abstracted EVM SDK for apps) we support by default the following Ethereum methods and events:
+
+
+```ts
+{
+  //...
+  methods: [
+    "eth_accounts",
+    "eth_requestAccounts",
+    "eth_sendRawTransaction",
+    "eth_sign",
+    "eth_signTransaction",
+    "eth_signTypedData",
+    "eth_signTypedData_v3",
+    "eth_signTypedData_v4",
+    "eth_sendTransaction",
+    "personal_sign",
+    "wallet_switchEthereumChain",
+    "wallet_addEthereumChain",
+    "wallet_getPermissions",
+    "wallet_requestPermissions",
+    "wallet_registerOnboarding",
+    "wallet_watchAsset",
+    "wallet_scanQRCode",
+    "wallet_sendCalls",
+    "wallet_getCallsStatus",
+    "wallet_showCallsStatus",
+    "wallet_getCapabilities",
+  ],
+  events: [
+    "chainChanged",
+    "accountsChanged",
+    "message",
+    "disconnect",
+    "connect",
+  ]
+}
+```
+
+- **EIP-5792 - Wallet Call API**
+
+WalletConnect supports [EIP-5792](https://eips.ethereum.org/EIPS/eip-5792#atomicbatch-capability) methods allowing
+
 ### Session Approval
 
 <PlatformTabs
