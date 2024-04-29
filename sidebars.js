@@ -59,11 +59,7 @@ module.exports = {
                 'web3modal/nextjs/components',
                 'web3modal/nextjs/email',
                 'web3modal/nextjs/onramp',
-                {
-                  type: 'category',
-                  label: 'SIWE',
-                  items: ['web3modal/nextjs/siwe/about', 'web3modal/nextjs/siwe/next-auth']
-                },
+                'web3modal/nextjs/siwe',
                 'web3modal/nextjs/theming',
                 'web3modal/nextjs/resources'
               ]
