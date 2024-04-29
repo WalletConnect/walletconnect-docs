@@ -1,32 +1,114 @@
-# NextAuth
+---
+title: SIWE
+---
+import Button from '../../components/button'
 
-## About NextAuth
+# Sign In With Ethereum
+
+Web3Modal SDK provides a simple solution for integrating with "Sign In With Ethereum" (SIWE), a new form of authentication that enables users to control their digital identity with their Ethereum account.
+SIWE is a standard also known as [EIP-4361](https://docs.login.xyz/general-information/siwe-overview/eip-4361).
+
+## NextAuth
 
 [NextAuth](https://next-auth.js.org/) is a complete open-source authentication solution for Next.js applications.
+It is designed from the ground up to support Next.js and Serverless. We can use NextAuth with SIWE to handle users authentication and sessions.
 
-It is designed from the ground up to support Next.js and Serverless.
+## Installation
 
-## Requirements
-
-## Install the Web3Modal SIWE package.
+Install the Web3Modal SIWE package, additionally we also recommend installing [siwe](https://docs.login.xyz/) and [next-auth](https://next-auth.js.org/).
 
 ```bash npm2yarn
 npm i @web3modal/siwe siwe next-auth
 ```
 
-## Set up your API route
+## Configure your SIWE Client
 
-Add `NEXTAUTH_SECRET` as an environment variable, it will be used to encrypt and decrypt user sessions.
-
-Create your API route `api/auth/[...nextauth].ts` and paste the following code into it.
+Let's create a file to instantiate our SIWE configuration. For this example we will use `config/siwe.ts`
 
 ```ts
-import type { SIWESession } from '@web3modal/siwe'
+import { getCsrfToken, signIn, signOut, getSession } from 'next-auth/react'
+
+import { SiweMessage } from 'siwe'
+
+import type { SIWEVerifyMessageArgs, SIWECreateMessageArgs } from '@web3modal/siwe'
+import { createSIWEConfig } from '@web3modal/siwe'
+
+export const siweConfig = createSIWEConfig({
+  createMessage: ({ nonce, address, chainId }: SIWECreateMessageArgs) =>
+    new SiweMessage({
+      version: '1',
+      domain: window.location.host,
+      uri: window.location.origin,
+      address,
+      chainId,
+      nonce,
+      // Human-readable ASCII assertion that the user will sign, and it must not contain `\n`.
+      statement: 'Sign in With Ethereum.'
+    }).prepareMessage(),
+  getNonce: async () => {
+    const nonce = await getCsrfToken()
+    if (!nonce) {
+      throw new Error('Failed to get nonce!')
+    }
+
+    return nonce
+  },
+  getSession,
+  verifyMessage: async ({ message, signature }: SIWEVerifyMessageArgs) => {
+    try {
+      const success = await signIn('credentials', {
+        message,
+        redirect: false,
+        signature,
+        callbackUrl: '/protected'
+      })
+
+      return Boolean(success?.ok)
+    } catch (error) {
+      return false
+    }
+  },
+  signOut: async () => {
+    try {
+      await signOut({
+        redirect: false
+      })
+
+      return true
+    } catch (error) {
+      return false
+    }
+  }
+})
+```
+
+## Initialize Web3Modal with your `siweConfig`.
+
+```ts
+import { siweConfig } from '@/config/siwe'
+
+createWeb3Modal({
+  siweConfig,
+  wagmiConfig, // or ethersConfig
+  projectId,
+  chains
+})
+```
+
+## Set up your API route
+
+Add `NEXTAUTH_SECRET` as an environment variable, it will be used to encrypt and decrypt user sessions. [Learn more.](https://next-auth.js.org/configuration/options#nextauth_secret)
+
+Create your API route at `api/auth/[...nextauth]/route.ts`
+
+```ts
 import { NextAuthOptions } from 'next-auth'
 import credentialsProvider from 'next-auth/providers/credentials'
 import { getCsrfToken } from 'next-auth/react'
-import { SiweMessage } from 'siwe'
 import NextAuth from 'next-auth/next'
+
+import type { SIWESession } from '@web3modal/siwe'
+import { SiweMessage } from 'siwe'
 
 declare module 'next-auth' {
   interface Session extends SIWESession {
@@ -34,6 +116,7 @@ declare module 'next-auth' {
     chainId: number
   }
 }
+
 const nextAuthSecret = process.env.NEXTAUTH_SECRET
 if (!nextAuthSecret) {
   throw new Error('NEXTAUTH_SECRET is not set')
@@ -44,7 +127,7 @@ if (!projectId) {
   throw new Error('NEXT_PUBLIC_PROJECT_ID is not set')
 }
 
-export const authOptions: NextAuthOptions = {
+const authOptions: NextAuthOptions = {
   // https://next-auth.js.org/configuration/providers/oauth
   secret: nextAuthSecret,
   providers: [
@@ -91,7 +174,6 @@ export const authOptions: NextAuthOptions = {
   },
   callbacks: {
     session({ session, token }) {
-      console.log('session', session)
       if (!token.sub) {
         return session
       }
@@ -111,103 +193,7 @@ const handler = NextAuth(authOptions)
 export { handler as GET, handler as POST }
 ```
 
-## Configure your SIWE Client
-
-```ts
-import { SiweMessage } from 'siwe'
-import { createSIWEConfig } from '@web3modal/siwe'
-import { getCsrfToken, signIn, signOut, getSession } from 'next-auth/react'
-import type { SIWECreateMessageArgs, SIWESession, SIWEVerifyMessageArgs } from '@web3modal/siwe'
-
-const siweConfig = createSIWEConfig({
-  createMessage: ({ nonce, address, chainId }: SIWECreateMessageArgs) =>
-    new SiweMessage({
-      version: '1',
-      domain: window.location.host,
-      uri: window.location.origin,
-      address,
-      chainId,
-      nonce,
-      // Human-readable ASCII assertion that the user will sign, and it must not contain `\n`.
-      statement: 'Sign in With Ethereum.'
-    }).prepareMessage(),
-  getNonce: async () => {
-    const nonce = await getCsrfToken()
-    if (!nonce) {
-      throw new Error('Failed to get nonce!')
-    }
-
-    return nonce
-  },
-  getSession: async () => {
-    const session = await getSession()
-    if (!session) {
-      throw new Error('Failed to get session!')
-    }
-
-    const { address, chainId } = session as unknown as SIWESession
-
-    return { address, chainId }
-  },
-  verifyMessage: async ({ message, signature }: SIWEVerifyMessageArgs) => {
-    try {
-      const success = await signIn('credentials', {
-        message,
-        redirect: false,
-        signature,
-        callbackUrl: '/protected'
-      })
-
-      return Boolean(success?.ok)
-    } catch (error) {
-      return false
-    }
-  },
-  signOut: async () => {
-    try {
-      await signOut({
-        redirect: false
-      })
-
-      return true
-    } catch (error) {
-      return false
-    }
-  }
-})
-```
-
-## Initialize Web3Modal with your `siweConfig`.
-
-```js
-createWeb3Modal({
-  siweConfig,
-  // Refer to https://docs.walletconnect.com/web3modal/react/about for the other options.
-  wagmiConfig, // or ethersConfig
-  projectId,
-  chains
-})
-```
-
-## Add the SessionProvider in your `_app.tsx`
-
-```tsx
-import { SessionProvider } from 'next-auth/react'
-// Use of the <SessionProvider> is mandatory to allow components that call
-// `useSession()` anywhere in your application to access the `session` object.
-export default function App({
-  Component,
-  pageProps
-}: AppProps<{
-  session: Session
-}>) {
-  return (
-    <SessionProvider session={pageProps.session} refetchInterval={0}>
-      <Component {...pageProps} />
-    </SessionProvider>
-  )
-}
-```
+<Button name="Learn more about NextAuth" url="https://next-auth.js.org/" />
 
 ### SIWE Config reference
 
