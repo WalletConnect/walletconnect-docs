@@ -238,6 +238,7 @@ module.exports = {
             'web3wallet/namespaces',
             'web3wallet/mobileLinking',
             'web3wallet/verify',
+            { type: 'doc', label: 'Modern Wallets (EIP-5792)', id: 'web3wallet/eip5792' },
             'web3wallet/push-notifications',
             {
               type: 'category',
