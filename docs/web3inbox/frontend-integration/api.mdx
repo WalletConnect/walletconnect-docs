@@ -745,10 +745,11 @@ interface NotifyApp {
   name: string
   description: string
   url: string
+  appDomain: string
   icon: string
-  isVerified: boolean
-  isFeatured: boolean
-  isComingSoon: boolean
+  isVerified: boolean // Is this app verified for its domain
+  isFeatured: boolean // Is this app flagged as featured 
+  isComingSoon: boolean // Is this app coming soon or already available 
   subscribe: () => Promise<void>
 }
 ```
