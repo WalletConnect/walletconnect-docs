@@ -1,0 +1,38 @@
+# Events
+
+### List of events you can subscribe to in order to get connection updates
+
+:::info note
+These methods are only available when connecting through WalletConnect protocol.
+Since Coinbase Wallet uses it own connection channel, these methods are not available when user connects with it.
+:::
+
+```dart
+// A connection is settled
+_w3mService.onModalConnect.subscribe((ModalConnect? event) {});
+```
+
+```dart
+// A connection is deleted (disconnected)
+_w3mService.onModalDisconnect.subscribe((ModalDisconnect? event) {});
+```
+
+```dart
+// An error occurs during connection
+_w3mService.onModalError.subscribe((ModalError? event) {});
+```
+
+```dart
+// A session expires
+_w3mService.onSessionExpireEvent.subscribe((SessionExpire? event) {});
+```
+
+```dart
+// A session data is updated
+_w3mService.onSessionUpdateEvent.subscribe((SessionUpdate? event) {});
+```
+
+```dart
+// A request event is happening
+_w3mService.onSessionEventEvent.subscribe((SessionEvent? event) {});
+```

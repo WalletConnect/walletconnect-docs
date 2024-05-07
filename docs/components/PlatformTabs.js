@@ -55,6 +55,10 @@ const PLATFORM_MAP = [
     label: 'Wagmi'
   },
   {
+    value: 'wagmi1',
+    label: 'Wagmi v1'
+  },
+  {
     value: 'other',
     label: 'Other'
   },
@@ -63,12 +67,12 @@ const PLATFORM_MAP = [
     label: 'Viem'
   },
   {
-    value: 'ethers5',
-    label: 'Ethers v5'
-  },
-  {
     value: 'ethers',
     label: 'Ethers'
+  },
+  {
+    value: 'ethers5',
+    label: 'Ethers v5'
   },
   {
     value: 'web3js',

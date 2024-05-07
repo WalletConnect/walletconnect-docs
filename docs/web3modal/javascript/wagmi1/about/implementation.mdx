@@ -1,0 +1,103 @@
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
+
+You can start Web3Modal configuration using either **default** or **custom** mode.
+
+Default mode will implement WalletConnect, Browser Wallets (injected) and Coinbase options in addition to [Wagmi's public provider](https://1.x.wagmi.sh/react/providers/public) and [WalletConnect's provider](../../../../cloud/blockchain-api.md).
+
+<Tabs>
+<TabItem value="default" label="Default">
+
+In your `main.ts` file set up the following configuration.
+
+```ts
+import { createWeb3Modal, defaultWagmiConfig } from '@web3modal/wagmi'
+
+import { mainnet, arbitrum } from 'viem/chains'
+
+// 1. Define constants
+const projectId = 'YOUR_PROJECT_ID'
+
+// 2. Create wagmiConfig
+const metadata = {
+  name: 'Web3Modal',
+  description: 'Web3Modal Example',
+  url: 'https://web3modal.com',
+  icons: ['https://avatars.githubusercontent.com/u/37784886']
+}
+
+const chains = [mainnet, arbitrum]
+const config = defaultWagmiConfig({ chains, projectId, metadata })
+
+const modal = createWeb3Modal({
+  wagmiConfig: config,
+  projectId,
+  enableAnalytics: true // Optional - defaults to your Cloud configuration
+})
+```
+
+</TabItem>
+<TabItem value="custom" label="Custom">
+
+In your `main.ts` file set up the following configuration.
+
+```ts
+import { createWeb3Modal, walletConnectProvider, EIP6963Connector } from '@web3modal/wagmi'
+
+import { configureChains, createConfig } from '@wagmi/core'
+import { mainnet } from 'viem/chains'
+import { publicProvider } from '@wagmi/core/providers/public'
+import { InjectedConnector } from '@wagmi/core'
+import { CoinbaseWalletConnector } from '@wagmi/core/connectors/coinbaseWallet'
+import { WalletConnectConnector } from '@wagmi/core/connectors/walletConnect'
+
+// 1. Define constants
+const projectId = 'YOUR_PROJECT_ID'
+
+// 2. Configure wagmi client
+const { chains, publicClient } = configureChains(
+  [mainnet],
+  [walletConnectProvider({ projectId }), publicProvider()]
+)
+
+const metadata = {
+  name: 'Web3Modal',
+  description: 'Web3Modal Example',
+  url: 'https://web3modal.com',
+  icons: ['https://avatars.githubusercontent.com/u/37784886']
+}
+
+const config = createConfig({
+  autoConnect: true,
+  connectors: [
+    new WalletConnectConnector({ chains, options: { projectId, showQrModal: false, metadata } }),
+    new EIP6963Connector({ chains }),
+    new InjectedConnector({ chains, options: { shimDisconnect: true } }),
+    new CoinbaseWalletConnector({ chains, options: { appName: metadata.name } })
+  ],
+  publicClient
+})
+
+const modal = createWeb3Modal({
+  wagmiConfig: config,
+  projectId,
+  enableAnalytics: true // Optional - defaults to your Cloud configuration
+})
+```
+
+:::note
+The provided code utilizes [Wagmi](https://1.x.wagmi.sh/), a JavaScript library for wallet and provider connections, along with the [Web3Modal](https://web3modal.com/) library to create a wallet connection modal. It features various connectors:
+
+1. **WalletConnectConnector**: Enables cross-device wallet connections using the WalletConnect protocol, adhering to [EIP-1193](https://eips.ethereum.org/EIPS/eip-1193).
+
+2. **EIP6963Connector**: Connects to wallets supporting the [EIP-6963](https://eips.ethereum.org/EIPS/eip-6963) standard, an Ethereum wallet extension specification.
+
+3. **InjectedConnector**: Interfaces with browser wallet injections, e.g., MetaMask.
+
+4. **CoinbaseWalletConnector**: Specifically for Coinbase Wallet.
+
+Additionally, there's a `publicProvider` for reading blockchain data through public nodes like Infura. The `walletConnectProvider`, which operates in a manner akin to the public provider but employs the [Blockchain API](https://docs.walletconnect.com/cloud/blockchain-api), is additionally accessible. The `WagmiConfig` component shares `wagmiConfig` with child components.
+:::
+
+</TabItem>
+</Tabs>

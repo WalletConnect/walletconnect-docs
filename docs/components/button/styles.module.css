@@ -1,4 +1,4 @@
-.container{
+.container {
   height: 40px;
   width: fit-content;
   border: 1px solid var(--ifm-border-color);
@@ -12,7 +12,7 @@
   border-color: var(--ifm-color-primary);
 }
 
-.container a{
+.container a {
   width: 100%;
   height: 100%;
   display: flex;
@@ -23,7 +23,7 @@
   border-bottom: none;
 }
 
-.container a svg{
+.container a svg {
   width: 1.25rem;
   height: 1.25rem;
   transition: transform 0.2s ease-in-out;

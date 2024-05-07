@@ -2,7 +2,7 @@ import React from 'react'
 import wcGlassImage from '../../static/assets/wc-logo-glass-full.webp'
 import Link from '@docusaurus/Link'
 
-export const CloudBanner = ({ title, description, href }) => {
+export const CloudBanner = ({ title, description, href, image = wcGlassImage }) => {
   return (
     <div className="cloud__wrapper cloud__wrapper--special">
       <div className="cloud__text-container">
@@ -27,14 +27,25 @@ export const CloudBanner = ({ title, description, href }) => {
           />
         </svg>
       </Link>
-      <img
-        style={{
-          transform: 'scale(1.5) scaleX(-1)'
-        }}
-        className="cloud__image"
-        src={wcGlassImage}
-        alt="cloud illustration"
-      />
+      {image === wcGlassImage ? (
+        <img
+          style={{
+            transform: 'scale(1.5) scaleX(-1)'
+          }}
+          className="cloud__image"
+          src={image}
+          alt="cloud illustration"
+        />
+      ) : (
+        <img
+          className="cloud__image"
+          src={image}
+          alt="cloud illustration"
+          style={{
+            transform: 'scale(0.75)'
+          }}
+        />
+      )}
     </div>
   )
 }

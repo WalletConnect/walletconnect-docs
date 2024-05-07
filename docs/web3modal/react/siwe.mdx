@@ -1,0 +1,37 @@
+---
+title: SIWE
+---
+
+import SiweCode from '../shared/siwe/code.mdx'
+import SiweParams from '../shared/siwe/parameters.mdx'
+import YoutubeEmbed from '../../components/YoutubeEmbed'
+
+# Sign In With Ethereum
+
+Web3Modal SDK provides a simple solution for integrating with "Sign In With Ethereum" (SIWE), a new form of authentication that enables users to control their digital identity with their Ethereum account.
+SIWE is a standard also known as [EIP-4361](https://docs.login.xyz/general-information/siwe-overview/eip-4361).
+
+## Installation
+
+Install the Web3Modal SIWE package, additionally we also recommend installing [siwe](https://docs.login.xyz/) which will abstract a lot of the required logic.
+
+```bash npm2yarn
+npm i @web3modal/siwe siwe
+```
+
+## Configure your SIWE Client
+
+<SiweCode />
+
+## Initialize Web3Modal with your `siweConfig`
+
+```ts
+createWeb3Modal({
+  //..
+  siweConfig
+})
+```
+
+## SIWE Config Parameters
+
+<SiweParams />

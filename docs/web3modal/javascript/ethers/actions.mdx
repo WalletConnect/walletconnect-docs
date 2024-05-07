@@ -8,10 +8,24 @@ You can use the following methods to get data and subscribe to changes:
 const address = modal.getAddress()
 ```
 
+### getError
+
+```ts
+const error = modal.getError()
+```
+
 ### getChainId
 
 ```ts
 const chainId = modal.getChainId()
+```
+
+### switchNetwork
+
+```ts
+const chainId = 137
+
+modal.switchNetwork(chainId)
 ```
 
 ### getIsConnected
@@ -30,18 +44,14 @@ const walletProvider = modal.getWalletProvider()
 
 ### getWalletProviderType
 
-The wallet or protocol of the walletProvider.
-
 ```ts
 const walletProviderType = modal.getWalletProviderType()
 ```
 
 ### subscribeProvider
 
-subscribe to chainId, address, provider changes.
-
 ```ts
-function handleChange({ provider, providerType, address, chainId, isConnected }){
+function handleChange({ provider, providerType, address, error, chainId, isConnected }) {
   //...
 }
 

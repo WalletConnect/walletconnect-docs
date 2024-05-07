@@ -17,7 +17,7 @@ activeOptions={["web","ios","android","csharp"]}>
 <PlatformTabItem value="web">
 
 :::info
-For an example implementation, please refer to our [`react-wallet-auth` example](https://github.com/WalletConnect/web-examples/tree/main/wallets/react-wallet-auth).
+For an example implementation, please refer to our [`react-wallet-auth` example](https://github.com/WalletConnect/web-examples/tree/main/advanced/wallets/react-wallet-auth).
 :::
 
 **1. Initialize your WalletConnect AuthClient, using [your Project ID](../../cloud/relay.md).**
@@ -382,17 +382,17 @@ async void OnAuthRequested(object sender, AuthRequest request)
     // Sign auth message using NEthereum
     var signature = await wallet.GetAccount(walletAddress).AccountSigningService.PersonalSign.SendRequestAsync(Encoding.UTF8.GetBytes(message));
 
-    await walletClient.Respond(new Cacao() 
-    { 
-        Id = request.Id, 
-        Signature = new Cacao.CacaoSignature.EIP191CacaoSignature(signature) 
+    await walletClient.Respond(new Cacao()
+    {
+        Id = request.Id,
+        Signature = new Cacao.CacaoSignature.EIP191CacaoSignature(signature)
     }, iss);
 }
 
 walletClient.AuthRequested += OnAuthRequested;
 ```
 
-You do not need to respond to the authentication request inside the callback. You may respond to the request at anytime using `walletClient.Respond`, however *you must know the request id* of the request you are responding to.
+You do not need to respond to the authentication request inside the callback. You may respond to the request at anytime using `walletClient.Respond`, however _you must know the request id_ of the request you are responding to.
 </PlatformTabItem>
 
 </PlatformTabs>

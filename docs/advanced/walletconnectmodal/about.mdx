@@ -144,7 +144,7 @@ npm install @walletconnect/modal-react-native
 Additionally add these extra packages to help with async storage, polyfills, modals and SVG's.
 
 ```bash npm2yarn
-npm install @react-native-async-storage/async-storage react-native-get-random-values react-native-modal react-native-svg @react-native-community/netinfo
+npm install @react-native-async-storage/async-storage react-native-get-random-values react-native-modal react-native-svg @react-native-community/netinfo @walletconnect/react-native-compat
 ```
 
 On iOS, use CocoaPods to add the native modules to your project:
@@ -165,6 +165,7 @@ To enable WalletConnectModal to detect wallets installed on the device, you need
 4. Refer to our [Info.plist example file](https://github.com/WalletConnect/react-native-examples/blob/main/dapps/ModalUProvider/ios/ModalUProvider/Info.plist) for a detailed illustration.
 
 Example:
+
 ```xml
 <key>LSApplicationQueriesSchemes</key>
 <array>
@@ -185,6 +186,7 @@ Example:
 4. Refer to our [AndroidManifest.xml example file](https://github.com/WalletConnect/react-native-examples/blob/main/dapps/ModalUProvider/android/app/src/main/AndroidManifest.xml) for detailed guidance.
 
 Example:
+
 ```xml
 <queries>
   <package android:name="io.metamask"/>
@@ -210,7 +212,7 @@ npx expo install @walletconnect/modal-react-native
 Additionally add these extra packages to help with async storage, polyfills, modals and SVG's.
 
 ```
-npx expo install @react-native-async-storage/async-storage react-native-get-random-values react-native-modal react-native-svg @react-native-community/netinfo
+npx expo install @react-native-async-storage/async-storage react-native-get-random-values react-native-modal react-native-svg @react-native-community/netinfo @walletconnect/react-native-compat
 ```
 
 <details>
@@ -284,7 +286,7 @@ Your configuration should look like this:
           "trust",
           "safe",
           "rainbow",
-          "uniswap",
+          "uniswap"
           // Add other wallet schemes names here
         ]
       }
@@ -314,16 +316,10 @@ flutter pub add walletconnect_modal_flutter
 </PlatformTabItem>
 <PlatformTabItem value="unity">
 
-
-:::caution
-**The WalletConnectModal SDK is currently in Beta and is not production-ready**.
-
-It's public API, prefab structure, and associated documentation may still see significant and breaking changes.
-:::
-
 #### Prerequisites
-* Unity 2021.3 or above
-* IL2CPP code stripping level: Minimal (or lower)
+
+- Unity 2021.3 or above
+- IL2CPP code stripping level: Minimal (or lower)
 
 <Tabs>
 
@@ -334,47 +330,134 @@ To install packages via OpenUPM, you need to have [Node.js](https://nodejs.org/e
 ```bash
 openupm add com.walletconnect.modal
 ```
+
 </TabItem>
 
 <TabItem value="pm-openupm" label="Package Manager with OpenUPM">
 
 1. Open `Advanced Project Settings` from the gear ⚙ menu located at the top right of the Package Manager’s toolbar
 2. Add a new scoped registry with the following details:
-    - Name: `OpenUPM`
-    - URL: `https://package.openupm.com`
-    - Scope(s): `com.walletconnect`
+   - Name: `OpenUPM`
+   - URL: `https://package.openupm.com`
+   - Scope(s): `com.walletconnect`
 3. Press plus ➕ and then `Save` buttons
 4. In the Package Manager windows open the add ➕ menu from the toolbar
 5. Select `Add package by name...`
-6. Enter the npackage name:
-    - `com.walletconnect.modal`
+6. Enter the package name:
+   - `com.walletconnect.modal`
 7. Press `Add` button
 
 </TabItem>
 
 <TabItem value="pm-git-utl" label="Package Manager with Git URL">
 
-1. Open the add ➕  menu in the Package Manager’s toolbar
+1. Open the add ➕ menu in the Package Manager’s toolbar
 2. Select `Add package from git URL...`
 3. Enter the package URL. You will need to install 3 packages in the following order:
 
 **WalletConnectUnity Core**
+
 ```
 https://github.com/WalletConnect/WalletConnectUnity.git?path=Packages/com.walletconnect.core
 ```
+
 **WalletConnectUnity UI**
+
 ```
 https://github.com/WalletConnect/WalletConnectUnity.git?path=Packages/com.walletconnect.ui
 ```
 
 **WalletConnectUnity Modal**
+
 ```
 https://github.com/WalletConnect/WalletConnectUnity.git?path=Packages/com.walletconnect.modal
 ```
+
 4. Press `Add` button
 
 </TabItem>
 </Tabs>
+
+#### (Optional) Installed Wallet Detection
+
+To enable WalletConnect Modal to detect wallets installed on the device, you need to make specific changes to the native sides of the project.
+
+<Tabs>
+<TabItem value="unity-installed-wallets-android" label="Android">
+
+1. In Unity [override Android Manifest](https://docs.unity3d.com/Manual/overriding-android-manifest.html).
+2. Add your `<queries>...</queries>` schemes outside of `<application />` scope in the manifest file.
+3. Refer to [Android Specs](https://developer.android.com/guide/topics/manifest/queries-element) for more information.
+
+Example:
+
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <queries>
+        <package android:name="io.metamask"/>
+        <package android:name="com.wallet.crypto.trustapp"/>
+        <package android:name="io.gnosis.safe"/>
+        <package android:name="me.rainbow"/>
+        <!-- Add other wallet schemes names here -->
+    </queries>
+
+    <application>
+        ...
+    </application>
+</manifest>
+```
+
+More wallet package names can be found in [our sample AndroidManifest.xml](https://github.com/WalletConnect/WalletConnectUnity/blob/project/modal-sample/Assets/Plugins/Android/AndroidManifest.xml).
+
+</TabItem>
+<TabItem value="unity-installed-wallets-ios" label="iOS">
+
+Wallet detection may produce inaccurate results on iOS Simulator. It is recommended to test on a real device.
+
+1. Make an iOS build.
+2. In the generated Xcode project, find `Info.plist` file and open it with a external editor (i.e. not Xcode).
+3. Locate or create `<key>LSApplicationQueriesSchemes</key>` section.
+4. Add the desired wallet schemes as string entries within the `<array>`. These schemes represent the wallets you want to detect.
+
+Example:
+
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+    <dict>
+        ...
+
+        <key>LSApplicationQueriesSchemes</key>
+        <array>
+            <string>metamask</string>
+            <string>trust</string>
+            <string>safe</string>
+            <string>rainbow</string>
+            <string>uniswap</string>
+            <string>zerion</string>
+            <string>imtokenv2</string>
+            <string>spot</string>
+            <string>omni</string>
+            <string>dfw</string>
+            <string>tpoutside</string>
+            <string>robinhood-wallet</string>
+        </array>
+
+        ...
+    </dict>
+</plist>
+```
+
+</TabItem>
+</Tabs>
+
+Important Note: The WalletConnect SDK will only be able to detect the wallets that you explicitly list in your native files. Make sure to include all the relevant wallet schemes/packages you want to support.
+
+For additional wallet schemes and package names, you can explore our [Explorer API](../../cloud/explorer.md). This API offers an up-to-date list of wallet identifiers that you can integrate into your project for enhanced wallet detection.
+
 </PlatformTabItem>
 </PlatformTabs>
 

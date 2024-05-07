@@ -1,6 +1,5 @@
 # Migration from WCM
 
-
 <!--As you may know, **Web3Modal** is a better, more simply, modal to connect your wallet and if you are coming from **WalletConnectModal** you are wondering what are really the differences:-->
 
 If you are currently using WalletConnectModalFlutter, migrating to Web3Modal couldn't be easier!
@@ -8,7 +7,6 @@ If you are currently using WalletConnectModalFlutter, migrating to Web3Modal cou
 ## Imports
 
 Uninstall `walletconnect_modal_flutter` and install `web3modal_flutter`, then change imports:
-
 
 ```dart
 // WalletConnectModal (Remove the following)
@@ -23,7 +21,6 @@ import 'package:walletconnect_modal_flutter/walletconnect_modal_flutter.dart';
 import 'package:web3modal_flutter/web3modal_flutter.dart';
 // highlight-add-end
 ```
-
 
 ## Service instance
 
@@ -79,4 +76,3 @@ WalletConnectModalConnect(service: _w3mService),
 W3MConnectWalletButton(service: _w3mService),
 // highlight-add-end
 ```
-

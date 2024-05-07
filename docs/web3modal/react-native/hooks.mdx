@@ -1,5 +1,11 @@
 import Table from '../../components/Table'
 import Button from '../../components/button'
+import PlatformTabs from '../../components/PlatformTabs'
+import PlatformTabItem from '../../components/PlatformTabItem'
+
+import WagmiHooks from './wagmi1/hooks.mdx'
+import EthersHooks from './ethers/hooks.mdx'
+import Ethers5Hooks from './ethers5/hooks.mdx'
 
 # Hooks
 
@@ -7,21 +13,59 @@ import Button from '../../components/button'
 
 Control the modal with the `useWeb3Modal` hook
 
+<PlatformTabs groupId="eth-lib" activeOptions={["wagmi1", "ethers", "ethers5"]}>
+
+<PlatformTabItem value="wagmi1">
 ```ts
-import { useWeb3Modal } from '@web3modal/wagmi-react-native'
+  import { useWeb3Modal } from '@web3modal/wagmi-react-native'
 
 export default function Component() {
 
-const { open, close } = useWeb3Modal()
+    const { open, close } = useWeb3Modal()
 
-open()
-```
+    open()
+
+}
+
+````
+</PlatformTabItem>
+
+<PlatformTabItem value="ethers">
+```ts
+  import { useWeb3Modal } from '@web3modal/ethers-react-native'
+
+  export default function Component() {
+
+    const { open, close } = useWeb3Modal()
+
+    open()
+  }
+````
+
+</PlatformTabItem>
+
+<PlatformTabItem value="ethers5">
+```ts
+  import { useWeb3Modal } from '@web3modal/ethers5-react-native'
+
+export default function Component() {
+
+    const { open, close } = useWeb3Modal()
+
+    open()
+
+}
+
+````
+</PlatformTabItem>
+
+</PlatformTabs>
 
 You can also select the modal's view when calling the `open` function
 
 ```ts
 open({ view: 'Account' })
-```
+````
 
 List of views you can select
 
@@ -56,13 +100,36 @@ List of views you can select
 
 Get the current value of the modal's state
 
-```ts
-import { useWeb3ModalState } from '@web3modal/wagmi-react-native'
-```
+<PlatformTabs groupId="eth-lib" activeOptions={["wagmi1", "ethers", "ethers5"]}>
 
+<PlatformTabItem value="wagmi1">
+  ```ts
+    import { useWeb3ModalState } from '@web3modal/wagmi-react-native'
+
+    const { open, selectedNetworkId } = useWeb3ModalState()
+
+````
+</PlatformTabItem>
+
+<PlatformTabItem value="ethers">
 ```ts
+import { useWeb3ModalState } from '@web3modal/ethers-react-native'
+
 const { open, selectedNetworkId } = useWeb3ModalState()
-```
+````
+
+</PlatformTabItem>
+
+<PlatformTabItem value="ethers5">
+```ts
+  import { useWeb3ModalState } from '@web3modal/ethers5-react-native'
+
+const { open, selectedNetworkId } = useWeb3ModalState()
+
+````
+</PlatformTabItem>
+
+</PlatformTabs>
 
 The modal state consists of two reactive values:
 
@@ -82,75 +149,56 @@ The modal state consists of two reactive values:
   ]}
 />
 
-## Use wagmi hooks
 
-You can use [Wagmi hooks](https://wagmi.sh/react/hooks/useAccount) to sign messages, interact with smart contracts, and much more.
+## useWeb3ModalEvents
 
-### useAccount
+Get the last tracked modal event
 
-Hook for accessing account data and connection status.
+<PlatformTabs groupId="eth-lib" activeOptions={["wagmi1", "ethers", "ethers5"]}>
 
-```tsx
-import { Text } from 'react-native'
-import { useAccount } from 'wagmi'
+<PlatformTabItem value="wagmi1">
+  ```ts
+    import { useWeb3ModalEvents } from '@web3modal/wagmi-react-native'
 
-function App() {
-  const { address, isConnecting, isDisconnected } = useAccount()
+    const event = useWeb3ModalEvents()
+````
 
-  if (isConnecting) return <Text>Connecting…</Text>
-  if (isDisconnected) return <Text>Disconnected</Text>
-  return <Text>{address}</Text>
-}
-```
+</PlatformTabItem>
 
-### useSignMessage
+<PlatformTabItem value="ethers">
+```ts
+  import { useWeb3ModalEvents } from '@web3modal/ethers-react-native'
 
-Hook for signing messages with connected account.
+const event = useWeb3ModalEvents()
 
-```tsx
-import { View, Text, Pressable } from 'react-native'
-import { useSignMessage } from 'wagmi'
+````
+</PlatformTabItem>
 
-function App() {
-  const { data, isError, isLoading, isSuccess, signMessage } = useSignMessage({
-    message: 'gm wagmi frens'
-  })
+<PlatformTabItem value="ethers5">
+```ts
+  import { useWeb3ModalEvents } from '@web3modal/ethers5-react-native'
 
-  return (
-    <View>
-      <Pressable disabled={isLoading} onPress={() => signMessage()}>
-        <Text>Sign message</Text>
-      </Pressable>
-      {isSuccess && <Text>Signature: {data}</Text>}
-      {isError && <Text>Error signing message</Text>}
-    </View>
-  )
-}
-```
+  const event = useWeb3ModalEvents()
+````
 
-### useContractRead
+</PlatformTabItem>
 
-Hook for calling a read method on a Contract.
+</PlatformTabs>
 
-```tsx
-import { View, Text } from 'react-native'
-import { useContractRead } from 'wagmi'
+## Ethereum Library
 
-function App() {
-  const {data, isError, isLoading, isSuccess} = useContractRead({
-    address: '0xecb504d39723b0be0e3a9aa33d646642d1051ee1',
-    abi: wagmigotchiABI,
-    functionName: 'getHunger'
-  });
+<PlatformTabs groupId="eth-lib" activeOptions={["wagmi1", "ethers", "ethers5"]}>
 
-  return (
-    <View>
-      {isLoading && <Text>Loading</Text>}
-      {isSuccess && <Text>Response: {data?.toString()}</Text>}
-      {isError && <Text>Error reading contract</Text>}
-    </View>
-  )
-}
-```
+<PlatformTabItem value="wagmi1">
+  <WagmiHooks />
+</PlatformTabItem>
 
-<Button name="Learn More" url="https://wagmi.sh/react/hooks/useAccount" />
+<PlatformTabItem value="ethers">
+  <EthersHooks />
+</PlatformTabItem>
+
+<PlatformTabItem value="ethers5">
+  <Ethers5Hooks />
+</PlatformTabItem>
+
+</PlatformTabs>

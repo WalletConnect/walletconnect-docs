@@ -1,9 +1,8 @@
 # Blockchain API
 
-The Blockchain API is WalletConnect's built-in RPC service that powers Web3Modal's blockchain functions such as account balances, ENS resolution, transaction history, and more. 
+The Blockchain API is WalletConnect's built-in RPC service that powers Web3Modal's blockchain functions such as account balances, ENS resolution, transaction history, and more.
 
 The Blockchain API is designed to work with all of the chains that WalletConnect and Web3Modal supports.
-
 
 ## Features
 
@@ -26,10 +25,9 @@ No config or setup is needed for Web3Modal integrations. For other usage, see th
 
 ## Limits
 
-The Blockchain API is free for 100k requests/day. 
+The Blockchain API is free for 6 million requests per 30 days.
 
 ## Links
 
 - [Supported chains](https://github.com/WalletConnect/rpc-proxy/blob/master/SUPPORTED_CHAINS.md)
 - [The Blockchain API GitHub repo](https://github.com/WalletConnect/rpc-proxy)
-

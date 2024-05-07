@@ -1,0 +1,44 @@
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
+
+<Tabs>
+<TabItem value="default" label="Default">
+
+If you're using the `defaultWagmiConfig` function you can enable email login by just adding `enableEmail: true` as a configuration parameter.
+
+```ts
+const wagmiConfig = defaultWagmiConfig({
+  chains,
+  projectId,
+  metadata,
+  /* highlight-add-start */
+  enableEmail: true // Optional - false by default
+  /* highlight-add-end */
+})
+```
+
+</TabItem>
+<TabItem value="custom" label="Custom">
+
+If you're using the `createConfig` function from Wagmi, you can enable email login by importing and adding the `emailConnector` function in your configuration.
+
+```ts
+/* highlight-add-start */
+import { emailConnector } from '@web3modal/wagmi'
+/* highlight-add-end */
+
+//...
+
+const wagmiConfig = createConfig({
+  //...
+  connectors: [
+    //...
+    /* highlight-add-start */
+    emailConnector({ chains, options: { projectId } })
+    /* highlight-add-end */
+  ]
+})
+```
+
+</TabItem>
+</Tabs>

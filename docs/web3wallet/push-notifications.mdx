@@ -3,9 +3,15 @@ import PlatformTabItem from '../components/PlatformTabItem'
 
 # Push Notifications
 
-The WalletConnect Web3Wallet SDK provides the functionality for wallets to receive push notifications through Firebase Cloud Messaging (FCM) and Apple Push Notification Service (APNS) via the Push Server. This feature ensures that wallets are promptly notified of incoming signature requests. Each push notification contains the encrypted details of the signature request. Upon receiving the notification, it can be decrypted and presented to the developer, allowing for customization of the message according to their requirements.
+The WalletConnect Web3Wallet SDK provides the functionality for wallets to receive push notifications through Firebase Cloud Messaging (FCM) and Apple Push Notification Service (APNs) via the Push Server. This feature ensures that wallets are promptly notified of incoming signature requests. Each push notification contains the encrypted details of the signature request. Upon receiving the notification, it can be decrypted and presented to the developer, allowing for customization of the message according to their requirements.
 
-## Setup
+## Server setup
+
+For the push notifications to be forwarded to FCM or APNs, the [Push Server](../advanced/push-server) will need to be configured with your FCM or APNs server API credentials.
+
+## App setup
+
+### Register the device token
 
 To enable a device for push notifications, it's essential to register the device token using `Web3Wallet.registerDeviceToken`. This token can be obtained from either FCM or APNS, depending on the platform used.
 
@@ -28,6 +34,7 @@ func application(_ application: UIApplication, didRegisterForRemoteNotifications
 This method enables wallets to receive push notifications from WalletConnect's Push Server via Firebase Cloud Messaging. This means you will have to setup your project with Firebase before being able to call `registerDeviceToken()` method.
 
 To register a wallet to receive WalletConnect push notifications, call `Web3Wallet.registerDeviceToken` and pass the Firebase Access Token.
+
 ```kotlin
 val firebaseAccessToken: String = //FCM access token received through the Firebase Messaging SDK
 val enableEncrypted: Boolean = true //Flag that enables receiveing the detailed notifications
@@ -51,21 +58,23 @@ You can follow their docummentation - [Firebase documentation](https://rnfirebas
 Once you have Firebase configured, you can obtain the device token by calling `messaging().getToken()`. This unique token is used to identify each device.
 
 ```ts
-import messaging from '@react-native-firebase/messaging';
+import messaging from '@react-native-firebase/messaging'
 
-const token = await messaging().getToken();
+const token = await messaging().getToken()
 ```
+
 The device token will be used to register for WalletConnect push notifications by calling `Web3Wallet.registerDeviceToken` and passing the token as an argument.
 The `registerDeviceToken` should be called every time the client is initialized.
 
 ```ts
 web3wallet.registerDeviceToken({
-    token: await messaging().getToken(), // device token
-    clientId: await web3wallet.core.crypto.getClientId(), //your instance clientId
-    notificationType: 'fcm', // notification type
-    enableEncrypted: true // flag that enabled detailed notifications
-});
-``` 
+  token: await messaging().getToken(), // device token
+  clientId: await web3wallet.core.crypto.getClientId(), //your instance clientId
+  notificationType: 'fcm', // notification type
+  enableEncrypted: true // flag that enabled detailed notifications
+})
+```
+
 With that the base setup is complete and you can start receiving push notifications from WalletConnect's Push Server for your sessions.
 
 Note, that from time to time, the device token is refreshed, so you must make sure to register it again.
@@ -86,8 +95,7 @@ messaging().onTokenRefresh(async token => {
 </PlatformTabItem>
 </PlatformTabs>
 
-
-## Usage
+### Receiving push notifications
 
 After the device token is registered, the next step involves setting up the notification service specific to the platform being used. This service will decrypt the incoming requests and forward them to the developer for further processing and integration.
 
@@ -104,16 +112,17 @@ When using encrypted push notifications via APNs, the payload will look like thi
     "mutable-content": 1
   },
   "message": "String", // Encrypted payload
-  "topic": "String",  // Subscription topic
+  "topic": "String", // Subscription topic
   "tag": "String" // Tag of the associated relay message
 }
 ```
+
 To decrypt a push notification, follow these steps:
 
 1. Instantiate [UNNotificationServiceExtension](https://developer.apple.com/documentation/usernotifications/unnotificationserviceextension)
 
 2. Modify the content of newly delivered notifications.
-Learn more about [modifying content in newly delivered notifications](https://developer.apple.com/documentation/usernotifications/modifying_content_in_newly_delivered_notifications).
+   Learn more about [modifying content in newly delivered notifications](https://developer.apple.com/documentation/usernotifications/modifying_content_in_newly_delivered_notifications).
 
 3. Create a Shared [Keychain Group](https://developer.apple.com/documentation/security/keychain_services/keychain_items/sharing_access_to_keychain_items_among_a_collection_of_apps)
 
@@ -132,36 +141,30 @@ Networking.configure(
 Use the same group name inside your notification service extension.
 
 ```Swift
-if let content = bestAttemptContent,
-   let topic = content.userInfo["topic"] as? String,
-   let ciphertext = content.userInfo["message"] as? String,
-   let tag = content.userInfo["tag"] as? UInt {
+override func didReceive(_ request: UNNotificationRequest, withContentHandler contentHandler: @escaping (UNNotificationContent) -> Void) {
+        self.contentHandler = contentHandler
+        self.bestAttemptContent = request.content
 
-    if Web3WalletDecryptionService.canHandle(tag: tag) {
-        let web3WalletDecryptionService = try Web3WalletDecryptionService(groupIdentifier: "group.com.walletconnect.sdk")
-        
-        // Decrypt the notification payload
-        let decryptedPayload = try web3WalletDecryptionService.decryptMessage(topic: topic, ciphertext: ciphertext, tag: tag)
-        let mutableContent = content.mutableCopy() as! UNMutableNotificationContent
+        if let content = bestAttemptContent,
+           let topic = content.userInfo["topic"] as? String,
+           let ciphertext = content.userInfo["message"] as? String,
+           let tag = content.userInfo["tag"] as? UInt {
 
-        // Retrieve metadata associated with your peer
-        guard let metadata = web3WalletDecryptionService.getMetadata(topic: topic) else {
-            mutableContent.title = "Error: Cannot get peer's metadata"
-            return mutableContent
+            if Web3WalletDecryptionService.canHandle(tag: tag) {
+                let mutableContent = handleWeb3WalletNotification(content: content, topic: topic, tag: tag, ciphertext: ciphertext)
+                contentHandler(mutableContent)
+            } else if NotifyDecryptionService.canHandle(tag: tag) {
+                let mutableContent = handleNotifyNotification(content: content, topic: topic, ciphertext: ciphertext)
+                contentHandler(mutableContent)
+            } else {
+                let mutableContent = content.mutableCopy() as! UNMutableNotificationContent
+                mutableContent.title = "Error: unknown message tag"
+            }
         }
-
-        // Customise the notification based on the decrypted payload and metadata
-        switch decryptedPayload.requestMethod {
-        case .sessionProposal, .sessionRequest, .authRequest:
-            mutableContent.title = "" // Customise the notification title here based on metadata
-            mutableContent.body = "" // Customise the notification body here based on metadata
-        }
-
-        // Pass the customised notification content to the content handler
-        contentHandler(mutableContent)
     }
-}
 ```
+
+`handleWeb3WalletNotification` and `handleNotifyNotification` methods can be found in our [Sample App](https://github.com/WalletConnect/WalletConnectSwiftV2/blob/main/Example/PNDecryptionService/NotificationService.swift)
 
 </PlatformTabItem>
 
@@ -176,19 +179,19 @@ class SampleFirebaseService: PushMessagingService() {
     }
 
     override fun registeringFailed(token: String, throwable: Throwable) {
-        // Triggered when Firebase Cloud Messaging if there is an error with registering with the Push server with a new token
+        // Triggered when Firebase Cloud Messaging if there is an error with registering with the Push Server with a new token
     }
 
     override fun onMessage(message: Core.Model.Message, originalMessage: RemoteMessage) {
-        // Triggered when a message is sent from the Push server through Firebase Cloud Messaging and the message contains `Core.Model.Message`. The original FCM RemoteMessage is also returned
+        // Triggered when a message is sent from the Push Server through Firebase Cloud Messaging and the message contains `Core.Model.Message`. The original FCM RemoteMessage is also returned
     }
 
     override fun onDefaultBehavior(message: RemoteMessage) {
-        // Triggered when a message is sent from the Push server through Firebase Cloud Messaging and the message does not contain `Core.Model.Message` in the payload. The original FCM RemoteMessage returned instead
+        // Triggered when a message is sent from the Push Server through Firebase Cloud Messaging and the message does not contain `Core.Model.Message` in the payload. The original FCM RemoteMessage returned instead
     }
 
     override fun onError(throwable: Throwable, defaultMessage: RemoteMessage) {
-        // Triggered when there is an error that occurs when a message is received from the Push server
+        // Triggered when there is an error that occurs when a message is received from the Push Server
     }
 }
 ```
@@ -248,12 +251,12 @@ messaging().onMessage(async notification => {
    /*
    * the metadata contains name, description, icon and url of the dapp that initiated the request
    * note that only notifications with tag `1108`(session requests) will have metadata,
-   **/ 
-   let metadata 
-   
+   **/
+   let metadata
+
    if(tag == 1108) {
         metadata = await Web3Wallet.notifications.getMetadata({ topic });
-   } else { 
+   } else {
         // session proposals contain metadata in the request itself
         metadata = decryptedMessage.params.proposer.metadata
    }
@@ -262,6 +265,7 @@ messaging().onMessage(async notification => {
    ...
 });
 ```
+
 </PlatformTabItem>
 
 </PlatformTabs>

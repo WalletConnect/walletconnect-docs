@@ -6,13 +6,9 @@ import PlatformTabItem from '../../components/PlatformTabItem'
 
 # Usage
 
-:::caution
-Web3Inbox is in beta
-:::
-
 This Web3Inbox SDK provides you the building blocks necessary to allow users to subscribe, receive notifications, and manage notification preferences, all from your app's UI. The Web3Inbox SDK supports both React hooks and JavaScript-based integrations.
 
-Before begin using Web3Inbox, you will first need to [setup your domain](../domain-setup) to send notifications.
+Before begin using Web3Inbox, you will first need to [setup your project](../cloud-setup) to send notifications.
 
 ## Installation
 
@@ -23,7 +19,7 @@ Before begin using Web3Inbox, you will first need to [setup your domain](../doma
 <PlatformTabItem value="react">
 
 ```bash npm2yarn
-npm i @web3inbox/core @web3inbox/widget-react
+npm i @web3inbox/core @web3inbox/react
 ```
 
 </PlatformTabItem>
@@ -48,109 +44,140 @@ This basic example demonstrates how to use the Web3Inbox SDK to subscribe to not
 
 Below is an example of adding the Web3Inbox SDK to a React project with wagmi. Wagmi is not required to use the Web3Inbox React hooks.
 
+We have separated it so the initialization can be done executed once in the app, and the hooks can be used anywhere in the app.
+
 ```tsx
+//App.tsx
+import { initWeb3InboxClient } from "@web3inbox/react";
+
+...
+// The project ID and domain you setup in the Domain Setup section
+const projectId = process.env.NEXT_PUBLIC_PROJECT_ID!;
+const appDomain = process.env.NEXT_PUBLIC_APP_DOMAIN!;
+
+initWeb3InboxClient({
+  projectId,
+  domain: appDomain,
+  allApps: process.env.NODE_ENV !== "production",
+});
+
+```
+
+```tsx
+// Index.tsx
 import {
-  useManageSubscription,
+  useNotifications,
+  usePrepareRegistration,
+  useRegister,
+  useSubscribe,
   useSubscription,
-  useW3iAccount,
-  useInitWeb3InboxClient,
-  useMessages
-} from '@web3inbox/widget-react'
+  useUnsubscribe,
+  useWeb3InboxAccount,
+  useWeb3InboxClient
+} from '@web3inbox/react'
 import { useCallback, useEffect } from 'react'
 import { useSignMessage, useAccount } from 'wagmi'
 
+import Notifications from './Notifications'
+
 export default function App() {
+  // Wagmi Hooks
   const { address } = useAccount()
   const { signMessageAsync } = useSignMessage()
 
-  // Initialize the Web3Inbox SDK
-  const isReady = useInitWeb3InboxClient({
-    // The project ID and domain you setup in the Domain Setup section
-    projectId,
-    domain: 'app.example.com',
+  // W3I Hooks
+  const { prepareRegistration } = usePrepareRegistration()
+  const { register, isLoading: isRegistering } = useRegister()
+  const { data: w3iClient, isLoading: w3iClientIsLoading } = useWeb3InboxClient()
+  const { isRegistered } = useWeb3InboxAccount(`eip155:1:${address}`)
 
-    // Allow localhost development with "unlimited" mode.
-    // This authorizes this dapp to control notification subscriptions for all domains (including `app.example.com`), not just `window.location.host`
-    isLimited: false
-  })
-
-  const { account, setAccount, isRegistered, isRegistering, register } = useW3iAccount()
-  useEffect(() => {
-    if (!address) return
-    // Convert the address into a CAIP-10 blockchain-agnostic account ID and update the Web3Inbox SDK with it
-    setAccount(`eip155:1:${address}`)
-  }, [address, setAccount])
-
-  // In order to authorize the dapp to control subscriptions, the user needs to sign a SIWE message which happens automatically when `register()` is called.
-  // Depending on the configuration of `domain` and `isLimited`, a different message is generated.
-  const performRegistration = useCallback(async () => {
-    if (!address) return
+  // Registration of your address to allow notifications
+  // This is done via a signature of a message (SIWE) and the
+  // signMessageAsync function from wagmi
+  const handleRegistration = async () => {
     try {
-      await register(message => signMessageAsync({ message }))
-    } catch (registerIdentityError) {
-      alert(registerIdentityError)
+      const { message, registerParams } = await prepareRegistration()
+      const signature = await signMessageAsync({ message: message })
+      await register({ registerParams, signature })
+    } catch (registerIdentityError: any) {
+      console.error(registerIdentityError)
     }
-  }, [signMessageAsync, register, address])
+  }
 
-  useEffect(() => {
-    // Register even if an identity key exists, to account for stale keys
-    performRegistration()
-  }, [performRegistration])
+  // Subscription to dapp notifications
+  // Subscribe can be called as a function post registration
+  // Can be moved above but shown for example clarity
+  const { subscribe, isLoading: isSubscribing } = useSubscribe()
+  const { unsubscribe, isLoading: isUnsubscribing } = useUnsubscribe()
+  const { data: subscription } = useSubscription()
+  const isSubscribed = Boolean(subscription)
 
-  const { isSubscribed, isSubscribing, subscribe } = useManageSubscription()
-
-  const performSubscribe = useCallback(async () => {
-    // Register again just in case
-    await performRegistration()
-    await subscribe()
-  }, [subscribe, isRegistered])
-
-  const { subscription } = useSubscription()
-  const { messages } = useMessages()
-
+  // Note: We are using Web3Modal for the dapp <> wallet connection.
+  // The <w3m-button /> module is from Web3Modal. Check Web3Modal Docs for further info.
   return (
     <>
-      {!isReady ? (
-        <div>Loading client...</div>
-      ) : (
-        <>
-          {!address ? (
-            <div>Connect your wallet</div>
-          ) : (
-            <>
-              <div>Address: {address}</div>
-              <div>Account ID: {account}</div>
-              {!isRegistered ? (
-                <div>
-                  To manage notifications, sign and register an identity key:&nbsp;
-                  <button onClick={performRegistration} disabled={isRegistering}>
-                    {isRegistering ? 'Signing...' : 'Sign'}
-                  </button>
-                </div>
-              ) : (
-                <>
-                  {!isSubscribed ? (
-                    <>
-                      <button onClick={performSubscribe} disabled={isSubscribing}>
-                        {isSubscribing ? 'Subscribing...' : 'Subscribe to notifications'}
-                      </button>
-                    </>
-                  ) : (
-                    <>
-                      <div>You are subscribed</div>
-                      <div>Subscription: {JSON.stringify(subscription)}</div>
-                      <div>Messages: {JSON.stringify(messages)}</div>
-                    </>
-                  )}
-                </>
-              )}
-            </>
-          )}
-        </>
-      )}
+      <main className={styles.main}>
+        {w3iClientIsLoading ? (
+          <div>Loading W3I Client</div>
+        ) : (
+          <div>
+            <h1>W3I QuickStart</h1>
+            <w3m-button />
+            <div className={styles.flexColumn}>
+              <button onClick={handleRegistration} disabled={isRegistered}>
+                {isRegistered ? 'Registered' : 'Register'}
+              </button>
+              <button
+                onClick={isSubscribed ? unsubscribe : subscribe}
+                disabled={isSubscribing || isUnsubscribing}
+              >
+                {isSubscribed ? 'Unsubscribe' : 'Subscribe'}
+              </button>
+              <hr />
+              {isSubscribed ? <Notifications /> : null}
+            </div>
+          </div>
+        )}
+      </main>
     </>
   )
 }
+```
+
+```tsx
+// Notifications.tsx
+import { useNotifications } from '@web3inbox/react'
+import React from 'react'
+import styles from '@/styles/Notifications.module.css'
+
+function Notifications() {
+  const { data: subscription } = useSubscription()
+  const { data: notifications } = useNotifications(5)
+
+  return (
+    <div>
+      <h2 className={styles.heading}>Notifications</h2>
+      <p>You have {subscription.unreadCount} unread notifications.</p>
+      <div className={styles.notificationsContainer}>
+        {!notifications?.length ? (
+          <p className={styles.fallbackText}>No notifications yet.</p>
+        ) : (
+          notifications.map(({ id, ...message }) => (
+            <div key={id} className={styles.message}>
+              <h3>{message.title}</h3>
+              <p>{message.body}</p>
+              <p>{message.isRead ? "Read" : "Unread"}</p>
+              <button onClick={message.markAsRead}>Mark as read</button>
+            </div>
+          ))
+        )}
+      </div>
+      <button onClick={nextPage}>Next page</button>
+    </div>
+  )
+}
+
+export default Notifications
 ```
 
 </PlatformTabItem>
@@ -158,19 +185,18 @@ export default function App() {
 
 ```ts
 import { Web3InboxClient } from '@web3inbox/core'
+import { signMessage } from '@wagmi/core'
 
 const client = await Web3InboxClient.init({ projectId: '...' })
 
-// Setup the register hook. Whenever account changes, and on startup, we need to re-register.
-client.watchAccount(account => {
-  client.register({
-    account,
-    onSign,
-  })
-})
+const account = 'eip155:1:0x9AfEaC202C837df470b5A145e0EfD6a574B21029'
 
 // Set the account to a CAIP-10 account ID
-await client.setAccount('eip155:1:0x9AfEaC202C837df470b5A145e0EfD6a574B21029')
+await client.setAccount(account)
+
+const { message, registerParams } = await client.prepareRegistration({ account })
+const { signature } = await signMessage(message)
+await client.register({ signature, registerParams })
 
 // Get the current notification subscription or watch for updates
 const subscription = client.getSubscription()
@@ -180,8 +206,26 @@ client.watchSubscription(subscription => console.log({ subscription }))
 await client.subscribeToDapp()
 
 // Get notification history
-const messages = client.getMessageHistory()
+const notificationsPerPage = 5
+const isInfiniteScroll = true
+
+client.pageNotifications(
+  notificationsPerPage,
+  isInfiniteScroll
+)(notifications => {
+  // add logic to display notifications here.
+  // if isInfiniteScroll is true, notifications will contain all notifications fetched so far, else it will only fetch current page
+  // See API docs for more information on `pageNotifications()` and how to use `notifications`
+})
 ```
 
 </PlatformTabItem>
 </PlatformTabs>
+
+## UX Guidelines
+
+For the best user experience we have several recommendations on how to build the Web3Inbox flows into your app:
+
+- Have an explicit opt-in UI to subscribe to notifications. Some users may not want to receive notifications, and enabling notifications requires the user to sign a message with their blockchain account. Enabling notifications should be optional, and if they do enable them they should be told that they will need to sign a message to enable this.
+- Have a button to unsubscribe from notifications once they are enabled. Users may want to stop receiving notifications, so you should have a button to unsubscribe from notifications if the user wants to.
+- Make use of [notification types](../cloud-setup#notification-types). These allow the user fine-grained control over what types of notifications they want to receive from your app. These allow users to only unsubscribe from the specific notifications they are no longer interested in, rather than needing to unsubscribe from your entire app. Your app should include functionality to manage notification preferences.

@@ -1,23 +1,18 @@
-import Table from './components/Table'
 import WhatsNewBanner from './components/WhatsNewBanner'
 import Banner from './components/Home/Banner'
 import Wrapper from './components/Home/Wrapper'
-import webLogo from '../static/assets/home/webLogo.png'
-import androidLogo from '../static/assets/home/androidLogo.png'
-import iosLogo from '../static/assets/home/iosLogo.png'
-import rnLogo from '../static/assets/home/rnLogo.png'
-import flutterLogo from '../static/assets/home/flutterLogo.png'
-import unityLogo from '../static/assets/home/unityLogo.png'
+import twitterLogo from '../static/assets/home/logo-white.png'
+import discordLogo from '../static/assets/home/discord.png'
+import telegramLogo from '../static/assets/home/telegram.png'
 import web3modalLogo from '../static/assets/home/web3modalLogo.png'
 import web3walletLogo from '../static/assets/home/web3walletLogo.png'
 import web3inboxLogo from '../static/assets/home/web3inboxLogo.png'
 import bookLogo from '../static/assets/home/bookLogo.png'
-import twitterLogo from '../static/assets/home/twitterLogo.png'
 import githubLogo from '../static/assets/home/githubLogo.png'
 import universalProviderLogo from '../static/assets/home/universalProviderLogo.png'
 import ethereumProviderLogo from '../static/assets/home/ethereumProviderLogo.png'
 import wcmLogo from '../static/assets/home/wcmLogo.png'
-import cloudLogo from '../static/assets/home/cloudLogo.png'
+import w3iLogo from '../static/assets/home/web3inboxLogo_high.png'
 
 # About
 
@@ -37,16 +32,16 @@ Effortlessly integrate our suite of SDKs
       description: 'All in one SDK for connecting your app to your wallet.'
     },
     {
-      name: 'Web3Wallet',
-      icon: web3walletLogo,
-      href: '/web3wallet/about',
-      description: 'All-in-one SDK for connecting your wallet’s users to any app.'
-    },
-    {
       name: 'Web3Inbox',
       icon: web3inboxLogo,
       href: '/web3inbox/about',
       description: 'All-in-one SDK for your push notifications and wallet messaging.'
+    },
+    {
+      name: 'Web3Wallet',
+      icon: web3walletLogo,
+      href: '/web3wallet/about',
+      description: 'All-in-one SDK for connecting your wallet’s users to any app.'
     }
   ]}
 />
@@ -56,9 +51,12 @@ Effortlessly integrate our suite of SDKs
 ## What's new?
 
 <WhatsNewBanner
-  title={'Verify API'}
-  description={'Securely validate and prevent phishing with domain verification.'}
-  href={'/web3wallet/verify'}
+  title={'Web3Inbox'}
+  description={
+    'All-in-one SDK for push notifications and wallet messaging to engage your users on a whole new level.'
+  }
+  href={'/web3inbox/about'}
+  image={w3iLogo}
 />
 
 <hr className="home__divider" />
@@ -73,7 +71,7 @@ Utility tools for advanced usage with WalletConnect
     {
       name: 'WalletConnectModal',
       icon: wcmLogo,
-      href: '/advanced/walletConnectModal/about',
+      href: '/advanced/walletconnectmodal/about',
       description: 'A no-frills modal for wallet connections'
     },
     {
@@ -101,9 +99,22 @@ Share your experience, contribute, or ask questions
   type="small"
   items={[
     {
-      name: 'Twitter',
+      name: 'X',
       icon: twitterLogo,
-      href: 'https://twitter.com/walletconnect'
+      href: 'https://twitter.com/walletconnect',
+      isWhite: true
+    },
+    {
+      name: 'Discord',
+      icon: discordLogo,
+      href: 'https://discord.com/invite/kdTQHQ6AFQ',
+      isWhite: true
+    },    
+    {
+      name: 'Telegram',
+      icon: telegramLogo,
+      href: 'https://t.me/walletconnect',
+      isWhite: true
     },
     {
       name: 'GitHub',

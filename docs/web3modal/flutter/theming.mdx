@@ -55,7 +55,11 @@ return Web3ModalTheme(
 );
 ```
 
-Finally, `Web3ModalTheme` comes with default border radiuses but you can override these values by passing your own values to `Web3ModalRadiuses()` object and then adding this object to `Web3ModalThemeData`'s `radiuses:` parameter. You can also set no corner radiuses at all by setting this value to `Web3ModalRadiuses.square`:
+### Preset theme shortcuts
+
+`Web3ModalTheme` comes with default border radiuses but you can override these values by passing your own values to `Web3ModalRadiuses()` object and then adding this object to `Web3ModalThemeData`'s `radiuses:` parameter.
+
+But you can also set **no corner radiuses** at all by setting this value to `Web3ModalRadiuses.square` or **everything circular** by using `Web3ModalRadiuses.circular`
 
 ```dart
 final _themeData = Web3ModalThemeData(
@@ -67,26 +71,32 @@ final _themeData = Web3ModalThemeData(
     accent100: Colors.green,
     background125: Colors.brown,
   ),
-  radiuses: Web3ModalRadiuses.square, // No corner radius, modal will look square
+  // No corner radius, modal will look square, use Web3ModalRadiuses.circular to make everything circular
+  radiuses: Web3ModalRadiuses.square,
 );
 ```
 
-_**Note**:_ If you don't wrap your `MaterialApp` with a `Web3ModalTheme` widget, the `Web3Modal` will use the default light theme.
+:::info
+If you don't wrap your `MaterialApp` with a `Web3ModalTheme` widget, the `Web3Modal` will use the default light theme.
+:::
 
 `Web3ModalTheme` is an InheritedWidget so it comes with a few handy methods for you to use:
 
 Check if the current time is dark:
+
 ```dart
 final isDarkMode = Web3ModalTheme.of(context).isDarkMode;
 final isMaybeDarkMode = Web3ModalTheme.maybeOf(context)?.isDarkMode;
 ```
 
 Get current `Web3ModalThemeData` object:
+
 ```dart
 final data = Web3ModalTheme.getDataOf(context);
 ```
 
 Get current `Web3ModalColors` object:
+
 ```dart
 final colors = Web3ModalTheme.colorsOf(context);
 ```

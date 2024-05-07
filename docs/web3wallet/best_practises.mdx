@@ -1,0 +1,483 @@
+import Container from './../components/Container'
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
+import PlatformTabs from '../components/PlatformTabs'
+import PlatformTabItem from '../components/PlatformTabItem'
+
+# Best Practices
+
+The purpose of this guide is to show the best practices in regards of Web3Wallet client usage. The goal is to provide the best user experience that just works in every circumstances.
+
+:::note
+In order to ensure the best user experience and flawless connection flow, please make sure that Web3Wallet SDK is initialized immediately after your app launch, especially if launched via a WalletConnect Deep Link. It guarantees that websocket connection is opened immediately and all requests are received by your wallet
+:::
+
+## Pairing
+
+A pairing is a connection between a wallet and a dapp that has fixed permissions to only allow a dapp to propose a session through it. Dapp can propose infinite number of sessions on one pairing. Wallet must use a pair method from Web3Wallet client to pair with dapp.
+
+<PlatformTabs
+	groupId="w3w"
+	activeOptions={["web","android","ios"]}
+>
+
+<PlatformTabItem value="web">
+```typescript
+const uri = 'xxx'; // pairing uri
+try {
+    await web3Wallet.pair({ uri });
+} catch (error) {
+    // some error happens while pairing - check Expected errors section
+}
+``` 
+</PlatformTabItem>
+
+<PlatformTabItem value="android">
+```kotlin
+val pairingParams = Wallet.Params.Pair(pairingUri)
+Web3Wallet.pair(pairingParams, 
+    onSuccess = {
+        //Subscribed on the pairing topic successfully. Wallet should await for a session proposal
+    },
+    onError = { error ->
+        //Some error happens while pairing - check Expected errors section
+    }
+}
+```
+</PlatformTabItem>
+
+<PlatformTabItem value="ios">
+```swift
+let uri = WalletConnectURI(string: urlString)
+
+if let uri {
+Task {
+try await Web3Wallet.instance.pair(uri: uri)
+}
+}
+
+````
+</PlatformTabItem>
+
+</PlatformTabs>
+
+### Pairing State
+
+A pairing state is a primitive exposed by Web3Wallet client for a wallet to indicate whether it should await a session proposal. The pairing state is `true` when a wallet scans a QR and awaits a session proposal. Once the session proposal is received by the wallet, the pairing state is changed to `false`.
+When `true` wallet should show a loading indicator awaiting a session proposal, when changed to `false` a proposal dialog should be displayed.
+
+<PlatformTabs
+	groupId="w3w"
+	activeOptions={["android","ios"]}
+>
+
+<PlatformTabItem value="android">
+```kotlin
+val coreDelegate = object : CoreClient.CoreDelegate {
+    override fun onPairingState(pairingState: Core.Model.PairingState) {
+        //Here a pairing state is triggered
+    }
+    ...other callbacks
+}
+
+CoreClient.setDelegate(coreDelegate)
+````
+
+</PlatformTabItem>
+
+<PlatformTabItem value="ios">
+```swift
+Web3Wallet.instance.pairingStatePublisher
+    .receive(on: DispatchQueue.main)
+    .sink { [weak self] isPairing in
+    self?.showPairingLoading = isPairing
+}.store(in: &disposeBag)
+```
+</PlatformTabItem>
+
+</PlatformTabs>
+
+### Pairing Expiry
+
+A pairing expiry event is triggered whenever a pairing is expired. The expiry for inactive pairing is 5 mins, whereas for active pairing is 30 days. A pairing becomes active when a session proposal is received and user successfully approves it. This event helps to know when given pairing expires and update UI accordingly.
+
+<PlatformTabs
+	groupId="w3w"
+	activeOptions={["web","android","ios"]}
+>
+
+<PlatformTabItem value="web">
+```typescript
+core.pairing.events.on("pairing_expire", (event) => {
+    // pairing expired before user approved/rejected a session proposal
+    const { topic } = topic;
+});
+```
+</PlatformTabItem>
+
+<PlatformTabItem value="android">
+```kotlin
+val coreDelegate = object : CoreClient.CoreDelegate {
+    override fun onPairingExpired(expiredPairing: Core.Model.ExpiredPairing) {
+        //Here a pairing expiry is triggered
+    }
+    ...other callbacks
+}
+
+CoreClient.setDelegate(coreDelegate)
+
+````
+</PlatformTabItem>
+
+<PlatformTabItem value="ios">
+```Swift
+Web3Wallet.instance.pairingExpirationPublisher
+    .receive(on: DispatchQueue.main)
+    .sink { pairing in
+    guard !pairing.active else { return }
+    // let user know that pairing has expired
+}.store(in: &publishers)
+````
+
+</PlatformTabItem>
+
+</PlatformTabs>
+
+### Expected User flow
+
+### Pairing Flow
+
+![](/assets/pairing.gif)
+
+### Pairing Error
+
+![](/assets/pairing_error.gif)
+
+### Expected Errors
+
+While pairing the following errors might occur:
+
+- No Internet connection error or pairing timeout when scanning QR with no Internet connection
+  - User should pair again with Internet connection
+- Pairing expired error when scanning a QR code with expired pairing
+  - User should refresh a QR code and scan again
+- Pairing with existing pairing is not allowed
+  - User should refresh a QR code and scan again. I usually happens when user scans an already paired QR code.
+
+## Session Proposal
+
+A session proposal is a handshake sent by a dapp and it's purpose is to define a session rules. Whenever a user wants to establish a connection between a wallet and a dapp, one should approve a session proposal.
+
+### User Action Feedback
+
+Whenever user approves or rejects a session proposal, wallet should show loading indicators in a moment of the button press until Relay acknowledgement is received for any of this actions.
+
+<PlatformTabs
+	groupId="w3w"
+	activeOptions={["web","android","ios"]}
+>
+
+<PlatformTabItem value="web">
+Approving session
+```typescript
+    try {
+        await web3Wallet.approveSession(params);
+        // update UI -> remove the loader
+    } catch (error) {
+        // present error to the user
+    }
+```
+Rejecting session
+```typescript
+    try {
+        await web3Wallet.rejectSession(params);
+        // update UI -> remove the loader
+    } catch (error) {
+        // present error to the user
+    }
+```
+</PlatformTabItem>
+
+<PlatformTabItem value="android">
+Session approve
+
+```kotlin
+ Web3Wallet.approveSession(approveProposal,
+    onSuccess = {
+        //Session approval response was sent successfully - update your UI
+    }
+    onError = { error ->
+        //Error while sending session approval - update your UI
+    })
+```
+
+Session reject
+
+```kotlin
+ Web3Wallet.rejectSession(reject,
+    onSuccess = {
+        //Session rejection response was sent successfully - update your UI
+    },
+    onError = { error ->
+          //Error while sending session rejection - update your UI
+    })
+```
+
+</PlatformTabItem>
+
+<PlatformTabItem value="ios">
+Session Approve
+```swift
+do {
+    try await Web3Wallet.instance.approve(proposalId: proposal.id, namespaces: sessionNamespaces, sessionProperties: proposal.sessionProperties)
+    // Update UI, remove loader
+} catch {
+    // present error
+}
+```
+
+Session Reject
+
+```swift
+do {
+    try await Web3Wallet.instance.reject(proposalId: proposal.id, reason: .userRejected)
+    // Update UI, remove loader
+} catch {
+    // present error
+}
+```
+
+</PlatformTabItem>
+
+</PlatformTabs>
+
+### Session Proposal Expiry
+
+A session proposal expiry is 5 mins. It means a given proposal is stored for 5 mins in the SDK storage and user has 5 mins for approval or rejection decision. After that time the below event is emitted and proposal modal should be removed from the app's UI.
+
+<PlatformTabs
+	groupId="w3w"
+	activeOptions={["web","android","ios"]}
+>
+
+<PlatformTabItem value="web">
+```typescript
+web3wallet.on("proposal_expire", (event) => {
+    // proposal expired and any modal displaying it should be removed
+    const { id } = event;
+});
+```
+</PlatformTabItem>
+
+<PlatformTabItem value="android">
+```kotlin
+val walletDelegate = object : Web3Wallet.WalletDelegate {
+    override fun onProposalExpired(proposal: Wallet.Model.ExpiredProposal) {
+            //Here this event is triggered when a proposal expires - update your UI
+    }
+    ...other callbacks
+}
+Web3Wallet.setWalletDelegate(walletDelegate)
+```
+</PlatformTabItem>
+
+<PlatformTabItem value="ios">
+```swift
+Web3Wallet.instance.sessionProposalExpirationPublisher.sink { _ in
+    // let user know that session proposal has expired, update UI
+}.store(in: &publishers)
+```
+</PlatformTabItem>
+
+</PlatformTabs>
+
+### Expected User flow
+
+### Approve or Reject Session Proposal
+
+![](/assets/pairing.gif)
+
+### Error Handling
+
+![](/assets/proposal_error.gif)
+
+### Expected Errors
+
+While approving or rejecting a session proposal the following errors might occurs:
+
+- No Internet connection
+  - It happens when a user tries to approve or reject session proposal with no Internet connection
+- Session proposal expired
+  - It happens when users tries to approve or reject expired session proposal
+- Invalid namespaces
+  - It happens when a validation of session namespaces fails
+- Timeout
+  - It happens when Relay doesn't acknowledge session settle publish within 10s
+
+## Session Request
+
+A session request represents the request sent by a dapp to a wallet.
+
+### User Action Feedback
+
+Whenever user approves or rejects a session request, wallet should show loading indicators in a moment of the button press until Relay acknowledgement is received for any of this actions.
+
+<PlatformTabs
+	groupId="w3w"
+	activeOptions={["web","android","ios"]}
+>
+
+<PlatformTabItem value="web">
+```typescript
+    try {
+        await web3Wallet.respondSessionRequest(params);
+        // update UI -> remove the loader
+    } catch (error) {
+        // present error to the user
+    }
+```
+</PlatformTabItem>
+
+<PlatformTabItem value="android">
+```kotlin
+Web3Wallet.respondSessionRequest(Wallet.Params.SessionRequestResponse,
+    onSuccess = {
+        //Session request response was sent successfully - update your UI
+    },
+    onError = { error ->
+        //Error while sending session response - update your UI
+    })
+```
+</PlatformTabItem>
+
+<PlatformTabItem value="ios">
+```swift
+do {
+    try await Web3Wallet.instance.respond(requestId: request.id, signature: signature, from: account)
+    // update UI -> remove the loader
+} catch {
+    // present error to the user
+}
+```
+</PlatformTabItem>
+
+</PlatformTabs>
+
+### Session Request Expiry
+
+A session request expiry is defined by a dapp. It's value must be between now() + 5mins and now() + 7 days. After the session request expires the below event is emitted and session request modal should be removed from the app's UI.
+
+<PlatformTabs
+	groupId="w3w"
+	activeOptions={["web","android","ios"]}
+>
+
+<PlatformTabItem value="web">
+```typescript
+web3wallet.on("session_request_expire", (event) => {
+    // request expired and any modal displaying it should be removed
+    const { id } = event;
+});
+```
+</PlatformTabItem>
+
+<PlatformTabItem value="android">
+```kotlin
+val walletDelegate = object : Web3Wallet.WalletDelegate {
+    override fun onRequestExpired(request: Wallet.Model.ExpiredRequest) {
+        //Here this event is triggered when a session request expires - update your UI
+    }
+    ...other callbacks
+}
+Web3Wallet.setWalletDelegate(walletDelegate)
+```
+</PlatformTabItem>
+
+<PlatformTabItem value="ios">
+```swift
+Web3Wallet.instance.requestExpirationPublisher.sink { _ in
+    // let user know that request has expired
+}.store(in: &publishers)
+```
+</PlatformTabItem>
+
+</PlatformTabs>
+
+### Expected User flow
+
+### Approve or Reject Session Proposal
+
+![](/assets/session_request.gif)
+
+### Error Handling
+
+![](/assets/session_request_error.gif)
+
+### Expected Errors
+
+While approving or rejecting a session request the following error might occur:
+
+- Invalid session
+  - This error might happen when user approves or rejects a session request on expired session
+- Session request expired
+  - This error might happen when user approves or rejects a session request that already expires
+- Timeout
+  - It happens when Relay doesn't acknowledge session settle publish within 10s
+
+## Web Socket Connection State
+
+The Web Socket connection state tracks the connection with the relay server, event is emitted whenever a connection state changes.
+
+<PlatformTabs
+	groupId="w3w"
+	activeOptions={["web","android","ios"]}
+>
+
+<PlatformTabItem value="web">
+```typescript
+core.relayer.on("relayer_connect", () => {
+    // connection to the relay server is established
+})
+
+core.relayer.on("relayer_disconnect", () => {
+// connection to the relay server is lost
+})
+
+````
+</PlatformTabItem>
+
+<PlatformTabItem value="android">
+```kotlin
+val walletDelegate = object : Web3Wallet.WalletDelegate {
+    override fun onConnectionStateChange(state: Wallet.Model.ConnectionState) {
+        //Here this event is triggered when a connection state has changed
+    }
+    ...other callbacks
+}
+Web3Wallet.setWalletDelegate(walletDelegate)
+````
+
+</PlatformTabItem>
+
+<PlatformTabItem value="ios">
+```swift
+Web3Wallet.instance.socketConnectionStatusPublisher
+    .receive(on: DispatchQueue.main)
+    .sink { status in
+    switch status {
+    case .connected:
+        // ...
+    case .disconnected:
+        // ...
+    }
+}.store(in: &publishers)
+```
+</PlatformTabItem>
+
+</PlatformTabs>
+
+### Expected User flow
+
+### Connection State
+
+![](/assets/connection_state.gif)

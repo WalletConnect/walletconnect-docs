@@ -1,12 +1,27 @@
 import CloudBanner from '../../components/CloudBanner'
 import Tabs from '@theme/Tabs'
 import TabItem from '@theme/TabItem'
+import PlatformTabs from '../../components/PlatformTabs'
+import PlatformTabItem from '../../components/PlatformTabItem'
+import YoutubeEmbed from '../../components/YoutubeEmbed'
+
+import WagmiInstallation from './wagmi1/about/installation.mdx'
+import WagmiInstallationExpo from './wagmi1/about/installation-expo.mdx'
+import WagmiImplementation from './wagmi1/about/implementation.mdx'
+
+import Ethers5Installation from './ethers5/about/installation.mdx'
+import Ethers5InstallationExpo from './ethers5/about/installation-expo.mdx'
+import Ethers5Implementation from './ethers5/about/implementation.mdx'
+
+import EthersInstallation from './ethers/about/installation.mdx'
+import EthersInstallationExpo from './ethers/about/installation-expo.mdx'
+import EthersImplementation from './ethers/about/implementation.mdx'
 
 # React Native
 
 ## Introduction
 
-With Web3Modal React Native, we work with the [Wagmi](https://wagmi.sh) library which is a collection of React Hooks to make your dapp development flow easier. You can sign messages, interact with smart contracts, and much more.
+Web3Modal SDK has support for [Wagmi v1](https://1.x.wagmi.sh/) and [Ethers v5](https://docs.ethers.org/v5/). Choose one of these Ethereum libraries to get started.
 
 <CloudBanner />
 
@@ -15,87 +30,81 @@ With Web3Modal React Native, we work with the [Wagmi](https://wagmi.sh) library 
 <Tabs groupId="platform">
 <TabItem value="rn-cli" label="React Native CLI">
 
-```bash npm2yarn
-npm install @web3modal/wagmi-react-native wagmi viem
-```
+<PlatformTabs groupId="eth-lib" activeOptions={["wagmi1", "ethers", "ethers5"]}>
 
-Additionally add these extra packages to help with async storage, polyfills, and SVG's.
+<PlatformTabItem value="wagmi1">
 
-```bash npm2yarn
-npm install @react-native-async-storage/async-storage react-native-get-random-values react-native-svg react-native-modal @react-native-community/netinfo @walletconnect/react-native-compat
-```
+{' '}
 
-On iOS, use CocoaPods to add the native modules to your project:
+<WagmiInstallation />
 
-```
-npx pod-install
-```
+</PlatformTabItem>
+
+<PlatformTabItem value="ethers">
+  
+  :::caution
+  Ethers support is currently in alpha. 
+  :::
+
+{' '}
+
+<EthersInstallation />
+
+</PlatformTabItem>
+
+<PlatformTabItem value="ethers5">
+  
+  :::caution
+  Ethers v5 support is currently in alpha. 
+  :::
+
+{' '}
+
+<Ethers5Installation />
+
+</PlatformTabItem>
+
+</PlatformTabs>
 
 </TabItem>
 
 <TabItem value="expo" label="Expo">
 
-```
-npx expo install @web3modal/wagmi-react-native wagmi viem
-```
+<PlatformTabs groupId="eth-lib" activeOptions={["wagmi1", "ethers", "ethers5"]}>
 
-Additionally add these extra packages to help with async storage, polyfills, and SVG's.
+<PlatformTabItem value="wagmi1">
 
-```
-npx expo install @react-native-async-storage/async-storage react-native-get-random-values react-native-svg react-native-modal @react-native-community/netinfo @walletconnect/react-native-compat
-```
+{' '}
 
-<details>
-<summary>Additional setup for Expo SDK 48 only</summary>
-<div>
+<WagmiInstallationExpo />
 
-If you are using Expo SDK 48, you also need to polyfill `crypto` with expo-crypto library.
+</PlatformTabItem>
 
-1. Add `expo-crypto`
+<PlatformTabItem value="ethers">
 
-```
-npx expo install expo-crypto
-```
+:::caution
+Ethers support is currently in alpha.
+:::
 
-2. Create a file named `crypto-polyfill.js`
+{' '}
 
-```js
-// src/crypto-polyfill.js
+<EthersInstallationExpo />
 
-// Apply only with Expo SDK 48
-import { getRandomValues as expoCryptoGetRandomValues } from 'expo-crypto'
+</PlatformTabItem>
 
-class Crypto {
-  getRandomValues = expoCryptoGetRandomValues
-}
+<PlatformTabItem value="ethers5">
 
-// eslint-disable-next-line no-undef
-const webCrypto = typeof crypto !== 'undefined' ? crypto : new Crypto()
+:::caution
+Ethers v5 support is currently in alpha.
+:::
 
-;(() => {
-  if (typeof crypto === 'undefined') {
-    Object.defineProperty(window, 'crypto', {
-      configurable: true,
-      enumerable: true,
-      get: () => webCrypto
-    })
-  }
-})()
-```
+{' '}
 
-3. Import `crypto-polyfill.js` in your App root file
+<Ethers5InstallationExpo />
 
-```js
-// src/App.js
+</PlatformTabItem>
 
-import './crypto-polyfill.js'
-import '@walletconnect/react-native-compat';
-...
-import { createWeb3Modal, defaultWagmiConfig } from '@web3modal/wagmi-react-native'
-```
-
-</div>
-</details>
+</PlatformTabs>
 
 </TabItem>
 
@@ -103,108 +112,24 @@ import { createWeb3Modal, defaultWagmiConfig } from '@web3modal/wagmi-react-nati
 
 ## Implementation
 
-Start by importing `createWeb3Modal`, and wagmi packages, then create your configs as shown below.
-Finally, pass your configuration to `createWeb3Modal`.
+<PlatformTabs groupId="eth-lib" activeOptions={["wagmi1", "ethers", "ethers5"]}>
 
-:::info Note
+<PlatformTabItem value="wagmi1">
+  <WagmiImplementation />
+</PlatformTabItem>
 
-Make sure you import `@walletconnect/react-native-compat` before `wagmi` to avoid any issues.
+<PlatformTabItem value="ethers">
+  <EthersImplementation />
+</PlatformTabItem>
 
-:::
+<PlatformTabItem value="ethers5">
+  <Ethers5Implementation />
+</PlatformTabItem>
 
-```tsx
-import '@walletconnect/react-native-compat';
-import { WagmiConfig } from 'wagmi'
-import { mainnet, polygon, arbitrum } from 'viem/chains'
-import { createWeb3Modal, defaultWagmiConfig, Web3Modal } from '@web3modal/wagmi-react-native'
-
-// 1. Get projectId at https://cloud.walletconnect.com
-const projectId = 'YOUR_PROJECT_ID'
-
-// 2. Create config
-const metadata = {
-  name: 'Web3Modal RN',
-  description: 'Web3Modal RN Example',
-  url: 'https://web3modal.com',
-  icons: ['https://avatars.githubusercontent.com/u/37784886'],
-  redirect: {
-    native: 'YOUR_APP_SCHEME://',
-    universal: 'YOUR_APP_UNIVERSAL_LINK.com'
-  }
-}
-
-const chains = [mainnet, polygon, arbitrum]
-
-const wagmiConfig = defaultWagmiConfig({ chains, projectId, metadata })
-
-// 3. Create modal
-createWeb3Modal({
-  projectId,
-  chains,
-  wagmiConfig
-})
-
-export default function App() {
-  return (
-    <WagmiConfig config={wagmiConfig}>
-      // Rest of your app...
-      <Web3Modal />
-    </WagmiConfig>
-  )
-}
-```
-
-## Trigger the modal
-
-To open Web3Modal you can use our **default** button component or build your own logic using Web3Modal hooks.
-
-<Tabs>
-<TabItem value="components" label="Components">
-You can use default components to open the modal
-
-```tsx
-import { W3mButton } from '@web3modal/wagmi-react-native'
-
-export default function ConnectView() {
-  return (
-    <>
-      ...rest of your view
-      <W3mButton />
-    </>
-  )
-}
-```
-
-Learn more about the Web3Modal components [here](./components.mdx)
-
-</TabItem>
-<TabItem value="hooks" label="Hooks">
-
-You can trigger the modal by calling the `open` function from `useWeb3Modal` hook.
-
-```tsx
-import { Pressable, Text } from 'react-native'
-import { useWeb3Modal } from '@web3modal/wagmi-react-native'
-
-export default function ConnectView() {
-  const { open } = useWeb3Modal()
-
-  return (
-    <>
-      <Pressable onClick={() => open()}>
-        <Text>Open Connect Modal</Text>
-      </Pressable>
-    </>
-  )
-}
-```
-
-Learn more about the Web3Modal hooks [here](./hooks.mdx)
-
-</TabItem>
-</Tabs>
+</PlatformTabs>
 
 ## Enable Wallet Detection
+
 :::info Note
 
 Make sure your have `@walletconnect/react-native-compat@2.10.5` or higher.
@@ -212,7 +137,6 @@ Make sure your have `@walletconnect/react-native-compat@2.10.5` or higher.
 :::
 
 To enable WalletConnectModal to detect wallets installed on the device, you need to make specific changes to the native code of your project.
-
 
 <Tabs groupId="platform">
   <TabItem value="rn-cli" label="React Native CLI">
@@ -294,3 +218,174 @@ Your configuration should look like this:
 </TabItem>
 
 </Tabs>
+
+## Enable Coinbase Wallet
+
+<Tabs groupId="platform">
+<TabItem value="rn-cli" label="React Native CLI">
+
+Follow these steps to install Coinbase SDK in your project along with our Coinbase package. Check <a href="https://mobilewalletprotocol.github.io/wallet-mobile-sdk/docs/client-sdk/rn-install">here</a> for more detailed information.
+
+- Note: Coinbase SDK is [not compatible with Expo Go](https://github.com/MobileWalletProtocol/wallet-mobile-sdk/issues/206)
+
+1. Enable Expo Modules in your project running:
+
+```
+npx install-expo-modules@latest
+```
+
+2. Install Coinbase SDK
+
+```bash npm2yarn
+npm install @coinbase/wallet-mobile-sdk react-native-mmkv
+```
+
+3. Install our custom connector
+
+<PlatformTabs groupId="eth-lib" activeOptions={["wagmi1", "ethers", "ethers5"]}>
+
+<PlatformTabItem value="wagmi1">
+  ```bash npm2yarn npm install @web3modal/coinbase-wagmi-react-native ```
+</PlatformTabItem>
+
+<PlatformTabItem value="ethers">
+  ```bash npm2yarn npm install @web3modal/coinbase-ethers-react-native ```
+</PlatformTabItem>
+
+<PlatformTabItem value="ethers5">
+  ```bash npm2yarn npm install @web3modal/coinbase-ethers-react-native ```
+</PlatformTabItem>
+
+</PlatformTabs>
+
+4. Run pod-install
+
+```
+npx pod-install
+```
+
+5. Enable Deeplink handling in your project following <a href="https://reactnative.dev/docs/linking?syntax=ios#enabling-deep-links">React Native docs</a>
+
+6. Add Coinbase package in your AndroidManifest.xml and Info.Plist
+
+```xml
+// AndroidManifest.xml
+
+<queries>
+  <!-- other queries -->
+  <package android:name="org.toshi" />
+</queries>
+```
+
+```xml
+// Info.plist
+
+<key>LSApplicationQueriesSchemes</key>
+<array>
+  <!-- other schemes -->
+  <string>cbwallet</string>
+</array>
+```
+
+7. Add Coinbase reponse handler in your app. More info <a href="https://mobilewalletprotocol.github.io/wallet-mobile-sdk/docs/client-sdk/rn-setup#listening-for-responses">here</a>
+
+```tsx
+import { handleResponse } from '@coinbase/wallet-mobile-sdk'
+
+// Your app's deeplink handling code
+useEffect(() => {
+  const sub = Linking.addEventListener('url', ({ url }) => {
+    const handledBySdk = handleResponse(new URL(url))
+    if (!handledBySdk) {
+      // Handle other deeplinks
+    }
+  })
+
+  return () => sub.remove()
+}, [])
+```
+
+<PlatformTabs groupId="eth-lib" activeOptions={["wagmi1", "ethers", "ethers5"]}>
+
+<PlatformTabItem value="wagmi1">
+
+8. Initialize `CoinbaseWagmiConnector` and add it in `extraConnectors`
+
+```tsx
+import { CoinbaseConnector } from '@web3modal/coinbase-wagmi-react-native'
+
+const coinbaseConnector = new CoinbaseConnector({
+  chains,
+  options: {
+    redirect: 'YOUR_APP_SCHEME://'
+  }
+})
+
+const wagmiConfig = defaultWagmiConfig({
+  chains,
+  projectId,
+  metadata,
+  extraConnectors: [coinbaseConnector]
+})
+```
+
+</PlatformTabItem>
+
+<PlatformTabItem value="ethers">
+
+8. Initialize `CoinbaseProvider` and add it in the default config
+
+```tsx
+import { CoinbaseProvider } from '@web3modal/coinbase-ethers-react-native'
+
+const coinbaseProvider = new CoinbaseProvider({
+  redirect: 'YOUR_APP_SCHEME://',
+  rpcUrl: mainnet.rpcUrl
+})
+
+const config = defaultConfig({
+  metadata,
+  coinbase: coinbaseProvider
+})
+```
+
+</PlatformTabItem>
+
+<PlatformTabItem value="ethers5">
+
+8. Initialize `CoinbaseProvider` and add it in the default config
+
+```tsx
+import { CoinbaseProvider } from '@web3modal/coinbase-ethers-react-native'
+
+const coinbaseProvider = new CoinbaseProvider({
+  redirect: 'YOUR_APP_SCHEME://',
+  rpcUrl: mainnet.rpcUrl
+})
+
+const config = defaultConfig({
+  metadata,
+  coinbase: coinbaseProvider
+})
+```
+
+</PlatformTabItem>
+
+</PlatformTabs>
+
+Check <a href="https://mobilewalletprotocol.github.io/wallet-mobile-sdk/docs/client-sdk/rn-install">Coinbase docs</a> for more detailed information.
+
+</TabItem>
+
+<TabItem value="expo" label="Expo">
+  Coinbase SDK doesn't support Expo Projects. More info{' '}
+  <a href="https://github.com/MobileWalletProtocol/wallet-mobile-sdk/issues/206#issuecomment-1468836345">
+    here
+  </a>
+</TabItem>
+
+</Tabs>
+
+## Tutorial
+
+<YoutubeEmbed videoId="R0edIW72fHo" />

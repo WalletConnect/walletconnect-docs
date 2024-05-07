@@ -1,0 +1,84 @@
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
+
+To open Web3Modal you can use our web components or build your own logic with Web3Modal actions
+
+<Tabs>
+<TabItem value="components" label="Components">
+
+```html
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>HTML Example</title>
+  </head>
+  <body>
+    <w3m-button />
+    <script type="module" src="main.js"></script>
+  </body>
+</html>
+```
+
+Learn more about the Web3Modal web components [here](../../components.mdx)
+
+:::note
+Web components are global html elements that don't require importing.
+:::
+
+</TabItem>
+<TabItem value="actions" label="Actions">
+
+You can trigger the modal by calling the `open` function from a modal instance returned by `createWeb3Modal`.
+
+Let's first add two html elements to display information to the user:
+
+```html
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>HTML Example</title>
+  </head>
+  <body>
+    <button id="btn">Connect</button>
+    <span id="user"></span>
+    <script type="module" src="main.js"></script>
+  </body>
+</html>
+```
+
+Following with our main.js file, we can now add the needed logic to open the modal and display information in the DOM:
+
+```ts
+//main.js
+import { watchAccount, disconnect, getAccount } from '@wagmi/core'
+
+function connect() {
+  if (getAccount().isConnected) {
+    disconnect()
+  } else {
+    modal.open()
+  }
+}
+
+const btnEl = document.getElementById('btn')
+const userEl = document.getElementById('user')
+
+btnEl.addEventListener('click', connect)
+
+// listening for account changes
+watchAccount(account => {
+  userEl.innerText = account.address ?? ''
+  if (account.isConnected) {
+    btnEl.innerText = 'Disconnect'
+  } else {
+    btnEl.innerText = 'Connect'
+  }
+})
+```
+
+Learn more about the Web3Modal actions [here](../../actions.mdx)
+
+</TabItem>
+</Tabs>

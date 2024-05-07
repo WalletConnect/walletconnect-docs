@@ -1,0 +1,24 @@
+---
+title: Onramp
+---
+
+The Web3Modal SDK seamlessly incorporates Coinbase Pay, enabling users to sign in to their Coinbase accounts and utilize fiat payment methods for purchasing cryptocurrencies.
+
+:::info Note
+Onramp is supported in the latest version of Web3Modal. If you are using an older version, make sure you upgrade.
+:::
+
+## Integration
+
+In order to enable Onramp on Web3Modal add the `enableOnramp` flag set to `true` in the `createWeb3Modal` function configuration.
+
+```ts
+const modal = createWeb3Modal({
+  //...
+  chains: [mainnet],
+  projectId,
+  /* highlight-add-start */
+  enableOnramp: true // Optional - false as default
+  /* highlight-add-end */
+})
+```

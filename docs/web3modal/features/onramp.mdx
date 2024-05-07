@@ -1,0 +1,105 @@
+---
+pagination_next: web3modal/react/about
+title: Introduction
+---
+
+import Button from '../../components/button'
+import Container from '../../components/Container.js'
+import Wrapper from '../../components/Home/Wrapper'
+import W3MQuickStart from '../../components/W3MQuickStart'
+import YoutubeEmbed from '../../components/YoutubeEmbed'
+import useBaseUrl from '@docusaurus/useBaseUrl'
+
+import reactLogo from '../../../static/assets/home/reactLogo.png'
+import nextjsLogo from '../../../static/assets/home/nextjsLogo.png'
+import vueLogo from '../../../static/assets/home/vueLogo.png'
+import javascriptLogo from '../../../static/assets/home/javascriptLogo.png'
+
+# Web3Modal Onramp
+
+The Web3Modal SDK seamlessly incorporates [Coinbase Pay](https://www.coinbase.com/cloud/products/pay-sdk), enabling users to sign in to their Coinbase accounts and utilize fiat payment methods for purchasing cryptocurrencies.
+
+<YoutubeEmbed videoId="m1E_N5b3r18" />
+
+<Button name="Try Demo" url="https://lab.web3modal.com/library/wagmi/" />
+
+## Get Started
+
+<Wrapper
+  type="large"
+  fit={false}
+  items={[
+    {
+      name: 'React',
+      description: 'Get started with Web3Modal in React.',
+      icon: reactLogo,
+      href: '../react/onramp'
+    },
+    {
+      name: 'Next.js',
+      description: 'Get started with Web3Modal in Next.js.',
+      icon: nextjsLogo,
+      href: '../nextjs/onramp',
+      isWhite: true
+    },
+    {
+      name: 'Vue',
+      description: 'Get started with Web3Modal in Vue.',
+      icon: vueLogo,
+      href: '../vue/onramp'
+    },
+    {
+      name: 'JavaScript',
+      description: 'Get started with Web3Modal in JavaScript.',
+      icon: javascriptLogo,
+      href: '../javascript/onramp'
+    }
+  ]}
+/>
+
+## Process Overview
+
+Web3Modal Onramp makes it easy for users to purchase crypto without the hassle of switching between multiple platforms and signing multiple messages - a simple, seamless, in-app experience for anyone looking to securely transact within web3.
+
+For a step-by-step guide on user flow with Web3Modal Onramp, refer to our Youtube video [here](https://youtu.be/m1E_N5b3r18?t=241&feature=shared).
+
+:::info Note
+Onramp is supported in the latest version of Web3Modal. If you are using an older version, make sure you upgrade.
+:::
+
+### Connect your wallet
+
+Head over to a Web3Modal-enabled application and click the "Connect Wallet" button. You will be prompted to connect your wallet.
+
+<img className="image-margin" src={useBaseUrl('/img/w3m/onramp/1.png')} />
+
+### Select "Buy Crypto"
+
+Once connected, select "Buy Crypto" from the wallet modal.
+
+<img className="image-margin" src={useBaseUrl('/img/w3m/onramp/2.png')} />
+
+### Choose your provider
+
+Select "Coinbase" as your provider.
+
+<img className="image-margin" src={useBaseUrl('/img/w3m/onramp/3.png')} />
+
+### Complete your purchase
+
+Complete your purchase using Coinbase Pay. You will be prompted to sign in to your Coinbase account.
+If the payment page does not appear, you can copy link from the wallet modal and paste it in your browser.
+
+<img className="image-margin" src={useBaseUrl('/img/w3m/onramp/4.png')} />
+
+### Select assets and amount
+
+Choose the asset and amount you would like to purchase from Coinbase.
+
+<img className="image-margin" src={useBaseUrl('/img/w3m/onramp/5.png')} />
+
+### Receive your crypto
+
+Once your purchase is complete, you will receive your crypto in your wallet.
+
+<img className="image-margin" src={useBaseUrl('/img/w3m/onramp/6.png')} />

@@ -3,29 +3,29 @@ import PlatformTabs from '../../components/PlatformTabs'
 import PlatformTabItem from '../../components/PlatformTabItem'
 
 import WagmiComposables from './wagmi/composables.mdx'
-
+import Wagmi1Composables from './wagmi1/composables.mdx'
 import EthersComposables from './ethers/composables.mdx'
 
 # Composables
+
+Composables are functions that will help you control the modal, subscribe to wallet events and interact with them and smart contracts.
 
 ## useWeb3Modal
 
 Control the modal with the `useWeb3Modal` function
 
-
-<PlatformTabs groupId="eth-lib" activeOptions={["wagmi","ethers5","ethers"]}>
+<PlatformTabs groupId="eth-lib" activeOptions={["wagmi", "ethers5","ethers"]}>
 <PlatformTabItem value="wagmi">
 
 ```ts
 import { useWeb3Modal } from '@web3modal/wagmi/vue'
 
 export default function Component() {
+  const { open, close } = useWeb3Modal()
 
-const { open, close } = useWeb3Modal()
+  open()
 
-open()
-
-//...
+  //...
 }
 ```
 
@@ -36,12 +36,11 @@ open()
 import { useWeb3Modal } from '@web3modal/ethers5/vue'
 
 export default function Component() {
+  const { open, close } = useWeb3Modal()
 
-const { open, close } = useWeb3Modal()
+  open()
 
-open()
-
-//...
+  //...
 }
 ```
 
@@ -52,12 +51,11 @@ open()
 import { useWeb3Modal } from '@web3modal/ethers/vue'
 
 export default function Component() {
+  const { open, close } = useWeb3Modal()
 
-const { open, close } = useWeb3Modal()
+  open()
 
-open()
-
-//...
+  //...
 }
 ```
 
@@ -84,7 +82,7 @@ List of views you can select
       description: 'User profile - default view when connected'
     },
     {
-      variable: { code: 'All wallets' },
+      variable: { code: 'AllWallets' },
       description: 'Shows the list of all available wallets'
     },
     {
@@ -99,13 +97,15 @@ List of views you can select
     {
       variable: { code: 'WhatIsAWallet' },
       description: '"What is a wallet" onboarding view'
+    },
+    {
+      variable: { code: 'OnRampProviders' },
+      description: '"OnRamp main view'
     }
   ]}
 />
 
 ## useDisconnect
-
-Disconnect currently connected account. 
 
 ```ts
 const { disconnect } = useDisconnect()
@@ -113,11 +113,38 @@ const { disconnect } = useDisconnect()
 disconnect()
 ```
 
+## useWalletInfo
+
+Metadata information from the connected wallet
+
+```ts
+import { useWalletInfo } from '@web3modal/wagmi/vue'
+
+const { walletInfo } = useWalletInfo()
+
+console.log(walletInfo.name, walletInfo.icon)
+```
+
+## Ethereum Library
+
+<PlatformTabs groupId="eth-lib" activeOptions={["wagmi", "ethers"]}>
+<PlatformTabItem value="wagmi">
+
+<WagmiComposables />
+
+</PlatformTabItem>
+<PlatformTabItem value="ethers">
+
+<EthersComposables />
+
+</PlatformTabItem>
+</PlatformTabs>
+
 ## useWeb3ModalState
 
 Get the current value of the modal's state
 
-<PlatformTabs groupId="eth-lib" activeOptions={["wagmi","ethers5","ethers"]}>
+<PlatformTabs groupId="eth-lib" activeOptions={["wagmi", "ethers5","ethers"]}>
 <PlatformTabItem value="wagmi">
 
 ```ts
@@ -181,25 +208,7 @@ setThemeVariables({
 ## Track modal events
 
 ```ts
-import {  useWeb3ModalEvents } from '@web3modal/wagmi/vue'
+import { useWeb3ModalEvents } from '@web3modal/wagmi/vue'
 
 const events = useWeb3ModalEvents()
 ```
-
-<PlatformTabs groupId="eth-lib" activeOptions={["wagmi","ethers5","ethers"]}>
-<PlatformTabItem value="wagmi">
-
-<WagmiComposables/>
-
-</PlatformTabItem>
-<PlatformTabItem value="ethers5">
-
-<Ethers5Composables/>
-
-</PlatformTabItem>
-<PlatformTabItem value="ethers">
-
-<EthersComposables/>
-
-</PlatformTabItem>
-</PlatformTabs>

@@ -1,10 +1,10 @@
 import Tabs from '@theme/Tabs'
 import TabItem from '@theme/TabItem'
 
-To open Web3Modal you can use our **default** web components or build your own logic with Web3Modal composables.
+To open Web3Modal you can use our [**web component**](../../components.mdx) or build your own button with the Web3Modal [**composables**](../../composables.mdx#useweb3modal).
 
 <Tabs>
-<TabItem value="components" label="Components">
+<TabItem value="components" label="Web Components">
 
 ```html
 <template>
@@ -25,7 +25,7 @@ You can trigger the modal by calling the `open` method from `useWeb3Modal` compo
 
 ```html
 <script setup lang="ts">
-import { useWeb3Modal } from '@web3modal/ethers/vue'
+  import { useWeb3Modal } from '@web3modal/ethers/vue'
   // 4. Use modal composable
   const modal = useWeb3Modal()
 </script>

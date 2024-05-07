@@ -41,11 +41,9 @@ module.exports = {
                 'web3modal/react/hooks',
                 'web3modal/react/options',
                 'web3modal/react/components',
-                {
-                  type: 'category',
-                  label: 'SIWE',
-                  items: ['web3modal/react/siwe/about', 'web3modal/react/siwe/usage']
-                },
+                'web3modal/react/email',
+                'web3modal/react/onramp',
+                'web3modal/react/siwe',
                 'web3modal/react/theming',
                 'web3modal/react/resources'
               ]
@@ -59,15 +57,9 @@ module.exports = {
                 'web3modal/nextjs/hooks',
                 'web3modal/nextjs/options',
                 'web3modal/nextjs/components',
-                {
-                  type: 'category',
-                  label: 'SIWE',
-                  items: [
-                    'web3modal/nextjs/siwe/about',
-                    'web3modal/nextjs/siwe/usage',
-                    'web3modal/nextjs/siwe/next-auth'
-                  ]
-                },
+                'web3modal/nextjs/email',
+                'web3modal/nextjs/onramp',
+                'web3modal/nextjs/siwe',
                 'web3modal/nextjs/theming',
                 'web3modal/nextjs/resources'
               ]
@@ -81,11 +73,9 @@ module.exports = {
                 'web3modal/vue/composables',
                 'web3modal/vue/options',
                 'web3modal/vue/components',
-                {
-                  type: 'category',
-                  label: 'SIWE',
-                  items: ['web3modal/vue/siwe/about', 'web3modal/vue/siwe/usage']
-                },
+                'web3modal/vue/email',
+                'web3modal/vue/onramp',
+                'web3modal/vue/siwe',
                 'web3modal/vue/theming',
                 'web3modal/vue/resources'
               ]
@@ -99,11 +89,9 @@ module.exports = {
                 'web3modal/javascript/actions',
                 'web3modal/javascript/options',
                 'web3modal/javascript/components',
-                {
-                  type: 'category',
-                  label: 'SIWE',
-                  items: ['web3modal/javascript/siwe/about', 'web3modal/javascript/siwe/usage']
-                },
+                'web3modal/javascript/email',
+                'web3modal/javascript/siwe',
+                'web3modal/javascript/onramp',
                 'web3modal/javascript/theming',
                 'web3modal/javascript/resources'
               ]
@@ -130,6 +118,7 @@ module.exports = {
                 { type: 'doc', label: 'Usage', id: 'web3modal/flutter/options' },
                 { type: 'doc', label: 'Options', id: 'web3modal/flutter/custom-wallets' },
                 'web3modal/flutter/actions',
+                'web3modal/flutter/events',
                 'web3modal/flutter/theming',
                 'web3modal/flutter/custom-chains',
                 { type: 'doc', label: 'Migration', id: 'web3modal/flutter/migration' },
@@ -175,34 +164,28 @@ module.exports = {
                 }
               ]
             },
-            'web3modal/upgrade',
-            'web3modal/v2/about'
-          ]
-        },
-        {
-          type: 'category',
-          label: 'Web3Wallet',
-          collapsed: true,
-          collapsible: true,
-          items: [
-            'web3wallet/about',
-            'web3wallet/wallet-usage',
-            'web3wallet/namespaces',
-            'web3wallet/mobileLinking',
-            'web3wallet/verify',
-            'web3wallet/push-notifications',
             {
               type: 'category',
-              label: 'Notify API',
+              label: 'Unity',
+              className: 'sidebar__logo sidebar__logo--unity',
               items: [
-                'web3wallet/notify/introduction',
-                'web3wallet/notify/installation',
-                'web3wallet/notify/usage',
-                'web3wallet/notify/spam-protection',
-                'web3wallet/notify/resources'
+                { type: 'doc', label: 'Getting started', id: 'web3modal/unity/about' },
+                'web3modal/unity/usage',
+                'web3modal/unity/options',
+                'web3modal/unity/actions',
+                'web3modal/unity/events'
               ]
             },
-            'web3wallet/resources',
+            {
+              type: 'category',
+              label: 'Features',
+              items: [
+                { type: 'doc', label: 'Email Wallets', id: 'web3modal/features/email' },
+                { type: 'doc', label: 'Onramp', id: 'web3modal/features/onramp' }
+              ]
+            },
+            'web3modal/upgrade',
+            'web3modal/v2/about'
           ]
         },
         {
@@ -216,17 +199,18 @@ module.exports = {
               label: 'Apps',
               items: [
                 'web3inbox/about',
-                'web3inbox/domain-setup',
+                'web3inbox/cloud-setup',
                 {
                   type: 'category',
                   label: 'Frontend Integration',
                   items: [
                     'web3inbox/frontend-integration/usage',
                     'web3inbox/frontend-integration/api',
-                    'web3inbox/frontend-integration/examples'
+                    'web3inbox/frontend-integration/examples',
+                    'web3inbox/frontend-integration/migration-guide'
                   ]
                 },
-                'web3inbox/sending-notifications',
+                'web3inbox/backend-integration',
                 'web3inbox/demo',
                 {
                   type: 'category',
@@ -249,6 +233,45 @@ module.exports = {
             },
             { type: 'doc', label: 'Wallets', id: 'web3inbox/wallets' }
           ]
+        },
+        {
+          type: 'category',
+          label: 'Web3Wallet',
+          collapsed: true,
+          collapsible: true,
+          items: [
+            'web3wallet/about',
+            'web3wallet/wallet-usage',
+            'web3wallet/authenticatedSessions',
+            'web3wallet/namespaces',
+            'web3wallet/mobileLinking',
+            'web3wallet/verify',
+            { type: 'doc', label: 'Modern Wallets (EIP-5792)', id: 'web3wallet/eip5792' },
+            'web3wallet/push-notifications',
+            {
+              type: 'category',
+              label: 'Notify API',
+              items: [
+                'web3wallet/notify/introduction',
+                'web3wallet/notify/installation',
+                'web3wallet/notify/usage',
+                'web3wallet/notify/spam-protection',
+                'web3wallet/notify/resources',
+		{
+		    type: 'category',
+		    label: 'React Native Wallets',
+                    items: [
+                      'web3wallet/notify/react-native-sdk',
+                      'web3inbox/frontend-integration/usage',
+                      'web3inbox/frontend-integration/api',
+                  ]
+
+		}
+              ]
+            },
+            'web3wallet/best_practises',
+            'web3wallet/resources'
+          ]
         }
       ]
     },
@@ -260,9 +283,18 @@ module.exports = {
       items: [
         'cloud/explorer',
         'cloud/explorer-submission',
+        {
+          type: 'category',
+          label: 'Explorer Chains',
+          items: [
+            'cloud/chains/overview',
+            'cloud/chains/chain-list'
+          ]
+        },
         'cloud/verify',
         'cloud/relay',
-        'cloud/blockchain-api'
+        'cloud/blockchain-api',
+        'cloud/analytics'
       ]
     },
     {
@@ -271,56 +303,42 @@ module.exports = {
       collapsible: false,
       className: 'menu_outer_list',
       items: [
+        
         {
           type: 'category',
           label: 'Multi-Chain',
           items: [
-            'advanced/multichain/overview',
-            'advanced/multichain/chain-list',
             {
               type: 'category',
-              label: 'Polkadot',
+              label: 'RPC Reference',
               items: [
-                'advanced/multichain/polkadot/dapp-integration-guide',
-                'advanced/multichain/polkadot/wallet-integration-guide',
-                'advanced/multichain/polkadot/namespaces-guide'
+                'advanced/multichain/rpc-reference/cosmos-rpc',
+                'advanced/multichain/rpc-reference/ethereum-rpc',
+                'advanced/multichain/rpc-reference/solana-rpc',
+                'advanced/multichain/rpc-reference/near-rpc',
+                'advanced/multichain/rpc-reference/starknet-rpc',
+                'advanced/multichain/rpc-reference/stellar-rpc',
+                'advanced/multichain/rpc-reference/tezos-rpc',
+                'advanced/multichain/rpc-reference/xrpl-rpc',
+                'advanced/multichain/rpc-reference/casper-rpc',
+                'advanced/multichain/rpc-reference/everscale-rpc'
+              ]
+            },
+            {
+              type: 'category',
+              label: 'Examples',
+              items: [,
+                {
+                  type: 'category',
+                  label: 'Polkadot',
+                  items: [
+                    'advanced/multichain/polkadot/dapp-integration-guide',
+                    'advanced/multichain/polkadot/namespaces-guide',
+                    'advanced/multichain/polkadot/wallet-integration-guide'
+                  ]
+                }
               ]
             }
-          ]
-        },
-        {
-          type: 'category',
-          label: 'Migration from v1.x',
-          items: [
-            {
-              type: 'doc',
-              id: 'advanced/migration-from-v1.x/overview',
-              label: 'Overview'
-            },
-            {
-              type: 'doc',
-              id: 'advanced/migration-from-v1.x/namespaces',
-              label: 'Namespaces'
-            },
-            {
-              type: 'category',
-              label: 'Dapps',
-              items: [
-                'advanced/migration-from-v1.x/dapps/dapps',
-                'advanced/migration-from-v1.x/dapps/dapp-checklist'
-              ]
-            },
-            {
-              type: 'category',
-              label: 'Wallets',
-              items: [
-                'advanced/migration-from-v1.x/wallets/wallets',
-                'advanced/migration-from-v1.x/wallets/wallet-checklist'
-              ]
-            },
-            'advanced/migration-from-v1.x/what-changed-from-v1.0',
-            'advanced/migration-from-v1.x/migration-faq',
-            'advanced/migration-from-v1.x/explorer-submission'
           ]
         },
         {
@@ -373,7 +391,7 @@ module.exports = {
             {
               type: 'category',
               label: 'Notify',
-              items: ['api/notify/about', 'api/notify/usage']
+              items: ['api/notify/about']
             },
             {
               type: 'category',
@@ -387,7 +405,7 @@ module.exports = {
             }
           ]
         },
-        'advanced/echo-server'
+        'advanced/push-server'
       ]
     },
     {

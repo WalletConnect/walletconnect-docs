@@ -8,34 +8,10 @@ body:
       value: |
         Thanks for taking the time to fill out this feature request!
   - type: textarea
-    id: description
+    id: context
     attributes:
-      label: Is your feature request related to a problem? Please describe.
-      description: A clear and concise description of what the problem is.
-      placeholder: Ex. I'm always frustrated when [...]
-    validations:
-      required: true
-  - type: textarea
-    id: solution
-    attributes:
-      label: Describe the solution you'd like
-      description: A clear and concise description of what you want to see.
-      placeholder: Enter the solution you'd like
-    validations:
-      required: true
-  - type: textarea
-    id: alternatives
-    attributes:
-      label: Describe alternatives you've considered
-      description: A clear and concise description of any alternative solutions or features you've considered.
-      placeholder: Enter the alternatives you've considered
-    validations:
-      required: false
-  - type: textarea
-    id: additional-context
-    attributes:
-      label: Additional context
+      label: Context
       description: Add any other context or screenshots about the feature request here.
-      placeholder: Enter some additional context
+      placeholder: Share the context
     validations:
       required: false

@@ -6,6 +6,14 @@
       "destination": "/:path*"
     },
     {
+      "source": "/advanced/multichain/:path*",
+      "destination": "/cloud/chains/overview"
+    },
+    {
+      "source": "/advanced/multichain/chain-list",
+      "destination": "/cloud/chains/chain-list"
+    },
+    {
       "source": "/web3modal/v2/html/:path*",
       "destination": "/web3modal/v2/javascript/:path*"
     },
@@ -196,6 +204,18 @@
     {
       "source": "/web3inbox/frontend-integration/about",
       "destination": "/web3inbox/frontend-integration/usage"
+    },
+    {
+      "source": "/web3inbox/domain-setup",
+      "destination": "/web3inbox/cloud-setup"
+    },
+    {
+      "source": "/web3inbox/sending-notifications",
+      "destination": "/web3inbox/backend-integration"
+    },
+    {
+      "source": "/advanced/echo-server",
+      "destination": "/advanced/push-server"
     },
     {
       "source": "/web3modal/flutter/installation",

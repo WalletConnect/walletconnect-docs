@@ -10,6 +10,18 @@ import { useWeb3ModalAccount } from '@web3modal/ethers/vue'
 const { address, chainId, isConnected } = useWeb3ModalAccount()
 ```
 
+### useSwitchNetwork
+
+```tsx
+import { useSwitchNetwork } from '@web3modal/ethers/vue'
+
+const chainId = 137
+
+const { switchNetwork } = useSwitchNetwork()
+
+switchNetwork(chainId)
+```
+
 ### useWeb3ModalProvider
 
 Hook that returns the `walletProvider` and the `WalletProviderType`.
@@ -28,4 +40,15 @@ async function onSignMessage() {
 }
 ```
 
-<Button name="Learn More About Ethers" url="https://docs.ethers.org/v6/getting-started/#starting-blockchain" />
+### useWeb3ModalError
+
+```ts
+import { useWeb3ModalError } from '@web3modal/ethers/react'
+
+const { error } = useWeb3ModalError()
+```
+
+<Button
+  name="Learn More About Ethers"
+  url="https://docs.ethers.org/v6/getting-started/#starting-blockchain"
+/>
