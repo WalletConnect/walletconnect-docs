@@ -668,6 +668,10 @@ interface NotifyNotification {
 
 ### Discover apps to subscribe to
 
+A list is maintained by WalletConnect to dapps one can subscribe to.
+
+You can add your app to this list by following: https://docs.walletconnect.com/web3inbox/cloud-setup
+
 <PlatformTabs
     groupId="w3iw"
     activeOptions={["react", "javascript"]}
@@ -700,14 +704,15 @@ return (
 
 ```
 interface NotifyApp {
-  id: string
+  id: string // The ID of the app on the discover list
   name: string
   description: string
   url: string
+  appDomain: string
   icon: string
-  isVerified: boolean
-  isFeatured: boolean
-  isComingSoon: boolean
+  isVerified: boolean // Is this app verified for its domain
+  isFeatured: boolean // Is this app flagged as featured 
+  isComingSoon: boolean // Is this app coming soon or already available 
   subscribe: () => Promise<void>
 }
 ```
@@ -741,7 +746,7 @@ await app[0].subscribe()
 
 ```
 interface NotifyApp {
-  id: string
+  id: string // The ID of the app on the discover list
   name: string
   description: string
   url: string
