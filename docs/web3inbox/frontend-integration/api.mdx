@@ -680,7 +680,9 @@ Apps wanting to provide users a list of apps that users may want to subscribe to
 ```ts
 const { data: apps, isLoading, discover, currentPageNumber, nextPage } = useDiscoverApps({
   isInfiniteScroll?: boolean,
-  appsPerPage?: number
+  appsPerPage?: number,
+  isVerified: true, // Filter by featured projects, defaulted to true
+  isFeatured: true  // Filter by verified projects, defaulted to true
 })
 
 return (
@@ -726,25 +728,41 @@ interface NotifyApp {
 <PlatformTabItem value="javascript">
 
 ```ts
-const { apps, nextPage } = await client.discoverApps({
-  isInfiniteScroll?: boolean,
-  appsPerPage?: number
-})
 
-for(const app of apps) {
-  console.log({
-    id: app.id,
-    name: app.name,
-    url: app.url,
-    icon: app.icon,
-    isVerified: app.isVerified,
-    isFeatured: app.isFeatured,
-    isComingSoon: app.isComingSoon,
-  })
+let apps;
+
+const onUpdate = (newApps) => {
+  for(const app of apps) {
+    console.log({
+      id: app.id,
+      name: app.name,
+      url: app.url,
+      icon: app.icon,
+      isVerified: app.isVerified,
+      isFeatured: app.isFeatured,
+      isComingSoon: app.isComingSoon,
+    })
+  }
+
+  // subscribe to the first app
+  await app[0].subscribe()
 }
 
-// subscribe to the first app
-await app[0].subscribe()
+const { nextPage } = await client.pageDiscoverApps({
+  isInfiniteScroll: boolean,
+  appsPerPage: number,
+  isVerified: true, // Filter by featured projects, defaulted to true
+  isFeatured: true  // Filter by verified projects, defaulted to true
+})(onUpdate)
+
+const singleFetchedApps = await client.discoverApps({
+  page: 1,
+  entries: 5,
+  isVerified: true, // Filter by featured projects, defaulted to true
+  isFeatured: true  // Filter by verified projects, defaulted to true
+})
+
+
 ```
 
 #### References
