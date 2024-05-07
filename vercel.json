@@ -196,6 +196,10 @@
     {
       "source": "/web3inbox/frontend-integration/about",
       "destination": "/web3inbox/frontend-integration/usage"
+    },
+    {
+      "source": "/web3modal/flutter/installation",
+      "destination": "/web3modal/flutter/about"
     }
   ]
 }
