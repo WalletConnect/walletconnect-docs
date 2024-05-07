@@ -678,7 +678,10 @@ Apps wanting to provide users a list of apps that users may want to subscribe to
 <PlatformTabItem value="react">
 
 ```ts
-const { data: apps, isLoading, discover } = useDiscoverApps()
+const { data: apps, isLoading, discover, currentPageNumber, nextPage } = useDiscoverApps({
+  isInfiniteScroll?: boolean,
+  appsPerPage?: number
+})
 
 return (
   <div>
@@ -699,6 +702,8 @@ return (
 
 - **refresh:** `() => NotifyApp[]`, refresh `apps` manually and also return updated `apps`.
 - **apps:** `NotifyApp[]`
+- **isInfiniteScroll:** Whether or not to keep already fetched apps when getting next page
+- **appsPerPage:** Number representing how many apps to get per fetch
 
 ```
 interface NotifyApp {
@@ -721,7 +726,10 @@ interface NotifyApp {
 <PlatformTabItem value="javascript">
 
 ```ts
-const apps = await client.discoverApps()
+const { apps, nextPage } = await client.discoverApps({
+  isInfiniteScroll?: boolean,
+  appsPerPage?: number
+})
 
 for(const app of apps) {
   console.log({
@@ -741,6 +749,8 @@ await app[0].subscribe()
 
 #### References
 - **discoverApps:** `() => NotifyApp[]`
+- **isInfiniteScroll:** Whether or not to keep already fetched apps when getting next page
+- **appsPerPage:** Number representing how many apps to get per fetch
 
 ```
 interface NotifyApp {
