@@ -1,0 +1,38 @@
+import PlatformTabs from '../../components/PlatformTabs'
+import PlatformTabItem from '../../components/PlatformTabItem'
+
+# Email Wallets
+
+Web3Modal SDK enables passwordless Web3 onboarding and authentication, allowing your users interact with your application by creating a non-custodial wallet with just their emails.
+
+:::caution
+
+Email wallets are supported from version 3.2.0 and higher. If you are using an older version, make sure to upgrade.
+
+:::
+
+## Integration
+
+In order to support Email Wallets creation just set `enableEmail` parameter to `true` in `W3MService` initialization.
+
+```dart
+final _w3mService = W3MService(
+  projectId: '{YOUR_PROJECT_ID}',
+  metadata: const PairingMetadata(
+    ...
+  ),
+  enableEmail: true, // OPTIONAL - false by default
+);
+```
+
+## User Flow
+
+1. Users will be able to connect to you application by simply using an email address. Web3Modal will send to them a One Time Password (OTP) to copy and paste in the modal, which will help to verify the user's authenticity. This will create a non-custodial wallet for your user which will be available in any application that integrates Web3Modal and Email Wallets.
+
+2. Eventually the user can optionally choose to move from a non-custodial wallet to a self-custodial one by pressing "Upgrade Wallet" on Web3Modal. This will open the (WalletConnect secure website) that will walk your user through the upgrading process.
+
+:::info Note
+
+Due to Safari’s strict third-party cookie policies, the SDK is not preserving sessions after the app is terminated (removed from memory). So upon app termination the user will have to re-authenticate themself through a new OTP code if they want to sign. Our team is working to solve this issue soon.
+
+:::

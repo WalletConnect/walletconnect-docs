@@ -1,0 +1,32 @@
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
+
+### Install packages
+
+```bash npm2yarn
+npm install react-native-webview @web3modal/email-ethers-react-native
+```
+
+On iOS, use CocoaPods to add the native modules to your project:
+
+```
+npx pod-install
+```
+
+### Add the email connector in `defaultConfig`
+
+```ts
+/* highlight-add-start */
+import { EmailProvider } from '@web3modal/email-ethers-react-native';
+
+const emailProvider = new EmailProvider({ projectId, metadata });
+/* highlight-add-end */
+
+const config = defaultConfig({
+  metadata,
+  /* highlight-add-start */
+  extraConnectors: [emailProvider],
+  /* highlight-add-end */
+})
+```
+
