@@ -122,6 +122,7 @@ module.exports = {
                 { type: 'doc', label: 'Getting started', id: 'web3modal/flutter/installation' },
                 { type: 'doc', label: 'Usage', id: 'web3modal/flutter/options' },
                 { type: 'doc', label: 'Options', id: 'web3modal/flutter/custom-wallets' },
+                { type: 'doc', label: 'Email Wallets', id: 'web3modal/flutter/email-wallets' },
                 'web3modal/flutter/actions',
                 'web3modal/flutter/events',
                 'web3modal/flutter/theming',

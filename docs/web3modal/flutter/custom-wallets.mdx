@@ -13,6 +13,8 @@ final _w3mService = W3MService(
       universal: 'https://www.walletconnect.com',
     ),
   ),
+  // enableAnalytics: true, // OPTIONAL - null by default
+  // enableEmail: true, // OPTIONAL - false by default
   // requiredNamespaces: {}, OPTIONAL
   // optionalNamespaces: {}, OPTIONAL
   // featuredWalletIds: {}, OPTIONAL
@@ -20,6 +22,15 @@ final _w3mService = W3MService(
   // excludedWalletIds: {}, OPTIONAL
 );
 ```
+
+## enableAnalytics
+
+Enable analytics to get more insights on your users activity within your [WalletConnect Cloud's dashboard](https://cloud.walletconnect.com)
+
+## enableEmail
+
+Used to enable/disable [Email Wallets](./email-wallets) feature.
+
 
 ## requiredNamespaces and optionalNamespaces
 
