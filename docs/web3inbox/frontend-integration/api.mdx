@@ -678,11 +678,11 @@ Apps wanting to provide users a list of apps that users may want to subscribe to
 <PlatformTabItem value="react">
 
 ```ts
-const { data: apps, isLoading, discover, currentPageNumber, nextPage } = useDiscoverApps({
-  isInfiniteScroll?: boolean,
-  appsPerPage?: number,
-  isVerified: true, // Filter by featured projects, defaulted to true
-  isFeatured: true  // Filter by verified projects, defaulted to true
+const { data: apps, isLoading, currentPageNumber, nextPage, previousPage, getPage } = useDiscoverApps({
+  isInfiniteScroll?: boolean, // Default to false
+  appsPerPage?: number, // Default to 10
+  isVerified?: boolean, // Filter by featured projects, defaulted to true
+  isFeatured?: boolean  // Filter by verified projects, defaulted to true
 })
 
 return (
@@ -702,7 +702,7 @@ return (
 
 #### References
 
-- **refresh:** `() => NotifyApp[]`, refresh `apps` manually and also return updated `apps`.
+- **getPage:** `(page: number) => Promise<NotifyApp[]>`, Fetch a specific page, does not affect state 
 - **apps:** `NotifyApp[]`
 - **isInfiniteScroll:** Whether or not to keep already fetched apps when getting next page
 - **appsPerPage:** Number representing how many apps to get per fetch
@@ -729,9 +729,7 @@ interface NotifyApp {
 
 ```ts
 
-let apps;
-
-const onUpdate = (newApps) => {
+const onUpdate = ({apps, currentPage}: {apps: NotifyApp[], currentPage: number}) => {
   for(const app of apps) {
     console.log({
       id: app.id,
@@ -748,11 +746,11 @@ const onUpdate = (newApps) => {
   await app[0].subscribe()
 }
 
-const { nextPage } = await client.pageDiscoverApps({
-  isInfiniteScroll: boolean,
-  appsPerPage: number,
-  isVerified: true, // Filter by featured projects, defaulted to true
-  isFeatured: true  // Filter by verified projects, defaulted to true
+const { previousPage, nextPage } = await client.pageDiscoverApps({
+  isInfiniteScroll?: boolean, // Default to false
+  appsPerPage?: number, // Default to 10
+  isVerified?: boolean, // Filter by featured projects, defaulted to true
+  isFeatured?: boolean  // Filter by verified projects, defaulted to true
 })(onUpdate)
 
 const singleFetchedApps = await client.discoverApps({
