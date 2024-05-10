@@ -687,7 +687,6 @@ const { data: apps, isLoading, currentPageNumber, nextPage, previousPage, getPag
 
 return (
   <div>
-    <button onClick={discover}> Refresh list </button>
     {apps.map(app => (
       <div onClick={app.subscribe} key={app.id}>
         <img src={app.icon} />
@@ -696,6 +695,9 @@ return (
         <span> {app.url} </span>
       </div>
     )}
+	<button onClick={nextPage} />
+	<button onClick={previousPage} />
+	<span> Page: {currentPageNumber} </span>
   </div>
 )
 ```
