@@ -77,6 +77,10 @@ const PLATFORM_MAP = [
   {
     value: 'web3js',
     label: 'Web3.js'
+  },
+  {
+    value: '1clickauth',
+    label: '1 Click Auth'
   }
 ]
 
