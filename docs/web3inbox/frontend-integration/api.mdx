@@ -109,7 +109,7 @@ client.watchAccount(account => {
 
 <PlatformTabs
 	groupId="w3iw"
-	activeOptions={["react", "javascript"]}
+	activeOptions={["react", "react (1 Click Auth)", "javascript", "javascript (1 Click Auth)]}
 >
 
 **Note**: [EIP-1271 signatures](https://eips.ethereum.org/EIPS/eip-1271) coming from smart wallets are supported in version `1.1.0` and above.
@@ -132,6 +132,154 @@ const handleRegistration = async () => {
     await register({ registerParams, signature })
   } catch (registerIdentityError: any) {
     console.error(registerIdentityError)
+  }
+}
+```
+
+#### References
+
+- **isRegistered:** A boolean of whether or not the account currently set is registered
+- **prepareRegistration:** Prepare registration params
+- **register:** Register using a signature and register params
+- **isLoading:** A boolean, representing if an account is being registered
+
+Some suggested methods of signing the message:
+
+- `@wagmi/core` [`signMessage` method](https://wagmi.sh/core/api/actions/signMessage)
+- The [`useSignMessage` hook](https://wagmi.sh/react/hooks/useSignMessage) in `@wagmi`
+- Ethers.js [`Wallet.signMessage` method](https://docs.ethers.org/v5/api/signer/#Signer-signMessage)
+
+</PlatformTabItem>
+
+<PlatformTabItem value="1 Click Auth">
+With [1 Click Auth](https://docs.walletconnect.com/web3wallet/authenticatedSessions), you can avoid the secondary signature request needed for typical `register` call. Instead, you can use a SIWE config like the one below for [Web3Modal SIWE](TODO LINK HERE WHEN ITS OUT OF ALPHA) 
+
+```ts
+let registerParams: Awaited<ReturnType<Web3InboxClient['prepareRegistrationViaRecaps']>> | null =
+  null
+
+export const getMessageParams = async (client: Web3InboxClient | null) => {
+  if (!client) {
+    throw new Error('Client not ready yet')
+  }
+
+  registerParams = await client.prepareRegistrationViaRecaps({
+    domain: window.location.hostname,
+    allApps: true
+  })
+
+  const { cacaoPayload } = registerParams
+
+  return {
+    chains: wagmiConfig.chains.map(chain => chain.id),
+    domain: cacaoPayload.domain,
+    statement: cacaoPayload.statement ?? undefined,
+    uri: cacaoPayload.uri,
+    resources: cacaoPayload.resources
+  }
+}
+
+export const createMessage = ({ address, ...args }: SIWECreateMessageArgs) => {
+  if (!registerParams) {
+    throw new Error("Can't create message if registerParams is undefined")
+  }
+
+  registerParams = {
+    ...registerParams,
+    cacaoPayload: {
+      ...registerParams?.cacaoPayload,
+      ...args
+    }
+  }
+
+  const message = formatMessage(registerParams.cacaoPayload, address)
+
+  // statement is generated in format message and not part of original payload.
+  const statement = message.split('\n')[3]
+  registerParams.cacaoPayload.statement = statement
+
+  return message
+}
+
+export const getNonce = async () => {
+  return registerParams?.cacaoPayload.nonce ?? 'FAILED_NONCE'
+}
+
+export const getSession = async (client: Web3InboxClient | null) => {
+  const { address, chainId } = getAccount({ ...wagmiConfig })
+
+  await waitFor(async () => !!client)
+
+  const account = `eip155:${chainId}:${address}`
+
+  const identityKey = await client?.getAccountIsRegistered(account)
+
+  const invalidSession = !(address && chainId && identityKey)
+
+  if (invalidSession) throw new Error('Failed to get account')
+
+  return {
+    address,
+    chainId
+  }
+}
+
+const verifySiweMessage = async (params: SIWEVerifyMessageArgs, client: Web3InboxClient | null) => {
+  if (!client) {
+    throw new Error('Failed to verify message - no client')
+  }
+
+  if (!registerParams) {
+    throw new Error('Failed to verify message - no registerParams saved')
+  }
+
+  // Start signing the signature modal so it does not show up
+  // in sign 2.5
+  const account = composeDidPkh(
+    `${getChainIdFromMessage(params.message)}:${getAddressFromMessage(params.message)}`
+  )
+
+  if (await client.getAccountIsRegistered(account)) {
+    return true
+  }
+
+  // Unregister account if registered with a faulty registration.
+  try {
+    await client.unregister({ account })
+  } catch (e) {}
+
+  await client.register({
+    registerParams: {
+      allApps: true,
+      cacaoPayload: {
+        ...registerParams.cacaoPayload,
+        ...params.cacao?.p,
+        iss: account
+      },
+      privateIdentityKey: registerParams.privateIdentityKey
+    },
+    signature: params.signature
+  })
+
+  return true
+}
+
+export const verifyMessage = async (
+  params: SIWEVerifyMessageArgs,
+  client: Web3InboxClient | null
+) => {
+  try {
+    const messageIsValid = await verifySiweMessage(params, client)
+
+    const account = `${getChainIdFromMessage(params.message)}:${getAddressFromMessage(params.message)}`
+
+    if (messageIsValid) {
+      await waitFor(() => client!.getAccountIsRegistered(account))
+    }
+
+    return messageIsValid
+  } catch (e) {
+    return false
   }
 }
 ```
