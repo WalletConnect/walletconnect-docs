@@ -204,7 +204,7 @@ ooverride val onSessionAuthenticate: ((Wallet.Model.SessionAuthenticate, Wallet.
 
   authPayloadParams.chains.forEach { chain ->
     val issuer = "did:pkh:$chain:$address"
-    val formattedMessage = Web3Wallet.formatAuthMessage(Sign.Params.FormatMessage(authPayloadParams, issuer))
+    val formattedMessage = Web3Wallet.formatAuthMessage(Wallet.Params.FormatAuthMessage(authPayloadParams, issuer))
 
     val signature = signMessage(message: formattedMessage, privateKey: privateKey) //Note: Assume `signMessage` is a function you've implemented to sign messages.
     val auth = Web3Wallet.generateAuthObject(authPayloadParams, issuer, signature)
