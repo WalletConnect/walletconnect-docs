@@ -22,13 +22,31 @@ It is recommended that you use WalletConnect Cloud for simplicity and ease of in
 
 ![fmc-and-apns-details-form](/assets/apns-fmc-details.png)
 
-### Firebase Cloud Messaging (FCM)
+### Firebase Cloud Messaging API (FCM v1)
 
-Google's FCM allows you to use send notifications to both Android and Apple devices. At this time, we only support Android devices via FCM.
+- In your Firebase project settings, under _Firebase Cloud Messaging API (V1)_, click the Manage Service Accounts link
+- You may use the default `firebase-adminsdk` service account, but we recommend making a minimally privileged service account:
+  - Click the _Create service account_ button
+  - Provide an arbitrary name and ID. E.g. `WalletConnect Cloud Push Server` and click _Create and Continue_
+    ![Provide a name](/assets/push-fcmv1-create-sa.png)
+  - Click Done
+- Next create keys for the service account by clicking on the `⋮` button next to the service account and selecting _Manage keys_
+  - Click _Add key_ -> _Create new key_
+  - Select _JSON_ and click _Create_
+  - A `.json` file containing the service account credentials will be automatically downloaded to your computer
+- Upload the credentaials JSON file to your Cloud project's settings
 
-Currently we only support Cloud Messaging API (Legacy) but are currently working on supporting Firebase Cloud Messaging API (V1) very soon.
+### Cloud Messaging API (FCM Legacy)
 
-- Enable Legacy Cloud Messaging API in the Firebase Project Settings
+:::caution
+FCM Legacy is deprecated and [will be removed in June 2024](https://firebase.google.com/docs/cloud-messaging/migrate-v1). We strongly encourage you to setup FCM v1 (above) instead.
+
+When FCM v1 is enabled in WalletConnect Cloud, it will replace the use of the legacy FCM API. No migration of devices/apps is necessary.
+:::
+
+Google's FCM allows you to use send notifications to both Android and Apple devices. At this time, we only support apps using the FCM client API.
+
+- Enable Legacy Cloud Messaging API in the Firebase project settings
   ![legacy-fcm-cloud-messaging](/assets/legacy-fcm-cloud-messaging-api.png)
 - [Set up Android](https://firebase.google.com/docs/cloud-messaging/android/client)
 - [Set up Apple](https://firebase.google.com/docs/cloud-messaging/ios/client)
