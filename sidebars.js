@@ -202,6 +202,7 @@ module.exports = {
               items: [
                 'web3inbox/about',
                 'web3inbox/cloud-setup',
+                'web3inbox/cloud-sending',
                 {
                   type: 'category',
                   label: 'Frontend Integration',
