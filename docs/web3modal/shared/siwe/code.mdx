@@ -111,12 +111,7 @@ function createMessage({ nonce, address, chainId }: SIWECreateMessageArgs){
 
 /* Function that returns the user's session */
 async function getSession(){
-  const session = await getSession()
-  if (!session) throw new Error('Failed to get session!')
-
-  const { address, chainId } = session
-
-  return { address, chainId }
+  //...
 }
 
 /* Use your SIWE server to verify if the message and the signature are valid */

@@ -78,7 +78,7 @@ import {
 import { useCallback, useEffect } from 'react'
 import { useSignMessage, useAccount } from 'wagmi'
 
-import Messages from './Messages'
+import Notifications from './Notifications'
 
 export default function App() {
   // Wagmi Hooks
@@ -134,7 +134,7 @@ export default function App() {
                 {isSubscribed ? 'Unsubscribe' : 'Subscribe'}
               </button>
               <hr />
-              {isSubscribed ? <Messages /> : null}
+              {isSubscribed ? <Notifications /> : null}
             </div>
           </div>
         )}
@@ -145,34 +145,39 @@ export default function App() {
 ```
 
 ```tsx
-//Messages.tsx
+// Notifications.tsx
 import { useNotifications } from '@web3inbox/react'
 import React from 'react'
-import styles from '@/styles/Messages.module.css'
+import styles from '@/styles/Notifications.module.css'
 
-function Messages() {
-  const { data: notifications } = useNotifications(3, false)
+function Notifications() {
+  const { data: subscription } = useSubscription()
+  const { data: notifications } = useNotifications(5)
 
   return (
     <div>
-      <h2 className={styles.heading}>Previous Messages</h2>
-      <div className={styles.messageContainer}>
+      <h2 className={styles.heading}>Notifications</h2>
+      <p>You have {subscription.unreadCount} unread notifications.</p>
+      <div className={styles.notificationsContainer}>
         {!notifications?.length ? (
-          <p className={styles.fallbackText}>No messages yet.</p>
+          <p className={styles.fallbackText}>No notifications yet.</p>
         ) : (
           notifications.map(({ id, ...message }) => (
             <div key={id} className={styles.message}>
               <h3>{message.title}</h3>
               <p>{message.body}</p>
+              <p>{message.isRead ? "Read" : "Unread"}</p>
+              <button onClick={message.markAsRead}>Mark as read</button>
             </div>
           ))
         )}
       </div>
+      <button onClick={nextPage}>Next page</button>
     </div>
   )
 }
 
-export default Messages
+export default Notifications
 ```
 
 </PlatformTabItem>
@@ -209,7 +214,8 @@ client.pageNotifications(
   isInfiniteScroll
 )(notifications => {
   // add logic to display notifications here.
-  //if isInfiniteScroll is true, notifications will contain all notifications fetched so far, else it will only fetch current page
+  // if isInfiniteScroll is true, notifications will contain all notifications fetched so far, else it will only fetch current page
+  // See API docs for more information on `pageNotifications()` and how to use `notifications`
 })
 ```
 

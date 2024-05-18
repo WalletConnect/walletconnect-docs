@@ -970,6 +970,12 @@ await dappClient.Disconnect(sessionTopic);
 await dappClient.Disconnect(sessionTopic, Error.FromErrorType(ErrorType.USER_DISCONNECTED));
 ```
 
+#### Subscribe to session events
+
+```csharp
+dappClient.SubscribeToSessionEvent("chainChanged", OnChainChanged);
+```
+
 </PlatformTabItem>
 
 <PlatformTabItem value="unity">

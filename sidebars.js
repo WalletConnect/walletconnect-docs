@@ -109,6 +109,7 @@ module.exports = {
                 'web3modal/react-native/options',
                 'web3modal/react-native/hooks',
                 'web3modal/react-native/components',
+                'web3modal/react-native/email',
                 'web3modal/react-native/resources'
               ]
             },
@@ -121,6 +122,7 @@ module.exports = {
                 { type: 'doc', label: 'Getting started', id: 'web3modal/flutter/installation' },
                 { type: 'doc', label: 'Usage', id: 'web3modal/flutter/options' },
                 { type: 'doc', label: 'Options', id: 'web3modal/flutter/custom-wallets' },
+                { type: 'doc', label: 'Email Wallets', id: 'web3modal/flutter/email-wallets' },
                 'web3modal/flutter/actions',
                 'web3modal/flutter/events',
                 'web3modal/flutter/theming',
@@ -166,6 +168,18 @@ module.exports = {
                   label: 'Example',
                   href: 'https://github.com/WalletConnect/web3modal-swift/tree/develop/Sample/Example'
                 }
+              ]
+            },
+            {
+              type: 'category',
+              label: 'Unity',
+              className: 'sidebar__logo sidebar__logo--unity',
+              items: [
+                { type: 'doc', label: 'Getting started', id: 'web3modal/unity/about' },
+                'web3modal/unity/usage',
+                'web3modal/unity/options',
+                'web3modal/unity/actions',
+                'web3modal/unity/events'
               ]
             },
             {
@@ -239,6 +253,7 @@ module.exports = {
             'web3wallet/namespaces',
             'web3wallet/mobileLinking',
             'web3wallet/verify',
+            { type: 'doc', label: 'Modern Wallets (EIP-5792)', id: 'web3wallet/eip5792' },
             'web3wallet/push-notifications',
             {
               type: 'category',
@@ -274,6 +289,14 @@ module.exports = {
       items: [
         'cloud/explorer',
         'cloud/explorer-submission',
+        {
+          type: 'category',
+          label: 'Explorer Chains',
+          items: [
+            'cloud/chains/overview',
+            'cloud/chains/chain-list'
+          ]
+        },
         'cloud/verify',
         'cloud/relay',
         'cloud/blockchain-api',
@@ -286,12 +309,11 @@ module.exports = {
       collapsible: false,
       className: 'menu_outer_list',
       items: [
+        
         {
           type: 'category',
           label: 'Multi-Chain',
           items: [
-            'advanced/multichain/overview',
-            'advanced/multichain/chain-list',
             {
               type: 'category',
               label: 'RPC Reference',
@@ -310,11 +332,17 @@ module.exports = {
             },
             {
               type: 'category',
-              label: 'Polkadot',
-              items: [
-                'advanced/multichain/polkadot/dapp-integration-guide',
-                'advanced/multichain/polkadot/wallet-integration-guide',
-                'advanced/multichain/polkadot/namespaces-guide'
+              label: 'Examples',
+              items: [,
+                {
+                  type: 'category',
+                  label: 'Polkadot',
+                  items: [
+                    'advanced/multichain/polkadot/dapp-integration-guide',
+                    'advanced/multichain/polkadot/namespaces-guide',
+                    'advanced/multichain/polkadot/wallet-integration-guide'
+                  ]
+                }
               ]
             }
           ]

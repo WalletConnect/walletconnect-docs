@@ -16,6 +16,10 @@ The WalletConnect protocol is multi-chain by design. By using the [CAIP-25 stand
 If you don't see your chain listed in this [list](./chain-list.mdx), then you will need to create an issue in GitHub to to get the process started.
 You can do so by clicking [here](https://github.com/WalletConnect/walletconnect-monorepo/issues/new?assignees=&labels=type%3A+new+chain+request&template=new_chain_to_explorer.md&title=). Once your chain is added to this list, wallets & dapps will be able to indicate support for your chain via WalletConnect's [Cloud](https://cloud.walletconnect.com).
 
+## CASA
+
+To register a chain, you must know both its native representation (the chainID used with that kind of blockchain) _and_ its Chain Agnostic Standards Alliance representation, which can be found reading the relevant CAIP-2 profiles on the [CASA Namespaces Project Docs](https://namespaces.chainagnostic.org/). If no such profile yet exists, you can collaborate with an expert in the respective chain's tooling and submit a [namespaces PR](https://github.com/ChainAgnostic/namespaces/?tab=readme-ov-file#namespaces) to add one.
+
 ## Add RPC Methods
 
 Integrate RPC method support into the example wallets and dapp.
@@ -33,10 +37,6 @@ Integrate RPC method support into the example wallets and dapp.
 ## Promote
 
 For a chain to benefit users, its prominent wallets and dApps must be registered in the Explorer. Encourage them to join the API, allowing users to view the wallets as options when connecting to a dApp.
-
-## [Web3Modal](../../web3modal/about.mdx)
-
-After adding the chain to the Explorer, Web3Modal can be utilized to offer users a seamless experience when connecting to their wallet.
 
 ## Wagmi & Viem
 
