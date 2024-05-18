@@ -1470,7 +1470,7 @@ const updatedNamespaces = {
   }
 }
 const { acknowledged } = await web3wallet.updateSession({ topic: session.topic, namespaces: updatedNamespaces })
-// if you wish to be notified when the dapp acks the update
+// If you wish to be notified when the dapp acknowledges the update.
 // note that if the dapp is offline `acknowledged` will not resolve until it comes back online
 await acknowledged();
 ```
