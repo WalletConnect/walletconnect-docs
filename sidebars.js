@@ -383,11 +383,6 @@ module.exports = {
             },
             {
               type: 'category',
-              label: 'Chat',
-              items: ['api/chat/about', 'api/chat/usage', 'api/chat/resources']
-            },
-            {
-              type: 'category',
               label: 'Core',
               items: ['api/core/pairing', 'api/core/relay', 'api/core/shared-core']
             },
