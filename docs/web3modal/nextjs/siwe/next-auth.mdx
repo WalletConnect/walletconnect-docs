@@ -1,7 +1,7 @@
 ---
 title: SIWE
 ---
-import Button from '../../components/button'
+import Button from '../../../components/button'
 
 # Sign In With Ethereum
 
@@ -18,7 +18,7 @@ It is designed from the ground up to support Next.js and Serverless. We can use 
 Install the Web3Modal SIWE package, additionally we also recommend installing [siwe](https://docs.login.xyz/) and [next-auth](https://next-auth.js.org/).
 
 ```bash npm2yarn
-npm i @web3modal/siwe siwe next-auth
+npm i next-auth
 ```
 
 ## Configure your SIWE Client
@@ -100,6 +100,106 @@ createWeb3Modal({
 Add `NEXTAUTH_SECRET` as an environment variable, it will be used to encrypt and decrypt user sessions. [Learn more.](https://next-auth.js.org/configuration/options#nextauth_secret)
 
 Create your API route at `app/api/auth/[...nextauth]/route.ts`.
+
+<Tabs>
+<TabItem value="one-click-auth" label="One-Click Auth">
+
+```ts
+import NextAuth from "next-auth"
+import credentialsProvider from 'next-auth/providers/credentials'
+import {
+  type SIWESession,
+  verifySignature,
+  getChainIdFromMessage,
+  getAddressFromMessage
+} from '@web3modal/siwe'
+
+declare module 'next-auth' {
+  interface Session extends SIWESession {
+    address: string
+    chainId: number
+  }
+}
+
+const nextAuthSecret = process.env.NEXTAUTH_SECRET
+if (!nextAuthSecret) {
+  throw new Error('NEXTAUTH_SECRET is not set')
+}
+
+const projectId = process.env.NEXT_PUBLIC_PROJECT_ID
+if (!projectId) {
+  throw new Error('NEXT_PUBLIC_PROJECT_ID is not set')
+}
+
+const providers = [
+  credentialsProvider({
+    name: 'Ethereum',
+    credentials: {
+      message: {
+        label: 'Message',
+        type: 'text',
+        placeholder: '0x0'
+      },
+      signature: {
+        label: 'Signature',
+        type: 'text',
+        placeholder: '0x0'
+      }
+    },
+    async authorize(credentials) {
+      try {
+        if (!credentials?.message) {
+          throw new Error('SiweMessage is undefined')
+        }
+        const { message, signature } = credentials
+        const address = getAddressFromMessage(message)
+        const chainId = getChainIdFromMessage(message)
+
+        const isValid = await verifySignature({ address, message, signature, chainId, projectId })
+
+        if (isValid) {
+          return {
+            id: `${chainId}:${address}`
+          }
+        }
+
+        return null
+      } catch (e) {
+        return null
+      }
+    }
+  })
+]
+
+const handler = NextAuth({
+    // https://next-auth.js.org/configuration/providers/oauth
+    secret: nextAuthSecret,
+    providers,
+    session: {
+      strategy: 'jwt'
+    },
+    callbacks: {
+      session({ session, token }) {
+        if (!token.sub) {
+          return session
+        }
+
+        const [, chainId, address] = token.sub.split(':')
+        if (chainId && address) {
+          session.address = address
+          session.chainId = parseInt(chainId, 10)
+        }
+
+        return session
+      }
+    }
+})
+
+export { handler as GET, handler as POST }
+```
+
+</TabItem>
+<TabItem value="legacy" label="Legacy">
 
 ```ts
 import { NextAuthOptions } from 'next-auth'
@@ -193,7 +293,19 @@ const handler = NextAuth(authOptions)
 export { handler as GET, handler as POST }
 ```
 
-<Button name="Learn more about NextAuth" url="https://next-auth.js.org/" />
+## Initialize Web3Modal with your `siweConfig`.
+
+```js
+createWeb3Modal({
+  siweConfig,
+  ...
+})
+```
+
+</TabItem>
+</Tabs>
+
+<Button name="Learn More" url="https://next-auth.js.org/" />
 
 ### SIWE Config reference
 

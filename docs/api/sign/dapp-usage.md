@@ -517,6 +517,7 @@ Capabilities are specified through ReCap URIs in the resources field of the Sign
 To initiate an authentication and authorization request, a dApp invokes the authenticate() method, passing in parameters that include desired capabilities as outlined in EIP-5573. The method generates a pairing URI for user interaction, facilitating a streamlined authentication and consent process.
 
 Example of initiating an authentication request with ReCaps:
+
 ```kotlin
  val authenticateParams = Sign.Params.Authenticate(
             domain = "your.domain",

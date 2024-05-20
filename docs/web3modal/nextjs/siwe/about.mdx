@@ -1,0 +1,227 @@
+---
+title: Implementation
+---
+
+import SiweCode from '../../shared/siwe/code.mdx'
+import SiweParams from '../../shared/siwe/parameters.mdx'
+import YoutubeEmbed from '../../../components/YoutubeEmbed'
+
+# Sign In With Ethereum
+
+Web3Modal SDK provides a simple solution for integrating with "Sign In With Ethereum" (SIWE), a new form of authentication that enables users to control their digital identity with their Ethereum account.
+SIWE is a standard also known as [EIP-4361](https://docs.login.xyz/general-information/siwe-overview/eip-4361).
+
+## One-Click Auth
+
+**One-Click Auth** represents a key advancement within WalletConnect v2, streamlining the user authentication process in Web3Modal by enabling them to seamlessly connect with a wallet and sign a SIWE message with just one click.
+
+Connecting a wallet, proving control of an address with an off-chain signature, authorizing specific actions. These are the kinds of authorizations that can be encoded as ["ReCaps"](https://eips.ethereum.org/EIPS/eip-5573). ReCaps are permissions for a specific website or dapp that can be compactly encoded as a long string in the message you sign and translated by any wallet into a straight-forward one-sentence summary.
+WalletConnect uses permissions expressed as ReCaps to enable a One-Click Authentication.
+
+## Installation
+
+<Tabs>
+<TabItem value="one-click-auth" label="One-Click Auth">
+
+:::caution
+Make sure the main Web3Modal package is also in alpha.
+:::
+
+```bash npm2yarn
+npm i @web3modal/siwe@alpha
+```
+
+</TabItem>
+<TabItem value="legacy" label="Legacy">
+
+## Video Tutorial
+
+<YoutubeEmbed videoId="SX6ercNOvc8" />
+
+:::caution
+For a better UX we recommend using One-Click Auth.
+:::
+
+Install the Web3Modal SIWE package, additionally we also recommend installing [siwe](https://docs.login.xyz/) which will abstract a lot of the required logic.
+
+```bash npm2yarn
+npm i @web3modal/siwe siwe
+```
+
+</TabItem>
+</Tabs>
+
+## Configure your SIWE Client
+
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
+
+<Tabs>
+<TabItem value="one-click-auth" label="One-Click Auth">
+
+```ts
+import { getCsrfToken, signIn, signOut, getSession } from 'next-auth/react'
+import type { SIWEVerifyMessageArgs, SIWECreateMessageArgs, SIWESession } from '@web3modal/siwe'
+import { createSIWEConfig, formatMessage } from '@web3modal/siwe'
+import { mainnet, sepolia } from 'viem/chains'
+
+export const siweConfig = createSIWEConfig({
+  getMessageParams: async () => ({
+    domain: typeof window !== 'undefined' ? window.location.host : '',
+    uri: typeof window !== 'undefined' ? window.location.origin : '',
+    chains: [mainnet.id, sepolia.id],
+    statement: 'Please sign with your account'
+  }),
+  createMessage: ({ address, ...args }: SIWECreateMessageArgs) => formatMessage(args, address),
+  getNonce: async () => {
+    const nonce = await getCsrfToken()
+    if (!nonce) {
+      throw new Error('Failed to get nonce!')
+    }
+
+    return nonce
+  },
+  getSession: async () => {
+    const session = await getSession()
+    if (!session) {
+      throw new Error('Failed to get session!')
+    }
+
+    const { address, chainId } = session as unknown as SIWESession
+
+    return { address, chainId }
+  },
+  verifyMessage: async ({ message, signature }: SIWEVerifyMessageArgs) => {
+    try {
+      const success = await signIn('credentials', {
+        message,
+        redirect: false,
+        signature,
+        callbackUrl: '/protected'
+      })
+
+      return Boolean(success?.ok)
+    } catch (error) {
+      return false
+    }
+  },
+  signOut: async () => {
+    try {
+      await signOut({
+        redirect: false
+      })
+
+      return true
+    } catch (error) {
+      return false
+    }
+  }
+})
+```
+
+### `verifySignature`
+
+Verify a SIWE signature.
+
+```ts
+import { verifySignature } from '@web3modal/siwe'
+
+const isValid = await verifySignature({ address, message, signature, chainId, projectId })
+```
+
+### `getChainIdFromMessage`
+
+Get the chain ID from the SIWE message.
+
+```ts
+import { getChainIdFromMessage } from '@web3modal/siwe'
+
+const chainId = getChainIdFromMessage(message)
+```
+
+### `getAddressFromMessage`
+
+Get the address from the SIWE message.
+
+```ts
+import { getAddressFromMessage } from '@web3modal/siwe'
+
+const address = getAddressFromMessage(message)
+```
+
+</TabItem>
+<TabItem value="legacy" label="Legacy">
+
+With help of the [siwe package](https://docs.login.xyz/sign-in-with-ethereum/quickstart-guide/implement-the-frontend) we will create the required configuration for Web3Modal.
+
+:::note
+The nonce and verification process will be implemented in your backend. [Read more.](https://docs.login.xyz/sign-in-with-ethereum/quickstart-guide/implement-the-backend)
+:::
+
+```ts
+import { SiweMessage } from 'siwe'
+import { createSIWEConfig } from '@web3modal/siwe'
+import type { SIWECreateMessageArgs, SIWEVerifyMessageArgs } from '@web3modal/siwe'
+
+/* Function that creates a SIWE message */
+function createMessage({ nonce, address, chainId }: SIWECreateMessageArgs){
+  const message = new SiweMessage({
+    version: '1',
+    domain: window.location.host,
+    uri: window.location.origin,
+    address,
+    chainId,
+    nonce,
+    statement: 'Sign in With Ethereum.'
+  })
+
+  return message.prepareMessage()
+}
+
+/* Function that returns the user's session */
+async function getSession(){
+  const session = await getSession()
+  if (!session) throw new Error('Failed to get session!')
+
+  const { address, chainId } = session
+
+  return { address, chainId }
+}
+
+/* Use your SIWE server to verify if the message and the signature are valid */
+async function verifyMessage({ message, signature }: SIWEVerifyMessageArgs){
+  try {
+    const isValid = await validateMessage({ message, signature })
+
+    return isValid
+  } catch (error) {
+    return false
+  }
+},
+
+/* Create a SIWE configuration object */
+const siweConfig = createSIWEConfig({
+  createMessage,
+  getNonce,
+  getSession,
+  verifyMessage,
+  signOut
+})
+```
+
+</TabItem>
+</Tabs>
+
+
+## Initialize Web3Modal with your `siweConfig`
+
+```ts
+createWeb3Modal({
+  //..
+  siweConfig
+})
+```
+
+## SIWE Config Parameters
+
+<SiweParams />

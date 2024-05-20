@@ -59,7 +59,11 @@ module.exports = {
                 'web3modal/nextjs/components',
                 'web3modal/nextjs/email',
                 'web3modal/nextjs/onramp',
-                'web3modal/nextjs/siwe',
+                {
+                  type: 'category',
+                  label: 'One-Click Auth / SIWE',
+                  items: ['web3modal/nextjs/siwe/about', 'web3modal/nextjs/siwe/next-auth']
+                },
                 'web3modal/nextjs/theming',
                 'web3modal/nextjs/resources'
               ]
@@ -182,6 +186,7 @@ module.exports = {
               type: 'category',
               label: 'Features',
               items: [
+                { type: 'doc', label: 'One-Click Auth', id: 'web3modal/features/one-click-auth' },
                 { type: 'doc', label: 'Email Wallets', id: 'web3modal/features/email' },
                 { type: 'doc', label: 'Onramp', id: 'web3modal/features/onramp' }
               ]
@@ -260,16 +265,15 @@ module.exports = {
                 'web3wallet/notify/usage',
                 'web3wallet/notify/spam-protection',
                 'web3wallet/notify/resources',
-		{
-		    type: 'category',
-		    label: 'React Native Wallets',
-                    items: [
-                      'web3wallet/notify/react-native-sdk',
-                      'web3inbox/frontend-integration/usage',
-                      'web3inbox/frontend-integration/api',
+                {
+                  type: 'category',
+                  label: 'React Native Wallets',
+                  items: [
+                    'web3wallet/notify/react-native-sdk',
+                    'web3inbox/frontend-integration/usage',
+                    'web3inbox/frontend-integration/api'
                   ]
-
-		}
+                }
               ]
             },
             'web3wallet/best_practises',

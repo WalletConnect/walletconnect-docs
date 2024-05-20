@@ -160,9 +160,11 @@ For this example we will create a file called `config/index.tsx` outside our app
 
 ```tsx
 import { defaultWagmiConfig } from '@web3modal/wagmi/react/config'
+import { alphaWalletConnect } from '@web3modal/wagmi'
 
 import { cookieStorage, createStorage } from 'wagmi'
 import { mainnet, sepolia } from 'wagmi/chains'
+import { injected, coinbaseWallet } from 'wagmi/connectors'
 
 // Get projectId at https://cloud.walletconnect.com
 export const projectId = process.env.NEXT_PUBLIC_PROJECT_ID
@@ -184,7 +186,7 @@ export const config = createConfig({
     [sepolia.id]: http()
   },
   connectors: [
-    walletConnect({ projectId, metadata, showQrModal: false }),
+    alphaWalletConnect({ projectId, metadata, showQrModal: false }),
     injected({ shimDisconnect: true }),
     coinbaseWallet({
       appName: metadata.name,
