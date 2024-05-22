@@ -58,7 +58,7 @@ const modal = createWeb3Modal({
 In your `main.ts` file set up the following configuration.
 
 ```ts
-import { createWeb3Modal, alphaWalletConnect } from '@web3modal/wagmi'
+import { createWeb3Modal, walletConnect } from '@web3modal/wagmi'
 
 import { reconnect, http, createConfig } from '@wagmi/core'
 import { mainnet, sepolia } from '@wagmi/core/chains'
@@ -81,7 +81,7 @@ const config = createConfig({
     [sepolia.id]: http()
   },
   connectors: [
-    alphaWalletConnect({ projectId, metadata, showQrModal: false }),
+    walletConnect({ projectId, metadata, showQrModal: false }),
     injected({ shimDisconnect: true }),
     coinbaseWallet({
       appName: metadata.name,

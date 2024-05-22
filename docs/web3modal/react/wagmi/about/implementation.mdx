@@ -71,7 +71,7 @@ On top of your app set up the following configuration, making sure that all func
 
 ```tsx
 import { createWeb3Modal } from '@web3modal/wagmi/react'
-import { alphaWalletConnect } from '@web3modal/wagmi'
+import { walletConnect } from '@web3modal/wagmi'
 
 import { http, createConfig, WagmiProvider } from 'wagmi'
 import { mainnet, sepolia } from 'wagmi/chains'
@@ -100,7 +100,7 @@ const config = createConfig({
     [sepolia.id]: http()
   },
   connectors: [
-    alphaWalletConnect({ projectId, metadata, showQrModal: false }),
+    walletConnect({ projectId, metadata, showQrModal: false }),
     injected({ shimDisconnect: true }),
     coinbaseWallet({
       appName: metadata.name,
