@@ -169,10 +169,6 @@ const result = await provider.request({ method: 'eth_requestAccounts' })
 provider.sendAsync({ method: 'eth_requestAccounts' }, CallBackFunction)
 ```
 
-## Session data
-
-Once a wallet is connected you can find the session data in `provider.session`. This includes the connected wallet metadata (name, description, icon, etc).
-
 ## Events
 
 ```typescript
@@ -189,3 +185,46 @@ provider.on('display_uri', handler)
 // session disconnected from the wallet - this won't be called when the disconnect function is called from the dapp.
 provider.on('disconnect', handler)
 ```
+
+## Session data
+
+Once a wallet is connected you can find the session data in the `provider.session` object.
+
+The session object includes the following properties, _among others_:
+
+- **namespaces**: `session.namespaces` is an object that contains the approved session data.
+
+:::caution
+
+Note that the `chains` object is an optional parameter and may be undefined. Therefore, we encourage apps to obtain the approved chains from the `session.accounts` object instead.
+
+:::
+
+```ts
+interface Namespaces {
+    chains?: string[];
+    accounts: string[];
+    methods: string[];
+    events: string[];
+}
+```
+
+- **requiredNamespaces, optionalNamespaces & sessionProperties**: These objects contain the namespaces and properties proposed for the session.
+- **peer**: The `session.peer.metadata` object contains the metadata of the connected wallet.
+
+```ts
+  interface Metadata {
+    name: string;
+    description: string;
+    url: string;
+    icons: string[];
+    verifyUrl?: string;
+    redirect?: {
+      native?: string;
+      universal?: string;
+    };
+  }
+
+```
+
+Find the complete type definition of the `session` object [here](https://github.com/WalletConnect/walletconnect-monorepo/blob/022e4d492c9862ab9b17c1a7b12884bdcd992ae4/packages/types/src/sign-client/session.ts#L25).
