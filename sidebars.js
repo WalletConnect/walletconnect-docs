@@ -30,7 +30,6 @@ module.exports = {
           collapsible: true,
           items: [
             'web3modal/about',
-            'web3modal/quickstart',
 
             {
               type: 'category',
