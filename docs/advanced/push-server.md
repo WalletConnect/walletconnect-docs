@@ -25,7 +25,7 @@ It is recommended that you use WalletConnect Cloud for simplicity and ease of in
 ### Firebase Cloud Messaging API (FCM v1)
 
 - In your Firebase project settings, under _Firebase Cloud Messaging API (V1)_, click the Manage Service Accounts link
-- You may use the default `firebase-adminsdk` service account, but we recommend making a minimally privileged service account:
+- You may use the default `firebase-adminsdk` service account, but we recommend making a minimally privileged service account. Eg a ready-made role from Firebase `Firebase Cloud Messaging Admin` would only give access to messaging and notifications:
   - Click the _Create service account_ button
   - Provide an arbitrary name and ID. E.g. `WalletConnect Cloud Push Server` and click _Create and Continue_
     ![Provide a name](/assets/push-fcmv1-create-sa.png)
