@@ -1,0 +1,73 @@
+import PlatformTabs from '../../../components/PlatformTabs'
+import PlatformTabItem from '../../../components/PlatformTabItem'
+
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
+
+The Coinbase connector now includes a new flag to customize the Smart Wallet behavior.
+
+:::info Note
+To enable the Coinbase Smart Wallet feature, ensure that Web3Modal is updated to version 4.2.3 or higher. Additionally, if you are using Wagmi, verify that it is on the latest version.
+:::
+
+The `preference` (or `coinbasePreference`) flag accepts one of the following string values:
+
+- `eoaOnly`: Uses EOA Browser Extension or Mobile Coinbase Wallet.
+- `smartWalletOnly`: Displays Smart Wallet popup.
+- `all` (default): Supports both `eoaOnly` and `smartWalletOnly` based on context.
+
+<PlatformTabs groupId="eth-lib" activeOptions={["wagmi", "ethers"]}>
+<PlatformTabItem value="wagmi">
+
+Web3Modal can be configured in **two** different ways: **Default** or **Custom**
+
+Select your preferred configuration mode below:
+
+<Tabs>
+<TabItem value="default" label="Default">
+
+```ts
+export const config = defaultWagmiConfig({
+  //...
+  /* highlight-add-start */
+  coinbasePreference: 'smartWalletOnly'
+  /* highlight-add-end */
+})
+```
+
+</TabItem>
+<TabItem value="custom" label="Custom">
+
+Learn more about the Coinbase connector in the [Wagmi documentation](https://wagmi.sh/react/api/connectors/coinbaseWallet#preference).
+
+```ts
+const config = createConfig({
+  //...
+  connectors: [
+    coinbaseWallet({
+      //...
+    /* highlight-add-start */
+      preference: 'smartWalletOnly',
+    /* highlight-add-end */
+    })
+  ]
+})
+```
+
+</TabItem>
+</Tabs>
+
+</PlatformTabItem>
+<PlatformTabItem value="ethers">
+
+```ts
+export const config = defaultWagmiConfig({
+  //...
+  /* highlight-add-start */
+  coinbasePreference: 'smartWalletOnly'
+  /* highlight-add-end */
+})
+```
+
+</PlatformTabItem>
+</PlatformTabs>
