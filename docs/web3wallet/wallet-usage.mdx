@@ -156,12 +156,13 @@ Each execution trace consists of:
 * Error Events: Captured when errors occur during the trace, halting the execution trace.
 
 When an error event is encountered, it is stored locally within the SDK along with all preceding trace events.
-These stored events are then transmitted to the server using the Pulse API whenever the SDK is initialized.
+These stored events are then transmitted to the server whenever the SDK is initialized.
 
 Error event tracing is enabled by default.
 
 Telemetry Enabled (telemetryEnabled = true):
 * The SDK stores events and sends them to the server.
+
 Telemetry Disabled (telemetryEnabled = false):
 * The SDK stops storing new events and deletes all unsent events from local storage upon the next initialization.
 
