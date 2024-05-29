@@ -1,0 +1,16 @@
+
+8. Initialize `CoinbaseProvider` and add it in the default config
+
+```tsx
+import { CoinbaseProvider } from '@web3modal/coinbase-ethers-react-native'
+
+const coinbaseProvider = new CoinbaseProvider({
+  redirect: 'YOUR_APP_SCHEME://',
+  rpcUrl: mainnet.rpcUrl
+})
+
+const config = defaultConfig({
+  metadata,
+  coinbase: coinbaseProvider
+})
+```
