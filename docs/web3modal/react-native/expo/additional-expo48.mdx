@@ -1,0 +1,52 @@
+
+<details>
+<summary>Additional setup for Expo SDK 48 only</summary>
+<div>
+
+If you are using Expo SDK 48, you also need to polyfill `crypto` with expo-crypto library.
+
+1. Add `expo-crypto`
+
+```
+npx expo install expo-crypto
+```
+
+2. Create a file named `crypto-polyfill.js`
+
+```js
+// src/crypto-polyfill.js
+
+// Apply only with Expo SDK 48
+import { getRandomValues as expoCryptoGetRandomValues } from 'expo-crypto'
+
+class Crypto {
+  getRandomValues = expoCryptoGetRandomValues
+}
+
+// eslint-disable-next-line no-undef
+const webCrypto = typeof crypto !== 'undefined' ? crypto : new Crypto()
+
+;(() => {
+  if (typeof crypto === 'undefined') {
+    Object.defineProperty(window, 'crypto', {
+      configurable: true,
+      enumerable: true,
+      get: () => webCrypto
+    })
+  }
+})()
+```
+
+3. Import `crypto-polyfill.js` in your App root file
+
+```js
+// src/App.js
+
+import './crypto-polyfill.js'
+import '@walletconnect/react-native-compat';
+...
+import { createWeb3Modal } from '@web3modal/...'
+```
+
+</div>
+</details>
