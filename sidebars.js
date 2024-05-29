@@ -41,8 +41,9 @@ module.exports = {
                 'web3modal/react/options',
                 'web3modal/react/components',
                 'web3modal/react/email',
-                'web3modal/react/onramp',
                 'web3modal/react/siwe',
+                'web3modal/react/smart-accounts',
+                'web3modal/react/onramp',
                 'web3modal/react/theming',
                 'web3modal/react/resources'
               ]
@@ -59,6 +60,7 @@ module.exports = {
                 'web3modal/nextjs/email',
                 'web3modal/nextjs/onramp',
                 'web3modal/nextjs/siwe',
+                'web3modal/nextjs/smart-accounts',
                 'web3modal/nextjs/theming',
                 'web3modal/nextjs/resources'
               ]
@@ -75,6 +77,7 @@ module.exports = {
                 'web3modal/vue/email',
                 'web3modal/vue/onramp',
                 'web3modal/vue/siwe',
+                'web3modal/vue/smart-accounts',
                 'web3modal/vue/theming',
                 'web3modal/vue/resources'
               ]
@@ -90,6 +93,7 @@ module.exports = {
                 'web3modal/javascript/components',
                 'web3modal/javascript/email',
                 'web3modal/javascript/siwe',
+                'web3modal/javascript/smart-accounts',
                 'web3modal/javascript/onramp',
                 'web3modal/javascript/theming',
                 'web3modal/javascript/resources'
