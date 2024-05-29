@@ -122,6 +122,7 @@ val projectId = "" // Get Project ID at https://cloud.walletconnect.com/
 val relayUrl = "relay.walletconnect.com"
 val serverUrl = "wss://$relayUrl?projectId=$projectId"
 val connectionType = ConnectionType.AUTOMATIC or ConnectionType.MANUAL
+val telemetryEnabled: Boolean = true
 val appMetaData = Core.Model.AppMetaData(
     name = "Wallet Name",
     description = "Wallet Description",
@@ -130,7 +131,7 @@ val appMetaData = Core.Model.AppMetaData(
     redirect = "kotlin-wallet-wc:/request" // Custom Redirect URI
 )
 
-CoreClient.initialize(relayServerUrl = serverUrl, connectionType = connectionType, application = this, metaData = appMetaData)
+CoreClient.initialize(relayServerUrl = serverUrl, connectionType = connectionType, application = this, metaData = appMetaData, telemetryEnabled = telemetryEnabled)
 
 val initParams = Wallet.Params.Init(core = CoreClient)
 
@@ -141,6 +142,30 @@ Web3Wallet.initialize(initParams) { error ->
 
 The Web3Wallet client will always be responsible for exposing accounts (CAIP10 compatible) to a Dapp and therefore is also in charge of signing.
 To initialize the Web3Wallet client, create a `Wallet.Params.Init` object in the Android Application class with the Core Client. The `Wallet.Params.Init` object will then be passed to the `Web3Wallet`initialize function.
+
+The telemetry feature aims to improve the reliability and observability of connection flows between decentralized applications (dapps) and wallets.
+It focuses solely on collecting data about code execution and error codes, without tracking any sensitive user information.
+
+It provides a comprehensive tracing system for three key use cases:
+* Subscribing to a Pairing Topic
+* Approving a Session
+* Approving an Authenticated Session
+
+Each execution trace consists of:
+* Trace Events: Collected to verify the proper execution of code.
+* Error Events: Captured when errors occur during the trace, halting the execution trace.
+
+When an error event is encountered, it is stored locally within the SDK along with all preceding trace events.
+These stored events are then transmitted to the server using the Pulse API whenever the SDK is initialized.
+
+Error event tracing is enabled by default.
+
+Telemetry Enabled (telemetryEnabled = true):
+* The SDK stores events and sends them to the server.
+Telemetry Disabled (telemetryEnabled = false):
+* The SDK stops storing new events and deletes all unsent events from local storage upon the next initialization.
+
+Important Note: Since the SDK only stores abstract trace and error data, user identification is not possible
 
 </PlatformTabItem>
 <PlatformTabItem value="flutter">
