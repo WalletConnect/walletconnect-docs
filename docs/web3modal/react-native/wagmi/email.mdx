@@ -1,0 +1,34 @@
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
+
+### Install packages
+
+```bash npm2yarn
+npm install @web3modal/email-wagmi-react-native@alpha react-native-webview
+```
+
+On iOS, use CocoaPods to add the native modules to your project:
+
+```
+npx pod-install
+```
+
+### Add the email connector in `defaultWagmiConfig`
+
+```ts
+/* highlight-add-start */
+import { emailConnector } from '@web3modal/email-wagmi-react-native';
+
+const email = emailConnector({ projectId, metadata });
+/* highlight-add-end */
+
+const wagmiConfig = defaultWagmiConfig({
+  chains,
+  projectId,
+  metadata,
+  /* highlight-add-start */
+  extraConnectors: [email]
+  /* highlight-add-end */
+})
+```
+

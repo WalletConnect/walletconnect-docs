@@ -1,0 +1,20 @@
+
+8. Initialize `CoinbaseConnector` and add it in `extraConnectors`
+
+```tsx
+import { CoinbaseConnector } from '@web3modal/coinbase-wagmi-react-native'
+
+const coinbaseConnector = new CoinbaseConnector({
+  chains,
+  options: {
+    redirect: 'YOUR_APP_SCHEME://'
+  }
+})
+
+const wagmiConfig = defaultWagmiConfig({
+  chains,
+  projectId,
+  metadata,
+  extraConnectors: [coinbaseConnector]
+})
+```

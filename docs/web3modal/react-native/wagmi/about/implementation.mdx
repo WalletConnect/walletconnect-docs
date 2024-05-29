@@ -6,15 +6,19 @@ Finally, pass your configuration to `createWeb3Modal`.
 
 :::info Note
 
-Make sure you import `@walletconnect/react-native-compat` and `@ethersproject/shims` before using our package to avoid any issues.
+Make sure you import `@walletconnect/react-native-compat` before `wagmi` to avoid any issues.
 
 :::
 
 ```tsx
 import '@walletconnect/react-native-compat'
-import '@ethersproject/shims'
+import { WagmiProvider } from 'wagmi';
+import { mainnet, polygon, arbitrum } from '@wagmi/core/chains'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { createWeb3Modal, defaultWagmiConfig, Web3Modal } from '@web3modal/wagmi-react-native'
 
-import { createWeb3Modal, defaultConfig, Web3Modal } from '@web3modal/ethers5-react-native'
+// 0. Setup queryClient
+const queryClient = new QueryClient()
 
 // 1. Get projectId at https://cloud.walletconnect.com
 const projectId = 'YOUR_PROJECT_ID'
@@ -26,45 +30,31 @@ const metadata = {
   url: 'https://web3modal.com',
   icons: ['https://avatars.githubusercontent.com/u/37784886'],
   redirect: {
-    native: 'YOUR_APP_SCHEME://'
+    native: 'YOUR_APP_SCHEME://',
+    universal: 'YOUR_APP_UNIVERSAL_LINK.com'
   }
 }
 
-const config = defaultConfig({ metadata })
+const chains = [mainnet, polygon, arbitrum] as const
 
-// 3. Define your chains
-const mainnet = {
-  chainId: 1,
-  name: 'Ethereum',
-  currency: 'ETH',
-  explorerUrl: 'https://etherscan.io',
-  rpcUrl: 'https://cloudflare-eth.com'
-}
+const wagmiConfig = defaultWagmiConfig({ chains, projectId, metadata })
 
-const polygon = {
-  chainId: 137,
-  name: 'Polygon',
-  currency: 'MATIC',
-  explorerUrl: 'https://polygonscan.com',
-  rpcUrl: 'https://polygon-rpc.com'
-}
-
-const chains = [mainnet, polygon]
-
-// 4. Create modal
+// 3. Create modal
 createWeb3Modal({
   projectId,
   chains,
-  config,
+  wagmiConfig,
   enableAnalytics: true // Optional - defaults to your Cloud configuration
 })
 
 export default function App() {
   return (
-    <>
-      // Rest of your app...
-      <Web3Modal />
-    </>
+    <WagmiProvider config={wagmiConfig}>
+      <QueryClientProvider client={queryClient}>
+        // Rest of your app...
+        <Web3Modal />
+      </QueryClientProvider>
+    </WagmiProvider>
   )
 }
 ```
@@ -78,7 +68,7 @@ To open Web3Modal you can use our **default** button component or build your own
 You can use default components to open the modal
 
 ```tsx
-import { W3mButton } from '@web3modal/ethers5-react-native'
+import { W3mButton } from '@web3modal/wagmi-react-native'
 
 export default function ConnectView() {
   return (
@@ -99,7 +89,7 @@ You can trigger the modal by calling the `open` function from `useWeb3Modal` hoo
 
 ```tsx
 import { Pressable, Text } from 'react-native'
-import { useWeb3Modal } from '@web3modal/ethers5-react-native'
+import { useWeb3Modal } from '@web3modal/wagmi-react-native'
 
 export default function ConnectView() {
   const { open } = useWeb3Modal()
