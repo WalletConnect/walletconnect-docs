@@ -1,0 +1,43 @@
+:root {
+  --ifm-heading-color: #1d2d35;
+  --ifm-color-primary: #1c8aff;
+}
+
+.custom-list__logo{
+  list-style: none;
+  margin: 0;
+  padding: .8rem 0 .4rem 1.25rem;
+}
+
+@media (max-width: 996px) {
+  .navbar__brand{
+    display: flex !important;
+  }
+}
+
+.navbar__brand {
+  font-weight: bold;
+  color: var(--ifm-heading-color);
+}
+
+.navbar__brand span {
+  text-transform: uppercase;
+  font-family: 'Office Code Pro', monospace;
+  font-weight: normal;
+  color: var(--ifm-color-primary);
+  margin-left: 5px;
+}
+
+.navbar__logo {
+  display: flex;
+  align-items: center;
+}
+
+.navbar__logo img {
+  width: 30px;
+  height: 18px;
+}
+.menu__list-item-collapsible {
+  margin-left: -24px;
+  padding-left: 24px;
+}
