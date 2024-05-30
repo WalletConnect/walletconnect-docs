@@ -1579,7 +1579,10 @@ const updatedNamespaces = {
     accounts
   }
 }
-await web3wallet.updateSession({ topic: session.topic, namespaces: updatedNamespaces })
+const { acknowledged } = await web3wallet.updateSession({ topic: session.topic, namespaces: updatedNamespaces })
+// If you wish to be notified when the dapp acknowledges the update.
+// note that if the dapp is offline `acknowledged` will not resolve until it comes back online
+await acknowledged();
 ```
 
 An example adding a new chain to an existing session:
@@ -1702,7 +1705,10 @@ await request.Acknowledged();
 Sessions have a default expiry of 7 days. To extend a session by an additional 7 days, call `.extendSession` method and pass in the `topic` of the session you wish to extend.
 
 ```javascript
-await web3wallet.extendSession({ topic })
+const { acknowledged } = await web3wallet.extendSession({ topic })
+// if you wish to be notified when the dapp acks the extend
+// note that if the dapp is offline `acknowledged` will not resolve until it comes back online
+await acknowledged(); 
 ```
 
 #### 🛠️ Usage examples
