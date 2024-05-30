@@ -38,7 +38,7 @@ final _w3mService = W3MService(
   ),
 );
 
-// Register callbacks on the Web3App you'd like to use. See `Events` section.
+// Register here the event callbacks on the service you'd like to use. See `Events` section.
 
 await _w3mServices.init();
 ```
@@ -47,7 +47,7 @@ The `metadata` object should contain your dApp's name, description, url and icon
 
 ## Redirect to your dApp
 
-The service's metadata object contains a `redirect` option that serves to the purpose of redirecting back to your dapp from the connected wallet. Please see [mobileLinking](../../web3wallet/mobileLinking?platform=flutter) docs for a bit more of context.
+The service's metadata object contains a `redirect` option that serves to the purpose of redirecting back to your dapp from the connected wallet. Please see [Mobile Linking](../../web3wallet/mobileLinking?platform=flutter) docs for a bit more of context.
 
 ```dart
 redirect: Redirect(
