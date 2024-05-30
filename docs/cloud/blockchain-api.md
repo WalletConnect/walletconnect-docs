@@ -1,8 +1,10 @@
 # Blockchain API
 
-The Blockchain API is WalletConnect's built-in RPC service that powers Web3Modal's blockchain functions such as account balances, ENS resolution, transaction history, and more.
+The Blockchain API is the RPC service that powers Web3Modal's blockchain functions such as account balances, ENS resolution, transaction history, and more.
 
-The Blockchain API is designed to work with all of the chains that WalletConnect and Web3Modal supports.
+:::info
+Blockchain API is not the same as the WalletConnect protocol. WalletConnect protocol supports wallets on all chains using the [CAIP-25](https://chainagnostic.org/CAIPs/caip-25) standard. We do not accept requests for new chains to be added to our Blockchain API. Please see your SDK's relevant documentation on how to add RPC URLs for chains you want to use that Blockchain API does not.
+:::
 
 ## Features
 
@@ -11,17 +13,15 @@ The Blockchain API is designed to work with all of the chains that WalletConnect
 - HTTP RPC support
 - Cloud metrics and reporting
 - The Identity API with near-instant ENS resolution
-- Transaction history (coming soon)
+- Transaction history
 
 ## Supported Chains
 
-The Blockchain API supports popular chains such as Ethereum, Binance Smart Chain, Solana, and more.
-
-See the full list of [supported chains](https://github.com/WalletConnect/rpc-proxy/blob/master/SUPPORTED_CHAINS.md).
+The Blockchain API supports popular chains such as Ethereum, Binance Smart Chain, Solana, and more. See the full list of [supported chains](https://github.com/WalletConnect/blockchain-api/blob/master/SUPPORTED_CHAINS.md).
 
 ## Using the Blockchain API
 
-No config or setup is needed for Web3Modal integrations. For other usage, see the [Usage](https://github.com/walletconnect/rpc-proxy#usage) section.
+No config or setup is needed for Web3Modal integrations. For other usage, see the [Usage](https://github.com/walletconnect/blockchain-api#usage) section.
 
 ## Limits
 
@@ -29,5 +29,5 @@ The Blockchain API is free for 6 million requests per 30 days.
 
 ## Links
 
-- [Supported chains](https://github.com/WalletConnect/rpc-proxy/blob/master/SUPPORTED_CHAINS.md)
-- [The Blockchain API GitHub repo](https://github.com/WalletConnect/rpc-proxy)
+- [Supported chains](https://github.com/WalletConnect/blockchain-api/blob/master/SUPPORTED_CHAINS.md)
+- [The Blockchain API GitHub repo](https://github.com/WalletConnect/blockchain-api)
