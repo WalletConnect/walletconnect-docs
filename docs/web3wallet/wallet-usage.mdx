@@ -172,32 +172,42 @@ Important Note: Since the SDK only stores abstract trace and error data, user id
 Example of the error events:
 ```json
 [
-	{
-	  "eventId": "69e53f11-fd4b-4efc-8d36-1f60a9ac8207",
-	  "bundleId": "com.wallet.example",
-	  "timestamp": 1689611327943,
-	  "props": {
-		  "event": "ERROR",
-	    "type": "pairing_already_exists",
-	    "properties": {
-		    "topic": "topic1",
-		    "trace": ["pairing_started", "pairing_uri_validation_success", "pairing_uri_not_expired", "existing_pairing", "pairing_not_expired", "pairing_not_expired"]
-	    }
-	  }
-	},
-	{
-		"eventId": "69e53f11-fd4b-4efc-8d36-2321312fds",
-	  "bundleId": "com.wallet.example",
-	  "timestamp": 16896113234323,
-	  "props": {
-		  "event": "ERROR",
+  {
+    "eventId": "69e53f11-fd4b-4efc-8d36-1f60a9ac8207",
+    "bundleId": "com.wallet.example",
+    "timestamp": 1689611327943,
+    "props": {
+      "event": "ERROR",
+      "type": "pairing_already_exists",
+      "properties": {
+        "topic": "topic1",
+        "trace": [
+          "pairing_started",
+          "pairing_uri_validation_success",
+          "pairing_uri_not_expired",
+          "existing_pairing",
+          "pairing_not_expired",
+          "pairing_not_expired"
+        ]
+      }
+    }
+  },
+  {
+    "eventId": "69e53f11-fd4b-4efc-8d36-2321312fds",
+    "bundleId": "com.wallet.example",
+    "timestamp": 16896113234323,
+    "props": {
+      "event": "ERROR",
       "type": "session_approve_namespace_validation_failure",
-	    "properties": {
-		    "topic": "topic2",
-			  "trace": ["session_approve_started", "proposal_not_expired"]
-	    }
-	  }
-	}
+      "properties": {
+        "topic": "topic2",
+        "trace": [
+          "session_approve_started",
+          "proposal_not_expired"
+        ]
+      }
+    }
+  }
 ]
 ```
 
