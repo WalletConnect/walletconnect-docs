@@ -24,22 +24,32 @@ It is recommended that you use WalletConnect Cloud for simplicity and ease of in
 
 ### Firebase Cloud Messaging API (FCM v1)
 
-- In your Firebase project settings, under _Firebase Cloud Messaging API (V1)_, click the Manage Service Accounts link
-- You may use the default `firebase-adminsdk` service account, but we recommend making a minimally privileged service account. Eg a ready-made role from Firebase `Firebase Cloud Messaging Admin` would only give access to messaging and notifications:
+- In your [Firebase](https://console.firebase.google.com) project settings, under _Firebase Cloud Messaging API (V1)_, click the Manage Service Accounts link
+  ![Manage service accounts link](/assets/push-fcmv1-manage-service-accounts.png)
+- You may use the default `firebase-adminsdk` service account, but we recommend making a new, minimally privileged, service account. Eg a ready-made role from Firebase `Firebase Cloud Messaging API Admin` would only give access to messaging and notifications:
   - Click the _Create service account_ button
+    ![Create service account button](/assets/push-fcmv1-create-sa-button.png)
   - Provide an arbitrary name and ID. E.g. `WalletConnect Cloud Push Server` and click _Create and Continue_
     ![Provide a name](/assets/push-fcmv1-create-sa.png)
+  - Select the `Firebase Cloud Messaging API Admin` role and click _Continue_
+    ![Select the `Firebase Cloud Messaging API Admin` role](/assets/push-fcmv1-create-sa-grants.png)
   - Click Done
-- Next create keys for the service account by clicking on the `⋮` button next to the service account and selecting _Manage keys_
-  - Click _Add key_ -> _Create new key_
+- Next create keys for the service account by clicking on the `⋮` button next to the service account and selecting _Manage keys_  
+  ![Manage keys](/assets/push-fcmv1-sa-manage-keys.png)
+  - Click _Add key_ -> _Create new key_  
+    ![Create new key](/assets/push-fcmv1-sa-new-key.png)
   - Select _JSON_ and click _Create_
   - A `.json` file containing the service account credentials will be automatically downloaded to your computer
-- Upload the credentaials JSON file to your Cloud project's settings
+- Upload the credentaials JSON file to your Cloud project's FCM V1 settings and click _Save_
+
+You should now see a green checkbox indicating that FCM V1 has been enabled! Now any clients that register themselves on the Push Server will receive FCM push notifications for relay messages to that client.
 
 ### Cloud Messaging API (FCM Legacy)
 
 :::caution
-FCM Legacy is deprecated and [will be removed in June 2024](https://firebase.google.com/docs/cloud-messaging/migrate-v1). We strongly encourage you to setup FCM v1 (above) instead.
+FCM Legacy is deprecated and [will be removed June 20, 2024](https://firebase.google.com/docs/cloud-messaging/migrate-v1). We strongly encourage you to setup FCM v1 (above) instead.
+
+![FCM legacy deprecated](/assets/push-fcm-legacy-deprecated.png)
 
 When FCM v1 is enabled in WalletConnect Cloud, it will replace the use of the legacy FCM API. No migration of devices/apps is necessary.
 :::
