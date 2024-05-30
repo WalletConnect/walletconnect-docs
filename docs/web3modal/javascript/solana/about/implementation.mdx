@@ -1,0 +1,83 @@
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
+
+Web3Modal Solana is built on top of the Web3Modal library and provides a set of components and actions to easily connect Solana wallets with your application.
+
+On top of your app set up the following configuration, making sure that all functions are called outside any React component to avoid unwanted rerenders.
+
+<Tabs>
+<TabItem value="default" label="Default">
+
+```tsx
+import { createWeb3Modal, defaultSolanaConfig } from '@web3modal/solana'
+import { solana, solanaTestnet, solanaDevnet } from '@web3modal/solana/chains'
+
+// 0. Setup chains
+const chains = [solana, solanaTestnet, solanaDevnet]
+
+// 1. Get projectId from https://cloud.walletconnect.com
+const projectId = 'YOUR_PROJECT_ID'
+
+// 2. Create solanaConfig
+const metadata = {
+  name: 'Web3Modal',
+  description: 'Web3Modal Solana Example',
+  url: 'https://web3modal.com', // origin must match your domain & subdomain
+  icons: ['https://avatars.githubusercontent.com/u/37784886']
+}
+
+const solanaConfig = defaultSolanaConfig({
+  metadata,
+  chains,
+  projectId
+})
+
+// 3. Create modal
+const modal = createWeb3Modal({
+  solanaConfig,
+  chains,
+  projectId
+})
+```
+
+</TabItem>
+<TabItem value="custom" label="Custom">
+
+```tsx
+import { createWeb3Modal, defaultSolanaConfig } from '@web3modal/solana'
+import { solana, solanaTestnet, solanaDevnet } from '@web3modal/solana/chains'
+
+// 0. Setup chains
+const chains = [solana, solanaTestnet, solanaDevnet]
+
+// 1. Get projectId from https://cloud.walletconnect.com
+const projectId = 'YOUR_PROJECT_ID'
+
+// 2. Create solanaConfig
+const metadata = {
+  name: 'Web3Modal',
+  description: 'Web3Modal Solana Example',
+  url: 'https://web3modal.com', // origin must match your domain & subdomain
+  icons: ['https://avatars.githubusercontent.com/u/37784886']
+}
+
+const solanaConfig = defaultSolanaConfig({
+  metadata,
+  chains,
+  projectId
+})
+
+// 3. Create modal
+const modal = createWeb3Modal({
+  solanaConfig: defaultSolanaConfig({
+    metadata,
+    enableInjected: true // Optional - defaults to true
+  }), // required
+  chains, // required
+  projectId, // required
+  enableAnalytics: true // Optional - defaults to your Cloud configuration
+})
+```
+
+</TabItem>
+</Tabs>

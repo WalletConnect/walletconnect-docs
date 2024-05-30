@@ -30,7 +30,6 @@ module.exports = {
           collapsible: true,
           items: [
             'web3modal/about',
-
             {
               type: 'category',
               className: 'sidebar__logo sidebar__logo--react',
@@ -187,7 +186,8 @@ module.exports = {
               items: [
                 { type: 'doc', label: 'One-Click Auth', id: 'web3modal/features/one-click-auth' },
                 { type: 'doc', label: 'Email Wallets', id: 'web3modal/features/email' },
-                { type: 'doc', label: 'Onramp', id: 'web3modal/features/onramp' }
+                { type: 'doc', label: 'Onramp', id: 'web3modal/features/onramp' },
+                { type: 'doc', label: 'Solana', id: 'web3modal/features/solana' }
               ]
             },
             'web3modal/upgrade',

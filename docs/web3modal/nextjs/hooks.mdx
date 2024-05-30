@@ -4,6 +4,7 @@ import PlatformTabItem from '../../components/PlatformTabItem'
 
 import WagmiHooks from './wagmi/hooks.mdx'
 import EthersHooks from './ethers/hooks.mdx'
+import SolanaHooks from './solana/hooks.mdx'
 
 # Hooks
 
@@ -13,7 +14,8 @@ Hooks are functions that will help you control the modal, subscribe to wallet ev
 
 Control the modal with the `useWeb3Modal` hook
 
-<PlatformTabs groupId="eth-lib" activeOptions={["wagmi", "ethers5","ethers"]}>
+<PlatformTabs groupId="eth-lib" activeOptions={["wagmi", "ethers5","ethers","solana"]}>
+
 <PlatformTabItem value="wagmi">
 
 ```ts
@@ -48,6 +50,21 @@ export default function Component() {
 
 ```ts
 import { useWeb3Modal } from '@web3modal/ethers/react'
+
+export default function Component() {
+  const { open, close } = useWeb3Modal()
+
+  open()
+
+  //...
+}
+```
+
+</PlatformTabItem>
+<PlatformTabItem value="solana">
+
+```ts
+import { useWeb3Modal } from '@web3modal/solana/react'
 
 export default function Component() {
   const { open, close } = useWeb3Modal()
@@ -148,7 +165,7 @@ export default Component(){
 
 Get the current value of the modal's state
 
-<PlatformTabs groupId="eth-lib" activeOptions={["wagmi", "ethers5","ethers"]}>
+<PlatformTabs groupId="eth-lib" activeOptions={["wagmi", "ethers5","ethers","solana"]}>
 <PlatformTabItem value="wagmi">
 
 ```ts
@@ -171,6 +188,15 @@ const { open, selectedNetworkId } = useWeb3ModalState()
 
 ```ts
 import { useWeb3ModalState } from '@web3modal/ethers/react'
+
+const { open, selectedNetworkId } = useWeb3ModalState()
+```
+
+</PlatformTabItem>
+<PlatformTabItem value="solana">
+
+```ts
+import { useWeb3ModalState } from '@web3modal/solana/react'
 
 const { open, selectedNetworkId } = useWeb3ModalState()
 ```

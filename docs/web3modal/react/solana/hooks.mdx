@@ -1,0 +1,61 @@
+import Button from '../../../components/button'
+
+### useWeb3ModalAccount
+
+Hook that returns the client's information.
+
+```tsx
+import { useWeb3ModalAccount } from '@web3modal/solana/react'
+
+function Components() {
+  const { address, chainId, isConnected } = useWeb3ModalAccount()
+
+  //...
+}
+```
+
+### useWeb3ModalProvider
+
+Hook that returns the `walletProvider` and the `WalletProviderType`.
+
+```tsx
+import { useWeb3ModalAccount, useWeb3ModalProvider } from '@web3modal/solana/react'
+
+function SignMessage() {
+  // 0. Get account and provider
+  const { address } = useWeb3ModalAccount()
+  const { walletProvider } = useWeb3ModalProvider()
+
+  // 1. Create a function to sign a message
+  async function onSignMessage() {
+    try {
+      if (!walletProvider || !address) {
+        throw Error('user is disconnected')
+      }
+
+      // 2. Encode message and sign it
+      const encodedMessage = new TextEncoder().encode('Hello from Web3Modal')
+      const signature = await walletProvider.signMessage(encodedMessage)
+
+      console.log(signature)
+    } catch (err) {
+      // Handle Error Here
+    }
+  }
+
+  // 3. Create a button to trigger the function
+  return <button onClick={onSignMessage}>Sign Message</button>
+}
+```
+
+### useWeb3ModalError
+
+```ts
+import { useWeb3ModalError } from '@web3modal/solana/react'
+
+function Components() {
+  const { error } = useWeb3ModalError()
+
+  //...
+}
+```

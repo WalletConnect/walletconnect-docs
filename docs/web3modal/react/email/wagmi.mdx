@@ -1,0 +1,118 @@
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
+
+You can start integrating Email Login into Web3Modal SDK using either **default** or **custom** mode.
+
+<Tabs>
+<TabItem value="default" label="Default">
+
+```tsx
+import { createWeb3Modal, defaultWagmiConfig } from '@web3modal/wagmi/react'
+
+import { WagmiConfig } from 'wagmi'
+import { arbitrum, mainnet } from 'viem/chains'
+
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+
+// 0. Setup queryClient
+const queryClient = new QueryClient()
+
+// 1. Get projectId from https://cloud.walletconnect.com
+const projectId = 'YOUR_PROJECT_ID'
+
+// 2. Create wagmiConfig
+const metadata = {
+  name: 'Web3Modal',
+  description: 'Web3Modal Example',
+  url: 'https://web3modal.com',
+  icons: ['https://avatars.githubusercontent.com/u/37784886']
+}
+
+const chains = [mainnet, arbitrum]
+const wagmiConfig = defaultWagmiConfig({
+  chains, // required
+  projectId, // required
+  metadata, // required
+  enableWalletConnect: true, // Optional - true by default
+  enableInjected: true, // Optional - true by default
+  enableEIP6963: true, // Optional - true by default
+  enableCoinbase: true, // Optional - true by default
+  /* highlight-add-start */
+  enableEmail: true // Optional - false by default
+  /* highlight-add-end */
+})
+
+// 3. Create modal
+createWeb3Modal({ wagmiConfig, projectId, chains })
+
+export function Web3Modal({ children }) {
+  return (
+    <WagmiConfig config={wagmiConfig}>
+      <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
+    </WagmiConfig>
+  )
+}
+```
+
+</TabItem>
+<TabItem value="custom" label="Custom">
+
+```tsx
+import { createWeb3Modal } from '@web3modal/wagmi/react'
+/* highlight-add-start */
+import { emailConnector } from '@web3modal/wagmi'
+/* highlight-add-end */
+
+import { http, createConfig, WagmiProvider } from 'wagmi'
+import { mainnet, sepolia } from 'wagmi/chains'
+import { walletConnect, injected, coinbaseWallet } from 'wagmi/connectors'
+
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+
+// 0. Setup queryClient
+const queryClient = new QueryClient()
+
+// 1. Get projectId from https://cloud.walletconnect.com
+const projectId = 'YOUR_PROJECT_ID'
+
+// 2. Create wagmiConfig
+const metadata = {
+  name: 'Web3Modal',
+  description: 'Web3Modal Example',
+  url: 'https://web3modal.com',
+  icons: ['https://avatars.githubusercontent.com/u/37784886']
+}
+
+const wagmiConfig = createConfig({
+  chains: [mainnet, sepolia],
+  transports: {
+    [mainnet.id]: http(),
+    [sepolia.id]: http()
+  },
+  connectors: [
+    walletConnect({ projectId, metadata, showQrModal: false }),
+    injected({ shimDisconnect: true }),
+    coinbaseWallet({
+      appName: metadata.name,
+      appLogoUrl: metadata.icons[0]
+    }),
+    /* highlight-add-start */
+    emailConnector({ chains, options: { projectId } })
+    /* highlight-add-end */
+  ]
+})
+
+// 3. Create modal
+createWeb3Modal({ wagmiConfig, projectId, chains })
+
+export function Web3Modal({ children }) {
+  return (
+    <WagmiConfig config={wagmiConfig}>
+      <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
+    </WagmiConfig>
+  )
+}
+```
+
+</TabItem>
+</Tabs>
