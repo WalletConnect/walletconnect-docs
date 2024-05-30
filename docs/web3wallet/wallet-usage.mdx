@@ -144,7 +144,7 @@ The Web3Wallet client will always be responsible for exposing accounts (CAIP10 c
 To initialize the Web3Wallet client, create a `Wallet.Params.Init` object in the Android Application class with the Core Client. The `Wallet.Params.Init` object will then be passed to the `Web3Wallet`initialize function.
 
 The telemetry feature aims to improve the reliability and observability of connection flows between decentralized applications (dapps) and wallets.
-It focuses solely on collecting data about code execution and error codes, without tracking any sensitive user information.
+It focuses solely on collecting data about code execution and error codes, without tracking any sensitive user information like amounts, accounts etc.
 
 It provides a comprehensive tracing system for three key use cases:
 * Subscribing to a Pairing Topic
@@ -167,7 +167,39 @@ Telemetry Enabled (telemetryEnabled = true):
 Telemetry Disabled (telemetryEnabled = false):
 * The SDK stops storing new events and deletes all unsent events from local storage upon the next initialization.
 
-Important Note: Since the SDK only stores abstract trace and error data, user identification is not possible
+Important Note: Since the SDK only stores abstract trace and error data, user identification is not possible.
+
+Example of the error events:
+```json
+[
+	{
+	  "eventId": "69e53f11-fd4b-4efc-8d36-1f60a9ac8207",
+	  "bundleId": "com.wallet.example",
+	  "timestamp": 1689611327943,
+	  "props": {
+		  "event": "ERROR",
+	    "type": "pairing_already_exists",
+	    "properties": {
+		    "topic": "topic1",
+		    "trace": ["pairing_started", "pairing_uri_validation_success", "pairing_uri_not_expired", "existing_pairing", "pairing_not_expired", "pairing_not_expired"]
+	    }
+	  }
+	},
+	{
+		"eventId": "69e53f11-fd4b-4efc-8d36-2321312fds",
+	  "bundleId": "com.wallet.example",
+	  "timestamp": 16896113234323,
+	  "props": {
+		  "event": "ERROR",
+      "type": "session_approve_namespace_validation_failure",
+	    "properties": {
+		    "topic": "topic2",
+			  "trace": ["session_approve_started", "proposal_not_expired"]
+	    }
+	  }
+	}
+]
+```
 
 </PlatformTabItem>
 <PlatformTabItem value="flutter">
