@@ -3,7 +3,7 @@
 The Blockchain API is the RPC service that powers Web3Modal's blockchain functions such as account balances, ENS resolution, transaction history, and more.
 
 :::info
-Blockchain API is not the same as the WalletConnect protocol. WalletConnect protocol supports wallets on all chains using the CAIP-25 standard. We do not accept requests for new chains to be added to our Blockchain API. Please see your SDK's relevant documentation on how to add RPC URLs for chains you want to support that Blockchain API does not.
+Blockchain API is not the same as the WalletConnect protocol. WalletConnect protocol supports wallets on all chains using the [CAIP-25](https://chainagnostic.org/CAIPs/caip-25) standard. We do not accept requests for new chains to be added to our Blockchain API. Please see your SDK's relevant documentation on how to add RPC URLs for chains you want to use that Blockchain API does not.
 :::
 
 ## Features
