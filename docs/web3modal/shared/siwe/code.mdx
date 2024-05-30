@@ -1,3 +1,88 @@
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
+
+<Tabs>
+<TabItem value="one-click-auth" label="One-Click Auth">
+
+```ts
+import { SiweMessage } from 'siwe'
+import { createSIWEConfig } from '@web3modal/siwe'
+import type { SIWECreateMessageArgs, SIWEVerifyMessageArgs, formatMessage } from '@web3modal/siwe'
+
+function getMessageParams(){
+  return {
+    domain: window.location.host,
+    uri: window.location.origin,
+    chains: [1, 2020],
+    statement: 'Please sign with your account'
+  }
+}
+
+/* Function that returns the user's session */
+async function getSession(){
+  const session = await getSession()
+  if (!session) throw new Error('Failed to get session!')
+
+  const { address, chainId } = session
+
+  return { address, chainId }
+}
+
+/* Use your SIWE server to verify if the message and the signature are valid */
+async function verifyMessage({ message, signature }: SIWEVerifyMessageArgs){
+  try {
+    const isValid = await validateMessage({ message, signature })
+
+    return isValid
+  } catch (error) {
+    return false
+  }
+},
+
+/* Create a SIWE configuration object */
+const siweConfig = createSIWEConfig({
+  getMessageParams,
+  createMessage: ({ address, ...args }: SIWECreateMessageArgs) => formatMessage(args, address),
+  getNonce,
+  getSession,
+  verifyMessage,
+  signOut
+})
+```
+
+### `verifySignature`
+
+Verify a SIWE signature.
+
+```ts
+import { verifySignature } from '@web3modal/siwe'
+
+const isValid = await verifySignature({ address, message, signature, chainId, projectId })
+```
+
+### `getChainIdFromMessage`
+
+Get the chain ID from the SIWE message.
+
+```ts
+import { getChainIdFromMessage } from '@web3modal/siwe'
+
+const chainId = getChainIdFromMessage(message)
+```
+
+### `getAddressFromMessage`
+
+Get the address from the SIWE message.
+
+```ts
+import { getAddressFromMessage } from '@web3modal/siwe'
+
+const address = getAddressFromMessage(message)
+```
+
+</TabItem>
+<TabItem value="legacy" label="Legacy">
+
 With help of the [siwe package](https://docs.login.xyz/sign-in-with-ethereum/quickstart-guide/implement-the-frontend) we will create the required configuration for Web3Modal.
 
 :::note
@@ -26,12 +111,7 @@ function createMessage({ nonce, address, chainId }: SIWECreateMessageArgs){
 
 /* Function that returns the user's session */
 async function getSession(){
-  const session = await getSession()
-  if (!session) throw new Error('Failed to get session!')
-
-  const { address, chainId } = session
-
-  return { address, chainId }
+  //...
 }
 
 /* Use your SIWE server to verify if the message and the signature are valid */
@@ -54,3 +134,6 @@ const siweConfig = createSIWEConfig({
   signOut
 })
 ```
+
+</TabItem>
+</Tabs>

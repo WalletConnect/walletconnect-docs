@@ -127,6 +127,10 @@ const config = {
               href: 'https://discord.com/invite/kdTQHQ6AFQ'
             },
             {
+              label: 'Telegram',
+              href: 'https://t.me/walletconnect'
+            },
+            {
               label: 'X',
               href: 'https://twitter.com/walletconnect'
             }
@@ -177,7 +181,7 @@ const config = {
     announcementBar: {
       id: 'support_us',
       content:
-        'New to Web3Modal: Email Wallets! <a rel="noopener noreferrer" href="/web3modal/features/email?utm_source=docs&utm_medium=banner">Explore the latest feature</a> ⚡',
+        'It’s shipping szn 🚢 Explore Web3Modal’s latest features: Email Wallets and On-ramp! <a rel="noopener noreferrer" href="/web3modal/features/onramp">Read the docs</a>',
       backgroundColor: '#3182ce',
       textColor: '#fff',
       isCloseable: true

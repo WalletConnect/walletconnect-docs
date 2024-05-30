@@ -1,3 +1,50 @@
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
+
+<Tabs>
+<TabItem value="one-click-auth" label="One-Click Auth">
+
+### getMessageParams `() => Promise<{ domain: string, uri: string, chains: number[], statement: string }>`
+
+Parameters to create the SIWE message internally.
+
+#### getNonce `() => Promise<string>`
+
+The getNonce method functions as a safeguard against spoofing, akin to a CSRF token. The siwe package provides a generateNonce() helper, or you can utilize an existing CSRF token from your backend if available.
+
+#### createMessage `(args: SIWECreateMessageArgs) => string`
+
+The official siwe package offers a straightforward method for generating an EIP-4361-compatible message, which can subsequently be authenticated using the same package. The nonce parameter is derived from your getNonce endpoint, while the address and chainId variables are sourced from the presently connected wallet.
+
+#### verifyMessage `(args: SIWEVerifyMessageArgs) => Promise<boolean>`
+
+The function to ensure the message is valid, has not been tampered with, and has been appropriately signed by the wallet address.
+
+#### getSession `() => Promise<SIWESession | null>`
+
+The backend session should store the associated address and chainId and return it via the `getSession` method.
+
+#### signOut `() => Promise<boolean>`
+
+The users session can be destroyed calling `signOut`.
+
+#### onSignIn `(session?: SIWESession) => void`
+
+Callback when user signs in (Optional).
+
+#### onSignOut `() => void`
+
+Callback when user signs out (Optional).
+
+#### signOutOnDisconnect `boolean`
+
+- defaults to `true`
+
+Whether or not to sign out when the user disconnects their wallet (Optional).
+
+</TabItem>
+<TabItem value="legacy" label="Legacy">
+
 #### getNonce `() => Promise<string>`
 
 The getNonce method functions as a safeguard against spoofing, akin to a CSRF token. The siwe package provides a generateNonce() helper, or you can utilize an existing CSRF token from your backend if available.
@@ -37,3 +84,6 @@ Callback when user signs out (Optional).
 - defaults to `true`
 
 Whether or not to sign out when the user disconnects their wallet (Optional).
+
+</TabItem>
+</Tabs>

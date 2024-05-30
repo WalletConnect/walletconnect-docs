@@ -1,0 +1,108 @@
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
+# Options
+
+### Explorer included wallets
+
+Allows to set included wallets that are fetched from [WalletConnect Explorer](https://walletconnect.com/explorer?type=wallet). You can define a list of wallets ids you'd like to prioritize (order is respected). You can get these ids from the explorer link mentioned before by clicking on a copy icon of your desired wallet card.
+```csharp
+await Web3Modal.InitializeAsync(new Web3ModalConfig
+{
+    includedWalletIds = new []
+    {
+        "c57ca95...74e97267d96",
+    }
+});
+```
+
+### Explorer excluded wallets
+
+Allows to set excluded wallets that are fetched from [WalletConnect Explorer](https://walletconnect.com/explorer?type=wallet). You can get these ids from the explorer link mentioned before by clicking on a copy icon of your desired wallet card.
+
+```csharp
+await Web3Modal.InitializeAsync(new Web3ModalConfig
+{
+    excludedWalletIds = new []
+    {
+        "c57ca95...74e97267d96",
+    }
+});
+```
+
+
+### Enable Installed Wallet Detection
+
+To enable Web3Modal to detect wallets installed on mobile devices, you need to make specific changes to the native side of the project.
+
+<Tabs>
+<TabItem value="unity-installed-wallets-android" label="Android">
+
+    1. In Unity [override Android Manifest](https://docs.unity3d.com/Manual/overriding-android-manifest.html).
+    2. Add your `<queries>...</queries>` schemes outside of `<application />` scope in the manifest file.
+    3. Refer to [Android Specs](https://developer.android.com/guide/topics/manifest/queries-element) for more information.
+
+    Example:
+
+    ```xml
+    <?xml version="1.0" encoding="utf-8"?>
+    <manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+        <queries>
+            <package android:name="io.metamask"/>
+            <package android:name="com.wallet.crypto.trustapp"/>
+            <package android:name="io.gnosis.safe"/>
+            <package android:name="me.rainbow"/>
+            <!-- Add other wallet schemes names here -->
+        </queries>
+
+        <application>
+            ...
+        </application>
+    </manifest>
+    ```
+
+    More wallet package names can be found in [our sample AndroidManifest.xml](https://github.com/WalletConnect/WalletConnectUnity/blob/project/modal-sample/Assets/Plugins/Android/AndroidManifest.xml).
+
+</TabItem>
+<TabItem value="unity-installed-wallets-ios" label="iOS">
+
+    Wallet detection may produce inaccurate results on iOS Simulator. It is recommended to test on a real device.
+
+    1. Make an iOS build.
+    2. In the generated Xcode project, find `Info.plist` file and open it with a external editor (i.e. not Xcode).
+    3. Locate or create `<key>LSApplicationQueriesSchemes</key>` section.
+    4. Add the desired wallet schemes as string entries within the `<array>`. These schemes represent the wallets you want to detect.
+
+    Example:
+
+    ```xml
+    <?xml version="1.0" encoding="utf-8"?>
+    <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+    <plist version="1.0">
+        <dict>
+            ...
+
+            <key>LSApplicationQueriesSchemes</key>
+            <array>
+                <string>metamask</string>
+                <string>trust</string>
+                <string>safe</string>
+                <string>rainbow</string>
+                <string>uniswap</string>
+                <string>zerion</string>
+                <string>imtokenv2</string>
+                <string>spot</string>
+                <string>omni</string>
+                <string>dfw</string>
+                <string>tpoutside</string>
+                <string>robinhood-wallet</string>
+            </array>
+
+            ...
+        </dict>
+    </plist>
+    ```
+
+</TabItem>
+</Tabs>

@@ -3,7 +3,7 @@
 Universal Provider is a multi-chain provider for WalletConnect v2 protocol.
 
 :::note
-Find more about different supported chains [here](../multichain/overview.md).
+Find more about different supported chains [here](../../cloud/chains/overview.md).
 :::
 
 ## Installation
@@ -102,23 +102,52 @@ const result = await provider.request(payload: RequestArguments, chain: string |
 
 ## Chain switching
 
-`DefaultChain` is the current chain that the provider will target to the next requested transaction.
+`DefaultChain` is the current chain that the provider will target for the next requested transaction.
 
 ```typescript
 // set the default chain to 56
 provider.setDefaultChain(`eip155:56`, rpcUrl?: string | undefined);
 ```
 
-## Creating a provider file
+## Session data
 
-- Create a file under `providers/universal-provider/src/providers/<NAMESPACE>.ts`
-- Implement the `IProvider` interface
-- In the `IProvider.request` method, there should be a check for whether or not
-  to run the request against the wallet or the blockchain.
-  `this.namespace.methods` should only contain the methods supported by the
-  wallet.
-- The rest of the methods of the class are very similar, mainly centering around
-  httpProvider and for the most part will be 90% similar to other providers
-  given similar structure of chainId. For example `eip155:1` or
-  `solana:mainnetBeta`.
-- Export provider under `providers/universal-provider/src/providers/index.ts`
+Once a wallet is connected you can find the session data in the `provider.session` object.
+
+The session object includes the following properties, _among others_:
+
+- **namespaces**: `session.namespaces` is an object that contains the approved session data.
+
+:::caution
+
+Note that the `chains` object is an optional parameter and may be undefined. Therefore, we encourage apps to obtain the approved chains from the `session.accounts` object instead.
+
+:::
+
+```ts
+interface Namespaces {
+    chains?: string[];
+    accounts: string[];
+    methods: string[];
+    events: string[];
+}
+```
+
+- **requiredNamespaces, optionalNamespaces & sessionProperties**: These objects contain the namespaces and properties proposed for the session.
+- **peer**: The `session.peer.metadata` object contains the metadata of the connected wallet.
+
+```ts
+  interface Metadata {
+    name: string;
+    description: string;
+    url: string;
+    icons: string[];
+    verifyUrl?: string;
+    redirect?: {
+      native?: string;
+      universal?: string;
+    };
+  }
+
+```
+
+Find the complete type definition of the `session` object [here](https://github.com/WalletConnect/walletconnect-monorepo/blob/022e4d492c9862ab9b17c1a7b12884bdcd992ae4/packages/types/src/sign-client/session.ts#L25).

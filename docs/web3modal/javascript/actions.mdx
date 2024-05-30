@@ -55,6 +55,10 @@ List of views you can select
     {
       variable: { code: 'WhatIsAWallet' },
       description: '"What is a wallet" onboarding view'
+    },
+    {
+      variable: { code: 'OnRampProviders' },
+      description: '"OnRamp main view'
     }
   ]}
 />
@@ -63,6 +67,22 @@ List of views you can select
 
 ```ts
 modal.disconnect()
+```
+
+## WalletInfo
+
+Metadata information from the connected wallet
+
+```ts
+function handler({ name, icon }){
+  console.log(name, icon)
+}
+
+modal.subscribeWalletInfo(handler)
+
+//or
+
+const { name, icon } = modal.getWalletInfo()
 ```
 
 ## Ethereum Library

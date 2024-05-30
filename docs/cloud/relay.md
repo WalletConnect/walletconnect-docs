@@ -23,7 +23,10 @@ const signClient = await SignClient.init({
 
 ## Allowlist
 
-To help prevent malicious use of your project ID you are strongly encouraged to set an allowlist of [origins](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Origin) where the project ID is used. This supports a list of origins in the format `[scheme://]<hostname[:port]`. Requests from other origins will be denied.
+To help prevent malicious use of your project ID you are strongly encouraged to set an allowlist of [origins](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Origin) or application/bundle ids for mobile applications where the project ID is used. Requests from other origins will be denied.
+
+- Allowlist supports a list of origins in the format `[scheme://]<hostname[:port]`.
+- [Application ID](https://developer.android.com/build/configure-app-module#set-application-id)/[Bundle IDs](https://developer.apple.com/documentation/appstoreconnectapi/bundle_ids) typically are defined using the [reverse domain name notation](https://en.wikipedia.org/wiki/Reverse_domain_name_notation)
 
 Using `localhost` (or `127.0.0.1`) is always permitted, and if empty all origins are allowed. Updates take 15 minutes to apply.
 

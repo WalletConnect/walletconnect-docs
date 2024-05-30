@@ -1,0 +1,110 @@
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
+
+Start by importing `createWeb3Modal`, and wagmi packages, then create your configs as shown below.
+Finally, pass your configuration to `createWeb3Modal`.
+
+:::info Note
+
+Make sure you import `@walletconnect/react-native-compat` before `wagmi` to avoid any issues.
+
+:::
+
+```tsx
+import '@walletconnect/react-native-compat'
+import { WagmiProvider } from 'wagmi';
+import { mainnet, polygon, arbitrum } from '@wagmi/core/chains'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { createWeb3Modal, defaultWagmiConfig, Web3Modal } from '@web3modal/wagmi-react-native'
+
+// 0. Setup queryClient
+const queryClient = new QueryClient()
+
+// 1. Get projectId at https://cloud.walletconnect.com
+const projectId = 'YOUR_PROJECT_ID'
+
+// 2. Create config
+const metadata = {
+  name: 'Web3Modal RN',
+  description: 'Web3Modal RN Example',
+  url: 'https://web3modal.com',
+  icons: ['https://avatars.githubusercontent.com/u/37784886'],
+  redirect: {
+    native: 'YOUR_APP_SCHEME://',
+    universal: 'YOUR_APP_UNIVERSAL_LINK.com'
+  }
+}
+
+const chains = [mainnet, polygon, arbitrum] as const
+
+const wagmiConfig = defaultWagmiConfig({ chains, projectId, metadata })
+
+// 3. Create modal
+createWeb3Modal({
+  projectId,
+  chains,
+  wagmiConfig,
+  enableAnalytics: true // Optional - defaults to your Cloud configuration
+})
+
+export default function App() {
+  return (
+    <WagmiProvider config={wagmiConfig}>
+      <QueryClientProvider client={queryClient}>
+        // Rest of your app...
+        <Web3Modal />
+      </QueryClientProvider>
+    </WagmiProvider>
+  )
+}
+```
+
+#### Trigger the modal
+
+To open Web3Modal you can use our **default** button component or build your own logic using Web3Modal hooks.
+
+<Tabs>
+<TabItem value="components" label="Components">
+You can use default components to open the modal
+
+```tsx
+import { W3mButton } from '@web3modal/wagmi-react-native'
+
+export default function ConnectView() {
+  return (
+    <>
+      ...rest of your view
+      <W3mButton />
+    </>
+  )
+}
+```
+
+Learn more about the Web3Modal components [here](../../components.mdx)
+
+</TabItem>
+<TabItem value="hooks" label="Hooks">
+
+You can trigger the modal by calling the `open` function from `useWeb3Modal` hook.
+
+```tsx
+import { Pressable, Text } from 'react-native'
+import { useWeb3Modal } from '@web3modal/wagmi-react-native'
+
+export default function ConnectView() {
+  const { open } = useWeb3Modal()
+
+  return (
+    <>
+      <Pressable onClick={() => open()}>
+        <Text>Open Connect Modal</Text>
+      </Pressable>
+    </>
+  )
+}
+```
+
+Learn more about the Web3Modal hooks [here](../../hooks.mdx)
+
+</TabItem>
+</Tabs>

@@ -30,7 +30,6 @@ module.exports = {
           collapsible: true,
           items: [
             'web3modal/about',
-            'web3modal/quickstart',
             {
               type: 'category',
               className: 'sidebar__logo sidebar__logo--react',
@@ -41,8 +40,9 @@ module.exports = {
                 'web3modal/react/options',
                 'web3modal/react/components',
                 'web3modal/react/email',
-                'web3modal/react/onramp',
                 'web3modal/react/siwe',
+                'web3modal/react/smart-accounts',
+                'web3modal/react/onramp',
                 'web3modal/react/theming',
                 'web3modal/react/resources'
               ]
@@ -58,11 +58,8 @@ module.exports = {
                 'web3modal/nextjs/components',
                 'web3modal/nextjs/email',
                 'web3modal/nextjs/onramp',
-                {
-                  type: 'category',
-                  label: 'SIWE',
-                  items: ['web3modal/nextjs/siwe/about', 'web3modal/nextjs/siwe/next-auth']
-                },
+                'web3modal/nextjs/siwe',
+                'web3modal/nextjs/smart-accounts',
                 'web3modal/nextjs/theming',
                 'web3modal/nextjs/resources'
               ]
@@ -79,6 +76,7 @@ module.exports = {
                 'web3modal/vue/email',
                 'web3modal/vue/onramp',
                 'web3modal/vue/siwe',
+                'web3modal/vue/smart-accounts',
                 'web3modal/vue/theming',
                 'web3modal/vue/resources'
               ]
@@ -94,6 +92,7 @@ module.exports = {
                 'web3modal/javascript/components',
                 'web3modal/javascript/email',
                 'web3modal/javascript/siwe',
+                'web3modal/javascript/smart-accounts',
                 'web3modal/javascript/onramp',
                 'web3modal/javascript/theming',
                 'web3modal/javascript/resources'
@@ -108,6 +107,7 @@ module.exports = {
                 'web3modal/react-native/options',
                 'web3modal/react-native/hooks',
                 'web3modal/react-native/components',
+                'web3modal/react-native/email',
                 'web3modal/react-native/resources'
               ]
             },
@@ -120,6 +120,7 @@ module.exports = {
                 { type: 'doc', label: 'Getting started', id: 'web3modal/flutter/installation' },
                 { type: 'doc', label: 'Usage', id: 'web3modal/flutter/options' },
                 { type: 'doc', label: 'Options', id: 'web3modal/flutter/custom-wallets' },
+                { type: 'doc', label: 'Email Wallets', id: 'web3modal/flutter/email-wallets' },
                 'web3modal/flutter/actions',
                 'web3modal/flutter/events',
                 'web3modal/flutter/theming',
@@ -169,8 +170,21 @@ module.exports = {
             },
             {
               type: 'category',
+              label: 'Unity',
+              className: 'sidebar__logo sidebar__logo--unity',
+              items: [
+                { type: 'doc', label: 'Getting started', id: 'web3modal/unity/about' },
+                'web3modal/unity/usage',
+                'web3modal/unity/options',
+                'web3modal/unity/actions',
+                'web3modal/unity/events'
+              ]
+            },
+            {
+              type: 'category',
               label: 'Features',
               items: [
+                { type: 'doc', label: 'One-Click Auth', id: 'web3modal/features/one-click-auth' },
                 { type: 'doc', label: 'Email Wallets', id: 'web3modal/features/email' },
                 { type: 'doc', label: 'Onramp', id: 'web3modal/features/onramp' },
                 { type: 'doc', label: 'Solana', id: 'web3modal/features/solana' }
@@ -192,6 +206,7 @@ module.exports = {
               items: [
                 'web3inbox/about',
                 'web3inbox/cloud-setup',
+                'web3inbox/cloud-sending',
                 {
                   type: 'category',
                   label: 'Frontend Integration',
@@ -234,9 +249,11 @@ module.exports = {
           items: [
             'web3wallet/about',
             'web3wallet/wallet-usage',
+            'web3wallet/authenticatedSessions',
             'web3wallet/namespaces',
             'web3wallet/mobileLinking',
             'web3wallet/verify',
+            { type: 'doc', label: 'Modern Wallets (EIP-5792)', id: 'web3wallet/eip5792' },
             'web3wallet/push-notifications',
             {
               type: 'category',
@@ -246,7 +263,16 @@ module.exports = {
                 'web3wallet/notify/installation',
                 'web3wallet/notify/usage',
                 'web3wallet/notify/spam-protection',
-                'web3wallet/notify/resources'
+                'web3wallet/notify/resources',
+                {
+                  type: 'category',
+                  label: 'React Native Wallets',
+                  items: [
+                    'web3wallet/notify/react-native-sdk',
+                    'web3inbox/frontend-integration/usage',
+                    'web3inbox/frontend-integration/api'
+                  ]
+                }
               ]
             },
             'web3wallet/best_practises',
@@ -263,6 +289,14 @@ module.exports = {
       items: [
         'cloud/explorer',
         'cloud/explorer-submission',
+        {
+          type: 'category',
+          label: 'Explorer Chains',
+          items: [
+            'cloud/chains/overview',
+            'cloud/chains/chain-list'
+          ]
+        },
         'cloud/verify',
         'cloud/relay',
         'cloud/blockchain-api',
@@ -275,12 +309,11 @@ module.exports = {
       collapsible: false,
       className: 'menu_outer_list',
       items: [
+        
         {
           type: 'category',
           label: 'Multi-Chain',
           items: [
-            'advanced/multichain/overview',
-            'advanced/multichain/chain-list',
             {
               type: 'category',
               label: 'RPC Reference',
@@ -299,11 +332,17 @@ module.exports = {
             },
             {
               type: 'category',
-              label: 'Polkadot',
-              items: [
-                'advanced/multichain/polkadot/dapp-integration-guide',
-                'advanced/multichain/polkadot/wallet-integration-guide',
-                'advanced/multichain/polkadot/namespaces-guide'
+              label: 'Examples',
+              items: [,
+                {
+                  type: 'category',
+                  label: 'Polkadot',
+                  items: [
+                    'advanced/multichain/polkadot/dapp-integration-guide',
+                    'advanced/multichain/polkadot/namespaces-guide',
+                    'advanced/multichain/polkadot/wallet-integration-guide'
+                  ]
+                }
               ]
             }
           ]
@@ -344,11 +383,6 @@ module.exports = {
                 'api/auth/signer-factory',
                 'api/auth/resources'
               ]
-            },
-            {
-              type: 'category',
-              label: 'Chat',
-              items: ['api/chat/about', 'api/chat/usage', 'api/chat/resources']
             },
             {
               type: 'category',

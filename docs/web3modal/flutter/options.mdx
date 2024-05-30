@@ -1,3 +1,6 @@
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
+
 import CloudBanner from '../../components/CloudBanner'
 import PlatformTabs from '../../components/PlatformTabs'
 import PlatformTabItem from '../../components/PlatformTabItem'
@@ -16,6 +19,10 @@ Be sure to update the **project ID** and metadata with your own.
 
 <CloudBanner />
 
+## W3MService initialization
+
+In order to initialize a W3MService instance you must provide a **projectId** and a **metadata**.
+
 ```dart
 final _w3mService = W3MService(
   projectId: '{YOUR_PROJECT_ID}',
@@ -25,15 +32,31 @@ final _w3mService = W3MService(
     url: 'https://www.walletconnect.com/',
     icons: ['https://walletconnect.com/walletconnect-logo.png'],
     redirect: Redirect(
-      native: 'flutterdapp://', // your own custom scheme
+      native: 'flutterdapp://',
       universal: 'https://www.walletconnect.com',
     ),
   ),
 );
-await _w3mService.init();
+
+// Register callbacks on the Web3App you'd like to use. See `Events` section.
+
+await _w3mServices.init();
 ```
 
-The `metadata` object should contain your dApp's name, description, url and icon. The `redirect` object inside serves the purpose of redirecting from the wallet back to your dApp once is connected. You would also need to add the following in the iOS/Android native side:
+The `metadata` object should contain your dApp's name, description, url and icon. Redirect object is optional but **highly recommended**. See next session why.
+
+## Redirect to your dApp
+
+The service's metadata object contains a `redirect` option that serves to the purpose of redirecting back to your dapp from the connected wallet. Please see [mobileLinking](../../web3wallet/mobileLinking?platform=flutter) docs for a bit more of context.
+
+```dart
+redirect: Redirect(
+  native: 'flutterdapp://', // your own custom scheme for deep linking
+  universal: 'https://www.walletconnect.com', // your own universal link for deep linking
+),
+```
+
+But in order for the redirect mechanism to work you would also need to add the following in the iOS and Android native sides:
 
 <PlatformTabs
 	groupId="w3m_flutter"
@@ -41,11 +64,9 @@ The `metadata` object should contain your dApp's name, description, url and icon
 >
 <PlatformTabItem value="ios">
 
-1. Open your `Info.plist` file.
+1. Locate your `Info.plist` file under `your_project/ios/Runner/` folder.
 2. Locate the `<key>CFBundleURLTypes</key>` section.
-3. Add your schema as `<dict>` entry within the `<array>` object.
-
-Example:
+3. Add your schema as `<dict>` entry within the `<array>` object as follows.
 
 ```xml
 <key>CFBundleURLTypes</key>
@@ -54,10 +75,11 @@ Example:
     <key>CFBundleTypeRole</key>
     <string>Editor</string>
     <key>CFBundleURLName</key>
-    <string>com.example.yourBundleId</string>
+    <string>com.example.yourBundleId</string> <!-- Bundle ID of your app -->
     <key>CFBundleURLSchemes</key>
     <array>
-      <string>flutterdapp</string> <!-- your own custom scheme -->
+      <!-- your own custom scheme. Be mind of removing :// for this step -->
+      <string>flutterdapp</string>
     </array>
   </dict>
 </array>
@@ -66,25 +88,26 @@ Example:
 </PlatformTabItem>
 <PlatformTabItem value="android">
 
-1. Open your `AndroidManifest.xml` file.
-2. Locate your `<Activity .MainActivity` inside `<application />` scope.
+1. Locate your `AndroidManifest.xml` file under `your_project/android/app/src/main/` fodler.
+2. Locate the `<Activity .MainActivity` inside `<application />` scope.
 3. Add the following intent
-
-Example:
 
 ```xml
 <intent-filter>
     <action android:name="android.intent.action.VIEW" />
     <category android:name="android.intent.category.DEFAULT" />
     <category android:name="android.intent.category.BROWSABLE" />
-    <data android:scheme="flutterdapp" /> <!-- your own custom scheme -->
+    <!-- your own custom scheme. Be mind of removing :// for this step -->
+    <data android:scheme="flutterdapp" />
 </intent-filter>
 ```
 
 </PlatformTabItem>
 </PlatformTabs>
 
-Now you can use the `W3MConnectWalletButton`, which will open the Web3Modal with no prior network selected
+## Connection Buttons
+
+You can use the `W3MConnectWalletButton`, which will open the Web3Modal with no prior network selected
 
 ```dart
 W3MConnectWalletButton(service: _w3mService)
@@ -100,52 +123,6 @@ Once session is approved you can use `W3MAccountButton` widget to show basic acc
 
 ```dart
 W3MAccountButton(service: _w3mService)
-```
-
-## Web3App or projectId + required PairingMetadata
-
-You must provide either a Web3App or a projectId as well as a PairingMetadata in both cases.
-Providing the `Web3App` instance lets you register callbacks on the `Web3App` you'd like to use.
-Otherwise, we recommend just providing the projectId and `PairingMetadata` to the `W3MService` directly.
-
-#### W3MService with Web3App:
-
-```dart
-final _web3App = await Web3App.createInstance(
-  projectId: '{YOUR_PROJECT_ID}',
-  metadata: const PairingMetadata(
-    name: 'Web3Modal Flutter Example',
-    description: 'Web3Modal Flutter Example',
-    url: 'https://www.walletconnect.com/',
-    icons: ['https://walletconnect.com/walletconnect-logo.png'],
-    redirect: Redirect(
-      native: 'flutterdapp://',
-      universal: 'https://www.walletconnect.com',
-    ),
-  ),
-);
-
-// Register callbacks on the Web3App you'd like to use
-
-final _w3mService = W3MService(web3App: _web3App);
-```
-
-#### W3MService with Project ID:
-
-```dart
-final _w3mService = W3MService(
-  projectId: '{YOUR_PROJECT_ID}',
-  metadata: const PairingMetadata(
-    name: 'Web3Modal Flutter Example',
-    description: 'Web3Modal Flutter Example',
-    url: 'https://www.walletconnect.com/',
-    icons: ['https://walletconnect.com/walletconnect-logo.png'],
-    redirect: Redirect(
-      native: 'flutterdapp://',
-      universal: 'https://www.walletconnect.com',
-    ),
-  ),
-);
 ```
 
 ## Network selection or direct wallet connection

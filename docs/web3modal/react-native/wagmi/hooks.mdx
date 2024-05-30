@@ -1,0 +1,70 @@
+import Button from '../../../components/button'
+
+You can use [Wagmi hooks](https://wagmi.sh/react/api/hooks) to sign messages, interact with smart contracts, and much more.
+
+### useAccount
+
+Hook for accessing account data and connection status.
+
+```tsx
+import { Text } from 'react-native'
+import { useAccount } from 'wagmi'
+
+function App() {
+  const { address, isConnecting, isDisconnected } = useAccount()
+
+  if (isConnecting) return <Text>Connecting…</Text>
+  if (isDisconnected) return <Text>Disconnected</Text>
+  return <Text>{address}</Text>
+}
+```
+
+### useSignMessage
+
+Hook for signing messages with connected account.
+
+```tsx
+import { View, Text, Pressable } from 'react-native'
+import { useSignMessage } from 'wagmi'
+
+function App() {
+  const { data, isError, isPending, isSuccess, signMessage } = useSignMessage()
+
+  return (
+    <View>
+      <Pressable disabled={isPending} onPress={() => signMessage({ message: 'hello world' })}>
+        <Text>Sign message</Text>
+      </Pressable>
+      {isSuccess && <Text>Signature: {data}</Text>}
+      {isError && <Text>Error signing message</Text>}
+    </View>
+  )
+}
+```
+
+### useReadContract
+
+Hook for calling a read method on a Contract.
+
+```tsx
+import { View, Text } from 'react-native'
+import { useReadContract } from './abi'
+
+function App() {
+  const { data, isError, isPending, isSuccess } = useReadContract({
+    abi,
+    address: '0x6b175474e89094c44da98b954eedeac495271d0f',
+    functionName: 'totalSupply'
+  })
+
+  return (
+    <View>
+      {isPending && <Text>Loading</Text>}
+      {isSuccess && <Text>Response: {data?.toString()}</Text>}
+      {isError && <Text>Error reading contract</Text>}
+    </View>
+  )
+}
+```
+
+<Button name="Learn More" url="https://wagmi.sh/react/api/hooks" />

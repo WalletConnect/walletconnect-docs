@@ -5,17 +5,25 @@ import PlatformTabs from '../../components/PlatformTabs'
 import PlatformTabItem from '../../components/PlatformTabItem'
 import YoutubeEmbed from '../../components/YoutubeEmbed'
 
-import WagmiInstallation from './wagmi1/about/installation.mdx'
-import WagmiInstallationExpo from './wagmi1/about/installation-expo.mdx'
-import WagmiImplementation from './wagmi1/about/implementation.mdx'
+import WagmiInstallation from './wagmi/about/installation.mdx'
+import WagmiInstallationExpo from './wagmi/about/installation-expo.mdx'
+import WagmiImplementation from './wagmi/about/implementation.mdx'
+import WagmiCoinbase from './wagmi/about/coinbase.mdx'
+
+import Wagmi1Installation from './wagmi1/about/installation.mdx'
+import Wagmi1InstallationExpo from './wagmi1/about/installation-expo.mdx'
+import Wagmi1Implementation from './wagmi1/about/implementation.mdx'
+import Wagmi1Coinbase from './wagmi1/about/coinbase.mdx'
 
 import Ethers5Installation from './ethers5/about/installation.mdx'
 import Ethers5InstallationExpo from './ethers5/about/installation-expo.mdx'
 import Ethers5Implementation from './ethers5/about/implementation.mdx'
+import Ethers5Coinbase from './ethers5/about/coinbase.mdx'
 
 import EthersInstallation from './ethers/about/installation.mdx'
 import EthersInstallationExpo from './ethers/about/installation-expo.mdx'
 import EthersImplementation from './ethers/about/implementation.mdx'
+import EthersCoinbase from './ethers/about/coinbase.mdx'
 
 # React Native
 
@@ -30,33 +38,40 @@ Web3Modal SDK has support for [Wagmi v1](https://1.x.wagmi.sh/) and [Ethers v5](
 <Tabs groupId="platform">
 <TabItem value="rn-cli" label="React Native CLI">
 
-<PlatformTabs groupId="eth-lib" activeOptions={["wagmi1", "ethers", "ethers5"]}>
+<PlatformTabs groupId="eth-lib" activeOptions={["wagmi", "wagmi1", "ethers", "ethers5"]}>
 
-<PlatformTabItem value="wagmi1">
+<PlatformTabItem value="wagmi">
 
 {' '}
+
 <WagmiInstallation />
 
 </PlatformTabItem>
 
-<PlatformTabItem value="ethers">
-  
-  :::caution
-  Ethers support is currently in alpha. 
-  :::
+<PlatformTabItem value="wagmi1">
+
+:::caution
+Wagmi v1 has been deprecated. Please upgrade to Wagmi v2. Read the [migration guide.](https://wagmi.sh/react/guides/migrate-from-v1-to-v2)
+:::
 
 {' '}
+
+<Wagmi1Installation />
+
+</PlatformTabItem>
+
+<PlatformTabItem value="ethers">
+
+{' '}
+
 <EthersInstallation />
 
 </PlatformTabItem>
 
 <PlatformTabItem value="ethers5">
-  
-  :::caution
-  Ethers v5 support is currently in alpha. 
-  :::
 
 {' '}
+
 <Ethers5Installation />
 
 </PlatformTabItem>
@@ -67,33 +82,36 @@ Web3Modal SDK has support for [Wagmi v1](https://1.x.wagmi.sh/) and [Ethers v5](
 
 <TabItem value="expo" label="Expo">
 
-<PlatformTabs groupId="eth-lib" activeOptions={["wagmi1", "ethers", "ethers5"]}>
+<PlatformTabs groupId="eth-lib" activeOptions={["wagmi", "wagmi1", "ethers", "ethers5"]}>
+
+<PlatformTabItem value="wagmi">
+
+{' '}
+
+<WagmiInstallationExpo />
+
+</PlatformTabItem>
 
 <PlatformTabItem value="wagmi1">
 
 {' '}
-<WagmiInstallationExpo />
+
+<Wagmi1InstallationExpo />
 
 </PlatformTabItem>
 
 <PlatformTabItem value="ethers">
 
-:::caution
-Ethers support is currently in alpha.
-:::
-
 {' '}
+
 <EthersInstallationExpo />
 
 </PlatformTabItem>
 
 <PlatformTabItem value="ethers5">
 
-:::caution
-Ethers v5 support is currently in alpha.
-:::
-
 {' '}
+
 <Ethers5InstallationExpo />
 
 </PlatformTabItem>
@@ -106,10 +124,14 @@ Ethers v5 support is currently in alpha.
 
 ## Implementation
 
-<PlatformTabs groupId="eth-lib" activeOptions={["wagmi1", "ethers", "ethers5"]}>
+<PlatformTabs groupId="eth-lib" activeOptions={["wagmi", "wagmi1", "ethers", "ethers5"]}>
+
+<PlatformTabItem value="wagmi">
+  <WagmiImplementation />
+</PlatformTabItem>
 
 <PlatformTabItem value="wagmi1">
-  <WagmiImplementation />
+  <Wagmi1Implementation />
 </PlatformTabItem>
 
 <PlatformTabItem value="ethers">
@@ -236,18 +258,30 @@ npm install @coinbase/wallet-mobile-sdk react-native-mmkv
 
 3. Install our custom connector
 
-<PlatformTabs groupId="eth-lib" activeOptions={["wagmi1", "ethers", "ethers5"]}>
+<PlatformTabs groupId="eth-lib" activeOptions={["wagmi", "wagmi1", "ethers", "ethers5"]}>
+
+<PlatformTabItem value="wagmi">
+  ```bash npm2yarn
+  npm install @web3modal/coinbase-wagmi-react-native
+  ```
+</PlatformTabItem>
 
 <PlatformTabItem value="wagmi1">
-  ```bash npm2yarn npm install @web3modal/coinbase-wagmi-react-native ```
+  ```bash npm2yarn
+  npm install @web3modal/coinbase-wagmi-react-native
+  ```
 </PlatformTabItem>
 
 <PlatformTabItem value="ethers">
-  ```bash npm2yarn npm install @web3modal/coinbase-ethers-react-native ```
+  ```bash npm2yarn
+  npm install @web3modal/coinbase-ethers-react-native
+  ```
 </PlatformTabItem>
 
 <PlatformTabItem value="ethers5">
-  ```bash npm2yarn npm install @web3modal/coinbase-ethers-react-native ```
+  ```bash npm2yarn
+  npm install @web3modal/coinbase-ethers-react-native
+  ```
 </PlatformTabItem>
 
 </PlatformTabs>
@@ -299,70 +333,22 @@ useEffect(() => {
 }, [])
 ```
 
-<PlatformTabs groupId="eth-lib" activeOptions={["wagmi1", "ethers", "ethers5"]}>
+<PlatformTabs groupId="eth-lib" activeOptions={["wagmi", "wagmi1", "ethers", "ethers5"]}>
+
+<PlatformTabItem value="wagmi">
+  <WagmiCoinbase />
+</PlatformTabItem>
 
 <PlatformTabItem value="wagmi1">
-
-8. Initialize `CoinbaseWagmiConnector` and add it in `extraConnectors`
-
-```tsx
-import { CoinbaseConnector } from '@web3modal/coinbase-wagmi-react-native'
-
-const coinbaseConnector = new CoinbaseConnector({
-  chains,
-  options: {
-    redirect: 'YOUR_APP_SCHEME://'
-  }
-})
-
-const wagmiConfig = defaultWagmiConfig({
-  chains,
-  projectId,
-  metadata,
-  extraConnectors: [coinbaseConnector]
-})
-```
-
+  <Wagmi1Coinbase />
 </PlatformTabItem>
 
 <PlatformTabItem value="ethers">
-
-8. Initialize `CoinbaseProvider` and add it in the default config
-
-```tsx
-import { CoinbaseProvider } from '@web3modal/coinbase-ethers-react-native'
-
-const coinbaseProvider = new CoinbaseProvider({
-  redirect: 'YOUR_APP_SCHEME://',
-  rpcUrl: mainnet.rpcUrl
-})
-
-const config = defaultConfig({
-  metadata,
-  coinbase: coinbaseProvider
-})
-```
-
+  <EthersCoinbase />
 </PlatformTabItem>
 
 <PlatformTabItem value="ethers5">
-
-8. Initialize `CoinbaseProvider` and add it in the default config
-
-```tsx
-import { CoinbaseProvider } from '@web3modal/coinbase-ethers-react-native'
-
-const coinbaseProvider = new CoinbaseProvider({
-  redirect: 'YOUR_APP_SCHEME://',
-  rpcUrl: mainnet.rpcUrl
-})
-
-const config = defaultConfig({
-  metadata,
-  coinbase: coinbaseProvider
-})
-```
-
+  <Ethers5Coinbase />
 </PlatformTabItem>
 
 </PlatformTabs>

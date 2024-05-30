@@ -589,9 +589,9 @@ also construct a `Namespaces` from a `RequiredNamespaces`, which auto-populates 
 #### RequiredNamespaces
 
 ```csharp
-sdk.On<SessionProposalEvent>(EngineEvents.SessionProposal, async (sender, @event) =>
+sdk.SessionProposed += async (sender, @event) =>
 {
-    var proposal = @event.EventData.Proposal;
+    var proposal = @event.Proposal;
     var requiredNamespaces = proposal.RequiredNamespaces;
     var approvedNamespaces = new Namespaces(requiredNamespaces);
     approvedNamespaces["eip155"].WithAccount("eip155:1:0xab16a96d359ec26a11e2c2b3d8f8b8942d5bfcdb");
@@ -605,6 +605,47 @@ dApp will provide a `RequiredNamespaces` when proposing the session. The `Requir
 </PlatformTabItem>
 
 </PlatformTabs>
+
+### EVM methods & events
+
+In @walletconnect/ethereum-provider, (our abstracted EVM SDK for apps) we support by default the following Ethereum methods and events:
+
+
+```ts
+{
+  //...
+  methods: [
+    "eth_accounts",
+    "eth_requestAccounts",
+    "eth_sendRawTransaction",
+    "eth_sign",
+    "eth_signTransaction",
+    "eth_signTypedData",
+    "eth_signTypedData_v3",
+    "eth_signTypedData_v4",
+    "eth_sendTransaction",
+    "personal_sign",
+    "wallet_switchEthereumChain",
+    "wallet_addEthereumChain",
+    "wallet_getPermissions",
+    "wallet_requestPermissions",
+    "wallet_registerOnboarding",
+    "wallet_watchAsset",
+    "wallet_scanQRCode",
+    "wallet_sendCalls",
+    "wallet_getCallsStatus",
+    "wallet_showCallsStatus",
+    "wallet_getCapabilities",
+  ],
+  events: [
+    "chainChanged",
+    "accountsChanged",
+    "message",
+    "disconnect",
+    "connect",
+  ]
+}
+```
 
 ### Session Approval
 
@@ -631,7 +672,7 @@ await web3wallet.pair({ uri })
 
 #### 🛠️ Usage examples
 
-- [in a demo wallet app](https://github.com/WalletConnect/web-examples/blob/main/advanced/wallets/react-web3wallet/src/views/SessionProposalModal.tsx#L75)
+- [in a demo wallet app](https://github.com/WalletConnect/web-examples/blob/a50c8eb5a10666f25911713c5358e78f1ca576d6/advanced/wallets/react-wallet-v2/src/views/SessionProposalModal.tsx#L264)
 - [in integration tests](https://github.com/WalletConnect/walletconnect-monorepo/blob/v2.0/packages/web3wallet/test/sign.spec.ts#L55)
 
 #### ⚠️ Expected Errors
@@ -888,9 +929,9 @@ The wallet can then approve the proposal by constructing an approved `Namespaces
 specified under `proposal.OptionalNamespaces`
 
 ```csharp
-sdk.On<SessionProposalEvent>(EngineEvents.SessionProposal, async (sender, @event) =>
+sdk.SessionProposed += async (sender, @event) =>
 {
-    var proposal = @event.EventData.Proposal;
+    var proposal = @event.Proposal;
     var requiredNamespaces = proposal.RequiredNamespaces;
     var approvedNamespaces = new Namespaces(requiredNamespaces);
     approvedNamespaces["eip155"].WithAccount("eip155:1:0xab16a96d359ec26a11e2c2b3d8f8b8942d5bfcdb");
@@ -904,9 +945,9 @@ You may also just provide the addresses that will connect, and the SDK will crea
 `Namespaces` for you. This function **will not approve optional namespaces**
 
 ```csharp
-sdk.On<SessionProposalEvent>(EngineEvents.SessionProposal, async (sender, @event) =>
+sdk.SessionProposed += async (sender, @event) =>
 {
-    var proposal = @event.EventData.Proposal;
+    var proposal = @event.Proposal;
 
     var sessionData = await sdk.ApproveSession(proposal, new[] { "eip155:1:0xab16a96d359ec26a11e2c2b3d8f8b8942d5bfcdb" });
     var sessionTopic = sessionData.Topic;
@@ -916,9 +957,9 @@ sdk.On<SessionProposalEvent>(EngineEvents.SessionProposal, async (sender, @event
 or
 
 ```csharp
-sdk.On<SessionProposalEvent>(EngineEvents.SessionProposal, async (sender, @event) =>
+sdk.SessionProposed += async (sender, @event) =>
 {
-    var proposal = @event.EventData.Proposal;
+    var proposal = @event.Proposal;
 
     var sessionData = await sdk.ApproveSession(proposal, "eip155:1:0xab16a96d359ec26a11e2c2b3d8f8b8942d5bfcdb");
     var sessionTopic = sessionData.Topic;
@@ -947,7 +988,7 @@ web3wallet.on('session_proposal', async proposal => {
 
 #### 🛠️ Usage examples
 
-- [in a demo wallet app](https://github.com/WalletConnect/web-examples/blob/main/advanced/wallets/react-web3wallet/src/views/SessionProposalModal.tsx#L87)
+- [in a demo wallet app](https://github.com/WalletConnect/web-examples/blob/a50c8eb5a10666f25911713c5358e78f1ca576d6/advanced/wallets/react-wallet-v2/src/views/SessionProposalModal.tsx#L287)
 - [in integration tests](https://github.com/WalletConnect/walletconnect-monorepo/blob/v2.0/packages/web3wallet/test/sign.spec.ts#L79)
 
 #### ⚠️ Expected Errors
@@ -1031,9 +1072,9 @@ await web3wallet.core.pairing.pair({ wcuri })
 The wallet can reject the proposal using the following:
 
 ```csharp
-sdk.On<SessionProposalEvent>(EngineEvents.SessionProposal, async (sender, @event) =>
+sdk.SessionProposed += async (sender, @event) =>
 {
-    var proposal = @event.EventData.Proposal;
+    var proposal = @event.Proposal;
     await sdk.Reject(proposal, "User rejected");
 });
 ```
@@ -1088,7 +1129,7 @@ const response = {
 
 #### 🛠️ Usage examples
 
-- [in a demo wallet app](https://github.com/WalletConnect/web-examples/blob/main/advanced/wallets/react-web3wallet/src/views/SessionSignModal.tsx#L33)
+- [in a demo wallet app](https://github.com/WalletConnect/web-examples/blob/a50c8eb5a10666f25911713c5358e78f1ca576d6/advanced/wallets/react-wallet-v2/src/views/SessionSignModal.tsx#L36)
 - [in integration tests](https://github.com/WalletConnect/walletconnect-monorepo/blob/v2.0/packages/web3wallet/test/sign.spec.ts#L165)
 
 #### ⚠️ Expected Errors
@@ -1494,7 +1535,7 @@ await web3wallet.updateSession({ topic: session.topic, namespaces: updatedNamesp
 
 #### 🛠️ Usage examples
 
-- [in a demo wallet app](https://github.com/WalletConnect/web-examples/blob/main/advanced/wallets/react-web3wallet/src/pages/session.tsx#L73)
+- [in a demo wallet app](https://github.com/WalletConnect/web-examples/blob/a50c8eb5a10666f25911713c5358e78f1ca576d6/advanced/wallets/react-wallet-v2/src/pages/session.tsx#L77)
 - [in integration tests](https://github.com/WalletConnect/walletconnect-monorepo/blob/v2.0/packages/web3wallet/test/sign.spec.ts#L98)
 
 #### ⚠️ Expected Errors
@@ -1851,6 +1892,10 @@ Web3Wallet.instance.register(deviceToken: deviceToken, enableEncrypted: true)
 val walletDelegate = object : Web3Wallet.WalletDelegate {
     override fun onSessionProposal(sessionProposal: Wallet.Model.SessionProposal, verifyContext: Wallet.Model.VerifyContext) {
         // Triggered when wallet receives the session proposal sent by a Dapp
+    }
+
+    fun onSessionAuthenticate(sessionAuthenticate: Wallet.Model.SessionAuthenticate, verifyContext: Wallet.Model.VerifyContext) {
+      // Triggered when wallet receives the session authenticate sent by a Dapp
     }
 
     override fun onSessionRequest(sessionRequest: Wallet.Model.SessionRequest, verifyContext: Wallet.Model.VerifyContext) {

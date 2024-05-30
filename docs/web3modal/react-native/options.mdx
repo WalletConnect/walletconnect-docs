@@ -20,11 +20,12 @@ You can set a desired chain for the initial connection:
 ```ts
   import { mainnet } from 'viem/chains'
 
-  createWeb3Modal({
-    //...
-    defaultChain: mainnet
-  })
-```
+createWeb3Modal({
+//...
+defaultChain: mainnet
+})
+
+````
 </PlatformTabItem>
 
 <PlatformTabItem value="ethers">
@@ -41,7 +42,8 @@ createWeb3Modal({
   //...
   defaultChain: mainnet
 })
-```
+````
+
 </PlatformTabItem>
 
 <PlatformTabItem value="ethers5">
@@ -55,10 +57,11 @@ const mainnet = {
 };
 
 createWeb3Modal({
-  //...
-  defaultChain: mainnet
+//...
+defaultChain: mainnet
 })
-```
+
+````
 </PlatformTabItem>
 
 </PlatformTabs>
@@ -78,7 +81,7 @@ createWeb3Modal({
     }
   }
 })
-```
+````
 
 ## tokens
 
@@ -171,10 +174,9 @@ createWeb3Modal({
   ]
 })
 ```
+
 ## enableAnalytics
-:::caution
-  Analytics is currently in alpha. 
-:::
+
 Enable analytics to get more insights on your users activity within your [WalletConnect Cloud's dashboard](https://cloud.walletconnect.com)
 
 ```ts

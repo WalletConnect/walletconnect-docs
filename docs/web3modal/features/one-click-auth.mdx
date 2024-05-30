@@ -1,0 +1,55 @@
+import Button from '../../components/button'
+import Container from '../../components/Container.js'
+import Wrapper from '../../components/Home/Wrapper'
+import W3MQuickStart from '../../components/W3MQuickStart'
+import YoutubeEmbed from '../../components/YoutubeEmbed'
+import useBaseUrl from '@docusaurus/useBaseUrl'
+
+import reactLogo from '../../../static/assets/home/reactLogo.png'
+import nextjsLogo from '../../../static/assets/home/nextjsLogo.png'
+import vueLogo from '../../../static/assets/home/vueLogo.png'
+import javascriptLogo from '../../../static/assets/home/javascriptLogo.png'
+
+# One-Click Auth
+
+**One-Click Auth** represents a key advancement within WalletConnect v2, streamlining the user authentication process in Web3Modal by enabling them to seamlessly connect with a wallet and sign a SIWE message with just one click.
+
+Connecting a wallet, proving control of an address with an off-chain signature, authorizing specific actions. These are the kinds of authorizations that can be encoded as ["ReCaps"](https://eips.ethereum.org/EIPS/eip-5573). ReCaps are permissions for a specific website or dapp that can be compactly encoded as a long string in the message you sign and translated by any wallet into a straight-forward one-sentence summary.
+WalletConnect uses permissions expressed as ReCaps to enable a One-Click Authentication.
+
+## Get Started
+
+<Wrapper
+  type="large"
+  fit={false}
+  items={[
+    {
+      name: 'React',
+      description: 'Get started with Web3Modal in React.',
+      icon: reactLogo,
+      href: '../react/siwe'
+    },
+    {
+      name: 'Next.js',
+      description: 'Get started with Web3Modal in Next.js.',
+      icon: nextjsLogo,
+      href: '../nextjs/siwe',
+      isWhite: true
+    },
+    {
+      name: 'Vue',
+      description: 'Get started with Web3Modal in Vue.',
+      icon: vueLogo,
+      href: '../vue/siwe'
+    },
+    {
+      name: 'JavaScript',
+      description: 'Get started with Web3Modal in JavaScript.',
+      icon: javascriptLogo,
+      href: '../javascript/siwe'
+    }
+  ]}
+/>
+
+<br />
+<Button name="Try Demo" url="https://lab.web3modal.com/library/wagmi-siwe/" />
