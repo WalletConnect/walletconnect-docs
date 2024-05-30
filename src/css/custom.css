@@ -38,6 +38,10 @@
   border-radius: 1000rem !important;
 }
 
+.kill{
+  display: none;
+}
+
 .MarkpromptSearchBoxTriggerContent {
   margin: 0;
   transition: all var(--ifm-transition-fast) var(--ifm-transition-timing-default);

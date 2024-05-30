@@ -152,7 +152,12 @@ const specs = {
 
 module.exports = {
   mainSidebar: [
-    'readme',
+    { 
+      type: 'doc',
+      label: 'Home',
+      className: 'kill',
+      id: 'readme'
+    },
     {
       type: 'category',
       label: 'SDKs',
@@ -234,34 +239,64 @@ module.exports = {
     },
     cloud
   ],
-  AppKit_Vue: [{
-    type: 'category',
-    label: 'SDKs',
-    collapsible: false,
-    className: 'menu_outer_list',
-    items: [
-      {
-        type: 'category',
-        label: 'Web3Modal',
-        collapsed: true,
-        collapsible: true,
-        items: [
-          { type: 'doc', label: 'Getting started', id: 'web3modal/vue/about' },
-          'web3modal/vue/composables',
-          'web3modal/vue/options',
-          'web3modal/vue/components',
-          'web3modal/vue/email',
-          'web3modal/vue/siwe',
-          'web3modal/vue/smart-accounts',
-          'web3modal/vue/onramp',
-          'web3modal/vue/theming',
-          'web3modal/vue/resources',
-          'web3modal/upgrade',
-          'web3modal/v2/about'
-        ]
-      }
-    ]
-  },
-  cloud],
+  AppKit_Vue: [
+    {
+      type: 'category',
+      label: 'SDKs',
+      collapsible: false,
+      className: 'menu_outer_list',
+      items: [
+        {
+          type: 'category',
+          label: 'Core',
+          items: [
+            'appkit/vue/core/installation',
+            'appkit/vue/core/compositions',
+            'appkit/vue/core/options',
+            'appkit/vue/core/components',
+            'appkit/vue/core/siwe',
+            'appkit/vue/core/theming'
+          ]
+        },
+        {
+          type: 'category',
+          label: 'Accounts',
+          items: [
+            {
+              type: 'category',
+              label: 'Universal Wallets',
+              items: [
+                'appkit/vue/accounts/universal-wallets/email',
+                'appkit/vue/accounts/universal-wallets/socials',
+                'appkit/vue/accounts/universal-wallets/wallet-features',
+                'appkit/vue/accounts/universal-wallets/graduation',
+                'appkit/vue/accounts/universal-wallets/smart-accounts',
+                'appkit/vue/accounts/universal-wallets/ens'
+              ]
+            },
+            'appkit/vue/accounts/multi-accounts'
+          ]
+        },
+        {
+          type: 'category',
+          label: 'Transactions',
+          items: [
+            'appkit/vue/transactions/onramp',
+            'appkit/vue/transactions/transaction-history',
+            'appkit/vue/transactions/swaps',
+          ]
+        },
+        {
+          type: 'category',
+          label: 'Notifications',
+          items: [
+            'appkit/vue/notifications/notifications',
+          ]
+        },
+        'appkit/vue/upgrade'
+      ]
+    },
+    cloud
+  ],
   walletKit: []
 }
