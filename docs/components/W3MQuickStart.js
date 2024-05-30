@@ -16,12 +16,12 @@ export const CloudBanner = props => {
     <div className="w3m-qs__wrapper">
       <div className="w3m-qs__text-container">
         <h2>⚡️ QuickStart</h2>
-        <p>Setup a dapp with Web3Modal in minutes!</p>
+        <p>Setup a dapp with AppKit in minutes!</p>
       </div>
       <CodeBlock
         className="w3m-qs__code-block"
         language="bash"
-      >{`npx create-wc-dapp@latest -y w3m`}</CodeBlock>
+      >{`npm create reown@latest`}</CodeBlock>
     </div>
   )
 }
