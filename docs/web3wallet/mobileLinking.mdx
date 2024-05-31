@@ -107,6 +107,13 @@ In order for Dapps to be able to trigger your wallet for a connection or sign re
 </intent-filter>
 ```
 
+:::info Note
+
+In case when a wallet is opened in the same process as caller app, consider changing the launchMode flag in your activity to singleTask.
+
+:::
+
+
 </PlatformTabItem>
 <PlatformTabItem value="flutter">
 
