@@ -18,8 +18,7 @@ export default function DocSidebarWrapper(props) {
         </a>
         </li>
         <FrameworksMenu/>
-        <DocSidebar {...props} />
-    </>
+        <DocSidebar {...props} /></>
   );
 }
 
@@ -28,6 +27,7 @@ const walletKit_environments = ['web', 'ios', 'android', 'react-native', 'c#']
 
 const FrameworksMenu = ()=>{
   const initial_environment = getItemInStorage()
+  console.log("initial_environment: ", initial_environment)
 
   const location = useLocation()
 

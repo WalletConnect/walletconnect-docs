@@ -38,8 +38,12 @@
   border-radius: 1000rem !important;
 }
 
+.dropdown_placeholder{
+  height: 300px;
+}
+
 .kill{
-  display: none;
+  visibility: hidden;
 }
 
 .MarkpromptSearchBoxTriggerContent {

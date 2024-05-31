@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { useLocation, useHistory } from "react-router-dom"
 import s from './styles.module.css'
 import { parseEnvironment, setItemInStorage } from './utils'
@@ -17,13 +17,14 @@ export default function Dropdown({ list, initial }){
 
   if(!selected){
     if(initial){
+      console.log("initial: ", initial)
       setSelected(initial)
     }else{
       const environment = list.find(item => location.pathname.includes(item))
-      console.log("ASDASDASD: ", environment)
       if(!environment){
         throw Error("The current path doesn't contain any environment.")
       }
+      console.log("environment: ", environment)
       setSelected(environment)
     }
   }
@@ -39,12 +40,27 @@ export default function Dropdown({ list, initial }){
     
     history.push(new_path)
   }
+
+  const menuRef = useRef(null);
+
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (menuRef.current && !menuRef.current.contains(event.target)) {
+        setIsOpen(false)
+      }
+    }
+    
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {  document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [menuRef]);
   
   return (
-    <div className={s.container} >
-      <button onClick={()=>setIsOpen(p => !p)} >{parseEnvironment(selected)}</button>
+    <div className={s.container} ref={menuRef} >
+      <div className={s.dropdownButton} onClick={()=>setIsOpen(p => !p)} >{parseEnvironment(selected)}</div>
       <div className={[!isOpen && s.kill, s.dropdownContainer].join(" ")}>
-        {list.map(item =><span className={s.item} onClick={()=>handleItem(item)} >{parseEnvironment(item)}</span>)}
+        {list.filter(i => i !== selected).map(item =><span className={s.item} onClick={()=>handleItem(item)} >{parseEnvironment(item)}</span>)}
       </div>
     </div>
   )

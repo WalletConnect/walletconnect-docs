@@ -3,6 +3,12 @@
 
 
 /* Global Sections */
+const dropdown_placeholder = { 
+  type: 'html',
+  value: '<div class="dropdown_placeholder"></div>',
+  defaultStyle: true
+}
+
 const cloud = {
   type: 'category',
   label: 'Cloud',
@@ -173,12 +179,12 @@ module.exports = {
           type: 'doc',
           label: 'WalletKit',
           id: 'walletkit/overview'
-        }
+        },
       ]
     },
     cloud,
     advanced,
-    specs
+    specs,
   ],
   AppKit_React: [
     {
@@ -234,10 +240,22 @@ module.exports = {
             'appkit/react/notifications/notifications',
           ]
         },
-        'appkit/react/upgrade'
+        'appkit/react/upgrade',
+        {
+          type: 'category',
+          label: 'Cloud',
+          collapsible: false,
+          className: 'menu_outer_list',
+          items: [
+            'appkit/react/cloud/verify',
+            'appkit/react/cloud/relay',
+            'appkit/react/cloud/blockchain-api',
+            'appkit/react/cloud/analytics'
+          ]
+        }
       ]
     },
-    cloud
+    dropdown_placeholder,
   ],
   AppKit_Vue: [
     {
@@ -293,10 +311,21 @@ module.exports = {
             'appkit/vue/notifications/notifications',
           ]
         },
-        'appkit/vue/upgrade'
+        'appkit/vue/upgrade',
+        {
+          type: 'category',
+          label: 'Cloud',
+          collapsible: false,
+          className: 'menu_outer_list',
+          items: [
+            'appkit/vue/cloud/verify',
+            'appkit/vue/cloud/relay',
+            'appkit/vue/cloud/blockchain-api',
+            'appkit/vue/cloud/analytics'
+          ]
+        }
       ]
-    },
-    cloud
+    }
   ],
   walletKit: []
 }

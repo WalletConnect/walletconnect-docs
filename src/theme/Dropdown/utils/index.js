@@ -16,7 +16,15 @@ export function parseEnvironment(env){
   if(!env) return ''
   if(env.includes('-')){
     const env_array = env.split('-')
-    return env_array.map(item => capitalize(item)).join(' ')
+    return env_array.map(item => {
+      if(item === 'ios'){
+        return 'iOS'
+      }
+      return capitalize(item)
+    }).join(' ')
+  }
+  if(env === 'ios'){
+    return 'iOS'
   }
   return capitalize(env)
 }
