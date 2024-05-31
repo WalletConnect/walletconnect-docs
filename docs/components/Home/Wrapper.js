@@ -17,6 +17,7 @@ const Wrapper = ({ items, type, fit = true, ...props }) => {
             <SmallContainer
               key={index}
               href={item.href}
+              type={item.type}
               name={item.name}
               icon={item.icon}
               isWhite={item.isWhite || false}
@@ -26,6 +27,7 @@ const Wrapper = ({ items, type, fit = true, ...props }) => {
             <LargeContainer
               key={index}
               href={item.href}
+              type={item.type}
               name={item.name}
               icon={item.icon}
               fit={fit}

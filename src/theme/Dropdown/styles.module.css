@@ -1,0 +1,24 @@
+.container{
+
+}
+
+.container button{
+
+}
+
+.dropdownContainer{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  border: 1px solid #202020;
+}
+
+.item{
+
+}
+
+.kill{
+  display: none;
+}
