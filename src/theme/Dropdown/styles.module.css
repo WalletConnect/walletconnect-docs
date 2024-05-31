@@ -1,4 +1,4 @@
-.container{
+.container {
   position: relative;
   padding-top: 60px !important;
   padding-left: 20px;
@@ -7,7 +7,7 @@
   align-items: center;
 }
 
-.dropdownContainer{
+.dropdownContainer {
   position: absolute;
   transform: translateY(50%);
   top: -40%;
@@ -23,15 +23,15 @@
   z-index: 100;
 }
 
-.item{
+.item {
   cursor: pointer;
 }
 
-.item:hover{
+.item:hover {
   color: var(--ifm-link-hover-color);
 }
 
-.kill{
+.kill {
   display: none;
 }
 

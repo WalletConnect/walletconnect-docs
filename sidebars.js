@@ -1,9 +1,7 @@
 // @ts-check
 
-
-
 /* Global Sections */
-const dropdown_placeholder = { 
+const dropdown_placeholder = {
   type: 'html',
   value: '<div class="dropdown_placeholder"></div>',
   defaultStyle: true
@@ -20,10 +18,7 @@ const cloud = {
     {
       type: 'category',
       label: 'Explorer Chains',
-      items: [
-        'cloud/chains/overview',
-        'cloud/chains/chain-list'
-      ]
+      items: ['cloud/chains/overview', 'cloud/chains/chain-list']
     },
     'cloud/verify',
     'cloud/relay',
@@ -38,7 +33,6 @@ const advanced = {
   collapsible: false,
   className: 'menu_outer_list',
   items: [
-    
     {
       type: 'category',
       label: 'Multi-Chain',
@@ -62,7 +56,8 @@ const advanced = {
         {
           type: 'category',
           label: 'Examples',
-          items: [,
+          items: [
+            ,
             {
               type: 'category',
               label: 'Polkadot',
@@ -158,7 +153,7 @@ const specs = {
 
 module.exports = {
   mainSidebar: [
-    { 
+    {
       type: 'doc',
       label: 'Home',
       className: 'kill',
@@ -179,12 +174,12 @@ module.exports = {
           type: 'doc',
           label: 'WalletKit',
           id: 'walletkit/overview'
-        },
+        }
       ]
     },
     cloud,
     advanced,
-    specs,
+    specs
   ],
   AppKit_React: [
     {
@@ -230,15 +225,13 @@ module.exports = {
           items: [
             'appkit/react/transactions/onramp',
             'appkit/react/transactions/transaction-history',
-            'appkit/react/transactions/swaps',
+            'appkit/react/transactions/swaps'
           ]
         },
         {
           type: 'category',
           label: 'Notifications',
-          items: [
-            'appkit/react/notifications/notifications',
-          ]
+          items: ['appkit/react/notifications/notifications']
         },
         'appkit/react/upgrade',
         {
@@ -255,7 +248,7 @@ module.exports = {
         }
       ]
     },
-    dropdown_placeholder,
+    dropdown_placeholder
   ],
   AppKit_Next: [
     {
@@ -301,15 +294,13 @@ module.exports = {
           items: [
             'appkit/next/transactions/onramp',
             'appkit/next/transactions/transaction-history',
-            'appkit/next/transactions/swaps',
+            'appkit/next/transactions/swaps'
           ]
         },
         {
           type: 'category',
           label: 'Notifications',
-          items: [
-            'appkit/next/notifications/notifications',
-          ]
+          items: ['appkit/next/notifications/notifications']
         },
         'appkit/next/upgrade',
         {
@@ -326,7 +317,7 @@ module.exports = {
         }
       ]
     },
-    dropdown_placeholder,
+    dropdown_placeholder
   ],
   AppKit_Vue: [
     {
@@ -372,15 +363,13 @@ module.exports = {
           items: [
             'appkit/vue/transactions/onramp',
             'appkit/vue/transactions/transaction-history',
-            'appkit/vue/transactions/swaps',
+            'appkit/vue/transactions/swaps'
           ]
         },
         {
           type: 'category',
           label: 'Notifications',
-          items: [
-            'appkit/vue/notifications/notifications',
-          ]
+          items: ['appkit/vue/notifications/notifications']
         },
         'appkit/vue/upgrade',
         {
@@ -442,15 +431,13 @@ module.exports = {
           items: [
             'appkit/javascript/transactions/onramp',
             'appkit/javascript/transactions/transaction-history',
-            'appkit/javascript/transactions/swaps',
+            'appkit/javascript/transactions/swaps'
           ]
         },
         {
           type: 'category',
           label: 'Notifications',
-          items: [
-            'appkit/javascript/notifications/notifications',
-          ]
+          items: ['appkit/javascript/notifications/notifications']
         },
         'appkit/javascript/upgrade',
         {
@@ -467,7 +454,7 @@ module.exports = {
         }
       ]
     },
-    dropdown_placeholder,
+    dropdown_placeholder
   ],
   AppKit_React_Native: [
     {
@@ -495,9 +482,7 @@ module.exports = {
             {
               type: 'category',
               label: 'Universal Wallets',
-              items: [
-                'appkit/react-native/accounts/universal-wallets/email',
-              ]
+              items: ['appkit/react-native/accounts/universal-wallets/email']
             }
           ]
         },
@@ -515,7 +500,7 @@ module.exports = {
         }
       ]
     },
-    dropdown_placeholder,
+    dropdown_placeholder
   ],
   AppKit_Flutter: [
     {
@@ -545,9 +530,7 @@ module.exports = {
             {
               type: 'category',
               label: 'Universal Wallets',
-              items: [
-                'appkit/flutter/accounts/universal-wallets/email',
-              ]
+              items: ['appkit/flutter/accounts/universal-wallets/email']
             }
           ]
         },
@@ -563,10 +546,10 @@ module.exports = {
             'appkit/flutter/cloud/analytics'
           ]
         },
-        'appkit/flutter/upgrade',
+        'appkit/flutter/upgrade'
       ]
     },
-    dropdown_placeholder,
+    dropdown_placeholder
   ],
   AppKit_iOS: [
     {
@@ -598,10 +581,10 @@ module.exports = {
             'appkit/ios/cloud/blockchain-api',
             'appkit/ios/cloud/analytics'
           ]
-        },
+        }
       ]
     },
-    dropdown_placeholder,
+    dropdown_placeholder
   ],
   AppKit_Android: [
     {
@@ -634,10 +617,10 @@ module.exports = {
             'appkit/android/cloud/blockchain-api',
             'appkit/android/cloud/analytics'
           ]
-        },
+        }
       ]
     },
-    dropdown_placeholder,
+    dropdown_placeholder
   ],
   AppKit_Unity: [
     {
@@ -654,7 +637,7 @@ module.exports = {
             'appkit/unity/core/usage',
             'appkit/unity/core/options',
             'appkit/unity/core/actions',
-            'appkit/unity/core/events',
+            'appkit/unity/core/events'
           ]
         },
         {
@@ -668,10 +651,10 @@ module.exports = {
             'appkit/unity/cloud/blockchain-api',
             'appkit/unity/cloud/analytics'
           ]
-        },
+        }
       ]
     },
-    dropdown_placeholder,
+    dropdown_placeholder
   ],
   walletKit: []
 }

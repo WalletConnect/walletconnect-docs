@@ -38,14 +38,14 @@ openupm add com.walletconnect.web3modal
 
 1. Open `Advanced Project Settings` from the gear ⚙ menu located at the top right of the Package Manager’s toolbar
 2. Add a new scoped registry with the following details:
-    - Name: `OpenUPM`
-    - URL: `https://package.openupm.com`
-    - Scope(s): `com.walletconnect`
+   - Name: `OpenUPM`
+   - URL: `https://package.openupm.com`
+   - Scope(s): `com.walletconnect`
 3. Press plus ➕ and then `Save` buttons
 4. In the Package Manager windows open the add ➕ menu from the toolbar
 5. Select `Add package by name...`
 6. Enter the package name:
-    - `com.walletconnect.web3modal`
+   - `com.walletconnect.web3modal`
 7. Press `Add` button
 
 </TabItem>
@@ -58,7 +58,7 @@ The minimum configuration required is filling in a `Project ID` and `Metadata` f
 <CloudBanner />
 
 - **Id**: The project ID is a unique identifier for your project.
-    - If you don’t have a Project ID, you can create one at [WalletConnect Cloud](https://cloud.walletconnect.com).
+  - If you don’t have a Project ID, you can create one at [WalletConnect Cloud](https://cloud.walletconnect.com).
 - **Name**: The project name is a human-readable name for your project.
 - **Description**: The project description is a human-readable description for your project.
 - **URL**: The project URL
@@ -72,13 +72,16 @@ Other fields are optional and will be covered in the next sections.
 
 1. Add `Web3Modal` prefab from `Packages/Web3Modal/Prefabs` to your scene.
 2. Initialize Web3Modal from your script
+
 ```csharp
 public async void Start()
 {
     await Web3Modal.InitializeAsync();
 }
 ```
+
 3. Open the modal
+
 ```csharp
 public void OpenModal()
 {

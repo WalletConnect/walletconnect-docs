@@ -147,13 +147,15 @@ The telemetry feature aims to improve the reliability and observability of conne
 It focuses solely on collecting data about code execution and error codes, without tracking any sensitive user information like amounts, accounts etc.
 
 It provides a comprehensive tracing system for three key use cases:
-* Subscribing to a Pairing Topic
-* Approving a Session
-* Approving an Authenticated Session
+
+- Subscribing to a Pairing Topic
+- Approving a Session
+- Approving an Authenticated Session
 
 Each execution trace consists of:
-* Trace Events: Collected to verify the proper execution of code.
-* Error Events: Captured when errors occur during the trace, halting the execution trace.
+
+- Trace Events: Collected to verify the proper execution of code.
+- Error Events: Captured when errors occur during the trace, halting the execution trace.
 
 When an error event is encountered, it is stored locally within the SDK along with all preceding trace events.
 These stored events are then transmitted to the server whenever the SDK is initialized.
@@ -161,15 +163,17 @@ These stored events are then transmitted to the server whenever the SDK is initi
 Error event tracing is enabled by default.
 
 Telemetry Enabled (telemetryEnabled = true):
-* The SDK stores events and sends them to the server.
 
+- The SDK stores events and sends them to the server.
 
 Telemetry Disabled (telemetryEnabled = false):
-* The SDK stops storing new events and deletes all unsent events from local storage upon the next initialization.
+
+- The SDK stops storing new events and deletes all unsent events from local storage upon the next initialization.
 
 Important Note: Since the SDK only stores abstract trace and error data, user identification is not possible.
 
 Example of the error events:
+
 ```json
 [
   {
@@ -201,10 +205,7 @@ Example of the error events:
       "type": "session_approve_namespace_validation_failure",
       "properties": {
         "topic": "topic2",
-        "trace": [
-          "session_approve_started",
-          "proposal_not_expired"
-        ]
+        "trace": ["session_approve_started", "proposal_not_expired"]
       }
     }
   }
@@ -678,7 +679,6 @@ dApp will provide a `RequiredNamespaces` when proposing the session. The `Requir
 ### EVM methods & events
 
 In @walletconnect/ethereum-provider, (our abstracted EVM SDK for apps) we support by default the following Ethereum methods and events:
-
 
 ```ts
 {
@@ -1579,10 +1579,13 @@ const updatedNamespaces = {
     accounts
   }
 }
-const { acknowledged } = await web3wallet.updateSession({ topic: session.topic, namespaces: updatedNamespaces })
+const { acknowledged } = await web3wallet.updateSession({
+  topic: session.topic,
+  namespaces: updatedNamespaces
+})
 // If you wish to be notified when the dapp acknowledges the update.
 // note that if the dapp is offline `acknowledged` will not resolve until it comes back online
-await acknowledged();
+await acknowledged()
 ```
 
 An example adding a new chain to an existing session:
@@ -1708,7 +1711,7 @@ Sessions have a default expiry of 7 days. To extend a session by an additional 7
 const { acknowledged } = await web3wallet.extendSession({ topic })
 // if you wish to be notified when the dapp acks the extend
 // note that if the dapp is offline `acknowledged` will not resolve until it comes back online
-await acknowledged(); 
+await acknowledged()
 ```
 
 #### 🛠️ Usage examples

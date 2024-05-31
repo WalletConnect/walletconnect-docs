@@ -17,16 +17,15 @@ npx pod-install
 
 ```ts
 /* highlight-add-start */
-import { EmailProvider } from '@web3modal/email-ethers-react-native';
+import { EmailProvider } from '@web3modal/email-ethers-react-native'
 
-const emailProvider = new EmailProvider({ projectId, metadata });
+const emailProvider = new EmailProvider({ projectId, metadata })
 /* highlight-add-end */
 
 const config = defaultConfig({
   metadata,
   /* highlight-add-start */
-  extraConnectors: [emailProvider],
+  extraConnectors: [emailProvider]
   /* highlight-add-end */
 })
 ```
-

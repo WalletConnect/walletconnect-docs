@@ -152,7 +152,6 @@ With help of the [siwe package](https://docs.login.xyz/sign-in-with-ethereum/qui
 The nonce and verification process will be implemented in your backend. [Read more.](https://docs.login.xyz/sign-in-with-ethereum/quickstart-guide/implement-the-backend)
 :::
 
-
 Let's create a file to instantiate our SIWE configuration. For this example we will use `config/siwe.ts`
 
 ```ts
@@ -225,7 +224,7 @@ Create your API route at `app/api/auth/[...nextauth]/route.ts`.
 <TabItem value="oca" label="One-Click Auth">
 
 ```ts
-import NextAuth from "next-auth"
+import NextAuth from 'next-auth'
 import credentialsProvider from 'next-auth/providers/credentials'
 import {
   type SIWESession,
@@ -292,27 +291,27 @@ const providers = [
 ]
 
 const handler = NextAuth({
-    // https://next-auth.js.org/configuration/providers/oauth
-    secret: nextAuthSecret,
-    providers,
-    session: {
-      strategy: 'jwt'
-    },
-    callbacks: {
-      session({ session, token }) {
-        if (!token.sub) {
-          return session
-        }
-
-        const [, chainId, address] = token.sub.split(':')
-        if (chainId && address) {
-          session.address = address
-          session.chainId = parseInt(chainId, 10)
-        }
-
+  // https://next-auth.js.org/configuration/providers/oauth
+  secret: nextAuthSecret,
+  providers,
+  session: {
+    strategy: 'jwt'
+  },
+  callbacks: {
+    session({ session, token }) {
+      if (!token.sub) {
         return session
       }
+
+      const [, chainId, address] = token.sub.split(':')
+      if (chainId && address) {
+        session.address = address
+        session.chainId = parseInt(chainId, 10)
+      }
+
+      return session
     }
+  }
 })
 
 export { handler as GET, handler as POST }

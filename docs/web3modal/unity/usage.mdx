@@ -1,4 +1,4 @@
-import Button from "../../components/button";
+import Button from '../../components/button'
 
 # Usage
 
@@ -17,7 +17,6 @@ You can use it to interact with the EVM chains, smart contracts, convert between
 An instance of Nethereum's `Web3` class is available in the `Web3Modal` at `Web3Modal.Web3`.
 It's already preconfigured with RPC URL and interceptor that will route the requests between the wallet provider and RPC node.
 
-
 :::info Warning
 
 Under some circumstances, Web3Modal may create a new instance of `Web3` class with a different configuration.
@@ -31,11 +30,12 @@ await web3.Eth.Blocks.GetBlockNumber.SendRequestAsync();
 // ✅ Instead, always use
 await Web3Modal.Web3.Eth.Blocks.GetBlockNumber.SendRequestAsync();
 ```
+
 :::
 
 <Button
-    name="Learn More About Nethereum"
-    url="https://docs.nethereum.com/en/latest/getting-started/"
+  name="Learn More About Nethereum"
+  url="https://docs.nethereum.com/en/latest/getting-started/"
 />
 
 ## Sending Ether
@@ -84,6 +84,7 @@ var tokenDecimal = await contractService.DecimalsQueryAsync();
 
 var finalBalance = tokenBalance / BigInteger.Pow(10, tokenDecimal);
 ```
+
 ###
 
 ### Send ERC20 Token
@@ -105,5 +106,3 @@ await contractService.TransferRequestAsync(recipientAddress, amount);
 
 Nethereum allows to deploy and interact with custom smart contracts as well.
 Refer to the [Nethereum documentation](https://docs.nethereum.com/en/latest/nethereum-smartcontrats-gettingstarted/) for more information.
-
-

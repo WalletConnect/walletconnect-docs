@@ -202,10 +202,10 @@ Note that the `chains` object is an optional parameter and may be undefined. The
 
 ```ts
 interface Namespaces {
-    chains?: string[];
-    accounts: string[];
-    methods: string[];
-    events: string[];
+  chains?: string[]
+  accounts: string[]
+  methods: string[]
+  events: string[]
 }
 ```
 
@@ -213,18 +213,17 @@ interface Namespaces {
 - **peer**: The `session.peer.metadata` object contains the metadata of the connected wallet.
 
 ```ts
-  interface Metadata {
-    name: string;
-    description: string;
-    url: string;
-    icons: string[];
-    verifyUrl?: string;
-    redirect?: {
-      native?: string;
-      universal?: string;
-    };
+interface Metadata {
+  name: string
+  description: string
+  url: string
+  icons: string[]
+  verifyUrl?: string
+  redirect?: {
+    native?: string
+    universal?: string
   }
-
+}
 ```
 
 Find the complete type definition of the `session` object [here](https://github.com/WalletConnect/walletconnect-monorepo/blob/022e4d492c9862ab9b17c1a7b12884bdcd992ae4/packages/types/src/sign-client/session.ts#L25).

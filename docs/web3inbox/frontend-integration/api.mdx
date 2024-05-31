@@ -340,7 +340,7 @@ const {
   markNotificationsAsRead,
   markAllNotificationsAsRead
 } = useNotifications(
-  notificationsPerPage, 
+  notificationsPerPage,
   isInfiniteScroll,
   account,
   domain,
@@ -349,33 +349,42 @@ const {
 )
 
 // marking a single notification as read
-await notifications[0].markAsRead();
+await notifications[0].markAsRead()
 
 // mark specific notifications as read for default account and under default domain
-await markNotificationsAsRead(notifications.slice(2).map(n => n.id));
+await markNotificationsAsRead(notifications.slice(2).map(n => n.id))
 
 // mark specific notifications as read for specified account under default domain
-await markNotificationsAsRead(notifications.slice(2).map(n => n.id), differentAccount);
+await markNotificationsAsRead(
+  notifications.slice(2).map(n => n.id),
+  differentAccount
+)
 
 // mark specific notifications as read for default account under specified domain
-await markNotificationsAsRead(notifications.slice(2).map(n => n.id), undefined, differentDomain);
+await markNotificationsAsRead(
+  notifications.slice(2).map(n => n.id),
+  undefined,
+  differentDomain
+)
 
 // mark specific notifications as read for specified account under specified domain
-await markNotificationsAsRead(notifications.slice(2).map(n => n.id), differentAccount, differentDomain);
+await markNotificationsAsRead(
+  notifications.slice(2).map(n => n.id),
+  differentAccount,
+  differentDomain
+)
 
 // mark all notifications as read for default account under default domain
-await markAllNotificationsAsRead();
+await markAllNotificationsAsRead()
 
 // mark all notifications as read for specified account under default domain
-await markAllNotificationsAsRead(differentAccount);
+await markAllNotificationsAsRead(differentAccount)
 
 // mark all notifications as read for default account under specified domain
-await markAllNotificationsAsRead(undefined, differentDomain);
+await markAllNotificationsAsRead(undefined, differentDomain)
 
 // mark all notifications as read for specified account under specified domain
-await markAllNotificationsAsRead(differentAccount, differentDomain);
-
-
+await markAllNotificationsAsRead(differentAccount, differentDomain)
 ```
 
 #### References
@@ -454,7 +463,7 @@ await markAllNotificationsAsRead();
 - **pageNotifications:**
   - **notificationsPerPage:** Number representing how many notifications to get per fetch
   - **isInfiniteScroll:** Whether or not to keep already fetched notifications when getting next page
-  - **params:* (optional) Additional parameters
+  - \*_params:_ (optional) Additional parameters
   - **unreadFirst:** (optional, default `true`, since 1.3.0) Whether or not unread messages should be sorted at the top, regardless of timestamp
 - **onUpdate:**: A callback that will be called whenever notifications get updated
 - **nextPage:**: A function to be called to fetch the next page of notifications

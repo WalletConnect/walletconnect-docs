@@ -166,7 +166,7 @@ function Notifications() {
             <div key={id} className={styles.message}>
               <h3>{message.title}</h3>
               <p>{message.body}</p>
-              <p>{message.isRead ? "Read" : "Unread"}</p>
+              <p>{message.isRead ? 'Read' : 'Unread'}</p>
               <button onClick={message.markAsRead}>Mark as read</button>
             </div>
           ))

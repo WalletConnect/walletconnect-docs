@@ -72,16 +72,16 @@ html[data-theme='light'] {
   --ifm-alert-background-color-highlight: rgba(210, 212, 215, 0.2);
 }
 
-.custom-list__logo{
+.custom-list__logo {
   position: absolute;
   list-style: none;
   margin: 0;
-  padding: .8rem 0 0 1.25rem;
+  padding: 0.8rem 0 0 1.25rem;
   z-index: 200;
 }
 
 @media (max-width: 996px) {
-  .navbar__brand{
+  .navbar__brand {
     display: flex !important;
   }
 }
