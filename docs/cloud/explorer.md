@@ -1,4 +1,6 @@
-# Explorer API
+---
+title: Explorer API
+---
 
 :::info
 
