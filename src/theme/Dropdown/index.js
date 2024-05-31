@@ -62,7 +62,7 @@ export default function Dropdown({ list, initial }) {
       <div className={s.dropdownButton} onClick={() => setIsOpen(p => !p)}>
         {parseEnvironment(selected)}
       </div>
-      <div className={[!isOpen && s.kill, s.dropdownContainer].join(' ')}>
+      {isOpen && <div className={s.dropdownContainer}>
         {list
           .filter(i => i !== selected)
           .map(item => (
@@ -70,7 +70,7 @@ export default function Dropdown({ list, initial }) {
               {parseEnvironment(item)}
             </span>
           ))}
-      </div>
+      </div>}
     </div>
   )
 }
