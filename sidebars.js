@@ -257,6 +257,77 @@ module.exports = {
     },
     dropdown_placeholder,
   ],
+  AppKit_Next: [
+    {
+      type: 'category',
+      label: 'SDKs',
+      collapsible: false,
+      className: 'menu_outer_list',
+      items: [
+        {
+          type: 'category',
+          label: 'Core',
+          items: [
+            'appkit/next/core/installation',
+            'appkit/next/core/hooks',
+            'appkit/next/core/options',
+            'appkit/next/core/components',
+            'appkit/next/core/siwe',
+            'appkit/next/core/theming'
+          ]
+        },
+        {
+          type: 'category',
+          label: 'Accounts',
+          items: [
+            {
+              type: 'category',
+              label: 'Universal Wallets',
+              items: [
+                'appkit/next/accounts/universal-wallets/email',
+                'appkit/next/accounts/universal-wallets/socials',
+                'appkit/next/accounts/universal-wallets/wallet-features',
+                'appkit/next/accounts/universal-wallets/graduation',
+                'appkit/next/accounts/universal-wallets/smart-accounts',
+                'appkit/next/accounts/universal-wallets/ens'
+              ]
+            },
+            'appkit/next/accounts/multi-accounts'
+          ]
+        },
+        {
+          type: 'category',
+          label: 'Transactions',
+          items: [
+            'appkit/next/transactions/onramp',
+            'appkit/next/transactions/transaction-history',
+            'appkit/next/transactions/swaps',
+          ]
+        },
+        {
+          type: 'category',
+          label: 'Notifications',
+          items: [
+            'appkit/next/notifications/notifications',
+          ]
+        },
+        'appkit/next/upgrade',
+        {
+          type: 'category',
+          label: 'Cloud',
+          collapsible: false,
+          className: 'menu_outer_list',
+          items: [
+            'appkit/next/cloud/verify',
+            'appkit/next/cloud/relay',
+            'appkit/next/cloud/blockchain-api',
+            'appkit/next/cloud/analytics'
+          ]
+        }
+      ]
+    },
+    dropdown_placeholder,
+  ],
   AppKit_Vue: [
     {
       type: 'category',
@@ -326,6 +397,281 @@ module.exports = {
         }
       ]
     }
+  ],
+  AppKit_JS: [
+    {
+      type: 'category',
+      label: 'SDKs',
+      collapsible: false,
+      className: 'menu_outer_list',
+      items: [
+        {
+          type: 'category',
+          label: 'Core',
+          items: [
+            'appkit/javascript/core/installation',
+            'appkit/javascript/core/actions',
+            'appkit/javascript/core/options',
+            'appkit/javascript/core/components',
+            'appkit/javascript/core/siwe',
+            'appkit/javascript/core/theming'
+          ]
+        },
+        {
+          type: 'category',
+          label: 'Accounts',
+          items: [
+            {
+              type: 'category',
+              label: 'Universal Wallets',
+              items: [
+                'appkit/javascript/accounts/universal-wallets/email',
+                'appkit/javascript/accounts/universal-wallets/socials',
+                'appkit/javascript/accounts/universal-wallets/wallet-features',
+                'appkit/javascript/accounts/universal-wallets/graduation',
+                'appkit/javascript/accounts/universal-wallets/smart-accounts',
+                'appkit/javascript/accounts/universal-wallets/ens'
+              ]
+            },
+            'appkit/javascript/accounts/multi-accounts'
+          ]
+        },
+        {
+          type: 'category',
+          label: 'Transactions',
+          items: [
+            'appkit/javascript/transactions/onramp',
+            'appkit/javascript/transactions/transaction-history',
+            'appkit/javascript/transactions/swaps',
+          ]
+        },
+        {
+          type: 'category',
+          label: 'Notifications',
+          items: [
+            'appkit/javascript/notifications/notifications',
+          ]
+        },
+        'appkit/javascript/upgrade',
+        {
+          type: 'category',
+          label: 'Cloud',
+          collapsible: false,
+          className: 'menu_outer_list',
+          items: [
+            'appkit/javascript/cloud/verify',
+            'appkit/javascript/cloud/relay',
+            'appkit/javascript/cloud/blockchain-api',
+            'appkit/javascript/cloud/analytics'
+          ]
+        }
+      ]
+    },
+    dropdown_placeholder,
+  ],
+  AppKit_React_Native: [
+    {
+      type: 'category',
+      label: 'SDKs',
+      collapsible: false,
+      className: 'menu_outer_list',
+      items: [
+        {
+          type: 'category',
+          label: 'Core',
+          items: [
+            'appkit/react-native/core/installation',
+            'appkit/react-native/core/options',
+            'appkit/react-native/core/hooks',
+            'appkit/react-native/core/components',
+            'appkit/react-native/core/theming',
+            'appkit/react-native/core/examples'
+          ]
+        },
+        {
+          type: 'category',
+          label: 'Accounts',
+          items: [
+            {
+              type: 'category',
+              label: 'Universal Wallets',
+              items: [
+                'appkit/react-native/accounts/universal-wallets/email',
+              ]
+            }
+          ]
+        },
+        {
+          type: 'category',
+          label: 'Cloud',
+          collapsible: false,
+          className: 'menu_outer_list',
+          items: [
+            'appkit/react-native/cloud/verify',
+            'appkit/react-native/cloud/relay',
+            'appkit/react-native/cloud/blockchain-api',
+            'appkit/react-native/cloud/analytics'
+          ]
+        }
+      ]
+    },
+    dropdown_placeholder,
+  ],
+  AppKit_Flutter: [
+    {
+      type: 'category',
+      label: 'SDKs',
+      collapsible: false,
+      className: 'menu_outer_list',
+      items: [
+        {
+          type: 'category',
+          label: 'Core',
+          items: [
+            'appkit/flutter/core/installation',
+            'appkit/flutter/core/usage',
+            'appkit/flutter/core/options',
+            'appkit/flutter/core/actions',
+            'appkit/flutter/core/events',
+            'appkit/flutter/core/theming',
+            'appkit/flutter/core/custom-chains',
+            'appkit/flutter/core/examples'
+          ]
+        },
+        {
+          type: 'category',
+          label: 'Accounts',
+          items: [
+            {
+              type: 'category',
+              label: 'Universal Wallets',
+              items: [
+                'appkit/flutter/accounts/universal-wallets/email',
+              ]
+            }
+          ]
+        },
+        {
+          type: 'category',
+          label: 'Cloud',
+          collapsible: false,
+          className: 'menu_outer_list',
+          items: [
+            'appkit/flutter/cloud/verify',
+            'appkit/flutter/cloud/relay',
+            'appkit/flutter/cloud/blockchain-api',
+            'appkit/flutter/cloud/analytics'
+          ]
+        },
+        'appkit/flutter/upgrade',
+      ]
+    },
+    dropdown_placeholder,
+  ],
+  AppKit_iOS: [
+    {
+      type: 'category',
+      label: 'SDKs',
+      collapsible: false,
+      className: 'menu_outer_list',
+      items: [
+        {
+          type: 'category',
+          label: 'Core',
+          items: [
+            'appkit/ios/core/installation',
+            'appkit/ios/core/usage',
+            'appkit/ios/core/options',
+            'appkit/ios/core/actions',
+            'appkit/ios/core/custom-chains',
+            'appkit/ios/core/examples'
+          ]
+        },
+        {
+          type: 'category',
+          label: 'Cloud',
+          collapsible: false,
+          className: 'menu_outer_list',
+          items: [
+            'appkit/ios/cloud/verify',
+            'appkit/ios/cloud/relay',
+            'appkit/ios/cloud/blockchain-api',
+            'appkit/ios/cloud/analytics'
+          ]
+        },
+      ]
+    },
+    dropdown_placeholder,
+  ],
+  AppKit_Android: [
+    {
+      type: 'category',
+      label: 'SDKs',
+      collapsible: false,
+      className: 'menu_outer_list',
+      items: [
+        {
+          type: 'category',
+          label: 'Core',
+          items: [
+            'appkit/android/core/installation',
+            'appkit/android/core/usage',
+            'appkit/android/core/options',
+            'appkit/android/core/actions',
+            'appkit/android/core/components',
+            'appkit/android/core/theming',
+            'appkit/android/core/examples'
+          ]
+        },
+        {
+          type: 'category',
+          label: 'Cloud',
+          collapsible: false,
+          className: 'menu_outer_list',
+          items: [
+            'appkit/android/cloud/verify',
+            'appkit/android/cloud/relay',
+            'appkit/android/cloud/blockchain-api',
+            'appkit/android/cloud/analytics'
+          ]
+        },
+      ]
+    },
+    dropdown_placeholder,
+  ],
+  AppKit_Unity: [
+    {
+      type: 'category',
+      label: 'SDKs',
+      collapsible: false,
+      className: 'menu_outer_list',
+      items: [
+        {
+          type: 'category',
+          label: 'Core',
+          items: [
+            'appkit/unity/core/installation',
+            'appkit/unity/core/usage',
+            'appkit/unity/core/options',
+            'appkit/unity/core/actions',
+            'appkit/unity/core/events',
+          ]
+        },
+        {
+          type: 'category',
+          label: 'Cloud',
+          collapsible: false,
+          className: 'menu_outer_list',
+          items: [
+            'appkit/unity/cloud/verify',
+            'appkit/unity/cloud/relay',
+            'appkit/unity/cloud/blockchain-api',
+            'appkit/unity/cloud/analytics'
+          ]
+        },
+      ]
+    },
+    dropdown_placeholder,
   ],
   walletKit: []
 }

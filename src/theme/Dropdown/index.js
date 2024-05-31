@@ -17,14 +17,12 @@ export default function Dropdown({ list, initial }){
 
   if(!selected){
     if(initial){
-      console.log("initial: ", initial)
       setSelected(initial)
     }else{
       const environment = list.find(item => location.pathname.includes(item))
       if(!environment){
         throw Error("The current path doesn't contain any environment.")
       }
-      console.log("environment: ", environment)
       setSelected(environment)
     }
   }
@@ -36,7 +34,7 @@ export default function Dropdown({ list, initial }){
     }
     setSelected(new_environment)
     setItemInStorage(new_environment)
-    const new_path = location.pathname.replace(current_environment, new_environment)
+    const new_path = location.pathname.slice(0, location.pathname.indexOf(current_environment)) + new_environment + "/core/installation"
     
     history.push(new_path)
   }
