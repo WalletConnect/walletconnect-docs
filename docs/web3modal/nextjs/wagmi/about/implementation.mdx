@@ -4,7 +4,7 @@ import TabItem from '@theme/TabItem'
 Web3Modal can be configured in **two** different ways:
 
 - **Default**: For a quick integration you can use `defaultWagmiConfig` function which wraps Wagmi's [`creatConfig`](https://wagmi.sh/core/api/createConfig) function with predefined configuration.
-  This includes WalletConnect, Coinbase and Injected connectors, and our [Blockchain API](../../../../cloud/blockchain-api.md) as a [transport](https://wagmi.sh/core/api/createConfig#transports) (if the chain is not support by the Blockchain API it will fallback to the chain's default RPC).
+  This includes WalletConnect, Coinbase and Injected connectors, and our [Blockchain API](../../../../cloud/blockchain-api.mdx) as a [transport](https://wagmi.sh/core/api/createConfig#transports) (if the chain is not support by the Blockchain API it will fallback to the chain's default RPC).
   <br /> As shown in the code example, this configuration (with the exception of the connectors) can
   be overridden.
   <br />
@@ -300,5 +300,5 @@ The `cookieToInitialState` function is only needed when using cookies for the Wa
 </Tabs>
 
 :::note IMPORTANT
-Make sure that the `url` from the `metadata` matches your domain and subdomain. This will later be used by the [Verify API](../../../../cloud/verify.md) to tell wallets if your application has been verified or not.
+Make sure that the `url` from the `metadata` matches your domain and subdomain. This will later be used by the [Verify API](../../../../cloud/verify.mdx) to tell wallets if your application has been verified or not.
 :::

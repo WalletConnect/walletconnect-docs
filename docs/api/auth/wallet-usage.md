@@ -20,7 +20,7 @@ activeOptions={["web","ios","android","csharp"]}>
 For an example implementation, please refer to our [`react-wallet-auth` example](https://github.com/WalletConnect/web-examples/tree/main/advanced/wallets/react-wallet-auth).
 :::
 
-**1. Initialize your WalletConnect AuthClient, using [your Project ID](../../cloud/relay.md).**
+**1. Initialize your WalletConnect AuthClient, using [your Project ID](../../cloud/relay.mdx).**
 
 ```javascript
 import AuthClient from '@walletconnect/auth-client'

@@ -37,7 +37,7 @@ We strongly encourage wallets to also integrate the [Auth](../auth/overview.md) 
 
 #### Initializing the client
 
-Initialize client as a controller using [your Project ID](../../cloud/relay.md).
+Initialize client as a controller using [your Project ID](../../cloud/relay.mdx).
 
 ```js
 const signClient = await SignClient.init({

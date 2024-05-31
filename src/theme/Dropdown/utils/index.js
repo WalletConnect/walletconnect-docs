@@ -1,14 +1,20 @@
 const SELECTED_ENV_KEY = "SELECTED_ENV_KIT"
 
 export function setItemInStorage(item){
+  if(typeof window === 'undefined') return
+
   localStorage.setItem(SELECTED_ENV_KEY, item)
 }
 
 export function removeItemInStorage(){
+  if(typeof window === 'undefined') return
+
   localStorage.removeItem(SELECTED_ENV_KEY)
 }
 
 export function getItemInStorage(){
+  if(typeof window === 'undefined') return
+  
   return localStorage.getItem(SELECTED_ENV_KEY)
 }
 

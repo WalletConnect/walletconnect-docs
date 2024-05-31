@@ -20,7 +20,7 @@ activeOptions={["web","ios","android","flutter","csharp"]}>
 For an example implementation, please refer to our [`react-dapp-auth` example](https://github.com/WalletConnect/web-examples/tree/main/advanced/dapps/react-dapp-auth).
 :::
 
-**1. Initialize your WalletConnect AuthClient, using [your Project ID](../../cloud/relay.md).**
+**1. Initialize your WalletConnect AuthClient, using [your Project ID](../../cloud/relay.mdx).**
 
 ```javascript
 import AuthClient from '@walletconnect/auth-client'
