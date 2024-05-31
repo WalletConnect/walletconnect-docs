@@ -32,6 +32,7 @@ export default function Dropdown({ list, initial }) {
       throw Error("The current path doesn't contain any environment.")
     }
     setSelected(new_environment)
+    setIsOpen(false)
     setItemInStorage(new_environment)
     const new_path =
       location.pathname.slice(0, location.pathname.indexOf(current_environment)) +
