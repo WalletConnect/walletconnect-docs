@@ -159,12 +159,9 @@ Create a new file for your Wagmi configuration, since we are going to be calling
 For this example we will create a file called `config/index.tsx` outside our app directory and set up the following configuration
 
 ```tsx
-import { defaultWagmiConfig } from '@web3modal/wagmi/react/config'
-import { walletConnect } from '@web3modal/wagmi'
-
-import { cookieStorage, createStorage } from 'wagmi'
+import { createConfig, cookieStorage, createStorage, http } from 'wagmi'
 import { mainnet, sepolia } from 'wagmi/chains'
-import { injected, coinbaseWallet } from 'wagmi/connectors'
+import { injected, coinbaseWallet, walletConnect } from 'wagmi/connectors'
 
 // Get projectId at https://cloud.walletconnect.com
 export const projectId = process.env.NEXT_PUBLIC_PROJECT_ID
