@@ -27,12 +27,18 @@ export function parseEnvironment(env) {
         if (item === 'ios') {
           return 'iOS'
         }
+        if(item === 'javascript'){
+          return "JavaScript"
+        }
         return capitalize(item)
       })
       .join(' ')
   }
   if (env === 'ios') {
     return 'iOS'
+  }
+  if(env === 'javascript'){
+    return "JavaScript"
   }
   return capitalize(env)
 }

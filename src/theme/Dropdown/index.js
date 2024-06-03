@@ -58,10 +58,21 @@ export default function Dropdown({ list, initial }) {
     }
   }, [menuRef])
 
+  const toggleIconRef = useRef(null)
+
+  useEffect(()=>{
+    if(isOpen){
+      toggleIconRef.current.style.transform = "rotate(180deg)"
+    }else{
+      toggleIconRef.current.style.transform = "rotate(90deg)"
+    }
+  },[isOpen, toggleIconRef])
+
   return (
     <div className={s.container} ref={menuRef}>
       <div className={s.dropdownButton} onClick={() => setIsOpen(p => !p)}>
         {parseEnvironment(selected)}
+        <span className={s.dropdownIcon} ref={toggleIconRef} />
       </div>
       {isOpen && <div className={s.dropdownContainer}>
         {list
