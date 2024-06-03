@@ -70,7 +70,13 @@ To get a list of active sessions, call `Web3Modal.instance.getSessions()` which 
 Web3Modal.instance.launchCurrentWallet()
 ```
 
-Get list of all pairings by calling `Web3Modal.instance.getPairings()` which will return `[Pairing]`.
+To open a wallet that your dapp is connected to
+
+### handle deep links
+
+```swift
+Web3Modal.instance.handleDeeplink(url)
+```
 
 ### Cleanup
 
