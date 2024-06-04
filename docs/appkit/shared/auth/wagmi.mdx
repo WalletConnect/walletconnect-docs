@@ -1,0 +1,61 @@
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
+
+<Tabs>
+<TabItem value="default" label="Default">
+
+To allow users to authenticate using their email or social accounts, you need to configure the `auth` parameter in the `defaultWagmiConfig` function.
+
+```ts
+const wagmiConfig = defaultWagmiConfig({
+  chains,
+  projectId,
+  metadata,
+  /* highlight-add-start */
+  auth: {
+    email: true, // default to true
+    socials: ['google', 'x', 'github', 'discord', 'apple'],
+    showWallets: true // default to true
+  }
+  /* highlight-add-end */
+})
+```
+
+</TabItem>
+<TabItem value="custom" label="Custom">
+
+If you're using the `createConfig` function from Wagmi, you can enable social or email login by importing and adding the `authConnector` function in your configuration.
+
+```ts
+/* highlight-add-start */
+import { authConnector } from '@web3modal/wagmi'
+/* highlight-add-end */
+
+//...
+
+const wagmiConfig = createConfig({
+  //...
+  connectors: [
+    //...
+
+    authConnector({
+      chains,
+      options: { projectId },
+      /* highlight-add-start */
+      email: true, // default to true
+      socials: ['google', 'x', 'github', 'discord', 'apple'],
+      showWallets: true // default to true
+      /* highlight-add-end */
+    })
+  ]
+})
+```
+
+</TabItem>
+</Tabs>
+
+### Options
+
+- email [boolean]: This boolean defines whether you want to enable email login. Default `true`
+- socials [array]: This array contains the list of social platforms that you want to enable for user authentication. The platforms in the example include Google, X, GitHub, Discord, Apple and Facebook (coming soon). Default `undefined`
+- showWallets [boolean]: This boolean defines whether you want to show the wallet options on the first connect screen. If this is false and `socials` are enabled, it will show a button that directs you to a new screen displaying the wallet options. Default `true`

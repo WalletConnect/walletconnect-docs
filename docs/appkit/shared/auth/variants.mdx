@@ -1,0 +1,27 @@
+## UI Variants
+
+AppKit SDK offers multiple UI variants to customize the user experience for the authentication process.
+
+By configuring the `showWallets` option in the `auth` parameter, you can control the initial connect screen behavior:
+
+- **`showWallets: true`**: When this option is enabled, the initial connect screen will display the available wallet options directly to the user. This allows users to choose their preferred wallet immediately.
+
+<img width={300} src="/img/w3m/auth/modal_wallets.webp" />
+
+- **`showWallets: false`**: If this option is disabled, the initial connect screen will show a button instead. When the user clicks this button, they will be directed to a new screen that lists all the available wallet options. This can help simplify the initial interface and reduce visual clutter.
+
+<img width={300} src="/img/w3m/auth/modal_no_wallets.webp" />
+
+By configuring the `socials` option in the `auth` parameter, you can control the amount of social providers you want to show on the connect screen:
+
+- **`socials: ['google']`**: When you only set one social provider, it will give you a button with `connect with provider.
+
+<img width={300} src="/img/w3m/auth/modal_one_social.webp" />
+
+- **`socials: ['google', 'discord']`**: When you set 2 social provider, it will give you 2 buttons next to each other with the logo of the social provider
+
+<img width={300} src="/img/w3m/auth/modal_two_social.webp" />
+
+- **` socials: ['google', 'x', 'discord', 'apple', 'github']`**: When you set more than 2 social providers, the first provider in the array will get a button with `connect with provider`. The other providers will get a button with the logo of the social provider next to each other.
+
+<img width={300} src="/img/w3m/auth/modal_wallets.webp" />

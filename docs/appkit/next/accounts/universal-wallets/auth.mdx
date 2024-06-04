@@ -1,0 +1,24 @@
+import PlatformTabs from '../../../../components/PlatformTabs'
+import PlatformTabItem from '../../../../components/PlatformTabItem'
+import Alert from '../../../shared/auth/alert.mdx'
+
+import Ethers from '../../../shared/auth/ethers.mdx'
+import Wagmi from '../../../shared/auth/wagmi.mdx'
+import Variants from '../../../shared/auth/variants.mdx'
+
+# Auth
+
+AppKit SDK enables passwordless Web3 onboarding and authentication, allowing your users interact with your application by creating a non-custodial wallet with just their email or social accounts. We support the following providers: Email, Google, X, GitHub, Discord, Apple and Facebook (coming soon)
+
+## Integration
+
+<PlatformTabs groupId="eth-lib" activeOptions={['wagmi', 'ethers']}>
+  <PlatformTabItem value="wagmi">
+    <Wagmi />
+  </PlatformTabItem>
+  <PlatformTabItem value="ethers">
+    <Ethers />
+  </PlatformTabItem>
+</PlatformTabs>
+
+<Variants />

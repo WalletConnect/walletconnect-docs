@@ -208,8 +208,7 @@ module.exports = {
               type: 'category',
               label: 'Universal Wallets',
               items: [
-                'appkit/react/accounts/universal-wallets/email',
-                'appkit/react/accounts/universal-wallets/socials',
+                'appkit/react/accounts/universal-wallets/auth',
                 'appkit/react/accounts/universal-wallets/wallet-features',
                 'appkit/react/accounts/universal-wallets/graduation',
                 'appkit/react/accounts/universal-wallets/smart-accounts',
@@ -277,8 +276,7 @@ module.exports = {
               type: 'category',
               label: 'Universal Wallets',
               items: [
-                'appkit/next/accounts/universal-wallets/email',
-                'appkit/next/accounts/universal-wallets/socials',
+                'appkit/next/accounts/universal-wallets/auth',
                 'appkit/next/accounts/universal-wallets/wallet-features',
                 'appkit/next/accounts/universal-wallets/graduation',
                 'appkit/next/accounts/universal-wallets/smart-accounts',
@@ -346,8 +344,7 @@ module.exports = {
               type: 'category',
               label: 'Universal Wallets',
               items: [
-                'appkit/vue/accounts/universal-wallets/email',
-                'appkit/vue/accounts/universal-wallets/socials',
+                'appkit/vue/accounts/universal-wallets/auth',
                 'appkit/vue/accounts/universal-wallets/wallet-features',
                 'appkit/vue/accounts/universal-wallets/graduation',
                 'appkit/vue/accounts/universal-wallets/smart-accounts',
@@ -414,8 +411,7 @@ module.exports = {
               type: 'category',
               label: 'Universal Wallets',
               items: [
-                'appkit/javascript/accounts/universal-wallets/email',
-                'appkit/javascript/accounts/universal-wallets/socials',
+                'appkit/javascript/accounts/universal-wallets/auth',
                 'appkit/javascript/accounts/universal-wallets/wallet-features',
                 'appkit/javascript/accounts/universal-wallets/graduation',
                 'appkit/javascript/accounts/universal-wallets/smart-accounts',
