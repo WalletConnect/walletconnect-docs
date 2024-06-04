@@ -2,6 +2,7 @@ import { useState, useRef, useEffect } from 'react'
 import { useLocation, useHistory } from 'react-router-dom'
 import s from './styles.module.css'
 import { parseEnvironment, setItemInStorage } from './utils'
+import { env_icons } from './icons'
 
 /**
  * This Dropdown Menu is meant to be for a list of Frameworks and Programming languages.
@@ -71,6 +72,7 @@ export default function Dropdown({ list, initial }) {
   return (
     <div className={s.container} ref={menuRef}>
       <div className={s.dropdownButton} onClick={() => setIsOpen(p => !p)}>
+        <img className={s.envIcon} src={env_icons[selected]} alt={selected} />
         {parseEnvironment(selected)}
         <span className={s.dropdownIcon} ref={toggleIconRef} />
       </div>
@@ -79,6 +81,7 @@ export default function Dropdown({ list, initial }) {
           .filter(i => i !== selected)
           .map(item => (
             <span className={s.item} onClick={() => handleItem(item)}>
+              <img className={s.envIcon} src={env_icons[item]} alt={item} />
               {parseEnvironment(item)}
             </span>
           ))}

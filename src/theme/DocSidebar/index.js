@@ -4,6 +4,7 @@ import Dropdown from '../Dropdown'
 import '../../css/sidebar.css'
 import { useLocation } from 'react-router-dom'
 import { getItemInStorage } from '../Dropdown/utils'
+import { appKit_environments, walletKit_environments } from './constants'
 
 export default function DocSidebarWrapper(props) {
   return (
@@ -22,19 +23,6 @@ export default function DocSidebarWrapper(props) {
     </>
   )
 }
-
-const appKit_environments = [
-  'react',
-  'next',
-  'vue',
-  'javascript',
-  'react-native',
-  'flutter',
-  'android',
-  'ios',
-  'unity'
-]
-const walletKit_environments = ['web', 'ios', 'android', 'react-native', 'c#']
 
 const FrameworksMenu = () => {
   const initial_environment = getItemInStorage()

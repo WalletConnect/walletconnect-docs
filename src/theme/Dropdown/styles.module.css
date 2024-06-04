@@ -9,7 +9,7 @@
 .dropdownContainer {
   position: absolute;
   transform: translateY(50%);
-  top: -29%;
+  top: -28%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -17,6 +17,7 @@
   border-radius: 0.5rem;
   border: 1px solid #202020;
   padding: 0.75rem 1.25rem;
+  border-color: var(--ifm-pagination-nav-color-hover);
   background-color: var(--ifm-container-background-color);
   color: var(--ifm-article-text);
   width: 12rem;
@@ -25,6 +26,9 @@
 
 .item {
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 11px;
 }
 
 .item:hover {
@@ -42,6 +46,7 @@
   width: 12rem;
   display: flex;
   align-items: center;
+  gap: 11px;
   justify-content: space-between;
   background-color: var(--ifm-container-background-color);
   color: var(--ifm-link-hover-color);
@@ -56,7 +61,7 @@
   content: '';
   margin-left: auto;
   min-width: 1.25rem;
-  background: var(--ifm-menu-link-sublist-icon) 50% / 2rem 2rem;
+  background: var(--ifm-menu-link-sublist-icon) 50% / 1.5rem 1.5rem;
   filter: var(--ifm-menu-link-sublist-icon-filter);
   height: 1.25rem;
   width: 1.25rem;
@@ -75,4 +80,11 @@
 
 [data-theme='light'] .dropdownButton img.white {
   filter: invert(1);
+}
+
+.envIcon{
+  border: none;
+  height: 1.25rem;
+  width: 1.25rem;
+  border-radius: 0;
 }
