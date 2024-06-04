@@ -20,7 +20,7 @@
   border-color: var(--ifm-pagination-nav-color-hover);
   background-color: var(--ifm-container-background-color);
   color: var(--ifm-article-text);
-  width: 12rem;
+  width: 11rem;
   z-index: 100;
 }
 
@@ -43,7 +43,8 @@
   border-radius: 0.5rem;
   border: 1.5px solid var(--ifm-border-color);
   padding: 0.5rem 1.25rem;
-  width: 12rem;
+  max-width: 13rem;
+  min-width: 11rem;
   display: flex;
   align-items: center;
   gap: 11px;
@@ -78,7 +79,7 @@
   border-radius: 0;
 }
 
-[data-theme='light'] .dropdownButton img.white {
+[data-theme='light'] .invertOnLightMode {
   filter: invert(1);
 }
 

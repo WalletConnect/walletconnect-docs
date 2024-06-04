@@ -46,3 +46,7 @@ export function parseEnvironment(env) {
 function capitalize(item) {
   return item.charAt(0).toUpperCase() + item.slice(1)
 }
+
+export function isIconWhite(icon){
+  if(icon === 'ios' || icon === 'next' || icon === 'unity') return true
+}
