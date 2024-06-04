@@ -1,89 +1,7 @@
 import Tabs from '@theme/Tabs'
 import TabItem from '@theme/TabItem'
-import PlatformTabs from '../../../../components/PlatformTabs'
-import PlatformTabItem from '../../../../components/PlatformTabItem'
 
 # Installation
-
-To get started with the Notify API, choose the programming language you'll be using to build your project. The SDK is available in JavaScript, Swift, and Kotlin.
-
-<PlatformTabs
-	groupId="w3w"
-	activeOptions={["ios","android", "react-native"]}
->
-<PlatformTabItem value="ios">
-
-Notify API is available via [Swift Package Manager](https://swift.org/package-manager/) or [Cocoapods](https://cocoapods.org/).
-
-<Tabs
-queryString="ios-method"
-	values={[
-		{ label: 'SwiftPackageManager', value: 'spm', },
-		{ label: 'Cocoapods', value: 'cocoa', },
-	]}
->
-<TabItem value="spm">
-
-You can add the WalletConnect Notify package to your project with the Swift Package Manager. In order to do that:
-
-1. Open XCode
-2. Go to File -> Add Packages
-3. Paste the repo GitHub URL: https://github.com/WalletConnect/WalletConnectSwiftV2
-4. Tap Add Package
-5. Select `WalletConnectNotify` check mark
-
-</TabItem>
-<TabItem value="cocoa">
-
-1. Update Cocoapods spec repos. Type in terminal `pod repo update`
-2. Initialize Podfile if needed with `pod init`
-3. Add pod to your Podfile:
-
-```ruby
-pod 'WalletConnectSwiftV2/WalletConnectNotify'
-```
-
-4. Install pods with `pod install`
-
-If you encounter any problems during package installation, you can specify the exact path to the repository
-
-```ruby
-pod 'WalletConnectSwiftV2/WalletConnectNotify', :git => 'https://github.com/WalletConnect/WalletConnectSwiftV2.git', :tag => '1.8.0'
-```
-
-</TabItem>
-</Tabs>
-
-</PlatformTabItem>
-<PlatformTabItem value="android">
-
-Add the `jitpack.io` Maven repository to your `root/build.gradle.kts` file. For example:
-
-```gradle
-allprojects {
- repositories {
-    mavenCentral()
-    maven { url "https://jitpack.io" }
- }
-}
-```
-
-In `app/build.gradle.kts` add the notify package and its dependencies:
-
-```gradle
-implementation(platform("com.walletconnect:android-bom:release_version"))
-implementation("com.walletconnect:android-core")
-implementation("com.walletconnect:notify")
-```
-
-#### Requirements
-
-- Android API level minimum 23
-- Java minimum version 11
-
-</PlatformTabItem>
-
-<PlatformTabItem value="react-native">
 
 Install the WalletConnect NotifyClient package.
 
@@ -197,9 +115,6 @@ module.exports = {
 
 </TabItem>
 </Tabs>
-</PlatformTabItem>
-
-</PlatformTabs>
 
 ## Next Steps
 

@@ -24,29 +24,6 @@ By incorporating ReCaps, this method extends the utility of SIWE messages, allow
 
 ## Handling Authentication Requests
 
-<PlatformTabs
-	groupId="w3w"
-	activeOptions={["web","ios","android","react-native"]}
->
-<PlatformTabItem value="web">
-
-To handle incoming authentication requests, subscribe to the `session_authenticate` event. This will notify you of any authentication requests that need to be processed, allowing you to either approve or reject them based on your application logic.
-
-```typescript
-web3wallet.on('session_authenticate', async payload => {
-  // Process the authentication request here.
-  // Steps include:
-  // 1. Populate the authentication payload with the supported chains and methods
-  // 2. Format the authentication message using the payload and the user's account
-  // 3. Present the authentication message to the user
-  // 4. Sign the authentication message(s) to create a verifiable authentication object(s)
-  // 5. Approve the authentication request with the authentication object(s)
-})
-```
-
-</PlatformTabItem>
-<PlatformTabItem value="ios">
-
 To handle incoming authentication requests, subscribe to the authenticateRequestPublisher. This will notify you of any authentication requests that need to be processed, allowing you to either approve or reject them based on your application logic.
 
 ```swift
@@ -59,83 +36,7 @@ Web3Wallet.instance.authenticateRequestPublisher
     .store(in: &subscriptions) // Assuming `subscriptions` is where you store your Combine subscriptions.
 ```
 
-</PlatformTabItem>
-
-<PlatformTabItem value="android">
-
-To handle incoming authentication requests, set up Web3Wallet.WalletDelegate. The onSessionAuthenticate callback will notify you of any authentication requests that need to be processed, allowing you to either approve or reject them based on your application logic.
-
-```kotlin
-override val onSessionAuthenticate: ((Wallet.Model.SessionAuthenticate, Wallet.Model.VerifyContext) -> Unit)
-  get() = { sessionAuthenticate, verifyContext ->
-      // Triggered when wallet receives the session authenticate sent by a Dapp
-      // Process the authentication request here
-      // This involves displaying UI to the user
-}
-```
-
-</PlatformTabItem>
-
-<PlatformTabItem value="react-native">
-
-To handle incoming authentication requests, subscribe to the `session_authenticate` event. This will notify you of any authentication requests that need to be processed, allowing you to either approve or reject them based on your application logic.
-
-```typescript
-web3wallet.on('session_authenticate', async payload => {
-  // Process the authentication request here.
-  // Steps include:
-  // 1. Populate the authentication payload with the supported chains and methods
-  // 2. Format the authentication message using the payload and the user's account
-  // 3. Present the authentication message to the user
-  // 4. Sign the authentication message(s) to create a verifiable authentication object(s)
-  // 5. Approve the authentication request with the authentication object(s)
-})
-```
-
-</PlatformTabItem>
-
-</PlatformTabs>
-
 ## Authentication Objects/Payloads
-
-<PlatformTabs
-	groupId="w3w"
-	activeOptions={["web","ios","android","react-native"]}
->
-<PlatformTabItem value="web">
-
-#### Populate Authentication Payload
-
-```typescript
-import { populateAuthPayload } from "@walletconnect/utils";
-
-// EVM chains that your wallet supports
-const supportedChains = ["eip155:1", "eip155:2", 'eip155:137'];
-// EVM methods that your wallet supports
-const supportedMethods = ["personal_sign", "eth_sendTransaction", "eth_signTypedData"];
-// Populate the authentication payload with the supported chains and methods
-const authPayload = populateAuthPayload({
-  authPayload: payload.params.authPayload,
-  chains: supportedChains,
-  methods: supportedMethods,
-});
-// Prepare the user's address in CAIP10(https://github.com/ChainAgnostic/CAIPs/blob/main/CAIPs/caip-10.md) format
-const iss = `eip155:1:0x0Df6d2a56F90e8592B4FfEd587dB3D5F5ED9d6ef`;
-// Now you can use the authPayload to format the authentication message
-const message = web3wallet.formatAuthMessage({
-  request: authPayload,
-  iss
-});
-
-// Present the authentication message to the user
-...
-```
-
-</PlatformTabItem>
-
-<PlatformTabItem value="ios">
-
-#### Building Authentication Objects
 
 To interact with authentication requests, first build authentication objects (AuthObject). These objects are crucial for approving authentication requests. This involves:
 
@@ -176,78 +77,6 @@ func buildAuthObjects(request: AuthenticationRequest, account: Account, privateK
 
 ```
 
-</PlatformTabItem>
-
-<PlatformTabItem value="android">
-
-#### Responding to Authentication Requests
-
-To interact with authentication requests, build authentication objects (Wallet.Model.Cacao). It involves the following steps:
-
-- **Creating an Authentication Payload Params** - Generate an authentication payload params that matches your application's supported chains and methods.
-- **Formatting Authentication Messages** - Format the authentication message using the payload and the user's account.
-- **Signing the Authentication Message** - Sign the formatted message to create a verifiable authentication object.
-
-Example:
-
-```kotlin
-ooverride val onSessionAuthenticate: ((Wallet.Model.SessionAuthenticate, Wallet.Model.VerifyContext) -> Unit)
-  get() = { sessionAuthenticate, verifyContext ->
-  val auths = mutableListOf<Wallet.Model.Cacao>()
-
-  val authPayloadParams =
-    Web3Wallet.generateAuthPayloadParams(
-      sessionAuthenticate.payloadParams,
-      supportedChains = listOf("eip155:1", "eip155:137", "eip155:56"), // Note: Only EVM chains are supported
-      supportedMethods = listOf("personal_sign", "eth_signTypedData", "eth_sign")
-  )
-
-  authPayloadParams.chains.forEach { chain ->
-    val issuer = "did:pkh:$chain:$address"
-    val formattedMessage = Web3Wallet.formatAuthMessage(Wallet.Params.FormatAuthMessage(authPayloadParams, issuer))
-
-    val signature = signMessage(message: formattedMessage, privateKey: privateKey) //Note: Assume `signMessage` is a function you've implemented to sign messages.
-    val auth = Web3Wallet.generateAuthObject(authPayloadParams, issuer, signature)
-    auths.add(auth)
-  }
-}
-```
-
-</PlatformTabItem>
-
-<PlatformTabItem value="react-native">
-
-#### Populate Authentication Payload
-
-```typescript
-import { populateAuthPayload } from "@walletconnect/utils";
-
-// EVM chains that your wallet supports
-const supportedChains = ["eip155:1", "eip155:2", 'eip155:137'];
-// EVM methods that your wallet supports
-const supportedMethods = ["personal_sign", "eth_sendTransaction", "eth_signTypedData"];
-// Populate the authentication payload with the supported chains and methods
-const authPayload = populateAuthPayload({
-  authPayload: payload.params.authPayload,
-  chains: supportedChains,
-  methods: supportedMethods,
-});
-// Prepare the user's address in CAIP10(https://github.com/ChainAgnostic/CAIPs/blob/main/CAIPs/caip-10.md) format
-const iss = `eip155:1:0x0Df6d2a56F90e8592B4FfEd587dB3D5F5ED9d6ef`;
-// Now you can use the authPayload to format the authentication message
-const message = web3wallet.formatAuthMessage({
-  request: authPayload,
-  iss
-});
-
-// Present the authentication message to the user
-...
-```
-
-</PlatformTabItem>
-
-</PlatformTabs>
-
 ## Approving Authentication Requests
 
 :::info Note
@@ -257,211 +86,19 @@ const message = web3wallet.formatAuthMessage({
 
 :::
 
-<PlatformTabs
-	groupId="w3w"
-	activeOptions={["web","ios","android","react-native"]}
->
-<PlatformTabItem value="web">
-
-```typescript
-// Approach 1
-// Sign the authentication message(s) to create a verifiable authentication object(s)
-const signature = await cryptoWallet.signMessage(message, privateKey)
-// Build the authentication object(s)
-const auth = buildAuthObject(
-  authPayload,
-  {
-    t: 'eip191',
-    s: signature
-  },
-  iss
-)
-
-// Approve
-await web3wallet.approveSessionAuthenticate({
-  id: payload.id,
-  auths: [auth]
-})
-
-// Approach 2
-// Note that you can also sign multiple messages for every requested chain/address pair
-const auths = []
-authPayload.chains.forEach(async chain => {
-  const message = web3wallet.formatAuthMessage({
-    request: authPayload,
-    iss: `${chain}:${cryptoWallet.address}`
-  })
-  const signature = await cryptoWallet.signMessage(message)
-  const auth = buildAuthObject(
-    authPayload,
-    {
-      t: 'eip191', // signature type
-      s: signature
-    },
-    `${chain}:${cryptoWallet.address}`
-  )
-  auths.push(auth)
-})
-
-// Approve
-await web3wallet.approveSessionAuthenticate({
-  id: payload.id,
-  auths
-})
-```
-
-</PlatformTabItem>
-
-<PlatformTabItem value="ios">
-
 To approve an authentication request, construct AuthObject instances for each supported blockchain, sign the authentication messages, build AuthObjects and call approveSessionAuthenticate with the request ID and the authentication objects.
 
 ```swift
 let session = try await Web3Wallet.instance.approveSessionAuthenticate(requestId: requestId, auths: authObjects)
 ```
 
-</PlatformTabItem>
-
-<PlatformTabItem value="android">
-
-To approve an authentication request, construct Wallet.Model.Cacao instances for each supported chain, sign the authentication messages, generate AuthObjects and call approveSessionAuthenticate with the request ID and the authentication objects.
-
-```kotlin
- val approveAuthenticate = Wallet.Params.ApproveSessionAuthenticate(id = sessionAuthenticate.id, auths = auths)
-Web3Wallet.approveSessionAuthenticate(approveProposal,
-  onSuccess = {
-    //Redirect back to the dapp if redirect is set: sessionAuthenticate.participant.metadata?.redirect
-  },
-  onError = { error ->
-      //Handle error
-  }
-)
-```
-
-</PlatformTabItem>
-
-<PlatformTabItem value="react-native">
-
-```typescript
-// Approach 1
-// Sign the authentication message(s) to create a verifiable authentication object(s)
-const signature = await cryptoWallet.signMessage(message, privateKey)
-// Build the authentication object(s)
-const auth = buildAuthObject(
-  authPayload,
-  {
-    t: 'eip191',
-    s: signature
-  },
-  iss
-)
-
-// Approve
-await web3wallet.approveSessionAuthenticate({
-  id: payload.id,
-  auths: [auth]
-})
-
-// Approach 2
-// Note that you can also sign multiple messages for every requested chain/address pair
-const auths = []
-authPayload.chains.forEach(async chain => {
-  const message = web3wallet.formatAuthMessage({
-    request: authPayload,
-    iss: `${chain}:${cryptoWallet.address}`
-  })
-  const signature = await cryptoWallet.signMessage(message)
-  const auth = buildAuthObject(
-    authPayload,
-    {
-      t: 'eip191', // signature type
-      s: signature
-    },
-    `${chain}:${cryptoWallet.address}`
-  )
-  auths.push(auth)
-})
-
-// Approve
-await web3wallet.approveSessionAuthenticate({
-  id: payload.id,
-  auths
-})
-```
-
-</PlatformTabItem>
-
-</PlatformTabs>
-
 ## Rejecting Authentication Requests
-
-<PlatformTabs
-	groupId="w3w"
-	activeOptions={["web","ios","android","react-native"]}
->
-<PlatformTabItem value="web">
-
-If the authentication request cannot be approved or if the user chooses to reject it, use the rejectSession method.
-
-```typescript
-import { getSdkError } from '@walletconnect/utils'
-
-await web3wallet.rejectSessionAuthenticate({
-  id: payload.id,
-  reason: getSdkError('USER_REJECTED') // or choose a different reason if applicable
-})
-```
-
-</PlatformTabItem>
-
-<PlatformTabItem value="ios">
 
 If the authentication request cannot be approved or if the user chooses to reject it, use the rejectSession method.
 
 ```swift
 try await Web3Wallet.instance.rejectSession(requestId: requestId)
 ```
-
-</PlatformTabItem>
-
-<PlatformTabItem value="android">
-
-If the authentication request cannot be approved or if the user chooses to reject it, use the rejectSessionAuthenticate method.
-
-```kotlin
-val rejectParams = Wallet.Params.rejectSessionAuthenticate(
-    id = sessionAuthenticate.id,
-    reason = "Reason"
-)
-
-Web3Wallet.rejectSessionAuthenticate(rejectParams,
-  onSuccess = {
-        //Success
-  },
-  onError = { error ->
-      //Handle error
-  }
-)
-```
-
-</PlatformTabItem>
-
-<PlatformTabItem value="react-native">
-
-If the authentication request cannot be approved or if the user chooses to reject it, use the rejectSession method.
-
-```typescript
-import { getSdkError } from '@walletconnect/utils'
-
-await web3wallet.rejectSessionAuthenticate({
-  id: payload.id,
-  reason: getSdkError('USER_REJECTED') // or choose a different reason if applicable
-})
-```
-
-</PlatformTabItem>
-
-</PlatformTabs>
 
 ## Testing One-click Auth
 
