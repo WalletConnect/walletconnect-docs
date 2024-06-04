@@ -166,15 +166,33 @@ module.exports = {
       className: 'menu_outer_list',
       items: [
         {
-          type: 'doc',
+          type: 'category',
           label: 'AppKit',
-          id: 'appkit/overview'
+          collapsed: true,
+          collapsible: true,
+          items: [
+            'appkit/overview',
+            {
+              type: 'category',
+              label: 'Features',
+              items: [
+                { type: 'doc', label: 'One-Click Auth', id: 'appkit/features/one-click-auth' },
+                { type: 'doc', label: 'Email Wallets', id: 'appkit/features/email' },
+                { type: 'doc', label: 'Onramp', id: 'appkit/features/onramp' },
+                { type: 'doc', label: 'Solana', id: 'appkit/features/solana' },
+              ]
+            },
+          ]
         },
         {
-          type: 'doc',
+          type: 'category',
           label: 'WalletKit',
-          id: 'walletkit/overview'
-        }
+          collapsed: true,
+          collapsible: true,
+          items: [
+            'walletkit/overview'
+          ]
+        },
       ]
     },
     cloud,

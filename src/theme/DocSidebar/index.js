@@ -31,7 +31,9 @@ export const FrameworksMenu = () => {
 
   if (
     location.pathname.includes('/appkit/overview') ||
-    location.pathname.includes('/walletkit/overview')
+    location.pathname.includes('/appkit/features') ||
+    location.pathname.includes('/walletkit/overview') ||
+    location.pathname.includes('/walletkit/features')
   ) {
     return
   }
