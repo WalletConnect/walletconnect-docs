@@ -84,4 +84,11 @@ For more information on how to configure universal links for your app, refer to 
 
 For a debugging guide, visit the [Debugging Universal Links](https://developer.apple.com/documentation/technotes/tn3155-debugging-universal-links) page.
 
+
 Once link mode is configured, your dApp will connect and send requests to wallets via universal links after receiving proof from the wallet that it also supports link mode.
+
+The wallet will also send responses using universal links. Your app needs to pass these responses to the Web3Modal client so it can process them.
+
+```swift
+Web3Modal.instance.handleDeeplink(url)
+```
