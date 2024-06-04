@@ -24,7 +24,7 @@ export default function DocSidebarWrapper(props) {
   )
 }
 
-const FrameworksMenu = () => {
+export const FrameworksMenu = () => {
   const initial_environment = getItemInStorage()
 
   const location = useLocation()

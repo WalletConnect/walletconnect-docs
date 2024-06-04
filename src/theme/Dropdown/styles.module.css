@@ -58,7 +58,7 @@
   background-size: contain;
 }
 
-.dropdownIcon {
+.dropdownArrow {
   content: '';
   margin-left: auto;
   min-width: 1.25rem;
@@ -66,6 +66,11 @@
   filter: var(--ifm-menu-link-sublist-icon-filter);
   height: 1.25rem;
   width: 1.25rem;
+  transform: rotate(90deg);
+}
+
+.rotateArrow {
+  transform: rotate(180deg);
 }
 
 [data-theme='light'] .dropdownButton__img-container {
@@ -88,4 +93,18 @@
   height: 1.25rem;
   width: 1.25rem;
   border-radius: 0;
+}
+
+@media (max-width: 996px){
+  .container{
+    padding-top: 0 !important;
+    padding-bottom: 10px;
+  }
+  .dropdownContainer{
+    background-color: var(--ifm-navbar-background-color);
+    top: -160%;
+  }
+  .dropdownButton{
+    background-color: var(--ifm-navbar-background-color);
+  }
 }
