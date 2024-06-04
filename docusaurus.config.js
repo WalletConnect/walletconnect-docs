@@ -102,16 +102,12 @@ const config = {
           title: 'Docs',
           items: [
             {
-              label: 'Web3Modal SDK',
-              to: '/web3modal/about'
+              label: 'AppKit',
+              to: '/appkit/overview'
             },
             {
-              label: 'Web3Wallet SDK',
-              to: '/web3wallet/about'
-            },
-            {
-              label: 'Web3Inbox SDK',
-              to: '/web3inbox/about'
+              label: 'WalletKit',
+              to: '/walletkit/overview'
             }
           ]
         },
