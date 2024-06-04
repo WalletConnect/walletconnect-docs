@@ -59,3 +59,29 @@ Web3Modal.instance.authResponsePublisher.sink { (id, result) in
     }
 }
 ```
+
+### Web3Modal Link Mode
+
+The latest release of Web3Modal supports link mode, a low latency mechanism for transporting 1-click auth requests and session requests over universal links, eliminating the need for a WebSocket connection with the Relay. This significantly enhances the user experience when connecting native dApps to native wallets by reducing the latency associated with networking connections, especially when the user has an unstable internet connection.
+
+To support link mode, configure your AppMetadata.Redirect with a valid universal link and set the linkMode property to true:
+
+
+```swift
+let metadata = AppMetadata(
+    ...
+    redirect: try! AppMetadata.Redirect(native: "exampleApp://", universal: "https://example.com/example_dapp", linkMode: true)
+)
+
+Web3Modal.configure(
+    ...
+    metadata: metadata,
+    ...
+)
+```
+
+For more information on how to configure universal links for your app, refer to the [Apple Documentation](https://developer.apple.com/documentation/xcode/allowing-apps-and-websites-to-link-to-your-content?language=objc).
+
+For a debugging guide, visit the [Debugging Universal Links](https://developer.apple.com/documentation/technotes/tn3155-debugging-universal-links) page.
+
+Once link mode is configured, your dApp will connect and send requests to wallets via universal links after receiving proof from the wallet that it also supports link mode.
