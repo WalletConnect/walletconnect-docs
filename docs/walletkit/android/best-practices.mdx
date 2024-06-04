@@ -1,14 +1,14 @@
 # Best Practices
 
-The purpose of this guide is to show the best practices in regards of Web3Wallet client usage. The goal is to provide the best user experience that just works in every circumstances.
+The purpose of this guide is to show the best practices in regards of the WalletKit client usage. The goal is to provide the best user experience that just works in every circumstances.
 
 :::note
-In order to ensure the best user experience and flawless connection flow, please make sure that Web3Wallet SDK is initialized immediately after your app launch, especially if launched via a WalletConnect Deep Link. It guarantees that websocket connection is opened immediately and all requests are received by your wallet
+In order to ensure the best user experience and flawless connection flow, please make sure that WalletKit is initialized immediately after your app launch, especially if launched via a WalletConnect Deep Link. It guarantees that websocket connection is opened immediately and all requests are received by your wallet
 :::
 
 ## Pairing
 
-A pairing is a connection between a wallet and a dapp that has fixed permissions to only allow a dapp to propose a session through it. Dapp can propose infinite number of sessions on one pairing. Wallet must use a pair method from Web3Wallet client to pair with dapp.
+A pairing is a connection between a wallet and a dapp that has fixed permissions to only allow a dapp to propose a session through it. Dapp can propose infinite number of sessions on one pairing. Wallet must use a pair method from WalletKit client to pair with dapp.
 
 ```kotlin
 val pairingParams = Wallet.Params.Pair(pairingUri)
@@ -24,7 +24,7 @@ Web3Wallet.pair(pairingParams,
 
 ### Pairing State
 
-A pairing state is a primitive exposed by Web3Wallet client for a wallet to indicate whether it should await a session proposal. The pairing state is `true` when a wallet scans a QR and awaits a session proposal. Once the session proposal is received by the wallet, the pairing state is changed to `false`.
+A pairing state is a primitive exposed by the WalletKit client for a wallet to indicate whether it should await a session proposal. The pairing state is `true` when a wallet scans a QR and awaits a session proposal. Once the session proposal is received by the wallet, the pairing state is changed to `false`.
 When `true` wallet should show a loading indicator awaiting a session proposal, when changed to `false` a proposal dialog should be displayed.
 
 ```kotlin

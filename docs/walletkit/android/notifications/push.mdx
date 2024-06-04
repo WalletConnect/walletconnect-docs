@@ -3,7 +3,7 @@ import PlatformTabItem from '../../../components/PlatformTabItem'
 
 # Push Notifications
 
-The WalletConnect Web3Wallet SDK provides the functionality for wallets to receive push notifications through Firebase Cloud Messaging (FCM) and Apple Push Notification Service (APNs) via the Push Server. This feature ensures that wallets are promptly notified of incoming signature requests. Each push notification contains the encrypted details of the signature request. Upon receiving the notification, it can be decrypted and presented to the developer, allowing for customization of the message according to their requirements.
+WalletKit provides the functionality for wallets to receive push notifications through Firebase Cloud Messaging (FCM) and Apple Push Notification Service (APNs) via the Push Server. This feature ensures that wallets are promptly notified of incoming signature requests. Each push notification contains the encrypted details of the signature request. Upon receiving the notification, it can be decrypted and presented to the developer, allowing for customization of the message according to their requirements.
 
 ## Server setup
 
@@ -38,7 +38,7 @@ Web3Wallet.registerDeviceToken(
 
 After the device token is registered, the next step involves setting up the notification service specific to the platform being used. This service will decrypt the incoming requests and forward them to the developer for further processing and integration.
 
-The `PushMessagingService` is a wrapper around the `FirebaseMessagingService`. The `PushMessagingService` class needs to be implemented for the Web3Wallet SDK to be able to decrypt and notify wallets of a push notification sent from the Dapp in the background. This service also needs to be registered in the `AndroidManifest.xml` file similar to the example in the FCM documentation.
+The `PushMessagingService` is a wrapper around the `FirebaseMessagingService`. The `PushMessagingService` class needs to be implemented for WalletKit to be able to decrypt and notify wallets of a push notification sent from the Dapp in the background. This service also needs to be registered in the `AndroidManifest.xml` file similar to the example in the FCM documentation.
 
 ```kotlin
 class SampleFirebaseService: PushMessagingService() {
