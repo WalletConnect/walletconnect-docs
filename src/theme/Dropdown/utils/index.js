@@ -20,6 +20,15 @@ export function getItemInStorage() {
 
 export function parseEnvironment(env) {
   if (!env) return ''
+  if(env === 'c-sharp'){
+    return "C#"
+  }
+  if (env === 'ios') {
+    return 'iOS'
+  }
+  if(env === 'javascript'){
+    return "JavaScript"
+  }
   if (env.includes('-')) {
     const env_array = env.split('-')
     return env_array
@@ -33,12 +42,6 @@ export function parseEnvironment(env) {
         return capitalize(item)
       })
       .join(' ')
-  }
-  if (env === 'ios') {
-    return 'iOS'
-  }
-  if(env === 'javascript'){
-    return "JavaScript"
   }
   return capitalize(env)
 }

@@ -24,6 +24,10 @@
   z-index: 100;
 }
 
+.walletKit{
+  top: 34%;
+}
+
 .item {
   cursor: pointer;
   display: flex;
@@ -106,5 +110,9 @@
   }
   .dropdownButton{
     background-color: var(--ifm-navbar-background-color);
+  }
+    
+  .walletKit{
+    top: -44%;
   }
 }

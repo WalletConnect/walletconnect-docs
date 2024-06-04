@@ -51,6 +51,7 @@ export const FrameworksMenu = () => {
     return (
       <Dropdown
         list={walletKit_environments}
+        isWalletKit
         initial={walletKit_environments.find(item => item === initial_environment)}
       />
     )

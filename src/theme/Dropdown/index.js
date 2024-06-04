@@ -8,7 +8,7 @@ import { env_icons } from './icons'
  * This Dropdown Menu is meant to be for a list of Frameworks and Programming languages.
  *  The selected item will mutate the current URL
  */
-export default function Dropdown({ list, initial }) {
+export default function Dropdown({ list, initial, isWalletKit }) {
   const location = useLocation()
   const history = useHistory()
 
@@ -38,7 +38,7 @@ export default function Dropdown({ list, initial }) {
     const new_path =
       location.pathname.slice(0, location.pathname.indexOf(current_environment)) +
       new_environment +
-      '/core/installation'
+      `${isWalletKit ? '/installation' : '/core/installation'}`
 
     history.push(new_path)
   }
@@ -66,7 +66,7 @@ export default function Dropdown({ list, initial }) {
         {parseEnvironment(selected)}
         <span className={`${s.dropdownArrow} ${isOpen && s.rotateArrow}`} />
       </div>
-      {isOpen && <div className={s.dropdownContainer}>
+      {isOpen && <div className={`${s.dropdownContainer} ${isWalletKit && s.walletKit}`}>
         {list
           .filter(i => i !== selected)
           .map(item => (

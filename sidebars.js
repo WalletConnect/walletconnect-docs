@@ -678,5 +678,229 @@ module.exports = {
     },
     dropdown_placeholder
   ],
-  walletKit: []
+  walletKit_Android: [
+    {
+      type: 'category',
+      label: 'SDKs',
+      collapsible: false,
+      className: 'menu_outer_list',
+      items: [
+        'walletkit/android/installation',
+        'walletkit/android/usage',
+        'walletkit/android/one-click-auth',
+        'walletkit/android/mobile-linking',
+        'walletkit/android/verify',
+        'walletkit/android/eip5792',
+        {
+          type: 'category',
+          label: 'Notifications',
+          items: [
+            {
+              type: 'category',
+              label: 'Notify',
+              items: [
+                'walletkit/android/notifications/notify/overview',
+                'walletkit/android/notifications/notify/installation',
+                'walletkit/android/notifications/notify/usage',
+                'walletkit/android/notifications/notify/spam-protection',
+                'walletkit/android/notifications/notify/resources',
+              ]
+            },
+            'walletkit/android/notifications/push',
+          ]
+        },
+        'walletkit/android/best-practices',
+        'walletkit/android/resources',
+        {
+          type: 'category',
+          label: 'Cloud',
+          collapsible: false,
+          className: 'menu_outer_list',
+          items: [
+            'walletkit/android/cloud/explorer-submission',
+            'walletkit/android/cloud/verify',
+            'walletkit/android/cloud/relay',
+            'walletkit/android/cloud/analytics'
+          ]
+        }
+      ]
+    },
+  ],
+  walletKit_iOS: [
+    {
+      type: 'category',
+      label: 'SDKs',
+      collapsible: false,
+      className: 'menu_outer_list',
+      items: [
+        'walletkit/ios/installation',
+        'walletkit/ios/usage',
+        'walletkit/ios/one-click-auth',
+        'walletkit/ios/mobile-linking',
+        'walletkit/ios/link-mode',
+        'walletkit/ios/verify',
+        'walletkit/ios/eip5792',
+        {
+          type: 'category',
+          label: 'Notifications',
+          items: [
+            {
+              type: 'category',
+              label: 'Notify',
+              items: [
+                'walletkit/ios/notifications/notify/overview',
+                'walletkit/ios/notifications/notify/installation',
+                'walletkit/ios/notifications/notify/usage',
+                'walletkit/ios/notifications/notify/spam-protection',
+                'walletkit/ios/notifications/notify/resources',
+              ]
+            },
+            'walletkit/ios/notifications/push',
+          ]
+        },
+        'walletkit/ios/best-practices',
+        'walletkit/ios/resources',
+        {
+          type: 'category',
+          label: 'Cloud',
+          collapsible: false,
+          className: 'menu_outer_list',
+          items: [
+            'walletkit/ios/cloud/explorer-submission',
+            'walletkit/ios/cloud/verify',
+            'walletkit/ios/cloud/relay',
+            'walletkit/ios/cloud/analytics'
+          ]
+        }
+      ]
+    },
+  ],
+  walletKit_Flutter: [
+    {
+      type: 'category',
+      label: 'SDKs',
+      collapsible: false,
+      className: 'menu_outer_list',
+      items: [
+        'walletkit/flutter/installation',
+        'walletkit/flutter/usage',
+        'walletkit/flutter/mobile-linking',
+        'walletkit/flutter/verify',
+        'walletkit/flutter/eip5792',
+        {
+          type: 'category',
+          label: 'Cloud',
+          collapsible: false,
+          className: 'menu_outer_list',
+          items: [
+            'walletkit/flutter/cloud/explorer-submission',
+            'walletkit/flutter/cloud/verify',
+            'walletkit/flutter/cloud/relay',
+            'walletkit/flutter/cloud/analytics'
+          ]
+        }
+      ]
+    },
+  ],
+  walletKit_React_Native: [
+    {
+      type: 'category',
+      label: 'SDKs',
+      collapsible: false,
+      className: 'menu_outer_list',
+      items: [
+        'walletkit/react-native/installation',
+        'walletkit/react-native/usage',
+        'walletkit/react-native/one-click-auth',
+        'walletkit/react-native/mobile-linking',
+        'walletkit/react-native/verify',
+        'walletkit/react-native/eip5792',
+        {
+          type: 'category',
+          label: 'Notifications',
+          items: [
+            {
+              type: 'category',
+              label: 'Notify',
+              items: [
+                'walletkit/react-native/notifications/notify/overview',
+                'walletkit/react-native/notifications/notify/installation',
+                'walletkit/react-native/notifications/notify/usage',
+                'walletkit/react-native/notifications/notify/spam-protection',
+              ]
+            },
+            'walletkit/react-native/notifications/push',
+          ]
+        },
+        'walletkit/react-native/best-practices',
+        'walletkit/react-native/resources',
+        {
+          type: 'category',
+          label: 'Cloud',
+          collapsible: false,
+          className: 'menu_outer_list',
+          items: [
+            'walletkit/react-native/cloud/explorer-submission',
+            'walletkit/react-native/cloud/verify',
+            'walletkit/react-native/cloud/relay',
+            'walletkit/react-native/cloud/analytics'
+          ]
+        }
+      ]
+    },
+  ],
+  walletKit_Web: [
+    {
+      type: 'category',
+      label: 'SDKs',
+      collapsible: false,
+      className: 'menu_outer_list',
+      items: [
+        'walletkit/web/installation',
+        'walletkit/web/usage',
+        'walletkit/web/one-click-auth',
+        'walletkit/web/verify',
+        'walletkit/web/eip5792',
+        'walletkit/web/best-practices',
+        'walletkit/web/resources',
+        {
+          type: 'category',
+          label: 'Cloud',
+          collapsible: false,
+          className: 'menu_outer_list',
+          items: [
+            'walletkit/web/cloud/explorer-submission',
+            'walletkit/web/cloud/verify',
+            'walletkit/web/cloud/relay',
+            'walletkit/web/cloud/analytics'
+          ]
+        }
+      ]
+    },
+  ],
+  walletKit_C_Sharp: [
+    {
+      type: 'category',
+      label: 'SDKs',
+      collapsible: false,
+      className: 'menu_outer_list',
+      items: [
+        'walletkit/c-sharp/installation',
+        'walletkit/c-sharp/usage',
+        'walletkit/c-sharp/verify',
+        {
+          type: 'category',
+          label: 'Cloud',
+          collapsible: false,
+          className: 'menu_outer_list',
+          items: [
+            'walletkit/c-sharp/cloud/explorer-submission',
+            'walletkit/c-sharp/cloud/verify',
+            'walletkit/c-sharp/cloud/relay',
+            'walletkit/c-sharp/cloud/analytics'
+          ]
+        }
+      ]
+    },
+  ],
 }

@@ -6,7 +6,7 @@ import ios from '../../../static/assets/home/iosLogo.png'
 import reactNative from '../../../static/assets/home/rnLogo.png'
 import flutter from '../../../static/assets/home/flutterLogo.png'
 import unity from '../../../static/assets/home/unityLogo.png'
-import cSharp from '../../../static/assets/home/unityLogo.png'
+import csharp from '../../../static/assets/home/csharpLogo.png'
 import javascript from '../../../static/assets/home/javascriptLogo.png'
 
 export const env_icons = {
@@ -19,5 +19,6 @@ export const env_icons = {
   android,
   ios,
   unity,
-  "c#":cSharp
+  "c-sharp":csharp,
+  web: javascript
 }
