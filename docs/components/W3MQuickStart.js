@@ -21,7 +21,7 @@ export const CloudBanner = props => {
       <CodeBlock
         className="w3m-qs__code-block"
         language="bash"
-      >{`npm create reown@latest`}</CodeBlock>
+      >{`npm create alpha@latest`}</CodeBlock>
     </div>
   )
 }

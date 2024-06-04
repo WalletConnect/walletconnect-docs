@@ -1,6 +1,6 @@
 # Push Server
 
-The Push Server sends WalletConnect protocol activity using FCM or APNs to users. The Push Server can be used with our [Notify API](../web3wallet/notify/introduction.mdx) and [Web3Wallet SDK](../web3wallet/about.mdx).
+The Push Server sends WalletConnect protocol activity using FCM or APNs to users. The Push Server can be used with our [WalletKit SDK](../walletkit/overview.mdx).
 
 Several options exist for setting up the Push Server:
 

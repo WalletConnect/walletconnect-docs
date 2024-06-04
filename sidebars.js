@@ -176,6 +176,9 @@ module.exports = {
               type: 'category',
               label: 'Features',
               items: [
+                { type: 'doc', label: 'Swaps', id: 'appkit/features/swaps' },
+                { type: 'doc', label: 'Socials', id: 'appkit/features/socials' },
+                { type: 'doc', label: 'Smart Accounts', id: 'appkit/features/smart-accounts' },
                 { type: 'doc', label: 'One-Click Auth', id: 'appkit/features/one-click-auth' },
                 { type: 'doc', label: 'Email Wallets', id: 'appkit/features/email' },
                 { type: 'doc', label: 'Onramp', id: 'appkit/features/onramp' },
