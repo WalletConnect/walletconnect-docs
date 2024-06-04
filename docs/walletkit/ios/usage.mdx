@@ -1,0 +1,2131 @@
+import Container from '../../components/Container'
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
+import PlatformTabs from '../../components/PlatformTabs'
+import PlatformTabItem from '../../components/PlatformTabItem'
+import CloudBanner from '../../components/CloudBanner'
+
+# Usage
+
+This section provides instructions on how to initialize the Web3Wallet client, approve sessions with supported namespaces, and respond to session requests, enabling easy integration of Web3 wallets with dapps through a simple and intuitive interface.
+
+## Content
+
+Links to sections on this page. Some sections are platform specific and are only visible when the platform is selected. To view a summary of useful platform specific topics, check out **Extra (Platform Specific)** under this section.
+
+**[Initialization](#initialization)**: Creating a new Web3Wallet instance and initializing it with a projectId from [Cloud](https://cloud.walletconnect.com).
+
+**[Session](#session-)**: Connection between a dapp and a wallet.
+
+- [Namespace Builder](#namespace-builder):
+  Namespace Builder is a helper utility that greatly reduces the complexity of parsing the required and optional namespaces. It accepts as parameters a session proposal along with your user's chains/methods/events/accounts and returns a ready-to-use object
+- [Session Approval](#session-approval):
+  Approving a session sent from a dapp
+- [Session Rejection](#session-rejection):
+  Rejecting a session sent from a dapp
+- [Responding to Session Requests](#responding-to-session-requests):
+  Responding to session requests sent from a dapp
+- [Updating a Session](#updating-a-session):
+  Updating a session sent between a dapp and wallet
+- [Extending a Session](#extending-a-session):
+  Extending a session between a dapp and wallet
+- [Session Disconnect](#session-disconnect):
+  Disconnecting a session between a dapp and wallet
+
+**[Extra (Platform Specific)](#extra-platform-specific)**: Additional information for platform specific usage. Some useful topics covered in this section are:
+
+- [Register Device Token (iOS)](?platform=ios#register-device-token)
+  Enabling Wallet Push Notifications by registering a device token.
+- [Register Device Token (Android)](?platform=android#register-device-token)
+  Enabling Wallet Push Notifications by registering a device token.
+- [Web3Wallet.WalletDelegate (Android)](?platform=android#web3walletwalletdelegate)
+  Setting and overriding functions through Web3Wallet delegate. Also includes instructions about VerifyContext.
+- [Format Message (Android)](?platform=android#format-message)
+  Receiving formatted SIWE message
+- [Emitting Session Events (Web)](?platform=web#emitting-session-events)
+  Custom Session Events to emit from the Wallet
+- [Subscribe for Web3Wallet Publishers (iOS)](?platform=ios#subscribe-for-web3wallet-publishers)
+  Publishers available to subscribe to for Web3Wallet
+
+To check the full list of platform specific instructions for your preferred platform, go to [Extra (Platform Specific)](#extra-platform-specific) and select your platform.
+
+<CloudBanner />
+
+## Initialization
+
+<PlatformTabs
+	groupId="w3w"
+	activeOptions={["web","ios","android","flutter","react-native","csharp"]}
+>
+<PlatformTabItem value="web">
+
+Create a new instance from Core and initialize it with a projectId created from installation. Next, create web3Wallet instance by calling init on Web3Wallet. Passing in the options object containing metadata about the app and an optional relay URL.
+
+```javascript
+import { Core } from '@walletconnect/core'
+import { Web3Wallet } from '@walletconnect/web3wallet'
+
+const core = new Core({
+  projectId: process.env.PROJECT_ID
+})
+
+const web3wallet = await Web3Wallet.init({
+  core, // <- pass the shared `core` instance
+  metadata: {
+    name: 'Demo app',
+    description: 'Demo Client as Wallet/Peer',
+    url: 'www.walletconnect.com',
+    icons: []
+  }
+})
+```
+
+</PlatformTabItem>
+<PlatformTabItem value="ios">
+
+Confirm you have configured the [Network Client](../../api/core/relay.mdx) first.
+
+Starting from WalletConnect SDK version 1.9.5, the `redirect` field in the `AppMetadata` object is mandatory. Ensure that the provided value matches your app's URL scheme to prevent redirection-related issues.
+
+Once you're done, in order to initialize a client just call a `configure` method from the Web3Wallet instance wrapper
+
+```swift
+let metadata = AppMetadata(
+    name: "Example Wallet",
+    description: "Wallet description",
+    url: "example.wallet",
+    icons: ["https://avatars.githubusercontent.com/u/37784886"],
+    redirect: AppMetadata.Redirect(native: "example://", universal: nil)
+)
+
+Web3Wallet.configure(
+    metadata: metadata,
+    crypto: DefaultCryptoProvider(),
+    // Used for the Push: "echo.walletconnect.com" will be used by default if not provided
+    pushHost: "echo.walletconnect.com",
+    // Used for the Push: "APNSEnvironment.production" will be used by default if not provided
+    environment: .production
+)
+```
+
+In order to allow users to receive push notifications you have to communicate with Apple Push Notification service and receive unique device token. Register that token with following method:
+
+```swift
+try await Web3Wallet.instance.register(deviceToken: deviceToken)
+```
+
+</PlatformTabItem>
+<PlatformTabItem value="android">
+
+```kotlin
+val projectId = "" // Get Project ID at https://cloud.walletconnect.com/
+val relayUrl = "relay.walletconnect.com"
+val serverUrl = "wss://$relayUrl?projectId=$projectId"
+val connectionType = ConnectionType.AUTOMATIC or ConnectionType.MANUAL
+val telemetryEnabled: Boolean = true
+val appMetaData = Core.Model.AppMetaData(
+    name = "Wallet Name",
+    description = "Wallet Description",
+    url = "Wallet URL",
+    icons = /*list of icon url strings*/,
+    redirect = "kotlin-wallet-wc:/request" // Custom Redirect URI
+)
+
+CoreClient.initialize(relayServerUrl = serverUrl, connectionType = connectionType, application = this, metaData = appMetaData, telemetryEnabled = telemetryEnabled)
+
+val initParams = Wallet.Params.Init(core = CoreClient)
+
+Web3Wallet.initialize(initParams) { error ->
+    // Error will be thrown if there's an issue during initialization
+}
+```
+
+The Web3Wallet client will always be responsible for exposing accounts (CAIP10 compatible) to a Dapp and therefore is also in charge of signing.
+To initialize the Web3Wallet client, create a `Wallet.Params.Init` object in the Android Application class with the Core Client. The `Wallet.Params.Init` object will then be passed to the `Web3Wallet`initialize function.
+
+The telemetry feature aims to improve the reliability and observability of connection flows between decentralized applications (dapps) and wallets.
+It focuses solely on collecting data about code execution and error codes, without tracking any sensitive user information like amounts, accounts etc.
+
+It provides a comprehensive tracing system for three key use cases:
+
+- Subscribing to a Pairing Topic
+- Approving a Session
+- Approving an Authenticated Session
+
+Each execution trace consists of:
+
+- Trace Events: Collected to verify the proper execution of code.
+- Error Events: Captured when errors occur during the trace, halting the execution trace.
+
+When an error event is encountered, it is stored locally within the SDK along with all preceding trace events.
+These stored events are then transmitted to the server whenever the SDK is initialized.
+
+Error event tracing is enabled by default.
+
+Telemetry Enabled (telemetryEnabled = true):
+
+- The SDK stores events and sends them to the server.
+
+Telemetry Disabled (telemetryEnabled = false):
+
+- The SDK stops storing new events and deletes all unsent events from local storage upon the next initialization.
+
+Important Note: Since the SDK only stores abstract trace and error data, user identification is not possible.
+
+Example of the error events:
+
+```json
+[
+  {
+    "eventId": "69e53f11-fd4b-4efc-8d36-1f60a9ac8207",
+    "bundleId": "com.wallet.example",
+    "timestamp": 1689611327943,
+    "props": {
+      "event": "ERROR",
+      "type": "pairing_already_exists",
+      "properties": {
+        "topic": "topic1",
+        "trace": [
+          "pairing_started",
+          "pairing_uri_validation_success",
+          "pairing_uri_not_expired",
+          "existing_pairing",
+          "pairing_not_expired",
+          "pairing_not_expired"
+        ]
+      }
+    }
+  },
+  {
+    "eventId": "69e53f11-fd4b-4efc-8d36-2321312fds",
+    "bundleId": "com.wallet.example",
+    "timestamp": 16896113234323,
+    "props": {
+      "event": "ERROR",
+      "type": "session_approve_namespace_validation_failure",
+      "properties": {
+        "topic": "topic2",
+        "trace": ["session_approve_started", "proposal_not_expired"]
+      }
+    }
+  }
+]
+```
+
+</PlatformTabItem>
+<PlatformTabItem value="flutter">
+
+To create an instance of Web3Wallet, you need to pass in the `core` and `metadata` parameters.
+
+```dart
+final web3Wallet = await Web3Wallet.createInstance(
+  projectId: '123.....',
+  metadata: const PairingMetadata(
+    name: 'Wallet Name',
+    description: 'Wallet Description',
+    url: 'https://your_wallet_url.com/',
+    icons: [
+      'https://your_wallet_icon.png'
+    ],
+    redirect: Redirect(
+      native: 'yourwalletscheme://',
+      universal: 'https://your_wallet_url.com',
+    ),
+  ),
+);
+
+```
+
+</PlatformTabItem>
+
+<PlatformTabItem value="react-native">
+
+:::info Note
+
+`@walletconnect/react-native-compat` must be installed and imported before any `@walletconnect/*` dependencies for proper React Native polyfills.
+
+```ts
+import '@walletconnect/react-native-compat'
+// Other imports
+```
+
+:::
+
+Create a new instance from `Core` and initialize it with your `projectId`. Next, create a Web3Wallet instance by calling `init` on `Web3Wallet`. Passing in the options object containing metadata about the app.
+
+In this code example, we wrapped it in a `createWeb3Wallet` function as this will be easier to call from your `App.tsx` or an initialization function as seen [here.](https://github.com/WalletConnect/react-native-examples/blob/main/wallets/rn_cli_wallet_068_5/src/utils/Web3WalletClient.ts)
+
+The `pair` function will help us pair between the dapp and wallet and will be used shortly.
+
+```javascript
+import { Core } from '@walletconnect/core'
+import { Web3Wallet } from '@walletconnect/web3wallet'
+
+const core = new Core({
+  projectId: process.env.PROJECT_ID
+})
+
+const web3wallet = await Web3Wallet.init({
+  core, // <- pass the shared `core` instance
+  metadata: {
+    name: 'Demo React Native Wallet',
+    description: 'Demo RN Wallet to interface with Dapps',
+    url: 'www.walletconnect.com',
+    icons: ['https://your_wallet_icon.png'],
+    redirect: {
+      native: 'yourwalletscheme://'
+    }
+  }
+})
+```
+
+</PlatformTabItem>
+
+<PlatformTabItem value="csharp">
+
+First you must setup a `WalletConnectCore` instance with a specific `Name` and `ProjectId`. You may optionally specify other `CoreOption`
+values, such as `RelayUrl` and `Storage`
+
+```csharp
+var options = new CoreOptions()
+{
+    ProjectId = "...",
+    Name = "my-app",
+}
+
+var core = new WalletConnectCore(options);
+```
+
+Next, you must define a `Metadata` object which describes your Wallet. This includes a `Name`, `Description`, `Url` and `Icons` url.
+
+```csharp
+var metadata = new Metadata()
+{
+    Description = "An example wallet to showcase WalletConnectSharpv2",
+    Icons = new[] { "https://walletconnect.com/meta/favicon.ico" },
+    Name = $"wallet-csharp-test",
+    Url = "https://walletconnect.com",
+};
+```
+
+Once you have both the `WalletConnectCore` and `Metadata` objects, you can initialize the `Web3WalletClient`
+
+```csharp
+var sdk = await Web3WalletClient.Init(core, metadata, metadata.Name);
+```
+
+</PlatformTabItem>
+
+</PlatformTabs>
+
+## Session
+
+A session is a connection between a dapp and a wallet. It is established when a user approves a session proposal from a dapp. A session is active until the user disconnects from the dapp or the session expires.
+
+### Namespace Builder
+
+<PlatformTabs
+	groupId="w3w"
+	activeOptions={["web","ios","android","flutter","react-native","csharp"]}
+>
+
+<PlatformTabItem value="web">
+
+With Web3Wallet v1.5.1 (and @walletconnect/utils v2.6.1) we've published a helper utility that greatly reduces the complexity of parsing the `required` and `optional` namespaces. It accepts as parameters a `session proposal` along with your user's `chains/methods/events/accounts` and returns ready-to-use `namespaces` object.
+
+```javascript
+// util params
+{
+  proposal: ProposalTypes.Struct; // the proposal received by `.on("session_proposal")`
+  supportedNamespaces: Record< // your Wallet's supported namespaces
+    string, // the supported namespace key e.g. eip155
+    {
+      chains: string[]; // your supported chains in CAIP-2 format e.g. ["eip155:1", "eip155:2", ...]
+      methods: string[]; // your supported methods e.g. ["personal_sign", "eth_sendTransaction"]
+      events: string[]; // your supported events e.g. ["chainChanged", "accountsChanged"]
+      accounts: string[] // your user's accounts in CAIP-10 format e.g. ["eip155:1:0x453d506b1543dcA64f57Ce6e7Bb048466e85e228"]
+      }
+  >;
+};
+```
+
+Example usage
+
+```javascript
+// import the builder util
+import { Web3Wallet, Web3WalletTypes } from '@walletconnect/web3wallet'
+import { buildApprovedNamespaces, getSdkError } from '@walletconnect/utils'
+
+async function onSessionProposal({ id, params }: Web3WalletTypes.SessionProposal){
+  try{
+    // ------- namespaces builder util ------------ //
+    const approvedNamespaces = buildApprovedNamespaces({
+      proposal: params,
+      supportedNamespaces: {
+        eip155: {
+          chains: ['eip155:1', 'eip155:137'],
+          methods: ['eth_sendTransaction', 'personal_sign'],
+          events: ['accountsChanged', 'chainChanged'],
+          accounts: [
+            'eip155:1:0xab16a96d359ec26a11e2c2b3d8f8b8942d5bfcdb',
+            'eip155:137:0xab16a96d359ec26a11e2c2b3d8f8b8942d5bfcdb'
+          ]
+        }
+      }
+    })
+    // ------- end namespaces builder util ------------ //
+
+    const session = await web3wallet.approveSession({
+      id,
+      namespaces: approvedNamespaces
+    })
+  }catch(error){
+    // use the error.message to show toast/info-box letting the user know that the connection attempt was unsuccessful
+    ....
+    await web3wallet.rejectSession({
+      id: proposal.id,
+      reason: getSdkError("USER_REJECTED")
+    })
+  }
+}
+
+
+web3wallet.on('session_proposal', onSessionProposal)
+```
+
+If your wallet supports multiple namespaces e.g. `eip155`,`cosmos` & `near`
+Your `supportedNamespaces` should look like the following example.
+
+```javascript
+// ------- namespaces builder util ------------ //
+const approvedNamespaces = buildApprovedNamespaces({
+    proposal: params,
+    supportedNamespaces: {
+        eip155: {...},
+        cosmos: {...},
+        near: {...}
+    },
+});
+// ------- end namespaces builder util ------------ //
+```
+
+</PlatformTabItem>
+<PlatformTabItem value="ios">
+
+`AutoNamespaces` is a helper utility that greatly reduces the complexity of parsing the required and optional namespaces. It accepts as parameters a session proposal along with your user's chains/methods/events/accounts and returns ready-to-use `SessionNamespace` object.
+
+```swift
+public static func build(
+    sessionProposal: Session.Proposal,
+    chains: [Blockchain],
+    methods: [String],
+    events: [String],
+    accounts: [Account]
+) throws -> [String: SessionNamespace]
+```
+
+Example usage
+
+```swift
+do {
+    sessionNamespaces = try AutoNamespaces.build(
+        sessionProposal: proposal,
+        chains: [Blockchain("eip155:1")!, Blockchain("eip155:137")!],
+        methods: ["eth_sendTransaction", "personal_sign"],
+        events: ["accountsChanged", "chainChanged"],
+        accounts: [
+            Account(blockchain: Blockchain("eip155:1")!, address: "0xab16a96d359ec26a11e2c2b3d8f8b8942d5bfcdb")!,
+            Account(blockchain: Blockchain("eip155:137")!, address: "0xab16a96d359ec26a11e2c2b3d8f8b8942d5bfcdb")!
+        ]
+    )
+} catch let error as AutoNamespacesError {
+    // reject session proposal if AutoNamespace build function threw
+    try await reject(proposal: proposal, reason: RejectionReason(from: error))
+    return
+}
+// approve session with sessionNamespaces
+try await Web3Wallet.instance.approve(proposalId: proposal.id, namespaces: sessionNamespaces)
+
+```
+
+</PlatformTabItem>
+
+<PlatformTabItem value="android">
+
+With Web3Wallet SDK 1.7.0 we've published a helper utility that greatly reduces the complexity of parsing the required and optional namespaces. It accepts as parameters a session proposal along with your wallet's chains, methods, events, and accounts (supported namespaces) and returns ready-to-use namespaces object that has to be passed into `Wallet.Params.SessionApprove` when approving a session.
+
+```kotlin
+val supportedNamespaces: Wallet.Model.Namespaces.Session = /* a map of all supported namespaces created by a wallet */
+val sessionProposal: Wallet.Model.SessionProposal =  /* an object received by `fun onSessionProposal(sessionProposal: Wallet.Model.SessionProposal)` in `Web3Wallet.WalletDelegate` */
+val sessionNamespaces = Web3Wallet.generateApprovedNamespaces(sessionProposal, supportedNamespaces)
+
+val approveParams: Wallet.Params.SessionApprove = Wallet.Params.SessionApprove(proposerPublicKey, sessionNamespaces)
+Web3Wallet.approveSession(approveParams) { error -> /*callback for error while approving a session*/ }
+```
+
+Examples of supported namespaces:
+
+```kotlin
+ val supportedNamespaces = mapOf(
+    "eip155" to Wallet.Model.Namespace.Session(
+        chains = listOf("eip155:1", "eip155:137", "eip155:3"),
+        methods = listOf("personal_sign", "eth_sendTransaction", "eth_signTransaction"),
+        events = listOf("chainChanged"),
+        accounts = listOf("eip155:1:0x57f48fAFeC1d76B27e3f29b8d277b6218CDE6092", "eip155:137:0x57f48fAFeC1d76B27e3f29b8d277b6218CDE6092", "eip155:3:0x57f48fAFeC1d76B27e3f29b8d277b6218CDE6092")
+    )
+)
+
+ val anotherSupportedNamespaces = mapOf(
+    "eip155" to Wallet.Model.Namespace.Session(
+        chains = listOf("eip155:1", "eip155:2", "eip155:4"),
+        methods = listOf("personal_sign", "eth_sendTransaction", "eth_signTransaction"),
+        events = listOf("chainChanged", "accountsChanged"),
+        accounts = listOf("eip155:1:0x57f48fAFeC1d76B27e3f29b8d277b6218CDE6092", "eip155:2:0x57f48fAFeC1d76B27e3f29b8d277b6218CDE6092", "eip155:4:0x57f48fAFeC1d76B27e3f29b8d277b6218CDE6092")
+    ),
+    "cosmos" to Wallet.Model.Namespace.Session(
+        chains = listOf("cosmos:cosmoshub-4"),
+        methods = listOf("cosmos_method"),
+        events = listOf("cosmos_event"),
+        accounts = listOf("cosmos:cosmoshub-4:cosmos1hsk6jryyqjfhp5dhc55tc9jtckygx0eph6dd02")
+    )
+)
+
+```
+
+</PlatformTabItem>
+
+<PlatformTabItem value="flutter">
+
+On flutter you don't need to worry about Namespace Builder as Flutter SDK would handle that for you and generate a namespace object with the supported ones.
+
+All you have to do is make sure you are registering
+
+1. **events emitters** with `web3Wallet.registerEventEmitter()` for events you want to support on your wallet
+2. **request handlers** with `web3Wallet.registerRequestHandler()` for methods you want to support on your wallet
+3. **wallet's accounts** with `web3Wallet.registerAccount()` for accounts you want these events and methods to be enabled on
+
+for every **chain** you want to support.
+
+When a dApp propose a session, with declared required and/or optional namespaces, your wallet will be able to approve an **already generated set of namespaces** based on your registered events, methods and accounts.
+
+You can access this object in **SessionProposalEvent** during `onSessionProposal` event by querying `event.params.generatedNamespaces`. (See next section)
+
+However, if you decide not to use `web3Wallet.registerRequestHandler()` and, instead, you decide to handle session requests by subscribing to the `web3Wallet.onSessionRequest` events then all you have to do is construct your approved namespaces as follows:
+
+```dart
+final approvedNamespaces = {
+  'eip155': const Namespace(
+    accounts: [ // every account you want to support
+      'eip155:1:0x76..........',
+      'eip155:137:0x76..........',
+    ],
+    methods: [ // every method you want to support
+      'personal_sign',
+      'eth_sendTransaction',
+    ],
+    events: [ // every event you want to support
+      'chainChanged',
+      'accountsChanged',
+    ],
+  ),
+};
+```
+
+Flutter SDK provides a handy `MethodsConstants` and `EventsConstants` for already defined set of required and optional values.
+
+</PlatformTabItem>
+
+<PlatformTabItem value="react-native">
+
+With Web3Wallet v1.5.1 (and @walletconnect/utils v2.6.1) we've published a helper utility that greatly reduces the complexity of parsing the `required` and `optional` namespaces. It accepts as parameters a `session proposal` along with your user's `chains/methods/events/accounts` and returns ready-to-use `namespaces` object.
+
+```javascript
+// util params
+{
+  proposal: ProposalTypes.Struct; // the proposal received by `.on("session_proposal")`
+  supportedNamespaces: Record< // your Wallet's supported namespaces
+    string, // the supported namespace key e.g. eip155
+    {
+      chains: string[]; // your supported chains in CAIP-2 format e.g. ["eip155:1", "eip155:2", ...]
+      methods: string[]; // your supported methods e.g. ["personal_sign", "eth_sendTransaction"]
+      events: string[]; // your supported events e.g. ["chainChanged", "accountsChanged"]
+      accounts: string[] // your user's accounts in CAIP-10 format e.g. ["eip155:1:0x453d506b1543dcA64f57Ce6e7Bb048466e85e228"]
+      }
+  >;
+};
+```
+
+Example usage
+
+```javascript
+// import the builder util
+import { Web3Wallet, Web3WalletTypes } from '@walletconnect/web3wallet'
+import { buildApprovedNamespaces, getSdkError } from '@walletconnect/utils'
+
+async function onSessionProposal({ id, params }: Web3WalletTypes.SessionProposal){
+  try{
+    // ------- namespaces builder util ------------ //
+    const approvedNamespaces = buildApprovedNamespaces({
+      proposal: params,
+      supportedNamespaces: {
+        eip155: {
+          chains: ['eip155:1', 'eip155:137'],
+          methods: ['eth_sendTransaction', 'personal_sign'],
+          events: ['accountsChanged', 'chainChanged'],
+          accounts: [
+            'eip155:1:0xab16a96d359ec26a11e2c2b3d8f8b8942d5bfcdb',
+            'eip155:137:0xab16a96d359ec26a11e2c2b3d8f8b8942d5bfcdb'
+          ]
+        }
+      }
+    })
+    // ------- end namespaces builder util ------------ //
+
+    const session = await web3wallet.approveSession({
+      id,
+      namespaces: approvedNamespaces
+    })
+  }catch(error){
+    // use the error.message to show toast/info-box letting the user know that the connection attempt was unsuccessful
+   ....
+
+    await web3wallet.rejectSession({
+      id: proposal.id,
+      reason: getSdkError("USER_REJECTED")
+    })
+  }
+}
+
+
+web3wallet.on('session_proposal', onSessionProposal)
+```
+
+If your wallet supports multiple namespaces e.g. `eip155`,`cosmos` & `near`
+Your `supportedNamespaces` should look like the following example.
+
+```javascript
+// ------- namespaces builder util ------------ //
+const approvedNamespaces = buildApprovedNamespaces({
+    proposal: params,
+    supportedNamespaces: {
+        eip155: {...},
+        cosmos: {...},
+        near: {...}
+    },
+});
+// ------- end namespaces builder util ------------ //
+```
+
+</PlatformTabItem>
+
+<PlatformTabItem value="csharp">
+
+To build a namespace mapping for either proposing a session **OR** approving a session, you can use C# dictionary + class constructors
+directly, or use the built-in builder methods
+
+#### C# Constructor Style
+
+```csharp
+var TestNamespaces = new Namespaces()
+{
+    {
+        "eip155", new Namespace()
+            {
+                Accounts = new [] { "eip155:1:0xab16a96d359ec26a11e2c2b3d8f8b8942d5bfcdb" },
+                Chains = new []{ "eip155:1" },
+                Methods = new[] { "eth_signTransaction" },
+                Events = new[] { "chainChanged" }
+            }
+    },
+};
+```
+
+#### Builder Style
+
+```csharp
+var TestNamespaces = new Namespaces()
+  .WithNamespace("eip155", new Namespace()
+      .WithChain("eip155:1")
+      .WithMethod("eth_signTransaction")
+      .WithEvent("chainChanged")
+      .WithAccount("eip155:1:0xab16a96d359ec26a11e2c2b3d8f8b8942d5bfcdb")
+  );
+```
+
+The `Namespaces` mapping is required when approving a proposed session from a dApp. Because of this, you may
+also construct a `Namespaces` from a `RequiredNamespaces`, which auto-populates all `Methods`, `Events` and
+`Chains` from the given `RequiredNamespaces`. This is provided for convenience.
+
+#### RequiredNamespaces
+
+```csharp
+sdk.SessionProposed += async (sender, @event) =>
+{
+    var proposal = @event.Proposal;
+    var requiredNamespaces = proposal.RequiredNamespaces;
+    var approvedNamespaces = new Namespaces(requiredNamespaces);
+    approvedNamespaces["eip155"].WithAccount("eip155:1:0xab16a96d359ec26a11e2c2b3d8f8b8942d5bfcdb");
+});
+```
+
+The `RequiredNamespaces` is required when setting up a session between a dApp and Wallet. The
+dApp will provide a `RequiredNamespaces` when proposing the session. The `RequiredNamespaces` and
+`ProposedNamespace` use the same style constructors + builder functions as `Namespaces` and `Namespace`.
+
+</PlatformTabItem>
+
+</PlatformTabs>
+
+### EVM methods & events
+
+In @walletconnect/ethereum-provider, (our abstracted EVM SDK for apps) we support by default the following Ethereum methods and events:
+
+```ts
+{
+  //...
+  methods: [
+    "eth_accounts",
+    "eth_requestAccounts",
+    "eth_sendRawTransaction",
+    "eth_sign",
+    "eth_signTransaction",
+    "eth_signTypedData",
+    "eth_signTypedData_v3",
+    "eth_signTypedData_v4",
+    "eth_sendTransaction",
+    "personal_sign",
+    "wallet_switchEthereumChain",
+    "wallet_addEthereumChain",
+    "wallet_getPermissions",
+    "wallet_requestPermissions",
+    "wallet_registerOnboarding",
+    "wallet_watchAsset",
+    "wallet_scanQRCode",
+    "wallet_sendCalls",
+    "wallet_getCallsStatus",
+    "wallet_showCallsStatus",
+    "wallet_getCapabilities",
+  ],
+  events: [
+    "chainChanged",
+    "accountsChanged",
+    "message",
+    "disconnect",
+    "connect",
+  ]
+}
+```
+
+### Session Approval
+
+<PlatformTabs
+	groupId="w3w"
+	activeOptions={["web","ios","android","flutter","react-native","csharp"]}
+>
+
+<PlatformTabItem value="web">
+
+The `session_proposal` event is emitted when a dapp initiates a new session with a user's wallet. The event will include a `proposal` object with information about the dapp and requested permissions. The wallet should display a prompt for the user to approve or reject the session. If approved, call `approveSession` and pass in the `proposal.id` and requested `namespaces`.
+
+The `pair` method initiates a WalletConnect pairing process with a dapp using the given `uri` (QR code from the dapps). To learn more about pairing, checkout out the [docs](../../api/core/pairing.mdx).
+
+```javascript
+web3wallet.on('session_proposal', async proposal => {
+  const session = await web3wallet.approveSession({
+    id: proposal.id,
+    namespaces
+  })
+})
+await web3wallet.pair({ uri })
+```
+
+#### 🛠️ Usage examples
+
+- [in a demo wallet app](https://github.com/WalletConnect/web-examples/blob/a50c8eb5a10666f25911713c5358e78f1ca576d6/advanced/wallets/react-wallet-v2/src/views/SessionProposalModal.tsx#L264)
+- [in integration tests](https://github.com/WalletConnect/walletconnect-monorepo/blob/v2.0/packages/web3wallet/test/sign.spec.ts#L55)
+
+#### ⚠️ Expected Errors
+
+- `No matching key. proposal id doesn't exist: 1`
+
+This rejection means the SDK can't find a record with the given `proposal.id` - in this example `1`.
+This can happen when the proposal has expired (by default 5 minutes) or if you attempt to respond to a proposal that has already been approved/rejected.
+If you are seeing this error, please make sure that you are calling `approveSession` with the correct `proposal.id` that is available within the proposal payload.
+
+- `Error: Missing or invalid. approve(), namespaces should be an object with data`
+
+This error means that the `namespaces` parameter passed to `approveSession` is either missing or invalid. Please check that you are passing a valid `namespaces` object that satisfies all required properties.
+
+- `Non conforming namespaces. approve() namespaces <property> don't satisfy required namespaces.`
+
+This error indicates that some value(s) in your `namespaces` object do not satisfy the required namespaces requested by the dapp.
+To provide additional guidance, the message might include info about the exact property that is missing or invalid e.g. `Required: eip155:1 Approved: eip155:137`.
+Please check [CAIP-25](https://github.com/ChainAgnostic/CAIPs/blob/master/CAIPs/caip-25.md) to familiarize yourself with the standard and it's nuances.
+Additionally, we highly recommend you to use our `namespace` builder utility that would greatly simplify the process of parsing & building a valid `namespaces` object.
+
+</PlatformTabItem>
+<PlatformTabItem value="ios">
+
+```swift
+ Web3Wallet.instance.approve(
+    proposalId: "proposal_id",
+    namespaces: sessionNamespaces
+)
+```
+
+When session is successfully approved `sessionsPublishers` will publish a `Session`
+
+```swift
+Web3Wallet.instance.sessionsPublishers
+    .receive(on: DispatchQueue.main)
+    .sink { [weak self] _ in
+        self?.reloadSessions()
+    }.store(in: &publishers)
+```
+
+`Session` object represents an active session connection with a dapp. It contains dapp’s metadata (that you may want to use for displaying an active session to the user), namespaces, and expiry date. There is also a topic property that you will use for linking requests with related sessions.
+
+You can always query settled sessions from the client later with:
+
+```swift
+Web3Wallet.instance.getSessions()
+```
+
+#### Connect Clients
+
+Your Wallet should allow users to scan a QR code generated by dapps. You are responsible for implementing it on your own.
+For testing, you can use our test dapp at: https://react-app.walletconnect.com/, which is v2 protocol compliant.
+Once you derive a URI from the QR code call `pair` method:
+
+```swift
+try await Web3Wallet.instance.pair(uri: uri)
+```
+
+if everything goes well, you should handle following event:
+
+```swift
+Web3Wallet.instance.sessionProposalPublisher
+    .receive(on: DispatchQueue.main)
+    .sink { [weak self] session in
+        self?.verifyDapp(session.context)
+        self?.showSessionProposal(session.proposal)
+    }.store(in: &publishers)
+```
+
+Session proposal is a handshake sent by a dapp and it's purpose is to define a session rules. Handshake procedure is defined by [CAIP-25](https://github.com/ChainAgnostic/CAIPs/blob/master/CAIPs/caip-25.md).
+`Session.Proposal` object conveys set of required and optional `ProposalNamespaces` that contains blockchains methods and events. Dapp requests with methods and wallet will emit events defined in namespaces.
+
+`VerifyContext` provides a domain verification information about `Session.Proposal` and `Request`. It consists of origin of a Dapp from where the request has been sent, validation enum that says whether origin is **unknown**, **valid** or **invalid** and verify URL server.
+
+To enable or disable verification find the **Verify SDK** toggle in your project [cloud](https://cloud.walletconnect.com).
+
+```swift
+public struct VerifyContext: Equatable, Hashable {
+   public enum ValidationStatus {
+       case unknown
+       case valid
+       case invalid
+   }
+
+   public let origin: String?
+   public let validation: ValidationStatus
+   public let verifyUrl: String
+}
+```
+
+The user will either approve the session proposal (with session namespaces) or reject it. Session namespaces must at least contain requested methods, events and accounts associated with proposed blockchains.
+
+Accounts must be provided according to [CAIP10](https://github.com/ChainAgnostic/CAIPs/blob/master/CAIPs/caip-10.md) specification and be prefixed with a chain identifier. chain_id + : + account_address. You can find more on blockchain identifiers in [CAIP2](https://github.com/ChainAgnostic/CAIPs/blob/master/CAIPs/caip-2.md). Our `Account` type meets the criteria.
+
+```
+let account = Account("eip155:1:0xab16a96d359ec26a11e2c2b3d8f8b8942d5bfcdb")!
+```
+
+Accounts sent in session approval must at least match all requested blockchains.
+
+Example proposal namespaces request:
+
+```json
+{
+  "eip155": {
+    "chains": ["eip155:137", "eip155:1"],
+    "methods": ["eth_sign"],
+    "events": ["accountsChanged"]
+  },
+  "cosmos": {
+    "chains": ["cosmos:cosmoshub-4"],
+    "methods": ["cosmos_signDirect"],
+    "events": ["someCosmosEvent"]
+  }
+}
+```
+
+Example session namespaces response:
+
+```json
+{
+  "eip155": {
+    "accounts": [
+      "eip155:137:0xab16a96d359ec26a11e2c2b3d8f8b8942d5bfcdb",
+      "eip155:1:0xab16a96d359ec26a11e2c2b3d8f8b8942d5bfcdb"
+    ],
+    "methods": ["eth_sign"],
+    "events": ["accountsChanged"]
+  },
+  "cosmos": {
+    "accounts": ["cosmos:cosmoshub-4:cosmos1t2uflqwqe0fsj0shcfkrvpukewcw40yjj6hdc0"],
+    "methods": ["cosmos_signDirect", "personal_sign"],
+    "events": ["someCosmosEvent", "proofFinalized"]
+  }
+}
+```
+
+#### Track Sessions
+
+When your `Web3Wallet` instance receives requests from a peer it will publish a related event. Set a subscription to handle them.
+
+To track sessions subscribe to `sessionsPublisher` publisher
+
+```swift
+Web3Wallet.instance.sessionsPublisher
+    .receive(on: DispatchQueue.main)
+    .sink { [weak self] sessions in
+        // Reload UI
+    }.store(in: &publishers)
+```
+
+</PlatformTabItem>
+<PlatformTabItem value="android">
+
+:::info Note
+
+Addresses provided in `accounts` array should follow [CAIP-10](https://github.com/ChainAgnostic/CAIPs/blob/master/CAIPs/caip-10.md)
+semantics.
+
+:::
+
+```kotlin
+val proposerPublicKey: String = /*Proposer publicKey from SessionProposal object*/
+val namespace: String = /*Namespace identifier, see for reference: https://github.com/ChainAgnostic/CAIPs/blob/master/CAIPs/caip-2.md#syntax*/
+val accounts: List<String> = /*List of accounts on chains*/
+val methods: List<String> = /*List of methods that wallet approves*/
+val events: List<String> = /*List of events that wallet approves*/
+val namespaces: Map<String, Wallet.Model.Namespaces.Session> = mapOf(namespace, Wallet.Model.Namespaces.Session(accounts, methods, events))
+
+val approveParams: Wallet.Params.SessionApprove = Wallet.Params.SessionApprove(proposerPublicKey, namespaces)
+Web3Wallet.approveSession(approveParams) { error -> /*callback for error while approving a session*/ }
+```
+
+To send an approval, pass a Proposer's Public Key along with the map of namespaces to the `Web3Wallet.approveSession` function.
+
+</PlatformTabItem>
+
+<PlatformTabItem value="flutter">
+
+As mentioned before, the `SessionProposalEvent` is emitted when a dapp initiates a new session with your wallet. The event object will include the information about the dapp and requested namespaces. The wallet should display a prompt for the user to approve or reject the session.
+
+To approve a session, call `approveSession()` and pass in the `event.id` and your approved namespaces.
+
+- If you decide to use the `registerRequestHandler()` method to register handlers for supported methods, as explained in previous section, you would use the `generatedNamespaces` object in the `approveSession`
+- If you decide to handle session requests by subscribing to the `onSessionRequest` event, you would need to pass your own set of approved namespaces.
+
+Either way you decide you would subscribe to the `onSessionProposal` event and use `approveSession()` as follows:
+
+```dart
+web3Wallet.onSessionProposal.subscribe((SessionProposalEvent? event) {
+  // display a prompt for the user to approve or reject the session
+  // ....
+  // If approved
+  web3Wallet.approveSession(
+    id: event.id,
+    namespaces: // event.params.generatedNamespaces! or approvedNamespaces,
+  );
+});
+```
+
+#### Pairing
+
+The `pair` method initiates a WalletConnect pairing process with a dapp using the given `uri` (QR code from the dapps). To learn more about pairing, checkout out the [docs](https://specs.walletconnect.com/2.0/specs/clients/core/pairing/).
+
+Scan the QR code and parse the URI, and pair with the dapp.  
+Upon the first pairing, you will immediately receive `onSessionProposal` and `onAuthRequest` events.
+
+```dart
+Uri uri = Uri.parse(scannedUriString);
+await web3Wallet.pair(uri: uri);
+```
+
+</PlatformTabItem>
+
+<PlatformTabItem value="react-native">
+
+In order to connect with a dapp, you will need to receive a WalletConnect URI (WCURI) and this will talk to our protocol to facilitate a pairing session. Therefore, you will need a test dapp in order to communicate with the wallet. We recommend testing with our [React V2 Dapp](https://react-app.walletconnect.com/) as this is the most up-to-date development site.
+
+In order to capture the WCURI, recommend having some sort of state management you will pass through a `TextInput` or QRcode instance.
+
+The `session_proposal` event is emitted when a dapp initiates a new session with a user's wallet. The event will include a `proposal` object with information about the dapp and requested permissions. The wallet should display a prompt for the user to approve or reject the session. If approved, call `approveSession` and pass in the `proposal.id` and requested `namespaces`.
+
+The `pair` method initiates a WalletConnect pairing process with a dapp using the given `uri` (QR code from the dapps). To learn more about pairing, checkout out the [docs](https://specs.walletconnect.com/2.0/specs/clients/core/pairing/).
+
+```javascript
+import { getSdkError } from '@walletconnect/utils'
+
+// Approval: Using this listener for sessionProposal, you can accept the session
+web3wallet.on('session_proposal', async proposal => {
+  const session = await web3wallet.approveSession({
+    id: proposal.id,
+    namespaces
+  })
+})
+
+// Call this after WCURI is received
+await web3wallet.pair({ wcuri })
+```
+
+</PlatformTabItem>
+
+<PlatformTabItem value="csharp">
+
+Wallets can pair an incoming session using the session's Uri. Pairing a session lets the Wallet obtain the connection proposal which can then be approved or denied.
+
+```csharp
+var uri = "...";
+ProposalStruct proposal = await sdk.Pair(uri);
+```
+
+The wallet can then approve the proposal by constructing an approved `Namespaces`. The approved
+`Namespaces` should include the `RequiredNamespaces` under `proposal.RequiredNamespaces`, and may optionally include any optional namespaces
+specified under `proposal.OptionalNamespaces`
+
+```csharp
+sdk.SessionProposed += async (sender, @event) =>
+{
+    var proposal = @event.Proposal;
+    var requiredNamespaces = proposal.RequiredNamespaces;
+    var approvedNamespaces = new Namespaces(requiredNamespaces);
+    approvedNamespaces["eip155"].WithAccount("eip155:1:0xab16a96d359ec26a11e2c2b3d8f8b8942d5bfcdb");
+
+    var sessionData = await sdk.ApproveSession(proposal.Id, approvedNamespaces);
+    var sessionTopic = sessionData.Topic;
+});
+```
+
+You may also just provide the addresses that will connect, and the SDK will create this approved
+`Namespaces` for you. This function **will not approve optional namespaces**
+
+```csharp
+sdk.SessionProposed += async (sender, @event) =>
+{
+    var proposal = @event.Proposal;
+
+    var sessionData = await sdk.ApproveSession(proposal, new[] { "eip155:1:0xab16a96d359ec26a11e2c2b3d8f8b8942d5bfcdb" });
+    var sessionTopic = sessionData.Topic;
+});
+```
+
+or
+
+```csharp
+sdk.SessionProposed += async (sender, @event) =>
+{
+    var proposal = @event.Proposal;
+
+    var sessionData = await sdk.ApproveSession(proposal, "eip155:1:0xab16a96d359ec26a11e2c2b3d8f8b8942d5bfcdb");
+    var sessionTopic = sessionData.Topic;
+});
+```
+
+</PlatformTabItem>
+
+</PlatformTabs>
+
+### Session Rejection
+
+<PlatformTabs groupId="w3w" activeOptions={["web","ios","android","flutter","react-native","csharp"]}>
+<PlatformTabItem value="web">
+
+In the event you want to reject the session proposal, call the `rejectSession` method. The `getSDKError` function comes from the `@walletconnect/utils` [library](https://github.com/WalletConnect/walletconnect-monorepo/tree/v2.0/packages/utils).
+
+```javascript
+web3wallet.on('session_proposal', async proposal => {
+  await web3wallet.rejectSession({
+    id: proposal.id,
+    reason: getSdkError('USER_REJECTED_METHODS')
+  })
+})
+```
+
+#### 🛠️ Usage examples
+
+- [in a demo wallet app](https://github.com/WalletConnect/web-examples/blob/a50c8eb5a10666f25911713c5358e78f1ca576d6/advanced/wallets/react-wallet-v2/src/views/SessionProposalModal.tsx#L287)
+- [in integration tests](https://github.com/WalletConnect/walletconnect-monorepo/blob/v2.0/packages/web3wallet/test/sign.spec.ts#L79)
+
+#### ⚠️ Expected Errors
+
+- `No matching key. proposal id doesn't exist: 1`
+
+This rejection means the SDK can't find a record with the given `proposal.id` - in this example `1`.
+This can happen when the proposal has expired (by default 5 minutes) or if you attempt to respond to a proposal that has already been approved/rejected.
+If you are seeing this error, please make sure that you are calling `rejectSession` with the correct `proposal.id` that is available within the proposal payload.
+
+- `Error: Missing or invalid. reject() reason:`
+
+This rejection means the `reason` parameter passed to `rejectSession` is either missing or invalid.
+We recommend using the `getSDKError` function from the `@walletconnect/utils` library that will populate & format the parameter for you.
+
+</PlatformTabItem>
+<PlatformTabItem value="ios">
+
+try await Web3Wallet.instance.reject(requestId: request.id)
+
+</PlatformTabItem>
+<PlatformTabItem value="android">
+
+```kotlin
+val proposerPublicKey: String = /*Proposer publicKey from SessionProposal object*/
+val rejectionReason: String = /*The reason for rejecting the Session Proposal*/
+val rejectionCode: String = /*The code for rejecting the Session Proposal*/
+For reference use CAIP-25: https://github.com/ChainAgnostic/CAIPs/blob/master/CAIPs/caip-25.md
+
+val rejectParams: Wallet.Params.SessionReject = SessionReject(proposerPublicKey, rejectionReason, rejectionCode)
+Web3Wallet.rejectSession(rejectParams) { error -> /*callback for error while rejecting a session*/ }
+```
+
+To send a rejection for the Session Proposal, pass a proposerPublicKey, rejection reason and rejection code to
+the `Web3Wallet.rejectSession` function.
+
+</PlatformTabItem>
+<PlatformTabItem value="flutter">
+
+To reject the request, pass in an error code and reason. They can be found [here](https://specs.walletconnect.com/2.0/specs/clients/sign/error-codes).
+
+To reject a session:
+
+```dart
+web3Wallet.onSessionProposal.subscribe((SessionProposalEvent? event) {
+  // display a prompt for the user to approve or reject the session
+  // ....
+  // If rejected
+  web3Wallet.rejectSession(
+    id: event.id,
+    reason: Errors.getSdkError(Errors.USER_REJECTED),
+  );
+});
+```
+
+</PlatformTabItem>
+
+<PlatformTabItem value="react-native">
+
+You can use the `getSDKError` function, which is available in the `@walletconnect/utils` for the rejection function [library](https://github.com/WalletConnect/walletconnect-monorepo/tree/v2.0/packages/utils).
+
+```javascript
+import { getSdkError } from '@walletconnect/utils'
+
+// Reject: Using this listener for sessionProposal, you can reject the session
+web3wallet.on('session_proposal', async proposal => {
+  await web3wallet.rejectSession({
+    id: proposal.id,
+    reason: getSdkError('USER_REJECTED_METHODS')
+  })
+})
+
+// Call this after WCURI is received
+await web3wallet.core.pairing.pair({ wcuri })
+```
+
+</PlatformTabItem>
+
+<PlatformTabItem value="csharp">
+
+The wallet can reject the proposal using the following:
+
+```csharp
+sdk.SessionProposed += async (sender, @event) =>
+{
+    var proposal = @event.Proposal;
+    await sdk.Reject(proposal, "User rejected");
+});
+```
+
+</PlatformTabItem>
+</PlatformTabs>
+
+### Responding to Session requests
+
+<PlatformTabs groupId="w3w" activeOptions={["web","ios","android","flutter","react-native","csharp"]}>
+
+<PlatformTabItem value="web">
+
+The `session_request` event is emitted when the SDK received a request from the peer and it needs the wallet to perform a specific action, such as signing a transaction. The event contains a `topic` and a `request` object, which will vary depending on the action requested.
+
+To respond to the request, you can access the `topic` and `request` object by destructuring them from the event payload. To see a list of possible `request` and `response` objects, refer to the relevant JSON-RPC Methods for [Ethereum](../../advanced/multichain/rpc-reference/ethereum-rpc.md), [Solana](../../advanced/multichain/rpc-reference/solana-rpc.md), [Cosmos](../../advanced/multichain/rpc-reference/cosmos-rpc.md), or [Stellar](../../advanced/multichain/rpc-reference/stellar-rpc.md).
+
+As an example, if the dapp requests a `personal_sign` method, you can extract the `params` array from the `request` object. The first item in the array is the hex version of the message to be signed, which can be converted to UTF-8 and assigned to a `message` variable. The second item in `params` is the user's wallet address.
+
+To sign the message, you can use your wallet's `signMessage` method and pass in the message. The signed message, along with the `id` from the event payload, can then be used to create a `response` object, which can be passed into `respondSessionRequest`.
+
+```javascript
+web3wallet.on('session_request', async event => {
+  const { topic, params, id } = event
+  const { request } = params
+  const requestParamsMessage = request.params[0]
+
+  // convert `requestParamsMessage` by using a method like hexToUtf8
+  const message = hexToUtf8(requestParamsMessage)
+
+  // sign the message
+  const signedMessage = await wallet.signMessage(message)
+
+  const response = { id, result: signedMessage, jsonrpc: '2.0' }
+
+  await web3wallet.respondSessionRequest({ topic, response })
+})
+```
+
+To reject a session request, the response should be similar to this.
+
+```javascript
+const response = {
+  id,
+  jsonrpc: '2.0',
+  error: {
+    code: 5000,
+    message: 'User rejected.'
+  }
+}
+```
+
+#### 🛠️ Usage examples
+
+- [in a demo wallet app](https://github.com/WalletConnect/web-examples/blob/a50c8eb5a10666f25911713c5358e78f1ca576d6/advanced/wallets/react-wallet-v2/src/views/SessionSignModal.tsx#L36)
+- [in integration tests](https://github.com/WalletConnect/walletconnect-monorepo/blob/v2.0/packages/web3wallet/test/sign.spec.ts#L165)
+
+#### ⚠️ Expected Errors
+
+- `Error: No matching key. session topic doesn't exist: 'xyz...'`
+
+This rejection means the SDK can't find a session with the given `topic` - in this example `xyz...`.
+This can happen when the session has been disconnected by either the wallet or the dapp while the session request was being processed or if a session with such topic doesn't exist.
+If you are seeing this error, please make sure that you are using a correct topic that is available within the request payload.
+
+- `Error: Missing or invalid. respond() response:`
+
+This rejection means the `response` parameter passed to `respondSessionRequest` is either missing or invalid. The response should be a valid [JSON-RPC 2.0](https://www.jsonrpc.org/specification) response object.
+We recommend you to use our `formatJsonRpcResult` utility from `"@walletconnect/jsonrpc-utils"` that will format the response for you.
+
+Example usage:
+`id` argument being the request id from the request payload.
+
+```javascript
+import { formatJsonRpcResult } from '@walletconnect/jsonrpc-utils'
+
+const signature = await cryptoWallet.signTransaction(signTransaction)
+const response = await web3wallet.respondSessionRequest({
+  topic: session.topic,
+  response: formatJsonRpcResult(id, signature)
+})
+```
+
+</PlatformTabItem>
+<PlatformTabItem value="ios">
+
+After the session is established, a dapp will request your wallet's users to sign a transaction or a message. Requests will be delivered by the following publisher.
+
+```swift
+Web3Wallet.instance.sessionRequestPublisher
+  .receive(on: DispatchQueue.main)
+  .sink { [weak self] session in
+      self?.verifyDapp(session.context)
+      self?.showSessionRequest(session.request)
+  }.store(in: &publishers)
+```
+
+When a wallet receives a session request, you probably want to show it to the user. It’s method will be in scope of session namespaces. And it’s params are represented by `AnyCodable` type. An expected object can be derived as follows:
+
+```swift
+if sessionRequest.method == "personal_sign" {
+    let params = try! sessionRequest.params.get([String].self)
+} else if method == "eth_signTypedData" {
+    let params = try! sessionRequest.params.get([String].self)
+} else if method == "eth_sendTransaction" {
+    let params = try! sessionRequest.params.get([EthereumTransaction].self)
+}
+```
+
+Now, your wallet (as it owns your user’s private keys) is responsible for signing the transaction. After doing it, you can send a response to a dapp.
+
+```swift
+let response: AnyCodable = sign(request: sessionRequest) // Implement your signing method
+try await Web3Wallet.instance.respond(topic: request.topic, requestId: request.id, response: .response(response))
+```
+
+</PlatformTabItem>
+<PlatformTabItem value="android">
+
+```kotlin
+val sessionTopic: String = /*Topic of Session*/
+val jsonRpcResponse: Wallet.Model.JsonRpcResponse.JsonRpcResult = /*Active Session Request ID along with request data*/
+val result = Wallet.Params.SessionRequestResponse(sessionTopic = sessionTopic, jsonRpcResponse = jsonRpcResponse)
+
+Web3Wallet.respondSessionRequest(result) { error -> /*callback for error while responding session request*/ }
+```
+
+To respond to JSON-RPC method that were sent from Dapps for a session, submit a `Wallet.Params.SessionRequestResponse` with the session's topic and request
+ID along with the respond data to the `Web3Wallet.respondSessionRequest` function.
+
+</PlatformTabItem>
+<PlatformTabItem value="flutter">
+
+To handle a session request, such as `personal_sign`, you have two ways and they are mutually exclusive, so, you use either one way or the other:
+
+1. The default one is subscribing to onSessionRequest events and handle the request based on the method that is firing the event
+
+```dart
+web3Wallet.onSessionRequest.subscribe(_onSessionRequest);
+
+void _onSessionRequest(SessionRequestEvent? event) async {
+  if (event != null) {
+    final id = event.id;
+    final topic = event.topic;
+    final method = event.method;
+    final chainId = event.chainId;
+    final params = event.params as List;
+
+    // message should arrive encoded
+    final decoded = hex.decode(params.first.substring(2));
+    final message = utf8.decode(decoded);
+
+    // display a prompt for the user to approve or reject the request
+    // if approved
+    if (approved) {
+      // Your code to sign the message here
+      final signature = ...
+
+      return web3Wallet.respondSessionRequest(
+        topic: topic,
+        response: JsonRpcResponse(
+          id: id,
+          jsonrpc: '2.0',
+          result: signature,
+        ),
+      );
+    }
+    // if rejected
+    return web3Wallet.respondSessionRequest(
+      topic: topic,
+      response: JsonRpcResponse(
+        id: id,
+        jsonrpc: '2.0',
+        error: const JsonRpcError(code: 5001, message: 'User rejected method'),
+      ),
+    );
+  }
+}
+```
+
+2. The second way is to register a request handler for the methods and chains you want to support. So let's say your wallet supports `eip155:1` and `eip155:137`. This would translate to:
+
+```dart
+final supportedChains = ['eip155:1', 'eip155:137'];
+Map<String, dynamic Function(String, dynamic)> supportedMethods = {
+  'personal_sign': _personalSignHandler,
+  'eth_sendTransaction': _ethSendTransactionHandler,
+};
+for (var chainId in supportedChains) {
+  for (var method in supportedMethods.entries) {
+    web3Wallet.registerRequestHandler(
+      chainId: chainId,
+      method: method.key,
+      handler: method.value,
+    );
+  }
+}
+
+Future<void> _personalSignHandler(String topic, dynamic params) async {
+  final id = web3Wallet.pendingRequests.getAll().first;
+
+  // message should arrive encoded
+  final decoded = hex.decode(params.first.substring(2));
+  final message = utf8.decode(decoded);
+
+  // display a prompt for the user to approve or reject the request
+  // if approved
+  if (approved) {
+    // Your code to sign the message here
+    final signature = ...
+
+    return web3Wallet.respondSessionRequest(
+      topic: topic,
+      response: JsonRpcResponse(
+        id: id,
+        jsonrpc: '2.0',
+        result: signature,
+      ),
+    );
+  }
+  // if rejected
+  return web3Wallet.respondSessionRequest(
+    topic: topic,
+    response: JsonRpcResponse(
+      id: id,
+      jsonrpc: '2.0',
+      error: const JsonRpcError(code: 5001, message: 'User rejected method'),
+    ),
+  );
+}
+
+Future<void> _ethSendTransactionHandler(String topic, dynamic params) async {
+  // ...
+}
+```
+
+Once you have your handlers registered, this are going to be triggered **INSTEAD OF** the `onSessionRequest` event.
+
+The main difference between these 2 ways of handling session requests is that the default one, using `onSessionRequest` events, carry more useful information such as the **request id** and the **chain id** which are not carried when using the reqeust handlers registration.
+
+</PlatformTabItem>
+
+<PlatformTabItem value="react-native">
+
+![session-request-example](/assets/SessionRequestExample.png)
+
+The `session_request` event is triggered by a dapp when it needs the wallet to perform a specific action, such as signing a transaction. The event contains a `topic` and a `request` object, which will vary depending on the action requested.
+
+To respond to the request, the wallet can access the `topic` and `request` object by destructuring them from the event payload. To see a list of possible `request` and `response` objects, refer to the relevant JSON-RPC Methods for [Ethereum](../../advanced/multichain/rpc-reference/ethereum-rpc.md), [Solana](../../advanced/multichain/rpc-reference/solana-rpc.md), [Cosmos](../../advanced/multichain/rpc-reference/cosmos-rpc.md), or [Stellar](../../advanced/multichain/rpc-reference/stellar-rpc.md).
+
+As an example, if the dapp requests a `personal_sign` method, the wallet can extract the `params` array from the `request` object. The first item in the array is the hex version of the message to be signed, which can be converted to UTF-8 and assigned to a `message` variable. The second item in `params` is the user's wallet address.
+
+To sign the message, the wallet can use the `wallet.signMessage` method and pass in the message. The signed message, along with the `id` from the event payload, can then be used to create a `response` object, which can be passed into `respondSessionRequest`.
+
+The wallet then signs the message. `signedMessage`, along with the `id` from the event payload, can then be used to create a `response` object, which can be passed into `respondSessionRequest`.
+
+```javascript
+web3wallet.on('session_request', async event => {
+  const { topic, params, id } = event
+  const { request } = params
+  const requestParamsMessage = request.params[0]
+
+  // convert `requestParamsMessage` by using a method like hexToUtf8
+  const message = hexToUtf8(requestParamsMessage)
+
+  // sign the message
+  const signedMessage = await wallet.signMessage(message)
+
+  const response = { id, result: signedMessage, jsonrpc: '2.0' }
+
+  await web3wallet.respondSessionRequest({ topic, response })
+})
+```
+
+To reject a session request, the response should be similar to this.
+
+```javascript
+const response = {
+  id,
+  jsonrpc: '2.0',
+  error: {
+    code: 5000,
+    message: 'User rejected.'
+  }
+}
+```
+
+</PlatformTabItem>
+
+<PlatformTabItem value="csharp">
+
+Responding to session requests is very similar to sending session requests. See dApp usage on how sending session requests works. All custom session requests requires a request class **and** response class to be created that matches the `params` field type in the custom session request. C# is a static typed language, so these types must be given whenever you do a session request (or do any querying for session requests).
+
+Currently, **WalletConnectSharp does not automatically assume the object type for `params` is an array**. This is very important, since most EVM RPC requests have `params` as an array type. **Use `List<T>` to workaround this**. For example, for `eth_sendTransaction`, use `List<Transaction>` instead of `Transaction`.
+
+Newtonsoft.Json is used for JSON serialization/deserialization, therefore you can use Newtonsoft.Json attributes when defining fields in your request/response classes.
+
+#### Building a Response type
+
+Create a class for the response and populate it with the JSON properties the response object has. For this example, we will use `eth_getTransactionReceipt`
+
+The `params` field for `eth_getTransactionReceipt` has the object type
+
+```csharp
+using Newtonsoft.Json;
+using System.Numerics;
+
+[RpcMethod("eth_getTransactionReceipt"), RpcRequestOptions(Clock.ONE_MINUTE, 99995)]
+public class TransactionReceipt
+{
+    [JsonProperty("transactionHash")]
+    public string TransactionHash;
+
+    [JsonProperty("transactionIndex")]
+    public BigInteger TransactionIndex;
+
+    [JsonProperty("blockHash")]
+    public string BlockHash;
+
+    [JsonProperty("blockNumber")]
+    public BigInteger BlockNumber;
+
+    [JsonProperty("from")]
+    public string From;
+
+    [JsonProperty("to")]
+    public string To;
+
+    [JsonProperty("cumulativeGasUsed")]
+    public BigInteger CumulativeGasUsed;
+
+    [JsonProperty("effectiveGasPrice ")]
+    public BigInteger EffectiveGasPrice ;
+
+    [JsonProperty("gasUsed")]
+    public BigInteger GasUsed;
+
+    [JsonProperty("contractAddress")]
+    public string ContractAddress;
+
+    [JsonProperty("logs")]
+    public object[] Logs;
+
+    [JsonProperty("logsBloom")]
+    public string LogBloom;
+
+    [JsonProperty("type")]
+    public BigInteger Type;
+
+    [JsonProperty("status")]
+    public BigInteger Status;
+}
+```
+
+The `RpcMethod` class attributes defines the rpc method this response uses, this is optional. The `RpcResponseOptions` class attributes define the expiry time and tag attached to the response, **this is required**.
+
+#### Sending a response
+
+To respond to requests from a dApp, you must define the class representing the request object type. The request type for `eth_getTransactionReceipt` is the following:
+
+```csharp
+[RpcMethod("eth_getTransactionReceipt"), RpcRequestOptions(Clock.ONE_MINUTE, 99994)]
+public class EthGetTransactionReceipt : List<string>
+{
+    public EthGetTransactionReceipt(params string[] hashes) : base(hashes)
+    {
+    }
+
+    // needed for proper json deserialization
+    public EthGetTransactionReceipt()
+    {
+    }
+}
+```
+
+We can handle the `eth_getTransactionReceipt` session request by doing the following:
+
+```csharp
+walletClient.Engine.SessionRequestEvents<EthGetTransactionReceipt, TransactionReceipt>().OnRequest += OnEthTransactionReceiptRequest;
+
+private Task OnEthTransactionReceiptRequest(RequestEventArgs<EthGetTransactionReceipt, TransactionReceipt> e)
+{
+    // logic for request goes here
+    // set e.Response to return a response
+}
+```
+
+The callback function gets invoked whenever the wallet receives the `eth_getTransactionReceipt` request from a connected dApp. You may optionally filter further which requests are handled using the `FilterRequests` function
+
+```csharp
+walletClient.Engine.SessionRequestEvents<EthGetTransactionReceipt, TransactionReceipt>()
+    .FilterRequests(r => r.Topic == sessionTopic)
+    .OnRequest += OnEthTransactionReceiptRequest;
+```
+
+The callback returns a `Task`, so the callback can be made async. To return a response, **you must** set the `Response` field in `RequestEventArgs<T, TR>` with the desired response.
+
+```csharp
+private async Task OnEthTransactionReceiptRequest(RequestEventArgs<EthGetTransactionReceipt, TransactionReceipt> e)
+{
+    var txHash = e.Request.Params[0];
+    var receipt = await EthGetTransactionReceipt(txHash);
+    e.Response = receipt;
+}
+```
+
+</PlatformTabItem>
+
+</PlatformTabs>
+
+### Updating a Session
+
+<PlatformTabs groupId="w3w" activeOptions={["web","ios","android","flutter","react-native","csharp"]}>
+
+<PlatformTabItem value="web">
+
+If you wish to include new accounts or chains or methods in an existing session, `updateSession` allows you to do so.
+You need pass in the `topic` and a new `Namespaces` object that contains all of the existing namespaces as well as the new data you wish to include.
+After you update the session, the other peer will receive a `session_update` event.
+
+An example adding a new account to an existing session:
+
+```javascript
+const namespaces = session.namespaces
+const accounts = [
+  'eip155:1:0xab16a96d359ec26a11e2c2b3d8f8b8942d5bfcdb',
+  'eip155:1:0x1234567890123456789012345678901234567890'
+]
+const updatedNamespaces = {
+  ...namespaces,
+  eip155: {
+    ...namespaces.eip155,
+    accounts
+  }
+}
+const { acknowledged } = await web3wallet.updateSession({
+  topic: session.topic,
+  namespaces: updatedNamespaces
+})
+// If you wish to be notified when the dapp acknowledges the update.
+// note that if the dapp is offline `acknowledged` will not resolve until it comes back online
+await acknowledged()
+```
+
+An example adding a new chain to an existing session:
+
+```javascript
+const namespaces = session.namespaces
+const chains = ['eip155:1', 'eip155:137']
+const accounts = [
+  'eip155:1:0xab16a96d359ec26a11e2c2b3d8f8b8942d5bfcdb',
+  'eip155:137:0x1234567890123456789012345678901234567890'
+]
+const updatedNamespaces = {
+  ...namespaces,
+  eip155: {
+    ...namespaces.eip155,
+    accounts,
+    chains
+  }
+}
+await web3wallet.updateSession({ topic: session.topic, namespaces: updatedNamespaces })
+```
+
+#### 🛠️ Usage examples
+
+- [in a demo wallet app](https://github.com/WalletConnect/web-examples/blob/a50c8eb5a10666f25911713c5358e78f1ca576d6/advanced/wallets/react-wallet-v2/src/pages/session.tsx#L77)
+- [in integration tests](https://github.com/WalletConnect/walletconnect-monorepo/blob/v2.0/packages/web3wallet/test/sign.spec.ts#L98)
+
+#### ⚠️ Expected Errors
+
+Note that all `namespaces` validation applies and you still have to satisfy the required namespaces requested by the dapp.
+
+- `Error: No matching key. session topic doesn't exist: 'xyz...'`
+
+This rejection means the SDK can't find a session with the given `topic` - in this example `xyz...`.
+This can happen when the session you're trying to update has already been disconnected by either the wallet or the dapp or if a session with such topic doesn't exist.
+If you are seeing this error, please make sure that you are using a correct topic of an active session.
+
+- `Error: Missing or invalid. update(), namespaces should be an object with data`
+
+This error means that the `namespaces` parameter passed to `updateSession` is either missing or invalid. Please check that you are passing a valid `namespaces` object that satisfies all required properties.
+
+- `Non conforming namespaces. update() namespaces <property> don't satisfy required namespaces.`
+
+This error indicates that some value(s) in your `namespaces` object do not satisfy the required namespaces requested by the dapp.
+To provide additional guidance, the message might include info about the exact property that is missing or invalid e.g. `Required: eip155:1 Approved: eip155:137`.
+Please check [CAIP-25](https://github.com/ChainAgnostic/CAIPs/blob/master/CAIPs/caip-25.md) to familiarize yourself with the standard and it's nuances.
+Additionally, we highly recommend you to use our `namespace` builder utility that would greatly simplify the process of parsing & building a valid `namespaces` object.
+
+</PlatformTabItem>
+<PlatformTabItem value="ios">
+
+If you want to update user session's chains, accounts, methods or events you can use session update method.
+
+```swift
+try await Web3Wallet.instance.update(topic: session.topic, namespaces: newNamespaces)
+```
+
+</PlatformTabItem>
+<PlatformTabItem value="android">
+
+NOTE: addresses provided in `accounts` array should follow [CAIP10](https://github.com/ChainAgnostic/CAIPs/blob/master/CAIPs/caip-10.md)
+semantics.
+
+```kotlin
+val sessionTopic: String = /*Topic of Session*/
+val namespace: String = /*Namespace identifier, see for reference: https://github.com/ChainAgnostic/CAIPs/blob/master/CAIPs/caip-2.md#syntax*/
+val accounts: List<String> = /*List of accounts on chains*/
+val methods: List<String> = /*List of methods that wallet approves*/
+val events: List<String> = /*List of events that wallet approves*/
+val namespaces: Map<String, Wallet.Model.Namespaces.Session> = mapOf(namespace, Wallet.Model.Namespaces.Session(accounts, methods, events))
+val updateParams = Wallet.Params.SessionUpdate(sessionTopic, namespaces)
+
+Web3Wallet.updateSession(updateParams) { error -> /*callback for error while sending session update*/ }
+```
+
+To update a session with namespaces, submit a `Wallet.Params.SessionUpdate` object with the session's topic and namespaces to update session with
+to `Web3Wallet.updateSession`.
+
+</PlatformTabItem>
+<PlatformTabItem value="flutter">
+
+If you wish to include new accounts or chains or methods in an existing session, `updateSession` allows you to do so.
+You need pass in the `topic` and a new `Namespaces` object that contains all of the existing namespaces as well as the new data you wish to include.
+
+After you update the session, the dapp connected to your wallet will receive a `SessionUpdate` event.
+
+```dart
+await web3Wallet.updateSession(topic: 'topic', namespaces: '{}')
+```
+
+</PlatformTabItem>
+<PlatformTabItem value="react-native">
+
+The `session_update` event is emitted from the wallet when the session is updated by calling `updateSession`. To update a session, pass in the [topic](../../advanced/glossary#topics) and the new namespace.
+
+```javascript
+await web3wallet.updateSession({ topic, namespaces: newNs })
+```
+
+</PlatformTabItem>
+<PlatformTabItem value="csharp">
+
+Update a session, adding/removing additional namespaces in the given topic.
+
+```csharp
+var newNamespaces = new Namespaces(...);
+var request = await walletClient.UpdateSession(sessionTopic, newNamespaces);
+await request.Acknowledged();
+```
+
+</PlatformTabItem>
+</PlatformTabs>
+
+### Extending a Session
+
+<PlatformTabs groupId="w3w" activeOptions={["web","ios","android","flutter","react-native","csharp"]}>
+
+<PlatformTabItem value="web">
+
+Sessions have a default expiry of 7 days. To extend a session by an additional 7 days, call `.extendSession` method and pass in the `topic` of the session you wish to extend.
+
+```javascript
+const { acknowledged } = await web3wallet.extendSession({ topic })
+// if you wish to be notified when the dapp acks the extend
+// note that if the dapp is offline `acknowledged` will not resolve until it comes back online
+await acknowledged()
+```
+
+#### 🛠️ Usage examples
+
+- [in integration tests](https://github.com/WalletConnect/walletconnect-monorepo/blob/v2.0/packages/web3wallet/test/sign.spec.ts#L130)
+
+#### ⚠️ Expected Errors
+
+- `Error: No matching key. session topic doesn't exist: 'xyz...'`
+
+This rejection means the SDK can't find a session with the given `topic` - in this example `xyz...`.
+This can happen when the session you're trying to update has already been disconnected by either the wallet or the dapp or if a session with such topic doesn't exist.
+If you are seeing this error, please make sure that you are using a correct topic of an active session.
+
+</PlatformTabItem>
+<PlatformTabItem value="ios">
+
+By default, session lifetime is set for 7 days and after that time user's session will expire. But if you consider that a session should be extended you can call:
+
+```swift
+try await Web3Wallet.instance.extend(topic: session.topic)
+```
+
+Above method will extend a user's session to a week.
+
+</PlatformTabItem>
+<PlatformTabItem value="android">
+
+```kotlin
+val sessionTopic: String = /*Topic of Session*/
+val extendParams = Wallet.Params.SessionExtend(sessionTopic = sessionTopic)
+
+Web3Wallet.extendSession(extendParams) { error -> /*callback for error while extending a session*/ }
+```
+
+To extend a session, create a `Wallet.Params.SessionExtend` object with the session's topic to update the session with to `Web3Wallet.extendSession`. Session is
+extended by 7 days.
+
+</PlatformTabItem>
+<PlatformTabItem value="flutter">
+
+To extend the session, call the `extendSession` method and pass in the new `topic`. The `SessionUpdate` event will be emitted from the wallet.
+
+```dart
+await web3Wallet.extendSession(topic: 'topic')
+```
+
+</PlatformTabItem>
+<PlatformTabItem value="react-native">
+
+To extend the session, call the `extendSession` method and pass in the new `topic`. The `session_update` event will be emitted from the wallet.
+
+```javascript
+await web3wallet.extendSession({ topic })
+```
+
+</PlatformTabItem>
+<PlatformTabItem value="csharp">
+
+Extend a session's expiry time so the session remains open
+
+```csharp
+var request = await walletClient.Extend(sessionTopic);
+await request.Acknowledged();
+```
+
+</PlatformTabItem>
+</PlatformTabs>
+
+### Session Disconnect
+
+<PlatformTabs groupId="w3w" activeOptions={["web","ios","android","flutter","react-native","csharp"]}>
+
+<PlatformTabItem value="web">
+
+To initiate disconnect from a session(think session delete), call `.disconnectSession` by passing a `topic` & `reason` for the disconnect.
+The other peer will receive a `session_delete` and be notified that the session has been disconnected.
+
+:::info Note
+It's important that you're subscribed to the `session_delete` event as well, to be notified when the other peer initiates a disconnect.
+:::
+:::note Tip
+We recommend using the `getSDKError` utility function, that will provide ready-to-use `reason` payloads and is available in the `@walletconnect/utils` [library](https://github.com/WalletConnect/walletconnect-monorepo/tree/v2.0/packages/utils).
+:::
+
+```javascript
+await web3wallet.disconnectSession({
+  topic,
+  reason: getSdkError('USER_DISCONNECTED')
+})
+```
+
+#### 🛠️ Usage examples
+
+- [in integration tests](https://github.com/WalletConnect/walletconnect-monorepo/blob/v2.0/packages/web3wallet/test/sign.spec.ts#L222)
+
+#### ⚠️ Expected Errors
+
+- `Error: No matching key. session topic doesn't exist: 'xyz...'`
+
+This rejection means the SDK can't find a session with the given `topic` - in this example `xyz...`.
+This can happen when the session you're trying to update has already been disconnected by either the wallet or the dapp or if a session with such topic doesn't exist.
+If you are seeing this error, please make sure that you are using a correct topic of an active session.
+
+</PlatformTabItem>
+<PlatformTabItem value="ios">
+
+For good user experience your wallet should allow users to disconnect unwanted sessions. In order to terminate a session use `disconnect` method.
+
+```swift
+try await Web3Wallet.instance.disconnect(topic: session.topic)
+```
+
+</PlatformTabItem>
+<PlatformTabItem value="android">
+
+```kotlin
+val disconnectionReason: String = /*The reason for disconnecting the Session*/
+val disconnectionCode: String = /*The code for disconnecting the Session*/
+val sessionTopic: String = /*Topic from the Session*/
+For reference use CAIP-25: https://github.com/ChainAgnostic/CAIPs/blob/master/CAIPs/caip-25.md
+val disconnectParams = Wallet.Params.SessionDisconnect(sessionTopic, disconnectionReason, disconnectionCode)
+
+Web3Wallet.disconnectSession(disconnectParams) { error -> /*callback for error while disconnecting a session*/ }
+```
+
+To disconnect from un active session, pass a disconnection reason with code and the Session topic to the `Web3Wallet.disconnectSession`
+function.
+
+</PlatformTabItem>
+<PlatformTabItem value="flutter">
+
+To initiate a session disconnect, call the `disconnectSession` method and pass in the `topic` and a `reason`.
+
+When either the dapp or the wallet disconnects from a session, a `SessionDelete` event will be emitted. It's important to subscribe to this event so you could keep your state up-to-date.
+
+```dart
+await web3Wallet.disconnectSession(
+  topic: session.topic,
+  reason: Errors.getSdkError(Errors.USER_DISCONNECTED),
+);
+```
+
+Using `disconnectSession()` alone will make the pairing topic persist, i.e, it can be re-used until it expires. If you want to disconnect (remove) the pairing topic as well you would have add another call as follows:
+
+```dart
+await web3Wallet.core.pairing.disconnect(
+  topic: pairing.topic,
+);
+```
+
+</PlatformTabItem>
+<PlatformTabItem value="react-native">
+
+When either the dapp or the wallet disconnects from a session, a `session_delete` event will be emitted. It's important to subscribe to this event so you could keep your state up-to-date.
+
+To initiate a session disconnect, call the `disconnectSession` method and pass in the `topic` and `reason`. You can use the `getSDKError` utility function, which is available in the `@walletconnect/utils` [library](https://github.com/WalletConnect/walletconnect-monorepo/tree/v2.0/packages/utils).
+
+```javascript
+await web3wallet.disconnectSession({
+  topic,
+  reason: getSdkError('USER_DISCONNECTED')
+})
+```
+
+</PlatformTabItem>
+<PlatformTabItem value="csharp">
+
+#### Disconnecting
+
+To disconnect a session, use the `Disconnect` function. You may optional provide a reason for the disconnect.
+
+Disconnecting requires the `topic` of the session to be given. This can be found in the `SessionStruct` object given when a session has been given approval by the Wallet.
+
+```csharp
+var sessionTopic = sessionData.Topic;
+await walletClient.Disconnect(sessionTopic);
+
+// or
+
+await walletClient.Disconnect(sessionTopic, Error.FromErrorType(ErrorType.USER_DISCONNECTED));
+```
+
+</PlatformTabItem>
+
+</PlatformTabs>
+
+## Extra (Platform Specific)
+
+<PlatformTabs groupId="w3w" activeOptions={["web","ios","android","flutter","react-native"]}>
+
+<PlatformTabItem value="web">
+
+#### Emitting Session Events
+
+To emit session events, call the `emitSessionEvent` and pass in the params. If you wish to switch to chain/account that is not approved (missing from `session.namespaces`) you will have to update the session first. In the following example, the wallet will emit `session_event` that will instruct the dapp to switch the active accounts.
+
+```javascript
+await web3wallet.emitSessionEvent({
+  topic,
+  event: {
+    name: 'accountsChanged',
+    data: ['0xab16a96D359eC26a11e2C2b3d8f8B8942d5Bfcdb']
+  },
+  chainId: 'eip155:1'
+})
+```
+
+In the following example, the wallet will emit `session_event` when the wallet switches chains.
+
+```javascript
+await web3wallet.emitSessionEvent({
+  topic,
+  event: {
+    name: 'chainChanged',
+    data: 1
+  },
+  chainId: 'eip155:1'
+})
+```
+
+</PlatformTabItem>
+<PlatformTabItem value="ios">
+
+#### Subscribe for Web3Wallet Publishers
+
+The following publishers are available to subscribe:
+
+```swift
+public var sessionProposalPublisher: AnyPublisher<(proposal: Session.Proposal, context: VerifyContext?), Never>
+public var sessionRequestPublisher: AnyPublisher<(request: Request, context: VerifyContext?), Never>
+public var authRequestPublisher: AnyPublisher<(request: AuthRequest, context: VerifyContext?), Never>
+public var sessionPublisher: AnyPublisher<[Session], Never>
+public var socketConnectionStatusPublisher: AnyPublisher<SocketConnectionStatus, Never>
+public var sessionSettlePublisher: AnyPublisher<Session, Never>
+public var sessionDeletePublisher: AnyPublisher<(String, Reason), Never>
+public var sessionResponsePublisher: AnyPublisher<Response, Never>
+```
+
+#### Register Device Token
+
+To register a wallet to receive WalletConnect push notifications, call `register` method and pass the device token received from the `didRegisterForRemoteNotificationsWithDeviceToken` method in the `AppDelegate`.
+
+```swift
+
+Web3Wallet.instance.register(deviceToken: deviceToken, enableEncrypted: true)
+
+```
+
+</PlatformTabItem>
+<PlatformTabItem value="android">
+
+#### Web3Wallet.WalletDelegate
+
+```kotlin
+val walletDelegate = object : Web3Wallet.WalletDelegate {
+    override fun onSessionProposal(sessionProposal: Wallet.Model.SessionProposal, verifyContext: Wallet.Model.VerifyContext) {
+        // Triggered when wallet receives the session proposal sent by a Dapp
+    }
+
+    fun onSessionAuthenticate(sessionAuthenticate: Wallet.Model.SessionAuthenticate, verifyContext: Wallet.Model.VerifyContext) {
+      // Triggered when wallet receives the session authenticate sent by a Dapp
+    }
+
+    override fun onSessionRequest(sessionRequest: Wallet.Model.SessionRequest, verifyContext: Wallet.Model.VerifyContext) {
+        // Triggered when a Dapp sends SessionRequest to sign a transaction or a message
+    }
+
+    override fun onAuthRequest(authRequest: Wallet.Model.AuthRequest, verifyContext: Wallet.Model.VerifyContext) {
+        // Triggered when Dapp / Requester makes an authorization request
+    }
+
+    override fun onSessionDelete(sessionDelete: Wallet.Model.SessionDelete) {
+        // Triggered when the session is deleted by the peer
+    }
+
+    override fun onSessionSettleResponse(settleSessionResponse: Wallet.Model.SettledSessionResponse) {
+        // Triggered when wallet receives the session settlement response from Dapp
+    }
+
+    override fun onSessionUpdateResponse(sessionUpdateResponse: Wallet.Model.SessionUpdateResponse) {
+        // Triggered when wallet receives the session update response from Dapp
+    }
+
+    override fun onConnectionStateChange(state: Wallet.Model.ConnectionState) {
+        //Triggered whenever the connection state is changed
+    }
+
+    override fun onError(error: Wallet.Model.Error) {
+        // Triggered whenever there is an issue inside the SDK
+    }
+}
+Web3Wallet.setWalletDelegate(walletDelegate)
+```
+
+`Wallet.Event.VerifyContext` provides a domain verification information about SessionProposal, SessionRequest and AuthRequest. It consists of origin of a Dapp from where the request has been sent, validation Enum that says whether origin is VALID, INVALID or UNKNOWN and verify url server.
+
+```kotlin
+data class VerifyContext(
+    val id: Long,
+    val origin: String,
+    val validation: Model.Validation,
+    val verifyUrl: String
+)
+
+enum class Validation {
+    VALID, INVALID, UNKNOWN
+}
+```
+
+The Web3Wallet needs a `Web3Wallet.WalletDelegate` passed to it for it to be able to expose asynchronous updates sent from the Dapp.
+
+#
+
+#### Format message
+
+To receive formatted SIWE message, call formatMessage method with following parameters:
+
+```kotlin
+val payloadParams: Wallet.Params.PayloadParams = //PayloadParams received in the onAuthRequest callback
+val issuer = //MUST be the same as send with the respond methods and follows: https://github.com/w3c-ccg/did-pkh/blob/main/did-pkh-method-draft.md
+val formatMessage = Wallet.Params.FormatMessage(event.payloadParams, issuer)
+
+Web3Wallet.formatMessage(formatMessage)
+```
+
+#### Register Device Token
+
+This method enables wallets to receive push notifications from WalletConnect's Push Server via [Firebase Cloud Messaging](https://firebase.google.com/docs/cloud-messaging). This means you will have to setup your project with Firebase before being able to call registerDeviceToken method.
+
+Make sure that a service extending the FirebaseMessagingService is added to your manifest as per the [Firebase FCM documentation](https://firebase.google.com/docs/cloud-messaging/android/client#manifest) as well as any other setup Firebase requires [Firebase setup documentation](https://firebase.google.com/docs/android/setup).
+
+To register a wallet to receive WalletConnect push notifications, call `Web3Wallet.registerDeviceToken` and pass the Firebase Access Token.
+
+```kotlin
+val firebaseAccessToken: String = //FCM access token received through the Firebase Messaging SDK
+
+Web3Wallet.registerDeviceToken(
+    firebaseAccessToken,
+    onSuccess = {
+        // callback triggered once registered successfully with the Push Server
+    },
+    onError = { error: Wallet.Model.Error ->
+        // callback triggered if there's an exception thrown during the registration process
+    })
+```
+
+</PlatformTabItem>
+<PlatformTabItem value="flutter">
+
+#### Supporting session events
+
+In order to support session events, such as `chainChanged` or `accountChanged`, you would have to to register an event emitter for such events, for every chain you want to emit an event for (similar to request handlers).
+
+```dart
+final supportedChains = ['eip155:1', 'eip155:137'];
+const supportedEvents = ['chainChanged', 'accountChanged'];
+for (var chainId in supportedChains) {
+  for (var event in supportedEvents) {
+    _web3Wallet.registerEventEmitter(
+      chainId: chainId,
+      event: event,
+    );
+  }
+}
+```
+
+And to emit an event, call `emitSessionEvent()` as follows:
+
+```dart
+await web3wallet.emitSessionEvent(
+  topic: session.topic,
+  chainId: 'eip155:1',
+  event: SessionEventParams(
+    name: 'chainChanged',
+    data: 1,
+  ),
+);
+```
+
+For a better understanding please check out the [example wallet](https://github.com/WalletConnect/WalletConnectFlutterV2/blob/master/example/wallet/lib/) and, in particular, the [EVMService](https://github.com/WalletConnect/WalletConnectFlutterV2/blob/master/example/wallet/lib/dependencies/chains/evm_service.dart) inside of it.
+
+</PlatformTabItem>
+
+<PlatformTabItem value="react-native">
+
+#### Emitting Session Events
+
+To emit session events, call the `emitSessionEvent` and pass in the params. If you wish to switch to chain/account that is not approved (missing from `session.namespaces`) you will have to update the session first. In the following example, the wallet will emit `session_event` that will instruct the dapp to switch the active accounts.
+
+```javascript
+await web3wallet.emitSessionEvent({
+  topic,
+  event: {
+    name: 'accountsChanged',
+    data: ['0xab16a96D359eC26a11e2C2b3d8f8B8942d5Bfcdb']
+  },
+  chainId: 'eip155:1'
+})
+```
+
+In the following example, the wallet will emit `session_event` when the wallet switches chains.
+
+```javascript
+await web3wallet.emitSessionEvent({
+  topic,
+  event: {
+    name: 'chainChanged',
+    data: 1
+  },
+  chainId: 'eip155:1'
+})
+```
+
+</PlatformTabItem>
+
+</PlatformTabs>

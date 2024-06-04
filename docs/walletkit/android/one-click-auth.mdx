@@ -1,0 +1,118 @@
+import ThemedImage from '@theme/ThemedImage'
+import useBaseUrl from '@docusaurus/useBaseUrl'
+import Button from '../../components/button'
+
+# One-click Auth
+
+## Introduction
+
+This section outlines an innovative protocol method that facilitates the initiation of a Sign session and the authentication of a wallet through a [Sign-In with Ethereum](https://eips.ethereum.org/EIPS/eip-4361) (SIWE) message, enhanced by [ReCaps](https://eips.ethereum.org/EIPS/eip-5573) (ReCap Capabilities).
+
+This enhancement not only offers immediate authentication for dApps, paving the way for prompt user logins, but also integrates informed consent for authorization. Through this mechanism, dApps can request the delegation of specific capabilities to perform actions on behalf of the wallet user. These capabilities, encapsulated within SIWE messages as ReCap URIs, detail the scope of actions authorized by the user in an explicit and human-readable form.
+
+By incorporating ReCaps, this method extends the utility of SIWE messages, allowing dApps to combine authentication with a nuanced authorization model. This model specifies the actions a dApp is authorized to execute on the user's behalf, enhancing security and user autonomy by providing clear consent for each delegated capability. As a result, dApps can utilize these consent-backed messages to perform predetermined actions, significantly enriching the interaction between dApps, wallets, and users within the Ethereum ecosystem.
+
+<ThemedImage
+  alt="Mobile Linking Connect Flow"
+  sources={{
+    light: useBaseUrl('/img/w3w/authenticatedSessions-light.png'),
+    dark: useBaseUrl('/img/w3w/authenticatedSessions-dark.png')
+  }}
+/>
+
+## Handling Authentication Requests
+
+To handle incoming authentication requests, set up Web3Wallet.WalletDelegate. The onSessionAuthenticate callback will notify you of any authentication requests that need to be processed, allowing you to either approve or reject them based on your application logic.
+
+```kotlin
+override val onSessionAuthenticate: ((Wallet.Model.SessionAuthenticate, Wallet.Model.VerifyContext) -> Unit)
+  get() = { sessionAuthenticate, verifyContext ->
+      // Triggered when wallet receives the session authenticate sent by a Dapp
+      // Process the authentication request here
+      // This involves displaying UI to the user
+}
+```
+
+## Authentication Objects/Payloads
+
+#### Responding to Authentication Requests
+
+To interact with authentication requests, build authentication objects (Wallet.Model.Cacao). It involves the following steps:
+
+- **Creating an Authentication Payload Params** - Generate an authentication payload params that matches your application's supported chains and methods.
+- **Formatting Authentication Messages** - Format the authentication message using the payload and the user's account.
+- **Signing the Authentication Message** - Sign the formatted message to create a verifiable authentication object.
+
+Example:
+
+```kotlin
+ooverride val onSessionAuthenticate: ((Wallet.Model.SessionAuthenticate, Wallet.Model.VerifyContext) -> Unit)
+  get() = { sessionAuthenticate, verifyContext ->
+  val auths = mutableListOf<Wallet.Model.Cacao>()
+
+  val authPayloadParams =
+    Web3Wallet.generateAuthPayloadParams(
+      sessionAuthenticate.payloadParams,
+      supportedChains = listOf("eip155:1", "eip155:137", "eip155:56"), // Note: Only EVM chains are supported
+      supportedMethods = listOf("personal_sign", "eth_signTypedData", "eth_sign")
+  )
+
+  authPayloadParams.chains.forEach { chain ->
+    val issuer = "did:pkh:$chain:$address"
+    val formattedMessage = Web3Wallet.formatAuthMessage(Wallet.Params.FormatAuthMessage(authPayloadParams, issuer))
+
+    val signature = signMessage(message: formattedMessage, privateKey: privateKey) //Note: Assume `signMessage` is a function you've implemented to sign messages.
+    val auth = Web3Wallet.generateAuthObject(authPayloadParams, issuer, signature)
+    auths.add(auth)
+  }
+}
+```
+
+## Approving Authentication Requests
+
+:::info Note
+
+1. The recommended approach for secure authentication across multiple chains involves signing a SIWE (Sign-In with Ethereum) message for each chain and account. However, at a minimum, one SIWE message must be signed to establish a session. It is possible to create a session for multiple chains with just one issued authentication object.
+2. Sometimes a dapp may want to only authenticate the user without creating a session, not every approval will result with a new session.
+
+:::
+
+To approve an authentication request, construct Wallet.Model.Cacao instances for each supported chain, sign the authentication messages, generate AuthObjects and call approveSessionAuthenticate with the request ID and the authentication objects.
+
+```kotlin
+ val approveAuthenticate = Wallet.Params.ApproveSessionAuthenticate(id = sessionAuthenticate.id, auths = auths)
+Web3Wallet.approveSessionAuthenticate(approveProposal,
+  onSuccess = {
+    //Redirect back to the dapp if redirect is set: sessionAuthenticate.participant.metadata?.redirect
+  },
+  onError = { error ->
+      //Handle error
+  }
+)
+```
+
+## Rejecting Authentication Requests
+
+If the authentication request cannot be approved or if the user chooses to reject it, use the rejectSessionAuthenticate method.
+
+```kotlin
+val rejectParams = Wallet.Params.rejectSessionAuthenticate(
+    id = sessionAuthenticate.id,
+    reason = "Reason"
+)
+
+Web3Wallet.rejectSessionAuthenticate(rejectParams,
+  onSuccess = {
+        //Success
+  },
+  onError = { error ->
+      //Handle error
+  }
+)
+```
+
+## Testing One-click Auth
+
+You can use [Web3Modal Labs](https://lab.web3modal.com/library/ethers-siwe/) to test and verify that your wallet supports One-click Auth properly.
+
+<Button name="Test One-click Auth" url="https://lab.web3modal.com/library/ethers-siwe/" />

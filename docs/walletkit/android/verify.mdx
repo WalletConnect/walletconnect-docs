@@ -1,0 +1,53 @@
+import Container from '../../components/Container'
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
+import PlatformTabs from '../../components/PlatformTabs'
+import PlatformTabItem from '../../components/PlatformTabItem'
+
+# Verify API
+
+Verify API is a security-focused feature that allows wallets to notify end-users when they may be connecting to a suspicious or malicious domain, helping to prevent phishing attacks across the industry.
+Once a wallet knows whether an end-user is on uniswap.com or eviluniswap.com, it can help them to detect potentially harmful connections through Verify's combined offering of WalletConnect’s domain registry and [Blowfish's domain scanner](https://docs.blowfish.xyz/reference/scan-domain-1).
+For those looking to enable Verify on the app side, check out our reference guide [here.](../cloud/verify)
+
+When a user initiates a connection with an application, Verify API enables wallets to present their users with four key states that can help them determine whether the domain they’re about to connect to might be malicious.
+
+These are:
+
+![Verify Banner](/img/verify-banner.png)
+
+## Disclaimer
+
+Verify API is not designed to be bulletproof but to make the impersonation attack harder and require a somewhat sophisticated attacker. We are working on a new standard with various partners to close those gaps and make it bulletproof.
+
+## Domain risk detection
+
+The Verify security system will discriminate session proposals & session requests with distinct validations that can be either `VALID`, `INVALID` or `UNKNOWN`.
+
+- Domain match: The domain linked to this request has been verified as this application's domain.
+  - This interface appears when the domain a user is attempting to connect to has been ‘verified’ in our domain registry as the registered domain of the application the user is trying to connect to, and the domain has not returned as suspicious from either of the security tools we work with. The `verifyContext` included in the request will have a validation of `VALID`.
+- Unverified: The domain sending the request cannot be verified.
+  - This interface appears when the domain a user is attempting to connect to has not been verified in our domain registry, but the domain has not returned as suspicious from either of the security tools we work with. The `verifyContext` included in the request will have a validation of `UNKNOWN`.
+- Mismatch: The application's domain doesn't match the sender of this request.
+  - This interface appears when the domain a user is attempting to connect to has been flagged as a different domain to the one this application has verified in our domain registry, but the domain has not returned as suspicious from either of the security tools we work with. The `verifyContext` included in the request will have a validation of `INVALID`
+- Threat: This domain is flagged as malicious and potentially harmful.
+  - This interface appears when the domain a user is attempting to connect to has been flagged as malicious on one or more of the security tools we work with. The `verifyContext` included in the request will contain parameter `isScam` with value `true`.
+
+### Implementation
+
+Wallet.Event.VerifyContext provides a domain verification information about SessionProposal, SessionRequest and AuthRequest.
+
+It consists of origin of an app from where the request has been sent, validation Enum that says whether origin is `VALID`, `INVALID` or `UNKNOWN` and verify url server.
+
+```kotlin
+data class VerifyContext(
+    val id: Long,
+    val origin: String,
+    val validation: Model.Validation,
+    val verifyUrl: String
+)
+
+enum class Validation {
+    VALID, INVALID, UNKNOWN
+}
+```

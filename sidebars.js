@@ -179,6 +179,7 @@ module.exports = {
                 { type: 'doc', label: 'One-Click Auth', id: 'appkit/features/one-click-auth' },
                 { type: 'doc', label: 'Email Wallets', id: 'appkit/features/email' },
                 { type: 'doc', label: 'Onramp', id: 'appkit/features/onramp' },
+                { type: 'doc', label: 'Notifications', id: 'appkit/features/notifications' },
                 { type: 'doc', label: 'Solana', id: 'appkit/features/solana' },
               ]
             },

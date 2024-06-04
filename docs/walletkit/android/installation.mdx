@@ -1,0 +1,23 @@
+# Installation
+
+Add the `jitpack.io` Maven repository to your `root/build.gradle.kts` file. For example:
+
+```gradle
+allprojects {
+ repositories {
+    mavenCentral()
+    maven { url "https://jitpack.io" }
+ }
+}
+```
+
+In `app/build.gradle.kts` add the web3wallet package and its dependencies:
+
+```gradle
+implementation("com.walletconnect:android-core:release_version")
+implementation("com.walletconnect:web3wallet:release_version")
+```
+
+## Next Steps
+
+Now that you've installed Web3Wallet SDK, you're ready to start integrating it. The next section will walk you through the process of setting up your project to use the SDK.

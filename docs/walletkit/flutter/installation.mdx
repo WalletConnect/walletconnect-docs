@@ -1,0 +1,143 @@
+import Container from '../../components/Container'
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
+import PlatformTabs from '../../components/PlatformTabs'
+import PlatformTabItem from '../../components/PlatformTabItem'
+
+# Installation
+
+<PlatformTabs
+	groupId="w3w"
+	activeOptions={["web","ios","android","flutter","react-native","csharp"]}
+>
+<PlatformTabItem value="web">
+
+Install the Web3Wallet SDK using npm or yarn.
+
+```bash npm2yarn
+npm install @walletconnect/web3wallet
+```
+
+</PlatformTabItem>
+<PlatformTabItem value="ios">
+
+WalletConnect SDK is available via [Swift Package Manager](https://swift.org/package-manager/) or [Cocoapods](https://cocoapods.org/).
+
+<Tabs
+queryString="ios-method"
+	values={[
+		{ label: 'SwiftPackageManager', value: 'spm', },
+		{ label: 'Cocoapods', value: 'cocoa', },
+	]}
+>
+<TabItem value="spm">
+
+You can add a WalletConnect SDK to your project with Swift Package Manager. In order to do that:
+
+1. Open XCode
+2. Go to File -> Add Packages
+3. Paste the repo GitHub URL: https://github.com/WalletConnect/WalletConnectSwiftV2
+4. Tap Add Package
+5. Select WalletConnect check mark
+
+</TabItem>
+<TabItem value="cocoa">
+
+1. Update Cocoapods spec repos. Type in terminal `pod repo update`
+2. Initialize Podfile if needed with `pod init`
+3. Add pod to your Podfile:
+
+```ruby
+pod 'WalletConnectSwiftV2'
+```
+
+4. Install pods with `pod install`
+
+If you encounter any problems during package installation, you can specify the exact path to the repository
+
+```ruby
+pod 'WalletConnectSwiftV2', :git => 'https://github.com/WalletConnect/WalletConnectSwiftV2.git', :tag => '1.0.5'
+```
+
+</TabItem>
+</Tabs>
+
+</PlatformTabItem>
+<PlatformTabItem value="android">
+
+Add the `jitpack.io` Maven repository to your `root/build.gradle.kts` file. For example:
+
+```gradle
+allprojects {
+ repositories {
+    mavenCentral()
+    maven { url "https://jitpack.io" }
+ }
+}
+```
+
+In `app/build.gradle.kts` add the web3wallet package and its dependencies:
+
+```gradle
+implementation("com.walletconnect:android-core:release_version")
+implementation("com.walletconnect:web3wallet:release_version")
+```
+
+</PlatformTabItem>
+<PlatformTabItem value="flutter">
+
+```dart
+flutter pub add walletconnect_flutter_v2
+```
+
+:::info
+
+Depending on your platform, you will have to add different permissions to get the package to work.
+
+**MacOS**
+
+Add the following to your `DebugProfile.entitlements` and `Release.entitlements` files so that it can connect to the WebSocket server.
+
+```xml
+<key>com.apple.security.network.client</key>
+<true/>
+```
+
+:::
+
+</PlatformTabItem>
+<PlatformTabItem value="react-native">
+
+Install the Web3Wallet SDK package.
+
+```bash npm2yarn
+npm install @walletconnect/web3wallet @walletconnect/react-native-compat
+```
+
+Additionally add these extra packages to help with async storage, polyfills and the instance of ethers.
+
+```bash npm2yarn
+npm install @react-native-async-storage/async-storage @react-native-community/netinfo react-native-get-random-values fast-text-encoding @ethersproject/shims ethers@5.7.2 @json-rpc-tools/utils
+```
+
+For those using Typescript, we recommend adding these dev dependencies:
+
+```bash npm2yarn
+npm install --save-dev @walletconnect/jsonrpc-types
+```
+
+</PlatformTabItem>
+<PlatformTabItem value="csharp">
+
+Install the WalletConnect client package via Nuget.
+
+```bash
+dotnet add package WalletConnect.Web3Wallet
+```
+
+</PlatformTabItem>
+</PlatformTabs>
+
+## Next Steps
+
+Now that you've installed Web3Wallet SDK, you're ready to start integrating it. The next section will walk you through the process of setting up your project to use the SDK.

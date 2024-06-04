@@ -1,0 +1,271 @@
+import PlatformTabs from '../../../components/PlatformTabs'
+import PlatformTabItem from '../../../components/PlatformTabItem'
+
+# Push Notifications
+
+The WalletConnect Web3Wallet SDK provides the functionality for wallets to receive push notifications through Firebase Cloud Messaging (FCM) and Apple Push Notification Service (APNs) via the Push Server. This feature ensures that wallets are promptly notified of incoming signature requests. Each push notification contains the encrypted details of the signature request. Upon receiving the notification, it can be decrypted and presented to the developer, allowing for customization of the message according to their requirements.
+
+## Server setup
+
+For the push notifications to be forwarded to FCM or APNs, the [Push Server](../advanced/push-server) will need to be configured with your FCM or APNs server API credentials.
+
+## App setup
+
+### Register the device token
+
+To enable a device for push notifications, it's essential to register the device token using `Web3Wallet.registerDeviceToken`. This token can be obtained from either FCM or APNS, depending on the platform used.
+
+<PlatformTabs activeOptions={["ios", "android", "react-native"]}>
+<PlatformTabItem value="ios">
+
+In your AppDelegate, you need to register your device token for push notifications. To enable encrypted push notifications, set the `enableEncrypted` flag to `true`.
+
+```Swift
+func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+    Task(priority: .high) {
+        try await Web3Wallet.instance.register(deviceToken: deviceToken, enableEncrypted: true)
+    }
+}
+```
+
+</PlatformTabItem>
+
+<PlatformTabItem value="android">
+This method enables wallets to receive push notifications from WalletConnect's Push Server via Firebase Cloud Messaging. This means you will have to setup your project with Firebase before being able to call `registerDeviceToken()` method.
+
+To register a wallet to receive WalletConnect push notifications, call `Web3Wallet.registerDeviceToken` and pass the Firebase Access Token.
+
+```kotlin
+val firebaseAccessToken: String = //FCM access token received through the Firebase Messaging SDK
+val enableEncrypted: Boolean = true //Flag that enables receiveing the detailed notifications
+
+Web3Wallet.registerDeviceToken(
+    firebaseAccessToken = firebaseAccessToken,
+    enableEncrypted = enableEncrypted,
+    onSuccess = {
+        // callback triggered once registered successfully with the Push Server
+    },
+    onError = { error: Wallet.Model.Error ->
+        // callback triggered if there's an exception thrown during the registration process
+    })
+```
+
+</PlatformTabItem>
+
+<PlatformTabItem value="react-native">
+To receive push notifications from WalletConnect's Push Server via Firebase Cloud Messaging, you will need to setup Firebase in your project. 
+You can follow their docummentation - [Firebase documentation](https://rnfirebase.io/messaging/usage#installation). 
+Once you have Firebase configured, you can obtain the device token by calling `messaging().getToken()`. This unique token is used to identify each device.
+
+```ts
+import messaging from '@react-native-firebase/messaging'
+
+const token = await messaging().getToken()
+```
+
+The device token will be used to register for WalletConnect push notifications by calling `Web3Wallet.registerDeviceToken` and passing the token as an argument.
+The `registerDeviceToken` should be called every time the client is initialized.
+
+```ts
+web3wallet.registerDeviceToken({
+  token: await messaging().getToken(), // device token
+  clientId: await web3wallet.core.crypto.getClientId(), //your instance clientId
+  notificationType: 'fcm', // notification type
+  enableEncrypted: true // flag that enabled detailed notifications
+})
+```
+
+With that the base setup is complete and you can start receiving push notifications from WalletConnect's Push Server for your sessions.
+
+Note, that from time to time, the device token is refreshed, so you must make sure to register it again.
+
+```ts
+impoprt messaging from '@react-native-firebase/messaging';
+
+messaging().onTokenRefresh(async token => {
+    await web3wallet.registerDeviceToken({
+        token: await messaging().getToken(), // device token
+        clientId: await web3wallet.core.crypto.getClientId(), //your instance clientId
+        notificationType: 'fcm', // notification type
+        enableEncrypted: true // flag that enabled detailed notifications
+    });
+});
+```
+
+</PlatformTabItem>
+</PlatformTabs>
+
+### Receiving push notifications
+
+After the device token is registered, the next step involves setting up the notification service specific to the platform being used. This service will decrypt the incoming requests and forward them to the developer for further processing and integration.
+
+<PlatformTabs activeOptions={["ios", "android", "react-native"]}>
+
+<PlatformTabItem value="ios">
+
+When using encrypted push notifications via APNs, the payload will look like this:
+
+```json
+{
+  "aps": {
+    "content-available": 1,
+    "mutable-content": 1
+  },
+  "message": "String", // Encrypted payload
+  "topic": "String", // Subscription topic
+  "tag": "String" // Tag of the associated relay message
+}
+```
+
+To decrypt a push notification, follow these steps:
+
+1. Instantiate [UNNotificationServiceExtension](https://developer.apple.com/documentation/usernotifications/unnotificationserviceextension)
+
+2. Modify the content of newly delivered notifications.
+   Learn more about [modifying content in newly delivered notifications](https://developer.apple.com/documentation/usernotifications/modifying_content_in_newly_delivered_notifications).
+
+3. Create a Shared [Keychain Group](https://developer.apple.com/documentation/security/keychain_services/keychain_items/sharing_access_to_keychain_items_among_a_collection_of_apps)
+
+Ensure you have a keychain group that is shared between your wallet application and the notification service. This is set in the app during the Networking Client configuration as shown below:
+
+```Swift
+Networking.configure(
+    groupIdentifier: "group.com.walletconnect.sdk",
+    projectId: InputConfig.projectId,
+    socketFactory: DefaultSocketFactory()
+)
+```
+
+4. Instantiate Web3WalletDecryptionService
+
+Use the same group name inside your notification service extension.
+
+```Swift
+override func didReceive(_ request: UNNotificationRequest, withContentHandler contentHandler: @escaping (UNNotificationContent) -> Void) {
+        self.contentHandler = contentHandler
+        self.bestAttemptContent = request.content
+
+        if let content = bestAttemptContent,
+           let topic = content.userInfo["topic"] as? String,
+           let ciphertext = content.userInfo["message"] as? String,
+           let tag = content.userInfo["tag"] as? UInt {
+
+            if Web3WalletDecryptionService.canHandle(tag: tag) {
+                let mutableContent = handleWeb3WalletNotification(content: content, topic: topic, tag: tag, ciphertext: ciphertext)
+                contentHandler(mutableContent)
+            } else if NotifyDecryptionService.canHandle(tag: tag) {
+                let mutableContent = handleNotifyNotification(content: content, topic: topic, ciphertext: ciphertext)
+                contentHandler(mutableContent)
+            } else {
+                let mutableContent = content.mutableCopy() as! UNMutableNotificationContent
+                mutableContent.title = "Error: unknown message tag"
+            }
+        }
+    }
+```
+
+`handleWeb3WalletNotification` and `handleNotifyNotification` methods can be found in our [Sample App](https://github.com/WalletConnect/WalletConnectSwiftV2/blob/main/Example/PNDecryptionService/NotificationService.swift)
+
+</PlatformTabItem>
+
+<PlatformTabItem value="android">
+The `PushMessagingService` is a wrapper around the `FirebaseMessagingService`. The `PushMessagingService` class needs to be implemented for the Web3Wallet SDK to be able to decrypt and notify wallets of a push notification sent from the Dapp in the background. This service also needs to be registered in the `AndroidManifest.xml` file similar to the example in the FCM documentation.
+
+```kotlin
+class SampleFirebaseService: PushMessagingService() {
+
+    override fun newToken(token: String) {
+        // Triggered when Firebase Cloud Messaging creates a new token
+    }
+
+    override fun registeringFailed(token: String, throwable: Throwable) {
+        // Triggered when Firebase Cloud Messaging if there is an error with registering with the Push Server with a new token
+    }
+
+    override fun onMessage(message: Core.Model.Message, originalMessage: RemoteMessage) {
+        // Triggered when a message is sent from the Push Server through Firebase Cloud Messaging and the message contains `Core.Model.Message`. The original FCM RemoteMessage is also returned
+    }
+
+    override fun onDefaultBehavior(message: RemoteMessage) {
+        // Triggered when a message is sent from the Push Server through Firebase Cloud Messaging and the message does not contain `Core.Model.Message` in the payload. The original FCM RemoteMessage returned instead
+    }
+
+    override fun onError(throwable: Throwable, defaultMessage: RemoteMessage) {
+        // Triggered when there is an error that occurs when a message is received from the Push Server
+    }
+}
+```
+
+```xml
+<application...>
+    <service android:name=".SampleFirebaseService">
+        <intent-filter>
+            <action android:name="com.google.firebase.MESSAGING_EVENT" />
+        </intent-filter>
+    </service>
+</application>
+```
+
+</PlatformTabItem>
+
+<PlatformTabItem value="react-native">
+To receive the actual push notifications, you will need to subscribe to firebase messaging events.
+
+```ts
+import messaging from '@react-native-firebase/messaging';
+
+// emitted when the app is open and a notification is received
+messaging().onMessage(async notification => {
+    ...
+});
+
+// emitted when the app is in the background or closed and a notification is received
+messaging().setBackgroundMessageHandler(async notification => {
+    ...
+});
+
+```
+
+Now that we have the notifications listeners setup, we can start processing the incoming notifications.
+
+```ts
+import { Web3Wallet } from '@walletconnect/web3wallet';
+import messaging from '@react-native-firebase/messaging';
+
+messaging().onMessage(async notification => {
+    // get the topic, encrypted message & tag from the notification payload
+    const { topic, message, tag } = notification.data;
+
+    // decrypt the message
+    // note this is static method and can be called without initializing the Web3Wallet
+    const decryptedMessage = await Web3wallet.notifications.decryptMessage({
+    topic,
+    encryptedMessage: message,
+  });
+
+    /*
+    * `decryptedMessage` is JsonRpcRequest object, with the full payload of the incoming request such as method, params, id, etc.
+    * You can use it to emit local push notification with the request to the user and ask for their approval.
+    **/
+
+   /*
+   * the metadata contains name, description, icon and url of the dapp that initiated the request
+   * note that only notifications with tag `1108`(session requests) will have metadata,
+   **/
+   let metadata
+
+   if(tag == 1108) {
+        metadata = await Web3Wallet.notifications.getMetadata({ topic });
+   } else {
+        // session proposals contain metadata in the request itself
+        metadata = decryptedMessage.params.proposer.metadata
+   }
+
+    // with this information you can show a local push notification to the user
+   ...
+});
+```
+
+</PlatformTabItem>
+
+</PlatformTabs>
