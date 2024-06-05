@@ -1,2 +1,28 @@
-The Web3Modal SDK now supports Smart Accounts, offering users enhanced security and convenience with features like multi-signature authorization and automated transaction workflows.
-This update ensures a seamless and efficient experience for managing digital assets within decentralized applications.
+## Overview
+
+:::note
+💡 Ensure you update Web3Modal to the latest version for optimal compatibility.
+:::
+
+Smart Accounts (SAs) are enabled by default within AppKit. These accounts enhance functionality by emitting 1271 and 6492 signatures, which should be taken into account for signature verification processes, such as Sign-In with Ethereum (SIWE).
+
+### Deployment
+
+Smart Accounts are deployed alongside the first transaction. Until deployment, a precalculated address, known as the counterfactual address, is displayed. Despite not being deployed, the account can still sign using 6492 signatures.
+
+### Supported Networks
+
+Smart Accounts are available on the following networks:
+
+- Base Sepolia
+- BSC (Binance Smart Chain)
+- Fraximal
+- Linea
+- Mode
+- Optimism
+- Polygon
+- Polygon Mumbai
+- Sepolia
+
+### User Eligibility
+Smart Accounts are exclusively available for users utilizing email or social logins (any Magic login)

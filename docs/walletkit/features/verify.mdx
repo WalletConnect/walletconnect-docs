@@ -1,1 +1,65 @@
-# Verify
+
+import Wrapper from '../../components/Home/Wrapper'
+
+import androidLogo from '../../../static/assets/home/androidLogo.png'
+import iosLogo from '../../../static/assets/home/iosLogo.png'
+import rnLogo from '../../../static/assets/home/rnLogo.png'
+import flutterLogo from '../../../static/assets/home/flutterLogo.png'
+import csharpLogo from '../../../static/assets/home/csharpLogo.png'
+import javascriptLogo from '../../../static/assets/home/javascriptLogo.png'
+
+# Verify API
+
+Verify API is a security-focused feature that allows wallets to notify end-users when they may be connecting to a suspicious or malicious domain, helping to prevent phishing attacks across the industry.
+Once a wallet knows whether an end-user is on uniswap.com or eviluniswap.com, it can help them to detect potentially harmful connections through Verify's combined offering of WalletConnect’s domain registry and [Blowfish's domain scanner](https://docs.blowfish.xyz/reference/scan-domain-1).
+
+## Get Started
+
+<Wrapper
+  type="large"
+  fit={false}
+  items={[
+    {
+      name: 'Android',
+      type: 'android',
+      description: 'Get started with WalletKit in Android.',
+      icon: androidLogo,
+      href: '../android/verify'
+    },
+    {
+      name: 'iOS',
+      type: 'ios',
+      description: 'Get started with WalletKit in iOS.',
+      icon: iosLogo,
+      href: '../ios/verify'
+    },
+    {
+      name: 'Flutter',
+      type: 'flutter',
+      description: 'Get started with WalletKit in Flutter.',
+      icon: flutterLogo,
+      href: '../flutter/verify'
+    },
+    {
+      name: 'React Native',
+      type: 'react-native',
+      description: 'Get started with WalletKit in React Native.',
+      icon: rnLogo,
+      href: '../react-native/verify'
+    },
+    {
+      name: 'Web',
+      type: 'javascript',
+      description: 'Get started with WalletKit in Web.',
+      icon: javascriptLogo,
+      href: '../web/verify'
+    },
+    {
+      name: 'C#',
+      type: 'c-sharp',
+      description: 'Get started with WalletKit in C#.',
+      icon: csharpLogo,
+      href: '../c-sharp/verify'
+    },
+  ]}
+/>

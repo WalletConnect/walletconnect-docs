@@ -15,22 +15,42 @@ import javascriptLogo from '../../../static/assets/home/javascriptLogo.png'
 
 The Swap feature allows users to exchange one cryptocurrency for another directly within the WalletConnect app. This feature is designed to provide a seamless and efficient swapping experience, leveraging our collaboration with 1Inch as the swap provider.
 
-## Availability
+<Button name="Try Demo" url="https://lab.web3modal.com/" />
 
-- **Requirement**: The Swap feature is available only to users who log in via email or social login. This is consistent with other wallet features such as sending tokens.
-- **Transaction Fee**: WalletConnect charges a 0.85% transaction fee on all swaps.
-- **Supported Tokens**: The tokens available for swapping are limited to those supported by 1Inch. Note that the availability of tokens may vary depending on the network.
-- **Network Availability**: The Swap feature is not available on Sepolia or other testnets at this time.
+## Get Started
 
-## How to Use
-
-:::caution
-The Swap feature is currently in Beta. Users may experience changes or improvements in the functionality as we continue to develop and refine this feature.
-:::
-
-1. **Connect**: Ensure you are logged in via email or social login.
-2. **Access Swap**: Navigate to the Swap feature within the account view.
-3. **Select Tokens**: Choose the tokens you wish to swap from the available options.
-4. **Type amount**: Enter your desired swap values. You can use the Max button to swap your all tokens or enter any specific number.
-5. **See swap details**: Once you type amount value. You'll see the available quote details as received amount, network fee, maximum slippage, or price impact. 
-6. **Confirm Swap**: Review the swap details, including the transaction fee, and confirm the swap.
+<Wrapper
+  type="large"
+  fit={false}
+  items={[
+    {
+      name: 'React',
+      type: 'react',
+      description: 'Get started with AppKit in React.',
+      icon: reactLogo,
+      href: '../react/transactions/swaps'
+    },
+    {
+      name: 'Next.js',
+      type: 'next',
+      description: 'Get started with AppKit in Next.js.',
+      icon: nextjsLogo,
+      href: '../next/transactions/swaps',
+      isWhite: true
+    },
+    {
+      name: 'Vue',
+      type: 'vue',
+      description: 'Get started with AppKit in Vue.',
+      icon: vueLogo,
+      href: '../vue/transactions/swaps'
+    },
+    {
+      name: 'JavaScript',
+      type: 'javascript',
+      description: 'Get started with AppKit in JavaScript.',
+      icon: javascriptLogo,
+      href: '../javascript/transactions/swaps'
+    }
+  ]}
+/>

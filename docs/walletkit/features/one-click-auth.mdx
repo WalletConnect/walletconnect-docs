@@ -1,1 +1,52 @@
+import Wrapper from '../../components/Home/Wrapper'
+
+import androidLogo from '../../../static/assets/home/androidLogo.png'
+import iosLogo from '../../../static/assets/home/iosLogo.png'
+import rnLogo from '../../../static/assets/home/rnLogo.png'
+import flutterLogo from '../../../static/assets/home/flutterLogo.png'
+import csharpLogo from '../../../static/assets/home/csharpLogo.png'
+import javascriptLogo from '../../../static/assets/home/javascriptLogo.png'
+
 # One-Click Auth
+
+**One-Click Auth** represents a key advancement within WalletConnect v2, streamlining the user authentication process by enabling them to seamlessly connect with a wallet and sign a SIWE message with just one click.
+
+Connecting a wallet, proving control of an address with an off-chain signature, authorizing specific actions. These are the kinds of authorizations that can be encoded as ["ReCaps"](https://eips.ethereum.org/EIPS/eip-5573). ReCaps are permissions for a specific website or dapp that can be compactly encoded as a long string in the message you sign and translated by any wallet into a straight-forward one-sentence summary.
+WalletConnect uses permissions expressed as ReCaps to enable a One-Click Authentication.
+
+## Get Started
+
+<Wrapper
+  type="large"
+  fit={false}
+  items={[
+    {
+      name: 'Android',
+      type: 'android',
+      description: 'Get started with WalletKit in Android.',
+      icon: androidLogo,
+      href: '../android/one-click-auth'
+    },
+    {
+      name: 'iOS',
+      type: 'ios',
+      description: 'Get started with WalletKit in iOS.',
+      icon: iosLogo,
+      href: '../ios/one-click-auth'
+    },
+    {
+      name: 'React Native',
+      type: 'react-native',
+      description: 'Get started with WalletKit in React Native.',
+      icon: rnLogo,
+      href: '../react-native/one-click-auth'
+    },
+    {
+      name: 'Web',
+      type: 'javascript',
+      description: 'Get started with WalletKit in Web.',
+      icon: javascriptLogo,
+      href: '../web/one-click-auth'
+    },
+  ]}
+/>
