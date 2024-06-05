@@ -9,9 +9,6 @@ import PlatformTabItem from '../../../components/PlatformTabItem'
 import WagmiImplementation from '../wagmi/about/implementation.mdx'
 import WagmiModal from '../wagmi/about/triggermodal.mdx'
 
-import Wagmi1Implementation from '../wagmi1/about/implementation.mdx'
-import Wagmi1Modal from '../wagmi1/about/triggermodal.mdx'
-
 import Ethers5Implementation from '../ethers5/implementation.mdx'
 import Ethers5Modal from '../ethers5/triggermodal.mdx'
 
@@ -33,22 +30,11 @@ These steps are specific to [Next.js](https://nextjs.org/) app router. For other
 
 ## Installation
 
-<PlatformTabs groupId="eth-lib" activeOptions={["wagmi", "wagmi1", "ethers5","ethers","solana"]}>
+<PlatformTabs groupId="eth-lib" activeOptions={["wagmi", "ethers5","ethers","solana"]}>
 <PlatformTabItem value="wagmi">
 
 ```bash npm2yarn
 npm install @web3modal/wagmi wagmi viem @tanstack/react-query
-```
-
-</PlatformTabItem>
-<PlatformTabItem value="wagmi1">
-
-:::caution
-Wagmi v1 has been deprecated. Please upgrade to Wagmi v2. Read the [migration guide.](https://wagmi.sh/react/guides/migrate-from-v1-to-v2)
-:::
-
-```bash npm2yarn
-npm install @web3modal/wagmi@3.5.7 wagmi@1.4.13 viem@1.21.4
 ```
 
 </PlatformTabItem>
@@ -80,19 +66,18 @@ npm install @web3modal/solana
 </PlatformTabItem>
 </PlatformTabs>
 
+## Cloud Configuration
+
+Create a new project on WalletConnect Cloud at https://cloud.walletconnect.com and obtain a new project ID.
+
 <CloudBanner />
 
 ## Implementation
 
-<PlatformTabs groupId="eth-lib" activeOptions={["wagmi", "wagmi1", "ethers5","ethers","solana"]}>
+<PlatformTabs groupId="eth-lib" activeOptions={["wagmi", "ethers5","ethers","solana"]}>
 <PlatformTabItem value="wagmi">
 
 <WagmiImplementation />
-
-</PlatformTabItem>
-<PlatformTabItem value="wagmi1">
-
-<Wagmi1Implementation />
 
 </PlatformTabItem>
 <PlatformTabItem value="ethers5">
@@ -114,15 +99,10 @@ npm install @web3modal/solana
 
 ## Trigger the modal
 
-<PlatformTabs groupId="eth-lib" activeOptions={["wagmi", "wagmi1", "ethers5","ethers","solana"]}>
+<PlatformTabs groupId="eth-lib" activeOptions={["wagmi", "ethers5","ethers","solana"]}>
 <PlatformTabItem value="wagmi">
 
 <WagmiModal />
-
-</PlatformTabItem>
-<PlatformTabItem value="wagmi1">
-
-<Wagmi1Modal />
 
 </PlatformTabItem>
 <PlatformTabItem value="ethers5">

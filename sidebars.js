@@ -227,6 +227,7 @@ module.exports = {
             'appkit/react/core/hooks',
             'appkit/react/core/options',
             'appkit/react/core/components',
+            'appkit/react/core/custom-connectors',
             'appkit/react/core/siwe',
             'appkit/react/core/theming',
             'appkit/react/core/resources'
@@ -329,6 +330,7 @@ module.exports = {
             'appkit/next/core/hooks',
             'appkit/next/core/options',
             'appkit/next/core/components',
+            'appkit/next/core/custom-connectors',
             'appkit/next/core/siwe',
             'appkit/next/core/theming',
             'appkit/next/core/resources'
@@ -431,6 +433,7 @@ module.exports = {
             'appkit/vue/core/composables',
             'appkit/vue/core/options',
             'appkit/vue/core/components',
+            'appkit/vue/core/custom-connectors',
             'appkit/vue/core/siwe',
             'appkit/vue/core/theming',
             'appkit/vue/core/resources'
@@ -532,6 +535,7 @@ module.exports = {
             'appkit/javascript/core/actions',
             'appkit/javascript/core/options',
             'appkit/javascript/core/components',
+            'appkit/javascript/core/custom-connectors',
             'appkit/javascript/core/siwe',
             'appkit/javascript/core/theming',
             'appkit/javascript/core/resources'

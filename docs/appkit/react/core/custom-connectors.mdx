@@ -1,0 +1,61 @@
+import PlatformTabs from '../../../components/PlatformTabs'
+import PlatformTabItem from '../../../components/PlatformTabItem'
+
+# Custom connectors
+
+Add custom connectors for Ethers or Wagmi
+
+<PlatformTabs groupId="eth-lib" activeOptions={["wagmi", "ethers"]}>
+<PlatformTabItem value="wagmi">
+
+If you already have Wagmi integrated into your application or would like more control over Wagmi's configuration, you can integrate Web3Modal on top of it.
+
+```tsx
+import { createWeb3Modal } from '@web3modal/wagmi/react'
+
+import { http, createConfig, WagmiProvider } from 'wagmi'
+import { sepolia } from 'wagmi/chains'
+import { walletConnect } from 'wagmi/connectors'
+
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+
+const queryClient = new QueryClient()
+
+const projectId = 'YOUR_PROJECT_ID'
+
+const metadata = {
+  //...
+}
+
+const config = createConfig({
+  chains: [sepolia],
+  transports: {
+    [sepolia.id]: http()
+  },
+  connectors: [
+    walletConnect({ projectId, metadata, showQrModal: false }), // showQrModal must be false
+    // Other connectors...
+  ]
+})
+
+createWeb3Modal({
+  wagmiConfig: config,
+  projectId,
+})
+
+export function ContextProvider({ children }) {
+  return (
+    <WagmiProvider config={config}>
+      <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
+    </WagmiProvider>
+  )
+}
+```
+
+</PlatformTabItem>
+<PlatformTabItem value="ethers">
+
+Coming soon...
+
+</PlatformTabItem>
+</PlatformTabs>
