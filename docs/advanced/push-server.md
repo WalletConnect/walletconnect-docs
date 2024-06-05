@@ -18,7 +18,7 @@ It is recommended that you use WalletConnect Cloud for simplicity and ease of in
 
 ![create-push-url](/assets/create-push-url.png)
 
-3. From the same settings tab, you will see the FCM and the APNS settings becomes available to setup. Add your [FCM](#firebase-cloud-messaging-fcm) and/or [APNs](#apple-push-notifications-apns) details.
+3. From the same settings tab, you will see the FCM and the APNS settings becomes available to setup. Add your [FCM](#Firebase Cloud Messaging API (FCM v1)) and/or [APNs](#apple-push-notifications-apns) details.
 
 ![fmc-and-apns-details-form](/assets/apns-fmc-details.png)
 
