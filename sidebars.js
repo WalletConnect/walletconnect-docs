@@ -751,7 +751,6 @@ module.exports = {
             'appkit/flutter/cloud/analytics'
           ]
         },
-        'appkit/flutter/upgrade'
       ]
     },
     dropdown_placeholder
