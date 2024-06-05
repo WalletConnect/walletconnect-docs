@@ -25,6 +25,16 @@ final _w3mService = W3MService(
 );
 ```
 
+:::note
+
+Remember to whitelist your dapp's iOS's bundleId and Android's packageName in your cloud configuration.
+
+1. LogIn into https://cloud.walletconnect.com
+2. Open Dashboard and scroll down to **Mobile Application IDs** menu
+3. Add your iOS Bundle ID and your Android Package Name
+
+:::
+
 ## User Flow
 
 1. Users will be able to connect to you application by simply using an email address. Web3Modal will send to them a One Time Password (OTP) to copy and paste in the modal, which will help to verify the user's authenticity. This will create a non-custodial wallet for your user which will be available in any application that integrates Web3Modal and Email Wallets.
