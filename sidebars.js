@@ -194,7 +194,16 @@ module.exports = {
           collapsed: true,
           collapsible: true,
           items: [
-            'walletkit/overview'
+            'walletkit/overview',
+            {
+              type: 'category',
+              label: 'Features',
+              items: [
+                { type: 'doc', label: 'One-Click Auth', id: 'walletkit/features/one-click-auth' },
+                { type: 'doc', label: 'Notifications', id: 'walletkit/features/notifications' },
+                { type: 'doc', label: 'Verify', id: 'walletkit/features/verify' }
+              ]
+            },
           ]
         },
       ]
