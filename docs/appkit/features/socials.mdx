@@ -1,0 +1,55 @@
+import Button from '../../components/button'
+import Container from '../../components/Container.js'
+import Wrapper from '../../components/Home/Wrapper'
+
+import reactLogo from '../../../static/assets/home/reactLogo.png'
+import nextjsLogo from '../../../static/assets/home/nextjsLogo.png'
+import vueLogo from '../../../static/assets/home/vueLogo.png'
+import javascriptLogo from '../../../static/assets/home/javascriptLogo.png'
+
+# Socials
+
+AppKit SDK enables passwordless Web3 onboarding and authentication, allowing your users interact with your application by creating a non-custodial wallet with just their email or social accounts.
+
+We support the following providers: 
+- **Email**, **Google**, **X**, **GitHub**, **Discord** and **Apple**.
+
+<Button name="Try Demo" url="https://lab.web3modal.com/library/wagmi/" />
+
+## Get Started
+
+<Wrapper
+  type="large"
+  fit={false}
+  items={[
+    {
+      name: 'React',
+      type: 'react',
+      description: 'Get started with AppKit in React.',
+      icon: reactLogo,
+      href: '../react/accounts/universal-wallets/socials'
+    },
+    {
+      name: 'Next.js',
+      type: 'next',
+      description: 'Get started with AppKit in Next.js.',
+      icon: nextjsLogo,
+      href: '../next/accounts/universal-wallets/socials',
+      isWhite: true
+    },
+    {
+      name: 'Vue',
+      type: 'vue',
+      description: 'Get started with AppKit in Vue.',
+      icon: vueLogo,
+      href: '../vue/accounts/universal-wallets/socials'
+    },
+    {
+      name: 'JavaScript',
+      type: 'javascript',
+      description: 'Get started with AppKit in JavaScript.',
+      icon: javascriptLogo,
+      href: '../javascript/accounts/universal-wallets/socials'
+    }
+  ]}
+/>
