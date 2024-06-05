@@ -1,1 +1,63 @@
-# SIWE & One-Click Auth
+---
+title: One-Click Auth / SIWE
+---
+
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
+import SiweCode from '../../shared/siwe/code.mdx'
+import SiweParams from '../../shared/siwe/parameters.mdx'
+import YoutubeEmbed from '../../../components/YoutubeEmbed'
+
+# Sign In With Ethereum
+
+Web3Modal SDK provides a simple solution for integrating with "Sign In With Ethereum" (SIWE), a new form of authentication that enables users to control their digital identity with their Ethereum account.
+SIWE is a standard also known as [EIP-4361](https://docs.login.xyz/general-information/siwe-overview/eip-4361).
+
+## One-Click Auth
+
+**One-Click Auth** represents a key advancement within WalletConnect v2, streamlining the user authentication process in Web3Modal by enabling them to seamlessly connect with a wallet and sign a SIWE message with just one click.
+
+Connecting a wallet, proving control of an address with an off-chain signature, authorizing specific actions. These are the kinds of authorizations that can be encoded as ["ReCaps"](https://eips.ethereum.org/EIPS/eip-5573). ReCaps are permissions for a specific website or dapp that can be compactly encoded as a long string in the message you sign and translated by any wallet into a straight-forward one-sentence summary.
+WalletConnect uses permissions expressed as ReCaps to enable a One-Click Authentication.
+
+## Installation
+
+<Tabs>
+<TabItem value="one-click-auth" label="One-Click Auth">
+
+```bash npm2yarn
+npm i @web3modal/siwe
+```
+
+</TabItem>
+<TabItem value="legacy" label="Legacy">
+
+:::caution
+For a better UX we recommend using One-Click Auth.
+:::
+
+Install the Web3Modal SIWE package, additionally we also recommend installing [siwe](https://docs.login.xyz/) which will abstract a lot of the required logic.
+
+```bash npm2yarn
+npm i @web3modal/siwe siwe
+```
+
+</TabItem>
+</Tabs>
+
+## Configure your SIWE Client
+
+<SiweCode />
+
+## Initialize Web3Modal with your `siweConfig`
+
+```ts
+createWeb3Modal({
+  //..
+  siweConfig
+})
+```
+
+## SIWE Config Parameters
+
+<SiweParams />

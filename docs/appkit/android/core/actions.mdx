@@ -1,1 +1,118 @@
 # Actions
+
+## Chains
+
+### Get selected chain
+
+You can get selected chain by calling the `getSelectedChain()` on the `Web3Modal` object.
+
+```kotlin
+Web3Modal.getSelectedChain()
+```
+
+## Web3Modal.ModalDelegate
+
+```kotlin
+val web3ModalModalDelegate = object : Web3Modal.ModalDelegate {
+    override fun onSessionApproved(approvedSession: Modal.Model.ApprovedSession) {
+        // Triggered when receives the session approval from wallet
+    }
+
+    override fun onSessionRejected(rejectedSession: Modal.Model.RejectedSession) {
+        // Triggered when receives the session rejection from wallet
+    }
+
+    override fun onSessionUpdate(updatedSession: Modal.Model.UpdatedSession) {
+        // Triggered when receives the session update from wallet
+    }
+
+    override fun onSessionExtend(session: Modal.Model.Session) {
+        // Triggered when receives the session extend from wallet
+    }
+
+    override fun onSessionEvent(sessionEvent: Modal.Model.SessionEvent) {
+        // Triggered when the peer emits events that match the list of events agreed upon session settlement
+    }
+
+    override fun onSessionDelete(deletedSession: Modal.Model.DeletedSession) {
+        // Triggered when receives the session delete from wallet
+    }
+
+    override fun onSessionRequestResponse(response: Modal.Model.SessionRequestResponse) {
+        // Triggered when receives the session request response from wallet
+    }
+
+    override fun onProposalExpired(proposal: Modal.Model.ExpiredProposal) {
+        // Triggered when a proposal becomes expired
+    }
+
+    override fun onRequestExpired(request: Modal.Model.ExpiredRequest) {
+        // Triggered when a request becomes expired
+    }
+
+    override fun onConnectionStateChange(state: Modal.Model.ConnectionState) {
+        //Triggered whenever the connection state is changed
+    }
+
+    override fun onError(error: Modal.Model.Error) {
+        // Triggered whenever there is an issue inside the SDK
+    }
+}
+```
+
+You have set delegate on Web3Modal to start getting updates from Wallet.
+
+```kotlin
+    Web3Modal.setDelegate(web3ModalModalDelegate)
+```
+
+## Actions
+
+### Disconnect
+
+```kotlin
+
+Web3Modal.disconnect(
+    onSuccess = {
+    /* callback that letting you know that you have successfully disconnected */
+    },
+    onError = { error ->
+    /* callback for error while trying to disconnection with a peer */
+    }
+)
+```
+
+### Request
+
+```kotlin
+val requestParams = Modal.Params.Request(
+    method = /* Selected method */,
+    params = /* Method params  */,
+)
+
+Web3Modal.request(
+    request = requestParams,
+    onSuccess = {
+    /* callback that letting you know that you have successful request */
+    },
+    onError = { error ->
+    /* callback for error */
+    }
+)
+```
+
+### Get Active Account
+
+Returns the current active account connected via Web3Modal
+
+```kotlin
+Web3Modal.getAccount()
+```
+
+### Get Connection type
+
+Return information about the type of our connection
+
+```kotlin
+Web3Modal.getConnectorType()
+```

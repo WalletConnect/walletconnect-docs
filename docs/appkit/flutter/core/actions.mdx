@@ -1,1 +1,127 @@
 # Actions
+
+### Launch the current wallet
+
+If you connected your dApp through deep linkining to a Wallet app you can launch that wallet app with the following:
+
+```dart
+_w3mService.launchConnectedWallet();
+```
+
+### Launch block explorer
+
+You can open the selected chain's block explorer easily:
+
+```dart
+_w3mService.launchBlockExplorer();
+```
+
+### Send an RPC request
+
+```dart
+final result = await _w3mService.request(
+  topic: _w3mService.session?.topic ?? '',
+  chainId: 'eip155:1', // Connected chain id
+  request: SessionRequestParams(
+    method: 'personal_sign',
+    params: ['Sign this', '0xdeadbeef'],
+  ),
+);
+```
+
+A list of all available methods can be found in [constants.dart](https://github.com/WalletConnect/WalletConnectFlutterV2/blob/master/lib/apis/utils/constants.dart#L70) file, which is already exported for you to use directly from web3modal package.
+
+### List of approved chains by the connected wallet
+
+```dart
+_w3mService.getApprovedChains();
+```
+
+### List of approved methods by connected wallet
+
+```dart
+_w3mService.getApprovedMethods();
+```
+
+### List of approved events by the connected wallet
+
+```dart
+_w3mService.getApprovedEvents();
+```
+
+### Interact with Smart Contracts
+
+1. Create a DeployedContract object
+
+```dart
+// Create DeployedContract object using contract's ABI and address
+final deployedContract = DeployedContract(
+  ContractAbi.fromJson(
+    jsonEncode([{.....}]), // ABI object
+    'TokenName',
+  ),
+  EthereumAddress.fromHex('0xaddress.......'), // Contract address
+);
+```
+
+2. Read from it by calling a read function
+
+```dart
+Future<void> getWalletBalance() async {
+  // Get balance of wallet
+  final result = await _w3mService.requestReadContract(
+    deployedContract: deployedContract,
+    functionName: 'balanceOf',
+    rpcUrl: 'https://{rpc-url}.com',
+    parameters: [
+      EthereumAddress.fromHex('0xaddress....'), // Your address
+    ],
+  );
+}
+
+Future<void> getTotalSupply() async {
+  // Get token total supply
+  final result = await _w3mService.requestReadContract(
+    deployedContract: deployedContract,
+    functionName: 'totalSupply',
+    rpcUrl: 'https://{rpc-url}.com',
+  );
+}
+```
+
+3. Write to it by calling a write function
+
+```dart
+Future<void> transferToken() async {
+  // Transfer 0.01 amount of Token using Smart Contract's transfer function
+  final result = await _w3mService.requestWriteContract(
+    topic: _w3mService.session.topic,
+    chainId: 'eip155:1',
+    rpcUrl: 'https://{rpc-url}.com',
+    deployedContract: contract,
+    functionName: 'transfer',
+    transaction: Transaction(
+      from: EthereumAddress.fromHex('0xaddressFrom....'),
+      to: EthereumAddress.fromHex('0xaddressTo....'),
+      value: EtherAmount.fromInt(EtherUnit.finney, 10), // == 0.010
+    ),
+  );
+}
+
+Future<void> writeMessage() async {
+  // Write a message data
+  final result = await _w3mService.requestWriteContract(
+    topic: _w3mService.session.topic,
+    chainId: 'eip155:1',
+    rpcUrl: 'https://{rpc-url}.com',
+    deployedContract: contract,
+    functionName: 'sayHello',
+    transaction: Transaction(
+      from: EthereumAddress.fromHex('0xaddressFrom....'),
+    ),
+    parameters: ['Hello world!'],
+  );
+}
+```
+
+For a complete example app check out the [example app](https://github.com/WalletConnect/Web3ModalFlutter/blob/master/example/lib/utils/crypto/eip155.dart#L297) for Web3Modal

@@ -1,0 +1,31 @@
+# Custom Chains
+
+## Custom Chain addition and selection
+
+You can add your own custom chain to the `W3MChainPresets.chains` object **before initialization**:
+
+Like so...
+
+```dart
+W3MChainPresets.chains.putIfAbsent('<chainID>', () => <Your W3MChainInfo>);
+await _w3mService.init();
+```
+
+:::info
+If you modify the presets (add/remove chains), it will reflect in the `W3MNetworkSelectButton` widget.
+:::
+
+Or you can select your own chain by calling the `selectChain()` method from `W3MService` **after initialization**:.
+
+```dart
+await _w3mService.init();
+_w3mService.selectChain(<Your W3MChainInfo>);
+```
+
+By using this option, your custom chain is not going to be added to the list of presets, so it's not going to show up in the `W3MNetworkSelectButton`. Use this method if you are not going to display `W3MNetworkSelectButton`.
+
+:::note
+The chain must be EVM compatible
+:::
+
+The list of chain presets can be found in [w3m_chains_presets.dart](https://github.com/WalletConnect/Web3ModalFlutter/blob/master/lib/utils/w3m_chains_presets.dart) which is already exported for you to use directly from web3modal package.

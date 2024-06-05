@@ -219,7 +219,8 @@ module.exports = {
             'appkit/react/core/options',
             'appkit/react/core/components',
             'appkit/react/core/siwe',
-            'appkit/react/core/theming'
+            'appkit/react/core/theming',
+            'appkit/react/core/resources'
           ]
         },
         {
@@ -255,7 +256,6 @@ module.exports = {
           label: 'Notifications',
           items: ['appkit/react/notifications/notifications']
         },
-        'appkit/react/upgrade',
         {
           type: 'category',
           label: 'Cloud',
@@ -288,7 +288,8 @@ module.exports = {
             'appkit/next/core/options',
             'appkit/next/core/components',
             'appkit/next/core/siwe',
-            'appkit/next/core/theming'
+            'appkit/next/core/theming',
+            'appkit/next/core/resources'
           ]
         },
         {
@@ -324,7 +325,6 @@ module.exports = {
           label: 'Notifications',
           items: ['appkit/next/notifications/notifications']
         },
-        'appkit/next/upgrade',
         {
           type: 'category',
           label: 'Cloud',
@@ -353,11 +353,12 @@ module.exports = {
           label: 'Core',
           items: [
             'appkit/vue/core/installation',
-            'appkit/vue/core/compositions',
+            'appkit/vue/core/composables',
             'appkit/vue/core/options',
             'appkit/vue/core/components',
             'appkit/vue/core/siwe',
-            'appkit/vue/core/theming'
+            'appkit/vue/core/theming',
+            'appkit/vue/core/resources'
           ]
         },
         {
@@ -393,7 +394,6 @@ module.exports = {
           label: 'Notifications',
           items: ['appkit/vue/notifications/notifications']
         },
-        'appkit/vue/upgrade',
         {
           type: 'category',
           label: 'Cloud',
@@ -425,7 +425,8 @@ module.exports = {
             'appkit/javascript/core/options',
             'appkit/javascript/core/components',
             'appkit/javascript/core/siwe',
-            'appkit/javascript/core/theming'
+            'appkit/javascript/core/theming',
+            'appkit/javascript/core/resources'
           ]
         },
         {
@@ -461,7 +462,6 @@ module.exports = {
           label: 'Notifications',
           items: ['appkit/javascript/notifications/notifications']
         },
-        'appkit/javascript/upgrade',
         {
           type: 'category',
           label: 'Cloud',
@@ -493,8 +493,7 @@ module.exports = {
             'appkit/react-native/core/options',
             'appkit/react-native/core/hooks',
             'appkit/react-native/core/components',
-            'appkit/react-native/core/theming',
-            'appkit/react-native/core/examples'
+            'appkit/react-native/core/resources'
           ]
         },
         {
@@ -541,8 +540,7 @@ module.exports = {
             'appkit/flutter/core/actions',
             'appkit/flutter/core/events',
             'appkit/flutter/core/theming',
-            'appkit/flutter/core/custom-chains',
-            'appkit/flutter/core/examples'
+            'appkit/flutter/core/custom-chains'
           ]
         },
         {
@@ -588,8 +586,8 @@ module.exports = {
             'appkit/ios/core/usage',
             'appkit/ios/core/options',
             'appkit/ios/core/actions',
+            'appkit/ios/core/one-click-auth',
             'appkit/ios/core/custom-chains',
-            'appkit/ios/core/examples'
           ]
         },
         {
@@ -624,8 +622,7 @@ module.exports = {
             'appkit/android/core/options',
             'appkit/android/core/actions',
             'appkit/android/core/components',
-            'appkit/android/core/theming',
-            'appkit/android/core/examples'
+            'appkit/android/core/theming'
           ]
         },
         {
