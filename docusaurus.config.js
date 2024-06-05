@@ -174,14 +174,14 @@ const config = {
         }
       ]
     },
-    announcementBar: {
-      id: 'support_us',
-      content:
-        'It’s shipping szn 🚢 Explore Web3Modal’s latest features: Email Wallets and On-ramp! <a rel="noopener noreferrer" href="/web3modal/features/onramp">Read the docs</a>',
-      backgroundColor: '#3182ce',
-      textColor: '#fff',
-      isCloseable: true
-    }
+    // announcementBar: {
+    //   id: 'support_us',
+    //   content:
+    //     'It’s shipping szn 🚢 Explore Web3Modal’s latest features: Email Wallets and On-ramp! <a rel="noopener noreferrer" href="/web3modal/features/onramp">Read the docs</a>',
+    //   backgroundColor: '#3182ce',
+    //   textColor: '#fff',
+    //   isCloseable: true
+    // }
   }
 }
 
