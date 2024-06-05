@@ -17,8 +17,8 @@ Furthremore you may need to configure the `domain` and `isLimited` parameters:
 - `allApps` determines if your app has access to all of the user's subscriptions, or only the ones that the app is hosted on. By setting it to `true`, it enables setting `domain` to a value other than `window.location.host`. Setting `allApps: true` can be useful during development to allow your localhost-deployed app to access the subscriptions for the domain you setup. Note that most apps do not need to set this in production environments, as they only need access to their own subscriptions. When enabled, the user has to sign a SIWE message granting your app more permissions, and this requires additional consideration from the user. Read [here](../authorization-signatures/about) for more details.
 
 <PlatformTabs
-	groupId="w3iw"
-	activeOptions={["react", "javascript"]}
+    groupId="w3iw"
+    activeOptions={["react", "javascript"]}
 >
 
 <PlatformTabItem value="react">
@@ -56,8 +56,8 @@ const client = await Web3InboxClient.init({ projectId, domain, allApps })
 ### Setting account for web3inbox
 
 <PlatformTabs
-	groupId="w3iw"
-	activeOptions={["react", "javascript"]}
+    groupId="w3iw"
+    activeOptions={["react", "javascript"]}
 >
 
 <PlatformTabItem value="react">
@@ -108,8 +108,8 @@ client.watchAccount(account => {
 ### Registering an account
 
 <PlatformTabs
-	groupId="w3iw"
-	activeOptions={["react", "javascript"]}
+    groupId="w3iw"
+    activeOptions={["react", "javascript"]}
 >
 
 **Note**: [EIP-1271 signatures](https://eips.ethereum.org/EIPS/eip-1271) coming from smart wallets are supported in version `1.1.0` and above.
@@ -190,8 +190,8 @@ This use case is for Dapps that have multile active accounts or wallets with mul
 :::
 
 <PlatformTabs
-	groupId="w3iw"
-	activeOptions={["react", "javascript"]}
+    groupId="w3iw"
+    activeOptions={["react", "javascript"]}
 >
 
 <PlatformTabItem value="react">
@@ -322,8 +322,8 @@ client.watchSubscriptions(subscriptions => console.log({ subscriptions }))
 Get notifications
 
 <PlatformTabs
-	groupId="w3iw"
-	activeOptions={["react", "javascript"]}
+    groupId="w3iw"
+    activeOptions={["react", "javascript"]}
 >
 
 <PlatformTabItem value="react">
@@ -484,8 +484,8 @@ await markAllNotificationsAsRead();
 Manage and fetch notification types.
 
 <PlatformTabs
-	groupId="w3iw"
-	activeOptions={["react", "javascript"]}
+    groupId="w3iw"
+    activeOptions={["react", "javascript"]}
 >
 
 <PlatformTabItem value="react">
@@ -551,8 +551,8 @@ If you wish to receive live push notifications to your React Native or Web app, 
 Your integration will obtain a token from Firebase and you will need to pass this token to the Web3Inbox SDK using the `registerWithPushServer()` function.
 
 <PlatformTabs
-	groupId="w3iw"
-	activeOptions={["react", "javascript"]}
+    groupId="w3iw"
+    activeOptions={["react", "javascript"]}
 >
 
 <PlatformTabItem value="react" >
@@ -605,8 +605,8 @@ Either APNS or FCM can be used to recieve push notifications. Token here is the 
 </PlatformTabs>
 
 <PlatformTabs
-	groupId="w3iw"
-	activeOptions={["react", "javascript"]}
+    groupId="w3iw"
+    activeOptions={["react", "javascript"]}
 >
 
 ## Listening For Events
@@ -662,6 +662,130 @@ interface NotifyNotification {
   type: string
 }
 ```
+
+</PlatformTabItem>
+</PlatformTabs>
+
+### Discover apps to subscribe to
+
+Apps wanting to provide users a list of apps that users may want to subscribe to can use this function. This list is manually curated by us, and apps can submit a request to be added to this list in our Cloud app by following [this guide](https://docs.walletconnect.com/web3inbox/cloud-setup).
+
+<PlatformTabs
+    groupId="w3iw"
+    activeOptions={["react", "javascript"]}
+>
+
+<PlatformTabItem value="react">
+
+```ts
+const { data: apps, isLoading, currentPageNumber, nextPage, previousPage, getPage } = useDiscoverApps({
+  isInfiniteScroll?: boolean, // Default to false
+  appsPerPage?: number, // Default to 10
+  isVerified?: boolean, // Filter by featured projects, defaulted to true
+  isFeatured?: boolean  // Filter by verified projects, defaulted to true
+})
+
+return (
+  <div>
+    {apps.map(app => (
+      <div onClick={app.subscribe} key={app.id}>
+        <img src={app.icon} />
+        <span> {app.name} </span>
+        <span> {app.description} </span>
+        <span> {app.url} </span>
+      </div>
+    )}
+	<button onClick={nextPage} />
+	<button onClick={previousPage} />
+	<span> Page: {currentPageNumber} </span>
+  </div>
+)
+```
+
+#### References
+
+- **getPage:** `(page: number) => Promise<NotifyApp[]>`, Fetch a specific page, does not affect state 
+- **apps:** `NotifyApp[]`
+- **isInfiniteScroll:** Whether or not to keep already fetched apps when getting next page
+- **appsPerPage:** Number representing how many apps to get per fetch
+
+```
+interface NotifyApp {
+  id: string // The ID of the app on the discover list
+  name: string
+  description: string
+  url: string
+  appDomain: string
+  icon: string
+  isVerified: boolean // Is this app verified for its domain
+  isFeatured: boolean // Is this app flagged as featured 
+  isComingSoon: boolean // Is this app coming soon or already available 
+  subscribe: () => Promise<void>
+}
+```
+
+
+</PlatformTabItem>
+
+<PlatformTabItem value="javascript">
+
+```ts
+
+const onUpdate = ({apps, currentPage}: {apps: NotifyApp[], currentPage: number}) => {
+  for(const app of apps) {
+    console.log({
+      id: app.id,
+      name: app.name,
+      url: app.url,
+      icon: app.icon,
+      isVerified: app.isVerified,
+      isFeatured: app.isFeatured,
+      isComingSoon: app.isComingSoon,
+    })
+  }
+
+  // subscribe to the first app
+  await app[0].subscribe()
+}
+
+const { previousPage, nextPage } = await client.pageDiscoverApps({
+  isInfiniteScroll?: boolean, // Default to false
+  appsPerPage?: number, // Default to 10
+  isVerified?: boolean, // Filter by featured projects, defaulted to true
+  isFeatured?: boolean  // Filter by verified projects, defaulted to true
+})(onUpdate)
+
+const singleFetchedApps = await client.discoverApps({
+  page: 1,
+  entries: 5,
+  isVerified: true, // Filter by featured projects, defaulted to true
+  isFeatured: true  // Filter by verified projects, defaulted to true
+})
+
+
+```
+
+#### References
+- **discoverApps:** `() => NotifyApp[]`
+- **isInfiniteScroll:** Whether or not to keep already fetched apps when getting next page
+- **appsPerPage:** Number representing how many apps to get per fetch
+
+```
+interface NotifyApp {
+  id: string // The ID of the app on the discover list
+  name: string
+  description: string
+  url: string
+  appDomain: string
+  icon: string
+  isVerified: boolean // Is this app verified for its domain
+  isFeatured: boolean // Is this app flagged as featured 
+  isComingSoon: boolean // Is this app coming soon or already available 
+  subscribe: () => Promise<void>
+}
+```
+
+
 
 </PlatformTabItem>
 </PlatformTabs>
