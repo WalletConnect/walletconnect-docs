@@ -254,7 +254,40 @@ module.exports = {
         {
           type: 'category',
           label: 'Notifications',
-          items: ['appkit/react/notifications/notifications']
+          items: [
+            'appkit/react/notifications/overview',
+            'appkit/react/notifications/cloud-setup',
+            'appkit/react/notifications/cloud-sending',
+            {
+              type: 'category',
+              label: 'Frontend Integration',
+              items: [
+                'appkit/react/notifications/frontend-integration/usage',
+                'appkit/react/notifications/frontend-integration/api',
+                'appkit/react/notifications/frontend-integration/examples',
+                'appkit/react/notifications/frontend-integration/migration-guide'
+              ]
+            },
+            'appkit/react/notifications/backend-integration',
+            'appkit/react/notifications/demo',
+            {
+              type: 'category',
+              label: 'Authorization Signatures',
+              items: [
+                { type: 'doc', label: 'About', id: 'appkit/react/notifications/authorization-signatures/overview' },
+                {
+                  type: 'doc',
+                  label: 'This App',
+                  id: 'appkit/react/notifications/authorization-signatures/this-app'
+                },
+                {
+                  type: 'doc',
+                  label: 'All Apps',
+                  id: 'appkit/react/notifications/authorization-signatures/all-apps'
+                }
+              ]
+            }
+          ]
         },
         {
           type: 'category',
@@ -323,7 +356,40 @@ module.exports = {
         {
           type: 'category',
           label: 'Notifications',
-          items: ['appkit/next/notifications/notifications']
+          items: [
+            'appkit/next/notifications/overview',
+            'appkit/next/notifications/cloud-setup',
+            'appkit/next/notifications/cloud-sending',
+            {
+              type: 'category',
+              label: 'Frontend Integration',
+              items: [
+                'appkit/next/notifications/frontend-integration/usage',
+                'appkit/next/notifications/frontend-integration/api',
+                'appkit/next/notifications/frontend-integration/examples',
+                'appkit/next/notifications/frontend-integration/migration-guide'
+              ]
+            },
+            'appkit/next/notifications/backend-integration',
+            'appkit/next/notifications/demo',
+            {
+              type: 'category',
+              label: 'Authorization Signatures',
+              items: [
+                { type: 'doc', label: 'About', id: 'appkit/next/notifications/authorization-signatures/overview' },
+                {
+                  type: 'doc',
+                  label: 'This App',
+                  id: 'appkit/next/notifications/authorization-signatures/this-app'
+                },
+                {
+                  type: 'doc',
+                  label: 'All Apps',
+                  id: 'appkit/next/notifications/authorization-signatures/all-apps'
+                }
+              ]
+            }
+          ]
         },
         {
           type: 'category',
@@ -392,7 +458,40 @@ module.exports = {
         {
           type: 'category',
           label: 'Notifications',
-          items: ['appkit/vue/notifications/notifications']
+          items: [
+            'appkit/vue/notifications/overview',
+            'appkit/vue/notifications/cloud-setup',
+            'appkit/vue/notifications/cloud-sending',
+            {
+              type: 'category',
+              label: 'Frontend Integration',
+              items: [
+                'appkit/vue/notifications/frontend-integration/usage',
+                'appkit/vue/notifications/frontend-integration/api',
+                'appkit/vue/notifications/frontend-integration/examples',
+                'appkit/vue/notifications/frontend-integration/migration-guide'
+              ]
+            },
+            'appkit/vue/notifications/backend-integration',
+            'appkit/vue/notifications/demo',
+            {
+              type: 'category',
+              label: 'Authorization Signatures',
+              items: [
+                { type: 'doc', label: 'About', id: 'appkit/vue/notifications/authorization-signatures/overview' },
+                {
+                  type: 'doc',
+                  label: 'This App',
+                  id: 'appkit/vue/notifications/authorization-signatures/this-app'
+                },
+                {
+                  type: 'doc',
+                  label: 'All Apps',
+                  id: 'appkit/vue/notifications/authorization-signatures/all-apps'
+                }
+              ]
+            }
+          ]
         },
         {
           type: 'category',
@@ -460,7 +559,40 @@ module.exports = {
         {
           type: 'category',
           label: 'Notifications',
-          items: ['appkit/javascript/notifications/notifications']
+          items: [
+            'appkit/javascript/notifications/overview',
+            'appkit/javascript/notifications/cloud-setup',
+            'appkit/javascript/notifications/cloud-sending',
+            {
+              type: 'category',
+              label: 'Frontend Integration',
+              items: [
+                'appkit/javascript/notifications/frontend-integration/usage',
+                'appkit/javascript/notifications/frontend-integration/api',
+                'appkit/javascript/notifications/frontend-integration/examples',
+                'appkit/javascript/notifications/frontend-integration/migration-guide'
+              ]
+            },
+            'appkit/javascript/notifications/backend-integration',
+            'appkit/javascript/notifications/demo',
+            {
+              type: 'category',
+              label: 'Authorization Signatures',
+              items: [
+                { type: 'doc', label: 'About', id: 'appkit/javascript/notifications/authorization-signatures/overview' },
+                {
+                  type: 'doc',
+                  label: 'This App',
+                  id: 'appkit/javascript/notifications/authorization-signatures/this-app'
+                },
+                {
+                  type: 'doc',
+                  label: 'All Apps',
+                  id: 'appkit/javascript/notifications/authorization-signatures/all-apps'
+                }
+              ]
+            }
+          ]
         },
         {
           type: 'category',
@@ -504,6 +636,44 @@ module.exports = {
               type: 'category',
               label: 'Universal Wallets',
               items: ['appkit/react-native/accounts/universal-wallets/email']
+            }
+          ]
+        },
+        {
+          type: 'category',
+          label: 'Notifications',
+          items: [
+            'appkit/react-native/notifications/overview',
+            'appkit/react-native/notifications/cloud-setup',
+            'appkit/react-native/notifications/cloud-sending',
+            {
+              type: 'category',
+              label: 'Frontend Integration',
+              items: [
+                'appkit/react-native/notifications/frontend-integration/usage',
+                'appkit/react-native/notifications/frontend-integration/api',
+                'appkit/react-native/notifications/frontend-integration/examples',
+                'appkit/react-native/notifications/frontend-integration/migration-guide'
+              ]
+            },
+            'appkit/react-native/notifications/backend-integration',
+            'appkit/react-native/notifications/demo',
+            {
+              type: 'category',
+              label: 'Authorization Signatures',
+              items: [
+                { type: 'doc', label: 'About', id: 'appkit/react-native/notifications/authorization-signatures/overview' },
+                {
+                  type: 'doc',
+                  label: 'This App',
+                  id: 'appkit/react-native/notifications/authorization-signatures/this-app'
+                },
+                {
+                  type: 'doc',
+                  label: 'All Apps',
+                  id: 'appkit/react-native/notifications/authorization-signatures/all-apps'
+                }
+              ]
             }
           ]
         },

@@ -1,0 +1,27 @@
+```ts
+// get scopes of current account's subscription to current dapp
+const types = client.getNotificationTypes()
+
+// watch scopes of specific account's subscription to specific dapp
+client.watchNotificationTypes(scp => {
+  console.log(scp)
+})
+
+client.update(['enabledType-1', 'enabledType-2'])
+```
+
+#### References
+
+- **update:** `(enabledScopeNames: string[]) -> void`
+- **types:** Map of scopes (Notification types)
+
+```ts
+type ScopeMap = Record<
+  string,
+  {
+    name: string
+    description: string
+    enabled: boolean
+  }
+>
+```

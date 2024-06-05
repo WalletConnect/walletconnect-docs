@@ -1,0 +1,26 @@
+import Installation from '../../../shared/notifications/frontend-integration/usage/installation/javascript.mdx'
+import Example from '../../../shared/notifications/frontend-integration/usage/example/javascript.mdx'
+
+# Usage
+
+AppKit Notifications provides you the building blocks necessary to allow users to subscribe, receive notifications, and manage notification preferences, all from your app's UI. The Web3Inbox SDK supports both React hooks and JavaScript-based integrations.
+
+Before begin using Web3Inbox, you will first need to [setup your project](../cloud-setup) to send notifications.
+
+## Installation
+
+<Installation/>
+
+## Example Usage
+
+This basic example demonstrates how to use the AppKit Notifications to subscribe to notifications and receive them in your app. Refer to the [API Reference](./api) for more details on the available methods.
+
+<Example/>
+
+## UX Guidelines
+
+For the best user experience we have several recommendations on how to build the Web3Inbox flows into your app:
+
+- Have an explicit opt-in UI to subscribe to notifications. Some users may not want to receive notifications, and enabling notifications requires the user to sign a message with their blockchain account. Enabling notifications should be optional, and if they do enable them they should be told that they will need to sign a message to enable this.
+- Have a button to unsubscribe from notifications once they are enabled. Users may want to stop receiving notifications, so you should have a button to unsubscribe from notifications if the user wants to.
+- Make use of [notification types](../cloud-setup#notification-types). These allow the user fine-grained control over what types of notifications they want to receive from your app. These allow users to only unsubscribe from the specific notifications they are no longer interested in, rather than needing to unsubscribe from your entire app. Your app should include functionality to manage notification preferences.

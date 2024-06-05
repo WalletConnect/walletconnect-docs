@@ -1,0 +1,19 @@
+```ts
+const { data: types, update } = useNotificationTypes()
+```
+
+#### References
+
+- **update:** `(enabledScopeNames: string[]) -> void`
+- **types:** Map of scopes (Notification types)
+
+```ts
+type ScopeMap = Record<
+  string,
+  {
+    name: string
+    description: string
+    enabled: boolean
+  }
+>
+```

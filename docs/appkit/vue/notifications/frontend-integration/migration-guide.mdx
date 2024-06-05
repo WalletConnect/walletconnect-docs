@@ -1,0 +1,14 @@
+import Migration from '../../../shared/notifications/frontend-integration/migration/javascript.mdx'
+
+# Migration Guide
+
+## General Migration notes
+
+- `isLimited` flag has been removed in favor of `allApps` flag. They essentially mean the opposite thing.
+- Deleting messages is no longer possible
+- Messages are now stored on notify server and can be paged
+- Registration is more flexible since it is now split into 2 functions
+
+## Migrating from 0.x to 1.0.0
+
+<Migration/>

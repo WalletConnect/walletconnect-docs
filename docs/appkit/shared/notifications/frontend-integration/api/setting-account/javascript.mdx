@@ -1,0 +1,15 @@
+```ts
+await client.setAccount('eip155:1:0x9AfEaC202C837df470b5A145e0EfD6a574B21029')
+
+const account = client.getAccount() // eip155:1:0x9AfEaC202C837df470b5A145e0EfD6a574B21029
+
+client.watchAccount(account => {
+  console.log({ account }) // eip155:1:0x9AfEaC202C837df470b5A145e0EfD6a574B21029
+})
+```
+
+### References
+
+- **account:** CAIP-10 account currently active in Web3Inbox
+- **setAccount:** Change actively managed account in Web3Inbox
+- **watchAccount:** Watcher ticks whenever the account updates

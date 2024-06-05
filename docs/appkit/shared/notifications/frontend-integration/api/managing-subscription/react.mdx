@@ -1,0 +1,66 @@
+Subscribe, Unsubscribe, Get Subscription, Check if Subscribed.
+
+:::note
+When using `differentAccount`, the passed account needs to be previously registered.
+This use case is for Dapps that have multiple active accounts or wallets with multiple active accounts.
+`differentAccount` can be used for all the below hooks and functions that accept `account`
+:::
+
+```ts
+const { subscribe, isLoading: isSubscribing } = useSubscribe()
+const { unsubscribe, isLoading: isUnsubscribing } = useUnsubscribe()
+
+// get subscription of current user to current dapp
+const { data: subscription, getSubscription } = useSubscription()
+
+// getSubscription can be used to get information about different dapps programatically
+const subscriptionToSameDappFromDifferentAccount = getSubscription(differentAccount)
+const subscriptionToDifferentDappFromSameAccount = getSubscription(undefined, differentDappDomain)
+const subscriptionToDifferentDappFromDifferentAccount = getSubscription(
+  differentAccount,
+  differentDappDomain
+)
+
+// subscribe to current dapp from current user
+subscribe()
+// subscribe to current dapp from different user
+subscribe(differentAccount)
+// subscribe to different dapp from current user
+subscribe(undefined, differentDappDomain)
+// subscribe to different dapp from different user
+subscribe(differentAccount, differentDappDomain)
+
+// unsubscribe from current dapp
+unsubscribe()
+
+// get all subscriptions for current account
+const subscriptions = useAllSubscriptions()
+
+const isSubscribed = Boolean(subscription)
+```
+
+#### References
+
+- **account _(Optional)_:** CAIP-10 account
+- **domain _(Optional)_:** dapp domain
+- **subscribe:** Function to subscribe to current dApp `() => void`
+- **unsubscribe:** Function to unsubscribe to current dApp `() => void`
+- **isSubscribed:** Reactive state, checking if subscribed to dApp `Boolean`
+- **isSubscribing:** If `subscribe()` is in-progress and has not finished yet
+- **isUnsubscribing:** If `unsubscribe()` is in-progress and has not finished yet
+- **subscription:** Reactive state, returning current subscription information, of type:
+
+```ts
+{
+  topic: string
+  account: string
+  relay: relayertypes.protocoloptions
+  metadata: Metadata
+  scope: ScopeMap
+  expiry: number
+  symkey: string
+  unreadCount: number
+}
+```
+
+- **subscriptions:** Reactive state, returning array of current subscriptions
