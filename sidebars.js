@@ -170,6 +170,7 @@ module.exports = {
           label: 'AppKit',
           collapsed: true,
           collapsible: true,
+          className: 'sidebar__logo sidebar__logo--appkit',
           items: [
             'appkit/overview',
             {
@@ -193,6 +194,7 @@ module.exports = {
           label: 'WalletKit',
           collapsed: true,
           collapsible: true,
+          className: 'sidebar__logo sidebar__logo--walletkit',
           items: [
             'walletkit/overview',
             {
