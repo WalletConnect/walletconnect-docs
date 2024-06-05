@@ -2,7 +2,7 @@
 
 WalletKit link mode is a low latency mechanism for transporting 1-click auth requests and session requests over universal links, eliminating the need for a WebSocket connection with the Relay. This significantly enhances the user experience when connecting native dApps to native wallets by reducing the latency associated with networking connections, especially when the user has an unstable internet connection.
 
-To support link mode, configure your `AppMetadata.Redirect` with a valid universal link and set the `linkMode` property to `true`:
+To support link mode add universal link for your wallet in Cloud project configuration dashboard, configure your `AppMetadata.Redirect` with a valid universal link and set the `linkMode` property to `true`:
 
 ```swift
 let metadata = AppMetadata(
@@ -14,6 +14,7 @@ Web3Wallet.configure(
     metadata: metadata,
     ...
 )
+
 
 For more information on how to configure universal links for your app, refer to the [Apple Documentation](https://developer.apple.com/documentation/xcode/allowing-apps-and-websites-to-link-to-your-content?language=objc).
 
