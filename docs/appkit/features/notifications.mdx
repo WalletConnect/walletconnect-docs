@@ -1,1 +1,52 @@
+import Button from '../../components/button'
+import Wrapper from '../../components/Home/Wrapper'
+import useBaseUrl from '@docusaurus/useBaseUrl'
+
+import reactLogo from '../../../static/assets/home/reactLogo.png'
+import nextjsLogo from '../../../static/assets/home/nextjsLogo.png'
+import vueLogo from '../../../static/assets/home/vueLogo.png'
+import javascriptLogo from '../../../static/assets/home/javascriptLogo.png'
+
 # Notifications
+
+AppKit provides a toolkit for integrating Web3 notification features into apps. AppKit Notifications can be used to send notifications from your app directly to wallets.
+
+This SDK utilizes WalletConnect's Notify API and is designed for Web3 scenarios, providing event-based notifications for activities like DAO votes, DeFi transaction alerts, and updates for NFT holders. Apps can send notifications to subscribed accounts, and users can receive and view their notifications in a supporting wallet, in the [Web3Inbox.com app](https://app.web3inbox.com), or in the app's frontend. Users can also discover Notify-compatible apps in their wallet or the [Web3Inbox.com app](https://app.web3inbox.com) to subscribe to.
+
+## Get Started
+
+<Wrapper
+  type="large"
+  fit={false}
+  items={[
+    {
+      name: 'React',
+      type: 'react',
+      description: 'Get started with AppKit in React.',
+      icon: reactLogo,
+      href: '../react/notifications/overview'
+    },
+    {
+      name: 'Next.js',
+      type: 'next',
+      description: 'Get started with AppKit in Next.js.',
+      icon: nextjsLogo,
+      href: '../next/notifications/overview',
+      isWhite: true
+    },
+    {
+      name: 'Vue',
+      type: 'vue',
+      description: 'Get started with AppKit in Vue.',
+      icon: vueLogo,
+      href: '../vue/notifications/overview'
+    },
+    {
+      name: 'JavaScript',
+      type: 'javascript',
+      description: 'Get started with AppKit in JavaScript.',
+      icon: javascriptLogo,
+      href: '../javascript/notifications/overview'
+    }
+  ]}
+/>
