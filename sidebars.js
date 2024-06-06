@@ -47,6 +47,7 @@ const advanced = {
             'advanced/multichain/rpc-reference/near-rpc',
             'advanced/multichain/rpc-reference/starknet-rpc',
             'advanced/multichain/rpc-reference/stellar-rpc',
+            'advanced/multichain/rpc-reference/hedera-rpc',
             'advanced/multichain/rpc-reference/tezos-rpc',
             'advanced/multichain/rpc-reference/xrpl-rpc',
             'advanced/multichain/rpc-reference/casper-rpc',
