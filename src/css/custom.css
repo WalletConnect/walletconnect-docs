@@ -43,6 +43,7 @@
 }
 
 .kill {
+  margin: 10px;
   visibility: hidden;
 }
 
@@ -403,7 +404,6 @@ img[alt='web3modal-customisation'] {
 }
 
 .menu_outer_list {
-  margin-bottom: 20px;
   padding-top: 5px;
   position: relative;
 }
@@ -419,7 +419,7 @@ img[alt='web3modal-customisation'] {
   background: linear-gradient(90deg, var(--ifm-border-color) 0, transparent 100%);
 }
 
-.menu_outer_list:nth-child(2) {
+.menu_outer_list--margin-top {
   margin-top: 21px;
 }
 
