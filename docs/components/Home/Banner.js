@@ -9,7 +9,7 @@ const Banner = () => {
       <div className={styles.banner__text}>
         <h2>WalletConnect Docs</h2>
         <p>
-          WalletConnect is the Web3 messaging layer and a standard to connect blockchain wallets to dapps.
+        WalletConnect gives developers the tools to build user experiences that make digital ownership effortless, intuitive, and secure.
         </p>
         {/* <Link to="/getting-started">
           Get Started
