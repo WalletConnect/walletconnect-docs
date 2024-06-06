@@ -9,10 +9,9 @@ const Banner = () => {
       <div className={styles.banner__text}>
         <h2>WalletConnect Docs</h2>
         <p>
-          WalletConnect provides developer toolkits empowering you to build engaging web3
-          experiences.
+          WalletConnect is the Web3 messaging layer and a standard to connect blockchain wallets to dapps.
         </p>
-        <Link to="/getting-started">
+        {/* <Link to="/getting-started">
           Get Started
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -27,7 +26,7 @@ const Banner = () => {
               d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75"
             />
           </svg>
-        </Link>
+        </Link> */}
       </div>
       <div className={styles.banner__backdrop} />
       <img className={styles.banner__image} src={logo} alt="WalletConnect Logo" />

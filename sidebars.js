@@ -149,6 +149,20 @@ const specs = {
   ]
 }
 
+const welcome = {
+  type: 'category',
+  label: 'INTRODUCTION',
+  collapsible: false,
+  className: 'menu_outer_list',
+  items: [
+    {
+      type: 'link',
+      label: 'Welcome',
+      href: '/'
+    },
+  ]
+}
+
 /** @type {import('@docusaurus/plugin-content-docs').SidebarsConfig} */
 
 module.exports = {
@@ -163,7 +177,7 @@ module.exports = {
       type: 'category',
       label: 'SDKs',
       collapsible: false,
-      className: 'menu_outer_list',
+      className: 'menu_outer_list menu_outer_list--margin-top',
       items: [
         {
           type: 'category',
@@ -215,6 +229,7 @@ module.exports = {
     specs
   ],
   AppKit_React: [
+      welcome,
     {
       type: 'category',
       label: 'SDKs',
@@ -318,6 +333,7 @@ module.exports = {
     dropdown_placeholder
   ],
   AppKit_Next: [
+    welcome,
     {
       type: 'category',
       label: 'SDKs',
@@ -421,6 +437,7 @@ module.exports = {
     dropdown_placeholder
   ],
   AppKit_Vue: [
+    welcome,
     {
       type: 'category',
       label: 'SDKs',
@@ -523,6 +540,7 @@ module.exports = {
     }
   ],
   AppKit_JS: [
+    welcome,
     {
       type: 'category',
       label: 'SDKs',
@@ -626,6 +644,7 @@ module.exports = {
     dropdown_placeholder
   ],
   AppKit_React_Native: [
+    welcome,
     {
       type: 'category',
       label: 'SDKs',
@@ -709,6 +728,7 @@ module.exports = {
     dropdown_placeholder
   ],
   AppKit_Flutter: [
+    welcome,
     {
       type: 'category',
       label: 'SDKs',
@@ -756,6 +776,7 @@ module.exports = {
     dropdown_placeholder
   ],
   AppKit_iOS: [
+    welcome,
     {
       type: 'category',
       label: 'SDKs',
@@ -791,6 +812,7 @@ module.exports = {
     dropdown_placeholder
   ],
   AppKit_Android: [
+    welcome,
     {
       type: 'category',
       label: 'SDKs',
@@ -826,6 +848,7 @@ module.exports = {
     dropdown_placeholder
   ],
   AppKit_Unity: [
+    welcome,
     {
       type: 'category',
       label: 'SDKs',
@@ -860,6 +883,7 @@ module.exports = {
     dropdown_placeholder
   ],
   walletKit_Android: [
+    welcome,
     {
       type: 'category',
       label: 'SDKs',
@@ -908,6 +932,7 @@ module.exports = {
     },
   ],
   walletKit_iOS: [
+    welcome,
     {
       type: 'category',
       label: 'SDKs',
@@ -957,6 +982,7 @@ module.exports = {
     },
   ],
   walletKit_Flutter: [
+    welcome,
     {
       type: 'category',
       label: 'SDKs',
@@ -984,6 +1010,7 @@ module.exports = {
     },
   ],
   walletKit_React_Native: [
+    welcome,
     {
       type: 'category',
       label: 'SDKs',
@@ -1031,6 +1058,7 @@ module.exports = {
     },
   ],
   walletKit_Web: [
+    welcome,
     {
       type: 'category',
       label: 'SDKs',
@@ -1060,6 +1088,7 @@ module.exports = {
     },
   ],
   walletKit_C_Sharp: [
+    welcome,
     {
       type: 'category',
       label: 'SDKs',
