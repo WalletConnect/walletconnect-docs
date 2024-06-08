@@ -6,6 +6,10 @@
       "destination": "/:path*"
     },
     {
+      "source": "/appkit/features/email",
+      "destination": "/appkit/features/socials"
+    },
+    {
       "source": "/web3modal/:path",
       "destination": "/appkit/overview"
     },

@@ -100,17 +100,6 @@ const advanced = {
       items: [
         {
           type: 'category',
-          label: 'Auth',
-          items: [
-            'api/auth/overview',
-            'api/auth/dapp-usage',
-            'api/auth/wallet-usage',
-            'api/auth/signer-factory',
-            'api/auth/resources'
-          ]
-        },
-        {
-          type: 'category',
           label: 'Core',
           items: ['api/core/pairing', 'api/core/relay', 'api/core/shared-core']
         },
@@ -193,10 +182,9 @@ module.exports = {
               label: 'Features',
               items: [
                 { type: 'doc', label: 'Swaps', id: 'appkit/features/swaps' },
-                { type: 'doc', label: 'Socials', id: 'appkit/features/socials' },
+                { type: 'doc', label: 'Email & Socials', id: 'appkit/features/socials' },
                 { type: 'doc', label: 'Smart Accounts', id: 'appkit/features/smart-accounts' },
                 { type: 'doc', label: 'One-Click Auth', id: 'appkit/features/one-click-auth' },
-                { type: 'doc', label: 'Email Wallets', id: 'appkit/features/email' },
                 { type: 'doc', label: 'Onramp', id: 'appkit/features/onramp' },
                 { type: 'doc', label: 'Notifications', id: 'appkit/features/notifications' },
                 { type: 'doc', label: 'Solana', id: 'appkit/features/solana' },
@@ -233,7 +221,7 @@ module.exports = {
       welcome,
     {
       type: 'category',
-      label: 'SDKs',
+      label: 'AppKit',
       collapsible: false,
       className: 'menu_outer_list',
       items: [
@@ -255,7 +243,6 @@ module.exports = {
           type: 'category',
           label: 'Onboarding',
           items: [
-            'appkit/react/onboarding/email',
             'appkit/react/onboarding/socials',
             'appkit/react/onboarding/smart-accounts'
           ]
@@ -327,7 +314,7 @@ module.exports = {
     welcome,
     {
       type: 'category',
-      label: 'SDKs',
+      label: 'AppKit',
       collapsible: false,
       className: 'menu_outer_list',
       items: [
@@ -349,7 +336,6 @@ module.exports = {
           type: 'category',
           label: 'Onboarding',
           items: [
-            'appkit/next/onboarding/email',
             'appkit/next/onboarding/socials',
             'appkit/next/onboarding/smart-accounts'
           ]
@@ -421,7 +407,7 @@ module.exports = {
     welcome,
     {
       type: 'category',
-      label: 'SDKs',
+      label: 'AppKit',
       collapsible: false,
       className: 'menu_outer_list',
       items: [
@@ -443,7 +429,6 @@ module.exports = {
           type: 'category',
           label: 'Onboarding',
           items: [
-            'appkit/vue/onboarding/email',
             'appkit/vue/onboarding/socials',
             'appkit/vue/onboarding/smart-accounts',
           ]
@@ -514,7 +499,7 @@ module.exports = {
     welcome,
     {
       type: 'category',
-      label: 'SDKs',
+      label: 'AppKit',
       collapsible: false,
       className: 'menu_outer_list',
       items: [
@@ -536,7 +521,6 @@ module.exports = {
           type: 'category',
           label: 'Onboarding',
           items: [
-            'appkit/javascript/onboarding/email',
             'appkit/javascript/onboarding/socials',
             'appkit/javascript/onboarding/smart-accounts',
           ]
@@ -608,7 +592,7 @@ module.exports = {
     welcome,
     {
       type: 'category',
-      label: 'SDKs',
+      label: 'AppKit',
       collapsible: false,
       className: 'menu_outer_list',
       items: [
@@ -686,7 +670,7 @@ module.exports = {
     welcome,
     {
       type: 'category',
-      label: 'SDKs',
+      label: 'AppKit',
       collapsible: false,
       className: 'menu_outer_list',
       items: [
@@ -728,7 +712,7 @@ module.exports = {
     welcome,
     {
       type: 'category',
-      label: 'SDKs',
+      label: 'AppKit',
       collapsible: false,
       className: 'menu_outer_list',
       items: [
@@ -764,7 +748,7 @@ module.exports = {
     welcome,
     {
       type: 'category',
-      label: 'SDKs',
+      label: 'AppKit',
       collapsible: false,
       className: 'menu_outer_list',
       items: [
@@ -800,7 +784,7 @@ module.exports = {
     welcome,
     {
       type: 'category',
-      label: 'SDKs',
+      label: 'AppKit',
       collapsible: false,
       className: 'menu_outer_list',
       items: [
@@ -835,7 +819,7 @@ module.exports = {
     welcome,
     {
       type: 'category',
-      label: 'SDKs',
+      label: 'WalletKit',
       collapsible: false,
       className: 'menu_outer_list',
       items: [
@@ -884,7 +868,7 @@ module.exports = {
     welcome,
     {
       type: 'category',
-      label: 'SDKs',
+      label: 'WalletKit',
       collapsible: false,
       className: 'menu_outer_list',
       items: [
@@ -934,7 +918,7 @@ module.exports = {
     welcome,
     {
       type: 'category',
-      label: 'SDKs',
+      label: 'WalletKit',
       collapsible: false,
       className: 'menu_outer_list',
       items: [
@@ -962,7 +946,7 @@ module.exports = {
     welcome,
     {
       type: 'category',
-      label: 'SDKs',
+      label: 'WalletKit',
       collapsible: false,
       className: 'menu_outer_list',
       items: [
@@ -1010,7 +994,7 @@ module.exports = {
     welcome,
     {
       type: 'category',
-      label: 'SDKs',
+      label: 'WalletKit',
       collapsible: false,
       className: 'menu_outer_list',
       items: [
@@ -1040,7 +1024,7 @@ module.exports = {
     welcome,
     {
       type: 'category',
-      label: 'SDKs',
+      label: 'WalletKit',
       collapsible: false,
       className: 'menu_outer_list',
       items: [
