@@ -253,21 +253,11 @@ module.exports = {
         },
         {
           type: 'category',
-          label: 'Accounts',
+          label: 'Onboarding',
           items: [
-            {
-              type: 'category',
-              label: 'Universal Wallets',
-              items: [
-                'appkit/react/accounts/universal-wallets/email',
-                'appkit/react/accounts/universal-wallets/socials',
-                'appkit/react/accounts/universal-wallets/wallet-features',
-                'appkit/react/accounts/universal-wallets/graduation',
-                'appkit/react/accounts/universal-wallets/smart-accounts',
-                'appkit/react/accounts/universal-wallets/ens'
-              ]
-            },
-            'appkit/react/accounts/multi-accounts'
+            'appkit/react/onboarding/email',
+            'appkit/react/onboarding/socials',
+            'appkit/react/onboarding/smart-accounts'
           ]
         },
         {
@@ -357,21 +347,11 @@ module.exports = {
         },
         {
           type: 'category',
-          label: 'Accounts',
+          label: 'Onboarding',
           items: [
-            {
-              type: 'category',
-              label: 'Universal Wallets',
-              items: [
-                'appkit/next/accounts/universal-wallets/email',
-                'appkit/next/accounts/universal-wallets/socials',
-                'appkit/next/accounts/universal-wallets/wallet-features',
-                'appkit/next/accounts/universal-wallets/graduation',
-                'appkit/next/accounts/universal-wallets/smart-accounts',
-                'appkit/next/accounts/universal-wallets/ens'
-              ]
-            },
-            'appkit/next/accounts/multi-accounts'
+            'appkit/next/onboarding/email',
+            'appkit/next/onboarding/socials',
+            'appkit/next/onboarding/smart-accounts'
           ]
         },
         {
@@ -461,21 +441,11 @@ module.exports = {
         },
         {
           type: 'category',
-          label: 'Accounts',
+          label: 'Onboarding',
           items: [
-            {
-              type: 'category',
-              label: 'Universal Wallets',
-              items: [
-                'appkit/vue/accounts/universal-wallets/email',
-                'appkit/vue/accounts/universal-wallets/socials',
-                'appkit/vue/accounts/universal-wallets/wallet-features',
-                'appkit/vue/accounts/universal-wallets/graduation',
-                'appkit/vue/accounts/universal-wallets/smart-accounts',
-                'appkit/vue/accounts/universal-wallets/ens'
-              ]
-            },
-            'appkit/vue/accounts/multi-accounts'
+            'appkit/vue/onboarding/email',
+            'appkit/vue/onboarding/socials',
+            'appkit/vue/onboarding/smart-accounts',
           ]
         },
         {
@@ -564,21 +534,11 @@ module.exports = {
         },
         {
           type: 'category',
-          label: 'Accounts',
+          label: 'Onboarding',
           items: [
-            {
-              type: 'category',
-              label: 'Universal Wallets',
-              items: [
-                'appkit/javascript/accounts/universal-wallets/email',
-                'appkit/javascript/accounts/universal-wallets/socials',
-                'appkit/javascript/accounts/universal-wallets/wallet-features',
-                'appkit/javascript/accounts/universal-wallets/graduation',
-                'appkit/javascript/accounts/universal-wallets/smart-accounts',
-                'appkit/javascript/accounts/universal-wallets/ens'
-              ]
-            },
-            'appkit/javascript/accounts/multi-accounts'
+            'appkit/javascript/onboarding/email',
+            'appkit/javascript/onboarding/socials',
+            'appkit/javascript/onboarding/smart-accounts',
           ]
         },
         {
@@ -665,14 +625,8 @@ module.exports = {
         },
         {
           type: 'category',
-          label: 'Accounts',
-          items: [
-            {
-              type: 'category',
-              label: 'Universal Wallets',
-              items: ['appkit/react-native/accounts/universal-wallets/email']
-            }
-          ]
+          label: 'Onboarding',
+          items: ['appkit/react-native/onboarding/email']
         },
         {
           type: 'category',
@@ -751,14 +705,8 @@ module.exports = {
         },
         {
           type: 'category',
-          label: 'Accounts',
-          items: [
-            {
-              type: 'category',
-              label: 'Universal Wallets',
-              items: ['appkit/flutter/accounts/universal-wallets/email']
-            }
-          ]
+          label: 'Onboarding',
+          items: ['appkit/flutter/onboarding/email']
         },
         {
           type: 'category',
