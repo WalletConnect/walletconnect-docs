@@ -189,7 +189,7 @@ module.exports = {
                 { type: 'doc', label: 'Notifications', id: 'appkit/features/notifications' },
                 { type: 'doc', label: 'Solana', id: 'appkit/features/solana' },
               ]
-            },
+            }
           ]
         },
         {
@@ -215,7 +215,8 @@ module.exports = {
     },
     cloud,
     advanced,
-    specs
+    specs,
+    dropdown_placeholder
   ],
   AppKit_React: [
       welcome,
@@ -493,7 +494,8 @@ module.exports = {
           ]
         }
       ]
-    }
+    },
+    dropdown_placeholder
   ],
   AppKit_JS: [
     welcome,
@@ -862,7 +864,8 @@ module.exports = {
           ]
         }
       ]
-    },
+    },,
+    dropdown_placeholder
   ],
   walletKit_iOS: [
     welcome,
@@ -912,7 +915,8 @@ module.exports = {
           ]
         }
       ]
-    },
+    },,
+    dropdown_placeholder
   ],
   walletKit_Flutter: [
     welcome,
@@ -940,7 +944,8 @@ module.exports = {
           ]
         }
       ]
-    },
+    },,
+    dropdown_placeholder
   ],
   walletKit_React_Native: [
     welcome,
@@ -988,7 +993,8 @@ module.exports = {
           ]
         }
       ]
-    },
+    },,
+    dropdown_placeholder
   ],
   walletKit_Web: [
     welcome,
@@ -1018,7 +1024,8 @@ module.exports = {
           ]
         }
       ]
-    },
+    },,
+    dropdown_placeholder
   ],
   walletKit_C_Sharp: [
     welcome,
@@ -1045,5 +1052,6 @@ module.exports = {
         }
       ]
     },
+    dropdown_placeholder
   ],
 }
