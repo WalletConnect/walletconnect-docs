@@ -165,6 +165,24 @@ module.exports = {
     },
     {
       type: 'category',
+      label: 'INTRODUCTION',
+      collapsible: false,
+      className: 'menu_outer_list',
+      items: [
+        {
+          type: 'link',
+          label: 'Welcome',
+          href: '/'
+        },
+        {
+          type: 'link',
+          label: 'System Status',
+          href: 'https://status.walletconnect.com'
+        }
+      ]
+    },
+    {
+      type: 'category',
       label: 'SDKs',
       collapsible: false,
       className: 'menu_outer_list menu_outer_list--margin-top',
