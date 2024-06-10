@@ -155,7 +155,7 @@ const config = {
     colorMode: {
       defaultMode: 'dark',
       disableSwitch: false,
-      respectPrefersColorScheme: false
+      respectPrefersColorScheme: true
     },
     prism: {
       darkTheme: darkCodeTheme,
@@ -173,7 +173,7 @@ const config = {
           block: { start: 'highlight-add-start', end: 'highlight-add-end' }
         }
       ]
-    },
+    }
     // announcementBar: {
     //   id: 'support_us',
     //   content:

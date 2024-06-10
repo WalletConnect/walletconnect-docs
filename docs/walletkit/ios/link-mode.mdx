@@ -10,7 +10,7 @@ let metadata = AppMetadata(
     redirect: try! AppMetadata.Redirect(native: "exampleApp://", universal: "https://example.com/example_wallet", linkMode: true)
 )
 
-Web3Modal.configure(
+Web3Wallet.configure(
     metadata: metadata,
     ...
 )
