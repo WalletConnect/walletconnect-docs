@@ -270,11 +270,7 @@ module.exports = {
         {
           type: 'category',
           label: 'Transactions',
-          items: [
-            'appkit/react/transactions/onramp',
-            'appkit/react/transactions/transaction-history',
-            'appkit/react/transactions/swaps'
-          ]
+          items: ['appkit/react/transactions/onramp', 'appkit/react/transactions/swaps']
         },
         {
           type: 'category',
@@ -364,11 +360,7 @@ module.exports = {
         {
           type: 'category',
           label: 'Transactions',
-          items: [
-            'appkit/next/transactions/onramp',
-            'appkit/next/transactions/transaction-history',
-            'appkit/next/transactions/swaps'
-          ]
+          items: ['appkit/next/transactions/onramp', 'appkit/next/transactions/swaps']
         },
         {
           type: 'category',
@@ -458,11 +450,7 @@ module.exports = {
         {
           type: 'category',
           label: 'Transactions',
-          items: [
-            'appkit/vue/transactions/onramp',
-            'appkit/vue/transactions/transaction-history',
-            'appkit/vue/transactions/swaps'
-          ]
+          items: ['appkit/vue/transactions/onramp', 'appkit/vue/transactions/swaps']
         },
         {
           type: 'category',
@@ -555,11 +543,7 @@ module.exports = {
         {
           type: 'category',
           label: 'Transactions',
-          items: [
-            'appkit/javascript/transactions/onramp',
-            'appkit/javascript/transactions/transaction-history',
-            'appkit/javascript/transactions/swaps'
-          ]
+          items: ['appkit/javascript/transactions/onramp', 'appkit/javascript/transactions/swaps']
         },
         {
           type: 'category',
