@@ -24,6 +24,10 @@ It is recommended that you use WalletConnect Cloud for simplicity and ease of in
 
 ### Firebase Cloud Messaging API (FCM v1)
 
+:::info
+If you already have FCM Legacy enabled and then enable FCM v1, push notifications will automatically be sent with the newer FCM v1 API automatically. No migration of devices/apps is necessary.
+:::
+
 - In your [Firebase](https://console.firebase.google.com) project settings, under _Firebase Cloud Messaging API (V1)_, click the Manage Service Accounts link
   ![Manage service accounts link](/assets/push-fcmv1-manage-service-accounts.png)
 - You may use the default `firebase-adminsdk` service account, but we recommend making a new, minimally privileged, service account. Eg a ready-made role from Firebase `Firebase Cloud Messaging API Admin` would only give access to messaging and notifications:
