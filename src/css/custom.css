@@ -47,8 +47,8 @@
   visibility: hidden;
 }
 
-@media (max-width: 996px){
-  .kill{
+@media (max-width: 996px) {
+  .kill {
     display: none;
   }
 }

@@ -78,6 +78,7 @@ html[data-theme='light'] {
   margin: 0;
   padding: 0.8rem 0 0 1.25rem;
   z-index: 200;
+  background-color: var(--ifm-background-color);
 }
 
 @media (max-width: 996px) {
