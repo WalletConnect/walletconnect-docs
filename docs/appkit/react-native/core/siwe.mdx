@@ -1,0 +1,189 @@
+---
+title: One-Click Auth / SIWE
+---
+
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
+import Button from '../../../components/button'
+
+# Sign In With Ethereum
+
+AppKit provides a simple solution for integrating with "Sign In With Ethereum" (SIWE), a new form of authentication that enables users to control their digital identity with their Ethereum account.
+SIWE is a standard also known as [EIP-4361](https://docs.login.xyz/general-information/siwe-overview/eip-4361).
+
+## One-Click Auth
+
+**One-Click Auth** represents a key advancement within WalletConnect v2, streamlining the user authentication process in Web3Modal by enabling them to seamlessly connect with a wallet and sign a SIWE message with just one click.
+
+Connecting a wallet, proving control of an address with an off-chain signature, authorizing specific actions. These are the kinds of authorizations that can be encoded as ["ReCaps"](https://eips.ethereum.org/EIPS/eip-5573). ReCaps are permissions for a specific website or dapp that can be compactly encoded as a long string in the message you sign and translated by any wallet into a straight-forward one-sentence summary.
+WalletConnect uses permissions expressed as ReCaps to enable a One-Click Authentication.
+
+## Pre-requisites
+In order for SIWE to work, you need to have a backend to communicate with. This backend will be used to generate a nonce, verify messages and handle sessions.
+More info [here](https://docs.login.xyz/sign-in-with-ethereum/quickstart-guide/implement-the-backend)
+
+:::caution
+This package is currently in Alpha.
+:::
+
+## Configure your SIWE Client
+
+```ts
+// siweConfig.ts
+
+import {
+  createSIWEConfig,
+  formatMessage,
+  type SIWEVerifyMessageArgs,
+  type SIWECreateMessageArgs
+} from '@web3modal/siwe-react-native';
+
+export const siweConfig = createSIWEConfig({
+  getNonce: async (): Promise<string> => {
+    // The getNonce method functions as a safeguard
+    // against spoofing, akin to a CSRF token.
+
+    return await api.getNonce();
+  },
+  verifyMessage: async ({ message, signature, cacao }: SIWEVerifyMessageArgs): Promise<boolean> => {
+    try {
+      // This function ensures the message is valid,
+      // has not been tampered with, and has been appropriately
+      // signed by the wallet address.
+      
+      const isValid = await api.verifyMessage({ message, signature, cacao })
+
+      return isValid
+    } catch (error) {
+      return false
+    }
+  },
+  getSession: async (): Promise<SIWESession | null> => {
+    // The backend session should store the associated address and chainId
+    // and return it via the `getSession` method.
+
+    const session = await api.getSession()
+    if (!session) throw new Error('Failed to get session!')
+
+    const { address, chainId } = session
+
+    return { address, chainId }
+  },
+  signOut: (): Promise<boolean> => {
+    try {
+      // The users session must be destroyed when calling `signOut`.
+
+      await api.signOut();
+      return true;
+    } catch {
+      return false
+    }
+  },
+  createMessage: ({ address, ...args }: SIWECreateMessageArgs): string => {
+    // Method for generating an EIP-4361-compatible message.
+
+    return formatMessage(args, address)
+  },
+  getMessageParams: () => {
+    // Parameters to create the SIWE message internally.
+    // More info in https://github.com/ChainAgnostic/CAIPs/blob/main/CAIPs/caip-222.method
+
+    return {
+      domain: 'your domain',
+      uri: 'your uri',
+      chains: [1,137], // array of chain ids
+      statement: 'Please sign with your account',
+      iat: new Date().toISOString()
+    }
+  },
+})
+```
+
+## Initialize Web3Modal with your `siweConfig`
+Add the siwe configuration in `createWeb3Modal` initialization
+
+```ts
+import { siweConfig } from './siweConfig.ts'
+
+createWeb3Modal({
+  //..
+  /* highlight-add-start */
+  siweConfig
+  /* highlight-add-end */
+})
+```
+
+### SIWE Config reference
+
+```ts
+interface SIWEConfig {
+  /** Required **/
+  getNonce: () => Promise<string>
+  createMessage: (args: SIWECreateMessageArgs) => string
+  verifyMessage: (args: SIWEVerifyMessageArgs) => Promise<boolean>
+  getSession: () => Promise<SIWESession | null>
+  signOut: () => Promise<boolean>
+
+  /** Required for One-Click Auth **/
+  getMessageParams `() => Promise<{ domain: string, uri: string, chains: number[], statement: string }>
+
+
+  /** Optional **/
+  
+  // Callback when user signs in
+  onSignIn?: (session?: SIWESession) => void
+
+  // Callback when user signs out
+  onSignOut?: () => void
+  
+  // Defaults to true
+  enabled?: boolean
+  
+  // In milliseconds, defaults to 5 minutes
+  nonceRefetchIntervalMs?: number
+  
+  // In milliseconds, defaults to 5 minutes
+  sessionRefetchIntervalMs?: number
+  
+  // Defaults to true
+  signOutOnDisconnect?: boolean
+  
+  // Defaults to true
+  signOutOnAccountChange?: boolean
+  
+  // Defaults to true
+  signOutOnNetworkChange?: boolean
+}
+```
+
+## Exported functions
+
+### `verifySignature`
+
+Verify a SIWE signature. Internally it calls your backend verification method.
+
+```ts
+import { verifySignature } from '@web3modal/siwe-react-native'
+
+const isValid = await verifySignature({ address, message, signature, chainId, projectId })
+```
+
+### `getChainIdFromMessage`
+
+Get the chain ID from the SIWE message.
+
+```ts
+import { getChainIdFromMessage } from '@web3modal/siwe-react-native'
+
+const chainId = getChainIdFromMessage(message)
+```
+
+### `getAddressFromMessage`
+
+Get the address from the SIWE message.
+
+```ts
+import { getAddressFromMessage } from '@web3modal/siwe-react-native'
+
+const address = getAddressFromMessage(message)
+```

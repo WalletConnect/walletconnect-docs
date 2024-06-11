@@ -623,6 +623,7 @@ module.exports = {
             'appkit/react-native/core/options',
             'appkit/react-native/core/hooks',
             'appkit/react-native/core/components',
+            'appkit/react-native/core/siwe',
             'appkit/react-native/core/resources'
           ]
         },
