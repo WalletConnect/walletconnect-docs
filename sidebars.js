@@ -328,6 +328,7 @@ module.exports = {
         }
       ]
     },
+    specs,
     dropdown_placeholder
   ],
   AppKit_Next: [
@@ -418,6 +419,7 @@ module.exports = {
         }
       ]
     },
+    specs,
     dropdown_placeholder
   ],
   AppKit_Vue: [
@@ -508,6 +510,7 @@ module.exports = {
         }
       ]
     },
+    specs,
     dropdown_placeholder
   ],
   AppKit_JS: [
@@ -601,6 +604,7 @@ module.exports = {
         }
       ]
     },
+    specs,
     dropdown_placeholder
   ],
   AppKit_React_Native: [
@@ -683,6 +687,7 @@ module.exports = {
         }
       ]
     },
+    specs,
     dropdown_placeholder
   ],
   AppKit_Flutter: [
@@ -725,6 +730,7 @@ module.exports = {
         }
       ]
     },
+    specs,
     dropdown_placeholder
   ],
   AppKit_iOS: [
@@ -761,6 +767,7 @@ module.exports = {
         }
       ]
     },
+    specs,
     dropdown_placeholder
   ],
   AppKit_Android: [
@@ -797,6 +804,7 @@ module.exports = {
         }
       ]
     },
+    specs,
     dropdown_placeholder
   ],
   AppKit_Unity: [
@@ -832,6 +840,7 @@ module.exports = {
         }
       ]
     },
+    specs,
     dropdown_placeholder
   ],
   walletKit_Android: [
@@ -882,7 +891,7 @@ module.exports = {
         }
       ]
     },
-    ,
+    specs,
     dropdown_placeholder
   ],
   walletKit_iOS: [
@@ -934,7 +943,7 @@ module.exports = {
         }
       ]
     },
-    ,
+    specs,
     dropdown_placeholder
   ],
   walletKit_Flutter: [
@@ -964,7 +973,7 @@ module.exports = {
         }
       ]
     },
-    ,
+    specs,
     dropdown_placeholder
   ],
   walletKit_React_Native: [
@@ -1014,7 +1023,7 @@ module.exports = {
         }
       ]
     },
-    ,
+    specs,
     dropdown_placeholder
   ],
   walletKit_Web: [
@@ -1046,7 +1055,7 @@ module.exports = {
         }
       ]
     },
-    ,
+    specs,
     dropdown_placeholder
   ],
   walletKit_C_Sharp: [
@@ -1074,6 +1083,7 @@ module.exports = {
         }
       ]
     },
+    specs,
     dropdown_placeholder
   ]
 }
