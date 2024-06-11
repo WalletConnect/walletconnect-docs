@@ -149,7 +149,7 @@ const welcome = {
       type: 'link',
       label: 'Welcome',
       href: '/'
-    },
+    }
   ]
 }
 
@@ -165,6 +165,24 @@ module.exports = {
     },
     {
       type: 'category',
+      label: 'INTRODUCTION',
+      collapsible: false,
+      className: 'menu_outer_list',
+      items: [
+        {
+          type: 'link',
+          label: 'Welcome',
+          href: '/'
+        },
+        {
+          type: 'link',
+          label: 'System Status',
+          href: 'https://status.walletconnect.com'
+        }
+      ]
+    },
+    {
+      type: 'category',
       label: 'SDKs',
       collapsible: false,
       className: 'menu_outer_list menu_outer_list--margin-top',
@@ -172,7 +190,7 @@ module.exports = {
         {
           type: 'category',
           label: 'AppKit',
-          collapsed: true,
+          collapsed: false,
           collapsible: true,
           className: 'sidebar__logo sidebar__logo--appkit',
           items: [
@@ -180,6 +198,8 @@ module.exports = {
             {
               type: 'category',
               label: 'Features',
+              collapsed: false,
+              collapsible: true,
               items: [
                 { type: 'doc', label: 'Swaps', id: 'appkit/features/swaps' },
                 { type: 'doc', label: 'Email & Socials', id: 'appkit/features/socials' },
@@ -187,7 +207,7 @@ module.exports = {
                 { type: 'doc', label: 'One-Click Auth', id: 'appkit/features/one-click-auth' },
                 { type: 'doc', label: 'Onramp', id: 'appkit/features/onramp' },
                 { type: 'doc', label: 'Notifications', id: 'appkit/features/notifications' },
-                { type: 'doc', label: 'Solana', id: 'appkit/features/solana' },
+                { type: 'doc', label: 'Solana', id: 'appkit/features/solana' }
               ]
             }
           ]
@@ -195,7 +215,7 @@ module.exports = {
         {
           type: 'category',
           label: 'WalletKit',
-          collapsed: true,
+          collapsed: false,
           collapsible: true,
           className: 'sidebar__logo sidebar__logo--walletkit',
           items: [
@@ -203,14 +223,16 @@ module.exports = {
             {
               type: 'category',
               label: 'Features',
+              collapsed: false,
+              collapsible: true,
               items: [
                 { type: 'doc', label: 'One-Click Auth', id: 'walletkit/features/one-click-auth' },
                 { type: 'doc', label: 'Notifications', id: 'walletkit/features/notifications' },
                 { type: 'doc', label: 'Verify', id: 'walletkit/features/verify' }
               ]
-            },
+            }
           ]
-        },
+        }
       ]
     },
     cloud,
@@ -219,7 +241,7 @@ module.exports = {
     dropdown_placeholder
   ],
   AppKit_React: [
-      welcome,
+    welcome,
     {
       type: 'category',
       label: 'AppKit',
@@ -243,19 +265,12 @@ module.exports = {
         {
           type: 'category',
           label: 'Onboarding',
-          items: [
-            'appkit/react/onboarding/socials',
-            'appkit/react/onboarding/smart-accounts'
-          ]
+          items: ['appkit/react/onboarding/socials', 'appkit/react/onboarding/smart-accounts']
         },
         {
           type: 'category',
           label: 'Transactions',
-          items: [
-            'appkit/react/transactions/onramp',
-            'appkit/react/transactions/transaction-history',
-            'appkit/react/transactions/swaps'
-          ]
+          items: ['appkit/react/transactions/onramp', 'appkit/react/transactions/swaps']
         },
         {
           type: 'category',
@@ -280,7 +295,11 @@ module.exports = {
               type: 'category',
               label: 'Authorization Signatures',
               items: [
-                { type: 'doc', label: 'About', id: 'appkit/react/notifications/authorization-signatures/overview' },
+                {
+                  type: 'doc',
+                  label: 'About',
+                  id: 'appkit/react/notifications/authorization-signatures/overview'
+                },
                 {
                   type: 'doc',
                   label: 'This App',
@@ -309,6 +328,7 @@ module.exports = {
         }
       ]
     },
+    specs,
     dropdown_placeholder
   ],
   AppKit_Next: [
@@ -336,19 +356,12 @@ module.exports = {
         {
           type: 'category',
           label: 'Onboarding',
-          items: [
-            'appkit/next/onboarding/socials',
-            'appkit/next/onboarding/smart-accounts'
-          ]
+          items: ['appkit/next/onboarding/socials', 'appkit/next/onboarding/smart-accounts']
         },
         {
           type: 'category',
           label: 'Transactions',
-          items: [
-            'appkit/next/transactions/onramp',
-            'appkit/next/transactions/transaction-history',
-            'appkit/next/transactions/swaps'
-          ]
+          items: ['appkit/next/transactions/onramp', 'appkit/next/transactions/swaps']
         },
         {
           type: 'category',
@@ -373,7 +386,11 @@ module.exports = {
               type: 'category',
               label: 'Authorization Signatures',
               items: [
-                { type: 'doc', label: 'About', id: 'appkit/next/notifications/authorization-signatures/overview' },
+                {
+                  type: 'doc',
+                  label: 'About',
+                  id: 'appkit/next/notifications/authorization-signatures/overview'
+                },
                 {
                   type: 'doc',
                   label: 'This App',
@@ -402,6 +419,7 @@ module.exports = {
         }
       ]
     },
+    specs,
     dropdown_placeholder
   ],
   AppKit_Vue: [
@@ -429,19 +447,12 @@ module.exports = {
         {
           type: 'category',
           label: 'Onboarding',
-          items: [
-            'appkit/vue/onboarding/socials',
-            'appkit/vue/onboarding/smart-accounts',
-          ]
+          items: ['appkit/vue/onboarding/socials', 'appkit/vue/onboarding/smart-accounts']
         },
         {
           type: 'category',
           label: 'Transactions',
-          items: [
-            'appkit/vue/transactions/onramp',
-            'appkit/vue/transactions/transaction-history',
-            'appkit/vue/transactions/swaps'
-          ]
+          items: ['appkit/vue/transactions/onramp', 'appkit/vue/transactions/swaps']
         },
         {
           type: 'category',
@@ -466,7 +477,11 @@ module.exports = {
               type: 'category',
               label: 'Authorization Signatures',
               items: [
-                { type: 'doc', label: 'About', id: 'appkit/vue/notifications/authorization-signatures/overview' },
+                {
+                  type: 'doc',
+                  label: 'About',
+                  id: 'appkit/vue/notifications/authorization-signatures/overview'
+                },
                 {
                   type: 'doc',
                   label: 'This App',
@@ -495,6 +510,7 @@ module.exports = {
         }
       ]
     },
+    specs,
     dropdown_placeholder
   ],
   AppKit_JS: [
@@ -524,17 +540,13 @@ module.exports = {
           label: 'Onboarding',
           items: [
             'appkit/javascript/onboarding/socials',
-            'appkit/javascript/onboarding/smart-accounts',
+            'appkit/javascript/onboarding/smart-accounts'
           ]
         },
         {
           type: 'category',
           label: 'Transactions',
-          items: [
-            'appkit/javascript/transactions/onramp',
-            'appkit/javascript/transactions/transaction-history',
-            'appkit/javascript/transactions/swaps'
-          ]
+          items: ['appkit/javascript/transactions/onramp', 'appkit/javascript/transactions/swaps']
         },
         {
           type: 'category',
@@ -559,7 +571,11 @@ module.exports = {
               type: 'category',
               label: 'Authorization Signatures',
               items: [
-                { type: 'doc', label: 'About', id: 'appkit/javascript/notifications/authorization-signatures/overview' },
+                {
+                  type: 'doc',
+                  label: 'About',
+                  id: 'appkit/javascript/notifications/authorization-signatures/overview'
+                },
                 {
                   type: 'doc',
                   label: 'This App',
@@ -588,6 +604,7 @@ module.exports = {
         }
       ]
     },
+    specs,
     dropdown_placeholder
   ],
   AppKit_React_Native: [
@@ -637,7 +654,11 @@ module.exports = {
               type: 'category',
               label: 'Authorization Signatures',
               items: [
-                { type: 'doc', label: 'About', id: 'appkit/react-native/notifications/authorization-signatures/overview' },
+                {
+                  type: 'doc',
+                  label: 'About',
+                  id: 'appkit/react-native/notifications/authorization-signatures/overview'
+                },
                 {
                   type: 'doc',
                   label: 'This App',
@@ -666,6 +687,7 @@ module.exports = {
         }
       ]
     },
+    specs,
     dropdown_placeholder
   ],
   AppKit_Flutter: [
@@ -705,9 +727,10 @@ module.exports = {
             'appkit/flutter/cloud/blockchain-api',
             'appkit/flutter/cloud/analytics'
           ]
-        },
+        }
       ]
     },
+    specs,
     dropdown_placeholder
   ],
   AppKit_iOS: [
@@ -727,7 +750,7 @@ module.exports = {
             'appkit/ios/core/options',
             'appkit/ios/core/actions',
             'appkit/ios/core/one-click-auth',
-            'appkit/ios/core/custom-chains',
+            'appkit/ios/core/custom-chains'
           ]
         },
         {
@@ -744,6 +767,7 @@ module.exports = {
         }
       ]
     },
+    specs,
     dropdown_placeholder
   ],
   AppKit_Android: [
@@ -780,6 +804,7 @@ module.exports = {
         }
       ]
     },
+    specs,
     dropdown_placeholder
   ],
   AppKit_Unity: [
@@ -815,6 +840,7 @@ module.exports = {
         }
       ]
     },
+    specs,
     dropdown_placeholder
   ],
   walletKit_Android: [
@@ -843,10 +869,10 @@ module.exports = {
                 'walletkit/android/notifications/notify/installation',
                 'walletkit/android/notifications/notify/usage',
                 'walletkit/android/notifications/notify/spam-protection',
-                'walletkit/android/notifications/notify/resources',
+                'walletkit/android/notifications/notify/resources'
               ]
             },
-            'walletkit/android/notifications/push',
+            'walletkit/android/notifications/push'
           ]
         },
         'walletkit/android/best-practices',
@@ -864,7 +890,8 @@ module.exports = {
           ]
         }
       ]
-    },,
+    },
+    specs,
     dropdown_placeholder
   ],
   walletKit_iOS: [
@@ -894,10 +921,10 @@ module.exports = {
                 'walletkit/ios/notifications/notify/installation',
                 'walletkit/ios/notifications/notify/usage',
                 'walletkit/ios/notifications/notify/spam-protection',
-                'walletkit/ios/notifications/notify/resources',
+                'walletkit/ios/notifications/notify/resources'
               ]
             },
-            'walletkit/ios/notifications/push',
+            'walletkit/ios/notifications/push'
           ]
         },
         'walletkit/ios/best-practices',
@@ -915,7 +942,8 @@ module.exports = {
           ]
         }
       ]
-    },,
+    },
+    specs,
     dropdown_placeholder
   ],
   walletKit_Flutter: [
@@ -944,7 +972,8 @@ module.exports = {
           ]
         }
       ]
-    },,
+    },
+    specs,
     dropdown_placeholder
   ],
   walletKit_React_Native: [
@@ -972,10 +1001,10 @@ module.exports = {
                 'walletkit/react-native/notifications/notify/overview',
                 'walletkit/react-native/notifications/notify/installation',
                 'walletkit/react-native/notifications/notify/usage',
-                'walletkit/react-native/notifications/notify/spam-protection',
+                'walletkit/react-native/notifications/notify/spam-protection'
               ]
             },
-            'walletkit/react-native/notifications/push',
+            'walletkit/react-native/notifications/push'
           ]
         },
         'walletkit/react-native/best-practices',
@@ -993,7 +1022,8 @@ module.exports = {
           ]
         }
       ]
-    },,
+    },
+    specs,
     dropdown_placeholder
   ],
   walletKit_Web: [
@@ -1024,7 +1054,8 @@ module.exports = {
           ]
         }
       ]
-    },,
+    },
+    specs,
     dropdown_placeholder
   ],
   walletKit_C_Sharp: [
@@ -1052,6 +1083,7 @@ module.exports = {
         }
       ]
     },
+    specs,
     dropdown_placeholder
-  ],
+  ]
 }

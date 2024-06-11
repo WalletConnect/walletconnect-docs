@@ -47,8 +47,8 @@
   visibility: hidden;
 }
 
-@media (max-width: 996px){
-  .kill{
+@media (max-width: 996px) {
+  .kill {
     display: none;
   }
 }
@@ -1376,59 +1376,6 @@ article img {
   align-items: center;
   gap: 0.75rem;
   flex-wrap: wrap;
-}
-
-.home__contribute {
-  border-radius: 1rem;
-  border: 1.5px solid var(--ifm-border-color);
-  display: flex;
-  align-items: center;
-}
-
-.home__contribute img {
-  border: none;
-  border-radius: 0;
-  height: 7rem;
-}
-
-.home__contribute a {
-  margin-left: auto;
-  margin-right: 1.75rem;
-  width: fit-content;
-  white-space: pre;
-  padding: 0.5rem 1.125rem;
-  border-radius: 0.875rem;
-  border: none;
-  background: linear-gradient(180deg, var(--ifm-color-gray-800) 0%, var(--ifm-color-gray-900) 100%);
-  box-shadow: 0px 0px 8px -1px var(--ifm-color-gray-900) inset;
-  color: white !important;
-  font-weight: 700;
-  letter-spacing: 0.25px;
-  display: flex;
-  align-items: center;
-  gap: 2rem;
-  transition: background 0.2s ease-in-out;
-}
-
-.home__contribute a > svg {
-  width: 1.25rem;
-  height: 1.25rem;
-  transition: transform 0.2s ease-in-out;
-}
-
-.home__contribute a:hover > svg {
-  transform: translateX(0.25rem);
-}
-
-.home__contribute--text {
-  max-width: 30rem;
-  margin: 0;
-  padding: 1rem 0;
-}
-
-.home__contribute--heading {
-  display: flex;
-  align-items: center;
 }
 
 .docs-doc-id-readme h2#how-to-contribute {
