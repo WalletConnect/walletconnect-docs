@@ -1,0 +1,104 @@
+---
+pagination_next: appkit/react/core/installation
+title: Introduction
+---
+
+import Button from '../../components/button'
+import Wrapper from '../../components/Home/Wrapper'
+import useBaseUrl from '@docusaurus/useBaseUrl'
+
+import reactLogo from '../../../static/assets/home/reactLogo.png'
+import nextjsLogo from '../../../static/assets/home/nextjsLogo.png'
+import vueLogo from '../../../static/assets/home/vueLogo.png'
+import javascriptLogo from '../../../static/assets/home/javascriptLogo.png'
+
+# Onramp
+
+On-Ramp securely provides users access to over 100 cryptocurrencies from right within your app. In just a few clicks, users can purchase tokens to support in-app activity and transactions across multiple chains. Set up in minutes with just one line of code.
+
+<Button name="Try Demo" url="https://lab.web3modal.com/library/wagmi/" />
+
+## Get Started
+
+<Wrapper
+  type="large"
+  fit={false}
+  items={[
+    {
+      name: 'React',
+      type: 'react',
+      description: 'Get started with AppKit in React.',
+      icon: reactLogo,
+      href: '../react/transactions/onramp'
+    },
+    {
+      name: 'Next.js',
+      type: 'next',
+      description: 'Get started with AppKit in Next.js.',
+      icon: nextjsLogo,
+      href: '../next/transactions/onramp',
+      isWhite: true
+    },
+    {
+      name: 'Vue',
+      type: 'vue',
+      description: 'Get started with AppKit in Vue.',
+      icon: vueLogo,
+      href: '../vue/transactions/onramp'
+    },
+    {
+      name: 'JavaScript',
+      type: 'javascript',
+      description: 'Get started with AppKit in JavaScript.',
+      icon: javascriptLogo,
+      href: '../javascript/transactions/onramp'
+    }
+  ]}
+/>
+
+## Process Overview
+
+AppKit Onramp makes it easy for users to purchase crypto without the hassle of switching between multiple platforms and signing multiple messages - a simple, seamless, in-app experience for anyone looking to securely transact within web3.
+
+For a step-by-step guide on user flow with AppKit Onramp, refer to our Youtube video [here](https://youtu.be/m1E_N5b3r18?t=241&feature=shared).
+
+:::info Note
+Onramp is supported in the latest version of AppKit. If you are using an older version, make sure you upgrade.
+:::
+
+### Connect your wallet
+
+Head over to a AppKit-enabled application and click the "Connect Wallet" button. You will be prompted to connect your wallet.
+
+<img className="image-margin" src={useBaseUrl('/img/w3m/onramp/1.png')} />
+
+### Select "Buy Crypto"
+
+Once connected, select "Buy Crypto" from the wallet modal.
+
+<img className="image-margin" src={useBaseUrl('/img/w3m/onramp/2.png')} />
+
+### Choose your provider
+
+Select "Coinbase" as your provider.
+
+<img className="image-margin" src={useBaseUrl('/img/w3m/onramp/3.png')} />
+
+### Complete your purchase
+
+Complete your purchase using Coinbase Pay. You will be prompted to sign in to your Coinbase account.
+If the payment page does not appear, you can copy link from the wallet modal and paste it in your browser.
+
+<img className="image-margin" src={useBaseUrl('/img/w3m/onramp/4.png')} />
+
+### Select assets and amount
+
+Choose the asset and amount you would like to purchase from Coinbase.
+
+<img className="image-margin" src={useBaseUrl('/img/w3m/onramp/5.png')} />
+
+### Receive your crypto
+
+Once your purchase is complete, you will receive your crypto in your wallet.
+
+<img className="image-margin" src={useBaseUrl('/img/w3m/onramp/6.png')} />

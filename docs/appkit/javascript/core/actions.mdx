@@ -1,0 +1,186 @@
+import Table from '../../../components/Table'
+import PlatformTabs from '../../../components/PlatformTabs'
+import PlatformTabItem from '../../../components/PlatformTabItem'
+
+import WagmiActions from '../wagmi/actions.mdx'
+import EthersActions from '../ethers/actions.mdx'
+import SolanaActions from '../solana/actions.mdx'
+
+# Actions
+
+Actions are functions that will help you control the modal, subscribe to wallet events and interact with them and smart contracts.
+
+## Open and close the modal
+
+```ts
+const modal = createWeb3Modal({ wagmiConfig, projectId })
+
+modal.open()
+
+modal.close()
+```
+
+You can also select the modal's view when calling the `open` function
+
+```ts
+modal.open({ view: 'Account' })
+```
+
+List of views you can select
+
+<Table
+  headers={['Variable', 'Description']}
+  data={[
+    {
+      variable: { code: 'Connect' },
+      description: 'Principal view of the modal - default view when disconnected'
+    },
+    {
+      variable: { code: 'Account' },
+      description: 'User profile - default view when connected'
+    },
+    {
+      variable: { code: 'AllWallets' },
+      description: 'Shows the list of all available wallets'
+    },
+    {
+      variable: { code: 'Networks' },
+      description:
+        'List of available networks - you can select and target a specific network before connecting'
+    },
+    {
+      variable: { code: 'WhatIsANetwork' },
+      description: '"What is a network" onboarding view'
+    },
+    {
+      variable: { code: 'WhatIsAWallet' },
+      description: '"What is a wallet" onboarding view'
+    },
+    {
+      variable: { code: 'OnRampProviders' },
+      description: '"OnRamp main view'
+    }
+  ]}
+/>
+
+## Disconnect
+
+```ts
+modal.disconnect()
+```
+
+## WalletInfo
+
+Metadata information from the connected wallet
+
+```ts
+function handler({ name, icon }) {
+  console.log(name, icon)
+}
+
+modal.subscribeWalletInfo(handler)
+
+//or
+
+const { name, icon } = modal.getWalletInfo()
+```
+
+## Ethereum Library
+
+<PlatformTabs groupId="eth-lib" activeOptions={["wagmi", "ethers"]}>
+<PlatformTabItem value="wagmi">
+
+<WagmiActions />
+
+</PlatformTabItem>
+<PlatformTabItem value="ethers">
+
+<EthersActions />
+
+</PlatformTabItem>
+</PlatformTabs>
+
+## Modal State
+
+Get the current value of the modal's state
+
+```ts
+const modal = createWeb3Modal({ wagmiConfig, projectId })
+
+const { open, selectedNetworkId } = modal.getState()
+```
+
+The modal state is an object of two properties:
+
+<Table
+  headers={['Property', 'Description', 'Type']}
+  data={[
+    {
+      variable: { code: 'open' },
+      description: 'Open state will be true when the modal is open and false when closed.',
+      type: { code: 'boolean' }
+    },
+    {
+      variable: { code: 'selectedNetworkId' },
+      description: 'The current chain id selected by the user',
+      type: { code: 'number' }
+    }
+  ]}
+/>
+
+You can also subscribe to the modal's state changes.
+
+```ts
+const modal = createWeb3Modal({ wagmiConfig, projectId })
+
+modal.subscribeState(newState => console.log(newState))
+```
+
+## ThemeMode
+
+Set the `themeMode` after creating the modal
+
+```ts
+const modal = createWeb3Modal({ wagmiConfig, projectId })
+
+modal.setThemeMode('dark')
+```
+
+Get the current `themeMode` value by calling the `getThemeMode` function
+
+```ts
+const modal = createWeb3Modal({ wagmiConfig, projectId })
+
+const themeMode = modal.getThemeMode()
+```
+
+## themeVariables
+
+Set the `themeVariables` after creating the modal
+
+```ts
+const modal = createWeb3Modal({ wagmiConfig, projectId })
+
+modal.setThemeVariables({ ... })
+```
+
+Get the current `themeVariables` value by calling the `getThemeVariables` function
+
+```ts
+const modal = createWeb3Modal({ wagmiConfig, projectId })
+
+const themeMode = modal.getThemeVariables()
+```
+
+## Subscribe to theme changes
+
+```ts
+const unsubscribe = modal.subscribeTheme(newTheme => console.log(newTheme))
+```
+
+## Track modal events
+
+```ts
+modal.getEvent() // get last event
+modal.subscribeEvents(event => console.log(event)) // subscribe to events
+```

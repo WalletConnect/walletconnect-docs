@@ -1,0 +1,204 @@
+import Table from '../../../components/Table'
+import Button from '../../../components/button'
+import PlatformTabs from '../../../components/PlatformTabs'
+import PlatformTabItem from '../../../components/PlatformTabItem'
+
+import WagmiHooks from '../wagmi1/hooks.mdx'
+import EthersHooks from '../ethers/hooks.mdx'
+import Ethers5Hooks from '../ethers5/hooks.mdx'
+
+# Hooks
+
+## useWeb3Modal
+
+Control the modal with the `useWeb3Modal` hook
+
+<PlatformTabs groupId="eth-lib" activeOptions={["wagmi1", "ethers", "ethers5"]}>
+
+<PlatformTabItem value="wagmi1">
+```ts
+  import { useWeb3Modal } from '@web3modal/wagmi-react-native'
+
+export default function Component() {
+
+    const { open, close } = useWeb3Modal()
+
+    open()
+
+}
+
+````
+</PlatformTabItem>
+
+<PlatformTabItem value="ethers">
+```ts
+  import { useWeb3Modal } from '@web3modal/ethers-react-native'
+
+  export default function Component() {
+
+    const { open, close } = useWeb3Modal()
+
+    open()
+  }
+````
+
+</PlatformTabItem>
+
+<PlatformTabItem value="ethers5">
+```ts
+  import { useWeb3Modal } from '@web3modal/ethers5-react-native'
+
+export default function Component() {
+
+    const { open, close } = useWeb3Modal()
+
+    open()
+
+}
+
+````
+</PlatformTabItem>
+
+</PlatformTabs>
+
+You can also select the modal's view when calling the `open` function
+
+```ts
+open({ view: 'Account' })
+````
+
+List of views you can select
+
+<Table
+  headers={['Variable', 'Description']}
+  data={[
+    {
+      variable: { code: 'Connect' },
+      description: 'Principal view of the modal - default view when disconnected'
+    },
+    {
+      variable: { code: 'Account' },
+      description: 'User profile - default view when connected'
+    },
+    {
+      variable: { code: 'Networks' },
+      description:
+        'List of available networks - you can select and target a specific network before connecting'
+    },
+    {
+      variable: { code: 'WhatIsANetwork' },
+      description: '"What is a network" onboarding view'
+    },
+    {
+      variable: { code: 'WhatIsAWallet' },
+      description: '"What is a wallet" onboarding view'
+    }
+  ]}
+/>
+
+## useWeb3ModalState
+
+Get the current value of the modal's state
+
+<PlatformTabs groupId="eth-lib" activeOptions={["wagmi1", "ethers", "ethers5"]}>
+
+<PlatformTabItem value="wagmi1">
+  ```ts
+    import { useWeb3ModalState } from '@web3modal/wagmi-react-native'
+
+    const { open, selectedNetworkId } = useWeb3ModalState()
+
+````
+</PlatformTabItem>
+
+<PlatformTabItem value="ethers">
+```ts
+import { useWeb3ModalState } from '@web3modal/ethers-react-native'
+
+const { open, selectedNetworkId } = useWeb3ModalState()
+````
+
+</PlatformTabItem>
+
+<PlatformTabItem value="ethers5">
+```ts
+  import { useWeb3ModalState } from '@web3modal/ethers5-react-native'
+
+const { open, selectedNetworkId } = useWeb3ModalState()
+
+````
+</PlatformTabItem>
+
+</PlatformTabs>
+
+The modal state consists of two reactive values:
+
+<Table
+  headers={['State', 'Description', 'Type']}
+  data={[
+    {
+      variable: { code: 'open' },
+      description: 'Open state will be true when the modal is open and false when closed.',
+      type: { code: 'boolean' }
+    },
+    {
+      variable: { code: 'selectedNetworkId' },
+      description: 'The current chain id selected by the user',
+      type: { code: 'number' }
+    }
+  ]}
+/>
+
+
+## useWeb3ModalEvents
+
+Get the last tracked modal event
+
+<PlatformTabs groupId="eth-lib" activeOptions={["wagmi1", "ethers", "ethers5"]}>
+
+<PlatformTabItem value="wagmi1">
+  ```ts
+    import { useWeb3ModalEvents } from '@web3modal/wagmi-react-native'
+
+    const event = useWeb3ModalEvents()
+````
+
+</PlatformTabItem>
+
+<PlatformTabItem value="ethers">
+```ts
+  import { useWeb3ModalEvents } from '@web3modal/ethers-react-native'
+
+const event = useWeb3ModalEvents()
+
+````
+</PlatformTabItem>
+
+<PlatformTabItem value="ethers5">
+```ts
+  import { useWeb3ModalEvents } from '@web3modal/ethers5-react-native'
+
+  const event = useWeb3ModalEvents()
+````
+
+</PlatformTabItem>
+
+</PlatformTabs>
+
+## Ethereum Library
+
+<PlatformTabs groupId="eth-lib" activeOptions={["wagmi1", "ethers", "ethers5"]}>
+
+<PlatformTabItem value="wagmi1">
+  <WagmiHooks />
+</PlatformTabItem>
+
+<PlatformTabItem value="ethers">
+  <EthersHooks />
+</PlatformTabItem>
+
+<PlatformTabItem value="ethers5">
+  <Ethers5Hooks />
+</PlatformTabItem>
+
+</PlatformTabs>

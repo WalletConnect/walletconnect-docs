@@ -1,494 +1,1090 @@
 // @ts-check
 
+/* Global Sections */
+const dropdown_placeholder = {
+  type: 'html',
+  value: '<div class="dropdown_placeholder"></div>',
+  defaultStyle: true
+}
+
+const cloud = {
+  type: 'category',
+  label: 'Cloud',
+  collapsible: false,
+  className: 'menu_outer_list',
+  items: [
+    'cloud/explorer',
+    'cloud/explorer-submission',
+    {
+      type: 'category',
+      label: 'Explorer Chains',
+      items: ['cloud/chains/overview', 'cloud/chains/chain-list']
+    },
+    'cloud/verify',
+    'cloud/relay',
+    'cloud/blockchain-api',
+    'cloud/analytics'
+  ]
+}
+
+const advanced = {
+  type: 'category',
+  label: 'Advanced',
+  collapsible: false,
+  className: 'menu_outer_list',
+  items: [
+    {
+      type: 'category',
+      label: 'Multi-Chain',
+      items: [
+        {
+          type: 'category',
+          label: 'RPC Reference',
+          items: [
+            'advanced/multichain/rpc-reference/cosmos-rpc',
+            'advanced/multichain/rpc-reference/ethereum-rpc',
+            'advanced/multichain/rpc-reference/solana-rpc',
+            'advanced/multichain/rpc-reference/near-rpc',
+            'advanced/multichain/rpc-reference/starknet-rpc',
+            'advanced/multichain/rpc-reference/stellar-rpc',
+            'advanced/multichain/rpc-reference/hedera-rpc',
+            'advanced/multichain/rpc-reference/tezos-rpc',
+            'advanced/multichain/rpc-reference/xrpl-rpc',
+            'advanced/multichain/rpc-reference/casper-rpc',
+            'advanced/multichain/rpc-reference/everscale-rpc'
+          ]
+        },
+        {
+          type: 'category',
+          label: 'Examples',
+          items: [
+            ,
+            {
+              type: 'category',
+              label: 'Polkadot',
+              items: [
+                'advanced/multichain/polkadot/dapp-integration-guide',
+                'advanced/multichain/polkadot/namespaces-guide',
+                'advanced/multichain/polkadot/wallet-integration-guide'
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      type: 'category',
+      label: 'Providers',
+      collapsible: true,
+      collapsed: true,
+      items: ['advanced/providers/ethereum', 'advanced/providers/universal']
+    },
+    {
+      type: 'category',
+      label: 'WalletConnectModal',
+      collapsed: true,
+      collapsible: true,
+      items: [
+        'advanced/walletconnectmodal/about',
+        'advanced/walletconnectmodal/usage',
+        'advanced/walletconnectmodal/options',
+        'advanced/walletconnectmodal/theming',
+        'advanced/walletconnectmodal/resources'
+      ]
+    },
+    {
+      type: 'category',
+      label: 'APIs',
+      collapsed: true,
+      collapsible: true,
+      items: [
+        {
+          type: 'category',
+          label: 'Core',
+          items: ['api/core/pairing', 'api/core/relay', 'api/core/shared-core']
+        },
+        {
+          type: 'category',
+          label: 'Notify',
+          items: ['api/notify/about']
+        },
+        {
+          type: 'category',
+          label: 'Sign',
+          items: [
+            'api/sign/overview',
+            'api/sign/dapp-usage',
+            'api/sign/wallet-usage',
+            'api/sign/smart-contract-wallet-usage'
+          ]
+        }
+      ]
+    },
+    'advanced/push-server'
+  ]
+}
+
+const specs = {
+  type: 'category',
+  label: 'Technical Reference',
+  collapsible: false,
+  className: 'menu_outer_list',
+  items: [
+    {
+      type: 'link',
+      label: 'Specs',
+      href: 'https://specs.walletconnect.com/'
+    },
+    'advanced/faq'
+  ]
+}
+
+const welcome = {
+  type: 'category',
+  label: 'INTRODUCTION',
+  collapsible: false,
+  className: 'menu_outer_list',
+  items: [
+    {
+      type: 'link',
+      label: 'Welcome',
+      href: '/'
+    }
+  ]
+}
+
 /** @type {import('@docusaurus/plugin-content-docs').SidebarsConfig} */
 
 module.exports = {
   mainSidebar: [
     {
-      type: 'html',
-      value:
-        '<a class="navbar__brand" href="/"><div class="navbar__logo"><img src="/img/walletconnect-logo-white.svg#dark-mode-only"  alt="WalletConnect Logo"><img src="/img/walletconnect-logo-black.svg#light-mode-only"  alt="WalletConnect Logo"></div>WalletConnect<span>Docs<span></a>',
-      defaultStyle: true
+      type: 'doc',
+      label: 'Home',
+      className: 'kill',
+      id: 'readme'
     },
     {
       type: 'category',
-      label: 'Introduction',
-      className: 'menu_outer_list',
-      collapsible: false,
-      items: ['readme', 'getting-started']
-    },
-    {
-      type: 'category',
-      label: 'SDKs',
-      collapsible: false,
-      className: 'menu_outer_list',
-      items: [
-        {
-          type: 'category',
-          label: 'Web3Modal',
-          collapsed: true,
-          collapsible: true,
-          items: [
-            'web3modal/about',
-
-            {
-              type: 'category',
-              className: 'sidebar__logo sidebar__logo--react',
-              label: 'React',
-              items: [
-                { type: 'doc', label: 'Getting started', id: 'web3modal/react/about' },
-                'web3modal/react/hooks',
-                'web3modal/react/options',
-                'web3modal/react/components',
-                'web3modal/react/email',
-                'web3modal/react/siwe',
-                'web3modal/react/smart-accounts',
-                'web3modal/react/onramp',
-                'web3modal/react/theming',
-                'web3modal/react/resources'
-              ]
-            },
-            {
-              type: 'category',
-              className: 'sidebar__logo sidebar__logo--nextjs',
-              label: 'Next.js',
-              items: [
-                { type: 'doc', label: 'Getting started', id: 'web3modal/nextjs/about' },
-                'web3modal/nextjs/hooks',
-                'web3modal/nextjs/options',
-                'web3modal/nextjs/components',
-                'web3modal/nextjs/email',
-                'web3modal/nextjs/onramp',
-                'web3modal/nextjs/siwe',
-                'web3modal/nextjs/smart-accounts',
-                'web3modal/nextjs/theming',
-                'web3modal/nextjs/resources'
-              ]
-            },
-            {
-              type: 'category',
-              className: 'sidebar__logo sidebar__logo--vue',
-              label: 'Vue',
-              items: [
-                { type: 'doc', label: 'Getting started', id: 'web3modal/vue/about' },
-                'web3modal/vue/composables',
-                'web3modal/vue/options',
-                'web3modal/vue/components',
-                'web3modal/vue/email',
-                'web3modal/vue/onramp',
-                'web3modal/vue/siwe',
-                'web3modal/vue/smart-accounts',
-                'web3modal/vue/theming',
-                'web3modal/vue/resources'
-              ]
-            },
-            {
-              type: 'category',
-              className: 'sidebar__logo sidebar__logo--javascript',
-              label: 'JavaScript',
-              items: [
-                { type: 'doc', label: 'Getting started', id: 'web3modal/javascript/about' },
-                'web3modal/javascript/actions',
-                'web3modal/javascript/options',
-                'web3modal/javascript/components',
-                'web3modal/javascript/email',
-                'web3modal/javascript/siwe',
-                'web3modal/javascript/smart-accounts',
-                'web3modal/javascript/onramp',
-                'web3modal/javascript/theming',
-                'web3modal/javascript/resources'
-              ]
-            },
-            {
-              type: 'category',
-              className: 'sidebar__logo sidebar__logo--react-native',
-              label: 'React Native',
-              items: [
-                { type: 'doc', label: 'Getting started', id: 'web3modal/react-native/about' },
-                'web3modal/react-native/options',
-                'web3modal/react-native/hooks',
-                'web3modal/react-native/components',
-                'web3modal/react-native/email',
-                'web3modal/react-native/resources'
-              ]
-            },
-            {
-              type: 'category',
-              label: 'Flutter',
-              className: 'sidebar__logo sidebar__logo--flutter',
-              items: [
-                ,
-                { type: 'doc', label: 'Getting started', id: 'web3modal/flutter/installation' },
-                { type: 'doc', label: 'Usage', id: 'web3modal/flutter/options' },
-                { type: 'doc', label: 'Options', id: 'web3modal/flutter/custom-wallets' },
-                { type: 'doc', label: 'Email Wallets', id: 'web3modal/flutter/email-wallets' },
-                'web3modal/flutter/actions',
-                'web3modal/flutter/events',
-                'web3modal/flutter/theming',
-                'web3modal/flutter/custom-chains',
-                { type: 'doc', label: 'Migration', id: 'web3modal/flutter/migration' },
-                {
-                  type: 'link',
-                  label: 'Example',
-                  href: 'https://github.com/WalletConnect/Web3ModalFlutter/tree/master/example'
-                }
-              ]
-            },
-            {
-              type: 'category',
-              label: 'Android',
-              className: 'sidebar__logo sidebar__logo--android',
-              items: [
-                { type: 'doc', label: 'Getting started', id: 'web3modal/android/about' },
-                'web3modal/android/options',
-                'web3modal/android/usage',
-                'web3modal/android/actions',
-                'web3modal/android/components',
-                'web3modal/android/theming',
-                {
-                  type: 'link',
-                  label: 'Example',
-                  href: 'https://github.com/WalletConnect/WalletConnectKotlinV2/tree/master/sample/modal/src/main/kotlin/com/walletconnect/sample/modal'
-                }
-              ]
-            },
-            {
-              type: 'category',
-              label: 'iOS',
-              className: 'sidebar__logo sidebar__logo--ios',
-              items: [
-                { type: 'doc', label: 'Getting started', id: 'web3modal/ios/about' },
-                'web3modal/ios/options',
-                'web3modal/ios/actions',
-                'web3modal/ios/usage',
-                'web3modal/ios/custom-chains',
-                {
-                  type: 'link',
-                  label: 'Example',
-                  href: 'https://github.com/WalletConnect/web3modal-swift/tree/develop/Sample/Example'
-                }
-              ]
-            },
-            {
-              type: 'category',
-              label: 'Unity',
-              className: 'sidebar__logo sidebar__logo--unity',
-              items: [
-                { type: 'doc', label: 'Getting started', id: 'web3modal/unity/about' },
-                'web3modal/unity/usage',
-                'web3modal/unity/options',
-                'web3modal/unity/actions',
-                'web3modal/unity/events'
-              ]
-            },
-            {
-              type: 'category',
-              label: 'Features',
-              items: [
-                { type: 'doc', label: 'One-Click Auth', id: 'web3modal/features/one-click-auth' },
-                { type: 'doc', label: 'Email Wallets', id: 'web3modal/features/email' },
-                { type: 'doc', label: 'Onramp', id: 'web3modal/features/onramp' }
-              ]
-            },
-            'web3modal/upgrade',
-            'web3modal/v2/about'
-          ]
-        },
-        {
-          type: 'category',
-          label: 'Web3Inbox',
-          collapsed: true,
-          collapsible: true,
-          items: [
-            {
-              type: 'category',
-              label: 'Apps',
-              items: [
-                'web3inbox/about',
-                'web3inbox/cloud-setup',
-                'web3inbox/cloud-sending',
-                {
-                  type: 'category',
-                  label: 'Frontend Integration',
-                  items: [
-                    'web3inbox/frontend-integration/usage',
-                    'web3inbox/frontend-integration/api',
-                    'web3inbox/frontend-integration/examples',
-                    'web3inbox/frontend-integration/migration-guide'
-                  ]
-                },
-                'web3inbox/backend-integration',
-                'web3inbox/demo',
-                {
-                  type: 'category',
-                  label: 'Authorization Signatures',
-                  items: [
-                    { type: 'doc', label: 'About', id: 'web3inbox/authorization-signatures/about' },
-                    {
-                      type: 'doc',
-                      label: 'This App',
-                      id: 'web3inbox/authorization-signatures/this-app'
-                    },
-                    {
-                      type: 'doc',
-                      label: 'All Apps',
-                      id: 'web3inbox/authorization-signatures/all-apps'
-                    }
-                  ]
-                }
-              ]
-            },
-            { type: 'doc', label: 'Wallets', id: 'web3inbox/wallets' }
-          ]
-        },
-        {
-          type: 'category',
-          label: 'Web3Wallet',
-          collapsed: true,
-          collapsible: true,
-          items: [
-            'web3wallet/about',
-            'web3wallet/wallet-usage',
-            'web3wallet/authenticatedSessions',
-            'web3wallet/namespaces',
-            'web3wallet/mobileLinking',
-            'web3wallet/verify',
-            { type: 'doc', label: 'Modern Wallets (EIP-5792)', id: 'web3wallet/eip5792' },
-            'web3wallet/push-notifications',
-            {
-              type: 'category',
-              label: 'Notify API',
-              items: [
-                'web3wallet/notify/introduction',
-                'web3wallet/notify/installation',
-                'web3wallet/notify/usage',
-                'web3wallet/notify/spam-protection',
-                'web3wallet/notify/resources',
-                {
-                  type: 'category',
-                  label: 'React Native Wallets',
-                  items: [
-                    'web3wallet/notify/react-native-sdk',
-                    'web3inbox/frontend-integration/usage',
-                    'web3inbox/frontend-integration/api'
-                  ]
-                }
-              ]
-            },
-            'web3wallet/best_practises',
-            'web3wallet/resources'
-          ]
-        }
-      ]
-    },
-    {
-      type: 'category',
-      label: 'Cloud',
-      collapsible: false,
-      className: 'menu_outer_list',
-      items: [
-        'cloud/explorer',
-        'cloud/explorer-submission',
-        {
-          type: 'category',
-          label: 'Explorer Chains',
-          items: [
-            'cloud/chains/overview',
-            'cloud/chains/chain-list'
-          ]
-        },
-        'cloud/verify',
-        'cloud/relay',
-        'cloud/blockchain-api',
-        'cloud/analytics'
-      ]
-    },
-    {
-      type: 'category',
-      label: 'Advanced',
-      collapsible: false,
-      className: 'menu_outer_list',
-      items: [
-        
-        {
-          type: 'category',
-          label: 'Multi-Chain',
-          items: [
-            {
-              type: 'category',
-              label: 'RPC Reference',
-              items: [
-                'advanced/multichain/rpc-reference/cosmos-rpc',
-                'advanced/multichain/rpc-reference/ethereum-rpc',
-                'advanced/multichain/rpc-reference/solana-rpc',
-                'advanced/multichain/rpc-reference/near-rpc',
-                'advanced/multichain/rpc-reference/starknet-rpc',
-                'advanced/multichain/rpc-reference/stellar-rpc',
-                'advanced/multichain/rpc-reference/tezos-rpc',
-                'advanced/multichain/rpc-reference/xrpl-rpc',
-                'advanced/multichain/rpc-reference/casper-rpc',
-                'advanced/multichain/rpc-reference/everscale-rpc'
-              ]
-            },
-            {
-              type: 'category',
-              label: 'Examples',
-              items: [,
-                {
-                  type: 'category',
-                  label: 'Polkadot',
-                  items: [
-                    'advanced/multichain/polkadot/dapp-integration-guide',
-                    'advanced/multichain/polkadot/namespaces-guide',
-                    'advanced/multichain/polkadot/wallet-integration-guide'
-                  ]
-                }
-              ]
-            }
-          ]
-        },
-        {
-          type: 'category',
-          label: 'Providers',
-          collapsible: true,
-          collapsed: true,
-          items: ['advanced/providers/ethereum', 'advanced/providers/universal']
-        },
-        {
-          type: 'category',
-          label: 'WalletConnectModal',
-          collapsed: true,
-          collapsible: true,
-          items: [
-            'advanced/walletconnectmodal/about',
-            'advanced/walletconnectmodal/usage',
-            'advanced/walletconnectmodal/options',
-            'advanced/walletconnectmodal/theming',
-            'advanced/walletconnectmodal/resources'
-          ]
-        },
-        {
-          type: 'category',
-          label: 'APIs',
-          collapsed: true,
-          collapsible: true,
-          items: [
-            {
-              type: 'category',
-              label: 'Auth',
-              items: [
-                'api/auth/overview',
-                'api/auth/dapp-usage',
-                'api/auth/wallet-usage',
-                'api/auth/signer-factory',
-                'api/auth/resources'
-              ]
-            },
-            {
-              type: 'category',
-              label: 'Core',
-              items: ['api/core/pairing', 'api/core/relay', 'api/core/shared-core']
-            },
-            {
-              type: 'category',
-              label: 'Notify',
-              items: ['api/notify/about']
-            },
-            {
-              type: 'category',
-              label: 'Sign',
-              items: [
-                'api/sign/overview',
-                'api/sign/dapp-usage',
-                'api/sign/wallet-usage',
-                'api/sign/smart-contract-wallet-usage'
-              ]
-            }
-          ]
-        },
-        'advanced/push-server'
-      ]
-    },
-    {
-      type: 'category',
-      label: 'Technical Reference',
+      label: 'INTRODUCTION',
       collapsible: false,
       className: 'menu_outer_list',
       items: [
         {
           type: 'link',
-          label: 'Specs',
-          href: 'https://specs.walletconnect.com/'
+          label: 'Welcome',
+          href: '/'
         },
-        'advanced/faq'
+        {
+          type: 'link',
+          label: 'System Status',
+          href: 'https://status.walletconnect.com'
+        }
       ]
-    }
+    },
+    {
+      type: 'category',
+      label: 'SDKs',
+      collapsible: false,
+      className: 'menu_outer_list menu_outer_list--margin-top',
+      items: [
+        {
+          type: 'category',
+          label: 'AppKit',
+          collapsed: false,
+          collapsible: true,
+          className: 'sidebar__logo sidebar__logo--appkit',
+          items: [
+            'appkit/overview',
+            {
+              type: 'category',
+              label: 'Features',
+              collapsed: false,
+              collapsible: true,
+              items: [
+                { type: 'doc', label: 'Swaps', id: 'appkit/features/swaps' },
+                { type: 'doc', label: 'Email & Socials', id: 'appkit/features/socials' },
+                { type: 'doc', label: 'Smart Accounts', id: 'appkit/features/smart-accounts' },
+                { type: 'doc', label: 'One-Click Auth', id: 'appkit/features/one-click-auth' },
+                { type: 'doc', label: 'Onramp', id: 'appkit/features/onramp' },
+                { type: 'doc', label: 'Notifications', id: 'appkit/features/notifications' },
+                { type: 'doc', label: 'Solana', id: 'appkit/features/solana' }
+              ]
+            }
+          ]
+        },
+        {
+          type: 'category',
+          label: 'WalletKit',
+          collapsed: false,
+          collapsible: true,
+          className: 'sidebar__logo sidebar__logo--walletkit',
+          items: [
+            'walletkit/overview',
+            {
+              type: 'category',
+              label: 'Features',
+              collapsed: false,
+              collapsible: true,
+              items: [
+                { type: 'doc', label: 'One-Click Auth', id: 'walletkit/features/one-click-auth' },
+                { type: 'doc', label: 'Notifications', id: 'walletkit/features/notifications' },
+                { type: 'doc', label: 'Verify', id: 'walletkit/features/verify' }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    cloud,
+    advanced,
+    specs,
+    dropdown_placeholder
   ],
-  'web3modal/v2': [
-    {
-      type: 'html',
-      value:
-        '<a class="navbar__brand" href="/"><div class="navbar__logo"><img src="/img/walletconnect-logo-white.svg#dark-mode-only"  alt="WalletConnect Logo"><img src="/img/walletconnect-logo-black.svg#light-mode-only"  alt="WalletConnect Logo"></div>WalletConnect<span>Docs<span></a>',
-      defaultStyle: true
-    },
+  AppKit_React: [
+    welcome,
     {
       type: 'category',
-      label: 'General',
-      className: 'menu_outer_list',
+      label: 'AppKit',
       collapsible: false,
-      items: [
-        {
-          type: 'ref',
-          label: 'Overview',
-          id: 'web3modal/v2/about'
-        }
-      ]
-    },
-    {
-      type: 'category',
-      label: 'Web',
       className: 'menu_outer_list',
-      collapsible: false,
       items: [
         {
           type: 'category',
-          label: 'React',
-          className: 'sidebar__logo sidebar__logo--react',
+          label: 'Core',
           items: [
-            'web3modal/v2/react/wagmi/installation',
-            'web3modal/v2/react/wagmi/components',
-            'web3modal/v2/react/wagmi/hooks',
-            'web3modal/v2/react/wagmi/options',
-            'web3modal/v2/react/wagmi/theming',
-            'web3modal/v2/react/wagmi/custom-wallets',
-            'web3modal/v2/react/wagmi/custom-chains',
+            'appkit/react/core/installation',
+            'appkit/react/core/hooks',
+            'appkit/react/core/options',
+            'appkit/react/core/components',
+            'appkit/react/core/custom-connectors',
+            'appkit/react/core/siwe',
+            'appkit/react/core/theming',
+            'appkit/react/core/resources'
+          ]
+        },
+        {
+          type: 'category',
+          label: 'Onboarding',
+          items: ['appkit/react/onboarding/socials', 'appkit/react/onboarding/smart-accounts']
+        },
+        {
+          type: 'category',
+          label: 'Transactions',
+          items: ['appkit/react/transactions/onramp', 'appkit/react/transactions/swaps']
+        },
+        {
+          type: 'category',
+          label: 'Notifications',
+          items: [
+            'appkit/react/notifications/overview',
+            'appkit/react/notifications/cloud-setup',
+            'appkit/react/notifications/cloud-sending',
             {
-              type: 'link',
-              label: 'Example',
-              href: 'https://github.com/WalletConnect/web3modal-examples/tree/main/web3modal-wagmi-react'
+              type: 'category',
+              label: 'Frontend Integration',
+              items: [
+                'appkit/react/notifications/frontend-integration/usage',
+                'appkit/react/notifications/frontend-integration/api',
+                'appkit/react/notifications/frontend-integration/examples',
+                'appkit/react/notifications/frontend-integration/migration-guide'
+              ]
+            },
+            'appkit/react/notifications/backend-integration',
+            'appkit/react/notifications/demo',
+            {
+              type: 'category',
+              label: 'Authorization Signatures',
+              items: [
+                {
+                  type: 'doc',
+                  label: 'About',
+                  id: 'appkit/react/notifications/authorization-signatures/overview'
+                },
+                {
+                  type: 'doc',
+                  label: 'This App',
+                  id: 'appkit/react/notifications/authorization-signatures/this-app'
+                },
+                {
+                  type: 'doc',
+                  label: 'All Apps',
+                  id: 'appkit/react/notifications/authorization-signatures/all-apps'
+                }
+              ]
             }
           ]
         },
         {
           type: 'category',
-          label: 'JavaScript',
-          className: 'sidebar__logo sidebar__logo--javascript',
+          label: 'Cloud',
+          collapsible: false,
+          className: 'menu_outer_list',
           items: [
-            'web3modal/v2/javascript/wagmi/installation',
-            'web3modal/v2/javascript/wagmi/components',
-            'web3modal/v2/javascript/wagmi/actions',
-            'web3modal/v2/javascript/wagmi/options',
-            'web3modal/v2/javascript/wagmi/theming',
-            'web3modal/v2/javascript/wagmi/custom-wallets',
-            'web3modal/v2/javascript/wagmi/custom-chains',
-            {
-              type: 'link',
-              label: 'Example',
-              href: 'https://github.com/WalletConnect/web3modal-examples/tree/main/web3modal-wagmi-html'
-            }
+            'appkit/react/cloud/verify',
+            'appkit/react/cloud/relay',
+            'appkit/react/cloud/blockchain-api',
+            'appkit/react/cloud/analytics'
           ]
         }
       ]
-    }
+    },
+    specs,
+    dropdown_placeholder
+  ],
+  AppKit_Next: [
+    welcome,
+    {
+      type: 'category',
+      label: 'AppKit',
+      collapsible: false,
+      className: 'menu_outer_list',
+      items: [
+        {
+          type: 'category',
+          label: 'Core',
+          items: [
+            'appkit/next/core/installation',
+            'appkit/next/core/hooks',
+            'appkit/next/core/options',
+            'appkit/next/core/components',
+            'appkit/next/core/custom-connectors',
+            'appkit/next/core/siwe',
+            'appkit/next/core/theming',
+            'appkit/next/core/resources'
+          ]
+        },
+        {
+          type: 'category',
+          label: 'Onboarding',
+          items: ['appkit/next/onboarding/socials', 'appkit/next/onboarding/smart-accounts']
+        },
+        {
+          type: 'category',
+          label: 'Transactions',
+          items: ['appkit/next/transactions/onramp', 'appkit/next/transactions/swaps']
+        },
+        {
+          type: 'category',
+          label: 'Notifications',
+          items: [
+            'appkit/next/notifications/overview',
+            'appkit/next/notifications/cloud-setup',
+            'appkit/next/notifications/cloud-sending',
+            {
+              type: 'category',
+              label: 'Frontend Integration',
+              items: [
+                'appkit/next/notifications/frontend-integration/usage',
+                'appkit/next/notifications/frontend-integration/api',
+                'appkit/next/notifications/frontend-integration/examples',
+                'appkit/next/notifications/frontend-integration/migration-guide'
+              ]
+            },
+            'appkit/next/notifications/backend-integration',
+            'appkit/next/notifications/demo',
+            {
+              type: 'category',
+              label: 'Authorization Signatures',
+              items: [
+                {
+                  type: 'doc',
+                  label: 'About',
+                  id: 'appkit/next/notifications/authorization-signatures/overview'
+                },
+                {
+                  type: 'doc',
+                  label: 'This App',
+                  id: 'appkit/next/notifications/authorization-signatures/this-app'
+                },
+                {
+                  type: 'doc',
+                  label: 'All Apps',
+                  id: 'appkit/next/notifications/authorization-signatures/all-apps'
+                }
+              ]
+            }
+          ]
+        },
+        {
+          type: 'category',
+          label: 'Cloud',
+          collapsible: false,
+          className: 'menu_outer_list',
+          items: [
+            'appkit/next/cloud/verify',
+            'appkit/next/cloud/relay',
+            'appkit/next/cloud/blockchain-api',
+            'appkit/next/cloud/analytics'
+          ]
+        }
+      ]
+    },
+    specs,
+    dropdown_placeholder
+  ],
+  AppKit_Vue: [
+    welcome,
+    {
+      type: 'category',
+      label: 'AppKit',
+      collapsible: false,
+      className: 'menu_outer_list',
+      items: [
+        {
+          type: 'category',
+          label: 'Core',
+          items: [
+            'appkit/vue/core/installation',
+            'appkit/vue/core/composables',
+            'appkit/vue/core/options',
+            'appkit/vue/core/components',
+            'appkit/vue/core/custom-connectors',
+            'appkit/vue/core/siwe',
+            'appkit/vue/core/theming',
+            'appkit/vue/core/resources'
+          ]
+        },
+        {
+          type: 'category',
+          label: 'Onboarding',
+          items: ['appkit/vue/onboarding/socials', 'appkit/vue/onboarding/smart-accounts']
+        },
+        {
+          type: 'category',
+          label: 'Transactions',
+          items: ['appkit/vue/transactions/onramp', 'appkit/vue/transactions/swaps']
+        },
+        {
+          type: 'category',
+          label: 'Notifications',
+          items: [
+            'appkit/vue/notifications/overview',
+            'appkit/vue/notifications/cloud-setup',
+            'appkit/vue/notifications/cloud-sending',
+            {
+              type: 'category',
+              label: 'Frontend Integration',
+              items: [
+                'appkit/vue/notifications/frontend-integration/usage',
+                'appkit/vue/notifications/frontend-integration/api',
+                'appkit/vue/notifications/frontend-integration/examples',
+                'appkit/vue/notifications/frontend-integration/migration-guide'
+              ]
+            },
+            'appkit/vue/notifications/backend-integration',
+            'appkit/vue/notifications/demo',
+            {
+              type: 'category',
+              label: 'Authorization Signatures',
+              items: [
+                {
+                  type: 'doc',
+                  label: 'About',
+                  id: 'appkit/vue/notifications/authorization-signatures/overview'
+                },
+                {
+                  type: 'doc',
+                  label: 'This App',
+                  id: 'appkit/vue/notifications/authorization-signatures/this-app'
+                },
+                {
+                  type: 'doc',
+                  label: 'All Apps',
+                  id: 'appkit/vue/notifications/authorization-signatures/all-apps'
+                }
+              ]
+            }
+          ]
+        },
+        {
+          type: 'category',
+          label: 'Cloud',
+          collapsible: false,
+          className: 'menu_outer_list',
+          items: [
+            'appkit/vue/cloud/verify',
+            'appkit/vue/cloud/relay',
+            'appkit/vue/cloud/blockchain-api',
+            'appkit/vue/cloud/analytics'
+          ]
+        }
+      ]
+    },
+    specs,
+    dropdown_placeholder
+  ],
+  AppKit_JS: [
+    welcome,
+    {
+      type: 'category',
+      label: 'AppKit',
+      collapsible: false,
+      className: 'menu_outer_list',
+      items: [
+        {
+          type: 'category',
+          label: 'Core',
+          items: [
+            'appkit/javascript/core/installation',
+            'appkit/javascript/core/actions',
+            'appkit/javascript/core/options',
+            'appkit/javascript/core/components',
+            'appkit/javascript/core/custom-connectors',
+            'appkit/javascript/core/siwe',
+            'appkit/javascript/core/theming',
+            'appkit/javascript/core/resources'
+          ]
+        },
+        {
+          type: 'category',
+          label: 'Onboarding',
+          items: [
+            'appkit/javascript/onboarding/socials',
+            'appkit/javascript/onboarding/smart-accounts'
+          ]
+        },
+        {
+          type: 'category',
+          label: 'Transactions',
+          items: ['appkit/javascript/transactions/onramp', 'appkit/javascript/transactions/swaps']
+        },
+        {
+          type: 'category',
+          label: 'Notifications',
+          items: [
+            'appkit/javascript/notifications/overview',
+            'appkit/javascript/notifications/cloud-setup',
+            'appkit/javascript/notifications/cloud-sending',
+            {
+              type: 'category',
+              label: 'Frontend Integration',
+              items: [
+                'appkit/javascript/notifications/frontend-integration/usage',
+                'appkit/javascript/notifications/frontend-integration/api',
+                'appkit/javascript/notifications/frontend-integration/examples',
+                'appkit/javascript/notifications/frontend-integration/migration-guide'
+              ]
+            },
+            'appkit/javascript/notifications/backend-integration',
+            'appkit/javascript/notifications/demo',
+            {
+              type: 'category',
+              label: 'Authorization Signatures',
+              items: [
+                {
+                  type: 'doc',
+                  label: 'About',
+                  id: 'appkit/javascript/notifications/authorization-signatures/overview'
+                },
+                {
+                  type: 'doc',
+                  label: 'This App',
+                  id: 'appkit/javascript/notifications/authorization-signatures/this-app'
+                },
+                {
+                  type: 'doc',
+                  label: 'All Apps',
+                  id: 'appkit/javascript/notifications/authorization-signatures/all-apps'
+                }
+              ]
+            }
+          ]
+        },
+        {
+          type: 'category',
+          label: 'Cloud',
+          collapsible: false,
+          className: 'menu_outer_list',
+          items: [
+            'appkit/javascript/cloud/verify',
+            'appkit/javascript/cloud/relay',
+            'appkit/javascript/cloud/blockchain-api',
+            'appkit/javascript/cloud/analytics'
+          ]
+        }
+      ]
+    },
+    specs,
+    dropdown_placeholder
+  ],
+  AppKit_React_Native: [
+    welcome,
+    {
+      type: 'category',
+      label: 'AppKit',
+      collapsible: false,
+      className: 'menu_outer_list',
+      items: [
+        {
+          type: 'category',
+          label: 'Core',
+          items: [
+            'appkit/react-native/core/installation',
+            'appkit/react-native/core/options',
+            'appkit/react-native/core/hooks',
+            'appkit/react-native/core/components',
+            'appkit/react-native/core/siwe',
+            'appkit/react-native/core/resources'
+          ]
+        },
+        {
+          type: 'category',
+          label: 'Onboarding',
+          items: ['appkit/react-native/onboarding/email']
+        },
+        {
+          type: 'category',
+          label: 'Notifications',
+          items: [
+            'appkit/react-native/notifications/overview',
+            'appkit/react-native/notifications/cloud-setup',
+            'appkit/react-native/notifications/cloud-sending',
+            {
+              type: 'category',
+              label: 'Frontend Integration',
+              items: [
+                'appkit/react-native/notifications/frontend-integration/usage',
+                'appkit/react-native/notifications/frontend-integration/api',
+                'appkit/react-native/notifications/frontend-integration/examples',
+                'appkit/react-native/notifications/frontend-integration/migration-guide'
+              ]
+            },
+            'appkit/react-native/notifications/backend-integration',
+            'appkit/react-native/notifications/demo',
+            {
+              type: 'category',
+              label: 'Authorization Signatures',
+              items: [
+                {
+                  type: 'doc',
+                  label: 'About',
+                  id: 'appkit/react-native/notifications/authorization-signatures/overview'
+                },
+                {
+                  type: 'doc',
+                  label: 'This App',
+                  id: 'appkit/react-native/notifications/authorization-signatures/this-app'
+                },
+                {
+                  type: 'doc',
+                  label: 'All Apps',
+                  id: 'appkit/react-native/notifications/authorization-signatures/all-apps'
+                }
+              ]
+            }
+          ]
+        },
+        {
+          type: 'category',
+          label: 'Cloud',
+          collapsible: false,
+          className: 'menu_outer_list',
+          items: [
+            'appkit/react-native/cloud/verify',
+            'appkit/react-native/cloud/relay',
+            'appkit/react-native/cloud/blockchain-api',
+            'appkit/react-native/cloud/analytics'
+          ]
+        }
+      ]
+    },
+    specs,
+    dropdown_placeholder
+  ],
+  AppKit_Flutter: [
+    welcome,
+    {
+      type: 'category',
+      label: 'AppKit',
+      collapsible: false,
+      className: 'menu_outer_list',
+      items: [
+        {
+          type: 'category',
+          label: 'Core',
+          items: [
+            'appkit/flutter/core/installation',
+            'appkit/flutter/core/usage',
+            'appkit/flutter/core/options',
+            'appkit/flutter/core/actions',
+            'appkit/flutter/core/events',
+            'appkit/flutter/core/theming',
+            'appkit/flutter/core/custom-chains'
+          ]
+        },
+        {
+          type: 'category',
+          label: 'Onboarding',
+          items: ['appkit/flutter/onboarding/email']
+        },
+        {
+          type: 'category',
+          label: 'Cloud',
+          collapsible: false,
+          className: 'menu_outer_list',
+          items: [
+            'appkit/flutter/cloud/verify',
+            'appkit/flutter/cloud/relay',
+            'appkit/flutter/cloud/blockchain-api',
+            'appkit/flutter/cloud/analytics'
+          ]
+        }
+      ]
+    },
+    specs,
+    dropdown_placeholder
+  ],
+  AppKit_iOS: [
+    welcome,
+    {
+      type: 'category',
+      label: 'AppKit',
+      collapsible: false,
+      className: 'menu_outer_list',
+      items: [
+        {
+          type: 'category',
+          label: 'Core',
+          items: [
+            'appkit/ios/core/installation',
+            'appkit/ios/core/usage',
+            'appkit/ios/core/options',
+            'appkit/ios/core/actions',
+            'appkit/ios/core/one-click-auth',
+            'appkit/ios/core/custom-chains'
+          ]
+        },
+        {
+          type: 'category',
+          label: 'Cloud',
+          collapsible: false,
+          className: 'menu_outer_list',
+          items: [
+            'appkit/ios/cloud/verify',
+            'appkit/ios/cloud/relay',
+            'appkit/ios/cloud/blockchain-api',
+            'appkit/ios/cloud/analytics'
+          ]
+        }
+      ]
+    },
+    specs,
+    dropdown_placeholder
+  ],
+  AppKit_Android: [
+    welcome,
+    {
+      type: 'category',
+      label: 'AppKit',
+      collapsible: false,
+      className: 'menu_outer_list',
+      items: [
+        {
+          type: 'category',
+          label: 'Core',
+          items: [
+            'appkit/android/core/installation',
+            'appkit/android/core/usage',
+            'appkit/android/core/options',
+            'appkit/android/core/actions',
+            'appkit/android/core/components',
+            'appkit/android/core/theming'
+          ]
+        },
+        {
+          type: 'category',
+          label: 'Cloud',
+          collapsible: false,
+          className: 'menu_outer_list',
+          items: [
+            'appkit/android/cloud/verify',
+            'appkit/android/cloud/relay',
+            'appkit/android/cloud/blockchain-api',
+            'appkit/android/cloud/analytics'
+          ]
+        }
+      ]
+    },
+    specs,
+    dropdown_placeholder
+  ],
+  AppKit_Unity: [
+    welcome,
+    {
+      type: 'category',
+      label: 'AppKit',
+      collapsible: false,
+      className: 'menu_outer_list',
+      items: [
+        {
+          type: 'category',
+          label: 'Core',
+          items: [
+            'appkit/unity/core/installation',
+            'appkit/unity/core/usage',
+            'appkit/unity/core/options',
+            'appkit/unity/core/actions',
+            'appkit/unity/core/events'
+          ]
+        },
+        {
+          type: 'category',
+          label: 'Cloud',
+          collapsible: false,
+          className: 'menu_outer_list',
+          items: [
+            'appkit/unity/cloud/verify',
+            'appkit/unity/cloud/relay',
+            'appkit/unity/cloud/blockchain-api',
+            'appkit/unity/cloud/analytics'
+          ]
+        }
+      ]
+    },
+    specs,
+    dropdown_placeholder
+  ],
+  walletKit_Android: [
+    welcome,
+    {
+      type: 'category',
+      label: 'WalletKit',
+      collapsible: false,
+      className: 'menu_outer_list',
+      items: [
+        'walletkit/android/installation',
+        'walletkit/android/usage',
+        'walletkit/android/one-click-auth',
+        'walletkit/android/mobile-linking',
+        'walletkit/android/verify',
+        'walletkit/android/eip5792',
+        {
+          type: 'category',
+          label: 'Notifications',
+          items: [
+            {
+              type: 'category',
+              label: 'Notify',
+              items: [
+                'walletkit/android/notifications/notify/overview',
+                'walletkit/android/notifications/notify/installation',
+                'walletkit/android/notifications/notify/usage',
+                'walletkit/android/notifications/notify/spam-protection',
+                'walletkit/android/notifications/notify/resources'
+              ]
+            },
+            'walletkit/android/notifications/push'
+          ]
+        },
+        'walletkit/android/best-practices',
+        'walletkit/android/resources',
+        {
+          type: 'category',
+          label: 'Cloud',
+          collapsible: false,
+          className: 'menu_outer_list',
+          items: [
+            'walletkit/android/cloud/explorer-submission',
+            'walletkit/android/cloud/verify',
+            'walletkit/android/cloud/relay',
+            'walletkit/android/cloud/analytics'
+          ]
+        }
+      ]
+    },
+    specs,
+    dropdown_placeholder
+  ],
+  walletKit_iOS: [
+    welcome,
+    {
+      type: 'category',
+      label: 'WalletKit',
+      collapsible: false,
+      className: 'menu_outer_list',
+      items: [
+        'walletkit/ios/installation',
+        'walletkit/ios/usage',
+        'walletkit/ios/one-click-auth',
+        'walletkit/ios/mobile-linking',
+        'walletkit/ios/link-mode',
+        'walletkit/ios/verify',
+        'walletkit/ios/eip5792',
+        {
+          type: 'category',
+          label: 'Notifications',
+          items: [
+            {
+              type: 'category',
+              label: 'Notify',
+              items: [
+                'walletkit/ios/notifications/notify/overview',
+                'walletkit/ios/notifications/notify/installation',
+                'walletkit/ios/notifications/notify/usage',
+                'walletkit/ios/notifications/notify/spam-protection',
+                'walletkit/ios/notifications/notify/resources'
+              ]
+            },
+            'walletkit/ios/notifications/push'
+          ]
+        },
+        'walletkit/ios/best-practices',
+        'walletkit/ios/resources',
+        {
+          type: 'category',
+          label: 'Cloud',
+          collapsible: false,
+          className: 'menu_outer_list',
+          items: [
+            'walletkit/ios/cloud/explorer-submission',
+            'walletkit/ios/cloud/verify',
+            'walletkit/ios/cloud/relay',
+            'walletkit/ios/cloud/analytics'
+          ]
+        }
+      ]
+    },
+    specs,
+    dropdown_placeholder
+  ],
+  walletKit_Flutter: [
+    welcome,
+    {
+      type: 'category',
+      label: 'WalletKit',
+      collapsible: false,
+      className: 'menu_outer_list',
+      items: [
+        'walletkit/flutter/installation',
+        'walletkit/flutter/usage',
+        'walletkit/flutter/mobile-linking',
+        'walletkit/flutter/verify',
+        'walletkit/flutter/eip5792',
+        {
+          type: 'category',
+          label: 'Cloud',
+          collapsible: false,
+          className: 'menu_outer_list',
+          items: [
+            'walletkit/flutter/cloud/explorer-submission',
+            'walletkit/flutter/cloud/verify',
+            'walletkit/flutter/cloud/relay',
+            'walletkit/flutter/cloud/analytics'
+          ]
+        }
+      ]
+    },
+    specs,
+    dropdown_placeholder
+  ],
+  walletKit_React_Native: [
+    welcome,
+    {
+      type: 'category',
+      label: 'WalletKit',
+      collapsible: false,
+      className: 'menu_outer_list',
+      items: [
+        'walletkit/react-native/installation',
+        'walletkit/react-native/usage',
+        'walletkit/react-native/one-click-auth',
+        'walletkit/react-native/mobile-linking',
+        'walletkit/react-native/verify',
+        'walletkit/react-native/eip5792',
+        {
+          type: 'category',
+          label: 'Notifications',
+          items: [
+            {
+              type: 'category',
+              label: 'Notify',
+              items: [
+                'walletkit/react-native/notifications/notify/overview',
+                'walletkit/react-native/notifications/notify/installation',
+                'walletkit/react-native/notifications/notify/usage',
+                'walletkit/react-native/notifications/notify/spam-protection'
+              ]
+            },
+            'walletkit/react-native/notifications/push'
+          ]
+        },
+        'walletkit/react-native/best-practices',
+        'walletkit/react-native/resources',
+        {
+          type: 'category',
+          label: 'Cloud',
+          collapsible: false,
+          className: 'menu_outer_list',
+          items: [
+            'walletkit/react-native/cloud/explorer-submission',
+            'walletkit/react-native/cloud/verify',
+            'walletkit/react-native/cloud/relay',
+            'walletkit/react-native/cloud/analytics'
+          ]
+        }
+      ]
+    },
+    specs,
+    dropdown_placeholder
+  ],
+  walletKit_Web: [
+    welcome,
+    {
+      type: 'category',
+      label: 'WalletKit',
+      collapsible: false,
+      className: 'menu_outer_list',
+      items: [
+        'walletkit/web/installation',
+        'walletkit/web/usage',
+        'walletkit/web/one-click-auth',
+        'walletkit/web/verify',
+        'walletkit/web/eip5792',
+        'walletkit/web/best-practices',
+        'walletkit/web/resources',
+        {
+          type: 'category',
+          label: 'Cloud',
+          collapsible: false,
+          className: 'menu_outer_list',
+          items: [
+            'walletkit/web/cloud/explorer-submission',
+            'walletkit/web/cloud/verify',
+            'walletkit/web/cloud/relay',
+            'walletkit/web/cloud/analytics'
+          ]
+        }
+      ]
+    },
+    specs,
+    dropdown_placeholder
+  ],
+  walletKit_C_Sharp: [
+    welcome,
+    {
+      type: 'category',
+      label: 'WalletKit',
+      collapsible: false,
+      className: 'menu_outer_list',
+      items: [
+        'walletkit/c-sharp/installation',
+        'walletkit/c-sharp/usage',
+        'walletkit/c-sharp/verify',
+        {
+          type: 'category',
+          label: 'Cloud',
+          collapsible: false,
+          className: 'menu_outer_list',
+          items: [
+            'walletkit/c-sharp/cloud/explorer-submission',
+            'walletkit/c-sharp/cloud/verify',
+            'walletkit/c-sharp/cloud/relay',
+            'walletkit/c-sharp/cloud/analytics'
+          ]
+        }
+      ]
+    },
+    specs,
+    dropdown_placeholder
   ]
 }

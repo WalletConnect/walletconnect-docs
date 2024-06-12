@@ -1,0 +1,188 @@
+---
+title: Installation
+---
+
+import CloudBanner from '../../../components/CloudBanner'
+import PlatformTabs from '../../../components/PlatformTabs'
+import PlatformTabItem from '../../../components/PlatformTabItem'
+
+import WagmiImplementation from '../wagmi/about/implementation.mdx'
+import WagmiModal from '../wagmi/about/triggermodal.mdx'
+
+import Ethers5Implementation from '../ethers5/implementation.mdx'
+
+import EthersImplementation from '../ethers/about/implementation.mdx'
+import EthersModal from '../ethers/about/triggermodal.mdx'
+
+import SolanaImplementation from '../solana/about/implementation.mdx'
+import SolanaModal from '../solana/about/triggermodal.mdx'
+import SolanaPrograms from '../solana/about/programs.mdx'
+
+# JavaScript
+
+AppKit has support for [Wagmi](https://wagmi.sh/) and [Ethers v6](https://docs.ethers.org/v6/) on Ethereum and [@solana/web3.js](https://solana-labs.github.io/solana-web3.js/) on Solana.
+Choose one of these Ethereum Libraries or 'Solana' to get started.
+
+:::info Note
+We recommend using [Vite](https://vitejs.dev/guide/#scaffolding-your-first-vite-project) to get started with Web3Modal JavaScript.
+:::
+
+## Installation
+
+<PlatformTabs groupId="eth-lib" activeOptions={["wagmi", "ethers5", "ethers","solana"]}>
+<PlatformTabItem value="wagmi">
+
+```bash npm2yarn
+npm install @web3modal/wagmi @wagmi/core @wagmi/connectors viem
+```
+
+</PlatformTabItem>
+<PlatformTabItem value="ethers5">
+
+```bash npm2yarn
+npm install @web3modal/ethers5 ethers@5.7.2
+```
+
+</PlatformTabItem>
+<PlatformTabItem value="ethers">
+
+```bash npm2yarn
+npm install @web3modal/ethers ethers
+```
+
+</PlatformTabItem>
+<PlatformTabItem value="solana">
+
+:::caution
+
+Web3Modal Solana is in canary and is not recommended for production use.
+:::
+
+```bash npm2yarn
+npm install @web3modal/solana
+```
+
+</PlatformTabItem>
+</PlatformTabs>
+
+## Cloud Configuration
+
+Create a new project on WalletConnect Cloud at https://cloud.walletconnect.com and obtain a new project ID.
+
+<CloudBanner />
+
+## Implementation
+
+<PlatformTabs groupId="eth-lib" activeOptions={["wagmi", "ethers5", "ethers","solana"]}>
+<PlatformTabItem value="wagmi">
+
+<WagmiImplementation />
+
+</PlatformTabItem>
+<PlatformTabItem value="ethers5">
+
+<Ethers5Implementation />
+
+</PlatformTabItem>
+<PlatformTabItem value="ethers">
+
+<EthersImplementation />
+
+</PlatformTabItem>
+<PlatformTabItem value="solana">
+
+<SolanaImplementation />
+
+</PlatformTabItem>
+</PlatformTabs>
+
+## Trigger the modal
+
+<PlatformTabs groupId="eth-lib" activeOptions={["wagmi","ethers5", "ethers","solana"]}>
+<PlatformTabItem value="wagmi">
+
+<WagmiModal />
+
+</PlatformTabItem>
+<PlatformTabItem value="ethers5">
+
+<EthersModal />
+
+</PlatformTabItem>
+<PlatformTabItem value="ethers">
+
+<EthersModal />
+
+</PlatformTabItem>
+<PlatformTabItem value="solana">
+
+<SolanaModal />
+
+</PlatformTabItem>
+</PlatformTabs>
+
+## Smart Contract Interaction
+
+<PlatformTabs groupId="eth-lib" activeOptions={["wagmi", "ethers","solana"]}>
+
+<PlatformTabItem value="wagmi">
+
+[Wagmi actions](https://wagmi.sh/core/api/actions/readContract) can help us interact with wallets and smart contracts:
+
+```tsx
+import { readContract } from '@wagmi/core'
+import { USDTAbi } from '../abi/USDTAbi'
+
+const USDTAddress = '0x...'
+
+const data = readContract({
+  address: USDTAddress,
+  abi: USDTAbi,
+  functionName: 'symbol'
+})
+```
+
+Read more about Wagmi actions for smart contract interaction [here](https://wagmi.sh/core/actions/readContract).
+
+</PlatformTabItem>
+<PlatformTabItem value="ethers">
+
+[Ethers](https://docs.ethers.org/v6/) can help us interact with wallets and smart contracts:
+
+```tsx
+import { BrowserProvider, Contract, formatUnits } from 'ethers'
+
+const USDTAddress = '0x617f3112bf5397D0467D315cC709EF968D9ba546'
+
+// The ERC-20 Contract ABI, which is a common contract interface
+// for tokens (this is the Human-Readable ABI format)
+const USDTAbi = [
+  'function name() view returns (string)',
+  'function symbol() view returns (string)',
+  'function balanceOf(address) view returns (uint)',
+  'function transfer(address to, uint amount)',
+  'event Transfer(address indexed from, address indexed to, uint amount)'
+]
+
+const walletProvider = modal.getWalletProvider()
+
+async function getBalance() {
+  if (!isConnected) throw Error('User disconnected')
+
+  const ethersProvider = new BrowserProvider(walletProvider)
+  const signer = await ethersProvider.getSigner()
+  // The Contract object
+  const USDTContract = new Contract(USDTAddress, USDTAbi, signer)
+  const USDTBalance = await USDTContract.balanceOf(address)
+
+  console.log(formatUnits(USDTBalance, 18))
+}
+```
+
+</PlatformTabItem>
+<PlatformTabItem value="solana">
+
+<SolanaPrograms />
+
+</PlatformTabItem>
+</PlatformTabs>

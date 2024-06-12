@@ -1,0 +1,80 @@
+---
+pagination_next: walletkit/features/notifications
+title: Overview
+---
+
+import Wrapper from '../components/Home/Wrapper.js'
+
+import androidLogo from '../../static/assets/home/androidLogo.png'
+import iosLogo from '../../static/assets/home/iosLogo.png'
+import rnLogo from '../../static/assets/home/rnLogo.png'
+import flutterLogo from '../../static/assets/home/flutterLogo.png'
+import csharpLogo from '../../static/assets/home/csharpLogo.png'
+import javascriptLogo from '../../static/assets/home/javascriptLogo.png'
+
+# WalletKit
+
+Unlock powerful wallet-native features and provide a simple, secure way for your wallet users to easily connect with thousands of apps and enjoy unbeaten experiences across connectivity, security, and communication.
+
+## Get Started
+
+<Wrapper
+  type="large"
+  fit={false}
+  items={[
+    {
+      name: 'Android',
+      type: 'android',
+      description: 'Get started with AppKit in Android.',
+      icon: androidLogo,
+      href: './android/installation'
+    },
+    {
+      name: 'iOS',
+      type: 'ios',
+      description: 'Get started with AppKit in iOS.',
+      icon: iosLogo,
+      href: './ios/installation',
+      isWhite: true
+    },
+    {
+      name: 'React Native',
+      type: 'react-native',
+      description: 'Get started with AppKit in React Native.',
+      icon: rnLogo,
+      href: './react-native/installation'
+    },
+    {
+      name: 'Flutter',
+      type: 'flutter',
+      description: 'Get started with AppKit in Flutter.',
+      icon: flutterLogo,
+      href: './flutter/installation'
+    },
+    {
+      name: 'Web',
+      type: 'javascript',
+      description: 'Get started with AppKit in Web.',
+      icon: javascriptLogo,
+      href: './web/installation'
+    },
+    {
+      name: 'C#',
+      type: 'csharp',
+      description: 'Get started with AppKit in C#.',
+      icon: csharpLogo,
+      href: './c-sharp/installation',
+      isWhite: true
+    }
+  ]}
+/>
+
+### Features
+
+![WalletKit banner](../../static/img/walletkit.png)
+
+Some of the key features of WalletKit include:
+
+- **Sign API**: Allows dapps to request that the user sign a transaction or message.
+- **Auth API**: Allows dapps to verify wallet address ownership through a single signature request, realizing login in one action.
+- **Chain agnostic**: WalletKit is designed to work with any blockchain, so you can easily support multiple chains without having to write separate integration code.

@@ -102,16 +102,12 @@ const config = {
           title: 'Docs',
           items: [
             {
-              label: 'Web3Modal SDK',
-              to: '/web3modal/about'
+              label: 'AppKit',
+              to: '/appkit/overview'
             },
             {
-              label: 'Web3Wallet SDK',
-              to: '/web3wallet/about'
-            },
-            {
-              label: 'Web3Inbox SDK',
-              to: '/web3inbox/about'
+              label: 'WalletKit',
+              to: '/walletkit/overview'
             }
           ]
         },
@@ -159,7 +155,7 @@ const config = {
     colorMode: {
       defaultMode: 'dark',
       disableSwitch: false,
-      respectPrefersColorScheme: false
+      respectPrefersColorScheme: true
     },
     prism: {
       darkTheme: darkCodeTheme,
@@ -177,15 +173,15 @@ const config = {
           block: { start: 'highlight-add-start', end: 'highlight-add-end' }
         }
       ]
-    },
-    announcementBar: {
-      id: 'support_us',
-      content:
-        'It’s shipping szn 🚢 Explore Web3Modal’s latest features: Email Wallets and On-ramp! <a rel="noopener noreferrer" href="/web3modal/features/onramp">Read the docs</a>',
-      backgroundColor: '#3182ce',
-      textColor: '#fff',
-      isCloseable: true
     }
+    // announcementBar: {
+    //   id: 'support_us',
+    //   content:
+    //     'It’s shipping szn 🚢 Explore Web3Modal’s latest features: Email Wallets and On-ramp! <a rel="noopener noreferrer" href="/web3modal/features/onramp">Read the docs</a>',
+    //   backgroundColor: '#3182ce',
+    //   textColor: '#fff',
+    //   isCloseable: true
+    // }
   }
 }
 

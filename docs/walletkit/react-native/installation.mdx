@@ -1,0 +1,32 @@
+# Installation
+
+Install WalletKit package.
+
+```bash npm2yarn
+npm install @walletconnect/web3wallet @walletconnect/react-native-compat
+```
+
+Additionally add these extra packages to help with async storage, polyfills and the instance of ethers.
+
+```bash npm2yarn
+npm install @react-native-async-storage/async-storage @react-native-community/netinfo react-native-get-random-values fast-text-encoding @ethersproject/shims ethers@5.7.2 @json-rpc-tools/utils
+```
+
+<details>
+<summary>Additional setup for Expo</summary>
+<div>
+```
+npx expo install expo-application
+```
+</div>
+</details>
+
+For those using Typescript, we recommend adding these dev dependencies:
+
+```bash npm2yarn
+npm install --save-dev @walletconnect/jsonrpc-types
+```
+
+## Next Steps
+
+Now that you've installed WalletKit, you're ready to start integrating it. The next section will walk you through the process of setting up your project to use the SDK.

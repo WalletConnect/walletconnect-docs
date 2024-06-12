@@ -1,0 +1,102 @@
+import ThemedImage from '@theme/ThemedImage'
+import useBaseUrl from '@docusaurus/useBaseUrl'
+
+# Mobile Linking
+
+:::info Note
+
+This feature is only relevant to native platforms.
+
+:::
+
+## Usage
+
+Mobile Linking allows your wallet to automatically redirect back to the Dapp allowing for less user interactions and hence a better UX for your users.
+
+### Establishing Communication Between Mobile Wallets and Apps
+
+When integrating a wallet with a mobile application, it's essential to understand how they communicate. The process involves two main steps:
+
+1. **QR Code Handshake:** The mobile app (Dapp) generates a unique URI (Uniform Resource Identifier) and displays it as a QR code. This URI acts like a secret handshake. When the user scans the QR code using their wallet app, they establish a connection. It's like saying, "Hey, let's chat!"
+2. **Deep Links and Universal Links:** The URI from the QR code allows the wallet app to create a [deep link](https://support.google.com/google-ads/answer/10023042?hl=en#:~:text=Deep%20links%20send%20mobile%20device,%2C%20Shopping%2C%20and%20Display%20campaigns.) or [universal link](https://developer.apple.com/ios/universal-links/). These links work on both Android and iOS. They enable seamless communication between the wallet and the app.
+
+:::tip
+
+**Developers should prefer Deep Linking over Universal Linking.**
+
+In the case of Universal Linking, the user may be redirected to the browser, which may not be the desired behavior. Deep Linking ensures that the user is redirected to the app, providing a seamless experience.
+
+:::
+
+The connection and sign request flows are similar across platforms.
+The next section provides a high-level overview of both flows.
+
+### Connection Flow
+
+- **Dapp Prompts User:** The Dapp asks the user to connect.
+- **User Chooses Wallet:** The user selects a wallet from a list of compatible wallets.
+- **Redirect to Wallet:** The user is redirected to their chosen wallet.
+- **Wallet Approval:** The wallet prompts the user to approve or reject the session (similar to granting permission).
+- **Return to Dapp:**
+  - **Manual Return:** The wallet asks the user to manually return to the Dapp.
+  - **Automatic Return:** Alternatively, the wallet automatically takes the user back to the Dapp.
+- **User Reunites with Dapp:** After all the interactions, the user ends up back in the Dapp.
+
+<ThemedImage
+  alt="Mobile Linking Connect Flow"
+  sources={{
+    light: useBaseUrl('/img/w3w/mobileLinking-light.png'),
+    dark: useBaseUrl('/img/w3w/mobileLinking-dark.png')
+  }}
+/>
+
+### Sign Request Flow
+
+When the Dapp needs the user to sign something (like a transaction), a similar pattern occurs:
+
+- **Automatic Redirect:** The Dapp automatically sends the user to their previously chosen wallet.
+- **Approval Prompt:** The wallet asks the user to approve or reject the request.
+- **Return to Dapp:**
+  - **Manual Return:** The wallet asks the user to manually return to the Dapp.
+  - **Automatic Return:** Alternatively, the wallet automatically takes the user back to the Dapp.
+- **User Reconnects:** Eventually, the user returns to the Dapp.
+
+<ThemedImage
+  alt="Mobile Linking Sign Flow"
+  sources={{
+    light: useBaseUrl('/img/w3w/mobileLinking_sign-light.png'),
+    dark: useBaseUrl('/img/w3w/mobileLinking_sign-dark.png')
+  }}
+/>
+
+## Platform preparations
+
+Since React Native leverages on native APIs, you must follow iOS and Android steps for each native platform
+
+More information in official documentation: https://reactnative.dev/docs/linking?syntax=android#enabling-deep-links
+
+:::tip
+
+Dapps developers must do the same for their own custom schemes if they want the wallet to be able to navigate back after a session approval or a sign request response
+
+:::
+
+## Integration
+
+In order to redirect to the Dapp, you'll need to use `Linking` from `react-native` and call `openURL()` method with the Dapp scheme that comes in the proposal metadata.
+
+```js
+import { Linking } from 'react-native'
+
+async function onApprove(proposal, namespaces) {
+  await web3wallet.approveSession({ id: proposal.id, namespaces })
+
+  const dappScheme = proposal.params.proposer.metadata.redirect?.native
+
+  if (dappScheme) {
+    Linking.openURL(dappScheme)
+  } else {
+    // Inform the user to manually return to the DApp
+  }
+}
+```

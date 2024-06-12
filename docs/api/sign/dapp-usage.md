@@ -35,7 +35,7 @@ npm install @walletconnect/modal
 
 #### Create a Session
 
-**1. Initiate your WalletConnect client with the relay server, using [your Project ID](../../cloud/relay.md).**
+**1. Initiate your WalletConnect client with the relay server, using [your Project ID](../../cloud/relay.mdx).**
 
 ```javascript
 import SignClient from '@walletconnect/sign-client'

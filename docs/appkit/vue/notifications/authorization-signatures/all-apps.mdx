@@ -1,0 +1,30 @@
+# Signing the message: “I further authorize this app to view and manage my notifications for ALL apps”
+
+When subscribing to notifications from an app that uses Web3Inbox, you may be presented with a signature request that reads the following message:
+
+> I further authorize this app to view and manage my notifications for ALL apps. Read more at https://walletconnect.com/notifications-all-apps
+
+For any signature request, it’s critical that you always read the message attached before signing in order to fully understand the permissions you’re granting.
+
+Take caution when signing this request as doing so will allow the app to:
+
+- Subscribe you to notifications from any app
+- Manage your notifications for any app
+- View your notifications from any app
+
+The app will not be able to:
+
+- Sign blockchain transactions or additional messages
+
+Typically, apps you subscribe to for notifications will send a slightly [different request](this-app) that asks you to only authorize them to manage notifications _for that app only_ upon signing. You should only ever be presented with the message shown in the example above when an app requires wider access to your subscriptions and messages.
+
+A common example of this would be an app that enables you to view notifications and messages from multiple apps, like a wallet or the [Web3Inbox.com app](https://app.web3inbox.com).
+
+Always be cautious when granting this permission to an app, and ensure that you’re familiar with the app sending the request.
+
+## Example wallet signature requests
+
+<div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gridGap: 16 }}>
+  <img src="/assets/web3inbox/authorization-signatures/all-apps/sign-this-message.jpg" />
+  <img src="/assets/web3inbox/authorization-signatures/all-apps/message.jpg" />
+</div>

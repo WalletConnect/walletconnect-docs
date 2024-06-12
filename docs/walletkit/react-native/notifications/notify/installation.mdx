@@ -1,0 +1,121 @@
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
+
+# Installation
+
+Install the WalletConnect NotifyClient package.
+
+```bash npm2yarn
+npm install @walletconnect/notify-client @walletconnect/react-native-compat
+```
+
+You will need to polyfill crypto depending on your environment. See instructions below.
+
+<Tabs
+queryString="rn-method"
+	values={[
+		{ label: 'Expo', value: 'expo', },
+		{ label: 'React Native CLI', value: 'rn-cli', },
+	]}
+>
+<TabItem value="expo">
+
+```bash npm2yarn
+npm i expo-crypto
+```
+
+1. Create a file called `expo-crypto-shim.js` at the root of your project
+2. Go to `expo-crypto-shim.js`and paste the following snippet into it.
+
+```js
+import { digest } from 'expo-crypto'
+
+// eslint-disable-next-line no-undef
+const webCrypto = typeof crypto !== 'undefined' ? crypto : new Crypto()
+webCrypto.subtle = {
+  digest: (algo, data) => {
+    const buf = Buffer.from(data)
+    return digest(algo, buf)
+  }
+}
+;(() => {
+  if (typeof crypto === 'undefined') {
+    Object.defineProperty(window, 'crypto', {
+      configurable: true,
+      enumerable: true,
+      get: () => webCrypto
+    })
+  }
+})()
+```
+
+3. Then head over your `index.js` file at the root of your project and add the following imports.
+
+```js
+import '@walletconnect/react-native-compat'
+import './expo-crypto-shim.js'
+```
+
+</TabItem>
+<TabItem value="rn-cli">
+
+```bash npm2yarn
+npm i react-native-quick-crypto react-native-quick-base64 stream-browserify @craftzdog/react-native-buffer babel-plugin-module-resolver
+```
+
+For iOS only
+
+```bash
+cd ios && pod install
+```
+
+1. Go to your `index.js` file at the root of your project and add the following polyfill
+
+```js
+import { AppRegistry } from 'react-native'
+import App from './App'
+import { name as appName } from './app.json'
+import crypto from 'react-native-quick-crypto'
+
+const polyfillDigest = async (algorithm, data) => {
+  const algo = algorithm.replace('-', '').toLowerCase()
+  const hash = crypto.createHash(algo)
+  hash.update(data)
+  return hash.digest()
+}
+
+globalThis.crypto = crypto
+globalThis.crypto.subtle = {
+  digest: polyfillDigest
+}
+
+AppRegistry.registerComponent(appName, () => App)
+```
+
+2. Update your `babel.config.js` with the following configuration
+
+```js
+module.exports = {
+  presets: ['module:metro-react-native-babel-preset'],
+  plugins: [
+   [
+     'module-resolver',
+     {
+       alias: {
+         'crypto': 'react-native-quick-crypto',
+         'stream': 'stream-browserify',
+         'buffer': '@craftzdog/react-native-buffer',
+       },
+     },
+   ],
+    ...
+  ],
+};
+```
+
+</TabItem>
+</Tabs>
+
+## Next Steps
+
+Now that you've installed WalletConnect Notify, you're ready to start integrating it. The next section will walk you through the process of setting up your project to use the Notify API.

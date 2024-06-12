@@ -1,0 +1,24 @@
+For developers using `@web3inbox/core` without the hooks, there are far less breaking changes.
+
+#### Managing registration
+
+Registration is now split into 2 steps to avoid the opinionated approach of passing `onSign` callback.
+
+```typescript
+import { useSignMessage } from '@wagmi'
+const { signMessageAsync } = useSignMessage()
+
+/* highlight-delete-start */
+client.register(signMessageAsync)
+/* highlight-delete-end */
+/* highlight-add-start */
+const { registerParams, message } = client.prepareRegistration({ account: 'eip155:1:0x..' })
+const signature = await signMessageAsync(message)
+client.register({ registerParams, signature })
+/* highlight-add-end */
+```
+
+#### Managing Notifications
+
+- `deleteMessage` has been removed.
+- `pageNotifications` has been added to allow paging notifications

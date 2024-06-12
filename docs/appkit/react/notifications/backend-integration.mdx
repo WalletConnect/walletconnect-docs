@@ -1,0 +1,263 @@
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
+
+# Backend Integration
+
+Once an account is subscribed to your app's notifications you can test sending notifications to the account. You can subscribe in your app directly with our [Frontend Integration](frontend-integration/usage), or with one of the below testing options.
+
+We recommend testing notifications with the [Web3Inbox.com app](https://app.web3inbox.com) which supports push notifications and can be installed to your phone. You can also try one of our sample wallets:
+
+- [iOS sample wallet](https://testflight.apple.com/join/09bTAryp)
+- [Android sample wallet](https://appdistribution.firebase.dev/i/d2c86e879abd5a86)
+
+## Authentication
+
+To send notifications and access all subscriber information for your dapp, you will need your Notify API Secret and project ID.
+
+You can find the Notify API Secret under the Notify API section of the APIs tab of your project on [WalletConnect Cloud](https://cloud.walletconnect.com). Follow steps on the [Cloud Setup](cloud-setup) page to configure this. This secret allows publishing notifications to any account subscribed to your app, so should not be published and should only be used by your app backend.
+
+## Sending notifications
+
+Only plaintext is supported, and newlines are ignored.
+
+To send a notification notification you can call the `/notify` endpoint. This endpoint supports the following fields:
+
+- `type` - The Notification type ID copied from WalletConnect Cloud.
+- `title` - The title of the notification. Max 64 characters.
+- `body` - The body of the notification containing more detail. Max 255 characters.
+- `url` (optional) - A URL attached to the notification that the user can navigate to. Max 255 characters.
+- `accounts` - A list of [CAIP-10](https://github.com/ChainAgnostic/CAIPs/blob/main/CAIPs/caip-10.md) account IDs for which to send the notification to. Max 500 accounts per request. Also see the [rate limits](#rate-limits) below.
+- `notification_id` (optional) - An idempotency key of arbitrary format used to dedup multiple requests. Max 255 characters. Multiple calls with the same `notification_id` will use the first call's `notification` content, but will send to any additional account IDs listed in `accounts`.
+
+```typescript
+type RequestBody = {
+  notification_id?: string | null
+  notification: {
+    type: string
+    title: string
+    body: string
+    url?: string | null
+  }
+  accounts: string[]
+}
+```
+
+Example usage:
+
+<Tabs queryString={'api-client'}>
+
+<TabItem value="javascript" label="JavaScript">
+
+```typescript
+const PROJECT_ID = '<PROJECT_ID>'
+const NOTIFY_API_SECRET = '<NOTIFY_API_SECRET>'
+const response = await fetch(`https://notify.walletconnect.com/${PROJECT_ID}/notify`, {
+  method: 'POST',
+  headers: {
+    Authorization: `Bearer ${NOTIFY_API_SECRET}`,
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify({
+    notification: {
+      type: 'a1e53b95-18e5-4af8-9f03-9308ec87b687',
+      title: 'The price of Ethereum has risen',
+      body: 'The price of Ethereum has gone up 10%',
+      url: 'https://app.example.com'
+    },
+    accounts: ['eip155:1:0x9AfEaC202C837df470b5A145e0EfD6a574B21029']
+  })
+})
+```
+
+</TabItem>
+
+<TabItem value="curl" label="cURL">
+
+```bash
+curl -X POST 'https://notify.walletconnect.com/<PROJECT_ID>/notify' \
+  --header 'Authorization: Bearer <NOTIFY_API_SECRET>' \
+  --header 'Content-Type: application/json' \
+  --data '{
+    "notification": {
+      "type": "a1e53b95-18e5-4af8-9f03-9308ec87b687",
+      "title": "The price of Ethereum has risen",
+      "body": "The price of Ethereum has gone up 10%",
+      "url": "https://app.example.com"
+    },
+    "accounts": [
+      "eip155:1:0x9AfEaC202C837df470b5A145e0EfD6a574B21029"
+    ]
+  }'
+```
+
+</TabItem>
+
+</Tabs>
+
+## Get subscribers
+
+You can tell if an account is subscribed and get information about subscribers using the `/v1/<project-id>/subscribers` endpoint. You can provide up to 100 accounts in the request.
+
+If the account is subscribed, it will be returned as a key in the response along with a list of subscribed notification types as the value. If the account is not a subscriber, it will not be returned in the response.
+
+Example usage:
+
+<Tabs queryString={'api-client'}>
+
+<TabItem value="javascript" label="JavaScript">
+
+```typescript
+const PROJECT_ID = '<PROJECT_ID>'
+const NOTIFY_API_SECRET = '<NOTIFY_API_SECRET>'
+const requestBody: RequestBody = {
+  accounts: [
+    'eip155:1:0x9AfEaC202C837df470b5A145e0EfD6a574B21029',
+    'eip155:1:0x0000000000000000000000000000000000000000'
+  ]
+}
+
+const response = await fetch(`https://notify.walletconnect.com/v1/${PROJECT_ID}/subscribers`, {
+  method: 'POST',
+  headers: {
+    Authorization: `Bearer ${NOTIFY_API_SECRET}`
+  }
+  body: JSON.stringify(requestBody)
+})
+
+const subscribers: ResponseBody = await response.json()
+
+type RequestBody = {
+  // Max 100 accounts
+  accounts: string[]
+}
+type ResponseBody = {
+  [account: string]: Subscriber
+}
+type Subscriber = {
+  notification_types: string[]
+}
+```
+
+</TabItem>
+
+<TabItem value="curl" label="cURL">
+
+```bash
+curl -X POST 'https://notify.walletconnect.com/v1/<PROJECT_ID>/subscribers' \
+  --header 'Authorization: Bearer <NOTIFY_API_SECRET>' \
+  --header 'Content-Type: application/json' \
+  --data '{
+    "accounts": [
+      "eip155:1:0x9AfEaC202C837df470b5A145e0EfD6a574B21029",
+      "eip155:1:0x0000000000000000000000000000000000000000"
+    ]
+  }'
+```
+
+</TabItem>
+
+</Tabs>
+
+Example response:
+
+```jsonc
+{
+  "eip155:1:0x9AfEaC202C837df470b5A145e0EfD6a574B21029": {
+    "notification_types": ["4d1c97ad-c182-4097-8f2c-8f80c0674df2"]
+  }
+}
+```
+
+## Get all subscribers
+
+:::caution
+This endpoint will download _all_ subscribers of your app, which is an expensive operation and can take several seconds to complete. Because of this, it has a low rate limit.
+:::
+
+You can get a list of all of the currently-subscribed accounts by calling the `/<project-id>/subscribers` endpoint.
+
+Example usage:
+
+<Tabs queryString={'api-client'}>
+
+<TabItem value="javascript" label="JavaScript">
+
+```typescript
+const PROJECT_ID = '<PROJECT_ID>'
+const NOTIFY_API_SECRET = '<NOTIFY_API_SECRET>'
+const response = await fetch(`https://notify.walletconnect.com/${PROJECT_ID}/subscribers`, {
+  headers: {
+    Authorization: `Bearer ${NOTIFY_API_SECRET}`
+  }
+})
+const subscribers: string[] = await response.json()
+```
+
+</TabItem>
+
+<TabItem value="curl" label="cURL">
+
+```bash
+curl 'https://notify.walletconnect.com/<PROJECT_ID>/subscribers' \
+  --header 'Authorization: Bearer <NOTIFY_API_SECRET>'
+```
+
+</TabItem>
+
+</Tabs>
+
+## Mark all notifications as read
+
+Unless marked as read by an app frontend, notifications will always be "unread". Because of this, when you
+initially add support for displaying unread status or unread count to your frontend, users that have received
+notifications in the past will have notifications display as "unread" even if they already have seen them.
+This can potentially be an undesireable user experience.
+
+To mitigate this problem, you can make a one-time call to the `/v1/<project-id>/mark-all-as-read` API endpoint
+which will mark all existing notifications as read. Notifications marked as read in this way will not contribute
+to read rate analytics. After you deploy your integration of unread states, you can call this endpoint to
+reset the unread state for all of your existing notifications.
+
+<Tabs queryString={'api-client'}>
+
+<TabItem value="javascript" label="JavaScript">
+
+```typescript
+const PROJECT_ID = '<PROJECT_ID>'
+const NOTIFY_API_SECRET = '<NOTIFY_API_SECRET>'
+const response = await fetch(`https://notify.walletconnect.com/v1/${PROJECT_ID}/mark-all-as-read`, {
+  method: 'POST',
+  headers: {
+    Authorization: `Bearer ${NOTIFY_API_SECRET}`
+  }
+})
+```
+
+</TabItem>
+
+<TabItem value="curl" label="cURL">
+
+```bash
+curl -X POST 'https://notify.walletconnect.com/v1/<PROJECT_ID>/mark-all-as-read' \
+  --header 'Authorization: Bearer <NOTIFY_API_SECRET>'
+```
+
+</TabItem>
+
+</Tabs>
+
+## Rate limits
+
+To protect our system and subscribers, various limits and rate limits are in-place.
+
+Rate limits are implemented as [token bucket](https://en.wikipedia.org/wiki/Token_bucket) and contain both rate and burst amounts. On average, a rate of requests can be made. However, since real-world applications often make requests in bursts, this fixed rate can be surpassed temporarily up to the burst amount, provided the app subsequently makes requests below the average in order to recover its bursting capability.
+
+- `POST /<project-id>/notify`:
+  - Each app can send 2 notifications per hour to an account, with a burst up to 50. Accounts that have been rate limited will be returned in the request response. Exceptions may be made on a per-project basis for special circumstances.
+  - Each app can call this endpoint 2 times per second with a burst up to 20. Rate limited requests will return a 429 status code.
+- `POST /v1/<project-id>/subscribers`
+  - Each app can call this endpoint 100 times per second with a burst up to 100. Rate limited requests will return a 429 status code.
+- `GET /<project-id>/subscribers`
+  - Each app can call this endpoint 1 time every 5 minutes with a burst up to 2. Rate limited requests will return a 429 status code.
+- `POST /v1/<project-id>/mark-all-as-read`
+  - Each app can call this endpoint 1 time per hour with a burst up to 5. Rate limited requests will return a 429 status code.

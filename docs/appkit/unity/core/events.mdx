@@ -1,0 +1,27 @@
+# Events
+
+## Web3Modal Events
+
+```csharp
+//Invoked after successful initialization of Web3Modal
+Web3Modal.Initialized += (sender, eventArgs) => { };
+
+// Invoked after successful connection of an account
+Web3Modal.AccountConnected += (sender, eventArgs) => {
+    Account activeAccount = eventArgs.GetAccount();
+};
+
+// Invoked after successful disconnection of an account
+Web3Modal.AccountDisconnected += (sender, eventArgs) => { };
+
+// Invoked after account has changed
+// This happens when the wallet updates a session or the user changes the active chain.
+Web3Modal.AccountChanged += (sender, eventArgs) => {
+    Account newAccount = eventArgs.Account;
+};
+
+// Invoked after active chain has changed
+Web3Modal.ChainChanged += (sender, eventArgs) => {
+    Chain newChain = eventArgs.Chain;
+};
+```

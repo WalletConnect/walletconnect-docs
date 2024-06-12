@@ -1,0 +1,17 @@
+To setup the client you need to configure it with your `projectId` which you can obtain from [WalletConnect Cloud](https://cloud.walletconnect.com).
+
+Furthermore you may need to configure the `domain` and `isLimited` parameters:
+
+- `domain` defaults to `window.location.host` and must be set to the domain setup in Cloud Setup. For example `app.example.com`. Do not add the scheme (`https://`).
+- `allApps` determines if your app has access to all of the user's subscriptions, or only the ones that the app is hosted on. By setting it to `true`, it enables setting `domain` to a value other than `window.location.host`. Setting `allApps: true` can be useful during development to allow your localhost-deployed app to access the subscriptions for the domain you setup. Note that most apps do not need to set this in production environments, as they only need access to their own subscriptions. When enabled, the user has to sign a SIWE message granting your app more permissions, and this requires additional consideration from the user.
+
+```ts
+initWeb3inboxClient({ projectId, domain, allApps, logLevel })
+```
+
+#### References
+
+- **projectId:** Your WalletConnect project ID
+- **domain _(Optional)_:** Your app's domain. Defaults to `window.location.host`.
+- **allApps _(Optional)_:** Set to `true` to request access to all of the user's notification subscriptions for all apps, instead of only `domain`. Defaults to `false`.
+- **logLevel _(Optional)_:** Increase verbosity of console logging. Defaults to `error`. Can be set to `error`, `info`, or `debug`.

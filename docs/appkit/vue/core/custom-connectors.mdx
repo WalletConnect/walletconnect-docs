@@ -1,0 +1,50 @@
+import PlatformTabs from '../../../components/PlatformTabs'
+import PlatformTabItem from '../../../components/PlatformTabItem'
+
+# Custom connectors
+
+Add custom connectors for Ethers or Wagmi
+
+<PlatformTabs groupId="eth-lib" activeOptions={["wagmi", "ethers"]}>
+<PlatformTabItem value="wagmi">
+
+If you already have Wagmi integrated into your application or would like more control over Wagmi's configuration, you can integrate Web3Modal on top of it.
+
+```ts
+import { createWeb3Modal } from '@web3modal/wagmi'
+
+import { reconnect, http, createConfig } from '@wagmi/core'
+import { sepolia } from '@wagmi/core/chains'
+import { walletConnect } from '@wagmi/connectors'
+
+const projectId = 'YOUR_PROJECT_ID'
+
+const metadata = {
+  //...
+}
+
+const config = createConfig({
+  chains: [sepolia],
+  transports: {
+    [sepolia.id]: http()
+  },
+  connectors: [
+    walletConnect({ projectId, metadata, showQrModal: false }), // showQrModal must be false.
+    //other connectors...
+  ]
+})
+reconnect(config)
+
+const modal = createWeb3Modal({
+  //...
+  wagmiConfig: config,
+})
+```
+
+</PlatformTabItem>
+<PlatformTabItem value="ethers">
+
+Coming soon...
+
+</PlatformTabItem>
+</PlatformTabs>

@@ -1,0 +1,45 @@
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
+
+To open Web3Modal you can use our [**web component**](../core/components.mdx) or build your own button with Web3Modal [**hooks**](../core/hooks.mdx#useweb3modal).
+
+<Tabs>
+<TabItem value="components" label="Web Component">
+
+```tsx
+export default function ConnectButton() {
+  return <w3m-button />
+}
+```
+
+Learn more about the Web3Modal web components [here](../core/components.mdx)
+
+:::note
+Web components are global html elements that don't require importing.
+:::
+
+</TabItem>
+<TabItem value="hooks" label="Hooks">
+
+You can trigger the modal by calling the `open` function from `useWeb3Modal` hook.
+
+```tsx
+import { useWeb3Modal } from '@web3modal/ethers5/react'
+
+export default function ConnectButton() {
+  // 4. Use modal hook
+  const { open } = useWeb3Modal()
+
+  return (
+    <>
+      <button onClick={() => open()}>Open Connect Modal</button>
+      <button onClick={() => open({ view: 'Networks' })}>Open Network Modal</button>
+    </>
+  )
+}
+```
+
+Learn more about the Web3Modal hooks [here](../core/hooks.mdx)
+
+</TabItem>
+</Tabs>

@@ -1,0 +1,24 @@
+**Note**: [EIP-1271 signatures](https://eips.ethereum.org/EIPS/eip-1271) coming from smart wallets are supported in version `1.1.0` and above.
+
+```ts
+import { signMessageAsync } from '@wagmi/core'
+
+const { registerParams, signature } = await client.prepareRegistration({
+  account
+})
+const isRegistered = await client.getAccountIsRegistered(account)
+const signature = await signMessageAsync({ message })
+await register({ registerParams, signature })
+```
+
+#### References
+
+- **prepareRegistration:** Prepare registration params
+- **register:** Register using a signature and register params
+- **getAccountIsRegistered:** Returns if account is registered
+
+Some suggested methods of signing the message:
+
+- Ethers.js [`Wallet.signMessage` method](https://docs.ethers.org/v5/api/signer/#Signer-signMessage)
+- `@wagmi/core` [`signMessage` method](https://wagmi.sh/core/api/actions/signMessage)
+- The [`useSignMessage` hook](https://wagmi.sh/react/hooks/useSignMessage) in `@wagmi`

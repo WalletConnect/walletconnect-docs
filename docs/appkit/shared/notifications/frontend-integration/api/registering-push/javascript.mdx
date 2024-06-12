@@ -1,0 +1,22 @@
+If you wish to receive live push notifications to your React Native or Web app, you must integrate with Firebase Messaging. More information about how to integrate with Firebase can be found [here](https://firebase.google.com/docs/cloud-messaging).
+
+Your integration will obtain a token from Firebase and you will need to pass this token to the Web3Inbox SDK using the `registerWithPushServer()` function.
+
+```ts
+import { getToken } from 'firebase/messaging
+
+// initialize Firebase's messaging object via Firebase's `getMessaging` function
+
+const firebaseToken = getToken(firebaseMessaging, {
+  vapidKey: "YOUR_FIREBASE_VAPID_KEY"
+})
+
+// The Client ID that registered with this token, can be used for debugging purposes or logs
+const clientId = client.registerWithPushServer(firebaseToken)
+```
+
+#### References
+
+- `registerWithPushServer`: `(token: string, platform: 'fcm' | 'apns') => string`
+
+Either APNS or FCM can be used to recieve push notifications. Token here is the respective platform's token.

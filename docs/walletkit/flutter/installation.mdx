@@ -1,0 +1,24 @@
+# Installation
+
+```dart
+flutter pub add walletconnect_flutter_v2
+```
+
+:::info
+
+Depending on your platform, you will have to add different permissions to get the package to work.
+
+**MacOS**
+
+Add the following to your `DebugProfile.entitlements` and `Release.entitlements` files so that it can connect to the WebSocket server.
+
+```xml
+<key>com.apple.security.network.client</key>
+<true/>
+```
+
+:::
+
+## Next Steps
+
+Now that you've installed Web3Wallet SDK, you're ready to start integrating it. The next section will walk you through the process of setting up your project to use the SDK.

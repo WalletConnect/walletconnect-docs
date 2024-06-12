@@ -1,0 +1,72 @@
+# Verify API
+
+Verify API is a security-focused feature that allows wallets to notify end-users when they may be connecting to a suspicious or malicious domain, helping to prevent phishing attacks across the industry.
+Once a wallet knows whether an end-user is on uniswap.com or eviluniswap.com, it can help them to detect potentially harmful connections through Verify's combined offering of WalletConnect’s domain registry and [Blowfish's domain scanner](https://docs.blowfish.xyz/reference/scan-domain-1).
+For those looking to enable Verify on the app side, check out our reference guide [here.](./cloud/verify)
+
+When a user initiates a connection with an application, Verify API enables wallets to present their users with four key states that can help them determine whether the domain they’re about to connect to might be malicious.
+
+These are:
+
+![Verify Banner](/img/verify-banner.png)
+
+## Disclaimer
+
+Verify API is not designed to be bulletproof but to make the impersonation attack harder and require a somewhat sophisticated attacker. We are working on a new standard with various partners to close those gaps and make it bulletproof.
+
+## Domain risk detection
+
+The Verify security system will discriminate session proposals & session requests with distinct validations that can be either `VALID`, `INVALID` or `UNKNOWN`.
+
+- Domain match: The domain linked to this request has been verified as this application's domain.
+  - This interface appears when the domain a user is attempting to connect to has been ‘verified’ in our domain registry as the registered domain of the application the user is trying to connect to, and the domain has not returned as suspicious from either of the security tools we work with. The `verifyContext` included in the request will have a validation of `VALID`.
+- Unverified: The domain sending the request cannot be verified.
+  - This interface appears when the domain a user is attempting to connect to has not been verified in our domain registry, but the domain has not returned as suspicious from either of the security tools we work with. The `verifyContext` included in the request will have a validation of `UNKNOWN`.
+- Mismatch: The application's domain doesn't match the sender of this request.
+  - This interface appears when the domain a user is attempting to connect to has been flagged as a different domain to the one this application has verified in our domain registry, but the domain has not returned as suspicious from either of the security tools we work with. The `verifyContext` included in the request will have a validation of `INVALID`
+- Threat: This domain is flagged as malicious and potentially harmful.
+  - This interface appears when the domain a user is attempting to connect to has been flagged as malicious on one or more of the security tools we work with. The `verifyContext` included in the request will contain parameter `isScam` with value `true`.
+
+### Implementation
+
+To check the Verify API validations and whether or not your user is interacting with potentially malicious app, you can do so by accessing the `verifyContext` included in the request payload.
+
+```javascript
+...
+web3wallet.on("auth_request", async (authRequest) => {
+  const { verifyContext } = authRequest
+  const validation = verifyContext.verified.validation // can be VALID, INVALID or UNKNOWN
+  const origin = verifyContext.verified.origin // the actual verified origin of the request
+  const isScam = verifyContext.verified.isScam // true if the domain is flagged as malicious
+
+  // if the domain is flagged as malicious, you should warn the user as they may lose their funds - check the `Threat` case for more info
+  if(isScam) {
+    // show a warning screen to the user
+    // and proceed only if the user accepts the risk
+  }
+
+  switch(validation) {
+    case "VALID":
+      // proceed with the request - check the `Domain match` case for more info
+      break
+    case "INVALID":
+      // show a warning dialog to the user - check the `Mismatch` case for more info
+      // and proceed only if the user accepts the risk
+      break
+    case "UNKNOWN":
+      // show a warning dialog to the user - check the `Unverified` case for more info
+      // and proceed only if the user accepts the risk
+      break
+  }
+
+  // respond to the request after the user has approved the request
+  await web3wallet.respondAuthRequest(...)
+})
+```
+
+For live demo examples of the intended Verify API flows, check out our demo apps:
+
+- [Demo Web Wallet](https://react-wallet.walletconnect.com)
+- [Demo React Native Wallet](https://github.com/WalletConnect/react-native-examples/tree/main/wallets/rn_cli_wallet)
+- [Demo App](https://react-app.walletconnect.com/) - you can toggle between the verify states by clicking on the `gear` & selecting the decided Validation before connecting to the wallet
+- [Demo Malicious App](https://malicious-app-verify-simulation.vercel.app/) - this app is flagged as malicious and will have the `isScam` parameter set to `true` in the `verifyContext` of the request

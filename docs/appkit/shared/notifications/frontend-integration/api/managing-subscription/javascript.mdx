@@ -1,0 +1,63 @@
+Subscribe, Unsubscribe, Get Subscription, Check if Subscribed.
+
+:::note
+When using `differentAccount`, the passed account needs to be previously registered.
+This use case is for Dapps that have multiple active accounts or wallets with multiple active accounts.
+`differentAccount` can be used for all the below hooks and functions that accept `account`
+:::
+
+```ts
+// check if current account is subscribed to current dapp
+const isSubscribed = client.isSubscribedToDapp()
+
+// watch if current account is subscribed to current dapp
+client.watchIsSubscribed(isSubbed => console.log({ isSubbed }))
+
+// subscribe to current dapp with current account
+await client.subscribeToDapp()
+
+// subscribe to same dapp with different account
+await client.subscribeToDapp(differentAccount)
+
+// subscribe to different dapp with current account
+await client.subscribeToDapp(undefined, differentDomain)
+
+// subscribe to different dapp with different account
+await client.subscribeToDapp(differentAccount, differentDomain)
+
+// unsubscribe from current dapp with current account
+await client.unsubscribeFromDapp()
+
+// get current account's subscription to current dapp
+const subscription = client.getSubscription()
+
+// watch current account's subscription to current dapp
+client.watchSubscription(subscription => console.log({ subscription }))
+
+// get current account's subscriptions
+const subscriptions = client.getSubscriptions()
+
+// watch current account's subscriptions
+client.watchSubscriptions(subscriptions => console.log({ subscriptions }))
+```
+
+#### References
+
+- **account _(Optional)_:** CAIP-10 account
+- **domain _(Optional)_:** dapp domain
+- **subscription:** _Non-Reactive_ state, returning current subscription information, of type:
+
+```ts
+{
+  topic: string
+  account: string
+  relay: relayertypes.protocoloptions
+  metadata: Metadata
+  scope: ScopeMap
+  expiry: number
+  symkey: string
+  unreadCount: number
+}
+```
+
+- **subscription:** _Non-Reactive_ state, returning array of current subscriptions

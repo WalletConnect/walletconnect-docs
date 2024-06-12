@@ -1,0 +1,267 @@
+import Table from '../../../components/Table'
+import PlatformTabs from '../../../components/PlatformTabs'
+import PlatformTabItem from '../../../components/PlatformTabItem'
+
+import WagmiHooks from '../wagmi/hooks.mdx'
+import EthersHooks from '../ethers/hooks.mdx'
+import SolanaHooks from '../solana/hooks.mdx'
+
+# Hooks
+
+Hooks are functions that will help you control the modal, subscribe to wallet events and interact with them and smart contracts.
+
+## useWeb3Modal
+
+Control the modal with the `useWeb3Modal` hook
+
+<PlatformTabs groupId="eth-lib" activeOptions={["wagmi", "wagmi1","ethers5","ethers", "solana"]}>
+<PlatformTabItem value="wagmi">
+
+```ts
+import { useWeb3Modal } from '@web3modal/wagmi/react'
+
+export default function Component() {
+  const { open, close } = useWeb3Modal()
+
+  open()
+
+  //...
+}
+```
+
+</PlatformTabItem>
+<PlatformTabItem value="wagmi1">
+
+```ts
+import { useWeb3Modal } from '@web3modal/wagmi/react'
+
+export default function Component() {
+  const { open, close } = useWeb3Modal()
+
+  open()
+
+  //...
+}
+```
+
+</PlatformTabItem>
+<PlatformTabItem value="ethers5">
+
+```ts
+import { useWeb3Modal } from '@web3modal/ethers5/react'
+
+export default function Component() {
+  const { open, close } = useWeb3Modal()
+
+  open()
+
+  //...
+}
+```
+
+</PlatformTabItem>
+<PlatformTabItem value="ethers">
+
+```ts
+import { useWeb3Modal } from '@web3modal/ethers/react'
+
+export default function Component() {
+  const { open, close } = useWeb3Modal()
+
+  open()
+
+  //...
+}
+```
+
+</PlatformTabItem>
+<PlatformTabItem value="solana">
+
+```ts
+import { useWeb3Modal } from '@web3modal/solana/react'
+
+export default function Component() {
+  const { open, close } = useWeb3Modal()
+
+  open()
+
+  //...
+}
+```
+
+</PlatformTabItem>
+</PlatformTabs>
+
+You can also select the modal's view when calling the `open` function
+
+```ts
+open({ view: 'Account' })
+```
+
+List of views you can select
+
+<Table
+  headers={['Variable', 'Description']}
+  data={[
+    {
+      variable: { code: 'Connect' },
+      description: 'Principal view of the modal - default view when disconnected'
+    },
+    {
+      variable: { code: 'Account' },
+      description: 'User profile - default view when connected'
+    },
+    {
+      variable: { code: 'AllWallets' },
+      description: 'Shows the list of all available wallets'
+    },
+    {
+      variable: { code: 'Networks' },
+      description:
+        'List of available networks - you can select and target a specific network before connecting'
+    },
+    {
+      variable: { code: 'WhatIsANetwork' },
+      description: '"What is a network" onboarding view'
+    },
+    {
+      variable: { code: 'WhatIsAWallet' },
+      description: '"What is a wallet" onboarding view'
+    },
+    {
+      variable: { code: 'OnRampProviders' },
+      description: '"OnRamp main view'
+    }
+  ]}
+/>
+
+## useDisconnect
+
+```ts
+const { disconnect } = useDisconnect()
+
+disconnect()
+```
+
+## useWalletInfo
+
+Metadata information from the connected wallet
+
+```ts
+import { useWalletInfo } from '@web3modal/wagmi/react'
+
+
+export default Component(){
+  const { walletInfo } = useWalletInfo()
+
+  console.log(walletInfo.name, walletInfo.icon)
+
+  //...
+}
+```
+
+## Ethereum Library
+
+<PlatformTabs groupId="eth-lib" activeOptions={["wagmi", "ethers"]}>
+<PlatformTabItem value="wagmi">
+
+<WagmiHooks />
+
+</PlatformTabItem>
+<PlatformTabItem value="ethers">
+
+<EthersHooks />
+
+</PlatformTabItem>
+</PlatformTabs>
+
+## useWeb3ModalState
+
+Get the current value of the modal's state
+
+<PlatformTabs groupId="eth-lib" activeOptions={["wagmi", "wagmi1", "ethers5","ethers", "solana"]}>
+<PlatformTabItem value="wagmi">
+
+```ts
+import { useWeb3ModalState } from '@web3modal/wagmi/react'
+
+const { open, selectedNetworkId } = useWeb3ModalState()
+```
+
+</PlatformTabItem>
+<PlatformTabItem value="wagmi1">
+
+```ts
+import { useWeb3ModalState } from '@web3modal/wagmi/react'
+
+const { open, selectedNetworkId } = useWeb3ModalState()
+```
+
+</PlatformTabItem>
+<PlatformTabItem value="ethers5">
+
+```ts
+import { useWeb3ModalState } from '@web3modal/ethers5/react'
+
+const { open, selectedNetworkId } = useWeb3ModalState()
+```
+
+</PlatformTabItem>
+<PlatformTabItem value="ethers">
+
+```ts
+import { useWeb3ModalState } from '@web3modal/ethers/react'
+
+const { open, selectedNetworkId } = useWeb3ModalState()
+```
+
+</PlatformTabItem>
+<PlatformTabItem value="solana">
+
+```ts
+import { useWeb3ModalState } from '@web3modal/solana/react'
+
+const { open, selectedNetworkId } = useWeb3ModalState()
+```
+
+</PlatformTabItem>
+</PlatformTabs>
+
+The modal state consists of two reactive values:
+
+<Table
+  headers={['State', 'Description', 'Type']}
+  data={[
+    {
+      variable: { code: 'open' },
+      description: 'Open state will be true when the modal is open and false when closed.',
+      type: { code: 'boolean' }
+    },
+    {
+      variable: { code: 'selectedNetworkId' },
+      description: 'The current chain id selected by the user',
+      type: { code: 'number' }
+    }
+  ]}
+/>
+
+## useWeb3ModalTheme
+
+```ts
+const { themeMode, themeVariables, setThemeMode, setThemeVariables } = useWeb3ModalTheme()
+
+setThemeMode('dark')
+
+setThemeVariables({
+  '--w3m-color-mix': '#00BB7F',
+  '--w3m-color-mix-strength': 40
+})
+```
+
+## Track modal events
+
+```ts
+import { useWeb3ModalEvents } from '@web3modal/wagmi/react'
+
+const events = useWeb3ModalEvents()
+```

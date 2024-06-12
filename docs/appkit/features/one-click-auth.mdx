@@ -1,0 +1,76 @@
+import Button from '../../components/button'
+import Container from '../../components/Container.js'
+import Wrapper from '../../components/Home/Wrapper'
+import W3MQuickStart from '../../components/W3MQuickStart'
+import useBaseUrl from '@docusaurus/useBaseUrl'
+
+import reactLogo from '../../../static/assets/home/reactLogo.png'
+import nextjsLogo from '../../../static/assets/home/nextjsLogo.png'
+import vueLogo from '../../../static/assets/home/vueLogo.png'
+import javascriptLogo from '../../../static/assets/home/javascriptLogo.png'
+import androidLogo from '../../../static/assets/home/androidLogo.png'
+import iosLogo from '../../../static/assets/home/iosLogo.png'
+import rnLogo from '../../../static/assets/home/rnLogo.png'
+
+# One-Click Auth
+
+**One-Click Auth** represents a key advancement within WalletConnect v2, streamlining the user authentication process in AppKit by enabling them to seamlessly connect with a wallet and sign a SIWE message with just one click.
+
+Enable your users to connect to web3 through a single tap with One-Click Auth, improving connectivity speeds and creating all-around better UX and friction-free user journeys. With one-tap multi-chain and multi-account signing, let users authenticate multiple chains and accounts simultaneously.
+
+## Get Started
+
+<Wrapper
+  type="large"
+  fit={false}
+  items={[
+    {
+      name: 'React',
+      type: 'react',
+      description: 'Get started with AppKit in React.',
+      icon: reactLogo,
+      href: '../react/core/siwe'
+    },
+    {
+      name: 'Next.js',
+      type: 'next',
+      description: 'Get started with AppKit in Next.js.',
+      icon: nextjsLogo,
+      href: '../next/core/siwe',
+      isWhite: true
+    },
+    {
+      name: 'Vue',
+      type: 'vue',
+      description: 'Get started with AppKit in Vue.',
+      icon: vueLogo,
+      href: '../vue/core/siwe'
+    },
+    {
+      name: 'JavaScript',
+      type: 'javascript',
+      description: 'Get started with AppKit in JavaScript.',
+      icon: javascriptLogo,
+      href: '../javascript/core/siwe'
+    },
+    {
+      name: 'iOS',
+      type: 'ios',
+      description: 'Get started with AppKit in iOS.',
+      icon: iosLogo,
+      href: '../ios/core/one-click-auth',
+      isWhite: true
+    },
+    {
+      name: 'React Native',
+      type: 'react-native',
+      description: 'Get started with AppKit in React Native.',
+      icon: rnLogo,
+      href: '../react-native/core/siwe'
+    }
+  ]}
+/>
+
+<br />
+
+<Button name="Try Demo" url="https://lab.web3modal.com/library/wagmi-siwe/" />

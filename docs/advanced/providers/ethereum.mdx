@@ -40,13 +40,13 @@ const provider = await EthereumProvider.init({
 
 :::info
 
-- Make sure that `url` from `metadata` matches your domain and subdomain. This will later be used by [Verify API](../../cloud/verify.md) to confirm if your application has been verified or not.
+- Make sure that `url` from `metadata` matches your domain and subdomain. This will later be used by [Verify API](../../cloud/verify.mdx) to confirm if your application has been verified or not.
 - We recommend using `optionalChains` (optional namespaces) over `chains` (required namespaces).  
   _Required namespaces_ will block wallets from connecting to your application if any of the chains are not supported by the wallet. Smart Contract Wallets can only support one chain,
   the one that they had been deployed to, this might cause issues when using required namespaces.
 - Using `chains`, `methods` or `events` will create a _Required Namespaces_ object internally.
 - `optionalMethods` and `optionalChains` default to the following methods and events: [Read source code](https://github.com/WalletConnect/walletconnect-monorepo/blob/v2.0/providers/ethereum-provider/src/constants/rpc.ts).
-- If `rpcMap` is not defined it will fallback to [Blockchain API](../../cloud/blockchain-api.md) RPCs. Keep in mind that Blockchain API supports a limited [list of chains](https://github.com/WalletConnect/rpc-proxy/blob/master/SUPPORTED_CHAINS.md).
+- If `rpcMap` is not defined it will fallback to [Blockchain API](../../cloud/blockchain-api.mdx) RPCs. Keep in mind that Blockchain API supports a limited [list of chains](https://github.com/WalletConnect/rpc-proxy/blob/master/SUPPORTED_CHAINS.md).
   :::
 
 ### Init Params
@@ -202,10 +202,10 @@ Note that the `chains` object is an optional parameter and may be undefined. The
 
 ```ts
 interface Namespaces {
-    chains?: string[];
-    accounts: string[];
-    methods: string[];
-    events: string[];
+  chains?: string[]
+  accounts: string[]
+  methods: string[]
+  events: string[]
 }
 ```
 
@@ -213,18 +213,17 @@ interface Namespaces {
 - **peer**: The `session.peer.metadata` object contains the metadata of the connected wallet.
 
 ```ts
-  interface Metadata {
-    name: string;
-    description: string;
-    url: string;
-    icons: string[];
-    verifyUrl?: string;
-    redirect?: {
-      native?: string;
-      universal?: string;
-    };
+interface Metadata {
+  name: string
+  description: string
+  url: string
+  icons: string[]
+  verifyUrl?: string
+  redirect?: {
+    native?: string
+    universal?: string
   }
-
+}
 ```
 
 Find the complete type definition of the `session` object [here](https://github.com/WalletConnect/walletconnect-monorepo/blob/022e4d492c9862ab9b17c1a7b12884bdcd992ae4/packages/types/src/sign-client/session.ts#L25).

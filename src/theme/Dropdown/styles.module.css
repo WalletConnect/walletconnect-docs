@@ -1,0 +1,118 @@
+.container {
+  position: relative;
+  padding-top: 60px !important;
+  padding-left: 20px;
+  display: flex;
+  align-items: center;
+}
+
+.dropdownContainer {
+  position: absolute;
+  transform: translateY(50%);
+  top: -28%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  border-radius: 0.5rem;
+  border: 1px solid #202020;
+  padding: 0.75rem 1.25rem;
+  border-color: var(--ifm-pagination-nav-color-hover);
+  background-color: var(--ifm-container-background-color);
+  color: var(--ifm-article-text);
+  width: 11rem;
+  z-index: 100;
+}
+
+.walletKit{
+  top: 20%;
+}
+
+.item {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 11px;
+}
+
+.item:hover {
+  color: var(--ifm-link-hover-color);
+}
+
+.kill {
+  display: none;
+}
+
+.dropdownButton {
+  border-radius: 0.5rem;
+  border: 1.5px solid var(--ifm-border-color);
+  padding: 0.5rem 1.25rem;
+  max-width: 13rem;
+  min-width: 11rem;
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  justify-content: space-between;
+  background-color: var(--ifm-container-background-color);
+  color: var(--ifm-link-hover-color);
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+
+  background-size: contain;
+}
+
+.dropdownArrow {
+  content: '';
+  margin-left: auto;
+  min-width: 1.25rem;
+  background: var(--ifm-menu-link-sublist-icon) 50% / 1.5rem 1.5rem;
+  filter: var(--ifm-menu-link-sublist-icon-filter);
+  height: 1.25rem;
+  width: 1.25rem;
+  transform: rotate(90deg);
+}
+
+.rotateArrow {
+  transform: rotate(180deg);
+}
+
+[data-theme='light'] .dropdownButton__img-container {
+  border: 2px solid var(--ifm-border-color);
+}
+
+.dropdownButton img {
+  border: none;
+  height: 1.25rem;
+  width: 1.25rem;
+  border-radius: 0;
+}
+
+[data-theme='light'] .invertOnLightMode {
+  filter: invert(1);
+}
+
+.envIcon{
+  border: none;
+  height: 1.25rem;
+  width: 1.25rem;
+  border-radius: 0;
+}
+
+@media (max-width: 996px){
+  .container{
+    padding-top: 0 !important;
+    padding-bottom: 10px;
+  }
+  .dropdownContainer{
+    background-color: var(--ifm-navbar-background-color);
+    top: -160%;
+  }
+  .dropdownButton{
+    background-color: var(--ifm-navbar-background-color);
+  }
+    
+  .walletKit{
+    top: -70%;
+  }
+}
