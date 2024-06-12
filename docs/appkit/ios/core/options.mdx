@@ -24,6 +24,28 @@ Web3Modal.configure(
 )
 ```
 
+### Add custom wallets
+
+If you want to list wallet that is not included in the explorer, you can configure the client as follows:
+
+```swift
+Web3Modal.configure(
+    ...
+    customWallets: [
+                .init(
+                    id: "swift-sample",
+                    name: "Swift Sample Wallet",
+                    homepage: "https://walletconnect.com/",
+                    imageUrl: "https://avatars.githubusercontent.com/u/37784886?s=200&v=4",
+                    order: 1,
+                    mobileLink: "walletapp://",
+                    linkMode: "https://lab.web3modal.com/wallet"
+                )
+            ]
+    ...
+)
+```
+
 ### Enable Installed Wallet Detection
 
 To enable Web3Modal to detect wallets installed on the device, you need to make specific changes your project Info.plist.
