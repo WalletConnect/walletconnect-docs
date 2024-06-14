@@ -10,15 +10,15 @@
       "destination": "/appkit/features/socials"
     },
     {
-      "source": "/web3modal/:path",
+      "source": "/web3modal/:path*",
       "destination": "/appkit/overview"
     },
     {
-      "source": "/web3inbox/:path",
+      "source": "/web3inbox/:path*",
       "destination": "/appkit/overview"
     },
     {
-      "source": "/web3wallet/:path",
+      "source": "/web3wallet/:path*",
       "destination": "/walletkit/overview"
     }
   ]
