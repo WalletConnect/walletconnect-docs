@@ -120,6 +120,13 @@ const advanced = {
         }
       ]
     },
+    {
+      type: 'category',
+      label: 'Security',
+      collapsed: true,
+      collapsible: true,
+      items: ['advanced/security/content-security-policy']
+    },
     'advanced/push-server'
   ]
 }
