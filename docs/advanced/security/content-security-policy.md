@@ -20,7 +20,7 @@ frame-src 'self' https://verify.walletconnect.com https://verify.walletconnect.o
 
 :::info
 
-If you are building on [AppKit](https://docs.walletconnect.com/appkit/overview), you may need to list RPC endpoints used by the blockchain networks you have enabled (e.g. via the [`wagmi/chains` package](https://wagmi.sh/core/api/chains)) as part of your `connect-src` definition.
+If you are building on [AppKit](https://docs.walletconnect.com/appkit/overview), you may need to list the RPC endpoints used by blockchain networks you have enabled (e.g. via the [`@wagmi/chains` package](https://wagmi.sh/core/api/chains)) as part of your `connect-src` definition.
 
 For a full of list of RPC sources used by `wagmi/viem`, please refer to [Viem's chain definitions](https://github.com/wevm/viem/tree/main/src/chains/definitions).
 
