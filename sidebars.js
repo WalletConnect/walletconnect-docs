@@ -209,7 +209,8 @@ module.exports = {
                 { type: 'doc', label: 'Notifications', id: 'appkit/features/notifications' },
                 { type: 'doc', label: 'Solana', id: 'appkit/features/solana' }
               ]
-            }
+            },
+            'appkit/upgrade',
           ]
         },
         {
