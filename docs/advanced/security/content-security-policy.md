@@ -6,7 +6,9 @@ A Content Security Policy (CSP) is a security feature that helps protect web app
 
 ## CSP Guidance
 
-The following is a **partial CSP** that covers WalletConnect's libraries and services. Note that **you may need to define additional sources based on your application's requirements**.
+### AppKit
+
+The following is a **partial CSP** that covers WalletConnect's libraries and services for [AppKit](https://docs.walletconnect.com/appkit/overview). Note that **you may need to define additional sources based on your application's requirements**.
 
 ```
 default-src 'self';
@@ -20,7 +22,7 @@ frame-src 'self' https://verify.walletconnect.com https://verify.walletconnect.o
 
 :::info
 
-If you are building on [AppKit](https://docs.walletconnect.com/appkit/overview), you may need to list the RPC endpoints used by blockchain networks you have enabled (e.g. via the [`@wagmi/chains` package](https://wagmi.sh/core/api/chains)) as part of your `connect-src` definition.
+You may need to list the RPC endpoints used by blockchain networks you have enabled (e.g. via the [`@wagmi/chains` package](https://wagmi.sh/core/api/chains)) as part of your `connect-src` definition.
 
 For a full of list of RPC sources used by `wagmi/viem`, please refer to [Viem's chain definitions](https://github.com/wevm/viem/tree/main/src/chains/definitions).
 
