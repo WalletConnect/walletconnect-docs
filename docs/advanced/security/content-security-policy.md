@@ -34,4 +34,4 @@ First deploy your CSP in `report-only` mode. After validation, migrate to `Conte
 
 ### Monitoring
 
-Configure `report-uri` to receive violation reports and set up a monitoring dashboard for review.
+Configure `report-uri` or `report-to` to receive violation reports and set up a monitoring dashboard for review.
