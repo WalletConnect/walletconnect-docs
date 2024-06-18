@@ -18,25 +18,14 @@ function getMessageParams(){
   }
 }
 
-/* Function that returns the user's session */
+/* Function that returns the user's session - this should come from your SIWE backend */
 async function getSession(){
-  const session = await getSession()
-  if (!session) throw new Error('Failed to get session!')
-
-  const { address, chainId } = session
-
-  return { address, chainId }
+  //...
 }
 
 /* Use your SIWE server to verify if the message and the signature are valid */
 async function verifyMessage({ message, signature }: SIWEVerifyMessageArgs){
-  try {
-    const isValid = await validateMessage({ message, signature })
-
-    return isValid
-  } catch (error) {
-    return false
-  }
+  //...
 },
 
 /* Create a SIWE configuration object */
@@ -48,16 +37,6 @@ const siweConfig = createSIWEConfig({
   verifyMessage,
   signOut
 })
-```
-
-### `verifySignature`
-
-Verify a SIWE signature.
-
-```ts
-import { verifySignature } from '@web3modal/siwe'
-
-const isValid = await verifySignature({ address, message, signature, chainId, projectId })
 ```
 
 ### `getChainIdFromMessage`
@@ -78,6 +57,16 @@ Get the address from the SIWE message.
 import { getAddressFromMessage } from '@web3modal/siwe'
 
 const address = getAddressFromMessage(message)
+```
+
+### `verifySignature`
+
+Verify a SIWE signature.
+
+```ts
+import { verifySignature } from '@web3modal/siwe'
+
+const isValid = await verifySignature({ address, message, signature, chainId, projectId })
 ```
 
 </TabItem>
