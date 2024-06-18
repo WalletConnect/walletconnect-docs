@@ -43,7 +43,7 @@ const wagmiConfig = defaultWagmiConfig({ chains, projectId, metadata })
 createWeb3Modal({
   projectId,
   wagmiConfig,
-  defaultChain: mainnet,
+  defaultChain: mainnet, // Optional
   enableAnalytics: true // Optional - defaults to your Cloud configuration
 })
 
