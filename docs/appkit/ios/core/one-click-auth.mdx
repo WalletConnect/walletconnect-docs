@@ -61,6 +61,21 @@ Web3Modal.instance.authResponsePublisher.sink { (id, result) in
 }
 ```
 
+Fallback to SIWE Over Session Request
+
+If the wallet connecting to your dapp does not support 1-Click Auth, the SDK will fallback to the wc_sessionPropose method and create a session with the wallet. Web3Modal will then inform the user that they need to sign a message to prove address ownership. Web3Modal will send a SIWE request to the wallet, and once the wallet responds with a signed message, the SIWEAuthenticationPublisher will publish the result. Subscribe to this publisher to handle the fallback:
+
+```swift
+Web3Modal.instance.SIWEAuthenticationPublisher.sink { result in
+    switch result {
+    case .success((let message, let signature)):
+        ...
+    case .failure(let error):
+        ...
+    }
+}.store(in: &disposeBag)
+```
+
 ### Link Mode
 
 The latest release of AppKit supports link mode, a low latency mechanism for transporting 1-click auth requests and session requests over universal links, eliminating the need for a WebSocket connection with the Relay. This significantly enhances the user experience when connecting native dApps to native wallets by reducing the latency associated with networking connections, especially when the user has an unstable internet connection.
