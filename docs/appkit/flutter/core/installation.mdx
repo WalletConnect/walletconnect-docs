@@ -95,7 +95,7 @@ Since Coinbase Wallet uses it's own SDK there are a few extra but simply steps t
 
 :::caution IMPORTANT
 
-There is currently a bug in Coinbase's MobileWalletProtocol which fix is still under review in the following PR https://github.com/MobileWalletProtocol/wallet-mobile-sdk/pull/327 so, until this PR is merged (or the bug fixed anyway) and a new version of their SDK us published, you will need to override `coinbase_wallet_sdk` in your **pubspec.yaml** as follows:
+There is currently a bug in Coinbase's MobileWalletProtocol which fix is still under review in the following PR https://github.com/MobileWalletProtocol/wallet-mobile-sdk/pull/327 so, until this PR is merged (or the bug is fixed in any way) and a new version of their SDK is published, you will need to override `coinbase_wallet_sdk` in your **pubspec.yaml** as follows if you want to support their wallet:
 
 ```dart
 dependency_overrides:
