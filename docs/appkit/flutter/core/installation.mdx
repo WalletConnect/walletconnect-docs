@@ -85,11 +85,30 @@ Example:
 
 ### Enable Coinbase Wallet
 
-:::info
+:::info VERSION DEPENDENCY
+
 Coinbase Wallet is available from Web3Modal **version 3.1.0** and higher
+
 :::
 
-Since Coinbase Wallet uses it's own SDK there are a few simply steps to do if you are planning to include and support it
+Since Coinbase Wallet uses it's own SDK there are a few extra but simply steps to do if you are planning to include and support it
+
+:::caution IMPORTANT
+
+There is currently a bug in Coinbase's MobileWalletProtocol which fix is still under review in the following PR https://github.com/MobileWalletProtocol/wallet-mobile-sdk/pull/327 so, until this PR is merged (or the bug is fixed in any way) and a new version of their SDK is published, you will need to override `coinbase_wallet_sdk` in your **pubspec.yaml** as follows if you want to support their wallet:
+
+```dart
+dependency_overrides:
+  coinbase_wallet_sdk:
+    git:
+      url: https://github.com/WalletConnect/wallet-mobile-sdk.git
+      path: flutter
+      ref: 9194f04dbaf41c12b8121f0a5f146cc7faf6b847
+```
+
+Alternatively, you can disable Coinbase Wallet support as explained in the [Disable Coinbase Wallet](#disable-coinbase-wallet) section.
+
+:::
 
 <PlatformTabs
 	groupId="w3m_flutter"
@@ -121,29 +140,31 @@ import CoinbaseWalletSDK
 ```swift
 override func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
     if #available(iOS 13.0, *) {
+      if (CoinbaseWalletSDK.isConfigured == true) {
         if (try? CoinbaseWalletSDK.shared.handleResponse(url)) == true {
             return true
         }
-    } else {
-        // Fallback on earlier versions
+      }
     }
-    // handle other types of deep links
-    return false
+
+    return super.application(app, open: url, options: options)
 }
 
 override func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
     if #available(iOS 13.0, *) {
+      if (CoinbaseWalletSDK.isConfigured == true) {
         if let url = userActivity.webpageURL,
             (try? CoinbaseWalletSDK.shared.handleResponse(url)) == true {
             return true
         }
-    } else {
-        // Fallback on earlier versions
+      }
     }
-    // handle other types of deep links
-    return false
+
+    return super.application(application, continue: userActivity, restorationHandler: restorationHandler)
 }
 ```
+
+Checkout out the [AppDelegate.swift](https://github.com/WalletConnect/Web3ModalFlutter/blob/master/example/ios/Runner/AppDelegate.swift) file from our sample dapp for reference.
 
 </PlatformTabItem>
 <PlatformTabItem value="android">
@@ -171,7 +192,7 @@ Example:
 </PlatformTabItem>
 </PlatformTabs>
 
-:::note
-If you don't want to include/support Coinbase Wallet you just need to pass the walletId `fd20dc426fb37566d803205b19bbc1d4096b248ac04548e3cfb6b3a38bd033aa` to [excludedWalletIds](./options#excludedwalletids) options Array.
-:::
+### Disable Coinbase Wallet
+
+Coinbase Wallet is enabled by default even if, in order to function properly, a few steps has to be done as described in the previous section. However, if you don't want to include/support Coinbase Wallet on your app you just need to pass Coinbase Wallet id `fd20dc426fb37566d803205b19bbc1d4096b248ac04548e3cfb6b3a38bd033aa` to [excludedWalletIds](./options#excludedwalletids) options Array.
 
