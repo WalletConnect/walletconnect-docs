@@ -1,0 +1,367 @@
+---
+title: Best Practices
+---
+
+import ThemedImage from '@theme/ThemedImage'
+import useBaseUrl from '@docusaurus/useBaseUrl'
+
+# Best Practices for Wallets
+
+To ensure the smoothest and most seamless experience for our users, WalletConnect is committed to working closely with wallet providers to encourage the adoption of our recommended best practices.
+
+By implementing these guidelines, we aim to optimize performance and minimize potential challenges, even in suboptimal network conditions.
+
+We are actively partnering with wallet developers to optimize performance in scenarios such as:
+
+1. **Success and Error Messages** - Users need to know what’s going on, at all times. Too much communication is better than too little. The less users need to figure out themselves or assume what’s going on, the better.
+2. **(Perceived) Latency** - A lot of factors can influence latency (or perceived latency), e.g. network conditions, position in the boot chain, waiting on the wallet to connect or complete a transaction and not knowing if or when it has done it.
+3. **Old SDK Versions** - Older versions can have known and already fixed bugs, leading to unnecessary issues to users, which can be simply and quickly solved by updating to the latest SDK.
+
+To take all of the above into account and to make experience better for users, we've put together some key guidelines for wallet providers. These best practices focus on the most important areas for improving user experience.
+
+Please follow these best practices and make the experience for your users and yourself a delightful and quick one.
+
+## 1. Success and Error Messages
+
+Users often face ambiguity in determining whether their connection or transactions were successful. They are also not guided to switching back into the dapp or automatically switched back when possible, causing unnecessary user anxiety. Additionally, wallets typically lack status indicators for connection and internet availability, leaving users in the dark.
+
+### Pairing
+
+A pairing is a connection between a wallet and a dapp that has fixed permissions to only allow a dapp to propose a session through it. Dapp can propose infinite number of sessions on one pairing. Wallet must use a pair method from Web3Wallet client to pair with dapp.
+
+```jsx
+const uri = 'xxx' // pairing uri
+try {
+  await web3Wallet.pair({ uri })
+} catch (error) {
+  // some error happens while pairing - check Expected errors section
+}
+```
+
+#### Pairing Expiry
+
+A pairing expiry event is triggered whenever a pairing is expired. The expiry for inactive pairing is 5 mins, whereas for active pairing is 30 days. A pairing becomes active when a session proposal is received and user successfully approves it. This event helps to know when given pairing expires and update UI accordingly.
+
+```jsx
+core.pairing.events.on('pairing_expire', event => {
+  // pairing expired before user approved/rejected a session proposal
+  const { topic } = topic
+})
+```
+
+#### Pairing success message
+
+_[Visual needed]_
+
+#### Pairing error message
+
+_[Visual needed]_
+
+#### Expected Errors
+
+While pairing, the following errors might occur:
+
+- **No Internet connection error or pairing timeout when scanning QR with no Internet connection**
+  - User should pair again with Internet connection
+- **Pairing expired error when scanning a QR code with expired pairing**
+  - User should refresh a QR code and scan again
+- **Pairing with existing pairing is not allowed**
+  - User should refresh a QR code and scan again. It usually happens when user scans an already paired QR code.
+
+### Session Proposal
+
+A session proposal is a handshake sent by a dapp and its purpose is to define session rules. Whenever a user wants to establish a connection between a wallet and a dapp, one should approve a session proposal.
+
+Whenever user approves or rejects a session proposal, a wallet should show a loading indicator the moment the button is pressed, until Relay acknowledgement is received for any of these actions.
+
+#### Approving session
+
+```tsx
+try {
+  await web3Wallet.approveSession(params)
+  // update UI -> remove the loader
+} catch (error) {
+  // present error to the user
+}
+```
+
+_[Visual needed]_
+
+#### Rejecting session
+
+```tsx
+try {
+  await web3Wallet.rejectSession(params)
+  // update UI -> remove the loader
+} catch (error) {
+  // present error to the user
+}
+```
+
+_[Visual needed]_
+
+#### Session proposal expiry
+
+A session proposal expiry is 5 minutes. It means a given proposal is stored for 5 minutes in the SDK storage and user has 5 minutes for the approval or rejection decision. After that time, the below event is emitted and proposal modal should be removed from the app's UI.
+
+```tsx
+web3wallet.on('proposal_expire', event => {
+  // proposal expired and any modal displaying it should be removed
+  const { id } = event
+})
+```
+
+#### Session Proposal success message
+
+_[Visual needed]_
+
+#### Session Proposal error message
+
+_[Visual needed]_
+
+#### Expected errors
+
+While approving or rejecting a session proposal, the following errors might occur:
+
+- **No Internet connection**
+  - It happens when a user tries to approve or reject a session proposal with no Internet connection
+- **Session proposal expired**
+  - It happens when a user tries to approve or reject an expired session proposal
+- **Invalid namespaces**
+  - It happens when a validation of session namespaces fails
+- **Timeout**
+  - It happens when Relay doesn't acknowledge session settle publish within 10s
+
+### Session Request
+
+A session request represents the request sent by a dapp to a wallet.
+
+Whenever user approves or rejects a session request, a wallet should show a loading indicator the moment the button is pressed, until Relay acknowledgement is received for any of these actions.
+
+```tsx
+try {
+  await web3Wallet.respondSessionRequest(params)
+  // update UI -> remove the loader
+} catch (error) {
+  // present error to the user
+}
+```
+
+#### Session request expiry
+
+A session request expiry is defined by a dapp. Its value must be between `now() + 5mins` and `now() + 7 days`. After the session request expires, the below event is emitted and session request modal should be removed from the app's UI.
+
+```tsx
+web3wallet.on('session_request_expire', event => {
+  // request expired and any modal displaying it should be removed
+  const { id } = event
+})
+```
+
+#### Session request success
+
+_[Visual needed]_
+
+#### Session request error
+
+_[Visual needed]_
+
+#### Expected errors
+
+While approving or rejecting a session request, the following errors might occur:
+
+- **Invalid session**
+  - This error might happen when a user approves or rejects a session request on an expired session
+- **Session request expired**
+  - This error might happen when a user approves or rejects a session request that already expired
+- **Timeout**
+  - It happens when Relay doesn't acknowledge session settle publish within 10 seconds
+
+### Connection state
+
+The Web Socket connection state tracks the connection with the Relay server. An event is emitted whenever a connection state changes.
+
+```tsx
+core.relayer.on('relayer_connect', () => {
+  // connection to the relay server is established
+})
+
+core.relayer.on('relayer_disconnect', () => {
+  // connection to the relay server is lost
+})
+```
+
+#### Connection state success
+
+_[Visual needed]_
+
+#### Connection state error
+
+[Visual needed]
+
+## 2. Mobile Linking
+
+### Why use Mobile Linking?
+
+Mobile Linking uses the mobile device’s native OS to automatically redirect between the native wallet app and a native app. This results in few user actions a better UX.
+
+**Establishing Communication Between Mobile Wallets and Apps**[](https://docs.walletconnect.com/walletkit/ios/mobile-linking#establishing-communication-between-mobile-wallets-and-apps)
+
+When integrating a wallet with a mobile application, it's essential to understand how they communicate. The process involves two main steps:
+
+1. **QR Code Handshake:** The mobile app (Dapp) generates a unique URI (Uniform Resource Identifier) and displays it as a QR code. This URI acts like a secret handshake. When the user scans the QR code or copy/pastes the URI using their wallet app, they establish a connection. It's like saying, "Hey, let's chat!"
+2. **Deep Links and Universal Links:** The URI from the QR code allows the wallet app to create a [deep link](https://support.google.com/google-ads/answer/10023042?hl=en#:~:text=Deep%20links%20send%20mobile%20device,%2C%20Shopping%2C%20and%20Display%20campaigns.) or [universal link](https://developer.apple.com/ios/universal-links/). These links work on both Android and iOS. They enable seamless communication between the wallet and the app.
+
+<aside>
+💡 TIP
+
+**Developers should prefer Deep Linking over Universal Linking.**
+
+In the case of Universal Linking, the user may be redirected to the browser, which may not be the desired behavior. Deep Linking ensures that the user is redirected to the app, providing a seamless experience.
+
+</aside>
+
+### Connection Flow
+
+1. **Dapp Prompts User:** The Dapp asks the user to connect.
+2. **User Chooses Wallet:** The user selects a wallet from a list of compatible wallets.
+3. **Redirect to Wallet:** The user is redirected to their chosen wallet.
+4. **Wallet Approval:** The wallet prompts the user to approve or reject the session (similar to granting permission).
+5. **Return to Dapp:**
+   - **Manual Return:** The wallet asks the user to manually return to the Dapp.
+   - **Automatic Return:** Alternatively, the wallet automatically takes the user back to the Dapp.
+6. **User Reunites with Dapp:** After all the interactions, the user ends up back in the Dapp.
+
+<ThemedImage
+  alt="Mobile Linking Connect Flow"
+  sources={{
+    light: useBaseUrl('/img/w3w/mobileLinking-light.png'),
+    dark: useBaseUrl('/img/w3w/mobileLinking-dark.png')
+  }}
+/>
+
+### Sign Request Flow
+
+When the Dapp needs the user to sign something (like a transaction), a similar pattern occurs:
+
+1. **Automatic Redirect:** The Dapp automatically sends the user to their previously chosen wallet.
+2. **Approval Prompt:** The wallet asks the user to approve or reject the request.
+3. **Return to Dapp:**
+   - **Manual Return:** The wallet asks the user to manually return to the Dapp.
+   - **Automatic Return:** Alternatively, the wallet automatically takes the user back to the Dapp.
+4. **User Reconnects:** Eventually, the user returns to the Dapp.
+
+<ThemedImage
+  alt="Mobile Linking Sign Flow"
+  sources={{
+    light: useBaseUrl('/img/w3w/mobileLinking_sign-light.png'),
+    dark: useBaseUrl('/img/w3w/mobileLinking_sign-dark.png')
+  }}
+/>
+
+### Platform Specific Preparation
+
+**Android -** Use content from: https://docs.walletconnect.com/walletkit/android/mobile-linking#platform-preparations
+
+**IOS -** Use content from: https://docs.walletconnect.com/walletkit/ios/mobile-linking#platform-preparations
+
+**Flutter-** Use content from: https://docs.walletconnect.com/walletkit/flutter/mobile-linking#platform-preparations
+
+### Platform Integration
+
+**Android -** Use content from: \*\*\*\*https://docs.walletconnect.com/walletkit/android/mobile-linking#integration
+
+**IOS -** Use content from: https://docs.walletconnect.com/walletkit/ios/mobile-linking#integration
+
+**Flutter-** Use content from: https://docs.walletconnect.com/walletkit/flutter/mobile-linking#integration
+
+### How to Test
+
+To experience the desired behavior, try our Sample Wallet and Dapps which use our Mobile linking best practices. These are available on all platforms.
+
+Once you have completed your integration, you can test it against our sample apps to see if it is working as expected. Download the app and and try your mobile linking integration on your device.
+
+**Android**
+
+- Link to Sample Wallet
+- Link to Sample App
+
+**iOS**
+
+- Link to Sample Wallet
+- [Sample App](https://testflight.apple.com/join/7S1GYcjC)
+
+**Flutter**
+
+- Link to Sample Wallet
+- Link to Sample App
+
+## 3. Latency
+
+Our SDK’s position in the boot chain can lead to up to 15 seconds in throttled network conditions. Lack of loading indicators exacerbates the perceived latency issues, impacting user experience negatively. Additionally, users often do not receive error messages or codes when issues occur or timeouts happen.
+
+### Target latency
+
+### How to test
+
+### Throttling
+
+## 4. Verify API
+
+Verify API is a security-focused feature that allows wallets to notify end-users when they may be connecting to a suspicious or malicious domain, helping to prevent phishing attacks across the industry. Once a wallet knows whether an end-user is on uniswap.com or eviluniswap.com, it can help them to detect potentially harmful connections through Verify's combined offering of WalletConnect’s domain registry and [Blowfish's domain scanner](https://docs.blowfish.xyz/reference/scan-domain-1). For those looking to enable Verify on the app side, check out our reference guide [here.](https://docs.walletconnect.com/walletkit/web/cloud/verify)
+
+When a user initiates a connection with an application, Verify API enables wallets to present their users with four key states that can help them determine whether the domain they’re about to connect to might be malicious.
+
+Possible states:
+
+- Domain match
+- Unverified
+- Mismatch
+- Threat
+
+![Verify Banner](/img/verify-banner.png)
+
+:::info Note
+
+Verify API is not designed to be bulletproof but to make the impersonation attack harder and require a somewhat sophisticated attacker. We are working on a new standard with various partners to close those gaps and make it bulletproof.
+
+:::
+
+### Domain risk detection[](https://docs.walletconnect.com/walletkit/web/verify#domain-risk-detection)
+
+The Verify security system will discriminate session proposals & session requests with distinct validations that can be either `VALID`, `INVALID` or `UNKNOWN`.
+
+- **Domain match:** The domain linked to this request has been verified as this application's domain.
+  - This interface appears when the domain a user is attempting to connect to has been ‘verified’ in our domain registry as the registered domain of the application the user is trying to connect to, and the domain has not returned as suspicious from either of the security tools we work with. The `verifyContext` included in the request will have a validation of `VALID`.
+- **Unverified:** The domain sending the request cannot be verified.
+  - This interface appears when the domain a user is attempting to connect to has not been verified in our domain registry, but the domain has not returned as suspicious from either of the security tools we work with. The `verifyContext` included in the request will have a validation of `UNKNOWN`.
+- **Mismatch:** The application's domain doesn't match the sender of this request.
+  - This interface appears when the domain a user is attempting to connect to has been flagged as a different domain to the one this application has verified in our domain registry, but the domain has not returned as suspicious from either of the security tools we work with. The `verifyContext` included in the request will have a validation of `INVALID`
+- **Threat:** This domain is flagged as malicious and potentially harmful.
+  - This interface appears when the domain a user is attempting to connect to has been flagged as malicious on one or more of the security tools we work with. The `verifyContext` included in the request will contain parameter `isScam` with value `true`.
+
+### Verify API Implementation
+
+To see how to implement Verify API for your framework, see _[Link to full Verify API page]_.
+
+### How to test
+
+_Content needed_
+
+### Error messages
+
+_[Visuals needed]_
+
+## 5. Latest SDK
+
+Numerous bugs have been identified and fixed over time, but many dapps and wallets continue to use older SDK versions with known issues, affecting overall reliability.
+
+### Latest version
+
+### Subscribe to updates
+
+### How to migrate
+
+## Checklist Before Going Live
+
+_A simple list of tasks based on the guidelines above_
