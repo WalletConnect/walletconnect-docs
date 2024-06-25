@@ -4,6 +4,8 @@ title: Best Practices
 
 import ThemedImage from '@theme/ThemedImage'
 import useBaseUrl from '@docusaurus/useBaseUrl'
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
 
 # Best Practices for Wallets
 
@@ -29,25 +31,98 @@ Users often face ambiguity in determining whether their connection or transactio
 
 A pairing is a connection between a wallet and a dapp that has fixed permissions to only allow a dapp to propose a session through it. Dapp can propose infinite number of sessions on one pairing. Wallet must use a pair method from Web3Wallet client to pair with dapp.
 
+<Tabs>
+  <TabItem value="web" label="Web">
 ```jsx
-const uri = 'xxx' // pairing uri
+const uri = 'xxx'; // pairing uri
 try {
-  await web3Wallet.pair({ uri })
+    await web3Wallet.pair({ uri });
 } catch (error) {
-  // some error happens while pairing - check Expected errors section
+    // some error happens while pairing - check Expected errors section
 }
 ```
+</TabItem>
+<TabItem value="react" label="React Native">
+```jsx
+const uri = 'xxx'; // pairing uri
+try {
+    await web3Wallet.pair({ uri });
+} catch (error) {
+    // some error happens while pairing - check Expected errors section
+}
+```
+</TabItem>
+<TabItem value="ios" label="iOS">
+```swift
+let uri = WalletConnectURI(string: urlString)
+
+if let uri {
+Task {
+try await Web3Wallet.instance.pair(uri: uri)
+}
+}
+
+````
+</TabItem>
+<TabItem value="android" label="Android">
+```kotlin
+val pairingParams = Wallet.Params.Pair(pairingUri)
+Web3Wallet.pair(pairingParams,
+    onSuccess = {
+        //Subscribed on the pairing topic successfully. Wallet should await for a session proposal
+    },
+    onError = { error ->
+        //Some error happens while pairing - check Expected errors section
+    }
+}
+```
+</TabItem>
+</Tabs>
 
 #### Pairing Expiry
 
 A pairing expiry event is triggered whenever a pairing is expired. The expiry for inactive pairing is 5 mins, whereas for active pairing is 30 days. A pairing becomes active when a session proposal is received and user successfully approves it. This event helps to know when given pairing expires and update UI accordingly.
 
-```jsx
-core.pairing.events.on('pairing_expire', event => {
-  // pairing expired before user approved/rejected a session proposal
-  const { topic } = topic
-})
+<Tabs>
+  <TabItem value="web" label="Web">
+```typescript
+core.pairing.events.on("pairing_expire", (event) => {
+    // pairing expired before user approved/rejected a session proposal
+    const { topic } = topic;
+});
 ```
+  </TabItem>
+  <TabItem value="react" label="React Native">
+```typescript
+core.pairing.events.on("pairing_expire", (event) => {
+    // pairing expired before user approved/rejected a session proposal
+    const { topic } = topic;
+});
+```
+  </TabItem>
+  <TabItem value="ios" label="iOS">
+```Swift
+Web3Wallet.instance.pairingExpirationPublisher
+    .receive(on: DispatchQueue.main)
+    .sink { pairing in
+    guard !pairing.active else { return }
+    // let user know that pairing has expired
+}.store(in: &publishers)
+```
+  </TabItem>
+  <TabItem value="android" label="Android">
+```kotlin
+val coreDelegate = object : CoreClient.CoreDelegate {
+    override fun onPairingExpired(expiredPairing: Core.Model.ExpiredPairing) {
+        // Here a pairing expiry is triggered
+    }
+    // ...other callbacks
+}
+
+CoreClient.setDelegate(coreDelegate)
+```
+</TabItem>
+</Tabs>
 
 #### Pairing success message
 
@@ -76,27 +151,97 @@ Whenever user approves or rejects a session proposal, a wallet should show a loa
 
 #### Approving session
 
-```tsx
+<Tabs>
+  <TabItem value="web" label="Web">
+```typescript
 try {
-  await web3Wallet.approveSession(params)
-  // update UI -> remove the loader
+    await web3Wallet.approveSession(params);
+    // update UI -> remove the loader
 } catch (error) {
-  // present error to the user
+    // present error to the user
 }
 ```
+  </TabItem>
+  <TabItem value="react" label="React Native">
+```typescript
+try {
+    await web3Wallet.approveSession(params);
+    // update UI -> remove the loader
+} catch (error) {
+    // present error to the user
+}
+```
+  </TabItem>
+  <TabItem value="ios" label="iOS">
+```swift
+do {
+    try await Web3Wallet.instance.approve(proposalId: proposal.id, namespaces: sessionNamespaces, sessionProperties: proposal.sessionProperties)
+    // Update UI, remove loader
+} catch {
+    // present error
+}
+```
+  </TabItem>
+  <TabItem value="android" label="Android">
+```kotlin
+Web3Wallet.approveSession(approveProposal,
+  onSuccess = {
+    //Session approval response was sent successfully - update your UI
+  }
+    onError = { error ->
+      //Error while sending session approval - update your UI
+  })
+```
+</TabItem>
+</Tabs>
 
 _[Visual needed]_
 
 #### Rejecting session
 
-```tsx
+<Tabs>
+  <TabItem value="web" label="Web">
+```typescript
 try {
-  await web3Wallet.rejectSession(params)
-  // update UI -> remove the loader
+    await web3Wallet.rejectSession(params);
+    // update UI -> remove the loader
 } catch (error) {
-  // present error to the user
+    // present error to the user
 }
 ```
+  </TabItem>
+  <TabItem value="react" label="React Native">
+```typescript
+try {
+    await web3Wallet.rejectSession(params);
+    // update UI -> remove the loader
+} catch (error) {
+    // present error to the user
+}
+```
+  </TabItem>
+  <TabItem value="ios" label="iOS">
+```swift
+do {
+    try await Web3Wallet.instance.reject(proposalId: proposal.id, reason: .userRejected)
+    // Update UI, remove loader
+} catch {
+    // present error
+}
+```
+  </TabItem>
+  <TabItem value="android" label="Android">
+```kotlin
+Web3Wallet.rejectSession(reject,
+  onSuccess = {
+      //Session rejection response was sent successfully - update your UI
+  },
+  onError = { error ->
+        //Error while sending session rejection - update your UI
+  })
+```
+</TabItem>
+</Tabs>
 
 _[Visual needed]_
 
@@ -104,12 +249,42 @@ _[Visual needed]_
 
 A session proposal expiry is 5 minutes. It means a given proposal is stored for 5 minutes in the SDK storage and user has 5 minutes for the approval or rejection decision. After that time, the below event is emitted and proposal modal should be removed from the app's UI.
 
-```tsx
-web3wallet.on('proposal_expire', event => {
-  // proposal expired and any modal displaying it should be removed
-  const { id } = event
-})
+<Tabs>
+  <TabItem value="web" label="Web">
+```typescript
+web3wallet.on("proposal_expire", (event) => {
+    // proposal expired and any modal displaying it should be removed
+    const { id } = event;
+});
 ```
+  </TabItem>
+  <TabItem value="react" label="React Native">
+```typescript
+web3wallet.on("proposal_expire", (event) => {
+    // proposal expired and any modal displaying it should be removed
+    const { id } = event;
+});
+```
+  </TabItem>
+  <TabItem value="ios" label="iOS">
+```swift
+Web3Wallet.instance.sessionProposalExpirationPublisher.sink { _ in
+    // let user know that session proposal has expired, update UI
+}.store(in: &publishers)
+```
+  </TabItem>
+  <TabItem value="android" label="Android">
+```kotlin
+val walletDelegate = object : Web3Wallet.WalletDelegate {
+  override fun onProposalExpired(proposal: Wallet.Model.ExpiredProposal) {
+          // Here this event is triggered when a proposal expires - update your UI
+  }
+  // ...other callbacks
+}
+Web3Wallet.setWalletDelegate(walletDelegate)
+```
+</TabItem>
+</Tabs>
 
 #### Session Proposal success message
 
@@ -138,25 +313,90 @@ A session request represents the request sent by a dapp to a wallet.
 
 Whenever user approves or rejects a session request, a wallet should show a loading indicator the moment the button is pressed, until Relay acknowledgement is received for any of these actions.
 
-```tsx
+<Tabs>
+  <TabItem value="web" label="Web">
+```typescript
 try {
-  await web3Wallet.respondSessionRequest(params)
-  // update UI -> remove the loader
+    await web3Wallet.respondSessionRequest(params);
+    // update UI -> remove the loader
 } catch (error) {
-  // present error to the user
+    // present error to the user
 }
 ```
+  </TabItem>
+  <TabItem value="react" label="React Native">
+```typescript
+try {
+    await web3Wallet.respondSessionRequest(params);
+    // update UI -> remove the loader
+} catch (error) {
+    // present error to the user
+}
+```
+  </TabItem>
+  <TabItem value="ios" label="iOS">
+```swift
+do {
+    try await Web3Wallet.instance.respond(requestId: request.id, signature: signature, from: account)
+    // update UI -> remove the loader
+} catch {
+    // present error to the user
+}
+```
+  </TabItem>
+  <TabItem value="android" label="Android">
+```kotlin
+Web3Wallet.respondSessionRequest(Wallet.Params.SessionRequestResponse,
+  onSuccess = {
+      //Session request response was sent successfully - update your UI
+  },
+  onError = { error ->
+      //Error while sending session response - update your UI
+  })
+```
+</TabItem>
+</Tabs>
 
 #### Session request expiry
 
 A session request expiry is defined by a dapp. Its value must be between `now() + 5mins` and `now() + 7 days`. After the session request expires, the below event is emitted and session request modal should be removed from the app's UI.
 
-```tsx
-web3wallet.on('session_request_expire', event => {
+<Tabs>
+  <TabItem value="web" label="Web">
+```typescript
+web3wallet.on("session_request_expire", (event) => {
   // request expired and any modal displaying it should be removed
-  const { id } = event
-})
+  const { id } = event;
+});
 ```
+  </TabItem>
+  <TabItem value="react" label="React Native">
+```typescript
+web3wallet.on("session_request_expire", (event) => {
+  // request expired and any modal displaying it should be removed
+  const { id } = event;
+});
+```
+  </TabItem>
+  <TabItem value="ios" label="iOS">
+```swift
+Web3Wallet.instance.requestExpirationPublisher.sink { _ in
+    // let user know that request has expired
+}.store(in: &publishers)
+```
+  </TabItem>
+  <TabItem value="android" label="Android">
+```kotlin
+val walletDelegate = object : Web3Wallet.WalletDelegate {
+  override fun onRequestExpired(request: Wallet.Model.ExpiredRequest) {
+      // Here this event is triggered when a session request expires - update your UI
+  }
+  // ...other callbacks
+}
+Web3Wallet.setWalletDelegate(walletDelegate)
+```
+</TabItem>
+</Tabs>
 
 #### Session request success
 
@@ -181,15 +421,55 @@ While approving or rejecting a session request, the following errors might occur
 
 The Web Socket connection state tracks the connection with the Relay server. An event is emitted whenever a connection state changes.
 
-```tsx
-core.relayer.on('relayer_connect', () => {
+<Tabs>
+  <TabItem value="web" label="Web">
+```typescript
+core.relayer.on("relayer_connect", () => {
   // connection to the relay server is established
 })
 
-core.relayer.on('relayer_disconnect', () => {
+core.relayer.on("relayer_disconnect", () => {
   // connection to the relay server is lost
 })
 ```
+  </TabItem>
+  <TabItem value="react" label="React Native">
+```typescript
+core.relayer.on("relayer_connect", () => {
+  // connection to the relay server is established
+})
+
+core.relayer.on("relayer_disconnect", () => {
+  // connection to the relay server is lost
+})
+```
+  </TabItem>
+  <TabItem value="ios" label="iOS">
+```swift
+Web3Wallet.instance.socketConnectionStatusPublisher
+  .receive(on: DispatchQueue.main)
+  .sink { status in
+  switch status {
+  case .connected:
+    // ...
+  case .disconnected:
+    // ...
+  }
+}.store(in: &publishers)
+```
+  </TabItem>
+  <TabItem value="android" label="Android">
+```kotlin
+val walletDelegate = object : Web3Wallet.WalletDelegate {
+  override fun onConnectionStateChange(state: Wallet.Model.ConnectionState) {
+    // Here this event is triggered when a connection state has changed
+  }
+  // ...other callbacks
+}
+Web3Wallet.setWalletDelegate(walletDelegate)
+```
+</TabItem>
+</Tabs>
 
 #### Connection state success
 
@@ -205,32 +485,30 @@ _[Visual needed]_
 
 Mobile Linking uses the mobile device’s native OS to automatically redirect between the native wallet app and a native app. This results in few user actions a better UX.
 
-**Establishing Communication Between Mobile Wallets and Apps**[](https://docs.walletconnect.com/walletkit/ios/mobile-linking#establishing-communication-between-mobile-wallets-and-apps)
+#### Establishing Communication Between Mobile Wallets and Apps
 
 When integrating a wallet with a mobile application, it's essential to understand how they communicate. The process involves two main steps:
 
 1. **QR Code Handshake:** The mobile app (Dapp) generates a unique URI (Uniform Resource Identifier) and displays it as a QR code. This URI acts like a secret handshake. When the user scans the QR code or copy/pastes the URI using their wallet app, they establish a connection. It's like saying, "Hey, let's chat!"
-2. **Deep Links and Universal Links:** The URI from the QR code allows the wallet app to create a [deep link](https://support.google.com/google-ads/answer/10023042?hl=en#:~:text=Deep%20links%20send%20mobile%20device,%2C%20Shopping%2C%20and%20Display%20campaigns.) or [universal link](https://developer.apple.com/ios/universal-links/). These links work on both Android and iOS. They enable seamless communication between the wallet and the app.
+2. **Deep Links and Universal Links:** The URI from the QR code allows the wallet app to create a [deep link](https://support.google.com/google-ads/answer/10023042) or [universal link](https://developer.apple.com/ios/universal-links/). These links work on both Android and iOS. They enable seamless communication between the wallet and the app.
 
-<aside>
-💡 TIP
+:::tip
 
-**Developers should prefer Deep Linking over Universal Linking.**
-
+**Developers should prefer Deep Linking over Universal Linking.**<br />
 In the case of Universal Linking, the user may be redirected to the browser, which may not be the desired behavior. Deep Linking ensures that the user is redirected to the app, providing a seamless experience.
 
-</aside>
+:::
 
 ### Connection Flow
 
-1. **Dapp Prompts User:** The Dapp asks the user to connect.
-2. **User Chooses Wallet:** The user selects a wallet from a list of compatible wallets.
-3. **Redirect to Wallet:** The user is redirected to their chosen wallet.
-4. **Wallet Approval:** The wallet prompts the user to approve or reject the session (similar to granting permission).
-5. **Return to Dapp:**
-   - **Manual Return:** The wallet asks the user to manually return to the Dapp.
-   - **Automatic Return:** Alternatively, the wallet automatically takes the user back to the Dapp.
-6. **User Reunites with Dapp:** After all the interactions, the user ends up back in the Dapp.
+1. **Dapp prompts user:** The Dapp asks the user to connect.
+2. **User chooses wallet:** The user selects a wallet from a list of compatible wallets.
+3. **Redirect to wallet:** The user is redirected to their chosen wallet.
+4. **Wallet approval:** The wallet prompts the user to approve or reject the session (similar to granting permission).
+5. **Return to dapp:**
+   - **Manual return:** The wallet asks the user to manually return to the Dapp.
+   - **Automatic return:** Alternatively, the wallet automatically takes the user back to the Dapp.
+6. **User reunites with dapp:** After all the interactions, the user ends up back in the Dapp.
 
 <ThemedImage
   alt="Mobile Linking Connect Flow"
@@ -244,12 +522,12 @@ In the case of Universal Linking, the user may be redirected to the browser, whi
 
 When the Dapp needs the user to sign something (like a transaction), a similar pattern occurs:
 
-1. **Automatic Redirect:** The Dapp automatically sends the user to their previously chosen wallet.
-2. **Approval Prompt:** The wallet asks the user to approve or reject the request.
-3. **Return to Dapp:**
-   - **Manual Return:** The wallet asks the user to manually return to the Dapp.
-   - **Automatic Return:** Alternatively, the wallet automatically takes the user back to the Dapp.
-4. **User Reconnects:** Eventually, the user returns to the Dapp.
+1. **Automatic redirect:** The Dapp automatically sends the user to their previously chosen wallet.
+2. **Approval prompt:** The wallet asks the user to approve or reject the request.
+3. **Return to dapp:**
+   - **Manual return:** The wallet asks the user to manually return to the Dapp.
+   - **Automatic return:** Alternatively, the wallet automatically takes the user back to the Dapp.
+4. **User reconnects:** Eventually, the user returns to the Dapp.
 
 <ThemedImage
   alt="Mobile Linking Sign Flow"
@@ -261,19 +539,59 @@ When the Dapp needs the user to sign something (like a transaction), a similar p
 
 ### Platform Specific Preparation
 
-**Android -** Use content from: https://docs.walletconnect.com/walletkit/android/mobile-linking#platform-preparations
+<Tabs>
+  <TabItem value="ios" label="iOS">
+In order for Dapps to be able to trigger your wallet for a connection or sign request using deep links you first need to add your custom scheme under [`CFBundleURLTypes`](https://developer.apple.com/documentation/bundleresources/information_property_list/cfbundleurltypes) key in your Info.plist file.
 
-**IOS -** Use content from: https://docs.walletconnect.com/walletkit/ios/mobile-linking#platform-preparations
+```ruby
+<key>CFBundleURLTypes</key>
+<array>
+	<dict>
+		<key>CFBundleTypeRole</key>
+		<string>Editor</string>
+		<key>CFBundleURLName</key>
+		<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
+		<key>CFBundleURLSchemes</key>
+		<array>
+			<string>examplewallet</string> <!-- your custom scheme goes here -->
+		</array>
+	</dict>
+</array>
+```
+  </TabItem>
+  <TabItem value="android" label="Android">
+In order for Dapps to be able to trigger your wallet for a connection or sign request using deep links you first need to declare an [`<intent-filter>`](https://developer.android.com/training/app-links/deep-linking#adding-filters) in your wallet's Manifest.xml as follows:
 
-**Flutter-** Use content from: https://docs.walletconnect.com/walletkit/flutter/mobile-linking#platform-preparations
+```xml
+<intent-filter>
+    <action android:name="android.intent.action.VIEW" />
+    <category android:name="android.intent.category.DEFAULT" />
+    <category android:name="android.intent.category.BROWSABLE" />
+    <data android:scheme="examplewallet" /> <!-- your own custom scheme -->
+</intent-filter>
+```
+  </TabItem>
+  <TabItem value="flutter" label="Flutter">
+Since Flutter leverages on native APIs, you must follow iOS and Android steps for each native platform.
+
+**Additionally**, you would have to set FlutterDeepLinkingEnabled key to true on iOS's Info.plist file.
+
+```xml
+<key>FlutterDeepLinkingEnabled</key>
+<true/>
+```
+More information in official documentation: https://docs.flutter.dev/ui/navigation/deep-linking
+  </TabItem>
+</Tabs>
+
 
 ### Platform Integration
 
-**Android -** Use content from: \*\*\*\*https://docs.walletconnect.com/walletkit/android/mobile-linking#integration
+You can find specific integration steps for each platform on Mobile Linking pages for each platform::
 
-**IOS -** Use content from: https://docs.walletconnect.com/walletkit/ios/mobile-linking#integration
-
-**Flutter-** Use content from: https://docs.walletconnect.com/walletkit/flutter/mobile-linking#integration
+- **Android** -  [Mobile Linking: Integration](https://docs.walletconnect.com/walletkit/android/mobile-linking#integration)
+- **iOS** - [Mobile Linking: Integration](https://docs.walletconnect.com/walletkit/ios/mobile-linking#integration)
+- **Flutter** - [Mobile Linking: Integration](https://docs.walletconnect.com/walletkit/flutter/mobile-linking#integration)
 
 ### How to Test
 
@@ -319,7 +637,8 @@ Possible states:
 - Mismatch
 - Threat
 
-![Verify Banner](/img/verify-banner.png)
+![Verify States](/img/verify-states-1.png)
+![Verify States](/img/verify-states-2.png)
 
 :::info Note
 
@@ -365,3 +684,4 @@ Numerous bugs have been identified and fixed over time, but many dapps and walle
 ## Checklist Before Going Live
 
 _A simple list of tasks based on the guidelines above_
+````
