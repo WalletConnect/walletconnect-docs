@@ -23,9 +23,43 @@ To take all of the above into account and to make experience better for users, w
 
 Please follow these best practices and make the experience for your users and yourself a delightful and quick one.
 
+## Checklist Before Going Live
+
+To make sure your wallet adheres to the best practices, we recommend implementing the following checklist before going live. You can find more detailed information on each point below.
+
+1. **Success and Error Messages**
+   - [ ] Display clear and concise messages for all user interactions
+   - [ ] Provide feedback for all user actions
+     - [ ] Connection success
+     - [ ] Connection error
+     - [ ] Loading indicators for waiting on connection, transaction, etc.
+   - [ ] Ensure that users are informed of the status of their connection and transactions
+   - [ ] Implement status indicators internet availability
+   - [ ] Make sure to provide feedback not only to users but also back to the dapp (e.g., if there's an error or a user has not enough funds to pay for gas, don't just display the info message to the user, but also send the error back to the dapp so that it can change the state accordingly)
+2. **Mobile Linking**
+   - [ ] Implement mobile linking to allow for automatic redirection between the wallet and the dapp
+   - [ ] Use deep linking over universal linking for a better user experience
+   - [ ] Ensure that the user is redirected back to the dapp after completing a transaction
+3. **Latency**
+   - [ ] Optimize performance to minimize latency
+   - [ ] Latency for connection in normal conditions: under 5 seconds
+   - [ ] Latency for connection in poor network (3G) conditions: under 15 seconds
+   - [ ] Latency for signing in normal conditions: under 5 seconds
+   - [ ] Latency for signing in poor network (3G) conditions: under 10 seconds
+4. **Verify API**
+   - [ ] Present users with four key states that can help them determine whether the domain they’re about to connect to might be malicious (Domain match, Unverified, Mismatch, Threat)
+5. **Latest SDK Version**
+   - [ ] Ensure that you are using the latest SDK version
+   - [ ] Update your SDK regularly to benefit from the latest features and bug fixes
+   - [ ] Subscribe to SDK updates to stay informed about new releases
+
 ## 1. Success and Error Messages
 
 Users often face ambiguity in determining whether their connection or transactions were successful. They are also not guided to switching back into the dapp or automatically switched back when possible, causing unnecessary user anxiety. Additionally, wallets typically lack status indicators for connection and internet availability, leaving users in the dark.
+
+![](/assets/connection-successful.png)
+
+<center>_An example of a successful connection message in a Rainbow wallet_</center>
 
 ### Pairing
 
@@ -75,7 +109,8 @@ Web3Wallet.pair(pairingParams,
         //Some error happens while pairing - check Expected errors section
     }
 }
-```
+````
+
 </TabItem>
 </Tabs>
 
@@ -120,7 +155,8 @@ val coreDelegate = object : CoreClient.CoreDelegate {
 }
 
 CoreClient.setDelegate(coreDelegate)
-```
+
+````
 </TabItem>
 </Tabs>
 
@@ -160,7 +196,8 @@ try {
 } catch (error) {
     // present error to the user
 }
-```
+````
+
   </TabItem>
   <TabItem value="react" label="React Native">
 ```typescript
@@ -429,9 +466,10 @@ core.relayer.on("relayer_connect", () => {
 })
 
 core.relayer.on("relayer_disconnect", () => {
-  // connection to the relay server is lost
+// connection to the relay server is lost
 })
-```
+
+````
   </TabItem>
   <TabItem value="react" label="React Native">
 ```typescript
@@ -442,7 +480,8 @@ core.relayer.on("relayer_connect", () => {
 core.relayer.on("relayer_disconnect", () => {
   // connection to the relay server is lost
 })
-```
+````
+
   </TabItem>
   <TabItem value="ios" label="iOS">
 ```swift
@@ -558,6 +597,7 @@ In order for Dapps to be able to trigger your wallet for a connection or sign re
 	</dict>
 </array>
 ```
+
   </TabItem>
   <TabItem value="android" label="Android">
 In order for Dapps to be able to trigger your wallet for a connection or sign request using deep links you first need to declare an [`<intent-filter>`](https://developer.android.com/training/app-links/deep-linking#adding-filters) in your wallet's Manifest.xml as follows:
@@ -570,6 +610,7 @@ In order for Dapps to be able to trigger your wallet for a connection or sign re
     <data android:scheme="examplewallet" /> <!-- your own custom scheme -->
 </intent-filter>
 ```
+
   </TabItem>
   <TabItem value="flutter" label="Flutter">
 Since Flutter leverages on native APIs, you must follow iOS and Android steps for each native platform.
@@ -580,16 +621,17 @@ Since Flutter leverages on native APIs, you must follow iOS and Android steps fo
 <key>FlutterDeepLinkingEnabled</key>
 <true/>
 ```
+
 More information in official documentation: https://docs.flutter.dev/ui/navigation/deep-linking
+
   </TabItem>
 </Tabs>
-
 
 ### Platform Integration
 
 You can find specific integration steps for each platform on Mobile Linking pages for each platform::
 
-- **Android** -  [Mobile Linking: Integration](https://docs.walletconnect.com/walletkit/android/mobile-linking#integration)
+- **Android** - [Mobile Linking: Integration](https://docs.walletconnect.com/walletkit/android/mobile-linking#integration)
 - **iOS** - [Mobile Linking: Integration](https://docs.walletconnect.com/walletkit/ios/mobile-linking#integration)
 - **Flutter** - [Mobile Linking: Integration](https://docs.walletconnect.com/walletkit/flutter/mobile-linking#integration)
 
@@ -620,9 +662,23 @@ Our SDK’s position in the boot chain can lead to up to 15 seconds in throttled
 
 ### Target latency
 
+For **connecting**, the target latency is:
+
+- **Under 5 seconds** in normal conditions
+- **Under 15 seconds** when throttled (3G network speed)
+
+For **signing**, the target latency is:
+
+- **Under 5 seconds** in normal conditions
+- **Under 10 seconds** when throttled (3G network speed)
+
 ### How to test
 
-### Throttling
+To test latency under suboptimal network conditions, you can enable throttling on your mobile phone. You can simulate different network conditions to see how your app behaves in various scenarios.
+
+For example, on iOS you need to enable Developer Mode and then go to **Settings > Developer > Network Link Conditioner**. You can then select the network condition you want to simulate. For 3G, you can select **3G** from the list, for no network or timeout simulations, choose **100% Loss**.
+
+Check this article for how to simulate slow internet connection on iOS & Android, with multiple options for both platforms: [How to simulate slow internet connection on iOS & Android](https://www.browserstack.com/guide/how-to-simulate-slow-network-conditions).
 
 ## 4. Verify API
 
@@ -661,7 +717,7 @@ The Verify security system will discriminate session proposals & session request
 
 ### Verify API Implementation
 
-To see how to implement Verify API for your framework, see _[Link to full Verify API page]_.
+To see how to implement Verify API for your framework, see [Verify API](./features/verify) page and select your platform to see code examples.
 
 ### How to test
 
@@ -673,15 +729,24 @@ _[Visuals needed]_
 
 ## 5. Latest SDK
 
-Numerous bugs have been identified and fixed over time, but many dapps and wallets continue to use older SDK versions with known issues, affecting overall reliability.
+Numerous features have been introduced, bugs have been identified and fixed over time, stability has improved, but many dapps and wallets continue to use older SDK versions with known issues, affecting overall reliability.
 
-### Latest version
+### Latest versions
+
+To be sure you get all the latest features and the most stable version, make sure you are using the latest version of the SDK for your platform.
+
+- **iOS**
+  - **WalletConnectSwiftV2**: [Latest release](https://github.com/WalletConnect/WalletConnectSwiftV2/releases/latest/)
+  - **WalletConnectSwiftV2**: [All releases](https://github.com/WalletConnect/WalletConnectSwiftV2/releases) - check the latest features, what's changed, and what's fixed
+- **Android**
+  - **WalletConnectKotlinV2**: [Latest release](https://github.com/WalletConnect/WalletConnectKotlinV2/releases/latest)
+  - **WalletConnectKotlinV2**: [All releases](https://github.com/WalletConnect/WalletConnectKotlinV2/releases) - check the latest features, what's changed, and what's fixed
+- **Flutter**
+  - **WalletConnectFlutterV2**: [Latest release](https://github.com/WalletConnect/WalletConnectFlutterV2/releases/latest)
+  - **WalletConnectFlutterV2**: [All releases](https://github.com/WalletConnect/WalletConnectFlutterV2/releases) - check the latest features, what's changed, and what's fixed
 
 ### Subscribe to updates
 
-### How to migrate
+To stay up to date with the latest SDK releases, you can use GitHub's native feature to subscribe to releases. This way, you will be notified whenever a new release is published. You can find the "Watch" button on the top right of the repository page. Click on it, then select "Custom" and "Releases only". You'll get a helpful ping whenever a new release is out.
 
-## Checklist Before Going Live
-
-_A simple list of tasks based on the guidelines above_
-````
+![Subscribe to releases](/assets/subsribe-to-release-updates.png)
