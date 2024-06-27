@@ -28,30 +28,30 @@ Please follow these best practices and make the experience for your users and yo
 To make sure your wallet adheres to the best practices, we recommend implementing the following checklist before going live. You can find more detailed information on each point below.
 
 1. **Success and Error Messages**
-   - [ ] Display clear and concise messages for all user interactions
-   - [ ] Provide feedback for all user actions
-     - [ ] Connection success
-     - [ ] Connection error
-     - [ ] Loading indicators for waiting on connection, transaction, etc.
-   - [ ] Ensure that users are informed of the status of their connection and transactions
-   - [ ] Implement status indicators internet availability
-   - [ ] Make sure to provide feedback not only to users but also back to the dapp (e.g., if there's an error or a user has not enough funds to pay for gas, don't just display the info message to the user, but also send the error back to the dapp so that it can change the state accordingly)
+   - ✅ Display clear and concise messages for all user interactions
+   - ✅ Provide feedback for all user actions
+     - ✅ Connection success
+     - ✅ Connection error
+     - ✅ Loading indicators for waiting on connection, transaction, etc.
+   - ✅ Ensure that users are informed of the status of their connection and transactions
+   - ✅ Implement status indicators internet availability
+   - ✅ Make sure to provide feedback not only to users but also back to the dapp (e.g., if there's an error or a user has not enough funds to pay for gas, don't just display the info message to the user, but also send the error back to the dapp so that it can change the state accordingly)
 2. **Mobile Linking**
-   - [ ] Implement mobile linking to allow for automatic redirection between the wallet and the dapp
-   - [ ] Use deep linking over universal linking for a better user experience
-   - [ ] Ensure that the user is redirected back to the dapp after completing a transaction
+   - ✅ Implement mobile linking to allow for automatic redirection between the wallet and the dapp
+   - ✅ Use deep linking over universal linking for a better user experience
+   - ✅ Ensure that the user is redirected back to the dapp after completing a transaction
 3. **Latency**
-   - [ ] Optimize performance to minimize latency
-   - [ ] Latency for connection in normal conditions: under 5 seconds
-   - [ ] Latency for connection in poor network (3G) conditions: under 15 seconds
-   - [ ] Latency for signing in normal conditions: under 5 seconds
-   - [ ] Latency for signing in poor network (3G) conditions: under 10 seconds
+   - ✅ Optimize performance to minimize latency
+   - ✅ Latency for connection in normal conditions: under 5 seconds
+   - ✅ Latency for connection in poor network (3G) conditions: under 15 seconds
+   - ✅ Latency for signing in normal conditions: under 5 seconds
+   - ✅ Latency for signing in poor network (3G) conditions: under 10 seconds
 4. **Verify API**
-   - [ ] Present users with four key states that can help them determine whether the domain they’re about to connect to might be malicious (Domain match, Unverified, Mismatch, Threat)
+   - ✅ Present users with four key states that can help them determine whether the domain they’re about to connect to might be malicious (Domain match, Unverified, Mismatch, Threat)
 5. **Latest SDK Version**
-   - [ ] Ensure that you are using the latest SDK version
-   - [ ] Update your SDK regularly to benefit from the latest features and bug fixes
-   - [ ] Subscribe to SDK updates to stay informed about new releases
+   - ✅ Ensure that you are using the latest SDK version
+   - ✅ Update your SDK regularly to benefit from the latest features and bug fixes
+   - ✅ Subscribe to SDK updates to stay informed about new releases
 
 ## 1. Success and Error Messages
 
@@ -160,13 +160,10 @@ CoreClient.setDelegate(coreDelegate)
 </TabItem>
 </Tabs>
 
-#### Pairing success message
+#### Pairing messages
 
-_[Visual needed]_
-
-#### Pairing error message
-
-_[Visual needed]_
+1. Consider displaying a successful pairing message when pairing is successful. Before that happens, wallet should show a loading indicator.
+2. Display an error message when a pairing fails.
 
 #### Expected Errors
 
@@ -232,8 +229,6 @@ Web3Wallet.approveSession(approveProposal,
 </TabItem>
 </Tabs>
 
-_[Visual needed]_
-
 #### Rejecting session
 
 <Tabs>
@@ -280,8 +275,6 @@ Web3Wallet.rejectSession(reject,
 </TabItem>
 </Tabs>
 
-_[Visual needed]_
-
 #### Session proposal expiry
 
 A session proposal expiry is 5 minutes. It means a given proposal is stored for 5 minutes in the SDK storage and user has 5 minutes for the approval or rejection decision. After that time, the below event is emitted and proposal modal should be removed from the app's UI.
@@ -323,13 +316,10 @@ Web3Wallet.setWalletDelegate(walletDelegate)
 </TabItem>
 </Tabs>
 
-#### Session Proposal success message
+#### Session Proposal messages
 
-_[Visual needed]_
-
-#### Session Proposal error message
-
-_[Visual needed]_
+1. Consider displaying a successful session proposal message before redirecting back to the dapp. Before the success message is displayed, wallet should show a loading indicator.
+2. Display an error message when session proposal fails.
 
 #### Expected errors
 
@@ -339,7 +329,7 @@ While approving or rejecting a session proposal, the following errors might occu
   - It happens when a user tries to approve or reject a session proposal with no Internet connection
 - **Session proposal expired**
   - It happens when a user tries to approve or reject an expired session proposal
-- **Invalid namespaces**
+- **Invalid [namespaces](../advanced/glossary#namespaces)**
   - It happens when a validation of session namespaces fails
 - **Timeout**
   - It happens when Relay doesn't acknowledge session settle publish within 10s
@@ -435,14 +425,6 @@ Web3Wallet.setWalletDelegate(walletDelegate)
 </TabItem>
 </Tabs>
 
-#### Session request success
-
-_[Visual needed]_
-
-#### Session request error
-
-_[Visual needed]_
-
 #### Expected errors
 
 While approving or rejecting a session request, the following errors might occur:
@@ -510,13 +492,9 @@ Web3Wallet.setWalletDelegate(walletDelegate)
 </TabItem>
 </Tabs>
 
-#### Connection state success
+#### Connection state messages
 
-_[Visual needed]_
-
-#### Connection state error
-
-[Visual needed]
+When the connection state changes, show a message in the UI. For example, display a message when the connection is lost or re-established.
 
 ## 2. Mobile Linking
 
@@ -627,13 +605,13 @@ More information in official documentation: https://docs.flutter.dev/ui/navigati
   </TabItem>
 </Tabs>
 
-### Platform Integration
+### Platform Preparations and Integration
 
 You can find specific integration steps for each platform on Mobile Linking pages for each platform::
 
-- **Android** - [Mobile Linking: Integration](https://docs.walletconnect.com/walletkit/android/mobile-linking#integration)
-- **iOS** - [Mobile Linking: Integration](https://docs.walletconnect.com/walletkit/ios/mobile-linking#integration)
-- **Flutter** - [Mobile Linking: Integration](https://docs.walletconnect.com/walletkit/flutter/mobile-linking#integration)
+- **Android** - [Mobile Linking: Platform preparations](./android/mobile-linking#platform-preparations)
+- **iOS** - [Mobile Linking: Platform preparations](./ios/mobile-linking#platform-preparations)
+- **Flutter** - [Mobile Linking: Platform preparations](./flutter/mobile-linking#platform-preparations)
 
 ### How to Test
 
@@ -643,18 +621,25 @@ Once you have completed your integration, you can test it against our sample app
 
 **Android**
 
-- Link to Sample Wallet
-- Link to Sample App
+- [Sample Wallet]
+- [Sample App]
 
 **iOS**
 
-- Link to Sample Wallet
-- [Sample App](https://testflight.apple.com/join/7S1GYcjC)
+- [Sample Wallet]
+- [Sample App]
 
 **Flutter**
 
-- Link to Sample Wallet
-- Link to Sample App
+- Sample Wallet:
+  - [Join the Web3Wallet Flutter beta](https://testflight.apple.com/join/Uv0XoBuD)
+  - [appdistribution.firebase.dev](https://appdistribution.firebase.dev/i/2b8b3dce9e2831cd)
+- Sample App:
+  - [Join the Web3Wallet Flutter beta](https://testflight.apple.com/join/ClqbHc17)
+  - [appdistribution.firebase.dev](https://appdistribution.firebase.dev/i/a8efff56e3f0fdb0)
+- Web3Modal Dapp:
+  - [Join the Web3Wallet Flutter beta](https://testflight.apple.com/join/ClqbHc17)
+  - [appdistribution.firebase.dev](https://appdistribution.firebase.dev/i/a8efff56e3f0fdb0)
 
 ## 3. Latency
 
@@ -721,11 +706,13 @@ To see how to implement Verify API for your framework, see [Verify API](./featur
 
 ### How to test
 
-_Content needed_
+To test Verify API with a malicious domain, you can check out the [Malicious React dapp](https://malicious-app-verify-simulation.vercel.app/), created specifically for testing. This app is flagged as malicious and will have the `isScam` parameter set to `true` in the `verifyContext` of the request. You can use this app to test how your wallet behaves when connecting to a malicious domain.
 
 ### Error messages
 
-_[Visuals needed]_
+![Verify API flagged domain](/assets/verify-api-flagged-domain.png)
+
+_A sample error warning when trying to connect to a malicious domain_
 
 ## 5. Latest SDK
 
@@ -750,3 +737,9 @@ To be sure you get all the latest features and the most stable version, make sur
 To stay up to date with the latest SDK releases, you can use GitHub's native feature to subscribe to releases. This way, you will be notified whenever a new release is published. You can find the "Watch" button on the top right of the repository page. Click on it, then select "Custom" and "Releases only". You'll get a helpful ping whenever a new release is out.
 
 ![Subscribe to releases](/assets/subsribe-to-release-updates.png)
+
+## Resources
+
+- [React Wallet](https://react-wallet.walletconnect.com/) - for testing dapps, features, Verify API messages, etc.
+- [React dapp](https://react-app.walletconnect.com/) - for testing wallets
+- [Malicious React dapp](https://malicious-app-verify-simulation.vercel.app/) - for testing Verify API with malicious domain
