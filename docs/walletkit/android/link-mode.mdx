@@ -1,0 +1,37 @@
+# Link Mode
+
+WalletKit link mode is a low latency mechanism for transporting 1-click auth requests and session requests over universal links, eliminating the need for a WebSocket connection with the Relay. This significantly enhances the user experience when connecting native dApps to native wallets by reducing the latency associated with networking connections, especially when the user has an unstable internet connection.
+
+To support link mode add universal link for your wallet in Cloud project configuration dashboard, configure your AppMetaData `appLink` with a valid universal link and set the `linkMode` property to `true`:
+
+```kotlin
+ val appMetaData = Core.Model.AppMetaData(
+    ...
+    appLink = "https://example.com/example_wallet",
+    linkMode = true
+)
+
+CoreClient.initialize(
+   metaData: appMetaData,
+    ...
+)
+
+Web3Wallet.initialize(Wallet.Params.Init(core = CoreClient))
+```
+
+Once link mode and app link are properly configured and the user interacts with a link mode supporting dApp, your wallet will receive requests over app links. You must pass these requests to WalletKit so it can process them:
+
+```kotlin
+val url = intent.dataString
+Web3Wallet.dispatchEnvelope(url) { error -> 
+    //handle error
+}
+```
+
+Ensure to handle incoming app links in your Activity onCreate method and in onNewIntent callback. 
+
+For more information on how to configure app links for your app, refer to the [Android Documentation](https://developer.android.com/training/app-links/verify-android-applinks).
+
+For enabling links to app content check [this](https://developer.android.com/training/app-links/deep-linking) documentation page. 
+
+For more information on how to interact with other apps using intents, see [Adnroid Intetn Documentation](https://developer.android.com/training/basics/intents)
