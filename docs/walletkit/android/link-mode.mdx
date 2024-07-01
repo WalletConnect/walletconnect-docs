@@ -28,7 +28,21 @@ Web3Wallet.dispatchEnvelope(url) { error ->
 }
 ```
 
-Ensure to handle incoming app links in your Activity onCreate method and in onNewIntent callback. 
+Ensure to handle incoming app links in your Activity onCreate method and in onNewIntent callback.
+
+Ensure that your App Link is properly configured in your app's Manifest file with the `autoVerify` set to `true`:
+
+```
+<intent-filter android:autoVerify="true">
+    <action android:name="android.intent.action.VIEW" />
+    <category android:name="android.intent.category.DEFAULT" />
+    <category android:name="android.intent.category.BROWSABLE" />
+
+    <data
+        android:host="your_host"
+        android:scheme="https">
+</intent-filter>
+```
 
 For more information on how to configure app links for your app, refer to the [Android Documentation](https://developer.android.com/training/app-links/verify-android-applinks).
 
