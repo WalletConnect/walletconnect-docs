@@ -4,8 +4,9 @@ title: Best Practices
 
 import ThemedImage from '@theme/ThemedImage'
 import useBaseUrl from '@docusaurus/useBaseUrl'
-import Tabs from '@theme/Tabs'
-import TabItem from '@theme/TabItem'
+import PlatformTabs from '../components/PlatformTabs'
+import PlatformTabItem from '../components/PlatformTabItem'
+
 
 # Best Practices for Wallets
 
@@ -65,8 +66,8 @@ Users often face ambiguity in determining whether their connection or transactio
 
 A pairing is a connection between a wallet and a dapp that has fixed permissions to only allow a dapp to propose a session through it. Dapp can propose infinite number of sessions on one pairing. Wallet must use a pair method from Web3Wallet client to pair with dapp.
 
-<Tabs>
-  <TabItem value="web" label="Web">
+<PlatformTabs activeOptions={["web","ios","android", "react-native"]}>
+  <PlatformTabItem value="web" label="Web">
 ```jsx
 const uri = 'xxx'; // pairing uri
 try {
@@ -75,8 +76,8 @@ try {
     // some error happens while pairing - check Expected errors section
 }
 ```
-</TabItem>
-<TabItem value="react" label="React Native">
+</PlatformTabItem>
+<PlatformTabItem value="react-native" label="React Native">
 ```jsx
 const uri = 'xxx'; // pairing uri
 try {
@@ -85,8 +86,8 @@ try {
     // some error happens while pairing - check Expected errors section
 }
 ```
-</TabItem>
-<TabItem value="ios" label="iOS">
+</PlatformTabItem>
+<PlatformTabItem value="ios" label="iOS">
 ```swift
 let uri = WalletConnectURI(string: urlString)
 
@@ -97,8 +98,8 @@ try await Web3Wallet.instance.pair(uri: uri)
 }
 
 ````
-</TabItem>
-<TabItem value="android" label="Android">
+</PlatformTabItem>
+<PlatformTabItem value="android" label="Android">
 ```kotlin
 val pairingParams = Wallet.Params.Pair(pairingUri)
 Web3Wallet.pair(pairingParams,
@@ -111,31 +112,31 @@ Web3Wallet.pair(pairingParams,
 }
 ````
 
-</TabItem>
-</Tabs>
+</PlatformTabItem>
+</PlatformTabs>
 
 #### Pairing Expiry
 
 A pairing expiry event is triggered whenever a pairing is expired. The expiry for inactive pairing is 5 mins, whereas for active pairing is 30 days. A pairing becomes active when a session proposal is received and user successfully approves it. This event helps to know when given pairing expires and update UI accordingly.
 
-<Tabs>
-  <TabItem value="web" label="Web">
+<PlatformTabs activeOptions={["web","ios","android", "react-native"]}>
+  <PlatformTabItem value="web" label="Web">
 ```typescript
 core.pairing.events.on("pairing_expire", (event) => {
     // pairing expired before user approved/rejected a session proposal
     const { topic } = topic;
 });
 ```
-  </TabItem>
-  <TabItem value="react" label="React Native">
+  </PlatformTabItem>
+  <PlatformTabItem value="react-native" label="React Native">
 ```typescript
 core.pairing.events.on("pairing_expire", (event) => {
     // pairing expired before user approved/rejected a session proposal
     const { topic } = topic;
 });
 ```
-  </TabItem>
-  <TabItem value="ios" label="iOS">
+  </PlatformTabItem>
+  <PlatformTabItem value="ios" label="iOS">
 ```Swift
 Web3Wallet.instance.pairingExpirationPublisher
     .receive(on: DispatchQueue.main)
@@ -144,8 +145,8 @@ Web3Wallet.instance.pairingExpirationPublisher
     // let user know that pairing has expired
 }.store(in: &publishers)
 ```
-  </TabItem>
-  <TabItem value="android" label="Android">
+  </PlatformTabItem>
+  <PlatformTabItem value="android" label="Android">
 ```kotlin
 val coreDelegate = object : CoreClient.CoreDelegate {
     override fun onPairingExpired(expiredPairing: Core.Model.ExpiredPairing) {
@@ -157,8 +158,8 @@ val coreDelegate = object : CoreClient.CoreDelegate {
 CoreClient.setDelegate(coreDelegate)
 
 ````
-</TabItem>
-</Tabs>
+</PlatformTabItem>
+</PlatformTabs>
 
 #### Pairing messages
 
@@ -184,8 +185,8 @@ Whenever user approves or rejects a session proposal, a wallet should show a loa
 
 #### Approving session
 
-<Tabs>
-  <TabItem value="web" label="Web">
+<PlatformTabs activeOptions={["web","ios","android", "react-native"]}>
+  <PlatformTabItem value="web" label="Web">
 ```typescript
 try {
     await web3Wallet.approveSession(params);
@@ -195,8 +196,8 @@ try {
 }
 ````
 
-  </TabItem>
-  <TabItem value="react" label="React Native">
+  </PlatformTabItem>
+  <PlatformTabItem value="react-native" label="React Native">
 ```typescript
 try {
     await web3Wallet.approveSession(params);
@@ -205,8 +206,8 @@ try {
     // present error to the user
 }
 ```
-  </TabItem>
-  <TabItem value="ios" label="iOS">
+  </PlatformTabItem>
+  <PlatformTabItem value="ios" label="iOS">
 ```swift
 do {
     try await Web3Wallet.instance.approve(proposalId: proposal.id, namespaces: sessionNamespaces, sessionProperties: proposal.sessionProperties)
@@ -215,8 +216,8 @@ do {
     // present error
 }
 ```
-  </TabItem>
-  <TabItem value="android" label="Android">
+  </PlatformTabItem>
+  <PlatformTabItem value="android" label="Android">
 ```kotlin
 Web3Wallet.approveSession(approveProposal,
   onSuccess = {
@@ -226,13 +227,13 @@ Web3Wallet.approveSession(approveProposal,
       //Error while sending session approval - update your UI
   })
 ```
-</TabItem>
-</Tabs>
+</PlatformTabItem>
+</PlatformTabs>
 
 #### Rejecting session
 
-<Tabs>
-  <TabItem value="web" label="Web">
+<PlatformTabs activeOptions={["web","ios","android", "react-native"]}>
+  <PlatformTabItem value="web" label="Web">
 ```typescript
 try {
     await web3Wallet.rejectSession(params);
@@ -241,8 +242,8 @@ try {
     // present error to the user
 }
 ```
-  </TabItem>
-  <TabItem value="react" label="React Native">
+  </PlatformTabItem>
+  <PlatformTabItem value="react-native" label="React Native">
 ```typescript
 try {
     await web3Wallet.rejectSession(params);
@@ -251,8 +252,8 @@ try {
     // present error to the user
 }
 ```
-  </TabItem>
-  <TabItem value="ios" label="iOS">
+  </PlatformTabItem>
+  <PlatformTabItem value="ios" label="iOS">
 ```swift
 do {
     try await Web3Wallet.instance.reject(proposalId: proposal.id, reason: .userRejected)
@@ -261,8 +262,8 @@ do {
     // present error
 }
 ```
-  </TabItem>
-  <TabItem value="android" label="Android">
+  </PlatformTabItem>
+  <PlatformTabItem value="android" label="Android">
 ```kotlin
 Web3Wallet.rejectSession(reject,
   onSuccess = {
@@ -272,38 +273,38 @@ Web3Wallet.rejectSession(reject,
         //Error while sending session rejection - update your UI
   })
 ```
-</TabItem>
-</Tabs>
+</PlatformTabItem>
+</PlatformTabs>
 
 #### Session proposal expiry
 
 A session proposal expiry is 5 minutes. It means a given proposal is stored for 5 minutes in the SDK storage and user has 5 minutes for the approval or rejection decision. After that time, the below event is emitted and proposal modal should be removed from the app's UI.
 
-<Tabs>
-  <TabItem value="web" label="Web">
+<PlatformTabs activeOptions={["web","ios","android", "react-native"]}>
+  <PlatformTabItem value="web" label="Web">
 ```typescript
 web3wallet.on("proposal_expire", (event) => {
     // proposal expired and any modal displaying it should be removed
     const { id } = event;
 });
 ```
-  </TabItem>
-  <TabItem value="react" label="React Native">
+  </PlatformTabItem>
+  <PlatformTabItem value="react-native" label="React Native">
 ```typescript
 web3wallet.on("proposal_expire", (event) => {
     // proposal expired and any modal displaying it should be removed
     const { id } = event;
 });
 ```
-  </TabItem>
-  <TabItem value="ios" label="iOS">
+  </PlatformTabItem>
+  <PlatformTabItem value="ios" label="iOS">
 ```swift
 Web3Wallet.instance.sessionProposalExpirationPublisher.sink { _ in
     // let user know that session proposal has expired, update UI
 }.store(in: &publishers)
 ```
-  </TabItem>
-  <TabItem value="android" label="Android">
+  </PlatformTabItem>
+  <PlatformTabItem value="android" label="Android">
 ```kotlin
 val walletDelegate = object : Web3Wallet.WalletDelegate {
   override fun onProposalExpired(proposal: Wallet.Model.ExpiredProposal) {
@@ -313,8 +314,8 @@ val walletDelegate = object : Web3Wallet.WalletDelegate {
 }
 Web3Wallet.setWalletDelegate(walletDelegate)
 ```
-</TabItem>
-</Tabs>
+</PlatformTabItem>
+</PlatformTabs>
 
 #### Session Proposal messages
 
@@ -340,8 +341,8 @@ A session request represents the request sent by a dapp to a wallet.
 
 Whenever user approves or rejects a session request, a wallet should show a loading indicator the moment the button is pressed, until Relay acknowledgement is received for any of these actions.
 
-<Tabs>
-  <TabItem value="web" label="Web">
+<PlatformTabs activeOptions={["web","ios","android", "react-native"]}>
+  <PlatformTabItem value="web" label="Web">
 ```typescript
 try {
     await web3Wallet.respondSessionRequest(params);
@@ -350,8 +351,8 @@ try {
     // present error to the user
 }
 ```
-  </TabItem>
-  <TabItem value="react" label="React Native">
+  </PlatformTabItem>
+  <PlatformTabItem value="react-native" label="React Native">
 ```typescript
 try {
     await web3Wallet.respondSessionRequest(params);
@@ -360,8 +361,8 @@ try {
     // present error to the user
 }
 ```
-  </TabItem>
-  <TabItem value="ios" label="iOS">
+  </PlatformTabItem>
+  <PlatformTabItem value="ios" label="iOS">
 ```swift
 do {
     try await Web3Wallet.instance.respond(requestId: request.id, signature: signature, from: account)
@@ -370,8 +371,8 @@ do {
     // present error to the user
 }
 ```
-  </TabItem>
-  <TabItem value="android" label="Android">
+  </PlatformTabItem>
+  <PlatformTabItem value="android" label="Android">
 ```kotlin
 Web3Wallet.respondSessionRequest(Wallet.Params.SessionRequestResponse,
   onSuccess = {
@@ -381,38 +382,38 @@ Web3Wallet.respondSessionRequest(Wallet.Params.SessionRequestResponse,
       //Error while sending session response - update your UI
   })
 ```
-</TabItem>
-</Tabs>
+</PlatformTabItem>
+</PlatformTabs>
 
 #### Session request expiry
 
 A session request expiry is defined by a dapp. Its value must be between `now() + 5mins` and `now() + 7 days`. After the session request expires, the below event is emitted and session request modal should be removed from the app's UI.
 
-<Tabs>
-  <TabItem value="web" label="Web">
+<PlatformTabs activeOptions={["web","ios","android", "react-native"]}>
+  <PlatformTabItem value="web" label="Web">
 ```typescript
 web3wallet.on("session_request_expire", (event) => {
   // request expired and any modal displaying it should be removed
   const { id } = event;
 });
 ```
-  </TabItem>
-  <TabItem value="react" label="React Native">
+  </PlatformTabItem>
+  <PlatformTabItem value="react-native" label="React Native">
 ```typescript
 web3wallet.on("session_request_expire", (event) => {
   // request expired and any modal displaying it should be removed
   const { id } = event;
 });
 ```
-  </TabItem>
-  <TabItem value="ios" label="iOS">
+  </PlatformTabItem>
+  <PlatformTabItem value="ios" label="iOS">
 ```swift
 Web3Wallet.instance.requestExpirationPublisher.sink { _ in
     // let user know that request has expired
 }.store(in: &publishers)
 ```
-  </TabItem>
-  <TabItem value="android" label="Android">
+  </PlatformTabItem>
+  <PlatformTabItem value="android" label="Android">
 ```kotlin
 val walletDelegate = object : Web3Wallet.WalletDelegate {
   override fun onRequestExpired(request: Wallet.Model.ExpiredRequest) {
@@ -422,8 +423,8 @@ val walletDelegate = object : Web3Wallet.WalletDelegate {
 }
 Web3Wallet.setWalletDelegate(walletDelegate)
 ```
-</TabItem>
-</Tabs>
+</PlatformTabItem>
+</PlatformTabs>
 
 #### Expected errors
 
@@ -440,8 +441,8 @@ While approving or rejecting a session request, the following errors might occur
 
 The Web Socket connection state tracks the connection with the Relay server. An event is emitted whenever a connection state changes.
 
-<Tabs>
-  <TabItem value="web" label="Web">
+<PlatformTabs activeOptions={["web","ios","android", "react-native"]}>
+  <PlatformTabItem value="web" label="Web">
 ```typescript
 core.relayer.on("relayer_connect", () => {
   // connection to the relay server is established
@@ -452,8 +453,8 @@ core.relayer.on("relayer_disconnect", () => {
 })
 
 ````
-  </TabItem>
-  <TabItem value="react" label="React Native">
+  </PlatformTabItem>
+  <PlatformTabItem value="react-native" label="React Native">
 ```typescript
 core.relayer.on("relayer_connect", () => {
   // connection to the relay server is established
@@ -464,8 +465,8 @@ core.relayer.on("relayer_disconnect", () => {
 })
 ````
 
-  </TabItem>
-  <TabItem value="ios" label="iOS">
+  </PlatformTabItem>
+  <PlatformTabItem value="ios" label="iOS">
 ```swift
 Web3Wallet.instance.socketConnectionStatusPublisher
   .receive(on: DispatchQueue.main)
@@ -478,8 +479,8 @@ Web3Wallet.instance.socketConnectionStatusPublisher
   }
 }.store(in: &publishers)
 ```
-  </TabItem>
-  <TabItem value="android" label="Android">
+  </PlatformTabItem>
+  <PlatformTabItem value="android" label="Android">
 ```kotlin
 val walletDelegate = object : Web3Wallet.WalletDelegate {
   override fun onConnectionStateChange(state: Wallet.Model.ConnectionState) {
@@ -489,8 +490,8 @@ val walletDelegate = object : Web3Wallet.WalletDelegate {
 }
 Web3Wallet.setWalletDelegate(walletDelegate)
 ```
-</TabItem>
-</Tabs>
+</PlatformTabItem>
+</PlatformTabs>
 
 #### Connection state messages
 
@@ -556,62 +557,23 @@ When the Dapp needs the user to sign something (like a transaction), a similar p
 
 ### Platform Specific Preparation
 
-<Tabs>
-  <TabItem value="ios" label="iOS">
-In order for Dapps to be able to trigger your wallet for a connection or sign request using deep links you first need to add your custom scheme under [`CFBundleURLTypes`](https://developer.apple.com/documentation/bundleresources/information_property_list/cfbundleurltypes) key in your Info.plist file.
+<PlatformTabs activeOptions={["ios","android", "flutter", "react-native"]}>
+  <PlatformTabItem value="ios" label="iOS">
+  Read the specific steps for iOS here: [Platform preparations](./ios/mobile-linking#platform-preparations)
+  </PlatformTabItem>
 
-```ruby
-<key>CFBundleURLTypes</key>
-<array>
-	<dict>
-		<key>CFBundleTypeRole</key>
-		<string>Editor</string>
-		<key>CFBundleURLName</key>
-		<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
-		<key>CFBundleURLSchemes</key>
-		<array>
-			<string>examplewallet</string> <!-- your custom scheme goes here -->
-		</array>
-	</dict>
-</array>
-```
+  <PlatformTabItem value="android" label="Android">
+  Read the specific steps for Android here: [Platform preparations](./android/mobile-linking#platform-preparations)
+  </PlatformTabItem>
 
-  </TabItem>
-  <TabItem value="android" label="Android">
-In order for Dapps to be able to trigger your wallet for a connection or sign request using deep links you first need to declare an [`<intent-filter>`](https://developer.android.com/training/app-links/deep-linking#adding-filters) in your wallet's Manifest.xml as follows:
+  <PlatformTabItem value="flutter" label="Flutter">
+  Read the specific steps for Flutter here: [Platform preparations](./flutter/mobile-linking#platform-preparations)
+  </PlatformTabItem>
 
-```xml
-<intent-filter>
-    <action android:name="android.intent.action.VIEW" />
-    <category android:name="android.intent.category.DEFAULT" />
-    <category android:name="android.intent.category.BROWSABLE" />
-    <data android:scheme="examplewallet" /> <!-- your own custom scheme -->
-</intent-filter>
-```
-
-  </TabItem>
-  <TabItem value="flutter" label="Flutter">
-Since Flutter leverages on native APIs, you must follow iOS and Android steps for each native platform.
-
-**Additionally**, you would have to set FlutterDeepLinkingEnabled key to true on iOS's Info.plist file.
-
-```xml
-<key>FlutterDeepLinkingEnabled</key>
-<true/>
-```
-
-More information in official documentation: https://docs.flutter.dev/ui/navigation/deep-linking
-
-  </TabItem>
-</Tabs>
-
-### Platform Preparations and Integration
-
-You can find specific integration steps for each platform on Mobile Linking pages for each platform::
-
-- **Android** - [Mobile Linking: Platform preparations](./android/mobile-linking#platform-preparations)
-- **iOS** - [Mobile Linking: Platform preparations](./ios/mobile-linking#platform-preparations)
-- **Flutter** - [Mobile Linking: Platform preparations](./flutter/mobile-linking#platform-preparations)
+  <PlatformTabItem value="react-native" label="React Native">
+  Read the specific steps for React Native here: [Platform preparations](./react-native/mobile-linking#platform-preparations)
+  </PlatformTabItem>
+</PlatformTabs>
 
 ### How to Test
 
@@ -619,27 +581,38 @@ To experience the desired behavior, try our Sample Wallet and Dapps which use ou
 
 Once you have completed your integration, you can test it against our sample apps to see if it is working as expected. Download the app and and try your mobile linking integration on your device.
 
-**Android**
+<PlatformTabs activeOptions={["ios","android", "flutter", "react-native"]}>
+  <PlatformTabItem value="ios" label="iOS">
+  - [Sample Wallet](https://testflight.apple.com/join/09bTAryp) - on TestFlight
+  - [Sample App](https://testflight.apple.com/join/7S1GYcjC) - on TestFlight
+  </PlatformTabItem>
 
-- [Sample Wallet](https://appdistribution.firebase.dev/i/6f9437a5f9bf4eec) - on Firebase
-- [Sample App](https://appdistribution.firebase.dev/i/5e4fe4b30c8a208d) - on Firebase
+  <PlatformTabItem value="android" label="Android">
+  - [Sample Wallet](https://appdistribution.firebase.dev/i/6f9437a5f9bf4eec) - on Firebase
+  - [Sample App](https://appdistribution.firebase.dev/i/5e4fe4b30c8a208d) - on Firebase
+  </PlatformTabItem>
 
-**iOS**
+  <PlatformTabItem value="flutter" label="Flutter">
+  - Sample Wallet:
+    - [Sample Wallet for iOS](https://testflight.apple.com/join/Uv0XoBuD)
+    - [Sample Wallet for Android](https://appdistribution.firebase.dev/i/2b8b3dce9e2831cd)
+  - Sample App:
+    - [Sample App for iOS](https://testflight.apple.com/join/ClqbHc17)
+    - [Sample App for Android](https://appdistribution.firebase.dev/i/a8efff56e3f0fdb0)
+  - AppKit Dapp:
+    - [AppKit Dapp for iOS](https://testflight.apple.com/join/ClqbHc17)
+    - [AppKit Dapp for Android](https://appdistribution.firebase.dev/i/a8efff56e3f0fdb0)
+  </PlatformTabItem>
 
-- [Sample Wallet](https://testflight.apple.com/join/09bTAryp) - on TestFlight
-- [Sample App](https://testflight.apple.com/join/7S1GYcjC) - on TestFlight
+  <PlatformTabItem value="react-native" label="React Native">
+  - Sample Wallet:
+    - [Sample Wallet for Android](https://appdistribution.firebase.dev/i/e7711e780547234e)
+  - Sample App:
+    - [Sample App for iOS](https://testflight.apple.com/join/Ivd8bg7s)
+    - [Sample App for Android](https://appdistribution.firebase.dev/i/0297fbd3de8f1e3f)
+  </PlatformTabItem>
+</PlatformTabs>
 
-**Flutter**
-
-- Sample Wallet:
-  - [Join the Web3Wallet Flutter beta](https://testflight.apple.com/join/Uv0XoBuD)
-  - [appdistribution.firebase.dev](https://appdistribution.firebase.dev/i/2b8b3dce9e2831cd)
-- Sample App:
-  - [Join the Web3Wallet Flutter beta](https://testflight.apple.com/join/ClqbHc17)
-  - [appdistribution.firebase.dev](https://appdistribution.firebase.dev/i/a8efff56e3f0fdb0)
-- Web3Modal Dapp:
-  - [Join the Web3Wallet Flutter beta](https://testflight.apple.com/join/ClqbHc17)
-  - [appdistribution.firebase.dev](https://appdistribution.firebase.dev/i/a8efff56e3f0fdb0)
 
 ## 3. Latency
 
@@ -718,19 +691,25 @@ _A sample error warning when trying to connect to a malicious domain_
 
 Numerous features have been introduced, bugs have been identified and fixed over time, stability has improved, but many dapps and wallets continue to use older SDK versions with known issues, affecting overall reliability.
 
-### Latest versions
+Make sure you are using the latest version of the SDK for your platform
 
-To be sure you get all the latest features and the most stable version, make sure you are using the latest version of the SDK for your platform.
-
-- **iOS**
+<PlatformTabs activeOptions={["ios","android", "flutter", "react-native"]}>
+  <PlatformTabItem value="ios" label="iOS">
   - **WalletConnectSwiftV2**: [Latest release](https://github.com/WalletConnect/WalletConnectSwiftV2/releases/latest/)
-  - **WalletConnectSwiftV2**: [All releases](https://github.com/WalletConnect/WalletConnectSwiftV2/releases) - check the latest features, what's changed, and what's fixed
-- **Android**
+  </PlatformTabItem>
+
+  <PlatformTabItem value="android" label="Android">
   - **WalletConnectKotlinV2**: [Latest release](https://github.com/WalletConnect/WalletConnectKotlinV2/releases/latest)
-  - **WalletConnectKotlinV2**: [All releases](https://github.com/WalletConnect/WalletConnectKotlinV2/releases) - check the latest features, what's changed, and what's fixed
-- **Flutter**
+  </PlatformTabItem>
+
+  <PlatformTabItem value="flutter" label="Flutter">
   - **WalletConnectFlutterV2**: [Latest release](https://github.com/WalletConnect/WalletConnectFlutterV2/releases/latest)
-  - **WalletConnectFlutterV2**: [All releases](https://github.com/WalletConnect/WalletConnectFlutterV2/releases) - check the latest features, what's changed, and what's fixed
+  </PlatformTabItem>
+
+  <PlatformTabItem value="react-native" label="React Native">
+  - **AppKit for React Native**: [Latest release](https://github.com/WalletConnect/web3modal-react-native/releases/latest)
+  </PlatformTabItem>
+</PlatformTabs>
 
 ### Subscribe to updates
 
