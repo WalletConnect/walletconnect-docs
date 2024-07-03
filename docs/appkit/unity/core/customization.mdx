@@ -1,0 +1,79 @@
+# Customization
+
+The AppKit uses Unity's [UI Toolkit](https://docs.unity3d.com/Manual/UIElements.html) system.
+By following this guide,you can customize the AppKit to match your game's style, even if you have minimal or no prior
+knowledge of UI Toolkit.
+
+## Theming
+
+The AppKit relies heavily on [Unity Style Sheet (USS) variables](https://docs.unity3d.com/Manual/UIE-USS-variables.html)
+for easy customization of various UI aspects, such as colors, spacing, border radius, and more.
+
+### Preparation
+
+The first step in theming the AppKit is to create a custom panel settings asset, followed by a custom theme file.
+Then, link them to the AppKit.
+
+1. In Unity Editor, right-click in the Project window and select **Create -> UI Toolkit -> Panel Settings Asset**.
+2. Right-click again in the Project window and select **Create -> UI Toolkit -> TSS Theme File**.
+3. Select the newly created Panel Settings Asset, and in the Inspector window, assign the newly created TSS Theme File
+to the `Theme Style Sheet` field.
+4. In the same Inspector window, set `Reference DPI` to 160. This is the recommended DPI for the AppKit, but feel free
+to adjust it to your needs.
+
+![unity-appkit-custom-theme](/assets/unity-appkit-custom-theme.webp)
+
+5. Open the TSS Theme File with your code editor and change the first line to:
+```css
+@import url("/Packages/com.walletconnect.web3modal/UI Toolkit/WUI Base Theme.tss");
+```
+6. Under `Web3Modal` prefab instance in your scene or prefab find `Modal` child object and assign the
+newly created `Panel Settings Asset` to the `Panel Settings` field of `UI Document` component.
+
+![unity-appkit-panel-settings](/assets/unity-appkit-panel-settings.webp)
+
+Everything is set up, now you can start customizing the AppKit to match your game's style.
+
+### Overriding Variables
+
+To override a variable, simply add it to your TSS Theme File and assign a new value to it.
+The example below changes the accent color to a shade of orange and the modal border color to a shade of gray.
+
+```css
+@import url("/Packages/com.walletconnect.web3modal/UI Toolkit/WUI Base Theme.tss");
+
+* {
+    --wui-color-accent-100: rgb(156, 81, 65);
+
+    --wui-accent-glass-090: rgba(156, 81, 65, 0.9);
+    --wui-accent-glass-080: rgba(156, 81, 65, 0.8);
+    --wui-accent-glass-020: rgba(156, 81, 65, 0.2);
+    --wui-accent-glass-015: rgba(156, 81, 65, 0.15);
+    --wui-accent-glass-010: rgba(156, 81, 65, 0.1);
+    --wui-accent-glass-005: rgba(156, 81, 65, 0.05);
+    --wui-accent-glass-002: rgba(156, 81, 65, 0.02);
+
+    --wui-modal-border-color: #9a9085;
+    --wui-modal-border-width: 3px;
+}
+```
+
+You can find the list of all available variables in the [WUI Base Theme](https://github.com/WalletConnect/Web3ModalUnity/blob/main/Packages/com.walletconnect.web3modal/UI%20Toolkit/WUI%20Base%20Theme.tss)
+file.
+
+:::info
+If you find that a variable is missing, please [open a GitHub issue](https://github.com/WalletConnect/Web3ModalUnity/issues/new?assignees=&labels=feature-request&projects=&template=feature-request.yml&title=%5Bfeature%5D+).
+We will be happy to add it for you.
+:::
+
+### Custom Fonts
+
+To override the default font, you need to add a custom font to your project and reference it in the TSS Theme File.
+```css
+@import url("/Packages/com.walletconnect.web3modal/UI Toolkit/WUI Base Theme.tss");
+
+* {
+    -unity-font-definition: resource("Custom Fonts/Comic Sans SDF Regular");
+}
+```
+

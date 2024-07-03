@@ -833,7 +833,8 @@ module.exports = {
             'appkit/unity/core/usage',
             'appkit/unity/core/options',
             'appkit/unity/core/actions',
-            'appkit/unity/core/events'
+            'appkit/unity/core/events',
+            'appkit/unity/core/customization'
           ]
         },
         {
