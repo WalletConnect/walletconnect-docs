@@ -14,18 +14,28 @@ createWeb3Modal({ projectId, chains, ...options })
 
 You can set a desired chain for the initial connection:
 
-<PlatformTabs groupId="eth-lib" activeOptions={["wagmi1", "ethers", "ethers5"]}>
+<PlatformTabs groupId="eth-lib" activeOptions={["wagmi", "wagmi1", "ethers", "ethers5"]}>
+
+<PlatformTabItem value="wagmi">
+```ts
+import { mainnet } from '@wagmi/core/chains'
+
+createWeb3Modal({
+  //...
+  defaultChain: mainnet
+})
+```
+</PlatformTabItem>
 
 <PlatformTabItem value="wagmi1">
 ```ts
-  import { mainnet } from 'viem/chains'
+import { mainnet } from 'viem/chains'
 
 createWeb3Modal({
-//...
-defaultChain: mainnet
+  //...
+  defaultChain: mainnet
 })
-
-````
+```
 </PlatformTabItem>
 
 <PlatformTabItem value="ethers">
@@ -42,7 +52,7 @@ createWeb3Modal({
   //...
   defaultChain: mainnet
 })
-````
+```
 
 </PlatformTabItem>
 
@@ -57,11 +67,10 @@ const mainnet = {
 };
 
 createWeb3Modal({
-//...
-defaultChain: mainnet
+  //...
+  defaultChain: mainnet
 })
-
-````
+```
 </PlatformTabItem>
 
 </PlatformTabs>
@@ -81,7 +90,7 @@ createWeb3Modal({
     }
   }
 })
-````
+```
 
 ## tokens
 

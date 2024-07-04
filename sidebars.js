@@ -217,7 +217,7 @@ module.exports = {
                 { type: 'doc', label: 'Solana', id: 'appkit/features/solana' }
               ]
             },
-            'appkit/upgrade',
+            'appkit/upgrade'
           ]
         },
         {
@@ -238,7 +238,8 @@ module.exports = {
                 { type: 'doc', label: 'Notifications', id: 'walletkit/features/notifications' },
                 { type: 'doc', label: 'Verify', id: 'walletkit/features/verify' }
               ]
-            }
+            },
+            'walletkit/best-practices'
           ]
         }
       ]
