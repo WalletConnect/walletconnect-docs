@@ -81,19 +81,6 @@ const advanced = {
     },
     {
       type: 'category',
-      label: 'WalletConnectModal',
-      collapsed: true,
-      collapsible: true,
-      items: [
-        'advanced/walletconnectmodal/about',
-        'advanced/walletconnectmodal/usage',
-        'advanced/walletconnectmodal/options',
-        'advanced/walletconnectmodal/theming',
-        'advanced/walletconnectmodal/resources'
-      ]
-    },
-    {
-      type: 'category',
       label: 'APIs',
       collapsed: true,
       collapsible: true,
