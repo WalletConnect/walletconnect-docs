@@ -143,6 +143,9 @@ A dapp would call `examplewallet://wc?uri={pairingUri}` from their side when the
 **Redirecting back to dapp (proposer) after session approval:**
 
 ```dart
+// subscribe to onSessionProposal with a handler
+_web3Wallet!.onSessionProposal.subscribe(_onSessionProposal);
+//
 void _onSessionProposal(SessionProposalEvent? event) async {
   if (event != null) {
     // Process session proposal
@@ -154,6 +157,8 @@ void _onSessionProposal(SessionProposalEvent? event) async {
 }
 
 // If your wallet supports One-Click Auth
+_web3Wallet!.onSessionAuthRequest.subscribe(_onSessionAuthRequest);
+//
 void _onSessionAuthRequest(SessionAuthRequest? event) async {
   if (event != null) {
     // Process session authentication
