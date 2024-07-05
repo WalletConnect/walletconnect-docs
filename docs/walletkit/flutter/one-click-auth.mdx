@@ -1,0 +1,149 @@
+import ThemedImage from '@theme/ThemedImage'
+import useBaseUrl from '@docusaurus/useBaseUrl'
+import Button from '../../components/button'
+
+# One-click Auth
+
+## Introduction
+
+This section outlines an innovative protocol method that facilitates the initiation of a Sign session and the authentication of a wallet through a [Sign-In with Ethereum](https://eips.ethereum.org/EIPS/eip-4361) (SIWE) message, enhanced by [ReCaps](https://eips.ethereum.org/EIPS/eip-5573) (ReCap Capabilities).
+
+This enhancement not only offers immediate authentication for dApps, paving the way for prompt user logins, but also integrates informed consent for authorization. Through this mechanism, dApps can request the delegation of specific capabilities to perform actions on behalf of the wallet user. These capabilities, encapsulated within SIWE messages as ReCap URIs, detail the scope of actions authorized by the user in an explicit and human-readable form.
+
+By incorporating ReCaps, this method extends the utility of SIWE messages, allowing dApps to combine authentication with a nuanced authorization model. This model specifies the actions a dApp is authorized to execute on the user's behalf, enhancing security and user autonomy by providing clear consent for each delegated capability. As a result, dApps can utilize these consent-backed messages to perform predetermined actions, significantly enriching the interaction between dApps, wallets, and users within the Ethereum ecosystem.
+
+<ThemedImage
+  alt="Mobile Linking Connect Flow"
+  sources={{
+    light: useBaseUrl('/img/w3w/authenticatedSessions-light.png'),
+    dark: useBaseUrl('/img/w3w/authenticatedSessions-dark.png')
+  }}
+/>
+
+## Handling Authentication Requests
+
+To handle incoming authentication requests, subscribe to the `onSessionAuthRequest` event. This will notify you of any authentication requests that need to be processed, allowing you to either approve or reject them based on your application logic.
+
+```dart
+// subscribe to onSessionAuthRequest with a handler
+_web3Wallet!.onSessionAuthRequest.subscribe(_onSessionAuthRequest);
+//
+void _onSessionAuthRequest(SessionAuthRequest? args) {
+  if (args != null) {
+    // Process the authentication request here.
+    // Steps include:
+    // 1. Populate the authentication payload with the supported chains and methods
+    // 2. Format the authentication message using the payload and the user's account
+    // 3. Present the authentication message to the user
+    // 4. Sign the authentication message(s) to create a verifiable authentication object(s)
+    // 5. Approve the authentication request with the authentication object(s)
+  }
+}
+```
+
+## Authentication Objects/Payloads
+
+```dart
+final supportedChains = ['eip155:1', 'eip155:10', 'eip155:137'];
+final supportedMethods = ['personal_sign', 'eth_sendTransaction'];
+final SessionAuthPayload authPayload = AuthSignature.populateAuthPayload(
+  authPayload: args.authPayload,
+  chains: supportedChains,
+  methods: supportedMethods,
+);
+final cacaoRequestPayload = CacaoRequestPayload.fromSessionAuthPayload(
+  newAuthPayload,
+);
+
+// Prepare the user's address in CAIP10(https://github.com/ChainAgnostic/CAIPs/blob/main/CAIPs/caip-10.md) format
+final iss = 'eip155:1:0x59e2f66C0E96803206B6486cDb39029abAE834c0';
+// Now you can use the authPayload to format the authentication message
+final message = _web3Wallet!.formatAuthMessage(
+  iss: iss,
+  cacaoPayload: cacaoRequestPayload,
+);
+
+// Present the authentication message to the user
+...
+```
+
+## Approving Authentication Requests
+
+:::info Note
+
+1. The recommended approach for secure authentication across multiple chains involves signing a SIWE (Sign-In with Ethereum) message for each chain and account. However, at a minimum, one SIWE message must be signed to establish a session. It is possible to create a session for multiple chains with just one issued authentication object.
+2. Sometimes a dapp may want to only authenticate the user without creating a session, not every approval will result with a new session.
+
+:::
+
+```dart
+// Approach 1
+// Sign the authentication message(s) to create a verifiable authentication object(s)
+final credentials = EthPrivateKey.fromHex('$privateKey');
+final signature = credentials.signPersonalMessageToUint8List(
+  Uint8List.fromList(message.codeUnits),
+);
+final hexSignature = bytesToHex(signature, include0x: true);
+// Build the authentication object(s)
+final cacao = AuthSignature.buildAuthObject(
+  requestPayload: cacaoRequestPayload,
+  signature: CacaoSignature(
+    t: CacaoSignature.EIP191,
+    s: hexSignature,
+  ),
+  iss: iss,
+);
+
+// Approve
+await _web3Wallet!.approveSessionAuthenticate(
+  id: args.id,
+  auths: [cacao],
+);
+
+// Approach 2
+// Note that you can also sign multiple messages for every requested chain/address pair
+final List<Cacao> cacaos = [];
+for (var chain in newAuthPayload.chains) {
+  final message = _web3Wallet!.formatAuthMessage(
+    iss: iss,
+    cacaoPayload: cacaoRequestPayload,
+  );
+  final credentials = EthPrivateKey.fromHex('$privateKey');
+  final signature = credentials.signPersonalMessageToUint8List(
+    Uint8List.fromList(message.codeUnits),
+  );
+  final hexSignature = bytesToHex(signature, include0x: true);
+  final cacao = AuthSignature.buildAuthObject(
+    requestPayload: cacaoRequestPayload,
+    signature: CacaoSignature(
+      t: CacaoSignature.EIP191,
+      s: hexSignature,
+    ),
+    iss: iss,
+  );
+  cacaos.add(cacao)
+}
+
+// Approve
+await _web3Wallet!.approveSessionAuthenticate(
+  id: args.id,
+  auths: cacaos,
+);
+```
+
+## Rejecting Authentication Requests
+
+If the authentication request cannot be approved or if the user chooses to reject it, use the rejectSession method.
+
+```dart
+await _web3Wallet!.rejectSessionAuthenticate(
+  id: args.id,
+  reason: Errors.getSdkError(Errors.USER_REJECTED_AUTH),
+);
+```
+
+## Testing One-click Auth
+
+You can use [Web3Modal Labs](https://lab.web3modal.com/library/ethers-siwe/) to test and verify that your wallet supports One-click Auth properly.
+
+<Button name="Test One-click Auth" url="https://lab.web3modal.com/library/ethers-siwe/" />

@@ -78,6 +78,8 @@ When the Dapp needs the user to sign something (like a transaction), a similar p
 
 In order for Dapps to be able to trigger your wallet for a connection or sign request using deep links you first need to add your custom scheme under [`CFBundleURLTypes`](https://developer.apple.com/documentation/bundleresources/information_property_list/cfbundleurltypes) key in your Info.plist file.
 
+For instance, if your Wallet's name is Example Wallet, your custom scheme would be more likely as `examplewallet://`, therefor you will add the following in your iOS's Info.plist file:
+
 ```ruby
 <key>CFBundleURLTypes</key>
 <array>
@@ -97,6 +99,8 @@ In order for Dapps to be able to trigger your wallet for a connection or sign re
 </PlatformTabItem>
 <PlatformTabItem value="android">
 In order for Dapps to be able to trigger your wallet for a connection or sign request using deep links you first need to declare an [`<intent-filter>`](https://developer.android.com/training/app-links/deep-linking#adding-filters) in your wallet's Manifest.xml as follows:
+
+For instance, if your Wallet's name is Example Wallet, your custom scheme would be more likely as `examplewallet://`, therefor you will add the following intent filter in your Android's Manifest.xml file:
 
 ```xml
 <intent-filter>
@@ -132,20 +136,59 @@ Dapps developers must do the same for their own custom schemes if they want the 
 
 ## Integration
 
-Either you are approving a session proposal or responding to a session request, redirecting back to the Dapp is as simply as launching requester's `redirect` object in `PairingMetadata`:
+Either you are approving a session proposal or responding to a session request, redirecting back to the Dapp is as simply as launching requester's `redirect` object in `PairingMetadata`, the same way as Dapps would call your wallet's `redirect` object on their side:
 
-For session approval:
+A dapp would call `examplewallet://wc?uri={pairingUri}` from their side when they request to connect with your wallet, and given the fact that `examplewallet` is your registered custom scheme then your wallet will be opened.
 
-```dart
-// Where event is a SessionProposalEvent
-final scheme = event.params.proposer.metadata.redirect?.native ?? '';
-launchUrlString(scheme, mode: LaunchMode.externalApplication);
-```
-
-For session requests:
+**Redirecting back to dapp (proposer) after session approval:**
 
 ```dart
-final session = web3Wallet.sessions.get(topic);
-final scheme = session?.peer.metadata.redirect?.native ?? '';
-launchUrlString(scheme, mode: LaunchMode.externalApplication);
+// subscribe to onSessionProposal with a handler
+_web3Wallet!.onSessionProposal.subscribe(_onSessionProposal);
+//
+void _onSessionProposal(SessionProposalEvent? event) async {
+  if (event != null) {
+    // Process session proposal
+    // ....
+    // Redirect back to proposer dapp
+    final scheme = event.params.proposer.metadata.redirect?.native ?? '';
+    launchUrlString(scheme, mode: LaunchMode.externalApplication);
+  }
+}
+
+// If your wallet supports One-Click Auth
+_web3Wallet!.onSessionAuthRequest.subscribe(_onSessionAuthRequest);
+//
+void _onSessionAuthRequest(SessionAuthRequest? event) async {
+  if (event != null) {
+    // Process session authentication
+    // ....
+    // Redirect back to requester dapp
+    final scheme = event.requester.metadata.redirect?.native ?? '';
+    launchUrlString(scheme, mode: LaunchMode.externalApplication);
+  }
+}
 ```
+
+A dapp would call `examplewallet://` (or even better `session.peer?.metadata.redirect?.native` object) from their side when they request to sign a transaction, and given the fact that `session.peer?.metadata.redirect?.native` contains your registered custom scheme (`examplewallet://`) then your wallet will be opened.
+
+**Redirecting back to dapp (proposer) after responding to a sign request:**
+
+```dart
+// Your registered request handler for the given requested method will be triggered
+Future<void> personalSignRequestHandler(String topic, dynamic parameters) async {
+  // Process signing requests
+  // ...
+  // With the given topic with retrieve the current session data
+  final session = web3Wallet.sessions.get(topic);
+  // And we get the peer metadata to trigger dapp's redirect value
+  final scheme = session?.peer.metadata.redirect?.native ?? '';
+  launchUrlString(scheme, mode: LaunchMode.externalApplication);
+}
+```
+
+:::note
+
+`launchUrlString()` from [url_launcher](https://pub.dev/packages/url_launcher) oficial package was used as an example to explain the mechanism, you can choose whatever other package you would like.
+
+:::
