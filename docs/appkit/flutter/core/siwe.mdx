@@ -105,10 +105,15 @@ final _siweConfig = SIWEConfig(
 ```
 
 ## Initialize Web3Modal with your `siweConfig`
-Add the siwe configuration in `createWeb3Modal` initialization
+Add the siwe configuration in `W3MService` initialization
+
+:::info note
+If `siweConfig:` is used then `W3MService` object will require a `BuildContext context` parameter to be passed.
+:::
 
 ```dart
 final _w3mService = W3MService(
+  context: context,
   projectId: '{YOUR_PROJECT_ID}',
   metadata: const PairingMetadata(
     ...
