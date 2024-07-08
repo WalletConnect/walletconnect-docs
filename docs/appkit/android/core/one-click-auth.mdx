@@ -2,9 +2,11 @@
 title: One-Click Auth / SIWE
 ---
 
-AppKit provides a simple solution for integrating with "Sign In With Ethereum" (SIWE), a form of authentication that enables users to control their digital identity with their Ethereum account. SIWE is a standard also known as EIP-4361.
+# Sign In With Ethereum
 
-### One-Click Auth
+AppKit provides a simple solution for integrating with "Sign In With Ethereum" (SIWE), a form of authentication that enables users to control their digital identity with their Ethereum account. SIWE is a standard also known as [EIP-4361](https://docs.login.xyz/general-information/siwe-overview/eip-4361).
+
+## One-Click Auth
 
 One-Click Auth represents a key advancement within WalletConnect v2, streamlining the user authentication process in AppKit by enabling them to seamlessly connect with a wallet and sign a SIWE message with just one click.
 Connecting a wallet, proving control of an address with an off-chain signature, authorizing specific actions. These are the kinds of authorizations that can be encoded as "ReCaps". ReCaps are permissions for a specific website or dapp that can be compactly encoded as a long string in the message you sign and translated by any wallet into a straight-forward one-sentence summary. WalletConnect uses permissions expressed as ReCaps to enable a One-Click Authentication.
@@ -13,7 +15,7 @@ Connecting a wallet, proving control of an address with an off-chain signature, 
 
 To integrate SIWE with AppKit, you need to configure your Web3Modal client using `Modal.Model.AuthPayloadParams`, which are required to create a SIWE message for the user to sign:
 
-``kotlin
+```kotlin
  Web3Modal.setAuthRequestParams(authPayloadParams)
 ```
 
@@ -53,7 +55,7 @@ fun onSessionAuthenticateResponse(response: Modal.Model.SessionAuthenticateRespo
 
 Fallback to SIWE Over Session Request
 
-If the wallet connecting to your dapp does not support 1-Click Auth, the SDK will fallback to the wc_sessionPropose method and create a session with the wallet. Web3Modal will then inform the user that they need to sign a message to prove address ownership. Web3Modal will send a SIWE request to the wallet, and once the wallet responds with a signed message, use onSIWEAuthenticationResponse callback to check the result:
+If the wallet connecting to your dapp does not support One-Click Auth, the SDK will fallback to the `wc_sessionPropose` method and create a session with the wallet. AppKit will then inform the user that they need to sign a message to prove address ownership. AppKit will send a SIWE request to the wallet, and once the wallet responds with a signed message, use `onSIWEAuthenticationResponse` callback to check the result:
 
 ```kotlin
  override fun onSIWEAuthenticationResponse(response: Modal.Model.SIWEAuthenticateResponse) {
@@ -117,4 +119,4 @@ For more information on how to configure app links for your app, refer to the [A
 
 For enabling links to app content check [this](https://developer.android.com/training/app-links/deep-linking) documentation page. 
 
-For more information on how to interact with other apps using intents, see [Adnroid Intetn Documentation](https://developer.android.com/training/basics/intents)
+For more information on how to interact with other apps using intents, see [Android Intent Documentation](https://developer.android.com/training/basics/intents)
