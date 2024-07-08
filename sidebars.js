@@ -714,6 +714,7 @@ module.exports = {
           items: [
             'appkit/flutter/core/installation',
             'appkit/flutter/core/usage',
+            'appkit/flutter/core/siwe',
             'appkit/flutter/core/options',
             'appkit/flutter/core/actions',
             'appkit/flutter/core/events',
@@ -967,6 +968,7 @@ module.exports = {
       items: [
         'walletkit/flutter/installation',
         'walletkit/flutter/usage',
+        'walletkit/flutter/one-click-auth',
         'walletkit/flutter/mobile-linking',
         'walletkit/flutter/verify',
         'walletkit/flutter/eip5792',
