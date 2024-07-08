@@ -81,13 +81,11 @@ Before using any of the WalletConnect Kotlin SDKs, it is necessary to initialize
 
 ```kotlin
 val projectId = "" //Get Project ID at https://cloud.walletconnect.com/
-val relayUrl = "relay.walletconnect.com"
-val serverUrl = "wss://$relayUrl?projectId=${projectId}"
 val connectionType = ConnectionType.AUTOMATIC or ConnectionType.MANUAL
 val application = //Android Application level class
 [Optional] val optionalRelay: RelayConnectionInterface? = /*implement interface*/
 
-CoreClient.initialize(relayServerUrl = serverUrl, connectionType = connectionType, application = application, relay = optionalRelay)
+CoreClient.initialize(projectId = projectId, connectionType = connectionType, application = application, relay = optionalRelay)
 ```
 
 #### Using your own Relay instance
@@ -98,7 +96,7 @@ The CoreClient offers the ability to use a custom Relay client. Just creating an
 ...
 val optionalRelay: RelayConnectionInterface = /*implement interface*/
 
-CoreClient.initialize(relayServerUrl = serverUrl, connectionType = connectionType, application = application, relay = optionalRelay)
+CoreClient.initialize(projectId = projectId, connectionType = connectionType, application = application, relay = optionalRelay)
 ```
 
 </PlatformTabItem>
