@@ -53,7 +53,7 @@ fun onSessionAuthenticateResponse(response: Modal.Model.SessionAuthenticateRespo
 
 Fallback to SIWE Over Session Request
 
-If the wallet connecting to your dapp does not support 1-Click Auth, the SDK will fallback to the wc_sessionPropose method and create a session with the wallet. Web3Modal will then inform the user that they need to sign a message to prove address ownership. Web3Modal will send a SIWE request to the wallet, and once the wallet responds with a signed message, use onSIWEAuthenticationResponse callback to check the result:
+If the wallet connecting to your dapp does not support One-Click Auth, the SDK will fallback to the `wc_sessionPropose` method and create a session with the wallet. AppKit will then inform the user that they need to sign a message to prove address ownership. AppKit will send a SIWE request to the wallet, and once the wallet responds with a signed message, use `onSIWEAuthenticationResponse` callback to check the result:
 
 ```kotlin
  override fun onSIWEAuthenticationResponse(response: Modal.Model.SIWEAuthenticateResponse) {
