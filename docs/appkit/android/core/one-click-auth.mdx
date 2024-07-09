@@ -109,9 +109,7 @@ Ensure that your App Link is properly configured in your app's Manifest file wit
     <category android:name="android.intent.category.DEFAULT" />
     <category android:name="android.intent.category.BROWSABLE" />
 
-    <data
-        android:host="your_host"
-        android:scheme="https">
+    <data android:scheme="https" android:host="your_host" />
 </intent-filter>
 ```
 
