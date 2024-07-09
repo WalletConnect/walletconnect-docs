@@ -53,7 +53,7 @@ fun onSessionAuthenticateResponse(response: Modal.Model.SessionAuthenticateRespo
 }
 ```
 
-Fallback to SIWE Over Session Request
+### Fallback to SIWE Over Session Request
 
 If the wallet connecting to your dapp does not support One-Click Auth, the SDK will fallback to the `wc_sessionPropose` method and create a session with the wallet. AppKit will then inform the user that they need to sign a message to prove address ownership. AppKit will send a SIWE request to the wallet, and once the wallet responds with a signed message, use `onSIWEAuthenticationResponse` callback to check the result:
 
@@ -69,7 +69,7 @@ If the wallet connecting to your dapp does not support One-Click Auth, the SDK w
 
 ### Link Mode
 
-The latest release of AppKit supports link mode, a low latency mechanism for transporting 1-click auth requests and session requests over universal links, eliminating the need for a WebSocket connection with the Relay. This significantly enhances the user experience when connecting native dApps to native wallets by reducing the latency associated with networking connections, especially when the user has an unstable internet connection.
+The latest release of AppKit supports link mode, a low latency mechanism for transporting 1-click auth requests and session requests over universal links, reducing the need for a WebSocket connection with the Relay. This significantly enhances the user experience when connecting native dApps to native wallets by reducing the latency associated with networking connections, especially when the user has an unstable internet connection.
 
 To support link mode, configure your AppMetaData `appLink` with a valid universal link and set the `linkMode` property to `true`:
 
