@@ -81,19 +81,6 @@ const advanced = {
     },
     {
       type: 'category',
-      label: 'WalletConnectModal',
-      collapsed: true,
-      collapsible: true,
-      items: [
-        'advanced/walletconnectmodal/about',
-        'advanced/walletconnectmodal/usage',
-        'advanced/walletconnectmodal/options',
-        'advanced/walletconnectmodal/theming',
-        'advanced/walletconnectmodal/resources'
-      ]
-    },
-    {
-      type: 'category',
       label: 'APIs',
       collapsed: true,
       collapsible: true,
@@ -163,6 +150,32 @@ const welcome = {
 /** @type {import('@docusaurus/plugin-content-docs').SidebarsConfig} */
 
 module.exports = {
+  WCM:[
+    {
+      type: 'doc',
+      label: 'Home',
+      className: 'kill',
+      id: 'readme'
+    },
+    {
+      type: 'link',
+      label: 'Welcome',
+      href: '/'
+    },
+    {
+      type: 'category',
+      label: 'WalletConnectModal',
+      collapsible: false,
+      className: 'menu_outer_list',
+      items: [
+        'advanced/walletconnectmodal/about',
+        'advanced/walletconnectmodal/usage',
+        'advanced/walletconnectmodal/options',
+        'advanced/walletconnectmodal/theming',
+        'advanced/walletconnectmodal/resources'
+      ]
+    },
+  ],
   mainSidebar: [
     {
       type: 'doc',
