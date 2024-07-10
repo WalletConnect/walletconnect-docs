@@ -225,7 +225,7 @@ module.exports = {
                 { type: 'doc', label: 'Email & Socials', id: 'appkit/features/socials' },
                 { type: 'doc', label: 'Smart Accounts', id: 'appkit/features/smart-accounts' },
                 { type: 'doc', label: 'One-Click Auth', id: 'appkit/features/one-click-auth' },
-                { type: 'doc', label: 'Onramp', id: 'appkit/features/onramp' },
+                { type: 'doc', label: 'On-Ramp', id: 'appkit/features/onramp' },
                 { type: 'doc', label: 'Notifications', id: 'appkit/features/notifications' },
                 { type: 'doc', label: 'Solana', id: 'appkit/features/solana' }
               ]
