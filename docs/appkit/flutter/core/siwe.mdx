@@ -23,7 +23,7 @@ In order for SIWE to work, you need to have a backend to communicate with. This 
 More info [here](https://docs.login.xyz/sign-in-with-ethereum/quickstart-guide/implement-the-backend)
 
 :::caution
-This feature is currently in beta. To get it, change your dependency to use `web3modal_flutter: ^3.3.0-beta04`
+This feature is currently in beta. To get it, change your dependency to use `web3modal_flutter: ^3.3.0-beta06`
 :::
 
 ## Configure your SIWEConfig object
@@ -49,9 +49,9 @@ final _siweConfig = SIWEConfig(
   },
   createMessage: (SIWECreateMessageArgs args) {
     // Method for generating an EIP-4361-compatible message.
-    // You can use our provided formatMessage() method of implement your own
+    // You can use our provided formatMessage() method or implement your own
 
-    return _w3mService.formatMessage(args);
+    return AuthSignature.formatMessage(args);
   },
   verifyMessage: (SIWEVerifyMessageArgs args) async {
     // This function ensures the message is valid,
@@ -172,6 +172,22 @@ class SIWEConfig {
 
 ## Exported functions
 
+### `generateNonce`
+
+Simple method to generate a timestamp-based nonce
+
+```dart
+AuthSignature.generateNonce();
+```
+
+### `formatMessage`
+
+Creates [EIP-4361](https://docs.login.xyz/general-information/siwe-overview/eip-4361#informal-message-template) message based on input arguments.
+
+```dart
+AuthSignature.formatMessage(args);
+```
+
 ### `verifySignature`
 
 Verify a SIWE signature. Internally it calls your backend verification method.
@@ -191,7 +207,7 @@ await AuthSignature.verifySignature(
 Get the chain ID from the SIWE message.
 
 ```dart
-final chainId = AuthSignature.getChainIdFromMessage(args.message);
+AuthSignature.getChainIdFromMessage(message);
 ```
 
 ### `getAddressFromMessage`
@@ -199,5 +215,5 @@ final chainId = AuthSignature.getChainIdFromMessage(args.message);
 Get the address from the SIWE message.
 
 ```dart
-final address = AuthSignature.getAddressFromMessage(args.message);
+AuthSignature.getAddressFromMessage(message);
 ```
