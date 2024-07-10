@@ -8,6 +8,11 @@ _w3mService.onModalConnect.subscribe((ModalConnect? event) {});
 ```
 
 ```dart
+// Used when SIWEConfig is enabled will be called when SIWE login finishes
+_w3mService.onModalUpdate.subscribe((ModalConnect? event) {});
+```
+
+```dart
 // A connection is deleted (disconnected)
 _w3mService.onModalDisconnect.subscribe((ModalDisconnect? event) {});
 ```
@@ -15,6 +20,11 @@ _w3mService.onModalDisconnect.subscribe((ModalDisconnect? event) {});
 ```dart
 // An error occurs during connection
 _w3mService.onModalError.subscribe((ModalError? event) {});
+```
+
+```dart
+// User selectes a different network in the dapp
+_w3mService.onModalNetworkChange.subscribe((ModalNetworkChange? event) {});
 ```
 
 ---

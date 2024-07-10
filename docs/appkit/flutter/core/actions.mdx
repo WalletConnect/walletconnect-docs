@@ -51,6 +51,20 @@ _w3mService.getApprovedEvents();
 
 ### Interact with Smart Contracts
 
+#### Read function:
+
+```dart
+Future<List<dynamic>> requestReadContract({
+  required DeployedContract deployedContract,
+  required String functionName,
+  required String rpcUrl,
+  EthereumAddress? sender,
+  List<dynamic> parameters = const [],
+});
+```
+
+#### Usage:
+
 1. Create a DeployedContract object
 
 ```dart
@@ -89,7 +103,37 @@ Future<void> getTotalSupply() async {
 }
 ```
 
-3. Write to it by calling a write function
+#### Write function:
+
+```dart
+Future<dynamic> requestWriteContract({
+  required String topic,
+  required String chainId,
+  required String rpcUrl,
+  required DeployedContract deployedContract,
+  required String functionName,
+  required Transaction transaction,
+  String? method,
+  List<dynamic> parameters = const [],
+});
+```
+
+#### Usage:
+
+1. Create a DeployedContract object (same as before)
+
+```dart
+// Create DeployedContract object using contract's ABI and address
+final deployedContract = DeployedContract(
+  ContractAbi.fromJson(
+    jsonEncode([{.....}]), // ABI object
+    'TokenName',
+  ),
+  EthereumAddress.fromHex('0xaddress.......'), // Contract address
+);
+```
+
+2. Write to it by calling a write function
 
 ```dart
 Future<void> transferToken() async {
