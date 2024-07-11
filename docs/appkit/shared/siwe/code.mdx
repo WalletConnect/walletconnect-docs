@@ -78,6 +78,15 @@ const siweConfig = createSIWEConfig({
 
 
 ## Server Side 
+Setting up a backend server using Express for a web application that interacts with the Siwe protocol.
+
+### Routes:
+
++ GET '/nonce': Generates and returns a nonce (single-use random number).
++ POST '/verify': Uses the Siwe protocol to verify the message, requiring a signature (the one you are going to approve throw the UX) and a nonce stored in the session.
++ GET '/session': Retrieves the stored Siwe object from the session.
++ GET '/signout': Clears the session.
+
 ```ts
 import cors from 'cors';
 import express from 'express';
