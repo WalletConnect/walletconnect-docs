@@ -65,7 +65,7 @@ const siweConfig = createSIWEConfig({
         getMessageParams: async () => ({
               domain: window.location.host,
               uri: window.location.origin, 
-              [1, 2020], // chains
+              chains: [1, 2020],
               statement: 'Please sign with your account',
             }),
         createMessage: ({ address, ...args }: SIWECreateMessageArgs) => formatMessage(args, address),
