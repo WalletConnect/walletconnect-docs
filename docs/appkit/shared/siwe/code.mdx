@@ -6,58 +6,148 @@ import TabItem from '@theme/TabItem'
 
 ```ts
 import { SiweMessage } from 'siwe'
-import { createSIWEConfig } from '@web3modal/siwe'
-import type { SIWECreateMessageArgs, SIWEVerifyMessageArgs, formatMessage } from '@web3modal/siwe'
+import {
+    type SIWESession,
+    type SIWEVerifyMessageArgs,
+    type SIWECreateMessageArgs,
+    createSIWEConfig,
+    formatMessage,
+  } from '@web3modal/siwe'
 
-function getMessageParams(){
-  return {
-    domain: window.location.host,
-    uri: window.location.origin,
-    chains: [1, 2020],
-    statement: 'Please sign with your account'
-  }
-}
+const BASE_URL = 'http://localhost:8080';
 
 /* Function that returns the user's session - this should come from your SIWE backend */
 async function getSession(){
-  //...
+   const res = await fetch(BASE_URL + "/session", {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    credentials: 'include',
+  });
+  if (!res.ok) {
+      throw new Error('Network response was not ok');
+  }
+  
+  const data = await res.json();
+  return data == "{}" ?  null : data as SIWESession;
 }
 
 /* Use your SIWE server to verify if the message and the signature are valid */
-async function verifyMessage({ message, signature }: SIWEVerifyMessageArgs){
-  //...
-},
+ const verifyMessage = async ({ message, signature }: SIWEVerifyMessageArgs) => {
+    try {
+        const response = await fetch(BASE_URL + "/verify", {
+            method: "POST",
+            headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json',
+            },
+            mode: 'cors',
+            body: JSON.stringify({ message, signature }),
+            credentials: 'include'
+        });
+
+        if (!response.ok) {
+            return false;
+        }
+        
+        const result = await response.json();
+        return result === true;
+      } catch (error) {
+        return false;
+      }
+}
+
+// Check the full example for singout and getNonce functions ... 
 
 /* Create a SIWE configuration object */
 const siweConfig = createSIWEConfig({
-  getMessageParams,
-  createMessage: ({ address, ...args }: SIWECreateMessageArgs) => formatMessage(args, address),
-  getNonce,
-  getSession,
-  verifyMessage,
-  signOut
-})
+        getMessageParams: async () => ({
+              domain: window.location.host,
+              uri: window.location.origin, 
+              chains: [1, 2020],
+              statement: 'Please sign with your account',
+            }),
+        createMessage: ({ address, ...args }: SIWECreateMessageArgs) => formatMessage(args, address),
+        getNonce,
+        getSession,
+        verifyMessage,
+        signOut,
+    })
 ```
 
-### `getChainIdFromMessage`
 
-Get the chain ID from the SIWE message.
+## Server Side 
+Setting up a backend server using Express for a web application that interacts with the Siwe protocol.
+
+### Routes:
+
++ GET '/nonce': Generates and returns a nonce (single-use random number).
++ POST '/verify': Uses the Siwe protocol to verify the message, requiring a signature (the one you are going to approve throw the UX) and a nonce stored in the session.
++ GET '/session': Retrieves the stored Siwe object from the session.
++ GET '/signout': Clears the session.
 
 ```ts
-import { getChainIdFromMessage } from '@web3modal/siwe'
+import cors from 'cors';
+import express from 'express';
+import Session from 'express-session';
+import { generateNonce,  SiweMessage } from 'siwe';
 
-const chainId = getChainIdFromMessage(message)
+const app = express();
+
+// configure cors and sessions
+app.use(cors({
+  origin: 'http://localhost:5173', // frontend URL
+  credentials: true,
+}))
+app.use(express.json())
+app.use(Session({
+  name: 'siwe-quickstart',
+  secret: "siwe-quickstart-secret",
+  resave: true,
+  saveUninitialized: true,
+  cookie: { secure: false, sameSite: true }
+}));
+
+app.get('/nonce', function (_, res) {
+    res.setHeader('Content-Type', 'text/plain');
+    console.log("/nonce");
+    res.send(generateNonce());
+});
+
+// verify the message
+app.post('/verify', async (req, res) => {
+    try {
+      if (!req.body.message) {
+        return res.status(400).json({ error: 'SiweMessage is undefined' });
+      }
+      let SIWEObject = new SiweMessage(req.body.message);
+      const { data: message } = await SIWEObject.verify({ signature: req.body.signature, nonce: req.session.nonce });
+      
+      const address = message.address;
+      const chainId = message.chainId;
+      
+      // save the session with the address and chainId (SIWESession)
+      req.session.siwe = { address, chainId };
+      req.session.save(() => res.status(200).send(true));
+    } catch (e) {
+      // clean the session
+      req.session.siwe = null;
+      req.session.nonce = null;
+      req.session.save(() => res.status(500).json({ message: e.message }));
+    }
+  });
+
+  /// ... check the github repository for the others endpoints
+
+  // get the session
+  app.get('/session', (req, res) => {
+    res.setHeader('Content-Type', 'application/json');
+    res.send(req.session.siwe);
+  });  
 ```
 
-### `getAddressFromMessage`
-
-Get the address from the SIWE message.
-
-```ts
-import { getAddressFromMessage } from '@web3modal/siwe'
-
-const address = getAddressFromMessage(message)
-```
+Check the github full example to see the full flow working: [siwe-quickstart](https://github.com/WalletConnect/web-examples/tree/main/dapps/appkit-siwe/react/)
 
 ### `verifySignature`
 
