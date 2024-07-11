@@ -71,7 +71,7 @@ When the Dapp needs the user to sign something (like a transaction), a similar p
 
 ## Platform preparations
 
-In order for Dapps to be able to trigger your wallet for a connection or sign request using deep links you first need to declare an [`<intent-filter>`](https://developer.android.com/training/app-links/deep-linking#adding-filters) in your wallet's Manifest.xml as follows:
+In order for Dapps to be able to trigger your wallet for a connection or sign request using deep links you first need to add your own wallet to the Explorer by login to your [WalletConnect Cloud](https://cloud.walletconnect.com/sign-in) account, declare a deep link and define an [`<intent-filter>`](https://developer.android.com/training/app-links/deep-linking#adding-filters) in your wallet's Manifest.xml with the same deep link added in Explorer:
 
 ```xml
 <intent-filter>
@@ -89,6 +89,8 @@ Dapps developers must do the same for their own custom schemes if they want the 
 :::
 
 ## Integration
+
+#### Wallet Support
 
 **Disclaimer:** The below solution is designed for the communication between native Android Dapps and native Android wallets. In the case of mobile browser Dapps and native Android wallets communication, we recommend moving wallets into the background after both approving and rejecting sessions or approving and rejecting requests to persist smooth deep-link UX.
 
