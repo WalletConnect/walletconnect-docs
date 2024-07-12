@@ -284,7 +284,6 @@ const withAndroidManifestService = (config) => {
   return withAndroidManifest(config, (config) => {
     config.modResults.manifest = {
       ...config.modResults.manifest,
-      //@ts-ignore
       queries,
     };
 
