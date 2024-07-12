@@ -89,9 +89,9 @@ In order to redirect to the Dapp, you'll need to use `Linking` from `react-nativ
 import { Linking } from 'react-native'
 
 async function onApprove(proposal, namespaces) {
-  await web3wallet.approveSession({ id: proposal.id, namespaces })
+  const session = await web3wallet.approveSession({ id: proposal.id, namespaces })
 
-  const dappScheme = proposal.params.proposer.metadata.redirect?.native
+  const dappScheme = session.peer.metadata.redirect?.native
 
   if (dappScheme) {
     Linking.openURL(dappScheme)
