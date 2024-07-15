@@ -33,7 +33,7 @@ To integrate SIWE with AppKit, you need to configure your Web3Modal client using
 )
 ```
 
-Configuring your Web3Modal client with Modal.Model.AuthPayloadParams will prioritize authentication requests over regular session proposals. If the wallet supports One-Click Auth, the session will be created and the user will automatically authenticate without needing to send another SIWE request over personal_sign. If the wallet does not support One-Click Auth, it will fall back to the session proposal. In this case, to authenticate the user, you can send another session request to prove address ownership.
+Configuring your Web3Modal client with Modal.Model.AuthPayloadParams will prioritize authentication requests over regular session proposals. If the wallet supports One-Click Auth, the session will be created and the user will automatically authenticate without needing to send another SIWE request over personal_sign. If the wallet does not support One-Click Auth, it will fall back to the session proposal. In this case, to authenticate the user, AppKit will send another session request to prove address ownership.
 
 To check whether the user has signed a SIWE message, check `onSessionAuthenticateResponse` callback from `Web3Modal.ModalDelegate`:
 
