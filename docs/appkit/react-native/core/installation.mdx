@@ -152,13 +152,13 @@ Make sure your have `@walletconnect/react-native-compat@2.10.5` or higher.
 
 :::
 
-To enable WalletConnectModal to detect wallets installed on the device, you need to make specific changes to the native code of your project.
+To enable AppKit to detect wallets installed on the device, you need to make specific changes to the native code of your project.
 
 <Tabs groupId="platform">
   <TabItem value="rn-cli" label="React Native CLI">
 
-#### For iOS:
-
+<Tabs groupId="native-platform">
+<TabItem value="ios" label="iOS">
 1. Open your `Info.plist` file.
 2. Locate the `<key>LSApplicationQueriesSchemes</key>` section.
 3. Add the desired wallet schemes as string entries within the `<array>`. These schemes represent the wallets you want to detect.
@@ -177,8 +177,9 @@ Example:
   <!-- Add other wallet schemes names here -->
 </array>
 ```
+</TabItem>
 
-#### For Android:
+<TabItem value="android" label="Android">
 
 1. Open your `AndroidManifest.xml` file.
 2. Locate the `<queries>` section.
@@ -196,14 +197,16 @@ Example:
   <!-- Add other wallet package names here -->
 </queries>
 ```
+</TabItem>
+</Tabs>
 
 </TabItem>
 
 <TabItem value="expo" label="Expo">
 
-#### For iOS only:
-
-To enable WalletConnectModal to detect wallets installed on the device in your Expo project for iOS, follow these steps:
+<Tabs groupId="native-platform">
+<TabItem value="ios" label="iOS">
+To enable AppKit to detect wallets installed on the device in your Expo project for iOS, follow these steps:
 
 1. Open your `app.json` (or `app.config.js`) file.
 2. Locate the ios section within the configuration.
@@ -212,10 +215,11 @@ To enable WalletConnectModal to detect wallets installed on the device in your E
 
 Your configuration should look like this:
 
-```json
+```js
 {
   "expo": {
     "ios": {
+      /* highlight-add-start */
       "infoPlist": {
         "LSApplicationQueriesSchemes": [
           "metamask",
@@ -226,10 +230,78 @@ Your configuration should look like this:
           // Add other wallet schemes names here
         ]
       }
+    /* highlight-add-end */
     }
   }
 }
 ```
+</TabItem>
+<TabItem value="android" label="Android">
+To enable AppKit to detect wallets installed on the device in your Expo project for Android, follow these steps:
+
+1. Open your `app.json` (or `app.config.js`) file.
+2. Locate the plugins section within the configuration.
+3. Add `queries.js` in the plugins array:
+```js
+{
+  "plugins": [
+    // other plugins,
+    /* highlight-add-start */
+    "./queries.js"
+    /* highlight-add-end */
+  ],
+}
+```
+
+4. Create the file `queries.js`:
+
+```js
+// based on https://github.com/expo/config-plugins/issues/123#issuecomment-1746757954
+
+const {
+  AndroidConfig,
+  withAndroidManifest,
+  createRunOncePlugin,
+} = require("expo/config-plugins");
+
+const queries = {
+  package: [
+    { $: { "android:name": "com.wallet.crypto.trustapp" } },
+    { $: { "android:name": "io.metamask" } },
+    { $: { "android:name": "me.rainbow" } },
+    { $: { "android:name": "io.zerion.android" } },
+    { $: { "android:name": "io.gnosis.safe" } },
+    { $: { "android:name": "com.uniswap.mobile" } },
+    // Add other wallet package names here
+  ]
+};
+
+
+/**
+ * @param {import('@expo/config-plugins').ExportedConfig} config
+ */
+const withAndroidManifestService = (config) => {
+  return withAndroidManifest(config, (config) => {
+    config.modResults.manifest = {
+      ...config.modResults.manifest,
+      queries,
+    };
+
+    return config;
+  });
+};
+
+module.exports = createRunOncePlugin(
+  withAndroidManifestService,
+  "withAndroidManifestService",
+  "1.0.0"
+);
+```
+
+
+5. Add the wallet package names you want to be detected by your app.
+</TabItem>
+</Tabs>
 
 </TabItem>
 
@@ -358,10 +430,7 @@ Check <a href="https://mobilewalletprotocol.github.io/wallet-mobile-sdk/docs/cli
 </TabItem>
 
 <TabItem value="expo" label="Expo">
-  Coinbase SDK doesn't support Expo Projects. More info{' '}
-  <a href="https://github.com/MobileWalletProtocol/wallet-mobile-sdk/issues/206#issuecomment-1468836345">
-    here
-  </a>
+  Coinbase SDK doesn't support Expo Projects. More info <a href="https://github.com/MobileWalletProtocol/wallet-mobile-sdk/issues/206#issuecomment-1468836345">here</a>
 </TabItem>
 
 </Tabs>

@@ -28,7 +28,7 @@ function Components() {
   async function onSignMessage() {
     const provider = new ethers.providers.Web3Provider(walletProvider)
     const signer = provider.getSigner()
-    const signature = await signer?.signMessage('Hello Web3Modal Ethers')
+    const signature = await signer?.signMessage('Hello AppKit Ethers')
     console.log(signature)
   }
 
