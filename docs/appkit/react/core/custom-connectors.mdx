@@ -3,7 +3,7 @@ import PlatformTabItem from '../../../components/PlatformTabItem'
 
 # Custom connectors
 Custom connectors, such as social logins, WalletConnect QR, Coinbasewallet, etc., can be integrated into your Modal. A simple example of how to incorporate them for Wagmi or Ethers library.
-<PlatformTabs groupId="eth-lib" activeOptions={["wagmi", "ethers"]}>
+<PlatformTabs groupId="eth-lib" activeOptions={["wagmi", "ethers", "solana"]}>
 <PlatformTabItem value="wagmi">
 
 If you already have Wagmi integrated into your application or would like more control over Wagmi's configuration, you can integrate Web3Modal on top of it.
@@ -128,4 +128,30 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
 Check our React ethers demo in [Github](https://github.com/WalletConnect/web-examples/tree/main/dapps/web3modal/react-ethers)
 
 </PlatformTabItem>
+<PlatformTabItem value="solana">
+You can add custom wallet adapters for solana wallets as follows
+```ts
+import { BackpackWalletAdapter } from '@solana/wallet-adapter-backpack'
+import { HuobiWalletAdapter, SolflareWalletAdapter } from '@solana/wallet-adapter-wallets'
+
+const solanaConfig = defaultSolanaConfig({
+  chains,
+  projectId,
+  metadata
+})
+
+const modal = createWeb3Modal({
+  solanaConfig,
+  projectId: ConstantsUtil.ProjectId,
+  metadata: ConstantsUtil.Metadata,
+  chains,
+  enableAnalytics: true,
+  termsConditionsUrl: 'https://walletconnect.com/terms',
+  privacyPolicyUrl: 'https://walletconnect.com/privacy',
+  wallets: [new BackpackWalletAdapter(), new HuobiWalletAdapter(), new SolflareWalletAdapter()]
+})
+```
+
+</PlatformTabItem>
+
 </PlatformTabs>
