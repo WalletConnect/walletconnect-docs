@@ -74,10 +74,10 @@ const advanced = {
     },
     {
       type: 'category',
-      label: 'Providers',
+      label: 'Providers & Adapters',
       collapsible: true,
       collapsed: true,
-      items: ['advanced/providers/ethereum', 'advanced/providers/universal']
+      items: ['advanced/providers/ethereum', 'advanced/providers/universal', 'advanced/providers/solana-adapter']
     },
     {
       type: 'category',
