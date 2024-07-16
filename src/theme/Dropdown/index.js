@@ -1,14 +1,14 @@
 import { useState, useRef, useEffect } from 'react'
 import { useLocation, useHistory } from 'react-router-dom'
 import s from './styles.module.css'
-import { isIconWhite, parseEnvironment, setItemInStorage } from './utils'
+import { getEnvFromCurrentPath, isIconWhite, parseEnvironment } from './utils'
 import { env_icons } from './icons'
 
 /**
  * This Dropdown Menu is meant to be for a list of Frameworks and Programming languages.
  *  The selected item will mutate the current URL
  */
-export default function Dropdown({ list, initial, isWalletKit }) {
+export default function Dropdown({ list, isWalletKit }) {
   const location = useLocation()
   const history = useHistory()
 
@@ -16,25 +16,20 @@ export default function Dropdown({ list, initial, isWalletKit }) {
   const [isOpen, setIsOpen] = useState(false)
 
   if (!selected) {
-    if (initial) {
-      setSelected(initial)
-    } else {
-      const environment = list.find(item => location.pathname.includes(item))
-      if (!environment) {
-        throw Error("The current path doesn't contain any environment.")
-      }
-      setSelected(environment)
+    const environment = getEnvFromCurrentPath(list)
+    if (!environment) {
+      throw Error("The current path doesn't contain any environment.")
     }
+    setSelected(environment)
   }
 
   function handleItem(new_environment) {
-    const current_environment = list.find(item => location.pathname.includes(item))
+    const current_environment = getEnvFromCurrentPath(list)
     if (!current_environment) {
       throw Error("The current path doesn't contain any environment.")
     }
     setSelected(new_environment)
     setIsOpen(false)
-    setItemInStorage(new_environment)
     const new_path =
       location.pathname.slice(0, location.pathname.indexOf(current_environment)) +
       new_environment +

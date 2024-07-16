@@ -1,18 +1,10 @@
 import Link from '@docusaurus/Link'
-import { setItemInStorage } from '@site/src/theme/Dropdown/utils'
 import React from 'react'
 
-const LargeContainer = ({ href, type, name, icon, description, fit, isWhite }) => {
-  function handleClick() {
-    if (type) {
-      /* This function is used to set the environment, framework or programming language
-       that's going to be selected in the dropdown menu */
-      setItemInStorage(type)
-    }
-  }
+const LargeContainer = ({ href, name, icon, description, fit, isWhite }) => {
 
   return (
-    <Link onClick={handleClick} to={href} className="home__large-container">
+    <Link to={href} className="home__large-container">
       {fit ? (
         <img src={icon} alt={name} />
       ) : (
