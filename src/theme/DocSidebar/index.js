@@ -3,7 +3,6 @@ import DocSidebar from '@theme-original/DocSidebar'
 import Dropdown from '../Dropdown'
 import '../../css/sidebar.css'
 import { useLocation } from 'react-router-dom'
-import { getItemInStorage } from '../Dropdown/utils'
 import { appKit_environments, walletKit_environments } from './constants'
 
 export default function DocSidebarWrapper(props) {
@@ -25,8 +24,6 @@ export default function DocSidebarWrapper(props) {
 }
 
 export const FrameworksMenu = () => {
-  const initial_environment = getItemInStorage()
-
   const location = useLocation()
 
   if (
@@ -44,7 +41,6 @@ export const FrameworksMenu = () => {
     return (
       <Dropdown
         list={appKit_environments}
-        initial={appKit_environments.find(item => item === initial_environment)}
       />
     )
   }
@@ -54,7 +50,6 @@ export const FrameworksMenu = () => {
       <Dropdown
         list={walletKit_environments}
         isWalletKit
-        initial={walletKit_environments.find(item => item === initial_environment)}
       />
     )
   }
