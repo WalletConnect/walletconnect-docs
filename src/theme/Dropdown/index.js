@@ -16,6 +16,7 @@ export default function Dropdown({ list, isWalletKit }) {
   const [isOpen, setIsOpen] = useState(false)
 
   if (!selected) {
+  if(typeof window === 'undefined') return true
     const environment = getEnvFromCurrentPath(list)
     if (!environment) {
       throw Error("The current path doesn't contain any environment.")
