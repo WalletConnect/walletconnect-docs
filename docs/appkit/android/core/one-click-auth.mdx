@@ -69,7 +69,7 @@ If the wallet connecting to your dapp does not support One-Click Auth, the SDK w
 
 ### Link Mode
 
-The latest release of AppKit supports link mode, a low latency mechanism for transporting 1-click auth requests and session requests over universal links, reducing the need for a WebSocket connection with the Relay. This significantly enhances the user experience when connecting native dApps to native wallets by reducing the latency associated with networking connections, especially when the user has an unstable internet connection.
+The latest release of AppKit supports link mode, a low latency mechanism for transporting One-Click Auth requests and session requests over universal links, reducing the need for a WebSocket connection with the Relay. This significantly enhances the user experience when connecting native dApps to native wallets by reducing the latency associated with networking connections, especially when the user has an unstable internet connection.
 
 To support link mode, configure your AppMetaData `appLink` with a valid universal link and set the `linkMode` property to `true`:
 
