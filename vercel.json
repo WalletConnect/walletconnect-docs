@@ -20,6 +20,14 @@
     {
       "source": "/web3wallet/:path*",
       "destination": "/walletkit/overview"
+    },
+    {
+      "source": "/advanced/multichain/chain-list",
+      "destination": "cloud/chains/chain-list"
+    },
+    {
+      "source": "/advanced/rpc-reference/:path*",
+      "destination": "/advanced/multichain/rpc-reference/:path*"
     }
   ]
 }
