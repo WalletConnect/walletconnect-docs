@@ -6,6 +6,8 @@ In your `App.vue` file set up the following configuration.
 ```html
 <script setup lang="ts">
 import { createWeb3Modal, defaultConfig } from '@web3modal/solana/react'
+import { BackpackWalletAdapter } from '@solana/wallet-adapter-backpack'
+import { HuobiWalletAdapter, SolflareWalletAdapter } from '@solana/wallet-adapter-wallets'
 
 // 1. Get projectId
 const projectId = 'YOUR_PROJECT_ID'
@@ -42,7 +44,8 @@ const modal = createWeb3Modal({
   solanaConfig,
   chains: [mainnet],
   projectId,
-  enableAnalytics: true // Optional - defaults to your Cloud configuration
+  enableAnalytics: true, // Optional - defaults to your Cloud configuration
+  wallets: [new BackpackWalletAdapter(), new HuobiWalletAdapter(), new SolflareWalletAdapter()]
 })
 
 </script>
