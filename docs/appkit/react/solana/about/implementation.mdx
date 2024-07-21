@@ -10,7 +10,6 @@ On top of your app set up the following configuration, making sure that all func
 
 import { createWeb3Modal, defaultSolanaConfig } from '@web3modal/solana/react'
 import { solana, solanaTestnet, solanaDevnet } from '@web3modal/solana/chains'
-import { BackpackWalletAdapter } from '@solana/wallet-adapter-backpack'
 import { HuobiWalletAdapter, SolflareWalletAdapter } from '@solana/wallet-adapter-wallets'
 
 // 0. Setup chains
@@ -38,7 +37,7 @@ createWeb3Modal({
   solanaConfig,
   chains,
   projectId
-  wallets: [new BackpackWalletAdapter(), new HuobiWalletAdapter(), new SolflareWalletAdapter()]
+  wallets: [new HuobiWalletAdapter(), new SolflareWalletAdapter()]
 })
 
 export default function App() {

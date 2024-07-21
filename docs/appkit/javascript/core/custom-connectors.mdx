@@ -50,7 +50,6 @@ Coming soon...
 <PlatformTabItem value="solana">
 You can add custom wallet adapters for solana wallets as follows
 ```ts
-import { BackpackWalletAdapter } from '@solana/wallet-adapter-backpack'
 import { HuobiWalletAdapter, SolflareWalletAdapter } from '@solana/wallet-adapter-wallets'
 
 const solanaConfig = defaultSolanaConfig({
@@ -67,7 +66,7 @@ const modal = createWeb3Modal({
   enableAnalytics: true,
   termsConditionsUrl: 'https://walletconnect.com/terms',
   privacyPolicyUrl: 'https://walletconnect.com/privacy',
-  wallets: [new BackpackWalletAdapter(), new HuobiWalletAdapter(), new SolflareWalletAdapter()]
+  wallets: [new HuobiWalletAdapter(), new SolflareWalletAdapter()]
 })
 ```
 

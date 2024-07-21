@@ -5,7 +5,6 @@ On top of your app set up the following configuration, making sure that all func
 
 ```tsx
 import { createWeb3Modal, defaultConfig } from '@web3modal/solana/react'
-import { BackpackWalletAdapter } from '@solana/wallet-adapter-backpack'
 import { HuobiWalletAdapter, SolflareWalletAdapter } from '@solana/wallet-adapter-wallets'
 
 // 1. Get projectId
@@ -44,7 +43,7 @@ createWeb3Modal({
   chains: [mainnet],
   projectId,
   enableAnalytics: true, // Optional - defaults to your Cloud configuration
-  wallets: [new BackpackWalletAdapter(), new HuobiWalletAdapter(), new SolflareWalletAdapter()]
+  wallets: [new HuobiWalletAdapter(), new SolflareWalletAdapter()]
 })
 
 export default function App() {
