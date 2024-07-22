@@ -14,11 +14,6 @@ import WagmiInstallationExpo from '../wagmi/about/installation-expo.mdx'
 import WagmiImplementation from '../wagmi/about/implementation.mdx'
 import WagmiCoinbase from '../wagmi/about/coinbase.mdx'
 
-import Wagmi1Installation from '../wagmi1/about/installation.mdx'
-import Wagmi1InstallationExpo from '../wagmi1/about/installation-expo.mdx'
-import Wagmi1Implementation from '../wagmi1/about/implementation.mdx'
-import Wagmi1Coinbase from '../wagmi1/about/coinbase.mdx'
-
 import Ethers5Installation from '../ethers5/about/installation.mdx'
 import Ethers5InstallationExpo from '../ethers5/about/installation-expo.mdx'
 import Ethers5Implementation from '../ethers5/about/implementation.mdx'
@@ -33,7 +28,7 @@ import EthersCoinbase from '../ethers/about/coinbase.mdx'
 
 ## Introduction
 
-AppKit has support for [Wagmi](https://wagmi.sh), [Wagmi v1](https://1.x.wagmi.sh/), [Ethers](https://docs.ethers.org/v6/) and [Ethers v5](https://docs.ethers.org/v5/). Choose one of these Ethereum libraries to get started.
+AppKit has support for [Wagmi](https://wagmi.sh) and [Ethers](https://docs.ethers.org/v6/). Choose one of these Ethereum libraries to get started.
 
 <CloudBanner />
 
@@ -42,21 +37,13 @@ AppKit has support for [Wagmi](https://wagmi.sh), [Wagmi v1](https://1.x.wagmi.s
 <Tabs groupId="platform">
 <TabItem value="rn-cli" label="React Native CLI">
 
-<PlatformTabs groupId="eth-lib" activeOptions={["wagmi", "wagmi1", "ethers", "ethers5"]}>
+<PlatformTabs groupId="eth-lib" activeOptions={["wagmi", "ethers", "ethers5"]}>
 
 <PlatformTabItem value="wagmi">
 
 {' '}
 
 <WagmiInstallation />
-
-</PlatformTabItem>
-
-<PlatformTabItem value="wagmi1">
-
-{' '}
-
-<Wagmi1Installation />
 
 </PlatformTabItem>
 
@@ -82,7 +69,7 @@ AppKit has support for [Wagmi](https://wagmi.sh), [Wagmi v1](https://1.x.wagmi.s
 
 <TabItem value="expo" label="Expo">
 
-<PlatformTabs groupId="eth-lib" activeOptions={["wagmi", "wagmi1", "ethers", "ethers5"]}>
+<PlatformTabs groupId="eth-lib" activeOptions={["wagmi", "ethers", "ethers5"]}>
 
 <PlatformTabItem value="wagmi">
 
@@ -92,13 +79,6 @@ AppKit has support for [Wagmi](https://wagmi.sh), [Wagmi v1](https://1.x.wagmi.s
 
 </PlatformTabItem>
 
-<PlatformTabItem value="wagmi1">
-
-{' '}
-
-<Wagmi1InstallationExpo />
-
-</PlatformTabItem>
 
 <PlatformTabItem value="ethers">
 
@@ -124,14 +104,10 @@ AppKit has support for [Wagmi](https://wagmi.sh), [Wagmi v1](https://1.x.wagmi.s
 
 ## Implementation
 
-<PlatformTabs groupId="eth-lib" activeOptions={["wagmi", "wagmi1", "ethers", "ethers5"]}>
+<PlatformTabs groupId="eth-lib" activeOptions={["wagmi", "ethers", "ethers5"]}>
 
 <PlatformTabItem value="wagmi">
   <WagmiImplementation />
-</PlatformTabItem>
-
-<PlatformTabItem value="wagmi1">
-  <Wagmi1Implementation />
 </PlatformTabItem>
 
 <PlatformTabItem value="ethers">
@@ -330,17 +306,11 @@ npm install @coinbase/wallet-mobile-sdk react-native-mmkv
 
 3. Install our custom connector
 
-<PlatformTabs groupId="eth-lib" activeOptions={["wagmi", "wagmi1", "ethers", "ethers5"]}>
+<PlatformTabs groupId="eth-lib" activeOptions={["wagmi", "ethers", "ethers5"]}>
 
 <PlatformTabItem value="wagmi">
 ```bash npm2yarn
 npm install @web3modal/coinbase-wagmi-react-native@alpha
-```
-</PlatformTabItem>
-
-<PlatformTabItem value="wagmi1">
-```bash npm2yarn
-npm install @web3modal/coinbase-wagmi-react-native
 ```
 </PlatformTabItem>
 
@@ -405,14 +375,10 @@ useEffect(() => {
 }, [])
 ```
 
-<PlatformTabs groupId="eth-lib" activeOptions={["wagmi", "wagmi1", "ethers", "ethers5"]}>
+<PlatformTabs groupId="eth-lib" activeOptions={["wagmi", "ethers", "ethers5"]}>
 
 <PlatformTabItem value="wagmi">
   <WagmiCoinbase />
-</PlatformTabItem>
-
-<PlatformTabItem value="wagmi1">
-  <Wagmi1Coinbase />
 </PlatformTabItem>
 
 <PlatformTabItem value="ethers">

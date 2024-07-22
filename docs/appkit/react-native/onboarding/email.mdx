@@ -2,7 +2,6 @@ import PlatformTabs from '../../../components/PlatformTabs'
 import PlatformTabItem from '../../../components/PlatformTabItem'
 
 import WagmiImplementation from '../wagmi/email.mdx'
-import Wagmi1Implementation from '../wagmi1/email.mdx'
 import EthersImplementation from '../ethers/email.mdx'
 
 # Email Wallets
@@ -17,14 +16,10 @@ Due to Safari’s strict third-party cookie policies, the SDK is not preserving 
 
 ## Integration
 
-<PlatformTabs groupId="eth-lib" activeOptions={["wagmi", "wagmi1", "ethers"]}>
+<PlatformTabs groupId="eth-lib" activeOptions={["wagmi", "ethers"]}>
 
 <PlatformTabItem value="wagmi">
    <WagmiImplementation />
-</PlatformTabItem>
-
-<PlatformTabItem value="wagmi1">
-   <Wagmi1Implementation />
 </PlatformTabItem>
 
 <PlatformTabItem value="ethers">
