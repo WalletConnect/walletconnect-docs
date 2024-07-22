@@ -17,22 +17,15 @@ const config = {
       tagName: 'script',
       attributes: {
         type: 'text/javascript',
-        src: 'https://app.termly.io/resource-blocker/22740907-ba21-41a3-bbd9-106afc077eab?autoBlock=on'
-      }
-    },
-    {
-      tagName: 'script',
-      attributes: {
-        type: 'text/javascript',
         src: 'https://www.googletagmanager.com/gtag/js?id=G-T8KHTQMBG8',
-        defer: true
+        defer: 'true'
       }
     },
     {
       tagName: 'script',
       attributes: {
         type: 'text/javascript',
-        defer: true
+        defer: 'true'
       },
       innerHTML: `
         window.dataLayer = window.dataLayer || [];
@@ -46,7 +39,7 @@ const config = {
       tagName: 'script',
       attributes: {
         type: 'text/javascript',
-        defer: true
+        defer: 'true'
       },
       innerHTML: `
         (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -69,11 +62,13 @@ const config = {
   staticDirectories: ['static'],
   scripts: [
     {
-      src: 'https://plausible.io/js/plausible.js',
-      defer: true,
-      'data-domain': 'docs.walletconnect.com'
+      src: 'https://app.termly.io/resource-blocker/22740907-ba21-41a3-bbd9-106afc077eab?autoBlock=on'
     },
-    {}
+    {
+      src: 'https://plausible.io/js/plausible.js',
+      defer: 'true',
+      'data-domain': 'docs.walletconnect.com'
+    }
   ],
   presets: [
     [
@@ -196,6 +191,16 @@ const config = {
             {
               label: 'Farcaster',
               href: 'https://warpcast.com/walletconnect/'
+            }
+          ]
+        },
+        {
+          title: 'Privacy',
+          items: [
+            {
+              href: '#',
+              class: 'termly-display-preferences footer__link-item ',
+              label: 'Consent Preferences'
             }
           ]
         }
