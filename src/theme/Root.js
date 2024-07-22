@@ -1,7 +1,20 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { DocsSidebarProvider } from '@docusaurus/theme-common/internal'
 
 export default function Root({ children }) {
+  useEffect(() => {
+    // Need to replace the consent prefences button after render due
+    // to the loading order of docusaurus scripts and footer tags.
+    setTimeout(() => {
+      const termlyATag = document.createElement('a')
+      termlyATag.href = '#'
+      termlyATag.className = 'termly-display-preferences footer__link-item'
+      termlyATag.innerHTML = 'Consent Preferences'
+      document.getElementById('termly-display-preferences')?.parentElement.append(termlyATag)
+      document.getElementById('termly-display-preferences')?.remove()
+    }, 0)
+  }, [])
+
   return (
     <>
       <noscript>
