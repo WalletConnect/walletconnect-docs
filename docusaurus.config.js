@@ -17,14 +17,14 @@ const config = {
       tagName: 'script',
       attributes: {
         type: 'text/javascript',
-        src: 'https://www.googletagmanager.com/gtag/js?id=G-T8KHTQMBG8'
+        src: 'https://app.termly.io/resource-blocker/22740907-ba21-41a3-bbd9-106afc077eab?autoBlock=on'
       }
     },
     {
       tagName: 'script',
       attributes: {
         type: 'text/javascript',
-        src: 'https://app.termly.io/resource-blocker/22740907-ba21-41a3-bbd9-106afc077eab?autoBlock=on'
+        src: 'https://www.googletagmanager.com/gtag/js?id=G-T8KHTQMBG8'
       }
     },
     {
