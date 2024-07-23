@@ -3,7 +3,7 @@ import { DocsSidebarProvider } from '@docusaurus/theme-common/internal'
 
 export default function Root({ children }) {
   useEffect(() => {
-    // Need to replace the consent prefences button after render due
+    // Need to replace the consent preferences button after render due
     // to the loading order of docusaurus scripts and footer tags.
     setTimeout(() => {
       const termlyATag = document.createElement('a')
