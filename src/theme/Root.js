@@ -5,6 +5,8 @@ export default function Root({ children }) {
   useEffect(() => {
     // Need to replace the consent preferences button after render due
     // to the loading order of docusaurus scripts and footer tags.
+    // The server rendered tags are present before the termly script
+    // finishes loading. Making the tags not trigger the termly modal.
     setTimeout(() => {
       const termlyATag = document.createElement('a')
       termlyATag.href = '#'
