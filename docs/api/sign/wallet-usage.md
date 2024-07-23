@@ -692,8 +692,6 @@ try await Sign.instance.rejectSession(requestId: requestId)
 
 ```kotlin
 val projectId = "" // Get Project ID at https://cloud.walletconnect.com/
-val relayUrl = "relay.walletconnect.com"
-val serverUrl = "wss://$relayUrl?projectId=$projectId"
 val connectionType = ConnectionType.AUTOMATIC or ConnectionType.MANUAL
 val appMetaData = Core.Model.AppMetaData(
     name = "Wallet Name",
@@ -703,7 +701,7 @@ val appMetaData = Core.Model.AppMetaData(
     redirect = "kotlin-wallet-wc:/request" // Custom Redirect URI
 )
 
-CoreClient.initialize(relayServerUrl = serverUrl, connectionType = connectionType, application = this, metaData = appMetaData)
+CoreClient.initialize(projectId = projectId, connectionType = connectionType, application = this, metaData = appMetaData)
 
 val init = Sign.Params.Init(core = CoreClient)
 

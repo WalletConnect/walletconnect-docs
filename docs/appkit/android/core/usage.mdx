@@ -12,8 +12,6 @@ import TabItem from '@theme/TabItem'
 ```kotlin
 val connectionType = ConnectionType.AUTOMATIC or ConnectionType.MANUAL
 val projectId = "" // Get Project ID at https://cloud.walletconnect.com/
-val relayUrl = "relay.walletconnect.com"
-val serverUrl = "wss://$relayUrl?projectId=${projectId}"
 val appMetaData = Core.Model.AppMetaData(
     name = "Kotlin.Web3Modal",
     description = "Kotlin Web3Modal Implementation",
@@ -22,7 +20,7 @@ val appMetaData = Core.Model.AppMetaData(
     redirect = "kotlin-web3modal://request"
 )
 
-CoreClient.initialize(relayServerUrl = serverUrl, connectionType = connectionType, application = this, metaData = appMetaData)
+CoreClient.initialize(projectId = projectId, connectionType = connectionType, application = this, metaData = appMetaData)
 
 Web3Modal.initialize(
     init = Modal.Params.Init(CoreClient),
