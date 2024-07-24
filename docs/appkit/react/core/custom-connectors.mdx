@@ -131,8 +131,6 @@ Check our React ethers demo in [Github](https://github.com/WalletConnect/web-exa
 <PlatformTabItem value="solana">
 You can add custom wallet adapters for solana wallets as follows
 ```ts
-import { HuobiWalletAdapter, SolflareWalletAdapter } from '@solana/wallet-adapter-wallets'
-
 const solanaConfig = defaultSolanaConfig({
   chains,
   projectId,
@@ -147,7 +145,6 @@ const modal = createWeb3Modal({
   enableAnalytics: true,
   termsConditionsUrl: 'https://walletconnect.com/terms',
   privacyPolicyUrl: 'https://walletconnect.com/privacy',
-  wallets: [new HuobiWalletAdapter(), new SolflareWalletAdapter()]
 })
 ```
 
