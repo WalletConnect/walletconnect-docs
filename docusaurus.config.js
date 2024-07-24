@@ -12,6 +12,51 @@ const projectKey =
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
+  headTags: [
+    {
+      tagName: 'script',
+      attributes: {
+        type: 'text/javascript',
+        src: 'https://app.termly.io/resource-blocker/22740907-ba21-41a3-bbd9-106afc077eab?autoBlock=on'
+      }
+    },
+    {
+      tagName: 'script',
+      attributes: {
+        defer: 'true',
+        type: 'text/javascript',
+        src: 'https://www.googletagmanager.com/gtag/js?id=G-T8KHTQMBG8'
+      }
+    },
+    {
+      tagName: 'script',
+      attributes: {
+        type: 'text/javascript',
+        defer: 'true'
+      },
+      innerHTML: `
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-T8KHTQMBG8');
+      `
+    },
+    {
+      tagName: 'script',
+      attributes: {
+        type: 'text/javascript',
+        defer: 'true'
+      },
+      innerHTML: `
+        (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer','GTM-5557TG59');
+      `
+    }
+  ],
   title: 'WalletConnect Docs',
   tagline: 'WalletConnect is an open protocol to communicate securely between Dapps and Wallets.',
   url: 'https://docs.walletconnect.com/',
@@ -25,7 +70,7 @@ const config = {
   scripts: [
     {
       src: 'https://plausible.io/js/plausible.js',
-      defer: true,
+      defer: 'true',
       'data-domain': 'docs.walletconnect.com'
     }
   ],
@@ -146,6 +191,17 @@ const config = {
             {
               label: 'Farcaster',
               href: 'https://warpcast.com/walletconnect/'
+            }
+          ]
+        },
+        {
+          title: 'Privacy',
+          items: [
+            {
+              href: '#',
+              id: 'termly-display-preferences',
+              class: 'termly-display-preferences footer__link-item',
+              label: 'Consent Preferences'
             }
           ]
         }
