@@ -23,6 +23,7 @@ const config = {
     {
       tagName: 'script',
       attributes: {
+        defer: 'true',
         type: 'text/javascript',
         src: 'https://www.googletagmanager.com/gtag/js?id=G-T8KHTQMBG8'
       }
