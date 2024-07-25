@@ -301,6 +301,19 @@ Web3Wallet.extendSession(extendParams) { error -> /*callback for error while ext
 To extend a session, create a `Wallet.Params.SessionExtend` object with the session's topic to update the session with to `Web3Wallet.extendSession`. Session is
 extended by 7 days.
 
+### Emitting a Session
+
+To emit an event, call emitSessionEvent() as follows:
+
+```kotlin
+val sessionTopic: String = /*Topic of Session*/
+val event: Wallet.Model.SessiomEvent = SessionEvent(name = "accountsChanged", data = "0x000000000")
+
+val sessionEmit = Wallet.Params.SessionEmit(topic = sessionTopic, chainId = "eip155:1", event = event)
+
+Web3Wallet.emitSessionEvent(sessionEmit) { error -> /*callback for error while emiting an event*/ }
+```
+
 ### Session Disconnect
 
 ```kotlin
