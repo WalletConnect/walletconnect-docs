@@ -38,19 +38,10 @@ export const FrameworksMenu = () => {
   }
 
   if (location.pathname.includes('/appkit/')) {
-    return (
-      <Dropdown
-        list={appKit_environments}
-      />
-    )
+    return <Dropdown list={appKit_environments} />
   }
 
   if (location.pathname.includes('/walletkit/')) {
-    return (
-      <Dropdown
-        list={walletKit_environments}
-        isWalletKit
-      />
-    )
+    return <Dropdown list={walletKit_environments} isWalletKit />
   }
 }

@@ -77,6 +77,7 @@ A session proposal is a handshake sent by a dapp and it's purpose is to define a
 Whenever user approves or rejects a session proposal, wallet should show loading indicators in a moment of the button press until Relay acknowledgement is received for any of this actions.
 
 Session Approve
+
 ```swift
 do {
     try await Web3Wallet.instance.approve(proposalId: proposal.id, namespaces: sessionNamespaces, sessionProperties: proposal.sessionProperties)

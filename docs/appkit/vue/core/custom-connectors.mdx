@@ -29,7 +29,7 @@ const config = createConfig({
     [sepolia.id]: http()
   },
   connectors: [
-    walletConnect({ projectId, metadata, showQrModal: false }), // showQrModal must be false.
+    walletConnect({ projectId, metadata, showQrModal: false }) // showQrModal must be false.
     //other connectors...
   ]
 })
@@ -37,7 +37,7 @@ reconnect(config)
 
 const modal = createWeb3Modal({
   //...
-  wagmiConfig: config,
+  wagmiConfig: config
 })
 ```
 

@@ -1,0 +1,64 @@
+---
+title: One-Click Auth / SIWS
+---
+
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
+import SiwsCode from '../../shared/siws/code.mdx'
+import SiwsParams from '../../shared/siws/parameters.mdx'
+
+# Sign In With Solana
+
+AppKit provides a simple solution for integrating with "Sign In With Solana" (SIWS), a new form of authentication that enables users to control their digital identity with their Solana account.
+SIWS is modeled [EIP-4361](https://docs.login.xyz/general-information/siwe-overview/eip-4361) (Sign In With Ethereum) and based on [CAIP122](https://github.com/ChainAgnostic/CAIPs/blob/master/CAIPs/caip-122.md).
+
+## One-Click Auth
+
+**One-Click Auth** represents a key advancement within WalletConnect v2, streamlining the user authentication process in Web3Modal by enabling them to seamlessly connect with a wallet and sign a SIWS message with just one click.
+
+Connecting a wallet, proving control of an address with an off-chain signature, authorizing specific actions. These are the kinds of authorizations that can be encoded as ["ReCaps"](https://github.com/ChainAgnostic/CAIPs/blob/main/CAIPs/caip-222.md). ReCaps are permissions for a specific website or dapp that can be compactly encoded as a long string in the message you sign and translated by any wallet into a straight-forward one-sentence summary.
+WalletConnect uses permissions expressed as ReCaps to enable a One-Click Authentication.
+
+## Installation
+
+<Tabs groupId="version">
+<TabItem value="one-click-auth" label="One-Click Auth">
+
+```bash npm2yarn
+npm i @web3modal/siws
+```
+
+</TabItem>
+<TabItem value="legacy" label="Legacy">
+
+:::caution
+For a better UX we recommend using One-Click Auth.
+:::
+
+Install the Web3Modal SIWS package, additionally we also recommend installing [siws](https://github.com/phantom/sign-in-with-solana?tab=readme-ov-file) which will abstract a lot of the required logic.
+
+```bash npm2yarn
+npm i @web3modal/siws siws
+```
+
+</TabItem>
+</Tabs>
+
+## Configure your SIWS Client
+
+<SiwsCode />
+
+## Initialize Web3Modal with your `siwsConfig`
+
+Add the `siwsConfig` to your createWeb3Modal parameters
+
+```ts
+createWeb3Modal({
+  //..
+  siwsConfig
+})
+```
+
+## SIWS Config Parameters
+
+<SiwsParams />

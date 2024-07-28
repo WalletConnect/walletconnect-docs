@@ -28,7 +28,7 @@ _Hedera has a separate open-source project implementing parts of the [Ethereum J
 - [`hedera_signMessage`](#hedera_signmessage)
 - [`hedera_getNodeAddresses`](#hedera_getnodeaddresses)
 
-## hedera\_signAndExecuteTransaction
+## hedera_signAndExecuteTransaction
 
 The `hedera_signAndExecuteTransaction` method is a generic method for executing a transaction on the Hedera network. A dApp can begin by constructing a transaction with one of the Hedera SDKs or by constructing the raw protobuf messages and may select one or more consensus nodes that are authorized to execute the transaction.
 
@@ -58,10 +58,10 @@ In certain conditions, the Hedera network will return a response that signifies 
       1.2. `message` : `String` - A human readable string describing the nature of the failure
       1.3. `data` : `Number` - An integer representing the ResponseCodeEnum value returned from the Hedera Node, which indicates the reason for the failure
 
-
 ### Example
 
 #### Request
+
 ```json
 {
   "id": 1,
@@ -73,7 +73,9 @@ In certain conditions, the Hedera network will return a response that signifies 
   }
 }
 ```
+
 #### Result
+
 ```json
 {
   "id": 1,
@@ -85,7 +87,9 @@ In certain conditions, the Hedera network will return a response that signifies 
   }
 }
 ```
+
 #### Error
+
 ```json
 {
   "id": 1,
@@ -97,7 +101,8 @@ In certain conditions, the Hedera network will return a response that signifies 
   }
 }
 ```
-## hedera\_signTransaction
+
+## hedera_signTransaction
 
 The `hedera_signTransaction` signs a `TransactionBody` and returns a `SignatureMap` to the caller.
 
@@ -115,6 +120,7 @@ The `hedera_signTransaction` signs a `TransactionBody` and returns a `SignatureM
 ### Example
 
 #### Request
+
 ```json
 {
   "id": 1,
@@ -126,7 +132,9 @@ The `hedera_signTransaction` signs a `TransactionBody` and returns a `SignatureM
   }
 }
 ```
+
 #### Result
+
 ```json
 {
   "id": 1,
@@ -136,7 +144,8 @@ The `hedera_signTransaction` signs a `TransactionBody` and returns a `SignatureM
   }
 }
 ```
-## hedera\_executeTransaction
+
+## hedera_executeTransaction
 
 When a dApp only requires the services of the controller to act as a relay to the Hedera network for submitting an already signed transaction, it can use the `hedera_executeTransaction` method.
 
@@ -164,6 +173,7 @@ In certain conditions, the Hedera network with return a response that signifies 
 ### Example
 
 #### Request
+
 ```json
 {
   "id": 1,
@@ -174,7 +184,9 @@ In certain conditions, the Hedera network with return a response that signifies 
   }
 }
 ```
+
 #### Result
+
 ```json
 {
   "id": 1,
@@ -188,6 +200,7 @@ In certain conditions, the Hedera network with return a response that signifies 
 ```
 
 #### Error
+
 ```json
 {
   "id": 1,
@@ -199,7 +212,8 @@ In certain conditions, the Hedera network with return a response that signifies 
   }
 }
 ```
-## hedera\_signAndExecuteQuery
+
+## hedera_signAndExecuteQuery
 
 This method provides functionality to perform a query on a Hedera consensus node. Many Queries against consensus nodes have a transaction fee [Learn more about Queries](https://docs.hedera.com/hedera/sdks-and-apis/sdks/queries).
 
@@ -216,8 +230,7 @@ Most requests that do not change network state can be performed against a [Mirro
     1. `Object` - Result of the Query submitteed to a Hedera consensus node
       1.1. `response` : `String` - Base64 encoding of the Hedera API response
 
-
-## hedera\_signMessage
+## hedera_signMessage
 
 This method accepts a plain text string value as input. If approved by the user, the controller UTF-8 encodes this message prepended with "\x19Hedera Signed Message:\n" plus the length of the message and signs the resulting bytes in the same manner as HAPI transactions are signed. The resulting signature(s) are transmitted back to the user encoded in a SignatureMap structure. The pseudo code for computing the signature is as follows:
 
@@ -264,7 +277,7 @@ This method accepts a plain text string value as input. If approved by the user,
 }
 ```
 
-## hedera\_getNodeAddresses
+## hedera_getNodeAddresses
 
 While constructing a transaction for transmission to a controller, a dApp needs to choose which Hedera Network node shall receive the transaction prior to signing (this is a requirement of the Hedera API Protocol). While a dApp can easily obtain a list of potential Hedera Nodes, a controller may not have an all-inclusive list nor a path to the node’s gRPC endpoint. The `hedera_getNodeAddresses` method allows a dApp to request a list of node wallet addresses known to the controller. The controller should only include nodes in this list that it is willing and able to submit transactions to at the time of the request.
 
@@ -281,7 +294,7 @@ While constructing a transaction for transmission to a controller, a dApp needs 
 {
   "id": 1,
   "jsonrpc": "2.0",
-  "method": "hedera_getNodeAddresses",
+  "method": "hedera_getNodeAddresses"
 }
 ```
 

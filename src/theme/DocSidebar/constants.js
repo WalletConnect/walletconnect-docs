@@ -9,4 +9,11 @@ export const appKit_environments = [
   'ios',
   'unity'
 ]
-export const walletKit_environments = ['web', 'ios', 'android', 'flutter', 'react-native', 'c-sharp']
+export const walletKit_environments = [
+  'web',
+  'ios',
+  'android',
+  'flutter',
+  'react-native',
+  'c-sharp'
+]

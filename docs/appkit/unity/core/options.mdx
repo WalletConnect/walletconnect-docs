@@ -107,7 +107,6 @@ To enable Web3Modal to detect wallets installed on mobile devices, you need to m
 </TabItem>
 </Tabs>
 
-
 ### Fullscreen in WebGL
 
 The default `unityInstance.SetFullscreen(1)` method enables fullscreen for the canvas node by pushing
@@ -119,6 +118,5 @@ By requesting fullscreen on the container, the modal will always be rendered on 
 
 ```javascript
 // Use this instead of unityInstance.SetFullscreen(1) to enable full screen
-document.querySelector('#canvas-container').requestFullscreen();
+document.querySelector('#canvas-container').requestFullscreen()
 ```
-

@@ -24,13 +24,13 @@ const chains = [mainnet, arbitrum] as const
 export const config = defaultWagmiConfig({
   chains,
   projectId,
-  metadata,
+  metadata
 })
 reconnect(config)
 
 // 3. Create modal
 const modal = createWeb3Modal({
   wagmiConfig: config,
-  projectId,
+  projectId
 })
 ```

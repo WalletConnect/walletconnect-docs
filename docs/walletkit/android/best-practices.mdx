@@ -12,7 +12,7 @@ A pairing is a connection between a wallet and a dapp that has fixed permissions
 
 ```kotlin
 val pairingParams = Wallet.Params.Pair(pairingUri)
-Web3Wallet.pair(pairingParams, 
+Web3Wallet.pair(pairingParams,
     onSuccess = {
         //Subscribed on the pairing topic successfully. Wallet should await for a session proposal
     },
@@ -36,7 +36,7 @@ val coreDelegate = object : CoreClient.CoreDelegate {
 }
 
 CoreClient.setDelegate(coreDelegate)
-````
+```
 
 ### Pairing Expiry
 
@@ -52,7 +52,7 @@ val coreDelegate = object : CoreClient.CoreDelegate {
 
 CoreClient.setDelegate(coreDelegate)
 
-````
+```
 
 ### Expected User flow
 
@@ -209,7 +209,7 @@ val walletDelegate = object : Web3Wallet.WalletDelegate {
     ...other callbacks
 }
 Web3Wallet.setWalletDelegate(walletDelegate)
-````
+```
 
 ### Expected User flow
 

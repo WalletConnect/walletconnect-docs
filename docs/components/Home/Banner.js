@@ -9,7 +9,8 @@ const Banner = () => {
       <div className={styles.banner__text}>
         <h2>WalletConnect Docs</h2>
         <p>
-        WalletConnect gives developers the tools to build user experiences that make digital ownership effortless, intuitive, and secure.
+          WalletConnect gives developers the tools to build user experiences that make digital
+          ownership effortless, intuitive, and secure.
         </p>
         {/* <Link to="/getting-started">
           Get Started

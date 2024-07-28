@@ -19,6 +19,7 @@ Connecting a wallet, proving control of an address with an off-chain signature, 
 WalletConnect uses permissions expressed as ReCaps to enable a One-Click Authentication.
 
 ## Pre-requisites
+
 In order for SIWE to work, you need to have a backend to communicate with. This backend will be used to generate a nonce, verify messages and handle sessions.
 More info [here](https://docs.login.xyz/sign-in-with-ethereum/quickstart-guide/implement-the-backend)
 
@@ -32,21 +33,21 @@ import {
   formatMessage,
   type SIWEVerifyMessageArgs,
   type SIWECreateMessageArgs
-} from '@web3modal/siwe-react-native';
+} from '@web3modal/siwe-react-native'
 
 export const siweConfig = createSIWEConfig({
   getNonce: async (): Promise<string> => {
     // The getNonce method functions as a safeguard
     // against spoofing, akin to a CSRF token.
 
-    return await api.getNonce();
+    return await api.getNonce()
   },
   verifyMessage: async ({ message, signature, cacao }: SIWEVerifyMessageArgs): Promise<boolean> => {
     try {
       // This function ensures the message is valid,
       // has not been tampered with, and has been appropriately
       // signed by the wallet address.
-      
+
       const isValid = await api.verifyMessage({ message, signature, cacao })
 
       return isValid
@@ -69,8 +70,8 @@ export const siweConfig = createSIWEConfig({
     try {
       // The users session must be destroyed when calling `signOut`.
 
-      await api.signOut();
-      return true;
+      await api.signOut()
+      return true
     } catch {
       return false
     }
@@ -87,15 +88,16 @@ export const siweConfig = createSIWEConfig({
     return {
       domain: 'your domain',
       uri: 'your uri',
-      chains: [1,137], // array of chain ids
+      chains: [1, 137], // array of chain ids
       statement: 'Please sign with your account',
       iat: new Date().toISOString()
     }
-  },
+  }
 })
 ```
 
 ## Initialize AppKit with your `siweConfig`
+
 Add the siwe configuration in `createWeb3Modal` initialization
 
 ```ts
@@ -125,28 +127,28 @@ interface SIWEConfig {
 
 
   /** Optional **/
-  
+
   // Callback when user signs in
   onSignIn?: (session?: SIWESession) => void
 
   // Callback when user signs out
   onSignOut?: () => void
-  
+
   // Defaults to true
   enabled?: boolean
-  
+
   // In milliseconds, defaults to 5 minutes
   nonceRefetchIntervalMs?: number
-  
+
   // In milliseconds, defaults to 5 minutes
   sessionRefetchIntervalMs?: number
-  
+
   // Defaults to true
   signOutOnDisconnect?: boolean
-  
+
   // Defaults to true
   signOutOnAccountChange?: boolean
-  
+
   // Defaults to true
   signOutOnNetworkChange?: boolean
 }

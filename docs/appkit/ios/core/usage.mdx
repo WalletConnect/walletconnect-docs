@@ -100,7 +100,7 @@ public var sessionRejectionPublisher: AnyPublisher<(Session.Proposal, Reason), N
 public var sessionDeletePublisher: AnyPublisher<(String, Reason), Never>
 public var sessionResponsePublisher: AnyPublisher<Response, Never>
 public var socketConnectionStatusPublisher: AnyPublisher<SocketConnectionStatus, Never>
-public var authResponsePublisher: AnyPublisher<(id: RPCID, result: Result<(Session?, [Cacao]), AuthError>), Never> 
+public var authResponsePublisher: AnyPublisher<(id: RPCID, result: Result<(Session?, [Cacao]), AuthError>), Never>
 ```
 
 ### Sign methods

@@ -38,31 +38,29 @@ import { WalletConnectWalletAdapter } from '@walletconnect/solana-adapter'
 /* highlight-add-end */
 
 export const SolanaContext = ({ children }: { children: ReactNode }) => {
-	const endpoint = useMemo(() => clusterApiUrl(WalletAdapterNetwork.Mainnet), [])
+  const endpoint = useMemo(() => clusterApiUrl(WalletAdapterNetwork.Mainnet), [])
 
-	const wallets = useMemo(
-		() => [
+  const wallets = useMemo(
+    () => [
       /* highlight-add-start */
-			new WalletConnectWalletAdapter({
-				network: WalletAdapterNetwork.Mainnet,
-				options: {
-					projectId: 'YOUR_PROJECT_ID',
-				},
-			}),
+      new WalletConnectWalletAdapter({
+        network: WalletAdapterNetwork.Mainnet,
+        options: {
+          projectId: 'YOUR_PROJECT_ID'
+        }
+      })
       /* highlight-add-end */
-		],
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-		[],
-	)
+    ],
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    []
+  )
 
-	return (
-		<ConnectionProvider endpoint={endpoint}>
-			<WalletProvider wallets={wallets} autoConnect>
-				<WalletModalProvider>
-					{children}
-				</WalletModalProvider>
-			</WalletProvider>
-		</ConnectionProvider>
-	)
+  return (
+    <ConnectionProvider endpoint={endpoint}>
+      <WalletProvider wallets={wallets} autoConnect>
+        <WalletModalProvider>{children}</WalletModalProvider>
+      </WalletProvider>
+    </ConnectionProvider>
+  )
 }
 ```

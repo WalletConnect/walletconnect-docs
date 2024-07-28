@@ -14,11 +14,11 @@ export const env_icons = {
   next,
   vue,
   javascript,
-  "react-native": reactNative,
+  'react-native': reactNative,
   flutter,
   android,
   ios,
   unity,
-  "c-sharp":csharp,
+  'c-sharp': csharp,
   web: javascript
 }

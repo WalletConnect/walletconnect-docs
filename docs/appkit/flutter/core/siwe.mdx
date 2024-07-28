@@ -19,6 +19,7 @@ Connecting a wallet, proving control of an address with an off-chain signature, 
 WalletConnect uses permissions expressed as ReCaps to enable a One-Click Authentication.
 
 ## Pre-requisites
+
 In order for SIWE to work, you need to have a backend to communicate with. This backend will be used to generate a nonce, verify messages and handle sessions.
 More info [here](https://docs.login.xyz/sign-in-with-ethereum/quickstart-guide/implement-the-backend)
 
@@ -84,7 +85,7 @@ final _siweConfig = SIWEConfig(
   },
   signOut: () async {
     // Called when wallet disconnects if `signOutOnDisconnect == true` and/or when
-    // `signOutOnAccountChange == true` and/or 
+    // `signOutOnAccountChange == true` and/or
     // `signOutOnNetworkChange == true`
     try {
       final success = await yourApi.signOut();
@@ -105,6 +106,7 @@ final _siweConfig = SIWEConfig(
 ```
 
 ## Initialize Web3Modal with your `siweConfig`
+
 Add the siwe configuration in `W3MService` initialization
 
 :::info note

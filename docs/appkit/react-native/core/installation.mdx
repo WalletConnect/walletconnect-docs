@@ -79,7 +79,6 @@ AppKit has support for [Wagmi](https://wagmi.sh) and [Ethers](https://docs.ether
 
 </PlatformTabItem>
 
-
 <PlatformTabItem value="ethers">
 
 {' '}
@@ -153,6 +152,7 @@ Example:
   <!-- Add other wallet schemes names here -->
 </array>
 ```
+
 </TabItem>
 
 <TabItem value="android" label="Android">
@@ -173,6 +173,7 @@ Example:
   <!-- Add other wallet package names here -->
 </queries>
 ```
+
 </TabItem>
 </Tabs>
 
@@ -211,6 +212,7 @@ Your configuration should look like this:
   }
 }
 ```
+
 </TabItem>
 <TabItem value="android" label="Android">
 To enable AppKit to detect wallets installed on the device in your Expo project for Android, follow these steps:
@@ -218,6 +220,7 @@ To enable AppKit to detect wallets installed on the device in your Expo project 
 1. Open your `app.json` (or `app.config.js`) file.
 2. Locate the plugins section within the configuration.
 3. Add `queries.js` in the plugins array:
+
 ```js
 {
   "plugins": [
@@ -234,49 +237,43 @@ To enable AppKit to detect wallets installed on the device in your Expo project 
 ```js
 // based on https://github.com/expo/config-plugins/issues/123#issuecomment-1746757954
 
-const {
-  AndroidConfig,
-  withAndroidManifest,
-  createRunOncePlugin,
-} = require("expo/config-plugins");
+const { AndroidConfig, withAndroidManifest, createRunOncePlugin } = require('expo/config-plugins')
 
 const queries = {
   package: [
-    { $: { "android:name": "com.wallet.crypto.trustapp" } },
-    { $: { "android:name": "io.metamask" } },
-    { $: { "android:name": "me.rainbow" } },
-    { $: { "android:name": "io.zerion.android" } },
-    { $: { "android:name": "io.gnosis.safe" } },
-    { $: { "android:name": "com.uniswap.mobile" } },
+    { $: { 'android:name': 'com.wallet.crypto.trustapp' } },
+    { $: { 'android:name': 'io.metamask' } },
+    { $: { 'android:name': 'me.rainbow' } },
+    { $: { 'android:name': 'io.zerion.android' } },
+    { $: { 'android:name': 'io.gnosis.safe' } },
+    { $: { 'android:name': 'com.uniswap.mobile' } }
     // Add other wallet package names here
   ]
-};
-
+}
 
 /**
  * @param {import('@expo/config-plugins').ExportedConfig} config
  */
-const withAndroidManifestService = (config) => {
-  return withAndroidManifest(config, (config) => {
+const withAndroidManifestService = config => {
+  return withAndroidManifest(config, config => {
     config.modResults.manifest = {
       ...config.modResults.manifest,
-      queries,
-    };
+      queries
+    }
 
-    return config;
-  });
-};
+    return config
+  })
+}
 
 module.exports = createRunOncePlugin(
   withAndroidManifestService,
-  "withAndroidManifestService",
-  "1.0.0"
-);
+  'withAndroidManifestService',
+  '1.0.0'
+)
 ```
 
-
 5. Add the wallet package names you want to be detected by your app.
-</TabItem>
+      </TabItem>
 </Tabs>
 
 </TabItem>
@@ -309,21 +306,15 @@ npm install @coinbase/wallet-mobile-sdk react-native-mmkv
 <PlatformTabs groupId="eth-lib" activeOptions={["wagmi", "ethers", "ethers5"]}>
 
 <PlatformTabItem value="wagmi">
-```bash npm2yarn
-npm install @web3modal/coinbase-wagmi-react-native
-```
+  ```bash npm2yarn npm install @web3modal/coinbase-wagmi-react-native ```
 </PlatformTabItem>
 
 <PlatformTabItem value="ethers">
-```bash npm2yarn
-npm install @web3modal/coinbase-ethers-react-native
-```
+  ```bash npm2yarn npm install @web3modal/coinbase-ethers-react-native ```
 </PlatformTabItem>
 
 <PlatformTabItem value="ethers5">
-```bash npm2yarn
-npm install @web3modal/coinbase-ethers-react-native
-```
+  ```bash npm2yarn npm install @web3modal/coinbase-ethers-react-native ```
 </PlatformTabItem>
 
 </PlatformTabs>
@@ -396,7 +387,10 @@ Check <a href="https://mobilewalletprotocol.github.io/wallet-mobile-sdk/docs/cli
 </TabItem>
 
 <TabItem value="expo" label="Expo">
-  Coinbase SDK doesn't support Expo Projects. More info <a href="https://github.com/MobileWalletProtocol/wallet-mobile-sdk/issues/206#issuecomment-1468836345">here</a>
+  Coinbase SDK doesn't support Expo Projects. More info{' '}
+  <a href="https://github.com/MobileWalletProtocol/wallet-mobile-sdk/issues/206#issuecomment-1468836345">
+    here
+  </a>
 </TabItem>
 
 </Tabs>

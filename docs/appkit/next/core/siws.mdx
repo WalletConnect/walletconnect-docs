@@ -1,0 +1,515 @@
+---
+title: One-Click Auth / SIWS
+---
+
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
+import Button from '../../../components/button'
+
+# Sign In With Solana
+
+AppKit provides a simple solution for integrating with "Sign In With Solana" (SIWS), a new form of authentication that enables users to control their digital identity with their Solana account.
+SIWS is modeled [EIP-4361](https://docs.login.xyz/general-information/siwe-overview/eip-4361) (Sign In With Ethereum) and based on [CAIP122](https://github.com/ChainAgnostic/CAIPs/blob/master/CAIPs/caip-122.md).
+
+## One-Click Auth
+
+**One-Click Auth** represents a key advancement within WalletConnect v2, streamlining the user authentication process in Web3Modal by enabling them to seamlessly connect with a wallet and sign a SIWS message with just one click.
+
+Connecting a wallet, proving control of an address with an off-chain signature, authorizing specific actions. These are the kinds of authorizations that can be encoded as ["ReCaps"](https://github.com/ChainAgnostic/CAIPs/blob/main/CAIPs/caip-222.md). ReCaps are permissions for a specific website or dapp that can be compactly encoded as a long string in the message you sign and translated by any wallet into a straight-forward one-sentence summary.
+WalletConnect uses permissions expressed as ReCaps to enable a One-Click Authentication.
+
+## NextAuth
+
+[NextAuth](https://next-auth.js.org/) is a complete open-source authentication solution for Next.js applications.
+It is designed from the ground up to support Next.js and Serverless. We can use NextAuth with SIWS to handle users authentication and sessions.
+
+## Installation
+
+<Tabs groupId="version">
+<TabItem value="one-click-auth" label="One-Click Auth">
+
+```bash npm2yarn
+npm i @web3modal/siws next-auth
+```
+
+</TabItem>
+<TabItem value="legacy" label="Legacy">
+
+:::caution
+For a better UX we recommend using One-Click Auth.
+:::
+
+Install the Web3Modal SIWS package, additionally we also recommend installing [siws](https://github.com/phantom/sign-in-with-solana?tab=readme-ov-file) which will abstract a lot of the required logic.
+
+```bash npm2yarn
+npm i @web3modal/siws siws next-auth
+```
+
+</TabItem>
+</Tabs>
+
+## Configure your SIWS Client
+
+<Tabs groupId="version">
+<TabItem value="one-click-auth" label="One-Click Auth">
+
+```ts
+import { getCsrfToken, signIn, signOut, getSession } from 'next-auth/react'
+import type { SIWSVerifyMessageArgs, SIWSCreateMessageArgs, SIWSSession } from '@web3modal/siws'
+import { createSIWSConfig, formatMessage } from '@web3modal/siws'
+
+export const siwsConfig = createSIWSConfig({
+  getMessageParams: async () => ({
+    domain: typeof window !== 'undefined' ? window.location.host : '',
+    uri: typeof window !== 'undefined' ? window.location.origin : '',
+    chains: ['5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp', '4uhcVJyU9pJkvQyS88uRDiswHXSCkY3z'], // array of chain ids
+    statement: 'Please sign with your account'
+  }),
+  createMessage: ({ address, ...args }: SIWSCreateMessageArgs) => formatMessage(args, address),
+  getNonce: async () => {
+    const nonce = await getCsrfToken()
+    if (!nonce) {
+      throw new Error('Failed to get nonce!')
+    }
+
+    return nonce
+  },
+  getSession: async () => {
+    const session = await getSession()
+    if (!session) {
+      throw new Error('Failed to get session!')
+    }
+
+    const { address, chainId } = session as unknown as SIWSSession
+
+    return { address, chainId }
+  },
+  verifyMessage: async ({ message, signature }: SIWSVerifyMessageArgs) => {
+    try {
+      const success = await signIn('credentials', {
+        message,
+        redirect: false,
+        signature,
+        callbackUrl: '/protected'
+      })
+
+      return Boolean(success?.ok)
+    } catch (error) {
+      return false
+    }
+  },
+  signOut: async () => {
+    try {
+      await signOut({
+        redirect: false
+      })
+
+      return true
+    } catch (error) {
+      return false
+    }
+  }
+})
+```
+
+### `verifySignature`
+
+Verify a SIWS signature.
+
+```ts
+import { verifySignature } from '@web3modal/siws'
+
+const isValid = await verifySignature({ address, message, signature })
+```
+
+### `getChainIdFromMessage`
+
+Get the chain ID from the SIWS message.
+
+```ts
+import { getChainIdFromMessage } from '@web3modal/siws'
+
+const chainId = getChainIdFromMessage(message)
+```
+
+### `getAddressFromMessage`
+
+Get the address from the SIWS message.
+
+```ts
+import { getAddressFromMessage } from '@web3modal/siws'
+
+const address = getAddressFromMessage(message)
+```
+
+</TabItem>
+<TabItem value="legacy" label="Legacy">
+
+Let's create a file to instantiate our SIWS configuration. For this example we will use `config/siws.ts`
+
+```ts
+import { getCsrfToken, signIn, signOut, getSession } from 'next-auth/react'
+
+import { SiwsMessage } from 'siws'
+
+import type { SIWSVerifyMessageArgs, SIWSCreateMessageArgs } from '@web3modal/siws'
+import { createSIWSConfig } from '@web3modal/siws'
+
+export const siwsConfig = createSIWSConfig({
+  createMessage: ({ nonce, address, chainId }: SIWSCreateMessageArgs) =>
+    new SiwsMessage({
+      version: '1',
+      domain: window.location.host,
+      uri: window.location.origin,
+      address,
+      chainId,
+      nonce,
+      // Human-readable ASCII assertion that the user will sign, and it must not contain `\n`.
+      statement: 'Sign in With Solana.'
+    }).prepareMessage(),
+  getNonce: async () => {
+    const nonce = await getCsrfToken()
+    if (!nonce) {
+      throw new Error('Failed to get nonce!')
+    }
+
+    return nonce
+  },
+  getSession,
+  verifyMessage: async ({ message, signature }: SIWSVerifyMessageArgs) => {
+    try {
+      const success = await signIn('credentials', {
+        message,
+        redirect: false,
+        signature,
+        callbackUrl: '/protected'
+      })
+
+      return Boolean(success?.ok)
+    } catch (error) {
+      return false
+    }
+  },
+  signOut: async () => {
+    try {
+      await signOut({
+        redirect: false
+      })
+
+      return true
+    } catch (error) {
+      return false
+    }
+  }
+})
+```
+
+</TabItem>
+</Tabs>
+
+## Set up your API route
+
+Add `NEXTAUTH_SECRET` as an environment variable, it will be used to encrypt and decrypt user sessions. [Learn more.](https://next-auth.js.org/configuration/options#nextauth_secret)
+
+Create your API route at `app/api/auth/[...nextauth]/route.ts`.
+
+<Tabs groupId="version">
+<TabItem value="one-click-auth" label="One-Click Auth">
+
+```ts
+import NextAuth from 'next-auth'
+import credentialsProvider from 'next-auth/providers/credentials'
+import {
+  type SIWSSession,
+  verifySignature,
+  getChainIdFromMessage,
+  getAddressFromMessage
+} from '@web3modal/siws'
+
+declare module 'next-auth' {
+  interface Session extends SIWSSession {
+    address: string
+    chainId: number
+  }
+}
+
+const nextAuthSecret = process.env.NEXTAUTH_SECRET
+if (!nextAuthSecret) {
+  throw new Error('NEXTAUTH_SECRET is not set')
+}
+
+const projectId = process.env.NEXT_PUBLIC_PROJECT_ID
+if (!projectId) {
+  throw new Error('NEXT_PUBLIC_PROJECT_ID is not set')
+}
+
+const providers = [
+  credentialsProvider({
+    name: 'Solana',
+    credentials: {
+      message: {
+        label: 'Message',
+        type: 'text',
+        placeholder: 'solana'
+      },
+      signature: {
+        label: 'Signature',
+        type: 'text',
+        placeholder: 'solana'
+      }
+    },
+    async authorize(credentials) {
+      try {
+        if (!credentials?.message) {
+          throw new Error('SiwsMessage is undefined')
+        }
+        const { message, signature } = credentials
+        const address = getAddressFromMessage(message)
+        const chainId = getChainIdFromMessage(message)
+
+        const isValid = await verifySignature({
+          address,
+          message,
+          signature
+        })
+
+        if (isValid) {
+          return {
+            id: `${chainId}:${address}`
+          }
+        }
+
+        return null
+      } catch (e) {
+        return null
+      }
+    }
+  })
+]
+
+const handler = NextAuth({
+  // https://next-auth.js.org/configuration/providers/oauth
+  secret: nextAuthSecret,
+  providers,
+  session: {
+    strategy: 'jwt'
+  },
+  callbacks: {
+    session({ session, token }) {
+      if (!token.sub) {
+        return session
+      }
+
+      const [, chainId, address] = token.sub.split(':')
+      if (chainId && address) {
+        session.address = address
+        session.chainId = parseInt(chainId, 10)
+      }
+
+      return session
+    }
+  }
+})
+
+export { handler as GET, handler as POST }
+```
+
+</TabItem>
+<TabItem value="legacy" label="Legacy">
+
+```ts
+import { NextAuthOptions } from 'next-auth'
+import credentialsProvider from 'next-auth/providers/credentials'
+import { getCsrfToken } from 'next-auth/react'
+import NextAuth from 'next-auth/next'
+
+import type { SIWSSession } from '@web3modal/siws'
+import { SiwsMessage } from 'siws'
+
+declare module 'next-auth' {
+  interface Session extends SIWSSession {
+    address: string
+    chainId: number
+  }
+}
+
+const nextAuthSecret = process.env.NEXTAUTH_SECRET
+if (!nextAuthSecret) {
+  throw new Error('NEXTAUTH_SECRET is not set')
+}
+// Get your projectId on https://cloud.walletconnect.com
+const projectId = process.env.NEXT_PUBLIC_PROJECT_ID
+if (!projectId) {
+  throw new Error('NEXT_PUBLIC_PROJECT_ID is not set')
+}
+
+const authOptions: NextAuthOptions = {
+  // https://next-auth.js.org/configuration/providers/oauth
+  secret: nextAuthSecret,
+  providers: [
+    credentialsProvider({
+      name: 'Solana',
+      credentials: {
+        message: {
+          label: 'Message',
+          type: 'text',
+          placeholder: '0x0'
+        },
+        signature: {
+          label: 'Signature',
+          type: 'text',
+          placeholder: '0x0'
+        }
+      },
+      async authorize(credentials, req) {
+        try {
+          if (!credentials?.message) {
+            throw new Error('SiwsMessage is undefined')
+          }
+          const siws = new SiwsMessage(credentials.message)
+          const nonce = await getCsrfToken({ req: { headers: req.headers } })
+          const result = await siws.verify({
+            signature: credentials?.signature || '',
+            nonce
+          })
+          if (result.success) {
+            return {
+              id: `solana:${siws.chainId}:${siws.address}`
+            }
+          }
+
+          return null
+        } catch (e) {
+          return null
+        }
+      }
+    })
+  ],
+  session: {
+    strategy: 'jwt'
+  },
+  callbacks: {
+    session({ session, token }) {
+      if (!token.sub) {
+        return session
+      }
+
+      const [, chainId, address] = token.sub.split(':')
+      if (chainId && address) {
+        session.address = address
+        session.chainId = parseInt(chainId, 10)
+      }
+
+      return session
+    }
+  }
+}
+
+const handler = NextAuth(authOptions)
+export { handler as GET, handler as POST }
+```
+
+</TabItem>
+</Tabs>
+
+<Button name="Learn More" url="https://next-auth.js.org/" />
+
+## Initialize Web3Modal with your `siwsConfig`.
+
+```js
+createWeb3Modal({
+  //..
+  siwsConfig
+})
+```
+
+### SIWS Config reference
+
+```ts
+interface SIWSConfig {
+  // Required
+  getNonce: () => Promise<string>
+  createMessage: (args: SIWSCreateMessageArgs) => string
+  verifyMessage: (args: SIWSVerifyMessageArgs) => Promise<boolean>
+  getSession: () => Promise<SIWSSession | null>
+  signOut: () => Promise<boolean>
+
+  // Optional
+  onSignIn?: (session?: SIWSSession) => void
+  onSignOut?: () => void
+  // Defaults to true
+  enabled?: boolean
+  // In milliseconds, defaults to 5 minutes
+  nonceRefetchIntervalMs?: number
+  // In milliseconds, defaults to 5 minutes
+  sessionRefetchIntervalMs?: number
+  // Defaults to true
+  signOutOnDisconnect?: boolean
+  // Defaults to true
+  signOutOnAccountChange?: boolean
+  // Defaults to true
+  signOutOnNetworkChange?: boolean
+}
+```
+
+### Required
+
+#### getNonce
+
+The getNonce method functions as a safeguard against spoofing, akin to a CSRF token. The siws package provides a generateNonce() helper, or you can utilize an existing CSRF token from your backend if available.
+
+#### createMessage
+
+The official siws package offers a straightforward method for generating an EIP-4361-compatible message, which can subsequently be authenticated using the same package. The nonce parameter is derived from your getNonce endpoint, while the address and chainId variables are sourced from the presently connected wallet.
+
+#### verifyMessage
+
+The `verifyMessage` method should lean on the siws package's new
+
+```js
+SiwsMessage(message).validate(signature)
+```
+
+to ensure the message is valid, has not been tampered with, and has been appropriately signed by the wallet address.
+
+#### getSession
+
+The backend session should store the associated address and chainId and return it via the `getSession` method.
+
+#### signOut
+
+The users session can be destroyed calling `signOut`.
+
+### Optional
+
+#### onSignIn `(session?: SIWSSession) => void`
+
+Callback when user signs in.
+
+#### onSignOut `() => void`
+
+Callback when user signs out.
+
+#### enabled `boolean` - defaults to `true`
+
+Whether or not to enable SIWS. Defaults to true.
+
+#### nonceRefetchIntervalMs `number` - defaults to `300000`ms (5 minutes)
+
+How often to refetch the nonce, in milliseconds.
+
+#### sessionRefetchIntervalMs `number` - defaults to `300000`ms (5 minutes)
+
+How often to refetch the session, in milliseconds.
+
+#### signOutOnDisconnect `boolean` - defaults to true
+
+Whether or not to sign out when the user disconnects their wallet.
+
+#### signOutOnAccountChange `boolean` - defaults to true
+
+Users will be signed out and redirected to the SIWS view to sign a new message in order to keep the SIWS session in sync with the connected account.
+
+#### signOutOnNetworkChange `boolean` - defaults to true
+
+Users will be signed out and redirected to the SIWS view to sign a new message in order to keep the SIWS session in sync with the connected account/network.

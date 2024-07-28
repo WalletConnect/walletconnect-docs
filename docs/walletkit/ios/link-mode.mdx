@@ -4,7 +4,7 @@ WalletKit link mode is a low latency mechanism for transporting 1-click auth req
 
 To support link mode add universal link for your wallet in Cloud project configuration dashboard, configure your `AppMetadata.Redirect` with a valid universal link and set the `linkMode` property to `true`:
 
-```swift
+````swift
 let metadata = AppMetadata(
     ...
     redirect: try! AppMetadata.Redirect(native: "exampleApp://", universal: "https://example.com/example_wallet", linkMode: true)
@@ -23,14 +23,12 @@ Once link mode and universal linking are properly configured and the user intera
 
 ```swift
 try Web3Wallet.instance.dispatchEnvelope(url.absoluteString)
-```
+````
 
-Ensure to handle incoming universal links in different methods of `AppDelegate` or `SceneDelegate`. 
+Ensure to handle incoming universal links in different methods of `AppDelegate` or `SceneDelegate`.
 
 For more information on how to configure universal links for your app, refer to the [Apple Documentation](https://developer.apple.com/documentation/xcode/allowing-apps-and-websites-to-link-to-your-content?language=objc).
 
 For a debugging guide, visit the [Debugging Universal Links](https://developer.apple.com/documentation/technotes/tn3155-debugging-universal-links) page.
 
 You can also find thiss [article](https://developer.apple.com/documentation/xcode/supporting-universal-links-in-your-app?language=objc) helpful.
-
-

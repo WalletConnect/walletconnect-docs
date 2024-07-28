@@ -17,7 +17,7 @@ const typeToImageMap = {
 
 const productToLinkMap = {
   w3m: './appkit/overview',
-  w3w: './walletkit/overview',
+  w3w: './walletkit/overview'
 }
 
 export const Card = ({ title, description, links, product, children, image }) => {

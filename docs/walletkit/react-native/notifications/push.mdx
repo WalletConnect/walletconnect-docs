@@ -12,8 +12,8 @@ For the push notifications to be forwarded to FCM or APNs, the [Push Server](../
 
 To enable a device for push notifications, it's essential to register the device token using `Web3Wallet.registerDeviceToken`. This token can be obtained from either FCM or APNS, depending on the platform used.
 
-To receive push notifications from WalletConnect's Push Server via Firebase Cloud Messaging, you will need to setup Firebase in your project. 
-You can follow their docummentation - [Firebase documentation](https://rnfirebase.io/messaging/usage#installation). 
+To receive push notifications from WalletConnect's Push Server via Firebase Cloud Messaging, you will need to setup Firebase in your project.
+You can follow their docummentation - [Firebase documentation](https://rnfirebase.io/messaging/usage#installation).
 Once you have Firebase configured, you can obtain the device token by calling `messaging().getToken()`. This unique token is used to identify each device.
 
 ```ts

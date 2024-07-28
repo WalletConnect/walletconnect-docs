@@ -24,7 +24,7 @@
   z-index: 100;
 }
 
-.walletKit{
+.walletKit {
   top: 20%;
 }
 
@@ -92,27 +92,27 @@
   filter: invert(1);
 }
 
-.envIcon{
+.envIcon {
   border: none;
   height: 1.25rem;
   width: 1.25rem;
   border-radius: 0;
 }
 
-@media (max-width: 996px){
-  .container{
+@media (max-width: 996px) {
+  .container {
     padding-top: 0 !important;
     padding-bottom: 10px;
   }
-  .dropdownContainer{
+  .dropdownContainer {
     background-color: var(--ifm-navbar-background-color);
     top: -160%;
   }
-  .dropdownButton{
+  .dropdownButton {
     background-color: var(--ifm-navbar-background-color);
   }
-    
-  .walletKit{
+
+  .walletKit {
     top: -70%;
   }
 }

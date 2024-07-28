@@ -16,7 +16,7 @@ export default function Dropdown({ list, isWalletKit }) {
   const [isOpen, setIsOpen] = useState(false)
 
   if (!selected) {
-  if(typeof window === 'undefined') return true
+    if (typeof window === 'undefined') return true
     const environment = getEnvFromCurrentPath(list)
     if (!environment) {
       throw Error("The current path doesn't contain any environment.")
@@ -58,20 +58,30 @@ export default function Dropdown({ list, isWalletKit }) {
   return (
     <div className={s.container} ref={menuRef}>
       <div className={s.dropdownButton} onClick={() => setIsOpen(p => !p)}>
-        <img className={`${s.envIcon} ${isIconWhite(selected) && s.invertOnLightMode}`} src={env_icons[selected]} alt={selected} />
+        <img
+          className={`${s.envIcon} ${isIconWhite(selected) && s.invertOnLightMode}`}
+          src={env_icons[selected]}
+          alt={selected}
+        />
         {parseEnvironment(selected)}
         <span className={`${s.dropdownArrow} ${isOpen && s.rotateArrow}`} />
       </div>
-      {isOpen && <div className={`${s.dropdownContainer} ${isWalletKit && s.walletKit}`}>
-        {list
-          .filter(i => i !== selected)
-          .map(item => (
-            <span className={s.item} onClick={() => handleItem(item)}>
-              <img className={`${s.envIcon} ${isIconWhite(item) && s.invertOnLightMode}`} src={env_icons[item]} alt={item} />
-              {parseEnvironment(item)}
-            </span>
-          ))}
-      </div>}
+      {isOpen && (
+        <div className={`${s.dropdownContainer} ${isWalletKit && s.walletKit}`}>
+          {list
+            .filter(i => i !== selected)
+            .map(item => (
+              <span className={s.item} onClick={() => handleItem(item)}>
+                <img
+                  className={`${s.envIcon} ${isIconWhite(item) && s.invertOnLightMode}`}
+                  src={env_icons[item]}
+                  alt={item}
+                />
+                {parseEnvironment(item)}
+              </span>
+            ))}
+        </div>
+      )}
     </div>
   )
 }

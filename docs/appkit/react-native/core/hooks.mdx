@@ -22,10 +22,11 @@ import { useWeb3Modal } from '@web3modal/wagmi-react-native'
 export default function Component() {
   const { open, close } = useWeb3Modal()
 
-  open()
+open()
 
-  //...
+//...
 }
+
 ````
 </PlatformTabItem>
 
@@ -51,10 +52,11 @@ import { useWeb3Modal } from '@web3modal/ethers5-react-native'
 export default function Component() {
   const { open, close } = useWeb3Modal()
 
-  open()
+open()
 
-  //...
+//...
 }
+
 ````
 </PlatformTabItem>
 
@@ -106,6 +108,7 @@ Get the current value of the modal's state
 import { useWeb3ModalState } from '@web3modal/wagmi-react-native'
 
 const { open, selectedNetworkId } = useWeb3ModalState()
+
 ````
 </PlatformTabItem>
 
@@ -123,6 +126,7 @@ const { open, selectedNetworkId } = useWeb3ModalState()
 import { useWeb3ModalState } from '@web3modal/ethers5-react-native'
 
 const { open, selectedNetworkId } = useWeb3ModalState()
+
 ````
 </PlatformTabItem>
 
@@ -167,6 +171,7 @@ const event = useWeb3ModalEvents()
 import { useWeb3ModalEvents } from '@web3modal/ethers-react-native'
 
 const event = useWeb3ModalEvents()
+
 ````
 </PlatformTabItem>
 
@@ -192,6 +197,7 @@ Get the metadata information from the connected wallet
 import { useWalletInfo } from '@web3modal/wagmi-react-native'
 
 const { walletInfo } = useWalletInfo()
+
 ````
 
 </PlatformTabItem>
@@ -202,6 +208,7 @@ import { useWalletInfo } from '@web3modal/ethers-react-native'
 
 const { walletInfo } = useWalletInfo()
 ````
+
 </PlatformTabItem>
 
 <PlatformTabItem value="ethers5">
@@ -209,7 +216,8 @@ const { walletInfo } = useWalletInfo()
 import { useWalletInfo } from '@web3modal/ethers5-react-native'
 
 const { walletInfo } = useWalletInfo()
-````
+
+```
 
 </PlatformTabItem>
 
@@ -232,3 +240,4 @@ const { walletInfo } = useWalletInfo()
 </PlatformTabItem>
 
 </PlatformTabs>
+```
