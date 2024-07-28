@@ -1,0 +1,231 @@
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
+
+<Tabs groupId="version">
+<TabItem value="one-click-auth" label="One-Click Auth">
+
+```ts
+import { SiwsMessage } from 'siws'
+import {
+    type SIWSSession,
+    type SIWSVerifyMessageArgs,
+    type SIWSCreateMessageArgs,
+    createSIWSConfig,
+    formatMessage,
+  } from '@web3modal/siws'
+
+const BASE_URL = 'http://localhost:8080';
+
+/* Function that returns the user's session - this should come from your SIWS backend */
+async function getSession(){
+   const res = await fetch(BASE_URL + "/session", {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    credentials: 'include',
+  });
+  if (!res.ok) {
+      throw new Error('Network response was not ok');
+  }
+
+  const data = await res.json();
+  return data == "{}" ?  null : data as SIWSSession;
+}
+
+/* Use your SIWS server to verify if the message and the signature are valid */
+ const verifyMessage = async ({ message, signature }: SIWSVerifyMessageArgs) => {
+    try {
+        const response = await fetch(BASE_URL + "/verify", {
+            method: "POST",
+            headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json',
+            },
+            mode: 'cors',
+            body: JSON.stringify({ message, signature }),
+            credentials: 'include'
+        });
+
+        if (!response.ok) {
+            return false;
+        }
+
+        const result = await response.json();
+        return result === true;
+      } catch (error) {
+        return false;
+      }
+}
+
+// Check the full example for signOut and getNonce functions ...
+
+/* Create a SIWS configuration object */
+const siwsConfig = createSIWSConfig({
+        getMessageParams: async () => ({
+              domain: window.location.host,
+              uri: window.location.origin,
+              chains: ['5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp', '4uhcVJyU9pJkvQyS88uRDiswHXSCkY3z', 'EtWTRABZaYq6iMfeYKouRu166VU2xqa1'],
+              statement: 'Please sign with your account',
+            }),
+        createMessage: ({ address, ...args }:   formatMessage(args, address),
+        getNonce,
+        getSession,
+        verifyMessage,
+        signOut,
+    })
+```
+
+## Server Side
+
+Setting up a backend server using Express for a web application that interacts with the Siws protocol.
+
+### Routes:
+
+- GET '/nonce': Generates and returns a nonce (single-use random number).
+- POST '/verify': Uses the Siws protocol to verify the message, requiring a signature (the one you are going to approve throw the UX) and a nonce stored in the session.
+- GET '/session': Retrieves the stored Siws object from the session.
+- GET '/signout': Clears the session.
+
+```ts
+import cors from 'cors'
+import express from 'express'
+import Session from 'express-session'
+import { generateNonce, SiwsMessage } from 'siws'
+
+const app = express()
+
+// configure cors and sessions
+app.use(
+  cors({
+    origin: 'http://localhost:5173', // frontend URL
+    credentials: true
+  })
+)
+app.use(express.json())
+app.use(
+  Session({
+    name: 'siws-quickstart',
+    secret: 'siws-quickstart-secret',
+    resave: true,
+    saveUninitialized: true,
+    cookie: { secure: false, sameSite: true }
+  })
+)
+
+app.get('/nonce', function (_, res) {
+  res.setHeader('Content-Type', 'text/plain')
+  console.log('/nonce')
+  res.send(generateNonce())
+})
+
+// verify the message
+app.post('/verify', async (req, res) => {
+  try {
+    if (!req.body.message) {
+      return res.status(400).json({ error: 'SiwsMessage is undefined' })
+    }
+    let SIWSObject = new SiwsMessage(req.body.message)
+    const { data: message } = await SIWSObject.verify({
+      signature: req.body.signature,
+      nonce: req.session.nonce
+    })
+
+    const address = message.address
+    const chainId = message.chainId
+
+    // save the session with the address and chainId (SIWSSession)
+    req.session.siws = { address, chainId }
+    req.session.save(() => res.status(200).send(true))
+  } catch (e) {
+    // clean the session
+    req.session.siws = null
+    req.session.nonce = null
+    req.session.save(() => res.status(500).json({ message: e.message }))
+  }
+})
+
+/// ... check the github repository for the others endpoints
+
+// get the session
+app.get('/session', (req, res) => {
+  res.setHeader('Content-Type', 'application/json')
+  res.send(req.session.siws)
+})
+```
+
+Check the github full example to see the full flow working: [siws-quickstart](https://github.com/WalletConnect/web-examples/tree/main/dapps/appkit-siws/react/)
+
+### `verifySignature`
+
+Verify a SIWS signature.
+
+```ts
+import { verifySignature } from '@web3modal/siws'
+
+const isValid = await verifySignature({ address, message, signature, chainId, projectId })
+```
+
+</TabItem>
+<TabItem value="legacy" label="Legacy">
+
+With help of the [siws package](https://github.com/phantom/sign-in-with-solana?tab=readme-ov-
+file#sign-in-input-generation-backend
+
+) we will create the required configuration for Web3Modal.
+
+:::note
+The nonce and verification process will be implemented in your backend. [Read more.](https://github.com/phantom/sign-in-with-solana?tab=readme-ov-
+file#sign-in-input-generation-backend
+
+)
+:::
+
+```ts
+import { SiwsMessage } from 'siws'
+import { createSIWSConfig } from '@web3modal/siws'
+import type { SIWSCreateMessageArgs, SIWSVerifyMessageArgs } from '@web3modal/siws'
+
+/* Function that creates a SIWS message */
+function createMessage({ nonce, address, chainId }: SIWSCreateMessageArgs){
+  const message = new SiwsMessage({
+    version: '1',
+    domain: window.location.host,
+    uri: window.location.origin,
+    address,
+    chainId,
+    nonce,
+    statement: 'Sign in With Solana.'
+  })
+
+  return message.prepareMessage()
+}
+
+/* Function that returns the user's session */
+async function getSession(){
+  //...
+}
+
+/* Use your SIWS server to verify if the message and the signature are valid */
+async function verifyMessage({ message, signature }: SIWSVerifyMessageArgs){
+  try {
+    const isValid = await validateMessage({ message, signature })
+
+    return isValid
+  } catch (error) {
+    return false
+  }
+},
+
+/* Create a SIWS configuration object */
+const siwsConfig = createSIWSConfig({
+  createMessage,
+  getNonce,
+  getSession,
+  verifyMessage,
+  signOut
+})
+```
+
+</TabItem>
+</Tabs>

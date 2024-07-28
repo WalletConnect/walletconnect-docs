@@ -1,20 +1,19 @@
 ---
-title: One-Click Auth / SIWE
+title: One-Click Auth / SIWS
 ---
 
-AppKit provides a simple solution for integrating with "Sign In With Ethereum" (SIWE), a form of authentication that enables users to control their digital identity with their Ethereum account. SIWE is a standard also known as EIP-4361.
+AppKit provides a simple solution for integrating with "Sign In With Solana" (SIWS), a form of authentication that enables users to control their digital identity with their Solana account. SIWS is a standard also known as [EIP-4361](https://docs.login.xyz/general-information/siwe-overview/eip-4361).
 
 ### One-Click Auth
 
-One-Click Auth represents a key advancement within WalletConnect v2, streamlining the user authentication process in AppKit by enabling them to seamlessly connect with a wallet and sign a SIWE message with just one click.
-Connecting a wallet, proving control of an address with an off-chain signature, authorizing specific actions. These are the kinds of authorizations that can be encoded as "ReCaps". ReCaps are permissions for a specific website or dapp that can be compactly encoded as a long string in the message you sign and translated by any wallet into a straight-forward one-sentence summary. WalletConnect uses permissions expressed as ReCaps to enable a One-Click Authentication.
-
+One-Click Auth represents a key advancement within WalletConnect v2, streamlining the user authentication process in AppKit by enabling them to seamlessly connect with a wallet and sign a SIWS message with just one click.
+Connecting a wallet, proving control of an address with an off-chain signature, authorizing specific actions. These are the kinds of authorizations that can be encoded as "ReCaps". ReCaps are permissions for a specific website or dapp that can be compactly encoded as a long string in the message you sign and translated by any wallet into a straight-forward one-sentence summary. WalletConnect uses permissions expressed as ReCaps to enable a One-Click Authentication.
 
 ### Configure your AppKit Client
 
-To integrate SIWE with AppKit, you need to configure your Web3Modal client using `AuthRequestParams`, which are required to create a SIWE message for the user to sign:
+To integrate SIWS with AppKit, you need to configure your Web3Modal client using `AuthRequestParams`, which are required to create a SIWS message for the user to sign:
 
-```swift
+````swift
 Web3Modal.configure(
     ...
     authRequestParams: authRequestParams,
@@ -27,12 +26,12 @@ Web3Modal.configure(
 extension AuthRequestParams {
     static func stub(
         domain: String = "yourDappDomain.com",
-        chains: [String] = ["eip155:1", "eip155:137"],
+        chains: [String] = ["5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp", "4uhcVJyU9pJkvQyS88uRDiswHXSCkY3z"], // array of chain ids
         nonce: String = "uniqueNonce",
         uri: String = "https://yourDappDomain.com/login",
         statement: String? = "I accept the Terms of Service: https://yourDappDomain.com/tos",
         resources: [String]? = nil, // Here your dapp may request authorization with ReCaps
-        methods: [String]? = ["personal_sign", "eth_sendTransaction"]
+        methods: [String]? = ["personal_sign"]
     ) -> AuthRequestParams {
         return try! AuthRequestParams(
             domain: domain,
@@ -45,11 +44,11 @@ extension AuthRequestParams {
         )
     }
 }
-```
+````
 
-Configuring your Web3Modal client with AuthRequestParams will prioritize authentication requests over regular session proposals. If the wallet supports One-Click Auth, the session will be created and the user will automatically authenticate without needing to send another SIWE request over personal_sign. If the wallet does not support One-Click Auth, it will fall back to the session proposal. In this case, to authenticate the user, you can send another session request to prove address ownership.
+Configuring your Web3Modal client with AuthRequestParams will prioritize authentication requests over regular session proposals. If the wallet supports One-Click Auth, the session will be created and the user will automatically authenticate without needing to send another SIWS request over personal_sign. If the wallet does not support One-Click Auth, it will fall back to the session proposal. In this case, to authenticate the user, you can send another session request to prove address ownership.
 
-To check whether the user has signed a SIWE message, subscribe to authResponsePublisher:
+To check whether the user has signed a SIWS message, subscribe to authResponsePublisher:
 
 ```swift
 Web3Modal.instance.authResponsePublisher.sink { (id, result) in
@@ -67,7 +66,6 @@ The latest release of AppKit supports link mode, a low latency mechanism for tra
 
 To support link mode, configure your AppMetadata.Redirect with a valid universal link and set the linkMode property to true:
 
-
 ```swift
 let metadata = AppMetadata(
     ...
@@ -84,7 +82,6 @@ Web3Modal.configure(
 For more information on how to configure universal links for your app, refer to the [Apple Documentation](https://developer.apple.com/documentation/xcode/allowing-apps-and-websites-to-link-to-your-content?language=objc).
 
 For a debugging guide, visit the [Debugging Universal Links](https://developer.apple.com/documentation/technotes/tn3155-debugging-universal-links) page.
-
 
 Once link mode is configured, your dApp will connect and send requests to wallets via universal links after receiving proof from the wallet that it also supports link mode.
 

@@ -1,0 +1,187 @@
+---
+title: One-Click Auth / SIWS
+---
+
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
+import Button from '../../../components/button'
+
+# Sign In With Solana
+
+AppKit provides a simple solution for integrating with "Sign In With Solana" (SIWS), a new form of authentication that enables users to control their digital identity with their Solana account.
+SIWS is modeled [EIP-4361](https://docs.login.xyz/general-information/siwe-overview/eip-4361) (Sign In With Ethereum) and based on [CAIP122](https://github.com/ChainAgnostic/CAIPs/blob/master/CAIPs/caip-122.md).
+
+## One-Click Auth
+
+**One-Click Auth** represents a key advancement within WalletConnect v2, streamlining the user authentication process in Web3Modal by enabling them to seamlessly connect with a wallet and sign a SIWS message with just one click.
+
+Connecting a wallet, proving control of an address with an off-chain signature, authorizing specific actions. These are the kinds of authorizations that can be encoded as ["ReCaps"](https://github.com/ChainAgnostic/CAIPs/blob/main/CAIPs/caip-222.md). ReCaps are permissions for a specific website or dapp that can be compactly encoded as a long string in the message you sign and translated by any wallet into a straight-forward one-sentence summary.
+WalletConnect uses permissions expressed as ReCaps to enable a One-Click Authentication.
+
+## Pre-requisites
+
+In order for SIWS to work, you need to have a backend to communicate with. This backend will be used to generate a nonce, verify messages and handle sessions.
+More info [here](https://github.com/phantom/sign-in-with-solana?tab=readme-ov-file#sign-in-input-generation-backend)
+
+## Configure your SIWS Client
+
+```ts
+// siwsConfig.ts
+
+import {
+  createSIWSConfig,
+  formatMessage,
+  type SIWSVerifyMessageArgs,
+  type SIWSCreateMessageArgs
+} from '@web3modal/siws-react-native'
+
+export const siwsConfig = createSIWSConfig({
+  getNonce: async (): Promise<string> => {
+    // The getNonce method functions as a safeguard
+    // against spoofing, akin to a CSRF token.
+
+    return await api.getNonce()
+  },
+  verifyMessage: async ({ message, signature, cacao }: SIWSVerifyMessageArgs): Promise<boolean> => {
+    try {
+      // This function ensures the message is valid,
+      // has not been tampered with, and has been appropriately
+      // signed by the wallet address.
+
+      const isValid = await api.verifyMessage({ message, signature, cacao })
+
+      return isValid
+    } catch (error) {
+      return false
+    }
+  },
+  getSession: async (): Promise<SIWSSession | null> => {
+    // The backend session should store the associated address and chainId
+    // and return it via the `getSession` method.
+
+    const session = await api.getSession()
+    if (!session) throw new Error('Failed to get session!')
+
+    const { address, chainId } = session
+
+    return { address, chainId }
+  },
+  signOut: (): Promise<boolean> => {
+    try {
+      // The users session must be destroyed when calling `signOut`.
+
+      await api.signOut()
+      return true
+    } catch {
+      return false
+    }
+  },
+  createMessage: ({ address, ...args }: SIWSCreateMessageArgs): string => {
+    // Method for generating an EIP-4361-compatible message.
+
+    return formatMessage(args, address)
+  },
+  getMessageParams: () => {
+    // Parameters to create the SIWS message internally.
+    // More info in https://github.com/ChainAgnostic/CAIPs/blob/main/CAIPs/caip-222.method
+
+    return {
+      domain: 'your domain',
+      uri: 'your uri',
+      chains: ['5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp', '4uhcVJyU9pJkvQyS88uRDiswHXSCkY3z'], // array of chain ids
+      statement: 'Please sign with your account',
+      iat: new Date().toISOString()
+    }
+  }
+})
+```
+
+## Initialize AppKit with your `siwsConfig`
+
+Add the siws configuration in `createWeb3Modal` initialization
+
+```ts
+import { siwsConfig } from './siwsConfig.ts'
+
+createWeb3Modal({
+  //..
+  /* highlight-add-start */
+  siwsConfig
+  /* highlight-add-end */
+})
+```
+
+### SIWS Config reference
+
+```ts
+interface SIWSConfig {
+  /** Required **/
+  getNonce: () => Promise<string>
+  createMessage: (args: SIWSCreateMessageArgs) => string
+  verifyMessage: (args: SIWSVerifyMessageArgs) => Promise<boolean>
+  getSession: () => Promise<SIWSSession | null>
+  signOut: () => Promise<boolean>
+
+  /** Required for One-Click Auth **/
+  getMessageParams `() => Promise<{ domain: string, uri: string, chains: number[], statement: string }>
+
+
+  /** Optional **/
+
+  // Callback when user signs in
+  onSignIn?: (session?: SIWSSession) => void
+
+  // Callback when user signs out
+  onSignOut?: () => void
+
+  // Defaults to true
+  enabled?: boolean
+
+  // In milliseconds, defaults to 5 minutes
+  nonceRefetchIntervalMs?: number
+
+  // In milliseconds, defaults to 5 minutes
+  sessionRefetchIntervalMs?: number
+
+  // Defaults to true
+  signOutOnDisconnect?: boolean
+
+  // Defaults to true
+  signOutOnAccountChange?: boolean
+
+  // Defaults to true
+  signOutOnNetworkChange?: boolean
+}
+```
+
+## Exported functions
+
+### `verifySignature`
+
+Verify a SIWS signature. Internally it calls your backend verification method.
+
+```ts
+import { verifySignature } from '@web3modal/siws-react-native'
+
+const isValid = await verifySignature({ address, message, signature })
+```
+
+### `getChainIdFromMessage`
+
+Get the chain ID from the SIWS message.
+
+```ts
+import { getChainIdFromMessage } from '@web3modal/siws-react-native'
+
+const chainId = getChainIdFromMessage(message)
+```
+
+### `getAddressFromMessage`
+
+Get the address from the SIWS message.
+
+```ts
+import { getAddressFromMessage } from '@web3modal/siws-react-native'
+
+const address = getAddressFromMessage(message)
+```
