@@ -93,7 +93,7 @@ Once link mode is configured, your dApp will connect and send requests to wallet
 The wallet will also send responses using app links. Your app needs to pass these responses to the Web3Modal client so it can process them.
 
 ```kotlin
-Web3Modal.handleDeepLink(url) { error -> 
+Web3Modal.handleDeepLink(url) { error ->
     //handle error
 
 }
@@ -115,6 +115,6 @@ Ensure that your App Link is properly configured in your app's Manifest file wit
 
 For more information on how to configure app links for your app, refer to the [Android Documentation](https://developer.android.com/training/app-links/verify-android-applinks).
 
-For enabling links to app content check [this](https://developer.android.com/training/app-links/deep-linking) documentation page. 
+For enabling links to app content check [this](https://developer.android.com/training/app-links/deep-linking) documentation page.
 
 For more information on how to interact with other apps using intents, see [Android Intent Documentation](https://developer.android.com/training/basics/intents).

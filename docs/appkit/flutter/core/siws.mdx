@@ -1,0 +1,219 @@
+---
+title: One-Click Auth / SIWS
+---
+
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
+import Button from '../../../components/button'
+
+# Sign In With Solana
+
+AppKit provides a simple solution for integrating with "Sign In With Solana" (SIWS), a new form of authentication that enables users to control their digital identity with their Solana account.
+SIWS is modeled [EIP-4361](https://docs.login.xyz/general-information/siwe-overview/eip-4361). (Sign In With Ethereum) but extends beyond its capabilities [SIWS](https://github.com/phantom/sign-in-with-solana).
+
+## One-Click Auth
+
+**One-Click Auth** represents a key advancement within WalletConnect v2, streamlining the user authentication process in Web3Modal by enabling them to seamlessly connect with a wallet and sign a SIWS message with just one click.
+
+Connecting a wallet, proving control of an address with an off-chain signature, authorizing specific actions. These are the kinds of authorizations that can be encoded as ["ReCaps"](https://github.com/ChainAgnostic/CAIPs/blob/main/CAIPs/caip-222.md). ReCaps are permissions for a specific website or dapp that can be compactly encoded as a long string in the message you sign and translated by any wallet into a straight-forward one-sentence summary.
+WalletConnect uses permissions expressed as ReCaps to enable a One-Click Authentication.
+
+## Pre-requisites
+
+In order for SIWS to work, you need to have a backend to communicate with. This backend will be used to generate a nonce, verify messages and handle sessions.
+More info [here](https://github.com/phantom/sign-in-with-solana?tab=readme-ov-file#sign-in-input-generation-backend)
+
+:::caution
+This feature is currently in beta. To get it, change your dependency to use `web3modal_flutter: ^3.3.0-beta06`
+:::
+
+## Configure your SIWSConfig object
+
+```dart
+final _siwsConfig = SIWSConfig(
+  getNonce: () async {
+    // The getNonce method functions as a safeguard
+    // against spoofing, akin to a CSRF token.
+
+    return await yourApi.getNonce();
+  },
+  getMessageParams: () async {
+    // Parameters to create the SIWS message internally.
+    // More info in https://github.com/ChainAgnostic/CAIPs/blob/main/CAIPs/caip-222.method
+
+    return SIWSMessageArgs(
+      domain: 'yourdomain.com',
+      uri: 'https://yourdomain.com/login',
+      statement: 'Please sign with your account',
+       methods: ['personal_sign'],
+    );
+  },
+  createMessage: (SIWSCreateMessageArgs args) {
+    // Method for generating an CAIP-222 compatible message.
+    // You can use our provided formatMessage() method or implement your own
+
+    return AuthSignature.formatMessage(args);
+  },
+  verifyMessage: (SIWSVerifyMessageArgs args) async {
+    // This function ensures the message is valid,
+    // has not been tampered with, and has been appropriately
+    // signed by the wallet address.
+
+    try {
+      final isValidMessage = await yourApi.verifyMessage(args.toJson());
+      return isValidMessage;
+    } catch (error) {
+      // error validating message
+      return false;
+    }
+  },
+  getSession: () async {
+    // Called after verifyMessage() succeeds
+    // The backend session should store the associated address and chainId
+    // and return it via the `getSession` method.
+
+    try {
+      final session = await yourApi.getSession();
+      return SIWSSession(address: session.address, chains: [session.chainId]);
+    } catch (error) {
+      // error getting session
+      rethrow;
+    }
+  },
+  onSignIn: (SIWSSession session) {
+    // Called after getSession() succeeds
+  },
+  signOut: () async {
+    // Called when wallet disconnects if `signOutOnDisconnect == true` and/or when
+    // `signOutOnAccountChange == true` and/or
+    // `signOutOnNetworkChange == true`
+    try {
+      final success = await yourApi.signOut();
+      return success;
+    } catch (error) {
+      // error signing out
+      return false;
+    }
+  },
+  onSignOut: () {
+    // Called after signOut() succeeds
+  },
+  // enabled: true, // OPTIONAL. Enables One-Click Auth + SIWS logic, if `false`, regular session proposal will be used. (default `true`)
+  // signOutOnDisconnect: true, // OPTIONAL (default `true`)
+  // signOutOnAccountChange: true, // OPTIONAL (default `true`)
+  // signOutOnNetworkChange: true, // OPTIONAL (default `true`)
+);
+```
+
+## Initialize Web3Modal with your `siwsConfig`
+
+Add the siws configuration in `W3MService` initialization
+
+:::info note
+If `siwsConfig:` is used then `W3MService` object will require a `BuildContext context` parameter to be passed.
+:::
+
+```dart
+final _w3mService = W3MService(
+  context: context,
+  projectId: '{YOUR_PROJECT_ID}',
+  metadata: const PairingMetadata(
+    ...
+  ),
+  siwsConfig: _siwsConfig, // not setting `siwsConfig` hast the same effect as setting `false` on `siwsConfig.enable`
+);
+```
+
+### SIWSConfig reference
+
+```dart
+class SIWSConfig {
+  final Future<String> Function() getNonce;
+  final Future<SIWSMessageArgs> Function() getMessageParams;
+  final String Function(SIWSCreateMessageArgs args) createMessage;
+  final Future<bool> Function(SIWSVerifyMessageArgs args) verifyMessage;
+  final Future<SIWSSession?> Function() getSession;
+  final Future<bool> Function() signOut;
+  // Callback when user signs in
+  final Function(SIWSSession session)? onSignIn;
+  // Callback when user signs out
+  final VoidCallback? onSignOut;
+  // Defaults to true
+  final bool enabled;
+  // In milliseconds, defaults to 5 minutes
+  final int nonceRefetchIntervalMs;
+  // In milliseconds, defaults to 5 minutes
+  final int sessionRefetchIntervalMs;
+  // Defaults to true
+  final bool signOutOnDisconnect;
+  // Defaults to true
+  final bool signOutOnAccountChange;
+  // Defaults to true
+  final bool signOutOnNetworkChange;
+  //
+
+  SIWSConfig({
+    required this.getNonce,
+    required this.getMessageParams,
+    required this.createMessage,
+    required this.verifyMessage,
+    required this.getSession,
+    required this.signOut,
+    this.onSignIn,
+    this.onSignOut,
+    this.enabled = true,
+    this.signOutOnDisconnect = true,
+    this.signOutOnAccountChange = true,
+    this.signOutOnNetworkChange = true,
+    this.nonceRefetchIntervalMs = 300000,
+    this.sessionRefetchIntervalMs = 300000,
+  });
+}
+
+```
+
+## Exported functions
+
+### `generateNonce`
+
+Simple method to generate a timestamp-based nonce
+
+```dart
+AuthSignature.generateNonce();
+```
+
+### `formatMessage`
+
+Creates [CAIP-222](https://github.com/ChainAgnostic/CAIPs/blob/main/CAIPs/caip-222.md) message based on input arguments.
+
+```dart
+AuthSignature.formatMessage(args);
+```
+
+### `verifySignature`
+
+Verify a SIWS signature. Internally it calls your backend verification method.
+
+```dart
+await AuthSignature.verifySignature(
+  address,
+  message,
+  signature,
+);
+```
+
+### `getChainIdFromMessage`
+
+Get the chain ID from the SIWS message.
+
+```dart
+AuthSignature.getChainIdFromMessage(message);
+```
+
+### `getAddressFromMessage`
+
+Get the address from the SIWS message.
+
+```dart
+AuthSignature.getAddressFromMessage(message);
+```

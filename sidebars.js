@@ -77,7 +77,11 @@ const advanced = {
       label: 'Providers & Adapters',
       collapsible: true,
       collapsed: true,
-      items: ['advanced/providers/ethereum', 'advanced/providers/universal', 'advanced/providers/solana-adapter']
+      items: [
+        'advanced/providers/ethereum',
+        'advanced/providers/universal',
+        'advanced/providers/solana-adapter'
+      ]
     },
     {
       type: 'category',
@@ -150,7 +154,7 @@ const welcome = {
 /** @type {import('@docusaurus/plugin-content-docs').SidebarsConfig} */
 
 module.exports = {
-  WCM:[
+  WCM: [
     {
       type: 'doc',
       label: 'Home',
@@ -174,7 +178,7 @@ module.exports = {
         'advanced/walletconnectmodal/theming',
         'advanced/walletconnectmodal/resources'
       ]
-    },
+    }
   ],
   mainSidebar: [
     {
@@ -247,7 +251,11 @@ module.exports = {
               collapsed: false,
               collapsible: true,
               items: [
-                { type: 'doc', label: 'One-Click Auth', id: 'walletkit/features/one-click-auth' },
+                {
+                  type: 'doc',
+                  label: 'One-Click Auth',
+                  id: 'walletkit/features/one-click-auth'
+                },
                 { type: 'doc', label: 'Notifications', id: 'walletkit/features/notifications' },
                 { type: 'doc', label: 'Verify', id: 'walletkit/features/verify' }
               ]
@@ -280,6 +288,7 @@ module.exports = {
             'appkit/react/core/components',
             'appkit/react/core/custom-connectors',
             'appkit/react/core/siwe',
+            'appkit/react/core/siws',
             'appkit/react/core/theming',
             'appkit/react/core/resources'
           ]
@@ -371,6 +380,7 @@ module.exports = {
             'appkit/next/core/components',
             'appkit/next/core/custom-connectors',
             'appkit/next/core/siwe',
+            'appkit/next/core/siws',
             'appkit/next/core/theming',
             'appkit/next/core/resources'
           ]
@@ -462,6 +472,7 @@ module.exports = {
             'appkit/vue/core/components',
             'appkit/vue/core/custom-connectors',
             'appkit/vue/core/siwe',
+            'appkit/vue/core/siws',
             'appkit/vue/core/theming',
             'appkit/vue/core/resources'
           ]
@@ -553,6 +564,7 @@ module.exports = {
             'appkit/javascript/core/components',
             'appkit/javascript/core/custom-connectors',
             'appkit/javascript/core/siwe',
+            'appkit/javascript/core/siws',
             'appkit/javascript/core/theming',
             'appkit/javascript/core/resources'
           ]
@@ -646,6 +658,7 @@ module.exports = {
             'appkit/react-native/core/hooks',
             'appkit/react-native/core/components',
             'appkit/react-native/core/siwe',
+            'appkit/react-native/core/siws',
             'appkit/react-native/core/resources'
           ]
         },
@@ -728,6 +741,7 @@ module.exports = {
             'appkit/flutter/core/installation',
             'appkit/flutter/core/usage',
             'appkit/flutter/core/siwe',
+            'appkit/flutter/core/siws',
             'appkit/flutter/core/options',
             'appkit/flutter/core/actions',
             'appkit/flutter/core/events',
@@ -773,7 +787,8 @@ module.exports = {
             'appkit/ios/core/usage',
             'appkit/ios/core/options',
             'appkit/ios/core/actions',
-            'appkit/ios/core/one-click-auth',
+            'appkit/ios/core/one-click-auth-siwe',
+            'appkit/ios/core/one-click-auth-siws',
             'appkit/ios/core/custom-chains'
           ]
         },
@@ -810,7 +825,8 @@ module.exports = {
             'appkit/android/core/usage',
             'appkit/android/core/options',
             'appkit/android/core/actions',
-            'appkit/android/core/one-click-auth',
+            'appkit/android/core/one-click-auth-siwe',
+            'appkit/android/core/one-click-auth-siws',
             'appkit/android/core/components',
             'appkit/android/core/theming'
           ]
