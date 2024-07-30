@@ -14,7 +14,7 @@ const wagmiConfig = defaultWagmiConfig({
   /* highlight-add-start */
   auth: {
     email: true, // default to true
-    socials: ['google', 'x', 'github', 'discord', 'apple'],
+    socials: ['farcaster', 'google', 'x', 'github', 'discord', 'apple'],
     showWallets: true, // default to true
     walletFeatures: true // default to true
   }
@@ -43,7 +43,7 @@ const wagmiConfig = createConfig({
       options: { projectId },
       /* highlight-add-start */
       email: true, // default to true
-      socials: ['google', 'x', 'github', 'discord', 'apple'],
+      socials: ['farcaster', 'google', 'x', 'github', 'discord', 'apple'],
       showWallets: true, // default to true
       walletFeatures: true // default to true
       /* highlight-add-end */
@@ -63,7 +63,7 @@ const modal = createWeb3Modal({
     /* highlight-add-start */
     auth: {
       email: true, // default to true
-      socials: ['google', 'x', 'github', 'discord', 'apple'],
+      socials: ['farcaster', 'google', 'x', 'github', 'discord', 'apple'],
       showWallets: true, // default to true
       walletFeatures: true // default to true
     }
@@ -79,7 +79,7 @@ const modal = createWeb3Modal({
 ## Options
 
 - email [boolean]: This boolean defines whether you want to enable email login. Default `true`
-- socials [array]: This array contains the list of social platforms that you want to enable for user authentication. The platforms in the example include Google, X, GitHub, Discord, Apple and Facebook (coming soon). Default `undefined`
+- socials [array]: This array contains the list of social platforms that you want to enable for user authentication. The platforms in the example include Google, X, GitHub, Discord, Apple, Facebook and Farcaster. Default `undefined`
 - showWallets [boolean]: This boolean defines whether you want to show the wallet options on the first connect screen. If this is false and `socials` are enabled, it will show a button that directs you to a new screen displaying the wallet options. Default `true`
 - walletFeatures [boolean]: This boolean defines whether you want to enable wallet features. Wallet features allow users to view their balance, send, receive, and buy funds through a clear user interface. Default `true`
 
