@@ -1,0 +1,51 @@
+import Button from '../../components/button'
+import Wrapper from '../../components/Home/Wrapper'
+import useBaseUrl from '@docusaurus/useBaseUrl'
+
+import reactLogo from '../../../static/assets/home/reactLogo.png'
+import nextjsLogo from '../../../static/assets/home/nextjsLogo.png'
+import vueLogo from '../../../static/assets/home/vueLogo.png'
+import javascriptLogo from '../../../static/assets/home/javascriptLogo.png'
+
+# Notifications
+
+Notifications power web3 communications between apps and their communities, allowing projects to directly engage users with web3-native notifications sent straight to their wallet address.
+Maximize reach with multiple touch points across in-app notifications, in-wallet notifications, and via the Web3Inbox app.
+
+## Get Started
+
+<Wrapper
+  type="large"
+  fit={false}
+  items={[
+    {
+      name: 'React',
+      type: 'react',
+      description: 'Get started with AppKit in React.',
+      icon: reactLogo,
+      href: '../react/notifications/overview'
+    },
+    {
+      name: 'Next.js',
+      type: 'next',
+      description: 'Get started with AppKit in Next.js.',
+      icon: nextjsLogo,
+      href: '../next/notifications/overview',
+      isWhite: true
+    },
+    {
+      name: 'Vue',
+      type: 'vue',
+      description: 'Get started with AppKit in Vue.',
+      icon: vueLogo,
+      href: '../vue/notifications/overview'
+    },
+    {
+      name: 'JavaScript',
+      type: 'javascript',
+      description: 'Get started with AppKit in JavaScript.',
+      icon: javascriptLogo,
+      href: '../javascript/notifications/overview'
+    }
+  ]}
+/>

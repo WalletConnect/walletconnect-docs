@@ -1,0 +1,64 @@
+---
+pagination_next: appkit/react/core/installation
+title: Solana
+---
+
+import Button from '../../components/button'
+import Container from '../../components/Container.js'
+import Wrapper from '../../components/Home/Wrapper'
+import W3MQuickStart from '../../components/W3MQuickStart'
+import useBaseUrl from '@docusaurus/useBaseUrl'
+
+import reactLogo from '../../../static/assets/home/reactLogo.png'
+import nextjsLogo from '../../../static/assets/home/nextjsLogo.png'
+import vueLogo from '../../../static/assets/home/vueLogo.png'
+import javascriptLogo from '../../../static/assets/home/javascriptLogo.png'
+
+# Solana
+
+The AppKit SDK supports Solana, allowing users to connect their Solana wallets to applications. AppKit provides a simple, secure, and seamless in-app experience for users looking to transact within web3.
+
+:::caution
+
+AppKit Solana is in canary and is not recommended for production use.
+:::
+
+<Button name="Try Demo" url="https://lab.web3modal.com/library/solana/" />
+
+## Get Started
+
+<Wrapper
+  type="large"
+  fit={false}
+  items={[
+    {
+      name: 'React',
+      type: 'react',
+      description: 'Get started with AppKit in React.',
+      icon: reactLogo,
+      href: '../react/core/installation?platform=solana'
+    },
+    {
+      name: 'Next.js',
+      type: 'next',
+      description: 'Get started with AppKit in Next.js.',
+      icon: nextjsLogo,
+      href: '../next/core/installation?platform=solana',
+      isWhite: true
+    },
+    {
+      name: 'Vue',
+      type: 'vue',
+      description: 'Get started with AppKit in Vue.',
+      icon: vueLogo,
+      href: '../vue/core/installation?platform=solana'
+    },
+    {
+      name: 'JavaScript',
+      type: 'javascript',
+      description: 'Get started with AppKit in JavaScript.',
+      icon: javascriptLogo,
+      href: '../javascript/core/installation?platform=solana'
+    }
+  ]}
+/>

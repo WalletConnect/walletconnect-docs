@@ -226,14 +226,22 @@ const accountSubscriptions = notifyClient.getActiveSubscriptions({
 
 ```javascript
 // Will return all past Notify messages for the provided subscription topic, keyed by messageId.
-const messageHistory = notifyClient.getNotificationHistory({ topic, limit: 10, startingAfter: 'notification-id', unreadFirst: true })
+const messageHistory = notifyClient.getNotificationHistory({
+  topic,
+  limit: 10,
+  startingAfter: 'notification-id',
+  unreadFirst: true
+})
 ```
 
 #### Marking notification as read
 
 ```javascript
 // Will mark the 2 specific notifications as read
-const messageHistory = notifyClient.markNotificationsAsRead({ topic, notificationIds: ["notification-1", "notification-2" ] })
+const messageHistory = notifyClient.markNotificationsAsRead({
+  topic,
+  notificationIds: ['notification-1', 'notification-2']
+})
 ```
 
 </PlatformTabItem>
@@ -505,8 +513,6 @@ The Notify client is responsible for creating and maintaining subscriptions. To 
 
 ```kotlin
 val projectId = "" // Get Project ID at https://cloud.walletconnect.com/
-val relayUrl = "relay.walletconnect.com"
-val serverUrl = "wss://$relayUrl?projectId=$projectId"
 val connectionType = ConnectionType.AUTOMATIC or ConnectionType.MANUAL
 val appMetaData = Core.Model.AppMetaData(
     name = "Wallet Name",
@@ -516,7 +522,7 @@ val appMetaData = Core.Model.AppMetaData(
     redirect = "kotlin-wallet-wc:/request" // Custom Redirect URI
 )
 
-CoreClient.initialize(relayServerUrl = serverUrl, connectionType = connectionType, application = this, metaData = appMetaData)
+CoreClient.initialize(projectId = projectId, connectionType = connectionType, application = this, metaData = appMetaData)
 
 val init = Notify.Params.Init(CoreClient)
 

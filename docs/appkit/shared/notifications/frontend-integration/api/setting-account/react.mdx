@@ -1,0 +1,19 @@
+```ts
+const {
+  data: account,
+  isRegistered,
+  identityKey,
+  setAccount,
+  error,
+  isLoading
+} = useW3iAccount('eip155:1:0x9A...')
+```
+
+### References
+
+- **data:** CAIP-10 account currently active in Web3Inbox
+- **setAccount:** Change actively managed account in Web3Inbox. Does not need to be used as you can set the account directly in the params.
+- **isRegistered:** A boolean of whether or not the account currently set is registered
+- **identityKey:** Currently set account's identity key
+- **error:** A string, representing possible error of setting an account.
+- **isLoading:** A boolean, representing if an account is being set

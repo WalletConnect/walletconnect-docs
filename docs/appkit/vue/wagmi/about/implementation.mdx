@@ -1,0 +1,46 @@
+For a quick integration you can use `defaultWagmiConfig` function which wraps Wagmi's [`createConfig`](https://wagmi.sh/core/api/createConfig) function with a predefined configuration.
+This includes WalletConnect, Coinbase and Injected connectors, and the [Blockchain API](../../../../cloud/blockchain-api.mdx) as a [transport](https://wagmi.sh/core/api/createConfig#transports)
+
+:::info
+If you're using Nuxt, you can set wagmi's `ssr` option to true and call the `reconnect` function after your application mounts.
+:::
+
+In your `App.vue` file set up the following configuration
+
+```html
+<script setup>
+  import { createWeb3Modal, defaultWagmiConfig } from '@web3modal/wagmi/vue'
+
+  import { mainnet, arbitrum } from 'viem/chains'
+  import { reconnect } from '@wagmi/core'
+
+  // 1. Define constants
+  const projectId = 'YOUR_PROJECT_ID'
+
+  // 2. Create wagmiConfig
+  const metadata = {
+    name: 'Web3Modal',
+    description: 'Web3Modal Example',
+    url: 'https://web3modal.com', // origin must match your domain & subdomain
+    icons: ['https://avatars.githubusercontent.com/u/37784886']
+  }
+
+  const chains = [mainnet, arbitrum]
+  const config = defaultWagmiConfig({
+    chains,
+    projectId,
+    metadata,
+    ...wagmiOptions // Optional - Override createConfig parameters
+  })
+
+  reconnect(config)
+  // 3. Create modal
+  createWeb3Modal({
+    wagmiConfig: config,
+    projectId,
+    enableAnalytics: true // Optional - defaults to your Cloud configuration  
+  })
+</script>
+
+<template> // Rest of your app ... </template>
+```

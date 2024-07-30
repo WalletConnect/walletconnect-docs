@@ -1,0 +1,368 @@
+import CloudBanner from '../../components/CloudBanner'
+
+# Usage
+
+This section provides instructions on how to initialize the WalletKit client, approve sessions with supported namespaces, and respond to session requests, enabling easy integration of Web3 wallets with dapps through a simple and intuitive interface.
+
+## Content
+
+Links to sections on this page. Some sections are platform specific and are only visible when the platform is selected. To view a summary of useful platform specific topics, check out **Extra (Platform Specific)** under this section.
+
+**[Initialization](#initialization)**: Creating a new WalletKit instance and initializing it with a projectId from [Cloud](https://cloud.walletconnect.com).
+
+**Session**: Connection between a dapp and a wallet.
+
+- [Namespace Builder](#namespace-builder):
+  Namespace Builder is a helper utility that greatly reduces the complexity of parsing the required and optional namespaces. It accepts as parameters a session proposal along with your user's chains/methods/events/accounts and returns a ready-to-use object
+- [Session Approval](#session-approval):
+  Approving a session sent from a dapp
+- [Session Rejection](#session-rejection):
+  Rejecting a session sent from a dapp
+- [Responding to Session Requests](#responding-to-session-requests):
+  Responding to session requests sent from a dapp
+- [Updating a Session](#updating-a-session):
+  Updating a session sent between a dapp and wallet
+- [Extending a Session](#extending-a-session):
+  Extending a session between a dapp and wallet
+- [Session Disconnect](#session-disconnect):
+  Disconnecting a session between a dapp and wallet
+- [Register Device Token](#register-device-token)
+  Enabling Wallet Push Notifications by registering a device token.
+- [Subscribe for WalletKit Publishers](#subscribe-for-web3wallet-publishers)
+  Publishers available to subscribe to for WalletKit
+
+<CloudBanner />
+
+## Initialization
+
+Confirm you have configured the [Network Client](../../api/core/relay.mdx) first.
+
+Starting from WalletConnect SDK version 1.9.5, the `redirect` field in the `AppMetadata` object is mandatory. Ensure that the provided value matches your app's URL scheme to prevent redirection-related issues.
+
+Once you're done, in order to initialize a client just call a `configure` method from the Web3Wallet instance wrapper
+
+```swift
+let metadata = AppMetadata(
+    name: "Example Wallet",
+    description: "Wallet description",
+    url: "example.wallet",
+    icons: ["https://avatars.githubusercontent.com/u/37784886"],
+    redirect: AppMetadata.Redirect(native: "example://", universal: nil)
+)
+
+Web3Wallet.configure(
+    metadata: metadata,
+    crypto: DefaultCryptoProvider(),
+    // Used for the Push: "echo.walletconnect.com" will be used by default if not provided
+    pushHost: "echo.walletconnect.com",
+    // Used for the Push: "APNSEnvironment.production" will be used by default if not provided
+    environment: .production
+)
+```
+
+In order to allow users to receive push notifications you have to communicate with Apple Push Notification service and receive unique device token. Register that token with following method:
+
+```swift
+try await Web3Wallet.instance.register(deviceToken: deviceToken)
+```
+
+## Session
+
+A session is a connection between a dapp and a wallet. It is established when a user approves a session proposal from a dapp. A session is active until the user disconnects from the dapp or the session expires.
+
+### Namespace Builder
+
+`AutoNamespaces` is a helper utility that greatly reduces the complexity of parsing the required and optional namespaces. It accepts as parameters a session proposal along with your user's chains/methods/events/accounts and returns ready-to-use `SessionNamespace` object.
+
+```swift
+public static func build(
+    sessionProposal: Session.Proposal,
+    chains: [Blockchain],
+    methods: [String],
+    events: [String],
+    accounts: [Account]
+) throws -> [String: SessionNamespace]
+```
+
+Example usage
+
+```swift
+do {
+    sessionNamespaces = try AutoNamespaces.build(
+        sessionProposal: proposal,
+        chains: [Blockchain("eip155:1")!, Blockchain("eip155:137")!],
+        methods: ["eth_sendTransaction", "personal_sign"],
+        events: ["accountsChanged", "chainChanged"],
+        accounts: [
+            Account(blockchain: Blockchain("eip155:1")!, address: "0xab16a96d359ec26a11e2c2b3d8f8b8942d5bfcdb")!,
+            Account(blockchain: Blockchain("eip155:137")!, address: "0xab16a96d359ec26a11e2c2b3d8f8b8942d5bfcdb")!
+        ]
+    )
+} catch let error as AutoNamespacesError {
+    // reject session proposal if AutoNamespace build function threw
+    try await reject(proposal: proposal, reason: RejectionReason(from: error))
+    return
+}
+// approve session with sessionNamespaces
+try await Web3Wallet.instance.approve(proposalId: proposal.id, namespaces: sessionNamespaces)
+
+```
+
+### EVM methods & events
+
+In @walletconnect/ethereum-provider, (our abstracted EVM SDK for apps) we support by default the following Ethereum methods and events:
+
+```ts
+{
+  //...
+  methods: [
+    "eth_accounts",
+    "eth_requestAccounts",
+    "eth_sendRawTransaction",
+    "eth_sign",
+    "eth_signTransaction",
+    "eth_signTypedData",
+    "eth_signTypedData_v3",
+    "eth_signTypedData_v4",
+    "eth_sendTransaction",
+    "personal_sign",
+    "wallet_switchEthereumChain",
+    "wallet_addEthereumChain",
+    "wallet_getPermissions",
+    "wallet_requestPermissions",
+    "wallet_registerOnboarding",
+    "wallet_watchAsset",
+    "wallet_scanQRCode",
+    "wallet_sendCalls",
+    "wallet_getCallsStatus",
+    "wallet_showCallsStatus",
+    "wallet_getCapabilities",
+  ],
+  events: [
+    "chainChanged",
+    "accountsChanged",
+    "message",
+    "disconnect",
+    "connect",
+  ]
+}
+```
+
+### Session Approval
+
+```swift
+ Web3Wallet.instance.approve(
+    proposalId: "proposal_id",
+    namespaces: sessionNamespaces
+)
+```
+
+When session is successfully approved `sessionsPublishers` will publish a `Session`
+
+```swift
+Web3Wallet.instance.sessionsPublishers
+    .receive(on: DispatchQueue.main)
+    .sink { [weak self] _ in
+        self?.reloadSessions()
+    }.store(in: &publishers)
+```
+
+`Session` object represents an active session connection with a dapp. It contains dapp’s metadata (that you may want to use for displaying an active session to the user), namespaces, and expiry date. There is also a topic property that you will use for linking requests with related sessions.
+
+You can always query settled sessions from the client later with:
+
+```swift
+Web3Wallet.instance.getSessions()
+```
+
+#### Connect Clients
+
+Your Wallet should allow users to scan a QR code generated by dapps. You are responsible for implementing it on your own.
+For testing, you can use our test dapp at: https://react-app.walletconnect.com/, which is v2 protocol compliant.
+Once you derive a URI from the QR code call `pair` method:
+
+```swift
+try await Web3Wallet.instance.pair(uri: uri)
+```
+
+if everything goes well, you should handle following event:
+
+```swift
+Web3Wallet.instance.sessionProposalPublisher
+    .receive(on: DispatchQueue.main)
+    .sink { [weak self] session in
+        self?.verifyDapp(session.context)
+        self?.showSessionProposal(session.proposal)
+    }.store(in: &publishers)
+```
+
+Session proposal is a handshake sent by a dapp and it's purpose is to define a session rules. Handshake procedure is defined by [CAIP-25](https://github.com/ChainAgnostic/CAIPs/blob/master/CAIPs/caip-25.md).
+`Session.Proposal` object conveys set of required and optional `ProposalNamespaces` that contains blockchains methods and events. Dapp requests with methods and wallet will emit events defined in namespaces.
+
+`VerifyContext` provides a domain verification information about `Session.Proposal` and `Request`. It consists of origin of a Dapp from where the request has been sent, validation enum that says whether origin is **unknown**, **valid** or **invalid** and verify URL server.
+
+To enable or disable verification find the **Verify SDK** toggle in your project [cloud](https://cloud.walletconnect.com).
+
+```swift
+public struct VerifyContext: Equatable, Hashable {
+   public enum ValidationStatus {
+       case unknown
+       case valid
+       case invalid
+   }
+
+   public let origin: String?
+   public let validation: ValidationStatus
+   public let verifyUrl: String
+}
+```
+
+The user will either approve the session proposal (with session namespaces) or reject it. Session namespaces must at least contain requested methods, events and accounts associated with proposed blockchains.
+
+Accounts must be provided according to [CAIP10](https://github.com/ChainAgnostic/CAIPs/blob/master/CAIPs/caip-10.md) specification and be prefixed with a chain identifier. chain_id + : + account_address. You can find more on blockchain identifiers in [CAIP2](https://github.com/ChainAgnostic/CAIPs/blob/master/CAIPs/caip-2.md). Our `Account` type meets the criteria.
+
+```
+let account = Account("eip155:1:0xab16a96d359ec26a11e2c2b3d8f8b8942d5bfcdb")!
+```
+
+Accounts sent in session approval must at least match all requested blockchains.
+
+Example proposal namespaces request:
+
+```json
+{
+  "eip155": {
+    "chains": ["eip155:137", "eip155:1"],
+    "methods": ["eth_sign"],
+    "events": ["accountsChanged"]
+  },
+  "cosmos": {
+    "chains": ["cosmos:cosmoshub-4"],
+    "methods": ["cosmos_signDirect"],
+    "events": ["someCosmosEvent"]
+  }
+}
+```
+
+Example session namespaces response:
+
+```json
+{
+  "eip155": {
+    "accounts": [
+      "eip155:137:0xab16a96d359ec26a11e2c2b3d8f8b8942d5bfcdb",
+      "eip155:1:0xab16a96d359ec26a11e2c2b3d8f8b8942d5bfcdb"
+    ],
+    "methods": ["eth_sign"],
+    "events": ["accountsChanged"]
+  },
+  "cosmos": {
+    "accounts": ["cosmos:cosmoshub-4:cosmos1t2uflqwqe0fsj0shcfkrvpukewcw40yjj6hdc0"],
+    "methods": ["cosmos_signDirect", "personal_sign"],
+    "events": ["someCosmosEvent", "proofFinalized"]
+  }
+}
+```
+
+#### Track Sessions
+
+When your `Web3Wallet` instance receives requests from a peer it will publish a related event. Set a subscription to handle them.
+
+To track sessions subscribe to `sessionsPublisher` publisher
+
+```swift
+Web3Wallet.instance.sessionsPublisher
+    .receive(on: DispatchQueue.main)
+    .sink { [weak self] sessions in
+        // Reload UI
+    }.store(in: &publishers)
+```
+
+### Session Rejection
+
+```swift
+try await Web3Wallet.instance.reject(requestId: request.id)
+```
+
+### Responding to Session requests
+
+After the session is established, a dapp will request your wallet's users to sign a transaction or a message. Requests will be delivered by the following publisher.
+
+```swift
+Web3Wallet.instance.sessionRequestPublisher
+  .receive(on: DispatchQueue.main)
+  .sink { [weak self] session in
+      self?.verifyDapp(session.context)
+      self?.showSessionRequest(session.request)
+  }.store(in: &publishers)
+```
+
+When a wallet receives a session request, you probably want to show it to the user. It’s method will be in scope of session namespaces. And it’s params are represented by `AnyCodable` type. An expected object can be derived as follows:
+
+```swift
+if sessionRequest.method == "personal_sign" {
+    let params = try! sessionRequest.params.get([String].self)
+} else if method == "eth_signTypedData" {
+    let params = try! sessionRequest.params.get([String].self)
+} else if method == "eth_sendTransaction" {
+    let params = try! sessionRequest.params.get([EthereumTransaction].self)
+}
+```
+
+Now, your wallet (as it owns your user’s private keys) is responsible for signing the transaction. After doing it, you can send a response to a dapp.
+
+```swift
+let response: AnyCodable = sign(request: sessionRequest) // Implement your signing method
+try await Web3Wallet.instance.respond(topic: request.topic, requestId: request.id, response: .response(response))
+```
+
+### Updating a Session
+
+If you want to update user session's chains, accounts, methods or events you can use session update method.
+
+```swift
+try await Web3Wallet.instance.update(topic: session.topic, namespaces: newNamespaces)
+```
+
+### Extending a Session
+
+By default, session lifetime is set for 7 days and after that time user's session will expire. But if you consider that a session should be extended you can call:
+
+```swift
+try await Web3Wallet.instance.extend(topic: session.topic)
+```
+
+Above method will extend a user's session to a week.
+
+### Session Disconnect
+
+For good user experience your wallet should allow users to disconnect unwanted sessions. In order to terminate a session use `disconnect` method.
+
+```swift
+try await Web3Wallet.instance.disconnect(topic: session.topic)
+```
+
+### Subscribe for Web3Wallet Publishers
+
+The following publishers are available to subscribe:
+
+```swift
+public var sessionProposalPublisher: AnyPublisher<(proposal: Session.Proposal, context: VerifyContext?), Never>
+public var sessionRequestPublisher: AnyPublisher<(request: Request, context: VerifyContext?), Never>
+public var authRequestPublisher: AnyPublisher<(request: AuthRequest, context: VerifyContext?), Never>
+public var sessionPublisher: AnyPublisher<[Session], Never>
+public var socketConnectionStatusPublisher: AnyPublisher<SocketConnectionStatus, Never>
+public var sessionSettlePublisher: AnyPublisher<Session, Never>
+public var sessionDeletePublisher: AnyPublisher<(String, Reason), Never>
+public var sessionResponsePublisher: AnyPublisher<Response, Never>
+```
+
+### Register Device Token
+
+To register a wallet to receive WalletConnect push notifications, call `register` method and pass the device token received from the `didRegisterForRemoteNotificationsWithDeviceToken` method in the `AppDelegate`.
+
+```swift
+
+Web3Wallet.instance.register(deviceToken: deviceToken, enableEncrypted: true)
+
+```

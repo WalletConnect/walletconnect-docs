@@ -1,0 +1,29 @@
+# Installation
+
+Add the `jitpack.io` Maven repository to your `root/build.gradle.kts` file. For example:
+
+```gradle
+allprojects {
+ repositories {
+    mavenCentral()
+    maven { url "https://jitpack.io" }
+ }
+}
+```
+
+In `app/build.gradle.kts` add the notify package and its dependencies:
+
+```gradle
+implementation(platform("com.walletconnect:android-bom:release_version"))
+implementation("com.walletconnect:android-core")
+implementation("com.walletconnect:notify")
+```
+
+#### Requirements
+
+- Android API level minimum 23
+- Java minimum version 11
+
+## Next Steps
+
+Now that you've installed WalletConnect Notify, you're ready to start integrating it. The next section will walk you through the process of setting up your project to use the Notify API.

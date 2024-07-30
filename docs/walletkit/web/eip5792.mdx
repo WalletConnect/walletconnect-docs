@@ -1,0 +1,9 @@
+# Wallet Call API
+
+WalletConnect supports [EIP-5792](https://eips.ethereum.org/EIPS/eip-5792#atomicbatch-capability), which defines new JSON-RPC methods that enable apps to ask a wallet to process a batch of onchain write calls and to check on the status of those calls.
+Applications can specify that these onchain calls be executed taking advantage of specific capabilities previously expressed by the wallet; an additional, a novel wallet RPC is defined to enable apps to query the wallet for those capabilities.
+
+- `wallet_sendCalls`: Requests that a wallet submits a batch of calls.
+- `wallet_getCallsStatus`: Returns the status of a call batch that was sent via wallet_sendCalls.
+- `wallet_showCallsStatus`: Requests that a wallet shows information about a given call bundle that was sent with wallet_sendCalls.
+- `wallet_getCapabilities`: This RPC allows an application to request capabilities from a wallet (e.g. batch transactions, paymaster communication).

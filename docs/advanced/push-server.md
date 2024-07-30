@@ -1,6 +1,6 @@
 # Push Server
 
-The Push Server sends WalletConnect protocol activity using FCM or APNs to users. The Push Server can be used with our [Notify API](../web3wallet/notify/introduction.mdx) and [Web3Wallet SDK](../web3wallet/about.mdx).
+The Push Server sends WalletConnect protocol activity using FCM or APNs to users. The Push Server can be used with our [WalletKit SDK](../walletkit/overview.mdx).
 
 Several options exist for setting up the Push Server:
 
@@ -18,11 +18,15 @@ It is recommended that you use WalletConnect Cloud for simplicity and ease of in
 
 ![create-push-url](/assets/create-push-url.png)
 
-3. From the same settings tab, you will see the FCM and the APNS settings becomes available to setup. Add your [FCM](#firebase-cloud-messaging-fcm) and/or [APNs](#apple-push-notifications-apns) details.
+3. From the same settings tab, you will see the FCM and the APNS settings becomes available to setup. Add your [FCM](#Firebase Cloud Messaging API (FCM v1)) and/or [APNs](#apple-push-notifications-apns) details.
 
 ![fmc-and-apns-details-form](/assets/apns-fmc-details.png)
 
 ### Firebase Cloud Messaging API (FCM v1)
+
+:::info
+If you already have FCM Legacy enabled and then enable FCM v1, push notifications will automatically be sent with the newer FCM v1 API automatically. No migration of devices/apps is necessary.
+:::
 
 - In your [Firebase](https://console.firebase.google.com) project settings, under _Firebase Cloud Messaging API (V1)_, click the Manage Service Accounts link
   ![Manage service accounts link](/assets/push-fcmv1-manage-service-accounts.png)

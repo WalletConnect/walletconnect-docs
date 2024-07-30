@@ -1,0 +1,49 @@
+# Introduction
+
+AppKit provides a toolkit for integrating Web3 notification features into apps. AppKit Notifications can be used to send notifications from your app directly to wallets.
+
+This SDK utilizes WalletConnect's Notify API and is designed for Web3 scenarios, providing event-based notifications for activities like DAO votes, DeFi transaction alerts, and updates for NFT holders. Apps can send notifications to subscribed accounts, and users can receive and view their notifications in a supporting wallet, in the [Web3Inbox.com app](https://app.web3inbox.com), or in the app's frontend. Users can also discover Notify-compatible apps in their wallet or the [Web3Inbox.com app](https://app.web3inbox.com) to subscribe to.
+
+AppKit Notifications is not to be confused with the [Web3Inbox.com app](https://app.web3inbox.com) which allows users to receive and manage their notifications from all apps, as they would in a wallet.
+
+![Web3Inbox](/assets/web3inbox/w3i-hero.png)
+
+## Getting Started
+
+AppKit Notifications can be added to your app in a few steps:
+
+- [Setup your project](cloud-setup) to send authenticated notifications.
+- Use our [frontend SDK](frontend-integration/usage) to enable users to subscribe to notifications in your app.
+- Finally, use [WalletConnect Cloud](cloud-sending) or our [API in your backend](backend-integration) to send notifications to subscribed users.
+
+## Overview
+
+Some of the key features of the Web3Inbox SDK include:
+
+- **Device push notifications:** Push notifications to the user's wallet (if it supports Notify API) or the [Web3Inbox.com app](https://app.web3inbox.com).
+- **Notification history:** Notifications are stored and can be accessed from any device.
+- **Spam protection/subscription control.** Using notification types, subscribers can opt-out of certain notification types they do not want to receive.
+- **Tracking read status across devices.**
+
+## Subscribing and receiving notifications
+
+Users can receive notifications in several places:
+
+- In the [Web3Inbox.com app](https://app.web3inbox.com) which supports push notifications and can be installed to the user's phone
+- In your app's frontend using our [frontend SDK](frontend-integration/usage)
+- Natively in their wallet if the wallet supports Notify API.
+  - You can also test with one of our sample wallets:
+    - [iOS sample wallet](https://testflight.apple.com/join/09bTAryp)
+    - [Android sample wallet](https://appdistribution.firebase.dev/i/d2c86e879abd5a86)
+
+Users can also subscribe to notifications in all of the above locations too. To be discoverable in the Web3Inbox.com app or in wallets, apps must submit an explorer listing.
+
+## Try it out
+
+See the [demo section](demo) for sample apps and the Web3Inbox universal inbox app.
+
+## FAQ
+
+### What chains does Web3Inbox support?
+
+Web3Inbox supports EOA accounts on all `eip155` (EVM) chains, and smart accounts on all `eip155` chains that our Blockchain API [supports](https://github.com/WalletConnect/blockchain-api/blob/master/SUPPORTED_CHAINS.md). We have plans to expand support in the future.

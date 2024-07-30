@@ -1,0 +1,76 @@
+import PlatformTabs from '../../../components/PlatformTabs'
+import PlatformTabItem from '../../../components/PlatformTabItem'
+
+# Push Notifications
+
+WalletKit provides the functionality for wallets to receive push notifications through Firebase Cloud Messaging (FCM) and Apple Push Notification Service (APNs) via the Push Server. This feature ensures that wallets are promptly notified of incoming signature requests. Each push notification contains the encrypted details of the signature request. Upon receiving the notification, it can be decrypted and presented to the developer, allowing for customization of the message according to their requirements.
+
+## Server setup
+
+For the push notifications to be forwarded to FCM or APNs, the [Push Server](../../../advanced/push-server) will need to be configured with your FCM or APNs server API credentials.
+
+## App setup
+
+### Register the device token
+
+To enable a device for push notifications, it's essential to register the device token using `Web3Wallet.registerDeviceToken`. This token can be obtained from either FCM or APNS, depending on the platform used.
+
+This method enables wallets to receive push notifications from WalletConnect's Push Server via Firebase Cloud Messaging. This means you will have to setup your project with Firebase before being able to call `registerDeviceToken()` method.
+
+To register a wallet to receive WalletConnect push notifications, call `Web3Wallet.registerDeviceToken` and pass the Firebase Access Token.
+
+```kotlin
+val firebaseAccessToken: String = //FCM access token received through the Firebase Messaging SDK
+val enableEncrypted: Boolean = true //Flag that enables receiveing the detailed notifications
+
+Web3Wallet.registerDeviceToken(
+    firebaseAccessToken = firebaseAccessToken,
+    enableEncrypted = enableEncrypted,
+    onSuccess = {
+        // callback triggered once registered successfully with the Push Server
+    },
+    onError = { error: Wallet.Model.Error ->
+        // callback triggered if there's an exception thrown during the registration process
+    })
+```
+
+### Receiving push notifications
+
+After the device token is registered, the next step involves setting up the notification service specific to the platform being used. This service will decrypt the incoming requests and forward them to the developer for further processing and integration.
+
+The `PushMessagingService` is a wrapper around the `FirebaseMessagingService`. The `PushMessagingService` class needs to be implemented for WalletKit to be able to decrypt and notify wallets of a push notification sent from the Dapp in the background. This service also needs to be registered in the `AndroidManifest.xml` file similar to the example in the FCM documentation.
+
+```kotlin
+class SampleFirebaseService: PushMessagingService() {
+
+    override fun newToken(token: String) {
+        // Triggered when Firebase Cloud Messaging creates a new token
+    }
+
+    override fun registeringFailed(token: String, throwable: Throwable) {
+        // Triggered when Firebase Cloud Messaging if there is an error with registering with the Push Server with a new token
+    }
+
+    override fun onMessage(message: Core.Model.Message, originalMessage: RemoteMessage) {
+        // Triggered when a message is sent from the Push Server through Firebase Cloud Messaging and the message contains `Core.Model.Message`. The original FCM RemoteMessage is also returned
+    }
+
+    override fun onDefaultBehavior(message: RemoteMessage) {
+        // Triggered when a message is sent from the Push Server through Firebase Cloud Messaging and the message does not contain `Core.Model.Message` in the payload. The original FCM RemoteMessage returned instead
+    }
+
+    override fun onError(throwable: Throwable, defaultMessage: RemoteMessage) {
+        // Triggered when there is an error that occurs when a message is received from the Push Server
+    }
+}
+```
+
+```xml
+<application...>
+    <service android:name=".SampleFirebaseService">
+        <intent-filter>
+            <action android:name="com.google.firebase.MESSAGING_EVENT" />
+        </intent-filter>
+    </service>
+</application>
+```

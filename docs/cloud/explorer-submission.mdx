@@ -1,9 +1,11 @@
+---
+title: Explorer Submission
+---
+
 import useBaseUrl from '@docusaurus/useBaseUrl'
 import Table from '../components/Table'
 import Tabs from '@theme/Tabs'
 import TabItem from '@theme/TabItem'
-
-# Explorer Submission
 
 :::info Note
 
@@ -93,18 +95,18 @@ However, doing so ensures that your project is listed under [WalletConnect Explo
     {
       field: 'Mobile Linking',
       description:
-        'Required for mobile wallets targeting Web3modal. Deep Link is recommended over Universal Link',
+        'Required for mobile wallets targeting AppKit. Deep Link is recommended over Universal Link',
       required: 'no'
     },
     {
       field: 'Desktop Linking',
-      description: 'Required for desktop wallets targeting Web3modal.',
+      description: 'Required for desktop wallets targeting AppKit.',
       required: 'no'
     },
     {
       field: 'Injected Wallet Identifiers',
       description:
-        'Required for injected wallets targeting Web3modal. RDNS (from EIP-6963 metadata) is recommended over Provider Flags(Legacy)',
+        'Required for injected wallets targeting AppKit. RDNS (from EIP-6963 metadata) is recommended over Provider Flags(Legacy)',
       required: 'no'
     },
     {
@@ -232,7 +234,7 @@ The following test cases only apply for wallets supporting a particular set of c
               2. Press the “Send Transaction” button.`,
       expectedResults: `1. N/A
                         2. A modal should popup on the wallet app requesting for a signature.`
-    },
+    }
   ]}
 />
 
@@ -260,13 +262,12 @@ The following test cases only apply for wallets supporting a particular set of c
       expectedResults: `1. N/A
                         2. A modal should popup on the wallet app requesting for a signature.
                         3. Once accepted and signed the hash should show up on the website.`
-    },
+    }
   ]}
 />
 
 </TabItem>
 </Tabs>
-
 
 ## What's Next?
 

@@ -1,0 +1,181 @@
+import CloudBanner from '../../../../components/CloudBanner'
+
+# Usage
+
+In this section, we showcase the aspects of using the Notify API. We'll guide you through the initial steps of initializing the Notify client and logging in a blockchain account. You'll also learn how to manage your subscriptions and messages. Additionally, we cover the process of setting up and displaying push notifications on your preferred platform. To ensure a good user experience, we include best practices for spam protection, helping you to enable the users to maintain control over the notifications wallet receives.
+
+## Content
+
+Links to sections on this page. Some sections are platform specific and are only visible when the platform is selected. To view a summary of useful platform specific topics, check out Extra (Platform Specific) under this section.
+
+- [Initialization](#initialization):
+  Creating a new Notify Client instance and initializing it with a projectId from [Cloud](https://cloud.walletconnect.com/).
+- [Account login](#account-login):
+  A SIWE message must be signed by the user in order to authorize the client to use Notify API
+- [Subscribing to a new dapp](#subscribing-to-a-new-dapp):
+  Opt-in to receive notifications from dapp
+- [Fetching active subscriptions](#fetching-active-subscriptions):
+  Get active subscriptions
+- [Fetching subscription’s notification](#fetching-subscriptions-notifications):
+  Get notifications of a subscription
+- [Updating subscriptions notification settings](#updating-subscriptions-notification-settings):
+  Change allowed notification types sent by dapp
+- [Unsubscribe from a dapp](#unsubscribe-from-a-dapp):
+  Opt-out from receiving notifications from a dapp
+- [Account logout](#account-logout):
+  To stop receiving notifications to this client, accounts can logout of using Notify API
+- [Apple Push Notification service setup](?platform=ios#apple-push-notification-service-setup):
+  Configuring iOS app in order to decrypt notifications
+
+## Initialization
+
+<CloudBanner />
+
+Important: Confirm you have configured the [Network Client](../../../../api/core/relay.mdx) first.
+
+Configure the `Notify` instance with:
+
+```swift
+try Notify.configure(environment: APNSEnvironment, crypto: CryptoProvider)
+```
+
+`environment` - Use `debug` environment for debug builds and `release` for release and TestFlight builds.
+
+`crypto` - CryptoProvider is a protocol, you are required to provide an implementation of `recoverPubKey` and `keccak256` methods.
+
+## Account login
+
+In order to register account in Notify API to be able to subscribe to any dapp to start receiving notifications, account needs to sign SIWE message to prove ownership. Developers can check if an account is registered by calling **`isRegistered()`** function. If the account is not registered, developers should call **`prepareRegistration()`** and then **`register()`** function to register the account.
+
+To login to manage notifications, you must request message to sign with `prepareRegistration()` method and register signature with `register()` method. Once logged in, cross-device syncing will be enabled.
+
+```swift
+let params = try await Notify.instance.prepareRegistration(account: account, domain: "com.YOURAPPDOMAIN")
+let signature = onSign(message: params.message) // Sign message with your signer
+try await Notify.instance.register(params: params, signature: signature)
+```
+
+- `account` - An CAIP-10 account that the identity key will be issued for
+- `domain` - A domain of your wallet, you should use your bundle ID
+
+Provide your own sign function implementation that returns CacaoSignature. If SIWE is not implemented on your app you can always use our [MessageSignerFactory](https://github.com/WalletConnect/WalletConnectSwiftV2/blob/main/Sources/WalletConnectSigner/Signer/MessageSignerFactory.swift) and [DefaultSignerFactory](https://github.com/WalletConnect/WalletConnectSwiftV2/blob/main/Example/Shared/DefaultSignerFactory.swift) from our sample app that uses Web3 SPM package.
+
+```swift
+func onSign(message: String) -> CacaoSignature {
+    let privateKey = Data(hex: privateKey)
+    let signer = MessageSignerFactory(signerFactory: DefaultSignerFactory()).create()
+    let signature = try! signer.sign(message: message, privateKey: privateKey, type: .eip191)
+    return signature
+}
+```
+
+## Subscribing to a new dapp
+
+To begin receiving notifications from a dapp, users must opt-in by subscribing. This subscription process grants permission for the dapp to send notifications to the user. These notifications can serve a variety of purposes, such as providing updates on the user's blockchain account activities or informing them about ongoing campaigns within the dapp. Upon initial subscription, clients will be automatically enrolled to receive all types of notifications as defined by the dapp at that moment. Users have the flexibility to modify their notification settings later, allowing them to tailor the types of alerts they receive according to their preferences.
+
+```swift
+public func subscribe(appDomain: String, account: Account) async throws
+```
+
+`appDomain` - dapp domain fetched from WalletConnect explorer
+
+`account` - an account you want to associate a sebscription with
+
+#### Combine event
+
+```swift
+public var subscriptionsPublisher: AnyPublisher<[NotifySubscription], Never>
+```
+
+## Fetching active subscriptions
+
+To fetch the current list of subscriptions an account has, call **`getActiveSubscriptions()`**.
+
+Method will return an array of NotifySubscription objects that indicates actual subscriptions state
+
+```swift
+public func getActiveSubscriptions(account: Account) -> [NotifySubscription]
+```
+
+`account` - subscriptions owner account
+
+## Fetching subscription’s notifications
+
+To fetch subscription’s notifications by calling **`getNotificationHistory()`**.
+
+Method will return an array of NotifyMessageRecord objects that indicates current notify messages state. This do not include old messages that aren't loaded yet. Useful for displaying initial notifications view state. For more info about pagination, check `fetchHistory` method.
+
+Use this method together with:
+
+- `messagesPublisher(topic: String)`
+- `fetchHistory`
+
+```swift
+public func getMessageHistory(topic: String) -> [NotifyMessageRecord]
+```
+
+`topic` - unique subscription's topic
+
+#### Combine events
+
+Publisher that send messages update event for specific topic only
+
+```swift
+public func messagesPublisher(topic: String) -> AnyPublisher<[NotifyMessageRecord], Never>
+```
+
+Publisher that send event on every messages update (for all subscriptions)
+
+```swift
+public var messagesPublisher: AnyPublisher<[NotifyMessageRecord], Never>
+```
+
+## Updating subscriptions notification settings
+
+Users can alter their notification settings to filter out unwanted alerts from a dapp. During this process, they review and select the types of notifications they wish to receive, based on the latest options provided by the dapp.
+
+```swift
+public func update(topic: String, scope: Set<String>) async throws
+```
+
+`topic` - topic of the subscription to update
+
+`scope` - The new space delimited list of scopes
+
+## Unsubscribe from a dapp
+
+To opt-out of receiving notifications from a dap, a user can decide to unsubscribe from dapp.
+
+```swift
+try await Notify.instance.deleteSubscription(topic: String)
+```
+
+`topic` - subscription's topic
+
+## Account logout
+
+If an account is removed from the client or a user no longer wants to receive notifications for this account, you can logout the account from Notify API by calling **`unregister()`**. This will remove all subscriptions and messages for this account from the client’s storage.
+
+```swift
+public func unregister(account: Account) async throws
+```
+
+`account` - account ot unregister
+
+## Fetch notification history (Pagination)
+
+Method that fetches notification history and saves it to SDK's database. When async method finishes execution, `messagesPublisher(topic: String)` will send the event with actual Notify messages for the specified topic.
+
+```swift
+func fetchHistory(subscription: NotifySubscription, after: String?, limit: Int) async throws -> Bool
+```
+
+`subscription` - subscription for which notification history is requested
+`after?` - id of last notification loaded. Recent notifications will be loaded if provided nil
+`limit` - notifications to load count
+
+`Returns` - Returns True if there are still not fetched notifications
+
+## Apple Push Notification service setup
+
+To setup Apple Push Notification service please follow our [Push Notifications docs](../push.mdx).

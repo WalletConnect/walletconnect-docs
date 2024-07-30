@@ -1,0 +1,24 @@
+This can be used to listen to, for example, messages received in realtime.
+
+```ts
+const { data: client } = useWeb3InboxClient()
+
+client.on('notify_message', ({ message }) => {
+  console.log(notification.title)
+})
+```
+
+#### References
+
+- `message`: Notification of type:
+
+```ts
+interface NotifyNotification {
+  title: string
+  sentAt: number
+  body: string
+  id: string
+  url: string | null
+  type: string
+}
+```

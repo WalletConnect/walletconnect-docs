@@ -1,0 +1,380 @@
+import Container from '../../components/Container'
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
+import PlatformTabs from '../../components/PlatformTabs'
+import PlatformTabItem from '../../components/PlatformTabItem'
+import CloudBanner from '../../components/CloudBanner'
+
+# Usage
+
+This section provides instructions on how to initialize the Web3Wallet client, approve sessions with supported namespaces, and respond to session requests, enabling easy integration of Web3 wallets with dapps through a simple and intuitive interface.
+
+## Content
+
+Links to sections on this page. Some sections are platform specific and are only visible when the platform is selected. To view a summary of useful platform specific topics, check out **Extra (Platform Specific)** under this section.
+
+**[Initialization](#initialization)**: Creating a new Web3Wallet instance and initializing it with a projectId from [Cloud](https://cloud.walletconnect.com).
+
+**Session**: Connection between a dapp and a wallet.
+
+- [Namespace Builder](#namespace-builder):
+  Namespace Builder is a helper utility that greatly reduces the complexity of parsing the required and optional namespaces. It accepts as parameters a session proposal along with your user's chains/methods/events/accounts and returns a ready-to-use object
+- [Session Approval](#session-approval):
+  Approving a session sent from a dapp
+- [Session Rejection](#session-rejection):
+  Rejecting a session sent from a dapp
+- [Responding to Session Requests](#responding-to-session-requests):
+  Responding to session requests sent from a dapp
+- [Updating a Session](#updating-a-session):
+  Updating a session sent between a dapp and wallet
+- [Extending a Session](#extending-a-session):
+  Extending a session between a dapp and wallet
+- [Session Disconnect](#session-disconnect):
+  Disconnecting a session between a dapp and wallet
+
+<CloudBanner />
+
+## Initialization
+
+First you must setup a `WalletConnectCore` instance with a specific `Name` and `ProjectId`. You may optionally specify other `CoreOption`
+values, such as `RelayUrl` and `Storage`
+
+```csharp
+var options = new CoreOptions()
+{
+    ProjectId = "...",
+    Name = "my-app",
+}
+
+var core = new WalletConnectCore(options);
+```
+
+Next, you must define a `Metadata` object which describes your Wallet. This includes a `Name`, `Description`, `Url` and `Icons` url.
+
+```csharp
+var metadata = new Metadata()
+{
+    Description = "An example wallet to showcase WalletConnectSharpv2",
+    Icons = new[] { "https://walletconnect.com/meta/favicon.ico" },
+    Name = $"wallet-csharp-test",
+    Url = "https://walletconnect.com",
+};
+```
+
+Once you have both the `WalletConnectCore` and `Metadata` objects, you can initialize the `Web3WalletClient`
+
+```csharp
+var sdk = await Web3WalletClient.Init(core, metadata, metadata.Name);
+```
+
+## Session
+
+A session is a connection between a dapp and a wallet. It is established when a user approves a session proposal from a dapp. A session is active until the user disconnects from the dapp or the session expires.
+
+### Namespace Builder
+
+To build a namespace mapping for either proposing a session **OR** approving a session, you can use C# dictionary + class constructors
+directly, or use the built-in builder methods
+
+### C# Constructor Style
+
+```csharp
+var TestNamespaces = new Namespaces()
+{
+    {
+        "eip155", new Namespace()
+            {
+                Accounts = new [] { "eip155:1:0xab16a96d359ec26a11e2c2b3d8f8b8942d5bfcdb" },
+                Chains = new []{ "eip155:1" },
+                Methods = new[] { "eth_signTransaction" },
+                Events = new[] { "chainChanged" }
+            }
+    },
+};
+```
+
+### Builder Style
+
+```csharp
+var TestNamespaces = new Namespaces()
+  .WithNamespace("eip155", new Namespace()
+      .WithChain("eip155:1")
+      .WithMethod("eth_signTransaction")
+      .WithEvent("chainChanged")
+      .WithAccount("eip155:1:0xab16a96d359ec26a11e2c2b3d8f8b8942d5bfcdb")
+  );
+```
+
+The `Namespaces` mapping is required when approving a proposed session from a dApp. Because of this, you may
+also construct a `Namespaces` from a `RequiredNamespaces`, which auto-populates all `Methods`, `Events` and
+`Chains` from the given `RequiredNamespaces`. This is provided for convenience.
+
+### RequiredNamespaces
+
+```csharp
+sdk.SessionProposed += async (sender, @event) =>
+{
+    var proposal = @event.Proposal;
+    var requiredNamespaces = proposal.RequiredNamespaces;
+    var approvedNamespaces = new Namespaces(requiredNamespaces);
+    approvedNamespaces["eip155"].WithAccount("eip155:1:0xab16a96d359ec26a11e2c2b3d8f8b8942d5bfcdb");
+});
+```
+
+The `RequiredNamespaces` is required when setting up a session between a dApp and Wallet. The
+dApp will provide a `RequiredNamespaces` when proposing the session. The `RequiredNamespaces` and
+`ProposedNamespace` use the same style constructors + builder functions as `Namespaces` and `Namespace`.
+
+### EVM methods & events
+
+In @walletconnect/ethereum-provider, (our abstracted EVM SDK for apps) we support by default the following Ethereum methods and events:
+
+```ts
+{
+  //...
+  methods: [
+    "eth_accounts",
+    "eth_requestAccounts",
+    "eth_sendRawTransaction",
+    "eth_sign",
+    "eth_signTransaction",
+    "eth_signTypedData",
+    "eth_signTypedData_v3",
+    "eth_signTypedData_v4",
+    "eth_sendTransaction",
+    "personal_sign",
+    "wallet_switchEthereumChain",
+    "wallet_addEthereumChain",
+    "wallet_getPermissions",
+    "wallet_requestPermissions",
+    "wallet_registerOnboarding",
+    "wallet_watchAsset",
+    "wallet_scanQRCode",
+    "wallet_sendCalls",
+    "wallet_getCallsStatus",
+    "wallet_showCallsStatus",
+    "wallet_getCapabilities",
+  ],
+  events: [
+    "chainChanged",
+    "accountsChanged",
+    "message",
+    "disconnect",
+    "connect",
+  ]
+}
+```
+
+### Session Approval
+
+Wallets can pair an incoming session using the session's Uri. Pairing a session lets the Wallet obtain the connection proposal which can then be approved or denied.
+
+```csharp
+var uri = "...";
+ProposalStruct proposal = await sdk.Pair(uri);
+```
+
+The wallet can then approve the proposal by constructing an approved `Namespaces`. The approved
+`Namespaces` should include the `RequiredNamespaces` under `proposal.RequiredNamespaces`, and may optionally include any optional namespaces
+specified under `proposal.OptionalNamespaces`
+
+```csharp
+sdk.SessionProposed += async (sender, @event) =>
+{
+    var proposal = @event.Proposal;
+    var requiredNamespaces = proposal.RequiredNamespaces;
+    var approvedNamespaces = new Namespaces(requiredNamespaces);
+    approvedNamespaces["eip155"].WithAccount("eip155:1:0xab16a96d359ec26a11e2c2b3d8f8b8942d5bfcdb");
+
+    var sessionData = await sdk.ApproveSession(proposal.Id, approvedNamespaces);
+    var sessionTopic = sessionData.Topic;
+});
+```
+
+You may also just provide the addresses that will connect, and the SDK will create this approved
+`Namespaces` for you. This function **will not approve optional namespaces**
+
+```csharp
+sdk.SessionProposed += async (sender, @event) =>
+{
+    var proposal = @event.Proposal;
+
+    var sessionData = await sdk.ApproveSession(proposal, new[] { "eip155:1:0xab16a96d359ec26a11e2c2b3d8f8b8942d5bfcdb" });
+    var sessionTopic = sessionData.Topic;
+});
+```
+
+or
+
+```csharp
+sdk.SessionProposed += async (sender, @event) =>
+{
+    var proposal = @event.Proposal;
+
+    var sessionData = await sdk.ApproveSession(proposal, "eip155:1:0xab16a96d359ec26a11e2c2b3d8f8b8942d5bfcdb");
+    var sessionTopic = sessionData.Topic;
+});
+```
+
+### Session Rejection
+
+The wallet can reject the proposal using the following:
+
+```csharp
+sdk.SessionProposed += async (sender, @event) =>
+{
+    var proposal = @event.Proposal;
+    await sdk.Reject(proposal, "User rejected");
+});
+```
+
+### Responding to Session requests
+
+Responding to session requests is very similar to sending session requests. See dApp usage on how sending session requests works. All custom session requests requires a request class **and** response class to be created that matches the `params` field type in the custom session request. C# is a static typed language, so these types must be given whenever you do a session request (or do any querying for session requests).
+
+Currently, **WalletConnectSharp does not automatically assume the object type for `params` is an array**. This is very important, since most EVM RPC requests have `params` as an array type. **Use `List<T>` to workaround this**. For example, for `eth_sendTransaction`, use `List<Transaction>` instead of `Transaction`.
+
+Newtonsoft.Json is used for JSON serialization/deserialization, therefore you can use Newtonsoft.Json attributes when defining fields in your request/response classes.
+
+### Building a Response type
+
+Create a class for the response and populate it with the JSON properties the response object has. For this example, we will use `eth_getTransactionReceipt`
+
+The `params` field for `eth_getTransactionReceipt` has the object type
+
+```csharp
+using Newtonsoft.Json;
+using System.Numerics;
+
+[RpcMethod("eth_getTransactionReceipt"), RpcRequestOptions(Clock.ONE_MINUTE, 99995)]
+public class TransactionReceipt
+{
+    [JsonProperty("transactionHash")]
+    public string TransactionHash;
+
+    [JsonProperty("transactionIndex")]
+    public BigInteger TransactionIndex;
+
+    [JsonProperty("blockHash")]
+    public string BlockHash;
+
+    [JsonProperty("blockNumber")]
+    public BigInteger BlockNumber;
+
+    [JsonProperty("from")]
+    public string From;
+
+    [JsonProperty("to")]
+    public string To;
+
+    [JsonProperty("cumulativeGasUsed")]
+    public BigInteger CumulativeGasUsed;
+
+    [JsonProperty("effectiveGasPrice ")]
+    public BigInteger EffectiveGasPrice ;
+
+    [JsonProperty("gasUsed")]
+    public BigInteger GasUsed;
+
+    [JsonProperty("contractAddress")]
+    public string ContractAddress;
+
+    [JsonProperty("logs")]
+    public object[] Logs;
+
+    [JsonProperty("logsBloom")]
+    public string LogBloom;
+
+    [JsonProperty("type")]
+    public BigInteger Type;
+
+    [JsonProperty("status")]
+    public BigInteger Status;
+}
+```
+
+The `RpcMethod` class attributes defines the rpc method this response uses, this is optional. The `RpcResponseOptions` class attributes define the expiry time and tag attached to the response, **this is required**.
+
+### Sending a response
+
+To respond to requests from a dApp, you must define the class representing the request object type. The request type for `eth_getTransactionReceipt` is the following:
+
+```csharp
+[RpcMethod("eth_getTransactionReceipt"), RpcRequestOptions(Clock.ONE_MINUTE, 99994)]
+public class EthGetTransactionReceipt : List<string>
+{
+    public EthGetTransactionReceipt(params string[] hashes) : base(hashes)
+    {
+    }
+
+    // needed for proper json deserialization
+    public EthGetTransactionReceipt()
+    {
+    }
+}
+```
+
+We can handle the `eth_getTransactionReceipt` session request by doing the following:
+
+```csharp
+walletClient.Engine.SessionRequestEvents<EthGetTransactionReceipt, TransactionReceipt>().OnRequest += OnEthTransactionReceiptRequest;
+
+private Task OnEthTransactionReceiptRequest(RequestEventArgs<EthGetTransactionReceipt, TransactionReceipt> e)
+{
+    // logic for request goes here
+    // set e.Response to return a response
+}
+```
+
+The callback function gets invoked whenever the wallet receives the `eth_getTransactionReceipt` request from a connected dApp. You may optionally filter further which requests are handled using the `FilterRequests` function
+
+```csharp
+walletClient.Engine.SessionRequestEvents<EthGetTransactionReceipt, TransactionReceipt>()
+    .FilterRequests(r => r.Topic == sessionTopic)
+    .OnRequest += OnEthTransactionReceiptRequest;
+```
+
+The callback returns a `Task`, so the callback can be made async. To return a response, **you must** set the `Response` field in `RequestEventArgs<T, TR>` with the desired response.
+
+```csharp
+private async Task OnEthTransactionReceiptRequest(RequestEventArgs<EthGetTransactionReceipt, TransactionReceipt> e)
+{
+    var txHash = e.Request.Params[0];
+    var receipt = await EthGetTransactionReceipt(txHash);
+    e.Response = receipt;
+}
+```
+
+### Updating a Session
+
+Update a session, adding/removing additional namespaces in the given topic.
+
+```csharp
+var newNamespaces = new Namespaces(...);
+var request = await walletClient.UpdateSession(sessionTopic, newNamespaces);
+await request.Acknowledged();
+```
+
+### Extending a Session
+
+Extend a session's expiry time so the session remains open
+
+```csharp
+var request = await walletClient.Extend(sessionTopic);
+await request.Acknowledged();
+```
+
+### Session Disconnect
+
+To disconnect a session, use the `Disconnect` function. You may optional provide a reason for the disconnect.
+
+Disconnecting requires the `topic` of the session to be given. This can be found in the `SessionStruct` object given when a session has been given approval by the Wallet.
+
+```csharp
+var sessionTopic = sessionData.Topic;
+await walletClient.Disconnect(sessionTopic);
+
+// or
+
+await walletClient.Disconnect(sessionTopic, Error.FromErrorType(ErrorType.USER_DISCONNECTED));
+```

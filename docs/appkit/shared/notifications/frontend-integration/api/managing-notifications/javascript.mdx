@@ -1,0 +1,68 @@
+You can retrieve notifications using pagination. One approach is to provide the last notification's ID as the starting point:
+
+```ts
+const notificationsPage = client.getNotificationHistory({
+  limit: 3,
+  // The `id` of the last notification, for example:
+  startingAfter: 'some-notification-id'
+})
+
+const notificationsPerPage = 5
+const isInfiniteScroll = true
+const unreadFirst = true
+
+let notifications = []
+
+const onUpdate = ({notifications: fetchedNotifications}: GetNotificationsReturn) => {
+  notifications = fetchedNotifications
+}
+
+const {
+  nextPage,
+  markNotificationAsRead,
+  markAllNotificationsAsRead
+} = client.pageNotifications(
+  notificationsPerPage,
+  isInfiniteScroll,
+  specifiedAccount // OR undefined,
+  specifiedDomain // OR undefined,
+  unreadFirst
+)(onUpdate)
+
+
+// marking a single notification as read
+await notifications[0].markAsRead();
+
+// mark specific notifications as read
+await markNotificationsAsRead(notifications.slice(2).map(n => n.id));
+
+// mark all notifications as read
+await markAllNotificationsAsRead();
+```
+
+#### References
+
+- **pageNotifications:**
+  - **notificationsPerPage:** Number representing how many notifications to get per fetch
+  - **isInfiniteScroll:** Whether or not to keep already fetched notifications when getting next page
+  - \*_params:_ (optional) Additional parameters
+  - **unreadFirst:** (optional, default `true`, since 1.3.0) Whether or not unread messages should be sorted at the top, regardless of timestamp
+- **onUpdate:**: A callback that will be called whenever notifications get updated
+- **nextPage:**: A function to be called to fetch the next page of notifications
+- **notifications:** Array of notifications, of type
+- **notification.markAsRead:** Mark the notification as read
+- **markNotificationsAsRead**: Takes an array of notification IDs and marks them as read. Max 1000 IDs
+- **markAllNotificationsAsRead**: Mark all notifications as read.
+
+```ts
+{
+  title: string
+  sentAt: number
+  body: string
+  id: string
+  isRead: boolean // since 1.3.0
+  url: string | null
+  type: string
+  read: () => Promise<void> // since 1.3.0
+}
+```

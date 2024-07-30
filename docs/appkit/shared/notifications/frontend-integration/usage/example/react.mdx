@@ -1,0 +1,137 @@
+Below is an example of adding the Web3Inbox SDK to a React project with wagmi. Wagmi is not required to use the Web3Inbox React hooks.
+
+We have separated it so the initialization can be done executed once in the app, and the hooks can be used anywhere in the app.
+
+```tsx
+//App.tsx
+import { initWeb3InboxClient } from "@web3inbox/react";
+
+...
+// The project ID and domain you setup in the Domain Setup section
+const projectId = process.env.NEXT_PUBLIC_PROJECT_ID!;
+const appDomain = process.env.NEXT_PUBLIC_APP_DOMAIN!;
+
+initWeb3InboxClient({
+  projectId,
+  domain: appDomain,
+  allApps: process.env.NODE_ENV !== "production",
+});
+
+```
+
+```tsx
+// Index.tsx
+import {
+  useNotifications,
+  usePrepareRegistration,
+  useRegister,
+  useSubscribe,
+  useSubscription,
+  useUnsubscribe,
+  useWeb3InboxAccount,
+  useWeb3InboxClient
+} from '@web3inbox/react'
+import { useCallback, useEffect } from 'react'
+import { useSignMessage, useAccount } from 'wagmi'
+
+import Notifications from './Notifications'
+
+export default function App() {
+  // Wagmi Hooks
+  const { address } = useAccount()
+  const { signMessageAsync } = useSignMessage()
+
+  // W3I Hooks
+  const { prepareRegistration } = usePrepareRegistration()
+  const { register, isLoading: isRegistering } = useRegister()
+  const { data: w3iClient, isLoading: w3iClientIsLoading } = useWeb3InboxClient()
+  const { isRegistered } = useWeb3InboxAccount(`eip155:1:${address}`)
+
+  // Registration of your address to allow notifications
+  // This is done via a signature of a message (SIWE) and the
+  // signMessageAsync function from wagmi
+  const handleRegistration = async () => {
+    try {
+      const { message, registerParams } = await prepareRegistration()
+      const signature = await signMessageAsync({ message: message })
+      await register({ registerParams, signature })
+    } catch (registerIdentityError: any) {
+      console.error(registerIdentityError)
+    }
+  }
+
+  // Subscription to dapp notifications
+  // Subscribe can be called as a function post registration
+  // Can be moved above but shown for example clarity
+  const { subscribe, isLoading: isSubscribing } = useSubscribe()
+  const { unsubscribe, isLoading: isUnsubscribing } = useUnsubscribe()
+  const { data: subscription } = useSubscription()
+  const isSubscribed = Boolean(subscription)
+
+  // Note: We are using Web3Modal for the dapp <> wallet connection.
+  // The <w3m-button /> module is from Web3Modal. Check Web3Modal Docs for further info.
+  return (
+    <>
+      <main className={styles.main}>
+        {w3iClientIsLoading ? (
+          <div>Loading W3I Client</div>
+        ) : (
+          <div>
+            <h1>W3I QuickStart</h1>
+            <w3m-button />
+            <div className={styles.flexColumn}>
+              <button onClick={handleRegistration} disabled={isRegistered}>
+                {isRegistered ? 'Registered' : 'Register'}
+              </button>
+              <button
+                onClick={isSubscribed ? unsubscribe : subscribe}
+                disabled={isSubscribing || isUnsubscribing}
+              >
+                {isSubscribed ? 'Unsubscribe' : 'Subscribe'}
+              </button>
+              <hr />
+              {isSubscribed ? <Notifications /> : null}
+            </div>
+          </div>
+        )}
+      </main>
+    </>
+  )
+}
+```
+
+```tsx
+// Notifications.tsx
+import { useNotifications } from '@web3inbox/react'
+import React from 'react'
+import styles from '@/styles/Notifications.module.css'
+
+function Notifications() {
+  const { data: subscription } = useSubscription()
+  const { data: notifications } = useNotifications(5)
+
+  return (
+    <div>
+      <h2 className={styles.heading}>Notifications</h2>
+      <p>You have {subscription.unreadCount} unread notifications.</p>
+      <div className={styles.notificationsContainer}>
+        {!notifications?.length ? (
+          <p className={styles.fallbackText}>No notifications yet.</p>
+        ) : (
+          notifications.map(({ id, ...message }) => (
+            <div key={id} className={styles.message}>
+              <h3>{message.title}</h3>
+              <p>{message.body}</p>
+              <p>{message.isRead ? 'Read' : 'Unread'}</p>
+              <button onClick={message.markAsRead}>Mark as read</button>
+            </div>
+          ))
+        )}
+      </div>
+      <button onClick={nextPage}>Next page</button>
+    </div>
+  )
+}
+
+export default Notifications
+```

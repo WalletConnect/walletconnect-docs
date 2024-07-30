@@ -1,0 +1,36 @@
+# Link Mode
+
+WalletKit link mode is a low latency mechanism for transporting 1-click auth requests and session requests over universal links, eliminating the need for a WebSocket connection with the Relay. This significantly enhances the user experience when connecting native dApps to native wallets by reducing the latency associated with networking connections, especially when the user has an unstable internet connection.
+
+To support link mode add universal link for your wallet in Cloud project configuration dashboard, configure your `AppMetadata.Redirect` with a valid universal link and set the `linkMode` property to `true`:
+
+```swift
+let metadata = AppMetadata(
+    ...
+    redirect: try! AppMetadata.Redirect(native: "exampleApp://", universal: "https://example.com/example_wallet", linkMode: true)
+)
+
+Web3Wallet.configure(
+    metadata: metadata,
+    ...
+)
+
+For more information on how to configure universal links for your app, refer to the [Apple Documentation](https://developer.apple.com/documentation/xcode/allowing-apps-and-websites-to-link-to-your-content?language=objc).
+
+For a debugging guide, visit the [Debugging Universal Links](https://developer.apple.com/documentation/technotes/tn3155-debugging-universal-links) page.
+
+Once link mode and universal linking are properly configured and the user interacts with a link mode supporting dApp, your wallet will receive requests over universal linking. You must pass these requests to WalletKit so it can process them:
+
+```swift
+try Web3Wallet.instance.dispatchEnvelope(url.absoluteString)
+```
+
+Ensure to handle incoming universal links in different methods of `AppDelegate` or `SceneDelegate`. 
+
+For more information on how to configure universal links for your app, refer to the [Apple Documentation](https://developer.apple.com/documentation/xcode/allowing-apps-and-websites-to-link-to-your-content?language=objc).
+
+For a debugging guide, visit the [Debugging Universal Links](https://developer.apple.com/documentation/technotes/tn3155-debugging-universal-links) page.
+
+You can also find thiss [article](https://developer.apple.com/documentation/xcode/supporting-universal-links-in-your-app?language=objc) helpful.
+
+

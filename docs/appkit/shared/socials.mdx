@@ -1,0 +1,134 @@
+import PlatformTabs from '../../components/PlatformTabs'
+import PlatformTabItem from '../../components/PlatformTabItem'
+
+To allow users to authenticate using their email or social accounts, you need to configure the `auth` parameter in the `defaultConfig` function.
+
+<PlatformTabs groupId="eth-lib" activeOptions={["wagmi", "ethers"]}>
+<PlatformTabItem value="wagmi">
+
+```ts
+const wagmiConfig = defaultWagmiConfig({
+  chains,
+  projectId,
+  metadata,
+  /* highlight-add-start */
+  auth: {
+    email: true, // default to true
+    socials: ['google', 'x', 'github', 'discord', 'apple'],
+    showWallets: true, // default to true
+    walletFeatures: true // default to true
+  }
+  /* highlight-add-end */
+})
+```
+
+## Wagmi Connector
+
+If you're using the `createConfig` function from Wagmi, you can enable social or email login by importing and adding the `authConnector` function in your configuration.
+
+```ts
+/* highlight-add-start */
+import { authConnector } from '@web3modal/wagmi'
+/* highlight-add-end */
+
+//...
+
+const wagmiConfig = createConfig({
+  //...
+  connectors: [
+    //...
+
+    authConnector({
+      chains,
+      options: { projectId },
+      /* highlight-add-start */
+      email: true, // default to true
+      socials: ['google', 'x', 'github', 'discord', 'apple'],
+      showWallets: true, // default to true
+      walletFeatures: true // default to true
+      /* highlight-add-end */
+    })
+  ]
+})
+```
+
+</PlatformTabItem>
+<PlatformTabItem value="ethers">
+
+```ts
+const modal = createWeb3Modal({
+  ethersConfig: defaultConfig({
+    metadata,
+    //..
+    /* highlight-add-start */
+    auth: {
+      email: true, // default to true
+      socials: ['google', 'x', 'github', 'discord', 'apple'],
+      showWallets: true, // default to true
+      walletFeatures: true // default to true
+    }
+    /* highlight-add-end */
+  })
+  //...
+})
+```
+
+</PlatformTabItem>
+</PlatformTabs>
+
+## Options
+
+- email [boolean]: This boolean defines whether you want to enable email login. Default `true`
+- socials [array]: This array contains the list of social platforms that you want to enable for user authentication. The platforms in the example include Google, X, GitHub, Discord, Apple and Facebook (coming soon). Default `undefined`
+- showWallets [boolean]: This boolean defines whether you want to show the wallet options on the first connect screen. If this is false and `socials` are enabled, it will show a button that directs you to a new screen displaying the wallet options. Default `true`
+- walletFeatures [boolean]: This boolean defines whether you want to enable wallet features. Wallet features allow users to view their balance, send, receive, and buy funds through a clear user interface. Default `true`
+
+## User flow
+
+1. Users will be able to connect to you application by simply using an email address. Web3Modal will send to them a One Time Password (OTP) to copy and paste in the modal, which will help to
+   verify the user's authenticity. This will create a non-custodial wallet for your user which will be available in any application that integrates Web3Modal and email login.
+
+2. Eventually the user can optionally choose to move from a non-custodial wallet to a self-custodial one by pressing "Upgrade Wallet" on Web3Modal.
+   This will open the _([WalletConnect secure website](https://secure.walletconnect.com/dashboard))_ that will walk your user through the upgrading process.
+
+## UI Variants
+
+AppKit SDK offers multiple UI variants to customize the user experience for the authentication process.
+
+By configuring the `showWallets` option in the `auth` parameter, you can control the initial connect screen behavior:
+
+- **`showWallets: true`**: When this option is enabled, the initial connect screen will display the available wallet options directly to the user. This allows users to choose their preferred wallet immediately.
+
+<p align="center">
+  <img width={300} src="/img/w3m/auth/modal_wallets.webp" />
+</p>
+
+- **`showWallets: false`**: If this option is disabled, the initial connect screen will show a button instead. When the user clicks this button, they will be directed to a new screen that lists all the available wallet options. This can help simplify the initial interface and reduce visual clutter.
+
+<p align="center">
+  <img width={300} src="/img/w3m/auth/modal_no_wallets.webp" />
+</p>
+
+By configuring the `socials` option in the `auth` parameter, you can control the amount of social providers you want to show on the connect screen:
+
+- **`socials: ['google']`**: When you only set one social provider, it will give you a button with `connect with provider.
+
+<p align="center">
+  <img width={300} src="/img/w3m/auth/modal_one_social.webp" />
+</p>
+
+- **`socials: ['google', 'discord']`**: When you set 2 social provider, it will give you 2 buttons next to each other with the logo of the social provider
+
+<p align="center">
+  <img width={300} src="/img/w3m/auth/modal_two_social.webp" />
+</p>
+
+- **` socials: ['google', 'x', 'discord', 'apple', 'github']`**: When you set more than 2 social providers, the first provider in the array will get a button with `connect with provider`. The other providers will get a button with the logo of the social provider next to each other.
+
+<p align="center">
+  <img width={300} src="/img/w3m/auth/modal_wallets.webp" />
+</p>
+
+## Wallet Features
+
+The AppKit SDK offers support for wallet features. By enabling wallet features, users can easily view their balance, send funds, receive payments, and buy additional funds within a clear user interface.

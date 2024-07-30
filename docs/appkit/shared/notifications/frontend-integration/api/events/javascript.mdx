@@ -1,0 +1,22 @@
+This can be used to listen to, for example, messages received in realtime.
+
+```ts
+client.on('notify_message', ({ notification }) => {
+  console.log(notification.title)
+})
+```
+
+#### References
+
+- `message`: Notification of type:
+
+```ts
+interface NotifyNotification {
+  title: string
+  sentAt: number
+  body: string
+  id: string
+  url: string | null
+  type: string
+}
+```

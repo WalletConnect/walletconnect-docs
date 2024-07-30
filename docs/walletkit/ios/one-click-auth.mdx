@@ -1,0 +1,107 @@
+import PlatformTabs from '../../components/PlatformTabs'
+import PlatformTabItem from '../../components/PlatformTabItem'
+import ThemedImage from '@theme/ThemedImage'
+import useBaseUrl from '@docusaurus/useBaseUrl'
+import Button from '../../components/button'
+
+# One-click Auth
+
+## Introduction
+
+This section outlines an innovative protocol method that facilitates the initiation of a Sign session and the authentication of a wallet through a [Sign-In with Ethereum](https://eips.ethereum.org/EIPS/eip-4361) (SIWE) message, enhanced by [ReCaps](https://eips.ethereum.org/EIPS/eip-5573) (ReCap Capabilities).
+
+This enhancement not only offers immediate authentication for dApps, paving the way for prompt user logins, but also integrates informed consent for authorization. Through this mechanism, dApps can request the delegation of specific capabilities to perform actions on behalf of the wallet user. These capabilities, encapsulated within SIWE messages as ReCap URIs, detail the scope of actions authorized by the user in an explicit and human-readable form.
+
+By incorporating ReCaps, this method extends the utility of SIWE messages, allowing dApps to combine authentication with a nuanced authorization model. This model specifies the actions a dApp is authorized to execute on the user's behalf, enhancing security and user autonomy by providing clear consent for each delegated capability. As a result, dApps can utilize these consent-backed messages to perform predetermined actions, significantly enriching the interaction between dApps, wallets, and users within the Ethereum ecosystem.
+
+<ThemedImage
+  alt="Mobile Linking Connect Flow"
+  sources={{
+    light: useBaseUrl('/img/w3w/authenticatedSessions-light.png'),
+    dark: useBaseUrl('/img/w3w/authenticatedSessions-dark.png')
+  }}
+/>
+
+## Handling Authentication Requests
+
+To handle incoming authentication requests, subscribe to the authenticateRequestPublisher. This will notify you of any authentication requests that need to be processed, allowing you to either approve or reject them based on your application logic.
+
+```swift
+Web3Wallet.instance.authenticateRequestPublisher
+    .receive(on: DispatchQueue.main)
+    .sink { result in
+        // Process the authentication request here.
+        // This involves displaying UI to the user.
+    }
+    .store(in: &subscriptions) // Assuming `subscriptions` is where you store your Combine subscriptions.
+```
+
+## Authentication Objects/Payloads
+
+To interact with authentication requests, first build authentication objects (AuthObject). These objects are crucial for approving authentication requests. This involves:
+
+- **Creating an Authentication Payload** - Generate an authentication payload that matches your application's supported chains and methods.
+- **Formatting Authentication Messages** - Format the authentication message using the payload and the user's account.
+- **Signing the Authentication Message** - Sign the formatted message to create a verifiable authentication object.
+
+Example Implementation:
+
+```swift
+func buildAuthObjects(request: AuthenticationRequest, account: Account, privateKey: String) throws -> [AuthObject] {
+    let requestedChains = Set(request.payload.chains.compactMap { Blockchain($0) })
+    let supportedChains: Set<Blockchain> = [Blockchain("eip155:1")!, Blockchain("eip155:137")!, Blockchain("eip155:69")!]
+    let commonChains = requestedChains.intersection(supportedChains)
+    let supportedMethods = ["personal_sign", "eth_sendTransaction"]
+
+    var authObjects = [AuthObject]()
+    for chain in commonChains {
+        let accountForChain = Account(blockchain: chain, address: account.address)!
+        let supportedAuthPayload = try Web3Wallet.instance.buildAuthPayload(
+            payload: request.payload,
+            supportedEVMChains: Array(commonChains),
+            supportedMethods: supportedMethods
+        )
+        let formattedMessage = try Web3Wallet.instance.formatAuthMessage(payload: supportedAuthPayload, account: accountForChain)
+        let signature = // Assume `signMessage` is a function you've implemented to sign messages.
+            signMessage(message: formattedMessage, privateKey: privateKey)
+
+        let authObject = try Web3Wallet.instance.buildSignedAuthObject(
+            authPayload: supportedAuthPayload,
+            signature: signature,
+            account: accountForChain
+        )
+        authObjects.append(authObject)
+    }
+    return authObjects
+}
+
+```
+
+## Approving Authentication Requests
+
+:::info Note
+
+1. The recommended approach for secure authentication across multiple chains involves signing a SIWE (Sign-In with Ethereum) message for each chain and account. However, at a minimum, one SIWE message must be signed to establish a session. It is possible to create a session for multiple chains with just one issued authentication object.
+2. Sometimes a dapp may want to only authenticate the user without creating a session, not every approval will result with a new session.
+
+:::
+
+To approve an authentication request, construct AuthObject instances for each supported blockchain, sign the authentication messages, build AuthObjects and call approveSessionAuthenticate with the request ID and the authentication objects.
+
+```swift
+let session = try await Web3Wallet.instance.approveSessionAuthenticate(requestId: requestId, auths: authObjects)
+```
+
+## Rejecting Authentication Requests
+
+If the authentication request cannot be approved or if the user chooses to reject it, use the rejectSession method.
+
+```swift
+try await Web3Wallet.instance.rejectSession(requestId: requestId)
+```
+
+## Testing One-click Auth
+
+You can use [Web3Modal Labs](https://lab.web3modal.com/library/ethers-siwe/) to test and verify that your wallet supports One-click Auth properly.
+
+<Button name="Test One-click Auth" url="https://lab.web3modal.com/library/ethers-siwe/" />

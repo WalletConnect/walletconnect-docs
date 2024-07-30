@@ -1,0 +1,26 @@
+---
+title: On-Ramp
+---
+
+AppKit seamlessly incorporates Coinbase Pay, enabling users to sign in to their Coinbase accounts and utilize fiat payment methods for purchasing cryptocurrencies.
+
+:::info Note
+On-Ramp is supported in the latest version of Web3Modal. If you are using an older version, make sure you upgrade.
+:::
+
+## Integration
+
+The On-Ramp feature is enabled by default, so no additional configuration is required. 
+
+If you prefer to disable it, set the `enableOnramp` flag to `false` in the configuration of the `createWeb3Modal` function.
+
+```ts
+const modal = createWeb3Modal({
+  //...
+  chains: [mainnet],
+  projectId,
+  /* highlight-add-start */
+  enableOnramp: false // Optional - true by default
+  /* highlight-add-end */
+})
+```

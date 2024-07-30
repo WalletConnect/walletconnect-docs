@@ -1,0 +1,68 @@
+import CloudBanner from '../../components/CloudBanner'
+
+# Solana Adapter
+
+The WalletConnect Solana Adapter allows you to integrate the WalletConnect protocol into the Wallet Adapter library.
+
+:::note
+If you are not familiar with the Wallet Adapter library it is recommended to use [AppKit instead](../../appkit//overview.mdx).
+:::
+
+## Installation
+
+```bash npm2yarn
+npm install @walletconnect/solana-adapter
+```
+
+## Cloud Configuration
+
+Create a new project on WalletConnect Cloud at https://cloud.walletconnect.com and obtain a new project ID.
+
+<CloudBanner />
+
+## Implementation
+
+Add the `WalletConnectAdapter` to your wallets list.
+
+```tsx
+import { ReactNode, useMemo, useState } from 'react'
+import { ConnectionProvider, WalletProvider } from '@solana/wallet-adapter-react'
+import { WalletAdapterNetwork } from '@solana/wallet-adapter-base'
+import { WalletModalProvider } from '@solana/wallet-adapter-react-ui'
+import { clusterApiUrl } from '@solana/web3.js'
+
+import '@solana/wallet-adapter-react-ui/styles.css'
+
+/* highlight-add-start */
+import { WalletConnectWalletAdapter } from '@walletconnect/solana-adapter'
+/* highlight-add-end */
+
+export const SolanaContext = ({ children }: { children: ReactNode }) => {
+	const endpoint = useMemo(() => clusterApiUrl(WalletAdapterNetwork.Mainnet), [])
+
+	const wallets = useMemo(
+		() => [
+      /* highlight-add-start */
+			new WalletConnectWalletAdapter({
+				network: WalletAdapterNetwork.Mainnet,
+				options: {
+					projectId: 'YOUR_PROJECT_ID',
+				},
+			}),
+      /* highlight-add-end */
+		],
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+		[],
+	)
+
+	return (
+		<ConnectionProvider endpoint={endpoint}>
+			<WalletProvider wallets={wallets} autoConnect>
+				<WalletModalProvider>
+					{children}
+				</WalletModalProvider>
+			</WalletProvider>
+		</ConnectionProvider>
+	)
+}
+```

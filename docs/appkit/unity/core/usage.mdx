@@ -1,0 +1,85 @@
+import Button from '../../../components/button'
+
+# Usage
+
+After you have installed and configured AppKit,
+you can start using it to interact with the wallet provider and blockchain.
+
+AppKit comes with the [Nethereum](https://nethereum.com/) and [Wagmi](https://wagmi.sh/) integration out of the box.
+
+To interact with EVM chains use `Web3Modal.Evm`. Internally, AppKit will use Wagmi on WebGL or Nethereum on other platforms.
+Nethereum is already preconfigured with RPC URL and interceptor that will route the requests between the wallet provider and RPC node.
+
+## Sending Ether
+
+To send ether, you can use the `SendTransactionAsync` method of the `Web3.Eth` class.
+
+```csharp
+const string toAddress = "0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045";
+BigInteger amount = Web3.Convert.ToWei(0.001);
+string result = await Web3Modal.Evm.SendTransactionAsync(toAddress, amount);
+
+Debug.Log("Transaction hash: " + result);
+```
+
+This type of transaction uses the default amount of Gas 21000. Gas price is determined by the wallet provider.
+
+## Reading Blockchain State
+
+#### Get Ether Balance
+
+```csharp
+Account account = await Web3Modal.GetAccountAsync();
+BigInteger balance = await Web3Modal.Evm.GetBalanceAsync(account.Address);
+
+Debug.Log($"Balance: {Web3.Convert.FromWei(balance.Value)} ETH");
+```
+
+## Smart Contract Interaction
+
+Use `ReadContractAsync` and `WriteContractAsync` methods of `Web3Modal.Evm` to interact with smart contracts.
+To read or write a smart contract function, you need to provide the contract address, ABI, method name, and arguments.
+
+### Get ERC20 Token Balance
+
+To get the balance of an ERC20 token, you need to know the contract address, ERC20 standard contract ABI, and the owner address.
+This operation doesn't involve state change on the blockchain, so it's a read-only action that doesn't require a transaction.
+
+```csharp
+const string contractAddress = "0x1f9840a85d5aF5bf1D1762F925BDADdC4201F984";
+const string ownerAddress = "0x3D30B1aB88D487B0F3061F40De76845Bec3F1e94";
+const string abi = "..."; // ABI of the ERC20 token contract
+
+var evm = Web3Modal.Evm;
+var balance = await evm.ReadContractAsync<BigInteger>(contractAddress, abi, "balanceOf", new object[]
+{
+    ownerAddress
+});
+var decimals = await evm.ReadContractAsync<BigInteger>(contractAddress, abi, "decimals");
+
+var finalBalance = tokenBalance / BigInteger.Pow(10, tokenDecimal);
+```
+
+###
+
+### Send ERC20 Token
+
+To send an ERC20 token, you need to know the contract address, ERC20 standard contract ABI, recipient address, and the amount of tokens to send.
+This operation requires a transaction and gas fees because it changes the state of the blockchain. User will need to confirm the transaction in the wallet.
+
+```csharp
+const string contractAddress = "0x1f9840a85d5aF5bf1D1762F925BDADdC4201F984";
+const string recipientAddress = "0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045";
+const string abi = "...";  // ABI of the ERC20 token contract
+
+BigInteger amount = 1;
+
+// Arguments for the transfer method. The order of the arguments must match the order in the method signature.
+// Method signature: `function transfer(address _to, uint256 _value) public returns (bool success)`
+var arguments = new object[]
+{
+    recipientAddress,
+    amount
+};
+var result = await Web3Modal.Evm.WriteContractAsync(contractAddress, abi, "transfer", arguments);
+```

@@ -1,0 +1,115 @@
+:root {
+  /*Code block highlight*/
+  --ifm-color-primary: #1c8aff;
+  --ifm-link-hover-color: #006eff;
+  --ifm-heading-font-family: 'ABC Diatype Bold', sans-serif;
+  --ifm-heading-font-weight: bold;
+  --ifm-font-family-base: 'ABC Diatype', sans-serif;
+  --ifm-heading-color: #1d2d35;
+  --ifm-color-gray-800: hsla(0, 0%, 100%, 0.1);
+  --ifm-nav-bg-color: rgba(255, 255, 255, 0.4);
+  --ifm-font-color-base: #29404b;
+  --ifm-border-color: hsla(210, 3%, 54%, 0.5);
+  --ifm-article-text: #000;
+  --ifm-footer-title-color: #1d2d35;
+  --ifm-table-alternate-bg-color: rgba(255, 255, 255, 0.8);
+  --ifm-table-bg-color: rgba(235, 237, 243, 0.8);
+  --ifm-box-bg-color: rgba(223, 227, 236, 0.4);
+  --ifm-box-shadow-color: rgb(20, 20, 20);
+  --ifm-pagination-bg-color: rgba(0, 0, 0, 0.02);
+  --ifm-pagination-border-color: rgba(0, 0, 0, 0.1);
+  --ifm-theme-code-border-color: rgba(0, 0, 0, 0.15);
+  --ifm-close-color: white;
+  --ifm-list-before-color: rgba(0, 0, 0, 0.4);
+  --ifm-navbar-show-bg-color: rgba(235, 235, 235, 1);
+  --ifm-background-color: #fff;
+  --ifm-platform-tabs-color-active-border: rgb(28, 138, 255, 0.5);
+  --ifm-platform-bg-color: rgb(28, 138, 255, 0.1);
+  --ifm-cloud-button-bg-color: rgba(0, 55, 113, 0.1);
+  --ifm-cloud-bg-primary: #0e0f11;
+  --ifm-cloud-bg-secondary: var(--ifm-color-primary-darkest);
+  --ifm-feedback-heading: var(--ifm-color-gray-900);
+  --ifm-container-background-color: #fff;
+}
+
+html[data-theme='dark'] {
+  --ifm-navbar-show-bg-color: rgba(20, 20, 20, 1);
+  --ifm-list-before-color: rgba(255, 255, 255, 0.4);
+  --ifm-close-color: black;
+  --ifm-theme-code-border-color: rgba(255, 255, 255, 0.1);
+  --ifm-pagination-border-color: rgba(255, 255, 255, 0.07);
+  --ifm-pagination-bg-color: rgba(255, 255, 255, 0.04);
+  --ifm-box-bg-color: var(--ifm-color-gray-800);
+  --ifm-box-shadow-color: var(--ifm-color-gray-800);
+  --ifm-pre-background: var(--prism-background-color);
+  --ifm-table-bg-color: var(--ifm-color-gray-900);
+  --ifm-table-alternate-bg-color: rgba(255, 255, 255, 0.05);
+  --ifm-footer-title-color: var(--ifm-color-white);
+  --ifm-color-primary: #66b0ff;
+  --ifm-link-hover-color: #3396ff;
+  --ifm-article-text: #fffff;
+  --ifm-nav-bg-color: rgba(20, 20, 20, 0.4);
+  --ifm-background-color: #141414;
+  --ifm-heading-color: #ffffff;
+  --ifm-font-color-base: #c9cfcf;
+  --ifm-border-color: hsla(0, 0%, 100%, 0.1);
+  --ifm-cloud-bg-secondary: rgb(16, 36, 69);
+  --ifm-feedback-heading: var(--ifm-color-gray-500);
+  --ifm-container-background-color: #141414;
+}
+
+html[data-theme='light'] {
+  --ifm-blockquote-color: var(--ifm-color-gray-900);
+}
+
+[data-theme='light'] img[src$='#dark-mode-only'],
+[data-theme='dark'] img[src$='#light-mode-only'] {
+  display: none;
+}
+
+[data-theme='light'] .alert--secondary {
+  --ifm-alert-border-color: var(--ifm-color-secondary-darkest);
+  --ifm-alert-background-color-highlight: rgba(210, 212, 215, 0.2);
+}
+
+.custom-list__logo {
+  position: absolute;
+  list-style: none;
+  margin: 0;
+  padding: 0.8rem 0 0 1.25rem;
+  z-index: 200;
+  background-color: var(--ifm-background-color);
+}
+
+@media (max-width: 996px) {
+  .navbar__brand {
+    display: flex !important;
+  }
+}
+
+.navbar__brand {
+  font-weight: bold;
+  color: var(--ifm-heading-color);
+}
+
+.navbar__brand span {
+  text-transform: uppercase;
+  font-family: 'Office Code Pro', monospace;
+  font-weight: normal;
+  color: var(--ifm-color-primary);
+  margin-left: 5px;
+}
+
+.navbar__logo {
+  display: flex;
+  align-items: center;
+}
+
+.navbar__logo img {
+  width: 30px;
+  height: 18px;
+}
+.menu__list-item-collapsible {
+  margin-left: -24px;
+  padding-left: 24px;
+}

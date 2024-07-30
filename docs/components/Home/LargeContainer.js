@@ -2,6 +2,7 @@ import Link from '@docusaurus/Link'
 import React from 'react'
 
 const LargeContainer = ({ href, name, icon, description, fit, isWhite }) => {
+
   return (
     <Link to={href} className="home__large-container">
       {fit ? (

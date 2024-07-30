@@ -31,13 +31,9 @@ in your wallet's top-level dependencies, please refer to the [`legacy` packages]
 
 In the above scenario, you would replace `@walletconnect/types@1.x.x` with `@walletconnect/legacy-types` and then install `@walletconnect/types@2.x.x`.
 
-#### Integrating Auth
-
-We strongly encourage wallets to also integrate the [Auth](../auth/overview.md) API so that dapps using only Auth can still participate in the same ecosystem.
-
 #### Initializing the client
 
-Initialize client as a controller using [your Project ID](../../cloud/relay.md).
+Initialize client as a controller using [your Project ID](../../cloud/relay.mdx).
 
 ```js
 const signClient = await SignClient.init({
@@ -696,8 +692,6 @@ try await Sign.instance.rejectSession(requestId: requestId)
 
 ```kotlin
 val projectId = "" // Get Project ID at https://cloud.walletconnect.com/
-val relayUrl = "relay.walletconnect.com"
-val serverUrl = "wss://$relayUrl?projectId=$projectId"
 val connectionType = ConnectionType.AUTOMATIC or ConnectionType.MANUAL
 val appMetaData = Core.Model.AppMetaData(
     name = "Wallet Name",
@@ -707,7 +701,7 @@ val appMetaData = Core.Model.AppMetaData(
     redirect = "kotlin-wallet-wc:/request" // Custom Redirect URI
 )
 
-CoreClient.initialize(relayServerUrl = serverUrl, connectionType = connectionType, application = this, metaData = appMetaData)
+CoreClient.initialize(projectId = projectId, connectionType = connectionType, application = this, metaData = appMetaData)
 
 val init = Sign.Params.Init(core = CoreClient)
 

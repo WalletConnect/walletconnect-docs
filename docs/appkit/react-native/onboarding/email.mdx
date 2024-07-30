@@ -1,0 +1,37 @@
+import PlatformTabs from '../../../components/PlatformTabs'
+import PlatformTabItem from '../../../components/PlatformTabItem'
+
+import WagmiImplementation from '../wagmi/email.mdx'
+import EthersImplementation from '../ethers/email.mdx'
+
+# Email Wallets
+
+AppKit enables passwordless Web3 onboarding and authentication, allowing your users interact with your application by creating a non-custodial wallet with just their emails.
+
+:::info Note
+
+Due to Safari’s strict third-party cookie policies, the SDK is not preserving sessions after the app is closed. Our team is working to solve this issue soon.
+
+:::
+
+## Integration
+
+<PlatformTabs groupId="eth-lib" activeOptions={["wagmi", "ethers"]}>
+
+<PlatformTabItem value="wagmi">
+   <WagmiImplementation />
+</PlatformTabItem>
+
+<PlatformTabItem value="ethers">
+   <EthersImplementation />
+</PlatformTabItem>
+
+</PlatformTabs>
+
+## User Flow
+
+1. Users will be able to connect to you application by simply using an email address. AppKit will send to them a One Time Password (OTP) to copy and paste in the modal, which will help to
+   verify the user's authenticity. This will create a non-custodial wallet for your user which will be available in any application that integrates AppKit and email login.
+
+2. Eventually the user can optionally choose to move from a non-custodial wallet to a self-custodial one by pressing "Upgrade Wallet" on AppKit.
+   This will open the _([WalletConnect secure website](https://secure.walletconnect.com/dashboard))_ that will walk your user through the upgrading process.
