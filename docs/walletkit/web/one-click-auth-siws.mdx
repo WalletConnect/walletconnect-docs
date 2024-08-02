@@ -1,0 +1,131 @@
+import ThemedImage from '@theme/ThemedImage'
+import useBaseUrl from '@docusaurus/useBaseUrl'
+import Button from '../../components/button'
+
+# One-click Auth / SIWS
+
+## Introduction
+
+This section outlines an innovative protocol method that facilitates the initiation of a Sign session and the authentication of a wallet through a [Sign-In with Solana](https://github.com/phantom/sign-in-with-solana) (SIWS) message, enhanced by [ReCaps](https://eips.ethereum.org/EIPS/eip-5573) (ReCap Capabilities).
+
+This enhancement not only offers immediate authentication for dApps, paving the way for prompt user logins, but also integrates informed consent for authorization. Through this mechanism, dApps can request the delegation of specific capabilities to perform actions on behalf of the wallet user. These capabilities, encapsulated within SIWS messages as ReCap URIs, detail the scope of actions authorized by the user in an explicit and human-readable form.
+
+By incorporating ReCaps, this method extends the utility of SIWS messages, allowing dApps to combine authentication with a nuanced authorization model. This model specifies the actions a dApp is authorized to execute on the user's behalf, enhancing security and user autonomy by providing clear consent for each delegated capability. As a result, dApps can utilize these consent-backed messages to perform predetermined actions, significantly enriching the interaction between dApps, wallets, and users within the Solana ecosystem.
+
+## Handling Authentication Requests
+
+To handle incoming authentication requests, subscribe to the `session_authenticate` event. This will notify you of any authentication requests that need to be processed, allowing you to either approve or reject them based on your application logic.
+
+```typescript
+web3wallet.on('session_authenticate', async payload => {
+  // Process the authentication request here.
+  // Steps include:
+  // 1. Populate the authentication payload with the supported chains and methods
+  // 2. Format the authentication message using the payload and the user's account
+  // 3. Present the authentication message to the user
+  // 4. Sign the authentication message(s) to create a verifiable authentication object(s)
+  // 5. Approve the authentication request with the authentication object(s)
+})
+```
+
+## Authentication Objects/Payloads
+
+```typescript
+import { populateAuthPayload } from "@walletconnect/utils";
+
+// Solana chains that your wallet supports
+const supportedChains = [ "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp", "solana:4sGjMW1sUnHzSxGspuhpqLDx6wiyjNtZ" ]
+// Solana methods that your wallet supports
+const supportedMethods = ["solana_signMessage", "solana_signTransaction"];
+// Populate the authentication payload with the supported chains and methods
+const authPayload = populateAuthPayload({
+  authPayload: payload.params.authPayload,
+  chains: supportedChains,
+  methods: supportedMethods,
+});
+// Prepare the user's address in CAIP10(https://github.com/ChainAgnostic/CAIPs/blob/main/CAIPs/caip-10.md) format
+const iss = `solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp:8nJ694gNrHx76L2eyJzQw7JBGRoW8Fdtrxf588pEqyYh`;
+// Now you can use the authPayload to format the authentication message
+const message = web3wallet.formatAuthMessage({
+  request: authPayload,
+  iss
+});
+
+// Present the authentication message to the user
+...
+```
+
+## Approving Authentication Requests
+
+:::info Note
+
+1. The recommended approach for secure authentication across multiple chains involves signing a SIWS (Sign-In with Solana) message for each chain and account. However, at a minimum, one SIWS message must be signed to establish a session. It is possible to create a session for multiple chains with just one issued authentication object.
+2. Sometimes a dapp may want to only authenticate the user without creating a session, not every approval will result with a new session.
+
+:::
+
+```typescript
+// Approach 1
+// Sign the authentication message(s) to create a verifiable authentication object(s)
+const signature = await cryptoWallet.signMessage(message, privateKey)
+// Build the authentication object(s)
+const auth = buildAuthObject(
+  authPayload,
+  {
+    t: 'caip122',
+    s: signature
+  },
+  iss
+)
+
+// Approve
+await web3wallet.approveSessionAuthenticate({
+  id: payload.id,
+  auths: [auth]
+})
+
+// Approach 2
+// Note that you can also sign multiple messages for every requested chain/address pair
+const auths = []
+authPayload.chains.forEach(async chain => {
+  const message = web3wallet.formatAuthMessage({
+    request: authPayload,
+    iss: `${chain}:${cryptoWallet.address}`
+  })
+  const signature = await cryptoWallet.signMessage(message)
+  const auth = buildAuthObject(
+    authPayload,
+    {
+      t: 'caip122', // signature type
+      s: signature
+    },
+    `${chain}:${cryptoWallet.address}`
+  )
+  auths.push(auth)
+})
+
+// Approve
+await web3wallet.approveSessionAuthenticate({
+  id: payload.id,
+  auths
+})
+```
+
+## Rejecting Authentication Requests
+
+If the authentication request cannot be approved or if the user chooses to reject it, use the rejectSession method.
+
+```typescript
+import { getSdkError } from '@walletconnect/utils'
+
+await web3wallet.rejectSessionAuthenticate({
+  id: payload.id,
+  reason: getSdkError('USER_REJECTED') // or choose a different reason if applicable
+})
+```
+
+## Testing One-click Auth
+
+You can use [Web3Modal Labs](https://lab.web3modal.com/library/solana-siws/) to test and verify that your wallet supports One-click Auth properly.
+
+<Button name="Test One-click Auth" url="https://lab.web3modal.com/library/solana-siws/" />
