@@ -40,6 +40,6 @@ For a chain to benefit users, its prominent wallets and dApps must be registered
 
 ## Wagmi & Viem
 
-If the chain you are registering is EVM compliant, we highly recommend you to integrate it with [Viem](https://viem.sh/docs/clients/chains.html), an ethereum library used by Wagmi and Web3Modal. To accomplish this you will need to open a GitHub Pull Request in the Viem repository.
+If the chain you are registering is EVM compliant, we highly recommend you to integrate it with [Viem](https://viem.sh/docs/clients/chains.html), an ethereum library used by Wagmi and AppKit. To accomplish this you will need to open a GitHub Pull Request in the Viem repository.
 
 - [Viem GitHub Repository](https://github.com/wagmi-dev/viem/tree/main/src/chains/definitions)

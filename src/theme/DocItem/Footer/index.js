@@ -6,7 +6,6 @@ import LastUpdated from '@theme/LastUpdated'
 import EditThisPage from '@theme/EditThisPage'
 import TagsListInline from '@theme/TagsListInline'
 import styles from './styles.module.css'
-import Feedback from '../../../../docs/components/Feedback'
 function TagsRow(props) {
   return (
     <div className={clsx(ThemeClassNames.docs.docFooterTagsRow, 'row margin-bottom--sm')}>
@@ -43,19 +42,16 @@ export default function DocItemFooter() {
     return null
   }
   return (
-    <>
-      <Feedback path={metadata.editUrl} />
-      <footer className={clsx(ThemeClassNames.docs.docFooter, 'docusaurus-mt-lg')}>
-        {canDisplayTagsRow && <TagsRow tags={tags} />}
-        {canDisplayEditMetaRow && (
-          <EditMetaRow
-            editUrl={editUrl}
-            lastUpdatedAt={lastUpdatedAt}
-            lastUpdatedBy={lastUpdatedBy}
-            formattedLastUpdatedAt={formattedLastUpdatedAt}
-          />
-        )}
-      </footer>
-    </>
+    <footer className={clsx(ThemeClassNames.docs.docFooter, 'docusaurus-mt-lg')}>
+      {canDisplayTagsRow && <TagsRow tags={tags} />}
+      {canDisplayEditMetaRow && (
+        <EditMetaRow
+          editUrl={editUrl}
+          lastUpdatedAt={lastUpdatedAt}
+          lastUpdatedBy={lastUpdatedBy}
+          formattedLastUpdatedAt={formattedLastUpdatedAt}
+        />
+      )}
+    </footer>
   )
 }

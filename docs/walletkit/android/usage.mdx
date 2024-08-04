@@ -41,8 +41,6 @@ To check the full list of platform specific instructions for your preferred plat
 
 ```kotlin
 val projectId = "" // Get Project ID at https://cloud.walletconnect.com/
-val relayUrl = "relay.walletconnect.com"
-val serverUrl = "wss://$relayUrl?projectId=$projectId"
 val connectionType = ConnectionType.AUTOMATIC or ConnectionType.MANUAL
 val telemetryEnabled: Boolean = true
 val appMetaData = Core.Model.AppMetaData(
@@ -53,7 +51,7 @@ val appMetaData = Core.Model.AppMetaData(
     redirect = "kotlin-wallet-wc:/request" // Custom Redirect URI
 )
 
-CoreClient.initialize(relayServerUrl = serverUrl, connectionType = connectionType, application = this, metaData = appMetaData, telemetryEnabled = telemetryEnabled)
+CoreClient.initialize(projectId = projectId, connectionType = connectionType, application = this, metaData = appMetaData, telemetryEnabled = telemetryEnabled)
 
 val initParams = Wallet.Params.Init(core = CoreClient)
 
@@ -302,6 +300,19 @@ Web3Wallet.extendSession(extendParams) { error -> /*callback for error while ext
 
 To extend a session, create a `Wallet.Params.SessionExtend` object with the session's topic to update the session with to `Web3Wallet.extendSession`. Session is
 extended by 7 days.
+
+### Emitting a Session
+
+To emit an event, call emitSessionEvent() as follows:
+
+```kotlin
+val sessionTopic: String = /*Topic of Session*/
+val event: Wallet.Model.SessiomEvent = SessionEvent(name = "accountsChanged", data = "0x000000000")
+
+val sessionEmit = Wallet.Params.SessionEmit(topic = sessionTopic, chainId = "eip155:1", event = event)
+
+Web3Wallet.emitSessionEvent(sessionEmit) { error -> /*callback for error while emiting an event*/ }
+```
 
 ### Session Disconnect
 

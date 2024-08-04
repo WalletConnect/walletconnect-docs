@@ -1,23 +1,3 @@
-const SELECTED_ENV_KEY = 'SELECTED_ENV_KIT'
-
-export function setItemInStorage(item) {
-  if (typeof window === 'undefined') return
-
-  localStorage.setItem(SELECTED_ENV_KEY, item)
-}
-
-export function removeItemInStorage() {
-  if (typeof window === 'undefined') return
-
-  localStorage.removeItem(SELECTED_ENV_KEY)
-}
-
-export function getItemInStorage() {
-  if (typeof window === 'undefined') return
-
-  return localStorage.getItem(SELECTED_ENV_KEY)
-}
-
 export function parseEnvironment(env) {
   if (!env) return ''
   if(env === 'c-sharp'){
@@ -52,4 +32,12 @@ function capitalize(item) {
 
 export function isIconWhite(icon){
   if(icon === 'ios' || icon === 'next' || icon === 'unity') return true
+}
+
+export function getEnvFromCurrentPath(list){
+  if(location.pathname.includes('react-native')){
+    return 'react-native'
+  }else{
+    return list.find(item => location.pathname.includes(item))
+  }
 }

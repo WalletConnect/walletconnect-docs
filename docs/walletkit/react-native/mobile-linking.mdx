@@ -1,5 +1,6 @@
 import ThemedImage from '@theme/ThemedImage'
 import useBaseUrl from '@docusaurus/useBaseUrl'
+import HowToTest from '../shared/mobile-linking.mdx'
 
 # Mobile Linking
 
@@ -81,6 +82,8 @@ Dapps developers must do the same for their own custom schemes if they want the 
 
 :::
 
+<HowToTest/>
+
 ## Integration
 
 In order to redirect to the Dapp, you'll need to use `Linking` from `react-native` and call `openURL()` method with the Dapp scheme that comes in the proposal metadata.
@@ -89,9 +92,9 @@ In order to redirect to the Dapp, you'll need to use `Linking` from `react-nativ
 import { Linking } from 'react-native'
 
 async function onApprove(proposal, namespaces) {
-  await web3wallet.approveSession({ id: proposal.id, namespaces })
+  const session = await web3wallet.approveSession({ id: proposal.id, namespaces })
 
-  const dappScheme = proposal.params.proposer.metadata.redirect?.native
+  const dappScheme = session.peer.metadata.redirect?.native
 
   if (dappScheme) {
     Linking.openURL(dappScheme)

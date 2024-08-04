@@ -14,22 +14,11 @@ createWeb3Modal({ projectId, chains, ...options })
 
 You can set a desired chain for the initial connection:
 
-<PlatformTabs groupId="eth-lib" activeOptions={["wagmi", "wagmi1", "ethers", "ethers5"]}>
+<PlatformTabs groupId="eth-lib" activeOptions={["wagmi", "ethers", "ethers5"]}>
 
 <PlatformTabItem value="wagmi">
 ```ts
 import { mainnet } from '@wagmi/core/chains'
-
-createWeb3Modal({
-  //...
-  defaultChain: mainnet
-})
-```
-</PlatformTabItem>
-
-<PlatformTabItem value="wagmi1">
-```ts
-import { mainnet } from 'viem/chains'
 
 createWeb3Modal({
   //...
@@ -77,7 +66,7 @@ createWeb3Modal({
 
 ## clipboardClient
 
-Use your preferred clipboard library to allow Web3Modal use the clipboard to copy addresses & URIs
+Use your preferred clipboard library to allow AppKit use the clipboard to copy addresses & URIs
 
 ```ts
 import * as Clipboard from 'expo-clipboard' // or `@react-native-clipboard/clipboard`
@@ -94,7 +83,7 @@ createWeb3Modal({
 
 ## tokens
 
-You can select tokens for Web3Modal to show the user's balance of. Each key represents the chain id of the token's blockchain.
+You can select tokens for AppKit to show the user's balance of. Each key represents the chain id of the token's blockchain.
 
 ```ts
 createWeb3Modal({
@@ -135,8 +124,7 @@ createWeb3Modal({
 
 ## featuredWalletIds
 
-Select wallets that are going to be shown on the modal's main view. Default wallets are MetaMask and Trust Wallet.
-Array of wallet ids defined will be prioritized (order is respected).
+Select wallets that are going to be shown on the modal's main view. Array of wallet IDs defined will be prioritized (order is respected).
 These wallets will also show up first in `All Wallets` view.
 You can find the wallets ids in [WalletConnect Explorer](https://walletconnect.com/explorer?type=wallet)
 

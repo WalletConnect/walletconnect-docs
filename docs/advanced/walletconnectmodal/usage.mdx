@@ -119,8 +119,6 @@ or you can change them later by calling `WalletConnectModal.set(sessionParams: S
 ```kotlin
 val connectionType = ConnectionType.AUTOMATIC or ConnectionType.MANUAL
 val projectId = "" // Get Project ID at https://cloud.walletconnect.com/
-val relayUrl = "relay.walletconnect.com"
-val serverUrl = "wss://$relayUrl?projectId=${projectId}"
 val appMetaData = Core.Model.AppMetaData(
     name = "Kotlin.WalletConnectModal",
     description = "Kotlin WalletConnectModal Implementation",
@@ -129,7 +127,7 @@ val appMetaData = Core.Model.AppMetaData(
     redirect = "kotlin-modal://request"
 )
 
-CoreClient.initialize(relayServerUrl = serverUrl, connectionType = connectionType, application = this, metaData = appMetaData)
+CoreClient.initialize(projectId = projectId, connectionType = connectionType, application = this, metaData = appMetaData)
 
 WalletConnectModal.initialize(
     init = Modal.Params.Init(CoreClient),

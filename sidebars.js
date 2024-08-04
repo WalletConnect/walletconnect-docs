@@ -74,10 +74,10 @@ const advanced = {
     },
     {
       type: 'category',
-      label: 'Providers',
+      label: 'Providers & Adapters',
       collapsible: true,
       collapsed: true,
-      items: ['advanced/providers/ethereum', 'advanced/providers/universal']
+      items: ['advanced/providers/ethereum', 'advanced/providers/universal', 'advanced/providers/solana-adapter']
     },
     {
       type: 'category',
@@ -810,6 +810,7 @@ module.exports = {
             'appkit/android/core/usage',
             'appkit/android/core/options',
             'appkit/android/core/actions',
+            'appkit/android/core/one-click-auth',
             'appkit/android/core/components',
             'appkit/android/core/theming'
           ]
@@ -880,6 +881,7 @@ module.exports = {
         'walletkit/android/usage',
         'walletkit/android/one-click-auth',
         'walletkit/android/mobile-linking',
+        'walletkit/android/link-mode',
         'walletkit/android/verify',
         'walletkit/android/eip5792',
         {
