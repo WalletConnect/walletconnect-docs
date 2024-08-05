@@ -48,24 +48,49 @@ Coming soon...
 
 </PlatformTabItem>
 <PlatformTabItem value="solana">
-You can add custom wallet adapters for solana wallets as follows
+You can add custom wallet adapters for solana wallets. First install the following package and then add the wallet adapters to the wallets array.
+
+```bash npm2yarn
+npm install @solana/wallet-adapter-wallets
+```
+
 ```ts
+import { createWeb3Modal, defaultSolanaConfig } from '@web3modal/solana'
+import { solana, solanaTestnet, solanaDevnet } from '@web3modal/solana/chains'
+import { PhantomWalletAdapter, HuobiWalletAdapter, SolflareWalletAdapter } from '@solana/wallet-adapter-wallets'
+
+// 0. Setup chains
+const chains = [solana, solanaTestnet, solanaDevnet]
+
+// 1. Get projectId from https://cloud.walletconnect.com
+const projectId = 'YOUR_PROJECT_ID'
+
+// 2. Create solanaConfig
+const metadata = {
+  //...
+}
+
 const solanaConfig = defaultSolanaConfig({
   chains,
   projectId,
   metadata
 })
 
+// 3. Create modal
 const modal = createWeb3Modal({
   solanaConfig,
-  projectId: ConstantsUtil.ProjectId,
-  metadata: ConstantsUtil.Metadata,
+  projectId: projectId,
+  metadata: metadata,
   chains,
   enableAnalytics: true,
   termsConditionsUrl: 'https://walletconnect.com/terms',
   privacyPolicyUrl: 'https://walletconnect.com/privacy',
+  wallets: [
+      new PhantomWalletAdapter(), 
+      new SolflareWalletAdapter(),
+      new HuobiWalletAdapter()
+    ]
 })
 ```
-
 </PlatformTabItem>
 </PlatformTabs>
