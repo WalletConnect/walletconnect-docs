@@ -14,23 +14,8 @@ Hooks are functions that will help you control the modal, subscribe to wallet ev
 
 Control the modal with the `useWeb3Modal` hook
 
-<PlatformTabs groupId="eth-lib" activeOptions={["wagmi", "wagmi1","ethers5","ethers", "solana"]}>
+<PlatformTabs groupId="eth-lib" activeOptions={["wagmi", "ethers5","ethers", "solana"]}>
 <PlatformTabItem value="wagmi">
-
-```ts
-import { useWeb3Modal } from '@web3modal/wagmi/react'
-
-export default function Component() {
-  const { open, close } = useWeb3Modal()
-
-  open()
-
-  //...
-}
-```
-
-</PlatformTabItem>
-<PlatformTabItem value="wagmi1">
 
 ```ts
 import { useWeb3Modal } from '@web3modal/wagmi/react'
