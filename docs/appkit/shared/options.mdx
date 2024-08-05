@@ -92,7 +92,7 @@ createWeb3Modal({
 
 ## tokens
 
-You can select tokens for Web3Modal to show the user's balance of. Each key represents the chain id of the token's blockchain.
+You can select tokens for AppKit to show the user's balance of. Each key represents the chain id of the token's blockchain.
 
 ```ts
 createWeb3Modal({
@@ -268,15 +268,15 @@ The `allWallets` parameter allows you to add or remove the "All Wallets" button 
   data={[
     {
       value: { code: 'SHOW' },
-      description: 'Shows the "All Wallets" button on Web3Modal.'
+      description: 'Shows the "All Wallets" button on AppKit.'
     },
     {
       value: { code: 'HIDE' },
-      description: 'Removes the "All Wallets" button from Web3Modal.'
+      description: 'Removes the "All Wallets" button from AppKit.'
     },
     {
       value: { code: 'ONLY_MOBILE' },
-      description: 'Shows the "All Wallets" button on Web3Modal only on mobile.'
+      description: 'Shows the "All Wallets" button on AppKit only on mobile.'
     }
   ]}
 />
@@ -335,7 +335,7 @@ createWeb3Modal({
 The Coinbase connector now includes a new flag to customize the Smart Wallet behavior.
 
 :::info Note
-To enable the Coinbase Smart Wallet feature, ensure that Web3Modal is updated to version 4.2.3 or higher. Additionally, if you are using Wagmi, verify that it is on the latest version.
+To enable the Coinbase Smart Wallet feature, ensure that AppKit is updated to version 4.2.3 or higher. Additionally, if you are using Wagmi, verify that it is on the latest version.
 :::
 
 The `preference` (or `coinbasePreference`) flag accepts one of the following string values:
@@ -347,7 +347,7 @@ The `preference` (or `coinbasePreference`) flag accepts one of the following str
 <PlatformTabs groupId="eth-lib" activeOptions={["wagmi", "ethers"]}>
 <PlatformTabItem value="wagmi">
 
-Web3Modal can be configured in **two** different ways: **Default** or **Custom**
+AppKit can be configured in **two** different ways: **Default** or **Custom**
 
 Select your preferred configuration mode below:
 

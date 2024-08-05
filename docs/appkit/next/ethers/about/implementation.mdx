@@ -40,7 +40,7 @@ const ethersConfig = defaultConfig({
   defaultChainId: 1 // used for the Coinbase SDK
 })
 
-// 5. Create a Web3Modal instance
+// 5. Create a AppKit instance
 createWeb3Modal({
   ethersConfig,
   chains: [mainnet],
@@ -48,28 +48,28 @@ createWeb3Modal({
   enableAnalytics: true // Optional - defaults to your Cloud configuration
 })
 
-export function Web3Modal({ children }) {
+export function AppKit({ children }) {
   return children
 }
 ```
 
-Next, in your `app/layout.tsx` or `app/layout.jsx` file, import the custom Web3Modal component.
+Next, in your `app/layout.tsx` or `app/layout.jsx` file, import the custom AppKit component.
 
 ```tsx
 import './globals.css'
 
-import { Web3Modal } from '../context/web3modal'
+import { AppKit } from '../context/web3modal'
 
 export const metadata = {
-  title: 'Web3Modal',
-  description: 'Web3Modal Example'
+  title: 'AppKit',
+  description: 'AppKit Example'
 }
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body>
-        <Web3Modal>{children}</Web3Modal>
+        <AppKit>{children}</AppKit>
       </body>
     </html>
   )

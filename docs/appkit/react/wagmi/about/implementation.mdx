@@ -19,8 +19,8 @@ const projectId = 'YOUR_PROJECT_ID'
 
 // 2. Create wagmiConfig
 const metadata = {
-  name: 'Web3Modal',
-  description: 'Web3Modal Example',
+  name: 'AppKit',
+  description: 'AppKit Example',
   url: 'https://web3modal.com', // origin must match your domain & subdomain
   icons: ['https://avatars.githubusercontent.com/u/37784886']
 }
@@ -40,7 +40,7 @@ createWeb3Modal({
   enableAnalytics: true // Optional - defaults to your Cloud configuration
 })
 
-export function Web3ModalProvider({ children }) {
+export function AppKitProvider({ children }) {
   return (
     <WagmiProvider config={config}>
       <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
