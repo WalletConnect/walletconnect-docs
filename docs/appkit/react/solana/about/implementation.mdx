@@ -35,7 +35,10 @@ const solanaConfig = defaultSolanaConfig({
 createWeb3Modal({
   solanaConfig,
   chains,
-  projectId
+  projectId,
+  wallets: [
+      // Solana wallet adapters (check Custom connectors for more info)
+  ]
 })
 
 export default function App() {

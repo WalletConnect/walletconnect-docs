@@ -5,44 +5,38 @@ In your `App.vue` file set up the following configuration.
 
 ```html
 <script setup lang="ts">
-import { createWeb3Modal, defaultConfig } from '@web3modal/solana/react'
+import { createWeb3Modal, defaultSolanaConfig } from '@web3modal/solana/vue'
+import { solana, solanaTestnet, solanaDevnet } from '@web3modal/solana/chains'
 
-// 1. Get projectId
+// 0. Setup chains
+const chains = [solana, solanaTestnet, solanaDevnet]
+
+// 1. Get projectId from https://cloud.walletconnect.com
 const projectId = 'YOUR_PROJECT_ID'
 
-// 2. Set chains
-const mainnet = {
-  chainId: '5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp',
-  name: 'Solana',
-  currency: 'SOL',
-  explorerUrl: 'https://solscan.io',
-  rpcUrl: 'https://rpc.walletconnect.org/v1'
-}
-
-// 3. Create a metadata object
+// 2. Create solanaConfig
 const metadata = {
-  name: 'My Website',
-  description: 'My Website description',
-  url: 'https://mywebsite.com', // origin must match your domain & subdomain
-  icons: ['https://avatars.mywebsite.com/']
+  name: 'Web3Modal',
+  description: 'Web3Modal Solana Example',
+  url: 'https://web3modal.com', // origin must match your domain & subdomain
+  icons: ['https://avatars.githubusercontent.com/u/37784886']
 }
 
 // 4. Create Solana config
-const solanaConfig = defaultConfig({
-  /*Required*/
+const solanaConfig = defaultSolanaConfig({
   metadata,
-  /*Optional*/
-  projectId,
-  enableInjected,
-  defaultChainId
+  chains,
+  projectId
 })
 
 // 5. Create a Web3Modal instance
-const modal = createWeb3Modal({
+createWeb3Modal({
   solanaConfig,
-  chains: [mainnet],
+  chains,
   projectId,
-  enableAnalytics: true, // Optional - defaults to your Cloud configuration
+  wallets: [
+      // Solana wallet adapters (check Custom connectors for more info)
+  ]
 })
 
 </script>
