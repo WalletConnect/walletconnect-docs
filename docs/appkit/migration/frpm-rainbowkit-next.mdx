@@ -1,0 +1,171 @@
+---
+title: Migration from RainbowKit to AppKit
+---
+
+# Migration from RainbowKit to AppKit
+
+Follow the steps below to migrate from the default Rainbowkit project using Next.js Pages to an Appkit project using wagmi.
+
+### step 1 . Create a project in WalletConnect Clouds
+
++ Create a new project on WalletConnect Cloud at https://cloud.walletconnect.com and obtain a new project ID.
+
+### step 2 . Install & Uninstall libraries
+
++ Run this command to install the `AppKit` Library and Uninstall the `RainbowKit` one.
+
+```bash
+pnpm install @web3modal/wagmi && pnpm uninstall @rainbow-me/rainbowkit
+```
+
+### step 3 . Change the index.tsx
+
+Use the Appkit Button. It can be configure following these [guidelines](https://docs.walletconnect.com/appkit/react-native/core/components#w3mbutton-).
+```tsx
+/* highlight-delete-start */
+- import { ConnectButton } from '@rainbow-me/rainbowkit';
+/* highlight-delete-end */
+
+/* highlight-delete-start */
+- <ConnectButton />
+/* highlight-delete-end */
+/* highlight-add-start */
++ <w3m-button />
+/* highlight-add-end */
+```
+
+:::info
+AppKit's web components are global html elements that don't require importing.
+:::
+
+### step 4 . Changes in your config file
+
++ Replace the following import statements:
+```tsx
+/* highlight-delete-start */
+- import { getDefaultConfig } from '@rainbow-me/rainbowkit';
+/* highlight-delete-end */
+/* highlight-add-start */
++ import { defaultWagmiConfig } from "@web3modal/wagmi/react/config";
+/* highlight-add-end */
+```
+
++ If you have something similar to this
+```tsx
+/* highlight-delete-start */
+- export const config = getDefaultConfig({
+-  appName: 'RainbowKit App',
+-  projectId: 'YOUR_PROJECT_ID',
+-  chains: [
+-    mainnet,
+-    polygon,
+-    optimism,
+-    arbitrum,
+-    base,
+-    ...(process.env.NEXT_PUBLIC_ENABLE_TESTNETS === 'true' ? [sepolia] : []),
+-  ],
+-  ssr: true,
+- });
+/* highlight-delete-end */
+```
+
++ Replace the wagmi config for this example. Also you can customize email and social logins following this [guidelines](https://docs.walletconnect.com/appkit/react/onboarding/socials).
+
+```tsx
+/* highlight-add-start */
+export const projectId = "YOUR_PROJECT_ID";
+
+export const metadata = {
+  name: "AppKit App",
+  description: "AppKit Example",
+  url: "https://web3modal.com", // origin must match your domain and subdomain
+  icons: ["https://avatars.githubusercontent.com/u/37784886"]
+};
+
+// Create wagmiConfig
+export const config = defaultWagmiConfig({
+  chains, // chains are the same
+  projectId, // Use the new Cloud Id 
+  metadata,
+  auth: { 
+    email: true, 
+    socials: ["github", "google", "x", "discord", "apple"],
+    showWallets: true, // default to true
+  },
+  ssr: true,
+});
+/* highlight-add-end */
+```
+
+###  step 5 . Update app.tsx
+
+In this step, we'll update the import statements and remove the RainbowKitProvider from the component tree.
+
++ Replace the following import statements:
+```tsx
+import '../styles/globals.css';
+/* highlight-delete-start */
+- import '@rainbow-me/rainbowkit/styles.css';
+/* highlight-delete-end */
+import type { AppProps } from 'next/app';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { WagmiProvider } from 'wagmi';
+
+/* highlight-delete-start */
+- import { RainbowKitProvider } from '@rainbow-me/rainbowkit';
+/* highlight-delete-end */
+/* highlight-add-start */
++ import { createWeb3Modal } from "@web3modal/wagmi/react"
+/* highlight-add-end */
+
+/* highlight-delete-start */
+- import { config } from '../wagmi';
+/* highlight-delete-end */
+/* highlight-add-start */
++ import { config, metadata, projectId } from '../wagmi';
+/* highlight-add-end */
+```
+
+
++ Initialize the Web3Modal:
+```tsx
+const client = new QueryClient();
+
+/* highlight-add-start */
+// Create modal
+createWeb3Modal({
+  metadata,
+  wagmiConfig: config,
+  projectId,
+  enableAnalytics: true, // Optional - defaults to your Cloud configuration
+  enableOnramp: true, // Optional - false as default
+});
+/* highlight-add-end */
+```
+
++ Update the component:
+```tsx
+function MyApp({ Component, pageProps }: AppProps) {
+  return (
+    <WagmiProvider config={config}>
+      <QueryClientProvider client={client}>
+/* highlight-delete-start */
+-       <RainbowKitProvider>
+/* highlight-delete-end */
+          <Component {...pageProps} />
+/* highlight-delete-start */
+-       </RainbowKitProvider>
+/* highlight-delete-end */
+      </QueryClientProvider>
+    </WagmiProvider>
+  );
+}
+
+export default MyApp;
+```
+
+###  Final notes
+
++ Ensure that you have updated all relevant configurations and imports in your project to reflect the changes from RainbowKit to AppKit.
++ Test your application thoroughly to ensure that the migration has been successful and that all functionalities are working as expected.
++ Check our [AppKit web examples](https://github.com/WalletConnect/web-examples/tree/main/dapps/web3modal) to compare with your implementation in case you are having issues 
