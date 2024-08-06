@@ -8,7 +8,7 @@ Custom connectors, such as social logins, WalletConnect QR, Coinbasewallet, etc.
 
 <PlatformTabItem value="wagmi">
 
-If you already have Wagmi integrated into your application or would like more control over Wagmi's configuration, you can integrate Web3Modal on top of it.
+If you already have Wagmi integrated into your application or would like more control over Wagmi's configuration, you can integrate AppKit on top of it.
 
 ```tsx
 import { createWeb3Modal } from '@web3modal/wagmi/react'
@@ -113,7 +113,7 @@ const ethersConfig = defaultConfig({
   }
 })
 
-// Create a Web3Modal instance
+// Create a AppKit instance
 createWeb3Modal({
   ethersConfig,
   chains: [mainnet],

@@ -24,7 +24,7 @@ AppKit has support for [Wagmi](https://wagmi.sh/) and [Ethers v6](https://docs.e
 Choose one of these Ethereum Libraries or 'Solana' to get started.
 
 :::info Note
-We recommend using [Vite](https://vitejs.dev/guide/#scaffolding-your-first-vite-project) to get started with Web3Modal JavaScript.
+We recommend using [Vite](https://vitejs.dev/guide/#scaffolding-your-first-vite-project) to get started with AppKit JavaScript.
 :::
 
 ## Installation
@@ -52,6 +52,10 @@ npm install @web3modal/ethers ethers
 
 </PlatformTabItem>
 <PlatformTabItem value="solana">
+:::caution
+
+AppKit Solana is in Beta.
+:::
 
 ```bash npm2yarn
 npm install @web3modal/solana
@@ -85,10 +89,7 @@ Create a new project on WalletConnect Cloud at https://cloud.walletconnect.com a
 
 </PlatformTabItem>
 <PlatformTabItem value="solana">
-:::caution
 
-AppKit Solana is in Beta.
-:::
 <SolanaImplementation />
 
 </PlatformTabItem>
