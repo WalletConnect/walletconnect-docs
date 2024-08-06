@@ -2,8 +2,8 @@ import React from 'react'
 import Link from '@docusaurus/Link'
 
 export const SolanaBanner = () => {
-  const title = 'Web3Modal Solana'
-  const description = 'Web3Modal now supports Solana. Learn how to integrate it into your project.'
+  const title = 'AppKit Solana'
+  const description = 'AppKit now supports Solana. Learn how to integrate it into your project.'
   const href = '/web3modal/features/solana'
 
   return (

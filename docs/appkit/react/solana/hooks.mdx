@@ -34,7 +34,7 @@ function SignMessage() {
       }
 
       // 2. Encode message and sign it
-      const encodedMessage = new TextEncoder().encode('Hello from Web3Modal')
+      const encodedMessage = new TextEncoder().encode('Hello from AppKit')
       const signature = await walletProvider.signMessage(encodedMessage)
 
       console.log(signature)
