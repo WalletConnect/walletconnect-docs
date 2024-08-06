@@ -6,11 +6,11 @@ title: Migration from RainbowKit to AppKit
 
 Follow the steps below to migrate from the default Rainbowkit project using Next.js Pages to an Appkit project using wagmi.
 
-### step 1. Create a project in WalletConnect Clouds
+### step 1 . Create a project in WalletConnect Clouds
 
 + Create a new project on WalletConnect Cloud at https://cloud.walletconnect.com and obtain a new project ID.
 
-### step 2. Install & Uninstall libraries
+### step 2 . Install & Uninstall libraries
 
 + Run this command to install the `AppKit` Library and Uninstall the `RainbowKit` one.
 
@@ -18,7 +18,7 @@ Follow the steps below to migrate from the default Rainbowkit project using Next
 pnpm install @web3modal/wagmi && pnpm uninstall @rainbow-me/rainbowkit
 ```
 
-### step 3. Change the index.tsx
+### step 3 . Change the index.tsx
 
 Use the Appkit Button. It can be configure following these [guidelines](https://docs.walletconnect.com/appkit/react-native/core/components#w3mbutton-).
 ```tsx
@@ -38,7 +38,7 @@ Use the Appkit Button. It can be configure following these [guidelines](https://
 AppKit's web components are global html elements that don't require importing.
 :::
 
-### step 4. Changes in your config file
+### step 4 . Changes in your config file
 
 + Replace the following import statements:
 ```tsx
@@ -97,7 +97,7 @@ export const config = defaultWagmiConfig({
 /* highlight-add-end */
 ```
 
-###  step 5. Update app.tsx
+###  step 5 . Update app.tsx
 
 In this step, we'll update the import statements and remove the RainbowKitProvider from the component tree.
 
@@ -163,3 +163,9 @@ function MyApp({ Component, pageProps }: AppProps) {
 
 export default MyApp;
 ```
+
+###  Final notes
+
++ Ensure that you have updated all relevant configurations and imports in your project to reflect the changes from RainbowKit to AppKit.
++ Test your application thoroughly to ensure that the migration has been successful and that all functionalities are working as expected.
++ Check our [AppKit web examples](https://github.com/WalletConnect/web-examples/tree/main/dapps/web3modal) to compare with your implementation in case you are having issues 
