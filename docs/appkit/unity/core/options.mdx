@@ -114,7 +114,7 @@ The default `unityInstance.SetFullscreen(1)` method enables fullscreen for the c
 it to the [top layer](https://developer.mozilla.org/en-US/docs/Glossary/Top_layer).
 This causes the modal to be rendered behind the canvas, making it invisible to the user when fullscreen is enabled.
 
-To fix this, Appkit creates a container around the canvas node and appends the modal UI to it.
+To fix this, AppKit creates a container around the canvas node and appends the modal UI to it.
 By requesting fullscreen on the container, the modal will always be rendered on top of the canvas.
 
 ```javascript
