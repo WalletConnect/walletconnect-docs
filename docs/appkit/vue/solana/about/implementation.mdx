@@ -1,0 +1,44 @@
+
+
+In your `App.vue` file set up the following configuration
+
+```html
+<script setup>
+  
+  import { createWeb3Modal, defaultSolanaConfig } from '@web3modal/solana/vue'
+  import { solana, solanaTestnet, solanaDevnet } from '@web3modal/solana/chains'
+  import { reconnect } from '@wagmi/core'
+
+  // 1. Define constants
+  const projectId = process.env.VUE_APP_PROJECT_ID // get it from cloud.walletconnect.com
+
+  // 2. Create wagmiConfig
+  const metadata = {
+    name: 'Appkit Solana',
+    description: 'Appkit Solana Example',
+    url: 'https://web3modal.com', // origin must match your domain & subdomain
+    icons: ['https://avatars.githubusercontent.com/u/37784886']
+  }
+
+  const chains = [solana, solanaTestnet, solanaDevnet]
+  const solanaConfig = defaultSolanaConfig({
+    metadata,
+    chains,
+    projectId
+  })
+
+  reconnect(solanaConfig)
+
+  // 3. Create modal
+  createWeb3Modal({
+    solanaConfig,
+    chains,
+    projectId
+  })
+</script>
+
+<template>
+  // Rest of your app ...
+</template>
+
+```
