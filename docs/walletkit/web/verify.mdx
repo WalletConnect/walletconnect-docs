@@ -58,9 +58,6 @@ web3wallet.on("auth_request", async (authRequest) => {
       // and proceed only if the user accepts the risk
       break
   }
-
-  // respond to the request after the user has approved the request
-  await web3wallet.respondAuthRequest(...)
 })
 ```
 

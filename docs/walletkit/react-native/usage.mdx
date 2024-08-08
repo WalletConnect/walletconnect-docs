@@ -6,28 +6,9 @@ import CloudBanner from '../../components/CloudBanner'
 
 This section provides instructions on how to initialize the Web3Wallet client, approve sessions with supported namespaces, and respond to session requests, enabling easy integration of Web3 wallets with dapps through a simple and intuitive interface.
 
-## Content
+## Cloud Configuration
 
-Links to sections on this page. Some sections are platform specific and are only visible when the platform is selected. To view a summary of useful platform specific topics, check out **Extra (Platform Specific)** under this section.
-
-**[Initialization](#initialization)**: Creating a new Web3Wallet instance and initializing it with a projectId from [Cloud](https://cloud.walletconnect.com).
-
-**Session**: Connection between a dapp and a wallet.
-
-- [Namespace Builder](#namespace-builder):
-  Namespace Builder is a helper utility that greatly reduces the complexity of parsing the required and optional namespaces. It accepts as parameters a session proposal along with your user's chains/methods/events/accounts and returns a ready-to-use object
-- [Session Approval](#session-approval):
-  Approving a session sent from a dapp
-- [Session Rejection](#session-rejection):
-  Rejecting a session sent from a dapp
-- [Responding to Session Requests](#responding-to-session-requests):
-  Responding to session requests sent from a dapp
-- [Updating a Session](#updating-a-session):
-  Updating a session sent between a dapp and wallet
-- [Extending a Session](#extending-a-session):
-  Extending a session between a dapp and wallet
-- [Session Disconnect](#session-disconnect):
-  Disconnecting a session between a dapp and wallet
+Create a new project on WalletConnect Cloud at https://cloud.walletconnect.com and obtain a new project ID.
 
 <CloudBanner />
 
@@ -155,6 +136,14 @@ const approvedNamespaces = buildApprovedNamespaces({
     },
 });
 // ------- end namespaces builder util ------------ //
+```
+
+### Get Active Sessions
+
+You can get the wallet active sessions using the `getActiveSessions` function.
+
+```js
+const activeSessions = web3wallet.getActiveSessions()
 ```
 
 ### EVM methods & events
