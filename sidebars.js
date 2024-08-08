@@ -77,7 +77,11 @@ const advanced = {
       label: 'Providers & Adapters',
       collapsible: true,
       collapsed: true,
-      items: ['advanced/providers/ethereum', 'advanced/providers/universal', 'advanced/providers/solana-adapter']
+      items: [
+        'advanced/providers/ethereum',
+        'advanced/providers/universal',
+        'advanced/providers/solana-adapter'
+      ]
     },
     {
       type: 'category',
@@ -150,7 +154,7 @@ const welcome = {
 /** @type {import('@docusaurus/plugin-content-docs').SidebarsConfig} */
 
 module.exports = {
-  WCM:[
+  WCM: [
     {
       type: 'doc',
       label: 'Home',
@@ -174,7 +178,7 @@ module.exports = {
         'advanced/walletconnectmodal/theming',
         'advanced/walletconnectmodal/resources'
       ]
-    },
+    }
   ],
   mainSidebar: [
     {
@@ -1064,7 +1068,8 @@ module.exports = {
       items: [
         'walletkit/web/installation',
         'walletkit/web/usage',
-        'walletkit/web/one-click-auth',
+        'walletkit/web/one-click-auth-siwe',
+        'walletkit/web/one-click-auth-siws',
         'walletkit/web/verify',
         'walletkit/web/eip5792',
         'walletkit/web/best-practices',

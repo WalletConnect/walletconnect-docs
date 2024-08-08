@@ -1,0 +1,42 @@
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
+
+To open Web3Modal you can use our [**web component**](../core/components.mdx) or build your own button with the Web3Modal [**composables**](../core/composables.mdx#useweb3modal).
+
+<Tabs>
+<TabItem value="components" label="Web Components">
+
+```html
+<template>
+  <w3m-button />
+</template>
+```
+
+Learn more about the Web3Modal web components [here](../core/components.mdx)
+
+:::note
+Web components are global html elements that don't require importing.
+:::
+
+</TabItem>
+<TabItem value="composables" label="Composables">
+
+You can trigger the modal by calling the `open` method from `useWeb3Modal` composable.
+
+```html
+<script setup lang="ts">
+  import { useWeb3Modal } from '@web3modal/solana/vue'
+  // 4. Use modal composable
+  const modal = useWeb3Modal()
+</script>
+
+<template>
+  <button @click="modal.open()">Open Connect Modal</button>
+  <button @click="modal.open({ view: 'Networks' })">Open Network Modal</button>
+</template>
+```
+
+Learn more about the Web3Modal composables [here](../core/composables.mdx)
+
+</TabItem>
+</Tabs>

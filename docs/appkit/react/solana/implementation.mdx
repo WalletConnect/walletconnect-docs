@@ -1,0 +1,54 @@
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
+
+On top of your app set up the following configuration, making sure that all functions are called outside any React component to avoid unwanted rerenders.
+
+```tsx
+import { createWeb3Modal, defaultConfig } from '@web3modal/solana/react'
+
+// 1. Get projectId
+const projectId = 'YOUR_PROJECT_ID'
+
+// 2. Set chains
+const mainnet = {
+  chainId: '5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp',
+  name: 'Solana',
+  currency: 'SOL',
+  explorerUrl: 'https://solscan.io',
+  rpcUrl: 'https://rpc.walletconnect.org/v1'
+}
+
+// 3. Create a metadata object
+const metadata = {
+  name: 'My Website',
+  description: 'My Website description',
+  url: 'https://mywebsite.com', // origin must match your domain & subdomain
+  icons: ['https://avatars.mywebsite.com/']
+}
+
+// 4. Create Ethers config
+const solanaConfig = defaultConfig({
+  /*Required*/
+  metadata,
+  /*Optional*/
+  projectId,
+  enableInjected,
+  defaultChainId
+})
+
+// 5. Create a Web3Modal instance
+createWeb3Modal({
+  solanaConfig,
+  chains: [mainnet],
+  projectId,
+  enableAnalytics: true, // Optional - defaults to your Cloud configuration
+})
+
+export default function App() {
+  return <YourApp />
+}
+```
+
+:::note IMPORTANT
+Make sure that the `url` from the `metadata` matches your domain and subdomain. This will later be used by the [Verify API](../../../cloud/verify.mdx) to tell wallets if your application has been verified or not.
+:::

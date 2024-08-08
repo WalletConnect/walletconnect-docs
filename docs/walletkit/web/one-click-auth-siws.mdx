@@ -2,23 +2,15 @@ import ThemedImage from '@theme/ThemedImage'
 import useBaseUrl from '@docusaurus/useBaseUrl'
 import Button from '../../components/button'
 
-# One-click Auth
+# One-click Auth / SIWS
 
 ## Introduction
 
-This section outlines an innovative protocol method that facilitates the initiation of a Sign session and the authentication of a wallet through a [Sign-In with Ethereum](https://eips.ethereum.org/EIPS/eip-4361) (SIWE) message, enhanced by [ReCaps](https://eips.ethereum.org/EIPS/eip-5573) (ReCap Capabilities).
+This section outlines an innovative protocol method that facilitates the initiation of a Sign session and the authentication of a wallet through a [Sign-In with Solana](https://github.com/phantom/sign-in-with-solana) (SIWS) message, enhanced by [ReCaps](https://eips.ethereum.org/EIPS/eip-5573) (ReCap Capabilities).
 
-This enhancement not only offers immediate authentication for dApps, paving the way for prompt user logins, but also integrates informed consent for authorization. Through this mechanism, dApps can request the delegation of specific capabilities to perform actions on behalf of the wallet user. These capabilities, encapsulated within SIWE messages as ReCap URIs, detail the scope of actions authorized by the user in an explicit and human-readable form.
+This enhancement not only offers immediate authentication for dApps, paving the way for prompt user logins, but also integrates informed consent for authorization. Through this mechanism, dApps can request the delegation of specific capabilities to perform actions on behalf of the wallet user. These capabilities, encapsulated within SIWS messages as ReCap URIs, detail the scope of actions authorized by the user in an explicit and human-readable form.
 
-By incorporating ReCaps, this method extends the utility of SIWE messages, allowing dApps to combine authentication with a nuanced authorization model. This model specifies the actions a dApp is authorized to execute on the user's behalf, enhancing security and user autonomy by providing clear consent for each delegated capability. As a result, dApps can utilize these consent-backed messages to perform predetermined actions, significantly enriching the interaction between dApps, wallets, and users within the Ethereum ecosystem.
-
-<ThemedImage
-  alt="Mobile Linking Connect Flow"
-  sources={{
-    light: useBaseUrl('/img/w3w/authenticatedSessions-light.png'),
-    dark: useBaseUrl('/img/w3w/authenticatedSessions-dark.png')
-  }}
-/>
+By incorporating ReCaps, this method extends the utility of SIWS messages, allowing dApps to combine authentication with a nuanced authorization model. This model specifies the actions a dApp is authorized to execute on the user's behalf, enhancing security and user autonomy by providing clear consent for each delegated capability. As a result, dApps can utilize these consent-backed messages to perform predetermined actions, significantly enriching the interaction between dApps, wallets, and users within the Solana ecosystem.
 
 ## Handling Authentication Requests
 
@@ -41,10 +33,10 @@ web3wallet.on('session_authenticate', async payload => {
 ```typescript
 import { populateAuthPayload } from "@walletconnect/utils";
 
-// EVM chains that your wallet supports
-const supportedChains = ["eip155:1", "eip155:2", 'eip155:137'];
-// EVM methods that your wallet supports
-const supportedMethods = ["personal_sign", "eth_sendTransaction", "eth_signTypedData"];
+// Solana chains that your wallet supports
+const supportedChains = [ "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp", "solana:4sGjMW1sUnHzSxGspuhpqLDx6wiyjNtZ" ]
+// Solana methods that your wallet supports
+const supportedMethods = ["solana_signMessage", "solana_signTransaction"];
 // Populate the authentication payload with the supported chains and methods
 const authPayload = populateAuthPayload({
   authPayload: payload.params.authPayload,
@@ -52,7 +44,7 @@ const authPayload = populateAuthPayload({
   methods: supportedMethods,
 });
 // Prepare the user's address in CAIP10(https://github.com/ChainAgnostic/CAIPs/blob/main/CAIPs/caip-10.md) format
-const iss = `eip155:1:0x0Df6d2a56F90e8592B4FfEd587dB3D5F5ED9d6ef`;
+const iss = `solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp:8nJ694gNrHx76L2eyJzQw7JBGRoW8Fdtrxf588pEqyYh`;
 // Now you can use the authPayload to format the authentication message
 const message = web3wallet.formatAuthMessage({
   request: authPayload,
@@ -67,7 +59,7 @@ const message = web3wallet.formatAuthMessage({
 
 :::info Note
 
-1. The recommended approach for secure authentication across multiple chains involves signing a SIWE (Sign-In with Ethereum) message for each chain and account. However, at a minimum, one SIWE message must be signed to establish a session. It is possible to create a session for multiple chains with just one issued authentication object.
+1. The recommended approach for secure authentication across multiple chains involves signing a SIWS (Sign-In with Solana) message for each chain and account. However, at a minimum, one SIWS message must be signed to establish a session. It is possible to create a session for multiple chains with just one issued authentication object.
 2. Sometimes a dapp may want to only authenticate the user without creating a session, not every approval will result with a new session.
 
 :::
@@ -80,7 +72,7 @@ const signature = await cryptoWallet.signMessage(message, privateKey)
 const auth = buildAuthObject(
   authPayload,
   {
-    t: 'eip191',
+    t: 'caip122',
     s: signature
   },
   iss
@@ -104,7 +96,7 @@ authPayload.chains.forEach(async chain => {
   const auth = buildAuthObject(
     authPayload,
     {
-      t: 'eip191', // signature type
+      t: 'caip122', // signature type
       s: signature
     },
     `${chain}:${cryptoWallet.address}`
@@ -134,6 +126,6 @@ await web3wallet.rejectSessionAuthenticate({
 
 ## Testing One-click Auth
 
-You can use [AppKit Lab](https://lab.web3modal.com/library/ethers-siwe/) to test and verify that your wallet supports One-click Auth properly.
+You can use [Web3Modal Labs](https://lab.web3modal.com/library/solana-siws/) to test and verify that your wallet supports One-click Auth properly.
 
-<Button name="Test One-click Auth" url="https://lab.web3modal.com/library/ethers-siwe/" />
+<Button name="Test One-click Auth" url="https://lab.web3modal.com/library/solana-siws/" />
