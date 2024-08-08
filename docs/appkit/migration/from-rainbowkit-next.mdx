@@ -4,23 +4,23 @@ title: Migration from RainbowKit to AppKit
 
 # Migration from RainbowKit to AppKit
 
-Follow the steps below to migrate from the default Rainbowkit project using Next.js Pages to an Appkit project using wagmi.
+Follow the steps below to migrate from the default RainbowKit project using Next.js Pages to an AppKit project using wagmi.
 
-### step 1 . Create a project in WalletConnect Clouds
+### Step 1. Create a project in WalletConnect Cloud
 
-+ Create a new project on WalletConnect Cloud at https://cloud.walletconnect.com and obtain a new project ID.
++ Create a new project on [WalletConnect Cloud](https://cloud.walletconnect.com) and obtain a new project ID.
 
-### step 2 . Install & Uninstall libraries
+### Step 2. Install & uninstall libraries
 
-+ Run this command to install the `AppKit` Library and Uninstall the `RainbowKit` one.
++ Run this command to install AppKit and uninstall RainbowKit.
 
 ```bash
 pnpm install @web3modal/wagmi && pnpm uninstall @rainbow-me/rainbowkit
 ```
 
-### step 3 . Change the index.tsx
+### Step 3. Change the index.tsx
 
-Use the Appkit Button. It can be configure following these [guidelines](https://docs.walletconnect.com/appkit/react-native/core/components#w3mbutton-).
+Use the AppKit Button. It can be configure following these [guidelines](https://docs.walletconnect.com/appkit/react-native/core/components#w3mbutton-).
 ```tsx
 /* highlight-delete-start */
 - import { ConnectButton } from '@rainbow-me/rainbowkit';
@@ -35,10 +35,10 @@ Use the Appkit Button. It can be configure following these [guidelines](https://
 ```
 
 :::info
-AppKit's web components are global html elements that don't require importing.
+AppKit's web components are global HTML elements that don't require importing.
 :::
 
-### step 4 . Changes in your config file
+### Step 4. Changes in your config file
 
 + Replace the following import statements:
 ```tsx
@@ -76,16 +76,16 @@ AppKit's web components are global html elements that don't require importing.
 export const projectId = "YOUR_PROJECT_ID";
 
 export const metadata = {
-  name: "AppKit App",
-  description: "AppKit Example",
-  url: "https://web3modal.com", // origin must match your domain and subdomain
-  icons: ["https://avatars.githubusercontent.com/u/37784886"]
+  name: "My App",
+  description: "My App description",
+  url: "https://example.com", // origin must match your domain and subdomain
+  icons: ["https://example.com/favicon.png"]
 };
 
 // Create wagmiConfig
 export const config = defaultWagmiConfig({
   chains, // chains are the same
-  projectId, // Use the new Cloud Id 
+  projectId, // Use the new project ID
   metadata,
   auth: { 
     email: true, 
@@ -97,7 +97,7 @@ export const config = defaultWagmiConfig({
 /* highlight-add-end */
 ```
 
-###  step 5 . Update app.tsx
+### Step 5. Update app.tsx
 
 In this step, we'll update the import statements and remove the RainbowKitProvider from the component tree.
 
@@ -127,7 +127,7 @@ import { WagmiProvider } from 'wagmi';
 ```
 
 
-+ Initialize the Web3Modal:
++ Initialize AppKit:
 ```tsx
 const client = new QueryClient();
 
@@ -164,8 +164,8 @@ function MyApp({ Component, pageProps }: AppProps) {
 export default MyApp;
 ```
 
-###  Final notes
+### Final notes
 
 + Ensure that you have updated all relevant configurations and imports in your project to reflect the changes from RainbowKit to AppKit.
-+ Test your application thoroughly to ensure that the migration has been successful and that all functionalities are working as expected.
++ Test your application thoroughly to ensure that the migration has been successful and that all functionality is working as expected.
 + Check our [AppKit web examples](https://github.com/WalletConnect/web-examples/tree/main/dapps/web3modal) to compare with your implementation in case you are having issues 
