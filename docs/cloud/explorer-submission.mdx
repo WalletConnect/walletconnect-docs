@@ -7,6 +7,9 @@ import Table from '../components/Table'
 import Tabs from '@theme/Tabs'
 import TabItem from '@theme/TabItem'
 
+import PlatformTabs from '../components/PlatformTabs'
+import PlatformTabItem from '../components/PlatformTabItem'
+
 :::info Note
 
 Submitting a project to the WalletConnect Cloud Explorer is recommended but optional. You can still use WalletConnect services without submitting your project.
@@ -204,8 +207,8 @@ The following list details our QA flow and how to reproduce it:
 
 The following test cases only apply for wallets supporting a particular set of chains.
 
-<Tabs groupId="chain">
-<TabItem value="evm" label="EVM">
+<PlatformTabs groupId="chains" activeOptions={["evm", "solana"]}>
+<PlatformTabItem value="evm">
 
 <Table
   headers={['Test Case', 'Steps', 'Expected Results']}
@@ -238,16 +241,16 @@ The following test cases only apply for wallets supporting a particular set of c
   ]}
 />
 
-</TabItem>
+</PlatformTabItem>
 
-<TabItem value="sol" label="Solana">
+<PlatformTabItem value="solana">
 
 <Table
   headers={['Test Case', 'Steps', 'Expected Results']}
   data={[
     {
       testCase: 'Supporting solana_signMessage',
-      steps: `1. Connect the wallet.
+      steps: `1. Connect the wallet to https://lab.web3modal.com/library/solana
               2. Press the “Sign Message” button.
               3. Accept the signature request on the wallet.`,
       expectedResults: `1. N/A
@@ -256,8 +259,17 @@ The following test cases only apply for wallets supporting a particular set of c
     },
     {
       testCase: 'Supporting solana_signTransaction',
-      steps: `1. Connect the wallet.
+      steps: `1. Connect the wallet to https://lab.web3modal.com/library/solana
               2. Press the “Sign Transaction”.
+              3. Accept the signature request on the wallet.`,
+      expectedResults: `1. N/A
+                        2. A modal should popup on the wallet app requesting for a signature.
+                        3. Once accepted and signed the hash should show up on the website.`
+    },
+    {
+      testCase: 'Supporting v0 Transactions',
+      steps: `1. Connect the wallet to https://lab.web3modal.com/library/solana
+              2. Press the “Sign Versioned Transaction" button.
               3. Accept the signature request on the wallet.`,
       expectedResults: `1. N/A
                         2. A modal should popup on the wallet app requesting for a signature.
@@ -266,8 +278,8 @@ The following test cases only apply for wallets supporting a particular set of c
   ]}
 />
 
-</TabItem>
-</Tabs>
+</PlatformTabItem>
+</PlatformTabs>
 
 ## What's Next?
 

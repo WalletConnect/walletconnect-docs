@@ -79,6 +79,10 @@ const PLATFORM_MAP = [
     label: 'Web3.js'
   },
   {
+    value: 'evm',
+    label: 'EVM'
+  },
+  {
     value: 'solana',
     label: 'Solana'
   }
