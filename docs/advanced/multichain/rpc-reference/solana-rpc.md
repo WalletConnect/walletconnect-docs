@@ -207,7 +207,7 @@ This method request to a wallet to sign and submit a transaction to the network.
 	"jsonrpc": "2.0",
 	"method": "solana_signAndSendTransaction",
 	"params": {
-      "transaction": "abc123...",
+      "transaction": "vxBNpvao9QJmLKXUThbbjRnxm3ufu4Wku97kHd5a67FDjSqeHwcPrBKTjAHp4ECr61eWwoxvUEVTuuWX65P9bCNDJrTJpWyhiQ68iePVXQba65aCqANmtsokLnysL7b7h3JaL7u1Wk93u6NJ6Ff1gjFy3aPBtoBBQLXPcUS5xmriZA21673DYxgUsf9Efq25bt3Doqg8qNAzQdHs9adfeQoUDq1YriVhKrxPYstfwANvrpA6bfoMAbzw1Ssix3hesqL9sSFM6WnbU1KPqt4i8dE6s1cj64wDgGJmjzX",
       "pubkey": "AqP3MyNwDP4L1GJKYhzmaAUdrjzpqJUZjahM7kHpgavm",
 			"sendOptions": {
 				"maxRetries": 2;
