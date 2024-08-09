@@ -10,7 +10,7 @@ The Chain IDs of Solana can be found in [namespaces.chainagnostic.org](https://n
 
 ### accountChanged
 
-This methods is sent by the wallet when the active _account_ changes.
+This RPC notification is sent by the wallet when the active _account_ changes in the wallet UX.
 
 **Parameters**
 
