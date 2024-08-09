@@ -1,24 +1,55 @@
 ---
-description: Solana JSON-RPC Methods
+description: Solana JSON-RPC Methods & Events
 ---
 
 # Solana
 
-## solana_getAccounts
+The Chain IDs of Solana can be found in [namespaces.chainagnostic.org](https://namespaces.chainagnostic.org/solana/caip10) [(GitHub)](https://github.com/ChainAgnostic/namespaces/blob/main/solana/caip10.md).
+
+## Notifications (Events)
+
+### accountChanged
+
+This methods is sent by the wallet when the active _account_ changes.
+
+**Parameters**
+
+  1.1. `Object`
+  	1.1.1. `pubkey` : `String` - public key for keypair
+
+**Returns**
+
+		none
+
+**Example**
+
+```javascript
+{
+  "jsonrpc": "2.0",
+  "method": "accountChanged",
+  "params": {
+    "publicKey": "722RdWmHC5TGXBjTejzNjbc8xEiduVDLqZvoUGz6Xzbp"
+   } 
+}  
+```
+
+## Methods
+
+### solana_getAccounts
 
 This method returns an Array of public keys available to sign from the wallet.
 
-### Parameters
+**Parameters**
 
     none
 
-### Returns
+**Returns**
 
     1.`Array` - Array of accounts:
     	1.1. `Object`
     		1.1.1. `pubkey` : `String` - public key for keypair
 
-### Example
+**Example**
 
 ```javascript
 // Request
@@ -37,21 +68,21 @@ This method returns an Array of public keys available to sign from the wallet.
 }
 ```
 
-## solana_requestAccounts
+### solana_requestAccounts
 
 This method returns an Array of public keys available to sign from the wallet.
 
-### Parameters
+**Parameters**
 
     none
 
-### Returns
+**Returns**
 
     1.`Array` - Array of accounts:
     	1.1. `Object`
     		1.1.1. `pubkey` : `String` - public key for keypair
 
-### Example
+**Example**
 
 ```javascript
 // Request
@@ -70,87 +101,22 @@ This method returns an Array of public keys available to sign from the wallet.
 }
 ```
 
-## solana_signTransaction
-
-This method returns a signature over the provided instructions by the targeted public key.
-
-### Parameters
-
-    1. `Object` - Signing parameters:
-    	1.1. [deprecated] `feePayer` : `String` -  public key of the transaction fee payer
-    	1.2. [deprecated] `instructions` : `Array` - instructions to be atomically executed:
-    		1.2.1. `Object` - instruction
-    			1.2.1.1. `programId` : `String` - public key of the on chain program
-    			1.2.1.2. `data` : `String | undefined` - encoded calldata for instruction
-    			1.2.1.3. `keys` : `Array` - account metadata used to define instructions
-    				1.2.1.3.1. `Object` - key
-    					1.2.1.3.1.1. `isSigner` : `Boolean` - true if an instruction requires a transaction signature matching `pubkey`
-    					1.2.1.3.1.2. `isWritable` : `Boolean` - true if the `pubkey` can be loaded as a read-write account
-    					1.2.1.3.1.3. `pubkey` : `String` - public key of authorized program
-    	1.3. [deprecated] `recentBlockhash` : `String` - a recent blockhash
-    	1.4. [deprecated] `partialSignatures` : `Array`, - (optional) previous partial signatures for this instruction set
-    		1.4.1. `Object` - partial signature
-    			1.4.1.2. `pubkey` : `String` - pubkey of the signer
-    			1.4.1.1. `signature` : `String` - signature matching `pubkey`
-    	1.5. `transaction` : `String`, - base64-encoded serialized transaction
-
-### Returns
-
-    1. `Object`
-    	1.1. `signature` : `String` - corresponding signature for signed instructions
-
-### Example
-
-```javascript
-// Request
-{
-	"id": 1,
-	"jsonrpc": "2.0",
-	"method": "solana_signTransaction",
-	"params": {
-		"feePayer": "AqP3MyNwDP4L1GJKYhzmaAUdrjzpqJUZjahM7kHpgavm",
-		"instructions": [{
-			"programId": "Vote111111111111111111111111111111111111111",
-			"data": "37u9WtQpcm6ULa3VtWDFAWoQc1hUvybPrA3dtx99tgHvvcE7pKRZjuGmn7VX2tC3JmYDYGG7",
-			"keys": [{
-				"isSigner": true,
-				"isWritable": true,
-				"pubkey": "AqP3MyNwDP4L1GJKYhzmaAUdrjzpqJUZjahM7kHpgavm"
-			}]
-		}],
-		"recentBlockhash": "2bUz6wu3axM8cDDncLB5chWuZaoscSjnoMD2nVvC1swe",
-		"signatures": [{
-			"pubkey": "AqP3MyNwDP4L1GJKYhzmaAUdrjzpqJUZjahM7kHpgavm",
-			"signature": "2Lb1KQHWfbV3pWMqXZveFWqneSyhH95YsgCENRWnArSkLydjN1M42oB82zSd6BBdGkM9pE6sQLQf1gyBh8KWM2c4"
-		}],
-                "transaction": "r32f2..FD33r"
-	}
-}
-
-// Result
-{
-	"id": 1,
-	"jsonrpc": "2.0",
-	"result":  { signature: "2Lb1KQHWfbV3pWMqXZveFWqneSyhH95YsgCENRWnArSkLydjN1M42oB82zSd6BBdGkM9pE6sQLQf1gyBh8KWM2c4" }
-}
-```
-
-## solana_signMessage
+### solana_signMessage
 
 This method returns a signature for the provided message from the requested signer address.
 
-### Parameters
+**Parameters**
 
     1. `Object` - Signing parameters:
     	1.1. `message` : `String` -  the message to be signed (base58 encoded)
     	1.2. `pubkey` : `String` -  public key of the signer
 
-### Returns
+**Returns**
 
     1. `Object`
     	1.1. `signature` : `String` - corresponding signature for signed message
 
-### Example
+**Example**
 
 ```javascript
 // Request
@@ -171,3 +137,145 @@ This method returns a signature for the provided message from the requested sign
 	"result":  { signature: "2Lb1KQHWfbV3pWMqXZveFWqneSyhH95YsgCENRWnArSkLydjN1M42oB82zSd6BBdGkM9pE6sQLQf1gyBh8KWM2c4" }
 }
 ```
+
+### solana_signTransaction
+
+This method returns a signature over the provided instructions by the targeted public key.
+
+**Parameters**
+
+    1. `Object` - Signing parameters:
+    	1.1. `transaction` : `TODO` -  the transaction raw bytes encoded on base58
+    	1.2. `pubkey` : `TODO` - TODO
+
+**Returns**
+
+    1. `Object`
+    	1.1. `transaction` : `TODO` - the signed transaction raw bytes encoded on base58
+
+**Example**
+
+```javascript
+// Request
+{
+	"id": 1,
+	"jsonrpc": "2.0",
+	"method": "solana_signTransaction",
+	"params": {
+      "transaction": "abc123...",
+      "pubkey": "AqP3MyNwDP4L1GJKYhzmaAUdrjzpqJUZjahM7kHpgavm"
+	}
+}
+
+// Result
+{
+	"id": 1,
+	"jsonrpc": "2.0",
+	"result":  { 
+      "transaction": "abc123..."
+    }
+}
+```
+
+### solana_signAndSendTransaction
+
+This method request to a wallet to sign and submit a transaction to the network.
+
+**Parameters**
+
+    1. `Object` - Signing parameters:
+    	1.1. `transaction` : `TODO` -  the transaction raw bytes encoded on base58
+    	1.2. `pubkey` : `TODO` - TODO
+			1.3. `sendOptions` : `object` - TODO
+				1.3.1. `maxRetries` : `number` \(optional\) - 
+				1.3.1. `minContextSlot` : `number` \(optional\) -
+				1.3.1. `preflightCommitment` : `string` \(optional\) -
+				1.3.1. `skipPreflight` : `boolean` \(optional\) -
+
+
+**Returns**
+
+    1. `Object`
+    	1.1. `transaction` : `TODO` - the signed transaction raw bytes encoded on base58
+
+**Example**
+
+```javascript
+// Request
+{
+	"id": 1,
+	"jsonrpc": "2.0",
+	"method": "solana_signAndSendTransaction",
+	"params": {
+      "transaction": "abc123...",
+      "pubkey": "AqP3MyNwDP4L1GJKYhzmaAUdrjzpqJUZjahM7kHpgavm",
+			"sendOptions": {
+				"maxRetries": 2;
+				"minContextSlot": TODO;
+				"preflightCommitment": "processed";
+				"skipPreflight": false;
+			}
+	}
+}
+
+// Result
+{
+	"id": 1,
+	"jsonrpc": "2.0",
+	"result":  { 
+      "transaction": "abc123..."
+    }
+}
+```
+
+### solana_signAllTransactions
+
+This method request to a wallet to sign and submit a transaction to the network.
+
+**Parameters**
+
+    1. `Object` - Signing parameters:
+    	1.1. `transactions` : `Array` -  Array of transactions.
+				1.1.1 `String` - serialized transaction, bs58-encoded
+    	1.2. `pubkey` : `String` - TODO
+
+
+**Returns**
+
+    1. `Object`
+    	1.1. `transactions` : `Array` -  Array of transactions.
+				1.1.1 `String` - signed serialized transaction, bs58-encoded
+
+**Example**
+
+```javascript
+// Request
+{
+	"id": 1,
+	"jsonrpc": "2.0",
+	"method": "solana_signAndSendTransaction",
+	"params": {
+      "transaction": [
+				"...",
+				"...",
+				"..."
+			],
+      "pubkey": "AqP3MyNwDP4L1GJKYhzmaAUdrjzpqJUZjahM7kHpgavm",
+	}
+}
+
+// Result
+{
+	"id": 1,
+	"jsonrpc": "2.0",
+	"result":  { 
+      "transaction": [
+				"...",
+				"...",
+				"..."
+			],
+    }
+}
+```
+
+
