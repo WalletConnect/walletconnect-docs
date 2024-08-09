@@ -223,7 +223,7 @@ This method request to a wallet to sign and submit a transaction to the network.
 	"id": 1,
 	"jsonrpc": "2.0",
 	"result":  { 
-      "transaction": "abc123..."
+      "transaction": "..."
     }
 }
 ```
