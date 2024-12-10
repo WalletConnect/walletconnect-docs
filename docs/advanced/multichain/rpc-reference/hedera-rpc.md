@@ -55,7 +55,7 @@ In certain conditions, the Hedera network will return a response that signifies 
 
     1. `Object` - Result of transaction submission to Hedera network
       1.1. `code` : 9000 - The reserved WalletConnect error code for unknown errors or errors not related to the WalletConnect protocol
-      1.2. `message` : `String` - A human readable string describing the nature of the failure
+      1.2. `message` : `String` - A human-readable string describing the nature of the failure
       1.3. `data` : `Number` - An integer representing the ResponseCodeEnum value returned from the Hedera Node, which indicates the reason for the failure
 
 

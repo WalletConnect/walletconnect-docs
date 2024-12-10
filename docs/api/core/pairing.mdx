@@ -319,8 +319,8 @@ Now wallet and a dapp have a secure communication channel that will be used by t
 
 #### Pairing Dapp Usage
 
-In order to pair dapp and a wallet, dapp needs to generate and share a uri with wallet.
-To generate a uri call `create()` function on Pair instance as follows.
+In order to pair dapp and a wallet, dapp needs to generate and share an uri with wallet.
+To generate an uri call `create()` function on Pair instance as follows.
 
 ```swift
 let uri = try await Pair.instance.create()
@@ -337,7 +337,7 @@ Now you can share the uri with the wallet.
 val pairing: Pairing? = CoreClient.Pairing.create() { error -> }
 ```
 
-When first establishing a pairing with a Peer, call `CoreClient.Pairing.create`. This will try and generate a new pairing with a URI parameter that can be used to establish a connection with the other Peer as well as other meta data related to the pairing.
+When first establishing a pairing with a Peer, call `CoreClient.Pairing.create`. This will try and generate a new pairing with an URI parameter that can be used to establish a connection with the other Peer as well as other meta data related to the pairing.
 
 #
 
@@ -436,7 +436,7 @@ Now the wallet and a dapp have a secure communication channel that will be used 
 
 #### Pairing Dapp Usage
 
-In order to pair dapp and a wallet, dapp needs to generate and share a uri with wallet. To generate a uri call `create()` function on Pair instance as follows.
+In order to pair dapp and a wallet, dapp needs to generate and share an uri with wallet. To generate an uri call `create()` function on Pair instance as follows.
 
 ```csharp
 
