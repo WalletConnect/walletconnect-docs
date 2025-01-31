@@ -211,7 +211,7 @@ curl 'https://notify.walletconnect.com/<PROJECT_ID>/subscribers' \
 Unless marked as read by an app frontend, notifications will always be "unread". Because of this, when you
 initially add support for displaying unread status or unread count to your frontend, users that have received
 notifications in the past will have notifications display as "unread" even if they already have seen them.
-This can potentially be an undesireable user experience.
+This can potentially be an undesirable user experience.
 
 To mitigate this problem, you can make a one-time call to the `/v1/<project-id>/mark-all-as-read` API endpoint
 which will mark all existing notifications as read. Notifications marked as read in this way will not contribute
